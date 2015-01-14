@@ -1,4 +1,4 @@
-package com.tools.common;
+package com.tools;
 
 import net.thucydides.core.pages.PageObject;
 
