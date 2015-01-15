@@ -1,46 +1,38 @@
-package com.tests;
+package com.tests.us0;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.ManagedPages;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
-import net.thucydides.core.pages.Pages;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.steps.BackEndSteps;
 import com.steps.ValidationSteps;
+import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.data.ValidationModel;
+import com.tools.data.StylistDataModel;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class ValidateStylistTest {
-
-	
-	@Managed(uniqueSession = false)
-	public WebDriver webdriver;
-
-	@ManagedPages(defaultUrl = Constants.BASE_URL_BE)
-	public Pages pages;
+public class ValidateStylistTest extends BaseTest{
 
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
 	public ValidationSteps validationSteps;
 
-	public ValidationModel initialValidation = new ValidationModel();
-	public ValidationModel finalValidation;
+	public StylistDataModel initialValidation = new StylistDataModel();
+	public StylistDataModel finalValidation;
 
 	private String stylistName;
 	private String accountActive;
@@ -87,27 +79,30 @@ public class ValidateStylistTest {
 				}
 			}
 		}
-		try {
-			input = null;
-			input = new FileInputStream(Constants.RESOURCES_PATH + "StylistData.properties");
-			prop.load(input);
-			initialValidation.customerLeads = prop.getProperty("customerLeads");
-			initialValidation.hostessLeads = prop.getProperty("hostessLeads");
-			initialValidation.hostessLeadsWeek = prop.getProperty("hostessLeadsWeek");
-			initialValidation.styleCoachLeads = prop.getProperty("styleCoachLeads");
-			initialValidation.styleCoachLeadsWeek = prop.getProperty("styleCoachLeadsWeek");
-			
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		
+		List<StylistDataModel> validationList = MongoReader.grabStylistDataModels("GrabStylistPropertiesTest");
+		initialValidation = validationList.get(0);
+//		try {
+//			input = null;
+//			input = new FileInputStream(Constants.RESOURCES_PATH + "StylistData.properties");
+//			prop.load(input);
+//			initialValidation.customerLeads = prop.getProperty("customerLeads");
+//			initialValidation.hostessLeads = prop.getProperty("hostessLeads");
+//			initialValidation.hostessLeadsWeek = prop.getProperty("hostessLeadsWeek");
+//			initialValidation.styleCoachLeads = prop.getProperty("styleCoachLeads");
+//			initialValidation.styleCoachLeadsWeek = prop.getProperty("styleCoachLeadsWeek");
+//			
+//		} catch (IOException ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			if (input != null) {
+//				try {
+//					input.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
 	}
 
 	/**

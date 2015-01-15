@@ -1,4 +1,4 @@
-package com.tests;
+package com.tests.us0;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,33 +7,24 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.ManagedPages;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
-import net.thucydides.core.pages.Pages;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.steps.BackEndSteps;
 import com.steps.EmailClientSteps;
+import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class CheckCustomerActivationTest {
-
-	@Managed(uniqueSession = true)
-	public WebDriver webdriver;
-
-	@ManagedPages(defaultUrl = Constants.URL_WEB_MAIL)
-	public Pages pages;
+public class CheckCustomerActivationTest extends BaseTest{
 
 	@Steps
 	public BackEndSteps backEndSteps;

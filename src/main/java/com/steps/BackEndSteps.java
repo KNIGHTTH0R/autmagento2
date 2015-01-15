@@ -4,7 +4,7 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
 import com.tools.Constants;
-import com.tools.data.ValidationModel;
+import com.tools.data.StylistDataModel;
 
 public class BackEndSteps extends AbstractSteps {
 
@@ -49,7 +49,7 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
-	public ValidationModel grabLeadSettingsData() {
+	public StylistDataModel grabLeadSettingsData() {
 		return leadSettingsPage().grabValidationFields();		
 	}
 	

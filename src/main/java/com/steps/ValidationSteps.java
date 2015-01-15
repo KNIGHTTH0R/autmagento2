@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
 
 import com.tools.AbstractSteps;
-import com.tools.data.ValidationModel;
+import com.tools.data.StylistDataModel;
 
 public class ValidationSteps extends AbstractSteps {
 
@@ -16,8 +16,8 @@ public class ValidationSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@StepGroup
-	public void validateStylistData(ValidationModel initialData,
-			ValidationModel finalData) {
+	public void validateStylistData(StylistDataModel initialData,
+			StylistDataModel finalData) {
 
 		System.out.println("Initial customerLeads: "
 				+ initialData.customerLeads);

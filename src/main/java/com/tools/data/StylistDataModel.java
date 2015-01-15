@@ -1,6 +1,6 @@
 package com.tools.data;
 
-public class ValidationModel {
+public class StylistDataModel {
 
 	public String styleCoachLeads;
 	public String hostessLeads;

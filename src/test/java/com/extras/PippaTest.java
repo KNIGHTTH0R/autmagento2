@@ -1,4 +1,4 @@
-package com.tests;
+package com.extras;
 
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;
@@ -18,7 +18,7 @@ import com.steps.FrontEndSteps;
 import com.tools.Constants;
 import com.tools.data.AddressModel;
 import com.tools.data.CustomerFormModel;
-import com.tools.data.ValidationModel;
+import com.tools.data.StylistDataModel;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
@@ -40,7 +40,7 @@ public class PippaTest {
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
-	public ValidationModel validationModel;
+	public StylistDataModel validationModel;
 
 	@Before
 	public void setUp() throws Exception {

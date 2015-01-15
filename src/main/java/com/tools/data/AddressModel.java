@@ -20,7 +20,6 @@ public class AddressModel {
 		setPostCode("12165");
 		setCountryName("Deutschland");
 		setPhoneNumber("00555123456");
-		
 	}
 
 	public String getStreetAddress() {
