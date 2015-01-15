@@ -8,4 +8,9 @@ public class Application {
 		public class CreateColaborator {
 		}
 	}
+	@Feature
+	public class StyleCoach {
+		public class Shopping {
+		}
+	}
 }

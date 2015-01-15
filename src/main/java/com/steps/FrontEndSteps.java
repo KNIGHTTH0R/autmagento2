@@ -154,4 +154,16 @@ public class FrontEndSteps extends AbstractSteps {
 	public void verifyText(){
 		registrationMessagePage().verifyText();
 	}
+
+	@Step
+	public void searchProduct(String searchKey) {
+		loungePage().searchInput(searchKey);
+		loungePage().clickOnSubmitButton();
+	}
+	
+	
+	@Step
+	public void findProduct(String productName){
+		productsPage().findProductAndClick(productName);
+	}
 }

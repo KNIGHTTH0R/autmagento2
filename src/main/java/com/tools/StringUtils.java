@@ -14,7 +14,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
-import junit.framework.Assert;
+import org.junit.Assert;
+
 
 public class StringUtils {
 

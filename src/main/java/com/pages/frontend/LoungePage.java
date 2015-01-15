@@ -14,12 +14,12 @@ public class LoungePage extends AbstractPage {
 	@FindBy(css = ".top-search-icon")
 	private WebElement submitSearch;
 
-	public void inputUserName(String seachKey) {
+	public void searchInput(String seachKey) {
 		element(searchInput).waitUntilVisible();
 		searchInput.sendKeys(seachKey);
 	}
 
-	public void clickOnLoginButton() {
+	public void clickOnSubmitButton() {
 		element(submitSearch).waitUntilVisible();
 		submitSearch.click();
 	}

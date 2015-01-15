@@ -11,6 +11,8 @@ import com.pages.external.MailinatorHomePage;
 import com.pages.external.MailinatorPage;
 import com.pages.frontend.CreateCustomerPage;
 import com.pages.frontend.LoginPage;
+import com.pages.frontend.LoungePage;
+import com.pages.frontend.ProductsPage;
 import com.pages.frontend.RegistrationMessagePage;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -49,6 +51,14 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public RegistrationMessagePage registrationMessagePage() {
 		return getPages().currentPageAt(RegistrationMessagePage.class);
+	}
+	
+	public LoungePage loungePage(){
+		return getPages().currentPageAt(LoungePage.class);
+	}
+	
+	public ProductsPage productsPage(){
+		return getPages().currentPageAt(ProductsPage.class);
 	}
 
 	// -----------------------Email-----------------------------------
