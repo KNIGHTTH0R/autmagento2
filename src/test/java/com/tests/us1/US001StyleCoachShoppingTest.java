@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import com.steps.FrontEndSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.data.ProductBasicModel;
 import com.tools.requirements.Application;
 
 @Story(Application.StyleCoach.Shopping.class)
@@ -59,7 +60,9 @@ public class US001StyleCoachShoppingTest extends BaseTest{
 	public void uS001StyleCoachShoppingTest(){
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.searchProduct("Rosemary Ring");
-		frontEndSteps.findProduct("ROSEMARY RING");
+		ProductBasicModel productData  = frontEndSteps.findProduct("ROSEMARY RING");
+		
+		System.out.println("----------------> " + productData.getPrice());
 	}
 	
 }

@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.StepGroup;
 import com.tools.AbstractSteps;
 import com.tools.data.AddressModel;
 import com.tools.data.CustomerFormModel;
+import com.tools.data.ProductBasicModel;
 
 public class FrontEndSteps extends AbstractSteps {
 
@@ -163,7 +164,7 @@ public class FrontEndSteps extends AbstractSteps {
 	
 	
 	@Step
-	public void findProduct(String productName){
-		productsPage().findProductAndClick(productName);
+	public ProductBasicModel findProduct(String productName){
+		return productsPage().findProductAndClick(productName);
 	}
 }
