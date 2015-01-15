@@ -1,4 +1,4 @@
-package com.tests;
+package com.extras;
 
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;

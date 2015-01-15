@@ -7,18 +7,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.ManagedPages;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
-import net.thucydides.core.pages.Pages;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.steps.BackEndSteps;
 import com.tools.Constants;
@@ -27,13 +23,7 @@ import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class GrabStylistPropertiesTest {
-
-	@Managed(uniqueSession = false)
-	public WebDriver webdriver;
-
-	@ManagedPages(defaultUrl = Constants.BASE_URL_BE)
-	public Pages pages;
+public class GrabStylistPropertiesTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -50,7 +40,8 @@ public class GrabStylistPropertiesTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "Stylist.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH
+					+ "Stylist.properties");
 			prop.load(input);
 			stylistName = prop.getProperty("stylistName");
 
@@ -89,7 +80,8 @@ public class GrabStylistPropertiesTest {
 		OutputStream output = null;
 
 		try {
-			output = new FileOutputStream(Constants.RESOURCES_PATH + "StylistData.properties");
+			output = new FileOutputStream(Constants.RESOURCES_PATH
+					+ "StylistData.properties");
 
 			prop.setProperty("styleCoachLeads", validationModel.styleCoachLeads);
 			prop.setProperty("hostessLeads", validationModel.hostessLeads);

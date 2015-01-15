@@ -6,6 +6,7 @@ public class Constants {
 	public static final String BASE_URL_FE = "http://staging.pippajean.com/customer/account/create/";
 
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
+	
 
 	public static final String RESOURCES_PATH = "src\\main\\resources\\";
 	public static final String BE_USER = "admin";
