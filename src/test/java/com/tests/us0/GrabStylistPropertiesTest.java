@@ -1,4 +1,4 @@
-package com.tests;
+package com.tests.us0;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,8 +17,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.BackEndSteps;
+import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.data.ValidationModel;
+import com.tools.data.StylistDataModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
@@ -28,7 +30,7 @@ public class GrabStylistPropertiesTest extends BaseTest {
 	@Steps
 	public BackEndSteps backEndSteps;
 
-	public ValidationModel validationModel;
+	public StylistDataModel validationModel;
 
 	private String stylistName;
 
@@ -76,34 +78,35 @@ public class GrabStylistPropertiesTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		Properties prop = new Properties();
-		OutputStream output = null;
-
-		try {
-			output = new FileOutputStream(Constants.RESOURCES_PATH
-					+ "StylistData.properties");
-
-			prop.setProperty("styleCoachLeads", validationModel.styleCoachLeads);
-			prop.setProperty("hostessLeads", validationModel.hostessLeads);
-			prop.setProperty("customerLeads", validationModel.customerLeads);
-			prop.setProperty("styleCoachLeadsWeek",
-					validationModel.styleCoachLeadsWeek);
-			prop.setProperty("hostessLeadsWeek",
-					validationModel.hostessLeadsWeek);
-
-			prop.store(output, null);
-
-		} catch (IOException io) {
-			io.printStackTrace();
-		} finally {
-			if (output != null) {
-				try {
-					output.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-		}
+		MongoWriter.saveStylistDataModel(validationModel, getClass().getSimpleName());
+//		Properties prop = new Properties();
+//		OutputStream output = null;
+//
+//		try {
+//			output = new FileOutputStream(Constants.RESOURCES_PATH
+//					+ "StylistData.properties");
+//
+//			prop.setProperty("styleCoachLeads", validationModel.styleCoachLeads);
+//			prop.setProperty("hostessLeads", validationModel.hostessLeads);
+//			prop.setProperty("customerLeads", validationModel.customerLeads);
+//			prop.setProperty("styleCoachLeadsWeek",
+//					validationModel.styleCoachLeadsWeek);
+//			prop.setProperty("hostessLeadsWeek",
+//					validationModel.hostessLeadsWeek);
+//
+//			prop.store(output, null);
+//
+//		} catch (IOException io) {
+//			io.printStackTrace();
+//		} finally {
+//			if (output != null) {
+//				try {
+//					output.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//
+//		}
 	}
 }

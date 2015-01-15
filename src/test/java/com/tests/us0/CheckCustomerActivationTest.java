@@ -1,4 +1,4 @@
-package com.tests;
+package com.tests.us0;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,14 +18,13 @@ import org.junit.runner.RunWith;
 
 import com.steps.BackEndSteps;
 import com.steps.EmailClientSteps;
+import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class CheckCustomerActivationTest extends BaseTest{
-
-
 
 	@Steps
 	public BackEndSteps backEndSteps;

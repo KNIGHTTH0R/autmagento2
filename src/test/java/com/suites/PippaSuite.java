@@ -4,10 +4,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.CheckCustomerActivationTest;
-import com.tests.CreateCustomerTest;
-import com.tests.GrabStylistPropertiesTest;
-import com.tests.ValidateStylistTest;
+import com.tests.us0.CheckCustomerActivationTest;
+import com.tests.us0.CreateCustomerTest;
+import com.tests.us0.GrabStylistPropertiesTest;
+import com.tests.us0.ValidateStylistTest;
 
 @SuiteClasses({
 		GrabStylistPropertiesTest.class,

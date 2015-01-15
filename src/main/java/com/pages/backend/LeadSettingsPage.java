@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import net.thucydides.core.annotations.findby.FindBy;
 
 import com.tools.AbstractPage;
-import com.tools.data.ValidationModel;
+import com.tools.data.StylistDataModel;
 
 public class LeadSettingsPage extends AbstractPage{
 
@@ -30,10 +30,10 @@ public class LeadSettingsPage extends AbstractPage{
 	private WebElement hostessLeadsWeek;
 	
 	
-	public ValidationModel grabValidationFields(){
+	public StylistDataModel grabValidationFields(){
 		element(styleCoachLeads).waitUntilVisible();
 		
-		ValidationModel stylistData = new ValidationModel();
+		StylistDataModel stylistData = new StylistDataModel();
 		
 		stylistData.styleCoachLeads = styleCoachLeads.getAttribute("value");
 		stylistData.hostessLeads = hostessLeads.getAttribute("value");

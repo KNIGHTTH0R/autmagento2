@@ -1,8 +1,9 @@
-package com.tests;
+package com.tests.us0;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -15,8 +16,10 @@ import org.junit.runner.RunWith;
 
 import com.steps.BackEndSteps;
 import com.steps.ValidationSteps;
+import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.data.ValidationModel;
+import com.tools.data.StylistDataModel;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
@@ -28,8 +31,8 @@ public class ValidateStylistTest extends BaseTest{
 	@Steps
 	public ValidationSteps validationSteps;
 
-	public ValidationModel initialValidation = new ValidationModel();
-	public ValidationModel finalValidation;
+	public StylistDataModel initialValidation = new StylistDataModel();
+	public StylistDataModel finalValidation;
 
 	private String stylistName;
 	private String accountActive;
@@ -76,27 +79,30 @@ public class ValidateStylistTest extends BaseTest{
 				}
 			}
 		}
-		try {
-			input = null;
-			input = new FileInputStream(Constants.RESOURCES_PATH + "StylistData.properties");
-			prop.load(input);
-			initialValidation.customerLeads = prop.getProperty("customerLeads");
-			initialValidation.hostessLeads = prop.getProperty("hostessLeads");
-			initialValidation.hostessLeadsWeek = prop.getProperty("hostessLeadsWeek");
-			initialValidation.styleCoachLeads = prop.getProperty("styleCoachLeads");
-			initialValidation.styleCoachLeadsWeek = prop.getProperty("styleCoachLeadsWeek");
-			
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		
+		List<StylistDataModel> validationList = MongoReader.grabStylistDataModels("GrabStylistPropertiesTest");
+		initialValidation = validationList.get(0);
+//		try {
+//			input = null;
+//			input = new FileInputStream(Constants.RESOURCES_PATH + "StylistData.properties");
+//			prop.load(input);
+//			initialValidation.customerLeads = prop.getProperty("customerLeads");
+//			initialValidation.hostessLeads = prop.getProperty("hostessLeads");
+//			initialValidation.hostessLeadsWeek = prop.getProperty("hostessLeadsWeek");
+//			initialValidation.styleCoachLeads = prop.getProperty("styleCoachLeads");
+//			initialValidation.styleCoachLeadsWeek = prop.getProperty("styleCoachLeadsWeek");
+//			
+//		} catch (IOException ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			if (input != null) {
+//				try {
+//					input.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
 	}
 
 	/**

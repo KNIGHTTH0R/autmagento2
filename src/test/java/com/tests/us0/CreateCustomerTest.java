@@ -1,4 +1,4 @@
-package com.tests;
+package com.tests.us0;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,10 +15,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.FrontEndSteps;
+import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.AddressModel;
 import com.tools.data.CustomerFormModel;
-import com.tools.data.ValidationModel;
+import com.tools.data.StylistDataModel;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
@@ -31,7 +32,7 @@ public class CreateCustomerTest extends BaseTest{
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
-	public ValidationModel validationModel;
+	public StylistDataModel validationModel;
 
 	@Before
 	public void setUp() throws Exception {

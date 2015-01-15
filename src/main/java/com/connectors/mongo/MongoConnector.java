@@ -8,7 +8,7 @@ import java.util.Set;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
-import com.tools.configs.MongoConstants;
+import com.tools.persistance.MongoConstants;
 
 /**
  * MongoConnector Will handle all transactions with the Mongo DB 
