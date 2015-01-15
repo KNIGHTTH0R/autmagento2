@@ -11,7 +11,7 @@ import com.tools.AbstractPage;
 
 public class MailinatorPage extends AbstractPage {
 
-	@FindBy(id = "mailcontainer")
+	@FindBy(id = "mailcontainermailcontainer")
 	private WebElement inboxContainer;
 
 	@FindBy(className = "mailview")
