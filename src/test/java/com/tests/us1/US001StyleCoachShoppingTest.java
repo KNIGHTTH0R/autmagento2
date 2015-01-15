@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
@@ -19,6 +20,7 @@ import com.tools.Constants;
 import com.tools.data.ProductBasicModel;
 import com.tools.requirements.Application;
 
+@WithTag(name="US1", type = "US1")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US001StyleCoachShoppingTest extends BaseTest{
