@@ -42,6 +42,7 @@ public class PrintUtils {
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace(",", ".");
+		result = result.replace("-", "");
 
 		return Double.parseDouble(result);
 	}

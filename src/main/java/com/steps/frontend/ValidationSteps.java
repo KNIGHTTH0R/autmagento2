@@ -73,15 +73,16 @@ public class ValidationSteps extends AbstractSteps {
 	}
 	
 	public void checkTotalsInCart(CartTotalsModel cartTotalsModel1,CartTotalsModel cartTotalsModel2){
-		
+		//TODO not a final form.must find a way to clean double numbers
 		System.out.println("----------SUBTOTAL: " + cartTotalsModel2.getSubtotal() + " : " +  PrintUtils.cleanNumberToDouble(cartTotalsModel1.getSubtotal()));	
-		Assert.assertTrue("The subtotal should be " + cartTotalsModel2.getSubtotal() +" and it is " + cartTotalsModel1.getSubtotal() +  "!",
+		Assert.assertTrue("The subtotal should be " + cartTotalsModel2.getSubtotal() +" and it is " +  PrintUtils.cleanNumberToDouble(cartTotalsModel1.getSubtotal()) +  "!",
 				cartTotalsModel2.getSubtotal().equals(String.valueOf(PrintUtils.cleanNumberToDouble(cartTotalsModel1.getSubtotal()))));
 		
-		System.out.println("----------DISCOUNT: " + cartTotalsModel2.getDiscount() + " : " +  cartTotalsModel1.getDiscount());	
-		Assert.assertTrue("The discount should be " + cartTotalsModel2.getDiscount() +" and it is " + cartTotalsModel1.getDiscount() +  "!",
-				cartTotalsModel2.getDiscount().equals(cartTotalsModel1.getDiscount()));
+		System.out.println("----------DISCOUNT: " + cartTotalsModel2.getDiscount() + " : " +  PrintUtils.cleanNumberToDouble(cartTotalsModel1.getDiscount()));	
+		Assert.assertTrue("The discount should be " + cartTotalsModel2.getDiscount() +" and it is " +  PrintUtils.cleanNumberToDouble(cartTotalsModel1.getDiscount()) +  "!",
+				cartTotalsModel2.getDiscount().equals(String.valueOf(PrintUtils.cleanNumberToDouble(cartTotalsModel1.getDiscount()))));
 		
+		//TODO need to fix from here 
 		System.out.println("----------TOTAL AMOUNT: " + cartTotalsModel2.getTotalAmount() + " : " +  cartTotalsModel1.getTotalAmount());	
 		Assert.assertTrue("The total amount should be " + cartTotalsModel2.getTotalAmount() +" and it is " + cartTotalsModel1.getTotalAmount() +  "!",
 				cartTotalsModel2.getTotalAmount().equals(cartTotalsModel1.getTotalAmount()));
