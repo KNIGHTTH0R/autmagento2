@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.FrontEndSteps;
+import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.SearchSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -29,7 +29,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 
 	
 	@Steps
-	public FrontEndSteps frontEndSteps;
+	public CustomerRegistrationSteps frontEndSteps;
 	
 	@Steps
 	public SearchSteps searchSteps;

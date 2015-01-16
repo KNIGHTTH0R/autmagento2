@@ -1,4 +1,4 @@
-package com.steps;
+package com.steps.external;
 
 import net.thucydides.core.annotations.Step;
 

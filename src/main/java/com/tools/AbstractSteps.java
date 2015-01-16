@@ -1,5 +1,6 @@
 package com.tools;
 
+import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import com.pages.backend.CustomerDetailsHomePage;
@@ -20,6 +21,18 @@ import com.pages.frontend.RegistrationMessagePage;
 public class AbstractSteps extends ScenarioSteps {
 
 	private static final long serialVersionUID = 7370145458268780962L;
+	
+	/**
+	 * General FrontEnd Login method.
+	 * @param userName
+	 * @param userPass
+	 */
+	@Step
+	public void performLogin(String userName, String userPass) {
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+	}
 
 	// ----------------------BE------------------------------------
 	public MagentoLoginPage magentoLoginPage() {

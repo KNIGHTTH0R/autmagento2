@@ -12,9 +12,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
-import com.steps.EmailClientSteps;
 import com.steps.backend.BackEndSteps;
-import com.steps.frontend.FrontEndSteps;
+import com.steps.external.EmailClientSteps;
+import com.steps.frontend.CustomerRegistrationSteps;
 import com.tools.Constants;
 import com.tools.data.AddressModel;
 import com.tools.data.CustomerFormModel;
@@ -34,7 +34,7 @@ public class PippaTest {
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
-	public FrontEndSteps frontEndSteps;
+	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
 	public EmailClientSteps emailClientSteps;
 
