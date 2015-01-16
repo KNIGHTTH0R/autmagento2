@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.frontend.CartSteps;
-import com.steps.frontend.FrontEndSteps;
+import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
@@ -36,7 +36,7 @@ public class US001StyleCoachShoppingTest extends BaseTest{
 
 	
 	@Steps
-	public FrontEndSteps frontEndSteps;
+	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
 	public ProductSteps productSteps;
 	@Steps

@@ -7,17 +7,9 @@ import com.tools.AbstractSteps;
 import com.tools.data.AddressModel;
 import com.tools.data.CustomerFormModel;
 
-public class FrontEndSteps extends AbstractSteps {
+public class CustomerRegistrationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 743498685895573421L;
-
-	
-	@Step
-	public void performLogin(String userName, String userPass) {
-		loginPage().inputUserName(userName);
-		loginPage().inputUserPass(userPass);
-		loginPage().clickOnLoginButton();
-	}
 
 	@StepGroup
 	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {

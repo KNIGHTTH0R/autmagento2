@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.FrontEndSteps;
+import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.AddressModel;
@@ -28,7 +28,7 @@ public class CreateCustomerTest extends BaseTest{
 
 
 	@Steps
-	public FrontEndSteps frontEndSteps;
+	public CustomerRegistrationSteps customerRegistrationSteps;
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
@@ -49,8 +49,8 @@ public class CreateCustomerTest extends BaseTest{
 	@Test
 	public void createFECustomerTest() {
 
-		frontEndSteps.fillCreateCustomerForm(dataModel, addressModel);
-		frontEndSteps.verifyCustomerCreation();
+		customerRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
+		customerRegistrationSteps.verifyCustomerCreation();
 	}
 
 	@After
