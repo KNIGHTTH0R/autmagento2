@@ -100,10 +100,10 @@ public class US001StyleCoachShoppingTest extends BaseTest{
 		System.out.println("Cart Preview Price: " + previewPrice);
 		
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
-		CartTotalsModel cartTotals = cartSteps.grabTotals();
+		CartTotalsModel cartTotals = cartSteps.grabTotals();		
+		CartTotalsModel cartTotals2 = validationSteps.calculateCartProducts(cartProducts);
 		
-		validationSteps.calculateCartProducts(cartProducts);
-		
+		validationSteps.checkTotalsInCart(cartTotals, cartTotals2);
 //		System.out.println("----------------> " + productData.getPrice());
 	}
 	

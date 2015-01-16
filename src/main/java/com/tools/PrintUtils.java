@@ -1,5 +1,8 @@
 package com.tools;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 import com.tools.data.CartProductModel;
@@ -50,14 +53,20 @@ public class PrintUtils {
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace(",", ".");
-		
+
 		try {
 			finalResult = Integer.valueOf(result);
 		} catch (Exception e) {
-			System.err.println("WARNING: Could not convert to integer - " + unitPrice);
+			System.err.println("WARNING: Could not convert to integer - "
+					+ unitPrice);
 			e.printStackTrace();
 		}
 
 		return finalResult;
+	}
+
+	public static Double getDoubleWithTwoDigits(Double number) {
+		DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
+		return Double.valueOf(twoFiguresFormat.format(number));
 	}
 }
