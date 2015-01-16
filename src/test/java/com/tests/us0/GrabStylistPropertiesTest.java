@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.BackEndSteps;
+import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.StylistDataModel;

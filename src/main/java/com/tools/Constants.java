@@ -15,6 +15,7 @@ public class Constants {
 	public static final String BE_STYLIST = "simona.popa@evozon.com";
 	public static final String WEB_MAIL = "mailinator.com";
 	public static final long WAIT_TIME_MAIL = 5000;
+	public static final long TIME_CONSTANT = 3000;
 	
 
 }

@@ -10,37 +10,29 @@ import org.openqa.selenium.WebElement;
 import com.tools.AbstractPage;
 import com.tools.data.ProductBasicModel;
 
-public class ProductsPage extends AbstractPage {
-	
+public class ProductListPage extends AbstractPage {
+
 	@FindBy(className = "category-products")
 	private WebElement productCatalogContainer;
 
 	public ProductBasicModel findProductAndClick(String productName) {
 		element(productCatalogContainer).waitUntilVisible();
 		List<WebElement> productsList = productCatalogContainer.findElements(By.cssSelector("li.item"));
-		
+
 		ProductBasicModel resultEntry = new ProductBasicModel();
-		
-		theFor:
-		for (WebElement webElement : productsList) {
+
+		theFor: for (WebElement webElement : productsList) {
 			String productText = webElement.findElement(By.cssSelector("a.prod-name")).getText();
-			if(productText.contains(productName)){
-				
+			if (productText.contains(productName)) {
+
 				resultEntry.setName(productText);
 				resultEntry.setType(webElement.findElement(By.cssSelector("span.product-cat-code")).getText());
 				resultEntry.setPrice(webElement.findElement(By.cssSelector("span.price")).getText());
-				
-				
-				
 				webElement.findElement(By.cssSelector("a.product-image")).click();
 
-				System.out.println(" ****************** Found the product: " + productName);
-				
-				waitABit(6000);
 				break theFor;
 			}
 		}
-		
 		return resultEntry;
 	}
 

@@ -9,10 +9,12 @@ import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
 import com.pages.external.MailinatorHomePage;
 import com.pages.external.MailinatorPage;
+import com.pages.frontend.CartPage;
 import com.pages.frontend.CreateCustomerPage;
+import com.pages.frontend.HeaderPage;
 import com.pages.frontend.LoginPage;
-import com.pages.frontend.LoungePage;
-import com.pages.frontend.ProductsPage;
+import com.pages.frontend.ProductDetailsPage;
+import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -53,12 +55,19 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(RegistrationMessagePage.class);
 	}
 	
-	public LoungePage loungePage(){
-		return getPages().currentPageAt(LoungePage.class);
+	public HeaderPage headerPage(){
+		return getPages().currentPageAt(HeaderPage.class);
 	}
 	
-	public ProductsPage productsPage(){
-		return getPages().currentPageAt(ProductsPage.class);
+	public ProductListPage productListPage(){
+		return getPages().currentPageAt(ProductListPage.class);
+	}
+	public ProductDetailsPage productDetailsPage(){
+		return getPages().currentPageAt(ProductDetailsPage.class);
+	}
+	
+	public CartPage cartPage(){
+		return getPages().currentPageAt(CartPage.class);
 	}
 
 	// -----------------------Email-----------------------------------

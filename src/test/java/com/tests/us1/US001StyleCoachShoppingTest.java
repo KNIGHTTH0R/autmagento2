@@ -3,6 +3,8 @@ package com.tests.us1;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -14,9 +16,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.FrontEndSteps;
+import com.steps.frontend.CartSteps;
+import com.steps.frontend.FrontEndSteps;
+import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.ProductSteps;
+import com.steps.frontend.SearchSteps;
+import com.steps.frontend.ValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.data.CartProductModel;
+import com.tools.data.CartTotalsModel;
 import com.tools.data.ProductBasicModel;
 import com.tools.requirements.Application;
 
@@ -28,8 +37,18 @@ public class US001StyleCoachShoppingTest extends BaseTest{
 	
 	@Steps
 	public FrontEndSteps frontEndSteps;
+	@Steps
+	public ProductSteps productSteps;
+	@Steps
+	public SearchSteps searchSteps;
+	@Steps
+	public HeaderSteps headerSteps;
+	@Steps
+	public CartSteps cartSteps;
+	@Steps
+	public ValidationSteps validationSteps;
 	
-	
+	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
 	
 	@Before
@@ -61,10 +80,31 @@ public class US001StyleCoachShoppingTest extends BaseTest{
 	@Test
 	public void uS001StyleCoachShoppingTest(){
 		frontEndSteps.performLogin(username, password);
-		frontEndSteps.searchProduct("Rosemary Ring");
-		ProductBasicModel productData  = frontEndSteps.findProduct("ROSEMARY RING");
 		
-		System.out.println("----------------> " + productData.getPrice());
+		ProductBasicModel productData = searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
+		productSteps.setProductAddToCart("1", "Blue");
+		productsList.add(productData);
+		productData = searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY ");
+		productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA BRACELET");
+		productSteps.setProductAddToCart("2", "0");
+		productsList.add(productData);
+		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
+		productSteps.setProductAddToCart("3", "18");
+		productsList.add(productData);
+		
+		String previewPrice = headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		
+		System.out.println("Cart Preview Price: " + previewPrice);
+		
+		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
+		CartTotalsModel cartTotals = cartSteps.grabTotals();
+		
+		validationSteps.calculateCartProducts(cartProducts);
+		
+//		System.out.println("----------------> " + productData.getPrice());
 	}
 	
 }

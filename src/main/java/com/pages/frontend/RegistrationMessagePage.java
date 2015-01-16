@@ -13,8 +13,7 @@ public class RegistrationMessagePage extends AbstractPage {
 	private WebElement textContainer;
 
 	public void verifyLink() {
-		Assert.assertTrue(getDriver().getCurrentUrl().contains(
-				"registersuccess"));
+		Assert.assertTrue(getDriver().getCurrentUrl().contains("registersuccess"));
 	}
 
 	public void verifyText() {

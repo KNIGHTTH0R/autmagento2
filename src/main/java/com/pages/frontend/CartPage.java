@@ -1,90 +1,64 @@
 package com.pages.frontend;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.AbstractPage;
+import com.tools.data.CartProductModel;
+import com.tools.data.CartTotalsModel;
 
-public class CartPage extends AbstractPage {
-
-	@FindBy(css = ".item")
-	private WebElement product;
-
-	public double getCustomerDiscount() {
-		String discountText = getDriver().findElement(
-				By.cssSelector("fieldset .title")).getText();
-		//TODO rewrite
-//		double discount = StringUtils
-//				.getFirstIntegerNumberFromString(discountText);
-		
-		double discount = 0;
-		return discount;
-	}
-
-	public String getPriceWithDiscount(double price, double discount) {
-		double priceWithDiscount = price - (price * discount);
-		
-		return "";
-		//TODO rewrite
-//		return String.valueOf(MathUtils
-//				.roundDoubleToTwoDigits(priceWithDiscount));
-
-	}
-
+public class CartPage extends AbstractPage{
 	
-	private void getSearchedProductElement(String productName) {
-		List<WebElement> productsList = getDriver().findElements(
-				By.cssSelector(".data-table.cart-table tr"));
-		productsList.remove(0);
-		boolean found = false;
-		for (WebElement product : productsList) {
-			WebElement productNameContainer = product.findElement(By
-					.cssSelector(" .product-name"));
-			if (productNameContainer.getText().trim()
-					.contentEquals(productName))
-				found = true;
+	@FindBy(css = "table#shopping-cart-totals-table")
+	private WebElement totalsTable;
+	
+	/**
+	 * Will grab all products data from the cart
+	 * @return
+	 */
+	 public List<CartProductModel> grabProductsData(){
+		 List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
+		 List<CartProductModel> resultList = new ArrayList<CartProductModel>();
+		 
+		 for (WebElement webElementNow : entryList) {
+			 CartProductModel productNow = new CartProductModel();
+			 
+			 productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
+			 productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
+			 productNow.setQuantity(webElementNow.findElement(By.cssSelector("input")).getAttribute("value"));
+			 productNow.setUnitPrice(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+			 productNow.setProductsPrice(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
+			 productNow.setFinalPrice(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText());
+			 productNow.setPriceIP(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText());
+			 
+			 resultList.add(productNow);
 		}
+		 
+		 
+		 return resultList;
+	 }
+	 
 
-		Assert.assertTrue("The " + productName + " was not found", found);
 
-	}
-
-	public void verifyProductDetailsInCart(String productName, String qty,
-			String unitPrice, String totalPrice, String finalPrice) {
-		//TODO correct
-		//		WebElement product = getSearchedProductElement(productName);
-		String productQuantityText = product.findElement(
-				By.cssSelector(" .input-text.qty")).getText();
-		String productUnitPriceText = product.findElement(
-				By.cssSelector("  td:nth-child(4) .cart-price")).getText();
-		String productTotalPriceText = product.findElement(
-				By.cssSelector(" .cart-price.variable-text")).getText();
-		//TODO rewrite
-//		String productPriceWithDiscount = String.valueOf(StringUtils
-//				.getFirstDoubleNumberFromString(product.findElement(
-//						By.cssSelector(" .price.pink-text")).getText()));
-
-		Assert.assertTrue("The quantity should be " + qty + " and it's"
-				+ productQuantityText, qty.contentEquals(productUnitPriceText));
-
-		Assert.assertTrue("The unit price should be " + unitPrice + " and it's"
-				+ productUnitPriceText,
-				unitPrice.contentEquals(productUnitPriceText));
-
-		Assert.assertTrue("The total price should be " + totalPrice + " and it's"
-				+ productTotalPriceText,
-				totalPrice.contentEquals(productTotalPriceText));
-
-		//TODO correct
-//		Assert.assertTrue("The quantity should be " + finalPrice + " and it's"
-//				+ productPriceWithDiscount,
-//				finalPrice.contentEquals(productPriceWithDiscount));
-
+	public CartTotalsModel grabTotals() {
+		CartTotalsModel resultModel = new CartTotalsModel();
+		element(totalsTable).waitUntilVisible();
+		
+		resultModel.setSubtotal(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(1) > td:last-child")).getText());
+		resultModel.setJewelryBonus(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(2) input#jewelry_credits")).getAttribute("value"));
+		resultModel.setDiscount(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(3) > td:last-child")).getText());
+		resultModel.setTax(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(4) > td:last-child")).getText());
+		resultModel.setShipping(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(5) > td:last-child")).getText());
+		resultModel.setShipping(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(5) > td:last-child")).getText());
+		resultModel.setTotalAmount(totalsTable.findElement(By.cssSelector("tr.grandtotal > td:last-child")).getText());
+		resultModel.setIpPoints(totalsTable.findElement(By.cssSelector("tfoot tr:nth-child(2) > td:last-child")).getText());
+		
+		return resultModel;
 	}
 
 }

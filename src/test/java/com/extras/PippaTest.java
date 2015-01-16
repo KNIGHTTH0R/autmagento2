@@ -12,9 +12,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
-import com.steps.BackEndSteps;
 import com.steps.EmailClientSteps;
-import com.steps.FrontEndSteps;
+import com.steps.backend.BackEndSteps;
+import com.steps.frontend.FrontEndSteps;
 import com.tools.Constants;
 import com.tools.data.AddressModel;
 import com.tools.data.CustomerFormModel;

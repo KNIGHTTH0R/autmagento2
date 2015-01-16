@@ -1,100 +1,83 @@
 package com.pages.frontend;
 
-import java.util.List;
-
 import net.thucydides.core.annotations.findby.FindBy;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
+import com.tools.Constants;
 
 public class ProductDetailsPage extends AbstractPage {
 
-	@FindBy(css = ".dp-bl.title.ff-Nb.size20")
-	private WebElement titleContainer;
+//	@FindBy(css = ".dp-bl.title.ff-Nb.size20")
+//	private WebElement titleContainer;
 
-	@FindBy(css = ".price")
-	private WebElement priceContainer;
+//	@FindBy(css = ".price")
+//	private WebElement priceContainer;
 
-	@FindBy(css = ".mini-products-list li")
-	private WebElement miniCartContainer;
-
-	@FindBy(css = ".sprite.shopping-bag")
-	private WebElement shoppingBagButton;
-
-	@FindBy(id = ".qty")
+	@FindBy(id = "qty")
 	private WebElement quantityInput;
 
-	@FindBy(id = "#add-to-cart")
+	@FindBy(css = "select[id*='attribute']")
+	private WebElement selectInput;
+	
+	@FindBy(css = "button#add-to-cart")
 	private WebElement addToCartButton;
 	
-	@FindBy(css = ".inner-wrapper .button")
-	private WebElement goToCartButton;
+//	@FindBy(css = "div.add-to-cart-modal")
+//	private WebElement popUpOK;
 
-	@FindBy(css = ".required-entry.super-attribute-select.validation-failed")
-	private WebElement selectInput;
+//	public void checkProductName(String productName) {
+//		element(titleContainer).waitUntilVisible();
+//		Assert.assertTrue("The product name is incorrect", titleContainer.getText().contains(productName));
+//	}
+//
+//	public void checkProductPrice(String productPrice) {
+//		element(priceContainer).waitUntilVisible();
+//		Assert.assertTrue("The product name is incorrect", priceContainer.getText().contains(productPrice));
+//	}
 
-	public void checkProductName(String productName) {
-		element(titleContainer).waitUntilVisible();
-		Assert.assertTrue("The product name is incorrect", titleContainer
-				.getText().contains(productName));
-	}
-
-	public void checkProductPrice(String productPrice) {
-		element(priceContainer).waitUntilVisible();
-		Assert.assertTrue("The product name is incorrect", priceContainer
-				.getText().contains(productPrice));
-	}
-
-	public void inputPrice(String qty) {
+	public void setPrice(String qty) {
 		element(quantityInput).waitUntilVisible();
+		quantityInput.clear();
 		quantityInput.sendKeys(qty);
 	}
 
-	public void selectRegistrationType(String size) {
+	public void selectValueFromDropDown(String size) {
 		element(selectInput).waitUntilVisible();
-		element(selectInput).selectByVisibleText(size);
+		selectFromDropdown(selectInput, size);
 	}
-
-	public void clickAddToCart() {
+	
+	public void addToCart(){
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
-	}
-	public void clickGoToCart() {
-		element(goToCartButton).waitUntilVisible();
-		goToCartButton.click();
-	}
-
-	public void clickShoppingBag() {
-		element(shoppingBagButton).waitUntilVisible();
-		shoppingBagButton.click();
+		
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), "Der Artikel wurde in den Warenkorb gelegt. Du kannst deinen Einkauf fortsetzen."));
+		waitABit(Constants.TIME_CONSTANT);
 	}
 
-	private WebElement getSearchedProductElement(String productName) {
-		List<WebElement> productsList = getDriver().findElements(
-				By.cssSelector(".mini-products-list li"));
-		boolean found = false;
-		for (WebElement product : productsList) {
-			WebElement productNameContainer = product.findElement(By
-					.cssSelector(" .product-name"));
-			if (productNameContainer.getText().trim()
-					.contentEquals(productName))
-				found = true;
-			return product;
-		}
+	// private void getSearchedProductElement(String productName) {
+	// List<WebElement> productsList = getDriver().findElements(
+	// By.cssSelector(".mini-products-list li"));
+	// boolean found = false;
+	// for (WebElement product : productsList) {
+	// WebElement productNameContainer = product.findElement(By
+	// .cssSelector(" .product-name"));
+	// if (productNameContainer.getText().trim()
+	// .contentEquals(productName))
+	// found = true;
+	// }
+	//
+	// Assert.assertTrue("The " + productName + " was not found", found);
+	// }
 
-		Assert.assertTrue("The " + productName + " was not found", found);
-		return null;
-
-	}
-
-	public void verifyProductDetailsInExpandedWrapper(String productName,
-			String price, String qty) {
-		WebElement product = getSearchedProductElement(productName);
-		Assert.assertTrue("Product details are incorrect", product.getText()
-				.contains(price) && product.getText().contains(qty));
-	}
+	// public void verifyProductDetailsInExpandedWrapper(String productName,
+	// String price, String qty) {
+	// WebElement product = getSearchedProductElement(productName);
+	// Assert.assertTrue("Product details are incorrect", product.getText()
+	// .contains(price) && product.getText().contains(qty));
+	// }
 
 }

@@ -1,4 +1,4 @@
-package com.steps;
+package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
@@ -6,12 +6,13 @@ import net.thucydides.core.annotations.StepGroup;
 import com.tools.AbstractSteps;
 import com.tools.data.AddressModel;
 import com.tools.data.CustomerFormModel;
-import com.tools.data.ProductBasicModel;
 
 public class FrontEndSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 743498685895573421L;
 
+	
+	@Step
 	public void performLogin(String userName, String userPass) {
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -19,10 +20,8 @@ public class FrontEndSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public void fillCreateCustomerForm(CustomerFormModel customerData,
-			AddressModel addressData) {
-		
-//		getDriver().get(Constants.BASE_URL_FE);
+	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
+
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		inputEmail(customerData.getEmailName());
@@ -50,12 +49,11 @@ public class FrontEndSteps extends AbstractSteps {
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 
 	}
-	
 
 	@StepGroup
 	public void verifyCustomerCreation() {
-		verifyText();		
-		verifyLink();		
+		verifyText();
+		verifyLink();
 	}
 
 	// ------------------Secondary Form - create customer - Address fields
@@ -129,6 +127,7 @@ public class FrontEndSteps extends AbstractSteps {
 	public void checkMember() {
 		createCustomerPage().checkMember();
 	}
+
 	@Step
 	public void checkNoInvite() {
 		createCustomerPage().checkNoInvite();
@@ -144,27 +143,15 @@ public class FrontEndSteps extends AbstractSteps {
 		createCustomerPage().clickCompleteButton();
 	}
 
-	
 	@Step
-	public void verifyLink(){
+	public void verifyLink() {
 		registrationMessagePage().verifyLink();
-	}
-	
-	
-	@Step
-	public void verifyText(){
-		registrationMessagePage().verifyText();
 	}
 
 	@Step
-	public void searchProduct(String searchKey) {
-		loungePage().searchInput(searchKey);
-		loungePage().clickOnSubmitButton();
+	public void verifyText() {
+		registrationMessagePage().verifyText();
 	}
-	
-	
-	@Step
-	public ProductBasicModel findProduct(String productName){
-		return productsPage().findProductAndClick(productName);
-	}
+
+
 }
