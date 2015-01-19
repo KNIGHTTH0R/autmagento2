@@ -39,9 +39,8 @@ public class CheckCustomerActivationTest extends BaseTest{
 	@Before
 	public void setUp() throws Exception {
 	
-		
-		
-	
+		clientName = MongoReader.grabCustomerFormModels("CreateCustomerTest").get(0).getEmailName();		
+		System.out.println(clientName);
 //		Properties prop = new Properties();
 //		InputStream input = null;
 //
