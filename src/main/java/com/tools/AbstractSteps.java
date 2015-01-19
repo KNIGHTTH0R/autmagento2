@@ -17,13 +17,17 @@ import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
 import com.pages.frontend.checkout.CartPage;
+import com.pages.frontend.checkout.shipping.BillingFormPage;
+import com.pages.frontend.checkout.shipping.ShippingFormPage;
+import com.pages.frontend.checkout.shipping.SurveyPage;
 
 public class AbstractSteps extends ScenarioSteps {
 
 	private static final long serialVersionUID = 7370145458268780962L;
-	
+
 	/**
 	 * General FrontEnd Login method.
+	 * 
 	 * @param userName
 	 * @param userPass
 	 */
@@ -67,20 +71,34 @@ public class AbstractSteps extends ScenarioSteps {
 	public RegistrationMessagePage registrationMessagePage() {
 		return getPages().currentPageAt(RegistrationMessagePage.class);
 	}
-	
-	public HeaderPage headerPage(){
+
+	public HeaderPage headerPage() {
 		return getPages().currentPageAt(HeaderPage.class);
 	}
-	
-	public ProductListPage productListPage(){
+
+	public ProductListPage productListPage() {
 		return getPages().currentPageAt(ProductListPage.class);
 	}
-	public ProductDetailsPage productDetailsPage(){
+
+	public ProductDetailsPage productDetailsPage() {
 		return getPages().currentPageAt(ProductDetailsPage.class);
 	}
-	
-	public CartPage cartPage(){
+
+	public CartPage cartPage() {
 		return getPages().currentPageAt(CartPage.class);
+	}
+
+	// shipping page
+	public BillingFormPage billingFormPage() {
+		return getPages().currentPageAt(BillingFormPage.class);
+	}
+
+	public ShippingFormPage shippingFormPage() {
+		return getPages().currentPageAt(ShippingFormPage.class);
+	}
+
+	public SurveyPage surveyPage() {
+		return getPages().currentPageAt(SurveyPage.class);
 	}
 
 	// -----------------------Email-----------------------------------

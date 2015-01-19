@@ -64,15 +64,15 @@ public class MongoReader extends MongoConnector {
 				StylistDataModel result = new StylistDataModel();
 				dbObject = cursor.next();
 
-				result.styleCoachLeads = (MongoUtils.checkField(dbObject,
+				result.setStyleCoachLeads(MongoUtils.checkField(dbObject,
 						MongoConstants.STYLE_COACH_LEADS));
-				result.hostessLeads = (MongoUtils.checkField(dbObject,
+				result.setHostessLeads(MongoUtils.checkField(dbObject,
 						MongoConstants.HOSTESS_LEADS));
-				result.customerLeads = (MongoUtils.checkField(dbObject,
+				result.setCustomerLeads(MongoUtils.checkField(dbObject,
 						MongoConstants.CUSTOMER_LEADS));
-				result.styleCoachLeadsWeek = (MongoUtils.checkField(dbObject,
+				result.setStyleCoachLeadsWeek(MongoUtils.checkField(dbObject,
 						MongoConstants.STYLE_COACH_LEADS_WEEK));
-				result.hostessLeadsWeek = (MongoUtils.checkField(dbObject,
+				result.setHostessLeadsWeek(MongoUtils.checkField(dbObject,
 						MongoConstants.HOSTESS_LEADS_WEEK));
 
 				itemList.add(result);

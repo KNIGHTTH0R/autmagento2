@@ -41,13 +41,13 @@ public class MongoWriter extends MongoConnector {
 
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoConstants.STYLE_COACH_LEADS,
-				dataModel.styleCoachLeads);
-		document.put(MongoConstants.HOSTESS_LEADS, dataModel.hostessLeads);
-		document.put(MongoConstants.CUSTOMER_LEADS, dataModel.customerLeads);
+				dataModel.getStyleCoachLeads());
+		document.put(MongoConstants.HOSTESS_LEADS, dataModel.getHostessLeads());
+		document.put(MongoConstants.CUSTOMER_LEADS, dataModel.getCustomerLeads());
 		document.put(MongoConstants.STYLE_COACH_LEADS_WEEK,
-				dataModel.styleCoachLeadsWeek);
+				dataModel.getStyleCoachLeadsWeek());
 		document.put(MongoConstants.HOSTESS_LEADS_WEEK,
-				dataModel.hostessLeadsWeek);
+				dataModel.getHostessLeadsWeek());
 
 		table.insert(document);
 	}

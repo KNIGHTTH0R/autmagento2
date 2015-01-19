@@ -20,31 +20,31 @@ public class ValidationSteps extends AbstractSteps {
 			StylistDataModel finalData) {
 
 		System.out.println("Initial customerLeads: "
-				+ initialData.customerLeads);
-		System.out.println("Initial hostessLeads: " + initialData.hostessLeads);
+				+ initialData.getCustomerLeads());
+		System.out.println("Initial hostessLeads: " + initialData.getHostessLeads());
 		System.out.println("Initial hostessLeadsWeek: "
-				+ initialData.hostessLeadsWeek);
+				+ initialData.getHostessLeadsWeek());
 		System.out.println("Initial styleCoachLeads: "
-				+ initialData.styleCoachLeads);
+				+ initialData.getStyleCoachLeads());
 		System.out.println("Initial styleCoachLeadsWeek: "
-				+ initialData.styleCoachLeadsWeek);
+				+ initialData.getStyleCoachLeadsWeek());
 
 		System.out
 				.println("--------------------------------------------------");
 
-		System.out.println("Final customerLeads: " + finalData.customerLeads);
-		System.out.println("Final hostessLeads: " + finalData.hostessLeads);
+		System.out.println("Final customerLeads: " + finalData.getCustomerLeads());
+		System.out.println("Final hostessLeads: " + finalData.getHostessLeads());
 		System.out.println("Final hostessLeadsWeek: "
-				+ finalData.hostessLeadsWeek);
+				+ finalData.getHostessLeadsWeek());
 		System.out.println("Final styleCoachLeads: "
-				+ finalData.styleCoachLeads);
+				+ finalData.getStyleCoachLeads());
 		System.out.println("Final styleCoachLeadsWeek: "
-				+ finalData.styleCoachLeadsWeek);
+				+ finalData.getStyleCoachLeadsWeek());
 
 
-		verifyValues(initialData.customerLeads, finalData.customerLeads, "Customer Leads ");
-		verifyValues(initialData.hostessLeads, finalData.hostessLeads, "Hostess Leads ");
-		verifyValues(initialData.hostessLeadsWeek, finalData.hostessLeadsWeek, "Hostess Leads Week ");
+		verifyValues(initialData.getCustomerLeads(), finalData.getCustomerLeads(), "Customer Leads ");
+		verifyValues(initialData.getHostessLeads(), finalData.getHostessLeads(), "Hostess Leads ");
+		verifyValues(initialData.getHostessLeadsWeek(), finalData.getHostessLeadsWeek(), "Hostess Leads Week ");
 
 		failThis();
 

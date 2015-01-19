@@ -39,7 +39,7 @@ public class CheckCustomerActivationTest extends BaseTest{
 	@Before
 	public void setUp() throws Exception {
 	
-		MongoReader.
+		
 		
 	
 //		Properties prop = new Properties();

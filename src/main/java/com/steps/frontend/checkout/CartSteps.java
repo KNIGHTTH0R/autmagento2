@@ -1,4 +1,4 @@
-package com.steps.frontend;
+package com.steps.frontend.checkout;
 
 import java.util.List;
 
@@ -22,13 +22,12 @@ public class CartSteps extends  AbstractSteps{
 
 	@Step
 	public CartTotalsModel grabTotals() {
-		PrintUtils.printCartTotals(cartPage().grabTotals());
 		return cartPage().grabTotals();
 	}
 	
 	@Step
-	public void clickGoToCheckout(){
-		cartPage().clickToCheckout();
+	public void clickGoToShipping(){
+		cartPage().clickToShipping();
 	}
 
 }
