@@ -18,6 +18,7 @@ import com.steps.ValidationSteps;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.data.CustomerConfigurationModel;
 import com.tools.data.StylistDataModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -32,6 +33,7 @@ public class ValidateStylistTest extends BaseTest{
 	public ValidationSteps validationSteps;
 
 	public StylistDataModel initialValidation = new StylistDataModel();
+	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
 	public StylistDataModel finalValidation;
 
 	private String stylistName;
@@ -61,40 +63,24 @@ public class ValidateStylistTest extends BaseTest{
 				}
 			}
 		}
-		try {
-			input = null;
-			input = new FileInputStream(Constants.RESOURCES_PATH + "CustomerConfirmation.properties");
-			prop.load(input);
-			accountActive = prop.getProperty("accountActive");
-			emailActive = prop.getProperty("emailActive");
-			prop = new Properties();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 		
-		List<StylistDataModel> validationList = MongoReader.grabStylistDataModels("GrabStylistPropertiesTest");
-		if(validationList.size() > 0)
-			initialValidation = validationList.get(0);
-		else
-			System.out.println("The databese has no entries");
+		List<CustomerConfigurationModel> customerConfigurationModels= MongoReader.grabCustomerConfigurationModels("CheckCustomerActivationTest");
+		if(customerConfigurationModels.size() > 0){
+			customerConfigurationModel = customerConfigurationModels.get(0);
+			
+			emailActive = customerConfigurationModel.getEmailActive();
+			accountActive = customerConfigurationModel.getAccountActive();			
+			
+		}else{
+			System.out.println("The database table has no entries");
+		}
 //		try {
 //			input = null;
-//			input = new FileInputStream(Constants.RESOURCES_PATH + "StylistData.properties");
+//			input = new FileInputStream(Constants.RESOURCES_PATH + "CustomerConfirmation.properties");
 //			prop.load(input);
-//			initialValidation.customerLeads = prop.getProperty("customerLeads");
-//			initialValidation.hostessLeads = prop.getProperty("hostessLeads");
-//			initialValidation.hostessLeadsWeek = prop.getProperty("hostessLeadsWeek");
-//			initialValidation.styleCoachLeads = prop.getProperty("styleCoachLeads");
-//			initialValidation.styleCoachLeadsWeek = prop.getProperty("styleCoachLeadsWeek");
-//			
+//			accountActive = prop.getProperty("accountActive");
+//			emailActive = prop.getProperty("emailActive");
+//			prop = new Properties();
 //		} catch (IOException ex) {
 //			ex.printStackTrace();
 //		} finally {
@@ -106,6 +92,37 @@ public class ValidateStylistTest extends BaseTest{
 //				}
 //			}
 //		}
+		
+		List<StylistDataModel> validationList = MongoReader.grabStylistDataModels("GrabStylistPropertiesTest");
+		if(validationList.size() > 0){
+			initialValidation = validationList.get(0);
+		}else
+			System.out.println("The database table has no entries");	
+		
+//			try {
+//				input = null;
+//				input = new FileInputStream(Constants.RESOURCES_PATH + "StylistData.properties");
+//				prop.load(input);
+//				initialValidation.setCustomerLeads(prop.getProperty("customerLeads"));
+//				initialValidation.setHostessLeads(prop.getProperty("hostessLeads"));
+//				initialValidation.setHostessLeadsWeek(prop.getProperty("hostessLeadsWeek"));
+//				initialValidation.setStyleCoachLeads(prop.getProperty("styleCoachLeads"));
+//				initialValidation.setStyleCoachLeadsWeek(prop.getProperty("styleCoachLeadsWeek"));
+//				
+//			} catch (IOException ex) {
+//				ex.printStackTrace();
+//			} finally {
+//				if (input != null) {
+//					try {
+//						input.close();
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+			
+				
+		
 	}
 
 	/**
@@ -119,6 +136,12 @@ public class ValidateStylistTest extends BaseTest{
 		backEndSteps.openCustomerDetails(stylistName);
 		backEndSteps.clickOnLeadSettings();
 		finalValidation = backEndSteps.grabLeadSettingsData();
+		
+		System.out.println("####" + finalValidation.getCustomerLeads());
+		System.out.println("####" + finalValidation.getHostessLeads());
+		System.out.println("####" + finalValidation.getHostessLeadsWeek());
+		System.out.println("####" + finalValidation.getStyleCoachLeads());
+		System.out.println("####" + finalValidation.getStyleCoachLeadsWeek());
 		
 		//this line is just to use emailActive var.
 		emailActive.contentEquals("true");
