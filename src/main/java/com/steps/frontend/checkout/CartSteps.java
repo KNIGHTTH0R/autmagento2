@@ -22,7 +22,6 @@ public class CartSteps extends  AbstractSteps{
 
 	@Step
 	public CartTotalsModel grabTotals() {
-		PrintUtils.printCartTotals(cartPage().grabTotals());
 		return cartPage().grabTotals();
 	}
 	

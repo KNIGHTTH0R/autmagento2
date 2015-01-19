@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.AbstractPage;
+import com.tools.PrintUtils;
 import com.tools.data.CartTotalsModel;
 
 public class SurveyPage extends AbstractPage{
@@ -25,10 +26,10 @@ public class SurveyPage extends AbstractPage{
 		CartTotalsModel result = new CartTotalsModel();
 		element(surveyTotalsContainer).waitUntilVisible();
 		
-		result.setSubtotal(surveyTotalsContainer.findElement(By.cssSelector("tr.subtotal td.a-right")).getText());
-		result.setDiscount(surveyTotalsContainer.findElement(By.cssSelector("tr.all_discounts td.a-right")).getText());
-		result.setShipping(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText());
-		result.setTotalAmount(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText());
+		result.setSubtotal(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.subtotal td.a-right")).getText()));
+		result.setDiscount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.all_discounts td.a-right")).getText()));
+		result.setShipping(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
+		result.setTotalAmount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
 		
 		return result;
 	}

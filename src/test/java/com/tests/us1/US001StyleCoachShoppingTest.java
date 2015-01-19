@@ -22,19 +22,20 @@ import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.ValidationSteps;
 import com.steps.frontend.checkout.CartSteps;
+import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.PrintUtils;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.ProductBasicModel;
 import com.tools.requirements.Application;
 
-@WithTag(name="US1", type = "US1")
+@WithTag(name = "US1", type = "US1")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US001StyleCoachShoppingTest extends BaseTest{
+public class US001StyleCoachShoppingTest extends BaseTest {
 
-	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -46,11 +47,13 @@ public class US001StyleCoachShoppingTest extends BaseTest{
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
+	public ShippingSteps shippingSteps;
+	@Steps
 	public ValidationSteps validationSteps;
-	
+
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		Properties prop = new Properties();
@@ -75,37 +78,48 @@ public class US001StyleCoachShoppingTest extends BaseTest{
 			}
 		}
 	}
-	
-	
+
 	@Test
-	public void uS001StyleCoachShoppingTest(){
+	public void uS001StyleCoachShoppingTest() {
 		frontEndSteps.performLogin(username, password);
-		
+
 		ProductBasicModel productData = searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
 		productSteps.setProductAddToCart("1", "Blue");
 		productsList.add(productData);
-//		productData = searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY ");
-//		productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
-//		productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA BRACELET");
-//		productSteps.setProductAddToCart("2", "0");
-//		productsList.add(productData);
-//		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-//		productSteps.setProductAddToCart("3", "18");
-//		productsList.add(productData);
-		
+		// productData = searchSteps.searchAndSelectProduct("M058",
+		// "GUTSCHEIN FOLGEPARTY ");
+		// productSteps.setProductAddToCart("1", "0");
+		// productsList.add(productData);
+		// productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA",
+		// "MAGIC VIOLETTA BRACELET");
+		// productSteps.setProductAddToCart("2", "0");
+		// productsList.add(productData);
+		// productData = searchSteps.searchAndSelectProduct("Rosemary Ring",
+		// "ROSEMARY RING");
+		// productSteps.setProductAddToCart("3", "18");
+		// productsList.add(productData);
+
 		String previewPrice = headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
+
 		System.out.println("Cart Preview Price: " + previewPrice);
-		
+
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
-		CartTotalsModel cartTotals = cartSteps.grabTotals();		
-		
-		CartTotalsModel cartTotals2 = validationSteps.calculateCartProducts(cartProducts);
-		validationSteps.checkTotalsInCart(cartTotals, cartTotals2);
-		
+		CartTotalsModel cartTotals = cartSteps.grabTotals();
+
+		CartTotalsModel calculatedTotals = validationSteps.calculateCartProducts(cartProducts);
+		validationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
+
 		cartSteps.clickGoToShipping();
+		
+		//TODO - add billing and shipping address forms 
+		
+		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		
+		PrintUtils.printCartTotals(shippingTotals);
+		
+		shippingSteps.clickGoToPaymentMethod();
+		
 	}
-	
+
 }

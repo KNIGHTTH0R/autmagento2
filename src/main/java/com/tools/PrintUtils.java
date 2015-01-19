@@ -38,6 +38,7 @@ public class PrintUtils {
 	public static double cleanNumberToDouble(String unitPrice) {
 		String result = unitPrice;
 		result = result.replace(" €", "");
+		result = result.replace("€ ", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace(",", ".");
@@ -48,6 +49,7 @@ public class PrintUtils {
 	public static String cleanNumberToString(String unitPrice) {
 		String result = unitPrice;
 		result = result.replace(" €", "");
+		result = result.replace("€ ", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace(",", ".");
@@ -60,6 +62,7 @@ public class PrintUtils {
 		String result = unitPrice;
 		int finalResult = 0;
 		result = result.replace(" €", "");
+		result = result.replace("€ ", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace(",", ".");
