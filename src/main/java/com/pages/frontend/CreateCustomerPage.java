@@ -35,7 +35,7 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "accept-checkbox")
 	private WebElement iAgreeCheckbox;
 
-	@FindBy(id = "by_comment")
+	@FindBy(id = "by_default")
 	private WebElement noInviteCheckbox;
 
 	@FindBy(css = "button[title*='Senden']")

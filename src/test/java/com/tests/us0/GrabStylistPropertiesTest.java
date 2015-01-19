@@ -18,6 +18,7 @@ import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.StylistDataModel;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -34,7 +35,7 @@ public class GrabStylistPropertiesTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 
