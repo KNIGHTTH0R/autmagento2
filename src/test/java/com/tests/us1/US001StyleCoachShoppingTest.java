@@ -16,12 +16,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.CartSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.ValidationSteps;
+import com.steps.frontend.checkout.CartSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.CartProductModel;
@@ -101,10 +101,11 @@ public class US001StyleCoachShoppingTest extends BaseTest{
 		
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		CartTotalsModel cartTotals = cartSteps.grabTotals();		
-		CartTotalsModel cartTotals2 = validationSteps.calculateCartProducts(cartProducts);
 		
+		CartTotalsModel cartTotals2 = validationSteps.calculateCartProducts(cartProducts);
 		validationSteps.checkTotalsInCart(cartTotals, cartTotals2);
-//		System.out.println("----------------> " + productData.getPrice());
+		
+		cartSteps.clickGoToShipping();
 	}
 	
 }

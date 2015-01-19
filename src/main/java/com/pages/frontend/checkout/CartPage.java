@@ -63,7 +63,7 @@ public class CartPage extends AbstractPage {
 		return resultModel;
 	}
 
-	public void clickToCheckout() {
+	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
 	}
