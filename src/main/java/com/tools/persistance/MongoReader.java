@@ -8,7 +8,6 @@ import com.connectors.mongo.MongoConnector;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.tools.data.AddressModel;
-import com.tools.data.CustomerFormModel;
 import com.tools.data.StylistDataModel;
 
 public class MongoReader extends MongoConnector {
@@ -82,30 +81,4 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
-	public static List<CustomerFormModel> grabCustomerFormModels(String testName) {
-		DBObject dbObject = null;
-		List<CustomerFormModel> itemList = new ArrayList<CustomerFormModel>();
-		
-		workingDB = mongoClient.getDB(testName);
-		DBCursor cursor = workingDB.getCollection(
-				MongoConstants.CUSTOMER_MODEL).find();
-		
-		try {
-			while (cursor.hasNext()) {
-				CustomerFormModel result = new CustomerFormModel();
-				dbObject = cursor.next();
-				
-				result.setEmailName(MongoUtils.checkField(dbObject,
-						MongoConstants.CLIENT_NAME));			
-				
-				itemList.add(result);
-			}
-		} catch (Exception e) {			
-			e.printStackTrace();
-		} finally {
-			cursor.close();
-		}
-		return itemList;
-	}
-
 }

@@ -20,7 +20,6 @@ import com.steps.backend.BackEndSteps;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
@@ -38,29 +37,26 @@ public class CheckCustomerActivationTest extends BaseTest{
 
 	@Before
 	public void setUp() throws Exception {
-	
-		clientName = MongoReader.grabCustomerFormModels("CreateCustomerTest").get(0).getEmailName();		
-		System.out.println(clientName);
-//		Properties prop = new Properties();
-//		InputStream input = null;
-//
-//		try {
-//
-//			input = new FileInputStream(Constants.RESOURCES_PATH + "Customer.properties");
-//			prop.load(input);
-//			clientName = prop.getProperty("clientName");
-//
-//		} catch (IOException ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			if (input != null) {
-//				try {
-//					input.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(Constants.RESOURCES_PATH + "Customer.properties");
+			prop.load(input);
+			clientName = prop.getProperty("clientName");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	@Test

@@ -22,12 +22,14 @@ import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.ValidationSteps;
 import com.steps.frontend.checkout.CartSteps;
+import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
+import com.tools.data.CreditCardModel;
 import com.tools.data.ProductBasicModel;
 import com.tools.requirements.Application;
 
@@ -49,10 +51,14 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
+	public PaymentSteps paymentSteps;
+	@Steps
 	public ValidationSteps validationSteps;
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
+	private CreditCardModel creditCardData = new CreditCardModel();
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -77,6 +83,15 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 				}
 			}
 		}
+		
+		
+		
+		creditCardData.setCardNumber("4111 1111 1111 1111");
+		creditCardData.setCardName("test");
+		creditCardData.setMonthExpiration("06");
+		creditCardData.setYearExpiration("2016");
+		creditCardData.setCvcNumber("737");
+		
 	}
 
 	@Test
@@ -86,18 +101,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		ProductBasicModel productData = searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
 		productSteps.setProductAddToCart("1", "Blue");
 		productsList.add(productData);
-
-		productData = searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY ");
-		productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
-		productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA BRACELET");
-		productSteps.setProductAddToCart("2", "0");
-		productsList.add(productData);
-		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-		productSteps.setProductAddToCart("3", "18");
-		productsList.add(productData);
-		
-
 		// productData = searchSteps.searchAndSelectProduct("M058",
 		// "GUTSCHEIN FOLGEPARTY ");
 		// productSteps.setProductAddToCart("1", "0");
@@ -111,7 +114,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		// productSteps.setProductAddToCart("3", "18");
 		// productsList.add(productData);
 
-
 		String previewPrice = headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
@@ -124,15 +126,19 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		validationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
 
 		cartSteps.clickGoToShipping();
-		
-		//TODO - add billing and shipping address forms 
-		
+
+		// TODO - add billing and shipping address forms
+
 		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		
+
 		PrintUtils.printCartTotals(shippingTotals);
-		
+
 		shippingSteps.clickGoToPaymentMethod();
 		
+		paymentSteps.expandCreditCardForm();
+		
+		paymentSteps.fillCreditCardForm(creditCardData);
+
 	}
 
 }

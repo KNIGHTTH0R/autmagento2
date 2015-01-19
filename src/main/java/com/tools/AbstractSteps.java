@@ -17,6 +17,8 @@ import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
 import com.pages.frontend.checkout.CartPage;
+import com.pages.frontend.checkout.payment.CreditCardFormPage;
+import com.pages.frontend.checkout.payment.PaymentPage;
 import com.pages.frontend.checkout.shipping.BillingFormPage;
 import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
@@ -84,11 +86,12 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(ProductDetailsPage.class);
 	}
 
+	//cart
 	public CartPage cartPage() {
 		return getPages().currentPageAt(CartPage.class);
 	}
 
-	// shipping page
+	// shipping pages
 	public BillingFormPage billingFormPage() {
 		return getPages().currentPageAt(BillingFormPage.class);
 	}
@@ -100,6 +103,17 @@ public class AbstractSteps extends ScenarioSteps {
 	public SurveyPage surveyPage() {
 		return getPages().currentPageAt(SurveyPage.class);
 	}
+	
+	// payment pages
+	
+	public PaymentPage paymentPage(){
+		return getPages().currentPageAt(PaymentPage.class);
+	}
+	
+	public CreditCardFormPage creditCardFormPage(){
+		return getPages().currentPageAt(CreditCardFormPage.class);
+	}
+	
 
 	// -----------------------Email-----------------------------------
 

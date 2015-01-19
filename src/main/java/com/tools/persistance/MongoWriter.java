@@ -6,9 +6,7 @@ import com.connectors.mongo.MongoConnector;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.tools.data.AddressModel;
-import com.tools.data.CustomerFormModel;
 import com.tools.data.StylistDataModel;
-
 
 public class MongoWriter extends MongoConnector {
 
@@ -49,18 +47,6 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoConstants.HOSTESS_LEADS_WEEK,
 				dataModel.getHostessLeadsWeek());
 
-		table.insert(document);
-	}
-	public static void saveCustomerFormModel(CustomerFormModel customerModel,
-			String testName) {
-		workingDB = mongoClient.getDB(testName);
-		DBCollection table = workingDB
-				.getCollection(MongoConstants.CUSTOMER_MODEL);
-		
-		BasicDBObject document = new BasicDBObject();
-		document.put(MongoConstants.CLIENT_NAME,
-				customerModel.getEmailName());		
-		
 		table.insert(document);
 	}
 

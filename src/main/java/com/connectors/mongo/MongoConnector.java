@@ -17,7 +17,7 @@ import com.tools.persistance.MongoConstants;
  * @author vladvoicu
  */
 public class MongoConnector {
-
+	
 	protected static MongoClient mongoClient;
 	protected static DB workingDB;
 	private List<ServerAddress> serverList = new ArrayList<ServerAddress>();
