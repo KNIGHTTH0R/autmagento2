@@ -66,7 +66,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	public void uS001StyleCoachShoppingTest(){
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData  = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-		
+		productData.getName();
 		
 	}
 	

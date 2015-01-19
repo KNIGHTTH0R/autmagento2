@@ -20,6 +20,7 @@ public class Constants {
 	public static final long WAIT_TIME_MAIL = 5000;
 	public static final long TIME_CONSTANT = 3000;
 	public static final String ADDRESS_SEPARATOR = ",";
+	public static final String LINE_SEPARATOR = "\n";
 	
 
 }

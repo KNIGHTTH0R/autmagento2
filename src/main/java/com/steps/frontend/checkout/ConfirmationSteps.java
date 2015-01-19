@@ -11,7 +11,7 @@ public class ConfirmationSteps extends AbstractSteps{
 	
 	@Step
 	public AddressModel grabSippingData(){
-		return confirmationPage().grabShippingData();
+		return confirmationPage().grabBillingData();
 	}
 	
 	@Step
