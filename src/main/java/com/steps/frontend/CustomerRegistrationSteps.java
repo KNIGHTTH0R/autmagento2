@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.AbstractSteps;
+import com.tools.Constants;
 import com.tools.data.AddressModel;
 import com.tools.data.CustomerFormModel;
 
@@ -13,6 +14,8 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 	@StepGroup
 	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
+		
+		getDriver().get(Constants.BASE_URL_FE);
 
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());

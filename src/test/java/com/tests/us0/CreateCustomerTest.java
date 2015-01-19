@@ -55,6 +55,7 @@ public class CreateCustomerTest extends BaseTest{
 
 	@After
 	public void saveData() {
+		
 		Properties prop = new Properties();
 		OutputStream output = null;
 
