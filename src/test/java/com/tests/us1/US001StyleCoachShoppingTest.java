@@ -22,11 +22,13 @@ import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.ValidationSteps;
 import com.steps.frontend.checkout.CartSteps;
+import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
+import com.tools.data.AddressModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.CreditCardModel;
@@ -52,6 +54,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public ShippingSteps shippingSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public ValidationSteps validationSteps;
 
@@ -128,7 +132,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		cartSteps.clickGoToShipping();
 
 		// TODO - add billing and shipping address forms
-
 		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
 
 		PrintUtils.printCartTotals(shippingTotals);
@@ -138,6 +141,16 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 		
 		paymentSteps.fillCreditCardForm(creditCardData);
+		
+		AddressModel billingAddress = confirmationSteps.grabBillingData();
+		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+		
+		
+		System.out.println("BILLING");
+		PrintUtils.printAddressModel(billingAddress);
+		
+		System.out.println("SHIPPING");
+		PrintUtils.printAddressModel(shippingAddress);
 
 	}
 

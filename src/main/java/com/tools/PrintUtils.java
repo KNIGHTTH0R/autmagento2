@@ -1,9 +1,9 @@
 package com.tools;
 
 import java.text.DecimalFormat;
-
 import java.util.List;
 
+import com.tools.data.AddressModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 
@@ -81,5 +81,16 @@ public class PrintUtils {
 	public static Double getDoubleWithTwoDigits(Double number) {
 		DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
 		return Double.valueOf(twoFiguresFormat.format(number));
+	}
+
+	public static void printAddressModel(AddressModel dataModel) {
+		
+		System.out.println("---- PRINT Adress Model ----");
+		System.out.println(dataModel.getStreetAddress());
+		System.out.println(dataModel.getStreetNumber());
+		System.out.println(dataModel.getPostCode());
+		System.out.println(dataModel.getHomeTown());
+		System.out.println(dataModel.getPhoneNumber());
+		
 	}
 }

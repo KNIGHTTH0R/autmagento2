@@ -17,6 +17,7 @@ import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
 import com.pages.frontend.checkout.CartPage;
+import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.payment.CreditCardFormPage;
 import com.pages.frontend.checkout.payment.PaymentPage;
 import com.pages.frontend.checkout.shipping.BillingFormPage;
@@ -105,13 +106,17 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 	
 	// payment pages
-	
 	public PaymentPage paymentPage(){
 		return getPages().currentPageAt(PaymentPage.class);
 	}
 	
 	public CreditCardFormPage creditCardFormPage(){
 		return getPages().currentPageAt(CreditCardFormPage.class);
+	}
+	
+	//confirmation page
+	public ConfirmationPage confirmationPage(){
+		return getPages().currentPageAt(ConfirmationPage.class);
 	}
 	
 
