@@ -1,6 +1,9 @@
 package com.steps.frontend;
 
+import java.text.DecimalFormat;
 import java.util.List;
+
+import net.thucydides.core.annotations.Step;
 
 import org.junit.Assert;
 
@@ -14,13 +17,15 @@ public class ValidationSteps extends AbstractSteps {
 	private static final long serialVersionUID = 4274219181280984116L;
 
 	public CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {
-
+		
+	 DecimalFormat df = new DecimalFormat("#####0.00");
+	 
 		double totalPrice = 0;
 		double discountSum = 0;
 		double totalAmount = 0;
-		double ipPointsSum = 0;
+		int ipPointsSum = 0;
 		double taxSum = 0;
-		double jeverlyBonus = 0;
+		int jeverlyBonus = 0;
 		double shiping = 0;
 		
 		for (CartProductModel cartProductModel : productList) {
@@ -46,13 +51,13 @@ public class ValidationSteps extends AbstractSteps {
 
 		CartTotalsModel result = new CartTotalsModel();
 
-		result.setSubtotal(String.valueOf(totalPrice));
-		result.setDiscount(String.valueOf(discountSum));
-		result.setTotalAmount(String.valueOf(totalAmount));
-		result.setIpPoints(String.valueOf(ipPointsSum));
-		result.setTax(String.valueOf(taxSum));
-		result.setShipping(String.valueOf(shiping));
-		result.setJewelryBonus(String.valueOf(jeverlyBonus));
+		result.setSubtotal(df.format((totalPrice)));
+		result.setDiscount(df.format(discountSum));
+		result.setTotalAmount(df.format(totalAmount));
+		result.setIpPoints(String.valueOf((ipPointsSum)));
+		result.setTax(df.format(taxSum));
+		result.setShipping(df.format(shiping));
+		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
 		
 		System.out.println("------------------------------");
 		System.out.println("------------------------------> " + result.getSubtotal());
@@ -72,17 +77,17 @@ public class ValidationSteps extends AbstractSteps {
 		return productPrice = (productPrice * 25 / 100);
 	}
 	
+	@Step
 	public void checkTotalsInCart(CartTotalsModel cartTotalsModel1,CartTotalsModel cartTotalsModel2){
-		//TODO not a final form.must find a way to clean double numbers
-		System.out.println("----------SUBTOTAL: " + cartTotalsModel2.getSubtotal() + " : " +  PrintUtils.cleanNumberToDouble(cartTotalsModel1.getSubtotal()));	
-		Assert.assertTrue("The subtotal should be " + cartTotalsModel2.getSubtotal() +" and it is " +  PrintUtils.cleanNumberToDouble(cartTotalsModel1.getSubtotal()) +  "!",
-				cartTotalsModel2.getSubtotal().equals(String.valueOf(PrintUtils.cleanNumberToDouble(cartTotalsModel1.getSubtotal()))));
 		
-		System.out.println("----------DISCOUNT: " + cartTotalsModel2.getDiscount() + " : " +  PrintUtils.cleanNumberToDouble(cartTotalsModel1.getDiscount()));	
-		Assert.assertTrue("The discount should be " + cartTotalsModel2.getDiscount() +" and it is " +  PrintUtils.cleanNumberToDouble(cartTotalsModel1.getDiscount()) +  "!",
-				cartTotalsModel2.getDiscount().equals(String.valueOf(PrintUtils.cleanNumberToDouble(cartTotalsModel1.getDiscount()))));
+		System.out.println("----------SUBTOTAL: " + cartTotalsModel2.getSubtotal() + " : " +  cartTotalsModel1.getSubtotal());	
+		Assert.assertTrue("The subtotal should be " + cartTotalsModel2.getSubtotal() +" and it is " +  cartTotalsModel1.getSubtotal() +  "!",
+				cartTotalsModel2.getSubtotal().equals(cartTotalsModel1.getSubtotal()));
 		
-		//TODO need to fix from here 
+		System.out.println("----------DISCOUNT: " + cartTotalsModel2.getDiscount() + " : " +  cartTotalsModel1.getDiscount());	
+		Assert.assertTrue("The discount should be " + cartTotalsModel2.getDiscount() +" and it is " +  cartTotalsModel1.getDiscount() +  "!",
+				cartTotalsModel2.getDiscount().equals(cartTotalsModel1.getDiscount()));		
+	
 		System.out.println("----------TOTAL AMOUNT: " + cartTotalsModel2.getTotalAmount() + " : " +  cartTotalsModel1.getTotalAmount());	
 		Assert.assertTrue("The total amount should be " + cartTotalsModel2.getTotalAmount() +" and it is " + cartTotalsModel1.getTotalAmount() +  "!",
 				cartTotalsModel2.getTotalAmount().equals(cartTotalsModel1.getTotalAmount()));
@@ -101,11 +106,11 @@ public class ValidationSteps extends AbstractSteps {
 		
 		System.out.println("----------IP POINTS: " + cartTotalsModel2.getIpPoints() + " : " +  cartTotalsModel1.getIpPoints());	
 		Assert.assertTrue("The ip points should be " + cartTotalsModel2.getIpPoints() +" and it is " + cartTotalsModel1.getIpPoints() +  "!",
-				cartTotalsModel2.getIpPoints().equals(cartTotalsModel1.getIpPoints()));
-		
+				cartTotalsModel2.getIpPoints().equals(cartTotalsModel1.getIpPoints()));	
 	
 	
 	}	
+	
 	
 	
 

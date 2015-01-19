@@ -1,8 +1,7 @@
 package com.tools;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
+
 import java.util.List;
 
 import com.tools.data.CartProductModel;
@@ -45,6 +44,16 @@ public class PrintUtils {
 		result = result.replace("-", "");
 
 		return Double.parseDouble(result);
+	}
+	public static String cleanNumberToString(String unitPrice) {
+		String result = unitPrice;
+		result = result.replace(" €", "");
+		result = result.replace(".", "");
+		result = result.replace(" IP", "");
+		result = result.replace(",", ".");
+		result = result.replace("-", "");
+		
+		return result;
 	}
 
 	public static int cleanNumberToInt(String unitPrice) {
