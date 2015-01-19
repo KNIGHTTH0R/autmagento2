@@ -81,7 +81,10 @@ public class ValidateStylistTest extends BaseTest{
 		}
 		
 		List<StylistDataModel> validationList = MongoReader.grabStylistDataModels("GrabStylistPropertiesTest");
-		initialValidation = validationList.get(0);
+		if(validationList.size() > 0)
+			initialValidation = validationList.get(0);
+		else
+			System.out.println("The databese has no entries");
 //		try {
 //			input = null;
 //			input = new FileInputStream(Constants.RESOURCES_PATH + "StylistData.properties");

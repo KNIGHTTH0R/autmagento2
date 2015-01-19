@@ -28,7 +28,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail();
-
+		
 		if (welcomeMessage.isEmpty()) {
 			String confirmLink = mailinatorPage().confirmEmail();
 
