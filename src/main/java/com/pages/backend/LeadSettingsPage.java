@@ -35,17 +35,17 @@ public class LeadSettingsPage extends AbstractPage{
 		
 		StylistDataModel stylistData = new StylistDataModel();
 		
-		stylistData.styleCoachLeads = styleCoachLeads.getAttribute("value");
-		stylistData.hostessLeads = hostessLeads.getAttribute("value");
-		stylistData.customerLeads = customerLeads.getAttribute("value");
-		stylistData.styleCoachLeadsWeek = styleCoachLeadsWeek.getAttribute("value");
-		stylistData.hostessLeadsWeek = hostessLeadsWeek.getAttribute("value");
+		stylistData.setStyleCoachLeads(styleCoachLeads.getAttribute("value"));
+		stylistData.setHostessLeads(hostessLeads.getAttribute("value"));
+		stylistData.setCustomerLeads(customerLeads.getAttribute("value"));
+		stylistData.setStyleCoachLeadsWeek(styleCoachLeadsWeek.getAttribute("value"));
+		stylistData.setHostessLeadsWeek(hostessLeadsWeek.getAttribute("value"));
 		
-		System.out.println("styleCoachLeads: " + stylistData.styleCoachLeads);
-		System.out.println("hostessLeads: " + stylistData.hostessLeads);
-		System.out.println("customerLeads: " + stylistData.customerLeads);
-		System.out.println("styleCoachLeadsWeek: " + stylistData.styleCoachLeadsWeek);
-		System.out.println("hostessLeadsWeek: " + stylistData.hostessLeadsWeek);
+		System.out.println("styleCoachLeads: " + stylistData.getStyleCoachLeads());
+		System.out.println("hostessLeads: " + stylistData.getHostessLeads());
+		System.out.println("customerLeads: " + stylistData.getCustomerLeads());
+		System.out.println("styleCoachLeadsWeek: " + stylistData.getStyleCoachLeadsWeek());
+		System.out.println("hostessLeadsWeek: " + stylistData.getHostessLeadsWeek());
 		
 		return stylistData;
 		

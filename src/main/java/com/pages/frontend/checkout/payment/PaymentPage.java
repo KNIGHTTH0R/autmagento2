@@ -6,6 +6,12 @@ import org.openqa.selenium.WebElement;
 
 import com.tools.AbstractPage;
 
+
+/**
+ * Main page from payment package
+ * @author voicu.vac
+ *
+ */
 public class PaymentPage extends AbstractPage{
 
 	
