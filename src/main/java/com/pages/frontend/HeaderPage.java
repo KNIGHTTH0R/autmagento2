@@ -24,7 +24,7 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(css = "div.top-cart span")
 	private WebElement shoppingBagButton;
 	
-	@FindBy(css = "div#topCartContent span.price")
+	@FindBy(css = "div#topCartContent p.subtotal span.price")
 	private WebElement cartPreviewPrice;
 
 	public void searchInput(String seachKey) {

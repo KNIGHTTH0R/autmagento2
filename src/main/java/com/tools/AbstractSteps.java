@@ -10,13 +10,13 @@ import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
 import com.pages.external.MailinatorHomePage;
 import com.pages.external.MailinatorPage;
-import com.pages.frontend.CartPage;
 import com.pages.frontend.CreateCustomerPage;
 import com.pages.frontend.HeaderPage;
 import com.pages.frontend.LoginPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
+import com.pages.frontend.checkout.CartPage;
 
 public class AbstractSteps extends ScenarioSteps {
 

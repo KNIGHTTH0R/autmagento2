@@ -25,5 +25,10 @@ public class CartSteps extends  AbstractSteps{
 		PrintUtils.printCartTotals(cartPage().grabTotals());
 		return cartPage().grabTotals();
 	}
+	
+	@Step
+	public void clickGoToCheckout(){
+		cartPage().clickToCheckout();
+	}
 
 }
