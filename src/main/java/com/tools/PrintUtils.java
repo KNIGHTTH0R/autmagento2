@@ -6,6 +6,7 @@ import java.util.List;
 import com.tools.data.AddressModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
+import com.tools.data.EmailModel;
 
 public class PrintUtils {
 
@@ -91,6 +92,16 @@ public class PrintUtils {
 		System.out.println(dataModel.getPostCode());
 		System.out.println(dataModel.getHomeTown());
 		System.out.println(dataModel.getPhoneNumber());
+		
+	}
+
+	public static void printEmailList(List<EmailModel> emailList) {
+		System.out.println("Email list:");
+		for (EmailModel emailModel : emailList) {
+			System.out.println(emailModel.getSubject());
+			System.out.println(emailModel.getContent());
+			System.out.println(emailModel.getSentDate() + " - " + emailModel.getRecievedDate());
+		}
 		
 	}
 }

@@ -1,4 +1,4 @@
-package com.steps.frontend;
+package com.steps.frontend.checkout;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -12,12 +12,19 @@ import com.tools.PrintUtils;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 
-public class ValidationSteps extends AbstractSteps {
+public class CheckoutValidationSteps extends AbstractSteps {
 	
-	DecimalFormat df = new DecimalFormat("#####0.00");
+	DecimalFormat df = new DecimalFormat("0.00");
 
 	private static final long serialVersionUID = 4274219181280984116L;
 
+	
+	@Step
+	public void verifySuccessMessage(){
+		successPage().verifySuccessMessage();
+	}
+	
+//	@Step
 	public CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {
 		
 	 DecimalFormat df = new DecimalFormat("#####0.00");
@@ -64,17 +71,18 @@ public class ValidationSteps extends AbstractSteps {
 		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
 		
 		System.out.println("------------------------------");
-		System.out.println("------------------------------> " + result.getSubtotal());
-		System.out.println("------------------------------> " + result.getDiscount());
-		System.out.println("------------------------------> " + result.getTotalAmount());
-		System.out.println("------------------------------> " + result.getIpPoints());
-		System.out.println("------------------------------> " + result.getTax());
-		System.out.println("------------------------------> " + result.getJewelryBonus());
-		System.out.println("------------------------------> " + result.getShipping());
+		System.out.println("Subtotal: " + result.getSubtotal());
+		System.out.println("Discount: " + result.getDiscount());
+		System.out.println("TotalAmount: " + result.getTotalAmount());
+		System.out.println("IpPoints " + result.getIpPoints());
+		System.out.println("Tax: " + result.getTax());
+		System.out.println("JewelryBonus: " + result.getJewelryBonus());
+		System.out.println("Shipping: " + result.getShipping());
 
 		return result;
 	}
 	
+//	@Step
 	public CartTotalsModel sumTotalsOfProductsWithDifferentDiscounts(List<CartTotalsModel> totalsList){
 		
 		CartTotalsModel result = new CartTotalsModel();
@@ -107,6 +115,7 @@ public class ValidationSteps extends AbstractSteps {
 		return result;
 	}
 
+//	@Step
 	public double calculateDiscountValue(CartProductModel cartProductModel) {
 		double productPrice = 0;
 		productPrice += (PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity()));

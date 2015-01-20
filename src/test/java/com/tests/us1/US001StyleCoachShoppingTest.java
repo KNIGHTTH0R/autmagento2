@@ -21,11 +21,11 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
-import com.steps.frontend.ValidationSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
@@ -59,7 +59,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public ValidationSteps validationSteps;
+	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
@@ -122,14 +122,14 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		CartTotalsModel cartTotals = cartSteps.grabTotals();
 
-		CartTotalsModel calculatedTotals = validationSteps.calculateCartProducts(cartProducts);
-		validationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
+		CartTotalsModel calculatedTotals = checkoutValidationSteps.calculateCartProducts(cartProducts);
+//		checkoutValidationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
 
 		cartSteps.clickGoToShipping();
 
 		// TODO - add billing and shipping address forms
 		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printCartTotals(shippingTotals);
+//		PrintUtils.printCartTotals(shippingTotals);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
@@ -146,9 +146,11 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		
 		
-		
+		checkoutValidationSteps.verifySuccessMessage();
 		
 		List<EmailModel> emailList = GmailConnector.readGmail();
+		
+		PrintUtils.printEmailList(emailList);
 		//TODO add page for success
 		System.out.println("---------------");
 		System.out.println("!!!!!!" + billingAddress.getCountryName());

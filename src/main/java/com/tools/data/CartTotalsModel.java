@@ -9,6 +9,16 @@ public class CartTotalsModel {
 	private String shipping;
 	private String totalAmount;
 	private String ipPoints;
+	
+	public CartTotalsModel() {
+		setSubtotal("");
+		setJewelryBonus("");
+		setDiscount("");
+		setTax("");
+		setShipping("");
+		setTotalAmount("");
+		setIpPoints("");
+	}
 
 	public String getSubtotal() {
 		return subtotal;

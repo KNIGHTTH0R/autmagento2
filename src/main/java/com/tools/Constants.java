@@ -5,7 +5,7 @@ public class Constants {
 	public static final String BASE_URL_BE = "http://staging.pippajean.com/index.php/admin/";
 	public static final String BASE_URL_FE = "http://staging.pippajean.com/customer/account/create/";
 //	public static final String BASE_URL_FE = "http://pippajean:sn0wMob1l!@staging.pippajean.com/customer/account/create/";
-	public static final String BASE_URL = "https://staging.pippajean.com/";
+	public static final String BASE_URL = "https://staging.pippajean.com/customer/account/login/";
 	public static final String BASE_URL_AUT = "https://staging.pippajean.com/customer/account/login/";
 //	public static final String BASE_URL = "https://pippajean:sn0wMob1l!@staging.pippajean.com/customer/account/login/";
 
