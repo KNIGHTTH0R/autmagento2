@@ -24,6 +24,20 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		successPage().verifySuccessMessage();
 	}
 	
+	public double calculateCartProductsByDiscount(CartProductModel product) {
+		
+		double productPrice = 0;
+	
+			if(product.getDiscountClass().contentEquals("25")){
+				productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 25 / 100;				
+			}
+			if(product.getDiscountClass().contentEquals("50")){
+				productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 50 /100;
+				
+			}		
+		return productPrice;
+	}
+	
 	@Step
 	public CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {
 		
@@ -41,9 +55,9 @@ public class CheckoutValidationSteps extends AbstractSteps {
 			productPrice += (PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity()));
 			totalPrice += productPrice;
 			double discount = 0;
-			if (PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP()) > 0) {
-				discount = calculateDiscountValue(cartProductModel);
-				discountSum += calculateDiscountValue(cartProductModel);
+			if (cartProductModel.getDiscountClass() == "25" || cartProductModel.getDiscountClass() == "50") {
+				discount = calculateCartProductsByDiscount(cartProductModel);
+				discountSum += calculateCartProductsByDiscount(cartProductModel);	
 				
 				
 			}			
