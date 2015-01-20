@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.activation.DataHandler;
 import javax.mail.BodyPart;
 import javax.mail.Folder;
 import javax.mail.Message;
-import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
@@ -47,9 +45,6 @@ public class GmailConnector {
 
 				modelNow.setRecievedDate(message[i].getReceivedDate());
 				modelNow.setSentDate(message[i].getSentDate());
-
-				// BodyPart bp = ((Multipart)
-				// message[i].getContent()).getBodyPart(0);
 				
 				modelNow.setContent(getStringFromMessage(message[i]));
 				

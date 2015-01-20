@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
-import org.jruby.ir.instructions.PutInstr;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
