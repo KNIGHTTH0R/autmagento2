@@ -17,10 +17,24 @@ public class ValidationSteps extends AbstractSteps {
 	DecimalFormat df = new DecimalFormat("#####0.00");
 
 	private static final long serialVersionUID = 4274219181280984116L;
+	
 
-	public CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {
+	public double calculateCartProductsByDiscount(CartProductModel product) {
 		
-	 DecimalFormat df = new DecimalFormat("#####0.00");
+		double productPrice = 0;
+	
+			if(product.getDiscountClass().contentEquals("25")){
+				productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 25 / 100;				
+			}
+			if(product.getDiscountClass().contentEquals("50")){
+				productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 50 /100;
+				
+			}		
+		return productPrice;
+	}	
+	
+
+	public CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {	
 	 
 		double totalPrice = 0;
 		double discountSum = 0;
@@ -35,13 +49,12 @@ public class ValidationSteps extends AbstractSteps {
 			productPrice += (PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity()));
 			totalPrice += productPrice;
 			double discount = 0;
-			if (PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP()) > 0) {
-				discount = calculateDiscountValue(cartProductModel);
-				discountSum += calculateDiscountValue(cartProductModel);
-				
+			if (cartProductModel.getDiscountClass() == "25" || cartProductModel.getDiscountClass() == "50") {
+				discount = calculateCartProductsByDiscount(cartProductModel);
+				discountSum += calculateCartProductsByDiscount(cartProductModel);				
 				
 			}			
-			totalAmount += (PrintUtils.cleanNumberToDouble(cartProductModel.getProductsPrice())- discount);			
+			totalAmount += (PrintUtils.cleanNumberToDouble(cartProductModel.getProductsPrice()) - discount);			
 			ipPointsSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
 			 
 			
