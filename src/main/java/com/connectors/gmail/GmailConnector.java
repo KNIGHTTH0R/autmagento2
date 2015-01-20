@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
 import javax.mail.BodyPart;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.internet.MimeMultipart;
 
 import com.tools.EmailConstants;
 import com.tools.data.EmailModel;
@@ -46,15 +48,17 @@ public class GmailConnector {
 				modelNow.setRecievedDate(message[i].getReceivedDate());
 				modelNow.setSentDate(message[i].getSentDate());
 
-				BodyPart bp = ((Multipart) message[i].getContent()).getBodyPart(0);
-
-				modelNow.setContent(bp.getContent().toString());
+				// BodyPart bp = ((Multipart)
+				// message[i].getContent()).getBodyPart(0);
+				
+				modelNow.setContent(getStringFromMessage(message[i]));
+				
 
 				System.out.println("------------------------");
 				System.out.println(message[i].getSubject());
 				System.out.println(message[i].getReceivedDate());
 				System.out.println(message[i].getSentDate());
-				System.out.println(bp.getContent().toString());
+				System.out.println(modelNow.getContent());
 				// message[i].setFlag(Flags.Flag.DELETED, true);
 
 				emailList.add(modelNow);
@@ -68,6 +72,25 @@ public class GmailConnector {
 		}
 
 		return emailList;
+	}
+
+	private static String getStringFromMessage(Message message) {
+		StringBuilder textContent = new StringBuilder("");
+		try {
+			textContent = new StringBuilder((message.getSubject() + " "));
+			if (message.getContentType().startsWith("multipart")) {
+				MimeMultipart content = (MimeMultipart) message.getContent();
+				for (int i = 0; i < content.getCount(); i++) {
+					BodyPart part = content.getBodyPart(i);
+					textContent.append(part.getContent());
+				}
+			} else {
+				textContent.append(message.getContent().toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return textContent.toString();
 	}
 
 }
