@@ -13,14 +13,14 @@ public class CartSteps extends  AbstractSteps{
 	
 	private static final long serialVersionUID = 4077671481867589798L;
 
-	@Step
+//	@Step
 	public List<CartProductModel> grabProductsData(){
 		PrintUtils.printList(cartPage().grabProductsData());
 		
 		return cartPage().grabProductsData();
 	}
 
-	@Step
+//	@Step
 	public CartTotalsModel grabTotals() {
 		return cartPage().grabTotals();
 	}

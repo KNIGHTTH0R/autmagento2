@@ -21,6 +21,9 @@ public class ConfirmationPage extends AbstractPage {
 	
 	@FindBy(id = "terms")
 	private WebElement acceptTerms;
+	
+	@FindBy(id = "submit-confirmation-step")
+	private WebElement submitButton;
 
 	public AddressModel grabAddressData(WebElement addressPreview) {
 		AddressModel result = new AddressModel();
@@ -47,29 +50,40 @@ public class ConfirmationPage extends AbstractPage {
 			result.setCountryName(splittedText[3]);
 			
 			System.out.println("grabAdressData method results are : ");
-			System.out.println("&&&&&&&& " + result.getStreetAddress());
-			System.out.println("&&&&&&&& " + result.getStreetNumber());
-			System.out.println("&&&&&&&& " + result.getHomeTown());
-			System.out.println("&&&&&&&& " + result.getPostCode());
-			System.out.println("&&&&&&&& " + result.getCountryName());
+			System.out.println("StreetAddress: " + result.getStreetAddress());
+			System.out.println("StreetNumber: " + result.getStreetNumber());
+			System.out.println("HomeTown: " + result.getHomeTown());
+			System.out.println("PostCode: " + result.getPostCode());
+			System.out.println("CountryName: " + result.getCountryName());
 			
 			
 		}
-		
-//		if(textparse.split(Constants.LINE_SEPARATOR).length == 4){
-//			//TODO FIX this
-//			result.setStreetAddress);
-//			result.setStreetNumber();
-//			
-//			result.setHomeTown("");
-//			result.setPostCode("");
-//			
-//			result.setCountryName("");
-//			result.setPhoneNumber("");
-			
-//		}
 		if(textparse.split(Constants.LINE_SEPARATOR).length == 5){
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page - 5");
+			
+			
+			String[] streetData = splittedText[1].split(Constants.COMMA_SEPARATOR);
+			String streetName = streetData[0];
+			String streetNumber = streetData[1];
+			
+			String[] townData  = splittedText[2].split(Constants.COMMA_SEPARATOR);
+			String homeTown = townData[0];
+			String postCode = townData[1];
+			
+			result.setStreetAddress(streetName);
+			result.setStreetNumber(streetNumber);
+			
+			result.setHomeTown(homeTown);
+			result.setPostCode(postCode);
+			
+			result.setCountryName(splittedText[3]);
+			
+			System.out.println("grabAdressData method results are : ");
+			System.out.println("StreetAddress: " + result.getStreetAddress());
+			System.out.println("StreetNumber: " + result.getStreetNumber());
+			System.out.println("HomeTown: " + result.getHomeTown());
+			System.out.println("PostCode: " + result.getPostCode());
+			System.out.println("CountryName: " + result.getCountryName());
 		}
 		else{
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page");
@@ -98,15 +112,16 @@ public class ConfirmationPage extends AbstractPage {
 		
 		return result;
 	}
+	
 
-	public static void main(String args[]) {
-		String a = "simona gmail" + "\n" + "test, 12"  + "\n" + "berlin, 12456"  + "\n" + "Deutschland";
-		
-		System.out.println("print: " + a);
-		
-		String[] splitter = a.split("\n");
-		System.out.println(splitter.length);
-		
+	public void clickIAgree() {
+		element(acceptTerms).waitUntilVisible();
+		acceptTerms.click();
+	}
+
+	public void clickOnSubmit() {
+		element(submitButton).waitUntilVisible();
+		submitButton.click();
 	}
 
 }
