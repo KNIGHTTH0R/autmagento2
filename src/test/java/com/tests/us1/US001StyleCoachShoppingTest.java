@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.gmail.GmailConnector;
+import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -60,6 +61,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
+	@Steps
+	public EmailSteps emailSteps;
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
@@ -116,12 +119,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		String previewPrice = headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
 //		System.out.println("Cart Preview Price: " + previewPrice);
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		CartTotalsModel cartTotals = cartSteps.grabTotals();
-
 //		CartTotalsModel calculatedTotals = checkoutValidationSteps.calculateCartProducts(cartProducts);
 //		checkoutValidationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
 
@@ -145,13 +146,15 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		confirmationSteps.agreeAndCheckout();
 		
-		
+
 		checkoutValidationSteps.verifySuccessMessage();
 		
 		List<EmailModel> emailList = GmailConnector.readGmail();
 		
-		PrintUtils.printEmailList(emailList);
-		//TODO add page for success
+//		PrintUtils.printEmailList(emailList);
+		
+		emailSteps.printEmailContent(emailList.get(0).getContent());
+		
 		System.out.println("---------------");
 		System.out.println("!!!!!!" + billingAddress.getCountryName());
 		System.out.println("!!!!!!" + shippingAddress.getCountryName());

@@ -16,7 +16,6 @@ public class CartSteps extends  AbstractSteps{
 
 	@StepGroup
 	public List<CartProductModel> grabProductsData(){
-//		PrintUtils.printList(cartPage().grabProductsData());
 		return cartPage().grabProductsData();
 	}
 	@Step
