@@ -58,7 +58,6 @@ public class ConfirmationPage extends AbstractPage {
 			
 			
 		}
-		
 		if(textparse.split(Constants.LINE_SEPARATOR).length == 5){
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page - 5");
 			
@@ -113,6 +112,7 @@ public class ConfirmationPage extends AbstractPage {
 		
 		return result;
 	}
+	
 
 	public void clickIAgree() {
 		element(acceptTerms).waitUntilVisible();

@@ -44,7 +44,7 @@ public class GrabStylistPropertiesTest extends BaseTest {
 					+ "Stylist.properties");
 			prop.load(input);
 			stylistName = prop.getProperty("stylistName");
-
+			System.out.println(stylistName);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {

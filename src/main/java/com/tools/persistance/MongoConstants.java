@@ -24,4 +24,13 @@ public class MongoConstants {
 	public static final String STYLE_COACH_LEADS_WEEK = "styleCoachLeadsWeek";
 	public static final String HOSTESS_LEADS_WEEK = "hostessLeadsWeek";
 	
+	//Customer model properties
+	public static final String CUSTOMER_MODEL = "CustomerModel";
+	public static final String CLIENT_NAME = "clientName";
+	
+	//Customer configuration model
+	
+	public static final String CUSTOMER_CONFIGURATION_MODEL = "CustomerConfigurationModel";
+	public static final String EMAIL_ACTIVE = "emailActive";
+	public static final String ACCOUNT_ACTIVE = "accountActive";
 }

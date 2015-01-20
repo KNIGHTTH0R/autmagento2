@@ -20,6 +20,7 @@ import com.tools.Constants;
 import com.tools.data.AddressModel;
 import com.tools.data.CustomerFormModel;
 import com.tools.data.StylistDataModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
@@ -55,27 +56,27 @@ public class CreateCustomerTest extends BaseTest{
 
 	@After
 	public void saveData() {
-		
-		Properties prop = new Properties();
-		OutputStream output = null;
-
-		try {
-			output = new FileOutputStream(Constants.RESOURCES_PATH + "Customer.properties");
-			prop.setProperty("clientName", dataModel.getEmailName());
-			prop.store(output, null);
-
-		} catch (IOException io) {
-			io.printStackTrace();
-		} finally {
-			if (output != null) {
-				try {
-					output.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-		}
+		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+//		Properties prop = new Properties();
+//		OutputStream output = null;
+//
+//		try {
+//			output = new FileOutputStream(Constants.RESOURCES_PATH + "Customer.properties");
+//			prop.setProperty("clientName", dataModel.getEmailName());
+//			prop.store(output, null);
+//
+//		} catch (IOException io) {
+//			io.printStackTrace();
+//		} finally {
+//			if (output != null) {
+//				try {
+//					output.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//
+//		}
 	}
 
 }
