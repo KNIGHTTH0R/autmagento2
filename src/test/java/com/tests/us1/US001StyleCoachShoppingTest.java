@@ -22,10 +22,10 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
+import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
-import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
@@ -110,19 +110,19 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
 		productSteps.setProductAddToCart("2", "0");
 		productsList.add(productData);
-//		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-//		productSteps.setProductAddToCart("3", "18");
-//		productsList.add(productData);
+		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
+		productSteps.setProductAddToCart("3", "18");
+		productsList.add(productData);
 
 		String previewPrice = headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		System.out.println("Cart Preview Price: " + previewPrice);
+//		System.out.println("Cart Preview Price: " + previewPrice);
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		CartTotalsModel cartTotals = cartSteps.grabTotals();
 
-		CartTotalsModel calculatedTotals = checkoutValidationSteps.calculateCartProducts(cartProducts);
+//		CartTotalsModel calculatedTotals = checkoutValidationSteps.calculateCartProducts(cartProducts);
 //		checkoutValidationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
 
 		cartSteps.clickGoToShipping();

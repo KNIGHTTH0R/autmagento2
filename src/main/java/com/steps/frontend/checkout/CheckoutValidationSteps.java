@@ -14,7 +14,7 @@ import com.tools.data.CartTotalsModel;
 
 public class CheckoutValidationSteps extends AbstractSteps {
 	
-	DecimalFormat df = new DecimalFormat("0.00");
+	private DecimalFormat df = new DecimalFormat("0.00");
 
 	private static final long serialVersionUID = 4274219181280984116L;
 
@@ -24,10 +24,9 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		successPage().verifySuccessMessage();
 	}
 	
-//	@Step
+	@Step
 	public CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {
 		
-	 DecimalFormat df = new DecimalFormat("#####0.00");
 	 
 		double totalPrice = 0;
 		double discountSum = 0;
