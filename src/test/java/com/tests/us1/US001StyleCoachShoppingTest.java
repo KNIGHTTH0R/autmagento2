@@ -102,15 +102,15 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		ProductBasicModel productData = searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
 		productSteps.setProductAddToCart("1", "Blue");
 		productsList.add(productData);
-		productData = searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY ");
+		productData = searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY");
 		productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
-		productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA BRACELET");
+		productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
 		productSteps.setProductAddToCart("2", "0");
 		productsList.add(productData);
-		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-		productSteps.setProductAddToCart("3", "18");
-		productsList.add(productData);
+//		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
+//		productSteps.setProductAddToCart("3", "18");
+//		productsList.add(productData);
 
 		String previewPrice = headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -142,7 +142,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		AddressModel shippingAddress = confirmationSteps.grabSippingData();
 		
 		confirmationSteps.agreeAndCheckout();
-
+		
+		//TODO add page for success
 		System.out.println("---------------");
 		System.out.println("!!!!!!" + billingAddress.getCountryName());
 		System.out.println("!!!!!!" + shippingAddress.getCountryName());
