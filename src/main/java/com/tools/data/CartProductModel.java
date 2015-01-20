@@ -9,6 +9,16 @@ public class CartProductModel {
 	private String productsPrice;
 	private String finalPrice;
 	private String priceIP;
+	private String discountClass;
+	
+
+	public String getDiscountClass() {
+		return discountClass;
+	}
+
+	public void setDiscountClass(String discountClass) {
+		this.discountClass = discountClass;
+	}
 
 	public String getName() {
 		return name;

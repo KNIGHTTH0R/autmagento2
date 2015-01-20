@@ -13,6 +13,8 @@ import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 
 public class ValidationSteps extends AbstractSteps {
+	
+	DecimalFormat df = new DecimalFormat("#####0.00");
 
 	private static final long serialVersionUID = 4274219181280984116L;
 
@@ -37,6 +39,7 @@ public class ValidationSteps extends AbstractSteps {
 				discount = calculateDiscountValue(cartProductModel);
 				discountSum += calculateDiscountValue(cartProductModel);
 				
+				
 			}			
 			totalAmount += (PrintUtils.cleanNumberToDouble(cartProductModel.getProductsPrice())- discount);			
 			ipPointsSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
@@ -46,6 +49,7 @@ public class ValidationSteps extends AbstractSteps {
 			System.out.println("Quantity: " + cartProductModel.getQuantity());
 			System.out.println("Product Price: " + productPrice);
 			System.out.println("Total Price: " + totalPrice);
+			System.out.println("Discount: " + discountSum);
 		}
 		taxSum = PrintUtils.getDoubleWithTwoDigits(((totalAmount * 19) /119));
 
@@ -70,11 +74,43 @@ public class ValidationSteps extends AbstractSteps {
 
 		return result;
 	}
+	
+	public CartTotalsModel sumTotalsOfProductsWithDifferentDiscounts(List<CartTotalsModel> totalsList){
+		
+		CartTotalsModel result = new CartTotalsModel();
+		
+		double totalPrice = 0;
+		double discountSum = 0;
+		double totalAmount = 0;
+		int ipPointsSum = 0;
+		double taxSum = 0;
+		int jeverlyBonus = 0;
+		double shiping = 0;
+		
+		for(CartTotalsModel total:totalsList){
+			totalPrice += Double.parseDouble(total.getSubtotal());
+			discountSum += Double.parseDouble(total.getDiscount());
+			totalAmount += Double.parseDouble(total.getTotalAmount());
+			ipPointsSum += Double.parseDouble(total.getIpPoints());
+			taxSum += Double.parseDouble(total.getTax());
+			jeverlyBonus += Double.parseDouble(total.getJewelryBonus());
+			shiping += Double.parseDouble(total.getShipping());
+			
+		}
+		result.setSubtotal(df.format((totalPrice)));
+		result.setDiscount(df.format(discountSum));
+		result.setTotalAmount(df.format(totalAmount));
+		result.setIpPoints(String.valueOf((ipPointsSum)));
+		result.setTax(df.format(taxSum));
+		result.setShipping(df.format(shiping));
+		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
+		return result;
+	}
 
 	public double calculateDiscountValue(CartProductModel cartProductModel) {
 		double productPrice = 0;
 		productPrice += (PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity()));
-		return productPrice = (productPrice * 25 / 100);
+		return productPrice = (productPrice * Double.parseDouble(cartProductModel.getDiscountClass()) / 100);
 	}
 	
 	@Step

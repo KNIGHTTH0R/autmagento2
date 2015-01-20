@@ -19,6 +19,24 @@ public class CartSteps extends  AbstractSteps{
 		
 		return cartPage().grabProductsData();
 	}
+//	@Step
+	public List<CartProductModel> grabProductsDataWith25PercentDiscount(){
+		PrintUtils.printList(cartPage().grabProductsDataWith25Discount());
+		
+		return cartPage().grabProductsDataWith25Discount();
+	}
+//	@Step
+	public List<CartProductModel> grabProductsDataWith50PercentDiscount(){
+		PrintUtils.printList(cartPage().grabProductsDataWith50Discount());
+		
+		return cartPage().grabProductsDataWith50Discount();
+	}
+//	@Step
+	public List<CartProductModel> grabMarketingMaterialProductsData(){
+		PrintUtils.printList(cartPage().grabMarketingMaterialProductsData());
+		
+		return cartPage().grabMarketingMaterialProductsData();
+	}
 
 //	@Step
 	public CartTotalsModel grabTotals() {
