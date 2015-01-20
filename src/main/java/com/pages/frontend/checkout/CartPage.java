@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.jruby.ir.instructions.PutInstr;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -40,7 +41,8 @@ public class CartPage extends AbstractPage {
 			productNow.setProductsPrice(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
 			productNow.setFinalPrice(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText());
 			productNow.setPriceIP(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText());
-
+			productNow.setDiscountClass("");
+			
 			resultList.add(productNow);
 		}
 
@@ -131,8 +133,55 @@ public class CartPage extends AbstractPage {
 
 	public CartTotalsModel grabTotals() {
 		CartTotalsModel resultModel = new CartTotalsModel();
+		
+		String valueTransformer = "";
 		element(totalsTable).waitUntilVisible();
-		//TODO if totalAmount is < 150 000 than shipping element is not present- {"method":"css selector","selector":"tbody tr:nth-child(5) > td:last-child"}
+		List<WebElement> valuesList = totalsTable.findElements(By.cssSelector("tr"));
+		
+		System.out.println("******PUSHKE ----- hamster");
+		
+		//TODO if totalAmount is < 150  than shipping element is not present- {"method":"css selector","selector":"tbody tr:nth-child(5) > td:last-child"}
+		
+		for (WebElement itemNow : valuesList) {
+			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
+			
+			if(key.contains("ZWISCHENSUMME")){
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setSubtotal(valueTransformer);
+			}
+			if(key.contains("SCHMUCK BONUS")){
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setJewelryBonus(valueTransformer);
+			}
+			if(key.contains("VERSANDKOSTENFREI")){
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setShipping(valueTransformer);
+			}
+			if(key.contains("25%")){
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setDiscount25(valueTransformer);
+			}
+			if(key.contains("50% - STYLIST")){
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setDiscount50(valueTransformer);
+			}
+			if(key.contains("GESAMTBETRAG")){
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setTotalAmount(valueTransformer);
+			}
+			if(key.contains("IP PUNKTE")){
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setIpPoints(valueTransformer);
+			}
+			
+		}
+		
+		
+		
+		
+		
+		
+		
 		resultModel.setSubtotal(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(1) > td:last-child")).getText()));
 		resultModel.setJewelryBonus(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(2) input#jewelry_credits")).getAttribute("value")));
 		resultModel.setDiscount(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(3) > td:last-child")).getText()));

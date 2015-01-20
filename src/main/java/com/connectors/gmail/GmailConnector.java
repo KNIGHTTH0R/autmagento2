@@ -43,21 +43,20 @@ public class GmailConnector {
 				EmailModel modelNow = new EmailModel();
 				modelNow.setSubject(message[i].getSubject());
 
-				Multipart mp = (Multipart) message[i].getContent();
-				// MimeBodyPart part = (MimeBodyPart)mp.getBodyPart(0);
-				BodyPart bp = ((Multipart) message[i].getContent()).getBodyPart(0);
-				
-				modelNow.setContent(bp.getContent().toString());
 				modelNow.setRecievedDate(message[i].getReceivedDate());
 				modelNow.setSentDate(message[i].getSentDate());
 
-				// print subjects of all mails in the inbox
+				BodyPart bp = ((Multipart) message[i].getContent()).getBodyPart(0);
+
+				modelNow.setContent(bp.getContent().toString());
+
 				System.out.println("------------------------");
 				System.out.println(message[i].getSubject());
 				System.out.println(message[i].getReceivedDate());
 				System.out.println(message[i].getSentDate());
 				System.out.println(bp.getContent().toString());
-				
+				// message[i].setFlag(Flags.Flag.DELETED, true);
+
 				emailList.add(modelNow);
 			}
 
@@ -70,4 +69,5 @@ public class GmailConnector {
 
 		return emailList;
 	}
+
 }

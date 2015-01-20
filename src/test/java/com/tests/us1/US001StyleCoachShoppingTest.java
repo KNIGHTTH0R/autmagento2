@@ -16,12 +16,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.gmail.GmailConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
-import com.steps.frontend.ValidationSteps;
 import com.steps.frontend.checkout.CartSteps;
+import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
@@ -32,6 +33,7 @@ import com.tools.data.AddressModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.CreditCardModel;
+import com.tools.data.EmailModel;
 import com.tools.data.ProductBasicModel;
 import com.tools.requirements.Application;
 
@@ -57,7 +59,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public ValidationSteps validationSteps;
+	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
@@ -108,26 +110,26 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
 		productSteps.setProductAddToCart("2", "0");
 		productsList.add(productData);
-//		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-//		productSteps.setProductAddToCart("3", "18");
-//		productsList.add(productData);
+		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
+		productSteps.setProductAddToCart("3", "18");
+		productsList.add(productData);
 
 		String previewPrice = headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		System.out.println("Cart Preview Price: " + previewPrice);
+//		System.out.println("Cart Preview Price: " + previewPrice);
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		CartTotalsModel cartTotals = cartSteps.grabTotals();
 
-		CartTotalsModel calculatedTotals = validationSteps.calculateCartProducts(cartProducts);
-		validationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
+//		CartTotalsModel calculatedTotals = checkoutValidationSteps.calculateCartProducts(cartProducts);
+//		checkoutValidationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
 
 		cartSteps.clickGoToShipping();
 
 		// TODO - add billing and shipping address forms
 		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printCartTotals(shippingTotals);
+//		PrintUtils.printCartTotals(shippingTotals);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
@@ -143,6 +145,12 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		confirmationSteps.agreeAndCheckout();
 		
+		
+		checkoutValidationSteps.verifySuccessMessage();
+		
+		List<EmailModel> emailList = GmailConnector.readGmail();
+		
+		PrintUtils.printEmailList(emailList);
 		//TODO add page for success
 		System.out.println("---------------");
 		System.out.println("!!!!!!" + billingAddress.getCountryName());

@@ -20,8 +20,8 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
-import com.steps.frontend.ValidationSteps;
 import com.steps.frontend.checkout.CartSteps;
+import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.CartProductModel;
@@ -52,7 +52,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	public CartSteps cartSteps;
 	
 	@Steps
-	public ValidationSteps validationSteps;
+	public CheckoutValidationSteps validationSteps;
 	
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CartTotalsModel> totalsList = new ArrayList<CartTotalsModel>();
