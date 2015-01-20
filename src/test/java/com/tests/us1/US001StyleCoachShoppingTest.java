@@ -145,6 +145,9 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		AddressModel billingAddress = confirmationSteps.grabBillingData();
 		AddressModel shippingAddress = confirmationSteps.grabSippingData();
 		
+		System.out.println("---------------");
+		System.out.println("!!!!!!" + billingAddress.getCountryName());
+		System.out.println("!!!!!!" + shippingAddress.getCountryName());
 		
 		System.out.println("BILLING");
 		PrintUtils.printAddressModel(billingAddress);

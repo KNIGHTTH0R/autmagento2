@@ -26,8 +26,7 @@ public class ConfirmationPage extends AbstractPage {
 		AddressModel result = new AddressModel();
 		element(addressPreview).waitUntilVisible();
 		String textparse = addressPreview.getText();
-		String[] splittedText = textparse.split(Constants.LINE_SEPARATOR);
-	
+		String[] splittedText = textparse.split(Constants.LINE_SEPARATOR);	
 		
 		if(splittedText.length == 4){
 			
@@ -47,6 +46,7 @@ public class ConfirmationPage extends AbstractPage {
 			
 			result.setCountryName(splittedText[3]);
 			
+			System.out.println("grabAdressData method results are : ");
 			System.out.println("&&&&&&&& " + result.getStreetAddress());
 			System.out.println("&&&&&&&& " + result.getStreetNumber());
 			System.out.println("&&&&&&&& " + result.getHomeTown());
@@ -58,7 +58,7 @@ public class ConfirmationPage extends AbstractPage {
 		
 //		if(textparse.split(Constants.LINE_SEPARATOR).length == 4){
 //			//TODO FIX this
-//			result.setStreetAddress();
+//			result.setStreetAddress);
 //			result.setStreetNumber();
 //			
 //			result.setHomeTown("");
@@ -84,9 +84,18 @@ public class ConfirmationPage extends AbstractPage {
 		element(billingContainer).waitUntilVisible();
 
 		System.out.println(billingContainer.getText());
+		result = grabAddressData(billingContainer);
 
-
-
+		return result;
+	}
+	
+	public AddressModel grabShippingData() {
+		AddressModel result = new AddressModel();
+		element(shippingContainer).waitUntilVisible();
+		
+		System.out.println(shippingContainer.getText());
+		result = grabAddressData(shippingContainer);		
+		
 		return result;
 	}
 
