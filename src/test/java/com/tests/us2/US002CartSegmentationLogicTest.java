@@ -17,10 +17,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
+import com.steps.frontend.ValidationSteps;
+import com.steps.frontend.checkout.CartSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.data.CartProductModel;
+import com.tools.data.CartTotalsModel;
 import com.tools.data.CreditCardModel;
 import com.tools.data.ProductBasicModel;
 import com.tools.requirements.Application;
@@ -40,7 +45,17 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	@Steps
 	public SearchSteps searchSteps;
 	
+	@Steps
+	public HeaderSteps headerSteps;
+	
+	@Steps
+	public CartSteps cartSteps;
+	
+	@Steps
+	public ValidationSteps validationSteps;
+	
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private List<CartTotalsModel> totalsList = new ArrayList<CartTotalsModel>();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private String username, password;
 	
@@ -74,21 +89,42 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	@Test
 	public void uS001StyleCoachShoppingTest(){
 		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
-		ProductBasicModel productData = searchSteps.searchAndSelectProduct("B056RS", "ALEXA BRACELET");
-		productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
-		ProductBasicModel productData1 = searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
-		productSteps.setProductAddToCart("2", "0");
-		productsList.add(productData1);	
-		ProductBasicModel productData2 = searchSteps.searchAndSelectProduct("R083BK", "CLARICE RING (GUN METAL)");
-		productSteps.setProductAddToCart("1", "18");
-		productsList.add(productData2);	
-		ProductBasicModel productData3 = searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
-		productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData3);	
-		ProductBasicModel productData4 = searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-		productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData4);	
+//		ProductBasicModel productData = searchSteps.searchAndSelectProduct("B056RS", "ALEXA BRACELET");
+//		productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+//		ProductBasicModel productData1 = searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
+//		productSteps.setProductAddToCart("2", "0");
+//		productsList.add(productData1);	
+//		ProductBasicModel productData2 = searchSteps.searchAndSelectProduct("R083BK", "CLARICE RING (GUN METAL)");
+//		productSteps.setProductAddToCart("1", "18");
+//		productsList.add(productData2);	
+//		ProductBasicModel productData3 = searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
+//		productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData3);	
+//		ProductBasicModel productData4 = searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
+//		productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData4);	
+		
+		String previewPrice = headerSteps.openCartPreview();
+		headerSteps.goToCart();
+
+		System.out.println("Cart Preview Price: " + previewPrice);
+		
+		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
+		List<CartProductModel> cartProductswith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
+		List<CartProductModel> cartProductswith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
+		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+		CartTotalsModel cartTotals = cartSteps.grabTotals();
+		
+		CartTotalsModel calculatedTotals25Discount = validationSteps.calculateCartProducts(cartProductswith25Discount);
+		totalsList.add(calculatedTotals25Discount);
+		CartTotalsModel calculatedTotals50Discount = validationSteps.calculateCartProducts(cartProductswith50Discount);
+		totalsList.add(calculatedTotals50Discount);
+		CartTotalsModel calculatedMarketingMaterialsTotals = validationSteps.calculateCartProducts(cartMarketingMaterialsProducts);
+		totalsList.add(calculatedMarketingMaterialsTotals);
+		CartTotalsModel sumedTotals  = validationSteps.sumTotalsOfProductsWithDifferentDiscounts(totalsList);
+		
+		validationSteps.checkTotalsInCart(cartTotals, sumedTotals);
 		
 	}
 	

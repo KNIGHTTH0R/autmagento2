@@ -67,7 +67,8 @@ public class CartPage extends AbstractPage {
 			productNow.setProductsPrice(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
 			productNow.setFinalPrice(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText());
 			productNow.setPriceIP(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText());
-
+			productNow.setDiscountClass("25");
+			
 			resultList.add(productNow);
 		}
 
@@ -93,6 +94,7 @@ public class CartPage extends AbstractPage {
 			productNow.setProductsPrice(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
 			productNow.setFinalPrice(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText());
 			productNow.setPriceIP(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText());
+			productNow.setDiscountClass("50");
 			
 			resultList.add(productNow);
 		}
@@ -119,6 +121,7 @@ public class CartPage extends AbstractPage {
 			productNow.setProductsPrice(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
 			productNow.setFinalPrice(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText());
 			productNow.setPriceIP(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText());
+			productNow.setDiscountClass("0");
 			
 			resultList.add(productNow);
 		}
@@ -129,7 +132,7 @@ public class CartPage extends AbstractPage {
 	public CartTotalsModel grabTotals() {
 		CartTotalsModel resultModel = new CartTotalsModel();
 		element(totalsTable).waitUntilVisible();
-
+		//TODO if totalAmount is < 150 000 than shipping element is not present- {"method":"css selector","selector":"tbody tr:nth-child(5) > td:last-child"}
 		resultModel.setSubtotal(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(1) > td:last-child")).getText()));
 		resultModel.setJewelryBonus(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(2) input#jewelry_credits")).getAttribute("value")));
 		resultModel.setDiscount(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(3) > td:last-child")).getText()));
