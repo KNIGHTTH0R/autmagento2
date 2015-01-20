@@ -16,7 +16,7 @@ public class BaseTest {
 	@Managed(uniqueSession = true)
 	public WebDriver webdriver;
 
-	@ManagedPages(defaultUrl = Constants.BASE_URL)
+	@ManagedPages(defaultUrl = Constants.BASE_URL_AUT)
 	public Pages pages;
 	
 	public MongoConnector mongoConnector;

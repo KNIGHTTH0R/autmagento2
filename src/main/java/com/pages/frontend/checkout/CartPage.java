@@ -46,6 +46,85 @@ public class CartPage extends AbstractPage {
 
 		return resultList;
 	}
+	
+	/**
+	 * Will grab all products data from the cart where discount is 25%
+	 * 
+	 * @return
+	 */
+	public List<CartProductModel> grabProductsDataWith25Discount() {
+		List<WebElement> entryList = getDriver().findElements(By.id("shopping-cart-25-table"));
+		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
+		System.out.println(resultList.size());
+
+		for (WebElement webElementNow : entryList) {
+			CartProductModel productNow = new CartProductModel();
+
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
+			productNow.setQuantity(webElementNow.findElement(By.cssSelector("input")).getAttribute("value"));
+			productNow.setUnitPrice(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+			productNow.setProductsPrice(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
+			productNow.setFinalPrice(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText());
+			productNow.setPriceIP(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText());
+
+			resultList.add(productNow);
+		}
+
+		return resultList;
+	}
+	/**
+	 * Will grab all products data from the cart where discount is 50%
+	 * 
+	 * @return
+	 */
+	public List<CartProductModel> grabProductsDataWith50Discount() {
+		List<WebElement> entryList = getDriver().findElements(By.id("shopping-cart-50-table"));
+		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
+		System.out.println(resultList.size());
+		
+		for (WebElement webElementNow : entryList) {
+			CartProductModel productNow = new CartProductModel();
+			
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
+			productNow.setQuantity(webElementNow.findElement(By.cssSelector("input")).getAttribute("value"));
+			productNow.setUnitPrice(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+			productNow.setProductsPrice(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
+			productNow.setFinalPrice(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText());
+			productNow.setPriceIP(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText());
+			
+			resultList.add(productNow);
+		}
+		
+		return resultList;
+	}
+	/**
+	 * Will grab all products data from the cart which are marketing materials
+	 * 
+	 * @return
+	 */
+	public List<CartProductModel> grabMarketingMaterialProductsData() {
+		List<WebElement> entryList = getDriver().findElements(By.id("shopping-cart-table-marketing-material"));
+		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
+		System.out.println(resultList.size());
+		
+		for (WebElement webElementNow : entryList) {
+			CartProductModel productNow = new CartProductModel();
+			
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
+			productNow.setQuantity(webElementNow.findElement(By.cssSelector("input")).getAttribute("value"));
+			productNow.setUnitPrice(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+			productNow.setProductsPrice(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
+			productNow.setFinalPrice(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText());
+			productNow.setPriceIP(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText());
+			
+			resultList.add(productNow);
+		}
+		
+		return resultList;
+	}
 
 	public CartTotalsModel grabTotals() {
 		CartTotalsModel resultModel = new CartTotalsModel();
