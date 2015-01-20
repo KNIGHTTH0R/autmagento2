@@ -62,7 +62,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -87,15 +86,13 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 				}
 			}
 		}
-		
-		
-		
+
 		creditCardData.setCardNumber("4111 1111 1111 1111");
 		creditCardData.setCardName("test");
 		creditCardData.setMonthExpiration("06");
 		creditCardData.setYearExpiration("2016");
 		creditCardData.setCvcNumber("737");
-		
+
 	}
 
 	@Test
@@ -105,18 +102,15 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		ProductBasicModel productData = searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
 		productSteps.setProductAddToCart("1", "Blue");
 		productsList.add(productData);
-		// productData = searchSteps.searchAndSelectProduct("M058",
-		// "GUTSCHEIN FOLGEPARTY ");
-		// productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		// productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA",
-		// "MAGIC VIOLETTA BRACELET");
-		// productSteps.setProductAddToCart("2", "0");
-		// productsList.add(productData);
-		// productData = searchSteps.searchAndSelectProduct("Rosemary Ring",
-		// "ROSEMARY RING");
-		// productSteps.setProductAddToCart("3", "18");
-		// productsList.add(productData);
+		productData = searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY ");
+		productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA BRACELET");
+		productSteps.setProductAddToCart("2", "0");
+		productsList.add(productData);
+		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
+		productSteps.setProductAddToCart("3", "18");
+		productsList.add(productData);
 
 		String previewPrice = headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -133,22 +127,25 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		// TODO - add billing and shipping address forms
 		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-
 		PrintUtils.printCartTotals(shippingTotals);
 
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		PrintUtils.printList(shippingProducts);
+
 		shippingSteps.clickGoToPaymentMethod();
-		
+
 		paymentSteps.expandCreditCardForm();
-		
+
 		paymentSteps.fillCreditCardForm(creditCardData);
-		
+
 		AddressModel billingAddress = confirmationSteps.grabBillingData();
 		AddressModel shippingAddress = confirmationSteps.grabSippingData();
 		
-		
+		confirmationSteps.agreeAndCheckout();
+
 		System.out.println("BILLING");
 		PrintUtils.printAddressModel(billingAddress);
-		
+
 		System.out.println("SHIPPING");
 		PrintUtils.printAddressModel(shippingAddress);
 

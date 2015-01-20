@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.AbstractSteps;
+import com.tools.Constants;
 
 public class ProductSteps extends AbstractSteps{
 
@@ -22,6 +23,7 @@ public class ProductSteps extends AbstractSteps{
 		
 		setQuantity(qty);
 		addToCart();
+		waitABit(Constants.TIME_CONSTANT);
 	}
 	
 	@Step

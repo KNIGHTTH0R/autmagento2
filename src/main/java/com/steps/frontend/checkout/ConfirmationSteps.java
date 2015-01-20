@@ -19,4 +19,11 @@ public class ConfirmationSteps extends AbstractSteps{
 		return confirmationPage().grabBillingData();
 	}
 
+	@Step
+	public void agreeAndCheckout() {
+		confirmationPage().clickIAgree();
+		confirmationPage().clickOnSubmit();
+		
+	}
+
 }

@@ -22,7 +22,7 @@ public class CartPage extends AbstractPage {
 	private WebElement kasseButton;
 
 	/**
-	 * Will grab all products data from the cart
+	 * Will grab all products data from all carts
 	 * 
 	 * @return
 	 */
