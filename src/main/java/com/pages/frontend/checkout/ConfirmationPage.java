@@ -1,12 +1,17 @@
 package com.pages.frontend.checkout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.AbstractPage;
 import com.tools.Constants;
 import com.tools.data.AddressModel;
+import com.tools.data.CartProductModel;
 
 public class ConfirmationPage extends AbstractPage {
 
@@ -24,6 +29,9 @@ public class ConfirmationPage extends AbstractPage {
 	
 	@FindBy(id = "submit-confirmation-step")
 	private WebElement submitButton;
+	
+	@FindBy(css = "div#cart-section-1 div.items-section")
+	private WebElement productListContainer;
 
 	public AddressModel grabAddressData(WebElement addressPreview) {
 		AddressModel result = new AddressModel();
@@ -122,6 +130,28 @@ public class ConfirmationPage extends AbstractPage {
 	public void clickOnSubmit() {
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
+	}
+	
+	public List<CartProductModel> grabProductsList() {
+		element(productListContainer).waitUntilVisible();
+		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
+		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
+
+		for (WebElement webElementNow : entryList) {
+			CartProductModel productNow = new CartProductModel();
+
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
+			productNow.setQuantity(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			productNow.setUnitPrice(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+			productNow.setProductsPrice("");
+			productNow.setFinalPrice("");
+			productNow.setPriceIP("");
+
+			resultList.add(productNow);
+		}
+
+		return resultList;
 	}
 
 }

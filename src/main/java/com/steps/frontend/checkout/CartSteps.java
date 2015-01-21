@@ -38,13 +38,21 @@ public class CartSteps extends  AbstractSteps{
 	}
 
 	@Step
-	public CartTotalsModel grabTotals() {
+	public CartTotalsModel grabTotals() {		
 		return cartPage().grabTotals();
 	}
 	
 	@Step
 	public void clickGoToShipping(){
 		cartPage().clickToShipping();
+	}
+	@Step
+	public void updateProducts(){
+		cartPage().clickUpdateProducts();
+	}
+	@Step
+	public void updateProductQuantity(String quantity,String... terms){
+		cartPage().updateProductQuantity(quantity, terms);
 	}
 
 }

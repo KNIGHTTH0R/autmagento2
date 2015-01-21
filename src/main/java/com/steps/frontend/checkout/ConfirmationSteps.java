@@ -1,9 +1,12 @@
 package com.steps.frontend.checkout;
 
+import java.util.List;
+
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
 import com.tools.data.AddressModel;
+import com.tools.data.CartProductModel;
 
 public class ConfirmationSteps extends AbstractSteps{
 
@@ -24,6 +27,10 @@ public class ConfirmationSteps extends AbstractSteps{
 		confirmationPage().clickIAgree();
 		confirmationPage().clickOnSubmit();
 		
+	}
+//	@Step
+	public List<CartProductModel> grabProductsList() {
+		return confirmationPage().grabProductsList();
 	}
 
 }

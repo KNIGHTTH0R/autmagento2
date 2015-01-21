@@ -34,6 +34,11 @@ public class CalculusSteps extends AbstractSteps {
 			result.setAskingPrice(askingPriceSum);
 			result.setFinalPrice(finalPriceSum);
 			result.setIpPoints(ipSum);
+		
+			System.out.println("----------------------------");
+			System.out.println("CALC: askingPriceSum: " + result.getAskingPrice());
+			System.out.println("CALC: finalPriceSum: " + result.getFinalPrice());
+			System.out.println("CALC: ipSum: " + result.getIpPoints());
 			
 		}else{
 			System.out.println("Failure: Product list is empty!!! - see Calculus Steps");
@@ -57,6 +62,8 @@ public class CalculusSteps extends AbstractSteps {
 		}
 		return result;
 	}
+	
+	
 
 
 }
