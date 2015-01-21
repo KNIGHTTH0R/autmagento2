@@ -1,5 +1,6 @@
 package com.steps.frontend.checkout;
 
+
 import java.util.List;
 
 import com.tools.AbstractSteps;
@@ -33,12 +34,14 @@ public class CalculusSteps extends AbstractSteps {
 			result.setAskingPrice(askingPriceSum);
 			result.setFinalPrice(finalPriceSum);
 			result.setIpPoints(ipSum);
+			
 		}else{
 			System.out.println("Failure: Product list is empty!!! - see Calculus Steps");
 		}
 		return result;
 
-	}
+	}	
+
 
 	private int checkCalculusType(String tableType) {
 		int result = 0;
@@ -54,5 +57,6 @@ public class CalculusSteps extends AbstractSteps {
 		}
 		return result;
 	}
+
 
 }

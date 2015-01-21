@@ -56,12 +56,13 @@ public class CartPage extends AbstractPage {
 	}
 	
 	/**
+	 * 
 	 * Will grab all products data from the cart where discount is 25%
 	 * 
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith25Discount() {
-		List<WebElement> entryList = getDriver().findElements(By.id("shopping-cart-25-table"));
+		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-25-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 		System.out.println(resultList.size());
 
@@ -88,7 +89,7 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith50Discount() {
-		List<WebElement> entryList = getDriver().findElements(By.id("shopping-cart-50-table"));
+		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-50-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 		System.out.println(resultList.size());
 		
@@ -115,7 +116,7 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabMarketingMaterialProductsData() {
-		List<WebElement> entryList = getDriver().findElements(By.id("shopping-cart-table-marketing-material"));
+		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-table-marketing-material tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 		System.out.println(resultList.size());
 		
