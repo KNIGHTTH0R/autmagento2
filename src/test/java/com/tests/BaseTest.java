@@ -25,7 +25,7 @@ public class BaseTest {
     public void startComponents() {
 
         try {
-            System.out.println("--------------------------------- Test Start---------------------------------------");
+            System.err.println("--------------------------------- Test Start---------------------------------------");
 
             mongoConnector = new MongoConnector();
             System.out.println("Connected to Mongo DB");

@@ -155,9 +155,9 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		emailSteps.printEmailContent(emailList.get(0).getContent());
 		
-		System.out.println("---------------");
-		System.out.println("!!!!!!" + billingAddress.getCountryName());
-		System.out.println("!!!!!!" + shippingAddress.getCountryName());
+//		System.out.println("---------------");
+//		System.out.println("!!!!!!" + billingAddress.getCountryName());
+//		System.out.println("!!!!!!" + shippingAddress.getCountryName());
 		
 		System.out.println("BILLING");
 		PrintUtils.printAddressModel(billingAddress);
