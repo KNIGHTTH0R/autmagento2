@@ -8,7 +8,6 @@ public class OrderModel {
 	private String deliveryContact;
 	private String totalPrice;
 	private String status;
-	private String actions;
 
 	public String getOrderId() {
 		return orderId;
@@ -34,10 +33,6 @@ public class OrderModel {
 		return status;
 	}
 
-	public String getActions() {
-		return actions;
-	}
-
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
@@ -60,10 +55,6 @@ public class OrderModel {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public void setActions(String actions) {
-		this.actions = actions;
 	}
 
 }

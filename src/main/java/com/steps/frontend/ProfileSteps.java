@@ -1,8 +1,11 @@
 package com.steps.frontend;
 
+import java.util.List;
+
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
+import com.tools.data.OrderModel;
 
 public class ProfileSteps extends AbstractSteps{
 
@@ -19,8 +22,8 @@ public class ProfileSteps extends AbstractSteps{
 		waitABit(9000);
 	}
 
-	public void grabOrderHistory() {
-		profileHistoryPage().grabOrderHistory();
+	public List<OrderModel> grabOrderHistory() {
+		return profileHistoryPage().grabOrderHistory();
 	}
 
 
