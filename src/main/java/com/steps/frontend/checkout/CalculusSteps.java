@@ -34,7 +34,7 @@ public class CalculusSteps extends AbstractSteps {
 			result.setFinalPrice(finalPriceSum);
 			result.setIpPoints(ipSum);
 		}else{
-			System.err.println("Failure: Product list is empty!!! - see Calculus Steps");
+			System.out.println("Failure: Product list is empty!!! - see Calculus Steps");
 		}
 		return result;
 
