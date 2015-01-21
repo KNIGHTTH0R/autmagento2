@@ -25,6 +25,7 @@ import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
@@ -58,6 +59,8 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	
 	@Steps
 	public CheckoutValidationSteps validationSteps;
+	@Steps
+	public CheckoutValidationSteps checkoutValidationSteps;
 	
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
@@ -94,45 +97,78 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	@Test
 	public void uS001StyleCoachShoppingTest(){
 		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
-//		ProductBasicModel productData = searchSteps.searchAndSelectProduct("B056RS", "ALEXA BRACELET");
-//		productSteps.setProductAddToCart("1", "0");
+		ProductBasicModel productData;
+		
+//		searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
+//		productData = productSteps.setProductAddToCart("1", "Blue");
 //		productsList.add(productData);
-//		ProductBasicModel productData1 = searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
-//		productSteps.setProductAddToCart("2", "0");
-//		productsList.add(productData1);	
-		ProductBasicModel productData2 = searchSteps.searchAndSelectProduct("R083BK", "CLARICE RING (GUN METAL)");
-		productSteps.setProductAddToCart("1", "18");
-		productsList.add(productData2);	
-//		ProductBasicModel productData3 = searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
-//		productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData3);	
-//		ProductBasicModel productData4 = searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-//		productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData4);	
+//		
+//		searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
+//		productData = productSteps.setProductAddToCart("2", "0");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("R083BK", "CLARICE RING (GUN METAL)");
+//		productData = productSteps.setProductAddToCart("1", "18");
+//		productsList.add(productData);
+		
+//		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+		
 		
 		String previewPrice = headerSteps.openCartPreview();
 		headerSteps.goToCart();
+//		cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
+//		productsList.get(0).setQuantity("6");
+//		cartSteps.updateProducts();
 
 		System.out.println("Cart Preview Price: " + previewPrice);
 		
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
+		PrintUtils.printList(cartProducts);
+		
 		List<CartProductModel> cartProductswith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
-		List<CartProductModel> cartProductswith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
-		System.out.println("size " + cartProductswith50Discount.size());
+		
+	
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-		CartTotalsModel cartTotals = cartSteps.grabTotals();
 		
+		CalculationModel calculationModelWith25Discount = calculusSteps.calculateTableProducts(cartProductswith25Discount);
+		totalsList.add(calculationModelWith25Discount);
 		
-		CalculationModel calculationModel25Discount = calculusSteps.calculateTableProducts(cartProductswith25Discount);
-		totalsList.add(calculationModel25Discount);
-		CalculationModel calculationModel50discount = calculusSteps.calculateTableProducts(cartProductswith50Discount);
-		totalsList.add(calculationModel50discount);
 		CalculationModel calculationModelMarketingMaterial = calculusSteps.calculateTableProducts(cartMarketingMaterialsProducts);
 		totalsList.add(calculationModelMarketingMaterial);
 		
 		
+		
+	
+		
+//		CalculationModel calculationModel50discount = calculusSteps.calculateTableProducts(cartProductswith50Discount);
+//		totalsList.add(calculationModel50discount);
+//		CalculationModel calculationModelMarketingMaterial = calculusSteps.calculateTableProducts(cartMarketingMaterialsProducts);
+//		totalsList.add(calculationModelMarketingMaterial);
+		
+		
 
-	//  CartTotalsModel sumedTotals  = validationSteps.sumTotalsOfProductsWithDifferentDiscounts(totalsList);
+		CalculationModel sumedTotals  = validationSteps.sumTotalsOfProductsWithDifferentDiscountsForCalculationModel(totalsList);
+		System.out.println("-----BUBA------");
+		System.out.println(sumedTotals.getAskingPrice());
+		System.out.println(sumedTotals.getFinalPrice());
+		System.out.println(sumedTotals.getIpPoints());
+		
+		System.out.println("TOTALS FROM THE BOTTOM");
+		CartTotalsModel cartTotals = cartSteps.grabTotals();
+		PrintUtils.printCartTotals(cartTotals);
+		
+		System.out.println("TOTALS CALCULATED");
+		CartTotalsModel cartBigTotal = checkoutValidationSteps.calculateCartProducts(cartProducts);
+		PrintUtils.printCartTotals(cartBigTotal);
+		
+		checkoutValidationSteps.checkTotalsInCart(cartTotals, cartBigTotal);
+
 		
 	//	validationSteps.checkTotalsInCart(cartTotals, sumedTotals);
 		

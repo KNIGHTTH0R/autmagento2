@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -21,6 +22,9 @@ public class CartPage extends AbstractPage {
 
 	@FindBy(css = "ul.checkout-types button:last-child")
 	private WebElement kasseButton;
+	
+	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
+	private WebElement updateButton;
 	
 	@FindBy(css = "table.cart-table")
 	private WebElement cartTable;
@@ -181,13 +185,7 @@ public class CartPage extends AbstractPage {
 				resultModel.setIpPoints(valueTransformer);
 			}
 			
-		}
-		
-		
-		
-		
-		
-		
+		}		
 		
 		resultModel.setSubtotal(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(1) > td:last-child")).getText()));
 		resultModel.setJewelryBonus(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(2) input#jewelry_credits")).getAttribute("value")));
@@ -197,6 +195,7 @@ public class CartPage extends AbstractPage {
 		resultModel.setShipping(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(5) > td:last-child")).getText()));
 		resultModel.setTotalAmount(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tr.grandtotal > td:last-child")).getText()));
 		resultModel.setIpPoints(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tfoot tr:nth-child(2) > td:last-child")).getText()));
+		
 
 		return resultModel;
 	}
@@ -205,5 +204,34 @@ public class CartPage extends AbstractPage {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
 	}
+	public void clickUpdateProducts() {
+		element(updateButton).waitUntilVisible();
+		updateButton.click();
+	}
+	
+	
+	public void updateProductQuantity(String quantity,String... terms){
+		element(cartTable).waitUntilVisible();
+		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
+		boolean found = false;
+		boolean containsTerms = true;
+		for (WebElement webElement : entryList) {
+			
+			for(String term: terms){				
+				if(!webElement.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(term)){	
+					containsTerms = false;					
+				}
+			}			
+			if(containsTerms){				
+				WebElement input = webElement.findElement(By.cssSelector("td:nth-child(3) input"));
+				element(input).clear();
+				element(input).sendKeys(quantity);
+				break;
+			}
+		}
+		Assert.assertTrue("The product was not found", containsTerms);
+
+	}	
+
 
 }

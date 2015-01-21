@@ -9,6 +9,7 @@ import org.junit.Assert;
 
 import com.tools.AbstractSteps;
 import com.tools.PrintUtils;
+import com.tools.data.CalculationModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.ProductBasicModel;
@@ -62,11 +63,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 			totalAmount += (PrintUtils.cleanNumberToDouble(cartProductModel.getProductsPrice()) - discount);
 			ipPointsSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
 
-			System.out.println("Unit Price: " + cartProductModel.getUnitPrice());
-			System.out.println("Quantity: " + cartProductModel.getQuantity());
-			System.out.println("Product Price: " + productPrice);
-			System.out.println("Total Price: " + totalPrice);
-			System.out.println("Discount: " + discountSum);
 		}
 		taxSum = PrintUtils.getDoubleWithTwoDigits(((totalAmount * 19) / 119));
 
@@ -93,7 +89,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	}
 
 	// @Step
-	public CartTotalsModel sumTotalsOfProductsWithDifferentDiscounts(List<CartTotalsModel> totalsList) {
+	public CartTotalsModel sumTotalsOfProductsWithDifferentDiscountsForCartTotalsModels(List<CartTotalsModel> totalsList) {
 
 		CartTotalsModel result = new CartTotalsModel();
 
@@ -122,6 +118,28 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		result.setTax(df.format(taxSum));
 		result.setShipping(df.format(shiping));
 		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
+		return result;
+	}
+	
+	// @Step
+	public CalculationModel sumTotalsOfProductsWithDifferentDiscountsForCalculationModel(List<CalculationModel> totalsList) {
+
+		CalculationModel result = new CalculationModel();//		
+		
+		 double askingPrice = 0;
+		 double finalPrice = 0;
+		 int ipPoints = 0;
+
+		for (CalculationModel total : totalsList) {
+			askingPrice += total.getAskingPrice();
+			finalPrice += total.getFinalPrice();
+			ipPoints += total.getIpPoints();
+		}
+		result.setAskingPrice((askingPrice));
+		result.setFinalPrice(finalPrice);
+		result.setIpPoints(ipPoints);
+		
+		
 		return result;
 	}
 
@@ -163,6 +181,25 @@ public class CheckoutValidationSteps extends AbstractSteps {
 				cartTotalsModel2.getIpPoints().equals(cartTotalsModel1.getIpPoints()));
 
 	}
+	
+//	@Step
+//	public void checkTotals(CalculationModel calculationModel1, CalculationModel calculationModel2) {
+//
+//		System.out.println("----------SUBTOTAL: " + calculationModel2.getAskingPrice() + " : " + calculationModel1.getAskingPrice());
+//		Assert.assertTrue("The subtotal should be " + calculationModel2.getAskingPrice() + " and it is " + calculationModel1.getAskingPrice() + "!",
+//				calculationModel2.getAskingPrice() == (calculationModel1.getAskingPrice()));
+//
+//		System.out.println("----------FINAL: " + calculationModel2.getFinalPrice() + " : " + calculationModel1.getFinalPrice());
+//		Assert.assertTrue("The discount should be " + calculationModel2.getFinalPrice() + " and it is " + calculationModel1.getFinalPrice() + "!",
+//				calculationModel2.getFinalPrice() == (calculationModel1.getFinalPrice()));
+//
+//		System.out.println("----------IP POINTS: " + calculationModel2.getIpPoints() + " : " + calculationModel1.getIpPoints());
+//		Assert.assertTrue("The total amount should be " + calculationModel2.getIpPoints() + " and it is " + calculationModel1.getIpPoints() + "!",
+//				calculationModel2.getIpPoints() == (calculationModel1.getIpPoints()));
+//		
+//		
+//
+//	}
 
 	@Step
 	public void validateProducts(List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {

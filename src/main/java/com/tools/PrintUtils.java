@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import com.tools.data.AddressModel;
+import com.tools.data.CalculationModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.EmailModel;
@@ -35,6 +36,16 @@ public class PrintUtils {
 		System.out.println(model.getShipping());
 		System.out.println(model.getTotalAmount());
 		System.out.println(model.getIpPoints());
+	}
+	public static void printCalculationModel(CalculationModel model) {
+		System.out.println(" *** Print Total *** ");
+		System.out.println("------------------------");
+		System.out.println(model.getTableType());
+		System.out.println(model.getRetailPrice());
+		System.out.println(model.getAskingPrice());
+		System.out.println(model.getFinalPrice());
+		System.out.println(model.getIpPoints());
+
 	}
 
 	public static double cleanNumberToDouble(String unitPrice) {
