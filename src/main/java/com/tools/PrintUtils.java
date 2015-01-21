@@ -7,6 +7,7 @@ import com.tools.data.AddressModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.EmailModel;
+import com.tools.data.ProductBasicModel;
 
 public class PrintUtils {
 
@@ -102,6 +103,14 @@ public class PrintUtils {
 			System.out.println(emailModel.getContent());
 			System.out.println(emailModel.getSentDate() + " - " + emailModel.getRecievedDate());
 		}
+		
+	}
+
+	public static void printProductsCompare(ProductBasicModel productNow, CartProductModel compare) {
+		System.out.println(productNow.getName() + " - " + compare.getName());
+		System.out.println(productNow.getPrice() + " - " + compare.getUnitPrice());
+		System.out.println(productNow.getQuantity() + " - " + compare.getQuantity());
+		System.out.println(productNow.getType() + " - " + compare.getProdCode());
 		
 	}
 }

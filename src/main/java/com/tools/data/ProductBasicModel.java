@@ -5,6 +5,7 @@ public class ProductBasicModel {
 	private String name;
 	private String type;
 	private String price;
+	private String quantity;
 
 	public String getName() {
 		return name;
@@ -29,4 +30,14 @@ public class ProductBasicModel {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+
+	public String getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
+
 }
