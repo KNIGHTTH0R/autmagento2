@@ -8,14 +8,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
 import com.tools.Constants;
+import com.tools.data.ProductBasicModel;
 
 public class ProductDetailsPage extends AbstractPage {
 
-//	@FindBy(css = ".dp-bl.title.ff-Nb.size20")
-//	private WebElement titleContainer;
-
-//	@FindBy(css = ".price")
-//	private WebElement priceContainer;
 
 	@FindBy(id = "qty")
 	private WebElement quantityInput;
@@ -26,18 +22,15 @@ public class ProductDetailsPage extends AbstractPage {
 	@FindBy(css = "button#add-to-cart")
 	private WebElement addToCartButton;
 	
-//	@FindBy(css = "div.add-to-cart-modal")
-//	private WebElement popUpOK;
-
-//	public void checkProductName(String productName) {
-//		element(titleContainer).waitUntilVisible();
-//		Assert.assertTrue("The product name is incorrect", titleContainer.getText().contains(productName));
-//	}
-//
-//	public void checkProductPrice(String productPrice) {
-//		element(priceContainer).waitUntilVisible();
-//		Assert.assertTrue("The product name is incorrect", priceContainer.getText().contains(productPrice));
-//	}
+	@FindBy(css = "p.product-ids.dp-inbl")
+	private WebElement productCode;
+	
+	@FindBy(css = "span[id*='product-price']")
+	private WebElement productPrice;
+	
+	@FindBy(css = "h1.ff-Nb")
+	private WebElement productName;
+	
 
 	public void setPrice(String qty) {
 		element(quantityInput).waitUntilVisible();
@@ -58,26 +51,24 @@ public class ProductDetailsPage extends AbstractPage {
 		waitABit(Constants.TIME_CONSTANT);
 	}
 
-	// private void getSearchedProductElement(String productName) {
-	// List<WebElement> productsList = getDriver().findElements(
-	// By.cssSelector(".mini-products-list li"));
-	// boolean found = false;
-	// for (WebElement product : productsList) {
-	// WebElement productNameContainer = product.findElement(By
-	// .cssSelector(" .product-name"));
-	// if (productNameContainer.getText().trim()
-	// .contentEquals(productName))
-	// found = true;
-	// }
-	//
-	// Assert.assertTrue("The " + productName + " was not found", found);
-	// }
+	public ProductBasicModel grabProductData() {
+		ProductBasicModel result = new ProductBasicModel();
+		
+		element(productName).waitUntilVisible();
+		
+		//clean productCode
+		String type = productCode.getText();
+		type = type.replace("Artikelnummer: ", "");
+		
+		
+		result.setName(productName.getText());
+		result.setType(type);
+		result.setPrice(productPrice.getText());
+		result.setQuantity(quantityInput.getAttribute("value"));
+		
+		return result;
+	}
 
-	// public void verifyProductDetailsInExpandedWrapper(String productName,
-	// String price, String qty) {
-	// WebElement product = getSearchedProductElement(productName);
-	// Assert.assertTrue("Product details are incorrect", product.getText()
-	// .contains(price) && product.getText().contains(qty));
-	// }
+	
 
 }

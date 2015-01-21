@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.AbstractSteps;
 import com.tools.Constants;
+import com.tools.data.ProductBasicModel;
 
 public class ProductSteps extends AbstractSteps{
 
@@ -16,14 +17,18 @@ public class ProductSteps extends AbstractSteps{
 	 * @param size
 	 */
 	@StepGroup
-	public void setProductAddToCart(String qty, String size){
+	public ProductBasicModel setProductAddToCart(String qty, String size){
 		if(!size.contentEquals("0")){
 			setDropDownValue(size);
 		}
 		
 		setQuantity(qty);
+		
+		
+		ProductBasicModel result = productDetailsPage().grabProductData();
 		addToCart();
 		waitABit(Constants.TIME_CONSTANT);
+		return result;
 	}
 	
 	@Step

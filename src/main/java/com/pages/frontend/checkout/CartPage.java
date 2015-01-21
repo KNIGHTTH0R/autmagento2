@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.AbstractPage;
+import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
@@ -20,6 +21,9 @@ public class CartPage extends AbstractPage {
 
 	@FindBy(css = "ul.checkout-types button:last-child")
 	private WebElement kasseButton;
+	
+	@FindBy(css = "table.cart-table")
+	private WebElement cartTable;
 
 	/**
 	 * Will grab all products data from all carts
@@ -27,7 +31,10 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsData() {
+		element(cartTable).waitUntilVisible();
 		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
+		
+		waitABit(Constants.TIME_CONSTANT);
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 
 		for (WebElement webElementNow : entryList) {

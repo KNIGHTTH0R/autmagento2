@@ -11,37 +11,36 @@ import com.tools.AbstractSteps;
 import com.tools.PrintUtils;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
+import com.tools.data.ProductBasicModel;
 
 public class CheckoutValidationSteps extends AbstractSteps {
-	
+
 	private DecimalFormat df = new DecimalFormat("0.00");
 
 	private static final long serialVersionUID = 4274219181280984116L;
 
-	
 	@Step
-	public void verifySuccessMessage(){
+	public void verifySuccessMessage() {
 		successPage().verifySuccessMessage();
 	}
-	
+
 	public double calculateCartProductsByDiscount(CartProductModel product) {
-		
+
 		double productPrice = 0;
-	
-			if(product.getDiscountClass().contentEquals("25")){
-				productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 25 / 100;				
-			}
-			if(product.getDiscountClass().contentEquals("50")){
-				productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 50 /100;
-				
-			}		
+
+		if (product.getDiscountClass().contentEquals("25")) {
+			productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 25 / 100;
+		}
+		if (product.getDiscountClass().contentEquals("50")) {
+			productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 50 / 100;
+
+		}
 		return productPrice;
 	}
-	
+
 	@Step
 	public CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {
-		
-	 
+
 		double totalPrice = 0;
 		double discountSum = 0;
 		double totalAmount = 0;
@@ -49,7 +48,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		double taxSum = 0;
 		int jeverlyBonus = 0;
 		double shiping = 0;
-		
+
 		for (CartProductModel cartProductModel : productList) {
 			double productPrice = 0;
 			productPrice += (PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity()));
@@ -57,21 +56,19 @@ public class CheckoutValidationSteps extends AbstractSteps {
 			double discount = 0;
 			if (cartProductModel.getDiscountClass() == "25" || cartProductModel.getDiscountClass() == "50") {
 				discount = calculateCartProductsByDiscount(cartProductModel);
-				discountSum += calculateCartProductsByDiscount(cartProductModel);	
-				
-				
-			}			
-			totalAmount += (PrintUtils.cleanNumberToDouble(cartProductModel.getProductsPrice())- discount);			
+				discountSum += calculateCartProductsByDiscount(cartProductModel);
+
+			}
+			totalAmount += (PrintUtils.cleanNumberToDouble(cartProductModel.getProductsPrice()) - discount);
 			ipPointsSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
-			 
-			
+
 			System.out.println("Unit Price: " + cartProductModel.getUnitPrice());
 			System.out.println("Quantity: " + cartProductModel.getQuantity());
 			System.out.println("Product Price: " + productPrice);
 			System.out.println("Total Price: " + totalPrice);
 			System.out.println("Discount: " + discountSum);
 		}
-		taxSum = PrintUtils.getDoubleWithTwoDigits(((totalAmount * 19) /119));
+		taxSum = PrintUtils.getDoubleWithTwoDigits(((totalAmount * 19) / 119));
 
 		CartTotalsModel result = new CartTotalsModel();
 
@@ -82,7 +79,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		result.setTax(df.format(taxSum));
 		result.setShipping(df.format(shiping));
 		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
-		
+
 		System.out.println("------------------------------");
 		System.out.println("Subtotal: " + result.getSubtotal());
 		System.out.println("Discount: " + result.getDiscount());
@@ -94,12 +91,12 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 		return result;
 	}
-	
-//	@Step
-	public CartTotalsModel sumTotalsOfProductsWithDifferentDiscounts(List<CartTotalsModel> totalsList){
-		
+
+	// @Step
+	public CartTotalsModel sumTotalsOfProductsWithDifferentDiscounts(List<CartTotalsModel> totalsList) {
+
 		CartTotalsModel result = new CartTotalsModel();
-		
+
 		double totalPrice = 0;
 		double discountSum = 0;
 		double totalAmount = 0;
@@ -107,8 +104,8 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		double taxSum = 0;
 		int jeverlyBonus = 0;
 		double shiping = 0;
-		
-		for(CartTotalsModel total:totalsList){
+
+		for (CartTotalsModel total : totalsList) {
 			totalPrice += Double.parseDouble(total.getSubtotal());
 			discountSum += Double.parseDouble(total.getDiscount());
 			totalAmount += Double.parseDouble(total.getTotalAmount());
@@ -116,7 +113,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 			taxSum += Double.parseDouble(total.getTax());
 			jeverlyBonus += Double.parseDouble(total.getJewelryBonus());
 			shiping += Double.parseDouble(total.getShipping());
-			
+
 		}
 		result.setSubtotal(df.format((totalPrice)));
 		result.setDiscount(df.format(discountSum));
@@ -128,48 +125,82 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		return result;
 	}
 
-//	@Step
+	// @Step
 	public double calculateDiscountValue(CartProductModel cartProductModel) {
 		double productPrice = 0;
 		productPrice += (PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity()));
 		return productPrice = (productPrice * Double.parseDouble(cartProductModel.getDiscountClass()) / 100);
 	}
-	
+
 	@Step
-	public void checkTotalsInCart(CartTotalsModel cartTotalsModel1,CartTotalsModel cartTotalsModel2){
-		
-		System.out.println("----------SUBTOTAL: " + cartTotalsModel2.getSubtotal() + " : " +  cartTotalsModel1.getSubtotal());	
-		Assert.assertTrue("The subtotal should be " + cartTotalsModel2.getSubtotal() +" and it is " +  cartTotalsModel1.getSubtotal() +  "!",
+	public void checkTotalsInCart(CartTotalsModel cartTotalsModel1, CartTotalsModel cartTotalsModel2) {
+
+		System.out.println("----------SUBTOTAL: " + cartTotalsModel2.getSubtotal() + " : " + cartTotalsModel1.getSubtotal());
+		Assert.assertTrue("The subtotal should be " + cartTotalsModel2.getSubtotal() + " and it is " + cartTotalsModel1.getSubtotal() + "!",
 				cartTotalsModel2.getSubtotal().equals(cartTotalsModel1.getSubtotal()));
-		
-		System.out.println("----------DISCOUNT: " + cartTotalsModel2.getDiscount() + " : " +  cartTotalsModel1.getDiscount());	
-		Assert.assertTrue("The discount should be " + cartTotalsModel2.getDiscount() +" and it is " +  cartTotalsModel1.getDiscount() +  "!",
-				cartTotalsModel2.getDiscount().equals(cartTotalsModel1.getDiscount()));		
-	
-		System.out.println("----------TOTAL AMOUNT: " + cartTotalsModel2.getTotalAmount() + " : " +  cartTotalsModel1.getTotalAmount());	
-		Assert.assertTrue("The total amount should be " + cartTotalsModel2.getTotalAmount() +" and it is " + cartTotalsModel1.getTotalAmount() +  "!",
+
+		System.out.println("----------DISCOUNT: " + cartTotalsModel2.getDiscount() + " : " + cartTotalsModel1.getDiscount());
+		Assert.assertTrue("The discount should be " + cartTotalsModel2.getDiscount() + " and it is " + cartTotalsModel1.getDiscount() + "!",
+				cartTotalsModel2.getDiscount().equals(cartTotalsModel1.getDiscount()));
+
+		System.out.println("----------TOTAL AMOUNT: " + cartTotalsModel2.getTotalAmount() + " : " + cartTotalsModel1.getTotalAmount());
+		Assert.assertTrue("The total amount should be " + cartTotalsModel2.getTotalAmount() + " and it is " + cartTotalsModel1.getTotalAmount() + "!",
 				cartTotalsModel2.getTotalAmount().equals(cartTotalsModel1.getTotalAmount()));
-		
-		System.out.println("----------TAX: " + cartTotalsModel2.getTax() + " : " +  cartTotalsModel1.getTax());	
-		Assert.assertTrue("The tax should be " + cartTotalsModel2.getTax() +" and it is " + cartTotalsModel1.getTax() +  "!",
-				cartTotalsModel2.getTax().equals(cartTotalsModel1.getTax()));
-		
-		System.out.println("----------SHIPPING: " + cartTotalsModel2.getShipping() + " : " +  cartTotalsModel1.getShipping());	
-		Assert.assertTrue("The shipping  should be " + cartTotalsModel2.getShipping() +" and it is " + cartTotalsModel1.getShipping() +  "!",
+
+		System.out.println("----------TAX: " + cartTotalsModel2.getTax() + " : " + cartTotalsModel1.getTax());
+		Assert.assertTrue("The tax should be " + cartTotalsModel2.getTax() + " and it is " + cartTotalsModel1.getTax() + "!", cartTotalsModel2.getTax().equals(cartTotalsModel1.getTax()));
+
+		System.out.println("----------SHIPPING: " + cartTotalsModel2.getShipping() + " : " + cartTotalsModel1.getShipping());
+		Assert.assertTrue("The shipping  should be " + cartTotalsModel2.getShipping() + " and it is " + cartTotalsModel1.getShipping() + "!",
 				cartTotalsModel2.getShipping().equals(cartTotalsModel1.getShipping()));
-		
-		System.out.println("----------JEWERLY BONUS: " + cartTotalsModel2.getJewelryBonus() + " : " +  cartTotalsModel1.getJewelryBonus());	
-		Assert.assertTrue("The jewerly bouns should be " + cartTotalsModel2.getJewelryBonus() +" and it is " + cartTotalsModel1.getJewelryBonus() +  "!",
+
+		System.out.println("----------JEWERLY BONUS: " + cartTotalsModel2.getJewelryBonus() + " : " + cartTotalsModel1.getJewelryBonus());
+		Assert.assertTrue("The jewerly bouns should be " + cartTotalsModel2.getJewelryBonus() + " and it is " + cartTotalsModel1.getJewelryBonus() + "!",
 				cartTotalsModel2.getJewelryBonus().equals(cartTotalsModel1.getJewelryBonus()));
+
+		System.out.println("----------IP POINTS: " + cartTotalsModel2.getIpPoints() + " : " + cartTotalsModel1.getIpPoints());
+		Assert.assertTrue("The ip points should be " + cartTotalsModel2.getIpPoints() + " and it is " + cartTotalsModel1.getIpPoints() + "!",
+				cartTotalsModel2.getIpPoints().equals(cartTotalsModel1.getIpPoints()));
+
+	}
+
+	@Step
+	public void validateProducts(List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {
+
+		for (ProductBasicModel productNow : productsList) {
+			CartProductModel compare = findProduct(productNow.getType(), cartProducts);
+
+			PrintUtils.printProductsCompare(productNow, compare);
+			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
+
+			if (compare.getName() != null) {
+
+				Assert.assertTrue("Failure: Price values dont match: " + productNow.getPrice() + " - " + compare.getUnitPrice(), productNow.getPrice().contentEquals(compare.getUnitPrice()));
+				Assert.assertTrue("Failure: Quantity values dont match: " + productNow.getQuantity() + " - " + compare.getQuantity(), productNow.getQuantity().contentEquals(compare.getQuantity()));
+				// Assert.assertTrue("Failure: Type values dont match: " +
+				// productNow.getType() + " - " + compare.getProdCode() ,
+				// productNow.getType().contentEquals(compare.getProdCode()));
+
+			} else{
+				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+			}
+		}
+	}
+
+	private static CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
+		CartProductModel result = new CartProductModel();
 		
-		System.out.println("----------IP POINTS: " + cartTotalsModel2.getIpPoints() + " : " +  cartTotalsModel1.getIpPoints());	
-		Assert.assertTrue("The ip points should be " + cartTotalsModel2.getIpPoints() +" and it is " + cartTotalsModel1.getIpPoints() +  "!",
-				cartTotalsModel2.getIpPoints().equals(cartTotalsModel1.getIpPoints()));	
-	
-	
-	}	
-	
-	
-	
+
+		theFor: for (CartProductModel cartProductModel : cartProducts) {
+			System.out.println(productCode + " - "+ cartProductModel.getProdCode());
+			if (cartProductModel.getProdCode().contains(productCode)) {
+				result = cartProductModel;
+				System.out.println("Got One!!!!!");
+				break theFor;
+			}
+		}
+
+		return result;
+	}
 
 }

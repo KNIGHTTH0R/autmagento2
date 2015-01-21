@@ -104,25 +104,32 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public void uS001StyleCoachShoppingTest() {
 		frontEndSteps.performLogin(username, password);
 
-		ProductBasicModel productData = searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
-		productSteps.setProductAddToCart("1", "Blue");
+		searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
+		ProductBasicModel productData = productSteps.setProductAddToCart("1", "Blue");
 		productsList.add(productData);
-		productData = searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY");
-		productSteps.setProductAddToCart("1", "0");
+		
+		searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY");
+		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
-		productData = searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
-		productSteps.setProductAddToCart("2", "0");
+		
+		searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
+		productData = productSteps.setProductAddToCart("2", "0");
 		productsList.add(productData);
-		productData = searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-		productSteps.setProductAddToCart("3", "18");
+		
+		searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
+		productData = productSteps.setProductAddToCart("3", "18");
 		productsList.add(productData);
 
 		String previewPrice = headerSteps.openCartPreview();
 		headerSteps.goToCart();
-//		System.out.println("Cart Preview Price: " + previewPrice);
 
-		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		CartTotalsModel cartTotals = cartSteps.grabTotals();
+		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
+		
+		PrintUtils.printList(cartProducts);
+		
+
+		
 //		CartTotalsModel calculatedTotals = checkoutValidationSteps.calculateCartProducts(cartProducts);
 //		checkoutValidationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
 
@@ -149,21 +156,28 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		checkoutValidationSteps.verifySuccessMessage();
 		
-		List<EmailModel> emailList = GmailConnector.readGmail();
+		
+		checkoutValidationSteps.validateProducts(productsList, cartProducts);
+		checkoutValidationSteps.validateProducts(productsList, shippingProducts);
+		
+
+		
+		
+//		List<EmailModel> emailList = GmailConnector.readGmail();
 		
 //		PrintUtils.printEmailList(emailList);
 		
-		emailSteps.printEmailContent(emailList.get(0).getContent());
+//		emailSteps.printEmailContent(emailList.get(0).getContent());
 		
 //		System.out.println("---------------");
 //		System.out.println("!!!!!!" + billingAddress.getCountryName());
 //		System.out.println("!!!!!!" + shippingAddress.getCountryName());
 		
-		System.out.println("BILLING");
-		PrintUtils.printAddressModel(billingAddress);
-
-		System.out.println("SHIPPING");
-		PrintUtils.printAddressModel(shippingAddress);
+//		System.out.println("BILLING");
+//		PrintUtils.printAddressModel(billingAddress);
+//
+//		System.out.println("SHIPPING");
+//		PrintUtils.printAddressModel(shippingAddress);
 
 	}
 
