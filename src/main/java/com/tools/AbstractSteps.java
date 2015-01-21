@@ -24,6 +24,8 @@ import com.pages.frontend.checkout.payment.PaymentPage;
 import com.pages.frontend.checkout.shipping.BillingFormPage;
 import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
+import com.pages.frontend.profile.DashboardMenuPage;
+import com.pages.frontend.profile.ProfileHistoryPage;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -122,6 +124,15 @@ public class AbstractSteps extends ScenarioSteps {
 	
 	public SuccessPage successPage(){
 		return getPages().currentPageAt(SuccessPage.class);
+	}
+	
+	//Profile
+	public DashboardMenuPage dashboardMenuPage(){
+		return getPages().currentPageAt(DashboardMenuPage.class);
+	}
+	
+	public ProfileHistoryPage profileHistoryPage(){
+		return getPages().currentPageAt(ProfileHistoryPage.class);
 	}
 	
 

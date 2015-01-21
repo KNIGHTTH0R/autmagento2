@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
@@ -34,11 +33,10 @@ import com.tools.data.AddressModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.CreditCardModel;
-import com.tools.data.EmailModel;
 import com.tools.data.ProductBasicModel;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US1", type = "US1")
+@WithTag(name = "US001", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US001StyleCoachShoppingTest extends BaseTest {

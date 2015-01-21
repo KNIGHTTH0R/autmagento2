@@ -22,5 +22,10 @@ public class HeaderSteps extends AbstractSteps{
 	public void goToCart(){
 		headerPage().clickGoToCart();
 	}
+	
+	@Step
+	public void goToProfile(){
+		headerPage().clickOnProfileButton();
+	}
 
 }
