@@ -12,7 +12,7 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void performAdminLogin(String userName, String userPass) {
-		
+
 		getDriver().get(Constants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
@@ -23,9 +23,20 @@ public class BackEndSteps extends AbstractSteps {
 	public void redirectToManageCustomers() {
 		navigationPage().clickOnCustomers();
 
-		@SuppressWarnings("unused")
-		String url = navigationPage().getManageCustomersPage();
+//		@SuppressWarnings("unused")
+//		String url = navigationPage().getManageCustomersPage();
 		// getDriver().get(url);
+	}
+
+	@Step
+	public void redirectToSalesOrders() {
+		navigationPage().clickOnSales();
+
+		navigationPage().clickOrdersPage();
+//		String url = navigationPage().getOrdersPage();
+//		getDriver().get(url);
+//		
+//		waitABit(8000);
 	}
 
 	@Step
@@ -33,11 +44,12 @@ public class BackEndSteps extends AbstractSteps {
 		customerListPage().inputEmailFilter(emailText);
 		customerListPage().clickOnSearch();
 	}
-	
+
 	@Step
 	public void openCustomerDetails(String emailText) {
 		customerListPage().openCustomerDetails(emailText);
 	}
+
 	@Step
 	public void clickOnLeadSettings() {
 		customerDetailsHomePage().clickOnLeadSettings();
@@ -50,12 +62,12 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public StylistDataModel grabLeadSettingsData() {
-		return leadSettingsPage().grabValidationFields();		
+		return leadSettingsPage().grabValidationFields();
 	}
-	
+
 	@Step
 	public String extractEmailConfirmationStatus() {
-		return customerDetailsHomePage().extractEmailConfirmationStatus();		
+		return customerDetailsHomePage().extractEmailConfirmationStatus();
 	}
 
 }

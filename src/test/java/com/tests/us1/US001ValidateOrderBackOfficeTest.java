@@ -37,11 +37,11 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest{
 		public void validateOrderBackendOfficeTest() {
 			backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 			// backEndSteps.dismissPopUp();
-			backEndSteps.redirectToManageCustomers();
-			backEndSteps.searchForEmail(stylistName);
-			backEndSteps.openCustomerDetails(stylistName);
-			backEndSteps.clickOnLeadSettings();
-			validationModel = backEndSteps.grabLeadSettingsData();
+			backEndSteps.redirectToSalesOrders();
+//			backEndSteps.searchForEmail(stylistName);
+//			backEndSteps.openCustomerDetails(stylistName);
+//			backEndSteps.clickOnLeadSettings();
+//			validationModel = backEndSteps.grabLeadSettingsData();
 
 		}
 
