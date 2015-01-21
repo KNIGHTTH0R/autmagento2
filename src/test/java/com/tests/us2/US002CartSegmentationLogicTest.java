@@ -103,7 +103,6 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		ProductBasicModel productData2 = searchSteps.searchAndSelectProduct("R083BK", "CLARICE RING (GUN METAL)");
 		productSteps.setProductAddToCart("1", "18");
 		productsList.add(productData2);	
-		System.out.println(productData2.getName());
 //		ProductBasicModel productData3 = searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
 //		productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData3);	

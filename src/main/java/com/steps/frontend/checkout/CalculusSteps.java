@@ -27,6 +27,7 @@ public class CalculusSteps extends AbstractSteps {
 				ipSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
 			}
 	
+	
 			int calcValue = checkCalculusType(result.getTableType());
 	
 			finalPriceSum = askingPriceSum - (askingPriceSum * calcValue / 100);
@@ -53,7 +54,7 @@ public class CalculusSteps extends AbstractSteps {
 			result = 50;
 		}
 		if (tableType.contains("0")) {
-			result = 100;
+			result = 0;
 		}
 		return result;
 	}
