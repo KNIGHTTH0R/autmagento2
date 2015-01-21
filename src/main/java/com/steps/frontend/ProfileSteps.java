@@ -19,6 +19,10 @@ public class ProfileSteps extends AbstractSteps{
 		waitABit(9000);
 	}
 
+	public void grabOrderHistory() {
+		profileHistoryPage().grabOrderHistory();
+	}
+
 
 
 }

@@ -67,7 +67,7 @@ public class US001ValidateUserProfileOrderTest extends BaseTest{
 		frontEndSteps.performLogin(username, password);
 		headerSteps.goToProfile();
 		profileSteps.openProfileHistory();
-		profileSteps.waitMore();
+		profileSteps.grabOrderHistory();
 		
 	}
 
