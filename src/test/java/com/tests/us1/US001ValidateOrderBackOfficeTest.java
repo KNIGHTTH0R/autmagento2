@@ -37,6 +37,8 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		backEndSteps.findOrderByOrderId(orderId);
 		backEndSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = backEndSteps.grabOrderData();
+//		backEndSteps.grabOrder
+//		backEndSteps.grabOrderTotals();
 		
 		PrintUtils.printOrderItemsList(orderItemsList);
 	}
