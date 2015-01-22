@@ -30,13 +30,8 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void redirectToSalesOrders() {
-		navigationPage().clickOnSales();
-
 		navigationPage().clickOrdersPage();
-//		String url = navigationPage().getOrdersPage();
-//		getDriver().get(url);
-//		
-//		waitABit(8000);
+		navigationPage().clickOnSales();
 	}
 
 	@Step
@@ -68,6 +63,18 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public String extractEmailConfirmationStatus() {
 		return customerDetailsHomePage().extractEmailConfirmationStatus();
+	}
+
+	@Step
+	public void findOrderByOrderId(String orderId) {
+		orderListPage().inputOderId(orderId);
+		orderListPage().clickOnSearch();
+		waitABit(5000);
+	}
+
+	@Step
+	public void openOrder(String orderId) {
+		orderListPage().openOrderDetails(orderId);		
 	}
 
 }

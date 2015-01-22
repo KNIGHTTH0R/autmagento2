@@ -3,11 +3,12 @@ package com.tools;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
-import com.pages.backend.CustomerDetailsHomePage;
-import com.pages.backend.CustomerListPage;
-import com.pages.backend.LeadSettingsPage;
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
+import com.pages.backend.customer.CustomerListPage;
+import com.pages.backend.customer.details.CustomerDetailsHomePage;
+import com.pages.backend.customer.details.LeadSettingsPage;
+import com.pages.backend.orders.OrderListPage;
 import com.pages.external.MailinatorHomePage;
 import com.pages.external.MailinatorPage;
 import com.pages.frontend.CreateCustomerPage;
@@ -63,6 +64,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public LeadSettingsPage leadSettingsPage() {
 		return getPages().currentPageAt(LeadSettingsPage.class);
+	}
+	
+	public OrderListPage orderListPage(){
+		return getPages().currentPageAt(OrderListPage.class);
 	}
 
 	// -----------------------FE-----------------------------------

@@ -19,7 +19,6 @@ public class NavigationPage extends AbstractPage {
 
 	public void clickOnCustomers() {
 		element(navigationBar).waitUntilVisible();
-
 		evaluateJavascript("jQuery.noConflict();");
 		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
 
@@ -34,12 +33,16 @@ public class NavigationPage extends AbstractPage {
 
 	public void clickOnSales() {
 		element(navigationBar).waitUntilVisible();
-
 		evaluateJavascript("jQuery.noConflict();");
-		WebElement salesButton = navigationBar.findElement(By.cssSelector("li:nth-child(2) > a"));
 
-		salesButton.click();
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
 
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Aufträge")) {
+				elementNow.click();
+				break;
+			}
+		}
 	}
 
 	public String getManageCustomersPage() {
@@ -80,12 +83,16 @@ public class NavigationPage extends AbstractPage {
 
 	public void clickOrdersPage() {
 		element(navigationBar).waitUntilVisible();
-
 		evaluateJavascript("jQuery.noConflict();");
-		WebElement salesButton = navigationBar.findElement(By.cssSelector("ul > li:nth-child(1) > a"));
 
-		element(salesButton).waitUntilVisible();
-		salesButton.click();
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Verkäufe")) {
+				elementNow.click();
+				break;
+			}
+		}
 
 	}
 }

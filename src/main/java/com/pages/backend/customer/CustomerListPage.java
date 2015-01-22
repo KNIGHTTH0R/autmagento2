@@ -1,4 +1,4 @@
-package com.pages.backend;
+package com.pages.backend.customer;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class CustomerListPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
-		waitABit(2000);
+//		waitABit(2000);
 	}
 	
 	public void openCustomerDetails(String searchTerm){

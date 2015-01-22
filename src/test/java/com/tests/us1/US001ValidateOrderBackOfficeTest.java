@@ -14,35 +14,25 @@ import com.tools.Constants;
 import com.tools.data.StylistDataModel;
 import com.tools.requirements.Application;
 
-
-
 @WithTag(name = "US001", type = "backend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US001ValidateOrderBackOfficeTest extends BaseTest{
+public class US001ValidateOrderBackOfficeTest extends BaseTest {
 
+	@Steps
+	public BackEndSteps backEndSteps;
 	
-		@Steps
-		public BackEndSteps backEndSteps;
+	private String orderId = "staging100050793";
 
-		public StylistDataModel validationModel;
-
-		private String stylistName;
-		
-		
-		/**
-		 * BackEnd steps in this test
-		 */
-		@Test
+	/**
+	 * BackEnd steps in this test
+	 */
+	@Test
 		public void us001ValidateOrderBackOfficeTest() {
 			backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
-			// backEndSteps.dismissPopUp();
 			backEndSteps.redirectToSalesOrders();
-//			backEndSteps.searchForEmail(stylistName);
-//			backEndSteps.openCustomerDetails(stylistName);
-//			backEndSteps.clickOnLeadSettings();
-//			validationModel = backEndSteps.grabLeadSettingsData();
-
+			backEndSteps.findOrderByOrderId(orderId);
+			backEndSteps.openOrder(orderId);
+//			backEndSteps.grabOrderData();
 		}
-
 }
