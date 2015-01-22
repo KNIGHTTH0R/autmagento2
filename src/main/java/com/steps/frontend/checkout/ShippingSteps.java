@@ -5,8 +5,8 @@ import java.util.List;
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
-import com.tools.data.CartProductModel;
-import com.tools.data.CartTotalsModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
 
 public class ShippingSteps extends AbstractSteps{
 

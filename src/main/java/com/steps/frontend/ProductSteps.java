@@ -5,7 +5,7 @@ import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.AbstractSteps;
 import com.tools.Constants;
-import com.tools.data.ProductBasicModel;
+import com.tools.data.frontend.ProductBasicModel;
 
 public class ProductSteps extends AbstractSteps{
 

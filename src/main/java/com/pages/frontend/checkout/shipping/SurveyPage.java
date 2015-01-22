@@ -10,8 +10,8 @@ import org.openqa.selenium.WebElement;
 
 import com.tools.AbstractPage;
 import com.tools.PrintUtils;
-import com.tools.data.CartProductModel;
-import com.tools.data.CartTotalsModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
 
 public class SurveyPage extends AbstractPage{
 

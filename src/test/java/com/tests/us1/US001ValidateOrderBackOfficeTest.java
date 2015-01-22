@@ -13,16 +13,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
+import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.data.OrderItemModel;
-
 import com.tools.data.OrderTotalsModel;
-
 import com.tools.data.OrderModel;
+import com.tools.data.backend.OrderItemModel;
 import com.tools.persistance.MongoReader;
-
 import com.tools.requirements.Application;
 
 @WithTag(name = "US001", type = "backend")
@@ -32,6 +30,8 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
+	@Steps
+	public OrdersSteps ordersSteps;
 
 	private String orderId = "";
 
@@ -56,10 +56,10 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	public void us001ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.redirectToSalesOrders();
-		backEndSteps.findOrderByOrderId(orderId);
-		backEndSteps.openOrder(orderId);
-		List<OrderItemModel> orderItemsList = backEndSteps.grabOrderData();
-		OrderTotalsModel ordertotal = backEndSteps.grabTotals();
+		ordersSteps.findOrderByOrderId(orderId);
+		ordersSteps.openOrder(orderId);
+		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
+		OrderTotalsModel ordertotal = ordersSteps.grabTotals();
 		PrintUtils.printOrderTotals(ordertotal);
 //		backEndSteps.grabOrder
 //		backEndSteps.grabOrderTotals();

@@ -16,9 +16,9 @@ import com.steps.backend.BackEndSteps;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tools.Constants;
-import com.tools.data.AddressModel;
-import com.tools.data.CustomerFormModel;
 import com.tools.data.StylistDataModel;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)

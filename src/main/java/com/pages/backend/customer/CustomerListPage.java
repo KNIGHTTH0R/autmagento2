@@ -29,7 +29,6 @@ public class CustomerListPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
-//		waitABit(2000);
 	}
 	
 	public void openCustomerDetails(String searchTerm){

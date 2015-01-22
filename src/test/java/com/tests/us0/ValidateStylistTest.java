@@ -18,8 +18,8 @@ import com.steps.ValidationSteps;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.data.CustomerConfigurationModel;
 import com.tools.data.StylistDataModel;
+import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

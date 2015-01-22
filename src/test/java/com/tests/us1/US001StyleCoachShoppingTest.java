@@ -21,7 +21,6 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
-import com.steps.frontend.checkout.CalculusSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -30,12 +29,13 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.data.AddressModel;
+import com.tools.calculation.CartTotalCalculation;
 import com.tools.data.CalculationModel;
-import com.tools.data.CartProductModel;
-import com.tools.data.CartTotalsModel;
-import com.tools.data.CreditCardModel;
-import com.tools.data.ProductBasicModel;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US001", type = "frontend")
@@ -63,8 +63,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public EmailSteps emailSteps;
-	@Steps
-	public CalculusSteps calculusStep;
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
@@ -172,14 +170,14 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
 		
-		CalculationModel calc25 = calculusStep.calculateTableProducts(cartProductsWith25Discount);
-		CalculationModel calc50 = calculusStep.calculateTableProducts(cartProductsWith50Discount);
-		CalculationModel calc00 = calculusStep.calculateTableProducts(cartMarketingMaterialsProducts);
+		CalculationModel calc25 = CartTotalCalculation.calculateTableProducts(cartProductsWith25Discount);
+		CalculationModel calc50 = CartTotalCalculation.calculateTableProducts(cartProductsWith50Discount);
+		CalculationModel calc00 = CartTotalCalculation.calculateTableProducts(cartMarketingMaterialsProducts);
 		calcList.add(calc25);
 		calcList.add(calc50);
 		calcList.add(calc00);
 		
-		CalculationModel totalsCalculated = calculusStep.calculateTotalSum(calcList);
+		CalculationModel totalsCalculated = CartTotalCalculation.calculateTotalSum(calcList);
 		
 		checkoutValidationSteps.checkTotals(totalsCalculated, cartTotals);
 	}

@@ -6,9 +6,9 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
 import com.tools.Constants;
-import com.tools.data.OrderItemModel;
 import com.tools.data.OrderTotalsModel;
 import com.tools.data.StylistDataModel;
+import com.tools.data.backend.OrderItemModel;
 
 public class BackEndSteps extends AbstractSteps {
 
@@ -69,26 +69,6 @@ public class BackEndSteps extends AbstractSteps {
 		return customerDetailsHomePage().extractEmailConfirmationStatus();
 	}
 
-	@Step
-	public void findOrderByOrderId(String orderId) {
-		orderListPage().inputOderId(orderId);
-		orderListPage().clickOnSearch();
-//		waitABit(5000);
-	}
 
-	@Step
-	public void openOrder(String orderId) {
-		orderListPage().openOrderDetails(orderId);
-//		waitABit(Constants.TIME_CONSTANT);
-	}
-
-	@Step
-	public List<OrderItemModel> grabOrderData() {
-		return orderItemsPage().grabOrderItems();
-	}
-	@Step
-	public OrderTotalsModel grabTotals() {
-		return orderTotalsPage().grabTotals();
-	}
 
 }

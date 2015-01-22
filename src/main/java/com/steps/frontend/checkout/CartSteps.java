@@ -7,8 +7,8 @@ import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.AbstractSteps;
 import com.tools.PrintUtils;
-import com.tools.data.CartProductModel;
-import com.tools.data.CartTotalsModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
 
 public class CartSteps extends  AbstractSteps{
 	

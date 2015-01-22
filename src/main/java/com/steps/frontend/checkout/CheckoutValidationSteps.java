@@ -12,9 +12,9 @@ import org.junit.Assert;
 import com.tools.AbstractSteps;
 import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
-import com.tools.data.CartProductModel;
-import com.tools.data.CartTotalsModel;
-import com.tools.data.ProductBasicModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ProductBasicModel;
 
 public class CheckoutValidationSteps extends AbstractSteps {
 

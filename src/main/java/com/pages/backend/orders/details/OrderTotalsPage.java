@@ -12,8 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.AbstractPage;
 import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.data.OrderItemModel;
 import com.tools.data.OrderTotalsModel;
+import com.tools.data.backend.OrderItemModel;
 
 public class OrderTotalsPage extends AbstractPage {
 
@@ -52,9 +52,6 @@ public class OrderTotalsPage extends AbstractPage {
 				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
 				result.setSubtotal((valueTransformer));
 			}
-			
-		
-			
 			
 		}
 		return result;

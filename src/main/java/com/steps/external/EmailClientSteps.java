@@ -12,7 +12,6 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public void openMailinator() {
 		waitABit(10000);
-
 		mailinatorHomePage().open();
 	}
 
@@ -20,7 +19,6 @@ public class EmailClientSteps extends AbstractSteps {
 	public String grabEmail(String email) {
 
 		waitABit(5000);
-
 		String url = Constants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 
 		System.out.println("URL : " + url);
@@ -33,7 +31,6 @@ public class EmailClientSteps extends AbstractSteps {
 			String confirmLink = mailinatorPage().confirmEmail();
 
 			waitABit(2000);
-
 			getDriver().get(confirmLink);
 			welcomeMessage = confirmLink;
 		}

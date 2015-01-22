@@ -4,7 +4,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.AbstractSteps;
-import com.tools.data.ProductBasicModel;
+import com.tools.data.frontend.ProductBasicModel;
 
 public class SearchSteps extends AbstractSteps{
 
