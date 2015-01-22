@@ -19,10 +19,8 @@ public class NavigationPage extends AbstractPage {
 
 	public void clickOnCustomers() {
 		element(navigationBar).waitUntilVisible();
-
 		evaluateJavascript("jQuery.noConflict();");
-		List<WebElement> elementList = navigationBar.findElements(By
-				.cssSelector("li > a"));
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
 
 		for (WebElement elementNow : elementList) {
 			// System.out.println(elementNow.getText());
@@ -33,12 +31,25 @@ public class NavigationPage extends AbstractPage {
 		}
 	}
 
+	public void clickOnSales() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Aufträge")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
+
 	public String getManageCustomersPage() {
 		String url = "";
 		element(navigationBar).waitUntilVisible();
 
-		List<WebElement> elementList = navigationBar.findElements(By
-				.cssSelector("li > a"));
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
 
 		for (WebElement elementNow : elementList) {
 			// System.out.println(elementNow.getText());
@@ -55,7 +66,33 @@ public class NavigationPage extends AbstractPage {
 	public void dismissPopUp() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(popUpWindow).waitUntilVisible();
-		popUpWindow.findElement(By.cssSelector("div.message-popup-head > a"))
-				.click();
+		popUpWindow.findElement(By.cssSelector("div.message-popup-head > a")).click();
+	}
+
+	public String getOrdersPage() {
+
+		element(navigationBar).waitUntilVisible();
+
+		evaluateJavascript("jQuery.noConflict();");
+		WebElement salesButton = navigationBar.findElement(By.cssSelector("ul > li:nth-child(1) > a"));
+
+		String ordersURL = salesButton.getAttribute("href");
+
+		return ordersURL;
+	}
+
+	public void clickOrdersPage() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Verkäufe")) {
+				elementNow.click();
+				break;
+			}
+		}
+
 	}
 }

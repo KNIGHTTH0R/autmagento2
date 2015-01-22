@@ -3,11 +3,12 @@ package com.tools;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
-import com.pages.backend.CustomerDetailsHomePage;
-import com.pages.backend.CustomerListPage;
-import com.pages.backend.LeadSettingsPage;
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
+import com.pages.backend.customer.CustomerListPage;
+import com.pages.backend.customer.details.CustomerDetailsHomePage;
+import com.pages.backend.customer.details.LeadSettingsPage;
+import com.pages.backend.orders.OrderListPage;
 import com.pages.external.MailinatorHomePage;
 import com.pages.external.MailinatorPage;
 import com.pages.frontend.CreateCustomerPage;
@@ -24,6 +25,8 @@ import com.pages.frontend.checkout.payment.PaymentPage;
 import com.pages.frontend.checkout.shipping.BillingFormPage;
 import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
+import com.pages.frontend.profile.DashboardMenuPage;
+import com.pages.frontend.profile.ProfileHistoryPage;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -61,6 +64,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public LeadSettingsPage leadSettingsPage() {
 		return getPages().currentPageAt(LeadSettingsPage.class);
+	}
+	
+	public OrderListPage orderListPage(){
+		return getPages().currentPageAt(OrderListPage.class);
 	}
 
 	// -----------------------FE-----------------------------------
@@ -122,6 +129,15 @@ public class AbstractSteps extends ScenarioSteps {
 	
 	public SuccessPage successPage(){
 		return getPages().currentPageAt(SuccessPage.class);
+	}
+	
+	//Profile
+	public DashboardMenuPage dashboardMenuPage(){
+		return getPages().currentPageAt(DashboardMenuPage.class);
+	}
+	
+	public ProfileHistoryPage profileHistoryPage(){
+		return getPages().currentPageAt(ProfileHistoryPage.class);
 	}
 	
 

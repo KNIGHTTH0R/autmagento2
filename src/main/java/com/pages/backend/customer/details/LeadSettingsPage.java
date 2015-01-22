@@ -1,4 +1,4 @@
-package com.pages.backend;
+package com.pages.backend.customer.details;
 
 import org.openqa.selenium.WebElement;
 
