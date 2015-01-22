@@ -1,9 +1,12 @@
 package com.steps.backend;
 
+import java.util.List;
+
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
 import com.tools.Constants;
+import com.tools.data.OrderItemModel;
 import com.tools.data.StylistDataModel;
 
 public class BackEndSteps extends AbstractSteps {
@@ -23,8 +26,8 @@ public class BackEndSteps extends AbstractSteps {
 	public void redirectToManageCustomers() {
 		navigationPage().clickOnCustomers();
 
-//		@SuppressWarnings("unused")
-//		String url = navigationPage().getManageCustomersPage();
+		// @SuppressWarnings("unused")
+		// String url = navigationPage().getManageCustomersPage();
 		// getDriver().get(url);
 	}
 
@@ -69,12 +72,18 @@ public class BackEndSteps extends AbstractSteps {
 	public void findOrderByOrderId(String orderId) {
 		orderListPage().inputOderId(orderId);
 		orderListPage().clickOnSearch();
-		waitABit(5000);
+//		waitABit(5000);
 	}
 
 	@Step
 	public void openOrder(String orderId) {
-		orderListPage().openOrderDetails(orderId);		
+		orderListPage().openOrderDetails(orderId);
+//		waitABit(Constants.TIME_CONSTANT);
+	}
+
+	@Step
+	public List<OrderItemModel> grabOrderData() {
+		return orderItemsPage().grabOrderItems();
 	}
 
 }
