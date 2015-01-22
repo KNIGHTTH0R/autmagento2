@@ -211,7 +211,6 @@ public class CartPage extends AbstractPage {
 	public void updateProductQuantity(String quantity,String... terms){
 		element(cartTable).waitUntilVisible();
 		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
-		boolean found = false;
 		boolean containsTerms = true;
 		for (WebElement webElement : entryList) {
 			

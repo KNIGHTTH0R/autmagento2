@@ -1,8 +1,6 @@
 package com.steps.frontend.checkout;
 
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
 
 import com.tools.AbstractSteps;
