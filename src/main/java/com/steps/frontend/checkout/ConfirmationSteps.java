@@ -13,30 +13,27 @@ public class ConfirmationSteps extends AbstractSteps{
 
 	private static final long serialVersionUID = 4739618000222382968L;
 	
-	@Step
 	public AddressModel grabSippingData(){
 		return confirmationPage().grabShippingData();
 	}
 	
-	@Step
 	public AddressModel grabBillingData(){
 		return confirmationPage().grabBillingData();
+	}
+	
+	public List<CartProductModel> grabProductsList() {
+		return confirmationPage().grabProductsList();
+	}
+	
+	public CartTotalsModel grabSurveyData() {
+		return confirmationPage().grabSurveyData();
 	}
 
 	@Step
 	public void agreeAndCheckout() {
 		confirmationPage().clickIAgree();
 		confirmationPage().clickOnSubmit();
-		
 	}
-//	@Step
-	public List<CartProductModel> grabProductsList() {
-		return confirmationPage().grabProductsList();
-	}
-	
-//	@Step
-	public CartTotalsModel grabSurveyData() {
-		return confirmationPage().grabSurveyData();
-	}
+
 
 }

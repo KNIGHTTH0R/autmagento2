@@ -149,8 +149,6 @@ public class CartPage extends AbstractPage {
 		element(totalsTable).waitUntilVisible();
 		List<WebElement> valuesList = totalsTable.findElements(By.cssSelector("tr"));
 		
-		System.out.println("******PUSHKE ----- hamster");
-		
 		//TODO if totalAmount is < 150  than shipping element is not present- {"method":"css selector","selector":"tbody tr:nth-child(5) > td:last-child"}
 		
 		for (WebElement itemNow : valuesList) {

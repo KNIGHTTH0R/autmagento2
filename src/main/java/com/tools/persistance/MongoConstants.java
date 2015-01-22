@@ -29,8 +29,16 @@ public class MongoConstants {
 	public static final String CLIENT_NAME = "clientName";
 	
 	//Customer configuration model
-	
 	public static final String CUSTOMER_CONFIGURATION_MODEL = "CustomerConfigurationModel";
 	public static final String EMAIL_ACTIVE = "emailActive";
 	public static final String ACCOUNT_ACTIVE = "accountActive";
+	
+	//OrderModel
+	public static final String ORDER_MODEL = "OrderModel";
+	public static final String ORDER_ID = "orderId";
+	public static final String DATE = "date";
+	public static final String INVOICE_CONTACT = "invoiceTo";
+	public static final String DELIVERY_CONTACT = "deliveryTo";
+	public static final String TOTAL_PRICE = "totalPrice";
+	public static final String STATUS = "status";
 }

@@ -48,31 +48,20 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
 	public ProductSteps productSteps;
-	
 	@Steps
 	public SearchSteps searchSteps;
-	
 	@Steps
 	public HeaderSteps headerSteps;
-	
 	@Steps
 	public CartSteps cartSteps;
-	
 	@Steps
 	public CalculusSteps calculusSteps;
-	
 	@Steps
 	public CheckoutValidationSteps validationSteps;
-	
-	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
-	
 	@Steps
 	public ShippingSteps shippingSteps;
-	
 	@Steps
 	public ConfirmationSteps confirmationSteps;
-	
 	@Steps
 	public PaymentSteps paymentSteps;
 	
@@ -197,28 +186,26 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 
 		confirmationSteps.agreeAndCheckout();
 		
-		checkoutValidationSteps.verifySuccessMessage();
+		validationSteps.verifySuccessMessage();
 		
 		System.out.println("CART PHASE PRODUCTS VALIDATION");
-		checkoutValidationSteps.validateProducts(productsList, cartProducts);
+		validationSteps.validateProducts(productsList, cartProducts);
 		System.out.println("SHIPPING PHASE PRODUCTS VALIDATION");
-		checkoutValidationSteps.validateProducts(productsList, shippingProducts);
+		validationSteps.validateProducts(productsList, shippingProducts);
 		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
-		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
-		
-		
+		validationSteps.validateProducts(productsList, confirmationProducts);
 		
 		PrintUtils.printCartTotals(cartTotals);
 		
 		System.out.println("TOTALS CALCULATED");
-		CartTotalsModel cartBigTotal = checkoutValidationSteps.calculateCartProducts(cartProducts);
+		CartTotalsModel cartBigTotal = validationSteps.calculateCartProducts(cartProducts);
 		PrintUtils.printCartTotals(cartBigTotal);
 		
 		System.out.println("-----DOAMNE AJUTA-------");
 		
-		checkoutValidationSteps.checkTotals(sumedTotals, cartTotals);
-		checkoutValidationSteps.checkTotals(sumedTotals, shippingTotals);
-		checkoutValidationSteps.checkTotals(sumedTotals, confirmationTotals);
+		validationSteps.checkTotals(sumedTotals, cartTotals);
+		validationSteps.checkTotals(sumedTotals, shippingTotals);
+		validationSteps.checkTotals(sumedTotals, confirmationTotals);
 		
 		
 	}
