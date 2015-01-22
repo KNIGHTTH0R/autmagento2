@@ -42,8 +42,8 @@ public class PrintUtils {
 		System.out.println("------------------------");
 //		System.out.println(model.getTableType());
 //		System.out.println(model.getRetailPrice());
-		System.out.println(model.getAskingPrice());
-		System.out.println(model.getFinalPrice());
+		System.out.println(model.formatDouble(model.getAskingPrice()));
+		System.out.println(model.formatDouble(model.getFinalPrice()));
 		System.out.println(model.getIpPoints());
 
 	}

@@ -2,6 +2,7 @@ package com.steps.frontend.checkout;
 
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 import com.tools.AbstractSteps;
@@ -11,7 +12,7 @@ import com.tools.data.CartProductModel;
 
 public class CalculusSteps extends AbstractSteps {
 	
-	DecimalFormat df = new DecimalFormat("#.00"); 
+	
 
 	private static final long serialVersionUID = -2988085683745584124L;
 
@@ -68,7 +69,7 @@ public class CalculusSteps extends AbstractSteps {
 	}
 	
 	// @Step
-	public CalculationModel sumTotalsOfProductsWithDifferentDiscountsForCalculationModel(List<CalculationModel> totalsList) {
+	public CalculationModel calculateTotalSum(List<CalculationModel> totalsList) {
 
 		CalculationModel result = new CalculationModel();	
 		
@@ -82,10 +83,12 @@ public class CalculusSteps extends AbstractSteps {
 			ipPoints += total.getIpPoints();
 			
 		}
-		System.out.println(df.format(askingPrice));
-		result.setAskingPrice(Double.parseDouble(df.format(askingPrice)));
-		result.setFinalPrice(Double.parseDouble(df.format(finalPrice)));
+		result.setAskingPrice(askingPrice);
+		result.setFinalPrice(finalPrice);
 		result.setIpPoints(ipPoints);
+//		result.setAskingPrice(Double.parseDouble(df.format(askingPrice)));
+//		result.setFinalPrice(Double.parseDouble(df.format(finalPrice)));
+//		result.setIpPoints(ipPoints);
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + result.getAskingPrice());
 		
 		return result;

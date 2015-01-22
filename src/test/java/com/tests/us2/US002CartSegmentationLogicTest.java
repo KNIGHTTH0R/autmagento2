@@ -160,11 +160,13 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		CalculationModel calculationModelMarketingMaterial = calculusSteps.calculateTableProducts(cartMarketingMaterialsProducts);
 		totalsList.add(calculationModelMarketingMaterial);	
 		
+		PrintUtils.printCalculationModel(calculationModelMarketingMaterial);
+		
 //		CalculationModel calculationModel50discount = calculusSteps.calculateTableProducts(cartProductswith50Discount);
 //		totalsList.add(calculationModel50discount);		
 		
 
-		CalculationModel sumedTotals  = calculusSteps.sumTotalsOfProductsWithDifferentDiscountsForCalculationModel(totalsList);
+		CalculationModel sumedTotals  = calculusSteps.calculateTotalSum(totalsList);
 //		System.out.println("-----BUBA------");
 //		System.out.println(sumedTotals.getAskingPrice());
 //		System.out.println(sumedTotals.getFinalPrice());

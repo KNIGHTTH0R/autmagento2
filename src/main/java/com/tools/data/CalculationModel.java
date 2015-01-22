@@ -1,5 +1,8 @@
 package com.tools.data;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class CalculationModel {
 
 	private String tableType;
@@ -7,6 +10,12 @@ public class CalculationModel {
 	private double askingPrice;
 	private double finalPrice;
 	private int ipPoints;
+	
+	NumberFormat df = new DecimalFormat("#.00"); 
+	
+	public String formatDouble(double value){
+		return df.format(value);
+	}
 
 	public String getTableType() {
 		return tableType;
