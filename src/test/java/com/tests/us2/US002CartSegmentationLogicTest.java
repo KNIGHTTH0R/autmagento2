@@ -23,6 +23,9 @@ import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CalculusSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
+import com.steps.frontend.checkout.ConfirmationSteps;
+import com.steps.frontend.checkout.PaymentSteps;
+import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
@@ -59,8 +62,18 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	
 	@Steps
 	public CheckoutValidationSteps validationSteps;
+	
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
+	
+	@Steps
+	public ShippingSteps shippingSteps;
+	
+	@Steps
+	public ConfirmationSteps confirmationSteps;
+	
+	@Steps
+	public PaymentSteps paymentSteps;
 	
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
@@ -92,6 +105,12 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 				}
 			}
 		}
+		
+		creditCardData.setCardNumber("4111 1111 1111 1111");
+		creditCardData.setCardName("test");
+		creditCardData.setMonthExpiration("06");
+		creditCardData.setYearExpiration("2016");
+		creditCardData.setCvcNumber("737");
 	}
 	
 	@Test
@@ -131,46 +150,56 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		PrintUtils.printList(cartProducts);
 		
-		List<CartProductModel> cartProductswith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
-		
-	
+		List<CartProductModel> cartProductswith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();	
+//		List<CartProductModel> cartProductswith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
 		
 		CalculationModel calculationModelWith25Discount = calculusSteps.calculateTableProducts(cartProductswith25Discount);
 		totalsList.add(calculationModelWith25Discount);
 		
 		CalculationModel calculationModelMarketingMaterial = calculusSteps.calculateTableProducts(cartMarketingMaterialsProducts);
-		totalsList.add(calculationModelMarketingMaterial);
-		
-		
-		
-	
+		totalsList.add(calculationModelMarketingMaterial);	
 		
 //		CalculationModel calculationModel50discount = calculusSteps.calculateTableProducts(cartProductswith50Discount);
-//		totalsList.add(calculationModel50discount);
-//		CalculationModel calculationModelMarketingMaterial = calculusSteps.calculateTableProducts(cartMarketingMaterialsProducts);
-//		totalsList.add(calculationModelMarketingMaterial);
-		
+//		totalsList.add(calculationModel50discount);		
 		
 
-		CalculationModel sumedTotals  = validationSteps.sumTotalsOfProductsWithDifferentDiscountsForCalculationModel(totalsList);
-		System.out.println("-----BUBA------");
-		System.out.println(sumedTotals.getAskingPrice());
-		System.out.println(sumedTotals.getFinalPrice());
-		System.out.println(sumedTotals.getIpPoints());
+		CalculationModel sumedTotals  = calculusSteps.sumTotalsOfProductsWithDifferentDiscountsForCalculationModel(totalsList);
+//		System.out.println("-----BUBA------");
+//		System.out.println(sumedTotals.getAskingPrice());
+//		System.out.println(sumedTotals.getFinalPrice());
+//		System.out.println(sumedTotals.getIpPoints());
+//		
+//		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
+//		CartTotalsModel cartTotals = cartSteps.grabTotals();
+//		System.out.println(cartTotals.getSubtotal());
+//		
+//		cartSteps.clickGoToShipping();		
+//		
+//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+//		System.out.println(shippingTotals.getSubtotal());
+//		
+//		shippingSteps.clickGoToPaymentMethod();
+//
+//		paymentSteps.expandCreditCardForm();
+//
+//		paymentSteps.fillCreditCardForm(creditCardData);
+//		
+//		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
+//		System.out.println(confirmationTotals.getSubtotal());
+//		
+//		PrintUtils.printCartTotals(cartTotals);
+//		
+//		System.out.println("TOTALS CALCULATED");
+//		CartTotalsModel cartBigTotal = checkoutValidationSteps.calculateCartProducts(cartProducts);
+//		PrintUtils.printCartTotals(cartBigTotal);
+//		
+//		System.out.println("-----DOAMNE AJUTA-------");
+//		
+//		checkoutValidationSteps.checkTotals(sumedTotals, cartTotals);
+//		checkoutValidationSteps.checkTotals(sumedTotals, shippingTotals);
+//		checkoutValidationSteps.checkTotals(sumedTotals, confirmationTotals);
 		
-		System.out.println("TOTALS FROM THE BOTTOM");
-		CartTotalsModel cartTotals = cartSteps.grabTotals();
-		PrintUtils.printCartTotals(cartTotals);
-		
-		System.out.println("TOTALS CALCULATED");
-		CartTotalsModel cartBigTotal = checkoutValidationSteps.calculateCartProducts(cartProducts);
-		PrintUtils.printCartTotals(cartBigTotal);
-		
-		checkoutValidationSteps.checkTotalsInCart(cartTotals, cartBigTotal);
-
-		
-	//	validationSteps.checkTotalsInCart(cartTotals, sumedTotals);
 		
 	}
 	

@@ -40,8 +40,8 @@ public class PrintUtils {
 	public static void printCalculationModel(CalculationModel model) {
 		System.out.println(" *** Print Total *** ");
 		System.out.println("------------------------");
-		System.out.println(model.getTableType());
-		System.out.println(model.getRetailPrice());
+//		System.out.println(model.getTableType());
+//		System.out.println(model.getRetailPrice());
 		System.out.println(model.getAskingPrice());
 		System.out.println(model.getFinalPrice());
 		System.out.println(model.getIpPoints());

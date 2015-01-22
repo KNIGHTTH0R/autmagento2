@@ -164,13 +164,11 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
 		
-
-		
-		
+//		
 //		List<EmailModel> emailList = GmailConnector.readGmail();
-		
+//		
 //		PrintUtils.printEmailList(emailList);
-		
+//	
 //		emailSteps.printEmailContent(emailList.get(0).getContent());
 		
 //		System.out.println("---------------");

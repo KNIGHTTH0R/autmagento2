@@ -10,8 +10,10 @@ import org.openqa.selenium.WebElement;
 
 import com.tools.AbstractPage;
 import com.tools.Constants;
+import com.tools.PrintUtils;
 import com.tools.data.AddressModel;
 import com.tools.data.CartProductModel;
+import com.tools.data.CartTotalsModel;
 
 public class ConfirmationPage extends AbstractPage {
 
@@ -32,6 +34,9 @@ public class ConfirmationPage extends AbstractPage {
 	
 	@FindBy(css = "div#cart-section-1 div.items-section")
 	private WebElement productListContainer;
+	
+	@FindBy(css = "div.checkout-totals-section")
+	private WebElement surveyTotalsContainer;
 
 	public AddressModel grabAddressData(WebElement addressPreview) {
 		AddressModel result = new AddressModel();
@@ -130,6 +135,18 @@ public class ConfirmationPage extends AbstractPage {
 	public void clickOnSubmit() {
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
+	}
+	
+	public CartTotalsModel grabSurveyData(){
+		CartTotalsModel result = new CartTotalsModel();
+		element(surveyTotalsContainer).waitUntilVisible();
+		
+		result.setSubtotal(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.subtotal td.a-right")).getText()));
+		result.setDiscount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.all_discounts td.a-right")).getText()));
+		result.setShipping(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
+		result.setTotalAmount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
+		
+		return result;
 	}
 	
 	public List<CartProductModel> grabProductsList() {

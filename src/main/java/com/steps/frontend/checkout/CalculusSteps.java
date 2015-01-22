@@ -1,6 +1,7 @@
 package com.steps.frontend.checkout;
 
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import com.tools.AbstractSteps;
@@ -9,6 +10,8 @@ import com.tools.data.CalculationModel;
 import com.tools.data.CartProductModel;
 
 public class CalculusSteps extends AbstractSteps {
+	
+	DecimalFormat df = new DecimalFormat("#.00"); 
 
 	private static final long serialVersionUID = -2988085683745584124L;
 
@@ -47,6 +50,7 @@ public class CalculusSteps extends AbstractSteps {
 		return result;
 
 	}	
+	
 
 
 	private int checkCalculusType(String tableType) {
@@ -61,6 +65,30 @@ public class CalculusSteps extends AbstractSteps {
 		if (tableType.contains("0")) {
 			result = 0;
 		}
+		return result;
+	}
+	
+	// @Step
+	public CalculationModel sumTotalsOfProductsWithDifferentDiscountsForCalculationModel(List<CalculationModel> totalsList) {
+
+		CalculationModel result = new CalculationModel();	
+		
+		 double askingPrice = 0;
+		 double finalPrice = 0;
+		 int ipPoints = 0;
+
+		for (CalculationModel total : totalsList) {
+			askingPrice += total.getAskingPrice();
+			finalPrice += total.getFinalPrice();
+			ipPoints += total.getIpPoints();
+			
+		}
+		System.out.println(df.format(askingPrice));
+		result.setAskingPrice(Double.parseDouble(df.format(askingPrice)));
+		result.setFinalPrice(Double.parseDouble(df.format(finalPrice)));
+		result.setIpPoints(ipPoints);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + result.getAskingPrice());
+		
 		return result;
 	}
 	

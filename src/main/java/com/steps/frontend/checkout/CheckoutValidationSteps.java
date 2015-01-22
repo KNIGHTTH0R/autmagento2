@@ -87,6 +87,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 		return result;
 	}
+	
 
 	// @Step
 	public CartTotalsModel sumTotalsOfProductsWithDifferentDiscountsForCartTotalsModels(List<CartTotalsModel> totalsList) {
@@ -121,27 +122,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		return result;
 	}
 	
-	// @Step
-	public CalculationModel sumTotalsOfProductsWithDifferentDiscountsForCalculationModel(List<CalculationModel> totalsList) {
 
-		CalculationModel result = new CalculationModel();//		
-		
-		 double askingPrice = 0;
-		 double finalPrice = 0;
-		 int ipPoints = 0;
-
-		for (CalculationModel total : totalsList) {
-			askingPrice += total.getAskingPrice();
-			finalPrice += total.getFinalPrice();
-			ipPoints += total.getIpPoints();
-		}
-		result.setAskingPrice((askingPrice));
-		result.setFinalPrice(finalPrice);
-		result.setIpPoints(ipPoints);
-		
-		
-		return result;
-	}
 
 	// @Step
 	public double calculateDiscountValue(CartProductModel cartProductModel) {
@@ -182,24 +163,22 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 	}
 	
-//	@Step
-//	public void checkTotals(CalculationModel calculationModel1, CalculationModel calculationModel2) {
-//
-//		System.out.println("----------SUBTOTAL: " + calculationModel2.getAskingPrice() + " : " + calculationModel1.getAskingPrice());
-//		Assert.assertTrue("The subtotal should be " + calculationModel2.getAskingPrice() + " and it is " + calculationModel1.getAskingPrice() + "!",
-//				calculationModel2.getAskingPrice() == (calculationModel1.getAskingPrice()));
-//
-//		System.out.println("----------FINAL: " + calculationModel2.getFinalPrice() + " : " + calculationModel1.getFinalPrice());
-//		Assert.assertTrue("The discount should be " + calculationModel2.getFinalPrice() + " and it is " + calculationModel1.getFinalPrice() + "!",
-//				calculationModel2.getFinalPrice() == (calculationModel1.getFinalPrice()));
-//
-//		System.out.println("----------IP POINTS: " + calculationModel2.getIpPoints() + " : " + calculationModel1.getIpPoints());
-//		Assert.assertTrue("The total amount should be " + calculationModel2.getIpPoints() + " and it is " + calculationModel1.getIpPoints() + "!",
-//				calculationModel2.getIpPoints() == (calculationModel1.getIpPoints()));
-//		
-//		
-//
-//	}
+	@Step
+	public void checkTotals(CalculationModel calculationModel, CartTotalsModel cartTotalModel) {
+
+		System.out.println("----------SUBTOTAL: " + cartTotalModel.getSubtotal() + " : " + calculationModel.getAskingPrice());
+		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.getAskingPrice() + "!",
+				cartTotalModel.getSubtotal().equals(calculationModel.getAskingPrice()));
+
+		System.out.println("----------FINAL: " + cartTotalModel.getTotalAmount() + " : " + calculationModel.getFinalPrice());
+		Assert.assertTrue("The discount should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.getFinalPrice() + "!",
+				cartTotalModel.getSubtotal().equals(calculationModel.getFinalPrice()));
+
+		System.out.println("----------IP POINTS: " + cartTotalModel.getIpPoints() + " : " + calculationModel.getIpPoints());
+		Assert.assertTrue("The total amount should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
+				cartTotalModel.getIpPoints().equals(calculationModel.getIpPoints()));		
+
+	}
 
 	@Step
 	public void validateProducts(List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {

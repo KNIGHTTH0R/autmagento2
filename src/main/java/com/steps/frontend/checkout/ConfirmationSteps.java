@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Step;
 import com.tools.AbstractSteps;
 import com.tools.data.AddressModel;
 import com.tools.data.CartProductModel;
+import com.tools.data.CartTotalsModel;
 
 public class ConfirmationSteps extends AbstractSteps{
 
@@ -31,6 +32,11 @@ public class ConfirmationSteps extends AbstractSteps{
 //	@Step
 	public List<CartProductModel> grabProductsList() {
 		return confirmationPage().grabProductsList();
+	}
+	
+//	@Step
+	public CartTotalsModel grabSurveyData() {
+		return confirmationPage().grabSurveyData();
 	}
 
 }
