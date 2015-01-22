@@ -9,6 +9,7 @@ import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.EmailModel;
 import com.tools.data.OrderItemModel;
+import com.tools.data.OrderTotalsModel;
 import com.tools.data.ProductBasicModel;
 
 public class PrintUtils {
@@ -47,6 +48,14 @@ public class PrintUtils {
 		System.out.println(model.formatDouble(model.getFinalPrice()));
 		System.out.println(model.getIpPoints());
 
+	}
+	public static void printOrderTotals(OrderTotalsModel model) {
+		System.out.println(" *** Print backend orders Totals  *** ");
+		System.out.println("------------------------");
+		System.out.println(model.getSubtotal());
+		System.out.println(model.getShipping());
+		System.out.println(model.getDiscount());
+		
 	}
 
 	public static double cleanNumberToDouble(String unitPrice) {

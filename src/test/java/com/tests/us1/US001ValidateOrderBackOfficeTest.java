@@ -15,6 +15,7 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.OrderItemModel;
+import com.tools.data.OrderTotalsModel;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US001", type = "backend")
@@ -37,6 +38,8 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		backEndSteps.findOrderByOrderId(orderId);
 		backEndSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = backEndSteps.grabOrderData();
+		OrderTotalsModel ordertotal = backEndSteps.grabTotals();
+		PrintUtils.printOrderTotals(ordertotal);
 //		backEndSteps.grabOrder
 //		backEndSteps.grabOrderTotals();
 		

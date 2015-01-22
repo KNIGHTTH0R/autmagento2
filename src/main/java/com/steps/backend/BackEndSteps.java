@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Step;
 import com.tools.AbstractSteps;
 import com.tools.Constants;
 import com.tools.data.OrderItemModel;
+import com.tools.data.OrderTotalsModel;
 import com.tools.data.StylistDataModel;
 
 public class BackEndSteps extends AbstractSteps {
@@ -84,6 +85,10 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public List<OrderItemModel> grabOrderData() {
 		return orderItemsPage().grabOrderItems();
+	}
+	@Step
+	public OrderTotalsModel grabTotals() {
+		return orderTotalsPage().grabTotals();
 	}
 
 }

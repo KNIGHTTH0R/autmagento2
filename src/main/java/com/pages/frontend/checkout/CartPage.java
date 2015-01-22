@@ -187,14 +187,14 @@ public class CartPage extends AbstractPage {
 			
 		}		
 		
-		resultModel.setSubtotal(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(1) > td:last-child")).getText()));
-		resultModel.setJewelryBonus(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(2) input#jewelry_credits")).getAttribute("value")));
-		resultModel.setDiscount(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(3) > td:last-child")).getText()));
-		resultModel.setTax(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(4) > td:last-child")).getText()));
-		resultModel.setShipping(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(5) > td:last-child")).getText()));
-		resultModel.setShipping(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(5) > td:last-child")).getText()));
-		resultModel.setTotalAmount(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tr.grandtotal > td:last-child")).getText()));
-		resultModel.setIpPoints(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tfoot tr:nth-child(2) > td:last-child")).getText()));
+//		resultModel.setSubtotal(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(1) > td:last-child")).getText()));
+//		resultModel.setJewelryBonus(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(2) input#jewelry_credits")).getAttribute("value")));
+//		resultModel.setDiscount(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(3) > td:last-child")).getText()));
+//		resultModel.setTax(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(4) > td:last-child")).getText()));
+//		resultModel.setShipping(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(5) > td:last-child")).getText()));
+//		resultModel.setShipping(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tbody tr:nth-child(5) > td:last-child")).getText()));
+//		resultModel.setTotalAmount(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tr.grandtotal > td:last-child")).getText()));
+//		resultModel.setIpPoints(PrintUtils.cleanNumberToString(totalsTable.findElement(By.cssSelector("tfoot tr:nth-child(2) > td:last-child")).getText()));
 		
 
 		return resultModel;
