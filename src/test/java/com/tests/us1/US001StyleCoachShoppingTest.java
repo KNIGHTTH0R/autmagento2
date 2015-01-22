@@ -126,8 +126,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		PrintUtils.printList(cartProducts);
 		
-
-		
 //		CartTotalsModel calculatedTotals = checkoutValidationSteps.calculateCartProducts(cartProducts);
 //		checkoutValidationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
 
@@ -145,14 +143,12 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 
 		paymentSteps.fillCreditCardForm(creditCardData);
-//
+
 		AddressModel billingAddress = confirmationSteps.grabBillingData();
 		AddressModel shippingAddress = confirmationSteps.grabSippingData();
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-//		
+
 		confirmationSteps.agreeAndCheckout();
-//		
-//
 		checkoutValidationSteps.verifySuccessMessage();
 		
 		System.out.println("CART PHASE PRODUCTS VALIDATION");
@@ -161,8 +157,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		checkoutValidationSteps.validateProducts(productsList, shippingProducts);
 		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
-		
-
 		
 		
 //		List<EmailModel> emailList = GmailConnector.readGmail();

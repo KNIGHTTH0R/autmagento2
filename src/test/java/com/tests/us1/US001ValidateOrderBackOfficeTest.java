@@ -1,12 +1,12 @@
 package com.tests.us1;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
@@ -34,7 +34,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest{
 		 * BackEnd steps in this test
 		 */
 		@Test
-		public void validateOrderBackendOfficeTest() {
+		public void us001ValidateOrderBackOfficeTest() {
 			backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 			// backEndSteps.dismissPopUp();
 			backEndSteps.redirectToSalesOrders();
