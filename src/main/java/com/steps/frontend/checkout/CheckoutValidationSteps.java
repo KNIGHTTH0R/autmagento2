@@ -3,7 +3,9 @@ package com.steps.frontend.checkout;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 
 import org.junit.Assert;
 
@@ -87,7 +89,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 		return result;
 	}
-	
 
 	// @Step
 	public CartTotalsModel sumTotalsOfProductsWithDifferentDiscountsForCartTotalsModels(List<CartTotalsModel> totalsList) {
@@ -121,8 +122,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
 		return result;
 	}
-	
-
 
 	// @Step
 	public double calculateDiscountValue(CartProductModel cartProductModel) {
@@ -162,25 +161,26 @@ public class CheckoutValidationSteps extends AbstractSteps {
 				cartTotalsModel2.getIpPoints().equals(cartTotalsModel1.getIpPoints()));
 
 	}
-	
+
 	@Step
 	public void checkTotals(CalculationModel calculationModel, CartTotalsModel cartTotalModel) {
 
 		System.out.println("----------SUBTOTAL: " + cartTotalModel.getSubtotal() + " : " + calculationModel.formatDouble(calculationModel.getAskingPrice()));
-		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.formatDouble(calculationModel.getAskingPrice()) + "!",
-				cartTotalModel.getSubtotal().equals(calculationModel.formatDouble(calculationModel.getAskingPrice())));
+		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.formatDouble(calculationModel.getAskingPrice()) + "!", cartTotalModel
+				.getSubtotal().equals(calculationModel.formatDouble(calculationModel.getAskingPrice())));
 
-		System.out.println("----------FINAL: " + cartTotalModel.getTotalAmount() + " : " +  calculationModel.formatDouble(calculationModel.getFinalPrice()));
-		Assert.assertTrue("The discount should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.formatDouble(calculationModel.getFinalPrice()) + "!",
-				cartTotalModel.getTotalAmount().equals(calculationModel.formatDouble(calculationModel.getFinalPrice())));
+//		System.out.println("----------FINAL: " + cartTotalModel.getTotalAmount() + " : " + calculationModel.formatDouble(calculationModel.getFinalPrice()));
+//		Assert.assertTrue("The discount should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.formatDouble(calculationModel.getFinalPrice()) + "!", cartTotalModel
+//				.getTotalAmount().equals(calculationModel.formatDouble(calculationModel.getFinalPrice())));
 
-//		System.out.println("----------IP POINTS: " + cartTotalModel.getIpPoints() + " : " + calculationModel.getIpPoints());
-//		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
-//				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));		
+		System.out.println("----------IP POINTS: " + cartTotalModel.getIpPoints() + " : " + calculationModel.getIpPoints());
+		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
+				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
 
 	}
-	
-	@Step
+
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
 	public void validateProducts(List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {
 
 		for (ProductBasicModel productNow : productsList) {
@@ -190,25 +190,31 @@ public class CheckoutValidationSteps extends AbstractSteps {
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
 			if (compare.getName() != null) {
-
-				Assert.assertTrue("Failure: Price values dont match: " + productNow.getPrice() + " - " + compare.getUnitPrice(), productNow.getPrice().contentEquals(compare.getUnitPrice()));
-				Assert.assertTrue("Failure: Quantity values dont match: " + productNow.getQuantity() + " - " + compare.getQuantity(), productNow.getQuantity().contentEquals(compare.getQuantity()));
-				// Assert.assertTrue("Failure: Type values dont match: " +
-				// productNow.getType() + " - " + compare.getProdCode() ,
-				// productNow.getType().contentEquals(compare.getProdCode()));
-
-			} else{
+				validateMatchPrice(productNow.getPrice(), compare.getUnitPrice());
+				validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
+			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
 		}
 	}
 
+	@Step
+	@Screenshots(onlyOnFailures = true)
+	public void validateMatchPrice(String productNow, String compare) {
+		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+	}
+
+	@Step
+	@Screenshots(onlyOnFailures = true)
+	public void validateMatchQuantity(String productNow, String compare) {
+		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+	}
+
 	private static CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
 		CartProductModel result = new CartProductModel();
-		
 
 		theFor: for (CartProductModel cartProductModel : cartProducts) {
-			System.out.println(productCode + " - "+ cartProductModel.getProdCode());
+			System.out.println(productCode + " - " + cartProductModel.getProdCode());
 			if (cartProductModel.getProdCode().contains(productCode)) {
 				result = cartProductModel;
 				System.out.println("Got One!!!!!");

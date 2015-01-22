@@ -21,6 +21,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
+import com.steps.frontend.checkout.CalculusSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -30,6 +31,7 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.AddressModel;
+import com.tools.data.CalculationModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.CreditCardModel;
@@ -61,10 +63,13 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public EmailSteps emailSteps;
+	@Steps
+	public CalculusSteps calculusStep;
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
 	private CreditCardModel creditCardData = new CreditCardModel();
+	private List<CalculationModel> calcList = new ArrayList<CalculationModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -105,15 +110,15 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
 		ProductBasicModel productData = productSteps.setProductAddToCart("1", "Blue");
 		productsList.add(productData);
-		
+
 		searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
-		
+
 		searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
 		productData = productSteps.setProductAddToCart("2", "0");
 		productsList.add(productData);
-		
+
 		searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
 		productData = productSteps.setProductAddToCart("3", "18");
 		productsList.add(productData);
@@ -123,17 +128,25 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		CartTotalsModel cartTotals = cartSteps.grabTotals();
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
-		
+
+		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
+
+		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
+
+		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+
 		PrintUtils.printList(cartProducts);
-		
-//		CartTotalsModel calculatedTotals = checkoutValidationSteps.calculateCartProducts(cartProducts);
-//		checkoutValidationSteps.checkTotalsInCart(cartTotals, calculatedTotals);
+
+		// CartTotalsModel calculatedTotals =
+		// checkoutValidationSteps.calculateCartProducts(cartProducts);
+		// checkoutValidationSteps.checkTotalsInCart(cartTotals,
+		// calculatedTotals);
 
 		cartSteps.clickGoToShipping();
 
 		// TODO - add billing and shipping address forms
 		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-//		PrintUtils.printCartTotals(shippingTotals);
+		// PrintUtils.printCartTotals(shippingTotals);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
@@ -151,7 +164,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
-		
+
 		System.out.println("CART PHASE PRODUCTS VALIDATION");
 		checkoutValidationSteps.validateProducts(productsList, cartProducts);
 		System.out.println("SHIPPING PHASE PRODUCTS VALIDATION");
@@ -159,23 +172,16 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
 		
-
-//		List<EmailModel> emailList = GmailConnector.readGmail();
-//		
-//		PrintUtils.printEmailList(emailList);
-//	
-//		emailSteps.printEmailContent(emailList.get(0).getContent());
+		CalculationModel calc25 = calculusStep.calculateTableProducts(cartProductsWith25Discount);
+		CalculationModel calc50 = calculusStep.calculateTableProducts(cartProductsWith50Discount);
+		CalculationModel calc00 = calculusStep.calculateTableProducts(cartMarketingMaterialsProducts);
+		calcList.add(calc25);
+		calcList.add(calc50);
+		calcList.add(calc00);
 		
-//		System.out.println("---------------");
-//		System.out.println("!!!!!!" + billingAddress.getCountryName());
-//		System.out.println("!!!!!!" + shippingAddress.getCountryName());
+		CalculationModel totalsCalculated = calculusStep.calculateTotalSum(calcList);
 		
-//		System.out.println("BILLING");
-//		PrintUtils.printAddressModel(billingAddress);
-//
-//		System.out.println("SHIPPING");
-//		PrintUtils.printAddressModel(shippingAddress);
-
+		checkoutValidationSteps.checkTotals(totalsCalculated, cartTotals);
 	}
 
 }

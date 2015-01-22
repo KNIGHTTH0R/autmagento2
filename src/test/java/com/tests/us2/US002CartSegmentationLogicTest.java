@@ -48,31 +48,20 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
 	public ProductSteps productSteps;
-	
 	@Steps
 	public SearchSteps searchSteps;
-	
 	@Steps
 	public HeaderSteps headerSteps;
-	
 	@Steps
 	public CartSteps cartSteps;
-	
 	@Steps
 	public CalculusSteps calculusSteps;
-	
 	@Steps
 	public CheckoutValidationSteps validationSteps;
-	
-	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
-	
 	@Steps
 	public ShippingSteps shippingSteps;
-	
 	@Steps
 	public ConfirmationSteps confirmationSteps;
-	
 	@Steps
 	public PaymentSteps paymentSteps;
 	
@@ -171,6 +160,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
 		CartTotalsModel cartTotals = cartSteps.grabTotals();
+
 		
 		
 //		cartSteps.clickGoToShipping();	
@@ -219,6 +209,54 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 //		checkoutValidationSteps.checkTotals(sumedTotals, cartTotals);
 //		checkoutValidationSteps.checkTotals(sumedTotals, shippingTotals);
 //		checkoutValidationSteps.checkTotals(sumedTotals, confirmationTotals);
+
+		System.out.println(cartTotals.getSubtotal());
+		
+		cartSteps.clickGoToShipping();	
+		
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		PrintUtils.printList(shippingProducts);
+
+		
+		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		System.out.println(shippingTotals.getSubtotal());
+		
+		shippingSteps.clickGoToPaymentMethod();
+
+		paymentSteps.expandCreditCardForm();
+
+		paymentSteps.fillCreditCardForm(creditCardData);
+		
+		AddressModel billingAddress = confirmationSteps.grabBillingData();
+		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		
+		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
+		System.out.println(confirmationTotals.getSubtotal());
+
+		confirmationSteps.agreeAndCheckout();
+		
+		validationSteps.verifySuccessMessage();
+		
+		System.out.println("CART PHASE PRODUCTS VALIDATION");
+		validationSteps.validateProducts(productsList, cartProducts);
+		System.out.println("SHIPPING PHASE PRODUCTS VALIDATION");
+		validationSteps.validateProducts(productsList, shippingProducts);
+		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		validationSteps.validateProducts(productsList, confirmationProducts);
+		
+		PrintUtils.printCartTotals(cartTotals);
+		
+		System.out.println("TOTALS CALCULATED");
+		CartTotalsModel cartBigTotal = validationSteps.calculateCartProducts(cartProducts);
+		PrintUtils.printCartTotals(cartBigTotal);
+		
+		System.out.println("-----DOAMNE AJUTA-------");
+		
+		validationSteps.checkTotals(sumedTotals, cartTotals);
+		validationSteps.checkTotals(sumedTotals, shippingTotals);
+		validationSteps.checkTotals(sumedTotals, confirmationTotals);
+
 		
 		
 	}

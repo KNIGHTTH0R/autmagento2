@@ -8,6 +8,15 @@ public class OrderModel {
 	private String deliveryContact;
 	private String totalPrice;
 	private String status;
+	
+	public OrderModel(){
+		setOrderId("");
+		setDate("");
+		setInvoiceContact("");
+		setDeliveryContact("");
+		setTotalPrice("");
+		setStatus("");
+	}
 
 	public String getOrderId() {
 		return orderId;
