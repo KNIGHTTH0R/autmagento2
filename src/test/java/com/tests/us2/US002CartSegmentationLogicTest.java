@@ -28,7 +28,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.calculation.CartTotalCalculation;
+import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
@@ -55,7 +55,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
-	public CartTotalCalculation calculusSteps;
+	public CartCalculation calculusSteps;
 	@Steps
 	public CheckoutValidationSteps validationSteps;
 	@Steps

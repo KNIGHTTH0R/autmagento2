@@ -1,6 +1,5 @@
 package com.pages.backend.orders.details;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
@@ -10,10 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
-import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.OrderTotalsModel;
-import com.tools.data.backend.OrderItemModel;
 
 public class OrderTotalsPage extends AbstractPage {
 

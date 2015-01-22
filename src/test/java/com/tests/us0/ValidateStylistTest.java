@@ -131,7 +131,7 @@ public class ValidateStylistTest extends BaseTest{
 	@Test
 	public void validateStylistData() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
-		backEndSteps.redirectToManageCustomers();
+		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistName);
 		backEndSteps.openCustomerDetails(stylistName);
 		backEndSteps.clickOnLeadSettings();

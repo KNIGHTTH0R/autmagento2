@@ -62,7 +62,7 @@ public class PippaTest {
 	public void checkStylistProperties() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		// backEndSteps.dismissPopUp();
-		backEndSteps.redirectToManageCustomers();
+		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(Constants.BE_STYLIST);
 		backEndSteps.openCustomerDetails(Constants.BE_STYLIST);
 		backEndSteps.clickOnLeadSettings();
@@ -94,7 +94,7 @@ public class PippaTest {
 	public void checkBECustomerActivation() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		// backEndSteps.dismissPopUp();
-		backEndSteps.redirectToManageCustomers();
+		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail("oP2Mc4Vk@mailinator.com");
 		backEndSteps.openCustomerDetails("oP2Mc4Vk@mailinator.com");
 		backEndSteps.extractEmailConfirmationStatus();

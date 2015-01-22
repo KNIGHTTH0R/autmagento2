@@ -36,7 +36,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		}
 		if (product.getDiscountClass().contentEquals("50")) {
 			productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 50 / 100;
-
 		}
 		return productPrice;
 	}
@@ -90,45 +89,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		return result;
 	}
 
-	// @Step
-	public CartTotalsModel sumTotalsOfProductsWithDifferentDiscountsForCartTotalsModels(List<CartTotalsModel> totalsList) {
-
-		CartTotalsModel result = new CartTotalsModel();
-
-		double totalPrice = 0;
-		double discountSum = 0;
-		double totalAmount = 0;
-		int ipPointsSum = 0;
-		double taxSum = 0;
-		int jeverlyBonus = 0;
-		double shiping = 0;
-
-		for (CartTotalsModel total : totalsList) {
-			totalPrice += Double.parseDouble(total.getSubtotal());
-			discountSum += Double.parseDouble(total.getDiscount());
-			totalAmount += Double.parseDouble(total.getTotalAmount());
-			ipPointsSum += Double.parseDouble(total.getIpPoints());
-			taxSum += Double.parseDouble(total.getTax());
-			jeverlyBonus += Double.parseDouble(total.getJewelryBonus());
-			shiping += Double.parseDouble(total.getShipping());
-
-		}
-		result.setSubtotal(df.format((totalPrice)));
-		result.setDiscount(df.format(discountSum));
-		result.setTotalAmount(df.format(totalAmount));
-		result.setIpPoints(String.valueOf((ipPointsSum)));
-		result.setTax(df.format(taxSum));
-		result.setShipping(df.format(shiping));
-		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
-		return result;
-	}
-
-	// @Step
-	public double calculateDiscountValue(CartProductModel cartProductModel) {
-		double productPrice = 0;
-		productPrice += (PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity()));
-		return productPrice = (productPrice * Double.parseDouble(cartProductModel.getDiscountClass()) / 100);
-	}
+	
 
 	@Step
 	public void checkTotalsInCart(CartTotalsModel cartTotalsModel1, CartTotalsModel cartTotalsModel2) {

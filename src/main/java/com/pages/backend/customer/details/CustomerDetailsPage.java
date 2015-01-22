@@ -9,7 +9,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 
 import com.tools.AbstractPage;
 
-public class CustomerDetailsHomePage extends AbstractPage {
+public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "customer_info_tabs_stylecoach_lead_manage")
 	private WebElement leadSettingsButton;

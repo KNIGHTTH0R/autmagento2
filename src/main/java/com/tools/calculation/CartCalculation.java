@@ -8,7 +8,7 @@ import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 
-public class CartTotalCalculation {
+public class CartCalculation {
 	
 	public static CalculationModel calculateTableProducts(List<CartProductModel> cartList) {
 		CalculationModel result = new CalculationModel();

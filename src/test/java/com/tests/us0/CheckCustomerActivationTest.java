@@ -75,7 +75,7 @@ public class CheckCustomerActivationTest extends BaseTest{
 		System.out.println(validateEmail);
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		// backEndSteps.dismissPopUp();
-		backEndSteps.redirectToManageCustomers();
+		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(clientName);
 		backEndSteps.openCustomerDetails(clientName);
 		validateAccount = backEndSteps.extractEmailConfirmationStatus();

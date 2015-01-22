@@ -66,7 +66,7 @@ public class GrabStylistPropertiesTest extends BaseTest {
 	public void grabStylistPropertiesTest() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		// backEndSteps.dismissPopUp();
-		backEndSteps.redirectToManageCustomers();
+		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistName);
 		backEndSteps.openCustomerDetails(stylistName);
 		backEndSteps.clickOnLeadSettings();

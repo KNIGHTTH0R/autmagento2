@@ -1,14 +1,10 @@
 package com.steps.backend;
 
-import java.util.List;
-
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
 import com.tools.Constants;
-import com.tools.data.OrderTotalsModel;
 import com.tools.data.StylistDataModel;
-import com.tools.data.backend.OrderItemModel;
 
 public class BackEndSteps extends AbstractSteps {
 
@@ -24,16 +20,12 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void redirectToManageCustomers() {
+	public void clickOnCustomers() {
 		navigationPage().clickOnCustomers();
-
-		// @SuppressWarnings("unused")
-		// String url = navigationPage().getManageCustomersPage();
-		// getDriver().get(url);
 	}
 
 	@Step
-	public void redirectToSalesOrders() {
+	public void clickOnSalesOrders() {
 		navigationPage().clickOrdersPage();
 		navigationPage().clickOnSales();
 	}

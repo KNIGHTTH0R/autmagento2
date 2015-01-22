@@ -29,7 +29,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.calculation.CartTotalCalculation;
+import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
@@ -170,14 +170,14 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
 		
-		CalculationModel calc25 = CartTotalCalculation.calculateTableProducts(cartProductsWith25Discount);
-		CalculationModel calc50 = CartTotalCalculation.calculateTableProducts(cartProductsWith50Discount);
-		CalculationModel calc00 = CartTotalCalculation.calculateTableProducts(cartMarketingMaterialsProducts);
+		CalculationModel calc25 = CartCalculation.calculateTableProducts(cartProductsWith25Discount);
+		CalculationModel calc50 = CartCalculation.calculateTableProducts(cartProductsWith50Discount);
+		CalculationModel calc00 = CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts);
 		calcList.add(calc25);
 		calcList.add(calc50);
 		calcList.add(calc00);
 		
-		CalculationModel totalsCalculated = CartTotalCalculation.calculateTotalSum(calcList);
+		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(calcList);
 		
 		checkoutValidationSteps.checkTotals(totalsCalculated, cartTotals);
 	}

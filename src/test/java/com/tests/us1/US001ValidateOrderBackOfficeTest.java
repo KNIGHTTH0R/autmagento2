@@ -55,7 +55,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	@Test
 	public void us001ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
-		backEndSteps.redirectToSalesOrders();
+		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
 		ordersSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
