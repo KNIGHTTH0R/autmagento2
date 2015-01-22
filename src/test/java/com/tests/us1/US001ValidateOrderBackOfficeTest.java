@@ -1,5 +1,7 @@
 package com.tests.us1;
 
+import java.util.List;
+
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -11,7 +13,8 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.data.StylistDataModel;
+import com.tools.PrintUtils;
+import com.tools.data.OrderItemModel;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US001", type = "backend")
@@ -21,18 +24,22 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
-	
+
 	private String orderId = "staging100050793";
 
 	/**
 	 * BackEnd steps in this test
 	 */
 	@Test
-		public void us001ValidateOrderBackOfficeTest() {
-			backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
-			backEndSteps.redirectToSalesOrders();
-			backEndSteps.findOrderByOrderId(orderId);
-			backEndSteps.openOrder(orderId);
-//			backEndSteps.grabOrderData();
-		}
+	public void us001ValidateOrderBackOfficeTest() {
+		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.redirectToSalesOrders();
+		backEndSteps.findOrderByOrderId(orderId);
+		backEndSteps.openOrder(orderId);
+		List<OrderItemModel> orderItemsList = backEndSteps.grabOrderData();
+//		backEndSteps.grabOrder
+//		backEndSteps.grabOrderTotals();
+		
+		PrintUtils.printOrderItemsList(orderItemsList);
+	}
 }

@@ -8,6 +8,7 @@ import com.tools.data.CalculationModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
 import com.tools.data.EmailModel;
+import com.tools.data.OrderItemModel;
 import com.tools.data.ProductBasicModel;
 
 public class PrintUtils {
@@ -122,6 +123,30 @@ public class PrintUtils {
 		System.out.println(productNow.getPrice() + " - " + compare.getUnitPrice());
 		System.out.println(productNow.getQuantity() + " - " + compare.getQuantity());
 		System.out.println(productNow.getType() + " - " + compare.getProdCode());
+		
+	}
+
+	public static void printOrderItemsList(List<OrderItemModel> orderItemsList) {
+		System.out.println("---------- Order Items List --------------");
+		
+		for (OrderItemModel orderItemModel : orderItemsList) {
+			System.out.println("------------------------");
+			System.out.println(orderItemModel.getProductName());
+			System.out.println(orderItemModel.getProductCode());
+			System.out.println(orderItemModel.getPropertyStatus());
+			System.out.println(orderItemModel.getOriginalPrice());
+			System.out.println(orderItemModel.getPrice());
+			System.out.println(orderItemModel.getNumber());
+			System.out.println(orderItemModel.getSubtotal());
+			System.out.println(orderItemModel.getTaxAmount());
+			System.out.println(orderItemModel.getTaxPercentage());
+			System.out.println(orderItemModel.getDiscountAmount());
+			System.out.println(orderItemModel.getiP());
+			System.out.println(orderItemModel.getjB());
+			System.out.println(orderItemModel.getmB());
+			System.out.println(orderItemModel.getfD());
+			System.out.println(orderItemModel.getRowSum());
+		}
 		
 	}
 }
