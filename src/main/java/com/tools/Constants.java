@@ -30,5 +30,8 @@ public class Constants {
 	public static final String COMMA_SEPARATOR = ",";
 	public static final String PROFILE_HISTORY = "MEINE BESTELLUNGEN";
 	
-
+	//discounts
+	public static final String DISCOUNT_0 = "0";
+	public static final String DISCOUNT_25 = "25";
+	public static final String DISCOUNT_50 = "50";
 }

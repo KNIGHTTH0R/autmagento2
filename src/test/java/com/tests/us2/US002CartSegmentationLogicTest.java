@@ -29,6 +29,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
+import com.tools.data.AddressModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.CartProductModel;
 import com.tools.data.CartTotalsModel;
@@ -150,57 +151,74 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		PrintUtils.printList(cartProducts);
 		
-		List<CartProductModel> cartProductswith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();	
-//		List<CartProductModel> cartProductswith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
+		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
+		
+		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();	
+		
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
 		
-		CalculationModel calculationModelWith25Discount = calculusSteps.calculateTableProducts(cartProductswith25Discount);
+		CalculationModel calculationModel50Discount = calculusSteps.calculateTableProducts(cartProductsWith50Discount);
+		totalsList.add(calculationModel50Discount);	
+		
+		CalculationModel calculationModelWith25Discount = calculusSteps.calculateTableProducts(cartProductsWith25Discount);
 		totalsList.add(calculationModelWith25Discount);
 		
 		CalculationModel calculationModelMarketingMaterial = calculusSteps.calculateTableProducts(cartMarketingMaterialsProducts);
-		totalsList.add(calculationModelMarketingMaterial);	
-		
-		PrintUtils.printCalculationModel(calculationModelMarketingMaterial);
-		
-//		CalculationModel calculationModel50discount = calculusSteps.calculateTableProducts(cartProductswith50Discount);
-//		totalsList.add(calculationModel50discount);		
+		totalsList.add(calculationModelMarketingMaterial);				
 		
 
 		CalculationModel sumedTotals  = calculusSteps.calculateTotalSum(totalsList);
-//		System.out.println("-----BUBA------");
-//		System.out.println(sumedTotals.getAskingPrice());
-//		System.out.println(sumedTotals.getFinalPrice());
-//		System.out.println(sumedTotals.getIpPoints());
-//		
-//		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
-//		CartTotalsModel cartTotals = cartSteps.grabTotals();
-//		System.out.println(cartTotals.getSubtotal());
-//		
-//		cartSteps.clickGoToShipping();		
-//		
-//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-//		System.out.println(shippingTotals.getSubtotal());
-//		
-//		shippingSteps.clickGoToPaymentMethod();
-//
-//		paymentSteps.expandCreditCardForm();
-//
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//		
-//		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
-//		System.out.println(confirmationTotals.getSubtotal());
-//		
-//		PrintUtils.printCartTotals(cartTotals);
-//		
-//		System.out.println("TOTALS CALCULATED");
-//		CartTotalsModel cartBigTotal = checkoutValidationSteps.calculateCartProducts(cartProducts);
-//		PrintUtils.printCartTotals(cartBigTotal);
-//		
-//		System.out.println("-----DOAMNE AJUTA-------");
-//		
-//		checkoutValidationSteps.checkTotals(sumedTotals, cartTotals);
-//		checkoutValidationSteps.checkTotals(sumedTotals, shippingTotals);
-//		checkoutValidationSteps.checkTotals(sumedTotals, confirmationTotals);
+		
+		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
+		CartTotalsModel cartTotals = cartSteps.grabTotals();
+		System.out.println(cartTotals.getSubtotal());
+		
+		cartSteps.clickGoToShipping();	
+		
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		PrintUtils.printList(shippingProducts);
+
+		
+		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		System.out.println(shippingTotals.getSubtotal());
+		
+		shippingSteps.clickGoToPaymentMethod();
+
+		paymentSteps.expandCreditCardForm();
+
+		paymentSteps.fillCreditCardForm(creditCardData);
+		
+		AddressModel billingAddress = confirmationSteps.grabBillingData();
+		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		
+		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
+		System.out.println(confirmationTotals.getSubtotal());
+
+		confirmationSteps.agreeAndCheckout();
+		
+		checkoutValidationSteps.verifySuccessMessage();
+		
+		System.out.println("CART PHASE PRODUCTS VALIDATION");
+		checkoutValidationSteps.validateProducts(productsList, cartProducts);
+		System.out.println("SHIPPING PHASE PRODUCTS VALIDATION");
+		checkoutValidationSteps.validateProducts(productsList, shippingProducts);
+		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
+		
+		
+		
+		PrintUtils.printCartTotals(cartTotals);
+		
+		System.out.println("TOTALS CALCULATED");
+		CartTotalsModel cartBigTotal = checkoutValidationSteps.calculateCartProducts(cartProducts);
+		PrintUtils.printCartTotals(cartBigTotal);
+		
+		System.out.println("-----DOAMNE AJUTA-------");
+		
+		checkoutValidationSteps.checkTotals(sumedTotals, cartTotals);
+		checkoutValidationSteps.checkTotals(sumedTotals, shippingTotals);
+		checkoutValidationSteps.checkTotals(sumedTotals, confirmationTotals);
 		
 		
 	}

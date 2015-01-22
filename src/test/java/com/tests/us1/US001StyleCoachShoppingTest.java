@@ -146,6 +146,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		AddressModel billingAddress = confirmationSteps.grabBillingData();
 		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
 		confirmationSteps.agreeAndCheckout();

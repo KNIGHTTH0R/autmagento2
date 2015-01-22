@@ -6,6 +6,7 @@ import java.text.NumberFormat;
 import java.util.List;
 
 import com.tools.AbstractSteps;
+import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
 import com.tools.data.CartProductModel;
@@ -25,6 +26,7 @@ public class CalculusSteps extends AbstractSteps {
 		if(cartList.size() > 0 ){
 			
 			result.setTableType(cartList.get(0).getDiscountClass());
+			System.out.println(cartList.get(0).getDiscountClass());
 	
 			for (CartProductModel cartProductModel : cartList) {
 				askingPriceSum += PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity());
@@ -32,7 +34,7 @@ public class CalculusSteps extends AbstractSteps {
 			}
 	
 			int calcValue = checkCalculusType(result.getTableType());
-	
+			System.out.println("calculation value is: " + calcValue);
 			finalPriceSum = askingPriceSum - (askingPriceSum * calcValue / 100);
 	
 			result.setAskingPrice(askingPriceSum);
@@ -56,13 +58,13 @@ public class CalculusSteps extends AbstractSteps {
 	private int checkCalculusType(String tableType) {
 		int result = 0;
 
-		if (tableType.contains("25")) {
+		if (tableType.contentEquals(Constants.DISCOUNT_25)) {
 			result = 25;
 		}
-		if (tableType.contains("50")) {
+		if (tableType.contentEquals(Constants.DISCOUNT_50)) {
 			result = 50;
 		}
-		if (tableType.contains("0")) {
+		if (tableType.contentEquals(Constants.DISCOUNT_0)) {
 			result = 0;
 		}
 		return result;
@@ -86,10 +88,7 @@ public class CalculusSteps extends AbstractSteps {
 		result.setAskingPrice(askingPrice);
 		result.setFinalPrice(finalPrice);
 		result.setIpPoints(ipPoints);
-//		result.setAskingPrice(Double.parseDouble(df.format(askingPrice)));
-//		result.setFinalPrice(Double.parseDouble(df.format(finalPrice)));
-//		result.setIpPoints(ipPoints);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + result.getAskingPrice());
+
 		
 		return result;
 	}
