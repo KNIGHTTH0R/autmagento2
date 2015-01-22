@@ -169,9 +169,9 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.formatDouble(calculationModel.getAskingPrice()) + "!", cartTotalModel
 				.getSubtotal().equals(calculationModel.formatDouble(calculationModel.getAskingPrice())));
 
-//		System.out.println("----------FINAL: " + cartTotalModel.getTotalAmount() + " : " + calculationModel.formatDouble(calculationModel.getFinalPrice()));
-//		Assert.assertTrue("The discount should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.formatDouble(calculationModel.getFinalPrice()) + "!", cartTotalModel
-//				.getTotalAmount().equals(calculationModel.formatDouble(calculationModel.getFinalPrice())));
+		System.out.println("----------FINAL: " + cartTotalModel.getTotalAmount() + " : " + calculationModel.formatDouble(calculationModel.getFinalPrice()));
+		Assert.assertTrue("The discount should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.formatDouble(calculationModel.getFinalPrice()) + "!", cartTotalModel
+				.getTotalAmount().equals(calculationModel.formatDouble(calculationModel.getFinalPrice())));
 
 		System.out.println("----------IP POINTS: " + cartTotalModel.getIpPoints() + " : " + calculationModel.getIpPoints());
 		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",

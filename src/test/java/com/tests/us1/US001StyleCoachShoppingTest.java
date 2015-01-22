@@ -116,11 +116,11 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		productsList.add(productData);
 
 		searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
-		productData = productSteps.setProductAddToCart("2", "0");
+		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 
 		searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-		productData = productSteps.setProductAddToCart("3", "18");
+		productData = productSteps.setProductAddToCart("1", "18");
 		productsList.add(productData);
 
 		String previewPrice = headerSteps.openCartPreview();
