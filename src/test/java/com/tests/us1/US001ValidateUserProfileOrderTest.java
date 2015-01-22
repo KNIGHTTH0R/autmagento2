@@ -3,6 +3,7 @@ package com.tests.us1;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -14,11 +15,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.gmail.GmailConnector;
+import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.data.OrderModel;
 import com.tools.requirements.Application;
 
 
@@ -33,7 +37,8 @@ public class US001ValidateUserProfileOrderTest extends BaseTest{
 	public HeaderSteps headerSteps;
 	@Steps
 	public ProfileSteps profileSteps;
-	
+	@Steps
+	public EmailSteps emailSteps;
 	
 	private String username, password;
 	
@@ -63,11 +68,17 @@ public class US001ValidateUserProfileOrderTest extends BaseTest{
 	}
 	
 	@Test
-	public void validateUserProfileOrderTest() {
+	public void us001ValidateUserProfileOrderTest() {
 		frontEndSteps.performLogin(username, password);
 		headerSteps.goToProfile();
 		profileSteps.openProfileHistory();
-		profileSteps.grabOrderHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+		System.out.println("ORDER ID: " + orderHistory.get(0).getOrderId());
+		
+		String orderId = orderHistory.get(0).getOrderId();
+		String message = GmailConnector.searchForMail("", orderHistory.get(0).getOrderId(), false);
+		
+		emailSteps.validateEmailContent(orderId, message);
 		
 	}
 

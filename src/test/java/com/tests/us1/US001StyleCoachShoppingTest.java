@@ -99,7 +99,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	}
 
 	@Test
-	public void uS001StyleCoachShoppingTest() {
+	public void us001StyleCoachShoppingTest() {
 		frontEndSteps.performLogin(username, password);
 
 		searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
