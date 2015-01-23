@@ -11,7 +11,7 @@ public class HeaderSteps extends AbstractSteps{
 	
 	/**
 	 * Return the total sum on the cart preview.
-	 * @return
+	 * @return - Preview Price
 	 */
 	@Step
 	public String openCartPreview(){

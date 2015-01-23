@@ -40,7 +40,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 
-@WithTag(name="US2", type = "US2")
+@WithTag(name="US2", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US002CartSegmentationLogicTest extends BaseTest{
@@ -165,54 +165,49 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		
 		cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
+
+		System.out.println(cartTotals.getSubtotal());
 		
-//
-//
-//		System.out.println(cartTotals.getSubtotal());
-//		
-//		cartSteps.clickGoToShipping();	
-//		
-//		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-//		PrintUtils.printList(shippingProducts);
-//
-//		
-//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-//		System.out.println(shippingTotals.getSubtotal());
-//		
-//		shippingSteps.clickGoToPaymentMethod();
-//
-//		paymentSteps.expandCreditCardForm();
-//
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//		
-//		AddressModel billingAddress = confirmationSteps.grabBillingData();
-//		AddressModel shippingAddress = confirmationSteps.grabSippingData();
-//		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-//		
-//		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
-//		System.out.println(confirmationTotals.getSubtotal());
-//
-//		confirmationSteps.agreeAndCheckout();
-//		
-//		validationSteps.verifySuccessMessage();
-//		
-//		validationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
-//		validationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
-//		validationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
-//		
-//		PrintUtils.printCartTotals(cartTotals);
-//		
-//		System.out.println("TOTALS CALCULATED");
-//		CartTotalsModel cartBigTotal = CartCalculation.calculateCartProducts(cartProducts);
-//		PrintUtils.printCartTotals(cartBigTotal);
-//		
-//		
-//		validationSteps.checkCalculationTotals(sumedTotals, cartTotals);
-//		validationSteps.checkCalculationTotals(sumedTotals, shippingTotals);
-//		validationSteps.checkCalculationTotals(sumedTotals, confirmationTotals);
+		cartSteps.clickGoToShipping();	
+		
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		PrintUtils.printList(shippingProducts);
 
 		
+		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		System.out.println(shippingTotals.getSubtotal());
 		
+		shippingSteps.clickGoToPaymentMethod();
+
+		paymentSteps.expandCreditCardForm();
+
+		paymentSteps.fillCreditCardForm(creditCardData);
+		
+		AddressModel billingAddress = confirmationSteps.grabBillingData();
+		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		
+		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
+		System.out.println(confirmationTotals.getSubtotal());
+
+		confirmationSteps.agreeAndCheckout();
+		
+		validationSteps.verifySuccessMessage();
+		
+		validationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
+		validationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
+		validationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
+		
+		PrintUtils.printCartTotals(cartTotals);
+		
+		CartTotalsModel cartBigTotal = CartCalculation.calculateCartProducts(cartProducts);
+		PrintUtils.printCartTotals(cartBigTotal);
+		
+		
+		validationSteps.checkCalculationTotals("CART TOTALS", sumedTotals, cartTotals);
+		validationSteps.checkCalculationTotals("SHIPPING TOTALS", sumedTotals, shippingTotals);
+		validationSteps.checkCalculationTotals("CONFIRMATION TOTALS", sumedTotals, confirmationTotals);
+
 	}
 	
 	@After

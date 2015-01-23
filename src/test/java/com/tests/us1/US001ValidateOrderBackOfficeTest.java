@@ -50,10 +50,11 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		}else{
 			Assert.assertTrue("Failure: Could not retrieve orderId. ",  orderModel.size() == 1);
 		}
-	
-		List<CartTotalsModel> cartTotals = MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
+	//TODO must change this to get info from USS01
 		
-		List<ProductBasicModel> productList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
+//		List<CartTotalsModel> cartTotals = MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
+//		
+//		List<ProductBasicModel> productList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
 		
 	
 	}

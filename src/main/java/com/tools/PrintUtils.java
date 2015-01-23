@@ -84,9 +84,6 @@ public class PrintUtils {
 
 	}
 	public static void printOrderTotals(OrderTotalsModel model) {
-		
-	
-		
 		System.out.println(" *** Print backend orders Totals  *** ");
 		System.out.println("------------------------");
 		System.out.println(model.getSubtotal());
