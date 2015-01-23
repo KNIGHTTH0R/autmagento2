@@ -12,6 +12,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,7 @@ import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
+import com.steps.frontend.ProfileSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
@@ -31,11 +33,12 @@ import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
-import com.tools.data.frontend.AddressModel;
+import com.tools.data.OrderModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US001", type = "frontend")
@@ -63,6 +66,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public EmailSteps emailSteps;
+	@Steps
+	public ProfileSteps profileSteps;
+
+	private OrderModel orderNumber = new OrderModel();
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
@@ -155,8 +162,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-		AddressModel billingAddress = confirmationSteps.grabBillingData();
-		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+//		AddressModel billingAddress = confirmationSteps.grabBillingData();
+//		AddressModel shippingAddress = confirmationSteps.grabSippingData();
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
@@ -180,6 +187,21 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(calcList);
 		
 		checkoutValidationSteps.checkTotals(totalsCalculated, cartTotals);
+		
+		
+		//After validation - grab order number
+		headerSteps.goToProfile();
+		profileSteps.openProfileHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+		System.out.println("ORDER ID: " + orderHistory.get(0).getOrderId());
+		
+		String orderId = orderHistory.get(0).getOrderId();
+		orderNumber.setOrderId(orderId);
 	}
 
+	
+	@After
+	public void saveData(){
+		MongoWriter.saveOrderModel(orderNumber , getClass().getSimpleName());
+	}
 }

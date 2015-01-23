@@ -6,12 +6,12 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us1.US001StyleCoachShoppingTest;
 import com.tests.us1.US001ValidateOrderBackOfficeTest;
-import com.tests.us1.US001ValidateUserProfileOrderTest;
+import com.tests.us1.US001ValidateOrderEmailTest;
 
 @SuiteClasses({
 	US001StyleCoachShoppingTest.class,
+	US001ValidateOrderEmailTest.class,
 	US001ValidateOrderBackOfficeTest.class,
-	US001ValidateUserProfileOrderTest.class,
 })
 @RunWith(Suite.class)
 public class US001Suite {

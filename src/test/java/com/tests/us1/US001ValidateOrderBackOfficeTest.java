@@ -37,18 +37,17 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	private String orderId = "staging100050872";
 
 	
-//	@Before
-//	public void setUp(){
-//		List<OrderModel> orderModel = MongoReader.getOrderModel("US001ValidateUserProfileOrderTest");
-//		
-//		if(orderModel.size() == 1){
-//			
-//			orderId = orderModel.get(0).getOrderId();
-//		}else{
-//			Assert.assertTrue("Failure: Could not retrieve orderId. ",  orderModel.size() == 1);
-//		}
-//	}
-	
+	@Before
+	public void setUp(){
+		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest");
+		
+		if(orderModel.size() == 1){
+			
+			orderId = orderModel.get(0).getOrderId();
+		}else{
+			Assert.assertTrue("Failure: Could not retrieve orderId. ",  orderModel.size() == 1);
+		}
+	}
 	
 	/**
 	 * BackEnd steps in this test
@@ -57,12 +56,6 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	public void us001ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 
-//		backEndSteps.redirectToSalesOrders();
-//		backEndSteps.findOrderByOrderId(orderId);
-//		backEndSteps.openOrder(orderId);
-//		List<OrderItemModel> orderItemsList = backEndSteps.grabOrderData();
-//		OrderTotalsModel ordertotal = backEndSteps.grabTotals();
-//		System.out.println("-----START-----");
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
