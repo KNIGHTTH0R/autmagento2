@@ -141,8 +141,8 @@ public class ConfirmationPage extends AbstractPage {
 		CartTotalsModel result = new CartTotalsModel();
 		element(surveyTotalsContainer).waitUntilVisible();
 		
-		result.setSubtotal(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.subtotal td.a-right")).getText()));
-		result.setDiscount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.all_discounts td.a-right")).getText()));
+		result.setSubtotal(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
+		result.setDiscount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
 		result.setShipping(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
 		result.setTotalAmount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
 		
