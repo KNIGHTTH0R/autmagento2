@@ -65,7 +65,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		OrderInfoModel orderInfo = ordersSteps.grabOrderInfo();
 
 		PrintUtils.printOrderTotals(ordertotal);
-		PrintUtils.printOrderInfo(orderInfo);
+//		PrintUtils.printOrderInfo(orderInfo);
 //		backEndSteps.grabOrder
 //		backEndSteps.grabOrderTotals();
 		
