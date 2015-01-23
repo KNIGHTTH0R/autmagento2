@@ -1,7 +1,5 @@
 package com.tools;
 
-import org.junit.Assert;
-
 import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;

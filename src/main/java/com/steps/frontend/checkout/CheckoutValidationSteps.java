@@ -2,7 +2,6 @@ package com.steps.frontend.checkout;
 
 import java.util.List;
 
-import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
@@ -145,7 +144,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	}
 
 	// TODO might need to move this
-	private static CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
+	public CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
 		CartProductModel result = new CartProductModel();
 		theFor: for (CartProductModel cartProductModel : cartProducts) {
 			System.out.println(productCode + " - " + cartProductModel.getProdCode());

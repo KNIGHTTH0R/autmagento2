@@ -41,6 +41,7 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US001", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
@@ -64,11 +65,13 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
-	@Steps
 	public EmailSteps emailSteps;
 	@Steps
 	public ProfileSteps profileSteps;
+	@Steps
+	public CartWorkflows cartWorkflows;
+	@Steps
+	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private OrderModel orderNumber = new OrderModel();
 
@@ -169,13 +172,20 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		
 		checkoutValidationSteps.verifySuccessMessage();
+		
+		cartWorkflows.setModels(productsList, cartProducts);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+		
+		cartWorkflows.setModels(productsList, shippingProducts);
+		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+		
+		cartWorkflows.setModels(productsList, confirmationProducts);
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
 
-		checkoutValidationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
-		checkoutValidationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
-		checkoutValidationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
 
 		checkoutValidationSteps.checkCalculationTotals("CART TOTALS",totalsCalculated, cartTotals);
-		checkoutValidationSteps.checkCalculationTotals("SHIPPING TOTALS", totalsCalculated, shippingTotals);
+//		checkoutValidationSteps.checkCalculationTotals("SHIPPING TOTALS", totalsCalculated, shippingTotals);
 	}
 	
 	
