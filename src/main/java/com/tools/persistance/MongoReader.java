@@ -11,7 +11,9 @@ import com.tools.data.OrderModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.ProductBasicModel;
 
 public class MongoReader extends MongoConnector {
 
@@ -140,6 +142,65 @@ public class MongoReader extends MongoConnector {
 				result.setEmailActive(MongoUtils.checkField(dbObject, MongoTableKeys.EMAIL_ACTIVE));
 				result.setAccountActive(MongoUtils.checkField(dbObject, MongoTableKeys.ACCOUNT_ACTIVE));
 
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+	public static List<ProductBasicModel> grabProductBasicModel(String testName) {
+		DBObject dbObject = null;
+		List<ProductBasicModel> itemList = new ArrayList<ProductBasicModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CUSTOMER_CONFIGURATION_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				ProductBasicModel result = new ProductBasicModel();
+				dbObject = cursor.next();
+				
+				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.NAME));
+				result.setType(MongoUtils.checkField(dbObject, MongoTableKeys.TYPE));
+				result.setPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRICE));
+				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.QUANTITY));			
+				
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+	
+	public static List<CartTotalsModel> grabTotalsModels(String testName) {
+		DBObject dbObject = null;
+		List<CartTotalsModel> itemList = new ArrayList<CartTotalsModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CART_TOTALS_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				CartTotalsModel result = new CartTotalsModel();
+				dbObject = cursor.next();
+				
+				result.setSubtotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
+				result.setJewelryBonus(MongoUtils.checkField(dbObject, MongoTableKeys.JEWERLY_BONUS));
+				result.setDiscount(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT));
+				result.setDiscount25(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_25));
+				result.setDiscount50(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_50));
+				result.setDiscount3To1(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_3_PLUS_1));
+				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
+				result.setShipping(MongoUtils.checkField(dbObject, MongoTableKeys.SHIPPING));
+				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
+				
 				itemList.add(result);
 			}
 		} catch (Exception e) {

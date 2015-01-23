@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
+import com.tools.PrintUtils;
 import com.tools.data.backend.OrderItemModel;
 
 public class OrderItemsPage extends AbstractPage {
@@ -33,18 +34,18 @@ public class OrderItemsPage extends AbstractPage {
 			String productName = elementNow.findElement(By.cssSelector("span[id*='order_item']")).getText();
 			String productCode = elementNow.findElement(By.cssSelector("div.item-text div")).getText();
 			String propertyStatus = elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText();
-			String originalPrice = elementNow.findElement(By.cssSelector("td:nth-child(3)")).getText();
-			String price = elementNow.findElement(By.cssSelector("td:nth-child(4) span.price")).getText();
+			String originalPrice = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			String price = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(4) span.price")).getText());
 			String number = elementNow.findElement(By.cssSelector("td:nth-child(5) td:last-child")).getText();
-			String subtotal = elementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText();
-			String taxAmount = elementNow.findElement(By.cssSelector("td:nth-child(7) span.price")).getText();
-			String taxPercentage = elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText();
-			String discountAmount = elementNow.findElement(By.cssSelector("td:nth-child(9) span.price")).getText();
+			String subtotal = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText());
+			String taxAmount = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(7) span.price")).getText());
+			String taxPercentage = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
+			String discountAmount = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(9) span.price")).getText());
 			String ip = elementNow.findElement(By.cssSelector("td:nth-child(10)")).getText();
-			String jb = elementNow.findElement(By.cssSelector("td:nth-child(11) span.price")).getText();
-			String mb = elementNow.findElement(By.cssSelector("td:nth-child(12) span.price")).getText();
+			String jb = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(11) span.price")).getText());
+			String mb = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(12) span.price")).getText());
 			String fd = elementNow.findElement(By.cssSelector("td:nth-child(13)")).getText();
-			String rowSum = elementNow.findElement(By.cssSelector("td:nth-child(14)")).getText();
+			String rowSum = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(14)")).getText());
 			
 			
 			orderNow.setProductName(productName);

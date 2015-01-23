@@ -166,50 +166,50 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
 		
-
-
-		System.out.println(cartTotals.getSubtotal());
-		
-		cartSteps.clickGoToShipping();	
-		
-		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		PrintUtils.printList(shippingProducts);
-
-		
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		System.out.println(shippingTotals.getSubtotal());
-		
-		shippingSteps.clickGoToPaymentMethod();
-
-		paymentSteps.expandCreditCardForm();
-
-		paymentSteps.fillCreditCardForm(creditCardData);
-		
-		AddressModel billingAddress = confirmationSteps.grabBillingData();
-		AddressModel shippingAddress = confirmationSteps.grabSippingData();
-		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-		
-		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
-		System.out.println(confirmationTotals.getSubtotal());
-
-		confirmationSteps.agreeAndCheckout();
-		
-		validationSteps.verifySuccessMessage();
-		
-		validationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
-		validationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
-		validationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
-		
-		PrintUtils.printCartTotals(cartTotals);
-		
-		System.out.println("TOTALS CALCULATED");
-		CartTotalsModel cartBigTotal = CartCalculation.calculateCartProducts(cartProducts);
-		PrintUtils.printCartTotals(cartBigTotal);
-		
-		
-		validationSteps.checkCalculationTotals(sumedTotals, cartTotals);
-		validationSteps.checkCalculationTotals(sumedTotals, shippingTotals);
-		validationSteps.checkCalculationTotals(sumedTotals, confirmationTotals);
+//
+//
+//		System.out.println(cartTotals.getSubtotal());
+//		
+//		cartSteps.clickGoToShipping();	
+//		
+//		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+//		PrintUtils.printList(shippingProducts);
+//
+//		
+//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+//		System.out.println(shippingTotals.getSubtotal());
+//		
+//		shippingSteps.clickGoToPaymentMethod();
+//
+//		paymentSteps.expandCreditCardForm();
+//
+//		paymentSteps.fillCreditCardForm(creditCardData);
+//		
+//		AddressModel billingAddress = confirmationSteps.grabBillingData();
+//		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+//		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+//		
+//		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
+//		System.out.println(confirmationTotals.getSubtotal());
+//
+//		confirmationSteps.agreeAndCheckout();
+//		
+//		validationSteps.verifySuccessMessage();
+//		
+//		validationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
+//		validationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
+//		validationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
+//		
+//		PrintUtils.printCartTotals(cartTotals);
+//		
+//		System.out.println("TOTALS CALCULATED");
+//		CartTotalsModel cartBigTotal = CartCalculation.calculateCartProducts(cartProducts);
+//		PrintUtils.printCartTotals(cartBigTotal);
+//		
+//		
+//		validationSteps.checkCalculationTotals(sumedTotals, cartTotals);
+//		validationSteps.checkCalculationTotals(sumedTotals, shippingTotals);
+//		validationSteps.checkCalculationTotals(sumedTotals, confirmationTotals);
 
 		
 		
@@ -217,8 +217,10 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	
 	@After
 	public void saveData(){
-		MongoWriter.saveTotalsModel(cartTotals , getClass().getSimpleName());
-	}
+		MongoWriter.saveTotalsModel(cartTotals , getClass().getSimpleName());		
+		for(ProductBasicModel product : productsList )
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
+		}
 	
 	
 }
