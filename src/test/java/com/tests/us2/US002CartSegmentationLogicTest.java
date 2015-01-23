@@ -168,8 +168,6 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		
 		cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
-		
-
 
 		System.out.println(cartTotals.getSubtotal());
 		
@@ -222,12 +220,15 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		validationSteps.checkCalculationTotals("CART TOTALS", sumedTotals, cartTotals);
 		validationSteps.checkCalculationTotals("SHIPPING TOTALS", sumedTotals, shippingTotals);
 		validationSteps.checkCalculationTotals("CONFIRMATION TOTALS", sumedTotals, confirmationTotals);
+
 	}
 	
 	@After
 	public void saveData(){
-		MongoWriter.saveTotalsModel(cartTotals , getClass().getSimpleName());
-	}
+		MongoWriter.saveTotalsModel(cartTotals , getClass().getSimpleName());		
+		for(ProductBasicModel product : productsList )
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
+		}
 	
 	
 }

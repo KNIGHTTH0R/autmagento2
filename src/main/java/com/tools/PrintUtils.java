@@ -28,6 +28,28 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getPriceIP());
 		}
 	}
+	public static void printOrderTtems(List<OrderItemModel> list) {
+		System.out.println(" *** Print Products List from Orders(backend) *** ");
+		for (OrderItemModel orderItem : list) {
+			System.out.println("------------------------");
+			System.out.println(orderItem.getProductName());
+			System.out.println(orderItem.getProductCode());
+			System.out.println(orderItem.getPropertyStatus());
+			System.out.println(orderItem.getOriginalPrice());
+			System.out.println(orderItem.getPrice());
+			System.out.println(orderItem.getNumber());
+			System.out.println(orderItem.getSubtotal());
+			System.out.println(orderItem.getTaxAmount());
+			System.out.println(orderItem.getTaxPercentage());
+			System.out.println(orderItem.getDiscountAmount());
+			System.out.println(orderItem.getiP());
+			System.out.println(orderItem.getjB());
+			System.out.println(orderItem.getmB());
+			System.out.println(orderItem.getfD());
+			System.out.println(orderItem.getRowSum());
+
+		}
+	}
 
 	public static void printCartTotals(CartTotalsModel model) {
 		System.out.println(" *** Print Total section from Cart *** ");
@@ -99,6 +121,7 @@ public class PrintUtils {
 		result = result.replace(" IP", "");
 		result = result.replace(",", ".");
 		result = result.replace("-", "");
+		result = result.replace("%", "");
 		
 		return result;
 	}
@@ -154,6 +177,14 @@ public class PrintUtils {
 		System.out.println(productNow.getPrice() + " - " + compare.getUnitPrice());
 		System.out.println(productNow.getQuantity() + " - " + compare.getQuantity());
 		System.out.println(productNow.getType() + " - " + compare.getProdCode());
+		
+	}
+	
+	public static void printProductsCompareBackend(ProductBasicModel basicProduct, OrderItemModel orderProduct) {
+		System.out.println(basicProduct.getName() + " - " + orderProduct.getProductName());
+		System.out.println(basicProduct.getPrice() + " - " + orderProduct.getPrice());
+		System.out.println(basicProduct.getQuantity() + " - " + orderProduct.getNumber());
+		System.out.println(basicProduct.getType() + " - " + orderProduct.getProductCode());
 		
 	}
 

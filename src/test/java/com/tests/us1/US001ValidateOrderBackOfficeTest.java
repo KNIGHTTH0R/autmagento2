@@ -7,6 +7,8 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,9 +17,14 @@ import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
+import com.tools.data.OrderModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ProductBasicModel;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US001", type = "backend")
@@ -33,17 +40,25 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	private String orderId = "staging100050872";
 
 	
-//	@Before
-//	public void setUp(){
-//		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest");
+	@Before
+	public void setUp(){
+		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest");
+		
+		if(orderModel.size() == 1){
+			
+			orderId = orderModel.get(0).getOrderId();
+		}else{
+			Assert.assertTrue("Failure: Could not retrieve orderId. ",  orderModel.size() == 1);
+		}
+	//TODO must change this to get info from USS01
+		
+//		List<CartTotalsModel> cartTotals = MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
 //		
-//		if(orderModel.size() == 1){
-//			
-//			orderId = orderModel.get(0).getOrderId();
-//		}else{
-//			Assert.assertTrue("Failure: Could not retrieve orderId. ",  orderModel.size() == 1);
-//		}
-//	}
+//		List<ProductBasicModel> productList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
+		
+	
+	}
+	
 	
 	/**
 	 * BackEnd steps in this test
@@ -59,9 +74,10 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
 		OrderTotalsModel ordertotal = ordersSteps.grabTotals();
 		OrderInfoModel orderInfo = ordersSteps.grabOrderInfo();
-
+		PrintUtils.printOrderItemsList(orderItemsList);
 		PrintUtils.printOrderTotals(ordertotal);
-//		PrintUtils.printOrderInfo(orderInfo);
+		PrintUtils.printOrderInfo(orderInfo);
+		
 //		backEndSteps.grabOrder
 //		backEndSteps.grabOrderTotals();
 		
