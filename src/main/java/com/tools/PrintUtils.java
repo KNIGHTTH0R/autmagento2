@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tools.data.CalculationModel;
 import com.tools.data.EmailModel;
+import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.AddressModel;
@@ -39,6 +40,17 @@ public class PrintUtils {
 		System.out.println(model.getTotalAmount());
 		System.out.println(model.getIpPoints());
 	}
+	
+	public static void printOrderInfo(OrderInfoModel model) {
+		System.out.println(" *** Print Order Info *** ");
+		System.out.println("------------------------");
+		System.out.println(model.getOrderDate());
+		System.out.println(model.getOrderStatus());
+		System.out.println(model.getAquiredBy());
+		System.out.println(model.getOrderIP());
+	
+	}
+	
 	public static void printCalculationModel(CalculationModel model) {
 		System.out.println(" *** Print Total *** ");
 		System.out.println("------------------------");
