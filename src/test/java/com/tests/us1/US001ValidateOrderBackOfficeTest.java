@@ -17,9 +17,9 @@ import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.data.OrderTotalsModel;
 import com.tools.data.OrderModel;
 import com.tools.data.backend.OrderItemModel;
+import com.tools.data.backend.OrderTotalsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -33,7 +33,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps
 	public OrdersSteps ordersSteps;
 
-	private String orderId = "";
+	private String orderId = "staging100050872";
 
 	
 	@Before
@@ -48,22 +48,24 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		}
 	}
 	
-	
 	/**
 	 * BackEnd steps in this test
 	 */
 	@Test
 	public void us001ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+
+
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
 		ordersSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
 		OrderTotalsModel ordertotal = ordersSteps.grabTotals();
+
 		PrintUtils.printOrderTotals(ordertotal);
 //		backEndSteps.grabOrder
 //		backEndSteps.grabOrderTotals();
 		
-		PrintUtils.printOrderItemsList(orderItemsList);
+//		PrintUtils.printOrderItemsList(orderItemsList);
 	}
 }

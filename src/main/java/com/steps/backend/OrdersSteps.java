@@ -5,8 +5,8 @@ import java.util.List;
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
-import com.tools.data.OrderTotalsModel;
 import com.tools.data.backend.OrderItemModel;
+import com.tools.data.backend.OrderTotalsModel;
 
 public class OrdersSteps extends AbstractSteps{
 

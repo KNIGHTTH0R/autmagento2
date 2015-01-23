@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.tools.data.CalculationModel;
 import com.tools.data.EmailModel;
-import com.tools.data.OrderTotalsModel;
 import com.tools.data.backend.OrderItemModel;
+import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -50,12 +50,25 @@ public class PrintUtils {
 
 	}
 	public static void printOrderTotals(OrderTotalsModel model) {
+		
+	
+		
 		System.out.println(" *** Print backend orders Totals  *** ");
 		System.out.println("------------------------");
 		System.out.println(model.getSubtotal());
 		System.out.println(model.getShipping());
-		System.out.println(model.getDiscount());
+		System.out.println(model.getDiscount());		
+		System.out.println(model.getTax());
+		System.out.println(model.getTotalAmount());
+		System.out.println(model.getTotalPaid());
+		System.out.println(model.getTotalRefunded());
+		System.out.println(model.getTotalPayable());
+		System.out.println(model.getTotalIP());
+		System.out.println(model.getTotalFortyDiscounts());		
+		System.out.println(model.getTotalBonusJeverly());
+		System.out.println(model.getTotalMarketingBonus());
 		
+
 	}
 
 	public static double cleanNumberToDouble(String unitPrice) {

@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
 import com.tools.PrintUtils;
-import com.tools.data.OrderTotalsModel;
+import com.tools.data.backend.OrderTotalsModel;
 
 public class OrderTotalsPage extends AbstractPage {
 
@@ -28,14 +28,13 @@ public class OrderTotalsPage extends AbstractPage {
 		waitFor(ExpectedConditions.visibilityOfAllElements(listEntries));
 		System.out.println(listEntries.size());
 		
-		String valueTransformer = "";
-		
-		//TODO finish this Mihai!:))
+		String valueTransformer = "";	
+
 		
 		for (WebElement elementNow : listEntries) {			
 			
 			String key = elementNow.findElement(By.cssSelector("td:first-child")).getText();
-			System.out.println(key);
+			System.out.println(key);			
 			
 			if(key.contains("Zwischensumme")){
 				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
@@ -43,11 +42,47 @@ public class OrderTotalsPage extends AbstractPage {
 			}
 			if(key.contains("Lieferung und Verarbeitung")){
 				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
-				result.setSubtotal((valueTransformer));
+				result.setShipping((valueTransformer));
 			}
 			if(key.contains("Rabatt (25% Style Coach Discount)")){
 				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
-				result.setSubtotal((valueTransformer));
+				result.setDiscount((valueTransformer));
+			}
+			if(key.contains("Steuer")){
+				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTax((valueTransformer));
+			}
+			if(key.contains("Gesamtbetrag")){
+				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTotalAmount((valueTransformer));
+			}
+			if(key.contains("Gesamtsumme bezahlt")){
+				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTotalPaid((valueTransformer));
+			}
+			if(key.contains("Gesamtsumme rückerstattet")){
+				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTotalRefunded((valueTransformer));
+			}
+			if(key.contains("Gesamtsumme fällig")){
+				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTotalPayable((valueTransformer));
+			}
+			if(key.contains("Total IPs")){
+				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTotalIP((valueTransformer));
+			}
+			if(key.contains("Total Forty Discounts")){
+				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTotalFortyDiscounts((valueTransformer));
+			}
+			if(key.contains("Total Jewelry Bonus")){
+				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTotalBonusJeverly((valueTransformer));
+			}
+			if(key.contains("Total Marketing Bonus")){
+				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
+				result.setTotalMarketingBonus((valueTransformer));
 			}
 			
 		}
