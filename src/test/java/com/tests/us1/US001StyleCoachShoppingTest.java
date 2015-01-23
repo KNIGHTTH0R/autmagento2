@@ -131,24 +131,22 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		productData = productSteps.setProductAddToCart("1", "18");
 		productsList.add(productData);
 
-		String previewPrice = headerSteps.openCartPreview();
+		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
 		CartTotalsModel cartTotals = cartSteps.grabTotals();
+		
+		//TODO only one might be needed - CHOOSE
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 
+		//Calculate cart products by discount
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
-
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
-
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-
-		PrintUtils.printList(cartProducts);
-
-		// CartTotalsModel calculatedTotals =
-		// checkoutValidationSteps.calculateCartProducts(cartProducts);
-		// checkoutValidationSteps.checkTotalsInCart(cartTotals,
-		// calculatedTotals);
+		calcList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
+		calcList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
+		calcList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
+		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(calcList);
 
 		cartSteps.clickGoToShipping();
 
@@ -165,36 +163,19 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-		// AddressModel billingAddress = confirmationSteps.grabBillingData();
-		// AddressModel shippingAddress = confirmationSteps.grabSippingData();
-
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
 		confirmationSteps.agreeAndCheckout();
+		
+		
 		checkoutValidationSteps.verifySuccessMessage();
 
-		
 		checkoutValidationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
 		checkoutValidationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
 		checkoutValidationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
 
-		CalculationModel calc25 = CartCalculation.calculateTableProducts(cartProductsWith25Discount);
-		CalculationModel calc50 = CartCalculation.calculateTableProducts(cartProductsWith50Discount);
-		CalculationModel calc00 = CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts);
-		calcList.add(calc25);
-		calcList.add(calc50);
-		calcList.add(calc00);
-		
-		
-		checkoutValidationSteps.printTotalsModel("Cart Totals", cartTotals.getSubtotal(), cartTotals.getDiscount(), cartTotals.getTotalAmount(), cartTotals.getTax(), cartTotals.getShipping(),
-				cartTotals.getJewelryBonus(), cartTotals.getIpPoints());
-
-		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(calcList);
-
-		checkoutValidationSteps.printCalculationModel("Calculated Values", String.valueOf(totalsCalculated.getAskingPrice()), String.valueOf(totalsCalculated.getFinalPrice()),
-				String.valueOf(totalsCalculated.getIpPoints()));
-
-		checkoutValidationSteps.checkCalculationTotals(totalsCalculated, cartTotals);
+		checkoutValidationSteps.checkCalculationTotals("CART TOTALS",totalsCalculated, cartTotals);
+		checkoutValidationSteps.checkCalculationTotals("SHIPPING TOTALS", totalsCalculated, shippingTotals);
 	}
 	
 	

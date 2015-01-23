@@ -73,7 +73,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	// }
 
 	@StepGroup
-	public void checkCalculationTotals(CalculationModel calculationModel, CartTotalsModel cartTotalModel) {
+	public void checkCalculationTotals(String message, CalculationModel calculationModel, CartTotalsModel cartTotalModel) {
 		
 		printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()), String.valueOf(calculationModel.getIpPoints()));
 		printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscount(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),

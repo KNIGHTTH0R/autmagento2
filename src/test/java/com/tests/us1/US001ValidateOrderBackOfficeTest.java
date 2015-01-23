@@ -7,8 +7,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,11 +15,9 @@ import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.data.OrderModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US001", type = "backend")

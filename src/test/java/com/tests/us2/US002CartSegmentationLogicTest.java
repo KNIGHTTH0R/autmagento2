@@ -202,17 +202,13 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		
 		PrintUtils.printCartTotals(cartTotals);
 		
-		System.out.println("TOTALS CALCULATED");
 		CartTotalsModel cartBigTotal = CartCalculation.calculateCartProducts(cartProducts);
 		PrintUtils.printCartTotals(cartBigTotal);
 		
 		
-		validationSteps.checkCalculationTotals(sumedTotals, cartTotals);
-		validationSteps.checkCalculationTotals(sumedTotals, shippingTotals);
-		validationSteps.checkCalculationTotals(sumedTotals, confirmationTotals);
-
-		
-		
+		validationSteps.checkCalculationTotals("CART TOTALS", sumedTotals, cartTotals);
+		validationSteps.checkCalculationTotals("SHIPPING TOTALS", sumedTotals, shippingTotals);
+		validationSteps.checkCalculationTotals("CONFIRMATION TOTALS", sumedTotals, confirmationTotals);
 	}
 	
 	@After
