@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
+import com.steps.frontend.ProfileSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
@@ -31,6 +32,7 @@ import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
+import com.tools.data.OrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -38,6 +40,7 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.workflows.frontend.CartWorkflows;
 
 
 @WithTag(name="US2", type = "frontend")
@@ -66,6 +69,12 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public ProfileSteps profileSteps;
+	@Steps
+	public CartWorkflows cartWorkflows;
+	
+	private OrderModel orderNumber = new OrderModel();
 	
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
@@ -111,37 +120,32 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
 		ProductBasicModel productData;
 		
-//		searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
-//		productData = productSteps.setProductAddToCart("1", "Blue");
-//		productsList.add(productData);
-//		
-//		searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
-//		productData = productSteps.setProductAddToCart("2", "0");
-//		productsList.add(productData);
-//		
-//		searchSteps.searchAndSelectProduct("R083BK", "CLARICE RING (GUN METAL)");
-//		productData = productSteps.setProductAddToCart("1", "18");
-//		productsList.add(productData);
+		searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
+		productData = productSteps.setProductAddToCart("1", "Blue");
+		productsList.add(productData);
 		
-//		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
-//		productData = productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
-//		
-//		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-//		productData = productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
+		searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
+		productData = productSteps.setProductAddToCart("2", "0");
+		productsList.add(productData);
 		
+		searchSteps.searchAndSelectProduct("R083BK", "CLARICE RING (GUN METAL)");
+		productData = productSteps.setProductAddToCart("1", "18");
+		productsList.add(productData);
 		
-		String previewPrice = headerSteps.openCartPreview();
+		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		
+		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		
 		headerSteps.goToCart();
-//		cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
-//		productsList.get(0).setQuantity("6");
-//		cartSteps.updateProducts();
-
-		System.out.println("Cart Preview Price: " + previewPrice);
+		cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
+		productsList.get(0).setQuantity("6");
+		cartSteps.updateProducts();
 		
-		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
-		PrintUtils.printList(cartProducts);
+		List<CartProductModel> cartProducts = cartSteps.grabProductsData();		
 		
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		
@@ -149,17 +153,10 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
 		
-		CalculationModel calculationModel50Discount = calculusSteps.calculateTableProducts(cartProductsWith50Discount);
-		totalsList.add(calculationModel50Discount);	
-		
-		CalculationModel calculationModelWith25Discount = calculusSteps.calculateTableProducts(cartProductsWith25Discount);
-		totalsList.add(calculationModelWith25Discount);
-		
-		CalculationModel calculationModelMarketingMaterial = calculusSteps.calculateTableProducts(cartMarketingMaterialsProducts);
-		totalsList.add(calculationModelMarketingMaterial);				
-		
-
-		CalculationModel sumedTotals  = calculusSteps.calculateTotalSum(totalsList);
+		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
+		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
+		totalsList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
+		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 		
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
 		
@@ -192,11 +189,16 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 
 		confirmationSteps.agreeAndCheckout();
 		
-		validationSteps.verifySuccessMessage();
+		validationSteps.verifySuccessMessage();		
 		
-		validationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
-		validationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
-		validationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
+		cartWorkflows.setModels(productsList, cartProducts);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+		
+		cartWorkflows.setModels(productsList, shippingProducts);
+		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+		
+		cartWorkflows.setModels(productsList, confirmationProducts);
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");;
 		
 		PrintUtils.printCartTotals(cartTotals);
 		
@@ -204,14 +206,26 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		PrintUtils.printCartTotals(cartBigTotal);
 		
 		
-		validationSteps.checkCalculationTotals("CART TOTALS", sumedTotals, cartTotals);
-		validationSteps.checkCalculationTotals("SHIPPING TOTALS", sumedTotals, shippingTotals);
-		validationSteps.checkCalculationTotals("CONFIRMATION TOTALS", sumedTotals, confirmationTotals);
+		validationSteps.checkCalculationTotals("CART TOTALS", totalsCalculated, cartTotals);
+		validationSteps.checkCalculationTotals("SHIPPING TOTALS", totalsCalculated, shippingTotals);
+		validationSteps.checkCalculationTotals("CONFIRMATION TOTALS", totalsCalculated, confirmationTotals);
 
 	}
+	@Test
+	public void us001UserProfileOrderId(){
+		
+		// After validation - grab order number
+		headerSteps.redirectToProfileHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+
+		String orderId = orderHistory.get(0).getOrderId();
+		orderNumber.setOrderId(orderId);
+	}
+	
 	
 	@After
 	public void saveData(){
+		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
 		MongoWriter.saveTotalsModel(cartTotals , getClass().getSimpleName());		
 		for(ProductBasicModel product : productsList )
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
