@@ -181,6 +181,14 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
 		
+		//After validation - grab order number
+		headerSteps.redirectToProfileHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+		System.out.println("ORDER ID: " + orderHistory.get(0).getOrderId());
+		
+		String orderId = orderHistory.get(0).getOrderId();
+		orderNumber.setOrderId(orderId);
+		
 		CalculationModel calc25 = CartCalculation.calculateTableProducts(cartProductsWith25Discount);
 		CalculationModel calc50 = CartCalculation.calculateTableProducts(cartProductsWith50Discount);
 		CalculationModel calc00 = CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts);
@@ -193,14 +201,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		checkoutValidationSteps.checkTotals(totalsCalculated, cartTotals);
 		
 		
-		//After validation - grab order number
-		headerSteps.goToProfile();
-		profileSteps.openProfileHistory();
-		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-		System.out.println("ORDER ID: " + orderHistory.get(0).getOrderId());
-		
-		String orderId = orderHistory.get(0).getOrderId();
-		orderNumber.setOrderId(orderId);
 	}
 
 	
