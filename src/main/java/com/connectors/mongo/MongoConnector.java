@@ -6,18 +6,18 @@ import java.util.List;
 import java.util.Set;
 
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 import com.tools.persistance.MongoConstants;
 
 /**
- * MongoConnector Will handle all transactions with the Mongo DB 
- * environment. 
+ * MongoConnector Will handle all transactions with the Mongo DB environment.
  * 
  * @author vladvoicu
  */
 public class MongoConnector {
-	
+
 	protected static MongoClient mongoClient;
 	protected static DB workingDB;
 	private List<ServerAddress> serverList = new ArrayList<ServerAddress>();
@@ -31,8 +31,7 @@ public class MongoConnector {
 
 	private List<ServerAddress> grabServerList() throws UnknownHostException {
 		List<ServerAddress> serverAddresses = new ArrayList<ServerAddress>();
-		String[] hostList = MongoConstants.MONGO_URL
-				.split(MongoConstants.COMMA_SEPARATOR);
+		String[] hostList = MongoConstants.MONGO_URL.split(MongoConstants.COMMA_SEPARATOR);
 		for (String hostNow : hostList) {
 			serverAddresses.add(new ServerAddress(hostNow));
 		}
@@ -85,5 +84,15 @@ public class MongoConnector {
 		return b;
 	}
 
+	public static void cleanCollection(String simpleName) {
+		workingDB = mongoClient.getDB(MongoConstants.DEV_MONGO_DB);
+		Set<String> colls = (workingDB.getCollectionNames());
+		for (String colName : colls) {
+			if (colName.contains(simpleName)) {
+				workingDB.getCollection(simpleName).dropIndexes();
+				break;
+			}
+		}
+	}
 
 }

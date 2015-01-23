@@ -17,6 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
+import com.mongodb.Mongo;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
@@ -105,6 +107,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		creditCardData.setMonthExpiration("06");
 		creditCardData.setYearExpiration("2016");
 		creditCardData.setCvcNumber("737");
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 

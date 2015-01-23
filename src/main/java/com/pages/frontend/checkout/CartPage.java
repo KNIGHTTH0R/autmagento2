@@ -20,7 +20,7 @@ public class CartPage extends AbstractPage {
 	@FindBy(css = "table#shopping-cart-totals-table")
 	private WebElement totalsTable;
 
-	@FindBy(css = "ul.checkout-types button:last-child")
+	@FindBy(css = "div.page-title ul.checkout-types button:last-child")
 	private WebElement kasseButton;
 	
 	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
