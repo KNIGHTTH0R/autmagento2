@@ -16,12 +16,9 @@ public class ProfileHistoryPage extends AbstractPage{
 	@FindBy(css = "table#my-orders-table")
 	private WebElement listContainer;
 	
-	@FindBy(css = "")
-	private WebElement selectCountDisplay;
-	
 	public List<OrderModel> grabOrderHistory() {
 
-		System.out.println("------------ order history");
+		System.out.println("------------ Order History");
 		element(listContainer).waitUntilVisible();
 		List<WebElement> orderList = listContainer.findElements(By.cssSelector("tbody > tr"));
 		
@@ -45,13 +42,13 @@ public class ProfileHistoryPage extends AbstractPage{
 			
 			result.add(orderNow);
 			
-			System.out.println("------------");
-			System.out.println(orderId);
-			System.out.println(date);
-			System.out.println(invoiceTo);
-			System.out.println(deliveryTo);
-			System.out.println(totalSum);
-			System.out.println(status);
+//			System.out.println("------------");
+//			System.out.println(orderId);
+//			System.out.println(date);
+//			System.out.println(invoiceTo);
+//			System.out.println(deliveryTo);
+//			System.out.println(totalSum);
+//			System.out.println(status);
 		}
 		
 		return result;

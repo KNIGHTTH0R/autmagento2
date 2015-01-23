@@ -16,7 +16,6 @@ public class CheckoutPage extends AbstractPage {
 	
 	@FindBy(id = "new-billing-address")
 	private WebElement newAddressButton;	
-	
 
 	public void selectAddressFromDropDown(String address) {
 		element(selectAddressInput).waitUntilVisible();

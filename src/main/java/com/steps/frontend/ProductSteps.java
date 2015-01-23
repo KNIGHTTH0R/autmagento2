@@ -24,7 +24,6 @@ public class ProductSteps extends AbstractSteps{
 		
 		setQuantity(qty);
 		
-		
 		ProductBasicModel result = productDetailsPage().grabProductData();
 		addToCart();
 		waitABit(Constants.TIME_CONSTANT);

@@ -10,22 +10,17 @@ import com.tools.data.OrderModel;
 public class ProfileSteps extends AbstractSteps{
 
 	private static final long serialVersionUID = -6439771925934414965L;
-
 	
 	@Step
 	public void openProfileHistory(){
 		dashboardMenuPage().clickOnProfileHistory();
 	}
 	
-	@Step
-	public void waitMore(){
-		waitABit(9000);
-	}
-
+	/**
+	 * Grab Order History List data from Profile OrderHistory
+	 * @return
+	 */
 	public List<OrderModel> grabOrderHistory() {
 		return profileHistoryPage().grabOrderHistory();
 	}
-
-
-
 }

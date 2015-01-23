@@ -46,20 +46,17 @@ public class ProductDetailsPage extends AbstractPage {
 	public void addToCart(){
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
-		
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), "Der Artikel wurde in den Warenkorb gelegt. Du kannst deinen Einkauf fortsetzen."));
 		waitABit(Constants.TIME_CONSTANT);
 	}
 
 	public ProductBasicModel grabProductData() {
 		ProductBasicModel result = new ProductBasicModel();
-		
 		element(productName).waitUntilVisible();
 		
 		//clean productCode
 		String type = productCode.getText();
 		type = type.replace("Artikelnummer: ", "");
-		
 		
 		result.setName(productName.getText());
 		result.setType(type);

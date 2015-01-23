@@ -166,48 +166,50 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
 		
-//		cartSteps.clickGoToShipping();	
-//		
-//		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-//		PrintUtils.printList(shippingProducts);
-//
-//		
-//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-//		System.out.println(shippingTotals.getSubtotal());
-//		
-//		shippingSteps.clickGoToPaymentMethod();
-//
-//		paymentSteps.expandCreditCardForm();
-//
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//		
-//		AddressModel billingAddress = confirmationSteps.grabBillingData();
-//		AddressModel shippingAddress = confirmationSteps.grabSippingData();
-//		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-//		
-//		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
-//		System.out.println(confirmationTotals.getSubtotal());
-//
-//		confirmationSteps.agreeAndCheckout();
-//		
-//		validationSteps.verifySuccessMessage();
-//		
-//		System.out.println("CART PHASE PRODUCTS VALIDATION");
-//		validationSteps.validateProducts(productsList, cartProducts);
-//		System.out.println("SHIPPING PHASE PRODUCTS VALIDATION");
-//		validationSteps.validateProducts(productsList, shippingProducts);
-//		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
-//		validationSteps.validateProducts(productsList, confirmationProducts);		
-//		
-//		System.out.println("TOTALS CALCULATED");
-//		CartTotalsModel cartBigTotal = validationSteps.calculateCartProducts(cartProducts);
-//		PrintUtils.printCartTotals(cartBigTotal);
-//		
-//		System.out.println("-----DOAMNE AJUTA-------");
-//		
-//		validationSteps.checkTotals(sumedTotals, cartTotals);
-//		validationSteps.checkTotals(sumedTotals, shippingTotals);
-//		validationSteps.checkTotals(sumedTotals, confirmationTotals);
+
+
+		System.out.println(cartTotals.getSubtotal());
+		
+		cartSteps.clickGoToShipping();	
+		
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		PrintUtils.printList(shippingProducts);
+
+		
+		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		System.out.println(shippingTotals.getSubtotal());
+		
+		shippingSteps.clickGoToPaymentMethod();
+
+		paymentSteps.expandCreditCardForm();
+
+		paymentSteps.fillCreditCardForm(creditCardData);
+		
+		AddressModel billingAddress = confirmationSteps.grabBillingData();
+		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		
+		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
+		System.out.println(confirmationTotals.getSubtotal());
+
+		confirmationSteps.agreeAndCheckout();
+		
+		validationSteps.verifySuccessMessage();
+		
+		validationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
+		validationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
+		validationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
+		
+		PrintUtils.printCartTotals(cartTotals);
+		
+		System.out.println("TOTALS CALCULATED");
+		CartTotalsModel cartBigTotal = CartCalculation.calculateCartProducts(cartProducts);
+		PrintUtils.printCartTotals(cartBigTotal);
+		
+		
+		validationSteps.checkCalculationTotals(sumedTotals, cartTotals);
+		validationSteps.checkCalculationTotals(sumedTotals, shippingTotals);
+		validationSteps.checkCalculationTotals(sumedTotals, confirmationTotals);
 
 		
 		

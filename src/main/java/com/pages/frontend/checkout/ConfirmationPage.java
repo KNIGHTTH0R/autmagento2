@@ -62,13 +62,7 @@ public class ConfirmationPage extends AbstractPage {
 			
 			result.setCountryName(splittedText[3]);
 			
-			System.out.println("grabAdressData method results are : ");
-			System.out.println("StreetAddress: " + result.getStreetAddress());
-			System.out.println("StreetNumber: " + result.getStreetNumber());
-			System.out.println("HomeTown: " + result.getHomeTown());
-			System.out.println("PostCode: " + result.getPostCode());
-			System.out.println("CountryName: " + result.getCountryName());
-			
+			PrintUtils.printAddressModel(result);
 			
 		}
 		if(textparse.split(Constants.LINE_SEPARATOR).length == 5){
@@ -91,12 +85,7 @@ public class ConfirmationPage extends AbstractPage {
 			
 			result.setCountryName(splittedText[3]);
 			
-			System.out.println("grabAdressData method results are : ");
-			System.out.println("StreetAddress: " + result.getStreetAddress());
-			System.out.println("StreetNumber: " + result.getStreetNumber());
-			System.out.println("HomeTown: " + result.getHomeTown());
-			System.out.println("PostCode: " + result.getPostCode());
-			System.out.println("CountryName: " + result.getCountryName());
+			PrintUtils.printAddressModel(result);
 		}
 		else{
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page");
@@ -149,6 +138,8 @@ public class ConfirmationPage extends AbstractPage {
 		return result;
 	}
 	
+	
+	//TODO might need to use other Model
 	public List<CartProductModel> grabProductsList() {
 		element(productListContainer).waitUntilVisible();
 		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));

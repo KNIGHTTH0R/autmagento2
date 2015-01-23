@@ -11,11 +11,9 @@ import com.tools.AbstractPage;
 import com.tools.Constants;
 
 public class DashboardMenuPage extends AbstractPage{
-
 	
 	@FindBy(css = "div.block-content")
 	private WebElement dashboardMenuContainer;
-	
 	
 	public void clickOnProfileHistory(){
 		element(dashboardMenuContainer).waitUntilVisible();

@@ -85,14 +85,7 @@ public class MongoConnector {
 	}
 
 	public static void cleanCollection(String simpleName) {
-		workingDB = mongoClient.getDB(MongoConstants.DEV_MONGO_DB);
-		Set<String> colls = (workingDB.getCollectionNames());
-		for (String colName : colls) {
-			if (colName.contains(simpleName)) {
-				workingDB.getCollection(simpleName).dropIndexes();
-				break;
-			}
-		}
+		mongoClient.dropDatabase(simpleName);
 	}
 
 }

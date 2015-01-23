@@ -13,29 +13,50 @@ public class CartSteps extends  AbstractSteps{
 	
 	private static final long serialVersionUID = 4077671481867589798L;
 
+	
+	/**
+	 * Grab all cart product sections from the Cart Page
+	 * in a single list.
+	 * @return
+	 */
 	public List<CartProductModel> grabProductsData(){
 		return cartPage().grabProductsData();
 	}
 	
+	/**
+	 * Grab 25% Discount section from the Cart Page
+	 * @return
+	 */
 	public List<CartProductModel> grabProductsDataWith25PercentDiscount(){
 		PrintUtils.printList(cartPage().grabProductsDataWith25Discount());
 		
 		return cartPage().grabProductsDataWith25Discount();
 	}
 
+	/**
+	 * Grab 50% Discount section from the Cart Page
+	 * @return
+	 */
 	public List<CartProductModel> grabProductsDataWith50PercentDiscount(){
 		PrintUtils.printList(cartPage().grabProductsDataWith50Discount());
 		
 		return cartPage().grabProductsDataWith50Discount();
 	}
 
+	/**
+	 * Grab Marketing Material section from the Cart Page
+	 * @return
+	 */
 	public List<CartProductModel> grabMarketingMaterialProductsData(){
 		PrintUtils.printList(cartPage().grabMarketingMaterialProductsData());
 		
 		return cartPage().grabMarketingMaterialProductsData();
 	}
-
-	@Step
+	
+	/**
+	 * Grab Cart Totals section from the Cart Page
+	 * @return
+	 */
 	public CartTotalsModel grabTotals() {		
 		return cartPage().grabTotals();
 	}

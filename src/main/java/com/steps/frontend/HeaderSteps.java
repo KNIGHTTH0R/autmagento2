@@ -3,6 +3,7 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
+import com.tools.Constants;
 
 public class HeaderSteps extends AbstractSteps{
 
@@ -26,6 +27,10 @@ public class HeaderSteps extends AbstractSteps{
 	@Step
 	public void goToProfile(){
 		headerPage().clickOnProfileButton();
+	}
+
+	public void redirectToProfileHistory() {
+		getDriver().get(Constants.PROFILE_HISTORY_URL);
 	}
 
 }

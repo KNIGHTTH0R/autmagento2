@@ -163,4 +163,40 @@ public class AbstractSteps extends ScenarioSteps {
 	public MailinatorHomePage mailinatorHomePage() {
 		return getPages().currentPageAt(MailinatorHomePage.class);
 	}
+	
+	
+	//------------------------- Common methods 
+	
+	
+	
+	@Step
+	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads, String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
+		System.out.println(" -- Print Totals - " + message);
+		System.out.println("CUSTOMERLEADS: " + customerLeads);
+		System.out.println("HOSTESSLEADS: " + hostessLeads);
+		System.out.println("HOSTESSLEADSWEEK: " + hostessLeadWeek);
+		System.out.println("STYLECOACHLEADS: " + styleCoachLeads);
+		System.out.println("STYLECOACHLEADSWEEK: " + styleCoachLeadsWeek);
+	}
+	
+	@Step
+	public void printTotalsModel(String message, String subtotal, String discount, String totalAmount, String tax, String shipping, String jewelryBonus, String ip){
+		System.out.println(" -- Print Totals - " + message);
+		System.out.println("SUBTOTAL: " + subtotal);
+		System.out.println("DISCOUNT: " + discount);
+		System.out.println("TOTAL AMOUNT: " + totalAmount);
+		System.out.println("TAX: " + tax);
+		System.out.println("SHIPPING: " + shipping);
+		System.out.println("JEWERLY BONUS: " + jewelryBonus);
+		System.out.println("IP POINTS: " + ip);
+	}
+	
+
+	@Step
+	public void printCalculationModel(String message, String subtotal, String totalAmount, String ip) {
+		System.out.println("-- Calculation Model - " + message);
+		System.out.println("SUBTOTAL: " + subtotal);
+		System.out.println("FINAL: " + totalAmount);
+		System.out.println("IP POINTS: " + ip);
+	}
 }
