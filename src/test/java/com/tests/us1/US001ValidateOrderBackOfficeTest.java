@@ -33,20 +33,20 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps
 	public BackEndSteps backEndSteps;
 
-	private String orderId = "";
+	private String orderId = "staging100050872";
 
 	
-	@Before
-	public void setUp(){
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US001ValidateUserProfileOrderTest");
-		
-		if(orderModel.size() == 1){
-			
-			orderId = orderModel.get(0).getOrderId();
-		}else{
-			Assert.assertTrue("Failure: Could not retrieve orderId. ",  orderModel.size() == 1);
-		}
-	}
+//	@Before
+//	public void setUp(){
+//		List<OrderModel> orderModel = MongoReader.getOrderModel("US001ValidateUserProfileOrderTest");
+//		
+//		if(orderModel.size() == 1){
+//			
+//			orderId = orderModel.get(0).getOrderId();
+//		}else{
+//			Assert.assertTrue("Failure: Could not retrieve orderId. ",  orderModel.size() == 1);
+//		}
+//	}
 	
 	
 	/**
@@ -60,10 +60,11 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		backEndSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = backEndSteps.grabOrderData();
 		OrderTotalsModel ordertotal = backEndSteps.grabTotals();
+		System.out.println("-----START-----");
 		PrintUtils.printOrderTotals(ordertotal);
 //		backEndSteps.grabOrder
 //		backEndSteps.grabOrderTotals();
 		
-		PrintUtils.printOrderItemsList(orderItemsList);
+//		PrintUtils.printOrderItemsList(orderItemsList);
 	}
 }

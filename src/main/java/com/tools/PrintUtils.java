@@ -50,12 +50,25 @@ public class PrintUtils {
 
 	}
 	public static void printOrderTotals(OrderTotalsModel model) {
+		
+	
+		
 		System.out.println(" *** Print backend orders Totals  *** ");
 		System.out.println("------------------------");
 		System.out.println(model.getSubtotal());
 		System.out.println(model.getShipping());
-		System.out.println(model.getDiscount());
+		System.out.println(model.getDiscount());		
+		System.out.println(model.getTax());
+		System.out.println(model.getTotalAmount());
+		System.out.println(model.getTotalPaid());
+		System.out.println(model.getTotalRefunded());
+		System.out.println(model.getTotalPayable());
+		System.out.println(model.getTotalIP());
+		System.out.println(model.getTotalFortyDiscounts());		
+		System.out.println(model.getTotalBonusJeverly());
+		System.out.println(model.getTotalMarketingBonus());
 		
+
 	}
 
 	public static double cleanNumberToDouble(String unitPrice) {
