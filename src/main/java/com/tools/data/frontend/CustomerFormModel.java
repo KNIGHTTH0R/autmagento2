@@ -1,4 +1,4 @@
-package com.tools.data;
+package com.tools.data.frontend;
 
 import com.tools.Constants;
 import com.tools.FieldGenerators;

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
 import com.tools.Constants;
-import com.tools.data.ProductBasicModel;
+import com.tools.data.frontend.ProductBasicModel;
 
 public class ProductDetailsPage extends AbstractPage {
 

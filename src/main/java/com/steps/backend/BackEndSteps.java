@@ -1,13 +1,9 @@
 package com.steps.backend;
 
-import java.util.List;
-
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
 import com.tools.Constants;
-import com.tools.data.OrderItemModel;
-import com.tools.data.OrderTotalsModel;
 import com.tools.data.StylistDataModel;
 
 public class BackEndSteps extends AbstractSteps {
@@ -24,16 +20,12 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void redirectToManageCustomers() {
+	public void clickOnCustomers() {
 		navigationPage().clickOnCustomers();
-
-		// @SuppressWarnings("unused")
-		// String url = navigationPage().getManageCustomersPage();
-		// getDriver().get(url);
 	}
 
 	@Step
-	public void redirectToSalesOrders() {
+	public void clickOnSalesOrders() {
 		navigationPage().clickOrdersPage();
 		navigationPage().clickOnSales();
 	}
@@ -69,26 +61,6 @@ public class BackEndSteps extends AbstractSteps {
 		return customerDetailsHomePage().extractEmailConfirmationStatus();
 	}
 
-	@Step
-	public void findOrderByOrderId(String orderId) {
-		orderListPage().inputOderId(orderId);
-		orderListPage().clickOnSearch();
-//		waitABit(5000);
-	}
 
-	@Step
-	public void openOrder(String orderId) {
-		orderListPage().openOrderDetails(orderId);
-//		waitABit(Constants.TIME_CONSTANT);
-	}
-
-	@Step
-	public List<OrderItemModel> grabOrderData() {
-		return orderItemsPage().grabOrderItems();
-	}
-	@Step
-	public OrderTotalsModel grabTotals() {
-		return orderTotalsPage().grabTotals();
-	}
 
 }

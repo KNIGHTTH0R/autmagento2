@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.AbstractPage;
-import com.tools.data.ProductBasicModel;
+import com.tools.data.frontend.ProductBasicModel;
 
 public class ProductListPage extends AbstractPage {
 

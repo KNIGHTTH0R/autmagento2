@@ -3,14 +3,14 @@ package com.tools;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import com.tools.data.AddressModel;
 import com.tools.data.CalculationModel;
-import com.tools.data.CartProductModel;
-import com.tools.data.CartTotalsModel;
 import com.tools.data.EmailModel;
-import com.tools.data.OrderItemModel;
 import com.tools.data.OrderTotalsModel;
-import com.tools.data.ProductBasicModel;
+import com.tools.data.backend.OrderItemModel;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ProductBasicModel;
 
 public class PrintUtils {
 

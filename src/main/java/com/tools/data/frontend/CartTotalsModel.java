@@ -1,4 +1,4 @@
-package com.tools.data;
+package com.tools.data.frontend;
 
 public class CartTotalsModel {
 

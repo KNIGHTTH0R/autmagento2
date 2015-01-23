@@ -1,21 +1,16 @@
-package com.steps.frontend.checkout;
+package com.tools.calculation;
 
 
 import java.util.List;
 
-import com.tools.AbstractSteps;
 import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
-import com.tools.data.CartProductModel;
+import com.tools.data.frontend.CartProductModel;
 
-public class CalculusSteps extends AbstractSteps {
+public class CartCalculation {
 	
-	
-
-	private static final long serialVersionUID = -2988085683745584124L;
-
-	public CalculationModel calculateTableProducts(List<CartProductModel> cartList) {
+	public static CalculationModel calculateTableProducts(List<CartProductModel> cartList) {
 		CalculationModel result = new CalculationModel();
 		double askingPriceSum = 0;
 		double finalPriceSum = 0;
@@ -50,26 +45,8 @@ public class CalculusSteps extends AbstractSteps {
 		return result;
 
 	}	
-	
 
-
-	private int checkCalculusType(String tableType) {
-		int result = 0;
-
-		if (tableType.contentEquals(Constants.DISCOUNT_25)) {
-			result = 25;
-		}
-		if (tableType.contentEquals(Constants.DISCOUNT_50)) {
-			result = 50;
-		}
-		if (tableType.contentEquals(Constants.DISCOUNT_0)) {
-			result = 0;
-		}
-		return result;
-	}
-	
-	// @Step
-	public CalculationModel calculateTotalSum(List<CalculationModel> totalsList) {
+	public static CalculationModel calculateTotalSum(List<CalculationModel> totalsList) {
 
 		CalculationModel result = new CalculationModel();	
 		
@@ -90,8 +67,20 @@ public class CalculusSteps extends AbstractSteps {
 		
 		return result;
 	}
-	
-	
 
+	private static int checkCalculusType(String tableType) {
+		int result = 0;
+
+		if (tableType.contentEquals(Constants.DISCOUNT_25)) {
+			result = 25;
+		}
+		if (tableType.contentEquals(Constants.DISCOUNT_50)) {
+			result = 50;
+		}
+		if (tableType.contentEquals(Constants.DISCOUNT_0)) {
+			result = 0;
+		}
+		return result;
+	}
 
 }

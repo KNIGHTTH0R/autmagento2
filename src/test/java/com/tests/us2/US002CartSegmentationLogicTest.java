@@ -20,7 +20,6 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
-import com.steps.frontend.checkout.CalculusSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -29,12 +28,13 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.data.AddressModel;
+import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
-import com.tools.data.CartProductModel;
-import com.tools.data.CartTotalsModel;
-import com.tools.data.CreditCardModel;
-import com.tools.data.ProductBasicModel;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
 
 
@@ -55,7 +55,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
-	public CalculusSteps calculusSteps;
+	public CartCalculation calculusSteps;
 	@Steps
 	public CheckoutValidationSteps validationSteps;
 	@Steps

@@ -5,8 +5,8 @@ import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.AbstractSteps;
 import com.tools.Constants;
-import com.tools.data.AddressModel;
-import com.tools.data.CustomerFormModel;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CustomerFormModel;
 
 public class CustomerRegistrationSteps extends AbstractSteps {
 

@@ -85,12 +85,5 @@ public class MongoConnector {
 		return b;
 	}
 
-//	public boolean verifyDatabaseIsEmpty() {
-//		workingDB = mongoClient.getDB(MongoConstants.DEV_MONGO_DB);
-//		long count = workingDB.getCollection(
-//				MongoConstants.MONGO_COLLECTION).getCount();
-//		System.out.println("Count: " + count);
-//		return count == 0;
-//	}
 
 }

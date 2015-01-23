@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
-import com.tools.data.OrderItemModel;
+
 
 public class OrderAdressPage extends AbstractPage {
 

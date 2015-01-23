@@ -3,7 +3,7 @@ package com.steps.frontend.checkout;
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
-import com.tools.data.CreditCardModel;
+import com.tools.data.frontend.CreditCardModel;
 
 public class PaymentSteps extends AbstractSteps{
 

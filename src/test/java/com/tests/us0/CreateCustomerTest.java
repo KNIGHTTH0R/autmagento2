@@ -11,9 +11,9 @@ import org.junit.runner.RunWith;
 
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.data.AddressModel;
-import com.tools.data.CustomerFormModel;
 import com.tools.data.StylistDataModel;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 

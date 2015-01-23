@@ -18,7 +18,6 @@ public class MagentoLoginPage extends AbstractPage{
 	private WebElement loginButton;
 
 	
-	
 	public void inputUserName(String userName){
 		element(userNameInput).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");

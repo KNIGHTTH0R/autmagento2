@@ -1,6 +1,5 @@
 package com.pages.backend.orders.details;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
@@ -10,9 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
-import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.data.OrderItemModel;
 import com.tools.data.OrderTotalsModel;
 
 public class OrderTotalsPage extends AbstractPage {
@@ -101,9 +98,6 @@ public class OrderTotalsPage extends AbstractPage {
 				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
 				result.setTotalMarketingBonus((valueTransformer));
 			}
-			
-		
-			
 			
 		}
 		return result;

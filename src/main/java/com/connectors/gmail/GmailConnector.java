@@ -19,59 +19,112 @@ import com.tools.data.EmailModel;
 
 public class GmailConnector {
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws MessagingException {
 		readGmail();
 	}
 
-
-	public static List<EmailModel> readGmail() {
+	/**
+	 * Return a list of e-mails as EmailModel. 
+	 * Note: To be used for mongo persistance if needed.
+	 * @return
+	 * @throws MessagingException
+	 */
+	public static List<EmailModel> readGmail() throws MessagingException {
 
 		List<EmailModel> emailList = new ArrayList<EmailModel>();
+		Message message[] = connect();
 
-		Properties props2 = System.getProperties();
+		for (int i = 0; i < message.length; i++) {
+			EmailModel modelNow = new EmailModel();
+			modelNow.setSubject(message[i].getSubject());
 
-		props2.setProperty(EmailConstants.EMAIL_STORE, EmailConstants.PROTOCOL);
+			modelNow.setRecievedDate(message[i].getReceivedDate());
+			modelNow.setSentDate(message[i].getSentDate());
 
-		Session session2 = Session.getDefaultInstance(props2, null);
+			modelNow.setContent(getStringFromMessage(message[i]));
 
-		try {
+			System.out.println("------------------------");
+			System.out.println(message[i].getSubject());
+			System.out.println(message[i].getReceivedDate());
+			System.out.println(message[i].getSentDate());
+			System.out.println(modelNow.getContent());
 
-			Store store = session2.getStore(EmailConstants.PROTOCOL);
-			store.connect(EmailConstants.RECEIVING_HOST, EmailConstants.USERNAME, EmailConstants.PASSWORD);
-			Folder folder = store.getFolder("INBOX");// get inbox
-
-			folder.open(Folder.READ_ONLY);// open folder only to read
-			Message message[] = folder.getMessages();
-
-			for (int i = 0; i < message.length; i++) {
-				EmailModel modelNow = new EmailModel();
-				modelNow.setSubject(message[i].getSubject());
-
-				modelNow.setRecievedDate(message[i].getReceivedDate());
-				modelNow.setSentDate(message[i].getSentDate());
-
-				modelNow.setContent(getStringFromMessage(message[i]));
-
-				System.out.println("------------------------");
-				System.out.println(message[i].getSubject());
-				System.out.println(message[i].getReceivedDate());
-				System.out.println(message[i].getSentDate());
-				System.out.println(modelNow.getContent());
-				// message[i].setFlag(Flags.Flag.DELETED, true);
-
-				emailList.add(modelNow);
-			}
-
-			folder.close(true);
-			store.close();
-
-		} catch (Exception e) {
-			System.out.println(e.toString());
+			// message[i].setFlag(FLAGS.Flag.DELETED, true);
+			emailList.add(modelNow);
 		}
 
 		return emailList;
 	}
 
+	/**
+	 * Search for email by searchKey - email content, also filter by emailAddress.
+	 * Flag for Delete found email.
+	 * @param emailAddress
+	 * @param searchKey
+	 * @param deleteAfter
+	 * @return
+	 */
+	public static String searchForMail(String emailAddress, String searchKey, boolean deleteAfter) {
+		Message message[] = connect();
+
+		boolean found = false;
+		String returnMessage = null;
+		for (int i = message.length - 1; i >= 0; i--) {
+			try {
+				Address[] addresses = message[i].getAllRecipients();
+				for (Address address : addresses) {
+					if (address.toString().contains(emailAddress)) {
+						String allText = getStringFromMessage(message[i]);
+						if (allText.contains(searchKey)) {
+							returnMessage = allText;
+							if (deleteAfter) {
+								message[i].setFlag(FLAGS.Flag.DELETED, true);
+							}
+							found = true;
+							break;
+						}
+					}
+				}
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+			if (found) {
+				break;
+			}
+		}
+		return returnMessage;
+	}
+
+	/**
+	 * Connect to email account and return INBOX messages.
+	 * @return
+	 */
+	private static Message[] connect() {
+		Properties props2 = System.getProperties();
+		Session session2 = Session.getDefaultInstance(props2, null);
+		props2.setProperty(EmailConstants.EMAIL_STORE, EmailConstants.PROTOCOL);
+		Message message[] = null;
+
+		try {
+
+			Store store = session2.getStore(EmailConstants.PROTOCOL);
+			store.connect(EmailConstants.RECEIVING_HOST, EmailConstants.USERNAME, EmailConstants.PASSWORD);
+			Folder folder = store.getFolder("INBOX");
+
+			folder.open(Folder.READ_WRITE);
+			message = folder.getMessages();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return message;
+	}
+
+	/**
+	 * Will return the message as a string from multipart type of content.
+	 * @param message
+	 * @return
+	 */
+	
 	private static String getStringFromMessage(Message message) {
 		StringBuilder textContent = new StringBuilder("");
 		try {
@@ -90,55 +143,4 @@ public class GmailConnector {
 		}
 		return textContent.toString();
 	}
-
-	public static String searchForMail(String emailAddress, String searchKey, boolean deleteAfter) {
-		Message messages[] = null;
-		Properties props2 = System.getProperties();
-
-		props2.setProperty(EmailConstants.EMAIL_STORE, EmailConstants.PROTOCOL);
-
-		Session session2 = Session.getDefaultInstance(props2, null);
-
-		try {
-
-			Store store = session2.getStore(EmailConstants.PROTOCOL);
-			store.connect(EmailConstants.RECEIVING_HOST, EmailConstants.USERNAME, EmailConstants.PASSWORD);
-			Folder folder = store.getFolder("INBOX");// get inbox
-
-			folder.open(Folder.READ_ONLY);// open folder only to read
-			messages = folder.getMessages();
-//			folder.close(true);
-//			store.close();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		boolean found = false;
-		String returnMessage = null;
-		for (int i = messages.length - 1; i >= 0; i--) {
-			try {
-				Address[] addresses = messages[i].getAllRecipients();
-				for (Address address : addresses) {
-					if (address.toString().contains(emailAddress)) {
-						String allText = getStringFromMessage(messages[i]);
-						if (allText.contains(searchKey)) {
-							returnMessage = allText;
-							if (deleteAfter) {
-								messages[i].setFlag(FLAGS.Flag.DELETED, true);
-							}
-							found = true;
-							break;
-						}
-					}
-				}
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			}
-			if (found) {
-				break;
-			}
-		}
-		return returnMessage;
-	}
-
 }
