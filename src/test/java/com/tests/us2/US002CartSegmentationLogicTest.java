@@ -38,6 +38,7 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.workflows.frontend.CartWorkflows;
 
 
 @WithTag(name="US2", type = "frontend")
@@ -66,6 +67,8 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public CartWorkflows cartWorkflows;
 	
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
@@ -196,9 +199,19 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		
 		validationSteps.verifySuccessMessage();
 		
-		validationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
-		validationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
-		validationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
+		
+		cartWorkflows.setModels(productsList, cartProducts);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+		
+		cartWorkflows.setModels(productsList, shippingProducts);
+		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+		
+		cartWorkflows.setModels(productsList, confirmationProducts);
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+//		validationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
+//		validationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
+//		validationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
 		
 		PrintUtils.printCartTotals(cartTotals);
 		

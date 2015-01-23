@@ -153,8 +153,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		cartSteps.clickGoToShipping();
 
-		// TODO - add billing and shipping address forms
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		// TODO - validate shipping without IP points
+//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
 		// PrintUtils.printCartTotals(shippingTotals);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
@@ -169,7 +169,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
 		confirmationSteps.agreeAndCheckout();
-		
+
 		
 		checkoutValidationSteps.verifySuccessMessage();
 		
@@ -181,10 +181,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		cartWorkflows.setModels(productsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
-		
-
 
 		checkoutValidationSteps.checkCalculationTotals("CART TOTALS",totalsCalculated, cartTotals);
+		
+		//Shipping has no IP
 //		checkoutValidationSteps.checkCalculationTotals("SHIPPING TOTALS", totalsCalculated, shippingTotals);
 	}
 	
@@ -198,6 +198,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		String orderId = orderHistory.get(0).getOrderId();
 		orderNumber.setOrderId(orderId);
+		profileSteps.verifyOrderId(orderId);
 	}
 	
 

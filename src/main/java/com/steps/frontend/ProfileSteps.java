@@ -2,6 +2,8 @@ package com.steps.frontend;
 
 import java.util.List;
 
+import org.junit.Assert;
+
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
@@ -22,5 +24,11 @@ public class ProfileSteps extends AbstractSteps{
 	 */
 	public List<OrderModel> grabOrderHistory() {
 		return profileHistoryPage().grabOrderHistory();
+	}
+	
+	
+	@Step
+	public void verifyOrderId(String orderId){
+		Assert.assertTrue("Failure: order id is null", orderId != null);
 	}
 }
