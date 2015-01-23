@@ -31,7 +31,6 @@ public class HeaderSteps extends AbstractSteps{
 
 	public void redirectToProfileHistory() {
 		getDriver().get(Constants.PROFILE_HISTORY_URL);
-		
 	}
 
 }

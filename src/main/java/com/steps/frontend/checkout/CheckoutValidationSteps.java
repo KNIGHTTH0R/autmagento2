@@ -27,6 +27,15 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		successPage().verifySuccessMessage();
 	}
 
+	/**
+	 * Return product price based on (price - quantity - discount). Discount may
+	 * be 25 or 50.
+	 * 
+	 * @param product
+	 * @return
+	 */
+
+	// TODO move this to calculation - No sense to be in steps
 	public double calculateCartProductsByDiscount(CartProductModel product) {
 
 		double productPrice = 0;
@@ -40,7 +49,13 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		return productPrice;
 	}
 
-	@Step
+	/**
+	 * Calculate Totals based on a product list
+	 * 
+	 * @param productList
+	 * @return
+	 */
+	// TODO move this to calculation - No sense to be in steps
 	public CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {
 
 		double totalPrice = 0;
@@ -59,7 +74,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 			if (cartProductModel.getDiscountClass() == "25" || cartProductModel.getDiscountClass() == "50") {
 				discount = calculateCartProductsByDiscount(cartProductModel);
 				discountSum += calculateCartProductsByDiscount(cartProductModel);
-
 			}
 			totalAmount += (PrintUtils.cleanNumberToDouble(cartProductModel.getProductsPrice()) - discount);
 			ipPointsSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
@@ -77,7 +91,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		result.setShipping(df.format(shiping));
 		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
 
-		System.out.println("------------------------------");
+		System.out.println("--- Calculated Totals ------------------------------");
 		System.out.println("Subtotal: " + result.getSubtotal());
 		System.out.println("Discount: " + result.getDiscount());
 		System.out.println("TotalAmount: " + result.getTotalAmount());
@@ -89,35 +103,29 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		return result;
 	}
 
-	
-
 	@Step
 	public void checkTotalsInCart(CartTotalsModel cartTotalsModel1, CartTotalsModel cartTotalsModel2) {
 
-		System.out.println("----------SUBTOTAL: " + cartTotalsModel2.getSubtotal() + " : " + cartTotalsModel1.getSubtotal());
+		printTotals("INITIAL", cartTotalsModel1.getSubtotal(), cartTotalsModel1.getDiscount(), cartTotalsModel1.getTotalAmount(), cartTotalsModel1.getTax(), cartTotalsModel1.getShipping(), cartTotalsModel1.getJewelryBonus(), cartTotalsModel1.getIpPoints());
+		printTotals("FINAL", cartTotalsModel2.getSubtotal(), cartTotalsModel2.getDiscount(), cartTotalsModel2.getTotalAmount(), cartTotalsModel2.getTax(), cartTotalsModel2.getShipping(), cartTotalsModel2.getJewelryBonus(), cartTotalsModel2.getIpPoints());
+
 		Assert.assertTrue("The subtotal should be " + cartTotalsModel2.getSubtotal() + " and it is " + cartTotalsModel1.getSubtotal() + "!",
 				cartTotalsModel2.getSubtotal().equals(cartTotalsModel1.getSubtotal()));
 
-		System.out.println("----------DISCOUNT: " + cartTotalsModel2.getDiscount() + " : " + cartTotalsModel1.getDiscount());
 		Assert.assertTrue("The discount should be " + cartTotalsModel2.getDiscount() + " and it is " + cartTotalsModel1.getDiscount() + "!",
 				cartTotalsModel2.getDiscount().equals(cartTotalsModel1.getDiscount()));
 
-		System.out.println("----------TOTAL AMOUNT: " + cartTotalsModel2.getTotalAmount() + " : " + cartTotalsModel1.getTotalAmount());
 		Assert.assertTrue("The total amount should be " + cartTotalsModel2.getTotalAmount() + " and it is " + cartTotalsModel1.getTotalAmount() + "!",
 				cartTotalsModel2.getTotalAmount().equals(cartTotalsModel1.getTotalAmount()));
 
-		System.out.println("----------TAX: " + cartTotalsModel2.getTax() + " : " + cartTotalsModel1.getTax());
 		Assert.assertTrue("The tax should be " + cartTotalsModel2.getTax() + " and it is " + cartTotalsModel1.getTax() + "!", cartTotalsModel2.getTax().equals(cartTotalsModel1.getTax()));
 
-		System.out.println("----------SHIPPING: " + cartTotalsModel2.getShipping() + " : " + cartTotalsModel1.getShipping());
 		Assert.assertTrue("The shipping  should be " + cartTotalsModel2.getShipping() + " and it is " + cartTotalsModel1.getShipping() + "!",
 				cartTotalsModel2.getShipping().equals(cartTotalsModel1.getShipping()));
 
-		System.out.println("----------JEWERLY BONUS: " + cartTotalsModel2.getJewelryBonus() + " : " + cartTotalsModel1.getJewelryBonus());
 		Assert.assertTrue("The jewerly bouns should be " + cartTotalsModel2.getJewelryBonus() + " and it is " + cartTotalsModel1.getJewelryBonus() + "!",
 				cartTotalsModel2.getJewelryBonus().equals(cartTotalsModel1.getJewelryBonus()));
 
-		System.out.println("----------IP POINTS: " + cartTotalsModel2.getIpPoints() + " : " + cartTotalsModel1.getIpPoints());
 		Assert.assertTrue("The ip points should be " + cartTotalsModel2.getIpPoints() + " and it is " + cartTotalsModel1.getIpPoints() + "!",
 				cartTotalsModel2.getIpPoints().equals(cartTotalsModel1.getIpPoints()));
 

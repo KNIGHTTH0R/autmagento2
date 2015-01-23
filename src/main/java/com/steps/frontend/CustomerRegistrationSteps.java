@@ -147,6 +147,4 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void verifyText() {
 		registrationMessagePage().verifyText();
 	}
-
-
 }
