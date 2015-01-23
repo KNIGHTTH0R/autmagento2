@@ -38,7 +38,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	
 	@Before
 	public void setUp(){
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US001ValidateUserProfileOrderTest");
+		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest");
 		
 		if(orderModel.size() == 1){
 			

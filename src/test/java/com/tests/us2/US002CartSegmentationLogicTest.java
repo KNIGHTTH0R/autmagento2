@@ -251,7 +251,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		CartTotalsModel cartBigTotal = validationSteps.calculateCartProducts(cartProducts);
 		PrintUtils.printCartTotals(cartBigTotal);
 		
-		System.out.println("-----DOAMNE AJUTA-------");
+//		System.out.println("-----DOAMNE AJUTA-------");
 		
 		validationSteps.checkTotals(sumedTotals, cartTotals);
 		validationSteps.checkTotals(sumedTotals, shippingTotals);
