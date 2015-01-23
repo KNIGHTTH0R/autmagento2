@@ -38,7 +38,7 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
 
 
-@WithTag(name="US2", type = "frontend")
+@WithTag(name="US2", type = "US2")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US002CartSegmentationLogicTest extends BaseTest{
@@ -104,7 +104,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	}
 	
 	@Test
-	public void us002CartSegmentationLogicTest(){
+	public void uS001StyleCoachShoppingTest(){
 		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
 		ProductBasicModel productData;
 		

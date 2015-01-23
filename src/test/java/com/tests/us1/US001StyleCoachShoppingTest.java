@@ -195,8 +195,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(calcList);
 		
 		checkoutValidationSteps.checkCalculationTotals(totalsCalculated, cartTotals);
-		
-		
 	}
 
 	
