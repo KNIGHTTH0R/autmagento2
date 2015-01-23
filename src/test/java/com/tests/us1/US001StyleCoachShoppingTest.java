@@ -106,7 +106,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		creditCardData.setMonthExpiration("06");
 		creditCardData.setYearExpiration("2016");
 		creditCardData.setCvcNumber("737");
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
@@ -165,26 +165,19 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-//		AddressModel billingAddress = confirmationSteps.grabBillingData();
-//		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+		// AddressModel billingAddress = confirmationSteps.grabBillingData();
+		// AddressModel shippingAddress = confirmationSteps.grabSippingData();
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 
-		checkoutValidationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION",productsList, cartProducts);
+		
+		checkoutValidationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
 		checkoutValidationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
 		checkoutValidationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
-		
-		//After validation - grab order number
-		headerSteps.redirectToProfileHistory();
-		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-		System.out.println("ORDER ID: " + orderHistory.get(0).getOrderId());
-		
-		String orderId = orderHistory.get(0).getOrderId();
-		orderNumber.setOrderId(orderId);
-		
+
 		CalculationModel calc25 = CartCalculation.calculateTableProducts(cartProductsWith25Discount);
 		CalculationModel calc50 = CartCalculation.calculateTableProducts(cartProductsWith50Discount);
 		CalculationModel calc00 = CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts);
@@ -192,14 +185,27 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		calcList.add(calc50);
 		calcList.add(calc00);
 		
-		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(calcList);
 		
+		checkoutValidationSteps.printTotalsModel("Cart Totals", cartTotals.getSubtotal(), cartTotals.getDiscount(), cartTotals.getTotalAmount(), cartTotals.getTax(), cartTotals.getShipping(),
+				cartTotals.getJewelryBonus(), cartTotals.getIpPoints());
+
+		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(calcList);
+
+		checkoutValidationSteps.printCalculationModel("Calculated Values", String.valueOf(totalsCalculated.getAskingPrice()), String.valueOf(totalsCalculated.getFinalPrice()),
+				String.valueOf(totalsCalculated.getIpPoints()));
+
+		// After validation - grab order number
+		headerSteps.redirectToProfileHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+
+		String orderId = orderHistory.get(0).getOrderId();
+		orderNumber.setOrderId(orderId);
+
 		checkoutValidationSteps.checkCalculationTotals(totalsCalculated, cartTotals);
 	}
 
-	
 	@After
-	public void saveData(){
-		MongoWriter.saveOrderModel(orderNumber , getClass().getSimpleName());
+	public void saveData() {
+		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
 	}
 }

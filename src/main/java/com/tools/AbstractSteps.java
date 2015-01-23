@@ -1,5 +1,8 @@
 package com.tools;
 
+import org.junit.Assert;
+
+import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
@@ -46,6 +49,11 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
+	}
+
+	
+	public AbstractPage abstractPage(){
+		return getPages().currentPageAt(AbstractPage.class);
 	}
 
 	// ----------------------BE------------------------------------
@@ -167,9 +175,8 @@ public class AbstractSteps extends ScenarioSteps {
 	
 	//------------------------- Common methods 
 	
-	
-	
 	@Step
+	@Screenshots(onlyOnFailures = true)
 	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads, String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
 		System.out.println(" -- Print Totals - " + message);
 		System.out.println("CUSTOMERLEADS: " + customerLeads);
@@ -177,26 +184,8 @@ public class AbstractSteps extends ScenarioSteps {
 		System.out.println("HOSTESSLEADSWEEK: " + hostessLeadWeek);
 		System.out.println("STYLECOACHLEADS: " + styleCoachLeads);
 		System.out.println("STYLECOACHLEADSWEEK: " + styleCoachLeadsWeek);
+		getDriver().getCurrentUrl();
 	}
-	
-	@Step
-	public void printTotalsModel(String message, String subtotal, String discount, String totalAmount, String tax, String shipping, String jewelryBonus, String ip){
-		System.out.println(" -- Print Totals - " + message);
-		System.out.println("SUBTOTAL: " + subtotal);
-		System.out.println("DISCOUNT: " + discount);
-		System.out.println("TOTAL AMOUNT: " + totalAmount);
-		System.out.println("TAX: " + tax);
-		System.out.println("SHIPPING: " + shipping);
-		System.out.println("JEWERLY BONUS: " + jewelryBonus);
-		System.out.println("IP POINTS: " + ip);
-	}
-	
 
-	@Step
-	public void printCalculationModel(String message, String subtotal, String totalAmount, String ip) {
-		System.out.println("-- Calculation Model - " + message);
-		System.out.println("SUBTOTAL: " + subtotal);
-		System.out.println("FINAL: " + totalAmount);
-		System.out.println("IP POINTS: " + ip);
-	}
+
 }

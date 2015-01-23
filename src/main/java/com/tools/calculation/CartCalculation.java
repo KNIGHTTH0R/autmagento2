@@ -105,12 +105,9 @@ public class CartCalculation {
 			result.setAskingPrice(askingPriceSum);
 			result.setFinalPrice(finalPriceSum);
 			result.setIpPoints(ipSum);
-		
-			System.out.println("----------------------------");
-			System.out.println("CALC: askingPriceSum: " + result.getAskingPrice());
-			System.out.println("CALC: finalPriceSum: " + result.getFinalPrice());
-			System.out.println("CALC: ipSum: " + result.getIpPoints());
 			
+			PrintUtils.printCalculationModel(result);
+		
 		}else{
 			System.out.println("Failure: Product list is empty!!! - see Calculus Steps");
 		}
