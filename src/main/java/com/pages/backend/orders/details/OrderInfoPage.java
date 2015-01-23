@@ -23,13 +23,14 @@ public class OrderInfoPage extends AbstractPage {
 		
 		OrderInfoModel orderInfo = new OrderInfoModel();
 		
-		element(infoContainer).waitUntilVisible();		
-		System.out.println(infoContainer.getText());
+		element(infoContainer).waitUntilVisible();	
 		
 		List<WebElement> elemList = infoContainer.findElements(By.cssSelector("table tr"));
 		
 		for (WebElement webElement : elemList) {
+			
 			String elementLabel = webElement.findElement(By.cssSelector("td:first-child")).getText();
+			
 			if(elementLabel.contains("Bestelldatum")){
 				orderInfo.setOrderDate(webElement.findElement(By.cssSelector("td:last-child")).getText());
 			}

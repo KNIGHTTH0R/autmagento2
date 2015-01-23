@@ -12,6 +12,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,6 +36,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 
@@ -69,6 +71,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private String username, password;
+	CartTotalsModel cartTotals;
 	
 	
 	
@@ -159,9 +162,9 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		CalculationModel sumedTotals  = calculusSteps.calculateTotalSum(totalsList);
 		
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
-		CartTotalsModel cartTotals = cartSteps.grabTotals();
-
 		
+		cartTotals = cartSteps.grabTotals();
+		PrintUtils.printCartTotals(cartTotals);
 		
 //		cartSteps.clickGoToShipping();	
 //		
@@ -187,81 +190,33 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 //
 //		confirmationSteps.agreeAndCheckout();
 //		
-//		checkoutValidationSteps.verifySuccessMessage();
+//		validationSteps.verifySuccessMessage();
 //		
 //		System.out.println("CART PHASE PRODUCTS VALIDATION");
-//		checkoutValidationSteps.validateProducts(productsList, cartProducts);
+//		validationSteps.validateProducts(productsList, cartProducts);
 //		System.out.println("SHIPPING PHASE PRODUCTS VALIDATION");
-//		checkoutValidationSteps.validateProducts(productsList, shippingProducts);
+//		validationSteps.validateProducts(productsList, shippingProducts);
 //		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
-//		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
-//		
-//		
-//		
-//		PrintUtils.printCartTotals(cartTotals);
+//		validationSteps.validateProducts(productsList, confirmationProducts);		
 //		
 //		System.out.println("TOTALS CALCULATED");
-//		CartTotalsModel cartBigTotal = checkoutValidationSteps.calculateCartProducts(cartProducts);
+//		CartTotalsModel cartBigTotal = validationSteps.calculateCartProducts(cartProducts);
 //		PrintUtils.printCartTotals(cartBigTotal);
 //		
 //		System.out.println("-----DOAMNE AJUTA-------");
 //		
-//		checkoutValidationSteps.checkTotals(sumedTotals, cartTotals);
-//		checkoutValidationSteps.checkTotals(sumedTotals, shippingTotals);
-//		checkoutValidationSteps.checkTotals(sumedTotals, confirmationTotals);
-
-		System.out.println(cartTotals.getSubtotal());
-		
-		cartSteps.clickGoToShipping();	
-		
-		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		PrintUtils.printList(shippingProducts);
-
-		
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		System.out.println(shippingTotals.getSubtotal());
-		
-		shippingSteps.clickGoToPaymentMethod();
-
-		paymentSteps.expandCreditCardForm();
-
-		paymentSteps.fillCreditCardForm(creditCardData);
-		
-		AddressModel billingAddress = confirmationSteps.grabBillingData();
-		AddressModel shippingAddress = confirmationSteps.grabSippingData();
-		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-		
-		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
-		System.out.println(confirmationTotals.getSubtotal());
-
-		confirmationSteps.agreeAndCheckout();
-		
-		validationSteps.verifySuccessMessage();
-		
-		System.out.println("CART PHASE PRODUCTS VALIDATION");
-		validationSteps.validateProducts(productsList, cartProducts);
-		System.out.println("SHIPPING PHASE PRODUCTS VALIDATION");
-		validationSteps.validateProducts(productsList, shippingProducts);
-		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
-		validationSteps.validateProducts(productsList, confirmationProducts);
-		
-		PrintUtils.printCartTotals(cartTotals);
-		
-		System.out.println("TOTALS CALCULATED");
-		CartTotalsModel cartBigTotal = validationSteps.calculateCartProducts(cartProducts);
-		PrintUtils.printCartTotals(cartBigTotal);
-		
-//		System.out.println("-----DOAMNE AJUTA-------");
-		
-		validationSteps.checkTotals(sumedTotals, cartTotals);
-		validationSteps.checkTotals(sumedTotals, shippingTotals);
-		validationSteps.checkTotals(sumedTotals, confirmationTotals);
+//		validationSteps.checkTotals(sumedTotals, cartTotals);
+//		validationSteps.checkTotals(sumedTotals, shippingTotals);
+//		validationSteps.checkTotals(sumedTotals, confirmationTotals);
 
 		
 		
 	}
 	
-	
+	@After
+	public void saveData(){
+		MongoWriter.saveTotalsModel(cartTotals , getClass().getSimpleName());
+	}
 	
 	
 }

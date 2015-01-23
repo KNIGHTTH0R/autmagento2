@@ -36,4 +36,25 @@ public class MongoTableKeys {
 	public static final String DELIVERY_CONTACT = "deliveryTo";
 	public static final String TOTAL_PRICE = "totalPrice";
 	public static final String STATUS = "status";
+	
+	//CartTotalsModel
+	public static final String CART_TOTALS_MODEL = "CartTotalsModel";
+	public static final String SUBTOTAL =  "subtotal";
+	public static final String JEWERLY_BONUS = "jewelryBonus";
+	public static final String DISCOUNT = "discount";
+	public static final String DISCOUNT_25 = "discount25";
+	public static final String DISCOUNT_50 = "discount50";
+	public static final String DISCOUNT_3_PLUS_1 = "discount3To1";
+	public static final String TAX = "tax";
+	public static final String SHIPPING = "shipping";
+	public static final String TOTAL_AMOUNT = "totalAmount";
+	public static final String IP_POINTS = "ipPoints";
+	
+	//CartproductModel
+	public static final String PRODUCT_BASIC_MODEL = "ProductBasicModel";
+	public static final String NAME = "name";
+	public static final String TYPE = "type";
+	public static final String PRICE = "price";
+	public static final String QUANTITY= "quantity";
+
 }

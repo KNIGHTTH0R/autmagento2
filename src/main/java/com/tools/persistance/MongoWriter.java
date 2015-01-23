@@ -1,6 +1,7 @@
 package com.tools.persistance;
 
 import java.net.UnknownHostException;
+import java.util.List;
 
 import com.connectors.mongo.MongoConnector;
 import com.mongodb.BasicDBObject;
@@ -9,7 +10,10 @@ import com.tools.data.OrderModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.ProductBasicModel;
 
 public class MongoWriter extends MongoConnector {
 
@@ -78,6 +82,38 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.DELIVERY_CONTACT, orderModel.getDeliveryContact());
 		document.put(MongoTableKeys.TOTAL_PRICE, orderModel.getTotalPrice());
 		document.put(MongoTableKeys.STATUS, orderModel.getStatus());
+		
+		table.insert(document);
+	}
+	
+	public static void saveProductBasicModel(ProductBasicModel product, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.PRODUCT_BASIC_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.NAME, product.getName());
+		document.put(MongoTableKeys.TYPE, product.getType());
+		document.put(MongoTableKeys.PRICE, product.getPrice());
+		document.put(MongoTableKeys.QUANTITY, product.getQuantity());	
+		
+		table.insert(document);
+	}
+	
+	public static void saveTotalsModel(CartTotalsModel cartTotalsModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.CART_TOTALS_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.SUBTOTAL, cartTotalsModel.getSubtotal());
+		document.put(MongoTableKeys.JEWERLY_BONUS, cartTotalsModel.getJewelryBonus());
+		document.put(MongoTableKeys.DISCOUNT, cartTotalsModel.getDiscount());
+		document.put(MongoTableKeys.DISCOUNT_25, cartTotalsModel.getDiscount25());
+		document.put(MongoTableKeys.DISCOUNT_50, cartTotalsModel.getDiscount50());
+		document.put(MongoTableKeys.DISCOUNT_3_PLUS_1, cartTotalsModel.getDiscount3To1());
+		document.put(MongoTableKeys.TAX, cartTotalsModel.getTax());
+		document.put(MongoTableKeys.SHIPPING, cartTotalsModel.getShipping());
+		document.put(MongoTableKeys.TOTAL_AMOUNT, cartTotalsModel.getTotalAmount());
+		document.put(MongoTableKeys.IP_POINTS, cartTotalsModel.getIpPoints());		
 		
 		table.insert(document);
 	}
