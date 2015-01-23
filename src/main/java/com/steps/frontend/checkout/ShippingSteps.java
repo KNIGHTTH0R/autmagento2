@@ -24,7 +24,7 @@ public class ShippingSteps extends AbstractSteps{
 		waitABit(9000);
 	}
 
-//	@Step
+	@Step
 	public List<CartProductModel> grabProductsList() {
 		return surveyPage().grabProductsList();
 	}

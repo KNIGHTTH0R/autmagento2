@@ -7,8 +7,10 @@ import net.thucydides.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
+import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -48,10 +50,12 @@ public class SurveyPage extends AbstractPage{
 	
 	public void clickGoToPaymentMethod(){
 		element(toPaymentButton).waitUntilVisible();
+		waitFor(ExpectedConditions.elementToBeClickable(toPaymentButton));
 		toPaymentButton.click();
 	}
 
 	public List<CartProductModel> grabProductsList() {
+		
 		element(productListContainer).waitUntilVisible();
 		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
