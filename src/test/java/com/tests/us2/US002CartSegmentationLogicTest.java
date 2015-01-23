@@ -70,6 +70,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
+
 	public ProfileSteps profileSteps;
 	@Steps
 	public CartWorkflows cartWorkflows;
@@ -191,6 +192,8 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		
 		validationSteps.verifySuccessMessage();		
 		
+
+		
 		cartWorkflows.setModels(productsList, cartProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
 		
@@ -198,7 +201,8 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 		
 		cartWorkflows.setModels(productsList, confirmationProducts);
-		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");;
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+
 		
 		PrintUtils.printCartTotals(cartTotals);
 		
