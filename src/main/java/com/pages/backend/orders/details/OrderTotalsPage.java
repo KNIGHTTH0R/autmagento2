@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
 import com.tools.PrintUtils;
-import com.tools.data.OrderTotalsModel;
+import com.tools.data.backend.OrderTotalsModel;
 
 public class OrderTotalsPage extends AbstractPage {
 
@@ -28,27 +28,13 @@ public class OrderTotalsPage extends AbstractPage {
 		waitFor(ExpectedConditions.visibilityOfAllElements(listEntries));
 		System.out.println(listEntries.size());
 		
-		String valueTransformer = "";
-		
-		//TODO finish this Mihai!:))
+		String valueTransformer = "";	
+
 		
 		for (WebElement elementNow : listEntries) {			
 			
 			String key = elementNow.findElement(By.cssSelector("td:first-child")).getText();
-			System.out.println(key);
-//			private String subtotal;
-//			private String shipping;
-//			private String discount;
-//			private String tax;
-//			private String totalAmount;
-//			private String totalPaid;
-//			private String totalRefunded;
-//			private String totalPayable;
-//			private String totalIP;
-//			private String totalFortyDiscounts;
-//			private String totalBonusJeverly;
-//			private String totalMarketingBonus;
-			
+			System.out.println(key);			
 			
 			if(key.contains("Zwischensumme")){
 				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());

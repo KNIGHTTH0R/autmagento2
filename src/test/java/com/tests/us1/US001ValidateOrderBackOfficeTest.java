@@ -17,9 +17,9 @@ import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
-import com.tools.data.OrderTotalsModel;
 import com.tools.data.OrderModel;
 import com.tools.data.backend.OrderItemModel;
+import com.tools.data.backend.OrderTotalsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
