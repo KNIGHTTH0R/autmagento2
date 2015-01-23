@@ -194,15 +194,21 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		checkoutValidationSteps.printCalculationModel("Calculated Values", String.valueOf(totalsCalculated.getAskingPrice()), String.valueOf(totalsCalculated.getFinalPrice()),
 				String.valueOf(totalsCalculated.getIpPoints()));
 
+		checkoutValidationSteps.checkCalculationTotals(totalsCalculated, cartTotals);
+	}
+	
+	
+	@Test
+	public void us001UserProfileOrderId(){
+		
 		// After validation - grab order number
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
 		String orderId = orderHistory.get(0).getOrderId();
 		orderNumber.setOrderId(orderId);
-
-		checkoutValidationSteps.checkCalculationTotals(totalsCalculated, cartTotals);
 	}
+	
 
 	@After
 	public void saveData() {

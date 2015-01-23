@@ -75,9 +75,9 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	@StepGroup
 	public void checkCalculationTotals(CalculationModel calculationModel, CartTotalsModel cartTotalModel) {
 		
-//		printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()), String.valueOf(calculationModel.getIpPoints()));
-//		printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscount(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),
-//				cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
+		printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()), String.valueOf(calculationModel.getIpPoints()));
+		printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscount(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),
+				cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
 		
 		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.formatDouble(calculationModel.getAskingPrice()) + "!", cartTotalModel
 				.getSubtotal().equals(calculationModel.formatDouble(calculationModel.getAskingPrice())));
@@ -121,6 +121,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
 			if (compare.getName() != null) {
+				matchName(productNow.getName(), compare.getName());
 				validateMatchPrice(productNow.getPrice(), compare.getUnitPrice());
 				validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
 			} else {
@@ -131,7 +132,11 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 	@Step
 	public void validateMatchPrice(String productNow, String compare) {
-		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, compare.contentEquals(productNow));
+	}
+	
+	@Step
+	public void matchName(String productNow, String compare) {
 	}
 
 	@Step
