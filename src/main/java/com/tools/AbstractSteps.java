@@ -9,6 +9,7 @@ import com.pages.backend.customer.CustomerListPage;
 import com.pages.backend.customer.details.CustomerDetailsPage;
 import com.pages.backend.customer.details.LeadSettingsPage;
 import com.pages.backend.orders.OrderListPage;
+import com.pages.backend.orders.details.OrderInfoPage;
 import com.pages.backend.orders.details.OrderItemsPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
 import com.pages.external.MailinatorHomePage;
@@ -77,6 +78,9 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 	public OrderTotalsPage orderTotalsPage(){
 		return getPages().currentPageAt(OrderTotalsPage.class);
+	}
+	public OrderInfoPage orderInfoPage(){
+		return getPages().currentPageAt(OrderInfoPage.class);
 	}
 
 	// -----------------------FE-----------------------------------

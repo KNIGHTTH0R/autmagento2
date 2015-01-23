@@ -18,6 +18,7 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.OrderModel;
+import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.persistance.MongoReader;
@@ -68,6 +69,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		ordersSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
 		OrderTotalsModel ordertotal = ordersSteps.grabTotals();
+		OrderInfoModel orderInfo = ordersSteps.grabOrderInfo();
 
 		PrintUtils.printOrderTotals(ordertotal);
 //		backEndSteps.grabOrder
