@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.mongodb.Mongo;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
@@ -174,12 +173,9 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 
-		System.out.println("CART PHASE PRODUCTS VALIDATION");
-		checkoutValidationSteps.validateProducts(productsList, cartProducts);
-		System.out.println("SHIPPING PHASE PRODUCTS VALIDATION");
-		checkoutValidationSteps.validateProducts(productsList, shippingProducts);
-		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
-		checkoutValidationSteps.validateProducts(productsList, confirmationProducts);
+		checkoutValidationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION",productsList, cartProducts);
+		checkoutValidationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
+		checkoutValidationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
 		
 		//After validation - grab order number
 		headerSteps.redirectToProfileHistory();
@@ -198,7 +194,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(calcList);
 		
-		checkoutValidationSteps.checkTotals(totalsCalculated, cartTotals);
+		checkoutValidationSteps.checkCalculationTotals(totalsCalculated, cartTotals);
 		
 		
 	}

@@ -164,18 +164,23 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(MailinatorHomePage.class);
 	}
 	
+	
+	//------------------------- Common methods 
+	
+	
+	
 	@Step
 	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads, String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
 		System.out.println(" -- Print Totals - " + message);
-		System.out.println("Initial customerLeads: " + customerLeads);
-		System.out.println("Initial hostessLeads: " + hostessLeads);
-		System.out.println("Initial hostessLeadsWeek: " + hostessLeadWeek);
-		System.out.println("Initial styleCoachLeads: " + styleCoachLeads);
-		System.out.println("Initial styleCoachLeadsWeek: " + styleCoachLeadsWeek);
+		System.out.println("CUSTOMERLEADS: " + customerLeads);
+		System.out.println("HOSTESSLEADS: " + hostessLeads);
+		System.out.println("HOSTESSLEADSWEEK: " + hostessLeadWeek);
+		System.out.println("STYLECOACHLEADS: " + styleCoachLeads);
+		System.out.println("STYLECOACHLEADSWEEK: " + styleCoachLeadsWeek);
 	}
 	
 	@Step
-	public void printTotals(String message, String subtotal, String discount, String totalAmount, String tax, String shipping, String jewelryBonus, String ip){
+	public void printTotalsModel(String message, String subtotal, String discount, String totalAmount, String tax, String shipping, String jewelryBonus, String ip){
 		System.out.println(" -- Print Totals - " + message);
 		System.out.println("SUBTOTAL: " + subtotal);
 		System.out.println("DISCOUNT: " + discount);
@@ -183,6 +188,15 @@ public class AbstractSteps extends ScenarioSteps {
 		System.out.println("TAX: " + tax);
 		System.out.println("SHIPPING: " + shipping);
 		System.out.println("JEWERLY BONUS: " + jewelryBonus);
+		System.out.println("IP POINTS: " + ip);
+	}
+	
+
+	@Step
+	public void printCalculationModel(String message, String subtotal, String totalAmount, String ip) {
+		System.out.println("-- Calculation Model - " + message);
+		System.out.println("SUBTOTAL: " + subtotal);
+		System.out.println("FINAL: " + totalAmount);
 		System.out.println("IP POINTS: " + ip);
 	}
 }

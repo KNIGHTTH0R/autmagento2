@@ -1,14 +1,86 @@
 package com.tools.calculation;
 
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
 
 public class CartCalculation {
+	
+	/**
+	 * Return product price based on (price - quantity - discount). Discount may
+	 * be 25 or 50.
+	 * 
+	 * @param product
+	 * @return
+	 */
+
+	// TODO move this to calculation - No sense to be in steps
+	public static double calculateCartProductsByDiscount(CartProductModel product) {
+
+		double productPrice = 0;
+
+		if (product.getDiscountClass().contentEquals("25")) {
+			productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 25 / 100;
+		}
+		if (product.getDiscountClass().contentEquals("50")) {
+			productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 50 / 100;
+		}
+		return productPrice;
+	}
+
+	/**
+	 * Calculate Totals based on a product list
+	 * 
+	 * @param productList
+	 * @return
+	 */
+	// TODO move this to calculation - No sense to be in steps
+	public static CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {
+
+		double totalPrice = 0;
+		double discountSum = 0;
+		double totalAmount = 0;
+		int ipPointsSum = 0;
+		double taxSum = 0;
+		int jeverlyBonus = 0;
+		double shiping = 0;
+
+		DecimalFormat df = new DecimalFormat("0.00");
+
+		for (CartProductModel cartProductModel : productList) {
+			double productPrice = 0;
+			productPrice += (PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity()));
+			totalPrice += productPrice;
+			double discount = 0;
+			if (cartProductModel.getDiscountClass() == "25" || cartProductModel.getDiscountClass() == "50") {
+				discount = calculateCartProductsByDiscount(cartProductModel);
+				discountSum += calculateCartProductsByDiscount(cartProductModel);
+			}
+			totalAmount += (PrintUtils.cleanNumberToDouble(cartProductModel.getProductsPrice()) - discount);
+			ipPointsSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
+
+		}
+		taxSum = PrintUtils.getDoubleWithTwoDigits(((totalAmount * 19) / 119));
+
+		CartTotalsModel result = new CartTotalsModel();
+
+		result.setSubtotal(df.format((totalPrice)));
+		result.setDiscount(df.format(discountSum));
+		result.setTotalAmount(df.format(totalAmount));
+		result.setIpPoints(String.valueOf((ipPointsSum)));
+		result.setTax(df.format(taxSum));
+		result.setShipping(df.format(shiping));
+		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
+
+
+		return result;
+	}
 	
 	public static CalculationModel calculateTableProducts(List<CartProductModel> cartList) {
 		CalculationModel result = new CalculationModel();
