@@ -38,7 +38,7 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
 
 
-@WithTag(name="US2", type = "US2")
+@WithTag(name="US2", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US002CartSegmentationLogicTest extends BaseTest{
@@ -104,7 +104,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	}
 	
 	@Test
-	public void uS001StyleCoachShoppingTest(){
+	public void us002CartSegmentationLogicTest(){
 		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
 		ProductBasicModel productData;
 		
@@ -238,12 +238,9 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		
 		validationSteps.verifySuccessMessage();
 		
-		System.out.println("CART PHASE PRODUCTS VALIDATION");
-		validationSteps.validateProducts(productsList, cartProducts);
-		System.out.println("SHIPPING PHASE PRODUCTS VALIDATION");
-		validationSteps.validateProducts(productsList, shippingProducts);
-		System.out.println("CONFIRMATION PHASE PRODUCTS VALIDATION");
-		validationSteps.validateProducts(productsList, confirmationProducts);
+		validationSteps.validateProducts("CART PHASE PRODUCTS VALIDATION", productsList, cartProducts);
+		validationSteps.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION", productsList, shippingProducts);
+		validationSteps.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION", productsList, confirmationProducts);
 		
 		PrintUtils.printCartTotals(cartTotals);
 		
@@ -251,7 +248,6 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		CartTotalsModel cartBigTotal = CartCalculation.calculateCartProducts(cartProducts);
 		PrintUtils.printCartTotals(cartBigTotal);
 		
-//		System.out.println("-----DOAMNE AJUTA-------");
 		
 		validationSteps.checkCalculationTotals(sumedTotals, cartTotals);
 		validationSteps.checkCalculationTotals(sumedTotals, shippingTotals);

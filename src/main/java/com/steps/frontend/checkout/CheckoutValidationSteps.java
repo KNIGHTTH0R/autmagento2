@@ -1,6 +1,5 @@
 package com.steps.frontend.checkout;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import net.thucydides.core.annotations.Screenshots;
@@ -24,8 +23,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	public void verifySuccessMessage() {
 		successPage().verifySuccessMessage();
 	}
-
-
 
 	@Step
 	public void checkTotalsInCart(CartTotalsModel cartTotalsModel1, CartTotalsModel cartTotalsModel2) {
@@ -63,6 +60,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscount(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),
 				cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
 
+		
 		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.formatDouble(calculationModel.getAskingPrice()) + "!", cartTotalModel
 				.getSubtotal().equals(calculationModel.formatDouble(calculationModel.getAskingPrice())));
 
@@ -71,10 +69,10 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
 				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
+	
 	}
 
 	@StepGroup
-	@Screenshots(onlyOnFailures = true)
 	public void validateProducts(String message, List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {
 
 		for (ProductBasicModel productNow : productsList) {
@@ -99,7 +97,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	}
 
 	@Step
-	@Screenshots(onlyOnFailures = true)
 	public void validateMatchQuantity(String productNow, String compare) {
 		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
