@@ -203,6 +203,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
+
+		
 		// validationSteps.checkCalculationTotals("SHIPPING TOTALS",
 		// totalsCalculated, shippingTotals);
 		// validationSteps.checkCalculationTotals("CONFIRMATION TOTALS",

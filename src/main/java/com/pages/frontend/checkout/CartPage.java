@@ -159,18 +159,22 @@ public class CartPage extends AbstractPage {
 				resultModel.setSubtotal(valueTransformer);
 			}
 			if(key.contains("SCHMUCK BONUS")){
-				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
 				resultModel.setJewelryBonus(valueTransformer);
+			}
+			if(key.contains("STEUER")){
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.setTax(valueTransformer);
 			}
 			if(key.contains("VERSANDKOSTENFREI")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setShipping(valueTransformer);
 			}
-			if(key.contains("25%")){
+			if(key.contains("25%") && key.contains("RABATT")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setDiscount25(valueTransformer);
 			}
-			if(key.contains("50% - STYLIST")){
+			if(key.contains("50%")  && key.contains("RABATT")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setDiscount50(valueTransformer);
 			}
