@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -109,6 +110,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		creditCardData.setMonthExpiration("06");
 		creditCardData.setYearExpiration("2016");
 		creditCardData.setCvcNumber("737");
+		
+	//	MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -129,6 +132,10 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		// productData = productSteps.setProductAddToCart("1", "18");
 		// productsList.add(productData);
 
+		searchSteps.searchAndSelectProduct("K054SV", "WHITNEY SET");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		
 		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
@@ -136,6 +143,10 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
+		
+		for (ProductBasicModel product : productsList){
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
+		}
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -157,9 +168,11 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
-
-		cartTotals = cartSteps.grabTotals();
+		
+		this.cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
+		
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 
 		System.out.println(cartTotals.getSubtotal());
 
@@ -197,18 +210,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");	
 
-		//TODO add a new cart total calculation
-//		CartTotalsModel cartBigTotal = CartCalculation.calculateCartProducts(cartProducts);
-//		PrintUtils.printCartTotals(cartBigTotal);
-
 		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
-
-		
-		// validationSteps.checkCalculationTotals("SHIPPING TOTALS",
-		// totalsCalculated, shippingTotals);
-		// validationSteps.checkCalculationTotals("CONFIRMATION TOTALS",
-		// totalsCalculated, confirmationTotals);
 
 	}
 
@@ -221,15 +224,13 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		String orderId = orderHistory.get(0).getOrderId();
 		orderNumber.setOrderId(orderId);
+		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
 
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
-		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
-		for (ProductBasicModel product : productsList)
-			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
-	}
+	
+		}
 
 }

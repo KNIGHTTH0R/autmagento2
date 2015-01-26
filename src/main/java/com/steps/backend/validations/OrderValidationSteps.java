@@ -21,7 +21,7 @@ public class OrderValidationSteps extends AbstractSteps {
 
 	@StepGroup
 	public void validateProducts(List<ProductBasicModel> productsList, List<OrderItemModel> orderProducts) {
-
+		//TODO Assert if productList is null
 		for (ProductBasicModel productNow : productsList) {
 			OrderItemModel compare = findProduct(productNow.getType(), orderProducts);
 
@@ -67,7 +67,7 @@ public class OrderValidationSteps extends AbstractSteps {
 		Assert.assertTrue("Failure: Shipping values dont match: " + orderTotals.getShipping() + " - " + cartTotals.getShipping(), orderTotals.getShipping().contentEquals(cartTotals.getShipping()));
 		Assert.assertTrue("Failure: Total Amount values dont match: " + orderTotals.getTotalAmount() + " - " + cartTotals.getTotalAmount(), orderTotals.getTotalAmount().contentEquals(cartTotals.getTotalAmount()));
 		Assert.assertTrue("Failure: Total IP values dont match: " + orderTotals.getTotalIP() + " - " + cartTotals.getIpPoints(), orderTotals.getTotalIP().contentEquals(cartTotals.getIpPoints()));
-		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotals.getTotalBonusJeverly() + " - " + cartTotals.getJewelryBonus(), orderTotals.getTotalBonusJeverly().contentEquals(cartTotals.getJewelryBonus()));
+		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotals.getTotalBonusJeverly() + " - " + cartTotals.getJewelryBonus(), orderTotals.getTotalBonusJeverly().contentEquals(PrintUtils.getDoubleWithTwoDigitstToString(Double.parseDouble(cartTotals.getJewelryBonus()))));
 		
 	}
 

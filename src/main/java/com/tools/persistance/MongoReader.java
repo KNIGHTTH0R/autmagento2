@@ -157,7 +157,7 @@ public class MongoReader extends MongoConnector {
 		List<ProductBasicModel> itemList = new ArrayList<ProductBasicModel>();
 		
 		workingDB = mongoClient.getDB(testName);
-		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CUSTOMER_CONFIGURATION_MODEL).find();
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.PRODUCT_BASIC_MODEL).find();
 		
 		try {
 			while (cursor.hasNext()) {

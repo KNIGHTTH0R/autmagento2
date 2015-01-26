@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.AbstractPage;
 import com.tools.Constants;
+import com.tools.PrintUtils;
 import com.tools.data.frontend.ProductBasicModel;
 
 public class ProductDetailsPage extends AbstractPage {
@@ -60,7 +61,7 @@ public class ProductDetailsPage extends AbstractPage {
 		
 		result.setName(productName.getText());
 		result.setType(type);
-		result.setPrice(productPrice.getText());
+		result.setPrice(PrintUtils.cleanNumberToString(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 		
 		return result;

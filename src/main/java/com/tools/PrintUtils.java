@@ -152,6 +152,10 @@ public class PrintUtils {
 		DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
 		return Double.valueOf(twoFiguresFormat.format(number));
 	}
+	public static String getDoubleWithTwoDigitstToString(Double number) {
+		DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
+		return twoFiguresFormat.format(number);
+	}
 
 	public static void printAddressModel(AddressModel dataModel) {
 		

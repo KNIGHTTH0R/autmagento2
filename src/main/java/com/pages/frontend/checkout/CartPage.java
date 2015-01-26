@@ -159,6 +159,7 @@ public class CartPage extends AbstractPage {
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setSubtotal(valueTransformer);
 			}
+	
 			if(key.contains("SCHMUCK BONUS")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
 				resultModel.setJewelryBonus(valueTransformer);

@@ -1,5 +1,6 @@
 package com.tests.us2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.Steps;
@@ -14,6 +15,7 @@ import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
+import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
@@ -36,25 +38,39 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
+	@Steps
+	public OrderValidationSteps orderValidationSteps;
 
-	private String orderId = "staging100050872";
+	private String orderId;
+	public List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
+	public List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 
 	
 	@Before
 	public void setUp(){
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest");
 		
-		if(orderModel.size() == 1){
-			
+		
+		List<OrderModel> orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest");
+
+		if (orderModel.size() == 1) {
+
 			orderId = orderModel.get(0).getOrderId();
-		}else{
-			Assert.assertTrue("Failure: Could not retrieve orderId. ",  orderModel.size() == 1);
+		} else {
+			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModel.size() == 1);
 		}
-	//TODO must change this to get info from USS01
+		// TODO must change this to get info from USS01
+
+		cartTotals = MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
+		if (cartTotals.size() == 1) {
+
+			orderId = orderModel.get(0).getOrderId();
+		} else {
+			Assert.assertTrue("Failure: Could not validate cartTotals section. " + cartTotals , cartTotals.size() == 1);
+		}
 		
-//		List<CartTotalsModel> cartTotals = MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
-//		
-//		List<ProductBasicModel> productList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
+		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
+		System.out.println("size " + productsList.size());
+		
 		
 	
 	}
@@ -77,6 +93,8 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		PrintUtils.printOrderItemsList(orderItemsList);
 		PrintUtils.printOrderTotals(ordertotal);
 		PrintUtils.printOrderInfo(orderInfo);
+		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
+		orderValidationSteps.validateProducts(productsList, orderItemsList);
 		
 //		backEndSteps.grabOrder
 //		backEndSteps.grabOrderTotals();
