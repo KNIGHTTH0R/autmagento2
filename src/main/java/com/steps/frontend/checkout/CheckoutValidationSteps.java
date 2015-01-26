@@ -3,40 +3,41 @@ package com.steps.frontend.checkout;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
 
 import org.junit.Assert;
 
 import com.tools.AbstractSteps;
-import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
 
 public class CheckoutValidationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 4274219181280984116L;
 
+	/**
+	 * Validate that the message from the succcess screen, on order process is
+	 * displayd.
+	 */
 	@Step
 	public void verifySuccessMessage() {
 		successPage().verifySuccessMessage();
 	}
 
-	@StepGroup
-	public void checkCalculationTotals(String message, CalculationModel calculationModel, CartTotalsModel cartTotalModel) {
-		
-		printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()), String.valueOf(calculationModel.getIpPoints()));
-		printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscount(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),
-				cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
-		
-		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.formatDouble(calculationModel.getAskingPrice()) + "!", cartTotalModel
-				.getSubtotal().equals(calculationModel.formatDouble(calculationModel.getAskingPrice())));
-
-		Assert.assertTrue("The discount should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.formatDouble(calculationModel.getFinalPrice()) + "!", cartTotalModel
-				.getTotalAmount().equals(calculationModel.formatDouble(calculationModel.getFinalPrice())));
-
-		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
-				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
-	}
+//	@StepGroup
+//	public void checkCalculationTotals(String message, CalculationModel calculationModel, CartTotalsModel cartTotalModel) {
+//
+//		printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()), String.valueOf(calculationModel.getIpPoints()));
+//		printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscount(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),
+//				cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
+//
+//		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.formatDouble(calculationModel.getAskingPrice()) + "!", cartTotalModel
+//				.getSubtotal().equals(calculationModel.formatDouble(calculationModel.getAskingPrice())));
+//
+//		Assert.assertTrue("The discount should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.formatDouble(calculationModel.getFinalPrice()) + "!", cartTotalModel
+//				.getTotalAmount().equals(calculationModel.formatDouble(calculationModel.getFinalPrice())));
+//
+//		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
+//				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
+//	}
 
 	@Step
 	public void printTotalsModel(String message, String subtotal, String discount, String totalAmount, String tax, String shipping, String jewelryBonus, String ip) {
@@ -64,7 +65,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	public void validateMatchPrice(String productNow, String compare) {
 		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, compare.contentEquals(productNow));
 	}
-	
+
 	@Step
 	public void matchName(String productNow, String compare) {
 	}
@@ -78,7 +79,8 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	public CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
 		CartProductModel result = new CartProductModel();
 		theFor: for (CartProductModel cartProductModel : cartProducts) {
-			System.out.println(productCode + " - " + cartProductModel.getProdCode());
+			// System.out.println(productCode + " - " +
+			// cartProductModel.getProdCode());
 			if (cartProductModel.getProdCode().contains(productCode)) {
 				result = cartProductModel;
 				break theFor;

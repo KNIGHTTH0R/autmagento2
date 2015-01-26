@@ -195,12 +195,12 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
 		cartWorkflows.setModels(productsList, confirmationProducts);
-		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");	
 
-		PrintUtils.printCartTotals(cartTotals);
 
 		CartTotalsModel cartBigTotal = CartCalculation.calculateCartProducts(cartProducts);
 		PrintUtils.printCartTotals(cartBigTotal);
+
 
 		validationSteps.checkCalculationTotals("CART TOTALS", totalsCalculated, cartTotals);
 		// validationSteps.checkCalculationTotals("SHIPPING TOTALS",

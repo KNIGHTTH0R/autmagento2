@@ -36,6 +36,7 @@ public class CartCalculation {
 
 	/**
 	 * Calculate Totals based on a product list
+	 * TODO - change to make only basic calculation - NO DISCOUNT AND SUCH
 	 * 
 	 * @param productList
 	 * @return

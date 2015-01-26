@@ -138,11 +138,11 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		headerSteps.goToCart();
 
 		CartTotalsModel cartTotals = cartSteps.grabTotals();
-		
-		//TODO only one might be needed - CHOOSE
+
+		// TODO only one might be needed - CHOOSE
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 
-		//Calculate cart products by discount
+		// Calculate cart products by discount
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
@@ -155,7 +155,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		// TODO - validate shipping without IP points
 //		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		// PrintUtils.printCartTotals(shippingTotals);
+//		PrintUtils.printCartTotals(shippingTotals);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
@@ -170,28 +170,28 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 
-		
 		checkoutValidationSteps.verifySuccessMessage();
-		
-		cartWorkflows.setModels(productsList, cartProducts);
+
+		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
-		
-		cartWorkflows.setModels(productsList, shippingProducts);
+
+		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
 		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
-		
-		cartWorkflows.setModels(productsList, confirmationProducts);
+
+		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
-		checkoutValidationSteps.checkCalculationTotals("CART TOTALS",totalsCalculated, cartTotals);
-		
-		//Shipping has no IP
-//		checkoutValidationSteps.checkCalculationTotals("SHIPPING TOTALS", totalsCalculated, shippingTotals);
+		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
+		cartWorkflows.checkCalculationTotals("CART TOTALS");
+
+		// Shipping has no IP
+		// checkoutValidationSteps.checkCalculationTotals("SHIPPING TOTALS",
+		// totalsCalculated, shippingTotals);
 	}
-	
-	
+
 	@Test
-	public void us001UserProfileOrderId(){
-		
+	public void us001UserProfileOrderId() {
+
 		// After validation - grab order number
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
@@ -200,7 +200,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		orderNumber.setOrderId(orderId);
 		profileSteps.verifyOrderId(orderId);
 	}
-	
 
 	@After
 	public void saveData() {
