@@ -1,6 +1,11 @@
 package com.tools.persistance;
 
 public class MongoTableKeys {
+	
+	//Keys used for total model FE
+	public static final String DISCOUNT_KEY = "DISCOUNT";
+	public static final String DISCOUNT_25_KEY = "25DISCOUNT";
+	public static final String DISCOUNT_50_KEY = "50DISCOUNT";
 	  
     //Address model properties and keys
 	public static final String ADDRESS_MODEL = "AddressModel";
@@ -41,14 +46,15 @@ public class MongoTableKeys {
 	public static final String CART_TOTALS_MODEL = "CartTotalsModel";
 	public static final String SUBTOTAL =  "subtotal";
 	public static final String JEWERLY_BONUS = "jewelryBonus";
-	public static final String DISCOUNT = "discount";
-	public static final String DISCOUNT_25 = "discount25";
-	public static final String DISCOUNT_50 = "discount50";
+//	public static final String DISCOUNT = "discount";
+//	public static final String DISCOUNT_25 = "discount25";
+//	public static final String DISCOUNT_50 = "discount50";
 	public static final String DISCOUNT_3_PLUS_1 = "discount3To1";
 	public static final String TAX = "tax";
 	public static final String SHIPPING = "shipping";
 	public static final String TOTAL_AMOUNT = "totalAmount";
 	public static final String IP_POINTS = "ipPoints";
+	public static final String DISCOUNT_LIST = "discounts";
 	
 	//CartproductModel
 	public static final String PRODUCT_BASIC_MODEL = "ProductBasicModel";
@@ -56,5 +62,6 @@ public class MongoTableKeys {
 	public static final String TYPE = "type";
 	public static final String PRICE = "price";
 	public static final String QUANTITY= "quantity";
+
 
 }

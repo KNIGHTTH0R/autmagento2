@@ -58,9 +58,9 @@ public class CartWorkflows {
 	
 	@StepGroup
 	public void checkCalculationTotals(String message) {
-
+		
 		checkoutValidationSteps.printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()), String.valueOf(calculationModel.getIpPoints()));
-		checkoutValidationSteps.printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscount(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),
+		checkoutValidationSteps.printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscountSumString(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),
 				cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
 
 		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.formatDouble(calculationModel.getAskingPrice()) + "!", cartTotalModel

@@ -14,6 +14,7 @@ import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.persistance.MongoTableKeys;
 
 public class CartPage extends AbstractPage {
 
@@ -172,11 +173,11 @@ public class CartPage extends AbstractPage {
 			}
 			if(key.contains("25%") && key.contains("RABATT")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.setDiscount25(valueTransformer);
+				resultModel.addDiscount(MongoTableKeys.DISCOUNT_25_KEY, valueTransformer);
 			}
 			if(key.contains("50%")  && key.contains("RABATT")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.setDiscount50(valueTransformer);
+				resultModel.addDiscount(MongoTableKeys.DISCOUNT_50_KEY, valueTransformer);
 			}
 			if(key.contains("GESAMTBETRAG")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());

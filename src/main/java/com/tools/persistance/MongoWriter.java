@@ -106,14 +106,11 @@ public class MongoWriter extends MongoConnector {
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.SUBTOTAL, cartTotalsModel.getSubtotal());
 		document.put(MongoTableKeys.JEWERLY_BONUS, cartTotalsModel.getJewelryBonus());
-		document.put(MongoTableKeys.DISCOUNT, cartTotalsModel.getDiscount());
-		document.put(MongoTableKeys.DISCOUNT_25, cartTotalsModel.getDiscount25());
-		document.put(MongoTableKeys.DISCOUNT_50, cartTotalsModel.getDiscount50());
-		document.put(MongoTableKeys.DISCOUNT_3_PLUS_1, cartTotalsModel.getDiscount3To1());
 		document.put(MongoTableKeys.TAX, cartTotalsModel.getTax());
 		document.put(MongoTableKeys.SHIPPING, cartTotalsModel.getShipping());
 		document.put(MongoTableKeys.TOTAL_AMOUNT, cartTotalsModel.getTotalAmount());
-		document.put(MongoTableKeys.IP_POINTS, cartTotalsModel.getIpPoints());		
+		document.put(MongoTableKeys.IP_POINTS, cartTotalsModel.getIpPoints());	
+		document.put(MongoTableKeys.DISCOUNT_LIST, cartTotalsModel.getDiscountsMap());
 		
 		table.insert(document);
 	}

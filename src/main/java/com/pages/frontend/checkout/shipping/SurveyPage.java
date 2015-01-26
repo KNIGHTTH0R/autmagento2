@@ -13,6 +13,7 @@ import com.tools.AbstractPage;
 import com.tools.PrintUtils;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.persistance.MongoTableKeys;
 
 public class SurveyPage extends AbstractPage {
 
@@ -36,7 +37,7 @@ public class SurveyPage extends AbstractPage {
 		element(surveyTotalsContainer).waitUntilVisible();
 
 		result.setSubtotal(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
-		result.setDiscount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
+		result.addDiscount(MongoTableKeys.DISCOUNT_KEY, PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
 		result.setShipping(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
 		result.setTotalAmount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
 
