@@ -117,21 +117,21 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 	}
 	
 	@Test
-	public void uS001StyleCoachShoppingTest(){
+	public void uS002CartSegmentationLogicTest(){
 		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
 		ProductBasicModel productData;
 		
-		searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
-		productData = productSteps.setProductAddToCart("1", "Blue");
-		productsList.add(productData);
-		
-		searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
-		productData = productSteps.setProductAddToCart("2", "0");
-		productsList.add(productData);
-		
-		searchSteps.searchAndSelectProduct("R083BK", "CLARICE RING (GUN METAL)");
-		productData = productSteps.setProductAddToCart("1", "18");
-		productsList.add(productData);
+//		searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
+//		productData = productSteps.setProductAddToCart("1", "Blue");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
+//		productData = productSteps.setProductAddToCart("2", "0");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("R083BK", "CLARICE RING (GUN METAL)");
+//		productData = productSteps.setProductAddToCart("1", "18");
+//		productsList.add(productData);
 		
 		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
 		productData = productSteps.setProductAddToCart("1", "0");
@@ -141,10 +141,11 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
+		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
-		productsList.get(0).setQuantity("6");
-		cartSteps.updateProducts();
+//		cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
+//		productsList.get(0).setQuantity("6");
+//		cartSteps.updateProducts();
 		
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();		
 		
@@ -211,12 +212,12 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 		
 		
 		validationSteps.checkCalculationTotals("CART TOTALS", totalsCalculated, cartTotals);
-		validationSteps.checkCalculationTotals("SHIPPING TOTALS", totalsCalculated, shippingTotals);
-		validationSteps.checkCalculationTotals("CONFIRMATION TOTALS", totalsCalculated, confirmationTotals);
+//		validationSteps.checkCalculationTotals("SHIPPING TOTALS", totalsCalculated, shippingTotals);
+//		validationSteps.checkCalculationTotals("CONFIRMATION TOTALS", totalsCalculated, confirmationTotals);
 
 	}
 	@Test
-	public void us001UserProfileOrderId(){
+	public void us002UserProfileOrderId(){
 		
 		// After validation - grab order number
 		headerSteps.redirectToProfileHistory();
@@ -224,6 +225,7 @@ public class US002CartSegmentationLogicTest extends BaseTest{
 
 		String orderId = orderHistory.get(0).getOrderId();
 		orderNumber.setOrderId(orderId);
+		
 	}
 	
 	

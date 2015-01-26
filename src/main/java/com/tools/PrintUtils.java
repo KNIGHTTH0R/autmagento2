@@ -54,13 +54,13 @@ public class PrintUtils {
 	public static void printCartTotals(CartTotalsModel model) {
 		System.out.println(" *** Print Total section from Cart *** ");
 		System.out.println("------------------------");
-		System.out.println(model.getSubtotal());
-		System.out.println(model.getJewelryBonus());
-		System.out.println(model.getDiscount());
-		System.out.println(model.getTax());
-		System.out.println(model.getShipping());
-		System.out.println(model.getTotalAmount());
-		System.out.println(model.getIpPoints());
+		System.out.println("subtotal " + model.getSubtotal());
+		System.out.println("jewerly " + model.getJewelryBonus());
+		System.out.println("discount " + model.getDiscount());
+		System.out.println("tax " + model.getTax());
+		System.out.println("shiping " + model.getShipping());
+		System.out.println("total amount " + model.getTotalAmount());
+		System.out.println("ip " + model.getIpPoints());
 	}
 	
 	public static void printOrderInfo(OrderInfoModel model) {
