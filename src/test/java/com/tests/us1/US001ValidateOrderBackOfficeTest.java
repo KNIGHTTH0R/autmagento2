@@ -1,5 +1,6 @@
 package com.tests.us1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.Steps;
@@ -14,6 +15,7 @@ import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
+import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
@@ -21,6 +23,7 @@ import com.tools.data.OrderModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.frontend.CartTotalsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -33,8 +36,12 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
+	@Steps
+	public OrderValidationSteps orderValidationSteps;
+	
+	public List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
 
-	private String orderId = "staging100050872";
+	private String orderId;
 
 	@Before
 	public void setUp() {
@@ -48,8 +55,13 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		}
 		// TODO must change this to get info from USS01
 
-		// List<CartTotalsModel> cartTotals =
-		// MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
+		cartTotals = MongoReader.grabTotalsModels("US001StyleCoachShoppingTest");
+		if (cartTotals.size() == 1) {
+
+			orderId = orderModel.get(0).getOrderId();
+		} else {
+			Assert.assertTrue("Failure: Could not validate cartTotals section. " + cartTotals , cartTotals.size() == 1);
+		}
 		//
 		// List<ProductBasicModel> productList =
 		// MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
@@ -73,6 +85,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		PrintUtils.printOrderItemsList(orderItemsList);
 		PrintUtils.printOrderTotals(ordertotal);
 		PrintUtils.printOrderInfo(orderInfo);
+		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
 
 		// backEndSteps.grabOrder
 		// backEndSteps.grabOrderTotals();

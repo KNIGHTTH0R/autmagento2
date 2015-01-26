@@ -11,6 +11,8 @@ import org.junit.Assert;
 import com.tools.AbstractSteps;
 import com.tools.PrintUtils;
 import com.tools.data.backend.OrderItemModel;
+import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 
 public class OrderValidationSteps extends AbstractSteps {
@@ -49,6 +51,24 @@ public class OrderValidationSteps extends AbstractSteps {
 	@Step
 	public void validateMatchQuantity(String productNow, String compare) {
 		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+	}
+	
+	/**
+	 * OrderTotals are taken from BE.
+	 * CartTotals are taken from FE.
+	 * @param orderTotals
+	 * @param cartTotals
+	 */
+	//TODO Add discount Map Validation
+	@Step
+	public void validateTotals(String message, OrderTotalsModel orderTotals, CartTotalsModel cartTotals){
+		Assert.assertTrue("Failure: Subtotal values dont match: " + orderTotals.getSubtotal() + " - " + cartTotals.getSubtotal(), orderTotals.getSubtotal().contentEquals(cartTotals.getSubtotal()));
+		Assert.assertTrue("Failure: Tax values dont match: " + orderTotals.getTax() + " - " + cartTotals.getTax(), orderTotals.getTax().contentEquals(cartTotals.getTax()));
+		Assert.assertTrue("Failure: Shipping values dont match: " + orderTotals.getShipping() + " - " + cartTotals.getShipping(), orderTotals.getShipping().contentEquals(cartTotals.getShipping()));
+		Assert.assertTrue("Failure: Total Amount values dont match: " + orderTotals.getTotalAmount() + " - " + cartTotals.getTotalAmount(), orderTotals.getTotalAmount().contentEquals(cartTotals.getTotalAmount()));
+		Assert.assertTrue("Failure: Total IP values dont match: " + orderTotals.getTotalIP() + " - " + cartTotals.getIpPoints(), orderTotals.getTotalIP().contentEquals(cartTotals.getIpPoints()));
+		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotals.getTotalBonusJeverly() + " - " + cartTotals.getJewelryBonus(), orderTotals.getTotalBonusJeverly().contentEquals(cartTotals.getJewelryBonus()));
+		
 	}
 
 	private static OrderItemModel findProduct(String productCode, List<OrderItemModel> orderProducts) {

@@ -79,6 +79,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	private String username, password;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private List<CalculationModel> calcList = new ArrayList<CalculationModel>();
+	public CartTotalsModel cartTotals = new CartTotalsModel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -137,7 +138,9 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		CartTotalsModel cartTotals = cartSteps.grabTotals();
+		this.cartTotals = cartSteps.grabTotals();
+
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 
 		// TODO only one might be needed - CHOOSE
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();

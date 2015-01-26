@@ -1,14 +1,12 @@
 package com.tools.calculation;
 
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
 
 public class CartCalculation {
 	
@@ -36,7 +34,7 @@ public class CartCalculation {
 
 	/**
 	 * Calculate Totals based on a product list
-	 * TODO - change to make only basic calculation - NO DISCOUNT AND SUCH
+	 * TODO  - change to make only basic calculation - NO DISCOUNT AND SUCH
 	 * 
 	 * @param productList
 	 * @return

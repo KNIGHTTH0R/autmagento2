@@ -179,8 +179,8 @@ public class MongoReader extends MongoConnector {
 		return itemList;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static List<CartTotalsModel> grabTotalsModels(String testName) {
-		System.out.println("here");
 		DBObject dbObject = null;
 		List<CartTotalsModel> itemList = new ArrayList<CartTotalsModel>();
 		
@@ -194,16 +194,10 @@ public class MongoReader extends MongoConnector {
 				
 				result.setSubtotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setJewelryBonus(MongoUtils.checkField(dbObject, MongoTableKeys.JEWERLY_BONUS));
-//				result.setDiscount(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT));
-//				result.setDiscount25(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_25));
-//				result.setDiscount50(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_50));
-//				result.setDiscount3To1(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT_3_PLUS_1));
 				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
 				result.setShipping(MongoUtils.checkField(dbObject, MongoTableKeys.SHIPPING));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
 				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
-				
-//				System.out.println(dbObject.get(MongoTableKeys.DISCOUNT_LIST));
 				
 				result.setDiscountMap((Map<String, String>) dbObject.get(MongoTableKeys.DISCOUNT_LIST));
 				

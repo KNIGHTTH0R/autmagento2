@@ -5,16 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.tools.PrintUtils;
-
 public class CartTotalsModel {
 
 	private String subtotal;
 	private String jewelryBonus;
-	// private String discount;
-	// private String discount25;
-	// private String discount50;
-	// private String discount3To1;
 	private String tax;
 	private String shipping;
 	private String totalAmount;
@@ -24,10 +18,6 @@ public class CartTotalsModel {
 	public CartTotalsModel() {
 		setSubtotal("");
 		setJewelryBonus("");
-		// setDiscount("");
-		// setDiscount25("");
-		// setDiscount50("");
-		// setDiscount3To1("");
 		setTax("");
 		setShipping("");
 		setTotalAmount("");
