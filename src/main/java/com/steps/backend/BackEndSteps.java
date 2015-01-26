@@ -61,6 +61,4 @@ public class BackEndSteps extends AbstractSteps {
 		return customerDetailsHomePage().extractEmailConfirmationStatus();
 	}
 
-
-
 }
