@@ -15,17 +15,19 @@ public class ValidationSteps extends AbstractSteps {
 	@StepGroup
 	public void validateStylistData(StylistDataModel initialData, StylistDataModel finalData) {
 
-		printStylistBackendValues("INITIAL", initialData.getCustomerLeads(), initialData.getHostessLeads(), initialData.getHostessLeadsWeek(), initialData.getStyleCoachLeads(), initialData.getStyleCoachLeadsWeek());
-		printStylistBackendValues("FINAL", finalData.getCustomerLeads(), finalData.getHostessLeads(), finalData.getHostessLeadsWeek(), finalData.getStyleCoachLeads(), finalData.getStyleCoachLeadsWeek());
+		printStylistBackendValues("INITIAL", initialData.getCustomerLeads(), initialData.getHostessLeads(), initialData.getHostessLeadsWeek(), initialData.getStyleCoachLeads(),
+				initialData.getStyleCoachLeadsWeek());
+		printStylistBackendValues("FINAL", finalData.getCustomerLeads(), finalData.getHostessLeads(), finalData.getHostessLeadsWeek(), finalData.getStyleCoachLeads(),
+				finalData.getStyleCoachLeadsWeek());
 
-		verifyValues(initialData.getCustomerLeads(), finalData.getCustomerLeads(), "Customer Leads ");
-		verifyValues(initialData.getHostessLeads(), finalData.getHostessLeads(), "Hostess Leads ");
-		verifyValues(initialData.getHostessLeadsWeek(), finalData.getHostessLeadsWeek(), "Hostess Leads Week ");
+		verifyValues("Customer Leads ", initialData.getCustomerLeads(), finalData.getCustomerLeads());
+		verifyValues("Hostess Leads ", initialData.getHostessLeads(), finalData.getHostessLeads());
+		verifyValues("Hostess Leads Week ", initialData.getHostessLeadsWeek(), finalData.getHostessLeadsWeek());
 
 	}
 
 	@Step
-	public void verifyValues(String initialStr, String finalStr, String message) {
+	public void verifyValues(String message, String initialStr, String finalStr) {
 		int initialInt, finalInt;
 
 		initialInt = Integer.valueOf(initialStr) + 1;
@@ -34,7 +36,5 @@ public class ValidationSteps extends AbstractSteps {
 		Assert.assertTrue(message + " values are incorrect:  Expected - " + initialInt + "  Actual - " + finalInt, initialInt == finalInt);
 		System.out.println("Verified " + message + " ... ");
 	}
-	
-	
 
 }

@@ -23,7 +23,6 @@ public class NavigationPage extends AbstractPage {
 		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
 
 		for (WebElement elementNow : elementList) {
-			// System.out.println(elementNow.getText());
 			if (elementNow.getText().contentEquals("Kunden")) {
 				elementNow.click();
 				break;
@@ -52,7 +51,7 @@ public class NavigationPage extends AbstractPage {
 	}
 
 	public void clickOrdersPage() {
-		
+
 		evaluateJavascript("jQuery.noConflict();");
 		element(navigationBar).waitUntilVisible();
 		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));

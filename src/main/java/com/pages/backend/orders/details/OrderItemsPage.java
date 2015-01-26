@@ -20,17 +20,16 @@ public class OrderItemsPage extends AbstractPage {
 
 	public List<OrderItemModel> grabOrderItems() {
 		List<OrderItemModel> result = new ArrayList<OrderItemModel>();
-		
+
 		element(tableContainer).waitUntilVisible();
 
 		List<WebElement> listEntries = getDriver().findElements(By.cssSelector("table.order-tables > tbody > tr"));
 
 		waitFor(ExpectedConditions.visibilityOfAllElements(listEntries));
-		
-		
+
 		for (WebElement elementNow : listEntries) {
 			OrderItemModel orderNow = new OrderItemModel();
-			
+
 			String productName = elementNow.findElement(By.cssSelector("span[id*='order_item']")).getText();
 			String productCode = elementNow.findElement(By.cssSelector("div.item-text div")).getText();
 			String propertyStatus = elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText();
@@ -46,8 +45,7 @@ public class OrderItemsPage extends AbstractPage {
 			String mb = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(12) span.price")).getText());
 			String fd = elementNow.findElement(By.cssSelector("td:nth-child(13)")).getText();
 			String rowSum = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:nth-child(14)")).getText());
-			
-			
+
 			orderNow.setProductName(productName);
 			orderNow.setProductCode(productCode.replace("Artikelposition: ", ""));
 			orderNow.setPropertyStatus(propertyStatus);
@@ -63,11 +61,10 @@ public class OrderItemsPage extends AbstractPage {
 			orderNow.setmB(mb);
 			orderNow.setfD(fd);
 			orderNow.setRowSum(rowSum);
-			
+
 			result.add(orderNow);
 		}
 		return result;
 	}
-	
 
 }

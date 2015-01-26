@@ -22,7 +22,6 @@ public class OrderTotalsPage extends AbstractPage {
 		OrderTotalsModel result = new OrderTotalsModel();
 		
 		element(tableContainer).waitUntilVisible();
-		System.out.println("nimic");
 
 		List<WebElement> listEntries = tableContainer.findElements(By.cssSelector("tr"));		
 		waitFor(ExpectedConditions.visibilityOfAllElements(listEntries));

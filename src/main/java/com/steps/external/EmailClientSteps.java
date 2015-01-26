@@ -11,8 +11,8 @@ public class EmailClientSteps extends AbstractSteps {
 
 	@Step
 	public void openMailinator() {
-		waitABit(10000);
-		mailinatorHomePage().open();
+		waitABit(2000);
+		getDriver().get(Constants.URL_WEB_MAIL);
 	}
 
 	@Step
@@ -26,7 +26,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail();
-		
+
 		if (welcomeMessage.isEmpty()) {
 			String confirmLink = mailinatorPage().confirmEmail();
 

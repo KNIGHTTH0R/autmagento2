@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 import com.tools.persistance.MongoConstants;
