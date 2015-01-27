@@ -24,16 +24,15 @@ import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
-
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-
 import com.tools.requirements.Application;
 import com.workflows.frontend.CartWorkflows;
 
@@ -67,6 +66,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	public CartWorkflows cartWorkflows;	
 	
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
+	private static CartTotalsModel finalCartTotals = new CartTotalsModel();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private String username, password;
 
@@ -100,7 +100,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 	@Test
 	public void uS003CartSegmentationWithVatTest() {
-		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
+		frontEndSteps.performLogin(username, password);
 //		ProductBasicModel productData;
 //		
 //		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
@@ -137,6 +137,24 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	
 		cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
+		
+		cartSteps.typeJewerlyBonus("100");
+		cartSteps.updateJewerlyBonus();
+		cartSteps.typeMarketingBonus("150");
+		cartSteps.updateMarketingBonus();
+		
+		finalCartTotals = cartSteps.grabTotals();
+		PrintUtils.printCartTotals(finalCartTotals);
+		
+		cartSteps.clickGoToShipping();
+
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		PrintUtils.printList(shippingProducts);
+
+		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		PrintUtils.printCartTotals(shippingTotals);
+		
+		
 		
 
 	}
