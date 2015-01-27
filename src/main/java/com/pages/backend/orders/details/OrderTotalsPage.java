@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.AbstractPage;
 import com.tools.PrintUtils;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.persistance.MongoTableKeys;
 
 public class OrderTotalsPage extends AbstractPage {
 
@@ -45,7 +46,7 @@ public class OrderTotalsPage extends AbstractPage {
 			}
 			if(key.contains("Rabatt (25% Style Coach Discount)")){
 				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());
-				result.setDiscount((valueTransformer));
+				result.addDiscount(MongoTableKeys.DISCOUNT_25_KEY,valueTransformer);
 			}
 			if(key.contains("Steuer")){
 				valueTransformer = PrintUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());

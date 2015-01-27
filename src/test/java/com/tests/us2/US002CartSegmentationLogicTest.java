@@ -17,7 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -190,8 +189,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-		AddressModel billingAddress = confirmationSteps.grabBillingData();
-		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+//		AddressModel billingAddress = confirmationSteps.grabBillingData();
+//		AddressModel shippingAddress = confirmationSteps.grabSippingData();
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
 		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();

@@ -71,7 +71,7 @@ public class OrderValidationSteps extends AbstractSteps {
 		
 	}
 
-	private static OrderItemModel findProduct(String productCode, List<OrderItemModel> orderProducts) {
+	public OrderItemModel findProduct(String productCode, List<OrderItemModel> orderProducts) {
 		OrderItemModel result = new OrderItemModel();
 
 		theFor: for (OrderItemModel orderProduct : orderProducts) {

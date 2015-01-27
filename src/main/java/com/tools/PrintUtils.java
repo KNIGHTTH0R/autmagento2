@@ -90,7 +90,9 @@ public class PrintUtils {
 		System.out.println("------------------------");
 		System.out.println(model.getSubtotal());
 		System.out.println(model.getShipping());
-		System.out.println(model.getDiscount());		
+		for (String discountNow : model.getDiscountsMap().keySet()) {
+			System.out.println(discountNow + ": " + model.getDiscountsMap().get(discountNow));
+		}		
 		System.out.println(model.getTax());
 		System.out.println(model.getTotalAmount());
 		System.out.println(model.getTotalPaid());

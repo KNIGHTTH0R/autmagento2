@@ -1,10 +1,15 @@
 package com.tools.data.backend;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class OrderTotalsModel {
 	
 	private String subtotal;
 	private String shipping;
-	private String discount;
+	private Map<String, String> discountList = new HashMap<String, String>();
 	private String tax;
 	private String totalAmount;
 	private String totalPaid;
@@ -14,6 +19,7 @@ public class OrderTotalsModel {
 	private String totalFortyDiscounts;
 	private String totalBonusJeverly;
 	private String totalMarketingBonus;
+	
 	
 	public String getSubtotal() {
 		return subtotal;
@@ -27,12 +33,48 @@ public class OrderTotalsModel {
 	public void setShipping(String shipping) {
 		this.shipping = shipping;
 	}
-	public String getDiscount() {
-		return discount;
+	
+	public void addDiscount(String key, String value) {
+		discountList.put(key, value);
 	}
-	public void setDiscount(String discount) {
-		this.discount = discount;
+
+	public void setDiscountMap(Map<String, String> discountList) {
+		this.discountList = discountList;
 	}
+
+	public String getDiscount(String key) {
+		return discountList.get(key);
+	}
+
+	public Map<String, String> getDiscountsMap() {
+		return discountList;
+	}
+
+	public List<String> getDiscountsList() {
+		List<String> resultList = new ArrayList<String>();
+
+		for (String string : discountList.keySet()) {
+			resultList.add(discountList.get(string));
+		}
+		return resultList;
+	}
+
+	public String getDiscountSumString() {
+		double result = 0;
+		for (String string : discountList.keySet()) {
+			result += Double.parseDouble(discountList.get(string));
+		}
+		return String.valueOf(result);
+	}
+
+	public double getDiscountSumDouble() {
+		double result = 0;
+		for (String string : discountList.keySet()) {
+			result += Double.parseDouble(discountList.get(string));
+		}
+		return result;
+	}
+
 	public String getTax() {
 		return tax;
 	}
@@ -88,6 +130,12 @@ public class OrderTotalsModel {
 		this.totalMarketingBonus = totalMarketingBonus;
 	}
 	
+//	public String getDiscount() {
+//		return discount;
+//	}
+//	public void setDiscount(String discount) {
+//		this.discount = discount;
+//	}
 	
 
 }

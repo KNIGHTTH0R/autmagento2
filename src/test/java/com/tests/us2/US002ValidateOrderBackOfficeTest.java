@@ -23,7 +23,6 @@ import com.tools.data.OrderModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
-import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoReader;
@@ -58,7 +57,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		} else {
 			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModel.size() == 1);
 		}
-		// TODO must change this to get info from USS01
+		
 
 		cartTotals = MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
 		if (cartTotals.size() == 1) {
@@ -69,7 +68,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		}
 		
 		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
-		System.out.println("size " + productsList.size());
+		
 		
 		
 	
