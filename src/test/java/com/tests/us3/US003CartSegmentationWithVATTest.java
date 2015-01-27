@@ -29,8 +29,11 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.PrintUtils;
 import com.tools.calculation.CartCalculation;
-import com.tools.data.OrderModel;
+import com.tools.data.CalculationModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
 import com.workflows.frontend.CartWorkflows;
@@ -66,11 +69,11 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 	@Steps
 	public ProfileSteps profileSteps;
 	@Steps
-	public CartWorkflows cartWorkflows;
-
-	private OrderModel orderNumber = new OrderModel();
+	public CartWorkflows cartWorkflows;	
 	
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private static CartTotalsModel cartTotals = new CartTotalsModel();
+	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 
 
 
@@ -104,22 +107,47 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 	@Test
 	public void uS003CartSegmentationWithVATTest() {
 		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
-		ProductBasicModel productData;
-		searchSteps.searchAndSelectProduct("K054SV", "WHITNEY SET");
-		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
+//		ProductBasicModel productData;
+//		
+//		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
+//		productData = productSteps.setProductAddToCart("1", "16");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+		
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		
+		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();		
+
+		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
+		
+		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+		
+		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
+		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
+		totalsList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
+		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
+		PrintUtils.printCalculationModel(totalsCalculated);
+		
+	
+		cartTotals = cartSteps.grabTotals();
+		PrintUtils.printCartTotals(cartTotals);
 		
 
 	}
 
-	@Test
-	public void us002UserProfileOrderId() {
 
-	}
 
-	@After
-	public void saveData() {
-
-	}
 
 }

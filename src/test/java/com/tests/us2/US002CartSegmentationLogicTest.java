@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -72,13 +73,12 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@Steps
 	public CartWorkflows cartWorkflows;
 
-	private OrderModel orderNumber = new OrderModel();
-
-	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private static OrderModel orderNumber = new OrderModel();
+	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private String username, password;
-	private CartTotalsModel cartTotals = new CartTotalsModel();
+	private static CartTotalsModel cartTotals = new CartTotalsModel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -110,7 +110,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		creditCardData.setYearExpiration("2016");
 		creditCardData.setCvcNumber("737");
 		
-	//	MongoConnector.cleanCollection(getClass().getSimpleName());
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -141,17 +141,13 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
-		
-		for (ProductBasicModel product : productsList){
-			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
-		}
+		productsList.add(productData);		
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		 cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
-		// productsList.get(0).setQuantity("6");
-		// cartSteps.updateProducts();
+//		 cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
+//		 productsList.get(0).setQuantity("6");
+//		 cartSteps.updateProducts();
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 
@@ -171,7 +167,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		this.cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
 		
-		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
+	
 
 		System.out.println(cartTotals.getSubtotal());
 
@@ -223,12 +219,17 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		String orderId = orderHistory.get(0).getOrderId();
 		orderNumber.setOrderId(orderId);
-		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
+		
 
 	}
 
 	@After
 	public void saveData() {
+		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
+		for (ProductBasicModel product : productsList){
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
+		}
 	
 	}
 

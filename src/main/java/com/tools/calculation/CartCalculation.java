@@ -90,11 +90,12 @@ public class CartCalculation {
 		if(cartList.size() > 0 ){
 			
 			result.setTableType(cartList.get(0).getDiscountClass());
-			System.out.println(cartList.get(0).getDiscountClass());
-	
+				
 			for (CartProductModel cartProductModel : cartList) {
+				
 				askingPriceSum += PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity());
 				ipSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
+			
 			}
 	
 			int calcValue = checkCalculusType(result.getTableType());
