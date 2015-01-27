@@ -140,6 +140,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		cartTotals = cartSteps.grabTotals();
 
+		PrintUtils.printCartTotals(cartTotals);
 		// TODO only one might be needed - CHOOSE
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 
@@ -155,8 +156,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		cartSteps.clickGoToShipping();
 
 		// TODO - validate shipping without IP points
-//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-//		PrintUtils.printCartTotals(shippingTotals);
+		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		PrintUtils.printCartTotals(shippingTotals);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);

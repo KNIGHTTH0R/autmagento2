@@ -1,5 +1,6 @@
 package com.tools;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -80,8 +81,8 @@ public class PrintUtils {
 		System.out.println("------------------------");
 //		System.out.println(model.getTableType());
 //		System.out.println(model.getRetailPrice());
-		System.out.println(model.formatDouble(model.getAskingPrice()));
-		System.out.println(model.formatDouble(model.getFinalPrice()));
+		System.out.println(model.getAskingPrice());
+		System.out.println(model.getFinalPrice());
 		System.out.println(model.getIpPoints());
 
 	}
@@ -106,7 +107,7 @@ public class PrintUtils {
 
 	}
 
-	public static double cleanNumberToDouble(String unitPrice) {
+	public static BigDecimal cleanNumberToBigDecimal(String unitPrice) {
 		String result = unitPrice;
 		result = result.replace(" €", "");
 		result = result.replace("€ ", "");
@@ -115,7 +116,7 @@ public class PrintUtils {
 		result = result.replace(",", ".");
 		result = result.replace("-", "");
 
-		return Double.parseDouble(result);
+		return BigDecimal.valueOf(Double.parseDouble(result));
 	}
 	public static String cleanNumberToString(String unitPrice) {
 		String result = unitPrice;
@@ -150,14 +151,14 @@ public class PrintUtils {
 		return finalResult;
 	}
 
-	public static Double getDoubleWithTwoDigits(Double number) {
-		DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
-		return Double.valueOf(twoFiguresFormat.format(number));
-	}
-	public static String getDoubleWithTwoDigitstToString(Double number) {
-		DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
-		return twoFiguresFormat.format(number);
-	}
+//	public static Double getDoubleWithTwoDigits(Double number) {
+//		DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
+//		return Double.valueOf(twoFiguresFormat.format(number));
+//	}
+//	public static String getDoubleWithTwoDigitstToString(Double number) {
+//		DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
+//		return twoFiguresFormat.format(number);
+//	}
 
 	public static void printAddressModel(AddressModel dataModel) {
 		
@@ -217,6 +218,17 @@ public class PrintUtils {
 			System.out.println(orderItemModel.getfD());
 			System.out.println(orderItemModel.getRowSum());
 		}
+		
+	}
+	public static void printCartProductModel(CartProductModel productNow) {
+		System.out.println("------------------------");
+		System.out.println("name " + productNow.getName());
+		System.out.println("code " + productNow.getProdCode());
+		System.out.println("price " + productNow.getUnitPrice());
+		System.out.println("qty " + productNow.getQuantity());
+		System.out.println("prices " + productNow.getProductsPrice());
+		System.out.println("ip " + productNow.getPriceIP());
+		System.out.println("final " + productNow.getFinalPrice());
 		
 	}
 }

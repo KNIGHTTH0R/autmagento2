@@ -1,35 +1,29 @@
 package com.tools.data;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import java.math.BigDecimal;
 
 public class CalculationModel {
 
 	private String tableType;
-	private double retailPrice;
-	private double askingPrice;
-	private double finalPrice;
+	private BigDecimal retailPrice;
+	private BigDecimal askingPrice;
+	private BigDecimal finalPrice;
 	private int ipPoints;
 	
-	NumberFormat df = new DecimalFormat("#.00"); 
-	
-	public String formatDouble(double value){
-		return df.format(value);
-	}
 
 	public String getTableType() {
 		return tableType;
 	}
 
-	public double getRetailPrice() {
+	public BigDecimal getRetailPrice() {
 		return retailPrice;
 	}
 
-	public double getAskingPrice() {
+	public BigDecimal getAskingPrice() {
 		return askingPrice;
 	}
 
-	public double getFinalPrice() {
+	public BigDecimal getFinalPrice() {
 		return finalPrice;
 	}
 
@@ -41,15 +35,15 @@ public class CalculationModel {
 		this.tableType = tableType;
 	}
 
-	public void setRetailPrice(double retailPrice) {
+	public void setRetailPrice(BigDecimal retailPrice) {
 		this.retailPrice = retailPrice;
 	}
 
-	public void setAskingPrice(double askingPrice) {
+	public void setAskingPrice(BigDecimal askingPrice) {
 		this.askingPrice = askingPrice;
 	}
 
-	public void setFinalPrice(double finalPrice) {
+	public void setFinalPrice(BigDecimal finalPrice) {
 		this.finalPrice = finalPrice;
 	}
 
