@@ -76,7 +76,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us001ValidateOrderBackOfficeTest() {
+	public void us002ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 
 

@@ -34,7 +34,6 @@ import com.tools.PrintUtils;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
 import com.tools.data.OrderModel;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -109,7 +108,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		creditCardData.setMonthExpiration("06");
 		creditCardData.setYearExpiration("2016");
 		creditCardData.setCvcNumber("737");
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -118,6 +117,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
 
+		//TODO change products list or clean 
 		// searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
 		// productData = productSteps.setProductAddToCart("1", "Blue");
 		// productsList.add(productData);
@@ -134,20 +134,20 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		searchSteps.searchAndSelectProduct("K054SV", "WHITNEY SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
-		
+
 		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);		
+		productsList.add(productData);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-//		 cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
-//		 productsList.get(0).setQuantity("6");
-//		 cartSteps.updateProducts();
+		// cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
+		// productsList.get(0).setQuantity("6");
+		// cartSteps.updateProducts();
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 
@@ -163,11 +163,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
-		
+
 		this.cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
-		
-	
 
 		System.out.println(cartTotals.getSubtotal());
 
@@ -185,8 +183,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-//		AddressModel billingAddress = confirmationSteps.grabBillingData();
-//		AddressModel shippingAddress = confirmationSteps.grabSippingData();
+		// AddressModel billingAddress = confirmationSteps.grabBillingData();
+		// AddressModel shippingAddress = confirmationSteps.grabSippingData();
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
 		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
@@ -203,7 +201,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
 		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
-		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");	
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
 		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
@@ -219,7 +217,6 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		String orderId = orderHistory.get(0).getOrderId();
 		orderNumber.setOrderId(orderId);
-		
 
 	}
 
@@ -227,10 +224,10 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	public void saveData() {
 		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
-		for (ProductBasicModel product : productsList){
+		for (ProductBasicModel product : productsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
 		}
-	
+
 	}
 
 }

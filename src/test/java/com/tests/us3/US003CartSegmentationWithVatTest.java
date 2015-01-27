@@ -12,7 +12,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,9 +41,7 @@ import com.workflows.frontend.CartWorkflows;
 @WithTag(name = "US3", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US003CartSegmentationWithVATTest extends BaseTest {
-	
-	private String username, password;
+public class US003CartSegmentationWithVatTest extends BaseTest {
 	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -65,16 +62,13 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public PaymentSteps paymentSteps;
-	@Steps
 	public ProfileSteps profileSteps;
 	@Steps
 	public CartWorkflows cartWorkflows;	
 	
-	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
-
+	private String username, password;
 
 
 	@Before
@@ -105,7 +99,7 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 	}
 
 	@Test
-	public void uS003CartSegmentationWithVATTest() {
+	public void uS003CartSegmentationWithVatTest() {
 		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
 //		ProductBasicModel productData;
 //		
