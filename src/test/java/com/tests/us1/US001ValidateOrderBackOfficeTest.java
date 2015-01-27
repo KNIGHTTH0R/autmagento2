@@ -60,7 +60,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 
 			orderId = orderModel.get(0).getOrderId();
 		} else {
-			Assert.assertTrue("Failure: Could not validate cartTotals section. " + cartTotals , cartTotals.size() == 1);
+			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + cartTotals , cartTotals.size() == 1);
 		}
 		//
 		// List<ProductBasicModel> productList =

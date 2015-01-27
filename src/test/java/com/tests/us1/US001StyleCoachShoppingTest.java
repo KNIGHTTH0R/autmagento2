@@ -73,13 +73,13 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
-	private OrderModel orderNumber = new OrderModel();
+	private static OrderModel orderNumber = new OrderModel();
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private List<CalculationModel> calcList = new ArrayList<CalculationModel>();
-	public CartTotalsModel cartTotals = new CartTotalsModel();
+	public static CartTotalsModel cartTotals;
 
 	@Before
 	public void setUp() throws Exception {
@@ -138,9 +138,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		this.cartTotals = cartSteps.grabTotals();
-
-		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
+		cartTotals = cartSteps.grabTotals();
 
 		// TODO only one might be needed - CHOOSE
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
@@ -206,6 +204,9 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 	@After
 	public void saveData() {
+		
+		System.out.println("cartTotals: " + cartTotals.toString());
 		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 	}
 }
