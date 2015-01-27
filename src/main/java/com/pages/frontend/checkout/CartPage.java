@@ -28,11 +28,20 @@ public class CartPage extends AbstractPage {
 	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
 	private WebElement updateButton;
 	
+	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")
+	private WebElement updateJewerlyBonus;
+	
+	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(3) td:last-child form button span")
+	private WebElement updateMarketingBonus;
+	
 	@FindBy(css = "table.cart-table")
 	private WebElement cartTable;
 	
 	@FindBy(id = "jewelry_credits")
 	private WebElement jewerlyBonusInput;
+	
+	@FindBy(id = "marketing_credits")
+	private WebElement marketingBonusInput;
 
 	/**
 	 * Will grab all products data from all carts
@@ -170,6 +179,10 @@ public class CartPage extends AbstractPage {
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
 				resultModel.setJewelryBonus(valueTransformer);
 			}
+			if(key.contains("MARKETING BONUS")){
+				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
+				resultModel.setMarketingBonus(valueTransformer);
+			}
 			if(key.contains("STEUER")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTax(valueTransformer);
@@ -205,15 +218,28 @@ public class CartPage extends AbstractPage {
 		kasseButton.click();
 	}
 	
-	public void clickUpdateProducts() {
+	public void clickUpdateCart() {
 		element(updateButton).waitUntilVisible();
 		updateButton.click();
+	}
+	public void clickUpdateJewerlyBonus() {
+		element(updateJewerlyBonus).waitUntilVisible();
+		updateJewerlyBonus.click();
+	}
+	public void clickUpdateMarketingBonus() {
+		element(updateMarketingBonus).waitUntilVisible();
+		updateMarketingBonus.click();
 	}
 	
 	public void typeJewerlyBonus(String jevewrlyBonus){
 		element(jewerlyBonusInput).waitUntilVisible();
 		element(jewerlyBonusInput).clear();
 		element(jewerlyBonusInput).sendKeys(jevewrlyBonus);
+	}
+	public void typeMarketingBonus(String marketingBonus){
+		element(marketingBonusInput).waitUntilVisible();
+		element(marketingBonusInput).clear();
+		element(marketingBonusInput).sendKeys(marketingBonus);
 	}
 	
 	

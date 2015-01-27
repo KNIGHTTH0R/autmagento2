@@ -66,12 +66,28 @@ public class CartSteps extends  AbstractSteps{
 		cartPage().clickToShipping();
 	}
 	@Step
-	public void updateProducts(){
-		cartPage().clickUpdateProducts();
+	public void updateCart(){
+		cartPage().clickUpdateCart();
+	}
+	@Step
+	public void updateJewerlyBonus(){
+		cartPage().clickUpdateJewerlyBonus();
+	}
+	@Step
+	public void updateMarketingBonus(){
+		cartPage().clickUpdateMarketingBonus();
 	}
 	@Step
 	public void updateProductQuantity(String quantity,String... terms){
 		cartPage().updateProductQuantity(quantity, terms);
+	}
+	@Step
+	public void typeJewerlyBonus(String jevewrlyBonus){
+		cartPage().typeJewerlyBonus(jevewrlyBonus);
+	}
+	@Step
+	public void typeMarketingBonus(String marketingBonus){
+		cartPage().typeMarketingBonus(marketingBonus);
 	}
 
 }

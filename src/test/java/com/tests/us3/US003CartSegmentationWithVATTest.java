@@ -73,6 +73,7 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 	
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
+	private static CartTotalsModel finalCartTotals = new CartTotalsModel();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 
 
@@ -106,7 +107,7 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 
 	@Test
 	public void uS003CartSegmentationWithVATTest() {
-		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
+		frontEndSteps.performLogin(username, password);
 //		ProductBasicModel productData;
 //		
 //		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
@@ -128,6 +129,8 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		
+		System.out.println("--------------------------------CART PHASE--------------------------------------------------");
+		
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();		
 
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
@@ -140,14 +143,31 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 		PrintUtils.printCalculationModel(totalsCalculated);
 		
-	
+		//TODO don't need 2 totals - just to compare
 		cartTotals = cartSteps.grabTotals();
-		PrintUtils.printCartTotals(cartTotals);
+		PrintUtils.printCartTotals(cartTotals);		
 		
+		cartSteps.typeJewerlyBonus("100");
+		cartSteps.updateJewerlyBonus();
+		cartSteps.typeMarketingBonus("150");
+		cartSteps.updateMarketingBonus();
+		
+		finalCartTotals = cartSteps.grabTotals();
+		PrintUtils.printCartTotals(cartTotals);	
+		
+		cartSteps.clickGoToShipping();
+		
+		System.out.println("--------------------------------SHIPPING PHASE--------------------------------------------------");
+
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		PrintUtils.printList(shippingProducts);
+
+		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		PrintUtils.printCartTotals(shippingTotals);
+		
+		System.out.println("--------------------------------CONFIRMATION PHASE--------------------------------------------------");
 
 	}
-
-
 
 
 }
