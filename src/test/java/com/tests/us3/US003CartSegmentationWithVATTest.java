@@ -12,7 +12,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +24,7 @@ import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
-import com.steps.frontend.checkout.PaymentSteps;
+
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -34,7 +33,7 @@ import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-import com.tools.data.frontend.ProductBasicModel;
+
 import com.tools.requirements.Application;
 import com.workflows.frontend.CartWorkflows;
 
@@ -43,8 +42,6 @@ import com.workflows.frontend.CartWorkflows;
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US003CartSegmentationWithVATTest extends BaseTest {
-	
-	private String username, password;
 	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -65,17 +62,13 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public PaymentSteps paymentSteps;
-	@Steps
 	public ProfileSteps profileSteps;
 	@Steps
 	public CartWorkflows cartWorkflows;	
 	
-	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
-	private static CartTotalsModel finalCartTotals = new CartTotalsModel();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
-
+	private String username, password;
 
 
 	@Before
@@ -106,8 +99,8 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 	}
 
 	@Test
-	public void uS003CartSegmentationWithVATTest() {
-		frontEndSteps.performLogin(username, password);
+	public void uS003CartSegmentationWithVatTest() {
+		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
 //		ProductBasicModel productData;
 //		
 //		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
@@ -129,8 +122,6 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		
-		System.out.println("--------------------------------CART PHASE--------------------------------------------------");
-		
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();		
 
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
@@ -143,31 +134,14 @@ public class US003CartSegmentationWithVATTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 		PrintUtils.printCalculationModel(totalsCalculated);
 		
-		//TODO don't need 2 totals - just to compare
+	
 		cartTotals = cartSteps.grabTotals();
-		PrintUtils.printCartTotals(cartTotals);		
+		PrintUtils.printCartTotals(cartTotals);
 		
-		cartSteps.typeJewerlyBonus("100");
-		cartSteps.updateJewerlyBonus();
-		cartSteps.typeMarketingBonus("150");
-		cartSteps.updateMarketingBonus();
-		
-		finalCartTotals = cartSteps.grabTotals();
-		PrintUtils.printCartTotals(cartTotals);	
-		
-		cartSteps.clickGoToShipping();
-		
-		System.out.println("--------------------------------SHIPPING PHASE--------------------------------------------------");
-
-		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		PrintUtils.printList(shippingProducts);
-
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printCartTotals(shippingTotals);
-		
-		System.out.println("--------------------------------CONFIRMATION PHASE--------------------------------------------------");
 
 	}
+
+
 
 
 }

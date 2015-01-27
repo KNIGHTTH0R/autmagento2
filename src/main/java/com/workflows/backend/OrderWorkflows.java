@@ -60,7 +60,8 @@ public class OrderWorkflows {
 		Assert.assertTrue("Failure: Shipping values dont match: " + orderTotalModel.getShipping() + " - " + cartTotalModel.getShipping(), orderTotalModel.getShipping().contentEquals(cartTotalModel.getShipping()));
 		Assert.assertTrue("Failure: Total Amount values dont match: " + orderTotalModel.getTotalAmount() + " - " + cartTotalModel.getTotalAmount(), orderTotalModel.getTotalAmount().contentEquals(cartTotalModel.getTotalAmount()));
 		Assert.assertTrue("Failure: Total IP values dont match: " + orderTotalModel.getTotalIP() + " - " + cartTotalModel.getIpPoints(), orderTotalModel.getTotalIP().contentEquals(cartTotalModel.getIpPoints()));
-		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotalModel.getTotalBonusJeverly() + " - " + cartTotalModel.getJewelryBonus(), orderTotalModel.getTotalBonusJeverly().contentEquals(PrintUtils.getDoubleWithTwoDigitstToString(Double.parseDouble(cartTotalModel.getJewelryBonus()))));
+		//TODO - This might fail due to BigDecimal
+		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotalModel.getTotalBonusJeverly() + " - " + cartTotalModel.getJewelryBonus(), orderTotalModel.getTotalBonusJeverly().contentEquals(cartTotalModel.getJewelryBonus()));
 		
 	}
 	

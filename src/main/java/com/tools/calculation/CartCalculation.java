@@ -1,6 +1,7 @@
 package com.tools.calculation;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.tools.Constants;
@@ -10,6 +11,8 @@ import com.tools.data.frontend.CartProductModel;
 
 public class CartCalculation {
 	
+	
+	
 	/**
 	 * Return product price based on (price - quantity - discount). Discount may
 	 * be 25 or 50.
@@ -17,74 +20,44 @@ public class CartCalculation {
 	 * @param product
 	 * @return
 	 */
-
 	// TODO move this to calculation - No sense to be in steps
-	public static double calculateCartProductsByDiscount(CartProductModel product) {
+	public static BigDecimal calculateCartProductsByDiscount(CartProductModel product) {
 
-		double productPrice = 0;
+		BigDecimal productPrice = BigDecimal.valueOf(0);
 
 		if (product.getDiscountClass().contentEquals("25")) {
-			productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 25 / 100;
+			
+			productPrice = productPrice.add(PrintUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
+//			System.out.println(productPrice);
+			productPrice = productPrice.multiply(PrintUtils.cleanNumberToBigDecimal(product.getQuantity()));
+//			System.out.println(productPrice);
+			productPrice = productPrice.multiply(BigDecimal.valueOf(25));
+//			System.out.println(productPrice);
+			productPrice = productPrice.divide(BigDecimal.valueOf(100));
+//			System.out.println("Final: " + productPrice);
+			//TODO old formula
+//			productPrice. += (PrintUtils.cleanNumberToBigDecimal(product.getUnitPrice()) * PrintUtils.cleanNumberToBigDecimal(product.getQuantity())) * 25 / 100;
 		}
 		if (product.getDiscountClass().contentEquals("50")) {
-			productPrice += (PrintUtils.cleanNumberToDouble(product.getUnitPrice()) * PrintUtils.cleanNumberToDouble(product.getQuantity())) * 50 / 100;
+			
+			productPrice = productPrice.add(PrintUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
+//			System.out.println(productPrice);
+			productPrice = productPrice.multiply(PrintUtils.cleanNumberToBigDecimal(product.getQuantity()));
+//			System.out.println(productPrice);
+			productPrice = productPrice.multiply(BigDecimal.valueOf(50));
+//			System.out.println(productPrice);
+			productPrice = productPrice.divide(BigDecimal.valueOf(100));
+//			System.out.println("Final: " + productPrice);
 		}
 		return productPrice;
 	}
 
-	/**
-	 * Calculate Totals based on a product list
-	 * TODO  - change to make only basic calculation - NO DISCOUNT AND SUCH
-	 * 
-	 * @param productList
-	 * @return
-	 */
-	// TODO move this to calculation - No sense to be in steps
-//	public static CartTotalsModel calculateCartProducts(List<CartProductModel> productList) {
-//
-//		double totalPrice = 0;
-//		double discountSum = 0;
-//		double totalAmount = 0;
-//		int ipPointsSum = 0;
-//		double taxSum = 0;
-//		int jeverlyBonus = 0;
-//		double shiping = 0;
-//
-//		DecimalFormat df = new DecimalFormat("0.00");
-//
-//		for (CartProductModel cartProductModel : productList) {
-//			double productPrice = 0;
-//			productPrice += (PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity()));
-//			totalPrice += productPrice;
-//			double discount = 0;
-//			if (cartProductModel.getDiscountClass() == "25" || cartProductModel.getDiscountClass() == "50") {
-//				discount = calculateCartProductsByDiscount(cartProductModel);
-//				discountSum += calculateCartProductsByDiscount(cartProductModel);
-//			}
-//			totalAmount += (PrintUtils.cleanNumberToDouble(cartProductModel.getProductsPrice()) - discount);
-//			ipPointsSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
-//
-//		}
-//		taxSum = PrintUtils.getDoubleWithTwoDigits(((totalAmount * 19) / 119));
-//
-//		CartTotalsModel result = new CartTotalsModel();
-//
-//		result.setSubtotal(df.format((totalPrice)));
-//		result.setDiscount(df.format(discountSum));
-//		result.setTotalAmount(df.format(totalAmount));
-//		result.setIpPoints(String.valueOf((ipPointsSum)));
-//		result.setTax(df.format(taxSum));
-//		result.setShipping(df.format(shiping));
-//		result.setJewelryBonus(String.valueOf((jeverlyBonus)));
-//
-//
-//		return result;
-//	}
+
 	
 	public static CalculationModel calculateTableProducts(List<CartProductModel> cartList) {
 		CalculationModel result = new CalculationModel();
-		double askingPriceSum = 0;
-		double finalPriceSum = 0;
+		BigDecimal askingPriceSum = BigDecimal.valueOf(0);
+		BigDecimal finalPriceSum = BigDecimal.valueOf(0);
 		int ipSum = 0;
 
 		if(cartList.size() > 0 ){
@@ -92,15 +65,29 @@ public class CartCalculation {
 			result.setTableType(cartList.get(0).getDiscountClass());
 				
 			for (CartProductModel cartProductModel : cartList) {
+				BigDecimal transport = BigDecimal.valueOf(0);
+				transport = transport.add(PrintUtils.cleanNumberToBigDecimal(cartProductModel.getUnitPrice()));
+				transport = transport.multiply(PrintUtils.cleanNumberToBigDecimal(cartProductModel.getQuantity()));
+				askingPriceSum = askingPriceSum.add(transport);
 				
-				askingPriceSum += PrintUtils.cleanNumberToDouble(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity());
 				ipSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
 			
 			}
 	
 			int calcValue = checkCalculusType(result.getTableType());
 			System.out.println("calculation value is: " + calcValue);
-			finalPriceSum = askingPriceSum - (askingPriceSum * calcValue / 100);
+			
+			BigDecimal partTwo = BigDecimal.valueOf(0);
+			
+			partTwo = partTwo.add(askingPriceSum);
+			partTwo = partTwo.multiply(BigDecimal.valueOf(calcValue));
+			partTwo = partTwo.divide(BigDecimal.valueOf(100));
+			
+			finalPriceSum = finalPriceSum.add(askingPriceSum);
+			finalPriceSum = finalPriceSum.subtract(partTwo);
+			
+			//TODO old formulas
+			//= askingPriceSum - (askingPriceSum * calcValue / 100);
 	
 			result.setAskingPrice(askingPriceSum);
 			result.setFinalPrice(finalPriceSum);
@@ -119,16 +106,32 @@ public class CartCalculation {
 
 		CalculationModel result = new CalculationModel();	
 		
-		 double askingPrice = 0;
-		 double finalPrice = 0;
+		 BigDecimal askingPrice = BigDecimal.valueOf(0);
+		 BigDecimal finalPrice = BigDecimal.valueOf(0);
 		 int ipPoints = 0;
+		 
 
 		for (CalculationModel total : totalsList) {
-			askingPrice += total.getAskingPrice();
-			finalPrice += total.getFinalPrice();
+
+			 System.out.println("**" + total.getAskingPrice());
+			 System.out.println("**" + total.getFinalPrice());
+			
+			if (total.getAskingPrice() != null) {
+				askingPrice = askingPrice.add(total.getAskingPrice());
+			}
+			
+			if (total.getFinalPrice() != null) {
+				finalPrice = finalPrice.add(total.getFinalPrice());
+				
+			}
+			
 			ipPoints += total.getIpPoints();
 			
 		}
+		finalPrice = finalPrice.divide(BigDecimal.valueOf(100));
+		askingPrice = askingPrice.divide(BigDecimal.valueOf(100));
+		
+		
 		result.setAskingPrice(askingPrice);
 		result.setFinalPrice(finalPrice);
 		result.setIpPoints(ipPoints);

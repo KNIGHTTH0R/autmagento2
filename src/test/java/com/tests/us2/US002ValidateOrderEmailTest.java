@@ -73,7 +73,7 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 	}
 	
 	@Test
-	public void us001ValidateOrderEmailTest() {
+	public void us002ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);
 		
 		String message = GmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);

@@ -53,7 +53,6 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		} else {
 			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModel.size() == 1);
 		}
-		// TODO must change this to get info from USS01
 
 		cartTotals = MongoReader.grabTotalsModels("US001StyleCoachShoppingTest");
 		if (cartTotals.size() == 1) {
@@ -62,10 +61,6 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		} else {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + cartTotals , cartTotals.size() == 1);
 		}
-		//
-		// List<ProductBasicModel> productList =
-		// MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
-
 	}
 
 	/**
@@ -86,10 +81,5 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		PrintUtils.printOrderTotals(ordertotal);
 		PrintUtils.printOrderInfo(orderInfo);
 		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
-
-		// backEndSteps.grabOrder
-		// backEndSteps.grabOrderTotals();
-
-		// PrintUtils.printOrderItemsList(orderItemsList);
 	}
 }
