@@ -30,6 +30,9 @@ public class CartPage extends AbstractPage {
 	
 	@FindBy(css = "table.cart-table")
 	private WebElement cartTable;
+	
+	@FindBy(id = "jewelry_credits")
+	private WebElement jewerlyBonusInput;
 
 	/**
 	 * Will grab all products data from all carts
@@ -203,9 +206,16 @@ public class CartPage extends AbstractPage {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
 	}
+	
 	public void clickUpdateProducts() {
 		element(updateButton).waitUntilVisible();
 		updateButton.click();
+	}
+	
+	public void typeJewerlyBonus(String jevewrlyBonus){
+		element(jewerlyBonusInput).waitUntilVisible();
+		element(jewerlyBonusInput).clear();
+		element(jewerlyBonusInput).sendKeys(jevewrlyBonus);
 	}
 	
 	

@@ -63,16 +63,15 @@ public class CartCalculation {
 		if(cartList.size() > 0 ){
 			
 			result.setTableType(cartList.get(0).getDiscountClass());
-			System.out.println(cartList.get(0).getDiscountClass());
-	
+				
 			for (CartProductModel cartProductModel : cartList) {
 				BigDecimal transport = BigDecimal.valueOf(0);
 				transport = transport.add(PrintUtils.cleanNumberToBigDecimal(cartProductModel.getUnitPrice()));
 				transport = transport.multiply(PrintUtils.cleanNumberToBigDecimal(cartProductModel.getQuantity()));
 				askingPriceSum = askingPriceSum.add(transport);
-				//TODO old formula
-//				askingPriceSum += PrintUtils.cleanNumberToBigDecimal(cartProductModel.getUnitPrice()) * PrintUtils.cleanNumberToInt(cartProductModel.getQuantity());
+				
 				ipSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
+			
 			}
 	
 			int calcValue = checkCalculusType(result.getTableType());
