@@ -67,10 +67,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 			Assert.assertTrue("Failure: Could not validate cartTotals section. " + cartTotals , cartTotals.size() == 1);
 		}
 		
-		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
-		
-		
-		
+		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");		
 	
 	}
 	

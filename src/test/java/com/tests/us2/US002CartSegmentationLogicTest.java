@@ -115,7 +115,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 	@Test
 	public void uS002CartSegmentationLogicTest() {
-		frontEndSteps.performLogin("ioana.urcan@evozon.com", "ioana1234");
+		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
 
 		// searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
@@ -149,7 +149,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		// cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
+		 cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
 		// productsList.get(0).setQuantity("6");
 		// cartSteps.updateProducts();
 
@@ -230,6 +230,6 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@After
 	public void saveData() {
 	
-		}
+	}
 
 }

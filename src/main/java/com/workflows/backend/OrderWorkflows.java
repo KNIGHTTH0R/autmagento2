@@ -20,12 +20,12 @@ public class OrderWorkflows {
 	@Steps
 	public static OrderValidationSteps orderValidationSteps;
 	
-	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
-	private static List<OrderItemModel> orderProducts = new ArrayList<OrderItemModel>();
+	private  List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private  List<OrderItemModel> orderProducts = new ArrayList<OrderItemModel>();
 	
 	public void setValidateProductsModels(List<ProductBasicModel> productsList, List<OrderItemModel> orderProducts) {
-		OrderWorkflows.productsList = productsList;
-		OrderWorkflows.orderProducts = orderProducts;
+		this.productsList = productsList;
+		this.orderProducts = orderProducts;
 	}
 	
 	@Step
