@@ -139,7 +139,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		headerSteps.goToCart();
 
 		this.cartTotals = cartSteps.grabTotals();
-
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 
 		// TODO only one might be needed - CHOOSE

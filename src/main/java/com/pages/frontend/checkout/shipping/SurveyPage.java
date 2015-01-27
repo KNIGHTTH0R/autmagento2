@@ -59,10 +59,10 @@ public class SurveyPage extends AbstractPage {
 		for (WebElement webElementNow : entryList) {
 			CartProductModel productNow = new CartProductModel();
 
-			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
-			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
-			productNow.setQuantity(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
-			productNow.setUnitPrice(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+			productNow.setName(PrintUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
+			productNow.setProdCode(PrintUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
+			productNow.setQuantity(PrintUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText()));
+			productNow.setUnitPrice(PrintUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setProductsPrice("");
 			productNow.setFinalPrice("");
 			productNow.setPriceIP("");
