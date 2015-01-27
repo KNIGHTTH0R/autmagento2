@@ -9,6 +9,7 @@ public class CartTotalsModel {
 
 	private String subtotal;
 	private String jewelryBonus;
+	private String marketingBonus;
 	private String tax;
 	private String shipping;
 	private String totalAmount;
@@ -72,6 +73,13 @@ public class CartTotalsModel {
 	public String getJewelryBonus() {
 		return jewelryBonus;
 	}
+	public String getMarketingBonus() {
+		return marketingBonus;
+	}
+
+	public void setMarketingBonus(String marketingBonus) {
+		this.marketingBonus = marketingBonus;
+	}
 
 	public String getShipping() {
 		return shipping;
@@ -112,6 +120,8 @@ public class CartTotalsModel {
 	public void setTax(String tax) {
 		this.tax = tax;
 	}
+
+	
 
 	// public String getDiscount25() {
 	// return discount25;

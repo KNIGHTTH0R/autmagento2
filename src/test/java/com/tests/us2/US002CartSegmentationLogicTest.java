@@ -145,9 +145,10 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		// cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
-		// productsList.get(0).setQuantity("6");
-		// cartSteps.updateProducts();
+
+		 cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
+		 productsList.get(0).setQuantity("6");
+		 cartSteps.updateCart();
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 
@@ -165,9 +166,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
 
 		this.cartTotals = cartSteps.grabTotals();
-		PrintUtils.printCartTotals(cartTotals);
 
-		System.out.println(cartTotals.getSubtotal());
+		PrintUtils.printCartTotals(cartTotals);	
 
 		cartSteps.clickGoToShipping();
 

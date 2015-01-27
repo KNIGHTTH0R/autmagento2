@@ -56,7 +56,8 @@ public class PrintUtils {
 		System.out.println(" *** Print Total section from Cart *** ");
 		System.out.println("------------------------");
 		System.out.println("subtotal " + model.getSubtotal());
-		System.out.println("jewerly " + model.getJewelryBonus());
+		System.out.println("jewerly bonus " + model.getJewelryBonus());
+		System.out.println("marketing bonus " + model.getMarketingBonus());
 		for (String discountNow : model.getDiscountsMap().keySet()) {
 			System.out.println("Discount " + discountNow + ": " + model.getDiscountsMap().get(discountNow));
 		}
