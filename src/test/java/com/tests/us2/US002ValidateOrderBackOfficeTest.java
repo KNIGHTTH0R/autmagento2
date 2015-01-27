@@ -28,7 +28,7 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US001", type = "backend")
+@WithTag(name = "US002", type = "backend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US002ValidateOrderBackOfficeTest extends BaseTest {

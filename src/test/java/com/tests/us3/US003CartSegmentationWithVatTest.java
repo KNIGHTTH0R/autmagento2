@@ -24,7 +24,6 @@ import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
-import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -33,12 +32,11 @@ import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
 import com.workflows.frontend.CartWorkflows;
 
 
-@WithTag(name = "US3", type = "frontend")
+@WithTag(name = "US003", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US003CartSegmentationWithVatTest extends BaseTest {

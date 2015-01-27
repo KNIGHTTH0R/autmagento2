@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
@@ -21,6 +22,7 @@ import com.tools.data.StylistDataModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
+@WithTag(name = "US000", type = "backend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US000GrabStylistPropertiesTest extends BaseTest {

@@ -28,7 +28,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US001", type = "frontend")
+@WithTag(name = "US001", type = "external")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US001ValidateOrderEmailTest extends BaseTest{

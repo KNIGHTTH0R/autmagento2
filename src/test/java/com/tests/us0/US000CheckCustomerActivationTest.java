@@ -2,6 +2,7 @@ package com.tests.us0;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
@@ -18,6 +19,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
+@WithTag(name = "US000", type = "external")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US000CheckCustomerActivationTest extends BaseTest {
