@@ -23,7 +23,7 @@ import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class GrabStylistPropertiesTest extends BaseTest {
+public class US000GrabStylistPropertiesTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -40,8 +40,7 @@ public class GrabStylistPropertiesTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH
-					+ "Stylist.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "Stylist.properties");
 			prop.load(input);
 			stylistName = prop.getProperty("stylistName");
 			System.out.println(stylistName);
@@ -63,7 +62,7 @@ public class GrabStylistPropertiesTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void grabStylistPropertiesTest() {
+	public void us000GrabStylistPropertiesTest() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		// backEndSteps.dismissPopUp();
 		backEndSteps.clickOnCustomers();
@@ -77,34 +76,5 @@ public class GrabStylistPropertiesTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveStylistDataModel(validationModel, getClass().getSimpleName());
-//		Properties prop = new Properties();
-//		OutputStream output = null;
-//
-//		try {
-//			output = new FileOutputStream(Constants.RESOURCES_PATH
-//					+ "StylistData.properties");
-//
-//			prop.setProperty("styleCoachLeads", validationModel.styleCoachLeads);
-//			prop.setProperty("hostessLeads", validationModel.hostessLeads);
-//			prop.setProperty("customerLeads", validationModel.customerLeads);
-//			prop.setProperty("styleCoachLeadsWeek",
-//					validationModel.styleCoachLeadsWeek);
-//			prop.setProperty("hostessLeadsWeek",
-//					validationModel.hostessLeadsWeek);
-//
-//			prop.store(output, null);
-//
-//		} catch (IOException io) {
-//			io.printStackTrace();
-//		} finally {
-//			if (output != null) {
-//				try {
-//					output.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//
-//		}
 	}
 }

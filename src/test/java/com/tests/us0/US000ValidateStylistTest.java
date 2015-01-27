@@ -25,7 +25,7 @@ import com.tools.requirements.Application;
 
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class ValidateStylistTest extends BaseTest{
+public class US000ValidateStylistTest extends BaseTest{
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -74,62 +74,19 @@ public class ValidateStylistTest extends BaseTest{
 		}else{
 			System.out.println("The database table has no entries");
 		}
-//		try {
-//			input = null;
-//			input = new FileInputStream(Constants.RESOURCES_PATH + "CustomerConfirmation.properties");
-//			prop.load(input);
-//			accountActive = prop.getProperty("accountActive");
-//			emailActive = prop.getProperty("emailActive");
-//			prop = new Properties();
-//		} catch (IOException ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			if (input != null) {
-//				try {
-//					input.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
 		
 		List<StylistDataModel> validationList = MongoReader.grabStylistDataModels("GrabStylistPropertiesTest");
 		if(validationList.size() > 0){
 			initialValidation = validationList.get(0);
 		}else
 			System.out.println("The database table has no entries");	
-		
-//			try {
-//				input = null;
-//				input = new FileInputStream(Constants.RESOURCES_PATH + "StylistData.properties");
-//				prop.load(input);
-//				initialValidation.setCustomerLeads(prop.getProperty("customerLeads"));
-//				initialValidation.setHostessLeads(prop.getProperty("hostessLeads"));
-//				initialValidation.setHostessLeadsWeek(prop.getProperty("hostessLeadsWeek"));
-//				initialValidation.setStyleCoachLeads(prop.getProperty("styleCoachLeads"));
-//				initialValidation.setStyleCoachLeadsWeek(prop.getProperty("styleCoachLeadsWeek"));
-//				
-//			} catch (IOException ex) {
-//				ex.printStackTrace();
-//			} finally {
-//				if (input != null) {
-//					try {
-//						input.close();
-//					} catch (IOException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-			
-				
-		
 	}
 
 	/**
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void validateStylistData() {
+	public void us000ValidateStylistData() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistName);
@@ -148,7 +105,6 @@ public class ValidateStylistTest extends BaseTest{
 		
 		
 		if(accountActive.contentEquals("true")){
-//			if(accountActive.contentEquals("true") && emailActive.contentEquals("true")){
 			validationSteps.validateStylistData(initialValidation, finalValidation);
 		}
 	}
