@@ -42,7 +42,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.CartWorkflows;
 
-@WithTag(name = "US2", type = "frontend")
+@WithTag(name = "US002", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US002CartSegmentationLogicTest extends BaseTest {

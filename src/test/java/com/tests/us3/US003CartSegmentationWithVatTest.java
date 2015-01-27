@@ -37,7 +37,7 @@ import com.tools.requirements.Application;
 import com.workflows.frontend.CartWorkflows;
 
 
-@WithTag(name = "US3", type = "frontend")
+@WithTag(name = "US003", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US003CartSegmentationWithVatTest extends BaseTest {
