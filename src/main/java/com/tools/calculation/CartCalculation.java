@@ -143,22 +143,9 @@ public class CartCalculation {
 	}
 
 	public CartTotalsModel calculateJewelryDiscount(List<CalculationModel> totalsList, String jewelryDiscount) {
-		//TODO modify this - clean decimals to number
-		
-		//modify jewelry discount formatting
-		//From 10 To 1000
-		//From 10.00 to 1000
-		if(jewelryDiscount.contains(".")){
 
-			jewelryDiscount = jewelryDiscount.replace(".", "");
-			
-		}else{
-			jewelryDiscount += "00";
-		}
-		
-		
-		
-		System.out.println(jewelryDiscount);
+		jewelryDiscount = formatDiscount(jewelryDiscount);
+
 		CartTotalsModel result = new CartTotalsModel();
 
 		BigDecimal remainder25 = BigDecimal.valueOf(0);
@@ -178,7 +165,8 @@ public class CartCalculation {
 			if (remainder25.compareTo(BigDecimal.valueOf(0)) < 0) {
 				remainder50 = applyDiscount(totalsList, remainder25.abs(), Constants.DISCOUNT_50);
 			} else {
-				//if 25%discount is positive there is no more discount value -  50% is not discounted
+				// if 25%discount is positive there is no more discount value -
+				// 50% is not discounted
 				if (remainder25.compareTo(BigDecimal.valueOf(0)) > 0) {
 					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_50);
 				} else {
@@ -189,21 +177,33 @@ public class CartCalculation {
 		} else {
 			System.out.println("TOTAL for 50% section is not greater than 0 !!!");
 		}
-		
 
 		remainder25 = remainder25.divide(BigDecimal.valueOf(4)).divide(BigDecimal.valueOf(100));
 		remainder50 = remainder50.divide(BigDecimal.valueOf(2)).divide(BigDecimal.valueOf(100));
 
 		System.out.println("Remainder after 25%: " + remainder25.toString());
 		System.out.println("Remainder after 50%: " + remainder50.toString());
-		
-		
+
 		result.addDiscount(Constants.DISCOUNT_50, remainder50.toString());
 		result.addDiscount(Constants.DISCOUNT_25, remainder25.toString());
-		
+
 		return result;
 	}
 
+	//clean decimals to number
+	private String formatDiscount(String jewelryDiscount) {
+		// modify jewelry discount formatting
+		// From 10 To 1000
+		// From 10.00 to 1000
+		if (jewelryDiscount.contains(".")) {
+
+			jewelryDiscount = jewelryDiscount.replace(".", "");
+
+		} else {
+			jewelryDiscount += "00";
+		}
+		return jewelryDiscount;
+	}
 
 	/**
 	 * Return calculation of totalProducts by discount class.
