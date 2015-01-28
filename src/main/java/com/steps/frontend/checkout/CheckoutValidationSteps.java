@@ -57,20 +57,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
 
-
-//	// TODO might need to move this
-//	public CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
-//		CartProductModel result = new CartProductModel();
-//		theFor: for (CartProductModel cartProductModel : cartProducts) {
-//			// System.out.println(productCode + " - " +
-//			// cartProductModel.getProdCode());
-//			if (cartProductModel.getProdCode().contains(productCode)) {
-//				result = cartProductModel;
-//				break theFor;
-//			}
-//		}
-//		return result;
-//	}
 	@Step
 	public void checkTotalAmountFromUrl(String url, String totalAmount) {
 		Assert.assertTrue("Failure: The total amount from URL is incorrect", url.contains(totalAmount));

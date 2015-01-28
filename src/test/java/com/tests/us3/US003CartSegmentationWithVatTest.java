@@ -24,6 +24,7 @@ import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
+import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -33,6 +34,7 @@ import com.tools.data.CalculationModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.CreditCardModel;
 import com.tools.requirements.Application;
 import com.workflows.frontend.CartWorkflows;
 
@@ -53,7 +55,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
-	public CartCalculation calculusSteps;
+	public CartCalculation calculationSteps;
 	@Steps
 	public CheckoutValidationSteps validationSteps;
 	@Steps
@@ -64,10 +66,16 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	public ProfileSteps profileSteps;
 	@Steps
 	public CartWorkflows cartWorkflows;	
+	@Steps
+	public PaymentSteps paymentSteps;
+	@Steps
+
 	
+	private CreditCardModel creditCardData = new CreditCardModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 	private static CartTotalsModel finalCartTotals = new CartTotalsModel();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
+	private static CalculationModel totals0Vat =new CalculationModel();
 	private String username, password;
 
 
@@ -95,6 +103,12 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 				}
 			}
 		}
+		
+		creditCardData.setCardNumber("4111 1111 1111 1111");
+		creditCardData.setCardName("test");
+		creditCardData.setMonthExpiration("06");
+		creditCardData.setYearExpiration("2016");
+		creditCardData.setCvcNumber("737");
 	
 	}
 
@@ -142,27 +156,41 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus("150");
 		cartSteps.updateMarketingBonus();
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		CalculationModel recalculatedTotals = CartCalculation.recalculateTotalsAfterDiscounts(totalsCalculated);
+		PrintUtils.printCalculationModel(recalculatedTotals);
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		
-		finalCartTotals = cartSteps.grabTotals();
-		PrintUtils.printCartTotals(finalCartTotals);
+//		finalCartTotals = cartSteps.grabTotals();
+//		PrintUtils.printCartTotals(finalCartTotals);
+//		
+//		cartSteps.clickGoToShipping();
+//		
+//		shippingSteps.selectAddress("sss sss, tttt, 3, 2345 Wien, Österreich");
+//		shippingSteps.setSameAsBilling(true);
+//
+//		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+//		PrintUtils.printList(shippingProducts);
+//
+//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+//		PrintUtils.printCartTotals(shippingTotals);
+//		
+//		shippingSteps.clickGoToPaymentMethod();
+//		
+//		String url = shippingSteps.grabUrl();
+//		totals0Vat = calculationSteps.calculateShippingTotalsWith0Vat(totalsCalculated);
+//		PrintUtils.printCalculationModel(totalsCalculated);
+//		
+//		
+//
+//		paymentSteps.expandCreditCardForm();
+//
+//		paymentSteps.fillCreditCardForm(creditCardData);		
+//		
+//		
+//		validationSteps.checkTotalAmountFromUrl(url, String.valueOf(totals0Vat.getFinalPrice()));
 		
-		cartSteps.clickGoToShipping();
 		
-		shippingSteps.selectAddress("sss sss, tttt, 3, 2345 Wien, Österreich");
-		shippingSteps.setSameAsBilling(true);
-
-		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		PrintUtils.printList(shippingProducts);
-
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printCartTotals(shippingTotals);
-		
-		
-		
-		
-		
-		
-
 	}
 
 
