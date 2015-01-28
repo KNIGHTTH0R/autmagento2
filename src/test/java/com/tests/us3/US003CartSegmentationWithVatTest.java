@@ -155,11 +155,15 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		PrintUtils.printCartTotals(cartTotals);
 		
 //		cartSteps.typeJewerlyBonus("198.90");
-		cartSteps.typeJewerlyBonus("20.00");
-		cartSteps.updateJewerlyBonus();
+//		cartSteps.typeJewerlyBonus("20.00");
+//		cartSteps.updateJewerlyBonus();
+		cartSteps.typeMarketingBonus("20.00");
+		cartSteps.updateMarketingBonus();
 		
 		
-		calculationSteps.calculateJewelryDiscount(totalsList, "20");
+		
+	//	calculationSteps.calculateJewelryDiscount(totalsList, "20");
+		calculationSteps.calculateDiscountTotals(totalsList, "0", "20");
 //		calculationSteps.calculateJewelryDiscount(totalsList, "19890");
 		
 		
