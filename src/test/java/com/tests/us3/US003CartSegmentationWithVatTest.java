@@ -35,6 +35,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
 import com.workflows.frontend.CartWorkflows;
 
@@ -74,6 +75,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 	private static CartTotalsModel finalCartTotals = new CartTotalsModel();
+	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private static CalculationModel totals0Vat =new CalculationModel();
 	private String username, password;
@@ -115,8 +117,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@Test
 	public void uS003CartSegmentationWithVatTest() {
 		frontEndSteps.performLogin(username, password);
-//		ProductBasicModel productData;
-//		
+		ProductBasicModel productData;
+		
 //		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
@@ -152,14 +154,27 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
 		
-		cartSteps.typeJewerlyBonus("100");
+//		cartSteps.typeJewerlyBonus("198.90");
+		cartSteps.typeJewerlyBonus("20");
 		cartSteps.updateJewerlyBonus();
-		cartSteps.typeMarketingBonus("150");
-		cartSteps.updateMarketingBonus();
-		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-		CalculationModel recalculatedTotals = CartCalculation.recalculateTotalsAfterDiscounts(totalsCalculated);
-		PrintUtils.printCalculationModel(recalculatedTotals);
-		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		
+		
+		calculationSteps.calculateJewelryDiscount(totalsList, "2000");
+//		calculationSteps.calculateJewelryDiscount(totalsList, "19890");
+		
+		
+//		cartSteps.typeMarketingBonus("150");
+//		cartSteps.updateMarketingBonus();
+		
+		
+		
+		
+//		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+//		CalculationModel recalculatedTotals = CartCalculation.recalculateTotalsAfterDiscounts(totalsCalculated);
+//		PrintUtils.printCalculationModel(recalculatedTotals);
+//		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		
+		
 		
 //		finalCartTotals = cartSteps.grabTotals();
 //		PrintUtils.printCartTotals(finalCartTotals);

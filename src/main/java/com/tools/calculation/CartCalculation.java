@@ -7,6 +7,7 @@ import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
 
 public class CartCalculation {
 
@@ -141,20 +142,75 @@ public class CartCalculation {
 		return result;
 	}
 
-	// public static CalculationModel
-	// calculateShippingTotalsWith0Vat(CalculationModel model){
-	//
-	// CalculationModel result = new CalculationModel();
-	//
-	// BigDecimal askingPrice = model.getAskingPrice();
-	// // askingPrice = askingPrice.divide(BigDecimal.valueOf(119));
-	// result.setAskingPrice(askingPrice);
-	//
-	// BigDecimal finalPrice = model.getFinalPrice();
-	// // askingPrice = askingPrice.divide(BigDecimal.valueOf(119));
-	// result.setFinalPrice(finalPrice);
-	//
-	// return result;
-	// }
+	public void calculateJewelryDiscount(List<CalculationModel> totalsList, String jewelryDiscount) {
+		BigDecimal remainder25 = BigDecimal.valueOf(0);
+		BigDecimal remainder50 = BigDecimal.valueOf(0);
+		System.out.println("DOING IT");
+
+		if (applyDiscount(totalsList, BigDecimal.valueOf(0), "25").compareTo(BigDecimal.valueOf(0)) > 0) {
+			// If 25% section has total over 0
+			remainder25 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), "25");
+			System.out.println("Remainder after 25%: " + remainder25.toString());
+		} else {
+			System.out.println("TOTAL for 25% section is not greater than 0 !!!");
+		}
+
+		if (applyDiscount(totalsList, BigDecimal.valueOf(0), "50").compareTo(BigDecimal.valueOf(0)) > 0) {
+			// If 25% section has negative total and 50% section has total over
+			// 0
+			if (remainder25.compareTo(BigDecimal.valueOf(0)) < 0) {
+				remainder50 = applyDiscount(totalsList, remainder25.abs(), "50");
+			} else {
+				//if 25%discount is positive there is no more discount value -  50% is not discounted
+				if (remainder25.compareTo(BigDecimal.valueOf(0)) > 0) {
+					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(0), "50");
+				} else {
+					// if there is no 25% section only the 50% section
+					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), "50");
+				}
+			}
+		} else {
+			System.out.println("TOTAL for 50% section is not greater than 0 !!!");
+		}
+
+		System.out.println("Remainder after 25%: " + remainder25.toString());
+		System.out.println("Remainder after 50%: " + remainder50.toString());
+
+	}
+
+
+	/**
+	 * Return calculation of totalProducts by discount class.
+	 * 
+	 * @param totalsList
+	 * @param jewelryDiscount
+	 * @param discountClass
+	 * @return
+	 */
+	private BigDecimal applyDiscount(List<CalculationModel> totalsList, BigDecimal jewelryDiscount, String discountClass) {
+
+		BigDecimal result = BigDecimal.valueOf(0);
+		BigDecimal productSum = BigDecimal.valueOf(0);
+
+		for (CalculationModel cartProductModel : totalsList) {
+			System.out.println(cartProductModel.getTableType());
+			if (cartProductModel.getTableType() != null && cartProductModel.getTableType().contentEquals(discountClass)) {
+				if (cartProductModel.getAskingPrice() != null) {
+					productSum = productSum.add(cartProductModel.getAskingPrice());
+				}
+			}
+		}
+		System.out.println("Products sum: " + productSum.toString());
+
+		// if 0 == 0
+		if (productSum.compareTo(BigDecimal.valueOf(0)) == 0) {
+			System.out.println("ERROR: TOTAL IS EMPTY");
+
+		}
+
+		result = productSum.subtract(jewelryDiscount);
+
+		return result;
+	}
 
 }
