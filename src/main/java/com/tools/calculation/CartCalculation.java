@@ -182,16 +182,29 @@ public class CartCalculation {
 		remainder25 = remainder25.divide(BigDecimal.valueOf(4)).divide(BigDecimal.valueOf(100));
 		remainder50 = remainder50.divide(BigDecimal.valueOf(2)).divide(BigDecimal.valueOf(100));
 
-		System.out.println("Remainder after 25%: " + remainder25.toString());
-		System.out.println("Remainder after 50%: " + remainder50.toString());
+		result.setSubtotal(calculateTotalSum(totalsList).getAskingPrice().toString());
+		
+		//calculate total amount
+		BigDecimal totalAmount = BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString()));
+		totalAmount = totalAmount.subtract(remainder25);
+		totalAmount = totalAmount.subtract(remainder50);
+		totalAmount = totalAmount.subtract(BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)).divide(BigDecimal.valueOf(100)));
+
+		result.setTotalAmount(totalAmount.toString()); 
 
 		result.addDiscount(Constants.DISCOUNT_50, remainder50.toString());
 		result.addDiscount(Constants.DISCOUNT_25, remainder25.toString());
+		
+		System.out.println("SUBTOTAL: " + BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString())));
+		System.out.println("TOTAL AMOUNT: " + result.getTotalAmount());
+		System.out.println("Remainder after 25%: " + remainder25.toString());
+		System.out.println("Remainder after 50%: " + remainder50.toString());
+
 
 		return result;
 	}
 
-	//clean decimals to number
+	// clean decimals to number
 	private String formatDiscount(String jewelryDiscount) {
 		// modify jewelry discount formatting
 		// From 10 To 1000
