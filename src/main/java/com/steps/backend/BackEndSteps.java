@@ -22,6 +22,7 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public void clickOnCustomers() {
 		navigationPage().clickOnCustomers();
+		navigationPage().clickOnManageCustomers();
 	}
 
 	@Step

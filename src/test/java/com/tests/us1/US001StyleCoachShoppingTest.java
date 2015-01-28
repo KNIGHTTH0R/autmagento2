@@ -138,12 +138,20 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
+		System.out.println("Grab TOTALS - CART");
 		cartTotals = cartSteps.grabTotals();
-
 		PrintUtils.printCartTotals(cartTotals);
+		
+		
 		// TODO only one might be needed - CHOOSE
+		System.out.println("Grab Products - CART");
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
+		for (CartProductModel cartProductModel : cartProducts) {
+			PrintUtils.printCartProductModel(cartProductModel);
+		}
+		System.out.println("Grab Products - CART");
 
+		
 		// Calculate cart products by discount
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
@@ -206,7 +214,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@After
 	public void saveData() {
 		
-		System.out.println("cartTotals: " + cartTotals.toString());
 		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 	}

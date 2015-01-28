@@ -5,6 +5,7 @@ import java.util.List;
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
+import com.tools.Constants;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 
@@ -14,6 +15,7 @@ public class ShippingSteps extends AbstractSteps{
 
 	
 	public CartTotalsModel grabSurveyData(){
+		waitABit(Constants.TIME_CONSTANT);
 		return surveyPage().grabSurveyData();
 	}
 	
@@ -24,6 +26,7 @@ public class ShippingSteps extends AbstractSteps{
 	}
 
 	public List<CartProductModel> grabProductsList() {
+		waitABit(Constants.TIME_CONSTANT);
 		return surveyPage().grabProductsList();
 	}
 	

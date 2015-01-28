@@ -5,6 +5,7 @@ import java.util.List;
 import net.thucydides.core.annotations.Step;
 
 import com.tools.AbstractSteps;
+import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -20,6 +21,7 @@ public class CartSteps extends  AbstractSteps{
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsData(){
+		waitABit(Constants.TIME_CONSTANT);
 		return cartPage().grabProductsData();
 	}
 	
