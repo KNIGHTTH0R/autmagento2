@@ -147,6 +147,7 @@ public class CartCalculation {
 		jewelryDiscount = formatDiscount(jewelryDiscount);
 
 		CartTotalsModel result = new CartTotalsModel();
+		result.setJewelryBonus(jewelryDiscount);
 
 		BigDecimal remainder25 = BigDecimal.valueOf(0);
 		BigDecimal remainder50 = BigDecimal.valueOf(0);
