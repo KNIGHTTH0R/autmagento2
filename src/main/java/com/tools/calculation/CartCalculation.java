@@ -143,16 +143,31 @@ public class CartCalculation {
 	}
 
 	public CartTotalsModel calculateJewelryDiscount(List<CalculationModel> totalsList, String jewelryDiscount) {
+		//TODO modify this - clean decimals to number
 		
+		//modify jewelry discount formatting
+		//From 10 To 1000
+		//From 10.00 to 1000
+		if(jewelryDiscount.contains(".")){
+
+			jewelryDiscount = jewelryDiscount.replace(".", "");
+			
+		}else{
+			jewelryDiscount += "00";
+		}
+		
+		
+		
+		System.out.println(jewelryDiscount);
 		CartTotalsModel result = new CartTotalsModel();
-		result.setJewelryBonus(jewelryDiscount);
-		
+
 		BigDecimal remainder25 = BigDecimal.valueOf(0);
 		BigDecimal remainder50 = BigDecimal.valueOf(0);
 
 		if (applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_25).compareTo(BigDecimal.valueOf(0)) > 0) {
 			// If 25% section has total over 0
 			remainder25 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), Constants.DISCOUNT_25);
+			System.out.println(remainder25.toString());
 		} else {
 			System.out.println("TOTAL for 25% section is not greater than 0 !!!");
 		}
@@ -220,6 +235,7 @@ public class CartCalculation {
 		}
 
 		result = productSum.subtract(jewelryDiscount);
+		System.out.println("HERE: " + result.toString());
 
 		return result;
 	}
