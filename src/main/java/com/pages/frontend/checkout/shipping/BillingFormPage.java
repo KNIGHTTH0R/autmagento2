@@ -2,7 +2,6 @@ package com.pages.frontend.checkout.shipping;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 import com.tools.AbstractPage;

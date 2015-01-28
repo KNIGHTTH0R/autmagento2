@@ -1,13 +1,10 @@
 package com.steps.frontend.checkout;
 
-import java.util.List;
-
 import net.thucydides.core.annotations.Step;
 
 import org.junit.Assert;
 
 import com.tools.AbstractSteps;
-import com.tools.data.frontend.CartProductModel;
 
 public class CheckoutValidationSteps extends AbstractSteps {
 
