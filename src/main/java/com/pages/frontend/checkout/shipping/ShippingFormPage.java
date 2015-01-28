@@ -39,6 +39,9 @@ public class ShippingFormPage extends AbstractPage{
 	@FindBy(css = "select#shipping:telephone")
 	private WebElement telephoneInput;
 	
+	@FindBy(css = "input#same_as_billing")
+	private WebElement sameAsBilling;
+	
 	/**
 	 * Select from dropdown an existing address or the "NEUE ADRESSE' value
 	 */
@@ -86,6 +89,15 @@ public class ShippingFormPage extends AbstractPage{
 
 	public void inputPhoneNumber(String phoneNumber) {
 		telephoneInput.sendKeys(phoneNumber);
+	}
+	
+	public void setSameAsBilling(boolean checked) {
+		
+		boolean isSelected = sameAsBilling.isSelected();
+		
+		if((checked && !isSelected) || (!checked && isSelected))
+			sameAsBilling.click();
+			
 	}
 	
 	

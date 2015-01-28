@@ -30,4 +30,14 @@ public class ShippingSteps extends AbstractSteps{
 		return surveyPage().grabProductsList();
 	}
 	
+	@Step
+	public void selectAddress(String address){
+		billingFormPage().selectAdressDropdown(address);
+	}
+	
+	@Step
+	public void setSameAsBilling(boolean checked){
+		shippingFormPage().setSameAsBilling(checked);
+	}
+	
 }
