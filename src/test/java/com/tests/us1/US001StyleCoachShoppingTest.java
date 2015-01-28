@@ -207,5 +207,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
+		for (ProductBasicModel product : productsList) {
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
+		}
 	}
 }

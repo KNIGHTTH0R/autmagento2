@@ -71,17 +71,10 @@ public class OrderWorkflows {
 	@Step
 	public void printOrderTotals(String subtotal, String tax, String shipping, String totalAmount, String totalIP, String totalBonusJeverly) {
 		// TODO Method used only for reporting - Might need to move
-		
 	}
-	
 	
 	@Step
 	public void printCartTotals(String subtotal, String tax, String shipping, String totalAmount, String totalIP, String totalBonusJeverly) {
 		// TODO Method used only for reporting - Might need to move
-		
 	}
-	
-	
-
-
 }

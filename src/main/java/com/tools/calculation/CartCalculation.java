@@ -217,6 +217,15 @@ public class CartCalculation {
 		} else {
 			System.out.println("TOTAL for 50% section is not greater than 0 !!!");
 		}
+
+		
+
+		remainder25 = remainder25.divide(BigDecimal.valueOf(4)).divide(BigDecimal.valueOf(100));
+		remainder50 = remainder50.divide(BigDecimal.valueOf(2)).divide(BigDecimal.valueOf(100));
+
+//		result.setSubtotal(calculateTotalSum(totalsList).getAskingPrice().toString());
+//		result.setIpPoints(String.valueOf(calculateTotalSum(totalsList).getIpPoints()));
+
 		
 	}
 
@@ -261,7 +270,6 @@ public class CartCalculation {
 		// if 0 == 0
 		if (productSum.compareTo(BigDecimal.valueOf(0)) == 0) {
 			System.out.println("ERROR: TOTAL IS EMPTY");
-
 		}
 
 		result = productSum.subtract(jewelryDiscount);
