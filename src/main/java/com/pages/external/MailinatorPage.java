@@ -24,14 +24,11 @@ public class MailinatorPage extends AbstractPage {
 		element(inboxContainer).waitUntilVisible();
 		String returnText = "";
 
-		List<WebElement> emailList = inboxContainer.findElements(By
-				.cssSelector("li"));
+		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("li"));
 
 		for (WebElement itemNow : emailList) {
 			String allText = itemNow.getText();
 			System.out.println("Row: " + allText);
-			// first look for the Welcome message else look for the confirmation
-			// mail
 			if (allText.contains("Willkommen")) {
 				returnText = allText;
 				break;
@@ -51,8 +48,7 @@ public class MailinatorPage extends AbstractPage {
 		getDriver().switchTo().frame(iFrameElement);
 
 		element(mailContainer).waitUntilVisible();
-		String confirmLink = mailContainer.findElement(
-				By.cssSelector("a[href*='confirm']")).getAttribute("href");
+		String confirmLink = mailContainer.findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
 
 		System.out.println("Confirm link: " + confirmLink);
 

@@ -18,7 +18,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String grabEmail(String email) {
 
-		waitABit(5000);
+//		waitABit(5000);
 		String url = Constants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 
 		System.out.println("URL : " + url);
