@@ -147,12 +147,18 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		PrintUtils.printCartTotals(finalCartTotals);
 		
 		cartSteps.clickGoToShipping();
+		
+		shippingSteps.selectAddress("sss sss, tttt, 3, 2345 Wien, Österreich");
+		shippingSteps.setSameAsBilling(true);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
 
 		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
 		PrintUtils.printCartTotals(shippingTotals);
+		
+		
+		
 		
 		
 		
