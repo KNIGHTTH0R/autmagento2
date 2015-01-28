@@ -176,9 +176,14 @@ public class CartPage extends AbstractPage {
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setSubtotal(valueTransformer);
 			}
-	
 			if(key.contains("SCHMUCK BONUS")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
+				
+				//TODO - format jewelry bonus string as a double - DEFAULT = 0 
+				if(!valueTransformer.contains(".")){
+					valueTransformer += ".00";
+				}
+				
 				resultModel.setJewelryBonus(valueTransformer);
 			}
 			if(key.contains("MARKETING BONUS")){
