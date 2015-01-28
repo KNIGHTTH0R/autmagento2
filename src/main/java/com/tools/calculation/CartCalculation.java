@@ -142,40 +142,51 @@ public class CartCalculation {
 		return result;
 	}
 
-	public void calculateJewelryDiscount(List<CalculationModel> totalsList, String jewelryDiscount) {
+	public CartTotalsModel calculateJewelryDiscount(List<CalculationModel> totalsList, String jewelryDiscount) {
+		
+		CartTotalsModel result = new CartTotalsModel();
+		result.setJewelryBonus(jewelryDiscount);
+		
 		BigDecimal remainder25 = BigDecimal.valueOf(0);
 		BigDecimal remainder50 = BigDecimal.valueOf(0);
-		System.out.println("DOING IT");
 
-		if (applyDiscount(totalsList, BigDecimal.valueOf(0), "25").compareTo(BigDecimal.valueOf(0)) > 0) {
+		if (applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_25).compareTo(BigDecimal.valueOf(0)) > 0) {
 			// If 25% section has total over 0
-			remainder25 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), "25");
-			System.out.println("Remainder after 25%: " + remainder25.toString());
+			remainder25 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), Constants.DISCOUNT_25);
 		} else {
 			System.out.println("TOTAL for 25% section is not greater than 0 !!!");
 		}
 
-		if (applyDiscount(totalsList, BigDecimal.valueOf(0), "50").compareTo(BigDecimal.valueOf(0)) > 0) {
+		if (applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_50).compareTo(BigDecimal.valueOf(0)) > 0) {
 			// If 25% section has negative total and 50% section has total over
 			// 0
 			if (remainder25.compareTo(BigDecimal.valueOf(0)) < 0) {
-				remainder50 = applyDiscount(totalsList, remainder25.abs(), "50");
+				remainder50 = applyDiscount(totalsList, remainder25.abs(), Constants.DISCOUNT_50);
 			} else {
 				//if 25%discount is positive there is no more discount value -  50% is not discounted
 				if (remainder25.compareTo(BigDecimal.valueOf(0)) > 0) {
-					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(0), "50");
+					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_50);
 				} else {
 					// if there is no 25% section only the 50% section
-					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), "50");
+					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), Constants.DISCOUNT_50);
 				}
 			}
 		} else {
 			System.out.println("TOTAL for 50% section is not greater than 0 !!!");
 		}
+		
+
+		remainder25 = remainder25.divide(BigDecimal.valueOf(4)).divide(BigDecimal.valueOf(100));
+		remainder50 = remainder50.divide(BigDecimal.valueOf(2)).divide(BigDecimal.valueOf(100));
 
 		System.out.println("Remainder after 25%: " + remainder25.toString());
 		System.out.println("Remainder after 50%: " + remainder50.toString());
-
+		
+		
+		result.addDiscount(Constants.DISCOUNT_50, remainder50.toString());
+		result.addDiscount(Constants.DISCOUNT_25, remainder25.toString());
+		
+		return result;
 	}
 
 
