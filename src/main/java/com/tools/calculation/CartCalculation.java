@@ -183,6 +183,7 @@ public class CartCalculation {
 		remainder50 = remainder50.divide(BigDecimal.valueOf(2)).divide(BigDecimal.valueOf(100));
 
 		result.setSubtotal(calculateTotalSum(totalsList).getAskingPrice().toString());
+		result.setIpPoints(String.valueOf(calculateTotalSum(totalsList).getIpPoints()));
 		
 		//calculate total amount
 		BigDecimal totalAmount = BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString()));
@@ -197,6 +198,7 @@ public class CartCalculation {
 		
 		System.out.println("SUBTOTAL: " + BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString())));
 		System.out.println("TOTAL AMOUNT: " + result.getTotalAmount());
+		System.out.println("IP: " + result.getIpPoints());
 		System.out.println("Remainder after 25%: " + remainder25.toString());
 		System.out.println("Remainder after 50%: " + remainder50.toString());
 
