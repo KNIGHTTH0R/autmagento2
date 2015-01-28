@@ -88,5 +88,10 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		}
 		return result;
 	}
+	@Step
+	public void checkTotalAmountFromUrl(String url, String totalAmount) {
+		Assert.assertTrue("Failure: The total amount from URL is incorrect", url.contains(totalAmount));
+		
+	}
 
 }

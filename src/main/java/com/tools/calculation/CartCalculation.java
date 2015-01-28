@@ -8,6 +8,7 @@ import com.tools.Constants;
 import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
 
 public class CartCalculation {
 	
@@ -139,6 +140,19 @@ public class CartCalculation {
 		
 		return result;
 	}
+	//TODO hardcoded discount - fix this
+	public static CalculationModel recalculateTotalsAfterDiscounts(CalculationModel calculationModel){
+		CalculationModel result = new CalculationModel();
+		System.out.println(calculationModel.getAskingPrice());
+		System.out.println(calculationModel.getFinalPrice());
+			result.setAskingPrice(calculationModel.getAskingPrice());
+			result.setFinalPrice(calculationModel.getFinalPrice().subtract(BigDecimal.valueOf(250)));
+			result.setIpPoints(calculationModel.getIpPoints());
+		
+		return result;
+		
+	}
+	
 
 	private static int checkCalculusType(String tableType) {
 		int result = 0;
@@ -154,5 +168,20 @@ public class CartCalculation {
 		}
 		return result;
 	}
+	
+//	public static CalculationModel calculateShippingTotalsWith0Vat(CalculationModel model){
+//		
+//		CalculationModel result = new CalculationModel();	
+//		
+//		 BigDecimal askingPrice = model.getAskingPrice();
+//		// askingPrice = askingPrice.divide(BigDecimal.valueOf(119)); 
+//		 result.setAskingPrice(askingPrice);
+//		 
+//		 BigDecimal finalPrice = model.getFinalPrice();
+//		// askingPrice = askingPrice.divide(BigDecimal.valueOf(119)); 
+//		 result.setFinalPrice(finalPrice);
+//		 
+//		 return result;
+//	}
 
 }

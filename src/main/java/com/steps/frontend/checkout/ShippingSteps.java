@@ -36,5 +36,10 @@ public class ShippingSteps extends AbstractSteps{
 	public void setSameAsBilling(boolean checked){
 		shippingFormPage().setSameAsBilling(checked);
 	}
+
+	@Step
+	public String grabUrl() {
+		return getDriver().getCurrentUrl();		
+	}
 	
 }
