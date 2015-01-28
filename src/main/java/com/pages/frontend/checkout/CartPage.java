@@ -168,7 +168,6 @@ public class CartPage extends AbstractPage {
 		List<WebElement> valuesList = totalsTable.findElements(By.cssSelector("tr"));
 		
 		//TODO if totalAmount is < 150  than shipping element is not present- {"method":"css selector","selector":"tbody tr:nth-child(5) > td:last-child"}
-		
 		for (WebElement itemNow : valuesList) {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 			
@@ -179,7 +178,7 @@ public class CartPage extends AbstractPage {
 			if(key.contains("SCHMUCK BONUS")){
 				valueTransformer = PrintUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
 				
-				//TODO - format jewelry bonus string as a double - DEFAULT = 0 
+				//TODO -FIXED- format jewelry bonus string as a double - DEFAULT = 0 
 				if(!valueTransformer.contains(".")){
 					valueTransformer += ".00";
 				}

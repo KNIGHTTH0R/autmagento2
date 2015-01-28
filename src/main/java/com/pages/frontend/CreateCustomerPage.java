@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import net.thucydides.core.annotations.findby.FindBy;
 
 import com.tools.AbstractPage;
+import com.tools.Constants;
 
 public class CreateCustomerPage extends AbstractPage {
 
@@ -81,8 +82,8 @@ public class CreateCustomerPage extends AbstractPage {
 		element(passwordInput).waitUntilVisible();
 		passwordInput.sendKeys(passText);
 		
-		//TODO FIX - quick fix for password verification
-		waitABit(1000);
+		//TODO - FIXED - quick fix for password verification
+		waitABit(Constants.TIME_CONSTANT);
 		passwordInput.clear();		
 		passwordInput.sendKeys(passText);
 		

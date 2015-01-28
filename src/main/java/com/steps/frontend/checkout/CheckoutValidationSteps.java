@@ -22,23 +22,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		successPage().verifySuccessMessage();
 	}
 
-//	@StepGroup
-//	public void checkCalculationTotals(String message, CalculationModel calculationModel, CartTotalsModel cartTotalModel) {
-//
-//		printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()), String.valueOf(calculationModel.getIpPoints()));
-//		printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscount(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),
-//				cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
-//
-//		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.formatDouble(calculationModel.getAskingPrice()) + "!", cartTotalModel
-//				.getSubtotal().equals(calculationModel.formatDouble(calculationModel.getAskingPrice())));
-//
-//		Assert.assertTrue("The discount should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.formatDouble(calculationModel.getFinalPrice()) + "!", cartTotalModel
-//				.getTotalAmount().equals(calculationModel.formatDouble(calculationModel.getFinalPrice())));
-//
-//		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
-//				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
-//	}
-
 	@Step
 	public void printTotalsModel(String message, String subtotal, String discount, String totalAmount, String tax, String shipping, String jewelryBonus, String ip) {
 		System.out.println(" -- Print Totals - " + message);
@@ -49,7 +32,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		System.out.println("SHIPPING: " + shipping);
 		System.out.println("JEWERLY BONUS: " + jewelryBonus);
 		System.out.println("IP POINTS: " + ip);
-		getDriver().getCurrentUrl();
 	}
 
 	@Step
@@ -58,7 +40,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		System.out.println("SUBTOTAL: " + subtotal);
 		System.out.println("FINAL: " + totalAmount);
 		System.out.println("IP POINTS: " + ip);
-		getDriver().getCurrentUrl();
 	}
 
 	@Step
@@ -68,6 +49,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 	@Step
 	public void matchName(String productNow, String compare) {
+		//Name is validated on element match -  Only for print purposes hence match not validate
 	}
 
 	@Step
@@ -75,18 +57,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
 
-	// TODO might need to move this
-	public CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
-		CartProductModel result = new CartProductModel();
-		theFor: for (CartProductModel cartProductModel : cartProducts) {
-			// System.out.println(productCode + " - " +
-			// cartProductModel.getProdCode());
-			if (cartProductModel.getProdCode().contains(productCode)) {
-				result = cartProductModel;
-				break theFor;
-			}
-		}
-		return result;
-	}
+
 
 }

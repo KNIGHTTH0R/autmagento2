@@ -26,16 +26,16 @@ public class ConfirmationPage extends AbstractPage {
 
 	@FindBy(css = "div.checkout-totals-section")
 	private WebElement totalsContainer;
-	
+
 	@FindBy(id = "terms")
 	private WebElement acceptTerms;
-	
+
 	@FindBy(id = "submit-confirmation-step")
 	private WebElement submitButton;
-	
+
 	@FindBy(css = "div#cart-section-1 div.items-section")
 	private WebElement productListContainer;
-	
+
 	@FindBy(css = "div.checkout-totals-section")
 	private WebElement surveyTotalsContainer;
 
@@ -43,52 +43,50 @@ public class ConfirmationPage extends AbstractPage {
 		AddressModel result = new AddressModel();
 		element(addressPreview).waitUntilVisible();
 		String textparse = addressPreview.getText();
-		String[] splittedText = textparse.split(Constants.LINE_SEPARATOR);	
-		
-		if(splittedText.length == 4){
-			
+		String[] splittedText = textparse.split(Constants.LINE_SEPARATOR);
+
+		if (splittedText.length == 4) {
+
 			String[] streetData = splittedText[1].split(Constants.COMMA_SEPARATOR);
 			String streetName = streetData[0];
 			String streetNumber = streetData[1];
-			
-			String[] townData  = splittedText[2].split(Constants.COMMA_SEPARATOR);
+
+			String[] townData = splittedText[2].split(Constants.COMMA_SEPARATOR);
 			String homeTown = townData[0];
 			String postCode = townData[1];
-			
+
 			result.setStreetAddress(streetName);
 			result.setStreetNumber(streetNumber);
-			
+
 			result.setHomeTown(homeTown);
 			result.setPostCode(postCode);
-			
+
 			result.setCountryName(splittedText[3]);
-			
+
 			PrintUtils.printAddressModel(result);
-			
+
 		}
-		if(textparse.split(Constants.LINE_SEPARATOR).length == 5){
+		if (textparse.split(Constants.LINE_SEPARATOR).length == 5) {
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page - 5");
-			
-			
+
 			String[] streetData = splittedText[1].split(Constants.COMMA_SEPARATOR);
 			String streetName = streetData[0];
 			String streetNumber = streetData[1];
-			
-			String[] townData  = splittedText[2].split(Constants.COMMA_SEPARATOR);
+
+			String[] townData = splittedText[2].split(Constants.COMMA_SEPARATOR);
 			String homeTown = townData[0];
 			String postCode = townData[1];
-			
+
 			result.setStreetAddress(streetName);
 			result.setStreetNumber(streetNumber);
-			
+
 			result.setHomeTown(homeTown);
 			result.setPostCode(postCode);
-			
+
 			result.setCountryName(splittedText[3]);
-			
+
 			PrintUtils.printAddressModel(result);
-		}
-		else{
+		} else {
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page");
 		}
 
@@ -105,17 +103,16 @@ public class ConfirmationPage extends AbstractPage {
 
 		return result;
 	}
-	
+
 	public AddressModel grabShippingData() {
 		AddressModel result = new AddressModel();
 		element(shippingContainer).waitUntilVisible();
-		
+
 		System.out.println(shippingContainer.getText());
-		result = grabAddressData(shippingContainer);		
-		
+		result = grabAddressData(shippingContainer);
+
 		return result;
 	}
-	
 
 	public void clickIAgree() {
 		element(acceptTerms).waitUntilVisible();
@@ -126,21 +123,20 @@ public class ConfirmationPage extends AbstractPage {
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
 	}
-	
-	public CartTotalsModel grabSurveyData(){
+
+	public CartTotalsModel grabSurveyData() {
 		CartTotalsModel result = new CartTotalsModel();
 		element(surveyTotalsContainer).waitUntilVisible();
-		
+
 		result.setSubtotal(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
 		result.addDiscount(MongoTableKeys.DISCOUNT_KEY, PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
 		result.setShipping(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
 		result.setTotalAmount(PrintUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
-		
+
 		return result;
 	}
-	
-	
-	//TODO might need to use other Model
+
+	// TODO might need to use other Model
 	public List<CartProductModel> grabProductsList() {
 		element(productListContainer).waitUntilVisible();
 		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));

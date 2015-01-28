@@ -138,19 +138,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		System.out.println("Grab TOTALS - CART");
 		cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
 		
-		
-		// TODO only one might be needed - CHOOSE
-		System.out.println("Grab Products - CART");
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
-		for (CartProductModel cartProductModel : cartProducts) {
-			PrintUtils.printCartProductModel(cartProductModel);
-		}
-		System.out.println("Grab Products - CART");
-
 		
 		// Calculate cart products by discount
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();

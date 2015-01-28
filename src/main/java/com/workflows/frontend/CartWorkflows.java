@@ -32,7 +32,7 @@ public class CartWorkflows {
 	@Step
 	public void validateProducts(String message) {
 		for (ProductBasicModel productNow : productsList) {
-			CartProductModel compare = checkoutValidationSteps.findProduct(productNow.getType(), cartProducts);
+			CartProductModel compare = findProduct(productNow.getType(), cartProducts);
 
 			PrintUtils.printProductsCompare(productNow, compare);
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
@@ -71,6 +71,19 @@ public class CartWorkflows {
 
 		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
 				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
+	}
+	
+	
+	// TODO -FIXED- might need to move this
+	public CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
+		CartProductModel result = new CartProductModel();
+		theFor: for (CartProductModel cartProductModel : cartProducts) {
+			if (cartProductModel.getProdCode().contains(productCode)) {
+				result = cartProductModel;
+				break theFor;
+			}
+		}
+		return result;
 	}
 	
 
