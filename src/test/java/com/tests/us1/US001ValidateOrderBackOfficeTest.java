@@ -24,6 +24,7 @@ import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.OrderWorkflows;
@@ -42,7 +43,8 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps
 	public OrderWorkflows orderWorkflows;
 	
-	public List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
+	public static List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
+	public static List<ProductBasicModel>  productsList = new ArrayList<ProductBasicModel>();
 
 	private String orderId;
 
@@ -64,6 +66,8 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		} else {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + cartTotals , cartTotals.size() == 1);
 		}
+		
+		productsList = MongoReader.grabProductBasicModel("US001StyleCoachShoppingTest");		
 	}
 
 	/**
@@ -86,5 +90,9 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 //		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
 		orderWorkflows.setCheckCalculationTotalsModels(ordertotal, cartTotals.get(0));
 		orderWorkflows.validateTotals("TOTALS VALIVATION");
+		
+		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
+		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
+//		orderValidationSteps.validateProducts(productsList, orderItemsList);
 	}
 }
