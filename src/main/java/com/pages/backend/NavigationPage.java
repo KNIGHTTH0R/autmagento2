@@ -29,6 +29,18 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
+	public void clickOnManageCustomers() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+		
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Kunden verwalten")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
 
 	public void clickOnSales() {
 		element(navigationBar).waitUntilVisible();

@@ -2,6 +2,16 @@ package com.tools;
 
 public class Constants {
 
+//	public static final String BASE_URL_BE = "http://pippajean:sn0wMob1l!@staging-aut.pippajean.com/index.php/admin/";
+//	public static final String BASE_URL_FE = "http://pippajean:sn0wMob1l!@staging-aut.pippajean.com/customer/account/create/";
+////	public static final String BASE_URL_FE = "http://pippajean:sn0wMob1l!@staging.pippajean.com/customer/account/create/";
+//	public static final String BASE_URL = "https://staging-aut.pippajean.com/customer/account/login/";
+//	public static final String BASE_URL_AUT = "https://staging-aut.pippajean.com/customer/account/login/";
+//	public static final String URL_CART_SUCCESS = "https://staging-aut.pippajean.com/simona/simplecheckout/process/success/";
+//	public static final String PROFILE_HISTORY_URL = "https://staging-aut.pippajean.com/simona/sales/order/history/";
+
+	
+//		public static final String BASE_URL = "https://pippajean:sn0wMob1l!@staging.pippajean.com/customer/account/login/";
 	public static final String BASE_URL_BE = "http://pippajean:sn0wMob1l!@staging.pippajean.com/index.php/admin/";
 	public static final String BASE_URL_FE = "http://pippajean:sn0wMob1l!@staging.pippajean.com/customer/account/create/";
 //	public static final String BASE_URL_FE = "http://pippajean:sn0wMob1l!@staging.pippajean.com/customer/account/create/";

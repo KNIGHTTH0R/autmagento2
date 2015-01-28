@@ -139,11 +139,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		headerSteps.goToCart();
 
 		cartTotals = cartSteps.grabTotals();
-
 		PrintUtils.printCartTotals(cartTotals);
-		// TODO only one might be needed - CHOOSE
+		
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
-
+		
 		// Calculate cart products by discount
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
@@ -206,7 +205,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@After
 	public void saveData() {
 		
-		System.out.println("cartTotals: " + cartTotals.toString());
 		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 	}

@@ -21,19 +21,23 @@ public class OrderValidationSteps extends AbstractSteps {
 
 	@StepGroup
 	public void validateProducts(List<ProductBasicModel> productsList, List<OrderItemModel> orderProducts) {
-		//TODO Assert if productList is null
-		for (ProductBasicModel productNow : productsList) {
-			OrderItemModel compare = findProduct(productNow.getType(), orderProducts);
+		// TODO - FIXED - Assert if productList is null
+		if (productsList != null) {
+			for (ProductBasicModel productNow : productsList) {
+				OrderItemModel compare = findProduct(productNow.getType(), orderProducts);
 
-			PrintUtils.printProductsCompareBackend(productNow, compare);
+				PrintUtils.printProductsCompareBackend(productNow, compare);
 
-			if (compare.getProductName() != null) {
-				matchName(productNow.getName(), compare.getProductName());
-				validateMatchPrice(productNow.getPrice(), compare.getPrice());
-				validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
-			} else {
-				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+				if (compare.getProductName() != null) {
+					matchName(productNow.getName(), compare.getProductName());
+					validateMatchPrice(productNow.getPrice(), compare.getPrice());
+					validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
+				} else {
+					Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+				}
 			}
+		}else{
+			Assert.assertTrue("Failure: to validate product list. Product list is empty", productsList != null);
 		}
 	}
 
@@ -45,31 +49,33 @@ public class OrderValidationSteps extends AbstractSteps {
 
 	@Step
 	public void matchName(String productNow, String compare) {
-		//Used only for reporting purposes. Display match names.
+		// Used only for reporting purposes. Display match names.
 	}
 
 	@Step
 	public void validateMatchQuantity(String productNow, String compare) {
 		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
-	
+
 	/**
-	 * OrderTotals are taken from BE.
-	 * CartTotals are taken from FE.
+	 * OrderTotals are taken from BE. CartTotals are taken from FE.
+	 * 
 	 * @param orderTotals
 	 * @param cartTotals
 	 */
-	//TODO Add discount Map Validation
+	// TODO Add discount Map Validation
 	@Step
-	public void validateTotals(String message, OrderTotalsModel orderTotals, CartTotalsModel cartTotals){
+	public void validateTotals(String message, OrderTotalsModel orderTotals, CartTotalsModel cartTotals) {
 		Assert.assertTrue("Failure: Subtotal values dont match: " + orderTotals.getSubtotal() + " - " + cartTotals.getSubtotal(), orderTotals.getSubtotal().contentEquals(cartTotals.getSubtotal()));
 		Assert.assertTrue("Failure: Tax values dont match: " + orderTotals.getTax() + " - " + cartTotals.getTax(), orderTotals.getTax().contentEquals(cartTotals.getTax()));
 		Assert.assertTrue("Failure: Shipping values dont match: " + orderTotals.getShipping() + " - " + cartTotals.getShipping(), orderTotals.getShipping().contentEquals(cartTotals.getShipping()));
-		Assert.assertTrue("Failure: Total Amount values dont match: " + orderTotals.getTotalAmount() + " - " + cartTotals.getTotalAmount(), orderTotals.getTotalAmount().contentEquals(cartTotals.getTotalAmount()));
+		Assert.assertTrue("Failure: Total Amount values dont match: " + orderTotals.getTotalAmount() + " - " + cartTotals.getTotalAmount(),
+				orderTotals.getTotalAmount().contentEquals(cartTotals.getTotalAmount()));
 		Assert.assertTrue("Failure: Total IP values dont match: " + orderTotals.getTotalIP() + " - " + cartTotals.getIpPoints(), orderTotals.getTotalIP().contentEquals(cartTotals.getIpPoints()));
-		//TODO Might fail due to BigDecimal
-		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotals.getTotalBonusJeverly() + " - " + cartTotals.getJewelryBonus(), orderTotals.getTotalBonusJeverly().contentEquals(cartTotals.getJewelryBonus()));
-		
+		// TODO Might fail due to BigDecimal
+		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotals.getTotalBonusJeverly() + " - " + cartTotals.getJewelryBonus(),
+				orderTotals.getTotalBonusJeverly().contentEquals(cartTotals.getJewelryBonus()));
+
 	}
 
 	public OrderItemModel findProduct(String productCode, List<OrderItemModel> orderProducts) {

@@ -38,9 +38,9 @@ public class US000CheckCustomerActivationTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("CreateCustomerTest").size();
+		int size = MongoReader.grabCustomerFormModels("US000CreateCustomerTest").size();
 		if (size > 0) {
-			clientName = MongoReader.grabCustomerFormModels("CreateCustomerTest").get(0).getEmailName();
+			clientName = MongoReader.grabCustomerFormModels("US000CreateCustomerTest").get(0).getEmailName();
 			System.out.println(clientName);
 		} else
 			System.out.println("The database has no entries");
