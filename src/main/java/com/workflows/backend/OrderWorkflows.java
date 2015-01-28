@@ -55,6 +55,9 @@ public class OrderWorkflows {
 	
 	@Step
 	public void validateTotals(String message){
+		printOrderTotals(orderTotalModel.getSubtotal(), orderTotalModel.getTax(),orderTotalModel.getShipping(), orderTotalModel.getTotalAmount(),orderTotalModel.getTotalIP(),orderTotalModel.getTotalBonusJeverly());
+		printCartTotals(cartTotalModel.getSubtotal(), cartTotalModel.getTax(),cartTotalModel.getShipping(), cartTotalModel.getTotalAmount(),cartTotalModel.getIpPoints(),cartTotalModel.getJewelryBonus());
+		
 		Assert.assertTrue("Failure: Subtotal values dont match: " + orderTotalModel.getSubtotal() + " - " + cartTotalModel.getSubtotal(), orderTotalModel.getSubtotal().contentEquals(cartTotalModel.getSubtotal()));
 		Assert.assertTrue("Failure: Tax values dont match: " + orderTotalModel.getTax() + " - " + cartTotalModel.getTax(), orderTotalModel.getTax().contentEquals(cartTotalModel.getTax()));
 		Assert.assertTrue("Failure: Shipping values dont match: " + orderTotalModel.getShipping() + " - " + cartTotalModel.getShipping(), orderTotalModel.getShipping().contentEquals(cartTotalModel.getShipping()));
@@ -62,6 +65,19 @@ public class OrderWorkflows {
 		Assert.assertTrue("Failure: Total IP values dont match: " + orderTotalModel.getTotalIP() + " - " + cartTotalModel.getIpPoints(), orderTotalModel.getTotalIP().contentEquals(cartTotalModel.getIpPoints()));
 		//TODO - This might fail due to BigDecimal
 		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotalModel.getTotalBonusJeverly() + " - " + cartTotalModel.getJewelryBonus(), orderTotalModel.getTotalBonusJeverly().contentEquals(cartTotalModel.getJewelryBonus()));
+		
+	}
+
+	@Step
+	public void printOrderTotals(String subtotal, String tax, String shipping, String totalAmount, String totalIP, String totalBonusJeverly) {
+		// TODO Method used only for reporting - Might need to move
+		
+	}
+	
+	
+	@Step
+	public void printCartTotals(String subtotal, String tax, String shipping, String totalAmount, String totalIP, String totalBonusJeverly) {
+		// TODO Method used only for reporting - Might need to move
 		
 	}
 	
