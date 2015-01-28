@@ -75,7 +75,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 	private static OrderModel orderNumber = new OrderModel();
 
-	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private List<CalculationModel> calcList = new ArrayList<CalculationModel>();
