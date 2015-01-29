@@ -118,18 +118,18 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		ProductBasicModel productData;
 
 		//TODO change products list or clean 
-		// searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
-		// productData = productSteps.setProductAddToCart("1", "Blue");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
-		// productData = productSteps.setProductAddToCart("2", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("R083BK",
-		// "CLARICE RING (GUN METAL)");
-		// productData = productSteps.setProductAddToCart("1", "18");
-		// productsList.add(productData);
+//		 searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
+//		 productData = productSteps.setProductAddToCart("1", "Blue");
+//		 productsList.add(productData);
+//		
+//		 searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
+//		 productData = productSteps.setProductAddToCart("2", "0");
+//		 productsList.add(productData);
+//		
+//		 searchSteps.searchAndSelectProduct("R083BK",
+//		 "CLARICE RING (GUN METAL)");
+//		 productData = productSteps.setProductAddToCart("1", "18");
+//		 productsList.add(productData);
 
 		searchSteps.searchAndSelectProduct("K054SV", "WHITNEY SET");
 		productData = productSteps.setProductAddToCart("1", "0");

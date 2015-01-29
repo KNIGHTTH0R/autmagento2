@@ -44,11 +44,9 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	public List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
 	public List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 
-	
 	@Before
-	public void setUp(){
-		
-		
+	public void setUp() {
+
 		List<OrderModel> orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest");
 
 		if (orderModel.size() == 1) {
@@ -57,28 +55,24 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		} else {
 			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModel.size() == 1);
 		}
-		
 
 		cartTotals = MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
 		if (cartTotals.size() == 1) {
 
 			orderId = orderModel.get(0).getOrderId();
 		} else {
-			Assert.assertTrue("Failure: Could not validate cartTotals section. " + cartTotals , cartTotals.size() == 1);
+			Assert.assertTrue("Failure: Could not validate cartTotals section. " + cartTotals, cartTotals.size() == 1);
 		}
-		
-		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");		
-	
+
+		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
 	}
-	
-	
+
 	/**
 	 * BackEnd steps in this test
 	 */
 	@Test
 	public void us002ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
-
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
@@ -91,10 +85,5 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		PrintUtils.printOrderInfo(orderInfo);
 		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
 		orderValidationSteps.validateProducts(productsList, orderItemsList);
-		
-//		backEndSteps.grabOrder
-//		backEndSteps.grabOrderTotals();
-		
-//		PrintUtils.printOrderItemsList(orderItemsList);
 	}
 }

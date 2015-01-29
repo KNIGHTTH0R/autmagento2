@@ -79,8 +79,5 @@ public class US001ValidateOrderEmailTest extends BaseTest{
 		String message = GmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 	}
-	
-	
-
 
 }

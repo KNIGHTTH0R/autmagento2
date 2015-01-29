@@ -68,7 +68,6 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 				}
 			}
 		}
-		
 		orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest");
 	}
 	
@@ -79,8 +78,5 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 		String message = GmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 	}
-	
-	
-
 
 }

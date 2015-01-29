@@ -134,7 +134,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
-		
+//		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		
@@ -150,17 +150,17 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 		PrintUtils.printCalculationModel(totalsCalculated);
 		
-	
+		//
 		cartTotals = cartSteps.grabTotals();
 		PrintUtils.printCartTotals(cartTotals);
 		
 
-		cartSteps.typeJewerlyBonus("150");
+		cartSteps.typeJewerlyBonus("20");
 		cartSteps.updateJewerlyBonus();
-		cartSteps.typeMarketingBonus("200");
+		cartSteps.typeMarketingBonus("100");
 		cartSteps.updateMarketingBonus();		
 
-		calculationSteps.calculateDiscountTotals(totalsList, "150", "200");
+		calculationSteps.calculateDiscountTotals(totalsList, "20", "100");
 
 		
 		

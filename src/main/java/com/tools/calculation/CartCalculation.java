@@ -1,6 +1,8 @@
 package com.tools.calculation;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 import com.tools.Constants;
@@ -139,6 +141,7 @@ public class CartCalculation {
 
 		calculateJewelryDiscounts(totalsList, jewelryDiscount);
 		calculateMarketingDiscount(totalsList, marketingMaterial);
+		calculateIpDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)));
 
 		remainder25 = remainder25.divide(BigDecimal.valueOf(4)).divide(BigDecimal.valueOf(100));
 		remainder50 = remainder50.divide(BigDecimal.valueOf(2)).divide(BigDecimal.valueOf(100));
@@ -207,15 +210,58 @@ public class CartCalculation {
 
 	}
 
+	public int calculateIpDiscount(List<CalculationModel> totalsList, BigDecimal jewelryBonus) {
+
+		System.out.println("IP CALCULATION---------------------------------------------------s");
+		BigDecimal result = BigDecimal.valueOf(0);
+		BigDecimal regularPrice = BigDecimal.valueOf(0);
+		BigDecimal ipTotal = BigDecimal.valueOf(0);
+
+		CalculationModel cModel = selectCalcModel(totalsList, Constants.DISCOUNT_25);
+		regularPrice = cModel.getAskingPrice();
+		ipTotal = BigDecimal.valueOf(cModel.getIpPoints());
+
+		System.out.println("RP = " + regularPrice);
+		System.out.println("IP TOTAL = " + ipTotal);
+		System.out.println("JEWELRY BONUS = " + jewelryBonus);
+		
+		
+//		System.out.println(result + " add " + jewelryBonus);
+		result = result.add(jewelryBonus);
+//		System.out.println("=> " + result);
+//		System.out.println(result + " multiply " + BigDecimal.valueOf(100));
+		result = result.multiply(BigDecimal.valueOf(100));
+//		System.out.println("=> " + result);
+//		System.out.println(result + " divide " + regularPrice);	
+		result = result.divide(regularPrice, RoundingMode.HALF_UP);
+//		System.out.println("=> " + result);
+//		System.out.println(result + " multiply " + ipTotal);	
+		result = result.multiply(ipTotal);
+//		System.out.println("=> " + result);
+//		System.out.println(result + " divide " + BigDecimal.valueOf(100));
+		result = result.divide(BigDecimal.valueOf(100));
+//		System.out.println("=> " + result);
+//		System.out.println(ipTotal + " subtract " + result);
+		result = ipTotal.subtract(result);
+//		System.out.println("Grand Result => " + result);
+//		result = result.divide(BigDecimal.valueOf(Double.valueOf(1)), RoundingMode.HALF_UP);
+		
+		
+		
+		System.out.println("IP CALCULATION: " + result.intValue());
+//		System.out.println("IP CALCULATION: " + Integer.valueOf(result.toString()));
+		
+		return result.intValue();
+
+	}
+
+	// modify jewelry discount formatting
+	// From 10 To 1000
+	// From 10.00 to 1000
 	// clean decimals to number
 	private String formatDiscount(String jewelryDiscount) {
-		// modify jewelry discount formatting
-		// From 10 To 1000
-		// From 10.00 to 1000
 		if (jewelryDiscount.contains(".")) {
-
 			jewelryDiscount = jewelryDiscount.replace(".", "");
-
 		} else {
 			jewelryDiscount += "00";
 		}
@@ -235,17 +281,21 @@ public class CartCalculation {
 		BigDecimal result = BigDecimal.valueOf(0);
 		BigDecimal productSum = BigDecimal.valueOf(0);
 
-		for (CalculationModel cartProductModel : totalsList) {
-			System.out.println(cartProductModel.getTableType());
-			if (cartProductModel.getTableType() != null && cartProductModel.getTableType().contentEquals(discountClass)) {
-				if (cartProductModel.getAskingPrice() != null) {
-					if (productSum.compareTo(BigDecimal.valueOf(0)) == 0) {
-						System.out.println("ERROR: TOTAL IS EMPTY");
-					}
-					productSum = productSum.add(cartProductModel.getAskingPrice());
-				}
-			}
-		}
+		CalculationModel cModel = selectCalcModel(totalsList, discountClass);
+		productSum = cModel.getAskingPrice();
+
+		// for (CalculationModel cartProductModel : totalsList) {
+		// System.out.println(cartProductModel.getTableType());
+		// if (cartProductModel.getTableType() != null &&
+		// cartProductModel.getTableType().contentEquals(discountClass)) {
+		// if (cartProductModel.getAskingPrice() != null) {
+		// if (productSum.compareTo(BigDecimal.valueOf(0)) == 0) {
+		// System.out.println("ERROR: TOTAL IS EMPTY");
+		// }
+		// productSum = productSum.add(cartProductModel.getAskingPrice());
+		// }
+		// }
+		// }
 
 		result = productSum.subtract(jewelryDiscount);
 
@@ -257,16 +307,22 @@ public class CartCalculation {
 		BigDecimal result = BigDecimal.valueOf(0);
 		BigDecimal productSum = BigDecimal.valueOf(0);
 
-		for (CalculationModel calculationModel : totalsList) {
-			if (calculationModel.getTableType() != null && calculationModel.getTableType() == Constants.DISCOUNT_0) {
-				if (calculationModel.getAskingPrice() != null) {
-					if (calculationModel.getAskingPrice().compareTo(BigDecimal.valueOf(0)) == 0) {
-						System.out.println("ERROR: TOTAL IS EMPTY");
-					}
-					productSum = calculationModel.getAskingPrice();
-				}
-			}
-		}
+		productSum = selectCalcModel(totalsList, Constants.DISCOUNT_0).getAskingPrice();
+
+		// // TODO refactor this in a private method with mode
+		// for (CalculationModel calculationModel : totalsList) {
+		// if (calculationModel.getTableType() != null &&
+		// calculationModel.getTableType() == Constants.DISCOUNT_0) {
+		// if (calculationModel.getAskingPrice() != null) {
+		// if
+		// (calculationModel.getAskingPrice().compareTo(BigDecimal.valueOf(0))
+		// == 0) {
+		// System.out.println("ERROR: TOTAL IS EMPTY");
+		// }
+		// productSum = calculationModel.getAskingPrice();
+		// }
+		// }
+		// }
 		result = productSum.subtract(marketingDiscount);
 
 		return result;
@@ -287,4 +343,31 @@ public class CartCalculation {
 
 	}
 
+	private CalculationModel selectCalcModel(List<CalculationModel> totalsList, String mode) {
+
+		CalculationModel result = new CalculationModel();
+
+		// TODO refactor this in a private method with mode
+		for (CalculationModel calculationModel : totalsList) {
+
+//			System.out.println("*/*/*/*//**11**1*1*1*1*1*1*1*1*1*1*");
+//			System.out.println("TableType: " + calculationModel.getTableType());
+//			System.out.println("Mode: " + mode);
+//			System.out.println(" contains compare" + calculationModel.getTableType().contains(mode));
+//			System.out.println(" contentEquals compare" + calculationModel.getTableType().contentEquals(mode));
+//			System.out.println(" = compare" + calculationModel.getTableType() == mode);
+//			System.out.println("*/*/*/*//**11**1*1*1*1*1*1*1*1*1*1*");
+
+			if (calculationModel.getTableType() != null && calculationModel.getTableType().contentEquals(mode)) {
+				if (calculationModel.getAskingPrice() != null) {
+					if (calculationModel.getAskingPrice().compareTo(BigDecimal.valueOf(0)) == 0) {
+						System.out.println("ERROR: TOTAL IS EMPTY");
+					}
+					result = calculationModel;
+				}
+			}
+		}
+
+		return result;
+	}
 }
