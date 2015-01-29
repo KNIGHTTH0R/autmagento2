@@ -3,10 +3,11 @@ package com.workflows.backend;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
-
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
+
+import org.junit.Assert;
 
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tools.PrintUtils;
@@ -17,19 +18,21 @@ import com.tools.data.frontend.ProductBasicModel;
 
 
 public class OrderWorkflows {
+	
 	@Steps
 	public static OrderValidationSteps orderValidationSteps;
 	
-	private  List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
-	private  List<OrderItemModel> orderProducts = new ArrayList<OrderItemModel>();
+	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private List<OrderItemModel> orderProducts = new ArrayList<OrderItemModel>();
 	
 	public void setValidateProductsModels(List<ProductBasicModel> productsList, List<OrderItemModel> orderProducts) {
 		this.productsList = productsList;
 		this.orderProducts = orderProducts;
 	}
 	
-	@Step
+	@StepGroup
 	public void validateProducts(String message) {
+		int count = 0;
 		for (ProductBasicModel productNow : productsList) {
 			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), orderProducts);
 
@@ -39,10 +42,14 @@ public class OrderWorkflows {
 				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
 				orderValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getPrice());
 				orderValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
+				count++;
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
 		}
+		
+		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
+		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
 	}
 	
 	private OrderTotalsModel orderTotalModel = new OrderTotalsModel();
