@@ -14,7 +14,6 @@ import com.tools.data.frontend.ProductBasicModel;
 
 public class PrintUtils {
 
-	// TODO Split in Formatter or FormatterUtils and PrintUtils
 	public static void printList(List<CartProductModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		for (CartProductModel cartProductModel : list) {
