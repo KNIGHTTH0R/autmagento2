@@ -4,11 +4,11 @@ import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.AbstractSteps;
 import com.tools.Constants;
-import com.tools.PrintUtils;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.requirements.AbstractSteps;
+import com.tools.utils.PrintUtils;
 
 public class CartSteps extends  AbstractSteps{
 	

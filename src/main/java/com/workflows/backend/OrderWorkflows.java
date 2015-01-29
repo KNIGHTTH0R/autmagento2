@@ -10,11 +10,11 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import com.steps.backend.validations.OrderValidationSteps;
-import com.tools.PrintUtils;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.utils.PrintUtils;
 
 
 public class OrderWorkflows {

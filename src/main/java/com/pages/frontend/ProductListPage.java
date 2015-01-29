@@ -7,8 +7,8 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.AbstractPage;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.requirements.AbstractPage;
 
 public class ProductListPage extends AbstractPage {
 

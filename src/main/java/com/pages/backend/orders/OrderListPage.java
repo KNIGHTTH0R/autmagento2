@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
-import com.tools.AbstractPage;
+import com.tools.requirements.AbstractPage;
 
 public class OrderListPage extends AbstractPage {
 

@@ -2,8 +2,8 @@ package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.AbstractSteps;
 import com.tools.Constants;
+import com.tools.requirements.AbstractSteps;
 
 public class HeaderSteps extends AbstractSteps {
 

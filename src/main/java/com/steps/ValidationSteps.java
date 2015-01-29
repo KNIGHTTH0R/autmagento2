@@ -5,8 +5,8 @@ import net.thucydides.core.annotations.StepGroup;
 
 import org.junit.Assert;
 
-import com.tools.AbstractSteps;
 import com.tools.data.StylistDataModel;
+import com.tools.requirements.AbstractSteps;
 
 public class ValidationSteps extends AbstractSteps {
 

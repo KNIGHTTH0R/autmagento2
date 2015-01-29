@@ -7,8 +7,8 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.AbstractPage;
 import com.tools.data.backend.OrderInfoModel;
+import com.tools.requirements.AbstractPage;
 
 public class OrderInfoPage extends AbstractPage {
 

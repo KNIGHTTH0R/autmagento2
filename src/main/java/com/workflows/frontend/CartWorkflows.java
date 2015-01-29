@@ -10,11 +10,11 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
-import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.utils.PrintUtils;
 
 public class CartWorkflows {
 

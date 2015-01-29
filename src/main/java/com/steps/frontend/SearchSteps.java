@@ -3,8 +3,8 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
-import com.tools.AbstractSteps;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.requirements.AbstractSteps;
 
 public class SearchSteps extends AbstractSteps {
 

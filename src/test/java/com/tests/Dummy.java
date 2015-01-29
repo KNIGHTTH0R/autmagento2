@@ -3,8 +3,8 @@ package com.tests;
 import java.math.BigDecimal;
 import java.net.UnknownHostException;
 
-import com.tools.PrintUtils;
 import com.tools.data.frontend.CartProductModel;
+import com.tools.utils.FormatterUtils;
 
 public class Dummy extends BaseTest {
 
@@ -36,16 +36,16 @@ public class Dummy extends BaseTest {
 		product.setUnitPrice("1.245,64");
 		BigDecimal productPrice = BigDecimal.valueOf(0);
 		
-		System.out.println(PrintUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
-		System.out.println(PrintUtils.cleanNumberToInt(product.getQuantity()));
+		System.out.println(FormatterUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
+		System.out.println(FormatterUtils.cleanNumberToInt(product.getQuantity()));
 		System.out.println(BigDecimal.valueOf(25));
 		System.out.println(BigDecimal.valueOf(100));
 		System.out.println("---------------------------");
 		
 		
-		productPrice = productPrice.add(PrintUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
+		productPrice = productPrice.add(FormatterUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
 		System.out.println(productPrice);
-		productPrice = productPrice.multiply(PrintUtils.cleanNumberToBigDecimal(product.getQuantity()));
+		productPrice = productPrice.multiply(FormatterUtils.cleanNumberToBigDecimal(product.getQuantity()));
 		System.out.println(productPrice);
 		productPrice = productPrice.multiply(BigDecimal.valueOf(25));
 		System.out.println(productPrice);

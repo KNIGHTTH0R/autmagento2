@@ -1,6 +1,5 @@
-package com.tools;
+package com.tools.utils;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.tools.data.CalculationModel;
@@ -15,8 +14,7 @@ import com.tools.data.frontend.ProductBasicModel;
 
 public class PrintUtils {
 
-	
-	//TODO Split in Formatter or FormatterUtils and PrintUtils
+	// TODO Split in Formatter or FormatterUtils and PrintUtils
 	public static void printList(List<CartProductModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		for (CartProductModel cartProductModel : list) {
@@ -87,7 +85,6 @@ public class PrintUtils {
 		System.out.println(model.getAskingPrice());
 		System.out.println(model.getFinalPrice());
 		System.out.println(model.getIpPoints());
-
 	}
 
 	public static void printOrderTotals(OrderTotalsModel model) {
@@ -107,62 +104,15 @@ public class PrintUtils {
 		System.out.println(model.getTotalFortyDiscounts());
 		System.out.println(model.getTotalBonusJeverly());
 		System.out.println(model.getTotalMarketingBonus());
-
-	}
-
-	public static BigDecimal cleanNumberToBigDecimal(String unitPrice) {
-		String result = unitPrice;
-		result = result.replace(" €", "");
-		result = result.replace("€ ", "");
-		result = result.replace(".", "");
-		result = result.replace(" IP", "");
-		result = result.replace(",", ".");
-		result = result.replace("-", "");
-
-		return BigDecimal.valueOf(Double.parseDouble(result));
-	}
-
-	public static String cleanNumberToString(String unitPrice) {
-		String result = unitPrice;
-		result = result.replace(" €", "");
-		result = result.replace("€ ", "");
-		result = result.replace(".", "");
-		result = result.replace(" IP", "");
-		result = result.replace(",", ".");
-		result = result.replace("-", "");
-		result = result.replace("%", "");
-
-		return result;
-	}
-
-	public static int cleanNumberToInt(String unitPrice) {
-		String result = unitPrice;
-		int finalResult = 0;
-		result = result.replace(" €", "");
-		result = result.replace("€ ", "");
-		result = result.replace(".", "");
-		result = result.replace(" IP", "");
-		result = result.replace(",", ".");
-
-		try {
-			finalResult = Integer.valueOf(result);
-		} catch (Exception e) {
-			System.err.println("WARNING: Could not convert to integer - " + unitPrice);
-			e.printStackTrace();
-		}
-
-		return finalResult;
 	}
 
 	public static void printAddressModel(AddressModel dataModel) {
-
 		System.out.println("---- PRINT Adress Model ----");
 		System.out.println(dataModel.getStreetAddress());
 		System.out.println(dataModel.getStreetNumber());
 		System.out.println(dataModel.getPostCode());
 		System.out.println(dataModel.getHomeTown());
 		System.out.println(dataModel.getPhoneNumber());
-
 	}
 
 	public static void printEmailList(List<EmailModel> emailList) {
@@ -172,7 +122,6 @@ public class PrintUtils {
 			System.out.println(emailModel.getContent());
 			System.out.println(emailModel.getSentDate() + " - " + emailModel.getRecievedDate());
 		}
-
 	}
 
 	public static void printProductsCompare(ProductBasicModel productNow, CartProductModel compare) {
@@ -180,7 +129,6 @@ public class PrintUtils {
 		System.out.println(productNow.getPrice() + " - " + compare.getUnitPrice());
 		System.out.println(productNow.getQuantity() + " - " + compare.getQuantity());
 		System.out.println(productNow.getType() + " - " + compare.getProdCode());
-
 	}
 
 	public static void printProductsCompareBackend(ProductBasicModel basicProduct, OrderItemModel orderProduct) {
@@ -188,7 +136,6 @@ public class PrintUtils {
 		System.out.println(basicProduct.getPrice() + " - " + orderProduct.getPrice());
 		System.out.println(basicProduct.getQuantity() + " - " + orderProduct.getNumber());
 		System.out.println(basicProduct.getType() + " - " + orderProduct.getProductCode());
-
 	}
 
 	public static void printOrderItemsList(List<OrderItemModel> orderItemsList) {
@@ -212,7 +159,6 @@ public class PrintUtils {
 			System.out.println(orderItemModel.getfD());
 			System.out.println(orderItemModel.getRowSum());
 		}
-
 	}
 
 	public static void printCartProductModel(CartProductModel productNow) {
@@ -224,6 +170,5 @@ public class PrintUtils {
 		System.out.println("prices " + productNow.getProductsPrice());
 		System.out.println("ip " + productNow.getPriceIP());
 		System.out.println("final " + productNow.getFinalPrice());
-
 	}
 }

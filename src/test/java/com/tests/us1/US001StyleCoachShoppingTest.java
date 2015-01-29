@@ -31,7 +31,6 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.PrintUtils;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
 import com.tools.data.OrderModel;
@@ -41,6 +40,7 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US001", type = "frontend")

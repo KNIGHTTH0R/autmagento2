@@ -4,7 +4,7 @@ import net.thucydides.core.annotations.Step;
 
 import org.junit.Assert;
 
-import com.tools.AbstractSteps;
+import com.tools.requirements.AbstractSteps;
 
 public class CheckoutValidationSteps extends AbstractSteps {
 

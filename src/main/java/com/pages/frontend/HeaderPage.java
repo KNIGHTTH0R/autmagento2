@@ -5,7 +5,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.AbstractPage;
+import com.tools.requirements.AbstractPage;
 
 public class HeaderPage extends AbstractPage {
 

@@ -2,9 +2,9 @@ package com.steps.backend;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.AbstractSteps;
 import com.tools.Constants;
 import com.tools.data.StylistDataModel;
+import com.tools.requirements.AbstractSteps;
 
 public class BackEndSteps extends AbstractSteps {
 

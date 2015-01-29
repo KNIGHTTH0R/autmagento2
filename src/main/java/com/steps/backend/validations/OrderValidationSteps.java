@@ -8,12 +8,12 @@ import net.thucydides.core.annotations.StepGroup;
 
 import org.junit.Assert;
 
-import com.tools.AbstractSteps;
-import com.tools.PrintUtils;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.requirements.AbstractSteps;
+import com.tools.utils.PrintUtils;
 
 public class OrderValidationSteps extends AbstractSteps {
 

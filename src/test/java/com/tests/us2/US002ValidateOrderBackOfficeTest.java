@@ -18,7 +18,6 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.PrintUtils;
 import com.tools.data.OrderModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -27,6 +26,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 
 @WithTag(name = "US002", type = "backend")
 @Story(Application.StyleCoach.Shopping.class)

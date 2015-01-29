@@ -4,10 +4,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.tools.Constants;
-import com.tools.PrintUtils;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.utils.FormatterUtils;
+import com.tools.utils.PrintUtils;
 
 public class CartCalculation {
 
@@ -27,14 +28,14 @@ public class CartCalculation {
 		BigDecimal productPrice = BigDecimal.valueOf(0);
 
 		if (product.getDiscountClass().contentEquals("25")) {
-			productPrice = productPrice.add(PrintUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
-			productPrice = productPrice.multiply(PrintUtils.cleanNumberToBigDecimal(product.getQuantity()));
+			productPrice = productPrice.add(FormatterUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
+			productPrice = productPrice.multiply(FormatterUtils.cleanNumberToBigDecimal(product.getQuantity()));
 			productPrice = productPrice.multiply(BigDecimal.valueOf(25));
 			productPrice = productPrice.divide(BigDecimal.valueOf(100));
 		}
 		if (product.getDiscountClass().contentEquals("50")) {
-			productPrice = productPrice.add(PrintUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
-			productPrice = productPrice.multiply(PrintUtils.cleanNumberToBigDecimal(product.getQuantity()));
+			productPrice = productPrice.add(FormatterUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
+			productPrice = productPrice.multiply(FormatterUtils.cleanNumberToBigDecimal(product.getQuantity()));
 			productPrice = productPrice.multiply(BigDecimal.valueOf(50));
 			productPrice = productPrice.divide(BigDecimal.valueOf(100));
 		}
@@ -53,11 +54,11 @@ public class CartCalculation {
 
 			for (CartProductModel cartProductModel : cartList) {
 				BigDecimal transport = BigDecimal.valueOf(0);
-				transport = transport.add(PrintUtils.cleanNumberToBigDecimal(cartProductModel.getUnitPrice()));
-				transport = transport.multiply(PrintUtils.cleanNumberToBigDecimal(cartProductModel.getQuantity()));
+				transport = transport.add(FormatterUtils.cleanNumberToBigDecimal(cartProductModel.getUnitPrice()));
+				transport = transport.multiply(FormatterUtils.cleanNumberToBigDecimal(cartProductModel.getQuantity()));
 				askingPriceSum = askingPriceSum.add(transport);
 
-				ipSum += PrintUtils.cleanNumberToInt(cartProductModel.getPriceIP());
+				ipSum += FormatterUtils.cleanNumberToInt(cartProductModel.getPriceIP());
 			}
 
 			int calcValue = checkCalculusType(result.getTableType());

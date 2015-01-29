@@ -4,7 +4,7 @@ import org.junit.Assert;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.AbstractSteps;
+import com.tools.requirements.AbstractSteps;
 
 public class EmailSteps extends AbstractSteps {
 

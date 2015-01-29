@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
-import com.tools.AbstractPage;
+import com.tools.requirements.AbstractPage;
 
 public class RegistrationMessagePage extends AbstractPage {
 

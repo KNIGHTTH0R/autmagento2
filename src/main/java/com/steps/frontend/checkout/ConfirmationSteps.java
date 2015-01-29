@@ -4,10 +4,10 @@ import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.AbstractSteps;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.requirements.AbstractSteps;
 
 public class ConfirmationSteps extends AbstractSteps{
 
