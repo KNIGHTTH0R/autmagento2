@@ -82,7 +82,6 @@ public class CreateCustomerPage extends AbstractPage {
 		element(passwordInput).waitUntilVisible();
 		passwordInput.sendKeys(passText);
 		
-		//TODO - FIXED - quick fix for password verification
 		waitABit(Constants.TIME_CONSTANT);
 		passwordInput.clear();		
 		passwordInput.sendKeys(passText);

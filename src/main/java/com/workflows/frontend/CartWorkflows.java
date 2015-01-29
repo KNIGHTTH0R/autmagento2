@@ -73,8 +73,6 @@ public class CartWorkflows {
 				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
 	}
 	
-	
-	// TODO -FIXED- might need to move this
 	public CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
 		CartProductModel result = new CartProductModel();
 		theFor: for (CartProductModel cartProductModel : cartProducts) {
@@ -86,5 +84,4 @@ public class CartWorkflows {
 		return result;
 	}
 	
-
 }

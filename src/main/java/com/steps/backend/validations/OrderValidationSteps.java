@@ -21,7 +21,6 @@ public class OrderValidationSteps extends AbstractSteps {
 
 	@StepGroup
 	public void validateProducts(List<ProductBasicModel> productsList, List<OrderItemModel> orderProducts) {
-		// TODO - FIXED - Assert if productList is null
 		if (productsList != null) {
 			for (ProductBasicModel productNow : productsList) {
 				OrderItemModel compare = findProduct(productNow.getType(), orderProducts);
@@ -72,7 +71,6 @@ public class OrderValidationSteps extends AbstractSteps {
 		Assert.assertTrue("Failure: Total Amount values dont match: " + orderTotals.getTotalAmount() + " - " + cartTotals.getTotalAmount(),
 				orderTotals.getTotalAmount().contentEquals(cartTotals.getTotalAmount()));
 		Assert.assertTrue("Failure: Total IP values dont match: " + orderTotals.getTotalIP() + " - " + cartTotals.getIpPoints(), orderTotals.getTotalIP().contentEquals(cartTotals.getIpPoints()));
-		// TODO Might fail due to BigDecimal
 		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotals.getTotalBonusJeverly() + " - " + cartTotals.getJewelryBonus(),
 				orderTotals.getTotalBonusJeverly().contentEquals(cartTotals.getJewelryBonus()));
 

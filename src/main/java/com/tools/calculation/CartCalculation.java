@@ -10,7 +10,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 
 public class CartCalculation {
-	
+
 	private static BigDecimal remainder25 = BigDecimal.valueOf(0);
 	private static BigDecimal remainder50 = BigDecimal.valueOf(0);
 	private static BigDecimal remainder00 = BigDecimal.valueOf(0);
@@ -22,7 +22,6 @@ public class CartCalculation {
 	 * @param product
 	 * @return
 	 */
-	// TODO - FIXED - move this to calculation - No sense to be in steps
 	public static BigDecimal calculateCartProductsByDiscount(CartProductModel product) {
 
 		BigDecimal productPrice = BigDecimal.valueOf(0);
@@ -86,16 +85,12 @@ public class CartCalculation {
 	}
 
 	public static CalculationModel calculateTotalSum(List<CalculationModel> totalsList) {
-
 		CalculationModel result = new CalculationModel();
 		BigDecimal askingPrice = BigDecimal.valueOf(0);
 		BigDecimal finalPrice = BigDecimal.valueOf(0);
 		int ipPoints = 0;
 
 		for (CalculationModel total : totalsList) {
-
-//			System.out.println("**" + total.getAskingPrice());
-//			System.out.println("**" + total.getFinalPrice());
 
 			if (total.getAskingPrice() != null) {
 				askingPrice = askingPrice.add(total.getAskingPrice());
@@ -117,19 +112,6 @@ public class CartCalculation {
 
 		return result;
 	}
-//
-//	// TODO hardcoded discount - fix this
-//	public static CalculationModel recalculateTotalsAfterDiscounts(CalculationModel calculationModel) {
-//		CalculationModel result = new CalculationModel();
-//		System.out.println(calculationModel.getAskingPrice());
-//		System.out.println(calculationModel.getFinalPrice());
-//		result.setAskingPrice(calculationModel.getAskingPrice());
-//		result.setFinalPrice(calculationModel.getFinalPrice().subtract(BigDecimal.valueOf(250)));
-//		result.setIpPoints(calculationModel.getIpPoints());
-//
-//		return result;
-//
-//	}
 
 	private static int checkCalculusType(String tableType) {
 		int result = 0;
@@ -146,64 +128,53 @@ public class CartCalculation {
 		return result;
 	}
 
-	public CartTotalsModel calculateDiscountTotals(List<CalculationModel> totalsList, String jewelryDiscount,String marketingMaterial) {
+	public CartTotalsModel calculateDiscountTotals(List<CalculationModel> totalsList, String jewelryDiscount, String marketingMaterial) {
 
 		jewelryDiscount = formatDiscount(jewelryDiscount);
 		marketingMaterial = formatDiscount(marketingMaterial);
-		
 
 		CartTotalsModel result = new CartTotalsModel();
 		result.setJewelryBonus(jewelryDiscount);
 
 		calculateJewelryDiscounts(totalsList, jewelryDiscount);
 		calculateMarketingDiscount(totalsList, marketingMaterial);
-		
+
 		remainder25 = remainder25.divide(BigDecimal.valueOf(4)).divide(BigDecimal.valueOf(100));
 		remainder50 = remainder50.divide(BigDecimal.valueOf(2)).divide(BigDecimal.valueOf(100));
 		remainder00 = remainder00.divide(BigDecimal.valueOf(100));
 
 		result.setSubtotal(calculateTotalSum(totalsList).getAskingPrice().toString());
 		result.setIpPoints(String.valueOf(calculateTotalSum(totalsList).getIpPoints()));
-		
-		System.out.println("============-=-=-=-=-=-=-=-=");
-		System.out.println("Remainder after 25%: " + remainder25.toString());
-		System.out.println("Remainder after 50%: " + remainder50.toString());
-		System.out.println("Remainder after 0%: " + remainder00.toString());
-		System.out.println("============-=-=-=-=-=-=-=-=");
-		
-		
-		//calculate total amount
+
+		// CORE FORMULA - calculate total amount
 		BigDecimal totalAmount = BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString()));
 		totalAmount = totalAmount.subtract(remainder25);
 		totalAmount = totalAmount.subtract(remainder50);
-//		totalAmount = totalAmount.subtract(remainder00);
 		totalAmount = totalAmount.subtract(BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)).divide(BigDecimal.valueOf(100)));
-		if(applyMarketingDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(marketingMaterial))).compareTo(BigDecimal.valueOf(0)) > 0){
+		if (applyMarketingDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(marketingMaterial))).compareTo(BigDecimal.valueOf(0)) > 0) {
 			totalAmount = totalAmount.subtract(BigDecimal.valueOf(Double.parseDouble(marketingMaterial)).divide(BigDecimal.valueOf(100)));
 		}
 
-		result.setTotalAmount(totalAmount.toString()); 
+		result.setTotalAmount(totalAmount.toString());
 
 		result.addDiscount(Constants.DISCOUNT_50, remainder50.toString());
 		result.addDiscount(Constants.DISCOUNT_25, remainder25.toString());
 		result.addDiscount(Constants.DISCOUNT_0, remainder00.toString());
-		
+
 		System.out.println("SUBTOTAL: " + BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString())));
 		System.out.println("TOTAL AMOUNT: " + result.getTotalAmount());
 		System.out.println("IP: " + result.getIpPoints());
 		System.out.println("Remainder after 25%: " + remainder25.toString());
 		System.out.println("Remainder after 50%: " + remainder50.toString());
 		System.out.println("Remainder after 0%: " + remainder00.toString());
-		
+
 		result.setSubtotal(calculateTotalSum(totalsList).getAskingPrice().toString());
 		result.setIpPoints(String.valueOf(calculateTotalSum(totalsList).getIpPoints()));
 
-
 		return result;
 	}
-	
-	
-	public void calculateJewelryDiscounts(List<CalculationModel> totalsList, String jewelryDiscount){
+
+	public void calculateJewelryDiscounts(List<CalculationModel> totalsList, String jewelryDiscount) {
 
 		if (applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_25).compareTo(BigDecimal.valueOf(0)) > 0) {
 			// If 25% section has total over 0
@@ -232,7 +203,7 @@ public class CartCalculation {
 		} else {
 			System.out.println("TOTAL for 50% section is not greater than 0 !!!");
 		}
-		
+
 	}
 
 	// clean decimals to number
@@ -279,14 +250,14 @@ public class CartCalculation {
 
 		return result;
 	}
-	
-	public BigDecimal applyMarketingDiscount(List<CalculationModel> totalsList, BigDecimal marketingDiscount){		
-				
-		BigDecimal result = BigDecimal.valueOf(0);		
-		BigDecimal productSum = BigDecimal.valueOf(0);		
-		
-		for(CalculationModel calculationModel : totalsList){
-			if(calculationModel.getTableType() !=null && calculationModel.getTableType() == Constants.DISCOUNT_0){
+
+	public BigDecimal applyMarketingDiscount(List<CalculationModel> totalsList, BigDecimal marketingDiscount) {
+
+		BigDecimal result = BigDecimal.valueOf(0);
+		BigDecimal productSum = BigDecimal.valueOf(0);
+
+		for (CalculationModel calculationModel : totalsList) {
+			if (calculationModel.getTableType() != null && calculationModel.getTableType() == Constants.DISCOUNT_0) {
 				if (calculationModel.getAskingPrice() != null) {
 					if (calculationModel.getAskingPrice().compareTo(BigDecimal.valueOf(0)) == 0) {
 						System.out.println("ERROR: TOTAL IS EMPTY");
@@ -296,25 +267,23 @@ public class CartCalculation {
 			}
 		}
 		result = productSum.subtract(marketingDiscount);
-		
+
 		return result;
-	
+
 	}
-	
-	
-	public void calculateMarketingDiscount(List<CalculationModel> totalsList, String marketingMaterial){
-		
+
+	public void calculateMarketingDiscount(List<CalculationModel> totalsList, String marketingMaterial) {
 		BigDecimal marketingRemainder = BigDecimal.valueOf(0);
-		
+
 		if (applyMarketingDiscount(totalsList, BigDecimal.valueOf(0)).compareTo(BigDecimal.valueOf(0)) > 0) {
 			// If marketing material section has total over 0
 			marketingRemainder = applyMarketingDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(marketingMaterial)));
 		} else {
 			System.out.println("TOTAL for marketing material section is less than 0 !!!");
 		}
-		
+
 		remainder00 = marketingRemainder;
-		
+
 	}
 
 }

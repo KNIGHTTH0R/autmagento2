@@ -70,18 +70,33 @@ public class OrderWorkflows {
 		Assert.assertTrue("Failure: Shipping values dont match: " + orderTotalModel.getShipping() + " - " + cartTotalModel.getShipping(), orderTotalModel.getShipping().contentEquals(cartTotalModel.getShipping()));
 		Assert.assertTrue("Failure: Total Amount values dont match: " + orderTotalModel.getTotalAmount() + " - " + cartTotalModel.getTotalAmount(), orderTotalModel.getTotalAmount().contentEquals(cartTotalModel.getTotalAmount()));
 		Assert.assertTrue("Failure: Total IP values dont match: " + orderTotalModel.getTotalIP() + " - " + cartTotalModel.getIpPoints(), orderTotalModel.getTotalIP().contentEquals(cartTotalModel.getIpPoints()));
-		//TODO - This might fail due to BigDecimal
 		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotalModel.getTotalBonusJeverly() + " - " + cartTotalModel.getJewelryBonus(), orderTotalModel.getTotalBonusJeverly().contentEquals(cartTotalModel.getJewelryBonus()));
 		
 	}
 
+	/**
+	 * Method used only for reporting
+	 * @param subtotal
+	 * @param tax
+	 * @param shipping
+	 * @param totalAmount
+	 * @param totalIP
+	 * @param totalBonusJeverly
+	 */
 	@Step
 	public void printOrderTotals(String subtotal, String tax, String shipping, String totalAmount, String totalIP, String totalBonusJeverly) {
-		// TODO Method used only for reporting - Might need to move
 	}
 	
+	/**
+	 * Method used only for reporting
+	 * @param subtotal
+	 * @param tax
+	 * @param shipping
+	 * @param totalAmount
+	 * @param totalIP
+	 * @param totalBonusJeverly
+	 */
 	@Step
 	public void printCartTotals(String subtotal, String tax, String shipping, String totalAmount, String totalIP, String totalBonusJeverly) {
-		// TODO Method used only for reporting - Might need to move
 	}
 }

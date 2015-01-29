@@ -136,7 +136,12 @@ public class ConfirmationPage extends AbstractPage {
 		return result;
 	}
 
-	// TODO might need to use other Model
+	/**
+	 * Due to consistency this method returns {@link CartProductModel} list. Only fileds set are:
+	 * Name, ProdCode, Quantity, Unit Price.
+	 * Left Blank: ProductsPrices, FinalPrice, PriceIP
+	 * @return
+	 */
 	public List<CartProductModel> grabProductsList() {
 		element(productListContainer).waitUntilVisible();
 		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
