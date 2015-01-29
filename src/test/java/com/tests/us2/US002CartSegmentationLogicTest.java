@@ -165,7 +165,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
 
-		this.cartTotals = cartSteps.grabTotals();
+		cartTotals = cartSteps.grabTotals();
 
 		PrintUtils.printCartTotals(cartTotals);	
 

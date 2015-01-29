@@ -15,6 +15,8 @@ import com.tools.data.frontend.ProductBasicModel;
 
 public class PrintUtils {
 
+	
+	//TODO Split in Formatter or FormatterUtils and PrintUtils
 	public static void printList(List<CartProductModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		for (CartProductModel cartProductModel : list) {
@@ -151,15 +153,6 @@ public class PrintUtils {
 
 		return finalResult;
 	}
-
-	// public static Double getDoubleWithTwoDigits(Double number) {
-	// DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
-	// return Double.valueOf(twoFiguresFormat.format(number));
-	// }
-	// public static String getDoubleWithTwoDigitstToString(Double number) {
-	// DecimalFormat twoFiguresFormat = new DecimalFormat("####0.00");
-	// return twoFiguresFormat.format(number);
-	// }
 
 	public static void printAddressModel(AddressModel dataModel) {
 

@@ -2,14 +2,9 @@ package com.tests;
 
 import java.math.BigDecimal;
 import java.net.UnknownHostException;
-import java.util.List;
 
-import com.connectors.mongo.MongoConnector;
 import com.tools.PrintUtils;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
-import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 
 public class Dummy extends BaseTest {
 
