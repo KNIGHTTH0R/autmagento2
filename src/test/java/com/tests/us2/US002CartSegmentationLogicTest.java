@@ -118,14 +118,14 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		ProductBasicModel productData;
 
 		//TODO change products list or clean 
-//		 searchSteps.searchAndSelectProduct("B056RS", "BANNER MIT LOGO");
-//		 productData = productSteps.setProductAddToCart("1", "Blue");
-//		 productsList.add(productData);
-//		
-//		 searchSteps.searchAndSelectProduct("B071BK", "IVY BRACELET (BLACK)");
-//		 productData = productSteps.setProductAddToCart("2", "0");
-//		 productsList.add(productData);
-//		
+		 searchSteps.searchAndSelectProduct("R105RS", "LOVE RING");
+		 productData = productSteps.setProductAddToCart("1", "16");
+		 productsList.add(productData);
+		
+		 searchSteps.searchAndSelectProduct("A015RD", "JAMINA BAG");
+		 productData = productSteps.setProductAddToCart("2", "0");
+		 productsList.add(productData);
+		
 		searchSteps.searchAndSelectProduct("R083BK","CLARICE RING (GUN METAL)");
 		productData = productSteps.setProductAddToCart("1", "18");
 		productsList.add(productData);
@@ -141,10 +141,11 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		//TODO change the update method to set the quantity in the model
-		cartSteps.updateProductQuantity("2","M064");
-		productsList.get(1).setQuantity("2");
-		cartSteps.updateProductQuantity("1","M101");
-		productsList.get(2).setQuantity("1");
+		//TODO handle witch product needs to be updated if we have the same product into different discount tables
+		cartSteps.updateProductQuantity("2","R105RS");
+		productsList.get(0).setQuantity("2");
+		cartSteps.updateProductQuantity("0","A015RD");
+		productsList.get(1).setQuantity("0");
 		cartSteps.updateCart();
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
