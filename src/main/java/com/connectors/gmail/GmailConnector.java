@@ -15,12 +15,21 @@ import javax.mail.internet.MimeMultipart;
 
 import com.sun.mail.imap.protocol.FLAGS;
 import com.tools.EmailConstants;
+import com.tools.data.EmailCredentialsModel;
 import com.tools.data.EmailModel;
 
 public class GmailConnector {
 
-	public static void main(String args[]) throws MessagingException {
-		readGmail();
+	private static String host;
+	private static String protocol;
+	private static String username;
+	private static String password;
+	
+	public GmailConnector(EmailCredentialsModel emailData) {
+		host = emailData.getHost();
+		protocol = emailData.getProtocol();
+		username = emailData.getUsername();
+		password = emailData.getPassword();
 	}
 
 	/**
@@ -102,13 +111,13 @@ public class GmailConnector {
 	private static Message[] connect() {
 		Properties props2 = System.getProperties();
 		Session session2 = Session.getDefaultInstance(props2, null);
-		props2.setProperty(EmailConstants.EMAIL_STORE, EmailConstants.PROTOCOL);
+		props2.setProperty(EmailConstants.EMAIL_STORE, protocol);
 		Message message[] = null;
 
 		try {
 
-			Store store = session2.getStore(EmailConstants.PROTOCOL);
-			store.connect(EmailConstants.RECEIVING_HOST, EmailConstants.USERNAME, EmailConstants.PASSWORD);
+			Store store = session2.getStore(protocol);
+			store.connect(host, username, password);
 			Folder folder = store.getFolder("INBOX");
 
 			folder.open(Folder.READ_WRITE);
@@ -118,6 +127,30 @@ public class GmailConnector {
 		}
 		return message;
 	}
+//	
+//	/**
+//	 * Connect to email account and return INBOX messages.
+//	 * @return
+//	 */
+//	private static Message[] connect() {
+//		Properties props2 = System.getProperties();
+//		Session session2 = Session.getDefaultInstance(props2, null);
+//		props2.setProperty(EmailConstants.EMAIL_STORE, EmailConstants.PROTOCOL);
+//		Message message[] = null;
+//		
+//		try {
+//			
+//			Store store = session2.getStore(EmailConstants.PROTOCOL);
+//			store.connect(EmailConstants.RECEIVING_HOST, EmailConstants.USERNAME, EmailConstants.PASSWORD);
+//			Folder folder = store.getFolder("INBOX");
+//			
+//			folder.open(Folder.READ_WRITE);
+//			message = folder.getMessages();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return message;
+//	}
 
 	/**
 	 * Will return the message as a string from multipart type of content.

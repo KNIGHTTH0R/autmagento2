@@ -9,8 +9,11 @@ import net.thucydides.core.pages.Pages;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 
+import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
 import com.tools.Constants;
+import com.tools.EmailConstants;
+import com.tools.data.EmailCredentialsModel;
 
 public class BaseTest {
 	@Managed(uniqueSession = true)
@@ -20,6 +23,7 @@ public class BaseTest {
 	public Pages pages;
 	
 	public MongoConnector mongoConnector;
+	public GmailConnector gmailConnector;
 	
     @Before
     public void startComponents() {
@@ -34,5 +38,13 @@ public class BaseTest {
             System.out.println("Error: Mongo connection could not be initialized");
             e.printStackTrace();
         }
+        
+        EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
+        emailDefaults.setHost(EmailConstants.RECEIVING_HOST);
+        emailDefaults.setProtocol(EmailConstants.PROTOCOL);
+        emailDefaults.setUsername(EmailConstants.USERNAME);
+        emailDefaults.setPassword(EmailConstants.PASSWORD);
+        
+        gmailConnector = new GmailConnector(emailDefaults);
     }
 }

@@ -146,8 +146,10 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		cartSteps.updateProductQuantity("2","M064");
-		productsList.get(1).setQuantity("2");
+		cartSteps.updateProductQuantity("3","M064");
+		productsList.get(1).setQuantity("3");
+		cartSteps.updateProductQuantity("2","M101");
+		productsList.get(2).setQuantity("2");
 		cartSteps.updateCart();
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();

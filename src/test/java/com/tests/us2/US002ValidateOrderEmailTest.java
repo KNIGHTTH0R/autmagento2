@@ -23,6 +23,8 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.EmailConstants;
+import com.tools.data.EmailCredentialsModel;
 import com.tools.data.OrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -69,13 +71,23 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest");
+		EmailCredentialsModel emailData = new EmailCredentialsModel();
+		
+		emailData.setHost(EmailConstants.RECEIVING_HOST);
+		emailData.setProtocol(EmailConstants.PROTOCOL);
+		emailData.setUsername(EmailConstants.USERNAME);
+		emailData.setPassword(EmailConstants.PASSWORD);
+        
+        
+        
+		gmailConnector = new GmailConnector(emailData);
 	}
 	
 	@Test
 	public void us002ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);
 		
-		String message = GmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
+		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 	}
 
