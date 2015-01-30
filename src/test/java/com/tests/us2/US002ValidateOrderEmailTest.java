@@ -80,12 +80,13 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 		emailData.setPassword(EmailConstants.PASSWORD);
         
         
-        
 		gmailConnector = new GmailConnector(emailData);
 	}
 	
 	@Pending
 	@Test
+	@Pending
+	//TODO Email should be changed - may need a new email connector if not gmail
 	public void us002ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);
 		

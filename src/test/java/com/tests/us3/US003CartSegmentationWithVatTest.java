@@ -31,11 +31,9 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
@@ -75,10 +73,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
-	private static CartTotalsModel finalCartTotals = new CartTotalsModel();
-	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+//	private static CartTotalsModel finalCartTotals = new CartTotalsModel();
+//	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
-	private static CalculationModel totals0Vat =new CalculationModel();
+//	private static CalculationModel totals0Vat =new CalculationModel();
 	private String username, password;
 
 
@@ -118,8 +116,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@Test
 	public void uS003CartSegmentationWithVatTest() {
 		frontEndSteps.performLogin(username, password);
-		ProductBasicModel productData;
-		
+//		ProductBasicModel productData;
+//		
 //		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
