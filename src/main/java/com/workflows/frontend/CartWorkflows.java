@@ -64,7 +64,7 @@ public class CartWorkflows {
 		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.getAskingPrice() + "!", cartTotalModel
 				.getSubtotal().equals(calculationModel.getAskingPrice().toString()));
 
-		Assert.assertTrue("The discount should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.getFinalPrice() + "!", cartTotalModel
+		Assert.assertTrue("The final price should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.getFinalPrice() + "!", cartTotalModel
 				.getTotalAmount().equals(calculationModel.getFinalPrice().toString()));
 
 		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",

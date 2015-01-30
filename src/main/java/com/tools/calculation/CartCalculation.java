@@ -1,6 +1,7 @@
 package com.tools.calculation;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
 
@@ -105,7 +106,7 @@ public class CartCalculation {
 			ipPoints += total.getIpPoints();
 		}
 
-		finalPrice = finalPrice.divide(BigDecimal.valueOf(100));
+		finalPrice = finalPrice.divide(BigDecimal.valueOf(100)).setScale(2, BigDecimal.ROUND_DOWN);
 		askingPrice = askingPrice.divide(BigDecimal.valueOf(100));
 
 		result.setAskingPrice(askingPrice);

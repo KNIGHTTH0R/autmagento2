@@ -126,18 +126,13 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 //		 productData = productSteps.setProductAddToCart("2", "0");
 //		 productsList.add(productData);
 //		
-//		 searchSteps.searchAndSelectProduct("R083BK",
-//		 "CLARICE RING (GUN METAL)");
-//		 productData = productSteps.setProductAddToCart("1", "18");
-//		 productsList.add(productData);
-		
-		searchSteps.searchAndSelectProduct("K054SV", "WHITNEY SET");
-		productData = productSteps.setProductAddToCart("1", "0");
+		searchSteps.searchAndSelectProduct("R083BK","CLARICE RING (GUN METAL)");
+		productData = productSteps.setProductAddToCart("1", "18");
 		productsList.add(productData);
 		
 		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
-		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);		
+		productData = productSteps.setProductAddToCart("2", "0");
+		productsList.add(productData);				
 
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 		productData = productSteps.setProductAddToCart("1", "0");
@@ -145,11 +140,11 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
-		cartSteps.updateProductQuantity("3","M064");
-		productsList.get(1).setQuantity("3");
-		cartSteps.updateProductQuantity("2","M101");
-		productsList.get(2).setQuantity("2");
+		//TODO change the update method to set the quantity in the model
+		cartSteps.updateProductQuantity("2","M064");
+		productsList.get(1).setQuantity("2");
+		cartSteps.updateProductQuantity("1","M101");
+		productsList.get(2).setQuantity("1");
 		cartSteps.updateCart();
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
@@ -185,8 +180,6 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-		// AddressModel billingAddress = confirmationSteps.grabBillingData();
-		// AddressModel shippingAddress = confirmationSteps.grabSippingData();
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
 		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
