@@ -14,7 +14,6 @@ import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
-import com.tools.utils.PrintUtils;
 
 public class CartWorkflows {
 
@@ -34,7 +33,6 @@ public class CartWorkflows {
 		for (ProductBasicModel productNow : productsList) {
 			CartProductModel compare = findProduct(productNow.getType(), cartProducts);
 
-			PrintUtils.printProductsCompare(productNow, compare);
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
 			if (compare.getName() != null) {
