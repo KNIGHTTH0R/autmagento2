@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 
+import com.tools.Constants;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
@@ -21,6 +22,7 @@ public class OrdersSteps extends AbstractSteps {
 
 	@Step
 	public void openOrder(String orderId) {
+		waitABit(Constants.TIME_CONSTANT);
 		orderListPage().openOrderDetails(orderId);
 	}
 

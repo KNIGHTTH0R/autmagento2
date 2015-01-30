@@ -99,4 +99,10 @@ public class OrderWorkflows {
 	@Step
 	public void printCartTotals(String subtotal, String tax, String shipping, String totalAmount, String totalIP, String totalBonusJeverly) {
 	}
+
+	
+	@Step
+	public void validateOrderStatus(String orderStatus, String string) {
+		Assert.assertTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
+	}
 }

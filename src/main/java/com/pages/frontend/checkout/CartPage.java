@@ -270,7 +270,6 @@ public class CartPage extends AbstractPage {
 			}
 		}
 		Assert.assertTrue("The product was not found", containsTerms);
-
 	}
 
 }

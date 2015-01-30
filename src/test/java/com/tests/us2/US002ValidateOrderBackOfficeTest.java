@@ -27,6 +27,7 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
+import com.workflows.backend.OrderWorkflows;
 
 @WithTag(name = "US002", type = "backend")
 @Story(Application.StyleCoach.Shopping.class)
@@ -39,6 +40,8 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	public OrdersSteps ordersSteps;
 	@Steps
 	public OrderValidationSteps orderValidationSteps;
+	@Steps
+	public OrderWorkflows orderWorkflows;
 
 	private String orderId;
 	public List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
@@ -85,5 +88,6 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		PrintUtils.printOrderInfo(orderInfo);
 		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
 		orderValidationSteps.validateProducts(productsList, orderItemsList);
+		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung geplant");
 	}
 }
