@@ -256,8 +256,8 @@ public class CartPage extends AbstractPage {
 		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
 		boolean containsTerms = true;
 		for (WebElement webElement : entryList) {
-
-			for (String term : terms) {
+			containsTerms = true;
+			for (String term : terms) {				
 				if (!webElement.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(term)) {
 					containsTerms = false;
 				}

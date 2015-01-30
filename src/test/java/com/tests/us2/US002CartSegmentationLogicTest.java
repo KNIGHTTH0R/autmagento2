@@ -130,14 +130,14 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 //		 "CLARICE RING (GUN METAL)");
 //		 productData = productSteps.setProductAddToCart("1", "18");
 //		 productsList.add(productData);
-
+		
 		searchSteps.searchAndSelectProduct("K054SV", "WHITNEY SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
-
+		
 		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
 		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
+		productsList.add(productData);		
 
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 		productData = productSteps.setProductAddToCart("1", "0");
@@ -146,9 +146,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		 cartSteps.updateProductQuantity("6","CLARICE RING","R083BK-18","18");
-		 productsList.get(0).setQuantity("6");
-		 cartSteps.updateCart();
+		cartSteps.updateProductQuantity("2","M064");
+		productsList.get(1).setQuantity("2");
+		cartSteps.updateCart();
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 

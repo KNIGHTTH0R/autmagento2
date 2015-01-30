@@ -173,7 +173,8 @@ public class CartCalculation {
 		System.out.println("Remainder after 0%: " + remainder00.toString());
 
 		result.setSubtotal(calculateTotalSum(totalsList).getAskingPrice().toString());
-		result.setIpPoints(String.valueOf(calculateTotalSum(totalsList).getIpPoints()));
+		result.setIpPoints(String.valueOf(calculateTotalSum(totalsList).getIpPoints()));		
+		result.setIpPoints(String.valueOf(calculateIpDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)))));
 
 		return result;
 	}
@@ -210,7 +211,7 @@ public class CartCalculation {
 
 	}
 
-	public int calculateIpDiscount(List<CalculationModel> totalsList, BigDecimal jewelryBonus) {
+	public BigDecimal calculateIpDiscount(List<CalculationModel> totalsList, BigDecimal jewelryBonus) {
 
 		System.out.println("IP CALCULATION---------------------------------------------------s");
 		BigDecimal result = BigDecimal.valueOf(0);
@@ -223,24 +224,23 @@ public class CartCalculation {
 
 		System.out.println("RP = " + regularPrice);
 		System.out.println("IP TOTAL = " + ipTotal);
-		System.out.println("JEWELRY BONUS = " + jewelryBonus);
-		
-		
+		System.out.println("JEWELRY BONUS = " + jewelryBonus);		
 //		System.out.println(result + " add " + jewelryBonus);
 		result = result.add(jewelryBonus);
-//		System.out.println("=> " + result);
+		System.out.println("1=> " + result);
 //		System.out.println(result + " multiply " + BigDecimal.valueOf(100));
 		result = result.multiply(BigDecimal.valueOf(100));
-//		System.out.println("=> " + result);
+		System.out.println("2=> " + result);
 //		System.out.println(result + " divide " + regularPrice);	
 		result = result.divide(regularPrice, RoundingMode.HALF_UP);
-//		System.out.println("=> " + result);
+//		result = result.divide(regularPrice);
+		System.out.println("3=> " + result);
 //		System.out.println(result + " multiply " + ipTotal);	
 		result = result.multiply(ipTotal);
-//		System.out.println("=> " + result);
+		System.out.println("4=> " + result);
 //		System.out.println(result + " divide " + BigDecimal.valueOf(100));
 		result = result.divide(BigDecimal.valueOf(100));
-//		System.out.println("=> " + result);
+		System.out.println("=> " + result);
 //		System.out.println(ipTotal + " subtract " + result);
 		result = ipTotal.subtract(result);
 //		System.out.println("Grand Result => " + result);
@@ -248,12 +248,52 @@ public class CartCalculation {
 		
 		
 		
-		System.out.println("IP CALCULATION: " + result.intValue());
+		System.out.println("IP CALCULATION: " + result.setScale(0, BigDecimal.ROUND_HALF_UP));
 //		System.out.println("IP CALCULATION: " + Integer.valueOf(result.toString()));
 		
-		return result.intValue();
+		return result.setScale(0, BigDecimal.ROUND_HALF_UP);
 
 	}
+	
+	
+	public BigDecimal calcIp(List<CartProductModel> cartList,BigDecimal jewelryBonus){
+		System.out.println("size " + cartList.size());
+		BigDecimal result = BigDecimal.valueOf(0);
+		BigDecimal totalPrice = BigDecimal.valueOf(0);
+		BigDecimal ipProduct = BigDecimal.valueOf(0);
+		
+		BigDecimal listProductsPrice = CartCalculation.calculateTableProducts(cartList).getAskingPrice();
+		
+		for( CartProductModel item : cartList) {	
+			
+			if(BigDecimal.valueOf(Double.parseDouble(item.getPriceIP())).compareTo(BigDecimal.ZERO) > 0){
+			
+			BigDecimal productResult = BigDecimal.valueOf(0);
+			
+			totalPrice = BigDecimal.valueOf(Double.parseDouble(item.getProductsPrice()));
+			ipProduct = BigDecimal.valueOf(Double.parseDouble(item.getPriceIP()));
+			System.out.println(item.getProductsPrice());
+			System.out.println(item.getPriceIP());
+			productResult = productResult.add(jewelryBonus);
+			productResult = productResult.multiply(BigDecimal.valueOf(100));
+			productResult = productResult.divide(totalPrice,RoundingMode.HALF_UP);
+			productResult = productResult.multiply(ipProduct);
+			productResult = productResult.divide(BigDecimal.valueOf(100));
+			System.out.println("=> " + productResult);
+			productResult = ipProduct.subtract(productResult);			
+			if (productResult.compareTo(BigDecimal.ZERO) < 0)
+				productResult = BigDecimal.valueOf(0);
+			System.out.println("IP CALCULATION: " + productResult.setScale(0, BigDecimal.ROUND_HALF_UP));
+			result = result.add(productResult.setScale(0, BigDecimal.ROUND_HALF_UP));
+			}
+		}
+		
+		System.out.println("TOTAL IP CALCULATION: " + result.setScale(0, BigDecimal.ROUND_HALF_UP));
+		return result;
+		
+	}
+
+
 
 	// modify jewelry discount formatting
 	// From 10 To 1000
