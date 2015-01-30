@@ -17,7 +17,7 @@ public class OrdersSteps extends AbstractSteps {
 	@Step
 	public void findOrderByOrderId(String orderId) {
 		orderListPage().inputOderId(orderId);
-		orderListPage().clickOnSearch();
+//		orderListPage().clickOnSearch();
 	}
 
 	@Step

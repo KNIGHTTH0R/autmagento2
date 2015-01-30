@@ -260,6 +260,7 @@ public class CartCalculation {
 		BigDecimal totalPrice = BigDecimal.valueOf(0);
 		BigDecimal ipProduct = BigDecimal.valueOf(0);
 		
+		@SuppressWarnings("unused")
 		BigDecimal listProductsPrice = CartCalculation.calculateTableProducts(cartList).getAskingPrice();
 		
 		for( CartProductModel item : cartList) {	
