@@ -1,7 +1,6 @@
 package com.tools.calculation;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
 
@@ -245,7 +244,6 @@ public class CartCalculation {
 		result = ipTotal.subtract(result);
 //		System.out.println("Grand Result => " + result);
 //		result = result.divide(BigDecimal.valueOf(Double.valueOf(1)), RoundingMode.HALF_UP);
-		
 		
 		
 		System.out.println("IP CALCULATION: " + result.intValue());
