@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -79,11 +80,12 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 		emailData.setPassword(EmailConstants.PASSWORD);
         
         
-        
 		gmailConnector = new GmailConnector(emailData);
 	}
 	
 	@Test
+	@Pending
+	//TODO Email should be changed - may need a new email connector if not gmail
 	public void us002ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);
 		

@@ -18,6 +18,12 @@ import com.tools.EmailConstants;
 import com.tools.data.EmailCredentialsModel;
 import com.tools.data.EmailModel;
 
+/**
+ * Due to new implementation Gmail Connector needs to be initialized with EmailCredentialsModel, 
+ * that contains: host, protocol, username and password.
+ * @author voicu.vac
+ *
+ */
 public class GmailConnector {
 
 	private static String host;
