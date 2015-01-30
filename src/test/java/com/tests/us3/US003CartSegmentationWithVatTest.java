@@ -3,6 +3,7 @@ package com.tests.us3;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -155,13 +156,17 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		PrintUtils.printCartTotals(cartTotals);
 		
 
-		cartSteps.typeJewerlyBonus("20");
+		cartSteps.typeJewerlyBonus("10");
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus("100");
 		cartSteps.updateMarketingBonus();		
+		
+		System.out.println("HELP");
+		
+		calculationSteps.calcIp(cartProductsWith25Discount, BigDecimal.valueOf(35));
 
-		calculationSteps.calculateDiscountTotals(totalsList, "20", "100");
-
+//		calculationSteps.calculateDiscountTotals(totalsList, "10", "100");
+		
 		
 		
 //		cartSteps.typeMarketingBonus("150");
