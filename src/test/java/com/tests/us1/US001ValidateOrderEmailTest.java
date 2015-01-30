@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
@@ -76,7 +75,7 @@ public class US001ValidateOrderEmailTest extends BaseTest{
 	public void us001ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);
 		
-		String message = GmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
+		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 	}
 

@@ -38,7 +38,7 @@ public class GmailConnector {
 	 * @return
 	 * @throws MessagingException
 	 */
-	public static List<EmailModel> readGmail() throws MessagingException {
+	public List<EmailModel> readGmail() throws MessagingException {
 
 		List<EmailModel> emailList = new ArrayList<EmailModel>();
 		Message message[] = connect();
@@ -73,7 +73,7 @@ public class GmailConnector {
 	 * @param deleteAfter
 	 * @return
 	 */
-	public static String searchForMail(String emailAddress, String searchKey, boolean deleteAfter) {
+	public String searchForMail(String emailAddress, String searchKey, boolean deleteAfter) {
 		Message message[] = connect();
 
 		boolean found = false;
@@ -108,7 +108,7 @@ public class GmailConnector {
 	 * Connect to email account and return INBOX messages.
 	 * @return
 	 */
-	private static Message[] connect() {
+	private Message[] connect() {
 		Properties props2 = System.getProperties();
 		Session session2 = Session.getDefaultInstance(props2, null);
 		props2.setProperty(EmailConstants.EMAIL_STORE, protocol);
@@ -158,7 +158,7 @@ public class GmailConnector {
 	 * @return
 	 */
 	
-	private static String getStringFromMessage(Message message) {
+	private String getStringFromMessage(Message message) {
 		StringBuilder textContent = new StringBuilder("");
 		try {
 			textContent = new StringBuilder((message.getSubject() + " "));
