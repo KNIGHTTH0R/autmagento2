@@ -133,13 +133,17 @@ public class CartCalculation {
 
 	public CalcDetailsModel calculateDiscountTotals(List<CalculationModel> totalsList, String jewelryDiscount, String marketingMaterial) {
 
+		CalcDetailsModel result = new CalcDetailsModel();
+		result.setJewelryBonus(jewelryDiscount);
+		result.setMarketingBonus(marketingMaterial);
+		
+		
 		jewelryDiscount = formatDiscount(jewelryDiscount);
 		marketingMaterial = formatDiscount(marketingMaterial);
 		BigDecimal totalAmount = BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString()));
 
-		CalcDetailsModel result = new CalcDetailsModel();
-		result.setJewelryBonus(jewelryDiscount);
-		result.setMarketingBonus(marketingMaterial);
+		
+
 
 		// Call methods to calculate Discounts and IP points
 		calculateJewelryDiscounts(totalsList, jewelryDiscount);
@@ -202,7 +206,6 @@ public class CartCalculation {
 	 * @param jewelryDiscount
 	 * @param marketingDiscount
 	 */
-
 	private void calculateTax(BigDecimal totalAmount, BigDecimal discount50, BigDecimal jewelryDiscount, BigDecimal marketingDiscount) {
 
 		BigDecimal result = BigDecimal.ZERO;
@@ -216,9 +219,7 @@ public class CartCalculation {
 
 		// TODO line that breaks
 		result = result.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 0, BigDecimal.ROUND_DOWN);
-
 		tax = partial.subtract(result).setScale(0, BigDecimal.ROUND_DOWN);
-
 	}
 
 	public void calculateJewelryDiscounts(List<CalculationModel> totalsList, String jewelryDiscount) {
@@ -255,7 +256,6 @@ public class CartCalculation {
 
 	public BigDecimal calculateIpDiscount(List<CalculationModel> totalsList, BigDecimal jewelryBonus) {
 
-		System.out.println("IP CALCULATION---------------------------------------------------s");
 		BigDecimal result = BigDecimal.valueOf(0);
 		BigDecimal regularPrice = BigDecimal.valueOf(0);
 		BigDecimal ipTotal = BigDecimal.valueOf(0);

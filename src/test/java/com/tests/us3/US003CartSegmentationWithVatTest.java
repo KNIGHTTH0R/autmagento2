@@ -29,8 +29,8 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
+import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
-import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -70,18 +70,15 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	public CartWorkflows cartWorkflows;	
 	@Steps
 	public PaymentSteps paymentSteps;
-	@Steps
 
 	
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
-//	private static CartTotalsModel finalCartTotals = new CartTotalsModel();
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
-//	private static CalculationModel totals0Vat =new CalculationModel();
 	private String username, password;
-	private String jewelryDisount = "100";
-	private String marketingDisount = "150";
+	private static String jewelryDisount = "100";
+	private static String marketingDisount = "150";
 
 
 	@Before
@@ -122,11 +119,18 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
 		
-		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
+//		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+		searchSteps.searchAndSelectProduct("K010SV", "CLARA SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
+		searchSteps.searchAndSelectProduct("K010SV", "CLARA SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
@@ -163,7 +167,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.typeMarketingBonus(marketingDisount);
 		cartSteps.updateMarketingBonus();		
 		
-		calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
+		CalcDetailsModel discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
@@ -190,24 +194,30 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		String urlOrder = FormatterUtils.extractOrderIDFromURL(url);
 		
 //		System.out.println("URL ----> " + url);
-//		System.out.println("Price URL ----> " + urlPrice);
-//		System.out.println("Order URL ----> " + urlOrder);
-		
+		System.out.println("Price URL ----> " + urlPrice);
+		System.out.println("Order URL ----> " + urlOrder);
 		//TODO calculate Totals with VAT 0%
 //		totals0Vat = calculationSteps.calculateShippingTotalsWith0Vat(totalsCalculated);
 //		PrintUtils.printCalculationModel(totalsCalculated);
 
 		paymentSteps.expandCreditCardForm();
-
 		paymentSteps.fillCreditCardForm(creditCardData);		
 		
 		//TODO validate URL price 
 //		validationSteps.checkTotalAmountFromUrl(url, String.valueOf(totals0Vat.getFinalPrice()));
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
-		confirmationSteps.agreeAndCheckout();
+//		confirmationSteps.agreeAndCheckout();
+//
+//		checkoutValidationSteps.verifySuccessMessage();
+		
+		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
+		cartWorkflows.checkCalculationTotals("CART TOTALS");
+		
+		checkoutValidationSteps.verifyTotalsDiscount(discountTotals, discountCalculationModel);
+//		checkoutValidationSteps.verifyShippingDiscount(shippingTotals, discountCalculationModel);
+		
 
-		checkoutValidationSteps.verifySuccessMessage();
 	}
 
 
