@@ -74,6 +74,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 	private static OrderModel orderNumber = new OrderModel();
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private String username, password;
@@ -89,7 +92,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 			input = new FileInputStream(Constants.RESOURCES_PATH + "us2\\us002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
-			password = prop.getProperty("password");
+			password = prop.getProperty("password");			
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -118,34 +121,46 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		ProductBasicModel productData;
 
 		//TODO change products list or clean 
-		 searchSteps.searchAndSelectProduct("R105RS", "LOVE RING");
-		 productData = productSteps.setProductAddToCart("1", "16");
-		 productsList.add(productData);
+		searchSteps.searchAndSelectProduct("N100SV", "MAXI CHAIN (SILVER)");
+		productData = productSteps.setProductAddToCart("1", "medium");			
+		//we add this into both sections because the quantity will be increased at 2, so 1 piece will be added into 25 section 		
+		ProductBasicModel newProduct = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "2");		
+		productsList50.add(productData);
+		productsList25.add(productData);		
+		productsList.add(newProduct);
 		
-		 searchSteps.searchAndSelectProduct("A015RD", "JAMINA BAG");
-		 productData = productSteps.setProductAddToCart("2", "0");
-		 productsList.add(productData);
-		
-		searchSteps.searchAndSelectProduct("R083BK","CLARICE RING (GUN METAL)");
-		productData = productSteps.setProductAddToCart("1", "18");
+		searchSteps.searchAndSelectProduct("B002BE", "FLORENCE BRACELET (BEIGE)");
+		productData = productSteps.setProductAddToCart("2", "medium");
 		productsList.add(productData);
+		ProductBasicModel newProduct2 = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
+		productsList50.add(newProduct2);
+	
+		//we remove the item product from 50 section because after updating the quantity will remain just 1 item.evend if we set 0 quantity
+		//for the product from 50 section, the other piece will not remain in the 25 section ,it will come into the 50 section
+		//productsList50.add(productData);
+		
+		searchSteps.searchAndSelectProduct("E106SV","JOANNA EARRINGS");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		productsList50.add(productData);
 		
 		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
 		productData = productSteps.setProductAddToCart("2", "0");
-		productsList.add(productData);				
+		productsList.add(productData);
+		productsListMarketing.add(productData);				
 
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
+		productsListMarketing.add(productData);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		//TODO change the update method to set the quantity in the model
 		//TODO handle witch product needs to be updated if we have the same product into different discount tables
-		cartSteps.updateProductQuantity("2","R105RS");
-		productsList.get(0).setQuantity("2");
-		cartSteps.updateProductQuantity("0","A015RD");
-		productsList.get(1).setQuantity("0");
+		cartSteps.updateProductQuantityIn50DiscountArea("2","N100SV");	
+		cartSteps.updateProductQuantityIn50DiscountArea("0","B002BE");
+
 		cartSteps.updateCart();
 
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
@@ -164,40 +179,68 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
 
 		cartTotals = cartSteps.grabTotals();
+		System.out.println("buba" + cartTotals.getIpPoints());
+		
+		System.out.println("lists size");
+		System.out.println(productsList.size());
+		System.out.println("----------------------");
+		System.out.println(productsList50.size());
+		System.out.println(productsList50.get(0).getName());
+		System.out.println(productsList50.get(0).getQuantity());
+		System.out.println(productsList50.get(1).getName());
+		System.out.println(productsList50.get(1).getQuantity());
+		System.out.println(productsList50.get(2).getName());
+		System.out.println(productsList50.get(2).getQuantity());
+		System.out.println("----------------------");
+		System.out.println(productsList25.size());
+		System.out.println(productsList25.get(0).getName());
+		System.out.println(productsList25.get(0).getQuantity());
+		System.out.println("----------------------");
+		System.out.println(productsListMarketing.size());
+		System.out.println(productsListMarketing.get(0).getName());
+		System.out.println(productsListMarketing.get(0).getQuantity());
+		System.out.println(productsListMarketing.get(1).getName());
+		System.out.println(productsListMarketing.get(1).getQuantity());
 
-		PrintUtils.printCartTotals(cartTotals);	
+//		PrintUtils.printCartTotals(cartTotals);	
+//
+//		cartSteps.clickGoToShipping();
+//
+//		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+//		PrintUtils.printList(shippingProducts);
+//
+//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+//		System.out.println(shippingTotals.getSubtotal());
+//
+//		shippingSteps.clickGoToPaymentMethod();
+//
+//		paymentSteps.expandCreditCardForm();
 
-		cartSteps.clickGoToShipping();
+//		paymentSteps.fillCreditCardForm(creditCardData);
 
-		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		PrintUtils.printList(shippingProducts);
+//		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		System.out.println(shippingTotals.getSubtotal());
+//		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
+//		System.out.println(confirmationTotals.getSubtotal());
+//
+//		confirmationSteps.agreeAndCheckout();
+//
+//		validationSteps.verifySuccessMessage();
+		
+		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
-		shippingSteps.clickGoToPaymentMethod();
+		cartWorkflows.setValidateProductsModels(productsList25, cartProductsWith25Discount);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
+		
+		cartWorkflows.setValidateProductsModels(productsListMarketing, cartMarketingMaterialsProducts);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
 
-		paymentSteps.expandCreditCardForm();
-
-		paymentSteps.fillCreditCardForm(creditCardData);
-
-		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-
-		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();
-		System.out.println(confirmationTotals.getSubtotal());
-
-		confirmationSteps.agreeAndCheckout();
-
-		validationSteps.verifySuccessMessage();
-
-		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
-		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
-
-		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
-		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
-
-		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
-		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+//		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
+//		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+//
+//		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
+//		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
 		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
@@ -224,6 +267,17 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
 		}
 
+	}
+	
+	
+	private ProductBasicModel newProductObject(String name, String price, String type, String quantity){
+		ProductBasicModel newProduct = new ProductBasicModel();
+		newProduct.setName(name);
+		newProduct.setPrice(price);
+		newProduct.setQuantity(quantity);
+		newProduct.setType(type);
+		
+		return newProduct;
 	}
 
 }

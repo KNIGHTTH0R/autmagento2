@@ -80,8 +80,8 @@ public class CartSteps extends  AbstractSteps{
 		cartPage().clickUpdateMarketingBonus();
 	}
 	@Step
-	public void updateProductQuantity(String quantity,String... terms){
-		cartPage().updateProductQuantity(quantity, terms);
+	public void updateProductQuantityIn50DiscountArea(String quantity,String... terms){
+		cartPage().updateProductQuantityIn50DiscountArea(quantity, terms);
 	}
 	@Step
 	public void typeJewerlyBonus(String jevewrlyBonus){

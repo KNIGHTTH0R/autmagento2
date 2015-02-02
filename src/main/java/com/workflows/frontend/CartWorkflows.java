@@ -82,4 +82,47 @@ public class CartWorkflows {
 		return result;
 	}
 	
+//	private CartTotalsModel cartCalculatedTotal = new CartTotalsModel();
+//	private CartTotalsModel cartGrabbedTotal = new CartTotalsModel();
+//	
+//	public void setTotalsModels(CartTotalsModel cartCalculatedTotal, CartTotalsModel cartGrabbedTotal){
+//		this.cartCalculatedTotal = cartCalculatedTotal;
+//		this.cartGrabbedTotal = cartGrabbedTotal;
+//	}
+//	
+//	@StepGroup
+//	public void checkCompleteTotals(String message){
+//
+//		
+//		checkoutValidationSteps.printTotalsModel("Cart Totals", cartGrabbedTotal.getSubtotal(), cartGrabbedTotal.getDiscountSumString(), cartGrabbedTotal.getTotalAmount(), cartGrabbedTotal.getTax(), cartGrabbedTotal.getShipping(),
+//				cartGrabbedTotal.getJewelryBonus(), cartGrabbedTotal.getIpPoints());
+//		
+//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getSubtotal() + " and it is " + cartCalculatedTotal.getSubtotal() + "!", cartCalculatedTotal
+//				.getSubtotal().equals(cartGrabbedTotal.getSubtotal()));
+//		
+//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getDiscountSumString() + " and it is " + cartCalculatedTotal.getDiscountSumString() + "!", cartCalculatedTotal
+//				.getDiscountSumString().equals(cartGrabbedTotal.getDiscountSumString()));
+//		
+//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getTotalAmount() + " and it is " + cartCalculatedTotal.getTotalAmount() + "!", cartCalculatedTotal
+//				.getTotalAmount().equals(cartGrabbedTotal.getTotalAmount()));
+//		
+//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getTax() + " and it is " + cartCalculatedTotal.getTax() + "!", cartCalculatedTotal
+//				.getTax().equals(cartGrabbedTotal.getTax()));
+//		
+//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getJewelryBonus() + " and it is " + cartCalculatedTotal.getJewelryBonus() + "!", cartCalculatedTotal
+//				.getJewelryBonus().equals(cartGrabbedTotal.getJewelryBonus()));
+//		
+//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getMarketingBonus() + " and it is " + cartCalculatedTotal.getMarketingBonus() + "!", cartCalculatedTotal
+//				.getMarketingBonus().equals(cartGrabbedTotal.getMarketingBonus()));
+//		
+//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getIpPoints() + " and it is " + cartCalculatedTotal.getIpPoints() + "!", cartCalculatedTotal
+//				.getIpPoints().equals(cartGrabbedTotal.getIpPoints()));
+//
+//		
+//	}
+	
+	
+	
+	
+	
 }
