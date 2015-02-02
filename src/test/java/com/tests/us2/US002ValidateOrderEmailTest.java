@@ -76,8 +76,8 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 		
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
 		emailData.setProtocol(EmailConstants.PROTOCOL);
-		emailData.setUsername(EmailConstants.USERNAME);
-		emailData.setPassword(EmailConstants.PASSWORD);
+		emailData.setUsername(EmailConstants.USERNAME_US002);
+		emailData.setPassword(EmailConstants.PASSWORD_US002);
         
         
 		gmailConnector = new GmailConnector(emailData);

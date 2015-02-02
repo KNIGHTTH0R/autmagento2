@@ -155,23 +155,32 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
 		totalsList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
-		PrintUtils.printCalculationModel(totalsCalculated);
+		PrintUtils.printCalculationModel(totalsCalculated);		
 		
 		cartTotals = cartSteps.grabTotals();
 //		System.out.println("NO BONUSES BEGIN ");
 //		PrintUtils.printCartTotals(cartTotals);
 //		System.out.println("NO BONUSES END");
 
+
+
 		cartSteps.typeJewerlyBonus(jewelryDisount);
+
 		cartSteps.updateJewerlyBonus();
+
 		cartSteps.typeMarketingBonus(marketingDisount);
+
 		cartSteps.updateMarketingBonus();		
+
 		
 		CalcDetailsModel discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 
+
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
+
 		
+
 //		System.out.println("BONUSES BEGIN ");
 //		PrintUtils.printCartTotals(discountTotals);
 //		System.out.println("BONUSES END");
@@ -186,6 +195,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
 		PrintUtils.printCartTotals(shippingTotals);
+
 		
 		shippingSteps.clickGoToPaymentMethod();
 		

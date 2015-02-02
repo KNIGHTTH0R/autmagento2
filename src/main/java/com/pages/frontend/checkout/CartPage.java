@@ -252,9 +252,9 @@ public class CartPage extends AbstractPage {
 		element(marketingBonusInput).sendKeys(marketingBonus);
 	}
 
-	public void updateProductQuantity(String quantity, String... terms) {
+	public void updateProductQuantityIn50DiscountArea(String quantity, String... terms) {
 		element(cartTable).waitUntilVisible();
-		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
+		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-50-table tbody > tr"));
 		boolean containsTerms = true;
 		for (WebElement webElement : entryList) {
 			containsTerms = true;
