@@ -33,7 +33,7 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
-import com.tools.data.OrderModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;

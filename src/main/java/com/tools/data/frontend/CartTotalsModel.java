@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Model used to hold Totals Section data from the Cart Page.
+ * @author voicu.vac
+ *
+ */
 public class CartTotalsModel {
 
 	private String subtotal;

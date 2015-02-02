@@ -6,7 +6,7 @@ import org.junit.Assert;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.data.OrderModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.requirements.AbstractSteps;
 
 public class ProfileSteps extends AbstractSteps{

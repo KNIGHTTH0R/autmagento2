@@ -25,8 +25,8 @@ import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.EmailConstants;
-import com.tools.data.EmailCredentialsModel;
-import com.tools.data.OrderModel;
+import com.tools.data.backend.OrderModel;
+import com.tools.data.email.EmailCredentialsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

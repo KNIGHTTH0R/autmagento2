@@ -3,7 +3,6 @@ package com.tests.us3;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -34,6 +33,7 @@ import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
@@ -74,7 +74,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 //	private static CartTotalsModel finalCartTotals = new CartTotalsModel();
-//	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 //	private static CalculationModel totals0Vat =new CalculationModel();
 	private String username, password;
@@ -116,24 +116,24 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@Test
 	public void uS003CartSegmentationWithVatTest() {
 		frontEndSteps.performLogin(username, password);
-//		ProductBasicModel productData;
-//		
-//		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
-//		productData = productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
-//		
-//		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
-//		productData = productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
-//		
-//		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
-//		productData = productSteps.setProductAddToCart("1", "16");
-//		productsList.add(productData);
-//		
-//		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-//		productData = productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
-//		
+		ProductBasicModel productData;
+		
+		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		
+		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		
+		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
+		productData = productSteps.setProductAddToCart("1", "16");
+		productsList.add(productData);
+		
+		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		
@@ -149,64 +149,53 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 		PrintUtils.printCalculationModel(totalsCalculated);
 		
-		//
 		cartTotals = cartSteps.grabTotals();
+		System.out.println("NO BONUSES BEGIN ");
 		PrintUtils.printCartTotals(cartTotals);
-		
+		System.out.println("NO BONUSES END");
 
-		cartSteps.typeJewerlyBonus("10");
+		cartSteps.typeJewerlyBonus("100");
 		cartSteps.updateJewerlyBonus();
-		cartSteps.typeMarketingBonus("100");
+		cartSteps.typeMarketingBonus("150");
 		cartSteps.updateMarketingBonus();		
 		
-		System.out.println("HELP");
-		
-		calculationSteps.calcIp(cartProductsWith25Discount, BigDecimal.valueOf(35));
+//		calculationSteps.calcIp(cartProductsWith25Discount, BigDecimal.valueOf(35));
 
-//		calculationSteps.calculateDiscountTotals(totalsList, "10", "100");
+		calculationSteps.calculateDiscountTotals(totalsList, "100", "150");
+
+		CartTotalsModel discountTotals = new CartTotalsModel();
+		discountTotals = cartSteps.grabTotals();
 		
+		System.out.println("BONUSES BEGIN ");
+		PrintUtils.printCartTotals(discountTotals);
+		System.out.println("BONUSES END");
 		
+		cartSteps.clickGoToShipping();
 		
-//		cartSteps.typeMarketingBonus("150");
-//		cartSteps.updateMarketingBonus();
+		shippingSteps.selectAddress("sss sss, tttt, 3, 2345 Wien, Österreich");
+		shippingSteps.setSameAsBilling(true);
+
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		PrintUtils.printList(shippingProducts);
+
+		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
+		PrintUtils.printCartTotals(shippingTotals);
 		
+		shippingSteps.clickGoToPaymentMethod();
 		
+		String url = shippingSteps.grabUrl();
 		
+		System.out.println("URL ----> " + url);
 		
-//		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-//		CalculationModel recalculatedTotals = CartCalculation.recalculateTotalsAfterDiscounts(totalsCalculated);
-//		PrintUtils.printCalculationModel(recalculatedTotals);
-//		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-		
-		
-		
-//		finalCartTotals = cartSteps.grabTotals();
-//		PrintUtils.printCartTotals(finalCartTotals);
-//		
-//		cartSteps.clickGoToShipping();
-//		
-//		shippingSteps.selectAddress("sss sss, tttt, 3, 2345 Wien, Österreich");
-//		shippingSteps.setSameAsBilling(true);
-//
-//		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-//		PrintUtils.printList(shippingProducts);
-//
-//		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-//		PrintUtils.printCartTotals(shippingTotals);
-//		
-//		shippingSteps.clickGoToPaymentMethod();
-//		
-//		String url = shippingSteps.grabUrl();
+		//TODO calculate Totals with VAT 0%
 //		totals0Vat = calculationSteps.calculateShippingTotalsWith0Vat(totalsCalculated);
 //		PrintUtils.printCalculationModel(totalsCalculated);
-//		
-//		
-//
-//		paymentSteps.expandCreditCardForm();
-//
-//		paymentSteps.fillCreditCardForm(creditCardData);		
-//		
-//		
+
+		paymentSteps.expandCreditCardForm();
+
+		paymentSteps.fillCreditCardForm(creditCardData);		
+		
+		//TODO validate URL price 
 //		validationSteps.checkTotalAmountFromUrl(url, String.valueOf(totals0Vat.getFinalPrice()));
 		
 		

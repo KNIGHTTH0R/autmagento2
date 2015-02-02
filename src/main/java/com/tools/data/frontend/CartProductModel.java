@@ -1,5 +1,13 @@
 package com.tools.data.frontend;
 
+
+/**
+ * Cart product model, should be used when grabbing products from the cart.
+ * DiscountClass field should be populated with the Segment the product is found in
+ * (Eg. "Marketing discount", "25%" etc...)
+ * @author voicu.vac
+ *
+ */
 public class CartProductModel {
 
 	private String name;

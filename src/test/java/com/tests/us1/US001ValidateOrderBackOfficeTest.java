@@ -18,9 +18,9 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.data.OrderModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
@@ -50,6 +50,8 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Before
 	public void setUp() {
+		
+		//TODO add setup config file for backend user and pass
 		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest");
 
 		if (orderModel.size() == 1) {
@@ -87,7 +89,6 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		PrintUtils.printOrderItemsList(orderItemsList);
 		PrintUtils.printOrderTotals(ordertotal);
 		PrintUtils.printOrderInfo(orderInfo);
-//		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
 		orderWorkflows.setCheckCalculationTotalsModels(ordertotal, cartTotals.get(0));
 		orderWorkflows.validateTotals("TOTALS VALIVATION");
 		

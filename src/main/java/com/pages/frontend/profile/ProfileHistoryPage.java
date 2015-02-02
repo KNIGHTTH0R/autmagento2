@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
-import com.tools.data.OrderModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.requirements.AbstractPage;
 
 public class ProfileHistoryPage extends AbstractPage{
