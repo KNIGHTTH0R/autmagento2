@@ -2,6 +2,14 @@ package com.tools.data;
 
 import java.math.BigDecimal;
 
+/**
+ * This model will hold Segmentation totals. Segmentation - tableType.
+ * All values are calculated with all products in that segment.
+ * {@link CalculationModel} is used in lists of {@link CalculationModel}.
+ * The list represents all the sections in the cart = whole cart.
+ * @author voicu.vac
+ *
+ */
 public class CalculationModel {
 
 	private String tableType;

@@ -1,5 +1,12 @@
-package com.tools.data;
+package com.tools.data.backend;
 
+
+/**
+ * This model is used in the Backend section, on the order details. The Order Details section 
+ * should be mapped with this model.
+ * @author voicu.vac
+ *
+ */
 public class OrderModel {
 
 	private String orderId;
@@ -65,5 +72,4 @@ public class OrderModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 }

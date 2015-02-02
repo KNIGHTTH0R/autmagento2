@@ -162,6 +162,7 @@ public class CartPage extends AbstractPage {
 
 	public CartTotalsModel grabTotals() {
 		CartTotalsModel resultModel = new CartTotalsModel();
+		waitABit(Constants.TIME_CONSTANT);
 
 		String valueTransformer = "";
 		element(totalsTable).waitUntilVisible();

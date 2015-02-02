@@ -3,10 +3,10 @@ package com.tools.utils;
 import java.util.List;
 
 import com.tools.data.CalculationModel;
-import com.tools.data.EmailModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.email.EmailModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
