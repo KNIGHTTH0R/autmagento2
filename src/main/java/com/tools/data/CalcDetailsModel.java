@@ -18,6 +18,7 @@ public class CalcDetailsModel {
 	private String totalAmount;
 	private String subTotal;
 	private String ipPoints;
+	private String tax;
 	private Map<String, String> segmentTotals = new HashMap<String, String>();
 	private Map<String, String> calculationsList = new HashMap<String, String>();
 
@@ -83,6 +84,14 @@ public class CalcDetailsModel {
 
 	public void setIpPoints(String ipPoints) {
 		this.ipPoints = ipPoints;
+	}
+
+	public String getTax() {
+		return tax;
+	}
+
+	public void setTax(String tax) {
+		this.tax = tax;
 	}
 
 }

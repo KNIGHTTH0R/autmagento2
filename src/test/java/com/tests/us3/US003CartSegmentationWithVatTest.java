@@ -30,11 +30,13 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
+import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
@@ -57,7 +59,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@Steps
 	public CartCalculation calculationSteps;
 	@Steps
-	public CheckoutValidationSteps validationSteps;
+	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
@@ -78,6 +80,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 //	private static CalculationModel totals0Vat =new CalculationModel();
 	private String username, password;
+	private String jewelryDisount = "100";
+	private String marketingDisount = "150";
 
 
 	@Before
@@ -150,25 +154,23 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		PrintUtils.printCalculationModel(totalsCalculated);
 		
 		cartTotals = cartSteps.grabTotals();
-		System.out.println("NO BONUSES BEGIN ");
-		PrintUtils.printCartTotals(cartTotals);
-		System.out.println("NO BONUSES END");
+//		System.out.println("NO BONUSES BEGIN ");
+//		PrintUtils.printCartTotals(cartTotals);
+//		System.out.println("NO BONUSES END");
 
-		cartSteps.typeJewerlyBonus("100");
+		cartSteps.typeJewerlyBonus(jewelryDisount);
 		cartSteps.updateJewerlyBonus();
-		cartSteps.typeMarketingBonus("150");
+		cartSteps.typeMarketingBonus(marketingDisount);
 		cartSteps.updateMarketingBonus();		
 		
-//		calculationSteps.calcIp(cartProductsWith25Discount, BigDecimal.valueOf(35));
-
-		calculationSteps.calculateDiscountTotals(totalsList, "100", "150");
+		calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
 		
-		System.out.println("BONUSES BEGIN ");
-		PrintUtils.printCartTotals(discountTotals);
-		System.out.println("BONUSES END");
+//		System.out.println("BONUSES BEGIN ");
+//		PrintUtils.printCartTotals(discountTotals);
+//		System.out.println("BONUSES END");
 		
 		cartSteps.clickGoToShipping();
 		
@@ -184,8 +186,12 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		shippingSteps.clickGoToPaymentMethod();
 		
 		String url = shippingSteps.grabUrl();
+		String urlPrice = FormatterUtils.extractPriceFromURL(url);
+		String urlOrder = FormatterUtils.extractOrderIDFromURL(url);
 		
-		System.out.println("URL ----> " + url);
+//		System.out.println("URL ----> " + url);
+//		System.out.println("Price URL ----> " + urlPrice);
+//		System.out.println("Order URL ----> " + urlOrder);
 		
 		//TODO calculate Totals with VAT 0%
 //		totals0Vat = calculationSteps.calculateShippingTotalsWith0Vat(totalsCalculated);
@@ -197,11 +203,24 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		//TODO validate URL price 
 //		validationSteps.checkTotalAmountFromUrl(url, String.valueOf(totals0Vat.getFinalPrice()));
-		
-		
+		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+
+		confirmationSteps.agreeAndCheckout();
+
+		checkoutValidationSteps.verifySuccessMessage();
 	}
 
 
-
+//	@Test
+//	public void us003UserProfileOrderId() {
+//
+//		// After validation - grab order number
+//		headerSteps.redirectToProfileHistory();
+//		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+//
+//		String orderId = orderHistory.get(0).getOrderId();
+//		orderNumber.setOrderId(orderId);
+//		profileSteps.verifyOrderId(orderId);
+//	}
 
 }

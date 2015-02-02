@@ -40,6 +40,7 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
@@ -162,6 +163,14 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		PrintUtils.printList(shippingProducts);
 
 		shippingSteps.clickGoToPaymentMethod();
+		
+		String url = shippingSteps.grabUrl();
+		String urlPrice = FormatterUtils.extractPriceFromURL(url);
+		String urlOrder = FormatterUtils.extractOrderIDFromURL(url);
+		
+		System.out.println("URL ----> " + url);
+		System.out.println("Price URL ----> " + urlPrice);
+		System.out.println("Order URL ----> " + urlOrder);
 
 		paymentSteps.expandCreditCardForm();
 

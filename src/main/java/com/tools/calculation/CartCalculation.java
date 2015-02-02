@@ -8,7 +8,6 @@ import com.tools.Constants;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 
@@ -17,6 +16,7 @@ public class CartCalculation {
 	private static BigDecimal remainder25 = BigDecimal.valueOf(0);
 	private static BigDecimal remainder50 = BigDecimal.valueOf(0);
 	private static BigDecimal remainder00 = BigDecimal.valueOf(0);
+	private static BigDecimal tax = BigDecimal.valueOf(0);
 
 	/**
 	 * Return product price based on (price - quantity - discount). Discount may
@@ -135,12 +135,13 @@ public class CartCalculation {
 
 		jewelryDiscount = formatDiscount(jewelryDiscount);
 		marketingMaterial = formatDiscount(marketingMaterial);
+		BigDecimal totalAmount = BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString()));
 
 		CalcDetailsModel result = new CalcDetailsModel();
 		result.setJewelryBonus(jewelryDiscount);
 		result.setMarketingBonus(marketingMaterial);
 
-		//Call methods to calculate Discounts and IP points
+		// Call methods to calculate Discounts and IP points
 		calculateJewelryDiscounts(totalsList, jewelryDiscount);
 		calculateMarketingDiscount(totalsList, marketingMaterial);
 		calculateIpDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)));
@@ -149,8 +150,8 @@ public class CartCalculation {
 		remainder50 = remainder50.divide(BigDecimal.valueOf(2)).divide(BigDecimal.valueOf(100));
 		remainder00 = remainder00.divide(BigDecimal.valueOf(100));
 
-		// CORE FORMULA - calculate total amount - save to model all calculations
-		BigDecimal totalAmount = BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString()));
+		// CORE FORMULA - calculate total amount - save to model all
+		// calculations
 		result.addCalculation("P1-Total", totalAmount.toString());
 		totalAmount = totalAmount.subtract(remainder25);
 		result.addCalculation("P2-Substract25", totalAmount.toString());
@@ -158,8 +159,8 @@ public class CartCalculation {
 		result.addCalculation("P3-Substract50", totalAmount.toString());
 		totalAmount = totalAmount.subtract(BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)).divide(BigDecimal.valueOf(100)));
 		result.addCalculation("P4-SubstractJD-divide100", totalAmount.toString());
-		
-		//If there is marketing bonus apply it to the Core formula
+
+		// If there is marketing bonus apply it to the Core formula
 		if (applyMarketingDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(marketingMaterial))).compareTo(BigDecimal.valueOf(0)) > 0) {
 			result.addCalculation("P5-SubstractMM-divide100", totalAmount.toString());
 			totalAmount = totalAmount.subtract(BigDecimal.valueOf(Double.parseDouble(marketingMaterial)).divide(BigDecimal.valueOf(100)));
@@ -168,21 +169,56 @@ public class CartCalculation {
 		result.addSegment(Constants.DISCOUNT_50, remainder50.toString());
 		result.addSegment(Constants.DISCOUNT_25, remainder25.toString());
 		result.addSegment(Constants.DISCOUNT_0, remainder00.toString());
-		
+
 		result.setTotalAmount(totalAmount.toString());
 		result.setSubTotal(calculateTotalSum(totalsList).getAskingPrice().toString());
 		result.setIpPoints(String.valueOf(calculateIpDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)))));
+
+		calculateTax(calculateTotalSum(totalsList).getAskingPrice(), remainder50, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)).divide(BigDecimal.valueOf(100)),
+				BigDecimal.valueOf(Double.parseDouble(marketingMaterial)).divide(BigDecimal.valueOf(100)));
+
+		result.setTax(tax.toString());
 
 		System.out.println(" ---- Calculation Results ---- ");
 		System.out.println("SUBTOTAL: " + BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString())));
 		System.out.println("TOTAL AMOUNT: " + result.getTotalAmount());
 		System.out.println("IP: " + result.getIpPoints());
+		System.out.println("Tax: " + tax);
 		System.out.println("Remainder after 25%: " + remainder25.toString());
 		System.out.println("Remainder after 50%: " + remainder50.toString());
 		System.out.println("Remainder after 0%: " + remainder00.toString());
 		System.out.println(" ----------------------------- ");
-		
+
 		return result;
+	}
+
+	/**
+	 * FORMULA: (Zwischensumme – 50% Muster Rabatt – Genutzer Schmuck Bonus-
+	 * Genutzer Marketing Bonus) - (Zwischensumme – 50% Muster Rabatt – Genutzer
+	 * Schmuck Bonus- Genutzer Marketing Bonus)/1.19
+	 * 
+	 * @param totalAmount
+	 * @param discount50
+	 * @param jewelryDiscount
+	 * @param marketingDiscount
+	 */
+
+	private void calculateTax(BigDecimal totalAmount, BigDecimal discount50, BigDecimal jewelryDiscount, BigDecimal marketingDiscount) {
+
+		BigDecimal result = BigDecimal.ZERO;
+		BigDecimal partial = BigDecimal.ZERO;
+
+		result = result.add(totalAmount);
+		result = result.subtract(discount50);
+		result = result.subtract(jewelryDiscount);
+		result = result.subtract(marketingDiscount);
+		partial = partial.add(result);
+
+		// TODO line that breaks
+		result = result.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 0, BigDecimal.ROUND_DOWN);
+
+		tax = partial.subtract(result).setScale(0, BigDecimal.ROUND_DOWN);
+
 	}
 
 	public void calculateJewelryDiscounts(List<CalculationModel> totalsList, String jewelryDiscount) {
@@ -234,61 +270,66 @@ public class CartCalculation {
 		result = result.multiply(ipTotal);
 		result = result.divide(BigDecimal.valueOf(100));
 		result = ipTotal.subtract(result);
-		
-		//if less than 0 make the result = 0
-		if(result.compareTo(BigDecimal.ZERO) < 0 ){
+
+		// if less than 0 make the result = 0
+		if (result.compareTo(BigDecimal.ZERO) < 0) {
 			result = BigDecimal.ZERO;
 		}
-		
+
 		System.out.println("IP CALCULATION: " + result.setScale(0, BigDecimal.ROUND_HALF_UP));
-		
+
 		return result.setScale(0, BigDecimal.ROUND_HALF_UP);
 	}
-	
-	
-//	/**
-//	 * TODO Modify this to apply the jewelryBonus correctly
-//	 * @param cartList
-//	 * @param jewelryBonus
-//	 * @return
-//	 */
-//	public BigDecimal calcIp(List<CartProductModel> cartList,BigDecimal jewelryBonus){
-//		System.out.println("size " + cartList.size());
-//		BigDecimal result = BigDecimal.valueOf(0);
-//		BigDecimal totalPrice = BigDecimal.valueOf(0);
-//		BigDecimal ipProduct = BigDecimal.valueOf(0);
-//		
-//		@SuppressWarnings("unused")
-//		BigDecimal listProductsPrice = CartCalculation.calculateTableProducts(cartList).getAskingPrice();
-//		
-//		for( CartProductModel item : cartList) {	
-//			
-//			if(BigDecimal.valueOf(Double.parseDouble(item.getPriceIP())).compareTo(BigDecimal.ZERO) > 0){
-//			
-//			BigDecimal productResult = BigDecimal.valueOf(0);
-//			
-//			totalPrice = BigDecimal.valueOf(Double.parseDouble(item.getProductsPrice()));
-//			ipProduct = BigDecimal.valueOf(Double.parseDouble(item.getPriceIP()));
-//			System.out.println(item.getProductsPrice());
-//			System.out.println(item.getPriceIP());
-//			productResult = productResult.add(jewelryBonus);
-//			productResult = productResult.multiply(BigDecimal.valueOf(100));
-//			productResult = productResult.divide(totalPrice,RoundingMode.HALF_UP);
-//			productResult = productResult.multiply(ipProduct);
-//			productResult = productResult.divide(BigDecimal.valueOf(100));
-//			System.out.println("=> " + productResult);
-//			productResult = ipProduct.subtract(productResult);			
-//			if (productResult.compareTo(BigDecimal.ZERO) < 0)
-//				productResult = BigDecimal.valueOf(0);
-//			System.out.println("IP CALCULATION: " + productResult.setScale(0, BigDecimal.ROUND_HALF_UP));
-//			result = result.add(productResult.setScale(0, BigDecimal.ROUND_HALF_UP));
-//			}
-//		}
-//		
-//		System.out.println("TOTAL IP CALCULATION: " + result.setScale(0, BigDecimal.ROUND_HALF_UP));
-//		return result;
-//		
-//	}
+
+	// /**
+	// * TODO Modify this to apply the jewelryBonus correctly
+	// * @param cartList
+	// * @param jewelryBonus
+	// * @return
+	// */
+	// public BigDecimal calcIp(List<CartProductModel> cartList,BigDecimal
+	// jewelryBonus){
+	// System.out.println("size " + cartList.size());
+	// BigDecimal result = BigDecimal.valueOf(0);
+	// BigDecimal totalPrice = BigDecimal.valueOf(0);
+	// BigDecimal ipProduct = BigDecimal.valueOf(0);
+	//
+	// @SuppressWarnings("unused")
+	// BigDecimal listProductsPrice =
+	// CartCalculation.calculateTableProducts(cartList).getAskingPrice();
+	//
+	// for( CartProductModel item : cartList) {
+	//
+	// if(BigDecimal.valueOf(Double.parseDouble(item.getPriceIP())).compareTo(BigDecimal.ZERO)
+	// > 0){
+	//
+	// BigDecimal productResult = BigDecimal.valueOf(0);
+	//
+	// totalPrice =
+	// BigDecimal.valueOf(Double.parseDouble(item.getProductsPrice()));
+	// ipProduct = BigDecimal.valueOf(Double.parseDouble(item.getPriceIP()));
+	// System.out.println(item.getProductsPrice());
+	// System.out.println(item.getPriceIP());
+	// productResult = productResult.add(jewelryBonus);
+	// productResult = productResult.multiply(BigDecimal.valueOf(100));
+	// productResult = productResult.divide(totalPrice,RoundingMode.HALF_UP);
+	// productResult = productResult.multiply(ipProduct);
+	// productResult = productResult.divide(BigDecimal.valueOf(100));
+	// System.out.println("=> " + productResult);
+	// productResult = ipProduct.subtract(productResult);
+	// if (productResult.compareTo(BigDecimal.ZERO) < 0)
+	// productResult = BigDecimal.valueOf(0);
+	// System.out.println("IP CALCULATION: " + productResult.setScale(0,
+	// BigDecimal.ROUND_HALF_UP));
+	// result = result.add(productResult.setScale(0, BigDecimal.ROUND_HALF_UP));
+	// }
+	// }
+	//
+	// System.out.println("TOTAL IP CALCULATION: " + result.setScale(0,
+	// BigDecimal.ROUND_HALF_UP));
+	// return result;
+	//
+	// }
 
 	// modify jewelry discount formatting
 	// From 10 To 1000
