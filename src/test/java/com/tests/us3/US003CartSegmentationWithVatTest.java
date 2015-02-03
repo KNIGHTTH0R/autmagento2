@@ -78,11 +78,16 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 
 	
-	private CreditCardModel creditCardData = new CreditCardModel();
+	
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
+	private static CartTotalsModel discountTotals = new CartTotalsModel();
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	
 	private static CalcDetailsModel discountCalculationModel;
 	private static ShippingModel shippingModel = new ShippingModel();
+	
+
+	private CreditCardModel creditCardData = new CreditCardModel();
 	
 	//extracted from URL in first test - validated in second test
 	private static OrderModel orderModel = new OrderModel();
@@ -143,6 +148,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
+//		
 //		searchSteps.searchAndSelectProduct("K010SV", "CLARA SET");
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
@@ -151,22 +157,22 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
 		
-//		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
-//		productData = productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
-//		
-//		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
-//		productData = productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
-//		
-//		
-//		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
-//		productData = productSteps.setProductAddToCart("1", "16");
-//		productsList.add(productData);
-//		
-//		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-//		productData = productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
+		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		
+		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
+		
+		
+		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
+		productData = productSteps.setProductAddToCart("1", "16");
+		productsList.add(productData);
+		
+		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
+		productData = productSteps.setProductAddToCart("1", "0");
+		productsList.add(productData);
 		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -180,8 +186,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
 		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
 		totalsList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
-		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
-		PrintUtils.printCalculationModel(totalsCalculated);		
+		
+		
+		CalculationModel totalsCartCalculated = CartCalculation.calculateTotalSum(totalsList);
+		PrintUtils.printCalculationModel(totalsCartCalculated);		
 		
 		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		cartTotals = cartSteps.grabTotals();
@@ -196,7 +204,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		shippingModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
 		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(productsList);
 
-		CartTotalsModel discountTotals = new CartTotalsModel();
+		
 		discountTotals = cartSteps.grabTotals();
 		
 		cartSteps.clickGoToShipping();
@@ -206,7 +214,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		//TODO fix this -> null 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		System.out.println(" --- shippingProducts ---");
 		PrintUtils.printList(shippingProducts);
+		System.out.println("X --- shippingProducts ---");
+
 
 		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
 		
@@ -218,44 +229,45 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		PrintUtils.printShippingTotals(shippingTotals);
 //		System.out.println(" --- shippingTotals ---");
 		
-//		shippingSteps.clickGoToPaymentMethod();
-//		
-//		//Grab data from URL //TODO validate URL price 
-//		String url = shippingSteps.grabUrl();
-//		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-//		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-//		
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);		
-//
-//		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-//		
-//		//Totals validation
-//		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
-//		cartWorkflows.checkCalculationTotals("CART TOTALS");
-//		
-//		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
-//		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
-//		
-//		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingModel);
-//		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-//		
-//		
-//		//Products List validation
-//		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
-//		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
-//
-//		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
-//		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
-//
-//		cartWorkflows.setValidateProductsModels(shippingProductsList, confirmationProducts);
-//		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
-//		
-//		
-////		Steps to finalize order
-////		confirmationSteps.agreeAndCheckout();
-////		checkoutValidationSteps.verifySuccessMessage();
-//		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingModel.getTotalAmount().replace(".", ""));
+		shippingSteps.clickGoToPaymentMethod();
+		
+		//Grab data from URL //TODO validate URL price 
+		String url = shippingSteps.grabUrl();
+		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+		
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);		
+
+		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		
+		//Totals validation
+		cartWorkflows.setCheckCalculationTotalsModels(totalsCartCalculated, cartTotals);
+		cartWorkflows.checkCalculationTotals("CART TOTALS");
+		
+		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
+		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
+		
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingModel);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		
+		//Products List validation
+		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+
+		//Need to validate to discounted item prices
+		cartWorkflows.setValidateProductsModels(shippingProductsList, shippingProducts);
+		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows.setValidateProductsModels(shippingProductsList, confirmationProducts);
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+		
+//		Steps to finalize order
+//		confirmationSteps.agreeAndCheckout();
+//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingModel.getTotalAmount().replace(".", ""));
 
 	}
 
@@ -279,6 +291,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
+		MongoWriter.saveTotalsModel(discountTotals, getClass().getSimpleName());
 		
 		//Discount calculations - jewelry and marketing
 		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());

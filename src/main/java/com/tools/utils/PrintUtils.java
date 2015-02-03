@@ -179,4 +179,15 @@ public class PrintUtils {
 		System.out.println("ShippingPrice " + shippingTotals.getShippingPrice());
 		System.out.println("TotalAmount " + shippingTotals.getTotalAmount());
 	}
+
+	public static void printProductBasicModel(ProductBasicModel productNow) {
+
+
+		System.out.println("PBM -----------------------------");
+		System.out.println("Name : " + productNow.getName());
+		System.out.println("Price : " + productNow.getPrice());
+		System.out.println("Qty : " + productNow.getQuantity());
+		System.out.println("Type: " + productNow.getType());
+		
+	}
 }
