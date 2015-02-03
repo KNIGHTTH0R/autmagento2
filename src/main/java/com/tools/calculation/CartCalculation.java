@@ -174,7 +174,7 @@ public class CartCalculation {
 		
 		//TODO TOTAL_AMOUNT_CALCULATION ROUNDING
 //		totalAmount = totalAmount.setScale(2, RoundingMode.DOWN);
-		totalAmount = totalAmount.setScale(2, RoundingMode.HALF_UP);
+		totalAmount = totalAmount.setScale(2, RoundingMode.HALF_DOWN);
 
 		result.addSegment(Constants.DISCOUNT_50, remainder50.toString());
 		result.addSegment(Constants.DISCOUNT_25, remainder25.toString());
