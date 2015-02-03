@@ -8,6 +8,8 @@ import com.tools.Constants;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 
@@ -166,8 +168,8 @@ public class CartCalculation {
 
 		// If there is marketing bonus apply it to the Core formula
 		if (applyMarketingDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(marketingMaterial))).compareTo(BigDecimal.valueOf(0)) > 0) {
-			result.addCalculation("P5-SubstractMM-divide100", totalAmount.toString());
 			totalAmount = totalAmount.subtract(BigDecimal.valueOf(Double.parseDouble(marketingMaterial)).divide(BigDecimal.valueOf(100)));
+			result.addCalculation("P5-SubstractMM-divide100", totalAmount.toString());
 		}
 
 		result.addSegment(Constants.DISCOUNT_50, remainder50.toString());
@@ -186,11 +188,11 @@ public class CartCalculation {
 		System.out.println(" ---- Calculation Results ---- ");
 		System.out.println("SUBTOTAL: " + BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString())));
 		System.out.println("TOTAL AMOUNT: " + result.getTotalAmount());
-		System.out.println("IP: " + result.getIpPoints());
-		System.out.println("Tax: " + tax);
+		System.out.println("				IP : " + result.getIpPoints());
+		System.out.println("				Tax: " + tax);
 		System.out.println("Remainder after 25%: " + remainder25.toString());
 		System.out.println("Remainder after 50%: " + remainder50.toString());
-		System.out.println("Remainder after 0%: " + remainder00.toString());
+		System.out.println("Remainder after 0% : " + remainder00.toString());
 		System.out.println(" ----------------------------- ");
 
 		return result;
@@ -218,8 +220,8 @@ public class CartCalculation {
 		partial = partial.add(result);
 
 		// TODO line that breaks
-		result = result.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 0, BigDecimal.ROUND_DOWN);
-		tax = partial.subtract(result).setScale(0, BigDecimal.ROUND_DOWN);
+		result = result.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 2, BigDecimal.ROUND_DOWN);
+		tax = partial.subtract(result).setScale(2, BigDecimal.ROUND_DOWN);
 	}
 
 	public void calculateJewelryDiscounts(List<CalculationModel> totalsList, String jewelryDiscount) {
@@ -410,5 +412,45 @@ public class CartCalculation {
 		}
 
 		return result;
+	}
+	
+	/**
+	 * Calculate the value of the value without VAT.
+	 * Eg. result = value.divide(1.19) 
+	 * result - ROUND_DOWN
+	 * result - 2 decimal precision
+	 * @param value
+	 * @return
+	 */
+	public BigDecimal apply119VAT(BigDecimal value){
+		BigDecimal result = BigDecimal.ZERO;
+		if(value.compareTo(BigDecimal.ZERO) > 0){
+			result = value.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 2, BigDecimal.ROUND_DOWN);
+		}else{
+			System.out.println("Error: Cannot apply 119 VAT value is not greater than 0. " + value.toString());
+		}
+		
+		return result;
+	}
+	
+
+	/**
+	 * This method will recalculate the totals without the 19% tax.
+	 * Will return a {@link ShippingModel}
+	 * @param discountCalculationModel
+	 * @return ShippingModel
+	 */
+	public ShippingModel remove119VAT(CalcDetailsModel discountCalculationModel, String shippingValue) {
+		ShippingModel result = new ShippingModel();
+		result.setSubTotal(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal()))).toString());
+		result.setDiscountPrice(discountCalculationModel.calculateSegmentsTotal());
+		result.setShippingPrice(shippingValue);
+		BigDecimal totalAmountCalculation = BigDecimal.ZERO;
+		totalAmountCalculation = totalAmountCalculation.add(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount()))));
+		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		
+		result.setTotalAmount(totalAmountCalculation.toString());
+		
+		return null;
 	}
 }

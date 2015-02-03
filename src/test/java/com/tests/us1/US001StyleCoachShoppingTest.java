@@ -38,6 +38,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -74,10 +75,12 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
-	private static OrderModel orderNumber = new OrderModel();
+	private static OrderModel orderModel = new OrderModel();
 
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
+	
+	
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private List<CalculationModel> calcList = new ArrayList<CalculationModel>();
 	public static CartTotalsModel cartTotals;
@@ -156,8 +159,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		cartSteps.clickGoToShipping();
 
 		// TODO - validate shipping without IP points
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printCartTotals(shippingTotals);
+		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
+		PrintUtils.printShippingTotals(shippingTotals);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
@@ -165,12 +168,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		shippingSteps.clickGoToPaymentMethod();
 		
 		String url = shippingSteps.grabUrl();
-		String urlPrice = FormatterUtils.extractPriceFromURL(url);
-		String urlOrder = FormatterUtils.extractOrderIDFromURL(url);
-		
-		System.out.println("URL ----> " + url);
-		System.out.println("Price URL ----> " + urlPrice);
-		System.out.println("Order URL ----> " + urlOrder);
+		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
 
@@ -202,19 +201,22 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Test
 	public void us001UserProfileOrderId() {
 
+		
 		// After validation - grab order number
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
 		String orderId = orderHistory.get(0).getOrderId();
-		orderNumber.setOrderId(orderId);
-		profileSteps.verifyOrderId(orderId);
+		String orderPrice = orderHistory.get(0).getTotalPrice();
+		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
+		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
+		orderModel = orderHistory.get(0);
 	}
 
 	@After
 	public void saveData() {
 		
-		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 		for (ProductBasicModel product : productsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());

@@ -11,6 +11,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.ShippingModel;
 
 public class PrintUtils {
 
@@ -169,5 +170,13 @@ public class PrintUtils {
 		System.out.println("prices " + productNow.getProductsPrice());
 		System.out.println("ip " + productNow.getPriceIP());
 		System.out.println("final " + productNow.getFinalPrice());
+	}
+
+	public static void printShippingTotals(ShippingModel shippingTotals) {
+		System.out.println("------------------------");		
+		System.out.println("SubTotal " + shippingTotals.getSubTotal());
+		System.out.println("DiscountPrice " + shippingTotals.getDiscountPrice());
+		System.out.println("ShippingPrice " + shippingTotals.getShippingPrice());
+		System.out.println("TotalAmount " + shippingTotals.getTotalAmount());
 	}
 }

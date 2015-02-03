@@ -12,10 +12,12 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -31,10 +33,13 @@ import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.ShippingModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
@@ -75,6 +80,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private static CalcDetailsModel discountCalculationModel;
+	
+	//extracted from URL in first test - validated in second test
+	private static OrderModel orderModel;
+	
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private String username, password;
 	private static String jewelryDisount = "100";
@@ -112,6 +122,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		creditCardData.setYearExpiration("2016");
 		creditCardData.setCvcNumber("737");
 	
+		//Clean DB
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -157,33 +169,21 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 		PrintUtils.printCalculationModel(totalsCalculated);		
 		
+		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		cartTotals = cartSteps.grabTotals();
-//		System.out.println("NO BONUSES BEGIN ");
-//		PrintUtils.printCartTotals(cartTotals);
-//		System.out.println("NO BONUSES END");
 
-
-
+		//APPLY DISCOUNTS
 		cartSteps.typeJewerlyBonus(jewelryDisount);
-
 		cartSteps.updateJewerlyBonus();
-
 		cartSteps.typeMarketingBonus(marketingDisount);
-
 		cartSteps.updateMarketingBonus();		
 
+		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
+		ShippingModel shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, "5.04");
 		
-		CalcDetailsModel discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
-
-
+		
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
-
-		
-
-//		System.out.println("BONUSES BEGIN ");
-//		PrintUtils.printCartTotals(discountTotals);
-//		System.out.println("BONUSES END");
 		
 		cartSteps.clickGoToShipping();
 		
@@ -193,54 +193,80 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
 
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printCartTotals(shippingTotals);
+		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
+		PrintUtils.printShippingTotals(shippingTotals);
 
 		
 		shippingSteps.clickGoToPaymentMethod();
 		
+		//Grab data from URL //TODO validate URL price 
 		String url = shippingSteps.grabUrl();
-		String urlPrice = FormatterUtils.extractPriceFromURL(url);
-		String urlOrder = FormatterUtils.extractOrderIDFromURL(url);
+		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 		
-//		System.out.println("URL ----> " + url);
-		System.out.println("Price URL ----> " + urlPrice);
-		System.out.println("Order URL ----> " + urlOrder);
-		//TODO calculate Totals with VAT 0%
-//		totals0Vat = calculationSteps.calculateShippingTotalsWith0Vat(totalsCalculated);
-//		PrintUtils.printCalculationModel(totalsCalculated);
-
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);		
-		
-		//TODO validate URL price 
-//		validationSteps.checkTotalAmountFromUrl(url, String.valueOf(totals0Vat.getFinalPrice()));
-		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
-//		confirmationSteps.agreeAndCheckout();
-//
-//		checkoutValidationSteps.verifySuccessMessage();
+		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 		
+		//Totals validation
 		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
 		
-		checkoutValidationSteps.verifyTotalsDiscount(discountTotals, discountCalculationModel);
-//		checkoutValidationSteps.verifyShippingDiscount(shippingTotals, discountCalculationModel);
+		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
+		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
 		
+		
+		
+		
+		//TODO Create a shipping totals RIGHT - Investigating As BUG
 
+		
+		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), discountCalculationModel.getTotalAmount().replace(".", ""));
+
+		//Products List validation
+		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
+		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+		
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		//Steps to finalize order
+//		confirmationSteps.agreeAndCheckout();
+//		checkoutValidationSteps.verifySuccessMessage();
 	}
 
 
-//	@Test
-//	public void us003UserProfileOrderId() {
-//
-//		// After validation - grab order number
-//		headerSteps.redirectToProfileHistory();
-//		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-//
-//		String orderId = orderHistory.get(0).getOrderId();
-//		orderNumber.setOrderId(orderId);
-//		profileSteps.verifyOrderId(orderId);
-//	}
+	@Test
+	public void us003UserProfileOrderId() {
+
+		// After validation - grab order number
+		headerSteps.redirectToProfileHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+
+		String orderId = orderHistory.get(0).getOrderId();
+		String orderPrice = orderHistory.get(0).getTotalPrice();
+		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
+		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
+		orderModel = orderHistory.get(0);
+	}
+	
+	
+	@After
+	public void saveData() {
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
+		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
+		for (ProductBasicModel product : productsList) {
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
+		}
+	}
 
 }

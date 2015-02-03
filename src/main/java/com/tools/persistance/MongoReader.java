@@ -8,6 +8,7 @@ import java.util.Map;
 import com.connectors.mongo.MongoConnector;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.tools.data.CalcDetailsModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.OrderModel;
@@ -29,19 +30,19 @@ public class MongoReader extends MongoConnector {
 
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.ORDER_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				OrderModel result = new OrderModel();
 				dbObject = cursor.next();
-				
+
 				result.setOrderId(MongoUtils.checkField(dbObject, MongoTableKeys.ORDER_ID));
 				result.setDate(MongoUtils.checkField(dbObject, MongoTableKeys.DATE));
 				result.setInvoiceContact(MongoUtils.checkField(dbObject, MongoTableKeys.INVOICE_CONTACT));
 				result.setDeliveryContact(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_CONTACT));
 				result.setTotalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_PRICE));
 				result.setStatus(MongoUtils.checkField(dbObject, MongoTableKeys.STATUS));
-				
+
 				itemList.add(result);
 			}
 		} finally {
@@ -152,23 +153,24 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+
 	public static List<ProductBasicModel> grabProductBasicModel(String testName) {
 		DBObject dbObject = null;
 		List<ProductBasicModel> itemList = new ArrayList<ProductBasicModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.PRODUCT_BASIC_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				ProductBasicModel result = new ProductBasicModel();
 				dbObject = cursor.next();
-				
+
 				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.NAME));
 				result.setType(MongoUtils.checkField(dbObject, MongoTableKeys.TYPE));
 				result.setPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRICE));
-				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.QUANTITY));			
-				
+				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.QUANTITY));
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -178,30 +180,29 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
-	
-	@SuppressWarnings("unchecked")
+
+	// @SuppressWarnings("unchecked")
 	public static List<CartTotalsModel> grabTotalsModels(String testName) {
 		DBObject dbObject = null;
 		List<CartTotalsModel> itemList = new ArrayList<CartTotalsModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CART_TOTALS_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				CartTotalsModel result = new CartTotalsModel();
 				dbObject = cursor.next();
-				
+
 				result.setSubtotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setJewelryBonus(MongoUtils.checkField(dbObject, MongoTableKeys.JEWERLY_BONUS));
 				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
 				result.setShipping(MongoUtils.checkField(dbObject, MongoTableKeys.SHIPPING));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
 				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
-				
-				result.setDiscountMap((Map<String, String>) dbObject.get(MongoTableKeys.DISCOUNT_LIST));
-				
-				
+
+				result.setDiscountMap(((Map<String, String>) dbObject.get(MongoTableKeys.DISCOUNT_LIST)));
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -211,9 +212,39 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
-	
-	
+
+	@SuppressWarnings("unchecked")
+	public static List<CalcDetailsModel> grabCalcDetailsModels(String testName) {
+		DBObject dbObject = null;
+		List<CalcDetailsModel> itemList = new ArrayList<CalcDetailsModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CART_TOTALS_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				CalcDetailsModel result = new CalcDetailsModel();
+				dbObject = cursor.next();
+
+				result.setMarketingBonus(MongoUtils.checkField(dbObject, MongoTableKeys.MARKETING_BONUS));
+				result.setJewelryBonus(MongoUtils.checkField(dbObject, MongoTableKeys.JEWERLY_BONUS));
+				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
+				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
+				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
+
+				result.addCalculation(((Map<String, String>) dbObject.get(MongoTableKeys.DISCOUNT_LIST)));
+				result.addSegments(((Map<String, String>) dbObject.get(MongoTableKeys.SEGMENTS)));
+
+				// itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+
+	}
 }
-
-
 
