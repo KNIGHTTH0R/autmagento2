@@ -425,7 +425,7 @@ public class CartCalculation {
 			now.setName(productBasicModel.getName());
 			now.setQuantity(productBasicModel.getQuantity());
 			now.setType(productBasicModel.getType());
-			now.setPrice(apply119VAT(BigDecimal.valueOf(Double.parseDouble(productBasicModel.getPrice())), 1, BigDecimal.ROUND_HALF_EVEN).toString());
+			now.setPrice(apply119VAT(BigDecimal.valueOf(Double.parseDouble(productBasicModel.getPrice())), 1, BigDecimal.ROUND_HALF_DOWN).toString());
 			
 			result.add(now);
 		}

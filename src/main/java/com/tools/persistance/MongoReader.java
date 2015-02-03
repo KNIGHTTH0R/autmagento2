@@ -16,6 +16,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.ShippingModel;
 
 public class MongoReader extends MongoConnector {
 
@@ -220,7 +221,7 @@ public class MongoReader extends MongoConnector {
 		List<CalcDetailsModel> itemList = new ArrayList<CalcDetailsModel>();
 
 		workingDB = mongoClient.getDB(testName);
-		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CART_TOTALS_MODEL).find();
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CALC_DETAILS_MODEL).find();
 
 		try {
 			while (cursor.hasNext()) {
@@ -237,7 +238,7 @@ public class MongoReader extends MongoConnector {
 				result.addCalculation(((Map<String, String>) dbObject.get(MongoTableKeys.DISCOUNT_LIST)));
 				result.addSegments(((Map<String, String>) dbObject.get(MongoTableKeys.SEGMENTS)));
 
-				// itemList.add(result);
+				itemList.add(result);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -246,6 +247,33 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 
+	}
+
+	public static List<ShippingModel> grabShippingModel(String testName) {
+		DBObject dbObject = null;
+		List<ShippingModel> itemList = new ArrayList<ShippingModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.SHIPPING_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				ShippingModel result = new ShippingModel();
+				dbObject = cursor.next();
+
+				result.setDiscountPrice(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT));
+				result.setShippingPrice(MongoUtils.checkField(dbObject, MongoTableKeys.SHIPPING));
+				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
+				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
 	}
 }
 

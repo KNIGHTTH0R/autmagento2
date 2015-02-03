@@ -82,6 +82,10 @@ public class MongoTableKeys {
 	public static final String TOTAL_REFUNDED = "TotalRefunded";
 	public static final String TOTAL_PAYABLE = "TotalPayable";
 	public static final String FORTY_DISCOUNTS = "FortyDiscounts";
+	
+	//ShippingModel
+	public static final String SHIPPING_MODEL = "ShippingModel";
+	public static final String DISCOUNT = "discount";
 
 
 }

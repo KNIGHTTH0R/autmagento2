@@ -17,6 +17,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.ShippingModel;
 
 public class MongoWriter extends MongoConnector {
 
@@ -175,20 +176,19 @@ public class MongoWriter extends MongoConnector {
 		table.insert(document);
 		
 	}
-	
-	
-	/**	private String subtotal;
-	private String shipping;
-	private Map<String, String> discountList = new HashMap<String, String>();
-	private String tax;
-	private String totalAmount;
-	private String totalPaid;
-	private String totalRefunded;
-	private String totalPayable;
-	private String totalIP;
-	private String totalFortyDiscounts;
-	private String totalBonusJeverly;
-	private String totalMarketingBonus;
-	**/
 
+	public static void saveShippingModel(ShippingModel shippingModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.SHIPPING_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		
+		document.put(MongoTableKeys.DISCOUNT, shippingModel.getDiscountPrice());
+		document.put(MongoTableKeys.SHIPPING, shippingModel.getShippingPrice());
+		document.put(MongoTableKeys.SUBTOTAL, shippingModel.getSubTotal());
+		document.put(MongoTableKeys.TOTAL_AMOUNT, shippingModel.getTotalAmount());
+		
+		table.insert(document);
+	}
+	
 }

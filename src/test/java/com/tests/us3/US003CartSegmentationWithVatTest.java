@@ -81,6 +81,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static CalcDetailsModel discountCalculationModel;
+	private static ShippingModel shippingModel = new ShippingModel();
 	
 	//extracted from URL in first test - validated in second test
 	private static OrderModel orderModel = new OrderModel();
@@ -141,13 +142,18 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		searchSteps.searchAndSelectProduct("Prod1_ioana", "PRODUS SIMPLU IOANA");
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
-		searchSteps.searchAndSelectProduct("K010SV", "CLARA SET");
+//		searchSteps.searchAndSelectProduct("K010SV", "CLARA SET");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+		
+		searchSteps.searchAndSelectProduct("N084SV", "RHEA NECKLACE");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("K010SV", "CLARA SET");
+		searchSteps.searchAndSelectProduct("N084SV", "RHEA NECKLACE");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
+		
 		
 		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
 		productData = productSteps.setProductAddToCart("1", "16");
@@ -182,10 +188,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.updateMarketingBonus();		
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
-		ShippingModel shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
+		shippingModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
 		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(productsList);
-		
-
 
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
@@ -227,7 +231,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
 		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
 		
-		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingModel);
 		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 		
 		
@@ -243,15 +247,14 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		
 //		Steps to finalize order
-		confirmationSteps.agreeAndCheckout();
-		checkoutValidationSteps.verifySuccessMessage();
-		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
+//		confirmationSteps.agreeAndCheckout();
+//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingModel.getTotalAmount().replace(".", ""));
 
 	}
 
 
 	@Test
-//	@Pending
 	public void us003UserProfileOrderId() {
 
 		// After validation - grab order number
@@ -269,8 +272,17 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
+		
+		//Discount calculations - jewelry and marketing
 		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());
+		
+		//Order status and details
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
+		
+		//values with discount and no TAX VAT
+		MongoWriter.saveShippingModel(shippingModel, getClass().getSimpleName());
+		
+		//Products list - with initial values
 		for (ProductBasicModel product : productsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
 		}
