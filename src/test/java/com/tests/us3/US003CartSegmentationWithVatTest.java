@@ -197,26 +197,24 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);		
-		
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
-
-//		confirmationSteps.agreeAndCheckout();
-//
-//		checkoutValidationSteps.verifySuccessMessage();
 		
+		//Totals validation
 		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
 		
 		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
 		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
 		
+		cartWorkflows.setVerifyTotalsDiscount(shippingTotals, discountCalculationModel);
+		cartWorkflows.verifyTotalsDiscount("SHIPPING TOTALS");
+		
 
 		checkoutValidationSteps.checkTotalAmountFromUrl(url, discountCalculationModel.getTotalAmount());
-		
-		
-		
+
+		//Products List validation
 		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
 
@@ -225,6 +223,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+		
+		//Steps to finalize order
+//		confirmationSteps.agreeAndCheckout();
+//		checkoutValidationSteps.verifySuccessMessage();
 	}
 
 
