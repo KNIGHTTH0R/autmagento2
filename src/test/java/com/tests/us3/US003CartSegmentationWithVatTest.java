@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -84,7 +83,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	
 	private static CalcDetailsModel discountCalculationModel;
-	private static ShippingModel shippingModel = new ShippingModel();
+	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	
 
 	private CreditCardModel creditCardData = new CreditCardModel();
@@ -137,6 +136,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	}
 
 	@Test
+//	@Pending
 	public void uS003CartSegmentationWithVatTest() {
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
@@ -156,12 +156,16 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		searchSteps.searchAndSelectProduct("N084SV", "RHEA NECKLACE");
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
+		searchSteps.searchAndSelectProduct("E106SV", "JOANNA EARRINGS");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
+		searchSteps.searchAndSelectProduct("E106SV", "JOANNA EARRINGS");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
@@ -201,7 +205,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.updateMarketingBonus();		
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
-		shippingModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
+		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
 		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(productsList);
 
 		
@@ -242,13 +246,13 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 		
 		//Totals validation
-		cartWorkflows.setCheckCalculationTotalsModels(totalsCartCalculated, cartTotals);
+		cartWorkflows.setCheckCalculationTotalsModels(cartTotals, totalsCartCalculated);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
 		
 		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
 		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
 		
-		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingModel);
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 		
 		
@@ -265,17 +269,17 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		
 //		Steps to finalize order
-//		confirmationSteps.agreeAndCheckout();
-//		checkoutValidationSteps.verifySuccessMessage();
-		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingModel.getTotalAmount().replace(".", ""));
+		confirmationSteps.agreeAndCheckout();
+		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
 
 	}
 
 
 	@Test
-	@Pending
+//	@Pending
 	public void us003UserProfileOrderId() {
-
+//		List<OrderModel> orderHistory = MongoReader.grabOrderModels(getClass().getSimpleName());
 		// After validation - grab order number
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
@@ -300,7 +304,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 		
 		//values with discount and no TAX VAT
-		MongoWriter.saveShippingModel(shippingModel, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
 		
 		//Products list - with initial values
 		for (ProductBasicModel product : productsList) {

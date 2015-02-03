@@ -275,5 +275,35 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+
+	public static List<OrderModel> grabOrderModels(String testName) {
+		DBObject dbObject = null;
+		List<OrderModel> itemList = new ArrayList<OrderModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.ORDER_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				OrderModel result = new OrderModel();
+				dbObject = cursor.next();
+
+				result.setOrderId(MongoUtils.checkField(dbObject, MongoTableKeys.ORDER_ID));
+				result.setStatus(MongoUtils.checkField(dbObject, MongoTableKeys.STATUS));
+				result.setTotalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_PRICE));
+				result.setDeliveryContact(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_CONTACT));
+				result.setInvoiceContact(MongoUtils.checkField(dbObject, MongoTableKeys.INVOICE_CONTACT));
+				result.setDate(MongoUtils.checkField(dbObject, MongoTableKeys.DATE));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+		
+	}
 }
 

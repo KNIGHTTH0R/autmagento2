@@ -90,7 +90,7 @@ public class CartWorkflows {
 	private CalculationModel calculationModel = new CalculationModel();
 	private CartTotalsModel cartTotalModel = new CartTotalsModel();
 	
-	public void setCheckCalculationTotalsModels(CalculationModel calculationModel, CartTotalsModel cartTotalModel){
+	public void setCheckCalculationTotalsModels(CartTotalsModel cartTotalModel, CalculationModel calculationModel){
 		this.calculationModel = calculationModel;
 		this.cartTotalModel = cartTotalModel;
 	}

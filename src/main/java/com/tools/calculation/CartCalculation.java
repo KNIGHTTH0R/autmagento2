@@ -172,7 +172,9 @@ public class CartCalculation {
 			result.addCalculation("P5-SubstractMM-divide100", totalAmount.toString());
 		}
 		
-		totalAmount = totalAmount.setScale(2, RoundingMode.DOWN);
+		//TODO TOTAL_AMOUNT_CALCULATION ROUNDING
+//		totalAmount = totalAmount.setScale(2, RoundingMode.DOWN);
+		totalAmount = totalAmount.setScale(2, RoundingMode.HALF_UP);
 
 		result.addSegment(Constants.DISCOUNT_50, remainder50.toString());
 		result.addSegment(Constants.DISCOUNT_25, remainder25.toString());

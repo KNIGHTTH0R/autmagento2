@@ -190,7 +190,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
-		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
+		cartWorkflows.setCheckCalculationTotalsModels(cartTotals, totalsCalculated);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
 
 		// Shipping has no IP
