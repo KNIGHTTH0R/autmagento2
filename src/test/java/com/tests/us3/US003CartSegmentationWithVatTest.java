@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -150,22 +151,22 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
-		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
-		
-		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
-		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
-		
-		
-		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
-		productData = productSteps.setProductAddToCart("1", "16");
-		productsList.add(productData);
-		
-		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
+//		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+//		
+//		
+//		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
+//		productData = productSteps.setProductAddToCart("1", "16");
+//		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
 		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -217,49 +218,50 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		PrintUtils.printShippingTotals(shippingTotals);
 //		System.out.println(" --- shippingTotals ---");
 		
-		shippingSteps.clickGoToPaymentMethod();
-		
-		//Grab data from URL //TODO validate URL price 
-		String url = shippingSteps.grabUrl();
-		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-		
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);		
-
-		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-		
-		//Totals validation
-		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
-		cartWorkflows.checkCalculationTotals("CART TOTALS");
-		
-		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
-		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
-		
-		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingModel);
-		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-		
-		
-		//Products List validation
-		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
-		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
-
-		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
-		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
-
-		cartWorkflows.setValidateProductsModels(shippingProductsList, confirmationProducts);
-		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
-		
-		
-//		Steps to finalize order
-//		confirmationSteps.agreeAndCheckout();
-//		checkoutValidationSteps.verifySuccessMessage();
-		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingModel.getTotalAmount().replace(".", ""));
+//		shippingSteps.clickGoToPaymentMethod();
+//		
+//		//Grab data from URL //TODO validate URL price 
+//		String url = shippingSteps.grabUrl();
+//		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+//		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+//		
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);		
+//
+//		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+//		
+//		//Totals validation
+//		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
+//		cartWorkflows.checkCalculationTotals("CART TOTALS");
+//		
+//		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
+//		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
+//		
+//		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingModel);
+//		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+//		
+//		
+//		//Products List validation
+//		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
+//		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+//
+//		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
+//		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+//
+//		cartWorkflows.setValidateProductsModels(shippingProductsList, confirmationProducts);
+//		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+//		
+//		
+////		Steps to finalize order
+////		confirmationSteps.agreeAndCheckout();
+////		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingModel.getTotalAmount().replace(".", ""));
 
 	}
 
 
 	@Test
+	@Pending
 	public void us003UserProfileOrderId() {
 
 		// After validation - grab order number

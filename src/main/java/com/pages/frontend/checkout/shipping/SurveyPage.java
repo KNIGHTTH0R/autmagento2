@@ -13,6 +13,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
+import com.tools.utils.PrintUtils;
 
 public class SurveyPage extends AbstractPage {
 
@@ -67,7 +68,11 @@ public class SurveyPage extends AbstractPage {
 			productNow.setPriceIP("");
 
 			resultList.add(productNow);
+			
+			PrintUtils.printCartProductModel(productNow);
 		}
+		
+		
 
 		return resultList;
 	}
