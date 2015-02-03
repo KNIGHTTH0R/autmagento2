@@ -164,11 +164,15 @@ public class CartCalculation {
 		totalAmount = totalAmount.subtract(BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)).divide(BigDecimal.valueOf(100)));
 		result.addCalculation("P4-SubstractJD-divide100", totalAmount.toString());
 
+		
+		
 		// If there is marketing bonus apply it to the Core formula
 		if (applyMarketingDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(marketingMaterial))).compareTo(BigDecimal.valueOf(0)) > 0) {
 			totalAmount = totalAmount.subtract(BigDecimal.valueOf(Double.parseDouble(marketingMaterial)).divide(BigDecimal.valueOf(100)));
 			result.addCalculation("P5-SubstractMM-divide100", totalAmount.toString());
 		}
+		
+		totalAmount = totalAmount.setScale(2, RoundingMode.DOWN);
 
 		result.addSegment(Constants.DISCOUNT_50, remainder50.toString());
 		result.addSegment(Constants.DISCOUNT_25, remainder25.toString());
@@ -178,7 +182,7 @@ public class CartCalculation {
 		result.setSubTotal(calculateTotalSum(totalsList).getAskingPrice().toString());
 		result.setIpPoints(String.valueOf(calculateIpDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)))));
 
-		calculateTax(calculateTotalSum(totalsList).getAskingPrice(), remainder50, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)).divide(BigDecimal.valueOf(100)),
+		calculateTax(calculateTotalSum(totalsList).getAskingPrice(),remainder25, remainder50, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)).divide(BigDecimal.valueOf(100)),
 				BigDecimal.valueOf(Double.parseDouble(marketingMaterial)).divide(BigDecimal.valueOf(100)));
 
 		result.setTax(tax.toString());
@@ -200,18 +204,19 @@ public class CartCalculation {
 	 * FORMULA: (Zwischensumme – 50% Muster Rabatt – Genutzer Schmuck Bonus-
 	 * Genutzer Marketing Bonus) - (Zwischensumme – 50% Muster Rabatt – Genutzer
 	 * Schmuck Bonus- Genutzer Marketing Bonus)/1.19
-	 * 
+	 * ADDED QF: - discount25
 	 * @param totalAmount
 	 * @param discount50
 	 * @param jewelryDiscount
 	 * @param marketingDiscount
 	 */
-	private void calculateTax(BigDecimal totalAmount, BigDecimal discount50, BigDecimal jewelryDiscount, BigDecimal marketingDiscount) {
+	private void calculateTax(BigDecimal totalAmount,BigDecimal discount25, BigDecimal discount50, BigDecimal jewelryDiscount, BigDecimal marketingDiscount) {
 
 		BigDecimal result = BigDecimal.ZERO;
 		BigDecimal partial = BigDecimal.ZERO;
 
 		result = result.add(totalAmount);
+		result = result.subtract(discount25);
 		result = result.subtract(discount50);
 		result = result.subtract(jewelryDiscount);
 		result = result.subtract(marketingDiscount);
@@ -397,6 +402,7 @@ public class CartCalculation {
 		
 		//discount calculation
 		BigDecimal discountCalculation = BigDecimal.ZERO;
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_25))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_50))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getMarketingBonus())));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getJewelryBonus())));
@@ -407,7 +413,7 @@ public class CartCalculation {
 		
 		//totals calculation
 		BigDecimal totalAmountCalculation = BigDecimal.ZERO;
-		totalAmountCalculation = totalAmountCalculation.add(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())), 2, BigDecimal.ROUND_HALF_EVEN));
+		totalAmountCalculation = totalAmountCalculation.add(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())), 2, BigDecimal.ROUND_HALF_DOWN));
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		
 		result.setTotalAmount(totalAmountCalculation.toString());

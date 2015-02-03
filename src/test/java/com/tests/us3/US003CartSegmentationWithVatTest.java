@@ -91,7 +91,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	//Test data
 	private static String jewelryDisount = "100";
 	private static String marketingDisount = "150";
-	private static String shippingPrice = "5.04";
+	private static String shippingPrice = "0.0";
 	private static String addressString = "sss sss, tttt, 3, 2345 Wien, Österreich";
 
 
@@ -145,12 +145,16 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		searchSteps.searchAndSelectProduct("K010SV", "CLARA SET");
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("N084SV", "RHEA NECKLACE");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("N084SV", "RHEA NECKLACE");
+		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("N084SV", "RHEA NECKLACE");
+		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
@@ -199,6 +203,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		shippingSteps.selectAddress(addressString);
 		shippingSteps.setSameAsBilling(true);
 
+		//TODO fix this -> null 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
 
