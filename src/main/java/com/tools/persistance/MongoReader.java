@@ -182,6 +182,7 @@ public class MongoReader extends MongoConnector {
 	}
 
 	// @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public static List<CartTotalsModel> grabTotalsModels(String testName) {
 		DBObject dbObject = null;
 		List<CartTotalsModel> itemList = new ArrayList<CartTotalsModel>();

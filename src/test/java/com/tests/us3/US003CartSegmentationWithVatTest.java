@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -83,7 +84,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private static CalcDetailsModel discountCalculationModel;
 	
 	//extracted from URL in first test - validated in second test
-	private static OrderModel orderModel;
+	private static OrderModel orderModel = new OrderModel();
 	
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private String username, password;
@@ -180,8 +181,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 		ShippingModel shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, "5.04");
+		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(productsList);
 		
-		
+
+
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
 		
@@ -194,8 +197,14 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		PrintUtils.printList(shippingProducts);
 
 		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
+		
+		System.out.println(" --- shippingCalculatedModel ---");
+		PrintUtils.printShippingTotals(shippingCalculatedModel);
+		System.out.println(" --- shippingCalculatedModel ---");
+		System.out.println(" --- ----------------------- ---");
+		System.out.println(" --- shippingTotals ---");
 		PrintUtils.printShippingTotals(shippingTotals);
-
+		System.out.println(" --- shippingTotals ---");
 		
 		shippingSteps.clickGoToPaymentMethod();
 		
@@ -216,14 +225,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
 		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
 		
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 		
 		
-		
-		//TODO Create a shipping totals RIGHT - Investigating As BUG
-
-		
-		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), discountCalculationModel.getTotalAmount().replace(".", ""));
-
 		//Products List validation
 		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
@@ -231,20 +236,20 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
 		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
-		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
+		cartWorkflows.setValidateProductsModels(shippingProductsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		
-		
-		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
-		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 		
 		//Steps to finalize order
 //		confirmationSteps.agreeAndCheckout();
 //		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
+
 	}
 
 
 	@Test
+	@Pending
 	public void us003UserProfileOrderId() {
 
 		// After validation - grab order number

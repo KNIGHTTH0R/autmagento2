@@ -85,8 +85,8 @@ public class CartWorkflows {
 	}
 
 	
-	private CartTotalsModel discountTotals;
-	private CalcDetailsModel discountCalculationModel;
+	private CartTotalsModel discountTotals = new CartTotalsModel();
+	private CalcDetailsModel discountCalculationModel = new CalcDetailsModel();
 
 	public void setVerifyTotalsDiscount(CartTotalsModel discountTotals, CalcDetailsModel discountCalculationModel) {
 		this.discountCalculationModel = discountCalculationModel;
@@ -152,20 +152,21 @@ public class CartWorkflows {
 		
 	}
 
-	private ShippingModel shippingGrabbedModel;
-	private ShippingModel shippingCalculatedModel;
+	private ShippingModel shippingGrabbedModel = new ShippingModel();;
+	private ShippingModel shippingCalculatedModel = new ShippingModel();
 	
 	public void setVerifyShippingTotals(ShippingModel shippingTotals, ShippingModel shippingCalculatedModel) {
 		this.shippingCalculatedModel = shippingCalculatedModel;
 		this.shippingGrabbedModel = shippingTotals;
 	}
 
-	@StepGroup
+	@Step
 	public void verifyShippingTotals(String string) {
-		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
 		verifyTotalAmount(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
 		verifyShippingPrice(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
 		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
+		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
+		
 	}
 
 	

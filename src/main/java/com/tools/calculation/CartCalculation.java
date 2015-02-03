@@ -2,13 +2,17 @@ package com.tools.calculation;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.bouncycastle.asn1.cmp.PBMParameter;
 
 import com.tools.Constants;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
@@ -452,5 +456,22 @@ public class CartCalculation {
 		result.setTotalAmount(totalAmountCalculation.toString());
 		
 		return null;
+	}
+
+	public List<ProductBasicModel> remove119VAT(List<ProductBasicModel> productsList) {
+		
+		List<ProductBasicModel> result = new ArrayList<ProductBasicModel>();
+		
+		for (ProductBasicModel productBasicModel : productsList) {
+			ProductBasicModel now = new ProductBasicModel();
+			
+			now.setName(productBasicModel.getName());
+			now.setQuantity(productBasicModel.getQuantity());
+			now.setType(productBasicModel.getType());
+			now.setPrice(apply119VAT(BigDecimal.valueOf(Double.parseDouble(productBasicModel.getPrice()))).setScale(1, RoundingMode.HALF_EVEN).toString());
+			
+			result.add(now);
+		}
+		return result;
 	}
 }

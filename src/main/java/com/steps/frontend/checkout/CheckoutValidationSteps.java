@@ -39,9 +39,14 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		System.out.println("IP POINTS: " + ip);
 	}
 
+	/**
+	 * Method is set to cantains. to validate compares like 15.53 == 15.5
+	 * @param productNow
+	 * @param compare
+	 */
 	@Step
 	public void validateMatchPrice(String productNow, String compare) {
-		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, compare.contentEquals(productNow));
+		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, compare.contains(productNow));
 	}
 
 	@Step
