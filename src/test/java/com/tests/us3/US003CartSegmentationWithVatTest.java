@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -202,13 +201,13 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
 		
-		System.out.println(" --- shippingCalculatedModel ---");
-		PrintUtils.printShippingTotals(shippingCalculatedModel);
-		System.out.println(" --- shippingCalculatedModel ---");
-		System.out.println(" --- ----------------------- ---");
-		System.out.println(" --- shippingTotals ---");
-		PrintUtils.printShippingTotals(shippingTotals);
-		System.out.println(" --- shippingTotals ---");
+//		System.out.println(" --- shippingCalculatedModel ---");
+//		PrintUtils.printShippingTotals(shippingCalculatedModel);
+//		System.out.println(" --- shippingCalculatedModel ---");
+//		System.out.println(" --- ----------------------- ---");
+//		System.out.println(" --- shippingTotals ---");
+//		PrintUtils.printShippingTotals(shippingTotals);
+//		System.out.println(" --- shippingTotals ---");
 		
 		shippingSteps.clickGoToPaymentMethod();
 		
@@ -244,16 +243,16 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		
 		
-		//Steps to finalize order
-//		confirmationSteps.agreeAndCheckout();
-//		checkoutValidationSteps.verifySuccessMessage();
-//		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
+//		Steps to finalize order
+		confirmationSteps.agreeAndCheckout();
+		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
 
 	}
 
 
 	@Test
-	@Pending
+//	@Pending
 	public void us003UserProfileOrderId() {
 
 		// After validation - grab order number
