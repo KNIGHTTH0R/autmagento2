@@ -5,13 +5,10 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bouncycastle.asn1.cmp.PBMParameter;
-
 import com.tools.Constants;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.utils.FormatterUtils;
@@ -455,7 +452,7 @@ public class CartCalculation {
 		
 		result.setTotalAmount(totalAmountCalculation.toString());
 		
-		return null;
+		return result;
 	}
 
 	public List<ProductBasicModel> remove119VAT(List<ProductBasicModel> productsList) {

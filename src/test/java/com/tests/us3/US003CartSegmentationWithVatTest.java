@@ -180,7 +180,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.updateMarketingBonus();		
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
-		ShippingModel shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, "5.04");
+		ShippingModel shippingCalculatedModel = new ShippingModel();
+		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, "5.04");
 		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(productsList);
 		
 
