@@ -94,4 +94,12 @@ public class CalcDetailsModel {
 		this.tax = tax;
 	}
 
+	public void addCalculation(Map<String, String> map) {
+		this.calculationsList = map; 
+	}
+	
+	public void addSegments(Map<String, String> map) {
+		this.segmentTotals = map; 
+	}
+
 }

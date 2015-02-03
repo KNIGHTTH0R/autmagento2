@@ -62,6 +62,12 @@ public class MongoTableKeys {
 	public static final String TYPE = "type";
 	public static final String PRICE = "price";
 	public static final String QUANTITY= "quantity";
+	
+	//CalcDetailsModel
+	public static final String CALC_DETAILS_MODEL = "CalcDetailsModel";
+	public static final String MARKETING_BONUS = "MarketingBonus";
+	public static final String SEGMENTS = "Segments";
+	public static final String CALCULATIONS = "Calculations";
 
 
 }

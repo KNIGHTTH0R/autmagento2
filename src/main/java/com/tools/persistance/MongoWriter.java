@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import com.connectors.mongo.MongoConnector;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.tools.data.CalcDetailsModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.OrderModel;
@@ -110,6 +111,25 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.IP_POINTS, cartTotalsModel.getIpPoints());
 		document.put(MongoTableKeys.DISCOUNT_LIST, cartTotalsModel.getDiscountsMap());
 
+		table.insert(document);
+	}
+	
+	public static void saveCalcDetailsModel(CalcDetailsModel calcDetailsModel, String testName){
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.CALC_DETAILS_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		
+		document.put(MongoTableKeys.JEWERLY_BONUS, calcDetailsModel.getJewelryBonus());
+		document.put(MongoTableKeys.MARKETING_BONUS, calcDetailsModel.getMarketingBonus());
+		document.put(MongoTableKeys.TOTAL_AMOUNT, calcDetailsModel.getTotalAmount());
+		document.put(MongoTableKeys.SUBTOTAL, calcDetailsModel.getSubTotal());
+		document.put(MongoTableKeys.TAX, calcDetailsModel.getTax());
+		document.put(MongoTableKeys.IP_POINTS, calcDetailsModel.getIpPoints());
+		//last two are maps
+		document.put(MongoTableKeys.SEGMENTS, calcDetailsModel.getSegments());
+		document.put(MongoTableKeys.CALCULATIONS, calcDetailsModel.getCalculations());
+		
 		table.insert(document);
 	}
 

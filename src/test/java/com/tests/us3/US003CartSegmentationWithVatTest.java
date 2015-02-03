@@ -227,6 +227,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		checkoutValidationSteps.verifyTotalsDiscount(discountTotals, discountCalculationModel);
 //		checkoutValidationSteps.verifyShippingDiscount(shippingTotals, discountCalculationModel);
 		
+		
 
 	}
 

@@ -39,7 +39,6 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US002", type = "frontend")
