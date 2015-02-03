@@ -38,7 +38,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
-import com.tools.persistance.MongoReader;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -83,7 +83,6 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private static CalcDetailsModel discountCalculationModel;
 	
 	//extracted from URL in first test - validated in second test
-//	private static String orderID, orderPrice;
 	private static OrderModel orderModel;
 	
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
@@ -180,7 +179,9 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.updateMarketingBonus();		
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
-
+		ShippingModel shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, "5.04");
+		
+		
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
 		
@@ -192,8 +193,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
 
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printCartTotals(shippingTotals);
+		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
+		PrintUtils.printShippingTotals(shippingTotals);
 
 		
 		shippingSteps.clickGoToPaymentMethod();
@@ -203,13 +204,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 		
-		
-		
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);		
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-
 		
 		//Totals validation
 		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
@@ -218,10 +216,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
 		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
 		
-		//TODO Create a shipping totals RIGHT
 		
 		
 		
+		//TODO Create a shipping totals RIGHT - Investigating As BUG
 //		cartWorkflows.setVerifyTotalsDiscount(shippingTotals, discountCalculationModel);
 //		cartWorkflows.verifyTotalsDiscount("SHIPPING TOTALS");
 		

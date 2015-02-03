@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.Constants;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.requirements.AbstractSteps;
 
 public class ShippingSteps extends AbstractSteps{
@@ -14,7 +14,7 @@ public class ShippingSteps extends AbstractSteps{
 	private static final long serialVersionUID = 8727875042758615102L;
 
 	
-	public CartTotalsModel grabSurveyData(){
+	public ShippingModel grabSurveyData(){
 		waitABit(Constants.TIME_CONSTANT);
 		return surveyPage().grabSurveyData();
 	}

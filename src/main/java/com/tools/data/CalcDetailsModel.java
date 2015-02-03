@@ -1,5 +1,6 @@
 package com.tools.data;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +49,16 @@ public class CalcDetailsModel {
 	
 	public String findSegment(String key){
 		return segmentTotals.get(key);
+	}
+	
+	public String calculateSegmentsTotal(){
+		BigDecimal resultSum = BigDecimal.ZERO;
+		
+		for (String  key : segmentTotals.keySet()) {
+			resultSum = resultSum.add(BigDecimal.valueOf(Double.parseDouble(segmentTotals.get(key))));
+		}
+		
+		return resultSum.toString();
 	}
 	
 	public void addCalculation(String key, String value){
@@ -100,6 +111,6 @@ public class CalcDetailsModel {
 	
 	public void addSegments(Map<String, String> map) {
 		this.segmentTotals = map; 
-	}
+	} 
 
 }

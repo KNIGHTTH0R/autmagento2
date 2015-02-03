@@ -38,6 +38,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -158,8 +159,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		cartSteps.clickGoToShipping();
 
 		// TODO - validate shipping without IP points
-		CartTotalsModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printCartTotals(shippingTotals);
+		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
+		PrintUtils.printShippingTotals(shippingTotals);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
