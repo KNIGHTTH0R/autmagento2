@@ -83,12 +83,15 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private static CalcDetailsModel discountCalculationModel;
 	
 	//extracted from URL in first test - validated in second test
-	private static OrderModel orderModel;
-	
+	private static OrderModel orderModel = new OrderModel();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private String username, password;
+	
+	//Test data
 	private static String jewelryDisount = "100";
 	private static String marketingDisount = "150";
+	private static String shippingPrice = "5.04";
+	private static String addressString = "sss sss, tttt, 3, 2345 Wien, Österreich";
 
 
 	@Before
@@ -179,23 +182,32 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.updateMarketingBonus();		
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
-		ShippingModel shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, "5.04");
+		ShippingModel shippingCalculatedModel = new ShippingModel();
+		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
+		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(productsList);
 		
-		
+
+
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
 		
 		cartSteps.clickGoToShipping();
 		
-		shippingSteps.selectAddress("sss sss, tttt, 3, 2345 Wien, Österreich");
+		shippingSteps.selectAddress(addressString);
 		shippingSteps.setSameAsBilling(true);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
 
 		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printShippingTotals(shippingTotals);
-
+		
+//		System.out.println(" --- shippingCalculatedModel ---");
+//		PrintUtils.printShippingTotals(shippingCalculatedModel);
+//		System.out.println(" --- shippingCalculatedModel ---");
+//		System.out.println(" --- ----------------------- ---");
+//		System.out.println(" --- shippingTotals ---");
+//		PrintUtils.printShippingTotals(shippingTotals);
+//		System.out.println(" --- shippingTotals ---");
 		
 		shippingSteps.clickGoToPaymentMethod();
 		
@@ -216,14 +228,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
 		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
 		
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 		
 		
-		
-		//TODO Create a shipping totals RIGHT - Investigating As BUG
-
-		
-		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), discountCalculationModel.getTotalAmount().replace(".", ""));
-
 		//Products List validation
 		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
@@ -231,20 +239,20 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
 		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
-		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
+		cartWorkflows.setValidateProductsModels(shippingProductsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		
 		
-		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
-		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-		
-		//Steps to finalize order
-//		confirmationSteps.agreeAndCheckout();
-//		checkoutValidationSteps.verifySuccessMessage();
+//		Steps to finalize order
+		confirmationSteps.agreeAndCheckout();
+		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
+
 	}
 
 
 	@Test
+//	@Pending
 	public void us003UserProfileOrderId() {
 
 		// After validation - grab order number

@@ -2,13 +2,14 @@ package com.tools.calculation;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tools.Constants;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
@@ -188,8 +189,8 @@ public class CartCalculation {
 		System.out.println(" ---- Calculation Results ---- ");
 		System.out.println("SUBTOTAL: " + BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString())));
 		System.out.println("TOTAL AMOUNT: " + result.getTotalAmount());
-		System.out.println("				IP : " + result.getIpPoints());
-		System.out.println("				Tax: " + tax);
+		System.out.println("IP : " + result.getIpPoints());
+		System.out.println("Tax: " + tax);
 		System.out.println("Remainder after 25%: " + remainder25.toString());
 		System.out.println("Remainder after 50%: " + remainder50.toString());
 		System.out.println("Remainder after 0% : " + remainder00.toString());
@@ -283,55 +284,6 @@ public class CartCalculation {
 		return result.setScale(0, BigDecimal.ROUND_HALF_UP);
 	}
 
-	// /**
-	// * TODO Modify this to apply the jewelryBonus correctly
-	// * @param cartList
-	// * @param jewelryBonus
-	// * @return
-	// */
-	// public BigDecimal calcIp(List<CartProductModel> cartList,BigDecimal
-	// jewelryBonus){
-	// System.out.println("size " + cartList.size());
-	// BigDecimal result = BigDecimal.valueOf(0);
-	// BigDecimal totalPrice = BigDecimal.valueOf(0);
-	// BigDecimal ipProduct = BigDecimal.valueOf(0);
-	//
-	// @SuppressWarnings("unused")
-	// BigDecimal listProductsPrice =
-	// CartCalculation.calculateTableProducts(cartList).getAskingPrice();
-	//
-	// for( CartProductModel item : cartList) {
-	//
-	// if(BigDecimal.valueOf(Double.parseDouble(item.getPriceIP())).compareTo(BigDecimal.ZERO)
-	// > 0){
-	//
-	// BigDecimal productResult = BigDecimal.valueOf(0);
-	//
-	// totalPrice =
-	// BigDecimal.valueOf(Double.parseDouble(item.getProductsPrice()));
-	// ipProduct = BigDecimal.valueOf(Double.parseDouble(item.getPriceIP()));
-	// System.out.println(item.getProductsPrice());
-	// System.out.println(item.getPriceIP());
-	// productResult = productResult.add(jewelryBonus);
-	// productResult = productResult.multiply(BigDecimal.valueOf(100));
-	// productResult = productResult.divide(totalPrice,RoundingMode.HALF_UP);
-	// productResult = productResult.multiply(ipProduct);
-	// productResult = productResult.divide(BigDecimal.valueOf(100));
-	// System.out.println("=> " + productResult);
-	// productResult = ipProduct.subtract(productResult);
-	// if (productResult.compareTo(BigDecimal.ZERO) < 0)
-	// productResult = BigDecimal.valueOf(0);
-	// System.out.println("IP CALCULATION: " + productResult.setScale(0,
-	// BigDecimal.ROUND_HALF_UP));
-	// result = result.add(productResult.setScale(0, BigDecimal.ROUND_HALF_UP));
-	// }
-	// }
-	//
-	// System.out.println("TOTAL IP CALCULATION: " + result.setScale(0,
-	// BigDecimal.ROUND_HALF_UP));
-	// return result;
-	//
-	// }
 
 	// modify jewelry discount formatting
 	// From 10 To 1000
@@ -420,12 +372,14 @@ public class CartCalculation {
 	 * result - ROUND_DOWN
 	 * result - 2 decimal precision
 	 * @param value
+	 * roundMode - eg BigDecimal.ROUND_HALF_EVEN
 	 * @return
 	 */
-	public BigDecimal apply119VAT(BigDecimal value){
+	public BigDecimal apply119VAT(BigDecimal value, int precision, int roundMode){
 		BigDecimal result = BigDecimal.ZERO;
 		if(value.compareTo(BigDecimal.ZERO) > 0){
-			result = value.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 2, BigDecimal.ROUND_DOWN);
+//			result = value.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 2, BigDecimal.ROUND_HALF_EVEN);
+			result = value.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), precision, roundMode);
 		}else{
 			System.out.println("Error: Cannot apply 119 VAT value is not greater than 0. " + value.toString());
 		}
@@ -442,15 +396,42 @@ public class CartCalculation {
 	 */
 	public ShippingModel remove119VAT(CalcDetailsModel discountCalculationModel, String shippingValue) {
 		ShippingModel result = new ShippingModel();
-		result.setSubTotal(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal()))).toString());
-		result.setDiscountPrice(discountCalculationModel.calculateSegmentsTotal());
+		result.setSubTotal(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())), 2, BigDecimal.ROUND_HALF_EVEN).toString());
+		
+		//discount calculation
+		BigDecimal discountCalculation = BigDecimal.ZERO;
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_50))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getMarketingBonus())));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getJewelryBonus())));
+		discountCalculation = apply119VAT(discountCalculation, 2, BigDecimal.ROUND_HALF_EVEN);
+		
+		result.setDiscountPrice(discountCalculation.toString());
 		result.setShippingPrice(shippingValue);
+		
+		//totals calculation
 		BigDecimal totalAmountCalculation = BigDecimal.ZERO;
-		totalAmountCalculation = totalAmountCalculation.add(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount()))));
+		totalAmountCalculation = totalAmountCalculation.add(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())), 2, BigDecimal.ROUND_HALF_EVEN));
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		
 		result.setTotalAmount(totalAmountCalculation.toString());
 		
-		return null;
+		return result;
+	}
+
+	public List<ProductBasicModel> remove119VAT(List<ProductBasicModel> productsList) {
+		
+		List<ProductBasicModel> result = new ArrayList<ProductBasicModel>();
+		
+		for (ProductBasicModel productBasicModel : productsList) {
+			ProductBasicModel now = new ProductBasicModel();
+			
+			now.setName(productBasicModel.getName());
+			now.setQuantity(productBasicModel.getQuantity());
+			now.setType(productBasicModel.getType());
+			now.setPrice(apply119VAT(BigDecimal.valueOf(Double.parseDouble(productBasicModel.getPrice())), 1, BigDecimal.ROUND_HALF_EVEN).toString());
+			
+			result.add(now);
+		}
+		return result;
 	}
 }
