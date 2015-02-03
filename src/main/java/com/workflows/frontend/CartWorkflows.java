@@ -32,6 +32,7 @@ public class CartWorkflows {
 
 	@Step
 	public void validateProducts(String message) {
+		int count = 0;
 		for (ProductBasicModel productNow : productsList) {
 			CartProductModel compare = findProduct(productNow.getType(), cartProducts);
 
@@ -41,10 +42,41 @@ public class CartWorkflows {
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getUnitPrice());
 				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
+				count++;
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
 		}
+		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
+		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
+	}
+	
+	@Step
+	public void validateProducts2(String message) {
+	
+		for (ProductBasicModel productNow : productsList) {
+			CartProductModel compare = findProduct(productNow.getType(), cartProducts);
+			
+			
+			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
+			
+			if (compare.getName() != null) {
+				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
+				checkoutValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getUnitPrice());
+				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());			
+			} else {
+				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+			}
+			
+			int index = cartProducts.indexOf(compare);			
+			if(index > -1){
+				cartProducts.remove(index);	
+				System.out.println("index of "+ compare.getName() +" removed");
+				System.out.println(cartProducts.size() + " items remained");
+			}
+		}
+		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
+		
 	}
 	
 	
