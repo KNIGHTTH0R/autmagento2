@@ -1,6 +1,8 @@
 package com.tools.persistance;
 
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.connectors.mongo.MongoConnector;
 import com.mongodb.BasicDBObject;
@@ -8,7 +10,9 @@ import com.mongodb.DBCollection;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.CustomerConfigurationModel;
+import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderModel;
+import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -132,5 +136,59 @@ public class MongoWriter extends MongoConnector {
 		
 		table.insert(document);
 	}
+
+	public static void saveOrderInfoModel(OrderInfoModel orderInfoModel, String testName) {
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.ORDER_INFO_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		
+		document.put(MongoTableKeys.ORDER_STATUS, orderInfoModel.getOrderStatus());
+		document.put(MongoTableKeys.ORDER_DATE, orderInfoModel.getOrderDate());
+		document.put(MongoTableKeys.IP_POINTS, orderInfoModel.getOrderIP());
+		document.put(MongoTableKeys.AQUIRED_BY, orderInfoModel.getAquiredBy());
+		
+		table.insert(document);
+	}
+
+	public static void saveOrderTotalsModel(OrderTotalsModel orderTotalsModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.ORDER_TOTALS_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		
+		document.put(MongoTableKeys.SUBTOTAL, orderTotalsModel.getSubtotal());
+		document.put(MongoTableKeys.SHIPPING, orderTotalsModel.getShipping());
+		document.put(MongoTableKeys.TAX, orderTotalsModel.getTax());
+		document.put(MongoTableKeys.TOTAL_AMOUNT, orderTotalsModel.getTotalAmount());
+		document.put(MongoTableKeys.TOTAL_PAID, orderTotalsModel.getTotalPaid());
+		document.put(MongoTableKeys.TOTAL_REFUNDED, orderTotalsModel.getTotalRefunded());
+		document.put(MongoTableKeys.TOTAL_PAYABLE, orderTotalsModel.getTotalPayable());
+		document.put(MongoTableKeys.IP_POINTS, orderTotalsModel.getTotalIP());
+		document.put(MongoTableKeys.FORTY_DISCOUNTS, orderTotalsModel.getTotalFortyDiscounts());
+		document.put(MongoTableKeys.JEWERLY_BONUS, orderTotalsModel.getTotalBonusJeverly());
+		document.put(MongoTableKeys.MARKETING_BONUS, orderTotalsModel.getTotalMarketingBonus());
+		
+		document.put(MongoTableKeys.SEGMENTS, orderTotalsModel.getDiscountsMap());
+		
+		table.insert(document);
+		
+	}
+	
+	
+	/**	private String subtotal;
+	private String shipping;
+	private Map<String, String> discountList = new HashMap<String, String>();
+	private String tax;
+	private String totalAmount;
+	private String totalPaid;
+	private String totalRefunded;
+	private String totalPayable;
+	private String totalIP;
+	private String totalFortyDiscounts;
+	private String totalBonusJeverly;
+	private String totalMarketingBonus;
+	**/
 
 }

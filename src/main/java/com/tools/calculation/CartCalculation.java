@@ -145,9 +145,6 @@ public class CartCalculation {
 		marketingMaterial = formatDiscount(marketingMaterial);
 		BigDecimal totalAmount = BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString()));
 
-		
-
-
 		// Call methods to calculate Discounts and IP points
 		calculateJewelryDiscounts(totalsList, jewelryDiscount);
 		calculateMarketingDiscount(totalsList, marketingMaterial);

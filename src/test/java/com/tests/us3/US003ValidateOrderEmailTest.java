@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -51,7 +52,7 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us1\\us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3\\us003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -72,6 +73,8 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 	}
 	
 	@Test
+	@Pending
+	//TODO make user with gmail implementation and valid gmail account
 	public void us003ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);
 		

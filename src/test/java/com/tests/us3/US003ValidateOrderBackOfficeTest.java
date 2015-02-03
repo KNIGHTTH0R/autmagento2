@@ -8,6 +8,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.data.CalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
@@ -25,6 +27,7 @@ import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
@@ -43,8 +46,11 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps
 	public OrderWorkflows orderWorkflows;
 	
-	public static List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
+//	public static List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
 	public static List<ProductBasicModel>  productsList = new ArrayList<ProductBasicModel>();
+	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
+	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
+	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 
 	private String orderId;
 
@@ -52,23 +58,23 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 	public void setUp() {
 		
 		//TODO add setup config file for backend user and pass
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US003CartSegmentationWithVatTest");
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US003CartSegmentationWithVatTest");
 
-		if (orderModel.size() == 1) {
+		if (orderModelList.size() == 1) {
 
-			orderId = orderModel.get(0).getOrderId();
+			orderId = orderModelList.get(0).getOrderId();
 		} else {
-			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModel.size() == 1);
-		}
-
-		cartTotals = MongoReader.grabTotalsModels("US001StyleCoachShoppingTest");
-		if (cartTotals.size() == 1) {
-
-			orderId = orderModel.get(0).getOrderId();
-		} else {
-			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + cartTotals , cartTotals.size() == 1);
+			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModelList.size() == 1);
 		}
 		
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US001StyleCoachShoppingTest");
+		
+		if(calcDetailsModelList.size() == 1 ){
+			orderId = orderModelList.get(0).getOrderId();
+		} else {
+			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList , calcDetailsModelList.size() == 1);
+		}
+
 		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest");		
 	}
 
@@ -83,20 +89,29 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 		ordersSteps.findOrderByOrderId(orderId);
 		ordersSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
-		OrderTotalsModel ordertotal = ordersSteps.grabTotals();
-		OrderInfoModel orderInfo = ordersSteps.grabOrderInfo();
+		orderTotalsModel = ordersSteps.grabTotals();
+		orderInfoModel = ordersSteps.grabOrderInfo();
 		
 		PrintUtils.printOrderItemsList(orderItemsList);
-		PrintUtils.printOrderTotals(ordertotal);
-		PrintUtils.printOrderInfo(orderInfo);
-		orderWorkflows.setCheckCalculationTotalsModels(ordertotal, cartTotals.get(0));
-		orderWorkflows.validateTotals("TOTALS VALIVATION");
+		PrintUtils.printOrderTotals(orderTotalsModel);
+		PrintUtils.printOrderInfo(orderInfoModel);
+		//TODO work for validation
+		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, calcDetailsModelList.get(0));
+		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");
 		
 		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
 //		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung erfolgreich");
-		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung geplant");
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
 //		orderValidationSteps.validateProducts(productsList, orderItemsList);
+	}
+	
+	
+	@After
+	public void saveData(){
+		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName());
+		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName());
+		
 	}
 }

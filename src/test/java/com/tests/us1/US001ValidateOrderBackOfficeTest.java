@@ -89,7 +89,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		PrintUtils.printOrderItemsList(orderItemsList);
 		PrintUtils.printOrderTotals(ordertotal);
 		PrintUtils.printOrderInfo(orderInfo);
-		orderWorkflows.setCheckCalculationTotalsModels(ordertotal, cartTotals.get(0));
+		orderWorkflows.setValidateTotals(ordertotal, cartTotals.get(0));
 		orderWorkflows.validateTotals("TOTALS VALIVATION");
 		
 		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);

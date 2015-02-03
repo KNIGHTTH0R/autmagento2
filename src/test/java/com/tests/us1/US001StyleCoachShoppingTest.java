@@ -196,6 +196,9 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		// Shipping has no IP
 		// checkoutValidationSteps.checkCalculationTotals("SHIPPING TOTALS",
 		// totalsCalculated, shippingTotals);
+		
+//		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+//		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 	}
 
 	@Test

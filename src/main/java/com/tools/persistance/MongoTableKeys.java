@@ -68,6 +68,20 @@ public class MongoTableKeys {
 	public static final String MARKETING_BONUS = "MarketingBonus";
 	public static final String SEGMENTS = "Segments";
 	public static final String CALCULATIONS = "Calculations";
+	
+	
+	//OrderInfoModel
+	public static final String ORDER_INFO_MODEL = "OrderInfoModel";
+	public static final String ORDER_STATUS = "OrderStatus";
+	public static final String ORDER_DATE = "OrderDate";
+	public static final String AQUIRED_BY = "AquiredBy";
+	
+	//OrderTotalsModel
+	public static final String ORDER_TOTALS_MODEL = "OrderTotalsModel";
+	public static final String TOTAL_PAID = "TotalPaid";
+	public static final String TOTAL_REFUNDED = "TotalRefunded";
+	public static final String TOTAL_PAYABLE = "TotalPayable";
+	public static final String FORTY_DISCOUNTS = "FortyDiscounts";
 
 
 }

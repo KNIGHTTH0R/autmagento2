@@ -10,6 +10,7 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import com.steps.backend.validations.OrderValidationSteps;
+import com.tools.data.CalcDetailsModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -55,7 +56,7 @@ public class OrderWorkflows {
 	private OrderTotalsModel orderTotalModel = new OrderTotalsModel();
 	private CartTotalsModel cartTotalModel = new CartTotalsModel();
 	
-	public void setCheckCalculationTotalsModels(OrderTotalsModel orderTotalModel, CartTotalsModel cartTotalModel){
+	public void setValidateTotals(OrderTotalsModel orderTotalModel, CartTotalsModel cartTotalModel){
 		this.orderTotalModel = orderTotalModel;
 		this.cartTotalModel = cartTotalModel;
 	}
@@ -104,5 +105,21 @@ public class OrderWorkflows {
 	@Step
 	public void validateOrderStatus(String orderStatus, String string) {
 		Assert.assertTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
+	}
+
+	
+	
+	private OrderTotalsModel orderTotalsGrabbed = new OrderTotalsModel();
+	private CalcDetailsModel calculatedTotals = new CalcDetailsModel();
+	
+	
+	public void setValidateCalculationTotals(OrderTotalsModel orderTotalsModel, CalcDetailsModel calcDetailsModel) {
+		this.orderTotalsGrabbed = orderTotalsModel;
+		this.calculatedTotals = calcDetailsModel;
+	}
+
+	public void validateCalculationTotals(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }
