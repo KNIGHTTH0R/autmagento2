@@ -32,4 +32,9 @@ public class ProfileSteps extends AbstractSteps{
 		Assert.assertTrue("Failure: Order id is not as expected. Expected: " + compare + " Actual: " + orderId, orderId.contentEquals(compare));
 	}
 
+	@Step
+	public void verifyOrderPrice(String orderPrice, String compare) {
+		Assert.assertTrue("Failure: Order Price is not as expected. Expected: " + compare + " Actual: " + orderPrice, orderPrice.contentEquals(compare));
+	}
+
 }

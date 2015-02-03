@@ -38,6 +38,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -82,7 +83,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private static CalcDetailsModel discountCalculationModel;
 	
 	//extracted from URL in first test - validated in second test
-	private static String orderID, orderPrice;
+//	private static String orderID, orderPrice;
+	private static OrderModel orderModel;
 	
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private String username, password;
@@ -198,8 +200,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		//Grab data from URL //TODO validate URL price 
 		String url = shippingSteps.grabUrl();
-		orderPrice= FormatterUtils.extractPriceFromURL(url);
-		orderID = FormatterUtils.extractOrderIDFromURL(url);
+		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 		
 		
 		
@@ -223,7 +225,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		cartWorkflows.setVerifyTotalsDiscount(shippingTotals, discountCalculationModel);
 //		cartWorkflows.verifyTotalsDiscount("SHIPPING TOTALS");
 		
-		checkoutValidationSteps.checkTotalAmountFromUrl(orderPrice, discountCalculationModel.getTotalAmount().replace(".", ""));
+		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), discountCalculationModel.getTotalAmount().replace(".", ""));
 
 		//Products List validation
 		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
@@ -250,7 +252,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
 		String orderId = orderHistory.get(0).getOrderId();
-		profileSteps.verifyOrderId(orderId, orderID);
+		String orderPrice = orderHistory.get(0).getTotalPrice();
+		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
+		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
+		orderModel = orderHistory.get(0);
 	}
 	
 	
@@ -258,6 +263,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	public void saveData() {
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 		for (ProductBasicModel product : productsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
 		}

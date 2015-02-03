@@ -166,8 +166,8 @@ public class CartCalculation {
 
 		// If there is marketing bonus apply it to the Core formula
 		if (applyMarketingDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(marketingMaterial))).compareTo(BigDecimal.valueOf(0)) > 0) {
-			result.addCalculation("P5-SubstractMM-divide100", totalAmount.toString());
 			totalAmount = totalAmount.subtract(BigDecimal.valueOf(Double.parseDouble(marketingMaterial)).divide(BigDecimal.valueOf(100)));
+			result.addCalculation("P5-SubstractMM-divide100", totalAmount.toString());
 		}
 
 		result.addSegment(Constants.DISCOUNT_50, remainder50.toString());
@@ -186,11 +186,11 @@ public class CartCalculation {
 		System.out.println(" ---- Calculation Results ---- ");
 		System.out.println("SUBTOTAL: " + BigDecimal.valueOf(Double.parseDouble(calculateTotalSum(totalsList).getAskingPrice().toString())));
 		System.out.println("TOTAL AMOUNT: " + result.getTotalAmount());
-		System.out.println("IP: " + result.getIpPoints());
-		System.out.println("Tax: " + tax);
+		System.out.println("				IP : " + result.getIpPoints());
+		System.out.println("				Tax: " + tax);
 		System.out.println("Remainder after 25%: " + remainder25.toString());
 		System.out.println("Remainder after 50%: " + remainder50.toString());
-		System.out.println("Remainder after 0%: " + remainder00.toString());
+		System.out.println("Remainder after 0% : " + remainder00.toString());
 		System.out.println(" ----------------------------- ");
 
 		return result;
