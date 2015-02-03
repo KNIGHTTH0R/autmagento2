@@ -12,10 +12,12 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -31,10 +33,12 @@ import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
@@ -75,6 +79,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private static CalcDetailsModel discountCalculationModel;
+	
+	//extracted from URL in first test - validated in second test
+	private static String orderID, orderPrice;
+	
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private String username, password;
 	private static String jewelryDisount = "100";
@@ -112,6 +121,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		creditCardData.setYearExpiration("2016");
 		creditCardData.setCvcNumber("737");
 	
+		//Clean DB
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -166,9 +177,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.typeMarketingBonus(marketingDisount);
 		cartSteps.updateMarketingBonus();		
 
-		
-		CalcDetailsModel discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
-
+		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
@@ -187,13 +196,12 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		shippingSteps.clickGoToPaymentMethod();
 		
-		//Grab data from URL
+		//Grab data from URL //TODO validate URL price 
 		String url = shippingSteps.grabUrl();
-		String urlPrice = FormatterUtils.extractPriceFromURL(url);
-		String urlOrder = FormatterUtils.extractOrderIDFromURL(url);
-		//TODO validate URL price 
-		System.out.println("Price URL ----> " + urlPrice);
-		System.out.println("Order URL ----> " + urlOrder);
+		orderPrice= FormatterUtils.extractPriceFromURL(url);
+		orderID = FormatterUtils.extractOrderIDFromURL(url);
+		
+		
 		
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);		
@@ -208,11 +216,14 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
 		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
 		
-		cartWorkflows.setVerifyTotalsDiscount(shippingTotals, discountCalculationModel);
-		cartWorkflows.verifyTotalsDiscount("SHIPPING TOTALS");
+		//TODO Create a shipping totals RIGHT
 		
-
-		checkoutValidationSteps.checkTotalAmountFromUrl(url, discountCalculationModel.getTotalAmount());
+		
+		
+//		cartWorkflows.setVerifyTotalsDiscount(shippingTotals, discountCalculationModel);
+//		cartWorkflows.verifyTotalsDiscount("SHIPPING TOTALS");
+		
+		checkoutValidationSteps.checkTotalAmountFromUrl(orderPrice, discountCalculationModel.getTotalAmount().replace(".", ""));
 
 		//Products List validation
 		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
@@ -231,16 +242,25 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	}
 
 
-//	@Test
-//	public void us003UserProfileOrderId() {
-//
-//		// After validation - grab order number
-//		headerSteps.redirectToProfileHistory();
-//		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-//
-//		String orderId = orderHistory.get(0).getOrderId();
-//		orderNumber.setOrderId(orderId);
-//		profileSteps.verifyOrderId(orderId);
-//	}
+	@Test
+	public void us003UserProfileOrderId() {
+
+		// After validation - grab order number
+		headerSteps.redirectToProfileHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+
+		String orderId = orderHistory.get(0).getOrderId();
+		profileSteps.verifyOrderId(orderId, orderID);
+	}
+	
+	
+	@After
+	public void saveData() {
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
+		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());
+		for (ProductBasicModel product : productsList) {
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
+		}
+	}
 
 }

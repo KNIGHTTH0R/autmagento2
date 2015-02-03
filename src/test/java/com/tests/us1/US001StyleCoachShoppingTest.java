@@ -78,6 +78,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
+	
+	//extracted from URL in first test - validated in second test
+	private static String orderID, orderPrice;
+	
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private List<CalculationModel> calcList = new ArrayList<CalculationModel>();
 	public static CartTotalsModel cartTotals;
@@ -165,12 +169,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		shippingSteps.clickGoToPaymentMethod();
 		
 		String url = shippingSteps.grabUrl();
-		String urlPrice = FormatterUtils.extractPriceFromURL(url);
-		String urlOrder = FormatterUtils.extractOrderIDFromURL(url);
-		
-		System.out.println("URL ----> " + url);
-		System.out.println("Price URL ----> " + urlPrice);
-		System.out.println("Order URL ----> " + urlOrder);
+		orderPrice= FormatterUtils.extractPriceFromURL(url);
+		orderID = FormatterUtils.extractOrderIDFromURL(url);
 
 		paymentSteps.expandCreditCardForm();
 
@@ -208,7 +208,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		String orderId = orderHistory.get(0).getOrderId();
 		orderNumber.setOrderId(orderId);
-		profileSteps.verifyOrderId(orderId);
+		profileSteps.verifyOrderId(orderId, orderID);
 	}
 
 	@After

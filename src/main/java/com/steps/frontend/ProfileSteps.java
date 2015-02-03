@@ -28,7 +28,8 @@ public class ProfileSteps extends AbstractSteps{
 	
 	
 	@Step
-	public void verifyOrderId(String orderId){
-		Assert.assertTrue("Failure: order id is null", orderId != null);
+	public void verifyOrderId(String orderId, String compare){
+		Assert.assertTrue("Failure: Order id is not as expected. Expected: " + compare + " Actual: " + orderId, orderId.contentEquals(compare));
 	}
+
 }
