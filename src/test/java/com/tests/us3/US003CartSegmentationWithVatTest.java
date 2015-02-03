@@ -157,19 +157,13 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 		PrintUtils.printCalculationModel(totalsCalculated);		
 		
+		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 		cartTotals = cartSteps.grabTotals();
-//		System.out.println("NO BONUSES BEGIN ");
-//		PrintUtils.printCartTotals(cartTotals);
-//		System.out.println("NO BONUSES END");
 
-
-
+		//APPLY DISCOUNTS
 		cartSteps.typeJewerlyBonus(jewelryDisount);
-
 		cartSteps.updateJewerlyBonus();
-
 		cartSteps.typeMarketingBonus(marketingDisount);
-
 		cartSteps.updateMarketingBonus();		
 
 		
@@ -178,12 +172,6 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		CartTotalsModel discountTotals = new CartTotalsModel();
 		discountTotals = cartSteps.grabTotals();
-
-		
-
-//		System.out.println("BONUSES BEGIN ");
-//		PrintUtils.printCartTotals(discountTotals);
-//		System.out.println("BONUSES END");
 		
 		cartSteps.clickGoToShipping();
 		
@@ -199,23 +187,20 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		shippingSteps.clickGoToPaymentMethod();
 		
+		//Grab data from URL
 		String url = shippingSteps.grabUrl();
 		String urlPrice = FormatterUtils.extractPriceFromURL(url);
 		String urlOrder = FormatterUtils.extractOrderIDFromURL(url);
-		
-//		System.out.println("URL ----> " + url);
+		//TODO validate URL price 
 		System.out.println("Price URL ----> " + urlPrice);
 		System.out.println("Order URL ----> " + urlOrder);
-		//TODO calculate Totals with VAT 0%
-//		totals0Vat = calculationSteps.calculateShippingTotalsWith0Vat(totalsCalculated);
-//		PrintUtils.printCalculationModel(totalsCalculated);
-
+		
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);		
 		
-		//TODO validate URL price 
-//		validationSteps.checkTotalAmountFromUrl(url, String.valueOf(totals0Vat.getFinalPrice()));
+
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+
 
 //		confirmationSteps.agreeAndCheckout();
 //
@@ -224,11 +209,22 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
 		
-		checkoutValidationSteps.verifyTotalsDiscount(discountTotals, discountCalculationModel);
-//		checkoutValidationSteps.verifyShippingDiscount(shippingTotals, discountCalculationModel);
-		
+		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
+		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
 		
 
+		checkoutValidationSteps.checkTotalAmountFromUrl(url, discountCalculationModel.getTotalAmount());
+		
+		
+		
+		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
+		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 	}
 
 

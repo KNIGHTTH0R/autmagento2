@@ -10,6 +10,7 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
+import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -81,48 +82,64 @@ public class CartWorkflows {
 		}
 		return result;
 	}
+
 	
-//	private CartTotalsModel cartCalculatedTotal = new CartTotalsModel();
-//	private CartTotalsModel cartGrabbedTotal = new CartTotalsModel();
-//	
-//	public void setTotalsModels(CartTotalsModel cartCalculatedTotal, CartTotalsModel cartGrabbedTotal){
-//		this.cartCalculatedTotal = cartCalculatedTotal;
-//		this.cartGrabbedTotal = cartGrabbedTotal;
-//	}
-//	
-//	@StepGroup
-//	public void checkCompleteTotals(String message){
-//
-//		
-//		checkoutValidationSteps.printTotalsModel("Cart Totals", cartGrabbedTotal.getSubtotal(), cartGrabbedTotal.getDiscountSumString(), cartGrabbedTotal.getTotalAmount(), cartGrabbedTotal.getTax(), cartGrabbedTotal.getShipping(),
-//				cartGrabbedTotal.getJewelryBonus(), cartGrabbedTotal.getIpPoints());
-//		
-//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getSubtotal() + " and it is " + cartCalculatedTotal.getSubtotal() + "!", cartCalculatedTotal
-//				.getSubtotal().equals(cartGrabbedTotal.getSubtotal()));
-//		
-//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getDiscountSumString() + " and it is " + cartCalculatedTotal.getDiscountSumString() + "!", cartCalculatedTotal
-//				.getDiscountSumString().equals(cartGrabbedTotal.getDiscountSumString()));
-//		
-//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getTotalAmount() + " and it is " + cartCalculatedTotal.getTotalAmount() + "!", cartCalculatedTotal
-//				.getTotalAmount().equals(cartGrabbedTotal.getTotalAmount()));
-//		
-//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getTax() + " and it is " + cartCalculatedTotal.getTax() + "!", cartCalculatedTotal
-//				.getTax().equals(cartGrabbedTotal.getTax()));
-//		
-//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getJewelryBonus() + " and it is " + cartCalculatedTotal.getJewelryBonus() + "!", cartCalculatedTotal
-//				.getJewelryBonus().equals(cartGrabbedTotal.getJewelryBonus()));
-//		
-//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getMarketingBonus() + " and it is " + cartCalculatedTotal.getMarketingBonus() + "!", cartCalculatedTotal
-//				.getMarketingBonus().equals(cartGrabbedTotal.getMarketingBonus()));
-//		
-//		Assert.assertTrue("The subtotal should be " + cartGrabbedTotal.getIpPoints() + " and it is " + cartCalculatedTotal.getIpPoints() + "!", cartCalculatedTotal
-//				.getIpPoints().equals(cartGrabbedTotal.getIpPoints()));
-//
-//		
-//	}
+	private CartTotalsModel discountTotals;
+	private CalcDetailsModel discountCalculationModel;
+
+	public void setVerifyTotalsDiscount(CartTotalsModel discountTotals, CalcDetailsModel discountCalculationModel) {
+		this.discountCalculationModel = discountCalculationModel;
+		this.discountTotals = discountTotals;
+
+	}
 	
-	
-	
-	
+
+	@StepGroup
+	public void verifyTotalsDiscount(String message) {
+		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
+		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
+		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());
+		verifyMarketingBonus(discountTotals.getMarketingBonus(), discountCalculationModel.getMarketingBonus());
+		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
+
+	}
+
+	@Step
+	public void verifyIP(String productNow, String compare) {
+		Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+
+	@Step
+	public void verifyTotalAmount(String productNow, String compare) {
+		Assert.assertTrue("Failure: Total Amount dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+
+	@Step
+	public void verifyTax(String productNow, String compare) {
+		Assert.assertTrue("Failure: TAX dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+
+	@Step
+	public void verifyJewelryBonus(String productNow, String compare) {
+		Assert.assertTrue("Failure: Jewelry Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+
+	@Step
+	public void verifySubTotals(String productNow, String compare) {
+		Assert.assertTrue("Failure: Sub Totals dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+
+	@Step
+	public void verifyMarketingBonus(String productNow, String compare) {
+		Assert.assertTrue("Failure: Marketing Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+
 	
 }
