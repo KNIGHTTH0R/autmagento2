@@ -220,8 +220,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		
 		//TODO Create a shipping totals RIGHT - Investigating As BUG
-//		cartWorkflows.setVerifyTotalsDiscount(shippingTotals, discountCalculationModel);
-//		cartWorkflows.verifyTotalsDiscount("SHIPPING TOTALS");
+
 		
 		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), discountCalculationModel.getTotalAmount().replace(".", ""));
 
@@ -235,6 +234,9 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		
+		
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 		
 		//Steps to finalize order
 //		confirmationSteps.agreeAndCheckout();

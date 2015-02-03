@@ -15,6 +15,7 @@ import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.ShippingModel;
 
 public class CartWorkflows {
 
@@ -139,6 +140,32 @@ public class CartWorkflows {
 	public void verifyMarketingBonus(String productNow, String compare) {
 		Assert.assertTrue("Failure: Marketing Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
+	}
+	@Step
+	public void verifyShippingPrice(String productNow, String compare) {
+		Assert.assertTrue("Failure: Shipping Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		
+	}
+	@Step
+	public void verifyDiscountsPrice(String productNow, String compare) {
+		Assert.assertTrue("Failure: Discounts Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		
+	}
+
+	private ShippingModel shippingGrabbedModel;
+	private ShippingModel shippingCalculatedModel;
+	
+	public void setVerifyShippingTotals(ShippingModel shippingTotals, ShippingModel shippingCalculatedModel) {
+		this.shippingCalculatedModel = shippingCalculatedModel;
+		this.shippingGrabbedModel = shippingTotals;
+	}
+
+	@StepGroup
+	public void verifyShippingTotals(String string) {
+		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
+		verifyTotalAmount(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
+		verifyShippingPrice(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
+		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
 	}
 
 	
