@@ -12,6 +12,7 @@ import org.junit.Assert;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.utils.PrintUtils;
@@ -51,6 +52,35 @@ public class OrderWorkflows {
 		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
 		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
 	}
+	
+	@Step
+	public void validateProducts2(String message) {
+	
+		for (ProductBasicModel productNow : productsList) {
+			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), orderProducts);
+			
+			PrintUtils.printProductsCompareBackend(productNow, compare);
+			
+			if (compare.getProductName() != null) {
+				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
+				orderValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getPrice());
+				orderValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
+		
+			} else {
+				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+			}
+			int index = orderProducts.indexOf(compare);			
+			if(index > -1){
+				orderProducts.remove(index);	
+				System.out.println("index of "+ compare.getProductName() +" removed");
+				System.out.println(orderProducts.size() + " items remained");
+			}
+		}
+		
+		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
+		
+	}	
+	
 	
 	private OrderTotalsModel orderTotalModel = new OrderTotalsModel();
 	private CartTotalsModel cartTotalModel = new CartTotalsModel();
