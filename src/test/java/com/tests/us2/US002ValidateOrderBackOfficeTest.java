@@ -85,9 +85,9 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		OrderInfoModel orderInfo = ordersSteps.grabOrderInfo();
 		PrintUtils.printOrderItemsList(orderItemsList);
 		PrintUtils.printOrderTotals(ordertotal);
-		PrintUtils.printOrderInfo(orderInfo);
-		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
+		PrintUtils.printOrderInfo(orderInfo);		
 		orderValidationSteps.validateProducts(productsList, orderItemsList);
+		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
 		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung geplant");
 	}
 }
