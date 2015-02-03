@@ -74,13 +74,11 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
-	private static OrderModel orderNumber = new OrderModel();
+	private static OrderModel orderModel = new OrderModel();
 
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
 	
-	//extracted from URL in first test - validated in second test
-	private static String orderID, orderPrice;
 	
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private List<CalculationModel> calcList = new ArrayList<CalculationModel>();
@@ -169,8 +167,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		shippingSteps.clickGoToPaymentMethod();
 		
 		String url = shippingSteps.grabUrl();
-		orderPrice= FormatterUtils.extractPriceFromURL(url);
-		orderID = FormatterUtils.extractOrderIDFromURL(url);
+		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
 
@@ -202,19 +200,22 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Test
 	public void us001UserProfileOrderId() {
 
+		
 		// After validation - grab order number
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
 		String orderId = orderHistory.get(0).getOrderId();
-		orderNumber.setOrderId(orderId);
-		profileSteps.verifyOrderId(orderId, orderID);
+		String orderPrice = orderHistory.get(0).getTotalPrice();
+		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
+		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
+		orderModel = orderHistory.get(0);
 	}
 
 	@After
 	public void saveData() {
 		
-		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 		for (ProductBasicModel product : productsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());

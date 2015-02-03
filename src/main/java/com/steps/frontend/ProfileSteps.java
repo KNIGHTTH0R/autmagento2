@@ -8,6 +8,7 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.data.backend.OrderModel;
 import com.tools.requirements.AbstractSteps;
+import com.tools.utils.FormatterUtils;
 
 public class ProfileSteps extends AbstractSteps{
 
@@ -34,6 +35,7 @@ public class ProfileSteps extends AbstractSteps{
 
 	@Step
 	public void verifyOrderPrice(String orderPrice, String compare) {
+		orderPrice = FormatterUtils.cleanNumberToString(orderPrice).replace(".", "");
 		Assert.assertTrue("Failure: Order Price is not as expected. Expected: " + compare + " Actual: " + orderPrice, orderPrice.contentEquals(compare));
 	}
 
