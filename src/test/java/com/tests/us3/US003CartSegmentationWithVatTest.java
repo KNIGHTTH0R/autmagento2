@@ -85,11 +85,14 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	
 	//extracted from URL in first test - validated in second test
 	private static OrderModel orderModel = new OrderModel();
-	
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private String username, password;
+	
+	//Test data
 	private static String jewelryDisount = "100";
 	private static String marketingDisount = "150";
+	private static String shippingPrice = "5.04";
+	private static String addressString = "sss sss, tttt, 3, 2345 Wien, Österreich";
 
 
 	@Before
@@ -181,7 +184,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 		ShippingModel shippingCalculatedModel = new ShippingModel();
-		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, "5.04");
+		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
 		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(productsList);
 		
 
@@ -191,7 +194,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		cartSteps.clickGoToShipping();
 		
-		shippingSteps.selectAddress("sss sss, tttt, 3, 2345 Wien, Österreich");
+		shippingSteps.selectAddress(addressString);
 		shippingSteps.setSameAsBilling(true);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
