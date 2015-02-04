@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -17,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -33,6 +33,7 @@ import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
+import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -84,6 +85,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	
 	private static CalcDetailsModel discountCalculationModel;
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
+	private static UrlModel  urlModel = new UrlModel();
 	
 
 	private CreditCardModel creditCardData = new CreditCardModel();
@@ -132,11 +134,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		creditCardData.setCvcNumber("737");
 	
 		//Clean DB
-		MongoConnector.cleanCollection(getClass().getSimpleName());
+//		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-//	@Pending
+	@Pending
 	public void uS003CartSegmentationWithVatTest() {
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
@@ -160,12 +162,16 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 //		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
 //		productData = productSteps.setProductAddToCart("1", "0");
 //		productsList.add(productData);
+//		
+//		searchSteps.searchAndSelectProduct("E106SV", "JOANNA EARRINGS");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("E106SV", "JOANNA EARRINGS");
+		searchSteps.searchAndSelectProduct("K007SV", "HAILEY SET (SILVER)");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("E106SV", "JOANNA EARRINGS");
+		searchSteps.searchAndSelectProduct("K007SV", "HAILEY SET (SILVER)");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 		
@@ -237,6 +243,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		
 		//Grab data from URL //TODO validate URL price 
 		String url = shippingSteps.grabUrl();
+		urlModel.setName("Payment URL");
+		urlModel.setUrl(url);
 		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 		
@@ -300,11 +308,16 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		//Discount calculations - jewelry and marketing
 		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());
 		
+		//values with discount and no TAX VAT - calculated values
+		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
+				
+				
+		
 		//Order status and details
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 		
-		//values with discount and no TAX VAT
-		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
+		//Payment URL with values
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
 		
 		//Products list - with initial values
 		for (ProductBasicModel product : productsList) {

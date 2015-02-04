@@ -34,15 +34,15 @@ public class CartWorkflows {
 	@Step
 	public void validateProducts(String message) {
 		int count = 0;
-		if(!productsList.isEmpty()){
+		if (!productsList.isEmpty()) {
 			for (ProductBasicModel productNow : productsList) {
-				
+
 				CartProductModel compare = findProduct(productNow.getType(), cartProducts);
-				
+
 				PrintUtils.printProductBasicModel(productNow);
-	
+
 				compare.setQuantity(compare.getQuantity().replace("x", "").trim());
-	
+
 				if (compare.getName() != null) {
 					checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 					checkoutValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getUnitPrice());
@@ -53,65 +53,64 @@ public class CartWorkflows {
 				}
 			}
 		}
-		
+
 		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
 		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
 	}
-	
+
 	@Step
 	public void validateProducts2(String message) {
-	
+
 		for (ProductBasicModel productNow : productsList) {
 			CartProductModel compare = findProduct(productNow.getType(), cartProducts);
-			
-			
+
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
-			
+
 			if (compare.getName() != null) {
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getUnitPrice());
-				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());			
+				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
-			
-			int index = cartProducts.indexOf(compare);			
-			if(index > -1){
-				cartProducts.remove(index);	
-				System.out.println("index of "+ compare.getName() +" removed");
+
+			int index = cartProducts.indexOf(compare);
+			if (index > -1) {
+				cartProducts.remove(index);
+				System.out.println("index of " + compare.getName() + " removed");
 				System.out.println(cartProducts.size() + " items remained");
 			}
 		}
 		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
-		
+
 	}
-	
-	
+
 	private CalculationModel calculationModel = new CalculationModel();
 	private CartTotalsModel cartTotalModel = new CartTotalsModel();
-	
-	public void setCheckCalculationTotalsModels(CartTotalsModel cartTotalModel, CalculationModel calculationModel){
+
+	public void setCheckCalculationTotalsModels(CartTotalsModel cartTotalModel, CalculationModel calculationModel) {
 		this.calculationModel = calculationModel;
 		this.cartTotalModel = cartTotalModel;
 	}
-	
+
 	@StepGroup
 	public void checkCalculationTotals(String message) {
-		
-		checkoutValidationSteps.printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()), String.valueOf(calculationModel.getIpPoints()));
-		checkoutValidationSteps.printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscountSumString(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(), cartTotalModel.getShipping(),
-				cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
 
-		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.getAskingPrice() + "!", cartTotalModel
-				.getSubtotal().equals(calculationModel.getAskingPrice().toString()));
+		checkoutValidationSteps.printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()),
+				String.valueOf(calculationModel.getIpPoints()));
+		checkoutValidationSteps.printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscountSumString(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(),
+				cartTotalModel.getShipping(), cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
 
-		Assert.assertTrue("The final price should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.getFinalPrice() + "!", cartTotalModel
-				.getTotalAmount().equals(calculationModel.getFinalPrice().toString()));
+		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.getAskingPrice() + "!",
+				cartTotalModel.getSubtotal().equals(calculationModel.getAskingPrice().toString()));
+
+		Assert.assertTrue("The final price should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.getFinalPrice() + "!",
+				cartTotalModel.getTotalAmount().equals(calculationModel.getFinalPrice().toString()));
 
 		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
 				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
 	}
-	
+
 	public CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
 		CartProductModel result = new CartProductModel();
 		theFor: for (CartProductModel cartProductModel : cartProducts) {
@@ -123,7 +122,6 @@ public class CartWorkflows {
 		return result;
 	}
 
-	
 	private CartTotalsModel discountTotals = new CartTotalsModel();
 	private CalcDetailsModel discountCalculationModel = new CalcDetailsModel();
 
@@ -132,7 +130,6 @@ public class CartWorkflows {
 		this.discountTotals = discountTotals;
 
 	}
-	
 
 	@StepGroup
 	public void verifyTotalsDiscount(String message) {
@@ -180,20 +177,22 @@ public class CartWorkflows {
 		Assert.assertTrue("Failure: Marketing Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
+
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
 		Assert.assertTrue("Failure: Shipping Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
-		
+
 	}
+
 	@Step
 	public void verifyDiscountsPrice(String productNow, String compare) {
 		Assert.assertTrue("Failure: Discounts Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
-		
+
 	}
 
 	private ShippingModel shippingGrabbedModel = new ShippingModel();;
 	private ShippingModel shippingCalculatedModel = new ShippingModel();
-	
+
 	public void setVerifyShippingTotals(ShippingModel shippingTotals, ShippingModel shippingCalculatedModel) {
 		this.shippingCalculatedModel = shippingCalculatedModel;
 		this.shippingGrabbedModel = shippingTotals;
@@ -205,8 +204,6 @@ public class CartWorkflows {
 		verifyShippingPrice(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
 		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
 		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
-		
 	}
 
-	
 }

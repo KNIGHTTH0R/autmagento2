@@ -2,6 +2,7 @@ package com.tools.utils;
 
 import java.util.List;
 
+import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -92,9 +93,6 @@ public class PrintUtils {
 		System.out.println("------------------------");
 		System.out.println(model.getSubtotal());
 		System.out.println(model.getShipping());
-		for (String discountNow : model.getDiscountsMap().keySet()) {
-			System.out.println(discountNow + ": " + model.getDiscountsMap().get(discountNow));
-		}
 		System.out.println(model.getTax());
 		System.out.println(model.getTotalAmount());
 		System.out.println(model.getTotalPaid());
@@ -104,6 +102,10 @@ public class PrintUtils {
 		System.out.println(model.getTotalFortyDiscounts());
 		System.out.println(model.getTotalBonusJeverly());
 		System.out.println(model.getTotalMarketingBonus());
+		
+		for (String discountNow : model.getDiscountsMap().keySet()) {
+			System.out.println(discountNow + ": " + model.getDiscountsMap().get(discountNow));
+		}
 	}
 
 	public static void printAddressModel(AddressModel dataModel) {
@@ -188,6 +190,20 @@ public class PrintUtils {
 		System.out.println("Price : " + productNow.getPrice());
 		System.out.println("Qty : " + productNow.getQuantity());
 		System.out.println("Type: " + productNow.getType());
+		
+	}
+
+	public static void printCalcDetailsModel(CalcDetailsModel calculatedDetailsModel) {
+		System.out.println("CDM -----------------------------");
+		System.out.println("jewelryBonus : " + calculatedDetailsModel.getJewelryBonus());
+		System.out.println("marketingBonus : " + calculatedDetailsModel.getMarketingBonus());
+		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
+		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());
+		System.out.println("ipPoints : " + calculatedDetailsModel.getIpPoints());
+		System.out.println("tax : " + calculatedDetailsModel.getTax());
+		System.out.println("Segments : " + calculatedDetailsModel.getSegments());
+		System.out.println("Calculations : " + calculatedDetailsModel.getCalculations());
+		
 		
 	}
 }

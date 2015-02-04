@@ -86,6 +86,10 @@ public class MongoTableKeys {
 	//ShippingModel
 	public static final String SHIPPING_MODEL = "ShippingModel";
 	public static final String DISCOUNT = "discount";
+	
+	//URLModel
+	public static final String URL_MODEL = "UrlModel";
+	public static final String URL_PATH = "url:";
 
 
 }
