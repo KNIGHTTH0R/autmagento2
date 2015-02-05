@@ -70,6 +70,7 @@ public class CartSteps extends  AbstractSteps{
 	@Step
 	public void updateCart(){
 		cartPage().clickUpdateCart();
+		getDriver().navigate().refresh();
 	}
 	@Step
 	public void updateJewerlyBonus(){

@@ -8,6 +8,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +26,9 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
@@ -48,37 +51,62 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	public List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
 	public List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
+	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
+	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
+	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
+	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	@Before
 	public void setUp() {
 
 		List<OrderModel> orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest");
-
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest");
+		shippingModelList = MongoReader.grabShippingModel("US002CartSegmentationLogicTest");
+		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
+		
 		if (orderModel.size() == 1) {
 
 			orderId = orderModel.get(0).getOrderId();
 		} else {
 			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModel.size() == 1);
-		}
+		}			
 		
-		
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest");
-		if (calcDetailsModelList.size() == 1) {
-			orderId = orderModel.get(0).getOrderId();
-		} else {
+		if (calcDetailsModelList.size() != 1) {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
 		
-
-		cartTotals = MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
-		if (cartTotals.size() == 1) {
-
-			orderId = orderModel.get(0).getOrderId();
-		} else {
-			Assert.assertTrue("Failure: Could not validate cartTotals section. " + cartTotals, cartTotals.size() == 1);
+		if (shippingModelList.size() != 1) {
+			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
-
-		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
+	
+		
+		shopTotalsModel.setSubtotal(shippingModelList.get(0).getSubTotal());
+		shopTotalsModel.setShipping(shippingModelList.get(0).getShippingPrice());
+		shopTotalsModel.setTotalAmount(shippingModelList.get(0).getTotalAmount());
+		// from calcDetails model calculations
+		shopTotalsModel.setTotalIP(calcDetailsModelList.get(0).getIpPoints());
+		shopTotalsModel.setTotalMarketingBonus(calcDetailsModelList.get(0).getMarketingBonus());
+		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
+		// Constants added
+		// shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
+		shopTotalsModel.setTax("0.00");
+		shopTotalsModel.setTotalPaid("0.00");
+		shopTotalsModel.setTotalRefunded("0.00");
+		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());
+		shopTotalsModel.setTotalFortyDiscounts("0.00");
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(shopTotalsModel.getSubtotal());
+		System.out.println(shopTotalsModel.getShipping());
+		System.out.println(shopTotalsModel.getTotalAmount());
+		System.out.println(shopTotalsModel.getTotalIP());
+		System.out.println(shopTotalsModel.getTotalMarketingBonus());
+		System.out.println(shopTotalsModel.getTotalBonusJeverly());
+		System.out.println(shopTotalsModel.getTax());
+		System.out.println(shopTotalsModel.getTotalPaid());
+		System.out.println(shopTotalsModel.getTotalRefunded());
+		System.out.println(shopTotalsModel.getTotalPayable());
+		System.out.println(shopTotalsModel.getTotalFortyDiscounts());
 	}
 
 	/**
@@ -91,14 +119,22 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
 		ordersSteps.openOrder(orderId);
-		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
-		OrderTotalsModel ordertotal = ordersSteps.grabTotals();
-		OrderInfoModel orderInfo = ordersSteps.grabOrderInfo();	
+		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();	
+		orderTotalsModel = ordersSteps.grabTotals();
 		
 		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
-		orderWorkflows.validateProducts2("PRODUCTS VALIDATION");
+		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
-		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
-		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung geplant");
+		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
+		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");		
+		
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
+	}
+	
+	@After
+	public void saveData() {
+		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName());
+		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName());
+
 	}
 }

@@ -74,7 +74,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@Steps
 	public CartWorkflows cartWorkflows;
 
-	private static OrderModel orderNumber = new OrderModel();
+//	private static OrderModel orderNumber = new OrderModel();
+	private static OrderModel orderModel = new OrderModel();
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
@@ -173,10 +174,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		//TODO change the update method to set the quantity in the model
 		//TODO handle witch product needs to be updated if we have the same product into different discount tables
 		cartSteps.updateProductQuantityIn50DiscountArea("2","N100SV");	
-		cartSteps.updateProductQuantityIn50DiscountArea("0","B002BE");
-	
+		cartSteps.updateProductQuantityIn50DiscountArea("0","B002BE");	
 
-		cartSteps.updateCart();
+		cartSteps.updateCart();			
 
 	//	List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 
@@ -217,9 +217,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		ShippingModel confirmationTotals = confirmationSteps.grabConfirmationTotals();		
 
-//		confirmationSteps.agreeAndCheckout();
-//
-//		validationSteps.verifySuccessMessage();		
+		confirmationSteps.agreeAndCheckout();
+
+		validationSteps.verifySuccessMessage();		
 		
 		
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
@@ -232,16 +232,16 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
 
 		cartWorkflows.setValidateProductsModels(allProductsList, shippingProducts);
-		cartWorkflows.validateProducts2("SHIPPING PHASE PRODUCTS VALIDATION");
+		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
 		cartWorkflows.setValidateProductsModels(allProductsList, confirmationProducts);
-		cartWorkflows.validateProducts2("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
 //		cartWorkflows.setCheckCalculationTotalsModels(cartTotals, totalsCalculated);
 //		cartWorkflows.checkCalculationTotals("CART TOTALS");
 		
-//		cartWorkflows.setVerifyTotalsDiscount(cartTotals, discountCalculationModel);
-//		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
+		cartWorkflows.setVerifyTotalsDiscount(cartTotals, discountCalculationModel);
+		cartWorkflows.verifyTotalsDiscountNoMarketing("DISCOUNT TOTALS");
 		
 		System.out.println(cartTotals.getSubtotal() + ":" + discountCalculationModel.getSubTotal());
 		System.out.println(cartTotals.getTotalAmount() + ":" + discountCalculationModel.getTotalAmount());
@@ -259,24 +259,26 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 	@Test
 	public void us002UserProfileOrderId() {
-
-		// After validation - grab order number
+		
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
 		String orderId = orderHistory.get(0).getOrderId();
-		orderNumber.setOrderId(orderId);
+		String orderPrice = orderHistory.get(0).getTotalPrice();
+		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
+		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
+		orderModel = orderHistory.get(0);
 
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
-		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());
-		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());		
+		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());		
 		for (ProductBasicModel product : allProductsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
-		}
+		}	
+		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 
 	}
 	

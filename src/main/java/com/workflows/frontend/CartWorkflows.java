@@ -31,35 +31,35 @@ public class CartWorkflows {
 		CartWorkflows.cartProducts = cartProducts;
 	}
 
+//	@Step
+//	public void validateProducts(String message) {
+//		int count = 0;
+//		if (!productsList.isEmpty()) {
+//			for (ProductBasicModel productNow : productsList) {
+//
+//				CartProductModel compare = findProduct(productNow.getType(), cartProducts);
+//
+//				PrintUtils.printProductBasicModel(productNow);
+//
+//				compare.setQuantity(compare.getQuantity().replace("x", "").trim());
+//
+//				if (compare.getName() != null) {
+//					checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
+//					checkoutValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getUnitPrice());
+//					checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
+//					count++;
+//				} else {
+//					Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+//				}
+//			}
+//		}
+//
+//		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
+//		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
+//	}
+
 	@Step
 	public void validateProducts(String message) {
-		int count = 0;
-		if (!productsList.isEmpty()) {
-			for (ProductBasicModel productNow : productsList) {
-
-				CartProductModel compare = findProduct(productNow.getType(), cartProducts);
-
-				PrintUtils.printProductBasicModel(productNow);
-
-				compare.setQuantity(compare.getQuantity().replace("x", "").trim());
-
-				if (compare.getName() != null) {
-					checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
-					checkoutValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getUnitPrice());
-					checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
-					count++;
-				} else {
-					Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
-				}
-			}
-		}
-
-		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
-		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
-	}
-
-	@Step
-	public void validateProducts2(String message) {
 
 		for (ProductBasicModel productNow : productsList) {
 			CartProductModel compare = findProduct(productNow.getType(), cartProducts);
@@ -141,10 +141,19 @@ public class CartWorkflows {
 		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
 
 	}
+	@StepGroup
+	public void verifyTotalsDiscountNoMarketing(String message) {
+		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
+		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
+		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());		
+		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
+		
+	}
 
 	@Step
 	public void verifyIP(String productNow, String compare) {
-		Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contentEquals(compare));
 
 	}
 

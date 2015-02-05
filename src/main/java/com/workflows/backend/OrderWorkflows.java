@@ -29,61 +29,63 @@ public class OrderWorkflows {
 		this.orderProducts = orderProducts;
 	}
 
-	@StepGroup
+//	@StepGroup
+//	public void validateProducts(String message) {
+//		int count = 0;
+//		for (ProductBasicModel productNow : productsList) {
+//			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), orderProducts);
+//
+//			PrintUtils.printProductsCompareBackend(productNow, compare);
+//
+//			if (compare.getProductName() != null) {
+//				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
+//				orderValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getPrice());
+//				orderValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
+//				count++;
+//			} else {
+//				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+//			}
+//		}
+//
+//		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
+//		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
+//	}
+
+	@Step
 	public void validateProducts(String message) {
-		int count = 0;
+
 		for (ProductBasicModel productNow : productsList) {
-			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), orderProducts);
+			OrderItemModel compare = orderValidationSteps.findProduct(
+					productNow.getType(), orderProducts);
 
 			PrintUtils.printProductsCompareBackend(productNow, compare);
 
 			if (compare.getProductName() != null) {
-				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
-				orderValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getPrice());
-				orderValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
-				count++;
+				orderValidationSteps.matchName(productNow.getName(),
+						compare.getProductName());
+				orderValidationSteps.validateMatchPrice(productNow.getPrice(),
+						compare.getPrice());
+				orderValidationSteps.validateMatchQuantity(
+						productNow.getQuantity(), compare.getNumber());
+
 			} else {
-				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+				Assert.assertTrue(
+						"Failure: Could not validate all products in the list",
+						compare != null);
+			}
+			int index = orderProducts.indexOf(compare);
+			if (index > -1) {
+				orderProducts.remove(index);
+				System.out.println("index of " + compare.getProductName()
+						+ " removed");
+				System.out.println(orderProducts.size() + " items remained");
 			}
 		}
 
-		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
-		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
-	}
+		Assert.assertTrue("Failure: Products list is empty. ",
+				productsList.size() != 0);
 
-	// @Step
-	// public void validateProducts2(String message) {
-	//
-	// for (ProductBasicModel productNow : productsList) {
-	// OrderItemModel compare =
-	// orderValidationSteps.findProduct(productNow.getType(), orderProducts);
-	//
-	// PrintUtils.printProductsCompareBackend(productNow, compare);
-	//
-	// if (compare.getProductName() != null) {
-	// orderValidationSteps.matchName(productNow.getName(),
-	// compare.getProductName());
-	// orderValidationSteps.validateMatchPrice(productNow.getPrice(),
-	// compare.getPrice());
-	// orderValidationSteps.validateMatchQuantity(productNow.getQuantity(),
-	// compare.getNumber());
-	//
-	// } else {
-	// Assert.assertTrue("Failure: Could not validate all products in the list",
-	// compare != null);
-	// }
-	// int index = orderProducts.indexOf(compare);
-	// if (index > -1) {
-	// orderProducts.remove(index);
-	// System.out.println("index of " + compare.getProductName() + " removed");
-	// System.out.println(orderProducts.size() + " items remained");
-	// }
-	// }
-	//
-	// Assert.assertTrue("Failure: Products list is empty. ",
-	// productsList.size() != 0);
-	//
-	// }
+	}
 
 	private OrderTotalsModel orderTotalModel = new OrderTotalsModel();
 	private CartTotalsModel cartTotalModel = new CartTotalsModel();

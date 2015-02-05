@@ -225,7 +225,7 @@ public class CartCalculation {
 		partial = partial.add(result);
 		// TODO line that breaks
 		result = result.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 2, BigDecimal.ROUND_DOWN);
-		tax = partial.subtract(result).setScale(2, BigDecimal.ROUND_DOWN);
+		tax = partial.subtract(result).setScale(1, BigDecimal.ROUND_DOWN);
 	}
 
 
