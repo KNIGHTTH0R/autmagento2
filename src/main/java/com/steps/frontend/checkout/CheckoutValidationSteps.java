@@ -1,10 +1,12 @@
 package com.steps.frontend.checkout;
 
+import static org.fest.assertions.Assertions.assertThat;
 import net.thucydides.core.annotations.Step;
 
-import org.junit.Assert;
-
 import com.tools.requirements.AbstractSteps;
+
+
+
 
 public class CheckoutValidationSteps extends AbstractSteps {
 
@@ -46,7 +48,9 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	 */
 	@Step
 	public void validateMatchPrice(String productNow, String compare) {
-		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, compare.contains(productNow));
+		assertThat(compare.contains(productNow));
+		
+//		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, compare.contains(productNow));
 	}
 
 	@Step
@@ -57,12 +61,14 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 	@Step
 	public void validateMatchQuantity(String productNow, String compare) {
-		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+		assertThat(compare.contentEquals(productNow));
+//		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
 
 	@Step
 	public void checkTotalAmountFromUrl(String url, String totalAmount) {
-		Assert.assertTrue("Failure: The total amount from URL is incorrect. Expected: " + totalAmount + " Actual: " + url, url.contains(totalAmount));
+		assertThat(url.contains(totalAmount));
+//		Assert.assertTrue("Failure: The total amount from URL is incorrect. Expected: " + totalAmount + " Actual: " + url, url.contains(totalAmount));
 
 	}
 

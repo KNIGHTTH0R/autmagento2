@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 
+import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -30,6 +31,9 @@ public class ConfirmationSteps extends AbstractSteps{
 //		return confirmationPage().grabSurveyData();
 //	}
 	public ShippingModel grabConfirmationTotals() {
+		waitABit(Constants.TIME_CONSTANT);
+		getDriver().navigate().to(getDriver().getCurrentUrl());  
+		waitABit(Constants.TIME_CONSTANT);
 		return confirmationPage().grabConfirmationTotals();
 	}
 

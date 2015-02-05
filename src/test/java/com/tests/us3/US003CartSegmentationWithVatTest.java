@@ -78,7 +78,9 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 	private static CartTotalsModel discountTotals = new CartTotalsModel();
-	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	private static ShippingModel shippingTotals = new ShippingModel();
+	private static ShippingModel confirmationTotals = new ShippingModel();
+	private static List<ProductBasicModel> cartProductsList = new ArrayList<ProductBasicModel>();
 
 	private static CalcDetailsModel discountCalculationModel;
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
@@ -94,7 +96,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	// Test data
 	private static String jewelryDisount = "100";
 	private static String marketingDisount = "150";
-	private static String shippingPrice = "0.0";
+	private static String shippingPrice = "5.04";
 	private static String addressString = "sss sss, tttt, 3, 2345 Wien, Österreich";
 
 	@Before
@@ -166,22 +168,34 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		// searchSteps.searchAndSelectProduct("K007SV", "HAILEY SET (SILVER)");
 		// productData = productSteps.setProductAddToCart("1", "0");
 		// productsList.add(productData);
+		//
+		// searchSteps.searchAndSelectProduct("K046WT", "TONY SET");
+		// productData = productSteps.setProductAddToCart("1", "0");
+		// productsList.add(productData);
+		//
+		// searchSteps.searchAndSelectProduct("K050SV", "JOANNA SET");
+		// productData = productSteps.setProductAddToCart("1", "0");
+		// productsList.add(productData);
+		//
+		// searchSteps.searchAndSelectProduct("K018RS", "TINKERBELL SET");
+		// productData = productSteps.setProductAddToCart("1", "0");
+		// productsList.add(productData);
 
-		searchSteps.searchAndSelectProduct("K046WT", "TONY SET");
+		searchSteps.searchAndSelectProduct("B096SV", "SWEET MELODY BRACELET");
 		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
-
-		searchSteps.searchAndSelectProduct("K046WT", "TONY SET");
+		cartProductsList.add(productData);
+		
+		searchSteps.searchAndSelectProduct("B096SV", "SWEET MELODY BRACELET");
 		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
+		cartProductsList.add(productData);
 
 		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
 		productData = productSteps.setProductAddToCart("1", "16");
-		productsList.add(productData);
+		cartProductsList.add(productData);
 
 		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
+		cartProductsList.add(productData);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -210,7 +224,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
-		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(productsList);
+		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(cartProductsList);
 
 		discountTotals = cartSteps.grabTotals();
 
@@ -220,11 +234,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		shippingSteps.setSameAsBilling(true);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-//		System.out.println(" --- shippingProducts ---");
-//		PrintUtils.printList(shippingProducts);
-//		System.out.println("X --- shippingProducts ---");
+		 System.out.println(" --- shippingProducts ---");
+		 PrintUtils.printList(shippingProducts);
+		 System.out.println("X --- shippingProducts ---");
 
-		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
+		shippingTotals = shippingSteps.grabSurveyData();
 
 		shippingSteps.clickGoToPaymentMethod();
 
@@ -238,13 +252,14 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		confirmationTotals = confirmationSteps.grabConfirmationTotals();
 
 		// Steps to finalize order
-//		confirmationSteps.agreeAndCheckout();
-//		checkoutValidationSteps.verifySuccessMessage();
+		confirmationSteps.agreeAndCheckout();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		// Products List validation
-		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
+		cartWorkflows.setValidateProductsModels(cartProductsList, cartProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
 
 		// Need to validate to discounted item prices
@@ -263,6 +278,9 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
 		// Validate URL
 		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
@@ -290,7 +308,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		// values with discount and no TAX VAT - calculated values
 		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
-
+		
+		//Values Grabbed from last screen totals
+		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName());
+		
 		// Order status and details
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 
@@ -298,7 +319,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
 
 		// Products list - with initial values
-		for (ProductBasicModel product : productsList) {
+		for (ProductBasicModel product : cartProductsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
 		}
 	}

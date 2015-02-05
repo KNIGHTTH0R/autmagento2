@@ -17,6 +17,8 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.utils.PrintUtils;
+import static org.fest.assertions.Assertions.assertThat;
+
 
 public class CartWorkflows {
 
@@ -153,49 +155,66 @@ public class CartWorkflows {
 
 	@Step
 	public void verifyIP(String productNow, String compare) {
+
 		Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contentEquals(compare));
+
+//		assertThat(productNow.contains(compare));
+//		Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+
 
 	}
 
 	@Step
 	public void verifyTotalAmount(String productNow, String compare) {
-		Assert.assertTrue("Failure: Total Amount dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		assertThat(productNow.contains(compare));
+//		Assert.assertTrue("Failure: Total Amount dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyTax(String productNow, String compare) {
-		Assert.assertTrue("Failure: TAX dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		assertThat(productNow.contains(compare));
+//		Assert.assertTrue("Failure: TAX dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyJewelryBonus(String productNow, String compare) {
-		Assert.assertTrue("Failure: Jewelry Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		
+		assertThat(productNow.contains(compare));
+//		Assert.assertTrue("Failure: Jewelry Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifySubTotals(String productNow, String compare) {
-		Assert.assertTrue("Failure: Sub Totals dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		
+		assertThat(productNow.contains(compare));
+//		Assert.assertTrue("Failure: Sub Totals dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyMarketingBonus(String productNow, String compare) {
-		Assert.assertTrue("Failure: Marketing Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		
+		assertThat(productNow.contains(compare));
+//		Assert.assertTrue("Failure: Marketing Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
-		Assert.assertTrue("Failure: Shipping Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		
+		assertThat(productNow.contains(compare));
+//		Assert.assertTrue("Failure: Shipping Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyDiscountsPrice(String productNow, String compare) {
-		Assert.assertTrue("Failure: Discounts Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		assertThat(productNow.contains(compare));
+		
+//		Assert.assertTrue("Failure: Discounts Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
@@ -210,7 +229,7 @@ public class CartWorkflows {
 	@Step
 	public void verifyShippingTotals(String string) {
 		verifyTotalAmount(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
-		verifyShippingPrice(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
+		verifyShippingPrice(shippingGrabbedModel.getShippingPrice(), shippingCalculatedModel.getShippingPrice());
 		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
 		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
 	}
