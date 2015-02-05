@@ -201,7 +201,7 @@ public class CartWorkflows {
 	@Step
 	public void verifyShippingTotals(String string) {
 		verifyTotalAmount(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
-		verifyShippingPrice(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
+		verifyShippingPrice(shippingGrabbedModel.getShippingPrice(), shippingCalculatedModel.getShippingPrice());
 		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
 		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
 	}

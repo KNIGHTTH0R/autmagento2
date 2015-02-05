@@ -94,7 +94,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	// Test data
 	private static String jewelryDisount = "100";
 	private static String marketingDisount = "150";
-	private static String shippingPrice = "0.0";
+	private static String shippingPrice = "5.04";
 	private static String addressString = "sss sss, tttt, 3, 2345 Wien, Österreich";
 
 	@Before
@@ -166,12 +166,20 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		// searchSteps.searchAndSelectProduct("K007SV", "HAILEY SET (SILVER)");
 		// productData = productSteps.setProductAddToCart("1", "0");
 		// productsList.add(productData);
-
-		searchSteps.searchAndSelectProduct("K046WT", "TONY SET");
+//
+//		searchSteps.searchAndSelectProduct("K046WT", "TONY SET");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+//
+//		searchSteps.searchAndSelectProduct("K050SV", "JOANNA SET");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+		
+		searchSteps.searchAndSelectProduct("K018RS", "TINKERBELL SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
-
-		searchSteps.searchAndSelectProduct("K046WT", "TONY SET");
+		
+		searchSteps.searchAndSelectProduct("K018RS", "TINKERBELL SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 
@@ -238,10 +246,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		ShippingModel confirmationTotals = confirmationSteps.grabConfirmationTotals();
 
 		// Steps to finalize order
-//		confirmationSteps.agreeAndCheckout();
-//		checkoutValidationSteps.verifySuccessMessage();
+		confirmationSteps.agreeAndCheckout();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		// Products List validation
 		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
@@ -263,6 +272,9 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
 		// Validate URL
 		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
