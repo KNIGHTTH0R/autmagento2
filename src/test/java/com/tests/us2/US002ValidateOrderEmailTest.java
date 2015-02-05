@@ -77,8 +77,7 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
 		emailData.setProtocol(EmailConstants.PROTOCOL);
 		emailData.setUsername(EmailConstants.USERNAME_US002);
-		emailData.setPassword(EmailConstants.PASSWORD_US002);
-        
+		emailData.setPassword(EmailConstants.PASSWORD_US002);        
         
 		gmailConnector = new GmailConnector(emailData);
 	}
@@ -87,8 +86,7 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 	@Test	
 	//TODO Email should be changed - may need a new email connector if not gmail
 	public void us002ValidateOrderEmailTest() {
-		frontEndSteps.performLogin(username, password);
-		
+		frontEndSteps.performLogin(username, password);		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 	}

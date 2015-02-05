@@ -12,6 +12,7 @@ import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -125,15 +126,27 @@ public class ConfirmationPage extends AbstractPage {
 		submitButton.click();
 	}
 
-	public CartTotalsModel grabSurveyData() {
-		CartTotalsModel result = new CartTotalsModel();
+//	public CartTotalsModel grabSurveyData() {
+//		CartTotalsModel result = new CartTotalsModel();
+//		element(surveyTotalsContainer).waitUntilVisible();
+//
+//		result.setSubtotal(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
+//		result.addDiscount(MongoTableKeys.DISCOUNT_KEY, FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
+//		result.setShipping(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
+//		result.setTotalAmount(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
+//
+//		return result;
+//	}
+	
+	public ShippingModel grabConfirmationTotals() {
+		ShippingModel result = new ShippingModel();
 		element(surveyTotalsContainer).waitUntilVisible();
 
-		result.setSubtotal(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
-		result.addDiscount(MongoTableKeys.DISCOUNT_KEY, FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
-		result.setShipping(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
+		result.setSubTotal(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
+		result.setDiscountPrice(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
+		result.setShippingPrice(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
 		result.setTotalAmount(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
-
+		
 		return result;
 	}
 

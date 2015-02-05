@@ -31,6 +31,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
+import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
@@ -74,6 +75,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	public CartWorkflows cartWorkflows;
 
 	private static OrderModel orderNumber = new OrderModel();
+	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
@@ -83,6 +85,10 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private String username, password;
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
+	private static CalcDetailsModel discountCalculationModel = new CalcDetailsModel();
+	private static String shippingValue = "0";
+	private static String jewelryDiscount = "0";
+	private static String marketingDiscount = "0";
 
 	@Before
 	public void setUp() throws Exception {
@@ -123,20 +129,16 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		ProductBasicModel productData;
 
 		//commented products are for demo
-//		searchSteps.searchAndSelectProduct("N100SV", "MAXI CHAIN (SILVER)");
-//		productData = productSteps.setProductAddToCart("1", "medium");			
-		searchSteps.searchAndSelectProduct("K010SV", "CLARA SET");
-		productData = productSteps.setProductAddToCart("1", "0");			
+		searchSteps.searchAndSelectProduct("N100SV", "MAXI CHAIN (SILVER)");
+		productData = productSteps.setProductAddToCart("1", "medium");			
 		//we add this into both sections because the quantity will be increased at 2, so 1 piece will be added into 25 section 		
 		ProductBasicModel newProduct = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "2");		
 		productsList50.add(productData);
 		productsList25.add(productData);		
 		productsList.add(newProduct);
 		
-//		searchSteps.searchAndSelectProduct("B002BE", "FLORENCE BRACELET (BEIGE)");
-//		productData = productSteps.setProductAddToCart("2", "medium");	
-		searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
-		productData = productSteps.setProductAddToCart("2", "0");
+		searchSteps.searchAndSelectProduct("B002BE", "FLORENCE BRACELET (BEIGE)");
+		productData = productSteps.setProductAddToCart("2", "medium");		
 		ProductBasicModel newProduct2 = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList.add(newProduct2);
 		productsList50.add(newProduct2);
@@ -145,10 +147,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		//for the product from 50 section, the other piece will not remain in the 25 section ,it will come into the 50 section
 		//productsList50.add(productData);
 		
-//		searchSteps.searchAndSelectProduct("E106SV","JOANNA EARRINGS");
-//		productData = productSteps.setProductAddToCart("1", "0");
-		searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-		productData = productSteps.setProductAddToCart("1", "18");
+		searchSteps.searchAndSelectProduct("E106SV","JOANNA EARRINGS");
+		productData = productSteps.setProductAddToCart("1", "0");	
 		productsList.add(productData);
 		productsList50.add(productData);
 		
@@ -172,14 +172,13 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		headerSteps.goToCart();
 		//TODO change the update method to set the quantity in the model
 		//TODO handle witch product needs to be updated if we have the same product into different discount tables
-//		cartSteps.updateProductQuantityIn50DiscountArea("2","N100SV");	
-//		cartSteps.updateProductQuantityIn50DiscountArea("0","B002BE");
-		cartSteps.updateProductQuantityIn50DiscountArea("2","K010SV");	
-		cartSteps.updateProductQuantityIn50DiscountArea("0","K017DK");
+		cartSteps.updateProductQuantityIn50DiscountArea("2","N100SV");	
+		cartSteps.updateProductQuantityIn50DiscountArea("0","B002BE");
+	
 
 		cartSteps.updateCart();
 
-		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
+	//	List<CartProductModel> cartProducts = cartSteps.grabProductsData();
 
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 
@@ -195,61 +194,18 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
 
 		cartTotals = cartSteps.grabTotals();
+	
 		
-		
-		System.out.println("lists size");
-		System.out.println(productsList.size());
-		System.out.println(productsList.get(0).getName());
-		System.out.println(productsList.get(0).getQuantity());
-		System.out.println(productsList.get(1).getName());
-		System.out.println(productsList.get(1).getQuantity());
-		System.out.println(productsList.get(2).getName());
-		System.out.println(productsList.get(2).getQuantity());
-		System.out.println(productsList.get(3).getName());
-		System.out.println(productsList.get(3).getQuantity());
-		System.out.println(productsList.get(4).getName());
-		System.out.println(productsList.get(4).getQuantity());
-		System.out.println("----------------------");
-		System.out.println(productsList50.size());
-		System.out.println(productsList50.get(0).getName());
-		System.out.println(productsList50.get(0).getQuantity());
-		System.out.println(productsList50.get(1).getName());
-		System.out.println(productsList50.get(1).getQuantity());
-		System.out.println(productsList50.get(2).getName());
-		System.out.println(productsList50.get(2).getQuantity());
-		System.out.println("----------------------");
-		System.out.println(productsList25.size());
-		System.out.println(productsList25.get(0).getName());
-		System.out.println(productsList25.get(0).getQuantity());
-		System.out.println("----------------------");
-		System.out.println(productsListMarketing.size());
-		System.out.println(productsListMarketing.get(0).getName());
-		System.out.println(productsListMarketing.get(0).getQuantity());
-		System.out.println(productsListMarketing.get(1).getName());
-		System.out.println(productsListMarketing.get(1).getQuantity());		
-		System.out.println("----------------------");
-		System.out.println(allProductsList.size());
-		System.out.println(allProductsList.get(0).getName());
-		System.out.println(allProductsList.get(0).getQuantity());
-		System.out.println(allProductsList.get(1).getName());
-		System.out.println(allProductsList.get(1).getQuantity());
-		System.out.println(allProductsList.get(2).getName());
-		System.out.println(allProductsList.get(2).getQuantity());
-		System.out.println(allProductsList.get(3).getName());
-		System.out.println(allProductsList.get(3).getQuantity());
-		System.out.println(allProductsList.get(4).getName());
-		System.out.println(allProductsList.get(4).getQuantity());
-		System.out.println(allProductsList.get(5).getName());
-		System.out.println(allProductsList.get(5).getQuantity());
+		discountCalculationModel = calculusSteps.calculateDiscountTotals(totalsList, jewelryDiscount, marketingDiscount);
 
 		cartSteps.clickGoToShipping();
+		
+		shippingCalculatedModel = calculusSteps.calculateShippingTotals(discountCalculationModel, shippingValue);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		PrintUtils.printList(shippingProducts);
-		
+		PrintUtils.printList(shippingProducts);		
 
-		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
-		
+		ShippingModel shippingTotals = shippingSteps.grabSurveyData();		
 
 		shippingSteps.clickGoToPaymentMethod();
 
@@ -259,11 +215,11 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
-		CartTotalsModel confirmationTotals = confirmationSteps.grabSurveyData();		
+		ShippingModel confirmationTotals = confirmationSteps.grabConfirmationTotals();		
 
-		confirmationSteps.agreeAndCheckout();
-
-		validationSteps.verifySuccessMessage();		
+//		confirmationSteps.agreeAndCheckout();
+//
+//		validationSteps.verifySuccessMessage();		
 		
 		
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
@@ -281,9 +237,23 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		cartWorkflows.setValidateProductsModels(allProductsList, confirmationProducts);
 		cartWorkflows.validateProducts2("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
-//		cartWorkflows.setCheckCalculationTotalsModels(totalsCalculated, cartTotals);
+//		cartWorkflows.setCheckCalculationTotalsModels(cartTotals, totalsCalculated);
 //		cartWorkflows.checkCalculationTotals("CART TOTALS");
 		
+//		cartWorkflows.setVerifyTotalsDiscount(cartTotals, discountCalculationModel);
+//		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
+		
+		System.out.println(cartTotals.getSubtotal() + ":" + discountCalculationModel.getSubTotal());
+		System.out.println(cartTotals.getTotalAmount() + ":" + discountCalculationModel.getTotalAmount());
+		System.out.println(cartTotals.getTax() + ":" + discountCalculationModel.getTax());
+		System.out.println(cartTotals.getIpPoints() + ":" + discountCalculationModel.getIpPoints());
+		System.out.println(cartTotals.getJewelryBonus() + ":" + discountCalculationModel.getJewelryBonus());
+		
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
 	}
 
@@ -302,8 +272,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(orderNumber, getClass().getSimpleName());
-		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
-		//TODO verify if productsList or allProductsList should be persisted,depending on how the products appear in order (backend)
+		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());		
 		for (ProductBasicModel product : allProductsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
 		}

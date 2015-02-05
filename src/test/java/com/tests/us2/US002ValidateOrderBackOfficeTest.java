@@ -18,6 +18,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.data.CalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
@@ -46,6 +47,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	private String orderId;
 	public List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
 	public List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
 
 	@Before
 	public void setUp() {
@@ -58,6 +60,15 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		} else {
 			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModel.size() == 1);
 		}
+		
+		
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest");
+		if (calcDetailsModelList.size() == 1) {
+			orderId = orderModel.get(0).getOrderId();
+		} else {
+			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
+		}
+		
 
 		cartTotals = MongoReader.grabTotalsModels("US002CartSegmentationLogicTest");
 		if (cartTotals.size() == 1) {
@@ -82,11 +93,11 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		ordersSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
 		OrderTotalsModel ordertotal = ordersSteps.grabTotals();
-		OrderInfoModel orderInfo = ordersSteps.grabOrderInfo();
-		PrintUtils.printOrderItemsList(orderItemsList);
-		PrintUtils.printOrderTotals(ordertotal);
-		PrintUtils.printOrderInfo(orderInfo);		
-		orderValidationSteps.validateProducts(productsList, orderItemsList);
+		OrderInfoModel orderInfo = ordersSteps.grabOrderInfo();	
+		
+		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
+		orderWorkflows.validateProducts2("PRODUCTS VALIDATION");
+		
 		orderValidationSteps.validateTotals("TOTALS VALIVATION", ordertotal, cartTotals.get(0));
 		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung geplant");
 	}
