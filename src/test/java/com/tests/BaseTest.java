@@ -4,14 +4,17 @@ import java.net.UnknownHostException;
 
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;
+import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.pages.Pages;
 
+import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
 
@@ -24,6 +27,9 @@ public class BaseTest {
 	
 	public MongoConnector mongoConnector;
 	public GmailConnector gmailConnector;
+	
+	@Steps 
+	public CustomVerification customVerifications;
 	
     @Before
     public void startComponents() {
@@ -47,4 +53,14 @@ public class BaseTest {
         
         gmailConnector = new GmailConnector(emailDefaults);
     }
+    
+    
+    
+	/**
+	 * See CustomVerification -  for multiple assertions
+	 */
+	@After
+	public void printErrors(){
+		customVerifications.printErrors();
+	}
 }

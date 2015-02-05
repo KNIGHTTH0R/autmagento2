@@ -139,53 +139,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
 
-		// searchSteps.searchAndSelectProduct("Prod1_ioana",
-		// "PRODUS SIMPLU IOANA");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("Prod1_ioana",
-		// "PRODUS SIMPLU IOANA");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("K010SV", "CLARA SET");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("N084SV", "RHEA NECKLACE");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("E106SV", "JOANNA EARRINGS");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("K007SV", "HAILEY SET (SILVER)");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("K046WT", "TONY SET");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("K050SV", "JOANNA SET");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-		//
-		// searchSteps.searchAndSelectProduct("K018RS", "TINKERBELL SET");
-		// productData = productSteps.setProductAddToCart("1", "0");
-		// productsList.add(productData);
-
-		searchSteps.searchAndSelectProduct("B096SV", "SWEET MELODY BRACELET");
+		searchSteps.searchAndSelectProduct("K089MC", "SURPRISE-BOX (SMALL)");
 		productData = productSteps.setProductAddToCart("1", "0");
 		cartProductsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("B096SV", "SWEET MELODY BRACELET");
+		searchSteps.searchAndSelectProduct("K089MC", "SURPRISE-BOX (SMALL)");
 		productData = productSteps.setProductAddToCart("1", "0");
 		cartProductsList.add(productData);
 
@@ -234,9 +192,9 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		shippingSteps.setSameAsBilling(true);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		 System.out.println(" --- shippingProducts ---");
-		 PrintUtils.printList(shippingProducts);
-		 System.out.println("X --- shippingProducts ---");
+		System.out.println(" --- shippingProducts ---");
+		PrintUtils.printList(shippingProducts);
+		System.out.println("X --- shippingProducts ---");
 
 		shippingTotals = shippingSteps.grabSurveyData();
 
@@ -308,10 +266,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		// values with discount and no TAX VAT - calculated values
 		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
-		
-		//Values Grabbed from last screen totals
+
+		// Values Grabbed from last screen totals
 		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName());
-		
+
 		// Order status and details
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 

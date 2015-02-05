@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import org.junit.Assert;
 
 import com.steps.backend.validations.OrderValidationSteps;
+import com.tools.CustomVerification;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -20,6 +20,8 @@ public class OrderWorkflows {
 
 	@Steps
 	public static OrderValidationSteps orderValidationSteps;
+	@Steps
+	public static CustomVerification customVerification;
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<OrderItemModel> orderProducts = new ArrayList<OrderItemModel>();
@@ -218,7 +220,8 @@ public class OrderWorkflows {
 
 	@Step
 	public void validateOrderStatus(String orderStatus, String string) {
-		Assert.assertTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
+		customVerification.verifyTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
+//		Assert.assertTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
 	}
 
 }
