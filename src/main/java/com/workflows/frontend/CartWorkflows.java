@@ -10,20 +10,21 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
+import com.tools.CustomVerification;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.utils.PrintUtils;
-import static org.fest.assertions.Assertions.assertThat;
 
 
 public class CartWorkflows {
 
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
+	@Steps 
+	public static CustomVerification customVerification;
 
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
@@ -32,33 +33,6 @@ public class CartWorkflows {
 		CartWorkflows.productsList = productsList;
 		CartWorkflows.cartProducts = cartProducts;
 	}
-
-//	@Step
-//	public void validateProducts(String message) {
-//		int count = 0;
-//		if (!productsList.isEmpty()) {
-//			for (ProductBasicModel productNow : productsList) {
-//
-//				CartProductModel compare = findProduct(productNow.getType(), cartProducts);
-//
-//				PrintUtils.printProductBasicModel(productNow);
-//
-//				compare.setQuantity(compare.getQuantity().replace("x", "").trim());
-//
-//				if (compare.getName() != null) {
-//					checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
-//					checkoutValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getUnitPrice());
-//					checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
-//					count++;
-//				} else {
-//					Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
-//				}
-//			}
-//		}
-//
-//		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
-//		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
-//	}
 
 	@Step
 	public void validateProducts(String message) {
@@ -156,66 +130,45 @@ public class CartWorkflows {
 
 	@Step
 	public void verifyIP(String productNow, String compare) {
-
-	//	Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contentEquals(compare));
-
-		assertThat(productNow.contentEquals(compare));
-//		Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
-
-
+		customVerification.verifyTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 	@Step
 	public void verifyTotalAmount(String productNow, String compare) {
-		assertThat(productNow.contains(compare));
-//		Assert.assertTrue("Failure: Total Amount dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
-
+		customVerification.verifyTrue("Failure: Total Amount dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 	@Step
 	public void verifyTax(String productNow, String compare) {
-		assertThat(productNow.contains(compare));
-//		Assert.assertTrue("Failure: TAX dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
-
+		customVerification.verifyTrue("Failure: TAX dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 	@Step
 	public void verifyJewelryBonus(String productNow, String compare) {
-		
-		assertThat(productNow.contains(compare));
-//		Assert.assertTrue("Failure: Jewelry Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
-
+		customVerification.verifyTrue("Failure: Jewelry Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 	@Step
 	public void verifySubTotals(String productNow, String compare) {
-		
-		assertThat(productNow.contains(compare));
-//		Assert.assertTrue("Failure: Sub Totals dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Sub Totals dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyMarketingBonus(String productNow, String compare) {
-		
-		assertThat(productNow.contains(compare));
-//		Assert.assertTrue("Failure: Marketing Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Marketing Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
-		
-		assertThat(productNow.contains(compare));
-//		Assert.assertTrue("Failure: Shipping Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Shipping Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyDiscountsPrice(String productNow, String compare) {
-		assertThat(productNow.contains(compare));
-		
-//		Assert.assertTrue("Failure: Discounts Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Discounts Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
