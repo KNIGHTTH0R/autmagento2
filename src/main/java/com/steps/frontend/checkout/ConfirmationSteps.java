@@ -7,7 +7,6 @@ import net.thucydides.core.annotations.Step;
 import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.requirements.AbstractSteps;
 
