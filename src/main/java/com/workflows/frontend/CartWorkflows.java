@@ -156,9 +156,9 @@ public class CartWorkflows {
 	@Step
 	public void verifyIP(String productNow, String compare) {
 
-		Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contentEquals(compare));
+	//	Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contentEquals(compare));
 
-//		assertThat(productNow.contains(compare));
+		assertThat(productNow.contentEquals(compare));
 //		Assert.assertTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
 
 
