@@ -71,7 +71,7 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 				}
 			}
 		}
-		orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest");
+		orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest" + Constants.GRAB);
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
 		emailData.setHost(EmailConstants.RECEIVING_HOST);

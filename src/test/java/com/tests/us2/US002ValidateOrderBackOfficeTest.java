@@ -58,10 +58,10 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest");
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest");
-		shippingModelList = MongoReader.grabShippingModel("US002CartSegmentationLogicTest");
-		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest");
+		List<OrderModel> orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest" + Constants.GRAB);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest" + Constants.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US002CartSegmentationLogicTest" + Constants.CALC);
+		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest" + Constants.GRAB);
 		
 		if (orderModel.size() == 1) {
 
@@ -121,8 +121,8 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName());
-		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName());
+		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + Constants.GRAB);
 
 	}
 }

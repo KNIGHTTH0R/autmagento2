@@ -72,7 +72,7 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US003CartSegmentationWithVatTest");
+		orderModel = MongoReader.getOrderModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
 		
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();

@@ -23,6 +23,7 @@ public class CartWorkflows {
 
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
+	
 	@Steps 
 	public static CustomVerification customVerification;
 
@@ -38,7 +39,7 @@ public class CartWorkflows {
 	public void validateProducts(String message) {
 
 		for (ProductBasicModel productNow : productsList) {
-			CartProductModel compare = findProduct(productNow.getType(), cartProducts);
+			CartProductModel compare = findProduct(productNow.getType(),productNow.getQuantity(), cartProducts);
 
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
@@ -88,10 +89,10 @@ public class CartWorkflows {
 				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
 	}
 
-	public CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
+	public CartProductModel findProduct(String productCode,String quantity,  List<CartProductModel> cartProducts) {
 		CartProductModel result = new CartProductModel();
 		theFor: for (CartProductModel cartProductModel : cartProducts) {
-			if (cartProductModel.getProdCode().contains(productCode)) {
+			if (cartProductModel.getProdCode().contains(productCode) && cartProductModel.getQuantity().contentEquals(quantity)) {
 				result = cartProductModel;
 				break theFor;
 			}

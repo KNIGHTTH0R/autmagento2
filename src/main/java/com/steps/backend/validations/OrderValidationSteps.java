@@ -1,5 +1,6 @@
 package com.steps.backend.validations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.Screenshots;
@@ -23,7 +24,7 @@ public class OrderValidationSteps extends AbstractSteps {
 	public void validateProducts(List<ProductBasicModel> productsList, List<OrderItemModel> orderProducts) {
 		if (productsList != null) {
 			for (ProductBasicModel productNow : productsList) {
-				OrderItemModel compare = findProduct(productNow.getType(), orderProducts);
+				OrderItemModel compare = findProduct(productNow.getType(),productNow.getQuantity(), orderProducts);
 
 				PrintUtils.printProductsCompareBackend(productNow, compare);
 
@@ -76,13 +77,32 @@ public class OrderValidationSteps extends AbstractSteps {
 
 	}
 
-	public OrderItemModel findProduct(String productCode, List<OrderItemModel> orderProducts) {
-		OrderItemModel result = new OrderItemModel();
+	public List<OrderItemModel> findProducts(String productCode, List<OrderItemModel> orderProducts) {
+		
+		List<OrderItemModel> resultList = new ArrayList<OrderItemModel>();
+		
 
-		theFor: for (OrderItemModel orderProduct : orderProducts) {
+		for (OrderItemModel orderProduct : orderProducts) {
 
 			if (orderProduct.getProductCode().contains(productCode)) {
+				OrderItemModel result = new OrderItemModel();
 				result = orderProduct;
+				
+				resultList.add(result);
+			}
+		}
+		return resultList;
+	}
+	
+	public OrderItemModel findProduct(String productCode, String qty,  List<OrderItemModel> orderProducts) {
+		OrderItemModel result = new OrderItemModel();
+		
+		theFor: for (OrderItemModel orderProduct : orderProducts) {
+			
+			if (orderProduct.getProductCode().contains(productCode) && orderProduct.getNumber().contentEquals(qty)) {
+					
+					result = orderProduct;
+						
 				break theFor;
 			}
 		}
