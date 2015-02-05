@@ -130,45 +130,45 @@ public class CartWorkflows {
 
 	@Step
 	public void verifyIP(String productNow, String compare) {
-		customVerification.verifyTrue("Failure: IP points dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: IP points dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 	@Step
 	public void verifyTotalAmount(String productNow, String compare) {
-		customVerification.verifyTrue("Failure: Total Amount dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Total Amount dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 	@Step
 	public void verifyTax(String productNow, String compare) {
-		customVerification.verifyTrue("Failure: TAX dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: TAX dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 	@Step
 	public void verifyJewelryBonus(String productNow, String compare) {
-		customVerification.verifyTrue("Failure: Jewelry Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Jewelry Bonus dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 	@Step
 	public void verifySubTotals(String productNow, String compare) {
-		customVerification.verifyTrue("Failure: Sub Totals dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Sub Totals dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyMarketingBonus(String productNow, String compare) {
-		customVerification.verifyTrue("Failure: Marketing Bonus dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Marketing Bonus dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
-		customVerification.verifyTrue("Failure: Shipping Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Shipping Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 
 	@Step
 	public void verifyDiscountsPrice(String productNow, String compare) {
-		customVerification.verifyTrue("Failure: Discounts Price dont match Expected" + compare + " Actual: " + productNow, productNow.contains(compare));
+		customVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
 

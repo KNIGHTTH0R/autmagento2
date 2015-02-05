@@ -27,10 +27,9 @@ public class CustomVerification extends AbstractSteps{
 		try{
 			Assert.verify(condition,message);
 		}catch(Exception e){
-			verificationMessages.append("\n" + e);
+			verificationMessages.append("\n" + e.getMessage());
 			LOGGER.info(message);
 		}
-		
 	}
 	
 	@Step
