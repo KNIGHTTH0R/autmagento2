@@ -32,9 +32,8 @@ public class ConfirmationSteps extends AbstractSteps{
 //	}
 	public ShippingModel grabConfirmationTotals() {
 		waitABit(Constants.TIME_CONSTANT);
-		getDriver().navigate().refresh();
+		getDriver().navigate().to(getDriver().getCurrentUrl());  
 		waitABit(Constants.TIME_CONSTANT);
-
 		return confirmationPage().grabConfirmationTotals();
 	}
 

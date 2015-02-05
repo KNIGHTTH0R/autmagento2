@@ -16,7 +16,7 @@ public class ShippingSteps extends AbstractSteps{
 	
 	public ShippingModel grabSurveyData(){
 		waitABit(Constants.TIME_CONSTANT);
-		getDriver().navigate().refresh();
+		getDriver().navigate().to(getDriver().getCurrentUrl());  
 		waitABit(Constants.TIME_CONSTANT);
 		return surveyPage().grabSurveyData();
 	}
