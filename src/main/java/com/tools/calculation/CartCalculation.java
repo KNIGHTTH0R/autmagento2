@@ -408,7 +408,7 @@ public class CartCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_50))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getMarketingBonus())));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getJewelryBonus())));
-		discountCalculation = apply119VAT(discountCalculation, 2, BigDecimal.ROUND_HALF_EVEN);
+		discountCalculation = apply119VAT(discountCalculation, 2, BigDecimal.ROUND_HALF_UP);
 		
 		result.setDiscountPrice(discountCalculation.toString());
 		result.setShippingPrice(shippingValue);

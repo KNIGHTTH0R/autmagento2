@@ -10,6 +10,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.StylistDataModel;
+import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
@@ -71,6 +72,29 @@ public class MongoReader extends MongoConnector {
 				result.setPostCode(MongoUtils.checkField(dbObject, MongoTableKeys.POST_CODE));
 				result.setCountryName(MongoUtils.checkField(dbObject, MongoTableKeys.COUNTRY_NAME));
 				result.setPhoneNumber(MongoUtils.checkField(dbObject, MongoTableKeys.PHONE_NUMBER));
+
+				itemList.add(result);
+			}
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+
+	public static List<UrlModel> grabUrlModels(String testName) {
+		DBObject dbObject = null;
+		List<UrlModel> itemList = new ArrayList<UrlModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.URL_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				UrlModel result = new UrlModel();
+				dbObject = cursor.next();
+
+				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.NAME));
+				result.setUrl(MongoUtils.checkField(dbObject, MongoTableKeys.URL_PATH));
 
 				itemList.add(result);
 			}
@@ -303,7 +327,6 @@ public class MongoReader extends MongoConnector {
 			cursor.close();
 		}
 		return itemList;
-		
+
 	}
 }
-

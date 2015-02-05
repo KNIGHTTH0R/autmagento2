@@ -47,12 +47,11 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps
 	public OrderWorkflows orderWorkflows;
 
-	// public static List<CartTotalsModel> cartTotals = new
-	// ArrayList<CartTotalsModel>();
 	public static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
+	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	private String orderId;
@@ -62,6 +61,9 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 
 		// TODO add setup config file for backend user and pass
 		List<OrderModel> orderModelList = MongoReader.getOrderModel("US003CartSegmentationWithVatTest");
+		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest");
+		shippingModelList = MongoReader.grabShippingModel("US003CartSegmentationWithVatTest");
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US003CartSegmentationWithVatTest");
 
 		if (orderModelList.size() == 1) {
 
@@ -70,18 +72,34 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModelList.size() == 1);
 		}
 
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US003CartSegmentationWithVatTest");
-		if (calcDetailsModelList.size() == 1) {
-			orderId = orderModelList.get(0).getOrderId();
-		} else {
+		if (calcDetailsModelList.size() != 1) {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
 
-		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest");
-		shippingModelList = MongoReader.grabShippingModel("US003CartSegmentationWithVatTest");
+		if (shippingModelList.size() != 1) {
+			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
+		}
 
 		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+
+		// Setup Data from all models in firts test
+		// from Shipping calculations
+		shopTotalsModel.setSubtotal(shippingModelList.get(0).getSubTotal());
+		shopTotalsModel.setShipping(shippingModelList.get(0).getShippingPrice());
+		shopTotalsModel.setTotalAmount(shippingModelList.get(0).getTotalAmount());
+		// from calcDetails model calculations
+		shopTotalsModel.setTotalIP(calcDetailsModelList.get(0).getIpPoints());
+		shopTotalsModel.setTotalMarketingBonus(calcDetailsModelList.get(0).getMarketingBonus());
+		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
+		// Constants added
+		// shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
+		shopTotalsModel.setTax("0.00");
+		shopTotalsModel.setTotalPaid("0.00");
+		shopTotalsModel.setTotalRefunded("0.00");
+		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());
+		shopTotalsModel.setTotalFortyDiscounts("0.00");
+
 	}
 
 	/**
@@ -101,17 +119,19 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 		PrintUtils.printOrderItemsList(orderItemsList);
 		PrintUtils.printOrderTotals(orderTotalsModel);
 		PrintUtils.printOrderInfo(orderInfoModel);
-		// TODO work for validation
-		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, calcDetailsModelList.get(0));
+
+		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");
 
-		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
-		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
-		shippingModelList.get(0);
+		// TODO add product list validation
+		// orderWorkflows.setValidateProductsModels(productsList,
+		// orderItemsList);
+		// orderWorkflows.validateProducts("PRODUCTS VALIDATION");
+		// orderValidationSteps.validateProducts(productsList, orderItemsList);
 		// orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(),
 		// "Zahlung erfolgreich");
 		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
-		// orderValidationSteps.validateProducts(productsList, orderItemsList);
+
 	}
 
 	@After
