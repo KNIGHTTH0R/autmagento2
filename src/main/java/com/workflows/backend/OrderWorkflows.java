@@ -1,7 +1,5 @@
 package com.workflows.backend;
 
-import static org.fest.assertions.Assertions.assertThat;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,38 +122,40 @@ public class OrderWorkflows {
 
 	@Step
 	public void verifySubTotals(String orderValue, String calculation) {
-		// assertThat(orderValue.contentEquals(calculation));
+
 		customVerification.verifyTrue("Failure: Subtotal values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
 	}
 
 	@Step
 	public void verifyTotalAmount(String orderValue, String calculation) {
-		// assertThat(orderValue.contentEquals(calculation));
+
 		customVerification.verifyTrue("Failure: Total Amount values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
 	}
 
 	@Step
 	public void verifyTax(String orderValue, String calculation) {
-		// assertThat(orderValue.contains(calculation));
+
 		customVerification.verifyTrue("Failure: Tax values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 	}
 
 	@Step
 	public void verifyShipping(String orderValue, String calculation) {
-		// assertThat(orderValue.contains(calculation));
+
 		customVerification.verifyTrue("Failure: Shipping values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 	}
 
 	@Step
 	public void verifyIP(String orderValue, String calculation) {
-		// assertThat(orderValue.contentEquals(calculation));
-		customVerification.verifyTrue("Failure: IP values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+
+		customVerification.verifyTrue("Failure: IP values dont match: " + orderValue +	 " - " + calculation, orderValue.contentEquals(calculation));
+
 	}
 
 	@Step
 	public void verifyJewelryBonus(String orderValue, String calculation) {
-		// assertThat(orderValue.contains(calculation));
-		customVerification.verifyTrue("Failure: Jewelry bonus values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
+
+		customVerification.verifyTrue("Failure: Jewelry bonus values dont match: " +	 orderValue + " - " + calculation, orderValue.contains(calculation));
+		
 
 	}
 
@@ -175,35 +175,28 @@ public class OrderWorkflows {
 
 	@Step
 	public void verifyMarketingBonus(String orderValue, String calculation) {
-		// Assert.assertTrue("Failure: Marketing bonus values dont match: " +
-		// orderValue + " - " + calculation, orderValue.contains(calculation));
+
 		customVerification.verifyTrue("Failure: Marketing bonus values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 
 	}
 
 	@Step
 	public void verifyTotalPayable(String orderValue, String calculation) {
-		// Assert.assertTrue("Failure: Total Payable values dont match: " +
-		// orderValue + " - " + calculation,
-		// orderValue.contentEquals(calculation));
+
 		customVerification.verifyTrue("Failure: Total Payable values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
 
 	}
 
 	@Step
 	public void verifyTotalPaid(String orderValue, String calculation) {
-		// Assert.assertTrue("Failure: Total Paid values dont match: " +
-		// orderValue + " - " + calculation,
-		// orderValue.contentEquals(calculation));
+
 		customVerification.verifyTrue("Failure: Total Paid values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
 
 	}
 
 	@Step
 	public void verifyTotalRefunded(String orderValue, String calculation) {
-		// Assert.assertTrue("Failure: Total Refunded values dont match: " +
-		// orderValue + " - " + calculation,
-		// orderValue.contentEquals(calculation));
+
 		customVerification.verifyTrue("Failure: Total Refunded values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
 
 	}
@@ -225,13 +218,7 @@ public class OrderWorkflows {
 	@Step
 	public void validateOrderStatus(String orderStatus, String string) {
 		customVerification.verifyTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
-		// Assert.assertTrue("Failure: Status expected is " + string +
-		// ", actual status is " + orderStatus,
-		// orderStatus.contentEquals(string));
-		// Assert.assertTrue("Failure: Status expected is " + string +
-		// ", actual status is " + orderStatus,
-		// orderStatus.contentEquals(string));
-		// assertThat(orderStatus.contentEquals(string));
+
 	}
 
 }

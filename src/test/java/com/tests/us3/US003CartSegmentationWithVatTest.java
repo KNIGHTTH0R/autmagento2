@@ -40,6 +40,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -140,12 +141,12 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct("K089MC", "SURPRISE-BOX (SMALL)");
-		productData = productSteps.setProductAddToCart("1", "0");
+		searchSteps.searchAndSelectProduct("R078SV", "AMÉLIE RING");
+		productData = productSteps.setProductAddToCart("1", "17");
 		cartProductsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("K089MC", "SURPRISE-BOX (SMALL)");
-		productData = productSteps.setProductAddToCart("1", "0");
+		searchSteps.searchAndSelectProduct("R078SV", "AMÉLIE RING");
+		productData = productSteps.setProductAddToCart("1", "17");
 		cartProductsList.add(productData);
 
 		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
@@ -259,23 +260,33 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 	@After
 	public void saveData() {
+
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName() + Constants.CALC );
 		MongoWriter.saveTotalsModel(discountTotals, getClass().getSimpleName() + Constants.CALC);
 
+
 		// Discount calculations - jewelry and marketing
+
 		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName() + Constants.CALC);
 
+
 		// values with discount and no TAX VAT - calculated values
+
 		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
 
+
 //		// Values Grabbed from last screen totals
-//		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + MongoTableKeys.GRAB);
 
 		// Order status and details
+
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
 
+
 		// Payment URL with values
+
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
+
 
 		// Products list - with initial values
 		for (ProductBasicModel product : cartProductsList) {

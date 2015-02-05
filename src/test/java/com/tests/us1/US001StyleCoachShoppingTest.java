@@ -76,6 +76,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private static OrderModel orderModel = new OrderModel();
+	private static CalculationModel totalsCalculated = new CalculationModel();
 
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
@@ -154,7 +155,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		calcList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
 		calcList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
 		calcList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
-		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(calcList);
+		totalsCalculated = CartCalculation.calculateTotalSum(calcList);
 
 		cartSteps.clickGoToShipping();
 
@@ -192,20 +193,17 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		cartWorkflows.setCheckCalculationTotalsModels(cartTotals, totalsCalculated);
 		cartWorkflows.checkCalculationTotals("CART TOTALS");
-
-		// Shipping has no IP
-		// checkoutValidationSteps.checkCalculationTotals("SHIPPING TOTALS",
-		// totalsCalculated, shippingTotals);
 		
-//		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
-//		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		//TODO add calculated Shipping values
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingTotals);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		//TODO add Confirmation values validation
+
 	}
 
 	@Test
 	public void us001UserProfileOrderId() {
-
-		
-		// After validation - grab order number
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
@@ -218,7 +216,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		
+//		MongoWriter.save(totalsCalculated, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
 		for (ProductBasicModel product : productsList) {
