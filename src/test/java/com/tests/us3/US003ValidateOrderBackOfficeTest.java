@@ -28,6 +28,7 @@ import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
@@ -62,8 +63,8 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 		// TODO add setup config file for backend user and pass
 		List<OrderModel> orderModelList = MongoReader.getOrderModel("US003CartSegmentationWithVatTest");
 		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest");
-		shippingModelList = MongoReader.grabShippingModel("US003CartSegmentationWithVatTest");
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US003CartSegmentationWithVatTest");
+		shippingModelList = MongoReader.grabShippingModel("US003CartSegmentationWithVatTest" + MongoTableKeys.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US003CartSegmentationWithVatTest" + MongoTableKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 

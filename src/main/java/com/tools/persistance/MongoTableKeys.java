@@ -2,6 +2,11 @@ package com.tools.persistance;
 
 public class MongoTableKeys {
 	
+	//DB names suffix for 
+
+	public static final String GRAB = "-GRB";
+	public static final String CALC = "-CLC";
+	
 	//Keys used for total model FE
 	public static final String DISCOUNT_KEY = "DISCOUNT";
 	public static final String DISCOUNT_25_KEY = "25DISCOUNT";

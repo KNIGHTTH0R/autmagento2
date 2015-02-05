@@ -40,6 +40,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -258,23 +259,24 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
-		MongoWriter.saveTotalsModel(discountTotals, getClass().getSimpleName());
+		//Grabbed values
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName() + MongoTableKeys.GRAB);
+		MongoWriter.saveTotalsModel(discountTotals, getClass().getSimpleName()+ MongoTableKeys.GRAB);
 
 		// Discount calculations - jewelry and marketing
-		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());
+		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName() + MongoTableKeys.CALC);
 
 		// values with discount and no TAX VAT - calculated values
-		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + MongoTableKeys.CALC);
 
 //		// Values Grabbed from last screen totals
-//		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + MongoTableKeys.GRAB);
 
 		// Order status and details
-		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + MongoTableKeys.GRAB);
 
 		// Payment URL with values
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + MongoTableKeys.GRAB);
 
 		// Products list - with initial values
 		for (ProductBasicModel product : cartProductsList) {
