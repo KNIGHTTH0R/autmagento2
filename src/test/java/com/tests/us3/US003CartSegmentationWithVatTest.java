@@ -267,8 +267,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		// values with discount and no TAX VAT - calculated values
 		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
 
-		// Values Grabbed from last screen totals
-		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName());
+//		// Values Grabbed from last screen totals
+//		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName());
 
 		// Order status and details
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
