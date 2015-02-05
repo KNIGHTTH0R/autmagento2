@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -17,13 +16,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.EmailConstants;
 import com.tools.data.backend.OrderModel;
+import com.tools.data.email.EmailCredentialsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -42,7 +44,7 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 	@Steps
 	public EmailSteps emailSteps;
 	
-	private String username, password;
+	private String username, password, emailPassword;
 	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
 	
 	@Before
@@ -56,6 +58,7 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			emailPassword = prop.getProperty("Emailpassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -70,11 +73,20 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 		}
 		
 		orderModel = MongoReader.getOrderModel("US003CartSegmentationWithVatTest");
+		
+		
+		EmailCredentialsModel emailData = new EmailCredentialsModel();
+		
+		emailData.setHost(EmailConstants.RECEIVING_HOST);
+		emailData.setProtocol(EmailConstants.PROTOCOL);
+		emailData.setUsername(username);
+		emailData.setPassword(emailPassword);
+        
+        
+		gmailConnector = new GmailConnector(emailData);
 	}
 	
 	@Test
-	@Pending
-	//TODO make user with gmail implementation and valid gmail account
 	public void us003ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);
 		

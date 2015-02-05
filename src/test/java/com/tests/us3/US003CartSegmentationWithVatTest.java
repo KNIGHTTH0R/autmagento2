@@ -220,19 +220,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		shippingSteps.setSameAsBilling(true);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		System.out.println(" --- shippingProducts ---");
-		PrintUtils.printList(shippingProducts);
-		System.out.println("X --- shippingProducts ---");
+//		System.out.println(" --- shippingProducts ---");
+//		PrintUtils.printList(shippingProducts);
+//		System.out.println("X --- shippingProducts ---");
 
 		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
-
-		// System.out.println(" --- shippingCalculatedModel ---");
-		// PrintUtils.printShippingTotals(shippingCalculatedModel);
-		// System.out.println(" --- shippingCalculatedModel ---");
-		// System.out.println(" --- ----------------------- ---");
-		// System.out.println(" --- shippingTotals ---");
-		// PrintUtils.printShippingTotals(shippingTotals);
-		// System.out.println(" --- shippingTotals ---");
 
 		shippingSteps.clickGoToPaymentMethod();
 
@@ -247,15 +239,9 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 
-		// Totals validation
-		cartWorkflows.setCheckCalculationTotalsModels(cartTotals, totalsCartCalculated);
-		cartWorkflows.checkCalculationTotals("CART TOTALS");
-
-		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
-		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
-
-		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
-		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		// Steps to finalize order
+//		confirmationSteps.agreeAndCheckout();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		// Products List validation
 		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
@@ -268,13 +254,18 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartWorkflows.setValidateProductsModels(shippingProductsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
-		// Steps to finalize order
-		confirmationSteps.agreeAndCheckout();
-		checkoutValidationSteps.verifySuccessMessage();
+		// Totals validation
+		cartWorkflows.setCheckCalculationTotalsModels(cartTotals, totalsCartCalculated);
+		cartWorkflows.checkCalculationTotals("CART TOTALS");
+
+		cartWorkflows.setVerifyTotalsDiscount(discountTotals, discountCalculationModel);
+		cartWorkflows.verifyTotalsDiscount("DISCOUNT TOTALS");
+
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
 		// Validate URL
 		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
-
 	}
 
 	@Test

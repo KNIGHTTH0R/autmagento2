@@ -47,8 +47,6 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps
 	public OrderWorkflows orderWorkflows;
 
-	// public static List<CartTotalsModel> cartTotals = new
-	// ArrayList<CartTotalsModel>();
 	public static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
