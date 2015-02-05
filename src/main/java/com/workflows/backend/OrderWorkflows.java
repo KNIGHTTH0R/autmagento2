@@ -1,10 +1,11 @@
 package com.workflows.backend;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import org.junit.Assert;
@@ -29,61 +30,33 @@ public class OrderWorkflows {
 		this.orderProducts = orderProducts;
 	}
 
-//	@StepGroup
-//	public void validateProducts(String message) {
-//		int count = 0;
-//		for (ProductBasicModel productNow : productsList) {
-//			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), orderProducts);
-//
-//			PrintUtils.printProductsCompareBackend(productNow, compare);
-//
-//			if (compare.getProductName() != null) {
-//				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
-//				orderValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getPrice());
-//				orderValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
-//				count++;
-//			} else {
-//				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
-//			}
-//		}
-//
-//		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
-//		Assert.assertTrue("Failure: not all products have been validated. ", count == productsList.size());
-//	}
-
 	@Step
 	public void validateProducts(String message) {
 
 		for (ProductBasicModel productNow : productsList) {
-			OrderItemModel compare = orderValidationSteps.findProduct(
-					productNow.getType(), orderProducts);
+			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), orderProducts);
 
 			PrintUtils.printProductsCompareBackend(productNow, compare);
 
 			if (compare.getProductName() != null) {
-				orderValidationSteps.matchName(productNow.getName(),
-						compare.getProductName());
-				orderValidationSteps.validateMatchPrice(productNow.getPrice(),
-						compare.getPrice());
-				orderValidationSteps.validateMatchQuantity(
-						productNow.getQuantity(), compare.getNumber());
+				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
+				orderValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getPrice());
+				orderValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
 
 			} else {
-				Assert.assertTrue(
-						"Failure: Could not validate all products in the list",
-						compare != null);
+				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
 			int index = orderProducts.indexOf(compare);
 			if (index > -1) {
 				orderProducts.remove(index);
-				System.out.println("index of " + compare.getProductName()
-						+ " removed");
+				System.out.println("index of " + compare.getProductName() + " removed");
 				System.out.println(orderProducts.size() + " items remained");
 			}
 		}
 
-		Assert.assertTrue("Failure: Products list is empty. ",
-				productsList.size() != 0);
+		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
+
+		Assert.assertTrue("Failure: Not all products have been validated . ", orderProducts.size() == 0);
 
 	}
 
@@ -140,32 +113,46 @@ public class OrderWorkflows {
 
 	@Step
 	public void verifySubTotals(String orderValue, String calculation) {
-		Assert.assertTrue("Failure: Subtotal values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		assertThat(orderValue.contentEquals(calculation));
+		// Assert.assertTrue("Failure: Subtotal values dont match: " +
+		// orderValue + " - " + calculation,
+		// orderValue.contentEquals(calculation));
 	}
 
 	@Step
 	public void verifyTotalAmount(String orderValue, String calculation) {
-		Assert.assertTrue("Failure: Total Amount values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		assertThat(orderValue.contentEquals(calculation));
+		// Assert.assertTrue("Failure: Total Amount values dont match: " +
+		// orderValue + " - " + calculation,
+		// orderValue.contentEquals(calculation));
 	}
 
 	@Step
 	public void verifyTax(String orderValue, String calculation) {
-		Assert.assertTrue("Failure: Tax values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		assertThat(orderValue.contains(calculation));
+		// Assert.assertTrue("Failure: Tax values dont match: " + orderValue +
+		// " - " + calculation, orderValue.contains(calculation));
 	}
 
 	@Step
 	public void verifyShipping(String orderValue, String calculation) {
-		Assert.assertTrue("Failure: Shipping values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
+		assertThat(orderValue.contains(calculation));
+		// Assert.assertTrue("Failure: Shipping values dont match: " +
+		// orderValue + " - " + calculation, orderValue.contains(calculation));
 	}
 
 	@Step
 	public void verifyIP(String orderValue, String calculation) {
-		Assert.assertTrue("Failure: IP values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		assertThat(orderValue.contentEquals(calculation));
+		// Assert.assertTrue("Failure: IP values dont match: " + orderValue +
+		// " - " + calculation, orderValue.contentEquals(calculation));
 	}
 
 	@Step
 	public void verifyJewelryBonus(String orderValue, String calculation) {
-		Assert.assertTrue("Failure: Jewelry bonus values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
+		assertThat(orderValue.contains(calculation));
+		// Assert.assertTrue("Failure: Jewelry bonus values dont match: " +
+		// orderValue + " - " + calculation, orderValue.contains(calculation));
 	}
 
 	/**
@@ -218,7 +205,8 @@ public class OrderWorkflows {
 
 	@Step
 	public void validateOrderStatus(String orderStatus, String string) {
-		Assert.assertTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
+	//	Assert.assertTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
+		assertThat(orderStatus.contentEquals(string));
 	}
 
 }

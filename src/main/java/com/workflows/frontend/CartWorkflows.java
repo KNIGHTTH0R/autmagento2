@@ -84,6 +84,7 @@ public class CartWorkflows {
 			}
 		}
 		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
+		Assert.assertTrue("Failure: Not all products have been validated . ", cartProducts.size() == 0);
 
 	}
 

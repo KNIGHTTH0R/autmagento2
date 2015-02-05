@@ -33,6 +33,7 @@ import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
+import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
@@ -41,6 +42,7 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
@@ -76,6 +78,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 //	private static OrderModel orderNumber = new OrderModel();
 	private static OrderModel orderModel = new OrderModel();
+	private static UrlModel urlModel = new UrlModel();
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
@@ -208,6 +211,12 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		ShippingModel shippingTotals = shippingSteps.grabSurveyData();		
 
 		shippingSteps.clickGoToPaymentMethod();
+		
+		String url = shippingSteps.grabUrl();
+		urlModel.setName("Payment URL");
+		urlModel.setUrl(url);
+		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
 
@@ -273,12 +282,14 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 	@After
 	public void saveData() {
+		
 		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());		
 		for (ProductBasicModel product : allProductsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
 		}	
 		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
 
 	}
 	

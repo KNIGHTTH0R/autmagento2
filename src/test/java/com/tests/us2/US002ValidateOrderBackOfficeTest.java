@@ -30,7 +30,6 @@ import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 
 @WithTag(name = "US002", type = "backend")
@@ -88,25 +87,13 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		shopTotalsModel.setTotalMarketingBonus(calcDetailsModelList.get(0).getMarketingBonus());
 		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
 		// Constants added
-		// shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
-		shopTotalsModel.setTax("0.00");
+		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
+//		shopTotalsModel.setTax("0.00");
 		shopTotalsModel.setTotalPaid("0.00");
 		shopTotalsModel.setTotalRefunded("0.00");
 		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());
 		shopTotalsModel.setTotalFortyDiscounts("0.00");
-		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(shopTotalsModel.getSubtotal());
-		System.out.println(shopTotalsModel.getShipping());
-		System.out.println(shopTotalsModel.getTotalAmount());
-		System.out.println(shopTotalsModel.getTotalIP());
-		System.out.println(shopTotalsModel.getTotalMarketingBonus());
-		System.out.println(shopTotalsModel.getTotalBonusJeverly());
-		System.out.println(shopTotalsModel.getTax());
-		System.out.println(shopTotalsModel.getTotalPaid());
-		System.out.println(shopTotalsModel.getTotalRefunded());
-		System.out.println(shopTotalsModel.getTotalPayable());
-		System.out.println(shopTotalsModel.getTotalFortyDiscounts());
+
 	}
 
 	/**
@@ -121,6 +108,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		ordersSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();	
 		orderTotalsModel = ordersSteps.grabTotals();
+		orderInfoModel = ordersSteps.grabOrderInfo();
 		
 		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
