@@ -78,13 +78,13 @@ public class CartWorkflows {
 		checkoutValidationSteps.printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscountSumString(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(),
 				cartTotalModel.getShipping(), cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
 
-		Assert.assertTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.getAskingPrice() + "!",
+		customVerification.verifyTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.getAskingPrice() + "!",
 				cartTotalModel.getSubtotal().equals(calculationModel.getAskingPrice().toString()));
 
-		Assert.assertTrue("The final price should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.getFinalPrice() + "!",
+		customVerification.verifyTrue("The final price should be " + cartTotalModel.getTotalAmount() + " and it is " + calculationModel.getFinalPrice() + "!",
 				cartTotalModel.getTotalAmount().equals(calculationModel.getFinalPrice().toString()));
 
-		Assert.assertTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
+		customVerification.verifyTrue("The total ip points should be " + cartTotalModel.getIpPoints() + " and it is " + calculationModel.getIpPoints() + "!",
 				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
 	}
 
