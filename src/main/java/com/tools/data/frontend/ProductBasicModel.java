@@ -39,5 +39,7 @@ public class ProductBasicModel {
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
+	
+
 
 }
