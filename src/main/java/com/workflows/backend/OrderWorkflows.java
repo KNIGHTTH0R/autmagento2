@@ -38,6 +38,7 @@ public class OrderWorkflows {
 
 			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), productNow.getQuantity(), orderProducts);
 
+
 			PrintUtils.printProductsCompareBackend(productNow, compare);
 			if (compare.getProductName() != null && (productNow.getQuantity().contentEquals(compare.getNumber()))) {
 				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());

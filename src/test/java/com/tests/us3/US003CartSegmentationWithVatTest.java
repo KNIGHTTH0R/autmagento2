@@ -21,7 +21,6 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
-import com.steps.frontend.ProfileSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
@@ -71,8 +70,6 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public ProfileSteps profileSteps;
-	@Steps
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public PaymentSteps paymentSteps;
@@ -82,6 +79,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private static ShippingModel shippingTotals = new ShippingModel();
 	private static ShippingModel confirmationTotals = new ShippingModel();
 	private static List<ProductBasicModel> cartProductsList = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> shippingProductsList = new ArrayList<ProductBasicModel>();
 
 	private static CalcDetailsModel discountCalculationModel;
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
@@ -184,7 +182,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
-		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(cartProductsList);
+		shippingProductsList = calculationSteps.remove119VAT(cartProductsList);
 
 		discountTotals = cartSteps.grabTotals();
 
@@ -246,17 +244,6 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
 	}
 
-	@Test
-	public void us003UserProfileOrderId() {
-		headerSteps.redirectToProfileHistory();
-		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-
-		String orderId = orderHistory.get(0).getOrderId();
-		String orderPrice = orderHistory.get(0).getTotalPrice();
-		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
-		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
-		orderModel = orderHistory.get(0);
-	}
 
 	@After
 	public void saveData() {
@@ -291,6 +278,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		// Products list - with initial values
 		for (ProductBasicModel product : cartProductsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.GRAB);
+		}
+		// Products list - with initial values
+		for (ProductBasicModel product : shippingProductsList) {
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.CALC);
 		}
 	}
 
