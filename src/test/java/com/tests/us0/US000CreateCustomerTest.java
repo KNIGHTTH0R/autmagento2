@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.data.StylistDataModel;
@@ -36,6 +37,8 @@ public class US000CreateCustomerTest extends BaseTest{
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	/**

@@ -76,12 +76,12 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@Steps
 	public CartWorkflows cartWorkflows;
 
-//	private static OrderModel orderNumber = new OrderModel();
+
 	private static OrderModel orderModel = new OrderModel();
 	private static UrlModel urlModel = new UrlModel();
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
-	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+//	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
@@ -136,16 +136,16 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		searchSteps.searchAndSelectProduct("R104WT", "OPEN MIND RING");
 		productData = productSteps.setProductAddToCart("1", "16");			
 		//we add this into both sections because the quantity will be increased at 2, so 1 piece will be added into 25 section 		
-		ProductBasicModel newProduct = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "2");		
+	
 		productsList50.add(productData);
 		productsList25.add(productData);		
 //		productsList.add(newProduct);
 		
 		searchSteps.searchAndSelectProduct("U001GO", "LOOP CHAIN 60 (GOLD)");
 		productData = productSteps.setProductAddToCart("2", "0");		
-		ProductBasicModel newProduct2 = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
+		ProductBasicModel newProduct = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 //		productsList.add(newProduct2);
-		productsList50.add(newProduct2);
+		productsList50.add(newProduct);
 	
 		//we remove the item product from 50 section because after updating the quantity will remain just 1 item.evend if we set 0 quantity
 		//for the product from 50 section, the other piece will not remain in the 25 section ,it will come into the 50 section
@@ -192,7 +192,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
 		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
 		totalsList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
-		CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
+	//	CalculationModel totalsCalculated = CartCalculation.calculateTotalSum(totalsList);
 
 		System.out.println("TOTALS FOR CHECKOUT ,SHIPPING AND CONFIRMATION");
 
