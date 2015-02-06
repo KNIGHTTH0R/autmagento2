@@ -132,20 +132,19 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	public void uS002CartSegmentationLogicTest() {
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
-
-		//commented products are for demo
+	
 		searchSteps.searchAndSelectProduct("R104WT", "OPEN MIND RING");
 		productData = productSteps.setProductAddToCart("1", "16");			
 		//we add this into both sections because the quantity will be increased at 2, so 1 piece will be added into 25 section 		
 		ProductBasicModel newProduct = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "2");		
 		productsList50.add(productData);
 		productsList25.add(productData);		
-		productsList.add(newProduct);
+//		productsList.add(newProduct);
 		
 		searchSteps.searchAndSelectProduct("U001GO", "LOOP CHAIN 60 (GOLD)");
 		productData = productSteps.setProductAddToCart("2", "0");		
 		ProductBasicModel newProduct2 = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
-		productsList.add(newProduct2);
+//		productsList.add(newProduct2);
 		productsList50.add(newProduct2);
 	
 		//we remove the item product from 50 section because after updating the quantity will remain just 1 item.evend if we set 0 quantity
@@ -154,17 +153,17 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		
 		searchSteps.searchAndSelectProduct("B115WT","BLUEBELL (WHITE)");
 		productData = productSteps.setProductAddToCart("1", "0");	
-		productsList.add(productData);
+//		productsList.add(productData);
 		productsList50.add(productData);
 		
 		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
 		productData = productSteps.setProductAddToCart("2", "0");
-		productsList.add(productData);
+//		productsList.add(productData);
 		productsListMarketing.add(productData);				
 
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 		productData = productSteps.setProductAddToCart("1", "0");
-		productsList.add(productData);
+//		productsList.add(productData);
 		productsListMarketing.add(productData);
 		
 		allProductsList.addAll(productsList25);
@@ -264,22 +263,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		
 		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-
 	}
 
-	@Test
-	public void us002UserProfileOrderId() {
-		
-		headerSteps.redirectToProfileHistory();
-		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-
-		String orderId = orderHistory.get(0).getOrderId();
-		String orderPrice = orderHistory.get(0).getTotalPrice();
-		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
-		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
-		orderModel = orderHistory.get(0);
-
-	}
 
 	@After
 	public void saveData() {
@@ -294,8 +279,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 	}
 	
-	
-	private ProductBasicModel newProductObject(String name, String price, String type, String quantity){
+	//TODO move this 
+	public ProductBasicModel newProductObject(String name, String price, String type, String quantity){
 		ProductBasicModel newProduct = new ProductBasicModel();
 		newProduct.setName(name);
 		newProduct.setPrice(price);
@@ -304,5 +289,6 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		
 		return newProduct;
 	}
+
 
 }

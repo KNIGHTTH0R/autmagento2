@@ -65,7 +65,7 @@ public class CustomerFormModel {
 	}
 	
 	public void setPassword() throws Exception {
-		this.password = FieldGenerators.generateRandomString(13, Mode.ALPHANUMERIC);
+		this.password = FieldGenerators.generateRandomString(13, Mode.ALPHANUMERIC) + "q1";
 	}
 
 }
