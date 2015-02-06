@@ -37,9 +37,41 @@ public class ProductDetailedModel {
 	private String customDesign;
 	private String customLayoutUpdate;
 	private String optionsContainer;
-	private StockDataModel stockData = new StockDataModel();
+	private StockDataModel stockData;
 	private Map<String, String> additionalAttributes = new HashMap<String, String>();
 	private String store;
+	
+	
+	public ProductDetailedModel(String value){
+		setSessionId(value);
+		setType(value);
+		setSet(value);
+		setSku(value);
+		setName(value);
+		setDescription(value);
+		setShortDescription(value);
+		setWeight(value);
+		setStatus(value);
+		setUrlKey(value);
+		setUrlPath(value);
+		setVisibility(value);
+		setHasOptions(value);
+		setGiftMessageAvailable(value);
+		setPrice(value);
+		setSpecialPrice(value);
+		setSpecialFromDate(value);
+		setSpecialToDate(value);
+		setTaxClassId(value);
+		setMetaTitle(value);
+		setMetaKeyword(value);
+		setMetaDescription(value);
+		setCustomDesign(value);
+		setCustomLayoutUpdate(value);
+		setOptionsContainer(value);
+		setStore(value);
+		
+		setStockData(new StockDataModel(value));
+	}
 
 	public String getSessionId() {
 		return sessionId;

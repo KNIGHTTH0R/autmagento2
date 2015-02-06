@@ -21,6 +21,28 @@ public class StockDataModel {
 	private String earliestAvailability;
 	private String maximumPercentageToBorrow;
 	private String useConfigMaximumPercentageToBorrow;
+	
+	public StockDataModel(String value){
+		setQty(value);
+		setIsInStock(value);
+		setManageStock(value);
+		setUseConfigManageStock(value);
+		setMinQty(value);
+		setUseConfigMinQty(value);
+		setMinSaleQty(value);
+		setUseConfigMinSaleQty(value);
+		setMaxSaleQty(value);
+		setUseConfigMaxSaleQty(value);
+		setIsQtyDecimal(value);
+		setBackorders(value);
+		setUseConfigBackorders(value);
+		setNotifyStockQty(value);
+		setUseConfigNotifyStockQty(value);
+		setIsDiscontinued(value);
+		setEarliestAvailability(value);
+		setMaximumPercentageToBorrow(value);
+		setUseConfigMaximumPercentageToBorrow(value);
+	}
 
 	public String getQty() {
 		return qty;
