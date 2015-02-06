@@ -28,7 +28,6 @@ import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
@@ -63,10 +62,9 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 		// TODO add setup config file for backend user and pass
 
 		List<OrderModel> orderModelList = MongoReader.getOrderModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
-		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US003CartSegmentationWithVatTest"+ Constants.CALC);
+		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest" + Constants.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US003CartSegmentationWithVatTest" + Constants.CALC);
 		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US003CartSegmentationWithVatTest" + Constants.CALC);
-
 
 		if (orderModelList.size() == 1) {
 
@@ -82,10 +80,10 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 		if (shippingModelList.size() != 1) {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
-		//TODO Asta aici era. Sigur trebuie?
+		// TODO Asta aici era. Sigur trebuie?
 		// Clean DB
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB );
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC );
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
 
 		// Setup Data from all models in firts test
 		// from Shipping calculations
@@ -127,13 +125,8 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");
 
-		// TODO add product list validation
-		// orderWorkflows.setValidateProductsModels(productsList,
-		// orderItemsList);
-		 orderWorkflows.validateProducts("PRODUCTS VALIDATION");
-		// orderValidationSteps.validateProducts(productsList, orderItemsList);
-		// orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(),
-		// "Zahlung erfolgreich");
+		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
+		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
 		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
 
 	}

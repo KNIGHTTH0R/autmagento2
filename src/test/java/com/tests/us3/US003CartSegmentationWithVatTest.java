@@ -79,6 +79,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	private static ShippingModel shippingTotals = new ShippingModel();
 	private static ShippingModel confirmationTotals = new ShippingModel();
 	private static List<ProductBasicModel> cartProductsList = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> shippingProductsList = new ArrayList<ProductBasicModel>();
 
 	private static CalcDetailsModel discountCalculationModel;
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
@@ -181,7 +182,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
-		List<ProductBasicModel> shippingProductsList = calculationSteps.remove119VAT(cartProductsList);
+		shippingProductsList = calculationSteps.remove119VAT(cartProductsList);
 
 		discountTotals = cartSteps.grabTotals();
 
@@ -277,6 +278,10 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		// Products list - with initial values
 		for (ProductBasicModel product : cartProductsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.GRAB);
+		}
+		// Products list - with initial values
+		for (ProductBasicModel product : shippingProductsList) {
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.CALC);
 		}
 	}
 

@@ -23,12 +23,11 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.backend.OrderModel;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 
 @WithTag(name = "US003", type = "frontend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.StyleCoach.Shopping.class)	
 @RunWith(ThucydidesRunner.class)
 public class US003UserProfileOrderIdTest extends BaseTest{
 
@@ -71,7 +70,7 @@ public class US003UserProfileOrderIdTest extends BaseTest{
 
 		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-		orderModel = MongoReader.grabOrderModels("US003CartSegmentationWithVatTest").get(0);
+		orderModel = MongoReader.grabOrderModels("US003CartSegmentationWithVatTest" + Constants.GRAB).get(0);
 	}
 	
 	
