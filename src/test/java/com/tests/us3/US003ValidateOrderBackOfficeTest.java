@@ -127,7 +127,7 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 		// TODO add product list validation
 		// orderWorkflows.setValidateProductsModels(productsList,
 		// orderItemsList);
-		// orderWorkflows.validateProducts("PRODUCTS VALIDATION");
+		 orderWorkflows.validateProducts("PRODUCTS VALIDATION");
 		// orderValidationSteps.validateProducts(productsList, orderItemsList);
 		// orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(),
 		// "Zahlung erfolgreich");

@@ -21,7 +21,6 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
-import com.steps.frontend.ProfileSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
@@ -70,8 +69,6 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	public ShippingSteps shippingSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
-	@Steps
-	public ProfileSteps profileSteps;
 	@Steps
 	public CartWorkflows cartWorkflows;
 	@Steps
@@ -245,17 +242,6 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
 	}
 
-	@Test
-	public void us003UserProfileOrderId() {
-		headerSteps.redirectToProfileHistory();
-		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-
-		String orderId = orderHistory.get(0).getOrderId();
-		String orderPrice = orderHistory.get(0).getTotalPrice();
-		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
-		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
-		orderModel = orderHistory.get(0);
-	}
 
 	@After
 	public void saveData() {
