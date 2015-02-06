@@ -61,10 +61,12 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 	public void setUp() {
 
 		// TODO add setup config file for backend user and pass
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US003CartSegmentationWithVatTest");
-		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest");
-		shippingModelList = MongoReader.grabShippingModel("US003CartSegmentationWithVatTest" + MongoTableKeys.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US003CartSegmentationWithVatTest" + MongoTableKeys.CALC);
+
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
+		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
+		shippingModelList = MongoReader.grabShippingModel("US003CartSegmentationWithVatTest"+ Constants.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US003CartSegmentationWithVatTest" + Constants.CALC);
+
 
 		if (orderModelList.size() == 1) {
 
@@ -80,9 +82,10 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 		if (shippingModelList.size() != 1) {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
-
+		//TODO Asta aici era. Sigur trebuie?
 		// Clean DB
-		MongoConnector.cleanCollection(getClass().getSimpleName());
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB );
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC );
 
 		// Setup Data from all models in firts test
 		// from Shipping calculations
@@ -137,8 +140,8 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName());
-		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName());
+		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + Constants.GRAB);
 
 	}
 }

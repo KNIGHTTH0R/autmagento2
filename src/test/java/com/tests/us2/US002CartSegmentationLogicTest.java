@@ -124,7 +124,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		creditCardData.setYearExpiration("2016");
 		creditCardData.setCvcNumber("737");
 
-		MongoConnector.cleanCollection(getClass().getSimpleName());
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
 	}
 
 	@Test
@@ -133,16 +134,16 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		ProductBasicModel productData;
 
 		//commented products are for demo
-		searchSteps.searchAndSelectProduct("N100SV", "MAXI CHAIN (SILVER)");
-		productData = productSteps.setProductAddToCart("1", "medium");			
+		searchSteps.searchAndSelectProduct("R104WT", "OPEN MIND RING");
+		productData = productSteps.setProductAddToCart("1", "16");			
 		//we add this into both sections because the quantity will be increased at 2, so 1 piece will be added into 25 section 		
 		ProductBasicModel newProduct = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "2");		
 		productsList50.add(productData);
 		productsList25.add(productData);		
 		productsList.add(newProduct);
 		
-		searchSteps.searchAndSelectProduct("B002BE", "FLORENCE BRACELET (BEIGE)");
-		productData = productSteps.setProductAddToCart("2", "medium");		
+		searchSteps.searchAndSelectProduct("U001GO", "LOOP CHAIN 60 (GOLD)");
+		productData = productSteps.setProductAddToCart("2", "0");		
 		ProductBasicModel newProduct2 = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList.add(newProduct2);
 		productsList50.add(newProduct2);
@@ -151,7 +152,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		//for the product from 50 section, the other piece will not remain in the 25 section ,it will come into the 50 section
 		//productsList50.add(productData);
 		
-		searchSteps.searchAndSelectProduct("E106SV","JOANNA EARRINGS");
+		searchSteps.searchAndSelectProduct("B115WT","BLUEBELL (WHITE)");
 		productData = productSteps.setProductAddToCart("1", "0");	
 		productsList.add(productData);
 		productsList50.add(productData);
@@ -176,8 +177,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		headerSteps.goToCart();
 		//TODO change the update method to set the quantity in the model
 		//TODO handle witch product needs to be updated if we have the same product into different discount tables
-		cartSteps.updateProductQuantityIn50DiscountArea("2","N100SV");	
-		cartSteps.updateProductQuantityIn50DiscountArea("0","B002BE");	
+		cartSteps.updateProductQuantityIn50DiscountArea("2","R104WT");	
+		cartSteps.updateProductQuantityIn50DiscountArea("0","U001GO");	
 
 		cartSteps.updateCart();			
 
@@ -226,9 +227,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		ShippingModel confirmationTotals = confirmationSteps.grabConfirmationTotals();		
 
-		confirmationSteps.agreeAndCheckout();
-
-		validationSteps.verifySuccessMessage();		
+//		confirmationSteps.agreeAndCheckout();
+//
+//		validationSteps.verifySuccessMessage();	
 		
 		
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
@@ -283,13 +284,13 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@After
 	public void saveData() {
 		
-		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName());		
+		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName() + Constants.CALC);		
 		for (ProductBasicModel product : allProductsList) {
-			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.GRAB);
 		}	
-		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName());
-		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
 
 	}
 	

@@ -45,4 +45,7 @@ public class Constants {
 	public static final String DISCOUNT_0 = "00";
 	public static final String DISCOUNT_25 = "25";
 	public static final String DISCOUNT_50 = "50";
+	
+	public static final String GRAB = "Grab";
+	public static final String CALC = "Calc";
 }
