@@ -10,6 +10,8 @@ public class SoapKeys {
 	public static final String URN_PREFIX = "urn";
 	public static final String SOAP_PREFIX = "soapenv";
 	public static final String SERVER_URI = "urn:Magento";
+
+	public static final String COMPLEX_OBJECT_ARRAY = "complexObjectArray";
 	
 	//Login keys
 	public static final String LOGIN_PARAM = "loginParam";	
@@ -67,6 +69,16 @@ public class SoapKeys {
 	public static final String EARLIEST_AVAILABILITY = "earliest_availability";
 	public static final String MAXIMUM_PERCENTAGE_TO_BORROW = "maximum_percent_to_borrow";
 	public static final String USE_CONFIG_MAXIMUM_PERCENTAGE_TO_BORROW = "use_config_maximum_percent_to_borrow";
+	//Tier Prices Model
+	public static final String TIER_PRICES = "tier_price";
+	public static final String CUSTOMER_GROUP_ID = "customer_group_id";
+	public static final String WEBSITE = "website";
+	public static final String WEBSITE_IDS = "website_ids";
+	public static final String WEBSITES = "websites";
+	public static final String CATEGORIES = "categories";
+	public static final String CATEGORY_IDS = "category_ids";
+	public static final String KEY = "key";
+	public static final String VALUE = "value";
 
 
 

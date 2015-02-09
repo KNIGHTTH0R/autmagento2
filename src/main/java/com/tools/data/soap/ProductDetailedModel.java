@@ -257,7 +257,7 @@ public class ProductDetailedModel {
 		this.taxClassId = taxClassId;
 	}
 
-	public List<TierPriceModel> getTierPrice() {
+	public List<TierPriceModel> getTierPriceList() {
 		return tierPrice;
 	}
 
