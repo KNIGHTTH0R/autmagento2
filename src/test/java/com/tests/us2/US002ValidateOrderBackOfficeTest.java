@@ -1,7 +1,11 @@
 package com.tests.us2;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -47,6 +51,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	public OrderWorkflows orderWorkflows;
 
 	private String orderId;
+	private String beUser,bePass;
 	public List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
 	public List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
@@ -57,6 +62,28 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Before
 	public void setUp() {
+		
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us2\\us002.properties");
+			prop.load(input);
+			beUser = prop.getProperty("beUser");
+			bePass = prop.getProperty("bePass");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 		List<OrderModel> orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest" + Constants.GRAB);
 		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest" + Constants.CALC);
@@ -77,7 +104,6 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		if (shippingModelList.size() != 1) {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
-	
 		
 		shopTotalsModel.setSubtotal(shippingModelList.get(0).getSubTotal());
 		shopTotalsModel.setShipping(shippingModelList.get(0).getShippingPrice());
@@ -88,7 +114,6 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
 		// Constants added
 		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
-//		shopTotalsModel.setTax("0.00");
 		shopTotalsModel.setTotalPaid("0.00");
 		shopTotalsModel.setTotalRefunded("0.00");
 		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());
@@ -101,7 +126,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	 */
 	@Test
 	public void us002ValidateOrderBackOfficeTest() {
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(beUser, bePass);
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
@@ -123,6 +148,5 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	public void saveData() {
 		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + Constants.GRAB);
 		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + Constants.GRAB);
-
 	}
 }
