@@ -78,7 +78,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 		
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest");
+		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest" + Constants.GRAB);
 
 		if (orderModel.size() == 1) {
 
