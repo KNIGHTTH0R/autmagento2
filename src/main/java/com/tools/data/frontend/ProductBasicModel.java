@@ -40,6 +40,17 @@ public class ProductBasicModel {
 		this.quantity = quantity;
 	}
 	
+	public ProductBasicModel newProductObject(String name, String price, String type, String quantity){
+		ProductBasicModel newProduct = new ProductBasicModel();
+		newProduct.setName(name);
+		newProduct.setPrice(price);
+		newProduct.setQuantity(quantity);
+		newProduct.setType(type);
+		
+		return newProduct;
+	
+}
+	
 
 
 }
