@@ -94,7 +94,7 @@ public class HttpSoapConnector {
 		userBody.addTextNode(user);
 		SOAPElement apikeyBody = loginContainer.addChildElement(SoapKeys.API_KEY);
 		apikeyBody.addTextNode(pass);
-
+		
 		soapMessage.saveChanges();
 
 		return soapMessage;

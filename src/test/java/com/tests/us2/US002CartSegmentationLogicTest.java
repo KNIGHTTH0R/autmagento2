@@ -128,6 +128,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
+		System.out.println(password);
 	}
 
 	@Test
