@@ -159,7 +159,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		cartSteps.clickGoToShipping();
 
-		// TODO - validate shipping without IP points
 		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
 		PrintUtils.printShippingTotals(shippingTotals);
 
@@ -202,25 +201,12 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 	}
 
-	@Test
-	public void us001UserProfileOrderId() {
-		headerSteps.redirectToProfileHistory();
-		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-
-		String orderId = orderHistory.get(0).getOrderId();
-		String orderPrice = orderHistory.get(0).getTotalPrice();
-		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
-		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
-		orderModel = orderHistory.get(0);
-	}
-
 	@After
 	public void saveData() {
-//		MongoWriter.save(totalsCalculated, getClass().getSimpleName());
-		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
-		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName() + Constants.GRAB);
 		for (ProductBasicModel product : productsList) {
-			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName());
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.GRAB);
 		}
 	}
 }
