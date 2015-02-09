@@ -24,21 +24,17 @@ public class CustomerDetailsPage extends AbstractPage {
 	}
 
 	public String extractEmailConfirmationStatus() {
-		
 		String status = "";
 		element(detailsContainer).waitUntilVisible();
-		List<WebElement> elementList = detailsContainer.findElements(By
-				.cssSelector("table.box-left tr"));
-		
+		List<WebElement> elementList = detailsContainer.findElements(By.cssSelector("table.box-left tr"));
+
 		detailsContainer.findElement(By.cssSelector("table.box-left tr:nth-child(2) td:last-child"));
 
 		for (WebElement elemNow : elementList) {
-			if(elemNow.getText().contains("E-Mail-Adresse"))
+			if (elemNow.getText().contains("E-Mail-Adresse"))
 				status = elemNow.getText();
 			System.out.println("EL: " + elemNow.getText());
 		}
-		
-//		System.out.println(isActive.getText());
 
 		return status;
 	}

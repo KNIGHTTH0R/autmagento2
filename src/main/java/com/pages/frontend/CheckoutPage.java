@@ -10,12 +10,12 @@ public class CheckoutPage extends AbstractPage {
 
 	@FindBy(css = "select[id*='billing']")
 	private WebElement selectAddressInput;
-	
+
 	@FindBy(css = "li.address-preview.billing-address-preview")
 	private WebElement addressPreview;
-	
+
 	@FindBy(id = "new-billing-address")
-	private WebElement newAddressButton;	
+	private WebElement newAddressButton;
 
 	public void selectAddressFromDropDown(String address) {
 		element(selectAddressInput).waitUntilVisible();

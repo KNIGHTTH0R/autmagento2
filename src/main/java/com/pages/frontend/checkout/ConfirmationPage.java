@@ -124,18 +124,19 @@ public class ConfirmationPage extends AbstractPage {
 		submitButton.click();
 	}
 
-//	public CartTotalsModel grabSurveyData() {
-//		CartTotalsModel result = new CartTotalsModel();
-//		element(surveyTotalsContainer).waitUntilVisible();
-//
-//		result.setSubtotal(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
-//		result.addDiscount(MongoTableKeys.DISCOUNT_KEY, FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
-//		result.setShipping(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
-//		result.setTotalAmount(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
-//
-//		return result;
-//	}
-	
+	// public CartTotalsModel grabSurveyData() {
+	// CartTotalsModel result = new CartTotalsModel();
+	// element(surveyTotalsContainer).waitUntilVisible();
+	//
+	// result.setSubtotal(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
+	// result.addDiscount(MongoTableKeys.DISCOUNT_KEY,
+	// FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
+	// result.setShipping(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
+	// result.setTotalAmount(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
+	//
+	// return result;
+	// }
+
 	public ShippingModel grabConfirmationTotals() {
 		ShippingModel result = new ShippingModel();
 		element(surveyTotalsContainer).waitUntilVisible();
@@ -144,14 +145,15 @@ public class ConfirmationPage extends AbstractPage {
 		result.setDiscountPrice(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
 		result.setShippingPrice(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
 		result.setTotalAmount(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
-		
+
 		return result;
 	}
 
 	/**
-	 * Due to consistency this method returns {@link CartProductModel} list. Only fileds set are:
-	 * Name, ProdCode, Quantity, Unit Price.
-	 * Left Blank: ProductsPrices, FinalPrice, PriceIP
+	 * Due to consistency this method returns {@link CartProductModel} list.
+	 * Only fileds set are: Name, ProdCode, Quantity, Unit Price. Left Blank:
+	 * ProductsPrices, FinalPrice, PriceIP
+	 * 
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsList() {
@@ -161,7 +163,7 @@ public class ConfirmationPage extends AbstractPage {
 
 		for (WebElement webElementNow : entryList) {
 			CartProductModel productNow = new CartProductModel();
-			
+
 			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 

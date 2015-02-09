@@ -81,11 +81,11 @@ public class CreateCustomerPage extends AbstractPage {
 	public void inputPassword(String passText) {
 		element(passwordInput).waitUntilVisible();
 		passwordInput.sendKeys(passText);
-		
+
 		waitABit(Constants.TIME_CONSTANT);
-		passwordInput.clear();		
+		passwordInput.clear();
 		passwordInput.sendKeys(passText);
-		
+
 	}
 
 	public void inputConfirmation(String passText) {

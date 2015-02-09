@@ -20,42 +20,21 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
 
+//TODO move stuff out to specialized classes. Only SOAP connector should remain
 public class HttpSoapConnector {
 
 	public static void main(String args[]) throws Exception {
-		// // Create SOAP Connection
-		// SOAPConnectionFactory soapConnectionFactory =
-		// SOAPConnectionFactory.newInstance();
-		// SOAPConnection soapConnection =
-		// soapConnectionFactory.createConnection();
-		//
-		//
-		//
-		// // Send SOAP Message to SOAP Server
-		// String url =
-		// "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
-		// SOAPMessage soapResponse =
-		// soapConnection.call(createLoginRequest("stagingaut", "YYz66iiaalop"),
-		// url);
-		//
-		// // print SOAP Response
-		// System.out.print("Response SOAP Message:");
-		// soapResponse.writeTo(System.out);
-		//
-		// soapConnection.close();
-		// createProduct(new ProductDetailedModel("zzzA"));
-
 		soapCreateProduct(new ProductDetailedModel("zzzA")).writeTo(System.out);
-		// createLoginRequest("u", "p");
+
 	}
 
 	public static SOAPMessage soapCreateProduct(ProductDetailedModel product) throws SOAPException, IOException {
 		String sessID = performLogin();
-		
+
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(createProduct(product, sessID), SoapKeys.API_URI);
-		
+
 		return soapResponse;
 	}
 
@@ -66,7 +45,7 @@ public class HttpSoapConnector {
 		String result = "";
 
 		NodeList returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);
-		if(returnList.getLength() == 1){
+		if (returnList.getLength() == 1) {
 			result = returnList.item(0).getTextContent();
 		}
 
@@ -94,7 +73,7 @@ public class HttpSoapConnector {
 		userBody.addTextNode(user);
 		SOAPElement apikeyBody = loginContainer.addChildElement(SoapKeys.API_KEY);
 		apikeyBody.addTextNode(pass);
-		
+
 		soapMessage.saveChanges();
 
 		return soapMessage;
