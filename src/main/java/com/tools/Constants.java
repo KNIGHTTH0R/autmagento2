@@ -27,7 +27,7 @@ public class Constants {
 
 	public static final String RESOURCES_PATH = "src\\main\\resources\\";
 	public static final String BE_USER = "admin";
-	public static final String BE_PASS = "admin123";
+	public static final String BE_PASS = "admin1234";
 	public static final String BE_STYLIST = "simona.popa@evozon.com";
 	public static final String WEB_MAIL = "mailinator.com";
 	

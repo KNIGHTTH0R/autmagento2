@@ -36,12 +36,8 @@ public class OrderWorkflows {
 
 		for (ProductBasicModel productNow : productsList) {
 
-			// List<OrderItemModel> compareList =
-			// orderValidationSteps.findProducts(productNow.getType(),
-			// orderProducts);
 			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), productNow.getQuantity(), orderProducts);
 
-			// for (OrderItemModel orderItemModel : compareList) {
 
 			PrintUtils.printProductsCompareBackend(productNow, compare);
 			if (compare.getProductName() != null && (productNow.getQuantity().contentEquals(compare.getNumber()))) {
@@ -60,10 +56,7 @@ public class OrderWorkflows {
 			}
 		}
 
-		// }
-
 		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
-
 		Assert.assertTrue("Failure: Not all products have been validated . ", orderProducts.size() == 0);
 
 	}

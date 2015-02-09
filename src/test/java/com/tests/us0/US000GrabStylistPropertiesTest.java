@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -30,7 +31,7 @@ public class US000GrabStylistPropertiesTest extends BaseTest {
 	@Steps
 	public BackEndSteps backEndSteps;
 
-	public StylistDataModel validationModel;
+	public StylistDataModel validationModel = new StylistDataModel();
 
 	private String stylistName;
 
@@ -57,8 +58,12 @@ public class US000GrabStylistPropertiesTest extends BaseTest {
 				}
 			}
 		}
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
+	
+	
 
 	/**
 	 * BackEnd steps in this test
@@ -72,6 +77,11 @@ public class US000GrabStylistPropertiesTest extends BaseTest {
 		backEndSteps.openCustomerDetails(stylistName);
 		backEndSteps.clickOnLeadSettings();
 		validationModel = backEndSteps.grabLeadSettingsData();
+		System.out.println(validationModel.getCustomerLeads());
+		System.out.println(validationModel.getHostessLeads());
+		System.out.println(validationModel.getHostessLeadsWeek());
+		System.out.println(validationModel.getStyleCoachLeads());
+		System.out.println(validationModel.getStyleCoachLeadsWeek());
 
 	}
 

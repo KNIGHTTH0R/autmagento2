@@ -66,7 +66,7 @@ public class US000ValidateStylistTest extends BaseTest{
 			}
 		}
 		
-		List<CustomerConfigurationModel> customerConfigurationModels= MongoReader.grabCustomerConfigurationModels("CheckCustomerActivationTest");
+		List<CustomerConfigurationModel> customerConfigurationModels= MongoReader.grabCustomerConfigurationModels("US000CheckCustomerActivationTest");
 		if(customerConfigurationModels.size() > 0){
 			customerConfigurationModel = customerConfigurationModels.get(0);
 			
@@ -77,7 +77,7 @@ public class US000ValidateStylistTest extends BaseTest{
 			System.out.println("The database table has no entries");
 		}
 		
-		List<StylistDataModel> validationList = MongoReader.grabStylistDataModels("GrabStylistPropertiesTest");
+		List<StylistDataModel> validationList = MongoReader.grabStylistDataModels("US000GrabStylistPropertiesTest");
 		if(validationList.size() > 0){
 			initialValidation = validationList.get(0);
 		}else
@@ -95,12 +95,7 @@ public class US000ValidateStylistTest extends BaseTest{
 		backEndSteps.openCustomerDetails(stylistName);
 		backEndSteps.clickOnLeadSettings();
 		finalValidation = backEndSteps.grabLeadSettingsData();
-		
-		System.out.println("####" + finalValidation.getCustomerLeads());
-		System.out.println("####" + finalValidation.getHostessLeads());
-		System.out.println("####" + finalValidation.getHostessLeadsWeek());
-		System.out.println("####" + finalValidation.getStyleCoachLeads());
-		System.out.println("####" + finalValidation.getStyleCoachLeadsWeek());
+	
 		
 		//this line is just to use emailActive var.
 		emailActive.contentEquals("true");
