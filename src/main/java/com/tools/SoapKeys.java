@@ -1,10 +1,12 @@
 package com.tools;
 
-import javax.xml.soap.Name;
 
 
 
 public class SoapKeys {
+	
+
+	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
 
 	//General keys
 	public static final String URN_PREFIX = "urn";
@@ -79,6 +81,7 @@ public class SoapKeys {
 	public static final String CATEGORY_IDS = "category_ids";
 	public static final String KEY = "key";
 	public static final String VALUE = "value";
+	public static final String RESULT = "result";
 
 
 

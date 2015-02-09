@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class ProductDetailedModel {
 
-	private String sessionId;
 	private String type;
 	private String set;
 	private String sku;
@@ -43,7 +42,6 @@ public class ProductDetailedModel {
 	
 	
 	public ProductDetailedModel(String value){
-		setSessionId(value);
 		setType(value);
 		setSet(value);
 		setSku(value);
@@ -71,14 +69,6 @@ public class ProductDetailedModel {
 		setStore(value);
 		
 		setStockData(new StockDataModel(value));
-	}
-
-	public String getSessionId() {
-		return sessionId;
-	}
-
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
 	}
 
 	public String getType() {
