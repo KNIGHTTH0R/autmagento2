@@ -30,9 +30,14 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
+import com.tools.data.CalcDetailsModel;
+import com.tools.data.CalculationModel;
+import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US004", type = "frontend")
@@ -41,11 +46,17 @@ import com.workflows.frontend.CartWorkflows;
 public class US004CartSegmentationWithVatBillingDifferentFromShipping extends BaseTest {
 	
 	String username,password;
+	ProductBasicModel productBasicModel = new ProductBasicModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
+	private static CalcDetailsModel discountCalculationModel;
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
+	private static CartTotalsModel cartTotals = new CartTotalsModel();
+	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
+	private static String jewelryDisount = "150";
+	private static String marketingDisount = "300";
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -112,7 +123,7 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 	
 		searchSteps.searchAndSelectProduct("R051GR", "LOLA VERDE RING");
 		productData = productSteps.setProductAddToCart("2", "17");
-		ProductBasicModel newProduct = newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
+		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 		
@@ -155,6 +166,33 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 		System.out.println(allProductsList.get(3).getName());
 		System.out.println(allProductsList.get(3).getQuantity());
 		
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+
+		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
+
+		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
+
+		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+		
+		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
+		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
+		totalsList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
+
+		CalculationModel totalsCartCalculated = CartCalculation.calculateTotalSum(totalsList);
+		PrintUtils.printCalculationModel(totalsCartCalculated);
+		
+		cartTotals = cartSteps.grabTotals();
+		
+		cartSteps.typeJewerlyBonus(jewelryDisount);
+		cartSteps.updateJewerlyBonus();
+		cartSteps.typeMarketingBonus(marketingDisount);
+		cartSteps.updateMarketingBonus();
+		
+		
+		
+		
+		
 	}
 	
 	@After
@@ -162,17 +200,7 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 		
 	}
 		
-	//TODO remove this from test level
-	public ProductBasicModel newProductObject(String name, String price, String type, String quantity){
-			ProductBasicModel newProduct = new ProductBasicModel();
-			newProduct.setName(name);
-			newProduct.setPrice(price);
-			newProduct.setQuantity(quantity);
-			newProduct.setType(type);
-			
-			return newProduct;
-		
-	}
+
 	
 }
 	

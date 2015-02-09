@@ -20,6 +20,7 @@ public class CartCalculation {
 	private static BigDecimal remainder50 = BigDecimal.valueOf(0);
 	private static BigDecimal remainder00 = BigDecimal.valueOf(0);
 	private static BigDecimal tax = BigDecimal.valueOf(0);
+	BigDecimal jBRegularItems = BigDecimal.valueOf(0);
 
 	/**
 	 * Return product price based on (price - quantity - discount). Discount may
@@ -199,6 +200,49 @@ public class CartCalculation {
 		System.out.println("Remainder after 0% : " + remainder00.toString());
 		System.out.println(" ----------------------------- ");
 
+		return result;
+	}
+	//TODO not finished
+	public List<CartProductModel> calculateCartProducts(List<CalculationModel> totalsList, String jewelryDiscount, String marketingMaterial) {
+		List<CartProductModel> result = new ArrayList<CartProductModel>();
+
+		jewelryDiscount = formatDiscount(jewelryDiscount);
+		marketingMaterial = formatDiscount(marketingMaterial);
+
+		calculateJewelryDiscounts(totalsList, jewelryDiscount);
+
+		for (CalculationModel calcModel : totalsList) {
+			if (calcModel.getTableType().equals(Constants.DISCOUNT_25)){
+				if (remainder25.compareTo(BigDecimal.ZERO) == 0){
+					jBRegularItems = calcModel.getRetailPrice();
+				}
+				else{
+					jBRegularItems = BigDecimal.valueOf(Double.parseDouble(jewelryDiscount));
+				}				
+				
+				
+			
+			}
+			
+			if (calcModel.getTableType().equals(Constants.DISCOUNT_25)){}
+			
+			
+
+		}
+
+		return result;
+	}
+	
+	public BigDecimal calculateCartProductFinalPrice(BigDecimal retailPrice, BigDecimal jBUsedForRegular, BigDecimal jB, BigDecimal sampleRetailSum){
+		
+		BigDecimal result = BigDecimal.ZERO;
+		
+		result = jB.subtract(jBUsedForRegular);
+		result = result.multiply(retailPrice);
+		result = result.divide(sampleRetailSum);
+		result = retailPrice.subtract(result);
+		result = result.divide(BigDecimal.valueOf(2));		
+		
 		return result;
 	}
 
