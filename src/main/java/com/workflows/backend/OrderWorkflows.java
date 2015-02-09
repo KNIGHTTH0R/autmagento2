@@ -134,6 +134,7 @@ public class OrderWorkflows {
 	public void verifyShipping(String orderValue, String calculation) {
 
 		customVerification.verifyTrue("Failure: Shipping values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
+		System.out.println(orderValue + " : " + calculation);
 	}
 
 	@Step

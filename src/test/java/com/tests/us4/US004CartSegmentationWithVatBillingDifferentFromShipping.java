@@ -57,6 +57,7 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
 	private static String jewelryDisount = "150";
 	private static String marketingDisount = "300";
+	List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -139,35 +140,10 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 		allProductsList.addAll(productsList50);
 		allProductsList.addAll(productsListMarketing);
 		
-		
-		System.out.println(productsList50.size());
-		System.out.println(productsList50.get(0).getName());
-		System.out.println(productsList50.get(0).getQuantity());
-		System.out.println(productsList50.get(1).getName());
-		System.out.println(productsList50.get(1).getQuantity());
-		
-		System.out.println("----------------------");
-		System.out.println(productsList25.size());
-		System.out.println(productsList25.get(0).getName());
-		System.out.println(productsList25.get(0).getQuantity());
-		System.out.println("----------------------");
-		System.out.println(productsListMarketing.size());
-		System.out.println(productsListMarketing.get(0).getName());
-		System.out.println(productsListMarketing.get(0).getQuantity());
-		
-		System.out.println("----------------------");
-		System.out.println(allProductsList.size());
-		System.out.println(allProductsList.get(0).getName());
-		System.out.println(allProductsList.get(0).getQuantity());
-		System.out.println(allProductsList.get(1).getName());
-		System.out.println(allProductsList.get(1).getQuantity());
-		System.out.println(allProductsList.get(2).getName());
-		System.out.println(allProductsList.get(2).getQuantity());
-		System.out.println(allProductsList.get(3).getName());
-		System.out.println(allProductsList.get(3).getQuantity());
-		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+		
+	
 
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 
@@ -175,20 +151,23 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
 		
-		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
-		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
-		totalsList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
-
-		CalculationModel totalsCartCalculated = CartCalculation.calculateTotalSum(totalsList);
-		PrintUtils.printCalculationModel(totalsCartCalculated);
-		
-		cartTotals = cartSteps.grabTotals();
+		cartProds.addAll(cartProductsWith50Discount);
+		cartProds.addAll(cartProductsWith25Discount);
+		cartProds.addAll(cartMarketingMaterialsProducts);
+		System.out.println("size" + cartProds.size());
 		
 		cartSteps.typeJewerlyBonus(jewelryDisount);
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDisount);
 		cartSteps.updateMarketingBonus();
 		
+		List<CartProductModel> calculatedProductsList =  CartCalculation.calculateProducts(cartProds, "150", "300");
+		System.out.println("Buba de mai jos");
+		PrintUtils.printList(calculatedProductsList);
+		
+		cartTotals = cartSteps.grabTotals();
+		
+	
 		
 		
 		
