@@ -74,14 +74,12 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 		
 		orderModel = MongoReader.getOrderModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
 		
-		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
 		emailData.setProtocol(EmailConstants.PROTOCOL);
 		emailData.setUsername(username);
 		emailData.setPassword(emailPassword);
-        
         
 		gmailConnector = new GmailConnector(emailData);
 	}
@@ -92,6 +90,7 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
+		emailSteps.validateEmailContent(orderModel.get(0).getTotalPrice(), message);
 	}
 
 }

@@ -22,10 +22,9 @@ public class CreditCardFormPage extends AbstractPage {
 
 	@FindBy(id = "card.cvcCode")
 	private WebElement cvcCodeInput;
-	
+
 	@FindBy(css = "input.paySubmit.paySubmitcard")
 	private WebElement submitButton;
-	
 
 	public void cardNumberInput(String cardNumber) {
 		element(cardNumberInput).waitUntilVisible();
@@ -49,8 +48,8 @@ public class CreditCardFormPage extends AbstractPage {
 		element(cvcCodeInput).waitUntilVisible();
 		cvcCodeInput.sendKeys(cvc);
 	}
-	
-	public void clickOnConfirm(){
+
+	public void clickOnConfirm() {
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
 	}

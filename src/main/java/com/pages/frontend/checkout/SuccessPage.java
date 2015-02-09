@@ -9,14 +9,13 @@ import org.openqa.selenium.WebElement;
 import com.tools.Constants;
 import com.tools.requirements.AbstractPage;
 
-
 @DefaultUrl(Constants.URL_CART_SUCCESS)
-public class SuccessPage extends AbstractPage{
-	
+public class SuccessPage extends AbstractPage {
+
 	@FindBy(className = "success-step-msg")
 	private WebElement messageContainer;
-	
-	public void verifySuccessMessage(){
+
+	public void verifySuccessMessage() {
 		element(messageContainer).waitUntilVisible();
 		String pageText = messageContainer.getText();
 		Assert.assertTrue("Failure: Success message has not been found.", pageText.contains("Wir haben dir eine eMail mit mit den Details zur Bestellung geschickt."));

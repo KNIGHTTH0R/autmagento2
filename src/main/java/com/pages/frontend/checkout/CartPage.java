@@ -258,7 +258,7 @@ public class CartPage extends AbstractPage {
 		boolean containsTerms = true;
 		for (WebElement webElement : entryList) {
 			containsTerms = true;
-			for (String term : terms) {				
+			for (String term : terms) {
 				if (!webElement.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(term)) {
 					containsTerms = false;
 				}

@@ -10,8 +10,6 @@ import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
 
 import com.tools.data.backend.OrderItemModel;
-import com.tools.data.backend.OrderTotalsModel;
-import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.PrintUtils;
@@ -24,7 +22,7 @@ public class OrderValidationSteps extends AbstractSteps {
 	public void validateProducts(List<ProductBasicModel> productsList, List<OrderItemModel> orderProducts) {
 		if (productsList != null) {
 			for (ProductBasicModel productNow : productsList) {
-				OrderItemModel compare = findProduct(productNow.getType(),productNow.getQuantity(), orderProducts);
+				OrderItemModel compare = findProduct(productNow.getType(), productNow.getQuantity(), orderProducts);
 
 				PrintUtils.printProductsCompareBackend(productNow, compare);
 
@@ -36,7 +34,7 @@ public class OrderValidationSteps extends AbstractSteps {
 					Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 				}
 			}
-		}else{
+		} else {
 			Assert.assertTrue("Failure: to validate product list. Product list is empty", productsList != null);
 		}
 	}
@@ -57,52 +55,31 @@ public class OrderValidationSteps extends AbstractSteps {
 		Assert.assertTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
 
-	/**
-	 * OrderTotals are taken from BE. CartTotals are taken from FE.
-	 * 
-	 * @param orderTotals
-	 * @param cartTotals
-	 */
-	// TODO Add discount Map Validation
-	@Step
-	public void validateTotals(String message, OrderTotalsModel orderTotals, CartTotalsModel cartTotals) {
-		Assert.assertTrue("Failure: Subtotal values dont match: " + orderTotals.getSubtotal() + " - " + cartTotals.getSubtotal(), orderTotals.getSubtotal().contentEquals(cartTotals.getSubtotal()));
-		Assert.assertTrue("Failure: Tax values dont match: " + orderTotals.getTax() + " - " + cartTotals.getTax(), orderTotals.getTax().contentEquals(cartTotals.getTax()));
-		Assert.assertTrue("Failure: Shipping values dont match: " + orderTotals.getShipping() + " - " + cartTotals.getShipping(), orderTotals.getShipping().contentEquals(cartTotals.getShipping()));
-		Assert.assertTrue("Failure: Total Amount values dont match: " + orderTotals.getTotalAmount() + " - " + cartTotals.getTotalAmount(),
-				orderTotals.getTotalAmount().contentEquals(cartTotals.getTotalAmount()));
-		Assert.assertTrue("Failure: Total IP values dont match: " + orderTotals.getTotalIP() + " - " + cartTotals.getIpPoints(), orderTotals.getTotalIP().contentEquals(cartTotals.getIpPoints()));
-		Assert.assertTrue("Failure: Jewelry Bonus values dont match: " + orderTotals.getTotalBonusJeverly() + " - " + cartTotals.getJewelryBonus(),
-				orderTotals.getTotalBonusJeverly().contentEquals(cartTotals.getJewelryBonus()));
-
-	}
-
 	public List<OrderItemModel> findProducts(String productCode, List<OrderItemModel> orderProducts) {
-		
+
 		List<OrderItemModel> resultList = new ArrayList<OrderItemModel>();
-		
 
 		for (OrderItemModel orderProduct : orderProducts) {
 
 			if (orderProduct.getProductCode().contains(productCode)) {
 				OrderItemModel result = new OrderItemModel();
 				result = orderProduct;
-				
+
 				resultList.add(result);
 			}
 		}
 		return resultList;
 	}
-	
-	public OrderItemModel findProduct(String productCode, String qty,  List<OrderItemModel> orderProducts) {
+
+	public OrderItemModel findProduct(String productCode, String qty, List<OrderItemModel> orderProducts) {
 		OrderItemModel result = new OrderItemModel();
-		
+
 		theFor: for (OrderItemModel orderProduct : orderProducts) {
-			
+
 			if (orderProduct.getProductCode().contains(productCode) && orderProduct.getNumber().contentEquals(qty)) {
-					
-					result = orderProduct;
-						
+
+				result = orderProduct;
+
 				break theFor;
 			}
 		}

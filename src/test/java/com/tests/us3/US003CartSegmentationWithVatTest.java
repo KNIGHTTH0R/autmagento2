@@ -90,13 +90,20 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	// extracted from URL in first test - validated in second test
 	private static OrderModel orderModel = new OrderModel();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
+	
+	// Test data - from property file
 	private String username, password;
-
-	// Test data
-	private static String jewelryDisount = "100";
-	private static String marketingDisount = "150";
-	private static String shippingPrice = "5.04";
-	private static String addressString = "sss sss, tttt, 3, 2345 Wien, Österreich";
+	//Test data fields
+	private static String jewelryDisount;
+	private static String marketingDisount;
+	private static String shippingPrice;
+	private static String addressString;
+	//Test data Credit card details
+	private static String cardNumber;
+	private static String cardName;
+	private static String cardMonth;
+	private static String cardYear;
+	private static String cardCVC;
 
 	@Before
 	public void setUp() throws Exception {
@@ -110,6 +117,18 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			
+			jewelryDisount = prop.getProperty("jewelryDisount");
+			marketingDisount = prop.getProperty("marketingDisount");
+			shippingPrice = prop.getProperty("shippingPrice");
+			addressString = prop.getProperty("addressString");
+			
+			
+			cardNumber = prop.getProperty("cardNumber");
+			cardName = prop.getProperty("cardName");
+			cardMonth = prop.getProperty("cardMonth");
+			cardYear = prop.getProperty("cardYear");
+			cardCVC = prop.getProperty("cardCVC");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -123,11 +142,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 			}
 		}
 
-		creditCardData.setCardNumber("4111 1111 1111 1111");
-		creditCardData.setCardName("test");
-		creditCardData.setMonthExpiration("06");
-		creditCardData.setYearExpiration("2016");
-		creditCardData.setCvcNumber("737");
+		creditCardData.setCardNumber(cardNumber);
+		creditCardData.setCardName(cardName);
+		creditCardData.setMonthExpiration(cardMonth);
+		creditCardData.setYearExpiration(cardYear);
+		creditCardData.setCvcNumber(cardCVC);
 
 		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
@@ -247,33 +266,23 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 	@After
 	public void saveData() {
-
 		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName() + Constants.CALC );
 		MongoWriter.saveTotalsModel(discountTotals, getClass().getSimpleName() + Constants.CALC);
 
-
 		// Discount calculations - jewelry and marketing
-
 		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName() + Constants.CALC);
 
-
 		// values with discount and no TAX VAT - calculated values
-
 		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
 
-
-//		// Values Grabbed from last screen totals
+		// Values Grabbed from last screen totals
 		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + MongoTableKeys.GRAB);
 
 		// Order status and details
-
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
 
-
 		// Payment URL with values
-
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
-
 
 		// Products list - with initial values
 		for (ProductBasicModel product : cartProductsList) {

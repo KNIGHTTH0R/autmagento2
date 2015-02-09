@@ -1,7 +1,11 @@
 package com.tests.us3;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -55,11 +59,31 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	private String orderId;
+	private String beUser,bePass;
 
 	@Before
 	public void setUp() {
+		Properties prop = new Properties();
+		InputStream input = null;
 
-		// TODO add setup config file for backend user and pass
+		try {
+
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3\\us003.properties");
+			prop.load(input);
+			beUser = prop.getProperty("beUser");
+			bePass = prop.getProperty("bePass");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 		List<OrderModel> orderModelList = MongoReader.getOrderModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
 		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest" + Constants.CALC);
@@ -80,12 +104,11 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 		if (shippingModelList.size() != 1) {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
-		// TODO Asta aici era. Sigur trebuie?
-		// Clean DB
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
 
-		// Setup Data from all models in firts test
+		// Setup Data from all models in first test
 		// from Shipping calculations
 		shopTotalsModel.setSubtotal(shippingModelList.get(0).getSubTotal());
 		shopTotalsModel.setShipping(shippingModelList.get(0).getShippingPrice());
@@ -109,7 +132,7 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 	 */
 	@Test
 	public void us003ValidateOrderBackOfficeTest() {
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(beUser, bePass);
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
@@ -127,14 +150,13 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 
 		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
+		
 		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
-
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + Constants.GRAB);
 		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + Constants.GRAB);
-
 	}
 }

@@ -21,9 +21,7 @@ public class OrderInfoPage extends AbstractPage {
 	public OrderInfoModel grabOrderInfo() {
 
 		OrderInfoModel orderInfo = new OrderInfoModel();
-
 		element(infoContainer).waitUntilVisible();
-
 		List<WebElement> elemList = infoContainer.findElements(By.cssSelector("table tr"));
 
 		for (WebElement webElement : elemList) {
@@ -42,7 +40,6 @@ public class OrderInfoPage extends AbstractPage {
 			if (elementLabel.contains("Bestellt von IP Nummer")) {
 				orderInfo.setOrderIP(webElement.findElement(By.cssSelector("td:last-child")).getText());
 			}
-
 		}
 
 		return orderInfo;

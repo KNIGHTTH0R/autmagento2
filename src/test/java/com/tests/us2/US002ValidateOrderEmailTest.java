@@ -45,6 +45,7 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 	public EmailSteps emailSteps;
 	
 	private String username, password;
+	private String email, emailPass;
 	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
 	
 	@Before
@@ -58,6 +59,9 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			
+			email = prop.getProperty("email");
+			emailPass = prop.getProperty("emailPass");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -75,15 +79,14 @@ public class US002ValidateOrderEmailTest extends BaseTest{
 		
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
 		emailData.setProtocol(EmailConstants.PROTOCOL);
-		emailData.setUsername(EmailConstants.USERNAME_US002);
-		emailData.setPassword(EmailConstants.PASSWORD_US002);        
+		emailData.setUsername(email);
+		emailData.setPassword(emailPass);        
         
 		gmailConnector = new GmailConnector(emailData);
 	}
 	
 	
 	@Test	
-	//TODO Email should be changed - may need a new email connector if not gmail
 	public void us002ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);

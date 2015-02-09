@@ -30,18 +30,17 @@ public class CustomerListPage extends AbstractPage {
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
 	}
-	
-	public void openCustomerDetails(String searchTerm){
+
+	public void openCustomerDetails(String searchTerm) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(listContainer).waitUntilVisible();
 		List<WebElement> listElements = listContainer.findElements(By.tagName("tr"));
-		
-		theFor:
-		for(WebElement elementNow:listElements){
+
+		theFor: for (WebElement elementNow : listElements) {
 			String currentEmail = elementNow.findElement(By.cssSelector("*:nth-child(4)")).getText();
 			WebElement currentLink = elementNow.findElement(By.cssSelector("*:nth-child(4)"));
 			System.out.println("Current Email: " + currentEmail);
-			if(currentEmail.trim().contentEquals(searchTerm)){
+			if (currentEmail.trim().contentEquals(searchTerm)) {
 				currentLink.click();
 				break theFor;
 			}

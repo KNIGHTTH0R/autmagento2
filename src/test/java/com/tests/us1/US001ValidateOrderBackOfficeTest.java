@@ -1,7 +1,11 @@
 package com.tests.us1;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -47,12 +51,34 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	public static List<ProductBasicModel>  productsList = new ArrayList<ProductBasicModel>();
 
 	private String orderId;
+	private String beUser,bePass;
 
 	@Before
 	public void setUp() {
 		
-		//TODO add setup config file for backend user and pass
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest");
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3\\us003.properties");
+			prop.load(input);
+			beUser = prop.getProperty("beUser");
+			bePass = prop.getProperty("bePass");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest" + Constants.GRAB);
 
 		if (orderModel.size() == 1) {
 
@@ -77,7 +103,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	 */
 	@Test
 	public void us001ValidateOrderBackOfficeTest() {
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(beUser, bePass);
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
@@ -97,7 +123,5 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		
 //		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung erfolgreich");
 		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung geplant");
-//		orderValidationSteps.validateProducts(productsList, orderItemsList);
-		//TODO validate order status in backend
 	}
 }

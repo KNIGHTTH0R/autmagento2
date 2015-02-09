@@ -17,16 +17,16 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(id = "#add-to-cart")
 	private WebElement addToCartButton;
-	
+
 	@FindBy(css = "a.button[href*='cart']")
 	private WebElement goToCartButton;
 
 	@FindBy(css = "div.top-cart span")
 	private WebElement shoppingBagButton;
-	
+
 	@FindBy(css = "div#topCartContent p.subtotal span.price")
 	private WebElement cartPreviewPrice;
-	
+
 	@FindBy(css = "a[title='Profil']")
 	private WebElement profileButton;
 
@@ -39,8 +39,8 @@ public class HeaderPage extends AbstractPage {
 		element(submitSearch).waitUntilVisible();
 		submitSearch.click();
 	}
-	
-	public void clickOnProfileButton(){
+
+	public void clickOnProfileButton() {
 		element(profileButton).waitUntilVisible();
 		profileButton.click();
 	}
@@ -61,8 +61,8 @@ public class HeaderPage extends AbstractPage {
 		waitFor(ExpectedConditions.elementToBeClickable(shoppingBagButton));
 		shoppingBagButton.click();
 	}
-	
-	public String getShoppingBagTotalSum(){
+
+	public String getShoppingBagTotalSum() {
 		element(cartPreviewPrice).waitUntilVisible();
 		return cartPreviewPrice.getText();
 	}

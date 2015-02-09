@@ -58,7 +58,7 @@ public class SurveyPage extends AbstractPage {
 
 		for (WebElement webElementNow : entryList) {
 			CartProductModel productNow = new CartProductModel();
-			
+
 			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
@@ -71,11 +71,9 @@ public class SurveyPage extends AbstractPage {
 			productNow.setPriceIP("");
 
 			resultList.add(productNow);
-			
+
 			PrintUtils.printCartProductModel(productNow);
 		}
-		
-		
 
 		return resultList;
 	}

@@ -133,30 +133,6 @@ public class GmailConnector {
 		}
 		return message;
 	}
-//	
-//	/**
-//	 * Connect to email account and return INBOX messages.
-//	 * @return
-//	 */
-//	private static Message[] connect() {
-//		Properties props2 = System.getProperties();
-//		Session session2 = Session.getDefaultInstance(props2, null);
-//		props2.setProperty(EmailConstants.EMAIL_STORE, EmailConstants.PROTOCOL);
-//		Message message[] = null;
-//		
-//		try {
-//			
-//			Store store = session2.getStore(EmailConstants.PROTOCOL);
-//			store.connect(EmailConstants.RECEIVING_HOST, EmailConstants.USERNAME, EmailConstants.PASSWORD);
-//			Folder folder = store.getFolder("INBOX");
-//			
-//			folder.open(Folder.READ_WRITE);
-//			message = folder.getMessages();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return message;
-//	}
 
 	/**
 	 * Will return the message as a string from multipart type of content.

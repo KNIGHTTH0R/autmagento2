@@ -267,7 +267,6 @@ public class CartCalculation {
 		result = result.subtract(jewelryDiscount);
 		result = result.subtract(marketingDiscount);
 		partial = partial.add(result);
-		// TODO line that breaks
 		result = result.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 2, BigDecimal.ROUND_DOWN);
 		tax = partial.subtract(result).setScale(1, BigDecimal.ROUND_DOWN);
 	}
@@ -398,9 +397,7 @@ public class CartCalculation {
 
 		CalculationModel result = new CalculationModel();
 
-		// TODO refactor this in a private method with mode
 		for (CalculationModel calculationModel : totalsList) {
-
 			if (calculationModel.getTableType() != null && calculationModel.getTableType().contentEquals(mode)) {
 				if (calculationModel.getAskingPrice() != null) {
 					if (calculationModel.getAskingPrice().compareTo(BigDecimal.valueOf(0)) == 0) {
