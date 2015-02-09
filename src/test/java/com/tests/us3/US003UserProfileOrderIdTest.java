@@ -38,7 +38,6 @@ public class US003UserProfileOrderIdTest extends BaseTest{
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	
-	
 	private String username, password;
 	private static OrderModel orderModel = new OrderModel();
 	
