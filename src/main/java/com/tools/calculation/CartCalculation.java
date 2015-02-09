@@ -21,6 +21,7 @@ public class CartCalculation {
 	private static BigDecimal remainder00 = BigDecimal.valueOf(0);
 	private static BigDecimal tax = BigDecimal.valueOf(0);
 	BigDecimal jBRegularItems = BigDecimal.valueOf(0);
+	BigDecimal sampleRetailSum = BigDecimal.valueOf(0);
 
 	/**
 	 * Return product price based on (price - quantity - discount). Discount may
@@ -218,13 +219,14 @@ public class CartCalculation {
 				}
 				else{
 					jBRegularItems = BigDecimal.valueOf(Double.parseDouble(jewelryDiscount));
-				}				
-				
-				
-			
+				}			
 			}
 			
-			if (calcModel.getTableType().equals(Constants.DISCOUNT_25)){}
+			if (calcModel.getTableType().equals(Constants.DISCOUNT_50)){
+				
+				sampleRetailSum = sampleRetailSum.add(calcModel.getRetailPrice());
+				
+			}
 			
 			
 
