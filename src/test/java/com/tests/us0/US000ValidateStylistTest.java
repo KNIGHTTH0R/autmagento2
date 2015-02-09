@@ -50,7 +50,7 @@ public class US000ValidateStylistTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "Stylist.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us0\\Stylist.properties");
 			prop.load(input);
 			stylistName = prop.getProperty("stylistName");
 			prop = new Properties();
