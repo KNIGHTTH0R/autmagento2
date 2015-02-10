@@ -129,7 +129,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		creditCardData.setYearExpiration(cardYear);
 		creditCardData.setCvcNumber(cardCVC);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName());
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 
 	}
@@ -220,7 +219,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 		
 		//TODO add Confirmation values validation
-
 	}
 
 	@After
