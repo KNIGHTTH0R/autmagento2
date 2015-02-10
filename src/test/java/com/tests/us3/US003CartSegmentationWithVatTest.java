@@ -158,11 +158,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct("R078SV", "AMÉLIE RING");
+		searchSteps.searchAndSelectProduct("K024GY", "CORALIE SET (GREY)");
 		productData = productSteps.setProductAddToCart("1", "17");
 		cartProductsList.add(productData);
 		
-		searchSteps.searchAndSelectProduct("R078SV", "AMÉLIE RING");
+		searchSteps.searchAndSelectProduct("K024GY", "CORALIE SET (GREY)");
 		productData = productSteps.setProductAddToCart("1", "17");
 		cartProductsList.add(productData);
 
