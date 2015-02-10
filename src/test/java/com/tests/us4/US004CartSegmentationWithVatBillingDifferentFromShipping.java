@@ -55,7 +55,7 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
-	private static String jewelryDisount = "150";
+	private static String jewelryDisount = "40";
 	private static String marketingDisount = "300";
 	List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
 	@Steps
@@ -161,7 +161,7 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 		cartSteps.typeMarketingBonus(marketingDisount);
 		cartSteps.updateMarketingBonus();
 		
-		List<CartProductModel> calculatedProductsList =  CartCalculation.calculateProducts(cartProds, "150", "300");
+		List<CartProductModel> calculatedProductsList =  CartCalculation.calculateProducts(cartProds, "40", "300");
 		System.out.println("Buba de mai jos");
 		PrintUtils.printList(calculatedProductsList);
 		
