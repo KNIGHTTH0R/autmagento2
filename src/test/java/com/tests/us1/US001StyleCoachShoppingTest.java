@@ -81,10 +81,16 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
 	
-	
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private List<CalculationModel> calcList = new ArrayList<CalculationModel>();
 	public static CartTotalsModel cartTotals;
+	
+	//Test data Credit card details
+	private static String cardNumber;
+	private static String cardName;
+	private static String cardMonth;
+	private static String cardYear;
+	private static String cardCVC;
 
 	@Before
 	public void setUp() throws Exception {
@@ -97,6 +103,12 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			
+			cardNumber = prop.getProperty("cardNumber");
+			cardName = prop.getProperty("cardName");
+			cardMonth = prop.getProperty("cardMonth");
+			cardYear = prop.getProperty("cardYear");
+			cardCVC = prop.getProperty("cardCVC");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -110,11 +122,12 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 			}
 		}
 
-		creditCardData.setCardNumber("4111 1111 1111 1111");
-		creditCardData.setCardName("test");
-		creditCardData.setMonthExpiration("06");
-		creditCardData.setYearExpiration("2016");
-		creditCardData.setCvcNumber("737");
+		//TODO edit this to prop file
+		creditCardData.setCardNumber(cardNumber);
+		creditCardData.setCardName(cardName);
+		creditCardData.setMonthExpiration(cardMonth);
+		creditCardData.setYearExpiration(cardYear);
+		creditCardData.setCvcNumber(cardCVC);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
@@ -132,13 +145,21 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 
-		searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
+		searchSteps.searchAndSelectProduct("B040DK", "MAGIC VIOLETTA");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList.add(productData);
 
-		searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
+		searchSteps.searchAndSelectProduct("R084BK", "GABRIELLE RING");
 		productData = productSteps.setProductAddToCart("1", "18");
 		productsList.add(productData);
+		
+//		searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
+//		productData = productSteps.setProductAddToCart("1", "0");
+//		productsList.add(productData);
+//
+//		searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
+//		productData = productSteps.setProductAddToCart("1", "18");
+//		productsList.add(productData);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();

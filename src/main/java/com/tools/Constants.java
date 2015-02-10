@@ -9,6 +9,7 @@ public class Constants {
 	public static final String BASE_URL_AUT = "https://staging-aut.pippajean.com/customer/account/login/";
 	public static final String URL_CART_SUCCESS = "https://staging-aut.pippajean.com/simona/simplecheckout/process/success/";
 	public static final String PROFILE_HISTORY_URL = "https://staging-aut.pippajean.com/simona/sales/order/history/";
+	public static final String CART_PAGE_URL = "http://staging-aut.pippajean.com/simona/checkout/cart/";
 
 	
 ////		public static final String BASE_URL = "https://pippajean:sn0wMob1l!@staging.pippajean.com/customer/account/login/";

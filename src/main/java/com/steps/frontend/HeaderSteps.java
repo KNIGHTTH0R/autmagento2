@@ -33,5 +33,9 @@ public class HeaderSteps extends AbstractSteps {
 	public void redirectToProfileHistory() {
 		getDriver().get(Constants.PROFILE_HISTORY_URL);
 	}
+	
+	public void redirectToCartPage() {
+		getDriver().get(Constants.CART_PAGE_URL);
+	}
 
 }

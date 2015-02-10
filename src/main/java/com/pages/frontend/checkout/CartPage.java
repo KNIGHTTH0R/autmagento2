@@ -43,6 +43,10 @@ public class CartPage extends AbstractPage {
 
 	@FindBy(id = "marketing_credits")
 	private WebElement marketingBonusInput;
+	
+	
+	@FindBy(css = "div.main.col1-layout")
+	private WebElement cartMainContainer;
 
 	/**
 	 * Will grab all products data from all carts
@@ -271,6 +275,17 @@ public class CartPage extends AbstractPage {
 			}
 		}
 		Assert.assertTrue("The product was not found", containsTerms);
+	}
+
+	/**
+	 * Verify Wipe cart if cart contains any data
+	 */
+	public void verifyWipeCart() {
+		element(cartMainContainer).waitUntilVisible();
+		System.out.println("TEXT from CONTAINER: " + cartMainContainer.getText());
+		
+		Assert.assertTrue(cartMainContainer.getText().contains("WARENKORB IST LEER"));
+		
 	}
 
 }
