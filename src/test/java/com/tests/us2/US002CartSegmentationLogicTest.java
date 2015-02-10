@@ -160,8 +160,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		productsList50.add(productData);
 		productsList25.add(productData);
 
-		searchSteps.searchAndSelectProduct("U001GO", "LOOP CHAIN 60 (GOLD)");
-		productData = productSteps.setProductAddToCart("2", "0");
+		searchSteps.searchAndSelectProduct("K051SV", "ROSEMARY SET");
+		productData = productSteps.setProductAddToCart("2", "17");
 
 		//Changed new product to this
 		ProductBasicModel newProduct = new ProductBasicModel();
@@ -172,7 +172,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct("B115WT", "BLUEBELL (WHITE)");
+		searchSteps.searchAndSelectProduct("K050SV", "JOANNA SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 
@@ -192,7 +192,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		headerSteps.goToCart();
 		// TODO change the update method to set the quantity in the model
 		cartSteps.updateProductQuantityIn50DiscountArea("2", "R104WT");
-		cartSteps.updateProductQuantityIn50DiscountArea("0", "U001GO");
+		cartSteps.updateProductQuantityIn50DiscountArea("0", "K051SV");
 
 		cartSteps.updateCart();
 
@@ -234,9 +234,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		ShippingModel confirmationTotals = confirmationSteps.grabConfirmationTotals();
 
-//		 confirmationSteps.agreeAndCheckout();
-//		
-//		 validationSteps.verifySuccessMessage();
+		 confirmationSteps.agreeAndCheckout();
+		
+		 validationSteps.verifySuccessMessage();
 
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
