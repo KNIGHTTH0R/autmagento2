@@ -68,7 +68,7 @@ public class US001ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest");
+		orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest" + Constants.GRAB);
 	}
 	
 	@Test
