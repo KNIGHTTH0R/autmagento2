@@ -75,7 +75,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
-	private static OrderModel orderModel = new OrderModel();
+	private static OrderModel orderModel;
 	private static CalculationModel totalsCalculated = new CalculationModel();
 
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
@@ -130,6 +130,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		creditCardData.setCvcNumber(cardCVC);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 
 	}
 

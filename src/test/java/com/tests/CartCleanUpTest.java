@@ -29,7 +29,6 @@ public class CartCleanUpTest extends BaseTest{
 		frontEndSteps.performLogin("evopippajean@gmail.com", "ghiocel24");
 		
 		String rawURL = headerSteps.getDriver().getCurrentUrl();
-//		rawURL = rawURL.replace("stylist/lounge/", "checkout/cart/");
 		headerSteps.getDriver().get(headerSteps.getDriver().getCurrentUrl().replace("stylist/lounge/", "checkout/cart/clearAllItems/"));
 		cartSteps.wipeCart(rawURL);
 		
