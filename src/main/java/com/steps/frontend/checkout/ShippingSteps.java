@@ -9,20 +9,19 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.requirements.AbstractSteps;
 
-public class ShippingSteps extends AbstractSteps{
+public class ShippingSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 8727875042758615102L;
 
-	
-	public ShippingModel grabSurveyData(){
+	public ShippingModel grabSurveyData() {
 		waitABit(Constants.TIME_CONSTANT);
-		getDriver().navigate().to(getDriver().getCurrentUrl());  
+		getDriver().navigate().to(getDriver().getCurrentUrl());
 		waitABit(Constants.TIME_CONSTANT);
 		return surveyPage().grabSurveyData();
 	}
-	
+
 	@Step
-	public void clickGoToPaymentMethod(){
+	public void clickGoToPaymentMethod() {
 		surveyPage().clickGoToPaymentMethod();
 		waitABit(9000);
 	}
@@ -31,20 +30,25 @@ public class ShippingSteps extends AbstractSteps{
 		waitABit(Constants.TIME_CONSTANT);
 		return surveyPage().grabProductsList();
 	}
-	
+
 	@Step
-	public void selectAddress(String address){
+	public void selectAddress(String address) {
 		billingFormPage().selectAdressDropdown(address);
 	}
-	
+
 	@Step
-	public void setSameAsBilling(boolean checked){
+	public void setSameAsBilling(boolean checked) {
 		shippingFormPage().setSameAsBilling(checked);
 	}
 
 	@Step
 	public String grabUrl() {
-		return getDriver().getCurrentUrl();		
+		return getDriver().getCurrentUrl();
 	}
-	
+
+	@Step
+	public void selectShippingAddress(String value) {
+		shippingFormPage().selectShippingAddress(value);
+	}
+
 }

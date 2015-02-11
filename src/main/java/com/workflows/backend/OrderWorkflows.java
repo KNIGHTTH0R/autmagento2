@@ -115,13 +115,13 @@ public class OrderWorkflows {
 	@Step
 	public void verifySubTotals(String orderValue, String calculation) {
 
-		customVerification.verifyTrue("Failure: Subtotal values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		customVerification.verifyTrue("Failure: Subtotal values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 	}
 
 	@Step
 	public void verifyTotalAmount(String orderValue, String calculation) {
 
-		customVerification.verifyTrue("Failure: Total Amount values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		customVerification.verifyTrue("Failure: Total Amount values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 	}
 
 	@Step
@@ -176,21 +176,21 @@ public class OrderWorkflows {
 	@Step
 	public void verifyTotalPayable(String orderValue, String calculation) {
 
-		customVerification.verifyTrue("Failure: Total Payable values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		customVerification.verifyTrue("Failure: Total Payable values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 
 	}
 
 	@Step
 	public void verifyTotalPaid(String orderValue, String calculation) {
 
-		customVerification.verifyTrue("Failure: Total Paid values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		customVerification.verifyTrue("Failure: Total Paid values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 
 	}
 
 	@Step
 	public void verifyTotalRefunded(String orderValue, String calculation) {
 
-		customVerification.verifyTrue("Failure: Total Refunded values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
+		customVerification.verifyTrue("Failure: Total Refunded values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 
 	}
 

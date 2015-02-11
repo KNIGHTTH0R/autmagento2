@@ -32,11 +32,17 @@ import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
+import com.tools.data.UrlModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.ShippingModel;
+import com.tools.persistance.MongoTableKeys;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
@@ -46,17 +52,25 @@ import com.workflows.frontend.CartWorkflows;
 public class US004CartSegmentationWithVatBillingDifferentFromShipping extends BaseTest {
 	
 	String username,password;
+	String billingAddress;
+	String shippingAddress;
 	ProductBasicModel productBasicModel = new ProductBasicModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private static CalcDetailsModel discountCalculationModel;
+	//private static CalcDetailsModel discountCalculationModel;
+	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
+	private static ShippingModel confirmationTotals = new ShippingModel();
+	private static ShippingModel shippingTotals = new ShippingModel();
+	private static UrlModel urlModel = new UrlModel();
+	private static OrderModel orderModel = new OrderModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
-	private List<CalculationModel> totalsList = new ArrayList<CalculationModel>();
-	private static String jewelryDisount = "40";
-	private static String marketingDisount = "300";
+	CalcDetailsModel total = new CalcDetailsModel();
+	private static String jewelryDiscount;
+	private static String marketingDiscount;
+	private static String shippingValue;	
 	List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -93,6 +107,11 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			billingAddress = prop.getProperty("billingAddress");
+			shippingAddress = prop.getProperty("shippingAddress");
+			jewelryDiscount = prop.getProperty("jewelryDiscount");
+			marketingDiscount = prop.getProperty("marketingDiscount");
+			shippingValue = prop.getProperty("shippingPrice");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -122,14 +141,15 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
 	
-		searchSteps.searchAndSelectProduct("R051GR", "LOLA VERDE RING");
+		searchSteps.searchAndSelectProduct("R083SV", "CLARICE RING (SILVER)");
 		productData = productSteps.setProductAddToCart("2", "17");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 		
-		searchSteps.searchAndSelectProduct("R051SV", "ZOE STACKRING");
-		productData = productSteps.setProductAddToCart("1", "16");
+		
+		searchSteps.searchAndSelectProduct("K012BK", "LEWIS SET");
+		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 		
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
@@ -156,26 +176,103 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 		cartProds.addAll(cartMarketingMaterialsProducts);
 		System.out.println("size" + cartProds.size());
 		
-		cartSteps.typeJewerlyBonus(jewelryDisount);
+		cartSteps.typeJewerlyBonus(jewelryDiscount);
 		cartSteps.updateJewerlyBonus();
-		cartSteps.typeMarketingBonus(marketingDisount);
+		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
 		
-		List<CartProductModel> calculatedProductsList =  CartCalculation.calculateProducts(cartProds, "40", "300");
+		List<CartProductModel> calculatedProductsList =  CartCalculation.calculateProducts(cartProds, jewelryDiscount, marketingDiscount);
 		System.out.println("Buba de mai jos");
 		PrintUtils.printList(calculatedProductsList);
 		
 		cartTotals = cartSteps.grabTotals();
 		
+		total = CartCalculation.calculateCartProductsTotals(calculatedProductsList, jewelryDiscount, marketingDiscount);
+		PrintUtils.printCalcDetailsModel(total);
+		
+		cartSteps.clickGoToShipping();
+
+		shippingSteps.selectAddress(billingAddress);
+		shippingSteps.setSameAsBilling(false);
+		shippingSteps.selectShippingAddress(shippingAddress);
+		
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+		
+		shippingTotals = shippingSteps.grabSurveyData();
+		
+		shippingCalculatedModel = calculationSteps.calculateShippingTotals(total, shippingValue);
+		PrintUtils.printShippingTotals(shippingCalculatedModel);
+
+		shippingSteps.clickGoToPaymentMethod();
+
+		String url = shippingSteps.grabUrl();
+		urlModel.setName("Payment URL");
+		urlModel.setUrl(url);
+		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+		
+
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+
+		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		confirmationTotals = confirmationSteps.grabConfirmationTotals();
+		
+		confirmationSteps.agreeAndCheckout();
+			
+		checkoutValidationSteps.verifySuccessMessage();
 	
-		
-		
+		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
+
+		cartWorkflows.setValidateProductsModels(productsList25, cartProductsWith25Discount);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
+
+		cartWorkflows.setValidateProductsModels(productsListMarketing, cartMarketingMaterialsProducts);
+		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+
+		cartWorkflows.setValidateProductsModels(allProductsList, shippingProducts);
+		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows.setValidateProductsModels(allProductsList, confirmationProducts);
+		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows.setVerifyTotalsDiscount(cartTotals, total);
+		cartWorkflows.verifyTotalsDiscountNoMarketing("CART TOTALS");
+
+		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
+		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 		
 		
 	}
 	
 	@After
 	public void saveData(){
+		
+
+		// Discount calculations - jewelry and marketing
+		MongoWriter.saveCalcDetailsModel(total, getClass().getSimpleName() + Constants.CALC);
+
+		// values with discount and no TAX VAT - calculated values
+		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
+
+		// Values Grabbed from last screen totals
+		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + MongoTableKeys.GRAB);
+
+		// Order status and details
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
+
+		// Payment URL with values
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
+
+		// Products list - with initial values
+		for (ProductBasicModel product : allProductsList) {
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.GRAB);
+		}
+	
 		
 	}
 		
