@@ -9,6 +9,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	US001Suite.class,
 	US002Suite.class,
 	US003Suite.class,
+	US004Suite.class,
 })
 @RunWith(Suite.class)
 public class PippaSuite {

@@ -30,6 +30,7 @@ import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
 import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
+import com.tools.Constants;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -48,8 +49,21 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().clickOnLoginButton();
 	}
 
-	
-	public AbstractPage abstractPage(){
+	/**
+	 * Clean cart content. On current user. This method should be used
+	 * imediattly after login. URL path might not be rewritten correctly
+	 * otherwise.
+	 * 
+	 */
+	public void wipeCart() {
+		String initURL = getDriver().getCurrentUrl();
+		String modiURL = getDriver().getCurrentUrl().replace("stylist/lounge/", "checkout/cart/clearAllItems/");
+		getDriver().get(modiURL);
+		waitABit(Constants.TIME_CONSTANT);
+		getDriver().get(initURL);
+	}
+
+	public AbstractPage abstractPage() {
 		return getPages().currentPageAt(AbstractPage.class);
 	}
 
@@ -73,18 +87,20 @@ public class AbstractSteps extends ScenarioSteps {
 	public LeadSettingsPage leadSettingsPage() {
 		return getPages().currentPageAt(LeadSettingsPage.class);
 	}
-	
-	public OrderListPage orderListPage(){
+
+	public OrderListPage orderListPage() {
 		return getPages().currentPageAt(OrderListPage.class);
 	}
-	
-	public OrderItemsPage orderItemsPage(){
+
+	public OrderItemsPage orderItemsPage() {
 		return getPages().currentPageAt(OrderItemsPage.class);
 	}
-	public OrderTotalsPage orderTotalsPage(){
+
+	public OrderTotalsPage orderTotalsPage() {
 		return getPages().currentPageAt(OrderTotalsPage.class);
 	}
-	public OrderInfoPage orderInfoPage(){
+
+	public OrderInfoPage orderInfoPage() {
 		return getPages().currentPageAt(OrderInfoPage.class);
 	}
 
@@ -113,7 +129,7 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(ProductDetailsPage.class);
 	}
 
-	//cart
+	// cart
 	public CartPage cartPage() {
 		return getPages().currentPageAt(CartPage.class);
 	}
@@ -130,43 +146,42 @@ public class AbstractSteps extends ScenarioSteps {
 	public SurveyPage surveyPage() {
 		return getPages().currentPageAt(SurveyPage.class);
 	}
-	
+
 	// payment pages
-	public PaymentPage paymentPage(){
+	public PaymentPage paymentPage() {
 		return getPages().currentPageAt(PaymentPage.class);
 	}
-	
-	public CreditCardFormPage creditCardFormPage(){
+
+	public CreditCardFormPage creditCardFormPage() {
 		return getPages().currentPageAt(CreditCardFormPage.class);
 	}
-	
-	//confirmation page
-	public ConfirmationPage confirmationPage(){
+
+	// confirmation page
+	public ConfirmationPage confirmationPage() {
 		return getPages().currentPageAt(ConfirmationPage.class);
 	}
-	
-	public SuccessPage successPage(){
+
+	public SuccessPage successPage() {
 		return getPages().currentPageAt(SuccessPage.class);
 	}
-	
-	//Profile
-	public DashboardMenuPage dashboardMenuPage(){
+
+	// Profile
+	public DashboardMenuPage dashboardMenuPage() {
 		return getPages().currentPageAt(DashboardMenuPage.class);
 	}
-	
-	public ProfileHistoryPage profileHistoryPage(){
+
+	public ProfileHistoryPage profileHistoryPage() {
 		return getPages().currentPageAt(ProfileHistoryPage.class);
 	}
-	
 
 	// -----------------------Email-----------------------------------
 
 	public MailinatorPage mailinatorPage() {
 		return getPages().currentPageAt(MailinatorPage.class);
 	}
-	
-	//------------------------- Common methods 
-	
+
+	// ------------------------- Common methods
+
 	@Step
 	@Screenshots(onlyOnFailures = true)
 	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads, String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
@@ -178,6 +193,5 @@ public class AbstractSteps extends ScenarioSteps {
 		System.out.println("STYLECOACHLEADSWEEK: " + styleCoachLeadsWeek);
 		getDriver().getCurrentUrl();
 	}
-
 
 }

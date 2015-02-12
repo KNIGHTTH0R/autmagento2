@@ -43,6 +43,27 @@ public class StockDataModel {
 		setMaximumPercentageToBorrow(value);
 		setUseConfigMaximumPercentageToBorrow(value);
 	}
+	public StockDataModel(){
+		setQty("");
+		setIsInStock("");
+		setManageStock("");
+		setUseConfigManageStock("");
+		setMinQty("");
+		setUseConfigMinQty("");
+		setMinSaleQty("");
+		setUseConfigMinSaleQty("");
+		setMaxSaleQty("");
+		setUseConfigMaxSaleQty("");
+		setIsQtyDecimal("");
+		setBackorders("");
+		setUseConfigBackorders("");
+		setNotifyStockQty("");
+		setUseConfigNotifyStockQty("");
+		setIsDiscontinued("");
+		setEarliestAvailability("");
+		setMaximumPercentageToBorrow("");
+		setUseConfigMaximumPercentageToBorrow("");
+	}
 
 	public String getQty() {
 		return qty;

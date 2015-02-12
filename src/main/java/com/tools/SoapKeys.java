@@ -5,8 +5,15 @@ package com.tools;
 
 public class SoapKeys {
 	
-
-	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
+	public static final String LOGIN_USER = "stagingaut";
+	public static final String LOGIN_PASS = "YYz66iiaalop";
+//	public static final String LOGIN_PASS = "YYz66iiaalop";
+	
+	
+//	public static final String API_URI = "http://staging-aut.pippajean.com/index.php/api/v2_soap?wsdl=1";
+//	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/";
+	public static final String API_URI = "http://staging-aut.pippajean.com:80/index.php/api/v2_soap/index/";
+//	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
 
 	//General keys
 	public static final String URN_PREFIX = "urn";
@@ -82,13 +89,6 @@ public class SoapKeys {
 	public static final String KEY = "key";
 	public static final String VALUE = "value";
 	public static final String RESULT = "result";
-
-
-
-
-
-
-
 
 
 

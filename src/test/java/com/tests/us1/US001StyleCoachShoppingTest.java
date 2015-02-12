@@ -136,6 +136,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Test
 	public void us001StyleCoachShoppingTest() {
 		frontEndSteps.performLogin(username, password);
+		frontEndSteps.wipeCart();
 
 		searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
 		ProductBasicModel productData = productSteps.setProductAddToCart("1", "Blue");
@@ -189,6 +190,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		shippingSteps.clickGoToPaymentMethod();
 		
 		String url = shippingSteps.grabUrl();
+		orderModel = new OrderModel();
 		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 

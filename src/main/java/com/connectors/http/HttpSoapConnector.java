@@ -23,10 +23,10 @@ import com.tools.data.soap.TierPriceModel;
 //TODO move stuff out to specialized classes. Only SOAP connector should remain
 public class HttpSoapConnector {
 
-	public static void main(String args[]) throws Exception {
-		soapCreateProduct(new ProductDetailedModel("zzzA")).writeTo(System.out);
-
-	}
+	// public static void main(String args[]) throws Exception {
+	// soapCreateProduct(new ProductDetailedModel("zzzA")).writeTo(System.out);
+	//
+	// }
 
 	public static SOAPMessage soapCreateProduct(ProductDetailedModel product) throws SOAPException, IOException {
 		String sessID = performLogin();
@@ -41,7 +41,38 @@ public class HttpSoapConnector {
 	private static String performLogin() throws SOAPException, IOException {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createLoginRequest("stagingaut", "YYz66iiaalop"), SoapKeys.API_URI);
+
+//		Socket socket = new Socket();
+//		SocketAddress sockaddr = new InetSocketAddress("localhost", 8888);
+//		socket.connect(sockaddr, 10000);
+//		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(socket.getInetAddress(), 8888));
+//		URL url = new URL(SoapKeys.API_URI);
+//		HttpURLConnection uc = (HttpURLConnection) url.openConnection(proxy);
+//		URL url = new URL("http", "localhost", 8888, SoapKeys.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(SoapKeys.LOGIN_USER, SoapKeys.LOGIN_PASS), url);
+//		
+//		InetSocketAddress proxyInet = new InetSocketAddress("localhost",8888);
+//		Proxy proxy = new Proxy(Proxy.Type.HTTP, proxyInet);
+//		URL httpsUrl = new URL(SoapKeys.API_URI);
+//		HttpsURLConnection httpsCon = (HttpsURLConnection) httpsUrl.openConnection(proxy);
+		
+//		System.setProperty("http.proxySet", "true");
+//		System.setProperty("http.proxyHost","127.0.0.1");
+//		System.setProperty("http.proxyPort","8888");
+//
+//		URL httpsUrl = new URL(SoapKeys.API_URI);
+//		HttpsURLConnection httpsCon = (HttpsURLConnection)httpsUrl.openConnection();
+		
+//		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(SoapKeys.LOGIN_USER, SoapKeys.LOGIN_PASS), httpsCon);
+		
+		
+//		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", Integer.parseInt("8888")));
+//		HttpURLConnection connection = (HttpURLConnection) new URL(SoapKeys.API_URI).openConnection(proxy);
+//		connection.connect();
+		
+		
+		
+		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(SoapKeys.LOGIN_USER, SoapKeys.LOGIN_PASS), SoapKeys.API_URI);
 		String result = "";
 
 		NodeList returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);
@@ -50,6 +81,8 @@ public class HttpSoapConnector {
 		}
 
 		System.out.println("SessionID -> " + result);
+		System.out.println("Login Response  ");
+		soapResponse.writeTo(System.out);
 		return result;
 
 	}
@@ -75,6 +108,8 @@ public class HttpSoapConnector {
 		apikeyBody.addTextNode(pass);
 
 		soapMessage.saveChanges();
+		
+		soapMessage.writeTo(System.out);
 
 		return soapMessage;
 	}
@@ -109,12 +144,12 @@ public class HttpSoapConnector {
 		SOAPElement sessionID = catalogProductCreateRequestParam.addChildElement(SoapKeys.SESSION_ID);
 		sessionID.addTextNode(ssID);
 
-		catalogProductCreateRequestParam.addChildElement(addOptionalField(SoapKeys.TYPE, product.getType(), catalogProductCreateRequestParam));
-		catalogProductCreateRequestParam.addChildElement(addOptionalField(SoapKeys.SET, product.getSet(), catalogProductCreateRequestParam));
-		catalogProductCreateRequestParam.addChildElement(addOptionalField(SoapKeys.SKU, product.getSku(), catalogProductCreateRequestParam));
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.TYPE, product.getType(), catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SET, product.getSet(), catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SKU, product.getSku(), catalogProductCreateRequestParam);
 
 		// Add product data here
-		catalogProductCreateRequestParam.addChildElement(generateProductMessage(catalogProductCreateRequestParam, product));
+		catalogProductCreateRequestParam = generateProductMessage(catalogProductCreateRequestParam, product);
 
 		SOAPElement store = catalogProductCreateRequestParam.addChildElement(SoapKeys.STORE);
 		store.addTextNode(product.getStore());
@@ -131,38 +166,38 @@ public class HttpSoapConnector {
 	private static SOAPElement generateProductMessage(SOAPElement bodyElement, ProductDetailedModel product) throws SOAPException {
 		SOAPElement productData = bodyElement.addChildElement(SoapKeys.PRODUCT_DATA);
 
-		productData.addChildElement(addOptionalField(SoapKeys.NAME, product.getName(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.DESCRIPTION, product.getDescription(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.SHORT_DESCRIPTION, product.getShortDescription(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.WEIGHT, product.getWeight(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.STATUS, product.getStatus(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.URL_KEY, product.getUrlKey(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.URL_PATH, product.getUrlPath(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.VISIBILITY, product.getVisibility(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.HAS_OPTIONS, product.getHasOptions(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.GIFT_MSG_AV, product.getGiftMessageAvailable(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.PRICE, product.getPrice(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.SPECIAL_PRICE, product.getSpecialPrice(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.SPECIAL_FROM_DATE, product.getSpecialFromDate(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.SPECIAL_TO_DATE, product.getSpecialToDate(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.TAX_CLASS_ID, product.getTaxClassId(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.META_TITLE, product.getMetaTitle(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.META_KEYWORD, product.getMetaKeyword(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.META_DESCRIPTION, product.getMetaDescription(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.CUSTOM_DESIGN, product.getCustomDesign(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.CUSTOM_LAYOUT_UPDATE, product.getCustomLayoutUpdate(), productData));
-		productData.addChildElement(addOptionalField(SoapKeys.OPTIONS_CONTAINER, product.getOptionsContainer(), productData));
+		productData = addOptionalField(SoapKeys.NAME, product.getName(), productData);
+		productData = addOptionalField(SoapKeys.DESCRIPTION, product.getDescription(), productData);
+		productData = addOptionalField(SoapKeys.SHORT_DESCRIPTION, product.getShortDescription(), productData);
+		productData = addOptionalField(SoapKeys.WEIGHT, product.getWeight(), productData);
+		productData = addOptionalField(SoapKeys.STATUS, product.getStatus(), productData);
+		productData = addOptionalField(SoapKeys.URL_KEY, product.getUrlKey(), productData);
+		productData = addOptionalField(SoapKeys.URL_PATH, product.getUrlPath(), productData);
+		productData = addOptionalField(SoapKeys.VISIBILITY, product.getVisibility(), productData);
+		productData = addOptionalField(SoapKeys.HAS_OPTIONS, product.getHasOptions(), productData);
+		productData = addOptionalField(SoapKeys.GIFT_MSG_AV, product.getGiftMessageAvailable(), productData);
+		productData = addOptionalField(SoapKeys.PRICE, product.getPrice(), productData);
+		productData = addOptionalField(SoapKeys.SPECIAL_PRICE, product.getSpecialPrice(), productData);
+		productData = addOptionalField(SoapKeys.SPECIAL_FROM_DATE, product.getSpecialFromDate(), productData);
+		productData = addOptionalField(SoapKeys.SPECIAL_TO_DATE, product.getSpecialToDate(), productData);
+		productData = addOptionalField(SoapKeys.TAX_CLASS_ID, product.getTaxClassId(), productData);
+		productData = addOptionalField(SoapKeys.META_TITLE, product.getMetaTitle(), productData);
+		productData = addOptionalField(SoapKeys.META_KEYWORD, product.getMetaKeyword(), productData);
+		productData = addOptionalField(SoapKeys.META_DESCRIPTION, product.getMetaDescription(), productData);
+		productData = addOptionalField(SoapKeys.CUSTOM_DESIGN, product.getCustomDesign(), productData);
+		productData = addOptionalField(SoapKeys.CUSTOM_LAYOUT_UPDATE, product.getCustomLayoutUpdate(), productData);
+		productData = addOptionalField(SoapKeys.OPTIONS_CONTAINER, product.getOptionsContainer(), productData);
 
 		// Added stock data section
-		productData.addChildElement(generateStockDataMessage(product.getStockData(), productData));
-		productData.addChildElement(generateTierPriceMessage(product.getTierPriceList(), productData));
+		productData = generateStockDataMessage(product.getStockData(), productData);
+		productData = generateTierPriceMessage(product.getTierPriceList(), productData);
 
 		// these should be implemented in the same manner
-		productData.addChildElement(generateWebsiteIds(product.getWebsiteIdsArray(), productData));
-		productData.addChildElement(generateWebsites(product.getWebsiteArray(), productData));
-		productData.addChildElement(generateCategories(product.getCategoriesArray(), productData));
-		productData.addChildElement(generateCategoryIds(product.getCategoryIdsArray(), productData));
-		productData.addChildElement(generateAdditionalAttributes(product.getAdditionalAttributes(), productData));
+		productData = generateWebsiteIds(product.getWebsiteIdsArray(), productData);
+		productData = generateWebsites(product.getWebsiteArray(), productData);
+		productData = generateCategories(product.getCategoriesArray(), productData);
+		productData = generateCategoryIds(product.getCategoryIdsArray(), productData);
+		productData = generateAdditionalAttributes(product.getAdditionalAttributes(), productData);
 
 		// Lists and other objects
 		return productData;
@@ -173,27 +208,27 @@ public class HttpSoapConnector {
 		SOAPElement stockData = bodyElement.addChildElement(SoapKeys.STOCK_DATA);
 
 		if (product != null) {
-			stockData.addChildElement(addOptionalField(SoapKeys.QTY, product.getQty(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.IS_IN_STOCK, product.getIsInStock(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.MANAGE_STOCK, product.getManageStock(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.USE_CONFIG_MANAGE_STOCK, product.getUseConfigManageStock(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.MIN_QTY, product.getMinQty(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.USE_CONFIG_MIN_QTY, product.getUseConfigMinQty(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.MIN_SALE_QTY, product.getMinSaleQty(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.USE_CONFIG_MIN_SALE_QTY, product.getUseConfigMinSaleQty(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.MAX_SALE_QTY, product.getMaxSaleQty(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.USE_CONFIG_MAX_SALE_QTY, product.getUseConfigMaxSaleQty(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.IS_QTY_DECIMAL, product.getIsQtyDecimal(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.BACKORDERS, product.getBackorders(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.USE_CONFIG_BACKORDERS, product.getUseConfigBackorders(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.NOTIFY_STOCK_QTY, product.getNotifyStockQty(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.USE_CONFIG_NOTIFY_STOCK_QTY, product.getUseConfigNotifyStockQty(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.IS_DISCONTINUED, product.getIsDiscontinued(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.EARLIEST_AVAILABILITY, product.getEarliestAvailability(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.MAXIMUM_PERCENTAGE_TO_BORROW, product.getMaximumPercentageToBorrow(), stockData));
-			stockData.addChildElement(addOptionalField(SoapKeys.USE_CONFIG_MAXIMUM_PERCENTAGE_TO_BORROW, product.getUseConfigMaximumPercentageToBorrow(), stockData));
+			stockData = addOptionalField(SoapKeys.QTY, product.getQty(), stockData);
+			stockData = addOptionalField(SoapKeys.IS_IN_STOCK, product.getIsInStock(), stockData);
+			stockData = addOptionalField(SoapKeys.MANAGE_STOCK, product.getManageStock(), stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_MANAGE_STOCK, product.getUseConfigManageStock(), stockData);
+			stockData = addOptionalField(SoapKeys.MIN_QTY, product.getMinQty(), stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_MIN_QTY, product.getUseConfigMinQty(), stockData);
+			stockData = addOptionalField(SoapKeys.MIN_SALE_QTY, product.getMinSaleQty(), stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_MIN_SALE_QTY, product.getUseConfigMinSaleQty(), stockData);
+			stockData = addOptionalField(SoapKeys.MAX_SALE_QTY, product.getMaxSaleQty(), stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_MAX_SALE_QTY, product.getUseConfigMaxSaleQty(), stockData);
+			stockData = addOptionalField(SoapKeys.IS_QTY_DECIMAL, product.getIsQtyDecimal(), stockData);
+			stockData = addOptionalField(SoapKeys.BACKORDERS, product.getBackorders(), stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_BACKORDERS, product.getUseConfigBackorders(), stockData);
+			stockData = addOptionalField(SoapKeys.NOTIFY_STOCK_QTY, product.getNotifyStockQty(), stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_NOTIFY_STOCK_QTY, product.getUseConfigNotifyStockQty(), stockData);
+			stockData = addOptionalField(SoapKeys.IS_DISCONTINUED, product.getIsDiscontinued(), stockData);
+			stockData = addOptionalField(SoapKeys.EARLIEST_AVAILABILITY, product.getEarliestAvailability(), stockData);
+			stockData = addOptionalField(SoapKeys.MAXIMUM_PERCENTAGE_TO_BORROW, product.getMaximumPercentageToBorrow(), stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_MAXIMUM_PERCENTAGE_TO_BORROW, product.getUseConfigMaximumPercentageToBorrow(), stockData);
 		} else {
-			System.out.println("ERROR: Product - Stock Data Model is NULL - see soap - generateStockDataMessage()");
+			System.out.println("Warning: Product - Stock Data Model is NULL - see soap - generateStockDataMessage()");
 		}
 		return stockData;
 	}
@@ -211,7 +246,7 @@ public class HttpSoapConnector {
 				objArray.addChildElement(addOptionalField(SoapKeys.PRICE, product.getPrice(), objArray));
 			}
 		} else {
-			System.out.println("ERROR: Product - Tier Price Model list is empty - see soap - generateTierPriceMessage()");
+			System.out.println("Warning: Product - Tier Price Model list is empty - see soap - generateTierPriceMessage()");
 		}
 		return tierPrices;
 	}
@@ -227,7 +262,7 @@ public class HttpSoapConnector {
 				objArray.addChildElement(addOptionalField(SoapKeys.VALUE, map.get(product), objArray));
 			}
 		} else {
-			System.out.println("ERROR: Product - Additional Atributes list is empty - see soap - generateTierPriceMessage()");
+			System.out.println("Warning: Product - Additional Atributes list is empty - see soap - generateTierPriceMessage()");
 		}
 		return tierPrices;
 	}
@@ -249,7 +284,7 @@ public class HttpSoapConnector {
 				objArray.addTextNode(product);
 			}
 		} else {
-			System.out.println("ERROR: Product - Website Ids list is empty - see soap - generateTierPriceMessage()");
+			System.out.println("Warning: Product - Website Ids list is empty - see soap - generateTierPriceMessage()");
 		}
 		return tierPrices;
 	}
@@ -263,7 +298,7 @@ public class HttpSoapConnector {
 				objArray.addTextNode(product);
 			}
 		} else {
-			System.out.println("ERROR: Product - Websites list is empty - see soap - generateTierPriceMessage()");
+			System.out.println("Warning: Product - Websites list is empty - see soap - generateTierPriceMessage()");
 		}
 		return tierPrices;
 	}
@@ -277,7 +312,7 @@ public class HttpSoapConnector {
 				objArray.addTextNode(product);
 			}
 		} else {
-			System.out.println("ERROR: Product - Categories list is empty - see soap - generateTierPriceMessage()");
+			System.out.println("Warning: Product - Categories list is empty - see soap - generateTierPriceMessage()");
 		}
 		return tierPrices;
 	}
@@ -291,7 +326,7 @@ public class HttpSoapConnector {
 				objArray.addTextNode(product);
 			}
 		} else {
-			System.out.println("ERROR: Product - Category Ids list is empty - see soap - generateTierPriceMessage()");
+			System.out.println("Warning: Product - Category Ids list is empty - see soap - generateTierPriceMessage()");
 		}
 		return tierPrices;
 	}
@@ -307,11 +342,13 @@ public class HttpSoapConnector {
 	 * @throws SOAPException
 	 */
 	private static SOAPElement addOptionalField(String fieldKey, String fieldValue, SOAPElement parentElement) throws SOAPException {
-		SOAPElement result = null;
-		if (!fieldValue.isEmpty()) {
-			result = parentElement.addChildElement(fieldKey);
-			result.addTextNode(fieldValue);
+		SOAPElement result = parentElement;
+		if (fieldValue != null && !fieldValue.contentEquals("")) {
+			SOAPElement elemNow = parentElement.addChildElement(fieldKey);
+			elemNow.addTextNode(fieldValue);
+			result.addChildElement(elemNow);
 		}
+
 		return result;
 	}
 }

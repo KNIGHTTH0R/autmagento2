@@ -41,35 +41,64 @@ public class ProductDetailedModel {
 	private String store;
 	
 	
-	public ProductDetailedModel(String value){
-		setType(value);
-		setSet(value);
-		setSku(value);
-		setName(value);
-		setDescription(value);
-		setShortDescription(value);
-		setWeight(value);
-		setStatus(value);
-		setUrlKey(value);
-		setUrlPath(value);
-		setVisibility(value);
-		setHasOptions(value);
-		setGiftMessageAvailable(value);
-		setPrice(value);
-		setSpecialPrice(value);
-		setSpecialFromDate(value);
-		setSpecialToDate(value);
-		setTaxClassId(value);
-		setMetaTitle(value);
-		setMetaKeyword(value);
-		setMetaDescription(value);
-		setCustomDesign(value);
-		setCustomLayoutUpdate(value);
-		setOptionsContainer(value);
-		setStore(value);
-		
-		setStockData(new StockDataModel(value));
-	}
+//	public ProductDetailedModel(String value){
+//		setType(value);
+//		setSet(value);
+//		setSku(value);
+//		setName(value);
+//		setDescription(value);
+//		setShortDescription(value);
+//		setWeight(value);
+//		setStatus(value);
+//		setUrlKey(value);
+//		setUrlPath(value);
+//		setVisibility(value);
+//		setHasOptions(value);
+//		setGiftMessageAvailable(value);
+//		setPrice(value);
+//		setSpecialPrice(value);
+//		setSpecialFromDate(value);
+//		setSpecialToDate(value);
+//		setTaxClassId(value);
+//		setMetaTitle(value);
+//		setMetaKeyword(value);
+//		setMetaDescription(value);
+//		setCustomDesign(value);
+//		setCustomLayoutUpdate(value);
+//		setOptionsContainer(value);
+//		setStore(value);
+//		
+//		setStockData(new StockDataModel(value));
+//	}
+//	public ProductDetailedModel(){
+//		setType("");
+//		setSet("");
+//		setSku("");
+//		setName("");
+//		setDescription("");
+//		setShortDescription("");
+//		setWeight("");
+//		setStatus("");
+//		setUrlKey("");
+//		setUrlPath("");
+//		setVisibility("");
+//		setHasOptions("");
+//		setGiftMessageAvailable("");
+//		setPrice("");
+//		setSpecialPrice("");
+//		setSpecialFromDate("");
+//		setSpecialToDate("");
+//		setTaxClassId("");
+//		setMetaTitle("");
+//		setMetaKeyword("");
+//		setMetaDescription("");
+//		setCustomDesign("");
+//		setCustomLayoutUpdate("");
+//		setOptionsContainer("");
+//		setStore("");
+//		
+//		setStockData(new StockDataModel(""));
+//	}
 
 	public String getType() {
 		return type;
