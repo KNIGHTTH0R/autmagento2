@@ -75,7 +75,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	public ProfileSteps profileSteps;
 	@Steps
 	public CartWorkflows cartWorkflows;
-
+	
+	ProductBasicModel productBasicModel = new ProductBasicModel();
 	private static OrderModel orderModel = new OrderModel();
 	private static UrlModel urlModel = new UrlModel();
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
@@ -153,27 +154,22 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct("R104WT", "OPEN MIND RING");
-		productData = productSteps.setProductAddToCart("1", "16");
+		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
+		productData = productSteps.setProductAddToCart("1", "0");
 		
 		// we add this into both sections because the quantity will be increased
 		// at 2, so 1 piece will be added into 25 section
 		productsList50.add(productData);
 		productsList25.add(productData);
 
-		searchSteps.searchAndSelectProduct("K051SV", "ROSEMARY SET");
-		productData = productSteps.setProductAddToCart("2", "17");
+		searchSteps.searchAndSelectProduct("K045SV", "TIANA SET");
+		productData = productSteps.setProductAddToCart("2", "0");
 
-		//Changed new product to this
-		ProductBasicModel newProduct = new ProductBasicModel();
-		newProduct.setName(productData.getName());
-		newProduct.setPrice(productData.getPrice());
-		newProduct.setType(productData.getType());
-		newProduct.setQuantity("1");
+		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct("K050SV", "JOANNA SET");
+		searchSteps.searchAndSelectProduct("K053GO", "DIONNE SET");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 
@@ -192,8 +188,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		// TODO change the update method to set the quantity in the model
-		cartSteps.updateProductQuantityIn50DiscountArea("2", "R104WT");
-		cartSteps.updateProductQuantityIn50DiscountArea("0", "K051SV");
+		cartSteps.updateProductQuantityIn50DiscountArea("2", "K052BK");
+		cartSteps.updateProductQuantityIn50DiscountArea("0", "K045SV");
 
 		cartSteps.updateCart();
 
@@ -235,9 +231,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		ShippingModel confirmationTotals = confirmationSteps.grabConfirmationTotals();
 
-		 confirmationSteps.agreeAndCheckout();
-		
-		 validationSteps.verifySuccessMessage();
+//		 confirmationSteps.agreeAndCheckout();
+//		
+//		 validationSteps.verifySuccessMessage();
 
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
