@@ -31,7 +31,6 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
-import com.tools.data.CalculationModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CartProductModel;
@@ -50,13 +49,13 @@ import com.workflows.frontend.CartWorkflows;
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US004CartSegmentationWithVatBillingDifferentFromShipping extends BaseTest {
-	
-	String username,password;
+
+	String username, password;
 	String billingAddress;
 	String shippingAddress;
 	ProductBasicModel productBasicModel = new ProductBasicModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
-	//private static CalcDetailsModel discountCalculationModel;
+	// private static CalcDetailsModel discountCalculationModel;
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
@@ -70,7 +69,12 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 	CalcDetailsModel total = new CalcDetailsModel();
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
-	private static String shippingValue;	
+	private static String shippingValue;
+	private static String cardNumber;
+	private static String cardName;
+	private static String cardMonth;
+	private static String cardYear;
+	private static String cardCVC;
 	List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -94,7 +98,7 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public PaymentSteps paymentSteps;
-	
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -113,6 +117,12 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
 
+			cardNumber = prop.getProperty("cardNumber");
+			cardName = prop.getProperty("cardName");
+			cardMonth = prop.getProperty("cardMonth");
+			cardYear = prop.getProperty("cardYear");
+			cardCVC = prop.getProperty("cardCVC");
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -125,81 +135,78 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 			}
 		}
 
-		creditCardData.setCardNumber("4111 1111 1111 1111");
-		creditCardData.setCardName("test");
-		creditCardData.setMonthExpiration("06");
-		creditCardData.setYearExpiration("2016");
-		creditCardData.setCvcNumber("737");
+		creditCardData.setCardNumber(cardNumber);
+		creditCardData.setCardName(cardName);
+		creditCardData.setMonthExpiration(cardMonth);
+		creditCardData.setYearExpiration(cardYear);
+		creditCardData.setCvcNumber(cardCVC);
 
 		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
 
-}
+	}
+
 	@Test
-	public void cartSegmentationWithVatBillingDifferentFromShipping(){
+	public void us004CartSegmentationWithVatBillingDifferentFromShipping() {
 		frontEndSteps.performLogin(username, password);
 		ProductBasicModel productData;
-	
-		searchSteps.searchAndSelectProduct("R083SV", "CLARICE RING (SILVER)");
+
+		searchSteps.searchAndSelectProduct("R075GO", "ALONA RING (GOLD)");
 		productData = productSteps.setProductAddToCart("2", "17");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
-		
-		
-		searchSteps.searchAndSelectProduct("K012BK", "LEWIS SET");
-		productData = productSteps.setProductAddToCart("1", "0");
+
+		searchSteps.searchAndSelectProduct("K035SV", "STELLA SET");
+		productData = productSteps.setProductAddToCart("1", "small");
 		productsList50.add(productData);
-		
+
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-		productData = productSteps.setProductAddToCart("2", "0");	
+		productData = productSteps.setProductAddToCart("2", "0");
 		productsListMarketing.add(productData);
-		
+
 		allProductsList.addAll(productsList25);
 		allProductsList.addAll(productsList50);
 		allProductsList.addAll(productsListMarketing);
-		
+
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
-	
 
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-		
+
 		cartProds.addAll(cartProductsWith50Discount);
 		cartProds.addAll(cartProductsWith25Discount);
 		cartProds.addAll(cartMarketingMaterialsProducts);
 		System.out.println("size" + cartProds.size());
-		
+
 		cartSteps.typeJewerlyBonus(jewelryDiscount);
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
-		
-		List<CartProductModel> calculatedProductsList =  CartCalculation.calculateProducts(cartProds, jewelryDiscount, marketingDiscount);
-		System.out.println("Buba de mai jos");
+
+		List<CartProductModel> calculatedProductsList = CartCalculation.calculateProducts(cartProds, jewelryDiscount, marketingDiscount);
 		PrintUtils.printList(calculatedProductsList);
-		
+
 		cartTotals = cartSteps.grabTotals();
-		
+
 		total = CartCalculation.calculateCartProductsTotals(calculatedProductsList, jewelryDiscount, marketingDiscount);
 		PrintUtils.printCalcDetailsModel(total);
-		
+
 		cartSteps.clickGoToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(false);
 		shippingSteps.selectShippingAddress(shippingAddress);
-		
+
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		
+
 		shippingTotals = shippingSteps.grabSurveyData();
-		
+
 		shippingCalculatedModel = calculationSteps.calculateShippingTotals(total, shippingValue);
 		PrintUtils.printShippingTotals(shippingCalculatedModel);
 
@@ -210,18 +217,17 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 		urlModel.setUrl(url);
 		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-		
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 		confirmationTotals = confirmationSteps.grabConfirmationTotals();
-		
-		confirmationSteps.agreeAndCheckout();
-			
-		checkoutValidationSteps.verifySuccessMessage();
-	
+
+//		confirmationSteps.agreeAndCheckout();
+//
+//		checkoutValidationSteps.verifySuccessMessage();
+
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
@@ -245,39 +251,21 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 
 		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
-		
-		
+
 	}
-	
+
 	@After
-	public void saveData(){
-		
+	public void saveData() {
 
-		// Discount calculations - jewelry and marketing
 		MongoWriter.saveCalcDetailsModel(total, getClass().getSimpleName() + Constants.CALC);
-
-		// values with discount and no TAX VAT - calculated values
 		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
-
-		// Values Grabbed from last screen totals
 		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + MongoTableKeys.GRAB);
-
-		// Order status and details
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
-
-		// Payment URL with values
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
-
-		// Products list - with initial values
 		for (ProductBasicModel product : allProductsList) {
 			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.GRAB);
 		}
-	
-		
+
 	}
-		
 
-	
 }
-	
-
