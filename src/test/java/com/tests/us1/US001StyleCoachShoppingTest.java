@@ -136,6 +136,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Test
 	public void us001StyleCoachShoppingTest() {
 		frontEndSteps.performLogin(username, password);
+		frontEndSteps.wipeCart();
 
 		searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
 		ProductBasicModel productData = productSteps.setProductAddToCart("1", "Blue");
