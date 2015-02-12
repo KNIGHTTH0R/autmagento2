@@ -23,7 +23,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void clickGoToPaymentMethod() {
 		surveyPage().clickGoToPaymentMethod();
-		waitABit(9000);
+		waitABit(Constants.TIME_CONSTANT);
 	}
 
 	public List<CartProductModel> grabProductsList() {

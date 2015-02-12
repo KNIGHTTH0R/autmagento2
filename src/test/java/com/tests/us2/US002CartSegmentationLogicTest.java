@@ -148,7 +148,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	}
 
 	@Test
-	public void uS002CartSegmentationLogicTest() {
+	public void us002CartSegmentationLogicTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;

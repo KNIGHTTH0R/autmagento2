@@ -153,7 +153,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	}
 
 	@Test
-	public void uS003CartSegmentationWithVatTest() {
+	public void us003CartSegmentationWithVatTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
