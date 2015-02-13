@@ -122,7 +122,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 			}
 		}
 
-		//TODO edit this to prop file
+
 		creditCardData.setCardNumber(cardNumber);
 		creditCardData.setCardName(cardName);
 		creditCardData.setMonthExpiration(cardMonth);
@@ -199,10 +199,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-
-		confirmationSteps.agreeAndCheckout();
-
-		checkoutValidationSteps.verifySuccessMessage();
+//
+//		confirmationSteps.agreeAndCheckout();
+//
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");

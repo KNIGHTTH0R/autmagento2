@@ -172,7 +172,6 @@ public class CartCalculation {
 			result.addCalculation("P5-SubstractMM-divide100", totalAmount.toString());
 		}
 
-		// TODO TOTAL_AMOUNT_CALCULATION ROUNDING
 		// totalAmount = totalAmount.setScale(2, RoundingMode.DOWN);
 		totalAmount = totalAmount.setScale(2, RoundingMode.HALF_DOWN);
 
@@ -264,7 +263,6 @@ public class CartCalculation {
 		result = askingPrice.subtract(result);
 		result = result.divide(BigDecimal.valueOf(2), 2, BigDecimal.ROUND_HALF_UP);
 		
-		System.out.println("calculate50DiscountCartProductFinalPrice  result" + result);
 		return String.valueOf(result);
 	}
 
@@ -307,7 +305,6 @@ public class CartCalculation {
 
 	private static String calculateMarketingMaterialCartProductFinalPrice(BigDecimal askingPrice, BigDecimal marketingDiscount, BigDecimal sumMarketingMaterial) {
 		
-		System.out.println("nenorocireeeeee--------------" + marketingDiscount);
 		BigDecimal result = BigDecimal.ZERO;
 		if (askingPrice.compareTo(marketingDiscount) < 0) {
 			result = BigDecimal.ZERO;
@@ -323,7 +320,14 @@ public class CartCalculation {
 		return String.valueOf(result);
 	}
 	
-	
+	/**
+	 * This method will recalculate the products list. Will return a new products list.For each product will be in the segmentation which belongs to
+	 * 
+	 * @param productsList
+	 * @param jewerlyDiscount
+	 * @param marketingDiscount
+	 * @return cartProducts
+	 */
 	public static List<CartProductModel> calculateProducts(List<CartProductModel> productsList, String jewelryDiscount, String marketingDiscount) {
 
 		
@@ -383,7 +387,15 @@ public class CartCalculation {
 		return cartProducts;
 
 	}
-	//TODO calculate Ip points 
+	
+	/**
+	 * This method will recalculate the cart totals based on a produsct list given . Will return a CalcDetailModel
+	 * 
+	 * @param productsList
+	 * @param jewerlyDiscount
+	 * @param marketingDiscount
+	 * @return result
+	 */	
 	public static CalcDetailsModel calculateCartProductsTotals(List<CartProductModel> productsList, String jewerlyDiscount, String marketingDiscount){
 		CalcDetailsModel result = new CalcDetailsModel();
 		
@@ -459,84 +471,6 @@ public class CartCalculation {
 		
 		return result;
 	}
-	
-	
-	
-	 
-
-	// private static BigDecimal discountTotal = BigDecimal.ZERO;
-
-	// new sample
-	// public List<CartProductModel> calculateSegments(List<CartProductModel>
-	// totalsList, String jewelryDiscount, String marketingMaterial){
-	//
-	// BigDecimal sum25 = BigDecimal.ZERO;
-	// BigDecimal sum50 = BigDecimal.ZERO;
-	//
-	// //add products totals by segment
-	// for (CartProductModel calculationModel : totalsList) {
-	// if(calculationModel.getDiscountClass().contains(Constants.DISCOUNT_25)){
-	// sum25 =
-	// sum25.add(BigDecimal.valueOf(Double.parseDouble(calculationModel.getProductsPrice())));
-	// }
-	// if(calculationModel.getDiscountClass().contains(Constants.DISCOUNT_50)){
-	// sum50 =
-	// sum50.add(BigDecimal.valueOf(Double.parseDouble(calculationModel.getProductsPrice())));
-	// }
-	// }
-	//
-	// //apply discount on 25 segment
-	// sum25 =
-	// sum25.subtract(BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)));
-	//
-	// //validate case of 25 segment
-	// if(sum25.compareTo(BigDecimal.ZERO) < 0 ){
-	// //formula
-	// //calculate individual prices for each product in 25\
-	//
-	// //remainder should be passed to 50
-	// }
-	//
-	// //apply remaining discount on 50
-	// sum50 = sum50.subtract(sum25.abs());
-	//
-	// //validate case of 50 segment
-	// if(sum50.compareTo(BigDecimal.ZERO) > 0 ){
-	// //error
-	// }else{ //less or equal to 0
-	// //formula calculate for each product in 50
-	// //[Preis - Preisx(JB – JB used for regular items)/Sum of prices for
-	// Sample Products]/2
-	// for (CalculationModel calculationModel : totalsList) {
-	// if(calculationModel.getTableType().contains(Constants.DISCOUNT_50)){
-	// // calculationModel
-	//
-	//
-	//
-	// }
-	//
-	// }
-	//
-	// }
-	//
-	//
-	//
-	// }
-
-	// private static BigDecimal calculateDiscount(CalculationModel productNow,
-	// BigDecimal jewelryDiscount){
-	// BigDecimal result = BigDecimal.ZERO;
-	// BigDecimal termOne = BigDecimal.ZERO;
-	//
-	// if(discountTotal.compareTo(jewelryDiscount) > 0){
-	// termOne = termOne.add(jewelryDiscount);
-	// termOne = termOne.subtract(discountTotal);
-	//
-	// result = result.add(productNow.getAskingPrice());
-	// result = result.add(productNow.getAskingPrice());
-	//
-	// }
-	// }
 
 	/**
 	 * FORMULA: (Zwischensumme – 50% Muster Rabatt – Genutzer Schmuck Bonus-
