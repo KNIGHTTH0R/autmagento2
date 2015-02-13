@@ -130,7 +130,7 @@ public class US004ValidateOrderBackOfficeTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us003ValidateOrderBackOfficeTest() {
+	public void us004ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(beUser, bePass);
 
 		backEndSteps.clickOnSalesOrders();

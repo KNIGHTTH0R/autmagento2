@@ -11,6 +11,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,6 +70,9 @@ public class US002UserProfileOrderIdTest extends BaseTest{
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
 		orderModel = MongoReader.grabOrderModels("US002CartSegmentationLogicTest" + Constants.GRAB).get(0);
+		
+		//fail test if no setup data is found
+		Assert.assertTrue(MongoReader.grabOrderModels("US002CartSegmentationLogicTest" + Constants.GRAB).size() > 0);
 		
 	}
 	

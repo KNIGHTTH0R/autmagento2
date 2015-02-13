@@ -73,7 +73,7 @@ public class US004UserProfileOrderIdTest extends BaseTest{
 	}
 	
 	@Test
-	public void us002UserProfileOrderId() {
+	public void us004UserProfileOrderIdTest() {
 		
 		frontEndSteps.performLogin(username, password);
 		
