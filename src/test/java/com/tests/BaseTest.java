@@ -1,7 +1,6 @@
 package com.tests;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.UnknownHostException;
 
 import net.thucydides.core.annotations.Managed;
@@ -11,9 +10,7 @@ import net.thucydides.core.pages.Pages;
 
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;

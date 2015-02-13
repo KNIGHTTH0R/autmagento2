@@ -205,7 +205,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		totalsList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
 		cartTotals = cartSteps.grabTotals();
 
-		discountCalculationModel = calculusSteps.calculateDiscountTotals(totalsList, jewelryDiscount, marketingDiscount);
+		discountCalculationModel = CartCalculation.calculateDiscountTotals(totalsList, jewelryDiscount, marketingDiscount);
 
 		cartSteps.clickGoToShipping();
 
