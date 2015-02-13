@@ -227,10 +227,8 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		shippingSteps.setSameAsBilling(true);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		System.out.println(" --- shippingProducts ---");
 		PrintUtils.printList(shippingProducts);
-		System.out.println("X --- shippingProducts ---");
-
+		
 		shippingTotals = shippingSteps.grabSurveyData();
 
 		shippingSteps.clickGoToPaymentMethod();
