@@ -1,5 +1,6 @@
 package com.tests.us1;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -99,7 +100,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us1\\us001.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us1" + File.separator + "us001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");

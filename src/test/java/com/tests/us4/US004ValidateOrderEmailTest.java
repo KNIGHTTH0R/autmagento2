@@ -1,5 +1,6 @@
 package com.tests.us4;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,7 +55,7 @@ public class US004ValidateOrderEmailTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us4\\us004.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us4" + File.separator + "us004.properties");
 			prop.load(input);
 			email = prop.getProperty("email");
 			password = prop.getProperty("password");

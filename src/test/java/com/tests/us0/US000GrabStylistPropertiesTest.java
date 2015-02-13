@@ -1,5 +1,6 @@
 package com.tests.us0;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +8,7 @@ import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
@@ -22,7 +24,7 @@ import com.tools.data.StylistDataModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-//@WithTag(name = "US000", type = "backend")
+@WithTag(name = "US000", type = "backend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US000GrabStylistPropertiesTest extends BaseTest {
@@ -42,7 +44,7 @@ public class US000GrabStylistPropertiesTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us0\\Stylist.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us0" + File.separator + "Stylist.properties");
 			prop.load(input);
 			stylistName = prop.getProperty("stylistName");
 			System.out.println(stylistName);

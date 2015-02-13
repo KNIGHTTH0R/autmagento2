@@ -1,5 +1,6 @@
 package com.tests.us3;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -112,7 +113,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3\\us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3" + File.separator + "us003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");

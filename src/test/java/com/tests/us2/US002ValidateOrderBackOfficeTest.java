@@ -1,5 +1,6 @@
 package com.tests.us2;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,7 +69,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us2\\us002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us2" + File.separator + "us002.properties");
 			prop.load(input);
 			beUser = prop.getProperty("beUser");
 			bePass = prop.getProperty("bePass");

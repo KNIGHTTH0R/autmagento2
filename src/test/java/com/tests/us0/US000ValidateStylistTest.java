@@ -1,5 +1,6 @@
 package com.tests.us0;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,7 +51,7 @@ public class US000ValidateStylistTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us0\\Stylist.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us0" + File.separator + "Stylist.properties");
 			prop.load(input);
 			stylistName = prop.getProperty("stylistName");
 			prop = new Properties();
