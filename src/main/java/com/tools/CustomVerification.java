@@ -16,14 +16,14 @@ import com.tools.requirements.AbstractSteps;
 public class CustomVerification extends AbstractSteps{
 	private static final long serialVersionUID = 3609006291221433240L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(PageObject.class);
-    StringBuffer verificationMessages;
+    static StringBuffer verificationMessages;
     
 	public CustomVerification(Pages pages){
 		verificationMessages = new StringBuffer();
 	}
 	
 	@Step
-	public void verifyTrue(String message, boolean condition) throws StepFailureException{
+	public static void verifyTrue(String message, boolean condition) throws StepFailureException{
 		try{
 			Assert.verify(condition,message);
 		}catch(Exception e){
