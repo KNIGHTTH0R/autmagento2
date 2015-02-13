@@ -137,7 +137,7 @@ public class CartCalculation {
 		return result;
 	}
 
-	public CalcDetailsModel calculateDiscountTotals(List<CalculationModel> totalsList, String jewelryDiscount, String marketingMaterial) {
+	public static CalcDetailsModel calculateDiscountTotals(List<CalculationModel> totalsList, String jewelryDiscount, String marketingMaterial) {
 
 		CalcDetailsModel result = new CalcDetailsModel();
 		result.setJewelryBonus(jewelryDiscount);
@@ -207,7 +207,6 @@ public class CartCalculation {
 
 		BigDecimal jBRegularItems = BigDecimal.ZERO;
 		BigDecimal sum25 = BigDecimal.ZERO;
-		String formatedJewelryDiscount = formatDiscount(jewelryDiscount);
 
 		for (CartProductModel product : productsList) {
 
@@ -549,7 +548,7 @@ public class CartCalculation {
 	 * @param jewelryDiscount
 	 * @param marketingDiscount
 	 */
-	private void calculateTax(BigDecimal totalAmount, BigDecimal discount25, BigDecimal discount50, BigDecimal jewelryDiscount, BigDecimal marketingDiscount) {
+	private static void calculateTax(BigDecimal totalAmount, BigDecimal discount25, BigDecimal discount50, BigDecimal jewelryDiscount, BigDecimal marketingDiscount) {
 
 		BigDecimal result = BigDecimal.ZERO;
 		BigDecimal partial = BigDecimal.ZERO;
@@ -564,7 +563,7 @@ public class CartCalculation {
 		tax = partial.subtract(result).setScale(1, BigDecimal.ROUND_DOWN);
 	}
 
-	public void calculateJewelryDiscounts(List<CalculationModel> totalsList, String jewelryDiscount) {
+	public static void calculateJewelryDiscounts(List<CalculationModel> totalsList, String jewelryDiscount) {
 
 		if (applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_25).compareTo(BigDecimal.valueOf(0)) > 0) {
 			// If 25% section has total over 0
@@ -596,7 +595,7 @@ public class CartCalculation {
 
 	}
 
-	public BigDecimal calculateIpDiscount(List<CalculationModel> totalsList, BigDecimal jewelryBonus) {
+	public static BigDecimal calculateIpDiscount(List<CalculationModel> totalsList, BigDecimal jewelryBonus) {
 
 		BigDecimal result = BigDecimal.valueOf(0);
 		BigDecimal regularPrice = BigDecimal.valueOf(0);
@@ -644,7 +643,7 @@ public class CartCalculation {
 	 * @param discountClass
 	 * @return
 	 */
-	private BigDecimal applyDiscount(List<CalculationModel> totalsList, BigDecimal jewelryDiscount, String discountClass) {
+	private static BigDecimal applyDiscount(List<CalculationModel> totalsList, BigDecimal jewelryDiscount, String discountClass) {
 
 		BigDecimal result = BigDecimal.valueOf(0);
 		BigDecimal productSum = BigDecimal.valueOf(0);
@@ -657,7 +656,7 @@ public class CartCalculation {
 		return result;
 	}
 
-	public BigDecimal applyMarketingDiscount(List<CalculationModel> totalsList, BigDecimal marketingDiscount) {
+	public static BigDecimal applyMarketingDiscount(List<CalculationModel> totalsList, BigDecimal marketingDiscount) {
 
 		BigDecimal result = BigDecimal.valueOf(0);
 		BigDecimal productSum = BigDecimal.valueOf(0);
@@ -670,7 +669,7 @@ public class CartCalculation {
 
 	}
 
-	public void calculateMarketingDiscount(List<CalculationModel> totalsList, String marketingMaterial) {
+	public static void calculateMarketingDiscount(List<CalculationModel> totalsList, String marketingMaterial) {
 		BigDecimal marketingRemainder = BigDecimal.valueOf(0);
 
 		if (applyMarketingDiscount(totalsList, BigDecimal.valueOf(0)).compareTo(BigDecimal.valueOf(0)) > 0) {
@@ -684,7 +683,7 @@ public class CartCalculation {
 
 	}
 
-	private CalculationModel selectCalcModel(List<CalculationModel> totalsList, String mode) {
+	private static CalculationModel selectCalcModel(List<CalculationModel> totalsList, String mode) {
 
 		CalculationModel result = new CalculationModel();
 
@@ -710,7 +709,7 @@ public class CartCalculation {
 	 *            roundMode - eg BigDecimal.ROUND_HALF_EVEN
 	 * @return
 	 */
-	public BigDecimal apply119VAT(BigDecimal value, int precision, int roundMode) {
+	public static BigDecimal apply119VAT(BigDecimal value, int precision, int roundMode) {
 		BigDecimal result = BigDecimal.ZERO;
 		if (value.compareTo(BigDecimal.ZERO) > 0) {
 			// result =
@@ -731,7 +730,7 @@ public class CartCalculation {
 	 * @param discountCalculationModel
 	 * @return ShippingModel
 	 */
-	public ShippingModel remove119VAT(CalcDetailsModel discountCalculationModel, String shippingValue) {
+	public static ShippingModel remove119VAT(CalcDetailsModel discountCalculationModel, String shippingValue) {
 		ShippingModel result = new ShippingModel();
 		result.setSubTotal(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())), 2, BigDecimal.ROUND_HALF_EVEN).toString());
 
@@ -780,7 +779,7 @@ public class CartCalculation {
 		return result;
 	}
 
-	public List<ProductBasicModel> remove119VAT(List<ProductBasicModel> productsList) {
+	public static List<ProductBasicModel> remove119VAT(List<ProductBasicModel> productsList) {
 
 		List<ProductBasicModel> result = new ArrayList<ProductBasicModel>();
 

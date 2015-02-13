@@ -63,8 +63,6 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
-	public CartCalculation calculationSteps;
-	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
@@ -208,11 +206,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.typeMarketingBonus(marketingDisount);
 		cartSteps.updateMarketingBonus();
 
-		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
-		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
-		shippingProductsList = calculationSteps.remove119VAT(cartProductsList);
+		discountCalculationModel = CartCalculation.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
+		shippingCalculatedModel = CartCalculation.remove119VAT(discountCalculationModel, shippingPrice);
+		shippingProductsList = CartCalculation.remove119VAT(cartProductsList);
 		
-		List<CartProductModel> ipItemsCalculation = calculationSteps.calculateProducts(fullProductsList, jewelryDisount, marketingDisount);
+		List<CartProductModel> ipItemsCalculation = CartCalculation.calculateProducts(fullProductsList, jewelryDisount, marketingDisount);
 		BigDecimal ipTotal = BigDecimal.ZERO;
 		for (CartProductModel cartProductModel : ipItemsCalculation) {
 			ipTotal = ipTotal.add(BigDecimal.valueOf(Integer.valueOf(cartProductModel.getPriceIP()))); 
