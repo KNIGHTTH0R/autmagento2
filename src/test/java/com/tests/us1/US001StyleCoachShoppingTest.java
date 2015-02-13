@@ -199,10 +199,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-//
-//		confirmationSteps.agreeAndCheckout();
-//
-//		checkoutValidationSteps.verifySuccessMessage();
+
+		confirmationSteps.agreeAndCheckout();
+
+		checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
