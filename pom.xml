@@ -31,7 +31,7 @@
 			<groupId>net.thucydides</groupId>
 			<artifactId>thucydides-junit</artifactId>
 			<version>${thucydides.version}</version>
-			<scope>test</scope>
+			<!-- <scope>test</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -67,6 +67,7 @@
 						<include>**/*Test.java</include>
 					</includes>
 					<systemPropertyVariables>
+						<webdriver.remote.url></webdriver.remote.url>
 						<project.build.directory>${project.build.directory}</project.build.directory>
 						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver213.exe</webdriver.chrome.driver>
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>

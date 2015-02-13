@@ -1,6 +1,7 @@
 package com.tests;
 
-import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.UnknownHostException;
 
 import net.thucydides.core.annotations.Managed;
@@ -10,10 +11,9 @@ import net.thucydides.core.pages.Pages;
 
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
@@ -24,6 +24,7 @@ import com.tools.data.email.EmailCredentialsModel;
 
 public class BaseTest {
 	@Managed(uniqueSession = true)
+//	@Managed(uniqueSession = true, driver="htmlunit")
 	public WebDriver webdriver;
 
 	@ManagedPages(defaultUrl = Constants.BASE_URL)
@@ -36,13 +37,7 @@ public class BaseTest {
 	public CustomVerification customVerifications;
 	
     @Before
-    public void startComponents() {
-    	
-    	File pathToBinary = new File("C:\\user\\Programme\\FirefoxPortable\\App\\Firefox\\firefox.exe");
-    	FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-    	FirefoxProfile firefoxProfile = new FirefoxProfile();       
-    	WebDriver driver = new FirefoxDriver(ffBinary,firefoxProfile);
-
+    public void startComponents() throws MalformedURLException {
         try {
             System.err.println("--------------------------------- Test Start---------------------------------------");
 
