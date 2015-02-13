@@ -237,14 +237,7 @@ public class CartCalculation {
 	}
 	
 	
-	public static void main(String args[]){
-		String ress  = calculateIpForEachProduct(BigDecimal.valueOf(255), BigDecimal.valueOf(10), BigDecimal.valueOf(50));
-		
-		
-		System.out.println("REzzz: " + ress);
-	}
-	
-	private static String calculateIpForEachProduct(BigDecimal initialIpNumber,BigDecimal jB, BigDecimal sum25){
+	public static String calculateIpForEachProduct(BigDecimal initialIpNumber,BigDecimal jB, BigDecimal sum25){
 		
 		BigDecimal result = BigDecimal.ZERO;		
 		result = result.add(jB);		
@@ -256,9 +249,8 @@ public class CartCalculation {
 		if(result.compareTo(BigDecimal.ZERO) < 0){
 			result = BigDecimal.ZERO;
 		}
-		int integerResult = result.intValue();
 		
-		return String.valueOf(integerResult);
+		return result.setScale(0, RoundingMode.HALF_UP).toString();
 		
 	}
 
@@ -331,8 +323,8 @@ public class CartCalculation {
 		}
 		return String.valueOf(result);
 	}
-
-	//TODO ask how ip points are calculated and modify the 25 discount section (hardcoded ip=0) formula: IP reduced = IP - IP (JB appliedx100/Regular price)
+	
+	
 	public static List<CartProductModel> calculateProducts(List<CartProductModel> productsList, String jewelryDiscount, String marketingDiscount) {
 
 		
@@ -340,6 +332,11 @@ public class CartCalculation {
 		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_25);
 		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_50);
 		BigDecimal jewelryUsed = calculateUsedJewelryBonus(productsList, jewelryDiscount);
+		
+		System.out.println(sum25);
+		System.out.println(sum50);
+		System.out.println(sumMarketingMaterial);
+		System.out.println(jewelryDiscount);
 	
 		List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
 
@@ -380,6 +377,7 @@ public class CartCalculation {
 				newProduct.setFinalPrice(calculateMarketingMaterialCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
 						BigDecimal.valueOf(Double.parseDouble(marketingDiscount)),sumMarketingMaterial));
 			}
+			System.out.println();
 			cartProducts.add(newProduct);
 		}
 

@@ -150,6 +150,7 @@ public class US004CartSegmentationWithVatBillingDifferentFromShipping extends Ba
 	@Test
 	public void us004CartSegmentationWithVatBillingDifferentFromShipping() {
 		frontEndSteps.performLogin(username, password);
+		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
 		searchSteps.searchAndSelectProduct("R075GO", "ALONA RING (GOLD)");

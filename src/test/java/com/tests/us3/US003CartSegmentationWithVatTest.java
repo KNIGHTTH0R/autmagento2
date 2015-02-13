@@ -3,6 +3,7 @@ package com.tests.us3;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -176,12 +177,20 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+		
+		
 
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+		
+		
+		List<CartProductModel> fullProductsList = new ArrayList<CartProductModel>();
+		fullProductsList.addAll(cartProductsWith50Discount);
+		fullProductsList.addAll(cartProductsWith25Discount);
+		fullProductsList.addAll(cartMarketingMaterialsProducts);
 
 		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
 		totalsList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
@@ -202,6 +211,13 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
 		shippingProductsList = calculationSteps.remove119VAT(cartProductsList);
+		
+		List<CartProductModel> ipItemsCalculation = calculationSteps.calculateProducts(fullProductsList, jewelryDisount, marketingDisount);
+		BigDecimal ipTotal = BigDecimal.ZERO;
+		for (CartProductModel cartProductModel : ipItemsCalculation) {
+			ipTotal = ipTotal.add(BigDecimal.valueOf(Integer.valueOf(cartProductModel.getPriceIP()))); 
+		}
+		discountCalculationModel.setIpPoints(String.valueOf(ipTotal));
 
 		discountTotals = cartSteps.grabTotals();
 
