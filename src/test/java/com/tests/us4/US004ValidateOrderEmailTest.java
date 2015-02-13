@@ -85,7 +85,7 @@ public class US004ValidateOrderEmailTest extends BaseTest{
 	}
 	
 	@Test
-	public void us003ValidateOrderEmailTest() {
+	public void us004ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(email, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
