@@ -68,7 +68,10 @@ public class DoomTest {
 		System.setProperty("javax.net.ssl.keyStoreType", "JKS");
 		
 		SOAPMessage response = HttpSoapConnector.soapCreateProduct(product);
+//		String sessionId = HttpSoapConnector.performLogin();
+		
 		System.out.println("OUT");
 		response.writeTo(System.out);
+
 	}
 }

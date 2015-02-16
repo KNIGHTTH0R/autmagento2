@@ -6,7 +6,7 @@ package com.tools;
 public class SoapKeys {
 	
 	public static final String LOGIN_USER = "stagingaut";
-	public static final String LOGIN_PASS = "YYz66iiaalop";
+	public static final String LOGIN_PASS = "stagingaut1";
 //	public static final String LOGIN_PASS = "YYz66iiaalop";
 	
 	

@@ -30,6 +30,7 @@ public class HttpSoapConnector {
 
 	public static SOAPMessage soapCreateProduct(ProductDetailedModel product) throws SOAPException, IOException {
 		String sessID = performLogin();
+		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
@@ -38,7 +39,7 @@ public class HttpSoapConnector {
 		return soapResponse;
 	}
 
-	private static String performLogin() throws SOAPException, IOException {
+	public static String performLogin() throws SOAPException, IOException {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
@@ -96,7 +97,7 @@ public class HttpSoapConnector {
 	 * @throws SOAPException
 	 * @throws IOException
 	 */
-	private static SOAPMessage createLoginRequest(String user, String pass) throws SOAPException, IOException {
+	public static SOAPMessage createLoginRequest(String user, String pass) throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		// SOAP Body

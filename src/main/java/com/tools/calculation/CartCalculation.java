@@ -264,7 +264,7 @@ public class CartCalculation {
 		result = askingPrice.subtract(result);
 		result = result.divide(BigDecimal.valueOf(2), 2, BigDecimal.ROUND_HALF_UP);
 		
-		return String.valueOf(result);
+		return String.valueOf(result.setScale(2));
 	}
 
 	private static String calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB ,BigDecimal sum25Section) {
@@ -283,8 +283,10 @@ public class CartCalculation {
 			result = result.multiply(BigDecimal.valueOf(75));
 			result = result.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
 		}
-		return String.valueOf(result);
+		
+		return String.valueOf(result.setScale(2));
 	}
+	
 	private static BigDecimal calculate25DiscountForEachProduct(BigDecimal askingPrice, BigDecimal jB ,BigDecimal sum25Section) {
 		
 		BigDecimal result = BigDecimal.ZERO;	
@@ -318,59 +320,89 @@ public class CartCalculation {
 			
 			result = askingPrice.subtract(result);
 		}
-		return String.valueOf(result);
+		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
 	}
 	
-	/**
-	 * This method will recalculate the products list. Will return a new products list.For each product will be in the segmentation which belongs to
-	 * 
-	 * @param productsList
-	 * @param jewerlyDiscount
-	 * @param marketingDiscount
-	 * @return cartProducts
-	 */
-	public static List<CartProductModel> calculateProducts(List<CartProductModel> productsList, String jewelryDiscount, String marketingDiscount) {
-
+//	/**
+//	 * This method will recalculate the products list. Will return a new products list.For each product will be in the segmentation which belongs to
+//	 * 
+//	 * @param productsList
+//	 * @param jewerlyDiscount
+//	 * @param marketingDiscount
+//	 * @return cartProducts
+//	 */
+//	public static List<CartProductModel> calculateProducts(List<CartProductModel> productsList, String jewelryDiscount, String marketingDiscount) {
+//
+//		
+//		BigDecimal sumMarketingMaterial = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_0);
+//		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_25);
+//		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_50);
+//		BigDecimal jewelryUsed = calculateUsedJewelryBonus(productsList, jewelryDiscount);
+//		
+//		System.out.println(sum25);
+//		System.out.println(sum50);
+//		System.out.println(sumMarketingMaterial);
+//		System.out.println(jewelryDiscount);
+//	
+//		List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
+//
+//		for (CartProductModel product : productsList) {
+//
+//			CartProductModel newProduct = new CartProductModel();
+//
+//			if (product.getDiscountClass().contains(Constants.DISCOUNT_50)) {
+//				newProduct.setDiscountClass(product.getDiscountClass());
+//				newProduct.setName(product.getName());
+//				newProduct.setUnitPrice(product.getUnitPrice());
+//				newProduct.setProdCode(product.getProdCode());
+//				newProduct.setQuantity(product.getQuantity());
+//				newProduct.setProductsPrice(product.getProductsPrice());
+//				newProduct.setPriceIP(product.getPriceIP());
+//				newProduct.setFinalPrice(calculate50DiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())), jewelryUsed,
+//						BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum50));
+//			}
+//			if (product.getDiscountClass().contains(Constants.DISCOUNT_25)) {
+//				newProduct.setDiscountClass(product.getDiscountClass());
+//				newProduct.setName(product.getName());
+//				newProduct.setUnitPrice(product.getUnitPrice());
+//				newProduct.setProdCode(product.getProdCode());
+//				newProduct.setQuantity(product.getQuantity());
+//				newProduct.setProductsPrice(product.getProductsPrice());
+//				newProduct.setPriceIP(calculateIpForEachProduct(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())), BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)) , sum25));
+//				newProduct.setFinalPrice(calculate25DiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
+//						BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)),sum25));
+//			}
+//			if (product.getDiscountClass().contains(Constants.DISCOUNT_0)) {
+//				newProduct.setDiscountClass(product.getDiscountClass());
+//				newProduct.setName(product.getName());
+//				newProduct.setUnitPrice(product.getUnitPrice());
+//				newProduct.setProdCode(product.getProdCode());
+//				newProduct.setQuantity(product.getQuantity());
+//				newProduct.setProductsPrice(product.getProductsPrice());
+//				newProduct.setPriceIP(product.getPriceIP());
+//				newProduct.setFinalPrice(calculateMarketingMaterialCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
+//						BigDecimal.valueOf(Double.parseDouble(marketingDiscount)),sumMarketingMaterial));
+//			}
+//			System.out.println();
+//			cartProducts.add(newProduct);
+//		}
+//
+//		return cartProducts;
+//
+//	}
+	
+	public static List<CartProductModel> calculateProductsforMarketingMaterial(List<CartProductModel> productsList, String marketingDiscount) {		
 		
 		BigDecimal sumMarketingMaterial = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_0);
-		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_25);
-		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_50);
-		BigDecimal jewelryUsed = calculateUsedJewelryBonus(productsList, jewelryDiscount);
 		
-		System.out.println(sum25);
-		System.out.println(sum50);
 		System.out.println(sumMarketingMaterial);
-		System.out.println(jewelryDiscount);
-	
+		
 		List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
-
+		
 		for (CartProductModel product : productsList) {
-
-			CartProductModel newProduct = new CartProductModel();
-
-			if (product.getDiscountClass().contains(Constants.DISCOUNT_50)) {
-				newProduct.setDiscountClass(product.getDiscountClass());
-				newProduct.setName(product.getName());
-				newProduct.setUnitPrice(product.getUnitPrice());
-				newProduct.setProdCode(product.getProdCode());
-				newProduct.setQuantity(product.getQuantity());
-				newProduct.setProductsPrice(product.getProductsPrice());
-				newProduct.setPriceIP(product.getPriceIP());
-				newProduct.setFinalPrice(calculate50DiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())), jewelryUsed,
-						BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum50));
-			}
-			if (product.getDiscountClass().contains(Constants.DISCOUNT_25)) {
-				newProduct.setDiscountClass(product.getDiscountClass());
-				newProduct.setName(product.getName());
-				newProduct.setUnitPrice(product.getUnitPrice());
-				newProduct.setProdCode(product.getProdCode());
-				newProduct.setQuantity(product.getQuantity());
-				newProduct.setProductsPrice(product.getProductsPrice());
-				newProduct.setPriceIP(calculateIpForEachProduct(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())), BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)) , sum25));
-				newProduct.setFinalPrice(calculate25DiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
-						BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)),sum25));
-			}
-			if (product.getDiscountClass().contains(Constants.DISCOUNT_0)) {
+			
+			CartProductModel newProduct = new CartProductModel();			
+			
 				newProduct.setDiscountClass(product.getDiscountClass());
 				newProduct.setName(product.getName());
 				newProduct.setUnitPrice(product.getUnitPrice());
@@ -380,8 +412,68 @@ public class CartCalculation {
 				newProduct.setPriceIP(product.getPriceIP());
 				newProduct.setFinalPrice(calculateMarketingMaterialCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
 						BigDecimal.valueOf(Double.parseDouble(marketingDiscount)),sumMarketingMaterial));
-			}
-			System.out.println();
+			
+			cartProducts.add(newProduct);
+		}
+		
+		return cartProducts;
+		
+	}
+	public static List<CartProductModel> calculateProductsfor50Discount(List<CartProductModel> productsList,List<CartProductModel> list25DiscountProducts, String jewelryDiscount) {
+		
+		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_50);
+		BigDecimal jewelryUsed = calculateUsedJewelryBonus(list25DiscountProducts, jewelryDiscount);		
+
+		System.out.println(sum50);
+		System.out.println(jewelryDiscount);
+		System.out.println(jewelryUsed);
+		
+		List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
+		
+		for (CartProductModel product : productsList) {
+			
+			CartProductModel newProduct = new CartProductModel();
+		
+				newProduct.setDiscountClass(product.getDiscountClass());
+				newProduct.setName(product.getName());
+				newProduct.setUnitPrice(product.getUnitPrice());
+				newProduct.setProdCode(product.getProdCode());
+				newProduct.setQuantity(product.getQuantity());
+				newProduct.setProductsPrice(product.getProductsPrice());
+				newProduct.setPriceIP(product.getPriceIP());
+				newProduct.setFinalPrice(calculate50DiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())), jewelryUsed,
+						BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum50));			
+			
+			cartProducts.add(newProduct);
+		}
+		
+		return cartProducts;
+		
+	}
+	
+	public static List<CartProductModel> calculateProductsfor25Discount(List<CartProductModel> productsList, String jewelryDiscount) {		
+
+		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_25);
+		
+		System.out.println(sum25);
+		System.out.println(jewelryDiscount);
+	
+		List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
+
+		for (CartProductModel product : productsList) {
+
+			CartProductModel newProduct = new CartProductModel();		
+			
+				newProduct.setDiscountClass(product.getDiscountClass());
+				newProduct.setName(product.getName());
+				newProduct.setUnitPrice(product.getUnitPrice());
+				newProduct.setProdCode(product.getProdCode());
+				newProduct.setQuantity(product.getQuantity());
+				newProduct.setProductsPrice(product.getProductsPrice());
+				newProduct.setPriceIP(calculateIpForEachProduct(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())), BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)) , sum25));
+				newProduct.setFinalPrice(calculate25DiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
+						BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)),sum25));
+			
 			cartProducts.add(newProduct);
 		}
 

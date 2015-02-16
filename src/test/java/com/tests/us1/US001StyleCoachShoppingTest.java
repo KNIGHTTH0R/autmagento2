@@ -220,6 +220,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingTotals);
 		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 		
+		
 		//TODO add Confirmation values validation
 	}
 
