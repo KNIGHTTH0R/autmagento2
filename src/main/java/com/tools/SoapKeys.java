@@ -6,7 +6,7 @@ package com.tools;
 public class SoapKeys {
 	
 	public static final String LOGIN_USER = "stagingaut";
-	public static final String LOGIN_PASS = "YYz66iiaalop";
+	public static final String LOGIN_PASS = "stagingaut1";
 //	public static final String LOGIN_PASS = "YYz66iiaalop";
 	
 	
@@ -25,7 +25,7 @@ public class SoapKeys {
 	//Login keys
 	public static final String LOGIN_PARAM = "loginParam";	
 	public static final String USER_NAME = "username";
-	public static final String API_KEY = "apikey";
+	public static final String API_KEY = "apiKey";
 	
 	
 	//Create Product Keys
