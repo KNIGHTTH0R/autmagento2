@@ -69,7 +69,7 @@
 					<systemPropertyVariables>
 						<webdriver.remote.url></webdriver.remote.url>
 						<project.build.directory>${project.build.directory}</project.build.directory>
-						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver213.exe</webdriver.chrome.driver>
+<!-- 						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver213.exe</webdriver.chrome.driver> -->
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
 					</systemPropertyVariables>
 				</configuration>
