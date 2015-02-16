@@ -63,7 +63,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.11</version>
 				<configuration>
-<!-- 					<skip>true</skip> -->
+					<!-- <skip>true</skip> -->
+					<parallel>classes</parallel>
+					<threadCount>10</threadCount>
 					<includes>
 						<include>**/*Test.java</include>
 					</includes>
@@ -74,42 +76,93 @@
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
 					</systemPropertyVariables>
 				</configuration>
+				<executions>
+					<execution>
+						<id>unit-tests</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
+							<parallel>classes</parallel>
+							<perCoreThreadCount>true</perCoreThreadCount>
+							<includes>
+								<include>**/When*.java</include>
+								<include>**/When*.groovy</include>
+								<include>**/*Test.java</include>
+								<include>**/Test*.java</include>
+							</includes>
+							<excludes>
+								<exclude>**/Abstract*.java</exclude>
+								<exclude>**/*Story.java</exclude>
+								<exclude>**/samples/*.java</exclude>
+								<exclude>**/Sample*.java</exclude>
+								<exclude>**/*Sample.java</exclude>
+								<exclude>%regex[.*integration.*]</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>integration-tests</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<skip>true</skip>
+							<parallel>classes</parallel>
+
+							<perCoreThreadCount>true</perCoreThreadCount>
+							<excludes>
+								<exclude>**/Abstract*.java</exclude>
+								<exclude>**/samples/*.java</exclude>
+								<exclude>**/Sample*.java</exclude>
+								<exclude>**/*Sample.java</exclude>
+							</excludes>
+							<includes>
+								<include>%regex[.*integration.*Story.*]</include>
+								<include>%regex[.*integration.*When.*]</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 
 
-<!-- 			<plugin> -->
-<!-- 				<artifactId>maven-failsafe-plugin</artifactId> -->
-<!-- 				<version>2.10</version> -->
-<!-- 				<configuration> -->
-<!-- 					<includes> -->
-<!-- 						<include>**/*Test.java</include> -->
-<!-- 					</includes> -->
-<!-- 					<argLine>-Xmx512m</argLine> -->
-<!-- 					<systemPropertyVariables> -->
-<!-- 						<webdriver.driver>${webdriver.driver}</webdriver.driver> -->
-<!-- 						<project.build.directory>${project.build.directory}</project.build.directory> -->
-<!-- 						<webdriver.remote.url>http://172.22.0.16:5555/wd/hub</webdriver.remote.url> -->
-<!-- 					</systemPropertyVariables> -->
-<!-- 				</configuration> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<goals> -->
-<!-- 							<goal>integration-test</goal> -->
-<!-- 							<goal>verify</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 			</plugin> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-compiler-plugin</artifactId> -->
-<!-- 				<version>2.3.2</version> -->
-<!-- 				<configuration> -->
-<!-- 					<source>1.5</source> -->
-<!-- 					<target>1.5</target> -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
+			<!-- <plugin> -->
+			<!-- <artifactId>maven-failsafe-plugin</artifactId> -->
+			<!-- <version>2.10</version> -->
+			<!-- <configuration> -->
+			<!-- <includes> -->
+			<!-- <include>**/*Test.java</include> -->
+			<!-- </includes> -->
+			<!-- <argLine>-Xmx512m</argLine> -->
+			<!-- <systemPropertyVariables> -->
+			<!-- <webdriver.driver>${webdriver.driver}</webdriver.driver> -->
+			<!-- <project.build.directory>${project.build.directory}</project.build.directory> -->
+			<!-- <webdriver.remote.url>http://172.22.0.16:5555/wd/hub</webdriver.remote.url> -->
+			<!-- </systemPropertyVariables> -->
+			<!-- </configuration> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <goals> -->
+			<!-- <goal>integration-test</goal> -->
+			<!-- <goal>verify</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-compiler-plugin</artifactId> -->
+			<!-- <version>2.3.2</version> -->
+			<!-- <configuration> -->
+			<!-- <source>1.5</source> -->
+			<!-- <target>1.5</target> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
 
 
 
