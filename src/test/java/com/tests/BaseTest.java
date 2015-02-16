@@ -1,5 +1,6 @@
 package com.tests;
 
+import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 
 import net.thucydides.core.annotations.Managed;
@@ -20,6 +21,7 @@ import com.tools.data.email.EmailCredentialsModel;
 
 public class BaseTest {
 	@Managed(uniqueSession = true)
+//	@Managed(uniqueSession = true, driver="htmlunit")
 	public WebDriver webdriver;
 
 	@ManagedPages(defaultUrl = Constants.BASE_URL)
@@ -32,8 +34,7 @@ public class BaseTest {
 	public CustomVerification customVerifications;
 	
     @Before
-    public void startComponents() {
-
+    public void startComponents() throws MalformedURLException {
         try {
             System.err.println("--------------------------------- Test Start---------------------------------------");
 

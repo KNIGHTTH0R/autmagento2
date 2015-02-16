@@ -1,6 +1,10 @@
 package com.tests.us3;
 
+
 import java.awt.ItemSelectable;
+
+import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,8 +68,6 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
-	public CartCalculation calculationSteps;
-	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
@@ -115,7 +117,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3\\us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3" + File.separator + "us003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -209,10 +211,11 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		cartSteps.typeMarketingBonus(marketingDisount);
 		cartSteps.updateMarketingBonus();
 
-		discountCalculationModel = calculationSteps.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
-		shippingCalculatedModel = calculationSteps.remove119VAT(discountCalculationModel, shippingPrice);
-		shippingProductsList = calculationSteps.remove119VAT(cartProductsList);
+		discountCalculationModel = CartCalculation.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
+		shippingCalculatedModel = CartCalculation.remove119VAT(discountCalculationModel, shippingPrice);
+		shippingProductsList = CartCalculation.remove119VAT(cartProductsList);
 		
+
 		List<CartProductModel> calculatedProductsList25 = CartCalculation.calculateProductsfor25Discount(cartProductsWith25Discount, jewelryDisount);
 		List<CartProductModel> calculatedProductsList50 = CartCalculation.calculateProductsfor50Discount(cartProductsWith50Discount,cartProductsWith25Discount, jewelryDisount);
 		List<CartProductModel> calculatedProductsListMarketing = CartCalculation.calculateProductsforMarketingMaterial(cartMarketingMaterialsProducts, marketingDisount);
@@ -222,6 +225,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		ipItemsCalculation.addAll(calculatedProductsList50);
 		ipItemsCalculation.addAll(calculatedProductsListMarketing);
 		
+
 		BigDecimal ipTotal = BigDecimal.ZERO;
 		for (CartProductModel cartProductModel : ipItemsCalculation) {
 			ipTotal = ipTotal.add(BigDecimal.valueOf(Integer.valueOf(cartProductModel.getPriceIP()))); 

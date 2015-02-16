@@ -36,7 +36,7 @@ public class ValidationSteps extends AbstractSteps {
 		initialInt = Integer.valueOf(initialStr) + 1;
 		finalInt = Integer.valueOf(finalStr);
 
-		customVerification.verifyTrue(message + " values are incorrect:  Expected - " + initialInt + "  Actual - " + finalInt, initialInt == finalInt);
+		CustomVerification.verifyTrue(message + " values are incorrect:  Expected - " + initialInt + "  Actual - " + finalInt, initialInt == finalInt);
 		System.out.println("Verified " + message + " ... ");
 	}
 

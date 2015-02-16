@@ -12,7 +12,7 @@ public class SoapKeys {
 	
 //	public static final String API_URI = "http://staging-aut.pippajean.com/index.php/api/v2_soap?wsdl=1";
 //	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/";
-	public static final String API_URI = "http://staging-aut.pippajean.com:80/index.php/api/v2_soap/index/";
+	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
 //	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
 
 	//General keys
@@ -25,7 +25,7 @@ public class SoapKeys {
 	//Login keys
 	public static final String LOGIN_PARAM = "loginParam";	
 	public static final String USER_NAME = "username";
-	public static final String API_KEY = "apikey";
+	public static final String API_KEY = "apiKey";
 	
 	
 	//Create Product Keys
