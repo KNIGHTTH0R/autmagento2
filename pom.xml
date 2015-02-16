@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<thucydides.version>0.9.268</thucydides.version>
+		<thucydides.version>0.9.275</thucydides.version>
 		<webdriver.driver>firefox</webdriver.driver>
 	</properties>
 
@@ -31,13 +31,13 @@
 			<groupId>net.thucydides</groupId>
 			<artifactId>thucydides-junit</artifactId>
 			<version>${thucydides.version}</version>
-			<scope>test</scope>
+<!-- 			<scope>test</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<scope>test</scope>
+<!-- 			<scope>test</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.mongodb</groupId>
@@ -68,6 +68,7 @@
 					<threadCount>10</threadCount>
 					<includes>
 						<include>**/*Test.java</include>
+						<include>**/*Suite.java</include>
 					</includes>
 					<systemPropertyVariables>
 						<project.build.directory>${project.build.directory}</project.build.directory>
@@ -128,58 +129,20 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
-
-			<!-- <plugin> -->
-			<!-- <artifactId>maven-failsafe-plugin</artifactId> -->
-			<!-- <version>2.10</version> -->
-			<!-- <configuration> -->
-			<!-- <includes> -->
-			<!-- <include>**/*Test.java</include> -->
-			<!-- </includes> -->
-			<!-- <argLine>-Xmx512m</argLine> -->
-			<!-- <systemPropertyVariables> -->
-			<!-- <webdriver.driver>${webdriver.driver}</webdriver.driver> -->
-			<!-- <project.build.directory>${project.build.directory}</project.build.directory> -->
-			<!-- <webdriver.remote.url>http://172.22.0.16:5555/wd/hub</webdriver.remote.url> -->
-			<!-- </systemPropertyVariables> -->
-			<!-- </configuration> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <goals> -->
-			<!-- <goal>integration-test</goal> -->
-			<!-- <goal>verify</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.maven.plugins</groupId> -->
-			<!-- <artifactId>maven-compiler-plugin</artifactId> -->
-			<!-- <version>2.3.2</version> -->
-			<!-- <configuration> -->
-			<!-- <source>1.5</source> -->
-			<!-- <target>1.5</target> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
-
-
-
-			<plugin>
-				<groupId>net.thucydides.maven.plugins</groupId>
-				<artifactId>maven-thucydides-plugin</artifactId>
-				<version>${thucydides.version}</version>
-				<executions>
-					<execution>
-						<id>thucydides-reports</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>aggregate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>net.thucydides.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-thucydides-plugin</artifactId> -->
+<!-- 				<version>${thucydides.version}</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<id>thucydides-reports</id> -->
+<!-- 						<phase>post-integration-test</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>aggregate</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 		</plugins>
 	</build>
 
