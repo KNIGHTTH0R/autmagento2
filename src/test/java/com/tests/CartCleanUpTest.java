@@ -1,5 +1,6 @@
 package com.tests;
 
+import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.junit.runners.ThucydidesRunner;
@@ -25,6 +26,7 @@ public class CartCleanUpTest extends BaseTest{
 	
 	
 	@Test
+	@Pending
 	public void cartCleanUpTest(){
 		frontEndSteps.performLogin("evopippajean@gmail.com", "ghiocel24");
 		
