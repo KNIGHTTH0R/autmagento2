@@ -61,9 +61,9 @@ public class US3003CartSegmentationWithVatBillingShippingDeTest extends BaseTest
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
-	private static List<CartProductModel> calcProductsList25 = new ArrayList<CartProductModel>();
-	private static List<CartProductModel> calcProductsList50 = new ArrayList<CartProductModel>();
-	private static List<CartProductModel> calcProductsListMarketing = new ArrayList<CartProductModel>();
+//	private static List<CartProductModel> calcProductsList25 = new ArrayList<CartProductModel>();
+//	private static List<CartProductModel> calcProductsList50 = new ArrayList<CartProductModel>();
+//	private static List<CartProductModel> calcProductsListMarketing = new ArrayList<CartProductModel>();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
