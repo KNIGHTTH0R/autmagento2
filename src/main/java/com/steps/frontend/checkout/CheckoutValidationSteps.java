@@ -63,6 +63,14 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	public void validateMatchQuantity(String productNow, String compare) {
 		customVerification.verifyTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
+	@Step
+	public void validateMatchFinalPrice(String productNow, String compare) {
+		customVerification.verifyTrue("Failure: Final price values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+	}
+	@Step
+	public void validateMatchIpPoints(String productNow, String compare) {
+		customVerification.verifyTrue("Failure: Ip points values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+	}
 
 	@Step
 	public void checkTotalAmountFromUrl(String url, String totalAmount) {

@@ -24,6 +24,14 @@ public class CartWorkflows {
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
 	
+
+	@Steps 
+	public static CustomVerification customVerification;
+
+	private static List<CartProductModel> cartProductsModelGrabbedList = new ArrayList<CartProductModel>();
+	private static List<CartProductModel> cartProductsModelCalculatedList = new ArrayList<CartProductModel>();
+	
+
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
 
@@ -59,6 +67,42 @@ public class CartWorkflows {
 		Assert.assertTrue("Failure: Not all products have been validated . ", cartProducts.size() == 0);
 
 	}
+	
+	public void setRecalculatedCartProductsModels(List<CartProductModel> cartProductsModelGrabbedList, List<CartProductModel> cartProductsModelCalculatedList) {
+		CartWorkflows.cartProductsModelGrabbedList = cartProductsModelGrabbedList;
+		CartWorkflows.cartProductsModelCalculatedList = cartProductsModelCalculatedList;
+	}
+
+	@Step
+	public void validateRecalculatedProducts(String message) {
+
+		for (CartProductModel productNow : cartProductsModelGrabbedList) {
+			CartProductModel compare = findProduct(productNow.getProdCode(),productNow.getQuantity(), cartProductsModelCalculatedList);
+
+			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
+
+			if (compare.getName() != null) {
+				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
+				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
+				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
+				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());
+				checkoutValidationSteps.validateMatchIpPoints(productNow.getPriceIP(), compare.getPriceIP());
+			} else {
+				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+			}
+
+			int index = cartProductsModelCalculatedList.indexOf(compare);
+			if (index > -1) {
+				cartProductsModelCalculatedList.remove(index);
+				System.out.println("index of " + compare.getName() + " removed");
+				System.out.println(cartProductsModelCalculatedList.size() + " items remained");
+			}
+		}
+		Assert.assertTrue("Failure: Products list is empty. ", cartProductsModelGrabbedList.size() != 0);
+		Assert.assertTrue("Failure: Not all products have been validated . ", cartProductsModelCalculatedList.size() == 0);
+
+	}
+	
 
 	private CalculationModel calculationModel = new CalculationModel();
 	private CartTotalsModel cartTotalModel = new CartTotalsModel();

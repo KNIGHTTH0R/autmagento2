@@ -1,6 +1,10 @@
 package com.tests.us3;
 
+
+import java.awt.ItemSelectable;
+
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -211,7 +215,17 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 		shippingCalculatedModel = CartCalculation.remove119VAT(discountCalculationModel, shippingPrice);
 		shippingProductsList = CartCalculation.remove119VAT(cartProductsList);
 		
-		List<CartProductModel> ipItemsCalculation = CartCalculation.calculateProducts(fullProductsList, jewelryDisount, marketingDisount);
+
+		List<CartProductModel> calculatedProductsList25 = CartCalculation.calculateProductsfor25Discount(cartProductsWith25Discount, jewelryDisount);
+		List<CartProductModel> calculatedProductsList50 = CartCalculation.calculateProductsfor50Discount(cartProductsWith50Discount,cartProductsWith25Discount, jewelryDisount);
+		List<CartProductModel> calculatedProductsListMarketing = CartCalculation.calculateProductsforMarketingMaterial(cartMarketingMaterialsProducts, marketingDisount);
+		
+		List<CartProductModel> ipItemsCalculation = new ArrayList<CartProductModel>();
+		ipItemsCalculation.addAll(calculatedProductsList25);
+		ipItemsCalculation.addAll(calculatedProductsList50);
+		ipItemsCalculation.addAll(calculatedProductsListMarketing);
+		
+
 		BigDecimal ipTotal = BigDecimal.ZERO;
 		for (CartProductModel cartProductModel : ipItemsCalculation) {
 			ipTotal = ipTotal.add(BigDecimal.valueOf(Integer.valueOf(cartProductModel.getPriceIP()))); 

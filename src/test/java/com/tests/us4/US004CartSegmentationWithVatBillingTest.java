@@ -61,7 +61,11 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
+	private static List<CartProductModel> calcProductsList25 = new ArrayList<CartProductModel>();
+	private static List<CartProductModel> calcProductsList50 = new ArrayList<CartProductModel>();
+	private static List<CartProductModel> calcProductsListMarketing = new ArrayList<CartProductModel>();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
+	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
 	private static ShippingModel shippingTotals = new ShippingModel();
 	private static UrlModel urlModel = new UrlModel();
@@ -190,13 +194,29 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
+		
+		List<CartProductModel> calculatedProductsList25 = CartCalculation.calculateProductsfor25Discount(cartProductsWith25Discount, jewelryDiscount);
+		PrintUtils.printList(calculatedProductsList25);
 
-		List<CartProductModel> calculatedProductsList = CartCalculation.calculateProducts(cartProds, jewelryDiscount, marketingDiscount);
-		PrintUtils.printList(calculatedProductsList);
+		List<CartProductModel> calculatedProductsList50 = CartCalculation.calculateProductsfor50Discount(cartProductsWith50Discount,cartProductsWith25Discount, jewelryDiscount);
+		PrintUtils.printList(calculatedProductsList50);
+
+		List<CartProductModel> calculatedProductsListMarketing = CartCalculation.calculateProductsforMarketingMaterial(cartMarketingMaterialsProducts, marketingDiscount);
+		PrintUtils.printList(calculatedProductsListMarketing);
+		
+		allProductsListRecalculated.addAll(calculatedProductsList50);
+		allProductsListRecalculated.addAll(calculatedProductsList25);
+		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
+		
+		List<CartProductModel> cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
+
+		List<CartProductModel> cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
+
+		List<CartProductModel> cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
 
 		cartTotals = cartSteps.grabTotals();
 
-		total = CartCalculation.calculateCartProductsTotals(calculatedProductsList, jewelryDiscount, marketingDiscount);
+		total = CartCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount);
 		PrintUtils.printCalcDetailsModel(total);
 
 		cartSteps.clickGoToShipping();
@@ -229,7 +249,8 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 //		confirmationSteps.agreeAndCheckout();
 //
 //		checkoutValidationSteps.verifySuccessMessage();
-
+		
+		//validate products before discount to be applied
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
@@ -238,6 +259,16 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 
 		cartWorkflows.setValidateProductsModels(productsListMarketing, cartMarketingMaterialsProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+		
+		//validations products after discount is applied
+		cartWorkflows.setRecalculatedCartProductsModels(cartProductsWith50DiscountDiscounted,calculatedProductsList50);
+		cartWorkflows.validateRecalculatedProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION -RECALCULATED");
+		
+		cartWorkflows.setRecalculatedCartProductsModels(cartProductsWith25DiscountDiscounted, calculatedProductsList25);
+		cartWorkflows.validateRecalculatedProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION -RECALCULATED");
+		
+		cartWorkflows.setRecalculatedCartProductsModels(cartMarketingMaterialsProductsDiscounted, calculatedProductsListMarketing);
+		cartWorkflows.validateRecalculatedProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION -RECALCULATED");
 
 		cartWorkflows.setValidateProductsModels(allProductsList, shippingProducts);
 		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
