@@ -1,4 +1,4 @@
-package com.tests.us3;
+package com.tests.us3001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,10 +27,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US003", type = "frontend")
+@WithTag(name = "US3001", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)	
 @RunWith(ThucydidesRunner.class)
-public class US003UserProfileOrderIdTest extends BaseTest{
+public class US3001UserProfileOrderIdTest extends BaseTest{
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -51,7 +51,7 @@ public class US003UserProfileOrderIdTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3" + File.separator + "us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3001" + File.separator + "us3001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -70,12 +70,12 @@ public class US003UserProfileOrderIdTest extends BaseTest{
 
 		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-		orderModel = MongoReader.grabOrderModels("US003CartSegmentationWithVatTest" + Constants.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US3001CartSegmentationWithVatTest" + Constants.GRAB).get(0);
 	}
 	
 	
 	@Test
-	public void us003UserProfileOrderId() {
+	public void us3001UserProfileOrderId() {
 		frontEndSteps.performLogin(username, password);
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();

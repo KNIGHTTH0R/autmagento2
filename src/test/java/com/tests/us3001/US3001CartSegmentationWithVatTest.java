@@ -1,4 +1,4 @@
-package com.tests.us3;
+package com.tests.us3001;
 
 
 import java.awt.ItemSelectable;
@@ -52,10 +52,10 @@ import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
-@WithTag(name = "US003", type = "frontend")
+@WithTag(name = "US3001", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US003CartSegmentationWithVatTest extends BaseTest {
+public class US3001CartSegmentationWithVatTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -117,7 +117,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3" + File.separator + "us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3001" + File.separator + "us3001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -157,7 +157,7 @@ public class US003CartSegmentationWithVatTest extends BaseTest {
 	}
 
 	@Test
-	public void us003CartSegmentationWithVatTest() {
+	public void us3001CartSegmentationWithVatTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;

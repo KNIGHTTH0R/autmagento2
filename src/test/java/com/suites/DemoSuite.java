@@ -9,8 +9,9 @@ import com.tests.us1.US001UserProfileOrderIdTest;
 import com.tests.us1.US001ValidateOrderBackOfficeTest;
 import com.tests.us1.US001ValidateOrderEmailTest;
 import com.tests.us2.US002CartSegmentationLogicTest;
-import com.tests.us3.US003CartSegmentationWithVatTest;
-import com.tests.us4.US004CartSegmentationWithVatBillingTest;
+import com.tests.us3001.US3001CartSegmentationWithVatTest;
+import com.tests.us3002.US3002CartSegmentationWithVatBillingTest;
+
 
 
 @SuiteClasses({
@@ -19,8 +20,8 @@ import com.tests.us4.US004CartSegmentationWithVatBillingTest;
 	US001ValidateOrderBackOfficeTest.class,
 	US001ValidateOrderEmailTest.class,
 	US002CartSegmentationLogicTest.class,
-	US003CartSegmentationWithVatTest.class,
-	US004CartSegmentationWithVatBillingTest.class,
+	US3001CartSegmentationWithVatTest.class,
+	US3002CartSegmentationWithVatBillingTest.class,
 })
 @RunWith(Suite.class)
 public class DemoSuite {

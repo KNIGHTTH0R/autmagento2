@@ -1,4 +1,4 @@
-package com.tests.us3;
+package com.tests.us3001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,10 +38,10 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 
-@WithTag(name = "US003", type = "backend")
+@WithTag(name = "US3001", type = "backend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US003ValidateOrderBackOfficeTest extends BaseTest {
+public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -69,7 +69,7 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3" + File.separator + "us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3001" + File.separator + "us3001.properties");
 			prop.load(input);
 			beUser = prop.getProperty("beUser");
 			bePass = prop.getProperty("bePass");
@@ -86,10 +86,10 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
-		productsList = MongoReader.grabProductBasicModel("US003CartSegmentationWithVatTest" + Constants.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US003CartSegmentationWithVatTest" + Constants.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US003CartSegmentationWithVatTest" + Constants.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001CartSegmentationWithVatTest" + Constants.GRAB);
+		productsList = MongoReader.grabProductBasicModel("US3001CartSegmentationWithVatTest" + Constants.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US3001CartSegmentationWithVatTest" + Constants.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3001CartSegmentationWithVatTest" + Constants.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -132,7 +132,7 @@ public class US003ValidateOrderBackOfficeTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us003ValidateOrderBackOfficeTest() {
+	public void us3001ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(beUser, bePass);
 
 		backEndSteps.clickOnSalesOrders();

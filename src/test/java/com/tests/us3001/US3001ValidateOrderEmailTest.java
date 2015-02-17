@@ -1,4 +1,4 @@
-package com.tests.us3;
+package com.tests.us3001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,10 +31,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US003", type = "external")
+@WithTag(name = "US3001", type = "external")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US003ValidateOrderEmailTest extends BaseTest{
+public class US3001ValidateOrderEmailTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -55,7 +55,7 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3" + File.separator + "us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3001" + File.separator + "us3001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -73,7 +73,7 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
+		orderModel = MongoReader.getOrderModel("US3001CartSegmentationWithVatTest" + Constants.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
@@ -86,7 +86,7 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 	}
 	
 	@Test
-	public void us003ValidateOrderEmailTest() {
+	public void us3001ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(username, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
