@@ -63,12 +63,12 @@ public class DoomTest {
 		
 		
 		//TODO work on this
-//		System.setProperty("javax.net.ssl.keyStore", Constants.RESOURCES_PATH + "keystore.jks");
-//		System.setProperty("javax.net.ssl.keyStorePassword", "");
-//		System.setProperty("javax.net.ssl.keyStoreType", "JKS");
+		System.setProperty("javax.net.ssl.keyStore", Constants.RESOURCES_PATH + "keystore.jks");
+		System.setProperty("javax.net.ssl.keyStorePassword", "");
+		System.setProperty("javax.net.ssl.keyStoreType", "JKS");
 		
 		SOAPMessage response = HttpSoapConnector.soapCreateProduct(product);
-//		String sessionId = HttpSoapConnector.performLogin();
+
 		
 		System.out.println("OUT");
 		response.writeTo(System.out);

@@ -1,4 +1,4 @@
-package com.tests.us4;
+package com.tests.us3003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,10 +46,10 @@ import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
-@WithTag(name = "US004", type = "frontend")
+@WithTag(name = "US3003", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US004CartSegmentationWithVatBillingTest extends BaseTest {
+public class US3003CartSegmentationWithVatBillingShippingDeTest extends BaseTest {
 
 	String username, password;
 	String billingAddress;
@@ -112,7 +112,7 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us4" + File.separator + "us004.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3003" + File.separator + "us3003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -153,7 +153,7 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 	}
 
 	@Test
-	public void us004CartSegmentationWithVatBillingTest() {
+	public void us3003CartSegmentationWithVatBillingShippingDeTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
@@ -222,8 +222,7 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 		cartSteps.clickGoToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.selectShippingAddress(shippingAddress);
+		shippingSteps.setSameAsBilling(true);	
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 
