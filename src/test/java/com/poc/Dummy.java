@@ -1,8 +1,10 @@
-package com.tests;
+package com.poc;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.tests.BaseTest;
 
 public class Dummy extends BaseTest {
 

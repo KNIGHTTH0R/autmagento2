@@ -20,14 +20,15 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
 
-//TODO move stuff out to specialized classes. Only SOAP connector should remain
 public class HttpSoapConnector {
 
-	// public static void main(String args[]) throws Exception {
-	// soapCreateProduct(new ProductDetailedModel("zzzA")).writeTo(System.out);
-	//
-	// }
-
+	/**
+	 * Create a product and return the message. Performs login and creates a xml based on the provided product model.
+	 * @param product
+	 * @return
+	 * @throws SOAPException
+	 * @throws IOException
+	 */
 	public static SOAPMessage soapCreateProduct(ProductDetailedModel product) throws SOAPException, IOException {
 		String sessID = performLogin();
 		System.out.println("Sesion id :" + sessID);
@@ -39,40 +40,15 @@ public class HttpSoapConnector {
 		return soapResponse;
 	}
 
-	public static String performLogin() throws SOAPException, IOException {
+	/**
+	 * This method will login with a user in {@link SoapKeys} and return the sessionID.
+	 * @return
+	 * @throws SOAPException
+	 * @throws IOException
+	 */
+	private static String performLogin() throws SOAPException, IOException {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-
-//		Socket socket = new Socket();
-//		SocketAddress sockaddr = new InetSocketAddress("localhost", 8888);
-//		socket.connect(sockaddr, 10000);
-//		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(socket.getInetAddress(), 8888));
-//		URL url = new URL(SoapKeys.API_URI);
-//		HttpURLConnection uc = (HttpURLConnection) url.openConnection(proxy);
-//		URL url = new URL("http", "localhost", 8888, SoapKeys.API_URI);
-//		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(SoapKeys.LOGIN_USER, SoapKeys.LOGIN_PASS), url);
-//		
-//		InetSocketAddress proxyInet = new InetSocketAddress("localhost",8888);
-//		Proxy proxy = new Proxy(Proxy.Type.HTTP, proxyInet);
-//		URL httpsUrl = new URL(SoapKeys.API_URI);
-//		HttpsURLConnection httpsCon = (HttpsURLConnection) httpsUrl.openConnection(proxy);
-		
-//		System.setProperty("http.proxySet", "true");
-//		System.setProperty("http.proxyHost","127.0.0.1");
-//		System.setProperty("http.proxyPort","8888");
-//
-//		URL httpsUrl = new URL(SoapKeys.API_URI);
-//		HttpsURLConnection httpsCon = (HttpsURLConnection)httpsUrl.openConnection();
-		
-//		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(SoapKeys.LOGIN_USER, SoapKeys.LOGIN_PASS), httpsCon);
-		
-		
-//		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", Integer.parseInt("8888")));
-//		HttpURLConnection connection = (HttpURLConnection) new URL(SoapKeys.API_URI).openConnection(proxy);
-//		connection.connect();
-		
-		
-		
 		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(SoapKeys.LOGIN_USER, SoapKeys.LOGIN_PASS), SoapKeys.API_URI);
 		String result = "";
 
@@ -85,7 +61,6 @@ public class HttpSoapConnector {
 		System.out.println("Login Response  ");
 		soapResponse.writeTo(System.out);
 		return result;
-
 	}
 
 	/**
@@ -109,7 +84,7 @@ public class HttpSoapConnector {
 		apikeyBody.addTextNode(pass);
 
 		soapMessage.saveChanges();
-		
+
 		soapMessage.writeTo(System.out);
 
 		return soapMessage;
@@ -126,10 +101,9 @@ public class HttpSoapConnector {
 		MessageFactory messageFactory = MessageFactory.newInstance();
 		SOAPMessage soapMessage = messageFactory.createMessage();
 
-		String serverURI = SoapKeys.SERVER_URI;
 		soapMessage.getSOAPPart().getEnvelope().setPrefix(SoapKeys.SOAP_PREFIX);
 		soapMessage.getSOAPPart().getEnvelope().removeNamespaceDeclaration("SOAP-ENV");
-		soapMessage.getSOAPPart().getEnvelope().addNamespaceDeclaration(SoapKeys.URN_PREFIX, serverURI);
+		soapMessage.getSOAPPart().getEnvelope().addNamespaceDeclaration(SoapKeys.URN_PREFIX, SoapKeys.SERVER_URI);
 		soapMessage.getSOAPBody().setPrefix(SoapKeys.SOAP_PREFIX);
 		soapMessage.getSOAPHeader().setPrefix(SoapKeys.SOAP_PREFIX);
 
@@ -234,6 +208,13 @@ public class HttpSoapConnector {
 		return stockData;
 	}
 
+	/**
+	 * Component of the product model. TierPrice Model
+	 * @param productList
+	 * @param bodyElement
+	 * @return
+	 * @throws SOAPException
+	 */
 	private static SOAPElement generateTierPriceMessage(List<TierPriceModel> productList, SOAPElement bodyElement) throws SOAPException {
 		SOAPElement tierPrices = bodyElement.addChildElement(SoapKeys.TIER_PRICES);
 

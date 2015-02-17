@@ -1,4 +1,4 @@
-package com.tests;
+package com.poc;
 
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.checkout.CartSteps;
+import com.tests.BaseTest;
 import com.tools.requirements.Application;
 
 @Story(Application.StyleCoach.Shopping.class)
