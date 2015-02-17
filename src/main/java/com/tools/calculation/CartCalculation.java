@@ -488,7 +488,7 @@ public class CartCalculation {
 	 * @param marketingDiscount
 	 * @return result
 	 */	
-	public static CalcDetailsModel calculateCartProductsTotals(List<CartProductModel> productsList, String jewerlyDiscount, String marketingDiscount){
+	public static CalcDetailsModel calculateCartProductsTotals(List<CartProductModel> productsList, String jewerlyDiscount, String marketingDiscount,String taxClass){
 		CalcDetailsModel result = new CalcDetailsModel();
 		
 		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList,Constants.DISCOUNT_25);
@@ -509,8 +509,9 @@ public class CartCalculation {
 		}
 		
 		totalAmount = calculateTotalAmount(subtotal,BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50, rabatt25);
-		tax = totalAmount.multiply(BigDecimal.valueOf(19));
-		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("119")), 2, BigDecimal.ROUND_DOWN);
+		
+		tax = totalAmount.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 		
 		result.setSubTotal(String.valueOf(subtotal));
 		result.setJewelryBonus(jewerlyDiscount);

@@ -75,6 +75,7 @@ public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
+	private static String taxClass;
 	private static String cardNumber;
 	private static String cardName;
 	private static String cardMonth;
@@ -121,6 +122,7 @@ public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
+			taxClass = prop.getProperty("taxClass");
 
 			cardNumber = prop.getProperty("cardNumber");
 			cardName = prop.getProperty("cardName");
@@ -216,7 +218,7 @@ public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 
 		cartTotals = cartSteps.grabTotals();
 
-		total = CartCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount);
+		total = CartCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
 		PrintUtils.printCalcDetailsModel(total);
 
 		cartSteps.clickGoToShipping();
