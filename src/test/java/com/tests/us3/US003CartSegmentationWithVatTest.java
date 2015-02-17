@@ -1,10 +1,7 @@
 package com.tests.us3;
 
 
-import java.awt.ItemSelectable;
-
 import java.io.File;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;

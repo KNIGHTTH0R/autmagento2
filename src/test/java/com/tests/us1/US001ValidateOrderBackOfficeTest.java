@@ -62,7 +62,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3" + File.separator + "us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us1" + File.separator + "us001.properties");
 			prop.load(input);
 			beUser = prop.getProperty("beUser");
 			bePass = prop.getProperty("bePass");
