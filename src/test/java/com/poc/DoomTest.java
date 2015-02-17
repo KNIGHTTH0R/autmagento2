@@ -1,23 +1,24 @@
-package com.tests;
+package com.poc;
 
 import java.io.IOException;
-import java.net.ProxySelector;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-import org.jruby.RubyProcess.Sys;
-
 import com.connectors.http.HttpSoapConnector;
-import com.tools.Constants;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 
 public class DoomTest {
 
-	
+	/**
+	 * Sample to create a basic product through the API.
+	 * @param args
+	 * @throws SOAPException
+	 * @throws IOException
+	 */
 	public static void main(String args[]) throws SOAPException, IOException{
 		ProductDetailedModel product = new ProductDetailedModel();
 		List<String> webSiteIds = new ArrayList<String>();
@@ -37,7 +38,7 @@ public class DoomTest {
 		webSiteIds.add("1");
 		product.setType("simple");
 		product.setSet("4");
-		product.setSku("MM2211554477");
+		product.setSku("MM2211554477s");
 		product.setName("doodle");
 		product.setDescription("Doodle one");
 		product.setShortDescription("one");
@@ -51,21 +52,6 @@ public class DoomTest {
 		product.setWebsiteIdsArray(webSiteIds);
 		product.setStockData(productStock);
 		product.setStore("0");
-		
-//		System.setProperty("http.proxyHost", "localhost");
-//		System.setProperty("http.proxyPort", "8888");
-		
-//		System.getProperties().put("proxySet", "true");
-//		System.getProperties().put("https.proxyHost", "localhost");  
-//		System.getProperties().put("https.proxyPort", 8888);
-//		System.getProperties().put("http.proxyHost", "localhost");  
-//		System.getProperties().put("http.proxyPort", 8888);
-		
-		
-		//TODO work on this
-//		System.setProperty("javax.net.ssl.keyStore", Constants.RESOURCES_PATH + "keystore.jks");
-//		System.setProperty("javax.net.ssl.keyStorePassword", "");
-//		System.setProperty("javax.net.ssl.keyStoreType", "JKS");
 		
 		SOAPMessage response = HttpSoapConnector.soapCreateProduct(product);
 		System.out.println("OUT");
