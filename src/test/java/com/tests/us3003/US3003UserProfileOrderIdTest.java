@@ -1,4 +1,4 @@
-package com.tests.us3;
+package com.tests.us3003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,34 +27,32 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US003", type = "frontend")
-@Story(Application.StyleCoach.Shopping.class)	
+@WithTag(name = "US3003", type = "frontend")
+@Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US003UserProfileOrderIdTest extends BaseTest{
-
-	@Steps
-	public HeaderSteps headerSteps;
+public class US3003UserProfileOrderIdTest extends BaseTest{
+	
 	@Steps
 	public ProfileSteps profileSteps;
 	@Steps
+	public HeaderSteps headerSteps;
+	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	
-	private String username, password;
 	private static OrderModel orderModel = new OrderModel();
+	private String username, password;
 	
-	
+
 	@Before
 	public void setUp() throws Exception {
-
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
-
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3" + File.separator + "us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3003" + File.separator + "us3003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
-			password = prop.getProperty("password");
+			password = prop.getProperty("password");			
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -68,15 +66,18 @@ public class US003UserProfileOrderIdTest extends BaseTest{
 			}
 		}
 
-		// Clean DB
-		MongoConnector.cleanCollection(getClass().getSimpleName());
-		orderModel = MongoReader.grabOrderModels("US003CartSegmentationWithVatTest" + Constants.GRAB).get(0);
+
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
+		orderModel = MongoReader.grabOrderModels("US3003CartSegmentationWithVatBillingShippingDeTest" + Constants.GRAB).get(0);
+		
 	}
 	
-	
 	@Test
-	public void us003UserProfileOrderId() {
+	public void us3003UserProfileOrderIdTest() {
+		
 		frontEndSteps.performLogin(username, password);
+		
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 

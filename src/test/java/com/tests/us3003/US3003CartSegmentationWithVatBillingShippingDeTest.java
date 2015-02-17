@@ -1,4 +1,4 @@
-package com.tests.us4;
+package com.tests.us3003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,10 +46,10 @@ import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
-@WithTag(name = "US004", type = "frontend")
+@WithTag(name = "US3003", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US004CartSegmentationWithVatBillingTest extends BaseTest {
+public class US3003CartSegmentationWithVatBillingShippingDeTest extends BaseTest {
 
 	String username, password;
 	String billingAddress;
@@ -61,9 +61,9 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
-	private static List<CartProductModel> calcProductsList25 = new ArrayList<CartProductModel>();
-	private static List<CartProductModel> calcProductsList50 = new ArrayList<CartProductModel>();
-	private static List<CartProductModel> calcProductsListMarketing = new ArrayList<CartProductModel>();
+//	private static List<CartProductModel> calcProductsList25 = new ArrayList<CartProductModel>();
+//	private static List<CartProductModel> calcProductsList50 = new ArrayList<CartProductModel>();
+//	private static List<CartProductModel> calcProductsListMarketing = new ArrayList<CartProductModel>();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
@@ -112,7 +112,7 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us4" + File.separator + "us004.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3003" + File.separator + "us3003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -153,19 +153,19 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 	}
 
 	@Test
-	public void us004CartSegmentationWithVatBillingTest() {
+	public void us3003CartSegmentationWithVatBillingShippingDeTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct("R075GO", "ALONA RING (GOLD)");
+		searchSteps.searchAndSelectProduct("R033SV", "ODILIE LIQUID SILVER RING");
 		productData = productSteps.setProductAddToCart("2", "17");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct("K035SV", "STELLA SET");
-		productData = productSteps.setProductAddToCart("1", "small");
+		searchSteps.searchAndSelectProduct("N095GY", "NALA NECKLACE (GREY)");
+		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
@@ -222,8 +222,7 @@ public class US004CartSegmentationWithVatBillingTest extends BaseTest {
 		cartSteps.clickGoToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.selectShippingAddress(shippingAddress);
+		shippingSteps.setSameAsBilling(true);	
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 

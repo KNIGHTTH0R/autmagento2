@@ -1,4 +1,4 @@
-package com.tests.us4;
+package com.tests.us3002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,10 +27,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US004", type = "frontend")
+@WithTag(name = "US3002", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US004UserProfileOrderIdTest extends BaseTest{
+public class US3002UserProfileOrderIdTest extends BaseTest{
 	
 	@Steps
 	public ProfileSteps profileSteps;
@@ -49,7 +49,7 @@ public class US004UserProfileOrderIdTest extends BaseTest{
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us4" + File.separator + "us004.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3002" + File.separator + "us3002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");			
@@ -69,7 +69,7 @@ public class US004UserProfileOrderIdTest extends BaseTest{
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
-		orderModel = MongoReader.grabOrderModels("US004CartSegmentationWithVatBillingDifferentFromShipping" + Constants.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US3002CartSegmentationWithVatBillingTest" + Constants.GRAB).get(0);
 		
 	}
 	

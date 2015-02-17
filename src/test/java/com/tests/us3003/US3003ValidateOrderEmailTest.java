@@ -1,4 +1,4 @@
-package com.tests.us3;
+package com.tests.us3003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,10 +31,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US003", type = "external")
+@WithTag(name = "US004", type = "external")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US003ValidateOrderEmailTest extends BaseTest{
+public class US3003ValidateOrderEmailTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -45,7 +45,7 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 	@Steps
 	public EmailSteps emailSteps;
 	
-	private String username, password, emailPassword;
+	private String email, password, emailPassword;
 	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
 	
 	@Before
@@ -55,11 +55,11 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3" + File.separator + "us003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3003" + File.separator + "us3003.properties");
 			prop.load(input);
-			username = prop.getProperty("username");
+			email = prop.getProperty("email");
 			password = prop.getProperty("password");
-			emailPassword = prop.getProperty("Emailpassword");
+			emailPassword = prop.getProperty("emailPass");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -73,25 +73,28 @@ public class US003ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US003CartSegmentationWithVatTest" + Constants.GRAB);
+		orderModel = MongoReader.getOrderModel("US3003CartSegmentationWithVatBillingShippingDeTest" + Constants.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
 		emailData.setProtocol(EmailConstants.PROTOCOL);
-		emailData.setUsername(username);
+		emailData.setUsername(email);
 		emailData.setPassword(emailPassword);
         
 		gmailConnector = new GmailConnector(emailData);
 	}
 	
 	@Test
-	public void us003ValidateOrderEmailTest() {
-		frontEndSteps.performLogin(username, password);
+	public void us3003ValidateOrderEmailTest() {
+		frontEndSteps.performLogin(email, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
+		System.out.println(message);
+		System.out.println(orderModel.get(0).getOrderId());
+		System.out.println(orderModel.get(0).getTotalPrice());
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
-		emailSteps.validateEmailContent(orderModel.get(0).getTotalPrice(), message);
+	
 	}
 
 }

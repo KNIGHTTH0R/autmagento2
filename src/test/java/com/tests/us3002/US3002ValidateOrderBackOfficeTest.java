@@ -1,4 +1,4 @@
-package com.tests.us4;
+package com.tests.us3002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,10 +38,10 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 
-@WithTag(name = "US004", type = "backend")
+@WithTag(name = "US3002", type = "backend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US004ValidateOrderBackOfficeTest extends BaseTest {
+public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -69,7 +69,7 @@ public class US004ValidateOrderBackOfficeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us4" + File.separator + "us004.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3002" + File.separator + "us3002.properties");
 			prop.load(input);
 			beUser = prop.getProperty("beUser");
 			bePass = prop.getProperty("bePass");
@@ -86,10 +86,10 @@ public class US004ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US004CartSegmentationWithVatBillingDifferentFromShipping" + Constants.GRAB);
-		productsList = MongoReader.grabProductBasicModel("US004CartSegmentationWithVatBillingDifferentFromShipping" + Constants.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US004CartSegmentationWithVatBillingDifferentFromShipping" + Constants.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US004CartSegmentationWithVatBillingDifferentFromShipping" + Constants.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3002CartSegmentationWithVatBillingTest" + Constants.GRAB);
+		productsList = MongoReader.grabProductBasicModel("US3002CartSegmentationWithVatBillingTest" + Constants.GRAB);
+		shippingModelList = MongoReader.grabShippingModel("US3002CartSegmentationWithVatBillingTest" + Constants.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3002CartSegmentationWithVatBillingTest" + Constants.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -131,7 +131,7 @@ public class US004ValidateOrderBackOfficeTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us004ValidateOrderBackOfficeTest() {
+	public void us3002ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(beUser, bePass);
 
 		backEndSteps.clickOnSalesOrders();
