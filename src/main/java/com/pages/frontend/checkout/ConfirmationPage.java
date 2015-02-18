@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -39,7 +40,7 @@ public class ConfirmationPage extends AbstractPage {
 	@FindBy(css = "div.checkout-totals-section")
 	private WebElement surveyTotalsContainer;
 
-	public AddressModel grabAddressData(WebElement addressPreview) {
+	private AddressModel grabAddressData(WebElement addressPreview) {
 		AddressModel result = new AddressModel();
 		element(addressPreview).waitUntilVisible();
 		String textparse = addressPreview.getText();
@@ -94,11 +95,10 @@ public class ConfirmationPage extends AbstractPage {
 
 	}
 
+
 	public AddressModel grabBillingData() {
 		AddressModel result = new AddressModel();
 		element(billingContainer).waitUntilVisible();
-
-		System.out.println(billingContainer.getText());
 		result = grabAddressData(billingContainer);
 
 		return result;
@@ -107,8 +107,6 @@ public class ConfirmationPage extends AbstractPage {
 	public AddressModel grabShippingData() {
 		AddressModel result = new AddressModel();
 		element(shippingContainer).waitUntilVisible();
-
-		System.out.println(shippingContainer.getText());
 		result = grabAddressData(shippingContainer);
 
 		return result;

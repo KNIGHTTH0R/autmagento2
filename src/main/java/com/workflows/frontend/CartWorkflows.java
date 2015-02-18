@@ -13,6 +13,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.CustomVerification;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
@@ -34,7 +35,24 @@ public class CartWorkflows {
 
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
+	
+	private static AddressModel billingAddress = new AddressModel();
+	private static String billingCountryName;
 
+	public void setAddressModels(AddressModel billingAddress,String billingCountryName) {
+		CartWorkflows.billingAddress = billingAddress;
+		CartWorkflows.billingCountryName = billingCountryName;
+	}
+	
+	public void validateBillingAddress(){
+		
+	}
+	
+	@Step
+	public void verifyCountry(String grabbed, String compare) {
+//		CustomVerification.verifyTrue("Failure: TAX dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
+	
 	public void setValidateProductsModels(List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {
 		CartWorkflows.productsList = productsList;
 		CartWorkflows.cartProducts = cartProducts;

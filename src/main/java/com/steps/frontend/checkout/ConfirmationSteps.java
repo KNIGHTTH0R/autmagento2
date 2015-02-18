@@ -5,6 +5,7 @@ import java.util.List;
 import net.thucydides.core.annotations.Step;
 
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -41,6 +42,20 @@ public class ConfirmationSteps extends AbstractSteps{
 		confirmationPage().clickIAgree();
 		confirmationPage().clickOnSubmit();
 	}
+
+
+	@Step
+	public void validateBillingAddress(String billingAddress){
+		AddressModel address = confirmationPage().grabBillingData();
+		CustomVerification.verifyTrue("Billing address is incorrect" , billingAddress.contains(address.getCountryName()));
+		
+	}
+	@Step
+	public void validateShippingAddress(String shippingAddress){
+		AddressModel address = confirmationPage().grabShippingData();
+		CustomVerification.verifyTrue("Shipping address is incorrect" , shippingAddress.contentEquals(address.getCountryName()));
+		
+	}	
 
 
 }
