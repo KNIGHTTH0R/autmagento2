@@ -34,6 +34,7 @@ import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -246,6 +247,9 @@ public class US3003CartSegmentationWithVatBillingShippingDeTest extends BaseTest
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 		confirmationTotals = confirmationSteps.grabConfirmationTotals();
+		
+		AddressModel grabbedBillingAddress =  confirmationSteps.grabBillingData();
+		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
 
 //		confirmationSteps.agreeAndCheckout();
 //
@@ -285,6 +289,12 @@ public class US3003CartSegmentationWithVatBillingShippingDeTest extends BaseTest
 
 		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		cartWorkflows.setBillingAddressModels(billingAddress,grabbedBillingAddress);
+		cartWorkflows.validateBillingAddress("BILLING ADDRESS");
+		
+		cartWorkflows.setShippingAddressModels(billingAddress,grabbedShippingAddress);
+		cartWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 
 	}
 

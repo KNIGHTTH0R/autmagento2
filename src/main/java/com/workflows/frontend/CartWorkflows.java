@@ -38,20 +38,34 @@ public class CartWorkflows {
 	
 	private static AddressModel billingAddress = new AddressModel();
 	private static String billingCountryName;
+	private static AddressModel shippingAddress = new AddressModel();
+	private static String shippingCountryName;
 
-	public void setAddressModels(AddressModel billingAddress,String billingCountryName) {
+	public void setBillingAddressModels(String billingCountryName,AddressModel billingAddress) {
 		CartWorkflows.billingAddress = billingAddress;
 		CartWorkflows.billingCountryName = billingCountryName;
 	}
 	
-	public void validateBillingAddress(){
+	public void validateBillingAddress(String message){
+		verifyCountry(billingCountryName,billingAddress.getCountryName());
+		
+	}
+	
+	public void setShippingAddressModels(String shippingCountryName,AddressModel shippingAddress) {
+		CartWorkflows.shippingAddress = shippingAddress;
+		CartWorkflows.shippingCountryName = shippingCountryName;
+	}
+	
+	public void validateShippingAddress(String message){
+		verifyCountry(shippingCountryName,shippingAddress.getCountryName());
 		
 	}
 	
 	@Step
-	public void verifyCountry(String grabbed, String compare) {
-//		CustomVerification.verifyTrue("Failure: TAX dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	public void verifyCountry(String address, String countryName) {
+		CustomVerification.verifyTrue("Failure: Countries dont match !", address.contains(countryName));
 	}
+	
 	
 	public void setValidateProductsModels(List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {
 		CartWorkflows.productsList = productsList;

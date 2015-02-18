@@ -57,14 +57,10 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 	String shippingAddress;
 	ProductBasicModel productBasicModel = new ProductBasicModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
-	// private static CalcDetailsModel discountCalculationModel;
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
-	private static List<CartProductModel> calcProductsList25 = new ArrayList<CartProductModel>();
-	private static List<CartProductModel> calcProductsList50 = new ArrayList<CartProductModel>();
-	private static List<CartProductModel> calcProductsListMarketing = new ArrayList<CartProductModel>();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
@@ -289,6 +285,12 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 
 		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		cartWorkflows.setBillingAddressModels(billingAddress,grabbedBillingAddress);
+		cartWorkflows.validateBillingAddress("BILLING ADDRESS");
+		
+		cartWorkflows.setShippingAddressModels(shippingAddress,grabbedShippingAddress);
+		cartWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 
 	}
 
