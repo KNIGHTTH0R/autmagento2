@@ -87,4 +87,17 @@ public class MongoConnector {
 		mongoClient.dropDatabase(simpleName);
 	}
 
+	public List<String> getDbNames() {
+		List<String> dbNames = mongoClient.getDatabaseNames();
+		for (String nameNow : dbNames) {
+			System.out.println(nameNow);
+		}
+
+		return dbNames;
+	}
+	
+	public void deleteDb(String dbName) {
+		mongoClient.dropDatabase(dbName);
+	}
+
 }
