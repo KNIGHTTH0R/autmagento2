@@ -88,7 +88,6 @@
 					<includes>
 						<include>${runSuite}</include>
 					</includes>
-					<outputEncoding>UTF-8</outputEncoding>
 				</configuration>
 				<executions>
 					<execution>
@@ -109,6 +108,9 @@
 				<groupId>net.thucydides.maven.plugins</groupId>
 				<artifactId>maven-thucydides-plugin</artifactId>
 				<version>${thucydides.version}</version>
+				<configuration>
+					<outputEncoding>UTF-8</outputEncoding>
+				</configuration>
 				<executions>
 					<execution>
 						<id>thucydides-reports</id>
