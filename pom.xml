@@ -11,12 +11,14 @@
 	<name>Pippa Jean Test Automation </name>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
+
 		<thucydides.version>0.9.268</thucydides.version>
 		<webdriver.driver>firefox</webdriver.driver>
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
 		<runSuite>**/DemoSuite.class</runSuite>
+		<outputEncoding>UTF-8</outputEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
