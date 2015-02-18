@@ -1,4 +1,4 @@
-package com.tests.us3005;
+package com.tests.us3006;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,10 +27,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US3005", type = "frontend")
+@WithTag(name = "US3006", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US3005UserProfileOrderIdTest extends BaseTest{
+public class US3006UserProfileOrderIdTest extends BaseTest{
 	
 	@Steps
 	public ProfileSteps profileSteps;
@@ -49,7 +49,7 @@ public class US3005UserProfileOrderIdTest extends BaseTest{
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3005" + File.separator + "us3005.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3006" + File.separator + "us3006.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");			
@@ -69,12 +69,12 @@ public class US3005UserProfileOrderIdTest extends BaseTest{
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
-		orderModel = MongoReader.grabOrderModels("US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest" + Constants.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US3006CartSegmentationWithVatAndSmbBillingShippingDeTest" + Constants.GRAB).get(0);
 		
 	}
 	
 	@Test
-	public void us3005UserProfileOrderIdTest() {
+	public void us3006UserProfileOrderIdTest() {
 		
 		frontEndSteps.performLogin(username, password);
 		
