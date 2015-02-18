@@ -2,6 +2,8 @@ package com.steps.frontend;
 
 import java.util.List;
 
+import org.junit.Assert;
+
 import net.thucydides.core.annotations.Step;
 
 import com.tools.CustomVerification;
@@ -30,13 +32,13 @@ public class ProfileSteps extends AbstractSteps{
 	
 	@Step
 	public void verifyOrderId(String orderId, String compare){
-		CustomVerification.verifyTrue("Failure: Order id is not as expected. Expected: " + compare + " Actual: " + orderId, orderId.contentEquals(compare));
+		Assert.assertTrue("Failure: Order id is not as expected. Expected: " + compare + " Actual: " + orderId, orderId.contentEquals(compare));
 	}
 
 	@Step
 	public void verifyOrderPrice(String orderPrice, String compare) {
 		orderPrice = FormatterUtils.cleanNumberToString(orderPrice).replace(".", "");
-		CustomVerification.verifyTrue("Failure: Order Price is not as expected. Expected: " + compare + " Actual: " + orderPrice, orderPrice.contentEquals(compare));
+		Assert.assertTrue("Failure: Order Price is not as expected. Expected: " + compare + " Actual: " + orderPrice, orderPrice.contentEquals(compare));
 	}
 
 }
