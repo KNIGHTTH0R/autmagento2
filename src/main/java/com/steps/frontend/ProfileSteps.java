@@ -2,11 +2,10 @@ package com.steps.frontend;
 
 import java.util.List;
 
-import org.junit.Assert;
-
 import net.thucydides.core.annotations.Step;
 
-import com.tools.CustomVerification;
+import org.junit.Assert;
+
 import com.tools.data.backend.OrderModel;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.FormatterUtils;
