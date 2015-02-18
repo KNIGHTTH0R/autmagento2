@@ -34,6 +34,7 @@ import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -53,17 +54,12 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 
 	String username, password;
 	String billingAddress;
-	String shippingAddress;
 	ProductBasicModel productBasicModel = new ProductBasicModel();
-	private CreditCardModel creditCardData = new CreditCardModel();
-	// private static CalcDetailsModel discountCalculationModel;
+	private CreditCardModel creditCardData = new CreditCardModel();	
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
-	private static List<CartProductModel> calcProductsList25 = new ArrayList<CartProductModel>();
-	private static List<CartProductModel> calcProductsList50 = new ArrayList<CartProductModel>();
-	private static List<CartProductModel> calcProductsListMarketing = new ArrayList<CartProductModel>();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
@@ -118,7 +114,6 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
@@ -246,6 +241,9 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 		confirmationTotals = confirmationSteps.grabConfirmationTotals();
+		
+		AddressModel grabbedBillingAddress =  confirmationSteps.grabBillingData();
+		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
 
 //		confirmationSteps.agreeAndCheckout();
 //
@@ -285,6 +283,12 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 
 		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		cartWorkflows.setBillingAddressModels(billingAddress,grabbedBillingAddress);
+		cartWorkflows.validateBillingAddress("BILLING ADDRESS");
+		
+		cartWorkflows.setShippingAddressModels(billingAddress,grabbedShippingAddress);
+		cartWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 
 	}
 
