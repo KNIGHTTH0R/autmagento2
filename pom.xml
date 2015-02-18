@@ -16,6 +16,7 @@
 		<webdriver.driver>firefox</webdriver.driver>
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
 		<runSuite>**/DemoSuite.class</runSuite>
+		<outputEncoding>UTF-8</outputEncoding>
 	</properties>
 
 	<dependencies>
@@ -87,6 +88,7 @@
 					<includes>
 						<include>${runSuite}</include>
 					</includes>
+					<outputEncoding>UTF-8</outputEncoding>
 				</configuration>
 				<executions>
 					<execution>
