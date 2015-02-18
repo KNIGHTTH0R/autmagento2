@@ -52,19 +52,14 @@ import com.workflows.frontend.CartWorkflows;
 @RunWith(ThucydidesRunner.class)
 public class US3003CartSegmentationWithVatBillingShippingDeTest extends BaseTest {
 
-	String username, password;
-	String billingAddress;
-	String shippingAddress;
-	ProductBasicModel productBasicModel = new ProductBasicModel();
+	private String username, password;
+	private String billingAddress;
+	private ProductBasicModel productBasicModel = new ProductBasicModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
-	// private static CalcDetailsModel discountCalculationModel;
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
-//	private static List<CartProductModel> calcProductsList25 = new ArrayList<CartProductModel>();
-//	private static List<CartProductModel> calcProductsList50 = new ArrayList<CartProductModel>();
-//	private static List<CartProductModel> calcProductsListMarketing = new ArrayList<CartProductModel>();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
@@ -72,7 +67,7 @@ public class US3003CartSegmentationWithVatBillingShippingDeTest extends BaseTest
 	private static UrlModel urlModel = new UrlModel();
 	private static OrderModel orderModel = new OrderModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
-	CalcDetailsModel total = new CalcDetailsModel();
+	private CalcDetailsModel total = new CalcDetailsModel();
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
@@ -82,7 +77,9 @@ public class US3003CartSegmentationWithVatBillingShippingDeTest extends BaseTest
 	private static String cardMonth;
 	private static String cardYear;
 	private static String cardCVC;
-	List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
+	private List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
+	
+	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -119,7 +116,6 @@ public class US3003CartSegmentationWithVatBillingShippingDeTest extends BaseTest
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");

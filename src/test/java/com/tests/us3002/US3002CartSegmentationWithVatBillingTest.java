@@ -51,19 +51,15 @@ import com.workflows.frontend.CartWorkflows;
 @RunWith(ThucydidesRunner.class)
 public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 
-	String username, password;
-	String billingAddress;
-	String shippingAddress;
-	ProductBasicModel productBasicModel = new ProductBasicModel();
+	private String username, password;
+	private String billingAddress;
+	private String shippingAddress;
+	private ProductBasicModel productBasicModel = new ProductBasicModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
-	// private static CalcDetailsModel discountCalculationModel;
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
-//	private static List<CartProductModel> calcProductsList25 = new ArrayList<CartProductModel>();
-//	private static List<CartProductModel> calcProductsList50 = new ArrayList<CartProductModel>();
-//	private static List<CartProductModel> calcProductsListMarketing = new ArrayList<CartProductModel>();
 	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
@@ -71,7 +67,7 @@ public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 	private static UrlModel urlModel = new UrlModel();
 	private static OrderModel orderModel = new OrderModel();
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
-	CalcDetailsModel total = new CalcDetailsModel();
+	private CalcDetailsModel cartTotalsCalculated = new CalcDetailsModel();
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
@@ -81,7 +77,9 @@ public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 	private static String cardMonth;
 	private static String cardYear;
 	private static String cardCVC;
-	List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
+	private List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
+	
+	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -218,8 +216,8 @@ public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 
 		cartTotals = cartSteps.grabTotals();
 
-		total = CartCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
-		PrintUtils.printCalcDetailsModel(total);
+		cartTotalsCalculated = CartCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
+		PrintUtils.printCalcDetailsModel(cartTotalsCalculated);
 
 		cartSteps.clickGoToShipping();
 
@@ -231,7 +229,7 @@ public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 
 		shippingTotals = shippingSteps.grabSurveyData();
 
-		shippingCalculatedModel = calculationSteps.calculateShippingTotals(total, shippingValue);
+		shippingCalculatedModel = calculationSteps.calculateShippingTotals(cartTotalsCalculated, shippingValue);
 		PrintUtils.printShippingTotals(shippingCalculatedModel);
 
 		shippingSteps.clickGoToPaymentMethod();
@@ -278,7 +276,7 @@ public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 		cartWorkflows.setValidateProductsModels(allProductsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
-		cartWorkflows.setVerifyTotalsDiscount(cartTotals, total);
+		cartWorkflows.setVerifyTotalsDiscount(cartTotals, cartTotalsCalculated);
 		cartWorkflows.verifyTotalsDiscountNoMarketing("CART TOTALS");
 
 		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
@@ -292,7 +290,7 @@ public class US3002CartSegmentationWithVatBillingTest extends BaseTest {
 	@After
 	public void saveData() {
 
-		MongoWriter.saveCalcDetailsModel(total, getClass().getSimpleName() + Constants.CALC);
+		MongoWriter.saveCalcDetailsModel(cartTotalsCalculated, getClass().getSimpleName() + Constants.CALC);
 		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
 		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + MongoTableKeys.GRAB);
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);

@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.Constants;
-import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ShippingModel;
