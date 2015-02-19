@@ -50,7 +50,7 @@ import com.workflows.frontend.CartWorkflows;
 @WithTag(name = "US3008", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US3008CartSegmentationNoValidVatAndNoSmbBillingDeShippingAtTest extends BaseTest {
+public class US3008Test extends BaseTest {
 
 	String username, password;
 	String billingAddress;

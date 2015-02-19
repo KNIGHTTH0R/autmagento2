@@ -115,6 +115,7 @@ public class PrintUtils {
 		System.out.println(dataModel.getPostCode());
 		System.out.println(dataModel.getHomeTown());
 		System.out.println(dataModel.getPhoneNumber());
+		System.out.println(dataModel.getCountryName());
 	}
 
 	public static void printEmailList(List<EmailModel> emailList) {
