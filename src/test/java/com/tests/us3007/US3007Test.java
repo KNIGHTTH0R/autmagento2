@@ -1,4 +1,4 @@
-package com.tests.us3004;
+package com.tests.us3007;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,10 +47,10 @@ import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
-@WithTag(name = "US3007", type = "frontend")
+@WithTag(name = "US3004", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends BaseTest {
+public class US3007Test extends BaseTest {
 
 	String username, password;
 	String billingAddress;
@@ -109,7 +109,7 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3007" + File.separator + "us3007.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3004" + File.separator + "us3004.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");

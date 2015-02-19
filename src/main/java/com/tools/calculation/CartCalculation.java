@@ -271,6 +271,7 @@ public class CartCalculation {
 		BigDecimal result = BigDecimal.ZERO;	
 		if (askingPrice.compareTo(jB) < 0) {
 			result = BigDecimal.ZERO;
+			
 		} else {
 			
 			result = result.add(askingPrice);		
