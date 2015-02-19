@@ -1,4 +1,4 @@
-package com.tests.us3004;
+package com.tests.us3009;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,15 +47,15 @@ import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.CartWorkflows;
 
-@WithTag(name = "US3007", type = "frontend")
+@WithTag(name = "US3009", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends BaseTest {
+public class US3009CartSegmentationNoValidVatAndNoSmbBillingShippingDeTest extends BaseTest {
 
 	String username, password;
 	String billingAddress;
 	ProductBasicModel productBasicModel = new ProductBasicModel();
-	private CreditCardModel creditCardData = new CreditCardModel();	
+	private CreditCardModel creditCardData = new CreditCardModel();
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
 	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
@@ -109,7 +109,7 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3007" + File.separator + "us3007.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3009" + File.separator + "us3009.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -150,7 +150,7 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 	}
 
 	@Test
-	public void us3007CartSegmentationWithVatBillingShippingDeTest() {
+	public void us3009CartSegmentationWithVatAndSmbBillingDeShippingAtTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
@@ -185,7 +185,6 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 		cartProds.addAll(cartProductsWith50Discount);
 		cartProds.addAll(cartProductsWith25Discount);
 		cartProds.addAll(cartMarketingMaterialsProducts);
-		System.out.println("size" + cartProds.size());
 
 		cartSteps.typeJewerlyBonus(jewelryDiscount);
 		cartSteps.updateJewerlyBonus();
@@ -250,6 +249,7 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 //		checkoutValidationSteps.verifySuccessMessage();
 		
 		//validate products before discount to be applied
+		
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
