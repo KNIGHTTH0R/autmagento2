@@ -7,8 +7,6 @@ import java.util.List;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-import org.apache.log4j.lf5.viewer.categoryexplorer.CategoryImmediateEditor;
-
 import com.connectors.http.HttpSoapConnector;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
