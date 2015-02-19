@@ -23,7 +23,9 @@ import com.tools.data.soap.TierPriceModel;
 public class HttpSoapConnector {
 
 	/**
-	 * Create a product and return the message. Performs login and creates a xml based on the provided product model.
+	 * Create a product and return the message. Performs login and creates a xml
+	 * based on the provided product model.
+	 * 
 	 * @param product
 	 * @return
 	 * @throws SOAPException
@@ -41,7 +43,9 @@ public class HttpSoapConnector {
 	}
 
 	/**
-	 * This method will login with a user in {@link SoapKeys} and return the sessionID.
+	 * This method will login with a user in {@link SoapKeys} and return the
+	 * sessionID.
+	 * 
 	 * @return
 	 * @throws SOAPException
 	 * @throws IOException
@@ -162,17 +166,19 @@ public class HttpSoapConnector {
 		productData = addOptionalField(SoapKeys.CUSTOM_DESIGN, product.getCustomDesign(), productData);
 		productData = addOptionalField(SoapKeys.CUSTOM_LAYOUT_UPDATE, product.getCustomLayoutUpdate(), productData);
 		productData = addOptionalField(SoapKeys.OPTIONS_CONTAINER, product.getOptionsContainer(), productData);
+		
 
 		// Added stock data section
-		productData = generateStockDataMessage(product.getStockData(), productData);
-		productData = generateTierPriceMessage(product.getTierPriceList(), productData);
+		productData.addChildElement(generateStockDataMessage(product.getStockData(), productData));
 
 		// these should be implemented in the same manner
-		productData = generateWebsiteIds(product.getWebsiteIdsArray(), productData);
-		productData = generateWebsites(product.getWebsiteArray(), productData);
-		productData = generateCategories(product.getCategoriesArray(), productData);
-		productData = generateCategoryIds(product.getCategoryIdsArray(), productData);
-		productData = generateAdditionalAttributes(product.getAdditionalAttributes(), productData);
+		productData.addChildElement(generateWebsiteIds(product.getWebsiteIdsArray(), productData));
+		productData.addChildElement(generateWebsites(product.getWebsiteArray(), productData));
+		productData.addChildElement(generateCategories(product.getCategoriesArray(), productData));
+		productData.addChildElement(generateCategoryIds(product.getCategoryIdsArray(), productData));
+		productData.addChildElement(generateAdditionalAttributes(product.getAdditionalAttributes(), productData));
+
+		productData.addChildElement(generateTierPriceMessage(product.getTierPriceList(), productData));
 
 		// Lists and other objects
 		return productData;
@@ -210,6 +216,7 @@ public class HttpSoapConnector {
 
 	/**
 	 * Component of the product model. TierPrice Model
+	 * 
 	 * @param productList
 	 * @param bodyElement
 	 * @return
@@ -222,10 +229,22 @@ public class HttpSoapConnector {
 			for (TierPriceModel product : productList) {
 				SOAPElement objArray = tierPrices.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
 
-				objArray.addChildElement(addOptionalField(SoapKeys.CUSTOMER_GROUP_ID, product.getCustomerGroupId(), objArray));
-				objArray.addChildElement(addOptionalField(SoapKeys.WEBSITE, product.getWebsite(), objArray));
-				objArray.addChildElement(addOptionalField(SoapKeys.QTY, product.getQty(), objArray));
-				objArray.addChildElement(addOptionalField(SoapKeys.PRICE, product.getPrice(), objArray));
+				SOAPElement groupId = objArray.addChildElement(SoapKeys.CUSTOMER_GROUP_ID);
+				groupId.addTextNode(product.getCustomerGroupId());
+				
+				SOAPElement web = objArray.addChildElement(SoapKeys.WEBSITE);
+				web.addTextNode(product.getCustomerGroupId());
+				
+				SOAPElement qty = objArray.addChildElement(SoapKeys.QTY);
+				qty.addTextNode(product.getCustomerGroupId());
+				
+				SOAPElement price = objArray.addChildElement(SoapKeys.PRICE);
+				price.addTextNode(product.getCustomerGroupId());
+				
+//				objArray.addChildElement(addOptionalField(SoapKeys.CUSTOMER_GROUP_ID, product.getCustomerGroupId(), objArray));
+//				objArray.addChildElement(addOptionalField(SoapKeys.WEBSITE, product.getWebsite(), objArray));
+//				objArray.addChildElement(addOptionalField(SoapKeys.QTY, product.getQty(), objArray));
+//				objArray.addChildElement(addOptionalField(SoapKeys.PRICE, product.getPrice(), objArray));
 			}
 		} else {
 			System.out.println("Warning: Product - Tier Price Model list is empty - see soap - generateTierPriceMessage()");
@@ -234,11 +253,11 @@ public class HttpSoapConnector {
 	}
 
 	private static SOAPElement generateAdditionalAttributes(Map<String, String> map, SOAPElement bodyElement) throws SOAPException {
-		SOAPElement tierPrices = bodyElement.addChildElement(SoapKeys.TIER_PRICES);
+		SOAPElement additionalAttributes = bodyElement.addChildElement(SoapKeys.ADDITIONAL_ATTRIBUTES);
 
 		if (map.size() > 0) {
 			for (String product : map.keySet()) {
-				SOAPElement objArray = tierPrices.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+				SOAPElement objArray = additionalAttributes.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
 
 				objArray.addChildElement(addOptionalField(SoapKeys.KEY, product, objArray));
 				objArray.addChildElement(addOptionalField(SoapKeys.VALUE, map.get(product), objArray));
@@ -246,7 +265,7 @@ public class HttpSoapConnector {
 		} else {
 			System.out.println("Warning: Product - Additional Atributes list is empty - see soap - generateTierPriceMessage()");
 		}
-		return tierPrices;
+		return additionalAttributes;
 	}
 
 	/**
@@ -258,59 +277,59 @@ public class HttpSoapConnector {
 	 * @throws SOAPException
 	 */
 	private static SOAPElement generateWebsiteIds(List<String> idsList, SOAPElement bodyElement) throws SOAPException {
-		SOAPElement tierPrices = bodyElement.addChildElement(SoapKeys.WEBSITE_IDS);
+		SOAPElement websiteIds = bodyElement.addChildElement(SoapKeys.WEBSITE_IDS);
 
 		if (idsList.size() > 0) {
 			for (String product : idsList) {
-				SOAPElement objArray = tierPrices.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+				SOAPElement objArray = websiteIds.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
 				objArray.addTextNode(product);
 			}
 		} else {
 			System.out.println("Warning: Product - Website Ids list is empty - see soap - generateTierPriceMessage()");
 		}
-		return tierPrices;
+		return websiteIds;
 	}
 
 	private static SOAPElement generateWebsites(List<String> idsList, SOAPElement bodyElement) throws SOAPException {
-		SOAPElement tierPrices = bodyElement.addChildElement(SoapKeys.WEBSITES);
+		SOAPElement websites = bodyElement.addChildElement(SoapKeys.WEBSITES);
 
 		if (idsList.size() > 0) {
 			for (String product : idsList) {
-				SOAPElement objArray = tierPrices.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+				SOAPElement objArray = websites.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
 				objArray.addTextNode(product);
 			}
 		} else {
 			System.out.println("Warning: Product - Websites list is empty - see soap - generateTierPriceMessage()");
 		}
-		return tierPrices;
+		return websites;
 	}
 
 	private static SOAPElement generateCategories(List<String> categoriesList, SOAPElement bodyElement) throws SOAPException {
-		SOAPElement tierPrices = bodyElement.addChildElement(SoapKeys.CATEGORIES);
+		SOAPElement categories = bodyElement.addChildElement(SoapKeys.CATEGORIES);
 
 		if (categoriesList.size() > 0) {
 			for (String product : categoriesList) {
-				SOAPElement objArray = tierPrices.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+				SOAPElement objArray = categories.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
 				objArray.addTextNode(product);
 			}
 		} else {
 			System.out.println("Warning: Product - Categories list is empty - see soap - generateTierPriceMessage()");
 		}
-		return tierPrices;
+		return categories;
 	}
 
 	private static SOAPElement generateCategoryIds(List<String> categoriesList, SOAPElement bodyElement) throws SOAPException {
-		SOAPElement tierPrices = bodyElement.addChildElement(SoapKeys.CATEGORY_IDS);
+		SOAPElement categoryIDs = bodyElement.addChildElement(SoapKeys.CATEGORY_IDS);
 
 		if (categoriesList.size() > 0) {
 			for (String product : categoriesList) {
-				SOAPElement objArray = tierPrices.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+				SOAPElement objArray = categoryIDs.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
 				objArray.addTextNode(product);
 			}
 		} else {
 			System.out.println("Warning: Product - Category Ids list is empty - see soap - generateTierPriceMessage()");
 		}
-		return tierPrices;
+		return categoryIDs;
 	}
 
 	/**

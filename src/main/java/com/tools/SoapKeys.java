@@ -1,5 +1,7 @@
 package com.tools;
 
+import javax.xml.soap.Name;
+
 
 
 
@@ -89,6 +91,7 @@ public class SoapKeys {
 	public static final String KEY = "key";
 	public static final String VALUE = "value";
 	public static final String RESULT = "result";
+	public static final String ADDITIONAL_ATTRIBUTES = "additional_attributes";
 
 
 
