@@ -7,8 +7,6 @@ import java.util.List;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-import org.apache.log4j.lf5.viewer.categoryexplorer.CategoryImmediateEditor;
-
 import com.connectors.http.HttpSoapConnector;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
@@ -40,7 +38,7 @@ public class DoomTest {
 		
 		product.setType("simple");
 		product.setSet("4");
-		product.setSku("qwe123");
+		product.setSku("MARKLAR3");
 		product.setName("doodle");
 		product.setDescription("Doodle one");
 		product.setShortDescription("one");

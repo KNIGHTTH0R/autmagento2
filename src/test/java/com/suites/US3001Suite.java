@@ -16,6 +16,6 @@ import com.tests.us3001.US3001ValidateOrderEmailTest;
 	US3001ValidateOrderBackOfficeTest.class,
 })
 @RunWith(Suite.class)
-public class US003Suite {
+public class US3001Suite {
 
 }
