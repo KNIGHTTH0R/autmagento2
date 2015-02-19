@@ -40,7 +40,7 @@ public class DoomTest {
 		
 		product.setType("simple");
 		product.setSet("4");
-		product.setSku("MARKLAR2");
+		product.setSku("qwe123");
 		product.setName("doodle");
 		product.setDescription("Doodle one");
 		product.setShortDescription("one");

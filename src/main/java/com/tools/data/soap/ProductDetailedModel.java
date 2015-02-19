@@ -39,6 +39,7 @@ public class ProductDetailedModel {
 	private StockDataModel stockData;
 	private Map<String, String> additionalAttributes = new HashMap<String, String>();
 	private String store;
+	private String ip;
 	
 	
 //	public ProductDetailedModel(String value){
@@ -354,6 +355,14 @@ public class ProductDetailedModel {
 
 	public void setStore(String store) {
 		this.store = store;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 }
