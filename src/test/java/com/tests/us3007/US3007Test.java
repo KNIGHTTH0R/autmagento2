@@ -109,7 +109,7 @@ public class US3007Test extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3004" + File.separator + "us3004.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3007" + File.separator + "us3007.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
