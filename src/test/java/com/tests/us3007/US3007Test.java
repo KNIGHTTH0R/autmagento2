@@ -155,13 +155,13 @@ public class US3007Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct("R033SV", "ODILIE LIQUID SILVER RING");
+		searchSteps.searchAndSelectProduct("R051RD", "LOLA TINTA RING");
 		productData = productSteps.setProductAddToCart("2", "17");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct("N095GY", "NALA NECKLACE (GREY)");
+		searchSteps.searchAndSelectProduct("K008SV", "HELEN SET (SILVER)");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 
@@ -245,9 +245,9 @@ public class US3007Test extends BaseTest {
 		AddressModel grabbedBillingAddress =  confirmationSteps.grabBillingData();
 		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
 
-//		confirmationSteps.agreeAndCheckout();
-//
-//		checkoutValidationSteps.verifySuccessMessage();
+		confirmationSteps.agreeAndCheckout();
+
+		checkoutValidationSteps.verifySuccessMessage();
 		
 		//validate products before discount to be applied
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);

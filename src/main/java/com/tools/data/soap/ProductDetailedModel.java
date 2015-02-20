@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bouncycastle.crypto.prng.RandomGenerator;
+
+import com.tools.utils.RandomGenerators;
+
 public class ProductDetailedModel {
 
 	private String type;
@@ -71,35 +75,37 @@ public class ProductDetailedModel {
 //		
 //		setStockData(new StockDataModel(value));
 //	}
-//	public ProductDetailedModel(){
-//		setType("");
-//		setSet("");
-//		setSku("");
-//		setName("");
-//		setDescription("");
-//		setShortDescription("");
-//		setWeight("");
-//		setStatus("");
-//		setUrlKey("");
-//		setUrlPath("");
-//		setVisibility("");
-//		setHasOptions("");
-//		setGiftMessageAvailable("");
-//		setPrice("");
-//		setSpecialPrice("");
-//		setSpecialFromDate("");
-//		setSpecialToDate("");
-//		setTaxClassId("");
-//		setMetaTitle("");
-//		setMetaKeyword("");
-//		setMetaDescription("");
-//		setCustomDesign("");
-//		setCustomLayoutUpdate("");
-//		setOptionsContainer("");
-//		setStore("");
-//		
-//		setStockData(new StockDataModel(""));
-//	}
+	public ProductDetailedModel(){
+		
+		setType("simple");
+		setSet("4");
+		setSku(RandomGenerators.randomAlphaNumericString(7));
+		setName(RandomGenerators.randomCapitalLettersString(12));
+		setDescription("description");
+		setShortDescription("desc");
+		setUrlPath(getName());
+		setWeight("2");
+		setStatus("1");
+		setUrlKey(getName());
+		setVisibility("4");
+		setHasOptions("");
+		setGiftMessageAvailable("");
+		setPrice(RandomGenerators.generateRandomDoubleAsString(100, 40));
+		setSpecialPrice("");
+		setSpecialFromDate("");
+		setSpecialToDate("");
+		setTaxClassId("2");
+		setMetaTitle("");
+		setMetaKeyword("");
+		setMetaDescription("");
+		setCustomDesign("");
+		setCustomLayoutUpdate("");
+		setOptionsContainer("");
+		setStore("0");
+		setIp("50");
+		
+		setStockData(new StockDataModel());
+	}
 
 	public String getType() {
 		return type;

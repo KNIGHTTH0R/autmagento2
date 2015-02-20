@@ -73,7 +73,7 @@ public class US3008ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US3008CartSegmentationNoValidVatAndNoSmbBillingDeShippingAtTest" + Constants.GRAB);
+		orderModel = MongoReader.getOrderModel("US3008Test" + Constants.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		

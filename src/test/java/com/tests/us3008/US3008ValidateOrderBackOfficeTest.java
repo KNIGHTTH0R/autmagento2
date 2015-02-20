@@ -86,10 +86,10 @@ public class US3008ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3008CartSegmentationNoValidVatAndNoSmbBillingDeShippingAtTest" + Constants.GRAB);
-		productsList = MongoReader.grabProductBasicModel("US3008CartSegmentationNoValidVatAndNoSmbBillingDeShippingAtTest" + Constants.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US3008CartSegmentationNoValidVatAndNoSmbBillingDeShippingAtTest" + Constants.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3008CartSegmentationNoValidVatAndNoSmbBillingDeShippingAtTest" + Constants.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3008Test" + Constants.GRAB);
+		productsList = MongoReader.grabProductBasicModel("US3008Test" + Constants.GRAB);
+		shippingModelList = MongoReader.grabShippingModel("US3008Test" + Constants.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3008Test" + Constants.CALC);
 
 		if (orderModelList.size() == 1) {
 

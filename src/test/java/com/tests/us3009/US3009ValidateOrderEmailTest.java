@@ -73,7 +73,7 @@ public class US3009ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US3009CartSegmentationNoValidVatAndNoSmbBillingShippingDeTest" + Constants.GRAB);
+		orderModel = MongoReader.getOrderModel("US3009Test" + Constants.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		

@@ -157,19 +157,19 @@ public class US3008Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct("R033SV", "ODILIE LIQUID SILVER RING");
-		productData = productSteps.setProductAddToCart("2", "17");
+		searchSteps.searchAndSelectProduct("VAKA5", "AUTPROD5");
+		productData = productSteps.setProductAddToCart("2", "0");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct("N095GY", "NALA NECKLACE (GREY)");
+		searchSteps.searchAndSelectProduct("VAKA4", "AUTPROD");
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 
 		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
 		productData = productSteps.setProductAddToCart("2", "0");
-		productsListMarketing.add(productData);
+		productsListMarketing.add(productData);		
 
 		allProductsList.addAll(productsList25);
 		allProductsList.addAll(productsList50);
@@ -251,7 +251,6 @@ public class US3008Test extends BaseTest {
 //		checkoutValidationSteps.verifySuccessMessage();
 		
 		//validate products before discount to be applied
-		
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 

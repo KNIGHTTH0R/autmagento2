@@ -24,34 +24,36 @@ public class DoomTest {
 		List<String> webSiteIds = new ArrayList<String>();
 		List<String> categoriesIds = new ArrayList<String>();
 		StockDataModel productStock = new StockDataModel();
-		productStock.setQty("1000");
-		productStock.setIsInStock("1");
-		productStock.setManageStock("1");
-		productStock.setUseConfigManageStock("0");
-		productStock.setUseConfigMinQty("1");
-		productStock.setUseConfigMinSaleQty("1");
-		productStock.setIsQtyDecimal("0");
-		productStock.setUseConfigBackorders("1");
-		productStock.setUseConfigNotifyStockQty("1");
-		productStock.setUseConfigMaximumPercentageToBorrow("80");
-		productStock.setIsDiscontinued("0");
+//		productStock.setQty("1000");
+//		productStock.setIsInStock("1");
+//		productStock.setManageStock("1");
+//		productStock.setUseConfigManageStock("0");
+//		productStock.setUseConfigMinQty("1");
+//		productStock.setUseConfigMinSaleQty("1");
+//		productStock.setIsQtyDecimal("0");
+//		productStock.setUseConfigBackorders("1");
+//		productStock.setUseConfigNotifyStockQty("1");
+//		productStock.setUseConfigMaximumPercentageToBorrow("80");
+//		productStock.setIsDiscontinued("0");
+	
 		
-		product.setType("simple");
-		product.setSet("4");
-		product.setSku("MARKLAR3");
-		product.setName("doodle");
-		product.setDescription("Doodle one");
-		product.setShortDescription("one");
-		product.setUrlPath("doodleOneOOne");
-		product.setWeight("2");
-		product.setStatus("1");
-		product.setUrlKey("doodleOneOOne");
-		product.setVisibility("4");
-		product.setPrice("100");
-		product.setTaxClassId("2");
-		
-		product.setStockData(productStock);
-		product.setStore("0");
+//		product.setType("simple");
+//		product.setSet("4");
+//		product.setSku("VAKA5");	//cod cu litere mari ca altfel crapa metoda de find product cand valideaza listele 
+//		product.setName("AUTPROD5"); //nume cu litere mari ca altfel crapa metoda de find product cand valideaza listele 
+//		product.setDescription("Doodle one");
+//		product.setShortDescription("one");
+//		product.setUrlPath("doodleOneOOne");
+//		product.setWeight("2");
+//		product.setStatus("1");
+//		product.setUrlKey("doodleOneOOne");
+//		product.setVisibility("4");
+//		product.setPrice("89.00");
+//		product.setTaxClassId("2");
+//		product.setIp("50");
+//		
+//		product.setStockData(productStock);
+//		product.setStore("0");
 		
 		webSiteIds.add("1");
 		webSiteIds.add("0");

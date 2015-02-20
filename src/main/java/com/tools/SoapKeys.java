@@ -58,6 +58,7 @@ public class SoapKeys {
 	public static final String CUSTOM_DESIGN = "custom_design";
 	public static final String CUSTOM_LAYOUT_UPDATE = "custom_layout_update";
 	public static final String OPTIONS_CONTAINER = "options_container";
+	public static final String PRODUCT_IP = "product_ip";
 	//Stock Data
 	public static final String STOCK_DATA = "stock_data";
 	public static final String QTY = "qty";

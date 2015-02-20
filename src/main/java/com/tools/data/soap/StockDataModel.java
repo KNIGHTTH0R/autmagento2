@@ -43,26 +43,48 @@ public class StockDataModel {
 		setMaximumPercentageToBorrow(value);
 		setUseConfigMaximumPercentageToBorrow(value);
 	}
+//	public StockDataModel(){
+//		setQty("");
+//		setIsInStock("");
+//		setManageStock("");
+//		setUseConfigManageStock("");
+//		setMinQty("");
+//		setUseConfigMinQty("");
+//		setMinSaleQty("");
+//		setUseConfigMinSaleQty("");
+//		setMaxSaleQty("");
+//		setUseConfigMaxSaleQty("");
+//		setIsQtyDecimal("");
+//		setBackorders("");
+//		setUseConfigBackorders("");
+//		setNotifyStockQty("");
+//		setUseConfigNotifyStockQty("");
+//		setIsDiscontinued("");
+//		setEarliestAvailability("");
+//		setMaximumPercentageToBorrow("");
+//		setUseConfigMaximumPercentageToBorrow("");
+//	}
+
 	public StockDataModel(){
-		setQty("");
-		setIsInStock("");
-		setManageStock("");
-		setUseConfigManageStock("");
+		setQty("1000");
+		setIsInStock("1");
+		setManageStock("1");
+		setUseConfigManageStock("1");
 		setMinQty("");
-		setUseConfigMinQty("");
+		setUseConfigMinQty("1");
 		setMinSaleQty("");
-		setUseConfigMinSaleQty("");
+		setUseConfigMinSaleQty("1");
 		setMaxSaleQty("");
 		setUseConfigMaxSaleQty("");
-		setIsQtyDecimal("");
+		setIsQtyDecimal("0");
 		setBackorders("");
-		setUseConfigBackorders("");
+		setUseConfigBackorders("1");
 		setNotifyStockQty("");
-		setUseConfigNotifyStockQty("");
-		setIsDiscontinued("");
+		setUseConfigNotifyStockQty("1");
+		setIsDiscontinued("0");
 		setEarliestAvailability("");
 		setMaximumPercentageToBorrow("");
-		setUseConfigMaximumPercentageToBorrow("");
+		setUseConfigMaximumPercentageToBorrow("80");
 	}
 
 	public String getQty() {

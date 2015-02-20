@@ -90,9 +90,11 @@ public class CartWorkflows {
 
 			int index = cartProducts.indexOf(compare);
 			if (index > -1) {
+	
 				cartProducts.remove(index);
 				System.out.println("index of " + compare.getName() + " removed");
 				System.out.println(cartProducts.size() + " items remained");
+			
 			}
 		}
 		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);

@@ -69,7 +69,7 @@ public class US3007UserProfileOrderIdTest extends BaseTest{
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
-		orderModel = MongoReader.grabOrderModels("US3007CartSegmentationNoValidVatAndNoSmbBillingShippingAtTest" + Constants.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US3007Test" + Constants.GRAB).get(0);
 		
 	}
 	

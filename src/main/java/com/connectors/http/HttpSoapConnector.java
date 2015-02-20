@@ -166,7 +166,7 @@ public class HttpSoapConnector {
 		productData = addOptionalField(SoapKeys.CUSTOM_DESIGN, product.getCustomDesign(), productData);
 		productData = addOptionalField(SoapKeys.CUSTOM_LAYOUT_UPDATE, product.getCustomLayoutUpdate(), productData);
 		productData = addOptionalField(SoapKeys.OPTIONS_CONTAINER, product.getOptionsContainer(), productData);
-		
+		productData = addOptionalField(SoapKeys.PRODUCT_IP, product.getIp(), productData);
 
 		// Added stock data section
 		productData.addChildElement(generateStockDataMessage(product.getStockData(), productData));
