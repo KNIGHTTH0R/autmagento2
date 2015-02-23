@@ -66,5 +66,6 @@ public class DoomTest {
 		SOAPMessage response = HttpSoapConnector.soapCreateProduct(product);
 		System.out.println("OUT");
 		response.writeTo(System.out);
+
 	}
 }

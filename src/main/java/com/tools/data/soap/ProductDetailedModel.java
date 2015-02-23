@@ -79,8 +79,8 @@ public class ProductDetailedModel {
 		
 		setType("simple");
 		setSet("4");
-		setSku(RandomGenerators.randomAlphaNumericString(7));
-		setName(RandomGenerators.randomCapitalLettersString(12));
+		setSku("");
+		setName("");
 		setDescription("description");
 		setShortDescription("desc");
 		setUrlPath(getName());
@@ -90,7 +90,7 @@ public class ProductDetailedModel {
 		setVisibility("4");
 		setHasOptions("");
 		setGiftMessageAvailable("");
-		setPrice(RandomGenerators.generateRandomDoubleAsString(100, 40));
+		setPrice("");
 		setSpecialPrice("");
 		setSpecialFromDate("");
 		setSpecialToDate("");

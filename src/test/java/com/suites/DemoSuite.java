@@ -15,6 +15,9 @@ import com.tests.us3003.US3003CartSegmentationWithVatBillingShippingDeTest;
 import com.tests.us3004.US3004CartSegmentationWithVatAndSmbBillingShippingAtTest;
 import com.tests.us3005.US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest;
 import com.tests.us3006.US3006CartSegmentationWithVatAndSmbBillingShippingDeTest;
+import com.tests.us3007.US3007Test;
+import com.tests.us3008.US3008Test;
+import com.tests.us3009.US3009Test;
 
 
 
@@ -30,6 +33,9 @@ import com.tests.us3006.US3006CartSegmentationWithVatAndSmbBillingShippingDeTest
 	US3004CartSegmentationWithVatAndSmbBillingShippingAtTest.class,
 	US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest.class,
 	US3006CartSegmentationWithVatAndSmbBillingShippingDeTest.class,
+	US3007Test.class,
+	US3008Test.class,
+	US3009Test.class,
 	
 })
 @RunWith(Suite.class)
