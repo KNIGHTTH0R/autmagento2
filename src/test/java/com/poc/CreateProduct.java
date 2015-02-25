@@ -9,7 +9,6 @@ import javax.xml.soap.SOAPMessage;
 
 import com.connectors.http.HttpSoapConnector;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.utils.RandomGenerators;
 
 public class CreateProduct {	
 

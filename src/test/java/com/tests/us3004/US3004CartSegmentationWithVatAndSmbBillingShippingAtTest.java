@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.poc.CreateProduct;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -45,12 +46,20 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
+import com.tools.utils.RandomGenerators;
 import com.workflows.frontend.CartWorkflows;
 
-@WithTag(name = "US3007", type = "frontend")
+@WithTag(name = "US3004", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends BaseTest {
+	
+	String sku = RandomGenerators.randomAlphaNumericString(7);
+	String name = RandomGenerators.randomCapitalLettersString(12);	
+	String price = "49.90";
+	String sku2 = RandomGenerators.randomAlphaNumericString(7);
+	String name2 = RandomGenerators.randomCapitalLettersString(12);	
+	String price2 = "89.00";
 
 	String username, password;
 	String billingAddress;
@@ -106,10 +115,13 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 
 		Properties prop = new Properties();
 		InputStream input = null;
+		
+		CreateProduct.createProduct(sku, name, price);
+		CreateProduct.createProduct(sku2, name2, price2);
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3007" + File.separator + "us3007.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3004" + File.separator + "us3004.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -150,18 +162,18 @@ public class US3004CartSegmentationWithVatAndSmbBillingShippingAtTest extends Ba
 	}
 
 	@Test
-	public void us3007CartSegmentationWithVatBillingShippingDeTest() {
+	public void us3004CartSegmentationWithVatAndSmbBillingShippingATTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct("R033SV", "ODILIE LIQUID SILVER RING");
-		productData = productSteps.setProductAddToCart("2", "17");
+		searchSteps.searchAndSelectProduct(sku, name);
+		productData = productSteps.setProductAddToCart("2", "0");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct("N095GY", "NALA NECKLACE (GREY)");
+		searchSteps.searchAndSelectProduct(sku2, name2);
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 

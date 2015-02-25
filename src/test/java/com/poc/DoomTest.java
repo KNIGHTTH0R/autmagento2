@@ -9,7 +9,6 @@ import javax.xml.soap.SOAPMessage;
 
 import com.connectors.http.HttpSoapConnector;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.data.soap.StockDataModel;
 
 public class DoomTest {
 
@@ -23,7 +22,7 @@ public class DoomTest {
 		ProductDetailedModel product = new ProductDetailedModel();
 		List<String> webSiteIds = new ArrayList<String>();
 		List<String> categoriesIds = new ArrayList<String>();
-		StockDataModel productStock = new StockDataModel();
+	//	StockDataModel productStock = new StockDataModel();
 //		productStock.setQty("1000");
 //		productStock.setIsInStock("1");
 //		productStock.setManageStock("1");
