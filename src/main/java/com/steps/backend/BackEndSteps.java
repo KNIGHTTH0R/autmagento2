@@ -18,6 +18,13 @@ public class BackEndSteps extends AbstractSteps {
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
 	}
+	@Step
+	public void performLogin(String userName, String userPass) {
+		
+		magentoLoginPage().inputUserName(userName);
+		magentoLoginPage().inputUserPassword(userPass);
+		magentoLoginPage().clickOnLogin();
+	}
 
 	@Step
 	public void clickOnCustomers() {
