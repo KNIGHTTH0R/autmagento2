@@ -304,7 +304,6 @@ public class US3007Test extends BaseTest {
 		cartWorkflows.setShippingAddressModels(billingAddress,grabbedShippingAddress);
 		cartWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 		
-		
 		customVerifications.printErrors();
 
 	}
