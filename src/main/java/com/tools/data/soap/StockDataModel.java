@@ -22,27 +22,27 @@ public class StockDataModel {
 	private String maximumPercentageToBorrow;
 	private String useConfigMaximumPercentageToBorrow;
 	
-	public StockDataModel(String value){
-		setQty(value);
-		setIsInStock(value);
-		setManageStock(value);
-		setUseConfigManageStock(value);
-		setMinQty(value);
-		setUseConfigMinQty(value);
-		setMinSaleQty(value);
-		setUseConfigMinSaleQty(value);
-		setMaxSaleQty(value);
-		setUseConfigMaxSaleQty(value);
-		setIsQtyDecimal(value);
-		setBackorders(value);
-		setUseConfigBackorders(value);
-		setNotifyStockQty(value);
-		setUseConfigNotifyStockQty(value);
-		setIsDiscontinued(value);
-		setEarliestAvailability(value);
-		setMaximumPercentageToBorrow(value);
-		setUseConfigMaximumPercentageToBorrow(value);
-	}
+//	public StockDataModel(String value){
+//		setQty(value);
+//		setIsInStock(value);
+//		setManageStock(value);
+//		setUseConfigManageStock(value);
+//		setMinQty(value);
+//		setUseConfigMinQty(value);
+//		setMinSaleQty(value);
+//		setUseConfigMinSaleQty(value);
+//		setMaxSaleQty(value);
+//		setUseConfigMaxSaleQty(value);
+//		setIsQtyDecimal(value);
+//		setBackorders(value);
+//		setUseConfigBackorders(value);
+//		setNotifyStockQty(value);
+//		setUseConfigNotifyStockQty(value);
+//		setIsDiscontinued(value);
+//		setEarliestAvailability(value);
+//		setMaximumPercentageToBorrow(value);
+//		setUseConfigMaximumPercentageToBorrow(value);
+//	}
 //	public StockDataModel(){
 //		setQty("");
 //		setIsInStock("");
@@ -65,27 +65,27 @@ public class StockDataModel {
 //		setUseConfigMaximumPercentageToBorrow("");
 //	}
 
-	public StockDataModel(){
-		setQty("1000");
-		setIsInStock("1");
-		setManageStock("1");
-		setUseConfigManageStock("1");
-		setMinQty("");
-		setUseConfigMinQty("1");
-		setMinSaleQty("");
-		setUseConfigMinSaleQty("1");
-		setMaxSaleQty("");
-		setUseConfigMaxSaleQty("");
-		setIsQtyDecimal("0");
-		setBackorders("");
-		setUseConfigBackorders("1");
-		setNotifyStockQty("");
-		setUseConfigNotifyStockQty("1");
-		setIsDiscontinued("0");
-		setEarliestAvailability("");
-		setMaximumPercentageToBorrow("");
-		setUseConfigMaximumPercentageToBorrow("80");
-	}
+//	public StockDataModel(){
+//		setQty("1000");
+//		setIsInStock("1");
+//		setManageStock("1");
+//		setUseConfigManageStock("1");
+//		setMinQty("");
+//		setUseConfigMinQty("1");
+//		setMinSaleQty("");
+//		setUseConfigMinSaleQty("1");
+//		setMaxSaleQty("");
+//		setUseConfigMaxSaleQty("");
+//		setIsQtyDecimal("0");
+//		setBackorders("");
+//		setUseConfigBackorders("1");
+//		setNotifyStockQty("");
+//		setUseConfigNotifyStockQty("1");
+//		setIsDiscontinued("0");
+//		setEarliestAvailability("");
+//		setMaximumPercentageToBorrow("");
+//		setUseConfigMaximumPercentageToBorrow("80");
+//	}
 
 	public String getQty() {
 		return qty;

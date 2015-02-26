@@ -24,6 +24,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -50,6 +51,8 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	public OrderValidationSteps orderValidationSteps;
 	@Steps
 	public OrderWorkflows orderWorkflows;
+	@Steps 
+	public CustomVerification customVerifications;
 
 	private String orderId;
 	private String beUser,bePass;
@@ -143,6 +146,8 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");		
 		
 		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
+		
+		customVerifications.printErrors();
 	}
 	
 	@After

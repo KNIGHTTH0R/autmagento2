@@ -20,6 +20,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -31,6 +32,8 @@ public class US000GrabStylistPropertiesTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 
 	public StylistDataModel validationModel = new StylistDataModel();
 
@@ -84,6 +87,7 @@ public class US000GrabStylistPropertiesTest extends BaseTest {
 		System.out.println(validationModel.getStyleCoachLeads());
 		System.out.println(validationModel.getStyleCoachLeadsWeek());
 
+		customVerifications.printErrors();
 	}
 
 	@After

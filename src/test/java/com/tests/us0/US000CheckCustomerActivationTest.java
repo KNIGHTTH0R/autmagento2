@@ -14,6 +14,7 @@ import com.steps.backend.BackEndSteps;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -28,6 +29,8 @@ public class US000CheckCustomerActivationTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public EmailClientSteps emailClientSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 
 	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
 
@@ -62,6 +65,8 @@ public class US000CheckCustomerActivationTest extends BaseTest {
 		validateAccount = backEndSteps.extractEmailConfirmationStatus();
 
 		System.out.println("validateAccount: " + validateAccount);
+		
+		customVerifications.printErrors();
 	}
 
 	@After

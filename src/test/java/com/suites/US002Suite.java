@@ -13,8 +13,8 @@ import com.tests.us2.US002ValidateOrderEmailTest;
 @SuiteClasses({
 	US002CartSegmentationLogicTest.class,
 	US002UserProfileOrderIdTest.class,
-	US002ValidateOrderBackOfficeTest.class,
 	US002ValidateOrderEmailTest.class,
+	US002ValidateOrderBackOfficeTest.class,
 })
 @RunWith(Suite.class)
 public class US002Suite {

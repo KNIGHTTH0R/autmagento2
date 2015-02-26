@@ -31,6 +31,7 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.UrlModel;
@@ -41,6 +42,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -54,39 +56,6 @@ import com.workflows.frontend.CartWorkflows;
 @RunWith(ThucydidesRunner.class)
 public class US3009Test extends BaseTest {
 	
-	String sku = RandomGenerators.randomAlphaNumericString(7);
-	String name = RandomGenerators.randomCapitalLettersString(12);	
-	String price = RandomGenerators.generateRandomDoubleAsString(100, 40);
-	String sku2 = RandomGenerators.randomAlphaNumericString(7);
-	String name2 = RandomGenerators.randomCapitalLettersString(12);	
-	String price2 = RandomGenerators.generateRandomDoubleAsString(100, 40);
-
-	String username, password;
-	String billingAddress;
-	ProductBasicModel productBasicModel = new ProductBasicModel();
-	private CreditCardModel creditCardData = new CreditCardModel();
-	private static ShippingModel shippingCalculatedModel = new ShippingModel();
-	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
-	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
-	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
-	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
-	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
-	private static ShippingModel confirmationTotals = new ShippingModel();
-	private static ShippingModel shippingTotals = new ShippingModel();
-	private static UrlModel urlModel = new UrlModel();
-	private static OrderModel orderModel = new OrderModel();
-	private static CartTotalsModel cartTotals = new CartTotalsModel();
-	CalcDetailsModel total = new CalcDetailsModel();
-	private static String jewelryDiscount;
-	private static String marketingDiscount;
-	private static String shippingValue;
-	private static String taxClass;
-	private static String cardNumber;
-	private static String cardName;
-	private static String cardMonth;
-	private static String cardYear;
-	private static String cardCVC;
-	List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -109,12 +78,50 @@ public class US3009Test extends BaseTest {
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps 
+	public CustomVerification customVerifications;
+	
+	private String username, password;
+	private String billingAddress;
+	private ProductBasicModel productBasicModel = new ProductBasicModel();
+	private CreditCardModel creditCardData = new CreditCardModel();
+	private static ShippingModel shippingCalculatedModel = new ShippingModel();
+	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
+	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
+	private static ShippingModel confirmationTotals = new ShippingModel();
+	private static ShippingModel shippingTotals = new ShippingModel();
+	private static UrlModel urlModel = new UrlModel();
+	private static OrderModel orderModel = new OrderModel();
+	private static CartTotalsModel cartTotals = new CartTotalsModel();
+	private CalcDetailsModel total = new CalcDetailsModel();
+	private static String jewelryDiscount;
+	private static String marketingDiscount;
+	private static String shippingValue;
+	private static String taxClass;
+	private static String cardNumber;
+	private static String cardName;
+	private static String cardMonth;
+	private static String cardYear;
+	private static String cardCVC;
+	private List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
+	
+	private ProductDetailedModel genProduct1;
+	private ProductDetailedModel genProduct2;
+
 
 	@Before
 	public void setUp() throws Exception {
 		
-		CreateProduct.createProduct(sku, name, price);
-		CreateProduct.createProduct(sku2, name2, price2);
+		genProduct1 = CreateProduct.createProductModel();
+		genProduct1.setPrice(RandomGenerators.generateRandomDoubleAsString(100, 40));
+		CreateProduct.createApiProduct(genProduct1);
+		
+		genProduct2 = CreateProduct.createProductModel();
+		genProduct2.setPrice(RandomGenerators.generateRandomDoubleAsString(100, 40));
+		CreateProduct.createApiProduct(genProduct2);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -167,13 +174,13 @@ public class US3009Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct(sku, name);
+		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
 		productData = productSteps.setProductAddToCart("2", "0");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct(sku2, name2);
+		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 
@@ -301,6 +308,8 @@ public class US3009Test extends BaseTest {
 		
 		cartWorkflows.setShippingAddressModels(billingAddress,grabbedShippingAddress);
 		cartWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		
+		customVerifications.printErrors();
 
 	}
 

@@ -1,4 +1,4 @@
-package com.tests.us3005;
+package com.tests.us3002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,63 +31,29 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
-import com.tools.utils.RandomGenerators;
 import com.workflows.frontend.CartWorkflows;
 
-@WithTag(name = "US3005", type = "frontend")
+@WithTag(name = "US3002", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends BaseTest {
+public class US3002Test extends BaseTest {
 	
-	String sku = RandomGenerators.randomAlphaNumericString(7);
-	String name = RandomGenerators.randomCapitalLettersString(12);	
-	String price = "49.90";
-	String sku2 = RandomGenerators.randomAlphaNumericString(7);
-	String name2 = RandomGenerators.randomCapitalLettersString(12);	
-	String price2 = "89.00";
-
-	String username, password;
-	String billingAddress;
-	String shippingAddress;
-	ProductBasicModel productBasicModel = new ProductBasicModel();
-	private CreditCardModel creditCardData = new CreditCardModel();
-	private static ShippingModel shippingCalculatedModel = new ShippingModel();
-	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
-	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
-	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
-	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
-	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
-	private static ShippingModel confirmationTotals = new ShippingModel();
-	private static ShippingModel shippingTotals = new ShippingModel();
-	private static UrlModel urlModel = new UrlModel();
-	private static OrderModel orderModel = new OrderModel();
-	private static CartTotalsModel cartTotals = new CartTotalsModel();
-	CalcDetailsModel total = new CalcDetailsModel();
-	private static String jewelryDiscount;
-	private static String marketingDiscount;
-	private static String shippingValue;
-	private static String taxClass;
-	private static String cardNumber;
-	private static String cardName;
-	private static String cardMonth;
-	private static String cardYear;
-	private static String cardCVC;
-	List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -110,6 +76,39 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps 
+	public CustomVerification customVerifications;
+
+	private String username, password;
+	private String billingAddress;
+	private String shippingAddress;
+	private ProductBasicModel productBasicModel = new ProductBasicModel();
+	private CreditCardModel creditCardData = new CreditCardModel();
+	private static ShippingModel shippingCalculatedModel = new ShippingModel();
+	private static List<ProductBasicModel> productsList25 = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> productsList50 = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> productsListMarketing = new ArrayList<ProductBasicModel>();
+	private static List<ProductBasicModel> allProductsList = new ArrayList<ProductBasicModel>();
+	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
+	private static ShippingModel confirmationTotals = new ShippingModel();
+	private static ShippingModel shippingTotals = new ShippingModel();
+	private static UrlModel urlModel = new UrlModel();
+	private static OrderModel orderModel = new OrderModel();
+	private static CartTotalsModel cartTotals = new CartTotalsModel();
+	private CalcDetailsModel cartTotalsCalculated = new CalcDetailsModel();
+	private static String jewelryDiscount;
+	private static String marketingDiscount;
+	private static String shippingValue;
+	private static String taxClass;
+	private static String cardNumber;
+	private static String cardName;
+	private static String cardMonth;
+	private static String cardYear;
+	private static String cardCVC;
+	private List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
+	
+	private ProductDetailedModel genProduct1;
+	private ProductDetailedModel genProduct2;
 
 	@Before
 	public void setUp() throws Exception {
@@ -117,12 +116,18 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 		Properties prop = new Properties();
 		InputStream input = null;
 		
-		CreateProduct.createProduct(sku, name, price);
-		CreateProduct.createProduct(sku2, name2, price2);
+		genProduct1 = CreateProduct.createProductModel();
+		genProduct1.setPrice("49.90");
+		CreateProduct.createApiProduct(genProduct1);
+		
+		genProduct2 = CreateProduct.createProductModel();
+		genProduct2.setPrice("89.00");
+		CreateProduct.createApiProduct(genProduct2);
+
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3005" + File.separator + "us3005.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us3002" + File.separator + "us3002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -164,18 +169,18 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 	}
 
 	@Test
-	public void us3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest() {
+	public void us3002CartSegmentationWithVatBillingTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct(sku, name);
+		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
 		productData = productSteps.setProductAddToCart("2", "0");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct(sku2, name2);
+		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 
@@ -199,6 +204,7 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 		cartProds.addAll(cartProductsWith50Discount);
 		cartProds.addAll(cartProductsWith25Discount);
 		cartProds.addAll(cartMarketingMaterialsProducts);
+		System.out.println("size" + cartProds.size());
 
 		cartSteps.typeJewerlyBonus(jewelryDiscount);
 		cartSteps.updateJewerlyBonus();
@@ -226,8 +232,8 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 
 		cartTotals = cartSteps.grabTotals();
 
-		total = CartCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
-		PrintUtils.printCalcDetailsModel(total);
+		cartTotalsCalculated = CartCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
+		PrintUtils.printCalcDetailsModel(cartTotalsCalculated);
 
 		cartSteps.clickGoToShipping();
 
@@ -239,7 +245,7 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 
 		shippingTotals = shippingSteps.grabSurveyData();
 
-		shippingCalculatedModel = calculationSteps.calculateShippingTotals(total, shippingValue);
+		shippingCalculatedModel = calculationSteps.calculateShippingTotals(cartTotalsCalculated, shippingValue);
 		PrintUtils.printShippingTotals(shippingCalculatedModel);
 
 		shippingSteps.clickGoToPaymentMethod();
@@ -255,15 +261,12 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 
 		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
 		confirmationTotals = confirmationSteps.grabConfirmationTotals();
-		AddressModel grabbedBillingAddress =  confirmationSteps.grabBillingData();
-		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
 
-//		confirmationSteps.agreeAndCheckout();
-//
-//		checkoutValidationSteps.verifySuccessMessage();
+		confirmationSteps.agreeAndCheckout();
+
+		checkoutValidationSteps.verifySuccessMessage();
 		
 		//validate products before discount to be applied
-		
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
@@ -289,7 +292,7 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 		cartWorkflows.setValidateProductsModels(allProductsList, confirmationProducts);
 		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
-		cartWorkflows.setVerifyTotalsDiscount(cartTotals, total);
+		cartWorkflows.setVerifyTotalsDiscount(cartTotals, cartTotalsCalculated);
 		cartWorkflows.verifyTotalsDiscountNoMarketing("CART TOTALS");
 
 		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
@@ -298,18 +301,15 @@ public class US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest extends 
 		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 		
-		cartWorkflows.setBillingAddressModels(billingAddress,grabbedBillingAddress);
-		cartWorkflows.validateBillingAddress("BILLING ADDRESS");
 		
-		cartWorkflows.setShippingAddressModels(shippingAddress,grabbedShippingAddress);
-		cartWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		customVerifications.printErrors();
 
 	}
 
 	@After
 	public void saveData() {
 
-		MongoWriter.saveCalcDetailsModel(total, getClass().getSimpleName() + Constants.CALC);
+		MongoWriter.saveCalcDetailsModel(cartTotalsCalculated, getClass().getSimpleName() + Constants.CALC);
 		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
 		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + MongoTableKeys.GRAB);
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);

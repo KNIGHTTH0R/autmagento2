@@ -1,21 +1,17 @@
 package com.tests;
 
 import java.net.MalformedURLException;
-import java.net.UnknownHostException;
 
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;
-import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.pages.Pages;
 
-import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
 import com.tools.Constants;
-import com.tools.CustomVerification;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
 
@@ -30,8 +26,6 @@ public class BaseTest {
 	public MongoConnector mongoConnector;
 	public GmailConnector gmailConnector;
 	
-	@Steps 
-	public CustomVerification customVerifications;
 	
     @Before
     public void startComponents() throws MalformedURLException {
@@ -39,9 +33,10 @@ public class BaseTest {
             System.err.println("--------------------------------- Test Start---------------------------------------");
 
             mongoConnector = new MongoConnector();
-            System.out.println("Connected to Mongo DB");
+            System.out.println("Connect to Mongo DB...");
+            System.out.println("DB: " + mongoConnector.getDbAddress());
         }
-        catch (UnknownHostException e) {
+        catch (Exception e) {
             System.out.println("Error: Mongo connection could not be initialized");
             e.printStackTrace();
         }
@@ -54,14 +49,4 @@ public class BaseTest {
         
         gmailConnector = new GmailConnector(emailDefaults);
     }
-    
-    
-    
-	/**
-	 * See CustomVerification -  for multiple assertions
-	 */
-	@After
-	public void printErrors(){
-		customVerifications.printErrors();
-	}
 }
