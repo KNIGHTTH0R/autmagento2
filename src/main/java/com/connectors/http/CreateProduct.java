@@ -1,4 +1,4 @@
-package com.poc;
+package com.connectors.http;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,7 +7,6 @@ import java.util.List;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-import com.connectors.http.HttpSoapConnector;
 import com.tools.FieldGenerators;
 import com.tools.FieldGenerators.Mode;
 import com.tools.data.soap.ProductDetailedModel;
