@@ -25,6 +25,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -51,6 +52,8 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 	public OrderValidationSteps orderValidationSteps;
 	@Steps
 	public OrderWorkflows orderWorkflows;
+	@Steps 
+	public CustomVerification customVerifications;
 
 	public static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
@@ -86,10 +89,10 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001CartSegmentationWithVatTest" + Constants.GRAB);
-		productsList = MongoReader.grabProductBasicModel("US3001CartSegmentationWithVatTest" + Constants.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US3001CartSegmentationWithVatTest" + Constants.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3001CartSegmentationWithVatTest" + Constants.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001Test" + Constants.GRAB);
+		productsList = MongoReader.grabProductBasicModel("US3001Test" + Constants.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US3001Test" + Constants.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3001Test" + Constants.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -153,6 +156,8 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
 		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
+		
+		customVerifications.printErrors();
 	}
 
 	@After

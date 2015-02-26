@@ -24,6 +24,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.EmailConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.email.EmailCredentialsModel;
@@ -44,6 +45,8 @@ public class US3005ValidateOrderEmailTest extends BaseTest{
 	public ProfileSteps profileSteps;
 	@Steps
 	public EmailSteps emailSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 	
 	private String email, password, emailPassword;
 	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
@@ -73,7 +76,7 @@ public class US3005ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest" + Constants.GRAB);
+		orderModel = MongoReader.getOrderModel("US3005Test" + Constants.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
@@ -94,6 +97,9 @@ public class US3005ValidateOrderEmailTest extends BaseTest{
 		System.out.println(orderModel.get(0).getOrderId());
 		System.out.println(orderModel.get(0).getTotalPrice());
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
+		
+		
+		customVerifications.printErrors();
 	
 	}
 

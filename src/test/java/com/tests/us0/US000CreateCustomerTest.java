@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -27,6 +28,8 @@ public class US000CreateCustomerTest extends BaseTest{
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
@@ -51,6 +54,7 @@ public class US000CreateCustomerTest extends BaseTest{
 
 		customerRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
+		customVerifications.printErrors();
 	}
 
 	@After

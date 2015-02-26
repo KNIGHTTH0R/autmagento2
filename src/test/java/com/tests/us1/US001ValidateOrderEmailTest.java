@@ -23,6 +23,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.backend.OrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -41,6 +42,8 @@ public class US001ValidateOrderEmailTest extends BaseTest{
 	public ProfileSteps profileSteps;
 	@Steps
 	public EmailSteps emailSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 	
 	private String username, password;
 	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
@@ -78,6 +81,8 @@ public class US001ValidateOrderEmailTest extends BaseTest{
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
+		
+		customVerifications.printErrors();
 	}
 
 }

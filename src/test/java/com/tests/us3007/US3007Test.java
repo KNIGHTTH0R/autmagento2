@@ -31,6 +31,7 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.UrlModel;
@@ -41,12 +42,12 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
-import com.tools.utils.RandomGenerators;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US3007", type = "frontend")
@@ -54,13 +55,30 @@ import com.workflows.frontend.CartWorkflows;
 @RunWith(ThucydidesRunner.class)
 public class US3007Test extends BaseTest {
 	
-	private String skuP1 = RandomGenerators.randomAlphaNumericString(7);
-	private String nameP1 = RandomGenerators.randomCapitalLettersString(12);	
-	private String priceP1 = "49.90";
-	
-	private String skuP2 = RandomGenerators.randomAlphaNumericString(7);
-	private String nameP2 = RandomGenerators.randomCapitalLettersString(12);	
-	private String priceP2 = "89.00";
+	@Steps
+	public CustomerRegistrationSteps frontEndSteps;
+	@Steps
+	public ProductSteps productSteps;
+	@Steps
+	public SearchSteps searchSteps;
+	@Steps
+	public HeaderSteps headerSteps;
+	@Steps
+	public CartSteps cartSteps;
+	@Steps
+	public CartCalculation calculationSteps;
+	@Steps
+	public CheckoutValidationSteps checkoutValidationSteps;
+	@Steps
+	public ShippingSteps shippingSteps;
+	@Steps
+	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public CartWorkflows cartWorkflows;
+	@Steps
+	public PaymentSteps paymentSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 
 	private String username, password;
 	private String billingAddress;
@@ -89,28 +107,9 @@ public class US3007Test extends BaseTest {
 	private static String cardCVC;
 	private List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
 	
-	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
-	@Steps
-	public ProductSteps productSteps;
-	@Steps
-	public SearchSteps searchSteps;
-	@Steps
-	public HeaderSteps headerSteps;
-	@Steps
-	public CartSteps cartSteps;
-	@Steps
-	public CartCalculation calculationSteps;
-	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
-	@Steps
-	public ShippingSteps shippingSteps;
-	@Steps
-	public ConfirmationSteps confirmationSteps;
-	@Steps
-	public CartWorkflows cartWorkflows;
-	@Steps
-	public PaymentSteps paymentSteps;
+	private ProductDetailedModel genProduct1;
+	private ProductDetailedModel genProduct2;
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -118,8 +117,13 @@ public class US3007Test extends BaseTest {
 		Properties prop = new Properties();
 		InputStream input = null;
 		
-		CreateProduct.createProduct(skuP1, nameP1, priceP1);
-		CreateProduct.createProduct(skuP2, nameP2, priceP2);
+		genProduct1 = CreateProduct.createProductModel();
+		genProduct1.setPrice("49.90");
+		CreateProduct.createApiProduct(genProduct1);
+		
+		genProduct2 = CreateProduct.createProductModel();
+		genProduct2.setPrice("89.00");
+		CreateProduct.createApiProduct(genProduct2);
 
 		try {
 
@@ -169,13 +173,13 @@ public class US3007Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct(skuP1, nameP1);
+		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
 		productData = productSteps.setProductAddToCart("2", "0");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct(skuP2, nameP2);
+		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 

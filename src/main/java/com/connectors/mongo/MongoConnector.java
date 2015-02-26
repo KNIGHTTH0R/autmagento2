@@ -27,6 +27,10 @@ public class MongoConnector {
 			mongoClient = new MongoClient(serverList);
 		}
 	}
+	
+	public String getDbAddress(){
+		return String.valueOf(mongoClient.getAddress());
+	}
 
 	private List<ServerAddress> grabServerList() throws UnknownHostException {
 		List<ServerAddress> serverAddresses = new ArrayList<ServerAddress>();

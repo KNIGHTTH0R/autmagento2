@@ -23,6 +23,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
@@ -47,6 +48,8 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 	public OrderValidationSteps orderValidationSteps;
 	@Steps
 	public OrderWorkflows orderWorkflows;
+	@Steps 
+	public CustomVerification customVerifications;
 	
 	public static List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
 	public static List<ProductBasicModel>  productsList = new ArrayList<ProductBasicModel>();
@@ -124,5 +127,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		
 //		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung erfolgreich");
 		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung geplant");
+		
+		customVerifications.printErrors();
 	}
 }

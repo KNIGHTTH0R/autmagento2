@@ -32,6 +32,7 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
@@ -42,11 +43,11 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
-import com.tools.utils.RandomGenerators;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US002", type = "frontend")
@@ -78,18 +79,10 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	public ProfileSteps profileSteps;
 	@Steps
 	public CartWorkflows cartWorkflows;
-	
-	String sku1 = RandomGenerators.randomAlphaNumericString(7);
-	String name1 = RandomGenerators.randomCapitalLettersString(12);	
-	String price1 = "129.00";
-	String sku2 = RandomGenerators.randomAlphaNumericString(7);
-	String name2 = RandomGenerators.randomCapitalLettersString(12);	
-	String price2 = "79.00";
-	String sku3 = RandomGenerators.randomAlphaNumericString(7);
-	String name3 = RandomGenerators.randomCapitalLettersString(12);	
-	String price3 = "84.00";
-	
-	ProductBasicModel productBasicModel = new ProductBasicModel();
+	@Steps 
+	public CustomVerification customVerifications;
+
+	private ProductBasicModel productBasicModel = new ProductBasicModel();
 	private static OrderModel orderModel = new OrderModel();
 	private static UrlModel urlModel = new UrlModel();
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
@@ -109,22 +102,34 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	private static String shippingValue;
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
-	
-	//Test data Credit card details
+
+	// Test data Credit card details
 	private static String cardNumber;
 	private static String cardName;
 	private static String cardMonth;
 	private static String cardYear;
 	private static String cardCVC;
-
+	
+	private ProductDetailedModel genProduct1;
+	private ProductDetailedModel genProduct2;
+	private ProductDetailedModel genProduct3;
+	
 	@Before
 	public void setUp() throws Exception {
 		Properties prop = new Properties();
 		InputStream input = null;
+
+		genProduct1 = CreateProduct.createProductModel();
+		genProduct1.setPrice("129.00");
+		CreateProduct.createApiProduct(genProduct1);
 		
-		CreateProduct.createProduct(sku1, name1, price1);
-		CreateProduct.createProduct(sku2, name2, price2);
-		CreateProduct.createProduct(sku3, name3, price3);
+		genProduct2 = CreateProduct.createProductModel();
+		genProduct2.setPrice("79.00");
+		CreateProduct.createApiProduct(genProduct2);
+		
+		genProduct3 = CreateProduct.createProductModel();
+		genProduct3.setPrice("84.00");
+		CreateProduct.createApiProduct(genProduct3);
 
 		try {
 
@@ -132,11 +137,11 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			
+
 			jewelryDiscount = prop.getProperty("jewelryDisount");
 			marketingDiscount = prop.getProperty("marketingDisount");
 			shippingValue = prop.getProperty("shippingPrice");
-			
+
 			cardNumber = prop.getProperty("cardNumber");
 			cardName = prop.getProperty("cardName");
 			cardMonth = prop.getProperty("cardMonth");
@@ -171,22 +176,22 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct(sku1, name1);
+		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
 		productData = productSteps.setProductAddToCart("1", "0");
-		
+
 		// we add this into both sections because the quantity will be increased
 		// at 2, so 1 piece will be added into 25 section
 		productsList50.add(productData);
 		productsList25.add(productData);
 
-		searchSteps.searchAndSelectProduct(sku2, name2);
+		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
 		productData = productSteps.setProductAddToCart("2", "0");
 
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
-		
+
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct(sku3, name3);
+		searchSteps.searchAndSelectProduct(genProduct3.getSku(), genProduct3.getName());
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 
@@ -205,8 +210,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		// TODO change the update method to set the quantity in the model
-		cartSteps.updateProductQuantityIn50DiscountArea("2", sku1);
-		cartSteps.updateProductQuantityIn50DiscountArea("0", sku2);
+		cartSteps.updateProductQuantityIn50DiscountArea("2", genProduct1.getSku());
+		cartSteps.updateProductQuantityIn50DiscountArea("0", genProduct2.getSku());
 
 		cartSteps.updateCart();
 
@@ -248,9 +253,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		ShippingModel confirmationTotals = confirmationSteps.grabConfirmationTotals();
 
-//		 confirmationSteps.agreeAndCheckout();
-//		
-//		 validationSteps.verifySuccessMessage();
+		confirmationSteps.agreeAndCheckout();
+
+		validationSteps.verifySuccessMessage();
 
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
@@ -275,6 +280,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
+		customVerifications.printErrors();
 	}
 
 	@After

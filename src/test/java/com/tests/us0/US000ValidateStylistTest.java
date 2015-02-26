@@ -20,6 +20,7 @@ import com.steps.ValidationSteps;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.persistance.MongoReader;
@@ -34,6 +35,8 @@ public class US000ValidateStylistTest extends BaseTest{
 	public BackEndSteps backEndSteps;
 	@Steps
 	public ValidationSteps validationSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 
 	public StylistDataModel initialValidation = new StylistDataModel();
 	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
@@ -105,5 +108,8 @@ public class US000ValidateStylistTest extends BaseTest{
 		if(accountActive.contentEquals("true")){
 			validationSteps.validateStylistData(initialValidation, finalValidation);
 		}
+		
+		
+		customVerifications.printErrors();
 	}
 }

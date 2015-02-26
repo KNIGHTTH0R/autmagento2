@@ -32,6 +32,7 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
 import com.tools.data.backend.OrderModel;
@@ -75,6 +76,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 
 	private static OrderModel orderModel;
 	private static CalculationModel totalsCalculated = new CalculationModel();
@@ -155,14 +158,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		productData = productSteps.setProductAddToCart("1", "18");
 		productsList.add(productData);
 		
-//		searchSteps.searchAndSelectProduct("MAGIC VIOLETTA", "MAGIC VIOLETTA");
-//		productData = productSteps.setProductAddToCart("1", "0");
-//		productsList.add(productData);
-//
-//		searchSteps.searchAndSelectProduct("Rosemary Ring", "ROSEMARY RING");
-//		productData = productSteps.setProductAddToCart("1", "18");
-//		productsList.add(productData);
-
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
@@ -223,6 +218,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		
 		//TODO add Confirmation values validation
+		
+		customVerifications.printErrors();
 	}
 
 	@After

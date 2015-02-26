@@ -41,67 +41,36 @@ public class ProductDetailedModel {
 	private String store;
 	private String ip;
 	
-	
-//	public ProductDetailedModel(String value){
-//		setType(value);
-//		setSet(value);
-//		setSku(value);
-//		setName(value);
-//		setDescription(value);
-//		setShortDescription(value);
-//		setWeight(value);
-//		setStatus(value);
-//		setUrlKey(value);
-//		setUrlPath(value);
-//		setVisibility(value);
-//		setHasOptions(value);
-//		setGiftMessageAvailable(value);
-//		setPrice(value);
-//		setSpecialPrice(value);
-//		setSpecialFromDate(value);
-//		setSpecialToDate(value);
-//		setTaxClassId(value);
-//		setMetaTitle(value);
-//		setMetaKeyword(value);
-//		setMetaDescription(value);
-//		setCustomDesign(value);
-//		setCustomLayoutUpdate(value);
-//		setOptionsContainer(value);
-//		setStore(value);
+//	public ProductDetailedModel(){
 //		
-//		setStockData(new StockDataModel(value));
+//		setType("simple");
+//		setSet("4");
+//		setSku("");
+//		setName("");
+//		setDescription("description");
+//		setShortDescription("desc");
+//		setUrlPath(getName());
+//		setWeight("2");
+//		setStatus("1");
+//		setUrlKey(getName());
+//		setVisibility("4");
+//		setHasOptions("");
+//		setGiftMessageAvailable("");
+//		setPrice("");
+//		setSpecialPrice("");
+//		setSpecialFromDate("");
+//		setSpecialToDate("");
+//		setTaxClassId("2");
+//		setMetaTitle("");
+//		setMetaKeyword("");
+//		setMetaDescription("");
+//		setCustomDesign("");
+//		setCustomLayoutUpdate("");
+//		setOptionsContainer("");
+//		setStore("0");
+//		setIp("50");
+//		setStockData(new StockDataModel());
 //	}
-	public ProductDetailedModel(){
-		
-		setType("simple");
-		setSet("4");
-		setSku("");
-		setName("");
-		setDescription("description");
-		setShortDescription("desc");
-		setUrlPath(getName());
-		setWeight("2");
-		setStatus("1");
-		setUrlKey(getName());
-		setVisibility("4");
-		setHasOptions("");
-		setGiftMessageAvailable("");
-		setPrice("");
-		setSpecialPrice("");
-		setSpecialFromDate("");
-		setSpecialToDate("");
-		setTaxClassId("2");
-		setMetaTitle("");
-		setMetaKeyword("");
-		setMetaDescription("");
-		setCustomDesign("");
-		setCustomLayoutUpdate("");
-		setOptionsContainer("");
-		setStore("0");
-		setIp("50");
-		
-		setStockData(new StockDataModel());
-	}
 
 	public String getType() {
 		return type;

@@ -1,6 +1,5 @@
 package com.tests.us3001;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,6 +31,7 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
@@ -52,7 +52,7 @@ import com.workflows.frontend.CartWorkflows;
 @WithTag(name = "US3001", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US3001CartSegmentationWithVatTest extends BaseTest {
+public class US3001Test extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -74,6 +74,8 @@ public class US3001CartSegmentationWithVatTest extends BaseTest {
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public CustomVerification customVerifications;
 
 	private static CartTotalsModel cartTotals = new CartTotalsModel();
 	private static CartTotalsModel discountTotals = new CartTotalsModel();
@@ -177,16 +179,13 @@ public class US3001CartSegmentationWithVatTest extends BaseTest {
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
-		
 
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-		
-		
+
 		List<CartProductModel> fullProductsList = new ArrayList<CartProductModel>();
 		fullProductsList.addAll(cartProductsWith50Discount);
 		fullProductsList.addAll(cartProductsWith25Discount);
@@ -211,21 +210,19 @@ public class US3001CartSegmentationWithVatTest extends BaseTest {
 		discountCalculationModel = CartCalculation.calculateDiscountTotals(totalsList, jewelryDisount, marketingDisount);
 		shippingCalculatedModel = CartCalculation.remove119VAT(discountCalculationModel, shippingPrice);
 		shippingProductsList = CartCalculation.remove119VAT(cartProductsList);
-		
 
 		List<CartProductModel> calculatedProductsList25 = CartCalculation.calculateProductsfor25Discount(cartProductsWith25Discount, jewelryDisount);
-		List<CartProductModel> calculatedProductsList50 = CartCalculation.calculateProductsfor50Discount(cartProductsWith50Discount,cartProductsWith25Discount, jewelryDisount);
+		List<CartProductModel> calculatedProductsList50 = CartCalculation.calculateProductsfor50Discount(cartProductsWith50Discount, cartProductsWith25Discount, jewelryDisount);
 		List<CartProductModel> calculatedProductsListMarketing = CartCalculation.calculateProductsforMarketingMaterial(cartMarketingMaterialsProducts, marketingDisount);
-		
+
 		List<CartProductModel> ipItemsCalculation = new ArrayList<CartProductModel>();
 		ipItemsCalculation.addAll(calculatedProductsList25);
 		ipItemsCalculation.addAll(calculatedProductsList50);
 		ipItemsCalculation.addAll(calculatedProductsListMarketing);
-		
 
 		BigDecimal ipTotal = BigDecimal.ZERO;
 		for (CartProductModel cartProductModel : ipItemsCalculation) {
-			ipTotal = ipTotal.add(BigDecimal.valueOf(Integer.valueOf(cartProductModel.getPriceIP()))); 
+			ipTotal = ipTotal.add(BigDecimal.valueOf(Integer.valueOf(cartProductModel.getPriceIP())));
 		}
 		discountCalculationModel.setIpPoints(String.valueOf(ipTotal));
 
@@ -238,7 +235,7 @@ public class US3001CartSegmentationWithVatTest extends BaseTest {
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
-		
+
 		shippingTotals = shippingSteps.grabSurveyData();
 
 		shippingSteps.clickGoToPaymentMethod();
@@ -256,8 +253,8 @@ public class US3001CartSegmentationWithVatTest extends BaseTest {
 		confirmationTotals = confirmationSteps.grabConfirmationTotals();
 
 		// Steps to finalize order
-		// confirmationSteps.agreeAndCheckout();
-		// checkoutValidationSteps.verifySuccessMessage();
+		confirmationSteps.agreeAndCheckout();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		// Products List validation
 		cartWorkflows.setValidateProductsModels(cartProductsList, cartProducts);
@@ -285,6 +282,8 @@ public class US3001CartSegmentationWithVatTest extends BaseTest {
 
 		// Validate URL
 		checkoutValidationSteps.checkTotalAmountFromUrl(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount().replace(".", ""));
+
+		customVerifications.printErrors();
 	}
 
 	@After

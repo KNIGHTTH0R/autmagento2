@@ -22,6 +22,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.CustomVerification;
 import com.tools.data.backend.OrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -38,6 +39,8 @@ public class US3007UserProfileOrderIdTest extends BaseTest{
 	public HeaderSteps headerSteps;
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 	
 	private static OrderModel orderModel = new OrderModel();
 	private String username, password;
@@ -86,5 +89,7 @@ public class US3007UserProfileOrderIdTest extends BaseTest{
 		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
 		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
 		orderModel = orderHistory.get(0);
+		
+		customVerifications.printErrors();
 	}
 }

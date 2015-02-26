@@ -12,8 +12,8 @@ import com.tests.us3007.US3007ValidateOrderEmailTest;
 @SuiteClasses({
 	US3007Test.class,
 	US3007UserProfileOrderIdTest.class,
-	US3007ValidateOrderBackOfficeTest.class,
 	US3007ValidateOrderEmailTest.class,
+	US3007ValidateOrderBackOfficeTest.class,
 })
 @RunWith(Suite.class)
 public class US3007Suite {
