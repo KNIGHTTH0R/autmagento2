@@ -20,7 +20,7 @@ public class CreateProduct {
 	}
 
 	public static ProductDetailedModel createProductModel() throws Exception {
-		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA);
+		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
 		
 		ProductDetailedModel product = new ProductDetailedModel();
 		
@@ -31,7 +31,7 @@ public class CreateProduct {
 		product.setShortDescription("desc");
 		product.setUrlPath(name);
 		product.setWeight("2");
-		product.setSku(FieldGenerators.generateRandomString(9, Mode.ALPHA));
+		product.setSku(FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS));
 		product.setPrice(FieldGenerators.generateRandomString(2, Mode.NUMERIC));
 		product.setStatus("1");
 		product.setUrlKey(name);
