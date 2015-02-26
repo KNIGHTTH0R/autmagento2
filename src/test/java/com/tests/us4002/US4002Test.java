@@ -258,9 +258,9 @@ public class US4002Test extends BaseTest {
 		AddressModel grabbedBillingAddress = confirmationSteps.grabBillingData();
 		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
 
-		// confirmationSteps.agreeAndCheckout();
-		//
-		// checkoutValidationSteps.verifySuccessMessage();
+		 confirmationSteps.agreeAndCheckout();
+		
+		 checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");

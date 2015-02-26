@@ -263,9 +263,9 @@ public class US3008Test extends BaseTest {
 		AddressModel grabbedBillingAddress =  confirmationSteps.grabBillingData();
 		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
 
-//		confirmationSteps.agreeAndCheckout();
-//
-//		checkoutValidationSteps.verifySuccessMessage();
+		confirmationSteps.agreeAndCheckout();
+
+		checkoutValidationSteps.verifySuccessMessage();
 		
 		//validate products before discount to be applied
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);

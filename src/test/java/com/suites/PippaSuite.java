@@ -17,7 +17,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	US3007Suite.class,
 	US3008Suite.class,
 	US3009Suite.class,
-	
 	US4001Suite.class,
 	US4002Suite.class,
 })
