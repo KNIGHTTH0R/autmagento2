@@ -166,7 +166,7 @@ public class US4002Test extends BaseTest {
 	}
 
 	@Test
-	public void us4002Test() {
+	public void us4002ShopForMyselfWithBuy3GetOneTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;

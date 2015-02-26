@@ -3,7 +3,6 @@ package com.tools.calculation;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.tools.Constants;
@@ -179,6 +178,8 @@ public class CartCalculation {
 		result.addSegment(Constants.DISCOUNT_50, remainder50.setScale(2, RoundingMode.HALF_UP).toString());
 		result.addSegment(Constants.DISCOUNT_25, remainder25.setScale(2, RoundingMode.HALF_UP).toString());
 		result.addSegment(Constants.DISCOUNT_0, remainder00.setScale(2, RoundingMode.HALF_UP).toString());
+		//i've added this because is used in calculte shipping total method (and it throws a NullPointerException)
+		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1,"0.00");
 
 		result.setTotalAmount(totalAmount.toString());
 		result.setSubTotal(calculateTotalSum(totalsList).getAskingPrice().toString());
@@ -453,7 +454,7 @@ public class CartCalculation {
 		BigDecimal discount = BigDecimal.ZERO;
 		BigDecimal finalPrice = BigDecimal.ZERO;
 
-		CartProductModel cheepest = getCheapestProduct(productsList);		
+		CartProductModel cheepest = getCheapestProduct(productsList);
 
 		List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
 
@@ -469,8 +470,8 @@ public class CartCalculation {
 			newProduct.setProductsPrice(product.getProductsPrice());
 			newProduct.setFinalPrice(product.getFinalPrice());
 			newProduct.setPriceIP(product.getPriceIP());
-
-			if (product == cheepest) {
+			//TODO verify expression
+			if (product.equals(cheepest)) {
 				discount = BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
 				finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
 				finalPrice = finalPrice.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
@@ -548,7 +549,7 @@ public class CartCalculation {
 		BigDecimal rabattBuy3Get1 = BigDecimal.ZERO;
 		BigDecimal tax = BigDecimal.ZERO;
 		BigDecimal totalAmount = BigDecimal.ZERO;
-		BigDecimal ipPoints = BigDecimal.ZERO;	
+		BigDecimal ipPoints = BigDecimal.ZERO;
 
 		for (CartProductModel product : productsList) {
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())));
@@ -575,7 +576,9 @@ public class CartCalculation {
 
 		return result;
 	}
-	public static CalcDetailsModel calculateCartProductsTotalsBuy3GetOneRuleApplied(List<CartProductModel> productsList, String jewerlyDiscount, String marketingDiscount, String taxClass) {
+
+	public static CalcDetailsModel calculateCartProductsTotalsBuy3GetOneRuleApplied(List<CartProductModel> productsList, String jewerlyDiscount, String marketingDiscount,
+			String taxClass) {
 		CalcDetailsModel result = new CalcDetailsModel();
 
 		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_25);

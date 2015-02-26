@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.poc.CreateProduct;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -45,6 +46,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
+import com.tools.utils.RandomGenerators;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US002", type = "frontend")
@@ -76,6 +78,16 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	public ProfileSteps profileSteps;
 	@Steps
 	public CartWorkflows cartWorkflows;
+	
+	String sku1 = RandomGenerators.randomAlphaNumericString(7);
+	String name1 = RandomGenerators.randomCapitalLettersString(12);	
+	String price1 = "129.00";
+	String sku2 = RandomGenerators.randomAlphaNumericString(7);
+	String name2 = RandomGenerators.randomCapitalLettersString(12);	
+	String price2 = "79.00";
+	String sku3 = RandomGenerators.randomAlphaNumericString(7);
+	String name3 = RandomGenerators.randomCapitalLettersString(12);	
+	String price3 = "84.00";
 	
 	ProductBasicModel productBasicModel = new ProductBasicModel();
 	private static OrderModel orderModel = new OrderModel();
@@ -109,6 +121,10 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	public void setUp() throws Exception {
 		Properties prop = new Properties();
 		InputStream input = null;
+		
+		CreateProduct.createProduct(sku1, name1, price1);
+		CreateProduct.createProduct(sku2, name2, price2);
+		CreateProduct.createProduct(sku3, name3, price3);
 
 		try {
 
@@ -155,7 +171,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct("K052BK", "JEANNIE SET");
+		searchSteps.searchAndSelectProduct(sku1, name1);
 		productData = productSteps.setProductAddToCart("1", "0");
 		
 		// we add this into both sections because the quantity will be increased
@@ -163,14 +179,14 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		productsList50.add(productData);
 		productsList25.add(productData);
 
-		searchSteps.searchAndSelectProduct("K045SV", "TIANA SET");
+		searchSteps.searchAndSelectProduct(sku2, name2);
 		productData = productSteps.setProductAddToCart("2", "0");
 
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct("K053GO", "DIONNE SET");
+		searchSteps.searchAndSelectProduct(sku3, name3);
 		productData = productSteps.setProductAddToCart("1", "0");
 		productsList50.add(productData);
 
@@ -189,8 +205,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		// TODO change the update method to set the quantity in the model
-		cartSteps.updateProductQuantityIn50DiscountArea("2", "K052BK");
-		cartSteps.updateProductQuantityIn50DiscountArea("0", "K045SV");
+		cartSteps.updateProductQuantityIn50DiscountArea("2", sku1);
+		cartSteps.updateProductQuantityIn50DiscountArea("0", sku2);
 
 		cartSteps.updateCart();
 

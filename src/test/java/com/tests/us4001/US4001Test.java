@@ -73,7 +73,7 @@ public class US4001Test extends BaseTest {
 	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
 	List<CartProductModel> productList25Buy3Get1Applied = new ArrayList<CartProductModel>();
 	List<CartProductModel> productList50Buy3Get1Applied = new ArrayList<CartProductModel>();
-	List<CartProductModel> productListMMBuy3Get1Applied = new ArrayList<CartProductModel>();
+	List<CartProductModel> productListMMBuy3Get1Applied = new ArrayList<CartProductModel>();	
 	private static ShippingModel confirmationTotals = new ShippingModel();
 	private static ShippingModel shippingTotals = new ShippingModel();
 	private static UrlModel urlModel = new UrlModel();
@@ -163,12 +163,10 @@ public class US4001Test extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
 
-	}
-	
-	
+	}	
 
 	@Test
-	public void us4001Test() {
+	public void us4001ShopForMyselfWithJbMmbAndBuy3GetOneTest() {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
@@ -192,18 +190,18 @@ public class US4001Test extends BaseTest {
 		allProductsList.addAll(productsListMarketing);
 
 		headerSteps.openCartPreview();
-		headerSteps.goToCart();
-		
-		cartSteps.typeJewerlyBonus(jewelryDiscount);
-		cartSteps.updateJewerlyBonus();
-		cartSteps.typeMarketingBonus(marketingDiscount);
-		cartSteps.updateMarketingBonus();
+		headerSteps.goToCart();		
 
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+		
+		cartSteps.typeJewerlyBonus(jewelryDiscount);
+		cartSteps.updateJewerlyBonus();
+		cartSteps.typeMarketingBonus(marketingDiscount);
+		cartSteps.updateMarketingBonus();
 		
 		cartTotals = cartSteps.grabTotals();
 		
@@ -267,7 +265,7 @@ public class US4001Test extends BaseTest {
 		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
 
 //		confirmationSteps.agreeAndCheckout();
-//
+		
 //		checkoutValidationSteps.verifySuccessMessage();
 		
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
