@@ -12,7 +12,7 @@ import com.tools.data.soap.ProductDetailedModel;
 
 public class CreateProduct {	
 
-
+	//TODO add return statement - ID from response or smth
 	public static void createProduct(String sku, String name, String price) {
 
 		ProductDetailedModel product = new ProductDetailedModel();

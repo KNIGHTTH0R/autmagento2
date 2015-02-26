@@ -5,10 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.bouncycastle.crypto.prng.RandomGenerator;
-
-import com.tools.utils.RandomGenerators;
-
 public class ProductDetailedModel {
 
 	private String type;

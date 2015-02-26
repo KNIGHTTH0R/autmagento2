@@ -62,6 +62,6 @@ public class BaseTest {
 	 */
 	@After
 	public void printErrors(){
-		customVerifications.printErrors();
+//		customVerifications.printErrors();
 	}
 }
