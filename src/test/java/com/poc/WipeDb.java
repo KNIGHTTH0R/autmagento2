@@ -6,7 +6,7 @@ import com.connectors.mongo.MongoConnector;
 
 public class WipeDb {
 	
-	public void main(String args[]) throws UnknownHostException{
+	public static void main(String args[]) throws UnknownHostException{
 		MongoConnector mongoQA = new MongoConnector();
 		System.out.println("---------- Mongo DBs CleanUp");
 		for (String dbNameNow : mongoQA.getDbNames()) {

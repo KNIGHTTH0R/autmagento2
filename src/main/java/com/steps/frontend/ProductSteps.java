@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.Constants;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.requirements.AbstractSteps;
 
@@ -26,6 +27,25 @@ public class ProductSteps extends AbstractSteps {
 		setQuantity(qty);
 
 		ProductBasicModel result = productDetailsPage().grabProductData();
+		addToCart();
+		waitABit(Constants.TIME_CONSTANT);
+		return result;
+	}
+	//TODO refactoring purpose
+	@StepGroup
+	public BasicProductModel setBasicProductAddToCart(String qty, String size,String askingPrice,String finalPrice,String ip,String discountClass) {
+		BasicProductModel result = new BasicProductModel();
+		if (!size.contentEquals("0")) {
+			setDropDownValue(size);
+		}		
+		setQuantity(qty);	
+		
+		result = productDetailsPage().grabBasicProductData();
+		result.setDiscountClass(discountClass);
+		result.setProductsPrice(askingPrice);
+		result.setFinalPrice(finalPrice);
+		result.setPriceIP(ip);
+		
 		addToCart();
 		waitABit(Constants.TIME_CONSTANT);
 		return result;

@@ -9,6 +9,7 @@ import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.email.EmailModel;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
@@ -19,6 +20,20 @@ public class PrintUtils {
 	public static void printList(List<CartProductModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		for (CartProductModel cartProductModel : list) {
+			System.out.println("------------------------");
+			System.out.println(cartProductModel.getName());
+			System.out.println(cartProductModel.getProdCode());
+			System.out.println(cartProductModel.getQuantity());
+			System.out.println(cartProductModel.getUnitPrice());
+			System.out.println(cartProductModel.getProductsPrice());
+			System.out.println(cartProductModel.getFinalPrice());
+			System.out.println(cartProductModel.getPriceIP());
+		}
+	}
+	public static void printListBasicProductModel(List<BasicProductModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		System.out.println("list size is : " + list.size());
+		for (BasicProductModel cartProductModel : list) {
 			System.out.println("------------------------");
 			System.out.println(cartProductModel.getName());
 			System.out.println(cartProductModel.getProdCode());
@@ -165,6 +180,16 @@ public class PrintUtils {
 	}
 
 	public static void printCartProductModel(CartProductModel productNow) {
+		System.out.println("------------------------");
+		System.out.println("name " + productNow.getName());
+		System.out.println("code " + productNow.getProdCode());
+		System.out.println("price " + productNow.getUnitPrice());
+		System.out.println("qty " + productNow.getQuantity());
+		System.out.println("prices " + productNow.getProductsPrice());
+		System.out.println("ip " + productNow.getPriceIP());
+		System.out.println("final " + productNow.getFinalPrice());
+	}
+	public static void printBasicProductModel(BasicProductModel productNow) {
 		System.out.println("------------------------");
 		System.out.println("name " + productNow.getName());
 		System.out.println("code " + productNow.getProdCode());
