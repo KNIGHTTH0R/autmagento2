@@ -4,8 +4,8 @@ public class MongoTableKeys {
 	
 	//DB names suffix for 
 
-	public static final String GRAB = "-GRB";
-	public static final String CALC = "-CLC";
+//	public static final String GRAB = "-GRB";
+//	public static final String CALC = "-CLC";
 	
 	//Keys used for total model FE
 	public static final String DISCOUNT_KEY = "DISCOUNT";
