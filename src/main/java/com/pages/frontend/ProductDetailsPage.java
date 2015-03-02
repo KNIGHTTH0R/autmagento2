@@ -1,7 +1,5 @@
 package com.pages.frontend;
 
-import java.math.BigDecimal;
-
 import net.thucydides.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;

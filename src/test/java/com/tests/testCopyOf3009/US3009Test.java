@@ -18,8 +18,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
-import com.poc.CreateProduct;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProductSteps;
@@ -37,18 +37,14 @@ import com.tools.calculation.NewCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomGenerators;
 import com.workflows.frontend.CartWorkflows;
@@ -90,9 +86,6 @@ public class US3009Test extends BaseTest {
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<BasicProductModel> productsList25 = new ArrayList<BasicProductModel>();
 	private static List<BasicProductModel> productsList50 = new ArrayList<BasicProductModel>();
-	private static List<BasicProductModel> productsListMarketing = new ArrayList<BasicProductModel>();
-	private static List<BasicProductModel> allProductsList = new ArrayList<BasicProductModel>();
-	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
 	private static ShippingModel shippingTotals = new ShippingModel();
 	private static UrlModel urlModel = new UrlModel();
@@ -108,7 +101,6 @@ public class US3009Test extends BaseTest {
 	private static String cardMonth;
 	private static String cardYear;
 	private static String cardCVC;
-	private List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
 	
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;

@@ -471,7 +471,7 @@ public class CartCalculation {
 			newProduct.setFinalPrice(product.getFinalPrice());
 			newProduct.setPriceIP(product.getPriceIP());
 			//TODO verify expression
-			if (product.equals(cheepest)) {
+			if (product.getProdCode().equals(cheepest.getProdCode())) {
 				discount = BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
 				finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
 				finalPrice = finalPrice.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
