@@ -50,6 +50,7 @@ public class Constants {
 	public static final String LINE_SEPARATOR = "\n";
 	public static final String COMMA_SEPARATOR = ",";
 	public static final String PROFILE_HISTORY = "MEINE BESTELLUNGEN";
+	public static final String US_03_FOLDER = "us3";
 
 	// discounts
 	public static final String DISCOUNT_0 = "00";
