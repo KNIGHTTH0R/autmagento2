@@ -357,7 +357,7 @@ public class US3009Test extends BaseTest {
 		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + Constants.GRAB);
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
-		for (BasicProductModel product : allProductsList) {
+		for (BasicProductModel product : allProductsListRecalculated) {
 			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + Constants.GRAB);
 		}
 
