@@ -67,6 +67,16 @@ public class MongoTableKeys {
 	public static final String TYPE = "type";
 	public static final String PRICE = "price";
 	public static final String QUANTITY= "quantity";
+	//CartproductModel
+	public static final String BASIC_PRODUCT_MODEL = "BasicProductModel";
+	public static final String PRODUCT_NAME = "name";
+	public static final String PRODUCT_CODE = "code";
+	public static final String PRODUCT_PRICE = "price";
+	public static final String PRODUCT_QUANTITY= "quantity";
+	public static final String PRODUCT_DISCOUNT_CLASS= "discountClass";
+	public static final String PRODUCT_ASKING_PRICE= "askingPrice";
+	public static final String PRODUCT_FINAL_PRICE= "finalPrice";
+	public static final String PRODUCT_IP_POINTS= "ipPoints";
 	
 	//CalcDetailsModel
 	public static final String CALC_DETAILS_MODEL = "CalcDetailsModel";

@@ -156,6 +156,13 @@ public class PrintUtils {
 		System.out.println(basicProduct.getQuantity() + " - " + orderProduct.getNumber());
 		System.out.println(basicProduct.getType() + " - " + orderProduct.getProductCode());
 	}
+	
+	public static void printProductsComparisonBackend(BasicProductModel basicProduct, OrderItemModel orderProduct) {
+		System.out.println(basicProduct.getName() + " - " + orderProduct.getProductName());
+		System.out.println(basicProduct.getUnitPrice() + " - " + orderProduct.getPrice());
+		System.out.println(basicProduct.getQuantity() + " - " + orderProduct.getNumber());
+		System.out.println(basicProduct.getProdCode() + " - " + orderProduct.getProductCode());
+	}
 
 	public static void printOrderItemsList(List<OrderItemModel> orderItemsList) {
 		System.out.println("---------- Order Items List --------------");

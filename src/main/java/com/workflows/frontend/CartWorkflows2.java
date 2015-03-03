@@ -78,5 +78,81 @@ public class CartWorkflows2 {
 		}
 		return result;
 	}
+	
+	private CartTotalsModel discountTotals = new CartTotalsModel();
+	private CalcDetailsModel discountCalculationModel = new CalcDetailsModel();
+
+	public void setVerifyTotalsDiscount(CartTotalsModel discountTotals, CalcDetailsModel discountCalculationModel) {
+		this.discountCalculationModel = discountCalculationModel;
+		this.discountTotals = discountTotals;
+
+	}
+
+	@StepGroup
+	public void verifyTotalsDiscount(String message) {
+		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
+		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
+		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());
+		verifyMarketingBonus(discountTotals.getMarketingBonus(), discountCalculationModel.getMarketingBonus());
+		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
+
+	}
+	
+	@StepGroup
+	public void verifyTotalsDiscountNoMarketing(String message) {
+		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
+		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
+		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());		
+		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
+		
+	}
+	
+	@Step
+	public void verifyIP(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: IP points dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
+
+	@Step
+	public void verifyTotalAmount(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Total Amount dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
+
+	@Step
+	public void verifyTax(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: TAX dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
+
+	@Step
+	public void verifyJewelryBonus(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Jewelry Bonus dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
+
+	@Step
+	public void verifySubTotals(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Sub Totals dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+
+	@Step
+	public void verifyMarketingBonus(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Marketing Bonus dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+
+	@Step
+	public void verifyShippingPrice(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Shipping Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+
+	@Step
+	public void verifyDiscountsPrice(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+
+	}
+	
+
 
 }
