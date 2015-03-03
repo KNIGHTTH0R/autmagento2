@@ -42,6 +42,7 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getProductsPrice());
 			System.out.println(cartProductModel.getFinalPrice());
 			System.out.println(cartProductModel.getPriceIP());
+			System.out.println(cartProductModel.getDiscountClass());
 		}
 	}
 
