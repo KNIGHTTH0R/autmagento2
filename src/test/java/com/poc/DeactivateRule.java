@@ -10,6 +10,11 @@ import com.steps.backend.promotion.PromotionSteps;
 import com.tests.BaseTest;
 
 
+/**
+ * Deactivate 3+1 rule in backend
+ * @author voicu.vac
+ *
+ */
 @RunWith(ThucydidesRunner.class)
 public class DeactivateRule extends BaseTest{
 	@Steps

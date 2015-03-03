@@ -9,7 +9,11 @@ import org.junit.runner.RunWith;
 import com.steps.backend.promotion.PromotionSteps;
 import com.tests.BaseTest;
 
-
+/**
+ * Activate 3+1 rule in backend
+ * @author voicu.vac
+ *
+ */
 @RunWith(ThucydidesRunner.class)
 public class ActivateRule extends BaseTest{
 	@Steps
