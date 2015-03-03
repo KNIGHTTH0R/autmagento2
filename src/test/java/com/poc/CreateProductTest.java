@@ -8,7 +8,7 @@ public class CreateProductTest {
 	
 	public static void main(String args[]) throws Exception{
 		ProductDetailedModel genProduct1 = CreateProduct.createProductModel();
-		genProduct1.setPrice("31.36587");
+		genProduct1.setPrice("42.90");
 		CreateProduct.createApiProduct(genProduct1);
 	}
 }
