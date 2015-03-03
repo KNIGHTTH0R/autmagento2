@@ -34,7 +34,7 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.calculation.CartCalculation;
-import com.tools.calculation.NewCalculation;
+import com.tools.calculation.CartDiscountsCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
@@ -186,8 +186,8 @@ public class US3009Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		BasicProductModel productData;
 
-		String askingPrice = NewCalculation.calculateAskingPrice(genProduct1.getPrice(), "1");
-		String finalPrice = NewCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_25,RoundingMode.HALF_DOWN);
+		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(genProduct1.getPrice(), "1");
+		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_25,RoundingMode.HALF_DOWN);
 
 		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
 		productData = productSteps.setBasicProductAddToCart("2", "0",askingPrice,finalPrice,genProduct1.getIp(),Constants.DISCOUNT_25);	
@@ -200,21 +200,21 @@ public class US3009Test extends BaseTest {
 		prod1_50.setDiscountClass(Constants.DISCOUNT_50);
 		prod1_50.setQuantity("1");
 		prod1_50.setPriceIP("0");
-		finalPrice = NewCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_50,RoundingMode.HALF_UP);
+		finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_50,RoundingMode.HALF_UP);
 		prod1_50.setFinalPrice(finalPrice);		
 	
 		productsList25.add(prod1_25);
 		productsList50.add(prod1_50);		
 		
-		askingPrice = NewCalculation.calculateAskingPrice(genProduct2.getPrice(), "1");
-		finalPrice = NewCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_50,RoundingMode.HALF_UP);
+		askingPrice = CartDiscountsCalculation.calculateAskingPrice(genProduct2.getPrice(), "1");
+		finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_50,RoundingMode.HALF_UP);
 		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
 		productData = productSteps.setBasicProductAddToCart("1", "0",askingPrice,finalPrice,genProduct2.getIp(),Constants.DISCOUNT_50);
 		productData.setPriceIP("0");
 		productsList50.add(productData);		
 		
-		askingPrice = NewCalculation.calculateAskingPrice(genProduct3.getPrice(), "2");
-		finalPrice = NewCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_0,RoundingMode.HALF_UP);
+		askingPrice = CartDiscountsCalculation.calculateAskingPrice(genProduct3.getPrice(), "2");
+		finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_0,RoundingMode.HALF_UP);
 		searchSteps.searchAndSelectProduct(genProduct3.getSku(), genProduct3.getName());
 		productData = productSteps.setBasicProductAddToCart("2", "0",askingPrice,finalPrice,genProduct3.getIp(),Constants.DISCOUNT_0);
 		productData.setPriceIP("0");
@@ -246,13 +246,13 @@ public class US3009Test extends BaseTest {
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
 		
-		List<BasicProductModel> calculatedProductsList25 = NewCalculation.calculateProductsfor25Discount(productsList25, jewelryDiscount);
+		List<BasicProductModel> calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25, jewelryDiscount);
 		PrintUtils.printListBasicProductModel(calculatedProductsList25);
 
-		List<BasicProductModel> calculatedProductsList50 = NewCalculation.calculateProductsfor50Discount(productsList50,productsList25, jewelryDiscount);
+		List<BasicProductModel> calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50,productsList25, jewelryDiscount);
 		PrintUtils.printListBasicProductModel(calculatedProductsList50);
 
-		List<BasicProductModel> calculatedProductsListMarketing = NewCalculation.calculateProductsforMarketingMaterial(productsListMarketing, marketingDiscount);
+		List<BasicProductModel> calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketing, marketingDiscount);
 		PrintUtils.printListBasicProductModel(calculatedProductsListMarketing);
 //		
 //		allProductsListRecalculated.addAll(calculatedProductsList50);

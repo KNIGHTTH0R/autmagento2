@@ -7,9 +7,8 @@ import java.util.List;
 
 import com.tools.Constants;
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.CartProductModel;
 
-public class NewCalculation {
+public class CartDiscountsCalculation {
 
 	public static String calculateAskingPrice(String unitPrice, String quantity) {
 
@@ -129,7 +128,7 @@ public class NewCalculation {
 
 	}
 	
-	private static BigDecimal calculateUsedJewelryBonus(List<BasicProductModel> productsList, String jewelryDiscount) {
+	public static BigDecimal calculateUsedJewelryBonus(List<BasicProductModel> productsList, String jewelryDiscount) {
 
 		BigDecimal jBRegularItems = BigDecimal.ZERO;
 		BigDecimal sum25 = BigDecimal.ZERO;
@@ -150,7 +149,7 @@ public class NewCalculation {
 
 	}
 
-	private static BigDecimal calculateDiscountAskingPriceSum(List<BasicProductModel> productsList, String discountType) {
+	public static BigDecimal calculateDiscountAskingPriceSum(List<BasicProductModel> productsList, String discountType) {
 		BigDecimal sum = BigDecimal.ZERO;
 		for (BasicProductModel product : productsList) {
 
@@ -183,7 +182,7 @@ public class NewCalculation {
 
 	}
 
-	private static String calculate50DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jBUsedForRegular, BigDecimal jB, BigDecimal sampleAskingSum) {
+	public static String calculate50DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jBUsedForRegular, BigDecimal jB, BigDecimal sampleAskingSum) {
 
 		BigDecimal result = BigDecimal.ZERO;
 
@@ -196,7 +195,7 @@ public class NewCalculation {
 		return String.valueOf(result.setScale(2));
 	}
 
-	private static String calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB, BigDecimal sum25Section) {
+	public static String calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB, BigDecimal sum25Section) {
 
 		BigDecimal result = BigDecimal.ZERO;
 		if (sum25Section.compareTo(jB) < 0) {
@@ -219,7 +218,7 @@ public class NewCalculation {
 	}
 
 
-	private static String calculateMarketingMaterialCartProductFinalPrice(BigDecimal askingPrice, BigDecimal marketingDiscount, BigDecimal sumMarketingMaterial) {
+	public static String calculateMarketingMaterialCartProductFinalPrice(BigDecimal askingPrice, BigDecimal marketingDiscount, BigDecimal sumMarketingMaterial) {
 
 		BigDecimal result = BigDecimal.ZERO;
 		if (askingPrice.compareTo(marketingDiscount) < 0) {
