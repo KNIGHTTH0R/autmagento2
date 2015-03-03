@@ -12,13 +12,9 @@ import org.junit.Assert;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.CustomVerification;
 import com.tools.data.CalcDetailsModel;
-import com.tools.data.CalculationModel;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-import com.tools.data.frontend.ProductBasicModel;
-import com.tools.data.frontend.ShippingModel;
 
 
 public class CartWorkflows2 {

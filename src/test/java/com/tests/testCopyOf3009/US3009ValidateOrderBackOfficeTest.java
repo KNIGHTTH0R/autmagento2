@@ -32,12 +32,13 @@ import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
+import com.workflows.backend.OrderProductsWorkflows;
+import com.workflows.backend.OrderTotalsWorkflows;
 import com.workflows.backend.OrderWorkflows;
 
 @WithTag(name = "US3009", type = "backend")
@@ -53,6 +54,10 @@ public class US3009ValidateOrderBackOfficeTest extends BaseTest {
 	public OrderValidationSteps orderValidationSteps;
 	@Steps
 	public OrderWorkflows orderWorkflows;
+	@Steps
+	public OrderProductsWorkflows orderProductsWorkflows;
+	@Steps
+	public OrderTotalsWorkflows orderTotalsWorkflows;
 	@Steps 
 	public CustomVerification customVerifications;
 
@@ -73,7 +78,7 @@ public class US3009ValidateOrderBackOfficeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3009" + File.separator + "us3009.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + Constants.US_03_FOLDER + File.separator + "us3009.properties");
 			prop.load(input);
 			beUser = prop.getProperty("beUser");
 			bePass = prop.getProperty("bePass");
@@ -149,15 +154,15 @@ public class US3009ValidateOrderBackOfficeTest extends BaseTest {
 		PrintUtils.printOrderTotals(orderTotalsModel);
 		PrintUtils.printOrderInfo(orderInfoModel);
 
-//		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
-//		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");
-//
-//		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
-//		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
-//		
-//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
-//		
-//		customVerifications.printErrors();
+		orderTotalsWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
+		orderTotalsWorkflows.validateCalculationTotals("TOTALS VALIVATION");
+
+		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
+		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
+		
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
+		
+		customVerifications.printErrors();
 	}
 
 	@After

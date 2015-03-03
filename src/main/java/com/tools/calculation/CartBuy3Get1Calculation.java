@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.CartProductModel;
 
 public class CartBuy3Get1Calculation {
 	

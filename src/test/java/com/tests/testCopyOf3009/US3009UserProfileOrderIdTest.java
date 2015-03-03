@@ -52,7 +52,7 @@ public class US3009UserProfileOrderIdTest extends BaseTest{
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us3009" + File.separator + "us3009.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + Constants.US_03_FOLDER + File.separator + "us3009.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");			

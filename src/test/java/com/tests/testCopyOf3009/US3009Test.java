@@ -44,17 +44,14 @@ import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomGenerators;
 import com.workflows.frontend.AddressWorkflows;
-import com.workflows.frontend.CartWorkflows;
 import com.workflows.frontend.CartWorkflows2;
 import com.workflows.frontend.ShippingAndConfirmationWorkflows;
 
@@ -122,9 +119,7 @@ public class US3009Test extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-	private ProductDetailedModel genProduct4;
-	private ProductDetailedModel genProduct5;
-	private ProductDetailedModel genProduct6;
+	
 
 
 	@Before
