@@ -51,6 +51,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomGenerators;
+import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.CartWorkflows2;
 import com.workflows.frontend.ShippingAndConfirmationWorkflows;
@@ -82,6 +83,8 @@ public class US3009Test extends BaseTest {
 	public CartWorkflows2 cartWorkflows2;
 	@Steps
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
+	@Steps
+	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public AddressWorkflows addressWorkflows;
 	@Steps
@@ -187,179 +190,188 @@ public class US3009Test extends BaseTest {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 		BasicProductModel productData;
-
-		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(genProduct1.getPrice(), "1");
-		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_25,RoundingMode.HALF_DOWN);
-
-		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
-		productData = productSteps.setBasicProductAddToCart("2", "0",askingPrice,finalPrice,genProduct1.getIp(),Constants.DISCOUNT_25);	
-	
-		BasicProductModel prod1_25 = productBasicModel.newProductObject(productData);
-		prod1_25.setQuantity("1");
-		prod1_25.setDiscountClass(Constants.DISCOUNT_25);
-
-		BasicProductModel prod1_50 = productBasicModel.newProductObject(productData);
-		prod1_50.setDiscountClass(Constants.DISCOUNT_50);
-		prod1_50.setQuantity("1");
-		prod1_50.setPriceIP("0");
-		finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_50,RoundingMode.HALF_UP);
-		prod1_50.setFinalPrice(finalPrice);		
-	
-		productsList25.add(prod1_25);
-		productsList50.add(prod1_50);		
 		
-		askingPrice = CartDiscountsCalculation.calculateAskingPrice(genProduct2.getPrice(), "1");
-		finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_50,RoundingMode.HALF_UP);
-		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
-		productData = productSteps.setBasicProductAddToCart("1", "0",askingPrice,finalPrice,genProduct2.getIp(),Constants.DISCOUNT_50);
-		productData.setPriceIP("0");
-		productsList50.add(productData);		
-		
-		askingPrice = CartDiscountsCalculation.calculateAskingPrice(genProduct3.getPrice(), "2");
-		finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_0,RoundingMode.HALF_UP);
-		searchSteps.searchAndSelectProduct(genProduct3.getSku(), genProduct3.getName());
-		productData = productSteps.setBasicProductAddToCart("2", "0",askingPrice,finalPrice,genProduct3.getIp(),Constants.DISCOUNT_0);
-		productData.setPriceIP("0");
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",Constants.DISCOUNT_50);
+		productsList50.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",Constants.DISCOUNT_25);
+		productsList25.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",Constants.DISCOUNT_50);
+		productsList50.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",Constants.DISCOUNT_0);
 		productsListMarketing.add(productData);
+
+//		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(genProduct1.getPrice(), "1");
+//		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_25);
+//
+//		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
+//		productData = productSteps.setBasicProductAddToCart("2", "0",askingPrice,finalPrice,genProduct1.getIp(),Constants.DISCOUNT_25);	
+//	
+//		BasicProductModel prod1_25 = productBasicModel.newProductObject(productData);
+//		prod1_25.setQuantity("1");
+//		prod1_25.setDiscountClass(Constants.DISCOUNT_25);
+//
+//		BasicProductModel prod1_50 = productBasicModel.newProductObject(productData);
+//		prod1_50.setDiscountClass(Constants.DISCOUNT_50);
+//		prod1_50.setQuantity("1");
+//		prod1_50.setPriceIP("0");
+//		finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_50);
+//		prod1_50.setFinalPrice(finalPrice);		
+//	
+//		productsList25.add(prod1_25);
+//		productsList50.add(prod1_50);		
+//		
+//		askingPrice = CartDiscountsCalculation.calculateAskingPrice(genProduct2.getPrice(), "1");
+//		finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_50);
+//		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
+//		productData = productSteps.setBasicProductAddToCart("1", "0",askingPrice,finalPrice,genProduct2.getIp(),Constants.DISCOUNT_50);
+//		productData.setPriceIP("0");
+//		productsList50.add(productData);		
+//		
+//		askingPrice = CartDiscountsCalculation.calculateAskingPrice(genProduct3.getPrice(), "2");
+//		finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, Constants.DISCOUNT_0);
+//		searchSteps.searchAndSelectProduct(genProduct3.getSku(), genProduct3.getName());
+//		productData = productSteps.setBasicProductAddToCart("2", "0",askingPrice,finalPrice,genProduct3.getIp(),Constants.DISCOUNT_0);
+//		productData.setPriceIP("0");
+//		productsListMarketing.add(productData);
 		
-		PrintUtils.printListBasicProductModel(productsList25);
-		PrintUtils.printListBasicProductModel(productsList50);
-		PrintUtils.printListBasicProductModel(productsListMarketing);
+//		PrintUtils.printListBasicProductModel(productsList25);
+//		PrintUtils.printListBasicProductModel(productsList50);
+//		PrintUtils.printListBasicProductModel(productsListMarketing);
 
-		allProductsList.addAll(productsList25);
-		allProductsList.addAll(productsList50);
-		allProductsList.addAll(productsListMarketing);
-
-		headerSteps.openCartPreview();
-		headerSteps.goToCart();
-
-		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
-
-		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
-
-		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-
-		cartProds.addAll(cartProductsWith50Discount);
-		cartProds.addAll(cartProductsWith25Discount);
-		cartProds.addAll(cartMarketingMaterialsProducts);
-
-		cartSteps.typeJewerlyBonus(jewelryDiscount);
-		cartSteps.updateJewerlyBonus();
-		cartSteps.typeMarketingBonus(marketingDiscount);
-		cartSteps.updateMarketingBonus();
-		
-		List<BasicProductModel> calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25, jewelryDiscount);
-		PrintUtils.printListBasicProductModel(calculatedProductsList25);
-
-		List<BasicProductModel> calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50,productsList25, jewelryDiscount);
-		PrintUtils.printListBasicProductModel(calculatedProductsList50);
-
-		List<BasicProductModel> calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketing, marketingDiscount);
-		PrintUtils.printListBasicProductModel(calculatedProductsListMarketing);
-		
-		allProductsListRecalculated.addAll(calculatedProductsList50);
-		allProductsListRecalculated.addAll(calculatedProductsList25);
-		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
-		
-		List<CartProductModel> cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
-
-		List<CartProductModel> cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
-
-		List<CartProductModel> cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
-
-		cartTotals = cartSteps.grabTotals();
-
-		total = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
-		PrintUtils.printCalcDetailsModel(total);
-
-		cartSteps.clickGoToShipping();
-
-		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);	
-
-		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-
-		shippingTotals = shippingSteps.grabSurveyData();
-
-		shippingCalculatedModel = calculationSteps.calculateShippingTotals(total, shippingValue);
-		PrintUtils.printShippingTotals(shippingCalculatedModel);
-
-		shippingSteps.clickGoToPaymentMethod();
-
-		String url = shippingSteps.grabUrl();
-		urlModel.setName("Payment URL");
-		urlModel.setUrl(url);
-		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
-		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-		confirmationTotals = confirmationSteps.grabConfirmationTotals();
-		
-		AddressModel grabbedBillingAddress =  confirmationSteps.grabBillingData();
-		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
-
-		confirmationSteps.agreeAndCheckout();
-
-		checkoutValidationSteps.verifySuccessMessage();
-		
-		cartWorkflows2.setValidateProductsModels(productsList50, cartProductsWith50Discount);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
-
-		cartWorkflows2.setValidateProductsModels(productsList25, cartProductsWith25Discount);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
-
-		cartWorkflows2.setValidateProductsModels(productsListMarketing, cartMarketingMaterialsProducts);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
-	
-		cartWorkflows2.setValidateProductsModels(calculatedProductsList50,cartProductsWith50DiscountDiscounted);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION -RECALCULATED");
-		
-		cartWorkflows2.setValidateProductsModels(calculatedProductsList25, cartProductsWith25DiscountDiscounted);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION -RECALCULATED");
-		
-		cartWorkflows2.setValidateProductsModels(calculatedProductsListMarketing, cartMarketingMaterialsProductsDiscounted);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION -RECALCULATED");
-
-		shippingAndConfirmationWorkflows.setValidateProductsModels(allProductsList, shippingProducts);
-		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
-
-		shippingAndConfirmationWorkflows.setValidateProductsModels(allProductsList, confirmationProducts);
-		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
-
-
-		cartWorkflows2.setVerifyTotalsDiscount(cartTotals, total);
-		cartWorkflows2.verifyTotalsDiscountNoMarketing("CART TOTALS");
-
-		shippingAndConfirmationWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
-		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-
-		shippingAndConfirmationWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
-		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
-		
-		addressWorkflows.setBillingAddressModels(billingAddress,grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
-		
-		addressWorkflows.setShippingAddressModels(billingAddress,grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
-		
-		customVerifications.printErrors();
+//		allProductsList.addAll(productsList25);
+//		allProductsList.addAll(productsList50);
+//		allProductsList.addAll(productsListMarketing);
+//
+//		headerSteps.openCartPreview();
+//		headerSteps.goToCart();
+//
+//		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
+//
+//		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
+//
+//		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+//
+//		cartProds.addAll(cartProductsWith50Discount);
+//		cartProds.addAll(cartProductsWith25Discount);
+//		cartProds.addAll(cartMarketingMaterialsProducts);
+//
+//		cartSteps.typeJewerlyBonus(jewelryDiscount);
+//		cartSteps.updateJewerlyBonus();
+//		cartSteps.typeMarketingBonus(marketingDiscount);
+//		cartSteps.updateMarketingBonus();
+//		
+//		List<BasicProductModel> calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25, jewelryDiscount);
+//		PrintUtils.printListBasicProductModel(calculatedProductsList25);
+//
+//		List<BasicProductModel> calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50,productsList25, jewelryDiscount);
+//		PrintUtils.printListBasicProductModel(calculatedProductsList50);
+//
+//		List<BasicProductModel> calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketing, marketingDiscount);
+//		PrintUtils.printListBasicProductModel(calculatedProductsListMarketing);
+//		
+//		allProductsListRecalculated.addAll(calculatedProductsList50);
+//		allProductsListRecalculated.addAll(calculatedProductsList25);
+//		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
+//		
+//		List<CartProductModel> cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
+//
+//		List<CartProductModel> cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
+//
+//		List<CartProductModel> cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
+//
+//		cartTotals = cartSteps.grabTotals();
+//
+//		total = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
+//		PrintUtils.printCalcDetailsModel(total);
+//
+//		cartSteps.clickGoToShipping();
+//
+//		shippingSteps.selectAddress(billingAddress);
+//		shippingSteps.setSameAsBilling(true);	
+//
+//		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+//
+//		shippingTotals = shippingSteps.grabSurveyData();
+//
+//		shippingCalculatedModel = calculationSteps.calculateShippingTotals(total, shippingValue);
+//		PrintUtils.printShippingTotals(shippingCalculatedModel);
+//
+//		shippingSteps.clickGoToPaymentMethod();
+//
+//		String url = shippingSteps.grabUrl();
+//		urlModel.setName("Payment URL");
+//		urlModel.setUrl(url);
+//		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+//		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+//
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+//
+//		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+//		confirmationTotals = confirmationSteps.grabConfirmationTotals();
+//		
+//		AddressModel grabbedBillingAddress =  confirmationSteps.grabBillingData();
+//		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
+//
+//		confirmationSteps.agreeAndCheckout();
+//
+//		checkoutValidationSteps.verifySuccessMessage();
+//		
+//		cartWorkflows2.setValidateProductsModels(productsList50, cartProductsWith50Discount);
+//		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
+//
+//		cartWorkflows2.setValidateProductsModels(productsList25, cartProductsWith25Discount);
+//		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
+//
+//		cartWorkflows2.setValidateProductsModels(productsListMarketing, cartMarketingMaterialsProducts);
+//		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+//	
+//		cartWorkflows2.setValidateProductsModels(calculatedProductsList50,cartProductsWith50DiscountDiscounted);
+//		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION -RECALCULATED");
+//		
+//		cartWorkflows2.setValidateProductsModels(calculatedProductsList25, cartProductsWith25DiscountDiscounted);
+//		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION -RECALCULATED");
+//		
+//		cartWorkflows2.setValidateProductsModels(calculatedProductsListMarketing, cartMarketingMaterialsProductsDiscounted);
+//		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION -RECALCULATED");
+//
+//		shippingAndConfirmationWorkflows.setValidateProductsModels(allProductsList, shippingProducts);
+//		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+//
+//		shippingAndConfirmationWorkflows.setValidateProductsModels(allProductsList, confirmationProducts);
+//		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+//
+//
+//		cartWorkflows2.setVerifyTotalsDiscount(cartTotals, total);
+//		cartWorkflows2.verifyTotalsDiscountNoMarketing("CART TOTALS");
+//
+//		shippingAndConfirmationWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+//		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+//
+//		shippingAndConfirmationWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
+//		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+//		
+//		addressWorkflows.setBillingAddressModels(billingAddress,grabbedBillingAddress);
+//		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+//		
+//		addressWorkflows.setShippingAddressModels(billingAddress,grabbedShippingAddress);
+//		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+//		
+//		customVerifications.printErrors();
 
 	}
 
 	@After
 	public void saveData() {
 
-		MongoWriter.saveCalcDetailsModel(total, getClass().getSimpleName() + Constants.CALC);
-		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
-		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
-		for (BasicProductModel product : allProductsListRecalculated) {
-			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + Constants.GRAB);
-		}
+//		MongoWriter.saveCalcDetailsModel(total, getClass().getSimpleName() + Constants.CALC);
+//		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
+//		MongoWriter.saveShippingModel(confirmationTotals, getClass().getSimpleName() + Constants.GRAB);
+//		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
+//		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
+//		for (BasicProductModel product : allProductsListRecalculated) {
+//			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + Constants.GRAB);
+//		}
 
 	}
 

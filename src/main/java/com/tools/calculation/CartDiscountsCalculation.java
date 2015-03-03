@@ -18,8 +18,16 @@ public class CartDiscountsCalculation {
 		return String.valueOf(price.multiply(qty));
 
 	}
+	
+	public static String calculateIpPoints(String ip, String quantity) {
+		
+		BigDecimal IP = BigDecimal.valueOf(Double.parseDouble(ip));
+		BigDecimal qty = BigDecimal.valueOf(Double.parseDouble(quantity));
 
-	public static String calculateFinalPrice(String askingPrice, String discount,RoundingMode roundingMode) {
+		return String.valueOf(IP.multiply(qty));
+	}
+
+	public static String calculateFinalPrice(String askingPrice, String discount) {
 
 		BigDecimal result = BigDecimal.ZERO;
 		BigDecimal discountValue = BigDecimal.ZERO;
@@ -33,7 +41,7 @@ public class CartDiscountsCalculation {
 		result = askPrice.subtract(discountValue);
 		System.out.println(result.setScale(4,BigDecimal.ROUND_HALF_UP));
 
-		return String.valueOf(result.setScale(2,roundingMode));
+		return String.valueOf(result.setScale(2));
 	}
 	
 	public static List<BasicProductModel> calculateProductsforMarketingMaterial(List<BasicProductModel> productsList, String marketingDiscount) {
@@ -234,5 +242,7 @@ public class CartDiscountsCalculation {
 		}
 		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
 	}
+
+
 
 }
