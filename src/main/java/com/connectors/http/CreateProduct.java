@@ -17,6 +17,17 @@ public class CreateProduct {
 	public static void main(String args[]) throws Exception {
 		createApiProduct(createProductModel());
 	}
+	
+	public static ProductDetailedModel createMarketingProductModel() throws Exception{
+		ProductDetailedModel result = createProductModel();
+		
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("15");
+		categoriesIds.add("15");
+		result.setCategoryIdsArray(categoriesIds);
+		
+		return result;
+	}
 
 	public static ProductDetailedModel createProductModel() throws Exception {
 		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
