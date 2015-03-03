@@ -22,9 +22,7 @@ import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProductSteps;
 import com.steps.frontend.ProfileSteps;
-import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -48,6 +46,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
+import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US002", type = "frontend")
@@ -58,9 +57,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
-	public ProductSteps productSteps;
-	@Steps
-	public SearchSteps searchSteps;
+	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -176,31 +173,25 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
-		productData = productSteps.setProductAddToCart("1", "0");
+		productData = addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "1", "0");
 
 		// we add this into both sections because the quantity will be increased
 		// at 2, so 1 piece will be added into 25 section
 		productsList50.add(productData);
 		productsList25.add(productData);
 
-		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
-		productData = productSteps.setProductAddToCart("2", "0");
-
+		productData = addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "2", "0");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct(genProduct3.getSku(), genProduct3.getName());
-		productData = productSteps.setProductAddToCart("1", "0");
+		productData = addProductsWorkflow.setProductToCart(genProduct3.getSku(), genProduct3.getName(), "1", "0");
 		productsList50.add(productData);
 
-		searchSteps.searchAndSelectProduct("M064", "SCHMUCKBROSCHÜRE (40 STK.)");
-		productData = productSteps.setProductAddToCart("2", "0");
+		productData = addProductsWorkflow.setProductToCart("M064", "SCHMUCKBROSCHÜRE (40 STK.)", "2", "0");
 		productsListMarketing.add(productData);
 
-		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-		productData = productSteps.setProductAddToCart("1", "0");
+		productData = addProductsWorkflow.setProductToCart("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)", "1", "0");
 		productsListMarketing.add(productData);
 
 		allProductsList.addAll(productsList25);

@@ -48,6 +48,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomGenerators;
+import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US3009", type = "frontend")
@@ -57,6 +58,8 @@ public class US3009Test extends BaseTest {
 	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
+	@Steps
+	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public ProductSteps productSteps;
 	@Steps
@@ -173,18 +176,15 @@ public class US3009Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
-		productData = productSteps.setProductAddToCart("2", "0");
+		productData = addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "2", "0");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
-		productData = productSteps.setProductAddToCart("1", "0");
+		productData = addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "1", "0");
 		productsList50.add(productData);
 
-		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-		productData = productSteps.setProductAddToCart("2", "0");
+		productData = addProductsWorkflow.setProductToCart("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)", "2", "0");
 		productsListMarketing.add(productData);
 
 		allProductsList.addAll(productsList25);

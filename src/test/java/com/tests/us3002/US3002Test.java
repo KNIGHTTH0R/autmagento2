@@ -22,8 +22,6 @@ import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProductSteps;
-import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -46,19 +44,18 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
+import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US3002", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US3002Test extends BaseTest {
-	
+
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
-	public ProductSteps productSteps;
-	@Steps
-	public SearchSteps searchSteps;
+	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -75,7 +72,7 @@ public class US3002Test extends BaseTest {
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public PaymentSteps paymentSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	private String username, password;
@@ -105,7 +102,7 @@ public class US3002Test extends BaseTest {
 	private static String cardYear;
 	private static String cardCVC;
 	private List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
-	
+
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 
@@ -114,15 +111,14 @@ public class US3002Test extends BaseTest {
 
 		Properties prop = new Properties();
 		InputStream input = null;
-		
+
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("49.90");
 		CreateProduct.createApiProduct(genProduct1);
-		
+
 		genProduct2 = CreateProduct.createProductModel();
 		genProduct2.setPrice("89.00");
 		CreateProduct.createApiProduct(genProduct2);
-
 
 		try {
 
@@ -173,18 +169,16 @@ public class US3002Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
-		productData = productSteps.setProductAddToCart("2", "0");
+		productData = addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "2", "0");
+		
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct(genProduct2.getSku(), genProduct2.getName());
-		productData = productSteps.setProductAddToCart("1", "0");
+		productData = addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "1", "0");
 		productsList50.add(productData);
 
-		searchSteps.searchAndSelectProduct("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-		productData = productSteps.setProductAddToCart("2", "0");
+		productData = addProductsWorkflow.setProductToCart("M101", "STYLE BOOK HERBST / WINTER 2014 (270 STK)", "2", "0");
 		productsListMarketing.add(productData);
 
 		allProductsList.addAll(productsList25);
@@ -209,29 +203,29 @@ public class US3002Test extends BaseTest {
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
-		
+
 		List<CartProductModel> calculatedProductsList25 = CartCalculation.calculateProductsfor25Discount(cartProductsWith25Discount, jewelryDiscount);
 		PrintUtils.printList(calculatedProductsList25);
 
-		List<CartProductModel> calculatedProductsList50 = CartCalculation.calculateProductsfor50Discount(cartProductsWith50Discount,cartProductsWith25Discount, jewelryDiscount);
+		List<CartProductModel> calculatedProductsList50 = CartCalculation.calculateProductsfor50Discount(cartProductsWith50Discount, cartProductsWith25Discount, jewelryDiscount);
 		PrintUtils.printList(calculatedProductsList50);
 
 		List<CartProductModel> calculatedProductsListMarketing = CartCalculation.calculateProductsforMarketingMaterial(cartMarketingMaterialsProducts, marketingDiscount);
 		PrintUtils.printList(calculatedProductsListMarketing);
-		
+
 		allProductsListRecalculated.addAll(calculatedProductsList50);
 		allProductsListRecalculated.addAll(calculatedProductsList25);
 		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
-		
+
 		List<CartProductModel> cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 
 		List<CartProductModel> cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 
-		List<CartProductModel> cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
+		List<CartProductModel> cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
 
 		cartTotals = cartSteps.grabTotals();
 
-		cartTotalsCalculated = CartCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
+		cartTotalsCalculated = CartCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass);
 		PrintUtils.printCalcDetailsModel(cartTotalsCalculated);
 
 		cartSteps.clickGoToShipping();
@@ -264,8 +258,8 @@ public class US3002Test extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 
 		checkoutValidationSteps.verifySuccessMessage();
-		
-		//validate products before discount to be applied
+
+		// validate products before discount to be applied
 		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
@@ -274,14 +268,14 @@ public class US3002Test extends BaseTest {
 
 		cartWorkflows.setValidateProductsModels(productsListMarketing, cartMarketingMaterialsProducts);
 		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
-		
-		//validations products after discount is applied
-		cartWorkflows.setRecalculatedCartProductsModels(cartProductsWith50DiscountDiscounted,calculatedProductsList50);
+
+		// validations products after discount is applied
+		cartWorkflows.setRecalculatedCartProductsModels(cartProductsWith50DiscountDiscounted, calculatedProductsList50);
 		cartWorkflows.validateRecalculatedProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION -RECALCULATED");
-		
+
 		cartWorkflows.setRecalculatedCartProductsModels(cartProductsWith25DiscountDiscounted, calculatedProductsList25);
 		cartWorkflows.validateRecalculatedProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION -RECALCULATED");
-		
+
 		cartWorkflows.setRecalculatedCartProductsModels(cartMarketingMaterialsProductsDiscounted, calculatedProductsListMarketing);
 		cartWorkflows.validateRecalculatedProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION -RECALCULATED");
 
@@ -299,8 +293,7 @@ public class US3002Test extends BaseTest {
 
 		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
 		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
-		
-		
+
 		customVerifications.printErrors();
 
 	}
