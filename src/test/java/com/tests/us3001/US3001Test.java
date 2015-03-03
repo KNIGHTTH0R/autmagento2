@@ -22,8 +22,6 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProductSteps;
-import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -46,6 +44,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
+import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US3001", type = "frontend")
@@ -56,9 +55,7 @@ public class US3001Test extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
-	public ProductSteps productSteps;
-	@Steps
-	public SearchSteps searchSteps;
+	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -160,20 +157,16 @@ public class US3001Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct("K024RO", "CORALIE SET (ROSÉ)");
-		productData = productSteps.setProductAddToCart("1", "17");
+		productData = addProductsWorkflow.setProductToCart("K024RO", "CORALIE SET (ROSÉ)", "1", "17");
 		cartProductsList.add(productData);
 
-		searchSteps.searchAndSelectProduct("K024RO", "CORALIE SET (ROSÉ)");
-		productData = productSteps.setProductAddToCart("1", "17");
+		productData = addProductsWorkflow.setProductToCart("K024RO", "CORALIE SET (ROSÉ)", "1", "17");
 		cartProductsList.add(productData);
 
-		searchSteps.searchAndSelectProduct("R025WT", "DAMARIS RING");
-		productData = productSteps.setProductAddToCart("1", "16");
+		productData = addProductsWorkflow.setProductToCart("R025WT", "DAMARIS RING", "1", "16");
 		cartProductsList.add(productData);
 
-		searchSteps.searchAndSelectProduct("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-		productData = productSteps.setProductAddToCart("1", "0");
+		productData = addProductsWorkflow.setProductToCart("M101 ", "STYLE BOOK HERBST / WINTER 2014 (270 STK)", "1", "0");
 		cartProductsList.add(productData);
 
 		headerSteps.openCartPreview();

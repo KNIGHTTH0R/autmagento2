@@ -22,8 +22,6 @@ import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProductSteps;
-import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -47,6 +45,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
+import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US4002", type = "frontend")
@@ -57,9 +56,7 @@ public class US4002Test extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
-	public ProductSteps productSteps;
-	@Steps
-	public SearchSteps searchSteps;
+	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -171,18 +168,15 @@ public class US4002Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 
-		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
-		productData = productSteps.setProductAddToCart("2", "0");
+		productData = addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "2", "0");
 		ProductBasicModel newProduct = productBasicModel.newProductObject(productData.getName(), productData.getPrice(), productData.getType(), "1");
 		productsList25.add(newProduct);
 		productsList50.add(newProduct);
 
-		searchSteps.searchAndSelectProduct("A010BK", "THERESA BAG");
-		productData = productSteps.setProductAddToCart("2", "0");
+		productData = addProductsWorkflow.setProductToCart("A010BK", "THERESA BAG", "2", "0");
 		productsList25.add(productData);
 
-		searchSteps.searchAndSelectProduct("M094", "SILIKON VERSCHLUSS FÜR OHRRINGE (50 PAAR)");
-		productData = productSteps.setProductAddToCart("3", "0");
+		productData = addProductsWorkflow.setProductToCart("M094", "SILIKON VERSCHLUSS FÜR OHRRINGE (50 PAAR)", "3", "0");
 		productsListMarketing.add(productData);
 
 		allProductsList.addAll(productsList25);

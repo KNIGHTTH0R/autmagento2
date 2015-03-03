@@ -22,9 +22,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProductSteps;
 import com.steps.frontend.ProfileSteps;
-import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -45,6 +43,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
+import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US001", type = "frontend")
@@ -55,9 +54,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
-	public ProductSteps productSteps;
-	@Steps
-	public SearchSteps searchSteps;
+	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -142,20 +139,16 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		frontEndSteps.performLogin(username, password);
 		frontEndSteps.wipeCart();
 
-		searchSteps.searchAndSelectProduct("M081", "BANNER MIT LOGO");
-		ProductBasicModel productData = productSteps.setProductAddToCart("1", "Blue");
+		ProductBasicModel productData = addProductsWorkflow.setProductToCart("M081", "BANNER MIT LOGO", "1", "Blue");
 		productsList.add(productData);
 
-		searchSteps.searchAndSelectProduct("M058", "GUTSCHEIN FOLGEPARTY");
-		productData = productSteps.setProductAddToCart("1", "0");
+		productData = addProductsWorkflow.setProductToCart("M058", "GUTSCHEIN FOLGEPARTY", "1", "0");
 		productsList.add(productData);
 
-		searchSteps.searchAndSelectProduct("B040DK", "MAGIC VIOLETTA");
-		productData = productSteps.setProductAddToCart("1", "0");
+		productData = addProductsWorkflow.setProductToCart("B040DK", "MAGIC VIOLETTA", "1", "0");
 		productsList.add(productData);
 
-		searchSteps.searchAndSelectProduct("R084BK", "GABRIELLE RING");
-		productData = productSteps.setProductAddToCart("1", "18");
+		productData = addProductsWorkflow.setProductToCart("R084BK", "GABRIELLE RING", "1", "18");
 		productsList.add(productData);
 		
 		headerSteps.openCartPreview();
