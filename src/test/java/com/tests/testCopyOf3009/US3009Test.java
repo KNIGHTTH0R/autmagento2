@@ -20,17 +20,13 @@ import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProductSteps;
-import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.CartSteps;
-import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
-import com.tools.calculation.CartCalculation;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -48,19 +44,11 @@ import com.workflows.frontend.ValidationWorkflows;
 public class US3009Test extends BaseTest {
 	
 	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
-	@Steps
-	public ProductSteps productSteps;
-	@Steps
-	public SearchSteps searchSteps;
+	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
 	public CartSteps cartSteps;
-	@Steps
-	public CartCalculation calculationSteps;
-	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
@@ -68,9 +56,9 @@ public class US3009Test extends BaseTest {
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
-	public ValidationWorkflows validationWorkflows;
-	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public ValidationWorkflows validationWorkflows;
 	@Steps 
 	public CustomVerification customVerifications;
 	
@@ -141,8 +129,8 @@ public class US3009Test extends BaseTest {
 
 	@Test
 	public void us3009CartSegmentationWithVatAndSmbBillingDeShippingAtTest() {
-		frontEndSteps.performLogin(username, password);
-		frontEndSteps.wipeCart();
+		customerRegistrationSteps.performLogin(username, password);
+		customerRegistrationSteps.wipeCart();
 		BasicProductModel productData;
 		
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",Constants.DISCOUNT_50);
@@ -195,7 +183,6 @@ public class US3009Test extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		checkoutValidationSteps.verifySuccessMessage();
 		
 		validationWorkflows.setBillingAddress(billingAddress);
 		validationWorkflows.performCartValidations();
@@ -214,5 +201,4 @@ public class US3009Test extends BaseTest {
 			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + Constants.GRAB);
 		}
 	}
-
 }

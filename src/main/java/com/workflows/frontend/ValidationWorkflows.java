@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
+import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 
@@ -15,6 +16,8 @@ public class ValidationWorkflows {
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
 	@Steps
 	public AddressWorkflows addressWorkflows;
+	@Steps
+	public CheckoutValidationSteps checkoutValidationSteps;
 	
 	public static String billingAddress;
 	
@@ -29,6 +32,9 @@ public class ValidationWorkflows {
 	@StepGroup
 	@Screenshots(onlyOnFailures=true)
 	public void performCartValidations(){
+		
+		checkoutValidationSteps.verifySuccessMessage();
+		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
