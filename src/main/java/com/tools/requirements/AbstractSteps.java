@@ -14,6 +14,7 @@ import com.pages.backend.orders.details.OrderInfoPage;
 import com.pages.backend.orders.details.OrderItemsPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
 import com.pages.backend.promotion.ShoppingCartPriceRulesPage;
+import com.pages.external.FacebookEMBLoginPage;
 import com.pages.external.MailinatorPage;
 import com.pages.frontend.CreateCustomerPage;
 import com.pages.frontend.HeaderPage;
@@ -184,6 +185,13 @@ public class AbstractSteps extends ScenarioSteps {
 	public MailinatorPage mailinatorPage() {
 		return getPages().currentPageAt(MailinatorPage.class);
 	}
+	
+	//-----------------------------------------External 
+
+	public FacebookEMBLoginPage facebookEMBLoginPage() {
+		return getPages().currentPageAt(FacebookEMBLoginPage.class);
+	}
+
 
 	// ------------------------- Common methods
 
