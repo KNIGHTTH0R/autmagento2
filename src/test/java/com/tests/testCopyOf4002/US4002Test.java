@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
+import com.tools.calculation.CartBuy3Get1Calculation;
 import com.tools.calculation.CartCalculation;
 import com.tools.calculation.CartDiscountsCalculation;
 import com.tools.data.CalcDetailsModel;
@@ -95,9 +97,8 @@ public class US4002Test extends BaseTest {
 	private static List<BasicProductModel> productsListMarketing = new ArrayList<BasicProductModel>();
 	private static List<BasicProductModel> allProductsList = new ArrayList<BasicProductModel>();
 	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
-	private List<CartProductModel> productList25Buy3Get1Applied = new ArrayList<CartProductModel>();
-	private List<CartProductModel> productList50Buy3Get1Applied = new ArrayList<CartProductModel>();
-	private List<CartProductModel> productListMMBuy3Get1Applied = new ArrayList<CartProductModel>();
+	private List<BasicProductModel> productList25Buy3Get1Applied = new ArrayList<BasicProductModel>();
+	private List<BasicProductModel> productListMMBuy3Get1Applied = new ArrayList<BasicProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
 	private static ShippingModel shippingTotals = new ShippingModel();
 	private static UrlModel urlModel = new UrlModel();
@@ -116,6 +117,7 @@ public class US4002Test extends BaseTest {
 	private static String cardCVC;
 	private List<CartProductModel> cartProds = new ArrayList<CartProductModel>();
 	
+	private ProductDetailedModel genProduct0;
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3;
@@ -123,8 +125,11 @@ public class US4002Test extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
+		genProduct0 = CreateProduct.createProductModel();
+		genProduct0.setPrice("100");
+		CreateProduct.createApiProduct(genProduct0);
 		genProduct1 = CreateProduct.createProductModel();
-		genProduct1.setPrice("100");
+		genProduct1.setPrice("90");
 		CreateProduct.createApiProduct(genProduct1);
 		genProduct2.setName("THERESA BAG");
 		genProduct2.setSku("A010BK");
@@ -187,14 +192,18 @@ public class US4002Test extends BaseTest {
 		BasicProductModel productData;
 
 
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct0, "1", "0",Constants.DISCOUNT_50);
+		productsList50.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct0, "5", "0",Constants.DISCOUNT_25);
+		productsList25.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",Constants.DISCOUNT_50);
 		productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "6", "0",Constants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "5", "0",Constants.DISCOUNT_25);
 		productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "2", "0",Constants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "22", "0",Constants.DISCOUNT_25);
 		productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "3", "0",Constants.DISCOUNT_0);
-		productsListMarketing.add(productData);
+//		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "9", "0",Constants.DISCOUNT_0);
+//		productsListMarketing.add(productData);
 		
 		PrintUtils.printListBasicProductModel(productsList25);
 		PrintUtils.printListBasicProductModel(productsList50);
@@ -204,22 +213,36 @@ public class US4002Test extends BaseTest {
 		allProductsList.addAll(productsList50);
 		allProductsList.addAll(productsListMarketing);
 
-//		headerSteps.openCartPreview();
-//		headerSteps.goToCart();
-//
-//		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
-//
-//		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
-//
-//		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-//
-//		cartTotals = cartSteps.grabTotals();
-//
-//		cartProds.addAll(cartProductsWith50Discount);
-//		cartProds.addAll(cartProductsWith25Discount);
-//		cartProds.addAll(cartMarketingMaterialsProducts);
-//
-//		if (CartCalculation.isBuy3Get1Applicable(cartProductsWith25Discount)) {
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+
+		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
+
+		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
+
+		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+
+		cartTotals = cartSteps.grabTotals();
+
+		cartProds.addAll(cartProductsWith50Discount);
+		cartProds.addAll(cartProductsWith25Discount);
+		cartProds.addAll(cartMarketingMaterialsProducts);
+		
+		productList25Buy3Get1Applied = CartBuy3Get1Calculation.theRule(productsList25);
+		PrintUtils.printListBasicProductModel(productList25Buy3Get1Applied);
+//		BigDecimal noOf25SectionProductsAffectedByBuyGet1 = result25[0].setScale(0);
+//		BigDecimal remainder25SectionInBatch  = result25[1].setScale(0);
+//		
+//		BigDecimal[] resultMarketing = CartBuy3Get1Calculation.determineNoOfProductsBuy3Get1IsAppliedOnAndRemainder(productsListMarketing,remainder25SectionInBatch);
+//		BigDecimal noOfMarketingSectionProductsAffectedByBuyGet1 = resultMarketing[0].setScale(0);
+	
+//		productList25Buy3Get1Applied = CartBuy3Get1Calculation.applyBuyThreeGetOneRule(productsList25,noOf25SectionProductsAffectedByBuyGet1);
+//		PrintUtils.printListBasicProductModel(productList25Buy3Get1Applied);
+		
+//		productListMMBuy3Get1Applied = CartBuy3Get1Calculation.applyBuyThreeGetOneRule(productsListMarketing,noOfMarketingSectionProductsAffectedByBuyGet1);
+//		PrintUtils.printListBasicProductModel(productListMMBuy3Get1Applied);
+		
+//		if (CartBuy3Get1Calculation.isBuy3Get1Applicable(productsList25)) {
 //			productList25Buy3Get1Applied = CartCalculation.applyBuyThreeGetOneRule(cartProductsWith25Discount);
 //			allProductsListRecalculated.addAll(productList25Buy3Get1Applied);
 //		} else {
@@ -230,13 +253,9 @@ public class US4002Test extends BaseTest {
 //			allProductsListRecalculated.addAll(productListMMBuy3Get1Applied);
 //		} else {
 //			allProductsListRecalculated.addAll(cartMarketingMaterialsProducts);
-//		}
-//		if (CartCalculation.isBuy3Get1Applicable(cartProductsWith50Discount)) {
-//			productList50Buy3Get1Applied = CartCalculation.applyBuyThreeGetOneRule(cartProductsWith50Discount);
-//			allProductsListRecalculated.addAll(productList50Buy3Get1Applied);
-//		} else {
+//		}		
 //			allProductsListRecalculated.addAll(cartProductsWith50Discount);
-//		}
+		
 //
 //		total = CartCalculation.calculateCartProductsTotalsBuy3GetOneRuleApplied(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass);
 //		PrintUtils.printCalcDetailsModel(total);
