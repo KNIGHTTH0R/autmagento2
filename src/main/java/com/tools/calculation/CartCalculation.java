@@ -893,7 +893,7 @@ public class CartCalculation {
 		return result;
 	}
 
-	public ShippingModel calculateShippingTotals(CalcDetailsModel discountCalculationModel, String shippingValue) {
+	public static ShippingModel calculateShippingTotals(CalcDetailsModel discountCalculationModel, String shippingValue) {
 		ShippingModel result = new ShippingModel();
 
 		result.setSubTotal(discountCalculationModel.getSubTotal());
