@@ -1,8 +1,10 @@
 package com.workflows.frontend;
 
-import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Screenshots;
+import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
+import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 
@@ -14,19 +16,27 @@ public class ValidationWorkflows {
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
 	@Steps
 	public AddressWorkflows addressWorkflows;
+	@Steps
+	public CheckoutValidationSteps checkoutValidationSteps;
 	
 	public static String billingAddress;
+	public static String shippingAddress;
 	
 	
-	public void setBillingAddress(String address){
-		billingAddress = address;
+	public void setBillingShippingAddress(String addressB,String addressS){
+		billingAddress = addressB;
+		shippingAddress = addressS;
 	}
 	
 	/**
 	 * Note need to set billingAddress of this class. call setBillingAddress
 	 */
-	@Step
+	@StepGroup
+	@Screenshots(onlyOnFailures=true)
 	public void performCartValidations(){
+		
+		checkoutValidationSteps.verifySuccessMessage();
+		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 
@@ -64,7 +74,7 @@ public class ValidationWorkflows {
 		addressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
 		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
 		
-		addressWorkflows.setShippingAddressModels(billingAddress,DataGrabber.grabbedShippingAddress);
+		addressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
 		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
