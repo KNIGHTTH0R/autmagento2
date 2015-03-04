@@ -63,12 +63,12 @@ public class US3009Test extends BaseTest {
 	public CustomVerification customVerifications;
 	
 	private String username, password;
-	private String billingAddress;
-	private CreditCardModel creditCardData = new CreditCardModel();
+	private static String billingAddress;
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
 	private static String taxClass;
+	private CreditCardModel creditCardData = new CreditCardModel();
 	
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -122,7 +122,6 @@ public class US3009Test extends BaseTest {
 			}
 		}
 
-		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
 	}
@@ -159,7 +158,6 @@ public class US3009Test extends BaseTest {
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
 		cartSteps.grabTotals();
-
 		cartSteps.clickGoToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
