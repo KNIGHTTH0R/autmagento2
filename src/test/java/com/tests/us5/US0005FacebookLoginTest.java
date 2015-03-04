@@ -31,7 +31,6 @@ public class US0005FacebookLoginTest extends BaseTest{
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	
-	private String username,password;
 	private String fbUser,fbPass;
 	
 	@Before
@@ -44,8 +43,6 @@ public class US0005FacebookLoginTest extends BaseTest{
 
 			input = new FileInputStream(Constants.RESOURCES_PATH + Constants.US_05_FOLDER + File.separator + "us0005.properties");
 			prop.load(input);
-			username = prop.getProperty("username");
-			password = prop.getProperty("password");
 			fbUser = prop.getProperty("fbUser");
 			fbPass = prop.getProperty("fbPass");
 
