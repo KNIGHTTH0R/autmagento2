@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.Constants;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.datahandlers.DataGrabber;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -132,7 +133,7 @@ public class CartPage extends AbstractPage {
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
-
+		
 		return resultList;
 	}
 
@@ -160,7 +161,7 @@ public class CartPage extends AbstractPage {
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
-
+		
 		return resultList;
 	}
 
@@ -220,6 +221,8 @@ public class CartPage extends AbstractPage {
 			}
 
 		}
+		
+		DataGrabber.cartTotals = resultModel;
 
 		return resultModel;
 	}

@@ -1,4 +1,4 @@
-package com.workflows.frontend;
+package com.tools.datahandlers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,6 @@ public class CartCalculator {
 	public static List<BasicProductModel> allProductsListRecalculated = new ArrayList<BasicProductModel>();
 	
 	public static CalcDetailsModel calculatedTotalsDiscounts = new CalcDetailsModel();
-	
 	public static ShippingModel shippingCalculatedModel = new ShippingModel();
 	
 	public static void calculateJMDiscounts(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue){
