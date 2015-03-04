@@ -40,10 +40,8 @@ public class CartCalculator {
 		allProductsListRecalculated.addAll(calculatedProductsList25);
 		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
 		
-		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(CartCalculator.allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
+		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
 	
-		shippingCalculatedModel = CartCalculation.calculateShippingTotals(CartCalculator.calculatedTotalsDiscounts, shippingValue);
+		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 	}
-	
-	
 }

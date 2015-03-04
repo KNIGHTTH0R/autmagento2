@@ -122,7 +122,6 @@ public class US3009Test extends BaseTest {
 			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
 			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
-
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -154,6 +153,7 @@ public class US3009Test extends BaseTest {
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",Constants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
+		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -166,8 +166,6 @@ public class US3009Test extends BaseTest {
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
-		
-		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 		
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();

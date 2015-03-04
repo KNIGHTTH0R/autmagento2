@@ -1,6 +1,7 @@
 package com.workflows.frontend;
 
-import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Screenshots;
+import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import com.tools.datahandlers.CartCalculator;
@@ -25,7 +26,8 @@ public class ValidationWorkflows {
 	/**
 	 * Note need to set billingAddress of this class. call setBillingAddress
 	 */
-	@Step
+	@StepGroup
+	@Screenshots(onlyOnFailures=true)
 	public void performCartValidations(){
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
