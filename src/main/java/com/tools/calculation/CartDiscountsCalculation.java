@@ -24,7 +24,7 @@ public class CartDiscountsCalculation {
 		BigDecimal IP = BigDecimal.valueOf(Double.parseDouble(ip));
 		BigDecimal qty = BigDecimal.valueOf(Double.parseDouble(quantity));
 
-		return String.valueOf(IP.multiply(qty));
+		return String.valueOf(IP.multiply(qty).intValue());
 	}
 
 	public static String calculateFinalPrice(String askingPrice, String discount) {
@@ -41,7 +41,7 @@ public class CartDiscountsCalculation {
 		result = askPrice.subtract(discountValue);
 		System.out.println(result.setScale(4,BigDecimal.ROUND_HALF_UP));
 
-		return String.valueOf(result.setScale(2));
+		return String.valueOf(result.setScale(2,BigDecimal.ROUND_HALF_DOWN));
 	}
 	
 	public static List<BasicProductModel> calculateProductsforMarketingMaterial(List<BasicProductModel> productsList, String marketingDiscount) {
