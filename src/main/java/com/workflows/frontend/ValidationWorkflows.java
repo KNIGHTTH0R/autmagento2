@@ -20,10 +20,12 @@ public class ValidationWorkflows {
 	public CheckoutValidationSteps checkoutValidationSteps;
 	
 	public static String billingAddress;
+	public static String shippingAddress;
 	
 	
-	public void setBillingAddress(String address){
-		billingAddress = address;
+	public void setBillingShippingAddress(String addressB,String addressS){
+		billingAddress = addressB;
+		shippingAddress = addressS;
 	}
 	
 	/**
@@ -72,7 +74,7 @@ public class ValidationWorkflows {
 		addressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
 		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
 		
-		addressWorkflows.setShippingAddressModels(billingAddress,DataGrabber.grabbedShippingAddress);
+		addressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
 		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 

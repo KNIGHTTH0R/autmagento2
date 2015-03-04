@@ -182,7 +182,7 @@ public class US3009Test extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 		
-		validationWorkflows.setBillingAddress(billingAddress);
+		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		validationWorkflows.performCartValidations();
 		
 		customVerifications.printErrors();

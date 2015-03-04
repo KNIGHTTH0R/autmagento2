@@ -32,6 +32,7 @@ public class AddProductsWorkflow {
 		
 		return productSteps.setProductAddToCart(qty, productProperty);
 	}
+	
 	@StepGroup
 	public BasicProductModel setBasicProductToCart(ProductDetailedModel model,String qty, String productProperty,String discountclass){
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
@@ -44,9 +45,5 @@ public class AddProductsWorkflow {
 
 		return productSteps.setBasicProductAddToCart(qty, productProperty,askingPrice,finalPrice,ipPoints,discountclass);
 	}
-
-
-	
-	
 
 }
