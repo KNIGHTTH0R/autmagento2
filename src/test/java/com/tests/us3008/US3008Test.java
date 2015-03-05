@@ -77,6 +77,8 @@ public class US3008Test extends BaseTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		CartCalculator.wipe();
+		DataGrabber.wipe();
 		
 		genProduct1 = CreateProduct.createProductModel();		
 		genProduct1.setPrice("49.90");

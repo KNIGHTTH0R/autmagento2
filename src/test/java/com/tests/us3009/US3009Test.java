@@ -74,8 +74,11 @@ public class US3009Test extends BaseTest {
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
 	
+	
 	@Before
 	public void setUp() throws Exception {
+		CartCalculator.wipe();
+		DataGrabber.wipe();
 		
 		genProduct1 = CreateProduct.createProductModel();		
 		genProduct1.setPrice("49.90");

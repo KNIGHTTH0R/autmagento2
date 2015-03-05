@@ -25,6 +25,21 @@ public class CartCalculator {
 	public static CalcDetailsModel calculatedTotalsDiscounts = new CalcDetailsModel();
 	public static ShippingModel shippingCalculatedModel = new ShippingModel();
 	
+	public static void wipe(){
+		allProductsList = new ArrayList<BasicProductModel>();
+		productsList25 = new ArrayList<BasicProductModel>();
+		productsList50 = new ArrayList<BasicProductModel>();
+		productsListMarketing = new ArrayList<BasicProductModel>();
+		
+		calculatedProductsList25 = new ArrayList<BasicProductModel>();
+		calculatedProductsList50 = new ArrayList<BasicProductModel>();
+		calculatedProductsListMarketing = new ArrayList<BasicProductModel>();
+		allProductsListRecalculated = new ArrayList<BasicProductModel>();
+		
+		calculatedTotalsDiscounts = new CalcDetailsModel();
+		shippingCalculatedModel = new ShippingModel();
+	}
+	
 	public static void calculateJMDiscounts(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue){
 		allProductsList.addAll(productsList25);
 		allProductsList.addAll(productsList50);
