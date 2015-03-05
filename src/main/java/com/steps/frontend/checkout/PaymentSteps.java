@@ -1,6 +1,7 @@
 package com.steps.frontend.checkout;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.requirements.AbstractSteps;
@@ -15,6 +16,7 @@ public class PaymentSteps extends AbstractSteps{
 	}
 	
 	@Step
+	@Title("Fill credit card form")
 	public void fillCreditCardForm(CreditCardModel creditCardData){
 		creditCardFormPage().cardNumberInput(creditCardData.getCardNumber());
 		creditCardFormPage().cardHolderInput(creditCardData.getCardName());

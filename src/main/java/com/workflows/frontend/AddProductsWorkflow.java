@@ -2,6 +2,7 @@ package com.workflows.frontend;
 
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Title;
 
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
@@ -34,6 +35,7 @@ public class AddProductsWorkflow {
 	}
 	
 	@StepGroup
+	@Title("Add product to cart")
 	public BasicProductModel setBasicProductToCart(ProductDetailedModel model,String qty, String productProperty,String discountclass){
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
 		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(),qty);
