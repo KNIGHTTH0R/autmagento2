@@ -25,6 +25,7 @@ public class DataGrabber {
 	public static List<CartProductModel> cartProductsWith50DiscountDiscounted = new ArrayList<CartProductModel>();
 	public static List<CartProductModel> cartProductsWith25DiscountDiscounted = new ArrayList<CartProductModel>();
 	public static List<CartProductModel> cartMarketingMaterialsProductsDiscounted = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> cartProductsList25AndMm = new ArrayList<CartProductModel>();
 	public static CartTotalsModel cartTotals = new CartTotalsModel();
 
 	// Phase Three
@@ -47,6 +48,7 @@ public class DataGrabber {
 		cartProductsWith50Discount = new ArrayList<CartProductModel>();
 		cartProductsWith25Discount = new ArrayList<CartProductModel>();
 		cartMarketingMaterialsProducts = new ArrayList<CartProductModel>();
+		cartProductsList25AndMm = new ArrayList<CartProductModel>();
 
 		// Phase Two
 		cartProductsWith50DiscountDiscounted = new ArrayList<CartProductModel>();
@@ -65,4 +67,10 @@ public class DataGrabber {
 
 		confirmationTotals = new ShippingModel();
 	}
+	
+	public static void addAll25AndMmProducts(){
+		cartProductsList25AndMm.addAll(cartProductsWith25Discount);
+		cartProductsList25AndMm.addAll(cartMarketingMaterialsProducts);
+	}
+	
 }

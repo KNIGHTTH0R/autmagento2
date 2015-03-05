@@ -37,6 +37,7 @@ import com.tools.CustomVerification;
 import com.tools.calculation.CartBuy3Get1Calculation;
 import com.tools.calculation.CartCalculation;
 import com.tools.calculation.CartDiscountsCalculation;
+import com.tools.calculation.CartTotalsCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
@@ -54,6 +55,8 @@ import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.CartWorkflows;
+import com.workflows.frontend.CartWorkflows2;
+import com.workflows.frontend.ShippingAndConfirmationWorkflows;
 
 @WithTag(name = "US4002", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
@@ -64,6 +67,10 @@ public class US4002Test extends BaseTest {
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
+	@Steps
+	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
+	@Steps
+	public CartWorkflows2 cartWorkflows2;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -89,16 +96,15 @@ public class US4002Test extends BaseTest {
 
 	private String username, password;
 	private String billingAddress;
-	private BasicProductModel productBasicModel = new BasicProductModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static ShippingModel shippingCalculatedModel = new ShippingModel();
 	private static List<BasicProductModel> productsList25 = new ArrayList<BasicProductModel>();
 	private static List<BasicProductModel> productsList50 = new ArrayList<BasicProductModel>();
 	private static List<BasicProductModel> productsListMarketing = new ArrayList<BasicProductModel>();
 	private static List<BasicProductModel> allProductsList = new ArrayList<BasicProductModel>();
-	private static List<CartProductModel> allProductsListRecalculated = new ArrayList<CartProductModel>();
-	private List<BasicProductModel> productList25Buy3Get1Applied = new ArrayList<BasicProductModel>();
-	private List<BasicProductModel> productListMMBuy3Get1Applied = new ArrayList<BasicProductModel>();
+	private static List<BasicProductModel> productListForBuy3Get1 = new ArrayList<BasicProductModel>();
+	private static List<CartProductModel> productsList25AndMmGrabbed = new ArrayList<CartProductModel>();
+	private List<BasicProductModel> productList25AndMmWithBuy3Get1Applied = new ArrayList<BasicProductModel>();
 	private static ShippingModel confirmationTotals = new ShippingModel();
 	private static ShippingModel shippingTotals = new ShippingModel();
 	private static UrlModel urlModel = new UrlModel();
@@ -125,11 +131,8 @@ public class US4002Test extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		genProduct0 = CreateProduct.createProductModel();
-		genProduct0.setPrice("100");
-		CreateProduct.createApiProduct(genProduct0);
 		genProduct1 = CreateProduct.createProductModel();
-		genProduct1.setPrice("90");
+		genProduct1.setPrice("100");
 		CreateProduct.createApiProduct(genProduct1);
 		genProduct2.setName("THERESA BAG");
 		genProduct2.setSku("A010BK");
@@ -192,153 +195,107 @@ public class US4002Test extends BaseTest {
 		BasicProductModel productData;
 
 
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct0, "1", "0",Constants.DISCOUNT_50);
-		productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct0, "5", "0",Constants.DISCOUNT_25);
-		productsList25.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",Constants.DISCOUNT_50);
 		productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "5", "0",Constants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",Constants.DISCOUNT_25);
 		productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "22", "0",Constants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "2", "0",Constants.DISCOUNT_25);
 		productsList25.add(productData);
-//		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "9", "0",Constants.DISCOUNT_0);
-//		productsListMarketing.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "3", "0",Constants.DISCOUNT_0);
+		productsListMarketing.add(productData);
 		
-		PrintUtils.printListBasicProductModel(productsList25);
-		PrintUtils.printListBasicProductModel(productsList50);
-		PrintUtils.printListBasicProductModel(productsListMarketing);
-
-		allProductsList.addAll(productsList25);
-		allProductsList.addAll(productsList50);
-		allProductsList.addAll(productsListMarketing);
+		productListForBuy3Get1.addAll(productsList25);
+		productListForBuy3Get1.addAll(productsListMarketing);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
 		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
-
 		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
-
 		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+		
+		productsList25AndMmGrabbed.addAll(cartProductsWith25Discount);
+		productsList25AndMmGrabbed.addAll(cartMarketingMaterialsProducts);
 
 		cartTotals = cartSteps.grabTotals();
 
-		cartProds.addAll(cartProductsWith50Discount);
-		cartProds.addAll(cartProductsWith25Discount);
-		cartProds.addAll(cartMarketingMaterialsProducts);
+//		cartProds.addAll(cartProductsWith50Discount);
+//		cartProds.addAll(cartProductsWith25Discount);
+//		cartProds.addAll(cartMarketingMaterialsProducts);
 		
-		productList25Buy3Get1Applied = CartBuy3Get1Calculation.theRule(productsList25);
-		PrintUtils.printListBasicProductModel(productList25Buy3Get1Applied);
-//		BigDecimal noOf25SectionProductsAffectedByBuyGet1 = result25[0].setScale(0);
-//		BigDecimal remainder25SectionInBatch  = result25[1].setScale(0);
-//		
-//		BigDecimal[] resultMarketing = CartBuy3Get1Calculation.determineNoOfProductsBuy3Get1IsAppliedOnAndRemainder(productsListMarketing,remainder25SectionInBatch);
-//		BigDecimal noOfMarketingSectionProductsAffectedByBuyGet1 = resultMarketing[0].setScale(0);
-	
-//		productList25Buy3Get1Applied = CartBuy3Get1Calculation.applyBuyThreeGetOneRule(productsList25,noOf25SectionProductsAffectedByBuyGet1);
-//		PrintUtils.printListBasicProductModel(productList25Buy3Get1Applied);
+		productList25AndMmWithBuy3Get1Applied = CartBuy3Get1Calculation.applyBuy3Get1OnTheCart(productListForBuy3Get1);
+		PrintUtils.printListBasicProductModel(productList25AndMmWithBuy3Get1Applied);	
 		
-//		productListMMBuy3Get1Applied = CartBuy3Get1Calculation.applyBuyThreeGetOneRule(productsListMarketing,noOfMarketingSectionProductsAffectedByBuyGet1);
-//		PrintUtils.printListBasicProductModel(productListMMBuy3Get1Applied);
-		
-//		if (CartBuy3Get1Calculation.isBuy3Get1Applicable(productsList25)) {
-//			productList25Buy3Get1Applied = CartCalculation.applyBuyThreeGetOneRule(cartProductsWith25Discount);
-//			allProductsListRecalculated.addAll(productList25Buy3Get1Applied);
-//		} else {
-//			allProductsListRecalculated.addAll(cartProductsWith25Discount);
-//		}
-//		if (CartCalculation.isBuy3Get1Applicable(cartMarketingMaterialsProducts)) {
-//			productListMMBuy3Get1Applied = CartCalculation.applyBuyThreeGetOneRule(cartMarketingMaterialsProducts);
-//			allProductsListRecalculated.addAll(productListMMBuy3Get1Applied);
-//		} else {
-//			allProductsListRecalculated.addAll(cartMarketingMaterialsProducts);
-//		}		
-//			allProductsListRecalculated.addAll(cartProductsWith50Discount);
-		
-//
-//		total = CartCalculation.calculateCartProductsTotalsBuy3GetOneRuleApplied(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass);
-//		PrintUtils.printCalcDetailsModel(total);
-//
-//		cartSteps.clickGoToShipping();
-//
-//		shippingSteps.selectAddress(billingAddress);
-//		shippingSteps.setSameAsBilling(true);
-//
-//		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-//
-//		shippingTotals = shippingSteps.grabSurveyData();
-//
-//		shippingValue = Double.parseDouble(total.getTotalAmount()) >= 150 ? shippingValue : shippingValueForLessThan150;
-//
-//		shippingCalculatedModel = calculationSteps.calculateShippingTotals(total, shippingValue);
-//		PrintUtils.printShippingTotals(shippingCalculatedModel);
-//
-//		shippingSteps.clickGoToPaymentMethod();
-//
-//		String url = shippingSteps.grabUrl();
-//		urlModel.setName("Payment URL");
-//		urlModel.setUrl(url);
-//		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-//		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-//
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//
-//		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
-//		confirmationTotals = confirmationSteps.grabConfirmationTotals();
-//
-//		AddressModel grabbedBillingAddress = confirmationSteps.grabBillingData();
-//		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
-//
-//		 confirmationSteps.agreeAndCheckout();
-//		
-//		 checkoutValidationSteps.verifySuccessMessage();
-//
-//		cartWorkflows.setValidateProductsModels(productsList50, cartProductsWith50Discount);
-//		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
-//
-//		cartWorkflows.setValidateProductsModels(productsList25, cartProductsWith25Discount);
-//		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
-//
-//		cartWorkflows.setValidateProductsModels(productsListMarketing, cartMarketingMaterialsProducts);
-//		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
-//
-//		if (CartCalculation.isBuy3Get1Applicable(CartCalculation.getSublistFromList(cartProds, Constants.DISCOUNT_25))) {
-//			cartWorkflows.setRecalculatedCartProductsModels(CartCalculation.getSublistFromList(cartProds, Constants.DISCOUNT_25), productList25Buy3Get1Applied);
-//			cartWorkflows.validateRecalculatedProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION -RECALCULATED");
-//		}
-//		if (CartCalculation.isBuy3Get1Applicable(CartCalculation.getSublistFromList(cartProds, Constants.DISCOUNT_50))) {
-//			cartWorkflows.setRecalculatedCartProductsModels(CartCalculation.getSublistFromList(cartProds, Constants.DISCOUNT_50), productList50Buy3Get1Applied);
-//			cartWorkflows.validateRecalculatedProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION -RECALCULATED");
-//		}
-//		if (CartCalculation.isBuy3Get1Applicable(CartCalculation.getSublistFromList(cartProds, Constants.DISCOUNT_0))) {
-//			cartWorkflows.setRecalculatedCartProductsModels(CartCalculation.getSublistFromList(cartProds, Constants.DISCOUNT_0), productListMMBuy3Get1Applied);
-//			cartWorkflows.validateRecalculatedProducts("CART PHASE PRODUCTS VALIDATION FOR MM SECTION -RECALCULATED");
-//		}
-//		cartWorkflows.setValidateProductsModels(allProductsList, shippingProducts);
-//		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
-//
-//		cartWorkflows.setValidateProductsModels(allProductsList, confirmationProducts);
-//		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
-//
-//		cartWorkflows.setVerifyTotalsDiscount(cartTotals, total);
-//		cartWorkflows.verifyTotalsDiscountNoMarketing("CART TOTALS");
-//
-//		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
-//		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-//
-//		cartWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
-//		cartWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
-//
-//		cartWorkflows.setBillingAddressModels(billingAddress, grabbedBillingAddress);
-//		cartWorkflows.validateBillingAddress("BILLING ADDRESS");
-//
-//		cartWorkflows.setShippingAddressModels(billingAddress, grabbedShippingAddress);
-//		cartWorkflows.validateShippingAddress("SHIPPING ADDRESS");
-//		
-//		customVerifications.printErrors();
+		allProductsList.addAll(productsList50);
+		allProductsList.addAll(productList25AndMmWithBuy3Get1Applied);
 
+		total = CartTotalsCalculation.calculateCartProductsTotalsBuy3GetOneRuleApplied(allProductsList, jewelryDiscount, marketingDiscount, taxClass);
+		PrintUtils.printCalcDetailsModel(total);
+
+		cartSteps.clickGoToShipping();
+
+		shippingSteps.selectAddress(billingAddress);
+		shippingSteps.setSameAsBilling(true);
+
+		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
+
+		shippingTotals = shippingSteps.grabSurveyData();
+
+		shippingValue = Double.parseDouble(total.getTotalAmount()) >= 150 ? shippingValue : shippingValueForLessThan150;
+
+		shippingCalculatedModel = calculationSteps.calculateShippingTotals(total, shippingValue);
+		PrintUtils.printShippingTotals(shippingCalculatedModel);
+
+		shippingSteps.clickGoToPaymentMethod();
+
+		String url = shippingSteps.grabUrl();
+		urlModel.setName("Payment URL");
+		urlModel.setUrl(url);
+		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+
+		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		confirmationTotals = confirmationSteps.grabConfirmationTotals();
+
+		AddressModel grabbedBillingAddress = confirmationSteps.grabBillingData();
+		AddressModel grabbedShippingAddress = confirmationSteps.grabSippingData();
+
+		 confirmationSteps.agreeAndCheckout();
+		
+		 checkoutValidationSteps.verifySuccessMessage();
+		 
+		cartWorkflows2.setValidateProductsModels(productsList50, cartProductsWith50Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
+		
+		cartWorkflows2.setValidateProductsModels(productList25AndMmWithBuy3Get1Applied, productsList25AndMmGrabbed);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");		
+		
+		shippingAndConfirmationWorkflows.setValidateProductsModels(allProductsList, shippingProducts);
+		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+
+		shippingAndConfirmationWorkflows.setValidateProductsModels(allProductsList, confirmationProducts);
+		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows2.setVerifyTotalsDiscount(cartTotals, total);
+		cartWorkflows2.verifyTotalsDiscountNoMarketing("CART TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(shippingTotals, shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(confirmationTotals, shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
+		cartWorkflows.setBillingAddressModels(billingAddress, grabbedBillingAddress);
+		cartWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		cartWorkflows.setShippingAddressModels(billingAddress, grabbedShippingAddress);
+		cartWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+
+		
+		customVerifications.printErrors();
 	}
 
 	@After

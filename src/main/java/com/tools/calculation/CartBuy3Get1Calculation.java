@@ -1,6 +1,8 @@
 package com.tools.calculation;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,16 +38,29 @@ public class CartBuy3Get1Calculation {
 		return newList;
 	}
 
-	public static List<BasicProductModel> applyBuyThreeGetOneRule(List<BasicProductModel> productsList,BigDecimal noOfProdsAffected) {
 
+
+	public static List<BasicProductModel> applyBuy3Get1OnTheCart(List<BasicProductModel> productsList) {
+		
+		BigDecimal remainder = BigDecimal.ZERO;
+
+		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
+		
 		BigDecimal discount = BigDecimal.ZERO;
 		BigDecimal finalPrice = BigDecimal.ZERO;
 
-		BasicProductModel cheepest = getCheapestProduct(productsList);
-
-		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
-
-		for (BasicProductModel product : productsList) {
+		for (int i = 0; i < productsList.size(); i++) {
+			BasicProductModel nextproduct;
+			BasicProductModel product = productsList.get(i);
+			if (i != productsList.size() - 1) {
+				nextproduct = productsList.get(i + 1);
+			} else {
+				nextproduct = productsList.get(i);
+			}
+			BigDecimal[] result = CartBuy3Get1Calculation.determineHowManyTimesAProductsIsWithHalfPrice(product, remainder);
+			BigDecimal noOfDiscounts = result[0].setScale(0);
+			BigDecimal productRemainder = result[1].setScale(0);
+			remainder = productRemainder;
 
 			BasicProductModel newProduct = new BasicProductModel();
 
@@ -57,103 +72,74 @@ public class CartBuy3Get1Calculation {
 			newProduct.setProductsPrice(product.getProductsPrice());
 			newProduct.setFinalPrice(product.getFinalPrice());
 			newProduct.setPriceIP(product.getPriceIP());
-			
-			if (product.getProdCode().equals(cheepest.getProdCode())) {
-				discount = BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
-				discount = discount.multiply(noOfProdsAffected);
-				finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
-				finalPrice = finalPrice.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
-				finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).subtract(finalPrice);
-				finalPrice = finalPrice.subtract(discount);
 
-				newProduct.setFinalPrice(String.valueOf(finalPrice.setScale(2, BigDecimal.ROUND_HALF_UP)));
-
-			}
-			cartProducts.add(newProduct);
-		}
-
-		return cartProducts;
-	}
-	
-	public static List<BasicProductModel> theRule(List<BasicProductModel> productsList) {
-		
-		BigDecimal discount = BigDecimal.ZERO;
-		BigDecimal finalPrice = BigDecimal.ZERO;		
-		BigDecimal remainder = BigDecimal.ZERO;
-		
-		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
-		
-		for (BasicProductModel product : productsList) {
-			BigDecimal[] result = CartBuy3Get1Calculation.determineHowManyTimesAProductsIsWithHalfPrice(product,remainder);
-			BigDecimal noOfDiscounts = result[0].setScale(0);
-			BigDecimal productRemainder = result[1].setScale(0);
-			remainder = productRemainder;
-				
-			BasicProductModel newProduct = new BasicProductModel();
-			
-			newProduct.setDiscountClass(product.getDiscountClass());
-			newProduct.setName(product.getName());
-			newProduct.setUnitPrice(product.getUnitPrice());
-			newProduct.setProdCode(product.getProdCode());
-			newProduct.setQuantity(product.getQuantity());
-			newProduct.setProductsPrice(product.getProductsPrice());
-			newProduct.setFinalPrice(product.getFinalPrice());
-			newProduct.setPriceIP(product.getPriceIP());			
-			
-				discount = BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
-				discount = discount.multiply(noOfDiscounts);
-				finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
-				finalPrice = finalPrice.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
-				finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).subtract(finalPrice);
-				finalPrice = finalPrice.subtract(discount);
-				
-				newProduct.setFinalPrice(String.valueOf(finalPrice.setScale(2, BigDecimal.ROUND_HALF_UP)));
-				
-			
-			cartProducts.add(newProduct);
-		}
-		
-		return cartProducts;
-	}
-	public static List<BasicProductModel> theRule2(List<BasicProductModel> productsList) {
-		
-		BigDecimal discount = BigDecimal.ZERO;
-		BigDecimal finalPrice = BigDecimal.ZERO;		
-		BigDecimal remainder = BigDecimal.ZERO;
-		
-		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
-		
-		for (BasicProductModel product : productsList) {
-			BigDecimal[] result = CartBuy3Get1Calculation.determineHowManyTimesAProductsIsWithHalfPrice(product,remainder);
-			BigDecimal noOfDiscounts = result[0].setScale(0);
-			BigDecimal productRemainder = result[1].setScale(0);
-			remainder = productRemainder;
-			
-			BasicProductModel newProduct = new BasicProductModel();
-			
-			newProduct.setDiscountClass(product.getDiscountClass());
-			newProduct.setName(product.getName());
-			newProduct.setUnitPrice(product.getUnitPrice());
-			newProduct.setProdCode(product.getProdCode());
-			newProduct.setQuantity(product.getQuantity());
-			newProduct.setProductsPrice(product.getProductsPrice());
-			newProduct.setFinalPrice(product.getFinalPrice());
-			newProduct.setPriceIP(product.getPriceIP());			
-			
 			discount = BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
 			discount = discount.multiply(noOfDiscounts);
+
+			if (BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1
+					|| BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1) {
+				
+				if (productRemainder.intValue() == 1 && Integer.parseInt(nextproduct.getQuantity()) >= 2) {						
+					discount = discount.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP));
+					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(2)).intValue()));
+					remainder = BigDecimal.ZERO;
+				}
+				if (productRemainder.intValue() == 2 && Integer.parseInt(nextproduct.getQuantity()) >= 1) {						
+					discount = discount.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP));
+					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(1)).intValue()));
+					remainder = BigDecimal.ZERO;
+				}
+			}
 			finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
 			finalPrice = finalPrice.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
 			finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).subtract(finalPrice);
 			finalPrice = finalPrice.subtract(discount);
-			
 			newProduct.setFinalPrice(String.valueOf(finalPrice.setScale(2, BigDecimal.ROUND_HALF_UP)));
-			
-			
+
 			cartProducts.add(newProduct);
 		}
-		
 		return cartProducts;
+	}
+	public static BigDecimal calculateTotalBuy3Get1Discount(List<BasicProductModel> productsList) {
+		BigDecimal totalDiscount = BigDecimal.ZERO;
+	
+		BigDecimal remainder = BigDecimal.ZERO;	
+		
+		for (int i = 0; i < productsList.size(); i++) {
+			BigDecimal discount = BigDecimal.ZERO;
+			BasicProductModel nextproduct;
+			BasicProductModel product = productsList.get(i);
+			if (i != productsList.size() - 1) {
+				nextproduct = productsList.get(i + 1);
+			} else {
+				nextproduct = productsList.get(i);
+			}
+			BigDecimal[] result = CartBuy3Get1Calculation.determineHowManyTimesAProductsIsWithHalfPrice(product, remainder);
+			BigDecimal noOfDiscounts = result[0].setScale(0);
+			BigDecimal productRemainder = result[1].setScale(0);
+			remainder = productRemainder;
+			
+			discount = BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
+			discount = discount.multiply(noOfDiscounts);
+			
+			if (BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1
+					|| BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1) {
+				
+				if (productRemainder.intValue() == 1 && Integer.parseInt(nextproduct.getQuantity()) >= 2) {						
+					discount = discount.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP));
+					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(2)).intValue()));
+					remainder = BigDecimal.ZERO;
+				}
+				if (productRemainder.intValue() == 2 && Integer.parseInt(nextproduct.getQuantity()) >= 1) {						
+					discount = discount.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP));
+					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(1)).intValue()));
+					remainder = BigDecimal.ZERO;
+				}
+			}
+			totalDiscount = totalDiscount.add(discount);
+
+		}
+		return totalDiscount.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	/**

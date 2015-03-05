@@ -13,6 +13,8 @@ public class ValidationWorkflows {
 	@Steps
 	public CartWorkflows2 cartWorkflows2;
 	@Steps
+	public CartWorkflows cartWorkflows;
+	@Steps
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
 	@Steps
 	public AddressWorkflows addressWorkflows;
@@ -75,6 +77,39 @@ public class ValidationWorkflows {
 		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
 		
 		addressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
+		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
+	@StepGroup
+	@Screenshots(onlyOnFailures=true)
+	public void performCartValidationsBu3Get1Rule(){
+		
+//		checkoutValidationSteps.verifySuccessMessage();
+		
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
+
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productList25AndMmWithBuy3Get1Applied,DataGrabber.cartProductsList25AndMm);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.shippingProducts);
+		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.confirmationProducts);
+		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows2.setVerifyTotalsDiscount(DataGrabber.cartTotals, CartCalculator.calculatedTotalsDiscounts);
+		cartWorkflows2.verifyTotalsDiscount("CART TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
+		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
 		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
