@@ -1,4 +1,4 @@
-package com.pages.external;
+package com.pages.external.facebook;
 
 import net.thucydides.core.annotations.findby.FindBy;
 

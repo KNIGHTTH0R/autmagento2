@@ -15,6 +15,7 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
+import com.tools.Constants;
 import com.tools.SoapKeys;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
@@ -37,7 +38,7 @@ public class HttpSoapConnector {
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createProduct(product, sessID), SoapKeys.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createProduct(product, sessID), Constants.API_URI);
 
 		return soapResponse;
 	}
@@ -50,10 +51,10 @@ public class HttpSoapConnector {
 	 * @throws SOAPException
 	 * @throws IOException
 	 */
-	private static String performLogin() throws SOAPException, IOException {
+	protected static String performLogin() throws SOAPException, IOException {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(SoapKeys.LOGIN_USER, SoapKeys.LOGIN_PASS), SoapKeys.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Constants.LOGIN_USER_SOAP, Constants.LOGIN_PASS_SOAP), Constants.API_URI);
 		String result = "";
 
 		NodeList returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);
@@ -101,7 +102,7 @@ public class HttpSoapConnector {
 	 * @throws DOMException
 	 * @throws SOAPException
 	 */
-	private static SOAPMessage createSoapDefaultMessage() throws DOMException, SOAPException {
+	protected static SOAPMessage createSoapDefaultMessage() throws DOMException, SOAPException {
 		MessageFactory messageFactory = MessageFactory.newInstance();
 		SOAPMessage soapMessage = messageFactory.createMessage();
 

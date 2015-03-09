@@ -6,15 +6,6 @@ package com.tools;
 
 public class SoapKeys {
 	
-	public static final String LOGIN_USER = "stagingaut";
-	public static final String LOGIN_PASS = "stagingaut1";
-//	public static final String LOGIN_PASS = "YYz66iiaalop";
-	
-	
-//	public static final String API_URI = "http://staging-aut.pippajean.com/index.php/api/v2_soap?wsdl=1";
-//	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/";
-	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
-//	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
 
 	//General keys
 	public static final String URN_PREFIX = "urn";
@@ -93,7 +84,9 @@ public class SoapKeys {
 	public static final String RESULT = "result";
 	public static final String ADDITIONAL_ATTRIBUTES = "additional_attributes";
 
-
+	//delete customer
+	public static final String CUSTOMER_CUSTOMER_DELETE_REQUEST_PARAM = "customerCustomerDeleteRequestParam";
+	public static final String CUSTOMER_ID = "customerId";
 
 
 }

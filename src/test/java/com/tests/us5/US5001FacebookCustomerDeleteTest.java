@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import javax.xml.soap.SOAPException;
+
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -15,7 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.backend.BackEndSteps;
+import com.steps.external.FacebookRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.requirements.Application;
@@ -24,14 +27,16 @@ import com.tools.requirements.Application;
 @WithTag(name = "US0005", type = "frontend,external")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US0005FacebookLoginTest extends BaseTest{
-	
+public class US5001FacebookCustomerDeleteTest extends BaseTest{
 	
 	
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public BackEndSteps backEndSteps;
+	@Steps
+	public FacebookRegistrationSteps facebookRegistrationSteps;
 	
-	private String fbUser,fbPass;
+	private String fbUser;
+	private String beUser,bePass;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -44,7 +49,8 @@ public class US0005FacebookLoginTest extends BaseTest{
 			input = new FileInputStream(Constants.RESOURCES_PATH + Constants.US_05_FOLDER + File.separator + "us0005.properties");
 			prop.load(input);
 			fbUser = prop.getProperty("fbUser");
-			fbPass = prop.getProperty("fbPass");
+			beUser = prop.getProperty("beUser");
+			bePass = prop.getProperty("bePass");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -60,11 +66,11 @@ public class US0005FacebookLoginTest extends BaseTest{
 	}
 	
 	@Test
-	public void us3002CartSegmentationWithVatBillingTest() {
-		customerRegistrationSteps.goToFacebookLogin(fbUser, fbPass);
+	public void usS5001FacebookDeleteCustomerTest() throws SOAPException, IOException{
+		backEndSteps.performAdminLogin(beUser, bePass);
+		backEndSteps.clickOnCustomers();
+		backEndSteps.searchForEmail(fbUser);
+		backEndSteps.openCustomerDetails(fbUser);
+		backEndSteps.deleteCustomer();
 	}
-	
-	
-	
-	
 }

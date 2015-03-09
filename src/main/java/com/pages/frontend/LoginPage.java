@@ -34,7 +34,7 @@ public class LoginPage extends AbstractPage {
 		element(loginButton).waitUntilVisible();
 		loginButton.click();
 	}
-
+	
 	public void clickOnFacebookSignIn() {
 		element(facebookLoginButton).waitUntilVisible();
 		facebookLoginButton.click();
