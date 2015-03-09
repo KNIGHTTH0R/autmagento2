@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -26,7 +24,6 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.EmailConstants;
-import com.tools.data.backend.OrderModel;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.requirements.Application;
 
@@ -48,7 +45,6 @@ public class US5001ValidateEmailTest extends BaseTest {
 
 	private String fbUser, pippaPass;
 	private String emailUser, emailPass, genName;
-	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
 
 	@Before
 	public void setUp() throws Exception {
