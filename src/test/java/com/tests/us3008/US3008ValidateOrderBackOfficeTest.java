@@ -31,12 +31,14 @@ import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
+import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
 
 @WithTag(name = "US3008", type = "backend")
@@ -51,11 +53,13 @@ public class US3008ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps
 	public OrderValidationSteps orderValidationSteps;
 	@Steps
+	public OrderProductsWorkflows orderProductsWorkflows;
+	@Steps
 	public OrderWorkflows orderWorkflows;
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
 	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
@@ -90,7 +94,7 @@ public class US3008ValidateOrderBackOfficeTest extends BaseTest {
 		}
 
 		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3008Test" + Constants.GRAB);
-		productsList = MongoReader.grabProductBasicModel("US3008Test" + Constants.GRAB);
+		productsList = MongoReader.grabBasicProductModel("US3008Test" + Constants.GRAB);
 		shippingModelList = MongoReader.grabShippingModel("US3008Test" + Constants.CALC);
 		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3008Test" + Constants.CALC);
 
@@ -151,8 +155,8 @@ public class US3008ValidateOrderBackOfficeTest extends BaseTest {
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");
 
-		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
-		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
+		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
+		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
 		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
 		

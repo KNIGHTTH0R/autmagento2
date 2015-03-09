@@ -37,7 +37,7 @@ public class OrderProductsWorkflows {
 			PrintUtils.printProductsComparisonBackend(productNow, compare);
 			if (compare.getProductName() != null && (productNow.getQuantity().contentEquals(compare.getNumber()))) {
 				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
-				orderValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getPrice());
+				orderValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getOriginalPrice());
 				orderValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
 				
 			} else {
