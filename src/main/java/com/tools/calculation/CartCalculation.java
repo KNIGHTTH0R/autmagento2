@@ -8,6 +8,7 @@ import java.util.List;
 import com.tools.Constants;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
@@ -930,6 +931,22 @@ public class CartCalculation {
 			now.setType(productBasicModel.getType());
 			now.setPrice(apply119VAT(BigDecimal.valueOf(Double.parseDouble(productBasicModel.getPrice())), 2, BigDecimal.ROUND_HALF_DOWN).toString());
 
+			result.add(now);
+		}
+		return result;
+	}
+	public static List<BasicProductModel> remove19(List<BasicProductModel> productsList) {
+		
+		List<BasicProductModel> result = new ArrayList<BasicProductModel>();
+		
+		for (BasicProductModel productBasicModel : productsList) {
+			BasicProductModel now = new BasicProductModel();
+			
+			now.setName(productBasicModel.getName());
+			now.setQuantity(productBasicModel.getQuantity());
+			now.setProdCode(productBasicModel.getProdCode());
+			now.setUnitPrice(apply119VAT(BigDecimal.valueOf(Double.parseDouble(productBasicModel.getUnitPrice())), 2, BigDecimal.ROUND_HALF_DOWN).toString());
+			
 			result.add(now);
 		}
 		return result;

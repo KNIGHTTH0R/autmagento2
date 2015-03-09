@@ -100,6 +100,8 @@ public class US4001Test extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
+		CartCalculator.wipe();
+		DataGrabber.wipe();
 
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("100");

@@ -35,6 +35,45 @@ public class ValidationWorkflows {
 	 */
 	@StepGroup
 	@Screenshots(onlyOnFailures=true)
+	public void performCartValidations119Vat(){
+		
+		checkoutValidationSteps.verifySuccessMessage();	
+		
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
+		
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketing, DataGrabber.cartMarketingMaterialsProducts);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+		
+		cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsList25, DataGrabber.cartProductsWith25DiscountDiscounted);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION -RECALCULATED");
+		
+		cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsListMarketing, DataGrabber.cartMarketingMaterialsProductsDiscounted);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION -RECALCULATED");
+		
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.shippingProductsList, DataGrabber.shippingProducts);
+		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+		
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.shippingProductsList, DataGrabber.confirmationProducts);
+		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");		
+		
+		cartWorkflows2.setVerifyTotalsDiscount(DataGrabber.cartTotals, CartCalculator.calculatedTotalsDiscounts);
+		cartWorkflows2.verifyTotalsDiscount("CART TOTALS");
+		
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		addressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
+		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		
+		addressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
+		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
+	@StepGroup
+	@Screenshots(onlyOnFailures=true)
 	public void performCartValidations(){
 		
 		checkoutValidationSteps.verifySuccessMessage();
@@ -83,7 +122,7 @@ public class ValidationWorkflows {
 	@Screenshots(onlyOnFailures=true)
 	public void performCartValidationsBu3Get1Rule(){
 		
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");

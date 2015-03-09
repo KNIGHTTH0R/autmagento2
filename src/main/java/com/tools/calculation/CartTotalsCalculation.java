@@ -29,7 +29,7 @@ public class CartTotalsCalculation {
 			rabatt25 = calculate25Discount(productsList, BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), sum25);
 			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())));
 		}
-
+		
 		totalAmount = calculateTotalAmount(subtotal, BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50,
 				rabatt25, rabattBuy3Get1);
 
@@ -69,10 +69,11 @@ public class CartTotalsCalculation {
 		for (BasicProductModel cartProductModel : productsList) {
 			if (cartProductModel.getDiscountClass().contains(Constants.DISCOUNT_25)) {
 				discountSum = discountSum.add(calculate25DiscountForEachProduct(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getProductsPrice())), jewelryDiscount,
-						sum25Section));
+						sum25Section));	
 			}
 
 		}
+
 		return discountSum;
 
 	}
@@ -95,7 +96,7 @@ public class CartTotalsCalculation {
 	private static BigDecimal calculate25DiscountForEachProduct(BigDecimal askingPrice, BigDecimal jB, BigDecimal sum25Section) {
 
 		BigDecimal result = BigDecimal.ZERO;
-		if (askingPrice.compareTo(jB) < 0) {
+		if (sum25Section.compareTo(jB) < 0) {
 			result = BigDecimal.ZERO;
 		} else {
 

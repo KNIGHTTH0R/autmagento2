@@ -10,6 +10,7 @@ import com.tools.calculation.CartTotalsCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.utils.PrintUtils;
 
 public class CartCalculator {
 	
@@ -24,6 +25,7 @@ public class CartCalculator {
 	public static List<BasicProductModel> calculatedProductsList50 = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> calculatedProductsListMarketing = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> allProductsListRecalculated = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> shippingProductsList = new ArrayList<BasicProductModel>();
 	
 	public static CalcDetailsModel calculatedTotalsDiscounts = new CalcDetailsModel();
 	public static ShippingModel shippingCalculatedModel = new ShippingModel();
@@ -47,6 +49,17 @@ public class CartCalculator {
 		
 	}
 	
+	public static void calculateShippingWith19PercentRemoved(String shippingValue){
+		
+		shippingCalculatedModel = CartCalculation.remove119VAT(calculatedTotalsDiscounts, shippingValue);
+		System.out.println("#####################");
+		PrintUtils.printShippingTotals(shippingCalculatedModel);
+		System.out.println("#####################");
+		shippingProductsList = CartCalculation.remove19(allProductsList);
+		PrintUtils.printListBasicProductModel(shippingProductsList);
+		System.out.println("#####################");
+	
+	}
 	public static void calculateJMDiscounts(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue){
 		allProductsList.addAll(productsList25);
 		allProductsList.addAll(productsList50);
@@ -61,6 +74,8 @@ public class CartCalculator {
 		allProductsListRecalculated.addAll(calculatedProductsList50);
 		allProductsListRecalculated.addAll(calculatedProductsList25);
 		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
+		
+		PrintUtils.printListBasicProductModel(allProductsListRecalculated);
 		
 		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass);
 	
