@@ -11,6 +11,16 @@ import java.io.File;
  */
 public class Constants {
 
+//	public static final String BASE_URL_BE = "http://staging.pippajean.com/index.php/admin/";
+//	public static final String BASE_URL_FE = "http://staging.pippajean.com/customer/account/create/";
+//	public static final String BASE_URL = "https://staging.pippajean.com/customer/account/login/";
+//	public static final String BASE_URL_AUT = "https://staging.pippajean.com/customer/account/login/";
+//	public static final String URL_CART_SUCCESS = "https://staging.pippajean.com/simona/simplecheckout/process/success/";
+//	public static final String PROFILE_HISTORY_URL = "https://staging.pippajean.com/simona/sales/order/history/";
+//	public static final String CART_PAGE_URL = "http://staging.pippajean.com/simona/checkout/cart/";
+//	public static final String BE_URL_RULE_BUY3GET1 = "https://staging.pippajean.com/index.php/admin/promo_quote/edit/id/5466/key/";
+	
+	
 	public static final String BASE_URL_BE = "http://pippajean:sn0wMob1l!@staging-aut.pippajean.com/index.php/admin/";
 	public static final String BASE_URL_FE = "http://pippajean:sn0wMob1l!@staging-aut.pippajean.com/customer/account/create/";
 	public static final String BASE_URL = "https://staging-aut.pippajean.com/customer/account/login/";
@@ -20,26 +30,10 @@ public class Constants {
 	public static final String CART_PAGE_URL = "http://staging-aut.pippajean.com/simona/checkout/cart/";
 	public static final String BE_URL_RULE_BUY3GET1 = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5466/key/";
 
-	// public static final String BASE_URL_BE =
-	// "http://staging.pippajean.com/index.php/admin/";
-	// public static final String BASE_URL_FE =
-	// "http://pippajean:sn0wMob1l!@staging.pippajean.com/customer/account/create/";
-	// public static final String BASE_URL =
-	// "https://staging.pippajean.com/customer/account/login/";
-	// public static final String BASE_URL_AUT =
-	// "https://staging.pippajean.com/customer/account/login/";
-	// public static final String URL_CART_SUCCESS =
-	// "https://staging.pippajean.com/simona/simplecheckout/process/success/";
-	// public static final String PROFILE_HISTORY_URL =
-	// "https://staging.pippajean.com/simona/sales/order/history/";
-	// public static final String CART_PAGE_URL =
-	// "http://staging.pippajean.com/simona/checkout/cart/";
-	// public static final String BE_URL_RULE_BUY3GET1 =
-	// "https://staging.pippajean.com/index.php/admin/promo_quote/edit/id/5466/key/";
-
+	
 	// SOAP user authentication
-	public static final String LOGIN_USER = "stagingaut";
-	public static final String LOGIN_PASS = "stagingaut1";
+	public static final String LOGIN_USER_SOAP = "stagingaut";
+	public static final String LOGIN_PASS_SOAP = "stagingaut1";
 	// public static final String LOGIN_PASS = "YYz66iiaalop";
 
 	// SOAP URIs
@@ -47,7 +41,7 @@ public class Constants {
 	// "http://staging-aut.pippajean.com/index.php/api/v2_soap?wsdl=1";
 	// public static final String API_URI =
 	// "https://staging-aut.pippajean.com/index.php/api/v2_soap/";
-	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
+	public static final String API_URI = "https://staging.pippajean.com/index.php/api/v2_soap/index/";
 	// public static final String API_URI =
 	// "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
 
@@ -55,8 +49,8 @@ public class Constants {
 
 	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator;
 	public static final String BE_USER = "admin";
-	public static final String BE_PASS = "admin123";
-	// public static final String BE_PASS = "admin1234";
+//	public static final String BE_PASS = "admin123";
+	 public static final String BE_PASS = "admin1234";
 	public static final String BE_STYLIST = "simona.popa@evozon.com";
 	public static final String WEB_MAIL = "mailinator.com";
 

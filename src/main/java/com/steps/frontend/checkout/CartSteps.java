@@ -57,10 +57,10 @@ public class CartSteps extends  AbstractSteps{
 	
 	/**
 	 * Grab Cart Totals section from the Cart Page
+	 * Note sets -> DataGrabber.cartTotals;
 	 * @return
 	 */
 	public CartTotalsModel grabTotals() {	
-		
 		return cartPage().grabTotals();
 	}
 	

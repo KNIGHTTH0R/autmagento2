@@ -13,6 +13,7 @@ import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.ProductBasicModel;
@@ -99,6 +100,22 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.PRICE, product.getPrice());
 		document.put(MongoTableKeys.QUANTITY, product.getQuantity());
 
+		table.insert(document);
+	}
+	public static void saveBasicProductModel(BasicProductModel product, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.BASIC_PRODUCT_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.BASIC_PRODUCT_MODEL, product.getName());
+		document.put(MongoTableKeys.PRODUCT_CODE, product.getProdCode());
+		document.put(MongoTableKeys.PRODUCT_PRICE, product.getUnitPrice());
+		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getQuantity());
+		document.put(MongoTableKeys.PRODUCT_DISCOUNT_CLASS, product.getDiscountClass());
+		document.put(MongoTableKeys.PRODUCT_ASKING_PRICE, product.getProductsPrice());
+		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
+		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getPriceIP());
+		
 		table.insert(document);
 	}
 

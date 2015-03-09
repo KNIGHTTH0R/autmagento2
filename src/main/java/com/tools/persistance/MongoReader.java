@@ -14,6 +14,7 @@ import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.ProductBasicModel;
@@ -196,6 +197,37 @@ public class MongoReader extends MongoConnector {
 				result.setPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRICE));
 				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.QUANTITY));
 
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+	public static List<BasicProductModel> grabBasicProductModel(String testName) {
+		DBObject dbObject = null;
+		List<BasicProductModel> itemList = new ArrayList<BasicProductModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.BASIC_PRODUCT_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				BasicProductModel result = new BasicProductModel();
+				dbObject = cursor.next();
+				
+				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
+				result.setProdCode(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
+				result.setUnitPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
+				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_QUANTITY));
+				result.setProductsPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_ASKING_PRICE));
+				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
+				result.setPriceIP(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
+				result.setDiscountClass(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_CLASS));
+				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.QUANTITY));
+				
 				itemList.add(result);
 			}
 		} catch (Exception e) {

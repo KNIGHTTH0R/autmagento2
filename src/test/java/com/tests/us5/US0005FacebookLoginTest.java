@@ -35,6 +35,7 @@ public class US0005FacebookLoginTest extends BaseTest{
 	
 //	private String beUser,bePass;
 	private String fbUser, fbPass;
+	private String zipCode,countryCode, pippaPass;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -48,8 +49,9 @@ public class US0005FacebookLoginTest extends BaseTest{
 			prop.load(input);
 			fbUser = prop.getProperty("fbUser");
 			fbPass = prop.getProperty("fbPass");
-//			beUser = prop.getProperty("beUser");
-//			bePass = prop.getProperty("bePass");
+			zipCode = prop.getProperty("zipCode");
+			countryCode = prop.getProperty("countryCode");
+			pippaPass = prop.getProperty("pippaPass");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -68,11 +70,6 @@ public class US0005FacebookLoginTest extends BaseTest{
 	public void usS0005FacebookLoginTest() {
 		facebookRegistrationSteps.goToFacebookLogin(fbUser, fbPass);
 //		facebookRegistrationSteps.confirmAccessRequest();
-		facebookRegistrationSteps.fillFacebookRegistration("123", "DE", "morcovIz1Good");
+		facebookRegistrationSteps.fillFacebookRegistration(zipCode, countryCode, pippaPass);
 	}
-	
-	
-	
-	
-	
 }

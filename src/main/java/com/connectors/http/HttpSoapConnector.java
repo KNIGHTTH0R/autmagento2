@@ -54,7 +54,7 @@ public class HttpSoapConnector {
 	protected static String performLogin() throws SOAPException, IOException {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Constants.LOGIN_USER, Constants.LOGIN_PASS), Constants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Constants.LOGIN_USER_SOAP, Constants.LOGIN_PASS_SOAP), Constants.API_URI);
 		String result = "";
 
 		NodeList returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);

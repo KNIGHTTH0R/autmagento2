@@ -194,6 +194,7 @@ public class CartWorkflows {
 		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
 
 	}
+	
 	@StepGroup
 	public void verifyTotalsDiscountNoMarketing(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());

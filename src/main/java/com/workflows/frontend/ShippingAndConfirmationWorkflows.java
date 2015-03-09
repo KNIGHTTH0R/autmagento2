@@ -4,34 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import org.junit.Assert;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.CustomVerification;
-import com.tools.data.CalcDetailsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ShippingModel;
 
-
-public class CartWorkflows2 {
-
+public class ShippingAndConfirmationWorkflows {
+	
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
 	
 
 	@Steps 
 	public static CustomVerification customVerification;
-
+	
 	private static List<BasicProductModel> basicProductsList = new ArrayList<BasicProductModel>();
 	private static List<CartProductModel> cartProductsList = new ArrayList<CartProductModel>();
 	
 	public void setValidateProductsModels(List<BasicProductModel> basicProductsList, List<CartProductModel> cartProductsList) {
-		CartWorkflows2.basicProductsList = basicProductsList;
-		CartWorkflows2.cartProductsList = cartProductsList;
+		ShippingAndConfirmationWorkflows.basicProductsList = basicProductsList;
+		ShippingAndConfirmationWorkflows.cartProductsList = cartProductsList;
 	}
 	
 	@Step
@@ -46,8 +43,7 @@ public class CartWorkflows2 {
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
 				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
-				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());
-				checkoutValidationSteps.validateMatchIpPoints(productNow.getPriceIP(), compare.getPriceIP());
+				
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
@@ -75,55 +71,29 @@ public class CartWorkflows2 {
 		return result;
 	}
 	
-	private CartTotalsModel discountTotals = new CartTotalsModel();
-	private CalcDetailsModel discountCalculationModel = new CalcDetailsModel();
+	private ShippingModel shippingGrabbedModel = new ShippingModel();;
+	private ShippingModel shippingCalculatedModel = new ShippingModel();
 
-	public void setVerifyTotalsDiscount(CartTotalsModel discountTotals, CalcDetailsModel discountCalculationModel) {
-		this.discountCalculationModel = discountCalculationModel;
-		this.discountTotals = discountTotals;
-
-	}
-
-	@StepGroup
-	public void verifyTotalsDiscount(String message) {
-		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
-		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
-		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());
-		verifyMarketingBonus(discountTotals.getMarketingBonus(), discountCalculationModel.getMarketingBonus());
-		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
-
-	}
-	
-	@StepGroup
-	public void verifyTotalsDiscountNoMarketing(String message) {
-		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
-		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
-		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());		
-		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
-		
+	public void setVerifyShippingTotals(ShippingModel shippingTotals, ShippingModel shippingCalculatedModel) {
+		this.shippingCalculatedModel = shippingCalculatedModel;
+		this.shippingGrabbedModel = shippingTotals;
 	}
 	
 	@Step
-	public void verifyIP(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: IP points dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	public void verifyShippingTotals(String string) {
+		verifyTotalAmount(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
+		verifyShippingPrice(shippingGrabbedModel.getShippingPrice(), shippingCalculatedModel.getShippingPrice());
+		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
+		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
 	}
+	
+
 
 	@Step
 	public void verifyTotalAmount(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Total Amount dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
-	@Step
-	public void verifyTax(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: TAX dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-	}
-
-	@Step
-	public void verifyJewelryBonus(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Jewelry Bonus dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-	}
 
 	@Step
 	public void verifySubTotals(String productNow, String compare) {
@@ -131,11 +101,6 @@ public class CartWorkflows2 {
 
 	}
 
-	@Step
-	public void verifyMarketingBonus(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Marketing Bonus dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
-	}
 
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
@@ -148,7 +113,5 @@ public class CartWorkflows2 {
 		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
-	
-
 
 }

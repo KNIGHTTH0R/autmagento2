@@ -1,5 +1,7 @@
 package com.steps.frontend;
 
+import java.util.Set;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
@@ -146,5 +148,37 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	public void verifyText() {
 		registrationMessagePage().verifyText();
+	}
+
+	@StepGroup
+	public void goToFacebookLogin(String user, String pass) {
+		clickOnFacebookLogin();
+//		waitABit(2000);
+		Set<String> windowsList = getDriver().getWindowHandles();
+		for (String string : windowsList) {
+			getDriver().switchTo().window(string);
+//			System.out.println("string: " + string);
+//			System.out.println("HEre: " + getDriver().getTitle());
+			if(getDriver().getTitle().trim().contains("Facebook")){
+				performFacebookLogin(user, pass);
+			}
+//			waitABit(2000);
+		}
+		
+		getDriver().switchTo().defaultContent();
+	}
+	
+	
+	
+	@Step
+	public void clickOnFacebookLogin(){
+		loginPage().clickOnFacebookSignIn();
+	}
+	
+	@Step
+	public void performFacebookLogin(String user, String pass){
+		facebookEMBLoginPage().inputUser(user);
+		facebookEMBLoginPage().inputPass(pass);
+		facebookEMBLoginPage().clickLogin();
 	}
 }

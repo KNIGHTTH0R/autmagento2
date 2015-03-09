@@ -12,6 +12,7 @@ import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.datahandlers.DataGrabber;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
@@ -99,7 +100,7 @@ public class ConfirmationPage extends AbstractPage {
 		AddressModel result = new AddressModel();
 		element(billingContainer).waitUntilVisible();
 		result = grabAddressData(billingContainer);
-
+		DataGrabber.grabbedBillingAddress = result;
 		return result;
 	}
 
@@ -107,7 +108,7 @@ public class ConfirmationPage extends AbstractPage {
 		AddressModel result = new AddressModel();
 		element(shippingContainer).waitUntilVisible();
 		result = grabAddressData(shippingContainer);
-
+		DataGrabber.grabbedShippingAddress = result;
 		return result;
 	}
 
@@ -143,6 +144,7 @@ public class ConfirmationPage extends AbstractPage {
 		result.setShippingPrice(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
 		result.setTotalAmount(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
 
+		DataGrabber.confirmationTotals = result;
 		return result;
 	}
 
@@ -175,6 +177,7 @@ public class ConfirmationPage extends AbstractPage {
 			resultList.add(productNow);
 		}
 
+		DataGrabber.confirmationProducts = resultList;
 		return resultList;
 	}
 

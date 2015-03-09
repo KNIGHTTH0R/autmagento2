@@ -1,6 +1,7 @@
 package com.tools;
 
 import jxl.common.Assert;
+import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.pages.PageObject;
 import net.thucydides.core.pages.Pages;
@@ -33,6 +34,7 @@ public class CustomVerification extends AbstractSteps{
 	}
 	
 	@Step
+	@Screenshots(onlyOnFailures=true)
 	public void printErrors(){
 		verifyNoErrors(verificationMessages.toString());
 	}

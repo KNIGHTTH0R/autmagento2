@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.datahandlers.DataGrabber;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
@@ -41,6 +42,7 @@ public class SurveyPage extends AbstractPage {
 		result.setShippingPrice(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
 		result.setTotalAmount(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
 
+		DataGrabber.shippingTotals = result;
 		return result;
 	}
 
@@ -74,6 +76,8 @@ public class SurveyPage extends AbstractPage {
 
 			PrintUtils.printCartProductModel(productNow);
 		}
+		
+		DataGrabber.shippingProducts = resultList;
 
 		return resultList;
 	}
