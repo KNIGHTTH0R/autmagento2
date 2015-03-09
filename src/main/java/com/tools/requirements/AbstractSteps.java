@@ -1,5 +1,7 @@
 package com.tools.requirements;
 
+import java.util.Set;
+
 import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
@@ -15,6 +17,8 @@ import com.pages.backend.orders.details.OrderItemsPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
 import com.pages.backend.promotion.ShoppingCartPriceRulesPage;
 import com.pages.external.MailinatorPage;
+import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
+import com.pages.external.facebook.FacebookEMBLoginPage;
 import com.pages.frontend.CreateCustomerPage;
 import com.pages.frontend.HeaderPage;
 import com.pages.frontend.LoginPage;
@@ -31,6 +35,7 @@ import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
 import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
+import com.pages.frontend.registration.FacebookRegistrationFormPage;
 import com.tools.Constants;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -62,6 +67,16 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().get(modiURL);
 		waitABit(Constants.TIME_CONSTANT);
 		getDriver().get(initURL);
+	}
+	
+	public void findFrame(String frameName){
+		Set<String> windowsList = getDriver().getWindowHandles();
+		for (String string : windowsList) {
+			getDriver().switchTo().window(string);
+			if(getDriver().getTitle().trim().contains(frameName)){
+				break;
+			}
+		}
 	}
 
 	public AbstractPage abstractPage() {
@@ -178,11 +193,24 @@ public class AbstractSteps extends ScenarioSteps {
 	public ProfileHistoryPage profileHistoryPage() {
 		return getPages().currentPageAt(ProfileHistoryPage.class);
 	}
+	
+	public FacebookRegistrationFormPage facebookRegistrationFormPage() {
+		return getPages().currentPageAt(FacebookRegistrationFormPage.class);
+	}
 
 	// -----------------------Email-----------------------------------
 
 	public MailinatorPage mailinatorPage() {
 		return getPages().currentPageAt(MailinatorPage.class);
+	}
+	
+	// External facebook
+	public FacebookEMBLoginPage facebookEMBLoginPage() {
+		return getPages().currentPageAt(FacebookEMBLoginPage.class);
+	}
+	
+	public FacebookEMBLoginConfirmPage facebookEMBLoginConfirmPage() {
+		return getPages().currentPageAt(FacebookEMBLoginConfirmPage.class);
 	}
 
 	// ------------------------- Common methods

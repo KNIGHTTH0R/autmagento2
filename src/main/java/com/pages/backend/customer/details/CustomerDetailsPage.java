@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import com.tools.Constants;
 import com.tools.requirements.AbstractPage;
 
 public class CustomerDetailsPage extends AbstractPage {
@@ -37,6 +38,30 @@ public class CustomerDetailsPage extends AbstractPage {
 		}
 
 		return status;
+	}
+
+	/**
+	 * Grab customer id from url.
+	 */
+	public String grabCustomerId() {
+		String url = getDriver().getCurrentUrl();
+		String userId[] = url.split("/");
+		return userId[8];
+	}
+	
+	public void deleteCustomer(){
+		List<WebElement> deleteButtons = getDriver().findElements(By.cssSelector("div.main-col div.main-col-inner button.delete"));
+		
+		
+		for (WebElement buttonNow : deleteButtons) {
+			buttonNow.click();
+			waitABit(Constants.TIME_CONSTANT);
+			String alertText = getDriver().switchTo().alert().getText();
+			getDriver().switchTo().alert().accept();
+			if(alertText.contains("Vorgang")){
+				break;
+			}
+		}
 	}
 
 }

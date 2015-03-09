@@ -68,5 +68,11 @@ public class BackEndSteps extends AbstractSteps {
 	public String extractEmailConfirmationStatus() {
 		return customerDetailsHomePage().extractEmailConfirmationStatus();
 	}
+	
+	
+	@Step
+	public void deleteCustomer() {
+		customerDetailsHomePage().deleteCustomer();
+	}
 
 }
