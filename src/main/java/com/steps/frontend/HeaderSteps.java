@@ -1,6 +1,7 @@
 package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.Constants;
 import com.tools.requirements.AbstractSteps;
@@ -36,6 +37,15 @@ public class HeaderSteps extends AbstractSteps {
 	
 	public void redirectToCartPage() {
 		getDriver().get(Constants.CART_PAGE_URL);
+	}
+	@StepGroup
+	public void navigateToRegisterform(){
+		getDriver().get(Constants.BASE_FE_URL);
+		headerPage().clickAnmeldenButton();
+		loginPage().clickOnStylistRegistrationLink();
+		stylistCampaignPage().clickJetztStartenButton();
+		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		
 	}
 
 }

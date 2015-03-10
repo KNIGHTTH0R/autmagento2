@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -93,11 +95,18 @@ public class US4002ValidateOrderEmailTest extends BaseTest{
 		frontEndSteps.performLogin(email, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
+		
+		Pattern pattern = Pattern.compile("<span class=\"price\">(.*?)</span>");
+		Matcher matcher = pattern.matcher(message);
+		if (matcher.find())
+		{
+		    System.out.println("cucuuuuuuuuuuuuuuuuu" + matcher.group(1));
+		}
+		
 		System.out.println(message);
 		System.out.println(orderModel.get(0).getOrderId());
 		System.out.println(orderModel.get(0).getTotalPrice());
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
-		
 		customVerifications.printErrors();
 	
 	}

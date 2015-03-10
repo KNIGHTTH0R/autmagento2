@@ -53,11 +53,11 @@ public class CustomerFormModel {
 	
 	//Custom setters for data generation
 	public void setFirstName() throws Exception {
-		this.firstName = FieldGenerators.generateRandomString(8, Mode.ALPHANUMERIC);
+		this.firstName = FieldGenerators.generateRandomString(8, Mode.ALPHA);
 	}
 	
 	public void setLastName() throws Exception {
-		this.lastName = FieldGenerators.generateRandomString(8, Mode.ALPHANUMERIC);
+		this.lastName = FieldGenerators.generateRandomString(8, Mode.ALPHA);
 	}
 	
 	public void setEmailName() throws Exception {

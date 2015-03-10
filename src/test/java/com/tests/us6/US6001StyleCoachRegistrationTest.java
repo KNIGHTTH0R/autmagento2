@@ -1,4 +1,8 @@
-package com.tests.us0;
+package com.tests.us6;
+
+import java.io.IOException;
+
+import javax.xml.soap.SOAPException;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -11,7 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.StylistCampaignSteps;
+import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
@@ -20,14 +26,20 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US000", type = "frontend")
-@Story(Application.Stylist.CreateColaborator.class)
+
+@WithTag(name = "US6001", type = "frontend")
+@Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US000CreateCustomerTest extends BaseTest{
-
-
+public class US6001StyleCoachRegistrationTest extends BaseTest{
+	
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public HeaderSteps headerSteps;
+	
+	@Steps
+	public StylistCampaignSteps stylistCampaignSteps;
+	
+	@Steps
+	public StylistRegistrationSteps stylistRegistrationSteps;
 	@Steps 
 	public CustomVerification customVerifications;
 
@@ -43,23 +55,18 @@ public class US000CreateCustomerTest extends BaseTest{
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
-
-	/**
-	 * FrontEnd steps in this test
-	 * 
-	 * @throws Exception
-	 */
+	
 	@Test
-	public void us000CreateFECustomerTest() {
-
-		customerRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
-		customerRegistrationSteps.verifyCustomerCreation();
-		customVerifications.printErrors();
+	public void us6001StyleCoachRegistrationTest() throws SOAPException, IOException{
+		
+		headerSteps.navigateToRegisterform();
+		stylistRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
+		customVerifications.printErrors();		
+	
 	}
-
+	
 	@After
 	public void saveData() {
-		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveStylistFormModel(dataModel, getClass().getSimpleName());
 	}
-
 }

@@ -29,6 +29,9 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = "a[title='Profil']")
 	private WebElement profileButton;
+	
+	@FindBy(css = "a[title='Anmelden']")
+	private WebElement anmeldenButton;
 
 	public void searchInput(String seachKey) {
 		element(searchInput).waitUntilVisible();
@@ -65,6 +68,11 @@ public class HeaderPage extends AbstractPage {
 	public String getShoppingBagTotalSum() {
 		element(cartPreviewPrice).waitUntilVisible();
 		return cartPreviewPrice.getText();
+	}
+	
+	public void clickAnmeldenButton() {
+		element(anmeldenButton).waitUntilVisible();
+		anmeldenButton.click();
 	}
 
 }

@@ -33,6 +33,13 @@ public class MongoTableKeys {
 	public static final String CUSTOMER_MODEL = "CustomerModel";
 	public static final String CLIENT_NAME = "clientName";
 	
+	//Stylist model properties
+	public static final String STYLIST_MODEL = "StylistModel";
+	public static final String STYLIST_FIRSTNAME = "clientFirstname";
+	public static final String STYLIST_LASTNAME = "clientLastname";
+	public static final String STYLIST_EMAIL = "clientEmail";
+	public static final String STYLIST_PASSWORD = "clientPassword";
+	
 	//Customer configuration model
 	public static final String CUSTOMER_CONFIGURATION_MODEL = "CustomerConfigurationModel";
 	public static final String EMAIL_ACTIVE = "emailActive";

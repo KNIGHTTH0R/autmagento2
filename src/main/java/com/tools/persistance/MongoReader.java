@@ -154,6 +154,32 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+	public static List<CustomerFormModel> grabStylistFormModels(String testName) {
+		DBObject dbObject = null;
+		List<CustomerFormModel> itemList = new ArrayList<CustomerFormModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STYLIST_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				CustomerFormModel result = new CustomerFormModel();
+				dbObject = cursor.next();
+				
+				result.setFirstName(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_FIRSTNAME));
+				result.setLastName(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_LASTNAME));
+				result.setEmailName(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_EMAIL));
+				result.setPassword(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_PASSWORD));
+				
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
 
 	public static List<CustomerConfigurationModel> grabCustomerConfigurationModels(String testName) {
 		DBObject dbObject = null;

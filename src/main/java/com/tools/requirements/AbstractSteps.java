@@ -25,6 +25,9 @@ import com.pages.frontend.LoginPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
+import com.pages.frontend.StarterSetPage;
+import com.pages.frontend.StylistCampaignPage;
+import com.pages.frontend.StylistRegistrationPage;
 import com.pages.frontend.checkout.CartPage;
 import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.SuccessPage;
@@ -128,11 +131,18 @@ public class AbstractSteps extends ScenarioSteps {
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
 	}
-
+	public StarterSetPage starterSetPage() {
+		return getPages().currentPageAt(StarterSetPage.class);
+	}
+	public StylistCampaignPage stylistCampaignPage() {
+		return getPages().currentPageAt(StylistCampaignPage.class);
+	}	
+	public StylistRegistrationPage stylistRegistrationPage() {
+		return getPages().currentPageAt(StylistRegistrationPage.class);
+	}
 	public CreateCustomerPage createCustomerPage() {
 		return getPages().currentPageAt(CreateCustomerPage.class);
 	}
-
 	public RegistrationMessagePage registrationMessagePage() {
 		return getPages().currentPageAt(RegistrationMessagePage.class);
 	}

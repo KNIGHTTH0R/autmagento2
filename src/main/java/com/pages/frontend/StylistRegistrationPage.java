@@ -1,0 +1,238 @@
+package com.pages.frontend;
+
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import net.thucydides.core.annotations.findby.FindBy;
+
+import com.tools.Constants;
+import com.tools.requirements.AbstractPage;
+
+public class StylistRegistrationPage extends AbstractPage {
+
+	@FindBy(id = "firstname")
+	private WebElement firstnameInput;
+
+	@FindBy(css = ".bordered-box.pitch.clearfix.starterkit-wrapper-inactive input")
+	private WebElement starterKit;
+
+	@FindBy(id = "lastname")
+	private WebElement lastnameInput;
+
+	@FindBy(id = "dateofbirth-dp")
+	private WebElement dob;
+
+	@FindBy(css = ".ui-datepicker-month")
+	private WebElement monthPicker;
+
+	@FindBy(css = ".ui-datepicker-year")
+	private WebElement yearPicker;
+
+	@FindBy(css = "tbody tr td")
+	private WebElement daypicker;
+
+	@FindBy(id = "email_address")
+	private WebElement emailaddressInput;
+
+	@FindBy(id = "password")
+	private WebElement passwordInput;
+
+	@FindBy(id = "confirmation")
+	private WebElement confirmationeInput;
+
+	@FindBy(id = "invitation_email")
+	private WebElement invitationEmailInput;
+
+	@FindBy(id = "flag_stylist_parties")
+	private WebElement partiesCheckbox;
+
+	@FindBy(id = "flag_stylist_member")
+	private WebElement memberCheckbox;
+
+	@FindBy(id = "accept-checkbox")
+	private WebElement iAgreeCheckbox;
+
+	@FindBy(id = "leave_master")
+	private WebElement noCoachCheckbox;
+
+	@FindBy(id = "by_default")
+	private WebElement noInviteCheckbox;
+
+	@FindBy(css = "button[title*='Senden']")
+	private WebElement completeButton;
+
+	@FindBy(id = "submit-step")
+	private WebElement submitStepButton;
+
+	@FindBy(id = "submit_cod")
+	private WebElement weiter;
+	
+	@FindBy(id = "placeYourOrder_bottom")
+	private WebElement submitPaymentMethod;
+
+	// ---------------------------------------------------
+	@FindBy(id = "street_1")
+	private WebElement streetInput;
+
+	@FindBy(id = "house_number")
+	private WebElement streetNumberInput;
+
+	@FindBy(id = "zip")
+	private WebElement postCodeInput;
+
+	@FindBy(id = "city")
+	private WebElement cityInput;
+
+	@FindBy(id = "country")
+	private WebElement countrySelect;
+
+	@FindBy(id = "telephone")
+	private WebElement telephoneInput;
+
+	@FindBy(id = "stylistref")
+	private WebElement stylistref;
+
+	// ---------------------------------------------------
+
+	public void inputFirstName(String firstName) {
+		element(firstnameInput).waitUntilVisible();
+		firstnameInput.sendKeys(firstName);
+	}
+
+	public void inputLastName(String lastName) {
+		element(lastnameInput).waitUntilVisible();
+		lastnameInput.sendKeys(lastName);
+	}
+
+	public void inputEmail(String emailAddress) {
+		element(emailaddressInput).waitUntilVisible();
+		emailaddressInput.sendKeys(emailAddress);
+	}
+
+	public void inputPassword(String passText) {
+		element(passwordInput).waitUntilVisible();
+		// passwordInput.sendKeys(passText);
+		//
+		// waitABit(Constants.TIME_CONSTANT);
+		passwordInput.clear();
+		passwordInput.sendKeys(passText);
+
+	}
+
+	public void inputConfirmation(String passText) {
+		element(confirmationeInput).waitUntilVisible();
+		confirmationeInput.sendKeys(passText);
+	}
+
+	public void inputStylistRef(String ref) {
+		element(stylistref).waitUntilVisible();
+		stylistref.sendKeys(ref);
+	}
+
+	public void inputStylistEmail(String stylistEmail) {
+		invitationEmailInput.sendKeys(stylistEmail);
+	}
+
+	public void checkParties() {
+		partiesCheckbox.click();
+	}
+
+	public void checkMember() {
+		memberCheckbox.click();
+	}
+
+	public void checkNoInvite() {
+		noInviteCheckbox.click();
+	}
+
+	public void checkIAgree() {
+		iAgreeCheckbox.click();
+	}
+
+	public void checkNoCoachCheckbox() {
+		noCoachCheckbox.click();
+	}
+
+	public void clickCompleteButton() {
+		completeButton.click();
+	}
+
+	public void clickDob() {
+		dob.click();
+	}
+
+	public void clickOnNachahmePaymentMethod() {
+		
+		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+		By by = By.id("payco-iframe-transaction");
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+		weiter.click();
+	}
+
+	public void inputStreetAddress(String streetAddress) {
+		element(streetInput).waitUntilVisible();
+		streetInput.sendKeys(streetAddress);
+	}
+
+	public void inputStreetNumber(String streetNumber) {
+		streetNumberInput.sendKeys(streetNumber);
+	}
+
+	public void inputPostCode(String postCode) {
+		postCodeInput.sendKeys(postCode);
+	}
+
+	public void inputHomeTown(String homeTown) {
+		cityInput.sendKeys(homeTown);
+	}
+
+	public void selectCountryName(String countryName) {
+		element(countrySelect).waitUntilVisible();
+		element(countrySelect).selectByVisibleText(countryName);
+	}
+
+	public void inputPhoneNumber(String phoneNumber) {
+		telephoneInput.sendKeys(phoneNumber);
+	}
+
+	public void submitStep() {
+		submitStepButton.click();
+	}
+	public void submitPaymentMethod() {
+		submitPaymentMethod.click();
+	}
+
+	public void selectStarterKit() {
+		elementjQueryClick("input#kit_2567");
+	}
+
+	public void selectMonth(String month) {
+		element(monthPicker).waitUntilVisible();
+		element(monthPicker).selectByVisibleText(month);
+	}
+
+	public void selectYear(String year) {
+		element(yearPicker).waitUntilVisible();
+		element(yearPicker).selectByVisibleText(year);
+	}
+
+	public void selectDay(String day) {
+		element(daypicker).waitUntilVisible();
+		List<WebElement> daysList = getDriver().findElements(By.cssSelector("tbody tr td"));
+		boolean found = false;
+		for (WebElement currentDay : daysList) {
+			if (currentDay.getText().contentEquals(day)) {
+				found = true;
+				currentDay.click();
+			}
+		}
+		Assert.assertTrue("Day was not found", found);
+	}
+
+}

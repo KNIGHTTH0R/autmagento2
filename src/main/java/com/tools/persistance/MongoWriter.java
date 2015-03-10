@@ -63,6 +63,18 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+	public static void saveStylistFormModel(CustomerFormModel customerModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.STYLIST_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.STYLIST_FIRSTNAME, customerModel.getFirstName());
+		document.put(MongoTableKeys.STYLIST_LASTNAME, customerModel.getLastName());
+		document.put(MongoTableKeys.STYLIST_EMAIL, customerModel.getEmailName());
+		document.put(MongoTableKeys.STYLIST_PASSWORD, customerModel.getPassword());
+		
+		table.insert(document);
+	}
 
 	public static void saveCustomerConfigurationModel(CustomerConfigurationModel customerConfigurationModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
