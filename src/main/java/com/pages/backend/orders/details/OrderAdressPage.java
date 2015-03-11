@@ -10,5 +10,7 @@ public class OrderAdressPage extends AbstractPage {
 
 	@FindBy(css = "table.order-tables")
 	private WebElement tableContainer;
+	
+	
 
 }

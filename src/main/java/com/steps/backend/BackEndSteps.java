@@ -4,6 +4,8 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.Constants;
 import com.tools.data.StylistDataModel;
+import com.tools.data.backend.StylistPropertiesModel;
+import com.tools.data.backend.StylistRegistrationAndActivationDateModel;
 import com.tools.requirements.AbstractSteps;
 
 public class BackEndSteps extends AbstractSteps {
@@ -18,9 +20,15 @@ public class BackEndSteps extends AbstractSteps {
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
 	}
+
+	@Step
+	public void goToBackend() {
+		getDriver().get(Constants.BASE_URL_BE);
+	}
+
 	@Step
 	public void performLogin(String userName, String userPass) {
-		
+
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
@@ -43,7 +51,16 @@ public class BackEndSteps extends AbstractSteps {
 		customerListPage().inputEmailFilter(emailText);
 		customerListPage().clickOnSearch();
 	}
+	@Step
+	public void searchOrderByName(String emailText) {
+		orderListPage().inputOrderName(emailText);
+		orderListPage().clickOnSearch();
+	}
 
+	@Step
+	public void openOrderDetails(String emailText) {
+		orderListPage().openOrderDetails(emailText);
+	}
 	@Step
 	public void openCustomerDetails(String emailText) {
 		customerListPage().openCustomerDetails(emailText);
@@ -68,11 +85,38 @@ public class BackEndSteps extends AbstractSteps {
 	public String extractEmailConfirmationStatus() {
 		return customerDetailsHomePage().extractEmailConfirmationStatus();
 	}
-	
-	
+	@Step
+	public String extractJewelryBonusValue() {
+		return customerDetailsHomePage().extractJewelryBonusValue();
+	}
+
+	@Step
+	public String extractEmailConfirmationStatusWithoutLabel() {
+		return customerDetailsHomePage().extractEmailConfirmationStatusWithoutLabel();
+	}
+	@Step
+	public String extractCustomerType() {
+		return customerDetailsHomePage().extractCustomerType();
+	}
+
 	@Step
 	public void deleteCustomer() {
 		customerDetailsHomePage().deleteCustomer();
+	}
+	
+	@Step
+	public StylistPropertiesModel grabCustomerConfiguration(){
+		 return customerDetailsHomePage().grabCustomerConfiguration();
+	}
+
+	@Step
+	public StylistRegistrationAndActivationDateModel grabStylistRegistrationAndConfirmationDates() {
+		StylistRegistrationAndActivationDateModel datesModel = new StylistRegistrationAndActivationDateModel();
+		datesModel.setRegistrationDate(customerDetailsHomePage().extractRegistrationDate());
+		datesModel.setConfirmationDate(customerDetailsHomePage().extractConfirmationDate());
+
+		return datesModel;
+
 	}
 
 }

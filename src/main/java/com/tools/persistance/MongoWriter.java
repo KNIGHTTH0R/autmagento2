@@ -16,6 +16,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 
@@ -72,6 +73,16 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.STYLIST_LASTNAME, customerModel.getLastName());
 		document.put(MongoTableKeys.STYLIST_EMAIL, customerModel.getEmailName());
 		document.put(MongoTableKeys.STYLIST_PASSWORD, customerModel.getPassword());
+		
+		table.insert(document);
+	}
+	public static void saveDateModel(DateModel dateModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.DATE_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.REGISTRATION_DATE, dateModel.getDate());
+		
 		
 		table.insert(document);
 	}

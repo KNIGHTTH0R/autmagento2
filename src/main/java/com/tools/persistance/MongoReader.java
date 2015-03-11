@@ -17,6 +17,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 
@@ -154,23 +155,48 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+
 	public static List<CustomerFormModel> grabStylistFormModels(String testName) {
 		DBObject dbObject = null;
 		List<CustomerFormModel> itemList = new ArrayList<CustomerFormModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STYLIST_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				CustomerFormModel result = new CustomerFormModel();
 				dbObject = cursor.next();
-				
+
 				result.setFirstName(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_FIRSTNAME));
 				result.setLastName(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_LASTNAME));
 				result.setEmailName(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_EMAIL));
 				result.setPassword(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_PASSWORD));
-				
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+
+	public static List<DateModel> grabStylistDateModels(String testName) {
+		DBObject dbObject = null;
+		List<DateModel> itemList = new ArrayList<DateModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.DATE_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				DateModel result = new DateModel();
+				dbObject = cursor.next();
+
+				result.setDate(MongoUtils.checkField(dbObject, MongoTableKeys.REGISTRATION_DATE));
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -232,18 +258,19 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+
 	public static List<BasicProductModel> grabBasicProductModel(String testName) {
 		DBObject dbObject = null;
 		List<BasicProductModel> itemList = new ArrayList<BasicProductModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.BASIC_PRODUCT_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				BasicProductModel result = new BasicProductModel();
 				dbObject = cursor.next();
-				
+
 				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
 				result.setProdCode(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
 				result.setUnitPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
@@ -253,7 +280,7 @@ public class MongoReader extends MongoConnector {
 				result.setPriceIP(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
 				result.setDiscountClass(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_CLASS));
 				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.QUANTITY));
-				
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {

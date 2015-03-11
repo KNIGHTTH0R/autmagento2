@@ -22,6 +22,7 @@ public class CustomerListPage extends AbstractPage {
 
 	public void inputEmailFilter(String emailText) {
 		element(emailFilterInput).waitUntilVisible();
+		emailFilterInput.clear();
 		emailFilterInput.sendKeys(emailText);
 	}
 

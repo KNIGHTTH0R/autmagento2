@@ -15,6 +15,7 @@ import com.pages.backend.orders.OrderListPage;
 import com.pages.backend.orders.details.OrderInfoPage;
 import com.pages.backend.orders.details.OrderItemsPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
+import com.pages.backend.orders.details.OrdersActionsPage;
 import com.pages.backend.promotion.ShoppingCartPriceRulesPage;
 import com.pages.external.MailinatorPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
@@ -109,6 +110,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public OrderListPage orderListPage() {
 		return getPages().currentPageAt(OrderListPage.class);
+	}
+	public OrdersActionsPage ordersActionsPage() {
+		return getPages().currentPageAt(OrdersActionsPage.class);
 	}
 
 	public OrderItemsPage orderItemsPage() {

@@ -7,6 +7,7 @@ import com.tools.data.CalculationModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.email.EmailModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
@@ -162,6 +163,12 @@ public class PrintUtils {
 		System.out.println(basicProduct.getUnitPrice() + " - " + orderProduct.getPrice());
 		System.out.println(basicProduct.getQuantity() + " - " + orderProduct.getNumber());
 		System.out.println(basicProduct.getProdCode() + " - " + orderProduct.getProductCode());
+	}
+	
+	public static void printStylistPropertiesModel(StylistPropertiesModel model){
+		System.out.println(model.getType());
+		System.out.println(model.getStatus());
+		System.out.println(model.getJewelryreceived());
 	}
 
 	public static void printOrderItemsList(List<OrderItemModel> orderItemsList) {

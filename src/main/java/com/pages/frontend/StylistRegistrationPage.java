@@ -1,6 +1,11 @@
 package com.pages.frontend;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.Assert;
@@ -72,7 +77,7 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	@FindBy(id = "submit_cod")
 	private WebElement weiter;
-	
+
 	@FindBy(id = "placeYourOrder_bottom")
 	private WebElement submitPaymentMethod;
 
@@ -132,6 +137,7 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void inputStylistRef(String ref) {
 		element(stylistref).waitUntilVisible();
+		stylistref.clear();
 		stylistref.sendKeys(ref);
 	}
 
@@ -168,10 +174,11 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void clickOnNachahmePaymentMethod() {
-		
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+
+		// WebDriverWait wait = new WebDriverWait(getDriver(), 10);
 		By by = By.id("payco-iframe-transaction");
-		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+		// wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
 		weiter.click();
 	}
 
@@ -204,6 +211,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void submitStep() {
 		submitStepButton.click();
 	}
+
 	public void submitPaymentMethod() {
 		submitPaymentMethod.click();
 	}
@@ -234,5 +242,6 @@ public class StylistRegistrationPage extends AbstractPage {
 		}
 		Assert.assertTrue("Day was not found", found);
 	}
+
 
 }

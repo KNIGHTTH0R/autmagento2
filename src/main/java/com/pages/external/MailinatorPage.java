@@ -59,6 +59,24 @@ public class MailinatorPage extends AbstractPage {
 		
 		return returnText;
 	}
+	
+	public String grabEmail(String title) {
+		element(inboxContainer).waitUntilVisible();
+		String returnText = "";
+		
+		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("li"));
+		
+		for (WebElement itemNow : emailList) {
+			String allText = itemNow.getText();
+			System.out.println("Row: " + allText);
+			if (allText.contains(title)) {
+				itemNow.findElement(By.cssSelector("div.subject")).click();
+				break;
+			} 
+		}
+		
+		return returnText;
+	}
 
 	public String confirmEmail() {
 

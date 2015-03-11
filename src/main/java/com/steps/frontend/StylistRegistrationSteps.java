@@ -9,14 +9,15 @@ import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.AbstractSteps;
+import com.tools.utils.DateUtils;
 
 public class StylistRegistrationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 743498685895573421L;
 
 	@StepGroup
-	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
-
+	public String fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {		
+		
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		//TODO make this pretty
@@ -25,15 +26,18 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		fillContactDetails(addressData);
-		checkNoCoachCheckbox();	
+		checkNoCoachCheckbox();		
 		checkIAgree();
+		String date = DateUtils.getAndFormatCurrentDate();
 		submitStep();
-		inputStylistRef(customerData.getFirstName());
-		submitStep();
+		inputStylistRef(customerData.getFirstName());		
+		submitStep();	
 		selectStarterKit();
-		submitStep();
+		submitStep();	
 		clickOnNachahmePaymentMethod();
 		submitPaymentMethod();
+		
+		return date;
 	}
 
 	@StepGroup

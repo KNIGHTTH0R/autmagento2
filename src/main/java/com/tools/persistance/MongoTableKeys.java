@@ -40,6 +40,11 @@ public class MongoTableKeys {
 	public static final String STYLIST_EMAIL = "clientEmail";
 	public static final String STYLIST_PASSWORD = "clientPassword";
 	
+	//Stylist model properties
+	public static final String DATE_MODEL = "DateModel";
+	public static final String REGISTRATION_DATE = "date";
+	
+	
 	//Customer configuration model
 	public static final String CUSTOMER_CONFIGURATION_MODEL = "CustomerConfigurationModel";
 	public static final String EMAIL_ACTIVE = "emailActive";

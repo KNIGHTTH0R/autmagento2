@@ -23,8 +23,10 @@ import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 
 
 @WithTag(name = "US6001", type = "frontend")
@@ -44,6 +46,7 @@ public class US6001StyleCoachRegistrationTest extends BaseTest{
 	public CustomVerification customVerifications;
 
 	public CustomerFormModel dataModel;
+	public DateModel dateModel = new DateModel();
 	public AddressModel addressModel;
 	public StylistDataModel validationModel;
 
@@ -60,7 +63,8 @@ public class US6001StyleCoachRegistrationTest extends BaseTest{
 	public void us6001StyleCoachRegistrationTest() throws SOAPException, IOException{
 		
 		headerSteps.navigateToRegisterform();
-		stylistRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
+		String date = stylistRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
+		dateModel.setDate(date);
 		customVerifications.printErrors();		
 	
 	}
@@ -68,5 +72,7 @@ public class US6001StyleCoachRegistrationTest extends BaseTest{
 	@After
 	public void saveData() {
 		MongoWriter.saveStylistFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
+		
 	}
 }
