@@ -21,7 +21,6 @@ import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.backend.StylistRegistrationAndActivationDateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US6001", type = "external")
@@ -79,8 +78,7 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 
 
 	@Test
-	public void us000CheckCustomerActivation() {
-
+	public void us000CheckCustomerActivationTest() {
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();
@@ -118,7 +116,6 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabbeddatesModel,datesModel);
 		customerAndStylistRegistrationWorkflows.validateStylistDAtes("VALIDATE REGISTRATION AND ACTIVATION DATES");
-
 		
 		customVerifications.printErrors();
 	}

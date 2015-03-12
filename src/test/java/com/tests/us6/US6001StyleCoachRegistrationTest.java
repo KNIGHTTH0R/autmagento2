@@ -26,7 +26,6 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.DateUtils;
 
 
 @WithTag(name = "US6001", type = "frontend")
@@ -60,12 +59,10 @@ public class US6001StyleCoachRegistrationTest extends BaseTest{
 	
 	@Test
 	public void us6001StyleCoachRegistrationTest() throws SOAPException, IOException{
-		
 		headerSteps.navigateToRegisterform();
 		String date = stylistRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
 		dateModel.setDate(date);
 		customVerifications.printErrors();		
-	
 	}
 	
 	@After
