@@ -25,7 +25,6 @@ import com.tools.requirements.Application;
 @RunWith(ThucydidesRunner.class)
 public class US6002CreateCustomerTest extends BaseTest{
 
-
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps 

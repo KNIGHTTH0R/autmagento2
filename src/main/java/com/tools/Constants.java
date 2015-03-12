@@ -22,6 +22,7 @@ public class Constants {
 	
 	
 	public static final String BASE_URL_BE = "http://pippajean:sn0wMob1l!@staging-aut.pippajean.com/index.php/admin/";
+//	public static final String BASE_URL_FE = "http://staging-aut.pippajean.com/welcome-shop-landing";
 	public static final String BASE_URL_FE = "http://pippajean:sn0wMob1l!@staging-aut.pippajean.com/customer/account/create/";
 	public static final String BASE_FE_URL = "http://staging-aut.pippajean.com/";
 	public static final String BASE_URL = "https://staging-aut.pippajean.com/customer/account/login/";
