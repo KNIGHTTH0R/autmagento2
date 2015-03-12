@@ -1,22 +1,16 @@
 package com.pages.frontend;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeoutException;
+
+import net.thucydides.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import net.thucydides.core.annotations.findby.FindBy;
 
 import com.tools.Constants;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.AbstractPage;
 
 public class StylistRegistrationPage extends AbstractPage {
@@ -80,6 +74,9 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	@FindBy(id = "placeYourOrder_bottom")
 	private WebElement submitPaymentMethod;
+	
+	@FindBy(css = "ul.messages li ul li span")
+	private WebElement existingAccountMessageContainer;
 
 	// ---------------------------------------------------
 	@FindBy(id = "street_1")
@@ -238,6 +235,19 @@ public class StylistRegistrationPage extends AbstractPage {
 		}
 		Assert.assertTrue("Day was not found", found);
 	}
+	
+	public void clickLoginLinkFromMessage(){
+		if(existingAccountMessageContainer.getText().contentEquals(Constants.EXISTING_ACCOUNT_MESSAGE)){
+			existingAccountMessageContainer.findElement(By.cssSelector("a")).click();
+		}else{
+			Assert.assertFalse("The message and the link were not found",true);
+		}
+		
+	}
+	
+//	public CustomerFormModel grabStylistPredefinedInfo(){
+//		
+//	}
 
 
 }

@@ -40,6 +40,22 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		
 		return date;
 	}
+	@StepGroup
+	public String fillStylistRegistrationPredefinedInfoForm(CustomerFormModel customerData, AddressModel addressData) {	
+		
+		selectBirthDate("Feb","1970","12");	
+		checkIAgree();
+		String date = DateUtils.getAndFormatCurrentDate();
+		submitStep();
+		inputStylistRef(customerData.getFirstName());		
+		submitStep();	
+		selectStarterKit();
+		submitStep();	
+		clickOnNachahmePaymentMethod();
+		submitPaymentMethod();
+		
+		return date;
+	}
 
 	@StepGroup
 	public void fillContactDetails(AddressModel addressData) {
@@ -76,6 +92,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	public void inputStreetNumber(String streetNumber) {
 		stylistRegistrationPage().inputStreetNumber(streetNumber);
 	}
+	
 
 	@Step
 	public void inputPostCode(String postCode) {
@@ -217,7 +234,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		
 		getDriver().switchTo().defaultContent();
 	}
-	
+	@Step
+	public void clickLoginLinkFromMessage(){
+		stylistRegistrationPage().clickLoginLinkFromMessage();
+	}
 	
 	
 	@Step
