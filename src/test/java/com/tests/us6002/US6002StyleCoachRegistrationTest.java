@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.steps.backend.BackEndSteps;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
@@ -24,12 +25,14 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
+import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 
 @WithTag(name = "US6001", type = "frontend")
@@ -40,6 +43,8 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	@Steps
 	public HeaderSteps headerSteps;	
 	@Steps
+	public BackEndSteps backEndSteps;
+	@Steps
 	public StylistCampaignSteps stylistCampaignSteps;
 	@Steps
 	public EmailClientSteps emailClientSteps;	
@@ -49,11 +54,14 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	public CustomVerification customVerifications;
 	@Steps 
 	public CustomerRegistrationSteps customerRegistrationSteps;
+	@Steps 
+	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
 	public CustomerFormModel dataModel;
 	public DateModel dateModel = new DateModel();
 	public AddressModel addressModel;
 	public StylistDataModel validationModel;
+	public StylistPropertiesModel beforeLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
 	
 	public String stylistEmail;
 	public String password;
@@ -63,6 +71,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
+		beforeLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(Constants.NOT_CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		int size = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").size();
@@ -78,6 +87,13 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	@Test
 	public void us6001StyleCoachRegistrationTest() throws SOAPException, IOException{
 		
+		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.clickOnCustomers();
+		backEndSteps.searchForEmail(stylistEmail);
+		backEndSteps.openCustomerDetails(stylistEmail);
+		
+		StylistPropertiesModel beforeLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();
+		
 		//confirmation link
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
@@ -87,6 +103,10 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 		customerRegistrationSteps.performLogin(stylistEmail, password);
 		String date = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(dataModel, addressModel);
 		dateModel.setDate(date);
+		
+		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(beforeLinkConfirmationStylistProperties, beforeLinkConfirmationStylistExpectedProperties);	
+		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
+		
 		customVerifications.printErrors();		
 	
 	}

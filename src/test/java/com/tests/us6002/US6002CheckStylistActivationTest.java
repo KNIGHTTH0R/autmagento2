@@ -44,7 +44,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 
 	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
 	
-	public StylistPropertiesModel beforeLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
+	
 	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
 	public StylistPropertiesModel afterOrderPaidStylistExpectedProperties = new StylistPropertiesModel();
 	public StylistRegistrationAndActivationDateModel datesModel = new StylistRegistrationAndActivationDateModel();
@@ -70,7 +70,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 
-		beforeLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(Constants.NOT_CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
+		
 		afterLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
 		afterOrderPaidStylistExpectedProperties =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_FINAL_VALUE, Constants.STYLIST);
 		datesModel = new StylistRegistrationAndActivationDateModel(date,date);
@@ -85,16 +85,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
-		backEndSteps.openCustomerDetails(stylistEmail);
-		
-		StylistPropertiesModel beforeLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();
-		
-		emailClientSteps.openMailinator();
-		confirmationEmail  = emailClientSteps.grabEmail(stylistEmail.replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
-		backEndSteps.goToBackend();
-		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail(stylistEmail);
-		backEndSteps.openCustomerDetails(stylistEmail);
+		backEndSteps.openCustomerDetails(stylistEmail);		
 		
 		StylistPropertiesModel afterLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();
 
@@ -112,9 +103,6 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 		System.out.println("########");
 		System.out.println(grabbeddatesModel.getConfirmationDate());
 		System.out.println(grabbeddatesModel.getRegistrationDate());
-
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(beforeLinkConfirmationStylistProperties, beforeLinkConfirmationStylistExpectedProperties);	
-		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");

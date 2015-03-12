@@ -32,6 +32,8 @@ public class HeaderPage extends AbstractPage {
 	
 	@FindBy(css = "a[title='Anmelden']")
 	private WebElement anmeldenButton;
+	@FindBy(css = "a[title='Abmelden']")
+	private WebElement abmeldenButton;
 
 	public void searchInput(String seachKey) {
 		element(searchInput).waitUntilVisible();
@@ -73,6 +75,10 @@ public class HeaderPage extends AbstractPage {
 	public void clickAnmeldenButton() {
 		element(anmeldenButton).waitUntilVisible();
 		anmeldenButton.click();
+	}
+	public void clickAbmeldenButton() {
+		element(abmeldenButton).waitUntilVisible();
+		abmeldenButton.click();
 	}
 
 }
