@@ -44,9 +44,6 @@ import com.tests.us4.us4002.US4002UserProfileOrderIdTest;
 import com.tests.us4.us4002.US4002ValidateOrderBackOfficeTest;
 import com.tests.us4.us4002.US4002ValidateOrderEmailTest;
 
-
-
-
 @SuiteClasses({
 	US001UserProfileOrderIdTest.class,
 	US001ValidateOrderBackOfficeTest.class,
