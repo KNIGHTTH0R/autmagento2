@@ -4,9 +4,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.us3007.US3007Test;
-import com.tests.us3008.US3008Test;
-import com.tests.us3009.US3009Test;
+import com.tests.us3.us3007.US3007Test;
+import com.tests.us3.us3008.US3008Test;
+import com.tests.us3.us3009.US3009Test;
 
 
 
