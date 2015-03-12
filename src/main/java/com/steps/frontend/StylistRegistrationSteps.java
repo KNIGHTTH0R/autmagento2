@@ -4,8 +4,8 @@ import java.util.Set;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
-import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.AbstractSteps;
@@ -16,11 +16,12 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	private static final long serialVersionUID = 743498685895573421L;
 
 	@StepGroup
+	@Title("Fill create customer form")
 	public String fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {		
 		
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
-		//TODO make this pretty
+		//TODO make this pretty <- Exact
 		selectBirthDate("Feb","1970","12");
 		inputEmail(customerData.getEmailName());
 		inputPassword(customerData.getPassword());
