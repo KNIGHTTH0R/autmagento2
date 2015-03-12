@@ -21,6 +21,7 @@ import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.backend.StylistRegistrationAndActivationDateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US6001", type = "external,backend")
@@ -78,7 +79,7 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 
 
 	@Test
-	public void us000CheckCustomerActivationTest() {
+	public void us6001CheckCustomerActivationTest() {
 
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
@@ -108,12 +109,18 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(beforeLinkConfirmationStylistProperties, beforeLinkConfirmationStylistExpectedProperties);	
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
+		PrintUtils.printStylistPropertiesModel(beforeLinkConfirmationStylistProperties);
+		PrintUtils.printStylistPropertiesModel(beforeLinkConfirmationStylistExpectedProperties);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
+		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistProperties);
+		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistExpectedProperties);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterOrderPaidStylistProperties, afterOrderPaidStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER MARK AS PAID ");
+		PrintUtils.printStylistPropertiesModel(afterOrderPaidStylistProperties);
+		PrintUtils.printStylistPropertiesModel(afterOrderPaidStylistExpectedProperties);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabbeddatesModel,datesModel);
 		customerAndStylistRegistrationWorkflows.validateStylistDAtes("VALIDATE REGISTRATION AND ACTIVATION DATES");

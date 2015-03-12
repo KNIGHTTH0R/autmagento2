@@ -16,8 +16,9 @@ public class CustomerDetailsPage extends AbstractPage {
 	@FindBy(id = "customer_info_tabs_stylecoach_lead_manage")
 	private WebElement leadSettingsButton;
 
-	@FindBy(css = "#rewardPointsBalanceGrid_table tbody tr:nth-child(1) td:nth-child(3)")
+	@FindBy(css = "#rewardPointsBalanceGrid_table tbody tr:nth-child(2) td:nth-child(3)")
 	private WebElement jewerlyContainer;
+	
 
 	@FindBy(css = "table.box-left tr:nth-child(5) td:last-child")
 	private WebElement customerTypeContainer;
@@ -113,18 +114,24 @@ public class CustomerDetailsPage extends AbstractPage {
 		}
 	}
 
+//	public String extractJewelryBonusValue() {
+//		return jewerlyContainer.getText();
+//	}
+	
 	public String extractJewelryBonusValue() {
-		return jewerlyContainer.getText();
+		String jb = "";
+		List<WebElement> list = getDriver().findElements(By.cssSelector("#rewardPointsBalanceGrid_table tbody tr"));
+		for (WebElement item : list) {
+			if (item.getText().contains("Schmuckbonus")) {
+				jb = item.findElement(By.cssSelector("td:nth-child(3)")).getText();
+				break;
+			}
+		}
+		
+		return jb;
 	}
 
-	public StylistPropertiesModel grabCustomerConfiguration() {
-		element(customerTypeContainer).waitUntilVisible();
-		StylistPropertiesModel stylistModel = new StylistPropertiesModel();
-		stylistModel.setType(customerTypeContainer.getText());
-		stylistModel.setStatus(statusContainer.getText());
-		stylistModel.setJewelryreceived(jewerlyContainer.getText());
-		return stylistModel;
-	}
+
 
 
 

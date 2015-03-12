@@ -21,6 +21,7 @@ public class CustomerListPage extends AbstractPage {
 	private WebElement searchButton;
 
 	public void inputEmailFilter(String emailText) {
+		evaluateJavascript("jQuery.noConflict();");
 		element(emailFilterInput).waitUntilVisible();
 		emailFilterInput.clear();
 		emailFilterInput.sendKeys(emailText);
@@ -35,7 +36,7 @@ public class CustomerListPage extends AbstractPage {
 	public void openCustomerDetails(String searchTerm) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(listContainer).waitUntilVisible();
-		List<WebElement> listElements = listContainer.findElements(By.tagName("tr"));
+		List<WebElement> listElements = listContainer.findElements(By.cssSelector("tbody > tr"));
 
 		theFor: for (WebElement elementNow : listElements) {
 			String currentEmail = elementNow.findElement(By.cssSelector("*:nth-child(4)")).getText();

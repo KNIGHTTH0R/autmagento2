@@ -21,6 +21,7 @@ import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.backend.StylistRegistrationAndActivationDateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US6002", type = "external,backend")
@@ -60,12 +61,13 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		date = MongoReader.grabStylistDateModels("US6001StyleCoachRegistrationTest").get(0).getDate();
-		int size = MongoReader.grabStylistFormModels("US6001StyleCoachRegistrationTest").size();
+		date = MongoReader.grabStylistDateModels("US6002StyleCoachRegistrationTest").get(0).getDate();
+		int size = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabStylistFormModels("US6001StyleCoachRegistrationTest").get(0).getEmailName();
-			stylistFirstName = MongoReader.grabStylistFormModels("US6001StyleCoachRegistrationTest").get(0).getFirstName();
-			System.out.println(stylistEmail);
+			stylistEmail = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").get(0).getEmailName();
+			stylistFirstName = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").get(0).getFirstName();
+			System.out.println("email " + stylistEmail);
+			System.out.println("name " + stylistFirstName);
 		} else
 			System.out.println("The database has no entries");
 
@@ -78,13 +80,13 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 
 
 	@Test
-	public void us6002CheckStylistActivation() {
+	public void us6002CheckStylistActivationTest() {
 
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
-		backEndSteps.openCustomerDetails(stylistEmail);		
+		backEndSteps.openCustomerDetails(stylistEmail);
 		
 		StylistPropertiesModel afterLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();
 
@@ -99,15 +101,16 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 		
 		StylistPropertiesModel afterOrderPaidStylistProperties =  backEndSteps.grabCustomerConfiguration();	
 		StylistRegistrationAndActivationDateModel grabbeddatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
-		System.out.println("########");
-		System.out.println(grabbeddatesModel.getConfirmationDate());
-		System.out.println(grabbeddatesModel.getRegistrationDate());
-		
+	
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
+		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistProperties);
+		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistExpectedProperties);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterOrderPaidStylistProperties, afterOrderPaidStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER MARK AS PAID ");
+		PrintUtils.printStylistPropertiesModel(afterOrderPaidStylistProperties);
+		PrintUtils.printStylistPropertiesModel(afterOrderPaidStylistExpectedProperties);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabbeddatesModel,datesModel);
 		customerAndStylistRegistrationWorkflows.validateStylistDAtes("VALIDATE REGISTRATION AND ACTIVATION DATES");

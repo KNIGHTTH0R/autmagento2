@@ -41,13 +41,13 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		return date;
 	}
 	@StepGroup
-	public String fillStylistRegistrationPredefinedInfoForm(CustomerFormModel customerData, AddressModel addressData) {	
+	public String fillStylistRegistrationPredefinedInfoForm(String name, AddressModel addressData) {	
 		
 		selectBirthDate("Feb","1970","12");	
 		checkIAgree();
 		String date = DateUtils.getAndFormatCurrentDate();
 		submitStep();
-		inputStylistRef(customerData.getFirstName());		
+		inputStylistRef(name);		
 		submitStep();	
 		selectStarterKit();
 		submitStep();	
