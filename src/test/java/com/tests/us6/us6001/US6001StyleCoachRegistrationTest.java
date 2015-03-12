@@ -59,7 +59,7 @@ public class US6001StyleCoachRegistrationTest extends BaseTest{
 	
 	@Test
 	public void us6001StyleCoachRegistrationTest() throws SOAPException, IOException{
-		headerSteps.navigateToRegisterform();
+		headerSteps.navigateToRegisterForm();
 		String date = stylistRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel, "Feb,1970,12");
 		dateModel.setDate(date);
 		customVerifications.printErrors();		

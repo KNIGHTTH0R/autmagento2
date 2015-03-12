@@ -70,15 +70,18 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	@FindBy(id = "submit_cod")
 	private WebElement weiter;
-	
+
 	@FindBy(id = "toggle_cctab")
 	private WebElement hinzufugen;
 
 	@FindBy(id = "placeYourOrder_bottom")
 	private WebElement submitPaymentMethod;
-	
+
 	@FindBy(css = "ul.messages li ul li span")
 	private WebElement existingAccountMessageContainer;
+
+	@FindBy(css = "div.page-title h1")
+	private WebElement stylistRegisterPageTitleContainer;
 
 	// ---------------------------------------------------
 	@FindBy(id = "street_1")
@@ -173,6 +176,7 @@ public class StylistRegistrationPage extends AbstractPage {
 		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
 		weiter.click();
 	}
+
 	public void clickOnKreditkartePaymentMethod() {
 		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
 		hinzufugen.click();
@@ -238,13 +242,17 @@ public class StylistRegistrationPage extends AbstractPage {
 		}
 		Assert.assertTrue("Day was not found", found);
 	}
-	
-	public void clickLoginLinkFromMessage(){
-		if(existingAccountMessageContainer.getText().contentEquals(Constants.EXISTING_ACCOUNT_MESSAGE)){
+
+	public void clickLoginLinkFromMessage() {
+		if (existingAccountMessageContainer.getText().contentEquals(Constants.EXISTING_ACCOUNT_MESSAGE)) {
 			existingAccountMessageContainer.findElement(By.cssSelector("a")).click();
-		}else{
-			Assert.assertFalse("The message and the link were not found",true);
+		} else {
+			Assert.assertFalse("The message and the link were not found", true);
 		}
-		
+
+	}
+
+	public String getStylistRegisterPageTitle() {
+		return stylistRegisterPageTitleContainer.getText();
 	}
 }

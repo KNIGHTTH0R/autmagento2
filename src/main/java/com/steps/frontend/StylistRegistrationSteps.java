@@ -20,8 +20,8 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@StepGroup
 	@Title("Fill create customer form")
-	public String fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData, String birthDate) {		
-		
+	public String fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		selectBirthDate(birthDate);
@@ -29,33 +29,34 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		fillContactDetails(addressData);
-		checkNoCoachCheckbox();		
+		checkNoCoachCheckbox();
 		checkIAgree();
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		submitStep();
-		inputStylistRef(customerData.getFirstName());		
-		submitStep();	
+		inputStylistRef(customerData.getFirstName());
+		submitStep();
 		selectStarterKit();
-		submitStep();	
+		submitStep();
 		clickOnNachahmePaymentMethod();
 		submitPaymentMethod();
-		
+
 		return date;
 	}
+
 	@StepGroup
-	public String fillStylistRegistrationPredefinedInfoForm(String name, AddressModel addressData, String birthDate) {	
-		
-		selectBirthDate(birthDate);	
+	public String fillStylistRegistrationPredefinedInfoForm(String name, AddressModel addressData, String birthDate) {
+
+		selectBirthDate(birthDate);
 		checkIAgree();
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		submitStep();
-		inputStylistRef(name);		
-		submitStep();	
+		inputStylistRef(name);
+		submitStep();
 		selectStarterKit();
-		submitStep();	
+		submitStep();
 		clickOnNachahmePaymentMethod();
 		submitPaymentMethod();
-		
+
 		return date;
 	}
 
@@ -69,12 +70,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 
 	}
-	
-	
+
 	@StepGroup
 	public void selectBirthDate(String dateOfBirth) {
 		String elems[] = dateOfBirth.split(Constants.DATE_SEPARATOR);
-		if(elems.length != 3){
+		if (elems.length != 3) {
 			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'", elems.length != 3);
 		}
 		clickDob();
@@ -99,7 +99,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	public void inputStreetNumber(String streetNumber) {
 		stylistRegistrationPage().inputStreetNumber(streetNumber);
 	}
-	
 
 	@Step
 	public void inputPostCode(String postCode) {
@@ -115,12 +114,14 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	public void selectCountryName(String countryName) {
 		stylistRegistrationPage().selectCountryName(countryName);
 	}
+
 	@Step
-	public void clickOnNachahmePaymentMethod(){
+	public void clickOnNachahmePaymentMethod() {
 		stylistRegistrationPage().clickOnNachahmePaymentMethod();
 	}
+
 	@Step
-	public void submitPaymentMethod(){
+	public void submitPaymentMethod() {
 		stylistRegistrationPage().submitPaymentMethod();
 	}
 
@@ -128,6 +129,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	public void inputPhoneNumber(String phoneNumber) {
 		stylistRegistrationPage().inputPhoneNumber(phoneNumber);
 	}
+
 	@Step
 	public void inputStylistRef(String ref) {
 		stylistRegistrationPage().inputStylistRef(ref);
@@ -183,42 +185,52 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	public void checkIAgree() {
 		stylistRegistrationPage().checkIAgree();
 	}
+
 	@Step
 	public void checkNoCoachCheckbox() {
 		stylistRegistrationPage().checkNoCoachCheckbox();
-	}	
+	}
+
 	@Step
 	public void clickCompleteButton() {
 		stylistRegistrationPage().clickCompleteButton();
-	}	
+	}
+
 	@Step
-	public void submitStep(){
+	public void submitStep() {
 		stylistRegistrationPage().submitStep();
 	}
+
 	@Step
-	public void clickDob(){
+	public void clickDob() {
 		stylistRegistrationPage().clickDob();
 	}
+
 	@Step
-	public void selectMonth(String month){
+	public void selectMonth(String month) {
 		stylistRegistrationPage().selectMonth(month);
 	}
+
 	@Step
-	public void selectYear(String year){
+	public void selectYear(String year) {
 		stylistRegistrationPage().selectYear(year);
 	}
+
 	@Step
-	public void selectDay(String day){
+	public void selectDay(String day) {
 		stylistRegistrationPage().selectDay(day);
 	}
+
 	@Step
-	public void selectStarterKit(){
+	public void selectStarterKit() {
 		stylistRegistrationPage().selectStarterKit();
 	}
+
 	@Step
 	public void verifyLink() {
 		registrationMessagePage().verifyLink();
 	}
+
 	@Step
 	public void verifyText() {
 		registrationMessagePage().verifyText();
@@ -227,33 +239,38 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void goToFacebookLogin(String user, String pass) {
 		clickOnFacebookLogin();
-//		waitABit(2000);
+		// waitABit(2000);
 		Set<String> windowsList = getDriver().getWindowHandles();
 		for (String string : windowsList) {
 			getDriver().switchTo().window(string);
-//			System.out.println("string: " + string);
-//			System.out.println("HEre: " + getDriver().getTitle());
-			if(getDriver().getTitle().trim().contains("Facebook")){
+			// System.out.println("string: " + string);
+			// System.out.println("HEre: " + getDriver().getTitle());
+			if (getDriver().getTitle().trim().contains("Facebook")) {
 				performFacebookLogin(user, pass);
 			}
-//			waitABit(2000);
+			// waitABit(2000);
 		}
-		
+
 		getDriver().switchTo().defaultContent();
 	}
+
 	@Step
-	public void clickLoginLinkFromMessage(){
+	public void clickLoginLinkFromMessage() {
 		stylistRegistrationPage().clickLoginLinkFromMessage();
 	}
-	
-	
+
 	@Step
-	public void clickOnFacebookLogin(){
+	public String getStylistRegisterPageTitle() {
+		return stylistRegistrationPage().getStylistRegisterPageTitle();
+	}
+
+	@Step
+	public void clickOnFacebookLogin() {
 		loginPage().clickOnFacebookSignIn();
 	}
-	
+
 	@Step
-	public void performFacebookLogin(String user, String pass){
+	public void performFacebookLogin(String user, String pass) {
 		facebookEMBLoginPage().inputUser(user);
 		facebookEMBLoginPage().inputPass(pass);
 		facebookEMBLoginPage().clickLogin();

@@ -87,7 +87,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	}
 	
 	@Test
-	public void us6001StyleCoachRegistrationTest() throws SOAPException, IOException{
+	public void us6002StyleCoachRegistrationTest() throws SOAPException, IOException{
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();
@@ -115,8 +115,6 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	
 	@After
 	public void saveData() {
-//		MongoWriter.saveStylistFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
-		
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());		
 	}
 }

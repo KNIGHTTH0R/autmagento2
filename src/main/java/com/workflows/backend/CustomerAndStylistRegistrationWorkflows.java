@@ -41,5 +41,7 @@ public class CustomerAndStylistRegistrationWorkflows extends ScenarioSteps {
 		stylistValidationSteps.validateDates(grabbedDatesModel.getConfirmationDate(), expectedDatesModel.getConfirmationDate());
 	
 	}
+	
+	
 
 }

@@ -39,7 +39,7 @@ public class HeaderSteps extends AbstractSteps {
 		getDriver().get(Constants.CART_PAGE_URL);
 	}
 	@StepGroup
-	public void navigateToRegisterform(){
+	public void navigateToRegisterForm(){
 		getDriver().get(Constants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();
@@ -47,6 +47,57 @@ public class HeaderSteps extends AbstractSteps {
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();
 		
 	}
+	@StepGroup
+	public void navigateToRegisterForm2(){
+		getDriver().get(Constants.BASE_FE_URL);
+		headerPage().clickAnmeldenButton();
+		loginPage().clickOnStylistRegistrationLink();
+		stylistCampaignPage().clickStarteJetztButton();
+		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		
+	}
+	@StepGroup
+	public void navigateToRegisterForm3(){
+		getDriver().get(Constants.BASE_FE_URL);
+		homePage().clickStyleCoachLink();
+		stylistCampaignPage().clickJetztStartenButton();
+		starterSetPage().clickOnJetztStartenFromStarterSet();
+//		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		
+	}
+	@StepGroup
+	public void navigateToRegisterForm4(){
+		getDriver().get(Constants.BASE_FE_URL);
+		homePage().clickStyleCoachLink();
+		stylistCampaignPage().clickStarteJetztButton();
+		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		
+	}
+	@StepGroup
+	public void navigateToRegisterForm5(){
+		footerPage().clickRegistrierungLink();
+		
+	}
+	@StepGroup
+	public void navigateToRegisterForm6(){
+		footerPage().clickStarterSetLink();
+		stylistCampaignPage().clickJetztStartenButton();
+		starterSetPage().clickOnJetztStyleCoachWerdenButton();		
+	}
+	@StepGroup
+	public void navigateToRegisterForm7(){
+		footerPage().clickStarterSetLink();
+		stylistCampaignPage().clickJetztStartenButton();
+		starterSetPage().clickOnJetztStyleCoachWerdenButton();		
+	}
+	
+	@StepGroup
+	public void navigateToRegisterForm8(){
+		footerPage().clickIncentivereisenLink();
+		stylistCampaignPage().clickStarteJetztButton();
+		starterSetPage().clickOnJetztStyleCoachWerdenButton();		
+	}	
+	
 	@StepGroup
 	public void navigateToRegisterFormAndLogout(){
 		getDriver().get(Constants.BASE_FE_URL);
@@ -56,6 +107,11 @@ public class HeaderSteps extends AbstractSteps {
 		stylistCampaignPage().clickJetztStartenButton();
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();
 		
+	}
+
+	@Step
+	public String getUrl() {
+		return headerPage().getUrl();
 	}
 
 }
