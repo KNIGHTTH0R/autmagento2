@@ -23,7 +23,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US6001", type = "external")
+@WithTag(name = "US6002", type = "external,backend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002CheckStylistActivationTest extends BaseTest {
@@ -78,7 +78,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 
 
 	@Test
-	public void us000CheckCustomerActivation() {
+	public void us6002CheckStylistActivation() {
 
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
@@ -111,7 +111,6 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabbeddatesModel,datesModel);
 		customerAndStylistRegistrationWorkflows.validateStylistDAtes("VALIDATE REGISTRATION AND ACTIVATION DATES");
-
 		
 		customVerifications.printErrors();
 	}

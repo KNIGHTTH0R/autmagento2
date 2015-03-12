@@ -41,6 +41,15 @@ public class HeaderSteps extends AbstractSteps {
 	@StepGroup
 	public void navigateToRegisterform(){
 		getDriver().get(Constants.BASE_FE_URL);
+		headerPage().clickAnmeldenButton();
+		loginPage().clickOnStylistRegistrationLink();
+		stylistCampaignPage().clickJetztStartenButton();
+		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		
+	}
+	@StepGroup
+	public void navigateToRegisterFormAndLogout(){
+		getDriver().get(Constants.BASE_FE_URL);
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();

@@ -35,7 +35,7 @@ import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 
-@WithTag(name = "US6001", type = "frontend")
+@WithTag(name = "US6002", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002StyleCoachRegistrationTest extends BaseTest{
@@ -98,7 +98,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
 		
-		headerSteps.navigateToRegisterform();
+		headerSteps.navigateToRegisterFormAndLogout();
 		stylistRegistrationSteps.clickLoginLinkFromMessage();
 		customerRegistrationSteps.performLogin(stylistEmail, password);
 		String date = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(dataModel, addressModel);

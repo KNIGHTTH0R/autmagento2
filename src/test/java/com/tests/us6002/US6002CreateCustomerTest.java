@@ -20,7 +20,7 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US000", type = "frontend")
+@WithTag(name = "US6002", type = "frontend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002CreateCustomerTest extends BaseTest{
@@ -50,7 +50,7 @@ public class US6002CreateCustomerTest extends BaseTest{
 	 * @throws Exception
 	 */
 	@Test
-	public void us000CreateFECustomerTest() {
+	public void us6002CreateFECustomerTest() {
 
 		customerRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();

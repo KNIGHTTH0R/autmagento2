@@ -71,6 +71,9 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	@FindBy(id = "submit_cod")
 	private WebElement weiter;
+	
+	@FindBy(id = "toggle_cctab")
+	private WebElement hinzufugen;
 
 	@FindBy(id = "placeYourOrder_bottom")
 	private WebElement submitPaymentMethod;
@@ -173,6 +176,14 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void clickOnNachahmePaymentMethod() {
 		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
 		weiter.click();
+	}
+	public void clickOnKreditkartePaymentMethod() {
+		
+		// WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+		By by = By.id("payco-iframe-transaction");
+		// wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+		hinzufugen.click();
 	}
 
 	public void inputStreetAddress(String streetAddress) {
