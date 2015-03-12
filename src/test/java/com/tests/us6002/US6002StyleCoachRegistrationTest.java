@@ -98,7 +98,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
 		
-		headerSteps.navigateToRegisterform();
+		headerSteps.navigateToRegisterFormAndLogout();
 		stylistRegistrationSteps.clickLoginLinkFromMessage();
 		customerRegistrationSteps.performLogin(stylistEmail, password);
 		String date = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(dataModel, addressModel);
