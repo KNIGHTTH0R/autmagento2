@@ -85,17 +85,14 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
-		backEndSteps.openCustomerDetails(stylistEmail);
+		String customerURL = backEndSteps.openCustomerDetails(stylistEmail);
 		
 		StylistPropertiesModel beforeLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();
 		
 		emailClientSteps.openMailinator();
 		confirmationEmail  = emailClientSteps.grabEmail(stylistEmail.replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
-		backEndSteps.goToBackend();
-		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail(stylistEmail);
-		backEndSteps.openCustomerDetails(stylistEmail);
 		
+		backEndSteps.navigate(customerURL);
 		StylistPropertiesModel afterLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();
 
 		backEndSteps.clickOnSalesOrders();
@@ -109,9 +106,6 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		
 		StylistPropertiesModel afterOrderPaidStylistProperties =  backEndSteps.grabCustomerConfiguration();	
 		StylistRegistrationAndActivationDateModel grabbeddatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
-		System.out.println("########");
-		System.out.println(grabbeddatesModel.getConfirmationDate());
-		System.out.println(grabbeddatesModel.getRegistrationDate());
 
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(beforeLinkConfirmationStylistProperties, beforeLinkConfirmationStylistExpectedProperties);	
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");

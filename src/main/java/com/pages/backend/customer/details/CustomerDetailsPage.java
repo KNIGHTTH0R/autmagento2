@@ -9,11 +9,9 @@ import org.openqa.selenium.WebElement;
 
 import com.tools.Constants;
 import com.tools.data.backend.StylistPropertiesModel;
-import com.tools.data.backend.StylistRegistrationAndActivationDateModel;
 import com.tools.requirements.AbstractPage;
 
 public class CustomerDetailsPage extends AbstractPage {
-
 
 	@FindBy(id = "customer_info_tabs_stylecoach_lead_manage")
 	private WebElement leadSettingsButton;
@@ -120,13 +118,12 @@ public class CustomerDetailsPage extends AbstractPage {
 	}
 
 	public StylistPropertiesModel grabCustomerConfiguration() {
+		element(customerTypeContainer).waitUntilVisible();
 		StylistPropertiesModel stylistModel = new StylistPropertiesModel();
 		stylistModel.setType(customerTypeContainer.getText());
 		stylistModel.setStatus(statusContainer.getText());
 		stylistModel.setJewelryreceived(jewerlyContainer.getText());
-
 		return stylistModel;
-
 	}
 
 

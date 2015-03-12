@@ -55,7 +55,6 @@ public class US6001StyleCoachRegistrationTest extends BaseTest{
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 	

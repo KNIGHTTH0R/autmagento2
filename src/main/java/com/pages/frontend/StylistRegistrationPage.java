@@ -174,11 +174,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void clickOnNachahmePaymentMethod() {
-
-		// WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		By by = By.id("payco-iframe-transaction");
-		// wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
-		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
 		weiter.click();
 	}
 
