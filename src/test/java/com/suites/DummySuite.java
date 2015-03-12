@@ -5,8 +5,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us0.US000GrabStylistPropertiesTest;
-import com.tests.us3005.US3005Test;
-import com.tests.us3006.US3006Test;
+import com.tests.us3.us3005.US3005Test;
+import com.tests.us3.us3006.US3006Test;
 
 @SuiteClasses({
 	US000GrabStylistPropertiesTest.class,

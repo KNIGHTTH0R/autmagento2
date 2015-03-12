@@ -1,26 +1,20 @@
 package com.tools;
 
-
-
-
-
 public class SoapKeys {
-	
 
-	//General keys
+	// General keys
 	public static final String URN_PREFIX = "urn";
 	public static final String SOAP_PREFIX = "soapenv";
 	public static final String SERVER_URI = "urn:Magento";
 
 	public static final String COMPLEX_OBJECT_ARRAY = "complexObjectArray";
-	
-	//Login keys
-	public static final String LOGIN_PARAM = "loginParam";	
+
+	// Login keys
+	public static final String LOGIN_PARAM = "loginParam";
 	public static final String USER_NAME = "username";
 	public static final String API_KEY = "apiKey";
-	
-	
-	//Create Product Keys
+
+	// Create Product Keys
 	public static final String CATALOG_CONTAINER = "catalogProductCreateRequestParam";
 	public static final String SESSION_ID = "sessionId";
 	public static final String TYPE = "type";
@@ -50,7 +44,7 @@ public class SoapKeys {
 	public static final String CUSTOM_LAYOUT_UPDATE = "custom_layout_update";
 	public static final String OPTIONS_CONTAINER = "options_container";
 	public static final String PRODUCT_IP = "product_ip";
-	//Stock Data
+	// Stock Data
 	public static final String STOCK_DATA = "stock_data";
 	public static final String QTY = "qty";
 	public static final String IS_IN_STOCK = "is_in_stock";
@@ -71,7 +65,7 @@ public class SoapKeys {
 	public static final String EARLIEST_AVAILABILITY = "earliest_availability";
 	public static final String MAXIMUM_PERCENTAGE_TO_BORROW = "maximum_percent_to_borrow";
 	public static final String USE_CONFIG_MAXIMUM_PERCENTAGE_TO_BORROW = "use_config_maximum_percent_to_borrow";
-	//Tier Prices Model
+	// Tier Prices Model
 	public static final String TIER_PRICES = "tier_price";
 	public static final String CUSTOMER_GROUP_ID = "customer_group_id";
 	public static final String WEBSITE = "website";
@@ -84,9 +78,8 @@ public class SoapKeys {
 	public static final String RESULT = "result";
 	public static final String ADDITIONAL_ATTRIBUTES = "additional_attributes";
 
-	//delete customer
+	// delete customer
 	public static final String CUSTOMER_CUSTOMER_DELETE_REQUEST_PARAM = "customerCustomerDeleteRequestParam";
 	public static final String CUSTOMER_ID = "customerId";
-
 
 }

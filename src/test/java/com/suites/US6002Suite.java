@@ -4,9 +4,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.us6002.US6002CheckStylistActivationTest;
-import com.tests.us6002.US6002CreateCustomerTest;
-import com.tests.us6002.US6002StyleCoachRegistrationTest;
+import com.tests.us6.us6002.US6002CheckStylistActivationTest;
+import com.tests.us6.us6002.US6002CreateCustomerTest;
+import com.tests.us6.us6002.US6002StyleCoachRegistrationTest;
 
 
 @SuiteClasses({

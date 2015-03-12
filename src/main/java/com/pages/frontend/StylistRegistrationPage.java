@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.Constants;
-import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.AbstractPage;
 
 public class StylistRegistrationPage extends AbstractPage {
@@ -122,9 +121,6 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void inputPassword(String passText) {
 		element(passwordInput).waitUntilVisible();
-		// passwordInput.sendKeys(passText);
-		//
-		// waitABit(Constants.TIME_CONSTANT);
 		passwordInput.clear();
 		passwordInput.sendKeys(passText);
 
@@ -178,11 +174,7 @@ public class StylistRegistrationPage extends AbstractPage {
 		weiter.click();
 	}
 	public void clickOnKreditkartePaymentMethod() {
-		
-		// WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		By by = By.id("payco-iframe-transaction");
-		// wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
-		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
 		hinzufugen.click();
 	}
 
@@ -255,10 +247,4 @@ public class StylistRegistrationPage extends AbstractPage {
 		}
 		
 	}
-	
-//	public CustomerFormModel grabStylistPredefinedInfo(){
-//		
-//	}
-
-
 }

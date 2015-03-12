@@ -4,10 +4,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.us3008.US3008Test;
-import com.tests.us3008.US3008UserProfileOrderIdTest;
-import com.tests.us3008.US3008ValidateOrderBackOfficeTest;
-import com.tests.us3008.US3008ValidateOrderEmailTest;
+import com.tests.us3.us3008.US3008Test;
+import com.tests.us3.us3008.US3008UserProfileOrderIdTest;
+import com.tests.us3.us3008.US3008ValidateOrderBackOfficeTest;
+import com.tests.us3.us3008.US3008ValidateOrderEmailTest;
 
 @SuiteClasses({
 	US3008Test.class,

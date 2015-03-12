@@ -63,8 +63,6 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
-	public CartCalculation calculusSteps;
-	@Steps
 	public CheckoutValidationSteps validationSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
@@ -221,7 +219,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 
 		cartSteps.clickGoToShipping();
 
-		shippingCalculatedModel = calculusSteps.calculateShippingTotals(discountCalculationModel, shippingValue);
+		shippingCalculatedModel = CartCalculation.calculateShippingTotals(discountCalculationModel, shippingValue);
 
 		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
 		PrintUtils.printList(shippingProducts);
