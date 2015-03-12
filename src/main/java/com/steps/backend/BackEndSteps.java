@@ -107,9 +107,14 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().deleteCustomer();
 	}
 	
-	@Step
-	public StylistPropertiesModel grabCustomerConfiguration(){
-		 return customerDetailsHomePage().grabCustomerConfiguration();
+
+	public StylistPropertiesModel grabCustomerConfiguration() {
+//		element(customerTypeContainer).waitUntilVisible();
+		StylistPropertiesModel stylistModel = new StylistPropertiesModel();
+		stylistModel.setType(extractCustomerType());
+		stylistModel.setStatus(extractEmailConfirmationStatusWithoutLabel());
+		stylistModel.setJewelryreceived(extractJewelryBonusValue());
+		return stylistModel;
 	}
 
 	@Step

@@ -64,6 +64,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	public StylistPropertiesModel beforeLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
 	
 	public String stylistEmail;
+	public String stylistname;
 	public String password;
 
 	@Before
@@ -77,6 +78,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 		int size = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").size();
 		if (size > 0) {
 			stylistEmail = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").get(0).getEmailName();
+			stylistname = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").get(0).getFirstName();
 			password = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").get(0).getPassword();
 			System.out.println(stylistEmail);
 			System.out.println(password);
@@ -101,7 +103,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 		headerSteps.navigateToRegisterFormAndLogout();
 		stylistRegistrationSteps.clickLoginLinkFromMessage();
 		customerRegistrationSteps.performLogin(stylistEmail, password);
-		String date = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(dataModel, addressModel, "Feb,1970,12");
+		String date = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistname, addressModel, "Feb,1970,12");
 		dateModel.setDate(date);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(beforeLinkConfirmationStylistProperties, beforeLinkConfirmationStylistExpectedProperties);	
@@ -113,7 +115,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	
 	@After
 	public void saveData() {
-		MongoWriter.saveStylistFormModel(dataModel, getClass().getSimpleName());
+//		MongoWriter.saveStylistFormModel(dataModel, getClass().getSimpleName());
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
 		
 	}
