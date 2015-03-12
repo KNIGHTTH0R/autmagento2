@@ -24,7 +24,6 @@ public class CartWorkflows {
 
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
-	
 
 	@Steps 
 	public static CustomVerification customVerification;

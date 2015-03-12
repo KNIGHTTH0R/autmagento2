@@ -2,14 +2,17 @@ package com.steps.frontend;
 
 import java.util.Set;
 
+import org.junit.Assert;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
+import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.AbstractSteps;
-import com.tools.utils.DateUtils;
+import com.tools.utils.FormatterUtils;
 
 public class StylistRegistrationSteps extends AbstractSteps {
 
@@ -17,19 +20,18 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@StepGroup
 	@Title("Fill create customer form")
-	public String fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {		
+	public String fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData, String birthDate) {		
 		
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
-		//TODO make this pretty <- Exact
-		selectBirthDate("Feb","1970","12");
+		selectBirthDate(birthDate);
 		inputEmail(customerData.getEmailName());
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		fillContactDetails(addressData);
 		checkNoCoachCheckbox();		
 		checkIAgree();
-		String date = DateUtils.getAndFormatCurrentDate();
+		String date = FormatterUtils.getAndFormatCurrentDate();
 		submitStep();
 		inputStylistRef(customerData.getFirstName());		
 		submitStep();	
@@ -41,11 +43,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		return date;
 	}
 	@StepGroup
-	public String fillStylistRegistrationPredefinedInfoForm(CustomerFormModel customerData, AddressModel addressData) {	
+	public String fillStylistRegistrationPredefinedInfoForm(CustomerFormModel customerData, AddressModel addressData, String birthDate) {	
 		
-		selectBirthDate("Feb","1970","12");	
+		selectBirthDate(birthDate);	
 		checkIAgree();
-		String date = DateUtils.getAndFormatCurrentDate();
+		String date = FormatterUtils.getAndFormatCurrentDate();
 		submitStep();
 		inputStylistRef(customerData.getFirstName());		
 		submitStep();	
@@ -67,13 +69,18 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 
 	}
+	
+	
 	@StepGroup
-	public void selectBirthDate(String month, String year, String day) {
+	public void selectBirthDate(String dateOfBirth) {
+		String elems[] = dateOfBirth.split(Constants.DATE_SEPARATOR);
+		if(elems.length != 3){
+			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'", elems.length != 3);
+		}
 		clickDob();
-		selectMonth(month);
-		selectYear(year);
-		selectDay(day);
-		
+		selectMonth(elems[0]);
+		selectYear(elems[1]);
+		selectDay(elems[2]);
 	}
 
 	@StepGroup

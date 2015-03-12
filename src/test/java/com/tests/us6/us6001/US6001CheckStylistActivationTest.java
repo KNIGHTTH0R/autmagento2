@@ -79,20 +79,21 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 
 	@Test
 	public void us000CheckCustomerActivationTest() {
-
-		
+		//backend 
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		String customerURL = backEndSteps.openCustomerDetails(stylistEmail);
 		
-		StylistPropertiesModel beforeLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();
+		StylistPropertiesModel grabStylistBeforeConfirmation =  backEndSteps.grabCustomerConfiguration();
 		
+		//external
 		emailClientSteps.openMailinator();
 		confirmationEmail  = emailClientSteps.grabEmail(stylistEmail.replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
 		
+		//backend
 		backEndSteps.navigate(customerURL);
-		StylistPropertiesModel afterLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();
+		StylistPropertiesModel grabStylistAfterConfirmation =  backEndSteps.grabCustomerConfiguration();
 
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByName(stylistFirstName);
@@ -103,19 +104,19 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
 		
-		StylistPropertiesModel afterOrderPaidStylistProperties =  backEndSteps.grabCustomerConfiguration();	
-		StylistRegistrationAndActivationDateModel grabbeddatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
+		StylistPropertiesModel grabStylistAfterOrderPaid =  backEndSteps.grabCustomerConfiguration();	
+		StylistRegistrationAndActivationDateModel grabDatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
 
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(beforeLinkConfirmationStylistProperties, beforeLinkConfirmationStylistExpectedProperties);	
+		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabStylistBeforeConfirmation, beforeLinkConfirmationStylistExpectedProperties);	
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
 		
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
+		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabStylistAfterConfirmation, afterLinkConfirmationStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
 		
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterOrderPaidStylistProperties, afterOrderPaidStylistExpectedProperties);
+		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabStylistAfterOrderPaid, afterOrderPaidStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER MARK AS PAID ");
 		
-		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabbeddatesModel,datesModel);
+		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabDatesModel,datesModel);
 		customerAndStylistRegistrationWorkflows.validateStylistDAtes("VALIDATE REGISTRATION AND ACTIVATION DATES");
 		
 		customVerifications.printErrors();

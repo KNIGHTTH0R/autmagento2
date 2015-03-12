@@ -268,7 +268,7 @@ public class CartCalculation {
 		result = result.divide(sampleAskingSum, 5, BigDecimal.ROUND_DOWN);
 		result = askingPrice.subtract(result);
 		result = result.divide(BigDecimal.valueOf(2), 2, BigDecimal.ROUND_HALF_UP);
-		System.out.println("REZ-----------------------------------------------------------------------------------------------------------" + result.setScale(3));
+		System.out.println("calculate50Discount Rezult => " + result.setScale(3));
 		return String.valueOf(result.setScale(2));
 	}
 
@@ -508,16 +508,6 @@ public class CartCalculation {
 
 		return result;
 	}
-
-	// public static void
-	// removeItemsFromListIfListSizeBiggerThan3(List<CartProductModel>
-	// productsList) {
-	// if (productsList.size() > 3) {
-	// for (int i = 3; i < productsList.size(); i++) {
-	// productsList.remove(i);
-	// }
-	// }
-	// }
 
 	public static boolean isBuy3Get1Applicable(List<CartProductModel> productList) {
 		int quantity = 0;
