@@ -2,7 +2,6 @@ package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.Constants;
 import com.tools.requirements.AbstractSteps;
 
 public class StarterSetSteps extends AbstractSteps {
@@ -11,7 +10,6 @@ public class StarterSetSteps extends AbstractSteps {
 
 	@Step
 	public void clickOnJetztStyleCoachWerdenButton() {
-		
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();
 	}
 

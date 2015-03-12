@@ -27,13 +27,11 @@ import com.tools.requirements.Application;
 @RunWith(ThucydidesRunner.class)
 public class US5001FacebookLoginTest extends BaseTest{
 	
-	
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
 	public FacebookRegistrationSteps facebookRegistrationSteps;
 	
-//	private String beUser,bePass;
 	private String fbUser, fbPass;
 	private String zipCode,countryCode, pippaPass;
 	

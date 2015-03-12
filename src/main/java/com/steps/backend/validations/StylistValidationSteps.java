@@ -2,8 +2,6 @@ package com.steps.backend.validations;
 
 import net.thucydides.core.annotations.Step;
 
-import org.junit.Assert;
-
 import com.tools.CustomVerification;
 import com.tools.requirements.AbstractSteps;
 
@@ -15,18 +13,21 @@ public class StylistValidationSteps extends AbstractSteps {
 	public void validateStatus(String confirmationstatus, String expectedconfirmationstatus) {
 
 		CustomVerification.verifyTrue("Failure: The confirmation status is not the expected one!!!", confirmationstatus.contentEquals(expectedconfirmationstatus));
-	
+
 	}
+
 	@Step
 	public void validateJewwelryBonus(String grabbed, String expected) {
 
 		CustomVerification.verifyTrue("Failure: The jewelry bonus amount is not the expected one!!!", grabbed.contentEquals(expected));
 	}
+
 	@Step
 	public void validateCustomerType(String grabbedCustomerType, String expectedCustomerType) {
 
 		CustomVerification.verifyTrue("Failure: The customer type is not the expected one!!!", grabbedCustomerType.contentEquals(expectedCustomerType));
 	}
+
 	@Step
 	public void validateDates(String grabbedDate, String expectedDate) {
 
