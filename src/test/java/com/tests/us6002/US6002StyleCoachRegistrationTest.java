@@ -35,7 +35,7 @@ import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 
-@WithTag(name = "US6001", type = "frontend")
+@WithTag(name = "US6002", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002StyleCoachRegistrationTest extends BaseTest{

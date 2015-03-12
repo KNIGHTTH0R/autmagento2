@@ -21,17 +21,16 @@ import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.backend.StylistRegistrationAndActivationDateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US6001", type = "external")
+@WithTag(name = "US6001", type = "external,backend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US6001CheckStylistActivationTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
-	@Steps
+	@Steps	
 	public OrdersSteps ordersSteps;
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -79,7 +78,7 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 
 
 	@Test
-	public void us000CheckCustomerActivation() {
+	public void us6001CheckStylistActivation() {
 
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
