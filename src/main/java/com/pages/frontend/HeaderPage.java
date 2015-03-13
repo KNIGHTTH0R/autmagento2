@@ -81,5 +81,9 @@ public class HeaderPage extends AbstractPage {
 		element(abmeldenButton).waitUntilVisible();
 		abmeldenButton.click();
 	}
+	
+	public String getUrl(){
+		return getDriver().getCurrentUrl();
+	}
 
 }

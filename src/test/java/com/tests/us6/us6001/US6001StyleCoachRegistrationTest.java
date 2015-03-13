@@ -54,10 +54,11 @@ public class US6001StyleCoachRegistrationTest extends BaseTest {
 
 	@Test
 	public void us6001StyleCoachRegistrationTest(){ 
-		headerSteps.navigateToRegisterform();
+		headerSteps.navigateToRegisterForm();
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 		customVerification.printErrors();
+		
 	}
 
 	@After

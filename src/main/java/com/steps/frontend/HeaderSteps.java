@@ -2,6 +2,7 @@ package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Steps;
 
 import com.tools.Constants;
 import com.tools.requirements.AbstractSteps;
@@ -15,6 +16,15 @@ public class HeaderSteps extends AbstractSteps {
 	 * 
 	 * @return - Preview Price
 	 */
+	@Steps
+	StylistCampaignSteps stylistCampaignSteps;
+	@Steps
+	StarterSetSteps starterSetSteps;
+	@Steps
+	LoginSteps loginSteps;
+	@Steps
+	HeaderSteps headerSteps;
+
 	@Step
 	public String openCartPreview() {
 		headerPage().clickShoppingBag();
@@ -34,28 +44,55 @@ public class HeaderSteps extends AbstractSteps {
 	public void redirectToProfileHistory() {
 		getDriver().get(Constants.PROFILE_HISTORY_URL);
 	}
-	
+
 	public void redirectToCartPage() {
 		getDriver().get(Constants.CART_PAGE_URL);
 	}
+
 	@StepGroup
-	public void navigateToRegisterform(){
+	public void navigateToRegisterForm() {
 		getDriver().get(Constants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();
 		stylistCampaignPage().clickJetztStartenButton();
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();
-		
+
 	}
+
 	@StepGroup
-	public void navigateToRegisterFormAndLogout(){
+	public void navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton() {
+		getDriver().get(Constants.BASE_FE_URL);
+		headerPage().clickAnmeldenButton();
+		loginPage().clickOnStylistRegistrationLink();
+		stylistCampaignPage().clickStarteJetztButton();
+		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+
+	}
+
+	@StepGroup
+	public void navigateToRegisterFormAndLogout() {
 		getDriver().get(Constants.BASE_FE_URL);
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();
 		stylistCampaignPage().clickJetztStartenButton();
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();
-		
+
+	}
+
+	@Step
+	public String getUrl() {
+		return headerPage().getUrl();
+	}
+
+	@Step
+	public void clickAnmeldenButton() {
+		headerPage().clickAnmeldenButton();
+	}
+
+	@Step
+	public void clickAbmeldenButton() {
+		headerPage().clickAbmeldenButton();
 	}
 
 }

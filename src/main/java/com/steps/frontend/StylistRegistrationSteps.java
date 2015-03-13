@@ -6,6 +6,9 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
+import org.junit.Assert;
+
+import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.AbstractSteps;
@@ -245,6 +248,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	@Step
 	public void clickLoginLinkFromMessage() {
 		stylistRegistrationPage().clickLoginLinkFromMessage();
+	}
+
+	@Step
+	public void validateStylistRegisterPageTitle() {
+		Assert.assertTrue("You are not on the style coach register page", stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(Constants.STYLE_COACH_REG_PAGE_TITLE));
 	}
 
 	@Step

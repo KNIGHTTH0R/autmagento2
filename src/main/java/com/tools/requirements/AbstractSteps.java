@@ -21,7 +21,9 @@ import com.pages.external.MailinatorPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
 import com.pages.external.facebook.FacebookEMBLoginPage;
 import com.pages.frontend.CreateCustomerPage;
+import com.pages.frontend.FooterPage;
 import com.pages.frontend.HeaderPage;
+import com.pages.frontend.HomePage;
 import com.pages.frontend.LoginPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
@@ -54,6 +56,14 @@ public class AbstractSteps extends ScenarioSteps {
 	 */
 	@Step
 	public void performLogin(String userName, String userPass) {
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+	}
+	@Step
+	public void navigateToLoginPageAndPerformLogin(String userName, String userPass) {
+//		getDriver().get(Constants.BASE_FE_URL);
+		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
@@ -138,6 +148,9 @@ public class AbstractSteps extends ScenarioSteps {
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
 	}
+	public HomePage homePage() {
+		return getPages().currentPageAt(HomePage.class);
+	}
 	public StarterSetPage starterSetPage() {
 		return getPages().currentPageAt(StarterSetPage.class);
 	}
@@ -156,6 +169,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public HeaderPage headerPage() {
 		return getPages().currentPageAt(HeaderPage.class);
+	}
+	public FooterPage footerPage() {
+		return getPages().currentPageAt(FooterPage.class);
 	}
 
 	public ProductListPage productListPage() {
