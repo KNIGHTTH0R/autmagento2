@@ -26,6 +26,9 @@ public class CreateCustomerPage extends AbstractPage {
 
 	@FindBy(id = "invitation_email")
 	private WebElement invitationEmailInput;
+	
+	@FindBy(id = "is_subscribed")
+	private WebElement newsletterCheckbox;
 
 	@FindBy(id = "flag_stylist_parties")
 	private WebElement partiesCheckbox;

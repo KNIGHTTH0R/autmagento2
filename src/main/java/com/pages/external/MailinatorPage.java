@@ -2,6 +2,7 @@ package com.pages.external;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -63,7 +64,7 @@ public class MailinatorPage extends AbstractPage {
 	public String grabEmail(String title) {
 		element(inboxContainer).waitUntilVisible();
 		String returnText = "";
-		
+		boolean foundEmail = false;
 		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("li"));
 		
 		for (WebElement itemNow : emailList) {
@@ -71,10 +72,11 @@ public class MailinatorPage extends AbstractPage {
 			System.out.println("Row: " + allText);
 			if (allText.contains(title)) {
 				itemNow.findElement(By.cssSelector("div.subject")).click();
+				foundEmail = true;
 				break;
 			} 
 		}
-		
+		Assert.assertTrue("The email with the title" + title + "was not found"  , foundEmail);
 		return returnText;
 	}
 

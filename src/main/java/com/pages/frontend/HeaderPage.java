@@ -1,5 +1,7 @@
 package com.pages.frontend;
 
+import java.util.List;
+
 import net.thucydides.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.WebElement;
@@ -32,8 +34,12 @@ public class HeaderPage extends AbstractPage {
 	
 	@FindBy(css = "a[title='Anmelden']")
 	private WebElement anmeldenButton;
+	
 	@FindBy(css = "a[title='Abmelden']")
 	private WebElement abmeldenButton;
+	
+	@FindBy(css = "div.branding p")
+	private WebElement brandContainer;
 
 	public void searchInput(String seachKey) {
 		element(searchInput).waitUntilVisible();
@@ -83,6 +89,15 @@ public class HeaderPage extends AbstractPage {
 	
 	public String getUrl(){
 		return getDriver().getCurrentUrl();
+	}
+	
+	public String getBoutiqueName(){
+		return brandContainer.getText();
+	}
+	
+	public void getStyleCoachNameFromProfile(){
+		
+//		List<WebElement> list = getDriver()
 	}
 
 }

@@ -27,9 +27,9 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 		// inputStylistEmail(stylistEmail);
 		checkParties();
-
+		checkMember();
 		fillContactDetails(addressData);
-		// checkMember();
+	
 		checkNoInvite();
 		checkIAgree();
 
