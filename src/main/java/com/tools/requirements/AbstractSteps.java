@@ -60,6 +60,14 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 	}
+	@Step
+	public void navigateToLoginPageAndPerformLogin(String userName, String userPass) {
+//		getDriver().get(Constants.BASE_FE_URL);
+		headerPage().clickAnmeldenButton();
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+	}
 
 	/**
 	 * Clean cart content. On current user. This method should be used

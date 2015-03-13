@@ -1,4 +1,4 @@
-package com.steps.frontend;
+package com.steps.backend;
 
 import net.thucydides.core.annotations.Step;
 

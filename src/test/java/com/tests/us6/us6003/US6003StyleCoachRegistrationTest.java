@@ -1,9 +1,5 @@
 package com.tests.us6.us6003;
 
-import java.io.IOException;
-
-import javax.xml.soap.SOAPException;
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -13,15 +9,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
-import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.StylistCampaignSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
 import com.tools.requirements.Application;
-import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 
 @WithTag(name = "US6003", type = "frontend")
@@ -30,64 +24,64 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 public class US6003StyleCoachRegistrationTest extends BaseTest{
 	
 	@Steps
+	public FooterSteps footerSteps;	
+	@Steps
 	public HeaderSteps headerSteps;	
+	@Steps
+	public HomeSteps homeSteps;	
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
-	public StylistCampaignSteps stylistCampaignSteps;
-	@Steps
-	public EmailClientSteps emailClientSteps;	
-	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
-	@Steps 
-	public CustomVerification customVerifications;
-	@Steps 
+	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps 
-	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;	
 	
 	private String username = "pN46P3vr@mailinator.com";
 	private String password = "MXpUvCPtsIEEFq1";
 	
-
-
-	
 	@Test
-	public void us6003StyleCoachRegistrationTest() throws SOAPException, IOException{
+	public void us6003NavigateToStyleCoachRegisterPage() {
 		
-//		headerSteps.navigateToRegisterForm();
-//		String title1 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-//		System.out.println(title1);
-//		headerSteps.navigateToRegisterForm2();
-//		String title2 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-//		System.out.println(title2);
-//		headerSteps.navigateToRegisterForm3();
-//		String title3 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-//		System.out.println(title3);
-//		headerSteps.navigateToRegisterForm4();
-//		String title4 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-//		System.out.println(title4);	
+		headerSteps.navigateToRegisterForm();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 		
-		customerRegistrationSteps.performLogin(username,password);
+		headerSteps.navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+
+		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndJetzStarten();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+
+		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();		
 		
-//		headerSteps.navigateToRegisterForm3();
-//		String title3 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-//		System.out.println(title3);
-//		headerSteps.navigateToRegisterForm4();
-//		String title4 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-//		System.out.println(title4);
-//		headerSteps.navigateToRegisterForm5();
-//		String title5 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-//		System.out.println(title5);
-//		headerSteps.navigateToRegisterForm6();
-//		String title6 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-//		System.out.println(title6);		
-//		headerSteps.navigateToRegisterForm7();
-//		String title7 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-//		System.out.println(title7);		
-		headerSteps.navigateToRegisterForm8();
-		String title8 = stylistRegistrationSteps.getStylistRegisterPageTitle();
-		System.out.println(title8);		
+		customerRegistrationSteps.navigateToLoginPageAndPerformLogin(username,password);
+		
+		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndJetzStarten();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+	
+		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+
+		footerSteps.navigateToRegisterFormFromRegistrierungLink();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+		
+		footerSteps.navigateToRegisterFormFromStarterSetLink();;
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+			
+		footerSteps.navigateToRegisterFormFromTrainingLink();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+			
+		footerSteps.navigateToRegisterFormFromIncentivereisenLink();;
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+			
+		footerSteps.navigateToRegisterFormFromErfolgsgeschichtenLink();;
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+			
+		footerSteps.navigateToRegisterFormFromTraumkarriereStyleCoachLink();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+
+		
+		
 	
 	
 	}

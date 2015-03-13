@@ -260,8 +260,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	}
 
 	@Step
-	public String getStylistRegisterPageTitle() {
-		return stylistRegistrationPage().getStylistRegisterPageTitle();
+	public void validateStylistRegisterPageTitle() {
+//		stylistRegistrationPage().getStylistRegisterPageTitle();
+		Assert.assertTrue("You are not on the style coach register page", stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(Constants.STYLE_COACH_REG_PAGE_TITLE));
+		
 	}
 
 	@Step
