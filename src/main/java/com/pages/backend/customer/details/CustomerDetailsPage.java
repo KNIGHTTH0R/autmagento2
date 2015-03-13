@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.Constants;
-import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.requirements.AbstractPage;
 
 public class CustomerDetailsPage extends AbstractPage {
@@ -18,7 +17,6 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "#rewardPointsBalanceGrid_table tbody tr:nth-child(2) td:nth-child(3)")
 	private WebElement jewerlyContainer;
-	
 
 	@FindBy(css = "table.box-left tr:nth-child(5) td:last-child")
 	private WebElement customerTypeContainer;
@@ -88,6 +86,7 @@ public class CustomerDetailsPage extends AbstractPage {
 	}
 
 	public String extractCustomerType() {
+		element(customerTypeContainer).waitUntilVisible();
 		return customerTypeContainer.getText();
 	}
 
@@ -114,10 +113,6 @@ public class CustomerDetailsPage extends AbstractPage {
 		}
 	}
 
-//	public String extractJewelryBonusValue() {
-//		return jewerlyContainer.getText();
-//	}
-	
 	public String extractJewelryBonusValue() {
 		String jb = "";
 		List<WebElement> list = getDriver().findElements(By.cssSelector("#rewardPointsBalanceGrid_table tbody tr"));
@@ -127,12 +122,8 @@ public class CustomerDetailsPage extends AbstractPage {
 				break;
 			}
 		}
-		
+
 		return jb;
 	}
-
-
-
-
 
 }

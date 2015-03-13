@@ -1,15 +1,12 @@
 package com.workflows.backend;
 
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.steps.ScenarioSteps;
 
 import com.steps.backend.validations.StylistValidationSteps;
+import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
-import com.tools.data.backend.StylistRegistrationAndActivationDateModel;
 
-public class CustomerAndStylistRegistrationWorkflows extends ScenarioSteps {
-
-	private static final long serialVersionUID = 1L;
+public class CustomerAndStylistRegistrationWorkflows {
 
 	@Steps
 	public StylistValidationSteps stylistValidationSteps;
@@ -28,10 +25,10 @@ public class CustomerAndStylistRegistrationWorkflows extends ScenarioSteps {
 		stylistValidationSteps.validateCustomerType(grabbedStylistModel.getType(), expectedStylistModel.getType());
 	}
 
-	private StylistRegistrationAndActivationDateModel grabbedDatesModel = new StylistRegistrationAndActivationDateModel();
-	private StylistRegistrationAndActivationDateModel expectedDatesModel = new StylistRegistrationAndActivationDateModel();
+	private RegistrationActivationDateModel grabbedDatesModel = new RegistrationActivationDateModel();
+	private RegistrationActivationDateModel expectedDatesModel = new RegistrationActivationDateModel();
 
-	public void setValidateStylistDates(StylistRegistrationAndActivationDateModel grabbedDatesModel, StylistRegistrationAndActivationDateModel expectedDatesModel) {
+	public void setValidateStylistDates(RegistrationActivationDateModel grabbedDatesModel, RegistrationActivationDateModel expectedDatesModel) {
 		this.grabbedDatesModel = grabbedDatesModel;
 		this.expectedDatesModel = expectedDatesModel;
 	}

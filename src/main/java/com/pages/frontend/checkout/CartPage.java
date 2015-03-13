@@ -48,6 +48,9 @@ public class CartPage extends AbstractPage {
 	
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
+	
+	@FindBy(className = "shopping-bag-form")
+	private WebElement formContainer;
 
 	/**
 	 * Will grab all products data from all carts
@@ -86,7 +89,8 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith25Discount() {
-		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-25-table tbody > tr"));
+		element(formContainer).waitUntilVisible();
+		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-25-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 		System.out.println(resultList.size());
 
@@ -114,7 +118,8 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith50Discount() {
-		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-50-table tbody > tr"));
+		element(formContainer).waitUntilVisible();
+		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-50-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 		System.out.println(resultList.size());
 
@@ -143,7 +148,8 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabMarketingMaterialProductsData() {
-		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-table-marketing-material tbody > tr"));
+		element(formContainer).waitUntilVisible();
+		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-table-marketing-material tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 		System.out.println(resultList.size());
 

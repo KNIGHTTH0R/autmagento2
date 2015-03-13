@@ -14,7 +14,6 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
@@ -30,35 +29,27 @@ public class US6002CreateCustomerTest extends BaseTest{
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel dataModel;
-	public AddressModel addressModel;
-	public StylistDataModel validationModel;
+	public CustomerFormModel customerData;
+	public AddressModel customerAddressData;
 
 	@Before
 	public void setUp() throws Exception {
 		// Generate data for this test run
-		dataModel = new CustomerFormModel();
-		addressModel = new AddressModel();
-		
+		customerData = new CustomerFormModel();
+		customerAddressData = new AddressModel();
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
-	/**
-	 * FrontEnd steps in this test
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void us6002CreateFECustomerTest() {
-
-		customerRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerForm(customerData, customerAddressData);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveStylistFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName());
 	}
 
 }

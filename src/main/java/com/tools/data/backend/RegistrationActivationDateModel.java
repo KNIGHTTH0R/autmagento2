@@ -1,11 +1,11 @@
 package com.tools.data.backend;
 
-public class StylistRegistrationAndActivationDateModel {
+public class RegistrationActivationDateModel {
 
-	public StylistRegistrationAndActivationDateModel() {
+	public RegistrationActivationDateModel() {
 	}
 
-	public StylistRegistrationAndActivationDateModel(String registrationDate, String confirmationDate) {
+	public RegistrationActivationDateModel(String registrationDate, String confirmationDate) {
 		this.registrationDate = registrationDate;
 		this.confirmationDate = confirmationDate;
 	}

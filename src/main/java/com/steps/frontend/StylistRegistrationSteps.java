@@ -2,11 +2,11 @@ package com.steps.frontend;
 
 import java.util.Set;
 
-import org.junit.Assert;
-
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
+
+import org.junit.Assert;
 
 import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
@@ -31,7 +31,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		fillContactDetails(addressData);
 		checkNoCoachCheckbox();
 		checkIAgree();
-		String date = FormatterUtils.getAndFormatCurrentDate();
 		submitStep();
 		inputStylistRef(customerData.getFirstName());
 		submitStep();
@@ -40,15 +39,14 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		clickOnNachahmePaymentMethod();
 		submitPaymentMethod();
 
+		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
 
 	@StepGroup
 	public String fillStylistRegistrationPredefinedInfoForm(String name, AddressModel addressData, String birthDate) {
-
 		selectBirthDate(birthDate);
 		checkIAgree();
-		String date = FormatterUtils.getAndFormatCurrentDate();
 		submitStep();
 		inputStylistRef(name);
 		submitStep();
@@ -57,6 +55,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		clickOnNachahmePaymentMethod();
 		submitPaymentMethod();
 
+		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
 
@@ -73,10 +72,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@StepGroup
 	public void selectBirthDate(String dateOfBirth) {
-		String elems[] = dateOfBirth.split(Constants.DATE_SEPARATOR);
-		if (elems.length != 3) {
-			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'", elems.length != 3);
-		}
+		String elems[] = FormatterUtils.splitDate(dateOfBirth);
 		clickDob();
 		selectMonth(elems[0]);
 		selectYear(elems[1]);
@@ -239,18 +235,13 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void goToFacebookLogin(String user, String pass) {
 		clickOnFacebookLogin();
-		// waitABit(2000);
 		Set<String> windowsList = getDriver().getWindowHandles();
 		for (String string : windowsList) {
 			getDriver().switchTo().window(string);
-			// System.out.println("string: " + string);
-			// System.out.println("HEre: " + getDriver().getTitle());
 			if (getDriver().getTitle().trim().contains("Facebook")) {
 				performFacebookLogin(user, pass);
 			}
-			// waitABit(2000);
 		}
-
 		getDriver().switchTo().defaultContent();
 	}
 
@@ -261,9 +252,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@Step
 	public void validateStylistRegisterPageTitle() {
-//		stylistRegistrationPage().getStylistRegisterPageTitle();
 		Assert.assertTrue("You are not on the style coach register page", stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(Constants.STYLE_COACH_REG_PAGE_TITLE));
-		
 	}
 
 	@Step

@@ -137,31 +137,7 @@ public class MongoReader extends MongoConnector {
 		List<CustomerFormModel> itemList = new ArrayList<CustomerFormModel>();
 
 		workingDB = mongoClient.getDB(testName);
-		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CUSTOMER_MODEL).find();
-
-		try {
-			while (cursor.hasNext()) {
-				CustomerFormModel result = new CustomerFormModel();
-				dbObject = cursor.next();
-
-				result.setEmailName(MongoUtils.checkField(dbObject, MongoTableKeys.CLIENT_NAME));
-
-				itemList.add(result);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			cursor.close();
-		}
-		return itemList;
-	}
-
-	public static List<CustomerFormModel> grabStylistFormModels(String testName) {
-		DBObject dbObject = null;
-		List<CustomerFormModel> itemList = new ArrayList<CustomerFormModel>();
-
-		workingDB = mongoClient.getDB(testName);
-		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STYLIST_MODEL).find();
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CUSTOMER_FORM_MODEL).find();
 
 		try {
 			while (cursor.hasNext()) {

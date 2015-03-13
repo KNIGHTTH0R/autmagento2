@@ -30,7 +30,7 @@ public class MongoTableKeys {
 	public static final String HOSTESS_LEADS_WEEK = "hostessLeadsWeek";
 	
 	//Customer model properties
-	public static final String CUSTOMER_MODEL = "CustomerModel";
+//	public static final String CUSTOMER_MODEL = "CustomerModel";
 	public static final String CLIENT_NAME = "clientName";
 	
 	//Stylist model properties
@@ -117,6 +117,9 @@ public class MongoTableKeys {
 	//URLModel
 	public static final String URL_MODEL = "UrlModel";
 	public static final String URL_PATH = "url:";
+	
+	
+	public static final String CUSTOMER_FORM_MODEL = "CustomerFormModel";
 
 
 }

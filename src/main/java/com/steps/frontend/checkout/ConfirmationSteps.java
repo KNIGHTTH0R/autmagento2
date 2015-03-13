@@ -41,6 +41,7 @@ public class ConfirmationSteps extends AbstractSteps{
 	public void agreeAndCheckout() {
 		confirmationPage().clickIAgree();
 		confirmationPage().clickOnSubmit();
+		waitABit(Constants.WAIT_TIME_LONG);
 	}
 
 

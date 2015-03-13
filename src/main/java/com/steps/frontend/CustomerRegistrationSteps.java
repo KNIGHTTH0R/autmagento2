@@ -153,18 +153,13 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void goToFacebookLogin(String user, String pass) {
 		clickOnFacebookLogin();
-//		waitABit(2000);
 		Set<String> windowsList = getDriver().getWindowHandles();
 		for (String string : windowsList) {
 			getDriver().switchTo().window(string);
-//			System.out.println("string: " + string);
-//			System.out.println("HEre: " + getDriver().getTitle());
 			if(getDriver().getTitle().trim().contains("Facebook")){
 				performFacebookLogin(user, pass);
 			}
-//			waitABit(2000);
 		}
-		
 		getDriver().switchTo().defaultContent();
 	}
 	

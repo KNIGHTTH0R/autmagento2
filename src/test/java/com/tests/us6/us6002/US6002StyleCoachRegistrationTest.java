@@ -1,15 +1,12 @@
 package com.tests.us6.us6002;
 
-import java.io.IOException;
-
-import javax.xml.soap.SOAPException;
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,12 +16,10 @@ import com.steps.backend.BackEndSteps;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -45,8 +40,6 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
-	public StylistCampaignSteps stylistCampaignSteps;
-	@Steps
 	public EmailClientSteps emailClientSteps;	
 	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
@@ -57,64 +50,55 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public CustomerFormModel dataModel;
-	public DateModel dateModel = new DateModel();
-	public AddressModel addressModel;
-	public StylistDataModel validationModel;
-	public StylistPropertiesModel beforeLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
+	public static DateModel formDate = new DateModel();
+	public AddressModel stylistAddressModel;
+	public StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	
-	public String stylistEmail;
-	public String stylistname;
-	public String password;
+	public CustomerFormModel stylistData = new CustomerFormModel("");
+	public String birthDate;
 
 	@Before
 	public void setUp() throws Exception {
 		// Generate data for this test run
-		dataModel = new CustomerFormModel();
-		addressModel = new AddressModel();
-		beforeLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(Constants.NOT_CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
+		stylistAddressModel = new AddressModel();
+		birthDate = "Feb,1970,12";
+		expectedBeforeLinkConfirmationStylistData =  new StylistPropertiesModel(Constants.NOT_CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-		int size = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").size();
+		int size = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").get(0).getEmailName();
-			stylistname = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").get(0).getFirstName();
-			password = MongoReader.grabStylistFormModels("US6002CreateCustomerTest").get(0).getPassword();
-			System.out.println(stylistEmail);
-			System.out.println(password);
+			stylistData = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").get(0);
 		} else
-			System.out.println("The database has no entries");
+			Assert.assertTrue("Failure: No test data has been found.", false);
 	}
 	
 	@Test
-	public void us6002StyleCoachRegistrationTest() throws SOAPException, IOException{
+	public void us6001StyleCoachRegistrationTest() {
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail(stylistEmail);
-		backEndSteps.openCustomerDetails(stylistEmail);
-		
-		StylistPropertiesModel beforeLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();
+		backEndSteps.searchForEmail(stylistData.getEmailName());
+		backEndSteps.openCustomerDetails(stylistData.getEmailName());
+		StylistPropertiesModel grabBeforeLinkConfirmationStylistData =  backEndSteps.grabCustomerConfiguration();
 		
 		//confirmation link
 		emailClientSteps.openMailinator();
-		emailClientSteps.grabEmail(stylistEmail.replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
+		emailClientSteps.grabEmail(stylistData.getEmailName().replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
 		
 		headerSteps.navigateToRegisterFormAndLogout();
 		stylistRegistrationSteps.clickLoginLinkFromMessage();
-		customerRegistrationSteps.performLogin(stylistEmail, password);
-		String date = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistname, addressModel, "Feb,1970,12");
-		dateModel.setDate(date);
+		customerRegistrationSteps.performLogin(stylistData.getEmailName(), stylistData.getPassword());
+		String formCreationDate = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), stylistAddressModel, birthDate);
+		formDate.setDate(formCreationDate);
 		
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(beforeLinkConfirmationStylistProperties, beforeLinkConfirmationStylistExpectedProperties);	
+		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
 		
 		customVerifications.printErrors();		
-	
 	}
 	
 	@After
 	public void saveData() {
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());		
+		MongoWriter.saveDateModel(formDate, getClass().getSimpleName());
 	}
 }

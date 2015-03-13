@@ -5,17 +5,24 @@ import com.tools.FieldGenerators;
 import com.tools.FieldGenerators.Mode;
 
 public class CustomerFormModel {
-	
+
 	private String firstName;
 	private String lastName;
 	private String emailName;
 	private String password;
-	
+
 	public CustomerFormModel() throws Exception {
 		setFirstName();
 		setLastName();
 		setEmailName();
 		setPassword();
+	}
+
+	public CustomerFormModel(String str) {
+		setFirstName(str);
+		setLastName(str);
+		setEmailName(str);
+		setPassword(str);
 	}
 
 	public String getFirstName() {
@@ -49,21 +56,20 @@ public class CustomerFormModel {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	//Custom setters for data generation
+
+	// Custom setters for data generation
 	public void setFirstName() throws Exception {
 		this.firstName = FieldGenerators.generateRandomString(8, Mode.ALPHA);
 	}
-	
+
 	public void setLastName() throws Exception {
 		this.lastName = FieldGenerators.generateRandomString(8, Mode.ALPHA);
 	}
-	
+
 	public void setEmailName() throws Exception {
 		this.emailName = FieldGenerators.generateRandomString(8, Mode.ALPHANUMERIC) + "@" + Constants.WEB_MAIL;
 	}
-	
+
 	public void setPassword() throws Exception {
 		this.password = FieldGenerators.generateRandomString(13, Mode.ALPHANUMERIC) + "q1";
 	}

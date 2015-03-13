@@ -12,5 +12,9 @@ public class Application {
 	public class StyleCoach {
 		public class Shopping {
 		}
+		public class Registration {
+		}
 	}
+	
+	
 }

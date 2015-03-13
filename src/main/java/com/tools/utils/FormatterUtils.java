@@ -5,14 +5,21 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.junit.Assert;
+
+import com.tools.Constants;
+
 public class FormatterUtils {
 	
+	/**
+	 * This is a helper method to aproximate the (local time RO)
+	 * of a form creation. 1 Hour is substracted from the time (GMT offset)
+	 * @return
+	 */
 	public static String getAndFormatCurrentDate() {
-		
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 		Date date = new Date(System.currentTimeMillis() - 3600 * 1000);
 		return dateFormat.format(date);
-
 	}
 
 	public static BigDecimal cleanNumberToBigDecimal(String unitPrice) {
@@ -79,5 +86,13 @@ public class FormatterUtils {
 		}
 
 		return finalResult;
+	}
+
+	public static String[] splitDate(String dateOfBirth) {
+		String elems[] = dateOfBirth.split(Constants.DATE_SEPARATOR);
+		if (elems.length != 3) {
+			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'", elems.length != 3);
+		}
+		return elems;
 	}
 }
