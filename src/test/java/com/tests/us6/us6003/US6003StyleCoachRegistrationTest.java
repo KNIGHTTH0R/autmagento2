@@ -42,6 +42,7 @@ public class US6003StyleCoachRegistrationTest extends BaseTest{
 	@Test
 	public void us6003NavigateToStyleCoachRegisterPage() {
 		
+		//navigate to register page without being logged in
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 		
@@ -54,6 +55,7 @@ public class US6003StyleCoachRegistrationTest extends BaseTest{
 		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt();
 		stylistRegistrationSteps.validateStylistRegisterPageTitle();		
 		
+		//navigate to register page being logged in as regular customer
 		customerRegistrationSteps.navigateToLoginPageAndPerformLogin(username,password);
 		
 		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndJetzStarten();
@@ -78,11 +80,7 @@ public class US6003StyleCoachRegistrationTest extends BaseTest{
 		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 			
 		footerSteps.navigateToRegisterFormFromTraumkarriereStyleCoachLink();
-		stylistRegistrationSteps.validateStylistRegisterPageTitle();
-
-		
-		
-	
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();	
 	
 	}
 	
