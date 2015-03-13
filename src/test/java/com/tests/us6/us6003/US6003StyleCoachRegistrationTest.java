@@ -40,7 +40,7 @@ public class US6003StyleCoachRegistrationTest extends BaseTest{
 	private String password = "MXpUvCPtsIEEFq1";
 	
 	@Test
-	public void us6003NavigateToStyleCoachRegisterPage() {
+	public void us6003NavigateToStyleCoachRegisterPageTest() {
 		
 		//navigate to register page without being logged in
 		headerSteps.navigateToRegisterForm();
