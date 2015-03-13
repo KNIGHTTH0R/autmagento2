@@ -32,6 +32,7 @@ public class HeaderPage extends AbstractPage {
 	
 	@FindBy(css = "a[title='Anmelden']")
 	private WebElement anmeldenButton;
+	
 	@FindBy(css = "a[title='Abmelden']")
 	private WebElement abmeldenButton;
 

@@ -57,33 +57,24 @@ public class MongoWriter extends MongoConnector {
 
 	public static void saveCustomerFormModel(CustomerFormModel customerModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
-		DBCollection table = workingDB.getCollection(MongoTableKeys.CUSTOMER_MODEL);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.CUSTOMER_FORM_MODEL);
 
-		BasicDBObject document = new BasicDBObject();
-		document.put(MongoTableKeys.CLIENT_NAME, customerModel.getEmailName());
-
-		table.insert(document);
-	}
-	public static void saveStylistFormModel(CustomerFormModel customerModel, String testName) {
-		workingDB = mongoClient.getDB(testName);
-		DBCollection table = workingDB.getCollection(MongoTableKeys.STYLIST_MODEL);
-		
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.STYLIST_FIRSTNAME, customerModel.getFirstName());
 		document.put(MongoTableKeys.STYLIST_LASTNAME, customerModel.getLastName());
 		document.put(MongoTableKeys.STYLIST_EMAIL, customerModel.getEmailName());
 		document.put(MongoTableKeys.STYLIST_PASSWORD, customerModel.getPassword());
-		
+
 		table.insert(document);
 	}
+
 	public static void saveDateModel(DateModel dateModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.DATE_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.REGISTRATION_DATE, dateModel.getDate());
-		
-		
+
 		table.insert(document);
 	}
 
@@ -125,10 +116,11 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void saveBasicProductModel(BasicProductModel product, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.BASIC_PRODUCT_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.BASIC_PRODUCT_MODEL, product.getName());
 		document.put(MongoTableKeys.PRODUCT_CODE, product.getProdCode());
@@ -138,7 +130,7 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.PRODUCT_ASKING_PRICE, product.getProductsPrice());
 		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
 		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getPriceIP());
-		
+
 		table.insert(document);
 	}
 

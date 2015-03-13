@@ -1,9 +1,5 @@
 package com.tests.us6.us6001;
 
-import java.io.IOException;
-
-import javax.xml.soap.SOAPException;
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -27,48 +23,47 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-
 @WithTag(name = "US6001", type = "frontend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.StyleCoach.Registration.class)
 @RunWith(ThucydidesRunner.class)
-public class US6001StyleCoachRegistrationTest extends BaseTest{
-	
+public class US6001StyleCoachRegistrationTest extends BaseTest {
+
 	@Steps
 	public HeaderSteps headerSteps;
-	
 	@Steps
 	public StylistCampaignSteps stylistCampaignSteps;
-	
 	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
-	@Steps 
-	public CustomVerification customVerifications;
+	@Steps
+	public CustomVerification customVerification;
 
-	public CustomerFormModel dataModel;
-	public DateModel dateModel = new DateModel();
-	public AddressModel addressModel;
+	public CustomerFormModel customerFormData;
+	public DateModel customerFormDate = new DateModel();
+	public DateModel birthDate = new DateModel();
+	public AddressModel customerFormAddress;
 	public StylistDataModel validationModel;
 
 	@Before
 	public void setUp() throws Exception {
 		// Generate data for this test run
-		dataModel = new CustomerFormModel();
-		addressModel = new AddressModel();
+		customerFormData = new CustomerFormModel();
+		customerFormAddress = new AddressModel();
+		birthDate.setDate("Feb,1970,12");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
-	
+
 	@Test
-	public void us6001StyleCoachRegistrationTest() throws SOAPException, IOException{
+	public void us6001StyleCoachRegistrationTest(){ 
 		headerSteps.navigateToRegisterform();
-		String date = stylistRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel, "Feb,1970,12");
-		dateModel.setDate(date);
-		customVerifications.printErrors();		
+		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
+		customerFormDate.setDate(formCreationDate);
+		customVerification.printErrors();
 	}
-	
+
 	@After
 	public void saveData() {
-		MongoWriter.saveStylistFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
-		
+		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
+		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
+
 	}
 }

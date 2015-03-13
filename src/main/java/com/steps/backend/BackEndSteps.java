@@ -5,7 +5,7 @@ import net.thucydides.core.annotations.Step;
 import com.tools.Constants;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.StylistPropertiesModel;
-import com.tools.data.backend.StylistRegistrationAndActivationDateModel;
+import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.requirements.AbstractSteps;
 
 public class BackEndSteps extends AbstractSteps {
@@ -106,10 +106,8 @@ public class BackEndSteps extends AbstractSteps {
 	public void deleteCustomer() {
 		customerDetailsHomePage().deleteCustomer();
 	}
-	
 
 	public StylistPropertiesModel grabCustomerConfiguration() {
-//		element(customerTypeContainer).waitUntilVisible();
 		StylistPropertiesModel stylistModel = new StylistPropertiesModel();
 		stylistModel.setType(extractCustomerType());
 		stylistModel.setStatus(extractEmailConfirmationStatusWithoutLabel());
@@ -118,8 +116,8 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
-	public StylistRegistrationAndActivationDateModel grabStylistRegistrationAndConfirmationDates() {
-		StylistRegistrationAndActivationDateModel datesModel = new StylistRegistrationAndActivationDateModel();
+	public RegistrationActivationDateModel grabStylistRegistrationAndConfirmationDates() {
+		RegistrationActivationDateModel datesModel = new RegistrationActivationDateModel();
 		datesModel.setRegistrationDate(customerDetailsHomePage().extractRegistrationDate());
 		datesModel.setConfirmationDate(customerDetailsHomePage().extractConfirmationDate());
 
