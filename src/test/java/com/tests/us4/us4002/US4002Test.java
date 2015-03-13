@@ -117,7 +117,7 @@ public class US4002Test extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us4002" + File.separator + "us4002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us4" + File.separator + "us4002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");

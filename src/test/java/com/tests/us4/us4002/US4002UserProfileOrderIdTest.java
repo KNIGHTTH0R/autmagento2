@@ -52,7 +52,7 @@ public class US4002UserProfileOrderIdTest extends BaseTest{
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us4002" + File.separator + "us4002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us4" + File.separator + "us4002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");			

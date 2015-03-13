@@ -75,7 +75,7 @@ public class US4002ValidateOrderBackOfficeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us4002" + File.separator + "us4002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us4" + File.separator + "us4002.properties");
 			prop.load(input);
 			beUser = prop.getProperty("beUser");
 			bePass = prop.getProperty("bePass");

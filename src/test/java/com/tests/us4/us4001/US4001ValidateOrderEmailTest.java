@@ -58,7 +58,7 @@ public class US4001ValidateOrderEmailTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us4001" + File.separator + "us4001.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us4" + File.separator + "us4001.properties");
 			prop.load(input);
 			email = prop.getProperty("email");
 			password = prop.getProperty("password");
