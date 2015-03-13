@@ -21,17 +21,16 @@ public class CartWorkflows2 {
 
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
-	
 
 	@Steps 
 	public static CustomVerification customVerification;
 
-	private static List<BasicProductModel> basicProductsList = new ArrayList<BasicProductModel>();
-	private static List<CartProductModel> cartProductsList = new ArrayList<CartProductModel>();
+	private List<BasicProductModel> basicProductsList = new ArrayList<BasicProductModel>();
+	private List<CartProductModel> cartProductsList = new ArrayList<CartProductModel>();
 	
 	public void setValidateProductsModels(List<BasicProductModel> basicProductsList, List<CartProductModel> cartProductsList) {
-		CartWorkflows2.basicProductsList = basicProductsList;
-		CartWorkflows2.cartProductsList = cartProductsList;
+		this.basicProductsList = basicProductsList;
+		this.cartProductsList = cartProductsList;
 	}
 	
 	@Step
@@ -40,8 +39,10 @@ public class CartWorkflows2 {
 		for (BasicProductModel productNow : basicProductsList) {
 			CartProductModel compare = findProduct(productNow.getProdCode(),productNow.getQuantity(), cartProductsList);
 
-			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
-
+			if(compare != null){
+				compare.setQuantity(compare.getQuantity().replace("x", "").trim());
+			}
+			
 			if (compare.getName() != null) {
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());

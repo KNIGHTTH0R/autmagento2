@@ -40,8 +40,6 @@ public class CartSteps extends  AbstractSteps{
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith50PercentDiscount(){
-		PrintUtils.printList(cartPage().grabProductsDataWith50Discount());
-		
 		return cartPage().grabProductsDataWith50Discount();
 	}
 
@@ -50,8 +48,6 @@ public class CartSteps extends  AbstractSteps{
 	 * @return
 	 */
 	public List<CartProductModel> grabMarketingMaterialProductsData(){
-		PrintUtils.printList(cartPage().grabMarketingMaterialProductsData());
-		
 		return cartPage().grabMarketingMaterialProductsData();
 	}
 	

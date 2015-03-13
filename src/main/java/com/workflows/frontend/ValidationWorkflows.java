@@ -77,6 +77,8 @@ public class ValidationWorkflows {
 	public void performCartValidations(){
 		
 		checkoutValidationSteps.verifySuccessMessage();
+		System.out.println("CartCalculator.productsList50: " + CartCalculator.productsList50.size());
+		System.out.println("DataGrabber.cartProductsWith50Discount: " + DataGrabber.cartProductsWith50Discount.size());
 		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
