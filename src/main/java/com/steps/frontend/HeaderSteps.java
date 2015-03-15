@@ -1,5 +1,7 @@
 package com.steps.frontend;
 
+import org.junit.Assert;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
@@ -93,6 +95,19 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	public void clickAbmeldenButton() {
 		headerPage().clickAbmeldenButton();
+	}
+	@Step
+	public String getBoutiqueName() {
+		return headerPage().getBoutiqueName();
+	}
+	@Step
+	public String getStyleCoachFirstNameFromProfile(){ 
+		return headerPage().getStyleCoachFirstNameFromProfile();
+	}
+	@Step
+	public void validateCustomeStyleCoachName(String boutiqueName, String styleCoachName){		
+		Assert.assertTrue("The stylecoach name and boutique name don't match !", boutiqueName.contentEquals(styleCoachName));
+		Assert.assertFalse(boutiqueName.contentEquals(""));
 	}
 
 }

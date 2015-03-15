@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -31,13 +32,13 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = "a[title='Profil']")
 	private WebElement profileButton;
-	
+
 	@FindBy(css = "a[title='Anmelden']")
 	private WebElement anmeldenButton;
-	
+
 	@FindBy(css = "a[title='Abmelden']")
 	private WebElement abmeldenButton;
-	
+
 	@FindBy(css = "div.branding p")
 	private WebElement brandContainer;
 
@@ -77,27 +78,36 @@ public class HeaderPage extends AbstractPage {
 		element(cartPreviewPrice).waitUntilVisible();
 		return cartPreviewPrice.getText();
 	}
-	
+
 	public void clickAnmeldenButton() {
 		element(anmeldenButton).waitUntilVisible();
 		anmeldenButton.click();
 	}
+
 	public void clickAbmeldenButton() {
 		element(abmeldenButton).waitUntilVisible();
 		abmeldenButton.click();
 	}
-	
-	public String getUrl(){
+
+	public String getUrl() {
 		return getDriver().getCurrentUrl();
 	}
-	
-	public String getBoutiqueName(){
-		return brandContainer.getText();
+
+	public String getBoutiqueName() {
+		return brandContainer.getText().split("'")[0].toLowerCase();
 	}
-	
-	public void getStyleCoachNameFromProfile(){
+
+	public String getStyleCoachFirstNameFromProfile() {
 		
-//		List<WebElement> list = getDriver()
+		String styleCoachNameParts[] = null ;
+		List<WebElement> infoBoxList = getDriver().findElements(By.cssSelector(".info-box"));
+		for (WebElement infoBox : infoBoxList) {
+			if (infoBox.getText().contains("MEIN STYLE COACH")) {
+				styleCoachNameParts = infoBox.findElement(By.cssSelector("dl dd")).getText().split(" ");
+				break;
+			}
+		}
+		return styleCoachNameParts[0].toLowerCase();
 	}
 
 }

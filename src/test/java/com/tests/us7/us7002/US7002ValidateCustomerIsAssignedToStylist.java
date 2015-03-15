@@ -1,4 +1,4 @@
-package com.tests.us7.us7001;
+package com.tests.us7.us7002;
 
 
 import net.thucydides.core.annotations.Steps;
@@ -19,10 +19,10 @@ import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7001", type = "frontend")
+@WithTag(name = "US7002", type = "frontend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {
+public class US7002ValidateCustomerIsAssignedToStylist extends BaseTest {
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -37,26 +37,27 @@ public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 	public String stylistEmail;
 	public String stylistPassword;
+	public String context;
 
 	@Before
 	public void setUp() throws Exception {
 		
 
-		int size = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").get(0).getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").get(0).getPassword();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").get(0).getEmailName();
+			stylistPassword = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").get(0).getPassword();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
-		
+		context = "simona";
 		
 		
 	}
 	@Test
-	public void us7001ValidateCustomerIsAssignedToStylist() {
+	public void us7002ValidateCustomerIsAssignedToStylist() {
 		
-		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
+		customerRegistrationSteps.performLoginUnderContext(stylistEmail, stylistPassword,context);
 		headerSteps.goToProfile();
 	
 		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());

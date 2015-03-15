@@ -61,6 +61,14 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().clickOnLoginButton();
 	}
 	@Step
+	public void performLoginUnderContext(String userName, String userPass, String context) {
+		getDriver().get(Constants.BASE_FE_URL + context);
+		headerPage().clickAnmeldenButton();
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+	}
+	@Step
 	public void navigateToLoginPageAndPerformLogin(String userName, String userPass) {
 //		getDriver().get(Constants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();

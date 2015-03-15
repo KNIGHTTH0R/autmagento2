@@ -14,8 +14,8 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.backend.CustomerConfigurationModel;
+import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
-import com.tools.data.backend.StylistRegistrationAndActivationDateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -34,16 +34,16 @@ public class US7001CheckReceivedEmailsTest extends BaseTest {
 	public StylistPropertiesModel beforeLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
 	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
 	public StylistPropertiesModel afterOrderPaidStylistExpectedProperties = new StylistPropertiesModel();
-	public StylistRegistrationAndActivationDateModel datesModel = new StylistRegistrationAndActivationDateModel();
+	public RegistrationActivationDateModel datesModel = new RegistrationActivationDateModel();
 	public String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {
 		
 
-		int size = MongoReader.grabStylistFormModels("US7001RegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabStylistFormModels("US7001RegularCustomerRegistrationTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
 		

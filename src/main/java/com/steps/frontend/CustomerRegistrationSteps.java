@@ -4,6 +4,7 @@ import java.util.Set;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Steps;
 
 import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
@@ -13,26 +14,66 @@ import com.tools.requirements.AbstractSteps;
 public class CustomerRegistrationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 743498685895573421L;
+	
+	@Steps
+	HeaderSteps headerSteps;
+	@Steps
+	LoginSteps loginSteps;
 
+//	@StepGroup
+//	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
+//		
+//		getDriver().get(Constants.BASE_URL_FE);
+//
+//		inputFirstName(customerData.getFirstName());
+//		inputLastName(customerData.getLastName());
+//		inputEmail(customerData.getEmailName());
+//		inputPassword(customerData.getPassword());
+//		inputConfirmation(customerData.getPassword());
+//
+//		// inputStylistEmail(stylistEmail);
+//		checkParties();
+//		checkMember();
+//		fillContactDetails(addressData);
+//	
+//		checkNoInvite();
+//		checkIAgree();
+//
+//		clickCompleteButton();
+//	}
 	@StepGroup
 	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
 		
-		getDriver().get(Constants.BASE_URL_FE);
-
+		getDriver().get(Constants.BASE_FE_URL);
+		headerSteps.clickAnmeldenButton();
+		loginSteps.clickGoToCustomerRegistration();		
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		inputEmail(customerData.getEmailName());
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
-
-		// inputStylistEmail(stylistEmail);
+		checkParties();
+		checkMember();
+		fillContactDetails(addressData);		
+		checkNoInvite();
+		checkIAgree();		
+		clickCompleteButton();
+	}
+	@StepGroup
+	public void fillCreateCustomerFormUnderContext(CustomerFormModel customerData, AddressModel addressData,String context) {
+		
+		getDriver().get(Constants.BASE_FE_URL + context);
+		headerSteps.clickAnmeldenButton();
+		loginSteps.clickGoToCustomerRegistration();		
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
 		checkParties();
 		checkMember();
 		fillContactDetails(addressData);
-	
-		checkNoInvite();
-		checkIAgree();
-
+		checkIAgree();		
 		clickCompleteButton();
 	}
 

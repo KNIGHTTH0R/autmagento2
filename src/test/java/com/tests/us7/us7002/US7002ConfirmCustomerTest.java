@@ -1,4 +1,4 @@
-package com.tests.us7.us7001;
+package com.tests.us7.us7002;
 
 
 import net.thucydides.core.annotations.Steps;
@@ -10,24 +10,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.CustomerRegistrationSteps;
-import com.steps.frontend.HeaderSteps;
+import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
+import com.tools.Constants;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7001", type = "frontend")
+@WithTag(name = "US7002", type = "external")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {
-	
+public class US7002ConfirmCustomerTest extends BaseTest {
+
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps
-	public HeaderSteps headerSteps;
+	public EmailClientSteps emailClientSteps;
 
 	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();	
 	public StylistPropertiesModel beforeLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
@@ -36,32 +34,26 @@ public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {
 	public RegistrationActivationDateModel datesModel = new RegistrationActivationDateModel();
 
 	public String stylistEmail;
-	public String stylistPassword;
+
 
 	@Before
 	public void setUp() throws Exception {
 		
 
-		int size = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").get(0).getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").get(0).getPassword();
-			System.out.println(stylistEmail);
+			stylistEmail = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
 		
-		
+		afterLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
 		
 	}
 	@Test
-	public void us7001ValidateCustomerIsAssignedToStylist() {
+	public void us7002ConfirmCustomerTest() {
 		
-		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
-		headerSteps.goToProfile();
-	
-		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
-		
-		
+		emailClientSteps.openMailinator();
+		emailClientSteps.grabEmail(stylistEmail.replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
 
 	}
 

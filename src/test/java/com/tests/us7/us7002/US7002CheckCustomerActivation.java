@@ -1,4 +1,4 @@
-package com.tests.us7.us7001;
+package com.tests.us7.us7002;
 
 
 import net.thucydides.core.annotations.Steps;
@@ -25,10 +25,10 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US7001", type = "external,backend")
+@WithTag(name = "US7002", type = "external,backend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class US7001CheckCustomerActivation extends BaseTest {
+public class US7002CheckCustomerActivation extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -56,9 +56,9 @@ public class US7001CheckCustomerActivation extends BaseTest {
 	public void setUp() throws Exception {
 		
 
-		int size = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").get(0).getEmailName();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
@@ -67,7 +67,7 @@ public class US7001CheckCustomerActivation extends BaseTest {
 		
 	}
 	@Test
-	public void us7001CheckCustomerActivation() {
+	public void us7002CheckCustomerActivation() {
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();

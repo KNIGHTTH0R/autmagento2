@@ -12,5 +12,9 @@ public class LoginSteps extends AbstractSteps{
 	public void clickOnStylistRegistrationLink() {
 		loginPage().clickOnStylistRegistrationLink();
 	}
+	@Step
+	public void clickGoToCustomerRegistration(){
+		loginPage().clickGoToCustomerRegistration();
+	}
 
 }
