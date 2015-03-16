@@ -37,12 +37,17 @@ import com.tests.us4.us4002.US4002Test;
 	US3008Test.class,
 	US3009Test.class,
 	
-	
 	//3+1 rule
 	ActivateRule.class,
 	US4001Test.class,
 	US4002Test.class,
 	DeactivateRule.class,
+	
+	US6001Suite.class,
+	US6002Suite.class,
+	US6003Suite.class,
+	US7001Suite.class,
+	US7002Suite.class,
 })
 @RunWith(Suite.class)
 public class FrontEndSuite {
