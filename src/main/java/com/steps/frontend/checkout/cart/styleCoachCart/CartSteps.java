@@ -1,4 +1,4 @@
-package com.steps.frontend.checkout;
+package com.steps.frontend.checkout.cart.styleCoachCart;
 
 import java.util.List;
 

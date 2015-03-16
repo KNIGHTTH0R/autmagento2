@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.checkout.CartSteps;
+import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.requirements.Application;
 

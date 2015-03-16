@@ -31,9 +31,10 @@ import com.pages.frontend.RegistrationMessagePage;
 import com.pages.frontend.StarterSetPage;
 import com.pages.frontend.StylistCampaignPage;
 import com.pages.frontend.StylistRegistrationPage;
-import com.pages.frontend.checkout.CartPage;
 import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.SuccessPage;
+import com.pages.frontend.checkout.cart.regularCart.RegularUserCartPage;
+import com.pages.frontend.checkout.cart.styleCoachCart.CartPage;
 import com.pages.frontend.checkout.payment.CreditCardFormPage;
 import com.pages.frontend.checkout.payment.PaymentPage;
 import com.pages.frontend.checkout.shipping.BillingFormPage;
@@ -193,6 +194,9 @@ public class AbstractSteps extends ScenarioSteps {
 	// cart
 	public CartPage cartPage() {
 		return getPages().currentPageAt(CartPage.class);
+	}
+	public RegularUserCartPage regularUserCartPage() {
+		return getPages().currentPageAt(RegularUserCartPage.class);
 	}
 
 	// shipping pages

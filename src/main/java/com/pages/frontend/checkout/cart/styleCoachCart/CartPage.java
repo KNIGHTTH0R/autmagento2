@@ -1,4 +1,4 @@
-package com.pages.frontend.checkout;
+package com.pages.frontend.checkout.cart.styleCoachCart;
 
 import java.util.ArrayList;
 import java.util.List;
