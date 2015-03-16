@@ -89,6 +89,7 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith25Discount() {
+		waitABit(Constants.TIME_CONSTANT);
 		element(formContainer).waitUntilVisible();
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-25-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
@@ -108,7 +109,7 @@ public class CartPage extends AbstractPage {
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
-
+		System.out.println("CONTROL: 25% grabbed " + resultList.size());
 		return resultList;
 	}
 
@@ -118,6 +119,7 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith50Discount() {
+		waitABit(Constants.TIME_CONSTANT);
 		element(formContainer).waitUntilVisible();
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-50-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
@@ -138,7 +140,7 @@ public class CartPage extends AbstractPage {
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
-		
+			System.out.println("CONTROL: 50% grabbed " + resultList.size());
 		return resultList;
 	}
 
@@ -148,6 +150,7 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabMarketingMaterialProductsData() {
+		waitABit(Constants.TIME_CONSTANT);
 		element(formContainer).waitUntilVisible();
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-table-marketing-material tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
@@ -167,7 +170,7 @@ public class CartPage extends AbstractPage {
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
-		
+		System.out.println("CONTROL: MarketMat grabbed " + resultList.size());
 		return resultList;
 	}
 

@@ -70,7 +70,6 @@ public class CartTotalsCalculation {
 				discountSum = discountSum.add(calculate25DiscountForEachProduct(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getProductsPrice())), jewelryDiscount,
 						sum25Section));	
 			}
-
 		}
 
 		return discountSum;
