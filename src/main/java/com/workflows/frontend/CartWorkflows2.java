@@ -40,8 +40,12 @@ public class CartWorkflows2 {
 			CartProductModel compare = findProduct(productNow.getProdCode(),productNow.getQuantity(), cartProductsList);
 
 			if(compare != null){
+				try{
 				compare.setQuantity(compare.getQuantity().replace("x", "").trim());
+
+				}catch(Exception e){}
 			}
+			
 			
 			if (compare.getName() != null) {
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
