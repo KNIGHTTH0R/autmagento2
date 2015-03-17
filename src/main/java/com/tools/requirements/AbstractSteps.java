@@ -62,6 +62,7 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 	}
+
 	@Step
 	public void performLoginUnderContext(String userName, String userPass, String context) {
 		getDriver().get(Constants.BASE_FE_URL + context);
@@ -70,9 +71,10 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 	}
+
 	@Step
 	public void navigateToLoginPageAndPerformLogin(String userName, String userPass) {
-//		getDriver().get(Constants.BASE_FE_URL);
+		// getDriver().get(Constants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -101,17 +103,18 @@ public class AbstractSteps extends ScenarioSteps {
 		waitABit(Constants.TIME_CONSTANT);
 		getDriver().get(initURL);
 	}
-	
-	public void findFrame(String frameName){
+
+	public void findFrame(String frameName) {
 		Set<String> windowsList = getDriver().getWindowHandles();
 		for (String string : windowsList) {
 			getDriver().switchTo().window(string);
-			if(getDriver().getTitle().trim().contains(frameName)){
+			if (getDriver().getTitle().trim().contains(frameName)) {
 				break;
 			}
 		}
 	}
-	public void navigate(String URL){
+
+	public void navigate(String URL) {
 		getDriver().get(URL);
 	}
 
@@ -143,6 +146,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public OrderListPage orderListPage() {
 		return getPages().currentPageAt(OrderListPage.class);
 	}
+
 	public OrdersActionsPage ordersActionsPage() {
 		return getPages().currentPageAt(OrdersActionsPage.class);
 	}
@@ -158,7 +162,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public OrderInfoPage orderInfoPage() {
 		return getPages().currentPageAt(OrderInfoPage.class);
 	}
-	
+
 	public ShoppingCartPriceRulesPage shoppingCartPriceRulesPage() {
 		return getPages().currentPageAt(ShoppingCartPriceRulesPage.class);
 	}
@@ -167,21 +171,27 @@ public class AbstractSteps extends ScenarioSteps {
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
 	}
+
 	public HomePage homePage() {
 		return getPages().currentPageAt(HomePage.class);
 	}
+
 	public StarterSetPage starterSetPage() {
 		return getPages().currentPageAt(StarterSetPage.class);
 	}
+
 	public StylistCampaignPage stylistCampaignPage() {
 		return getPages().currentPageAt(StylistCampaignPage.class);
-	}	
+	}
+
 	public StylistRegistrationPage stylistRegistrationPage() {
 		return getPages().currentPageAt(StylistRegistrationPage.class);
 	}
+
 	public CreateCustomerPage createCustomerPage() {
 		return getPages().currentPageAt(CreateCustomerPage.class);
 	}
+
 	public RegistrationMessagePage registrationMessagePage() {
 		return getPages().currentPageAt(RegistrationMessagePage.class);
 	}
@@ -189,6 +199,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public HeaderPage headerPage() {
 		return getPages().currentPageAt(HeaderPage.class);
 	}
+
 	public FooterPage footerPage() {
 		return getPages().currentPageAt(FooterPage.class);
 	}
@@ -205,6 +216,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public CartPage cartPage() {
 		return getPages().currentPageAt(CartPage.class);
 	}
+
 	public RegularUserCartPage regularUserCartPage() {
 		return getPages().currentPageAt(RegularUserCartPage.class);
 	}
@@ -251,7 +263,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public ProfileHistoryPage profileHistoryPage() {
 		return getPages().currentPageAt(ProfileHistoryPage.class);
 	}
-	
+
 	public FacebookRegistrationFormPage facebookRegistrationFormPage() {
 		return getPages().currentPageAt(FacebookRegistrationFormPage.class);
 	}
@@ -261,12 +273,12 @@ public class AbstractSteps extends ScenarioSteps {
 	public MailinatorPage mailinatorPage() {
 		return getPages().currentPageAt(MailinatorPage.class);
 	}
-	
+
 	// External facebook
 	public FacebookEMBLoginPage facebookEMBLoginPage() {
 		return getPages().currentPageAt(FacebookEMBLoginPage.class);
 	}
-	
+
 	public FacebookEMBLoginConfirmPage facebookEMBLoginConfirmPage() {
 		return getPages().currentPageAt(FacebookEMBLoginConfirmPage.class);
 	}

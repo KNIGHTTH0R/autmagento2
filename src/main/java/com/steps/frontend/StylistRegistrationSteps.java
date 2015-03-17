@@ -252,7 +252,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@Step
 	public void validateStylistRegisterPageTitle() {
-		Assert.assertTrue("You are not on the style coach register page", stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(Constants.STYLE_COACH_REG_PAGE_TITLE));
+		Assert.assertTrue("Failure: You are not on the style coach register page", stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(Constants.STYLE_COACH_REG_PAGE_TITLE));
 	}
 
 	@Step

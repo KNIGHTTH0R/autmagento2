@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.persistance.MongoReader;
@@ -27,14 +26,10 @@ public class US7002ConfirmCustomerTest extends BaseTest {
 	@Steps
 	public EmailClientSteps emailClientSteps;
 
-	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();	
-	public StylistPropertiesModel beforeLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
-	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
-	public StylistPropertiesModel afterOrderPaidStylistExpectedProperties = new StylistPropertiesModel();
+	public StylistPropertiesModel expectedCustomerData = new StylistPropertiesModel();
 	public RegistrationActivationDateModel datesModel = new RegistrationActivationDateModel();
 
 	public String stylistEmail;
-
 
 	@Before
 	public void setUp() throws Exception {
@@ -46,17 +41,14 @@ public class US7002ConfirmCustomerTest extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 		
-		afterLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
-		
+		expectedCustomerData =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
 	}
+	
 	@Test
 	public void us7002ConfirmCustomerTest() {
 		
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
-
 	}
-
-
 }
 

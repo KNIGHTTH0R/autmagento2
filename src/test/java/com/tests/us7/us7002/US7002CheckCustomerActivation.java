@@ -11,14 +11,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
-import com.steps.backend.OrdersSteps;
-import com.steps.backend.validations.StylistValidationSteps;
-import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
-import com.tools.data.backend.CustomerConfigurationModel;
-import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -32,30 +27,16 @@ public class US7002CheckCustomerActivation extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
-	@Steps	
-	public OrdersSteps ordersSteps;
-	@Steps
-	public EmailClientSteps emailClientSteps;
 	@Steps 
 	public CustomVerification customVerifications;
 	@Steps 
-	public StylistValidationSteps stylistValidationSteps;
-	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
-	
-	public StylistPropertiesModel beforeLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
-	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
-	public StylistPropertiesModel afterOrderPaidStylistExpectedProperties = new StylistPropertiesModel();
-	public RegistrationActivationDateModel datesModel = new RegistrationActivationDateModel();
-
+	public StylistPropertiesModel expectedCustomerData = new StylistPropertiesModel();
 	public String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {
-		
-
 		int size = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").size();
 		if (size > 0) {
 			stylistEmail = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").get(0).getEmailName();
@@ -63,7 +44,7 @@ public class US7002CheckCustomerActivation extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 		
-		afterLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
+		expectedCustomerData =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
 		
 	}
 	@Test
@@ -74,12 +55,12 @@ public class US7002CheckCustomerActivation extends BaseTest {
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
 		
-		StylistPropertiesModel afterLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();		
+		StylistPropertiesModel grabCustomerData =  backEndSteps.grabCustomerConfiguration();		
 		
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
+		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabCustomerData, expectedCustomerData);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
-		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistProperties);
-		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistExpectedProperties);
+		PrintUtils.printStylistPropertiesModel(grabCustomerData);
+		PrintUtils.printStylistPropertiesModel(expectedCustomerData);
 			
 		customVerifications.printErrors();
 	}

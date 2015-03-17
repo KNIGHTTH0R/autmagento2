@@ -61,11 +61,11 @@ public class BackEndSteps extends AbstractSteps {
 	public void openOrderDetails(String emailText) {
 		orderListPage().openOrderDetails(emailText);
 	}
+	
 	@Step
 	public String openCustomerDetails(String emailText) {
 		customerListPage().openCustomerDetails(emailText);
 		waitABit(Constants.TIME_CONSTANT);
-		
 		return getDriver().getCurrentUrl();
 	}
 
@@ -79,25 +79,23 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().dismissPopUp();
 	}
 
-	@Step
 	public StylistDataModel grabLeadSettingsData() {
 		return leadSettingsPage().grabValidationFields();
 	}
 
-	@Step
 	public String extractEmailConfirmationStatus() {
 		return customerDetailsHomePage().extractEmailConfirmationStatus();
 	}
-	@Step
+
 	public String extractJewelryBonusValue() {
 		return customerDetailsHomePage().extractJewelryBonusValue();
 	}
 
-	@Step
 	public String extractEmailConfirmationStatusWithoutLabel() {
 		return customerDetailsHomePage().extractEmailConfirmationStatusWithoutLabel();
 	}
-	@Step
+	
+	
 	public String extractCustomerType() {
 		return customerDetailsHomePage().extractCustomerType();
 	}

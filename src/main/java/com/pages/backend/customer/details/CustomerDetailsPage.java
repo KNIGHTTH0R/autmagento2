@@ -43,7 +43,6 @@ public class CustomerDetailsPage extends AbstractPage {
 		for (WebElement elemNow : elementList) {
 			if (elemNow.getText().contains("E-Mail-Adresse"))
 				status = elemNow.getText();
-			System.out.println("EL: " + elemNow.getText());
 		}
 
 		return status;
@@ -59,7 +58,6 @@ public class CustomerDetailsPage extends AbstractPage {
 		for (WebElement elemNow : elementList) {
 			if (elemNow.getText().contains("Konto erstellt am"))
 				status = elemNow.getText();
-			System.out.println("EL: " + elemNow.getText());
 		}
 
 		return status;
@@ -75,7 +73,6 @@ public class CustomerDetailsPage extends AbstractPage {
 		for (WebElement elemNow : elementList) {
 			if (elemNow.getText().contains("Registrierungsdatum als SC"))
 				status = elemNow.getText();
-			System.out.println("EL: " + elemNow.getText());
 		}
 
 		return status;

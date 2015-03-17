@@ -40,6 +40,8 @@ public class ProductDetailedModel {
 	private Map<String, String> additionalAttributes = new HashMap<String, String>();
 	private String store;
 	private String ip;
+	private String newsFromDate;
+	private String newsToDate;
 	
 //	public ProductDetailedModel(){
 //		
@@ -334,6 +336,22 @@ public class ProductDetailedModel {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public String getNewsFromDate() {
+		return newsFromDate;
+	}
+
+	public void setNewsFromDate(String newsFromDate) {
+		this.newsFromDate = newsFromDate;
+	}
+
+	public String getNewsToDate() {
+		return newsToDate;
+	}
+
+	public void setNewsToDate(String newsToDate) {
+		this.newsToDate = newsToDate;
 	}
 
 }

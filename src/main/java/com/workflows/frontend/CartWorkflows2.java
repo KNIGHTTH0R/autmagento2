@@ -93,7 +93,7 @@ public class CartWorkflows2 {
 	public void verifyTotalsDiscount(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
+//		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
 		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());
 		verifyMarketingBonus(discountTotals.getMarketingBonus(), discountCalculationModel.getMarketingBonus());
 		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
@@ -104,7 +104,7 @@ public class CartWorkflows2 {
 	public void verifyTotalsDiscountNoMarketing(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
+//		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
 		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());		
 		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
 		
@@ -120,10 +120,10 @@ public class CartWorkflows2 {
 		CustomVerification.verifyTrue("Failure: Total Amount dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
-	@Step
-	public void verifyTax(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: TAX dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-	}
+//	@Step
+//	public void verifyTax(String productNow, String compare) {
+//		CustomVerification.verifyTrue("Failure: TAX dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+//	}
 
 	@Step
 	public void verifyJewelryBonus(String productNow, String compare) {

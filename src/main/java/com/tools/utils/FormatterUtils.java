@@ -21,6 +21,21 @@ public class FormatterUtils {
 		Date date = new Date(System.currentTimeMillis() - 3600 * 1000);
 		return dateFormat.format(date);
 	}
+	
+	/**
+	 * This method can generate a date in a certain format Ex dd.MM.yyyy;
+	 * and set a date offset from today -> cuttentTime + offset = result
+	 * offset = 3600 (1 hour offset);
+	 * offset = 86400 (24 hour offset)
+	 * @param dateFormatPattern
+	 * @param dayOffset
+	 * @return
+	 */
+	public static String getCustomDate(String dateFormatPattern, long dayOffset) {
+		DateFormat dateFormat = new SimpleDateFormat(dateFormatPattern);
+		Date date = new Date(System.currentTimeMillis() + dayOffset * 1000);
+		return dateFormat.format(date);
+	}
 
 	public static BigDecimal cleanNumberToBigDecimal(String unitPrice) {
 		String result = unitPrice;
