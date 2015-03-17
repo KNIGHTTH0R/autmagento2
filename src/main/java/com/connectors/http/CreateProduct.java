@@ -11,6 +11,7 @@ import com.tools.FieldGenerators;
 import com.tools.FieldGenerators.Mode;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
+import com.tools.utils.FormatterUtils;
 
 public class CreateProduct {
 
@@ -61,6 +62,10 @@ public class CreateProduct {
 		product.setStore("0");
 		product.setIp("50");
 		
+		product.setNewsFromDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 3600));
+		product.setNewsToDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 86400));
+		
+		
 		
 		List<String> webSiteIds = new ArrayList<String>();
 		webSiteIds.add("1");
@@ -94,7 +99,6 @@ public class CreateProduct {
 		stockModel.setMaximumPercentageToBorrow("");
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
 		product.setStockData(stockModel);
-		
 		
 		return product;
 

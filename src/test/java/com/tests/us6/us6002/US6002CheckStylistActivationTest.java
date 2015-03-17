@@ -87,7 +87,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 		PrintUtils.printStylistPropertiesModel(expectedAfterLinkConfirmationStylistData);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabAfterOrderPaidStylistData, expectedAfterOrderPaidStylistData);
-		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER MARK AS PAID ");
+		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER MARK AS PAID");
 		PrintUtils.printStylistPropertiesModel(grabAfterOrderPaidStylistData);
 		PrintUtils.printStylistPropertiesModel(expectedAfterOrderPaidStylistData);
 		

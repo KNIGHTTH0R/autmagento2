@@ -168,6 +168,8 @@ public class HttpSoapConnector {
 		productData = addOptionalField(SoapKeys.CUSTOM_LAYOUT_UPDATE, product.getCustomLayoutUpdate(), productData);
 		productData = addOptionalField(SoapKeys.OPTIONS_CONTAINER, product.getOptionsContainer(), productData);
 		productData = addOptionalField(SoapKeys.PRODUCT_IP, product.getIp(), productData);
+		productData = addOptionalField(SoapKeys.NEWS_FROM_DATE, product.getNewsFromDate(), productData);
+		productData = addOptionalField(SoapKeys.NEWS_TO_DATE, product.getNewsToDate(), productData);
 
 		// Added stock data section
 		productData.addChildElement(generateStockDataMessage(product.getStockData(), productData));
@@ -242,10 +244,6 @@ public class HttpSoapConnector {
 				SOAPElement price = objArray.addChildElement(SoapKeys.PRICE);
 				price.addTextNode(product.getCustomerGroupId());
 				
-//				objArray.addChildElement(addOptionalField(SoapKeys.CUSTOMER_GROUP_ID, product.getCustomerGroupId(), objArray));
-//				objArray.addChildElement(addOptionalField(SoapKeys.WEBSITE, product.getWebsite(), objArray));
-//				objArray.addChildElement(addOptionalField(SoapKeys.QTY, product.getQty(), objArray));
-//				objArray.addChildElement(addOptionalField(SoapKeys.PRICE, product.getPrice(), objArray));
 			}
 		} else {
 			System.out.println("Warning: Product - Tier Price Model list is empty - see soap - generateTierPriceMessage()");
