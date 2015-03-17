@@ -4,6 +4,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.poc.ActivateRule;
+import com.poc.DeactivateRule;
+
 @SuiteClasses({
 	US000Suite.class,
 	US001Suite.class,
@@ -17,8 +20,19 @@ import org.junit.runners.Suite.SuiteClasses;
 	US3007Suite.class,
 	US3008Suite.class,
 	US3009Suite.class,
+	
+	US6001Suite.class,
+	US6002Suite.class,
+	US6003Suite.class,
+	US7001Suite.class,
+	US7002Suite.class,
+	
+	
+	//3+1 rule
+	ActivateRule.class,
 	US4001Suite.class,
 	US4002Suite.class,
+	DeactivateRule.class,
 })
 @RunWith(Suite.class)
 public class PippaSuite {
