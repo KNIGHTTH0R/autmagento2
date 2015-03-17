@@ -11,6 +11,8 @@ public class MongoTableKeys {
 	public static final String DISCOUNT_KEY = "DISCOUNT";
 	public static final String DISCOUNT_25_KEY = "25DISCOUNT";
 	public static final String DISCOUNT_50_KEY = "50DISCOUNT";
+	public static final String DISCOUNT_40_KEY = "40DISCOUNT";
+	public static final String DISCOUNT_JEWELRY_BONUS = "JEWELRY_DISCOUNT";
 	  
     //Address model properties and keys
 	public static final String ADDRESS_MODEL = "AddressModel";
@@ -73,13 +75,14 @@ public class MongoTableKeys {
 	public static final String IP_POINTS = "ipPoints";
 	public static final String DISCOUNT_LIST = "discounts";
 	
-	//CartproductModel
+	
 	public static final String PRODUCT_BASIC_MODEL = "ProductBasicModel";
 	public static final String NAME = "name";
 	public static final String TYPE = "type";
 	public static final String PRICE = "price";
 	public static final String QUANTITY= "quantity";
-	//CartproductModel
+	
+	public static final String REGULAR_BASIC_PRODUCT_MODEL = "RegularBasicProductModel";
 	public static final String BASIC_PRODUCT_MODEL = "BasicProductModel";
 	public static final String PRODUCT_NAME = "name";
 	public static final String PRODUCT_CODE = "code";
@@ -120,6 +123,8 @@ public class MongoTableKeys {
 	
 	
 	public static final String CUSTOMER_FORM_MODEL = "CustomerFormModel";
+
+	
 
 
 }

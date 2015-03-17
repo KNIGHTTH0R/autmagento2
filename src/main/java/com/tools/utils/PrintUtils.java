@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
+import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
@@ -14,6 +15,7 @@ import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class PrintUtils {
@@ -44,6 +46,21 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getFinalPrice());
 			System.out.println(cartProductModel.getPriceIP());
 			System.out.println(cartProductModel.getDiscountClass());
+		}
+	}
+	public static void printListRegularBasicProductModel(List<RegularBasicProductModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		System.out.println("list size is : " + list.size());
+		for (RegularBasicProductModel cartProductModel : list) {
+			System.out.println("------------------------");
+			System.out.println(cartProductModel.getName());
+			System.out.println(cartProductModel.getProdCode());
+			System.out.println(cartProductModel.getQuantity());
+			System.out.println(cartProductModel.getUnitPrice());		
+			System.out.println(cartProductModel.getFinalPrice());
+			System.out.println(cartProductModel.getBonusType());
+			System.out.println(cartProductModel.getBunosValue());
+		
 		}
 	}
 
@@ -244,6 +261,17 @@ public class PrintUtils {
 		System.out.println("tax : " + calculatedDetailsModel.getTax());
 		System.out.println("Segments : " + calculatedDetailsModel.getSegments());
 		System.out.println("Calculations : " + calculatedDetailsModel.getCalculations());
+		
+		
+	}
+	public static void printRegularCartCalcDetailsModel(RegularCartCalcDetailsModel calculatedDetailsModel) {
+		System.out.println("printRegularCartCalcDetailsModel -----------------------------");
+
+		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
+		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());		
+		System.out.println("tax : " + calculatedDetailsModel.getTax());
+		System.out.println("Segments : " + calculatedDetailsModel.getSegments());
+		
 		
 		
 	}
