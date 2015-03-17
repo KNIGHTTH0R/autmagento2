@@ -39,22 +39,15 @@ public class US7001RegularCustomerRegistrationTest extends BaseTest{
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
-	/**
-	 * FrontEnd steps in this test
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void us7001RegularCustomerRegistrationTest() {
 
 		customerRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
-		
 	}
 
 	@After

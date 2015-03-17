@@ -13,11 +13,11 @@ public class RegistrationMessagePage extends AbstractPage {
 	private WebElement textContainer;
 
 	public void verifyLink() {
-		Assert.assertTrue(getDriver().getCurrentUrl().contains("registersuccess"));
+		Assert.assertTrue("Failure: URL not redirected to success page. ",getDriver().getCurrentUrl().contains("registersuccess"));
 	}
 
 	public void verifyText() {
 		element(textContainer).waitUntilVisible();
-		Assert.assertTrue(textContainer.getText().contains("Email geschickt"));
+		Assert.assertTrue("Failure: Email notification text was not found. ", textContainer.getText().contains("Email geschickt"));
 	}
 }

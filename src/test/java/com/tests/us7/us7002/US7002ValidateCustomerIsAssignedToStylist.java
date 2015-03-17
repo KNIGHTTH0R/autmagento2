@@ -13,9 +13,6 @@ import org.junit.runner.RunWith;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
-import com.tools.data.backend.CustomerConfigurationModel;
-import com.tools.data.backend.RegistrationActivationDateModel;
-import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -29,19 +26,12 @@ public class US7002ValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 
-	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();	
-	public StylistPropertiesModel beforeLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
-	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
-	public StylistPropertiesModel afterOrderPaidStylistExpectedProperties = new StylistPropertiesModel();
-	public RegistrationActivationDateModel datesModel = new RegistrationActivationDateModel();
-
 	public String stylistEmail;
 	public String stylistPassword;
 	public String context;
 
 	@Before
 	public void setUp() throws Exception {
-		
 
 		int size = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").size();
 		if (size > 0) {
@@ -51,18 +41,15 @@ public class US7002ValidateCustomerIsAssignedToStylist extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 		context = "simona";
-		
-		
 	}
+	
 	@Test
 	public void us7002ValidateCustomerIsAssignedToStylist() {
-		
+
 		customerRegistrationSteps.performLoginUnderContext(stylistEmail, stylistPassword,context);
 		headerSteps.goToProfile();
 	
 		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
-		
-		
 
 	}
 

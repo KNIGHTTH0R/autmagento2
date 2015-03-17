@@ -1,10 +1,9 @@
 package com.steps.frontend;
 
-import org.junit.Assert;
-
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Steps;
+
+import org.junit.Assert;
 
 import com.tools.Constants;
 import com.tools.requirements.AbstractSteps;
@@ -12,20 +11,6 @@ import com.tools.requirements.AbstractSteps;
 public class HeaderSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1221784607709066875L;
-
-	/**
-	 * Return the total sum on the cart preview.
-	 * 
-	 * @return - Preview Price
-	 */
-	@Steps
-	StylistCampaignSteps stylistCampaignSteps;
-	@Steps
-	StarterSetSteps starterSetSteps;
-	@Steps
-	LoginSteps loginSteps;
-	@Steps
-	HeaderSteps headerSteps;
 
 	@Step
 	public String openCartPreview() {
@@ -80,11 +65,6 @@ public class HeaderSteps extends AbstractSteps {
 		stylistCampaignPage().clickJetztStartenButton();
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();
 
-	}
-
-	@Step
-	public String getUrl() {
-		return headerPage().getUrl();
 	}
 
 	@Step

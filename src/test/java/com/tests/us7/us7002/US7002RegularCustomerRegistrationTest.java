@@ -14,7 +14,6 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
@@ -32,7 +31,6 @@ public class US7002RegularCustomerRegistrationTest extends BaseTest{
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
-	public StylistDataModel validationModel;
 	public String context;
 
 	@Before
@@ -52,10 +50,9 @@ public class US7002RegularCustomerRegistrationTest extends BaseTest{
 	@Test
 	public void us7002RegularCustomerRegistrationTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel,"simona");
+		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel,context);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
-		
 	}
 
 	@After

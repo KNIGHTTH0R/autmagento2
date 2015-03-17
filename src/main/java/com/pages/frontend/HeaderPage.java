@@ -89,10 +89,6 @@ public class HeaderPage extends AbstractPage {
 		abmeldenButton.click();
 	}
 
-	public String getUrl() {
-		return getDriver().getCurrentUrl();
-	}
-
 	public String getBoutiqueName() {
 		return brandContainer.getText().split("'")[0].toLowerCase();
 	}
