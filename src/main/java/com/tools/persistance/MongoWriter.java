@@ -18,6 +18,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class MongoWriter extends MongoConnector {
@@ -122,7 +123,7 @@ public class MongoWriter extends MongoConnector {
 		DBCollection table = workingDB.getCollection(MongoTableKeys.BASIC_PRODUCT_MODEL);
 
 		BasicDBObject document = new BasicDBObject();
-		document.put(MongoTableKeys.BASIC_PRODUCT_MODEL, product.getName());
+		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
 		document.put(MongoTableKeys.PRODUCT_CODE, product.getProdCode());
 		document.put(MongoTableKeys.PRODUCT_PRICE, product.getUnitPrice());
 		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getQuantity());
@@ -131,6 +132,20 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
 		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getPriceIP());
 
+		table.insert(document);
+	}
+	public static void saveRegularBasicProductModel(RegularBasicProductModel product, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.REGULAR_BASIC_PRODUCT_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
+		document.put(MongoTableKeys.PRODUCT_CODE, product.getProdCode());
+		document.put(MongoTableKeys.PRODUCT_PRICE, product.getUnitPrice());
+		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getQuantity());
+		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
+		
+		
 		table.insert(document);
 	}
 

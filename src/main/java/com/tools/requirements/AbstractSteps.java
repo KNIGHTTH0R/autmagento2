@@ -40,6 +40,7 @@ import com.pages.frontend.checkout.payment.PaymentPage;
 import com.pages.frontend.checkout.shipping.BillingFormPage;
 import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
+import com.pages.frontend.checkout.shipping.regularUser.ShippingPartySectionPage;
 import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.registration.FacebookRegistrationFormPage;
@@ -93,6 +94,15 @@ public class AbstractSteps extends ScenarioSteps {
 	public void wipeCart() {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("stylist/lounge/", "checkout/cart/clearAllItems/");
+		getDriver().get(modiURL);
+		waitABit(Constants.TIME_CONSTANT);
+		getDriver().get(initURL);
+	}
+	
+	//TODO fix this
+	public void wipeRegularCart() {
+		String initURL = getDriver().getCurrentUrl();
+		String modiURL = getDriver().getCurrentUrl().replace("schmuckstucke/neu.html", "checkout/cart/clearAllItems/");
 		getDriver().get(modiURL);
 		waitABit(Constants.TIME_CONSTANT);
 		getDriver().get(initURL);
@@ -218,6 +228,9 @@ public class AbstractSteps extends ScenarioSteps {
 	// shipping pages
 	public BillingFormPage billingFormPage() {
 		return getPages().currentPageAt(BillingFormPage.class);
+	}
+	public ShippingPartySectionPage regularUserShippingPage() {
+		return getPages().currentPageAt(ShippingPartySectionPage.class);
 	}
 
 	public ShippingFormPage shippingFormPage() {

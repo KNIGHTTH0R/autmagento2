@@ -10,8 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
@@ -76,8 +78,34 @@ public class SurveyPage extends AbstractPage {
 
 			PrintUtils.printCartProductModel(productNow);
 		}
-		
+
 		DataGrabber.shippingProducts = resultList;
+
+		return resultList;
+	}
+
+	public List<RegularUserCartProductModel> grabRegularProductsList() {
+
+		element(productListContainer).waitUntilVisible();
+		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
+		List<RegularUserCartProductModel> resultList = new ArrayList<RegularUserCartProductModel>();
+
+		for (WebElement webElementNow : entryList) {
+			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
+
+			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			parseQty = parseQty.replace("x", "").trim();
+
+			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
+			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
+			productNow.setQuantity(parseQty);
+			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice("");
+			resultList.add(productNow);
+
+		}
+
+		RegularUserDataGrabber.grabbedRegularShippingProductsList = resultList;
 
 		return resultList;
 	}

@@ -19,6 +19,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.ProductBasicModel;
+import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class MongoReader extends MongoConnector {
@@ -255,8 +256,34 @@ public class MongoReader extends MongoConnector {
 				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
 				result.setPriceIP(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
 				result.setDiscountClass(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_CLASS));
-				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.QUANTITY));
 
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+	public static List<RegularBasicProductModel> grabRegularBasicProductModel(String testName) {
+		DBObject dbObject = null;
+		List<RegularBasicProductModel> itemList = new ArrayList<RegularBasicProductModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.REGULAR_BASIC_PRODUCT_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				RegularBasicProductModel result = new RegularBasicProductModel();
+				dbObject = cursor.next();
+				
+				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
+				result.setProdCode(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
+				result.setUnitPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
+				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_QUANTITY));
+				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
+				
 				itemList.add(result);
 			}
 		} catch (Exception e) {
