@@ -50,13 +50,12 @@ public class US7004RegularUserRegistrationLandingPageTest extends BaseTest{
 	public void us7002RegularCustomerRegistrationTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
-//		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, "a", "b");
 		customerRegistrationSteps.selectStylistOption(StyleMode.DefaultStylist, "", "");
 		customerRegistrationSteps.submitStylistSelection();
 		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
 		
 		customerRegistrationSteps.verifyCustomerEmail(dataModel.getEmailName(), email);
-		customerRegistrationSteps.verifySuccessMessage();
+		customerRegistrationSteps.verifySuccessLink();
 		
 		customVerifications.printErrors();
 	}

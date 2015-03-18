@@ -11,8 +11,9 @@ public class RegistrationSuccessPage extends AbstractPage{
 	@FindBy(name = "page-title")
 	private WebElement messageContainer;
 	
-	public String getSuccessMessageTitle(){
-		element(messageContainer).waitUntilVisible();
-		return messageContainer.getText();
-	}
+//	public String getSuccessMessageTitle(){
+////		element(messageContainer).waitUntilVisible();
+////		return messageContainer.getText();
+//		return getTitle();
+//	}
 }

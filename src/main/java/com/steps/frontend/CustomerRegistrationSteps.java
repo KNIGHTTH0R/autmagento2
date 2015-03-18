@@ -240,11 +240,12 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	 */
 	@Step
 	public String fillThankYouForm(String password) {
-
+		
 		thankYouPage().passwordInput(password);
+		String email = thankYouPage().getEmailText();
 		thankYouPage().checkIAgree();
 		thankYouPage().submitButton();
-		return thankYouPage().getEmailText();
+		return email;
 	}
 
 	/**
@@ -261,9 +262,9 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	 * Assert on last step of landing page flow. success message display
 	 */
 	@Step
-	public void verifySuccessMessage() {
-		String grabedTitle = registrationSuccessPage().getSuccessMessageTitle();
-		Assert.assertTrue("Failure: Success message not found. ", grabedTitle.contains("Deine Registrierung war erfolgreich!"));
+	public void verifySuccessLink() {
+		String grabedTitle = getDriver().getCurrentUrl();
+		Assert.assertTrue("Failure: Success link not found. Actual URL: " + grabedTitle, grabedTitle.contains("registersuccess"));
 	}
 
 }

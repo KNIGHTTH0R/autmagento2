@@ -11,8 +11,8 @@ public class ThankYouPage extends AbstractPage{
 	@FindBy(id = "thankyou-register")
 	private WebElement thankYouForm;
 	
-	@FindBy(css = "div.hidden-input")
-//	@FindBy(css = "input[name='email']")
+//	@FindBy(css = "div.hidden-input")
+	@FindBy(css = "input[name='email']")
 	private WebElement emailField;
 	
 	@FindBy(name = "password")
@@ -45,8 +45,9 @@ public class ThankYouPage extends AbstractPage{
 	
 	public String getEmailText(){
 		element(emailField).waitUntilVisible();
-		return emailField.getText();
-//		return emailField.getAttribute("value");
+//		System.out.println("sdasdasdasdas ------ . " + emailField.getText());
+//		return emailField.getText();
+		return emailField.getAttribute("value");
 	}
 	
 }
