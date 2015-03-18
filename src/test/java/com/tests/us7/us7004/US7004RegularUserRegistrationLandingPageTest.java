@@ -19,6 +19,8 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+
+
 @WithTag(name = "US7003", type = "fontend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
