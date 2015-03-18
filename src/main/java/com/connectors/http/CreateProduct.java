@@ -65,8 +65,6 @@ public class CreateProduct {
 		product.setNewsFromDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 3600));
 		product.setNewsToDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 86400));
 		
-		
-		
 		List<String> webSiteIds = new ArrayList<String>();
 		webSiteIds.add("1");
 		webSiteIds.add("0");

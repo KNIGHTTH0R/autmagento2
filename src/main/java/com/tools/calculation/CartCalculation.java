@@ -505,7 +505,6 @@ public class CartCalculation {
 				}
 			}
 		}
-
 		return result;
 	}
 

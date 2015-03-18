@@ -20,7 +20,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US7002", type = "external,backend")
+@WithTag(name = "US7002", type = "backend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US7002CheckCustomerActivation extends BaseTest {

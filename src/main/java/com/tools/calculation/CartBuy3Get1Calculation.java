@@ -99,6 +99,7 @@ public class CartBuy3Get1Calculation {
 		}
 		return cartProducts;
 	}
+	
 	public static BigDecimal calculateTotalBuy3Get1Discount(List<BasicProductModel> productsList) {
 		BigDecimal totalDiscount = BigDecimal.ZERO;
 	

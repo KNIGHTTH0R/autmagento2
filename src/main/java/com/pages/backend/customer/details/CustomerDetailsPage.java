@@ -38,11 +38,10 @@ public class CustomerDetailsPage extends AbstractPage {
 		element(detailsContainer).waitUntilVisible();
 		List<WebElement> elementList = detailsContainer.findElements(By.cssSelector("table.box-left tr"));
 
-		detailsContainer.findElement(By.cssSelector("table.box-left tr:nth-child(2) td:last-child"));
-
 		for (WebElement elemNow : elementList) {
 			if (elemNow.getText().contains("E-Mail-Adresse"))
 				status = elemNow.getText();
+				status = status.replace("Bestätigte E-Mail-Adresse:", "").trim();
 		}
 
 		return status;
@@ -52,8 +51,6 @@ public class CustomerDetailsPage extends AbstractPage {
 		String status = "";
 		element(detailsContainer).waitUntilVisible();
 		List<WebElement> elementList = detailsContainer.findElements(By.cssSelector("table.box-left tr"));
-
-		detailsContainer.findElement(By.cssSelector("table.box-left tr:nth-child(2) td:last-child"));
 
 		for (WebElement elemNow : elementList) {
 			if (elemNow.getText().contains("Konto erstellt am"))
@@ -67,8 +64,6 @@ public class CustomerDetailsPage extends AbstractPage {
 		String status = "";
 		element(detailsContainer).waitUntilVisible();
 		List<WebElement> elementList = detailsContainer.findElements(By.cssSelector("table.box-left tr"));
-
-		detailsContainer.findElement(By.cssSelector("table.box-left tr:nth-child(2) td:last-child"));
 
 		for (WebElement elemNow : elementList) {
 			if (elemNow.getText().contains("Registrierungsdatum als SC"))
