@@ -19,9 +19,8 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
 		
 		getDriver().get(Constants.BASE_FE_URL);
-		headerPage().clickAbmeldenButton();
-		loginPage().clickGoToCustomerRegistration();
-		
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();		
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		inputEmail(customerData.getEmailName());
@@ -38,7 +37,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerFormUnderContext(CustomerFormModel customerData, AddressModel addressData,String context) {
 		
 		getDriver().get(Constants.BASE_FE_URL + context);
-		headerPage().clickAbmeldenButton();
+		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		
 		inputFirstName(customerData.getFirstName());

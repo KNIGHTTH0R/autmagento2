@@ -16,6 +16,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class PrintUtils {
@@ -61,6 +62,18 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getBonusType());
 			System.out.println(cartProductModel.getBunosValue());
 		
+		}
+	}
+	public static void printListRegularCartProductModel(List<RegularUserCartProductModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		System.out.println("list size is : " + list.size());
+		for (RegularUserCartProductModel cartProductModel : list) {
+			System.out.println("------------------------");
+			System.out.println(cartProductModel.getName());
+			System.out.println(cartProductModel.getProdCode());
+			System.out.println(cartProductModel.getQuantity());
+			System.out.println(cartProductModel.getUnitPrice());		
+			System.out.println(cartProductModel.getFinalPrice());			
 		}
 	}
 

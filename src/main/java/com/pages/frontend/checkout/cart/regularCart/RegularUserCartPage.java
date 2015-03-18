@@ -126,7 +126,8 @@ public class RegularUserCartPage extends AbstractPage {
 
 			resultList.add(productNow);
 		}
-
+		RegularUserDataGrabber.grabbedRegularCartProductsList = resultList;
+		
 		return resultList;
 	}
 
@@ -169,7 +170,7 @@ public class RegularUserCartPage extends AbstractPage {
 			}
 		}
 
-		RegularUserDataGrabber.regularUserCartTotals = resultModel;
+		RegularUserDataGrabber.regularUserGrabbedCartTotals = resultModel;
 
 		return resultModel;
 	}

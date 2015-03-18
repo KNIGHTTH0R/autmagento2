@@ -19,10 +19,11 @@ import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
+import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.calculation.RegularCartTotalsCalculation;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -43,6 +44,10 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
+	public ShippingSteps shippingSteps;
+	@Steps
+	public ShippingPartySectionSteps shippingPartySectionSteps;
+	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -51,6 +56,7 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 	private String username, password;
 	private String discountClass;
+	private String billingAddress;
 
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
@@ -86,7 +92,8 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			
-			discountClass = prop.getProperty("discountClass");
+			discountClass = prop.getProperty("discountClass");			
+			billingAddress = prop.getProperty("billingAddress");
 
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
 			creditCardData.setCardName(prop.getProperty("cardName"));
@@ -126,16 +133,32 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
+		//TODO put the updateProductList in selectProductDiscountType method (maybe)
 		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), Constants.JEWELRY_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), Constants.JEWELRY_BONUS);
 		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
 		
-		RegularUserDataGrabber.productsList = regularUserCartSteps.grabProductsData();
+		regularUserCartSteps.grabProductsData();
+		regularUserCartSteps.grabTotals();
+//		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
+//		RegularUserDataGrabber.regularUserGrabbedCartTotals  = regularUserCartSteps.grabTotals();
 		
-		total = RegularCartTotalsCalculation.calculateTotals(RegularUserCartCalculator.allProductsList, discountClass);
-		PrintUtils.printRegularCartCalcDetailsModel(total);
+		RegularUserCartCalculator.calculateCartTotals(RegularUserCartCalculator.allProductsList, discountClass);
+		PrintUtils.printRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts);
+		
+		regularUserCartSteps.clickGoToShipping();
+		shippingPartySectionSteps.clickPartyNoOption();
+		shippingSteps.selectAddress(billingAddress);
+		shippingSteps.setSameAsBilling(true);	
+		
+		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
+		System.out.println("-----------SHIPPING-------");
+		PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularShippingProductsList);
+		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
+		PrintUtils.printShippingTotals(RegularUserDataGrabber.regularUserShippingTotals);
+		shippingSteps.clickGoToPaymentMethod();
+		
 		
 	
 	}

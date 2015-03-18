@@ -3,19 +3,22 @@ package com.tools.datahandlers.regularUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tools.calculation.RegularCartTotalsCalculation;
+import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.data.frontend.RegularUserCartTotalsModel;
 
 public class RegularUserCartCalculator {
 	
 	public static List<RegularBasicProductModel> allProductsList = new ArrayList<RegularBasicProductModel>();
-	public static RegularUserCartTotalsModel calculatedTotalsDiscounts = new RegularUserCartTotalsModel();
+	public static RegularCartCalcDetailsModel calculatedTotalsDiscounts = new RegularCartCalcDetailsModel();
 	
 	public static void wipe(){
 		allProductsList = new ArrayList<RegularBasicProductModel>();
-		calculatedTotalsDiscounts = new RegularUserCartTotalsModel();
+		calculatedTotalsDiscounts = new RegularCartCalcDetailsModel();
 	}
 	
-	public static void calculateCartTtotals(){}
+	public static void calculateCartTotals(List<RegularBasicProductModel> prodList,String discountClass){
+		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass);
+	}
 
 }
