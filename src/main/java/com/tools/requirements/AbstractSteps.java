@@ -43,6 +43,10 @@ import com.pages.frontend.checkout.shipping.SurveyPage;
 import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.registration.FacebookRegistrationFormPage;
+import com.pages.frontend.registration.landing.ContactLandingPage;
+import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
+import com.pages.frontend.registration.landing.RegistrationSuccessPage;
+import com.pages.frontend.registration.landing.ThankYouPage;
 import com.tools.Constants;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -253,6 +257,22 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public FacebookRegistrationFormPage facebookRegistrationFormPage() {
 		return getPages().currentPageAt(FacebookRegistrationFormPage.class);
+	}
+	
+	public ContactLandingPage contactLandingPage() {
+		return getPages().currentPageAt(ContactLandingPage.class);
+	}
+	
+	public LandingCustomerAllocationPage landingCustomerAllocationPage() {
+		return getPages().currentPageAt(LandingCustomerAllocationPage.class);
+	}
+	
+	public ThankYouPage thankYouPage() {
+		return getPages().currentPageAt(ThankYouPage.class);
+	}
+	
+	public RegistrationSuccessPage registrationSuccessPage() {
+		return getPages().currentPageAt(RegistrationSuccessPage.class);
 	}
 
 	// -----------------------Email-----------------------------------
