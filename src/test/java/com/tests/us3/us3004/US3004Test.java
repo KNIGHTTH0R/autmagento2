@@ -178,7 +178,7 @@ public class US3004Test extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-		confirmationSteps.grabProductsList();
+		confirmationSteps.grabRegularProductsList();
 		confirmationSteps.grabConfirmationTotals();
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();

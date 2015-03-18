@@ -15,6 +15,7 @@ public class RegularUserCartProductModel {
 	private String quantity;
 	private String unitPrice;;
 	private String finalPrice;
+	private String bonusType;
 
 	public String getName() {
 		return name;
@@ -54,6 +55,14 @@ public class RegularUserCartProductModel {
 
 	public void setProdCode(String prodCode) {
 		this.prodCode = prodCode;
+	}
+
+	public String getBonusType() {
+		return bonusType;
+	}
+
+	public void setBonusType(String bonusType) {
+		this.bonusType = bonusType;
 	}
 
 }

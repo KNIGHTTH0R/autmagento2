@@ -17,6 +17,12 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void selectProductDiscountType(String productCode, String discountType) {
 		regularUserCartPage().selectProductDiscountType(productCode, discountType);
 	}
+
+	@Step
+	public void validateThatVoucherCannotBeAppliedMessage() {
+		regularUserCartPage().validateThatVoucherCannotBeAppliedMessage();
+	}
+
 	@Step
 	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode, String discountType) {
 		regularUserCartPage().updateProductList(productsList, productCode, discountType);
@@ -39,7 +45,7 @@ public class RegularUserCartSteps extends AbstractSteps {
 
 	@Step
 	public void submitVoucherCode() {
-		regularUserCartPage().submitVoucherCode();  
+		regularUserCartPage().submitVoucherCode();
 	}
 
 	@Step

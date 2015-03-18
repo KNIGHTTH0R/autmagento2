@@ -74,5 +74,9 @@ public class CheckoutValidationSteps extends AbstractSteps {
 		CustomVerification.verifyTrue("Failure: The total amount from URL is incorrect. Expected: " + totalAmount + " Actual: " + url, url.contains(totalAmount));
 
 	}
+	@Step
+	public void verifyBonusType(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: THe applied bonus type doesn't match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
 
 }

@@ -74,6 +74,7 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getQuantity());
 			System.out.println(cartProductModel.getUnitPrice());		
 			System.out.println(cartProductModel.getFinalPrice());			
+			System.out.println(cartProductModel.getBonusType());			
 		}
 	}
 

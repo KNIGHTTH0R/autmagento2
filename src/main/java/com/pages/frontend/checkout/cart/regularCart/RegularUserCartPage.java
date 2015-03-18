@@ -31,7 +31,7 @@ public class RegularUserCartPage extends AbstractPage {
 	@FindBy(id = "coupon_code")
 	private WebElement couponCodeInput;
 
-	@FindBy(css = "a[title='Redeem voucher']")
+	@FindBy(css = "a[title='Gutschein einlösen']")
 	private WebElement submitVoucherCode;
 
 	@FindBy(css = "div.page-title ul.checkout-types button:last-child")
@@ -48,6 +48,14 @@ public class RegularUserCartPage extends AbstractPage {
 
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
+	
+	@FindBy(css = "li.error-msg span")
+	private WebElement errorMessageContainer;
+	
+	public void validateThatVoucherCannotBeAppliedMessage(){
+		element(errorMessageContainer).waitUntilVisible();
+		Assert.assertTrue("The message <" + Constants.VOUCHER_DISCOUNT_INCOMPATIBLE + "> dosn't appear and it should!", errorMessageContainer.getText().contains(Constants.VOUCHER_DISCOUNT_INCOMPATIBLE));
+	}
 
 	public void typeCouponCode(String code) {
 		element(couponCodeInput).waitUntilVisible();
@@ -122,6 +130,7 @@ public class RegularUserCartPage extends AbstractPage {
 					.trim()));
 			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+//			productNow.setBonusType(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) select option[selected='true']")).getText()));
 			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
 
 			resultList.add(productNow);
@@ -158,11 +167,11 @@ public class RegularUserCartPage extends AbstractPage {
 			}
 			if (key.contains("GENUTZTER SCHMUCK BONUS")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.addDiscount(MongoTableKeys.DISCOUNT_JEWELRY_BONUS, valueTransformer);
+				resultModel.addDiscount(Constants.JEWELRY_BONUS, valueTransformer);
 			}
 			if (key.contains("40%") && key.contains("RABATT")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.addDiscount(MongoTableKeys.DISCOUNT_40_KEY, valueTransformer);
+				resultModel.addDiscount(Constants.DISCOUNT_40_BONUS, valueTransformer);
 			}
 			if (key.contains("GESAMTBETRAG")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
