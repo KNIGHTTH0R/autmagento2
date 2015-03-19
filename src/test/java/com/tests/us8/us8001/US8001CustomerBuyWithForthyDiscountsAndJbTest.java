@@ -1,4 +1,4 @@
-package com.tests.us8;
+package com.tests.us8.us8001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,14 +40,13 @@ import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US3006", type = "frontend")
+@WithTag(name = "US8001", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
+public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -143,7 +142,7 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	}
 
 	@Test
-	public void customerCartTest() {
+	public void us8001CustomerBuyWithForthyDiscountsAndJbTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
@@ -169,16 +168,10 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		// TODO move this (maybe)
 		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
 
-		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
-		System.out.println("FATALITATE");
-		PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularCartProductsList);
+		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals();
 
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
-
-		System.out.println("--------CALC CART AND SHIPPING----------------");
-		PrintUtils.printRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts);
-		PrintUtils.printShippingTotals(RegularUserCartCalculator.shippingCalculatedModel);
 
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
@@ -186,10 +179,9 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		shippingSteps.setSameAsBilling(true);
 
 		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
-		System.out.println("-----------SHIPPING-------");
-		PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularShippingProductsList);
+	
 		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printShippingTotals(RegularUserDataGrabber.regularUserShippingTotals);
+	
 		shippingSteps.clickGoToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
@@ -200,12 +192,11 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-
-		System.out.println("------CONFIRMATION-------");
+	
 		confirmationSteps.grabRegularProductsList();
-		PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularConfirmationProductsList);
+		
 		RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-		PrintUtils.printShippingTotals(RegularUserDataGrabber.regularUserConfirmationTotals);
+		
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
@@ -213,7 +204,7 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		checkoutValidationSteps.verifySuccessMessage();
 
 		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		regularCartValidationWorkflows.performCartValidations();
+		regularCartValidationWorkflows.performCartValidationsWith40DiscountAndJb();
 
 		customVerifications.printErrors();
 	}
@@ -222,6 +213,7 @@ public class CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	public void saveData() {
 		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + Constants.CALC);
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
 		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + Constants.GRAB);
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + Constants.CALC);

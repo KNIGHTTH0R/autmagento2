@@ -97,6 +97,7 @@ public class Constants {
 	public static final String DISCOUNT_40_BONUS = "40% Rabatt Gutschein";
 	public static final String REGULAR_PRICE = "Regulärer Preis";
 	public static final String VOUCHER_DISCOUNT = "Voucher Discount";
+
 	
 
 	

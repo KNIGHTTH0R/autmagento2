@@ -92,12 +92,21 @@ public class RegularUserCartWorkflows {
 	}
 
 	@StepGroup
-	public void verifyTotalsDiscount(String message) {
+	public void verifyTotalsDiscountWith40AndJbDiscount(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
 		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
 		verifyForthyDiscount(discountTotals.getDiscount(Constants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(Constants.DISCOUNT_40_BONUS));
 		verifyJewelryDiscount(discountTotals.getDiscount(Constants.JEWELRY_BONUS), discountCalculationModel.findSegment(Constants.JEWELRY_BONUS));
+		//TODO add more validations
+	}
+	@StepGroup
+	public void verifyTotalsDiscountWithVoucher(String message) {
+		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
+		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
+		verifyVoucherDiscount(discountTotals.getDiscount(Constants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(Constants.VOUCHER_DISCOUNT));
+		
 		//TODO add more validations
 	}
 	
@@ -112,6 +121,10 @@ public class RegularUserCartWorkflows {
 	@Step
 	public void verifyForthyDiscount(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: 40% bonus doesn't match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
+	@Step
+	public void verifyVoucherDiscount(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: The voucher discount doesn't match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 	@Step

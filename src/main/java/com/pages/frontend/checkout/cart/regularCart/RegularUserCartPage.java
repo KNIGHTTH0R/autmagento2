@@ -170,6 +170,10 @@ public class RegularUserCartPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(Constants.JEWELRY_BONUS, valueTransformer);
 			}
+			if (key.contains("G025FMDE")) {
+				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.addDiscount(Constants.VOUCHER_DISCOUNT, valueTransformer);
+			}
 			if (key.contains("40%") && key.contains("RABATT")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(Constants.DISCOUNT_40_BONUS, valueTransformer);

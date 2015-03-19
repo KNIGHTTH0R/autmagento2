@@ -17,6 +17,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
+import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class PrintUtils {
@@ -114,6 +115,19 @@ public class PrintUtils {
 		System.out.println("shiping " + model.getShipping());
 		System.out.println("total amount " + model.getTotalAmount());
 		System.out.println("ip " + model.getIpPoints());
+	}
+	public static void printRegularUserCartTotalsModel(RegularUserCartTotalsModel model) {
+		System.out.println(" *** Print Total section from Cart *** ");
+		System.out.println("------------------------");
+		System.out.println("subtotal " + model.getSubtotal());
+	
+		for (String discountNow : model.getDiscountsMap().keySet()) {
+			System.out.println("Discount " + discountNow + ": " + model.getDiscountsMap().get(discountNow));
+		}
+		System.out.println("tax " + model.getTax());
+		System.out.println("shiping " + model.getShipping());
+		System.out.println("total amount " + model.getTotalAmount());
+		
 	}
 
 	public static void printOrderInfo(OrderInfoModel model) {
