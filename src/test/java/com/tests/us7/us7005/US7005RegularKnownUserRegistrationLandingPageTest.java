@@ -1,4 +1,10 @@
-package com.tests.us7.us7004;
+package com.tests.us7.us7005;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -11,9 +17,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
+import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -21,10 +27,10 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US7004", type = "fontend")
+@WithTag(name = "US7005", type = "fontend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class US7004RegularUserRegistrationLandingPageTest extends BaseTest{
+public class US7005RegularKnownUserRegistrationLandingPageTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -33,13 +39,38 @@ public class US7004RegularUserRegistrationLandingPageTest extends BaseTest{
 	
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
+	private String username;
 	
 
 	@Before
 	public void setUp() throws Exception {
+		
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us7" + File.separator + "us7005.properties");
+			prop.load(input);
+			username = prop.getProperty("username");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
+		dataModel.setEmailName(username);
 		addressModel = new AddressModel();
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -49,11 +80,9 @@ public class US7004RegularUserRegistrationLandingPageTest extends BaseTest{
 	 * @throws Exception
 	 */
 	@Test
-	public void us7004RegularUserRegistrationLandingPageTest() {
+	public void us7005RegularKnownUserRegistrationLandingPageTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
-		customerRegistrationSteps.selectStylistOption(StyleMode.DefaultStylist, "", "");
-		customerRegistrationSteps.submitStylistSelection();
 		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
 		
 		customerRegistrationSteps.verifyCustomerEmail(dataModel.getEmailName(), email);
