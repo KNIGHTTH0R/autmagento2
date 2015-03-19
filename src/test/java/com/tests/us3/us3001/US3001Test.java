@@ -188,6 +188,7 @@ public class US3001Test extends BaseTest {
 
 		shippingSteps.selectAddress(addressString);
 		shippingSteps.setSameAsBilling(true);	
+		shippingSteps.refresh();
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.clickGoToPaymentMethod();

@@ -17,7 +17,7 @@ import com.tools.CustomVerification;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7004", type = "external")
+@WithTag(name = "US7004", type = "backend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US7004CheckCustomerActivationTest extends BaseTest {
@@ -56,8 +56,8 @@ public class US7004CheckCustomerActivationTest extends BaseTest {
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
 
-		System.out.println("grabStatus: " + grabStatus);
-		System.out.println("expectedStatus: " + expectedStatus);
+//		System.out.println("grabStatus: " + grabStatus);
+//		System.out.println("expectedStatus: " + expectedStatus);
 		stylistValidationSteps.validateStatus(grabStatus, expectedStatus);
 		
 		customVerifications.printErrors();

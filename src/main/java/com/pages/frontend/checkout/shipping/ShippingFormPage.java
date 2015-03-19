@@ -96,7 +96,6 @@ public class ShippingFormPage extends AbstractPage {
 
 		if ((checked && !isSelected) || (!checked && isSelected))
 			sameAsBilling.click();
-
 	}
 	
 	public void selectShippingAddress(String value) {
