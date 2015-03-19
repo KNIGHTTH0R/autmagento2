@@ -9,6 +9,7 @@ import com.connectors.mongo.MongoConnector;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.tools.data.CalcDetailsModel;
+import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
@@ -359,6 +360,34 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 
+	}
+	@SuppressWarnings("unchecked")
+	public static List<RegularCartCalcDetailsModel> grabRegularCartCalcDetailsModels(String testName) {
+		DBObject dbObject = null;
+		List<RegularCartCalcDetailsModel> itemList = new ArrayList<RegularCartCalcDetailsModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.REGULAR_CART_CALC_DETAILS_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				RegularCartCalcDetailsModel result = new RegularCartCalcDetailsModel();
+				dbObject = cursor.next();				
+				
+				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
+				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
+				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+				result.addSegments(((Map<String, String>) dbObject.get(MongoTableKeys.SEGMENTS)));
+				
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+		
 	}
 
 	public static List<ShippingModel> grabShippingModel(String testName) {

@@ -74,6 +74,7 @@ public class Constants {
 	public static final String DISCOUNT_25 = "25";
 	public static final String DISCOUNT_50 = "50";
 	public static final String DISCOUNT_BUY_3_GET_1 = "3+1";
+	
 
 	public static final String GRAB = "Grab";
 	public static final String CALC = "Calc";
@@ -90,10 +91,14 @@ public class Constants {
 	//messages
 	public static final String EXISTING_ACCOUNT_MESSAGE = "WICHTIG: Wenn Du bereits einen PIPPA&JEAN Benutzerkonto hast, dann melde dich bitte hier an, bevor Du die Style Coach Registrierung ausführst!";
 	public static final String STYLE_COACH_REG_PAGE_TITLE = "REGISTRIERE DICH ALS STYLE COACH UND ERWERBE DAS STARTER-SET";
+	public static final String VOUCHER_DISCOUNT_INCOMPATIBLE = "Gutscheine können nicht in Verbindung mit Schmuckbonus verwendet werden.";
 	//BONUSES
 	public static final String JEWELRY_BONUS = "Schmuck Bonus";
 	public static final String DISCOUNT_40_BONUS = "40% Rabatt Gutschein";
 	public static final String REGULAR_PRICE = "Regulärer Preis";
+	public static final String VOUCHER_DISCOUNT = "Voucher Discount";
+	
+
 	
 	
 }

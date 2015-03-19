@@ -6,6 +6,7 @@ import com.connectors.mongo.MongoConnector;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.tools.data.CalcDetailsModel;
+import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
@@ -181,6 +182,20 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.SEGMENTS, calcDetailsModel.getSegments());
 		document.put(MongoTableKeys.CALCULATIONS, calcDetailsModel.getCalculations());
 
+		table.insert(document);
+	}
+	public static void saveRegularCartCalcDetailsModel(RegularCartCalcDetailsModel calcDetailsModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.REGULAR_CART_CALC_DETAILS_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();		
+		
+		document.put(MongoTableKeys.TOTAL_AMOUNT, calcDetailsModel.getTotalAmount());
+		document.put(MongoTableKeys.SUBTOTAL, calcDetailsModel.getSubTotal());
+		document.put(MongoTableKeys.TAX, calcDetailsModel.getTax());
+		document.put(MongoTableKeys.SEGMENTS, calcDetailsModel.getSegments());
+
+		
 		table.insert(document);
 	}
 

@@ -95,6 +95,7 @@ public class MongoTableKeys {
 	
 	//CalcDetailsModel
 	public static final String CALC_DETAILS_MODEL = "CalcDetailsModel";
+	public static final String REGULAR_CART_CALC_DETAILS_MODEL = "RegularCartCalcDetailsModel";
 	public static final String MARKETING_BONUS = "MarketingBonus";
 	public static final String SEGMENTS = "Segments";
 	public static final String CALCULATIONS = "Calculations";
