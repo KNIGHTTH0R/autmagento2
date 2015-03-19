@@ -48,6 +48,7 @@ import com.pages.frontend.registration.landing.ContactLandingPage;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
 import com.pages.frontend.registration.landing.RegistrationSuccessPage;
 import com.pages.frontend.registration.landing.ThankYouPage;
+import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.tools.Constants;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -291,6 +292,10 @@ public class AbstractSteps extends ScenarioSteps {
 	
 	public RegistrationSuccessPage registrationSuccessPage() {
 		return getPages().currentPageAt(RegistrationSuccessPage.class);
+	}
+	
+	public RegisterLandingPage registerLandingPage() {
+		return getPages().currentPageAt(RegisterLandingPage.class);
 	}
 
 	// -----------------------Email-----------------------------------
