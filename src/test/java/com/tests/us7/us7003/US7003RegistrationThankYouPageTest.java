@@ -30,7 +30,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US7003", type = "fontend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
+public class US7003RegistrationThankYouPageTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -83,13 +83,10 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 	 * @throws Exception
 	 */
 	@Test
-	public void us7003RegularUserRegistrationThankYouPageTest() {
+	public void us7003RegistrationThankYouPageTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
-		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
-		
-		customerRegistrationSteps.verifyCustomerEmail(dataModel.getEmailName(), email);
-		customerRegistrationSteps.verifySuccessLink();
+		customerRegistrationSteps.verifySimpleThankYouPage();
 		
 		customVerifications.printErrors();
 	}

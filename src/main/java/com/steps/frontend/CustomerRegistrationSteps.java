@@ -266,4 +266,18 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		Assert.assertTrue("Failure: Success link not found. Actual URL: " + grabedTitle, grabedTitle.contains("registersuccess"));
 	}
 
+	/**
+	 * thankyou-register - is the id of the form on the thank you page.
+	 * We verify that the form is not present with this method.
+	 * Page title is also validated
+	 */
+	@Step
+	public void verifySimpleThankYouPage() {
+		waitABit(Constants.TIME_CONSTANT);
+		String pageSource = thankYouPage().pageSource();
+		String pageTitle = thankYouPage().pageTitle();
+		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page",pageTitle.contains("Thank you page"));
+		Assert.assertTrue("Failure: Page may contain thankYou register form.",!pageSource.contains("thankyou-register"));
+	}
+
 }
