@@ -66,6 +66,11 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 	}
+	
+	public void refresh() {
+		getDriver().navigate().refresh();
+		waitABit(Constants.TIME_CONSTANT);
+	}
 
 	@Step
 	public void performLoginUnderContext(String userName, String userPass, String context) {
