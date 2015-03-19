@@ -1,4 +1,4 @@
-package com.tests.us7.us7004;
+package com.tests.us7.us7007;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -11,20 +11,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US7004", type = "fontend")
+@WithTag(name = "US7006", type = "fontend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class US7004RegularUserRegistrationLandingPageTest extends BaseTest{
+public class US7007UserRegistrationWidgetRegistrationTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -32,15 +30,15 @@ public class US7004RegularUserRegistrationLandingPageTest extends BaseTest{
 	public CustomVerification customVerifications;
 	
 	private CustomerFormModel dataModel;
-	private AddressModel addressModel;
+	private String memberCode;
 	
 
 	@Before
 	public void setUp() throws Exception {
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
-		addressModel = new AddressModel();
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+		memberCode = "123aa11";
 	}
 
 	/**
@@ -49,15 +47,9 @@ public class US7004RegularUserRegistrationLandingPageTest extends BaseTest{
 	 * @throws Exception
 	 */
 	@Test
-	public void us7004RegularUserRegistrationLandingPageTest() {
+	public void us7007UserRegistrationWidgetRegistrationTest() {
 
-		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
-		customerRegistrationSteps.selectStylistOption(StyleMode.DefaultStylist, "", "");
-		customerRegistrationSteps.submitStylistSelection();
-		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
-		
-		customerRegistrationSteps.verifyCustomerEmail(dataModel.getEmailName(), email);
-		customerRegistrationSteps.verifySuccessLink();
+		customerRegistrationSteps.fillWidgetRegistrationForm(memberCode, dataModel);
 		
 		customVerifications.printErrors();
 	}

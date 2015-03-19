@@ -50,6 +50,7 @@ public class Constants {
 	// "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
 
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
+	public static final String REGISTER_LANDING_PAGE = "register-landing-page";
 	public static final String LANDING_PAGE = "contact-landing-page";
 
 	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator;

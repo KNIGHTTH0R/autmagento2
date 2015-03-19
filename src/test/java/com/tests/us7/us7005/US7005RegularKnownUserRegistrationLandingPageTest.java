@@ -1,4 +1,4 @@
-package com.tests.us7.us7003;
+package com.tests.us7.us7005;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,10 +27,10 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US7003", type = "fontend")
+@WithTag(name = "US7005", type = "fontend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
+public class US7005RegularKnownUserRegistrationLandingPageTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -40,7 +40,6 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
 	private String username;
-	private String password;
 	
 
 	@Before
@@ -51,10 +50,9 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us7" + File.separator + "us7003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us7" + File.separator + "us7005.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
-			password = prop.getProperty("password");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -71,7 +69,6 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		dataModel.setEmailName(username);
-		dataModel.setPassword(password);
 		addressModel = new AddressModel();
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
@@ -83,7 +80,7 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 	 * @throws Exception
 	 */
 	@Test
-	public void us7003RegularUserRegistrationThankYouPageTest() {
+	public void us7005RegularKnownUserRegistrationLandingPageTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
 		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());

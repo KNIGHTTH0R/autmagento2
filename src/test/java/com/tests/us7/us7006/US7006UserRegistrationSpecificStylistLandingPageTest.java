@@ -1,4 +1,4 @@
-package com.tests.us7.us7003;
+package com.tests.us7.us7006;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -27,10 +28,10 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US7003", type = "fontend")
+@WithTag(name = "US7006", type = "fontend")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
+public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -39,8 +40,8 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 	
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
-	private String username;
-	private String password;
+	private String styleCoachFN;
+	private String styleCoachLN;
 	
 
 	@Before
@@ -51,10 +52,10 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us7" + File.separator + "us7003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us7" + File.separator + "us7006.properties");
 			prop.load(input);
-			username = prop.getProperty("username");
-			password = prop.getProperty("password");
+			styleCoachFN = prop.getProperty("styleCoachFN");
+			styleCoachLN = prop.getProperty("styleCoachLN");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -70,10 +71,7 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 		
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
-		dataModel.setEmailName(username);
-		dataModel.setPassword(password);
 		addressModel = new AddressModel();
-		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -83,9 +81,11 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 	 * @throws Exception
 	 */
 	@Test
-	public void us7003RegularUserRegistrationThankYouPageTest() {
+	public void us7006UserRegistrationSpecificStylistLandingPageTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
+		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN);
+		customerRegistrationSteps.submitStylistSelection();
 		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
 		
 		customerRegistrationSteps.verifyCustomerEmail(dataModel.getEmailName(), email);

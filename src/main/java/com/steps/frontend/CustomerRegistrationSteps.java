@@ -195,6 +195,11 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	// Create customer from landing page
+	/**
+	 * This form is found on the http//[base.url]/contact-landing-page
+	 * @param dataModel
+	 * @param addressModel
+	 */
 	@Step
 	public void fillLandingPageForm(CustomerFormModel dataModel, AddressModel addressModel) {
 		getDriver().get(Constants.BASE_FE_URL + Constants.LANDING_PAGE);
@@ -264,6 +269,34 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void verifySuccessLink() {
 		String grabedTitle = getDriver().getCurrentUrl();
 		Assert.assertTrue("Failure: Success link not found. Actual URL: " + grabedTitle, grabedTitle.contains("registersuccess"));
+	}
+
+	/**
+	 * thankyou-register - is the id of the form on the thank you page.
+	 * We verify that the form is not present with this method.
+	 * Page title is also validated
+	 */
+	@Step
+	public void verifySimpleThankYouPage() {
+		waitABit(Constants.TIME_CONSTANT);
+		String pageSource = thankYouPage().pageSource();
+		String pageTitle = thankYouPage().pageTitle();
+		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page",pageTitle.contains("Thank you page"));
+		Assert.assertTrue("Failure: Page may contain thankYou register form.",!pageSource.contains("thankyou-register"));
+	}
+
+	@Step
+	public void fillWidgetRegistrationForm(String code, CustomerFormModel dataModel) {
+		getDriver().get(Constants.BASE_FE_URL + Constants.REGISTER_LANDING_PAGE);
+		registerLandingPage().memberCodeInput(code);
+		registerLandingPage().firstNameInput(dataModel.getFirstName());
+		registerLandingPage().lastNameInput(dataModel.getLastName());
+		registerLandingPage().emailInput(dataModel.getEmailName());
+		
+		registerLandingPage().passwordInput(dataModel.getPassword());
+		registerLandingPage().passwordConfirmInput(dataModel.getPassword());
+		registerLandingPage().checkIAgree();
+		registerLandingPage().submitAndContinue();
 	}
 
 }

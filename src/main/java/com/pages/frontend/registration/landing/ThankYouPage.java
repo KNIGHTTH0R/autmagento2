@@ -27,6 +27,15 @@ public class ThankYouPage extends AbstractPage{
 	@FindBy(id = "thankyou-submit")
 	private WebElement submitButton;
 	
+	public String pageSource(){
+		return getDriver().getPageSource();
+	}
+
+	public String pageTitle() {
+		return getDriver().getTitle();
+	}
+
+	
 	public void passwordInput(String password){
 		element(thankYouForm).waitUntilVisible();
 		passwordInput.sendKeys(password);

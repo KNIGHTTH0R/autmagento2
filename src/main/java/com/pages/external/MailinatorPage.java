@@ -81,16 +81,18 @@ public class MailinatorPage extends AbstractPage {
 	}
 
 	public String confirmEmail() {
-
 		getDriver().switchTo().frame(iFrameElement);
-
 		element(mailContainer).waitUntilVisible();
 		String confirmLink = mailContainer.findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
-
 		System.out.println("Confirm link: " + confirmLink);
-
 		return confirmLink;
-
+	}
+	
+	public String grabCouponCode(){
+		getDriver().switchTo().frame(iFrameElement);
+		String codeSection = mailContainer.findElement(By.cssSelector("table[bgcolor='#FFFFFF'] tbody > tr:nth-child(3)")).getText();
+	
+		return codeSection;
 	}
 
 }
