@@ -178,6 +178,10 @@ public class RegularUserCartPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(Constants.DISCOUNT_40_BONUS, valueTransformer);
 			}
+			if (key.contains("BUY 3 GET 1 FOR 50%")) {
+				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.addDiscount(Constants.DISCOUNT_BUY_3_GET_1, valueTransformer);
+			}
 			if (key.contains("GESAMTBETRAG")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);

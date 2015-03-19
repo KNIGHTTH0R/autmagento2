@@ -48,6 +48,7 @@ import com.pages.frontend.registration.landing.ContactLandingPage;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
 import com.pages.frontend.registration.landing.RegistrationSuccessPage;
 import com.pages.frontend.registration.landing.ThankYouPage;
+import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.Constants;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -262,6 +263,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public SuccessPage successPage() {
 		return getPages().currentPageAt(SuccessPage.class);
+	}
+	//Lounge-Reports 
+	public StylistsCustomerOrderReportPage stylistsCustomerOrderReportPage() {
+		return getPages().currentPageAt(StylistsCustomerOrderReportPage.class);
 	}
 
 	// Profile

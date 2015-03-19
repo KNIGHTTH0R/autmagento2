@@ -6,7 +6,6 @@ import java.math.RoundingMode;
 import java.util.List;
 
 import com.tools.Constants;
-import com.tools.data.CalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -51,6 +50,44 @@ public class RegularCartTotalsCalculation {
 
 		return result;
 	}
+	public static RegularCartCalcDetailsModel calculateTotalsWithBuy3Get1Active(List<RegularBasicProductModel> productsList,List<RegularBasicProductModel> productsListForBuy3Get1, String taxClass, String voucherValue) {
+		RegularCartCalcDetailsModel result = new RegularCartCalcDetailsModel();
+		
+		BigDecimal subtotal = BigDecimal.ZERO;
+		BigDecimal tax = BigDecimal.ZERO;
+		BigDecimal totalAmount = BigDecimal.ZERO;
+		BigDecimal jewerlyDiscount = BigDecimal.ZERO;
+		BigDecimal forthyDiscount = BigDecimal.ZERO;
+		BigDecimal buy3Get1 = RegularCartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsListForBuy3Get1);
+		BigDecimal voucherPrice = BigDecimal.valueOf(Double.parseDouble(voucherValue));
+		
+		for (RegularBasicProductModel product : productsList) {
+			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
+			if (product.getBonusType().contentEquals(Constants.JEWELRY_BONUS)) {
+				jewerlyDiscount = jewerlyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
+				jewerlyDiscount.setScale(2, RoundingMode.HALF_UP);
+			}
+			if (product.getBonusType().contentEquals(Constants.DISCOUNT_40_BONUS)) {
+				forthyDiscount = forthyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
+				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
+			}
+		}
+		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1 ,voucherPrice);
+		
+		tax = totalAmount.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
+		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
+		
+		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
+		
+		result.setTax(String.valueOf(tax));
+		result.addSegment(Constants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
+		result.addSegment(Constants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
+		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
+		result.addSegment(Constants.VOUCHER_DISCOUNT, String.valueOf(voucherValue));
+		
+		return result;
+	}
 
 	private static BigDecimal calculateTotalAmount(BigDecimal subtotal, BigDecimal jewelryDiscount, BigDecimal forthyDiscount, BigDecimal buy3Get1,BigDecimal voucherPrice) {
 
@@ -88,6 +125,8 @@ public class RegularCartTotalsCalculation {
 
 		return result;
 	}
+	
+	
 
 }
 //=======

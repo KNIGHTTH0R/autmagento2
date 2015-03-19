@@ -17,44 +17,44 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
 
-
 public class RegularUserCartWorkflows {
 
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
 
-	@Steps 
+	@Steps
 	public static CustomVerification customVerification;
 
 	private List<RegularBasicProductModel> basicProductsList = new ArrayList<RegularBasicProductModel>();
 	private List<RegularUserCartProductModel> cartProductsList = new ArrayList<RegularUserCartProductModel>();
-	
+
 	public void setValidateProductsModels(List<RegularBasicProductModel> basicProductsList, List<RegularUserCartProductModel> cartProductsList) {
 		this.basicProductsList = basicProductsList;
 		this.cartProductsList = cartProductsList;
 	}
-	
+
 	@Step
 	public void validateProducts(String message) {
 
 		for (RegularBasicProductModel productNow : basicProductsList) {
-			RegularUserCartProductModel compare = findProduct(productNow.getProdCode(),productNow.getQuantity(), cartProductsList);
+			RegularUserCartProductModel compare = findProduct(productNow.getProdCode(), productNow.getQuantity(), cartProductsList);
 
-			if(compare != null){
-				try{
-				compare.setQuantity(compare.getQuantity().replace("x", "").trim());
+			if (compare != null) {
+				try {
+					compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
-				}catch(Exception e){}
+				} catch (Exception e) {
+				}
 			}
-			
-			
+
 			if (compare.getName() != null) {
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
 				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
 				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());
-//				checkoutValidationSteps.verifyBonusType(productNow.getBonusType(), compare.getBonusType());
-			
+				// checkoutValidationSteps.verifyBonusType(productNow.getBonusType(),
+				// compare.getBonusType());
+
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
@@ -70,8 +70,8 @@ public class RegularUserCartWorkflows {
 		Assert.assertTrue("Failure: Not all products have been validated . ", cartProductsList.size() == 0);
 
 	}
-	
-	public RegularUserCartProductModel findProduct(String productCode,String quantity,  List<RegularUserCartProductModel> cartProducts) {
+
+	public RegularUserCartProductModel findProduct(String productCode, String quantity, List<RegularUserCartProductModel> cartProducts) {
 		RegularUserCartProductModel result = new RegularUserCartProductModel();
 		theFor: for (RegularUserCartProductModel cartProductModel : cartProducts) {
 			if (cartProductModel.getProdCode().contains(productCode) && cartProductModel.getQuantity().contentEquals(quantity)) {
@@ -81,7 +81,7 @@ public class RegularUserCartWorkflows {
 		}
 		return result;
 	}
-	
+
 	private RegularUserCartTotalsModel discountTotals = new RegularUserCartTotalsModel();
 	private RegularCartCalcDetailsModel discountCalculationModel = new RegularCartCalcDetailsModel();
 
@@ -92,36 +92,54 @@ public class RegularUserCartWorkflows {
 	}
 
 	@StepGroup
+	public void verifyTotalsDiscountWith40JbAndBuy3Get1Discount(String message) {
+		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
+		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
+		verifyForthyDiscount(discountTotals.getDiscount(Constants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(Constants.DISCOUNT_40_BONUS));
+		verifyJewelryDiscount(discountTotals.getDiscount(Constants.JEWELRY_BONUS), discountCalculationModel.findSegment(Constants.JEWELRY_BONUS));
+		verifyBuy3Get1Discount(discountTotals.getDiscount(Constants.DISCOUNT_BUY_3_GET_1), discountCalculationModel.findSegment(Constants.DISCOUNT_BUY_3_GET_1));
+	}
+
+	@StepGroup
 	public void verifyTotalsDiscountWith40AndJbDiscount(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
 		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
 		verifyForthyDiscount(discountTotals.getDiscount(Constants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(Constants.DISCOUNT_40_BONUS));
 		verifyJewelryDiscount(discountTotals.getDiscount(Constants.JEWELRY_BONUS), discountCalculationModel.findSegment(Constants.JEWELRY_BONUS));
-		//TODO add more validations
+
 	}
+
 	@StepGroup
 	public void verifyTotalsDiscountWithVoucher(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
 		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
 		verifyVoucherDiscount(discountTotals.getDiscount(Constants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(Constants.VOUCHER_DISCOUNT));
-		
-		//TODO add more validations
+
 	}
-	
+
 	@Step
 	public void verifyIP(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: IP points dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
+
 	@Step
 	public void verifyJewelryDiscount(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Jewelry bonus doesn't match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
+	
+	@Step
+	public void verifyBuy3Get1Discount(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Buy 3 Get 1 for 50% bonus doesn't match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
+
 	@Step
 	public void verifyForthyDiscount(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: 40% bonus doesn't match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
+
 	@Step
 	public void verifyVoucherDiscount(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: The voucher discount doesn't match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
@@ -137,14 +155,11 @@ public class RegularUserCartWorkflows {
 		CustomVerification.verifyTrue("Failure: TAX dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
-
 	@Step
 	public void verifySubTotals(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Sub Totals dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
-
-
 
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
@@ -157,7 +172,5 @@ public class RegularUserCartWorkflows {
 		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 
 	}
-	
-
 
 }

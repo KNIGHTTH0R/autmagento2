@@ -1,4 +1,4 @@
-package com.tests.us8.us8002;
+package com.tests.us8.us8003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,10 +44,10 @@ import com.tools.utils.PrintUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8002", type = "frontend")
+@WithTag(name = "US8003", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US8002CustomerBuyWithVoucherTest extends BaseTest {
+public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -74,7 +74,7 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 
 	private String username, password;
 	private String discountClass;
-	private String billingAddress,shippingAddress;
+	private String billingAddress;
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
@@ -108,14 +108,13 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 
 			voucherCode = prop.getProperty("voucherCode");
@@ -144,7 +143,7 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 	}
 
 	@Test
-	public void us8002CustomerBuyWithVoucherTest() {
+	public void us8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test() {
 		customerRegistrationSteps.performLogin(username, password);
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
@@ -157,23 +156,32 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		RegularUserCartCalculator.allProductsList.add(productData);
 
 		headerSteps.openCartPreview();
-		headerSteps.goToCart();		
-
+		headerSteps.goToCart();
+		// TODO put the updateProductList in selectProductDiscountType method
+		// (maybe)
+		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), Constants.JEWELRY_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), Constants.JEWELRY_BONUS);
+		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
+		
 		regularUserCartSteps.typeCouponCode(voucherCode);
 		regularUserCartSteps.submitVoucherCode();
+		// TODO move this (maybe)
+		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
+
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals();
-		PrintUtils.printRegularUserCartTotalsModel(RegularUserDataGrabber.regularUserGrabbedCartTotals);
 
-		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
+		RegularUserCartCalculator.calculateCartBuy3Get1CartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
+		
 		PrintUtils.printRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts);
-
+		PrintUtils.printShippingTotals(RegularUserCartCalculator.shippingCalculatedModel);
+		
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.selectShippingAddress(shippingAddress);
+		shippingSteps.setSameAsBilling(true);
 
 		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
 	
@@ -200,8 +208,8 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 
-		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		regularCartValidationWorkflows.performCartValidationsWithVoucherApplied();
+		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		regularCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
 
 		customVerifications.printErrors();
 	}
