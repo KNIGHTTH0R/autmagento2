@@ -1,4 +1,4 @@
-package com.tests.us3.us3004;
+package com.tests.us8.us8001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,10 +32,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US3004", type = "external")
+@WithTag(name = "US8001", type = "external")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US3004ValidateOrderEmailTest extends BaseTest{
+public class US8001ValidateOrderEmailTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -58,11 +58,11 @@ public class US3004ValidateOrderEmailTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + Constants.US_03_FOLDER + File.separator + "us3004.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8001.properties");
 			prop.load(input);
 			email = prop.getProperty("email");
 			password = prop.getProperty("password");
-			emailPassword = prop.getProperty("emailPass");
+			emailPassword = prop.getProperty("emailPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -76,7 +76,7 @@ public class US3004ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US3004Test" + Constants.GRAB);
+		orderModel = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
@@ -84,12 +84,15 @@ public class US3004ValidateOrderEmailTest extends BaseTest{
 		emailData.setProtocol(EmailConstants.PROTOCOL);
 		emailData.setUsername(email);
 		emailData.setPassword(emailPassword);
+		System.out.println(email);
+		System.out.println(password);
+		System.out.println(emailPassword);
         
 		gmailConnector = new GmailConnector(emailData);
 	}
 	
 	@Test
-	public void us3004ValidateOrderEmailTest() {
+	public void us8001ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(email, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);

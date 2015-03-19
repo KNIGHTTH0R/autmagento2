@@ -75,6 +75,7 @@ public class RegularCartTotalsCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.JEWELRY_BONUS))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_40_BONUS))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_BUY_3_GET_1))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.VOUCHER_DISCOUNT))));
 
 		result.setDiscountPrice(discountCalculation.toString());
 		result.setShippingPrice(shippingValue);
