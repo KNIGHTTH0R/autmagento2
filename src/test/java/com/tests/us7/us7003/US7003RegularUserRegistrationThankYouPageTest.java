@@ -84,7 +84,6 @@ public class US7003RegularUserRegistrationThankYouPageTest extends BaseTest{
 	 */
 	@Test
 	public void us7003RegularUserRegistrationThankYouPageTest() {
-
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
 		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
 		
