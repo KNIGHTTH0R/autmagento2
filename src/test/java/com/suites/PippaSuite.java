@@ -24,9 +24,14 @@ import com.poc.DeactivateRule;
 	US6001Suite.class,
 	US6002Suite.class,
 	US6003Suite.class,
+	
 	US7001Suite.class,
 	US7002Suite.class,
-	
+	US7003Suite.class,
+	US7004Suite.class,
+	US7005Suite.class,
+	US7006Suite.class,
+	US7007Suite.class,
 	
 	//3+1 rule
 	ActivateRule.class,
