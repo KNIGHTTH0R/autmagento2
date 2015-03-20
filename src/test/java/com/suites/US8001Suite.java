@@ -8,14 +8,14 @@ import com.tests.us8.us8001.US8001CustomerBuyWithForthyDiscountsAndJbTest;
 import com.tests.us8.us8001.US8001UserProfileOrderIdTest;
 import com.tests.us8.us8001.US8001ValidateOrderBackOfficeTest;
 import com.tests.us8.us8001.US8001ValidateOrderEmailTest;
-import com.tests.us8.us8001.US8001ValidateOrderInStylistsCustomerOrderReport;
+import com.tests.us8.us8001.US8001ValidateOrderInStylistsCustomerOrderReportTest;
 
 @SuiteClasses({
 	US8001CustomerBuyWithForthyDiscountsAndJbTest.class,
 	US8001UserProfileOrderIdTest.class,	
 	US8001ValidateOrderEmailTest.class,	
-	US8001ValidateOrderBackOfficeTest.class,	
-	US8001ValidateOrderInStylistsCustomerOrderReport.class,	
+	US8001ValidateOrderBackOfficeTest.class,
+	US8001ValidateOrderInStylistsCustomerOrderReportTest.class,
 	
 })
 @RunWith(Suite.class)

@@ -10,7 +10,7 @@ import com.tests.us8.us8003.US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Tes
 import com.tests.us8.us8003.US8003UserProfileOrderIdTest;
 import com.tests.us8.us8003.US8003ValidateOrderBackOfficeTest;
 import com.tests.us8.us8003.US8003ValidateOrderEmailTest;
-import com.tests.us8.us8003.US8003ValidateOrderInStylistsCustomerOrderReport;
+import com.tests.us8.us8003.US8003ValidateOrderInStylistsCustomerOrderReportTest;
 
 @SuiteClasses({
 	ActivateBuyGet1ForRegular.class,
@@ -18,7 +18,7 @@ import com.tests.us8.us8003.US8003ValidateOrderInStylistsCustomerOrderReport;
 	US8003UserProfileOrderIdTest.class,	
 	US8003ValidateOrderEmailTest.class,	
 	US8003ValidateOrderBackOfficeTest.class,
-	US8003ValidateOrderInStylistsCustomerOrderReport.class,
+	US8003ValidateOrderInStylistsCustomerOrderReportTest.class,
 	DeactivateBuy3Get1ForRegular.class,
 	
 })

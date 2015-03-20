@@ -1,4 +1,4 @@
-package com.tests.us8.us8001;
+package com.tests.us8.us8003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,10 +28,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US8001", type = "frontend")
+@WithTag(name = "US8003", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US8001ValidateOrderInStylistsCustomerOrderReport extends BaseTest{
+public class US8003ValidateOrderInStylistsCustomerOrderReportTest extends BaseTest{
 //	
 //	@Steps
 //	public ProfileSteps profileSteps;
@@ -54,7 +54,7 @@ public class US8001ValidateOrderInStylistsCustomerOrderReport extends BaseTest{
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8001.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8003.properties");
 			prop.load(input);
 			stylistUsername = prop.getProperty("stylistUsername");
 			stylistPassword = prop.getProperty("stylistPassword");			
@@ -74,12 +74,12 @@ public class US8001ValidateOrderInStylistsCustomerOrderReport extends BaseTest{
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
-		orderModel = MongoReader.grabOrderModels("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test" + Constants.GRAB).get(0);
 		
 	}
 	
 	@Test
-	public void us8001ValidateOrderInStylistsCustomerOrderReport() {
+	public void us8003ValidateOrderInStylistsCustomerOrderReportTest() {
 		
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		
