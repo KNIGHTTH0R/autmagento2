@@ -73,7 +73,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	}
 	
 	@Test
-	public void us6001StyleCoachRegistrationTest() {
+	public void us6002StyleCoachRegistrationTest() {
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();
