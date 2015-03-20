@@ -8,12 +8,14 @@ import com.tests.us8.us8002.US8002CustomerBuyWithVoucherTest;
 import com.tests.us8.us8002.US8002UserProfileOrderIdTest;
 import com.tests.us8.us8002.US8002ValidateOrderBackOfficeTest;
 import com.tests.us8.us8002.US8002ValidateOrderEmailTest;
+import com.tests.us8.us8002.US8002ValidateOrderInStylistsCustomerOrderReport;
 
 @SuiteClasses({
 	US8002CustomerBuyWithVoucherTest.class,
 	US8002UserProfileOrderIdTest.class,	
 	US8002ValidateOrderEmailTest.class,	
 	US8002ValidateOrderBackOfficeTest.class,	
+	US8002ValidateOrderInStylistsCustomerOrderReport.class,	
 	
 })
 @RunWith(Suite.class)
