@@ -17,7 +17,6 @@ import com.tools.CustomVerification;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
 @WithTag(name = "US7004", type = "external")
 @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
@@ -49,7 +48,7 @@ public class US7004EmailActivationTest extends BaseTest{
 
 		emailClientSteps.openMailinator();
 		validateURL = emailClientSteps.grabEmail(clientName.replace("@" + Constants.WEB_MAIL, ""));
-		System.out.println(validateURL);
+//		System.out.println(validateURL);
 		emailSteps.validateURL(validateURL, "customer/account/confirm");
 		
 		customVerifications.printErrors();

@@ -48,7 +48,6 @@ public class US7003EmailActivationTest extends BaseTest{
 	private String username;
 	private String emailUser;
 	private String emailPass;
-	
 
 	@Before
 	public void setUp() throws Exception {

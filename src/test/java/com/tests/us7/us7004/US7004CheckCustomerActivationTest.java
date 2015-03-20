@@ -50,14 +50,10 @@ public class US7004CheckCustomerActivationTest extends BaseTest {
 	public void us7004CheckCustomerActivationTest() {
 
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
-		// backEndSteps.dismissPopUp();
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(clientName);
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
-
-//		System.out.println("grabStatus: " + grabStatus);
-//		System.out.println("expectedStatus: " + expectedStatus);
 		stylistValidationSteps.validateStatus(grabStatus, expectedStatus);
 		
 		customVerifications.printErrors();

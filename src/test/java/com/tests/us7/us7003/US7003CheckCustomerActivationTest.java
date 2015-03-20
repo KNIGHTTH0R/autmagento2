@@ -61,8 +61,6 @@ public class US7003CheckCustomerActivationTest extends BaseTest {
 				}
 			}
 		}
-		
-		
 		expectedStatus = "Bestätigt";
 	}
 
@@ -75,7 +73,6 @@ public class US7003CheckCustomerActivationTest extends BaseTest {
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
 		stylistValidationSteps.validateStatus(grabStatus, expectedStatus);
-		
 //		backEndSteps.deleteCustomer();
 		
 		customVerifications.printErrors();
