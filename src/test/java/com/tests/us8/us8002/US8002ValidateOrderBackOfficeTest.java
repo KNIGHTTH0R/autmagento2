@@ -1,4 +1,4 @@
-package com.tests.us8.us8001;
+package com.tests.us8.us8002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,10 +40,10 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.regularUser.RegularUserOrderProductsWorkflows;
 
-@WithTag(name = "US8001", type = "backend")
+@WithTag(name = "US8002", type = "backend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US8001ValidateOrderBackOfficeTest extends BaseTest {
+public class US8002ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -75,7 +75,7 @@ public class US8001ValidateOrderBackOfficeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8001.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8002.properties");
 			prop.load(input);
 			beUser = prop.getProperty("beUser");
 			bePass = prop.getProperty("bePass");
@@ -92,10 +92,10 @@ public class US8001ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.GRAB);
-		productsList = MongoReader.grabRegularBasicProductModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.CALC);
-		calcDetailsModelList = MongoReader.grabRegularCartCalcDetailsModels("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8002CustomerBuyWithVoucherTest" + Constants.GRAB);
+		productsList = MongoReader.grabRegularBasicProductModel("US8002CustomerBuyWithVoucherTest" + Constants.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US8002CustomerBuyWithVoucherTest" + Constants.CALC);
+		calcDetailsModelList = MongoReader.grabRegularCartCalcDetailsModels("US8002CustomerBuyWithVoucherTest" + Constants.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -133,7 +133,7 @@ public class US8001ValidateOrderBackOfficeTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us8001ValidateOrderBackOfficeTest() {
+	public void us8002ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(beUser, bePass);
 
 		backEndSteps.clickOnSalesOrders();
