@@ -88,8 +88,8 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		CartCalculator.wipe();
-		DataGrabber.wipe();
+		RegularUserCartCalculator.wipe();
+		RegularUserDataGrabber.wipe();
 
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("89.00");

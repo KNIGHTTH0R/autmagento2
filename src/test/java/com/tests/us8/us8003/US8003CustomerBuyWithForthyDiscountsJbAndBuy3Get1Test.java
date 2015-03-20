@@ -88,9 +88,8 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 
 	@Before
 	public void setUp() throws Exception {
-		CartCalculator.wipe();
-		DataGrabber.wipe();
-
+		RegularUserCartCalculator.wipe();
+		RegularUserDataGrabber.wipe();
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("89.00");
 		CreateProduct.createApiProduct(genProduct1);
