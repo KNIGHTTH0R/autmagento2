@@ -54,10 +54,10 @@ public class RegularUserCartSteps extends AbstractSteps {
 		regularUserCartPage().selectShippingOption(option);
 	}
 
-	@Step
-	public void updateProductQuantity(String quantity, String... terms) {
-		regularUserCartPage().updateProductQuantity(quantity, terms);
-	}
+//	@Step
+//	public void updateProductQuantity(String quantity, String... terms) {
+//		regularUserCartPage().updateProductQuantity(quantity, terms);
+//	}
 
 	@Step
 	public void clickGoToShipping() {

@@ -78,5 +78,10 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	public void verifyBonusType(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: THe applied bonus type doesn't match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
+	@Step
+	public void validateIpPoints(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: The ip points don't match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+		
+	}
 
 }

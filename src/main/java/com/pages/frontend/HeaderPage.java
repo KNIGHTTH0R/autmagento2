@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.Constants;
 import com.tools.requirements.AbstractPage;
 
 public class HeaderPage extends AbstractPage {
@@ -104,6 +105,10 @@ public class HeaderPage extends AbstractPage {
 			}
 		}
 		return styleCoachNameParts[0].toLowerCase();
+	}
+	
+	public void navigateToPartyPage(String partyId){
+		getDriver().get(Constants.PARTY_DETAILS_URL + partyId);
 	}
 
 }

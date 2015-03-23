@@ -33,7 +33,7 @@ public class Constants {
 	public static final String CART_PAGE_URL = "http://staging-aut.pippajean.com/simona/checkout/cart/";
 	public static final String BE_URL_RULE_BUY3GET1 = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5466/key/";
 	public static final String BE_URL_RULE_BUY3GET1_FOR_REGULAR = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5467/key/";
-
+	public static final String PARTY_DETAILS_URL = "http://staging-aut.pippajean.com/qateam/stylist/party/details/id/";
 	
 	// SOAP user authentication
 	public static final String LOGIN_USER_SOAP = "stagingaut";
@@ -100,6 +100,7 @@ public class Constants {
 	public static final String DISCOUNT_40_BONUS = "40% Rabatt Gutschein";
 	public static final String REGULAR_PRICE = "Regulärer Preis";
 	public static final String VOUCHER_DISCOUNT = "Voucher Discount";
+	
 
 	
 

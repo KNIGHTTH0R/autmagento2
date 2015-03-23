@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.Constants;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.requirements.AbstractSteps;
@@ -62,6 +63,25 @@ public class ProductSteps extends AbstractSteps {
 		result = productDetailsPage().grabRegularBasicProductData();
 		
 		result.setFinalPrice(finalPrice);
+		result.setBonusType(Constants.REGULAR_PRICE);
+		result.setBunosValue("0");
+		
+		addToCart();
+		waitABit(Constants.TIME_CONSTANT);
+		return result;
+	}
+	@Step
+	public HostBasicProductModel setHostBasicProductAddToCart(String qty, String size,String finalPrice,String ipPoints) {
+		HostBasicProductModel result = new HostBasicProductModel();
+		if (!size.contentEquals("0")) {
+			setDropDownValue(size);
+		}		
+		setQuantity(qty);	
+		
+		result = productDetailsPage().grabHostBasicProductData();
+		
+		result.setFinalPrice(finalPrice);
+		result.setIpPoints(ipPoints);
 		result.setBonusType(Constants.REGULAR_PRICE);
 		result.setBunosValue("0");
 		

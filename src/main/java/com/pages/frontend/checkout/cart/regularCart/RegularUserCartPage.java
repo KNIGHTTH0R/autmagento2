@@ -203,26 +203,26 @@ public class RegularUserCartPage extends AbstractPage {
 		updateButton.click();
 	}
 
-	public void updateProductQuantity(String quantity, String... terms) {
-		element(cartTable).waitUntilVisible();
-		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody > tr"));
-		boolean containsTerms = true;
-		for (WebElement webElement : entryList) {
-			containsTerms = true;
-			for (String term : terms) {
-				if (!webElement.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(term)) {
-					containsTerms = false;
-				}
-			}
-			if (containsTerms) {
-				WebElement input = webElement.findElement(By.cssSelector("td:nth-child(3) input"));
-				element(input).clear();
-				element(input).sendKeys(quantity);
-				break;
-			}
-		}
-		Assert.assertTrue("The product was not found", containsTerms);
-	}
+//	public void updateProductQuantity(String quantity, String... terms) {
+//		element(cartTable).waitUntilVisible();
+//		List<WebElement> entryList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody > tr"));
+//		boolean containsTerms = true;
+//		for (WebElement webElement : entryList) {
+//			containsTerms = true;
+//			for (String term : terms) {
+//				if (!webElement.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(term)) {
+//					containsTerms = false;
+//				}
+//			}
+//			if (containsTerms) {
+//				WebElement input = webElement.findElement(By.cssSelector("td:nth-child(3) input"));
+//				element(input).clear();
+//				element(input).sendKeys(quantity);
+//				break;
+//			}
+//		}
+//		Assert.assertTrue("The product was not found", containsTerms);
+//	}
 
 	/**
 	 * Verify Wipe cart if cart contains any data
