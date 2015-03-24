@@ -12,8 +12,6 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
-import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class HostShippingAndConfirmationWorkflows {
@@ -23,7 +21,7 @@ public class HostShippingAndConfirmationWorkflows {
 	
 
 	@Steps 
-	public static CustomVerification customVerification;
+	public static CustomVerification customVerification;	
 	
 	private static List<HostBasicProductModel> basicProductsList = new ArrayList<HostBasicProductModel>();
 	private static List<HostCartProductModel> cartProductsList = new ArrayList<HostCartProductModel>();

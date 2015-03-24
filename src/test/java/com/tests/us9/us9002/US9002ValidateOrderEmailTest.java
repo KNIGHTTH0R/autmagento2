@@ -1,4 +1,4 @@
-package com.tests.us8.us8002;
+package com.tests.us9.us9002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -33,10 +32,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US8002", type = "external")
+@WithTag(name = "US9002", type = "external")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US8002ValidateOrderEmailTest extends BaseTest{
+public class US9002ValidateOrderEmailTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -59,7 +58,7 @@ public class US8002ValidateOrderEmailTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us9" + File.separator + "us9002.properties");
 			prop.load(input);
 			email = prop.getProperty("email");
 			password = prop.getProperty("password");
@@ -77,7 +76,7 @@ public class US8002ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US8002CustomerBuyWithVoucherTest" + Constants.GRAB);
+		orderModel = MongoReader.getOrderModel("US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test" + Constants.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
@@ -85,15 +84,13 @@ public class US8002ValidateOrderEmailTest extends BaseTest{
 		emailData.setProtocol(EmailConstants.PROTOCOL);
 		emailData.setUsername(email);
 		emailData.setPassword(emailPassword);
-		System.out.println(email);
-		System.out.println(password);
-		System.out.println(emailPassword);
+		
         
 		gmailConnector = new GmailConnector(emailData);
 	}
 	
 	@Test
-	public void us8002ValidateOrderEmailTest() {
+	public void us9002ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(email, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);

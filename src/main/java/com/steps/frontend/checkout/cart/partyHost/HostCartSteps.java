@@ -3,6 +3,7 @@ package com.steps.frontend.checkout.cart.partyHost;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
@@ -19,6 +20,7 @@ public class HostCartSteps extends AbstractSteps {
 	}
 
 	@Step
+	@Title("Update product list")
 	public void updateProductList(List<HostBasicProductModel> productsList, String productCode, String discountType) {
 		hostCartPage().updateProductList(productsList, productCode, discountType);
 	}

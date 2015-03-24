@@ -1,4 +1,4 @@
-package com.tests.us8.us8001;
+package com.tests.us9.us9002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,28 +24,30 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
-import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
+import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
-import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
+import com.tools.datahandlers.partyHost.HostCartCalculator;
+import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
-import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
+import com.tools.utils.PrintUtils;
+import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
+import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US8001", type = "frontend")
+@WithTag(name = "US9002", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
+public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -58,15 +60,15 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
-	public RegularUserCartSteps regularUserCartSteps;
+	public HostCartSteps hostCartSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public AddRegularProductsWorkflow addRegularProductsWorkflow;
+	public AddHostProductsWorkflow addHostProductsWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
-	public RegularCartValidationWorkflows regularCartValidationWorkflows;
+	public HostCartValidationWorkflows hostCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
 
@@ -74,8 +76,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	private String discountClass;
 	private String billingAddress;
 	private String shippingValue;
-	private String voucherCode;
-	private String voucherValue;
+
 
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
@@ -86,8 +87,8 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		RegularUserCartCalculator.wipe();
-		RegularUserDataGrabber.wipe();
+		HostCartCalculator.wipe();
+		HostDataGrabber.wipe();
 
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("89.00");
@@ -106,7 +107,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8001.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "us9" + File.separator + "us9002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -115,8 +116,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 
-			voucherCode = prop.getProperty("voucherCode");
-			voucherValue = prop.getProperty("voucherValue");
+	
 
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
 			creditCardData.setCardName(prop.getProperty("cardName"));
@@ -141,81 +141,86 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	}
 
 	@Test
-	public void us8001CustomerBuyWithForthyDiscountsAndJbTest() {
+	public void us9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test() {
 		customerRegistrationSteps.performLogin(username, password);
-		customerRegistrationSteps.wipeRegularCart();
-		RegularBasicProductModel productData;
+		headerSteps.navigateToPartyPageAndStartOrder("11832");
+		customerRegistrationSteps.wipeHostCart();
+		HostBasicProductModel productData;
 
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "4", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
+		productData = addHostProductsWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		HostCartCalculator.allProductsList.add(productData);
+		productData = addHostProductsWorkflow.setHostProductToCart(genProduct2, "1", "0");
+		HostCartCalculator.allProductsList.add(productData);
+		productData = addHostProductsWorkflow.setHostProductToCart(genProduct3, "4", "0");
+		HostCartCalculator.allProductsList.add(productData);
+		
+		System.out.println("----basic list----");
+		PrintUtils.printListHostBasicProductModel(HostCartCalculator.allProductsList);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		// TODO put the updateProductList in selectProductDiscountType method
-		// (maybe)
-		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), Constants.JEWELRY_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), Constants.JEWELRY_BONUS);
-		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
+		
+		hostCartSteps.selectProductDiscountType(genProduct1.getSku(), Constants.JEWELRY_BONUS);
+		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct1.getSku(), Constants.JEWELRY_BONUS);
+		hostCartSteps.selectProductDiscountType(genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
+		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
 
-		regularUserCartSteps.typeCouponCode(voucherCode);
-		regularUserCartSteps.submitVoucherCode();
-		// TODO move this (maybe)
-		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
+		hostCartSteps.grabProductsData();		
+		hostCartSteps.grabTotals();
+		PrintUtils.printListHostCartProductModel(HostDataGrabber.grabbedHostCartProductsList);
+		PrintUtils.printHostCartTotalsModel(HostDataGrabber.hostGrabbedCartTotals);
 
-		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
-		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals();
+		HostCartCalculator.calculateCartBuy3Get1CartAndShippingTotals(HostCartCalculator.allProductsList, discountClass, shippingValue);
+		System.out.println("MACEL-------------------------------------------------------------");
+		PrintUtils.printListHostBasicProductModel(HostCartCalculator.allProductsListWithBuy3Get1Applied);
+		PrintUtils.printHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts);
+		PrintUtils.printShippingTotals(HostCartCalculator.shippingCalculatedModel);
 
-		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
-
-		regularUserCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.clickPartyNoOption();
+		hostCartSteps.clickGoToShipping();
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 
-		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
-	
-		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
-	
+		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();	
+		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
+		
+		System.out.println("-----Shipping------");
+		PrintUtils.printListHostCartProductModel(HostDataGrabber.grabbedHostShippingProductsList);
+		PrintUtils.printShippingTotals(HostDataGrabber.hostShippingTotals);
 		shippingSteps.clickGoToPaymentMethod();
+		
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
 		DataGrabber.urlModel.setUrl(url);
-		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 	
-		confirmationSteps.grabRegularProductsList();
+		confirmationSteps.grabHostProductsList();
 		
-		RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
+		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
 		
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
-		confirmationSteps.agreeAndCheckout();
-		checkoutValidationSteps.verifySuccessMessage();
+//		confirmationSteps.agreeAndCheckout();
 
-		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		regularCartValidationWorkflows.performCartValidationsWith40DiscountAndJb();
+		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
 
 		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + Constants.CALC);
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
+		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + Constants.CALC);
+		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
 		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + Constants.GRAB);
-		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
-			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + Constants.CALC);
+		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
+			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + Constants.CALC);
 		}
 	}
 }

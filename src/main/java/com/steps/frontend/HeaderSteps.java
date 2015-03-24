@@ -27,6 +27,10 @@ public class HeaderSteps extends AbstractSteps {
 	public void goToProfile() {
 		headerPage().clickOnProfileButton();
 	}
+	@Step
+	public void clickLounge() {
+		headerPage().clickLounge();
+	}
 
 	public void redirectToProfileHistory() {
 		getDriver().get(Constants.PROFILE_HISTORY_URL);

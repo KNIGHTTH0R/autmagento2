@@ -7,9 +7,7 @@ import java.util.List;
 
 import com.tools.Constants;
 import com.tools.data.HostCartCalcDetailsModel;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
-import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class HostCartTotalsCalculation {
@@ -52,19 +50,21 @@ public class HostCartTotalsCalculation {
 
 		return result;
 	}
-	public static RegularCartCalcDetailsModel calculateTotalsWithBuy3Get1Active(List<RegularBasicProductModel> productsList,List<RegularBasicProductModel> productsListForBuy3Get1, String taxClass) {
-		RegularCartCalcDetailsModel result = new RegularCartCalcDetailsModel();
+	public static HostCartCalcDetailsModel calculateTotalsWithBuy3Get1Active(List<HostBasicProductModel> productsList,List<HostBasicProductModel> productsListForBuy3Get1, String taxClass) {
+		HostCartCalcDetailsModel result = new HostCartCalcDetailsModel();
 		
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal tax = BigDecimal.ZERO;
+		BigDecimal ipPoints = BigDecimal.ZERO;
 		BigDecimal totalAmount = BigDecimal.ZERO;
 		BigDecimal jewerlyDiscount = BigDecimal.ZERO;
 		BigDecimal forthyDiscount = BigDecimal.ZERO;
-		BigDecimal buy3Get1 = RegularCartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsListForBuy3Get1);
+		BigDecimal buy3Get1 = HostCartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsListForBuy3Get1);
 		
 		
-		for (RegularBasicProductModel product : productsList) {
+		for (HostBasicProductModel product : productsList) {
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
+			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
 			if (product.getBonusType().contentEquals(Constants.JEWELRY_BONUS)) {
 				jewerlyDiscount = jewerlyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				jewerlyDiscount.setScale(2, RoundingMode.HALF_UP);
@@ -80,9 +80,9 @@ public class HostCartTotalsCalculation {
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 		
-		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
-		
+		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));		
 		result.setTax(String.valueOf(tax));
+		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 		result.addSegment(Constants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
 		result.addSegment(Constants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
 		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));

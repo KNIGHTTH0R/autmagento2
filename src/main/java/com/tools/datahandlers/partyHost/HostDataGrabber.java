@@ -7,7 +7,6 @@ import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
-import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class HostDataGrabber {

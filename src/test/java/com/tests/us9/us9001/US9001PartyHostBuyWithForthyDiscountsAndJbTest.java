@@ -11,6 +11,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,15 +36,14 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
-import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US8001", type = "frontend")
+@WithTag(name = "US9001", type = "frontend")
 @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
@@ -86,8 +86,8 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		RegularUserCartCalculator.wipe();
-		RegularUserDataGrabber.wipe();
+		HostCartCalculator.wipe();
+		HostDataGrabber.wipe();
 
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("89.00");
@@ -140,10 +140,10 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	}
 
 	@Test
-	public void us8001CustomerBuyWithForthyDiscountsAndJbTest() {
+	public void us9001PartyHostBuyWithForthyDiscountsAndJbTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		headerSteps.navigateToPartyPageAndStartOrder("11832");
-		customerRegistrationSteps.wipeRegularCart();
+		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;
 
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct1, "1", "0");
@@ -166,12 +166,7 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		hostCartSteps.grabProductsData();		
 		hostCartSteps.grabTotals();
-		PrintUtils.printListHostCartProductModel(HostDataGrabber.grabbedHostCartProductsList);
-		PrintUtils.printHostCartTotalsModel(HostDataGrabber.hostGrabbedCartTotals);
-
 		HostCartCalculator.calculateCartAndShippingTotals(HostCartCalculator.allProductsList, discountClass, shippingValue);
-		PrintUtils.printHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts);
-		PrintUtils.printShippingTotals(HostCartCalculator.shippingCalculatedModel);
 
 		hostCartSteps.clickGoToShipping();
 		shippingSteps.selectAddress(billingAddress);
@@ -179,12 +174,8 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();	
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
-		
-		System.out.println("-----Shipping------");
-		PrintUtils.printListHostCartProductModel(HostDataGrabber.grabbedHostShippingProductsList);
-		PrintUtils.printShippingTotals(HostDataGrabber.hostShippingTotals);
-		shippingSteps.clickGoToPaymentMethod();
-		
+	
+		shippingSteps.clickGoToPaymentMethod();		
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
@@ -195,7 +186,7 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 	
-		confirmationSteps.grabRegularProductsList();
+		confirmationSteps.grabHostProductsList();
 		
 		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
 		
@@ -211,16 +202,16 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		customVerifications.printErrors();
 	}
 
-//	@After
-//	public void saveData() {
-//		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + Constants.CALC);
-//		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + Constants.GRAB);
-//		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
-//		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + Constants.GRAB);
-//		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
-//			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + Constants.CALC);
-//		}
-//	}
+	@After
+	public void saveData() {
+		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + Constants.CALC);
+		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
+		MongoWriter.saveUrlModel(HostDataGrabber.urlModel, getClass().getSimpleName() + Constants.GRAB);
+		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
+			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + Constants.CALC);
+		}
+	}
 }
 
 

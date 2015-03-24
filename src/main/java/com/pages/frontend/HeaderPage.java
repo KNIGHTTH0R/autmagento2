@@ -33,6 +33,9 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = "a[title='Profil']")
 	private WebElement profileButton;
+	
+	@FindBy(css = "a[title='Style Coach Lounge']")
+	private WebElement loungeButton;
 
 	@FindBy(css = "a[title='Anmelden']")
 	private WebElement anmeldenButton;
@@ -88,6 +91,10 @@ public class HeaderPage extends AbstractPage {
 	public void clickAbmeldenButton() {
 		element(abmeldenButton).waitUntilVisible();
 		abmeldenButton.click();
+	}
+	public void clickLounge() {
+		element(loungeButton).waitUntilVisible();
+		loungeButton.click();
 	}
 
 	public String getBoutiqueName() {

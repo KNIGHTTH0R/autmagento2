@@ -25,6 +25,7 @@ import com.pages.frontend.FooterPage;
 import com.pages.frontend.HeaderPage;
 import com.pages.frontend.HomePage;
 import com.pages.frontend.LoginPage;
+import com.pages.frontend.LoungePage;
 import com.pages.frontend.PartyDetailsPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
@@ -117,6 +118,13 @@ public class AbstractSteps extends ScenarioSteps {
 		waitABit(Constants.TIME_CONSTANT);
 		getDriver().get(initURL);
 	}
+	public void wipeHostCart() {
+		String initURL = getDriver().getCurrentUrl();
+		String modiURL = getDriver().getCurrentUrl().replace("checkout/cart/", "checkout/cart/clearAllItems/");
+		getDriver().get(modiURL);
+		waitABit(Constants.TIME_CONSTANT);
+		getDriver().get(initURL);
+	}
 
 	public void findFrame(String frameName) {
 		Set<String> windowsList = getDriver().getWindowHandles();
@@ -184,6 +192,9 @@ public class AbstractSteps extends ScenarioSteps {
 	// -----------------------FE-----------------------------------
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
+	}
+	public LoungePage loungePage() {
+		return getPages().currentPageAt(LoungePage.class);
 	}
 
 	public HomePage homePage() {
