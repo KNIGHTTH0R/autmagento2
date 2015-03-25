@@ -40,5 +40,18 @@ public class PromotionSteps extends AbstractSteps {
 		shoppingCartPriceRulesPage().deactivateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
+	public void activateBuy3Get1ForHost() {
+		getDriver().get(Constants.BE_URL_RULE_BUY3GET1_FOR_HOST);
+		backEndSteps.performLogin("admin", "admin1234");
+		shoppingCartPriceRulesPage().activateRule();
+		shoppingCartPriceRulesPage().saveRule();
+	}
+	
+	public void deactivateBuy3Get1ForHost() {
+		getDriver().get(Constants.BE_URL_RULE_BUY3GET1_FOR_HOST);
+		backEndSteps.performLogin("admin", "admin1234");
+		shoppingCartPriceRulesPage().deactivateRule();
+		shoppingCartPriceRulesPage().saveRule();
+	}
 
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.Constants;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.requirements.AbstractPage;
@@ -85,6 +86,22 @@ public class ProductDetailsPage extends AbstractPage {
 	}
 	public RegularBasicProductModel grabRegularBasicProductData() {
 		RegularBasicProductModel result = new RegularBasicProductModel();
+		element(productName).waitUntilVisible();
+		
+		// clean productCode
+		String type = productCode.getText();
+		type = type.replace("Artikelnummer: ", "");
+		
+		result.setName(productName.getText());
+		result.setProdCode(type);
+		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+		result.setQuantity(quantityInput.getAttribute("value"));
+//		result.setFinaPrice(String.valueOf(BigDecimal.valueOf(Double.parseDouble(result.getPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(result.getQuantity())))));
+		
+		return result;
+	}
+	public HostBasicProductModel grabHostBasicProductData() {
+		HostBasicProductModel result = new HostBasicProductModel();
 		element(productName).waitUntilVisible();
 		
 		// clean productCode

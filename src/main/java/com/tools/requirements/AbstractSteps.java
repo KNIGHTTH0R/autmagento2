@@ -25,6 +25,8 @@ import com.pages.frontend.FooterPage;
 import com.pages.frontend.HeaderPage;
 import com.pages.frontend.HomePage;
 import com.pages.frontend.LoginPage;
+import com.pages.frontend.LoungePage;
+import com.pages.frontend.PartyDetailsPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
@@ -33,6 +35,7 @@ import com.pages.frontend.StylistCampaignPage;
 import com.pages.frontend.StylistRegistrationPage;
 import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.SuccessPage;
+import com.pages.frontend.checkout.cart.partyHost.HostCartPage;
 import com.pages.frontend.checkout.cart.regularCart.RegularUserCartPage;
 import com.pages.frontend.checkout.cart.styleCoachCart.CartPage;
 import com.pages.frontend.checkout.payment.CreditCardFormPage;
@@ -48,9 +51,8 @@ import com.pages.frontend.registration.landing.ContactLandingPage;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
 import com.pages.frontend.registration.landing.RegistrationSuccessPage;
 import com.pages.frontend.registration.landing.ThankYouPage;
-import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
-
+import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.Constants;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -69,6 +71,7 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 	}
+
 	
 	public void refresh() {
 		getDriver().navigate().refresh();
@@ -111,6 +114,13 @@ public class AbstractSteps extends ScenarioSteps {
 	public void wipeRegularCart() {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("schmuckstucke/neu.html", "checkout/cart/clearAllItems/");
+		getDriver().get(modiURL);
+		waitABit(Constants.TIME_CONSTANT);
+		getDriver().get(initURL);
+	}
+	public void wipeHostCart() {
+		String initURL = getDriver().getCurrentUrl();
+		String modiURL = getDriver().getCurrentUrl().replace("checkout/cart/", "checkout/cart/clearAllItems/");
 		getDriver().get(modiURL);
 		waitABit(Constants.TIME_CONSTANT);
 		getDriver().get(initURL);
@@ -183,6 +193,9 @@ public class AbstractSteps extends ScenarioSteps {
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
 	}
+	public LoungePage loungePage() {
+		return getPages().currentPageAt(LoungePage.class);
+	}
 
 	public HomePage homePage() {
 		return getPages().currentPageAt(HomePage.class);
@@ -223,6 +236,9 @@ public class AbstractSteps extends ScenarioSteps {
 	public ProductDetailsPage productDetailsPage() {
 		return getPages().currentPageAt(ProductDetailsPage.class);
 	}
+	public PartyDetailsPage partyDetailsPage() {
+		return getPages().currentPageAt(PartyDetailsPage.class);
+	}
 
 	// cart
 	public CartPage cartPage() {
@@ -231,6 +247,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public RegularUserCartPage regularUserCartPage() {
 		return getPages().currentPageAt(RegularUserCartPage.class);
+	}
+	public HostCartPage hostCartPage() {
+		return getPages().currentPageAt(HostCartPage.class);
 	}
 
 	// shipping pages

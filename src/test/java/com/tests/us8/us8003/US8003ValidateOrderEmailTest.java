@@ -84,9 +84,6 @@ public class US8003ValidateOrderEmailTest extends BaseTest{
 		emailData.setProtocol(EmailConstants.PROTOCOL);
 		emailData.setUsername(email);
 		emailData.setPassword(emailPassword);
-		System.out.println(email);
-		System.out.println(password);
-		System.out.println(emailPassword);
         
 		gmailConnector = new GmailConnector(emailData);
 	}

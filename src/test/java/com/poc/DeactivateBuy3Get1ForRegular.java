@@ -22,7 +22,7 @@ public class DeactivateBuy3Get1ForRegular extends BaseTest{
 	
 	@Test
 	public void changeRuleStatusTest(){
-		promotionSteps.deactivateBuy3Get1ForRegular();;	
+		promotionSteps.deactivateBuy3Get1ForRegular();
 		
 	}
 }

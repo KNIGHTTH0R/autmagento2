@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.Constants;
 import com.tools.requirements.AbstractPage;
 
 public class HeaderPage extends AbstractPage {
@@ -32,6 +33,9 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = "a[title='Profil']")
 	private WebElement profileButton;
+	
+	@FindBy(css = "a[title='Style Coach Lounge']")
+	private WebElement loungeButton;
 
 	@FindBy(css = "a[title='Anmelden']")
 	private WebElement anmeldenButton;
@@ -88,6 +92,10 @@ public class HeaderPage extends AbstractPage {
 		element(abmeldenButton).waitUntilVisible();
 		abmeldenButton.click();
 	}
+	public void clickLounge() {
+		element(loungeButton).waitUntilVisible();
+		loungeButton.click();
+	}
 
 	public String getBoutiqueName() {
 		return brandContainer.getText().split("'")[0].toLowerCase();
@@ -104,6 +112,10 @@ public class HeaderPage extends AbstractPage {
 			}
 		}
 		return styleCoachNameParts[0].toLowerCase();
+	}
+	
+	public void navigateToPartyPage(String partyId){
+		getDriver().get(Constants.PARTY_DETAILS_URL + partyId);
 	}
 
 }

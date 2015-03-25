@@ -6,6 +6,7 @@ import com.connectors.mongo.MongoConnector;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.tools.data.CalcDetailsModel;
+import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.UrlModel;
@@ -18,6 +19,7 @@ import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -149,6 +151,21 @@ public class MongoWriter extends MongoConnector {
 		
 		table.insert(document);
 	}
+	public static void saveHostBasicProductModel(HostBasicProductModel product, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.HOST_BASIC_PRODUCT_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
+		document.put(MongoTableKeys.PRODUCT_CODE, product.getProdCode());
+		document.put(MongoTableKeys.PRODUCT_PRICE, product.getUnitPrice());
+		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getQuantity());
+		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
+		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getIpPoints());
+		
+		
+		table.insert(document);
+	}
 
 	public static void saveTotalsModel(CartTotalsModel cartTotalsModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
@@ -195,6 +212,21 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.TAX, calcDetailsModel.getTax());
 		document.put(MongoTableKeys.SEGMENTS, calcDetailsModel.getSegments());
 
+		
+		table.insert(document);
+	}
+	public static void saveHostCartCalcDetailsModel(HostCartCalcDetailsModel calcDetailsModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.HOST_CART_CALC_DETAILS_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();		
+		
+		document.put(MongoTableKeys.TOTAL_AMOUNT, calcDetailsModel.getTotalAmount());
+		document.put(MongoTableKeys.SUBTOTAL, calcDetailsModel.getSubTotal());
+		document.put(MongoTableKeys.TAX, calcDetailsModel.getTax());
+		document.put(MongoTableKeys.IP_POINTS, calcDetailsModel.getIpPoints());
+		document.put(MongoTableKeys.SEGMENTS, calcDetailsModel.getSegments());
+		
 		
 		table.insert(document);
 	}

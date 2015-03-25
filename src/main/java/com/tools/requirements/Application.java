@@ -15,6 +15,12 @@ public class Application {
 		public class Registration {
 		}
 	}
+	@Feature
+	public class StyleParty {
+		public class CreateParty {
+		}
+		
+	}
 	
 	
 }

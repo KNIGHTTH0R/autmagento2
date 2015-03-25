@@ -33,7 +33,6 @@ import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
@@ -88,9 +87,8 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 
 	@Before
 	public void setUp() throws Exception {
-		CartCalculator.wipe();
-		DataGrabber.wipe();
-
+		RegularUserCartCalculator.wipe();
+		RegularUserDataGrabber.wipe();
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("89.00");
 		CreateProduct.createApiProduct(genProduct1);

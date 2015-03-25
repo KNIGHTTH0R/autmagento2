@@ -67,7 +67,7 @@ public class CustomerFormModel {
 	}
 
 	public void setEmailName() throws Exception {
-		this.emailName = FieldGenerators.generateRandomString(8, Mode.ALPHANUMERIC) + "@" + Constants.WEB_MAIL;
+		this.emailName = FieldGenerators.generateRandomString(12, Mode.ALPHANUMERIC) + "@" + Constants.WEB_MAIL;
 	}
 
 	public void setPassword() throws Exception {

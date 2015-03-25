@@ -31,7 +31,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 
 @WithTag(name = "US6002", type = "frontend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.StyleCoach.Registration.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002StyleCoachRegistrationTest extends BaseTest{
 	
@@ -73,7 +73,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	}
 	
 	@Test
-	public void us6001StyleCoachRegistrationTest() {
+	public void us6002StyleCoachRegistrationTest() {
 		
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		backEndSteps.clickOnCustomers();

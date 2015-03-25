@@ -27,10 +27,15 @@ public class HeaderSteps extends AbstractSteps {
 	public void goToProfile() {
 		headerPage().clickOnProfileButton();
 	}
+	@Step
+	public void clickLounge() {
+		headerPage().clickLounge();
+	}
 
 	public void redirectToProfileHistory() {
 		getDriver().get(Constants.PROFILE_HISTORY_URL);
 	}
+
 	public void redirectTostylistsCustomerOrderReport() {
 		getDriver().get(Constants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
@@ -79,18 +84,27 @@ public class HeaderSteps extends AbstractSteps {
 	public void clickAbmeldenButton() {
 		headerPage().clickAbmeldenButton();
 	}
+
 	@Step
 	public String getBoutiqueName() {
 		return headerPage().getBoutiqueName();
 	}
+
 	@Step
-	public String getStyleCoachFirstNameFromProfile(){ 
+	public String getStyleCoachFirstNameFromProfile() {
 		return headerPage().getStyleCoachFirstNameFromProfile();
 	}
+
 	@Step
-	public void validateCustomeStyleCoachName(String boutiqueName, String styleCoachName){		
+	public void validateCustomeStyleCoachName(String boutiqueName, String styleCoachName) {
 		Assert.assertTrue("The stylecoach name and boutique name don't match !", boutiqueName.contentEquals(styleCoachName));
 		Assert.assertFalse(boutiqueName.contentEquals(""));
+	}
+
+	@Step
+	public void navigateToPartyPageAndStartOrder(String partyId) {
+		headerPage().navigateToPartyPage(partyId);
+		partyDetailsPage().clickOrderForHostess();
 	}
 
 }

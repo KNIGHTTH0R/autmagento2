@@ -9,6 +9,7 @@ import com.connectors.mongo.MongoConnector;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.tools.data.CalcDetailsModel;
+import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.UrlModel;
@@ -19,6 +20,7 @@ import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -294,6 +296,33 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+	public static List<HostBasicProductModel> grabHostBasicProductModel(String testName) {
+		DBObject dbObject = null;
+		List<HostBasicProductModel> itemList = new ArrayList<HostBasicProductModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.REGULAR_BASIC_PRODUCT_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				HostBasicProductModel result = new HostBasicProductModel();
+				dbObject = cursor.next();
+				
+				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
+				result.setProdCode(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
+				result.setUnitPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
+				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_QUANTITY));
+				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
+				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
 
 	// @SuppressWarnings("unchecked")
 	@SuppressWarnings("unchecked")
@@ -377,6 +406,35 @@ public class MongoReader extends MongoConnector {
 				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
 				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+				result.addSegments(((Map<String, String>) dbObject.get(MongoTableKeys.SEGMENTS)));
+				
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+		
+	}
+	@SuppressWarnings("unchecked")
+	public static List<HostCartCalcDetailsModel> grabHostCartCalcDetailsModels(String testName) {
+		DBObject dbObject = null;
+		List<HostCartCalcDetailsModel> itemList = new ArrayList<HostCartCalcDetailsModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.HOST_CART_CALC_DETAILS_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				HostCartCalcDetailsModel result = new HostCartCalcDetailsModel();
+				dbObject = cursor.next();				
+				
+				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
+				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
+				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
 				result.addSegments(((Map<String, String>) dbObject.get(MongoTableKeys.SEGMENTS)));
 				
 				itemList.add(result);

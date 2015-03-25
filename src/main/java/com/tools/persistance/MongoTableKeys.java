@@ -124,6 +124,8 @@ public class MongoTableKeys {
 	
 	
 	public static final String CUSTOMER_FORM_MODEL = "CustomerFormModel";
+	public static final String HOST_CART_CALC_DETAILS_MODEL = "HostCartCalcDetailsModel";
+	public static final String HOST_BASIC_PRODUCT_MODEL = "HostBasicProductModel";
 
 	
 
