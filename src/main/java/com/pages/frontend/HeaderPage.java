@@ -114,8 +114,8 @@ public class HeaderPage extends AbstractPage {
 		return styleCoachNameParts[0].toLowerCase();
 	}
 	
-	public void navigateToPartyPage(String partyId){
-		getDriver().get(Constants.PARTY_DETAILS_URL + partyId);
+	public void navigateToPartyPage(String url){
+		getDriver().get(url);
 	}
 
 }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -12,7 +11,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,17 +20,18 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
+import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.persistance.MongoWriter;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US10001", type = "frontend")
 @Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10001CreatePartyTest extends BaseTest {
+public class US10001ClosePartyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -42,9 +41,12 @@ public class US10001CreatePartyTest extends BaseTest {
 	public LoungeSteps loungeSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
+	@Steps
+	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
+	boolean runTest = true;
 
 	@Before
 	public void setUp() throws Exception {
@@ -71,22 +73,29 @@ public class US10001CreatePartyTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+		urlModel = MongoReader.grabUrlModels("US10001CreatePartyTest" + Constants.GRAB).get(0);
+		dateModel = MongoReader.grabStylistDateModels("US10001CreatePartyTest" + Constants.GRAB).get(0);
+
+		Long partyCreationTime = Long.parseLong(dateModel.getDate());
+		Long currentTime = System.currentTimeMillis();
+		
+		// if less than 15 minutes passed skip the test
+		if (currentTime - partyCreationTime < 90000) {
+			runTest = false;
+		}
 
 	}
 
 	@Test
-	public void us10001CreatePartyTest() {
-		customerRegistrationSteps.performLogin(username, password);
-		headerSteps.clickLounge();
-		loungeSteps.clickCreateParty();
-		urlModel.setUrl(partyCreationSteps.fillPartyDetails());
-		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
+	public void us10001ClosePartyTest() {
+		if (runTest) {
+			customerRegistrationSteps.performLogin(username, password);
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.closeParty();
+			partyDetailsSteps.typePartyAttendersNumber("10");
+			partyDetailsSteps.popupCloseParty();
+			partyDetailsSteps.verifyThatPartyIsClosed();
+		}
 	}
 
-	@After
-	public void saveData() {
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + Constants.GRAB);
-	}
 }

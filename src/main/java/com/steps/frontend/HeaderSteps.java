@@ -102,9 +102,9 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void navigateToPartyPageAndStartOrder(String partyId) {
-		headerPage().navigateToPartyPage(partyId);
-		partyDetailsPage().clickOrderForHostess();
+	public void navigateToPartyPageAndStartOrder(String url) {
+		headerPage().navigateToPartyPage(url);
+		partyCreationPage().clickOrderForHostess();
 	}
 
 }

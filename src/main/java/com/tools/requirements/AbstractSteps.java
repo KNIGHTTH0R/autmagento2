@@ -26,6 +26,7 @@ import com.pages.frontend.HeaderPage;
 import com.pages.frontend.HomePage;
 import com.pages.frontend.LoginPage;
 import com.pages.frontend.LoungePage;
+import com.pages.frontend.PartyCreationPage;
 import com.pages.frontend.PartyDetailsPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
@@ -235,6 +236,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public ProductDetailsPage productDetailsPage() {
 		return getPages().currentPageAt(ProductDetailsPage.class);
+	}
+	public PartyCreationPage partyCreationPage() {
+		return getPages().currentPageAt(PartyCreationPage.class);
 	}
 	public PartyDetailsPage partyDetailsPage() {
 		return getPages().currentPageAt(PartyDetailsPage.class);
