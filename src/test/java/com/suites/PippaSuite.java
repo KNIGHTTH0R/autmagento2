@@ -21,6 +21,8 @@ import com.poc.DeactivateRule;
 	US3008Suite.class,
 	US3009Suite.class,
 	
+	//US 5 - Facebook login is external. System is not always up (facebook app)
+	
 	US6001Suite.class,
 	US6002Suite.class,
 	US6003Suite.class,
