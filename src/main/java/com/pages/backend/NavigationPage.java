@@ -17,6 +17,31 @@ public class NavigationPage extends AbstractPage {
 	@FindBy(id = "message-popup-window")
 	private WebElement popUpWindow;
 
+	public void clickOnStyleCoach() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+		
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Stylecoach")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
+	
+	public void clickOnStyleParties() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+		
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Style Parties")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
 	public void clickOnCustomers() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");

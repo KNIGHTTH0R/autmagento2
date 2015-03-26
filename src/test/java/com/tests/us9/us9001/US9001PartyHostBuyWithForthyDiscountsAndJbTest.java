@@ -140,7 +140,7 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
 		
-		partyUrlModel = MongoReader.grabUrlModels("US10001CreatePartyTest" + Constants.GRAB).get(0);
+		partyUrlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
 		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 
@@ -198,7 +198,7 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
-//		confirmationSteps.agreeAndCheckout();
+		confirmationSteps.agreeAndCheckout();
 
 
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);

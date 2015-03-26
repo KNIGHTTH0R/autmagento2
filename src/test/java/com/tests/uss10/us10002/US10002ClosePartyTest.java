@@ -1,4 +1,4 @@
-package com.tests.uss10;
+package com.tests.uss10.us10002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
@@ -28,10 +27,10 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10001", type = "frontend")
+@WithTag(name = "US10002", type = "frontend")
 @Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10001ClosePartyTest extends BaseTest {
+public class US10002ClosePartyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -56,7 +55,7 @@ public class US10001ClosePartyTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -73,8 +72,8 @@ public class US10001ClosePartyTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10001CreatePartyTest" + Constants.GRAB).get(0);
-		dateModel = MongoReader.grabStylistDateModels("US10001CreatePartyTest" + Constants.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10002CreatePartyWithCustomerHostTest" + Constants.GRAB).get(0);
+		dateModel = MongoReader.grabStylistDateModels("US10002CreatePartyWithCustomerHostTest" + Constants.GRAB).get(0);
 
 		Long partyCreationTime = Long.parseLong(dateModel.getDate());
 		Long currentTime = System.currentTimeMillis();
@@ -87,7 +86,7 @@ public class US10001ClosePartyTest extends BaseTest {
 	}
 
 	@Test
-	public void us10001ClosePartyTest() {
+	public void us10002ClosePartyTest() {
 		if (runTest) {
 			customerRegistrationSteps.performLogin(username, password);
 			customerRegistrationSteps.navigate(urlModel.getUrl());

@@ -17,6 +17,8 @@ import com.pages.backend.orders.details.OrderItemsPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
 import com.pages.backend.orders.details.OrdersActionsPage;
 import com.pages.backend.promotion.ShoppingCartPriceRulesPage;
+import com.pages.backend.styleParties.PartyDetailsBackendPage;
+import com.pages.backend.styleParties.PartyListBackendPage;
 import com.pages.external.MailinatorPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
 import com.pages.external.facebook.FacebookEMBLoginPage;
@@ -156,6 +158,12 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public CustomerListPage customerListPage() {
 		return getPages().currentPageAt(CustomerListPage.class);
+	}
+	public PartyListBackendPage partyListBackendPage() {
+		return getPages().currentPageAt(PartyListBackendPage.class);
+	}
+	public PartyDetailsBackendPage partyDetailsBackendPage() {
+		return getPages().currentPageAt(PartyDetailsBackendPage.class);
 	}
 
 	public CustomerDetailsPage customerDetailsHomePage() {

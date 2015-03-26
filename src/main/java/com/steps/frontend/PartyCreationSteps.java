@@ -34,7 +34,15 @@ public class PartyCreationSteps extends AbstractSteps {
 	}
 
 	@Step
-	public String fillPartyDetails() {
+	public String fillPartyDetailsForStylistHost() {
+		partyCreationPage().selectFirstAvailableDate();
+		partyCreationPage().selectFirstAvailableHour();
+		return partyCreationPage().submitParty();
+	}
+	@Step
+	public String fillPartyDetailsForCustomerHost(String name) {
+		partyCreationPage().checkHostedByCustomer();
+		partyCreationPage().typeCustomerName(name);
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
 		return partyCreationPage().submitParty();

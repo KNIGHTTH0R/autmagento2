@@ -1,10 +1,9 @@
-package com.tests.uss10;
+package com.tests.uss10.us10002;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -29,10 +28,10 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10001", type = "frontend")
+@WithTag(name = "US10002", type = "frontend")
 @Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10001CreatePartyTest extends BaseTest {
+public class US10002CreatePartyWithCustomerHostTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -45,6 +44,7 @@ public class US10001CreatePartyTest extends BaseTest {
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
+	private String customerName;
 
 	@Before
 	public void setUp() throws Exception {
@@ -54,10 +54,11 @@ public class US10001CreatePartyTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			customerName = prop.getProperty("customerName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -76,15 +77,16 @@ public class US10001CreatePartyTest extends BaseTest {
 	}
 
 	@Test
-	public void us10001CreatePartyTest() {
+	public void us10002CreatePartyWithCustomerHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		headerSteps.goToCreatePartyPage();;
-		urlModel.setUrl(partyCreationSteps.fillPartyDetails());
+		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 	}
 
 	@After
 	public void saveData() {
+		
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + Constants.GRAB);
 	}

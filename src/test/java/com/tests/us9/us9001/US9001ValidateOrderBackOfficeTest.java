@@ -149,7 +149,6 @@ public class US9001ValidateOrderBackOfficeTest extends BaseTest {
 
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateRegularUserCalculationTotals("TOTALS VALIVATION");
-
 		hostOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		hostOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 		

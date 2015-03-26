@@ -39,6 +39,11 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().clickOnCustomers();
 		navigationPage().clickOnManageCustomers();
 	}
+	@Step
+	public void clickOnStyleParties() {
+		navigationPage().clickOnStyleCoach();
+		navigationPage().clickOnStyleParties();
+	}
 
 	@Step
 	public void clickOnSalesOrders() {
