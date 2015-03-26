@@ -78,8 +78,7 @@ public class US10001CreatePartyTest extends BaseTest {
 	@Test
 	public void us10001CreatePartyTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		headerSteps.clickLounge();
-		loungeSteps.clickCreateParty();
+		headerSteps.goToCreatePartyPage();;
 		urlModel.setUrl(partyCreationSteps.fillPartyDetails());
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 	}

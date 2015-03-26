@@ -91,9 +91,7 @@ public class US10001ClosePartyTest extends BaseTest {
 		if (runTest) {
 			customerRegistrationSteps.performLogin(username, password);
 			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.closeParty();
-			partyDetailsSteps.typePartyAttendersNumber("10");
-			partyDetailsSteps.popupCloseParty();
+			partyDetailsSteps.closeTheParty(Constants.TEN);
 			partyDetailsSteps.verifyThatPartyIsClosed();
 		}
 	}

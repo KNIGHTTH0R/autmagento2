@@ -2,6 +2,7 @@ package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
@@ -28,8 +29,10 @@ public class HeaderSteps extends AbstractSteps {
 		headerPage().clickOnProfileButton();
 	}
 	@Step
-	public void clickLounge() {
+	@Title("Go to create party page")
+	public void goToCreatePartyPage() {
 		headerPage().clickLounge();
+		loungePage().clickCreateParty();
 	}
 
 	public void redirectToProfileHistory() {

@@ -13,13 +13,21 @@ public class AddressModel {
 	private String countryName;
 	private String phoneNumber;
 
+//	public AddressModel() {
+//		setStreetAddress("Filandastraße");
+//		setStreetNumber("22");
+//		setHomeTown("Steglitz");
+//		setPostCode("12165");
+//		setCountryName("Deutschland");
+//		setPhoneNumber("00555123456");
+//	}
 	public AddressModel() {
 		setStreetAddress("Filandastraße");
 		setStreetNumber("22");
-		setHomeTown("Steglitz");
-		setPostCode("12165");
+		setHomeTown("dsfsdf");
+		setPostCode("43243");
 		setCountryName("Deutschland");
-		setPhoneNumber("00555123456");
+		setPhoneNumber("00234234");
 	}
 
 	public String getStreetAddress() {

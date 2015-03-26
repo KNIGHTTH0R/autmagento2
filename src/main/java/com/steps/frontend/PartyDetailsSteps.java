@@ -1,6 +1,7 @@
 package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.requirements.AbstractSteps;
 
@@ -8,9 +9,12 @@ public class PartyDetailsSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
-	@Step
-	public void closeParty() {
+	@StepGroup
+	public void closeTheParty(String number) {
 		partyDetailsPage().closeParty();
+		partyDetailsPage().typePartyAttendersNumber(number);
+		partyDetailsPage().popupCloseParty();
+		
 	}
 
 	@Step
