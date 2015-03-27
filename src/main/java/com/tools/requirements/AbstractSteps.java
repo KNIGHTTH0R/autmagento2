@@ -46,6 +46,7 @@ import com.pages.frontend.checkout.payment.PaymentPage;
 import com.pages.frontend.checkout.shipping.BillingFormPage;
 import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
+import com.pages.frontend.checkout.shipping.host.ContactHostShippingPage;
 import com.pages.frontend.checkout.shipping.regularUser.ShippingPartySectionPage;
 import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
@@ -274,6 +275,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public ShippingFormPage shippingFormPage() {
 		return getPages().currentPageAt(ShippingFormPage.class);
+	}
+	public ContactHostShippingPage contactHostShippingPage() {
+		return getPages().currentPageAt(ContactHostShippingPage.class);
 	}
 
 	public SurveyPage surveyPage() {

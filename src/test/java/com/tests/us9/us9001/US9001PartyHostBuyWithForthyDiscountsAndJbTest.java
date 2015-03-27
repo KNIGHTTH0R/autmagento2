@@ -41,7 +41,6 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
@@ -157,9 +156,6 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		HostCartCalculator.allProductsList.add(productData);
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct3, "4", "0");
 		HostCartCalculator.allProductsList.add(productData);
-		
-		System.out.println("----basic list----");
-		PrintUtils.printListHostBasicProductModel(HostCartCalculator.allProductsList);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();

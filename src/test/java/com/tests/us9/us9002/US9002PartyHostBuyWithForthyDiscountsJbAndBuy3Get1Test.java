@@ -25,6 +25,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
+import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -42,7 +43,6 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
@@ -73,10 +73,12 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 	public HostCartValidationWorkflows hostCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
+	@Steps
+	public ContactHostShippingHostSteps contactHostShippingHostSteps;
 
 	private String username, password;
-	private String discountClass;
-	private String billingAddress;
+	private String discountClass;	
+	private String contactBillingAddress;
 	private String shippingValue;
 
 
@@ -115,11 +117,9 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 
-			discountClass = prop.getProperty("discountClass");
-			billingAddress = prop.getProperty("billingAddress");
-			shippingValue = prop.getProperty("shippingValue");
-
-	
+			discountClass = prop.getProperty("discountClass");		
+			contactBillingAddress = prop.getProperty("contactBillingAddress");			
+			shippingValue = prop.getProperty("shippingValue");	
 
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
 			creditCardData.setCardName(prop.getProperty("cardName"));
@@ -158,10 +158,7 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 		HostCartCalculator.allProductsList.add(productData);
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct3, "4", "0");
 		HostCartCalculator.allProductsList.add(productData);
-		
-		System.out.println("----basic list----");
-		PrintUtils.printListHostBasicProductModel(HostCartCalculator.allProductsList);
-
+	
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		
@@ -172,27 +169,17 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 
 		hostCartSteps.grabProductsData();		
 		hostCartSteps.grabTotals();
-		PrintUtils.printListHostCartProductModel(HostDataGrabber.grabbedHostCartProductsList);
-		PrintUtils.printHostCartTotalsModel(HostDataGrabber.hostGrabbedCartTotals);
 
 		HostCartCalculator.calculateCartBuy3Get1CartAndShippingTotals(HostCartCalculator.allProductsList, discountClass, shippingValue);
-		System.out.println("MACEL-------------------------------------------------------------");
-		PrintUtils.printListHostBasicProductModel(HostCartCalculator.allProductsListWithBuy3Get1Applied);
-		PrintUtils.printHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts);
-		PrintUtils.printShippingTotals(HostCartCalculator.shippingCalculatedModel);
 
 		hostCartSteps.clickGoToShipping();
-		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);
+		contactHostShippingHostSteps.checkItemNotReceivedYet();
+
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();	
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
-		
-		System.out.println("-----Shipping------");
-		PrintUtils.printListHostCartProductModel(HostDataGrabber.grabbedHostShippingProductsList);
-		PrintUtils.printShippingTotals(HostDataGrabber.hostShippingTotals);
-		shippingSteps.clickGoToPaymentMethod();
-		
+
+		shippingSteps.clickGoToPaymentMethod();		
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
@@ -212,7 +199,7 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 
 		confirmationSteps.agreeAndCheckout();
 
-		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, contactBillingAddress);
 		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
 
 		customVerifications.printErrors();
