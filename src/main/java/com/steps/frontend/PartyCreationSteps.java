@@ -12,6 +12,11 @@ public class PartyCreationSteps extends AbstractSteps {
 	public void clickOrderForHostess() {
 		partyCreationPage().clickOrderForHostess();
 	}
+	
+	@Step
+	public void clickAddContact() {
+		partyCreationPage().clickAddContact();
+	}
 
 	@Step
 	public void selectFirstAvailableDate() {
@@ -47,4 +52,11 @@ public class PartyCreationSteps extends AbstractSteps {
 		partyCreationPage().selectFirstAvailableHour();
 		return partyCreationPage().submitParty();
 	}
+	@Step
+	public String fillPartyDetailsForNewCustomerHost() {
+		partyCreationPage().selectFirstAvailableDate();
+		partyCreationPage().selectFirstAvailableHour();
+		return partyCreationPage().submitParty();
+	}
+
 }

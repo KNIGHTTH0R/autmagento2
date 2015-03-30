@@ -33,6 +33,16 @@ public class HeaderSteps extends AbstractSteps {
 	public void goToCreatePartyPage() {
 		headerPage().clickLounge();
 		loungePage().clickCreateParty();
+		
+	}
+	@Step
+	@Title("Go to create party for new contact")
+	public void goToCreatePartyWithNewContactPage() {
+		headerPage().clickLounge();
+		loungePage().clickCreateParty();
+		partyCreationPage().checkHostedByCustomer();
+		partyCreationPage().clickAddContact();
+		
 	}
 
 	public void redirectToProfileHistory() {
