@@ -86,6 +86,8 @@ public class US3001ValidateOrderEmailTest extends BaseTest{
 		emailData.setPassword(emailPassword);
         
 		gmailConnector = new GmailConnector(emailData);
+		System.out.println(orderModel.get(0).getOrderId());
+	
 	}
 	
 	@Test

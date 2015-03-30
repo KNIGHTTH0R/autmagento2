@@ -17,6 +17,8 @@ import com.pages.backend.orders.details.OrderItemsPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
 import com.pages.backend.orders.details.OrdersActionsPage;
 import com.pages.backend.promotion.ShoppingCartPriceRulesPage;
+import com.pages.backend.styleParties.PartyDetailsBackendPage;
+import com.pages.backend.styleParties.PartyListBackendPage;
 import com.pages.external.MailinatorPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
 import com.pages.external.facebook.FacebookEMBLoginPage;
@@ -26,6 +28,7 @@ import com.pages.frontend.HeaderPage;
 import com.pages.frontend.HomePage;
 import com.pages.frontend.LoginPage;
 import com.pages.frontend.LoungePage;
+import com.pages.frontend.PartyCreationPage;
 import com.pages.frontend.PartyDetailsPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
@@ -43,6 +46,7 @@ import com.pages.frontend.checkout.payment.PaymentPage;
 import com.pages.frontend.checkout.shipping.BillingFormPage;
 import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
+import com.pages.frontend.checkout.shipping.host.ContactHostShippingPage;
 import com.pages.frontend.checkout.shipping.regularUser.ShippingPartySectionPage;
 import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
@@ -156,6 +160,12 @@ public class AbstractSteps extends ScenarioSteps {
 	public CustomerListPage customerListPage() {
 		return getPages().currentPageAt(CustomerListPage.class);
 	}
+	public PartyListBackendPage partyListBackendPage() {
+		return getPages().currentPageAt(PartyListBackendPage.class);
+	}
+	public PartyDetailsBackendPage partyDetailsBackendPage() {
+		return getPages().currentPageAt(PartyDetailsBackendPage.class);
+	}
 
 	public CustomerDetailsPage customerDetailsHomePage() {
 		return getPages().currentPageAt(CustomerDetailsPage.class);
@@ -236,6 +246,9 @@ public class AbstractSteps extends ScenarioSteps {
 	public ProductDetailsPage productDetailsPage() {
 		return getPages().currentPageAt(ProductDetailsPage.class);
 	}
+	public PartyCreationPage partyCreationPage() {
+		return getPages().currentPageAt(PartyCreationPage.class);
+	}
 	public PartyDetailsPage partyDetailsPage() {
 		return getPages().currentPageAt(PartyDetailsPage.class);
 	}
@@ -262,6 +275,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public ShippingFormPage shippingFormPage() {
 		return getPages().currentPageAt(ShippingFormPage.class);
+	}
+	public ContactHostShippingPage contactHostShippingPage() {
+		return getPages().currentPageAt(ContactHostShippingPage.class);
 	}
 
 	public SurveyPage surveyPage() {

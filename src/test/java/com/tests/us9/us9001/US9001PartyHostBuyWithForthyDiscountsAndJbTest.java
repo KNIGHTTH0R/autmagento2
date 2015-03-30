@@ -30,16 +30,17 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.RegularCartCalcDetailsModel;
+import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
@@ -79,7 +80,7 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-
+	public static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -137,12 +138,15 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
+		
+		partyUrlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
+		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 
 	@Test
 	public void us9001PartyHostBuyWithForthyDiscountsAndJbTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		headerSteps.navigateToPartyPageAndStartOrder("11832");
+		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;
 
@@ -152,9 +156,6 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		HostCartCalculator.allProductsList.add(productData);
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct3, "4", "0");
 		HostCartCalculator.allProductsList.add(productData);
-		
-		System.out.println("----basic list----");
-		PrintUtils.printListHostBasicProductModel(HostCartCalculator.allProductsList);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -193,7 +194,7 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
-//		confirmationSteps.agreeAndCheckout();
+		confirmationSteps.agreeAndCheckout();
 
 
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);

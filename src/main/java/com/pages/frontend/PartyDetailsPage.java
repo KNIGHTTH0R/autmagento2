@@ -1,50 +1,48 @@
 package com.pages.frontend;
 
-import java.util.List;
-
 import net.thucydides.core.annotations.findby.FindBy;
 
-import org.openqa.selenium.By;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
+import com.tools.Constants;
 import com.tools.requirements.AbstractPage;
 
 public class PartyDetailsPage extends AbstractPage {
 
-	@FindBy(css = "a.button.blue-button.btn-fix")
-	private WebElement orderForHostessButton;
+	@FindBy(id = "closeParty")
+	private WebElement closeParty;
 
-	@FindBy(css = "table.ui-datepicker-calendar tbody tr td a:nth-child(1).ui-state-default.ui-state-highlight")
-	private WebElement firstAvailableDateButton;
+	@FindBy(css = "input#guests")
+	private WebElement guests;
 
-	@FindBy(id = "date")
-	private WebElement dateSelect;
+	@FindBy(css = "div.style-party-detail > p")
+	private WebElement messageContainer;
 
-	@FindBy(id = "time")
-	private WebElement hourSelectDropDown;
+	@FindBy(css = ".button[type*='submit'][value*='YES']")
+	private WebElement popupPartyCloseButton;
 
-	@FindBy(xpath = "//option[not(@disabled)]")
-	private WebElement availableHoursButton;
-
-	public void clickOrderForHostess() {
-		element(orderForHostessButton).waitUntilVisible();
-		orderForHostessButton.click();
+	public void closeParty() {
+		element(closeParty).waitUntilVisible();
+		closeParty.click();
 	}
 
-	public void selectFirstAvailableDate() {
-
-		element(dateSelect).waitUntilVisible();
-		dateSelect.click();
-		element(firstAvailableDateButton).waitUntilVisible();
-		firstAvailableDateButton.click();
+	public void popupCloseParty() {
+		element(popupPartyCloseButton).waitUntilVisible();
+		popupPartyCloseButton.click();
 	}
 
-	public void selectFirstAvailableHour() {
+	public void verifyThatPartyIsClosed() {		
+		element(messageContainer).waitUntilVisible();
+		System.out.println(messageContainer.getText() + " : " + Constants.PARTY_CLOSED);
+		Assert.assertTrue("The status should be Party geschlossen and it's not ", messageContainer.getText().contains(Constants.PARTY_CLOSED));	
 
-		List<WebElement> hoursList = hourSelectDropDown.findElements(By.xpath("//option[not(@disabled)]"));
-		//get(0) is the default dropdown label, that's why the first available hour is get(1) 
-		hoursList.get(1).click();
+	}
 
+	public void typePartyAttendersNumber(String number) {
+		element(guests).waitUntilVisible();
+		element(guests).clear();
+		element(guests).sendKeys(number);
 	}
 
 }

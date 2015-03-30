@@ -1,4 +1,4 @@
-package com.tests.uss10;
+package com.tests.uss10.us10002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,22 +11,27 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
-import com.steps.frontend.PartyDetailsSteps;
+import com.steps.frontend.PartyCreationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.data.UrlModel;
+import com.tools.data.frontend.DateModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10001", type = "frontend")
+@WithTag(name = "US10002", type = "frontend")
 @Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10001CreatePartyTest extends BaseTest {
+public class US10002CreatePartyWithCustomerHostTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -35,8 +40,11 @@ public class US10001CreatePartyTest extends BaseTest {
 	@Steps
 	public LoungeSteps loungeSteps;
 	@Steps
-	public PartyDetailsSteps partyDetailsSteps;
+	public PartyCreationSteps partyCreationSteps;
+	public static UrlModel urlModel = new UrlModel();
+	public static DateModel dateModel = new DateModel();
 	private String username, password;
+	private String customerName;
 
 	@Before
 	public void setUp() throws Exception {
@@ -46,10 +54,11 @@ public class US10001CreatePartyTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			customerName = prop.getProperty("customerName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -63,15 +72,22 @@ public class US10001CreatePartyTest extends BaseTest {
 			}
 		}
 
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+
 	}
 
 	@Test
-	public void us10001CreatePartyTest() {
+	public void us10002CreatePartyWithCustomerHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		headerSteps.clickLounge();
-		loungeSteps.clickCreateParty();
-		partyDetailsSteps.selectFirstAvailableDate();
-		partyDetailsSteps.selectFirstAvailableHour();
+		headerSteps.goToCreatePartyPage();;
+		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
+		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
+	}
+
+	@After
+	public void saveData() {
 		
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + Constants.GRAB);
 	}
 }
