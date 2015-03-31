@@ -8,7 +8,7 @@ import com.poc.ActivateRule;
 import com.poc.DeactivateRule;
 
 @SuiteClasses({
-	US000Suite.class,
+//	US000Suite.class,
 	US001Suite.class,
 	US002Suite.class,
 	US3001Suite.class,
