@@ -24,12 +24,12 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6001", type = "frontend")
-@Story(Application.StyleCoach.Registration.class)
-@RunWith(ThucydidesRunner.class)
+//@WithTag(name = "US6001", type = "frontend")
 @Narrative(title="6001 Story" , text={"In order to choose the best flight for my travels",                      
         "As a traveller",
         "I want to be able to search for flights between specific destinations"})
+//@Story(Application.StyleCoach.Registration.class)
+@RunWith(ThucydidesRunner.class)
 public class US6001StyleCoachRegistrationTest extends BaseTest {
 
 	@Steps
