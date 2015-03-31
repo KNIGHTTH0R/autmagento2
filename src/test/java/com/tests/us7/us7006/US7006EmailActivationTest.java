@@ -25,7 +25,7 @@ import com.tools.requirements.Application;
 
 
 @WithTag(name = "US7006", type = "external")
-@Story(Application.Stylist.CreateColaborator.class)
+@Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7006EmailActivationTest extends BaseTest{
 

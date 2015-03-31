@@ -46,7 +46,7 @@ import com.workflows.frontend.ShippingAndConfirmationWorkflows;
 import com.workflows.frontend.ValidationWorkflows;
 
 @WithTag(name = "US4002", type = "frontend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US4002Test extends BaseTest {
 

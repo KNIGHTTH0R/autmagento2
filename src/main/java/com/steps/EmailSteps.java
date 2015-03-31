@@ -1,12 +1,8 @@
 package com.steps;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
+import net.thucydides.core.annotations.Step;
 
 import org.junit.Assert;
-
-import net.thucydides.core.annotations.Step;
 
 import com.tools.requirements.AbstractSteps;
 

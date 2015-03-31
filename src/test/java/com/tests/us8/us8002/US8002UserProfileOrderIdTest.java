@@ -29,7 +29,7 @@ import com.tools.requirements.Application;
 
 
 @WithTag(name = "US8002", type = "frontend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US8002UserProfileOrderIdTest extends BaseTest{
 	

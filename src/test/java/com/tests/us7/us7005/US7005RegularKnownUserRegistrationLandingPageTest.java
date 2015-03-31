@@ -28,7 +28,7 @@ import com.tools.requirements.Application;
 
 
 @WithTag(name = "US7005", type = "fontend")
-@Story(Application.Stylist.CreateColaborator.class)
+@Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7005RegularKnownUserRegistrationLandingPageTest extends BaseTest{
 	

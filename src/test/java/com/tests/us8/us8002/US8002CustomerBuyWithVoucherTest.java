@@ -43,7 +43,7 @@ import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
 @WithTag(name = "US8002", type = "frontend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 

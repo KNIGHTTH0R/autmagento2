@@ -41,7 +41,7 @@ import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
 @WithTag(name = "US9002", type = "backend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.Shop.HostessCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US9002ValidateOrderBackOfficeTest extends BaseTest {
 

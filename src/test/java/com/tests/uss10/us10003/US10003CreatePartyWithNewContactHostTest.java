@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -29,10 +28,9 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
-import com.tools.requirements.Application;
 
 @WithTag(name = "US10003", type = "frontend")
-@Story(Application.StyleParty.CreateParty.class)
+//@Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 

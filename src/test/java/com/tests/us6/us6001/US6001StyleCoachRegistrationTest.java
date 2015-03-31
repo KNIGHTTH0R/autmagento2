@@ -1,6 +1,5 @@
 package com.tests.us6.us6001;
 
-import net.thucydides.core.annotations.Narrative;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -25,7 +24,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US6001", type = "frontend")
-@Story(Application.StyleCoach.Registration.class)
+@Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
 public class US6001StyleCoachRegistrationTest extends BaseTest {
 

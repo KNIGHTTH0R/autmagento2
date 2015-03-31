@@ -33,7 +33,7 @@ import com.tools.requirements.Application;
 
 
 @WithTag(name = "US006", type = "external")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US3006ValidateOrderEmailTest extends BaseTest{
 	
