@@ -27,7 +27,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US6001", type = "frontend")
 @Story(Application.StyleCoach.Registration.class)
 @RunWith(ThucydidesRunner.class)
-@Narrative(text={"In order to choose the best flight for my travels",                      
+@Narrative(title="6001 Story" , text={"In order to choose the best flight for my travels",                      
         "As a traveller",
         "I want to be able to search for flights between specific destinations"})
 public class US6001StyleCoachRegistrationTest extends BaseTest {
