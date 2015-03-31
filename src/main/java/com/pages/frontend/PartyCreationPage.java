@@ -22,6 +22,9 @@ public class PartyCreationPage extends AbstractPage {
 
 	@FindBy(id = "date")
 	private WebElement dateSelect;
+	
+	@FindBy(id = "addContact")
+	private WebElement addContact;
 
 	@FindBy(css = "input#hostedBy_contact")
 	private WebElement hostedByCustomer;
@@ -41,6 +44,11 @@ public class PartyCreationPage extends AbstractPage {
 	@FindBy(css = ".button[type*='submit']")
 	private WebElement partySubmitButton;
 
+	public void clickAddContact() {
+		element(addContact).waitUntilVisible();
+		addContact.click();
+	}
+	
 	public void clickOrderForHostess() {
 		element(orderForHostessButton).waitUntilVisible();
 		orderForHostessButton.click();

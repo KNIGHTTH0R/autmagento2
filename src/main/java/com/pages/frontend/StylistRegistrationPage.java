@@ -174,11 +174,13 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void clickOnNachahmePaymentMethod() {
 		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
+		element(weiter).waitUntilVisible();
 		weiter.click();
 	}
 
 	public void clickOnKreditkartePaymentMethod() {
 		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
+		element(hinzufugen).waitUntilVisible();
 		hinzufugen.click();
 	}
 

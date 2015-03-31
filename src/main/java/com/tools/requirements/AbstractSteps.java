@@ -55,6 +55,7 @@ import com.pages.frontend.registration.landing.ContactLandingPage;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
 import com.pages.frontend.registration.landing.RegistrationSuccessPage;
 import com.pages.frontend.registration.landing.ThankYouPage;
+import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.Constants;
@@ -76,7 +77,6 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().clickOnLoginButton();
 	}
 
-	
 	public void refresh() {
 		getDriver().navigate().refresh();
 		waitABit(Constants.TIME_CONSTANT);
@@ -113,8 +113,8 @@ public class AbstractSteps extends ScenarioSteps {
 		waitABit(Constants.TIME_CONSTANT);
 		getDriver().get(initURL);
 	}
-	
-	//TODO fix this
+
+	// TODO fix this
 	public void wipeRegularCart() {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("schmuckstucke/neu.html", "checkout/cart/clearAllItems/");
@@ -122,6 +122,7 @@ public class AbstractSteps extends ScenarioSteps {
 		waitABit(Constants.TIME_CONSTANT);
 		getDriver().get(initURL);
 	}
+
 	public void wipeHostCart() {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("checkout/cart/", "checkout/cart/clearAllItems/");
@@ -160,9 +161,11 @@ public class AbstractSteps extends ScenarioSteps {
 	public CustomerListPage customerListPage() {
 		return getPages().currentPageAt(CustomerListPage.class);
 	}
+
 	public PartyListBackendPage partyListBackendPage() {
 		return getPages().currentPageAt(PartyListBackendPage.class);
 	}
+
 	public PartyDetailsBackendPage partyDetailsBackendPage() {
 		return getPages().currentPageAt(PartyDetailsBackendPage.class);
 	}
@@ -203,6 +206,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
 	}
+
 	public LoungePage loungePage() {
 		return getPages().currentPageAt(LoungePage.class);
 	}
@@ -246,11 +250,17 @@ public class AbstractSteps extends ScenarioSteps {
 	public ProductDetailsPage productDetailsPage() {
 		return getPages().currentPageAt(ProductDetailsPage.class);
 	}
+
 	public PartyCreationPage partyCreationPage() {
 		return getPages().currentPageAt(PartyCreationPage.class);
 	}
+
 	public PartyDetailsPage partyDetailsPage() {
 		return getPages().currentPageAt(PartyDetailsPage.class);
+	}
+
+	public CreateNewContactPage createNewContactPage() {
+		return getPages().currentPageAt(CreateNewContactPage.class);
 	}
 
 	// cart
@@ -261,6 +271,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public RegularUserCartPage regularUserCartPage() {
 		return getPages().currentPageAt(RegularUserCartPage.class);
 	}
+
 	public HostCartPage hostCartPage() {
 		return getPages().currentPageAt(HostCartPage.class);
 	}
@@ -269,6 +280,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public BillingFormPage billingFormPage() {
 		return getPages().currentPageAt(BillingFormPage.class);
 	}
+
 	public ShippingPartySectionPage regularUserShippingPage() {
 		return getPages().currentPageAt(ShippingPartySectionPage.class);
 	}
@@ -276,6 +288,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public ShippingFormPage shippingFormPage() {
 		return getPages().currentPageAt(ShippingFormPage.class);
 	}
+
 	public ContactHostShippingPage contactHostShippingPage() {
 		return getPages().currentPageAt(ContactHostShippingPage.class);
 	}
@@ -301,7 +314,8 @@ public class AbstractSteps extends ScenarioSteps {
 	public SuccessPage successPage() {
 		return getPages().currentPageAt(SuccessPage.class);
 	}
-	//Lounge-Reports 
+
+	// Lounge-Reports
 	public StylistsCustomerOrderReportPage stylistsCustomerOrderReportPage() {
 		return getPages().currentPageAt(StylistsCustomerOrderReportPage.class);
 	}
@@ -318,23 +332,23 @@ public class AbstractSteps extends ScenarioSteps {
 	public FacebookRegistrationFormPage facebookRegistrationFormPage() {
 		return getPages().currentPageAt(FacebookRegistrationFormPage.class);
 	}
-	
+
 	public ContactLandingPage contactLandingPage() {
 		return getPages().currentPageAt(ContactLandingPage.class);
 	}
-	
+
 	public LandingCustomerAllocationPage landingCustomerAllocationPage() {
 		return getPages().currentPageAt(LandingCustomerAllocationPage.class);
 	}
-	
+
 	public ThankYouPage thankYouPage() {
 		return getPages().currentPageAt(ThankYouPage.class);
 	}
-	
+
 	public RegistrationSuccessPage registrationSuccessPage() {
 		return getPages().currentPageAt(RegistrationSuccessPage.class);
 	}
-	
+
 	public RegisterLandingPage registerLandingPage() {
 		return getPages().currentPageAt(RegisterLandingPage.class);
 	}
