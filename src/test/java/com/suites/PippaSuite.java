@@ -8,7 +8,7 @@ import com.poc.ActivateRule;
 import com.poc.DeactivateRule;
 
 @SuiteClasses({
-	US000Suite.class,
+//	US000Suite.class,
 	US001Suite.class,
 	US002Suite.class,
 	US3001Suite.class,
@@ -20,6 +20,8 @@ import com.poc.DeactivateRule;
 	US3007Suite.class,
 	US3008Suite.class,
 	US3009Suite.class,
+	
+	//US 5 - Facebook login is external. System is not always up (facebook app)
 	
 	US6001Suite.class,
 	US6002Suite.class,

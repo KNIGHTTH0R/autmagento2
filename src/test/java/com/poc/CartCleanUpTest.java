@@ -2,7 +2,6 @@ package com.poc;
 
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Test;
@@ -12,9 +11,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
-import com.tools.requirements.Application;
 
-@Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class CartCleanUpTest extends BaseTest{
 

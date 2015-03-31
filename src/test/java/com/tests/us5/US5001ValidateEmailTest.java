@@ -28,7 +28,7 @@ import com.tools.data.email.EmailCredentialsModel;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US5000", type = "external")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.External.class)
 @RunWith(ThucydidesRunner.class)
 public class US5001ValidateEmailTest extends BaseTest {
 

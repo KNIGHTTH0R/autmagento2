@@ -1,7 +1,6 @@
 package com.tests.uss10.us10002;
 
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -13,10 +12,12 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.persistance.MongoReader;
-import com.tools.requirements.Application;
+
 
 @WithTag(name = "US10002", type = "external")
-@Story(Application.Stylist.CreateColaborator.class)
+//@Story(Application.Stylist.CreateColaborator.class)
+
+
 @RunWith(ThucydidesRunner.class)
 public class US10002CheckInviteEmailTest extends BaseTest {
 

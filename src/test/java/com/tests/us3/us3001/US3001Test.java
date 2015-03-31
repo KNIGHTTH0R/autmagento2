@@ -40,7 +40,7 @@ import com.workflows.frontend.CartWorkflows;
 import com.workflows.frontend.ValidationWorkflows;
 
 @WithTag(name = "US3001", type = "frontend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US3001Test extends BaseTest {
 

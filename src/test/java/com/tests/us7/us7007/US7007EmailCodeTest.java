@@ -19,7 +19,7 @@ import com.tools.requirements.Application;
 
 
 @WithTag(name = "US7007", type = "external")
-@Story(Application.Stylist.CreateColaborator.class)
+@Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7007EmailCodeTest extends BaseTest{
 

@@ -17,7 +17,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US10003", type = "external")
-@Story(Application.StyleCoach.Shopping.class)
+//@Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 

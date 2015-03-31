@@ -36,7 +36,7 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 
 @WithTag(name = "US001", type = "backend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US001ValidateOrderBackOfficeTest extends BaseTest {
 

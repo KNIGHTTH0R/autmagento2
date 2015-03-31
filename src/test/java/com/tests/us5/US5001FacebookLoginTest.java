@@ -23,7 +23,7 @@ import com.tools.requirements.Application;
 
 
 @WithTag(name = "US5", type = "frontend,external")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.External.class)
 @RunWith(ThucydidesRunner.class)
 public class US5001FacebookLoginTest extends BaseTest{
 	

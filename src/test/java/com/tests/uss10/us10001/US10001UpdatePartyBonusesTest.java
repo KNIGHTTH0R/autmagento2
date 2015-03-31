@@ -1,7 +1,6 @@
 package com.tests.uss10.us10001;
 
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -16,17 +15,16 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
 import com.tools.persistance.MongoReader;
-import com.tools.requirements.Application;
 
 @WithTag(name = "US10001", type = "backend")
-@Story(Application.StyleParty.CreateParty.class)
+//@Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10001UpdatePartyBonusesTest extends BaseTest {
 	
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
-	public PartyDetailsBackendSteps partyDetailsBackendSteps;
+	public PartyDetailsBackendSteps partyDetailsBackendSteps;	
 	@Steps
 	public PartyListBackendSteps partyListBackendSteps;
 

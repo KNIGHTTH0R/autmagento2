@@ -16,7 +16,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US10003", type = "external")
-@Story(Application.Stylist.CreateColaborator.class)
+//@Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US10003CheckInviteEmailTest extends BaseTest {
 

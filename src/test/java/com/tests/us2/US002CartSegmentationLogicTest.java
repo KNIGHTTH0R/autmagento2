@@ -50,7 +50,7 @@ import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.CartWorkflows;
 
 @WithTag(name = "US002", type = "frontend")
-@Story(Application.StyleCoach.Shopping.class)
+@Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US002CartSegmentationLogicTest extends BaseTest {
 

@@ -33,7 +33,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US10002", type = "frontend")
-@Story(Application.StyleParty.CreateParty.class)
+//@Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10002UpdatePartyTest extends BaseTest {
 
