@@ -217,6 +217,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void selectStarterKit() {
+		element(By.cssSelector("input#kit_2567")).waitUntilVisible();
 		elementjQueryClick("input#kit_2567");
 	}
 
