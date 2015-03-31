@@ -76,7 +76,7 @@ public class MailinatorPage extends AbstractPage {
 				break;
 			} 
 		}
-		Assert.assertTrue("The email with the title" + title + "was not found"  , foundEmail);
+		Assert.assertTrue("The email with the title " + title + " was not found"  , foundEmail);
 		return returnText;
 	}
 

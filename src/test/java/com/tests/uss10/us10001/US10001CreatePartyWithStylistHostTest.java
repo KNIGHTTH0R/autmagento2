@@ -75,7 +75,7 @@ public class US10001CreatePartyWithStylistHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us10001CreatePartyWithStylistHostTestO() {
+	public void us10001CreatePartyWithStylistHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		headerSteps.goToCreatePartyPage();;
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());

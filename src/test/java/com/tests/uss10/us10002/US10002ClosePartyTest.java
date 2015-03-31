@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
@@ -77,6 +78,8 @@ public class US10002ClosePartyTest extends BaseTest {
 				}
 			}
 		}
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10002CreatePartyWithCustomerHostTest" + Constants.GRAB).get(0);
 		dateModel = MongoReader.grabStylistDateModels("US10002CreatePartyWithCustomerHostTest" + Constants.GRAB).get(0);
@@ -99,6 +102,7 @@ public class US10002ClosePartyTest extends BaseTest {
 			partyDetailsSteps.sendInvitationToGest(customerData);
 			partyDetailsSteps.verifyThatGuestIsInvited(customerData);
 			partyDetailsSteps.closeTheParty(Constants.TEN);
+			partyDetailsSteps.verifyThatPartyIsClosed();
 
 		}
 	}

@@ -30,6 +30,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 
 	@Step
 	public void verifyThatPartyIsClosed() {
+		getDriver().navigate().refresh();
 		partyDetailsPage().verifyThatPartyIsClosed();
 	}
 
@@ -47,6 +48,14 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void inviteGuests() {
 		partyDetailsPage().inviteGuests();
+	}
+	@Step
+	public void editParty() {
+		partyDetailsPage().editParty();
+	}
+	@Step
+	public void deleteParty() {
+		partyDetailsPage().deleteParty();
 	}
 	@Step
 	public void verifyThatGuestIsInvited(CustomerFormModel customerData) {

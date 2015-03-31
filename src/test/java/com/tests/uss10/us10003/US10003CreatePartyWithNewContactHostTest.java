@@ -91,14 +91,14 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 		customerRegistrationSteps.performLogin(username, password);
 		headerSteps.goToCreatePartyWithNewContactPage();
 		createNewContactSteps.fillCreateNewContact(customerData, addressData);
-		partyCreationSteps.fillPartyDetailsForNewCustomerHost();
-		
+		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForNewCustomerHost());
+		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 	
 	}
 
 	@After
 	public void saveData() {
-		
+		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName()+ Constants.GRAB);
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + Constants.GRAB);
 	}

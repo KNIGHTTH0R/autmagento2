@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
@@ -23,6 +24,7 @@ import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -46,10 +48,12 @@ public class US10001ClosePartyTest extends BaseTest {
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
 	boolean runTest = true;
+	public CustomerFormModel customerData;
 
 	@Before
 	public void setUp() throws Exception {
 
+		customerData = new CustomerFormModel();
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -71,6 +75,8 @@ public class US10001ClosePartyTest extends BaseTest {
 				}
 			}
 		}
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
 		dateModel = MongoReader.grabStylistDateModels("US10001CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
@@ -90,8 +96,10 @@ public class US10001ClosePartyTest extends BaseTest {
 		if (runTest) {
 			customerRegistrationSteps.performLogin(username, password);
 			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.sendInvitationToGest(customerData);
+			partyDetailsSteps.verifyThatGuestIsInvited(customerData);
 			partyDetailsSteps.closeTheParty(Constants.TEN);
-//			partyDetailsSteps.verifyThatPartyIsClosed();
+			partyDetailsSteps.verifyThatPartyIsClosed();
 		}
 	}
 

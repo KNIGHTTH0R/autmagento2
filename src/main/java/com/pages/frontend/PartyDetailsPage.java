@@ -17,6 +17,12 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(id = "closeParty")
 	private WebElement closeParty;
 
+	@FindBy(id = "editParty")
+	private WebElement editParty;
+	
+	@FindBy(id = "deleteParty")
+	private WebElement deleteParty;
+
 	@FindBy(id = "invitations-list-table")
 	private WebElement invitationsList;
 
@@ -47,6 +53,16 @@ public class PartyDetailsPage extends AbstractPage {
 	public void closeParty() {
 		element(closeParty).waitUntilVisible();
 		closeParty.click();
+	}
+
+	public void editParty() {
+		element(editParty).waitUntilVisible();
+		editParty.click();
+	}
+	
+	public void deleteParty() {
+		element(deleteParty).waitUntilVisible();
+		deleteParty.click();
 	}
 
 	public void inviteGuests() {

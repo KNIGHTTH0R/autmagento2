@@ -36,6 +36,7 @@ import com.pages.frontend.RegistrationMessagePage;
 import com.pages.frontend.StarterSetPage;
 import com.pages.frontend.StylistCampaignPage;
 import com.pages.frontend.StylistRegistrationPage;
+import com.pages.frontend.UpdatePartyPage;
 import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.SuccessPage;
 import com.pages.frontend.checkout.cart.partyHost.HostCartPage;
@@ -253,6 +254,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public PartyCreationPage partyCreationPage() {
 		return getPages().currentPageAt(PartyCreationPage.class);
+	}
+	public UpdatePartyPage updatePartyPage() {
+		return getPages().currentPageAt(UpdatePartyPage.class);
 	}
 
 	public PartyDetailsPage partyDetailsPage() {

@@ -97,6 +97,8 @@ public class Constants {
 	public static final String VOUCHER_DISCOUNT_INCOMPATIBLE = "Gutscheine können nicht in Verbindung mit Schmuckbonus verwendet werden.";
 	public static final CharSequence PARTY_CLOSED = "Party geschlossen";
 	public static final String BOUNUS_SUCCESS_MESSAGE = "Bonus was successfully saved";
+	public static final String INVITE_EMAIL_SUBJECT = "lädt Dich ein zur PIPPA&JEAN Style Party";
+	public static final String PARTY_CREATION_EMAIL_SUBJECT = "PIPPA&JEAN Style Party wurde für Dich angelegt";
 	//BONUSES
 	public static final String JEWELRY_BONUS = "Schmuck Bonus";
 	public static final String DISCOUNT_40_BONUS = "40% Rabatt Gutschein";
@@ -105,6 +107,7 @@ public class Constants {
 	public static final String BE_URL_RULE_BUY3GET1_FOR_HOST = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5478/";
 	
 	public static final String TEN = "10";
+
 
 	
 	

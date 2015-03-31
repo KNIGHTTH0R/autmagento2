@@ -1,4 +1,4 @@
-package com.tests.uss10.us10003;
+package com.tests.uss10.us10002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,6 +22,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
+import com.steps.frontend.UpdatePartySteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
@@ -31,15 +32,17 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10003", type = "frontend")
+@WithTag(name = "US10002", type = "frontend")
 @Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10003ClosePartyTest extends BaseTest {
+public class US10002UpdatePartyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public UpdatePartySteps updatePartySteps;
 	@Steps
 	public LoungeSteps loungeSteps;
 	@Steps
@@ -49,20 +52,19 @@ public class US10003ClosePartyTest extends BaseTest {
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
-	boolean runTest = true;
 	public CustomerFormModel customerData;
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		customerData = new CustomerFormModel();
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -78,37 +80,27 @@ public class US10003ClosePartyTest extends BaseTest {
 				}
 			}
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10003CreatePartyWithNewContactHostTest" + Constants.GRAB).get(0);
-		dateModel = MongoReader.grabStylistDateModels("US10003CreatePartyWithNewContactHostTest" + Constants.GRAB).get(0);
-
-		Long partyCreationTime = Long.parseLong(dateModel.getDate());
-		Long currentTime = System.currentTimeMillis();
-		
-		// if less than 15 minutes passed skip the test
-		if (currentTime - partyCreationTime < 90000) {
-			runTest = false;
-		}
+		urlModel = MongoReader.grabUrlModels("US10002CreatePartyWithCustomerHostTest" + Constants.GRAB).get(0);
 
 	}
 
 	@Test
-	public void us10003ClosePartyTest() {
-		if (runTest) {			
-			customerRegistrationSteps.performLogin(username, password);
-			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.sendInvitationToGest(customerData);
-			partyDetailsSteps.verifyThatGuestIsInvited(customerData);
-			partyDetailsSteps.closeTheParty(Constants.TEN);
-			partyDetailsSteps.verifyThatPartyIsClosed();
-		}
+	public void us10002UpdatePartyTest() {
+
+		customerRegistrationSteps.performLogin(username, password);
+		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.sendInvitationToGest(customerData);
+		partyDetailsSteps.verifyThatGuestIsInvited(customerData);
+		partyDetailsSteps.editParty();
+		updatePartySteps.updatePartyDateAndHour();
+
 	}
-	
+
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName());
 	}
-
 }

@@ -56,7 +56,9 @@ public class PartyCreationSteps extends AbstractSteps {
 	public String fillPartyDetailsForNewCustomerHost() {
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
+		waitABit(2000);
 		return partyCreationPage().submitParty();
+		
 	}
 
 }
