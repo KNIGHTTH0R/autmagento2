@@ -220,7 +220,7 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void selectStarterKit() {
 		waitABit(Constants.TIME_MEDIUM);
-		element(By.cssSelector("input#kit_2567")).waitUntilVisible();
+//		element(By.cssSelector("div.starter-kit")).waitUntilVisible();
 		elementjQueryClick("input#kit_2567");
 	}
 
