@@ -2,10 +2,11 @@ package com.steps.frontend;
 
 import java.util.Set;
 
-import org.junit.Assert;
-
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
+
+import org.junit.Assert;
 
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
 import com.tools.Constants;
@@ -201,6 +202,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	 * @param addressModel
 	 */
 	@Step
+	@Title("Fill landing page form")
 	public void fillLandingPageForm(CustomerFormModel dataModel, AddressModel addressModel) {
 		getDriver().get(Constants.BASE_FE_URL + Constants.LANDING_PAGE);
 		contactLandingPage().selectGender(true);
@@ -274,11 +276,12 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	/**
 	 * thankyou-register - is the id of the form on the thank you page.
 	 * We verify that the form is not present with this method.
-	 * Page title is also validated
+	 * Page title is also validated  
+	 * Note time wait is large due to slow website.
 	 */
 	@Step
 	public void verifySimpleThankYouPage() {
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(Constants.WAIT_TIME_LONG);
 		String pageSource = thankYouPage().pageSource();
 		String pageTitle = thankYouPage().pageTitle();
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page",pageTitle.contains("Thank you page"));
