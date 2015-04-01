@@ -30,5 +30,12 @@ public class UpdatePartySteps extends AbstractSteps {
 		updatePartyPage().selectSecondAvailableHour();
 		updatePartyPage().submitParty();
 	}
+	@StepGroup
+	public void updatePartyDateWithMinimum180DaysLater() {
+		updatePartyPage().selectADateGreaterWithMinimum180Days();
+		updatePartyPage().confirmMoveParty();
+		updatePartyPage().selectSecondAvailableHour();
+		updatePartyPage().submitParty();
+	}
 
 }

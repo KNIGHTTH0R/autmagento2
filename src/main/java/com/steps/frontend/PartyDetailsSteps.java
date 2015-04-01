@@ -1,6 +1,8 @@
 
 package com.steps.frontend;
 
+import org.junit.Assert;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
@@ -57,10 +59,20 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void deleteParty() {
 		partyDetailsPage().deleteParty();
+		partyDetailsPage().confirmDeleteParty();
+		
 	}
 	@Step
 	public void verifyThatGuestIsInvited(CustomerFormModel customerData) {
 		partyDetailsPage().verifyThatGuestIsInvited(customerData);
+	}
+	@Step
+	public void verifyThatFolowUpPartyAppearsOnPartyDetailsPage(String... terms) {
+		partyDetailsPage().verifyThatFolowUpPartyAppearsOnPartyDetailsPage(terms);
+	}
+	@Step
+	public void createFolowUpParty() {
+		partyDetailsPage().createFolowUpParty();
 	}
 
 }

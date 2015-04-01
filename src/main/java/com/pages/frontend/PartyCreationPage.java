@@ -43,6 +43,9 @@ public class PartyCreationPage extends AbstractPage {
 
 	@FindBy(css = ".button[type*='submit']")
 	private WebElement partySubmitButton;
+	
+	@FindBy(id = "city")
+	private WebElement cityInput;
 
 	public void clickAddContact() {
 		element(addContact).waitUntilVisible();
@@ -81,18 +84,20 @@ public class PartyCreationPage extends AbstractPage {
 		
 	}
 
-	public void selectFirstAvailableDate() {
+	public String selectFirstAvailableDate() {
 
 		element(dateSelect).waitUntilVisible();
 		dateSelect.click();
 		element(firstAvailableDateButton).waitUntilVisible();
 		firstAvailableDateButton.click();
+		return dateSelect.getText();
 	}
 
-	public void selectFirstAvailableHour() {
+	public String selectFirstAvailableHour() {
 
 		List<WebElement> hoursList = hourSelectDropDown.findElements(By.xpath("//option[not(@disabled)]"));
-		hoursList.get(1).click();
+		hoursList.get(0).click();
+		return hourSelectDropDown.getText();
 
 	}
 

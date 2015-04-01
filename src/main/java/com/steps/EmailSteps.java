@@ -1,9 +1,7 @@
 package com.steps;
 
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 import net.thucydides.core.annotations.Step;
 
@@ -50,7 +48,7 @@ public class EmailSteps extends AbstractSteps {
 		return resultURL;
 	}
 
-	public String grabPartyLink(String message) {
+	public String grabRowFromMessage(String message) {
 		String resultURL = null;
 		String[] lines = message.split("\n");
 		for (String stringNow : lines) {
@@ -63,20 +61,21 @@ public class EmailSteps extends AbstractSteps {
 		return resultURL;
 	}
 
+
 	public String extractUrlFromEmailMessage(String email) {
+		String row = grabRowFromMessage(email);
 		int matchStart = 0;
 		int matchEnd = 0;
 		int occ = 0;
 		Pattern urlPattern = Pattern.compile("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?",
 				Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
-		Matcher matcher = urlPattern.matcher(email);
+		Matcher matcher = urlPattern.matcher(row);
 		while (matcher.find() & occ < 1) {
 			occ++;
 			matchStart = matcher.start(1);
 			matchEnd = matcher.end();
-			// now you have the offsets of a URL match
 		}
-		String link = email.substring(matchStart, matchEnd);
+		String link = row.substring(matchStart, matchEnd);
 		return link;
 	}
 }

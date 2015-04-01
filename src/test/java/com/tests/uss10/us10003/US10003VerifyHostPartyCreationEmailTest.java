@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +13,14 @@ import org.junit.runner.RunWith;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
+import com.tools.data.UrlModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US10003", type = "external")
-//@Story(Application.StyleCoach.Shopping.class)
+// @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 
@@ -26,11 +29,12 @@ public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 
 	private String email;
 	private static CustomerFormModel customerModel;
+	UrlModel urlModel = new UrlModel();
 
 	@Before
 	public void setUp() throws Exception {
 		customerModel = new CustomerFormModel();
-		customerModel = MongoReader.grabCustomerFormModels("US10003CreatePartyWithNewContactHostTest" +Constants.GRAB).get(0);
+		customerModel = MongoReader.grabCustomerFormModels("US10003CreatePartyWithNewContactHostTest" + Constants.GRAB).get(0);
 		email = customerModel.getEmailName();
 		System.out.println(email);
 
@@ -40,7 +44,13 @@ public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 	public void us10003VerifyHostPartyCreationEmailTest() {
 
 		emailClientSteps.openMailinator();
-		emailClientSteps.validateThatEmailIsReceivedAndConfirm(email.replace("@" + Constants.WEB_MAIL, ""), Constants.PARTY_CREATION_EMAIL_SUBJECT);
+		urlModel.setUrl(emailClientSteps.validateThatEmailIsReceivedAndConfirm(email.replace("@" + Constants.WEB_MAIL, ""), Constants.PARTY_CREATION_EMAIL_SUBJECT));
 
 	}
+
+	@After
+	public void saveData() {
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
+	}
+
 }

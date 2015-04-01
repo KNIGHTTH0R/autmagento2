@@ -115,7 +115,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 	}
 	@Step
-	public void validateThatEmailIsReceivedAndConfirm(String email, String title) {
+	public String validateThatEmailIsReceivedAndConfirm(String email, String title) {
 		
 		// waitABit(5000);
 		String url = Constants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
@@ -136,6 +136,6 @@ public class EmailClientSteps extends AbstractSteps {
 		
 		 waitABit(6000);
 
-		
+		return welcomeMessage;
 	}
 }

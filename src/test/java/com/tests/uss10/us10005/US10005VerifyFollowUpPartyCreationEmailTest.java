@@ -1,4 +1,4 @@
-package com.tests.uss10.us10002;
+package com.tests.uss10.us10005;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,10 +33,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10002", type = "external")
+@WithTag(name = "US10005", type = "external")
 // @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US10002VerifyHostPartyCreationEmailTest extends BaseTest {
+public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -86,11 +86,11 @@ public class US10002VerifyHostPartyCreationEmailTest extends BaseTest {
 	}
 
 	@Test
-	public void us10002VerifyHostPartyCreationEmailTest() {
+	public void us10005VerifyHostPartyCreationEmailTest() {
 
 		frontEndSteps.performLogin(email, password);
 
-		String message = gmailConnector.searchForMail("", Constants.PARTY_CREATION_EMAIL_SUBJECT, false);
+		String message = gmailConnector.searchForMail("", Constants.PARTY_CREATION_EMAIL_SUBJECT, true);
 		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message));
 
 		customVerifications.printErrors();

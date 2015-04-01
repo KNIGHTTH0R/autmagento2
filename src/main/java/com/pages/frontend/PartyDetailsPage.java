@@ -19,9 +19,12 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(id = "editParty")
 	private WebElement editParty;
-	
+
 	@FindBy(id = "deleteParty")
 	private WebElement deleteParty;
+
+	@FindBy(css = "#deleteForm button[value*='YES']")
+	private WebElement confirmDeleteParty;
 
 	@FindBy(id = "invitations-list-table")
 	private WebElement invitationsList;
@@ -41,6 +44,9 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(id = "inviteGuests")
 	private WebElement inviteGuests;
 
+	@FindBy(css = "a[href*='http://staging-aut.pippajean.com/qateam/stylist/party/create/parentId/']")
+	private WebElement createFolowUpParty;
+
 	@FindBy(css = "input#guests")
 	private WebElement guests;
 
@@ -49,6 +55,9 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(css = ".button[type*='submit'][value*='YES']")
 	private WebElement popupPartyCloseButton;
+
+	@FindBy(css = "table.data-table.follow-up-parties")
+	private WebElement folowUpPartysTable;
 
 	public void closeParty() {
 		element(closeParty).waitUntilVisible();
@@ -59,10 +68,20 @@ public class PartyDetailsPage extends AbstractPage {
 		element(editParty).waitUntilVisible();
 		editParty.click();
 	}
-	
+
+	public void createFolowUpParty() {
+		element(createFolowUpParty).waitUntilVisible();
+		createFolowUpParty.click();
+	}
+
 	public void deleteParty() {
 		element(deleteParty).waitUntilVisible();
 		deleteParty.click();
+	}
+
+	public void confirmDeleteParty() {
+		element(confirmDeleteParty).waitUntilVisible();
+		confirmDeleteParty.click();
 	}
 
 	public void inviteGuests() {
@@ -85,6 +104,27 @@ public class PartyDetailsPage extends AbstractPage {
 		System.out.println(messageContainer.getText() + " : " + Constants.PARTY_CLOSED);
 		Assert.assertTrue("The status should be Party geschlossen and it's not ", messageContainer.getText().contains(Constants.PARTY_CLOSED));
 
+	}
+
+	public void verifyThatFolowUpPartyAppearsOnPartyDetailsPage(String... terms) {
+		element(folowUpPartysTable).waitUntilVisible();
+		List<WebElement> partiesList = folowUpPartysTable.findElements(By.cssSelector("tbody tr"));
+		boolean foundParty = false;
+		for (WebElement party : partiesList) {
+			boolean foundAllTerms = true;
+			for (String term : terms) {
+				if (!party.getText().contains(term)) {
+					foundAllTerms = false;
+				}
+
+			}
+			if (foundAllTerms) {
+				foundParty = true;
+				break;
+			}
+
+		}
+		Assert.assertTrue("The folow up party was not found", foundParty);
 	}
 
 	public void typePartyAttendersNumber(String number) {

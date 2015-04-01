@@ -1,5 +1,5 @@
 
-package com.tests.uss10.us10001;
+package com.tests.uss10.us10004;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -27,12 +26,11 @@ import com.tools.Constants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
-import com.tools.requirements.Application;
 
-@WithTag(name = "US10001", type = "frontend")
+@WithTag(name = "US10004", type = "frontend")
 //@Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10001CreatePartyWithStylistHostTest extends BaseTest {
+public class US10004CreatePartyWithStylistHostTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -76,9 +74,9 @@ public class US10001CreatePartyWithStylistHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us10001CreatePartyWithStylistHostTest() {
+	public void us10004CreatePartyWithStylistHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		headerSteps.goToCreatePartyPage();;
+		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 	}
