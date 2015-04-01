@@ -136,8 +136,8 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void inputStylistRef(String ref) {
 		element(stylistref).waitUntilVisible();
-		stylistref.clear();
-		stylistref.sendKeys(ref);
+//		stylistref.clear();
+		element(stylistref).typeAndEnter(ref);
 	}
 
 	public void inputStylistEmail(String stylistEmail) {

@@ -32,7 +32,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkNoCoachCheckbox();
 		checkIAgree();
 		submitStep();
-		inputStylistRef(customerData.getFirstName());
+		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
 		submitStep();
 		selectStarterKit();
 		submitStep();
@@ -130,6 +130,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	public void inputStylistRef(String ref) {
 		stylistRegistrationPage().inputStylistRef(ref);
 	}
+	
 
 	// ----------------------------Main Form from create customer
 	@Step
