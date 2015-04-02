@@ -57,8 +57,7 @@ public class ProductDetailsPage extends AbstractPage {
 		element(productName).waitUntilVisible();
 
 		// clean productCode
-		String type = productCode.getText();
-		type = type.replace("Artikelnummer: ", "");
+		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setType(type);
@@ -74,14 +73,12 @@ public class ProductDetailsPage extends AbstractPage {
 		element(productName).waitUntilVisible();
 
 		// clean productCode
-		String type = productCode.getText();
-		type = type.replace("Artikelnummer: ", "");
+		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
 		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
-		// result.setFinaPrice(String.valueOf(BigDecimal.valueOf(Double.parseDouble(result.getPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(result.getQuantity())))));
 
 		return result;
 	}
@@ -91,14 +88,12 @@ public class ProductDetailsPage extends AbstractPage {
 		element(productName).waitUntilVisible();
 
 		// clean productCode
-		String type = productCode.getText();
-		type = type.replace("Artikelnummer: ", "");
+		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
 		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
-		// result.setFinaPrice(String.valueOf(BigDecimal.valueOf(Double.parseDouble(result.getPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(result.getQuantity())))));
 
 		return result;
 	}
@@ -108,16 +103,17 @@ public class ProductDetailsPage extends AbstractPage {
 		element(productName).waitUntilVisible();
 
 		// clean productCode
-		String type = productCode.getText();
-		type = type.replace("Artikelnummer: ", "");
+		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
 		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
-		// result.setFinaPrice(String.valueOf(BigDecimal.valueOf(Double.parseDouble(result.getPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(result.getQuantity())))));
 
 		return result;
 	}
-
+	
+	private String cleanProductCode(String code){
+		return code.replace("Artikelnummer: ", "");
+	}
 }
