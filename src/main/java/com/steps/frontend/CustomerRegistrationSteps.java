@@ -38,6 +38,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
+	@Title("Fill create customer form under context")
 	public void fillCreateCustomerFormUnderContext(CustomerFormModel customerData, AddressModel addressData, String context) {
 
 		getDriver().get(Constants.BASE_FE_URL + context);
@@ -57,6 +58,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
+	@Title("Fill contact details")
 	public void fillContactDetails(AddressModel addressData) {
 		inputStreetAddress(addressData.getStreetAddress());
 		inputStreetNumber(addressData.getStreetNumber());
@@ -289,6 +291,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	@Step
+	@Title("Fill widget registration form")
 	public void fillWidgetRegistrationForm(String code, CustomerFormModel dataModel) {
 		getDriver().get(Constants.BASE_FE_URL + Constants.REGISTER_LANDING_PAGE);
 		registerLandingPage().memberCodeInput(code);
