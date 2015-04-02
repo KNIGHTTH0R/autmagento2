@@ -5,12 +5,11 @@ public class HostBasicProductModel {
 	private String name;
 	private String prodCode;
 	private String quantity;
-	private String unitPrice;	
+	private String unitPrice;
 	private String finalPrice;
 	private String bonusType;
 	private String bunosValue;
 	private String ipPoints;
-
 
 	public String getName() {
 		return name;
@@ -50,14 +49,14 @@ public class HostBasicProductModel {
 
 	public void setFinalPrice(String finalPrice) {
 		this.finalPrice = finalPrice;
-	}	
+	}
 
 	public HostBasicProductModel newProductObject(HostBasicProductModel model) {
 		HostBasicProductModel newProduct = new HostBasicProductModel();
 		newProduct.setName(model.getName());
 		newProduct.setProdCode(model.getProdCode());
 		newProduct.setQuantity(model.getQuantity());
-		newProduct.setUnitPrice(model.getUnitPrice());	
+		newProduct.setUnitPrice(model.getUnitPrice());
 		newProduct.setFinalPrice(model.getFinalPrice());
 
 		return newProduct;

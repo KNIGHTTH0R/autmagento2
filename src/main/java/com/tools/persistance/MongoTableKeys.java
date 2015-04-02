@@ -4,8 +4,6 @@ public class MongoTableKeys {
 	
 	//DB names suffix for 
 
-//	public static final String GRAB = "-GRB";
-//	public static final String CALC = "-CLC";
 	
 	//Keys used for total model FE
 	public static final String DISCOUNT_KEY = "DISCOUNT";
@@ -65,9 +63,6 @@ public class MongoTableKeys {
 	public static final String CART_TOTALS_MODEL = "CartTotalsModel";
 	public static final String SUBTOTAL =  "subtotal";
 	public static final String JEWERLY_BONUS = "jewelryBonus";
-//	public static final String DISCOUNT = "discount";
-//	public static final String DISCOUNT_25 = "discount25";
-//	public static final String DISCOUNT_50 = "discount50";
 	public static final String DISCOUNT_3_PLUS_1 = "discount3To1";
 	public static final String TAX = "tax";
 	public static final String SHIPPING = "shipping";

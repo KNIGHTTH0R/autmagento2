@@ -37,13 +37,13 @@ public class CreateNewContactPage extends AbstractPage {
 
 	@FindBy(id = "flag_member")
 	private WebElement flagMember;
-	
+
 	@FindBy(id = "street_1")
 	private WebElement streetInput;
-	
+
 	@FindBy(css = "div.input-box.address-street input[name*='house_number']")
 	private WebElement houseNumberInput;
-	
+
 	@FindBy(css = "#addContactForm button[type*='submit']")
 	private WebElement sumbitContact;
 
@@ -66,10 +66,12 @@ public class CreateNewContactPage extends AbstractPage {
 		element(streetInput).waitUntilVisible();
 		streetInput.sendKeys(street);
 	}
+
 	public void houseNumberInput(String number) {
 		element(houseNumberInput).waitUntilVisible();
 		houseNumberInput.sendKeys(number);
 	}
+
 	public void postcodeInput(String code) {
 		element(postcode).waitUntilVisible();
 		postcode.sendKeys(code);
@@ -103,6 +105,7 @@ public class CreateNewContactPage extends AbstractPage {
 		element(flagMember).waitUntilVisible();
 		flagMember.click();
 	}
+
 	public void submitContact() {
 		element(sumbitContact).waitUntilVisible();
 		sumbitContact.click();

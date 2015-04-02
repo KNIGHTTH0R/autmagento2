@@ -32,7 +32,7 @@ public class RegularUserDataGrabber {
 		regularUserShippingTotals = new ShippingModel();
 		regularUserConfirmationTotals = new ShippingModel();
 		grabbedRegularConfirmationProductsList = new ArrayList<RegularUserCartProductModel>();
-		
+
 	}
 
 }

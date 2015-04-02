@@ -54,7 +54,6 @@ import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.registration.FacebookRegistrationFormPage;
 import com.pages.frontend.registration.landing.ContactLandingPage;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
-import com.pages.frontend.registration.landing.RegistrationSuccessPage;
 import com.pages.frontend.registration.landing.ThankYouPage;
 import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
@@ -115,7 +114,6 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().get(initURL);
 	}
 
-	// TODO fix this
 	public void wipeRegularCart() {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("schmuckstucke/neu.html", "checkout/cart/clearAllItems/");
@@ -255,6 +253,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public PartyCreationPage partyCreationPage() {
 		return getPages().currentPageAt(PartyCreationPage.class);
 	}
+
 	public UpdatePartyPage updatePartyPage() {
 		return getPages().currentPageAt(UpdatePartyPage.class);
 	}
@@ -347,10 +346,6 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public ThankYouPage thankYouPage() {
 		return getPages().currentPageAt(ThankYouPage.class);
-	}
-
-	public RegistrationSuccessPage registrationSuccessPage() {
-		return getPages().currentPageAt(RegistrationSuccessPage.class);
 	}
 
 	public RegisterLandingPage registerLandingPage() {

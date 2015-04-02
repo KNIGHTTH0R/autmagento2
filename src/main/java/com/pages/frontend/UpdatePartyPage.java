@@ -46,7 +46,8 @@ public class UpdatePartyPage extends AbstractPage {
 		for (int i = 0; i < 7; i++) {
 			nextMonthButton.click();
 		}
-		selectDay();	}
+		selectDay();
+	}
 
 	public void selectFirstAvailableDate() {
 

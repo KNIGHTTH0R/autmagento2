@@ -42,38 +42,38 @@ public class CalcDetailsModel {
 	public String getIpPoints() {
 		return ipPoints;
 	}
-	
-	public void addSegment(String key, String value){
+
+	public void addSegment(String key, String value) {
 		segmentTotals.put(key, value);
 	}
-	
-	public String findSegment(String key){
+
+	public String findSegment(String key) {
 		return segmentTotals.get(key);
 	}
-	
-	public String calculateSegmentsTotal(){
+
+	public String calculateSegmentsTotal() {
 		BigDecimal resultSum = BigDecimal.ZERO;
-		
-		for (String  key : segmentTotals.keySet()) {
+
+		for (String key : segmentTotals.keySet()) {
 			resultSum = resultSum.add(BigDecimal.valueOf(Double.parseDouble(segmentTotals.get(key))));
 		}
-		
+
 		return resultSum.toString();
 	}
-	
-	public void addCalculation(String key, String value){
+
+	public void addCalculation(String key, String value) {
 		calculationsList.put(key, value);
 	}
-	
-	public String findCalculation(String key){
+
+	public String findCalculation(String key) {
 		return calculationsList.get(key);
 	}
-	
-	public Map<String, String> getSegments(){
+
+	public Map<String, String> getSegments() {
 		return segmentTotals;
 	}
-	
-	public Map<String, String> getCalculations(){
+
+	public Map<String, String> getCalculations() {
 		return calculationsList;
 	}
 
@@ -106,11 +106,11 @@ public class CalcDetailsModel {
 	}
 
 	public void addCalculation(Map<String, String> map) {
-		this.calculationsList = map; 
+		this.calculationsList = map;
 	}
-	
+
 	public void addSegments(Map<String, String> map) {
-		this.segmentTotals = map; 
-	} 
+		this.segmentTotals = map;
+	}
 
 }

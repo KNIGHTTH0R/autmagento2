@@ -15,28 +15,26 @@ import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class RegularUserShippingAndConfirmationWorkflows {
-	
+
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
-	
 
-	@Steps 
+	@Steps
 	public static CustomVerification customVerification;
-	
+
 	private static List<RegularBasicProductModel> basicProductsList = new ArrayList<RegularBasicProductModel>();
 	private static List<RegularUserCartProductModel> cartProductsList = new ArrayList<RegularUserCartProductModel>();
-	
-	
+
 	public void setValidateProductsModels(List<RegularBasicProductModel> basicProductsList, List<RegularUserCartProductModel> cartProductsList) {
 		RegularUserShippingAndConfirmationWorkflows.basicProductsList = basicProductsList;
 		RegularUserShippingAndConfirmationWorkflows.cartProductsList = cartProductsList;
 	}
-	
+
 	@Step
 	public void validateProducts(String message) {
 
 		for (RegularBasicProductModel productNow : basicProductsList) {
-			RegularUserCartProductModel compare = findProduct(productNow.getProdCode(),productNow.getQuantity(), cartProductsList);
+			RegularUserCartProductModel compare = findProduct(productNow.getProdCode(), productNow.getQuantity(), cartProductsList);
 
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
@@ -44,7 +42,7 @@ public class RegularUserShippingAndConfirmationWorkflows {
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
 				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
-				
+
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
@@ -60,8 +58,8 @@ public class RegularUserShippingAndConfirmationWorkflows {
 		Assert.assertTrue("Failure: Not all products have been validated . ", cartProductsList.size() == 0);
 
 	}
-	
-	public RegularUserCartProductModel findProduct(String productCode,String quantity,  List<RegularUserCartProductModel> cartProducts) {
+
+	public RegularUserCartProductModel findProduct(String productCode, String quantity, List<RegularUserCartProductModel> cartProducts) {
 		RegularUserCartProductModel result = new RegularUserCartProductModel();
 		theFor: for (RegularUserCartProductModel cartProductModel : cartProducts) {
 			if (cartProductModel.getProdCode().contains(productCode) && cartProductModel.getQuantity().contentEquals(quantity)) {
@@ -71,7 +69,7 @@ public class RegularUserShippingAndConfirmationWorkflows {
 		}
 		return result;
 	}
-	
+
 	private ShippingModel shippingGrabbedModel = new ShippingModel();;
 	private ShippingModel shippingCalculatedModel = new ShippingModel();
 
@@ -79,7 +77,7 @@ public class RegularUserShippingAndConfirmationWorkflows {
 		this.shippingCalculatedModel = shippingCalculatedModel;
 		this.shippingGrabbedModel = shippingTotals;
 	}
-	
+
 	@Step
 	public void verifyShippingTotals(String string) {
 		verifyTotalAmount(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
@@ -87,32 +85,25 @@ public class RegularUserShippingAndConfirmationWorkflows {
 		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
 		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
 	}
-	
-
 
 	@Step
 	public void verifyTotalAmount(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Total Amount dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
-
 	@Step
 	public void verifySubTotals(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Sub Totals dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
-
 
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Shipping Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
 
 	@Step
 	public void verifyDiscountsPrice(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
 
 }

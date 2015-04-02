@@ -111,29 +111,30 @@ public class SurveyPage extends AbstractPage {
 
 		return resultList;
 	}
+
 	public List<HostCartProductModel> grabHostProductsList() {
-		
+
 		element(productListContainer).waitUntilVisible();
 		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
 		List<HostCartProductModel> resultList = new ArrayList<HostCartProductModel>();
-		
+
 		for (WebElement webElementNow : entryList) {
 			HostCartProductModel productNow = new HostCartProductModel();
-			
+
 			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
-			
+
 			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
 			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			resultList.add(productNow);
-			
+
 		}
-		
+
 		HostDataGrabber.grabbedHostShippingProductsList = resultList;
-		
+
 		return resultList;
 	}
 

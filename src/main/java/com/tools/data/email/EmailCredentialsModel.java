@@ -1,7 +1,9 @@
 package com.tools.data.email;
 
 /**
- * This model is used to pass to the [Email]Connector the authentication credentials.
+ * This model is used to pass to the [Email]Connector the authentication
+ * credentials.
+ * 
  * @author voicu.vac
  *
  */

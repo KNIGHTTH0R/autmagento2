@@ -8,6 +8,7 @@ public class ContactHostShippingHostSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
+	@Step
 	public void checkItemNotReceivedYet() {
 		contactHostShippingPage().checkItemNotReceivedYet();
 	}

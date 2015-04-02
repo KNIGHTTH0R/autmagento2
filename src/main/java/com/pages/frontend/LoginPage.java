@@ -16,13 +16,13 @@ public class LoginPage extends AbstractPage {
 
 	@FindBy(id = "send2")
 	private WebElement loginButton;
-	
+
 	@FindBy(css = "button[rel='facebook-connect']")
 	private WebElement facebookLoginButton;
-	
+
 	@FindBy(css = ".col-2.new-users p a")
 	private WebElement stylistRegistrationlink;
-	
+
 	@FindBy(css = "button.button.left")
 	private WebElement customerRegistrationButton;
 
@@ -40,15 +40,17 @@ public class LoginPage extends AbstractPage {
 		element(loginButton).waitUntilVisible();
 		loginButton.click();
 	}
+
 	public void clickGoToCustomerRegistration() {
 		element(customerRegistrationButton).waitUntilVisible();
 		customerRegistrationButton.click();
 	}
-	
+
 	public void clickOnFacebookSignIn() {
 		element(facebookLoginButton).waitUntilVisible();
 		facebookLoginButton.click();
 	}
+
 	public void clickOnStylistRegistrationLink() {
 		element(stylistRegistrationlink).waitUntilVisible();
 		stylistRegistrationlink.click();

@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Model used to hold Totals Section data from the Cart Page.
+ * 
  * @author voicu.vac
  *
  */
@@ -78,6 +79,7 @@ public class CartTotalsModel {
 	public String getJewelryBonus() {
 		return jewelryBonus;
 	}
+
 	public String getMarketingBonus() {
 		return marketingBonus;
 	}
@@ -125,8 +127,6 @@ public class CartTotalsModel {
 	public void setTax(String tax) {
 		this.tax = tax;
 	}
-
-	
 
 	// public String getDiscount25() {
 	// return discount25;

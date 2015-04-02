@@ -36,7 +36,6 @@ public class OrderWorkflows {
 
 			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), productNow.getQuantity(), orderProducts);
 
-
 			PrintUtils.printProductsCompareBackend(productNow, compare);
 			if (compare.getProductName() != null && (productNow.getQuantity().contentEquals(compare.getNumber()))) {
 				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
@@ -107,10 +106,11 @@ public class OrderWorkflows {
 		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());
 
 	}
+
 	public void validateRegularUserCalculationTotals(String string) {
 		PrintUtils.printOrderTotals(calculatedTotals);
 		PrintUtils.printOrderTotals(orderTotalsGrabbed);
-		
+
 		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
 		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
 		verifyShipping(orderTotalsGrabbed.getShipping(), calculatedTotals.getShipping());
@@ -118,7 +118,7 @@ public class OrderWorkflows {
 		verifyTotalPaid(orderTotalsGrabbed.getTotalPaid(), calculatedTotals.getTotalPaid());
 		verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
 		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());
-		
+
 	}
 
 	// ----------------------------------------//
@@ -131,36 +131,28 @@ public class OrderWorkflows {
 
 	@Step
 	public void verifyTotalAmount(String orderValue, String calculation) {
-
 		CustomVerification.verifyTrue("Failure: Total Amount values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 	}
 
 	@Step
 	public void verifyTax(String orderValue, String calculation) {
-
 		CustomVerification.verifyTrue("Failure: Tax values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 	}
 
 	@Step
 	public void verifyShipping(String orderValue, String calculation) {
-
 		CustomVerification.verifyTrue("Failure: Shipping values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 		System.out.println(orderValue + " : " + calculation);
 	}
 
 	@Step
 	public void verifyIP(String orderValue, String calculation) {
-
-		CustomVerification.verifyTrue("Failure: IP values dont match: " + orderValue +	 " - " + calculation, orderValue.contentEquals(calculation));
-
+		CustomVerification.verifyTrue("Failure: IP values dont match: " + orderValue + " - " + calculation, orderValue.contentEquals(calculation));
 	}
 
 	@Step
 	public void verifyJewelryBonus(String orderValue, String calculation) {
-
-		CustomVerification.verifyTrue("Failure: Jewelry bonus values dont match: " +	 orderValue + " - " + calculation, orderValue.contains(calculation));
-		
-
+		CustomVerification.verifyTrue("Failure: Jewelry bonus values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
 	}
 
 	/**
@@ -179,30 +171,22 @@ public class OrderWorkflows {
 
 	@Step
 	public void verifyMarketingBonus(String orderValue, String calculation) {
-
 		CustomVerification.verifyTrue("Failure: Marketing bonus values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
-
 	}
 
 	@Step
 	public void verifyTotalPayable(String orderValue, String calculation) {
-
 		CustomVerification.verifyTrue("Failure: Total Payable values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
-
 	}
 
 	@Step
 	public void verifyTotalPaid(String orderValue, String calculation) {
-
 		CustomVerification.verifyTrue("Failure: Total Paid values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
-
 	}
 
 	@Step
 	public void verifyTotalRefunded(String orderValue, String calculation) {
-
 		CustomVerification.verifyTrue("Failure: Total Refunded values dont match: " + orderValue + " - " + calculation, orderValue.contains(calculation));
-
 	}
 
 	/**

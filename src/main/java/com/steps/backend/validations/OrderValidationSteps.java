@@ -45,10 +45,14 @@ public class OrderValidationSteps extends AbstractSteps {
 		Assert.assertTrue("Failure: Price values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
 
+	/**
+	 * Used only for reporting purposes. Display match names.
+	 * 
+	 * @param productNow
+	 * @param compare
+	 */
 	@Step
 	public void matchName(String productNow, String compare) {
-//		Assert.assertTrue("Failure: Names dont match: " + productNow + " - " + compare, productNow.contains(compare));
-		// Used only for reporting purposes. Display match names.
 	}
 
 	@Step

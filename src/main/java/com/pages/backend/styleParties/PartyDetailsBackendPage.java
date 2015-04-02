@@ -80,7 +80,7 @@ public class PartyDetailsBackendPage extends AbstractPage {
 
 	public void verifyAddBonusSuccessMessage() {
 		element(successMessage).waitUntilVisible();
-		Assert.assertTrue("The mesage should be " + Constants.BOUNUS_SUCCESS_MESSAGE + " and it's not!", successMessage.getText().contains(Constants.BOUNUS_SUCCESS_MESSAGE));
+		Assert.assertTrue("Failure: The mesage should be " + Constants.BOUNUS_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(), successMessage.getText().contains(Constants.BOUNUS_SUCCESS_MESSAGE));
 	}
 
 }

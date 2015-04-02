@@ -9,7 +9,6 @@ import com.tools.requirements.AbstractSteps;
 public class CheckoutValidationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 4274219181280984116L;
-	
 
 	/**
 	 * Validate that the message from the succcess screen, on order process is
@@ -52,8 +51,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 	@Step
 	public void matchName(String productNow, String compare) {
-		// Name is validated on element match - Only for print purposes hence
-		// match not validate
 	}
 
 	@Step

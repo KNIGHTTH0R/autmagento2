@@ -60,6 +60,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
+	@Title("Fill contact details ")
 	public void fillContactDetails(AddressModel addressData) {
 		inputStreetAddress(addressData.getStreetAddress());
 		inputStreetNumber(addressData.getStreetNumber());

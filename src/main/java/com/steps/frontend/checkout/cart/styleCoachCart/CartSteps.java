@@ -92,11 +92,8 @@ public class CartSteps extends  AbstractSteps{
 
 	@Step
 	public void wipeCart(String URL) {
-		//modify URL to wipe cart
 		URL = URL.replace("stylist/lounge/", "checkout/cart/clearAllItems/");
-		//call cart wipe
 		getDriver().get(URL);
-		
 		cartPage().verifyWipeCart();
 	}
 

@@ -44,7 +44,6 @@ public class BillingFormPage extends AbstractPage {
 	public void selectAdressDropdown(String value) {
 		element(addressDropDown).waitUntilVisible();
 		element(addressDropDown).selectByVisibleText(value);
-		// selectFromDropdown(addressDropDown, value);
 	}
 
 	public void inputFirstName(String firstName) {

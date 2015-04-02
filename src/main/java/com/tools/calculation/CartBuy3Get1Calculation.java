@@ -8,7 +8,7 @@ import java.util.List;
 import com.tools.data.frontend.BasicProductModel;
 
 public class CartBuy3Get1Calculation {
-	
+
 	public static BigDecimal calculateBuyThreeGetOneDiscountForEachSegment(List<BasicProductModel> productsList, String discountType) {
 
 		BigDecimal discount = BigDecimal.ZERO;
@@ -37,14 +37,12 @@ public class CartBuy3Get1Calculation {
 		return newList;
 	}
 
-
-
 	public static List<BasicProductModel> applyBuy3Get1OnTheCart(List<BasicProductModel> productsList) {
-		
+
 		BigDecimal remainder = BigDecimal.ZERO;
 
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
-		
+
 		BigDecimal discount = BigDecimal.ZERO;
 		BigDecimal finalPrice = BigDecimal.ZERO;
 
@@ -77,13 +75,13 @@ public class CartBuy3Get1Calculation {
 
 			if (BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1
 					|| BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1) {
-				
-				if (productRemainder.intValue() == 1 && Integer.parseInt(nextproduct.getQuantity()) >= 2) {						
+
+				if (productRemainder.intValue() == 1 && Integer.parseInt(nextproduct.getQuantity()) >= 2) {
 					discount = discount.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP));
 					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(2)).intValue()));
 					remainder = BigDecimal.ZERO;
 				}
-				if (productRemainder.intValue() == 2 && Integer.parseInt(nextproduct.getQuantity()) >= 1) {						
+				if (productRemainder.intValue() == 2 && Integer.parseInt(nextproduct.getQuantity()) >= 1) {
 					discount = discount.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP));
 					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(1)).intValue()));
 					remainder = BigDecimal.ZERO;
@@ -99,12 +97,12 @@ public class CartBuy3Get1Calculation {
 		}
 		return cartProducts;
 	}
-	
+
 	public static BigDecimal calculateTotalBuy3Get1Discount(List<BasicProductModel> productsList) {
 		BigDecimal totalDiscount = BigDecimal.ZERO;
-	
-		BigDecimal remainder = BigDecimal.ZERO;	
-		
+
+		BigDecimal remainder = BigDecimal.ZERO;
+
 		for (int i = 0; i < productsList.size(); i++) {
 			BigDecimal discount = BigDecimal.ZERO;
 			BasicProductModel nextproduct;
@@ -118,19 +116,19 @@ public class CartBuy3Get1Calculation {
 			BigDecimal noOfDiscounts = result[0].setScale(0);
 			BigDecimal productRemainder = result[1].setScale(0);
 			remainder = productRemainder;
-			
+
 			discount = BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
 			discount = discount.multiply(noOfDiscounts);
-			
+
 			if (BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1
 					|| BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).compareTo(BigDecimal.valueOf(Double.parseDouble(nextproduct.getUnitPrice()))) == -1) {
-				
-				if (productRemainder.intValue() == 1 && Integer.parseInt(nextproduct.getQuantity()) >= 2) {						
+
+				if (productRemainder.intValue() == 1 && Integer.parseInt(nextproduct.getQuantity()) >= 2) {
 					discount = discount.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP));
 					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(2)).intValue()));
 					remainder = BigDecimal.ZERO;
 				}
-				if (productRemainder.intValue() == 2 && Integer.parseInt(nextproduct.getQuantity()) >= 1) {						
+				if (productRemainder.intValue() == 2 && Integer.parseInt(nextproduct.getQuantity()) >= 1) {
 					discount = discount.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP));
 					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(1)).intValue()));
 					remainder = BigDecimal.ZERO;
@@ -183,29 +181,31 @@ public class CartBuy3Get1Calculation {
 		} else
 			return false;
 	}
-	//TODO find a better name for this  
-	public static BigDecimal[] determineNoOfProductsBuy3Get1IsAppliedOnAndRemainder(List<BasicProductModel> productsList,BigDecimal remainder) {
-		
-		BigDecimal batchSize = BigDecimal.valueOf(3);		
+
+	// TODO find a better name for this
+	public static BigDecimal[] determineNoOfProductsBuy3Get1IsAppliedOnAndRemainder(List<BasicProductModel> productsList, BigDecimal remainder) {
+
+		BigDecimal batchSize = BigDecimal.valueOf(3);
 		BigDecimal quantity = BigDecimal.ZERO;
-		
+
 		for (BasicProductModel cartProductModel : productsList) {
 			quantity = quantity.add(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getQuantity())));
 		}
 		quantity = quantity.add(remainder);
 		BigDecimal result[] = quantity.divideAndRemainder(batchSize);
-		
-		return result;		
+
+		return result;
 	}
-	public static BigDecimal[] determineHowManyTimesAProductsIsWithHalfPrice(BasicProductModel product,BigDecimal remainder) {
-		
-		BigDecimal batchSize = BigDecimal.valueOf(3);		
+
+	public static BigDecimal[] determineHowManyTimesAProductsIsWithHalfPrice(BasicProductModel product, BigDecimal remainder) {
+
+		BigDecimal batchSize = BigDecimal.valueOf(3);
 		BigDecimal quantity = BigDecimal.valueOf(Double.parseDouble(product.getQuantity()));
-		
+
 		quantity = quantity.add(remainder);
 		BigDecimal result[] = quantity.divideAndRemainder(batchSize);
-		
-		return result;		
+
+		return result;
 	}
 
 }

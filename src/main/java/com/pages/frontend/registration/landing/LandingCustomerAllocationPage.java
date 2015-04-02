@@ -33,7 +33,7 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 	@CacheLookup
 	@FindBy(id = "by_default")
 	private WebElement radioSelectByDefault;
-	
+
 	@FindBy(id = "kostenlos-anmelden")
 	private WebElement submitButton;
 
@@ -64,9 +64,9 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 		}
 
 	}
-	
-	public void submitAndContinue(){
+
+	public void submitAndContinue() {
 		element(submitButton).waitUntilVisible();
-		submitButton.click();	
+		submitButton.click();
 	}
 }

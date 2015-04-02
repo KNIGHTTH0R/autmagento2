@@ -55,6 +55,4 @@ public class OrderProductsWorkflows {
 		Assert.assertTrue("Failure: Not all products have been validated . ", orderProducts.size() == 0);
 
 	}
-
-
 }

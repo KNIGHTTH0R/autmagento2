@@ -8,10 +8,9 @@ public class LoungeSteps extends AbstractSteps {
 
 	public void clickMeinBusiness() {
 		loungePage().clickMeinBusiness();
-		
 	}
-	
-	public void clickCreateParty(){
+
+	public void clickCreateParty() {
 		loungePage().clickCreateParty();
 	}
 

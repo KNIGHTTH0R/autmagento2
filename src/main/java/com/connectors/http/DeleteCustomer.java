@@ -14,21 +14,20 @@ import org.w3c.dom.DOMException;
 import com.tools.Constants;
 import com.tools.SoapKeys;
 
-public class DeleteCustomer extends HttpSoapConnector{
-	
-	public static void main(String args[]) throws SOAPException, IOException{
+public class DeleteCustomer extends HttpSoapConnector {
+
+	public static void main(String args[]) throws SOAPException, IOException {
 		deleteCustomer("26236");
 	}
-	
-	
-	public static SOAPMessage deleteCustomer(String customerId) throws SOAPException, IOException{
+
+	public static SOAPMessage deleteCustomer(String customerId) throws SOAPException, IOException {
 		String sessID = HttpSoapConnector.performLogin();
-		
+
 		System.out.println("Sesion id :" + sessID);
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(deleteCustomerMessage(sessID,customerId), Constants.API_URI);
-		
+		SOAPMessage soapResponse = soapConnection.call(deleteCustomerMessage(sessID, customerId), Constants.API_URI);
+
 		return soapResponse;
 	}
 
@@ -41,7 +40,6 @@ public class DeleteCustomer extends HttpSoapConnector{
 		sessionID.addTextNode(sessID);
 		SOAPElement customerIdElement = customerCustomerDeleteRequestParam.addChildElement(SoapKeys.CUSTOMER_ID);
 		customerIdElement.addTextNode(customerId);
-
 
 		soapMessage.saveChanges();
 

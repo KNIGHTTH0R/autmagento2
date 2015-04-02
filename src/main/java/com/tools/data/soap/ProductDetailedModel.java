@@ -42,37 +42,6 @@ public class ProductDetailedModel {
 	private String ip;
 	private String newsFromDate;
 	private String newsToDate;
-	
-//	public ProductDetailedModel(){
-//		
-//		setType("simple");
-//		setSet("4");
-//		setSku("");
-//		setName("");
-//		setDescription("description");
-//		setShortDescription("desc");
-//		setUrlPath(getName());
-//		setWeight("2");
-//		setStatus("1");
-//		setUrlKey(getName());
-//		setVisibility("4");
-//		setHasOptions("");
-//		setGiftMessageAvailable("");
-//		setPrice("");
-//		setSpecialPrice("");
-//		setSpecialFromDate("");
-//		setSpecialToDate("");
-//		setTaxClassId("2");
-//		setMetaTitle("");
-//		setMetaKeyword("");
-//		setMetaDescription("");
-//		setCustomDesign("");
-//		setCustomLayoutUpdate("");
-//		setOptionsContainer("");
-//		setStore("0");
-//		setIp("50");
-//		setStockData(new StockDataModel());
-//	}
 
 	public String getType() {
 		return type;

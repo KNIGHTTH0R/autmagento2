@@ -28,7 +28,6 @@ public class AddRegularProductsWorkflow {
 	 * @param productProperty
 	 * @return
 	 */
-
 	@StepGroup
 	@Title("Add product to cart")
 	public RegularBasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {

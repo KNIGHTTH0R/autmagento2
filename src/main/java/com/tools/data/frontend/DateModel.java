@@ -1,7 +1,7 @@
 package com.tools.data.frontend;
 
 public class DateModel {
-	
+
 	private String date;
 
 	public String getDate() {

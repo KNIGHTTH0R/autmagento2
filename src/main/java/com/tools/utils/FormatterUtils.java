@@ -10,10 +10,11 @@ import org.junit.Assert;
 import com.tools.Constants;
 
 public class FormatterUtils {
-	
+
 	/**
-	 * This is a helper method to aproximate the (local time RO)
-	 * of a form creation. 1 Hour is substracted from the time (GMT offset)
+	 * This is a helper method to aproximate the (local time RO) of a form
+	 * creation. 1 Hour is substracted from the time (GMT offset)
+	 * 
 	 * @return
 	 */
 	public static String getAndFormatCurrentDate() {
@@ -21,12 +22,12 @@ public class FormatterUtils {
 		Date date = new Date(System.currentTimeMillis() - 3600 * 1000);
 		return dateFormat.format(date);
 	}
-	
+
 	/**
-	 * This method can generate a date in a certain format Ex dd.MM.yyyy;
-	 * and set a date offset from today -> cuttentTime + offset = result
-	 * offset = 3600 (1 hour offset);
-	 * offset = 86400 (24 hour offset)
+	 * This method can generate a date in a certain format Ex dd.MM.yyyy; and
+	 * set a date offset from today -> cuttentTime + offset = result offset =
+	 * 3600 (1 hour offset); offset = 86400 (24 hour offset)
+	 * 
 	 * @param dateFormatPattern
 	 * @param dayOffset
 	 * @return
@@ -48,23 +49,24 @@ public class FormatterUtils {
 
 		return BigDecimal.valueOf(Double.parseDouble(result));
 	}
-	
-	public static String extractPriceFromURL(String url){
-		
+
+	public static String extractPriceFromURL(String url) {
+
 		String result = "";
 		String[] splitter = url.split("&");
 		for (String string : splitter) {
-			if(string.contains("paymentAmount=")){
+			if (string.contains("paymentAmount=")) {
 				result = string.replace("paymentAmount=", "");
 			}
 		}
 		return result;
 	}
-	public static String extractOrderIDFromURL(String url){
+
+	public static String extractOrderIDFromURL(String url) {
 		String result = "";
 		String[] splitter = url.split("&");
 		for (String string : splitter) {
-			if(string.contains("merchantReference=")){
+			if (string.contains("merchantReference=")) {
 				result = string.replace("merchantReference=TEST-PAYMENT-", "");
 			}
 		}

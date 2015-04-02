@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import com.tools.requirements.AbstractPage;
 
 public class OrdersActionsPage extends AbstractPage{
+	
 	@FindBy(css = "#order_history_block button:nth-child(3)")
 	private WebElement markAsPaidButton;
 	
@@ -15,7 +16,6 @@ public class OrdersActionsPage extends AbstractPage{
 		String onClick = markAsPaidButton.getAttribute("onclick");
 		evaluateJavascript("jQuery.noConflict();");
 		onClick += " window.confirm = function(submitConfirmAndReloadPage){return true;};";
-		System.out.println("---- OnClick: " + onClick);
 		evaluateJavascript(onClick);
 		getAlert().accept();
 		evaluateJavascript("jQuery.noConflict();");

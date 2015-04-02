@@ -13,35 +13,33 @@ import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.requirements.AbstractSteps;
 
-public class ConfirmationSteps extends AbstractSteps{
+public class ConfirmationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 4739618000222382968L;
-	
-	public AddressModel grabSippingData(){
+
+	public AddressModel grabSippingData() {
 		return confirmationPage().grabShippingData();
 	}
-	
-	public AddressModel grabBillingData(){
+
+	public AddressModel grabBillingData() {
 		return confirmationPage().grabBillingData();
 	}
-	
+
 	public List<CartProductModel> grabProductsList() {
 		return confirmationPage().grabProductsList();
 	}
-	
-	public List<RegularUserCartProductModel> grabRegularProductsList(){
+
+	public List<RegularUserCartProductModel> grabRegularProductsList() {
 		return confirmationPage().grabRegularProductsList();
 	}
-	public List<HostCartProductModel> grabHostProductsList(){
+
+	public List<HostCartProductModel> grabHostProductsList() {
 		return confirmationPage().grabHostProductsList();
 	}
-	
-//	public CartTotalsModel grabSurveyData() {
-//		return confirmationPage().grabSurveyData();
-//	}
+
 	public ShippingModel grabConfirmationTotals() {
 		waitABit(Constants.TIME_CONSTANT);
-		getDriver().navigate().to(getDriver().getCurrentUrl());  
+		getDriver().navigate().to(getDriver().getCurrentUrl());
 		waitABit(Constants.TIME_CONSTANT);
 		return confirmationPage().grabConfirmationTotals();
 	}
@@ -53,19 +51,18 @@ public class ConfirmationSteps extends AbstractSteps{
 		waitABit(Constants.WAIT_TIME_LONG);
 	}
 
-
 	@Step
-	public void validateBillingAddress(String billingAddress){
+	public void validateBillingAddress(String billingAddress) {
 		AddressModel address = confirmationPage().grabBillingData();
-		CustomVerification.verifyTrue("Billing address is incorrect" , billingAddress.contains(address.getCountryName()));
-		
-	}
-	@Step
-	public void validateShippingAddress(String shippingAddress){
-		AddressModel address = confirmationPage().grabShippingData();
-		CustomVerification.verifyTrue("Shipping address is incorrect" , shippingAddress.contentEquals(address.getCountryName()));
-		
-	}	
+		CustomVerification.verifyTrue("Billing address is incorrect", billingAddress.contains(address.getCountryName()));
 
+	}
+
+	@Step
+	public void validateShippingAddress(String shippingAddress) {
+		AddressModel address = confirmationPage().grabShippingData();
+		CustomVerification.verifyTrue("Shipping address is incorrect", shippingAddress.contentEquals(address.getCountryName()));
+
+	}
 
 }

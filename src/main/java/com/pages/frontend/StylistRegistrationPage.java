@@ -126,7 +126,6 @@ public class StylistRegistrationPage extends AbstractPage {
 		element(passwordInput).waitUntilVisible();
 		passwordInput.clear();
 		passwordInput.sendKeys(passText);
-
 	}
 
 	public void inputConfirmation(String passText) {
@@ -136,7 +135,7 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void inputStylistRef(String ref) {
 		element(stylistref).waitUntilVisible();
-//		stylistref.clear();
+		// stylistref.clear();
 		element(stylistref).typeAndEnter(ref);
 	}
 
@@ -220,7 +219,7 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void selectStarterKit() {
 		waitABit(Constants.TIME_MEDIUM);
-//		element(By.cssSelector("div.starter-kit")).waitUntilVisible();
+		// element(By.cssSelector("div.starter-kit")).waitUntilVisible();
 		elementjQueryClick("input#kit_2567");
 	}
 

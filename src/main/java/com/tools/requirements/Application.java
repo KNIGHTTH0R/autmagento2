@@ -3,43 +3,30 @@ package com.tools.requirements;
 import net.thucydides.core.annotations.Feature;
 
 public class Application {
-	
-//	@Feature
-//	public class Stylist {
-//		public class CreateColaborator {
-//		}
-//	}
-//	@Feature
-//	public class StyleCoach {
-//		public class Shopping {
-//		}
-//		public class Registration {
-//		}
-//	}
-//	@Feature
-//	public class StyleParty {
-//		public class CreateParty {
-//		}
-//		
-//	}
-	
-	
+
 	@Feature
-	public class Shop{
-		public class ForMyselfCart {}
-		public class RegularCart {}
-		public class HostessCart {}
+	public class Shop {
+		public class ForMyselfCart {
+		}
+
+		public class RegularCart {
+		}
+
+		public class HostessCart {
+		}
 	}
-	
+
 	@Feature
-	public class Registration{
-		public class Customer {}
-		public class Stylist {}
+	public class Registration {
+		public class Customer {
+		}
+
+		public class Stylist {
+		}
 	}
-	
+
 	@Feature
-	public class External{
+	public class External {
 	}
-	
-	
+
 }

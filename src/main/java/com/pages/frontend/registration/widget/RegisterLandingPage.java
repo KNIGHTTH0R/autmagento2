@@ -55,7 +55,7 @@ public class RegisterLandingPage extends AbstractPage {
 		element(lastNameInput).waitUntilVisible();
 		lastNameInput.sendKeys(lastName);
 	}
-	
+
 	public void emailInput(String email) {
 		element(emailInput).waitUntilVisible();
 		emailInput.sendKeys(email);

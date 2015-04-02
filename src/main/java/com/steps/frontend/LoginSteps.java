@@ -4,16 +4,17 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.requirements.AbstractSteps;
 
-public class LoginSteps extends AbstractSteps{
+public class LoginSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Step
 	public void clickOnStylistRegistrationLink() {
 		loginPage().clickOnStylistRegistrationLink();
 	}
+
 	@Step
-	public void clickGoToCustomerRegistration(){
+	public void clickGoToCustomerRegistration() {
 		loginPage().clickGoToCustomerRegistration();
 	}
 

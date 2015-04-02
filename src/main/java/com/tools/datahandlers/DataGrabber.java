@@ -39,8 +39,7 @@ public class DataGrabber {
 
 	public static ShippingModel confirmationTotals = new ShippingModel();
 
-
-	public static void wipe(){
+	public static void wipe() {
 		urlModel = new UrlModel();
 		orderModel = new OrderModel();
 
@@ -67,10 +66,10 @@ public class DataGrabber {
 
 		confirmationTotals = new ShippingModel();
 	}
-	
-	public static void addAll25AndMmProducts(){
+
+	public static void addAll25AndMmProducts() {
 		cartProductsList25AndMm.addAll(cartProductsWith25Discount);
 		cartProductsList25AndMm.addAll(cartMarketingMaterialsProducts);
 	}
-	
+
 }

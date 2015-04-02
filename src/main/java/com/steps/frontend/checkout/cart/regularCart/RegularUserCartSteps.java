@@ -4,6 +4,7 @@ package com.steps.frontend.checkout.cart.regularCart;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
@@ -15,6 +16,7 @@ public class RegularUserCartSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
+	@Title("Update product list type")
 	public void selectProductDiscountType(String productCode, String discountType) {
 		regularUserCartPage().selectProductDiscountType(productCode, discountType);
 	}
@@ -25,6 +27,7 @@ public class RegularUserCartSteps extends AbstractSteps {
 	}
 
 	@Step
+	@Title("Update product list")
 	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode, String discountType) {
 		regularUserCartPage().updateProductList(productsList, productCode, discountType);
 	}
@@ -54,11 +57,6 @@ public class RegularUserCartSteps extends AbstractSteps {
 		regularUserCartPage().selectShippingOption(option);
 	}
 
-//	@Step
-//	public void updateProductQuantity(String quantity, String... terms) {
-//		regularUserCartPage().updateProductQuantity(quantity, terms);
-//	}
-
 	@Step
 	public void clickGoToShipping() {
 		regularUserCartPage().clickToShipping();
@@ -70,14 +68,6 @@ public class RegularUserCartSteps extends AbstractSteps {
 		getDriver().navigate().refresh();
 	}
 
-	@Step
-	public void wipeCart(String URL) {
-		// modify URL to wipe cart
-		URL = URL.replace("stylist/lounge/", "checkout/cart/clearAllItems/");
-		// call cart wipe
-		getDriver().get(URL);
-		regularUserCartPage().verifyWipeCart();
-	}
 }
 
 

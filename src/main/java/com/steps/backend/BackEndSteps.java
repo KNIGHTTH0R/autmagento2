@@ -28,7 +28,6 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void performLogin(String userName, String userPass) {
-
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
@@ -79,7 +78,6 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().clickOnLeadSettings();
 	}
 
-	// not present in report
 	public void dismissPopUp() {
 		navigationPage().dismissPopUp();
 	}
@@ -99,7 +97,6 @@ public class BackEndSteps extends AbstractSteps {
 	public String extractEmailConfirmationStatusWithoutLabel() {
 		return customerDetailsHomePage().extractEmailConfirmationStatusWithoutLabel();
 	}
-	
 	
 	public String extractCustomerType() {
 		return customerDetailsHomePage().extractCustomerType();

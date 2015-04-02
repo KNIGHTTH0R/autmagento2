@@ -21,7 +21,7 @@ public class NavigationPage extends AbstractPage {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
 		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-		
+
 		for (WebElement elementNow : elementList) {
 			if (elementNow.getText().contentEquals("Stylecoach")) {
 				elementNow.click();
@@ -29,12 +29,12 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
-	
+
 	public void clickOnStyleParties() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
 		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-		
+
 		for (WebElement elementNow : elementList) {
 			if (elementNow.getText().contentEquals("Style Parties")) {
 				elementNow.click();
@@ -42,6 +42,7 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
+
 	public void clickOnCustomers() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");

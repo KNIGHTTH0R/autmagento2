@@ -21,5 +21,4 @@ public class PaymentPage extends AbstractPage {
 		element(creditCardContainer).waitUntilVisible();
 		creditCardContainer.click();
 	}
-
 }

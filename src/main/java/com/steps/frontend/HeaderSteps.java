@@ -110,8 +110,8 @@ public class HeaderSteps extends AbstractSteps {
 
 	@Step
 	public void validateCustomeStyleCoachName(String boutiqueName, String styleCoachName) {
-		Assert.assertTrue("The stylecoach name and boutique name don't match !", boutiqueName.contentEquals(styleCoachName));
-		Assert.assertFalse(boutiqueName.contentEquals(""));
+		Assert.assertTrue("Failure: The stylecoach name and boutique name don't match !", boutiqueName.contentEquals(styleCoachName));
+		Assert.assertFalse("Failure: The stylecoach name and boutique is empty !", boutiqueName.contentEquals(""));
 	}
 
 	@Step

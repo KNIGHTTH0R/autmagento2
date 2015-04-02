@@ -120,11 +120,6 @@ public class CartWorkflows2 {
 		CustomVerification.verifyTrue("Failure: Total Amount dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
-//	@Step
-//	public void verifyTax(String productNow, String compare) {
-//		CustomVerification.verifyTrue("Failure: TAX dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-//	}
-
 	@Step
 	public void verifyJewelryBonus(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Jewelry Bonus dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
@@ -133,27 +128,21 @@ public class CartWorkflows2 {
 	@Step
 	public void verifySubTotals(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Sub Totals dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
 
 	@Step
 	public void verifyMarketingBonus(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Marketing Bonus dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
 
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Shipping Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
 
 	@Step
 	public void verifyDiscountsPrice(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
-	
-
 
 }

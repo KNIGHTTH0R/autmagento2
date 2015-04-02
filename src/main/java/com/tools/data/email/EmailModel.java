@@ -3,11 +3,10 @@ package com.tools.data.email;
 import java.util.Date;
 
 /**
- * This model is used to hold email related information. 
- * Subject of the email. 
- * Content of the email
- * This model should be used in a list that would represent for example the 
- * INBOX list.
+ * This model is used to hold email related information. Subject of the email.
+ * Content of the email This model should be used in a list that would represent
+ * for example the INBOX list.
+ * 
  * @author voicu.vac
  *
  */

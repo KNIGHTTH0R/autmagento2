@@ -1,4 +1,4 @@
-package com.tools;
+package com.tools.utils;
 
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
