@@ -7,13 +7,14 @@ import com.tools.requirements.AbstractSteps;
 public class ShippingPartySectionSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Step
-	public void clickPartyYesOption(){
+	public void clickPartyYesOption() {
 		regularUserShippingPage().clickPartyYesOption();
 	}
+
 	@Step
-	public void clickPartyNoOption(){
+	public void clickPartyNoOption() {
 		regularUserShippingPage().clickPartyNoOption();
 	}
 

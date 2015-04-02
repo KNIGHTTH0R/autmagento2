@@ -11,7 +11,7 @@ import com.tools.requirements.AbstractSteps;
 public class ValidationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Steps
 	public static CustomVerification customVerification;
 

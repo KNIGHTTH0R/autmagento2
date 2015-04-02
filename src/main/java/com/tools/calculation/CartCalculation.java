@@ -22,8 +22,6 @@ public class CartCalculation {
 	private static BigDecimal remainder00 = BigDecimal.valueOf(0);
 	private static BigDecimal tax = BigDecimal.valueOf(0);
 
-	// private static BigDecimal jBRegularItems = BigDecimal.valueOf(0);
-	// private static BigDecimal sampleRetailSum = BigDecimal.valueOf(0);
 
 	/**
 	 * Return product price based on (price - quantity - discount). Discount may
@@ -179,16 +177,16 @@ public class CartCalculation {
 		result.addSegment(Constants.DISCOUNT_50, remainder50.setScale(2, RoundingMode.HALF_UP).toString());
 		result.addSegment(Constants.DISCOUNT_25, remainder25.setScale(2, RoundingMode.HALF_UP).toString());
 		result.addSegment(Constants.DISCOUNT_0, remainder00.setScale(2, RoundingMode.HALF_UP).toString());
-		//i've added this because is used in calculte shipping total method (and it throws a NullPointerException)
-		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1,"0.00");
+		// i've added this because is used in calculte shipping total method
+		// (and it throws a NullPointerException)
+		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, "0.00");
 
 		result.setTotalAmount(totalAmount.toString());
 		result.setSubTotal(calculateTotalSum(totalsList).getAskingPrice().toString());
 		result.setIpPoints(String.valueOf(calculateIpDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)))));
 
-		calculateTax(calculateTotalSum(totalsList).getAskingPrice(), remainder25, remainder50,
-				BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)).divide(BigDecimal.valueOf(100)),
-				BigDecimal.valueOf(Double.parseDouble(marketingMaterial)).divide(BigDecimal.valueOf(100)));
+		calculateTax(calculateTotalSum(totalsList).getAskingPrice(), remainder25, remainder50, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)).divide(BigDecimal.valueOf(100)), BigDecimal
+				.valueOf(Double.parseDouble(marketingMaterial)).divide(BigDecimal.valueOf(100)));
 
 		result.setTax(tax.toString());
 
@@ -410,8 +408,7 @@ public class CartCalculation {
 			newProduct.setProdCode(product.getProdCode());
 			newProduct.setQuantity(product.getQuantity());
 			newProduct.setProductsPrice(product.getProductsPrice());
-			newProduct.setPriceIP(calculateIpForEachProduct(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())), BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)),
-					sum25));
+			newProduct.setPriceIP(calculateIpForEachProduct(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())), BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25));
 			newProduct.setFinalPrice(calculate25DiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
 					BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25));
 
@@ -471,7 +468,7 @@ public class CartCalculation {
 			newProduct.setProductsPrice(product.getProductsPrice());
 			newProduct.setFinalPrice(product.getFinalPrice());
 			newProduct.setPriceIP(product.getPriceIP());
-			//TODO verify expression
+			// TODO verify expression
 			if (product.getProdCode().equals(cheepest.getProdCode())) {
 				discount = BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
 				finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
@@ -548,8 +545,8 @@ public class CartCalculation {
 			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())));
 		}
 
-		totalAmount = calculateTotalAmount(subtotal, BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50,
-				rabatt25, rabattBuy3Get1);
+		totalAmount = calculateTotalAmount(subtotal, BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50, rabatt25,
+				rabattBuy3Get1);
 
 		tax = totalAmount.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
@@ -567,8 +564,7 @@ public class CartCalculation {
 		return result;
 	}
 
-	public static CalcDetailsModel calculateCartProductsTotalsBuy3GetOneRuleApplied(List<CartProductModel> productsList, String jewerlyDiscount, String marketingDiscount,
-			String taxClass) {
+	public static CalcDetailsModel calculateCartProductsTotalsBuy3GetOneRuleApplied(List<CartProductModel> productsList, String jewerlyDiscount, String marketingDiscount, String taxClass) {
 		CalcDetailsModel result = new CalcDetailsModel();
 
 		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_25);
@@ -603,8 +599,8 @@ public class CartCalculation {
 			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())));
 		}
 
-		totalAmount = calculateTotalAmount(subtotal, BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50,
-				rabatt25, rabattBuy3Get1);
+		totalAmount = calculateTotalAmount(subtotal, BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50, rabatt25,
+				rabattBuy3Get1);
 
 		tax = totalAmount.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
@@ -641,8 +637,7 @@ public class CartCalculation {
 
 		for (CartProductModel cartProductModel : productsList) {
 			if (cartProductModel.getDiscountClass().contains(Constants.DISCOUNT_25)) {
-				discountSum = discountSum.add(calculate25DiscountForEachProduct(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getProductsPrice())), jewelryDiscount,
-						sum25Section));
+				discountSum = discountSum.add(calculate25DiscountForEachProduct(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getProductsPrice())), jewelryDiscount, sum25Section));
 			}
 
 		}
@@ -650,8 +645,8 @@ public class CartCalculation {
 
 	}
 
-	private static BigDecimal calculateTotalAmount(BigDecimal subtotal, BigDecimal jewelryDiscount, BigDecimal marketingDiscount, BigDecimal sum50Discount,
-			BigDecimal sum25Discount, BigDecimal buy3Get1) {
+	private static BigDecimal calculateTotalAmount(BigDecimal subtotal, BigDecimal jewelryDiscount, BigDecimal marketingDiscount, BigDecimal sum50Discount, BigDecimal sum25Discount,
+			BigDecimal buy3Get1) {
 
 		BigDecimal result = BigDecimal.ZERO;
 
@@ -874,8 +869,7 @@ public class CartCalculation {
 
 		// totals calculation
 		BigDecimal totalAmountCalculation = BigDecimal.ZERO;
-		totalAmountCalculation = totalAmountCalculation.add(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())), 2,
-				BigDecimal.ROUND_HALF_DOWN));
+		totalAmountCalculation = totalAmountCalculation.add(apply119VAT(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())), 2, BigDecimal.ROUND_HALF_DOWN));
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 
 		result.setTotalAmount(totalAmountCalculation.toString());
@@ -924,18 +918,19 @@ public class CartCalculation {
 		}
 		return result;
 	}
+
 	public static List<BasicProductModel> remove19(List<BasicProductModel> productsList) {
-		
+
 		List<BasicProductModel> result = new ArrayList<BasicProductModel>();
-		
+
 		for (BasicProductModel productBasicModel : productsList) {
 			BasicProductModel now = new BasicProductModel();
-			
+
 			now.setName(productBasicModel.getName());
 			now.setQuantity(productBasicModel.getQuantity());
 			now.setProdCode(productBasicModel.getProdCode());
 			now.setUnitPrice(apply119VAT(BigDecimal.valueOf(Double.parseDouble(productBasicModel.getUnitPrice())), 2, BigDecimal.ROUND_HALF_DOWN).toString());
-			
+
 			result.add(now);
 		}
 		return result;

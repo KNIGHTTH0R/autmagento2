@@ -39,8 +39,6 @@ public class StylistsCustomerOrderReportPage extends AbstractPage {
 			orderNow.setStatus(status);
 
 			result.add(orderNow);
-
-		
 		}
 
 		return result;

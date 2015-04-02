@@ -35,56 +35,58 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public BasicProductModel setBasicProductAddToCart(String qty, String size,String askingPrice,String finalPrice,String ip,String discountClass) {
+	public BasicProductModel setBasicProductAddToCart(String qty, String size, String askingPrice, String finalPrice, String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
-		}		
-		setQuantity(qty);	
-		
+		}
+		setQuantity(qty);
+
 		result = productDetailsPage().grabBasicProductData();
 		result.setDiscountClass(discountClass);
 		result.setProductsPrice(askingPrice);
 		result.setFinalPrice(finalPrice);
 		result.setPriceIP(ip);
-		
+
 		addToCart();
 		waitABit(Constants.TIME_CONSTANT);
 		return result;
 	}
+
 	@Step
-	public RegularBasicProductModel setRegularBasicProductAddToCart(String qty, String size,String finalPrice) {
+	public RegularBasicProductModel setRegularBasicProductAddToCart(String qty, String size, String finalPrice) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
-		}		
-		setQuantity(qty);	
-		
+		}
+		setQuantity(qty);
+
 		result = productDetailsPage().grabRegularBasicProductData();
-		
+
 		result.setFinalPrice(finalPrice);
 		result.setBonusType(Constants.REGULAR_PRICE);
 		result.setBunosValue("0");
-		
+
 		addToCart();
 		waitABit(Constants.TIME_CONSTANT);
 		return result;
 	}
+
 	@Step
-	public HostBasicProductModel setHostBasicProductAddToCart(String qty, String size,String finalPrice,String ipPoints) {
+	public HostBasicProductModel setHostBasicProductAddToCart(String qty, String size, String finalPrice, String ipPoints) {
 		HostBasicProductModel result = new HostBasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
-		}		
-		setQuantity(qty);	
-		
+		}
+		setQuantity(qty);
+
 		result = productDetailsPage().grabHostBasicProductData();
-		
+
 		result.setFinalPrice(finalPrice);
 		result.setIpPoints(ipPoints);
 		result.setBonusType(Constants.REGULAR_PRICE);
 		result.setBunosValue("0");
-		
+
 		addToCart();
 		waitABit(Constants.TIME_CONSTANT);
 		return result;

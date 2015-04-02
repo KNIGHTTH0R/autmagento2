@@ -23,7 +23,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 		getDriver().get(Constants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
-		loginPage().clickGoToCustomerRegistration();		
+		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		inputEmail(customerData.getEmailName());
@@ -200,6 +200,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	// Create customer from landing page
 	/**
 	 * This form is found on the http//[base.url]/contact-landing-page
+	 * 
 	 * @param dataModel
 	 * @param addressModel
 	 */
@@ -248,7 +249,6 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	 */
 	@Step
 	public String fillThankYouForm(String password) {
-		
 		thankYouPage().passwordInput(password);
 		String email = thankYouPage().getEmailText();
 		thankYouPage().checkIAgree();
@@ -258,12 +258,13 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 	/**
 	 * Assert for the ThankYouPage item - email
+	 * 
 	 * @param expected
 	 * @param actual
 	 */
 	@Step
 	public void verifyCustomerEmail(String expected, String actual) {
-		Assert.assertTrue("Failure: email address not as expected: "+ expected + ", actual: " + actual, expected.contentEquals(actual));
+		Assert.assertTrue("Failure: email address not as expected: " + expected + ", actual: " + actual, expected.contentEquals(actual));
 	}
 
 	/**
@@ -276,18 +277,17 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	/**
-	 * thankyou-register - is the id of the form on the thank you page.
-	 * We verify that the form is not present with this method.
-	 * Page title is also validated  
-	 * Note time wait is large due to slow website.
+	 * thankyou-register - is the id of the form on the thank you page. We
+	 * verify that the form is not present with this method. Page title is also
+	 * validated Note time wait is large due to slow website.
 	 */
 	@Step
 	public void verifySimpleThankYouPage() {
 		waitABit(Constants.WAIT_TIME_LONG);
 		String pageSource = thankYouPage().pageSource();
 		String pageTitle = thankYouPage().pageTitle();
-		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page",pageTitle.contains("Thank you page"));
-		Assert.assertTrue("Failure: Page may contain thankYou register form.",!pageSource.contains("thankyou-register"));
+		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page", pageTitle.contains("Thank you page"));
+		Assert.assertTrue("Failure: Page may contain thankYou register form.", !pageSource.contains("thankyou-register"));
 	}
 
 	@Step
@@ -298,7 +298,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		registerLandingPage().firstNameInput(dataModel.getFirstName());
 		registerLandingPage().lastNameInput(dataModel.getLastName());
 		registerLandingPage().emailInput(dataModel.getEmailName());
-		
+
 		registerLandingPage().passwordInput(dataModel.getPassword());
 		registerLandingPage().passwordConfirmInput(dataModel.getPassword());
 		registerLandingPage().checkIAgree();

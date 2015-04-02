@@ -8,6 +8,7 @@ import com.tools.requirements.AbstractSteps;
 
 public class PromotionSteps extends AbstractSteps {
 
+	//TODO - Change this to a workflow class or a propper Step file
 	@Steps
 	public BackEndSteps backEndSteps;
 
@@ -15,14 +16,14 @@ public class PromotionSteps extends AbstractSteps {
 
 	public void activateRule() {
 		getDriver().get(Constants.BE_URL_RULE_BUY3GET1);
-		backEndSteps.performLogin("admin", "admin1234");
+		backEndSteps.performLogin(Constants.BE_USER, Constants.BE_PASS);
 		shoppingCartPriceRulesPage().activateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
 
 	public void deactivateRule() {
 		getDriver().get(Constants.BE_URL_RULE_BUY3GET1);
-		backEndSteps.performLogin("admin", "admin1234");
+		backEndSteps.performLogin(Constants.BE_USER, Constants.BE_PASS);
 		shoppingCartPriceRulesPage().deactivateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
@@ -36,20 +37,21 @@ public class PromotionSteps extends AbstractSteps {
 
 	public void deactivateBuy3Get1ForRegular() {
 		getDriver().get(Constants.BE_URL_RULE_BUY3GET1_FOR_REGULAR);
-		backEndSteps.performLogin("admin", "admin1234");
+		backEndSteps.performLogin(Constants.BE_USER, Constants.BE_PASS);
 		shoppingCartPriceRulesPage().deactivateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
+
 	public void activateBuy3Get1ForHost() {
 		getDriver().get(Constants.BE_URL_RULE_BUY3GET1_FOR_HOST);
-		backEndSteps.performLogin("admin", "admin1234");
+		backEndSteps.performLogin(Constants.BE_USER, Constants.BE_PASS);
 		shoppingCartPriceRulesPage().activateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
-	
+
 	public void deactivateBuy3Get1ForHost() {
 		getDriver().get(Constants.BE_URL_RULE_BUY3GET1_FOR_HOST);
-		backEndSteps.performLogin("admin", "admin1234");
+		backEndSteps.performLogin(Constants.BE_USER, Constants.BE_PASS);
 		shoppingCartPriceRulesPage().deactivateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}

@@ -61,14 +61,13 @@ public class EmailSteps extends AbstractSteps {
 		return resultURL;
 	}
 
-
 	public String extractUrlFromEmailMessage(String email) {
 		String row = grabRowFromMessage(email);
 		int matchStart = 0;
 		int matchEnd = 0;
 		int occ = 0;
-		Pattern urlPattern = Pattern.compile("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?",
-				Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+		Pattern urlPattern = Pattern.compile("(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?", Pattern.CASE_INSENSITIVE
+				| Pattern.MULTILINE | Pattern.DOTALL);
 		Matcher matcher = urlPattern.matcher(row);
 		while (matcher.find() & occ < 1) {
 			occ++;

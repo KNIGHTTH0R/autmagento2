@@ -72,8 +72,7 @@ public class HostCartBuy3Get1Calculation {
 			newProduct.setFinalPrice(product.getFinalPrice());
 			newProduct.setIpPoints(product.getIpPoints());
 
-			ipDiscount = BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())).divide(BigDecimal.valueOf(Double.parseDouble(product.getQuantity())), 5,
-					BigDecimal.ROUND_HALF_UP);
+			ipDiscount = BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())).divide(BigDecimal.valueOf(Double.parseDouble(product.getQuantity())), 5, BigDecimal.ROUND_HALF_UP);
 			ipDiscount = ipDiscount.divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
 			ipDiscount = ipDiscount.multiply(noOfDiscounts);
 
@@ -83,16 +82,14 @@ public class HostCartBuy3Get1Calculation {
 				BigDecimal extraIpDiscount = BigDecimal.ZERO;
 
 				if (productRemainder.intValue() == 1 && Integer.parseInt(nextproduct.getQuantity()) >= 2) {
-					extraIpDiscount = BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())).divide(BigDecimal.valueOf(Double.parseDouble(product.getQuantity())), 5,
-							BigDecimal.ROUND_HALF_UP);
+					extraIpDiscount = BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())).divide(BigDecimal.valueOf(Double.parseDouble(product.getQuantity())), 5, BigDecimal.ROUND_HALF_UP);
 					extraIpDiscount = extraIpDiscount.divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
 					ipDiscount = ipDiscount.add(extraIpDiscount);
 					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(2)).intValue()));
 					remainder = BigDecimal.ZERO;
 				}
 				if (productRemainder.intValue() == 2 && Integer.parseInt(nextproduct.getQuantity()) >= 1) {
-					extraIpDiscount = BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())).divide(BigDecimal.valueOf(Double.parseDouble(product.getQuantity())), 5,
-							BigDecimal.ROUND_HALF_UP);
+					extraIpDiscount = BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())).divide(BigDecimal.valueOf(Double.parseDouble(product.getQuantity())), 5, BigDecimal.ROUND_HALF_UP);
 					extraIpDiscount = extraIpDiscount.divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
 					ipDiscount = ipDiscount.add(extraIpDiscount);
 					nextproduct.setQuantity(String.valueOf(BigDecimal.valueOf(Double.parseDouble(nextproduct.getQuantity())).subtract(BigDecimal.valueOf(1)).intValue()));

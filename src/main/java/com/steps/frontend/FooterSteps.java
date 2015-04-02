@@ -38,7 +38,7 @@ public class FooterSteps extends AbstractSteps {
 	public void clickTraumkarriereStyleCoachLink() {
 		footerPage().clickTraumkarriereStyleCoachLink();
 	}
-	
+
 	@StepGroup
 	public void navigateToRegisterFormFromStarterSetLink() {
 		footerPage().clickStarterSetLink();
@@ -73,7 +73,7 @@ public class FooterSteps extends AbstractSteps {
 		stylistCampaignPage().clickStarteJetztButton();
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();
 	}
-	
+
 	@StepGroup
 	public void navigateToRegisterFormFromRegistrierungLink() {
 		footerPage().clickRegistrierungLink();

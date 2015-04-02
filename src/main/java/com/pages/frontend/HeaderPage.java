@@ -32,7 +32,7 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = "a[title='Profil']")
 	private WebElement profileButton;
-	
+
 	@FindBy(css = "a[title='Style Coach Lounge']")
 	private WebElement loungeButton;
 
@@ -91,6 +91,7 @@ public class HeaderPage extends AbstractPage {
 		element(abmeldenButton).waitUntilVisible();
 		abmeldenButton.click();
 	}
+
 	public void clickLounge() {
 		element(loungeButton).waitUntilVisible();
 		loungeButton.click();
@@ -101,8 +102,8 @@ public class HeaderPage extends AbstractPage {
 	}
 
 	public String getStyleCoachFirstNameFromProfile() {
-		
-		String styleCoachNameParts[] = null ;
+
+		String styleCoachNameParts[] = null;
 		List<WebElement> infoBoxList = getDriver().findElements(By.cssSelector(".info-box"));
 		for (WebElement infoBox : infoBoxList) {
 			if (infoBox.getText().contains("MEIN STYLE COACH")) {
@@ -112,8 +113,8 @@ public class HeaderPage extends AbstractPage {
 		}
 		return styleCoachNameParts[0].toLowerCase();
 	}
-	
-	public void navigateToPartyPage(String url){
+
+	public void navigateToPartyPage(String url) {
 		getDriver().get(url);
 	}
 

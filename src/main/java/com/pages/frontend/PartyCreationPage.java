@@ -22,16 +22,16 @@ public class PartyCreationPage extends AbstractPage {
 
 	@FindBy(id = "date")
 	private WebElement dateSelect;
-	
+
 	@FindBy(id = "addContact")
 	private WebElement addContact;
 
 	@FindBy(css = "input#hostedBy_contact")
 	private WebElement hostedByCustomer;
-	
+
 	@FindBy(css = "input#contact")
 	private WebElement customerName;
-	
+
 	@FindBy(css = "ul li.ui-menu-item a")
 	private WebElement selectContact;
 
@@ -43,7 +43,7 @@ public class PartyCreationPage extends AbstractPage {
 
 	@FindBy(css = ".button[type*='submit']")
 	private WebElement partySubmitButton;
-	
+
 	@FindBy(id = "city")
 	private WebElement cityInput;
 
@@ -51,7 +51,7 @@ public class PartyCreationPage extends AbstractPage {
 		element(addContact).waitUntilVisible();
 		addContact.click();
 	}
-	
+
 	public void clickOrderForHostess() {
 		element(orderForHostessButton).waitUntilVisible();
 		orderForHostessButton.click();
@@ -74,14 +74,14 @@ public class PartyCreationPage extends AbstractPage {
 		locationContainer.sendKeys(location);
 
 	}
+
 	public void typeCustomerName(String name) {
 		element(customerName).waitUntilVisible();
 		element(customerName).sendKeys(name);
 		element(selectContact).waitUntilVisible();
 		element(selectContact).click();
 		waitABit(1000);
-		
-		
+
 	}
 
 	public String selectFirstAvailableDate() {

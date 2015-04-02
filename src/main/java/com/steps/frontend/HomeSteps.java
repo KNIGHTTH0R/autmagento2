@@ -6,13 +6,13 @@ import net.thucydides.core.annotations.StepGroup;
 import com.tools.Constants;
 import com.tools.requirements.AbstractSteps;
 
-public class HomeSteps extends AbstractSteps{
+public class HomeSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
+
 	@Step
 	public void clickStyleCoachLink() {
 		homePage().clickStyleCoachLink();
-		
 	}
 
 	@StepGroup
@@ -22,7 +22,7 @@ public class HomeSteps extends AbstractSteps{
 		stylistCampaignPage().clickJetztStartenButton();
 		starterSetPage().clickOnJetztStartenFromStarterSet();
 	}
-	
+
 	@StepGroup
 	public void navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt() {
 		getDriver().get(Constants.BASE_FE_URL);
@@ -31,5 +31,5 @@ public class HomeSteps extends AbstractSteps{
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();
 
 	}
-	
+
 }
