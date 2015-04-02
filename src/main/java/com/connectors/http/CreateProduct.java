@@ -7,11 +7,11 @@ import java.util.List;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-import com.tools.FieldGenerators;
-import com.tools.FieldGenerators.Mode;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
+import com.tools.utils.FieldGenerators;
 import com.tools.utils.FormatterUtils;
+import com.tools.utils.FieldGenerators.Mode;
 
 public class CreateProduct {
 

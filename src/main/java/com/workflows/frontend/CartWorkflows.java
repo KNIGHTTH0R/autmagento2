@@ -19,53 +19,47 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 
-
 public class CartWorkflows {
 
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
-
-	@Steps 
+	@Steps
 	public static CustomVerification customVerification;
 
 	private static List<CartProductModel> cartProductsModelGrabbedList = new ArrayList<CartProductModel>();
 	private static List<CartProductModel> cartProductsModelCalculatedList = new ArrayList<CartProductModel>();
-	
-
 	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private static List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
-	
 	private static AddressModel billingAddress = new AddressModel();
 	private static String billingCountryName;
 	private static AddressModel shippingAddress = new AddressModel();
 	private static String shippingCountryName;
 
-	public void setBillingAddressModels(String billingCountryName,AddressModel billingAddress) {
+	public void setBillingAddressModels(String billingCountryName, AddressModel billingAddress) {
 		CartWorkflows.billingAddress = billingAddress;
 		CartWorkflows.billingCountryName = billingCountryName;
 	}
-	
-	public void validateBillingAddress(String message){
-		verifyCountry(billingCountryName,billingAddress.getCountryName());
-		
+
+	public void validateBillingAddress(String message) {
+		verifyCountry(billingCountryName, billingAddress.getCountryName());
+
 	}
-	
-	public void setShippingAddressModels(String shippingCountryName,AddressModel shippingAddress) {
+
+	public void setShippingAddressModels(String shippingCountryName, AddressModel shippingAddress) {
 		CartWorkflows.shippingAddress = shippingAddress;
 		CartWorkflows.shippingCountryName = shippingCountryName;
 	}
-	
-	public void validateShippingAddress(String message){
-		verifyCountry(shippingCountryName,shippingAddress.getCountryName());
-		
+
+	public void validateShippingAddress(String message) {
+		verifyCountry(shippingCountryName, shippingAddress.getCountryName());
+
 	}
-	
+
 	@Step
 	public void verifyCountry(String address, String countryName) {
 		CustomVerification.verifyTrue("Failure: Countries dont match !", address.contains(countryName));
 	}
-	
-	
+
 	public void setValidateProductsModels(List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {
 		CartWorkflows.productsList = productsList;
 		CartWorkflows.cartProducts = cartProducts;
@@ -75,7 +69,7 @@ public class CartWorkflows {
 	public void validateProducts(String message) {
 
 		for (ProductBasicModel productNow : productsList) {
-			CartProductModel compare = findProduct(productNow.getType(),productNow.getQuantity(), cartProducts);
+			CartProductModel compare = findProduct(productNow.getType(), productNow.getQuantity(), cartProducts);
 
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
@@ -89,18 +83,18 @@ public class CartWorkflows {
 
 			int index = cartProducts.indexOf(compare);
 			if (index > -1) {
-	
+
 				cartProducts.remove(index);
 				System.out.println("index of " + compare.getName() + " removed");
 				System.out.println(cartProducts.size() + " items remained");
-			
+
 			}
 		}
 		Assert.assertTrue("Failure: Products list is empty. ", productsList.size() != 0);
 		Assert.assertTrue("Failure: Not all products have been validated . ", cartProducts.size() == 0);
 
 	}
-	
+
 	public void setRecalculatedCartProductsModels(List<CartProductModel> cartProductsModelGrabbedList, List<CartProductModel> cartProductsModelCalculatedList) {
 		CartWorkflows.cartProductsModelGrabbedList = cartProductsModelGrabbedList;
 		CartWorkflows.cartProductsModelCalculatedList = cartProductsModelCalculatedList;
@@ -110,7 +104,7 @@ public class CartWorkflows {
 	public void validateRecalculatedProducts(String message) {
 
 		for (CartProductModel productNow : cartProductsModelGrabbedList) {
-			CartProductModel compare = findProduct(productNow.getProdCode(),productNow.getQuantity(), cartProductsModelCalculatedList);
+			CartProductModel compare = findProduct(productNow.getProdCode(), productNow.getQuantity(), cartProductsModelCalculatedList);
 
 			compare.setQuantity(compare.getQuantity().replace("x", "").trim());
 
@@ -135,7 +129,6 @@ public class CartWorkflows {
 		Assert.assertTrue("Failure: Not all products have been validated . ", cartProductsModelCalculatedList.size() == 0);
 
 	}
-	
 
 	private CalculationModel calculationModel = new CalculationModel();
 	private CartTotalsModel cartTotalModel = new CartTotalsModel();
@@ -163,7 +156,7 @@ public class CartWorkflows {
 				cartTotalModel.getIpPoints().equals(String.valueOf(calculationModel.getIpPoints())));
 	}
 
-	public CartProductModel findProduct(String productCode,String quantity,  List<CartProductModel> cartProducts) {
+	public CartProductModel findProduct(String productCode, String quantity, List<CartProductModel> cartProducts) {
 		CartProductModel result = new CartProductModel();
 		theFor: for (CartProductModel cartProductModel : cartProducts) {
 			if (cartProductModel.getProdCode().contains(productCode) && cartProductModel.getQuantity().contentEquals(quantity)) {
@@ -193,15 +186,15 @@ public class CartWorkflows {
 		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
 
 	}
-	
+
 	@StepGroup
 	public void verifyTotalsDiscountNoMarketing(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
 		verifyTax(discountTotals.getTax(), discountCalculationModel.getTax());
-		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());		
+		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());
 		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
-		
+
 	}
 
 	@Step

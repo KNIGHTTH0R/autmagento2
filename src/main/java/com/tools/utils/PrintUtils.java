@@ -39,6 +39,7 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getPriceIP());
 		}
 	}
+
 	public static void printListBasicProductModel(List<BasicProductModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		System.out.println("list size is : " + list.size());
@@ -54,6 +55,7 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getDiscountClass());
 		}
 	}
+
 	public static void printListRegularBasicProductModel(List<RegularBasicProductModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		System.out.println("list size is : " + list.size());
@@ -62,13 +64,14 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getName());
 			System.out.println(cartProductModel.getProdCode());
 			System.out.println(cartProductModel.getQuantity());
-			System.out.println(cartProductModel.getUnitPrice());		
+			System.out.println(cartProductModel.getUnitPrice());
 			System.out.println(cartProductModel.getFinalPrice());
 			System.out.println(cartProductModel.getBonusType());
 			System.out.println(cartProductModel.getBunosValue());
-		
+
 		}
 	}
+
 	public static void printListHostBasicProductModel(List<HostBasicProductModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		System.out.println("list size is : " + list.size());
@@ -77,14 +80,15 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getName());
 			System.out.println(cartProductModel.getProdCode());
 			System.out.println(cartProductModel.getQuantity());
-			System.out.println(cartProductModel.getUnitPrice());		
+			System.out.println(cartProductModel.getUnitPrice());
 			System.out.println(cartProductModel.getFinalPrice());
 			System.out.println(cartProductModel.getIpPoints());
 			System.out.println(cartProductModel.getBonusType());
 			System.out.println(cartProductModel.getBunosValue());
-			
+
 		}
 	}
+
 	public static void printListRegularCartProductModel(List<RegularUserCartProductModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		System.out.println("list size is : " + list.size());
@@ -93,11 +97,12 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getName());
 			System.out.println(cartProductModel.getProdCode());
 			System.out.println(cartProductModel.getQuantity());
-			System.out.println(cartProductModel.getUnitPrice());		
-			System.out.println(cartProductModel.getFinalPrice());			
-				
+			System.out.println(cartProductModel.getUnitPrice());
+			System.out.println(cartProductModel.getFinalPrice());
+
 		}
 	}
+
 	public static void printListHostCartProductModel(List<HostCartProductModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		System.out.println("list size is : " + list.size());
@@ -106,10 +111,10 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getName());
 			System.out.println(cartProductModel.getProdCode());
 			System.out.println(cartProductModel.getQuantity());
-			System.out.println(cartProductModel.getUnitPrice());		
-			System.out.println(cartProductModel.getFinalPrice());			
-			System.out.println(cartProductModel.getIpPoints());			
-				
+			System.out.println(cartProductModel.getUnitPrice());
+			System.out.println(cartProductModel.getFinalPrice());
+			System.out.println(cartProductModel.getIpPoints());
+
 		}
 	}
 
@@ -150,31 +155,33 @@ public class PrintUtils {
 		System.out.println("total amount " + model.getTotalAmount());
 		System.out.println("ip " + model.getIpPoints());
 	}
+
 	public static void printRegularUserCartTotalsModel(RegularUserCartTotalsModel model) {
 		System.out.println(" *** Print Total section from Cart *** ");
 		System.out.println("------------------------");
 		System.out.println("subtotal " + model.getSubtotal());
-	
+
 		for (String discountNow : model.getDiscountsMap().keySet()) {
 			System.out.println("Discount " + discountNow + ": " + model.getDiscountsMap().get(discountNow));
 		}
 		System.out.println("tax " + model.getTax());
 		System.out.println("shiping " + model.getShipping());
 		System.out.println("total amount " + model.getTotalAmount());
-		
+
 	}
+
 	public static void printHostCartTotalsModel(HostCartTotalsModel model) {
 		System.out.println(" *** Print Total section from Cart *** ");
 		System.out.println("------------------------");
 		System.out.println("subtotal " + model.getSubtotal());
-		
+
 		for (String discountNow : model.getDiscountsMap().keySet()) {
 			System.out.println("Discount " + discountNow + ": " + model.getDiscountsMap().get(discountNow));
 		}
 		System.out.println("tax " + model.getTax());
 		System.out.println("shiping " + model.getShipping());
 		System.out.println("total amount " + model.getTotalAmount());
-		
+
 	}
 
 	public static void printOrderInfo(OrderInfoModel model) {
@@ -211,7 +218,7 @@ public class PrintUtils {
 		System.out.println(model.getTotalFortyDiscounts());
 		System.out.println(model.getTotalBonusJeverly());
 		System.out.println(model.getTotalMarketingBonus());
-		
+
 		for (String discountNow : model.getDiscountsMap().keySet()) {
 			System.out.println(discountNow + ": " + model.getDiscountsMap().get(discountNow));
 		}
@@ -249,15 +256,15 @@ public class PrintUtils {
 		System.out.println(basicProduct.getQuantity() + " - " + orderProduct.getNumber());
 		System.out.println(basicProduct.getType() + " - " + orderProduct.getProductCode());
 	}
-	
+
 	public static void printProductsComparisonBackend(BasicProductModel basicProduct, OrderItemModel orderProduct) {
 		System.out.println(basicProduct.getName() + " - " + orderProduct.getProductName());
 		System.out.println(basicProduct.getUnitPrice() + " - " + orderProduct.getPrice());
 		System.out.println(basicProduct.getQuantity() + " - " + orderProduct.getNumber());
 		System.out.println(basicProduct.getProdCode() + " - " + orderProduct.getProductCode());
 	}
-	
-	public static void printStylistPropertiesModel(StylistPropertiesModel model){
+
+	public static void printStylistPropertiesModel(StylistPropertiesModel model) {
 		System.out.println(model.getType());
 		System.out.println(model.getStatus());
 		System.out.println(model.getJewelryreceived());
@@ -296,6 +303,7 @@ public class PrintUtils {
 		System.out.println("ip " + productNow.getPriceIP());
 		System.out.println("final " + productNow.getFinalPrice());
 	}
+
 	public static void printBasicProductModel(BasicProductModel productNow) {
 		System.out.println("------------------------");
 		System.out.println("name " + productNow.getName());
@@ -308,7 +316,7 @@ public class PrintUtils {
 	}
 
 	public static void printShippingTotals(ShippingModel shippingTotals) {
-		System.out.println("------------------------");		
+		System.out.println("------------------------");
 		System.out.println("SubTotal " + shippingTotals.getSubTotal());
 		System.out.println("DiscountPrice " + shippingTotals.getDiscountPrice());
 		System.out.println("ShippingPrice " + shippingTotals.getShippingPrice());
@@ -317,13 +325,12 @@ public class PrintUtils {
 
 	public static void printProductBasicModel(ProductBasicModel productNow) {
 
-
 		System.out.println("PBM -----------------------------");
 		System.out.println("Name : " + productNow.getName());
 		System.out.println("Price : " + productNow.getPrice());
 		System.out.println("Qty : " + productNow.getQuantity());
 		System.out.println("Type: " + productNow.getType());
-		
+
 	}
 
 	public static void printCalcDetailsModel(CalcDetailsModel calculatedDetailsModel) {
@@ -336,30 +343,27 @@ public class PrintUtils {
 		System.out.println("tax : " + calculatedDetailsModel.getTax());
 		System.out.println("Segments : " + calculatedDetailsModel.getSegments());
 		System.out.println("Calculations : " + calculatedDetailsModel.getCalculations());
-		
-		
+
 	}
+
 	public static void printRegularCartCalcDetailsModel(RegularCartCalcDetailsModel calculatedDetailsModel) {
 		System.out.println("printRegularCartCalcDetailsModel -----------------------------");
 
 		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
-		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());		
+		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());
 		System.out.println("tax : " + calculatedDetailsModel.getTax());
 		System.out.println("Segments : " + calculatedDetailsModel.getSegments());
-		
-		
-		
+
 	}
+
 	public static void printHostCartCalcDetailsModel(HostCartCalcDetailsModel calculatedDetailsModel) {
 		System.out.println("printRegularCartCalcDetailsModel -----------------------------");
-		
+
 		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
-		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());		
+		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());
 		System.out.println("tax : " + calculatedDetailsModel.getTax());
 		System.out.println("ip : " + calculatedDetailsModel.getIpPoints());
 		System.out.println("Segments : " + calculatedDetailsModel.getSegments());
-		
-		
-		
+
 	}
 }

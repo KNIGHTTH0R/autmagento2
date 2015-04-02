@@ -18,8 +18,6 @@ public class ShippingAndConfirmationWorkflows {
 	
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
-	
-
 	@Steps 
 	public static CustomVerification customVerification;
 	
@@ -86,32 +84,25 @@ public class ShippingAndConfirmationWorkflows {
 		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
 		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
 	}
-	
-
 
 	@Step
 	public void verifyTotalAmount(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Total Amount dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
-
 	@Step
 	public void verifySubTotals(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Sub Totals dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
-
 
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Shipping Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
 
 	@Step
 	public void verifyDiscountsPrice(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
-
 	}
 
 }

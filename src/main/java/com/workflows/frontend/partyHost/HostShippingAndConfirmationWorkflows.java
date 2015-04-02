@@ -18,14 +18,11 @@ public class HostShippingAndConfirmationWorkflows {
 	
 	@Steps
 	public static CheckoutValidationSteps checkoutValidationSteps;
-	
-
 	@Steps 
 	public static CustomVerification customVerification;	
 	
 	private static List<HostBasicProductModel> basicProductsList = new ArrayList<HostBasicProductModel>();
 	private static List<HostCartProductModel> cartProductsList = new ArrayList<HostCartProductModel>();
-	
 	
 	public void setValidateProductsModels(List<HostBasicProductModel> basicProductsList, List<HostCartProductModel> cartProductsList) {
 		HostShippingAndConfirmationWorkflows.basicProductsList = basicProductsList;
