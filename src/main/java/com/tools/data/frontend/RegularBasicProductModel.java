@@ -5,11 +5,10 @@ public class RegularBasicProductModel {
 	private String name;
 	private String prodCode;
 	private String quantity;
-	private String unitPrice;	
+	private String unitPrice;
 	private String finalPrice;
 	private String bonusType;
 	private String bunosValue;
-
 
 	public String getName() {
 		return name;
@@ -49,14 +48,14 @@ public class RegularBasicProductModel {
 
 	public void setFinalPrice(String finalPrice) {
 		this.finalPrice = finalPrice;
-	}	
+	}
 
 	public RegularBasicProductModel newProductObject(RegularBasicProductModel model) {
 		RegularBasicProductModel newProduct = new RegularBasicProductModel();
 		newProduct.setName(model.getName());
 		newProduct.setProdCode(model.getProdCode());
 		newProduct.setQuantity(model.getQuantity());
-		newProduct.setUnitPrice(model.getUnitPrice());	
+		newProduct.setUnitPrice(model.getUnitPrice());
 		newProduct.setFinalPrice(model.getFinalPrice());
 
 		return newProduct;

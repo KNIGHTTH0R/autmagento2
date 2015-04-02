@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Model used to hold Totals Section data from the Cart Page.
+ * 
  * @author voicu.vac
  *
  */
@@ -23,7 +24,7 @@ public class HostCartTotalsModel {
 		setTax("");
 		setShipping("");
 		setTotalAmount("");
-	
+
 	}
 
 	public void addDiscount(String key, String value) {
@@ -71,17 +72,6 @@ public class HostCartTotalsModel {
 		return subtotal;
 	}
 
-//	public String getJewelryBonus() {
-//		return jewelryBonus;
-//	}
-//	public String getMarketingBonus() {
-//		return marketingBonus;
-//	}
-//
-//	public void setMarketingBonus(String marketingBonus) {
-//		this.marketingBonus = marketingBonus;
-//	}
-
 	public String getShipping() {
 		return shipping;
 	}
@@ -93,10 +83,6 @@ public class HostCartTotalsModel {
 	public void setSubtotal(String subtotal) {
 		this.subtotal = subtotal;
 	}
-
-//	public void setJewelryBonus(String jewelryBonus) {
-//		this.jewelryBonus = jewelryBonus;
-//	}
 
 	public void setShipping(String shipping) {
 		this.shipping = shipping;
@@ -113,39 +99,5 @@ public class HostCartTotalsModel {
 	public void setTax(String tax) {
 		this.tax = tax;
 	}
-
-	
-
-	// public String getDiscount25() {
-	// return discount25;
-	// }
-	//
-	// public String getDiscount50() {
-	// return discount50;
-	// }
-	//
-	// public String getDiscount3To1() {
-	// return discount3To1;
-	// }
-	//
-	// public void setDiscount25(String discount25) {
-	// this.discount25 = discount25;
-	// }
-	//
-	// public void setDiscount50(String discount50) {
-	// this.discount50 = discount50;
-	// }
-	//
-	// public void setDiscount3To1(String discount3To1) {
-	// this.discount3To1 = discount3To1;
-	// }
-	//
-	// public String getDiscount() {
-	// return discount;
-	// }
-	//
-	// public void setDiscount(String discount) {
-	// this.discount = discount;
-	// }
 
 }

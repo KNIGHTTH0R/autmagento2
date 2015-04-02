@@ -1,4 +1,3 @@
-
 package com.tools.datahandlers.regularUser;
 
 import java.util.ArrayList;
@@ -38,13 +37,12 @@ public class RegularUserCartCalculator {
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass, voucherValue);
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 	}
+
 	public static void calculateCartBuy3Get1CartAndShippingTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {
 		allProductsListWithRegularPrice = getProductswithRegularPriceFromList(allProductsList);
-		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotalsWithBuy3Get1Active (allProductsList,allProductsListWithRegularPrice, discountClass, voucherValue);
+		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsList, allProductsListWithRegularPrice, discountClass, voucherValue);
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
-		
+
 	}
-		
 
 }
-

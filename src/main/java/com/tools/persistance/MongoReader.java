@@ -269,24 +269,25 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+
 	public static List<RegularBasicProductModel> grabRegularBasicProductModel(String testName) {
 		DBObject dbObject = null;
 		List<RegularBasicProductModel> itemList = new ArrayList<RegularBasicProductModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.REGULAR_BASIC_PRODUCT_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				RegularBasicProductModel result = new RegularBasicProductModel();
 				dbObject = cursor.next();
-				
+
 				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
 				result.setProdCode(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
 				result.setUnitPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
 				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_QUANTITY));
 				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
-				
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -296,18 +297,19 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+
 	public static List<HostBasicProductModel> grabHostBasicProductModel(String testName) {
 		DBObject dbObject = null;
 		List<HostBasicProductModel> itemList = new ArrayList<HostBasicProductModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.HOST_BASIC_PRODUCT_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				HostBasicProductModel result = new HostBasicProductModel();
 				dbObject = cursor.next();
-				
+
 				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
 				result.setProdCode(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
 				result.setUnitPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
@@ -390,24 +392,25 @@ public class MongoReader extends MongoConnector {
 		return itemList;
 
 	}
+
 	@SuppressWarnings("unchecked")
 	public static List<RegularCartCalcDetailsModel> grabRegularCartCalcDetailsModels(String testName) {
 		DBObject dbObject = null;
 		List<RegularCartCalcDetailsModel> itemList = new ArrayList<RegularCartCalcDetailsModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.REGULAR_CART_CALC_DETAILS_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				RegularCartCalcDetailsModel result = new RegularCartCalcDetailsModel();
-				dbObject = cursor.next();				
-				
+				dbObject = cursor.next();
+
 				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
 				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
 				result.addSegments(((Map<String, String>) dbObject.get(MongoTableKeys.SEGMENTS)));
-				
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -416,27 +419,28 @@ public class MongoReader extends MongoConnector {
 			cursor.close();
 		}
 		return itemList;
-		
+
 	}
+
 	@SuppressWarnings("unchecked")
 	public static List<HostCartCalcDetailsModel> grabHostCartCalcDetailsModels(String testName) {
 		DBObject dbObject = null;
 		List<HostCartCalcDetailsModel> itemList = new ArrayList<HostCartCalcDetailsModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.HOST_CART_CALC_DETAILS_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				HostCartCalcDetailsModel result = new HostCartCalcDetailsModel();
-				dbObject = cursor.next();				
-				
+				dbObject = cursor.next();
+
 				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
 				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
 				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
 				result.addSegments(((Map<String, String>) dbObject.get(MongoTableKeys.SEGMENTS)));
-				
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -445,7 +449,7 @@ public class MongoReader extends MongoConnector {
 			cursor.close();
 		}
 		return itemList;
-		
+
 	}
 
 	public static List<ShippingModel> grabShippingModel(String testName) {

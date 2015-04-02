@@ -27,5 +27,5 @@ public class AbstractPage extends PageObject {
 	public void elementjQueryMouseOver(String element) {
 		evaluateJavascript("var dd =jQuery(' " + element + " ').eq(1);dd.mouseover(); ");
 	}
-	
+
 }
