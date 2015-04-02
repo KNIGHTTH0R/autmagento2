@@ -90,7 +90,6 @@ public class CartSteps extends  AbstractSteps{
 		cartPage().typeMarketingBonus(marketingBonus);
 	}
 
-	//TODO - Duplicate
 	@Step
 	public void wipeCart(String URL) {
 		URL = URL.replace("stylist/lounge/", "checkout/cart/clearAllItems/");

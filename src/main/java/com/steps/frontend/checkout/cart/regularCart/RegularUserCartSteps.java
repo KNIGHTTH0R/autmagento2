@@ -68,13 +68,6 @@ public class RegularUserCartSteps extends AbstractSteps {
 		getDriver().navigate().refresh();
 	}
 
-	//TODO - Duplicate
-	@Step
-	public void wipeCart(String URL) {
-		URL = URL.replace("stylist/lounge/", "checkout/cart/clearAllItems/");
-		getDriver().get(URL);
-		regularUserCartPage().verifyWipeCart();
-	}
 }
 
 

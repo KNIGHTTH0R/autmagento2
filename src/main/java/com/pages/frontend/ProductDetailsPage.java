@@ -67,7 +67,6 @@ public class ProductDetailsPage extends AbstractPage {
 		return result;
 	}
 
-	// TODO refactoring purpose
 	public BasicProductModel grabBasicProductData() {
 		BasicProductModel result = new BasicProductModel();
 		element(productName).waitUntilVisible();

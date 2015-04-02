@@ -114,7 +114,6 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().get(initURL);
 	}
 
-	// TODO fix this
 	public void wipeRegularCart() {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("schmuckstucke/neu.html", "checkout/cart/clearAllItems/");
