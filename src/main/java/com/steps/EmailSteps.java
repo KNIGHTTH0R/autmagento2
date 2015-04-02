@@ -48,22 +48,25 @@ public class EmailSteps extends AbstractSteps {
 		return resultURL;
 	}
 
-	public String grabRowFromMessage(String message) {
+	public String grabRowFromMessage(String message, String searchedRow) {
 		String resultURL = null;
 		String[] lines = message.split("\n");
+		boolean foundRow = false;
 		for (String stringNow : lines) {
-			if (stringNow.contains("customer/party/confirm")) {
+			if (stringNow.contains(searchedRow)) {
 				resultURL = stringNow;
+				foundRow = true;
 				break;
 			}
 
 		}
+		Assert.assertTrue("The searched row was not found", foundRow);
 		return resultURL;
 	}
 
-
-	public String extractUrlFromEmailMessage(String email) {
-		String row = grabRowFromMessage(email);
+	public String extractUrlFromEmailMessage(String email, String searchedRow) {
+		String row = grabRowFromMessage(email, searchedRow);
+		String link = null;
 		int matchStart = 0;
 		int matchEnd = 0;
 		int occ = 0;
@@ -75,7 +78,8 @@ public class EmailSteps extends AbstractSteps {
 			matchStart = matcher.start(1);
 			matchEnd = matcher.end();
 		}
-		String link = row.substring(matchStart, matchEnd);
+		link = row.substring(matchStart, matchEnd);
+		Assert.assertTrue("The link is null", link != null);
 		return link;
 	}
 }

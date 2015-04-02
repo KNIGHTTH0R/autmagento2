@@ -21,6 +21,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
+import com.steps.frontend.UpdatePartySteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
@@ -32,10 +33,12 @@ import com.tools.persistance.MongoWriter;
 @WithTag(name = "US10004", type = "frontend")
 // @Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10004InviteGuestsAndDeletePartyTest extends BaseTest {
+public class US10004InviteRegisteredGuestUpdateAndDeletePartyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
+	@Steps
+	public UpdatePartySteps updatePartySteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -47,13 +50,11 @@ public class US10004InviteGuestsAndDeletePartyTest extends BaseTest {
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
-
-	public CustomerFormModel customerData;
+	private String customerEmail, customerPassword,customerName;
 
 	@Before
 	public void setUp() throws Exception {
-
-		customerData = new CustomerFormModel();
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -63,6 +64,11 @@ public class US10004InviteGuestsAndDeletePartyTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			
+			customerEmail = prop.getProperty("customerUsername");
+			customerPassword = prop.getProperty("customerPassword");
+			customerName = prop.getProperty("customerName");
+			
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -84,19 +90,18 @@ public class US10004InviteGuestsAndDeletePartyTest extends BaseTest {
 	}
 
 	@Test
-	public void us10004InviteGuestsAndDeletePartyTest() {
+	public void us10004InviteRegisteredGuestUpdateAndDeletePartyTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.sendInvitationToGest(customerData);
-		partyDetailsSteps.verifyThatGuestIsInvited(customerData);
+		partyDetailsSteps.sendInvitationToGest(customerName,customerEmail);
+		partyDetailsSteps.verifyThatGuestIsInvited(customerName);
+		partyDetailsSteps.editParty();
+		updatePartySteps.updatePartyDateAndHour();
 		partyDetailsSteps.deleteParty();
 
 	}
 	
-	@After
-	public void saveData() {
-		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName());
-	}
+
 
 }

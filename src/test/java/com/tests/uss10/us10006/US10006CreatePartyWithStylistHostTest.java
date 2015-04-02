@@ -1,0 +1,93 @@
+
+package com.tests.uss10.us10006;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.WithTag;
+import net.thucydides.junit.runners.ThucydidesRunner;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.connectors.mongo.MongoConnector;
+import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.LoungeSteps;
+import com.steps.frontend.PartyCreationSteps;
+import com.steps.frontend.PartyDetailsSteps;
+import com.tests.BaseTest;
+import com.tools.Constants;
+import com.tools.data.UrlModel;
+import com.tools.persistance.MongoWriter;
+
+@WithTag(name = "US10006", type = "frontend")
+//@Story(Application.StyleParty.CreateParty.class)
+@RunWith(ThucydidesRunner.class)
+public class US10006CreatePartyWithStylistHostTest extends BaseTest {
+
+	@Steps
+	public PartyDetailsSteps partyDetailsSteps;
+	@Steps
+	public CustomerRegistrationSteps customerRegistrationSteps;
+	@Steps
+	public HeaderSteps headerSteps;
+	@Steps
+	public LoungeSteps loungeSteps;
+	@Steps
+	public PartyCreationSteps partyCreationSteps;
+	public static UrlModel urlModel = new UrlModel();
+
+	private String username, password;
+
+	@Before
+	public void setUp() throws Exception {
+
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
+			prop.load(input);
+			username = prop.getProperty("username");
+			password = prop.getProperty("password");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+
+	}
+
+	@Test
+	public void us10006CreatePartyWithStylistHostTest() {
+		customerRegistrationSteps.performLogin(username, password);
+		headerSteps.goToCreatePartyPage();
+		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
+		partyDetailsSteps.verifyPlannedPartyAvailableActions();
+		
+	}
+
+	@After
+	public void saveData() {
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
+		
+	}
+}
+

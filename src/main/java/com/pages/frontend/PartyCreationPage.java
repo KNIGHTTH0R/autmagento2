@@ -84,20 +84,20 @@ public class PartyCreationPage extends AbstractPage {
 		
 	}
 
-	public String selectFirstAvailableDate() {
+	public void selectFirstAvailableDate() {
 
 		element(dateSelect).waitUntilVisible();
 		dateSelect.click();
 		element(firstAvailableDateButton).waitUntilVisible();
 		firstAvailableDateButton.click();
-		return dateSelect.getText();
+
 	}
 
-	public String selectFirstAvailableHour() {
+	public void selectFirstAvailableHour() {
 
 		List<WebElement> hoursList = hourSelectDropDown.findElements(By.xpath("//option[not(@disabled)]"));
-		hoursList.get(0).click();
-		return hourSelectDropDown.getText();
+		hoursList.get(1).click();
+		
 
 	}
 

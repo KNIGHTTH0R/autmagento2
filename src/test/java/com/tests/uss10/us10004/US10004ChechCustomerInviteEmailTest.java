@@ -1,4 +1,4 @@
-package com.tests.uss10.us10005;
+package com.tests.uss10.us10004;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +12,7 @@ import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +37,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US10005", type = "external")
 // @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
+public class US10004ChechCustomerInviteEmailTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -56,7 +57,7 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
 			email = prop.getProperty("customerUsername");
 			password = prop.getProperty("customerPassword");
@@ -75,6 +76,8 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 		}
 
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
+		System.out.println(email);
+		System.out.println(emailPassword);
 
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
 		emailData.setProtocol(EmailConstants.PROTOCOL);
@@ -86,18 +89,13 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 	}
 
 	@Test
-	public void us10005VerifyHostPartyCreationEmailTest() {
+	public void us10004ChechCustomerInviteEmailTest() {
 
 		frontEndSteps.performLogin(email, password);
+		String message = gmailConnector.searchForMail("", Constants.INVITE_EMAIL_SUBJECT, true);
+		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message, "registriere Dich bitte hier"));
+		System.out.println(urlModel.getUrl());
 
-		String message = gmailConnector.searchForMail("", Constants.PARTY_CREATION_EMAIL_SUBJECT, true);
-		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message,"customer/party/confirm"));
-
-		customVerifications.printErrors();
 	}
 
-	@After
-	public void saveData() {
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
-	}
 }

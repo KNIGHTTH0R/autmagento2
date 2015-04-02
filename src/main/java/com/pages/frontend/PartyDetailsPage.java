@@ -59,6 +59,9 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "table.data-table.follow-up-parties")
 	private WebElement folowUpPartysTable;
 
+	@FindBy(css = "div.col-main.pos-rel")
+	private WebElement partyDetailsAndActionsContainer;
+
 	public void closeParty() {
 		element(closeParty).waitUntilVisible();
 		closeParty.click();
@@ -99,11 +102,91 @@ public class PartyDetailsPage extends AbstractPage {
 		popupPartyCloseButton.click();
 	}
 
-	public void verifyThatPartyIsClosed() {
-		element(messageContainer).waitUntilVisible();
-		System.out.println(messageContainer.getText() + " : " + Constants.PARTY_CLOSED);
-		Assert.assertTrue("The status should be Party geschlossen and it's not ", messageContainer.getText().contains(Constants.PARTY_CLOSED));
+	public void verifyEditLink(boolean editLinkIsPresent) {
+		if (editLinkIsPresent) {
+			Assert.assertTrue("The edit link should be present and it's not", partyDetailsAndActionsContainer.getText().contains("Style Party bearbeiten"));
+		} else {
+			Assert.assertFalse("The edit link should not be present", partyDetailsAndActionsContainer.getText().contains("Style Party bearbeiten"));
+		}
 
+	}
+
+	public void verifyDeleteLink(boolean deleteLinkIsPresent) {
+		if (deleteLinkIsPresent) {
+			Assert.assertTrue("The delete link should be present and it's not", partyDetailsAndActionsContainer.getText().contains("Style Party löschen"));
+		} else {
+			Assert.assertFalse("The delete link should not be present", partyDetailsAndActionsContainer.getText().contains("Style Party löschen"));
+		}
+
+	}
+	public void verifyInviteGuestsLink(boolean inviteGuestsLinkIsPresent) {
+		if (inviteGuestsLinkIsPresent) {
+			Assert.assertTrue("The invite guests button should be present and it's not", partyDetailsAndActionsContainer.getText().contains("GÄSTE EINLADEN"));
+		} else {
+			Assert.assertFalse("The invite guests button should not be present", partyDetailsAndActionsContainer.getText().contains("GÄSTE EINLADEN"));
+		}
+		
+	}
+	public void verifyFolowUpPartyLink(boolean folowUpPartyLinkIsPresent) {
+		if (folowUpPartyLinkIsPresent) {
+			Assert.assertTrue("The follow up button should be present and it's not", partyDetailsAndActionsContainer.getText().contains("LEGE EINE FOLGEPARTY AN"));
+		} else {
+			Assert.assertFalse("The follow up button should not be present", partyDetailsAndActionsContainer.getText().contains("LEGE EINE FOLGEPARTY AN"));
+		}
+		
+	}
+	public void verifyCustomerOrderLink(boolean customerOrderLinkIsPresent) {
+		if (customerOrderLinkIsPresent) {
+			Assert.assertTrue("The customer order button should be present and it's not", partyDetailsAndActionsContainer.getText().contains("FÜR EINE KUNDIN BESTELLEN"));
+		} else {
+			Assert.assertFalse("The customer order button should not be present", partyDetailsAndActionsContainer.getText().contains("FÜR EINE KUNDIN BESTELLEN"));
+		}
+		
+	}
+	public void verifyClosePartyLink(boolean closePartyLinkIsPresent) {
+		if (closePartyLinkIsPresent) {
+			Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains("STYLE PARTY SCHLIESSEN"));
+		} else {
+			Assert.assertFalse("The close party  button should not be present", partyDetailsAndActionsContainer.getText().contains("STYLE PARTY SCHLIESSEN"));
+		}
+		
+	}
+
+	public void verifyPartyStatus(String status) {
+		element(messageContainer).waitUntilVisible();
+		Assert.assertTrue("The status should be" + status + "and it's not ", messageContainer.getText().contains(status));
+
+	}
+
+	public void verifyPlannedPartyAvailableActions() {
+		element(partyDetailsAndActionsContainer).waitUntilVisible();
+		verifyPartyStatus(Constants.PARTY_PLANNED);
+		verifyEditLink(true);
+		verifyDeleteLink(true);
+		verifyInviteGuestsLink(true);
+		verifyFolowUpPartyLink(false);
+		verifyCustomerOrderLink(false);
+		verifyClosePartyLink(false);
+	}
+	public void verifyActivePartyAvailableActions() {
+		element(partyDetailsAndActionsContainer).waitUntilVisible();
+		verifyPartyStatus(Constants.PARTY_ACTIVE);
+		verifyEditLink(false);
+		verifyDeleteLink(false);
+		verifyInviteGuestsLink(true);
+		verifyFolowUpPartyLink(true);
+		verifyCustomerOrderLink(true);
+		verifyClosePartyLink(true);
+	}
+	public void verifyClosedPartyAvailableActions() {
+		element(partyDetailsAndActionsContainer).waitUntilVisible();
+		verifyPartyStatus(Constants.PARTY_CLOSED);
+		verifyEditLink(false);
+		verifyDeleteLink(false);
+		verifyInviteGuestsLink(false);
+		verifyFolowUpPartyLink(false);
+		verifyCustomerOrderLink(false);
+		verifyClosePartyLink(false);
 	}
 
 	public void verifyThatFolowUpPartyAppearsOnPartyDetailsPage(String... terms) {
@@ -148,12 +231,12 @@ public class PartyDetailsPage extends AbstractPage {
 		element(guestMessage).sendKeys(message);
 	}
 
-	public void verifyThatGuestIsInvited(CustomerFormModel customerData) {
+	public void verifyThatGuestIsInvited(String name) {
 		element(invitationsList).waitUntilVisible();
 		List<WebElement> invitesList = invitationsList.findElements(By.cssSelector("tbody tr"));
 		boolean found = false;
 		for (WebElement invite : invitesList) {
-			if (invite.findElement(By.cssSelector("td:first-child")).getText().contentEquals(customerData.getFirstName())) {
+			if (invite.findElement(By.cssSelector("td:first-child")).getText().contentEquals(name)) {
 				found = true;
 			}
 

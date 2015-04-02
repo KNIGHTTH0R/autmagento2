@@ -91,7 +91,7 @@ public class US10005VerifyHostPartyCreationEmailTest extends BaseTest {
 		frontEndSteps.performLogin(email, password);
 
 		String message = gmailConnector.searchForMail("", Constants.PARTY_CREATION_EMAIL_SUBJECT, true);
-		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message));
+		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message,"customer/party/confirm"));
 		System.out.println(urlModel.getUrl());
 		customVerifications.printErrors();
 	}

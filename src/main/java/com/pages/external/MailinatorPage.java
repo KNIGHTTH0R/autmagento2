@@ -87,6 +87,13 @@ public class MailinatorPage extends AbstractPage {
 		System.out.println("Confirm link: " + confirmLink);
 		return confirmLink;
 	}
+	public String registerFromEmail() {
+		getDriver().switchTo().frame(iFrameElement);
+		element(mailContainer).waitUntilVisible();
+		String confirmLink = mailContainer.findElement(By.cssSelector("a[href*='https://staging-aut.pippajean.com/qateam/customer/account/create/']")).getAttribute("href");
+		System.out.println("Confirm link: " + confirmLink);
+		return confirmLink;
+	}
 	
 	public String grabCouponCode(){
 		getDriver().switchTo().frame(iFrameElement);

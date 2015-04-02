@@ -93,7 +93,7 @@ public class US10002UpdatePartyTest extends BaseTest {
 		customerRegistrationSteps.performLogin(username, password);
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.sendInvitationToGest(customerData);
-		partyDetailsSteps.verifyThatGuestIsInvited(customerData);
+		partyDetailsSteps.verifyThatGuestIsInvited(customerData.getFirstName());
 		partyDetailsSteps.editParty();
 		updatePartySteps.updatePartyDateAndHour();
 

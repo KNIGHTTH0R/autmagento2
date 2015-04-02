@@ -18,7 +18,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US10003", type = "external")
 //@Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
-public class US10003CheckInviteEmailTest extends BaseTest {
+public class US10003CheckInviteEmailAndRegistratiionLinkTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -28,9 +28,9 @@ public class US10003CheckInviteEmailTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US10003ClosePartyTest").size();
+		int size = MongoReader.grabCustomerFormModels("US10003InviteNoRegisteredContactAndClosePartyTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US10003ClosePartyTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US10003InviteNoRegisteredContactAndClosePartyTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
 
@@ -39,7 +39,7 @@ public class US10003CheckInviteEmailTest extends BaseTest {
 	@Test
 	public void us10003CheckInviteEmailTest() {
 		emailClientSteps.openMailinator();
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + Constants.WEB_MAIL, ""), Constants.INVITE_EMAIL_SUBJECT);
+		emailClientSteps.validateThatEmailIsReceivedAndClickRegister(stylistEmail.replace("@" + Constants.WEB_MAIL, ""), Constants.INVITE_EMAIL_SUBJECT);
 
 	}
 
