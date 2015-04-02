@@ -45,7 +45,7 @@ public class PartyListBackendPage extends AbstractPage {
 				break theFor;
 			}
 		}
-		Assert.assertTrue("the party was not found in the list", found);
+		Assert.assertTrue("Failure: Open Party Details - The party was not found in the list", found);
 	}
 
 }

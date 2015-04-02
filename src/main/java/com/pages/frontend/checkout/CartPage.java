@@ -45,7 +45,6 @@ public class CartPage extends AbstractPage {
 	@FindBy(id = "marketing_credits")
 	private WebElement marketingBonusInput;
 	
-	
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
 	

@@ -44,11 +44,10 @@ public class CartPage extends AbstractPage {
 
 	@FindBy(id = "marketing_credits")
 	private WebElement marketingBonusInput;
-	
-	
+
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
-	
+
 	@FindBy(className = "shopping-bag-form")
 	private WebElement formContainer;
 
@@ -138,7 +137,7 @@ public class CartPage extends AbstractPage {
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
-		
+
 		return resultList;
 	}
 
@@ -167,7 +166,7 @@ public class CartPage extends AbstractPage {
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
-		
+
 		return resultList;
 	}
 
@@ -227,7 +226,7 @@ public class CartPage extends AbstractPage {
 			}
 
 		}
-		
+
 		DataGrabber.cartTotals = resultModel;
 
 		return resultModel;
@@ -292,9 +291,9 @@ public class CartPage extends AbstractPage {
 	public void verifyWipeCart() {
 		element(cartMainContainer).waitUntilVisible();
 		System.out.println("TEXT from CONTAINER: " + cartMainContainer.getText());
-		
+
 		Assert.assertTrue(cartMainContainer.getText().contains("WARENKORB IST LEER"));
-		
+
 	}
 
 }

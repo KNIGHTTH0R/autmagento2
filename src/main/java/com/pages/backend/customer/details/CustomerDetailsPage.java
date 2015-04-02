@@ -41,7 +41,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		for (WebElement elemNow : elementList) {
 			if (elemNow.getText().contains("E-Mail-Adresse"))
 				status = elemNow.getText();
-				status = status.replace("Bestätigte E-Mail-Adresse:", "").trim();
+			status = status.replace("Bestätigte E-Mail-Adresse:", "").trim();
 		}
 
 		return status;

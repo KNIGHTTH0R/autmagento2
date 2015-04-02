@@ -19,8 +19,9 @@ import com.tools.data.email.EmailCredentialsModel;
 import com.tools.data.email.EmailModel;
 
 /**
- * Due to new implementation Gmail Connector needs to be initialized with EmailCredentialsModel, 
- * that contains: host, protocol, username and password.
+ * Due to new implementation Gmail Connector needs to be initialized with
+ * EmailCredentialsModel, that contains: host, protocol, username and password.
+ * 
  * @author voicu.vac
  *
  */
@@ -30,7 +31,7 @@ public class GmailConnector {
 	private static String protocol;
 	private static String username;
 	private static String password;
-	
+
 	public GmailConnector(EmailCredentialsModel emailData) {
 		host = emailData.getHost();
 		protocol = emailData.getProtocol();
@@ -39,8 +40,9 @@ public class GmailConnector {
 	}
 
 	/**
-	 * Return a list of e-mails as EmailModel. 
-	 * Note: To be used for mongo persistance if needed.
+	 * Return a list of e-mails as EmailModel. Note: To be used for mongo
+	 * persistance if needed.
+	 * 
 	 * @return
 	 * @throws MessagingException
 	 */
@@ -72,8 +74,9 @@ public class GmailConnector {
 	}
 
 	/**
-	 * Search for email by searchKey - email content, also filter by emailAddress.
-	 * Flag for Delete found email.
+	 * Search for email by searchKey - email content, also filter by
+	 * emailAddress. Flag for Delete found email.
+	 * 
 	 * @param emailAddress
 	 * @param searchKey
 	 * @param deleteAfter
@@ -112,10 +115,18 @@ public class GmailConnector {
 
 	/**
 	 * Connect to email account and return INBOX messages.
+	 * 
 	 * @return
 	 */
 	private Message[] connect() {
 		Properties props2 = System.getProperties();
+		// added props
+		// props2.put("mail.smtp.starttls.enable","true");
+		// props2.put("mail.smtp.debug", "true");
+		// props2.put("mail.smtp.auth", "true");
+		// props2.put("mail.smtp.socketFactory.port", "587");
+		// props2.put("mail.smtp.socketFactory.fallback", "false");
+
 		Session session2 = Session.getDefaultInstance(props2, null);
 		props2.setProperty(EmailConstants.EMAIL_STORE, protocol);
 		Message message[] = null;
@@ -136,10 +147,10 @@ public class GmailConnector {
 
 	/**
 	 * Will return the message as a string from multipart type of content.
+	 * 
 	 * @param message
 	 * @return
 	 */
-	
 	private String getStringFromMessage(Message message) {
 		StringBuilder textContent = new StringBuilder("");
 		try {

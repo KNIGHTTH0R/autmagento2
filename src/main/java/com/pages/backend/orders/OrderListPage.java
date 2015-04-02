@@ -2,11 +2,11 @@ package com.pages.backend.orders;
 
 import java.util.List;
 
+import net.thucydides.core.annotations.findby.FindBy;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import net.thucydides.core.annotations.findby.FindBy;
 
 import com.tools.requirements.AbstractPage;
 
@@ -14,7 +14,7 @@ public class OrderListPage extends AbstractPage {
 
 	@FindBy(id = "sales_order_grid_filter_real_order_id")
 	private WebElement orderIdInput;
-	
+
 	@FindBy(id = "sales_order_grid_filter_billing_name")
 	private WebElement orderNameInput;
 
@@ -30,11 +30,8 @@ public class OrderListPage extends AbstractPage {
 		orderIdInput.clear();
 		element(orderIdInput).typeAndEnter(orderId);
 	}
+
 	public void inputOrderName(String name) {
-//		evaluateJavascript("jQuery.noConflict();");
-//		waitFor(ExpectedConditions.visibilityOf(orderNameInput));
-//		orderNameInput.clear();
-//		element(orderNameInput).typeAndEnter(name);
 		WebElement element = getDriver().findElement(By.id("sales_order_grid_filter_billing_name"));
 		element.clear();
 		element(element).typeAndEnter(name);

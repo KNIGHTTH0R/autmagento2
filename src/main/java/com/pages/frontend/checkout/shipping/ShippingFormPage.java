@@ -41,14 +41,6 @@ public class ShippingFormPage extends AbstractPage {
 	@FindBy(css = "input#same_as_billing")
 	private WebElement sameAsBilling;
 
-	/**
-	 * Select from dropdown an existing address or the "NEUE ADRESSE' value
-	 */
-//	public void selectAdressDropdown(String value) {
-//		element(addressDropDown).waitUntilVisible();
-//		selectFromDropdown(addressDropDown, value);
-//	}
-
 	public void inputFirstName(String firstName) {
 		element(firstNameInput).waitUntilVisible();
 		firstNameInput.sendKeys(firstName);
@@ -97,11 +89,10 @@ public class ShippingFormPage extends AbstractPage {
 		if ((checked && !isSelected) || (!checked && isSelected))
 			sameAsBilling.click();
 	}
-	
+
 	public void selectShippingAddress(String value) {
 		element(addressDropDown).waitUntilVisible();
 		element(addressDropDown).selectByVisibleText(value);
-		
 	}
 
 }

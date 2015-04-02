@@ -99,7 +99,6 @@ public class ConfirmationPage extends AbstractPage {
 
 	}
 
-
 	public AddressModel grabBillingData() {
 		AddressModel result = new AddressModel();
 		element(billingContainer).waitUntilVisible();
@@ -125,19 +124,6 @@ public class ConfirmationPage extends AbstractPage {
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
 	}
-
-	// public CartTotalsModel grabSurveyData() {
-	// CartTotalsModel result = new CartTotalsModel();
-	// element(surveyTotalsContainer).waitUntilVisible();
-	//
-	// result.setSubtotal(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
-	// result.addDiscount(MongoTableKeys.DISCOUNT_KEY,
-	// FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
-	// result.setShipping(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
-	// result.setTotalAmount(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
-	//
-	// return result;
-	// }
 
 	public ShippingModel grabConfirmationTotals() {
 		ShippingModel result = new ShippingModel();
@@ -184,7 +170,7 @@ public class ConfirmationPage extends AbstractPage {
 		DataGrabber.confirmationProducts = resultList;
 		return resultList;
 	}
-	
+
 	public List<RegularUserCartProductModel> grabRegularProductsList() {
 
 		element(productListContainer).waitUntilVisible();
@@ -210,29 +196,30 @@ public class ConfirmationPage extends AbstractPage {
 
 		return resultList;
 	}
+
 	public List<HostCartProductModel> grabHostProductsList() {
-		
+
 		element(productListContainer).waitUntilVisible();
 		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
 		List<HostCartProductModel> resultList = new ArrayList<HostCartProductModel>();
-		
+
 		for (WebElement webElementNow : entryList) {
 			HostCartProductModel productNow = new HostCartProductModel();
-			
+
 			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
-			
+
 			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
 			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			resultList.add(productNow);
-			
+
 		}
-		
+
 		HostDataGrabber.grabbedHostConfirmationProductsList = resultList;
-		
+
 		return resultList;
 	}
 

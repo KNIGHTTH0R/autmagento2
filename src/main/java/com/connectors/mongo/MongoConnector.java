@@ -27,8 +27,8 @@ public class MongoConnector {
 			mongoClient = new MongoClient(serverList);
 		}
 	}
-	
-	public String getDbAddress(){
+
+	public String getDbAddress() {
 		return String.valueOf(mongoClient.getAddress());
 	}
 
@@ -99,7 +99,7 @@ public class MongoConnector {
 
 		return dbNames;
 	}
-	
+
 	public void deleteDb(String dbName) {
 		mongoClient.dropDatabase(dbName);
 	}

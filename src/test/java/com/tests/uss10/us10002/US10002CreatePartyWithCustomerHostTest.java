@@ -27,7 +27,6 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 
 @WithTag(name = "US10002", type = "frontend")
-//@Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10002CreatePartyWithCustomerHostTest extends BaseTest {
 

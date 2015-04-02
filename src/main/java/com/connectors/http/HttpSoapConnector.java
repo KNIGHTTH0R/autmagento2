@@ -234,16 +234,16 @@ public class HttpSoapConnector {
 
 				SOAPElement groupId = objArray.addChildElement(SoapKeys.CUSTOMER_GROUP_ID);
 				groupId.addTextNode(product.getCustomerGroupId());
-				
+
 				SOAPElement web = objArray.addChildElement(SoapKeys.WEBSITE);
 				web.addTextNode(product.getCustomerGroupId());
-				
+
 				SOAPElement qty = objArray.addChildElement(SoapKeys.QTY);
 				qty.addTextNode(product.getCustomerGroupId());
-				
+
 				SOAPElement price = objArray.addChildElement(SoapKeys.PRICE);
 				price.addTextNode(product.getCustomerGroupId());
-				
+
 			}
 		} else {
 			System.out.println("Warning: Product - Tier Price Model list is empty - see soap - generateTierPriceMessage()");
