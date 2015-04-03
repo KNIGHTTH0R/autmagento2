@@ -1,4 +1,3 @@
-
 package com.tests.uss10.us10006;
 
 import java.io.File;
@@ -22,18 +21,22 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
+import com.steps.frontend.checkout.cart.regularCart.PlaceCustomerOrderFromPartySteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 
 @WithTag(name = "US10006", type = "frontend")
-//@Story(Application.StyleParty.CreateParty.class)
+// @Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
+	@Steps
+	public PlaceCustomerOrderFromPartySteps placeCustomerOrderFromPartySteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -43,7 +46,7 @@ public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
 	public static UrlModel urlModel = new UrlModel();
-
+	public static DateModel dateModel = new DateModel();
 	private String username, password;
 
 	@Before
@@ -80,14 +83,14 @@ public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 		customerRegistrationSteps.performLogin(username, password);
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
+		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		partyDetailsSteps.verifyPlannedPartyAvailableActions();
-		
+
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
-		
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + Constants.GRAB);
 	}
 }
-

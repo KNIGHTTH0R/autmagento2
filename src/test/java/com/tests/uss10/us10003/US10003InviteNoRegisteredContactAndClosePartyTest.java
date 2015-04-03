@@ -100,10 +100,11 @@ public class US10003InviteNoRegisteredContactAndClosePartyTest extends BaseTest 
 		if (runTest) {			
 			customerRegistrationSteps.performLogin(username, password);
 			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.verifyActivePartyAvailableActions();
 			partyDetailsSteps.sendInvitationToGest(customerData);
 			partyDetailsSteps.verifyThatGuestIsInvited(customerData.getFirstName());
 			partyDetailsSteps.closeTheParty(Constants.TEN);
-			partyDetailsSteps.verifyPartyStatus(Constants.PARTY_CLOSED);
+			partyDetailsSteps.verifyClosedPartyAvailableActions();
 		}
 	}
 	

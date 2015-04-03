@@ -17,5 +17,10 @@ public class ShippingPartySectionSteps extends AbstractSteps {
 	public void clickPartyNoOption() {
 		regularUserShippingPage().clickPartyNoOption();
 	}
+	
+	@Step
+	public void checkItemNotReceivedYet(){
+		regularUserShippingPage().checkItemNotReceivedYet();
+	}
 
 }

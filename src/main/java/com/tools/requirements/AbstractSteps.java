@@ -40,6 +40,7 @@ import com.pages.frontend.UpdatePartyPage;
 import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.SuccessPage;
 import com.pages.frontend.checkout.cart.partyHost.HostCartPage;
+import com.pages.frontend.checkout.cart.regularCart.PlaceCustomerOrderFromPartyPage;
 import com.pages.frontend.checkout.cart.regularCart.RegularUserCartPage;
 import com.pages.frontend.checkout.cart.styleCoachCart.CartPage;
 import com.pages.frontend.checkout.payment.CreditCardFormPage;
@@ -252,6 +253,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public PartyCreationPage partyCreationPage() {
 		return getPages().currentPageAt(PartyCreationPage.class);
+	}
+	public PlaceCustomerOrderFromPartyPage placeCustomerOrderFromPartyPage() {
+		return getPages().currentPageAt(PlaceCustomerOrderFromPartyPage.class);
 	}
 
 	public UpdatePartyPage updatePartyPage() {

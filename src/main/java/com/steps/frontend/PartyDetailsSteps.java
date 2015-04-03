@@ -69,8 +69,20 @@ public class PartyDetailsSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void orderForCustomerFromParty(String name) {
+		partyDetailsPage().orderForCustomer();
+		placeCustomerOrderFromPartyPage().typeContactName(name);
+		placeCustomerOrderFromPartyPage().startOrderForCustomer();
+
+	}
+
+	@Step
 	public void verifyThatGuestIsInvited(String name) {
 		partyDetailsPage().verifyThatGuestIsInvited(name);
+	}
+	@Step
+	public void verifyThatOrderIsInTheOrdersList(String order) {
+		partyDetailsPage().verifyThatOrderIsInTheOrdersList(order);
 	}
 
 	@Step

@@ -97,6 +97,7 @@ public class US10001ClosePartyTest extends BaseTest {
 	@Test
 	public void us10001ClosePartyTest() {
 		if (runTest) {
+			customerRegistrationSteps.performLogin(username, password);
 			customerRegistrationSteps.navigate(urlModel.getUrl());
 			partyDetailsSteps.sendInvitationToGest(customerData);
 			partyDetailsSteps.verifyThatGuestIsInvited(customerData.getFirstName());

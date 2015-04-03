@@ -28,6 +28,9 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(id = "invitations-list-table")
 	private WebElement invitationsList;
+	
+	@FindBy(id = "my-orders-table")
+	private WebElement ordersList;
 
 	@FindBy(id = "name_0")
 	private WebElement guestName;
@@ -61,6 +64,14 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(css = "div.col-main.pos-rel")
 	private WebElement partyDetailsAndActionsContainer;
+	
+	@FindBy(css = "button[title*='Für eine Kundin bestellen']")
+	private WebElement orderForCustomer;
+	
+	public void orderForCustomer() {
+		element(orderForCustomer).waitUntilVisible();
+		orderForCustomer.click();
+	}
 
 	public void closeParty() {
 		element(closeParty).waitUntilVisible();
@@ -242,6 +253,19 @@ public class PartyDetailsPage extends AbstractPage {
 
 		}
 		Assert.assertTrue("The guest was not found in invites list", found);
+	}
+	
+	public void verifyThatOrderIsInTheOrdersList(String order) {
+		element(ordersList).waitUntilVisible();
+		List<WebElement> invitesList = ordersList.findElements(By.cssSelector("tbody tr"));
+		boolean found = false;
+		for (WebElement invite : invitesList) {
+			if (invite.findElement(By.cssSelector("td:first-child")).getText().contentEquals(order)) {
+				found = true;
+			}
+			
+		}
+		Assert.assertTrue("The order was not found in orders list", found);
 	}
 
 }
