@@ -35,7 +35,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US10003", type = "frontend")
 //@Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10003InviteNoRegisteredContactAndClosePartyTest extends BaseTest {
+public class US10003ClosePartyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -100,9 +100,7 @@ public class US10003InviteNoRegisteredContactAndClosePartyTest extends BaseTest 
 		if (runTest) {			
 			customerRegistrationSteps.performLogin(username, password);
 			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.verifyActivePartyAvailableActions();
-			partyDetailsSteps.sendInvitationToGest(customerData);
-			partyDetailsSteps.verifyThatGuestIsInvited(customerData.getFirstName());
+			partyDetailsSteps.verifyActivePartyAvailableActions();		
 			partyDetailsSteps.closeTheParty(Constants.TEN);
 			partyDetailsSteps.verifyClosedPartyAvailableActions();
 		}

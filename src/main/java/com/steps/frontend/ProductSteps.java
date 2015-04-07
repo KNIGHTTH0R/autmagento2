@@ -71,6 +71,24 @@ public class ProductSteps extends AbstractSteps {
 		waitABit(Constants.TIME_CONSTANT);
 		return result;
 	}
+	@Step
+	public RegularBasicProductModel setRegularBasicProductAddToWishlist(String qty, String size, String finalPrice) {
+		RegularBasicProductModel result = new RegularBasicProductModel();
+		if (!size.contentEquals("0")) {
+			setDropDownValue(size);
+		}
+		setQuantity(qty);
+		
+		result = productDetailsPage().grabRegularBasicProductData();
+		
+		result.setFinalPrice(finalPrice);
+		result.setBonusType(Constants.REGULAR_PRICE);
+		result.setBunosValue("0");
+		
+		addToWishlist();
+		waitABit(Constants.TIME_CONSTANT);
+		return result;
+	}
 
 	@Step
 	public HostBasicProductModel setHostBasicProductAddToCart(String qty, String size, String finalPrice, String ipPoints) {
@@ -105,6 +123,10 @@ public class ProductSteps extends AbstractSteps {
 	@Step
 	public void addToCart() {
 		productDetailsPage().addToCart();
+	}
+	@Step
+	public void addToWishlist() {
+		productDetailsPage().addToWishlist();
 	}
 
 }

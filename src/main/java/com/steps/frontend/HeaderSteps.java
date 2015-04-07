@@ -48,6 +48,11 @@ public class HeaderSteps extends AbstractSteps {
 	public void redirectToProfileHistory() {
 		getDriver().get(Constants.PROFILE_HISTORY_URL);
 	}
+	@Step
+	public void redirectToWishlist() {
+		getDriver().get(Constants.WISHLIST_URL);
+		wishlistPage().addAllProductsToCArt();
+	}
 
 	public void redirectTostylistsCustomerOrderReport() {
 		getDriver().get(Constants.STYLISTS_CUSTOMER_ORDER_REPORT);

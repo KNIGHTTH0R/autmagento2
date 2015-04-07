@@ -24,6 +24,9 @@ public class ProductDetailsPage extends AbstractPage {
 
 	@FindBy(css = "button#add-to-cart")
 	private WebElement addToCartButton;
+	
+	@FindBy(css = "div.product-attributes.clearfix a")
+	private WebElement addToWishlistButton;
 
 	@FindBy(css = "p.product-ids.dp-inbl")
 	private WebElement productCode;
@@ -50,6 +53,11 @@ public class ProductDetailsPage extends AbstractPage {
 		addToCartButton.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), "Der Artikel wurde in den Warenkorb gelegt. Du kannst deinen Einkauf fortsetzen."));
 		waitABit(Constants.TIME_CONSTANT);
+	}
+	public void addToWishlist() {
+		element(addToWishlistButton).waitUntilVisible();
+		addToWishlistButton.click();
+		
 	}
 
 	public ProductBasicModel grabProductData() {
