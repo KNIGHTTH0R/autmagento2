@@ -22,7 +22,7 @@ import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7003", type = "backend")
+@WithTag(name = "US7", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7003CheckCustomerActivationTest extends BaseTest {

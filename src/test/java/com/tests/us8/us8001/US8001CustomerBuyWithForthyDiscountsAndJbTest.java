@@ -42,7 +42,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8001", type = "frontend")
+@WithTag(name = "US8", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {

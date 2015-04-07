@@ -16,7 +16,7 @@ import com.tests.BaseTest;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7001", type = "frontend")
+@WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {

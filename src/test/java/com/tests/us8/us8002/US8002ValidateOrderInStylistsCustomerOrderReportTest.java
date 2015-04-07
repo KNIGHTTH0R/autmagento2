@@ -28,13 +28,11 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US8002", type = "frontend")
+@WithTag(name = "US8", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US8002ValidateOrderInStylistsCustomerOrderReportTest extends BaseTest{
-//	
-//	@Steps
-//	public ProfileSteps profileSteps;
+
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
 	@Steps

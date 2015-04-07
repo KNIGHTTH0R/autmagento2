@@ -38,7 +38,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.OrderWorkflows;
 
-@WithTag(name = "US002", type = "backend")
+@WithTag(name = "US2", type = "backend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US002ValidateOrderBackOfficeTest extends BaseTest {

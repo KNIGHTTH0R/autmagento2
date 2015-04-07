@@ -32,7 +32,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US8001", type = "external")
+@WithTag(name = "US8", type = "external")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US8001ValidateOrderEmailTest extends BaseTest{
