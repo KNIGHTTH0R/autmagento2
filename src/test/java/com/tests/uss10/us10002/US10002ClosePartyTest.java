@@ -63,7 +63,7 @@ public class US10002ClosePartyTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -100,10 +100,8 @@ public class US10002ClosePartyTest extends BaseTest {
 		if (runTest) {
 			customerRegistrationSteps.performLogin(username, password);
 			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.sendInvitationToGest(customerData);
-			partyDetailsSteps.verifyThatGuestIsInvited(customerData.getFirstName());
 			partyDetailsSteps.closeTheParty(Constants.TEN);
-			partyDetailsSteps.verifyPartyStatus(Constants.PARTY_CLOSED);
+			partyDetailsSteps.verifyClosedPartyAvailableActions();
 
 		}
 	}

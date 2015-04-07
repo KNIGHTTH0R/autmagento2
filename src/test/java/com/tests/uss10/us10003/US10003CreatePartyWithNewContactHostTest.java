@@ -22,6 +22,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
+import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -46,6 +47,8 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 	@Steps
 	public LoungeSteps loungeSteps;
 	@Steps
+	public PartyDetailsSteps partyDetailsSteps;
+	@Steps
 	public PartyCreationSteps partyCreationSteps;
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
@@ -66,7 +69,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10003.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -94,6 +97,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 		createNewContactSteps.fillCreateNewContact(customerData, addressData);
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForNewCustomerHost());
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
+		partyDetailsSteps.verifyPlannedPartyAvailableActions();
 	
 	}
 

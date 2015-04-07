@@ -9,6 +9,7 @@ import com.poc.DeactivateRule;
 
 @SuiteClasses({
 //	US000Suite.class,
+	US10CreateAllPartiesSuite.class,
 	US001Suite.class,
 	US002Suite.class,
 	US3001Suite.class,
@@ -44,6 +45,10 @@ import com.poc.DeactivateRule;
 	US4001Suite.class,
 	US4002Suite.class,
 	DeactivateRule.class,
+//	US10001AndUS10002ClosePartiesSuite.class,
+	US9001Suite.class,
+	US9002Suite.class,
+	
 })
 @RunWith(Suite.class)
 public class PippaSuite {

@@ -68,9 +68,24 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "button[title*='Für eine Kundin bestellen']")
 	private WebElement orderForCustomer;
 	
+	@FindBy(id = "hostess-confirmation")
+	private WebElement sendInvitationToHostess;
+	
+	@FindBy(css = "#hostessConfirmation button[type*='submit']")
+	private WebElement hostessInviteConfirmation;
+	
 	public void orderForCustomer() {
 		element(orderForCustomer).waitUntilVisible();
 		orderForCustomer.click();
+	}
+	public void hostessInviteConfirmation() {
+		element(hostessInviteConfirmation).waitUntilVisible();
+		hostessInviteConfirmation.click();
+	}
+	
+	public void sendInvitationToHostess() {
+		element(sendInvitationToHostess).waitUntilVisible();
+		sendInvitationToHostess.click();
 	}
 
 	public void closeParty() {
@@ -113,6 +128,15 @@ public class PartyDetailsPage extends AbstractPage {
 		popupPartyCloseButton.click();
 	}
 
+	public void verifyHostessInviteLink(boolean hostessInviteLinkIsPresent) {
+		if (hostessInviteLinkIsPresent) {
+			Assert.assertTrue("The invite hostess link should be present and it's not", partyDetailsAndActionsContainer.getText().contains("GASTGEBERIN EINLADEN"));
+		} else {
+			Assert.assertFalse("The invite hostess link should not be present", partyDetailsAndActionsContainer.getText().contains("GASTGEBERIN EINLADEN"));
+		}
+		
+	}
+	
 	public void verifyEditLink(boolean editLinkIsPresent) {
 		if (editLinkIsPresent) {
 			Assert.assertTrue("The edit link should be present and it's not", partyDetailsAndActionsContainer.getText().contains("Style Party bearbeiten"));
@@ -164,14 +188,16 @@ public class PartyDetailsPage extends AbstractPage {
 	}
 
 	public void verifyPartyStatus(String status) {
-		element(messageContainer).waitUntilVisible();
-		Assert.assertTrue("The status should be" + status + "and it's not ", messageContainer.getText().contains(status));
+		getDriver().navigate().refresh();
+		element(messageContainer).waitUntilVisible();		
+		Assert.assertTrue("The status should be " + status + " and it's not ", messageContainer.getText().contains(status));
 
 	}
 
 	public void verifyPlannedPartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
 		verifyPartyStatus(Constants.PARTY_PLANNED);
+		verifyHostessInviteLink(true);
 		verifyEditLink(true);
 		verifyDeleteLink(true);
 		verifyInviteGuestsLink(true);
@@ -182,6 +208,7 @@ public class PartyDetailsPage extends AbstractPage {
 	public void verifyActivePartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
 		verifyPartyStatus(Constants.PARTY_ACTIVE);
+		verifyHostessInviteLink(true);
 		verifyEditLink(false);
 		verifyDeleteLink(false);
 		verifyInviteGuestsLink(true);
@@ -190,8 +217,9 @@ public class PartyDetailsPage extends AbstractPage {
 		verifyClosePartyLink(true);
 	}
 	public void verifyClosedPartyAvailableActions() {
-		element(partyDetailsAndActionsContainer).waitUntilVisible();
+		element(partyDetailsAndActionsContainer).waitUntilVisible();		
 		verifyPartyStatus(Constants.PARTY_CLOSED);
+		verifyHostessInviteLink(true);
 		verifyEditLink(false);
 		verifyDeleteLink(false);
 		verifyInviteGuestsLink(false);

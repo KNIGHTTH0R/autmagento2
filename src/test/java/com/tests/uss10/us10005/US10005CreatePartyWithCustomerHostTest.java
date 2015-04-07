@@ -20,6 +20,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
+import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
@@ -35,6 +36,8 @@ public class US10005CreatePartyWithCustomerHostTest extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public LoungeSteps loungeSteps;
 	@Steps
@@ -52,7 +55,7 @@ public class US10005CreatePartyWithCustomerHostTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -80,6 +83,7 @@ public class US10005CreatePartyWithCustomerHostTest extends BaseTest {
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
+		partyDetailsSteps.verifyPlannedPartyAvailableActions();
 	}
 
 	@After

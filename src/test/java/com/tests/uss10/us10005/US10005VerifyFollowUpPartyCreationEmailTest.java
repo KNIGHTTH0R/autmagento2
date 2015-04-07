@@ -56,7 +56,7 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
 			email = prop.getProperty("customerUsername");
 			password = prop.getProperty("customerPassword");

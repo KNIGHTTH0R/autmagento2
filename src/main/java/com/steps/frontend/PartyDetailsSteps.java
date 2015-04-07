@@ -34,6 +34,13 @@ public class PartyDetailsSteps extends AbstractSteps {
 		partyDetailsPage().sendInvitation();
 	}
 
+	@StepGroup
+	public void sendInvitationToHostess() {
+		partyDetailsPage().sendInvitationToHostess();
+		partyDetailsPage().hostessInviteConfirmation();
+		waitABit(3000);
+	}
+
 	@Step
 	public void verifyPartyStatus(String status) {
 		getDriver().navigate().refresh();
@@ -80,6 +87,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void verifyThatGuestIsInvited(String name) {
 		partyDetailsPage().verifyThatGuestIsInvited(name);
 	}
+
 	@Step
 	public void verifyThatOrderIsInTheOrdersList(String order) {
 		partyDetailsPage().verifyThatOrderIsInTheOrdersList(order);

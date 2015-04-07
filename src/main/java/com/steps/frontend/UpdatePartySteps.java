@@ -26,6 +26,7 @@ public class UpdatePartySteps extends AbstractSteps {
 
 	@StepGroup
 	public void updatePartyDateAndHour() {
+		partyDetailsPage().editParty();
 		updatePartyPage().selectFirstAvailableDate();
 		updatePartyPage().selectSecondAvailableHour();
 		updatePartyPage().submitParty();

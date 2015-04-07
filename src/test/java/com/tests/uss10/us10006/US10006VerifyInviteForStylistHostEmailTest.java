@@ -1,4 +1,4 @@
-package com.tests.uss10.us10002;
+package com.tests.uss10.us10006;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,10 +33,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10002", type = "external")
+@WithTag(name = "US10005", type = "external")
 // @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US10002VerifyHostPartyCreationEmailTest extends BaseTest {
+public class US10006VerifyInviteForStylistHostEmailTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -56,11 +56,13 @@ public class US10002VerifyHostPartyCreationEmailTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10002.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
-			email = prop.getProperty("customerUsername");
-			password = prop.getProperty("customerPassword");
-			emailPassword = prop.getProperty("customerPassword");
+
+			
+			email = prop.getProperty("username");
+			password = prop.getProperty("password");
+			emailPassword = prop.getProperty("emailPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -86,13 +88,13 @@ public class US10002VerifyHostPartyCreationEmailTest extends BaseTest {
 	}
 
 	@Test
-	public void us10002VerifyHostPartyCreationEmailTest() {
+	public void us10006VerifyInviteForStylistHostEmailTest() {
 
 		frontEndSteps.performLogin(email, password);
 
-		String message = gmailConnector.searchForMail("", Constants.PARTY_CREATION_EMAIL_SUBJECT, false);
+		String message = gmailConnector.searchForMail("", Constants.PARTY_CREATION_EMAIL_SUBJECT, true);
 		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message,"customer/party/confirm"));
-
+		System.out.println(urlModel.getUrl());
 		customVerifications.printErrors();
 	}
 

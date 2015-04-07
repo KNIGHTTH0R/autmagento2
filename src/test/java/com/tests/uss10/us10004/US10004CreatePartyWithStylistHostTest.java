@@ -21,6 +21,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
+import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
@@ -36,6 +37,8 @@ public class US10004CreatePartyWithStylistHostTest extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public LoungeSteps loungeSteps;
 	@Steps
@@ -79,6 +82,7 @@ public class US10004CreatePartyWithStylistHostTest extends BaseTest {
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
+		partyDetailsSteps.verifyPlannedPartyAvailableActions();
 	}
 
 	@After

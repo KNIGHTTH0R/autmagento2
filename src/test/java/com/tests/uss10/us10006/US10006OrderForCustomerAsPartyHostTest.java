@@ -122,7 +122,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);	
+		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
 
 	}
 
@@ -130,6 +130,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 	public void us10006OrderForCustomerAsPartyHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.verifyActivePartyAvailableActions();
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
 		RegularBasicProductModel productData;
@@ -154,11 +155,10 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
-		
+
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(order);
 
 	}
 
-	
 }

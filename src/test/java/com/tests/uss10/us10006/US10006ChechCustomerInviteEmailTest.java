@@ -1,4 +1,4 @@
-package com.tests.uss10.us10004;
+package com.tests.uss10.us10006;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,7 +37,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US10005", type = "external")
 // @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US10004ChechCustomerInviteEmailTest extends BaseTest {
+public class US10006ChechCustomerInviteEmailTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;

@@ -21,6 +21,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
+import com.steps.frontend.UpdatePartySteps;
 import com.steps.frontend.checkout.cart.regularCart.PlaceCustomerOrderFromPartySteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -44,10 +45,13 @@ public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 	@Steps
 	public LoungeSteps loungeSteps;
 	@Steps
+	public UpdatePartySteps updatePartySteps;
+	@Steps
 	public PartyCreationSteps partyCreationSteps;
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
+	private String customerEmail, customerName;
 
 	@Before
 	public void setUp() throws Exception {
@@ -61,6 +65,9 @@ public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+
+			customerEmail = prop.getProperty("customerUsername");
+			customerName = prop.getProperty("customerName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -85,6 +92,10 @@ public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		partyDetailsSteps.verifyPlannedPartyAvailableActions();
+		partyDetailsSteps.sendInvitationToGest(customerName, customerEmail);
+		partyDetailsSteps.verifyThatGuestIsInvited(customerName);
+		updatePartySteps.updatePartyDateAndHour();
+		partyDetailsSteps.sendInvitationToHostess();
 
 	}
 

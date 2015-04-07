@@ -33,7 +33,7 @@ import com.tools.persistance.MongoWriter;
 @WithTag(name = "US10004", type = "frontend")
 // @Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10004InviteRegisteredGuestUpdateAndDeletePartyTest extends BaseTest {
+public class US10004UpdateAndDeletePartyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -50,7 +50,7 @@ public class US10004InviteRegisteredGuestUpdateAndDeletePartyTest extends BaseTe
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
-	private String customerEmail, customerPassword,customerName;
+	private String customerEmail,customerName;
 
 	@Before
 	public void setUp() throws Exception {
@@ -66,7 +66,6 @@ public class US10004InviteRegisteredGuestUpdateAndDeletePartyTest extends BaseTe
 			password = prop.getProperty("password");
 			
 			customerEmail = prop.getProperty("customerUsername");
-			customerPassword = prop.getProperty("customerPassword");
 			customerName = prop.getProperty("customerName");
 			
 
@@ -94,8 +93,6 @@ public class US10004InviteRegisteredGuestUpdateAndDeletePartyTest extends BaseTe
 
 		customerRegistrationSteps.performLogin(username, password);
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.sendInvitationToGest(customerName,customerEmail);
-		partyDetailsSteps.verifyThatGuestIsInvited(customerName);
 		partyDetailsSteps.editParty();
 		updatePartySteps.updatePartyDateAndHour();
 		partyDetailsSteps.deleteParty();
