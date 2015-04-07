@@ -27,7 +27,7 @@ import com.tools.data.email.EmailCredentialsModel;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US7003", type = "external")
+@WithTag(name = "US7", type = "external")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7003EmailActivationTest extends BaseTest{

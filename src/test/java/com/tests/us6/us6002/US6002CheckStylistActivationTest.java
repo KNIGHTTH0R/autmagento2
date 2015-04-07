@@ -22,7 +22,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US6002", type = "backend")
+@WithTag(name = "US6", type = "backend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002CheckStylistActivationTest extends BaseTest {

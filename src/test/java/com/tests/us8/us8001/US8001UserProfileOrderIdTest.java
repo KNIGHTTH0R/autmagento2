@@ -28,7 +28,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US8001", type = "frontend")
+@WithTag(name = "US8", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US8001UserProfileOrderIdTest extends BaseTest{

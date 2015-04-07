@@ -25,7 +25,7 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6003", type = "frontend")
+@WithTag(name = "US6", type = "frontend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
 public class US6003StyleCoachRegistrationTest extends BaseTest {

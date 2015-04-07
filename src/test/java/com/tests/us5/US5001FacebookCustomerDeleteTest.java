@@ -24,7 +24,7 @@ import com.tools.Constants;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US0005", type = "frontend,external")
+@WithTag(name = "US5", type = "frontend,external")
 @Story(Application.External.class)
 @RunWith(ThucydidesRunner.class)
 public class US5001FacebookCustomerDeleteTest extends BaseTest{

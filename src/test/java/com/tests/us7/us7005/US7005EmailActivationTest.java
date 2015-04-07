@@ -28,7 +28,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US7005", type = "external")
+@WithTag(name = "US7", type = "external")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7005EmailActivationTest extends BaseTest{

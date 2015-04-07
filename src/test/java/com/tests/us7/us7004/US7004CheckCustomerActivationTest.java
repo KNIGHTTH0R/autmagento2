@@ -17,7 +17,7 @@ import com.tools.CustomVerification;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7004", type = "backend")
+@WithTag(name = "US7", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7004CheckCustomerActivationTest extends BaseTest {

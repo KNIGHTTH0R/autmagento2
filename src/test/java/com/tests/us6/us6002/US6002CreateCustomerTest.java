@@ -19,7 +19,7 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6002", type = "frontend")
+@WithTag(name = "US6", type = "frontend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002CreateCustomerTest extends BaseTest{
