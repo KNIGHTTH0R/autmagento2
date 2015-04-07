@@ -120,13 +120,6 @@ public class GmailConnector {
 	 */
 	private Message[] connect() {
 		Properties props2 = System.getProperties();
-		// added props
-		// props2.put("mail.smtp.starttls.enable","true");
-		// props2.put("mail.smtp.debug", "true");
-		// props2.put("mail.smtp.auth", "true");
-		// props2.put("mail.smtp.socketFactory.port", "587");
-		// props2.put("mail.smtp.socketFactory.fallback", "false");
-
 		Session session2 = Session.getDefaultInstance(props2, null);
 		props2.setProperty(EmailConstants.EMAIL_STORE, protocol);
 		Message message[] = null;

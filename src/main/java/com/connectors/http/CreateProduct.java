@@ -21,7 +21,6 @@ public class CreateProduct {
 	
 	public static ProductDetailedModel createMarketingProductModel() throws Exception{
 		ProductDetailedModel result = createProductModel();
-		
 		List<String> categoriesIds = new ArrayList<String>();
 		categoriesIds.add("15");
 		categoriesIds.add("15");
@@ -32,7 +31,6 @@ public class CreateProduct {
 
 	public static ProductDetailedModel createProductModel() throws Exception {
 		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
-		
 		ProductDetailedModel product = new ProductDetailedModel();
 		
 		product.setType("simple");
