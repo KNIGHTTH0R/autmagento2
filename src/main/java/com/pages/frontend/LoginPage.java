@@ -1,7 +1,6 @@
 package com.pages.frontend;
 
 import org.openqa.selenium.WebElement;
-
 import net.thucydides.core.annotations.findby.FindBy;
 
 import com.tools.requirements.AbstractPage;

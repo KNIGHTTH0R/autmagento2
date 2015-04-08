@@ -40,12 +40,12 @@ import com.poc.DeactivateRule;
 	US8002Suite.class,
 	US8003Suite.class,
 	
-	//3+1 rule
+	
 	ActivateRule.class,
 	US4001Suite.class,
 	US4002Suite.class,
 	DeactivateRule.class,
-//	US10001AndUS10002ClosePartiesSuite.class,
+	US10001AndUS10002ClosePartiesSuite.class,
 	US9001Suite.class,
 	US9002Suite.class,
 	

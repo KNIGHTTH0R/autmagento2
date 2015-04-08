@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -18,22 +17,16 @@ import org.junit.runner.RunWith;
 
 import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
-import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
-import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.EmailConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.data.frontend.CustomerFormModel;
-import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
-import com.tools.requirements.Application;
 
-@WithTag(name = "US10005", type = "external")
+@WithTag(name = "US10006", type = "external")
 // @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006VerifyInviteForStylistHostEmailTest extends BaseTest {
@@ -58,7 +51,6 @@ public class US10006VerifyInviteForStylistHostEmailTest extends BaseTest {
 
 			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
-
 			
 			email = prop.getProperty("username");
 			password = prop.getProperty("password");

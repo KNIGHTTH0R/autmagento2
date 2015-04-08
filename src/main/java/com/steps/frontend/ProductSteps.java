@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.Constants;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.BorrowedProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -53,6 +54,18 @@ public class ProductSteps extends AbstractSteps {
 		return result;
 	}
 
+	@StepGroup
+	public BorrowedProductModel setBorrowedProductAddToCart(String name, String price, String finalPrice, String ipPoints) {
+		BorrowedProductModel result = new BorrowedProductModel();
+
+		result.setName(name);
+		result.setUnitPrice(price);
+		result.setFinalPrice(finalPrice);
+		result.setIpPoints(ipPoints);
+
+		return result;
+	}
+
 	@Step
 	public RegularBasicProductModel setRegularBasicProductAddToCart(String qty, String size, String finalPrice) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
@@ -71,6 +84,7 @@ public class ProductSteps extends AbstractSteps {
 		waitABit(Constants.TIME_CONSTANT);
 		return result;
 	}
+
 	@Step
 	public RegularBasicProductModel setRegularBasicProductAddToWishlist(String qty, String size, String finalPrice) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
@@ -78,13 +92,13 @@ public class ProductSteps extends AbstractSteps {
 			setDropDownValue(size);
 		}
 		setQuantity(qty);
-		
+
 		result = productDetailsPage().grabRegularBasicProductData();
-		
+
 		result.setFinalPrice(finalPrice);
 		result.setBonusType(Constants.REGULAR_PRICE);
 		result.setBunosValue("0");
-		
+
 		addToWishlist();
 		waitABit(Constants.TIME_CONSTANT);
 		return result;
@@ -124,6 +138,7 @@ public class ProductSteps extends AbstractSteps {
 	public void addToCart() {
 		productDetailsPage().addToCart();
 	}
+
 	@Step
 	public void addToWishlist() {
 		productDetailsPage().addToWishlist();

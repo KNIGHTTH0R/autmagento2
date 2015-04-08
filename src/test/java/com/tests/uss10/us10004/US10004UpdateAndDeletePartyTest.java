@@ -10,25 +10,19 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
-import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.LoungeSteps;
-import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.UpdatePartySteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 
 @WithTag(name = "US10004", type = "frontend")
 // @Story(Application.StyleParty.CreateParty.class)
@@ -40,17 +34,12 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 	@Steps
 	public UpdatePartySteps updatePartySteps;
 	@Steps
-	public HeaderSteps headerSteps;
-	@Steps
-	public LoungeSteps loungeSteps;
-	@Steps
-	public PartyCreationSteps partyCreationSteps;
-	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
+	
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
-	private String customerEmail,customerName;
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -64,9 +53,6 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			
-			customerEmail = prop.getProperty("customerUsername");
-			customerName = prop.getProperty("customerName");
 			
 
 		} catch (IOException ex) {

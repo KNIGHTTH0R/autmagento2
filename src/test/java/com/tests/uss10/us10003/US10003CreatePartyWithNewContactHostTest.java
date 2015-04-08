@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -20,7 +19,6 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
@@ -31,7 +29,6 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
-import com.tools.requirements.Application;
 
 @WithTag(name = "US10003", type = "frontend")
 //@Story(Application.StyleParty.CreateParty.class)
@@ -45,11 +42,10 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public LoungeSteps loungeSteps;
-	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
+	
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;

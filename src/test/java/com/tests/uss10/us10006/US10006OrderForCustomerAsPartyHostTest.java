@@ -25,11 +25,9 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
-import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.CustomVerification;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -41,7 +39,6 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
-import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
 @WithTag(name = "US10006", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
@@ -63,18 +60,12 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
-	public RegularUserCartSteps regularUserCartSteps;
-	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public AddRegularProductsWorkflow addRegularProductsWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
-	@Steps
-	public RegularCartValidationWorkflows regularCartValidationWorkflows;
-	@Steps
-	public CustomVerification customVerifications;
-
+	
 	private String username, password, customerName;
 
 	private CreditCardModel creditCardData = new CreditCardModel();

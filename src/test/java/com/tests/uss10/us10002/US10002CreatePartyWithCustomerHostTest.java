@@ -18,7 +18,6 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -35,9 +34,8 @@ public class US10002CreatePartyWithCustomerHostTest extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public LoungeSteps loungeSteps;
-	@Steps
 	public PartyCreationSteps partyCreationSteps;
+	
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;

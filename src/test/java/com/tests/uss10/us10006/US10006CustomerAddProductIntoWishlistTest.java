@@ -13,7 +13,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.jruby.ir.operands.Array;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,47 +22,29 @@ import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.checkout.CheckoutValidationSteps;
-import com.steps.frontend.checkout.ConfirmationSteps;
-import com.steps.frontend.checkout.PaymentSteps;
-import com.steps.frontend.checkout.ShippingSteps;
-import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
-import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
-import com.tools.CustomVerification;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
-import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8001", type = "frontend")
+@WithTag(name = "US10006", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 
 	@Steps
-	public HeaderSteps headerSteps;
-
-	@Steps
-	public RegularUserCartSteps regularUserCartSteps;
+	public HeaderSteps headerSteps;	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public AddRegularProductsWorkflow addRegularProductsWorkflow;
-
-	@Steps
-	public CustomVerification customVerifications;
+	public AddRegularProductsWorkflow addRegularProductsWorkflow;	
 
 	private String username, password;
 	public static List<RegularBasicProductModel> allProductsList = new ArrayList<RegularBasicProductModel>();

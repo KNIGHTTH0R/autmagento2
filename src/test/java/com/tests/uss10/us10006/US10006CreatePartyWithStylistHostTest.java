@@ -18,11 +18,9 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.UpdatePartySteps;
-import com.steps.frontend.checkout.cart.regularCart.PlaceCustomerOrderFromPartySteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
@@ -37,17 +35,14 @@ public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
-	public PlaceCustomerOrderFromPartySteps placeCustomerOrderFromPartySteps;
-	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public LoungeSteps loungeSteps;
-	@Steps
 	public UpdatePartySteps updatePartySteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
+	
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;

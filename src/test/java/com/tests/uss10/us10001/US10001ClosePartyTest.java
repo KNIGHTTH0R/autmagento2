@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -19,9 +18,6 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
-import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.LoungeSteps;
-import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
@@ -30,7 +26,6 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
-import com.tools.requirements.Application;
 
 @WithTag(name = "US10001", type = "frontend")
 //@Story(Application.StyleParty.CreateParty.class)
@@ -38,13 +33,7 @@ import com.tools.requirements.Application;
 public class US10001ClosePartyTest extends BaseTest {
 
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps
-	public HeaderSteps headerSteps;
-	@Steps
-	public LoungeSteps loungeSteps;
-	@Steps
-	public PartyCreationSteps partyCreationSteps;
+	public CustomerRegistrationSteps customerRegistrationSteps;	
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();
@@ -83,12 +72,13 @@ public class US10001ClosePartyTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
 		dateModel = MongoReader.grabStylistDateModels("US10001CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
+		System.out.println(urlModel.getUrl());
 
 		Long partyCreationTime = Long.parseLong(dateModel.getDate());
 		Long currentTime = System.currentTimeMillis();
 		
-		// if less than 15 minutes passed skip the test
-		if (currentTime - partyCreationTime < 90000) {
+		// if less than 30 minutes passed skip the test
+		if (currentTime - partyCreationTime < 1800000) {
 			runTest = false;
 		}
 

@@ -18,7 +18,6 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
@@ -27,7 +26,7 @@ import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 
-@WithTag(name = "US10002", type = "frontend")
+@WithTag(name = "US10005", type = "frontend")
 //@Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10005CreatePartyWithCustomerHostTest extends BaseTest {
@@ -39,9 +38,8 @@ public class US10005CreatePartyWithCustomerHostTest extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
-	public LoungeSteps loungeSteps;
-	@Steps
 	public PartyCreationSteps partyCreationSteps;
+	
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
@@ -78,7 +76,7 @@ public class US10005CreatePartyWithCustomerHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us10002CreatePartyWithCustomerHostTest() {
+	public void us10005CreatePartyWithCustomerHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));

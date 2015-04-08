@@ -98,6 +98,7 @@ public class PartyDetailsPage extends AbstractPage {
 			wishlistProductCheckbox.click();
 		}
 		addToBorrowCart.click();
+		
 
 	}
 
@@ -253,7 +254,7 @@ public class PartyDetailsPage extends AbstractPage {
 	public void verifyClosedPartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
 		verifyPartyStatus(Constants.PARTY_CLOSED);
-		verifyHostessInviteLink(true);
+		verifyHostessInviteLink(false);
 		verifyEditLink(false);
 		verifyDeleteLink(false);
 		verifyInviteGuestsLink(false);

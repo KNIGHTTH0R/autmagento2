@@ -18,19 +18,17 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
-import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.LoungeSteps;
-import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
-import com.steps.frontend.UpdatePartySteps;
 import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.data.UrlModel;
+import com.tools.data.frontend.BorrowedProductModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.persistance.MongoReader;
+import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
 
-@WithTag(name = "US10004", type = "frontend")
+@WithTag(name = "US10006", type = "frontend")
 // @Story(Application.StyleParty.CreateParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
@@ -38,21 +36,16 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public UpdatePartySteps updatePartySteps;
-	@Steps
-	public HeaderSteps headerSteps;
-	@Steps
-	public LoungeSteps loungeSteps;
-	@Steps
-	public PartyCreationSteps partyCreationSteps;
-	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
+	@Steps
+	AddBorrowedProductsWorkflow addBorrowedProductsWorkflow;
+
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
-	private String customerEmail, customerName;
 	public static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
-	String productName;
+	public static List<BorrowedProductModel> borrowCartProductsList = new ArrayList<BorrowedProductModel>();
+	String productName, productCode;
 
 	@Before
 	public void setUp() throws Exception {
@@ -66,9 +59,6 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-
-			customerEmail = prop.getProperty("customerUsername");
-			customerName = prop.getProperty("customerName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -87,6 +77,7 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
 		productsList = MongoReader.grabRegularBasicProductModel("US10006CustomerAddProductIntoWishlistTest" + Constants.CALC);
 		productName = productsList.get(0).getName();
+		productCode = productsList.get(0).getProdCode();
 
 	}
 
@@ -94,9 +85,16 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	public void us10006CheckPartyWishlistAndBorrowProductTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
+		customerRegistrationSteps.wipeHostCart();
 		customerRegistrationSteps.navigate(urlModel.getUrl());
+
 		partyDetailsSteps.selectWishlistProductAndAddItToBorrowCart(productName);
+		BorrowedProductModel borrowedProductModel;
+		borrowedProductModel = addBorrowedProductsWorkflow.setBorrowedProductToCart(productName, "0", "0", "0");
+		borrowCartProductsList.add(borrowedProductModel);
+		borrowedProductModel = addBorrowedProductsWorkflow.setBorrowedProductToCart("Leihgebühr Z999", "0", "0", "0");
+		borrowCartProductsList.add(borrowedProductModel);
+
 
 	}
-
 }
