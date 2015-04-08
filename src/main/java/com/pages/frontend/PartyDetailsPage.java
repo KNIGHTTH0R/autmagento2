@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.tools.Constants;
 import com.tools.data.frontend.CustomerFormModel;
@@ -28,7 +29,7 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(id = "invitations-list-table")
 	private WebElement invitationsList;
-	
+
 	@FindBy(id = "my-orders-table")
 	private WebElement ordersList;
 
@@ -64,25 +65,52 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(css = "div.col-main.pos-rel")
 	private WebElement partyDetailsAndActionsContainer;
-	
+
 	@FindBy(css = "button[title*='Für eine Kundin bestellen']")
 	private WebElement orderForCustomer;
-	
+
 	@FindBy(id = "hostess-confirmation")
 	private WebElement sendInvitationToHostess;
-	
+
 	@FindBy(css = "#hostessConfirmation button[type*='submit']")
 	private WebElement hostessInviteConfirmation;
+
+	@FindBy(css = "div#wishlistGuestsFormContainer img")
+	private WebElement wishlistProductImage;
+
+	@FindBy(css = "div.prod-tooltip.js-over")
+	private WebElement wishlistProductNameContainer;
+
+	@FindBy(css = "input.input-checkbox.contact-chk")
+	private WebElement wishlistProductCheckbox;
 	
+	@FindBy(css = "button[title*='In den Warenkorb']")
+	private WebElement addToBorrowCart;
+
+	// this is made for a single product.if the products is the expected
+	// one,select it and borrow it
+	public void selectWishlistProductAndAddItToBorrowCart(String productName) {
+
+		Actions builder = new Actions(getDriver());
+		builder.moveToElement(wishlistProductImage).build().perform();
+		element(wishlistProductNameContainer).waitUntilVisible();
+		if (wishlistProductNameContainer.getText().contains(productName)) {
+			wishlistProductCheckbox.click();
+		}
+		addToBorrowCart.click();
+
+	}
+
 	public void orderForCustomer() {
 		element(orderForCustomer).waitUntilVisible();
 		orderForCustomer.click();
 	}
+
 	public void hostessInviteConfirmation() {
 		element(hostessInviteConfirmation).waitUntilVisible();
 		hostessInviteConfirmation.click();
 	}
-	
+
 	public void sendInvitationToHostess() {
 		element(sendInvitationToHostess).waitUntilVisible();
 		sendInvitationToHostess.click();
@@ -134,9 +162,9 @@ public class PartyDetailsPage extends AbstractPage {
 		} else {
 			Assert.assertFalse("The invite hostess link should not be present", partyDetailsAndActionsContainer.getText().contains("GASTGEBERIN EINLADEN"));
 		}
-		
+
 	}
-	
+
 	public void verifyEditLink(boolean editLinkIsPresent) {
 		if (editLinkIsPresent) {
 			Assert.assertTrue("The edit link should be present and it's not", partyDetailsAndActionsContainer.getText().contains("Style Party bearbeiten"));
@@ -154,42 +182,46 @@ public class PartyDetailsPage extends AbstractPage {
 		}
 
 	}
+
 	public void verifyInviteGuestsLink(boolean inviteGuestsLinkIsPresent) {
 		if (inviteGuestsLinkIsPresent) {
 			Assert.assertTrue("The invite guests button should be present and it's not", partyDetailsAndActionsContainer.getText().contains("GÄSTE EINLADEN"));
 		} else {
 			Assert.assertFalse("The invite guests button should not be present", partyDetailsAndActionsContainer.getText().contains("GÄSTE EINLADEN"));
 		}
-		
+
 	}
+
 	public void verifyFolowUpPartyLink(boolean folowUpPartyLinkIsPresent) {
 		if (folowUpPartyLinkIsPresent) {
 			Assert.assertTrue("The follow up button should be present and it's not", partyDetailsAndActionsContainer.getText().contains("LEGE EINE FOLGEPARTY AN"));
 		} else {
 			Assert.assertFalse("The follow up button should not be present", partyDetailsAndActionsContainer.getText().contains("LEGE EINE FOLGEPARTY AN"));
 		}
-		
+
 	}
+
 	public void verifyCustomerOrderLink(boolean customerOrderLinkIsPresent) {
 		if (customerOrderLinkIsPresent) {
 			Assert.assertTrue("The customer order button should be present and it's not", partyDetailsAndActionsContainer.getText().contains("FÜR EINE KUNDIN BESTELLEN"));
 		} else {
 			Assert.assertFalse("The customer order button should not be present", partyDetailsAndActionsContainer.getText().contains("FÜR EINE KUNDIN BESTELLEN"));
 		}
-		
+
 	}
+
 	public void verifyClosePartyLink(boolean closePartyLinkIsPresent) {
 		if (closePartyLinkIsPresent) {
 			Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains("STYLE PARTY SCHLIESSEN"));
 		} else {
 			Assert.assertFalse("The close party  button should not be present", partyDetailsAndActionsContainer.getText().contains("STYLE PARTY SCHLIESSEN"));
 		}
-		
+
 	}
 
 	public void verifyPartyStatus(String status) {
 		getDriver().navigate().refresh();
-		element(messageContainer).waitUntilVisible();		
+		element(messageContainer).waitUntilVisible();
 		Assert.assertTrue("The status should be " + status + " and it's not ", messageContainer.getText().contains(status));
 
 	}
@@ -205,6 +237,7 @@ public class PartyDetailsPage extends AbstractPage {
 		verifyCustomerOrderLink(false);
 		verifyClosePartyLink(false);
 	}
+
 	public void verifyActivePartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
 		verifyPartyStatus(Constants.PARTY_ACTIVE);
@@ -216,8 +249,9 @@ public class PartyDetailsPage extends AbstractPage {
 		verifyCustomerOrderLink(true);
 		verifyClosePartyLink(true);
 	}
+
 	public void verifyClosedPartyAvailableActions() {
-		element(partyDetailsAndActionsContainer).waitUntilVisible();		
+		element(partyDetailsAndActionsContainer).waitUntilVisible();
 		verifyPartyStatus(Constants.PARTY_CLOSED);
 		verifyHostessInviteLink(true);
 		verifyEditLink(false);
@@ -282,7 +316,7 @@ public class PartyDetailsPage extends AbstractPage {
 		}
 		Assert.assertTrue("The guest was not found in invites list", found);
 	}
-	
+
 	public void verifyThatOrderIsInTheOrdersList(String order) {
 		element(ordersList).waitUntilVisible();
 		List<WebElement> invitesList = ordersList.findElements(By.cssSelector("tbody tr"));
@@ -291,7 +325,7 @@ public class PartyDetailsPage extends AbstractPage {
 			if (invite.findElement(By.cssSelector("td:first-child")).getText().contentEquals(order)) {
 				found = true;
 			}
-			
+
 		}
 		Assert.assertTrue("The order was not found in orders list", found);
 	}

@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.gmail.GmailConnector;
+import com.connectors.mongo.MongoConnector;
 import com.steps.EmailSteps;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -37,7 +38,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US10005", type = "external")
 // @Story(Application.StyleCoach.Shopping.class)
 @RunWith(ThucydidesRunner.class)
-public class US10006ChechCustomerInviteEmailTest extends BaseTest {
+public class US10006ChechEmailAndAcceptInvitationTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -85,17 +86,24 @@ public class US10006ChechCustomerInviteEmailTest extends BaseTest {
 		emailData.setPassword(emailPassword);
 
 		gmailConnector = new GmailConnector(emailData);
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 
 	@Test
-	public void us10004ChechCustomerInviteEmailTest() {
+	public void us10006ChechEmailAndAcceptInvitationTest() {
 
 		frontEndSteps.performLogin(email, password);
 		String message = gmailConnector.searchForMail("", Constants.INVITE_EMAIL_SUBJECT, true);
-		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message, "registriere Dich bitte hier"));
+		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message, "JA, ich werde teilnehmen"));
 		System.out.println(urlModel.getUrl());
 
+	}
+
+	@After
+	public void saveData() {
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
 	}
 
 }

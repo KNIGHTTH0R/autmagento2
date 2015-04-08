@@ -50,6 +50,7 @@ import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
 import com.pages.frontend.checkout.shipping.host.ContactHostShippingPage;
 import com.pages.frontend.checkout.shipping.regularUser.ShippingPartySectionPage;
+import com.pages.frontend.checkout.wishlist.WishlistPage;
 import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.registration.FacebookRegistrationFormPage;
@@ -273,6 +274,9 @@ public class AbstractSteps extends ScenarioSteps {
 	// cart
 	public CartPage cartPage() {
 		return getPages().currentPageAt(CartPage.class);
+	}
+	public WishlistPage wishlistPage() {
+		return getPages().currentPageAt(WishlistPage.class);
 	}
 
 	public RegularUserCartPage regularUserCartPage() {

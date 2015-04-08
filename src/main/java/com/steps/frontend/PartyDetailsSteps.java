@@ -117,5 +117,9 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void createFolowUpParty() {
 		partyDetailsPage().createFolowUpParty();
 	}
+	@Step
+	public void selectWishlistProductAndAddItToBorrowCart(String productName) {
+		partyDetailsPage().selectWishlistProductAndAddItToBorrowCart(productName);
+	}
 
 }

@@ -36,5 +36,13 @@ public class AddRegularProductsWorkflow {
 
 		return productSteps.setRegularBasicProductAddToCart(qty, productProperty, finalPrice);
 	}
+	@StepGroup
+	@Title("Add product to cart")
+	public RegularBasicProductModel setBasicProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
+		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		
+		return productSteps.setRegularBasicProductAddToWishlist(qty, productProperty, finalPrice);
+	}
 
 }

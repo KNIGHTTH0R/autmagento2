@@ -55,6 +55,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 	private String username, password;
 	
 	public CustomerFormModel customerData;
+	public CustomerFormModel inviteData;
 	public AddressModel addressData;
 
 
@@ -62,6 +63,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 	public void setUp() throws Exception {
 		
 		customerData = new CustomerFormModel();
+		inviteData = new CustomerFormModel();
 		addressData = new AddressModel();
 
 		Properties prop = new Properties();
@@ -98,12 +100,15 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForNewCustomerHost());
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		partyDetailsSteps.verifyPlannedPartyAvailableActions();
+		partyDetailsSteps.sendInvitationToGest(inviteData);
+		partyDetailsSteps.verifyThatGuestIsInvited(inviteData.getFirstName());
 	
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName()+ Constants.GRAB);
+		MongoWriter.saveCustomerFormModel(inviteData, getClass().getSimpleName());
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + Constants.GRAB);
 	}
