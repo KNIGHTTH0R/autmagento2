@@ -93,7 +93,7 @@
 					</includes>
 					<systemPropertyVariables>
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
-						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver213.exe</webdriver.chrome.driver>
+						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver.exe</webdriver.chrome.driver>
 						<webdriver.ie.driver>${basedir}/src/main/resources/IEDriverServer.exe</webdriver.ie.driver>
 					</systemPropertyVariables>
 				</configuration>
