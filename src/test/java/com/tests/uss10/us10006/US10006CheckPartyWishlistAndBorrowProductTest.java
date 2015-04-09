@@ -47,7 +47,7 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	private String username, password;
 	public static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
 	public static List<BorrowedProductModel> borrowCartProductsList = new ArrayList<BorrowedProductModel>();
-	String productName, productCode;
+	private String productName, productCode;
 
 	@Before
 	public void setUp() throws Exception {

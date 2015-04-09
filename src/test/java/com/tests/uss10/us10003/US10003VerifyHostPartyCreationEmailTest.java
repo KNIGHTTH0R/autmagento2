@@ -29,7 +29,7 @@ public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 
 	private String email;
 	private static CustomerFormModel customerModel;
-	UrlModel urlModel = new UrlModel();
+	private UrlModel urlModel = new UrlModel();
 
 	@Before
 	public void setUp() throws Exception {

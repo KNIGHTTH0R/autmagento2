@@ -39,7 +39,7 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
 	private String email, password, emailPassword;
 
-	UrlModel urlModel = new UrlModel();
+	private UrlModel urlModel = new UrlModel();
 
 	@Before
 	public void setUp() throws Exception {

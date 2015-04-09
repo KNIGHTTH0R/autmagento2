@@ -41,8 +41,7 @@ public class US10006VerifyInviteForStylistHostEmailTest extends BaseTest {
 	public CustomVerification customVerifications;
 
 	private String email, password, emailPassword;
-
-	UrlModel urlModel = new UrlModel();
+	private UrlModel urlModel = new UrlModel();
 
 	@Before
 	public void setUp() throws Exception {
