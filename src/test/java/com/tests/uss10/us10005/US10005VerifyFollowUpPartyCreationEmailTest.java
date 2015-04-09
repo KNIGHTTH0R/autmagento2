@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -24,9 +25,10 @@ import com.tools.EmailConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.persistance.MongoWriter;
+import com.tools.requirements.Application;
 
-@WithTag(name = "US10005", type = "external")
-// @Story(Application.StyleCoach.Shopping.class)
+@WithTag(name = "US10", type = "external")
+@Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
@@ -37,7 +39,7 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
 	private String email, password, emailPassword;
 
-	UrlModel urlModel = new UrlModel();
+	private UrlModel urlModel = new UrlModel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -81,7 +83,7 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 		frontEndSteps.performLogin(email, password);
 
 		String message = gmailConnector.searchForMail("", Constants.PARTY_CREATION_EMAIL_SUBJECT, true);
-		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message,"customer/party/confirm"));
+		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message, "customer/party/confirm"));
 
 	}
 

@@ -28,7 +28,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US7", type = "fontend")
+@WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTest{

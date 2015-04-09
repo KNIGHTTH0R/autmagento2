@@ -1,4 +1,4 @@
-package com.tests.uss10.us10003;
+package com.tests.uss10.us10004;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -18,7 +18,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US10", type = "external")
 @Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10003CheckInviteEmailAndRegistratiionLinkTest extends BaseTest {
+public class US10004CheckInviteEmailTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -28,9 +28,9 @@ public class US10003CheckInviteEmailAndRegistratiionLinkTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US10003CreatePartyWithNewContactHostTest").size();
+		int size = MongoReader.grabCustomerFormModels("US10004InviteRegisteredGuestUpdateAndDeletePartyTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US10003CreatePartyWithNewContactHostTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US10004InviteRegisteredGuestUpdateAndDeletePartyTest").get(0).getEmailName();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
@@ -38,9 +38,9 @@ public class US10003CheckInviteEmailAndRegistratiionLinkTest extends BaseTest {
 	}
 
 	@Test
-	public void us10003CheckInviteEmailTest() {
+	public void us10004CheckInviteEmailTest() {
 		emailClientSteps.openMailinator();
-		emailClientSteps.validateThatEmailIsReceivedAndClickRegister(stylistEmail.replace("@" + Constants.WEB_MAIL, ""), Constants.INVITE_EMAIL_SUBJECT);
+		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + Constants.WEB_MAIL, ""), Constants.INVITE_EMAIL_SUBJECT);
 
 	}
 

@@ -26,6 +26,12 @@ public class Application {
 	}
 
 	@Feature
+	public class StyleParty {
+		public class CreateParty {
+		}
+	}
+
+	@Feature
 	public class External {
 	}
 

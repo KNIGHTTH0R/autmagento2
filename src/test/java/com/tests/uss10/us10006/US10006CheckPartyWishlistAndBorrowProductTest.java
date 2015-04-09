@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -26,10 +27,11 @@ import com.tools.data.frontend.BorrowedProductModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.persistance.MongoReader;
+import com.tools.requirements.Application;
 import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
 
-@WithTag(name = "US10006", type = "frontend")
-// @Story(Application.StyleParty.CreateParty.class)
+@WithTag(name = "US10", type = "frontend")
+@Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 
@@ -45,7 +47,7 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	private String username, password;
 	public static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
 	public static List<BorrowedProductModel> borrowCartProductsList = new ArrayList<BorrowedProductModel>();
-	String productName, productCode;
+	private String productName, productCode;
 
 	@Before
 	public void setUp() throws Exception {
@@ -94,7 +96,6 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 		borrowCartProductsList.add(borrowedProductModel);
 		borrowedProductModel = addBorrowedProductsWorkflow.setBorrowedProductToCart("Leihgebühr Z999", "0", "0", "0");
 		borrowCartProductsList.add(borrowedProductModel);
-
 
 	}
 }

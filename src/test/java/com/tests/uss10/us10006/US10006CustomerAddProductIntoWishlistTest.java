@@ -34,7 +34,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
-@WithTag(name = "US10006", type = "frontend")
+@WithTag(name = "US10", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
