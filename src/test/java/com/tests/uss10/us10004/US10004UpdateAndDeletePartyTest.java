@@ -35,15 +35,14 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 	public UpdatePartySteps updatePartySteps;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
-	
+
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
 
-
 	@Before
 	public void setUp() throws Exception {
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -53,7 +52,6 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -84,7 +82,5 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 		partyDetailsSteps.deleteParty();
 
 	}
-	
-
 
 }

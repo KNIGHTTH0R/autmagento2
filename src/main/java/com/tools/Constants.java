@@ -99,7 +99,7 @@ public class Constants {
 	public static final String STYLE_COACH_REG_PAGE_TITLE = "REGISTRIERE DICH ALS STYLE COACH UND ERWERBE DAS STARTER-SET";
 	public static final String VOUCHER_DISCOUNT_INCOMPATIBLE = "Gutscheine können nicht in Verbindung mit Schmuckbonus verwendet werden.";
 	public static final String PARTY_PLANNED = "Party geplant";
-	public static final String PARTY_ACTIVE = "Party vorüber";
+	public static final String PARTY_ACTIVE = "Partytermin vorüber";
 	public static final String PARTY_CLOSED = "Party geschlossen";
 	public static final String BOUNUS_SUCCESS_MESSAGE = "Bonus was successfully saved";
 	public static final String INVITE_EMAIL_SUBJECT = "lädt Dich ein zur PIPPA&JEAN Style Party";
