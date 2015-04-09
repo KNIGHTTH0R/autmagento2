@@ -45,7 +45,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US9002", type = "frontend")
+@WithTag(name = "US9", type = "frontend")
 @Story(Application.Shop.HostessCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseTest {

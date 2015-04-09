@@ -13,7 +13,7 @@ import com.tests.BaseTest;
 import com.tools.Constants;
 import com.tools.persistance.MongoReader;
 
-@WithTag(name = "US10003", type = "external")
+@WithTag(name = "US10", type = "external")
 //@Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US10003CheckInviteEmailAndRegistratiionLinkTest extends BaseTest {

@@ -1,6 +1,7 @@
 package com.tests.uss10.us10003;
 
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -16,9 +17,10 @@ import com.tools.data.UrlModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
+import com.tools.requirements.Application;
 
-@WithTag(name = "US10003", type = "external")
-// @Story(Application.StyleCoach.Shopping.class)
+@WithTag(name = "US10", type = "external")
+@Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 

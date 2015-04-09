@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
@@ -25,9 +26,10 @@ import com.tools.EmailConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.persistance.MongoWriter;
+import com.tools.requirements.Application;
 
-@WithTag(name = "US10006", type = "external")
-// @Story(Application.StyleCoach.Shopping.class)
+@WithTag(name = "US10", type = "external")
+@Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006ChechEmailAndAcceptInvitationTest extends BaseTest {
 
@@ -35,7 +37,6 @@ public class US10006ChechEmailAndAcceptInvitationTest extends BaseTest {
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
 	public EmailSteps emailSteps;
-
 
 	private String email, password, emailPassword;
 
@@ -76,7 +77,7 @@ public class US10006ChechEmailAndAcceptInvitationTest extends BaseTest {
 		emailData.setPassword(emailPassword);
 
 		gmailConnector = new GmailConnector(emailData);
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
