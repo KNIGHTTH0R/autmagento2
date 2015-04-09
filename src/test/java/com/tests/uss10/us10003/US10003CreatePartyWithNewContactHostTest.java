@@ -85,7 +85,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 		}
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test

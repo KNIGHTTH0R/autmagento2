@@ -29,6 +29,7 @@ public class US10003CheckInviteEmailAndRegistratiionLinkTest extends BaseTest {
 		int size = MongoReader.grabCustomerFormModels("US10003CreatePartyWithNewContactHostTest").size();
 		if (size > 0) {
 			stylistEmail = MongoReader.grabCustomerFormModels("US10003CreatePartyWithNewContactHostTest").get(0).getEmailName();
+			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
 
