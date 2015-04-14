@@ -12,9 +12,9 @@ import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.backend.StylistPropertiesModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;

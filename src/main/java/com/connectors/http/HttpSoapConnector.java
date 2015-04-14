@@ -15,11 +15,11 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
-import com.tools.Constants;
 import com.tools.SoapKeys;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
+import com.tools.env.stagingaut.Constants;
 
 public class HttpSoapConnector {
 

@@ -6,11 +6,11 @@ import net.thucydides.core.annotations.Title;
 
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
-import com.tools.Constants;
 import com.tools.calculation.CartDiscountsCalculation;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.soap.ProductDetailedModel;
+import com.tools.env.stagingaut.Constants;
 
 public class AddProductsWorkflow {
 	@Steps

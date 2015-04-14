@@ -3,12 +3,12 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
-import com.tools.Constants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowedProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
 public class ProductSteps extends AbstractSteps {

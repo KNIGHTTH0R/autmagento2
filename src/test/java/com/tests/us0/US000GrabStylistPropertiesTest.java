@@ -18,9 +18,9 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoWriter;
 
 @WithTag(name = "US000", type = "backend")

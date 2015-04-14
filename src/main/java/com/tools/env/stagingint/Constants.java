@@ -1,4 +1,4 @@
-package com.tools;
+package com.tools.env.stagingint;
 
 import java.io.File;
 
@@ -11,24 +11,13 @@ import java.io.File;
  */
 public class Constants {
 
-	//Staging uRLs
-//	public static final String BASE_URL_BE = "http://staging.pippajean.com/index.php/admin/";
-//	public static final String BASE_URL_FE = "http://staging.pippajean.com/customer/account/create/";
-//	public static final String BASE_URL = "https://staging.pippajean.com/customer/account/login/";
-//	public static final String BASE_URL_AUT = "https://staging.pippajean.com/customer/account/login/";
-//	public static final String URL_CART_SUCCESS = "https://staging.pippajean.com/simona/simplecheckout/process/success/";
-//	public static final String PROFILE_HISTORY_URL = "https://staging.pippajean.com/simona/sales/order/history/";
-//	public static final String CART_PAGE_URL = "http://staging.pippajean.com/simona/checkout/cart/";
-//	public static final String BE_URL_RULE_BUY3GET1 = "https://staging.pippajean.com/index.php/admin/promo_quote/edit/id/5466/key/";
 	
 	//Staging INT uRLs
-	public static final String BASE_FE_URL = "http://staging-int.pippajean.com/de/?___store=de_lang_de";
-	public static final String BASE_URL = "https://staging-int.pippajean.com/de/customer/account/login/";
+	public static final String BASE_FE_URL = "http://staging-int.pippajean.com/de/";
+	public static final String BASE_URL = "http://staging-int.pippajean.com/de/?___store=de_lang_de/";
 	public static final String BASE_URL_AUT = "https://staging-int.pippajean.com/de/customer/account/login/";
 	public static final String BASE_URL_BE = "https://admin-staging-int.pippajean.com/index.php/admin/";
 	public static final String BASE_URL_FE = "https://staging-int.pippajean.com/de/customer/account/create/";
-	
-	
 	public static final String URL_CART_SUCCESS = "http://staging-int.pippajean.com/de/simona/simplecheckout/process/success/";
 	public static final String PROFILE_HISTORY_URL = "http://staging-int.pippajean.com/de/simona/sales/order/history/";
 	public static final String WISHLIST_URL = "http://staging-int.pippajean.com/de/qateam/wishlist/";
@@ -38,44 +27,20 @@ public class Constants {
 	public static final String BE_URL_RULE_BUY3GET1_FOR_REGULAR = "https://admin-staging-int.pippajean.com/index.php/admin/promo_quote/edit/id/5467/key/";
 	public static final String PARTY_DETAILS_URL = "http://staging-int.pippajean.com/de/qateam/stylist/party/details/id/";
 	
-	//Staging AUT uRLs
-//	public static final String BASE_URL_BE = "http://pippajean:sn0wMob1l!@staging-aut.pippajean.com/index.php/admin/";
-////	public static final String BASE_URL_FE = "http://staging-aut.pippajean.com/welcome-shop-landing";
-//	public static final String BASE_URL_FE = "http://pippajean:sn0wMob1l!@staging-aut.pippajean.com/customer/account/create/";
-//	public static final String BASE_FE_URL = "http://staging-aut.pippajean.com/";
-//	public static final String BASE_URL = "https://staging-aut.pippajean.com/customer/account/login/";
-//	public static final String BASE_URL_AUT = "https://staging-aut.pippajean.com/customer/account/login/";
-//	public static final String URL_CART_SUCCESS = "https://staging-aut.pippajean.com/simona/simplecheckout/process/success/";
-//	public static final String PROFILE_HISTORY_URL = "https://staging-aut.pippajean.com/simona/sales/order/history/";
-//	public static final String WISHLIST_URL = "https://staging-aut.pippajean.com/qateam/wishlist/";
-//	public static final String STYLISTS_CUSTOMER_ORDER_REPORT = "http://staging-aut.pippajean.com/qateam/stylereports/order/myorders/?type=customerorders";
-//	public static final String CART_PAGE_URL = "http://staging-aut.pippajean.com/simona/checkout/cart/";
-//	public static final String BE_URL_RULE_BUY3GET1 = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5466/key/";
-//	public static final String BE_URL_RULE_BUY3GET1_FOR_REGULAR = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5467/key/";
-//	public static final String PARTY_DETAILS_URL = "http://staging-aut.pippajean.com/qateam/stylist/party/details/id/";
 	
 	// SOAP user authentication
 	public static final String LOGIN_USER_SOAP = "stagingaut";
 	public static final String LOGIN_PASS_SOAP = "stagingaut1";
-	// public static final String LOGIN_PASS = "YYz66iiaalop";
-
-	// SOAP URIs
-	// public static final String API_URI =
-	// "http://staging-aut.pippajean.com/index.php/api/v2_soap?wsdl=1";
-	// public static final String API_URI =
-	// "https://staging-aut.pippajean.com/index.php/api/v2_soap/";
-	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
-	// public static final String API_URI =
-	// "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
+	
+	public static final String API_URI = "https://staging-int.pippajean.com/index.php/api/v2_soap/index/";
 
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
 	public static final String REGISTER_LANDING_PAGE = "register-landing-page";
 	public static final String LANDING_PAGE = "contact-landing-page";
 
-	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-int" + File.separator;
 	public static final String BE_USER = "admin";
-//	public static final String BE_PASS = "admin123";
-	 public static final String BE_PASS = "admin1234";
+	public static final String BE_PASS = "admin123";
 	public static final String BE_STYLIST = "simona.popa@evozon.com";
 	public static final String WEB_MAIL = "mailinator.com";
 

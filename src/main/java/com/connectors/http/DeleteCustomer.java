@@ -11,8 +11,8 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.DOMException;
 
-import com.tools.Constants;
 import com.tools.SoapKeys;
+import com.tools.env.stagingaut.Constants;
 
 public class DeleteCustomer extends HttpSoapConnector {
 

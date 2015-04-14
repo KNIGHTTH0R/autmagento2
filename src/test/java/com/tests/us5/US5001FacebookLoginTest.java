@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.external.FacebookRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.Application;
 
 

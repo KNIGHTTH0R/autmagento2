@@ -10,12 +10,12 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
-import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
+import com.tools.env.stagingaut.Constants;
 
 public class RegularUserCartWorkflows {
 

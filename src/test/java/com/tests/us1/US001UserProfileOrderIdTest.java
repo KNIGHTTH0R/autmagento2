@@ -20,9 +20,9 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.backend.OrderModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

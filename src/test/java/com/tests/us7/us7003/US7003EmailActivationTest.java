@@ -20,10 +20,10 @@ import com.steps.EmailSteps;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.Application;
 
 

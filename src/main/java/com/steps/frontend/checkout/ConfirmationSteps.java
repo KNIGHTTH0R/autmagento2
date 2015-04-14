@@ -4,13 +4,13 @@ import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
 public class ConfirmationSteps extends AbstractSteps {

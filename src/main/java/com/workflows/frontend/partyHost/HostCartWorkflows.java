@@ -10,12 +10,12 @@ import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
-import com.tools.Constants;
 import com.tools.CustomVerification;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
+import com.tools.env.stagingaut.Constants;
 
 public class HostCartWorkflows {
 

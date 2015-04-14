@@ -9,9 +9,9 @@ import net.thucydides.core.annotations.Title;
 import org.junit.Assert;
 
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
-import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
 public class CustomerRegistrationSteps extends AbstractSteps {

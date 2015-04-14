@@ -13,8 +13,8 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.styleParties.PartyDetailsBackendSteps;
 import com.steps.backend.styleParties.PartyListBackendSteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
 import com.tools.data.UrlModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

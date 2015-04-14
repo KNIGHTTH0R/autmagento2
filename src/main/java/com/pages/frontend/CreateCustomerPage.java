@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
-import com.tools.Constants;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractPage;
 
 public class CreateCustomerPage extends AbstractPage {

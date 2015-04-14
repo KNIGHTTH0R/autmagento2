@@ -18,8 +18,8 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
 import com.tools.CustomVerification;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US7", type = "backend")

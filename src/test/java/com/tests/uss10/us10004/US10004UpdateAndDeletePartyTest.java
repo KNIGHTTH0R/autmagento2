@@ -20,9 +20,9 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.UpdatePartySteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

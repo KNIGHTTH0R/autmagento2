@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.Constants;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractPage;
 
 public class StylistRegistrationPage extends AbstractPage {

@@ -2,10 +2,10 @@ package com.steps.backend;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.Constants;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
 public class BackEndSteps extends AbstractSteps {

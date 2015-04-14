@@ -11,12 +11,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.Constants;
 import com.tools.calculation.HostCartTotalsCalculation;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 

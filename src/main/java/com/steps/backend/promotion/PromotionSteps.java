@@ -1,6 +1,6 @@
 package com.steps.backend.promotion;
 
-import com.tools.Constants;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
 public class PromotionSteps extends AbstractSteps {

@@ -22,7 +22,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US6", type = "frontend")

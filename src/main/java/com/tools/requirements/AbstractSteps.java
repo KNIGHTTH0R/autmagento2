@@ -60,7 +60,7 @@ import com.pages.frontend.registration.landing.ThankYouPage;
 import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
-import com.tools.Constants;
+import com.tools.env.stagingaut.Constants;
 
 public class AbstractSteps extends ScenarioSteps {
 

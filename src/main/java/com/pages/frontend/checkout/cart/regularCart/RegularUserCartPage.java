@@ -11,11 +11,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.Constants;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 

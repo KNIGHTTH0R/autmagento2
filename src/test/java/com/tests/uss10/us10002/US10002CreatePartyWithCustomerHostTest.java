@@ -21,9 +21,9 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.tests.BaseTest;
-import com.tools.Constants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 

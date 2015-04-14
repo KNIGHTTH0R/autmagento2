@@ -6,7 +6,6 @@ public class SoapKeys {
 	public static final String URN_PREFIX = "urn";
 	public static final String SOAP_PREFIX = "soapenv";
 	public static final String SERVER_URI = "urn:Magento";
-
 	public static final String COMPLEX_OBJECT_ARRAY = "complexObjectArray";
 
 	// Login keys
@@ -46,7 +45,6 @@ public class SoapKeys {
 	public static final String PRODUCT_IP = "product_ip";
 	public static final String NEWS_FROM_DATE = "news_from_date";
 	public static final String NEWS_TO_DATE = "news_to_date";
-	
 	
 	// Stock Data
 	public static final String STOCK_DATA = "stock_data";

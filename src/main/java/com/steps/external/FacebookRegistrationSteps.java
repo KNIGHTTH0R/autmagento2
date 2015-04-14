@@ -3,7 +3,7 @@ package com.steps.external;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
-import com.tools.Constants;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
 public class FacebookRegistrationSteps extends AbstractSteps {

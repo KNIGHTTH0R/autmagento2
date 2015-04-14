@@ -8,7 +8,6 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.Constants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
@@ -17,6 +16,7 @@ import com.tools.data.frontend.ShippingModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
