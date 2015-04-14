@@ -13,11 +13,12 @@ import com.tools.persistance.MongoReader;
  */
 public class UrlConstants {
 	
-	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-" + MongoReader.getEnvironment() + File.separator;
 //	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-aut" + File.separator;
+	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + MongoReader.getEnvironment() + File.separator;
 
-	//Staging AUT uRLs
-	public static final String BASE_FE_URL = "http://staging-aut.pippajean.com/";
+	//Staging AUT uRLs 
+//	public static final String BASE_FE_URL = "http://staging-aut.pippajean.com/";
+	public static final String BASE_FE_URL = MongoReader.getBaseURL();
 	public static final String BASE_URL_BE = BASE_FE_URL + "index.php/admin/";
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
 	

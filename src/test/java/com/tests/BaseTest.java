@@ -13,7 +13,6 @@ import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 
@@ -21,7 +20,8 @@ public class BaseTest {
 	@Managed(uniqueSession = true)
 	public WebDriver webdriver;
 
-	@ManagedPages(defaultUrl = UrlConstants.BASE_URL_AUT)
+	@ManagedPages(defaultUrl = "http://staging-aut.pippajean.com/customer/account/login/")
+//	@ManagedPages(defaultUrl = UrlConstants.BASE_URL_AUT)
 	public Pages pages;
 	
 	public MongoConnector mongoConnector;
@@ -42,11 +42,14 @@ public class BaseTest {
             e.printStackTrace();
         }
         
-        //Context and environment - clean and setup
+        //Context and environment - clean and setup to mongo
         MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
         String contextValue = System.getProperty("runContext");
         String envValue = System.getProperty("runEnv");
-        MongoWriter.saveEnvContext(envValue, contextValue);
+        String baseUrl = System.getProperty("webdriver.base.url");
+        MongoWriter.saveEnvContext(envValue, contextValue, baseUrl);
+        
+        System.out.println("(webdriver.base.url) Base URL: " + baseUrl);
         
         EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
         emailDefaults.setHost(EmailConstants.RECEIVING_HOST);

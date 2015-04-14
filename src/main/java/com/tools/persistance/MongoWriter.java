@@ -30,13 +30,14 @@ public class MongoWriter extends MongoConnector {
 		super();
 	}
 
-	public static void saveEnvContext(String env, String context) {
+	public static void saveEnvContext(String env, String context, String baseUrl) {
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.DEFAULT_CONFIG_MODEL);
 		
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.ENV_KEY, env);
 		document.put(MongoTableKeys.CONTEXT_KEY, context);
+		document.put(MongoTableKeys.BASE_URL_KEY, baseUrl);
 		
 		table.insert(document);
 	}

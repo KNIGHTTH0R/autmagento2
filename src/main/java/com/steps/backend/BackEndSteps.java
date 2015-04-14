@@ -29,6 +29,7 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void performLogin(String userName, String userPass) {
+		getDriver().get(UrlConstants.BASE_URL_AUT);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
