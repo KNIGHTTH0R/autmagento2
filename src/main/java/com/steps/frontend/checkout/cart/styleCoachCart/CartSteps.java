@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.PrintUtils;
 
@@ -21,7 +21,7 @@ public class CartSteps extends  AbstractSteps{
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsData(){
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return cartPage().grabProductsData();
 	}
 	

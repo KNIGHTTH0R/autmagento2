@@ -60,6 +60,7 @@ import com.pages.frontend.registration.landing.ThankYouPage;
 import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
+import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -81,7 +82,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public void refresh() {
 		getDriver().navigate().refresh();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -112,7 +113,7 @@ public class AbstractSteps extends ScenarioSteps {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("stylist/lounge/", "checkout/cart/clearAllItems/");
 		getDriver().get(modiURL);
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(initURL);
 	}
 
@@ -120,7 +121,7 @@ public class AbstractSteps extends ScenarioSteps {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("schmuckstucke/neu.html", "checkout/cart/clearAllItems/");
 		getDriver().get(modiURL);
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(initURL);
 	}
 
@@ -128,7 +129,7 @@ public class AbstractSteps extends ScenarioSteps {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("checkout/cart/", "checkout/cart/clearAllItems/");
 		getDriver().get(modiURL);
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(initURL);
 	}
 

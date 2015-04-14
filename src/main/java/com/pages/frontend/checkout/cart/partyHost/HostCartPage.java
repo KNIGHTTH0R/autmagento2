@@ -16,6 +16,7 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
+import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -119,7 +120,7 @@ public class HostCartPage extends AbstractPage {
 
 	public HostCartTotalsModel grabTotals() {
 		HostCartTotalsModel resultModel = new HostCartTotalsModel();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 
 		String valueTransformer = "";
 		element(totalsTable).waitUntilVisible();

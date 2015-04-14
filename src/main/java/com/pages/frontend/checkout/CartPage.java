@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
@@ -88,7 +89,7 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith25Discount() {
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		element(formContainer).waitUntilVisible();
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-25-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
@@ -118,7 +119,7 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith50Discount() {
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		element(formContainer).waitUntilVisible();
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-50-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
@@ -149,7 +150,7 @@ public class CartPage extends AbstractPage {
 	 * @return
 	 */
 	public List<CartProductModel> grabMarketingMaterialProductsData() {
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		element(formContainer).waitUntilVisible();
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-table-marketing-material tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
@@ -175,7 +176,7 @@ public class CartPage extends AbstractPage {
 
 	public CartTotalsModel grabTotals() {
 		CartTotalsModel resultModel = new CartTotalsModel();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 
 		String valueTransformer = "";
 		element(totalsTable).waitUntilVisible();

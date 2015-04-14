@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.Step;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class OrdersSteps extends AbstractSteps {
@@ -21,7 +21,7 @@ public class OrdersSteps extends AbstractSteps {
 
 	@Step
 	public void openOrder(String orderId) {
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		orderListPage().openOrderDetails(orderId);
 	}
 
@@ -43,7 +43,7 @@ public class OrdersSteps extends AbstractSteps {
 	@Step
 	public void markOrderAsPaid() {
 		ordersActionsPage().markOrderAsPaid();
-		waitABit(Constants.WAIT_TIME_LONG);
+		waitABit(TimeConstants.WAIT_TIME_LONG);
 	}
 
 }

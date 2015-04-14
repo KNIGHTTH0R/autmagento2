@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
@@ -172,7 +173,7 @@ public class CartPage extends AbstractPage {
 
 	public CartTotalsModel grabTotals() {
 		CartTotalsModel resultModel = new CartTotalsModel();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 
 		String valueTransformer = "";
 		element(totalsTable).waitUntilVisible();

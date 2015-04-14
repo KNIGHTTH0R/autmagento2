@@ -10,7 +10,7 @@ import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 
@@ -52,7 +52,7 @@ public class ProductDetailsPage extends AbstractPage {
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), "Der Artikel wurde in den Warenkorb gelegt. Du kannst deinen Einkauf fortsetzen."));
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 	public void addToWishlist() {
 		element(addToWishlistButton).waitUntilVisible();

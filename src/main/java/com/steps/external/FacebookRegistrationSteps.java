@@ -3,7 +3,7 @@ package com.steps.external;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class FacebookRegistrationSteps extends AbstractSteps {
@@ -37,7 +37,7 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 
 	@Step
 	public void fillFacebookRegistration(String zipCode, String selectOption, String passsword) {
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		findFrame("Create new account");
 		facebookRegistrationFormPage().zipInput(zipCode);
 		facebookRegistrationFormPage().countrySelect(selectOption);

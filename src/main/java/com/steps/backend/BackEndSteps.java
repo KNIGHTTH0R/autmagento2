@@ -3,8 +3,9 @@ package com.steps.backend;
 import net.thucydides.core.annotations.Step;
 
 import com.tools.data.StylistDataModel;
-import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
+import com.tools.data.backend.StylistPropertiesModel;
+import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
@@ -74,7 +75,7 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public String openCustomerDetails(String emailText) {
 		customerListPage().openCustomerDetails(emailText);
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return getDriver().getCurrentUrl();
 	}
 

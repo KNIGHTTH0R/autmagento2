@@ -15,6 +15,7 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -141,7 +142,7 @@ public class RegularUserCartPage extends AbstractPage {
 
 	public RegularUserCartTotalsModel grabTotals() {
 		RegularUserCartTotalsModel resultModel = new RegularUserCartTotalsModel();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 
 		String valueTransformer = "";
 		element(totalsTable).waitUntilVisible();

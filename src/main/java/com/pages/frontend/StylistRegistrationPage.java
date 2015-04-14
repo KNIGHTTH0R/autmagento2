@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractPage;
 
@@ -218,8 +219,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void selectStarterKit() {
-		waitABit(Constants.TIME_MEDIUM);
-		// element(By.cssSelector("div.starter-kit")).waitUntilVisible();
+		waitABit(TimeConstants.TIME_MEDIUM);
 		elementjQueryClick("input#kit_2567");
 	}
 

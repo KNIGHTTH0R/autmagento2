@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class CustomerDetailsPage extends AbstractPage {
@@ -96,7 +96,7 @@ public class CustomerDetailsPage extends AbstractPage {
 
 		for (WebElement buttonNow : deleteButtons) {
 			buttonNow.click();
-			waitABit(Constants.TIME_CONSTANT);
+			waitABit(TimeConstants.TIME_CONSTANT);
 			String alertText = getDriver().switchTo().alert().getText();
 			getDriver().switchTo().alert().accept();
 			if (alertText.contains("Vorgang")) {

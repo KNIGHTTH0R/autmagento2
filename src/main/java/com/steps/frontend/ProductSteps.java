@@ -8,6 +8,7 @@ import com.tools.data.frontend.BorrowedProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
@@ -31,7 +32,7 @@ public class ProductSteps extends AbstractSteps {
 
 		ProductBasicModel result = productDetailsPage().grabProductData();
 		addToCart();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
 
@@ -50,7 +51,7 @@ public class ProductSteps extends AbstractSteps {
 		result.setPriceIP(ip);
 
 		addToCart();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
 
@@ -81,7 +82,7 @@ public class ProductSteps extends AbstractSteps {
 		result.setBunosValue("0");
 
 		addToCart();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
 
@@ -100,7 +101,7 @@ public class ProductSteps extends AbstractSteps {
 		result.setBunosValue("0");
 
 		addToWishlist();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
 
@@ -120,7 +121,7 @@ public class ProductSteps extends AbstractSteps {
 		result.setBunosValue("0");
 
 		addToCart();
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
 

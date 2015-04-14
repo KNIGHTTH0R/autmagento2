@@ -1,10 +1,10 @@
 package com.pages.frontend;
 
-import org.openqa.selenium.WebElement;
-
 import net.thucydides.core.annotations.findby.FindBy;
 
-import com.tools.env.stagingaut.Constants;
+import org.openqa.selenium.WebElement;
+
+import com.tools.env.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class CreateCustomerPage extends AbstractPage {
@@ -85,7 +85,7 @@ public class CreateCustomerPage extends AbstractPage {
 		element(passwordInput).waitUntilVisible();
 		passwordInput.sendKeys(passText);
 
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		passwordInput.clear();
 		passwordInput.sendKeys(passText);
 

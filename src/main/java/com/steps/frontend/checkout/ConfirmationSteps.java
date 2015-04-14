@@ -10,7 +10,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class ConfirmationSteps extends AbstractSteps {
@@ -38,9 +38,9 @@ public class ConfirmationSteps extends AbstractSteps {
 	}
 
 	public ShippingModel grabConfirmationTotals() {
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().navigate().to(getDriver().getCurrentUrl());
-		waitABit(Constants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return confirmationPage().grabConfirmationTotals();
 	}
 
@@ -48,7 +48,7 @@ public class ConfirmationSteps extends AbstractSteps {
 	public void agreeAndCheckout() {
 		confirmationPage().clickIAgree();
 		confirmationPage().clickOnSubmit();
-		waitABit(Constants.WAIT_TIME_LONG);
+		waitABit(TimeConstants.WAIT_TIME_LONG);
 	}
 
 	@Step

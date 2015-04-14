@@ -11,6 +11,7 @@ import org.junit.Assert;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
@@ -283,7 +284,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	 */
 	@Step
 	public void verifySimpleThankYouPage() {
-		waitABit(Constants.WAIT_TIME_LONG);
+		waitABit(TimeConstants.WAIT_TIME_LONG);
 		String pageSource = thankYouPage().pageSource();
 		String pageTitle = thankYouPage().pageTitle();
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page", pageTitle.contains("Thank you page"));

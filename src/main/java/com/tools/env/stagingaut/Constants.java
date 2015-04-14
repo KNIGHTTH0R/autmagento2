@@ -40,15 +40,15 @@ public class Constants {
 
 	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-aut" + File.separator;
 	public static final String BE_USER = "admin";
-	 public static final String BE_PASS = "admin1234";
+	public static final String BE_PASS = "admin1234";
 	public static final String BE_STYLIST = "simona.popa@evozon.com";
 	public static final String WEB_MAIL = "mailinator.com";
 
 
-	public static final long TIME_MEDIUM = 5000;
-	public static final long WAIT_TIME_MAIL = 5000;
-	public static final long TIME_CONSTANT = 3000;
-	public static final long WAIT_TIME_LONG = 8000;
+//	public static final long TIME_MEDIUM = 5000;
+//	public static final long WAIT_TIME_MAIL = 5000;
+//	public static final long TIME_CONSTANT = 3000;
+//	public static final long WAIT_TIME_LONG = 8000;
 
 	public static final String DATE_SEPARATOR = ",";
 	public static final String ADDRESS_SEPARATOR = ",";
