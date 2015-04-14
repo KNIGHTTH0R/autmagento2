@@ -16,6 +16,7 @@ import com.tools.CustomVerification;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.ConfigConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -53,8 +54,8 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 			System.out.println("The database has no entries");
 
 		
-		expectedAfterLinkConfirmationStylistData =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
-		expectedAfterOrderPaidStylistData =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_FINAL_VALUE, Constants.STYLIST);
+		expectedAfterLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
+		expectedAfterOrderPaidStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.STYLIST);
 		expectedDateModel = new RegistrationActivationDateModel(formDateCreation,formDateCreation);
 		
 	}

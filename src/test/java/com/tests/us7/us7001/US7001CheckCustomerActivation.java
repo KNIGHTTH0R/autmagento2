@@ -14,6 +14,7 @@ import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.backend.StylistPropertiesModel;
+import com.tools.env.ConfigConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -46,7 +47,7 @@ public class US7001CheckCustomerActivation extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 		
-		afterLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(Constants.CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
+		afterLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
 		
 	}
 	@Test

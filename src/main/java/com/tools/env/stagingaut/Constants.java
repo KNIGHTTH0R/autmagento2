@@ -60,15 +60,6 @@ public class Constants {
 	public static final String DISCOUNT_50 = "50";
 	public static final String DISCOUNT_BUY_3_GET_1 = "3+1";
 	
-	//statuses
-	public static final String CONFIRMED = "Bestätigt";
-	public static final String NOT_CONFIRMED = "Nicht bestätigt, kann sich nicht anmelden";
-	//jewelry bonus values
-	public static final String JEWELRY_INITIAL_VALUE = "0.0000";
-	public static final String JEWELRY_FINAL_VALUE = "400.0000";
-	//customer types
-	public static final String GENERAL = "General";
-	public static final String STYLIST = "Stylist";
 	//messages
 	public static final String EXISTING_ACCOUNT_MESSAGE = "WICHTIG: Wenn Du bereits einen PIPPA&JEAN Benutzerkonto hast, dann melde dich bitte hier an, bevor Du die Style Coach Registrierung ausführst!";
 	public static final String STYLE_COACH_REG_PAGE_TITLE = "REGISTRIERE DICH ALS STYLE COACH UND ERWERBE DAS STARTER-SET";
@@ -86,7 +77,4 @@ public class Constants {
 	public static final String REGULAR_PRICE = "Regulärer Preis";
 	public static final String VOUCHER_DISCOUNT = "Voucher Discount";
 	
-	
-//	public static final String TEN = "10";
-
 }

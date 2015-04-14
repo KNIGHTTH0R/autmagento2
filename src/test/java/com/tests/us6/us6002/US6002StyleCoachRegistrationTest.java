@@ -23,6 +23,7 @@ import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.env.ConfigConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -62,7 +63,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 		// Generate data for this test run
 		stylistAddressModel = new AddressModel();
 		birthDate = "Feb,1970,12";
-		expectedBeforeLinkConfirmationStylistData =  new StylistPropertiesModel(Constants.NOT_CONFIRMED, Constants.JEWELRY_INITIAL_VALUE, Constants.GENERAL);
+		expectedBeforeLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.NOT_CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		int size = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").size();
