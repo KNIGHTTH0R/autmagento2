@@ -14,6 +14,8 @@ import com.connectors.mongo.MongoConnector;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoTableKeys;
+import com.tools.persistance.MongoWriter;
 
 public class BaseTest {
 	@Managed(uniqueSession = true)
@@ -40,9 +42,11 @@ public class BaseTest {
             e.printStackTrace();
         }
         
+        //Context and environment - clean and setup
+        MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
         String contextValue = System.getProperty("runContext");
-        
-        System.out.println(" ---- Context: " + contextValue);
+        String envValue = System.getProperty("runEnv");
+        MongoWriter.saveEnvContext(envValue, contextValue);
         
         EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
         emailDefaults.setHost(EmailConstants.RECEIVING_HOST);

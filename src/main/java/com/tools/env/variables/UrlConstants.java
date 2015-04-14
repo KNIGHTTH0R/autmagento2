@@ -2,6 +2,8 @@ package com.tools.env.variables;
 
 import java.io.File;
 
+import com.tools.persistance.MongoReader;
+
 /**
  * Need to make soap and environment always point to the same environment.
  * Issues might arise.
@@ -11,7 +13,8 @@ import java.io.File;
  */
 public class UrlConstants {
 	
-	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-aut" + File.separator;
+	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-" + MongoReader.getEnvironment() + File.separator;
+//	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-aut" + File.separator;
 
 	//Staging AUT uRLs
 	public static final String BASE_FE_URL = "http://staging-aut.pippajean.com/";

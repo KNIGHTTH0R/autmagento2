@@ -17,7 +17,7 @@
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
 		<runSuite>**/DemoSuite.class</runSuite>
 		<runContext>de</runContext>
-		<runEnv>aut</runEnv>
+		<runEnv>staging-aut</runEnv>
 		<outputEncoding>UTF-8</outputEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

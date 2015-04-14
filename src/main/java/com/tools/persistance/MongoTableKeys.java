@@ -121,8 +121,12 @@ public class MongoTableKeys {
 	public static final String CUSTOMER_FORM_MODEL = "CustomerFormModel";
 	public static final String HOST_CART_CALC_DETAILS_MODEL = "HostCartCalcDetailsModel";
 	public static final String HOST_BASIC_PRODUCT_MODEL = "HostBasicProductModel";
-
 	
-
+	//Default settings 
+	public static final String TEST_CONFIG = "DefaultConfig";
+	public static final String DEFAULT_CONFIG_MODEL = "DefaultConfigModel";
+	public static final String ENV_KEY = "env";
+	public static final String CONTEXT_KEY = "context";
+	
 
 }
