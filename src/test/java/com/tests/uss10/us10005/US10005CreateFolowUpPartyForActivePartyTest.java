@@ -23,7 +23,7 @@ import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

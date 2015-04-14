@@ -10,7 +10,7 @@ import com.tools.calculation.CartDiscountsCalculation;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.env.ConfigConstants;
+import com.tools.env.constants.ConfigConstants;
 
 public class AddProductsWorkflow {
 	@Steps

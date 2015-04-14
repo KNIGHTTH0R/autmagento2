@@ -31,6 +31,48 @@ public class MongoReader extends MongoConnector {
 		super();
 	}
 
+	public static String getEnvironment() {
+
+		DBObject dbObject = null;
+		String env = "";
+
+		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.DEFAULT_CONFIG_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				dbObject = cursor.next();
+				env = MongoUtils.checkField(dbObject, MongoTableKeys.ENV_KEY);
+			}
+		} finally {
+			cursor.close();
+		}
+		
+		System.out.println("Environment Set: " + env);
+
+		return env;
+	}
+
+	public static String getContext() {
+
+		DBObject dbObject = null;
+		String context = "";
+
+		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.DEFAULT_CONFIG_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				dbObject = cursor.next();
+				context = MongoUtils.checkField(dbObject, MongoTableKeys.CONTEXT_KEY);
+			}
+		} finally {
+			cursor.close();
+		}
+
+		return context;
+	}
+
 	public static List<OrderModel> getOrderModel(String testName) {
 
 		DBObject dbObject = null;

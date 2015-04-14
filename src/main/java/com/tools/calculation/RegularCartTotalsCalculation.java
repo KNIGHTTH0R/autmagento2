@@ -7,7 +7,7 @@ import java.util.List;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.ConfigConstants;
+import com.tools.env.constants.ConfigConstants;
 
 public class RegularCartTotalsCalculation {
 

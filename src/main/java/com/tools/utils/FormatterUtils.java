@@ -7,8 +7,7 @@ import java.util.Date;
 
 import org.junit.Assert;
 
-import com.tools.env.Separators;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.constants.Separators;
 
 public class FormatterUtils {
 

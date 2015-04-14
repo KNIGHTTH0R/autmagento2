@@ -16,6 +16,8 @@
 		<webdriver.driver>firefox</webdriver.driver>
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
 		<runSuite>**/DemoSuite.class</runSuite>
+		<runContext>de</runContext>
+		<runEnv>staging-aut</runEnv>
 		<outputEncoding>UTF-8</outputEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -92,6 +94,8 @@
 						<include>**/*${runSuite}.class</include>
 					</includes>
 					<systemPropertyVariables>
+						<runContext>${runContext}</runContext>
+						<runEnv>${runEnv}</runEnv>
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
 						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver.exe</webdriver.chrome.driver>
 						<webdriver.ie.driver>${basedir}/src/main/resources/IEDriverServer.exe</webdriver.ie.driver>

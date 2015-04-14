@@ -15,7 +15,7 @@ import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
-import com.tools.env.ConfigConstants;
+import com.tools.env.constants.ConfigConstants;
 
 public class HostCartWorkflows {
 

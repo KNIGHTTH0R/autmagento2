@@ -1,7 +1,7 @@
 package com.steps.backend.promotion;
 
-import com.tools.env.stagingaut.UrlConstants;
-import com.tools.env.stagingaut.Credentials;
+import com.tools.env.variables.Credentials;
+import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class PromotionSteps extends AbstractSteps {

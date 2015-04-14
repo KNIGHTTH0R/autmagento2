@@ -26,7 +26,7 @@ import com.tools.data.UrlModel;
 import com.tools.data.frontend.BorrowedProductModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;

@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.Step;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
-import com.tools.env.TimeConstants;
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class OrdersSteps extends AbstractSteps {

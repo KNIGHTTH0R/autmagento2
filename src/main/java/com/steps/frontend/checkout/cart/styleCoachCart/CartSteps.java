@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-import com.tools.env.TimeConstants;
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.PrintUtils;
 

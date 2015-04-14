@@ -24,8 +24,8 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.FilePaths;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.constants.FilePaths;
+import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US5", type = "external")

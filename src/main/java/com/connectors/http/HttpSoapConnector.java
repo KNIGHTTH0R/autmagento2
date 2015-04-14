@@ -19,8 +19,8 @@ import com.tools.SoapKeys;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
-import com.tools.env.stagingaut.UrlConstants;
-import com.tools.env.stagingaut.Credentials;
+import com.tools.env.variables.Credentials;
+import com.tools.env.variables.UrlConstants;
 
 public class HttpSoapConnector {
 

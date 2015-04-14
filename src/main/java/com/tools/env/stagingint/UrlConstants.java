@@ -1,3 +1,4 @@
+
 package com.tools.env.stagingint;
 
 import java.io.File;
@@ -67,3 +68,4 @@ public class UrlConstants {
 
 	public static final String ARTICLE_NUMBER = "Artikelnummer: ";
 }
+

@@ -25,7 +25,8 @@ import com.tools.EmailConstants;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.ContextConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -86,7 +87,7 @@ public class US10006VerifyInviteForStylistHostEmailTest extends BaseTest {
 
 		frontEndSteps.performLogin(email, password);
 
-		String message = gmailConnector.searchForMail("", UrlConstants.PARTY_CREATION_EMAIL_SUBJECT, true);
+		String message = gmailConnector.searchForMail("", ContextConstants.PARTY_CREATION_EMAIL_SUBJECT, true);
 		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message, "customer/party/confirm"));
 		System.out.println(urlModel.getUrl());
 		customVerifications.printErrors();

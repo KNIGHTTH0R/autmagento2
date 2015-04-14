@@ -19,8 +19,8 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.stagingaut.UrlConstants;
-import com.tools.env.stagingaut.Credentials;
+import com.tools.env.variables.Credentials;
+import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US7", type = "backend")

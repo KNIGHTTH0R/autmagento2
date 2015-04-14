@@ -16,8 +16,8 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
-import com.tools.env.ConfigConstants;
-import com.tools.env.TimeConstants;
+import com.tools.env.constants.ConfigConstants;
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 

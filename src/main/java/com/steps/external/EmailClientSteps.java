@@ -2,7 +2,7 @@ package com.steps.external;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class EmailClientSteps extends AbstractSteps {

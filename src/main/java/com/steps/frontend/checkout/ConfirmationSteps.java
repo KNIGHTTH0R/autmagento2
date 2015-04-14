@@ -10,7 +10,7 @@ import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.TimeConstants;
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class ConfirmationSteps extends AbstractSteps {

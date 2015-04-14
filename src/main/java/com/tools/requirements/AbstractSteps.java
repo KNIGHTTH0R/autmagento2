@@ -60,8 +60,8 @@ import com.pages.frontend.registration.landing.ThankYouPage;
 import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
-import com.tools.env.TimeConstants;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.UrlConstants;
 
 public class AbstractSteps extends ScenarioSteps {
 

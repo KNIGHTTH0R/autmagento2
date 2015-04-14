@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class HeaderSteps extends AbstractSteps {

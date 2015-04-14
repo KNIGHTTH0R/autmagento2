@@ -8,7 +8,7 @@ import com.tools.calculation.HostCartTotalsCalculation;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.ConfigConstants;
+import com.tools.env.constants.ConfigConstants;
 
 public class HostCartCalculator {
 

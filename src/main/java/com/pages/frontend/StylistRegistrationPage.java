@@ -9,8 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.env.TimeConstants;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class StylistRegistrationPage extends AbstractPage {
@@ -248,7 +248,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void clickLoginLinkFromMessage() {
-		if (existingAccountMessageContainer.getText().contentEquals(UrlConstants.EXISTING_ACCOUNT_MESSAGE)) {
+		if (existingAccountMessageContainer.getText().contentEquals(ContextConstants.EXISTING_ACCOUNT_MESSAGE)) {
 			existingAccountMessageContainer.findElement(By.cssSelector("a")).click();
 		} else {
 			Assert.assertFalse("The message and the link were not found", true);

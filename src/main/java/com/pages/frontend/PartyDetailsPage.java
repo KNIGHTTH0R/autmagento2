@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class PartyDetailsPage extends AbstractPage {
@@ -229,7 +230,7 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void verifyPlannedPartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
-		verifyPartyStatus(UrlConstants.PARTY_PLANNED);
+		verifyPartyStatus(ContextConstants.PARTY_PLANNED);
 		verifyHostessInviteLink(true);
 		verifyEditLink(true);
 		verifyDeleteLink(true);
@@ -241,7 +242,7 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void verifyActivePartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
-		verifyPartyStatus(UrlConstants.PARTY_ACTIVE);
+		verifyPartyStatus(ContextConstants.PARTY_ACTIVE);
 		verifyHostessInviteLink(true);
 		verifyEditLink(false);
 		verifyDeleteLink(false);
@@ -253,7 +254,7 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void verifyClosedPartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
-		verifyPartyStatus(UrlConstants.PARTY_CLOSED);
+		verifyPartyStatus(ContextConstants.PARTY_CLOSED);
 		verifyHostessInviteLink(false);
 		verifyEditLink(false);
 		verifyDeleteLink(false);

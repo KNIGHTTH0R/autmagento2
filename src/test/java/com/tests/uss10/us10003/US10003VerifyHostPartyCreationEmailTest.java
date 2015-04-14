@@ -15,8 +15,8 @@ import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.ConfigConstants;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -46,7 +46,7 @@ public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 	public void us10003VerifyHostPartyCreationEmailTest() {
 
 		emailClientSteps.openMailinator();
-		urlModel.setUrl(emailClientSteps.validateThatEmailIsReceivedAndConfirm(email.replace("@" + ConfigConstants.WEB_MAIL, ""), UrlConstants.PARTY_CREATION_EMAIL_SUBJECT));
+		urlModel.setUrl(emailClientSteps.validateThatEmailIsReceivedAndConfirm(email.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.PARTY_CREATION_EMAIL_SUBJECT));
 
 	}
 

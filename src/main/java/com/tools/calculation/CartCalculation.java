@@ -11,7 +11,7 @@ import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.ConfigConstants;
+import com.tools.env.constants.ConfigConstants;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 
