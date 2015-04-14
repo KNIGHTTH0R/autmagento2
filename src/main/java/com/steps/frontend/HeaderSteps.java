@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class HeaderSteps extends AbstractSteps {
@@ -46,25 +46,25 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	public void redirectToProfileHistory() {
-		getDriver().get(Constants.PROFILE_HISTORY_URL);
+		getDriver().get(UrlConstants.PROFILE_HISTORY_URL);
 	}
 	@Step
 	public void redirectToWishlist() {
-		getDriver().get(Constants.WISHLIST_URL);
+		getDriver().get(UrlConstants.WISHLIST_URL);
 		wishlistPage().addAllProductsToCArt();
 	}
 
 	public void redirectTostylistsCustomerOrderReport() {
-		getDriver().get(Constants.STYLISTS_CUSTOMER_ORDER_REPORT);
+		getDriver().get(UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
 	public void redirectToCartPage() {
-		getDriver().get(Constants.CART_PAGE_URL);
+		getDriver().get(UrlConstants.CART_PAGE_URL);
 	}
 
 	@StepGroup
 	public void navigateToRegisterForm() {
-		getDriver().get(Constants.BASE_FE_URL);
+		getDriver().get(UrlConstants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();
 		stylistCampaignPage().clickJetztStartenButton();
@@ -74,7 +74,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton() {
-		getDriver().get(Constants.BASE_FE_URL);
+		getDriver().get(UrlConstants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();
 		stylistCampaignPage().clickStarteJetztButton();
@@ -84,7 +84,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormAndLogout() {
-		getDriver().get(Constants.BASE_FE_URL);
+		getDriver().get(UrlConstants.BASE_FE_URL);
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();

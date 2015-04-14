@@ -12,7 +12,7 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.DOMException;
 
 import com.tools.SoapKeys;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 
 public class DeleteCustomer extends HttpSoapConnector {
 
@@ -26,7 +26,7 @@ public class DeleteCustomer extends HttpSoapConnector {
 		System.out.println("Sesion id :" + sessID);
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(deleteCustomerMessage(sessID, customerId), Constants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(deleteCustomerMessage(sessID, customerId), UrlConstants.API_URI);
 
 		return soapResponse;
 	}

@@ -61,7 +61,7 @@ import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.env.TimeConstants;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -87,7 +87,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void performLoginUnderContext(String userName, String userPass, String context) {
-		getDriver().get(Constants.BASE_FE_URL + context);
+		getDriver().get(UrlConstants.BASE_FE_URL + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);

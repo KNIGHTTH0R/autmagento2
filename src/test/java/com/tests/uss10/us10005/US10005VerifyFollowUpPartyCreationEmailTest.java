@@ -24,7 +24,7 @@ import com.tools.EmailConstants;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -49,7 +49,7 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
 			email = prop.getProperty("customerUsername");
 			password = prop.getProperty("customerPassword");
@@ -83,7 +83,7 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
 		frontEndSteps.performLogin(email, password);
 
-		String message = gmailConnector.searchForMail("", Constants.PARTY_CREATION_EMAIL_SUBJECT, true);
+		String message = gmailConnector.searchForMail("", UrlConstants.PARTY_CREATION_EMAIL_SUBJECT, true);
 		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message, "customer/party/confirm"));
 
 	}

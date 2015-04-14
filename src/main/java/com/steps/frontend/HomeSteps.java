@@ -3,7 +3,7 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class HomeSteps extends AbstractSteps {
@@ -17,7 +17,7 @@ public class HomeSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormFromStyleCoachLinkAndJetzStarten() {
-		getDriver().get(Constants.BASE_FE_URL);
+		getDriver().get(UrlConstants.BASE_FE_URL);
 		homePage().clickStyleCoachLink();
 		stylistCampaignPage().clickJetztStartenButton();
 		starterSetPage().clickOnJetztStartenFromStarterSet();
@@ -25,7 +25,7 @@ public class HomeSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt() {
-		getDriver().get(Constants.BASE_FE_URL);
+		getDriver().get(UrlConstants.BASE_FE_URL);
 		homePage().clickStyleCoachLink();
 		stylistCampaignPage().clickStarteJetztButton();
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();

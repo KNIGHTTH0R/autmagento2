@@ -22,7 +22,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US6", type = "frontend")
@@ -54,7 +54,7 @@ public class US6003StyleCoachRegistrationTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us6" + File.separator + "us6003.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");

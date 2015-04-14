@@ -1,6 +1,6 @@
 package com.steps.backend.promotion;
 
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.env.stagingaut.Credentials;
 import com.tools.requirements.AbstractSteps;
 
@@ -9,7 +9,7 @@ public class PromotionSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	public void activateRule() {
-		getDriver().get(Constants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -23,7 +23,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void deactivateRule() {
-		getDriver().get(Constants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -37,7 +37,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void activateBuy3Get1ForRegular() {
-		getDriver().get(Constants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -51,7 +51,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void deactivateBuy3Get1ForRegular() {
-		getDriver().get(Constants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -65,7 +65,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void activateBuy3Get1ForHost() {
-		getDriver().get(Constants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -79,7 +79,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void deactivateBuy3Get1ForHost() {
-		getDriver().get(Constants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();

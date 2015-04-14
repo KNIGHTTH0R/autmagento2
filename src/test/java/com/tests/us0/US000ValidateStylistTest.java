@@ -21,7 +21,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.CustomerConfigurationModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.env.stagingaut.Credentials;
 import com.tools.persistance.MongoReader;
 
@@ -53,7 +53,7 @@ public class US000ValidateStylistTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us0" + File.separator + "Stylist.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us0" + File.separator + "Stylist.properties");
 			prop.load(input);
 			stylistName = prop.getProperty("stylistName");
 			prop = new Properties();

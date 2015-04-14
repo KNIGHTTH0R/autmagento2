@@ -25,7 +25,7 @@ import com.tools.CustomVerification;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.env.FilePaths;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US5", type = "external")
@@ -53,7 +53,7 @@ public class US5001ValidateEmailTest extends BaseTest {
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(Constants.RESOURCES_PATH + FilePaths.US_05_FOLDER + File.separator + "us0005.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_05_FOLDER + File.separator + "us0005.properties");
 			prop.load(input);
 			fbUser = prop.getProperty("fbUser");
 			pippaPass = prop.getProperty("pippaPass");

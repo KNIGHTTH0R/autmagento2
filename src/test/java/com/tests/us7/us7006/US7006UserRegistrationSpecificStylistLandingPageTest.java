@@ -23,7 +23,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -52,7 +52,7 @@ public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTe
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us7" + File.separator + "us7006.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7006.properties");
 			prop.load(input);
 			styleCoachFN = prop.getProperty("styleCoachFN");
 			styleCoachLN = prop.getProperty("styleCoachLN");

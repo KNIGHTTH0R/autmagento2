@@ -19,7 +19,7 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.env.stagingaut.Credentials;
 import com.tools.requirements.Application;
 
@@ -47,7 +47,7 @@ public class US7003CheckCustomerActivationTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us7" + File.separator + "us7003.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7003.properties");
 			prop.load(input);
 			clientName = prop.getProperty("username");
 

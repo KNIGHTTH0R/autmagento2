@@ -23,7 +23,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -59,7 +59,7 @@ public class US7005EmailActivationTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us7" + File.separator + "us7005.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7005.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			context = prop.getProperty("context");

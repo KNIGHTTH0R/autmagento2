@@ -24,7 +24,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -53,7 +53,7 @@ public class US8002ValidateOrderInStylistsCustomerOrderReportTest extends BaseTe
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us8" + File.separator + "us8002.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8002.properties");
 			prop.load(input);
 			stylistUsername = prop.getProperty("stylistUsername");
 			stylistPassword = prop.getProperty("stylistPassword");			

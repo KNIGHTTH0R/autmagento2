@@ -17,7 +17,7 @@ import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.ConfigConstants;
 import com.tools.env.TimeConstants;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 
@@ -55,8 +55,8 @@ public class RegularUserCartPage extends AbstractPage {
 
 	public void validateThatVoucherCannotBeAppliedMessage() {
 		element(errorMessageContainer).waitUntilVisible();
-		Assert.assertTrue("The message <" + Constants.VOUCHER_DISCOUNT_INCOMPATIBLE + "> dosn't appear and it should!",
-				errorMessageContainer.getText().contains(Constants.VOUCHER_DISCOUNT_INCOMPATIBLE));
+		Assert.assertTrue("The message <" + UrlConstants.VOUCHER_DISCOUNT_INCOMPATIBLE + "> dosn't appear and it should!",
+				errorMessageContainer.getText().contains(UrlConstants.VOUCHER_DISCOUNT_INCOMPATIBLE));
 	}
 
 	public void typeCouponCode(String code) {

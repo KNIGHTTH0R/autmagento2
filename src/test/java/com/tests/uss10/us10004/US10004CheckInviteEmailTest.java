@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.env.ConfigConstants;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -41,7 +41,7 @@ public class US10004CheckInviteEmailTest extends BaseTest {
 	@Test
 	public void us10004CheckInviteEmailTest() {
 		emailClientSteps.openMailinator();
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), Constants.INVITE_EMAIL_SUBJECT);
+		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), UrlConstants.INVITE_EMAIL_SUBJECT);
 
 	}
 

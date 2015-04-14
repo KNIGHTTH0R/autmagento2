@@ -23,7 +23,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -52,7 +52,7 @@ public class US001UserProfileOrderIdTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + "us1" + File.separator + "us001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us1" + File.separator + "us001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");

@@ -9,7 +9,7 @@ import java.io.File;
  * @author voicu.vac
  *
  */
-public class Constants {
+public class UrlConstants {
 
 	
 	//Staging INT uRLs

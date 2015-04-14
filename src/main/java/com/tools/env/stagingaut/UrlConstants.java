@@ -9,7 +9,7 @@ import java.io.File;
  * @author voicu.vac
  *
  */
-public class Constants {
+public class UrlConstants {
 	
 	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-aut" + File.separator;
 

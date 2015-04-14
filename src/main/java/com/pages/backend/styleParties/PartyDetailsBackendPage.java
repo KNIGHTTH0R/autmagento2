@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.requirements.AbstractPage;
 
 public class PartyDetailsBackendPage extends AbstractPage {
@@ -80,7 +80,7 @@ public class PartyDetailsBackendPage extends AbstractPage {
 
 	public void verifyAddBonusSuccessMessage() {
 		element(successMessage).waitUntilVisible();
-		Assert.assertTrue("Failure: The mesage should be " + Constants.BOUNUS_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(), successMessage.getText().contains(Constants.BOUNUS_SUCCESS_MESSAGE));
+		Assert.assertTrue("Failure: The mesage should be " + UrlConstants.BOUNUS_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(), successMessage.getText().contains(UrlConstants.BOUNUS_SUCCESS_MESSAGE));
 	}
 
 }

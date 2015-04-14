@@ -2,7 +2,7 @@ package com.steps.external;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class EmailClientSteps extends AbstractSteps {
@@ -12,13 +12,13 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public void openMailinator() {
 		waitABit(2000);
-		getDriver().get(Constants.URL_WEB_MAIL);
+		getDriver().get(UrlConstants.URL_WEB_MAIL);
 	}
 
 	@Step
 	public String grabEmail(String email) {
 
-		String url = Constants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
 		getDriver().get(url);
 
@@ -41,7 +41,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String grabEmail(String email, String title) {
 
-		String url = Constants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
 		getDriver().get(url);
 
@@ -64,7 +64,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String grabEmailCoupon(String email, String title) {
 
-		String url = Constants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 
 		System.out.println("URL : " + url);
 		getDriver().get(url);
@@ -88,7 +88,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public void validateThatEmailIsReceived(String email, String title) {
 
-		String url = Constants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
 		getDriver().get(url);
 
@@ -100,7 +100,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String validateThatEmailIsReceivedAndConfirm(String email, String title) {
 
-		String url = Constants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
 		getDriver().get(url);
 
@@ -122,7 +122,7 @@ public class EmailClientSteps extends AbstractSteps {
 	public String validateThatEmailIsReceivedAndClickRegister(String email, String title) {
 		
 		// waitABit(5000);
-		String url = Constants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		
 		System.out.println("URL : " + url);
 		getDriver().get(url);
