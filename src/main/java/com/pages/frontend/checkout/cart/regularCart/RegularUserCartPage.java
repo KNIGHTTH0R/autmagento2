@@ -15,9 +15,9 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.ConfigConstants;
-import com.tools.env.TimeConstants;
-import com.tools.env.stagingaut.ContextConstants;
+import com.tools.env.constants.ConfigConstants;
+import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 

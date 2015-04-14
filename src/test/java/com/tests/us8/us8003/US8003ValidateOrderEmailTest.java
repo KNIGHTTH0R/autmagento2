@@ -28,7 +28,7 @@ import com.tools.EmailConstants;
 import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

@@ -13,7 +13,7 @@ import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.UrlConstants;
 
 public class BaseTest {
 	@Managed(uniqueSession = true)

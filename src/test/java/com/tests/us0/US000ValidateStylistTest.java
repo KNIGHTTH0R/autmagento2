@@ -21,8 +21,8 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.CustomerConfigurationModel;
-import com.tools.env.stagingaut.UrlConstants;
-import com.tools.env.stagingaut.Credentials;
+import com.tools.env.variables.Credentials;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 
 @WithTag(name = "US000", type = "backend")

@@ -19,8 +19,8 @@ import com.steps.EmailSteps;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.ConfigConstants;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

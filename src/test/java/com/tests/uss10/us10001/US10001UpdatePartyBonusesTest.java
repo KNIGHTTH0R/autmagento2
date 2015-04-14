@@ -15,7 +15,7 @@ import com.steps.backend.styleParties.PartyListBackendSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
-import com.tools.env.stagingaut.Credentials;
+import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

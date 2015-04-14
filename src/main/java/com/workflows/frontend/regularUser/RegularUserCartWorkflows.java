@@ -15,7 +15,7 @@ import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
-import com.tools.env.ConfigConstants;
+import com.tools.env.constants.ConfigConstants;
 
 public class RegularUserCartWorkflows {
 

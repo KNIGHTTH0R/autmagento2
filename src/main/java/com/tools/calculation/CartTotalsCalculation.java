@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.env.ConfigConstants;
+import com.tools.env.constants.ConfigConstants;
 
 public class CartTotalsCalculation {
 

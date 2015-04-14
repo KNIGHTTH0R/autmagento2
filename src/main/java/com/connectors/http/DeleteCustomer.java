@@ -12,7 +12,7 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.DOMException;
 
 import com.tools.SoapKeys;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.UrlConstants;
 
 public class DeleteCustomer extends HttpSoapConnector {
 

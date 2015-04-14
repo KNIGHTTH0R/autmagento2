@@ -1,4 +1,4 @@
-package com.tools.env;
+package com.tools.env.constants;
 
 public class Separators {
 	public static final String DATE_SEPARATOR = ",";

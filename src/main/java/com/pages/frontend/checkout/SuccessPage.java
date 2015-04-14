@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.AbstractPage;
 
 @DefaultUrl(UrlConstants.URL_CART_SUCCESS)

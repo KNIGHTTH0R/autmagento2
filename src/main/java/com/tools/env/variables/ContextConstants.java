@@ -1,4 +1,4 @@
-package com.tools.env.stagingaut;
+package com.tools.env.variables;
 
 public class ContextConstants {
 	

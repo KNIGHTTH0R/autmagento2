@@ -16,7 +16,7 @@ import com.tools.data.frontend.ShippingModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.Separators;
+import com.tools.env.constants.Separators;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
