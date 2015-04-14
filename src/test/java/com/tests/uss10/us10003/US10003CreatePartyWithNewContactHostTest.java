@@ -47,6 +47,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
+
 	
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
@@ -87,7 +88,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 		}
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
