@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.junit.Assert;
 
+import com.tools.env.Separators;
 import com.tools.env.stagingaut.Constants;
 
 public class FormatterUtils {
@@ -106,7 +107,7 @@ public class FormatterUtils {
 	}
 
 	public static String[] splitDate(String dateOfBirth) {
-		String elems[] = dateOfBirth.split(Constants.DATE_SEPARATOR);
+		String elems[] = dateOfBirth.split(Separators.DATE_SEPARATOR);
 		if (elems.length != 3) {
 			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'", elems.length != 3);
 		}

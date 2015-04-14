@@ -8,7 +8,7 @@ import com.tools.calculation.HostCartTotalsCalculation;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 
 public class HostCartCalculator {
 
@@ -31,7 +31,7 @@ public class HostCartCalculator {
 	public static List<HostBasicProductModel> getProductswithRegularPriceFromList(List<HostBasicProductModel> productsList) {
 		List<HostBasicProductModel> newProductsList = new ArrayList<HostBasicProductModel>();
 		for (HostBasicProductModel product : productsList) {
-			if (product.getBonusType().contentEquals(Constants.REGULAR_PRICE)) {
+			if (product.getBonusType().contentEquals(ConfigConstants.REGULAR_PRICE)) {
 				newProductsList.add(product);
 			}
 		}
@@ -41,7 +41,7 @@ public class HostCartCalculator {
 	public static List<HostBasicProductModel> getProductsWithoutRegularPriceFromList(List<HostBasicProductModel> productsList) {
 		List<HostBasicProductModel> newProductsList = new ArrayList<HostBasicProductModel>();
 		for (HostBasicProductModel product : productsList) {
-			if (!product.getBonusType().contentEquals(Constants.REGULAR_PRICE)) {
+			if (!product.getBonusType().contentEquals(ConfigConstants.REGULAR_PRICE)) {
 				newProductsList.add(product);
 			}
 		}

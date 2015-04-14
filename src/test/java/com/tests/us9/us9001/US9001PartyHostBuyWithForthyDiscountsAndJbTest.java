@@ -37,6 +37,7 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
+import com.tools.env.ConfigConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -161,10 +162,10 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		
-		hostCartSteps.selectProductDiscountType(genProduct1.getSku(), Constants.JEWELRY_BONUS);
-		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct1.getSku(), Constants.JEWELRY_BONUS);
-		hostCartSteps.selectProductDiscountType(genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
-		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
+		hostCartSteps.selectProductDiscountType(genProduct1.getSku(), ConfigConstants.JEWELRY_BONUS);
+		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct1.getSku(), ConfigConstants.JEWELRY_BONUS);
+		hostCartSteps.selectProductDiscountType(genProduct2.getSku(), ConfigConstants.DISCOUNT_40_BONUS);
+		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct2.getSku(), ConfigConstants.DISCOUNT_40_BONUS);
 
 		hostCartSteps.grabProductsData();		
 		hostCartSteps.grabTotals();

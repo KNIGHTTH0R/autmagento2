@@ -7,7 +7,7 @@ import java.util.List;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 
 public class HostCartTotalsCalculation {
 
@@ -25,11 +25,11 @@ public class HostCartTotalsCalculation {
 		for (HostBasicProductModel product : productsList) {
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
 			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
-			if (product.getBonusType().contentEquals(Constants.JEWELRY_BONUS)) {
+			if (product.getBonusType().contentEquals(ConfigConstants.JEWELRY_BONUS)) {
 				jewerlyDiscount = jewerlyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				jewerlyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
-			if (product.getBonusType().contentEquals(Constants.DISCOUNT_40_BONUS)) {
+			if (product.getBonusType().contentEquals(ConfigConstants.DISCOUNT_40_BONUS)) {
 				forthyDiscount = forthyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
@@ -41,9 +41,9 @@ public class HostCartTotalsCalculation {
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
 		result.setTax(String.valueOf(tax));
 		result.setIpPoints(String.valueOf(ipPoints));
-		result.addSegment(Constants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
-		result.addSegment(Constants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
-		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
+		result.addSegment(ConfigConstants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
+		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
+		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
 
 		return result;
 	}
@@ -62,11 +62,11 @@ public class HostCartTotalsCalculation {
 		for (HostBasicProductModel product : productsList) {
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
 			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
-			if (product.getBonusType().contentEquals(Constants.JEWELRY_BONUS)) {
+			if (product.getBonusType().contentEquals(ConfigConstants.JEWELRY_BONUS)) {
 				jewerlyDiscount = jewerlyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				jewerlyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
-			if (product.getBonusType().contentEquals(Constants.DISCOUNT_40_BONUS)) {
+			if (product.getBonusType().contentEquals(ConfigConstants.DISCOUNT_40_BONUS)) {
 				forthyDiscount = forthyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
@@ -80,9 +80,9 @@ public class HostCartTotalsCalculation {
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
 		result.setTax(String.valueOf(tax));
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
-		result.addSegment(Constants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
-		result.addSegment(Constants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
-		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
+		result.addSegment(ConfigConstants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
+		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
+		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
 
 		return result;
 	}
@@ -116,9 +116,9 @@ public class HostCartTotalsCalculation {
 
 		// discount calculation
 		BigDecimal discountCalculation = BigDecimal.ZERO;
-		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.JEWELRY_BONUS))));
-		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_40_BONUS))));
-		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_BUY_3_GET_1))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.JEWELRY_BONUS))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_40_BONUS))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_BUY_3_GET_1))));
 
 		result.setDiscountPrice(discountCalculation.toString());
 		result.setShippingPrice(shippingValue);

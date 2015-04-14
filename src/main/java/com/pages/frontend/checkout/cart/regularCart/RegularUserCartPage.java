@@ -15,6 +15,7 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.env.ConfigConstants;
 import com.tools.env.TimeConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractPage;
@@ -86,9 +87,9 @@ public class RegularUserCartPage extends AbstractPage {
 		for (RegularBasicProductModel product : productsList) {
 			if (product.getProdCode().contentEquals(productCode)) {
 				product.setBonusType(discountType);
-				if (discountType.contentEquals(Constants.DISCOUNT_40_BONUS)) {
+				if (discountType.contentEquals(ConfigConstants.DISCOUNT_40_BONUS)) {
 					product.setBunosValue(String.valueOf(calculate40Discount(product.getFinalPrice())));
-				} else if (discountType.contentEquals(Constants.JEWELRY_BONUS)) {
+				} else if (discountType.contentEquals(ConfigConstants.JEWELRY_BONUS)) {
 					product.setBunosValue(product.getFinalPrice());
 				}
 			}
@@ -167,19 +168,19 @@ public class RegularUserCartPage extends AbstractPage {
 			}
 			if (key.contains("GENUTZTER SCHMUCK BONUS")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.addDiscount(Constants.JEWELRY_BONUS, valueTransformer);
+				resultModel.addDiscount(ConfigConstants.JEWELRY_BONUS, valueTransformer);
 			}
 			if (key.contains("G025FMDE")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.addDiscount(Constants.VOUCHER_DISCOUNT, valueTransformer);
+				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}
 			if (key.contains("40%") && key.contains("RABATT")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.addDiscount(Constants.DISCOUNT_40_BONUS, valueTransformer);
+				resultModel.addDiscount(ConfigConstants.DISCOUNT_40_BONUS, valueTransformer);
 			}
 			if (key.contains("BUY 3 GET 1 FOR 50%")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.addDiscount(Constants.DISCOUNT_BUY_3_GET_1, valueTransformer);
+				resultModel.addDiscount(ConfigConstants.DISCOUNT_BUY_3_GET_1, valueTransformer);
 			}
 			if (key.contains("GESAMTBETRAG")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());

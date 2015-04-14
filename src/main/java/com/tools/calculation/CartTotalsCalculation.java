@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 
 public class CartTotalsCalculation {
 
@@ -13,7 +13,7 @@ public class CartTotalsCalculation {
 			String shippingForLessThan150) {
 		CalcDetailsModel result = new CalcDetailsModel();
 		String shippingValue;
-		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_25);
+		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
 
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal rabatt50 = BigDecimal.ZERO;
@@ -45,9 +45,9 @@ public class CartTotalsCalculation {
 		result.setTotalAmount(String.valueOf(totalAmount));
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 		result.setTax(String.valueOf(tax));
-		result.addSegment(Constants.DISCOUNT_50, String.valueOf(rabatt50));
-		result.addSegment(Constants.DISCOUNT_25, String.valueOf(rabatt25));
-		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
+		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
+		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
+		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
 
 		return result;
 	}
@@ -57,7 +57,7 @@ public class CartTotalsCalculation {
 		BigDecimal discountSum = BigDecimal.ZERO;
 
 		for (BasicProductModel cartProductModel : productsList) {
-			if (cartProductModel.getDiscountClass().contains(Constants.DISCOUNT_50)) {
+			if (cartProductModel.getDiscountClass().contains(ConfigConstants.DISCOUNT_50)) {
 				discountSum = discountSum.add(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getFinalPrice())));
 			}
 		}
@@ -70,7 +70,7 @@ public class CartTotalsCalculation {
 		BigDecimal discountSum = BigDecimal.ZERO;
 
 		for (BasicProductModel cartProductModel : productsList) {
-			if (cartProductModel.getDiscountClass().contains(Constants.DISCOUNT_25)) {
+			if (cartProductModel.getDiscountClass().contains(ConfigConstants.DISCOUNT_25)) {
 				discountSum = discountSum.add(calculate25DiscountForEachProduct(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getProductsPrice())), jewelryDiscount, sum25Section));
 			}
 		}
@@ -118,7 +118,7 @@ public class CartTotalsCalculation {
 		CalcDetailsModel result = new CalcDetailsModel();
 		String shippingValue;
 
-		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_25);
+		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
 
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal rabatt50 = BigDecimal.ZERO;
@@ -150,9 +150,9 @@ public class CartTotalsCalculation {
 		result.setTotalAmount(String.valueOf(totalAmount));
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 		result.setTax(String.valueOf(tax));
-		result.addSegment(Constants.DISCOUNT_50, String.valueOf(rabatt50));
-		result.addSegment(Constants.DISCOUNT_25, String.valueOf(rabatt25));
-		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, String.valueOf(CartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsList)));
+		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
+		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
+		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(CartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsList)));
 
 		return result;
 	}

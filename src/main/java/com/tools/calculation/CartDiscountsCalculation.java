@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 
 public class CartDiscountsCalculation {
 
@@ -46,7 +46,7 @@ public class CartDiscountsCalculation {
 	
 	public static List<BasicProductModel> calculateProductsforMarketingMaterial(List<BasicProductModel> productsList, String marketingDiscount) {
 
-		BigDecimal sumMarketingMaterial = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_0);
+		BigDecimal sumMarketingMaterial = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_0);
 
 		System.out.println(sumMarketingMaterial);
 
@@ -75,7 +75,7 @@ public class CartDiscountsCalculation {
 
 	public static List<BasicProductModel> calculateProductsfor50Discount(List<BasicProductModel> productsList, List<BasicProductModel> list25DiscountProducts, String jewelryDiscount) {
 
-		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_50);
+		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_50);
 		BigDecimal jewelryUsed = calculateUsedJewelryBonus(list25DiscountProducts, jewelryDiscount);
 
 		System.out.println(sum50);
@@ -107,7 +107,7 @@ public class CartDiscountsCalculation {
 
 	public static List<BasicProductModel> calculateProductsfor25Discount(List<BasicProductModel> productsList, String jewelryDiscount) {
 
-		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_25);
+		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
 
 		System.out.println(sum25);
 		System.out.println(jewelryDiscount);
@@ -143,7 +143,7 @@ public class CartDiscountsCalculation {
 
 		for (BasicProductModel product : productsList) {
 
-			if (product.getDiscountClass().contains(Constants.DISCOUNT_25)) {
+			if (product.getDiscountClass().contains(ConfigConstants.DISCOUNT_25)) {
 				sum25 = sum25.add(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())));
 			}
 		}

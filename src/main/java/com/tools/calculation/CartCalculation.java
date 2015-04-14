@@ -11,7 +11,7 @@ import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 
@@ -124,13 +124,13 @@ public class CartCalculation {
 	private static int checkCalculusType(String tableType) {
 		int result = 0;
 
-		if (tableType.contentEquals(Constants.DISCOUNT_25)) {
+		if (tableType.contentEquals(ConfigConstants.DISCOUNT_25)) {
 			result = 25;
 		}
-		if (tableType.contentEquals(Constants.DISCOUNT_50)) {
+		if (tableType.contentEquals(ConfigConstants.DISCOUNT_50)) {
 			result = 50;
 		}
-		if (tableType.contentEquals(Constants.DISCOUNT_0)) {
+		if (tableType.contentEquals(ConfigConstants.DISCOUNT_0)) {
 			result = 0;
 		}
 		return result;
@@ -174,12 +174,12 @@ public class CartCalculation {
 		// totalAmount = totalAmount.setScale(2, RoundingMode.DOWN);
 		totalAmount = totalAmount.setScale(2, RoundingMode.HALF_DOWN);
 
-		result.addSegment(Constants.DISCOUNT_50, remainder50.setScale(2, RoundingMode.HALF_UP).toString());
-		result.addSegment(Constants.DISCOUNT_25, remainder25.setScale(2, RoundingMode.HALF_UP).toString());
-		result.addSegment(Constants.DISCOUNT_0, remainder00.setScale(2, RoundingMode.HALF_UP).toString());
+		result.addSegment(ConfigConstants.DISCOUNT_50, remainder50.setScale(2, RoundingMode.HALF_UP).toString());
+		result.addSegment(ConfigConstants.DISCOUNT_25, remainder25.setScale(2, RoundingMode.HALF_UP).toString());
+		result.addSegment(ConfigConstants.DISCOUNT_0, remainder00.setScale(2, RoundingMode.HALF_UP).toString());
 		// i've added this because is used in calculte shipping total method
 		// (and it throws a NullPointerException)
-		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, "0.00");
+		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, "0.00");
 
 		result.setTotalAmount(totalAmount.toString());
 		result.setSubTotal(calculateTotalSum(totalsList).getAskingPrice().toString());
@@ -210,7 +210,7 @@ public class CartCalculation {
 
 		for (CartProductModel product : productsList) {
 
-			if (product.getDiscountClass().contains(Constants.DISCOUNT_25)) {
+			if (product.getDiscountClass().contains(ConfigConstants.DISCOUNT_25)) {
 				sum25 = sum25.add(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())));
 			}
 		}
@@ -330,7 +330,7 @@ public class CartCalculation {
 
 	public static List<CartProductModel> calculateProductsforMarketingMaterial(List<CartProductModel> productsList, String marketingDiscount) {
 
-		BigDecimal sumMarketingMaterial = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_0);
+		BigDecimal sumMarketingMaterial = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_0);
 
 		System.out.println(sumMarketingMaterial);
 
@@ -359,7 +359,7 @@ public class CartCalculation {
 
 	public static List<CartProductModel> calculateProductsfor50Discount(List<CartProductModel> productsList, List<CartProductModel> list25DiscountProducts, String jewelryDiscount) {
 
-		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_50);
+		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_50);
 		BigDecimal jewelryUsed = calculateUsedJewelryBonus(list25DiscountProducts, jewelryDiscount);
 
 		System.out.println(sum50);
@@ -391,7 +391,7 @@ public class CartCalculation {
 
 	public static List<CartProductModel> calculateProductsfor25Discount(List<CartProductModel> productsList, String jewelryDiscount) {
 
-		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_25);
+		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
 
 		System.out.println(sum25);
 		System.out.println(jewelryDiscount);
@@ -528,7 +528,7 @@ public class CartCalculation {
 	public static CalcDetailsModel calculateCartProductsTotals(List<CartProductModel> productsList, String jewerlyDiscount, String marketingDiscount, String taxClass) {
 		CalcDetailsModel result = new CalcDetailsModel();
 
-		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_25);
+		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
 
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal rabatt50 = BigDecimal.ZERO;
@@ -557,9 +557,9 @@ public class CartCalculation {
 		result.setTotalAmount(String.valueOf(totalAmount));
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 		result.setTax(String.valueOf(tax));
-		result.addSegment(Constants.DISCOUNT_50, String.valueOf(rabatt50));
-		result.addSegment(Constants.DISCOUNT_25, String.valueOf(rabatt25));
-		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
+		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
+		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
+		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
 
 		return result;
 	}
@@ -567,7 +567,7 @@ public class CartCalculation {
 	public static CalcDetailsModel calculateCartProductsTotalsBuy3GetOneRuleApplied(List<CartProductModel> productsList, String jewerlyDiscount, String marketingDiscount, String taxClass) {
 		CalcDetailsModel result = new CalcDetailsModel();
 
-		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, Constants.DISCOUNT_25);
+		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
 
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal rabatt50 = BigDecimal.ZERO;
@@ -580,14 +580,14 @@ public class CartCalculation {
 		BigDecimal buy3get1discount50Section = BigDecimal.ZERO;
 		BigDecimal buy3get1discountMMSection = BigDecimal.ZERO;
 
-		if (isBuy3Get1Applicable(getSublistFromList(productsList, Constants.DISCOUNT_25))) {
-			buy3get1discount25Section = calculateBuyThreeGetOneDiscountForEachSegment(productsList, Constants.DISCOUNT_25);
+		if (isBuy3Get1Applicable(getSublistFromList(productsList, ConfigConstants.DISCOUNT_25))) {
+			buy3get1discount25Section = calculateBuyThreeGetOneDiscountForEachSegment(productsList, ConfigConstants.DISCOUNT_25);
 		}
-		if (isBuy3Get1Applicable(getSublistFromList(productsList, Constants.DISCOUNT_0))) {
-			buy3get1discountMMSection = calculateBuyThreeGetOneDiscountForEachSegment(productsList, Constants.DISCOUNT_0);
+		if (isBuy3Get1Applicable(getSublistFromList(productsList, ConfigConstants.DISCOUNT_0))) {
+			buy3get1discountMMSection = calculateBuyThreeGetOneDiscountForEachSegment(productsList, ConfigConstants.DISCOUNT_0);
 		}
-		if (isBuy3Get1Applicable(getSublistFromList(productsList, Constants.DISCOUNT_50))) {
-			buy3get1discount50Section = calculateBuyThreeGetOneDiscountForEachSegment(productsList, Constants.DISCOUNT_0);
+		if (isBuy3Get1Applicable(getSublistFromList(productsList, ConfigConstants.DISCOUNT_50))) {
+			buy3get1discount50Section = calculateBuyThreeGetOneDiscountForEachSegment(productsList, ConfigConstants.DISCOUNT_0);
 		}
 		rabattBuy3Get1 = buy3get1discount25Section.add(buy3get1discountMMSection);
 		rabattBuy3Get1 = rabattBuy3Get1.add(buy3get1discount50Section);
@@ -611,9 +611,9 @@ public class CartCalculation {
 		result.setTotalAmount(String.valueOf(totalAmount));
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 		result.setTax(String.valueOf(tax));
-		result.addSegment(Constants.DISCOUNT_50, String.valueOf(rabatt50));
-		result.addSegment(Constants.DISCOUNT_25, String.valueOf(rabatt25));
-		result.addSegment(Constants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
+		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
+		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
+		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
 
 		return result;
 	}
@@ -623,7 +623,7 @@ public class CartCalculation {
 		BigDecimal discountSum = BigDecimal.ZERO;
 
 		for (CartProductModel cartProductModel : productsList) {
-			if (cartProductModel.getDiscountClass().contains(Constants.DISCOUNT_50)) {
+			if (cartProductModel.getDiscountClass().contains(ConfigConstants.DISCOUNT_50)) {
 				discountSum = discountSum.add(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getFinalPrice())));
 			}
 		}
@@ -636,7 +636,7 @@ public class CartCalculation {
 		BigDecimal discountSum = BigDecimal.ZERO;
 
 		for (CartProductModel cartProductModel : productsList) {
-			if (cartProductModel.getDiscountClass().contains(Constants.DISCOUNT_25)) {
+			if (cartProductModel.getDiscountClass().contains(ConfigConstants.DISCOUNT_25)) {
 				discountSum = discountSum.add(calculate25DiscountForEachProduct(BigDecimal.valueOf(Double.parseDouble(cartProductModel.getProductsPrice())), jewelryDiscount, sum25Section));
 			}
 
@@ -687,28 +687,28 @@ public class CartCalculation {
 
 	public static void calculateJewelryDiscounts(List<CalculationModel> totalsList, String jewelryDiscount) {
 
-		if (applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_25).compareTo(BigDecimal.valueOf(0)) > 0) {
+		if (applyDiscount(totalsList, BigDecimal.valueOf(0), ConfigConstants.DISCOUNT_25).compareTo(BigDecimal.valueOf(0)) > 0) {
 			// If 25% section has total over 0
-			remainder25 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), Constants.DISCOUNT_25);
+			remainder25 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), ConfigConstants.DISCOUNT_25);
 			System.out.println(remainder25.toString());
 		} else {
 			System.out.println("TOTAL for 25% section is not greater than 0 !!!");
 		}
 
-		if (applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_50).compareTo(BigDecimal.valueOf(0)) > 0) {
+		if (applyDiscount(totalsList, BigDecimal.valueOf(0), ConfigConstants.DISCOUNT_50).compareTo(BigDecimal.valueOf(0)) > 0) {
 			// If 25% section has negative total and 50% section has total over
 			// 0
 			if (remainder25.compareTo(BigDecimal.valueOf(0)) < 0) {
-				remainder50 = applyDiscount(totalsList, remainder25.abs(), Constants.DISCOUNT_50);
+				remainder50 = applyDiscount(totalsList, remainder25.abs(), ConfigConstants.DISCOUNT_50);
 				remainder25 = BigDecimal.valueOf(0);
 			} else {
 				// if 25%discount is positive there is no more discount value -
 				// 50% is not discounted
 				if (remainder25.compareTo(BigDecimal.valueOf(0)) > 0) {
-					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(0), Constants.DISCOUNT_50);
+					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(0), ConfigConstants.DISCOUNT_50);
 				} else {
 					// if there is no 25% section only the 50% section
-					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), Constants.DISCOUNT_50);
+					remainder50 = applyDiscount(totalsList, BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), ConfigConstants.DISCOUNT_50);
 				}
 			}
 		} else {
@@ -723,7 +723,7 @@ public class CartCalculation {
 		BigDecimal regularPrice = BigDecimal.valueOf(0);
 		BigDecimal ipTotal = BigDecimal.valueOf(0);
 
-		CalculationModel cModel = selectCalcModel(totalsList, Constants.DISCOUNT_25);
+		CalculationModel cModel = selectCalcModel(totalsList, ConfigConstants.DISCOUNT_25);
 		regularPrice = cModel.getAskingPrice();
 		ipTotal = BigDecimal.valueOf(cModel.getIpPoints());
 
@@ -783,7 +783,7 @@ public class CartCalculation {
 		BigDecimal result = BigDecimal.valueOf(0);
 		BigDecimal productSum = BigDecimal.valueOf(0);
 
-		productSum = selectCalcModel(totalsList, Constants.DISCOUNT_0).getAskingPrice();
+		productSum = selectCalcModel(totalsList, ConfigConstants.DISCOUNT_0).getAskingPrice();
 
 		result = productSum.subtract(marketingDiscount);
 
@@ -858,8 +858,8 @@ public class CartCalculation {
 
 		// discount calculation
 		BigDecimal discountCalculation = BigDecimal.ZERO;
-		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_25))));
-		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_50))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_25))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_50))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getMarketingBonus())));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getJewelryBonus())));
 		discountCalculation = apply119VAT(discountCalculation, 2, BigDecimal.ROUND_HALF_UP);
@@ -884,9 +884,9 @@ public class CartCalculation {
 
 		// discount calculation
 		BigDecimal discountCalculation = BigDecimal.ZERO;
-		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_25))));
-		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_50))));
-		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(Constants.DISCOUNT_BUY_3_GET_1))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_25))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_50))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_BUY_3_GET_1))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getMarketingBonus())));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getJewelryBonus())));
 

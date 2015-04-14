@@ -15,7 +15,7 @@ import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 
 public class HostCartWorkflows {
 
@@ -96,9 +96,9 @@ public class HostCartWorkflows {
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
 		// verifyTax(discountTotals.getTax(),
 		// discountCalculationModel.getTax());
-		verifyForthyDiscount(discountTotals.getDiscount(Constants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(Constants.DISCOUNT_40_BONUS));
-		verifyJewelryDiscount(discountTotals.getDiscount(Constants.JEWELRY_BONUS), discountCalculationModel.findSegment(Constants.JEWELRY_BONUS));
-		verifyBuy3Get1Discount(discountTotals.getDiscount(Constants.DISCOUNT_BUY_3_GET_1), discountCalculationModel.findSegment(Constants.DISCOUNT_BUY_3_GET_1));
+		verifyForthyDiscount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_40_BONUS));
+		verifyJewelryDiscount(discountTotals.getDiscount(ConfigConstants.JEWELRY_BONUS), discountCalculationModel.findSegment(ConfigConstants.JEWELRY_BONUS));
+		verifyBuy3Get1Discount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_BUY_3_GET_1), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1));
 	}
 
 	@StepGroup
@@ -107,8 +107,8 @@ public class HostCartWorkflows {
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
 		// verifyTax(discountTotals.getTax(),
 		// discountCalculationModel.getTax());
-		verifyForthyDiscount(discountTotals.getDiscount(Constants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(Constants.DISCOUNT_40_BONUS));
-		verifyJewelryDiscount(discountTotals.getDiscount(Constants.JEWELRY_BONUS), discountCalculationModel.findSegment(Constants.JEWELRY_BONUS));
+		verifyForthyDiscount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_40_BONUS));
+		verifyJewelryDiscount(discountTotals.getDiscount(ConfigConstants.JEWELRY_BONUS), discountCalculationModel.findSegment(ConfigConstants.JEWELRY_BONUS));
 
 	}
 
@@ -118,7 +118,7 @@ public class HostCartWorkflows {
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
 		// verifyTax(discountTotals.getTax(),
 		// discountCalculationModel.getTax());
-		verifyVoucherDiscount(discountTotals.getDiscount(Constants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(Constants.VOUCHER_DISCOUNT));
+		verifyVoucherDiscount(discountTotals.getDiscount(ConfigConstants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(ConfigConstants.VOUCHER_DISCOUNT));
 
 	}
 

@@ -10,7 +10,7 @@ import com.tools.calculation.CartDiscountsCalculation;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 
 public class AddProductsWorkflow {
 	@Steps
@@ -40,7 +40,7 @@ public class AddProductsWorkflow {
 		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(),qty);
 		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(),qty);
-		if(discountclass.equals(Constants.DISCOUNT_50) || discountclass.equals(Constants.DISCOUNT_0)){
+		if(discountclass.equals(ConfigConstants.DISCOUNT_50) || discountclass.equals(ConfigConstants.DISCOUNT_0)){
 			ipPoints = "0";
 		}
 

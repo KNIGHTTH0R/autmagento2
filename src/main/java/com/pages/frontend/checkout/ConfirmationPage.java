@@ -16,7 +16,7 @@ import com.tools.data.frontend.ShippingModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.Separators;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
@@ -48,15 +48,15 @@ public class ConfirmationPage extends AbstractPage {
 		AddressModel result = new AddressModel();
 		element(addressPreview).waitUntilVisible();
 		String textparse = addressPreview.getText();
-		String[] splittedText = textparse.split(Constants.LINE_SEPARATOR);
+		String[] splittedText = textparse.split(Separators.LINE_SEPARATOR);
 
 		if (splittedText.length == 4) {
 
-			String[] streetData = splittedText[1].split(Constants.COMMA_SEPARATOR);
+			String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
 			String streetName = streetData[0];
 			String streetNumber = streetData[1];
 
-			String[] townData = splittedText[2].split(Constants.COMMA_SEPARATOR);
+			String[] townData = splittedText[2].split(Separators.COMMA_SEPARATOR);
 			String homeTown = townData[0];
 			String postCode = townData[1];
 
@@ -71,14 +71,14 @@ public class ConfirmationPage extends AbstractPage {
 			PrintUtils.printAddressModel(result);
 
 		}
-		if (textparse.split(Constants.LINE_SEPARATOR).length == 5) {
+		if (textparse.split(Separators.LINE_SEPARATOR).length == 5) {
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page - 5");
 
-			String[] streetData = splittedText[1].split(Constants.COMMA_SEPARATOR);
+			String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
 			String streetName = streetData[0];
 			String streetNumber = streetData[1];
 
-			String[] townData = splittedText[2].split(Constants.COMMA_SEPARATOR);
+			String[] townData = splittedText[2].split(Separators.COMMA_SEPARATOR);
 			String homeTown = townData[0];
 			String postCode = townData[1];
 

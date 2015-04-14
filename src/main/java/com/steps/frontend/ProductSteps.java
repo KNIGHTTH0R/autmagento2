@@ -8,8 +8,8 @@ import com.tools.data.frontend.BorrowedProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.env.ConfigConstants;
 import com.tools.env.TimeConstants;
-import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.AbstractSteps;
 
 public class ProductSteps extends AbstractSteps {
@@ -78,7 +78,7 @@ public class ProductSteps extends AbstractSteps {
 		result = productDetailsPage().grabRegularBasicProductData();
 
 		result.setFinalPrice(finalPrice);
-		result.setBonusType(Constants.REGULAR_PRICE);
+		result.setBonusType(ConfigConstants.REGULAR_PRICE);
 		result.setBunosValue("0");
 
 		addToCart();
@@ -97,7 +97,7 @@ public class ProductSteps extends AbstractSteps {
 		result = productDetailsPage().grabRegularBasicProductData();
 
 		result.setFinalPrice(finalPrice);
-		result.setBonusType(Constants.REGULAR_PRICE);
+		result.setBonusType(ConfigConstants.REGULAR_PRICE);
 		result.setBunosValue("0");
 
 		addToWishlist();
@@ -117,7 +117,7 @@ public class ProductSteps extends AbstractSteps {
 
 		result.setFinalPrice(finalPrice);
 		result.setIpPoints(ipPoints);
-		result.setBonusType(Constants.REGULAR_PRICE);
+		result.setBonusType(ConfigConstants.REGULAR_PRICE);
 		result.setBunosValue("0");
 
 		addToCart();

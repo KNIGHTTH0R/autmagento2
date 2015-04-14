@@ -7,7 +7,7 @@ import com.tools.calculation.RegularCartTotalsCalculation;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 
 public class RegularUserCartCalculator {
 
@@ -26,7 +26,7 @@ public class RegularUserCartCalculator {
 	public static List<RegularBasicProductModel> getProductswithRegularPriceFromList(List<RegularBasicProductModel> productsList) {
 		List<RegularBasicProductModel> newProductsList = new ArrayList<RegularBasicProductModel>();
 		for (RegularBasicProductModel product : productsList) {
-			if (product.getBonusType().contentEquals(Constants.REGULAR_PRICE)) {
+			if (product.getBonusType().contentEquals(ConfigConstants.REGULAR_PRICE)) {
 				newProductsList.add(product);
 			}
 		}

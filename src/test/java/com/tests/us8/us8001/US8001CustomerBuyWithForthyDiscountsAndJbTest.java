@@ -36,6 +36,7 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.env.ConfigConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -158,10 +159,10 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		headerSteps.goToCart();
 		// TODO put the updateProductList in selectProductDiscountType method
 		// (maybe)
-		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), Constants.JEWELRY_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), Constants.JEWELRY_BONUS);
-		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), Constants.DISCOUNT_40_BONUS);
+		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ConfigConstants.JEWELRY_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ConfigConstants.JEWELRY_BONUS);
+		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ConfigConstants.DISCOUNT_40_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), ConfigConstants.DISCOUNT_40_BONUS);
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
 		regularUserCartSteps.submitVoucherCode();

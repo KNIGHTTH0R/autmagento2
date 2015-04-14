@@ -13,8 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.env.ConfigConstants;
 import com.tools.env.TimeConstants;
-import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -104,7 +104,7 @@ public class CartPage extends AbstractPage {
 			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
 			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
 			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
-			productNow.setDiscountClass(Constants.DISCOUNT_25);
+			productNow.setDiscountClass(ConfigConstants.DISCOUNT_25);
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
@@ -133,7 +133,7 @@ public class CartPage extends AbstractPage {
 			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
 			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
 			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
-			productNow.setDiscountClass(Constants.DISCOUNT_50);
+			productNow.setDiscountClass(ConfigConstants.DISCOUNT_50);
 
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
@@ -163,7 +163,7 @@ public class CartPage extends AbstractPage {
 			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
 			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
 			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
-			productNow.setDiscountClass(Constants.DISCOUNT_0);
+			productNow.setDiscountClass(ConfigConstants.DISCOUNT_0);
 			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
