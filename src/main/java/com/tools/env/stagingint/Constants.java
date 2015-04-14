@@ -89,5 +89,5 @@ public class Constants {
 	public static final String VOUCHER_DISCOUNT = "Voucher Discount";
 	public static final String BE_URL_RULE_BUY3GET1_FOR_HOST = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5478/";
 	
-	public static final String TEN = "10";
+//	public static final String TEN = "10";
 }

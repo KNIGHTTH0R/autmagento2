@@ -94,7 +94,7 @@ public class US10003ClosePartyTest extends BaseTest {
 			customerRegistrationSteps.performLogin(username, password);
 			customerRegistrationSteps.navigate(urlModel.getUrl());
 			partyDetailsSteps.verifyActivePartyAvailableActions();		
-			partyDetailsSteps.closeTheParty(Constants.TEN);
+			partyDetailsSteps.closeTheParty("10");
 			partyDetailsSteps.verifyClosedPartyAvailableActions();
 		}
 	}

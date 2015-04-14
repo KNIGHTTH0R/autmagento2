@@ -44,8 +44,8 @@ public class BaseTest {
         EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
         emailDefaults.setHost(EmailConstants.RECEIVING_HOST);
         emailDefaults.setProtocol(EmailConstants.PROTOCOL);
-        emailDefaults.setUsername(EmailConstants.USERNAME);
-        emailDefaults.setPassword(EmailConstants.PASSWORD);
+        emailDefaults.setUsername(EmailConstants.EMAIL_DEF_USERNAME);
+        emailDefaults.setPassword(EmailConstants.EMAIL_DEF_PASSWORD);
         
         gmailConnector = new GmailConnector(emailDefaults);
     }
