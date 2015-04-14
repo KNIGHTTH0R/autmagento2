@@ -26,6 +26,7 @@ public class ConfigConstants {
 	public static final String REGULAR_PRICE = "Regulärer Preis";
 	public static final String VOUCHER_DISCOUNT = "Voucher Discount";
 	
+	//Webmail suffix
 	public static final String WEB_MAIL = "mailinator.com";
 	
 }

@@ -15,7 +15,7 @@ import com.steps.backend.styleParties.PartyListBackendSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -46,7 +46,7 @@ public class US10001UpdatePartyBonusesTest extends BaseTest {
 	@Test
 	public void us10001ClosePartyTest() {
 
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStyleParties();
 		partyListBackendSteps.openPartyDetails(partyId);
 		partyDetailsBackendSteps.addJewelryAndFourthyDiscountBonusToParty();

@@ -15,7 +15,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.env.ConfigConstants;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
@@ -53,7 +53,7 @@ public class US7001CheckCustomerActivation extends BaseTest {
 	@Test
 	public void us7001CheckCustomerActivation() {
 		
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);

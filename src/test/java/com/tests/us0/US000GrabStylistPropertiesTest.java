@@ -21,6 +21,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.Credentials;
 import com.tools.persistance.MongoWriter;
 
 @WithTag(name = "US000", type = "backend")
@@ -72,7 +73,7 @@ public class US000GrabStylistPropertiesTest extends BaseTest {
 	 */
 	@Test
 	public void us000GrabStylistPropertiesTest() {
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		// backEndSteps.dismissPopUp();
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistName);

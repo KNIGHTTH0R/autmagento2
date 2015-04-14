@@ -24,7 +24,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.ConfigConstants;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -76,7 +76,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	@Test
 	public void us6002StyleCoachRegistrationTest() {
 		
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistData.getEmailName());
 		backEndSteps.openCustomerDetails(stylistData.getEmailName());

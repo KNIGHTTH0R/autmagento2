@@ -1,6 +1,7 @@
 package com.steps.backend.promotion;
 
 import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.Credentials;
 import com.tools.requirements.AbstractSteps;
 
 public class PromotionSteps extends AbstractSteps {
@@ -9,8 +10,8 @@ public class PromotionSteps extends AbstractSteps {
 
 	public void activateRule() {
 		getDriver().get(Constants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Constants.BE_USER);
-		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
+		magentoLoginPage().inputUserName(Credentials.BE_USER);
+		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().clickOnPromotions();
 		navigationPage().clickOnShoppingCartPriceRules();
@@ -23,8 +24,8 @@ public class PromotionSteps extends AbstractSteps {
 
 	public void deactivateRule() {
 		getDriver().get(Constants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Constants.BE_USER);
-		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
+		magentoLoginPage().inputUserName(Credentials.BE_USER);
+		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().clickOnPromotions();
 		navigationPage().clickOnShoppingCartPriceRules();
@@ -37,8 +38,8 @@ public class PromotionSteps extends AbstractSteps {
 
 	public void activateBuy3Get1ForRegular() {
 		getDriver().get(Constants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Constants.BE_USER);
-		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
+		magentoLoginPage().inputUserName(Credentials.BE_USER);
+		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().clickOnPromotions();
 		navigationPage().clickOnShoppingCartPriceRules();
@@ -51,8 +52,8 @@ public class PromotionSteps extends AbstractSteps {
 
 	public void deactivateBuy3Get1ForRegular() {
 		getDriver().get(Constants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Constants.BE_USER);
-		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
+		magentoLoginPage().inputUserName(Credentials.BE_USER);
+		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().clickOnPromotions();
 		navigationPage().clickOnShoppingCartPriceRules();
@@ -65,8 +66,8 @@ public class PromotionSteps extends AbstractSteps {
 
 	public void activateBuy3Get1ForHost() {
 		getDriver().get(Constants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Constants.BE_USER);
-		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
+		magentoLoginPage().inputUserName(Credentials.BE_USER);
+		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().clickOnPromotions();
 		navigationPage().clickOnShoppingCartPriceRules();
@@ -79,8 +80,8 @@ public class PromotionSteps extends AbstractSteps {
 
 	public void deactivateBuy3Get1ForHost() {
 		getDriver().get(Constants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Constants.BE_USER);
-		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
+		magentoLoginPage().inputUserName(Credentials.BE_USER);
+		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().clickOnPromotions();
 		navigationPage().clickOnShoppingCartPriceRules();

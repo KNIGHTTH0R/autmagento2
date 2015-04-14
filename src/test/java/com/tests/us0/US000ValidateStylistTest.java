@@ -22,6 +22,7 @@ import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.Credentials;
 import com.tools.persistance.MongoReader;
 
 @WithTag(name = "US000", type = "backend")
@@ -91,7 +92,7 @@ public class US000ValidateStylistTest extends BaseTest{
 	 */
 	@Test
 	public void us000ValidateStylistData() {
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistName);
 		backEndSteps.openCustomerDetails(stylistName);

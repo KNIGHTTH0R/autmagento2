@@ -13,7 +13,7 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -50,7 +50,7 @@ public class US7005CheckCustomerActivationTest extends BaseTest {
 	@Test
 	public void us7005CheckCustomerActivationTest() {
 
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(clientName);
 		backEndSteps.openCustomerDetails(clientName);

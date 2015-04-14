@@ -10,6 +10,8 @@ import java.io.File;
  *
  */
 public class Constants {
+	
+	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-aut" + File.separator;
 
 	
 	//Staging AUT uRLs
@@ -30,27 +32,13 @@ public class Constants {
 	public static final String BE_URL_RULE_BUY3GET1_FOR_HOST = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5478/";
 
 	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
-	
-	// SOAP user authentication
-	public static final String LOGIN_USER_SOAP = "stagingaut";
-	public static final String LOGIN_PASS_SOAP = "stagingaut1";
-
-
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
+	
 	public static final String REGISTER_LANDING_PAGE = "register-landing-page";
 	public static final String LANDING_PAGE = "contact-landing-page";
 
-	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-aut" + File.separator;
-	public static final String BE_USER = "admin";
-	public static final String BE_PASS = "admin1234";
-	public static final String BE_STYLIST = "simona.popa@evozon.com";
-
 	public static final String PROFILE_HISTORY = "MEINE BESTELLUNGEN";
-	
-//	public static final String WEB_MAIL = "mailinator.com";
-//	public static final String US_03_FOLDER = "us3";
-//	public static final String US_05_FOLDER = "us5";
-	
+
 	//messages
 	public static final String EXISTING_ACCOUNT_MESSAGE = "WICHTIG: Wenn Du bereits einen PIPPA&JEAN Benutzerkonto hast, dann melde dich bitte hier an, bevor Du die Style Coach Registrierung ausführst!";
 	public static final String STYLE_COACH_REG_PAGE_TITLE = "REGISTRIERE DICH ALS STYLE COACH UND ERWERBE DAS STARTER-SET";

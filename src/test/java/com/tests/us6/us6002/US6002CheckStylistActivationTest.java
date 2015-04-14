@@ -17,7 +17,7 @@ import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.ConfigConstants;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.stagingaut.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
@@ -63,7 +63,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 	@Test
 	public void us6002CheckStylistActivationTest() {
 		
-		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
 		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
