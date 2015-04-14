@@ -17,10 +17,9 @@ import com.tools.env.stagingaut.UrlConstants;
 
 public class BaseTest {
 	@Managed(uniqueSession = true)
-//	@Managed(uniqueSession = true, driver="htmlunit")
 	public WebDriver webdriver;
 
-	@ManagedPages(defaultUrl = UrlConstants.BASE_URL)
+	@ManagedPages(defaultUrl = UrlConstants.BASE_URL_AUT)
 	public Pages pages;
 	
 	public MongoConnector mongoConnector;

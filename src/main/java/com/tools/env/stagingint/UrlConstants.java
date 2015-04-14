@@ -11,12 +11,15 @@ import java.io.File;
  */
 public class UrlConstants {
 
+	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-int" + File.separator;
 	
 	//Staging INT uRLs
 	public static final String BASE_FE_URL = "http://staging-int.pippajean.com/de/";
+	public static final String BASE_URL_BE = "https://admin-staging-int.pippajean.com/index.php/admin/";
+	
+	
 	public static final String BASE_URL = "http://staging-int.pippajean.com/de/?___store=de_lang_de/";
 	public static final String BASE_URL_AUT = "https://staging-int.pippajean.com/de/customer/account/login/";
-	public static final String BASE_URL_BE = "https://admin-staging-int.pippajean.com/index.php/admin/";
 	public static final String BASE_URL_FE = "https://staging-int.pippajean.com/de/customer/account/create/";
 	public static final String URL_CART_SUCCESS = "http://staging-int.pippajean.com/de/simona/simplecheckout/process/success/";
 	public static final String PROFILE_HISTORY_URL = "http://staging-int.pippajean.com/de/simona/sales/order/history/";
@@ -32,11 +35,6 @@ public class UrlConstants {
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
 	public static final String REGISTER_LANDING_PAGE = "register-landing-page";
 	public static final String LANDING_PAGE = "contact-landing-page";
-
-	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-int" + File.separator;
-//	public static final String BE_USER = "admin";
-//	public static final String BE_PASS = "admin123";
-//	public static final String BE_STYLIST = "simona.popa@evozon.com";
 
 	public static final String PROFILE_HISTORY = "MEINE BESTELLUNGEN";
 	
