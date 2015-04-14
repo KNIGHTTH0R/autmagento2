@@ -21,6 +21,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.BorrowedProductModel;
 import com.tools.data.frontend.DateModel;
@@ -47,7 +48,8 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	private String username, password;
 	public static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
 	public static List<BorrowedProductModel> borrowCartProductsList = new ArrayList<BorrowedProductModel>();
-	private String productName, productCode;
+	private String productName;
+	//, productCode;
 
 	@Before
 	public void setUp() throws Exception {
@@ -76,10 +78,10 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
-		productsList = MongoReader.grabRegularBasicProductModel("US10006CustomerAddProductIntoWishlistTest" + Constants.CALC);
+		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		productsList = MongoReader.grabRegularBasicProductModel("US10006CustomerAddProductIntoWishlistTest" + SoapKeys.CALC);
 		productName = productsList.get(0).getName();
-		productCode = productsList.get(0).getProdCode();
+//		productCode = productsList.get(0).getProdCode();
 
 	}
 

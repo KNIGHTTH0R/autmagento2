@@ -27,6 +27,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -111,9 +112,9 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 
 	}
 

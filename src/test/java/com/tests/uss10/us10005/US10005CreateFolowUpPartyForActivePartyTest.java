@@ -20,6 +20,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.stagingaut.Constants;
@@ -71,7 +72,7 @@ public class US10005CreateFolowUpPartyForActivePartyTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10005CreatePartyWithCustomerHostTest" + Constants.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10005CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 
 	}
 

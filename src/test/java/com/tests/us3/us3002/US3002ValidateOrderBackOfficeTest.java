@@ -25,6 +25,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -92,10 +93,10 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3002Test" + Constants.GRAB);
-		productsList = MongoReader.grabBasicProductModel("US3002Test" + Constants.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US3002Test" + Constants.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3002Test" + Constants.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3002Test" + SoapKeys.GRAB);
+		productsList = MongoReader.grabBasicProductModel("US3002Test" + SoapKeys.GRAB);
+		shippingModelList = MongoReader.grabShippingModel("US3002Test" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3002Test" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -112,8 +113,8 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
 		
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
 		// Setup Data from all models in first test
 		// from Shipping calculations
@@ -164,7 +165,7 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 }

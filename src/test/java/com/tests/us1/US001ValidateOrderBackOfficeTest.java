@@ -23,6 +23,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
@@ -82,7 +83,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 		
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest" + Constants.GRAB);
+		List<OrderModel> orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest" + SoapKeys.GRAB);
 
 		if (orderModel.size() == 1) {
 
@@ -91,7 +92,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModel.size() == 1);
 		}
 
-		cartTotals = MongoReader.grabTotalsModels("US001StyleCoachShoppingTest" + Constants.GRAB);
+		cartTotals = MongoReader.grabTotalsModels("US001StyleCoachShoppingTest" + SoapKeys.GRAB);
 		if (cartTotals.size() == 1) {
 
 			orderId = orderModel.get(0).getOrderId();
@@ -99,7 +100,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + cartTotals , cartTotals.size() == 1);
 		}
 		
-		productsList = MongoReader.grabProductBasicModel("US001StyleCoachShoppingTest" + Constants.GRAB);		
+		productsList = MongoReader.grabProductBasicModel("US001StyleCoachShoppingTest" + SoapKeys.GRAB);		
 	}
 
 	/**

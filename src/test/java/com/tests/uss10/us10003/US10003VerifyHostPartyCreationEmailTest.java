@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.stagingaut.Constants;
@@ -34,7 +35,7 @@ public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		customerModel = new CustomerFormModel();
-		customerModel = MongoReader.grabCustomerFormModels("US10003CreatePartyWithNewContactHostTest" + Constants.GRAB).get(0);
+		customerModel = MongoReader.grabCustomerFormModels("US10003CreatePartyWithNewContactHostTest" + SoapKeys.GRAB).get(0);
 		email = customerModel.getEmailName();
 		System.out.println(email);
 
@@ -50,7 +51,7 @@ public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 }

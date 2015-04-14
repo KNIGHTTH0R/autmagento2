@@ -21,6 +21,7 @@ import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.EmailConstants;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.env.stagingaut.Constants;
@@ -89,6 +90,6 @@ public class US10005VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 }

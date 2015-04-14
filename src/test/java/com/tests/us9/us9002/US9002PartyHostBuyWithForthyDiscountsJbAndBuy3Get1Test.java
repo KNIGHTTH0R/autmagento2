@@ -28,6 +28,7 @@ import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -136,10 +137,10 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 		
-		partyUrlModel = MongoReader.grabUrlModels("US10002CreatePartyWithCustomerHostTest" + Constants.GRAB).get(0);
+		partyUrlModel = MongoReader.grabUrlModels("US10002CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 	}
 
 	@Test
@@ -204,12 +205,12 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 
 	@After
 	public void saveData() {
-		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + Constants.CALC);
-		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
-		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
-			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + Constants.CALC);
+			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
 		}
 	}
 }

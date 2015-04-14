@@ -20,6 +20,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.UpdatePartySteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.stagingaut.Constants;
@@ -69,8 +70,8 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10004CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
-		dateModel = MongoReader.grabStylistDateModels("US10004CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10004CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		dateModel = MongoReader.grabStylistDateModels("US10004CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
 	}
 

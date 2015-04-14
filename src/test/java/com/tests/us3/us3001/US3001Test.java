@@ -26,6 +26,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -147,8 +148,8 @@ public class US3001Test extends BaseTest {
 		creditCardData.setYearExpiration(cardYear);
 		creditCardData.setCvcNumber(cardCVC);
 		// Clean DB
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
 
 	@Test
@@ -217,13 +218,13 @@ public class US3001Test extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + Constants.CALC);
-		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
-		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (BasicProductModel product : CartCalculator.allProductsList) {
-			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + Constants.GRAB);
+			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
 		}
 	}
 

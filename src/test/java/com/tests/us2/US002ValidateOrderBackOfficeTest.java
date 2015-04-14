@@ -24,6 +24,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -89,10 +90,10 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest" + Constants.GRAB);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest" + Constants.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US002CartSegmentationLogicTest" + Constants.CALC);
-		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest" + Constants.GRAB);
+		List<OrderModel> orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest" + SoapKeys.GRAB);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest" + SoapKeys.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US002CartSegmentationLogicTest" + SoapKeys.CALC);
+		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest" + SoapKeys.GRAB);
 		
 		if (orderModel.size() == 1) {
 
@@ -152,7 +153,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 }

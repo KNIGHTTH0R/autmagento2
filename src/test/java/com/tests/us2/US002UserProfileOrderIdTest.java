@@ -23,6 +23,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
@@ -71,12 +72,12 @@ public class US002UserProfileOrderIdTest extends BaseTest{
 		}
 
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
-		orderModel = MongoReader.grabOrderModels("US002CartSegmentationLogicTest" + Constants.GRAB).get(0);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		orderModel = MongoReader.grabOrderModels("US002CartSegmentationLogicTest" + SoapKeys.GRAB).get(0);
 		
 		//fail test if no setup data is found
-		Assert.assertTrue(MongoReader.grabOrderModels("US002CartSegmentationLogicTest" + Constants.GRAB).size() > 0);
+		Assert.assertTrue(MongoReader.grabOrderModels("US002CartSegmentationLogicTest" + SoapKeys.GRAB).size() > 0);
 		
 	}
 	

@@ -21,6 +21,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
@@ -67,7 +68,7 @@ public class US001UserProfileOrderIdTest extends BaseTest{
 				}
 			}
 		}
-		orderModel = MongoReader.grabOrderModels("US001StyleCoachShoppingTest" + Constants.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US001StyleCoachShoppingTest" + SoapKeys.GRAB).get(0);
 	}
 	
 	

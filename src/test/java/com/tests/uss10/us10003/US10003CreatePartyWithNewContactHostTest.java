@@ -24,6 +24,7 @@ import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -87,7 +88,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -106,10 +107,10 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName()+ Constants.GRAB);
+		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName()+ SoapKeys.GRAB);
 		MongoWriter.saveCustomerFormModel(inviteData, getClass().getSimpleName());
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 }
 

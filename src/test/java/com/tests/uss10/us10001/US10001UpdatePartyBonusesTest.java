@@ -13,6 +13,7 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.styleParties.PartyDetailsBackendSteps;
 import com.steps.backend.styleParties.PartyListBackendSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
@@ -36,7 +37,7 @@ public class US10001UpdatePartyBonusesTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + Constants.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		String[] bits = urlModel.getUrl().split("/");
 		partyId = bits[bits.length - 1];
 		System.out.println(partyId);

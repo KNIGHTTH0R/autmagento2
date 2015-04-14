@@ -30,6 +30,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalculationModel;
 import com.tools.data.backend.OrderModel;
@@ -130,7 +131,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		creditCardData.setYearExpiration(cardYear);
 		creditCardData.setCvcNumber(cardCVC);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 
 	}
 
@@ -217,10 +218,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (ProductBasicModel product : productsList) {
-			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.GRAB);
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
 		}
 	}
 }

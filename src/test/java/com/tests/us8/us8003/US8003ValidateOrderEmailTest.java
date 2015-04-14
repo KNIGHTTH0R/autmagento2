@@ -25,6 +25,7 @@ import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.EmailConstants;
+import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.env.stagingaut.Constants;
@@ -76,7 +77,7 @@ public class US8003ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test" + Constants.GRAB);
+		orderModel = MongoReader.getOrderModel("US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test" + SoapKeys.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		

@@ -23,6 +23,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
@@ -72,7 +73,7 @@ public class US001ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest" + Constants.GRAB);
+		orderModel = MongoReader.getOrderModel("US001StyleCoachShoppingTest" + SoapKeys.GRAB);
 	}
 	
 	@Test

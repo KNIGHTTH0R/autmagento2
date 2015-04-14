@@ -21,6 +21,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -74,8 +75,8 @@ public class US10003ClosePartyTest extends BaseTest {
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10003CreatePartyWithNewContactHostTest" + Constants.GRAB).get(0);
-		dateModel = MongoReader.grabStylistDateModels("US10003CreatePartyWithNewContactHostTest" + Constants.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10003CreatePartyWithNewContactHostTest" + SoapKeys.GRAB).get(0);
+		dateModel = MongoReader.grabStylistDateModels("US10003CreatePartyWithNewContactHostTest" + SoapKeys.GRAB).get(0);
 
 		Long partyCreationTime = Long.parseLong(dateModel.getDate());
 		Long currentTime = System.currentTimeMillis();

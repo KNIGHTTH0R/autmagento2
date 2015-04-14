@@ -30,6 +30,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.calculation.CartCalculation;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
@@ -161,8 +162,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		creditCardData.setYearExpiration(cardYear);
 		creditCardData.setCvcNumber(cardCVC);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
 
 	@Test
@@ -276,13 +277,13 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@After
 	public void saveData() {
 
-		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName() + Constants.CALC);
+		MongoWriter.saveCalcDetailsModel(discountCalculationModel, getClass().getSimpleName() + SoapKeys.CALC);
 		for (ProductBasicModel product : allProductsList) {
-			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + Constants.GRAB);
+			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
 		}
-		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + Constants.CALC);
-		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveShippingModel(shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 
 	}
 

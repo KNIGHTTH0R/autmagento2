@@ -25,6 +25,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -92,10 +93,10 @@ public class US8001ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.GRAB);
-		productsList = MongoReader.grabRegularBasicProductModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.CALC);
-		calcDetailsModelList = MongoReader.grabRegularCartCalcDetailsModels("US8001CustomerBuyWithForthyDiscountsAndJbTest" + Constants.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabRegularBasicProductModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabRegularCartCalcDetailsModels("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -112,8 +113,8 @@ public class US8001ValidateOrderBackOfficeTest extends BaseTest {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
 		
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
 		// Setup Data from all models in first test
 		// from Shipping calculations
@@ -160,7 +161,7 @@ public class US8001ValidateOrderBackOfficeTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 }

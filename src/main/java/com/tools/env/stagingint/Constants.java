@@ -45,11 +45,6 @@ public class Constants {
 	public static final String WEB_MAIL = "mailinator.com";
 
 
-//	public static final long TIME_MEDIUM = 5000;
-//	public static final long WAIT_TIME_MAIL = 5000;
-//	public static final long TIME_CONSTANT = 3000;
-//	public static final long WAIT_TIME_LONG = 8000;
-
 	public static final String DATE_SEPARATOR = ",";
 	public static final String ADDRESS_SEPARATOR = ",";
 	public static final String LINE_SEPARATOR = "\n";
@@ -64,9 +59,9 @@ public class Constants {
 	public static final String DISCOUNT_50 = "50";
 	public static final String DISCOUNT_BUY_3_GET_1 = "3+1";
 	
-
-	public static final String GRAB = "Grab";
-	public static final String CALC = "Calc";
+//
+//	public static final String GRAB = "Grab";
+//	public static final String CALC = "Calc";
 	
 	//statuses
 	public static final String CONFIRMED = "Bestätigt";
@@ -95,14 +90,4 @@ public class Constants {
 	public static final String BE_URL_RULE_BUY3GET1_FOR_HOST = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5478/";
 	
 	public static final String TEN = "10";
-
-
-	
-	
-	
-
-	
-
-	
-	
 }

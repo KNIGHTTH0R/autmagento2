@@ -22,6 +22,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.stagingaut.Constants;
@@ -69,7 +70,7 @@ public class US10001CreatePartyWithStylistHostTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 
 	}
 
@@ -83,8 +84,8 @@ public class US10001CreatePartyWithStylistHostTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + Constants.GRAB);
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + Constants.GRAB);
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 }
 

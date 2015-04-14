@@ -1,6 +1,10 @@
 package com.tools;
 
 public class SoapKeys {
+	
+	//SOAP TEST DATA - data grouping
+	public static final String GRAB = "Grab";
+	public static final String CALC = "Calc";
 
 	// General keys
 	public static final String URN_PREFIX = "urn";

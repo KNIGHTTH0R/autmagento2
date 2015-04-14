@@ -22,6 +22,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
@@ -70,9 +71,9 @@ public class US4001UserProfileOrderIdTest extends BaseTest{
 		}
 
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
-		orderModel = MongoReader.grabOrderModels("US4001Test" + Constants.GRAB).get(0);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		orderModel = MongoReader.grabOrderModels("US4001Test" + SoapKeys.GRAB).get(0);
 		
 	}
 	

@@ -23,6 +23,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -82,8 +83,8 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + Constants.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
 		urlModel = MongoReader.grabUrlModels("US10006ChechEmailAndAcceptInvitationTest").get(0);		
 	}
@@ -103,7 +104,7 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 	@After
 	public void saveData() {
 		for (RegularBasicProductModel product : allProductsList) {
-			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + Constants.CALC);
+			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
 		}
 	}
 }
