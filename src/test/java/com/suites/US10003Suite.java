@@ -6,10 +6,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.uss10.us10003.US10003CheckInviteEmailAndRegistratiionLinkTest;
 import com.tests.uss10.us10003.US10003ClosePartyTest;
-import com.tests.uss10.us10003.US10003CreatePartyWithNewContactHostTest;
+import com.tests.uss10.us10003.US10003VerifyHostPartyCreationEmailTest;
 
 @SuiteClasses({
-	US10003CreatePartyWithNewContactHostTest.class,
+	US10003VerifyHostPartyCreationEmailTest.class,
 	US10003CheckInviteEmailAndRegistratiionLinkTest.class,
 	US10003ClosePartyTest.class,	
 

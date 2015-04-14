@@ -97,7 +97,7 @@ public class PartyCreationPage extends AbstractPage {
 	public void selectFirstAvailableHour() {
 
 		List<WebElement> hoursList = hourSelectDropDown.findElements(By.xpath("//option[not(@disabled)]"));
-		hoursList.get(1).click();
+		hoursList.get(2).click();
 		
 
 	}

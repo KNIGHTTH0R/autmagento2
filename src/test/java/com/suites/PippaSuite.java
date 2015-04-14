@@ -48,6 +48,9 @@ import com.poc.DeactivateRule;
 	US10001AndUS10002ClosePartiesSuite.class,
 	US9001Suite.class,
 	US9002Suite.class,
+//	US10003Suite.class,
+//	US10005Suite.class,
+//	US10006Suite.class,
 	
 })
 @RunWith(Suite.class)

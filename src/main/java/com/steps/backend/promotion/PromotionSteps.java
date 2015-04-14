@@ -8,55 +8,85 @@ public class PromotionSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	public void activateRule() {
-		getDriver().get(Constants.BE_URL_RULE_BUY3GET1);
+		getDriver().get(Constants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Constants.BE_USER);
 		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().clickOnPromotions();
+		navigationPage().clickOnShoppingCartPriceRules();
+		shoppingCartPriceRulesPage().typeRuleName("Buy 3 get 1 for 50% - stylist");
+		shoppingCartPriceRulesPage().clickOnSearch();
+		shoppingCartPriceRulesPage().openRuleDetails("Buy 3 get 1 for 50% - stylist");
 		shoppingCartPriceRulesPage().activateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
 
 	public void deactivateRule() {
-		getDriver().get(Constants.BE_URL_RULE_BUY3GET1);
+		getDriver().get(Constants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Constants.BE_USER);
 		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().clickOnPromotions();
+		navigationPage().clickOnShoppingCartPriceRules();
+		shoppingCartPriceRulesPage().typeRuleName("Buy 3 get 1 for 50% - stylist");
+		shoppingCartPriceRulesPage().clickOnSearch();
+		shoppingCartPriceRulesPage().openRuleDetails("Buy 3 get 1 for 50% - stylist");
 		shoppingCartPriceRulesPage().deactivateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
 
 	public void activateBuy3Get1ForRegular() {
-		getDriver().get(Constants.BE_URL_RULE_BUY3GET1_FOR_REGULAR);
+		getDriver().get(Constants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Constants.BE_USER);
 		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().clickOnPromotions();
+		navigationPage().clickOnShoppingCartPriceRules();
+		shoppingCartPriceRulesPage().typeRuleName("Buy 3 get 1 for 50% - regular");
+		shoppingCartPriceRulesPage().clickOnSearch();
+		shoppingCartPriceRulesPage().openRuleDetails("Buy 3 get 1 for 50% - regular");
 		shoppingCartPriceRulesPage().activateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
 
 	public void deactivateBuy3Get1ForRegular() {
-		getDriver().get(Constants.BE_URL_RULE_BUY3GET1_FOR_REGULAR);
+		getDriver().get(Constants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Constants.BE_USER);
 		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().clickOnPromotions();
+		navigationPage().clickOnShoppingCartPriceRules();
+		shoppingCartPriceRulesPage().typeRuleName("Buy 3 get 1 for 50% - regular");
+		shoppingCartPriceRulesPage().clickOnSearch();
+		shoppingCartPriceRulesPage().openRuleDetails("Buy 3 get 1 for 50% - regular");
 		shoppingCartPriceRulesPage().deactivateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
 
 	public void activateBuy3Get1ForHost() {
-		getDriver().get(Constants.BE_URL_RULE_BUY3GET1_FOR_HOST);
+		getDriver().get(Constants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Constants.BE_USER);
 		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().clickOnPromotions();
+		navigationPage().clickOnShoppingCartPriceRules();
+		shoppingCartPriceRulesPage().typeRuleName("Buy 3 get 1 for 50% - host");
+		shoppingCartPriceRulesPage().clickOnSearch();
+		shoppingCartPriceRulesPage().openRuleDetails("Buy 3 get 1 for 50% - host");
 		shoppingCartPriceRulesPage().activateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
 
 	public void deactivateBuy3Get1ForHost() {
-		getDriver().get(Constants.BE_URL_RULE_BUY3GET1_FOR_HOST);
+		getDriver().get(Constants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Constants.BE_USER);
 		magentoLoginPage().inputUserPassword(Constants.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().clickOnPromotions();
+		navigationPage().clickOnShoppingCartPriceRules();
+		shoppingCartPriceRulesPage().typeRuleName("Buy 3 get 1 for 50% - host");
+		shoppingCartPriceRulesPage().clickOnSearch();
+		shoppingCartPriceRulesPage().openRuleDetails("Buy 3 get 1 for 50% - host");
 		shoppingCartPriceRulesPage().deactivateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
