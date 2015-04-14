@@ -15,6 +15,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.env.ConfigConstants;
 import com.tools.env.TimeConstants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -29,6 +30,7 @@ public class CartPage extends AbstractPage {
 	private WebElement kasseButton;
 
 	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
+//	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")    //int  
 	private WebElement updateButton;
 
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")
@@ -296,7 +298,7 @@ public class CartPage extends AbstractPage {
 		element(cartMainContainer).waitUntilVisible();
 		System.out.println("TEXT from CONTAINER: " + cartMainContainer.getText());
 		
-		Assert.assertTrue(cartMainContainer.getText().contains("WARENKORB IST LEER"));
+		Assert.assertTrue(cartMainContainer.getText().contains(UrlConstants.EMPTY_CART));
 		
 	}
 

@@ -29,6 +29,7 @@ public class CartPage extends AbstractPage {
 	private WebElement kasseButton;
 
 	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
+//	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")    //int  
 	private WebElement updateButton;
 
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")

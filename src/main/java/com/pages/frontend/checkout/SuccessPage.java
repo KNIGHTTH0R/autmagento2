@@ -18,7 +18,7 @@ public class SuccessPage extends AbstractPage {
 	public void verifySuccessMessage() {
 		element(messageContainer).waitUntilVisible();
 		String pageText = messageContainer.getText();
-		Assert.assertTrue("Failure: Success message has not been found.", pageText.contains("Wir haben dir eine eMail mit mit den Details zur Bestellung geschickt."));
+		Assert.assertTrue("Failure: Success message has not been found.", pageText.contains(UrlConstants.SUCCES_MESSAGE));
 	}
 
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.requirements.AbstractPage;
 
 public class HeaderPage extends AbstractPage {
@@ -31,15 +32,19 @@ public class HeaderPage extends AbstractPage {
 	private WebElement cartPreviewPrice;
 
 	@FindBy(css = "a[title='Profil']")
+//	@FindBy(css = "div.quick-access.clearfix ul.links li:nth-child(2) a")     //int
 	private WebElement profileButton;
 
 	@FindBy(css = "a[title='Style Coach Lounge']")
+//	@FindBy(css = "div.categories>ul.clearfix li:last-child a")     //int
 	private WebElement loungeButton;
 
 	@FindBy(css = "a[title='Anmelden']")
+//	@FindBy(css = "ul.links>.last a")    //int
 	private WebElement anmeldenButton;
 
 	@FindBy(css = "a[title='Abmelden']")
+//	@FindBy(css = "ul.links>.last a")    //int
 	private WebElement abmeldenButton;
 
 	@FindBy(css = "div.branding p")
@@ -106,7 +111,7 @@ public class HeaderPage extends AbstractPage {
 		String styleCoachNameParts[] = null;
 		List<WebElement> infoBoxList = getDriver().findElements(By.cssSelector(".info-box"));
 		for (WebElement infoBox : infoBoxList) {
-			if (infoBox.getText().contains("MEIN STYLE COACH")) {
+			if (infoBox.getText().contains(UrlConstants.MEIN_STYLE_COACH)) {
 				styleCoachNameParts = infoBox.findElement(By.cssSelector("dl dd")).getText().split(" ");
 				break;
 			}

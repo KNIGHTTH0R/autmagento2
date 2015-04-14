@@ -11,6 +11,7 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.env.TimeConstants;
+import com.tools.env.stagingaut.UrlConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 
@@ -51,7 +52,7 @@ public class ProductDetailsPage extends AbstractPage {
 	public void addToCart() {
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), "Der Artikel wurde in den Warenkorb gelegt. Du kannst deinen Einkauf fortsetzen."));
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), UrlConstants.PRODUCT_ADDED_INTO_CART));
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 	public void addToWishlist() {
@@ -121,6 +122,6 @@ public class ProductDetailsPage extends AbstractPage {
 	}
 	
 	private String cleanProductCode(String code){
-		return code.replace("Artikelnummer: ", "");
+		return code.replace(UrlConstants.ARTICLE_NUMBER, "");
 	}
 }
