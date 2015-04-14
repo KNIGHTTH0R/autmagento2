@@ -13,7 +13,7 @@ import com.steps.EmailSteps;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -46,7 +46,7 @@ public class US7007EmailCodeTest extends BaseTest{
 	
 	@Test
 	public void us7006EmailActivationTest() {
-		validateMessageMail = emailClientSteps.grabEmailCoupon(clientName.replace("@" + Constants.WEB_MAIL, ""), "Willkommen");
+		validateMessageMail = emailClientSteps.grabEmailCoupon(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), "Willkommen");
 		System.out.println(validateMessageMail);
 		emailSteps.validateEmail("123aa11", validateMessageMail);
 		

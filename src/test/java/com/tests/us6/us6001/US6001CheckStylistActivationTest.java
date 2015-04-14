@@ -85,7 +85,7 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		
 		//external 
 		emailClientSteps.openMailinator();
-		grabConfirmationEmail  = emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + Constants.WEB_MAIL, ""),"Benutzerkonto");
+		grabConfirmationEmail  = emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),"Benutzerkonto");
 		
 		backEndSteps.navigate(customerURL);
 		StylistPropertiesModel grabAfterLinkConfirmationStylistData =  backEndSteps.grabCustomerConfiguration();

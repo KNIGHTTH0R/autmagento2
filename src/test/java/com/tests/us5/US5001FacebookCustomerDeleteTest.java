@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.external.FacebookRegistrationSteps;
 import com.tests.BaseTest;
+import com.tools.env.FilePaths;
 import com.tools.env.stagingaut.Constants;
 import com.tools.requirements.Application;
 
@@ -46,7 +47,7 @@ public class US5001FacebookCustomerDeleteTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + Constants.US_05_FOLDER + File.separator + "us0005.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + FilePaths.US_05_FOLDER + File.separator + "us0005.properties");
 			prop.load(input);
 			fbUser = prop.getProperty("fbUser");
 			beUser = prop.getProperty("beUser");

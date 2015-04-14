@@ -28,6 +28,7 @@ import com.tools.EmailConstants;
 import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.email.EmailCredentialsModel;
+import com.tools.env.FilePaths;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -59,7 +60,7 @@ public class US3005ValidateOrderEmailTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + Constants.US_03_FOLDER + File.separator + "us3005.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3005.properties");
 			prop.load(input);
 			email = prop.getProperty("email");
 			password = prop.getProperty("password");

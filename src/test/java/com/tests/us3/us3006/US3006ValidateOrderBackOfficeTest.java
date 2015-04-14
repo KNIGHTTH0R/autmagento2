@@ -33,6 +33,7 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.env.FilePaths;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -76,7 +77,7 @@ public class US3006ValidateOrderBackOfficeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(Constants.RESOURCES_PATH + Constants.US_03_FOLDER + File.separator + "us3006.properties");
+			input = new FileInputStream(Constants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3006.properties");
 			prop.load(input);
 			beUser = prop.getProperty("beUser");
 			bePass = prop.getProperty("bePass");

@@ -1,6 +1,6 @@
 package com.tools.data.frontend;
 
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;
 
@@ -67,7 +67,7 @@ public class CustomerFormModel {
 	}
 
 	public void setEmailName() throws Exception {
-		this.emailName = FieldGenerators.generateRandomString(12, Mode.ALPHANUMERIC) + "@" + Constants.WEB_MAIL;
+		this.emailName = FieldGenerators.generateRandomString(12, Mode.ALPHANUMERIC) + "@" + ConfigConstants.WEB_MAIL;
 	}
 
 	public void setPassword() throws Exception {

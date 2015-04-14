@@ -28,12 +28,13 @@ public class Constants {
 	public static final String BE_URL_RULE_BUY3GET1_FOR_REGULAR = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5467/key/";
 	public static final String PARTY_DETAILS_URL = "http://staging-aut.pippajean.com/qateam/stylist/party/details/id/";
 	public static final String BE_URL_RULE_BUY3GET1_FOR_HOST = "https://staging-aut.pippajean.com/index.php/admin/promo_quote/edit/id/5478/";
+
+	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
 	
 	// SOAP user authentication
 	public static final String LOGIN_USER_SOAP = "stagingaut";
 	public static final String LOGIN_PASS_SOAP = "stagingaut1";
 
-	public static final String API_URI = "https://staging-aut.pippajean.com/index.php/api/v2_soap/index/";
 
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
 	public static final String REGISTER_LANDING_PAGE = "register-landing-page";
@@ -43,13 +44,12 @@ public class Constants {
 	public static final String BE_USER = "admin";
 	public static final String BE_PASS = "admin1234";
 	public static final String BE_STYLIST = "simona.popa@evozon.com";
-	public static final String WEB_MAIL = "mailinator.com";
-
 
 	public static final String PROFILE_HISTORY = "MEINE BESTELLUNGEN";
-	public static final String US_03_FOLDER = "us3";
-	public static final String US_05_FOLDER = "us5";
-
+	
+//	public static final String WEB_MAIL = "mailinator.com";
+//	public static final String US_03_FOLDER = "us3";
+//	public static final String US_05_FOLDER = "us5";
 	
 	//messages
 	public static final String EXISTING_ACCOUNT_MESSAGE = "WICHTIG: Wenn Du bereits einen PIPPA&JEAN Benutzerkonto hast, dann melde dich bitte hier an, bevor Du die Style Coach Registrierung ausführst!";
@@ -61,11 +61,5 @@ public class Constants {
 	public static final String BOUNUS_SUCCESS_MESSAGE = "Bonus was successfully saved";
 	public static final String INVITE_EMAIL_SUBJECT = "lädt Dich ein zur PIPPA&JEAN Style Party";
 	public static final String PARTY_CREATION_EMAIL_SUBJECT = "PIPPA&JEAN Style Party wurde für Dich angelegt";
-	
-//	//BONUSES
-//	public static final String JEWELRY_BONUS = "Schmuck Bonus";
-//	public static final String DISCOUNT_40_BONUS = "40% Rabatt Gutschein";
-//	public static final String REGULAR_PRICE = "Regulärer Preis";
-//	public static final String VOUCHER_DISCOUNT = "Voucher Discount";
 	
 }

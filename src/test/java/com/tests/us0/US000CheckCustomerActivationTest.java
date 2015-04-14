@@ -14,6 +14,7 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.backend.CustomerConfigurationModel;
+import com.tools.env.ConfigConstants;
 import com.tools.env.stagingaut.Constants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -53,7 +54,7 @@ public class US000CheckCustomerActivationTest extends BaseTest {
 
 		// Confirm Email
 		emailClientSteps.openMailinator();
-		validateEmail = emailClientSteps.grabEmail(clientName.replace("@" + Constants.WEB_MAIL, ""));
+		validateEmail = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
 		System.out.println(validateEmail);
 		backEndSteps.performAdminLogin(Constants.BE_USER, Constants.BE_PASS);
 		// backEndSteps.dismissPopUp();

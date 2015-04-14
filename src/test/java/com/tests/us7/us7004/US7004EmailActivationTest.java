@@ -13,7 +13,7 @@ import com.steps.EmailSteps;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.stagingaut.Constants;
+import com.tools.env.ConfigConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -47,7 +47,7 @@ public class US7004EmailActivationTest extends BaseTest{
 	public void us7004EmailActivationTest() {
 
 		emailClientSteps.openMailinator();
-		validateURL = emailClientSteps.grabEmail(clientName.replace("@" + Constants.WEB_MAIL, ""));
+		validateURL = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
 //		System.out.println(validateURL);
 		emailSteps.validateURL(validateURL, "customer/account/confirm");
 		
