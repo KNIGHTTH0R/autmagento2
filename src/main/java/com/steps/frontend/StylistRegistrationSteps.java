@@ -10,7 +10,7 @@ import org.junit.Assert;
 
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.stagingaut.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.FormatterUtils;
 
@@ -254,7 +254,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@Step
 	public void validateStylistRegisterPageTitle() {
-		Assert.assertTrue("Failure: You are not on the style coach register page", stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(UrlConstants.STYLE_COACH_REG_PAGE_TITLE));
+		Assert.assertTrue("Failure: You are not on the style coach register page", stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(ContextConstants.STYLE_COACH_REG_PAGE_TITLE));
 	}
 
 	@Step

@@ -24,6 +24,7 @@ import com.tests.BaseTest;
 import com.tools.EmailConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.email.EmailCredentialsModel;
+import com.tools.env.stagingaut.ContextConstants;
 import com.tools.env.stagingaut.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -86,7 +87,7 @@ public class US10006ChechEmailAndAcceptInvitationTest extends BaseTest {
 	public void us10006ChechEmailAndAcceptInvitationTest() {
 
 		frontEndSteps.performLogin(email, password);
-		String message = gmailConnector.searchForMail("", UrlConstants.INVITE_EMAIL_SUBJECT, true);
+		String message = gmailConnector.searchForMail("", ContextConstants.INVITE_EMAIL_SUBJECT, true);
 		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message, "JA, ich werde teilnehmen"));
 
 	}

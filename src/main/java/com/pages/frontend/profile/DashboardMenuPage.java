@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.stagingaut.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class DashboardMenuPage extends AbstractPage {
@@ -22,7 +22,7 @@ public class DashboardMenuPage extends AbstractPage {
 		theFor: for (WebElement elementNow : menuList) {
 			String elementText = elementNow.getText();
 			System.out.println(elementText);
-			if (elementText.contains(UrlConstants.PROFILE_HISTORY)) {
+			if (elementText.contains(ContextConstants.PROFILE_HISTORY)) {
 				elementNow.click();
 				break theFor;
 			}

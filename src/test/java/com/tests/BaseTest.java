@@ -40,6 +40,10 @@ public class BaseTest {
             e.printStackTrace();
         }
         
+        String contextValue = System.getProperty("runContext");
+        
+        System.out.println(" ---- Context: " + contextValue);
+        
         EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
         emailDefaults.setHost(EmailConstants.RECEIVING_HOST);
         emailDefaults.setProtocol(EmailConstants.PROTOCOL);

@@ -1,7 +1,6 @@
 package com.tools.env;
 
 public class FilePaths {
-	
 	//Config folders
 	public static final String US_01_FOLDER = "us1";
 	public static final String US_02_FOLDER = "us2";
@@ -13,5 +12,4 @@ public class FilePaths {
 	public static final String US_08_FOLDER = "us8";
 	public static final String US_09_FOLDER = "us9";
 	public static final String US_10_FOLDER = "us10";
-
 }
