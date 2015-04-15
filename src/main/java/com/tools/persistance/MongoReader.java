@@ -93,6 +93,26 @@ public class MongoReader extends MongoConnector {
 		return baseUrl;
 	}
 
+	public static String getStoreIds() {
+
+		DBObject dbObject = null;
+		String storeIds = "";
+
+		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.DEFAULT_CONFIG_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				dbObject = cursor.next();
+				storeIds = MongoUtils.checkField(dbObject, MongoTableKeys.STORE_ID_KEY);
+			}
+		} finally {
+			cursor.close();
+		}
+
+		return storeIds;
+	}
+
 	public static List<OrderModel> getOrderModel(String testName) {
 
 		DBObject dbObject = null;
