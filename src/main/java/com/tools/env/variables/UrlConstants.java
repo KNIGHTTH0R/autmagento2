@@ -18,8 +18,6 @@ public class UrlConstants {
 //	public static final String CONTEXT_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "context" + File.separator + MongoReader.getContext() + File.separator;
 
 	//Staging AUT uRLs 
-//	public static final String BASE_FE_URL = "http://staging-aut.pippajean.com/";
-//	public static final String BASE_FE_URL = MongoReader.getBaseURL();
 
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
 	
@@ -34,11 +32,7 @@ public class UrlConstants {
 	public static final String CART_PAGE_URL = "simona/checkout/cart/";
 	
 	
-	
-	
-	
 //	public static final String URL_CART_SUCCESS = "simona/simplecheckout/process/success/";
-	
 //	public static final String PARTY_DETAILS_URL = "qateam/stylist/party/details/id/";
 //	public static final String BASE_URL_FE = "customer/account/create/";
 	

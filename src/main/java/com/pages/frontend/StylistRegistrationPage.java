@@ -212,6 +212,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void submitStep() {
+		element(submitStepButton).waitUntilVisible();
 		submitStepButton.click();
 	}
 
