@@ -13,13 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.datahandlers.DataGrabber;
-
-
-import com.tools.env.stagingaut.UrlConstants;
-
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.TimeConstants;
-
+import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -302,7 +298,7 @@ public class CartPage extends AbstractPage {
 		element(cartMainContainer).waitUntilVisible();
 		System.out.println("TEXT from CONTAINER: " + cartMainContainer.getText());
 		
-		Assert.assertTrue(cartMainContainer.getText().contains(UrlConstants.EMPTY_CART));
+		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 		
 	}
 

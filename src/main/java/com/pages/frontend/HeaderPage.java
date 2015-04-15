@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.env.stagingaut.UrlConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class HeaderPage extends AbstractPage {
@@ -111,7 +111,7 @@ public class HeaderPage extends AbstractPage {
 		String styleCoachNameParts[] = null;
 		List<WebElement> infoBoxList = getDriver().findElements(By.cssSelector(".info-box"));
 		for (WebElement infoBox : infoBoxList) {
-			if (infoBox.getText().contains(UrlConstants.MEIN_STYLE_COACH)) {
+			if (infoBox.getText().contains(ContextConstants.MEIN_STYLE_COACH)) {
 				styleCoachNameParts = infoBox.findElement(By.cssSelector("dl dd")).getText().split(" ");
 				break;
 			}

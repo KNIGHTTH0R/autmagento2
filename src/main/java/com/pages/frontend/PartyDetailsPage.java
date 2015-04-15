@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.tools.env.stagingaut.UrlConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
@@ -160,63 +159,63 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void verifyHostessInviteLink(boolean hostessInviteLinkIsPresent) {
 		if (hostessInviteLinkIsPresent) {
-			Assert.assertTrue("The invite hostess link should be present and it's not", partyDetailsAndActionsContainer.getText().contains(UrlConstants.INVITE_HOSTESS));
+			Assert.assertTrue("The invite hostess link should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_HOSTESS));
 		} else {
-			Assert.assertFalse("The invite hostess link should not be present", partyDetailsAndActionsContainer.getText().contains(UrlConstants.INVITE_HOSTESS));
+			Assert.assertFalse("The invite hostess link should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_HOSTESS));
 		}
 
 	}
 
 	public void verifyEditLink(boolean editLinkIsPresent) {
 		if (editLinkIsPresent) {
-			Assert.assertTrue("The edit link should be present and it's not", partyDetailsAndActionsContainer.getText().contains(UrlConstants.UPDATE_PARTY));
+			Assert.assertTrue("The edit link should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.UPDATE_PARTY));
 		} else {
-			Assert.assertFalse("The edit link should not be present", partyDetailsAndActionsContainer.getText().contains(UrlConstants.UPDATE_PARTY));
+			Assert.assertFalse("The edit link should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.UPDATE_PARTY));
 		}
 
 	}
 
 	public void verifyDeleteLink(boolean deleteLinkIsPresent) {
 		if (deleteLinkIsPresent) {
-			Assert.assertTrue("The delete link should be present and it's not", partyDetailsAndActionsContainer.getText().contains(UrlConstants.DELETE_PARTY));
+			Assert.assertTrue("The delete link should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.DELETE_PARTY));
 		} else {
-			Assert.assertFalse("The delete link should not be present", partyDetailsAndActionsContainer.getText().contains(UrlConstants.DELETE_PARTY));
+			Assert.assertFalse("The delete link should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.DELETE_PARTY));
 		}
 
 	}
 
 	public void verifyInviteGuestsLink(boolean inviteGuestsLinkIsPresent) {
 		if (inviteGuestsLinkIsPresent) {
-			Assert.assertTrue("The invite guests button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(UrlConstants.INVITE_GUEST));
+			Assert.assertTrue("The invite guests button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_GUEST));
 		} else {
-			Assert.assertFalse("The invite guests button should not be present", partyDetailsAndActionsContainer.getText().contains(UrlConstants.INVITE_GUEST));
+			Assert.assertFalse("The invite guests button should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_GUEST));
 		}
 
 	}
 
 	public void verifyFolowUpPartyLink(boolean folowUpPartyLinkIsPresent) {
 		if (folowUpPartyLinkIsPresent) {
-			Assert.assertTrue("The follow up button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(UrlConstants.CREATE_FOLLOW_UP_PARTY));
+			Assert.assertTrue("The follow up button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.CREATE_FOLLOW_UP_PARTY));
 		} else {
-			Assert.assertFalse("The follow up button should not be present", partyDetailsAndActionsContainer.getText().contains(UrlConstants.CREATE_FOLLOW_UP_PARTY));
+			Assert.assertFalse("The follow up button should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.CREATE_FOLLOW_UP_PARTY));
 		}
 
 	}
 
 	public void verifyCustomerOrderLink(boolean customerOrderLinkIsPresent) {
 		if (customerOrderLinkIsPresent) {
-			Assert.assertTrue("The customer order button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(UrlConstants.ORDER_FOR_CUSTOMER));
+			Assert.assertTrue("The customer order button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDER_FOR_CUSTOMER));
 		} else {
-			Assert.assertFalse("The customer order button should not be present", partyDetailsAndActionsContainer.getText().contains(UrlConstants.ORDER_FOR_CUSTOMER));
+			Assert.assertFalse("The customer order button should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDER_FOR_CUSTOMER));
 		}
 
 	}
 
 	public void verifyClosePartyLink(boolean closePartyLinkIsPresent) {
 		if (closePartyLinkIsPresent) {
-			Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(UrlConstants.CLOSE_PARTY));
+			Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.CLOSE_PARTY));
 		} else {
-			Assert.assertFalse("The close party  button should not be present", partyDetailsAndActionsContainer.getText().contains(UrlConstants.CLOSE_PARTY));
+			Assert.assertFalse("The close party  button should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.CLOSE_PARTY));
 		}
 
 	}

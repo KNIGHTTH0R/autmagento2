@@ -10,12 +10,8 @@ import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
-
-
-import com.tools.env.stagingaut.UrlConstants;
-
 import com.tools.env.constants.TimeConstants;
-
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 
@@ -56,7 +52,7 @@ public class ProductDetailsPage extends AbstractPage {
 	public void addToCart() {
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), UrlConstants.PRODUCT_ADDED_INTO_CART));
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), ContextConstants.PRODUCT_ADDED_INTO_CART));
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 	public void addToWishlist() {
@@ -126,6 +122,6 @@ public class ProductDetailsPage extends AbstractPage {
 	}
 	
 	private String cleanProductCode(String code){
-		return code.replace(UrlConstants.ARTICLE_NUMBER, "");
+		return code.replace(ContextConstants.ARTICLE_NUMBER, "");
 	}
 }
