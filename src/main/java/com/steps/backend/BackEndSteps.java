@@ -16,7 +16,7 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public void performAdminLogin(String userName, String userPass) {
 
-		getDriver().get(UrlConstants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_FE_URL + "index.php/admin/");
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
@@ -24,12 +24,12 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void goToBackend() {
-		getDriver().get(UrlConstants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_FE_URL + "index.php/admin/");
 	}
 
 	@Step
 	public void performLogin(String userName, String userPass) {
-		getDriver().get(UrlConstants.BASE_URL_AUT);
+		getDriver().get(UrlConstants.BASE_FE_URL + "customer/account/login/");
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();

@@ -9,7 +9,7 @@ public class PromotionSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	public void activateRule() {
-		getDriver().get(UrlConstants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_FE_URL + "index.php/admin/");
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -23,7 +23,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void deactivateRule() {
-		getDriver().get(UrlConstants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_FE_URL + "index.php/admin/");
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -37,7 +37,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void activateBuy3Get1ForRegular() {
-		getDriver().get(UrlConstants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_FE_URL + "index.php/admin/");
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -51,7 +51,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void deactivateBuy3Get1ForRegular() {
-		getDriver().get(UrlConstants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_FE_URL + "index.php/admin/");
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -65,7 +65,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void activateBuy3Get1ForHost() {
-		getDriver().get(UrlConstants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_FE_URL + "index.php/admin/");
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -79,7 +79,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void deactivateBuy3Get1ForHost() {
-		getDriver().get(UrlConstants.BASE_URL_BE);
+		getDriver().get(UrlConstants.BASE_FE_URL + "index.php/admin/");
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();

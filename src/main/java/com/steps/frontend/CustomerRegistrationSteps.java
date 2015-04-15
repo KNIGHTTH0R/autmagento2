@@ -11,7 +11,6 @@ import org.junit.Assert;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.AbstractSteps;
 
