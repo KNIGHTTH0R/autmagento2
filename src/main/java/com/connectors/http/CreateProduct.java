@@ -9,6 +9,8 @@ import javax.xml.soap.SOAPMessage;
 
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
+import com.tools.env.constants.Separators;
+import com.tools.persistance.MongoReader;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.FieldGenerators.Mode;
@@ -18,21 +20,21 @@ public class CreateProduct {
 	public static void main(String args[]) throws Exception {
 		createApiProduct(createProductModel());
 	}
-	
-	public static ProductDetailedModel createMarketingProductModel() throws Exception{
+
+	public static ProductDetailedModel createMarketingProductModel() throws Exception {
 		ProductDetailedModel result = createProductModel();
 		List<String> categoriesIds = new ArrayList<String>();
 		categoriesIds.add("15");
 		categoriesIds.add("15");
 		result.setCategoryIdsArray(categoriesIds);
-		
+
 		return result;
 	}
 
 	public static ProductDetailedModel createProductModel() throws Exception {
 		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
 		ProductDetailedModel product = new ProductDetailedModel();
-		
+
 		product.setType("simple");
 		product.setSet("4");
 		product.setName(name);
@@ -59,21 +61,35 @@ public class CreateProduct {
 		product.setOptionsContainer("");
 		product.setStore("0");
 		product.setIp("50");
-		
+
 		product.setNewsFromDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 3600));
 		product.setNewsToDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 86400));
-		
+
 		List<String> webSiteIds = new ArrayList<String>();
-		webSiteIds.add("1");
-		webSiteIds.add("0");
-		webSiteIds.add("2");
+
+		//Made the store allocation to be environment dependent
+		String tempStore = MongoReader.getStoreIds();
+		System.out.println("---------------------------------");
+		System.out.println("Stores: " + tempStore);
+		System.out.println("---------------------------------");
+
+		if (!tempStore.isEmpty() && tempStore != null) {
+			String strSplitter[] = tempStore.split(Separators.COMMA_SEPARATOR);
+			for (String string : strSplitter) {
+				webSiteIds.add(string);
+			}
+		}
+
+//		webSiteIds.add("1");
+//		webSiteIds.add("0");
+//		webSiteIds.add("2");
 		product.setWebsiteIdsArray(webSiteIds);
-		
+
 		List<String> categoriesIds = new ArrayList<String>();
 		categoriesIds.add("43");
 		categoriesIds.add("5");
 		product.setCategoryIdsArray(categoriesIds);
-		
+
 		StockDataModel stockModel = new StockDataModel();
 		stockModel.setQty("1000");
 		stockModel.setIsInStock("1");
@@ -95,7 +111,7 @@ public class CreateProduct {
 		stockModel.setMaximumPercentageToBorrow("");
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
 		product.setStockData(stockModel);
-		
+
 		return product;
 
 	}
@@ -106,7 +122,7 @@ public class CreateProduct {
 		try {
 			SOAPMessage response = HttpSoapConnector.soapCreateProduct(product);
 			resultID = extractResult(response);
-			 System.out.println("resultID: " + resultID);
+			System.out.println("resultID: " + resultID);
 		} catch (SOAPException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

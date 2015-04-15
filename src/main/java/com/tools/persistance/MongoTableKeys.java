@@ -128,6 +128,7 @@ public class MongoTableKeys {
 	public static final String ENV_KEY = "env";
 	public static final String CONTEXT_KEY = "context";
 	public static final String BASE_URL_KEY = "baseUrl";
+	public static final String STORE_ID_KEY = "storeIds";
 	
 
 }
