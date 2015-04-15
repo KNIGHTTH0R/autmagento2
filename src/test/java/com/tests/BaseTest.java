@@ -1,6 +1,11 @@
 package com.tests;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.util.Properties;
 
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;
@@ -13,6 +18,7 @@ import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 
@@ -42,14 +48,38 @@ public class BaseTest {
             e.printStackTrace();
         }
         
-        //Context and environment - clean and setup to mongo
+    	//Context and environment - clean and setup to mongo
         MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
         String contextValue = System.getProperty("runContext");
         String envValue = System.getProperty("runEnv");
-        String baseUrl = System.getProperty("webdriver.base.url");
-        MongoWriter.saveEnvContext(envValue, contextValue, baseUrl);
+        MongoWriter.saveEnvContext(envValue, contextValue);
+
+        String baseUrl = "";
+        Properties prop = new Properties();
+		InputStream input = null;
         
-        System.out.println("(webdriver.base.url) Base URL: " + baseUrl);
+        try {
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "config.properties");
+			prop.load(input);
+			baseUrl = prop.getProperty("baseUrl");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+        
+        
+        System.out.println("Base URL: " + baseUrl);
+//        MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
+        MongoWriter.saveEnvContextUrl(envValue, contextValue, baseUrl);
         
         EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
         emailDefaults.setHost(EmailConstants.RECEIVING_HOST);

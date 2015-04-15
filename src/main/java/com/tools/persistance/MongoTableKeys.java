@@ -127,7 +127,7 @@ public class MongoTableKeys {
 	public static final String DEFAULT_CONFIG_MODEL = "DefaultConfigModel";
 	public static final String ENV_KEY = "env";
 	public static final String CONTEXT_KEY = "context";
-	public static final String BASE_URL_KEY = "webdriver.base.url";
+	public static final String BASE_URL_KEY = "baseUrl";
 	
 
 }

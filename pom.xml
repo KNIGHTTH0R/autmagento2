@@ -13,7 +13,6 @@
 	<properties>
 		<thucydides.version>0.9.268</thucydides.version>
 		<webdriver.driver>firefox</webdriver.driver>
-		<webdriver.base.url>http://staging-aut.pippajean.com/</webdriver.base.url>
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
 		<runSuite>**/DemoSuite.class</runSuite>
 		<outputEncoding>UTF-8</outputEncoding>
@@ -96,7 +95,7 @@
 					<systemPropertyVariables>
 						<runContext>${runContext}</runContext>
 						<runEnv>${runEnv}</runEnv>
-						<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+						<!-- <webdriver.base.url>${webdriver.base.url}</webdriver.base.url> -->
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
 						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver.exe</webdriver.chrome.driver>
 						<webdriver.ie.driver>${basedir}/src/main/resources/IEDriverServer.exe</webdriver.ie.driver>
