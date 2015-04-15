@@ -84,7 +84,7 @@ public class US7003RegistrationThankYouPageTest extends BaseTest{
 	 */
 	@Test
 	public void us7003RegistrationThankYouPageTest() {
-
+		
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
 		customerRegistrationSteps.verifySimpleThankYouPage();
 		

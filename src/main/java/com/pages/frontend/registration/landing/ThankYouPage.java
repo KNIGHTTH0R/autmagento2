@@ -1,8 +1,8 @@
 package com.pages.frontend.registration.landing;
 
-import org.openqa.selenium.WebElement;
-
 import net.thucydides.core.annotations.findby.FindBy;
+
+import org.openqa.selenium.WebElement;
 
 import com.tools.requirements.AbstractPage;
 

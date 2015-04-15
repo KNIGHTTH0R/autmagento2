@@ -38,7 +38,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void sendInvitationToHostess() {
 		partyDetailsPage().sendInvitationToHostess();
 		partyDetailsPage().hostessInviteConfirmation();
-		waitABit(3000);
+		waitABit(5000);
 	}
 
 	@Step
