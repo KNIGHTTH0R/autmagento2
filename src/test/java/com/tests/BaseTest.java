@@ -1,6 +1,11 @@
 package com.tests;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.util.Properties;
 
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;
@@ -21,7 +26,8 @@ public class BaseTest {
 	@Managed(uniqueSession = true)
 	public WebDriver webdriver;
 
-	@ManagedPages(defaultUrl = UrlConstants.BASE_URL_AUT)
+	@ManagedPages(defaultUrl = "http://staging-aut.pippajean.com/customer/account/login/")
+//	@ManagedPages(defaultUrl = UrlConstants.BASE_URL_AUT)
 	public Pages pages;
 	
 	public MongoConnector mongoConnector;
@@ -42,11 +48,38 @@ public class BaseTest {
             e.printStackTrace();
         }
         
-        //Context and environment - clean and setup
+    	//Context and environment - clean and setup to mongo
         MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
         String contextValue = System.getProperty("runContext");
         String envValue = System.getProperty("runEnv");
         MongoWriter.saveEnvContext(envValue, contextValue);
+
+        String baseUrl = "";
+        Properties prop = new Properties();
+		InputStream input = null;
+        
+        try {
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "config.properties");
+			prop.load(input);
+			baseUrl = prop.getProperty("baseUrl");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+        
+        
+        System.out.println("Base URL: " + baseUrl);
+//        MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
+        MongoWriter.saveEnvContextUrl(envValue, contextValue, baseUrl);
         
         EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
         emailDefaults.setHost(EmailConstants.RECEIVING_HOST);

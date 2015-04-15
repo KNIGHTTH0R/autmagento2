@@ -75,6 +75,7 @@ public class AbstractSteps extends ScenarioSteps {
 	 */
 	@Step
 	public void performLogin(String userName, String userPass) {
+//		getDriver().get(UrlConstants.BASE_FE_URL);
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
@@ -96,7 +97,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void navigateToLoginPageAndPerformLogin(String userName, String userPass) {
-		// getDriver().get(Constants.BASE_FE_URL);
+//		getDriver().get(UrlConstants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);

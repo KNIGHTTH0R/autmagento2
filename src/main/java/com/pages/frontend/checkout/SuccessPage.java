@@ -1,15 +1,15 @@
 package com.pages.frontend.checkout;
 
-import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 import com.tools.env.stagingaut.UrlConstants;
+
 import com.tools.requirements.AbstractPage;
 
-@DefaultUrl(UrlConstants.URL_CART_SUCCESS)
+//@DefaultUrl(UrlConstants.URL_CART_SUCCESS)
 public class SuccessPage extends AbstractPage {
 
 	@FindBy(className = "success-step-msg")
