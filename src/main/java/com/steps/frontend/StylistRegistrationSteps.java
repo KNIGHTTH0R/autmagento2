@@ -38,6 +38,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		clickOnNachahmePaymentMethod();
 		submitPaymentMethod();
+		finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -54,6 +55,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		clickOnNachahmePaymentMethod();
 		submitPaymentMethod();
+		finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -120,6 +122,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	@Step
 	public void submitPaymentMethod() {
 		stylistRegistrationPage().submitPaymentMethod();
+	}
+	@Step
+	public void finishPayment() {
+		stylistRegistrationPage().finishPayment();
 	}
 
 	@Step

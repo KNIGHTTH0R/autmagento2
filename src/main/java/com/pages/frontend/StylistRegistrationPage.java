@@ -63,14 +63,14 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(id = "by_default")
 	private WebElement noInviteCheckbox;
 
-	@FindBy(css = "button[title*='Senden']")
-//	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")     //int
+//	@FindBy(css = "button[title*='Senden']")
+	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")     //int
 	private WebElement completeButton;
 
 	@FindBy(id = "submit-step")
 	private WebElement submitStepButton;
 
-	@FindBy(id = "submit_cod")
+	@FindBy(id = "submit_prepaid")
 	private WebElement weiter;
 
 	@FindBy(id = "toggle_cctab")
@@ -78,6 +78,9 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	@FindBy(id = "placeYourOrder_bottom")
 	private WebElement submitPaymentMethod;
+	
+	@FindBy(id = "continueShopping_top")
+	private WebElement finishPayment;
 
 	@FindBy(css = "ul.messages li ul li span")
 	private WebElement existingAccountMessageContainer;
@@ -219,10 +222,14 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void submitPaymentMethod() {
 		submitPaymentMethod.click();
 	}
+	
+	public void finishPayment() {
+		finishPayment.click();
+	}
 
 	public void selectStarterKit() {
 		waitABit(TimeConstants.TIME_MEDIUM);
-		elementjQueryClick("input#kit_2567");
+		elementjQueryClick("input#kit_2941");
 	}
 
 	public void selectMonth(String month) {
