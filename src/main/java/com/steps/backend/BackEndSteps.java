@@ -59,8 +59,11 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void searchForEmail(String emailText) {
+		customerListPage().clickOnResetFilter();
+		waitABit(3000);
 		customerListPage().inputEmailFilter(emailText);
 		customerListPage().clickOnSearch();
+		
 	}
 	@Step
 	public void searchOrderByName(String emailText) {

@@ -16,6 +16,9 @@ public class CustomerListPage extends AbstractPage {
 
 	@FindBy(css = "div.hor-scroll")
 	private WebElement listContainer;
+	
+	@FindBy(css = "td.filter-actions.a-right button:nth-child(1)")
+	private WebElement resetFilter;
 
 	@FindBy(css = "td.filter-actions > button.task")
 	private WebElement searchButton;
@@ -31,6 +34,11 @@ public class CustomerListPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
+	}
+	public void clickOnResetFilter() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(resetFilter).waitUntilVisible();
+		resetFilter.click();
 	}
 
 	public void openCustomerDetails(String searchTerm) {
