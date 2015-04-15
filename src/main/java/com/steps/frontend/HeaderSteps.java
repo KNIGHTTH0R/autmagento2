@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
@@ -46,22 +47,20 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	public void redirectToProfileHistory() {
-		getDriver().get(MongoReader.getBaseURL() + "simona/sales/order/history/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
 	}
 	@Step
 	public void redirectToWishlist() {
-		getDriver().get(MongoReader.getBaseURL() + "qateam/wishlist/");
-//		getDriver().get(UrlConstants.WISHLIST_URL);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.WISHLIST_URL);
 		wishlistPage().addAllProductsToCArt();
 	}
 
-	public void redirectTostylistsCustomerOrderReport() {
-		getDriver().get(MongoReader.getBaseURL() + "qateam/stylereports/order/myorders/?type=customerorders");
-//		getDriver().get(UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
+	public void redirectToStylistsCustomerOrderReport() {
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
 	public void redirectToCartPage() {
-		getDriver().get(MongoReader.getBaseURL() + "simona/checkout/cart/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);
 //		getDriver().get(UrlConstants.CART_PAGE_URL);
 	}
 

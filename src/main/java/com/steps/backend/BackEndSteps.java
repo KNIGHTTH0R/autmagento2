@@ -6,6 +6,7 @@ import com.tools.data.StylistDataModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
@@ -15,7 +16,7 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void performAdminLogin(String userName, String userPass) {
-		getDriver().get(MongoReader.getBaseURL() + "index.php/admin/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
@@ -23,12 +24,12 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void goToBackend() {
-		getDriver().get(MongoReader.getBaseURL() + "index.php/admin/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 	}
 
 	@Step
 	public void performLogin(String userName, String userPass) {
-		getDriver().get(MongoReader.getBaseURL() + "customer/account/login/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_AUT);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();

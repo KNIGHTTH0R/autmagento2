@@ -1,6 +1,7 @@
 package com.steps.backend.promotion;
 
 import com.tools.env.variables.Credentials;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
@@ -9,7 +10,7 @@ public class PromotionSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	public void activateRule() {
-		getDriver().get(MongoReader.getBaseURL() + "index.php/admin/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -23,7 +24,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void deactivateRule() {
-		getDriver().get(MongoReader.getBaseURL() + "index.php/admin/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -37,7 +38,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void activateBuy3Get1ForRegular() {
-		getDriver().get(MongoReader.getBaseURL() + "index.php/admin/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -51,7 +52,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void deactivateBuy3Get1ForRegular() {
-		getDriver().get(MongoReader.getBaseURL() + "index.php/admin/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -65,7 +66,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void activateBuy3Get1ForHost() {
-		getDriver().get(MongoReader.getBaseURL() + "index.php/admin/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -79,7 +80,7 @@ public class PromotionSteps extends AbstractSteps {
 	}
 
 	public void deactivateBuy3Get1ForHost() {
-		getDriver().get(MongoReader.getBaseURL() + "index.php/admin/");
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();

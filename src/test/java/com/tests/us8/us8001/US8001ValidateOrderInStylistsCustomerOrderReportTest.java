@@ -82,7 +82,7 @@ public class US8001ValidateOrderInStylistsCustomerOrderReportTest extends BaseTe
 		
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		
-		headerSteps.redirectTostylistsCustomerOrderReport();
+		headerSteps.redirectToStylistsCustomerOrderReport();
 		List<OrderModel> orderHistory = stylistsCustomerOrdersReportSteps.grabOrderReport();
 
 		String orderId = orderHistory.get(0).getOrderId();
