@@ -61,7 +61,7 @@ import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.env.constants.TimeConstants;
-import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -75,7 +75,7 @@ public class AbstractSteps extends ScenarioSteps {
 	 */
 	@Step
 	public void performLogin(String userName, String userPass) {
-//		getDriver().get(UrlConstants.BASE_FE_URL);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
@@ -88,7 +88,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void performLoginUnderContext(String userName, String userPass, String context) {
-		getDriver().get(UrlConstants.BASE_FE_URL + context);
+		getDriver().get(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);

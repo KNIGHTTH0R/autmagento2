@@ -3,7 +3,7 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
-import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
 public class HomeSteps extends AbstractSteps {
@@ -17,7 +17,7 @@ public class HomeSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormFromStyleCoachLinkAndJetzStarten() {
-		getDriver().get(UrlConstants.BASE_FE_URL);
+		getDriver().get(MongoReader.getBaseURL());
 		homePage().clickStyleCoachLink();
 		stylistCampaignPage().clickJetztStartenButton();
 		starterSetPage().clickOnJetztStartenFromStarterSet();
@@ -25,7 +25,7 @@ public class HomeSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt() {
-		getDriver().get(UrlConstants.BASE_FE_URL);
+		getDriver().get(MongoReader.getBaseURL());
 		homePage().clickStyleCoachLink();
 		stylistCampaignPage().clickStarteJetztButton();
 		starterSetPage().clickOnJetztStyleCoachWerdenButton();

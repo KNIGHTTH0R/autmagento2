@@ -19,7 +19,7 @@ public class UrlConstants {
 
 	//Staging AUT uRLs 
 //	public static final String BASE_FE_URL = "http://staging-aut.pippajean.com/";
-	public static final String BASE_FE_URL = MongoReader.getBaseURL();
+//	public static final String BASE_FE_URL = MongoReader.getBaseURL();
 //	public static final String BASE_URL_BE = BASE_FE_URL + "index.php/admin/";
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
 	

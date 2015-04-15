@@ -6,7 +6,6 @@ import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
@@ -51,18 +50,18 @@ public class HeaderSteps extends AbstractSteps {
 	}
 	@Step
 	public void redirectToWishlist() {
-		getDriver().get(UrlConstants.BASE_FE_URL + "qateam/wishlist/");
+		getDriver().get(MongoReader.getBaseURL() + "qateam/wishlist/");
 //		getDriver().get(UrlConstants.WISHLIST_URL);
 		wishlistPage().addAllProductsToCArt();
 	}
 
 	public void redirectTostylistsCustomerOrderReport() {
-		getDriver().get(UrlConstants.BASE_FE_URL + "qateam/stylereports/order/myorders/?type=customerorders");
+		getDriver().get(MongoReader.getBaseURL() + "qateam/stylereports/order/myorders/?type=customerorders");
 //		getDriver().get(UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
 	public void redirectToCartPage() {
-		getDriver().get(UrlConstants.BASE_FE_URL + "simona/checkout/cart/");
+		getDriver().get(MongoReader.getBaseURL() + "simona/checkout/cart/");
 //		getDriver().get(UrlConstants.CART_PAGE_URL);
 	}
 
@@ -79,7 +78,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton() {
-		getDriver().get(UrlConstants.BASE_FE_URL);
+		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();
 		stylistCampaignPage().clickStarteJetztButton();
@@ -89,7 +88,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormAndLogout() {
-		getDriver().get(UrlConstants.BASE_FE_URL);
+		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();

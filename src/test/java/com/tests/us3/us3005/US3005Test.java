@@ -46,7 +46,6 @@ import com.workflows.frontend.ValidationWorkflows;
 @RunWith(ThucydidesRunner.class)
 public class US3005Test extends BaseTest {
 	
-	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps

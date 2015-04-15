@@ -46,7 +46,7 @@ import com.workflows.backend.OrderWorkflows;
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US3005ValidateOrderBackOfficeTest extends BaseTest {
-
+	
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps

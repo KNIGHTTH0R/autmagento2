@@ -12,6 +12,7 @@ import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.Sty
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
 public class CustomerRegistrationSteps extends AbstractSteps {
@@ -21,7 +22,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(UrlConstants.BASE_FE_URL);
+		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -41,7 +42,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Title("Fill create customer form under context")
 	public void fillCreateCustomerFormUnderContext(CustomerFormModel customerData, AddressModel addressData, String context) {
 
-		getDriver().get(UrlConstants.BASE_FE_URL + context);
+		getDriver().get(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 
@@ -207,7 +208,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	@Title("Fill landing page form")
 	public void fillLandingPageForm(CustomerFormModel dataModel, AddressModel addressModel) {
-		getDriver().get(UrlConstants.BASE_FE_URL + UrlConstants.LANDING_PAGE);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.LANDING_PAGE);
 		contactLandingPage().selectGender(true);
 		contactLandingPage().inputFirstName(dataModel.getFirstName());
 		contactLandingPage().inputLastName(dataModel.getLastName());
@@ -301,7 +302,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	@Title("Fill widget registration form")
 	public void fillWidgetRegistrationForm(String code, CustomerFormModel dataModel) {
-		getDriver().get(UrlConstants.BASE_FE_URL + UrlConstants.REGISTER_LANDING_PAGE);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.REGISTER_LANDING_PAGE);
 		registerLandingPage().memberCodeInput(code);
 		registerLandingPage().firstNameInput(dataModel.getFirstName());
 		registerLandingPage().lastNameInput(dataModel.getLastName());
