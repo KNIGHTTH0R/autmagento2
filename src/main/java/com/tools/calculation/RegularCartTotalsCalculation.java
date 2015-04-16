@@ -8,6 +8,7 @@ import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 
 public class RegularCartTotalsCalculation {
 
@@ -24,11 +25,11 @@ public class RegularCartTotalsCalculation {
 
 		for (RegularBasicProductModel product : productsList) {
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
-			if (product.getBonusType().contentEquals(ConfigConstants.JEWELRY_BONUS)) {
+			if (product.getBonusType().contentEquals(ContextConstants.JEWELRY_BONUS)) {
 				jewerlyDiscount = jewerlyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				jewerlyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
-			if (product.getBonusType().contentEquals(ConfigConstants.DISCOUNT_40_BONUS)) {
+			if (product.getBonusType().contentEquals(ContextConstants.DISCOUNT_40_BONUS)) {
 				forthyDiscount = forthyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
@@ -64,11 +65,11 @@ public class RegularCartTotalsCalculation {
 
 		for (RegularBasicProductModel product : productsList) {
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
-			if (product.getBonusType().contentEquals(ConfigConstants.JEWELRY_BONUS)) {
+			if (product.getBonusType().contentEquals(ContextConstants.JEWELRY_BONUS)) {
 				jewerlyDiscount = jewerlyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				jewerlyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
-			if (product.getBonusType().contentEquals(ConfigConstants.DISCOUNT_40_BONUS)) {
+			if (product.getBonusType().contentEquals(ContextConstants.DISCOUNT_40_BONUS)) {
 				forthyDiscount = forthyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}

@@ -88,9 +88,9 @@ public class RegularUserCartPage extends AbstractPage {
 		for (RegularBasicProductModel product : productsList) {
 			if (product.getProdCode().contentEquals(productCode)) {
 				product.setBonusType(discountType);
-				if (discountType.contentEquals(ConfigConstants.DISCOUNT_40_BONUS)) {
+				if (discountType.contentEquals(ContextConstants.DISCOUNT_40_BONUS)) {
 					product.setBunosValue(String.valueOf(calculate40Discount(product.getFinalPrice())));
-				} else if (discountType.contentEquals(ConfigConstants.JEWELRY_BONUS)) {
+				} else if (discountType.contentEquals(ContextConstants.JEWELRY_BONUS)) {
 					product.setBunosValue(product.getFinalPrice());
 				}
 			}
@@ -236,7 +236,7 @@ public class RegularUserCartPage extends AbstractPage {
 		element(cartMainContainer).waitUntilVisible();
 		System.out.println("TEXT from CONTAINER: " + cartMainContainer.getText());
 
-		Assert.assertTrue(cartMainContainer.getText().contains("WARENKORB IST LEER"));
+		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 
 	}
 

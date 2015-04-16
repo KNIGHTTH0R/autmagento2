@@ -42,13 +42,6 @@ public class ProfileHistoryPage extends AbstractPage {
 
 			result.add(orderNow);
 
-			// System.out.println("------------");
-			// System.out.println(orderId);
-			// System.out.println(date);
-			// System.out.println(invoiceTo);
-			// System.out.println(deliveryTo);
-			// System.out.println(totalSum);
-			// System.out.println(status);
 		}
 
 		return result;

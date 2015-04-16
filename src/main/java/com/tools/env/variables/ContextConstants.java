@@ -5,7 +5,7 @@ import com.tools.persistance.MongoReader;
 public class ContextConstants {
 	
 	
-	public static String JEWELRY_BONUS = MongoReader.getDictionaryItem("JEWELRY_BONUS");
+	
 //	public static String JEWELRY_BONUS = "Schmuckbonus";
 	//messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
@@ -20,21 +20,26 @@ public class ContextConstants {
 	public static String PROFILE_HISTORY = MongoReader.getDictionaryItem("PROFILE_HISTORY");
 	
 	
-	public static String EMPTY_CART = "WARENKORB IST LEER";
-	public static String SUCCES_MESSAGE = "Wir haben dir eine eMail mit mit den Details zur Bestellung geschickt.";
-	public static String PRODUCT_ADDED_INTO_CART = "Der Artikel wurde in den Warenkorb gelegt. Du kannst deinen Einkauf fortsetzen.";
-	public static String SUCCESFULL_REGISTRATION = "DEINE REGISTRIERUNG WAR ERFOLGREICH!";
-	public static String MEIN_STYLE_COACH = "MEIN STYLE COACH";
+	public static String EMPTY_CART = MongoReader.getDictionaryItem("EMPTY_CART");
+	public static String SUCCES_MESSAGE = MongoReader.getDictionaryItem("SUCCES_MESSAGE");
+	public static String PRODUCT_ADDED_INTO_CART = MongoReader.getDictionaryItem("PRODUCT_ADDED_INTO_CART");
+	public static String SUCCESFULL_REGISTRATION = MongoReader.getDictionaryItem("SUCCESFULL_REGISTRATION");
+	public static String MEIN_STYLE_COACH = MongoReader.getDictionaryItem("MEIN_STYLE_COACH");
 	
 
-	public static String INVITE_HOSTESS = "GASTGEBERIN EINLADEN";
-	public static String UPDATE_PARTY = "Style Party bearbeiten";
-	public static String DELETE_PARTY = "Style Party löschen";
-	public static String INVITE_GUEST = "GÄSTE EINLADEN";
-	public static String CREATE_FOLLOW_UP_PARTY = "LEGE EINE FOLGEPARTY AN";
-	public static String ORDER_FOR_CUSTOMER = "FÜR EINE KUNDIN BESTELLEN";
-	public static String CLOSE_PARTY = "STYLE PARTY SCHLIESSEN";
+	public static String INVITE_HOSTESS = MongoReader.getDictionaryItem("INVITE_HOSTESS");
+	public static String UPDATE_PARTY = MongoReader.getDictionaryItem("UPDATE_PARTY");
+	public static String DELETE_PARTY = MongoReader.getDictionaryItem("DELETE_PARTY");
+	public static String INVITE_GUEST = MongoReader.getDictionaryItem("INVITE_GUEST");
+	public static String CREATE_FOLLOW_UP_PARTY = MongoReader.getDictionaryItem("CREATE_FOLLOW_UP_PARTY");
+	public static String ORDER_FOR_CUSTOMER = MongoReader.getDictionaryItem("ORDER_FOR_CUSTOMER");
+	public static String CLOSE_PARTY = MongoReader.getDictionaryItem("CLOSE_PARTY");
 
-	public static String ARTICLE_NUMBER = "Artikelnummer: ";
-	public static String PROCESS = "Vorgang";
+	public static String ARTICLE_NUMBER = MongoReader.getDictionaryItem("ARTICLE_NUMBER");
+	public static String PROCESS = MongoReader.getDictionaryItem("PROCESS");
+	
+	public static String JEWELRY_BONUS = MongoReader.getDictionaryItem("JEWELRY_BONUS");
+	public static String DISCOUNT_40_BONUS = MongoReader.getDictionaryItem("DISCOUNT_40_BONUS");
+	public static String REGULAR_PRICE = MongoReader.getDictionaryItem("REGULAR_PRICE");
+	public static String VOUCHER_DISCOUNT = MongoReader.getDictionaryItem("VOUCHER_DISCOUNT");
 }
