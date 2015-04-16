@@ -31,24 +31,43 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(css = "div#topCartContent p.subtotal span.price")
 	private WebElement cartPreviewPrice;
 
-	@FindBy(css = "a[title='Profil']")
-//	@FindBy(css = "div.quick-access.clearfix ul.links li:nth-child(2) a")     //int
+//	@FindBy(css = "a[title='Profil']")
+	 @FindBy(css = "div.quick-access.clearfix ul.links li:nth-child(2) a")     //int	
 	private WebElement profileButton;
 
-	@FindBy(css = "a[title='Style Coach Lounge']")
-//	@FindBy(css = "div.categories>ul.clearfix li:last-child a")     //int
+//	@FindBy(css = "a[title='Style Coach Lounge']")
+	 @FindBy(css = "div.categories>ul.clearfix li:last-child a") //int
 	private WebElement loungeButton;
 
-	@FindBy(css = "a[title='Anmelden']")
-//	@FindBy(css = "ul.links>.last a")    //int
+//	@FindBy(css = "a[title='Anmelden']")
+	 @FindBy(css = "ul.links>.last a") //int
 	private WebElement anmeldenButton;
 
-	@FindBy(css = "a[title='Abmelden']")
-//	@FindBy(css = "ul.links>.last a")    //int
+//	@FindBy(css = "a[title='Abmelden']")
+	 @FindBy(css = "ul.links>.last a") //int
 	private WebElement abmeldenButton;
 
 	@FindBy(css = "div.branding p")
 	private WebElement brandContainer;
+
+	@FindBy(css = "div.switcher-wrapper")
+	private WebElement websiteContainer;
+
+	public void selectLanguage(String language) {
+		element(websiteContainer).waitUntilVisible();
+		List<WebElement> languagesList = getDriver().findElements(By.cssSelector("ul#select-website > li"));
+		for (WebElement lang : languagesList) {
+			if (lang.getText().contentEquals(language)) {
+				try {
+					lang.findElement(By.cssSelector("a")).click();
+					break;
+				} catch (Exception e) {
+					lang.click();
+					break;
+				}
+			}
+		}
+	}
 
 	public void searchInput(String seachKey) {
 		element(searchInput).waitUntilVisible();

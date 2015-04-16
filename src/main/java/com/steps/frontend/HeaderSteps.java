@@ -97,6 +97,11 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void selectLanguage(String language) {
+		headerPage().selectLanguage(language);
+	}
+	
+	@Step
 	public void clickAnmeldenButton() {
 		headerPage().clickAnmeldenButton();
 	}
