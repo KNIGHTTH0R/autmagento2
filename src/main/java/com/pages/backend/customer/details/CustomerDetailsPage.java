@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class CustomerDetailsPage extends AbstractPage {
@@ -99,7 +100,7 @@ public class CustomerDetailsPage extends AbstractPage {
 			waitABit(TimeConstants.TIME_CONSTANT);
 			String alertText = getDriver().switchTo().alert().getText();
 			getDriver().switchTo().alert().accept();
-			if (alertText.contains("Vorgang")) {
+			if (alertText.contains(ContextConstants.PROCESS)) {
 				break;
 			}
 		}
@@ -109,7 +110,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		String jb = "";
 		List<WebElement> list = getDriver().findElements(By.cssSelector("#rewardPointsBalanceGrid_table tbody tr"));
 		for (WebElement item : list) {
-			if (item.getText().contains("Schmuckbonus")) {
+			if (item.getText().contains(ContextConstants.JEWELRY_BONUS )) {
 				jb = item.findElement(By.cssSelector("td:nth-child(3)")).getText();
 				break;
 			}
