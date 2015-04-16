@@ -72,6 +72,33 @@ public class MongoReader extends MongoConnector {
 
 		return context;
 	}
+	/**
+	 * Get value of Dictionary item. Return Empty string if none is found.
+	 * @param key
+	 * @return
+	 */
+	public static String getDictionaryItem(String key) {
+		
+		DBObject dbObject = null;
+		String value = "";
+		
+		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.DICTIONARY_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				dbObject = cursor.next();
+				value = MongoUtils.checkField(dbObject, key);
+				if(!value.isEmpty()){
+					break;
+				}
+			}
+		} finally {
+			cursor.close();
+		}
+		
+		return value;
+	}
 
 	public static String getBaseURL() {
 

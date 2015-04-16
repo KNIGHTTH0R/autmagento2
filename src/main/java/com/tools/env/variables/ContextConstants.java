@@ -1,20 +1,23 @@
 package com.tools.env.variables;
 
+import com.tools.persistance.MongoReader;
+
 public class ContextConstants {
 	
 	
-	public static String JEWELRY_BONUS = "Schmuckbonus";
+	public static String JEWELRY_BONUS = MongoReader.getDictionaryItem("JEWELRY_BONUS");
+//	public static String JEWELRY_BONUS = "Schmuckbonus";
 	//messages
-	public static String EXISTING_ACCOUNT_MESSAGE = "WICHTIG: Wenn Du bereits einen PIPPA&JEAN Benutzerkonto hast, dann melde dich bitte hier an, bevor Du die Style Coach Registrierung ausführst!";
-	public static String STYLE_COACH_REG_PAGE_TITLE = "REGISTRIERE DICH ALS STYLE COACH UND ERWERBE DAS STARTER-SET";
-	public static String VOUCHER_DISCOUNT_INCOMPATIBLE = "Gutscheine können nicht in Verbindung mit Schmuckbonus verwendet werden.";
-	public static String PARTY_PLANNED = "Party geplant";
-	public static String PARTY_ACTIVE = "Partytermin vorüber";
-	public static String PARTY_CLOSED = "Party geschlossen";
-	public static String BOUNUS_SUCCESS_MESSAGE = "Bonus was successfully saved";
-	public static String INVITE_EMAIL_SUBJECT = "lädt Dich ein zur PIPPA&JEAN Style Party";
-	public static String PARTY_CREATION_EMAIL_SUBJECT = "PIPPA&JEAN Style Party wurde für Dich angelegt";
-	public static String PROFILE_HISTORY = "MEINE BESTELLUNGEN";
+	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
+	public static String STYLE_COACH_REG_PAGE_TITLE = MongoReader.getDictionaryItem("STYLE_COACH_REG_PAGE_TITLE");
+	public static String VOUCHER_DISCOUNT_INCOMPATIBLE = MongoReader.getDictionaryItem("VOUCHER_DISCOUNT_INCOMPATIBLE");
+	public static String PARTY_PLANNED = MongoReader.getDictionaryItem("PARTY_PLANNED");
+	public static String PARTY_ACTIVE = MongoReader.getDictionaryItem("PARTY_ACTIVE");
+	public static String PARTY_CLOSED = MongoReader.getDictionaryItem("PARTY_CLOSED");
+	public static String BOUNUS_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("BOUNUS_SUCCESS_MESSAGE");
+	public static String INVITE_EMAIL_SUBJECT = MongoReader.getDictionaryItem("INVITE_EMAIL_SUBJECT");
+	public static String PARTY_CREATION_EMAIL_SUBJECT = MongoReader.getDictionaryItem("PARTY_CREATION_EMAIL_SUBJECT");
+	public static String PROFILE_HISTORY = MongoReader.getDictionaryItem("PROFILE_HISTORY");
 	
 	
 	public static String EMPTY_CART = "WARENKORB IST LEER";

@@ -40,6 +40,15 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+	public static void saveToDictionary(String key, String value) {
+		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.DICTIONARY_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(key, value);
+		
+		table.insert(document);
+	}
 
 	public static void saveStoreUrl(String storeIds, String baseUrl) {
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
