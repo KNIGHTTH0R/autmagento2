@@ -17,9 +17,7 @@ import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
-import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 
@@ -28,7 +26,6 @@ public class BaseTest {
 	public WebDriver webdriver;
 
 	@ManagedPages(defaultUrl = "http://staging-aut.pippajean.com/customer/account/login/")
-	// @ManagedPages(defaultUrl = UrlConstants.BASE_URL_AUT)
 	public Pages pages;
 
 	public MongoConnector mongoConnector;
@@ -88,13 +85,8 @@ public class BaseTest {
 		emailDefaults.setPassword(EmailConstants.EMAIL_DEF_PASSWORD);
 
 		gmailConnector = new GmailConnector(emailDefaults);
-		
-		try {
-			updateDictionary();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		updateDictionary();
 		
 	}
 
@@ -103,7 +95,7 @@ public class BaseTest {
 	 * MongoDb.
 	 * @throws InterruptedException 
 	 */
-	private static void updateDictionary() throws InterruptedException {
+	private static void updateDictionary() {
 		System.out.println("Load Dictionary... ");
 		Properties prop = new Properties();
 		InputStream input = null;
