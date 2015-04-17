@@ -104,9 +104,8 @@ public class BaseTest {
 			input = new FileInputStream(UrlConstants.CONTEXT_PATH + "dictionary.properties");
 			prop.load(input);
 			for (Object keyNow : prop.keySet()) {
-				String keyNowStr = String.valueOf(keyNow);
-				String value = prop.getProperty(keyNowStr);
-				MongoWriter.saveToDictionary(keyNowStr, value);
+				String value = prop.getProperty(String.valueOf(keyNow));
+				MongoWriter.saveToDictionary(String.valueOf(keyNow), value);
 			}
 
 		} catch (IOException ex) {

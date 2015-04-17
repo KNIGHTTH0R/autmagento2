@@ -3,10 +3,7 @@ package com.tools.env.variables;
 import com.tools.persistance.MongoReader;
 
 public class ContextConstants {
-	
-	
-	
-//	public static String JEWELRY_BONUS = "Schmuckbonus";
+
 	//messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
 	public static String STYLE_COACH_REG_PAGE_TITLE = MongoReader.getDictionaryItem("STYLE_COACH_REG_PAGE_TITLE");
