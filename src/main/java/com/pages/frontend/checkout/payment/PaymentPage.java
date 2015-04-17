@@ -14,8 +14,8 @@ import com.tools.requirements.AbstractPage;
  */
 public class PaymentPage extends AbstractPage {
 
-	@FindBy(css = "input[value='Kreditkarte']")
-//	@FindBy(css = "input.imgB.pmB.pmBcard")    //int
+//	@FindBy(css = "input[value='Kreditkarte']")
+	@FindBy(css = "input.imgB.pmB.pmBcard")    //int
 	private WebElement creditCardContainer;
 
 	public void expandCreditCardForm() {

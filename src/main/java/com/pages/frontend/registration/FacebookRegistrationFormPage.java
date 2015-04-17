@@ -43,8 +43,8 @@ public class FacebookRegistrationFormPage extends AbstractPage {
 	@FindBy(id = "accept-checkbox")
 	private WebElement acceptButton;
 
-	@FindBy(css = "button[title='Senden']")
-//	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")     //int
+//	@FindBy(css = "button[title='Senden']")
+	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")     //int
 	private WebElement submitButton;
 
 	public void zipInput(String zipCode) {

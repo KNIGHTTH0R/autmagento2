@@ -8,12 +8,12 @@ import com.tools.requirements.AbstractPage;
 
 public class ContactLandingPage extends AbstractPage {
 
-	@FindBy(css = "input[value='frau']")
-//	@FindBy(css = "li.control div input:nth-child(3)")      //int
+//	@FindBy(css = "input[value='frau']")
+	@FindBy(css = "li.control div input:nth-child(3)")      //int
 	private WebElement frauRadioButton;
 
-	@FindBy(css = "input[value='herr']")
-//	@FindBy(css = "li.control div input:first-child")     //int
+//	@FindBy(css = "input[value='herr']")
+	@FindBy(css = "li.control div input:first-child")     //int
 	private WebElement herrRadioButton;
 
 	@FindBy(name = "vorname")
