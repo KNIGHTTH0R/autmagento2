@@ -79,6 +79,7 @@ public class FormatterUtils {
 		result = result.replace("€ ", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
+		result = result.replace("IP", "");
 		result = result.replace(",", ".");
 		result = result.replace("-", "");
 		result = result.replace("%", "");
@@ -93,6 +94,7 @@ public class FormatterUtils {
 		result = result.replace("€ ", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
+		result = result.replace("IP", "");
 		result = result.replace(",", ".");
 
 		try {

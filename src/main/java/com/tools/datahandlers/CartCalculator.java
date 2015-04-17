@@ -78,8 +78,9 @@ public class CartCalculator {
 		PrintUtils.printListBasicProductModel(allProductsListRecalculated);
 		
 		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount,taxClass,shippingValue,shippingValue);
-	
+		PrintUtils.printCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+		PrintUtils.printShippingTotals(shippingCalculatedModel);
 	}
 	
 	public static void calculateJMDiscountsForBuy3Get1Rule(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue, String shippingValueForLessThan150){

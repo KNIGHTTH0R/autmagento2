@@ -108,8 +108,8 @@ public class US4001Test extends BaseTest {
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("100");
 		CreateProduct.createApiProduct(genProduct1);
-		genProduct2.setName("THERESA BAG");
-		genProduct2.setSku("A010BK");
+		genProduct2.setName("QPIWDODRU");
+		genProduct2.setSku("DFCDVEUBK");
 		genProduct2.setIp("42");
 		genProduct2.setPrice("49.90");
 		genProduct3 = CreateProduct.createMarketingProductModel();
