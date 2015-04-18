@@ -12,11 +12,14 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
+import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 

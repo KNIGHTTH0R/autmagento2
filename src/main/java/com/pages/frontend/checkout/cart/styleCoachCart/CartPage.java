@@ -186,11 +186,11 @@ public class CartPage extends AbstractPage {
 		for (WebElement itemNow : valuesList) {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 
-			if (key.contains("ZWISCHENSUMME")) {
+			if (key.contains(ContextConstants.ZWISCHENSUMME)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setSubtotal(valueTransformer);
 			}
-			if (key.contains("SCHMUCK BONUS")) {
+			if (key.contains(ContextConstants.SCHMUCK_BONUS)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
 
 				if (!valueTransformer.contains(".")) {
@@ -199,31 +199,31 @@ public class CartPage extends AbstractPage {
 
 				resultModel.setJewelryBonus(valueTransformer);
 			}
-			if (key.contains("MARKETING BONUS")) {
+			if (key.contains(ContextConstants.MARKETING_BONUS)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
 				resultModel.setMarketingBonus(valueTransformer);
 			}
-			if (key.contains("STEUER")) {
+			if (key.contains(ContextConstants.STEUER)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTax(valueTransformer);
 			}
-			if (key.contains("VERSANDKOSTENFREI")) {
+			if (key.contains(ContextConstants.VERSANDKOSTENFREI)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setShipping(valueTransformer);
 			}
-			if (key.contains("25%") && key.contains("RABATT")) {
+			if (key.contains("25%") && key.contains(ContextConstants.RABATT)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(MongoTableKeys.DISCOUNT_25_KEY, valueTransformer);
 			}
-			if (key.contains("50%") && key.contains("RABATT")) {
+			if (key.contains("50%") && key.contains(ContextConstants.RABATT)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(MongoTableKeys.DISCOUNT_50_KEY, valueTransformer);
 			}
-			if (key.contains("GESAMTBETRAG")) {
+			if (key.contains(ContextConstants.GESAMTBETRAG)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
 			}
-			if (key.contains("IP PUNKTE")) {
+			if (key.contains(ContextConstants.IP_PUNKTE)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setIpPoints(valueTransformer);
 			}

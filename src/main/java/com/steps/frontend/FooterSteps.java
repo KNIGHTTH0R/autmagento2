@@ -79,5 +79,10 @@ public class FooterSteps extends AbstractSteps {
 		footerPage().clickRegistrierungLink();
 
 	}
+	@StepGroup
+	public void verifyThatFooterWebsiteIsCorrect(String website) {
+		footerPage().verifyThatFooterWebsiteIsCorrect(website);
+		
+	}
 
 }

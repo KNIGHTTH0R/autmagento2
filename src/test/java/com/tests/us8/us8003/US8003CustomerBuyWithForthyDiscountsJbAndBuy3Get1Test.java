@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -39,6 +40,7 @@ import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -72,6 +74,8 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 	public RegularCartValidationWorkflows regularCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
+	@Steps
+	public FooterSteps footerSteps;
 
 	private String username, password;
 	private String discountClass;
@@ -143,8 +147,10 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 	}
 
 	@Test
-	public void us8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test() {
+	public void us8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test() {		
 		customerRegistrationSteps.performLogin(username, password);
+		headerSteps.selectLanguage(MongoReader.getContext().toUpperCase());
+		footerSteps.verifyThatFooterWebsiteIsCorrect(MongoReader.getContext());
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
 

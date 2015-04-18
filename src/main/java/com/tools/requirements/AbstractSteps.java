@@ -75,7 +75,7 @@ public class AbstractSteps extends ScenarioSteps {
 	 */
 	@Step
 	public void performLogin(String userName, String userPass) {
-		getDriver().get(MongoReader.getBaseURL());
+		getDriver().get(MongoReader.getBaseURL() +MongoReader.getContext());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);

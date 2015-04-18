@@ -32,7 +32,7 @@ public class RegularUserCartPage extends AbstractPage {
 	@FindBy(id = "coupon_code")
 	private WebElement couponCodeInput;
 
-	@FindBy(css = "a[title='Gutschein einlösen']")
+	@FindBy(css = "#discount-coupon-form a.button.gold-btn.bordered")
 	private WebElement submitVoucherCode;
 
 	@FindBy(css = "div.page-title ul.checkout-types button:last-child")

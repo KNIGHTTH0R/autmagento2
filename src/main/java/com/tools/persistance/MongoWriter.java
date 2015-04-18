@@ -52,7 +52,7 @@ public class MongoWriter extends MongoConnector {
 
 	public static void saveStoreUrl(String storeIds, String baseUrl) {
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
-		DBCollection table = workingDB.getCollection(MongoTableKeys.DEFAULT_CONFIG_MODEL);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.STORE_CONFIG_MODEL);
 
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.STORE_ID_KEY, storeIds);

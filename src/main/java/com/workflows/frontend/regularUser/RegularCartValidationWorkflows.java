@@ -4,11 +4,13 @@ import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.persistance.MongoReader;
 import com.workflows.frontend.AddressWorkflows;
 
 public class RegularCartValidationWorkflows {
@@ -21,6 +23,7 @@ public class RegularCartValidationWorkflows {
 	public AddressWorkflows addressWorkflows;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
+
 
 	public static String billingAddress;
 	public static String shippingAddress;
@@ -72,6 +75,7 @@ public class RegularCartValidationWorkflows {
 	public void performCartValidationsWith40DiscountAndJbAndBuy3Get1() {
 
 		checkoutValidationSteps.verifySuccessMessage();
+	
 		System.out.println("CartCalculator.productsList50: " + CartCalculator.productsList50.size());
 		System.out.println("DataGrabber.cartProductsWith50Discount: " + DataGrabber.cartProductsWith50Discount.size());
 

@@ -12,10 +12,13 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
+import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -28,6 +31,8 @@ public class US7002RegularCustomerRegistrationTest extends BaseTest{
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps 
 	public CustomVerification customVerifications;
+	@Steps 
+
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
@@ -38,7 +43,7 @@ public class US7002RegularCustomerRegistrationTest extends BaseTest{
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		context = "simona";
+		context = "ioa";
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 

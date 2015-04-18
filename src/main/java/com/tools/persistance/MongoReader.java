@@ -106,7 +106,7 @@ public class MongoReader extends MongoConnector {
 		String baseUrl = "";
 
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
-		DBCursor cursor = workingDB.getCollection(MongoTableKeys.DEFAULT_CONFIG_MODEL).find();
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STORE_CONFIG_MODEL).find();
 
 		try {
 			while (cursor.hasNext()) {
@@ -126,7 +126,7 @@ public class MongoReader extends MongoConnector {
 		String storeIds = "";
 
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
-		DBCursor cursor = workingDB.getCollection(MongoTableKeys.DEFAULT_CONFIG_MODEL).find();
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STORE_CONFIG_MODEL).find();
 
 		try {
 			while (cursor.hasNext()) {
