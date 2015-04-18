@@ -22,13 +22,13 @@ public class UrlConstants {
 	public static final String URL_WEB_MAIL = "http://mailinator.com/";
 	
 	//Frontend Composed URLS
-	public static final String BASE_URL_BE = "index.php/admin/";
-	public static final String BASE_URL_AUT = "customer/account/login/";
-	public static final String WISHLIST_URL = "qateam/wishlist/";
+	public static final String BASE_URL_BE = "/index.php/admin/";
+	public static final String BASE_URL_AUT = "/customer/account/login/";
+	public static final String WISHLIST_URL = "/qateam/wishlist/";
 
 //	public static final String PROFILE_HISTORY_URL = "simona/sales/order/history/";
-	public static final String PROFILE_HISTORY_URL = "sales/order/history/";
-	public static final String STYLISTS_CUSTOMER_ORDER_REPORT = "stylereports/order/myorders/?type=customerorders";
+	public static final String PROFILE_HISTORY_URL = "/sales/order/history/";
+	public static final String STYLISTS_CUSTOMER_ORDER_REPORT = "/stylereports/order/myorders/?type=customerorders";
 	public static final String CART_PAGE_URL = "simona/checkout/cart/";
 	
 	

@@ -11,6 +11,7 @@ import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.persistance.MongoReader;
+import com.tools.utils.PrintUtils;
 import com.workflows.frontend.AddressWorkflows;
 
 public class RegularCartValidationWorkflows {
@@ -42,8 +43,13 @@ public class RegularCartValidationWorkflows {
 	public void performCartValidationsWith40DiscountAndJb() {
 
 		checkoutValidationSteps.verifySuccessMessage();
-		System.out.println("CartCalculator.productsList50: " + CartCalculator.productsList50.size());
-		System.out.println("DataGrabber.cartProductsWith50Discount: " + DataGrabber.cartProductsWith50Discount.size());
+		System.out.println("CartCalculator.productsList50: " + RegularUserCartCalculator.allProductsList.size());
+		System.out.println("DataGrabber.cartProductsWith50Discount: " + RegularUserDataGrabber.grabbedRegularCartProductsList.size());
+		System.out.println("------------------");
+		PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
+		System.out.println("------------------");
+		PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularCartProductsList);
+		System.out.println("------------------");
 
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");

@@ -45,7 +45,9 @@ public class ContextConstants {
 	public static String MARKETING_BONUS = MongoReader.getDictionaryItem("MARKETING_BONUS");
 	public static String STEUER = MongoReader.getDictionaryItem("STEUER");
 	public static String VERSANDKOSTENFREI = MongoReader.getDictionaryItem("VERSANDKOSTENFREI");
-	public static String RABATT = MongoReader.getDictionaryItem("RABATT");
+	public static String RABATT = MongoReader.getDictionaryItem("DESCUENTO");
 	public static String GESAMTBETRAG = MongoReader.getDictionaryItem("GESAMTBETRAG");
 	public static String IP_PUNKTE = MongoReader.getDictionaryItem("IP_PUNKTE");
+
+
 }

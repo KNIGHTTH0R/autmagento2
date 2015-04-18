@@ -1,5 +1,7 @@
 package com.steps.frontend;
 
+import java.io.File;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
@@ -47,20 +49,20 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	public void redirectToProfileHistory() {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
+		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() + UrlConstants.PROFILE_HISTORY_URL);
 	}
 	@Step
 	public void redirectToWishlist() {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.WISHLIST_URL);
+		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() +  UrlConstants.WISHLIST_URL);
 		wishlistPage().addAllProductsToCArt();
 	}
 
 	public void redirectToStylistsCustomerOrderReport() {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
+		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
 	public void redirectToCartPage() {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);
+		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() + UrlConstants.CART_PAGE_URL);
 //		getDriver().get(UrlConstants.CART_PAGE_URL);
 	}
 
