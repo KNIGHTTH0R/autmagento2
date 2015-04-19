@@ -68,11 +68,8 @@ public class ConfirmationPage extends AbstractPage {
 
 			result.setCountryName(splittedText[3]);
 
-			PrintUtils.printAddressModel(result);
-
 		}
 		if (textparse.split(Separators.LINE_SEPARATOR).length == 5) {
-			System.out.println("FAILURE: error on shipping parsing - Confirmation Page - 5");
 
 			String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
 			String streetName = streetData[0];
@@ -90,7 +87,6 @@ public class ConfirmationPage extends AbstractPage {
 
 			result.setCountryName(splittedText[3]);
 
-			PrintUtils.printAddressModel(result);
 		} else {
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page");
 		}

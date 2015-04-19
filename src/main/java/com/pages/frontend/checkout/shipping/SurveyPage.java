@@ -78,7 +78,6 @@ public class SurveyPage extends AbstractPage {
 
 			resultList.add(productNow);
 
-			PrintUtils.printCartProductModel(productNow);
 		}
 
 		DataGrabber.shippingProducts = resultList;

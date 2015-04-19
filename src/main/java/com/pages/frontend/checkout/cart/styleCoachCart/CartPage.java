@@ -219,6 +219,10 @@ public class CartPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(MongoTableKeys.DISCOUNT_50_KEY, valueTransformer);
 			}
+			if (key.contains("BUY 3 GET 1 FOR 50%")) {
+				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.addDiscount(MongoTableKeys.DISCOUNT_3_PLUS_1, valueTransformer);
+			}
 			if (key.contains(ContextConstants.GESAMTBETRAG)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
