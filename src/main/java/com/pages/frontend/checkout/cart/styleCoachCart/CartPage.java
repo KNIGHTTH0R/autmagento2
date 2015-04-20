@@ -137,7 +137,7 @@ public class CartPage extends AbstractPage {
 			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
 			productNow.setDiscountClass(ConfigConstants.DISCOUNT_50);
 
-			PrintUtils.printCartProductModel(productNow);
+		
 			resultList.add(productNow);
 		}
 
@@ -166,7 +166,7 @@ public class CartPage extends AbstractPage {
 			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
 			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
 			productNow.setDiscountClass(ConfigConstants.DISCOUNT_0);
-			PrintUtils.printCartProductModel(productNow);
+		
 			resultList.add(productNow);
 		}
 

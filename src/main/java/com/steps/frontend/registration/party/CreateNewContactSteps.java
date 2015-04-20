@@ -21,6 +21,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().checkParties();
 		createNewContactPage().checkMember();
 		createNewContactPage().submitContact();
+		waitABit(2000);
 	}
 
 	@StepGroup

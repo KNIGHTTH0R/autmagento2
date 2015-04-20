@@ -1,5 +1,7 @@
 package com.tools.data.frontend;
 
+import com.tools.env.variables.ContextConstants;
+
 public class AddressModel {
 
 	/**
@@ -18,7 +20,7 @@ public class AddressModel {
 		setStreetNumber("22");
 		setHomeTown("Steglitz");
 		setPostCode("12165");
-		setCountryName("Deutschland");
+		setCountryName(ContextConstants.COUNTRY_NAME);
 		setPhoneNumber("00555123456");
 	}
 

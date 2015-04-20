@@ -65,6 +65,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 		customerData = new CustomerFormModel();
 		inviteData = new CustomerFormModel();
 		addressData = new AddressModel();
+		addressData.setCountryName("España");
 
 		Properties prop = new Properties();
 		InputStream input = null;

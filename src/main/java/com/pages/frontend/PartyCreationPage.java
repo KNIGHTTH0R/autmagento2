@@ -86,7 +86,6 @@ public class PartyCreationPage extends AbstractPage {
 	}
 
 	public void selectFirstAvailableDate() {
-
 		element(dateSelect).waitUntilVisible();
 		waitABit(2000);
 		dateSelect.click();
