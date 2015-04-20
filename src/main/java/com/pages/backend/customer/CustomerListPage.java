@@ -28,12 +28,14 @@ public class CustomerListPage extends AbstractPage {
 		element(emailFilterInput).waitUntilVisible();
 		emailFilterInput.clear();
 		emailFilterInput.sendKeys(emailText);
+	
 	}
 
 	public void clickOnSearch() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
+		waitABit(2000);
 	}
 	public void clickOnResetFilter() {
 		evaluateJavascript("jQuery.noConflict();");

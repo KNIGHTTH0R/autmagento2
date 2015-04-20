@@ -4,6 +4,7 @@ import com.tools.persistance.MongoReader;
 
 public class ContextConstants {
 
+
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
 	//messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
@@ -20,6 +21,7 @@ public class ContextConstants {
 	
 	public static String EMPTY_CART = MongoReader.getDictionaryItem("EMPTY_CART");
 	public static String SUCCES_MESSAGE = MongoReader.getDictionaryItem("SUCCES_MESSAGE");
+	public static String CREATE_ACCOUNT_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("CREATE_ACCOUNT_SUCCESS_MESSAGE");
 	public static String PRODUCT_ADDED_INTO_CART = MongoReader.getDictionaryItem("PRODUCT_ADDED_INTO_CART");
 	public static String SUCCESFULL_REGISTRATION = MongoReader.getDictionaryItem("SUCCESFULL_REGISTRATION");
 	public static String MEIN_STYLE_COACH = MongoReader.getDictionaryItem("MEIN_STYLE_COACH");
@@ -49,6 +51,9 @@ public class ContextConstants {
 	public static String RABATT = MongoReader.getDictionaryItem("DESCUENTO");
 	public static String GESAMTBETRAG = MongoReader.getDictionaryItem("GESAMTBETRAG");
 	public static String IP_PUNKTE = MongoReader.getDictionaryItem("IP_PUNKTE");
-
+	
+	public static String CONFIRM_ACCOUNT_MAIL_SUBJECT = MongoReader.getDictionaryItem("CONFIRM_ACCOUNT_MAIL_SUBJECT");
+	public static String NEWSLETTER_MAIL_SUBJECT = MongoReader.getDictionaryItem("NEWSLETTER_MAIL_SUBJECT");
+	public static String WELCOME_MAIL_SUBJECT = MongoReader.getDictionaryItem("WELCOME_MAIL_SUBJECT");
 
 }

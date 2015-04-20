@@ -24,6 +24,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -84,7 +85,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 		
 		//confirmation link
 		emailClientSteps.openMailinator();
-		emailClientSteps.grabEmail(stylistData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),"Benutzerkonto");
+		emailClientSteps.grabEmail(stylistData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		
 		headerSteps.navigateToRegisterFormAndLogout();
 		stylistRegistrationSteps.clickLoginLinkFromMessage();

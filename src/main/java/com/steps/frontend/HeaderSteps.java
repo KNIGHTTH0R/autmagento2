@@ -31,13 +31,15 @@ public class HeaderSteps extends AbstractSteps {
 	public void goToProfile() {
 		headerPage().clickOnProfileButton();
 	}
+
 	@Step
 	@Title("Go to create party page")
 	public void goToCreatePartyPage() {
 		headerPage().clickLounge();
 		loungePage().clickCreateParty();
-		
+
 	}
+
 	@Step
 	@Title("Go to create party for new contact")
 	public void goToCreatePartyWithNewContactPage() {
@@ -45,35 +47,34 @@ public class HeaderSteps extends AbstractSteps {
 		loungePage().clickCreateParty();
 		partyCreationPage().checkHostedByCustomer();
 		partyCreationPage().clickAddContact();
-		
+
 	}
 
 	public void redirectToProfileHistory() {
-		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() + UrlConstants.PROFILE_HISTORY_URL);
+		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext() + UrlConstants.PROFILE_HISTORY_URL);
 	}
+
 	@Step
 	public void redirectToWishlist() {
-		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() +  UrlConstants.WISHLIST_URL);
+		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext() + UrlConstants.WISHLIST_URL);
 		wishlistPage().addAllProductsToCArt();
 	}
 
 	public void redirectToStylistsCustomerOrderReport() {
-		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
+		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
 	public void redirectToCartPage() {
-		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() + UrlConstants.CART_PAGE_URL);
-//		getDriver().get(UrlConstants.CART_PAGE_URL);
+		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext() + UrlConstants.CART_PAGE_URL);
+		// getDriver().get(UrlConstants.CART_PAGE_URL);
 	}
 
 	@StepGroup
 	public void navigateToRegisterForm() {
 		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext());
-//		getDriver().get(UrlConstants.BASE_FE_URL);
+		// getDriver().get(UrlConstants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
-		loginPage().clickOnStylistRegistrationLink();
-		stylistCampaignPage().clickJetztStartenButton();
-		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		footerPage().clickRegistrierungLink();
 
 	}
 
@@ -92,9 +93,10 @@ public class HeaderSteps extends AbstractSteps {
 		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext());
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
-		loginPage().clickOnStylistRegistrationLink();
-		stylistCampaignPage().clickJetztStartenButton();
-		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		footerPage().clickRegistrierungLink();
+//		loginPage().clickOnStylistRegistrationLink();
+//		stylistCampaignPage().clickJetztStartenButton();
+//		starterSetPage().clickOnJetztStyleCoachWerdenButton();
 
 	}
 
@@ -102,7 +104,7 @@ public class HeaderSteps extends AbstractSteps {
 	public void selectLanguage(String language) {
 		headerPage().selectLanguage(language);
 	}
-	
+
 	@Step
 	public void clickAnmeldenButton() {
 		headerPage().clickAnmeldenButton();

@@ -19,6 +19,6 @@ public class RegistrationMessagePage extends AbstractPage {
 
 	public void verifyText() {
 		element(textContainer).waitUntilVisible();
-		Assert.assertTrue("Failure: Email notification text was not found. ", textContainer.getText().contains(ContextConstants.SUCCESFULL_REGISTRATION));
+		Assert.assertTrue("Failure: Email notification text was not found. ", textContainer.getText().contains(ContextConstants.CREATE_ACCOUNT_SUCCESS_MESSAGE));
 	}
 }

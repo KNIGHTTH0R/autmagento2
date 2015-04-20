@@ -21,6 +21,7 @@ import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -85,7 +86,7 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		
 		//external 
 		emailClientSteps.openMailinator();
-		grabConfirmationEmail  = emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),"Benutzerkonto");
+		grabConfirmationEmail  = emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		
 		backEndSteps.navigate(customerURL);
 		StylistPropertiesModel grabAfterLinkConfirmationStylistData =  backEndSteps.grabCustomerConfiguration();

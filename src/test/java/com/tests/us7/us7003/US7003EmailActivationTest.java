@@ -23,6 +23,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.Application;
 
@@ -93,7 +94,7 @@ public class US7003EmailActivationTest extends BaseTest{
 		
 		frontEndSteps.performLogin(username, password);
 
-		String message = gmailConnector.searchForMail("", "Benutzerkonto", false);
+		String message = gmailConnector.searchForMail("", ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT, false);
 
 		System.out.println(message);
 		String linkURL = emailSteps.grabConfirmationLink(message);

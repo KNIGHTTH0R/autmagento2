@@ -52,12 +52,9 @@ public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {
 		System.out.println(headerSteps.getBoutiqueName());
 		System.out.println(headerSteps.getStyleCoachFirstNameFromProfile());
 	
-		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
-		
-		
+		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());		
 
 	}
-
 
 }
 

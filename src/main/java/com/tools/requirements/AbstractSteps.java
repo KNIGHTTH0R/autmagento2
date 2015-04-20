@@ -89,7 +89,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void performLoginUnderContext(String userName, String userPass, String context) {
-		getDriver().get(MongoReader.getBaseURL() + context);
+		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);

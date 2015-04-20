@@ -43,7 +43,7 @@ public class US7002RegularCustomerRegistrationTest extends BaseTest{
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		context = "ioa";
+		context = "/ioa";
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 

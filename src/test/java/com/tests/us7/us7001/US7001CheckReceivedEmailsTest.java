@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -39,9 +40,9 @@ public class US7001CheckReceivedEmailsTest extends BaseTest {
 	@Test
 	public void us7001CheckReceivedEmailsTest() {
 		emailClientSteps.openMailinator();
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), "Newsletter");
+		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.NEWSLETTER_MAIL_SUBJECT);
 		emailClientSteps.openMailinator();
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), "Willkommen");
+		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.WELCOME_MAIL_SUBJECT);
 
 	}
 

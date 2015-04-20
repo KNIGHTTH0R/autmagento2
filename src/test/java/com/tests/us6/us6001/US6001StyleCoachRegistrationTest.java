@@ -56,7 +56,6 @@ public class US6001StyleCoachRegistrationTest extends BaseTest {
 	@Test
 	public void us6001StyleCoachRegistrationTest(){ 
 		headerSteps.navigateToRegisterForm();
-		headerSteps.selectLanguage(MongoReader.getContext().toUpperCase());
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 		customVerification.printErrors();

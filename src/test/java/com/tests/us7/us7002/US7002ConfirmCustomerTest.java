@@ -15,6 +15,7 @@ import com.tests.BaseTest;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -48,7 +49,7 @@ public class US7002ConfirmCustomerTest extends BaseTest {
 	public void us7002ConfirmCustomerTest() {
 		
 		emailClientSteps.openMailinator();
-		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""),"Benutzerkonto");
+		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
 }
 

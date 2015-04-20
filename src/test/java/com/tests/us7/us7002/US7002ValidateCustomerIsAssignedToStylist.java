@@ -1,6 +1,5 @@
 package com.tests.us7.us7002;
 
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -20,7 +19,7 @@ import com.tools.requirements.Application;
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US7002ValidateCustomerIsAssignedToStylist extends BaseTest {
-	
+
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -40,19 +39,16 @@ public class US7002ValidateCustomerIsAssignedToStylist extends BaseTest {
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
-		context = "simona";
+		context = "/ioa";
 	}
-	
+
 	@Test
 	public void us7002ValidateCustomerIsAssignedToStylist() {
 
-		customerRegistrationSteps.performLoginUnderContext(stylistEmail, stylistPassword,context);
+		customerRegistrationSteps.performLoginUnderContext(stylistEmail, stylistPassword, context);
 		headerSteps.goToProfile();
-	
 		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
 
 	}
 
-
 }
-
