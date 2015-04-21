@@ -63,7 +63,7 @@ public class US6001bCheckStylistActivationTest extends BaseTest {
 		formCreationDate = MongoReader.grabStylistDateModels("US6001bStyleCoachRegistrationTest").get(0).getDate();
 		int size = MongoReader.grabCustomerFormModels("US6001bStyleCoachRegistrationTest").size();
 		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US6001StyleCoachRegistrationTest").get(0);
+			stylistRegistrationData = MongoReader.grabCustomerFormModels("US6001bStyleCoachRegistrationTest").get(0);
 		} else
 			System.out.println("The database has no entries");
 

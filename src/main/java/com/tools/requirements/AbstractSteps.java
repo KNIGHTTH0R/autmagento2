@@ -83,8 +83,20 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
-		footerPage().verifyThatFooterWebsiteIsCorrect(MongoReader.getContext());
+
 	}
+	@Step
+	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass) {
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+		headerPage().verifyThatLanguageFromHeaderIsCorrectySelected(MongoReader.getContext());
+		footerPage().verifyThatFooterWebsiteIsCorrect(MongoReader.getContext());
+		
+	}
+	
 	@Step
 	public void performLoginOnPreferedWebsite(String userName, String userPass) {	
 		

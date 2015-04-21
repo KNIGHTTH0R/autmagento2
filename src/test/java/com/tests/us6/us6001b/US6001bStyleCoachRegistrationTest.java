@@ -58,7 +58,7 @@ public class US6001bStyleCoachRegistrationTest extends BaseTest {
 	@Test
 	public void us6001bStyleCoachRegistrationTest(){ 
 		headerSteps.navigateToRegisterForm();
-		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
+		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerFormFirstWithForbiddenCountry(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 		customVerification.printErrors();
 		

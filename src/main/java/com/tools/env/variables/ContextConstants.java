@@ -59,6 +59,8 @@ public class ContextConstants {
 	
 	public static String NOT_PREFERED_LANGUAGE = MongoReader.getDictionaryItem("NOT_PREFERED_LANGUAGE");
 	public static String PREFERD_LANGUAGE = MongoReader.getDictionaryItem("PREFERD_LANGUAGE");	
-	public static String NOT_PREFERED_WEBSITE = MongoReader.getDictionaryItem("NOT_PREFERED_WEBSITE");	
+	public static String NOT_PREFERED_WEBSITE = MongoReader.getDictionaryItem("NOT_PREFERED_WEBSITE");
+	public static String CHANGE_WEBSITE_POPUP_MESSAGE = MongoReader.getDictionaryItem("CHANGE_WEBSITE_POPUP_MESSAGE");
+	
 
 }

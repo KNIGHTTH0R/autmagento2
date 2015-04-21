@@ -5,6 +5,7 @@ import java.util.List;
 import net.thucydides.core.annotations.findby.FindBy;
 import net.thucydides.core.pages.WebElementFacade;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,20 +33,24 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(css = "div#topCartContent p.subtotal span.price")
 	private WebElement cartPreviewPrice;
 
-//	@FindBy(css = "a[title='Profil']")
-	@FindBy(css = "div.quick-access.clearfix ul.links li:nth-child(2) a")     //int	
+	// @FindBy(css = "a[title='Profil']")
+	@FindBy(css = "div.quick-access.clearfix ul.links li:nth-child(2) a")
+	// int
 	private WebElement profileButton;
 
-//	@FindBy(css = "a[title='Style Coach Lounge']")
-	@FindBy(css = "div.categories>ul.clearfix li:last-child a") //int
+	// @FindBy(css = "a[title='Style Coach Lounge']")
+	@FindBy(css = "div.categories>ul.clearfix li:last-child a")
+	// int
 	private WebElement loungeButton;
 
-//	@FindBy(css = "a[title='Anmelden']")
-	@FindBy(css = "ul.links>.last a") //int
+	// @FindBy(css = "a[title='Anmelden']")
+	@FindBy(css = "ul.links>.last a")
+	// int
 	private WebElement anmeldenButton;
 
-//	@FindBy(css = "a[title='Abmelden']")
-	@FindBy(css = "ul.links>.last a") //int
+	// @FindBy(css = "a[title='Abmelden']")
+	@FindBy(css = "ul.links>.last a")
+	// int
 	private WebElement abmeldenButton;
 
 	@FindBy(css = "div.branding p")
@@ -68,6 +73,19 @@ public class HeaderPage extends AbstractPage {
 				}
 			}
 		}
+	}
+
+	public void verifyThatLanguageFromHeaderIsCorrectySelected(String website) {
+		List<WebElement> websites = websiteContainer.findElements(By.cssSelector("li span"));
+		boolean found = false;
+		for (WebElement web : websites) {
+			if (web.getText().contentEquals(website.toUpperCase())) {
+
+				found = true;
+				break;
+			}
+		}
+		Assert.assertTrue("The selected language is not the correct one !!!", found);
 	}
 
 	public void searchInput(String seachKey) {
