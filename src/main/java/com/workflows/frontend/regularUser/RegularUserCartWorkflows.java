@@ -20,10 +20,10 @@ import com.tools.env.constants.ConfigConstants;
 public class RegularUserCartWorkflows {
 
 	@Steps
-	public static CheckoutValidationSteps checkoutValidationSteps;
+	public CheckoutValidationSteps checkoutValidationSteps;
 
 	@Steps
-	public static CustomVerification customVerification;
+	public CustomVerification customVerification;
 
 	private List<RegularBasicProductModel> basicProductsList = new ArrayList<RegularBasicProductModel>();
 	private List<RegularUserCartProductModel> cartProductsList = new ArrayList<RegularUserCartProductModel>();

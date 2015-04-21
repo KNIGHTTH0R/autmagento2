@@ -22,9 +22,7 @@ import com.tools.data.frontend.ShippingModel;
 public class CartWorkflows {
 
 	@Steps
-	public static CheckoutValidationSteps checkoutValidationSteps;
-	@Steps
-	public static CustomVerification customVerification;
+	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private static List<CartProductModel> cartProductsModelGrabbedList = new ArrayList<CartProductModel>();
 	private static List<CartProductModel> cartProductsModelCalculatedList = new ArrayList<CartProductModel>();

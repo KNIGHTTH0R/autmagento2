@@ -17,9 +17,7 @@ import com.tools.data.frontend.ShippingModel;
 public class HostShippingAndConfirmationWorkflows {
 	
 	@Steps
-	public static CheckoutValidationSteps checkoutValidationSteps;
-	@Steps 
-	public static CustomVerification customVerification;	
+	public CheckoutValidationSteps checkoutValidationSteps;
 	
 	private static List<HostBasicProductModel> basicProductsList = new ArrayList<HostBasicProductModel>();
 	private static List<HostCartProductModel> cartProductsList = new ArrayList<HostCartProductModel>();

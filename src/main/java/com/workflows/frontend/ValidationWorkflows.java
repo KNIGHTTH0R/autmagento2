@@ -1,6 +1,5 @@
 package com.workflows.frontend;
 
-import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
@@ -9,14 +8,12 @@ import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 
 public class ValidationWorkflows {
-
+	
 	@Steps
 	public CartWorkflows2 cartWorkflows2;
-	@Steps
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
-	@Steps
 	public AddressWorkflows addressWorkflows;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
@@ -33,10 +30,10 @@ public class ValidationWorkflows {
 	 * Note need to set billingAddress of this class. call setBillingAddress
 	 */
 	@StepGroup
-	@Screenshots(onlyOnFailures = true)
+//	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations119Vat() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
@@ -73,12 +70,10 @@ public class ValidationWorkflows {
 	}
 
 	@StepGroup
-	@Screenshots(onlyOnFailures = true)
+//	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations() {
 
-		checkoutValidationSteps.verifySuccessMessage();
-		System.out.println("CartCalculator.productsList50: " + CartCalculator.productsList50.size());
-		System.out.println("DataGrabber.cartProductsWith50Discount: " + DataGrabber.cartProductsWith50Discount.size());
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
@@ -121,10 +116,10 @@ public class ValidationWorkflows {
 	}
 
 	@StepGroup
-	@Screenshots(onlyOnFailures = true)
+//	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBu3Get1Rule() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
@@ -155,10 +150,10 @@ public class ValidationWorkflows {
 	}
 
 	@StepGroup
-	@Screenshots(onlyOnFailures = true)
+//	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBuy3Get1RuleJbAndMbApplied() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		// validations before JB and MM Discounts - in this phase ,on products
 		// is applied buy3Get1 rule, so we are validating those prices

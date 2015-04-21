@@ -16,7 +16,7 @@ import com.tools.utils.PrintUtils;
 public class OrderProductsWorkflows {
 	
 	@Steps
-	public static OrderValidationSteps orderValidationSteps;
+	public OrderValidationSteps orderValidationSteps;
 	
 	private List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
 	private List<OrderItemModel> orderProducts = new ArrayList<OrderItemModel>();

@@ -20,10 +20,7 @@ import com.tools.data.frontend.CartTotalsModel;
 public class CartWorkflows2 {
 
 	@Steps
-	public static CheckoutValidationSteps checkoutValidationSteps;
-
-	@Steps 
-	public static CustomVerification customVerification;
+	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private List<BasicProductModel> basicProductsList = new ArrayList<BasicProductModel>();
 	private List<CartProductModel> cartProductsList = new ArrayList<CartProductModel>();
