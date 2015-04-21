@@ -1,4 +1,4 @@
-package com.tests.us7.us7001;
+package com.tests.us7.us7001b;
 
 
 import net.thucydides.core.annotations.Steps;
@@ -19,7 +19,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {
+public class US7001bValidateCustomerIsAssignedToStylist extends BaseTest {
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -33,25 +33,22 @@ public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {
 	public void setUp() throws Exception {
 		
 
-		int size = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7001bRegularCustomerRegistrationTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").get(0).getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").get(0).getPassword();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7001bRegularCustomerRegistrationTest").get(0).getEmailName();
+			stylistPassword = MongoReader.grabCustomerFormModels("US7001bRegularCustomerRegistrationTest").get(0).getPassword();
 			System.out.println(stylistEmail);
 		} else
-			System.out.println("The database has no entries");
-		
-		
+			System.out.println("The database has no entries");		
 		
 	}
 	@Test
-	public void us7001ValidateCustomerIsAssignedToStylist() {
+	public void us7001bValidateCustomerIsAssignedToStylist() {
 		
-		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);	
+		customerRegistrationSteps.performLoginOnPreferedWebsite(stylistEmail, stylistPassword);
 		headerSteps.goToProfile();
 		System.out.println(headerSteps.getBoutiqueName());
-		System.out.println(headerSteps.getStyleCoachFirstNameFromProfile());
-	
+		System.out.println(headerSteps.getStyleCoachFirstNameFromProfile());	
 		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());		
 
 	}

@@ -66,11 +66,11 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	public HostCartSteps hostCartSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	
+	@Steps
 	public AddHostProductsWorkflow addHostProductsWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
-
+	@Steps
 	public HostCartValidationWorkflows hostCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
@@ -179,7 +179,7 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();	
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 	
-			shippingSteps.clickGoToPaymentMethod();		
+		shippingSteps.clickGoToPaymentMethod();		
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
