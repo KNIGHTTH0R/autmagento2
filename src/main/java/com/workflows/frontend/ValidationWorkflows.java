@@ -14,7 +14,7 @@ public class ValidationWorkflows {
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
-	public AddressWorkflows addressWorkflows;
+//	public AddressWorkflows addressWorkflows = new AddressWorkflows();
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
@@ -33,7 +33,7 @@ public class ValidationWorkflows {
 //	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations119Vat() {
 
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
@@ -62,18 +62,18 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
 //	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations() {
 
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
@@ -108,18 +108,18 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
 //	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBu3Get1Rule() {
 
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
@@ -142,18 +142,18 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
 //	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBuy3Get1RuleJbAndMbApplied() {
 
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		// validations before JB and MM Discounts - in this phase ,on products
 		// is applied buy3Get1 rule, so we are validating those prices
@@ -190,11 +190,11 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(billingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(billingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 }
