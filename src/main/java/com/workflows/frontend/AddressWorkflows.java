@@ -1,7 +1,5 @@
 package com.workflows.frontend;
 
-import net.thucydides.core.annotations.Step;
-
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 
@@ -12,26 +10,27 @@ public class AddressWorkflows {
 	private static AddressModel shippingAddress = new AddressModel();
 	private static String shippingCountryName;
 
-	public void setBillingAddressModels(String billingCountryName, AddressModel billingAddress) {
-		AddressWorkflows.billingAddress = billingAddress;
-		AddressWorkflows.billingCountryName = billingCountryName;
+	public static void setBillingAddressModels(String billingCountryNameValue, AddressModel billingAddressValue) {
+		System.out.println("HERE __AddressWorkflows__ setBillingAddressModels");
+		billingAddress = billingAddressValue;
+		billingCountryName = billingCountryNameValue;
 	}
 
-	public void validateBillingAddress(String message) {
+	public static void validateBillingAddress(String message) {
 		verifyCountry(billingCountryName, billingAddress.getCountryName());
 	}
 
-	public void setShippingAddressModels(String shippingCountryName, AddressModel shippingAddress) {
-		AddressWorkflows.shippingAddress = shippingAddress;
-		AddressWorkflows.shippingCountryName = shippingCountryName;
+	public static void setShippingAddressModels(String shippingCountryNameValue, AddressModel shippingAddressValue) {
+		shippingAddress = shippingAddressValue;
+		shippingCountryName = shippingCountryNameValue;
 	}
 
-	public void validateShippingAddress(String message) {
+	public static void validateShippingAddress(String message) {
 		verifyCountry(shippingCountryName, shippingAddress.getCountryName());
 	}
 
-	@Step
-	public void verifyCountry(String address, String countryName) {
+//	@Step
+	public static void verifyCountry(String address, String countryName) {
 		CustomVerification.verifyTrue("Failure: Countries dont match !", address.contains(countryName));
 	}
 

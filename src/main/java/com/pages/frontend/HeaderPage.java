@@ -3,6 +3,7 @@ package com.pages.frontend;
 import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
+import net.thucydides.core.pages.WebElementFacade;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,7 +15,7 @@ import com.tools.requirements.AbstractPage;
 public class HeaderPage extends AbstractPage {
 
 	@FindBy(id = "search")
-	private WebElement searchInput;
+	private WebElementFacade searchInput;
 
 	@FindBy(css = ".top-search-icon")
 	private WebElement submitSearch;

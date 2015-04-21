@@ -136,6 +136,7 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().get(modiURL);
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(initURL);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	public void wipeRegularCart() {
@@ -144,6 +145,7 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().get(modiURL);
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(initURL);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	public void wipeHostCart() {
@@ -152,6 +154,7 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().get(modiURL);
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(initURL);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	public void findFrame(String frameName) {

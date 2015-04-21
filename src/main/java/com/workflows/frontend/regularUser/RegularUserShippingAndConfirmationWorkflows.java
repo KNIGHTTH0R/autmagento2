@@ -17,10 +17,7 @@ import com.tools.data.frontend.ShippingModel;
 public class RegularUserShippingAndConfirmationWorkflows {
 
 	@Steps
-	public static CheckoutValidationSteps checkoutValidationSteps;
-
-	@Steps
-	public static CustomVerification customVerification;
+	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private static List<RegularBasicProductModel> basicProductsList = new ArrayList<RegularBasicProductModel>();
 	private static List<RegularUserCartProductModel> cartProductsList = new ArrayList<RegularUserCartProductModel>();

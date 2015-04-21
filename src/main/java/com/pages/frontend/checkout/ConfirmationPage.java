@@ -17,9 +17,9 @@ import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.constants.Separators;
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 
 public class ConfirmationPage extends AbstractPage {
 
@@ -45,6 +45,7 @@ public class ConfirmationPage extends AbstractPage {
 	private WebElement surveyTotalsContainer;
 
 	private AddressModel grabAddressData(WebElement addressPreview) {
+		waitABit(TimeConstants.TIME_MEDIUM);
 		AddressModel result = new AddressModel();
 		element(addressPreview).waitUntilVisible();
 		String textparse = addressPreview.getText();

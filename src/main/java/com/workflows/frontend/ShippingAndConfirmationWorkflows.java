@@ -17,9 +17,7 @@ import com.tools.data.frontend.ShippingModel;
 public class ShippingAndConfirmationWorkflows {
 	
 	@Steps
-	public static CheckoutValidationSteps checkoutValidationSteps;
-	@Steps 
-	public static CustomVerification customVerification;
+	public CheckoutValidationSteps checkoutValidationSteps;
 	
 	private static List<BasicProductModel> basicProductsList = new ArrayList<BasicProductModel>();
 	private static List<CartProductModel> cartProductsList = new ArrayList<CartProductModel>();
@@ -79,10 +77,15 @@ public class ShippingAndConfirmationWorkflows {
 	
 	@Step
 	public void verifyShippingTotals(String string) {
+		System.out.println("HERE - ShippingAndConfirmationWorkflows");
+		System.out.println(shippingGrabbedModel.getTotalAmount() + " - " + shippingCalculatedModel.getTotalAmount());
 		verifyTotalAmount(shippingGrabbedModel.getTotalAmount(), shippingCalculatedModel.getTotalAmount());
 		verifyShippingPrice(shippingGrabbedModel.getShippingPrice(), shippingCalculatedModel.getShippingPrice());
+		System.out.println(shippingGrabbedModel.getShippingPrice() + " - " + shippingCalculatedModel.getShippingPrice());
 		verifyDiscountsPrice(shippingGrabbedModel.getDiscountPrice(), shippingCalculatedModel.getDiscountPrice());
+		System.out.println(shippingGrabbedModel.getDiscountPrice() + " - " + shippingCalculatedModel.getDiscountPrice());
 		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
+		System.out.println(shippingGrabbedModel.getSubTotal() + " - " + shippingCalculatedModel.getSubTotal());
 	}
 
 	@Step

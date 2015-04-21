@@ -56,13 +56,13 @@ public class US3003Test extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public AddProductsWorkflow addProductsWorkflow;
-	@Steps
 	public PaymentSteps paymentSteps;
-	@Steps
-	public ValidationWorkflows validationWorkflows;
 	@Steps 
 	public CustomVerification customVerifications;
+	@Steps
+	public AddProductsWorkflow addProductsWorkflow;
+	@Steps
+	public ValidationWorkflows validationWorkflows;
 	
 	private String username, password;
 	private static String billingAddress;
@@ -96,7 +96,7 @@ public class US3003Test extends BaseTest {
 
 		Properties prop = new Properties();
 		InputStream input = null;
-
+		
 		try {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3003.properties");
@@ -135,9 +135,8 @@ public class US3003Test extends BaseTest {
 	public void us3003CartSegmentationWithVatBillingShippingDeTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		customerRegistrationSteps.wipeCart();
-		BasicProductModel productData;
 		
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_50);
+		BasicProductModel productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
@@ -186,6 +185,9 @@ public class US3003Test extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
+		
+		System.out.println("CartCalculator.productsList25: " + CartCalculator.productsList25);
+		System.out.println("DataGrabber.cartProductsWith25Discount: " + DataGrabber.cartProductsWith25Discount);
 		
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		validationWorkflows.performCartValidations();

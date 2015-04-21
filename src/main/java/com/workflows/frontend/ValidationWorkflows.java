@@ -1,6 +1,5 @@
 package com.workflows.frontend;
 
-import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
@@ -9,15 +8,13 @@ import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 
 public class ValidationWorkflows {
-
+	
 	@Steps
 	public CartWorkflows2 cartWorkflows2;
-	@Steps
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
-	@Steps
-	public AddressWorkflows addressWorkflows;
+//	public AddressWorkflows addressWorkflows = new AddressWorkflows();
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
@@ -33,7 +30,7 @@ public class ValidationWorkflows {
 	 * Note need to set billingAddress of this class. call setBillingAddress
 	 */
 	@StepGroup
-	@Screenshots(onlyOnFailures = true)
+//	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations119Vat() {
 
 		checkoutValidationSteps.verifySuccessMessage();
@@ -65,20 +62,18 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
-	@Screenshots(onlyOnFailures = true)
+//	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations() {
 
 		checkoutValidationSteps.verifySuccessMessage();
-		System.out.println("CartCalculator.productsList50: " + CartCalculator.productsList50.size());
-		System.out.println("DataGrabber.cartProductsWith50Discount: " + DataGrabber.cartProductsWith50Discount.size());
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
@@ -113,15 +108,15 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
-	@Screenshots(onlyOnFailures = true)
+//	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBu3Get1Rule() {
 
 		checkoutValidationSteps.verifySuccessMessage();
@@ -147,15 +142,15 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
-	@Screenshots(onlyOnFailures = true)
+//	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBuy3Get1RuleJbAndMbApplied() {
 
 		checkoutValidationSteps.verifySuccessMessage();
@@ -195,11 +190,11 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(billingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(billingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 }
