@@ -14,7 +14,7 @@ import com.tools.persistance.MongoReader;
 public class UrlConstants {
 	
 //	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-aut" + File.separator;
-	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + MongoReader.getEnvironment() + File.separator + MongoReader.getContext() + File.separator;
+	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + MongoReader.getEnvironment() + File.separator;
 	public static final String CONTEXT_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "context" + File.separator + MongoReader.getContext() + File.separator;
 
 	//Staging AUT uRLs 

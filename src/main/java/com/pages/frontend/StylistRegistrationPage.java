@@ -109,6 +109,12 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	@FindBy(id = "stylistref")
 	private WebElement stylistref;
+	
+	@FindBy(id = "fancybox-outer")
+	private WebElement infoBox;
+	
+	@FindBy(id = "fancybox-close")
+	private WebElement closeInfoBox;
 
 	// ---------------------------------------------------
 
@@ -174,6 +180,10 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void clickDob() {
 		dob.click();
+	}
+	
+	public void closeInfoBox() {
+		closeInfoBox.click();
 	}
 
 	public void clickOnNachahmePaymentMethod() {
@@ -266,5 +276,10 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public String getStylistRegisterPageTitle() {
 		return stylistRegisterPageTitleContainer.getText();
+	}
+	
+	public void validateInfoBoxMessage(){
+		element(infoBox).waitUntilVisible();
+		Assert.assertTrue("The message from infobox is not the expected one!!", infoBox.getText().contains(ContextConstants.CHANGE_WEBSITE_POPUP_MESSAGE));
 	}
 }

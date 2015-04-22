@@ -2,6 +2,8 @@ package com.tools.requirements;
 
 import java.util.Set;
 
+import org.junit.Assert;
+
 import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
@@ -61,6 +63,7 @@ import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -75,7 +78,35 @@ public class AbstractSteps extends ScenarioSteps {
 	 */
 	@Step
 	public void performLogin(String userName, String userPass) {
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext());
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+
+	}
+	@Step
+	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass) {
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+		headerPage().verifyThatLanguageFromHeaderIsCorrectySelected(MongoReader.getContext());
+		footerPage().verifyThatFooterWebsiteIsCorrect(MongoReader.getContext());
+		
+	}
+	
+	@Step
+	public void performLoginOnPreferedWebsite(String userName, String userPass) {	
+		
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+		Assert.assertTrue(getDriver().getCurrentUrl().contains("http://staging-int.pippajean.com/" + ContextConstants.NOT_PREFERED_WEBSITE));
+		footerPage().verifyThatFooterWebsiteIsCorrect(ContextConstants.NOT_PREFERED_WEBSITE);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -89,7 +120,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void performLoginUnderContext(String userName, String userPass, String context) {
-		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext() + context);
+		getDriver().get(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);

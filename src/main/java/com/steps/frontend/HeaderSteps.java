@@ -51,27 +51,27 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	public void redirectToProfileHistory() {
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext() + UrlConstants.PROFILE_HISTORY_URL);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
 	}
 
 	@Step
 	public void redirectToWishlist() {
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext() + UrlConstants.WISHLIST_URL);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.WISHLIST_URL);
 		wishlistPage().addAllProductsToCArt();
 	}
 
 	public void redirectToStylistsCustomerOrderReport() {
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
+		getDriver().get(MongoReader.getBaseURL()+ UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
 	public void redirectToCartPage() {
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext() + UrlConstants.CART_PAGE_URL);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);
 		// getDriver().get(UrlConstants.CART_PAGE_URL);
 	}
 
 	@StepGroup
 	public void navigateToRegisterForm() {
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext());
+		getDriver().get(MongoReader.getBaseURL());
 		// getDriver().get(UrlConstants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
 		footerPage().clickRegistrierungLink();
@@ -80,7 +80,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton() {
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext());
+		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();
 		stylistCampaignPage().clickStarteJetztButton();
@@ -90,7 +90,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormAndLogout() {
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext());
+		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
 		footerPage().clickRegistrierungLink();

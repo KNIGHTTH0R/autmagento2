@@ -10,8 +10,7 @@ import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.workflows.frontend.AddressWorkflows;
 
-public class HostCartValidationWorkflows {
-	
+public class HostCartValidationWorkflows {	
 	@Steps
 	public HostCartWorkflows hostCartWorkflows;
 	@Steps
@@ -38,7 +37,7 @@ public class HostCartValidationWorkflows {
 	@Screenshots(onlyOnFailures=true)
 	public void performCartValidationsWith40DiscountAndJb(){
 		
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 		
 		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsList, HostDataGrabber.grabbedHostCartProductsList);
 		hostCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
@@ -68,7 +67,7 @@ public class HostCartValidationWorkflows {
 	@Screenshots(onlyOnFailures=true)
 	public void performCartValidationsWith40DiscountAndJbAndBuy3Get1(){
 		
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 		
 		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListWithBuy3Get1Applied, HostDataGrabber.grabbedHostCartProductsList);
 		hostCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");

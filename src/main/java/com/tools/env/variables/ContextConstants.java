@@ -5,6 +5,7 @@ import com.tools.persistance.MongoReader;
 public class ContextConstants {
 
 
+	
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
 	//messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
@@ -55,5 +56,11 @@ public class ContextConstants {
 	public static String CONFIRM_ACCOUNT_MAIL_SUBJECT = MongoReader.getDictionaryItem("CONFIRM_ACCOUNT_MAIL_SUBJECT");
 	public static String NEWSLETTER_MAIL_SUBJECT = MongoReader.getDictionaryItem("NEWSLETTER_MAIL_SUBJECT");
 	public static String WELCOME_MAIL_SUBJECT = MongoReader.getDictionaryItem("WELCOME_MAIL_SUBJECT");
+	
+	public static String NOT_PREFERED_LANGUAGE = MongoReader.getDictionaryItem("NOT_PREFERED_LANGUAGE");
+	public static String PREFERD_LANGUAGE = MongoReader.getDictionaryItem("PREFERD_LANGUAGE");	
+	public static String NOT_PREFERED_WEBSITE = MongoReader.getDictionaryItem("NOT_PREFERED_WEBSITE");
+	public static String CHANGE_WEBSITE_POPUP_MESSAGE = MongoReader.getDictionaryItem("CHANGE_WEBSITE_POPUP_MESSAGE");
+	
 
 }

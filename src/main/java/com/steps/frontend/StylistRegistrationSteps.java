@@ -45,6 +45,32 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
+	@Title("Fill create customer form")
+	public String fillCreateCustomerFormFirstWithForbiddenCountry(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetailsFirstWithForbidenCountry(addressData);
+		checkNoCoachCheckbox();
+		checkIAgree();
+		submitStep();
+		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		submitStep();
+		selectStarterKit();
+		submitStep();
+		clickOnNachahmePaymentMethod();
+		submitPaymentMethod();
+		finishPayment();
+
+		String date = FormatterUtils.getAndFormatCurrentDate();
+		return date;
+	}
+
+	@StepGroup
 	public String fillStylistRegistrationPredefinedInfoForm(String name, AddressModel addressData, String birthDate) {
 		selectBirthDate(birthDate);
 		checkIAgree();
@@ -68,6 +94,22 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputStreetNumber(addressData.getStreetNumber());
 		inputPostCode(addressData.getPostCode());
 		inputHomeTown(addressData.getHomeTown());
+		selectCountryName(addressData.getCountryName());
+		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
+
+	}
+
+	@StepGroup
+	@Title("Fill contact details ")
+	public void fillContactDetailsFirstWithForbidenCountry(AddressModel addressData) {
+		inputStreetAddress(addressData.getStreetAddress());
+		inputStreetNumber(addressData.getStreetNumber());
+		inputPostCode(addressData.getPostCode());
+		inputHomeTown(addressData.getHomeTown());
+		selectCountryName(addressData.getCountryName());
+		validateInfoBoxMessage();
+		closeInfoBox();
+		addressData.setCountryName(ContextConstants.COUNTRY_NAME);
 		selectCountryName(addressData.getCountryName());
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 
@@ -123,6 +165,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	public void submitPaymentMethod() {
 		stylistRegistrationPage().submitPaymentMethod();
 	}
+
 	@Step
 	public void finishPayment() {
 		stylistRegistrationPage().finishPayment();
@@ -137,7 +180,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	public void inputStylistRef(String ref) {
 		stylistRegistrationPage().inputStylistRef(ref);
 	}
-	
 
 	// ----------------------------Main Form from create customer
 	@Step
@@ -260,7 +302,8 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@Step
 	public void validateStylistRegisterPageTitle() {
-		Assert.assertTrue("Failure: You are not on the style coach register page", stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(ContextConstants.STYLE_COACH_REG_PAGE_TITLE));
+		Assert.assertTrue("Failure: You are not on the style coach register page",
+				stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(ContextConstants.STYLE_COACH_REG_PAGE_TITLE));
 	}
 
 	@Step
@@ -273,5 +316,15 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		facebookEMBLoginPage().inputUser(user);
 		facebookEMBLoginPage().inputPass(pass);
 		facebookEMBLoginPage().clickLogin();
+	}
+
+	@Step
+	public void validateInfoBoxMessage() {
+		stylistRegistrationPage().validateInfoBoxMessage();
+	}
+
+	@Step
+	public void closeInfoBox() {
+		stylistRegistrationPage().closeInfoBox();
 	}
 }
