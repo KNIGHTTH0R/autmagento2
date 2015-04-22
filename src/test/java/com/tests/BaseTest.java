@@ -1,5 +1,6 @@
 package com.tests;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,9 +16,11 @@ import org.openqa.selenium.WebDriver;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
+import com.mongodb.DBCollection;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 
@@ -77,7 +80,7 @@ public class BaseTest {
 		}
 
 		System.out.println("Base URL: " + baseUrl);
-		// MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
+		System.out.println("Soap URL: " + soapUrl);
 		MongoWriter.saveStoreUrl(storeIDs, baseUrl,soapUrl);
 
 		EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
@@ -85,11 +88,8 @@ public class BaseTest {
 		emailDefaults.setProtocol(EmailConstants.PROTOCOL);
 		emailDefaults.setUsername(EmailConstants.EMAIL_DEF_USERNAME);
 		emailDefaults.setPassword(EmailConstants.EMAIL_DEF_PASSWORD);
-
 		gmailConnector = new GmailConnector(emailDefaults);
-
 		updateDictionary();
-		
 	}
 
 	/**
@@ -97,13 +97,16 @@ public class BaseTest {
 	 * MongoDb.
 	 * @throws InterruptedException 
 	 */
-	private static void updateDictionary() {
+	public static void updateDictionary() {
+		MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG, MongoTableKeys.DICTIONARY_MODEL);
+		
+		System.out.println("Dictionary PATH: " + UrlConstants.CONTEXT_PATH + MongoReader.getContext() + File.separator + "dictionary.properties");
 		System.out.println("Load Dictionary... ");
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-
-			input = new FileInputStream(UrlConstants.CONTEXT_PATH + "dictionary.properties");
+			input = new FileInputStream(UrlConstants.CONTEXT_PATH + MongoReader.getContext() + File.separator + "dictionary.properties");
 			prop.load(input);
 			for (Object keyNow : prop.keySet()) {
 				String value = prop.getProperty(String.valueOf(keyNow));
