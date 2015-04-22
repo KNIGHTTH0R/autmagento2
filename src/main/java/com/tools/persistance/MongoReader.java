@@ -160,6 +160,9 @@ public class MongoReader extends MongoConnector {
 			while (cursor.hasNext()) {
 				dbObject = cursor.next();
 				storeIds = MongoUtils.checkField(dbObject, MongoTableKeys.STORE_ID_KEY);
+				if(!storeIds.isEmpty()){
+					break;
+				}
 			}
 		} finally {
 			cursor.close();
