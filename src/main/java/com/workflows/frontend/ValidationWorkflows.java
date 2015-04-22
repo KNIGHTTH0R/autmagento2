@@ -14,7 +14,6 @@ public class ValidationWorkflows {
 	public CartWorkflows cartWorkflows;
 	@Steps
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
-//	public AddressWorkflows addressWorkflows = new AddressWorkflows();
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
