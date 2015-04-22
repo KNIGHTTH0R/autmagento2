@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us6.us6002b.US6002bCheckStylistActivationTest;
+import com.tests.us6.us6002b.US6002bCheckStylistPreferedWebsiteAndLanguage;
 import com.tests.us6.us6002b.US6002bCreateCustomerTest;
 import com.tests.us6.us6002b.US6002bStyleCoachRegistrationTest;
 
@@ -13,6 +14,7 @@ import com.tests.us6.us6002b.US6002bStyleCoachRegistrationTest;
 	US6002bCreateCustomerTest.class,
 	US6002bStyleCoachRegistrationTest.class,
 	US6002bCheckStylistActivationTest.class,
+	US6002bCheckStylistPreferedWebsiteAndLanguage.class,
 })
 @RunWith(Suite.class)
 public class US6002bSuite {
