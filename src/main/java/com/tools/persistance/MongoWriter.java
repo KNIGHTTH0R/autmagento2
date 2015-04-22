@@ -60,6 +60,16 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+	
+	public static void saveSoapUrl(String soapUrl) {
+		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.STORE_CONFIG_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.SOAP_URL_KEY, soapUrl);
+		
+		table.insert(document);
+	}
 
 	public static void saveAddressModel(AddressModel dataModel, String testName) {
 		workingDB = mongoClient.getDB(testName);

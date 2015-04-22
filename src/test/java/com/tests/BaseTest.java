@@ -52,6 +52,7 @@ public class BaseTest {
 
 		String baseUrl = "";
 		String storeIDs = "";
+		String soapUrl = "";
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -60,6 +61,7 @@ public class BaseTest {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "config.properties");
 			prop.load(input);
 			baseUrl = prop.getProperty("baseUrl");
+			soapUrl = prop.getProperty("soapUrl");
 			storeIDs = prop.getProperty("storeIDs");
 
 		} catch (IOException ex) {
@@ -77,6 +79,7 @@ public class BaseTest {
 		System.out.println("Base URL: " + baseUrl);
 		// MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
 		MongoWriter.saveStoreUrl(storeIDs, baseUrl);
+		MongoWriter.saveSoapUrl(soapUrl);
 
 		EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
 		emailDefaults.setHost(EmailConstants.RECEIVING_HOST);

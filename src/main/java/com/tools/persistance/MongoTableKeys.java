@@ -131,6 +131,7 @@ public class MongoTableKeys {
 	public static final String STORE_ID_KEY = "storeIds";
 	public static final String DICTIONARY_MODEL = "DictionaryModel";
 	public static final String STORE_CONFIG_MODEL = "StoreConfigModel";
+	public static final String SOAP_URL_KEY = "soapUrl";
 	
 
 }
