@@ -61,7 +61,7 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	public void redirectToStylistsCustomerOrderReport() {
-		getDriver().get(MongoReader.getBaseURL()+ UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
 	public void redirectToCartPage() {
@@ -94,9 +94,9 @@ public class HeaderSteps extends AbstractSteps {
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
 		footerPage().clickRegistrierungLink();
-//		loginPage().clickOnStylistRegistrationLink();
-//		stylistCampaignPage().clickJetztStartenButton();
-//		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		// loginPage().clickOnStylistRegistrationLink();
+		// stylistCampaignPage().clickJetztStartenButton();
+		// starterSetPage().clickOnJetztStyleCoachWerdenButton();
 
 	}
 
@@ -135,6 +135,11 @@ public class HeaderSteps extends AbstractSteps {
 	public void navigateToPartyPageAndStartOrder(String url) {
 		headerPage().navigateToPartyPage(url);
 		partyCreationPage().clickOrderForHostess();
+	}
+
+	@Step
+	public boolean succesfullLogin() {
+		return headerPage().succesfullLogin();
 	}
 
 }

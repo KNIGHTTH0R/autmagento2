@@ -45,6 +45,22 @@ public class FooterPage extends AbstractPage {
 		}
 		Assert.assertTrue("The selected website is not the correct one !!!", found);
 	}
+	
+	public void selectWebsiteFromFooter(String language) {
+		element(websitesList).waitUntilVisible();
+		List<WebElement> languagesList = getDriver().findElements(By.cssSelector("li a"));
+		for (WebElement lang : languagesList) {
+			if (lang.getText().contentEquals(language)) {
+				try {
+					lang.findElement(By.cssSelector("a")).click();
+					break;
+				} catch (Exception e) {
+					lang.click();
+					break;
+				}
+			}
+		}
+	}
 
 	public void clickRegistrierungLink() {
 		registrierungLink.click();

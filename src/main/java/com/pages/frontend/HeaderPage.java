@@ -17,6 +17,9 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(id = "search")
 	private WebElementFacade searchInput;
+	
+	@FindBy(css = "div.quick-access.clearfix p")
+	private WebElementFacade succesLoginContainer;
 
 	@FindBy(css = ".top-search-icon")
 	private WebElement submitSearch;
@@ -159,6 +162,10 @@ public class HeaderPage extends AbstractPage {
 
 	public void navigateToPartyPage(String url) {
 		getDriver().get(url);
+	}
+	
+	public boolean succesfullLogin(){
+		return succesLoginContainer.getText().contains("¡BIENVENIDO,") || succesLoginContainer.getText().contains("HI,");
 	}
 
 }

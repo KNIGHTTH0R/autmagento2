@@ -84,5 +84,10 @@ public class FooterSteps extends AbstractSteps {
 		footerPage().verifyThatFooterWebsiteIsCorrect(website);
 		
 	}
+	@StepGroup
+	public void selectWebsiteFromFooter(String language) {
+		footerPage().selectWebsiteFromFooter(language);
+		
+	}
 
 }
