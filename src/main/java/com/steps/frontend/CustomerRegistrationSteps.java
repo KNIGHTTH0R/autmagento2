@@ -22,7 +22,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext());
+		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -42,7 +42,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Title("Fill create customer form under context")
 	public void fillCreateCustomerFormUnderContext(CustomerFormModel customerData, AddressModel addressData, String context) {
 
-		getDriver().get(MongoReader.getBaseURL()  + MongoReader.getContext() + context);
+		getDriver().get(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());

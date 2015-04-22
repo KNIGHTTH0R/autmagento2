@@ -78,7 +78,7 @@ public class AbstractSteps extends ScenarioSteps {
 	 */
 	@Step
 	public void performLogin(String userName, String userPass) {
-		getDriver().get(MongoReader.getBaseURL() + MongoReader.getContext());
+		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -87,13 +87,13 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 	@Step
 	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass) {
-		getDriver().get(MongoReader.getBaseURL() +  MongoReader.getContext());
+		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 		headerPage().verifyThatLanguageFromHeaderIsCorrectySelected(MongoReader.getContext());
-		footerPage().verifyThatFooterWebsiteIsCorrect(MongoReader.getContext() +  MongoReader.getContext());
+		footerPage().verifyThatFooterWebsiteIsCorrect(MongoReader.getContext());
 		
 	}
 	
