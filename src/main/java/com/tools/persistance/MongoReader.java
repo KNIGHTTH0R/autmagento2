@@ -65,6 +65,9 @@ public class MongoReader extends MongoConnector {
 			while (cursor.hasNext()) {
 				dbObject = cursor.next();
 				context = MongoUtils.checkField(dbObject, MongoTableKeys.CONTEXT_KEY);
+				if(!context.isEmpty()){
+					break;
+				}
 			}
 		} finally {
 			cursor.close();
@@ -112,11 +115,36 @@ public class MongoReader extends MongoConnector {
 			while (cursor.hasNext()) {
 				dbObject = cursor.next();
 				baseUrl = MongoUtils.checkField(dbObject, MongoTableKeys.BASE_URL_KEY);
+				if(!baseUrl.isEmpty()){
+					break;
+				}
 			}
 		} finally {
 			cursor.close();
 		}
 
+		return baseUrl;
+	}
+	public static String getSoapURL() {
+		
+		DBObject dbObject = null;
+		String baseUrl = "";
+		
+		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STORE_CONFIG_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				dbObject = cursor.next();
+				baseUrl = MongoUtils.checkField(dbObject, MongoTableKeys.SOAP_URL_KEY);
+				if(!baseUrl.isEmpty()){
+					break;
+				}
+			}
+		} finally {
+			cursor.close();
+		}
+		
 		return baseUrl;
 	}
 
