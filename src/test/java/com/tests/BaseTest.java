@@ -25,7 +25,7 @@ import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 
 public class BaseTest {
-	@Managed(uniqueSession = true)
+	@Managed(uniqueSession = false)
 	public WebDriver webdriver;
 
 	@ManagedPages(defaultUrl = "http://staging-aut.pippajean.com/customer/account/login/")
