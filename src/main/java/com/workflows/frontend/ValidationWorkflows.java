@@ -11,7 +11,6 @@ public class ValidationWorkflows {
 	
 	@Steps
 	public CartWorkflows2 cartWorkflows2;
-	public CartWorkflows cartWorkflows;
 	@Steps
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
 	@Steps
