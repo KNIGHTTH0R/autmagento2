@@ -31,6 +31,7 @@ public class MongoWriter extends MongoConnector {
 	}
 
 	public static void saveEnvContext(String env, String context) {
+		MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG, MongoTableKeys.DEFAULT_CONFIG_MODEL);
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.DEFAULT_CONFIG_MODEL);
 
@@ -40,13 +41,14 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void saveToDictionary(String key, String value) {
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.DICTIONARY_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(key, value);
-		
+
 		table.insert(document);
 	}
 
@@ -61,7 +63,7 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
-	
+
 	public static void saveAddressModel(AddressModel dataModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.ADDRESS_MODEL);
