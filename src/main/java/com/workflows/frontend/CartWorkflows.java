@@ -33,9 +33,9 @@ public class CartWorkflows {
 	private static AddressModel shippingAddress = new AddressModel();
 	private static String shippingCountryName;
 
-	public void setBillingAddressModels(String billingCountryName, AddressModel billingAddress) {
-		CartWorkflows.billingAddress = billingAddress;
-		CartWorkflows.billingCountryName = billingCountryName;
+	public void setBillingAddressModels(String billingCountryNameValue, AddressModel billingAddressValue) {
+		billingAddress = billingAddressValue;
+		billingCountryName = billingCountryNameValue;
 	}
 
 	public void validateBillingAddress(String message) {
@@ -43,9 +43,9 @@ public class CartWorkflows {
 
 	}
 
-	public void setShippingAddressModels(String shippingCountryName, AddressModel shippingAddress) {
-		CartWorkflows.shippingAddress = shippingAddress;
-		CartWorkflows.shippingCountryName = shippingCountryName;
+	public void setShippingAddressModels(String shippingCountryNameValue, AddressModel shippingAddressValue) {
+		shippingAddress = shippingAddressValue;
+		shippingCountryName = shippingCountryNameValue;
 	}
 
 	public void validateShippingAddress(String message) {
@@ -58,9 +58,9 @@ public class CartWorkflows {
 		CustomVerification.verifyTrue("Failure: Countries dont match !", address.contains(countryName));
 	}
 
-	public void setValidateProductsModels(List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {
-		CartWorkflows.productsList = productsList;
-		CartWorkflows.cartProducts = cartProducts;
+	public void setValidateProductsModels(List<ProductBasicModel> productsListValue, List<CartProductModel> cartProductsValue) {
+		productsList = productsListValue;
+		cartProducts = cartProductsValue;
 	}
 
 	@Step
@@ -93,9 +93,9 @@ public class CartWorkflows {
 
 	}
 
-	public void setRecalculatedCartProductsModels(List<CartProductModel> cartProductsModelGrabbedList, List<CartProductModel> cartProductsModelCalculatedList) {
-		CartWorkflows.cartProductsModelGrabbedList = cartProductsModelGrabbedList;
-		CartWorkflows.cartProductsModelCalculatedList = cartProductsModelCalculatedList;
+	public void setRecalculatedCartProductsModels(List<CartProductModel> cartProductsModelGrabbedListVal, List<CartProductModel> cartProductsModelCalculatedListVal) {
+		cartProductsModelGrabbedList = cartProductsModelGrabbedListVal;
+		cartProductsModelCalculatedList = cartProductsModelCalculatedListVal;
 	}
 
 	@Step

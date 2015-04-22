@@ -15,8 +15,8 @@ public class HostCartValidationWorkflows {
 	public HostCartWorkflows hostCartWorkflows;
 	@Steps
 	public HostShippingAndConfirmationWorkflows hostShippingAndConfirmationWorkflows;
-	@Steps
-	public AddressWorkflows addressWorkflows;
+//	@Steps
+//	public AddressWorkflows addressWorkflows;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	
@@ -57,11 +57,11 @@ public class HostCartValidationWorkflows {
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals, HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 		
-		addressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 		
-		addressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 	@StepGroup
 	@Screenshots(onlyOnFailures=true)
@@ -87,11 +87,11 @@ public class HostCartValidationWorkflows {
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals, HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 		
-		addressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 		
-		addressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 }

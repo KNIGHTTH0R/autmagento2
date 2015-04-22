@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
@@ -39,7 +40,6 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
-import com.workflows.frontend.CartWorkflows;
 import com.workflows.frontend.ValidationWorkflows;
 
 @WithTag(name = "US3", type = "frontend")
@@ -64,8 +64,6 @@ public class US3001Test extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public CartWorkflows cartWorkflows;
-	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
 	public CustomVerification customVerifications;
@@ -88,31 +86,47 @@ public class US3001Test extends BaseTest {
 	private static String cardYear;
 	private static String cardCVC;
 	
-	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct1;
+	private ProductDetailedModel genProduct2;
+	private ProductDetailedModel genProduct3;
 
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
+		genProduct1 = CreateProduct.createProductModel();	
+		genProduct1.setIp("84");
+		genProduct1.setPrice("49.90");
+		CreateProduct.createApiProduct(genProduct1);
+		
+		genProduct2 = CreateProduct.createProductModel();		
+		genProduct2.setIp("25");
+		genProduct2.setPrice("89.00");
+		CreateProduct.createApiProduct(genProduct2);
+		
+		genProduct3 = CreateProduct.createMarketingProductModel();
+		genProduct3.setIp("0");
+		genProduct3.setPrice("229.00");
+		CreateProduct.createApiProduct(genProduct3);
+		
+//		genProduct1.setName("CORALIE SET (ROSÉ)");
+//		genProduct1.setSku("K024RO");
+//		genProduct1.setIp("84");
+//		genProduct1.setPrice("99.00");
+//		genProduct2.setName("DAMARIS RING");
+//		genProduct2.setSku("R025WT");
+//		genProduct2.setIp("25");
+//		genProduct2.setPrice("29.90");
+//		genProduct3.setName("STYLE BOOK HERBST / WINTER 2014 (270 STK)");
+//		genProduct3.setSku("M101");
+//		genProduct3.setIp("0");
+//		genProduct3.setPrice("229.00");
+
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 		
-		genProduct1.setName("CORALIE SET (ROSÉ)");
-		genProduct1.setSku("K024RO");
-		genProduct1.setIp("84");
-		genProduct1.setPrice("99.00");
-		genProduct2.setName("DAMARIS RING");
-		genProduct2.setSku("R025WT");
-		genProduct2.setIp("25");
-		genProduct2.setPrice("29.90");
-		genProduct3.setName("STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-		genProduct3.setSku("M101");
-		genProduct3.setIp("0");
-		genProduct3.setPrice("229.00");
-
 		try {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
@@ -160,12 +174,18 @@ public class US3001Test extends BaseTest {
 		frontEndSteps.wipeCart();
 		BasicProductModel productData;		
 		
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "2", "17",ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "2", "0",ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "16",ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0",ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
+//		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "2", "17",ConfigConstants.DISCOUNT_25);
+//		CartCalculator.productsList25.add(productData);
+//		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "16",ConfigConstants.DISCOUNT_25);
+//		CartCalculator.productsList25.add(productData);
+//		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0",ConfigConstants.DISCOUNT_0);
+//		CartCalculator.productsListMarketing.add(productData);
 		CartCalculator.calculateJMDiscounts(jewelryDisount, marketingDisount, taxClass, shippingValue);	
 
 		headerSteps.openCartPreview();
@@ -215,7 +235,6 @@ public class US3001Test extends BaseTest {
 		validationWorkflows.performCartValidations119Vat();
 		
 		customVerifications.printErrors();
-
 	}
 
 	@After

@@ -19,8 +19,6 @@ public class RegularCartValidationWorkflows {
 	@Steps
 	public RegularUserShippingAndConfirmationWorkflows regularUserShippingAndConfirmationWorkflows;
 	@Steps
-	public AddressWorkflows addressWorkflows;
-	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
 
@@ -67,11 +65,11 @@ public class RegularCartValidationWorkflows {
 		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(RegularUserDataGrabber.regularUserConfirmationTotals, RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
@@ -101,11 +99,11 @@ public class RegularCartValidationWorkflows {
 		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(RegularUserDataGrabber.regularUserConfirmationTotals, RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
@@ -134,11 +132,11 @@ public class RegularCartValidationWorkflows {
 		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(RegularUserDataGrabber.regularUserConfirmationTotals, RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 }

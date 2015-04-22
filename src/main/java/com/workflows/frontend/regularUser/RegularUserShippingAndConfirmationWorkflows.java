@@ -22,9 +22,9 @@ public class RegularUserShippingAndConfirmationWorkflows {
 	private static List<RegularBasicProductModel> basicProductsList = new ArrayList<RegularBasicProductModel>();
 	private static List<RegularUserCartProductModel> cartProductsList = new ArrayList<RegularUserCartProductModel>();
 
-	public void setValidateProductsModels(List<RegularBasicProductModel> basicProductsList, List<RegularUserCartProductModel> cartProductsList) {
-		RegularUserShippingAndConfirmationWorkflows.basicProductsList = basicProductsList;
-		RegularUserShippingAndConfirmationWorkflows.cartProductsList = cartProductsList;
+	public void setValidateProductsModels(List<RegularBasicProductModel> basicProductsListValue, List<RegularUserCartProductModel> cartProductsListValue) {
+		basicProductsList = basicProductsListValue;
+		cartProductsList = cartProductsListValue;
 	}
 
 	@Step

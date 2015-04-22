@@ -8,6 +8,7 @@ import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
+import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
@@ -62,12 +63,12 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	public void redirectToStylistsCustomerOrderReport() {
+		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(MongoReader.getBaseURL()  +  UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
 	public void redirectToCartPage() {
 		getDriver().get(MongoReader.getBaseURL()  + UrlConstants.CART_PAGE_URL);
-		// getDriver().get(UrlConstants.CART_PAGE_URL);
 	}
 
 	@StepGroup
