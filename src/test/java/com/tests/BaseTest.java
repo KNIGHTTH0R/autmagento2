@@ -78,8 +78,7 @@ public class BaseTest {
 
 		System.out.println("Base URL: " + baseUrl);
 		// MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
-		MongoWriter.saveStoreUrl(storeIDs, baseUrl);
-		MongoWriter.saveSoapUrl(soapUrl);
+		MongoWriter.saveStoreUrl(storeIDs, baseUrl,soapUrl);
 
 		EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
 		emailDefaults.setHost(EmailConstants.RECEIVING_HOST);
