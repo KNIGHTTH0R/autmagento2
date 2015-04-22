@@ -149,8 +149,6 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 	@Test
 	public void us8002CustomerBuyWithVoucherTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		headerSteps.selectLanguage(MongoReader.getContext().toUpperCase());
-		footerSteps.verifyThatFooterWebsiteIsCorrect(MongoReader.getContext());
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
 

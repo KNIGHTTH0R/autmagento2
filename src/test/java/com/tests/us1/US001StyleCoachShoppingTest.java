@@ -21,7 +21,9 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.ProfileSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -40,6 +42,7 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -60,6 +63,10 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public HeaderSteps headerSteps;
 	@Steps
 	public CartSteps cartSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
@@ -138,6 +145,11 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Test
 	public void us001StyleCoachShoppingTest() {
 		frontEndSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
 
 		ProductBasicModel productData = addProductsWorkflow.setProductToCart("M081", "BANNER MIT LOGO", "1", "Blue");

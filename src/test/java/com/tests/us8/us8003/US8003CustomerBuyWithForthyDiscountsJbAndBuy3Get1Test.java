@@ -149,8 +149,6 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 	@Test
 	public void us8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test() {		
 		customerRegistrationSteps.performLogin(username, password);
-		headerSteps.selectLanguage(MongoReader.getContext().toUpperCase());
-		footerSteps.verifyThatFooterWebsiteIsCorrect(MongoReader.getContext());
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
 

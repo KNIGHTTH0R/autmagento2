@@ -21,7 +21,9 @@ import org.junit.runner.RunWith;
 import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.ProfileSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -43,6 +45,7 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -62,6 +65,10 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public FooterSteps footerSteps;
+	@Steps
 	public CartSteps cartSteps;
 	@Steps
 	public CheckoutValidationSteps validationSteps;
@@ -75,7 +82,7 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	public ProfileSteps profileSteps;
 	@Steps
 	public CartWorkflows cartWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	private ProductBasicModel productBasicModel = new ProductBasicModel();
@@ -105,11 +112,11 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	private static String cardMonth;
 	private static String cardYear;
 	private static String cardCVC;
-	
+
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		Properties prop = new Properties();
@@ -118,11 +125,11 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("129.00");
 		CreateProduct.createApiProduct(genProduct1);
-		
+
 		genProduct2 = CreateProduct.createProductModel();
 		genProduct2.setPrice("79.00");
 		CreateProduct.createApiProduct(genProduct2);
-		
+
 		genProduct3 = CreateProduct.createProductModel();
 		genProduct3.setPrice("84.00");
 		CreateProduct.createApiProduct(genProduct3);
@@ -169,6 +176,11 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	@Test
 	public void us002CartSegmentationLogicTest() {
 		frontEndSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
 		ProductBasicModel productData;
 

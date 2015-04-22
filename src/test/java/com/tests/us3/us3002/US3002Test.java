@@ -116,6 +116,9 @@ public class US3002Test extends BaseTest {
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
+			if (!MongoReader.getContext().contentEquals("de")) {
+				shippingValue = "7.56";
+			}
 			taxClass = prop.getProperty("taxClass");
 			
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
@@ -181,6 +184,10 @@ public class US3002Test extends BaseTest {
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
 		cartSteps.grabTotals();
 		cartSteps.clickGoToShipping();
+		
+		if (!MongoReader.getContext().contentEquals("de")) {
+			CartCalculator.calculateShippingWith19PercentRemoved(shippingValue);
+		}
 
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(false);
@@ -207,7 +214,11 @@ public class US3002Test extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		
 		validationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		validationWorkflows.performCartValidations();
+		if (!MongoReader.getContext().contentEquals("de")) {
+			validationWorkflows.performCartValidations119Vat();
+		} else {
+			validationWorkflows.performCartValidations();
+		}
 		
 		customVerifications.printErrors();
 	}

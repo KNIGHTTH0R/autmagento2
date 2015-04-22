@@ -64,13 +64,13 @@ public class US3003Test extends BaseTest {
 	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public ValidationWorkflows validationWorkflows;
-	
+
 	private String username, password;
 	private static String billingAddress;
 	private static String jewelryDiscount;
@@ -78,32 +78,31 @@ public class US3003Test extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	
+
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-	
-	
+
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
-		
-		genProduct1 = CreateProduct.createProductModel();		
+
+		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("49.90");
 		CreateProduct.createApiProduct(genProduct1);
-		
-		genProduct2 = CreateProduct.createProductModel();		
+
+		genProduct2 = CreateProduct.createProductModel();
 		genProduct2.setPrice("89.00");
 		CreateProduct.createApiProduct(genProduct2);
-		
+
 		genProduct3 = CreateProduct.createMarketingProductModel();
 		genProduct3.setPrice("229.00");
 		CreateProduct.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
-		
+
 		try {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3003.properties");
@@ -114,8 +113,11 @@ public class US3003Test extends BaseTest {
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
+			if (!MongoReader.getContext().contentEquals("de")) {
+				shippingValue = "7.56";
+			}
 			taxClass = prop.getProperty("taxClass");
-			
+
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
 			creditCardData.setCardName(prop.getProperty("cardName"));
 			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
@@ -147,14 +149,14 @@ public class US3003Test extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.clickonGeneralView();
 		customerRegistrationSteps.wipeCart();
-		
-		BasicProductModel productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_50);
+
+		BasicProductModel productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_50);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
 		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 
@@ -169,15 +171,19 @@ public class US3003Test extends BaseTest {
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
-		
+
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
-		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
+		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
 		cartSteps.grabTotals();
 		cartSteps.clickGoToShipping();
 
+		if (!MongoReader.getContext().contentEquals("de")) {
+			CartCalculator.calculateShippingWith19PercentRemoved(shippingValue);
+		}
+
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);	
+		shippingSteps.setSameAsBilling(true);
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.clickGoToPaymentMethod();
@@ -197,13 +203,16 @@ public class US3003Test extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		
+
 		System.out.println("CartCalculator.productsList25: " + CartCalculator.productsList25);
 		System.out.println("DataGrabber.cartProductsWith25Discount: " + DataGrabber.cartProductsWith25Discount);
-		
+
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		validationWorkflows.performCartValidations();
-		
+		if (!MongoReader.getContext().contentEquals("de")) {
+			validationWorkflows.performCartValidations119Vat();
+		} else {
+			validationWorkflows.performCartValidations();
+		}
 		customVerifications.printErrors();
 	}
 
