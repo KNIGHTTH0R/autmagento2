@@ -21,6 +21,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
@@ -47,11 +48,13 @@ import com.workflows.frontend.ValidationWorkflows;
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US3004Test extends BaseTest {
-	
+
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public HomeSteps homeSteps;
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
@@ -66,9 +69,9 @@ public class US3004Test extends BaseTest {
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ValidationWorkflows validationWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private String username, password;
 	private static String billingAddress;
 	private static String jewelryDiscount;
@@ -76,24 +79,24 @@ public class US3004Test extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	
+
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
-		
-		genProduct1 = CreateProduct.createProductModel();		
+
+		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("49.90");
 		CreateProduct.createApiProduct(genProduct1);
-		
-		genProduct2 = CreateProduct.createProductModel();		
+
+		genProduct2 = CreateProduct.createProductModel();
 		genProduct2.setPrice("89.00");
 		CreateProduct.createApiProduct(genProduct2);
-		
+
 		genProduct3 = CreateProduct.createMarketingProductModel();
 		genProduct3.setPrice("229.00");
 		CreateProduct.createApiProduct(genProduct3);
@@ -112,7 +115,7 @@ public class US3004Test extends BaseTest {
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
-			
+
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
 			creditCardData.setCardName(prop.getProperty("cardName"));
 			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
@@ -138,20 +141,21 @@ public class US3004Test extends BaseTest {
 	@Test
 	public void us3004CartSegmentationWithVatAndSmbBillingShippingATTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		if(!headerSteps.succesfullLogin()){
+		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
-			headerSteps.selectLanguage(MongoReader.getContext());
 		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.clickonGeneralView();
 		customerRegistrationSteps.wipeCart();
 		BasicProductModel productData;
-		
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_50);
+
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_50);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
 		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 
@@ -166,16 +170,16 @@ public class US3004Test extends BaseTest {
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
-		
+
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
-		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();	
-		
+		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
+
 		cartSteps.grabTotals();
 		cartSteps.clickGoToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);	
+		shippingSteps.setSameAsBilling(true);
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.clickGoToPaymentMethod();
@@ -195,10 +199,10 @@ public class US3004Test extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		
+
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		validationWorkflows.performCartValidations();
-		
+
 		customVerifications.printErrors();
 	}
 

@@ -17,7 +17,7 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(id = "search")
 	private WebElementFacade searchInput;
-	
+
 	@FindBy(css = "div.quick-access.clearfix p")
 	private WebElementFacade succesLoginContainer;
 
@@ -64,18 +64,17 @@ public class HeaderPage extends AbstractPage {
 
 	public void selectLanguage(String language) {
 		element(websiteContainer).waitUntilVisible();
-		List<WebElement> languagesList = getDriver().findElements(By.cssSelector("ul#select-website > li"));
+		List<WebElement> languagesList = websiteContainer.findElements(By.cssSelector("ul#select-website > li a"));		
 		for (WebElement lang : languagesList) {
-			if (lang.getText().contentEquals(language)) {
-				try {
-					lang.findElement(By.cssSelector("a")).click();
-					break;
-				} catch (Exception e) {
-					lang.click();
-					break;
-				}
+			if (lang.getText().contentEquals(language.toUpperCase())) {
+				System.out.println("match");
+				System.out.println(lang.getText());
+				lang.click();
+				waitABit(2000);
+				break;
 			}
 		}
+	
 	}
 
 	public void verifyThatLanguageFromHeaderIsCorrectySelected(String website) {
@@ -163,8 +162,8 @@ public class HeaderPage extends AbstractPage {
 	public void navigateToPartyPage(String url) {
 		getDriver().get(url);
 	}
-	
-	public boolean succesfullLogin(){
+
+	public boolean succesfullLogin() {
 		return succesLoginContainer.getText().contains("¡BIENVENIDO,") || succesLoginContainer.getText().contains("HI,");
 	}
 
