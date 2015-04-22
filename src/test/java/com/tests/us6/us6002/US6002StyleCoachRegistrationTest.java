@@ -90,7 +90,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 		headerSteps.navigateToRegisterFormAndLogout();
 		stylistRegistrationSteps.clickLoginLinkFromMessage();
 		customerRegistrationSteps.performLogin(stylistData.getEmailName(), stylistData.getPassword());
-		String formCreationDate = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), stylistAddressModel, birthDate);
+		String formCreationDate = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), birthDate);
 		formDate.setDate(formCreationDate);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	

@@ -71,7 +71,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public String fillStylistRegistrationPredefinedInfoForm(String name, AddressModel addressData, String birthDate) {
+	public String fillStylistRegistrationPredefinedInfoForm(String name, String birthDate) {
 		selectBirthDate(birthDate);
 		checkIAgree();
 		submitStep();
@@ -83,6 +83,25 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitPaymentMethod();
 		finishPayment();
 
+		String date = FormatterUtils.getAndFormatCurrentDate();
+		return date;
+	}
+	@StepGroup
+	public String fillStylistRegistrationPredefinedInfoFormWithNotPreferedCountryFirst(String name, AddressModel addressData, String birthDate) {
+		validateInfoBoxMessage();
+		closeInfoBox();
+		addressData.setCountryName(ContextConstants.COUNTRY_NAME);
+		selectBirthDate(birthDate);
+		checkIAgree();
+		submitStep();
+		inputStylistRef(name);
+		submitStep();
+		selectStarterKit();
+		submitStep();
+		clickOnNachahmePaymentMethod();
+		submitPaymentMethod();
+		finishPayment();
+		
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}

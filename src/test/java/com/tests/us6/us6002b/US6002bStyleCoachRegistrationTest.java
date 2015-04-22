@@ -53,7 +53,7 @@ public class US6002bStyleCoachRegistrationTest extends BaseTest{
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
 	public static DateModel formDate = new DateModel();
-	public AddressModel stylistAddressModel;
+	
 	public StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	
 	public CustomerFormModel stylistData = new CustomerFormModel("");
@@ -62,7 +62,7 @@ public class US6002bStyleCoachRegistrationTest extends BaseTest{
 	@Before
 	public void setUp() throws Exception {
 		// Generate data for this test run
-		stylistAddressModel = new AddressModel();
+		
 		birthDate = "Feb,1970,12";
 		expectedBeforeLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.NOT_CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
 		
@@ -90,7 +90,7 @@ public class US6002bStyleCoachRegistrationTest extends BaseTest{
 		headerSteps.navigateToRegisterFormAndLogout();
 		stylistRegistrationSteps.clickLoginLinkFromMessage();
 		customerRegistrationSteps.performLogin(stylistData.getEmailName(), stylistData.getPassword());
-		String formCreationDate = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), stylistAddressModel, birthDate);
+		String formCreationDate = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), birthDate);
 		formDate.setDate(formCreationDate);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	
