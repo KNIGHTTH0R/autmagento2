@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -71,17 +72,22 @@ public class US001UserProfileOrderIdTest extends BaseTest{
 				}
 			}
 		}
+
+
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 		orderModel = MongoReader.grabOrderModels("US001StyleCoachShoppingTest" + SoapKeys.GRAB).get(0);
+		
 	}
 	
-	
 	@Test
-	public void us001UserProfileOrderId() {
+	public void us001UserProfileOrderIdTest() {
+		
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
-			
+		
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
-		}	
+		}		
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
@@ -93,4 +99,5 @@ public class US001UserProfileOrderIdTest extends BaseTest{
 		
 		customVerifications.printErrors();
 	}
+	
 }

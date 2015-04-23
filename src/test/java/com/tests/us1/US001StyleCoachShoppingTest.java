@@ -39,6 +39,7 @@ import com.tools.datahandlers.DataGrabber;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
@@ -203,13 +204,18 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		customVerifications.printErrors();
 
 	}
-
+	
+	
 	@After
 	public void saveData() {
-//		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-//		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName() + SoapKeys.GRAB);
-//		for (ProductBasicModel product : productsList) {
-//			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
-//		}
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		for (BasicProductModel product : CartCalculator.allProductsListRecalculated) {
+			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
+		}
 	}
+
 }
