@@ -32,4 +32,16 @@ public class HomeSteps extends AbstractSteps {
 
 	}
 
+	@Step
+	public void clickonGeneralView() {
+		homePage().clickonGeneralView();
+	}
+	
+	@Step
+	public void goToNewItems(){
+		homePage().goToNewItems();
+	}
+	
+	
+
 }

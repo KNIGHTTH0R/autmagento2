@@ -19,10 +19,9 @@ import org.junit.runner.RunWith;
 import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProductSteps;
-import com.steps.frontend.SearchSteps;
-import com.steps.frontend.checkout.CheckoutValidationSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
@@ -30,7 +29,6 @@ import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
-import com.tools.calculation.CartCalculation;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -38,13 +36,11 @@ import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
-import com.workflows.frontend.CartWorkflows;
-import com.workflows.frontend.CartWorkflows2;
-import com.workflows.frontend.ShippingAndConfirmationWorkflows;
 import com.workflows.frontend.ValidationWorkflows;
 
 @WithTag(name = "US4", type = "frontend")
@@ -52,38 +48,29 @@ import com.workflows.frontend.ValidationWorkflows;
 @RunWith(ThucydidesRunner.class)
 public class US4002Test extends BaseTest {
 
+
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
-	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
-	@Steps
-	public CartWorkflows2 cartWorkflows2;
+	public ValidationWorkflows validationWorkflows;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public SearchSteps searchSteps;
+	public HomeSteps homeSteps;
 	@Steps
-	public ProductSteps productSteps;
+	public FooterSteps footerSteps;
 	@Steps
 	public CartSteps cartSteps;
-	@Steps
-	public CartCalculation calculationSteps;
-	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public CartWorkflows cartWorkflows;
-	@Steps
 	public PaymentSteps paymentSteps;
-	@Steps
+	@Steps 
 	public CustomVerification customVerifications;
-	@Steps
-	public ValidationWorkflows validationWorkflows;
 
 	private String username, password;
 	private String billingAddress;
@@ -157,6 +144,11 @@ public class US4002Test extends BaseTest {
 	@Test
 	public void us4002ShopForMyselfWithBuy3GetOneTest() {
 		frontEndSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
 		BasicProductModel productData;
 

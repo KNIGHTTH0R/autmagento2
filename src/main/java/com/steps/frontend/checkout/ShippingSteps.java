@@ -41,7 +41,8 @@ public class ShippingSteps extends AbstractSteps {
 
 	@Step
 	public void selectAddress(String address) {
-		billingFormPage().selectAdressDropdown(address);
+		billingFormPage().verifyThatYouCannotBillOnRestrictedCountries();
+		billingFormPage().selectAdressDropdown(address);		
 	}
 
 	@Step
@@ -56,6 +57,7 @@ public class ShippingSteps extends AbstractSteps {
 
 	@Step
 	public void selectShippingAddress(String value) {
+		shippingFormPage().verifyThatYouCannotShipOnRestrictedCountries();
 		shippingFormPage().selectShippingAddress(value);
 	}
 

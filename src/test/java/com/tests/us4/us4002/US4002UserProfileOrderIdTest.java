@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
@@ -28,24 +29,24 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
 @WithTag(name = "US4", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US4002UserProfileOrderIdTest extends BaseTest{
-	
+public class US4002UserProfileOrderIdTest extends BaseTest {
+
 	@Steps
 	public ProfileSteps profileSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
+	public FooterSteps footerSteps;
+	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private static OrderModel orderModel = new OrderModel();
 	private String username, password;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -56,7 +57,7 @@ public class US4002UserProfileOrderIdTest extends BaseTest{
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us4" + File.separator + "us4002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
-			password = prop.getProperty("password");			
+			password = prop.getProperty("password");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -70,18 +71,20 @@ public class US4002UserProfileOrderIdTest extends BaseTest{
 			}
 		}
 
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 		orderModel = MongoReader.grabOrderModels("US4002Test" + SoapKeys.GRAB).get(0);
-		
+
 	}
-	
+
 	@Test
 	public void us4002UserProfileOrderIdTest() {
-		
+
 		frontEndSteps.performLogin(username, password);
-		
+		if (!headerSteps.succesfullLogin()) {
+
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
@@ -90,7 +93,7 @@ public class US4002UserProfileOrderIdTest extends BaseTest{
 		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
 		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
 		orderModel = orderHistory.get(0);
-		
+
 		customVerifications.printErrors();
 	}
 }

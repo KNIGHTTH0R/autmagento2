@@ -18,7 +18,9 @@ import org.junit.runner.RunWith;
 import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -48,6 +50,10 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
@@ -121,6 +127,10 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 	@Test
 	public void us10006OrderForCustomerAsPartyHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.verifyActivePartyAvailableActions();
 		partyDetailsSteps.orderForCustomerFromParty(customerName);

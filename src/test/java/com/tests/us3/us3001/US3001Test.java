@@ -16,10 +16,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -36,6 +37,7 @@ import com.tools.datahandlers.DataGrabber;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -55,6 +57,10 @@ public class US3001Test extends BaseTest {
 	public ValidationWorkflows validationWorkflows;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
@@ -86,42 +92,42 @@ public class US3001Test extends BaseTest {
 	private static String cardYear;
 	private static String cardCVC;
 	
-	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
+	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1 = CreateProduct.createProductModel();	
-		genProduct1.setIp("84");
-		genProduct1.setPrice("49.90");
-		CreateProduct.createApiProduct(genProduct1);
-		
-		genProduct2 = CreateProduct.createProductModel();		
-		genProduct2.setIp("25");
-		genProduct2.setPrice("89.00");
-		CreateProduct.createApiProduct(genProduct2);
-		
-		genProduct3 = CreateProduct.createMarketingProductModel();
-		genProduct3.setIp("0");
-		genProduct3.setPrice("229.00");
-		CreateProduct.createApiProduct(genProduct3);
-		
-//		genProduct1.setName("CORALIE SET (ROSÉ)");
-//		genProduct1.setSku("K024RO");
+//		genProduct1 = CreateProduct.createProductModel();	
 //		genProduct1.setIp("84");
-//		genProduct1.setPrice("99.00");
-//		genProduct2.setName("DAMARIS RING");
-//		genProduct2.setSku("R025WT");
+//		genProduct1.setPrice("49.90");
+//		CreateProduct.createApiProduct(genProduct1);
+//		
+//		genProduct2 = CreateProduct.createProductModel();		
 //		genProduct2.setIp("25");
-//		genProduct2.setPrice("29.90");
-//		genProduct3.setName("STYLE BOOK HERBST / WINTER 2014 (270 STK)");
-//		genProduct3.setSku("M101");
+//		genProduct2.setPrice("89.00");
+//		CreateProduct.createApiProduct(genProduct2);
+//		
+//		genProduct3 = CreateProduct.createMarketingProductModel();
 //		genProduct3.setIp("0");
 //		genProduct3.setPrice("229.00");
+//		CreateProduct.createApiProduct(genProduct3);
+		
+		genProduct1.setName("VDOTGJDSJ");
+		genProduct1.setSku("KKZWJRSUI");
+		genProduct1.setIp("84");
+		genProduct1.setPrice("49.90");
+		genProduct2.setName("RNTDRTVZE");
+		genProduct2.setSku("KODQWWIEU");
+		genProduct2.setIp("25");
+		genProduct2.setPrice("89.00");
+		genProduct3.setName("ZPFXMHPCG");
+		genProduct3.setSku("ZIIIKSGTC");
+		genProduct3.setIp("0");
+		genProduct3.setPrice("229.00");
 
 		
 		Properties prop = new Properties();
@@ -171,6 +177,11 @@ public class US3001Test extends BaseTest {
 	@Test
 	public void us3001CartSegmentationWithVatTest() {
 		frontEndSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
 		BasicProductModel productData;		
 		

@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
@@ -30,6 +31,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -44,6 +46,9 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 	public CreateNewContactSteps createNewContactSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
@@ -64,8 +69,7 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 		
 		customerData = new CustomerFormModel();
 		inviteData = new CustomerFormModel();
-		addressData = new AddressModel();
-		addressData.setCountryName("España");
+		addressData = new AddressModel();		
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -96,6 +100,10 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 	@Test
 	public void us10003CreatePartyWithNewContactHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyWithNewContactPage();
 		createNewContactSteps.fillCreateNewContact(customerData, addressData);
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForNewCustomerHost());

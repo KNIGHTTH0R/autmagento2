@@ -37,11 +37,17 @@ public class PartyCreationSteps extends AbstractSteps {
 	public void typeLocation(String location) {
 		partyCreationPage().typeLocation(location);
 	}
+	
+	@Step
+	public void verifyThatPartyCountryListDoesNotContainCountry(){
+		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
+	}
 
 	@Step
 	public String fillPartyDetailsForStylistHost() {
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
+		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
 		return partyCreationPage().submitParty();
 	}
 
@@ -51,6 +57,7 @@ public class PartyCreationSteps extends AbstractSteps {
 		partyCreationPage().typeCustomerName(name);
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
+		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
 		return partyCreationPage().submitParty();
 	}
 
@@ -58,6 +65,7 @@ public class PartyCreationSteps extends AbstractSteps {
 	public String fillPartyDetailsForNewCustomerHost() {
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
+		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
 		waitABit(2000);
 		return partyCreationPage().submitParty();
 

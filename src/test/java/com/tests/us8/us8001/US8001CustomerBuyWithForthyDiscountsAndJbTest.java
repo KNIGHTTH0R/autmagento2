@@ -21,6 +21,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -37,7 +38,6 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -65,6 +65,8 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
+	@Steps
+	public HomeSteps homeSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -151,8 +153,11 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	@Test
 	public void us8001CustomerBuyWithForthyDiscountsAndJbTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		headerSteps.selectLanguage(MongoReader.getContext().toUpperCase());
-//		footerSteps.verifyThatFooterWebsiteIsCorrect(MongoReader.getContext());
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.goToNewItems();
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
 

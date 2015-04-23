@@ -61,6 +61,7 @@ public class RegularCartTotalsCalculation {
 		BigDecimal jewerlyDiscount = BigDecimal.ZERO;
 		BigDecimal forthyDiscount = BigDecimal.ZERO;
 		BigDecimal buy3Get1 = RegularCartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsListForBuy3Get1);
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% " + buy3Get1);
 		BigDecimal voucherPrice = BigDecimal.valueOf(Double.parseDouble(voucherValue));
 
 		for (RegularBasicProductModel product : productsList) {

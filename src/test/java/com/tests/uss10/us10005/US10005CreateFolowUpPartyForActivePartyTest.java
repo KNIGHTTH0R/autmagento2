@@ -17,6 +17,8 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
+import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
@@ -31,7 +33,10 @@ import com.tools.requirements.Application;
  @Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10005CreateFolowUpPartyForActivePartyTest extends BaseTest {
-
+	@Steps
+	public HeaderSteps headerSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -80,6 +85,10 @@ public class US10005CreateFolowUpPartyForActivePartyTest extends BaseTest {
 	public void us10005CreateFolowUpPartyForActivePartyTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.verifyActivePartyAvailableActions();
 		partyDetailsSteps.createFolowUpParty();

@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
@@ -39,6 +40,8 @@ public class US3006UserProfileOrderIdTest extends BaseTest{
 	public ProfileSteps profileSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps 
@@ -82,7 +85,10 @@ public class US3006UserProfileOrderIdTest extends BaseTest{
 	public void us3006UserProfileOrderIdTest() {
 		
 		frontEndSteps.performLogin(username, password);
-		
+		if (!headerSteps.succesfullLogin()) {
+			
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 

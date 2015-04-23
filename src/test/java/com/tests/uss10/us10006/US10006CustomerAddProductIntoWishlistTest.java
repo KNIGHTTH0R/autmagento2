@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
@@ -40,6 +41,8 @@ import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 @RunWith(ThucydidesRunner.class)
 public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 
+	@Steps
+	public FooterSteps footerSteps;	
 	@Steps
 	public HeaderSteps headerSteps;	
 	@Steps
@@ -93,6 +96,10 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 	public void us10006CustomerAddProductIntoWishlist() {
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.redirectToWishlist();
 		RegularBasicProductModel productData;
 

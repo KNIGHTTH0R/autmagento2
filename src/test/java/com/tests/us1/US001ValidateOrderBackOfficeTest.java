@@ -127,7 +127,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
 //		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung erfolgreich");
-		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung geplant");
+//		orderWorkflows.validateOrderStatus(orderInfo.getOrderStatus(), "Zahlung geplant");
 		
 		customVerifications.printErrors();
 	}

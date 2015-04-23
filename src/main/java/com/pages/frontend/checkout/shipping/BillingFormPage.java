@@ -2,8 +2,10 @@ package com.pages.frontend.checkout.shipping;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class BillingFormPage extends AbstractPage {
@@ -37,6 +39,11 @@ public class BillingFormPage extends AbstractPage {
 
 	@FindBy(css = "select#billing:telephone")
 	private WebElement telephoneInput;
+	
+	public void verifyThatYouCannotBillOnRestrictedCountries(){
+		Assert.assertTrue("The ddl contains the country name and it should not !!!", !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE) || !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
+		System.out.println(addressDropDown.getText());
+	}
 
 	/**
 	 * Select from dropdown an existing address or the "NEUE ADRESSE' value

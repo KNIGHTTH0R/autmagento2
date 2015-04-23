@@ -89,6 +89,7 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	public void us10006CheckPartyWishlistAndBorrowProductTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
+		
 		customerRegistrationSteps.wipeHostCart();
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 

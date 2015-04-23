@@ -21,6 +21,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -37,13 +38,13 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
+import com.tools.utils.PrintUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
@@ -55,11 +56,15 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
+	public FooterSteps footerSteps;
+	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public HomeSteps homeSteps;
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
@@ -74,8 +79,7 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 	public RegularCartValidationWorkflows regularCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
-	@Steps
-	public FooterSteps footerSteps;
+	
 
 	private String username, password;
 	private String discountClass;
@@ -147,10 +151,13 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 	}
 
 	@Test
-	public void us8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test() {		
+	public void us8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test() {
 		customerRegistrationSteps.performLogin(username, password);
-		headerSteps.selectLanguage(MongoReader.getContext().toUpperCase());
-		footerSteps.verifyThatFooterWebsiteIsCorrect(MongoReader.getContext());
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.goToNewItems();
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
 
@@ -169,27 +176,27 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
-		
+
 		regularUserCartSteps.typeCouponCode(voucherCode);
 		regularUserCartSteps.submitVoucherCode();
 		// TODO move this (maybe)
 		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
 
-
-		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
+		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals();
+		PrintUtils.printRegularUserCartTotalsModel(RegularUserDataGrabber.regularUserGrabbedCartTotals);
 
 		RegularUserCartCalculator.calculateCartBuy3Get1CartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
-		
+
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 
 		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
-	
+
 		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
-	
+
 		shippingSteps.clickGoToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
@@ -200,11 +207,11 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-	
+
 		confirmationSteps.grabRegularProductsList();
-		
+
 		RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-		
+
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
@@ -228,5 +235,3 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 		}
 	}
 }
-
-

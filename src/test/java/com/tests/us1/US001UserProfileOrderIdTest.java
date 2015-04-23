@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
@@ -36,6 +37,8 @@ public class US001UserProfileOrderIdTest extends BaseTest{
 	public HeaderSteps headerSteps;
 	@Steps
 	public ProfileSteps profileSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps 
@@ -75,7 +78,10 @@ public class US001UserProfileOrderIdTest extends BaseTest{
 	@Test
 	public void us001UserProfileOrderId() {
 		frontEndSteps.performLogin(username, password);
-		
+		if (!headerSteps.succesfullLogin()) {
+			
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}	
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
