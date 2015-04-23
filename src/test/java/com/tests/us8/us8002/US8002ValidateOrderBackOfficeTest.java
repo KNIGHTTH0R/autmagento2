@@ -154,7 +154,7 @@ public class US8002ValidateOrderBackOfficeTest extends BaseTest {
 		regularUserOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		regularUserOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
-		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
+//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
 		
 		customVerifications.printErrors();
 	}

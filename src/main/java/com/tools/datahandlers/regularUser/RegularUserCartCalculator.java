@@ -7,7 +7,8 @@ import com.tools.calculation.RegularCartTotalsCalculation;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
+import com.tools.utils.PrintUtils;
 
 public class RegularUserCartCalculator {
 
@@ -26,7 +27,7 @@ public class RegularUserCartCalculator {
 	public static List<RegularBasicProductModel> getProductswithRegularPriceFromList(List<RegularBasicProductModel> productsList) {
 		List<RegularBasicProductModel> newProductsList = new ArrayList<RegularBasicProductModel>();
 		for (RegularBasicProductModel product : productsList) {
-			if (product.getBonusType().contentEquals(ConfigConstants.REGULAR_PRICE)) {
+			if (product.getBonusType().contentEquals(ContextConstants.REGULAR_PRICE)) {
 				newProductsList.add(product);
 			}
 		}
@@ -35,12 +36,14 @@ public class RegularUserCartCalculator {
 
 	public static void calculateCartAndShippingTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass, voucherValue);
+		PrintUtils.printRegularCartCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 	}
 
 	public static void calculateCartBuy3Get1CartAndShippingTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {
 		allProductsListWithRegularPrice = getProductswithRegularPriceFromList(allProductsList);
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsList, allProductsListWithRegularPrice, discountClass, voucherValue);
+		PrintUtils.printRegularCartCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 
 	}

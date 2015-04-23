@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.tests.BaseTest;
@@ -25,6 +26,7 @@ import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -37,6 +39,8 @@ public class US10002CreatePartyWithCustomerHostTest extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
 	
@@ -78,6 +82,10 @@ public class US10002CreatePartyWithCustomerHostTest extends BaseTest {
 	@Test
 	public void us10002CreatePartyWithCustomerHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();;
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));

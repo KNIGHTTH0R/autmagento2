@@ -38,7 +38,6 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -158,7 +157,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		homeSteps.clickonGeneralView();
+		homeSteps.goToNewItems();
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
 

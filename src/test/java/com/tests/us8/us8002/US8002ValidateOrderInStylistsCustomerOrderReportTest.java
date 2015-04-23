@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
@@ -38,6 +39,8 @@ public class US8002ValidateOrderInStylistsCustomerOrderReportTest extends BaseTe
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps 
@@ -81,7 +84,10 @@ public class US8002ValidateOrderInStylistsCustomerOrderReportTest extends BaseTe
 	public void us8002ValidateOrderInStylistsCustomerOrderReportTest() {
 		
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
-		
+		if (!headerSteps.succesfullLogin()) {
+
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
 		headerSteps.redirectToStylistsCustomerOrderReport();
 		List<OrderModel> orderHistory = stylistsCustomerOrdersReportSteps.grabOrderReport();
 

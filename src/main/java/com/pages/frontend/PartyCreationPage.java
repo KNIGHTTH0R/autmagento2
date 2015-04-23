@@ -5,9 +5,11 @@ import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class PartyCreationPage extends AbstractPage {
@@ -47,6 +49,14 @@ public class PartyCreationPage extends AbstractPage {
 	
 	@FindBy(id = "city")
 	private WebElement cityInput;
+	
+	@FindBy(css = "#form-stylist-party-create #country")
+	private WebElement countryDdl;
+	
+	public void verifyThatPartyCountryListDoesNotContainRestrictedCountry(){
+		Assert.assertTrue("The ddl contains the country name and it should not !!!", !countryDdl.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE) || !countryDdl.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
+		System.out.println(countryDdl.getText());
+	}
 
 	public void clickAddContact() {
 		element(addContact).waitUntilVisible();
