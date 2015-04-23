@@ -160,7 +160,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-		CartCalculator.calculateJMDiscounts("0", "0", "119", "0");
+		CartCalculator.calculateJMDiscounts("0", "0", "19", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();

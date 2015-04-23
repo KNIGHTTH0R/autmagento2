@@ -38,8 +38,9 @@ public class RegularUserCartPage extends AbstractPage {
 	@FindBy(css = "div.page-title ul.checkout-types button:last-child")
 	private WebElement kasseButton;
 
-//	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
-	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")    //int     
+	// @FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
+	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")
+	// int
 	private WebElement updateButton;
 
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")
@@ -129,7 +130,8 @@ public class RegularUserCartPage extends AbstractPage {
 			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
 
 			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText()));
-			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim()));
+			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "")
+					.trim()));
 			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			// productNow.setBonusType(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) select option[selected='true']")).getText()));
@@ -203,31 +205,6 @@ public class RegularUserCartPage extends AbstractPage {
 		element(updateButton).waitUntilVisible();
 		updateButton.click();
 	}
-
-	// public void updateProductQuantity(String quantity, String... terms) {
-	// element(cartTable).waitUntilVisible();
-	// List<WebElement> entryList =
-	// getDriver().findElements(By.cssSelector("#shopping-cart-table tbody > tr"));
-	// boolean containsTerms = true;
-	// for (WebElement webElement : entryList) {
-	// containsTerms = true;
-	// for (String term : terms) {
-	// if
-	// (!webElement.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(term))
-	// {
-	// containsTerms = false;
-	// }
-	// }
-	// if (containsTerms) {
-	// WebElement input =
-	// webElement.findElement(By.cssSelector("td:nth-child(3) input"));
-	// element(input).clear();
-	// element(input).sendKeys(quantity);
-	// break;
-	// }
-	// }
-	// Assert.assertTrue("The product was not found", containsTerms);
-	// }
 
 	/**
 	 * Verify Wipe cart if cart contains any data

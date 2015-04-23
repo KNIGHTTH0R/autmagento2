@@ -19,7 +19,9 @@ import org.junit.runner.RunWith;
 import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -37,7 +39,6 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -54,6 +55,10 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
@@ -149,6 +154,11 @@ public class US9001PartyHostBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	@Test
 	public void us9001PartyHostBuyWithForthyDiscountsAndJbTest() {
 		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+//		homeSteps.clickonGeneralView();
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;

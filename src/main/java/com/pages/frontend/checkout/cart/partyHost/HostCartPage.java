@@ -145,7 +145,7 @@ public class HostCartPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setShipping(valueTransformer);
 			}
-			if (key.contains("GENUTZTER SCHMUCK BONUS")) {
+			if (key.contains(ContextConstants.SCHMUCK_BONUS)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.JEWELRY_BONUS, valueTransformer);
 			}

@@ -19,7 +19,9 @@ import org.junit.runner.RunWith;
 import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -38,7 +40,6 @@ import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -55,6 +56,10 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
@@ -77,10 +82,9 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 	public ContactHostShippingHostSteps contactHostShippingHostSteps;
 
 	private String username, password;
-	private String discountClass;	
+	private String discountClass;
 	private String contactBillingAddress;
 	private String shippingValue;
-
 
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
@@ -117,9 +121,9 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 
-			discountClass = prop.getProperty("discountClass");		
-			contactBillingAddress = prop.getProperty("contactBillingAddress");			
-			shippingValue = prop.getProperty("shippingValue");	
+			discountClass = prop.getProperty("discountClass");
+			contactBillingAddress = prop.getProperty("contactBillingAddress");
+			shippingValue = prop.getProperty("shippingValue");
 
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
 			creditCardData.setCardName(prop.getProperty("cardName"));
@@ -141,13 +145,18 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
-		
+
 		partyUrlModel = MongoReader.grabUrlModels("US10002CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 	}
 
 	@Test
 	public void us9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test() {
 		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		// homeSteps.clickonGeneralView();
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;
@@ -158,28 +167,27 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 		HostCartCalculator.allProductsList.add(productData);
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct3, "4", "0");
 		HostCartCalculator.allProductsList.add(productData);
-	
+
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
+
 		hostCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		hostCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 
-		hostCartSteps.grabProductsData();		
+		hostCartSteps.grabProductsData();
 		hostCartSteps.grabTotals();
 
 		HostCartCalculator.calculateCartBuy3Get1CartAndShippingTotals(HostCartCalculator.allProductsList, discountClass, shippingValue);
 
 		hostCartSteps.clickGoToShipping();
 		contactHostShippingHostSteps.checkItemNotReceivedYet();
-
-
-		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();	
+		contactHostShippingHostSteps.verifyThatRestrictedCountriesAreNotAvailable();
+		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 
-		shippingSteps.clickGoToPaymentMethod();		
+		shippingSteps.clickGoToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
@@ -189,11 +197,11 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-	
+
 		confirmationSteps.grabHostProductsList();
-		
+
 		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-		
+
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
@@ -216,5 +224,3 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 		}
 	}
 }
-
-
