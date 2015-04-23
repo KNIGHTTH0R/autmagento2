@@ -19,7 +19,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 
-public class CartWorkflows {
+public class CartWorkflows{
 
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
@@ -30,8 +30,7 @@ public class CartWorkflows {
 	private static List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
 	private static AddressModel billingAddress = new AddressModel();
 	private static String billingCountryName;
-	private static AddressModel shippingAddress = new AddressModel();
-	private static String shippingCountryName;
+
 
 	public void setBillingAddressModels(String billingCountryNameValue, AddressModel billingAddressValue) {
 		billingAddress = billingAddressValue;
@@ -42,6 +41,9 @@ public class CartWorkflows {
 		verifyCountry(billingCountryName, billingAddress.getCountryName());
 
 	}
+	
+	private static AddressModel shippingAddress = new AddressModel();
+	private static String shippingCountryName;
 
 	public void setShippingAddressModels(String shippingCountryNameValue, AddressModel shippingAddressValue) {
 		shippingAddress = shippingAddressValue;

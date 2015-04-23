@@ -21,7 +21,7 @@ public class CreateProduct {
 		createApiProduct(createProductModel());
 	}
 
-	public static ProductDetailedModel createMarketingProductModel() throws Exception {
+	public static ProductDetailedModel createMarketingProductModel() {
 		ProductDetailedModel result = createProductModel();
 		List<String> categoriesIds = new ArrayList<String>();
 		categoriesIds.add("15");
@@ -31,7 +31,7 @@ public class CreateProduct {
 		return result;
 	}
 
-	public static ProductDetailedModel createProductModel() throws Exception {
+	public static ProductDetailedModel createProductModel() {
 		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
 		ProductDetailedModel product = new ProductDetailedModel();
 
