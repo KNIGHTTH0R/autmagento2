@@ -156,7 +156,7 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		// homeSteps.clickonGeneralView();
+//		homeSteps.clickonGeneralView();
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;

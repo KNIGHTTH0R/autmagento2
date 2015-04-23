@@ -47,7 +47,7 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(id = "inviteGuests")
 	private WebElement inviteGuests;
 
-	@FindBy(css = "a[href*='http://staging-aut.pippajean.com/qateam/stylist/party/create/parentId/']")
+	@FindBy(css = "a[href*='stylist/party/create/parentId/']")
 	private WebElement createFolowUpParty;
 
 	@FindBy(css = "input#guests")
