@@ -184,7 +184,6 @@ public class US002CopyCartSegmentationLogicTest extends BaseTest {
 		CartCalculator.productsListMarketing.add(productData);
 		CartCalculator.calculateJMDiscounts("0", "0", "19", "0");
 
-
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		
@@ -195,6 +194,23 @@ public class US002CopyCartSegmentationLogicTest extends BaseTest {
 		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
+		
+		System.out.println("NEBUNIE");
+		System.out.println("------------- 50 calc -----------------------");
+		PrintUtils.printListBasicProductModel(CartCalculator.productsList50);
+		System.out.println("------------- 50 grabbed -----------------------");
+		PrintUtils.printList(DataGrabber.cartProductsWith50Discount);
+		System.out.println("--------------------------------------------");
+		System.out.println("------------- 25 calc -----------------------");
+		PrintUtils.printListBasicProductModel(CartCalculator.productsList25);
+		System.out.println("------------- 25 grabbed -----------------------");
+		PrintUtils.printList(DataGrabber.cartProductsWith25Discount);
+		System.out.println("--------------------------------------------");
+		System.out.println("------------- marketing calc -----------------------");
+		PrintUtils.printListBasicProductModel(CartCalculator.productsListMarketing);
+		System.out.println("------------- marketing grabbed -----------------------");
+		PrintUtils.printList(DataGrabber.cartMarketingMaterialsProducts);
+		System.out.println("--------------------------------------------");		
 	
 		
 		cartSteps.grabTotals();

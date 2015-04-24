@@ -38,7 +38,7 @@ public class CartCalculator {
 		
 		productListForBuy3Get1 = new ArrayList<BasicProductModel>();
 		productList25AndMmWithBuy3Get1Applied = new ArrayList<BasicProductModel>();
-		
+		shippingProductsList = new ArrayList<BasicProductModel>();
 		calculatedProductsList25 = new ArrayList<BasicProductModel>();
 		calculatedProductsList50 = new ArrayList<BasicProductModel>();
 		calculatedProductsListMarketing = new ArrayList<BasicProductModel>();

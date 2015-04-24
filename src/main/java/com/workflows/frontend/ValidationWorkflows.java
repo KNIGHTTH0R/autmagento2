@@ -119,21 +119,23 @@ public class ValidationWorkflows {
 		
 		checkoutValidationSteps.verifySuccessMessage();
 		
-		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);		
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);	
 		System.out.println("-----50-----calc----------");
 		PrintUtils.printListBasicProductModel(CartCalculator.productsList50);
 		System.out.println("-----50-----grabbed----------");
 		PrintUtils.printList(DataGrabber.cartProductsWith50Discount);
 		System.out.println("--------------------");
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
+	
 		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
 		System.out.println("-----25---calc------------");
 		PrintUtils.printListBasicProductModel(CartCalculator.productsList25);
 		System.out.println("-----25----grabbed-----------");
 		PrintUtils.printList(DataGrabber.cartProductsWith25Discount);
 		System.out.println("--------------------");
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
+
 		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketing, DataGrabber.cartMarketingMaterialsProducts);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");		
