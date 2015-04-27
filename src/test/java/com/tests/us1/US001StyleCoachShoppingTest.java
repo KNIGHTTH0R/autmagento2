@@ -150,8 +150,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
-		BasicProductModel productData;
 		
+		BasicProductModel productData;		
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
@@ -174,10 +174,12 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
 		
 		cartSteps.grabTotals();
+		
 		cartSteps.clickGoToShipping();
 
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
+		
 		shippingSteps.clickGoToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();

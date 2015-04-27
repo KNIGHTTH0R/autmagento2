@@ -30,13 +30,14 @@ import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
 
 @WithTag(name = "US2", type = "backend")
@@ -54,11 +55,14 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 	public OrderWorkflows orderWorkflows;
 	@Steps 
 	public CustomVerification customVerifications;
+	@Steps
+	public OrderProductsWorkflows orderProductsWorkflows;
 
 	private String orderId;
 	private String beUser,bePass;
 	public List<CartTotalsModel> cartTotals = new ArrayList<CartTotalsModel>();
-	public List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
+	
+	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
 	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
@@ -90,16 +94,16 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModel = MongoReader.getOrderModel("US002CartSegmentationLogicTest" + SoapKeys.GRAB);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US002CartSegmentationLogicTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabBasicProductModel("US002CartSegmentationLogicTest" + SoapKeys.GRAB);
 		shippingModelList = MongoReader.grabShippingModel("US002CartSegmentationLogicTest" + SoapKeys.CALC);
-		productsList = MongoReader.grabProductBasicModel("US002CartSegmentationLogicTest" + SoapKeys.GRAB);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US002CartSegmentationLogicTest" + SoapKeys.CALC);
 		
-		if (orderModel.size() == 1) {
+		if (orderModelList.size() == 1) {
 
-			orderId = orderModel.get(0).getOrderId();
+			orderId = orderModelList.get(0).getOrderId();
 		} else {
-			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModel.size() == 1);
+			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModelList.size() == 1);
 		}			
 		
 		if (calcDetailsModelList.size() != 1) {
@@ -140,11 +144,11 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		orderTotalsModel = ordersSteps.grabTotals();
 		orderInfoModel = ordersSteps.grabOrderInfo();
 		
-		orderWorkflows.setValidateProductsModels(productsList, orderItemsList);
-		orderWorkflows.validateProducts("PRODUCTS VALIDATION");
-		
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
-		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");		
+		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");
+
+		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
+		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");	
 		
 //		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
 		

@@ -19,6 +19,7 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.Application;
@@ -62,7 +63,6 @@ public class US7003CheckCustomerActivationTest extends BaseTest {
 				}
 			}
 		}
-		expectedStatus = "Bestätigt";
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class US7003CheckCustomerActivationTest extends BaseTest {
 		backEndSteps.searchForEmail(clientName);
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
-		stylistValidationSteps.validateStatus(grabStatus, expectedStatus);
+		stylistValidationSteps.validateStatus(grabStatus, ConfigConstants.CONFIRMED);
 //		backEndSteps.deleteCustomer();
 		
 		customVerifications.printErrors();

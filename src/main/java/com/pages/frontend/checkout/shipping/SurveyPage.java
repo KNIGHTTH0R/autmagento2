@@ -18,7 +18,6 @@ import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 
 public class SurveyPage extends AbstractPage {
 

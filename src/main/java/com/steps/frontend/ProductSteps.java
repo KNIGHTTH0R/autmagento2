@@ -59,6 +59,7 @@ public class ProductSteps extends AbstractSteps {
 		BasicProductModel result = new BasicProductModel();
 		
 		result = productDetailsPage().grabBasicProductData();
+		result.setQuantity(qty);
 		result.setDiscountClass(discountClass);
 		result.setProductsPrice(askingPrice);
 		result.setFinalPrice(finalPrice);

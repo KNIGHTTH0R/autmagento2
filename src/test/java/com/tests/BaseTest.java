@@ -16,7 +16,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
-import com.mongodb.DBCollection;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.env.variables.UrlConstants;

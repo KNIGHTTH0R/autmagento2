@@ -1,7 +1,5 @@
 package com.steps.frontend;
 
-import java.io.File;
-
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;

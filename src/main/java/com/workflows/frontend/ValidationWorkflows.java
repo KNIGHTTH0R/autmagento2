@@ -1,12 +1,12 @@
 package com.workflows.frontend;
 
+import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
-import com.tools.utils.PrintUtils;
 
 public class ValidationWorkflows {
 	
@@ -29,7 +29,7 @@ public class ValidationWorkflows {
 	 * Note need to set billingAddress of this class. call setBillingAddress
 	 */
 	@StepGroup
-//	@Screenshots(onlyOnFailures = true)
+	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations119Vat() {
 
 		checkoutValidationSteps.verifySuccessMessage();
@@ -69,7 +69,7 @@ public class ValidationWorkflows {
 	}
 
 	@StepGroup
-//	@Screenshots(onlyOnFailures = true)
+	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations() {
 
 		checkoutValidationSteps.verifySuccessMessage();
@@ -114,26 +114,16 @@ public class ValidationWorkflows {
 		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 	@StepGroup
-//	@Screenshots(onlyOnFailures = true)
+	@Screenshots(onlyOnFailures = true)
 	public void performSimpleCartValidations() {
 		
 		checkoutValidationSteps.verifySuccessMessage();
 		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);	
-		System.out.println("-----50-----calc----------");
-		PrintUtils.printListBasicProductModel(CartCalculator.productsList50);
-		System.out.println("-----50-----grabbed----------");
-		PrintUtils.printList(DataGrabber.cartProductsWith50Discount);
-		System.out.println("--------------------");
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
 	
 		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
-		System.out.println("-----25---calc------------");
-		PrintUtils.printListBasicProductModel(CartCalculator.productsList25);
-		System.out.println("-----25----grabbed-----------");
-		PrintUtils.printList(DataGrabber.cartProductsWith25Discount);
-		System.out.println("--------------------");
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
 
 		
@@ -147,7 +137,7 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		
 		cartWorkflows2.setVerifyTotalsDiscount(DataGrabber.cartTotals, CartCalculator.calculatedTotalsDiscounts);
-		cartWorkflows2.verifyTotalsDiscount("CART TOTALS");
+		cartWorkflows2.verifyTotalsDiscountNoMarketing("CART TOTALS");
 		
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
@@ -159,7 +149,7 @@ public class ValidationWorkflows {
 	}
 
 	@StepGroup
-//	@Screenshots(onlyOnFailures = true)
+	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBu3Get1Rule() {
 
 		checkoutValidationSteps.verifySuccessMessage();
@@ -193,7 +183,7 @@ public class ValidationWorkflows {
 	}
 
 	@StepGroup
-//	@Screenshots(onlyOnFailures = true)
+	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBuy3Get1RuleJbAndMbApplied() {
 
 		checkoutValidationSteps.verifySuccessMessage();
