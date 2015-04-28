@@ -128,6 +128,10 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
 		// Constants added
 		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
+		//on spanish vebsite the because billing and shipping address can be only Spain we encounter the 0 vat case on every valid vat and no smb SC. 
+		if(!MongoReader.getContext().contentEquals("de")){
+			shopTotalsModel.setTax("0.00");
+		}
 		shopTotalsModel.setTotalPaid("0.00");
 		shopTotalsModel.setTotalRefunded("0.00");
 		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());

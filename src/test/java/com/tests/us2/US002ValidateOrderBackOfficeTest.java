@@ -123,6 +123,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
 		// Constants added
 		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
+	
 		shopTotalsModel.setTotalPaid("0.00");
 		shopTotalsModel.setTotalRefunded("0.00");
 		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());
