@@ -81,6 +81,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	private static String cardMonth;
 	private static String cardYear;
 	private static String cardCVC;
+	private static String taxClass;
 	
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -118,6 +119,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 			cardMonth = prop.getProperty("cardMonth");
 			cardYear = prop.getProperty("cardYear");
 			cardCVC = prop.getProperty("cardCVC");
+			taxClass = prop.getProperty("taxClass");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -160,7 +162,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-		CartCalculator.calculateJMDiscounts("0", "0", "19", "0");
+		CartCalculator.calculateJMDiscounts("0", "0", taxClass, "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
