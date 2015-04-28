@@ -30,6 +30,7 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -42,17 +43,18 @@ import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 
 	@Steps
-	public FooterSteps footerSteps;	
+	public FooterSteps footerSteps;
 	@Steps
-	public HeaderSteps headerSteps;	
+	public HeaderSteps headerSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public AddRegularProductsWorkflow addRegularProductsWorkflow;	
+	public AddRegularProductsWorkflow addRegularProductsWorkflow;
 
 	private String username, password;
 	public static List<RegularBasicProductModel> allProductsList = new ArrayList<RegularBasicProductModel>();
 	private ProductDetailedModel genProduct1;
+	private ProductDetailedModel genProduct2;
 	public static UrlModel urlModel = new UrlModel();
 
 	@Before
@@ -63,6 +65,10 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 		genProduct1 = CreateProduct.createProductModel();
 		genProduct1.setPrice("89.00");
 		CreateProduct.createApiProduct(genProduct1);
+
+		genProduct2 = CreateProduct.createProductModel();
+		genProduct2.setPrice("49.00");
+		CreateProduct.createApiProduct(genProduct2);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -89,27 +95,41 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
-		urlModel = MongoReader.grabUrlModels("US10006ChechEmailAndAcceptInvitationTest").get(0);		
+		urlModel = MongoReader.grabUrlModels("US10006ChechEmailAndAcceptInvitationTest").get(0);
 	}
 
 	@Test
 	public void us10006CustomerAddProductIntoWishlist() {
-		customerRegistrationSteps.navigate(urlModel.getUrl());
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.redirectToWishlist();
+		headerSteps.clickOnWishlistButton();
+		headerSteps.wipeWishlist();
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");
 		allProductsList.add(productData);
 
+		footerSteps.selectWebsiteFromFooter(ContextConstants.NOT_PREFERED_WEBSITE);
+		if (!headerSteps.succesfullLogin()) {
+			customerRegistrationSteps.performLoginAfterChangingWebsite(username, password);
+		}
+		headerSteps.clickOnWishlistButton();
+		headerSteps.wipeWishlist();
+
+		productData = addRegularProductsWorkflow.setBasicProductToWishlist(genProduct2, "1", "0");
+
 	}
 
 	@After
 	public void saveData() {
+		// the invited guest can have products in both wishllists( from de and
+		// from es website)
+		// only the expected product to be found in party wishlist will be
+		// added.the second one should not appear,but we will check that only
+		// the product from the preferred website appears in the party wishlist
 		for (RegularBasicProductModel product : allProductsList) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
 		}

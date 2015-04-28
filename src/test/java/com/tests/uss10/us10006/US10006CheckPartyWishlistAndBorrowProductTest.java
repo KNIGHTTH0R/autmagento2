@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
+import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
@@ -40,6 +42,10 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
+	@Steps
+	public FooterSteps footerSteps;
+	@Steps
+	public HeaderSteps headerSteps;
 	@Steps
 	AddBorrowedProductsWorkflow addBorrowedProductsWorkflow;
 
@@ -87,8 +93,10 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 
 	@Test
 	public void us10006CheckPartyWishlistAndBorrowProductTest() {
-
 		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
 		
 		customerRegistrationSteps.wipeHostCart();
 		customerRegistrationSteps.navigate(urlModel.getUrl());

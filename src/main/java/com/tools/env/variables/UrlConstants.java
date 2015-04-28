@@ -24,7 +24,7 @@ public class UrlConstants {
 	//Frontend Composed URLS
 	public static final String BASE_URL_BE = "/index.php/admin/";
 	public static final String BASE_URL_AUT = "/customer/account/login/";
-	public static final String WISHLIST_URL = "/qateam/wishlist/";
+	public static final String WISHLIST_URL = "/wishlist/";
 
 //	public static final String PROFILE_HISTORY_URL = "simona/sales/order/history/";
 	public static final String PROFILE_HISTORY_URL = "/sales/order/history/";

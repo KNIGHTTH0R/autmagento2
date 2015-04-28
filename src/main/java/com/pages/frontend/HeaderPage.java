@@ -36,24 +36,21 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(css = "div#topCartContent p.subtotal span.price")
 	private WebElement cartPreviewPrice;
 
-	// @FindBy(css = "a[title='Profil']")
 	@FindBy(css = "div.quick-access.clearfix ul.links li:nth-child(2) a")
-	// int
 	private WebElement profileButton;
 
-	// @FindBy(css = "a[title='Style Coach Lounge']")
 	@FindBy(css = "div.categories>ul.clearfix li:last-child a")
-	// int
 	private WebElement loungeButton;
 
-	// @FindBy(css = "a[title='Anmelden']")
+	@FindBy(css = "ul.links li:first-child a")
+	private WebElement wishlist;
+	
 	@FindBy(css = "ul.links>.last a")
-	// int
 	private WebElement anmeldenButton;
 
-	// @FindBy(css = "a[title='Abmelden']")
+	
 	@FindBy(css = "ul.links>.last a")
-	// int
+	
 	private WebElement abmeldenButton;
 
 	@FindBy(css = "div.branding p")
@@ -103,6 +100,10 @@ public class HeaderPage extends AbstractPage {
 	public void clickOnProfileButton() {
 		element(profileButton).waitUntilVisible();
 		profileButton.click();
+	}
+	public void clickOnWishlistButton() {
+		element(wishlist).waitUntilVisible();
+		wishlist.click();
 	}
 
 	public void clickAddToCart() {

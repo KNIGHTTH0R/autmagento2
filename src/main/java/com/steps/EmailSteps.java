@@ -81,6 +81,7 @@ public class EmailSteps extends AbstractSteps {
 		}
 		link = row.substring(matchStart, matchEnd);
 		Assert.assertTrue("The link is null", link != null);
+		getDriver().get(link);
 		return link;
 	}
 }

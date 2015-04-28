@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.tools.env.variables.ContextConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractPage;
 
 public class PartyDetailsPage extends AbstractPage {
@@ -82,24 +83,32 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(css = "input.input-checkbox.contact-chk")
 	private WebElement wishlistProductCheckbox;
-	
-//	@FindBy(css = "button[title*='In den Warenkorb']")
-	@FindBy(css = "div#wishlistGuestsFormContainer form button")       //int
+
+	@FindBy(css = "div#wishlistGuestsFormContainer form button")
 	private WebElement addToBorrowCart;
 
 	// this is made for a single product.if the products is the expected
 	// one,select it and borrow it
 	public void selectWishlistProductAndAddItToBorrowCart(String productName) {
 
+		List<WebElement> wishlistProductsList = getDriver().findElements(By.cssSelector("div.customer-list-container.clearfix .mini-box img"));
+		Assert.assertTrue("There are produscts in party wishlist which should not be there !!!", wishlistProductsList.size() == 1);
+
 		Actions builder = new Actions(getDriver());
 		builder.moveToElement(wishlistProductImage).build().perform();
 		element(wishlistProductNameContainer).waitUntilVisible();
+		boolean found = false;
 		if (wishlistProductNameContainer.getText().contains(productName)) {
+			found = true;
 			wishlistProductCheckbox.click();
 		}
-		addToBorrowCart.click();
-		
-
+		// on es website the borrow cart and contact booster is blocked.the
+		// product appears in party wishlist but cannot pe added into the borrow
+		// cart
+		if (!MongoReader.getContext().contentEquals("es")) {
+			addToBorrowCart.click();
+		}
+		Assert.assertTrue("The product expected to be in wishlist is not present !!!", found);
 	}
 
 	public void orderForCustomer() {
@@ -242,10 +251,10 @@ public class PartyDetailsPage extends AbstractPage {
 	public void verifyActivePartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
 		verifyPartyStatus(ContextConstants.PARTY_ACTIVE);
-		verifyHostessInviteLink(true);
+		verifyHostessInviteLink(false);
 		verifyEditLink(false);
 		verifyDeleteLink(false);
-		verifyInviteGuestsLink(true);
+		verifyInviteGuestsLink(false);
 		verifyFolowUpPartyLink(true);
 		verifyCustomerOrderLink(true);
 		verifyClosePartyLink(true);

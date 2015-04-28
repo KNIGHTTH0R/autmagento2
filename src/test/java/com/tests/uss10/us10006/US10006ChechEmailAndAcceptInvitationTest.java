@@ -87,9 +87,11 @@ public class US10006ChechEmailAndAcceptInvitationTest extends BaseTest {
 	public void us10006ChechEmailAndAcceptInvitationTest() {
 
 		frontEndSteps.performLogin(email, password);
-		String message = gmailConnector.searchForMail("", ContextConstants.INVITE_EMAIL_SUBJECT, true);
-		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message, "JA, ich werde teilnehmen"));
-
+		String message = gmailConnector.searchForMail("", ContextConstants.INVITE_EMAIL_SUBJECT, true);		
+		System.out.println(message);
+		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message,ContextConstants.ACCEPT_INVITATION));
+		
+		System.out.println("URL: " + urlModel.getUrl());
 	}
 
 	@After

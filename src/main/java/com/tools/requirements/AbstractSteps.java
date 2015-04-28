@@ -86,6 +86,14 @@ public class AbstractSteps extends ScenarioSteps {
 
 	}
 	@Step
+	public void performLoginAfterChangingWebsite(String userName, String userPass) {
+		headerPage().clickAnmeldenButton();
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+		
+	}
+	@Step
 	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass) {
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();

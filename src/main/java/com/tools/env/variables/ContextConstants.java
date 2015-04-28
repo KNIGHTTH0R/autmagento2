@@ -6,6 +6,8 @@ public class ContextConstants {
 
 
 	
+	
+	
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
 	//messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
@@ -21,6 +23,7 @@ public class ContextConstants {
 	
 	
 	public static String EMPTY_CART = MongoReader.getDictionaryItem("EMPTY_CART");
+	public static String EMPTY_WISHLIST_MESSAGE = MongoReader.getDictionaryItem("EMPTY_WISHLIST_MESSAGE");
 	public static String SUCCES_MESSAGE = MongoReader.getDictionaryItem("SUCCES_MESSAGE");
 	public static String CREATE_ACCOUNT_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("CREATE_ACCOUNT_SUCCESS_MESSAGE");
 	public static String PRODUCT_ADDED_INTO_CART = MongoReader.getDictionaryItem("PRODUCT_ADDED_INTO_CART");
@@ -32,6 +35,7 @@ public class ContextConstants {
 	public static String UPDATE_PARTY = MongoReader.getDictionaryItem("UPDATE_PARTY");
 	public static String DELETE_PARTY = MongoReader.getDictionaryItem("DELETE_PARTY");
 	public static String INVITE_GUEST = MongoReader.getDictionaryItem("INVITE_GUEST");
+	public static String ACCEPT_INVITATION = MongoReader.getDictionaryItem("ACCEPT_INVITATION");
 	public static String CREATE_FOLLOW_UP_PARTY = MongoReader.getDictionaryItem("CREATE_FOLLOW_UP_PARTY");
 	public static String ORDER_FOR_CUSTOMER = MongoReader.getDictionaryItem("ORDER_FOR_CUSTOMER");
 	public static String CLOSE_PARTY = MongoReader.getDictionaryItem("CLOSE_PARTY");

@@ -32,6 +32,11 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void clickOnWishlistButton() {
+		headerPage().clickOnWishlistButton();
+	}
+
+	@Step
 	@Title("Go to create party page")
 	public void goToCreatePartyPage() {
 		headerPage().clickLounge();
@@ -50,23 +55,29 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	public void redirectToProfileHistory() {
-		getDriver().get(MongoReader.getBaseURL()  +  UrlConstants.PROFILE_HISTORY_URL);
-		
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
+
 	}
 
 	@Step
 	public void redirectToWishlist() {
-		getDriver().get(MongoReader.getBaseURL() +  UrlConstants.WISHLIST_URL);
-		wishlistPage().addAllProductsToCArt();
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.WISHLIST_URL);
+	
+	}
+	@Step
+	public void wipeWishlist() {		
+		if (!wishlistPage().isWishlistEmpty()) {
+			wishlistPage().addAllProductsToCArt();
+		}
 	}
 
 	public void redirectToStylistsCustomerOrderReport() {
 		waitABit(TimeConstants.TIME_CONSTANT);
-		getDriver().get(MongoReader.getBaseURL()  +  UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
 	public void redirectToCartPage() {
-		getDriver().get(MongoReader.getBaseURL()  + UrlConstants.CART_PAGE_URL);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);
 	}
 
 	@StepGroup

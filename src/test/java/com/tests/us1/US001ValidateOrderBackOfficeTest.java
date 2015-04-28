@@ -126,7 +126,7 @@ public class US001ValidateOrderBackOfficeTest extends BaseTest {
 		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
 		// Constants added
 		//Remove from total tax segments discounts and transport discount
-		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax() + calcDetailsModelList.get(0).calculateSegmentsTotal());
+		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
 		shopTotalsModel.setTotalPaid("0.00");
 		shopTotalsModel.setTotalRefunded("0.00");
 		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());
