@@ -113,7 +113,7 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
-		Assert.assertTrue(getDriver().getCurrentUrl().contains("http://staging-int.pippajean.com/" + ContextConstants.NOT_PREFERED_WEBSITE));
+		Assert.assertTrue(getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));
 		footerPage().verifyThatFooterWebsiteIsCorrect(ContextConstants.NOT_PREFERED_WEBSITE);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);

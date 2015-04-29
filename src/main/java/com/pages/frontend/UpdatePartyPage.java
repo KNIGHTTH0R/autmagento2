@@ -4,9 +4,11 @@ import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class UpdatePartyPage extends AbstractPage {
@@ -16,6 +18,12 @@ public class UpdatePartyPage extends AbstractPage {
 
 	@FindBy(id = "time")
 	private WebElement hourSelectDropDown;
+
+	@FindBy(css = "#country")
+	private WebElement countrySelectDropDown;
+	
+	@FindBy(css = "#editPartyForm p div")
+	private WebElement errorMessageContainer;
 
 	@FindBy(css = "#ui-datepicker-div div.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all a:nth-child(2)")
 	private WebElement nextMonthButton;
@@ -40,13 +48,23 @@ public class UpdatePartyPage extends AbstractPage {
 	}
 
 	public void selectADateGreaterWithMinimum180Days() {
-
 		element(dateSelect).waitUntilVisible();
 		dateSelect.click();
 		for (int i = 0; i < 7; i++) {
 			nextMonthButton.click();
 		}
 		selectDay();
+	}
+
+	public void verifyThatCountryDropdownDoesNotContainNotAllowedCountries() {
+		Assert.assertTrue("The ddl contains the country name and it should not !!!", !countrySelectDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE)
+				|| !countrySelectDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
+		System.out.println(countrySelectDropDown.getText());
+	}
+
+	public void selectCountryName(String countryName) {
+		element(countrySelectDropDown).waitUntilVisible();
+		element(countrySelectDropDown).selectByVisibleText(countryName);
 	}
 
 	public void selectFirstAvailableDate() {
@@ -73,6 +91,11 @@ public class UpdatePartyPage extends AbstractPage {
 	public void submitParty() {
 		element(partySubmitButton).waitUntilVisible();
 		partySubmitButton.click();
+	}
+
+	public void verifyCountryRestrictionMessage() {
+		Assert.assertTrue("The error message should be present but it's not !!!", errorMessageContainer.getText().contains(ContextConstants.PARTY_COUNTRY_RESTRICTION_ERROR_MESSAGE));
+		
 	}
 
 }

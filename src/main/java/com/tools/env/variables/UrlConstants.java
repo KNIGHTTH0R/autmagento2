@@ -41,8 +41,8 @@ public class UrlConstants {
 	public static final String API_URI = "index.php/api/v2_soap/index/";
 
 	//Static Pages
-	public static final String REGISTER_LANDING_PAGE = "register-landing-page";
-	public static final String LANDING_PAGE = "contact-landing-page";
+	public static final String REGISTER_LANDING_PAGE = "/register-landing-page";
+	public static final String LANDING_PAGE = "/contact-landing-page";
 
 
 }

@@ -24,6 +24,21 @@ public class UpdatePartySteps extends AbstractSteps {
 		updatePartyPage().submitParty();
 	}
 
+	@Step
+	public void verifyThatCountryDropdownDoesNotContainNotAllowedCountries() {
+		updatePartyPage().verifyThatCountryDropdownDoesNotContainNotAllowedCountries();
+
+	}
+	@Step
+	public void selectNotAllowedCountryName(String countryName) {
+		partyDetailsPage().editParty();
+		updatePartyPage().selectCountryName(countryName);
+		updatePartyPage().submitParty();
+		
+		
+		
+	}
+
 	@StepGroup
 	public void updatePartyDateAndHour() {
 		partyDetailsPage().editParty();
@@ -38,6 +53,11 @@ public class UpdatePartySteps extends AbstractSteps {
 		updatePartyPage().confirmMoveParty();
 		updatePartyPage().selectSecondAvailableHour();
 		updatePartyPage().submitParty();
+	}
+	@Step
+	public void verifyCountryRestrictionMessage() {
+		updatePartyPage().verifyCountryRestrictionMessage();
+		
 	}
 
 }

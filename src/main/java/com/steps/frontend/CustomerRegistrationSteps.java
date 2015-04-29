@@ -208,6 +208,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Title("Fill landing page form")
 	public void fillLandingPageForm(CustomerFormModel dataModel, AddressModel addressModel) {
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.LANDING_PAGE);
+		System.out.println("@@@@@@@@@@@@@@@@@@ " + MongoReader.getBaseURL() + UrlConstants.LANDING_PAGE);
 		contactLandingPage().selectGender(true);
 		contactLandingPage().inputFirstName(dataModel.getFirstName());
 		contactLandingPage().inputLastName(dataModel.getLastName());
@@ -291,11 +292,8 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			pageTitle = thankYouPage().pageTitle();
 			counter++;
 		} while (!pageTitle.contains("Thank you page") && counter < 30);
-		String pageSource = thankYouPage().pageSource();
-		System.out.println(pageSource);
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page. Actual: " + pageTitle, pageTitle.contains("Thank you page"));
-		// Assert.assertTrue("Failure: Page may contain thankYou register form.",
-		// !pageSource.contains("thankyou-register"));
+
 	}
 
 	@Step

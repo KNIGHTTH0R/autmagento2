@@ -1,4 +1,3 @@
-
 package com.tests.uss10.us10004;
 
 import java.io.File;
@@ -47,7 +46,7 @@ public class US10004CreatePartyWithStylistHostTest extends BaseTest {
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
-	
+
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
@@ -100,4 +99,3 @@ public class US10004CreatePartyWithStylistHostTest extends BaseTest {
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 }
-

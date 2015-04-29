@@ -1,4 +1,3 @@
-
 package com.tests.uss10.us10003;
 
 import java.io.File;
@@ -54,22 +53,20 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
 
-	
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
-	
+
 	public CustomerFormModel customerData;
 	public CustomerFormModel inviteData;
 	public AddressModel addressData;
 
-
 	@Before
 	public void setUp() throws Exception {
-		
+
 		customerData = new CustomerFormModel();
 		inviteData = new CustomerFormModel();
-		addressData = new AddressModel();		
+		addressData = new AddressModel();
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -111,15 +108,14 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 		partyDetailsSteps.verifyPlannedPartyAvailableActions();
 		partyDetailsSteps.sendInvitationToGest(inviteData);
 		partyDetailsSteps.verifyThatGuestIsInvited(inviteData.getFirstName());
-	
+
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName()+ SoapKeys.GRAB);
+		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveCustomerFormModel(inviteData, getClass().getSimpleName());
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 }
-
