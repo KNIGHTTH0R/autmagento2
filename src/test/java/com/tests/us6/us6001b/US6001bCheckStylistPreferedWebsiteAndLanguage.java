@@ -37,7 +37,7 @@ public class US6001bCheckStylistPreferedWebsiteAndLanguage extends BaseTest {
 	@Test
 	public void us6001bCheckCustomerActivationTest() {
 
-		customerRegistrationSteps.performLoginAndVerifyWebsiteAndLanguage(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
+		customerRegistrationSteps.performLoginAndVerifyWebsiteAndLanguage(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword(),MongoReader.getContext(),MongoReader.getContext());
 
 	}
 }

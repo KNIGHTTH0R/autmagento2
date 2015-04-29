@@ -5,6 +5,8 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.tools.datahandlers.CartCalculator;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractPage;
 
 public class HomePage extends AbstractPage {
@@ -21,6 +23,9 @@ public class HomePage extends AbstractPage {
 	@FindBy(css = "#cssmenu > ul > li:nth-child(2) > ul li:nth-child(1) > a")
 	private WebElement newMenu;
 
+	@FindBy(css = "#cssmenu > ul > li:nth-child(2) > ul li:nth-child(2) > a")
+	private WebElement newMenuDe;
+
 	public void clickStyleCoachLink() {
 		styleCoachLink.click();
 
@@ -32,13 +37,17 @@ public class HomePage extends AbstractPage {
 		waitABit(2000);
 
 	}
-
+	//TODO a switch-case  should be added here
 	public void goToNewItems() {
 		Actions builder = new Actions(getDriver());
 		builder.moveToElement(jewelriesMenu).build().perform();
-		element(newMenu).waitUntilVisible();
-		newMenu.click();
-
+		if (MongoReader.getContext().contentEquals("de")) {
+			element(newMenuDe).waitUntilVisible();
+			newMenuDe.click();
+		} else {
+			element(newMenu).waitUntilVisible();
+			newMenu.click();
+		}
 	}
 
 }
