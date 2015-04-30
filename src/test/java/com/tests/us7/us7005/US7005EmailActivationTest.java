@@ -104,10 +104,11 @@ public class US7005EmailActivationTest extends BaseTest{
 		
 		frontEndSteps.performLogin(username, password);
 
-		String message = gmailConnector.searchForMail("", ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT, false);
+		String message = gmailConnector.searchForMail("", ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT, true);
 
 		System.out.println(message);
 		String linkURL = emailSteps.grabConfirmationLink(message);
+		System.out.println("urllllllllllllllllllllllllllll  " + linkURL);
 		emailSteps.navigate(linkURL);
 		emailSteps.validateEmail(password, message);
 		emailSteps.validateEmail(context, linkURL);

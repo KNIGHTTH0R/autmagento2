@@ -8,9 +8,11 @@ public class ContextConstants {
 	
 	
 	
+	
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
 	//messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
+	public static String CONFIRMATION_LINK_TEXT = MongoReader.getDictionaryItem("CONFIRMATION_LINK_TEXT");
 	public static String PARTY_COUNTRY_RESTRICTION_ERROR_MESSAGE = MongoReader.getDictionaryItem("PARTY_COUNTRY_RESTRICTION_ERROR_MESSAGE");
 	public static String STYLE_COACH_REG_PAGE_TITLE = MongoReader.getDictionaryItem("STYLE_COACH_REG_PAGE_TITLE");
 	public static String VOUCHER_DISCOUNT_INCOMPATIBLE = MongoReader.getDictionaryItem("VOUCHER_DISCOUNT_INCOMPATIBLE");

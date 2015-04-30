@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Step;
 
 import org.junit.Assert;
 
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class EmailSteps extends AbstractSteps {
@@ -30,6 +31,10 @@ public class EmailSteps extends AbstractSteps {
 
 	@Step
 	public void validateURL(String URL, String context) {
+		Assert.assertTrue("Failure: URL does not contain the string provided", URL.contains(context));
+	}
+	@Step
+	public void validateContextFromURL(String URL, String context) {
 		Assert.assertTrue("Failure: URL does not contain the context provided", URL.contains(context));
 	}
 
@@ -38,7 +43,7 @@ public class EmailSteps extends AbstractSteps {
 		String[] lines = message.split("\n");
 
 		for (String stringNow : lines) {
-			if (stringNow.contains("Bestätigungslink")) {
+			if (stringNow.contains(ContextConstants.CONFIRMATION_LINK_TEXT)) {
 				String[] subLines = stringNow.split("\"");
 				resultURL = subLines[3];
 				break;

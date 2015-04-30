@@ -82,7 +82,10 @@ public class US7006EmailActivationTest extends BaseTest{
 		validateURL = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
 		System.out.println(validateURL);
 		emailSteps.validateURL(validateURL, "customer/account/confirm");
-		emailSteps.validateURL(validateURL, styleCoachFN.toLowerCase());
+		System.out.println("!!!!!!  " + validateURL);
+		System.out.println("!!!!!!  " + styleCoachFN.toLowerCase());
+		emailSteps.validateContextFromURL(validateURL, styleCoachFN.toLowerCase());
+		
 		
 		customVerifications.printErrors();
 	}

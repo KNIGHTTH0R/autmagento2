@@ -14,13 +14,14 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US7", type = "external")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7004EmailActivationTest extends BaseTest{
+public class US7004EmailActivationTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -28,10 +29,10 @@ public class US7004EmailActivationTest extends BaseTest{
 	public EmailSteps emailSteps;
 	@Steps
 	public CustomVerification customVerifications;
-	
+
 	public String clientName;
 	public String validateURL;
-	
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -42,17 +43,20 @@ public class US7004EmailActivationTest extends BaseTest{
 		} else
 			System.out.println("The database has no entries");
 	}
-	
+
 	@Test
 	public void us7004EmailActivationTest() {
 
+		// emailClientSteps.openMailinator();
+		// validateURL = emailClientSteps.grabEmail(clientName.replace("@" +
+		// ConfigConstants.WEB_MAIL, ""));
+		// // System.out.println(validateURL);
+		// emailSteps.validateURL(validateURL, "customer/account/confirm");
+		//
+		// customVerifications.printErrors();
+
 		emailClientSteps.openMailinator();
-		validateURL = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
-//		System.out.println(validateURL);
-		emailSteps.validateURL(validateURL, "customer/account/confirm");
-		
-		customVerifications.printErrors();
+		emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
-	
-	
+
 }

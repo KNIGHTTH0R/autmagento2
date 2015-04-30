@@ -189,6 +189,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public void navigate(String URL) {
 		getDriver().get(URL);
+	
 	}
 
 	public AbstractPage abstractPage() {
