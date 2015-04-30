@@ -66,6 +66,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void editParty() {
 		partyDetailsPage().editParty();
+		waitABit(1000);
 	}
 
 	@Step

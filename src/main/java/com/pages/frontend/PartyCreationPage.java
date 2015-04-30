@@ -90,7 +90,7 @@ public class PartyCreationPage extends AbstractPage {
 		element(customerName).sendKeys(name);
 		element(selectContact).waitUntilVisible();
 		element(selectContact).click();
-		waitABit(1000);
+		waitABit(4000);
 		
 		
 	}

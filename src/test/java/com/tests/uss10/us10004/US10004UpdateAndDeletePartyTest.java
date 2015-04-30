@@ -90,7 +90,6 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.editParty();
 		updatePartySteps.updatePartyDateAndHour();
 		partyDetailsSteps.deleteParty();
 

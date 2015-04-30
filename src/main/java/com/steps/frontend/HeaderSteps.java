@@ -41,6 +41,7 @@ public class HeaderSteps extends AbstractSteps {
 	public void goToCreatePartyPage() {
 		headerPage().clickLounge();
 		loungePage().clickCreateParty();
+		waitABit(1000);
 
 	}
 

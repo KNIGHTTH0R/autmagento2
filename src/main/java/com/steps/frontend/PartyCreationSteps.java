@@ -49,6 +49,7 @@ public class PartyCreationSteps extends AbstractSteps {
 		partyCreationPage().selectFirstAvailableHour();
 		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
 		return partyCreationPage().submitParty();
+		
 	}
 
 	@Step
@@ -58,7 +59,9 @@ public class PartyCreationSteps extends AbstractSteps {
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
 		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
+		waitABit(1000);
 		return partyCreationPage().submitParty();
+		
 	}
 
 	@Step
