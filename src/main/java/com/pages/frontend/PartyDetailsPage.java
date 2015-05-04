@@ -18,10 +18,10 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(id = "closeParty")
 	private WebElement closeParty;
 
-	@FindBy(id = "editParty")
+	@FindBy(css = "div.goes-up.right.pos-abs #editParty")
 	private WebElement editParty;
 
-	@FindBy(id = "deleteParty")
+	@FindBy(css = "div.goes-up.right.pos-abs #deleteParty")
 	private WebElement deleteParty;
 
 	@FindBy(css = "#deleteForm button[value*='YES']")
@@ -69,7 +69,7 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "button[title*='Für eine Kundin bestellen']")
 	private WebElement orderForCustomer;
 
-	@FindBy(id = "hostess-confirmation")
+	@FindBy(css = "div.clearfix.invite-buttons #hostess-confirmation")
 	private WebElement sendInvitationToHostess;
 
 	@FindBy(css = "#hostessConfirmation button[type*='submit']")

@@ -25,7 +25,6 @@ import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -82,7 +81,7 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 	}
 
 	@Test
-	public void us10004InviteRegisteredGuestUpdateAndDeletePartyTest() {
+	public void us10004UpdateAndDeletePartyTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

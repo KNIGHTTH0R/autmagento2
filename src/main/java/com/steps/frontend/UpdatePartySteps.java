@@ -45,6 +45,7 @@ public class UpdatePartySteps extends AbstractSteps {
 		updatePartyPage().selectFirstAvailableDate();
 		updatePartyPage().selectSecondAvailableHour();
 		updatePartyPage().submitParty();
+		waitABit(2000);
 	}
 
 	@StepGroup
@@ -53,6 +54,7 @@ public class UpdatePartySteps extends AbstractSteps {
 		updatePartyPage().confirmMoveParty();
 		updatePartyPage().selectSecondAvailableHour();
 		updatePartyPage().submitParty();
+		waitABit(2000);
 	}
 	@Step
 	public void verifyCountryRestrictionMessage() {

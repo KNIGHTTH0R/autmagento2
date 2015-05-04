@@ -71,7 +71,9 @@ public class PartyCreationPage extends AbstractPage {
 	public String submitParty() {
 		element(partySubmitButton).waitUntilVisible();
 		partySubmitButton.click();
+		waitABit(1000);
 		return getDriver().getCurrentUrl();
+		
 	}
 
 	public void checkHostedByCustomer() {
@@ -90,7 +92,7 @@ public class PartyCreationPage extends AbstractPage {
 		element(customerName).sendKeys(name);
 		element(selectContact).waitUntilVisible();
 		element(selectContact).click();
-		waitABit(4000);
+		waitABit(2000);
 		
 		
 	}

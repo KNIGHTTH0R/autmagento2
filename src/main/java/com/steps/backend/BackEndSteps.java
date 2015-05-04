@@ -69,6 +69,7 @@ public class BackEndSteps extends AbstractSteps {
 	public void searchOrderByName(String emailText) {
 		orderListPage().inputOrderName(emailText);
 		orderListPage().clickOnSearch();
+		waitABit(2000);
 	}
 
 	@Step
