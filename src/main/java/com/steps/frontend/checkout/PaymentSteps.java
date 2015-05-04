@@ -24,6 +24,7 @@ public class PaymentSteps extends AbstractSteps{
 		creditCardFormPage().selectYearExpiry(creditCardData.getYearExpiration());
 		creditCardFormPage().cvcCodeInput(creditCardData.getCvcNumber());
 		creditCardFormPage().clickOnConfirm();
+		waitABit(2000);
 	}
 	
 }

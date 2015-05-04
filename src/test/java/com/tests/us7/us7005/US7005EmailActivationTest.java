@@ -102,7 +102,7 @@ public class US7005EmailActivationTest extends BaseTest{
 	@Test
 	public void us7005EmailActivationTest() {
 		
-		frontEndSteps.performLogin(username, password);
+//		frontEndSteps.performLogin(username, password);
 
 		String message = gmailConnector.searchForMail("", ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT, true);
 
@@ -111,8 +111,10 @@ public class US7005EmailActivationTest extends BaseTest{
 		System.out.println("urllllllllllllllllllllllllllll  " + linkURL);
 		emailSteps.navigate(linkURL);
 		emailSteps.validateEmail(password, message);
-		emailSteps.validateEmail(context, linkURL);
+//		emailSteps.validateEmail(context, linkURL);
 
-		customVerifications.printErrors();
+//		customVerifications.printErrors();
+
+
 	}
 }

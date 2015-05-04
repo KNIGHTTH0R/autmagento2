@@ -59,23 +59,24 @@ public class EmailClientSteps extends AbstractSteps {
 		return welcomeMessage;
 
 	}
+
 	@Step
 	public String confirmEmail(String email, String title) {
-		
+
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
 		getDriver().get(url);
-		
+
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail(title);
-		
+
 		if (welcomeMessage.isEmpty()) {
 			mailinatorPage().clickConfirmEmail();
 		}
-		
+
 		waitABit(6000);
 		return welcomeMessage;
-		
+
 	}
 
 	@Step
@@ -89,15 +90,15 @@ public class EmailClientSteps extends AbstractSteps {
 		waitABit(5000);
 		String couponCode = mailinatorPage().grabEmail(title);
 
-		if (couponCode.isEmpty()) {
+		
 			couponCode = mailinatorPage().grabCouponCode();
-			couponCode = couponCode.replace("Gratuliere! Du hast einen Gutschein für Deine Registrierung erhalten.", "");
-			couponCode = couponCode.replace("Dein Gutscheincode lautet: ", "");
-			couponCode = couponCode.replace("Diesen Code gibst Du im Warenkorb ein, nachdem Du Deine Lieblingsstücke ausgewählt hast.", "");
-			couponCode = couponCode.trim();
+//			couponCode = couponCode.replace("Gratuliere! Du hast einen Gutschein für Deine Registrierung erhalten.", "");
+//			couponCode = couponCode.replace("Dein Gutscheincode lautet: ", "");
+//			couponCode = couponCode.replace("Diesen Code gibst Du im Warenkorb ein, nachdem Du Deine Lieblingsstücke ausgewählt hast.", "");
+//			couponCode = couponCode.trim();
+			System.out.println(couponCode);
 			waitABit(2000);
-		}
-
+		
 		return couponCode;
 
 	}
@@ -111,6 +112,18 @@ public class EmailClientSteps extends AbstractSteps {
 
 		waitABit(5000);
 		mailinatorPage().grabEmail(title);
+
+	}
+
+	@Step
+	public String validateEmailContent(String email, String title) {
+
+		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
+		System.out.println("URL : " + url);
+		getDriver().get(url);
+
+		waitABit(5000);
+		return mailinatorPage().grabEmail(title);
 
 	}
 
@@ -135,28 +148,29 @@ public class EmailClientSteps extends AbstractSteps {
 		waitABit(6000);
 		return welcomeMessage;
 	}
+
 	@Step
 	public String validateThatEmailIsReceivedAndClickRegister(String email, String title) {
-		
+
 		// waitABit(5000);
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
-		
+
 		System.out.println("URL : " + url);
 		getDriver().get(url);
-		
+
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail(title);
-		
-		if (welcomeMessage.isEmpty()) {
+
+		if (!welcomeMessage.isEmpty()) {
 			String confirmLink = mailinatorPage().registerFromEmail();
-			
+
 			waitABit(2000);
 			getDriver().get(confirmLink);
 			welcomeMessage = confirmLink;
 		}
-		
+
 		waitABit(6000);
-		
+
 		return welcomeMessage;
 	}
 }

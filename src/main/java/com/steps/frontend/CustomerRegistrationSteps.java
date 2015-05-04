@@ -233,6 +233,16 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	 */
 	@Step
 	public void selectStylistOption(StyleMode mode, String firstName, String lastName) {
+		
+		String pageTitle;
+		int counter = 0;
+		do {
+			waitABit(2000);
+			pageTitle = thankYouPage().pageTitle();
+			counter++;
+		} while (!pageTitle.contains("Thank you page") && counter < 30);
+		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page. Actual: " + pageTitle, pageTitle.contains("PIPPA&JEAN"));
+		
 		landingCustomerAllocationPage().selectStylistOption(mode, firstName, lastName);
 	}
 

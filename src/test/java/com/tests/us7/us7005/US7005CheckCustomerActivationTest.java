@@ -13,6 +13,7 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -44,7 +45,7 @@ public class US7005CheckCustomerActivationTest extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 
-		expectedStatus = "Bestätigt";
+	
 	}
 
 	@Test
@@ -55,10 +56,8 @@ public class US7005CheckCustomerActivationTest extends BaseTest {
 		backEndSteps.searchForEmail(clientName);
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
-		stylistValidationSteps.validateStatus(grabStatus, expectedStatus);
-		
-		backEndSteps.deleteCustomer();
-		
+		stylistValidationSteps.validateStatus(grabStatus, ConfigConstants.CONFIRMED);		
+		backEndSteps.deleteCustomer();		
 		customVerifications.printErrors();
 	}
 

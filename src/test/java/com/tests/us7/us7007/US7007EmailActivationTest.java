@@ -14,6 +14,7 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -47,12 +48,15 @@ public class US7007EmailActivationTest extends BaseTest{
 	@Test
 	public void us7006EmailActivationTest() {
 
-		emailClientSteps.openMailinator();
-		validateMessageMail = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
-		System.out.println(validateMessageMail);
-		emailSteps.validateURL(validateMessageMail, "customer/account/confirm");
+//		emailClientSteps.openMailinator();
+//		validateMessageMail = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
+//		System.out.println(validateMessageMail);
+//		emailSteps.validateURL(validateMessageMail, "customer/account/confirm");
+//		
+//		customVerifications.printErrors();
 		
-		customVerifications.printErrors();
+		emailClientSteps.openMailinator();
+		emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
 	
 	

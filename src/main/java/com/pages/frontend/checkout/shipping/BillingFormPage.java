@@ -43,6 +43,7 @@ public class BillingFormPage extends AbstractPage {
 	public void verifyThatYouCannotBillOnRestrictedCountries(){
 		Assert.assertTrue("The ddl contains the country name and it should not !!!", !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE) || !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
 		System.out.println(addressDropDown.getText());
+		waitABit(2000);
 	}
 
 	/**

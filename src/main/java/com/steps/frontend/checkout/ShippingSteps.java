@@ -48,7 +48,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void setSameAsBilling(boolean checked) {
 		shippingFormPage().setSameAsBilling(checked);
-		waitABit(2000);
+		waitABit(1000);
 	}
 
 	@Step
@@ -60,7 +60,7 @@ public class ShippingSteps extends AbstractSteps {
 	public void selectShippingAddress(String value) {
 		shippingFormPage().verifyThatYouCannotShipOnRestrictedCountries();
 		shippingFormPage().selectShippingAddress(value);
-		waitABit(2000);
+		waitABit(1000);
 	}
 
 }

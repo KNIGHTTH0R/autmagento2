@@ -28,5 +28,6 @@ public class ConfigConstants {
 	
 	//Webmail suffix
 	public static final String WEB_MAIL = "mailinator.com";
+	public static final String GMAIL = "gmail.com";
 	
 }

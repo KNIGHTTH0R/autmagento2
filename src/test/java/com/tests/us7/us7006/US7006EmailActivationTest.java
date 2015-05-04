@@ -20,6 +20,7 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -78,13 +79,16 @@ public class US7006EmailActivationTest extends BaseTest{
 	@Test
 	public void us7006EmailActivationTest() {
 
+//		emailClientSteps.openMailinator();
+//		validateURL = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
+//		System.out.println(validateURL);
+//		emailSteps.validateURL(validateURL, "customer/account/confirm");
+//		System.out.println("!!!!!!  " + validateURL);
+//		System.out.println("!!!!!!  " + styleCoachFN.toLowerCase());
+//		emailSteps.validateContextFromURL(validateURL, styleCoachFN.toLowerCase());
+		
 		emailClientSteps.openMailinator();
-		validateURL = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
-		System.out.println(validateURL);
-		emailSteps.validateURL(validateURL, "customer/account/confirm");
-		System.out.println("!!!!!!  " + validateURL);
-		System.out.println("!!!!!!  " + styleCoachFN.toLowerCase());
-		emailSteps.validateContextFromURL(validateURL, styleCoachFN.toLowerCase());
+		emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		
 		
 		customVerifications.printErrors();
