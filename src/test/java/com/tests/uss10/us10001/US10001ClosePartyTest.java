@@ -80,7 +80,7 @@ public class US10001ClosePartyTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		dateModel = MongoReader.grabStylistDateModels("US10001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-		System.out.println(urlModel.getUrl());
+		
 
 		Long partyCreationTime = Long.parseLong(dateModel.getDate());
 		Long currentTime = System.currentTimeMillis();

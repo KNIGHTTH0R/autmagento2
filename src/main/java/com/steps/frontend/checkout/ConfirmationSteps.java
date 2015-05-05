@@ -26,6 +26,7 @@ public class ConfirmationSteps extends AbstractSteps {
 	}
 
 	public List<CartProductModel> grabProductsList() {
+		waitABit(TimeConstants.TIME_CONSTANT);
 		return confirmationPage().grabProductsList();
 	}
 

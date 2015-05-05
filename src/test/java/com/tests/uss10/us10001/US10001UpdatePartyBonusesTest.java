@@ -44,7 +44,7 @@ public class US10001UpdatePartyBonusesTest extends BaseTest {
 	}
 
 	@Test
-	public void us10001ClosePartyTest() {
+	public void us10001UpdatePartyBonusesTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStyleParties();

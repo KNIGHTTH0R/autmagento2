@@ -52,6 +52,7 @@ public class HeaderSteps extends AbstractSteps {
 		loungePage().clickCreateParty();
 		partyCreationPage().checkHostedByCustomer();
 		partyCreationPage().clickAddContact();
+		waitABit(1000);
 
 	}
 
