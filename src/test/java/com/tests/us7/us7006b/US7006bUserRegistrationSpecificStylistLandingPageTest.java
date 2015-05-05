@@ -1,4 +1,4 @@
-package com.tests.us7.us7006;
+package com.tests.us7.us7006b;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +32,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTest{
+public class US7006bUserRegistrationSpecificStylistLandingPageTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -73,6 +73,7 @@ public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTe
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
+		addressModel.setCountryName(ContextConstants.NOT_PREFERED_LANGUAGE);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -82,7 +83,7 @@ public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTe
 	 * @throws Exception
 	 */
 	@Test
-	public void us7006UserRegistrationSpecificStylistLandingPageTest() {
+	public void us7006bUserRegistrationSpecificStylistLandingPageTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
 		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN);

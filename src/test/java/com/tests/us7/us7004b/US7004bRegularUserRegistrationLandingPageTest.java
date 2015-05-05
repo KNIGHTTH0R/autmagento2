@@ -41,7 +41,6 @@ public class US7004bRegularUserRegistrationLandingPageTest extends BaseTest{
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		addressModel.setCountryName(ContextConstants.NOT_PREFERED_LANGUAGE);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 

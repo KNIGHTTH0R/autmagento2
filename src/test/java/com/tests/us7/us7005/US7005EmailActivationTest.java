@@ -28,11 +28,10 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
 @WithTag(name = "US7", type = "external")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7005EmailActivationTest extends BaseTest{
+public class US7005EmailActivationTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -42,7 +41,7 @@ public class US7005EmailActivationTest extends BaseTest{
 	public CustomVerification customVerifications;
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
-	
+
 	public String clientName;
 	public String validateURL;
 	private String password;
@@ -50,11 +49,10 @@ public class US7005EmailActivationTest extends BaseTest{
 	private String username;
 	private String emailUser;
 	private String emailPass;
-	
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -64,7 +62,7 @@ public class US7005EmailActivationTest extends BaseTest{
 			prop.load(input);
 			username = prop.getProperty("username");
 			context = prop.getProperty("context");
-			
+
 			emailUser = prop.getProperty("emailUser");
 			emailPass = prop.getProperty("emailPass");
 
@@ -84,11 +82,11 @@ public class US7005EmailActivationTest extends BaseTest{
 		if (size > 0) {
 			clientName = MongoReader.grabCustomerFormModels("US7005RegularKnownUserRegistrationLandingPageTest").get(0).getEmailName();
 			password = MongoReader.grabCustomerFormModels("US7005RegularKnownUserRegistrationLandingPageTest").get(0).getPassword();
-			
+
 			System.out.println(clientName);
 		} else
 			System.out.println("The database has no entries");
-		
+
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
@@ -98,23 +96,24 @@ public class US7005EmailActivationTest extends BaseTest{
 
 		gmailConnector = new GmailConnector(emailData);
 	}
-	
+
 	@Test
 	public void us7005EmailActivationTest() {
-		
-//		frontEndSteps.performLogin(username, password);
+
+		frontEndSteps.performLogin(username, password);
 
 		String message = gmailConnector.searchForMail("", ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT, true);
 
 		System.out.println(message);
+//		emailSteps.extractUrlFromEmailMessage(message,ContextConstants.CONFIRMATION_LINK_TEXT);
 		String linkURL = emailSteps.grabConfirmationLink(message);
 		System.out.println("urllllllllllllllllllllllllllll  " + linkURL);
+
 		emailSteps.navigate(linkURL);
 		emailSteps.validateEmail(password, message);
-//		emailSteps.validateEmail(context, linkURL);
+		// emailSteps.validateEmail(context, linkURL);
 
-//		customVerifications.printErrors();
-
+		// customVerifications.printErrors();
 
 	}
 }

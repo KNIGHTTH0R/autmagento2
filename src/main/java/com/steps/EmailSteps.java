@@ -53,6 +53,7 @@ public class EmailSteps extends AbstractSteps {
 		return resultURL;
 	}
 
+
 	public String grabRowFromMessage(String message, String searchedRow) {
 		String resultURL = null;
 		String[] lines = message.split("\n");
@@ -86,6 +87,7 @@ public class EmailSteps extends AbstractSteps {
 		}
 		link = row.substring(matchStart, matchEnd);
 		Assert.assertTrue("The link is null", link != null);
+		System.out.println(link);
 		getDriver().get(link);
 		return link;
 	}

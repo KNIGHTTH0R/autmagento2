@@ -102,7 +102,6 @@ public class US10003EditAndVerifyNotAllowedCountriesTest extends BaseTest {
 			customerRegistrationSteps.performLoginAfterChangingWebsite(username, password);
 		}
 		String newUrl = urlModel.getUrl().replace("/" + MongoReader.getContext() + "/", "/" + ContextConstants.NOT_PREFERED_WEBSITE + "/");
-		System.out.println("new url:  " + newUrl);
 		customerRegistrationSteps.navigate(newUrl);
 		updatePartySteps.selectNotAllowedCountryName(ContextConstants.NOT_PREFERED_LANGUAGE);
 		updatePartySteps.verifyCountryRestrictionMessage();
