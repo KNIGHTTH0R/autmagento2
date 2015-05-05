@@ -5,7 +5,6 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.tools.datahandlers.CartCalculator;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractPage;
 

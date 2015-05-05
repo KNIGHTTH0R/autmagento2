@@ -45,7 +45,6 @@ public class US7005EmailActivationTest extends BaseTest {
 	public String clientName;
 	public String validateURL;
 	private String password;
-	private String context;
 	private String username;
 	private String emailUser;
 	private String emailPass;
@@ -61,7 +60,6 @@ public class US7005EmailActivationTest extends BaseTest {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7005.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
-			context = prop.getProperty("context");
 
 			emailUser = prop.getProperty("emailUser");
 			emailPass = prop.getProperty("emailPass");

@@ -17,7 +17,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
