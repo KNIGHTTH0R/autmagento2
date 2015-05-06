@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tools.calculation.HostCartBuy3Get1Calculation;
 import com.tools.calculation.HostCartTotalsCalculation;
+import com.tools.calculation.OrderForCustomerDiscountsCalculation;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -13,6 +14,7 @@ import com.tools.env.variables.ContextConstants;
 public class HostCartCalculator {
 
 	public static List<HostBasicProductModel> allProductsList = new ArrayList<HostBasicProductModel>();
+	public static List<HostBasicProductModel> allProductsListwithVoucher = new ArrayList<HostBasicProductModel>();
 	public static List<HostBasicProductModel> allProductsListWithRegularPrice = new ArrayList<HostBasicProductModel>();
 	public static List<HostBasicProductModel> allProductsListWithoutRegularPrice = new ArrayList<HostBasicProductModel>();
 	public static List<HostBasicProductModel> allProductsListWithBuy3Get1Applied = new ArrayList<HostBasicProductModel>();
@@ -21,6 +23,7 @@ public class HostCartCalculator {
 
 	public static void wipe() {
 		allProductsList = new ArrayList<HostBasicProductModel>();
+		allProductsListwithVoucher = new ArrayList<HostBasicProductModel>();
 		allProductsListWithRegularPrice = new ArrayList<HostBasicProductModel>();
 		allProductsListWithoutRegularPrice = new ArrayList<HostBasicProductModel>();
 		allProductsListWithBuy3Get1Applied = new ArrayList<HostBasicProductModel>();
@@ -53,6 +56,12 @@ public class HostCartCalculator {
 		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 	}
 
+	public static void calculateOrderForCustomerCartAndShippingTotals(String discountClass, String shippingValue, String voucherValue) {
+		allProductsListwithVoucher = OrderForCustomerDiscountsCalculation.calculateProductsWithVoucherApplied(allProductsList, voucherValue);
+		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateOrderForCustomerTotals(allProductsListwithVoucher, discountClass, voucherValue);
+		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+	}
+
 	public static void calculateCartBuy3Get1CartAndShippingTotals(List<HostBasicProductModel> prodList, String discountClass, String shippingValue) {
 
 		allProductsListWithRegularPrice = getProductswithRegularPriceFromList(allProductsList);
@@ -62,6 +71,18 @@ public class HostCartCalculator {
 		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsListWithBuy3Get1Applied, allProductsListWithRegularPrice, discountClass);
 		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 
+	}
+	
+	public static void calculateCartBuy3Get1OrderForCustomerCartAndShippingTotals(List<HostBasicProductModel> prodList, String discountClass, String shippingValue,String voucherValue) {
+		
+		allProductsListwithVoucher = OrderForCustomerDiscountsCalculation.calculateProductsWithVoucherApplied(allProductsList, voucherValue);
+		allProductsListWithRegularPrice = getProductswithRegularPriceFromList(allProductsListwithVoucher);		
+		allProductsListWithoutRegularPrice = getProductsWithoutRegularPriceFromList(allProductsListwithVoucher);
+		allProductsListWithBuy3Get1Applied = HostCartBuy3Get1Calculation.applyBuy3Get1OnTheCart(allProductsListWithRegularPrice);
+		allProductsListWithBuy3Get1Applied.addAll(allProductsListWithoutRegularPrice);
+		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsListWithBuy3Get1Applied, allProductsListWithRegularPrice, discountClass);
+		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+		
 	}
 
 }

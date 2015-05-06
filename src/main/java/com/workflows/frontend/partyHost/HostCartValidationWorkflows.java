@@ -8,6 +8,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
+import com.tools.utils.PrintUtils;
 import com.workflows.frontend.AddressWorkflows;
 
 public class HostCartValidationWorkflows {	
@@ -49,11 +50,41 @@ public class HostCartValidationWorkflows {
 		hostShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 		
 		hostCartWorkflows.setVerifyTotalsDiscount(HostDataGrabber.hostGrabbedCartTotals, HostCartCalculator.calculatedTotalsDiscounts);
-		hostCartWorkflows.verifyTotalsDiscountWith40AndJbDiscount("CART TOTALS WITH 40% AND JB APPLIED");
+		hostCartWorkflows.verifyTotalsDiscountWith40AndJbDiscount("CART TOTALS");
 
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostShippingTotals, HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals, HostCartCalculator.shippingCalculatedModel);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		AddressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		
+		AddressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
+	@StepGroup
+	@Screenshots(onlyOnFailures=true)
+	public void performCartValidationsWithVoucherDiscount(){
+		
+		checkoutValidationSteps.verifySuccessMessage();
+		
+		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListwithVoucher, HostDataGrabber.grabbedHostCartProductsList);
+		hostCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsList, HostDataGrabber.grabbedHostShippingProductsList);
+		hostShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsList, HostDataGrabber.grabbedHostConfirmationProductsList);
+		hostShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+		hostCartWorkflows.setVerifyTotalsDiscount(HostDataGrabber.hostGrabbedCartTotals, HostCartCalculator.calculatedTotalsDiscounts);
+		hostCartWorkflows.verifyTotalsDiscountWithVoucher("CART TOTALS");
+		
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostShippingTotals, HostCartCalculator.shippingCalculatedModel);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals, HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 		

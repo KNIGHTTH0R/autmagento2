@@ -2,11 +2,11 @@ package com.tools.requirements;
 
 import java.util.Set;
 
-import org.junit.Assert;
-
 import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
+
+import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
@@ -42,6 +42,7 @@ import com.pages.frontend.UpdatePartyPage;
 import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.SuccessPage;
 import com.pages.frontend.checkout.cart.partyHost.HostCartPage;
+import com.pages.frontend.checkout.cart.partyHost.OrderForCustomerCartPage;
 import com.pages.frontend.checkout.cart.regularCart.PlaceCustomerOrderFromPartyPage;
 import com.pages.frontend.checkout.cart.regularCart.RegularUserCartPage;
 import com.pages.frontend.checkout.cart.styleCoachCart.CartPage;
@@ -331,6 +332,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public HostCartPage hostCartPage() {
 		return getPages().currentPageAt(HostCartPage.class);
+	}
+	public OrderForCustomerCartPage orderForCustomerCartPage() {
+		return getPages().currentPageAt(OrderForCustomerCartPage.class);
 	}
 
 	// shipping pages

@@ -36,7 +36,8 @@ public class HomePage extends AbstractPage {
 		waitABit(2000);
 
 	}
-	//TODO a switch-case  should be added here
+
+	// TODO a switch-case should be added here
 	public void goToNewItems() {
 		Actions builder = new Actions(getDriver());
 		builder.moveToElement(jewelriesMenu).build().perform();

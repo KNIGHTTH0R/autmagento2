@@ -54,6 +54,7 @@ public class CustomerListPage extends AbstractPage {
 			System.out.println("Current Email: " + currentEmail);
 			if (currentEmail.trim().contentEquals(searchTerm)) {
 				currentLink.click();
+				waitABit(1000);
 				break theFor;
 			}
 		}
