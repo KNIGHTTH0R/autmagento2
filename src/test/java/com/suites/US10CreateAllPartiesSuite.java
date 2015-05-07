@@ -14,6 +14,8 @@ import com.tests.uss10.us10004.US10004CreatePartyWithStylistHostTest;
 import com.tests.uss10.us10004.US10004UpdateAndDeletePartyTest;
 import com.tests.uss10.us10005.US10005CreatePartyWithCustomerHostTest;
 import com.tests.uss10.us10006.US10006CreatePartyWithStylistHostTest;
+import com.tests.uss11.us11001.US11001CreatePartyWithStylistHostTest;
+import com.tests.uss11.us11002.US11002CreatePartyWithCustomerHostTest;
 
 @SuiteClasses({
 	US10001CreatePartyWithStylistHostTest.class,
@@ -26,6 +28,8 @@ import com.tests.uss10.us10006.US10006CreatePartyWithStylistHostTest;
 	US10004UpdateAndDeletePartyTest.class,
 	US10005CreatePartyWithCustomerHostTest.class,
 	US10006CreatePartyWithStylistHostTest.class,
+	US11001CreatePartyWithStylistHostTest.class,
+	US11002CreatePartyWithCustomerHostTest.class,
 	
 })
 @RunWith(Suite.class)

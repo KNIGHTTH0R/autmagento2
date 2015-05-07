@@ -30,7 +30,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "frontend")
+@WithTag(name = "US11", type = "frontend")
 @Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US11002CreatePartyWithCustomerHostTest extends BaseTest {

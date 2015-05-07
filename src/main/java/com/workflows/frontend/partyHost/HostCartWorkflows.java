@@ -100,6 +100,12 @@ public class HostCartWorkflows {
 		verifyJewelryDiscount(discountTotals.getDiscount(ConfigConstants.JEWELRY_BONUS), discountCalculationModel.findSegment(ConfigConstants.JEWELRY_BONUS));
 		verifyBuy3Get1Discount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_BUY_3_GET_1), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1));
 	}
+	@StepGroup
+	public void verifyTotalsWithBuy3Get1Discount(String message) {
+		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
+		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
+		verifyBuy3Get1Discount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_BUY_3_GET_1), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1));
+	}
 
 	@StepGroup
 	public void verifyTotalsDiscountWith40AndJbDiscount(String message) {

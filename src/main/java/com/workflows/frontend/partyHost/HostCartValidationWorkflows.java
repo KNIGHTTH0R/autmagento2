@@ -124,5 +124,38 @@ public class HostCartValidationWorkflows {
 		AddressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
 		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
+	@StepGroup
+	@Screenshots(onlyOnFailures=true)
+	public void performCartValidationsWithBuy3Get1(){
+		
+		checkoutValidationSteps.verifySuccessMessage();
+		
+		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListWithBuy3Get1Applied, HostDataGrabber.grabbedHostCartProductsList);
+		PrintUtils.printListHostBasicProductModel(HostCartCalculator.allProductsListWithBuy3Get1Applied);
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		PrintUtils.printListHostCartProductModel(HostDataGrabber.grabbedHostCartProductsList);
+		hostCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsList, HostDataGrabber.grabbedHostShippingProductsList);
+		hostShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsList, HostDataGrabber.grabbedHostConfirmationProductsList);
+		hostShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+		hostCartWorkflows.setVerifyTotalsDiscount(HostDataGrabber.hostGrabbedCartTotals, HostCartCalculator.calculatedTotalsDiscounts);
+		hostCartWorkflows.verifyTotalsWithBuy3Get1Discount("CART TOTALS WITH 3+1 ACTIVE");
+		
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostShippingTotals, HostCartCalculator.shippingCalculatedModel);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals, HostCartCalculator.shippingCalculatedModel);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		AddressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		
+		AddressWorkflows.setShippingAddressModels(shippingAddress,DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
 
 }

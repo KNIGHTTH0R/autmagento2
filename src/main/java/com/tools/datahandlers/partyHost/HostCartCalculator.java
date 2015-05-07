@@ -10,6 +10,7 @@ import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.env.variables.ContextConstants;
+import com.tools.utils.PrintUtils;
 
 public class HostCartCalculator {
 
@@ -73,14 +74,16 @@ public class HostCartCalculator {
 
 	}
 	
-	public static void calculateCartBuy3Get1OrderForCustomerCartAndShippingTotals(List<HostBasicProductModel> prodList, String discountClass, String shippingValue,String voucherValue) {
+	public static void calculateCartBuy3Get1OrderForCustomerCartAndShippingTotals(String discountClass, String shippingValue,String voucherValue) {
 		
 		allProductsListwithVoucher = OrderForCustomerDiscountsCalculation.calculateProductsWithVoucherApplied(allProductsList, voucherValue);
-		allProductsListWithRegularPrice = getProductswithRegularPriceFromList(allProductsListwithVoucher);		
-		allProductsListWithoutRegularPrice = getProductsWithoutRegularPriceFromList(allProductsListwithVoucher);
-		allProductsListWithBuy3Get1Applied = HostCartBuy3Get1Calculation.applyBuy3Get1OnTheCart(allProductsListWithRegularPrice);
-		allProductsListWithBuy3Get1Applied.addAll(allProductsListWithoutRegularPrice);
-		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsListWithBuy3Get1Applied, allProductsListWithRegularPrice, discountClass);
+		System.out.println("here:allProductsListwithVoucher");
+		PrintUtils.printListHostBasicProductModel(allProductsListwithVoucher);		
+		
+		allProductsListWithBuy3Get1Applied = HostCartBuy3Get1Calculation.applyBuy3Get1OnTheCart(allProductsListwithVoucher);		
+		System.out.println("here:allProductsListWithBuy3Get1Applied");
+		PrintUtils.printListHostBasicProductModel(allProductsListWithBuy3Get1Applied);
+		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsListWithBuy3Get1Applied, allProductsListwithVoucher, discountClass);
 		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 		
 	}

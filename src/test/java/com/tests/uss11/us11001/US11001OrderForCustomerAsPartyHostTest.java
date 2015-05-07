@@ -39,8 +39,6 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
-import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -49,7 +47,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US10", type = "frontend")
+@WithTag(name = "US11", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US11001OrderForCustomerAsPartyHostTest extends BaseTest {
@@ -153,8 +151,9 @@ public class US11001OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US11001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
 
 	@Test

@@ -78,7 +78,7 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "div#wishlistGuestsFormContainer img")
 	private WebElement wishlistProductImage;
 
-	@FindBy(css = "div.prod-tooltip.js-over")
+	@FindBy(css = "div.prod-tooltip.js-over p")
 	private WebElement wishlistProductNameContainer;
 
 	@FindBy(css = "input.input-checkbox.contact-chk")
@@ -100,14 +100,14 @@ public class PartyDetailsPage extends AbstractPage {
 		boolean found = false;
 		if (wishlistProductNameContainer.getText().contains(productName)) {
 			found = true;
-			wishlistProductCheckbox.click();
+//			wishlistProductCheckbox.click();
 		}
 		// on es website the borrow cart and contact booster is blocked.the
 		// product appears in party wishlist but cannot pe added into the borrow
 		// cart
-		if (!MongoReader.getContext().contentEquals("es")) {
-			addToBorrowCart.click();
-		}
+//		if (!MongoReader.getContext().contentEquals("es")) {
+//			addToBorrowCart.click();
+//		}
 		Assert.assertTrue("The product expected to be in wishlist is not present !!!", found);
 	}
 
