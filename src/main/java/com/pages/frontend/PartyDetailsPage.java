@@ -90,7 +90,7 @@ public class PartyDetailsPage extends AbstractPage {
 	// this is made for a single product.if the products is the expected
 	// one,select it and borrow it
 	public void selectWishlistProductAndAddItToBorrowCart(String productName) {
-
+		element(wishlistProductImage).waitUntilVisible();
 		List<WebElement> wishlistProductsList = getDriver().findElements(By.cssSelector("div.customer-list-container.clearfix .mini-box img"));
 		Assert.assertTrue("There are produscts in party wishlist which should not be there !!!", wishlistProductsList.size() == 1);
 
