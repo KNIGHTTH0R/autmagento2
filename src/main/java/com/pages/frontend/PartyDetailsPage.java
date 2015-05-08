@@ -66,7 +66,7 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "div.col-main.pos-rel")
 	private WebElement partyDetailsAndActionsContainer;
 
-	@FindBy(css = "button[title*='Für eine Kundin bestellen']")
+	@FindBy(css = "div.style-party-detail div:nth-child(14) form button")
 	private WebElement orderForCustomer;
 
 	@FindBy(css = "div.clearfix.invite-buttons #hostess-confirmation")

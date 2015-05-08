@@ -5,9 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us7.us7003.US7003CheckCustomerActivationTest;
-import com.tests.us7.us7003.US7003EmailActivationTest;
 import com.tests.us7.us7003.US7003RegistrationThankYouPageTest;
-import com.tests.us7.us7003.US7003RegularUserRegistrationThankYouPageTest;
 
 @SuiteClasses({
 ////	//setup

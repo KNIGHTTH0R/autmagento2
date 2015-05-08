@@ -17,6 +17,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -40,6 +41,7 @@ public class US7004bRegularUserRegistrationLandingPageTest extends BaseTest{
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
+		addressModel.setCountryName(ContextConstants.NOT_PREFERED_LANGUAGE);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 

@@ -56,6 +56,7 @@ public class ContextConstants {
 	public static String CONFIRM_ACCOUNT_MAIL_SUBJECT = MongoReader.getDictionaryItem("CONFIRM_ACCOUNT_MAIL_SUBJECT");
 	public static String NEWSLETTER_MAIL_SUBJECT = MongoReader.getDictionaryItem("NEWSLETTER_MAIL_SUBJECT");
 	public static String WELCOME_MAIL_SUBJECT = MongoReader.getDictionaryItem("WELCOME_MAIL_SUBJECT");
+	public static String ORDER_FOR_WRONG_CUSTOMER_ERROR_MESSAGE = MongoReader.getDictionaryItem("ORDER_FOR_WRONG_CUSTOMER_ERROR_MESSAGE");
 
 	public static String NOT_PREFERED_LANGUAGE = MongoReader.getDictionaryItem("NOT_PREFERED_LANGUAGE");
 	public static String PREFERD_LANGUAGE = MongoReader.getDictionaryItem("PREFERD_LANGUAGE");

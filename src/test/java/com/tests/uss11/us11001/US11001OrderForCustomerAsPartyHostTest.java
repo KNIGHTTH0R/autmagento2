@@ -79,7 +79,7 @@ public class US11001OrderForCustomerAsPartyHostTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	private String username, password, customerName;
+	private String username, password, customerName,notAllowedCustomerName;
 	private String discountClass;
 	private String billingAddress;
 	private String shippingValue;
@@ -123,6 +123,8 @@ public class US11001OrderForCustomerAsPartyHostTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
+			notAllowedCustomerName = prop.getProperty("notAllowedCustomerName");
+			System.out.println(notAllowedCustomerName);
 
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
@@ -151,19 +153,20 @@ public class US11001OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US11001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
 
 	@Test
-	public void us10006OrderForCustomerAsPartyHostTest() {
+	public void us11001OrderForCustomerAsPartyHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.orderForCustomer();
+		partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
 		// we use host cart even if it's not a host order because is the same

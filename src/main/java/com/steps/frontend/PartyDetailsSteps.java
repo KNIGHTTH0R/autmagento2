@@ -77,11 +77,21 @@ public class PartyDetailsSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void orderForCustomerFromParty(String name) {
+	public void orderForCustomer() {
 		partyDetailsPage().orderForCustomer();
+	}
+
+	@Step
+	public void orderForCustomerFromParty(String name) {
 		placeCustomerOrderFromPartyPage().typeContactName(name);
 		placeCustomerOrderFromPartyPage().startOrderForCustomer();
+	}
 
+	@Step
+	public void verifyCountryRestrictionWhenSelectingCustomerParty(String name) {
+		placeCustomerOrderFromPartyPage().typeContactName(name);
+		placeCustomerOrderFromPartyPage().startOrderForCustomer();
+		placeCustomerOrderFromPartyPage().verifyCustomerIsNotSuitableForTheOrderErrorMessage();
 	}
 
 	@Step

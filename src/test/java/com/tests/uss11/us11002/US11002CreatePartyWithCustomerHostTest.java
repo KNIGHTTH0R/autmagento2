@@ -80,7 +80,7 @@ public class US11002CreatePartyWithCustomerHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us10002CreatePartyWithCustomerHostTest() {
+	public void us11002CreatePartyWithCustomerHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

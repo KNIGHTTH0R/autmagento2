@@ -160,6 +160,7 @@ public class US11002OrderForCustomerAsPartyHostTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.orderForCustomer();
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;
