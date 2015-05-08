@@ -25,11 +25,10 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
 @WithTag(name = "US7", type = "external")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7006EmailActivationTest extends BaseTest{
+public class US7006EmailActivationTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -37,15 +36,16 @@ public class US7006EmailActivationTest extends BaseTest{
 	public EmailSteps emailSteps;
 	@Steps
 	public CustomVerification customVerifications;
-	
+
 	public String clientName;
 	public String validateURL;
-	private String styleCoachFN;
-//	private String styleCoachLN;
-	
+
+	// private String styleCoachFN;
+	// private String styleCoachLN;
+
 	@Before
 	public void setUp() throws Exception {
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -53,8 +53,8 @@ public class US7006EmailActivationTest extends BaseTest{
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7006.properties");
 			prop.load(input);
-			styleCoachFN = prop.getProperty("styleCoachFN");
-//			styleCoachLN = prop.getProperty("styleCoachLN");
+			// styleCoachFN = prop.getProperty("styleCoachFN");
+			// styleCoachLN = prop.getProperty("styleCoachLN");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -75,24 +75,24 @@ public class US7006EmailActivationTest extends BaseTest{
 		} else
 			System.out.println("The database has no entries");
 	}
-	
+
 	@Test
 	public void us7006EmailActivationTest() {
 
-//		emailClientSteps.openMailinator();
-//		validateURL = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
-//		System.out.println(validateURL);
-//		emailSteps.validateURL(validateURL, "customer/account/confirm");
-//		System.out.println("!!!!!!  " + validateURL);
-//		System.out.println("!!!!!!  " + styleCoachFN.toLowerCase());
-//		emailSteps.validateContextFromURL(validateURL, styleCoachFN.toLowerCase());
-		
+		// emailClientSteps.openMailinator();
+		// validateURL = emailClientSteps.grabEmail(clientName.replace("@" +
+		// ConfigConstants.WEB_MAIL, ""));
+		// System.out.println(validateURL);
+		// emailSteps.validateURL(validateURL, "customer/account/confirm");
+		// System.out.println("!!!!!!  " + validateURL);
+		// System.out.println("!!!!!!  " + styleCoachFN.toLowerCase());
+		// emailSteps.validateContextFromURL(validateURL,
+		// styleCoachFN.toLowerCase());
+
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
-		
-		
+
 		customVerifications.printErrors();
 	}
-	
-	
+
 }

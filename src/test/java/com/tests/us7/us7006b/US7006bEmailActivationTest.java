@@ -40,7 +40,7 @@ public class US7006bEmailActivationTest extends BaseTest{
 	
 	public String clientName;
 	public String validateURL;
-	private String styleCoachFN;
+//	private String styleCoachFN;
 //	private String styleCoachLN;
 	
 	@Before
@@ -53,7 +53,7 @@ public class US7006bEmailActivationTest extends BaseTest{
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7006.properties");
 			prop.load(input);
-			styleCoachFN = prop.getProperty("styleCoachFN");
+//			styleCoachFN = prop.getProperty("styleCoachFN");
 //			styleCoachLN = prop.getProperty("styleCoachLN");
 
 		} catch (IOException ex) {

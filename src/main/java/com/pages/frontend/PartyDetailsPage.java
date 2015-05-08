@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.tools.env.variables.ContextConstants;
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractPage;
 
 public class PartyDetailsPage extends AbstractPage {
