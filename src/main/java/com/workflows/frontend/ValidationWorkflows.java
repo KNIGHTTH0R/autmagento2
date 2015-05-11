@@ -7,6 +7,9 @@ import net.thucydides.core.annotations.Steps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
+import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.utils.PrintUtils;
 
 public class ValidationWorkflows {
 	
@@ -91,6 +94,18 @@ public class ValidationWorkflows {
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsListMarketing, DataGrabber.cartMarketingMaterialsProductsDiscounted);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION -RECALCULATED");
+		
+		System.out.println("--shipping calculated----------------");
+		PrintUtils.printListBasicProductModel(CartCalculator.allProductsList);
+		System.out.println("----shipping grabbed--------------");
+		PrintUtils.printList(DataGrabber.shippingProducts);
+		System.out.println("------------------");
+		
+		System.out.println("--conf calculated----------------");
+		PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
+		System.out.println("----conf grabbed--------------");
+		PrintUtils.printList(DataGrabber.confirmationProducts);
+		System.out.println("------------------");
 
 		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.shippingProducts);
 		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
@@ -128,7 +143,19 @@ public class ValidationWorkflows {
 
 		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketing, DataGrabber.cartMarketingMaterialsProducts);
-		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");		
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+		
+		System.out.println("--shipping calculated----------------");
+		PrintUtils.printListBasicProductModel(CartCalculator.allProductsList);
+		System.out.println("----shipping grabbed--------------");
+		PrintUtils.printList(DataGrabber.shippingProducts);
+		System.out.println("------------------");
+		
+		System.out.println("--conf calculated----------------");
+		PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
+		System.out.println("----conf grabbed--------------");
+		PrintUtils.printList(DataGrabber.confirmationProducts);
+		System.out.println("------------------");
 		
 		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.shippingProducts);
 		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
