@@ -7,10 +7,12 @@ import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.poc.Retry;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
@@ -53,12 +55,12 @@ public class US6001StyleCoachRegistrationTest extends BaseTest {
 	}
 
 	@Test
-	public void us6001StyleCoachRegistrationTest(){ 
+	public void us6001StyleCoachRegistrationTest() {
 		headerSteps.navigateToRegisterForm();
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 		customVerification.printErrors();
-		
+
 	}
 
 	@After
