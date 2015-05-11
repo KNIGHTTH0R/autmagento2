@@ -79,6 +79,7 @@ public class PartyCreationPage extends AbstractPage {
 	public void checkHostedByCustomer() {
 		element(hostedByCustomer).waitUntilVisible();
 		hostedByCustomer.click();
+		waitABit(1000);
 
 	}
 
