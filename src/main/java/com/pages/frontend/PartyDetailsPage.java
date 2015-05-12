@@ -91,10 +91,12 @@ public class PartyDetailsPage extends AbstractPage {
 	public void selectWishlistProductAndAddItToBorrowCart(String productName) {
 		element(wishlistProductImage).waitUntilVisible();
 		List<WebElement> wishlistProductsList = getDriver().findElements(By.cssSelector("div.customer-list-container.clearfix .mini-box img"));
+	
 		Assert.assertTrue("There are produscts in party wishlist which should not be there !!!", wishlistProductsList.size() == 1);
 
-		Actions builder = new Actions(getDriver());
-		builder.moveToElement(wishlistProductImage).build().perform();
+//		Actions builder = new Actions(getDriver());
+//		builder.moveToElement(wishlistProductImage).build().perform();
+		element(wishlistProductCheckbox).click();
 		element(wishlistProductNameContainer).waitUntilVisible();
 		boolean found = false;
 		if (wishlistProductNameContainer.getText().contains(productName)) {
