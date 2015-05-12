@@ -59,6 +59,26 @@ public class EmailClientSteps extends AbstractSteps {
 		return welcomeMessage;
 
 	}
+	@Step
+	public String grabConfirmationLinkFromEmail(String email, String title) {
+		waitABit(5000);
+		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
+		System.out.println("URL : " + url);
+		getDriver().get(url);
+		
+		waitABit(5000);
+		String welcomeMessage = mailinatorPage().grabEmail(title);
+		
+		if (welcomeMessage.isEmpty()) {
+			String confirmLink = mailinatorPage().confirmEmail();
+			waitABit(2000);
+			welcomeMessage = confirmLink;
+		}
+		
+		waitABit(6000);
+		return welcomeMessage;
+		
+	}
 
 	@Step
 	public String confirmEmail(String email, String title) {

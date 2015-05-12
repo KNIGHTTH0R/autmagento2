@@ -12,6 +12,9 @@ public class HomePage extends AbstractPage {
 
 	@FindBy(css = "div.categories li:nth-child(3) a")
 	private WebElement styleCoachLink;
+	
+	@FindBy(css = "a#contactBoosterDetails")
+	private WebElement contactBoosterDetails;
 
 	@FindBy(css = "#cssmenu > ul > li:first-child a")
 	private WebElement generalView;
@@ -28,6 +31,11 @@ public class HomePage extends AbstractPage {
 	public void clickStyleCoachLink() {
 		styleCoachLink.click();
 
+	}
+	public void clickOnContactBoosterDetails() {
+		element(contactBoosterDetails).waitUntilVisible();
+		contactBoosterDetails.click();
+		
 	}
 
 	public void clickonGeneralView() {

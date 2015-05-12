@@ -25,13 +25,17 @@ import com.pages.external.MailinatorPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
 import com.pages.external.facebook.FacebookEMBLoginPage;
 import com.pages.frontend.CreateCustomerPage;
+import com.pages.frontend.FancyBoxPage;
 import com.pages.frontend.FooterPage;
 import com.pages.frontend.HeaderPage;
 import com.pages.frontend.HomePage;
+import com.pages.frontend.KoboSuccesFormPage;
+import com.pages.frontend.KoboValidationPage;
 import com.pages.frontend.LoginPage;
 import com.pages.frontend.LoungePage;
 import com.pages.frontend.PartyCreationPage;
 import com.pages.frontend.PartyDetailsPage;
+import com.pages.frontend.PomProductListPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
@@ -57,6 +61,7 @@ import com.pages.frontend.checkout.wishlist.WishlistPage;
 import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.registration.FacebookRegistrationFormPage;
+import com.pages.frontend.registration.contactBooster.ContactBoosterRegistrationPage;
 import com.pages.frontend.registration.landing.ContactLandingPage;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
 import com.pages.frontend.registration.landing.ThankYouPage;
@@ -254,6 +259,9 @@ public class AbstractSteps extends ScenarioSteps {
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
 	}
+	public FancyBoxPage fancyBoxPage() {
+		return getPages().currentPageAt(FancyBoxPage.class);
+	}
 
 	public LoungePage loungePage() {
 		return getPages().currentPageAt(LoungePage.class);
@@ -316,6 +324,21 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public CreateNewContactPage createNewContactPage() {
 		return getPages().currentPageAt(CreateNewContactPage.class);
+	}
+	
+	public KoboValidationPage koboValidationPage() {
+		return getPages().currentPageAt(KoboValidationPage.class);
+	}
+
+	public ContactBoosterRegistrationPage contactBoosterRegistrationPage() {
+		return getPages().currentPageAt(ContactBoosterRegistrationPage.class);
+	}
+	
+	public KoboSuccesFormPage koboSuccesFormPage() {
+		return getPages().currentPageAt(KoboSuccesFormPage.class);
+	}
+	public PomProductListPage pomProductListPage() {
+		return getPages().currentPageAt(PomProductListPage.class);
 	}
 
 	// cart

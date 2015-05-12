@@ -80,7 +80,7 @@ public class BaseTest {
 
 		System.out.println("Base URL: " + baseUrl);
 		System.out.println("Soap URL: " + soapUrl);
-		MongoWriter.saveStoreUrl(storeIDs, baseUrl,soapUrl);
+		MongoWriter.saveStoreUrl(storeIDs, baseUrl, soapUrl);
 
 		EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
 		emailDefaults.setHost(EmailConstants.RECEIVING_HOST);
@@ -94,14 +94,15 @@ public class BaseTest {
 	/**
 	 * This method will grab dictionary properties by context and save it to
 	 * MongoDb.
-	 * @throws InterruptedException 
+	 * 
+	 * @throws InterruptedException
 	 */
 	public static void updateDictionary() {
 		MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG, MongoTableKeys.DICTIONARY_MODEL);
-		
+
 		System.out.println("Dictionary PATH: " + UrlConstants.CONTEXT_PATH + MongoReader.getContext() + File.separator + "dictionary.properties");
 		System.out.println("Load Dictionary... ");
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
@@ -123,6 +124,6 @@ public class BaseTest {
 				}
 			}
 		}
-		
+
 	}
 }

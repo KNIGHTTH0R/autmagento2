@@ -4,6 +4,7 @@ import com.tools.persistance.MongoReader;
 
 public class ContextConstants {
 
+	
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
 	// messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
@@ -23,6 +24,7 @@ public class ContextConstants {
 	public static String EMPTY_WISHLIST_MESSAGE = MongoReader.getDictionaryItem("EMPTY_WISHLIST_MESSAGE");
 	public static String SUCCES_MESSAGE = MongoReader.getDictionaryItem("SUCCES_MESSAGE");
 	public static String CREATE_ACCOUNT_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("CREATE_ACCOUNT_SUCCESS_MESSAGE");
+	public static String SUCCES_KOBO_FORM = MongoReader.getDictionaryItem("SUCCES_KOBO_FORM");
 	public static String PRODUCT_ADDED_INTO_CART = MongoReader.getDictionaryItem("PRODUCT_ADDED_INTO_CART");
 	public static String SUCCESFULL_REGISTRATION = MongoReader.getDictionaryItem("SUCCESFULL_REGISTRATION");
 	public static String MEIN_STYLE_COACH = MongoReader.getDictionaryItem("MEIN_STYLE_COACH");

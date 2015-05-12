@@ -329,5 +329,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		registerLandingPage().checkIAgree();
 		registerLandingPage().submitAndContinue();
 	}
+	
+
 
 }

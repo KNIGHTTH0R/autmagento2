@@ -87,6 +87,7 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		productsList = MongoReader.grabRegularBasicProductModel("US10006CustomerAddProductIntoWishlistTest" + SoapKeys.CALC);
 		productName = productsList.get(0).getName();
+		System.out.println(productName);
 //		productCode = productsList.get(0).getProdCode();
 
 	}

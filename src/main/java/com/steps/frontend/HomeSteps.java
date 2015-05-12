@@ -42,6 +42,11 @@ public class HomeSteps extends AbstractSteps {
 		homePage().goToNewItems();
 	}
 	
+	@Step
+	public void clickOnContactBoosterDetails(){
+		homePage().clickOnContactBoosterDetails();
+	}
+	
 	
 
 }
