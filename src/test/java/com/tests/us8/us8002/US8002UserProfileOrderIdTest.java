@@ -29,12 +29,11 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
 @WithTag(name = "US8", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US8002UserProfileOrderIdTest extends BaseTest{
-	
+public class US8002UserProfileOrderIdTest extends BaseTest {
+
 	@Steps
 	public ProfileSteps profileSteps;
 	@Steps
@@ -43,12 +42,11 @@ public class US8002UserProfileOrderIdTest extends BaseTest{
 	public FooterSteps footerSteps;
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private static OrderModel orderModel = new OrderModel();
 	private String username, password;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -59,7 +57,7 @@ public class US8002UserProfileOrderIdTest extends BaseTest{
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
-			password = prop.getProperty("password");			
+			password = prop.getProperty("password");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -73,16 +71,15 @@ public class US8002UserProfileOrderIdTest extends BaseTest{
 			}
 		}
 
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 		orderModel = MongoReader.grabOrderModels("US8002CustomerBuyWithVoucherTest" + SoapKeys.GRAB).get(0);
-		
+
 	}
-	
+
 	@Test
 	public void us8002UserProfileOrderIdTest() {
-		
+
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 
@@ -96,7 +93,7 @@ public class US8002UserProfileOrderIdTest extends BaseTest{
 		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
 		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
 		orderModel = orderHistory.get(0);
-		
+
 		customVerifications.printErrors();
 	}
 }

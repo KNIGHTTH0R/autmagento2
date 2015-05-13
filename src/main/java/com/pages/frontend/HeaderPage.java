@@ -44,13 +44,11 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = "ul.links li:first-child a")
 	private WebElement wishlist;
-	
+
 	@FindBy(css = "ul.links>.last a")
 	private WebElement anmeldenButton;
 
-	
 	@FindBy(css = "ul.links>.last a")
-	
 	private WebElement abmeldenButton;
 
 	@FindBy(css = "div.branding p")
@@ -61,7 +59,7 @@ public class HeaderPage extends AbstractPage {
 
 	public void selectLanguage(String language) {
 		element(websiteContainer).waitUntilVisible();
-		List<WebElement> languagesList = websiteContainer.findElements(By.cssSelector("ul#select-website > li a"));		
+		List<WebElement> languagesList = websiteContainer.findElements(By.cssSelector("ul#select-website > li a"));
 		for (WebElement lang : languagesList) {
 			if (lang.getText().contentEquals(language.toUpperCase())) {
 				System.out.println("match");
@@ -71,7 +69,7 @@ public class HeaderPage extends AbstractPage {
 				break;
 			}
 		}
-	
+
 	}
 
 	public void verifyThatLanguageFromHeaderIsCorrectySelected(String website) {
@@ -101,6 +99,7 @@ public class HeaderPage extends AbstractPage {
 		element(profileButton).waitUntilVisible();
 		profileButton.click();
 	}
+
 	public void clickOnWishlistButton() {
 		element(wishlist).waitUntilVisible();
 		wishlist.click();
@@ -158,6 +157,19 @@ public class HeaderPage extends AbstractPage {
 			}
 		}
 		return styleCoachNameParts[0].toLowerCase();
+	}
+
+	public String getStyleCoachFullNameFromProfile() {
+		
+		String styleCoachName = "";
+		List<WebElement> infoBoxList = getDriver().findElements(By.cssSelector(".info-box"));
+		for (WebElement infoBox : infoBoxList) {
+			if (infoBox.getText().contains(ContextConstants.MEIN_STYLE_COACH)) {
+				styleCoachName = infoBox.findElement(By.cssSelector("dl dd")).getText();
+				break;
+			}
+		}
+		return styleCoachName;
 	}
 
 	public void navigateToPartyPage(String url) {

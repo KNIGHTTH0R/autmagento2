@@ -21,6 +21,16 @@ public class CreateProduct {
 		createApiProduct(createProductModel());
 	}
 
+	public static ProductDetailedModel createPomProductModel() {
+		ProductDetailedModel result = createProductModel();
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+
+		return result;
+	}
+
 	public static ProductDetailedModel createMarketingProductModel() {
 		ProductDetailedModel result = createProductModel();
 		List<String> categoriesIds = new ArrayList<String>();
@@ -67,7 +77,7 @@ public class CreateProduct {
 
 		List<String> webSiteIds = new ArrayList<String>();
 
-		//Made the store allocation to be environment dependent
+		// Made the store allocation to be environment dependent
 		String tempStore = MongoReader.getStoreIds();
 		System.out.println("---------------------------------");
 		System.out.println("Stores: " + tempStore);
@@ -80,9 +90,9 @@ public class CreateProduct {
 			}
 		}
 
-//		webSiteIds.add("1");
-//		webSiteIds.add("0");
-//		webSiteIds.add("2");
+		// webSiteIds.add("1");
+		// webSiteIds.add("0");
+		// webSiteIds.add("2");
 		product.setWebsiteIdsArray(webSiteIds);
 
 		List<String> categoriesIds = new ArrayList<String>();

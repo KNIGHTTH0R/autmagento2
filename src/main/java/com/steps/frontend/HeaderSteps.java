@@ -64,10 +64,11 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	public void redirectToWishlist() {
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.WISHLIST_URL);
-	
+
 	}
+
 	@Step
-	public void wipeWishlist() {		
+	public void wipeWishlist() {
 		if (!wishlistPage().isWishlistEmpty()) {
 			wishlistPage().addAllProductsToCArt();
 		}
@@ -137,11 +138,23 @@ public class HeaderSteps extends AbstractSteps {
 	public String getStyleCoachFirstNameFromProfile() {
 		return headerPage().getStyleCoachFirstNameFromProfile();
 	}
+	@Step
+	public String getStyleCoachFullNameFromProfile() {
+		return headerPage().getStyleCoachFullNameFromProfile();
+	}
 
 	@Step
 	public void validateCustomeStyleCoachName(String boutiqueName, String styleCoachName) {
 		Assert.assertTrue("Failure: The stylecoach name and boutique name don't match !", boutiqueName.contentEquals(styleCoachName));
-		Assert.assertFalse("Failure: The stylecoach name and boutique is empty !", boutiqueName.contentEquals(""));
+		Assert.assertFalse("Failure: The stylecoach name and boutique is empty !", boutiqueName.contentEquals("") || boutiqueName == null);
+	}
+
+	@Step
+	public void validateCustomerIsAssignedToStyleCoach(String expectedSCName, String grabbedSCName) {
+		System.out.println(expectedSCName);
+		System.out.println(grabbedSCName);
+		Assert.assertTrue("Failure: The customer is not assigned to the expected SC !", expectedSCName.contentEquals(grabbedSCName));
+
 	}
 
 	@Step

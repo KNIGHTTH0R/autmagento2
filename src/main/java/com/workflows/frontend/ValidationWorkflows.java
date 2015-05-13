@@ -76,6 +76,24 @@ public class ValidationWorkflows {
 	public void performCartValidations() {
 
 		checkoutValidationSteps.verifySuccessMessage();
+		
+		System.out.println("--shipping calculated----------------");
+		PrintUtils.printListBasicProductModel(CartCalculator.productsList50);
+		System.out.println("----shipping grabbed--------------");
+		PrintUtils.printList(DataGrabber.cartProductsWith50Discount);
+		System.out.println("------------------");
+		
+		System.out.println("--shipping calculated----------------");
+		PrintUtils.printListBasicProductModel(CartCalculator.productsList25);
+		System.out.println("----shipping grabbed--------------");
+		PrintUtils.printList(DataGrabber.cartProductsWith25Discount);
+		System.out.println("------------------");
+		
+		System.out.println("--shipping calculated----------------");
+		PrintUtils.printListBasicProductModel(CartCalculator.productsListMarketing);
+		System.out.println("----shipping grabbed--------------");
+		PrintUtils.printList(DataGrabber.cartMarketingMaterialsProducts);
+		System.out.println("------------------");
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);		
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");

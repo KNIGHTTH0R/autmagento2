@@ -24,7 +24,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 @WithTag(name = "US7", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7001CheckCustomerActivation extends BaseTest {
+public class US7008CheckCustomerActivation extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -40,9 +40,9 @@ public class US7001CheckCustomerActivation extends BaseTest {
 	public void setUp() throws Exception {
 		
 
-		int size = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7008KoboRegistrationTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7008KoboRegistrationTest").get(0).getEmailName();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
@@ -51,7 +51,7 @@ public class US7001CheckCustomerActivation extends BaseTest {
 		
 	}
 	@Test
-	public void us7001CheckCustomerActivation() {
+	public void us7008CheckCustomerActivation() {
 		
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();

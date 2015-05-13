@@ -1,4 +1,4 @@
-package com.tests.us7.us7008;
+package com.tests.us7.us7009;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,7 +50,7 @@ import com.tools.utils.FormatterUtils;
 @WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7008KoboRegistrationTest extends BaseTest {
+public class US7009KoboRegistrationTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -99,9 +99,8 @@ public class US7008KoboRegistrationTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7008.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7009.properties");
 			prop.load(input);
-			
 			context = prop.getProperty("context");
 			koboCode = prop.getProperty("koboCode");
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
@@ -128,7 +127,7 @@ public class US7008KoboRegistrationTest extends BaseTest {
 	}
 
 	@Test
-	public void us7008KoboRegistrationTest() {
+	public void us7009KoboRegistrationTest() {
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL() + context, koboCode);
 		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();

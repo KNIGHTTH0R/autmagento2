@@ -17,9 +17,25 @@ public class FancyBoxPage extends AbstractPage {
 	@FindBy(css = "select[id*='attribute']")
 	private WebElement selectInput;
 
+	@FindBy(css = "div.product-shop button")
+	private WebElement submit;
+
+	@FindBy(css = ".confirmation-button >.button.white-button.confirm-button")
+	private WebElement goToShipping;
+
 	public void closeFancyBox() {
 		element(closeFancyBox).waitUntilVisible();
 		closeFancyBox.click();
+	}
+
+	public void goToShipping() {
+		element(goToShipping).waitUntilVisible();
+		goToShipping.click();
+	}
+
+	public void submitProduct() {
+		element(submit).waitUntilVisible();
+		submit.click();
 	}
 
 	public void selectValueFromDropDown(String size) {

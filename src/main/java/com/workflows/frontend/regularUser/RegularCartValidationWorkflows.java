@@ -136,8 +136,12 @@ public class RegularCartValidationWorkflows {
 	public void performCartValidationsWithVoucherApplied() {
 
 		checkoutValidationSteps.verifySuccessMessage();
-		System.out.println("CartCalculator.productsList50: " + CartCalculator.productsList50.size());
-		System.out.println("DataGrabber.cartProductsWith50Discount: " + DataGrabber.cartProductsWith50Discount.size());
+		
+		System.out.println("--cart calculated----------------");
+		PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
+		System.out.println("----cart grabbed--------------");
+		PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularCartProductsList);
+		System.out.println("------------------");
 
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");

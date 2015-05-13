@@ -21,8 +21,8 @@ public class KoboValidationSteps extends AbstractSteps {
 	}
 	
 	@StepGroup
-	public void enterKoboCodeAndGoToRegistrationProcess(String code){
-		getDriver().get(MongoReader.getBaseURL());
+	public void enterKoboCodeAndGoToRegistrationProcess(String url,String code){
+		getDriver().get(url);
 		homePage().clickOnContactBoosterDetails();
 		koboValidationPage().enterKoboCode(code);
 		koboValidationPage().submitFormBooster();
