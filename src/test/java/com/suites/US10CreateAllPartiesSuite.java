@@ -13,6 +13,7 @@ import com.tests.uss10.us10003.US10003VerifyHostPartyCreationEmailTest;
 import com.tests.uss10.us10004.US10004CreatePartyWithStylistHostTest;
 import com.tests.uss10.us10004.US10004UpdateAndDeletePartyTest;
 import com.tests.uss10.us10005.US10005CreatePartyWithCustomerHostTest;
+import com.tests.uss10.us10006.US10006ChechEmailAndAcceptInvitationTest;
 import com.tests.uss10.us10006.US10006CreatePartyWithStylistHostTest;
 import com.tests.uss11.us11001.US11001CreatePartyWithStylistHostTest;
 import com.tests.uss11.us11002.US11002CreatePartyWithCustomerHostTest;
@@ -28,6 +29,7 @@ import com.tests.uss11.us11002.US11002CreatePartyWithCustomerHostTest;
 	US10004UpdateAndDeletePartyTest.class,
 	US10005CreatePartyWithCustomerHostTest.class,
 	US10006CreatePartyWithStylistHostTest.class,
+	US10006ChechEmailAndAcceptInvitationTest.class,
 	US11001CreatePartyWithStylistHostTest.class,
 	US11002CreatePartyWithCustomerHostTest.class,
 	
