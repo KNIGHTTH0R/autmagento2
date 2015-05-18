@@ -42,8 +42,7 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "by_default")
 	private WebElement noInviteCheckbox;
 
-//	@FindBy(css = "button[title*='Senden']")
-	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")     //int
+	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")  
 	private WebElement completeButton;
 
 	// ---------------------------------------------------

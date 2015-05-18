@@ -8,9 +8,6 @@ import com.tools.requirements.AbstractPage;
 
 public class ContactBoosterRegistrationPage extends AbstractPage {
 
-	@FindBy(id = "member-code")
-	private WebElement memberCodeInput;
-
 	@FindBy(id = "firstname")
 	private WebElement firstNameInput;
 

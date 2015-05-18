@@ -25,6 +25,7 @@ public class UrlConstants {
 	public static final String BASE_URL_BE = "/index.php/admin/";
 	public static final String BASE_URL_AUT = "/customer/account/login/";
 	public static final String WISHLIST_URL = "/wishlist/";
+	public static final String KOBO_CAMPAIGN = "/kobo-campaign/";
 
 //	public static final String PROFILE_HISTORY_URL = "simona/sales/order/history/";
 	public static final String PROFILE_HISTORY_URL = "/sales/order/history/";

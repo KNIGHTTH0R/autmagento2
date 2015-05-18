@@ -3,7 +3,6 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
 public class KoboValidationSteps extends AbstractSteps {
@@ -26,6 +25,11 @@ public class KoboValidationSteps extends AbstractSteps {
 		homePage().clickOnContactBoosterDetails();
 		koboValidationPage().enterKoboCode(code);
 		koboValidationPage().submitFormBooster();
+	}
+	@StepGroup
+	public void startKoboCampaignProcess(String url){
+		getDriver().get(url);
+		koboCampaignPage().clickRegister();
 	}
 	
 
