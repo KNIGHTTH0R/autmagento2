@@ -25,6 +25,8 @@ public class ContextConstants {
 	public static String EMPTY_WISHLIST_MESSAGE = MongoReader.getDictionaryItem("EMPTY_WISHLIST_MESSAGE");
 	public static String SUCCES_MESSAGE = MongoReader.getDictionaryItem("SUCCES_MESSAGE");
 	public static String CREATE_ACCOUNT_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("CREATE_ACCOUNT_SUCCESS_MESSAGE");
+	public static String NOT_ALLOWED_TO_SHIP_ON_SELECTED_COUNTRY = MongoReader.getDictionaryItem("NOT_ALLOWED_TO_SHIP_ON_SELECTED_COUNTRY");
+	public static String NOT_PREFERED_SHOP_MESSAGE = MongoReader.getDictionaryItem("NOT_PREFERED_SHOP_MESSAGE");
 	public static String SUCCES_KOBO_FORM = MongoReader.getDictionaryItem("SUCCES_KOBO_FORM");
 	public static String PRODUCT_ADDED_INTO_CART = MongoReader.getDictionaryItem("PRODUCT_ADDED_INTO_CART");
 	public static String SUCCESFULL_REGISTRATION = MongoReader.getDictionaryItem("SUCCESFULL_REGISTRATION");

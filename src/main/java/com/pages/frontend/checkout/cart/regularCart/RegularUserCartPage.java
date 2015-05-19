@@ -38,9 +38,7 @@ public class RegularUserCartPage extends AbstractPage {
 	@FindBy(css = "div.page-title ul.checkout-types button:last-child")
 	private WebElement kasseButton;
 
-	// @FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
 	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")
-	// int
 	private WebElement updateButton;
 
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")
@@ -52,6 +50,12 @@ public class RegularUserCartPage extends AbstractPage {
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
 
+	@FindBy(css = "a[href*='/changePreferredShop']")
+	private WebElement changePrefferedShopLink;
+
+	@FindBy(css = "ul.messages li.error-msg")
+	private WebElement changePrefferedShopMessage;
+
 	@FindBy(css = "li.error-msg span")
 	private WebElement errorMessageContainer;
 
@@ -59,6 +63,12 @@ public class RegularUserCartPage extends AbstractPage {
 		element(errorMessageContainer).waitUntilVisible();
 		Assert.assertTrue("The message <" + ContextConstants.VOUCHER_DISCOUNT_INCOMPATIBLE + "> dosn't appear and it should!",
 				errorMessageContainer.getText().contains(ContextConstants.VOUCHER_DISCOUNT_INCOMPATIBLE));
+	}
+
+	public void validateThatShippingOnSelectedCountryIsNotAllowed() {
+		element(errorMessageContainer).waitUntilVisible();
+		Assert.assertTrue("The message <" + ContextConstants.VOUCHER_DISCOUNT_INCOMPATIBLE + "> dosn't appear and it should!",
+				errorMessageContainer.getText().contains(ContextConstants.NOT_ALLOWED_TO_SHIP_ON_SELECTED_COUNTRY));
 	}
 
 	public void typeCouponCode(String code) {
@@ -69,6 +79,11 @@ public class RegularUserCartPage extends AbstractPage {
 	public void submitVoucherCode() {
 		element(submitVoucherCode).waitUntilVisible();
 		submitVoucherCode.click();
+	}
+
+	public void validateNotPrefferedShopAndGoToPreferredOne() {
+		Assert.assertTrue("The not preffered shop message is missing", changePrefferedShopMessage.getText().contains(ContextConstants.NOT_PREFERED_SHOP_MESSAGE));
+		changePrefferedShopLink.click();
 	}
 
 	public void selectProductDiscountType(String productCode, String discountType) {
@@ -123,7 +138,6 @@ public class RegularUserCartPage extends AbstractPage {
 		element(cartTable).waitUntilVisible();
 		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
 
-		// waitABit(Constants.TIME_CONSTANT);
 		List<RegularUserCartProductModel> resultList = new ArrayList<RegularUserCartProductModel>();
 
 		for (WebElement webElementNow : entryList) {
@@ -134,7 +148,6 @@ public class RegularUserCartPage extends AbstractPage {
 					.trim()));
 			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			// productNow.setBonusType(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) select option[selected='true']")).getText()));
 			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
 
 			resultList.add(productNow);
@@ -173,7 +186,16 @@ public class RegularUserCartPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.JEWELRY_BONUS, valueTransformer);
 			}
+			// TODO do something with this codes
 			if (key.contains("G025FMDE")) {
+				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
+			}
+			if (key.contains("CNYSSQGT-2014")) {
+				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
+			}
+			if (key.contains("DVKMHTKA-2015")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}
