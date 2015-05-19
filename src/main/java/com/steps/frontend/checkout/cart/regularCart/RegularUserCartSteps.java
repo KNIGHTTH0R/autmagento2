@@ -25,6 +25,14 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void validateThatVoucherCannotBeAppliedMessage() {
 		regularUserCartPage().validateThatVoucherCannotBeAppliedMessage();
 	}
+	@Step
+	public void validateNotPrefferedShopAndGoToPreferredOne() {
+		regularUserCartPage().validateNotPrefferedShopAndGoToPreferredOne();
+	}
+	@Step
+	public void validateThatShippingOnSelectedCountryIsNotAllowed() {
+		regularUserCartPage().validateThatShippingOnSelectedCountryIsNotAllowed();
+	}
 
 	@Step
 	@Title("Update product list")

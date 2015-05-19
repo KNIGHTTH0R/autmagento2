@@ -73,14 +73,12 @@ public class US70012ValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Test
 	public void us70012ValidateCustomerIsAssignedToStylist() {
 
-		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
+		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);	
 		headerSteps.goToProfile();
-		headerSteps.getBoutiqueName();
-		headerSteps.getStyleCoachFirstNameFromProfile();
-		headerSteps.getStyleCoachFullNameFromProfile();
-
-		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
-		headerSteps.validateCustomerIsAssignedToStyleCoach(expectedStyleCoach, headerSteps.getStyleCoachFullNameFromProfile());
+		System.out.println(headerSteps.getBoutiqueName());
+		System.out.println(headerSteps.getStyleCoachFirstNameFromProfile());
+	
+		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());		
 
 	}
 
