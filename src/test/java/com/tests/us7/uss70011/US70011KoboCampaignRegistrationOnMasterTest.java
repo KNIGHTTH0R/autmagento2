@@ -79,7 +79,6 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
-	
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
 	private CreditCardModel creditCardData = new CreditCardModel();
@@ -88,7 +87,7 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
-		
+
 		genProduct1 = CreateProduct.createPomProductModel();
 		genProduct1.setPrice("89.00");
 		CreateProduct.createApiProduct(genProduct1);
@@ -100,7 +99,7 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us70011.properties");
 			prop.load(input);
-			
+
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
 			creditCardData.setCardName(prop.getProperty("cardName"));
 			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
@@ -143,7 +142,6 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
-		
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 

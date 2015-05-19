@@ -39,7 +39,12 @@ import com.poc.DeactivateRule;
 //	US7005Suite.class,
 	US7006Suite.class,
 	US7006bSuite.class,
-	US7007Suite.class,
+	US7007Suite.class,	
+	US7008Suite.class,
+	US7009Suite.class,
+	US70010Suite.class,
+	US70011Suite.class,
+	US70012Suite.class,
 	
 	DeactivateBuy3Get1ForRegular.class,
 	US8001Suite.class,
@@ -62,8 +67,10 @@ import com.poc.DeactivateRule;
 	US11001Suite.class,
 	US11002Suite.class,
 	
+	
+	
 })
 @RunWith(Suite.class)
-public class PippaInternationalizationSuite {
+public class PippaInternationalizationDeSuite {
 
 }
