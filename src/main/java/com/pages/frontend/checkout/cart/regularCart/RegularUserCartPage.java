@@ -143,9 +143,9 @@ public class RegularUserCartPage extends AbstractPage {
 		for (WebElement webElementNow : entryList) {
 			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
 
-			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText()));
-			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "")
-					.trim()));
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "")
+					.trim());
 			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
@@ -157,7 +157,7 @@ public class RegularUserCartPage extends AbstractPage {
 		return resultList;
 	}
 
-	public RegularUserCartTotalsModel grabTotals() {
+	public RegularUserCartTotalsModel grabTotals(String voucherCodeLabel) {
 		RegularUserCartTotalsModel resultModel = new RegularUserCartTotalsModel();
 		waitABit(TimeConstants.TIME_CONSTANT);
 
@@ -186,16 +186,16 @@ public class RegularUserCartPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.JEWELRY_BONUS, valueTransformer);
 			}
-			// TODO do something with this codes
-			if (key.contains("G025FMDE")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
-			}
-			if (key.contains("CNYSSQGT-2014")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
-				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
-			}
-			if (key.contains("DVKMHTKA-2015")) {
+//			// TODO do something with this codes
+//			if (key.contains("G025FMDE")) {
+//				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+//				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
+//			}
+//			if (key.contains("CNYSSQGT-2014")) {
+//				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+//				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
+//			}
+			if (key.contains(voucherCodeLabel)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}

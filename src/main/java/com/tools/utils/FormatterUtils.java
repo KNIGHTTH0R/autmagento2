@@ -86,6 +86,17 @@ public class FormatterUtils {
 
 		return result;
 	}
+	public static String cleanString(String unitPrice) {
+		String result = unitPrice;
+		result = result.replace(" €", "");
+		result = result.replace("€ ", "");
+		result = result.replace(".", "");
+		result = result.replace(",", ".");
+		result = result.replace("-", "");
+		result = result.replace("%", "");
+		
+		return result;
+	}
 
 	public static int cleanNumberToInt(String unitPrice) {
 		String result = unitPrice;

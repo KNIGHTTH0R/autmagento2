@@ -183,7 +183,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
-		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals();
+		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
 		PrintUtils.printRegularUserCartTotalsModel(RegularUserDataGrabber.regularUserGrabbedCartTotals);
 
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);

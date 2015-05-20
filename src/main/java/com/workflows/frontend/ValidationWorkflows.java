@@ -8,7 +8,6 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.utils.PrintUtils;
 
 public class ValidationWorkflows {

@@ -1,7 +1,6 @@
 package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
 import com.tools.data.frontend.AddressModel;

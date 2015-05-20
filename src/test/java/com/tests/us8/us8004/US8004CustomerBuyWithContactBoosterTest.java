@@ -187,7 +187,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		regularUserCartSteps.submitVoucherCode();
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
-		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals();
+		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
 
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
 
@@ -196,6 +196,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(false);
 		shippingSteps.selectShippingAddress(shippingAddress);
+		shippingSteps.clickGoToPaymentMethod();
 		regularUserCartSteps.validateThatShippingOnSelectedCountryIsNotAllowed();
 		
 		shippingPartySectionSteps.clickPartyNoOption();
@@ -227,7 +228,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 
-		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
+		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		regularCartValidationWorkflows.performCartValidationsWithVoucherApplied();
 
 		customVerifications.printErrors();

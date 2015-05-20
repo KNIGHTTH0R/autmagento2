@@ -5,7 +5,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +17,6 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
-import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.persistance.MongoReader;
@@ -54,16 +49,7 @@ public class PocContextChange extends BaseTest {
 	public ValidationWorkflows validationWorkflows;
 	
 	private String username, password;
-	private static String billingAddress;
-	private static String jewelryDiscount;
-	private static String marketingDiscount;
-	private static String shippingValue;
-	private static String taxClass;
-	private CreditCardModel creditCardData = new CreditCardModel();
-	
-	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
+
 	
 	
 	@Before

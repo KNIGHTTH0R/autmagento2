@@ -46,8 +46,8 @@ public class RegularUserCartSteps extends AbstractSteps {
 	}
 
 	@Step
-	public RegularUserCartTotalsModel grabTotals() {
-		return regularUserCartPage().grabTotals();
+	public RegularUserCartTotalsModel grabTotals(String voucherCodeLabel) {
+		return regularUserCartPage().grabTotals(voucherCodeLabel);
 	}
 
 	@Step

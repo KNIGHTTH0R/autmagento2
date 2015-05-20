@@ -49,7 +49,7 @@ public class US11002ValidateOrderEmailTest extends BaseTest{
 	@Steps 
 	public CustomVerification customVerifications;
 	
-	private String email, password, emailPassword;
+	private String username, password, emailPassword;
 	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
 	
 	@Before
@@ -61,7 +61,7 @@ public class US11002ValidateOrderEmailTest extends BaseTest{
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11002.properties");
 			prop.load(input);
-			email = prop.getProperty("email");
+			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			emailPassword = prop.getProperty("emailPassword");
 
@@ -83,7 +83,7 @@ public class US11002ValidateOrderEmailTest extends BaseTest{
 		
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
 		emailData.setProtocol(EmailConstants.PROTOCOL);
-		emailData.setUsername(email);
+		emailData.setUsername(username);
 		emailData.setPassword(emailPassword);
 		
         
@@ -92,7 +92,7 @@ public class US11002ValidateOrderEmailTest extends BaseTest{
 	
 	@Test
 	public void us11002ValidateOrderEmailTest() {
-		frontEndSteps.performLogin(email, password);
+		frontEndSteps.performLogin(username, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
 		System.out.println(message);
