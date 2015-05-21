@@ -33,6 +33,7 @@ import com.pages.frontend.KoboSuccesFormPage;
 import com.pages.frontend.KoboValidationPage;
 import com.pages.frontend.LoginPage;
 import com.pages.frontend.LoungePage;
+import com.pages.frontend.MyBusinessPage;
 import com.pages.frontend.PartyCreationPage;
 import com.pages.frontend.PartyDetailsPage;
 import com.pages.frontend.PomProductListPage;
@@ -45,6 +46,7 @@ import com.pages.frontend.StylistRegistrationPage;
 import com.pages.frontend.UpdatePartyPage;
 import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.SuccessPage;
+import com.pages.frontend.checkout.cart.kobo.ContactBoosterCartPage;
 import com.pages.frontend.checkout.cart.partyHost.HostCartPage;
 import com.pages.frontend.checkout.cart.partyHost.OrderForCustomerCartPage;
 import com.pages.frontend.checkout.cart.regularCart.PlaceCustomerOrderFromPartyPage;
@@ -56,6 +58,7 @@ import com.pages.frontend.checkout.shipping.BillingFormPage;
 import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
 import com.pages.frontend.checkout.shipping.host.ContactHostShippingPage;
+import com.pages.frontend.checkout.shipping.kobo.KoboShippingPage;
 import com.pages.frontend.checkout.shipping.regularUser.ShippingPartySectionPage;
 import com.pages.frontend.checkout.wishlist.WishlistPage;
 import com.pages.frontend.profile.DashboardMenuPage;
@@ -372,6 +375,9 @@ public class AbstractSteps extends ScenarioSteps {
 	public ShippingPartySectionPage regularUserShippingPage() {
 		return getPages().currentPageAt(ShippingPartySectionPage.class);
 	}
+	public KoboShippingPage koboShippingPage() {
+		return getPages().currentPageAt(KoboShippingPage.class);
+	}
 
 	public ShippingFormPage shippingFormPage() {
 		return getPages().currentPageAt(ShippingFormPage.class);
@@ -435,6 +441,12 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public RegisterLandingPage registerLandingPage() {
 		return getPages().currentPageAt(RegisterLandingPage.class);
+	}
+	public MyBusinessPage myBusinessPage() {
+		return getPages().currentPageAt(MyBusinessPage.class);
+	}
+	public ContactBoosterCartPage contactBoosterCart() {
+		return getPages().currentPageAt(ContactBoosterCartPage.class);
 	}
 
 	// -----------------------Email-----------------------------------

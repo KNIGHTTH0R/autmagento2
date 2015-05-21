@@ -4,11 +4,10 @@ import com.tools.persistance.MongoReader;
 
 public class ContextConstants {
 
-	
-	
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
 	// messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
+	public static String WAITING_PAYMENT_CONFIRMATION = MongoReader.getDictionaryItem("WAITING_PAYMENT_CONFIRMATION");
 	public static String CONFIRMATION_LINK_TEXT = MongoReader.getDictionaryItem("CONFIRMATION_LINK_TEXT");
 	public static String PARTY_COUNTRY_RESTRICTION_ERROR_MESSAGE = MongoReader.getDictionaryItem("PARTY_COUNTRY_RESTRICTION_ERROR_MESSAGE");
 	public static String STYLE_COACH_REG_PAGE_TITLE = MongoReader.getDictionaryItem("STYLE_COACH_REG_PAGE_TITLE");
@@ -68,7 +67,7 @@ public class ContextConstants {
 	public static String PREFERD_LANGUAGE = MongoReader.getDictionaryItem("PREFERD_LANGUAGE");
 	public static String NOT_PREFERED_WEBSITE = MongoReader.getDictionaryItem("NOT_PREFERED_WEBSITE");
 	public static String CHANGE_WEBSITE_POPUP_MESSAGE = MongoReader.getDictionaryItem("CHANGE_WEBSITE_POPUP_MESSAGE");
-	
+
 	public static String CODE_LABEL = MongoReader.getDictionaryItem("CODE_LABEL");
 
 }

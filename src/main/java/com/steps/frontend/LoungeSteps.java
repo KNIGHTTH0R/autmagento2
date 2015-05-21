@@ -6,8 +6,8 @@ public class LoungeSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
-	public void clickMeinBusiness() {
-		loungePage().clickMeinBusiness();
+	public void goToMyBusiness() {
+		loungePage().goToMyBusiness();
 	}
 
 	public void clickCreateParty() {

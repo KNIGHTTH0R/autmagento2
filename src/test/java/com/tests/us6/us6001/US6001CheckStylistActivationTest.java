@@ -74,7 +74,7 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 	}
 
 	@Test
-	public void us6001CheckCustomerActivationTest() {
+	public void us6001CheckStylistActivationTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();

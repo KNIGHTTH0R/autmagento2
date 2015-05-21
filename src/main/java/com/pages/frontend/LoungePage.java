@@ -9,21 +9,21 @@ import com.tools.requirements.AbstractPage;
 
 public class LoungePage extends AbstractPage {
 
-//	@FindBy(css = "a[title='Mein Business']")
-	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2)")           //int
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2)")   
 	private WebElement meinBusinessButton;
+	
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) a")
+	private WebElement meinBusinessLink;
 
-//	@FindBy(css = "a[title='Style Party erstellen']")
-	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(1) > ul li:nth-child(2) a")    //int
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(1) > ul li:nth-child(2) a")    
 	private WebElement createPartyButton;
 
-//	@FindBy(css = "ul.dropdown li:nth-child(1) label span")
-	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(1)")     //int
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(1)")     
 	private WebElement stylePartiesLink;
 
-	public void clickMeinBusiness() {
+	public void goToMyBusiness() {
 		element(meinBusinessButton).waitUntilVisible();
-		meinBusinessButton.click();
+		meinBusinessLink.click();
 	}
 
 	public void clickCreateParty() {

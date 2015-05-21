@@ -44,6 +44,16 @@ public class HeaderSteps extends AbstractSteps {
 		waitABit(1000);
 
 	}
+	
+	@Step
+	@Title("Go to my business page")
+	public void goToMyBusinessPage() {
+		headerPage().clickLounge();
+		loungePage().goToMyBusiness();
+		waitABit(1000);
+		
+	}
+	
 
 	@Step
 	@Title("Go to create party for new contact")
