@@ -32,6 +32,11 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void goToLounge() {
+		headerPage().clickLounge();
+	}
+
+	@Step
 	public void clickOnWishlistButton() {
 		headerPage().clickOnWishlistButton();
 	}
@@ -44,16 +49,15 @@ public class HeaderSteps extends AbstractSteps {
 		waitABit(1000);
 
 	}
-	
+
 	@Step
 	@Title("Go to my business page")
 	public void goToMyBusinessPage() {
 		headerPage().clickLounge();
 		loungePage().goToMyBusiness();
 		waitABit(1000);
-		
+
 	}
-	
 
 	@Step
 	@Title("Go to create party for new contact")
@@ -148,6 +152,7 @@ public class HeaderSteps extends AbstractSteps {
 	public String getStyleCoachFirstNameFromProfile() {
 		return headerPage().getStyleCoachFirstNameFromProfile();
 	}
+
 	@Step
 	public String getStyleCoachFullNameFromProfile() {
 		return headerPage().getStyleCoachFullNameFromProfile();

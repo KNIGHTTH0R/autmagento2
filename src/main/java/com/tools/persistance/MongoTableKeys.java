@@ -50,6 +50,9 @@ public class MongoTableKeys {
 	public static final String EMAIL_ACTIVE = "emailActive";
 	public static final String ACCOUNT_ACTIVE = "accountActive";
 	
+	//Kobo code
+	public static final String KOBO_MODEL = "KoboModel";
+	public static final String KOBO_CODE = "KoboCode";
 	//OrderModel
 	public static final String ORDER_MODEL = "OrderModel";
 	public static final String ORDER_ID = "orderId";

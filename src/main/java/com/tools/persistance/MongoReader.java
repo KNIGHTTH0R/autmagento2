@@ -65,7 +65,7 @@ public class MongoReader extends MongoConnector {
 			while (cursor.hasNext()) {
 				dbObject = cursor.next();
 				context = MongoUtils.checkField(dbObject, MongoTableKeys.CONTEXT_KEY);
-				if(!context.isEmpty()){
+				if (!context.isEmpty()) {
 					break;
 				}
 			}
@@ -75,31 +75,33 @@ public class MongoReader extends MongoConnector {
 
 		return context;
 	}
+
 	/**
 	 * Get value of Dictionary item. Return Empty string if none is found.
+	 * 
 	 * @param key
 	 * @return
 	 */
 	public static String getDictionaryItem(String key) {
-		
+
 		DBObject dbObject = null;
 		String value = "";
-		
+
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.DICTIONARY_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				dbObject = cursor.next();
 				value = MongoUtils.checkField(dbObject, key);
-				if(!value.isEmpty()){
+				if (!value.isEmpty()) {
 					break;
 				}
 			}
 		} finally {
 			cursor.close();
 		}
-		
+
 		return value;
 	}
 
@@ -115,7 +117,7 @@ public class MongoReader extends MongoConnector {
 			while (cursor.hasNext()) {
 				dbObject = cursor.next();
 				baseUrl = MongoUtils.checkField(dbObject, MongoTableKeys.BASE_URL_KEY);
-				if(!baseUrl.isEmpty()){
+				if (!baseUrl.isEmpty()) {
 					break;
 				}
 			}
@@ -125,26 +127,27 @@ public class MongoReader extends MongoConnector {
 
 		return baseUrl;
 	}
+
 	public static String getSoapURL() {
-		
+
 		DBObject dbObject = null;
 		String baseUrl = "";
-		
+
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STORE_CONFIG_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				dbObject = cursor.next();
 				baseUrl = MongoUtils.checkField(dbObject, MongoTableKeys.SOAP_URL_KEY);
-				if(!baseUrl.isEmpty()){
+				if (!baseUrl.isEmpty()) {
 					break;
 				}
 			}
 		} finally {
 			cursor.close();
 		}
-		
+
 		return baseUrl;
 	}
 
@@ -160,7 +163,7 @@ public class MongoReader extends MongoConnector {
 			while (cursor.hasNext()) {
 				dbObject = cursor.next();
 				storeIds = MongoUtils.checkField(dbObject, MongoTableKeys.STORE_ID_KEY);
-				if(!storeIds.isEmpty()){
+				if (!storeIds.isEmpty()) {
 					break;
 				}
 			}
@@ -646,6 +649,31 @@ public class MongoReader extends MongoConnector {
 			cursor.close();
 		}
 		return itemList;
+
+	}
+
+	public static String grabKoboModel(String testName) {
+		DBObject dbObject = null;
+		String koboVoucher = "";
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.KOBO_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+
+				dbObject = cursor.next();
+				koboVoucher = MongoUtils.checkField(dbObject, MongoTableKeys.KOBO_CODE);
+				if (!koboVoucher.isEmpty()) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return koboVoucher;
 
 	}
 }

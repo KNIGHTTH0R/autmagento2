@@ -142,6 +142,16 @@ public class MongoWriter extends MongoConnector {
 		table.insert(document);
 	}
 
+	public static void saveKoboCode(String koboCode, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.KOBO_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.KOBO_CODE, koboCode);
+
+		table.insert(document);
+	}
+
 	public static void saveProductBasicModel(ProductBasicModel product, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.PRODUCT_BASIC_MODEL);

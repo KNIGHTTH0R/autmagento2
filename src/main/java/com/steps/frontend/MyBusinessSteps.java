@@ -21,11 +21,12 @@ public class MyBusinessSteps extends AbstractSteps {
 	@Step
 	public void cancelSubstription() {
 		myBusinessPage().cancelSubstription();
+		myBusinessPage().confirmCancelSubstription();
 	}
 
 	@Step
-	public void verifyThatKoboCodeWasGeneratetInLoungePage() {
-		myBusinessPage().verifyThatKoboCodeWasGeneratetInLoungePage();
+	public String getKoboCode() {
+		return myBusinessPage().getKoboCode();
 	}
 
 	@Step

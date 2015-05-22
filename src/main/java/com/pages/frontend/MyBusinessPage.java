@@ -22,6 +22,9 @@ public class MyBusinessPage extends AbstractPage {
 	@FindBy(css = "#kobo-cancel div.col-3.col")
 	private WebElementFacade coboSection;
 
+	@FindBy(css = "#confirmCancelCbSubscriptionModal form button[type='submit']")
+	private WebElementFacade confirmCancelSubstription;
+
 	public void verifyThatNumberOfLinksAreEqualTo(int expectedNoOflinks) {
 		Assert.assertTrue("", getDriver().findElements(By.cssSelector("#kobo-cancel div.col-3.col ul.link-list li")).size() == expectedNoOflinks);
 	}
@@ -31,13 +34,19 @@ public class MyBusinessPage extends AbstractPage {
 		accesKoboCart.click();
 	}
 
+	public void confirmCancelSubstription() {
+		element(confirmCancelSubstription).waitUntilVisible();
+		confirmCancelSubstription.click();
+	}
+
 	public void cancelSubstription() {
 		element(cancelSubstription).waitUntilVisible();
 		cancelSubstription.click();
 	}
 
-	public void verifyThatKoboCodeWasGeneratetInLoungePage() {
-		Assert.assertTrue("The voucher code is not present in my business page", !coboCodeContainer.getText().contentEquals(null));
+	public String getKoboCode() {
+		element(coboCodeContainer).waitUntilVisible();
+		return coboCodeContainer.getText();
 	}
 
 	public void verifyKoboSectionContainsText(String text) {

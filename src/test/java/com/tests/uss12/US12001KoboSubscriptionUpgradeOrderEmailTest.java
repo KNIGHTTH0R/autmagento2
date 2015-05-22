@@ -11,7 +11,9 @@ import org.junit.runner.RunWith;
 
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -26,12 +28,18 @@ public class US12001KoboSubscriptionUpgradeOrderEmailTest extends BaseTest {
 
 	public String stylistEmail;
 	private static OrderModel orderModel = new OrderModel();
+	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 
 	@Before
 	public void setUp() throws Exception {
 
-		stylistEmail = MongoReader.grabCustomerFormModels("US12001KoboSubscriptionUpgradeTest").get(0).getEmailName();
-		orderModel = MongoReader.grabOrderModels("US12001KoboSubscriptionUpgradeTest").get(0);
+		int size = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").size();
+		if (size > 0) {
+			stylistRegistrationData = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").get(0);
+		} else
+			System.out.println("The database has no entries");
+
+		orderModel = MongoReader.grabOrderModels("US12001KoboSubscriptionTest" + SoapKeys.GRAB).get(0);
 
 	}
 
@@ -39,9 +47,7 @@ public class US12001KoboSubscriptionUpgradeOrderEmailTest extends BaseTest {
 	public void us12001CheckKoboSubscriptionOrderEmailTest() {
 
 		emailClientSteps.openMailinator();
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), orderModel.getOrderId());
-
-
+		emailClientSteps.validateThatEmailIsReceived(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), orderModel.getOrderId());
 
 	}
 

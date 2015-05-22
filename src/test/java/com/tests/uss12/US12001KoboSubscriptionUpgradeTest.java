@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -32,6 +33,7 @@ import com.tools.SoapKeys;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -67,6 +69,7 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 	private CreditCardModel creditCardData = new CreditCardModel();
+	String coboCode;
 	private static String cardNumber;
 	private static String cardName;
 	private static String cardMonth;
@@ -115,6 +118,8 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		creditCardData.setMonthExpiration(cardMonth);
 		creditCardData.setYearExpiration(cardYear);
 		creditCardData.setCvcNumber(cardCVC);
+
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 	@Test
@@ -125,6 +130,7 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToMyBusiness();
+		//TODO change this into String - for the report
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo(2);
 		myBusinessSteps.accessKoboCart();
 		contactBoosterCartSteps.selectContactBoosterVoucher();
@@ -139,14 +145,22 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
+		headerSteps.goToLounge();
+		coboCode = myBusinessSteps.getKoboCode();
 		headerSteps.goToMyBusinessPage();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo(2);
+		myBusinessSteps.cancelSubstription();
+		headerSteps.goToMyBusinessPage();
+//		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo(0);
+		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.SUBSCRIPTION_CANCELLED);
+		
 
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveKoboCode(coboCode, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 }

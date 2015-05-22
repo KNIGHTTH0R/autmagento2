@@ -1,0 +1,39 @@
+package com.tests.uss12;
+
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.junit.runners.ThucydidesRunner;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.steps.backend.promotion.PromotionSteps;
+import com.tests.BaseTest;
+import com.tools.SoapKeys;
+import com.tools.persistance.MongoReader;
+
+/**
+ * Deactivate 3+1 rule in backend for host cart
+ * 
+ * @author voicu.vac
+ *
+ */
+@RunWith(ThucydidesRunner.class)
+public class US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest extends BaseTest {
+	@Steps
+	public PromotionSteps promotionSteps;
+	String koboCode;
+
+	@Before
+	public void setUp() throws Exception {
+
+		koboCode = MongoReader.grabKoboModel("US12001KoboSubscriptionUpgradeTest" + SoapKeys.GRAB);
+		System.out.println(koboCode);
+
+	}
+
+	@Test
+	public void us12001ChechUsesPerCouponAfterSubscriptionTest() {
+		promotionSteps.verifyThatNoOfUsesPerCouponIsCorrect(koboCode, "150");
+	}
+}

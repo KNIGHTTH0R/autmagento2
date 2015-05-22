@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -68,6 +69,7 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 	private CreditCardModel creditCardData = new CreditCardModel();
+
 	private static String cardNumber;
 	private static String cardName;
 	private static String cardMonth;
@@ -116,6 +118,8 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		creditCardData.setMonthExpiration(cardMonth);
 		creditCardData.setYearExpiration(cardYear);
 		creditCardData.setCvcNumber(cardCVC);
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 	@Test
@@ -139,7 +143,7 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-		confirmationSteps.agreeAndCheckout();
+		confirmationSteps.agreeAndCheckout();	
 		headerSteps.goToMyBusinessPage();
 		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.WAITING_PAYMENT_CONFIRMATION);
 
@@ -148,6 +152,7 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		
 	}
 
 }

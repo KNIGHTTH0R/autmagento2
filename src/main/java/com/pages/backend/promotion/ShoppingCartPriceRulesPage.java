@@ -14,9 +14,21 @@ public class ShoppingCartPriceRulesPage extends AbstractPage {
 
 	@FindBy(id = "rule_is_active")
 	private WebElement activationDropdown;
-	
+
 	@FindBy(css = "p.form-buttons button:nth-child(4)")
 	private WebElement saveRule;
+
+	@FindBy(css = "input#promo_quote_grid_filter_name")
+	private WebElement ruleName;
+
+	@FindBy(css = "input#promo_quote_grid_filter_coupon_code")
+	private WebElement ruleCode;
+
+	@FindBy(css = "div.hor-scroll")
+	private WebElement listContainer;
+
+	@FindBy(css = "td.filter-actions > button.task")
+	private WebElement searchButton;
 
 	public void activateRule() {
 		evaluateJavascript("jQuery.noConflict();");
@@ -27,24 +39,20 @@ public class ShoppingCartPriceRulesPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(activationDropdown).selectByVisibleText("Nicht aktiv");
 	}
-	
-	public void saveRule(){
+
+	public void saveRule() {
 		element(saveRule).waitUntilVisible();
 		element(saveRule).click();
 	}
-	
-	@FindBy(css = "input#promo_quote_grid_filter_name")
-	private WebElement ruleName;
-
-	@FindBy(css = "div.hor-scroll")
-	private WebElement listContainer;
-
-	@FindBy(css = "td.filter-actions > button.task")
-	private WebElement searchButton;
 
 	public void typeRuleName(String id) {
 		element(ruleName).waitUntilVisible();
 		element(ruleName).typeAndEnter(id);
+	}
+
+	public void typeRuleCode(String id) {
+		element(ruleCode).waitUntilVisible();
+		element(ruleCode).typeAndEnter(id);
 	}
 
 	public void clickOnSearch() {
@@ -67,6 +75,10 @@ public class ShoppingCartPriceRulesPage extends AbstractPage {
 			}
 		}
 		Assert.assertTrue("Failure: Open Rule Details - The rule was not found in the list", found);
+	}
+
+	public String getUsesPerCouponValue() {
+		return getDriver().findElement(By.cssSelector("input#rule_uses_per_coupon")).getAttribute("value");
 	}
 
 }

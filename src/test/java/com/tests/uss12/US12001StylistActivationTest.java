@@ -17,6 +17,8 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.constants.ConfigConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -25,7 +27,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 @WithTag(name = "US6", type = "backend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US12001CheckStylistActivationTest extends BaseTest {
+public class US12001StylistActivationTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -56,13 +58,16 @@ public class US12001CheckStylistActivationTest extends BaseTest {
 	}
 
 	@Test
-	public void us12001CheckStylistActivationTest() {
+	public void us12001StylistActivationTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByName(stylistRegistrationData.getFirstName());
 		backEndSteps.openOrderDetails(stylistRegistrationData.getFirstName());
 		ordersSteps.markOrderAsPaid();
+		
+		emailClientSteps.openMailinator();
+		grabConfirmationEmail = emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
 
 }
