@@ -23,7 +23,7 @@ import com.tools.requirements.Application;
 @Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10002UpdatePartyBonusesTest extends BaseTest {
-	
+
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps

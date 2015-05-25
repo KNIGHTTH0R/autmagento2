@@ -59,7 +59,7 @@ public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 	}
 
 	@Test
-	public void us12001CheckStylistActivationTest() {
+	public void us12001MarkAsPaidKoboOrderTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();

@@ -9,7 +9,7 @@ public class MyBusinessSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void verifyThatNumberOfLinksAreEqualTo(int expectedNoOfLinks) {
+	public void verifyThatNumberOfLinksAreEqualTo(String expectedNoOfLinks) {
 		myBusinessPage().verifyThatNumberOfLinksAreEqualTo(expectedNoOfLinks);
 	}
 

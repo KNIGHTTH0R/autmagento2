@@ -130,7 +130,7 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToMyBusiness();
-		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo(1);
+		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
 		myBusinessSteps.accessKoboCart();
 		contactBoosterCartSteps.selectContactBoosterVoucher();
 		contactBoosterCartSteps.clickToShipping();

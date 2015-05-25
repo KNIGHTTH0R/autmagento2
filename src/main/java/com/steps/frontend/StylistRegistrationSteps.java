@@ -1,5 +1,6 @@
 package com.steps.frontend;
 
+import java.io.IOException;
 import java.util.Set;
 
 import net.thucydides.core.annotations.Step;
@@ -8,8 +9,12 @@ import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
+import com.poc.geolocationAPI.AddressConverter;
+import com.poc.geolocationAPI.GoogleResponse;
+import com.poc.geolocationAPI.Result;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.FormatterUtils;
@@ -42,6 +47,38 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
+	}
+
+	@StepGroup
+	@Title("Fill create customer form and return customer's lattitude and longitude")
+	public CoordinatesModel fillCreateCustomerFormAndReturnLatAndLong(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+
+		CoordinatesModel coordinatesModel = new CoordinatesModel();
+
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetails(addressData);
+		checkNoCoachCheckbox();
+		checkIAgree();
+		submitStep();
+		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		submitStep();
+		selectStarterKit();
+		submitStep();
+		clickOnNachahmePaymentMethod();
+		submitPaymentMethod();
+		finishPayment();
+		try {
+			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
+					+ addressData.getHomeTown() + "," + addressData.getPostCode() + "," + addressData.getCountryName());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return coordinatesModel;
 	}
 
 	@StepGroup
@@ -86,6 +123,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
+
 	@StepGroup
 	public String fillStylistRegistrationPredefinedInfoFormWithNotPreferedCountryFirst(String name, AddressModel addressData, String birthDate) {
 		validateInfoBoxMessage();
@@ -101,7 +139,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		clickOnNachahmePaymentMethod();
 		submitPaymentMethod();
 		finishPayment();
-		
+
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}

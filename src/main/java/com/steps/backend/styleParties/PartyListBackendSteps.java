@@ -20,6 +20,9 @@ public class PartyListBackendSteps extends AbstractSteps {
 
 	@Step
 	public void openPartyDetails(String searchTerm) {
+		partyListBackendPage().typeIdFrom(searchTerm);
+		partyListBackendPage().typeIdTo(searchTerm);
+		partyListBackendPage().clickOnSearch();
 		partyListBackendPage().openPartyDetails(searchTerm);
 	}
 

@@ -130,8 +130,7 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToMyBusiness();
-		//TODO change this into String - for the report
-		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo(2);
+		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
 		myBusinessSteps.accessKoboCart();
 		contactBoosterCartSteps.selectContactBoosterVoucher();
 		contactBoosterCartSteps.clickToShipping();
@@ -148,12 +147,10 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		headerSteps.goToLounge();
 		coboCode = myBusinessSteps.getKoboCode();
 		headerSteps.goToMyBusinessPage();
-		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo(2);
+		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
 		myBusinessSteps.cancelSubstription();
 		headerSteps.goToMyBusinessPage();
-//		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo(0);
 		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.SUBSCRIPTION_CANCELLED);
-		
 
 	}
 

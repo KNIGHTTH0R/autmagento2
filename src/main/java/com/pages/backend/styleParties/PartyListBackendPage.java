@@ -14,6 +14,9 @@ public class PartyListBackendPage extends AbstractPage {
 
 	@FindBy(css = "input#party_grid_filter_id_from")
 	private WebElement idFrom;
+	
+	@FindBy(css = "input#party_grid_filter_id_to")
+	private WebElement idTo;
 
 	@FindBy(css = "div.hor-scroll")
 	private WebElement listContainer;
@@ -25,11 +28,16 @@ public class PartyListBackendPage extends AbstractPage {
 		element(idFrom).waitUntilVisible();
 		element(idFrom).typeAndEnter(id);
 	}
+	public void typeIdTo(String id) {
+		element(idTo).waitUntilVisible();
+		element(idTo).typeAndEnter(id);
+	}
 
 	public void clickOnSearch() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
+		waitABit(2000);
 	}
 
 	public void openPartyDetails(String searchTerm) {
