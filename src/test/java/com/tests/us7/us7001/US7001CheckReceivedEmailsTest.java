@@ -23,7 +23,7 @@ public class US7001CheckReceivedEmailsTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
-	
+
 	public String stylistEmail;
 
 	@Before

@@ -23,6 +23,7 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.geolocation.CoordinatesModel;
 
 public class MongoWriter extends MongoConnector {
 
@@ -113,6 +114,16 @@ public class MongoWriter extends MongoConnector {
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.REGISTRATION_DATE, dateModel.getDate());
 
+		table.insert(document);
+	}
+	public static void saveCoordinatesModel(CoordinatesModel dateModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.COORDINATES_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.LATTITUDE, dateModel.getLattitude());
+		document.put(MongoTableKeys.LONGITUDE, dateModel.getLongitude());
+		
 		table.insert(document);
 	}
 

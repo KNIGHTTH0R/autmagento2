@@ -1,5 +1,6 @@
 package com.steps.frontend;
 
+import java.io.IOException;
 import java.util.Set;
 
 import net.thucydides.core.annotations.Step;
@@ -9,8 +10,10 @@ import net.thucydides.core.annotations.Title;
 import org.junit.Assert;
 
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
+import com.poc.geolocationAPI.AddressConverter;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
@@ -36,6 +39,34 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkNoInvite();
 		checkIAgree();
 		clickCompleteButton();
+	}
+
+	@StepGroup
+	public CoordinatesModel fillCreateCustomerFormAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
+
+		CoordinatesModel coordinatesModel = new CoordinatesModel();
+
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		checkMember();
+		fillContactDetails(addressData);
+		checkNoInvite();
+		checkIAgree();
+		clickCompleteButton();
+		try {
+			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
+					+ addressData.getHomeTown() + "," + addressData.getPostCode());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return coordinatesModel;
 	}
 
 	@StepGroup
@@ -233,7 +264,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	 */
 	@Step
 	public void selectStylistOption(StyleMode mode, String firstName, String lastName) {
-		
+
 		String pageTitle;
 		int counter = 0;
 		do {
@@ -242,7 +273,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			counter++;
 		} while (!pageTitle.contains("Thank you page") && counter < 30);
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page. Actual: " + pageTitle, pageTitle.contains("PIPPA&JEAN"));
-		
+
 		landingCustomerAllocationPage().selectStylistOption(mode, firstName, lastName);
 	}
 
@@ -259,7 +290,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	 */
 	@Step
 	public String fillThankYouForm(String password) {
-		
+
 		String pageTitle;
 		int counter = 0;
 		do {
@@ -268,7 +299,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			counter++;
 		} while (!pageTitle.contains("Thank you page") && counter < 30);
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page. Actual: " + pageTitle, pageTitle.contains("Thank you page"));
-		
+
 		thankYouPage().passwordInput(password);
 		String email = thankYouPage().getEmailText();
 		thankYouPage().checkIAgree();
@@ -329,7 +360,5 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		registerLandingPage().checkIAgree();
 		registerLandingPage().submitAndContinue();
 	}
-	
-
 
 }

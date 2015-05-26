@@ -31,7 +31,9 @@ public class AddressConverter {
 
 	}
 
+	// TODO pass as parameter an AddressModel here -maybe
 	public static CoordinatesModel getLattitudeAndLongitudeFromAddress(String address) throws IOException {
+
 		CoordinatesModel coordinatesModel = new CoordinatesModel();
 		GoogleResponse res = new AddressConverter().convertToLatLong(address);
 		if (res.getStatus().equals("OK")) {
@@ -39,7 +41,7 @@ public class AddressConverter {
 			for (Result result : res.getResults()) {
 
 				coordinatesModel.setLattitude((result.getGeometry().getLocation().getLat()));
-				coordinatesModel.setLongitude((result.getGeometry().getLocation().getLat()));
+				coordinatesModel.setLongitude((result.getGeometry().getLocation().getLng()));
 
 			}
 		} else {

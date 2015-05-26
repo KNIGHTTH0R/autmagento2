@@ -10,8 +10,6 @@ import net.thucydides.core.annotations.Title;
 import org.junit.Assert;
 
 import com.poc.geolocationAPI.AddressConverter;
-import com.poc.geolocationAPI.GoogleResponse;
-import com.poc.geolocationAPI.Result;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
@@ -51,7 +49,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@StepGroup
 	@Title("Fill create customer form and return customer's lattitude and longitude")
-	public CoordinatesModel fillCreateCustomerFormAndReturnLatAndLong(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+	public CoordinatesModel fillCreateStylystFormAndReturnLatAndLong(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
 
 		CoordinatesModel coordinatesModel = new CoordinatesModel();
 
@@ -74,7 +72,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		finishPayment();
 		try {
 			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
-					+ addressData.getHomeTown() + "," + addressData.getPostCode() + "," + addressData.getCountryName());
+					+ addressData.getHomeTown() + "," + addressData.getPostCode());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

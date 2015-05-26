@@ -136,5 +136,9 @@ public class MongoTableKeys {
 	public static final String STORE_CONFIG_MODEL = "StoreConfigModel";
 	public static final String SOAP_URL_KEY = "soapUrl";
 	
+	public static final String COORDINATES_MODEL = "CoordinatesModel";
+	public static final String LATTITUDE = "Lattitude";
+	public static final String LONGITUDE = "Longitude";
+	
 
 }
