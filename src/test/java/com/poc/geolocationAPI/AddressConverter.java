@@ -5,10 +5,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.tools.data.geolocation.CoordinatesModel;
+import com.tools.data.soap.DBStylistModel;
 
 public class AddressConverter {
 
@@ -49,5 +51,25 @@ public class AddressConverter {
 		}
 		return coordinatesModel;
 	}
+
+//	public static List<DBStylistModel> calculateLatAndLongForStylist(List<DBStylistModel> model) throws IOException {
+//
+//		for (DBStylistModel dbStylistModel : model) {
+//			GoogleResponse res = new AddressConverter().convertToLatLong(dbStylistModel.getStreet() + " "+  dbStylistModel.getHouseNumber() + "," + dbStylistModel.getPostCode());
+//			System.out.println(dbStylistModel.getStreet() + " "+  dbStylistModel.getHouseNumber() + "," + dbStylistModel.getPostCode());
+//			if (res.getStatus().equals("OK")) {
+//
+//				for (Result result : res.getResults()) {
+//
+//					dbStylistModel.setLattitude((result.getGeometry().getLocation().getLat()));
+//					dbStylistModel.setLongitude((result.getGeometry().getLocation().getLng()));
+//				}
+//			} else {
+//				System.out.println(res.getStatus());
+//			}
+//		}
+//
+//		return model;
+//	}
 
 }

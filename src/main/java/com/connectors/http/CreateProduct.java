@@ -7,7 +7,10 @@ import java.util.List;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
+import org.w3c.dom.NodeList;
+
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.env.constants.Separators;
@@ -145,7 +148,8 @@ public class CreateProduct {
 
 	public static String getStylistInfo(String id) {
 
-//		List<CustomerFormModel> stylistList = new ArrayList<CustomerFormModel>();
+		// List<CustomerFormModel> stylistList = new
+		// ArrayList<CustomerFormModel>();
 
 		String resultID = null;
 		try {
@@ -161,10 +165,80 @@ public class CreateProduct {
 		return resultID;
 	}
 
+	public static List<DBStylistModel> getStylistList() {
+
+		List<DBStylistModel> stylistList = new ArrayList<DBStylistModel>();
+
+		String resultID = null;
+		try {
+			SOAPMessage response = HttpSoapConnector.soapGetStylistList();
+			try {
+				stylistList = extractStylistData(response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("resultID: " + resultID);
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return stylistList;
+	}
+
 	private static String extractResult(SOAPMessage response) throws SOAPException, IOException {
 		return response.getSOAPBody().getElementsByTagName("result").item(0).getFirstChild().getNodeValue();
 	}
 
+	private static List<DBStylistModel> extractStylistData(SOAPMessage response) throws Exception {
 
+		List<DBStylistModel> stylistModelList = new ArrayList<DBStylistModel>();
+
+		NodeList stylistList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
+		for (int i = 0; i < stylistList.getLength(); i++) {
+			DBStylistModel model = new DBStylistModel();
+			NodeList childNodes = stylistList.item(i).getChildNodes();
+			for (int j = 0; j < childNodes.getLength(); j++) {
+
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
+					model.setId(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("status")) {
+					model.setStatus(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_email")) {
+					model.setEmail(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_street")) {
+					model.setStreet(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_house_number")) {
+					model.setHouseNumber(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_postcode")) {
+					model.setPostCode(childNodes.item(j).getTextContent());
+				}
+
+			}
+			stylistModelList.add(model);
+		}
+
+		return stylistModelList;
+
+	}
+
+	public static List<DBStylistModel> getActiveStylistsFromList(List<DBStylistModel> allStylistsList) {
+		List<DBStylistModel> activeStylistsList = new ArrayList<DBStylistModel>();
+		for (DBStylistModel stylist : allStylistsList) {
+			if (stylist.getStatus().contentEquals("1")) {
+				if (stylist.getStreet() != null || stylist.getPostCode() != null) {
+					activeStylistsList.add(stylist);
+				}
+			}
+		}
+		return activeStylistsList;
+	}
 
 }

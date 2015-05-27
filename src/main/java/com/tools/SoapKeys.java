@@ -1,5 +1,7 @@
 package com.tools;
 
+import javax.xml.soap.Name;
+
 public class SoapKeys {
 	
 	//SOAP TEST DATA - data grouping
@@ -89,8 +91,9 @@ public class SoapKeys {
 	public static final String CUSTOMER_ID = "customerId";
 	
 	//getStylistList
-	public static final String STYLIST_CONTAINER = "stylistStylistListRequestParam";
+	public static final String STYLIST_LIST = "stylistStylistListRequestParam";
 	public static final String STYLIST_ID = "stylistId";
 	public static final String STYLIST_INFO = "stylistStylistInfoRequestParam";
+	public static final String FILTERS = "filters";
 
 }

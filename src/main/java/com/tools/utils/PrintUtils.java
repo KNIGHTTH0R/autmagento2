@@ -23,6 +23,7 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.soap.DBStylistModel;
 
 public class PrintUtils {
 
@@ -37,6 +38,19 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getProductsPrice());
 			System.out.println(cartProductModel.getFinalPrice());
 			System.out.println(cartProductModel.getPriceIP());
+		}
+	}
+	public static void printListDbStylists(List<DBStylistModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		for (DBStylistModel dBStylistModel : list) {
+			System.out.println("------------------------");
+			System.out.println(dBStylistModel.getId());
+			System.out.println(dBStylistModel.getStatus());
+			System.out.println(dBStylistModel.getEmail());
+			System.out.println(dBStylistModel.getStreet());
+			System.out.println(dBStylistModel.getHouseNumber());
+			System.out.println(dBStylistModel.getPostCode());
+		
 		}
 	}
 
