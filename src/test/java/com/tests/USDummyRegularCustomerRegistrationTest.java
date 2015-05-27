@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.CreateProduct;
 import com.connectors.mongo.MongoConnector;
 import com.poc.readFromFile.RandomAddress;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -40,6 +41,8 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
+		CreateProduct.getStylistInfo("1");
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
@@ -57,10 +60,10 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 		customVerifications.printErrors();
 	}
 
-	@After
-	public void saveData() {
-		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
-	}
+//	@After
+//	public void saveData() {
+//		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+//		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
+//	}
 
 }

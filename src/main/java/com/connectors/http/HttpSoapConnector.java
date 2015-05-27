@@ -44,6 +44,16 @@ public class HttpSoapConnector {
 
 		return soapResponse;
 	}
+	public static SOAPMessage soapGetStylistInfo(String stylistId) throws SOAPException, IOException {
+		String sessID = performLogin();
+		System.out.println("Sesion id :" + sessID);
+		
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(getStylistInfo(stylistId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		
+		return soapResponse;
+	}
 
 	/**
 	 * This method will login with a user in {@link SoapKeys} and return the
@@ -142,6 +152,25 @@ public class HttpSoapConnector {
 		soapMessage.writeTo(System.out);
 		System.out.println();
 
+		return soapMessage;
+	}
+	private static SOAPMessage getStylistInfo(String id, String ssID) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+		
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement getStylistRequestParam = soapBody.addChildElement(SoapKeys.STYLIST_INFO, SoapKeys.URN_PREFIX);
+		SOAPElement sessionID = getStylistRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+		
+		SOAPElement stylistId = getStylistRequestParam.addChildElement(SoapKeys.STYLIST_ID);
+		stylistId.addTextNode(id);
+
+		soapMessage.saveChanges();
+		
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+		
 		return soapMessage;
 	}
 
