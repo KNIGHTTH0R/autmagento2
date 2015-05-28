@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.CreateProduct;
+import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.ContactBoosterRegistrationSteps;
@@ -90,9 +90,9 @@ public class US7009KoboRegistrationTest extends BaseTest {
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = CreateProduct.createPomProductModel();
+		genProduct1 = ApiCalls.createPomProductModel();
 		genProduct1.setPrice("89.00");
-		CreateProduct.createApiProduct(genProduct1);
+		ApiCalls.createApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;

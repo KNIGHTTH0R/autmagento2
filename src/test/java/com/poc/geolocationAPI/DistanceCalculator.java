@@ -2,7 +2,7 @@ package com.poc.geolocationAPI;
 
 public class DistanceCalculator {
 
-	private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
+	public static double getDistance(double lat1, double lon1, double lat2, double lon2, String unit) {
 
 		double theta = lon1 - lon2;
 		double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
@@ -25,9 +25,9 @@ public class DistanceCalculator {
 		return (rad * 180 / Math.PI);
 	}
 
-	public static void main(String[] args) {
-		System.out.println(DistanceCalculator.distance(54.806044, 9.516037299999999, 54.6584, 9.39992, "K"));
-
-	}
+//	public static void main(String[] args) {
+//		System.out.println(DistanceCalculator.getDistance(54.806044, 9.516037299999999, 54.6584, 9.39992, "K"));
+//
+//	}
 
 }

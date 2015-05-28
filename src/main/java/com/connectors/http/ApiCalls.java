@@ -9,7 +9,8 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
-import com.tools.data.frontend.CustomerFormModel;
+import com.poc.geolocationAPI.DistanceCalculator;
+import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
@@ -19,7 +20,7 @@ import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;
 import com.tools.utils.FormatterUtils;
 
-public class CreateProduct {
+public class ApiCalls {
 
 	public static void main(String args[]) throws Exception {
 		createApiProduct(createProductModel());
@@ -169,16 +170,16 @@ public class CreateProduct {
 
 		List<DBStylistModel> stylistList = new ArrayList<DBStylistModel>();
 
-		String resultID = null;
 		try {
 			SOAPMessage response = HttpSoapConnector.soapGetStylistList();
+			System.out.println(response);
 			try {
 				stylistList = extractStylistData(response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("resultID: " + resultID);
+
 		} catch (SOAPException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -220,25 +221,34 @@ public class CreateProduct {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_postcode")) {
 					model.setPostCode(childNodes.item(j).getTextContent());
 				}
-
 			}
 			stylistModelList.add(model);
 		}
-
 		return stylistModelList;
 
 	}
 
-	public static List<DBStylistModel> getActiveStylistsFromList(List<DBStylistModel> allStylistsList) {
-		List<DBStylistModel> activeStylistsList = new ArrayList<DBStylistModel>();
-		for (DBStylistModel stylist : allStylistsList) {
-			if (stylist.getStatus().contentEquals("1")) {
-				if (stylist.getStreet() != null || stylist.getPostCode() != null) {
-					activeStylistsList.add(stylist);
-				}
+	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinateaModel, String range) {
+
+		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
+		for (DBStylistModel dbStylistModel : getStylistList()) {
+			if (!isStylistIncompatible(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
+				compatibleList.add(dbStylistModel);
 			}
 		}
-		return activeStylistsList;
+		return compatibleList;
+	}
+
+	// add here a complete check after all needed fields will be exposed by api
+	// be careful at null fields which might occur
+	private static boolean isStylistIncompatible(DBStylistModel stylistModel) {
+		return stylistModel.getStatus().contentEquals("0");
+	}
+
+	public static boolean isStylistInRange(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel, String range) {
+		double distance = DistanceCalculator.getDistance(Double.parseDouble(coordinateaModel.getLattitude()), Double.parseDouble(coordinateaModel.getLongitude()),
+				Double.parseDouble(dBStylistModel.getLattitude()), Double.parseDouble(dBStylistModel.getLongitude()), "k");
+		return distance <= Double.parseDouble(range);
 	}
 
 }

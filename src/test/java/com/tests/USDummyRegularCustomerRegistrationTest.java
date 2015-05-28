@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.CreateProduct;
+import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.poc.geolocationAPI.AddressConverter;
 import com.poc.readFromFile.RandomAddress;
@@ -42,28 +42,30 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 	CoordinatesModel coordinatesModel = new CoordinatesModel();
 	RandomAddress randomAddress;
 	List<DBStylistModel> stylistList = new ArrayList<DBStylistModel>();
-	List<DBStylistModel> activeStylistList = new ArrayList<DBStylistModel>();
-	List<DBStylistModel> activeStylistList2 = new ArrayList<DBStylistModel>();
+	List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
+	String range = "50";
 
 	@Before
 	public void setUp() throws Exception {
-
-		stylistList = CreateProduct.getStylistList();
-		activeStylistList = CreateProduct.getActiveStylistsFromList(stylistList);
 
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		randomAddress = new RandomAddress();
-
 		addressModel = randomAddress.getRandomAddressFromFile();
+		coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
+
+		stylistList = ApiCalls.getStylistList();
+		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, range);
+		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
 	public void usDummyRegularCustomerRegistrationTest() {
 
-		coordinatesModel = customerRegistrationSteps.fillCreateCustomerFormAndGetLatAndLong(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerFormAndGetLatAndLong(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
 	}

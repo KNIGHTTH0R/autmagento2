@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.CreateProduct;
+import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -89,17 +89,17 @@ public class US3008Test extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 		
-		genProduct1 = CreateProduct.createProductModel();		
+		genProduct1 = ApiCalls.createProductModel();		
 		genProduct1.setPrice("49.90");
-		CreateProduct.createApiProduct(genProduct1);
+		ApiCalls.createApiProduct(genProduct1);
 		
-		genProduct2 = CreateProduct.createProductModel();		
+		genProduct2 = ApiCalls.createProductModel();		
 		genProduct2.setPrice("89.00");
-		CreateProduct.createApiProduct(genProduct2);
+		ApiCalls.createApiProduct(genProduct2);
 		
-		genProduct3 = CreateProduct.createMarketingProductModel();
+		genProduct3 = ApiCalls.createMarketingProductModel();
 		genProduct3.setPrice("229.00");
-		CreateProduct.createApiProduct(genProduct3);
+		ApiCalls.createApiProduct(genProduct3);
 		
 		Properties prop = new Properties();
 		InputStream input = null;

@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.CreateProduct;
+import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -100,18 +100,18 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = CreateProduct.createProductModel();
+		genProduct1 = ApiCalls.createProductModel();
 		genProduct1.setPrice("89.00");
-		CreateProduct.createApiProduct(genProduct1);
+		ApiCalls.createApiProduct(genProduct1);
 
-		genProduct2 = CreateProduct.createPomProductModel();
+		genProduct2 = ApiCalls.createPomProductModel();
 		genProduct2.setPrice("49.90");
 		voucherValue = genProduct2.getPrice();
-		CreateProduct.createApiProduct(genProduct2);
+		ApiCalls.createApiProduct(genProduct2);
 
-		genProduct3 = CreateProduct.createProductModel();
+		genProduct3 = ApiCalls.createProductModel();
 		genProduct3.setPrice("100.00");
-		CreateProduct.createApiProduct(genProduct3);
+		ApiCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;

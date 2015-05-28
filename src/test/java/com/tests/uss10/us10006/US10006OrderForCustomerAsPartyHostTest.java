@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.CreateProduct;
+import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -85,9 +85,9 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = CreateProduct.createProductModel();
+		genProduct1 = ApiCalls.createProductModel();
 		genProduct1.setPrice("89.00");
-		CreateProduct.createApiProduct(genProduct1);
+		ApiCalls.createApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;

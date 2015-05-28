@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
 
@@ -52,24 +53,24 @@ public class AddressConverter {
 		return coordinatesModel;
 	}
 
-//	public static List<DBStylistModel> calculateLatAndLongForStylist(List<DBStylistModel> model) throws IOException {
-//
-//		for (DBStylistModel dbStylistModel : model) {
-//			GoogleResponse res = new AddressConverter().convertToLatLong(dbStylistModel.getStreet() + " "+  dbStylistModel.getHouseNumber() + "," + dbStylistModel.getPostCode());
-//			System.out.println(dbStylistModel.getStreet() + " "+  dbStylistModel.getHouseNumber() + "," + dbStylistModel.getPostCode());
-//			if (res.getStatus().equals("OK")) {
-//
-//				for (Result result : res.getResults()) {
-//
-//					dbStylistModel.setLattitude((result.getGeometry().getLocation().getLat()));
-//					dbStylistModel.setLongitude((result.getGeometry().getLocation().getLng()));
-//				}
-//			} else {
-//				System.out.println(res.getStatus());
-//			}
-//		}
-//
-//		return model;
-//	}
+	public static CoordinatesModel calculateLatAndLongFromAddress(AddressModel model) throws IOException {
+
+		CoordinatesModel coordinatesModel = new CoordinatesModel();
+
+		GoogleResponse res = new AddressConverter().convertToLatLong(model.getStreetAddress() + " " + model.getStreetNumber() + "," + model.getPostCode() + ","
+				+ model.getHomeTown() + "," + model.getCountryName());
+		if (res.getStatus().equals("OK")) {
+
+			for (Result result : res.getResults()) {
+
+				coordinatesModel.setLattitude((result.getGeometry().getLocation().getLat()));
+				coordinatesModel.setLongitude((result.getGeometry().getLocation().getLng()));
+			}
+		} else {
+			System.out.println(res.getStatus());
+		}
+
+		return coordinatesModel;
+	}
 
 }

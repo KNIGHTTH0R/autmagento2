@@ -193,8 +193,8 @@ public class HttpSoapConnector {
 		SOAPElement sessionID = getStylistRequestParam.addChildElement(SoapKeys.SESSION_ID);
 		sessionID.addTextNode(ssID);
 		
-		SOAPElement filters = getStylistRequestParam.addChildElement(SoapKeys.FILTERS);
-		
+		SOAPElement filters = getStylistRequestParam.addChildElement(SoapKeys.FILTERS);		
+	
 		soapMessage.saveChanges();
 		
 		System.out.print("Request SOAP Message:");
