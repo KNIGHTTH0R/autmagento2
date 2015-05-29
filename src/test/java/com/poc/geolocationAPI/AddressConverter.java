@@ -58,7 +58,7 @@ public class AddressConverter {
 		CoordinatesModel coordinatesModel = new CoordinatesModel();
 
 		GoogleResponse res = new AddressConverter().convertToLatLong(model.getStreetAddress() + " " + model.getStreetNumber() + "," + model.getPostCode() + ","
-				+ model.getHomeTown() + "," + model.getCountryName());
+				+ model.getHomeTown());
 		if (res.getStatus().equals("OK")) {
 
 			for (Result result : res.getResults()) {

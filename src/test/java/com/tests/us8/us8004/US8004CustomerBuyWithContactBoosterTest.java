@@ -198,7 +198,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		shippingSteps.selectShippingAddress(shippingAddress);
 		shippingSteps.clickGoToPaymentMethod();
 		regularUserCartSteps.validateThatShippingOnSelectedCountryIsNotAllowed();
-		
+
 		shippingPartySectionSteps.clickPartyNoOption();
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);

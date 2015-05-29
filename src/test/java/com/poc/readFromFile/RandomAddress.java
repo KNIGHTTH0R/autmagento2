@@ -9,16 +9,22 @@ import java.util.List;
 import com.tools.data.frontend.AddressModel;
 import com.tools.env.constants.Separators;
 import com.tools.env.variables.ContextConstants;
+import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
+import com.tools.utils.FieldGenerators;
+import com.tools.utils.FieldGenerators.Mode;
 import com.tools.utils.PrintUtils;
 
 public class RandomAddress {
 
-	private String fileName = "C:/Users/mihaibarta/Downloads/address.csv";
+	private String fileName = UrlConstants.CONTEXT_PATH + MongoReader.getContext() +  "/address.csv";
+
 	List<String> lines = null;
 
 	public AddressModel getRandomAddressFromFile() {
 
 		AddressModel addressModel = new AddressModel();
+		System.out.println("fileName" + fileName);
 
 		try {
 			lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
@@ -36,7 +42,7 @@ public class RandomAddress {
 		addressModel.setHomeTown(splittedText[1]);
 		addressModel.setPostCode((splittedText[2]));
 		addressModel.setCountryName(ContextConstants.COUNTRY_NAME);
-		addressModel.setPhoneNumber("0000555566");
+		addressModel.setPhoneNumber(FieldGenerators.generateRandomString(10, Mode.NUMERIC));
 
 		PrintUtils.printAddressModel(addressModel);
 

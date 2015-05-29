@@ -8,6 +8,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 
@@ -54,10 +56,11 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 		randomAddress = new RandomAddress();
 		addressModel = randomAddress.getRandomAddressFromFile();
 		coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
+		System.out.println(coordinatesModel.getLattitude());
+		System.out.println(coordinatesModel.getLongitude());
 
-		stylistList = ApiCalls.getStylistList();
-		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, range);
-		
+//		stylistList = ApiCalls.getStylistList();
+//		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, range);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
@@ -70,11 +73,10 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 		customVerifications.printErrors();
 	}
 
-	// @After
-	// public void saveData() {
-	// MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-	// MongoWriter.saveCoordinatesModel(coordinatesModel,
-	// getClass().getSimpleName());
-	// }
+	@After
+	public void saveData() {
+		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
+	}
 
 }

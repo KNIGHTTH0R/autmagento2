@@ -25,9 +25,4 @@ public class DistanceCalculator {
 		return (rad * 180 / Math.PI);
 	}
 
-//	public static void main(String[] args) {
-//		System.out.println(DistanceCalculator.getDistance(54.806044, 9.516037299999999, 54.6584, 9.39992, "K"));
-//
-//	}
-
 }
