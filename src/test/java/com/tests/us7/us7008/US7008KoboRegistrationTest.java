@@ -101,7 +101,7 @@ public class US7008KoboRegistrationTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7008.properties");
 			prop.load(input);
-			
+
 			context = prop.getProperty("context");
 			koboCode = prop.getProperty("koboCode");
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
@@ -136,10 +136,9 @@ public class US7008KoboRegistrationTest extends BaseTest {
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		contactBoosterRegistrationSteps.navigate(url);
-//		fancyBoxSteps.closeFancyBox();
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 		fancyBoxSteps.goToShipping();
-		shippingPomSteps.clickPartyNoOption();
+//		shippingPomSteps.clickPartyNoOption();
 		shippingSteps.clickGoToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));
@@ -148,7 +147,7 @@ public class US7008KoboRegistrationTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
-		
+
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 

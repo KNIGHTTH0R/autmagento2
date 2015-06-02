@@ -135,10 +135,9 @@ public class US7009KoboRegistrationTest extends BaseTest {
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		contactBoosterRegistrationSteps.navigate(url);
-//		fancyBoxSteps.closeFancyBox();
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 		fancyBoxSteps.goToShipping();
-		shippingPomSteps.clickPartyNoOption();
+//		shippingPomSteps.clickPartyNoOption();
 		shippingSteps.clickGoToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));

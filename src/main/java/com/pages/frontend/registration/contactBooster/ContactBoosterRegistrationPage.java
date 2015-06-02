@@ -51,7 +51,7 @@ public class ContactBoosterRegistrationPage extends AbstractPage {
 	@FindBy(id = "city")
 	private WebElement cityInput;
 
-	@FindBy(id = "country")
+	@FindBy(id = "registration-distribution-country")
 	private WebElement countrySelect;
 
 	@FindBy(id = "telephone")

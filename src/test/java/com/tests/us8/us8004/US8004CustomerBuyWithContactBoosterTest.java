@@ -66,7 +66,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	@Steps
 	public HomeSteps homeSteps;
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
+	public CustomerRegistrationSteps customerRegistrationSteps;	
 	@Steps
 	public AddRegularProductsWorkflow addRegularProductsWorkflow;
 	@Steps
@@ -110,7 +110,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		ApiCalls.createApiProduct(genProduct2);
 
 		genProduct3 = ApiCalls.createProductModel();
-		genProduct3.setPrice("100.00");
+		genProduct3.setPrice("10.00");
 		ApiCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
@@ -196,12 +196,6 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(false);
 		shippingSteps.selectShippingAddress(shippingAddress);
-		shippingSteps.clickGoToPaymentMethod();
-		regularUserCartSteps.validateThatShippingOnSelectedCountryIsNotAllowed();
-
-		shippingPartySectionSteps.clickPartyNoOption();
-		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);
 
 		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
 
@@ -228,7 +222,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 
-		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
 		regularCartValidationWorkflows.performCartValidationsWithVoucherApplied();
 
 		customVerifications.printErrors();

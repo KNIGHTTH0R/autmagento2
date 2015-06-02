@@ -239,7 +239,7 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void selectStarterKit() {
 		waitABit(TimeConstants.TIME_MEDIUM);
-		elementjQueryClick("input#kit_2570");
+		elementjQueryClick("input#kit_2941");
 	}
 
 	public void selectMonth(String month) {

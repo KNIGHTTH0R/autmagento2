@@ -21,11 +21,8 @@ public class HomePage extends AbstractPage {
 	@FindBy(css = "#cssmenu > ul > li:nth-child(2) > a")
 	private WebElement jewelriesMenu;
 
-	@FindBy(css = "#cssmenu > ul > li:nth-child(2) > ul li:nth-child(2) > a")
+	@FindBy(css = "#cssmenu > ul > li:nth-child(2) > ul li > a[href*='neu.html']")
 	private WebElement newMenu;
-
-	// @FindBy(css = "#cssmenu > ul > li:nth-child(2) > ul li:nth-child(2) > a")
-	// private WebElement newMenuDe;
 
 	public void clickStyleCoachLink() {
 		styleCoachLink.click();
@@ -49,13 +46,8 @@ public class HomePage extends AbstractPage {
 	public void goToNewItems() {
 		Actions builder = new Actions(getDriver());
 		builder.moveToElement(jewelriesMenu).build().perform();
-		// if (MongoReader.getContext().contentEquals("de")) {
 		element(newMenu).waitUntilVisible();
 		newMenu.click();
-		// } else {
-		// element(newMenu).waitUntilVisible();
-		// newMenu.click();
-		// }
 	}
 
 }
