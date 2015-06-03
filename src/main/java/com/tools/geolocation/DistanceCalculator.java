@@ -1,4 +1,4 @@
-package com.tools;
+package com.tools.geolocation;
 
 public class DistanceCalculator {
 

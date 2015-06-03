@@ -10,11 +10,11 @@ import net.thucydides.core.annotations.Title;
 import org.junit.Assert;
 
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
-import com.tools.AddressConverter;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.variables.UrlConstants;
+import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 

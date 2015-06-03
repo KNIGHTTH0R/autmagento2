@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.poc.readFromFile.RandomAddress;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
@@ -23,6 +22,7 @@ import com.tools.data.frontend.DateModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.RandomAddress;
 
 @WithTag(name = "US6", type = "frontend")
 @Story(Application.Registration.Stylist.class)

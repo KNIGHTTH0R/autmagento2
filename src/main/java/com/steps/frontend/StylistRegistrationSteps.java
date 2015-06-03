@@ -9,11 +9,11 @@ import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
-import com.tools.AddressConverter;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.variables.ContextConstants;
+import com.tools.geolocation.AddressConverter;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.FormatterUtils;
 

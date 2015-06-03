@@ -9,12 +9,12 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
-import com.tools.DistanceCalculator;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.env.constants.Separators;
+import com.tools.geolocation.DistanceCalculator;
 import com.tools.persistance.MongoReader;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;

@@ -15,18 +15,18 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
-import com.poc.readFromFile.RandomAddress;
 import com.steps.frontend.CustomerRegistrationSteps;
-import com.tools.AddressConverter;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
+import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
+import com.tools.utils.RandomAddress;
 
 @WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)

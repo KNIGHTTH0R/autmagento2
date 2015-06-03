@@ -1,19 +1,15 @@
-package com.tools;
+package com.tools.geolocation;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.poc.geolocationAPI.GoogleResponse;
-import com.poc.geolocationAPI.Result;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.geolocation.CoordinatesModel;
-import com.tools.data.soap.DBStylistModel;
 
 public class AddressConverter {
 
