@@ -1,4 +1,4 @@
-package com.tests;
+package com.tests.uss13.us13002;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
@@ -29,7 +30,7 @@ import com.tools.utils.RandomAddress;
 @WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class USDummyRegularCustomerRegistrationTest extends BaseTest {
+public class US13002StyleCoachLeadDistributionTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -57,14 +58,15 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 		System.out.println(coordinatesModel.getLattitude());
 		System.out.println(coordinatesModel.getLongitude());
 
-//		stylistList = ApiCalls.getStylistList();
-//		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, range);
+		// compatibleStylistList =
+		// ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel,
+		// range);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void usDummyRegularCustomerRegistrationTest() {
+	public void us13002StyleCoachLeadDistributionTest() {
 
 		customerRegistrationSteps.fillCreateCustomerFormAndGetLatAndLong(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
@@ -75,6 +77,9 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
+		for (DBStylistModel stylist : compatibleStylistList) {
+			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
+		}
 	}
 
 }

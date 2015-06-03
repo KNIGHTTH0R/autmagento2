@@ -125,6 +125,13 @@ public class MongoTableKeys {
 	public static final String HOST_CART_CALC_DETAILS_MODEL = "HostCartCalcDetailsModel";
 	public static final String HOST_BASIC_PRODUCT_MODEL = "HostBasicProductModel";
 	
+	//DBStylistModel
+	public static final String DB_STYLIST_MODEL = "dbStylistModel";
+	public static final String DB_STYLIST_FIRSTNAME = "stylistFirstname";
+	public static final String DB_STYLIST_LASTNAME = "stylistLastname";
+	public static final String DB_STYLIST_EMAIL = "stylistEmail";
+	public static final String DB_STYLIST_PASSWORD = "stylistPassword";
+	
 	//Default settings 
 	public static final String TEST_CONFIG = "DefaultConfig";
 	public static final String DEFAULT_CONFIG_MODEL = "DefaultConfigModel";

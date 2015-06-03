@@ -25,13 +25,13 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 
 @WithTag(name = "US000", type = "backend")
-//@Story(Application.Stylist.CreateColaborator.class)
+// @Story(Application.Stylist.CreateColaborator.class)
 @RunWith(ThucydidesRunner.class)
 public class US000GrabStylistPropertiesTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	public StylistDataModel validationModel = new StylistDataModel();
@@ -61,12 +61,10 @@ public class US000GrabStylistPropertiesTest extends BaseTest {
 				}
 			}
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
-	
-	
 
 	/**
 	 * BackEnd steps in this test

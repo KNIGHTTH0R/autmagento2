@@ -1,11 +1,14 @@
 package com.steps.frontend;
 
+import java.util.List;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
+import com.tools.data.soap.DBStylistModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -159,6 +162,11 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	@Step
+	public String getStyleCoachEmailFromProfile() {
+		return headerPage().getStyleCoachEmailFromProfile();
+	}
+
+	@Step
 	public void validateCustomeStyleCoachName(String boutiqueName, String styleCoachName) {
 		Assert.assertTrue("Failure: The stylecoach name and boutique name don't match !", boutiqueName.contentEquals(styleCoachName));
 		Assert.assertFalse("Failure: The stylecoach name and boutique is empty !", boutiqueName.contentEquals("") || boutiqueName == null);
@@ -169,6 +177,19 @@ public class HeaderSteps extends AbstractSteps {
 		System.out.println(expectedSCName);
 		System.out.println(grabbedSCName);
 		Assert.assertTrue("Failure: The customer is not assigned to the expected SC !", expectedSCName.contentEquals(grabbedSCName));
+
+	}
+
+	@Step
+	public void validateCustomerIsAssignedToOneOfTheStyleCoaches(List<DBStylistModel> stylistsList, String grabbedEmail) {
+		boolean match = false;
+		for (DBStylistModel dbStylistModel : stylistsList) {
+			if (dbStylistModel.getEmail().contentEquals(grabbedEmail)) {
+				match = true;
+				break;
+			}
+		}
+		Assert.assertTrue("Failure: The customer is not assigned to the expected SC !", match);
 
 	}
 

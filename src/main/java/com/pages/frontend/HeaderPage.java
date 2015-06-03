@@ -171,6 +171,18 @@ public class HeaderPage extends AbstractPage {
 		}
 		return styleCoachName;
 	}
+	public String getStyleCoachEmailFromProfile() {
+		
+		String styleCoachName = "";
+		List<WebElement> infoBoxList = getDriver().findElements(By.cssSelector(".info-box"));
+		for (WebElement infoBox : infoBoxList) {
+			if (infoBox.getText().contains(ContextConstants.MEIN_STYLE_COACH)) {
+				styleCoachName = infoBox.findElement(By.cssSelector("dl dd:nth-child(4)")).getText();
+				break;
+			}
+		}
+		return styleCoachName;
+	}
 
 	public void navigateToPartyPage(String url) {
 		getDriver().get(url);

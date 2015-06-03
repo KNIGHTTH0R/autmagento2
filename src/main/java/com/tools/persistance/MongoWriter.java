@@ -24,6 +24,7 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.geolocation.CoordinatesModel;
+import com.tools.data.soap.DBStylistModel;
 
 public class MongoWriter extends MongoConnector {
 
@@ -104,6 +105,14 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.STYLIST_EMAIL, customerModel.getEmailName());
 		document.put(MongoTableKeys.STYLIST_PASSWORD, customerModel.getPassword());
 
+		table.insert(document);
+	}
+	public static void saveDbStylistModel(DBStylistModel stylistModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.DB_STYLIST_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.DB_STYLIST_EMAIL, stylistModel.getEmail());		
 		table.insert(document);
 	}
 

@@ -24,6 +24,7 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.soap.DBStylistModel;
 
 public class MongoReader extends MongoConnector {
 
@@ -295,6 +296,30 @@ public class MongoReader extends MongoConnector {
 				result.setLastName(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_LASTNAME));
 				result.setEmailName(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_EMAIL));
 				result.setPassword(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_PASSWORD));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+
+	public static List<DBStylistModel> grabDbStylistModels(String testName) {
+		DBObject dbObject = null;
+		List<DBStylistModel> itemList = new ArrayList<DBStylistModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.DB_STYLIST_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				DBStylistModel result = new DBStylistModel();
+				dbObject = cursor.next();
+
+				result.setEmail(MongoUtils.checkField(dbObject, MongoTableKeys.DB_STYLIST_EMAIL));
 
 				itemList.add(result);
 			}

@@ -42,7 +42,7 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "by_default")
 	private WebElement noInviteCheckbox;
 
-	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")  
+	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")
 	private WebElement completeButton;
 
 	// ---------------------------------------------------
@@ -55,11 +55,17 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "zip")
 	private WebElement postCodeInput;
 
+	@FindBy(id = "distribution_zip")
+	private WebElement distributionZip;
+
 	@FindBy(id = "city")
 	private WebElement cityInput;
 
 	@FindBy(id = "country")
 	private WebElement countrySelect;
+
+	@FindBy(id = "registration-distribution-country")
+	private WebElement distributionCountry;
 
 	@FindBy(id = "telephone")
 	private WebElement telephoneInput;
@@ -132,6 +138,10 @@ public class CreateCustomerPage extends AbstractPage {
 	public void inputPostCode(String postCode) {
 		postCodeInput.sendKeys(postCode);
 	}
+	
+	public void inputPostCodeFromPersonalInfo(String postCode) {
+		distributionZip.sendKeys(postCode);
+	}
 
 	public void inputHomeTown(String homeTown) {
 		cityInput.sendKeys(homeTown);
@@ -140,6 +150,11 @@ public class CreateCustomerPage extends AbstractPage {
 	public void selectCountryName(String countryName) {
 		element(countrySelect).waitUntilVisible();
 		element(countrySelect).selectByVisibleText(countryName);
+	}
+	
+	public void selectCountryNameFromPersonalInfo(String countryName) {
+		element(distributionCountry).waitUntilVisible();
+		element(distributionCountry).selectByVisibleText(countryName);
 	}
 
 	public void inputPhoneNumber(String phoneNumber) {

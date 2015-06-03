@@ -10,7 +10,9 @@ import com.poc.DeactivateBuy3Get1ForRegular;
 import com.poc.DeactivateRule;
 
 @SuiteClasses({
-
+	
+	US7009Suite.class,
+	US70010Suite.class,
 	US10CreateAllPartiesSuite.class,
 	DeactivateRule.class,
 	US001Suite.class,
@@ -66,6 +68,7 @@ import com.poc.DeactivateRule;
 	
 	US11001Suite.class,
 	US11002Suite.class,
+	US12001Suite.class,
 	
 	
 	

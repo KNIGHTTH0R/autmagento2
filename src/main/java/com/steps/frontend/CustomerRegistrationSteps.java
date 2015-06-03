@@ -42,6 +42,24 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
+	public void fillCreateCustomerFormWithNoStylePartyAndStyleCoachChecked(CustomerFormModel customerData, AddressModel addressData) {
+
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		inputPostCodeFromPersonalInfo(addressData.getPostCode());
+		selectCountryNameFromPersonalInfo(addressData.getCountryName());
+		checkNoInvite();
+		checkIAgree();
+		clickCompleteButton();
+	}
+
+	@StepGroup
 	public CoordinatesModel fillCreateCustomerFormAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
 
 		CoordinatesModel coordinatesModel = new CoordinatesModel();
@@ -123,6 +141,11 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void inputPostCodeFromPersonalInfo(String postCode) {
+		createCustomerPage().inputPostCodeFromPersonalInfo(postCode);
+	}
+
+	@Step
 	public void inputHomeTown(String homeTown) {
 		createCustomerPage().inputHomeTown(homeTown);
 	}
@@ -130,6 +153,11 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	public void selectCountryName(String countryName) {
 		createCustomerPage().selectCountryName(countryName);
+	}
+
+	@Step
+	public void selectCountryNameFromPersonalInfo(String countryName) {
+		createCustomerPage().selectCountryNameFromPersonalInfo(countryName);
 	}
 
 	@Step
