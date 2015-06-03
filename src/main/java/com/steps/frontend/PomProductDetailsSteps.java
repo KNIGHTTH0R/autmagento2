@@ -16,7 +16,6 @@ public class PomProductDetailsSteps extends AbstractSteps {
 	@StepGroup
 	public void findStarterProductAndAddItToTheCart(String productName){
 		pomProductListPage().findProductAndClick(productName);
-//		fancyBoxPage().selectValueFromDropDown(size);
 		fancyBoxPage().submitProduct();
 	}
 

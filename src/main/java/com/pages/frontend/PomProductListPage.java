@@ -27,9 +27,9 @@ public class PomProductListPage extends AbstractPage {
 			String productText = webElement.findElement(By.cssSelector("div h2")).getText();
 			if (productText.contains(productName)) {
 				builder.moveToElement(webElement.findElement(By.cssSelector("div img"))).build().perform();
-				waitABit(2000);
+				waitABit(3000);
 				webElement.findElement(By.cssSelector("div img")).click();
-				waitABit(1000);
+				waitABit(2000);
 				webElement.findElement(By.cssSelector("div div a")).click();
 				found = true;
 				break theFor;

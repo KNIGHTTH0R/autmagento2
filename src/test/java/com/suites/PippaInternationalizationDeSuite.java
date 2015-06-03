@@ -11,8 +11,6 @@ import com.poc.DeactivateRule;
 
 @SuiteClasses({
 	
-	US7009Suite.class,
-	US70010Suite.class,
 	US10CreateAllPartiesSuite.class,
 	DeactivateRule.class,
 	US001Suite.class,
