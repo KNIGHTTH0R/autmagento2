@@ -117,7 +117,6 @@ public class KoboCampaignSteps extends AbstractSteps {
 		koboCampaignPage().checkStyleMemberCheckbox();
 		koboCampaignPage().checkStylePartiesCheckbox();
 		koboCampaignPage().checkIAgree();
-		koboCampaignPage().checkNoInvite();	
 		koboCampaignPage().submitAndContinue();
 	}
 	@Step

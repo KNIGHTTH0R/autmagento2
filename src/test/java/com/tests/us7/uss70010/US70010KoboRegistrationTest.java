@@ -137,7 +137,6 @@ public class US70010KoboRegistrationTest extends BaseTest {
 		contactBoosterRegistrationSteps.navigate(url);
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 		fancyBoxSteps.goToShipping();
-//		shippingPomSteps.clickPartyNoOption();
 		shippingSteps.clickGoToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));
