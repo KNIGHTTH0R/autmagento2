@@ -9,7 +9,7 @@ import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
-import com.poc.geolocationAPI.AddressConverter;
+import com.tools.AddressConverter;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;

@@ -15,9 +15,9 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
-import com.poc.geolocationAPI.AddressConverter;
 import com.poc.readFromFile.RandomAddress;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.tools.AddressConverter;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;

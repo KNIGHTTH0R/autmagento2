@@ -9,7 +9,7 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
-import com.poc.geolocationAPI.DistanceCalculator;
+import com.tools.DistanceCalculator;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -22,9 +22,9 @@ import com.tools.utils.FormatterUtils;
 
 public class ApiCalls {
 
-	public static void main(String args[]) throws Exception {
-		createApiProduct(createProductModel());
-	}
+//	public static void main(String args[]) throws Exception {
+//		createApiProduct(createProductModel());
+//	}
 
 	public static ProductDetailedModel createPomProductModel() {
 		ProductDetailedModel result = createProductModel();
