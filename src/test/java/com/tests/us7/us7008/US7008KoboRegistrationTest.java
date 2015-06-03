@@ -124,21 +124,22 @@ public class US7008KoboRegistrationTest extends BaseTest {
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
+		addressModel.setCountryName(ContextConstants.NOT_PREFERED_LANGUAGE);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
 	public void us7008KoboRegistrationTest() {
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL() + context, koboCode);
-		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);
+		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);		
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
+		koboSuccesFormSteps.verifyThatTheWebsiteChanged();
 		emailClientSteps.openMailinator();
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		contactBoosterRegistrationSteps.navigate(url);
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 		fancyBoxSteps.goToShipping();
-//		shippingPomSteps.clickPartyNoOption();
 		shippingSteps.clickGoToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));

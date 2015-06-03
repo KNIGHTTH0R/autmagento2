@@ -74,6 +74,7 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 	public void us7008ValidateCustomerIsAssignedToStylist() {
 
 		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
+
 		headerSteps.goToProfile();
 		headerSteps.getBoutiqueName();
 		headerSteps.getStyleCoachFirstNameFromProfile();

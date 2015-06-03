@@ -38,7 +38,7 @@ public class KoboCampaignPage extends AbstractPage {
 	@FindBy(id = "terms")
 	private WebElement termsCheckbox;
 
-	@FindBy(id = "kostenlos-anmelden")
+	@FindBy(css = "button#kostenlos-anmelden")
 	private WebElement submitButton;
 
 	@FindBy(css = "#selectContainer input#by_default")
@@ -57,7 +57,7 @@ public class KoboCampaignPage extends AbstractPage {
 	@FindBy(id = "city")
 	private WebElement cityInput;
 
-	@FindBy(id = "country")
+	@FindBy(id = "registration-distribution-country")
 	private WebElement countrySelect;
 
 	@FindBy(id = "telephone")
