@@ -7,6 +7,8 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
@@ -28,10 +30,69 @@ public class CustomerDetailsPage extends AbstractPage {
 	@FindBy(id = "customer_info_tabs_customer_edit_tab_view_content")
 	private WebElement detailsContainer;
 
+	@FindBy(id = "customer_info_tabs_addresses")
+	private WebElement addressesTab;
+
+	@FindBy(css = "input[id*='street0'][id^='_item']")
+	private WebElement streetInput;
+
+	@FindBy(css = "input[id*='house_number'][id^='_item']")
+	private WebElement houseNumberInput;
+
+	@FindBy(css = "input[id*='city'][id^='_item']")
+	private WebElement cityInput;
+
+	@FindBy(css = "select[id*='country_id'][id^='_item']")
+	private WebElement countrySelect;
+
+	@FindBy(css = "input[id*='postcode'][id^='_item']")
+	private WebElement postCodeInput;
+
 	public void clickOnLeadSettings() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(leadSettingsButton).waitUntilVisible();
 		leadSettingsButton.click();
+	}
+
+	public void inputStreet(String street) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(streetInput).waitUntilVisible();
+		element(streetInput).sendKeys(street);
+	}
+
+	public void inputHouseNumber(String number) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(houseNumberInput).waitUntilVisible();
+		element(houseNumberInput).sendKeys(number);
+	}
+
+	public void inputCity(String city) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(cityInput).waitUntilVisible();
+		element(cityInput).sendKeys(city);
+	}
+
+	public void inputPostCode(String code) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(postCodeInput).waitUntilVisible();
+		element(postCodeInput).sendKeys(code);
+	}
+
+	public void selectCountryName(String countryName) {
+		element(countrySelect).waitUntilVisible();
+		element(countrySelect).selectByVisibleText(countryName);
+	}
+
+	public void clickOnAddressesTab() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(addressesTab).waitUntilVisible();
+		addressesTab.click();
+	}
+
+	public CoordinatesModel changeAdress(AddressModel addressModel) {
+		CoordinatesModel coordinatesModel = new CoordinatesModel();
+
+		return coordinatesModel;
 	}
 
 	public String extractEmailConfirmationStatus() {

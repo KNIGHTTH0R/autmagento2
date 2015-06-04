@@ -1,4 +1,4 @@
-package com.tests.uss13.us13001;
+package com.tests.uss14.us14001;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -17,9 +17,9 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US13", type = "external")
-@Story(Application.Distribution.CustomerLead.class)
+@Story(Application.Distribution.StyleCoachLead.class)
 @RunWith(ThucydidesRunner.class)
-public class US13001ConfirmCustomerTest extends BaseTest {
+public class US14001ConfirmCustomerTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -29,16 +29,16 @@ public class US13001ConfirmCustomerTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").size();
+		int size = MongoReader.grabCustomerFormModels("US14001StyleCoachLeadDistributionTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US14001StyleCoachLeadDistributionTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
 
 	}
 
 	@Test
-	public void us13001ConfirmCustomerTest() {
+	public void us14001ConfirmCustomerTest() {
 
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);

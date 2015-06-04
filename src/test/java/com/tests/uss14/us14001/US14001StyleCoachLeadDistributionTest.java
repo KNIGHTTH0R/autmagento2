@@ -1,4 +1,4 @@
-package com.tests.uss13.us13003;
+package com.tests.uss14.us14001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
@@ -26,13 +25,14 @@ import com.tools.data.soap.DBStylistModel;
 import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
+import com.tools.utils.FieldGenerators;
+import com.tools.utils.FieldGenerators.Mode;
 import com.tools.utils.RandomAddress;
 
 @WithTag(name = "US13", type = "frontend")
-@Story(Application.Distribution.HostLead.class)
+@Story(Application.Distribution.StyleCoachLead.class)
 @RunWith(ThucydidesRunner.class)
-public class US13003HostLeadDistributionTest extends BaseTest {
+public class US14001StyleCoachLeadDistributionTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -41,12 +41,6 @@ public class US13003HostLeadDistributionTest extends BaseTest {
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
-	public StylistDataModel validationModel;
-	CoordinatesModel coordinatesModel = new CoordinatesModel();
-	RandomAddress randomAddress;
-	List<DBStylistModel> stylistList = new ArrayList<DBStylistModel>();
-	List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
-	String range = "50";
 
 	@Before
 	public void setUp() throws Exception {
@@ -54,25 +48,17 @@ public class US13003HostLeadDistributionTest extends BaseTest {
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		randomAddress = new RandomAddress();
-		addressModel = randomAddress.getRandomAddressFromFile();
-		coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
-		System.out.println(coordinatesModel.getLattitude());
-		System.out.println(coordinatesModel.getLongitude());
-
-		// the last parameter is for mode 3 - style coach retrieval
-				compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, range,"status","eq","1",2);
-				System.out.println(compatibleStylistList.size());
-				PrintUtils.printListDbStylists(compatibleStylistList);
-				MongoConnector.cleanCollection(getClass().getSimpleName());
+		addressModel.setStreetAddress(FieldGenerators.generateRandomString(12, Mode.ALPHA));
+		addressModel.setHomeTown(FieldGenerators.generateRandomString(12, Mode.ALPHA));
+		addressModel.setPostCode("123");
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us13003HostLeadDistributionTest() {
+	public void us14001StyleCoachLeadDistributionTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormNoMemberAndGetLatAndLong(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerFormAndGetLatAndLong(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
 	}
@@ -80,10 +66,7 @@ public class US13003HostLeadDistributionTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
-		for (DBStylistModel stylist : compatibleStylistList) {
-			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
-		}
+
 	}
 
 }

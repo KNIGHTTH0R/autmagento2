@@ -40,17 +40,16 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getPriceIP());
 		}
 	}
+
+	// TODO print all fields here
 	public static void printListDbStylists(List<DBStylistModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		for (DBStylistModel dBStylistModel : list) {
 			System.out.println("------------------------");
-			System.out.println(dBStylistModel.getId());
+
 			System.out.println(dBStylistModel.getStatus());
 			System.out.println(dBStylistModel.getEmail());
-			System.out.println(dBStylistModel.getStreet());
-			System.out.println(dBStylistModel.getHouseNumber());
-			System.out.println(dBStylistModel.getPostCode());
-		
+
 		}
 	}
 

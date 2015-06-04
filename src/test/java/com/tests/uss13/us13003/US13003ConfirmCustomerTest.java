@@ -16,8 +16,8 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "external")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US13", type = "external")
+@Story(Application.Distribution.HostLead.class)
 @RunWith(ThucydidesRunner.class)
 public class US13003ConfirmCustomerTest extends BaseTest {
 

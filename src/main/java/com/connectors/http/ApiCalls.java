@@ -22,9 +22,9 @@ import com.tools.utils.FormatterUtils;
 
 public class ApiCalls {
 
-//	public static void main(String args[]) throws Exception {
-//		createApiProduct(createProductModel());
-//	}
+	// public static void main(String args[]) throws Exception {
+	// createApiProduct(createProductModel());
+	// }
 
 	public static ProductDetailedModel createPomProductModel() {
 		ProductDetailedModel result = createProductModel();
@@ -166,12 +166,12 @@ public class ApiCalls {
 		return resultID;
 	}
 
-	public static List<DBStylistModel> getStylistList() {
+	public static List<DBStylistModel> getStylistList(String filter, String operand, String filterValue) {
 
 		List<DBStylistModel> stylistList = new ArrayList<DBStylistModel>();
 
 		try {
-			SOAPMessage response = HttpSoapConnector.soapGetStylistList();
+			SOAPMessage response = HttpSoapConnector.soapGetStylistList(filter, operand, filterValue);
 			System.out.println(response);
 			try {
 				stylistList = extractStylistData(response);
@@ -203,8 +203,8 @@ public class ApiCalls {
 			NodeList childNodes = stylistList.item(i).getChildNodes();
 			for (int j = 0; j < childNodes.getLength(); j++) {
 
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
-					model.setId(childNodes.item(j).getTextContent());
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_firstname")) {
+					model.setFirstName(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("status")) {
 					model.setStatus(childNodes.item(j).getTextContent());
@@ -212,14 +212,47 @@ public class ApiCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_email")) {
 					model.setEmail(childNodes.item(j).getTextContent());
 				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_street")) {
-					model.setStreet(childNodes.item(j).getTextContent());
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("billing_latitude")) {
+					model.setLattitude(childNodes.item(j).getTextContent());
 				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_house_number")) {
-					model.setHouseNumber(childNodes.item(j).getTextContent());
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("billing_longitude")) {
+					model.setLongitude(childNodes.item(j).getTextContent());
 				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_postcode")) {
-					model.setPostCode(childNodes.item(j).getTextContent());
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("qualified_sc_lead_retrieval")) {
+					model.setQualifiedSC(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("qualified_host_lead_retrieval")) {
+					model.setQualifiedHost(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("qualified_customer_retrieval")) {
+					model.setQualifiedCustomer(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_sc_leads_received")) {
+					model.setTotalSCReceived(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_host_leads_received")) {
+					model.setTotalHostReceived(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_customers_received")) {
+					model.setTotalCustomerReceived(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_sc_leads_rec_curr_week")) {
+					model.setTotalSCCurrentWeek(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_host_leads_rec_curr_week")) {
+					model.setTotalHostCurrentWeek(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("max_sc_leads_per_week")) {
+					model.setMaxSCPerWeek(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("lead_retrieval_paused")) {
+					model.setLeadRetrievalPaused(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("sc_lead_range")) {
+					model.setStyleCoachLeadRange(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("host_lead_range")) {
+					model.setHostLeadRange(childNodes.item(j).getTextContent());
 				}
 			}
 			stylistModelList.add(model);
@@ -228,21 +261,50 @@ public class ApiCalls {
 
 	}
 
-	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinateaModel, String range) {
+	// mode will be 1-customer retrieval,2-host retrieval,3- style coach
+	// retrieval
+	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinateaModel, String range, String filter, String operand, String filterValue,
+			int mode) {
 
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
-		for (DBStylistModel dbStylistModel : getStylistList()) {
-			if (!isStylistIncompatible(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
-				compatibleList.add(dbStylistModel);
+		for (DBStylistModel dbStylistModel : getStylistList(filter, operand, filterValue)) {
+			switch (mode) {
+
+			case 1:
+				if (!isStylistIncompatibleForCustomerRetrieval(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
+					compatibleList.add(dbStylistModel);
+				}
+
+			case 2:
+				if (!isStylistIncompatibleForHost(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
+					compatibleList.add(dbStylistModel);
+				}
+
+			case 3:
+				if (!isStylistIncompatibleForSCRetrieval(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
+					compatibleList.add(dbStylistModel);
+				}
 			}
+		}
+		if (compatibleList.size() > 5) {
+			compatibleList = compatibleList.subList(0, 5);
 		}
 		return compatibleList;
 	}
 
-	// add here a complete check after all needed fields will be exposed by api
-	// be careful at null fields which might occur
-	private static boolean isStylistIncompatible(DBStylistModel stylistModel) {
-		return stylistModel.getStatus().contentEquals("0");
+	private static boolean isStylistIncompatibleForCustomerRetrieval(DBStylistModel stylistModel) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedCustomer().contentEquals("0");
+	}
+
+	private static boolean isStylistIncompatibleForSCRetrieval(DBStylistModel stylistModel) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedSC().contentEquals("0");
+	}
+
+	private static boolean isStylistIncompatibleForHost(DBStylistModel stylistModel) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedHost().contentEquals("0");
 	}
 
 	public static boolean isStylistInRange(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel, String range) {

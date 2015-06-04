@@ -86,6 +86,58 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		}
 		return coordinatesModel;
 	}
+	@StepGroup
+	public CoordinatesModel fillCreateCustomerFormNoMemberAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
+		
+		CoordinatesModel coordinatesModel = new CoordinatesModel();
+		
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		fillContactDetails(addressData);
+		checkNoInvite();
+		checkIAgree();
+		clickCompleteButton();
+		try {
+			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
+					+ addressData.getHomeTown() + "," + addressData.getPostCode());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return coordinatesModel;
+	}
+	@StepGroup
+	public CoordinatesModel fillCreateCustomerFormNoPartiesAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
+		
+		CoordinatesModel coordinatesModel = new CoordinatesModel();
+		
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkMember();
+		fillContactDetails(addressData);
+		checkNoInvite();
+		checkIAgree();
+		clickCompleteButton();
+		try {
+			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
+					+ addressData.getHomeTown() + "," + addressData.getPostCode());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return coordinatesModel;
+	}
 
 	@StepGroup
 	@Title("Fill create customer form under context")

@@ -181,16 +181,19 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void validateCustomerIsAssignedToOneOfTheStyleCoaches(List<DBStylistModel> stylistsList, String grabbedEmail) {
+	public DBStylistModel validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(List<DBStylistModel> stylistsList, String grabbedEmail) {
 		boolean match = false;
+		DBStylistModel result = new DBStylistModel();
 		for (DBStylistModel dbStylistModel : stylistsList) {
 			if (dbStylistModel.getEmail().contentEquals(grabbedEmail)) {
 				match = true;
+				result.setEmail(dbStylistModel.getEmail());
 				break;
 			}
 		}
 		Assert.assertTrue("Failure: The customer is not assigned to the expected SC !", match);
-
+		
+		return result;
 	}
 
 	@Step

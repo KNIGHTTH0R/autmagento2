@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
@@ -25,10 +26,11 @@ import com.tools.data.soap.DBStylistModel;
 import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US13", type = "frontend")
+@Story(Application.Distribution.StyleCoachLead.class)
 @RunWith(ThucydidesRunner.class)
 public class US13002StyleCoachLeadDistributionTest extends BaseTest {
 
@@ -57,18 +59,18 @@ public class US13002StyleCoachLeadDistributionTest extends BaseTest {
 		coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
 		System.out.println(coordinatesModel.getLattitude());
 		System.out.println(coordinatesModel.getLongitude());
-
-		// compatibleStylistList =
-		// ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel,
-		// range);
-
+		
+		// the last parameter is for mode 3 - style coach retrieval
+		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, range,"status","eq","1",3);
+		System.out.println(compatibleStylistList.size());
+		PrintUtils.printListDbStylists(compatibleStylistList);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
 	public void us13002StyleCoachLeadDistributionTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormAndGetLatAndLong(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerFormNoPartiesAndGetLatAndLong(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
 	}

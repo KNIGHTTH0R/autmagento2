@@ -54,13 +54,13 @@ public class HttpSoapConnector {
 		
 		return soapResponse;
 	}
-	public static SOAPMessage soapGetStylistList() throws SOAPException, IOException {
+	public static SOAPMessage soapGetStylistList(String filter,String operand,String filterValue) throws SOAPException, IOException {
 		String sessID = performLogin();
 		System.out.println("Sesion id :" + sessID);
 		
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getStylistList(sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getStylistList(sessID,filter,operand,filterValue), MongoReader.getSoapURL() + UrlConstants.API_URI);
 		
 		return soapResponse;
 	}
@@ -184,17 +184,26 @@ public class HttpSoapConnector {
 		
 		return soapMessage;
 	}
-	private static SOAPMessage getStylistList(String ssID) throws SOAPException, IOException {
+	private static SOAPMessage getStylistList(String ssID,String filterName,String operand,String filterValue) throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 		
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
 		SOAPElement getStylistRequestParam = soapBody.addChildElement(SoapKeys.STYLIST_LIST, SoapKeys.URN_PREFIX);
 		
 		SOAPElement sessionID = getStylistRequestParam.addChildElement(SoapKeys.SESSION_ID);
-		sessionID.addTextNode(ssID);
+		sessionID.addTextNode(ssID);		
 		
 		SOAPElement filters = getStylistRequestParam.addChildElement(SoapKeys.FILTERS);		
-	
+		SOAPElement complexFilter = filters.addChildElement(SoapKeys.COMPLEX_FILTER);
+		SOAPElement complexObjectArray = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement key = complexObjectArray.addChildElement(SoapKeys.KEY);
+		key.addTextNode(filterName);
+		SOAPElement value = complexObjectArray.addChildElement(SoapKeys.VALUE);
+		SOAPElement key2 = value.addChildElement(SoapKeys.KEY);
+		key2.addTextNode(operand);
+		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
+		value2.addTextNode(filterValue);
+		
 		soapMessage.saveChanges();
 		
 		System.out.print("Request SOAP Message:");
@@ -247,6 +256,13 @@ public class HttpSoapConnector {
 		// Lists and other objects
 		return productData;
 
+	}
+	private static SOAPElement generateStylistComplexFilter(SOAPElement bodyElement, ProductDetailedModel product) throws SOAPException {
+		SOAPElement productData = bodyElement.addChildElement(SoapKeys.COMPLEX_FILTER);
+		
+		productData = addOptionalField(SoapKeys.NAME, product.getName(), productData);
+
+		return productData;
 	}
 
 	private static SOAPElement generateStockDataMessage(StockDataModel product, SOAPElement bodyElement) throws SOAPException {

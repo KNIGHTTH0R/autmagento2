@@ -30,6 +30,15 @@ public class Application {
 		public class CreateParty {
 		}
 	}
+	@Feature
+	public class Distribution {
+		public class CustomerLead {
+		}
+		public class StyleCoachLead {
+		}
+		public class HostLead {
+		}
+	}
 
 	@Feature
 	public class External {

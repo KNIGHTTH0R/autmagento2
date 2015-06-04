@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Steps;
 
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
+import com.tools.data.soap.DBStylistModel;
 import com.tools.requirements.AbstractSteps;
 
 public class ValidationSteps extends AbstractSteps {
@@ -26,6 +27,29 @@ public class ValidationSteps extends AbstractSteps {
 		verifyValues("Customer Leads ", initialData.getCustomerLeads(), finalData.getCustomerLeads());
 		verifyValues("Hostess Leads ", initialData.getHostessLeads(), finalData.getHostessLeads());
 		verifyValues("Hostess Leads Week ", initialData.getHostessLeadsWeek(), finalData.getHostessLeadsWeek());
+
+	}
+
+	@StepGroup
+	public void validateCustomerLeadData(DBStylistModel initialData, StylistDataModel finalData) {
+
+		verifyValues("Customer Leads ", initialData.getTotalCustomerReceived(), finalData.getCustomerLeads());
+
+	}
+
+	@StepGroup
+	public void validateStyleCoachLeadData(DBStylistModel initialData, StylistDataModel finalData) {
+
+		verifyValues("Customer Leads ", initialData.getTotalSCReceived(), finalData.getStyleCoachLeads());
+		verifyValues("Customer Leads ", initialData.getTotalSCCurrentWeek(), finalData.getStyleCoachLeadsWeek());
+
+	}
+
+	@StepGroup
+	public void validateHostLeadData(DBStylistModel initialData, StylistDataModel finalData) {
+
+		verifyValues("Hostess Leads ", initialData.getTotalHostReceived(), finalData.getHostessLeads());
+		verifyValues("Hostess Leads Week ", initialData.getTotalHostCurrentWeek(), finalData.getHostessLeadsWeek());
 
 	}
 

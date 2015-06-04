@@ -2,21 +2,30 @@ package com.tools.data.soap;
 
 public class DBStylistModel {
 
-	private String id;
+	private String firstName;
 	private String status;
 	private String email;
-	private String street;
-	private String houseNumber;
-	private String postCode;
 	private String lattitude;
 	private String longitude;
+	private String qualifiedSC;
+	private String qualifiedHost;
+	private String qualifiedCustomer;
+	private String totalSCReceived;
+	private String totalHostReceived;
+	private String totalCustomerReceived;
+	private String totalSCCurrentWeek;
+	private String totalHostCurrentWeek;
+	private String maxSCPerWeek;
+	private String leadRetrievalPaused;
+	private String styleCoachLeadRange;
+	private String hostLeadRange;
 
-	public String getId() {
-		return id;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getStatus() {
@@ -35,30 +44,6 @@ public class DBStylistModel {
 		this.email = email;
 	}
 
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getHouseNumber() {
-		return houseNumber;
-	}
-
-	public void setHouseNumber(String houseNumber) {
-		this.houseNumber = houseNumber;
-	}
-
-	public String getPostCode() {
-		return postCode;
-	}
-
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
-	}
-
 	public String getLattitude() {
 		return lattitude;
 	}
@@ -75,5 +60,102 @@ public class DBStylistModel {
 		this.longitude = longitude;
 	}
 
+	public String getQualifiedSC() {
+		return qualifiedSC;
+	}
+
+	public void setQualifiedSC(String qualifiedSC) {
+		this.qualifiedSC = qualifiedSC;
+	}
+
+	public String getQualifiedHost() {
+		return qualifiedHost;
+	}
+
+	public void setQualifiedHost(String qualifiedHost) {
+		this.qualifiedHost = qualifiedHost;
+	}
+
+	public String getQualifiedCustomer() {
+		return qualifiedCustomer;
+	}
+
+	public void setQualifiedCustomer(String qualifiedCustomer) {
+		this.qualifiedCustomer = qualifiedCustomer;
+	}
+
+	public String getTotalSCReceived() {
+		return totalSCReceived;
+	}
+
+	public void setTotalSCReceived(String totalSCReceived) {
+		this.totalSCReceived = totalSCReceived;
+	}
+
+	public String getTotalHostReceived() {
+		return totalHostReceived;
+	}
+
+	public void setTotalHostReceived(String totalHostReceived) {
+		this.totalHostReceived = totalHostReceived;
+	}
+
+	public String getTotalCustomerReceived() {
+		return totalCustomerReceived;
+	}
+
+	public void setTotalCustomerReceived(String totalCustomerReceived) {
+		this.totalCustomerReceived = totalCustomerReceived;
+	}
+
+	public String getTotalSCCurrentWeek() {
+		return totalSCCurrentWeek;
+	}
+
+	public void setTotalSCCurrentWeek(String totalSCCurrentWeek) {
+		this.totalSCCurrentWeek = totalSCCurrentWeek;
+	}
+
+	public String getTotalHostCurrentWeek() {
+		return totalHostCurrentWeek;
+	}
+
+	public void setTotalHostCurrentWeek(String totalHostCurrentWeek) {
+		this.totalHostCurrentWeek = totalHostCurrentWeek;
+	}
+
+	public String getMaxSCPerWeek() {
+		return maxSCPerWeek;
+	}
+
+	public void setMaxSCPerWeek(String maxSCPerWeek) {
+		this.maxSCPerWeek = maxSCPerWeek;
+	}
+
+	public String getLeadRetrievalPaused() {
+		return leadRetrievalPaused;
+	}
+
+	public void setLeadRetrievalPaused(String leadRetrievalPaused) {
+		this.leadRetrievalPaused = leadRetrievalPaused;
+	}
+
+	public String getStyleCoachLeadRange() {
+		return styleCoachLeadRange;
+	}
+
+	public void setStyleCoachLeadRange(String styleCoachLeadRange) {
+		this.styleCoachLeadRange = styleCoachLeadRange;
+	}
+
+	public String getHostLeadRange() {
+		return hostLeadRange;
+	}
+
+	public void setHostLeadRange(String hostLeadRange) {
+		this.hostLeadRange = hostLeadRange;
+	}
+
+	
 
 }

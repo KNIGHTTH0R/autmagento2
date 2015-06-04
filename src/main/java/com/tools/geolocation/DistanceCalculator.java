@@ -24,5 +24,9 @@ public class DistanceCalculator {
 	private static double rad2deg(double rad) {
 		return (rad * 180 / Math.PI);
 	}
+	
+	public static  void main(String[] args){
+		System.out.println(DistanceCalculator.getDistance(48, 8, 53, 10, "k"));
+	}
 
 }

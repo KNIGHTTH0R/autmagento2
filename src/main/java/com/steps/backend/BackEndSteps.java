@@ -40,15 +40,18 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().clickOnCustomers();
 		navigationPage().clickOnManageCustomers();
 	}
+
 	@Step
 	public void clickOnStyleParties() {
 		navigationPage().clickOnStyleCoach();
 		navigationPage().clickOnStyleParties();
 	}
+
 	@Step
 	public void clickOnShoppingCartPriceRules() {
 		navigationPage().clickOnPromotions();
-		navigationPage().clickOnShoppingCartPriceRules();;
+		navigationPage().clickOnShoppingCartPriceRules();
+		;
 	}
 
 	@Step
@@ -63,8 +66,9 @@ public class BackEndSteps extends AbstractSteps {
 		waitABit(3000);
 		customerListPage().inputEmailFilter(emailText);
 		customerListPage().clickOnSearch();
-		
+
 	}
+
 	@Step
 	public void searchOrderByName(String emailText) {
 		orderListPage().inputOrderName(emailText);
@@ -76,12 +80,17 @@ public class BackEndSteps extends AbstractSteps {
 	public void openOrderDetails(String emailText) {
 		orderListPage().openOrderDetails(emailText);
 	}
-	
+
 	@Step
 	public String openCustomerDetails(String emailText) {
 		customerListPage().openCustomerDetails(emailText);
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return getDriver().getCurrentUrl();
+	}
+
+	@Step
+	public void clickOnAddressesTab() {
+		customerDetailsHomePage().clickOnAddressesTab();
 	}
 
 	@Step
@@ -108,7 +117,7 @@ public class BackEndSteps extends AbstractSteps {
 	public String extractEmailConfirmationStatusWithoutLabel() {
 		return customerDetailsHomePage().extractEmailConfirmationStatusWithoutLabel();
 	}
-	
+
 	public String extractCustomerType() {
 		return customerDetailsHomePage().extractCustomerType();
 	}

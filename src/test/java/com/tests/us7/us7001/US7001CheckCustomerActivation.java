@@ -1,6 +1,5 @@
 package com.tests.us7.us7001;
 
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -28,9 +27,9 @@ public class US7001CheckCustomerActivation extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	@Steps 
+	@Steps
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
 	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
@@ -38,7 +37,6 @@ public class US7001CheckCustomerActivation extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
 
 		int size = MongoReader.grabCustomerFormModels("US7001RegularCustomerRegistrationTest").size();
 		if (size > 0) {
@@ -46,28 +44,27 @@ public class US7001CheckCustomerActivation extends BaseTest {
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
-		
-		afterLinkConfirmationStylistExpectedProperties =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
-		
+
+		afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
+
 	}
+
 	@Test
 	public void us7001CheckCustomerActivation() {
-		
+
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		
-		StylistPropertiesModel afterLinkConfirmationStylistProperties =  backEndSteps.grabCustomerConfiguration();		
-		
+
+		StylistPropertiesModel afterLinkConfirmationStylistProperties = backEndSteps.grabCustomerConfiguration();
+
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
 		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistProperties);
 		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistExpectedProperties);
-			
+
 		customVerifications.printErrors();
 	}
 
-
 }
-
