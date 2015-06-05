@@ -74,11 +74,10 @@ public class US14001ChangeCustomerAddressTest extends BaseTest {
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.clickOnAddressesTab();
 		backEndSteps.editAddress(addressModel);
 
 	}
-	
+
 	@After
 	public void saveData() {
 		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());

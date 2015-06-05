@@ -47,7 +47,16 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "input[id*='postcode'][id^='_item']")
 	private WebElement postCodeInput;
+	
+	@FindBy(css = "button[onclick*='editForm.submit();']")
+	private WebElement saveCustomer;
 
+	public void saveCustomer() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(saveCustomer).waitUntilVisible();
+		saveCustomer.click();
+	}
+	
 	public void clickOnLeadSettings() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(leadSettingsButton).waitUntilVisible();

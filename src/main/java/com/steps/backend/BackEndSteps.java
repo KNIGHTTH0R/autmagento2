@@ -96,11 +96,13 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void editAddress(AddressModel addressModel) {
+		customerDetailsHomePage().clickOnAddressesTab();
 		customerDetailsHomePage().inputStreet(addressModel.getStreetAddress());
 		customerDetailsHomePage().inputHouseNumber(addressModel.getStreetNumber());
 		customerDetailsHomePage().inputCity(addressModel.getHomeTown());
 		customerDetailsHomePage().selectCountryName(addressModel.getCountryName());
 		customerDetailsHomePage().inputPostCode(addressModel.getPostCode());
+		customerDetailsHomePage().saveCustomer();
 	}
 
 	@Step

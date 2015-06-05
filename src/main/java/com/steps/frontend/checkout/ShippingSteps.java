@@ -30,10 +30,12 @@ public class ShippingSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabProductsList();
 	}
+
 	public List<RegularUserCartProductModel> grabRegularProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabRegularProductsList();
 	}
+
 	public List<HostCartProductModel> grabHostProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabHostProductsList();
@@ -42,7 +44,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void selectAddress(String address) {
 		billingFormPage().selectAdressDropdown(address);
-//		billingFormPage().verifyThatYouCannotBillOnRestrictedCountries();				
+		// billingFormPage().verifyThatYouCannotBillOnRestrictedCountries();
 	}
 
 	@Step
@@ -52,13 +54,18 @@ public class ShippingSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void selectKnowStylistNoOption() {
+		shippingFormPage().selectKnowStylistNoOption();
+	}
+
+	@Step
 	public String grabUrl() {
 		return getDriver().getCurrentUrl();
 	}
 
 	@Step
 	public void selectShippingAddress(String value) {
-//		shippingFormPage().verifyThatYouCannotShipOnRestrictedCountries();
+		// shippingFormPage().verifyThatYouCannotShipOnRestrictedCountries();
 		shippingFormPage().selectShippingAddress(value);
 		waitABit(1000);
 	}

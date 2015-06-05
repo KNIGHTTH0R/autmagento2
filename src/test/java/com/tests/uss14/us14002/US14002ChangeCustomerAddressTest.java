@@ -73,9 +73,7 @@ public class US14002ChangeCustomerAddressTest extends BaseTest {
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.clickOnAddressesTab();
 		backEndSteps.editAddress(addressModel);
-
 	}
 
 	@After

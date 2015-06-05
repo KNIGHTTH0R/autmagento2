@@ -43,6 +43,14 @@ public class ShippingFormPage extends AbstractPage {
 	@FindBy(css = "input#same_as_billing")
 	private WebElement sameAsBilling;
 
+	@FindBy(id = "know_stylist_no")
+	private WebElement knowStylistNo;
+
+	public void selectKnowStylistNoOption() {
+		element(knowStylistNo).waitUntilVisible();
+		knowStylistNo.click();
+	}
+
 	public void inputFirstName(String firstName) {
 		element(firstNameInput).waitUntilVisible();
 		firstNameInput.sendKeys(firstName);
@@ -96,9 +104,10 @@ public class ShippingFormPage extends AbstractPage {
 		element(addressDropDown).waitUntilVisible();
 		element(addressDropDown).selectByVisibleText(value);
 	}
-	
-	public void verifyThatYouCannotShipOnRestrictedCountries(){
-		Assert.assertTrue("The ddl contains the country name and it should not !!!", !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE) || !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
+
+	public void verifyThatYouCannotShipOnRestrictedCountries() {
+		Assert.assertTrue("The ddl contains the country name and it should not !!!", !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE)
+				|| !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
 		System.out.println(addressDropDown.getText());
 	}
 
