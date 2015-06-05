@@ -113,6 +113,11 @@ public class MongoWriter extends MongoConnector {
 		
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.DB_STYLIST_EMAIL, stylistModel.getEmail());		
+		document.put(MongoTableKeys.DB_TOTAL_SC_RECEIVED, stylistModel.getTotalSCReceived());		
+		document.put(MongoTableKeys.DB_TOTAL_HOST_RECEIVED, stylistModel.getTotalHostReceived());		
+		document.put(MongoTableKeys.DB_TOTAL_CUSTOMER_RECEIVED, stylistModel.getTotalCustomerReceived());		
+		document.put(MongoTableKeys.DB_TOTAL_SC_CURRENT_WEEK, stylistModel.getTotalSCCurrentWeek());		
+		document.put(MongoTableKeys.DB_TOTAL_HOST_CURRENT_WEEK, stylistModel.getTotalHostCurrentWeek());		
 		table.insert(document);
 	}
 

@@ -320,6 +320,11 @@ public class MongoReader extends MongoConnector {
 				dbObject = cursor.next();
 
 				result.setEmail(MongoUtils.checkField(dbObject, MongoTableKeys.DB_STYLIST_EMAIL));
+				result.setTotalSCReceived(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_SC_RECEIVED));
+				result.setTotalHostReceived(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_HOST_RECEIVED));
+				result.setTotalCustomerReceived(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_CUSTOMER_RECEIVED));
+				result.setTotalSCCurrentWeek(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_SC_CURRENT_WEEK));
+				result.setTotalHostCurrentWeek(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_HOST_CURRENT_WEEK));
 
 				itemList.add(result);
 			}

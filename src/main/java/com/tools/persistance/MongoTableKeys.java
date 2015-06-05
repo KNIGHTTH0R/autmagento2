@@ -127,10 +127,12 @@ public class MongoTableKeys {
 	
 	//DBStylistModel
 	public static final String DB_STYLIST_MODEL = "dbStylistModel";
-	public static final String DB_STYLIST_FIRSTNAME = "stylistFirstname";
-	public static final String DB_STYLIST_LASTNAME = "stylistLastname";
 	public static final String DB_STYLIST_EMAIL = "stylistEmail";
-	public static final String DB_STYLIST_PASSWORD = "stylistPassword";
+	public static final String DB_TOTAL_SC_RECEIVED = "totalSCReceived";
+	public static final String DB_TOTAL_HOST_RECEIVED = "totalHostReceived";
+	public static final String DB_TOTAL_CUSTOMER_RECEIVED = "totalCustomerReceived";
+	public static final String DB_TOTAL_SC_CURRENT_WEEK = "totalSCCurrentWeek";
+	public static final String DB_TOTAL_HOST_CURRENT_WEEK = "totalHostCurrentWeek";
 	
 	//Default settings 
 	public static final String TEST_CONFIG = "DefaultConfig";

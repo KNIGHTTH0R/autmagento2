@@ -1,9 +1,13 @@
 package com.tools.geolocation;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class GoogleResponse {
 
 	private Result[] results;
 	private String status;
+	@JsonIgnore
+	private String exclude_from_slo;
 
 	public Result[] getResults() {
 		return results;

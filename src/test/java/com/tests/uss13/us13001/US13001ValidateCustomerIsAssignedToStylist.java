@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
@@ -38,14 +39,17 @@ public class US13001ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		int size = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").size();
 		if (size > 0) {
 			stylistEmail = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").get(0).getEmailName();
 			stylistPassword = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").get(0).getPassword();
 		} else
 			System.out.println("The database has no entries");
+
 		stylistsList = MongoReader.grabDbStylistModels("US13001CustomerLeadDistributionTest");
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 

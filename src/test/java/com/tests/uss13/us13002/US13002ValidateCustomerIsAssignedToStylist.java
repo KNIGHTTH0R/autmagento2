@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
@@ -46,6 +47,8 @@ public class US13002ValidateCustomerIsAssignedToStylist extends BaseTest {
 			System.out.println("The database has no entries");
 
 		stylistsList = MongoReader.grabDbStylistModels("US13002StyleCoachLeadDistributionTest");
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -55,6 +58,8 @@ public class US13002ValidateCustomerIsAssignedToStylist extends BaseTest {
 		headerSteps.goToProfile();
 		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
 		distStylist = headerSteps.validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(stylistsList, headerSteps.getStyleCoachEmailFromProfile());
+		System.out.println("@@@@@@@@@@" + distStylist.getTotalSCReceived());
+		System.out.println("@@@@@@@@@@" + distStylist.getTotalSCCurrentWeek());
 	}
 
 	@After

@@ -261,8 +261,6 @@ public class ApiCalls {
 
 	}
 
-	// mode will be 1-customer retrieval,2-host retrieval,3- style coach
-	// retrieval
 	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinateaModel, String range, String filter, String operand, String filterValue,
 			int mode) {
 
@@ -273,16 +271,19 @@ public class ApiCalls {
 			case 1:
 				if (!isStylistIncompatibleForCustomerRetrieval(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
 					compatibleList.add(dbStylistModel);
+					break;
 				}
 
 			case 2:
 				if (!isStylistIncompatibleForHost(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
 					compatibleList.add(dbStylistModel);
+					break;
 				}
 
 			case 3:
 				if (!isStylistIncompatibleForSCRetrieval(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
 					compatibleList.add(dbStylistModel);
+					break;
 				}
 			}
 		}
@@ -299,7 +300,7 @@ public class ApiCalls {
 
 	private static boolean isStylistIncompatibleForSCRetrieval(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedSC().contentEquals("0");
+				|| stylistModel.getQualifiedSC().contentEquals("0") || Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek());
 	}
 
 	private static boolean isStylistIncompatibleForHost(DBStylistModel stylistModel) {
@@ -309,7 +310,7 @@ public class ApiCalls {
 
 	public static boolean isStylistInRange(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel, String range) {
 		double distance = DistanceCalculator.getDistance(Double.parseDouble(coordinateaModel.getLattitude()), Double.parseDouble(coordinateaModel.getLongitude()),
-				Double.parseDouble(dBStylistModel.getLattitude()), Double.parseDouble(dBStylistModel.getLongitude()), "k");
+				Double.parseDouble(dBStylistModel.getLattitude()), Double.parseDouble(dBStylistModel.getLongitude()), "K");
 		return distance <= Double.parseDouble(range);
 	}
 

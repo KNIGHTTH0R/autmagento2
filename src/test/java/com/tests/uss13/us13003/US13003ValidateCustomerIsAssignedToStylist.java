@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
@@ -38,7 +39,7 @@ public class US13003ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		int size = MongoReader.grabCustomerFormModels("US13003HostLeadDistributionTest").size();
 		if (size > 0) {
 			stylistEmail = MongoReader.grabCustomerFormModels("US13003HostLeadDistributionTest").get(0).getEmailName();
@@ -47,6 +48,8 @@ public class US13003ValidateCustomerIsAssignedToStylist extends BaseTest {
 			System.out.println("The database has no entries");
 
 		stylistsList = MongoReader.grabDbStylistModels("US13003HostLeadDistributionTest");
+
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -58,10 +61,10 @@ public class US13003ValidateCustomerIsAssignedToStylist extends BaseTest {
 		distStylist = headerSteps.validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(stylistsList, headerSteps.getStyleCoachEmailFromProfile());
 
 	}
-	
+
 	@After
-	public void tearDown(){
-		
+	public void tearDown() {
+
 		MongoWriter.saveDbStylistModel(distStylist, getClass().getSimpleName());
 	}
 

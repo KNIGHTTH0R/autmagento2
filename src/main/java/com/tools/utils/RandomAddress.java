@@ -22,7 +22,6 @@ public class RandomAddress {
 	public AddressModel getRandomAddressFromFile() {
 
 		AddressModel addressModel = new AddressModel();
-		System.out.println("fileName" + fileName);
 
 		try {
 			lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);

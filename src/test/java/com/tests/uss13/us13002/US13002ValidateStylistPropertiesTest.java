@@ -39,7 +39,6 @@ public class US13002ValidateStylistPropertiesTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		stylist = MongoReader.grabDbStylistModels("US13002ValidateCustomerIsAssignedToStylist").get(0);
-
 	}
 
 	@Test
@@ -49,9 +48,9 @@ public class US13002ValidateStylistPropertiesTest extends BaseTest {
 		backEndSteps.searchForEmail(stylist.getEmail());
 		backEndSteps.openCustomerDetails(stylist.getEmail());
 		backEndSteps.clickOnLeadSettings();
-		validationModel = backEndSteps.grabLeadSettingsData();		
+		validationModel = backEndSteps.grabLeadSettingsData();
 		validationSteps.validateStyleCoachLeadData(stylist, validationModel);
-		
+
 		customVerifications.printErrors();
 
 	}

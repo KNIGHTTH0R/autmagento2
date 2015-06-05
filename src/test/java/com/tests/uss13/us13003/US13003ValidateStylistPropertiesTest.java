@@ -38,7 +38,7 @@ public class US13003ValidateStylistPropertiesTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		stylist = MongoReader.grabDbStylistModels("US13001ValidateCustomerIsAssignedToStylist").get(0);
+		stylist = MongoReader.grabDbStylistModels("US13003ValidateCustomerIsAssignedToStylist").get(0);
 
 	}
 

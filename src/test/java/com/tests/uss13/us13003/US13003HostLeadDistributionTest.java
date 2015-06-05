@@ -23,6 +23,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
+import com.tools.env.constants.SoapConstants;
 import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -44,9 +45,7 @@ public class US13003HostLeadDistributionTest extends BaseTest {
 	public StylistDataModel validationModel;
 	CoordinatesModel coordinatesModel = new CoordinatesModel();
 	RandomAddress randomAddress;
-	List<DBStylistModel> stylistList = new ArrayList<DBStylistModel>();
 	List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
-	String range = "50";
 
 	@Before
 	public void setUp() throws Exception {
@@ -55,16 +54,17 @@ public class US13003HostLeadDistributionTest extends BaseTest {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		randomAddress = new RandomAddress();
-		addressModel = randomAddress.getRandomAddressFromFile();
-		coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
-		System.out.println(coordinatesModel.getLattitude());
-		System.out.println(coordinatesModel.getLongitude());
 
-		// the last parameter is for mode 3 - style coach retrieval
-				compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, range,"status","eq","1",2);
-				System.out.println(compatibleStylistList.size());
-				PrintUtils.printListDbStylists(compatibleStylistList);
-				MongoConnector.cleanCollection(getClass().getSimpleName());
+		while (coordinatesModel.getLattitude() == null) {
+
+			addressModel = randomAddress.getRandomAddressFromFile();
+			coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
+
+		}
+		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
+				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 2);
+		System.out.println(compatibleStylistList.size());
+		PrintUtils.printListDbStylists(compatibleStylistList);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}

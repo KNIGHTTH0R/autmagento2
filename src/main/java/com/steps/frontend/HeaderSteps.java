@@ -188,11 +188,28 @@ public class HeaderSteps extends AbstractSteps {
 			if (dbStylistModel.getEmail().contentEquals(grabbedEmail)) {
 				match = true;
 				result.setEmail(dbStylistModel.getEmail());
+				result.setStatus(dbStylistModel.getStatus());
+				result.setFirstName(dbStylistModel.getFirstName());
+				result.setLattitude(dbStylistModel.getLattitude());
+				result.setLongitude(dbStylistModel.getLongitude());
+				result.setQualifiedSC(dbStylistModel.getQualifiedSC());
+				result.setQualifiedHost(dbStylistModel.getQualifiedHost());
+				result.setQualifiedCustomer(dbStylistModel.getQualifiedCustomer());
+				result.setTotalSCReceived(dbStylistModel.getTotalSCReceived());
+				result.setTotalHostReceived(dbStylistModel.getTotalHostReceived());
+				result.setTotalCustomerReceived(dbStylistModel.getTotalCustomerReceived());
+				result.setTotalSCCurrentWeek(dbStylistModel.getTotalSCCurrentWeek());
+				result.setTotalHostCurrentWeek(dbStylistModel.getTotalHostCurrentWeek());
+				result.setMaxSCPerWeek(dbStylistModel.getMaxSCPerWeek());
+				result.setLeadRetrievalPaused(dbStylistModel.getLeadRetrievalPaused());
+				result.setStyleCoachLeadRange(dbStylistModel.getStyleCoachLeadRange());
+				result.setHostLeadRange(dbStylistModel.getHostLeadRange());
+
 				break;
 			}
 		}
 		Assert.assertTrue("Failure: The customer is not assigned to the expected SC !", match);
-		
+
 		return result;
 	}
 

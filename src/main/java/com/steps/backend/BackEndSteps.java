@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.Step;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
+import com.tools.data.frontend.AddressModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -91,6 +92,15 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public void clickOnAddressesTab() {
 		customerDetailsHomePage().clickOnAddressesTab();
+	}
+
+	@Step
+	public void editAddress(AddressModel addressModel) {
+		customerDetailsHomePage().inputStreet(addressModel.getStreetAddress());
+		customerDetailsHomePage().inputHouseNumber(addressModel.getStreetNumber());
+		customerDetailsHomePage().inputCity(addressModel.getHomeTown());
+		customerDetailsHomePage().selectCountryName(addressModel.getCountryName());
+		customerDetailsHomePage().inputPostCode(addressModel.getPostCode());
 	}
 
 	@Step

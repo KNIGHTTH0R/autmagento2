@@ -30,7 +30,7 @@ public class CustomerDetailsPage extends AbstractPage {
 	@FindBy(id = "customer_info_tabs_customer_edit_tab_view_content")
 	private WebElement detailsContainer;
 
-	@FindBy(id = "customer_info_tabs_addresses")
+	@FindBy(css = "a#customer_info_tabs_addresses")
 	private WebElement addressesTab;
 
 	@FindBy(css = "input[id*='street0'][id^='_item']")
@@ -57,24 +57,28 @@ public class CustomerDetailsPage extends AbstractPage {
 	public void inputStreet(String street) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(streetInput).waitUntilVisible();
+		element(streetInput).clear();
 		element(streetInput).sendKeys(street);
 	}
 
 	public void inputHouseNumber(String number) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(houseNumberInput).waitUntilVisible();
+		element(houseNumberInput).clear();
 		element(houseNumberInput).sendKeys(number);
 	}
 
 	public void inputCity(String city) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(cityInput).waitUntilVisible();
+		element(cityInput).clear();
 		element(cityInput).sendKeys(city);
 	}
 
 	public void inputPostCode(String code) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(postCodeInput).waitUntilVisible();
+		element(postCodeInput).clear();
 		element(postCodeInput).sendKeys(code);
 	}
 

@@ -257,13 +257,6 @@ public class HttpSoapConnector {
 		return productData;
 
 	}
-	private static SOAPElement generateStylistComplexFilter(SOAPElement bodyElement, ProductDetailedModel product) throws SOAPException {
-		SOAPElement productData = bodyElement.addChildElement(SoapKeys.COMPLEX_FILTER);
-		
-		productData = addOptionalField(SoapKeys.NAME, product.getName(), productData);
-
-		return productData;
-	}
 
 	private static SOAPElement generateStockDataMessage(StockDataModel product, SOAPElement bodyElement) throws SOAPException {
 		SOAPElement stockData = bodyElement.addChildElement(SoapKeys.STOCK_DATA);
