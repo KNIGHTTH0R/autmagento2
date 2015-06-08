@@ -41,6 +41,12 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "input[id*='city'][id^='_item']")
 	private WebElement cityInput;
+	
+	@FindBy(css = "input[title*='Set as Default Billing Address']")
+	private WebElement defaultBillingCheckbox;
+	
+	@FindBy(css = "input[title*='Set as Default Shipping Address']")
+	private WebElement defaultShippingCheckbox;
 
 	@FindBy(css = "select[id*='country_id'][id^='_item']")
 	private WebElement countrySelect;
@@ -50,7 +56,25 @@ public class CustomerDetailsPage extends AbstractPage {
 	
 	@FindBy(css = "button[onclick*='editForm.submit();']")
 	private WebElement saveCustomer;
+	
+	@FindBy(id = "add_address_button")
+	private WebElement addAddressButton;
 
+	public void addNewAddress() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(addAddressButton).waitUntilVisible();
+		addAddressButton.click();
+	}
+	public void checkDefaultBillingAddress() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(defaultBillingCheckbox).waitUntilVisible();
+		defaultBillingCheckbox.click();
+	}
+	public void checkDefaultShippingAddress() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(defaultShippingCheckbox).waitUntilVisible();
+		defaultShippingCheckbox.click();
+	}
 	public void saveCustomer() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(saveCustomer).waitUntilVisible();

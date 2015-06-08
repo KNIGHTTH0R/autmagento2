@@ -2,6 +2,8 @@ package com.connectors.http;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.xml.soap.SOAPException;
@@ -19,6 +21,11 @@ import com.tools.persistance.MongoReader;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;
 import com.tools.utils.FormatterUtils;
+
+/**
+ * @author mihaibarta
+ *
+ */
 
 public class ApiCalls {
 
@@ -176,7 +183,6 @@ public class ApiCalls {
 			try {
 				stylistList = extractStylistData(response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -203,6 +209,9 @@ public class ApiCalls {
 			NodeList childNodes = stylistList.item(i).getChildNodes();
 			for (int j = 0; j < childNodes.getLength(); j++) {
 
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
+					model.setStylistId(childNodes.item(j).getTextContent());
+				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_firstname")) {
 					model.setFirstName(childNodes.item(j).getTextContent());
 				}
@@ -261,57 +270,121 @@ public class ApiCalls {
 
 	}
 
-	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinateaModel, String range, String filter, String operand, String filterValue,
+	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinatesModel, String range, String filter, String operand, String filterValue,
 			int mode) {
 
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
+
 		for (DBStylistModel dbStylistModel : getStylistList(filter, operand, filterValue)) {
+
 			switch (mode) {
 
 			case 1:
-				if (!isStylistIncompatibleForCustomerRetrieval(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
+				if (!isStylistIncompatibleForCustomerRetrieval(dbStylistModel)) {
+
+					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 					break;
 				}
 
 			case 2:
-				if (!isStylistIncompatibleForHost(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
+				if (!isStylistIncompatibleForHost(dbStylistModel)) {
+
+					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 					break;
 				}
 
 			case 3:
-				if (!isStylistIncompatibleForSCRetrieval(dbStylistModel) && isStylistInRange(coordinateaModel, dbStylistModel, range)) {
+				if (!isStylistIncompatibleForSCRetrieval(dbStylistModel)) {
+
+					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 					break;
 				}
 			}
 		}
-		if (compatibleList.size() > 5) {
-			compatibleList = compatibleList.subList(0, 5);
-		}
-		return compatibleList;
+
+		return getFirstFiveStylistInRangeOrClosest(coordinatesModel, compatibleList, range);
+
 	}
 
 	private static boolean isStylistIncompatibleForCustomerRetrieval(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedCustomer().contentEquals("0");
+				|| stylistModel.getQualifiedCustomer().contentEquals("0") || stylistModel.getStylistId().contentEquals("1");
 	}
 
 	private static boolean isStylistIncompatibleForSCRetrieval(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedSC().contentEquals("0") || Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek());
+				|| stylistModel.getStylistId().contentEquals("1") || stylistModel.getQualifiedSC().contentEquals("0")
+				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek());
 	}
 
 	private static boolean isStylistIncompatibleForHost(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedHost().contentEquals("0");
+				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1");
 	}
 
 	public static boolean isStylistInRange(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel, String range) {
 		double distance = DistanceCalculator.getDistance(Double.parseDouble(coordinateaModel.getLattitude()), Double.parseDouble(coordinateaModel.getLongitude()),
 				Double.parseDouble(dBStylistModel.getLattitude()), Double.parseDouble(dBStylistModel.getLongitude()), "K");
 		return distance <= Double.parseDouble(range);
+	}
+
+	public static List<DBStylistModel> sortStylistListByRange(List<DBStylistModel> stylistsList) {
+
+		Collections.sort(stylistsList, new Comparator<DBStylistModel>() {
+
+			public int compare(DBStylistModel stylist1, DBStylistModel stylist2) {
+				double delta = Double.parseDouble(stylist1.getDistanceFromCoordinates()) - Double.parseDouble(stylist2.getDistanceFromCoordinates());
+				if (delta > 0)
+					return 1;
+				if (delta < 0)
+					return -1;
+				return 0;
+			}
+		});
+
+		return stylistsList;
+	}
+
+	/**
+	 * Returns the compatible stylists ordered by distance.If more than 5
+	 * stylists are found,the top five are taken.If no stylist is found in
+	 * range,the closest stylist is taken
+	 * 
+	 * @param coordinatesModel
+	 * @param stylistsList
+	 * @param range
+	 * @return compatibleStylistsInRange
+	 */
+	public static List<DBStylistModel> getFirstFiveStylistInRangeOrClosest(CoordinatesModel coordinatesModel, List<DBStylistModel> stylistsList, String range) {
+
+		stylistsList = sortStylistListByRange(stylistsList);
+
+		List<DBStylistModel> compatibleStylists = new ArrayList<DBStylistModel>();
+
+		for (DBStylistModel stylist : stylistsList) {
+			if (isStylistInRange(coordinatesModel, stylist, range)) {
+				compatibleStylists.add(stylist);
+			}
+		}
+		if (compatibleStylists.size() > 5) {
+//			compatibleStylists = compatibleStylists.subList(0, 5);
+
+		} else if (compatibleStylists.size() == 0) {
+			compatibleStylists.add(stylistsList.get(0));
+
+		}
+
+		return compatibleStylists;
+	}
+
+	public static String calculateDistanceFromCustomersCoordinates(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel) {
+		double distance = DistanceCalculator.getDistance(Double.parseDouble(coordinateaModel.getLattitude()), Double.parseDouble(coordinateaModel.getLongitude()),
+				Double.parseDouble(dBStylistModel.getLattitude()), Double.parseDouble(dBStylistModel.getLongitude()), "K");
+
+		return String.valueOf(distance);
 	}
 
 }

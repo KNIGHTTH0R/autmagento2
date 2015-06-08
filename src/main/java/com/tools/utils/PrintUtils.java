@@ -50,7 +50,7 @@ public class PrintUtils {
 			System.out.println(dBStylistModel.getStatus());
 			System.out.println(dBStylistModel.getEmail());
 			System.out.println(dBStylistModel.getFirstName());
-
+			System.out.println(dBStylistModel.getDistanceFromCoordinates());
 		}
 	}
 

@@ -7,6 +7,8 @@ public class Result {
 	@JsonIgnore
 	private String formatted_address;
 	@JsonIgnore
+	private String postcode_localities;
+	@JsonIgnore
 	private boolean partial_match;
 
 	private Geometry geometry;

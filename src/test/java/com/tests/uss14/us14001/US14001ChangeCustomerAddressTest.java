@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.ApiCalls;
+import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.AddressModel;
@@ -64,6 +65,8 @@ public class US14001ChangeCustomerAddressTest extends BaseTest {
 		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
 				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 3);
 		PrintUtils.printListDbStylists(compatibleStylistList);
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 

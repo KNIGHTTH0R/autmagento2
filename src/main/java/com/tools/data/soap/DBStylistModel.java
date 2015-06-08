@@ -2,6 +2,7 @@ package com.tools.data.soap;
 
 public class DBStylistModel {
 
+	private String stylistId;
 	private String firstName;
 	private String status;
 	private String email;
@@ -19,6 +20,7 @@ public class DBStylistModel {
 	private String leadRetrievalPaused;
 	private String styleCoachLeadRange;
 	private String hostLeadRange;
+	private String distanceFromCoordinates;
 
 	public String getFirstName() {
 		return firstName;
@@ -154,6 +156,22 @@ public class DBStylistModel {
 
 	public void setHostLeadRange(String hostLeadRange) {
 		this.hostLeadRange = hostLeadRange;
+	}
+
+	public String getDistanceFromCoordinates() {
+		return distanceFromCoordinates;
+	}
+
+	public void setDistanceFromCoordinates(String distanceFromCoordinates) {
+		this.distanceFromCoordinates = distanceFromCoordinates;
+	}
+
+	public String getStylistId() {
+		return stylistId;
+	}
+
+	public void setStylistId(String stylistId) {
+		this.stylistId = stylistId;
 	}
 
 	

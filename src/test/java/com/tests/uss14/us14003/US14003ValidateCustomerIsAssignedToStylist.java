@@ -1,4 +1,4 @@
-package com.tests.uss13.us13001;
+package com.tests.uss14.us14003;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,9 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US13", type = "frontend")
-@Story(Application.Distribution.CustomerLead.class)
+@Story(Application.Distribution.StyleCoachLead.class)
 @RunWith(ThucydidesRunner.class)
-public class US13001ValidateCustomerIsAssignedToStylist extends BaseTest {
+public class US14003ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -39,35 +39,33 @@ public class US13001ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-
-		int size = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").size();
+		int size = MongoReader.grabCustomerFormModels("US14003CustomerLeadDistributionTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").get(0).getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").get(0).getPassword();
+			stylistEmail = MongoReader.grabCustomerFormModels("US14003CustomerLeadDistributionTest").get(0).getEmailName();
+			stylistPassword = MongoReader.grabCustomerFormModels("US14003CustomerLeadDistributionTest").get(0).getPassword();
 		} else
 			System.out.println("The database has no entries");
 
-		stylistsList = MongoReader.grabDbStylistModels("US13001CustomerLeadDistributionTest");
-
+		stylistsList = MongoReader.grabDbStylistModels("US14003AddAddressToCustomerTest");
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-
 	}
 
 	@Test
-	public void us13001ValidateCustomerIsAssignedToStylist() {
+	public void us14003ValidateCustomerIsAssignedToStylist() {
 
 		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
 		headerSteps.goToProfile();
 		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
 		distStylist = headerSteps.validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(stylistsList, headerSteps.getStyleCoachEmailFromProfile());
-
+		System.out.println("@@@@@@@@@@" + distStylist.getTotalSCReceived());
+		System.out.println("@@@@@@@@@@" + distStylist.getTotalSCCurrentWeek());
 	}
 
 	@After
 	public void tearDown() {
 
 		MongoWriter.saveDbStylistModel(distStylist, getClass().getSimpleName());
-
 	}
 
 }

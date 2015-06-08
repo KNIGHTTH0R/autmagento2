@@ -95,6 +95,19 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void addAddress() {
+		customerDetailsHomePage().addNewAddress();
+	}
+	@Step
+	public void checkDefaultBillingAddress() {
+		customerDetailsHomePage().checkDefaultBillingAddress();
+	}
+	@Step
+	public void checkDefaultShippingAddress() {
+		customerDetailsHomePage().checkDefaultShippingAddress();
+	}
+
+	@Step
 	public void editAddress(AddressModel addressModel) {
 		customerDetailsHomePage().clickOnAddressesTab();
 		customerDetailsHomePage().inputStreet(addressModel.getStreetAddress());
@@ -102,6 +115,20 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().inputCity(addressModel.getHomeTown());
 		customerDetailsHomePage().selectCountryName(addressModel.getCountryName());
 		customerDetailsHomePage().inputPostCode(addressModel.getPostCode());
+		customerDetailsHomePage().saveCustomer();
+	}
+
+	@Step
+	public void addNewAddress(AddressModel addressModel) {
+		customerDetailsHomePage().clickOnAddressesTab();
+		customerDetailsHomePage().addNewAddress();
+		customerDetailsHomePage().inputStreet(addressModel.getStreetAddress());
+		customerDetailsHomePage().inputHouseNumber(addressModel.getStreetNumber());
+		customerDetailsHomePage().inputCity(addressModel.getHomeTown());
+		customerDetailsHomePage().selectCountryName(addressModel.getCountryName());
+		customerDetailsHomePage().inputPostCode(addressModel.getPostCode());
+		customerDetailsHomePage().checkDefaultBillingAddress();
+		customerDetailsHomePage().checkDefaultShippingAddress();
 		customerDetailsHomePage().saveCustomer();
 	}
 

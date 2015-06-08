@@ -1,7 +1,4 @@
-package com.tests;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.tests.uss14.us14003;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -15,21 +12,19 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.geolocation.CoordinatesModel;
-import com.tools.data.soap.DBStylistModel;
-import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.RandomAddress;
+import com.tools.utils.FieldGenerators;
+import com.tools.utils.FieldGenerators.Mode;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US14", type = "frontend")
+@Story(Application.Distribution.HostLead.class)
 @RunWith(ThucydidesRunner.class)
-public class USDummyRegularCustomerRegistrationTest extends BaseTest {
+public class US14003CustomerLeadDistributionTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -38,12 +33,6 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
-	public StylistDataModel validationModel;
-	CoordinatesModel coordinatesModel = new CoordinatesModel();
-	RandomAddress randomAddress;
-	List<DBStylistModel> stylistList = new ArrayList<DBStylistModel>();
-	List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
-	String range = "50";
 
 	@Before
 	public void setUp() throws Exception {
@@ -51,20 +40,15 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		randomAddress = new RandomAddress();
-		addressModel = randomAddress.getRandomAddressFromFile();
-		coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
-		System.out.println(coordinatesModel.getLattitude());
-		System.out.println(coordinatesModel.getLongitude());
-
-//		stylistList = ApiCalls.getStylistList();
-//		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, range);
+		addressModel.setStreetAddress(FieldGenerators.generateRandomString(12, Mode.ALPHA));
+		addressModel.setHomeTown(FieldGenerators.generateRandomString(12, Mode.ALPHA));
+		addressModel.setPostCode("123");
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void usDummyRegularCustomerRegistrationTest() {
+	public void us14003CustomerLeadDistributionTest() {
 
 		customerRegistrationSteps.fillCreateCustomerFormAndGetLatAndLong(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
@@ -74,7 +58,7 @@ public class USDummyRegularCustomerRegistrationTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
+
 	}
 
 }

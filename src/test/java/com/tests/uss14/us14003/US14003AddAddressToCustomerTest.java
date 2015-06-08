@@ -1,4 +1,4 @@
-package com.tests.uss14.us14002;
+package com.tests.uss14.us14003;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ import com.tools.utils.RandomAddress;
 @WithTag(name = "US14", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US14002ChangeCustomerAddressTest extends BaseTest {
+public class US14003AddAddressToCustomerTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -46,9 +46,9 @@ public class US14002ChangeCustomerAddressTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US14002HostLeadDistributionTest").size();
+		int size = MongoReader.grabCustomerFormModels("US14003CustomerLeadDistributionTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US14002HostLeadDistributionTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US14003CustomerLeadDistributionTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
 
@@ -70,13 +70,13 @@ public class US14002ChangeCustomerAddressTest extends BaseTest {
 	}
 
 	@Test
-	public void us14002ChangeCustomerAddressTest() {
+	public void us14003AddAddressToCustomerTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.editAddress(addressModel);
+		backEndSteps.addNewAddress(addressModel);
 	}
 
 	@After
