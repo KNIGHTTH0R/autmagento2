@@ -263,6 +263,18 @@ public class ApiCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("host_lead_range")) {
 					model.setHostLeadRange(childNodes.item(j).getTextContent());
 				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("sc_quite_date")) {
+					model.setStylistQuiteDate(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("sc_contract_status")) {
+					model.setStylistContractStatus(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("paused_from")) {
+					model.setPausedFrom(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("paused_to")) {
+					model.setPausedTo(childNodes.item(j).getTextContent());
+				}
 			}
 			stylistModelList.add(model);
 		}
@@ -273,9 +285,12 @@ public class ApiCalls {
 	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinatesModel, String range, String filter, String operand, String filterValue,
 			int mode) {
 
+		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+		initialList = getStylistList(filter, operand, filterValue);
+
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
 
-		for (DBStylistModel dbStylistModel : getStylistList(filter, operand, filterValue)) {
+		for (DBStylistModel dbStylistModel : initialList) {
 
 			switch (mode) {
 
@@ -284,24 +299,27 @@ public class ApiCalls {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-					break;
+
 				}
+				break;
 
 			case 2:
 				if (!isStylistIncompatibleForHost(dbStylistModel)) {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-					break;
+
 				}
+				break;
 
 			case 3:
 				if (!isStylistIncompatibleForSCRetrieval(dbStylistModel)) {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-					break;
+
 				}
+				break;
 			}
 		}
 
@@ -311,18 +329,23 @@ public class ApiCalls {
 
 	private static boolean isStylistIncompatibleForCustomerRetrieval(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedCustomer().contentEquals("0") || stylistModel.getStylistId().contentEquals("1");
+				|| stylistModel.getQualifiedCustomer().contentEquals("0") || stylistModel.getStylistId().contentEquals("1")
+				|| !stylistModel.getStylistQuiteDate().contentEquals("0") || !stylistModel.getStylistContractStatus().contentEquals("0")
+				|| stylistModel.getStylistContractStatus().contentEquals("3");
+
 	}
 
 	private static boolean isStylistIncompatibleForSCRetrieval(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getStylistId().contentEquals("1") || stylistModel.getQualifiedSC().contentEquals("0")
+				|| stylistModel.getStylistId().contentEquals("1") || stylistModel.getQualifiedSC().contentEquals("0") || !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3")
 				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek());
 	}
 
 	private static boolean isStylistIncompatibleForHost(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1");
+				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1") || !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3");
 	}
 
 	public static boolean isStylistInRange(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel, String range) {
@@ -370,7 +393,7 @@ public class ApiCalls {
 			}
 		}
 		if (compatibleStylists.size() > 5) {
-//			compatibleStylists = compatibleStylists.subList(0, 5);
+			compatibleStylists = compatibleStylists.subList(0, 5);
 
 		} else if (compatibleStylists.size() == 0) {
 			compatibleStylists.add(stylistsList.get(0));

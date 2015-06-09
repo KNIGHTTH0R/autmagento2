@@ -130,6 +130,7 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().checkDefaultBillingAddress();
 		customerDetailsHomePage().checkDefaultShippingAddress();
 		customerDetailsHomePage().saveCustomer();
+		waitABit(2000);
 	}
 
 	@Step

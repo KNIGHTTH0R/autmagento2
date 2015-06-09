@@ -65,7 +65,7 @@ public class US14001ChangeCustomerAddressTest extends BaseTest {
 		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
 				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 3);
 		PrintUtils.printListDbStylists(compatibleStylistList);
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}

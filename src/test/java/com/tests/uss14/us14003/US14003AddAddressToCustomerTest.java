@@ -62,7 +62,7 @@ public class US14003AddAddressToCustomerTest extends BaseTest {
 
 		}
 		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
-				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 2);
+				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 1);
 
 		PrintUtils.printListDbStylists(compatibleStylistList);
 		

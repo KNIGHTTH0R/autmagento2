@@ -47,7 +47,7 @@ public class US14003ValidateCustomerIsAssignedToStylist extends BaseTest {
 			System.out.println("The database has no entries");
 
 		stylistsList = MongoReader.grabDbStylistModels("US14003AddAddressToCustomerTest");
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 

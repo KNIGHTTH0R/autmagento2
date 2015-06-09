@@ -49,7 +49,7 @@ public class US14003ValidateStylistPropertiesTest extends BaseTest {
 		backEndSteps.openCustomerDetails(stylist.getEmail());
 		backEndSteps.clickOnLeadSettings();
 		validationModel = backEndSteps.grabLeadSettingsData();
-		validationSteps.validateStyleCoachLeadData(stylist, validationModel);
+		validationSteps.validateCustomerLeadData(stylist, validationModel);
 
 		customVerifications.printErrors();
 

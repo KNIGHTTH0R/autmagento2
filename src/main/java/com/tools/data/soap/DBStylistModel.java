@@ -21,6 +21,10 @@ public class DBStylistModel {
 	private String styleCoachLeadRange;
 	private String hostLeadRange;
 	private String distanceFromCoordinates;
+	private String stylistQuiteDate;
+	private String stylistContractStatus;
+	private String pausedFrom;
+	private String pausedTo;
 
 	public String getFirstName() {
 		return firstName;
@@ -172,6 +176,38 @@ public class DBStylistModel {
 
 	public void setStylistId(String stylistId) {
 		this.stylistId = stylistId;
+	}
+
+	public String getStylistQuiteDate() {
+		return stylistQuiteDate;
+	}
+
+	public void setStylistQuiteDate(String stylistQuiteDate) {
+		this.stylistQuiteDate = stylistQuiteDate;
+	}
+
+	public String getStylistContractStatus() {
+		return stylistContractStatus;
+	}
+
+	public void setStylistContractStatus(String stylistContractStatus) {
+		this.stylistContractStatus = stylistContractStatus;
+	}
+
+	public String getPausedFrom() {
+		return pausedFrom;
+	}
+
+	public void setPausedFrom(String pausedFrom) {
+		this.pausedFrom = pausedFrom;
+	}
+
+	public String getPausedTo() {
+		return pausedTo;
+	}
+
+	public void setPausedTo(String pausedTo) {
+		this.pausedTo = pausedTo;
 	}
 
 	

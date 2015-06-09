@@ -73,7 +73,7 @@ public class US14003CustomerDistributionDurringCheckoutTest extends BaseTest {
 		genProduct1.setPrice("89.00");
 		ApiCalls.createApiProduct(genProduct1);
 		creditCardData = new CreditCardModel();
-		dataModel = MongoReader.grabCustomerFormModels("US14002HostLeadDistributionTest").get(0);
+		dataModel = MongoReader.grabCustomerFormModels("US14003CustomerLeadDistributionTest").get(0);
 	}
 
 	@Test

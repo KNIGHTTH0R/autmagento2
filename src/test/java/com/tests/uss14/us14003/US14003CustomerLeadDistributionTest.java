@@ -37,7 +37,6 @@ public class US14003CustomerLeadDistributionTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		addressModel.setStreetAddress(FieldGenerators.generateRandomString(12, Mode.ALPHA));
@@ -50,7 +49,7 @@ public class US14003CustomerLeadDistributionTest extends BaseTest {
 	@Test
 	public void us14003CustomerLeadDistributionTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormAndGetLatAndLong(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachChecked(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
 	}
