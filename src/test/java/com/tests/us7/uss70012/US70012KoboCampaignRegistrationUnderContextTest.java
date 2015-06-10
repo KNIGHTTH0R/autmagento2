@@ -132,7 +132,7 @@ public class US70012KoboCampaignRegistrationUnderContextTest extends BaseTest {
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
 		emailClientSteps.openMailinator();
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
-				ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		koboCampaignSteps.navigate(url);
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 		fancyBoxSteps.goToShipping();

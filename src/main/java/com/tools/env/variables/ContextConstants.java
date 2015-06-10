@@ -60,6 +60,7 @@ public class ContextConstants {
 	public static String IP_PUNKTE = MongoReader.getDictionaryItem("IP_PUNKTE");
 
 	public static String CONFIRM_ACCOUNT_MAIL_SUBJECT = MongoReader.getDictionaryItem("CONFIRM_ACCOUNT_MAIL_SUBJECT");
+	public static String KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT = MongoReader.getDictionaryItem("KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT");
 	public static String ORDER_ACTUALIZATION_EMAIL = MongoReader.getDictionaryItem("ORDER_ACTUALIZATION_EMAIL");
 	public static String NEWSLETTER_MAIL_SUBJECT = MongoReader.getDictionaryItem("NEWSLETTER_MAIL_SUBJECT");
 	public static String WELCOME_MAIL_SUBJECT = MongoReader.getDictionaryItem("WELCOME_MAIL_SUBJECT");

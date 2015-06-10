@@ -58,6 +58,8 @@ public class US13002StyleCoachLeadDistributionTest extends BaseTest {
 
 			addressModel = randomAddress.getRandomAddressFromFile();
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
+			System.out.println(coordinatesModel.getLattitude());
+			System.out.println(coordinatesModel.getLongitude());
 
 		}
 		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,

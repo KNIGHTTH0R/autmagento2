@@ -50,7 +50,7 @@ public class US14002HostLeadDistributionTest extends BaseTest {
 	@Test
 	public void us14002HostLeadDistributionTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormAndGetLatAndLong(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerFormNoMemberAndGetLatAndLong(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
 	}

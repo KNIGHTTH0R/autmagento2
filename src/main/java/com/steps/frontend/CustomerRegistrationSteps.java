@@ -104,12 +104,12 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkNoInvite();
 		checkIAgree();
 		clickCompleteButton();
-		try {
-			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
-					+ addressData.getHomeTown() + "," + addressData.getPostCode());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
+//					+ addressData.getHomeTown() + "," + addressData.getPostCode());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		return coordinatesModel;
 	}
 	@StepGroup

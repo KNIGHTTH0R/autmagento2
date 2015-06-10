@@ -58,11 +58,11 @@ public class US14003AddAddressToCustomerTest extends BaseTest {
 		while (coordinatesModel.getLattitude() == null) {
 
 			addressModel = randomAddress.getRandomAddressFromFile();
-			coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
+			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
 
 		}
 		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
-				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 1);
+				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 4);
 
 		PrintUtils.printListDbStylists(compatibleStylistList);
 		

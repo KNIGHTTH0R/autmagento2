@@ -42,14 +42,16 @@ public class US14002ValidateStylistPropertiesTest extends BaseTest {
 	}
 
 	@Test
-	public void us13002ValidateStylistPropertiesTest() {
+	public void us14002ValidateStylistPropertiesTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylist.getEmail());
 		backEndSteps.openCustomerDetails(stylist.getEmail());
 		backEndSteps.clickOnLeadSettings();
 		validationModel = backEndSteps.grabLeadSettingsData();
-		validationSteps.validateStyleCoachLeadData(stylist, validationModel);
+		validationSteps.validateHostLeadData(stylist, validationModel);
+		validationSteps.validateCustomerLeadData(stylist, validationModel);
+		
 
 		customVerifications.printErrors();
 

@@ -50,6 +50,7 @@ public class US14001ValidateStylistPropertiesTest extends BaseTest {
 		backEndSteps.clickOnLeadSettings();
 		validationModel = backEndSteps.grabLeadSettingsData();
 		validationSteps.validateStyleCoachLeadData(stylist, validationModel);
+		validationSteps.validateCustomerLeadData(stylist, validationModel);
 
 		customVerifications.printErrors();
 

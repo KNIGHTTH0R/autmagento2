@@ -43,7 +43,7 @@ public class US13003ValidateStylistPropertiesTest extends BaseTest {
 	}
 
 	@Test
-	public void us000GrabStylistPropertiesTest() {
+	public void us13003ValidateStylistPropertiesTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylist.getEmail());

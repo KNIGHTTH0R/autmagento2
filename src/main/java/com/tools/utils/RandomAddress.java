@@ -36,9 +36,9 @@ public class RandomAddress {
 
 		addressModel.setStreetNumber(houseNumber);
 		addressModel.setStreetAddress(cleanAddress(splittedText[0].replace(" " + houseNumber, "")));
-		addressModel.setHomeTown(splittedText[1]);
-		addressModel.setPostCode((splittedText[2]));
-		addressModel.setCountryName(ContextConstants.COUNTRY_NAME);
+		addressModel.setHomeTown(trimQuotes(splittedText[1]));
+		addressModel.setPostCode(trimQuotes(splittedText[2]));
+		addressModel.setCountryName(trimQuotes(ContextConstants.COUNTRY_NAME));
 		addressModel.setPhoneNumber(FieldGenerators.generateRandomString(10, Mode.NUMERIC));
 
 		PrintUtils.printAddressModel(addressModel);
@@ -64,7 +64,13 @@ public class RandomAddress {
 	private String cleanAddress(String text) {
 		text = text.replace("\"", "");
 		text = text.replace(" Str.", "");
+		text = text.replace(" Str", "");
 
+		return text;
+	}
+	private String trimQuotes(String text) {
+		text = text.replace("\"", "");
+		
 		return text;
 	}
 
