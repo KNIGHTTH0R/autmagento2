@@ -67,8 +67,8 @@ public class SurveyPage extends AbstractPage {
 			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
-			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
-			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setProductsPrice("");
@@ -96,8 +96,8 @@ public class SurveyPage extends AbstractPage {
 			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
-			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
-			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
@@ -123,8 +123,8 @@ public class SurveyPage extends AbstractPage {
 			parseQty = parseQty.replace("x", "").trim();
 			parseQty = parseQty.replace(" x", "").trim();			
 
-			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
-			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");

@@ -6,7 +6,9 @@ import net.thucydides.core.pages.WebElementFacade;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.DateUtils;
 
 public class MyBusinessPage extends AbstractPage {
 
@@ -51,6 +53,11 @@ public class MyBusinessPage extends AbstractPage {
 
 	public void verifyKoboSectionContainsText(String text) {
 		Assert.assertTrue("The text does not appear in kobo section from my business page", coboSection.getText().contains(text));
+	}
+
+	public void verifyCancelledKoboMessageAndActiveUntilDate() {
+		Assert.assertTrue("The message or the -valid until- date is not correct !!",
+				coboSection.getText().contains(ContextConstants.SUBSCRIPTION_CANCELLED + " " + DateUtils.getLastDayOfTheCurrentMonth()));
 	}
 
 }

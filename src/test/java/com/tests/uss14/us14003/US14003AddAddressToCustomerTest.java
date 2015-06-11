@@ -65,7 +65,7 @@ public class US14003AddAddressToCustomerTest extends BaseTest {
 				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 4);
 
 		PrintUtils.printListDbStylists(compatibleStylistList);
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 

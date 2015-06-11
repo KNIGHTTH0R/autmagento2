@@ -1,5 +1,8 @@
 package com.tests.uss13.us13003;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -34,25 +37,32 @@ public class US13003ValidateStylistPropertiesTest extends BaseTest {
 	public StylistDataModel validationModel = new StylistDataModel();
 
 	DBStylistModel stylist = new DBStylistModel();
+	public static List<DBStylistModel> stylistsList = new ArrayList<DBStylistModel>();
 
 	@Before
 	public void setUp() throws Exception {
-
-		stylist = MongoReader.grabDbStylistModels("US13003ValidateCustomerIsAssignedToStylist").get(0);
-
+		stylistsList = MongoReader.grabDbStylistModels("US13003HostLeadDistributionTest");
+		if (stylistsList.size() > 0) {
+			stylist = MongoReader.grabDbStylistModels("US13003ValidateCustomerIsAssignedToStylist").get(0);
+		}
 	}
 
 	@Test
 	public void us13003ValidateStylistPropertiesTest() {
-		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail(stylist.getEmail());
-		backEndSteps.openCustomerDetails(stylist.getEmail());
-		backEndSteps.clickOnLeadSettings();
-		validationModel = backEndSteps.grabLeadSettingsData();
-		validationSteps.validateHostLeadData(stylist, validationModel);
+		// if the stylistList is empty,it means that no suitable style coach was
+		// found for distribution and the customer remains under master.The test
+		// will be skipped
+		if (stylistsList.size() > 0) {
+			backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+			backEndSteps.clickOnCustomers();
+			backEndSteps.searchForEmail(stylist.getEmail());
+			backEndSteps.openCustomerDetails(stylist.getEmail());
+			backEndSteps.clickOnLeadSettings();
+			validationModel = backEndSteps.grabLeadSettingsData();
+			validationSteps.validateHostLeadData(stylist, validationModel);
 
-		customVerifications.printErrors();
+			customVerifications.printErrors();
+		}
 
 	}
 

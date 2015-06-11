@@ -137,8 +137,6 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		koboShippingSteps.acceptTerms();
 		shippingSteps.clickGoToPaymentMethod();
 		String url = shippingSteps.grabUrl();
-		DataGrabber.urlModel.setName("Payment URL");
-		DataGrabber.urlModel.setUrl(url);
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 		paymentSteps.expandCreditCardForm();
@@ -149,6 +147,8 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		headerSteps.goToMyBusinessPage();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
 		myBusinessSteps.cancelSubstription();
+		headerSteps.goToLounge();
+		myBusinessSteps.verifyCancelledKoboMessageAndActiveUntilDate();
 		headerSteps.goToMyBusinessPage();
 		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.SUBSCRIPTION_CANCELLED);
 

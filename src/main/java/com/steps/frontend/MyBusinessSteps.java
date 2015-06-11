@@ -33,5 +33,10 @@ public class MyBusinessSteps extends AbstractSteps {
 	public void verifyKoboSectionContainsText(String text) {
 		myBusinessPage().verifyKoboSectionContainsText(text);
 	}
+	
+	@Step
+	public void verifyCancelledKoboMessageAndActiveUntilDate(){
+		myBusinessPage().verifyCancelledKoboMessageAndActiveUntilDate();
+	}
 
 }

@@ -47,25 +47,30 @@ public class US13002ValidateCustomerIsAssignedToStylist extends BaseTest {
 			System.out.println("The database has no entries");
 
 		stylistsList = MongoReader.grabDbStylistModels("US13002StyleCoachLeadDistributionTest");
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
 	public void us13002ValidateCustomerIsAssignedToStylist() {
-
-		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
-		headerSteps.goToProfile();
-		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
-		distStylist = headerSteps.validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(stylistsList, headerSteps.getStyleCoachEmailFromProfile());
-		System.out.println("@@@@@@@@@@" + distStylist.getTotalSCReceived());
-		System.out.println("@@@@@@@@@@" + distStylist.getTotalSCCurrentWeek());
+		// if the stylistList is empty,it means that no suitable style coach was
+		// found for distribution and the customer remains under master.The test
+		// will be skipped
+		if (stylistsList.size() > 0) {
+			customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
+			headerSteps.goToProfile();
+			headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
+			distStylist = headerSteps.validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(stylistsList, headerSteps.getStyleCoachEmailFromProfile());
+			System.out.println("@@@@@@@@@@" + distStylist.getTotalSCReceived());
+			System.out.println("@@@@@@@@@@" + distStylist.getTotalSCCurrentWeek());
+		}
 	}
 
 	@After
 	public void tearDown() {
-
-		MongoWriter.saveDbStylistModel(distStylist, getClass().getSimpleName());
+		if (stylistsList.size() > 0) {
+			MongoWriter.saveDbStylistModel(distStylist, getClass().getSimpleName());
+		}
 	}
 
 }

@@ -60,9 +60,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public CoordinatesModel fillCreateCustomerFormAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
-
-		CoordinatesModel coordinatesModel = new CoordinatesModel();
+	public void fillCreateCustomerFormAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
 
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
@@ -78,18 +76,9 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkNoInvite();
 		checkIAgree();
 		clickCompleteButton();
-		try {
-			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
-					+ addressData.getHomeTown() + "," + addressData.getPostCode());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return coordinatesModel;
 	}
 	@StepGroup
-	public CoordinatesModel fillCreateCustomerFormNoMemberAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
-		
-		CoordinatesModel coordinatesModel = new CoordinatesModel();
+	public void fillCreateCustomerFormNoMemberAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
 		
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
@@ -104,18 +93,9 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkNoInvite();
 		checkIAgree();
 		clickCompleteButton();
-//		try {
-//			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
-//					+ addressData.getHomeTown() + "," + addressData.getPostCode());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		return coordinatesModel;
 	}
 	@StepGroup
-	public CoordinatesModel fillCreateCustomerFormNoPartiesAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
-		
-		CoordinatesModel coordinatesModel = new CoordinatesModel();
+	public void fillCreateCustomerFormNoPartiesAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
 		
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
@@ -130,13 +110,6 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkNoInvite();
 		checkIAgree();
 		clickCompleteButton();
-		try {
-			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
-					+ addressData.getHomeTown() + "," + addressData.getPostCode());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return coordinatesModel;
 	}
 
 	@StepGroup

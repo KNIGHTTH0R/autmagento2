@@ -68,6 +68,7 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 		PrintUtils.printListDbStylists(compatibleStylistList);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+
 	}
 
 	@Test
