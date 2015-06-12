@@ -1,4 +1,4 @@
-package com.tests.uss13.us13001;
+package com.tests;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -19,7 +19,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US13", type = "external")
 @Story(Application.Distribution.CustomerLead.class)
 @RunWith(ThucydidesRunner.class)
-public class US13001ConfirmCustomerTest extends BaseTest {
+public class CheckMailchimpConfigTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -42,5 +42,7 @@ public class US13001ConfirmCustomerTest extends BaseTest {
 
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+
 	}
+
 }
