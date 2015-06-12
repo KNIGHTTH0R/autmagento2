@@ -9,18 +9,10 @@ public class MailchimpListsSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void enterUsername(String username) {
-		mailchimpLoginPage().enterUsername(username);
+	public void goToDesiredList(String listName) {
+		mailchimpHeaderPage().goToListsTab();
+		mailchimpListsPage().selectDesiredLink(listName);
 	}
 
-	@Step
-	public void enterPassword(String password) {
-		mailchimpLoginPage().enterPassword(password);
-	}
-
-	@Step
-	public void submitLogin() {
-		mailchimpLoginPage().submitLogin();
-	}
 
 }

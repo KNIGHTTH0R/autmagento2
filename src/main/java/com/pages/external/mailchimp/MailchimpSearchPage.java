@@ -33,7 +33,7 @@ public class MailchimpSearchPage extends AbstractPage {
 		List<WebElement> links = getDriver().findElements(By.cssSelector("ul.media-list li div.line.member-summary"));
 		boolean foundLink = false;
 		for (WebElement link : links) {
-			if (link.getText().contentEquals(searchTerm)) {
+			if (link.getText().contains(searchTerm)) {
 				foundLink = true;
 				link.findElement(By.cssSelector("div.button-small.nomargin")).click();
 				break;

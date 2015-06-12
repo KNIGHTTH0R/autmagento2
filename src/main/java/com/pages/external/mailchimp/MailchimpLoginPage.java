@@ -14,7 +14,7 @@ public class MailchimpLoginPage extends AbstractPage {
 	@FindBy(id = "password")
 	private WebElement passwordInput;
 
-	@FindBy(id = "button[type='submit']")
+	@FindBy(css = "button[type='submit']")
 	private WebElement loginButton;
 
 	public void enterUsername(String username) {

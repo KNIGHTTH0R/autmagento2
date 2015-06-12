@@ -9,18 +9,12 @@ public class MailchimpSearchSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void enterUsername(String username) {
-		mailchimpLoginPage().enterUsername(username);
-	}
+	public void searchForSubscriber(String email) {
+		mailchimpListDetailsPage().startSearch();
+		mailchimpSearchPage().inputSearchTerm(email);
+		mailchimpSearchPage().submitSearch();
+		mailchimpSearchPage().selectSearchResultAndViewProfile(email);
 
-	@Step
-	public void enterPassword(String password) {
-		mailchimpLoginPage().enterPassword(password);
-	}
-
-	@Step
-	public void submitLogin() {
-		mailchimpLoginPage().submitLogin();
 	}
 
 }

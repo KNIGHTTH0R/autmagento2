@@ -23,7 +23,7 @@ public class UrlConstants {
 	
 	//mailchimp
 	
-	public static final String URL_CHIMPMAIL = "http://mailinator.com/";
+	public static final String URL_CHIMPMAIL = "https://login.mailchimp.com/";
 	
 	//Frontend Composed URLS
 	public static final String BASE_URL_BE = "/index.php/admin/";

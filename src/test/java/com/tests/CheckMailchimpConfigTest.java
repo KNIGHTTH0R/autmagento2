@@ -5,15 +5,13 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.external.EmailClientSteps;
-import com.tests.BaseTest;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.ContextConstants;
-import com.tools.persistance.MongoReader;
+import com.steps.external.mailchimp.MailchimpListsSteps;
+import com.steps.external.mailchimp.MailchimpLoginSteps;
+import com.steps.external.mailchimp.MailchimpSearchSteps;
+import com.tools.env.variables.Credentials;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US13", type = "external")
@@ -22,26 +20,21 @@ import com.tools.requirements.Application;
 public class CheckMailchimpConfigTest extends BaseTest {
 
 	@Steps
-	public EmailClientSteps emailClientSteps;
+	public MailchimpLoginSteps mailchimpLoginSteps;
+	@Steps
+	public MailchimpListsSteps mailchimpListsSteps;
+	@Steps
+	public MailchimpSearchSteps mailchimpSearchSteps;
 
-	public String stylistEmail;
-
-	@Before
-	public void setUp() throws Exception {
-
-		int size = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").size();
-		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US13001CustomerLeadDistributionTest").get(0).getEmailName();
-		} else
-			System.out.println("The database has no entries");
-
-	}
+	private String listName = "staging_newsletter_all_subscribers";
+	private String email = "simona.popa@evozon.com";
 
 	@Test
 	public void us13001ConfirmCustomerTest() {
 
-		emailClientSteps.openMailinator();
-		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+		mailchimpLoginSteps.loginOnMailchimp(Credentials.MAILCHIMP_USERNAME, Credentials.MAILCHIMP_PASSWORD);
+		mailchimpListsSteps.goToDesiredList(listName);
+		mailchimpSearchSteps.searchForSubscriber(email);
 
 	}
 

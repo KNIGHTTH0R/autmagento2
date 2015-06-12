@@ -23,6 +23,7 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.newsletter.SubscriberModel;
 import com.tools.data.soap.DBStylistModel;
 
 public class PrintUtils {
@@ -168,6 +169,24 @@ public class PrintUtils {
 		System.out.println("shiping " + model.getShipping());
 		System.out.println("total amount " + model.getTotalAmount());
 		System.out.println("ip " + model.getIpPoints());
+	}
+
+	public static void printSubscriberData(SubscriberModel model) {
+		System.out.println(" *** Print Subscriber configuration *** ");
+		System.out.println("------------------------");
+		System.out.println("email " + model.getEmail());
+		System.out.println("activated at " + model.getActivatedAt());
+		System.out.println("last party " + model.getLastParty());
+		System.out.println("country " + model.getCountry());
+		System.out.println("revenue 3 months " + model.getRevenue3Months());
+		System.out.println("revenue 1 year " + model.getRevenue1Year());
+		System.out.println("is stylist " + model.getIsStylist());
+		System.out.println("last Purchase " + model.getLastPurchase());
+		System.out.println("registration date " + model.getRegistrationDate());
+		System.out.println("preffered website " + model.getPreferredWebsite());
+		System.out.println("product sku " + model.getProductSku());
+		System.out.println("contact Or User " + model.getContactOrUser());
+		System.out.println("revenue 6 months " + model.getRevenu6Months());
 	}
 
 	public static void printRegularUserCartTotalsModel(RegularUserCartTotalsModel model) {

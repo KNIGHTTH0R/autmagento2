@@ -7,71 +7,9 @@ import org.openqa.selenium.WebElement;
 
 import com.tools.data.newsletter.SubscriberModel;
 import com.tools.requirements.AbstractPage;
-import com.tools.utils.FormatterUtils;
+import com.tools.utils.PrintUtils;
 
 public class MailchimpSubscriberProfilePage extends AbstractPage {
-
-	// @FindBy(css =
-	// "a[onclick*='#view-profile'].button-small.below24.mar-t0.mar-lv3.details")
-	// private WebElement editButton;
-	//
-	// @FindBy(id = "MERGE0")
-	// private WebElement emailInput;
-	//
-	// @FindBy(id = "dijit_form_DateTextBox_0")
-	// private WebElement activatedAtInput;
-	//
-	// @FindBy(id = "dijit_form_DateTextBox_1")
-	// private WebElement lastPartyInput;
-	//
-	// @FindBy(id = "MERGE15")
-	// private WebElement countryInput;
-	//
-	// @FindBy(id = "MERGE29")
-	// private WebElement revenu3MonthsInput;
-	//
-	// @FindBy(id = "MERGE9")
-	// private WebElement revenue1YearInput;
-	//
-	// @FindBy(id = "MERGE6")
-	// private WebElement isStylistInput;
-	//
-	// @FindBy(id = "dijit_form_DateTextBox_2")
-	// private WebElement lastPurchaseInput;
-	//
-	// @FindBy(id = "dijit_form_DateTextBox_3")
-	// private WebElement registrationDateInput;
-	//
-	// @FindBy(id = "MERGE20")
-	// private WebElement preferredWebsiteInput;
-	//
-	// @FindBy(id = "MERGE26")
-	// private WebElement productSkuInput;
-	//
-	// @FindBy(id = "MERGE11")
-	// private WebElement contactOrUserInput;
-	//
-	// @FindBy(id = "MERGE30")
-	// private WebElement revenu6MonthsInput;
-	//
-	//
-	// public void editSubscriber() {
-	// element(editButton).waitUntilVisible();
-	// editButton.click();
-	// }
-	//
-	// public SubscriberModel grabSubribersData(){
-	//
-	// SubscriberModel model = new SubscriberModel();
-	// model.setEmail(emailInput.getAttribute("value"));
-	// model.setActivatedAt(activatedAtInput.getAttribute("value"));
-	// model.setLastParty(lastPartyInput.getAttribute("value"));
-	// model.setCountry(countryInput.getAttribute("value"));
-	// model.setRevenue3Months(revenu3MonthsInput.getAttribute("value"));
-	//
-	// return model;
-	//
-	// }
 
 	public SubscriberModel grabSubribersData() {
 
@@ -124,7 +62,7 @@ public class MailchimpSubscriberProfilePage extends AbstractPage {
 				model.setContactOrUser(value);
 			}
 		}
-
+		PrintUtils.printSubscriberData(model);
 		return model;
 	}
 
