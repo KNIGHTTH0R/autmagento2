@@ -43,6 +43,12 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void goToNewsletterSubribers() {
+		navigationPage().goToNewsletter();
+		navigationPage().goToNewsletterSubribers();
+	}
+
+	@Step
 	public void clickOnStyleParties() {
 		navigationPage().clickOnStyleCoach();
 		navigationPage().clickOnStyleParties();
@@ -98,10 +104,12 @@ public class BackEndSteps extends AbstractSteps {
 	public void addAddress() {
 		customerDetailsHomePage().addNewAddress();
 	}
+
 	@Step
 	public void checkDefaultBillingAddress() {
 		customerDetailsHomePage().checkDefaultBillingAddress();
 	}
+
 	@Step
 	public void checkDefaultShippingAddress() {
 		customerDetailsHomePage().checkDefaultShippingAddress();

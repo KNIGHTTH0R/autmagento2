@@ -13,6 +13,7 @@ import com.pages.backend.NavigationPage;
 import com.pages.backend.customer.CustomerListPage;
 import com.pages.backend.customer.details.CustomerDetailsPage;
 import com.pages.backend.customer.details.LeadSettingsPage;
+import com.pages.backend.newsletter.NewsletterSubscribersListPage;
 import com.pages.backend.orders.OrderListPage;
 import com.pages.backend.orders.details.OrderInfoPage;
 import com.pages.backend.orders.details.OrderItemsPage;
@@ -24,6 +25,11 @@ import com.pages.backend.styleParties.PartyListBackendPage;
 import com.pages.external.MailinatorPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
 import com.pages.external.facebook.FacebookEMBLoginPage;
+import com.pages.external.mailchimp.MailchimpHeaderPage;
+import com.pages.external.mailchimp.MailchimpListDetailsPage;
+import com.pages.external.mailchimp.MailchimpListsPage;
+import com.pages.external.mailchimp.MailchimpLoginPage;
+import com.pages.external.mailchimp.MailchimpSearchPage;
 import com.pages.frontend.CreateCustomerPage;
 import com.pages.frontend.FancyBoxPage;
 import com.pages.frontend.FooterPage;
@@ -95,16 +101,18 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().clickOnLoginButton();
 
 	}
+
 	@Step
 	public void performLoginAfterChangingWebsite(String userName, String userPass) {
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
-		
+
 	}
+
 	@Step
-	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass,String language,String website) {
+	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass, String language, String website) {
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -112,12 +120,12 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().clickOnLoginButton();
 		headerPage().verifyThatLanguageFromHeaderIsCorrectySelected(language);
 		footerPage().verifyThatFooterWebsiteIsCorrect(website);
-		
+
 	}
-	
+
 	@Step
-	public void performLoginOnPreferedWebsite(String userName, String userPass) {	
-		
+	public void performLoginOnPreferedWebsite(String userName, String userPass) {
+
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -147,7 +155,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void navigateToLoginPageAndPerformLogin(String userName, String userPass) {
-//		getDriver().get(UrlConstants.BASE_FE_URL);
+		// getDriver().get(UrlConstants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -196,10 +204,11 @@ public class AbstractSteps extends ScenarioSteps {
 			}
 		}
 	}
+
 	@Step
 	public void navigate(String URL) {
 		getDriver().get(URL);
-	
+
 	}
 
 	public AbstractPage abstractPage() {
@@ -209,6 +218,10 @@ public class AbstractSteps extends ScenarioSteps {
 	// ----------------------BE------------------------------------
 	public MagentoLoginPage magentoLoginPage() {
 		return getPages().currentPageAt(MagentoLoginPage.class);
+	}
+
+	public NewsletterSubscribersListPage newsletterSubscribersListPage() {
+		return getPages().currentPageAt(NewsletterSubscribersListPage.class);
 	}
 
 	public NavigationPage navigationPage() {
@@ -263,6 +276,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
 	}
+
 	public FancyBoxPage fancyBoxPage() {
 		return getPages().currentPageAt(FancyBoxPage.class);
 	}
@@ -314,6 +328,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public PartyCreationPage partyCreationPage() {
 		return getPages().currentPageAt(PartyCreationPage.class);
 	}
+
 	public PlaceCustomerOrderFromPartyPage placeCustomerOrderFromPartyPage() {
 		return getPages().currentPageAt(PlaceCustomerOrderFromPartyPage.class);
 	}
@@ -329,7 +344,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public CreateNewContactPage createNewContactPage() {
 		return getPages().currentPageAt(CreateNewContactPage.class);
 	}
-	
+
 	public KoboValidationPage koboValidationPage() {
 		return getPages().currentPageAt(KoboValidationPage.class);
 	}
@@ -337,13 +352,15 @@ public class AbstractSteps extends ScenarioSteps {
 	public ContactBoosterRegistrationPage contactBoosterRegistrationPage() {
 		return getPages().currentPageAt(ContactBoosterRegistrationPage.class);
 	}
-	
+
 	public KoboSuccesFormPage koboSuccesFormPage() {
 		return getPages().currentPageAt(KoboSuccesFormPage.class);
 	}
+
 	public KoboCampaignPage koboCampaignPage() {
 		return getPages().currentPageAt(KoboCampaignPage.class);
 	}
+
 	public PomProductListPage pomProductListPage() {
 		return getPages().currentPageAt(PomProductListPage.class);
 	}
@@ -352,6 +369,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public CartPage cartPage() {
 		return getPages().currentPageAt(CartPage.class);
 	}
+
 	public WishlistPage wishlistPage() {
 		return getPages().currentPageAt(WishlistPage.class);
 	}
@@ -363,6 +381,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public HostCartPage hostCartPage() {
 		return getPages().currentPageAt(HostCartPage.class);
 	}
+
 	public OrderForCustomerCartPage orderForCustomerCartPage() {
 		return getPages().currentPageAt(OrderForCustomerCartPage.class);
 	}
@@ -375,6 +394,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public ShippingPartySectionPage regularUserShippingPage() {
 		return getPages().currentPageAt(ShippingPartySectionPage.class);
 	}
+
 	public KoboShippingPage koboShippingPage() {
 		return getPages().currentPageAt(KoboShippingPage.class);
 	}
@@ -442,9 +462,11 @@ public class AbstractSteps extends ScenarioSteps {
 	public RegisterLandingPage registerLandingPage() {
 		return getPages().currentPageAt(RegisterLandingPage.class);
 	}
+
 	public MyBusinessPage myBusinessPage() {
 		return getPages().currentPageAt(MyBusinessPage.class);
 	}
+
 	public ContactBoosterCartPage contactBoosterCart() {
 		return getPages().currentPageAt(ContactBoosterCartPage.class);
 	}
@@ -462,6 +484,23 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public FacebookEMBLoginConfirmPage facebookEMBLoginConfirmPage() {
 		return getPages().currentPageAt(FacebookEMBLoginConfirmPage.class);
+	}
+
+	// external - Mailchimp
+	public MailchimpLoginPage mailchimpLoginPage() {
+		return getPages().currentPageAt(MailchimpLoginPage.class);
+	}
+	public MailchimpHeaderPage mailchimpHeaderPage() {
+		return getPages().currentPageAt(MailchimpHeaderPage.class);
+	}
+	public MailchimpListDetailsPage mailchimpListDetailsPage() {
+		return getPages().currentPageAt(MailchimpListDetailsPage.class);
+	}
+	public MailchimpListsPage mailchimpListsPage() {
+		return getPages().currentPageAt(MailchimpListsPage.class);
+	}
+	public MailchimpSearchPage mailchimpSearchPage() {
+		return getPages().currentPageAt(MailchimpSearchPage.class);
 	}
 
 	// ------------------------- Common methods

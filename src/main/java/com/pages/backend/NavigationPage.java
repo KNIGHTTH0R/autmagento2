@@ -21,7 +21,7 @@ public class NavigationPage extends AbstractPage {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
 		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-		
+
 		for (WebElement elementNow : elementList) {
 			if (elementNow.getText().contentEquals("Promotionen")) {
 				elementNow.click();
@@ -29,7 +29,7 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
-	
+
 	public void clickOnShoppingCartPriceRules() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
@@ -42,6 +42,7 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
+
 	public void clickOnStyleCoach() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
@@ -88,6 +89,32 @@ public class NavigationPage extends AbstractPage {
 
 		for (WebElement elementNow : elementList) {
 			if (elementNow.getText().contentEquals("Kunden verwalten")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
+
+	public void goToNewsletter() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Newsletter")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
+	
+	public void goToNewsletterSubribers() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Newsletter Bezieher")) {
 				elementNow.click();
 				break;
 			}
