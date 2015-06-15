@@ -38,7 +38,7 @@ public class MailchimpSubscriberProfilePage extends AbstractPage {
 				model.setRevenue3Months(value);
 			}
 			if (key.contains("Revenue 1 year")) {
-				model.setEmail(value);
+				model.setRevenue1Year(value);
 			}
 			if (key.contains("Is stylist")) {
 				model.setIsStylist(value);

@@ -30,6 +30,7 @@ import com.pages.external.mailchimp.MailchimpListDetailsPage;
 import com.pages.external.mailchimp.MailchimpListsPage;
 import com.pages.external.mailchimp.MailchimpLoginPage;
 import com.pages.external.mailchimp.MailchimpSearchPage;
+import com.pages.external.mailchimp.MailchimpSubscriberProfilePage;
 import com.pages.frontend.CreateCustomerPage;
 import com.pages.frontend.FancyBoxPage;
 import com.pages.frontend.FooterPage;
@@ -501,6 +502,9 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 	public MailchimpSearchPage mailchimpSearchPage() {
 		return getPages().currentPageAt(MailchimpSearchPage.class);
+	}
+	public MailchimpSubscriberProfilePage mailchimpSubscriberProfilePage() {
+		return getPages().currentPageAt(MailchimpSubscriberProfilePage.class);
 	}
 
 	// ------------------------- Common methods
