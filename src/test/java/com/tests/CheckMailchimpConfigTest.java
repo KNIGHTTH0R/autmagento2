@@ -41,5 +41,4 @@ public class CheckMailchimpConfigTest extends BaseTest {
 		mailchimpSubscriberProfileSteps.grabSubribersData();
 
 	}
-
 }
