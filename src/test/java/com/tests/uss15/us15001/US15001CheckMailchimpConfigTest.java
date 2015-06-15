@@ -44,25 +44,20 @@ public class US15001CheckMailchimpConfigTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		stylistEmail = MongoReader
-				.grabCustomerFormModels("US15001SubscribeToNewsletterTest")
-				.get(0).getEmailName();
+		stylistEmail = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").get(0).getEmailName();
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
 	public void us13001ConfirmCustomerTest() {
 
-		mailchimpLoginSteps.loginOnMailchimp(Credentials.MAILCHIMP_USERNAME,
-				Credentials.MAILCHIMP_PASSWORD);
+		mailchimpLoginSteps.loginOnMailchimp(Credentials.MAILCHIMP_USERNAME, Credentials.MAILCHIMP_PASSWORD);
 		mailchimpListsSteps.goToDesiredList(listName);
 		mailchimpSearchSteps.searchForSubscriber(stylistEmail);
 		model = mailchimpSubscriberProfileSteps.grabSubribersData();
+		//validations
+		
 
 	}
 
-	@After
-	public void tearDown() {
-		MongoWriter.saveSubscriberModel(model, getClass().getSimpleName());
-	}
 }
