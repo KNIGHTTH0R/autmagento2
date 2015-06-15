@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.AbstractSteps;
+import com.tools.utils.DateUtils;
 
 public class EmailClientSteps extends AbstractSteps {
 
@@ -54,30 +55,31 @@ public class EmailClientSteps extends AbstractSteps {
 			getDriver().get(confirmLink);
 			welcomeMessage = confirmLink;
 		}
-
 		waitABit(6000);
-		return welcomeMessage;
+
+		return DateUtils.getCurrentDate("MM/dd/YYYY");
 
 	}
+
 	@Step
 	public String grabConfirmationLinkFromEmail(String email, String title) {
 		waitABit(5000);
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
 		getDriver().get(url);
-		
+
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail(title);
-		
+
 		if (welcomeMessage.isEmpty()) {
 			String confirmLink = mailinatorPage().confirmEmail();
 			waitABit(2000);
 			welcomeMessage = confirmLink;
 		}
-		
+
 		waitABit(6000);
 		return welcomeMessage;
-		
+
 	}
 
 	@Step
@@ -110,15 +112,18 @@ public class EmailClientSteps extends AbstractSteps {
 		waitABit(5000);
 		String couponCode = mailinatorPage().grabEmail(title);
 
-		
-			couponCode = mailinatorPage().grabCouponCode();
-//			couponCode = couponCode.replace("Gratuliere! Du hast einen Gutschein für Deine Registrierung erhalten.", "");
-//			couponCode = couponCode.replace("Dein Gutscheincode lautet: ", "");
-//			couponCode = couponCode.replace("Diesen Code gibst Du im Warenkorb ein, nachdem Du Deine Lieblingsstücke ausgewählt hast.", "");
-//			couponCode = couponCode.trim();
-			System.out.println(couponCode);
-			waitABit(2000);
-		
+		couponCode = mailinatorPage().grabCouponCode();
+		// couponCode =
+		// couponCode.replace("Gratuliere! Du hast einen Gutschein für Deine Registrierung erhalten.",
+		// "");
+		// couponCode = couponCode.replace("Dein Gutscheincode lautet: ", "");
+		// couponCode =
+		// couponCode.replace("Diesen Code gibst Du im Warenkorb ein, nachdem Du Deine Lieblingsstücke ausgewählt hast.",
+		// "");
+		// couponCode = couponCode.trim();
+		System.out.println(couponCode);
+		waitABit(2000);
+
 		return couponCode;
 
 	}

@@ -45,7 +45,6 @@ public class US12001StylistActivationTest extends BaseTest {
 	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
 
 	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
-	public String grabConfirmationEmail;
 
 	@Before
 	public void setUp() throws Exception {
@@ -67,7 +66,7 @@ public class US12001StylistActivationTest extends BaseTest {
 		ordersSteps.markOrderAsPaid();
 		
 		emailClientSteps.openMailinator();
-		grabConfirmationEmail = emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
 
 }

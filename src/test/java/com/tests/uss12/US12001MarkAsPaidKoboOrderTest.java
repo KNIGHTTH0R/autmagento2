@@ -45,7 +45,7 @@ public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
 
 	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
-	public String grabConfirmationEmail;
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -68,7 +68,7 @@ public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 		ordersSteps.markOrderAsPaid();
 		// external
 		emailClientSteps.openMailinator();
-		grabConfirmationEmail = emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
+		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
 

@@ -54,7 +54,6 @@ public class US6001bCheckStylistActivationTest extends BaseTest {
 	public RegistrationActivationDateModel datesExpected = new RegistrationActivationDateModel();
 
 	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
-	public String grabConfirmationEmail;
 	public String formCreationDate;
 
 	@Before
@@ -86,7 +85,7 @@ public class US6001bCheckStylistActivationTest extends BaseTest {
 		
 		//external 
 		emailClientSteps.openMailinator();
-		grabConfirmationEmail  = emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		
 		backEndSteps.navigate(customerURL);
 		StylistPropertiesModel grabAfterLinkConfirmationStylistData =  backEndSteps.grabCustomerConfiguration();

@@ -31,13 +31,14 @@ public class US15001SubscribeToNewsletterTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		dataModel = new CustomerFormModel();
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
 	public void us15001SubscribeToNewsletterTest() {
 
-		footerSteps.subscribeToNewsletter(dataModel.getEmailName());
+		footerSteps.subscribeToNewsletter(dataModel);
 
 	}
 

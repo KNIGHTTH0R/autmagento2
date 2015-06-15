@@ -17,7 +17,7 @@ public class NewsletterSubscribersListPage extends AbstractPage {
 
 	@FindBy(css = "div.hor-scroll")
 	private WebElement listContainer;
-	
+
 	@FindBy(css = "td.filter-actions.a-right button:nth-child(1)")
 	private WebElement resetFilter;
 
@@ -29,7 +29,7 @@ public class NewsletterSubscribersListPage extends AbstractPage {
 		element(emailFilterInput).waitUntilVisible();
 		emailFilterInput.clear();
 		emailFilterInput.sendKeys(emailText);
-	
+
 	}
 
 	public void clickOnSearch() {
@@ -38,6 +38,7 @@ public class NewsletterSubscribersListPage extends AbstractPage {
 		searchButton.click();
 		waitABit(2000);
 	}
+
 	public void clickOnResetFilter() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(resetFilter).waitUntilVisible();
@@ -53,8 +54,8 @@ public class NewsletterSubscribersListPage extends AbstractPage {
 			String currentEmail = elementNow.findElement(By.cssSelector("*:nth-child(3)")).getText();
 			if (currentEmail.trim().contentEquals(searchTerm)) {
 				waitABit(3000);
-				System.out.println("@@@@@@@@@@@@@@@@@@@@ " +  elementNow.findElement(By.cssSelector("*:nth-child(7)")).getText());
-				Assert.assertTrue("The status is not the expected one !!!", elementNow.findElement(By.cssSelector("*:nth-child(7)")).getText().contentEquals("Abonniert"));				
+				System.out.println("@@@@@@@@@@@@@@@@@@@@ " + elementNow.findElement(By.cssSelector("*:nth-child(7)")).getText());
+				Assert.assertTrue("The status is not the expected one !!!", elementNow.findElement(By.cssSelector("*:nth-child(7)")).getText().contentEquals("Abonniert"));
 				break theFor;
 			}
 		}

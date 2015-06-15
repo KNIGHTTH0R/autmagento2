@@ -3,8 +3,11 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
+import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.newsletter.SubscriberModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
+import com.tools.utils.DateUtils;
 
 public class FooterSteps extends AbstractSteps {
 
@@ -41,9 +44,10 @@ public class FooterSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public void subscribeToNewsletter(String email) {
+	public void subscribeToNewsletter(CustomerFormModel model) {
+
 		getDriver().get(MongoReader.getBaseURL());
-		footerPage().inputNewsletterEmail(email);
+		footerPage().inputNewsletterEmail(model.getEmailName());
 		footerPage().submitNesletter();
 	}
 

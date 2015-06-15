@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.DateUtils;
 
 public class FooterPage extends AbstractPage {
 
@@ -35,7 +36,7 @@ public class FooterPage extends AbstractPage {
 
 	@FindBy(css = "form.newsletter input")
 	private WebElement newsletterInput;
-	
+
 	@FindBy(css = "form.newsletter button")
 	private WebElement newsletterButton;
 
@@ -88,15 +89,15 @@ public class FooterPage extends AbstractPage {
 	public void clickTraumkarriereStyleCoachLink() {
 		traumkarriereStyleCoachLink.click();
 	}
-	
-	public void inputNewsletterEmail(String email){
+
+	public void inputNewsletterEmail(String email) {
 		element(newsletterInput).waitUntilVisible();
 		element(newsletterInput).sendKeys(email);
 	}
-	
+
 	public void submitNesletter() {
 		element(newsletterButton).waitUntilVisible();
-		newsletterButton.click();
+		newsletterButton.click();		
 	}
 
 }

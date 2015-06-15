@@ -57,7 +57,7 @@ public class MyBusinessPage extends AbstractPage {
 
 	public void verifyCancelledKoboMessageAndActiveUntilDate() {
 		Assert.assertTrue("The message or the -valid until- date is not correct !!",
-				coboSection.getText().contains(ContextConstants.SUBSCRIPTION_CANCELLED + " " + DateUtils.getLastDayOfTheCurrentMonth()));
+				coboSection.getText().contains(ContextConstants.SUBSCRIPTION_CANCELLED + " " + DateUtils.getLastDayOfTheCurrentMonth("dd.MM.yyy")));
 	}
 
 }
