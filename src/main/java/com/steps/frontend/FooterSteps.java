@@ -3,6 +3,7 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
 public class FooterSteps extends AbstractSteps {
@@ -37,6 +38,13 @@ public class FooterSteps extends AbstractSteps {
 	@Step
 	public void clickTraumkarriereStyleCoachLink() {
 		footerPage().clickTraumkarriereStyleCoachLink();
+	}
+
+	@StepGroup
+	public void subscribeToNewsletter(String email) {
+		getDriver().get(MongoReader.getBaseURL());
+		footerPage().inputNewsletterEmail(email);
+		footerPage().submitNesletter();
 	}
 
 	@StepGroup
@@ -79,15 +87,17 @@ public class FooterSteps extends AbstractSteps {
 		footerPage().clickRegistrierungLink();
 
 	}
+
 	@StepGroup
 	public void verifyThatFooterWebsiteIsCorrect(String website) {
 		footerPage().verifyThatFooterWebsiteIsCorrect(website);
-		
+
 	}
+
 	@StepGroup
 	public void selectWebsiteFromFooter(String language) {
 		footerPage().selectWebsiteFromFooter(language);
-		
+
 	}
 
 }

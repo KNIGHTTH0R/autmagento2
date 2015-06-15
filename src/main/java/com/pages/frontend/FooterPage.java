@@ -33,6 +33,12 @@ public class FooterPage extends AbstractPage {
 	@FindBy(css = "div.columns.thicker #select-website")
 	private WebElement websitesList;
 
+	@FindBy(css = "form.newsletter input")
+	private WebElement newsletterInput;
+	
+	@FindBy(css = "form.newsletter button")
+	private WebElement newsletterButton;
+
 	public void verifyThatFooterWebsiteIsCorrect(String website) {
 
 		List<WebElement> websites = websitesList.findElements(By.cssSelector("li span"));
@@ -45,24 +51,6 @@ public class FooterPage extends AbstractPage {
 		}
 		Assert.assertTrue("The selected website is not the correct one !!!", found);
 	}
-
-	// // TODO change this
-	// public void selectWebsiteFromFooter(String language) {
-	// element(websitesList).waitUntilVisible();
-	// List<WebElement> languagesList =
-	// getDriver().findElements(By.cssSelector("li a"));
-	// for (WebElement lang : languagesList) {
-	// if (lang.getText().contentEquals(language)) {
-	// try {
-	// lang.findElement(By.cssSelector("a")).click();
-	// break;
-	// } catch (Exception e) {
-	// lang.click();
-	// break;
-	// }
-	// }
-	// }
-	// }
 
 	public void selectWebsiteFromFooter(String language) {
 		element(websitesList).waitUntilVisible();
@@ -99,6 +87,16 @@ public class FooterPage extends AbstractPage {
 
 	public void clickTraumkarriereStyleCoachLink() {
 		traumkarriereStyleCoachLink.click();
+	}
+	
+	public void inputNewsletterEmail(String email){
+		element(newsletterInput).waitUntilVisible();
+		element(newsletterInput).sendKeys(email);
+	}
+	
+	public void submitNesletter() {
+		element(newsletterButton).waitUntilVisible();
+		newsletterButton.click();
 	}
 
 }

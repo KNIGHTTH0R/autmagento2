@@ -46,5 +46,4 @@ public class CheckMailchimpConfigTest extends BaseTest {
 		System.out.println(" pt ioana   " + model.getEmail());
 
 	}
-
 }
