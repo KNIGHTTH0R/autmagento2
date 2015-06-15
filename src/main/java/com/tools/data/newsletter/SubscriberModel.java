@@ -15,7 +15,93 @@ public class SubscriberModel {
 	private String productSku;
 	private String contactOrUser;
 	private String revenu6Months;
+	private String koboUsed;
+	private String firstName;
+	private String lastName;
+	private String koboCode;
+	private String SCsponsorName;
+	private String SCsponsorEmail;
+	private String SCsponsorPhone;
+    private String SCsponsorShop;
+    private String productName;
+    private String custKobo;
+    private String flagStylist;
+    private String flagHost;
+    
+    
 	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getKoboCode() {
+		return koboCode;
+	}
+	public void setKoboCode(String koboCode) {
+		this.koboCode = koboCode;
+	}
+	public String getSCsponsorName() {
+		return SCsponsorName;
+	}
+	public void setSCsponsorName(String sCsponsorName) {
+		SCsponsorName = sCsponsorName;
+	}
+	public String getSCsponsorEmail() {
+		return SCsponsorEmail;
+	}
+	public void setSCsponsorEmail(String sCsponsorEmail) {
+		SCsponsorEmail = sCsponsorEmail;
+	}
+	public String getSCsponsorPhone() {
+		return SCsponsorPhone;
+	}
+	public void setSCsponsorPhone(String sCsponsorPhone) {
+		SCsponsorPhone = sCsponsorPhone;
+	}
+	public String getSCsponsorShop() {
+		return SCsponsorShop;
+	}
+	public void setSCsponsorShop(String sCsponsorShop) {
+		SCsponsorShop = sCsponsorShop;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getCustKobo() {
+		return custKobo;
+	}
+	public void setCustKobo(String custKobo) {
+		this.custKobo = custKobo;
+	}
+	public String getFlagStylist() {
+		return flagStylist;
+	}
+	public void setFlagStylist(String flagStylist) {
+		this.flagStylist = flagStylist;
+	}
+	public String getFlagHost() {
+		return flagHost;
+	}
+	public void setFlagHost(String flagHost) {
+		this.flagHost = flagHost;
+	}
+	public String getKoboUsed() {
+		return koboUsed;
+	}
+	public void setKobo(String koboUsed) {
+		this.koboUsed = koboUsed;
+	}
 	public String getEmail() {
 		return email;
 	}

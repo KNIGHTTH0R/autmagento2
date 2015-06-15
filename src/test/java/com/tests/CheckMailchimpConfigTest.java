@@ -12,6 +12,7 @@ import com.steps.external.mailchimp.MailchimpListsSteps;
 import com.steps.external.mailchimp.MailchimpLoginSteps;
 import com.steps.external.mailchimp.MailchimpSearchSteps;
 import com.steps.external.mailchimp.MailchimpSubscriberProfileSteps;
+import com.tools.data.newsletter.SubscriberModel;
 import com.tools.env.variables.Credentials;
 import com.tools.requirements.Application;
 
@@ -28,6 +29,8 @@ public class CheckMailchimpConfigTest extends BaseTest {
 	public MailchimpSearchSteps mailchimpSearchSteps;
 	@Steps
 	public MailchimpSubscriberProfileSteps mailchimpSubscriberProfileSteps;
+	
+	SubscriberModel model = new SubscriberModel();
 
 	private String listName = "staging_newsletter_all_subscribers";
 	private String email = "simona.popa@evozon.com";
@@ -38,7 +41,9 @@ public class CheckMailchimpConfigTest extends BaseTest {
 		mailchimpLoginSteps.loginOnMailchimp(Credentials.MAILCHIMP_USERNAME, Credentials.MAILCHIMP_PASSWORD);
 		mailchimpListsSteps.goToDesiredList(listName);
 		mailchimpSearchSteps.searchForSubscriber(email);
-		mailchimpSubscriberProfileSteps.grabSubribersData();
+		model = mailchimpSubscriberProfileSteps.grabSubribersData();
+		
+		System.out.println(" pt ioana   " + model.getEmail());
 
 	}
 

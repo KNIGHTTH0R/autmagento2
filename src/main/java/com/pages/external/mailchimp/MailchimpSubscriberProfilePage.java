@@ -61,6 +61,44 @@ public class MailchimpSubscriberProfilePage extends AbstractPage {
 			if (key.contains("contact or user")) {
 				model.setContactOrUser(value);
 			}
+			if (key.contains("First Name")) {
+				model.setFirstName(value);
+			}
+			if (key.contains("Last Name")) {
+				model.setLastName(value);
+			}
+			if (key.contains("KOBOUSED")) {
+				model.setKobo(value);
+			}
+			if (key.contains("Kobo code")) {
+				model.setKoboCode(value);
+			}
+			if (key.contains("SC sponsor name")) {
+				model.setSCsponsorName(value);
+			}
+			if (key.contains("SC sponsor email")) {
+				model.setSCsponsorEmail(value);
+			}
+			if (key.contains("SC sponsor phone")) {
+				model.setSCsponsorPhone(value);
+			}
+			if (key.contains("SC sponsor shop")) {
+				model.setSCsponsorShop(value);
+			}
+			if (key.contains("Product name")) {
+				model.setProductName(value);
+			}
+			if (key.contains("CUSTKOBO")) {
+				model.setCustKobo(value);
+			}
+			if (key.contains("Flag stylist")) {
+				model.setFlagStylist(value);
+			}
+			if (key.contains("Flag host")) {
+				model.setFlagHost(value);
+			}
+			
+			
 		}
 		PrintUtils.printSubscriberData(model);
 		return model;

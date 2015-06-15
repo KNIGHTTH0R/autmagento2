@@ -187,6 +187,27 @@ public class PrintUtils {
 		System.out.println("product sku: " + model.getProductSku());
 		System.out.println("contact or user: " + model.getContactOrUser());
 		System.out.println("revenue 6 months: " + model.getRevenu6Months());
+		System.out.println("Customer used a kobo voucher:" +model.getKoboUsed());
+		System.out.println("FirstName:" +model.getFirstName());
+		System.out.println("LastName:" +model.getLastName());
+		System.out.println("SC is subscribed to kobo:" +model.getKoboCode());
+		System.out.println("SC sponsor Name:" +model.getSCsponsorName());
+		System.out.println("SC sponsor email:" +model.getSCsponsorEmail());
+		System.out.println("SC sponsor phone:" +model.getSCsponsorPhone());
+		System.out.println("SC sponsor shop:" +model.getSCsponsorShop());
+		System.out.println("Product Name:" +model.getProductName());
+		System.out.println("Customer used kobo voucher:" +model.getCustKobo());
+		System.out.println("Flag stylist:" +model.getFlagStylist());
+		System.out.println("Flag host:" +model.getFlagHost());
+
+
+
+
+
+
+
+
+
 	}
 
 	public static void printRegularUserCartTotalsModel(RegularUserCartTotalsModel model) {

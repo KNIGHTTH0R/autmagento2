@@ -30,7 +30,6 @@ public class MailchimpLoginPage extends AbstractPage {
 	public void submitLogin() {
 		element(loginButton).waitUntilVisible();
 		loginButton.click();
-
 	}
 
 }

@@ -8,6 +8,8 @@ import com.tools.requirements.AbstractSteps;
 public class MailchimpLoginSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
+	
+	
 
 	@StepGroup
 	public void loginOnMailchimp(String username, String password) {
