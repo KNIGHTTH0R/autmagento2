@@ -29,11 +29,7 @@ public class US15001ConfirmCustomerTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").size();
-		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").get(0).getEmailName();
-		} else
-			System.out.println("The database has no entries");
+		stylistEmail = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").get(0).getEmailName();
 
 	}
 

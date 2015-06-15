@@ -1,6 +1,7 @@
 package com.steps.backend.newsletterSubscribers;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.requirements.AbstractSteps;
 
@@ -25,7 +26,16 @@ public class NewsleterSubscribersSteps extends AbstractSteps {
 
 	@Step
 	public void openNewsletterSubscriberDetails(String searchTerm) {
-		newsletterSubscribersListPage().openNewsletterSubscriberDetails(searchTerm);
+		newsletterSubscribersListPage().checkSubscriberDetails(searchTerm);
 	}
+	
+	@StepGroup
+	public void searchForSubscriberAndOpenDetails(String email){
+		newsletterSubscribersListPage().clickOnResetFilter();
+		newsletterSubscribersListPage().inputEmailFilter(email);
+		newsletterSubscribersListPage().clickOnSearch();
+		newsletterSubscribersListPage().checkSubscriberDetails(email);
+		
+	} 
 
 }

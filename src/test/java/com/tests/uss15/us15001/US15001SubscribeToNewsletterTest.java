@@ -38,11 +38,13 @@ public class US15001SubscribeToNewsletterTest extends BaseTest {
 	public void us15001SubscribeToNewsletterTest() {
 
 		footerSteps.subscribeToNewsletter(dataModel.getEmailName());
+
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+
 	}
 
 }

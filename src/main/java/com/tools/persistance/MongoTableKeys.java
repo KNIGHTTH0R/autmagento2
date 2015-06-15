@@ -120,6 +120,9 @@ public class MongoTableKeys {
 	public static final String URL_MODEL = "UrlModel";
 	public static final String URL_PATH = "url:";
 	
+	//subscriber model
+	public static final String SUBSCRIBER_MODEL = "SubscriberModel";
+	public static final String SUBSCRIBER_FIRSTNAME = "SubscriberFirstname";
 	
 	public static final String CUSTOMER_FORM_MODEL = "CustomerFormModel";
 	public static final String HOST_CART_CALC_DETAILS_MODEL = "HostCartCalcDetailsModel";

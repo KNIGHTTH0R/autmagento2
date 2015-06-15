@@ -1,4 +1,4 @@
-package com.tests;
+package com.tests.uss15.us15001;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -15,15 +15,17 @@ import com.steps.external.mailchimp.MailchimpListsSteps;
 import com.steps.external.mailchimp.MailchimpLoginSteps;
 import com.steps.external.mailchimp.MailchimpSearchSteps;
 import com.steps.external.mailchimp.MailchimpSubscriberProfileSteps;
+import com.tests.BaseTest;
 import com.tools.data.newsletter.SubscriberModel;
 import com.tools.env.variables.Credentials;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US13", type = "external")
 @Story(Application.Distribution.CustomerLead.class)
 @RunWith(ThucydidesRunner.class)
-public class CheckMailchimpConfigTest extends BaseTest {
+public class US15001CheckMailchimpConfigTest extends BaseTest {
 
 	@Steps
 	public MailchimpLoginSteps mailchimpLoginSteps;
@@ -35,12 +37,16 @@ public class CheckMailchimpConfigTest extends BaseTest {
 	public MailchimpSubscriberProfileSteps mailchimpSubscriberProfileSteps;
 
 	SubscriberModel model = new SubscriberModel();
+	String stylistEmail;
 
 	private String listName = "staging_newsletter_all_subscribers";
-	private String email = "simona.popa@evozon.com";
 
 	@Before
 	public void setUp() {
+
+		stylistEmail = MongoReader
+				.grabCustomerFormModels("US15001SubscribeToNewsletterTest")
+				.get(0).getEmailName();
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -50,13 +56,13 @@ public class CheckMailchimpConfigTest extends BaseTest {
 		mailchimpLoginSteps.loginOnMailchimp(Credentials.MAILCHIMP_USERNAME,
 				Credentials.MAILCHIMP_PASSWORD);
 		mailchimpListsSteps.goToDesiredList(listName);
-		mailchimpSearchSteps.searchForSubscriber(email);
+		mailchimpSearchSteps.searchForSubscriber(stylistEmail);
 		model = mailchimpSubscriberProfileSteps.grabSubribersData();
 
 	}
 
 	@After
-	public void tearDown() {		
+	public void tearDown() {
 		MongoWriter.saveSubscriberModel(model, getClass().getSimpleName());
 	}
 }
