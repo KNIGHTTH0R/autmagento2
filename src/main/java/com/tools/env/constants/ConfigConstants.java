@@ -31,4 +31,9 @@ public class ConfigConstants {
 	public static final String GMAIL = "gmail.com";
 	public static final String MASTER_STYLE_COACH = "";
 	
+	public static final String NO = "No";
+	public static final String YES = "Yes";
+	public static final String CONTACT = "contact";
+	public static final String USER = "user";
+	
 }

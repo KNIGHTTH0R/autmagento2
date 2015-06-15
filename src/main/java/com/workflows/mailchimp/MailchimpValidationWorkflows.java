@@ -1,7 +1,11 @@
 package com.workflows.mailchimp;
 
 import com.tools.CustomVerification;
+import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.data.newsletter.SubscriberModel;
+import com.tools.env.constants.ConfigConstants;
+import com.tools.persistance.MongoReader;
 
 import net.thucydides.core.annotations.Step;
 
@@ -32,6 +36,33 @@ public class MailchimpValidationWorkflows {
 		verifyCustomerKobo(grabbedModel.getCustKobo(),expectedModel.getCustKobo());
 		verifyStylistFlag(grabbedModel.getFlagStylist(),expectedModel.getFlagStylist());
 		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
+	}
+	@Step
+	public void validateNewContactSubscriberMailchimpProperties(SubscriberModel grabbedModel, SubscriberModel expectedModel) {
+		verifyEmail(grabbedModel.getEmail(),expectedModel.getEmail());
+		verifyActivatedAt(grabbedModel.getActivatedAt(),expectedModel.getActivatedAt());
+		verifyIsStylist(grabbedModel.getIsStylist(),expectedModel.getIsStylist());
+		verifyLastDatePurchase(grabbedModel.getLastPurchase(), expectedModel.getLastPurchase());
+		verifyPreferredWebsite(grabbedModel.getPreferredWebsite(),expectedModel.getPreferredWebsite());
+		verifyContactOrUser(grabbedModel.getContactOrUser(),expectedModel.getContactOrUser());
+		verifyStylistFlag(grabbedModel.getFlagStylist(),expectedModel.getFlagStylist());
+		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
+	}
+	
+	@Step
+	public SubscriberModel populateSubsriberModelFromExistingData(CustomerFormModel dataModel, DateModel dateModel){		
+		SubscriberModel resultSubscriber = new SubscriberModel();
+		
+		resultSubscriber.setEmail(dataModel.getEmailName());
+		resultSubscriber.setActivatedAt(dateModel.getDate());
+		resultSubscriber.setIsStylist(ConfigConstants.NO);
+		resultSubscriber.setLastPurchase(dateModel.getDate());
+		resultSubscriber.setPreferredWebsite(MongoReader.getContext());
+		resultSubscriber.setContactOrUser(ConfigConstants.CONTACT);
+		resultSubscriber.setFlagStylist(ConfigConstants.NO);
+		resultSubscriber.setFlagHost(ConfigConstants.NO);
+		
+		return resultSubscriber;
 	}
 	
 	@Step

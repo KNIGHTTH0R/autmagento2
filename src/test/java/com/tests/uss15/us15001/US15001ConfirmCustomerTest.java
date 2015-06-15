@@ -51,6 +51,7 @@ public class US15001ConfirmCustomerTest extends BaseTest {
 
 	@After
 	public void saveData() {
+
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
 	}
 
