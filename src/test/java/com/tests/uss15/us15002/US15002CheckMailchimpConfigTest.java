@@ -43,6 +43,7 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 	SubscriberModel expectedSubscriberModel = new SubscriberModel();
 	CustomerFormModel dataModel;
 	DateModel dateModel;
+	String koboCode;
 
 	private String listName = "staging_AUT_newsletter_all_subscribers";
 
@@ -51,6 +52,7 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 
 		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US15002ConfirmCustomerTest").get(0);
+		koboCode = MongoReader.grabKoboModel("US15002KoboRegistrationNewsletterSubscribeTest");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -61,7 +63,7 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 		mailchimpListsSteps.goToDesiredList(listName);
 		mailchimpSearchSteps.searchForSubscriber(dataModel.getEmailName());
 		grabbedSubscriberModel = mailchimpSubscriberProfileSteps.grabSubribersData();
-		expectedSubscriberModel = mailchimpValidationWorkflows.populateSubsriberModelFromExistingData(dataModel, dateModel);
-		mailchimpValidationWorkflows.validateNewContactSubscriberMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
+		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewCustomerWithKoboFromExistingData(dataModel, dateModel, koboCode);
+		mailchimpValidationWorkflows.validateNewCustomerWithKoboMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
 	}
 }
