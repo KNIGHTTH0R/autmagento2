@@ -57,7 +57,7 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 
 	@Before
 	public void setUp() {
-		
+
 		product = MongoReader.grabBasicProductModel("US15002SubscribedCustomerBuyWithContactBoosterTest").get(2);
 		shippingModel = MongoReader.grabShippingModel("US15002SubscribedCustomerBuyWithContactBoosterTest").get(0);
 		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
@@ -73,7 +73,7 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 		mailchimpListsSteps.goToDesiredList(listName);
 		mailchimpSearchSteps.searchForSubscriber(dataModel.getEmailName());
 		grabbedSubscriberModel = mailchimpSubscriberProfileSteps.grabSubribersData();
-		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewCustomerWithKoboFromExistingData(dataModel, dateModel,product,shippingModel, koboCode);
+		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewCustomerWithKoboFromExistingData(dataModel, dateModel, product, shippingModel, koboCode);
 		mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
 	}
 }
