@@ -1,5 +1,8 @@
 package com.tests.uss15.us15002;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -15,8 +18,11 @@ import com.steps.external.mailchimp.MailchimpLoginSteps;
 import com.steps.external.mailchimp.MailchimpSearchSteps;
 import com.steps.external.mailchimp.MailchimpSubscriberProfileSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.data.newsletter.SubscriberModel;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
@@ -41,6 +47,8 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 
 	SubscriberModel grabbedSubscriberModel = new SubscriberModel();
 	SubscriberModel expectedSubscriberModel = new SubscriberModel();
+	private ShippingModel shippingModel = new ShippingModel();
+	public BasicProductModel product = new BasicProductModel();
 	CustomerFormModel dataModel;
 	DateModel dateModel;
 	String koboCode;
@@ -49,7 +57,9 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 
 	@Before
 	public void setUp() {
-
+		
+		product = MongoReader.grabBasicProductModel("US15002SubscribedCustomerBuyWithContactBoosterTest").get(2);
+		shippingModel = MongoReader.grabShippingModel("US15002SubscribedCustomerBuyWithContactBoosterTest").get(0);
 		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US15002ConfirmCustomerTest").get(0);
 		koboCode = MongoReader.grabKoboModel("US15002KoboRegistrationNewsletterSubscribeTest");
@@ -63,7 +73,7 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 		mailchimpListsSteps.goToDesiredList(listName);
 		mailchimpSearchSteps.searchForSubscriber(dataModel.getEmailName());
 		grabbedSubscriberModel = mailchimpSubscriberProfileSteps.grabSubribersData();
-		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewCustomerWithKoboFromExistingData(dataModel, dateModel, koboCode);
-		mailchimpValidationWorkflows.validateNewCustomerWithKoboMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
+		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewCustomerWithKoboFromExistingData(dataModel, dateModel,product,shippingModel, koboCode);
+		mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
 	}
 }

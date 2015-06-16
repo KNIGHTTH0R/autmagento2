@@ -1,8 +1,10 @@
 package com.workflows.mailchimp;
 
 import com.tools.CustomVerification;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.data.newsletter.SubscriberModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.persistance.MongoReader;
@@ -49,7 +51,7 @@ public class MailchimpValidationWorkflows {
 		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
 	}
 	@Step
-	public void validateNewCustomerWithKoboMailchimpProperties(SubscriberModel grabbedModel, SubscriberModel expectedModel) {
+	public void validateNewCustomerOrderWithKoboMailchimpProperties(SubscriberModel grabbedModel, SubscriberModel expectedModel) {
 		verifyEmail(grabbedModel.getEmail(),expectedModel.getEmail());
 		verifyActivatedAt(grabbedModel.getActivatedAt(),expectedModel.getActivatedAt());
 		verifyIsStylist(grabbedModel.getIsStylist(),expectedModel.getIsStylist());
@@ -62,6 +64,10 @@ public class MailchimpValidationWorkflows {
 		verifyFirstName(grabbedModel.getFirstName(), expectedModel.getFirstName());
 		verifyLastName(grabbedModel.getLastName(), expectedModel.getLastName());
 		verifyCountry(grabbedModel.getCountry(),expectedModel.getCountry());
+		verifyRevenue3Months(grabbedModel.getRevenue3Months(), expectedModel.getRevenue3Months());
+		verifyRevenue6Months(grabbedModel.getRevenu6Months(),expectedModel.getRevenu6Months());
+		verifyRevenue1Year(grabbedModel.getRevenue1Year(),expectedModel.getRevenue1Year());
+		verifyProductSKU(grabbedModel.getProductSku(),expectedModel.getProductSku());
 		
 	}
 	
@@ -81,7 +87,7 @@ public class MailchimpValidationWorkflows {
 		return resultSubscriber;
 	}
 	@Step
-	public SubscriberModel populateNewCustomerWithKoboFromExistingData(CustomerFormModel dataModel, DateModel dateModel,String koboCode){		
+	public SubscriberModel populateNewCustomerWithKoboFromExistingData(CustomerFormModel dataModel,DateModel dateModel,BasicProductModel basicProductModel, ShippingModel shippingModel, String koboCode){		
 		SubscriberModel resultSubscriber = new SubscriberModel();
 		
 		resultSubscriber.setEmail(dataModel.getEmailName());
@@ -96,6 +102,10 @@ public class MailchimpValidationWorkflows {
 		resultSubscriber.setLastName(dataModel.getLastName());
 		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
 		resultSubscriber.setCustKobo(koboCode);
+		resultSubscriber.setRevenue3Months(shippingModel.getTotalAmount());
+		resultSubscriber.setRevenu6Months(shippingModel.getTotalAmount());
+		resultSubscriber.setRevenue1Year(shippingModel.getTotalAmount());
+		resultSubscriber.setProductSku(basicProductModel.getProdCode());
 		
 		return resultSubscriber;
 	}

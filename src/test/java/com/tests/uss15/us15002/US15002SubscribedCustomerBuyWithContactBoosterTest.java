@@ -30,13 +30,11 @@ import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.variables.UrlConstants;
@@ -134,9 +132,8 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 				}
 			}
 		}
-
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -171,10 +168,6 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 
 		shippingSteps.clickGoToPaymentMethod();
 
-		String url = shippingSteps.grabUrl();
-		DataGrabber.urlModel.setName("Payment URL");
-		DataGrabber.urlModel.setUrl(url);
-
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
@@ -186,9 +179,9 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 
 	@After
 	public void saveData() {
-		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
-			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
+			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName());
 		}
 	}
 }
