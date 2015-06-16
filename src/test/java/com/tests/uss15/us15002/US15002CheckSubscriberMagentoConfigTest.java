@@ -1,4 +1,4 @@
-package com.tests.uss15.us15001;
+package com.tests.uss15.us15002;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -21,7 +21,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 @WithTag(name = "US7", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US15001CheckSubscriberMagentoConfigTest extends BaseTest {
+public class US15002CheckSubscriberMagentoConfigTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -37,12 +37,12 @@ public class US15001CheckSubscriberMagentoConfigTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		stylistEmail = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").get(0).getEmailName();
+		stylistEmail = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0).getEmailName();
 
 	}
 
 	@Test
-	public void us15001CheckSubscriberMagentoConfigTest() {
+	public void us15002CheckSubscriberMagentoConfigTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.goToNewsletterSubribers();

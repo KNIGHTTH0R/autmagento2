@@ -18,7 +18,6 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.soap.DBStylistModel;
-import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;

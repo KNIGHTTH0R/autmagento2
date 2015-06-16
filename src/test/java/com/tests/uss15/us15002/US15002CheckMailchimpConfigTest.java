@@ -1,4 +1,4 @@
-package com.tests.uss15.us15001;
+package com.tests.uss15.us15002;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -26,7 +26,7 @@ import com.workflows.mailchimp.MailchimpValidationWorkflows;
 @WithTag(name = "US13", type = "external")
 @Story(Application.Distribution.CustomerLead.class)
 @RunWith(ThucydidesRunner.class)
-public class US15001CheckMailchimpConfigTest extends BaseTest {
+public class US15002CheckMailchimpConfigTest extends BaseTest {
 
 	@Steps
 	public MailchimpLoginSteps mailchimpLoginSteps;
@@ -49,13 +49,13 @@ public class US15001CheckMailchimpConfigTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		dataModel = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US15001ConfirmCustomerTest").get(0);
+		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
+		dateModel = MongoReader.grabStylistDateModels("US15002ConfirmCustomerTest").get(0);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us15001CheckMailchimpConfigTest() {
+	public void us15002CheckMailchimpConfigTest() {
 
 		mailchimpLoginSteps.loginOnMailchimp(Credentials.MAILCHIMP_USERNAME, Credentials.MAILCHIMP_PASSWORD);
 		mailchimpListsSteps.goToDesiredList(listName);
