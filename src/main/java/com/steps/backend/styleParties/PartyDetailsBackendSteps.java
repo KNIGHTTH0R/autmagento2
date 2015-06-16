@@ -60,4 +60,5 @@ public class PartyDetailsBackendSteps extends AbstractSteps {
 
 	}
 
+
 }

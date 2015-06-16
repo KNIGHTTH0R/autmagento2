@@ -82,5 +82,6 @@ public class PartyDetailsBackendPage extends AbstractPage {
 		element(successMessage).waitUntilVisible();
 		Assert.assertTrue("Failure: The mesage should be " + ContextConstants.BOUNUS_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(), successMessage.getText().contains(ContextConstants.BOUNUS_SUCCESS_MESSAGE));
 	}
+	
 
 }

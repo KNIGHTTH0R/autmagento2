@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -14,6 +15,15 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class CustomerDetailsPage extends AbstractPage {
+
+	@FindBy(id = "customer_info_tabs_customer_edit_tab_reward")
+	private WebElement rewardPointsTab;
+
+	@FindBy(id = "reward_reward_type")
+	private WebElement rewardType;
+
+	@FindBy(id = "reward_points_delta")
+	private WebElement rewardPointsInput;
 
 	@FindBy(id = "customer_info_tabs_stylecoach_lead_manage")
 	private WebElement leadSettingsButton;
@@ -41,10 +51,10 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "input[id*='city'][id^='_item']")
 	private WebElement cityInput;
-	
+
 	@FindBy(css = "input[title*='Set as Default Billing Address']")
 	private WebElement defaultBillingCheckbox;
-	
+
 	@FindBy(css = "input[title*='Set as Default Shipping Address']")
 	private WebElement defaultShippingCheckbox;
 
@@ -53,34 +63,49 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "input[id*='postcode'][id^='_item']")
 	private WebElement postCodeInput;
-	
+
 	@FindBy(css = "button[onclick*='editForm.submit();']")
 	private WebElement saveCustomer;
-	
+
+	@FindBy(css = "button[onclick*='saveAndContinueEdit']")
+	private WebElement saveAndContinueEdit;
+
 	@FindBy(id = "add_address_button")
 	private WebElement addAddressButton;
+	
+	@FindBy(css = "li.success-msg")
+	private WebElement successMessage;
 
 	public void addNewAddress() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(addAddressButton).waitUntilVisible();
 		addAddressButton.click();
 	}
+
 	public void checkDefaultBillingAddress() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(defaultBillingCheckbox).waitUntilVisible();
 		defaultBillingCheckbox.click();
 	}
+
 	public void checkDefaultShippingAddress() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(defaultShippingCheckbox).waitUntilVisible();
 		defaultShippingCheckbox.click();
 	}
+
 	public void saveCustomer() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(saveCustomer).waitUntilVisible();
 		saveCustomer.click();
 	}
-	
+
+	public void saveAndContinueEdit() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(saveAndContinueEdit).waitUntilVisible();
+		saveAndContinueEdit.click();
+	}
+
 	public void clickOnLeadSettings() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(leadSettingsButton).waitUntilVisible();
@@ -215,6 +240,29 @@ public class CustomerDetailsPage extends AbstractPage {
 		}
 
 		return jb;
+	}
+
+	public void selectRewardPointstype(String reward) {
+		element(rewardType).waitUntilVisible();
+		element(rewardType).selectByVisibleText(reward);
+	}
+
+	public void clickOnRewardsPointsTab() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(rewardPointsTab).waitUntilVisible();
+		rewardPointsTab.click();
+	}
+
+	public void typeRewardsPointsValue(String value) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(rewardPointsInput).waitUntilVisible();
+		element(rewardPointsInput).sendKeys(value);
+	}
+
+	public void verifySaveCustomerSuccessMessage() {
+		element(successMessage).waitUntilVisible();
+		Assert.assertTrue("Failure: The mesage should be " + ContextConstants.CUSTOMER_SAVE_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(), successMessage
+				.getText().contains(ContextConstants.CUSTOMER_SAVE_SUCCESS_MESSAGE));
 	}
 
 }

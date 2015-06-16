@@ -1,6 +1,7 @@
 package com.steps.backend;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
@@ -191,6 +192,20 @@ public class BackEndSteps extends AbstractSteps {
 
 		return datesModel;
 
+	}
+	
+	@StepGroup
+	public void addJewelryAndFourthyDiscountBonusToRegularCustomer() {
+		customerDetailsHomePage().clickOnRewardsPointsTab();
+		customerDetailsHomePage().selectRewardPointstype("Schmuckbonus (EUR)");
+		customerDetailsHomePage().typeRewardsPointsValue("10000");
+		customerDetailsHomePage().saveAndContinueEdit();
+		customerDetailsHomePage().verifySaveCustomerSuccessMessage();
+		customerDetailsHomePage().selectRewardPointstype("Forty Discounts");
+		customerDetailsHomePage().typeRewardsPointsValue("10000");
+		customerDetailsHomePage().saveAndContinueEdit();	
+		customerDetailsHomePage().verifySaveCustomerSuccessMessage();
+		
 	}
 
 }

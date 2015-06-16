@@ -48,13 +48,12 @@ public class NewsletterSubscribersListPage extends AbstractPage {
 	public void checkSubscriberDetails(String searchTerm) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(listContainer).waitUntilVisible();
+		waitABit(2000);
 		List<WebElement> listElements = listContainer.findElements(By.cssSelector("tbody > tr"));
 
 		theFor: for (WebElement elementNow : listElements) {
 			String currentEmail = elementNow.findElement(By.cssSelector("*:nth-child(3)")).getText();
 			if (currentEmail.trim().contentEquals(searchTerm)) {
-				waitABit(3000);
-				System.out.println("@@@@@@@@@@@@@@@@@@@@ " + elementNow.findElement(By.cssSelector("*:nth-child(7)")).getText());
 				Assert.assertTrue("The status is not the expected one !!!", elementNow.findElement(By.cssSelector("*:nth-child(7)")).getText().contentEquals("Abonniert"));
 				break theFor;
 			}

@@ -98,15 +98,10 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7008.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15002.properties");
 			prop.load(input);
 
 			koboCode = prop.getProperty("koboCode");
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -119,16 +114,17 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 				}
 			}
 		}
-		// Generate data for this test run
+	
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
 	public void us15002KoboRegistrationNewsletterSubscribeTest() {
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL(), koboCode);
-		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);		
+		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
 		emailClientSteps.openMailinator();
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
