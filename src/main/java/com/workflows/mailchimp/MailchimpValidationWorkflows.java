@@ -48,6 +48,22 @@ public class MailchimpValidationWorkflows {
 		verifyStylistFlag(grabbedModel.getFlagStylist(),expectedModel.getFlagStylist());
 		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
 	}
+	@Step
+	public void validateNewCustomerWithKoboMailchimpProperties(SubscriberModel grabbedModel, SubscriberModel expectedModel) {
+		verifyEmail(grabbedModel.getEmail(),expectedModel.getEmail());
+		verifyActivatedAt(grabbedModel.getActivatedAt(),expectedModel.getActivatedAt());
+		verifyIsStylist(grabbedModel.getIsStylist(),expectedModel.getIsStylist());
+		verifyLastDatePurchase(grabbedModel.getLastPurchase(), expectedModel.getLastPurchase());
+		verifyPreferredWebsite(grabbedModel.getPreferredWebsite(),expectedModel.getPreferredWebsite());
+		verifyContactOrUser(grabbedModel.getContactOrUser(),expectedModel.getContactOrUser());
+		verifyStylistFlag(grabbedModel.getFlagStylist(),expectedModel.getFlagStylist());
+		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
+		verifyCustomerKobo(grabbedModel.getCustKobo(),expectedModel.getCustKobo());
+		verifyFirstName(grabbedModel.getFirstName(), expectedModel.getFirstName());
+		verifyLastName(grabbedModel.getLastName(), expectedModel.getLastName());
+		verifyCountry(grabbedModel.getCountry(),expectedModel.getCountry());
+		
+	}
 	
 	@Step
 	public SubscriberModel populateSubsriberModelFromExistingData(CustomerFormModel dataModel, DateModel dateModel){		
@@ -61,6 +77,25 @@ public class MailchimpValidationWorkflows {
 		resultSubscriber.setContactOrUser(ConfigConstants.CONTACT);
 		resultSubscriber.setFlagStylist(ConfigConstants.NO);
 		resultSubscriber.setFlagHost(ConfigConstants.NO);
+		
+		return resultSubscriber;
+	}
+	@Step
+	public SubscriberModel populateNewCustomerWithKoboFromExistingData(CustomerFormModel dataModel, DateModel dateModel,String koboCode){		
+		SubscriberModel resultSubscriber = new SubscriberModel();
+		
+		resultSubscriber.setEmail(dataModel.getEmailName());
+		resultSubscriber.setActivatedAt(dateModel.getDate());
+		resultSubscriber.setIsStylist(ConfigConstants.NO);
+		resultSubscriber.setLastPurchase(dateModel.getDate());
+		resultSubscriber.setPreferredWebsite(MongoReader.getContext());
+		resultSubscriber.setContactOrUser(ConfigConstants.USER);
+		resultSubscriber.setFlagStylist(ConfigConstants.YES);
+		resultSubscriber.setFlagHost(ConfigConstants.YES);
+		resultSubscriber.setFirstName(dataModel.getFirstName());
+		resultSubscriber.setLastName(dataModel.getLastName());
+		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
+		resultSubscriber.setCustKobo(koboCode);
 		
 		return resultSubscriber;
 	}

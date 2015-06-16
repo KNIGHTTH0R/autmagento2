@@ -156,7 +156,8 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
+		MongoWriter.saveKoboCode(koboCode, getClass().getSimpleName());
+		
 	}
 
 }
