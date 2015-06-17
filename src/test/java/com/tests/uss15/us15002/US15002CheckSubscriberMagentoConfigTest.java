@@ -9,10 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.newsletterSubscribers.NewsleterSubscribersSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -42,11 +44,12 @@ public class US15002CheckSubscriberMagentoConfigTest extends BaseTest {
 	}
 
 	@Test
-	public void us15002CheckSubscriberMagentoConfigTest() {
+	public void us15002CheckSubscriberMagentoConfigTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.goToNewsletterSubribers();
 		newsleterSubscribersSteps.checkSubscriberDetails(stylistEmail);
+		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
 	}
 
 }
