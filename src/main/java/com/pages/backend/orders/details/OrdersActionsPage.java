@@ -16,7 +16,7 @@ public class OrdersActionsPage extends AbstractPage {
 	@FindBy(css = "li.success-msg")
 	private WebElement successMessage;
 
-	@FindBy(css = "#creditmemo_item_container button[onclick*='disableElements('submit-button');submitCreditMemoOffline()']")
+	@FindBy(css = "button.scalable.save.submit-button")
 	private WebElement refundOffline;
 
 	@FindBy(css = "button[onclick*='/sales_order_invoice/start/order_id/']")
@@ -70,7 +70,8 @@ public class OrdersActionsPage extends AbstractPage {
 	public void refundOffline() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(refundOffline).waitUntilVisible();
-		refundOffline.click();
+		System.out.println(refundOffline.getText());
+		refundOffline.click();		
 	}
 
 	public void verifyInvoiceShippingSubmitedMessage() {
