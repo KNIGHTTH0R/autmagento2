@@ -46,4 +46,22 @@ public class OrdersSteps extends AbstractSteps {
 		waitABit(TimeConstants.WAIT_TIME_LONG);
 	}
 
+	@Step
+	public void completeOrder() {
+		ordersActionsPage().clickInvoiceButton();
+		ordersActionsPage().checkCreateShippment();
+		ordersActionsPage().submitInvoice();
+		ordersActionsPage().verifyInvoiceShippingSubmitedMessage();
+		waitABit(5000);
+	}
+
+	@Step
+	public void refundOrder() {
+		ordersActionsPage().clickcreditMemoButton();
+		waitABit(1000);
+		ordersActionsPage().refundOffline();
+		ordersActionsPage().verifyRefundedSuccessMessage();
+		waitABit(2000);
+	}
+
 }

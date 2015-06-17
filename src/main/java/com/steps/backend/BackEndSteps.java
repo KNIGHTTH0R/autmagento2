@@ -59,13 +59,18 @@ public class BackEndSteps extends AbstractSteps {
 	public void clickOnShoppingCartPriceRules() {
 		navigationPage().clickOnPromotions();
 		navigationPage().clickOnShoppingCartPriceRules();
-		;
 	}
 
 	@Step
 	public void clickOnSalesOrders() {
 		navigationPage().clickOrdersPage();
 		navigationPage().clickOnSales();
+	}
+
+	@Step
+	public void clickOnCreditMemo() {
+		navigationPage().clickOrdersPage();
+		navigationPage().clickOnCreditMemo();
 	}
 
 	@Step
@@ -78,15 +83,40 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void searchOrderByName(String emailText) {
-		orderListPage().inputOrderName(emailText);
+	public void searchOrderByName(String name) {
+		orderListPage().inputOrderName(name);
 		orderListPage().clickOnSearch();
 		waitABit(2000);
 	}
 
 	@Step
-	public void openOrderDetails(String emailText) {
-		orderListPage().openOrderDetails(emailText);
+	public void searchOrderByOrderId(String orderId) {
+		orderListPage().inputOderId(orderId);
+		orderListPage().clickOnSearch();
+		waitABit(2000);
+	}
+
+	@Step
+	public void openOrderDetails(String name) {
+		orderListPage().openOrderDetails(name);
+	}
+
+	@Step
+	public void searchCreditMemoByorderId(String orderId) {
+		creditMemoListPage().inputCreditMemoOrderId(orderId);
+		creditMemoListPage().clickOnSearch();
+		waitABit(2000);
+	}
+
+	@Step
+	public void openCreditMemoDetails(String name) {
+		creditMemoListPage().openCreditMemoDetails(name);
+	}
+
+	@Step
+	public void cancelCreditMemo() {
+		creditMemoDetailsPage().cancelCreditMemo();
+		creditMemoDetailsPage().verifyCreditMemoRefundedMessage();
 	}
 
 	@Step
@@ -193,7 +223,7 @@ public class BackEndSteps extends AbstractSteps {
 		return datesModel;
 
 	}
-	
+
 	@StepGroup
 	public void addJewelryAndFourthyDiscountBonusToRegularCustomer() {
 		customerDetailsHomePage().clickOnRewardsPointsTab();
@@ -203,9 +233,9 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().verifySaveCustomerSuccessMessage();
 		customerDetailsHomePage().selectRewardPointstype("Forty Discounts");
 		customerDetailsHomePage().typeRewardsPointsValue("10000");
-		customerDetailsHomePage().saveAndContinueEdit();	
+		customerDetailsHomePage().saveAndContinueEdit();
 		customerDetailsHomePage().verifySaveCustomerSuccessMessage();
-		
+
 	}
 
 }

@@ -10,6 +10,8 @@ import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
+import com.pages.backend.creditMemo.CreditMemoDetailsPage;
+import com.pages.backend.creditMemo.CreditMemoListPage;
 import com.pages.backend.customer.CustomerListPage;
 import com.pages.backend.customer.details.CustomerDetailsPage;
 import com.pages.backend.customer.details.LeadSettingsPage;
@@ -253,6 +255,14 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(OrderListPage.class);
 	}
 
+	public CreditMemoListPage creditMemoListPage() {
+		return getPages().currentPageAt(CreditMemoListPage.class);
+	}
+	
+	public CreditMemoDetailsPage creditMemoDetailsPage() {
+		return getPages().currentPageAt(CreditMemoDetailsPage.class);
+	}
+
 	public OrdersActionsPage ordersActionsPage() {
 		return getPages().currentPageAt(OrdersActionsPage.class);
 	}
@@ -491,18 +501,23 @@ public class AbstractSteps extends ScenarioSteps {
 	public MailchimpLoginPage mailchimpLoginPage() {
 		return getPages().currentPageAt(MailchimpLoginPage.class);
 	}
+
 	public MailchimpHeaderPage mailchimpHeaderPage() {
 		return getPages().currentPageAt(MailchimpHeaderPage.class);
 	}
+
 	public MailchimpListDetailsPage mailchimpListDetailsPage() {
 		return getPages().currentPageAt(MailchimpListDetailsPage.class);
 	}
+
 	public MailchimpListsPage mailchimpListsPage() {
 		return getPages().currentPageAt(MailchimpListsPage.class);
 	}
+
 	public MailchimpSearchPage mailchimpSearchPage() {
 		return getPages().currentPageAt(MailchimpSearchPage.class);
 	}
+
 	public MailchimpSubscriberProfilePage mailchimpSubscriberProfilePage() {
 		return getPages().currentPageAt(MailchimpSubscriberProfilePage.class);
 	}

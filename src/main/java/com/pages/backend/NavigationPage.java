@@ -134,6 +134,19 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
+	public void clickOnCreditMemo() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+		
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Gutschriften")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
 
 	public void dismissPopUp() {
 		evaluateJavascript("jQuery.noConflict();");

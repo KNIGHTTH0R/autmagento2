@@ -5,6 +5,8 @@ import com.tools.persistance.MongoReader;
 public class ContextConstants {
 
 
+	public static String INVOICE_SHIPPING_SUBMITED_MESSAGE =  MongoReader.getDictionaryItem("INVOICE_SHIPPING_SUBMITED_MESSAGE");
+	public static String REFUNDED_SUCCESS_MESSAGE =  MongoReader.getDictionaryItem("REFUNDED_SUCCESS_MESSAGE");
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
 	// messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
@@ -17,6 +19,7 @@ public class ContextConstants {
 	public static String PARTY_ACTIVE = MongoReader.getDictionaryItem("PARTY_ACTIVE");
 	public static String PARTY_CLOSED = MongoReader.getDictionaryItem("PARTY_CLOSED");
 	public static String BOUNUS_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("BOUNUS_SUCCESS_MESSAGE");
+	public static String CREDIT_MEMO_REFUNDED = MongoReader.getDictionaryItem("CREDIT_MEMO_REFUNDED");
 	public static String CUSTOMER_SAVE_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("CUSTOMER_SAVE_SUCCESS_MESSAGE");
 	public static String SUBSCRIPTION_CANCELLED = MongoReader.getDictionaryItem("SUBSCRIPTION_CANCELLED");
 	public static String INVITE_EMAIL_SUBJECT = MongoReader.getDictionaryItem("INVITE_EMAIL_SUBJECT");

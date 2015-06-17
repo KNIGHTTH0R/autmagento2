@@ -14,12 +14,28 @@ import com.tools.requirements.AbstractPage;
  */
 public class PaymentPage extends AbstractPage {
 
-//	@FindBy(css = "input[value='Kreditkarte']")
-	@FindBy(css = "input.imgB.pmB.pmBcard")    //int
+	@FindBy(css = "input.imgB.pmB.pmBcard")
 	private WebElement creditCardContainer;
+
+	@FindBy(css = "#paymentMethods li input.imgB.pmB.pmBbankTransfer_DE")
+	private WebElement bankTransfer;
+
+	@FindBy(css = "input.paySubmit.paySubmitbankTransfer_DE")
+	private WebElement confirmPayBankTransfer;
 
 	public void expandCreditCardForm() {
 		element(creditCardContainer).waitUntilVisible();
 		creditCardContainer.click();
 	}
+
+	public void expandBankTransferForm() {
+		element(bankTransfer).waitUntilVisible();
+		bankTransfer.click();
+	}
+
+	public void confirmPayBankTransfer() {
+		element(confirmPayBankTransfer).waitUntilVisible();
+		confirmPayBankTransfer.click();
+	}
+
 }

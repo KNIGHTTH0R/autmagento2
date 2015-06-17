@@ -31,16 +31,17 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.RegularCartCalcDetailsModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
+import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
@@ -81,7 +82,6 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 	private String discountClass;
 	private String voucherValue;
 
-	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	CustomerFormModel dataModel;
 
@@ -132,12 +132,12 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 				}
 			}
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us8004CustomerBuyWithContactBoosterTest() {
+	public void us15002SubscribedCustomerBuyWithContactBoosterTest() {
 		customerRegistrationSteps.performLogin(dataModel.getEmailName(), dataModel.getPassword());
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -168,8 +168,13 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 
 		shippingSteps.clickGoToPaymentMethod();
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+		String url = shippingSteps.grabUrl();
+		DataGrabber.urlModel.setName("Payment URL");
+		DataGrabber.urlModel.setUrl(url);
+		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+
+		paymentSteps.payWithBankTransfer();
 
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
@@ -180,6 +185,7 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 	@After
 	public void saveData() {
 		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName());
 		}

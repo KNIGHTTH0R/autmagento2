@@ -11,46 +11,40 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.ApacheHttpHelper;
 import com.steps.backend.BackEndSteps;
-import com.steps.backend.newsletterSubscribers.NewsleterSubscribersSteps;
+import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
+import com.tools.data.backend.OrderModel;
 import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US7", type = "backend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US6", type = "backend")
+@Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US15002CheckSubscriberMagentoConfigTest extends BaseTest {
+public class US15002ApplyCreditMemoOnOrderTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
-	public NewsleterSubscribersSteps newsleterSubscribersSteps;
-	@Steps
-	public CustomVerification customVerifications;
-	@Steps
-	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
-
-	public String stylistEmail;
+	public OrdersSteps ordersSteps;
+	private OrderModel orderModel;
 
 	@Before
 	public void setUp() throws Exception {
 
-		stylistEmail = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0).getEmailName();
-
+		orderModel = MongoReader.grabOrderModels("US15002SubscribedCustomerBuyWithContactBoosterTest").get(0);
 	}
 
 	@Test
-	public void us15002CheckSubscriberMagentoConfigTest() throws Exception {
+	public void us15002ApplyCreditMemoOnOrderTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.goToNewsletterSubribers();
-		newsleterSubscribersSteps.checkSubscriberDetails(stylistEmail);
+		backEndSteps.clickOnSalesOrders();
+		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
+		backEndSteps.openOrderDetails(orderModel.getOrderId());
+		ordersSteps.refundOrder();
 		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
-
 	}
 
 }
