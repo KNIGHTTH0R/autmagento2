@@ -59,7 +59,7 @@ import com.poc.DeactivateRule;
 	
 	DeactivateBuy3Get1ForHost.class,
 	US9001Suite.class,
-	US9002Suite.class,
+	US15001Suite.class,
 	
 	US10005Suite.class,
 	US10006Suite.class,

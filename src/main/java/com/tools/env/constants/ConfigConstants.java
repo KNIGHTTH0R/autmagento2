@@ -35,5 +35,6 @@ public class ConfigConstants {
 	public static final String YES = "Yes";
 	public static final String CONTACT = "contact";
 	public static final String USER = "user";
+	public static final String ZERO = "0";
 	
 }

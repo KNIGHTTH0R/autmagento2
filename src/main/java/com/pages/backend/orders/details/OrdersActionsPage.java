@@ -13,6 +13,12 @@ public class OrdersActionsPage extends AbstractPage {
 	@FindBy(css = "#order_history_block button:nth-child(3)")
 	private WebElement markAsPaidButton;
 
+	@FindBy(css = "#order_history_block button:nth-child(2)")
+	private WebElement uncancelOrderButton;
+
+	@FindBy(css = "button[onclick*='/sales_order/cancel/order_id/']")
+	private WebElement cancelOrderButton;
+
 	@FindBy(css = "li.success-msg")
 	private WebElement successMessage;
 
@@ -36,6 +42,27 @@ public class OrdersActionsPage extends AbstractPage {
 		String onClick = markAsPaidButton.getAttribute("onclick");
 		evaluateJavascript("jQuery.noConflict();");
 		onClick += " window.confirm = function(submitConfirmAndReloadPage){return true;};";
+		evaluateJavascript(onClick);
+		getAlert().accept();
+		evaluateJavascript("jQuery.noConflict();");
+		getDriver().switchTo().defaultContent();
+		evaluateJavascript("jQuery.noConflict();");
+	}
+
+	public void cancelOrder() {
+		element(cancelOrderButton).waitUntilVisible();
+		cancelOrderButton.click();
+		getAlert().accept();
+		evaluateJavascript("jQuery.noConflict();");
+		getDriver().switchTo().defaultContent();
+		evaluateJavascript("jQuery.noConflict();");
+	}
+	
+	public void uncancelOrder() {
+		element(uncancelOrderButton).waitUntilVisible();
+		String onClick = uncancelOrderButton.getAttribute("onclick");
+		evaluateJavascript("jQuery.noConflict();");
+		onClick += " window.confirm = function(deleteConfirm){return true;};";
 		evaluateJavascript(onClick);
 		getAlert().accept();
 		evaluateJavascript("jQuery.noConflict();");
@@ -71,7 +98,7 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(refundOffline).waitUntilVisible();
 		System.out.println(refundOffline.getText());
-		refundOffline.click();		
+		refundOffline.click();
 	}
 
 	public void verifyInvoiceShippingSubmitedMessage() {
@@ -79,10 +106,11 @@ public class OrdersActionsPage extends AbstractPage {
 		Assert.assertTrue("Failure: The mesage should be " + ContextConstants.INVOICE_SHIPPING_SUBMITED_MESSAGE + " and it's not! Actual: " + successMessage.getText(),
 				successMessage.getText().contains(ContextConstants.INVOICE_SHIPPING_SUBMITED_MESSAGE));
 	}
+
 	public void verifyRefundedSuccessMessage() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(successMessage).waitUntilVisible();
-		Assert.assertTrue("Failure: The mesage should be " + ContextConstants.REFUNDED_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(),
-				successMessage.getText().contains(ContextConstants.REFUNDED_SUCCESS_MESSAGE));
+		Assert.assertTrue("Failure: The mesage should be " + ContextConstants.REFUNDED_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(), successMessage
+				.getText().contains(ContextConstants.REFUNDED_SUCCESS_MESSAGE));
 	}
 }

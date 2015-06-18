@@ -22,33 +22,30 @@ import com.tools.requirements.Application;
 @WithTag(name = "US6", type = "backend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US15002CancelCreditMemoTest extends BaseTest {
+public class US15002CancelOrderTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
-	private OrderModel orderModel;
+	private static OrderModel orderModel = new OrderModel();
 
 	@Before
 	public void setUp() throws Exception {
 
 		orderModel = MongoReader.grabOrderModels("US15002SubscribedCustomerBuyWithContactBoosterTest").get(0);
+		System.out.println(orderModel.getOrderId());
 	}
 
 	@Test
-	public void us15002CancelCreditMemoTest() throws Exception {
+	public void us15002CancelOrderTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnCreditMemo();
-		backEndSteps.searchCreditMemoByorderId(orderModel.getOrderId());
-		backEndSteps.openCreditMemoDetails(orderModel.getOrderId());
-		backEndSteps.cancelCreditMemo();
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
-		ordersSteps.markOrderAsPaid();
+		ordersSteps.cancelOrder();
 		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
-	}
 
+	}
 }

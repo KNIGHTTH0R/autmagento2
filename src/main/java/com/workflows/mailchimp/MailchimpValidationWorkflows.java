@@ -109,6 +109,29 @@ public class MailchimpValidationWorkflows {
 		
 		return resultSubscriber;
 	}
+	@Step
+	public SubscriberModel populateNewCustomerWithKoboFromExistingDataWithZeroRevenue(CustomerFormModel dataModel,DateModel dateModel,BasicProductModel basicProductModel, ShippingModel shippingModel, String koboCode){		
+		SubscriberModel resultSubscriber = new SubscriberModel();
+		
+		resultSubscriber.setEmail(dataModel.getEmailName());
+		resultSubscriber.setActivatedAt(dateModel.getDate());
+		resultSubscriber.setIsStylist(ConfigConstants.NO);
+		resultSubscriber.setLastPurchase(dateModel.getDate());
+		resultSubscriber.setPreferredWebsite(MongoReader.getContext());
+		resultSubscriber.setContactOrUser(ConfigConstants.USER);
+		resultSubscriber.setFlagStylist(ConfigConstants.YES);
+		resultSubscriber.setFlagHost(ConfigConstants.YES);
+		resultSubscriber.setFirstName(dataModel.getFirstName());
+		resultSubscriber.setLastName(dataModel.getLastName());
+		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
+		resultSubscriber.setCustKobo(koboCode);
+		resultSubscriber.setRevenue3Months(ConfigConstants.ZERO);
+		resultSubscriber.setRevenu6Months(ConfigConstants.ZERO);
+		resultSubscriber.setRevenue1Year(ConfigConstants.ZERO);
+		resultSubscriber.setProductSku(basicProductModel.getProdCode());
+		
+		return resultSubscriber;
+	}
 	
 	@Step
 	public void verifyEmail(String expectedValue, String grabbedValue) {

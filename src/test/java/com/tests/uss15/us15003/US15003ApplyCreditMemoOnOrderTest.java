@@ -1,4 +1,4 @@
-package com.tests.uss15.us15002;
+package com.tests.uss15.us15003;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -22,7 +22,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US6", type = "backend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US15002CancelCreditMemoTest extends BaseTest {
+public class US15003ApplyCreditMemoOnOrderTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -33,21 +33,17 @@ public class US15002CancelCreditMemoTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		orderModel = MongoReader.grabOrderModels("US15002SubscribedCustomerBuyWithContactBoosterTest").get(0);
+		orderModel = MongoReader.grabOrderModels("US15003SubscribedStyleCoachCheckoutProcessTest").get(0);
 	}
 
 	@Test
-	public void us15002CancelCreditMemoTest() throws Exception {
+	public void us15003ApplyCreditMemoOnOrderTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnCreditMemo();
-		backEndSteps.searchCreditMemoByorderId(orderModel.getOrderId());
-		backEndSteps.openCreditMemoDetails(orderModel.getOrderId());
-		backEndSteps.cancelCreditMemo();
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
-		ordersSteps.markOrderAsPaid();
+		ordersSteps.refundOrder();
 		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
 	}
 

@@ -47,6 +47,18 @@ public class OrdersSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void cancelOrder() {
+		ordersActionsPage().cancelOrder();
+		waitABit(TimeConstants.WAIT_TIME_LONG);
+	}
+
+	@Step
+	public void uncancelOrder() {
+		ordersActionsPage().uncancelOrder();
+		waitABit(TimeConstants.WAIT_TIME_LONG);
+	}
+
+	@Step
 	public void completeOrder() {
 		ordersActionsPage().clickInvoiceButton();
 		ordersActionsPage().checkCreateShippment();
