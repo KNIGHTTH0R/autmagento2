@@ -176,7 +176,6 @@ public class PrintUtils {
 		System.out.println("------------------------");
 		System.out.println("email: " + model.getEmail());
 		System.out.println("activated at: " + model.getActivatedAt());
-		System.out.println("last party: " + model.getLastParty());
 		System.out.println("country: " + model.getCountry());
 		System.out.println("revenue 3 months: " + model.getRevenue3Months());
 		System.out.println("revenue 1 year: " + model.getRevenue1Year());
@@ -200,14 +199,26 @@ public class PrintUtils {
 		System.out.println("Flag stylist:" +model.getFlagStylist());
 		System.out.println("Flag host:" +model.getFlagHost());
 
-
-
-
-
-
-
-
-
+	}
+	public static void printCustomerSubscriberData(SubscriberModel model) {
+		System.out.println(" *** Print Subscriber configuration *** ");
+		System.out.println("------------------------");
+		System.out.println("email: " + model.getEmail());
+		System.out.println("country: " + model.getCountry());
+		System.out.println("revenue 3 months: " + model.getRevenue3Months());
+		System.out.println("revenue 1 year: " + model.getRevenue1Year());
+		System.out.println("is stylist: " + model.getIsStylist());
+		System.out.println("last Purchase: " + model.getLastPurchase());
+		System.out.println("preffered website: " + model.getPreferredWebsite());
+		System.out.println("product sku: " + model.getProductSku());
+		System.out.println("contact or user: " + model.getContactOrUser());
+		System.out.println("revenue 6 months: " + model.getRevenu6Months());
+		System.out.println("FirstName:" +model.getFirstName());
+		System.out.println("LastName:" +model.getLastName());
+		System.out.println("Customer used kobo voucher:" +model.getCustKobo());
+		System.out.println("Flag stylist:" +model.getFlagStylist());
+		System.out.println("Flag host:" +model.getFlagHost());
+		
 	}
 
 	public static void printRegularUserCartTotalsModel(RegularUserCartTotalsModel model) {

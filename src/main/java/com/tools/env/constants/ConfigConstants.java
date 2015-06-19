@@ -37,4 +37,7 @@ public class ConfigConstants {
 	public static final String USER = "user";
 	public static final String ZERO = "0";
 	
+	public static final String MAILINATOR = "@mailinator.com";
+	public static final String EVOZON = "@evozon.com";
+	
 }

@@ -80,6 +80,7 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private CustomerFormModel dataModel;
+	
 	private AddressModel addressModel;
 	private String koboCode;
 	private CreditCardModel creditCardData = new CreditCardModel();
@@ -88,6 +89,7 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
+		
 
 		genProduct1 = ApiCalls.createPomProductModel();
 		genProduct1.setPrice("89.00");

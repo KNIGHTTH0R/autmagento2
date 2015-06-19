@@ -24,6 +24,9 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "reward_points_delta")
 	private WebElement rewardPointsInput;
+	
+	@FindBy(css = "input#_accountemail")
+	private WebElement emailInput;
 
 	@FindBy(id = "customer_info_tabs_stylecoach_lead_manage")
 	private WebElement leadSettingsButton;
@@ -42,6 +45,9 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "a#customer_info_tabs_addresses")
 	private WebElement addressesTab;
+	
+	@FindBy(css = "a#customer_info_tabs_account")
+	private WebElement accountInfoTab;
 
 	@FindBy(css = "input[id*='street0'][id^='_item']")
 	private WebElement streetInput;
@@ -150,6 +156,11 @@ public class CustomerDetailsPage extends AbstractPage {
 		element(addressesTab).waitUntilVisible();
 		addressesTab.click();
 	}
+	public void clickOnAccountInfoTab() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(accountInfoTab).waitUntilVisible();
+		accountInfoTab.click();
+	}
 
 	public CoordinatesModel changeAdress(AddressModel addressModel) {
 		CoordinatesModel coordinatesModel = new CoordinatesModel();
@@ -257,6 +268,12 @@ public class CustomerDetailsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(rewardPointsInput).waitUntilVisible();
 		element(rewardPointsInput).sendKeys(value);
+	}
+	public void typeEmail(String value) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(emailInput).waitUntilVisible();
+		element(emailInput).clear();
+		element(emailInput).sendKeys(value);
 	}
 
 	public void verifySaveCustomerSuccessMessage() {

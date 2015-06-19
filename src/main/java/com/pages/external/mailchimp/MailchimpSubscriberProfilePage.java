@@ -27,10 +27,7 @@ public class MailchimpSubscriberProfilePage extends AbstractPage {
 			}
 			if (key.contains("Activated at")) {
 				model.setActivatedAt(value);
-			}
-			if (key.contains("Last party date")) {
-				model.setLastParty(value);
-			}
+			}		
 			if (key.contains("Country")) {
 				model.setCountry(value);
 			}

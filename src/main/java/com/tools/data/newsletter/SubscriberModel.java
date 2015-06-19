@@ -4,7 +4,6 @@ public class SubscriberModel {
 
 	private String email;
 	private String activatedAt;
-	private String lastParty;
 	private String country;
 	private String revenue3Months;
 	private String revenue1Year;
@@ -113,12 +112,6 @@ public class SubscriberModel {
 	}
 	public void setActivatedAt(String activatedAt) {
 		this.activatedAt = activatedAt;
-	}
-	public String getLastParty() {
-		return lastParty;
-	}
-	public void setLastParty(String lastParty) {
-		this.lastParty = lastParty;
 	}
 	public String getCountry() {
 		return country;

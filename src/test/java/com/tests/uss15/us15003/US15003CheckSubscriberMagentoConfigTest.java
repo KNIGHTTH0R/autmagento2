@@ -14,6 +14,8 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.newsletterSubscribers.NewsleterSubscribersSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
@@ -34,12 +36,13 @@ public class US15003CheckSubscriberMagentoConfigTest extends BaseTest {
 	@Steps
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public String stylistEmail;
+	CustomerFormModel dataModel;
 
 	@Before
 	public void setUp() throws Exception {
 
-		stylistEmail = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0).getEmailName();
+		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
+		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 
 	}
 
@@ -48,7 +51,7 @@ public class US15003CheckSubscriberMagentoConfigTest extends BaseTest {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.goToNewsletterSubribers();
-		newsleterSubscribersSteps.checkSubscriberDetails(stylistEmail);
+		newsleterSubscribersSteps.checkSubscriberDetails(dataModel.getEmailName());
 		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
 
 	}

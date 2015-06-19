@@ -20,6 +20,7 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.newsletter.SubscriberModel;
+import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -36,7 +37,7 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 	public MailchimpListsSteps mailchimpListsSteps;
 	@Steps
 	public MailchimpSearchSteps mailchimpSearchSteps;
-
+	@Steps
 	public MailchimpValidationWorkflows mailchimpValidationWorkflows;
 	@Steps
 	public MailchimpSubscriberProfileSteps mailchimpSubscriberProfileSteps;
@@ -57,6 +58,7 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 		product = MongoReader.grabBasicProductModel("US15002SubscribedCustomerBuyWithContactBoosterTest").get(2);
 		shippingModel = MongoReader.grabShippingModel("US15002SubscribedCustomerBuyWithContactBoosterTest").get(0);
 		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
+		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 		dateModel = MongoReader.grabStylistDateModels("US15002ConfirmCustomerTest").get(0);
 		koboCode = MongoReader.grabKoboModel("US15002KoboRegistrationNewsletterSubscribeTest");
 		MongoConnector.cleanCollection(getClass().getSimpleName());

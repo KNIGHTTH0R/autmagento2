@@ -7,6 +7,7 @@ import com.tools.data.StylistDataModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -154,6 +155,12 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().inputCity(addressModel.getHomeTown());
 		customerDetailsHomePage().selectCountryName(addressModel.getCountryName());
 		customerDetailsHomePage().inputPostCode(addressModel.getPostCode());
+		customerDetailsHomePage().saveCustomer();
+	}
+	@Step
+	public void editEmail(CustomerFormModel customerData) {
+		customerDetailsHomePage().clickOnAccountInfoTab();
+		customerDetailsHomePage().typeEmail(customerData.getEmailName().replace("@mailinator.com", "@evozon.com"));
 		customerDetailsHomePage().saveCustomer();
 	}
 

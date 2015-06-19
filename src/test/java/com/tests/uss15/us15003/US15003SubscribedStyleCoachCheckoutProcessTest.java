@@ -30,6 +30,7 @@ import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
@@ -72,6 +73,7 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	private CreditCardModel creditCardData = new CreditCardModel();
+	CustomerFormModel dataModel;
 
 	private ProductDetailedModel genProduct1;
 
@@ -88,6 +90,9 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 		InputStream input = null;
 
 		try {
+			
+//			dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
+//			dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15003.properties");
 			prop.load(input);
