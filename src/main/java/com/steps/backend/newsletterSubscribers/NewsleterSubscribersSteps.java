@@ -31,7 +31,7 @@ public class NewsleterSubscribersSteps extends AbstractSteps {
 	
 	@StepGroup
 	public void checkSubscriberDetails(String email){
-		newsletterSubscribersListPage().clickOnResetFilter();
+//		newsletterSubscribersListPage().clickOnResetFilter();
 		newsletterSubscribersListPage().inputEmailFilter(email);
 		newsletterSubscribersListPage().clickOnSearch();
 		newsletterSubscribersListPage().checkSubscriberDetails(email);

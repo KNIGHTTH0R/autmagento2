@@ -1,4 +1,4 @@
-package com.tests.uss15.us15003;
+package com.tests.uss15.us15001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import com.tools.utils.RandomAddress;
 @WithTag(name = "US14", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US15003ChangeCustomersEmailTest extends BaseTest {
+public class US15001ChangeCustomersEmailTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -45,16 +45,14 @@ public class US15003ChangeCustomersEmailTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		dataModel = new CustomerFormModel();
-
-		dataModel = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
+		dataModel = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 
 	@Test
-	public void usO15003ChangeCustomersEmailTest() {
+	public void us15001ChangeCustomersEmailTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();

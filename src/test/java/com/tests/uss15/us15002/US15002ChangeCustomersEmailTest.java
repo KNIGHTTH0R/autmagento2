@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
@@ -21,13 +20,10 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
-import com.tools.env.constants.SoapConstants;
 import com.tools.env.variables.Credentials;
-import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
 
 @WithTag(name = "US14", type = "backend")
@@ -58,7 +54,7 @@ public class US15002ChangeCustomersEmailTest extends BaseTest {
 	}
 
 	@Test
-	public void us14001ChangeCustomerAddressTest() {
+	public void us15002ChangeCustomersEmailTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();

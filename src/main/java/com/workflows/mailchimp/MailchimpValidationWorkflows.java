@@ -6,6 +6,7 @@ import com.tools.CustomVerification;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.newsletter.SubscriberModel;
@@ -130,6 +131,29 @@ public class MailchimpValidationWorkflows {
 		resultSubscriber.setRevenu6Months(ConfigConstants.ZERO);
 		resultSubscriber.setRevenue1Year(ConfigConstants.ZERO);
 		resultSubscriber.setProductSku(basicProductModel.getProdCode());
+		
+		return resultSubscriber;
+	}
+	@Step
+	public SubscriberModel populatePlaceCustomerOrderSubscriber(CustomerFormModel dataModel,DateModel dateModel,HostBasicProductModel hostbasicProductModel, ShippingModel shippingModel, String koboCode){		
+		SubscriberModel resultSubscriber = new SubscriberModel();
+		
+		resultSubscriber.setEmail(dataModel.getEmailName());
+		resultSubscriber.setActivatedAt(dateModel.getDate());
+		resultSubscriber.setIsStylist(ConfigConstants.NO);
+		resultSubscriber.setLastPurchase(dateModel.getDate());
+		resultSubscriber.setPreferredWebsite(MongoReader.getContext());
+		resultSubscriber.setContactOrUser(ConfigConstants.USER);
+		resultSubscriber.setFlagStylist(ConfigConstants.YES);
+		resultSubscriber.setFlagHost(ConfigConstants.YES);
+		resultSubscriber.setFirstName(dataModel.getFirstName());
+		resultSubscriber.setLastName(dataModel.getLastName());
+		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
+		resultSubscriber.setCustKobo(koboCode);
+		resultSubscriber.setRevenue3Months(shippingModel.getTotalAmount());
+		resultSubscriber.setRevenu6Months(shippingModel.getTotalAmount());
+		resultSubscriber.setRevenue1Year(shippingModel.getTotalAmount());
+		resultSubscriber.setProductSku(hostbasicProductModel.getProdCode());
 		
 		return resultSubscriber;
 	}

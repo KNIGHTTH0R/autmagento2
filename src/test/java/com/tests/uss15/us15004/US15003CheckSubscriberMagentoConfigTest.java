@@ -1,4 +1,4 @@
-package com.tests.uss15.us15001;
+package com.tests.uss15.us15004;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -25,7 +25,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 @WithTag(name = "US7", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US15001CheckSubscriberMagentoConfigTest extends BaseTest {
+public class US15003CheckSubscriberMagentoConfigTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -47,11 +47,13 @@ public class US15001CheckSubscriberMagentoConfigTest extends BaseTest {
 	}
 
 	@Test
-	public void us15001CheckSubscriberMagentoConfigTest() throws Exception {
+	public void us15003CheckSubscriberMagentoConfigTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.goToNewsletterSubribers();
 		newsleterSubscribersSteps.checkSubscriberDetails(dataModel.getEmailName());
 		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
+
 	}
+
 }

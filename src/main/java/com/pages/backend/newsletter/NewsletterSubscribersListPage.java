@@ -24,28 +24,17 @@ public class NewsletterSubscribersListPage extends AbstractPage {
 	@FindBy(css = "td.filter-actions > button.task")
 	private WebElement searchButton;
 
-//	public void inputEmailFilter(String emailText) {
-//		evaluateJavascript("jQuery.noConflict();");
-//		element(emailFilterInput).waitUntilVisible();
-//		emailFilterInput.clear();
-//		emailFilterInput.sendKeys(emailText);
-//
-//	}
-	
 	public void inputEmailFilter(String name) {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   " + name);
-		evaluateJavascript("jQuery.noConflict();");
 		WebElement element = getDriver().findElement(By.id("subscriberGrid_filter_email"));
 		element.clear();
-		element(element).sendKeys(name);
-		waitABit(1000);
+		element(element).typeAndEnter(name);
 	}
 
 	public void clickOnSearch() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
-		waitABit(2000);
+		waitABit(4000);
 	}
 
 	public void clickOnResetFilter() {

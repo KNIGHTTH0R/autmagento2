@@ -1,4 +1,4 @@
-package com.tests.uss15.us15001;
+package com.tests.uss15.us15004;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -15,19 +15,22 @@ import com.steps.external.mailchimp.MailchimpLoginSteps;
 import com.steps.external.mailchimp.MailchimpSearchSteps;
 import com.steps.external.mailchimp.MailchimpSubscriberProfileSteps;
 import com.tests.BaseTest;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.data.newsletter.SubscriberModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.mailchimp.MailchimpValidationWorkflows;
 
 @WithTag(name = "US13", type = "external")
 @Story(Application.Distribution.CustomerLead.class)
 @RunWith(ThucydidesRunner.class)
-public class US15001CheckMailchimpConfigTest extends BaseTest {
+public class US15003GetSubscriberRevenuesBeforeOrderTest extends BaseTest {
 
 	@Steps
 	public MailchimpLoginSteps mailchimpLoginSteps;
@@ -35,35 +38,44 @@ public class US15001CheckMailchimpConfigTest extends BaseTest {
 	public MailchimpListsSteps mailchimpListsSteps;
 	@Steps
 	public MailchimpSearchSteps mailchimpSearchSteps;
-
+	@Steps
 	public MailchimpValidationWorkflows mailchimpValidationWorkflows;
 	@Steps
 	public MailchimpSubscriberProfileSteps mailchimpSubscriberProfileSteps;
 
 	SubscriberModel grabbedSubscriberModel = new SubscriberModel();
 	SubscriberModel expectedSubscriberModel = new SubscriberModel();
+	private ShippingModel shippingModel = new ShippingModel();
+	public BasicProductModel product = new BasicProductModel();
 	CustomerFormModel dataModel;
 	DateModel dateModel;
+	String koboCode = "";
 
 	private String listName = "staging_AUT_newsletter_all_subscribers";
 
 	@Before
 	public void setUp() {
 
-		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
+		product = MongoReader.grabBasicProductModel("US15003SubscribedStyleCoachCheckoutProcessTest").get(2);
+		shippingModel = MongoReader.grabShippingModel("US15003SubscribedStyleCoachCheckoutProcessTest").get(0);
+		dataModel = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
 		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
-		dateModel = MongoReader.grabStylistDateModels("US15001ConfirmCustomerTest").get(0);
+		dateModel = MongoReader.grabStylistDateModels("US15003ConfirmCustomerTest").get(0);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+
 	}
 
 	@Test
-	public void us15001CheckMailchimpConfigTest() {
+	public void US15003GetSubscriberRevenuesBeforeOrderTest() {
 
 		mailchimpLoginSteps.loginOnMailchimp(Credentials.MAILCHIMP_USERNAME, Credentials.MAILCHIMP_PASSWORD);
 		mailchimpListsSteps.goToDesiredList(listName);
 		mailchimpSearchSteps.searchForSubscriber(dataModel.getEmailName());
 		grabbedSubscriberModel = mailchimpSubscriberProfileSteps.grabSubribersData();
-		expectedSubscriberModel = mailchimpValidationWorkflows.populateSubsriberModelFromExistingData(dataModel, dateModel);
-		mailchimpValidationWorkflows.validateNewContactSubscriberMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
+		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewStyleCoachFromExistingDataWithZeroRevenue(dataModel, dateModel, product, shippingModel, koboCode);
+		System.out.println("---------------");
+		PrintUtils.printSubscriberData(expectedSubscriberModel);
+		mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
+
 	}
 }

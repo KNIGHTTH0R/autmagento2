@@ -54,6 +54,15 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	@Step
+	@Title("Go to Order for customer page")
+	public void goToOrderForCustomerPage() {
+		headerPage().clickLounge();
+		loungePage().clickOrderForCustomer();
+		waitABit(1000);
+
+	}
+
+	@Step
 	@Title("Go to my business page")
 	public void goToMyBusinessPage() {
 		headerPage().clickLounge();
