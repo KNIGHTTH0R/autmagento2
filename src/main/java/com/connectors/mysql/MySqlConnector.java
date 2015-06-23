@@ -7,6 +7,9 @@ public class MySqlConnector {
 
 	public static void main(String[] args) {
 
+		//server authentication
+		//pippajean / pass: sn0wMob1l
+		
 		String url = "jdbc:mysql://phpmyadmin.pippajean.com/index.php?pippajean_staging";
 		String driver = "com.mysql.jdbc.Driver";
 		String userName = "pippajeanstaging";

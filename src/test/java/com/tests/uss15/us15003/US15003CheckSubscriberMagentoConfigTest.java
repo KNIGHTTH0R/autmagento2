@@ -22,7 +22,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US7", type = "backend")
+@WithTag(name = "US15", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003CheckSubscriberMagentoConfigTest extends BaseTest {

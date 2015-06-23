@@ -63,14 +63,7 @@ public class US15002CheckRevenuesZeroInMailchimpConfigTest extends BaseTest {
 		dateModel = MongoReader.grabStylistDateModels("US15002ConfirmCustomerTest").get(0);
 		koboCode = MongoReader.grabKoboModel("US15002KoboRegistrationNewsletterSubscribeTest");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-		System.out.println(product.getProdCode());
-		System.out.println(shippingModel.getTotalAmount());
-		System.out.println(dataModel.getFirstName());
-		System.out.println(dataModel.getLastName());
-		System.out.println(dataModel.getEmailName());
-		System.out.println(dateModel.getDate());
-		System.out.println(koboCode);
-		System.out.println(MongoReader.getContext());
+	
 	}
 
 	@Test
@@ -85,7 +78,7 @@ public class US15002CheckRevenuesZeroInMailchimpConfigTest extends BaseTest {
 
 		 System.out.println("---------------");
 		 PrintUtils.printCustomerSubscriberData(expectedSubscriberModel);
-		// mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel,
-		// expectedSubscriberModel);
+		 mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel,
+		 expectedSubscriberModel);
 	}
 }

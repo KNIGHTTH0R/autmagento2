@@ -7,6 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.tests.uss15.us15002.US15002ApplyCreditMemoOnOrderTest;
 import com.tests.uss15.us15002.US15002CancelCreditMemoTest;
 import com.tests.uss15.us15002.US15002CancelOrderTest;
+import com.tests.uss15.us15002.US15002ChangeCustomersEmailTest;
 import com.tests.uss15.us15002.US15002CheckMailchimpConfigTest;
 import com.tests.uss15.us15002.US15002CheckRevenuesZeroInMailchimpConfigTest;
 import com.tests.uss15.us15002.US15002CheckSubscriberMagentoConfigTest;
@@ -19,8 +20,9 @@ import com.tests.uss15.us15002.US15002UncancelOrderTest;
 	
 	US15002KoboRegistrationNewsletterSubscribeTest.class,
 	US15002ConfirmCustomerTest.class,
-	US15002CheckSubscriberMagentoConfigTest.class,
+	US15002ChangeCustomersEmailTest.class,
 	US15002SubscribedCustomerBuyWithContactBoosterTest.class,
+	US15002CheckSubscriberMagentoConfigTest.class,	
 	US15002CheckRevenuesZeroInMailchimpConfigTest.class,
 	US15002CancelOrderTest.class,
 	US15002CheckRevenuesZeroInMailchimpConfigTest.class,

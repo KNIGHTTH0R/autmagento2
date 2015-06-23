@@ -45,7 +45,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8", type = "frontend")
+@WithTag(name = "US15", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest {
@@ -173,7 +173,11 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.payWithBankTransfer();
+		if (MongoReader.getContext().contentEquals("de")) {
+			paymentSteps.payWithBankTransfer();
+		} else {
+			paymentSteps.payWithBankTransferEs();
+		}
 
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();

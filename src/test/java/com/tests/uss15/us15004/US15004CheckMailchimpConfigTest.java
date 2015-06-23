@@ -26,13 +26,14 @@ import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.newsletter.SubscriberModel;
+import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.mailchimp.MailchimpValidationWorkflows;
 
-@WithTag(name = "US13", type = "external")
+@WithTag(name = "US15", type = "external")
 @Story(Application.Distribution.CustomerLead.class)
 @RunWith(ThucydidesRunner.class)
 public class US15004CheckMailchimpConfigTest extends BaseTest {
@@ -61,9 +62,11 @@ public class US15004CheckMailchimpConfigTest extends BaseTest {
 	@Before
 	public void setUp() {
 
+		dataModel = MongoReader.grabCustomerFormModels("US15004OrderForCustomerTest").get(0);
+		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 		product = MongoReader.grabHostBasicProductModel("US15004OrderForCustomerTest").get(2);
 		shippingModel = MongoReader.grabShippingModel("US15004OrderForCustomerTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US15004OrderForCustomerTest").get(0);
+		dateModel = MongoReader.grabStylistDateModels("US15004ConfirmCustomerTest").get(0);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		Properties prop = new Properties();
@@ -73,10 +76,6 @@ public class US15004CheckMailchimpConfigTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15004.properties");
 			prop.load(input);
-
-			dataModel.setFirstName(prop.getProperty("customerFirstName"));
-			dataModel.setLastName(prop.getProperty("customerLastName"));
-			dataModel.setEmailName(prop.getProperty("customerUsername"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

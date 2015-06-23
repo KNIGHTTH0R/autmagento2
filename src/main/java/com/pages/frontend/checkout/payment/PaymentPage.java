@@ -16,12 +16,18 @@ public class PaymentPage extends AbstractPage {
 
 	@FindBy(css = "input.imgB.pmB.pmBcard")
 	private WebElement creditCardContainer;
-
+	
 	@FindBy(css = "#paymentMethods li input.imgB.pmB.pmBbankTransfer_DE")
 	private WebElement bankTransfer;
+	
+	@FindBy(css = "#paymentMethods li input.imgB.pmB.pmBbankTransfer_IBAN")
+	private WebElement bankTransferEs;
 
 	@FindBy(css = "input.paySubmit.paySubmitbankTransfer_DE")
 	private WebElement confirmPayBankTransfer;
+	
+	@FindBy(css = "input.paySubmit.paySubmitbankTransfer_IBAN")
+	private WebElement confirmPayBankTransferEs;
 
 	public void expandCreditCardForm() {
 		element(creditCardContainer).waitUntilVisible();
@@ -32,10 +38,19 @@ public class PaymentPage extends AbstractPage {
 		element(bankTransfer).waitUntilVisible();
 		bankTransfer.click();
 	}
+	public void expandBankTransferFormEs() {
+		element(bankTransferEs).waitUntilVisible();
+		bankTransferEs.click();
+	}
 
 	public void confirmPayBankTransfer() {
 		element(confirmPayBankTransfer).waitUntilVisible();
 		confirmPayBankTransfer.click();
+	}
+	
+	public void confirmPayBankTransferEs() {
+		element(confirmPayBankTransferEs).waitUntilVisible();
+		confirmPayBankTransferEs.click();
 	}
 
 }

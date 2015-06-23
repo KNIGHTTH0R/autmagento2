@@ -29,7 +29,6 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.CartCalculator;
@@ -42,7 +41,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 
-@WithTag(name = "US3", type = "frontend")
+@WithTag(name = "US15", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
@@ -72,7 +71,6 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 	private static String marketingDiscount;
 	private static String shippingValue;
 	private static String taxClass;
-	private CreditCardModel creditCardData = new CreditCardModel();
 	CustomerFormModel dataModel;
 
 	private ProductDetailedModel genProduct1;
@@ -90,9 +88,11 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 		InputStream input = null;
 
 		try {
-			
-//			dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
-//			dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
+
+			// dataModel =
+			// MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
+			// dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR,
+			// ConfigConstants.EVOZON));
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15003.properties");
 			prop.load(input);
@@ -144,8 +144,11 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+		if (MongoReader.getContext().contentEquals("de")) {
+			paymentSteps.payWithBankTransfer();
+		} else {
+			paymentSteps.payWithBankTransferEs();
+		}
 
 		confirmationSteps.agreeAndCheckout();
 

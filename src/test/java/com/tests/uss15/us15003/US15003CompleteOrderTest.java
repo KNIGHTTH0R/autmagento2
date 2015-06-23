@@ -19,7 +19,7 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "backend")
+@WithTag(name = "US15", type = "backend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003CompleteOrderTest extends BaseTest {

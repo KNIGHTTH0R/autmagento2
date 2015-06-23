@@ -1,4 +1,4 @@
-package com.tests.uss15.us15001;
+package com.tests.uss15.us15004;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -25,7 +25,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US15", type = "external")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US15001ConfirmCustomerTest extends BaseTest {
+public class US15004ConfirmCustomerTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -38,13 +38,13 @@ public class US15001ConfirmCustomerTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		dateModel = new DateModel();
-		stylistEmail = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").get(0).getEmailName();
+		stylistEmail = MongoReader.grabCustomerFormModels("US15004OrderForCustomerTest").get(0).getEmailName();
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us15001ConfirmCustomerTest() throws Exception {
+	public void us15004ConfirmCustomerTest() throws Exception {
 
 		emailClientSteps.openMailinator();
 		dateModel.setDate(emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.NEWSLETTER_MAIL_SUBJECT));
@@ -54,6 +54,7 @@ public class US15001ConfirmCustomerTest extends BaseTest {
 
 	@After
 	public void saveData() {
+
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
 	}
 

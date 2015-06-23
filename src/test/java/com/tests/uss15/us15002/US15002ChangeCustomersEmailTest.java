@@ -26,7 +26,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.RandomAddress;
 
-@WithTag(name = "US14", type = "backend")
+@WithTag(name = "US15", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US15002ChangeCustomersEmailTest extends BaseTest {

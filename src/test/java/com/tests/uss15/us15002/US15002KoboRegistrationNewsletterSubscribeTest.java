@@ -47,7 +47,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 
-@WithTag(name = "US7", type = "frontend")
+@WithTag(name = "US15", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
 public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
@@ -80,7 +80,7 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private CustomerFormModel dataModel;
-	
+
 	private AddressModel addressModel;
 	private String koboCode;
 	private CreditCardModel creditCardData = new CreditCardModel();
@@ -89,7 +89,6 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
-		
 
 		genProduct1 = ApiCalls.createPomProductModel();
 		genProduct1.setPrice("89.00");
@@ -116,10 +115,10 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 				}
 			}
 		}
-	
+
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -155,7 +154,7 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 		MongoWriter.saveKoboCode(koboCode, getClass().getSimpleName());
-		
+
 	}
 
 }

@@ -38,6 +38,14 @@ public class LoungePage extends AbstractPage {
 
 	@FindBy(css = "li.error-msg ul li span")
 	private WebElement errorMessageContainer;
+	
+	@FindBy(id = "addContact")
+	private WebElement addContact;
+	
+	public void clickAddContact() {
+		element(addContact).waitUntilVisible();
+		addContact.click();
+	}
 
 	public void typeContactName(String name) {
 		element(contactInput).waitUntilVisible();
@@ -79,5 +87,7 @@ public class LoungePage extends AbstractPage {
 		startOrderForCustomerLink.click();
 
 	}
+	
+
 
 }

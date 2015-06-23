@@ -40,4 +40,12 @@ public class PaymentSteps extends AbstractSteps {
 		waitABit(2000);
 	}
 
+	@Step
+	@Title("Pay With Bank transfer for Es website")
+	public void payWithBankTransferEs() {
+		paymentPage().expandBankTransferFormEs();
+		paymentPage().confirmPayBankTransferEs();
+		waitABit(2000);
+	}
+
 }

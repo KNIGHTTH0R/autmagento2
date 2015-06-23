@@ -23,7 +23,7 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "frontend")
+@WithTag(name = "US15", type = "frontend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003StyleCoachRegistrationTest extends BaseTest {

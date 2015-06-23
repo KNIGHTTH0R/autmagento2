@@ -19,36 +19,33 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "backend")
+@WithTag(name = "US15", type = "backend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US15003CancelCreditMemoTest extends BaseTest {
+public class US15004CancelOrderTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
-	private OrderModel orderModel;
+	private static OrderModel orderModel = new OrderModel();
 
 	@Before
 	public void setUp() throws Exception {
 
-		orderModel = MongoReader.grabOrderModels("US15003SubscribedStyleCoachCheckoutProcessTest").get(0);
+		orderModel = MongoReader.grabOrderModels("US15004OrderForCustomerTest").get(0);
+		System.out.println(orderModel.getOrderId());
 	}
 
 	@Test
-	public void us15003CancelCreditMemoTest() throws Exception {
+	public void us15004CancelOrderTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnCreditMemo();
-		backEndSteps.searchCreditMemoByorderId(orderModel.getOrderId());
-		backEndSteps.openCreditMemoDetails(orderModel.getOrderId());
-		backEndSteps.cancelCreditMemo();
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
-		ordersSteps.markOrderAsPaid();
+		ordersSteps.cancelOrder();
 		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
-	}
 
+	}
 }

@@ -28,16 +28,14 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
+import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
-import com.tools.data.UrlModel;
-import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.env.variables.UrlConstants;
@@ -49,7 +47,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US11", type = "frontend")
+@WithTag(name = "US15", type = "frontend")
 @Story(Application.Shop.RegularCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US15004OrderForCustomerTest extends BaseTest {
@@ -62,6 +60,8 @@ public class US15004OrderForCustomerTest extends BaseTest {
 	public LoungeSteps loungeSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
+	@Steps
+	public CreateNewContactSteps createNewContactSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
@@ -81,16 +81,14 @@ public class US15004OrderForCustomerTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	private String username, password, customerName;
+	private String username, password;
 	private String discountClass;
-	private String billingAddress;
 	private String shippingValue;
 	private String voucherValue;
 
-	private CreditCardModel creditCardData = new CreditCardModel();
 	private DateModel dateModel = new DateModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-	public static UrlModel urlModel = new UrlModel();
+	private CustomerFormModel customerData;
+	private AddressModel addressData;
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -99,6 +97,9 @@ public class US15004OrderForCustomerTest extends BaseTest {
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
+
+		customerData = new CustomerFormModel();
+		addressData = new AddressModel();
 
 		genProduct1 = ApiCalls.createProductModel();
 		genProduct1.setPrice("89.00");
@@ -123,10 +124,8 @@ public class US15004OrderForCustomerTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			customerName = prop.getProperty("customerName");
 
 			discountClass = prop.getProperty("discountClass");
-			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 			voucherValue = prop.getProperty("voucherValue");
 
@@ -142,8 +141,8 @@ public class US15004OrderForCustomerTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName());
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 
@@ -154,8 +153,8 @@ public class US15004OrderForCustomerTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.clickOrderForCustomer();
-		loungeSteps.selectCustomerToOrderFor(customerName);
+		loungeSteps.orderForNewCustomer();
+		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;
 
@@ -169,47 +168,32 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		orderForCustomerCartSteps.grabProductsData();
-		orderForCustomerCartSteps.grabTotals();
 		HostCartCalculator.calculateCartBuy3Get1OrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
 
 		orderForCustomerCartSteps.clickGoToShipping();
+		shippingPartySectionSteps.clickPartyNoOption();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
-
-		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
-		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 
 		shippingSteps.clickGoToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
-		DataGrabber.urlModel.setName("Payment URL");
-		DataGrabber.urlModel.setUrl(url);
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
-		confirmationSteps.grabHostProductsList();
-
-		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-
-		confirmationSteps.grabBillingData();
-		confirmationSteps.grabSippingData();
+		if (MongoReader.getContext().contentEquals("de")) {
+			paymentSteps.payWithBankTransfer();
+		} else {
+			paymentSteps.payWithBankTransferEs();
+		}
 
 		confirmationSteps.agreeAndCheckout();
-
-		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		hostCartValidationWorkflows.performCartValidationsWithBuy3Get1();
-
 		dateModel.setDate(DateUtils.getCurrentDate("MM/dd/YYYY"));
 		customVerifications.printErrors();
-
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName());
+		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName());
 		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
 		MongoWriter.saveUrlModel(HostDataGrabber.urlModel, getClass().getSimpleName());

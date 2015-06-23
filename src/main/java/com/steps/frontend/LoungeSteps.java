@@ -28,5 +28,11 @@ public class LoungeSteps extends AbstractSteps {
 		loungePage().typeContactName(name);
 		loungePage().startOrderForCustomer();
 	}
+	
+	@Step
+	public void orderForNewCustomer(){
+		loungePage().clickOrderForCustomer();
+		loungePage().clickAddContact();
+	}
 
 }

@@ -22,10 +22,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US7", type = "backend")
+@WithTag(name = "US15", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US15003CheckSubscriberMagentoConfigTest extends BaseTest {
+public class US15004CheckSubscriberMagentoConfigTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -41,13 +41,13 @@ public class US15003CheckSubscriberMagentoConfigTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
+		dataModel = MongoReader.grabCustomerFormModels("US15004OrderForCustomerTest").get(0);
 		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 
 	}
 
 	@Test
-	public void us15003CheckSubscriberMagentoConfigTest() throws Exception {
+	public void us15004CheckSubscriberMagentoConfigTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.goToNewsletterSubribers();

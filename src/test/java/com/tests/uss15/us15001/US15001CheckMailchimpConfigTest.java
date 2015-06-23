@@ -24,7 +24,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.mailchimp.MailchimpValidationWorkflows;
 
-@WithTag(name = "US13", type = "external")
+@WithTag(name = "US15", type = "external")
 @Story(Application.Distribution.CustomerLead.class)
 @RunWith(ThucydidesRunner.class)
 public class US15001CheckMailchimpConfigTest extends BaseTest {
@@ -35,7 +35,7 @@ public class US15001CheckMailchimpConfigTest extends BaseTest {
 	public MailchimpListsSteps mailchimpListsSteps;
 	@Steps
 	public MailchimpSearchSteps mailchimpSearchSteps;
-
+	@Steps
 	public MailchimpValidationWorkflows mailchimpValidationWorkflows;
 	@Steps
 	public MailchimpSubscriberProfileSteps mailchimpSubscriberProfileSteps;
@@ -50,7 +50,7 @@ public class US15001CheckMailchimpConfigTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
+		dataModel = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").get(0);
 		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 		dateModel = MongoReader.grabStylistDateModels("US15001ConfirmCustomerTest").get(0);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
