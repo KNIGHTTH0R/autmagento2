@@ -14,6 +14,7 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.variables.ContextConstants;
 import com.tools.geolocation.AddressConverter;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.FormatterUtils;
 
@@ -42,6 +43,30 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		clickOnNachahmePaymentMethod();
 		submitPaymentMethod();
 		finishPayment();
+
+		String date = FormatterUtils.getAndFormatCurrentDate();
+		return date;
+	}
+
+	@StepGroup
+	@Title("Fill create customer form and pay with visa")
+	public String fillCreateCustomerFormPayWithVisa(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetails(addressData);
+		checkNoCoachCheckbox();
+		checkIAgree();
+		submitStep();
+		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		submitStep();
+		selectStarterKit();
+		submitStep();
+		payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -214,6 +239,24 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	@Step
 	public void clickOnNachahmePaymentMethod() {
 		stylistRegistrationPage().clickOnNachahmePaymentMethod();
+	}
+
+	@Step
+	public void payWithCreditCard() {
+		if (MongoReader.getContext().contentEquals("es")) {
+			stylistRegistrationPage().expandCreditCardForm();
+			stylistRegistrationPage().selectCardTypeEs("Visa/Electron");
+		} else {
+			stylistRegistrationPage().selectCardType("Visa/Electron");
+		}
+		stylistRegistrationPage().inputCardNumber("4548812049400004");
+		stylistRegistrationPage().inputCardExpiryMonth("11");
+		stylistRegistrationPage().inputCardExpiryYear("2015");
+		stylistRegistrationPage().submitCreditCard();
+		stylistRegistrationPage().inputCardCvv("285");
+		stylistRegistrationPage().submitPaymentMethod();
+		stylistRegistrationPage().inputCardPin("123456");
+		stylistRegistrationPage().submitVisaFinalStep();
 	}
 
 	@Step

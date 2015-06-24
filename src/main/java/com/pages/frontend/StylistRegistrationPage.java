@@ -14,6 +14,9 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class StylistRegistrationPage extends AbstractPage {
+	
+	@FindBy(id = "toggle_cctab")
+	private WebElement expandCredtCardButton;
 
 	@FindBy(id = "firstname")
 	private WebElement firstnameInput;
@@ -63,8 +66,9 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(id = "by_default")
 	private WebElement noInviteCheckbox;
 
-//	@FindBy(css = "button[title*='Senden']")
-	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")     //int
+	// @FindBy(css = "button[title*='Senden']")
+	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")
+	// int
 	private WebElement completeButton;
 
 	@FindBy(id = "submit-step")
@@ -73,12 +77,15 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(id = "submit_prepaid")
 	private WebElement weiter;
 
+	@FindBy(css = "input#submit_cc")
+	private WebElement submitCC;
+
 	@FindBy(id = "toggle_cctab")
 	private WebElement hinzufugen;
 
 	@FindBy(id = "placeYourOrder_bottom")
 	private WebElement submitPaymentMethod;
-	
+
 	@FindBy(id = "continueShopping_top")
 	private WebElement finishPayment;
 
@@ -109,14 +116,37 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	@FindBy(id = "stylistref")
 	private WebElement stylistref;
-	
+
 	@FindBy(id = "fancybox-outer")
 	private WebElement infoBox;
-	
+
 	@FindBy(id = "fancybox-close")
 	private WebElement closeInfoBox;
 
 	// ---------------------------------------------------
+
+	@FindBy(css = "select#addCreditCardIssuer")
+	private WebElement cartTypeSelect;
+
+	@FindBy(id = "addCreditCardNumber")
+	private WebElement creditCardNumberInput;
+
+	@FindBy(css = "select#addCreditCardMonth")
+	private WebElement creditCardMonthInput;
+
+	@FindBy(css = "select#addCreditCardYear")
+	private WebElement creditCardYearInput;
+
+	@FindBy(css = "input#addCreditCardCVV")
+	private WebElement creditCardCVVInput;
+
+	@FindBy(css = "input[name='pin']")
+	private WebElement pinInput;
+	
+	@FindBy(css = "a[href='javascript:submiteCip()']")
+	private WebElement submitFinalVisaStep;
+
+	// ----------------------------------------------------
 
 	public void inputFirstName(String firstName) {
 		element(firstnameInput).waitUntilVisible();
@@ -146,12 +176,56 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void inputStylistRef(String ref) {
 		element(stylistref).waitUntilVisible();
-		// stylistref.clear();
 		element(stylistref).typeAndEnter(ref);
 	}
 
 	public void inputStylistEmail(String stylistEmail) {
 		invitationEmailInput.sendKeys(stylistEmail);
+	}
+
+	public void selectCardType(String cardType) {
+		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
+		element(cartTypeSelect).waitUntilVisible();
+		element(cartTypeSelect).selectByVisibleText(cardType);
+	}
+	public void selectCardTypeEs(String cardType) {
+		element(cartTypeSelect).waitUntilVisible();
+		element(cartTypeSelect).selectByVisibleText(cardType);
+	}
+
+	public void inputCardCvv(String cvv) {
+		element(creditCardCVVInput).waitUntilVisible();
+		element(creditCardCVVInput).sendKeys(cvv);
+	}
+	public void inputCardPin(String pin) {
+		element(pinInput).waitUntilVisible();
+		element(pinInput).sendKeys(pin);
+	}
+
+	public void inputCardNumber(String cardNumber) {
+		element(creditCardNumberInput).waitUntilVisible();
+		element(creditCardNumberInput).sendKeys(cardNumber);
+	}
+
+	public void inputCardExpiryMonth(String month) {
+		element(creditCardMonthInput).waitUntilVisible();
+		element(creditCardMonthInput).selectByValue(month);
+	}
+
+	public void inputCardExpiryYear(String year) {
+		element(creditCardYearInput).waitUntilVisible();
+		element(creditCardYearInput).selectByValue(year);
+		waitABit(2000);
+	}
+
+	public void submitCreditCard() {
+		element(submitCC).waitUntilVisible();
+		submitCC.click();
+	}
+	
+	public void submitVisaFinalStep() {
+		element(submitFinalVisaStep).waitUntilVisible();
+		submitFinalVisaStep.click();
 	}
 
 	public void checkParties() {
@@ -181,11 +255,17 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void clickDob() {
 		dob.click();
 	}
-	
+
 	public void closeInfoBox() {
 		closeInfoBox.click();
 	}
 
+	public void expandCreditCardForm() {
+		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
+		element(expandCredtCardButton).waitUntilVisible();
+		expandCredtCardButton.click();
+	}
+	
 	public void clickOnNachahmePaymentMethod() {
 		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
 		element(weiter).waitUntilVisible();
@@ -232,7 +312,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void submitPaymentMethod() {
 		submitPaymentMethod.click();
 	}
-	
+
 	public void finishPayment() {
 		finishPayment.click();
 	}
@@ -277,8 +357,8 @@ public class StylistRegistrationPage extends AbstractPage {
 	public String getStylistRegisterPageTitle() {
 		return stylistRegisterPageTitleContainer.getText();
 	}
-	
-	public void validateInfoBoxMessage(){
+
+	public void validateInfoBoxMessage() {
 		element(infoBox).waitUntilVisible();
 		Assert.assertTrue("The message from infobox is not the expected one!!", infoBox.getText().contains(ContextConstants.CHANGE_WEBSITE_POPUP_MESSAGE));
 	}

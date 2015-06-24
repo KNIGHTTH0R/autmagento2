@@ -89,10 +89,8 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 
 		try {
 
-			// dataModel =
-			// MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
-			// dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR,
-			// ConfigConstants.EVOZON));
+			dataModel = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
+			dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15003.properties");
 			prop.load(input);
@@ -119,7 +117,7 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 
 	@Test
 	public void us15003SubscribedStyleCoachCheckoutProcessTest() {
-		customerRegistrationSteps.performLogin("JfyNRS1JnMlP@mailinator.com", "qwe123");
+		customerRegistrationSteps.performLogin(dataModel.getEmailName(), dataModel.getPassword());
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}

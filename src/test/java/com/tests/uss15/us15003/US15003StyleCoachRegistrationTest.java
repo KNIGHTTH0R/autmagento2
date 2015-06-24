@@ -55,7 +55,7 @@ public class US15003StyleCoachRegistrationTest extends BaseTest {
 	@Test
 	public void us15003StyleCoachRegistrationTest() {
 		headerSteps.navigateToRegisterForm();
-		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
+		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerFormPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 		customVerification.printErrors();
 
@@ -65,6 +65,5 @@ public class US15003StyleCoachRegistrationTest extends BaseTest {
 	public void saveData() {
 
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
-
 	}
 }

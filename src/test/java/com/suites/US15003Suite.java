@@ -12,6 +12,7 @@ import com.tests.uss15.us15003.US15003CheckMailchimpConfigTest;
 import com.tests.uss15.us15003.US15003CheckRevenuesZeroInMailchimpConfigTest;
 import com.tests.uss15.us15003.US15003CheckSubscriberMagentoConfigTest;
 import com.tests.uss15.us15003.US15003ConfirmCustomerTest;
+import com.tests.uss15.us15003.US15003MarkStarterKitOrderAsPaidTest;
 import com.tests.uss15.us15003.US15003StyleCoachRegistrationTest;
 import com.tests.uss15.us15003.US15003SubscribedStyleCoachCheckoutProcessTest;
 import com.tests.uss15.us15003.US15003UncancelOrderTest;
@@ -21,6 +22,7 @@ import com.tests.uss15.us15003.US15003UncancelOrderTest;
 	US15003StyleCoachRegistrationTest.class,
 	US15003ConfirmCustomerTest.class,
 	US15003ChangeCustomersEmailTest.class,
+	US15003MarkStarterKitOrderAsPaidTest.class,
 	US15003SubscribedStyleCoachCheckoutProcessTest.class,
 	US15003CheckSubscriberMagentoConfigTest.class,
 	US15003CheckRevenuesZeroInMailchimpConfigTest.class,
