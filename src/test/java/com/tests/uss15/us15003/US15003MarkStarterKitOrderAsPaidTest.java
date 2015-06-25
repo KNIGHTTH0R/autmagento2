@@ -37,7 +37,7 @@ public class US15003MarkStarterKitOrderAsPaidTest extends BaseTest {
 	}
 
 	@Test
-	public void us6001CheckStylistActivationTest() {
+	public void us15003MarkStarterKitOrderAsPaidTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 

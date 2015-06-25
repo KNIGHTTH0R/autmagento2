@@ -48,7 +48,7 @@ public class US15003CheckMailchimpConfigTest extends BaseTest {
 	public BasicProductModel product = new BasicProductModel();
 	CustomerFormModel dataModel;
 	DateModel dateModel;
-	String koboCode = "";
+	String koboCode;
 
 	private String listName = "staging_AUT_newsletter_all_subscribers";
 
@@ -60,6 +60,7 @@ public class US15003CheckMailchimpConfigTest extends BaseTest {
 		dataModel = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
 		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 		dateModel = MongoReader.grabStylistDateModels("US15003ConfirmCustomerTest").get(0);
+		koboCode = MongoReader.grabKoboModel("US15003SubscribedStyleCoachCheckoutProcessTest");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -70,7 +71,7 @@ public class US15003CheckMailchimpConfigTest extends BaseTest {
 		mailchimpListsSteps.goToDesiredList(listName);
 		mailchimpSearchSteps.searchForSubscriber(dataModel.getEmailName());
 		grabbedSubscriberModel = mailchimpSubscriberProfileSteps.grabSubribersData();
-		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewCustomerWithKoboFromExistingData(dataModel, dateModel, product, shippingModel, koboCode);
-		mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
+		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewStyleCoachFromExistingData(dataModel, dateModel, product, shippingModel, koboCode);
+		mailchimpValidationWorkflows.validateNewScKoboSubscriptionAndShopForMyselfMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
 	}
 }

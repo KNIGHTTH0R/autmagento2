@@ -46,5 +46,4 @@ public class US15002ApplyCreditMemoOnOrderTest extends BaseTest {
 		ordersSteps.refundOrder();
 		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
 	}
-
 }

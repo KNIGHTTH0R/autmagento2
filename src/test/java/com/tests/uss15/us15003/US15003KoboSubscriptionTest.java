@@ -1,4 +1,4 @@
-package com.tests.uss12;
+package com.tests.uss15.us15003;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -23,20 +23,20 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.kobo.ContactBoosterCartSteps;
 import com.steps.frontend.checkout.shipping.kobo.KoboShippingSteps;
 import com.tests.BaseTest;
-import com.tools.SoapKeys;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 
-@WithTag(name = "US12", type = "frontend")
+@WithTag(name = "US15", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US12001KoboSubscriptionTest extends BaseTest {
+public class US15003KoboSubscriptionTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -68,17 +68,20 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 
 		DataGrabber.wipe();
 
-		int size = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").size();
 		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").get(0);
+			stylistRegistrationData = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
+			stylistRegistrationData.setEmailName(stylistRegistrationData.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
+			System.out.println(stylistRegistrationData.getEmailName());
+			
 		} else
 			System.out.println("The database has no entries");
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us12001KoboSubscriptionTest() {
+	public void us15003KoboSubscriptionTest() {
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -104,8 +107,7 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-
+		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());
 	}
 
 }

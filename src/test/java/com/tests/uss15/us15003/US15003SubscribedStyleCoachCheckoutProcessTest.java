@@ -22,6 +22,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
+import com.steps.frontend.MyBusinessSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -63,6 +64,8 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
+	public MyBusinessSteps myBusinessSteps;
+	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
@@ -72,6 +75,7 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	CustomerFormModel dataModel;
+	String coboCode;
 
 	private ProductDetailedModel genProduct1;
 
@@ -122,6 +126,7 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		coboCode = myBusinessSteps.getKoboCode();
 		homeSteps.clickonGeneralView();
 		customerRegistrationSteps.wipeCart();
 		BasicProductModel productData;
@@ -156,6 +161,7 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 
 	@After
 	public void saveData() {
+		MongoWriter.saveKoboCode(coboCode, getClass().getSimpleName());
 		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());
 		for (BasicProductModel product : CartCalculator.allProductsListRecalculated) {

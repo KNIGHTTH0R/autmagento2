@@ -84,7 +84,7 @@ public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTe
 	public void us7006UserRegistrationSpecificStylistLandingPageTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
-		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN);
+		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN,addressModel);
 		customerRegistrationSteps.submitStylistSelection();
 		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
 		

@@ -73,6 +73,26 @@ public class MailchimpValidationWorkflows {
 //		
 	}
 	@Step
+	public void validateNewScKoboSubscriptionAndShopForMyselfMailchimpProperties(SubscriberModel grabbedModel, SubscriberModel expectedModel) {
+		verifyEmail(grabbedModel.getEmail(),expectedModel.getEmail());
+//		verifyActivatedAt(grabbedModel.getActivatedAt(),expectedModel.getActivatedAt());
+//		verifyIsStylist(grabbedModel.getIsStylist(),expectedModel.getIsStylist());
+//		verifyLastDatePurchase(grabbedModel.getLastPurchase(), expectedModel.getLastPurchase());
+//		verifyPreferredWebsite(grabbedModel.getPreferredWebsite(),expectedModel.getPreferredWebsite());
+//		verifyContactOrUser(grabbedModel.getContactOrUser(),expectedModel.getContactOrUser());
+//		verifyStylistFlag(grabbedModel.getFlagStylist(),expectedModel.getFlagStylist());
+//		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
+//		verifyKoboCode(grabbedModel.getKoboCode(),expectedModel.getKoboCode());
+//		verifyFirstName(grabbedModel.getFirstName(), expectedModel.getFirstName());
+//		verifyLastName(grabbedModel.getLastName(), expectedModel.getLastName());
+//		verifyCountry(grabbedModel.getCountry(),expectedModel.getCountry());
+//		verifyRevenue3Months(grabbedModel.getRevenue3Months(), expectedModel.getRevenue3Months());
+//		verifyRevenue6Months(grabbedModel.getRevenu6Months(),expectedModel.getRevenu6Months());
+//		verifyRevenue1Year(grabbedModel.getRevenue1Year(),expectedModel.getRevenue1Year());
+//		verifyProductSKU(grabbedModel.getProductSku(),expectedModel.getProductSku());
+//		
+	}
+	@Step
 	public void validateNewCustomerOrderWithKoboMailchimpPropertiesZeroRevenue(SubscriberModel grabbedModel, SubscriberModel expectedModel) {
 		verifyEmail(grabbedModel.getEmail(),expectedModel.getEmail());
 //		verifyActivatedAt(grabbedModel.getActivatedAt(),expectedModel.getActivatedAt());
@@ -178,7 +198,7 @@ public class MailchimpValidationWorkflows {
 		return resultSubscriber;
 	}
 	@Step
-	public SubscriberModel populateNewStyleCoachFromExistingDataWithZeroRevenue(CustomerFormModel dataModel,DateModel dateModel,BasicProductModel basicProductModel, ShippingModel shippingModel, String koboCode){		
+	public SubscriberModel populateNewStyleCoachFromExistingDataWithZeroRevenue(CustomerFormModel dataModel,DateModel dateModel,BasicProductModel basicProductModel, ShippingModel shippingModel, String subscriptionKoboCode){		
 		SubscriberModel resultSubscriber = new SubscriberModel();
 		
 		resultSubscriber.setEmail(dataModel.getEmailName());
@@ -192,10 +212,33 @@ public class MailchimpValidationWorkflows {
 		resultSubscriber.setFirstName(dataModel.getFirstName());
 		resultSubscriber.setLastName(dataModel.getLastName());
 		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
-		resultSubscriber.setCustKobo(koboCode);
+		resultSubscriber.setKoboCode(subscriptionKoboCode);
 		resultSubscriber.setRevenue3Months(ConfigConstants.ZERO);
 		resultSubscriber.setRevenu6Months(ConfigConstants.ZERO);
 		resultSubscriber.setRevenue1Year(ConfigConstants.ZERO);
+		resultSubscriber.setProductSku(basicProductModel.getProdCode());
+		
+		return resultSubscriber;
+	}
+	@Step
+	public SubscriberModel populateNewStyleCoachFromExistingData(CustomerFormModel dataModel,DateModel dateModel,BasicProductModel basicProductModel, ShippingModel shippingModel, String subscriptionKoboCode){		
+		SubscriberModel resultSubscriber = new SubscriberModel();
+		
+		resultSubscriber.setEmail(dataModel.getEmailName());
+		resultSubscriber.setActivatedAt(dateModel.getDate());
+		resultSubscriber.setIsStylist(ConfigConstants.NO);
+		resultSubscriber.setLastPurchase(dateModel.getDate());
+		resultSubscriber.setPreferredWebsite(MongoReader.getContext());
+		resultSubscriber.setContactOrUser(ConfigConstants.USER);
+		resultSubscriber.setFlagStylist(ConfigConstants.YES);
+		resultSubscriber.setFlagHost(ConfigConstants.YES);
+		resultSubscriber.setFirstName(dataModel.getFirstName());
+		resultSubscriber.setLastName(dataModel.getLastName());
+		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
+		resultSubscriber.setKoboCode(subscriptionKoboCode);
+		resultSubscriber.setRevenue3Months(shippingModel.getTotalAmount());
+		resultSubscriber.setRevenu6Months(shippingModel.getTotalAmount());
+		resultSubscriber.setRevenue1Year(shippingModel.getTotalAmount());
 		resultSubscriber.setProductSku(basicProductModel.getProdCode());
 		
 		return resultSubscriber;

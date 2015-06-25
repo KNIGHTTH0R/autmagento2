@@ -39,9 +39,6 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "accept-checkbox")
 	private WebElement iAgreeCheckbox;
 
-	@FindBy(id = "by_default")
-	private WebElement noInviteCheckbox;
-
 	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")
 	private WebElement completeButton;
 
@@ -69,6 +66,23 @@ public class CreateCustomerPage extends AbstractPage {
 
 	@FindBy(id = "telephone")
 	private WebElement telephoneInput;
+
+	// ----------------------search SC
+
+	@FindBy(id = "by_geoip")
+	private WebElement searchStylistByGeoip;
+
+	@FindBy(id = "search_postcode")
+	private WebElement searchPostcode;
+
+	@FindBy(id = "search_countryId")
+	private WebElement searchCountry;
+
+	@FindBy(css = "ul#stylist-list li:nth-child(1) div button")
+	private WebElement firstStylistContainer;
+
+	@FindBy(css = "button[name='search_by_geoip_submit']")
+	private WebElement searchByGeoipSubmitButton;
 
 	// ---------------------------------------------------
 
@@ -114,10 +128,6 @@ public class CreateCustomerPage extends AbstractPage {
 		memberCheckbox.click();
 	}
 
-	public void checkNoInvite() {
-		noInviteCheckbox.click();
-	}
-
 	public void checkIAgree() {
 		iAgreeCheckbox.click();
 	}
@@ -138,7 +148,7 @@ public class CreateCustomerPage extends AbstractPage {
 	public void inputPostCode(String postCode) {
 		postCodeInput.sendKeys(postCode);
 	}
-	
+
 	public void inputPostCodeFromPersonalInfo(String postCode) {
 		distributionZip.sendKeys(postCode);
 	}
@@ -151,7 +161,7 @@ public class CreateCustomerPage extends AbstractPage {
 		element(countrySelect).waitUntilVisible();
 		element(countrySelect).selectByVisibleText(countryName);
 	}
-	
+
 	public void selectCountryNameFromPersonalInfo(String countryName) {
 		element(distributionCountry).waitUntilVisible();
 		element(distributionCountry).selectByVisibleText(countryName);
@@ -159,6 +169,31 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void inputPhoneNumber(String phoneNumber) {
 		telephoneInput.sendKeys(phoneNumber);
+	}
+
+	// ---------------Sc search
+
+	public void searchStylistByGeoip() {
+		searchStylistByGeoip.click();
+	}
+
+	public void inputPostcodeFilter(String postcode) {
+		searchPostcode.sendKeys(postcode);
+	}
+
+	public void selectCountryFilter(String countryName) {
+		element(searchCountry).waitUntilVisible();
+		element(searchCountry).selectByVisibleText(countryName);
+	}
+
+	public void selectFirstStylistFromList() {
+		element(firstStylistContainer).waitUntilVisible();
+		firstStylistContainer.click();
+	}
+
+	public void searchByGeoipSubmit() {
+		element(searchByGeoipSubmitButton).waitUntilVisible();
+		searchByGeoipSubmitButton.click();
 	}
 
 }

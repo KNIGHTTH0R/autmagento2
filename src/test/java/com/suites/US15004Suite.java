@@ -18,7 +18,6 @@ import com.tests.uss15.us15004.US15004OrderForCustomerTest;
 	
 	US15004OrderForCustomerTest.class,
 	US15004ConfirmCustomerTest.class,
-	//here the email should be changed
 	US15004CheckSubscriberMagentoConfigTest.class,
 	US15004CheckMailchimpConfigWithZeroRevenuesTest.class,
 	US15004CancelOrderTest.class,

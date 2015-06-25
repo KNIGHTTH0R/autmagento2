@@ -1,10 +1,11 @@
 package com.pages.frontend.registration.landing;
 
+import net.thucydides.core.annotations.findby.FindBy;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 
-import net.thucydides.core.annotations.findby.FindBy;
-
+import com.tools.data.frontend.AddressModel;
 import com.tools.requirements.AbstractPage;
 
 /**
@@ -30,19 +31,53 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 	@FindBy(name = "search_by_name_submit")
 	private WebElement searchSubmitButton;
 
-	@CacheLookup
-	@FindBy(id = "by_default")
-	private WebElement radioSelectByDefault;
-
 	@FindBy(id = "kostenlos-anmelden")
 	private WebElement submitButton;
+
+	@FindBy(id = "by_geoip")
+	private WebElement searchStylistByGeoip;
+
+	@FindBy(id = "search_postcode")
+	private WebElement searchPostcode;
+
+	@FindBy(id = "search_countryId")
+	private WebElement searchCountry;
+
+	@FindBy(css = "ul#stylist-list li:nth-child(1) div button")
+	private WebElement firstStylistContainer;
+
+	@FindBy(css = "button[name='search_by_geoip_submit']")
+	private WebElement searchByGeoipSubmitButton;
+
+	public void searchStylistByGeoip() {
+		searchStylistByGeoip.click();
+	}
+
+	public void inputPostcodeFilter(String postcode) {
+		searchPostcode.sendKeys(postcode);
+	}
+
+	public void selectCountryFilter(String countryName) {
+		element(searchCountry).waitUntilVisible();
+		element(searchCountry).selectByVisibleText(countryName);
+	}
+
+	public void selectFirstStylistFromList() {
+		element(firstStylistContainer).waitUntilVisible();
+		firstStylistContainer.click();
+	}
+
+	public void searchByGeoipSubmit() {
+		element(searchByGeoipSubmitButton).waitUntilVisible();
+		searchByGeoipSubmitButton.click();
+	}
 
 	public enum StyleMode {
 		CustomStylist, DefaultStylist
 	}
 
-	public void selectStylistOption(StyleMode mode, String firstName, String lastName) {
-		element(radioSelectByDefault).waitUntilVisible();
+	public void selectStylistOption(StyleMode mode, String firstName, String lastName, AddressModel addressModel) {
+		element(searchStylistByGeoip).waitUntilVisible();
 
 		switch (mode) {
 		case CustomStylist:
@@ -56,7 +91,11 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 
 			break;
 		case DefaultStylist:
-			radioSelectByDefault.click();
+			searchStylistByGeoip();
+			inputPostcodeFilter(addressModel.getPostCode());
+			selectCountryFilter(addressModel.getCountryName());
+			searchByGeoipSubmit();
+			selectFirstStylistFromList();
 			break;
 
 		default:

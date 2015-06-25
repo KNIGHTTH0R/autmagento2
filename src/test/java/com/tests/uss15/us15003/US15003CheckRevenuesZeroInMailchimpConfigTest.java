@@ -49,7 +49,7 @@ public class US15003CheckRevenuesZeroInMailchimpConfigTest extends BaseTest {
 	public BasicProductModel product = new BasicProductModel();
 	CustomerFormModel dataModel;
 	DateModel dateModel;
-	String koboCode = "";
+	String koboCode;
 
 	private String listName = "staging_AUT_newsletter_all_subscribers";
 
@@ -61,6 +61,7 @@ public class US15003CheckRevenuesZeroInMailchimpConfigTest extends BaseTest {
 		dataModel = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
 		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 		dateModel = MongoReader.grabStylistDateModels("US15003ConfirmCustomerTest").get(0);
+		koboCode = MongoReader.grabKoboModel("US15003SubscribedStyleCoachCheckoutProcessTest");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
@@ -75,7 +76,7 @@ public class US15003CheckRevenuesZeroInMailchimpConfigTest extends BaseTest {
 		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewStyleCoachFromExistingDataWithZeroRevenue(dataModel, dateModel, product, shippingModel, koboCode);
 		System.out.println("---------------");
 		PrintUtils.printSubscriberData(expectedSubscriberModel);
-		mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
-		
+		mailchimpValidationWorkflows.validateNewScKoboSubscriptionAndShopForMyselfMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
+
 	}
 }

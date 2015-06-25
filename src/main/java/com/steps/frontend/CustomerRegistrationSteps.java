@@ -1,6 +1,5 @@
 package com.steps.frontend;
 
-import java.io.IOException;
 import java.util.Set;
 
 import net.thucydides.core.annotations.Step;
@@ -12,9 +11,7 @@ import org.junit.Assert;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.variables.UrlConstants;
-import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
@@ -36,7 +33,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkParties();
 		checkMember();
 		fillContactDetails(addressData);
-		checkNoInvite();
+		searchStylistByGeoip(addressData);
 		checkIAgree();
 		clickCompleteButton();
 	}
@@ -54,7 +51,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputConfirmation(customerData.getPassword());
 		inputPostCodeFromPersonalInfo(addressData.getPostCode());
 		selectCountryNameFromPersonalInfo(addressData.getCountryName());
-		checkNoInvite();
+		searchStylistByGeoip(addressData);
 		checkIAgree();
 		clickCompleteButton();
 	}
@@ -73,7 +70,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkParties();
 		checkMember();
 		fillContactDetails(addressData);
-		checkNoInvite();
+		searchStylistByGeoip(addressData);
 		checkIAgree();
 		clickCompleteButton();
 	}
@@ -90,7 +87,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputConfirmation(customerData.getPassword());
 		checkParties();
 		fillContactDetails(addressData);
-		checkNoInvite();
+		searchStylistByGeoip(addressData);
 		checkIAgree();
 		clickCompleteButton();
 	}
@@ -107,7 +104,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputConfirmation(customerData.getPassword());
 		checkMember();
 		fillContactDetails(addressData);
-		checkNoInvite();
+		searchStylistByGeoip(addressData);
 		checkIAgree();
 		clickCompleteButton();
 	}
@@ -232,8 +229,12 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void checkNoInvite() {
-		createCustomerPage().checkNoInvite();
+	public void searchStylistByGeoip(AddressModel addressModel) {
+		createCustomerPage().searchStylistByGeoip();
+		createCustomerPage().inputPostcodeFilter(addressModel.getPostCode());
+		createCustomerPage().selectCountryFilter(addressModel.getCountryName());
+		createCustomerPage().searchByGeoipSubmit();
+		createCustomerPage().selectFirstStylistFromList();
 	}
 
 	@Step
@@ -316,7 +317,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	 * @param lastName
 	 */
 	@Step
-	public void selectStylistOption(StyleMode mode, String firstName, String lastName) {
+	public void selectStylistOption(StyleMode mode, String firstName, String lastName, AddressModel addressModel) {
 
 		String pageTitle;
 		int counter = 0;
@@ -327,7 +328,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		} while (!pageTitle.contains("Thank you page") && counter < 30);
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page. Actual: " + pageTitle, pageTitle.contains("PIPPA&JEAN"));
 
-		landingCustomerAllocationPage().selectStylistOption(mode, firstName, lastName);
+		landingCustomerAllocationPage().selectStylistOption(mode, firstName, lastName, addressModel);
 	}
 
 	/**
