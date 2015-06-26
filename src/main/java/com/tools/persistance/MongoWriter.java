@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import com.connectors.mongo.MongoConnector;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.tools.data.BorrowCartCalcDetailsModel;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
@@ -16,6 +17,7 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -108,26 +110,28 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void saveSubscriberModel(SubscriberModel subscriberModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.SUBSCRIBER_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.SUBSCRIBER_FIRSTNAME, subscriberModel.getFirstName());
-		
+
 		table.insert(document);
 	}
+
 	public static void saveDbStylistModel(DBStylistModel stylistModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.DB_STYLIST_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
-		document.put(MongoTableKeys.DB_STYLIST_EMAIL, stylistModel.getEmail());		
-		document.put(MongoTableKeys.DB_TOTAL_SC_RECEIVED, stylistModel.getTotalSCReceived());		
-		document.put(MongoTableKeys.DB_TOTAL_HOST_RECEIVED, stylistModel.getTotalHostReceived());		
-		document.put(MongoTableKeys.DB_TOTAL_CUSTOMER_RECEIVED, stylistModel.getTotalCustomerReceived());		
-		document.put(MongoTableKeys.DB_TOTAL_SC_CURRENT_WEEK, stylistModel.getTotalSCCurrentWeek());		
-		document.put(MongoTableKeys.DB_TOTAL_HOST_CURRENT_WEEK, stylistModel.getTotalHostCurrentWeek());		
+		document.put(MongoTableKeys.DB_STYLIST_EMAIL, stylistModel.getEmail());
+		document.put(MongoTableKeys.DB_TOTAL_SC_RECEIVED, stylistModel.getTotalSCReceived());
+		document.put(MongoTableKeys.DB_TOTAL_HOST_RECEIVED, stylistModel.getTotalHostReceived());
+		document.put(MongoTableKeys.DB_TOTAL_CUSTOMER_RECEIVED, stylistModel.getTotalCustomerReceived());
+		document.put(MongoTableKeys.DB_TOTAL_SC_CURRENT_WEEK, stylistModel.getTotalSCCurrentWeek());
+		document.put(MongoTableKeys.DB_TOTAL_HOST_CURRENT_WEEK, stylistModel.getTotalHostCurrentWeek());
 		table.insert(document);
 	}
 
@@ -140,14 +144,15 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void saveCoordinatesModel(CoordinatesModel dateModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.COORDINATES_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.LATTITUDE, dateModel.getLattitude());
 		document.put(MongoTableKeys.LONGITUDE, dateModel.getLongitude());
-		
+
 		table.insert(document);
 	}
 
@@ -245,6 +250,19 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+	public static void saveBorrowProductModel(BorrowProductModel product, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.BORROW_BASIC_PRODUCT_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
+		document.put(MongoTableKeys.PRODUCT_CODE, product.getProdCode());
+		document.put(MongoTableKeys.PRODUCT_PRICE, product.getUnitPrice());
+		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
+		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getIpPoints());
+		
+		table.insert(document);
+	}
 
 	public static void saveTotalsModel(CartTotalsModel cartTotalsModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
@@ -277,6 +295,21 @@ public class MongoWriter extends MongoConnector {
 		// last two are maps
 		document.put(MongoTableKeys.SEGMENTS, calcDetailsModel.getSegments());
 		document.put(MongoTableKeys.CALCULATIONS, calcDetailsModel.getCalculations());
+
+		table.insert(document);
+	}
+
+	public static void saveBorrowCartCalcDetailsModel(BorrowCartCalcDetailsModel calcDetailsModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.BORROW_CART_CALC_DETAILS_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+
+		document.put(MongoTableKeys.TOTAL_AMOUNT, calcDetailsModel.getTotalAmount());
+		document.put(MongoTableKeys.SUBTOTAL, calcDetailsModel.getSubTotal());
+		document.put(MongoTableKeys.TAX, calcDetailsModel.getTax());
+		document.put(MongoTableKeys.IP_POINTS, calcDetailsModel.getIpPoints());
+		// last two are maps
 
 		table.insert(document);
 	}

@@ -9,11 +9,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.requirements.AbstractPage;
@@ -81,6 +83,32 @@ public class SurveyPage extends AbstractPage {
 
 		DataGrabber.shippingProducts = resultList;
 
+		return resultList;
+	}
+	public List<BorrowProductModel> grabBorrowedProductsList() {
+		
+		element(productListContainer).waitUntilVisible();
+		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
+		List<BorrowProductModel> resultList = new ArrayList<BorrowProductModel>();
+		
+		for (WebElement webElementNow : entryList) {
+			BorrowProductModel productNow = new BorrowProductModel();
+			
+			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			parseQty = parseQty.replace("x", "").trim();
+			
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
+			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice("");
+			productNow.setIpPoints("");
+			
+			resultList.add(productNow);
+			
+		}
+		
+		BorrowDataGrabber.grabbedBorrowShippingProductsList = resultList;
+		
 		return resultList;
 	}
 

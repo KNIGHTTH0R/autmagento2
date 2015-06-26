@@ -25,7 +25,7 @@ import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.BorrowedProductModel;
+import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.env.variables.UrlConstants;
@@ -53,7 +53,7 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
 	public static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
-	public static List<BorrowedProductModel> borrowCartProductsList = new ArrayList<BorrowedProductModel>();
+	public static List<BorrowProductModel> borrowCartProductsList = new ArrayList<BorrowProductModel>();
 	private String productName;
 	//, productCode;
 
@@ -103,11 +103,11 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 
 		partyDetailsSteps.selectWishlistProductAndAddItToBorrowCart(productName);
-		BorrowedProductModel borrowedProductModel;
-		borrowedProductModel = addBorrowedProductsWorkflow.setBorrowedProductToCart(productName, "0", "0", "0");
-		borrowCartProductsList.add(borrowedProductModel);
-		borrowedProductModel = addBorrowedProductsWorkflow.setBorrowedProductToCart("Leihgebühr Z999", "0", "0", "0");
-		borrowCartProductsList.add(borrowedProductModel);
+//		BorrowProductModel borrowedProductModel;
+//		borrowedProductModel = addBorrowedProductsWorkflow.setBorrowedProductToCart(productName, "0", "0", "0");
+//		borrowCartProductsList.add(borrowedProductModel);
+//		borrowedProductModel = addBorrowedProductsWorkflow.setBorrowedProductToCart("Leihgebühr Z999", "0", "0", "0");
+//		borrowCartProductsList.add(borrowedProductModel);
 
 	}
 }

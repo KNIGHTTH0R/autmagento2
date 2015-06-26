@@ -4,10 +4,11 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.BorrowedProductModel;
+import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractSteps;
@@ -69,13 +70,14 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public BorrowedProductModel setBorrowedProductAddToCart(String name, String price, String finalPrice, String ipPoints) {
-		BorrowedProductModel result = new BorrowedProductModel();
+	public BorrowProductModel setBorrowedProductAddToCart( ProductDetailedModel model, String price, String finalPrice) {
+		BorrowProductModel result = new BorrowProductModel();
 
-		result.setName(name);
+		result.setName(model.getName());
+		result.setProdCode(model.getSku());
 		result.setUnitPrice(price);
 		result.setFinalPrice(finalPrice);
-		result.setIpPoints(ipPoints);
+		result.setIpPoints("0");
 
 		return result;
 	}

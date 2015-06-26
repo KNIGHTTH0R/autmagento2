@@ -6,7 +6,8 @@ import net.thucydides.core.annotations.Title;
 
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
-import com.tools.data.frontend.BorrowedProductModel;
+import com.tools.data.frontend.BorrowProductModel;
+import com.tools.data.soap.ProductDetailedModel;
 
 public class AddBorrowedProductsWorkflow {
 	@Steps
@@ -15,9 +16,9 @@ public class AddBorrowedProductsWorkflow {
 	public ProductSteps productSteps;
 
 	@StepGroup
-	@Title("Add product to cart")
-	public BorrowedProductModel setBorrowedProductToCart(String productName, String price, String finalPrice, String ipPoints) {
-		return productSteps.setBorrowedProductAddToCart(productName,price,finalPrice,ipPoints);
+	@Title("Add borrowed product to cart")
+	public BorrowProductModel setBorrowedProductToCart(ProductDetailedModel model, String price, String finalPrice) {
+		return productSteps.setBorrowedProductAddToCart(model,price,finalPrice);
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.tools.data.frontend;
 
-public class BorrowedProductModel {
+public class BorrowedCartModel {
 
 	private String name;
 	private String prodCode;

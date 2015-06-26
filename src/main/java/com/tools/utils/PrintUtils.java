@@ -2,6 +2,7 @@ package com.tools.utils;
 
 import java.util.List;
 
+import com.tools.data.BorrowCartCalcDetailsModel;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.HostCartCalcDetailsModel;
@@ -419,6 +420,16 @@ public class PrintUtils {
 		System.out.println("tax : " + calculatedDetailsModel.getTax());
 		System.out.println("Segments : " + calculatedDetailsModel.getSegments());
 
+	}
+	public static void printBorrowCartCalcDetailsModel(BorrowCartCalcDetailsModel calculatedDetailsModel) {
+		System.out.println("printRegularCartCalcDetailsModel -----------------------------");
+		
+		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
+		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());
+		System.out.println("tax : " + calculatedDetailsModel.getTax());
+		System.out.println("tax : " + calculatedDetailsModel.getIpPoints());
+	
+		
 	}
 
 	public static void printHostCartCalcDetailsModel(HostCartCalcDetailsModel calculatedDetailsModel) {

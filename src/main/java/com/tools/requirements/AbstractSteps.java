@@ -55,6 +55,7 @@ import com.pages.frontend.StylistRegistrationPage;
 import com.pages.frontend.UpdatePartyPage;
 import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.SuccessPage;
+import com.pages.frontend.checkout.cart.borrowCart.BorrowCartPage;
 import com.pages.frontend.checkout.cart.kobo.ContactBoosterCartPage;
 import com.pages.frontend.checkout.cart.partyHost.HostCartPage;
 import com.pages.frontend.checkout.cart.partyHost.OrderForCustomerCartPage;
@@ -379,6 +380,9 @@ public class AbstractSteps extends ScenarioSteps {
 	// cart
 	public CartPage cartPage() {
 		return getPages().currentPageAt(CartPage.class);
+	}
+	public BorrowCartPage borrowCartPage() {
+		return getPages().currentPageAt(BorrowCartPage.class);
 	}
 
 	public WishlistPage wishlistPage() {

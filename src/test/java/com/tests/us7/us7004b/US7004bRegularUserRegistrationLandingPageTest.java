@@ -38,7 +38,7 @@ public class US7004bRegularUserRegistrationLandingPageTest extends BaseTest{
 
 	@Before
 	public void setUp() throws Exception {
-		// Generate data for this test run
+		
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		addressModel.setPostCode(ContextConstants.NOT_PREFEERD_WEBSITE_POST_CODE);
