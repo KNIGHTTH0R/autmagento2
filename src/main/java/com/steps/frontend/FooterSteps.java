@@ -4,10 +4,8 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.newsletter.SubscriberModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
-import com.tools.utils.DateUtils;
 
 public class FooterSteps extends AbstractSteps {
 

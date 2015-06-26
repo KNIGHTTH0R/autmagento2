@@ -19,7 +19,7 @@ public class AddressModel {
 		setStreetAddress("Filandastraße");
 		setStreetNumber("22");
 		setHomeTown("Steglitz");
-		setPostCode("12165");
+		setPostCode(ContextConstants.POST_CODE);
 		setCountryName(ContextConstants.COUNTRY_NAME);
 		setPhoneNumber("00555123456");
 	}

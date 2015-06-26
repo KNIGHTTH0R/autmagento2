@@ -194,6 +194,7 @@ public class CreateCustomerPage extends AbstractPage {
 	public void searchByGeoipSubmit() {
 		element(searchByGeoipSubmitButton).waitUntilVisible();
 		searchByGeoipSubmitButton.click();
+		waitABit(2000);
 	}
 
 }

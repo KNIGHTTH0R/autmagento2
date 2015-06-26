@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.requirements.AbstractPage;
-import com.tools.utils.DateUtils;
 
 public class FooterPage extends AbstractPage {
 

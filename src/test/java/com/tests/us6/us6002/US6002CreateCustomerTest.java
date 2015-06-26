@@ -22,11 +22,11 @@ import com.tools.requirements.Application;
 @WithTag(name = "US6", type = "frontend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US6002CreateCustomerTest extends BaseTest{
+public class US6002CreateCustomerTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	public CustomerFormModel customerData;

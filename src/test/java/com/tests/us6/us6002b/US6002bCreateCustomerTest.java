@@ -38,6 +38,7 @@ public class US6002bCreateCustomerTest extends BaseTest{
 		// Generate data for this test run
 		customerData = new CustomerFormModel();
 		customerAddressData = new AddressModel();
+		customerAddressData.setPostCode(ContextConstants.NOT_PREFEERD_WEBSITE_POST_CODE);
 		customerAddressData.setCountryName(ContextConstants.NOT_PREFERED_LANGUAGE);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
