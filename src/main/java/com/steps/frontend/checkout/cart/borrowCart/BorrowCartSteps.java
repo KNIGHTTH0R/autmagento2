@@ -4,8 +4,8 @@ import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.BorrowCartTotalsModel;
+import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.requirements.AbstractSteps;
 
 public class BorrowCartSteps extends AbstractSteps {
@@ -13,7 +13,7 @@ public class BorrowCartSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public List<BorrowProductModel> grabProductsData() {
+	public List<BorrowedCartModel> grabProductsData() {
 		return borrowCartPage().grabProductsData();
 	}
 
@@ -24,7 +24,11 @@ public class BorrowCartSteps extends AbstractSteps {
 
 	@Step
 	public void clickGoToShipping() {
-		regularUserCartPage().clickToShipping();
+		borrowCartPage().clickToShipping();
+	}
+	@Step
+	public void clickWipeCart() {
+		borrowCartPage().clickWipeCart();
 	}
 
 }

@@ -23,9 +23,15 @@ public class LoungePage extends AbstractPage {
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(3)")
 	private WebElement customerOrderLink;
+	
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(6)")
+	private WebElement loanedLink;
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(3) > ul li:nth-child(1) a")
 	private WebElement startOrderForCustomerLink;
+	
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(6) > ul li:nth-child(1) a")
+	private WebElement borrowCartLink;
 
 	@FindBy(id = "contact")
 	private WebElement contactInput;
@@ -86,6 +92,18 @@ public class LoungePage extends AbstractPage {
 		element(startOrderForCustomerLink).waitUntilVisible();
 		startOrderForCustomerLink.click();
 
+	}
+	
+	public void clickGoToBorrowCart() {
+		
+		Actions builder = new Actions(getDriver());
+		
+		builder.moveToElement(meinBusinessButton).build().perform();
+		builder.moveToElement(loanedLink).build().perform();
+		
+		element(borrowCartLink).waitUntilVisible();
+		borrowCartLink.click();
+		
 	}
 	
 

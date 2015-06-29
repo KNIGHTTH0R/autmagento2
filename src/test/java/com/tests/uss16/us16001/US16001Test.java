@@ -22,6 +22,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
+import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
@@ -43,10 +44,10 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
-import com.workflows.frontend.ValidationWorkflows;
 import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
+import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 
-@WithTag(name = "US3", type = "frontend")
+@WithTag(name = "US16", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US16001Test extends BaseTest {
@@ -60,6 +61,8 @@ public class US16001Test extends BaseTest {
 	@Steps
 	public HomeSteps homeSteps;
 	@Steps
+	public LoungeSteps loungeSteps;
+	@Steps
 	public FooterSteps footerSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
@@ -72,7 +75,7 @@ public class US16001Test extends BaseTest {
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
-	public ValidationWorkflows validationWorkflows;
+	public BorrowCartValidationWorkflows borrowCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
 
@@ -103,7 +106,7 @@ public class US16001Test extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3005.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_16_FOLDER + File.separator + "us16001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -128,19 +131,21 @@ public class US16001Test extends BaseTest {
 	}
 
 	@Test
-	public void us3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest() {
+	public void us16001Test() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		homeSteps.clickonGeneralView();
-		customerRegistrationSteps.wipeCart();
+		loungeSteps.clickGoToBorrowCart();
+		borrowCartSteps.clickWipeCart();
 		BorrowProductModel productData;
-
-		productData = addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct1, "1", "0");
+		
+		productData = addBorrowedProductsWorkflow.setBorrowedDefaultProductToCart();
 		BorrowCartCalculator.allBorrowedProductsList.add(productData);
-		productData = addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct2, "1", "0");
+		productData = addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct1, "0.00");
+		BorrowCartCalculator.allBorrowedProductsList.add(productData);
+		productData = addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct2, "0.00");
 		BorrowCartCalculator.allBorrowedProductsList.add(productData);
 
 		BorrowCartCalculator.calculateCartAndShippingTotals(taxClass, shippingValue);
@@ -155,6 +160,7 @@ public class US16001Test extends BaseTest {
 
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
+		shippingSteps.checkTermsCheckbox();
 
 		shippingSteps.grabBorrowedProductsList();
 		shippingSteps.grabSurveyData();
@@ -176,15 +182,15 @@ public class US16001Test extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 
-		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		validationWorkflows.performCartValidations();
+		borrowCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		borrowCartValidationWorkflows.performBorrowCartValidations();
 
 		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
-		
+
 		MongoWriter.saveBorrowCartCalcDetailsModel(BorrowCartCalculator.borrowCartCalcDetailsModel, getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(BorrowCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(BorrowDataGrabber.borrowCartConfirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);

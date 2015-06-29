@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.data.frontend.BorrowProductModel;
+import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
@@ -41,7 +41,7 @@ public class ShippingSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabHostProductsList();
 	}
-	public List<BorrowProductModel> grabBorrowedProductsList() {
+	public List<BorrowedCartModel> grabBorrowedProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabBorrowedProductsList();
 	}
@@ -61,6 +61,10 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void selectKnowStylistNoOption() {
 		shippingFormPage().selectKnowStylistNoOption();
+	}
+	@Step
+	public void checkTermsCheckbox() {
+		shippingFormPage().checkTermsCheckbox();
 	}
 
 	@Step

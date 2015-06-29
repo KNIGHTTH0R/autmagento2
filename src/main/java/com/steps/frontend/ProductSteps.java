@@ -55,28 +55,44 @@ public class ProductSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
+
 	@StepGroup
 	public BasicProductModel updateProduct(String qty, String size, String askingPrice, String finalPrice, String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();
-		
+
 		result = productDetailsPage().grabBasicProductData();
 		result.setQuantity(qty);
 		result.setDiscountClass(discountClass);
 		result.setProductsPrice(askingPrice);
 		result.setFinalPrice(finalPrice);
 		result.setPriceIP(ip);
-		
+
 		return result;
 	}
 
 	@StepGroup
-	public BorrowProductModel setBorrowedProductAddToCart( ProductDetailedModel model, String price, String finalPrice) {
+	public BorrowProductModel setBorrowedProductAddToCart(ProductDetailedModel model, String finalPrice) {
 		BorrowProductModel result = new BorrowProductModel();
 
 		result.setName(model.getName());
 		result.setProdCode(model.getSku());
-		result.setUnitPrice(price);
+		result.setUnitPrice(finalPrice);
 		result.setFinalPrice(finalPrice);
+		result.setIpPoints("0");
+
+		addToCart();
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return result;
+	}
+
+	@StepGroup
+	public BorrowProductModel setBorrowedDefaultProductAddToCart() {
+		BorrowProductModel result = new BorrowProductModel();
+
+		result.setName("Leihgebühr");
+		result.setProdCode("Z999");
+		result.setUnitPrice("6.00");
+		result.setFinalPrice("6.00");
 		result.setIpPoints("0");
 
 		return result;

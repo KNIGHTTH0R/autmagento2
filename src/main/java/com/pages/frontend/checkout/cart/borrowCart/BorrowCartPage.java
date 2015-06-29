@@ -9,13 +9,15 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import com.tools.data.frontend.BorrowProductModel;
+
 import com.tools.data.frontend.BorrowCartTotalsModel;
+import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
+import com.tools.utils.PrintUtils;
 
 public class BorrowCartPage extends AbstractPage {
 
@@ -28,18 +30,35 @@ public class BorrowCartPage extends AbstractPage {
 	@FindBy(css = "ul.checkout-types li button:last-child")
 	private WebElement kasseButton;
 
+	@FindBy(css = "button[onclick*='cart/clearAllItems']")
+	private WebElement wipeCart;
+
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
 
-
-	public List<BorrowProductModel> grabProductsData() {
+	public List<BorrowedCartModel> grabProductsData() {
 		element(cartTable).waitUntilVisible();
-		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
 
-		List<BorrowProductModel> resultList = new ArrayList<BorrowProductModel>();
+		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
+		entryList.remove(0);
+
+		List<BorrowedCartModel> resultList = new ArrayList<BorrowedCartModel>();
+
+		BorrowedCartModel defaultProduct = new BorrowedCartModel();
+
+		WebElement prodListFirstRow = getDriver().findElement(By.cssSelector("div.cart table.cart-table tbody > tr:nth-child(1)"));
+
+		defaultProduct.setName(prodListFirstRow.findElement(By.cssSelector("h2.product-name")).getText().replace(" Z999", "").trim());
+		defaultProduct.setProdCode(prodListFirstRow.findElement(By.cssSelector("h2.product-name")).getText().replace(defaultProduct.getName(), "").trim());
+		defaultProduct.setUnitPrice(FormatterUtils.cleanNumberToString(prodListFirstRow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+		defaultProduct.setFinalPrice(FormatterUtils.cleanNumberToString(prodListFirstRow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(1).price")).getText()));
+		defaultProduct.setIpPoints(FormatterUtils.cleanNumberToString(prodListFirstRow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(2).price")).getText()));
+
+		resultList.add(defaultProduct);
 
 		for (WebElement webElementNow : entryList) {
-			BorrowProductModel productNow = new BorrowProductModel();
+
+			BorrowedCartModel productNow = new BorrowedCartModel();
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
@@ -49,7 +68,9 @@ public class BorrowCartPage extends AbstractPage {
 
 			resultList.add(productNow);
 		}
+
 		BorrowDataGrabber.grabbedBorrowCartProductsList = resultList;
+		PrintUtils.printBorrowedCartList(resultList);
 
 		return resultList;
 	}
@@ -86,6 +107,7 @@ public class BorrowCartPage extends AbstractPage {
 		}
 
 		BorrowDataGrabber.borrowCartGrabbedCartTotals = resultModel;
+		PrintUtils.printBorrowCartTotalsModel(resultModel);
 
 		return resultModel;
 	}
@@ -93,6 +115,11 @@ public class BorrowCartPage extends AbstractPage {
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
+	}
+
+	public void clickWipeCart() {
+		element(wipeCart).waitUntilVisible();
+		wipeCart.click();
 	}
 
 	/**

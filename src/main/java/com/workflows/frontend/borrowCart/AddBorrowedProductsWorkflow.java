@@ -17,8 +17,16 @@ public class AddBorrowedProductsWorkflow {
 
 	@StepGroup
 	@Title("Add borrowed product to cart")
-	public BorrowProductModel setBorrowedProductToCart(ProductDetailedModel model, String price, String finalPrice) {
-		return productSteps.setBorrowedProductAddToCart(model,price,finalPrice);
+	public BorrowProductModel setBorrowedProductToCart(ProductDetailedModel model, String finalPrice) {
+
+		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		return productSteps.setBorrowedProductAddToCart(model, finalPrice);
+	}
+	@StepGroup
+	@Title("Add default borrowed product to cart")
+	public BorrowProductModel setBorrowedDefaultProductToCart() {
+		
+		return productSteps.setBorrowedDefaultProductAddToCart();
 	}
 
 }

@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.Step;
 
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.BorrowProductModel;
+import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
@@ -31,7 +31,7 @@ public class ConfirmationSteps extends AbstractSteps {
 		return confirmationPage().grabProductsList();
 	}
 
-	public List<BorrowProductModel> grabBorrowedProductsList() {
+	public List<BorrowedCartModel> grabBorrowedProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return confirmationPage().grabBorrowedProductsList();
 	}

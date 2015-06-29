@@ -12,4 +12,5 @@ public class FilePaths {
 	public static final String US_08_FOLDER = "us8";
 	public static final String US_09_FOLDER = "us9";
 	public static final String US_10_FOLDER = "us10";
+	public static final String US_16_FOLDER = "uss16";
 }

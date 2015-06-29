@@ -14,6 +14,8 @@ import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.email.EmailModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.BorrowCartTotalsModel;
+import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.HostBasicProductModel;
@@ -40,6 +42,17 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getProductsPrice());
 			System.out.println(cartProductModel.getFinalPrice());
 			System.out.println(cartProductModel.getPriceIP());
+		}
+	}
+	public static void printBorrowedCartList(List<BorrowedCartModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		for (BorrowedCartModel cartProductModel : list) {
+			System.out.println("------------------------");
+			System.out.println(cartProductModel.getName());
+			System.out.println(cartProductModel.getProdCode());
+			System.out.println(cartProductModel.getUnitPrice());
+			System.out.println(cartProductModel.getFinalPrice());
+			System.out.println(cartProductModel.getIpPoints());
 		}
 	}
 
@@ -249,6 +262,15 @@ public class PrintUtils {
 		System.out.println("total amount " + model.getTotalAmount());
 
 	}
+	public static void printBorrowCartTotalsModel(BorrowCartTotalsModel model) {
+		System.out.println(" *** Print Total section from Cart *** ");
+		System.out.println("------------------------");
+		System.out.println("subtotal " + model.getSubtotal());	
+		System.out.println("tax " + model.getTax());
+		System.out.println("total amount " + model.getTotalAmount());
+		System.out.println("ip points " + model.getIpPoints());
+		
+	}
 
 	public static void printOrderInfo(OrderInfoModel model) {
 		System.out.println(" *** Print Order Info *** ");
@@ -370,6 +392,7 @@ public class PrintUtils {
 		System.out.println("final " + productNow.getFinalPrice());
 	}
 
+
 	public static void printBasicProductModel(BasicProductModel productNow) {
 		System.out.println("------------------------");
 		System.out.println("name " + productNow.getName());
@@ -422,7 +445,7 @@ public class PrintUtils {
 
 	}
 	public static void printBorrowCartCalcDetailsModel(BorrowCartCalcDetailsModel calculatedDetailsModel) {
-		System.out.println("printRegularCartCalcDetailsModel -----------------------------");
+		System.out.println("printBorrowCartCalcDetailsModel -----------------------------");
 		
 		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
 		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());

@@ -7,6 +7,8 @@ import net.thucydides.core.annotations.Steps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
+import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.utils.PrintUtils;
 
@@ -187,10 +189,10 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 		
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
-		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
-		
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");	
 	
 	}
+	
 
 	@StepGroup
 	@Screenshots(onlyOnFailures = true)

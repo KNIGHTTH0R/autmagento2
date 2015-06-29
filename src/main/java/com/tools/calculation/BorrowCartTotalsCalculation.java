@@ -5,10 +5,8 @@ import java.math.RoundingMode;
 import java.util.List;
 
 import com.tools.data.BorrowCartCalcDetailsModel;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.constants.ConfigConstants;
 
 public class BorrowCartTotalsCalculation {
 
@@ -17,7 +15,6 @@ public class BorrowCartTotalsCalculation {
 
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal tax = BigDecimal.ZERO;
-		BigDecimal totalAmount = BigDecimal.ZERO;
 		BigDecimal ipPoints = BigDecimal.ZERO;
 
 		for (BorrowProductModel product : productsList) {
@@ -25,18 +22,14 @@ public class BorrowCartTotalsCalculation {
 			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
 
 		}
-		// total amount variable is not needed if total amount is equal with
-		// subtotal,but i
-		// prefferd to reflect that the tax is calculated from total amount and
-		// not from subtotal
 
-		totalAmount = subtotal;
-
-		tax = totalAmount.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		// because discount is always 0 the total amount is equal to sub total and the tax can be calculated from subtotal
+		
+		tax = subtotal.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 
-		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
+		result.setTotalAmount(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 
 		result.setTax(String.valueOf(tax));
 		result.setIpPoints(String.valueOf(ipPoints));

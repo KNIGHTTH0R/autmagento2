@@ -22,6 +22,10 @@ public class LoungeSteps extends AbstractSteps {
 	public void clickOrderForCustomer() {
 		loungePage().clickOrderForCustomer();
 	}
+	@Step
+	public void clickGoToBorrowCart() {
+		loungePage().clickGoToBorrowCart();
+	}
 
 	@Step
 	public void selectCustomerToOrderFor(String name) {

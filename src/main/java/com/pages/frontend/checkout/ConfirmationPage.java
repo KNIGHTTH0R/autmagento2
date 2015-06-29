@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.BorrowProductModel;
+import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
@@ -169,26 +169,24 @@ public class ConfirmationPage extends AbstractPage {
 		DataGrabber.confirmationProducts = resultList;
 		return resultList;
 	}
-	public List<BorrowProductModel> grabBorrowedProductsList() {
+
+	public List<BorrowedCartModel> grabBorrowedProductsList() {
 		element(productListContainer).waitUntilVisible();
 		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
-		List<BorrowProductModel> resultList = new ArrayList<BorrowProductModel>();
-		
+		List<BorrowedCartModel> resultList = new ArrayList<BorrowedCartModel>();
+
 		for (WebElement webElementNow : entryList) {
-			BorrowProductModel productNow = new BorrowProductModel();
-			
-			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
-			parseQty = parseQty.replace("x", "").trim();
-			
+			BorrowedCartModel productNow = new BorrowedCartModel();
+
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			productNow.setIpPoints("");
-			
+
 			resultList.add(productNow);
 		}
-		
+
 		BorrowDataGrabber.grabbedBorrowConfirmationProductsList = resultList;
 		return resultList;
 	}

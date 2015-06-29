@@ -45,10 +45,17 @@ public class ShippingFormPage extends AbstractPage {
 
 	@FindBy(id = "know_stylist_no")
 	private WebElement knowStylistNo;
+	
+	@FindBy(id = "terms")
+	private WebElement termsCheckbox;
 
 	public void selectKnowStylistNoOption() {
 		element(knowStylistNo).waitUntilVisible();
 		knowStylistNo.click();
+	}
+	public void checkTermsCheckbox() {
+		element(termsCheckbox).waitUntilVisible();
+		termsCheckbox.click();
 	}
 
 	public void inputFirstName(String firstName) {

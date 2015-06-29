@@ -26,7 +26,7 @@ public class MyBusinessPage extends AbstractPage {
 
 	@FindBy(css = "#confirmCancelCbSubscriptionModal form button[type='submit']")
 	private WebElementFacade confirmCancelSubstription;
-
+	
 	public void verifyThatNumberOfLinksAreEqualTo(String expectedNoOflinks) {
 		Assert.assertTrue("", getDriver().findElements(By.cssSelector("#kobo-cancel div.col-3.col ul.link-list li")).size() == Integer.parseInt(expectedNoOflinks));
 	}

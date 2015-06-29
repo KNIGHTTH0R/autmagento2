@@ -27,26 +27,24 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-
 @WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTest{
-	
+public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTest {
+
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
 	private String styleCoachFN;
 	private String styleCoachLN;
-	
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -68,7 +66,7 @@ public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTe
 				}
 			}
 		}
-		
+
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
@@ -84,13 +82,12 @@ public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTe
 	public void us7006UserRegistrationSpecificStylistLandingPageTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
-		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN,addressModel);
+		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN, addressModel);
 		customerRegistrationSteps.submitStylistSelection();
 		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
-		
 		customerRegistrationSteps.verifyCustomerEmail(dataModel.getEmailName(), email);
 		customerRegistrationSteps.verifySuccessLink();
-		
+
 		customVerifications.printErrors();
 	}
 
@@ -98,6 +95,5 @@ public class US7006UserRegistrationSpecificStylistLandingPageTest extends BaseTe
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 	}
-	
-	
+
 }
