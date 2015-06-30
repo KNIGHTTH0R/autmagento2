@@ -75,8 +75,6 @@ public class US3005UserProfileOrderIdTest extends BaseTest{
 		}
 
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 		orderModel = MongoReader.grabOrderModels("US3005Test" + SoapKeys.GRAB).get(0);
 		
 	}

@@ -11,6 +11,7 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
 public class ProductSteps extends AbstractSteps {
@@ -84,6 +85,19 @@ public class ProductSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
+	@StepGroup
+	public BorrowProductModel setBorrowedProductAddToCart(RegularBasicProductModel model, String finalPrice) {
+		BorrowProductModel result = new BorrowProductModel();
+		
+		result.setName(model.getName());
+		result.setProdCode(model.getProdCode());
+		result.setUnitPrice(finalPrice);
+		result.setFinalPrice(finalPrice);
+		result.setIpPoints("0");
+		
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return result;
+	}
 
 	@StepGroup
 	public BorrowProductModel setBorrowedDefaultProductAddToCart() {
@@ -91,8 +105,13 @@ public class ProductSteps extends AbstractSteps {
 
 		result.setName("Leihgebühr");
 		result.setProdCode("Z999");
-		result.setUnitPrice("6.00");
-		result.setFinalPrice("6.00");
+		if (MongoReader.getContext().contentEquals("de")) {
+			result.setUnitPrice("6.00");
+			result.setFinalPrice("6.00");
+		} else if (MongoReader.getContext().contentEquals("es")) {
+			result.setUnitPrice("30.00");
+			result.setFinalPrice("30.00");
+		}
 		result.setIpPoints("0");
 
 		return result;

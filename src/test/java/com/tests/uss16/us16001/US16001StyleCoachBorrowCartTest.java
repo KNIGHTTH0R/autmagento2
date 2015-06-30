@@ -33,7 +33,6 @@ import com.tools.SoapKeys;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
 import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
@@ -50,7 +49,7 @@ import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 @WithTag(name = "US16", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US16001Test extends BaseTest {
+public class US16001StyleCoachBorrowCartTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -90,7 +89,8 @@ public class US16001Test extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		CartCalculator.wipe();
+		BorrowCartCalculator.wipe();
+		BorrowDataGrabber.wipe();
 		DataGrabber.wipe();
 
 		genProduct1 = ApiCalls.createProductModel();
@@ -131,7 +131,7 @@ public class US16001Test extends BaseTest {
 	}
 
 	@Test
-	public void us16001Test() {
+	public void us16001StyleCoachBorrowCartTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

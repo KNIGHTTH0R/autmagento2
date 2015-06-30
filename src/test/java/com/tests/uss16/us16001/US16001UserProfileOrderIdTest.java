@@ -1,4 +1,4 @@
-package com.tests.us3.us3006;
+package com.tests.uss16.us16001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -31,10 +30,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US3", type = "frontend")
+@WithTag(name = "US16", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US3006UserProfileOrderIdTest extends BaseTest{
+public class US16001UserProfileOrderIdTest extends BaseTest{
 	
 	@Steps
 	public ProfileSteps profileSteps;
@@ -57,7 +56,7 @@ public class US3006UserProfileOrderIdTest extends BaseTest{
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3006.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_16_FOLDER + File.separator + "us16001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");			
@@ -74,14 +73,12 @@ public class US3006UserProfileOrderIdTest extends BaseTest{
 			}
 		}
 
-
-		
-		orderModel = MongoReader.grabOrderModels("US3006Test" + SoapKeys.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US16001StyleCoachBorrowCartTest" + SoapKeys.GRAB).get(0);
 		
 	}
 	
 	@Test
-	public void us3006UserProfileOrderIdTest() {
+	public void us16001UserProfileOrderIdTest() {
 		
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

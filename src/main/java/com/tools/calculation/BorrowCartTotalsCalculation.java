@@ -10,7 +10,7 @@ import com.tools.data.frontend.ShippingModel;
 
 public class BorrowCartTotalsCalculation {
 
-	public static BorrowCartCalcDetailsModel calculateTotals(List<BorrowProductModel> productsList, String taxClass) {
+	public static BorrowCartCalcDetailsModel calculateTotals(List<BorrowProductModel> productsList, String taxClass, String shippingValue) {
 		BorrowCartCalcDetailsModel result = new BorrowCartCalcDetailsModel();
 
 		BigDecimal subtotal = BigDecimal.ZERO;
@@ -23,16 +23,17 @@ public class BorrowCartTotalsCalculation {
 
 		}
 
-		// because discount is always 0 the total amount is equal to sub total and the tax can be calculated from subtotal
-		
-		tax = subtotal.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		// because discount is always 0 the total amount is equal to sub total
+		// and the tax can be calculated from subtotal
+		tax = subtotal.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 
 		result.setTotalAmount(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 
 		result.setTax(String.valueOf(tax));
-		result.setIpPoints(String.valueOf(ipPoints));
+		result.setIpPoints(String.valueOf(ipPoints.intValue()));
 
 		return result;
 	}

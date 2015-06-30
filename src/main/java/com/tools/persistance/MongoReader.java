@@ -8,6 +8,7 @@ import java.util.Map;
 import com.connectors.mongo.MongoConnector;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.tools.data.BorrowCartCalcDetailsModel;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
@@ -17,6 +18,7 @@ import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -443,6 +445,34 @@ public class MongoReader extends MongoConnector {
 		return itemList;
 	}
 
+	public static List<BorrowProductModel> grabBorrowProductModel(String testName) {
+		DBObject dbObject = null;
+		List<BorrowProductModel> itemList = new ArrayList<BorrowProductModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.BORROW_BASIC_PRODUCT_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				BorrowProductModel result = new BorrowProductModel();
+				dbObject = cursor.next();
+
+				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
+				result.setProdCode(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
+				result.setUnitPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
+				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
+				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+
 	public static List<RegularBasicProductModel> grabRegularBasicProductModel(String testName) {
 		DBObject dbObject = null;
 		List<RegularBasicProductModel> itemList = new ArrayList<RegularBasicProductModel>();
@@ -564,6 +594,34 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 
+	}
+	
+	public static List<BorrowCartCalcDetailsModel> grabBorrowCartCalcDetailsModels(String testName) {
+		DBObject dbObject = null;
+		List<BorrowCartCalcDetailsModel> itemList = new ArrayList<BorrowCartCalcDetailsModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.BORROW_CART_CALC_DETAILS_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				BorrowCartCalcDetailsModel result = new BorrowCartCalcDetailsModel();
+				dbObject = cursor.next();
+				
+				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
+				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
+				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
+				
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+		
 	}
 
 	@SuppressWarnings("unchecked")

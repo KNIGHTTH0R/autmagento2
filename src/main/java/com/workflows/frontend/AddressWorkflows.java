@@ -1,5 +1,7 @@
 package com.workflows.frontend;
 
+import net.thucydides.core.annotations.Step;
+
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 
@@ -15,7 +17,7 @@ public class AddressWorkflows {
 		billingAddress = billingAddressValue;
 		billingCountryName = billingCountryNameValue;
 	}
-
+	@Step
 	public static void validateBillingAddress(String message) {
 		verifyCountry(billingCountryName, billingAddress.getCountryName());
 	}
@@ -24,7 +26,7 @@ public class AddressWorkflows {
 		shippingAddress = shippingAddressValue;
 		shippingCountryName = shippingCountryNameValue;
 	}
-
+	@Step
 	public static void validateShippingAddress(String message) {
 		verifyCountry(shippingCountryName, shippingAddress.getCountryName());
 	}

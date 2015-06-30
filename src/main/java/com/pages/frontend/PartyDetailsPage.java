@@ -7,8 +7,10 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.tools.env.variables.ContextConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractPage;
 
 public class PartyDetailsPage extends AbstractPage {
@@ -93,21 +95,23 @@ public class PartyDetailsPage extends AbstractPage {
 	
 		Assert.assertTrue("There are produscts in party wishlist which should not be there !!!", wishlistProductsList.size() == 1);
 
-//		Actions builder = new Actions(getDriver());
-//		builder.moveToElement(wishlistProductImage).build().perform();
-		element(wishlistProductCheckbox).click();
+		Actions builder = new Actions(getDriver());
+		builder.moveToElement(wishlistProductImage).build().perform();
+//		element(wishlistProductCheckbox).click();
 		element(wishlistProductNameContainer).waitUntilVisible();
 		boolean found = false;
 		if (wishlistProductNameContainer.getText().contains(productName)) {
 			found = true;
-//			wishlistProductCheckbox.click();
+			wishlistProductCheckbox.click();
+			waitABit(2000);
 		}
 		// on es website the borrow cart and contact booster is blocked.the
 		// product appears in party wishlist but cannot pe added into the borrow
 		// cart
-//		if (!MongoReader.getContext().contentEquals("es")) {
-//			addToBorrowCart.click();
-//		}
+		if (!MongoReader.getContext().contentEquals("es")) {
+			addToBorrowCart.click();
+			waitABit(5000);
+		}
 		Assert.assertTrue("The product expected to be in wishlist is not present !!!", found);
 	}
 

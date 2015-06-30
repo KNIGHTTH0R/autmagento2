@@ -450,7 +450,7 @@ public class PrintUtils {
 		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
 		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());
 		System.out.println("tax : " + calculatedDetailsModel.getTax());
-		System.out.println("tax : " + calculatedDetailsModel.getIpPoints());
+		System.out.println("ip points : " + calculatedDetailsModel.getIpPoints());
 	
 		
 	}
