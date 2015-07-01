@@ -1,4 +1,4 @@
-package com.steps.backend.styleParties;
+package com.steps.backend.stylecoach;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;

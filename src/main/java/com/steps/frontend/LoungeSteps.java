@@ -22,9 +22,15 @@ public class LoungeSteps extends AbstractSteps {
 	public void clickOrderForCustomer() {
 		loungePage().clickOrderForCustomer();
 	}
+
 	@Step
 	public void clickGoToBorrowCart() {
 		loungePage().clickGoToBorrowCart();
+	}
+
+	@Step
+	public void goToToAddNewContact() {
+		loungePage().goToToAddNewContact();
 	}
 
 	@Step
@@ -32,9 +38,9 @@ public class LoungeSteps extends AbstractSteps {
 		loungePage().typeContactName(name);
 		loungePage().startOrderForCustomer();
 	}
-	
+
 	@Step
-	public void orderForNewCustomer(){
+	public void orderForNewCustomer() {
 		loungePage().clickOrderForCustomer();
 		loungePage().clickAddContact();
 	}

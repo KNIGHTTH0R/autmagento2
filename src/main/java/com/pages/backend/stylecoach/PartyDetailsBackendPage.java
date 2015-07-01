@@ -1,4 +1,4 @@
-package com.pages.backend.styleParties;
+package com.pages.backend.stylecoach;
 
 import java.util.List;
 

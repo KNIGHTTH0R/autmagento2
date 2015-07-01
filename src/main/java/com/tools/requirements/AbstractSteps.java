@@ -22,8 +22,9 @@ import com.pages.backend.orders.details.OrderItemsPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
 import com.pages.backend.orders.details.OrdersActionsPage;
 import com.pages.backend.promotion.ShoppingCartPriceRulesPage;
-import com.pages.backend.styleParties.PartyDetailsBackendPage;
-import com.pages.backend.styleParties.PartyListBackendPage;
+import com.pages.backend.stylecoach.PartyDetailsBackendPage;
+import com.pages.backend.stylecoach.PartyListBackendPage;
+import com.pages.backend.stylecoach.StylecoachListBackendPage;
 import com.pages.external.MailinatorPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
 import com.pages.external.facebook.FacebookEMBLoginPage;
@@ -238,6 +239,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public PartyListBackendPage partyListBackendPage() {
 		return getPages().currentPageAt(PartyListBackendPage.class);
+	}
+	
+	public StylecoachListBackendPage stylecoachListBackendPage() {
+		return getPages().currentPageAt(StylecoachListBackendPage.class);  
 	}
 
 	public PartyDetailsBackendPage partyDetailsBackendPage() {

@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
-import com.steps.backend.styleParties.PartyDetailsBackendSteps;
-import com.steps.backend.styleParties.PartyListBackendSteps;
+import com.steps.backend.stylecoach.PartyDetailsBackendSteps;
+import com.steps.backend.stylecoach.PartyListBackendSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
