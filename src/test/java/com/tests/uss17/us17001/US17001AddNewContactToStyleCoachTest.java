@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
@@ -47,6 +48,8 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 			stylistRegistrationData = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		} else
 			System.out.println("The database has no entries");
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test

@@ -114,6 +114,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerFormUnderContext(CustomerFormModel customerData, AddressModel addressData, String context) {
 
 		getDriver().get(MongoReader.getBaseURL() + context);
+		System.out.println(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());

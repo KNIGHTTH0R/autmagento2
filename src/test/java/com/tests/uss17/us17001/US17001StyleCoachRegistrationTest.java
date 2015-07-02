@@ -52,7 +52,7 @@ public class US17001StyleCoachRegistrationTest extends BaseTest {
 	}
 
 	@Test
-	public void us15003StyleCoachRegistrationTest() {
+	public void us17001StyleCoachRegistrationTest() {
 		headerSteps.navigateToRegisterForm();
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerFormPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);

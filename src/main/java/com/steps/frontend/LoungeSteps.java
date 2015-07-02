@@ -34,6 +34,11 @@ public class LoungeSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void goToContactsList() {
+		loungePage().goToContactsList();
+	}
+
+	@Step
 	public void selectCustomerToOrderFor(String name) {
 		loungePage().typeContactName(name);
 		loungePage().startOrderForCustomer();

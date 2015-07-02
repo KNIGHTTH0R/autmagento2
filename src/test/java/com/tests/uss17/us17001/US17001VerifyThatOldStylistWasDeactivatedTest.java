@@ -21,7 +21,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 @WithTag(name = "US17", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US17001ReasignContactsTest extends BaseTest {
+public class US17001VerifyThatOldStylistWasDeactivatedTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -49,7 +49,7 @@ public class US17001ReasignContactsTest extends BaseTest {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStylecoachList();
-		stylecoachListBackendSteps.reassignCustomersToAnotherStylecoach(stylistEmail,"mihaialexandrubarta@gmail.com");
+		stylecoachListBackendSteps.verifyStylecoachEmailAndStatus(stylistEmail);
 	}
 
 }

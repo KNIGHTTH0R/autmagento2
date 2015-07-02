@@ -26,6 +26,9 @@ public class LoungePage extends AbstractPage {
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(2) > ul li:nth-child(2) a")
 	private WebElement addNewContactLink;
+	
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(2) > ul li:nth-child(1) a")
+	private WebElement contactsListLink;
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(3)")
 	private WebElement customerOrderLink;
@@ -121,6 +124,17 @@ public class LoungePage extends AbstractPage {
 		
 		element(addNewContactLink).waitUntilVisible();
 		addNewContactLink.click();
+		
+	}
+	public void goToContactsList() {
+		
+		Actions builder = new Actions(getDriver());
+		
+		builder.moveToElement(meinBusinessButton).build().perform();
+		builder.moveToElement(myContactsLink).build().perform();
+		
+		element(contactsListLink).waitUntilVisible();
+		contactsListLink.click();
 		
 	}
 	

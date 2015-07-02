@@ -17,6 +17,7 @@ import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.constants.Separators;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -38,7 +39,6 @@ public class US17001RegularCustomerRegistrationTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		// Generate data for this test run
 		stylistAddressModel = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
@@ -48,7 +48,8 @@ public class US17001RegularCustomerRegistrationTest extends BaseTest {
 	@Test
 	public void us17001RegularCustomerRegistrationTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel, stylistAddressModel.getFirstName() + stylistAddressModel.getLastName());
+		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel,
+				Separators.SLASH + stylistAddressModel.getFirstName() + stylistAddressModel.getLastName());
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
 	}

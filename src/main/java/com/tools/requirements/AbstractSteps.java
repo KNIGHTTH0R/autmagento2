@@ -44,6 +44,7 @@ import com.pages.frontend.KoboValidationPage;
 import com.pages.frontend.LoginPage;
 import com.pages.frontend.LoungePage;
 import com.pages.frontend.MyBusinessPage;
+import com.pages.frontend.MyContactsListPage;
 import com.pages.frontend.PartyCreationPage;
 import com.pages.frontend.PartyDetailsPage;
 import com.pages.frontend.PomProductListPage;
@@ -231,6 +232,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public NavigationPage navigationPage() {
 		return getPages().currentPageAt(NavigationPage.class);
+	}
+	
+	public MyContactsListPage myContactsListPage() {
+		return getPages().currentPageAt(MyContactsListPage.class);
 	}
 
 	public CustomerListPage customerListPage() {
