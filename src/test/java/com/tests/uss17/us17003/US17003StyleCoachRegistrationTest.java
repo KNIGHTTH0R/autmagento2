@@ -1,4 +1,4 @@
-package com.tests.uss17.us17001;
+package com.tests.uss17.us17003;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -26,7 +26,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US17", type = "frontend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US17001StyleCoachRegistrationTest extends BaseTest {
+public class US17003StyleCoachRegistrationTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -51,7 +51,7 @@ public class US17001StyleCoachRegistrationTest extends BaseTest {
 	}
 
 	@Test
-	public void us17001StyleCoachRegistrationTest() {
+	public void us17003StyleCoachRegistrationTest() {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.fillCreateCustomerFormPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
 		customVerification.printErrors();

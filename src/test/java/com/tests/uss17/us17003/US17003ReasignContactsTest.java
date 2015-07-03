@@ -1,4 +1,4 @@
-package com.tests.uss17.us17001;
+package com.tests.uss17.us17003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +29,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 @WithTag(name = "US17", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US17001ReasignContactsTest extends BaseTest {
+public class US17003ReasignContactsTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -40,7 +40,7 @@ public class US17001ReasignContactsTest extends BaseTest {
 
 	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
 	private String stylistEmail;
-	private String newStylecoachUsername;
+	private String cancelledStylecoachUsername;
 
 	@Before
 	public void setUp() throws Exception {
@@ -52,7 +52,7 @@ public class US17001ReasignContactsTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
-			newStylecoachUsername = prop.getProperty("stylecoachUsername");
+			cancelledStylecoachUsername = prop.getProperty("cancelledStylecoachUsername");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -66,20 +66,21 @@ public class US17001ReasignContactsTest extends BaseTest {
 			}
 		}
 
-		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
 
 	}
 
 	@Test
-	public void us17001ReasignContactsTest() {
+	public void us17003ReasignContactsTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStylecoachList();
-		stylecoachListBackendSteps.reassignCustomersToAnotherStylecoach(stylistEmail, newStylecoachUsername);
+		stylecoachListBackendSteps.reassignCustomersToAnotherStylecoach(stylistEmail, cancelledStylecoachUsername);
+		stylecoachListBackendSteps.verifyStylecoachEmailAndStatus(stylistEmail);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.tests.uss17.us17001;
+package com.tests.uss17.us17002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +29,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 @WithTag(name = "US17", type = "backend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US17001ReasignContactsTest extends BaseTest {
+public class US17002ReasignContactsTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -66,20 +66,21 @@ public class US17001ReasignContactsTest extends BaseTest {
 			}
 		}
 
-		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
 
 	}
 
 	@Test
-	public void us17001ReasignContactsTest() {
+	public void us17002ReasignContactsTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStylecoachList();
 		stylecoachListBackendSteps.reassignCustomersToAnotherStylecoach(stylistEmail, newStylecoachUsername);
+		stylecoachListBackendSteps.verifyStylecoachEmailAndStatus(stylistEmail);
 	}
 
 }

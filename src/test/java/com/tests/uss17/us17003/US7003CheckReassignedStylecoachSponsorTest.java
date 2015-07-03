@@ -1,4 +1,4 @@
-package com.tests.uss17.us17001;
+package com.tests.uss17.us17003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,36 +15,30 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.backend.BackEndSteps;
-import com.steps.backend.stylecoach.StylecoachListBackendSteps;
+import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
-import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.env.constants.FilePaths;
-import com.tools.env.variables.Credentials;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US17", type = "backend")
+@WithTag(name = "US17", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US17001ReasignContactsTest extends BaseTest {
+public class US7003CheckReassignedStylecoachSponsorTest extends BaseTest {
 
 	@Steps
-	public BackEndSteps backEndSteps;
+	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public StylecoachListBackendSteps stylecoachListBackendSteps;
-	@Steps
-	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
+	public HeaderSteps headerSteps;
 
-	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
 	private String stylistEmail;
+	private String stylistPassword;
 	private String newStylecoachUsername;
 
 	@Before
 	public void setUp() throws Exception {
-
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -52,6 +46,7 @@ public class US17001ReasignContactsTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
+			
 			newStylecoachUsername = prop.getProperty("stylecoachUsername");
 
 		} catch (IOException ex) {
@@ -66,20 +61,23 @@ public class US17001ReasignContactsTest extends BaseTest {
 			}
 		}
 
-		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationWithKnownSponsorTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationWithKnownSponsorTest").get(0).getEmailName();
+			stylistPassword = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationWithKnownSponsorTest").get(0).getPassword();
 		} else
 			System.out.println("The database has no entries");
 
 	}
 
 	@Test
-	public void us17001ReasignContactsTest() {
+	public void us7003CheckReassignedStylecoachSponsorTest() {
 
-		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnStylecoachList();
-		stylecoachListBackendSteps.reassignCustomersToAnotherStylecoach(stylistEmail, newStylecoachUsername);
+		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
+		headerSteps.goToProfile();
+		System.out.println(headerSteps.getStyleCoachEmailFromProfile());
+		headerSteps.validateCustomerIsAssignedToStyleCoach(newStylecoachUsername, headerSteps.getStyleCoachEmailFromProfile());
+
 	}
 
 }

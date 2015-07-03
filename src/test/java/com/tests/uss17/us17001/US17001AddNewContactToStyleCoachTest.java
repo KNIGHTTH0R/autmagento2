@@ -12,6 +12,8 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
+import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
@@ -31,6 +33,10 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 	@Steps
 	public LoungeSteps loungeSteps;
 	@Steps
+	public FooterSteps footerSteps;
+	@Steps
+	public HeaderSteps headerSteps;
+	@Steps
 	public CreateNewContactSteps createNewContactSteps;
 
 	public CustomerFormModel stylistRegistrationData;
@@ -48,7 +54,7 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 			stylistRegistrationData = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		} else
 			System.out.println("The database has no entries");
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -56,6 +62,10 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 	public void us17001AddNewContactToStyleCoachTest() {
 
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
 

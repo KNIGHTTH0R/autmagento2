@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.Title;
 import org.junit.Assert;
 
 import com.tools.data.soap.DBStylistModel;
+import com.tools.env.constants.Separators;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -112,8 +113,16 @@ public class HeaderSteps extends AbstractSteps {
 	@StepGroup
 	public void navigateToRegisterForm() {
 		getDriver().get(MongoReader.getBaseURL());
-		// getDriver().get(UrlConstants.BASE_FE_URL);
 		headerPage().clickAnmeldenButton();
+		footerPage().clickRegistrierungLink();
+
+	}
+
+	@StepGroup
+	public void navigateToStylecoachRegisterFormUnderContext(String context) {
+		getDriver().get(MongoReader.getBaseURL() + Separators.SLASH + context.toLowerCase());
+		waitABit(2000);
+		System.out.println(MongoReader.getBaseURL() + Separators.SLASH + context.toLowerCase());
 		footerPage().clickRegistrierungLink();
 
 	}
@@ -134,9 +143,6 @@ public class HeaderSteps extends AbstractSteps {
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
 		footerPage().clickRegistrierungLink();
-		// loginPage().clickOnStylistRegistrationLink();
-		// stylistCampaignPage().clickJetztStartenButton();
-		// starterSetPage().clickOnJetztStyleCoachWerdenButton();
 
 	}
 
@@ -183,8 +189,6 @@ public class HeaderSteps extends AbstractSteps {
 
 	@Step
 	public void validateCustomerIsAssignedToStyleCoach(String expectedSCName, String grabbedSCName) {
-		System.out.println(expectedSCName);
-		System.out.println(grabbedSCName);
 		Assert.assertTrue("Failure: The customer is not assigned to the expected SC !", expectedSCName.contentEquals(grabbedSCName));
 
 	}

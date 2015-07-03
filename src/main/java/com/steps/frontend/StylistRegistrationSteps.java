@@ -23,7 +23,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	private static final long serialVersionUID = 743498685895573421L;
 
 	@StepGroup
-	@Title("Fill create customer form")
+	@Title("Fill create stylecoach form")
 	public String fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
 
 		inputFirstName(customerData.getFirstName());
@@ -44,6 +44,30 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitPaymentMethod();
 		finishPayment();
 
+		String date = FormatterUtils.getAndFormatCurrentDate();
+		return date;
+	}
+	@StepGroup
+	@Title("Fill create stylecoach form with known sponsor")
+	public String fillCreateStylecoachFormWithKnownSponsor(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+		
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetails(addressData);
+		checkIAgree();
+		submitStep();
+		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		submitStep();
+		selectStarterKit();
+		submitStep();
+		clickOnNachahmePaymentMethod();
+		submitPaymentMethod();
+		finishPayment();
+		
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
@@ -68,6 +92,29 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		payWithCreditCard();
 
+		String date = FormatterUtils.getAndFormatCurrentDate();
+		return date;
+	}
+	
+	@StepGroup
+	@Title("Fill create customer form and pay with visa")
+	public String fillCreateStylecoachFormWithKnownSponsorPayWithVisa(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+		
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetails(addressData);
+		checkIAgree();
+		submitStep();
+		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		submitStep();
+		selectStarterKit();
+		submitStep();
+		payWithCreditCard();
+		
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
