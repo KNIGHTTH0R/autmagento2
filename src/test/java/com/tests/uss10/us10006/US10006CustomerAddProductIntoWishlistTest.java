@@ -95,7 +95,8 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
-		urlModel = MongoReader.grabUrlModels("US10006ChechEmailAndAcceptInvitationTest").get(0);
+//		urlModel = MongoReader.grabUrlModels("US10006ChechEmailAndAcceptInvitationTest").get(0);
+//		System.out.println(urlModel.getUrl());
 	}
 
 	@Test

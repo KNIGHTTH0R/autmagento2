@@ -81,13 +81,15 @@ public class StylecoachListBackendPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(reasignStylistsSelect).waitUntilVisible();
 		String stylistName = "";
+		boolean found = false;
 		List<WebElement> stylistList = reasignStylistsSelect.findElements(By.cssSelector("option"));
 		for (WebElement stylist : stylistList) {
 			if (stylist.getText().contains(stylecoachName)) {
+				found = true;
 				stylistName = stylist.getText();
 			}
 		}
-		System.out.println(stylistName);
+		Assert.assertTrue("No option with this email was found", found);
 		return stylistName;
 	}
 

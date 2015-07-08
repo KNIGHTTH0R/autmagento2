@@ -50,7 +50,7 @@ public class US17003ReasignContactsTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17003.properties");
 			prop.load(input);
 			cancelledStylecoachUsername = prop.getProperty("cancelledStylecoachUsername");
 
