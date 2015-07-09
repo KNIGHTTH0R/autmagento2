@@ -96,7 +96,7 @@ public class PartyDetailsPage extends AbstractPage {
 		Assert.assertTrue("There are produscts in party wishlist which should not be there !!!", wishlistProductsList.size() == 1);
 
 		Actions builder = new Actions(getDriver());
-		builder.moveToElement(wishlistProductImage).build().perform();
+		builder.moveToElement(wishlistProductImage).perform();
 		element(wishlistProductNameContainer).waitUntilVisible();
 		boolean found = false;
 		if (wishlistProductNameContainer.getText().contains(productName)) {
