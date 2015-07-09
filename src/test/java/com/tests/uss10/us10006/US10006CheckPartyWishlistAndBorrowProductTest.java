@@ -134,6 +134,7 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
+		
 
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.selectWishlistProductAndAddItToBorrowCart(productName);
