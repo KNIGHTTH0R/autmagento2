@@ -25,7 +25,7 @@ import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US6", type = "backend")
-@Story(Application.Registration.Stylist.class)
+@Story(Application.KoboSubscription.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001StylistActivationTest extends BaseTest {
 

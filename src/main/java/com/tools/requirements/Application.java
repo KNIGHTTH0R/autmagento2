@@ -14,6 +14,9 @@ public class Application {
 
 		public class HostessCart {
 		}
+
+		public class BorrowCart {
+		}
 	}
 
 	@Feature
@@ -22,7 +25,20 @@ public class Application {
 		}
 
 		public class Stylist {
-		}
+		}		
+		
+	}
+	@Feature
+	public class KoboRegistration {
+		
+	}
+	@Feature
+	public class KoboCampaign {
+		
+	}
+	@Feature
+	public class KoboSubscription {
+		
 	}
 
 	@Feature
@@ -30,14 +46,27 @@ public class Application {
 		public class CreateParty {
 		}
 	}
+
 	@Feature
 	public class Distribution {
 		public class CustomerLead {
 		}
+
 		public class StyleCoachLead {
 		}
+
 		public class HostLead {
 		}
+	}
+
+	@Feature
+	public class Newsletter {
+
+	}
+
+	@Feature
+	public class MassAction {
+
 	}
 
 	@Feature

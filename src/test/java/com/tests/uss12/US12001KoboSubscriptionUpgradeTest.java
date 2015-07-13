@@ -34,7 +34,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 
 @WithTag(name = "US12", type = "frontend")
-@Story(Application.Shop.ForMyselfCart.class)
+@Story(Application.KoboSubscription.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 

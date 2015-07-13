@@ -23,7 +23,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US15", type = "external")
-@Story(Application.Registration.Customer.class)
+@Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
 public class US15001ConfirmCustomerTest extends BaseTest {
 

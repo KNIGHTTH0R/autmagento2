@@ -22,7 +22,7 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US7", type = "backend")
-@Story(Application.Registration.Customer.class)
+@Story(Application.KoboRegistration.class)
 @RunWith(ThucydidesRunner.class)
 public class US70010CheckCustomerActivation extends BaseTest {
 

@@ -27,7 +27,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.RandomAddress;
 
 @WithTag(name = "US15", type = "backend")
-@Story(Application.Registration.Customer.class)
+@Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003ChangeCustomersEmailTest extends BaseTest {
 

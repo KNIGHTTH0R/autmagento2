@@ -42,5 +42,9 @@ public class OrderForCustomerCartSteps extends AbstractSteps {
 	public void submitVoucherCode() {
 		orderForCustomerCartPage().submitVoucherCode();
 	}
+	@Step
+	public void openSearchProductsModal() {
+		orderForCustomerCartPage().openSearchProductsModal();
+	}
 
 }

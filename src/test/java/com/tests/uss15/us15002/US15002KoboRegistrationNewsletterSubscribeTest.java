@@ -48,7 +48,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 
 @WithTag(name = "US15", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
 public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 

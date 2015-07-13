@@ -67,7 +67,7 @@ import com.poc.DeactivateRule;
 	US11001Suite.class,
 	US11002Suite.class,
 	US12001Suite.class,
-	
+	US16001Suite.class,
 	
 	
 })

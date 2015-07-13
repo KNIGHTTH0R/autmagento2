@@ -53,6 +53,71 @@ public class ApiCalls {
 		return result;
 	}
 
+	public static ProductDetailedModel createBundleProductModel() {
+		ProductDetailedModel result = createProductModel();
+		result.setType("bundle");
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+
+		return result;
+	}
+
+	public static ProductDetailedModel createGroupedProductModel() {
+		ProductDetailedModel result = createProductModel();
+		result.setType("grouped");
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+
+		return result;
+	}
+
+	public static ProductDetailedModel createConfigurableProductModel() {
+		ProductDetailedModel result = createProductModel();
+		result.setType("configurable");
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+
+		return result;
+	}
+
+	public static ProductDetailedModel createVirtualProductModel() {
+		ProductDetailedModel result = createProductModel();
+		result.setType("virtual");
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+
+		return result;
+	}
+
+	public static ProductDetailedModel createGiftProductModel() {
+		ProductDetailedModel result = createProductModel();
+		result.setType("giftcard");
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+
+		return result;
+	}
+	public static ProductDetailedModel createDownloadableProductModel() {
+		ProductDetailedModel result = createProductModel();
+		result.setType("downloadable");
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+		
+		return result;
+	}
+
 	public static ProductDetailedModel createProductModel() {
 		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
 		ProductDetailedModel product = new ProductDetailedModel();

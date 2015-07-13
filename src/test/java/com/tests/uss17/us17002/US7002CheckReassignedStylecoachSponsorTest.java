@@ -24,7 +24,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US17", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
 public class US7002CheckReassignedStylecoachSponsorTest extends BaseTest {
 

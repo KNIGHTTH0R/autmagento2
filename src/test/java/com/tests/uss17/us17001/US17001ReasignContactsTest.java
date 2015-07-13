@@ -27,7 +27,7 @@ import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US17", type = "backend")
-@Story(Application.Registration.Customer.class)
+@Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
 public class US17001ReasignContactsTest extends BaseTest {
 

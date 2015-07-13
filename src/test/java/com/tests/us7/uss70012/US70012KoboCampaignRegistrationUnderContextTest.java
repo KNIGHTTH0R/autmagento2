@@ -48,7 +48,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 
 @WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@Story(Application.KoboCampaign.class)
 @RunWith(ThucydidesRunner.class)
 public class US70012KoboCampaignRegistrationUnderContextTest extends BaseTest {
 

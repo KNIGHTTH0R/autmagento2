@@ -48,7 +48,7 @@ import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
 @WithTag(name = "US15", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
+@Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
 public class US15004OrderForCustomerTest extends BaseTest {
 

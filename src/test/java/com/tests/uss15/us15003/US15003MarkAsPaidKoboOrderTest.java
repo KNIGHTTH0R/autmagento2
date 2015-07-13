@@ -25,7 +25,7 @@ import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US6", type = "backend")
-@Story(Application.Registration.Stylist.class)
+@Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003MarkAsPaidKoboOrderTest extends BaseTest {
 

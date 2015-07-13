@@ -38,7 +38,7 @@ import com.tools.requirements.Application;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
 @WithTag(name = "US10", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
+@Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 

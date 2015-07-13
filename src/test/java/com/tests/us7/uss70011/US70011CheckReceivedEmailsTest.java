@@ -18,7 +18,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US7", type = "external")
-@Story(Application.Registration.Customer.class)
+@Story(Application.KoboCampaign.class)
 @RunWith(ThucydidesRunner.class)
 public class US70011CheckReceivedEmailsTest extends BaseTest {
 

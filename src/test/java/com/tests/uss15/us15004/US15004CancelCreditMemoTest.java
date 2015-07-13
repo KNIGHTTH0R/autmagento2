@@ -20,7 +20,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US15", type = "backend")
-@Story(Application.Registration.Stylist.class)
+@Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
 public class US15004CancelCreditMemoTest extends BaseTest {
 

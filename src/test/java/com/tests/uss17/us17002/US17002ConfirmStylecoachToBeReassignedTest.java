@@ -18,7 +18,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US17", type = "external")
-@Story(Application.Registration.Customer.class)
+@Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
 public class US17002ConfirmStylecoachToBeReassignedTest extends BaseTest {
 

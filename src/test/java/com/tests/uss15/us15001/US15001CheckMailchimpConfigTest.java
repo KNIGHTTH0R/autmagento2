@@ -25,7 +25,7 @@ import com.tools.requirements.Application;
 import com.workflows.mailchimp.MailchimpValidationWorkflows;
 
 @WithTag(name = "US15", type = "external")
-@Story(Application.Distribution.CustomerLead.class)
+@Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
 public class US15001CheckMailchimpConfigTest extends BaseTest {
 

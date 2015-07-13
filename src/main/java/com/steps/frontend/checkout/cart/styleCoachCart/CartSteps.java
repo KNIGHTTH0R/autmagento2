@@ -65,6 +65,7 @@ public class CartSteps extends  AbstractSteps{
 		cartPage().clickToShipping();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
+
 	@Step
 	public void updateCart(){
 		cartPage().clickUpdateCart();

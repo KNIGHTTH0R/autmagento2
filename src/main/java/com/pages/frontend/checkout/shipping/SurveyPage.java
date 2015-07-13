@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;

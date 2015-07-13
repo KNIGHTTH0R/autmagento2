@@ -37,7 +37,7 @@ import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.borrowCart.BorrowCartOrderProductsWorkflows;
 
 @WithTag(name = "US16", type = "backend")
-@Story(Application.Shop.ForMyselfCart.class)
+@Story(Application.Shop.BorrowCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US16001ValidateOrderBackOfficeTest extends BaseTest {
 	

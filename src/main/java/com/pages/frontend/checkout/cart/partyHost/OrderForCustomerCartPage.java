@@ -47,6 +47,9 @@ public class OrderForCustomerCartPage extends AbstractPage {
 
 	@FindBy(css = "#discount-coupon-form a.button.gold-btn.bordered")
 	private WebElement submitVoucherCode;
+	
+	@FindBy(id = "empty-add-items-button")
+	private WebElement searchProductsModal;
 
 
 	public List<HostCartProductModel> grabProductsData() {
@@ -127,6 +130,10 @@ public class OrderForCustomerCartPage extends AbstractPage {
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
+	}
+	public void openSearchProductsModal() {
+		element(searchProductsModal).waitUntilVisible();
+		searchProductsModal.click();
 	}
 
 	public void clickUpdateCart() {

@@ -18,7 +18,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US15", type = "frontend")
-@Story(Application.Distribution.CustomerLead.class)
+@Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
 public class US15001SubscribeToNewsletterTest extends BaseTest {
 
