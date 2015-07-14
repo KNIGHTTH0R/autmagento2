@@ -25,6 +25,7 @@ public class SoapKeys {
 	public static final String SET = "set";
 	public static final String SKU = "sku";
 	public static final String STORE = "store";
+	public static final String CARTS = "carts";
 	public static final String PRODUCT_DATA = "productData";
 	public static final String NAME = "name";
 	public static final String DESCRIPTION = "description";
@@ -48,6 +49,7 @@ public class SoapKeys {
 	public static final String CUSTOM_LAYOUT_UPDATE = "custom_layout_update";
 	public static final String OPTIONS_CONTAINER = "options_container";
 	public static final String PRODUCT_IP = "product_ip";
+	public static final String JEWELRY_BONUS = "jewelry_bonus_value";
 	public static final String NEWS_FROM_DATE = "news_from_date";
 	public static final String NEWS_TO_DATE = "news_to_date";
 	

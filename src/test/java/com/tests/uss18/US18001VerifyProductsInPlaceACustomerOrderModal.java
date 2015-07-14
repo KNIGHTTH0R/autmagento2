@@ -56,44 +56,56 @@ public class US18001VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 	private ProductDetailedModel genProduct5;
 	private ProductDetailedModel genProduct6;
 	private ProductDetailedModel genProduct7;
+	private ProductDetailedModel genProduct8;
+	private ProductDetailedModel genProduct9;
 
 	@Before
 	public void setUp() throws Exception {
 
-		genProduct1 = ApiCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		genProduct1.setIp("75");
-		ApiCalls.createApiProduct(genProduct1);
+//		genProduct1 = ApiCalls.createProductModel();
+//		genProduct1.setPrice("89.00");
+//		genProduct1.setIp("75");
+//		ApiCalls.createApiProduct(genProduct1);
+//		
+//		genProduct2 = ApiCalls.createBundleProductModel();
+//		genProduct2.setPrice("89.00");
+//		genProduct2.setIp("75");
+//		ApiCalls.createApiProduct(genProduct2);
+//		
+//		genProduct3 = ApiCalls.createGroupedProductModel();
+//		genProduct3.setPrice("89.00");
+//		genProduct3.setIp("75");
+//		ApiCalls.createApiProduct(genProduct3);
+//		
+//		genProduct4 = ApiCalls.createConfigurableProductModel();
+//		genProduct4.setPrice("89.00");
+//		genProduct4.setIp("75");
+//		ApiCalls.createApiProduct(genProduct4);
+//		
+//		genProduct5 = ApiCalls.createVirtualProductModel();
+//		genProduct5.setPrice("89.00");
+//		genProduct5.setIp("75");
+//		ApiCalls.createApiProduct(genProduct5);
+//		
+//		genProduct6 = ApiCalls.createGiftProductModel();
+//		genProduct6.setPrice("89.00");
+//		genProduct6.setIp("75");
+//		ApiCalls.createApiProduct(genProduct6);
+//		
+//		genProduct7 = ApiCalls.createDownloadableProductModel();
+//		genProduct7.setPrice("89.00");
+//		genProduct7.setIp("75");
+//		ApiCalls.createApiProduct(genProduct7);
 		
-		genProduct2 = ApiCalls.createBundleProductModel();
-		genProduct2.setPrice("89.00");
-		genProduct2.setIp("75");
-		ApiCalls.createApiProduct(genProduct2);
+		genProduct8 = ApiCalls.createZzzProductModel();
+		genProduct8.setPrice("89.00");
+		genProduct8.setIp("75");
+		ApiCalls.createApiProduct(genProduct8);
 		
-		genProduct3 = ApiCalls.createGroupedProductModel();
-		genProduct3.setPrice("89.00");
-		genProduct3.setIp("75");
-		ApiCalls.createApiProduct(genProduct3);
-		
-		genProduct4 = ApiCalls.createConfigurableProductModel();
-		genProduct4.setPrice("89.00");
-		genProduct4.setIp("75");
-		ApiCalls.createApiProduct(genProduct4);
-		
-		genProduct5 = ApiCalls.createVirtualProductModel();
-		genProduct5.setPrice("89.00");
-		genProduct5.setIp("75");
-		ApiCalls.createApiProduct(genProduct5);
-		
-		genProduct6 = ApiCalls.createGiftProductModel();
-		genProduct6.setPrice("89.00");
-		genProduct6.setIp("75");
-		ApiCalls.createApiProduct(genProduct6);
-		
-		genProduct7 = ApiCalls.createDownloadableProductModel();
-		genProduct7.setPrice("89.00");
-		genProduct7.setIp("75");
-		ApiCalls.createApiProduct(genProduct7);
+//		genProduct9 = ApiCalls.createStarterKitProductModel();
+//		genProduct9.setPrice("89.00");
+//		genProduct9.setIp("75");
+//		ApiCalls.createApiProduct(genProduct9);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -136,11 +148,11 @@ public class US18001VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 		customerRegistrationSteps.wipeHostCart();		
 		orderForCustomerCartSteps.openSearchProductsModal();
 		
-		addProductsModalSteps.searchForProduct(genProduct1.getSku());
-		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct1.getSku(), genProduct1.getName());
-		
-		addProductsModalSteps.searchForProduct(genProduct2.getSku());
-		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct2.getSku(), genProduct2.getName());
+//		addProductsModalSteps.searchForProduct(genProduct1.getSku());
+//		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct1.getSku(), genProduct1.getName());
+//		
+//		addProductsModalSteps.searchForProduct(genProduct2.getSku());
+//		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct2.getSku(), genProduct2.getName());
 		
 	}
 

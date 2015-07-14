@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
 import com.tools.env.constants.FilePaths;
@@ -32,6 +33,8 @@ public class US7002CheckReassignedStylecoachSponsorTest extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public DashboardSteps dashboardSteps;
 
 	private String stylistEmail;
 	private String stylistPassword;
@@ -74,8 +77,8 @@ public class US7002CheckReassignedStylecoachSponsorTest extends BaseTest {
 
 		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
 		headerSteps.goToProfile();
-		System.out.println(headerSteps.getStyleCoachEmailFromProfile());
-		headerSteps.validateCustomerIsAssignedToStyleCoach(newStylecoachUsername, headerSteps.getStyleCoachEmailFromProfile());
+		System.out.println(dashboardSteps.getStyleCoachEmailFromProfile());
+		dashboardSteps.validateCustomerIsAssignedToStyleCoach(newStylecoachUsername, dashboardSteps.getStyleCoachEmailFromProfile());
 
 	}
 

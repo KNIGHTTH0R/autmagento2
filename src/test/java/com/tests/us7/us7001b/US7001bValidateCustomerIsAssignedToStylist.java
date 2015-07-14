@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
 import com.tools.persistance.MongoReader;
@@ -25,6 +26,8 @@ public class US7001bValidateCustomerIsAssignedToStylist extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public DashboardSteps dashboardSteps;
 
 	public String stylistEmail;
 	public String stylistPassword;
@@ -48,8 +51,8 @@ public class US7001bValidateCustomerIsAssignedToStylist extends BaseTest {
 		customerRegistrationSteps.performLoginOnPreferedWebsite(stylistEmail, stylistPassword);
 		headerSteps.goToProfile();
 		System.out.println(headerSteps.getBoutiqueName());
-		System.out.println(headerSteps.getStyleCoachFirstNameFromProfile());	
-		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());		
+		System.out.println(dashboardSteps.getStyleCoachFirstNameFromProfile());	
+		dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), dashboardSteps.getStyleCoachFirstNameFromProfile());		
 
 	}
 

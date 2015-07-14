@@ -10,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class HeaderPage extends AbstractPage {
@@ -144,44 +143,6 @@ public class HeaderPage extends AbstractPage {
 
 	public String getBoutiqueName() {
 		return brandContainer.getText().split("'")[0].toLowerCase();
-	}
-
-	public String getStyleCoachFirstNameFromProfile() {
-
-		String styleCoachNameParts[] = null;
-		List<WebElement> infoBoxList = getDriver().findElements(By.cssSelector(".info-box"));
-		for (WebElement infoBox : infoBoxList) {
-			if (infoBox.getText().contains(ContextConstants.MEIN_STYLE_COACH)) {
-				styleCoachNameParts = infoBox.findElement(By.cssSelector("dl dd")).getText().split(" ");
-				break;
-			}
-		}
-		return styleCoachNameParts[0].toLowerCase();
-	}
-
-	public String getStyleCoachFullNameFromProfile() {
-		
-		String styleCoachName = "";
-		List<WebElement> infoBoxList = getDriver().findElements(By.cssSelector(".info-box"));
-		for (WebElement infoBox : infoBoxList) {
-			if (infoBox.getText().contains(ContextConstants.MEIN_STYLE_COACH)) {
-				styleCoachName = infoBox.findElement(By.cssSelector("dl dd")).getText();
-				break;
-			}
-		}
-		return styleCoachName;
-	}
-	public String getStyleCoachEmailFromProfile() {
-		
-		String styleCoachName = "";
-		List<WebElement> infoBoxList = getDriver().findElements(By.cssSelector(".info-box"));
-		for (WebElement infoBox : infoBoxList) {
-			if (infoBox.getText().contains(ContextConstants.MEIN_STYLE_COACH)) {
-				styleCoachName = infoBox.findElement(By.cssSelector("dl dd:nth-child(4)")).getText();
-				break;
-			}
-		}
-		return styleCoachName;
 	}
 
 	public void navigateToPartyPage(String url) {

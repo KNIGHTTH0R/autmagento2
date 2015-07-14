@@ -12,6 +12,7 @@ public class ProductDetailedModel {
 	private String sku;
 	private List<String> categoriesArray = new ArrayList<String>();
 	private List<String> websiteArray = new ArrayList<String>();
+	private List<String> availableCartsArray = new ArrayList<String>();
 	private String name;
 	private String description;
 	private String shortDescription;
@@ -26,6 +27,7 @@ public class ProductDetailedModel {
 	private String giftMessageAvailable;
 	private String price;
 	private String specialPrice;
+	private String jewelryBonus;
 	private String specialFromDate;
 	private String specialToDate;
 	private String taxClassId;
@@ -321,6 +323,22 @@ public class ProductDetailedModel {
 
 	public void setNewsToDate(String newsToDate) {
 		this.newsToDate = newsToDate;
+	}
+
+	public String getJewelryBonus() {
+		return jewelryBonus;
+	}
+
+	public void setJewelryBonus(String jewelryBonus) {
+		this.jewelryBonus = jewelryBonus;
+	}
+
+	public List<String> getAvailableCartsArray() {
+		return availableCartsArray;
+	}
+
+	public void setAvailableCartsArray(List<String> availableCartsArray) {
+		this.availableCartsArray = availableCartsArray;
 	}
 
 }

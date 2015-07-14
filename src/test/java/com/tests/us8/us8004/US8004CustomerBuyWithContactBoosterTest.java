@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
@@ -77,6 +78,8 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	public CustomVerification customVerifications;
 	@Steps
 	public FooterSteps footerSteps;
+	@Steps
+	public DashboardSteps dashboardSteps;
 
 	private String username, password;
 	private String discountClass;
@@ -163,7 +166,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
-		voucherCode = headerSteps.getStyleCoachFullNameFromProfile().contentEquals(initialStylistName) ? secondVoucherCode : firstVoucherCode;
+		voucherCode = dashboardSteps.getStyleCoachFullNameFromProfile().contentEquals(initialStylistName) ? secondVoucherCode : firstVoucherCode;
 		homeSteps.goToNewItems();
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;

@@ -75,6 +75,7 @@ import com.pages.frontend.checkout.shipping.kobo.KoboShippingPage;
 import com.pages.frontend.checkout.shipping.regularUser.ShippingPartySectionPage;
 import com.pages.frontend.checkout.wishlist.WishlistPage;
 import com.pages.frontend.profile.DashboardMenuPage;
+import com.pages.frontend.profile.DashboardPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.registration.FacebookRegistrationFormPage;
 import com.pages.frontend.registration.contactBooster.ContactBoosterRegistrationPage;
@@ -84,6 +85,7 @@ import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
 import com.pages.frontend.registration.landing.ThankYouPage;
 import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
+import com.pages.frontend.reports.JewelryBonusHistoryPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
@@ -235,7 +237,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public NavigationPage navigationPage() {
 		return getPages().currentPageAt(NavigationPage.class);
 	}
-	
+
 	public MyContactsListPage myContactsListPage() {
 		return getPages().currentPageAt(MyContactsListPage.class);
 	}
@@ -247,13 +249,13 @@ public class AbstractSteps extends ScenarioSteps {
 	public PartyListBackendPage partyListBackendPage() {
 		return getPages().currentPageAt(PartyListBackendPage.class);
 	}
-	
+
 	public AddProductsModalPage addProductsModalPage() {
 		return getPages().currentPageAt(AddProductsModalPage.class);
 	}
-	
+
 	public StylecoachListBackendPage stylecoachListBackendPage() {
-		return getPages().currentPageAt(StylecoachListBackendPage.class);  
+		return getPages().currentPageAt(StylecoachListBackendPage.class);
 	}
 
 	public PartyDetailsBackendPage partyDetailsBackendPage() {
@@ -275,7 +277,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public CreditMemoListPage creditMemoListPage() {
 		return getPages().currentPageAt(CreditMemoListPage.class);
 	}
-	
+
 	public CreditMemoDetailsPage creditMemoDetailsPage() {
 		return getPages().currentPageAt(CreditMemoDetailsPage.class);
 	}
@@ -303,6 +305,10 @@ public class AbstractSteps extends ScenarioSteps {
 	// -----------------------FE-----------------------------------
 	public LoginPage loginPage() {
 		return getPages().currentPageAt(LoginPage.class);
+	}
+
+	public DashboardPage dashboardPage() {
+		return getPages().currentPageAt(DashboardPage.class);
 	}
 
 	public FancyBoxPage fancyBoxPage() {
@@ -397,6 +403,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public CartPage cartPage() {
 		return getPages().currentPageAt(CartPage.class);
 	}
+
 	public BorrowCartPage borrowCartPage() {
 		return getPages().currentPageAt(BorrowCartPage.class);
 	}
@@ -463,6 +470,9 @@ public class AbstractSteps extends ScenarioSteps {
 	// Lounge-Reports
 	public StylistsCustomerOrderReportPage stylistsCustomerOrderReportPage() {
 		return getPages().currentPageAt(StylistsCustomerOrderReportPage.class);
+	}
+	public JewelryBonusHistoryPage jewelryBonusHistoryPage() {
+		return getPages().currentPageAt(JewelryBonusHistoryPage.class);
 	}
 
 	// Profile

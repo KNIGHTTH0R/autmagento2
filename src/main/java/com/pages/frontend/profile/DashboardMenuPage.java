@@ -29,4 +29,18 @@ public class DashboardMenuPage extends AbstractPage {
 		}
 
 	}
+	public void clickOnJewelryBonusHistory() {
+		element(dashboardMenuContainer).waitUntilVisible();
+		List<WebElement> menuList = dashboardMenuContainer.findElements(By.cssSelector("li a"));
+		
+		theFor: for (WebElement elementNow : menuList) {
+			String elementText = elementNow.getText();
+			System.out.println(elementText);
+			if (elementText.contains(ContextConstants.JEWELRY_HISTORY)) {
+				elementNow.click();
+				break theFor;
+			}
+		}
+		
+	}
 }

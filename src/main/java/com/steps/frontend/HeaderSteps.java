@@ -1,14 +1,9 @@
 package com.steps.frontend;
 
-import java.util.List;
-
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
-import org.junit.Assert;
-
-import com.tools.data.soap.DBStylistModel;
 import com.tools.env.constants.Separators;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.UrlConstants;
@@ -164,66 +159,6 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	public String getBoutiqueName() {
 		return headerPage().getBoutiqueName();
-	}
-
-	@Step
-	public String getStyleCoachFirstNameFromProfile() {
-		return headerPage().getStyleCoachFirstNameFromProfile();
-	}
-
-	@Step
-	public String getStyleCoachFullNameFromProfile() {
-		return headerPage().getStyleCoachFullNameFromProfile();
-	}
-
-	@Step
-	public String getStyleCoachEmailFromProfile() {
-		return headerPage().getStyleCoachEmailFromProfile();
-	}
-
-	@Step
-	public void validateCustomeStyleCoachName(String boutiqueName, String styleCoachName) {
-		Assert.assertTrue("Failure: The stylecoach name and boutique name don't match !", boutiqueName.contentEquals(styleCoachName));
-		Assert.assertFalse("Failure: The stylecoach name and boutique is empty !", boutiqueName.contentEquals("") || boutiqueName == null);
-	}
-
-	@Step
-	public void validateCustomerIsAssignedToStyleCoach(String expectedSCName, String grabbedSCName) {
-		Assert.assertTrue("Failure: The customer is not assigned to the expected SC !", expectedSCName.contentEquals(grabbedSCName));
-
-	}
-
-	@Step
-	public DBStylistModel validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(List<DBStylistModel> stylistsList, String grabbedEmail) {
-		boolean match = false;
-		DBStylistModel result = new DBStylistModel();
-		for (DBStylistModel dbStylistModel : stylistsList) {
-			if (dbStylistModel.getEmail().contentEquals(grabbedEmail)) {
-				match = true;
-				result.setEmail(dbStylistModel.getEmail());
-				result.setStatus(dbStylistModel.getStatus());
-				result.setFirstName(dbStylistModel.getFirstName());
-				result.setLattitude(dbStylistModel.getLattitude());
-				result.setLongitude(dbStylistModel.getLongitude());
-				result.setQualifiedSC(dbStylistModel.getQualifiedSC());
-				result.setQualifiedHost(dbStylistModel.getQualifiedHost());
-				result.setQualifiedCustomer(dbStylistModel.getQualifiedCustomer());
-				result.setTotalSCReceived(dbStylistModel.getTotalSCReceived());
-				result.setTotalHostReceived(dbStylistModel.getTotalHostReceived());
-				result.setTotalCustomerReceived(dbStylistModel.getTotalCustomerReceived());
-				result.setTotalSCCurrentWeek(dbStylistModel.getTotalSCCurrentWeek());
-				result.setTotalHostCurrentWeek(dbStylistModel.getTotalHostCurrentWeek());
-				result.setMaxSCPerWeek(dbStylistModel.getMaxSCPerWeek());
-				result.setLeadRetrievalPaused(dbStylistModel.getLeadRetrievalPaused());
-				result.setStyleCoachLeadRange(dbStylistModel.getStyleCoachLeadRange());
-				result.setHostLeadRange(dbStylistModel.getHostLeadRange());
-
-				break;
-			}
-		}
-		Assert.assertTrue("Failure: The customer is not assigned to the expected SC !", match);
-
-		return result;
 	}
 
 	@Step

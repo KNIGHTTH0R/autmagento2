@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
 import com.tools.env.variables.UrlConstants;
@@ -31,6 +32,8 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public DashboardSteps dashboardSteps;
 
 	public String stylistEmail;
 	public String stylistPassword;
@@ -77,11 +80,11 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 		headerSteps.goToProfile();
 		headerSteps.getBoutiqueName();
-		headerSteps.getStyleCoachFirstNameFromProfile();
-		headerSteps.getStyleCoachFullNameFromProfile();
+		dashboardSteps.getStyleCoachFirstNameFromProfile();
+		dashboardSteps.getStyleCoachFullNameFromProfile();
 
-		headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
-		headerSteps.validateCustomerIsAssignedToStyleCoach(expectedStyleCoach, headerSteps.getStyleCoachFullNameFromProfile());
+		dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), dashboardSteps.getStyleCoachFirstNameFromProfile());
+		dashboardSteps.validateCustomerIsAssignedToStyleCoach(expectedStyleCoach, dashboardSteps.getStyleCoachFullNameFromProfile());
 
 	}
 

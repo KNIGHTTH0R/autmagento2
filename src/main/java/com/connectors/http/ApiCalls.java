@@ -117,6 +117,26 @@ public class ApiCalls {
 		
 		return result;
 	}
+	public static ProductDetailedModel createZzzProductModel() {
+		ProductDetailedModel result = createProductModel();
+		result.setSet("15");
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+		
+		return result;
+	}
+	public static ProductDetailedModel createStarterKitProductModel() {
+		ProductDetailedModel result = createProductModel();
+		result.setSet("13");
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+		
+		return result;
+	}
 
 	public static ProductDetailedModel createProductModel() {
 		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
@@ -148,6 +168,7 @@ public class ApiCalls {
 		product.setOptionsContainer("");
 		product.setStore("0");
 		product.setIp("50");
+		product.setJewelryBonus("50");
 
 		product.setNewsFromDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 3600));
 		product.setNewsToDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 86400));
@@ -156,9 +177,6 @@ public class ApiCalls {
 
 		// Made the store allocation to be environment dependent
 		String tempStore = MongoReader.getStoreIds();
-		System.out.println("---------------------------------");
-		System.out.println("Stores: " + tempStore);
-		System.out.println("---------------------------------");
 
 		if (!tempStore.isEmpty() && tempStore != null) {
 			String strSplitter[] = tempStore.split(Separators.COMMA_SEPARATOR);
@@ -167,15 +185,17 @@ public class ApiCalls {
 			}
 		}
 
-		// webSiteIds.add("1");
-		// webSiteIds.add("0");
-		// webSiteIds.add("2");
 		product.setWebsiteIdsArray(webSiteIds);
 
 		List<String> categoriesIds = new ArrayList<String>();
 		categoriesIds.add("43");
 		categoriesIds.add("5");
 		product.setCategoryIdsArray(categoriesIds);
+		
+		List<String> cartIds = new ArrayList<String>();
+		cartIds.add("4");
+		cartIds.add("3");
+		product.setAvailableCartsArray(cartIds);
 
 		StockDataModel stockModel = new StockDataModel();
 		stockModel.setQty("1000");
@@ -218,11 +238,23 @@ public class ApiCalls {
 
 		return resultID;
 	}
+	public static String createJbZzzApiProduct(ProductDetailedModel product) {
+		
+		String resultID = null;
+		try {
+			SOAPMessage response = HttpSoapConnector.soapCreateJbZzzProduct(product);
+			resultID = extractResult(response);
+			System.out.println("resultID: " + resultID);
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return resultID;
+	}
 
 	public static String getStylistInfo(String id) {
-
-		// List<CustomerFormModel> stylistList = new
-		// ArrayList<CustomerFormModel>();
 
 		String resultID = null;
 		try {

@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
@@ -28,10 +29,12 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
+import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
+import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -72,9 +75,14 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 	public AddRegularProductsWorkflow addRegularProductsWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
-	
+	@Steps
+	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
+	@Steps
+	public DashboardSteps dashboardSteps;
+
 	private String username, password, customerName;
 
+	private JewelryHistoryModel expectedJewelryHistoryModel = new JewelryHistoryModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	public static UrlModel urlModel = new UrlModel();
@@ -131,8 +139,11 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		headerSteps.goToProfile();
+
+		expectedJewelryHistoryModel = dashboardSteps.calculateExpectedJewelryConfiguration(genProduct1.getJewelryBonus(), true);
+
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-//		partyDetailsSteps.verifyActivePartyAvailableActions();
 		partyDetailsSteps.orderForCustomer();
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
@@ -161,6 +172,10 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(order);
+
+		jewelryBonusHistorySteps.navigateToJewelryHistory();
+		jewelryBonusHistorySteps.grabJewelryBonusHistory();
+		jewelryBonusHistorySteps.validateNewHistoryRegistration(expectedJewelryHistoryModel, jewelryBonusHistorySteps.grabJewelryBonusHistory());
 
 	}
 

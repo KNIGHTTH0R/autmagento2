@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
 import com.tools.data.soap.DBStylistModel;
@@ -31,6 +32,8 @@ public class US13003ValidateCustomerIsAssignedToStylist extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public DashboardSteps dashboardSteps;
 
 	public String stylistEmail;
 	public String stylistPassword;
@@ -60,8 +63,8 @@ public class US13003ValidateCustomerIsAssignedToStylist extends BaseTest {
 		if (stylistsList.size() > 0) {
 			customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
 			headerSteps.goToProfile();
-			headerSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), headerSteps.getStyleCoachFirstNameFromProfile());
-			distStylist = headerSteps.validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(stylistsList, headerSteps.getStyleCoachEmailFromProfile());
+			dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), dashboardSteps.getStyleCoachFirstNameFromProfile());
+			distStylist = dashboardSteps.validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(stylistsList, dashboardSteps.getStyleCoachEmailFromProfile());
 		}
 	}
 
