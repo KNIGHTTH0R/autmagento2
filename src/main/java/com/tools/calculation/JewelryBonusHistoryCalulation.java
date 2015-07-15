@@ -9,7 +9,7 @@ public class JewelryBonusHistoryCalulation {
 		BigDecimal decimalTotal = BigDecimal.valueOf(Double.parseDouble(total.replace(".", "").replace(",", ".")));
 		BigDecimal decimalAmount = BigDecimal.valueOf(Double.parseDouble(amount));
 
-		return String.valueOf(decimalTotal.add(decimalAmount));
+		return String.valueOf(decimalTotal.add(decimalAmount).setScale(2));
 
 	}
 
@@ -18,7 +18,7 @@ public class JewelryBonusHistoryCalulation {
 		BigDecimal decimalTotal = BigDecimal.valueOf(Double.parseDouble(total.replace(".", "").replace(",", ".")));
 		BigDecimal decimalAmount = BigDecimal.valueOf(Double.parseDouble(amount));
 
-		return String.valueOf(decimalTotal.subtract(decimalAmount));
+		return String.valueOf(decimalTotal.subtract(decimalAmount).setScale(2));
 
 	}
 

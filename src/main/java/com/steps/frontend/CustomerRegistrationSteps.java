@@ -31,7 +31,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		checkParties();
-		checkMember();
+//		checkMember();
 		fillContactDetails(addressData);
 		searchStylistByGeoip(addressData);
 		checkIAgree();
@@ -134,10 +134,11 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillContactDetails(AddressModel addressData) {
 		inputStreetAddress(addressData.getStreetAddress());
 		inputStreetNumber(addressData.getStreetNumber());
+		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 		inputPostCode(addressData.getPostCode());
 		inputHomeTown(addressData.getHomeTown());
 		selectCountryName(addressData.getCountryName());
-		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
+		
 
 	}
 
@@ -176,6 +177,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	public void selectCountryName(String countryName) {
 		createCustomerPage().selectCountryName(countryName);
+		waitABit(3000);
 	}
 
 	@Step
@@ -298,11 +300,11 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		contactLandingPage().inputFirstName(dataModel.getFirstName());
 		contactLandingPage().inputLastName(dataModel.getLastName());
 		contactLandingPage().inputEmail(dataModel.getEmailName());
-		contactLandingPage().inputPostCode(addressModel.getPostCode());
-		contactLandingPage().inputCity(addressModel.getHomeTown());
-		contactLandingPage().selectCountry(addressModel.getCountryName());
 		contactLandingPage().inputTelephoneAreaCode("49");
 		contactLandingPage().inputTelephone(addressModel.getPhoneNumber());
+		contactLandingPage().inputPostCode(addressModel.getPostCode());
+		contactLandingPage().inputCity(addressModel.getHomeTown());
+		contactLandingPage().selectCountry(addressModel.getCountryName());	
 		contactLandingPage().iAgreeCheckbox();
 		contactLandingPage().clickOk();
 
@@ -326,7 +328,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			waitABit(2000);
 			pageTitle = thankYouPage().pageTitle();
 			counter++;
-		} while (!pageTitle.contains("Thank you page") || counter < 60);
+		} while (!pageTitle.contains("Thank you page") && counter < 30);
 		System.out.println(pageTitle);
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page. Actual: " + pageTitle, pageTitle.contains("PIPPA&JEAN"));
 
@@ -353,7 +355,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			waitABit(2000);
 			pageTitle = thankYouPage().pageTitle();
 			counter++;
-		} while (!pageTitle.contains("Thank you page") || counter < 60);
+		} while (!pageTitle.contains("Thank you page") && counter < 30);
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page. Actual: " + pageTitle, pageTitle.contains("Thank you page"));
 
 		thankYouPage().passwordInput(password);
@@ -397,7 +399,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			waitABit(2000);
 			pageTitle = thankYouPage().pageTitle();
 			counter++;
-		} while (!pageTitle.contains("Thank you page") || counter < 60);
+		} while (!pageTitle.contains("Thank you page") && counter < 30);
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page. Actual: " + pageTitle, pageTitle.contains("Thank you page"));
 
 	}

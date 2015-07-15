@@ -11,7 +11,9 @@ import com.tests.uss10.us10006.US10006VerifyInviteForStylistHostEmailTest;
 
 @SuiteClasses({	
 	US10006VerifyInviteForStylistHostEmailTest.class,
-	US10006OrderForCustomerAsPartyHostTest.class,	
+	US10006OrderForCustomerAsPartyHostTest.class,
+//	US10006MarkPlaceCustomerOrderAsPaidTest.class,
+//	US10006VerifyDashboardAndJbHistoryCompleteOrderTest.class,
 	US10006CustomerAddProductIntoWishlistTest.class,	
 	US10006CheckPartyWishlistAndBorrowProductTest.class,
 	

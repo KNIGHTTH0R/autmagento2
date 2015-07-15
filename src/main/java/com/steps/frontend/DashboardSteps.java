@@ -44,6 +44,16 @@ public class DashboardSteps extends AbstractSteps {
 	}
 
 	@Step
+	public String getJewelryBonus() {
+		return dashboardPage().getJewelryBonus();
+	}
+
+	@Step
+	public void validateDashboardTotalJewerlyBonus(String expectedTotal, String actualTotal) {
+		Assert.assertTrue("The totals don't match", expectedTotal.contentEquals(actualTotal.replace(".", "").replace(",", ".")));
+	}
+
+	@Step
 	public DBStylistModel validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(List<DBStylistModel> stylistsList, String grabbedEmail) {
 		boolean match = false;
 		DBStylistModel result = new DBStylistModel();
@@ -77,15 +87,16 @@ public class DashboardSteps extends AbstractSteps {
 	}
 
 	@Step
-	public JewelryHistoryModel calculateExpectedJewelryConfiguration(String productJewelryValue, boolean increase) {
+	public JewelryHistoryModel calculateExpectedJewelryConfiguration(String currentTotal, String productJewelryValue, boolean increase) {
 
 		JewelryHistoryModel result = new JewelryHistoryModel();
 
-		result.setAmountValue(productJewelryValue);
 		if (increase) {
-			result.setTotalPoints(JewelryBonusHistoryCalulation.addNewJewelryBonusToTotal(dashboardPage().getJewelryBonus(), productJewelryValue));
+			result.setAmountValue(productJewelryValue);
+			result.setTotalPoints(JewelryBonusHistoryCalulation.addNewJewelryBonusToTotal(currentTotal, productJewelryValue));
 		} else {
-			result.setTotalPoints(JewelryBonusHistoryCalulation.substractNewJewelryBonusFromTotal(dashboardPage().getJewelryBonus(), productJewelryValue));
+			result.setAmountValue("-" + productJewelryValue);
+			result.setTotalPoints(JewelryBonusHistoryCalulation.addNewJewelryBonusToTotal(currentTotal, "0"));
 		}
 		result.setDate(DateUtils.getCurrentDate("dd.MM.yyyy"));
 		result.setReason("Updated by system");

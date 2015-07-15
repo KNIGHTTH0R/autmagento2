@@ -12,6 +12,7 @@ import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
+import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
@@ -107,6 +108,19 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.STYLIST_LASTNAME, customerModel.getLastName());
 		document.put(MongoTableKeys.STYLIST_EMAIL, customerModel.getEmailName());
 		document.put(MongoTableKeys.STYLIST_PASSWORD, customerModel.getPassword());
+
+		table.insert(document);
+	}
+
+	public static void saveJewerlyHistoryModel(JewelryHistoryModel jewelryHistoryModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.JEWERLY_HISTORY_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.JB_HISTORY_TOTAL, jewelryHistoryModel.getTotalPoints());
+		document.put(MongoTableKeys.JB_HISTORY_AMOUNT, jewelryHistoryModel.getAmountValue());
+		document.put(MongoTableKeys.JB_HISTORY_DATE, jewelryHistoryModel.getDate());
+		document.put(MongoTableKeys.JB_HISTORY_REASON, jewelryHistoryModel.getReason());
 
 		table.insert(document);
 	}
@@ -250,17 +264,18 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void saveBorrowProductModel(BorrowProductModel product, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.BORROW_BASIC_PRODUCT_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
 		document.put(MongoTableKeys.PRODUCT_CODE, product.getProdCode());
 		document.put(MongoTableKeys.PRODUCT_PRICE, product.getUnitPrice());
 		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
 		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getIpPoints());
-		
+
 		table.insert(document);
 	}
 

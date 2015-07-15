@@ -119,6 +119,7 @@ public class ContactBoosterRegistrationPage extends AbstractPage {
 	}
 
 	public void inputPostCode(String postCode) {
+		postCodeInput.clear();
 		postCodeInput.sendKeys(postCode);
 	}
 

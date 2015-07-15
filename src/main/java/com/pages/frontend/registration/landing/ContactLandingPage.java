@@ -77,6 +77,7 @@ public class ContactLandingPage extends AbstractPage {
 
 	public void inputPostCode(String postCode) {
 		element(plzInput).waitUntilVisible();
+		plzInput.clear();
 		plzInput.sendKeys(postCode);
 	}
 

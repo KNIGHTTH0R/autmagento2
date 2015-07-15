@@ -146,7 +146,9 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputPostCode(String postCode) {
+		postCodeInput.clear();
 		postCodeInput.sendKeys(postCode);
+		waitABit(1000);
 	}
 
 	public void inputPostCodeFromPersonalInfo(String postCode) {
@@ -178,6 +180,7 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputPostcodeFilter(String postcode) {
+		searchPostcode.clear();
 		searchPostcode.sendKeys(postcode);
 	}
 

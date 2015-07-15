@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
@@ -29,8 +30,10 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
+import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
+import com.tools.SoapKeys;
+import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -79,7 +82,9 @@ public class US15004OrderForCustomerTest extends BaseTest {
 	@Steps
 	public HostCartValidationWorkflows hostCartValidationWorkflows;
 	@Steps
-	public CustomVerification customVerifications;
+	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
+	@Steps
+	public DashboardSteps dashboardSteps;
 
 	private String username, password;
 	private String discountClass;
@@ -87,6 +92,8 @@ public class US15004OrderForCustomerTest extends BaseTest {
 	private String voucherValue;
 
 	private DateModel dateModel = new DateModel();
+	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
+	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderCancelled = new JewelryHistoryModel();
 	private CustomerFormModel customerData;
 	private AddressModel addressData;
 	private ProductDetailedModel genProduct1;
@@ -111,7 +118,7 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		genProduct2.setIp("42");
 		ApiCalls.createApiProduct(genProduct2);
 
-		genProduct3 = ApiCalls.createProductModel();
+		genProduct3 = ApiCalls.createZzzProductModel();
 		genProduct3.setPrice("99.00");
 		genProduct3.setIp("84");
 		ApiCalls.createApiProduct(genProduct3);
@@ -142,7 +149,8 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		}
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-		MongoConnector.cleanCollection(getClass().getSimpleName());
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.COMPLETE);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CANCELED);
 
 	}
 
@@ -153,6 +161,13 @@ public class US15004OrderForCustomerTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		headerSteps.goToProfile();
+		
+		String currentTotal = dashboardSteps.getJewelryBonus();
+		
+		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,"200.00", true);
+		expectedJewelryHistoryModelWhenOrderCancelled = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,"200.00", false);
+
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		customerRegistrationSteps.wipeHostCart();
@@ -188,7 +203,7 @@ public class US15004OrderForCustomerTest extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 		dateModel.setDate(DateUtils.getCurrentDate("MM/dd/YYYY"));
-		customVerifications.printErrors();
+
 	}
 
 	@After
@@ -198,6 +213,8 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
 		MongoWriter.saveUrlModel(HostDataGrabber.urlModel, getClass().getSimpleName());
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
+		MongoWriter.saveJewerlyHistoryModel(expectedJewelryHistoryModelWhenOrderComplete, getClass().getSimpleName() + SoapKeys.COMPLETE);
+		MongoWriter.saveJewerlyHistoryModel(expectedJewelryHistoryModelWhenOrderCancelled, getClass().getSimpleName() + SoapKeys.CANCELED);
 		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName());
 		}

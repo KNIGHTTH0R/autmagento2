@@ -108,7 +108,7 @@ public class ContactBoosterRegistrationSteps extends AbstractSteps {
 		contactBoosterRegistrationPage().passwordInput(dataModel.getPassword());
 		contactBoosterRegistrationPage().passwordConfirmInput(dataModel.getPassword());
 		contactBoosterRegistrationPage().checkStyleMemberCheckbox();
-		contactBoosterRegistrationPage().checkStylePartiesCheckbox();
+//		contactBoosterRegistrationPage().checkStylePartiesCheckbox();
 		contactBoosterRegistrationPage().checkIAgree();
 		contactBoosterRegistrationPage().submitAndContinue();
 	}

@@ -129,6 +129,7 @@ public class KoboCampaignPage extends AbstractPage {
 	}
 
 	public void inputPostCode(String postCode) {
+		postCodeInput.clear();
 		postCodeInput.sendKeys(postCode);
 	}
 

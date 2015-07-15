@@ -15,6 +15,7 @@ import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistDataModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
+import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
@@ -595,24 +596,24 @@ public class MongoReader extends MongoConnector {
 		return itemList;
 
 	}
-	
+
 	public static List<BorrowCartCalcDetailsModel> grabBorrowCartCalcDetailsModels(String testName) {
 		DBObject dbObject = null;
 		List<BorrowCartCalcDetailsModel> itemList = new ArrayList<BorrowCartCalcDetailsModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.BORROW_CART_CALC_DETAILS_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				BorrowCartCalcDetailsModel result = new BorrowCartCalcDetailsModel();
 				dbObject = cursor.next();
-				
+
 				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
 				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
 				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
-				
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -621,7 +622,7 @@ public class MongoReader extends MongoConnector {
 			cursor.close();
 		}
 		return itemList;
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -728,6 +729,34 @@ public class MongoReader extends MongoConnector {
 				result.setDeliveryContact(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_CONTACT));
 				result.setInvoiceContact(MongoUtils.checkField(dbObject, MongoTableKeys.INVOICE_CONTACT));
 				result.setDate(MongoUtils.checkField(dbObject, MongoTableKeys.DATE));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+
+	}
+
+	public static List<JewelryHistoryModel> grabJewerlyHistoryModels(String testName) {
+		DBObject dbObject = null;
+		List<JewelryHistoryModel> itemList = new ArrayList<JewelryHistoryModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.JEWERLY_HISTORY_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				JewelryHistoryModel result = new JewelryHistoryModel();
+				dbObject = cursor.next();
+
+				result.setTotalPoints(MongoUtils.checkField(dbObject, MongoTableKeys.JB_HISTORY_TOTAL));
+				result.setAmountValue(MongoUtils.checkField(dbObject, MongoTableKeys.JB_HISTORY_AMOUNT));
+				result.setDate(MongoUtils.checkField(dbObject, MongoTableKeys.JB_HISTORY_DATE));
+				result.setReason(MongoUtils.checkField(dbObject, MongoTableKeys.JB_HISTORY_REASON));
 
 				itemList.add(result);
 			}

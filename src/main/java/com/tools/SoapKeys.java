@@ -6,6 +6,8 @@ public class SoapKeys {
 	//SOAP TEST DATA - data grouping
 	public static final String GRAB = "Grab";
 	public static final String CALC = "Calc";
+	public static final String COMPLETE = "Complete";
+	public static final String CANCELED = "Cancelled";
 
 	// General keys
 	public static final String URN_PREFIX = "urn";

@@ -21,7 +21,6 @@ public class DashboardMenuPage extends AbstractPage {
 
 		theFor: for (WebElement elementNow : menuList) {
 			String elementText = elementNow.getText();
-			System.out.println(elementText);
 			if (elementText.contains(ContextConstants.PROFILE_HISTORY)) {
 				elementNow.click();
 				break theFor;
@@ -35,7 +34,6 @@ public class DashboardMenuPage extends AbstractPage {
 		
 		theFor: for (WebElement elementNow : menuList) {
 			String elementText = elementNow.getText();
-			System.out.println(elementText);
 			if (elementText.contains(ContextConstants.JEWELRY_HISTORY)) {
 				elementNow.click();
 				break theFor;

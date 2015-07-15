@@ -11,6 +11,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,10 +39,12 @@ import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
+import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
@@ -82,7 +85,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 	private String username, password, customerName;
 
-	private JewelryHistoryModel expectedJewelryHistoryModel = new JewelryHistoryModel();
+	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	public static UrlModel urlModel = new UrlModel();
@@ -128,7 +131,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.COMPLETE);
 
 	}
 
@@ -141,7 +144,9 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
 
-		expectedJewelryHistoryModel = dashboardSteps.calculateExpectedJewelryConfiguration(genProduct1.getJewelryBonus(), true);
+		String currentTotal = dashboardSteps.getJewelryBonus();
+
+		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal, "200.00", true);
 
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();
@@ -162,7 +167,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 		shippingSteps.clickGoToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
-		String order = FormatterUtils.extractOrderIDFromURL(url);
+		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
@@ -171,12 +176,14 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 		checkoutValidationSteps.verifySuccessMessage();
 
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(order);
+		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(HostDataGrabber.orderModel.getOrderId());
 
-		jewelryBonusHistorySteps.navigateToJewelryHistory();
-		jewelryBonusHistorySteps.grabJewelryBonusHistory();
-		jewelryBonusHistorySteps.validateNewHistoryRegistration(expectedJewelryHistoryModel, jewelryBonusHistorySteps.grabJewelryBonusHistory());
+	}
 
+	@After
+	public void saveData() {
+		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
+		MongoWriter.saveJewerlyHistoryModel(expectedJewelryHistoryModelWhenOrderComplete, getClass().getSimpleName() + SoapKeys.COMPLETE);
 	}
 
 }
