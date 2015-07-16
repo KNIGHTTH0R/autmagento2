@@ -28,7 +28,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US15", type = "frontend")
-@Story(Application.Newsletter.class)
+@Story(Application.ZzzProducts.class)
 @RunWith(ThucydidesRunner.class)
 public class US15004VerifyDashboardAndJbHistoryCompleteOrderTest extends BaseTest {
 

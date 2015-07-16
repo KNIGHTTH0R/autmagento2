@@ -63,6 +63,10 @@ public class Application {
 	public class Newsletter {
 
 	}
+	@Feature
+	public class ZzzProducts {
+		
+	}
 
 	@Feature
 	public class MassAction {

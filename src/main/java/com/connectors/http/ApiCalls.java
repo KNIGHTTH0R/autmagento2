@@ -168,7 +168,7 @@ public class ApiCalls {
 		product.setOptionsContainer("");
 		product.setStore("0");
 		product.setIp("50");
-		product.setJewelryBonus("50");
+		product.setJewelryBonus("50.00");
 
 		product.setNewsFromDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 3600));
 		product.setNewsToDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 86400));

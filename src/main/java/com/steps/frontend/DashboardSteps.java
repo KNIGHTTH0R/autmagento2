@@ -99,6 +99,8 @@ public class DashboardSteps extends AbstractSteps {
 			result.setTotalPoints(JewelryBonusHistoryCalulation.addNewJewelryBonusToTotal(currentTotal, "0"));
 		}
 		result.setDate(DateUtils.getCurrentDate("dd.MM.yyyy"));
+		// TODO change this hardcoded message when the dev team will implement
+		// the message in different languages
 		result.setReason("Updated by system");
 
 		return result;

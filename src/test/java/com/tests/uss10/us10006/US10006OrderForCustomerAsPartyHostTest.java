@@ -96,7 +96,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = ApiCalls.createProductModel();
+		genProduct1 = ApiCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");
 		ApiCalls.createApiProduct(genProduct1);
 
@@ -131,6 +131,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.COMPLETE);
 
 	}
@@ -146,7 +147,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		String currentTotal = dashboardSteps.getJewelryBonus();
 
-		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal, "200.00", true);
+		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct1.getJewelryBonus(), true);
 
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();

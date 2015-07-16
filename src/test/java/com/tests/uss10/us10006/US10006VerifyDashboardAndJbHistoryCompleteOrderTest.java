@@ -58,7 +58,7 @@ public class US10006VerifyDashboardAndJbHistoryCompleteOrderTest extends BaseTes
 
 			expectedJewelryHistoryModel = MongoReader.grabJewerlyHistoryModels("US10006OrderForCustomerAsPartyHostTest" + SoapKeys.COMPLETE).get(0);
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15004.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10006.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -87,7 +87,7 @@ public class US10006VerifyDashboardAndJbHistoryCompleteOrderTest extends BaseTes
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
 		String dashboardTotalJb = dashboardSteps.getJewelryBonus();
-
+		
 		jewelryBonusHistorySteps.navigateToJewelryHistory();
 		actualJewelryHistoryModel = jewelryBonusHistorySteps.grabJewelryBonusHistory();
 

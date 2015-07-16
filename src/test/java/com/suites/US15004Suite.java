@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.uss15.us15004.US15004ApplyCreditMemoOnOrderTest;
+import com.tests.uss15.us15004.US15004CancelCreditMemoTest;
 import com.tests.uss15.us15004.US15004CancelOrderTest;
 import com.tests.uss15.us15004.US15004CompleteOrderTest;
 import com.tests.uss15.us15004.US15004OrderForCustomerTest;
@@ -26,7 +27,8 @@ import com.tests.uss15.us15004.US15004VerifyDashboardAndJbHistoryMemoAppliedOrde
 	US15004ApplyCreditMemoOnOrderTest.class,
 	US15004VerifyDashboardAndJbHistoryMemoAppliedOrderTest.class,
 //	US15004CheckMailchimpConfigWithZeroRevenuesTest.class,
-//	US15004CancelCreditMemoTest.class,
+	US15004CancelCreditMemoTest.class,
+	US15004VerifyDashboardAndJbHistoryCompleteOrderTest.class,
 //	US15004CheckMailchimpConfigTest.class,
 	
 	

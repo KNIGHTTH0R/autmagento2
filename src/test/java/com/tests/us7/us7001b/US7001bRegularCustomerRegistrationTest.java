@@ -24,11 +24,11 @@ import com.tools.requirements.Application;
 @WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7001bRegularCustomerRegistrationTest extends BaseTest{
+public class US7001bRegularCustomerRegistrationTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	public CustomerFormModel dataModel;
