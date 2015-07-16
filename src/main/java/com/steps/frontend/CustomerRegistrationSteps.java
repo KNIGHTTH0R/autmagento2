@@ -137,6 +137,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 		inputPostCode(addressData.getPostCode());
 		inputHomeTown(addressData.getHomeTown());
+		waitABit(1000);
 		selectCountryName(addressData.getCountryName());
 		
 
