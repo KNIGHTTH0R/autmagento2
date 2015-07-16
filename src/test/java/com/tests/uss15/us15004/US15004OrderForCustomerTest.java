@@ -108,7 +108,7 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		customerData = new CustomerFormModel();
 		addressData = new AddressModel();
 
-		genProduct1 = ApiCalls.createProductModel();
+		genProduct1 = ApiCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");
 		genProduct1.setIp("75");
 		ApiCalls.createApiProduct(genProduct1);
@@ -118,7 +118,7 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		genProduct2.setIp("42");
 		ApiCalls.createApiProduct(genProduct2);
 
-		genProduct3 = ApiCalls.createZzzProductModel();
+		genProduct3 = ApiCalls.createProductModel();
 		genProduct3.setPrice("99.00");
 		genProduct3.setIp("84");
 		ApiCalls.createApiProduct(genProduct3);
@@ -165,8 +165,8 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		
 		String currentTotal = dashboardSteps.getJewelryBonus();
 		
-		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,"200.00", true);
-		expectedJewelryHistoryModelWhenOrderCancelled = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,"200.00", false);
+		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct1.getJewelryBonus(), true);
+		expectedJewelryHistoryModelWhenOrderCancelled = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct1.getJewelryBonus(), false);
 
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
