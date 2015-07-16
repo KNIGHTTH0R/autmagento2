@@ -165,8 +165,8 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		
 		String currentTotal = dashboardSteps.getJewelryBonus();
 		
-		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,"200.00", true);
-		expectedJewelryHistoryModelWhenOrderCancelled = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,"200.00", false);
+		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct3.getJewelryBonus(), true);
+		expectedJewelryHistoryModelWhenOrderCancelled = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct3.getJewelryBonus(), false);
 
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);

@@ -47,7 +47,7 @@ public class US15004CancelCreditMemoTest extends BaseTest {
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
-		ordersSteps.markOrderAsPaid();
+//		ordersSteps.markOrderAsPaid();
 		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
 	}
 
