@@ -33,7 +33,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().checkParties();
 		createNewContactPage().checkMember();
 		createNewContactPage().submitContact();
-		waitABit(5000);
+//		waitABit(5000);
 		loungePage().startOrderForCustomer();
 	}
 
@@ -45,6 +45,5 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().cityInput(addressData.getHomeTown());
 		createNewContactPage().selectCountryName(addressData.getCountryName());
 		createNewContactPage().inputPhoneNumber(addressData.getPhoneNumber());
-
 	}
 }
