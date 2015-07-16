@@ -4,10 +4,13 @@ import com.tools.persistance.MongoReader;
 
 public class ContextConstants {
 
-	public static String INVOICE_SHIPPING_SUBMITED_MESSAGE =  MongoReader.getDictionaryItem("INVOICE_SHIPPING_SUBMITED_MESSAGE");
-	public static String REFUNDED_SUCCESS_MESSAGE =  MongoReader.getDictionaryItem("REFUNDED_SUCCESS_MESSAGE");
+	public static String INVOICE_SHIPPING_SUBMITED_MESSAGE = MongoReader.getDictionaryItem("INVOICE_SHIPPING_SUBMITED_MESSAGE");
+	public static String REFUNDED_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("REFUNDED_SUCCESS_MESSAGE");
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
 	public static String POST_CODE = MongoReader.getDictionaryItem("POST_CODE");
+	public static String STREET_ADDRESS = MongoReader.getDictionaryItem("STREET_ADDRESS");
+	public static String STREET_NUMBER = MongoReader.getDictionaryItem("STREET_NUMBER");
+	public static String HOME_TOWN = MongoReader.getDictionaryItem("HOME_TOWN");
 	public static String NOT_PREFEERD_WEBSITE_POST_CODE = MongoReader.getDictionaryItem("NOT_PREFEERD_WEBSITE_POST_CODE");
 	// messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");

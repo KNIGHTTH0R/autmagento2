@@ -16,9 +16,9 @@ public class AddressModel {
 	private String phoneNumber;
 
 	public AddressModel() {
-		setStreetAddress("Filandastraße");
-		setStreetNumber("22");
-		setHomeTown("Steglitz");
+		setStreetAddress(ContextConstants.STREET_ADDRESS);
+		setStreetNumber(ContextConstants.STREET_NUMBER);
+		setHomeTown(ContextConstants.HOME_TOWN);
 		setPostCode(ContextConstants.POST_CODE);
 		setCountryName(ContextConstants.COUNTRY_NAME);
 		setPhoneNumber("00555123456");
