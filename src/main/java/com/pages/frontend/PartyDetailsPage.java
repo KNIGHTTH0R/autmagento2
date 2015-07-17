@@ -101,10 +101,10 @@ public class PartyDetailsPage extends AbstractPage {
 		if (wishlistProductNameContainer.getText().contains(productName)) {
 			found = true;
 			wishlistProductNameContainer.click();
-			waitABit(2000);
+			waitABit(4000);
 		}
 		addToBorrowCart.click();
-		waitABit(2000);
+		waitABit(4000);
 
 		Assert.assertTrue("The product expected to be in wishlist is not present !!!", found);
 	}
