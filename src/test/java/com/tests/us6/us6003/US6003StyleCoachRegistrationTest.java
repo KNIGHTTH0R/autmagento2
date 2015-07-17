@@ -23,6 +23,7 @@ import com.steps.frontend.HomeSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US6", type = "frontend")
@@ -89,6 +90,10 @@ public class US6003StyleCoachRegistrationTest extends BaseTest {
 
 		// navigate to register page being logged in as regular customer
 		customerRegistrationSteps.navigateToLoginPageAndPerformLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 
 		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndJetzStarten();
 		stylistRegistrationSteps.validateStylistRegisterPageTitle();
