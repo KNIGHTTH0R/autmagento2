@@ -122,7 +122,7 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void checkParties() {
 		partiesCheckbox.click();
-		waitABit(1000);
+//		waitABit(1000);
 	}
 
 	public void checkMember() {
