@@ -100,8 +100,8 @@ public class PartyDetailsPage extends AbstractPage {
 		boolean found = false;
 		if (wishlistProductNameContainer.getText().contains(productName)) {
 			found = true;
-			wishlistProductCheckbox.click();
-			waitABit(1000);
+			wishlistProductNameContainer.click();
+			waitABit(2000);
 		}
 		addToBorrowCart.click();
 		waitABit(2000);
