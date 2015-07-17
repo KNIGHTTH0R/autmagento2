@@ -83,7 +83,7 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "input.input-checkbox.contact-chk")
 	private WebElement wishlistProductCheckbox;
 
-	@FindBy(css = "div#wishlistGuestsFormContainer form button")
+	@FindBy(css = "div#wishlistGuestsFormContainer form button[class='button blue-button right clear']")
 	private WebElement addToBorrowCart;
 
 	// this is made for a single product.if the products is the expected
