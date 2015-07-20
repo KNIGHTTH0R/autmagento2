@@ -100,8 +100,10 @@ public class PartyDetailsPage extends AbstractPage {
 		boolean found = false;
 		if (wishlistProductNameContainer.getText().contains(productName)) {
 			found = true;
+			wishlistProductCheckbox.click();
 		}
-		wishlistProductCheckbox.click();
+		//just trying to fix a problem - not needed
+		builder.moveToElement(addToBorrowCart).build().perform();
 		addToBorrowCart.click();
 
 		Assert.assertTrue("The product expected to be in wishlist is not present !!!", found);
