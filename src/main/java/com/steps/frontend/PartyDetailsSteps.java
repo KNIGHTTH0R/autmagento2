@@ -132,6 +132,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void selectWishlistProductAndAddItToBorrowCart(String productName) {
 		partyDetailsPage().selectWishlistProductAndAddItToBorrowCart(productName);
+		refresh();
 	}
 
 }
