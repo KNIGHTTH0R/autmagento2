@@ -1,4 +1,4 @@
-package com.tests.uss12;
+package com.tests.uss17.us17001;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -20,13 +20,14 @@ import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "frontend")
-@Story(Application.KoboSubscription.class)
+@WithTag(name = "US17", type = "frontend")
+@Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US12001StyleCoachRegistrationTest extends BaseTest {
+public class US17001StyleCoachRegistrationWithKnownSponsorTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -37,34 +38,32 @@ public class US12001StyleCoachRegistrationTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerification;
 
-	public CustomerFormModel customerFormData;
-	public DateModel customerFormDate = new DateModel();
+	public CustomerFormModel stylecoachFormData;
 	public DateModel birthDate = new DateModel();
 	public AddressModel customerFormAddress;
 	public StylistDataModel validationModel;
+	private CustomerFormModel sponsorStylecoachData;
 
 	@Before
 	public void setUp() throws Exception {
-		// Generate data for this test run
-		customerFormData = new CustomerFormModel();
+
+		sponsorStylecoachData = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
+
+		stylecoachFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		birthDate.setDate("Feb,1970,12");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us12001StyleCoachRegistrationTest() {
-		headerSteps.navigateToRegisterForm();
-		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerFormPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
-		customerFormDate.setDate(formCreationDate);
+	public void us17001StyleCoachRegistrationWithKnownSponsorTest() {
+		headerSteps.navigateToStylecoachRegisterFormUnderContext(sponsorStylecoachData.getFirstName() + sponsorStylecoachData.getLastName());
+		stylistRegistrationSteps.fillCreateStylecoachFormWithKnownSponsorPayWithVisa(stylecoachFormData, customerFormAddress, birthDate.getDate());
 		customVerification.printErrors();
-
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
-		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
-
+		MongoWriter.saveCustomerFormModel(stylecoachFormData, getClass().getSimpleName());
 	}
 }

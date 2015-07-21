@@ -35,7 +35,7 @@ public class US17003MarkStarterKitOrderAsPaidTest extends BaseTest {
 	}
 
 	@Test
-	public void us15003MarkStarterKitOrderAsPaidTest() {
+	public void us17003MarkStarterKitOrderAsPaidTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 

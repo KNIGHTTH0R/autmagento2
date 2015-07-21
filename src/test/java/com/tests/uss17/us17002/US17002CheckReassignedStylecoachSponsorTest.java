@@ -27,7 +27,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US17", type = "frontend")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US7002CheckReassignedStylecoachSponsorTest extends BaseTest {
+public class US17002CheckReassignedStylecoachSponsorTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;

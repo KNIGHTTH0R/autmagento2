@@ -45,7 +45,7 @@ public class US17001VerifyThatOldStylistWasDeactivatedTest extends BaseTest {
 	}
 
 	@Test
-	public void us17001ReasignContactsTest() {
+	public void us17001VerifyThatOldStylistWasDeactivatedTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStylecoachList();

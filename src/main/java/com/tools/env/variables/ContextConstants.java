@@ -26,6 +26,7 @@ public class ContextConstants {
 	public static String CREDIT_MEMO_REFUNDED = MongoReader.getDictionaryItem("CREDIT_MEMO_REFUNDED");
 	public static String CUSTOMER_SAVE_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("CUSTOMER_SAVE_SUCCESS_MESSAGE");
 	public static String SUBSCRIPTION_CANCELLED = MongoReader.getDictionaryItem("SUBSCRIPTION_CANCELLED");
+	public static String SUBSCRIPTION_CANCELLED_LOUNGE = MongoReader.getDictionaryItem("SUBSCRIPTION_CANCELLED_LOUNGE");
 	public static String INVITE_EMAIL_SUBJECT = MongoReader.getDictionaryItem("INVITE_EMAIL_SUBJECT");
 	public static String PARTY_CREATION_EMAIL_SUBJECT = MongoReader.getDictionaryItem("PARTY_CREATION_EMAIL_SUBJECT");
 	public static String PROFILE_HISTORY = MongoReader.getDictionaryItem("PROFILE_HISTORY");
