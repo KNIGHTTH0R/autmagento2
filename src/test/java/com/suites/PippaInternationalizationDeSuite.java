@@ -29,14 +29,13 @@ import com.poc.DeactivateRule;
 	US6001bSuite.class,
 	US6002Suite.class,
 	US6002bSuite.class,
+	US6003Suite.class,
 	
 	US7001Suite.class,
 	US7001bSuite.class,
 	US7002Suite.class,
-//	US7003Suite.class,
 	US7004Suite.class,
 	US7004bSuite.class,
-//	US7005Suite.class,
 	US7006Suite.class,
 	US7006bSuite.class,
 	US7007Suite.class,	
@@ -68,6 +67,9 @@ import com.poc.DeactivateRule;
 	US11002Suite.class,
 	US12001Suite.class,
 	US16001Suite.class,
+	
+	US17001Suite.class,
+	US15004Suite.class,
 	
 	
 })

@@ -19,9 +19,11 @@ import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
@@ -41,12 +43,16 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 
 	public CustomerFormModel stylistRegistrationData;
 	public CustomerFormModel dataModel;
+	public DateModel dateModel;
 	public AddressModel addressModel;
 
 	@Before
 	public void setUp() throws Exception {
 
+		dateModel = new DateModel();
 		dataModel = new CustomerFormModel();
+		dataModel.setFirstName("NEYJWYYZ");
+		dataModel.setLastName("FCVIZFFT");
 		addressModel = new AddressModel();
 
 		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
@@ -66,13 +72,15 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.goToToAddNewContact();
+		loungeSteps.goToToAddNewContact();		
 		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
+		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
 	}
 }

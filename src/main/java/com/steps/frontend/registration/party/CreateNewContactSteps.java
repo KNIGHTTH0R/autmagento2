@@ -33,7 +33,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().checkParties();
 		createNewContactPage().checkMember();
 		createNewContactPage().submitContact();
-//		waitABit(5000);
+		waitABit(2000);
 		loungePage().startOrderForCustomer();
 	}
 

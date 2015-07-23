@@ -23,6 +23,7 @@ import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.MyContactsListSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -48,6 +49,7 @@ public class US17001VerifyThatContactsWhereRedistributedToStylecoachTest extends
 
 	public CustomerFormModel customerModel;
 	public CustomerFormModel contactModel;
+	public DateModel dateModel;
 
 	private String stylecoachUsername;
 	private String stylecoachPassword;
@@ -79,12 +81,13 @@ public class US17001VerifyThatContactsWhereRedistributedToStylecoachTest extends
 
 		customerModel = MongoReader.grabCustomerFormModels("US17001RegularCustomerRegistrationTest").get(0);
 		contactModel = MongoReader.grabCustomerFormModels("US17001AddNewContactToStyleCoachTest").get(0);
+		dateModel = MongoReader.grabStylistDateModels("US17001AddNewContactToStyleCoachTest").get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void usO17001VerifyThatContactsWhereRedistributedToStylecoachTest() {
+	public void us17001VerifyThatContactsWhereRedistributedToStylecoachTest() {
 
 		customerRegistrationSteps.performLogin(stylecoachUsername, stylecoachPassword);
 		if (!headerSteps.succesfullLogin()) {
@@ -93,7 +96,8 @@ public class US17001VerifyThatContactsWhereRedistributedToStylecoachTest extends
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
 		myContactsListSteps.verifyThatContactIsInTheList(customerModel.getEmailName());
-		myContactsListSteps.verifyThatContactIsInTheList(contactModel.getEmailName());
+		myContactsListSteps.verifyThatContactMatchesAllTerms(contactModel.getEmailName(), dateModel.getDate());
+		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(contactModel.getFirstName());
 
 	}
 

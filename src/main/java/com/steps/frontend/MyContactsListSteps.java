@@ -1,8 +1,8 @@
 package com.steps.frontend;
 
-import com.tools.requirements.AbstractSteps;
-
 import net.thucydides.core.annotations.Step;
+
+import com.tools.requirements.AbstractSteps;
 
 public class MyContactsListSteps extends AbstractSteps {
 
@@ -11,6 +11,19 @@ public class MyContactsListSteps extends AbstractSteps {
 	@Step
 	public void verifyThatContactIsInTheList(String contactName) {
 		myContactsListPage().verifyThatContactIsInTheList(contactName);
+	}
+
+	@Step
+	public void verifyThatContactMatchesAllTerms(String... terms) {
+		myContactsListPage().verifyThatContactMatchesAllTerms(terms);
+	}
+
+	@Step
+	public void verifyThatContactIsUniqueInStylecoachList(String contactName) {
+		myContactsListPage().inputSearchTerm(contactName);
+		myContactsListPage().submitContactSearch();
+		myContactsListPage().verifyThatContactIsUniqueInStylecoachList();
+
 	}
 
 }
