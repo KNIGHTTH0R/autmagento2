@@ -66,6 +66,9 @@ public class PrintUtils {
 			System.out.println(dBStylistModel.getEmail());
 			System.out.println(dBStylistModel.getFirstName());
 			System.out.println(dBStylistModel.getDistanceFromCoordinates());
+			System.out.println("Customer leads: " + dBStylistModel.getTotalCustomerReceived());
+			System.out.println("SC leads: " + dBStylistModel.getTotalSCReceived());
+			System.out.println("Host leads: " + dBStylistModel.getTotalHostReceived());
 		}
 	}
 

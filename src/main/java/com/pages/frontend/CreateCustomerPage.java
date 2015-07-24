@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.WebElement;
 
 import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class CreateCustomerPage extends AbstractPage {
@@ -77,6 +78,9 @@ public class CreateCustomerPage extends AbstractPage {
 
 	@FindBy(id = "search_countryId")
 	private WebElement searchCountry;
+
+	@FindBy(id = "sc_name_result")
+	private WebElement styleCoachNameResult;
 
 	@FindBy(css = "ul#stylist-list li:nth-child(1) div button")
 	private WebElement firstStylistContainer;
@@ -200,6 +204,12 @@ public class CreateCustomerPage extends AbstractPage {
 		element(searchByGeoipSubmitButton).waitUntilVisible();
 		searchByGeoipSubmitButton.click();
 		waitABit(2000);
+	}
+
+	public boolean isStylecoachFound() {
+		element(styleCoachNameResult).waitUntilVisible();
+		return !styleCoachNameResult.getText().contains(ContextConstants.NO_SC_FOUND_BY_GEOIP);
+
 	}
 
 }

@@ -31,7 +31,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		checkParties();
-//		checkMember();
+		// checkMember();
 		fillContactDetails(addressData);
 		searchStylistByGeoip(addressData);
 		checkIAgree();
@@ -74,9 +74,10 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
+
 	@StepGroup
 	public void fillCreateCustomerFormNoMemberAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
-		
+
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
@@ -91,9 +92,10 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
+
 	@StepGroup
 	public void fillCreateCustomerFormNoPartiesAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
-		
+
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
@@ -139,7 +141,6 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputHomeTown(addressData.getHomeTown());
 		waitABit(1000);
 		selectCountryName(addressData.getCountryName());
-		
 
 	}
 
@@ -238,7 +239,9 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		createCustomerPage().inputPostcodeFilter(addressModel.getPostCode());
 		createCustomerPage().selectCountryFilter(addressModel.getCountryName());
 		createCustomerPage().searchByGeoipSubmit();
-		createCustomerPage().selectFirstStylistFromList();
+		if (createCustomerPage().isStylecoachFound()) {
+			createCustomerPage().selectFirstStylistFromList();
+		}
 	}
 
 	@Step
@@ -305,7 +308,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		contactLandingPage().inputTelephone(addressModel.getPhoneNumber());
 		contactLandingPage().inputPostCode(addressModel.getPostCode());
 		contactLandingPage().inputCity(addressModel.getHomeTown());
-		contactLandingPage().selectCountry(addressModel.getCountryName());	
+		contactLandingPage().selectCountry(addressModel.getCountryName());
 		contactLandingPage().iAgreeCheckbox();
 		contactLandingPage().clickOk();
 

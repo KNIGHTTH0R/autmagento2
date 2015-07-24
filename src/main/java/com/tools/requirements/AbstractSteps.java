@@ -78,6 +78,7 @@ import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.DashboardPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.registration.FacebookRegistrationFormPage;
+import com.pages.frontend.registration.connectWithMe.ConnectWithMeRegistrationPage;
 import com.pages.frontend.registration.contactBooster.ContactBoosterRegistrationPage;
 import com.pages.frontend.registration.contactBooster.KoboCampaignPage;
 import com.pages.frontend.registration.landing.ContactLandingPage;
@@ -333,6 +334,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public StylistRegistrationPage stylistRegistrationPage() {
 		return getPages().currentPageAt(StylistRegistrationPage.class);
+	}
+	
+	public ConnectWithMeRegistrationPage connectWithMeRegistrationPage() {
+		return getPages().currentPageAt(ConnectWithMeRegistrationPage.class);
 	}
 
 	public CreateCustomerPage createCustomerPage() {

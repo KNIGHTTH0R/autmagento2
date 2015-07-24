@@ -1,4 +1,4 @@
-package com.pages.frontend.registration.landing;
+package com.pages.frontend.registration.connectWithMe;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
@@ -6,45 +6,51 @@ import org.openqa.selenium.WebElement;
 
 import com.tools.requirements.AbstractPage;
 
-public class ContactLandingPage extends AbstractPage {
+public class ConnectWithMeRegistrationPage extends AbstractPage {
 
-	
-//	@FindBy(css = "input[value='frau']")
-	@FindBy(css = "li.control div input:nth-child(3)")      //int
+	@FindBy(id = "frau")
 	private WebElement frauRadioButton;
 
-//	@FindBy(css = "input[value='herr']")
-	@FindBy(css = "li.control div input:first-child")     //int
+	@FindBy(id = "herr")
 	private WebElement herrRadioButton;
 
-	@FindBy(name = "vorname")
+	@FindBy(id = "firstname")
 	private WebElement firstNameInput;
 
-	@FindBy(name = "nachname")
+	@FindBy(id = "lastname")
 	private WebElement lastNameInput;
 
-	@FindBy(name = "email")
+	@FindBy(id = "email")
 	private WebElement emailInput;
 
-	@FindBy(name = "plz")
+	@FindBy(id = "postcode")
 	private WebElement plzInput;
 
-	@FindBy(name = "ort")
-	private WebElement ortInput;
+	@FindBy(id = "city")
+	private WebElement cityInput;
 
 	@FindBy(id = "land")
 	private WebElement countrySelect;
 
-	@FindBy(name = "tel_ort")
+	@FindBy(id = "area_code")
 	private WebElement telefoneCodeInput;
 
-	@FindBy(name = "tel_ziel")
+	@FindBy(id = "telephone")
 	private WebElement telefoneInput;
+
+	@FindBy(id = "flag_newsletter")
+	private WebElement flagNewsletter;
+
+	@FindBy(id = "flag_parties")
+	private WebElement flagParties;
+
+	@FindBy(id = "flagMember")
+	private WebElement flagMember;
 
 	@FindBy(id = "terms")
 	private WebElement iAgreeCheckbox;
 
-	@FindBy(id = "kostenlos-anmelden")
+	@FindBy(css = "form#form-stylist-connect button[type='submit']")
 	private WebElement okButton;
 
 	public void selectGender(boolean isMale) {
@@ -72,8 +78,8 @@ public class ContactLandingPage extends AbstractPage {
 	}
 
 	public void inputCity(String city) {
-		element(ortInput).waitUntilVisible();
-		ortInput.sendKeys(city);
+		element(cityInput).waitUntilVisible();
+		cityInput.sendKeys(city);
 	}
 
 	public void inputPostCode(String postCode) {
@@ -102,10 +108,34 @@ public class ContactLandingPage extends AbstractPage {
 		iAgreeCheckbox.click();
 	}
 
+	public void checkNewslletterCheckbox(boolean checked) {
+
+		boolean isSelected = flagNewsletter.isSelected();
+
+		if ((checked && !isSelected) || (!checked && isSelected))
+			flagNewsletter.click();
+
+	}
+
+	public void checkPartiesCheckbox(boolean checked) {
+
+		boolean isSelected = flagParties.isSelected();
+
+		if ((checked && !isSelected) || (!checked && isSelected))
+			flagParties.click();
+	}
+
+	public void checkMemberCheckbox(boolean checked) {
+
+		boolean isSelected = flagMember.isSelected();
+
+		if ((checked && !isSelected) || (!checked && isSelected))
+			flagMember.click();
+	}
+
 	public void clickOk() {
 		element(okButton).waitUntilVisible();
 		okButton.click();
 	}
-
 
 }

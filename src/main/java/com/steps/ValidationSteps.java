@@ -33,13 +33,13 @@ public class ValidationSteps extends AbstractSteps {
 	@StepGroup
 	public void validateCustomerLeadData(DBStylistModel initialData, StylistDataModel finalData) {
 
-		verifyValues("for ", initialData.getTotalCustomerReceived(), finalData.getCustomerLeads());
+		verifyValues("Customer Leads ", initialData.getTotalCustomerReceived(), finalData.getCustomerLeads());
 
 	}
 
 	@StepGroup
 	public void validateStyleCoachLeadData(DBStylistModel initialData, StylistDataModel finalData) {
-
+		verifyValues("Customer Leads", initialData.getTotalCustomerReceived(), finalData.getCustomerLeads());
 		verifyValues("Style Coach Leads ", initialData.getTotalSCReceived(), finalData.getStyleCoachLeads());
 		verifyValues("Style Coach Leads Week ", initialData.getTotalSCCurrentWeek(), finalData.getStyleCoachLeadsWeek());
 
@@ -47,7 +47,7 @@ public class ValidationSteps extends AbstractSteps {
 
 	@StepGroup
 	public void validateHostLeadData(DBStylistModel initialData, StylistDataModel finalData) {
-
+		verifyValues("Customer Leads ", initialData.getTotalCustomerReceived(), finalData.getCustomerLeads());
 		verifyValues("Hostess Leads ", initialData.getTotalHostReceived(), finalData.getHostessLeads());
 		verifyValues("Hostess Leads Week ", initialData.getTotalHostCurrentWeek(), finalData.getHostessLeadsWeek());
 
