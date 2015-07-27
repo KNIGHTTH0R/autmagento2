@@ -7,10 +7,6 @@ import net.thucydides.core.annotations.Steps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
-import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
-import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
-import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
-import com.tools.utils.PrintUtils;
 
 public class ValidationWorkflows {
 	
@@ -77,24 +73,6 @@ public class ValidationWorkflows {
 	public void performCartValidations() {
 
 		checkoutValidationSteps.verifySuccessMessage();
-		
-//		System.out.println("--shipping calculated----------------");
-//		PrintUtils.printListBasicProductModel(CartCalculator.productsList50);
-//		System.out.println("----shipping grabbed--------------");
-//		PrintUtils.printList(DataGrabber.cartProductsWith50Discount);
-//		System.out.println("------------------");
-//		
-//		System.out.println("--shipping calculated----------------");
-//		PrintUtils.printListBasicProductModel(CartCalculator.productsList25);
-//		System.out.println("----shipping grabbed--------------");
-//		PrintUtils.printList(DataGrabber.cartProductsWith25Discount);
-//		System.out.println("------------------");
-//		
-//		System.out.println("--shipping calculated----------------");
-//		PrintUtils.printListBasicProductModel(CartCalculator.productsListMarketing);
-//		System.out.println("----shipping grabbed--------------");
-//		PrintUtils.printList(DataGrabber.cartMarketingMaterialsProducts);
-//		System.out.println("------------------");
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);		
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
@@ -113,18 +91,6 @@ public class ValidationWorkflows {
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.calculatedProductsListMarketing, DataGrabber.cartMarketingMaterialsProductsDiscounted);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION -RECALCULATED");
-		
-		System.out.println("--shipping calculated----------------");
-		PrintUtils.printListBasicProductModel(CartCalculator.allProductsList);
-		System.out.println("----shipping grabbed--------------");
-		PrintUtils.printList(DataGrabber.shippingProducts);
-		System.out.println("------------------");
-		
-		System.out.println("--conf calculated----------------");
-		PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
-		System.out.println("----conf grabbed--------------");
-		PrintUtils.printList(DataGrabber.confirmationProducts);
-		System.out.println("------------------");
 
 		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.shippingProducts);
 		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
@@ -163,18 +129,6 @@ public class ValidationWorkflows {
 		
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketing, DataGrabber.cartMarketingMaterialsProducts);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
-		
-		System.out.println("--shipping calculated----------------");
-		PrintUtils.printListBasicProductModel(CartCalculator.allProductsList);
-		System.out.println("----shipping grabbed--------------");
-		PrintUtils.printList(DataGrabber.shippingProducts);
-		System.out.println("------------------");
-		
-		System.out.println("--conf calculated----------------");
-		PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
-		System.out.println("----conf grabbed--------------");
-		PrintUtils.printList(DataGrabber.confirmationProducts);
-		System.out.println("------------------");
 		
 		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.shippingProducts);
 		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");

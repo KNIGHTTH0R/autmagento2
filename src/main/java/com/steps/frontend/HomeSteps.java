@@ -11,7 +11,7 @@ public class HomeSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void clickStyleCoachLink() {
+	public void goToStyleCoachSection() {
 		homePage().clickStyleCoachLink();
 	}
 

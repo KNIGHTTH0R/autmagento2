@@ -44,10 +44,10 @@ public class ConnectWithMeRegistrationPage extends AbstractPage {
 	@FindBy(id = "flag_parties")
 	private WebElement flagParties;
 
-	@FindBy(id = "flagMember")
+	@FindBy(id = "flag_member")
 	private WebElement flagMember;
 
-	@FindBy(id = "terms")
+	@FindBy(id = "accept-checkbox")
 	private WebElement iAgreeCheckbox;
 
 	@FindBy(css = "form#form-stylist-connect button[type='submit']")

@@ -14,6 +14,7 @@ public class ContextConstants {
 	public static String NOT_PREFEERD_WEBSITE_POST_CODE = MongoReader.getDictionaryItem("NOT_PREFEERD_WEBSITE_POST_CODE");
 	// messages
 	public static String EXISTING_ACCOUNT_MESSAGE = MongoReader.getDictionaryItem("EXISTING_ACCOUNT_MESSAGE");
+	public static String CONNECT_SUCCES_MESSAGE = MongoReader.getDictionaryItem("CONNECT_SUCCES_MESSAGE");
 	public static String WAITING_PAYMENT_CONFIRMATION = MongoReader.getDictionaryItem("WAITING_PAYMENT_CONFIRMATION");
 	public static String CONFIRMATION_LINK_TEXT = MongoReader.getDictionaryItem("CONFIRMATION_LINK_TEXT");
 	public static String PARTY_COUNTRY_RESTRICTION_ERROR_MESSAGE = MongoReader.getDictionaryItem("PARTY_COUNTRY_RESTRICTION_ERROR_MESSAGE");
