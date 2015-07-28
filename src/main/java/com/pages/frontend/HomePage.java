@@ -11,6 +11,9 @@ public class HomePage extends AbstractPage {
 
 	@FindBy(css = "div.categories li:nth-child(3) a")
 	private WebElement styleCoachLink;
+	
+	@FindBy(css = "div.categories li:nth-child(2) a")
+	private WebElement stylePartyLink;
 
 	@FindBy(css = "a#contactBoosterDetails")
 	private WebElement contactBoosterDetails;
@@ -27,6 +30,10 @@ public class HomePage extends AbstractPage {
 	public void clickStyleCoachLink() {
 		styleCoachLink.click();
 
+	}
+	public void clickStylePartyLink() {
+		stylePartyLink.click();
+		
 	}
 
 	public void clickOnContactBoosterDetails() {

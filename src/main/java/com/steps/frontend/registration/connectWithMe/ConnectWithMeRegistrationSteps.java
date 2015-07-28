@@ -18,18 +18,18 @@ public class ConnectWithMeRegistrationSteps extends AbstractSteps {
 	@Step
 	public void navigateToConnectWithMeUnderMasterShop() {
 		getDriver().get(MongoReader.getBaseURL());
-		homePage().clickStyleCoachLink();
+		homePage().clickStylePartyLink();
 	}
 
 	@Step
 	public void navigateToConnectWithMeUnderContext(String context) {
 		getDriver().get(MongoReader.getBaseURL() + context);
-		homePage().clickStyleCoachLink();
+		homePage().clickStylePartyLink();
 	}
 
 	@Step
 	public void loggedInUsernavigatesToConnectWithMeUnderContext(String context) {
-		homePage().clickStyleCoachLink();
+		homePage().clickStylePartyLink();
 	}
 
 	@Step
