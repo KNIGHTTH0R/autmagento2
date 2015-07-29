@@ -21,6 +21,7 @@ import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DykscSeachModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.env.constants.SoapConstants;
@@ -45,7 +46,9 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 	public StylistDataModel validationModel;
 	CoordinatesModel coordinatesModel = new CoordinatesModel();
 	RandomAddress randomAddress;
-	List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
+	List<DBStylistModel> compatibleStylistListForDistribution = new ArrayList<DBStylistModel>();
+	List<DBStylistModel> searchByPlzAndCountryStylistList = new ArrayList<DBStylistModel>();
+	List<DykscSeachModel> dysksStylecoachesList = new ArrayList<DykscSeachModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -62,10 +65,13 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 			System.out.println(coordinatesModel.getLongitude());
 
 		}
-		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
+		compatibleStylistListForDistribution = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
 				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 1);
 
-		PrintUtils.printListDbStylists(compatibleStylistList);
+		searchByPlzAndCountryStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
+				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 1);
+
+		PrintUtils.printListDbStylists(compatibleStylistListForDistribution);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
@@ -74,7 +80,7 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 	@Test
 	public void us13001CustomerLeadDistributionTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachChecked(dataModel, addressModel);
+		dysksStylecoachesList = customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedAndReturnFoundStylecoaches(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
 	}
@@ -83,7 +89,7 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
-		for (DBStylistModel stylist : compatibleStylistList) {
+		for (DBStylistModel stylist : compatibleStylistListForDistribution) {
 			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
 		}
 	}
