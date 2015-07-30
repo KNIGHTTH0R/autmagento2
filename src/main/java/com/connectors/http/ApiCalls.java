@@ -377,6 +377,19 @@ public class ApiCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("paused_to")) {
 					model.setPausedTo(childNodes.item(j).getTextContent());
 				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("date_of_birth")) {
+					String[] parts = childNodes.item(j).getTextContent().split(" ");
+					model.setBirthDate(parts[0]);
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("has_slogan")) {
+					model.setSlogan(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("has_avatar")) {
+					model.setAvatar(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_confirmed")) {
+					model.setConfirmed(childNodes.item(j).getTextContent());
+				}
 			}
 			stylistModelList.add(model);
 		}
@@ -441,6 +454,7 @@ public class ApiCalls {
 	public static List<DBStylistModel> getCompatibleStylistsForDysks(CoordinatesModel coordinatesModel, String range, String filter, String operand, String filterValue, int mode) {
 
 		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+
 		initialList = getStylistList(filter, operand, filterValue);
 
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
@@ -450,7 +464,7 @@ public class ApiCalls {
 			switch (mode) {
 
 			case 1:
-				if (!isStylistIncompatibleForCustomerRetrieval(dbStylistModel)) {
+				if (!isStylistIncompatibleForCustomerRetrievalAssignation(dbStylistModel)) {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
@@ -459,7 +473,7 @@ public class ApiCalls {
 				break;
 
 			case 2:
-				if (!isStylistIncompatibleForHost(dbStylistModel)) {
+				if (!isStylistIncompatibleForHostAssignation(dbStylistModel)) {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
@@ -468,7 +482,7 @@ public class ApiCalls {
 				break;
 
 			case 3:
-				if (!isStylistIncompatibleForSCRetrieval(dbStylistModel)) {
+				if (!isStylistIncompatibleForSCRetrievalAssignation(dbStylistModel)) {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
@@ -487,7 +501,7 @@ public class ApiCalls {
 			}
 		}
 
-		return getFirstFiveStylistInRangeOrClosest(coordinatesModel, compatibleList, range);
+		return getFiveStylistsFromListForeachAgeCategoryIfExist(coordinatesModel, compatibleList, range);
 
 	}
 
@@ -503,7 +517,8 @@ public class ApiCalls {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
 				|| stylistModel.getQualifiedCustomer().contentEquals("0") || stylistModel.getStylistId().contentEquals("1")
 				|| !stylistModel.getStylistQuiteDate().contentEquals("0") || !stylistModel.getStylistContractStatus().contentEquals("0")
-				|| stylistModel.getStylistContractStatus().contentEquals("3");
+				|| stylistModel.getStylistContractStatus().contentEquals("3") || !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1")
+				|| !stylistModel.getSlogan().contentEquals("1") || stylistModel.getBirthDate().contentEquals("");
 
 	}
 
@@ -514,10 +529,26 @@ public class ApiCalls {
 				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek());
 	}
 
+	private static boolean isStylistIncompatibleForSCRetrievalAssignation(DBStylistModel stylistModel) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getStylistId().contentEquals("1") || stylistModel.getQualifiedSC().contentEquals("0") || !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3")
+				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek()) || !stylistModel.getConfirmed().contentEquals("1")
+				|| !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1") || stylistModel.getBirthDate().contentEquals("");
+	}
+
 	private static boolean isStylistIncompatibleForHost(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
 				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1") || !stylistModel.getStylistQuiteDate().contentEquals("0")
 				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3");
+	}
+
+	private static boolean isStylistIncompatibleForHostAssignation(DBStylistModel stylistModel) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1") || !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3")
+				|| !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1")
+				|| stylistModel.getBirthDate().contentEquals("");
 	}
 
 	private static boolean isStylistIncompatibleForDistributionDuringCheckout(DBStylistModel stylistModel) {
@@ -622,21 +653,30 @@ public class ApiCalls {
 		}
 		if (compatibleStylists.size() > 5) {
 
-			if (category30Age.size() > 0) {
-				compatibleStylists.add(category30Age.get(0));
-				category30Age.remove(0);
-			}
-			if (category45Age.size() > 0) {
-				compatibleStylists.add(category45Age.get(0));
-				category30Age.remove(0);
-			}
-			if (category60Age.size() > 0) {
-				compatibleStylists.add(category60Age.get(0));
-				category30Age.remove(0);
-			}
+			compatibleStylists.clear();
 
+			while (compatibleStylists.size() < 5) {
+
+				if (category30Age.size() > 0) {
+					compatibleStylists.add(category30Age.get(0));
+					category30Age.remove(0);
+				}
+				if (category45Age.size() > 0) {
+					compatibleStylists.add(category45Age.get(0));
+					category30Age.remove(0);
+				}
+				if (category60Age.size() > 0) {
+					compatibleStylists.add(category60Age.get(0));
+					category30Age.remove(0);
+				}
+				// this is because we can reach the 5 elements in the first if
+				// and until we enter in while loop,we can have 6 or 7
+				// elements
+				compatibleStylists.subList(0, 5);
+			}
 
 		} else if (compatibleStylists.size() == 0) {
+
 			compatibleStylists.add(stylistsList.get(0));
 
 		}

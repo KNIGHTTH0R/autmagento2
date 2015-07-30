@@ -68,10 +68,13 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 		compatibleStylistListForDistribution = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
 				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 1);
 
-		searchByPlzAndCountryStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
+		searchByPlzAndCountryStylistList = ApiCalls.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
 				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 1);
 
+		System.out.println("--distribution---------");
 		PrintUtils.printListDbStylists(compatibleStylistListForDistribution);
+		System.out.println("--dysks---------");
+		PrintUtils.printListDbStylists(searchByPlzAndCountryStylistList);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
