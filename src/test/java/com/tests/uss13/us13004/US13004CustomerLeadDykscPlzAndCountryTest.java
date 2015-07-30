@@ -1,4 +1,4 @@
-package com.tests.uss13.us13001;
+package com.tests.uss13.us13004;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,7 @@ import com.tests.BaseTest;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DykscSeachModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.env.constants.SoapConstants;
@@ -28,21 +29,25 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
+import com.workflows.frontend.DysksWorkflows;
 
 @WithTag(name = "US13", type = "frontend")
-@Story(Application.Distribution.CustomerLead.class)
+@Story(Application.DykscPlzAndCountry.CustomerLead.class)
 @RunWith(ThucydidesRunner.class)
-public class US13001CustomerLeadDistributionTest extends BaseTest {
+public class US13004CustomerLeadDykscPlzAndCountryTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
+	@Steps
+	public DysksWorkflows dysksWorkflows;
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
 	public StylistDataModel validationModel;
 	CoordinatesModel coordinatesModel = new CoordinatesModel();
 	RandomAddress randomAddress;
-	List<DBStylistModel> compatibleStylistListForDistribution = new ArrayList<DBStylistModel>();
+	List<DBStylistModel> searchByPlzAndCountryStylistList = new ArrayList<DBStylistModel>();
+	List<DykscSeachModel> dysksStylecoachesList = new ArrayList<DykscSeachModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -59,26 +64,34 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 			System.out.println(coordinatesModel.getLongitude());
 
 		}
-		compatibleStylistListForDistribution = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
+
+		searchByPlzAndCountryStylistList = ApiCalls.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
 				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 1);
-		PrintUtils.printListDbStylists(compatibleStylistListForDistribution);
+
+		System.out.println("--calculated dysks---------");
+		PrintUtils.printListDbStylists(searchByPlzAndCountryStylistList);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 
 	@Test
-	public void us13001CustomerLeadDistributionTest() {
+	public void us13004CustomerLeadDykscPlzAndCountryTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedNoStylistSelected(dataModel, addressModel);
+		dysksStylecoachesList = customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedAndReturnFoundStylecoaches(dataModel, addressModel);
+		System.out.println("--grabbed dysks---------");
+		PrintUtils.printListDykscSeachModel(dysksStylecoachesList);
+		
 		customerRegistrationSteps.verifyCustomerCreation();
+		dysksWorkflows.setValidateStylistsModels(searchByPlzAndCountryStylistList, dysksStylecoachesList);		
+		dysksWorkflows.validateStylists("VALIDATE THAT SEARCH BY PLZ AND COUNTRY RETURNS THE CORRECT LIST");
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
-		for (DBStylistModel stylist : compatibleStylistListForDistribution) {
+		for (DBStylistModel stylist : searchByPlzAndCountryStylistList) {
 			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
 		}
 	}

@@ -630,7 +630,7 @@ public class ApiCalls {
 
 		List<DBStylistModel> category30Age = new ArrayList<DBStylistModel>();
 		List<DBStylistModel> category45Age = new ArrayList<DBStylistModel>();
-		List<DBStylistModel> category60Age = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> category100Age = new ArrayList<DBStylistModel>();
 
 		List<DBStylistModel> compatibleStylists = new ArrayList<DBStylistModel>();
 
@@ -644,8 +644,8 @@ public class ApiCalls {
 				} else if (calculateStylistAge(stylist) > 30 && calculateStylistAge(stylist) <= 45) {
 					category45Age.add(stylist);
 
-				} else if (calculateStylistAge(stylist) > 45 && calculateStylistAge(stylist) <= 60) {
-					category45Age.add(stylist);
+				} else if (calculateStylistAge(stylist) > 45 && calculateStylistAge(stylist) <= 100) {
+					category100Age.add(stylist);
 				}
 
 				compatibleStylists.add(stylist);
@@ -665,8 +665,8 @@ public class ApiCalls {
 					compatibleStylists.add(category45Age.get(0));
 					category30Age.remove(0);
 				}
-				if (category60Age.size() > 0) {
-					compatibleStylists.add(category60Age.get(0));
+				if (category100Age.size() > 0) {
+					compatibleStylists.add(category100Age.get(0));
 					category30Age.remove(0);
 				}
 				// this is because we can reach the 5 elements in the first if

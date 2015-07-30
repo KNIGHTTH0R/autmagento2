@@ -18,6 +18,7 @@ import com.tools.data.frontend.BorrowCartTotalsModel;
 import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.DykscSeachModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
@@ -56,7 +57,6 @@ public class PrintUtils {
 		}
 	}
 
-	// TODO print all fields here
 	public static void printListDbStylists(List<DBStylistModel> list) {
 		System.out.println(" *** Print List from Cart *** ");
 		for (DBStylistModel dBStylistModel : list) {
@@ -69,6 +69,16 @@ public class PrintUtils {
 			System.out.println("Customer leads: " + dBStylistModel.getTotalCustomerReceived());
 			System.out.println("SC leads: " + dBStylistModel.getTotalSCReceived());
 			System.out.println("Host leads: " + dBStylistModel.getTotalHostReceived());
+		}
+	}
+	public static void printListDykscSeachModel(List<DykscSeachModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		for (DykscSeachModel stylist : list) {
+			System.out.println("------------------------");
+			
+			System.out.println(stylist.getId());
+			System.out.println(stylist.getName());
+			
 		}
 	}
 
