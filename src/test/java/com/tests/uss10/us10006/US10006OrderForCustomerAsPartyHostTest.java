@@ -98,7 +98,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		genProduct1 = ApiCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");
-		ApiCalls.createApiProduct(genProduct1);
+		ApiCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -147,7 +147,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		String currentTotal = dashboardSteps.getJewelryBonus();
 
-		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct1.getJewelryBonus(), true);
+		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct1.getJewerlyBonusValue(), true);
 
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();

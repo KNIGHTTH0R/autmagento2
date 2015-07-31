@@ -50,9 +50,9 @@ public class US18001VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 	private String username, password, customerName;
 
 	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
-	private ProductDetailedModel genProduct4;
+
+	// private ProductDetailedModel genProduct2;
+	// private ProductDetailedModel genProduct3;
 
 	@Before
 	public void setUp() throws Exception {
@@ -62,15 +62,15 @@ public class US18001VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 		genProduct1.setIp("75");
 		ApiCalls.createApiProduct(genProduct1);
 
-		genProduct2 = ApiCalls.createBundleProductModel();
-		genProduct2.setPrice("89.00");
-		genProduct2.setIp("75");
-		ApiCalls.createApiProduct(genProduct2);
-
-		genProduct4 = ApiCalls.createConfigurableProductModel();
-		genProduct4.setPrice("89.00");
-		genProduct4.setIp("75");
-		ApiCalls.createApiProduct(genProduct4);
+		// genProduct2 = ApiCalls.createBundleProductModel();
+		// genProduct2.setPrice("89.00");
+		// genProduct2.setIp("75");
+		// ApiCalls.createApiProduct(genProduct2);
+		//
+		// genProduct3 = ApiCalls.createConfigurableProductModel();
+		// genProduct3.setPrice("89.00");
+		// genProduct3.setIp("75");
+		// ApiCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -116,11 +116,11 @@ public class US18001VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 		addProductsModalSteps.searchForProduct(genProduct1.getSku());
 		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct1.getSku(), genProduct1.getName());
 
-		addProductsModalSteps.searchForProduct(genProduct2.getSku());
-		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct2.getSku(), genProduct2.getName());
+		addProductsModalSteps.searchForProduct("K095MC");
+		addProductsModalSteps.verifyProductPropertiesInModalWindow("K095MC", "TRIPLE TWIST SET");
 
-		addProductsModalSteps.searchForProduct(genProduct3.getSku());
-		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct3.getSku(), genProduct3.getName());
+		addProductsModalSteps.searchForProduct("R073SV");
+		addProductsModalSteps.verifyProductPropertiesInModalWindow("R073SV", "SYDNEY RING-16");
 
 	}
 

@@ -162,11 +162,11 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
-		
+
 		String currentTotal = dashboardSteps.getJewelryBonus();
-		
-		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct1.getJewelryBonus(), true);
-		expectedJewelryHistoryModelWhenOrderCancelled = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct1.getJewelryBonus(), false);
+
+		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal, genProduct1.getJewerlyBonusValue(), true);
+		expectedJewelryHistoryModelWhenOrderCancelled = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal, genProduct1.getJewerlyBonusValue(), false);
 
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);

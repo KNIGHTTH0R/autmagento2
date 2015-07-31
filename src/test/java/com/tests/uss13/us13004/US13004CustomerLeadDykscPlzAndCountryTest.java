@@ -81,9 +81,9 @@ public class US13004CustomerLeadDykscPlzAndCountryTest extends BaseTest {
 		dysksStylecoachesList = customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedAndReturnFoundStylecoaches(dataModel, addressModel);
 		System.out.println("--grabbed dysks---------");
 		PrintUtils.printListDykscSeachModel(dysksStylecoachesList);
-		
+
 		customerRegistrationSteps.verifyCustomerCreation();
-		dysksWorkflows.setValidateStylistsModels(searchByPlzAndCountryStylistList, dysksStylecoachesList);		
+		dysksWorkflows.setValidateStylistsModels(searchByPlzAndCountryStylistList, dysksStylecoachesList);
 		dysksWorkflows.validateStylists("VALIDATE THAT SEARCH BY PLZ AND COUNTRY RETURNS THE CORRECT LIST");
 	}
 

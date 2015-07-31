@@ -27,7 +27,6 @@ public class ProductDetailedModel {
 	private String giftMessageAvailable;
 	private String price;
 	private String specialPrice;
-	private String jewelryBonus;
 	private String specialFromDate;
 	private String specialToDate;
 	private String taxClassId;
@@ -44,6 +43,8 @@ public class ProductDetailedModel {
 	private String ip;
 	private String newsFromDate;
 	private String newsToDate;
+	private String jewerlyBonusValue;
+	private String jewelryBonusCart;
 
 	public String getType() {
 		return type;
@@ -325,20 +326,28 @@ public class ProductDetailedModel {
 		this.newsToDate = newsToDate;
 	}
 
-	public String getJewelryBonus() {
-		return jewelryBonus;
-	}
-
-	public void setJewelryBonus(String jewelryBonus) {
-		this.jewelryBonus = jewelryBonus;
-	}
-
 	public List<String> getAvailableCartsArray() {
 		return availableCartsArray;
 	}
 
 	public void setAvailableCartsArray(List<String> availableCartsArray) {
 		this.availableCartsArray = availableCartsArray;
+	}
+
+	public String getJewerlyBonusValue() {
+		return jewerlyBonusValue;
+	}
+
+	public void setJewerlyBonusValue(String jewerlyBonusValue) {
+		this.jewerlyBonusValue = jewerlyBonusValue;
+	}
+
+	public String getJewelryBonusCart() {
+		return jewelryBonusCart;
+	}
+
+	public void setJewelryBonusCart(String jewelryBonusCart) {
+		this.jewelryBonusCart = jewelryBonusCart;
 	}
 
 }
