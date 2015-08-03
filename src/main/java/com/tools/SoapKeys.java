@@ -76,6 +76,8 @@ public class SoapKeys {
 	public static final String EARLIEST_AVAILABILITY = "earliest_availability";
 	public static final String MAXIMUM_PERCENTAGE_TO_BORROW = "maximum_percent_to_borrow";
 	public static final String USE_CONFIG_MAXIMUM_PERCENTAGE_TO_BORROW = "use_config_maximum_percent_to_borrow";
+	public static final String JEWERLY_BONUS_VALUE = "jewelry_bonus_value";
+	public static final String ALLOW_JEWERLY_BONUS_CART = "allow_jewelry_bonus_cart";
 	// Tier Prices Model
 	public static final String TIER_PRICES = "tier_price";
 	public static final String CUSTOMER_GROUP_ID = "customer_group_id";
@@ -99,5 +101,7 @@ public class SoapKeys {
 	public static final String STYLIST_INFO = "stylistStylistInfoRequestParam";
 	public static final String FILTERS = "filters";
 	public static final String COMPLEX_FILTER = "complex_filter";
+	
+	
 
 }

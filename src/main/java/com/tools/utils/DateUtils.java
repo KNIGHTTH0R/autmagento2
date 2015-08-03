@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
+
 public class DateUtils {
 
 	public static String getLastDayOfTheCurrentMonth(String format) {
@@ -27,5 +30,19 @@ public class DateUtils {
 
 		return String.valueOf(sdf.format(today));
 	}
-	
+
+	public static int getAge(String birthDate) {
+		String[] parts = birthDate.split("/");
+
+		LocalDate birthdate = new LocalDate(Integer.parseInt(parts[2]), Integer.parseInt(parts[1]), Integer.parseInt(parts[0]));
+		LocalDate now = new LocalDate();
+		Years age = Years.yearsBetween(birthdate, now);
+
+		return age.getYears();
+	}
+
+	public static void main(String[] args) {
+		System.out.println(DateUtils.getAge("29/08/2000"));
+	}
+
 }

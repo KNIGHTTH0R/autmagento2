@@ -1,9 +1,14 @@
 package com.pages.frontend;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.data.frontend.DykscSeachModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
@@ -198,6 +203,26 @@ public class CreateCustomerPage extends AbstractPage {
 	public void selectFirstStylistFromList() {
 		element(firstStylistContainer).waitUntilVisible();
 		firstStylistContainer.click();
+	}
+
+	public List<DykscSeachModel> getFoundStylecoachesData() {
+
+		List<DykscSeachModel> resultList = new ArrayList<DykscSeachModel>();
+
+		List<WebElement> foundStylecoaches = getDriver().findElements(By.cssSelector("ul#stylist-list li"));
+
+		for (WebElement stylecoach : foundStylecoaches) {
+
+			DykscSeachModel model = new DykscSeachModel();
+
+			model.setId(stylecoach.getAttribute("rel"));
+			model.setName(stylecoach.findElement(By.cssSelector("span.sc-name")).getText());
+			resultList.add(model);
+
+		}
+
+		return resultList;
+
 	}
 
 	public void searchByGeoipSubmit() {

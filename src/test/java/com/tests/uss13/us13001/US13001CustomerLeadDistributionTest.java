@@ -17,7 +17,6 @@ import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -37,15 +36,14 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps
-	public CustomVerification customVerifications;
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
 	public StylistDataModel validationModel;
 	CoordinatesModel coordinatesModel = new CoordinatesModel();
 	RandomAddress randomAddress;
-	List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
+	List<DBStylistModel> compatibleStylistListForDistribution = new ArrayList<DBStylistModel>();
+	List<DBStylistModel> compatibleStylistListForDistributionPart2 = new ArrayList<DBStylistModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -62,10 +60,9 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 			System.out.println(coordinatesModel.getLongitude());
 
 		}
-		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
-				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 1);
-
-		PrintUtils.printListDbStylists(compatibleStylistList);
+		compatibleStylistListForDistribution = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.STYLIST_ID_FILTER,
+				SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 1);
+		PrintUtils.printListDbStylists(compatibleStylistListForDistribution);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
@@ -74,16 +71,15 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 	@Test
 	public void us13001CustomerLeadDistributionTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachChecked(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedNoStylistSelected(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
-		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
-		for (DBStylistModel stylist : compatibleStylistList) {
+		for (DBStylistModel stylist : compatibleStylistListForDistribution) {
 			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
 		}
 	}

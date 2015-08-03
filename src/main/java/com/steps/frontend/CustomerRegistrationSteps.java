@@ -1,5 +1,7 @@
 package com.steps.frontend;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import net.thucydides.core.annotations.Step;
@@ -11,6 +13,7 @@ import org.junit.Assert;
 import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.StyleMode;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DykscSeachModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
@@ -38,6 +41,8 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		clickCompleteButton();
 	}
 
+	// for distribution and DYSKS
+
 	@StepGroup
 	public void fillCreateCustomerFormWithNoStylePartyAndStyleCoachChecked(CustomerFormModel customerData, AddressModel addressData) {
 
@@ -54,6 +59,48 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		searchStylistByGeoip(addressData);
 		checkIAgree();
 		clickCompleteButton();
+	}
+
+	@Title("Fill create customer form without party and stylecoach checkboxes checked and do not select any resulting SC - customer retrieval")
+	@StepGroup
+	public void fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedNoStylistSelected(CustomerFormModel customerData, AddressModel addressData) {
+
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		inputPostCodeFromPersonalInfo(addressData.getPostCode());
+		selectCountryNameFromPersonalInfo(addressData.getCountryName());
+		searchStylistByGeoipButDoNotSelectAnyStylecoach(addressData);
+		checkIAgree();
+		clickCompleteButton();
+	}
+
+	@Title("Fill create customer form without party and stylecoach checkboxes checked and select firts SC - customer retrieval")
+	@StepGroup
+	public List<DykscSeachModel> fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedAndReturnFoundStylecoaches(CustomerFormModel customerData, AddressModel addressData) {
+
+		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
+
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		inputPostCodeFromPersonalInfo(addressData.getPostCode());
+		selectCountryNameFromPersonalInfo(addressData.getCountryName());
+		result = searchStylistByGeoipAndReturnFoundStylecoaches(addressData);
+		checkIAgree();
+		clickCompleteButton();
+
+		return result;
 	}
 
 	@StepGroup
@@ -75,6 +122,50 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		clickCompleteButton();
 	}
 
+	@Title("Fill create customer form with all checkboxes checked and do not select any resulting SC - SC retrieval")
+	@StepGroup
+	public void fillCreateCustomerFormNoStylistSelected(CustomerFormModel customerData, AddressModel addressData) {
+
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		checkMember();
+		fillContactDetails(addressData);
+		searchStylistByGeoipButDoNotSelectAnyStylecoach(addressData);
+		checkIAgree();
+		clickCompleteButton();
+	}
+
+	@Title("Fill create customer form with all checkboxes checked and select firts SC - SC retrieval")
+	@StepGroup
+	public List<DykscSeachModel> fillCreateCustomerFormAndReturnFoundStylecoaches(CustomerFormModel customerData, AddressModel addressData) {
+
+		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
+
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		checkMember();
+		fillContactDetails(addressData);
+		result = searchStylistByGeoipAndReturnFoundStylecoaches(addressData);
+		checkIAgree();
+		clickCompleteButton();
+
+		return result;
+	}
+
 	@StepGroup
 	public void fillCreateCustomerFormNoMemberAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
 
@@ -92,6 +183,50 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
+
+	@Title("Fill create customer form with no member checked and do not select any resulting SC - host retrieval")
+	@StepGroup
+	public void fillCreateCustomerFormNoMemberFlagAndNoStylistSelected(CustomerFormModel customerData, AddressModel addressData) {
+
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		fillContactDetails(addressData);
+		searchStylistByGeoipButDoNotSelectAnyStylecoach(addressData);
+		checkIAgree();
+		clickCompleteButton();
+	}
+
+	@Title("Fill create customer form with no member checked checked and select firts SC - host retrieval")
+	@StepGroup
+	public List<DykscSeachModel> fillCreateCustomerFormNoMemberAndReturnFoundStylecoaches(CustomerFormModel customerData, AddressModel addressData) {
+
+		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
+
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		fillContactDetails(addressData);
+		result = searchStylistByGeoipAndReturnFoundStylecoaches(addressData);
+		checkIAgree();
+		clickCompleteButton();
+
+		return result;
+	}
+
+	// end - distribution and DYSKS
 
 	@StepGroup
 	public void fillCreateCustomerFormNoPartiesAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
@@ -242,6 +377,29 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		if (createCustomerPage().isStylecoachFound()) {
 			createCustomerPage().selectFirstStylistFromList();
 		}
+	}
+
+	@Step
+	public void searchStylistByGeoipButDoNotSelectAnyStylecoach(AddressModel addressModel) {
+		createCustomerPage().searchStylistByGeoip();
+		createCustomerPage().inputPostcodeFilter(addressModel.getPostCode());
+		createCustomerPage().selectCountryFilter(addressModel.getCountryName());
+		createCustomerPage().searchByGeoipSubmit();
+
+	}
+
+	@Step
+	public List<DykscSeachModel> searchStylistByGeoipAndReturnFoundStylecoaches(AddressModel addressModel) {
+		createCustomerPage().searchStylistByGeoip();
+		createCustomerPage().inputPostcodeFilter(addressModel.getPostCode());
+		createCustomerPage().selectCountryFilter(addressModel.getCountryName());
+		createCustomerPage().searchByGeoipSubmit();
+		if (createCustomerPage().isStylecoachFound()) {
+			createCustomerPage().selectFirstStylistFromList();
+		}
+
+		return createCustomerPage().getFoundStylecoachesData();
+
 	}
 
 	@Step

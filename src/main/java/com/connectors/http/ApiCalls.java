@@ -18,6 +18,7 @@ import com.tools.data.soap.StockDataModel;
 import com.tools.env.constants.Separators;
 import com.tools.geolocation.DistanceCalculator;
 import com.tools.persistance.MongoReader;
+import com.tools.utils.DateUtils;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;
 import com.tools.utils.FormatterUtils;
@@ -107,6 +108,7 @@ public class ApiCalls {
 
 		return result;
 	}
+
 	public static ProductDetailedModel createDownloadableProductModel() {
 		ProductDetailedModel result = createProductModel();
 		result.setType("downloadable");
@@ -114,9 +116,10 @@ public class ApiCalls {
 		categoriesIds.add("52");
 		categoriesIds.add("52");
 		result.setCategoryIdsArray(categoriesIds);
-		
+
 		return result;
 	}
+
 	public static ProductDetailedModel createZzzProductModel() {
 		ProductDetailedModel result = createProductModel();
 		result.setSet("15");
@@ -124,9 +127,10 @@ public class ApiCalls {
 		categoriesIds.add("52");
 		categoriesIds.add("52");
 		result.setCategoryIdsArray(categoriesIds);
-		
+
 		return result;
 	}
+
 	public static ProductDetailedModel createStarterKitProductModel() {
 		ProductDetailedModel result = createProductModel();
 		result.setSet("13");
@@ -134,7 +138,7 @@ public class ApiCalls {
 		categoriesIds.add("52");
 		categoriesIds.add("52");
 		result.setCategoryIdsArray(categoriesIds);
-		
+
 		return result;
 	}
 
@@ -168,7 +172,6 @@ public class ApiCalls {
 		product.setOptionsContainer("");
 		product.setStore("0");
 		product.setIp("50");
-		product.setJewelryBonus("50.00");
 
 		product.setNewsFromDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 3600));
 		product.setNewsToDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 86400));
@@ -191,7 +194,7 @@ public class ApiCalls {
 		categoriesIds.add("43");
 		categoriesIds.add("5");
 		product.setCategoryIdsArray(categoriesIds);
-		
+
 		List<String> cartIds = new ArrayList<String>();
 		cartIds.add("4");
 		cartIds.add("3");
@@ -219,6 +222,9 @@ public class ApiCalls {
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
 		product.setStockData(stockModel);
 
+		product.setJewerlyBonusValue("50");
+		product.setJewelryBonusCart("3,4");
+
 		return product;
 
 	}
@@ -238,8 +244,9 @@ public class ApiCalls {
 
 		return resultID;
 	}
+
 	public static String createJbZzzApiProduct(ProductDetailedModel product) {
-		
+
 		String resultID = null;
 		try {
 			SOAPMessage response = HttpSoapConnector.soapCreateJbZzzProduct(product);
@@ -250,7 +257,7 @@ public class ApiCalls {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return resultID;
 	}
 
@@ -372,7 +379,19 @@ public class ApiCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("paused_to")) {
 					model.setPausedTo(childNodes.item(j).getTextContent());
 				}
-				
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("date_of_birth")) {
+					String[] parts = childNodes.item(j).getTextContent().split(" ");
+					model.setBirthDate(parts[0]);
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("has_slogan")) {
+					model.setSlogan(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("has_avatar")) {
+					model.setAvatar(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_confirmed")) {
+					model.setConfirmed(childNodes.item(j).getTextContent());
+				}
 			}
 			stylistModelList.add(model);
 		}
@@ -380,11 +399,15 @@ public class ApiCalls {
 
 	}
 
-	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinatesModel, String range, String filter, String operand, String filterValue,
-			int mode) {
+	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinatesModel, String range, String filter, String operand, String operand2,
+			String filterValue, int mode) {
 
 		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
+
 		initialList = getStylistList(filter, operand, filterValue);
+		initialListPart2 = getStylistList(filter, operand2, filterValue);
+		initialList.addAll(initialListPart2);
 
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
 
@@ -434,11 +457,74 @@ public class ApiCalls {
 
 	}
 
+	public static List<DBStylistModel> getCompatibleStylistsForDysks(CoordinatesModel coordinatesModel, String range, String filter, String operand, String filterValue, int mode) {
+
+		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+
+		initialList = getStylistList(filter, operand, filterValue);
+
+		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
+
+		for (DBStylistModel dbStylistModel : initialList) {
+
+			switch (mode) {
+
+			case 1:
+				if (!isStylistIncompatibleForCustomerRetrievalAssignation(dbStylistModel)) {
+
+					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					compatibleList.add(dbStylistModel);
+
+				}
+				break;
+
+			case 2:
+				if (!isStylistIncompatibleForHostAssignation(dbStylistModel)) {
+
+					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					compatibleList.add(dbStylistModel);
+
+				}
+				break;
+
+			case 3:
+				if (!isStylistIncompatibleForSCRetrievalAssignation(dbStylistModel)) {
+
+					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					compatibleList.add(dbStylistModel);
+
+				}
+				break;
+
+			case 4:
+				if (!isStylistIncompatibleForDistributionDuringCheckout(dbStylistModel)) {
+
+					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					compatibleList.add(dbStylistModel);
+
+				}
+				break;
+			}
+		}
+
+		return getFiveStylistsFromListForeachAgeCategoryIfExist(coordinatesModel, compatibleList, range);
+
+	}
+
 	private static boolean isStylistIncompatibleForCustomerRetrieval(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
 				|| stylistModel.getQualifiedCustomer().contentEquals("0") || stylistModel.getStylistId().contentEquals("1")
 				|| !stylistModel.getStylistQuiteDate().contentEquals("0") || !stylistModel.getStylistContractStatus().contentEquals("0")
 				|| stylistModel.getStylistContractStatus().contentEquals("3");
+
+	}
+
+	private static boolean isStylistIncompatibleForCustomerRetrievalAssignation(DBStylistModel stylistModel) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedCustomer().contentEquals("0") || stylistModel.getStylistId().contentEquals("1")
+				|| !stylistModel.getStylistQuiteDate().contentEquals("0") || !stylistModel.getStylistContractStatus().contentEquals("0")
+				|| stylistModel.getStylistContractStatus().contentEquals("3") || !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1")
+				|| !stylistModel.getSlogan().contentEquals("1") || stylistModel.getBirthDate().contentEquals("");
 
 	}
 
@@ -449,10 +535,26 @@ public class ApiCalls {
 				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek());
 	}
 
+	private static boolean isStylistIncompatibleForSCRetrievalAssignation(DBStylistModel stylistModel) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getStylistId().contentEquals("1") || stylistModel.getQualifiedSC().contentEquals("0") || !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3")
+				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek()) || !stylistModel.getConfirmed().contentEquals("1")
+				|| !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1") || stylistModel.getBirthDate().contentEquals("");
+	}
+
 	private static boolean isStylistIncompatibleForHost(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
 				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1") || !stylistModel.getStylistQuiteDate().contentEquals("0")
 				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3");
+	}
+
+	private static boolean isStylistIncompatibleForHostAssignation(DBStylistModel stylistModel) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1") || !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3")
+				|| !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1")
+				|| stylistModel.getBirthDate().contentEquals("");
 	}
 
 	private static boolean isStylistIncompatibleForDistributionDuringCheckout(DBStylistModel stylistModel) {
@@ -515,11 +617,88 @@ public class ApiCalls {
 		return compatibleStylists;
 	}
 
+	/**
+	 * Returns 5 stylecoaces if more than 5 are found. If less than five are
+	 * found,all the stylecoaches will be returned. If more than five are found,
+	 * each age category will have 1 stylecoach if there is a stylecoach for
+	 * that category,the rest of available places will be filled in with
+	 * compatible stylecoaches in range (random)
+	 * 
+	 * @param coordinatesModel
+	 * @param stylistsList
+	 * @param range
+	 * @return compatibleStylistsInRange
+	 */
+
+	public static List<DBStylistModel> getFiveStylistsFromListForeachAgeCategoryIfExist(CoordinatesModel coordinatesModel, List<DBStylistModel> stylistsList, String range) {
+
+		stylistsList = sortStylistListByRange(stylistsList);
+
+		List<DBStylistModel> category30Age = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> category45Age = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> category100Age = new ArrayList<DBStylistModel>();
+
+		List<DBStylistModel> compatibleStylists = new ArrayList<DBStylistModel>();
+
+		for (DBStylistModel stylist : stylistsList) {
+
+			if (isStylistInRange(coordinatesModel, stylist, range)) {
+
+				if (calculateStylistAge(stylist) <= 30) {
+					category30Age.add(stylist);
+
+				} else if (calculateStylistAge(stylist) > 30 && calculateStylistAge(stylist) <= 45) {
+					category45Age.add(stylist);
+
+				} else if (calculateStylistAge(stylist) > 45 && calculateStylistAge(stylist) <= 100) {
+					category100Age.add(stylist);
+				}
+
+				compatibleStylists.add(stylist);
+			}
+		}
+		if (compatibleStylists.size() > 5) {
+
+			compatibleStylists.clear();
+
+			while (compatibleStylists.size() < 5) {
+
+				if (category30Age.size() > 0) {
+					compatibleStylists.add(category30Age.get(0));
+					category30Age.remove(0);
+				}
+				if (category45Age.size() > 0) {
+					compatibleStylists.add(category45Age.get(0));
+					category30Age.remove(0);
+				}
+				if (category100Age.size() > 0) {
+					compatibleStylists.add(category100Age.get(0));
+					category30Age.remove(0);
+				}
+				// this is because we can reach the 5 elements in the first if
+				// and until we enter in while loop,we can have 6 or 7
+				// elements
+				compatibleStylists.subList(0, 5);
+			}
+
+		} else if (compatibleStylists.size() == 0) {
+
+			compatibleStylists.add(stylistsList.get(0));
+
+		}
+
+		return compatibleStylists;
+	}
+
 	public static String calculateDistanceFromCustomersCoordinates(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel) {
 		double distance = DistanceCalculator.getDistance(Double.parseDouble(coordinateaModel.getLattitude()), Double.parseDouble(coordinateaModel.getLongitude()),
 				Double.parseDouble(dBStylistModel.getLattitude()), Double.parseDouble(dBStylistModel.getLongitude()), "K");
 
 		return String.valueOf(distance);
+	}
+
+	public static int calculateStylistAge(DBStylistModel stylist) {
+		return DateUtils.getAge(stylist.getBirthDate());
 	}
 
 }

@@ -58,6 +58,17 @@ public class Application {
 		public class HostLead {
 		}
 	}
+	@Feature
+	public class DykscPlzAndCountry {
+		public class CustomerLead {
+		}
+		
+		public class StyleCoachLead {
+		}
+		
+		public class HostLead {
+		}
+	}
 
 	@Feature
 	public class Newsletter {

@@ -25,6 +25,11 @@ public class DBStylistModel {
 	private String stylistContractStatus;
 	private String pausedFrom;
 	private String pausedTo;
+	private String birthDate;
+	private String confirmed;
+	private String avatar;
+	private String slogan;
+	private String kobo;
 
 	public String getFirstName() {
 		return firstName;
@@ -208,6 +213,46 @@ public class DBStylistModel {
 
 	public void setPausedTo(String pausedTo) {
 		this.pausedTo = pausedTo;
+	}
+
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(String confirmed) {
+		this.confirmed = confirmed;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getSlogan() {
+		return slogan;
+	}
+
+	public void setSlogan(String slogan) {
+		this.slogan = slogan;
+	}
+
+	public String getKobo() {
+		return kobo;
+	}
+
+	public void setKobo(String kobo) {
+		this.kobo = kobo;
 	}
 
 	

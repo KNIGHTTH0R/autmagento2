@@ -35,6 +35,7 @@ public class AddProductsModalPage extends AbstractPage {
 
 	public void typeProductCode(String code) {
 		element(productCodeInput).waitUntilVisible();
+		productCodeInput.clear();
 		productCodeInput.sendKeys(code);
 	}
 
