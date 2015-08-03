@@ -111,7 +111,7 @@ public class US15004OrderForCustomerTest extends BaseTest {
 		genProduct1 = ApiCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");
 		genProduct1.setIp("75");
-		ApiCalls.createApiProduct(genProduct1);
+		ApiCalls.createJbZzzApiProduct(genProduct1);
 
 		genProduct2 = ApiCalls.createProductModel();
 		genProduct2.setPrice("49.90");
