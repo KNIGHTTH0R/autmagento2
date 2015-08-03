@@ -32,6 +32,7 @@ public class ContextConstants {
 	public static String PARTY_CREATION_EMAIL_SUBJECT = MongoReader.getDictionaryItem("PARTY_CREATION_EMAIL_SUBJECT");
 	public static String PROFILE_HISTORY = MongoReader.getDictionaryItem("PROFILE_HISTORY");
 	public static String JEWELRY_HISTORY = MongoReader.getDictionaryItem("JEWELRY_HISTORY");
+	public static String UPDATED_BY_SYSTEM = MongoReader.getDictionaryItem("UPDATED_BY_SYSTEM");
 
 	public static String EMPTY_CART = MongoReader.getDictionaryItem("EMPTY_CART");
 	public static String EMPTY_WISHLIST_MESSAGE = MongoReader.getDictionaryItem("EMPTY_WISHLIST_MESSAGE");

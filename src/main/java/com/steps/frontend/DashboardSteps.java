@@ -9,6 +9,7 @@ import org.junit.Assert;
 import com.tools.calculation.JewelryBonusHistoryCalulation;
 import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.soap.DBStylistModel;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.DateUtils;
 
@@ -50,7 +51,7 @@ public class DashboardSteps extends AbstractSteps {
 
 	@Step
 	public void validateDashboardTotalJewerlyBonus(String expectedTotal, String actualTotal) {
-		Assert.assertTrue("The totals don't match", expectedTotal.contentEquals(actualTotal.replace(".", "").replace(",", ".")));
+		Assert.assertTrue("The dashboard totals don't match", expectedTotal.contentEquals(actualTotal.replace(".", "").replace(",", ".")));
 	}
 
 	@Step
@@ -101,7 +102,7 @@ public class DashboardSteps extends AbstractSteps {
 		result.setDate(DateUtils.getCurrentDate("dd.MM.yyyy"));
 		// TODO change this hardcoded message when the dev team will implement
 		// the message in different languages
-		result.setReason("Updated by system");
+		result.setReason(ContextConstants.UPDATED_BY_SYSTEM);
 
 		return result;
 	}
