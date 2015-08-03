@@ -172,7 +172,6 @@ public class ApiCalls {
 		product.setOptionsContainer("");
 		product.setStore("0");
 		product.setIp("50");
-		
 
 		product.setNewsFromDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 3600));
 		product.setNewsToDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 86400));
@@ -222,7 +221,7 @@ public class ApiCalls {
 		stockModel.setMaximumPercentageToBorrow("");
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
 		product.setStockData(stockModel);
-		
+
 		product.setJewerlyBonusValue("50");
 		product.setJewelryBonusCart("3,4");
 
@@ -400,11 +399,15 @@ public class ApiCalls {
 
 	}
 
-	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinatesModel, String range, String filter, String operand, String filterValue,
-			int mode) {
+	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinatesModel, String range, String filter, String operand, String operand2,
+			String filterValue, int mode) {
 
 		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
+
 		initialList = getStylistList(filter, operand, filterValue);
+		initialListPart2 = getStylistList(filter, operand2, filterValue);
+		initialList.addAll(initialListPart2);
 
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
 

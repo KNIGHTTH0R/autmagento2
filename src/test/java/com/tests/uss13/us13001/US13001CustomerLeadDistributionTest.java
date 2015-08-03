@@ -43,6 +43,7 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 	CoordinatesModel coordinatesModel = new CoordinatesModel();
 	RandomAddress randomAddress;
 	List<DBStylistModel> compatibleStylistListForDistribution = new ArrayList<DBStylistModel>();
+	List<DBStylistModel> compatibleStylistListForDistributionPart2 = new ArrayList<DBStylistModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -59,8 +60,8 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 			System.out.println(coordinatesModel.getLongitude());
 
 		}
-		compatibleStylistListForDistribution = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
-				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 1);
+		compatibleStylistListForDistribution = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.STYLIST_ID_FILTER,
+				SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 1);
 		PrintUtils.printListDbStylists(compatibleStylistListForDistribution);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());

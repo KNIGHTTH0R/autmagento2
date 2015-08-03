@@ -59,8 +59,8 @@ public class US13002StyleCoachLeadDistributionTest extends BaseTest {
 			System.out.println(coordinatesModel.getLongitude());
 
 		}
-		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
-				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 3);
+		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.STYLIST_ID_FILTER,
+				SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 3);
 		PrintUtils.printListDbStylists(compatibleStylistList);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());

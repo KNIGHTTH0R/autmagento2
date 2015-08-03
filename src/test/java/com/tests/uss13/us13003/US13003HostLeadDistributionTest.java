@@ -60,8 +60,8 @@ public class US13003HostLeadDistributionTest extends BaseTest {
 			System.out.println(coordinatesModel.getLongitude());
 
 		}
-		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
-				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 2);
+		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.STYLIST_ID_FILTER,
+				SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 2);
 		System.out.println(compatibleStylistList.size());
 		PrintUtils.printListDbStylists(compatibleStylistList);
 

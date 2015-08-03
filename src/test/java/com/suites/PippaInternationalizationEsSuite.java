@@ -8,6 +8,7 @@ import com.poc.ActivateRule;
 import com.poc.DeactivateBuy3Get1ForHost;
 import com.poc.DeactivateBuy3Get1ForRegular;
 import com.poc.DeactivateRule;
+import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 
 @SuiteClasses({
 	
@@ -67,7 +68,20 @@ import com.poc.DeactivateRule;
 	US11001Suite.class,
 	US11002Suite.class,
 	US12001Suite.class,
+	
+	US13001Suite.class,
+	US13002Suite.class,
+	US13003Suite.class,
+	US13004Suite.class,
+	US13005Suite.class,
+	US13006Suite.class,
+	
 	US16001Suite.class,
+	
+	US17001Suite.class,
+	US15004Suite.class,
+	
+	US18001VerifyProductsInPlaceACustomerOrderModal.class,
 	
 	
 })

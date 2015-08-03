@@ -61,8 +61,8 @@ public class US14003AddAddressToCustomerTest extends BaseTest {
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
 
 		}
-		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
-				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 4);
+		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.STYLIST_ID_FILTER,
+				SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 4);
 
 		PrintUtils.printListDbStylists(compatibleStylistList);
 
