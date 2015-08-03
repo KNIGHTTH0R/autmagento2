@@ -28,6 +28,12 @@ public class ContextConstants {
 	public static String CUSTOMER_SAVE_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("CUSTOMER_SAVE_SUCCESS_MESSAGE");
 	public static String SUBSCRIPTION_CANCELLED = MongoReader.getDictionaryItem("SUBSCRIPTION_CANCELLED");
 	public static String SUBSCRIPTION_CANCELLED_LOUNGE = MongoReader.getDictionaryItem("SUBSCRIPTION_CANCELLED_LOUNGE");
+	public static String SUBSCRIPTION_PROCESSING_ORDER = MongoReader.getDictionaryItem("SUBSCRIPTION_PROCESSING_ORDER");
+	public static String SUBSCRIPTION_KOBO_ACTIVE = MongoReader.getDictionaryItem("SUBSCRIPTION_KOBO_ACTIVE");
+	public static String SUBSCRIPTION_BEFORE_PLACE_THE_ORDER = MongoReader.getDictionaryItem("SUBSCRIPTION_BEFORE_PLACE_THE_ORDER");
+	
+	
+	
 	public static String INVITE_EMAIL_SUBJECT = MongoReader.getDictionaryItem("INVITE_EMAIL_SUBJECT");
 	public static String PARTY_CREATION_EMAIL_SUBJECT = MongoReader.getDictionaryItem("PARTY_CREATION_EMAIL_SUBJECT");
 	public static String PROFILE_HISTORY = MongoReader.getDictionaryItem("PROFILE_HISTORY");

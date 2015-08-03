@@ -85,6 +85,7 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		myBusinessSteps.verifyKoboVoucherIsActive();
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
 		myBusinessSteps.accessKoboCart();

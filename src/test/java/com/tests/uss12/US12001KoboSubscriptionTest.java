@@ -84,6 +84,7 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		myBusinessSteps.verifyKoboStatusBeforePlaceTheOrder();
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
 		myBusinessSteps.accessKoboCart();
@@ -97,8 +98,13 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
+		headerSteps.goToLounge();
+		myBusinessSteps.verifyKoboOrderProcessingStatus();
 		headerSteps.goToMyBusinessPage();
 		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.WAITING_PAYMENT_CONFIRMATION);
+
+		
+		
 
 	}
 

@@ -372,6 +372,7 @@ public class ApiCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("paused_to")) {
 					model.setPausedTo(childNodes.item(j).getTextContent());
 				}
+				
 			}
 			stylistModelList.add(model);
 		}
