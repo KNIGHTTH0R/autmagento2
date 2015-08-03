@@ -62,5 +62,21 @@ public class MyBusinessPage extends AbstractPage {
 		Assert.assertTrue("The message or the -valid until- date is not correct !!",
 				voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_CANCELLED_LOUNGE + " " + DateUtils.getLastDayOfTheCurrentMonth("dd.MM.yyy")));
 	}
+	
+	public void verifyKoboStatusBeforePlaceTheOrder() {
+		Assert.assertTrue("The Kobo Subscription status is not Correct",
+				voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_BEFORE_PLACE_THE_ORDER));
+	}
+	
+	public void verifyKoboOrderProcessingStatus() {
+		Assert.assertTrue("The processing order status is missing",
+				voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_PROCESSING_ORDER));
+	}
+	public void verifyKoboVoucherIsActive() {
+		Assert.assertTrue("The Kobo voucher active message is not found",
+				voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_KOBO_ACTIVE ));
+	}
+	
+	
 
 }
