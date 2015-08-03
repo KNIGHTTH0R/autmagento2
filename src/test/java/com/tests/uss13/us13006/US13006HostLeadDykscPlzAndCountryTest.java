@@ -66,8 +66,8 @@ public class US13006HostLeadDykscPlzAndCountryTest extends BaseTest {
 
 		}
 
-		searchByPlzAndCountryStylistList = ApiCalls.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.SOAP_STYLIST_FILTER,
-				SoapConstants.SOAP_STYLIST_OPERAND, SoapConstants.SOAP_STYLIST_FILTER_VALUE, 2);
+		searchByPlzAndCountryStylistList = ApiCalls.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.STYLIST_ID_FILTER,
+				SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 2);
 
 		System.out.println("--dysks---------");
 		PrintUtils.printListDbStylists(searchByPlzAndCountryStylistList);
@@ -80,9 +80,9 @@ public class US13006HostLeadDykscPlzAndCountryTest extends BaseTest {
 		dysksStylecoachesList = customerRegistrationSteps.fillCreateCustomerFormNoMemberAndReturnFoundStylecoaches(dataModel, addressModel);
 		System.out.println("--grabbed dysks---------");
 		PrintUtils.printListDykscSeachModel(dysksStylecoachesList);
-		
-		customerRegistrationSteps.verifyCustomerCreation();		
-		dysksWorkflows.setValidateStylistsModels(searchByPlzAndCountryStylistList, dysksStylecoachesList);		
+
+		customerRegistrationSteps.verifyCustomerCreation();
+		dysksWorkflows.setValidateStylistsModels(searchByPlzAndCountryStylistList, dysksStylecoachesList);
 		dysksWorkflows.validateStylists("VALIDATE THAT SEARCH BY PLZ AND COUNTRY RETURNS THE CORRECT LIST");
 	}
 

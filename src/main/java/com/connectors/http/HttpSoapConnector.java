@@ -19,6 +19,7 @@ import com.tools.SoapKeys;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
+import com.tools.env.constants.SoapConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -249,6 +250,16 @@ public class HttpSoapConnector {
 		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
 		value2.addTextNode(filterValue);
 
+		// in testing
+		SOAPElement complexObjectArrayB = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
+		keyB.addTextNode(SoapConstants.SOAP_STATUS_FILTER);
+		SOAPElement valueB = complexObjectArrayB.addChildElement(SoapKeys.VALUE);
+		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
+		key2B.addTextNode(SoapConstants.EQUAL);
+		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
+		value2B.addTextNode("1");
+
 		soapMessage.saveChanges();
 
 		System.out.print("Request SOAP Message:");
@@ -288,7 +299,8 @@ public class HttpSoapConnector {
 		productData = addOptionalField(SoapKeys.JEWERLY_BONUS_VALUE, product.getJewerlyBonusValue(), productData);
 		productData = addOptionalField(SoapKeys.ALLOW_JEWERLY_BONUS_CART, product.getJewelryBonusCart(), productData);
 
-//		productData = addOptionalField(SoapKeys.JEWELRY_BONUS, product.getJewelryBonus(), productData);
+		// productData = addOptionalField(SoapKeys.JEWELRY_BONUS,
+		// product.getJewelryBonus(), productData);
 
 		// Added stock data section
 		productData.addChildElement(generateStockDataMessage(product.getStockData(), productData));

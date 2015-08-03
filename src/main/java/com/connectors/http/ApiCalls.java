@@ -457,11 +457,15 @@ public class ApiCalls {
 
 	}
 
-	public static List<DBStylistModel> getCompatibleStylistsForDysks(CoordinatesModel coordinatesModel, String range, String filter, String operand, String filterValue, int mode) {
+	public static List<DBStylistModel> getCompatibleStylistsForDysks(CoordinatesModel coordinatesModel, String range, String filter, String operand, String operand2,
+			String filterValue, int mode) {
 
 		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
 
 		initialList = getStylistList(filter, operand, filterValue);
+		initialListPart2 = getStylistList(filter, operand2, filterValue);
+		initialList.addAll(initialListPart2);
 
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
 

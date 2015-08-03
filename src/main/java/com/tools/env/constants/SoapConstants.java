@@ -2,7 +2,7 @@ package com.tools.env.constants;
 
 public class SoapConstants {
 	
-	public static final String SOAP_STYLIST_FILTER = "status";
+	public static final String SOAP_STATUS_FILTER = "status";
 	public static final String SOAP_STYLIST_OPERAND = "eq";
 	public static final String LESS_THAN = "lt";
 	public static final String GREATER_THAN = "gt";
