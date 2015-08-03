@@ -319,6 +319,9 @@ public class ApiCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_firstname")) {
 					model.setFirstName(childNodes.item(j).getTextContent());
 				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_lastname")) {
+					model.setLastName(childNodes.item(j).getTextContent());
+				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("status")) {
 					model.setStatus(childNodes.item(j).getTextContent());
 				}
@@ -515,6 +518,28 @@ public class ApiCalls {
 
 	}
 
+	public static List<DBStylistModel> getDykscStylistByName(String firstName, String lastName, String filter, String operand, String operand2, String filterValue, int mode) {
+
+		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
+
+		initialList = getStylistList(filter, operand, filterValue);
+		initialListPart2 = getStylistList(filter, operand2, filterValue);
+		initialList.addAll(initialListPart2);
+
+		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
+
+		for (DBStylistModel dbStylistModel : initialList) {
+
+			if (!isStylistIncompatibleForDykscSearchByName(dbStylistModel, firstName, lastName)) {
+
+				compatibleList.add(dbStylistModel);
+
+			}
+		}
+		return compatibleList;
+	}
+
 	private static boolean isStylistIncompatibleForCustomerRetrieval(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
 				|| stylistModel.getQualifiedCustomer().contentEquals("0") || stylistModel.getStylistId().contentEquals("1")
@@ -564,6 +589,12 @@ public class ApiCalls {
 	private static boolean isStylistIncompatibleForDistributionDuringCheckout(DBStylistModel stylistModel) {
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getQualifiedCustomer().contentEquals("0")
 				|| stylistModel.getStylistId().contentEquals("1");
+	}
+
+	private static boolean isStylistIncompatibleForDykscSearchByName(DBStylistModel stylistModel, String firstName, String lastName) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1") || stylistModel.getStylistId().contentEquals("1")
+				|| !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1")
+				|| stylistModel.getBirthDate().contentEquals("") || !stylistModel.getFirstName().contains(firstName) || !stylistModel.getLastName().contains(lastName);
 	}
 
 	public static boolean isStylistInRange(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel, String range) {

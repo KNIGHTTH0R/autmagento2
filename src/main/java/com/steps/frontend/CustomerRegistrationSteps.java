@@ -42,6 +42,29 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	// for distribution and DYSKS
+	
+	@Title("Fill create customer form with no member checked checked and select firts SC found by name - host retrieval")
+	@StepGroup
+	public List<DykscSeachModel> fillCreateCustomerFormAnReturnFoundByNameStylecoaches(CustomerFormModel customerData, AddressModel addressData,String firstName,String lastName) {
+
+		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
+
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		fillContactDetails(addressData);
+		result = searchStylistByNameStylecoaches(firstName, lastName);
+		checkIAgree();
+		clickCompleteButton();
+
+		return result;
+	}
 
 	@StepGroup
 	public void fillCreateCustomerFormWithNoStylePartyAndStyleCoachChecked(CustomerFormModel customerData, AddressModel addressData) {
@@ -400,6 +423,19 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 		return createCustomerPage().getFoundStylecoachesData();
 
+	}
+	@Step
+	public List<DykscSeachModel> searchStylistByNameStylecoaches(String firstName, String lastName) {
+		createCustomerPage().searchStylistByName();
+		createCustomerPage().inputSearchFirstName(firstName);
+		createCustomerPage().inputSearchLastName(lastName);
+		createCustomerPage().searchByNameSubmit();
+		if (createCustomerPage().isStylecoachFound()) {
+			createCustomerPage().selectFirstStylistFromList();
+		}
+		
+		return createCustomerPage().getFoundStylecoachesData();
+		
 	}
 
 	@Step

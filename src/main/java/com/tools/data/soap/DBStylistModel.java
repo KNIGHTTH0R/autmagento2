@@ -4,6 +4,7 @@ public class DBStylistModel {
 
 	private String stylistId;
 	private String firstName;
+	private String lastName;
 	private String status;
 	private String email;
 	private String lattitude;
@@ -253,6 +254,14 @@ public class DBStylistModel {
 
 	public void setKobo(String kobo) {
 		this.kobo = kobo;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	

@@ -78,6 +78,15 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "by_geoip")
 	private WebElement searchStylistByGeoip;
 
+	@FindBy(id = "by_sc_name")
+	private WebElement searchStylistByName;
+
+	@FindBy(id = "search_firstname")
+	private WebElement searchFirstNameInput;
+
+	@FindBy(id = "search_lastname")
+	private WebElement searchLastNameInput;
+
 	@FindBy(id = "search_postcode")
 	private WebElement searchPostcode;
 
@@ -92,6 +101,9 @@ public class CreateCustomerPage extends AbstractPage {
 
 	@FindBy(css = "button[name='search_by_geoip_submit']")
 	private WebElement searchByGeoipSubmitButton;
+
+	@FindBy(css = "button[name='search_by_name_submit']")
+	private WebElement searchByNameSubmitButton;
 
 	// ---------------------------------------------------
 
@@ -200,6 +212,18 @@ public class CreateCustomerPage extends AbstractPage {
 		element(searchCountry).selectByVisibleText(countryName);
 	}
 
+	public void searchStylistByName() {
+		searchStylistByName.click();
+	}
+
+	public void inputSearchFirstName(String postcode) {
+		searchFirstNameInput.sendKeys(postcode);
+	}
+
+	public void inputSearchLastName(String postcode) {
+		searchLastNameInput.sendKeys(postcode);
+	}
+
 	public void selectFirstStylistFromList() {
 		element(firstStylistContainer).waitUntilVisible();
 		firstStylistContainer.click();
@@ -228,6 +252,12 @@ public class CreateCustomerPage extends AbstractPage {
 	public void searchByGeoipSubmit() {
 		element(searchByGeoipSubmitButton).waitUntilVisible();
 		searchByGeoipSubmitButton.click();
+		waitABit(2000);
+	}
+
+	public void searchByNameSubmit() {
+		element(searchByNameSubmitButton).waitUntilVisible();
+		searchByNameSubmitButton.click();
 		waitABit(2000);
 	}
 

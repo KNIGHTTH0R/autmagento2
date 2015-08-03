@@ -78,6 +78,10 @@ import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 	US17001Suite.class,
 	US15004Suite.class,
 	US18001VerifyProductsInPlaceACustomerOrderModal.class,
+	US19001Suite.class,
+	US19002Suite.class,
+	US19003Suite.class,
+	US19004Suite.class,
 	
 	
 })
