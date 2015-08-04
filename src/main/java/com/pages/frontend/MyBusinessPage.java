@@ -67,7 +67,8 @@ public class MyBusinessPage extends AbstractPage {
 	}
 	
 	public void verifyKoboStatusBeforePlaceTheOrder() {
-		Assert.assertTrue("The Kobo Subscription status is not Correct",
+		System.out.println(voucherContainer.getText());
+		Assert.assertTrue("The Kobo status before subscription is not correct",
 				voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_BEFORE_PLACE_THE_ORDER));
 	}
 	
