@@ -17,7 +17,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US13", type = "external")
-@Story(Application.DykscPlzAndCountry.HostLead.class)
+@Story(Application.DykscByName.class)
 @RunWith(ThucydidesRunner.class)
 public class US13007ConfirmCustomerTest extends BaseTest {
 

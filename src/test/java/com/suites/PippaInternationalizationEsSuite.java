@@ -67,6 +67,7 @@ import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 	
 	US11001Suite.class,
 	US11002Suite.class,
+	
 	US12001Suite.class,
 	
 	US13001Suite.class,
@@ -75,11 +76,13 @@ import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 	US13004Suite.class,
 	US13005Suite.class,
 	US13006Suite.class,
+	US13007Suite.class,
+	
+	US15004Suite.class,
 	
 	US16001Suite.class,
 	
-	US17001Suite.class,
-	US15004Suite.class,
+	US17001Suite.class,	
 	
 	US18001VerifyProductsInPlaceACustomerOrderModal.class,
 	

@@ -38,7 +38,7 @@ import com.tools.utils.RandomAddress;
 import com.workflows.frontend.DysksWorkflows;
 
 @WithTag(name = "US13", type = "frontend")
-@Story(Application.DykscPlzAndCountry.HostLead.class)
+@Story(Application.DykscByName.class)
 @RunWith(ThucydidesRunner.class)
 public class US13007DykscSearchByNameTest extends BaseTest {
 
@@ -91,11 +91,8 @@ public class US13007DykscSearchByNameTest extends BaseTest {
 
 			addressModel = randomAddress.getRandomAddressFromFile();
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
-			System.out.println(coordinatesModel.getLattitude());
-			System.out.println(coordinatesModel.getLongitude());
 
 		}
-		// hardcoded
 		searchByNameStylistList = ApiCalls.getDykscStylistByName(firstName, lastName, SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN,
 				SoapConstants.STYLIST_ID_2000, 2);
 

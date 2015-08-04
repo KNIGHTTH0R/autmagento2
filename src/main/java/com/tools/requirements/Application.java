@@ -25,20 +25,23 @@ public class Application {
 		}
 
 		public class Stylist {
-		}		
-		
+		}
+
 	}
+
 	@Feature
 	public class KoboRegistration {
-		
+
 	}
+
 	@Feature
 	public class KoboCampaign {
-		
+
 	}
+
 	@Feature
 	public class KoboSubscription {
-		
+
 	}
 
 	@Feature
@@ -58,25 +61,32 @@ public class Application {
 		public class HostLead {
 		}
 	}
+
 	@Feature
 	public class DykscPlzAndCountry {
 		public class CustomerLead {
 		}
-		
+
 		public class StyleCoachLead {
 		}
-		
+
 		public class HostLead {
 		}
+	}
+
+	@Feature
+	public class DykscByName {
+
 	}
 
 	@Feature
 	public class Newsletter {
 
 	}
+
 	@Feature
 	public class ZzzProducts {
-		
+
 	}
 
 	@Feature

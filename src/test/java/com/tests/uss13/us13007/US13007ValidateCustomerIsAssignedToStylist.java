@@ -24,7 +24,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US13", type = "frontend")
-@Story(Application.DykscPlzAndCountry.HostLead.class)
+@Story(Application.DykscByName.class)
 @RunWith(ThucydidesRunner.class)
 public class US13007ValidateCustomerIsAssignedToStylist extends BaseTest {
 
