@@ -20,10 +20,10 @@ public class MyBusinessPage extends AbstractPage {
 
 	@FindBy(css = "span.cb-code")
 	private WebElementFacade coboCodeContainer;
-	
+
 	@FindBy(css = "div.cb-sprite.contact-booster")
 	private WebElementFacade voucherContainer;
-	
+
 	@FindBy(css = "div.cb-sprite-large.contact-booster")
 	private WebElementFacade voucherlargeContainer;
 
@@ -32,7 +32,7 @@ public class MyBusinessPage extends AbstractPage {
 
 	@FindBy(css = "#confirmCancelCbSubscriptionModal form button[type='submit']")
 	private WebElementFacade confirmCancelSubstription;
-	
+
 	public void verifyThatNumberOfLinksAreEqualTo(String expectedNoOflinks) {
 		Assert.assertTrue("", getDriver().findElements(By.cssSelector("#kobo-cancel div.col-3.col ul.link-list li")).size() == Integer.parseInt(expectedNoOflinks));
 	}
@@ -65,22 +65,19 @@ public class MyBusinessPage extends AbstractPage {
 		Assert.assertTrue("The message or the -valid until- date is not correct !!",
 				voucherlargeContainer.getText().contains(ContextConstants.SUBSCRIPTION_CANCELLED_LOUNGE + " " + DateUtils.getLastDayOfTheCurrentMonth("dd.MM.yyy")));
 	}
-	
+
 	public void verifyKoboStatusBeforePlaceTheOrder() {
-		System.out.println(voucherContainer.getText());
-		Assert.assertTrue("The Kobo status before subscription is not correct",
-				voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_BEFORE_PLACE_THE_ORDER));
+		Assert.assertTrue("The Kobo status before subscription is not correct", voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_BEFORE_PLACE_THE_ORDER));
 	}
-	
+
 	public void verifyKoboOrderProcessingStatus() {
-		Assert.assertTrue("The processing order status is missing",
-				voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_PROCESSING_ORDER));
+		System.out.println(voucherContainer.getText());
+		Assert.assertTrue("The processing order status is missing", voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_PROCESSING_ORDER));
 	}
+
 	public void verifyKoboVoucherIsActive() {
-		Assert.assertTrue("The Kobo voucher active message is not found",
-				voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_KOBO_ACTIVE ));
+		System.out.println(voucherlargeContainer.getText());
+		Assert.assertTrue("The Kobo voucher active message is not found", voucherlargeContainer.getText().contains(ContextConstants.SUBSCRIPTION_KOBO_ACTIVE));
 	}
-	
-	
 
 }
