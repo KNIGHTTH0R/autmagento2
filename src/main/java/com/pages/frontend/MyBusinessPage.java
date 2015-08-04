@@ -21,8 +21,11 @@ public class MyBusinessPage extends AbstractPage {
 	@FindBy(css = "span.cb-code")
 	private WebElementFacade coboCodeContainer;
 	
-	@FindBy(css = "div.cb-sprite-large.contact-booster")
+	@FindBy(css = "div.cb-sprite.contact-booster")
 	private WebElementFacade voucherContainer;
+	
+	@FindBy(css = "div.cb-sprite-large.contact-booster")
+	private WebElementFacade voucherlargeContainer;
 
 	@FindBy(css = "#kobo-cancel div.col-3.col")
 	private WebElementFacade coboSection;
@@ -60,7 +63,7 @@ public class MyBusinessPage extends AbstractPage {
 
 	public void verifyCancelledKoboMessageAndActiveUntilDate() {
 		Assert.assertTrue("The message or the -valid until- date is not correct !!",
-				voucherContainer.getText().contains(ContextConstants.SUBSCRIPTION_CANCELLED_LOUNGE + " " + DateUtils.getLastDayOfTheCurrentMonth("dd.MM.yyy")));
+				voucherlargeContainer.getText().contains(ContextConstants.SUBSCRIPTION_CANCELLED_LOUNGE + " " + DateUtils.getLastDayOfTheCurrentMonth("dd.MM.yyy")));
 	}
 	
 	public void verifyKoboStatusBeforePlaceTheOrder() {
