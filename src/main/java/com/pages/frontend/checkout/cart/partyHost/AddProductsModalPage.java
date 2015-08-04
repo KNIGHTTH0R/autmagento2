@@ -42,5 +42,6 @@ public class AddProductsModalPage extends AbstractPage {
 	public void submitSearch() {
 		element(submitSearch).waitUntilVisible();
 		submitSearch.click();
+		waitABit(1000);
 	}
 }
