@@ -40,7 +40,6 @@ public class PartyDetailsBackendPage extends AbstractPage {
 		List<WebElement> optionsList = getDriver().findElements(By.cssSelector("#party_details_view li"));
 		for (WebElement option : optionsList) {
 			if (option.getText().contains(searchedOption)) {
-				System.out.println("bingo");
 				option.findElement(By.cssSelector("a")).click();
 				waitABit(2000);
 				break;
