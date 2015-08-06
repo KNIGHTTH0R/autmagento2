@@ -79,7 +79,7 @@ public class US19004RegisteredConnectWithMeOnContextTest extends BaseTest {
 	}
 
 	@Test
-	public void us70016RegisteredConnectWithMeOnContextTest() {
+	public void us19004RegisteredConnectWithMeOnContextTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
