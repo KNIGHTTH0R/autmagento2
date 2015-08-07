@@ -26,7 +26,7 @@ public class DistanceCalculator {
 	}
 	
 	public static  void main(String[] args){
-		System.out.println(DistanceCalculator.getDistance(49.454,11.077, 52.5200066, 13.404954, "K"));
+		System.out.println(DistanceCalculator.getDistance(51.22,10.94, 46.76, 23.59, "K"));
 	}
 
 }

@@ -25,7 +25,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US12", type = "backend")
 @Story(Application.KoboSubscription.class)
 @RunWith(ThucydidesRunner.class)
-public class US12001ChechUsesPerCouponAfterSubscriptionCMTest extends BaseTest {
+public class US12001ChechUsesPerCouponAfterSubscriptionCmTest extends BaseTest {
 	@Steps
 	public PromotionSteps promotionSteps;
 	String koboCode;

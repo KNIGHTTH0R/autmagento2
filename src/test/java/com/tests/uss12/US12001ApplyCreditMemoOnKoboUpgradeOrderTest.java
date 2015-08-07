@@ -45,5 +45,4 @@ public class US12001ApplyCreditMemoOnKoboUpgradeOrderTest extends BaseTest {
 		ordersSteps.completeOrder();
 		ordersSteps.refundOrder();
 	}
-
 }
