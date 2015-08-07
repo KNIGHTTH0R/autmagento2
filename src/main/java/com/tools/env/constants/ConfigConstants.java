@@ -44,6 +44,7 @@ public class ConfigConstants {
 	public static final String CANCEL_SC_AND_REASSIGN_CONTACTS = "Cancel SC and reassign SC Contacts";
 	public static final String NOT_ACTIVE = "Not active";
 	public static final String ACTIVE = "Active";
+	public static final String INACTIVE = "Inactive";
 	public static final String REASSIGNED_PREFIX = "gesperrt_";
 	
 	

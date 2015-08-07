@@ -103,9 +103,6 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		headerSteps.goToMyBusinessPage();
 		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.WAITING_PAYMENT_CONFIRMATION);
 
-		
-		
-
 	}
 
 	@After

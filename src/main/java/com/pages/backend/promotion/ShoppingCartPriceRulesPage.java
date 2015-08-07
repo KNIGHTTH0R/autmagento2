@@ -67,14 +67,31 @@ public class ShoppingCartPriceRulesPage extends AbstractPage {
 		List<WebElement> listElements = listContainer.findElements(By.cssSelector("tbody > tr"));
 		boolean found = false;
 		theFor: for (WebElement elementNow : listElements) {
-			String id = elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText();
-			if (id.contentEquals(searchTerm)) {
+			String name = elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText();
+			if (name.contentEquals(searchTerm)) {
 				elementNow.click();
 				found = true;
 				break theFor;
 			}
 		}
 		Assert.assertTrue("Failure: Open Rule Details - The rule was not found in the list", found);
+	}
+
+	public void verifyStatusAndOpenRuleDetails(String searchTerm, String status) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(listContainer).waitUntilVisible();
+		List<WebElement> listElements = listContainer.findElements(By.cssSelector("tbody > tr"));
+		boolean found = false;
+		theFor: for (WebElement elementNow : listElements) {
+			String name = elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText();
+			String state = elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText();
+			if (name.contentEquals(searchTerm) && state.contentEquals(status)) {
+				elementNow.click();
+				found = true;
+				break theFor;
+			}
+		}
+		Assert.assertTrue("Failure: Open Rule Details - The rule was not found in the list or the status is incorrect", found);
 	}
 
 	public String getUsesPerCouponValue() {
