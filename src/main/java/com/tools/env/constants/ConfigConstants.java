@@ -46,5 +46,28 @@ public class ConfigConstants {
 	public static final String ACTIVE = "Active";
 	public static final String INACTIVE = "Inactive";
 	public static final String REASSIGNED_PREFIX = "gesperrt_";
+	
+	
+	//backend horizontal menu cons
+	
+	public static final String PROMOTIONEN = "Promotionen";
+	public static final String WARENKORB_PREISGEBOTE = "Warenkorb Preisgebote";
+	public static final String STYLECOACH = "Stylecoach";
+	public static final String STYLE_PARTIES = "Style Parties";
+	public static final String STYLECOACH_LIST = "Stylecoach List";
+	public static final String KUNDEN = "Kunden";
+	public static final String KUNDEN_VERWALTEN = "Kunden verwalten";
+	public static final String NEWSLETTER = "Newsletter";
+	public static final String NEWSLETTER_BEZIEHER = "Newsletter Bezieher";
+	public static final String AUFTRÄGE = "Aufträge";
+	public static final String GUTSCHRIFTEN = "Gutschriften";
+	public static final String VERKÄUFE = "Verkäufe";
+	public static final String KATALOG = "Katalog";
+	public static final String PRODUKTE_VERWALTEN = "Produkte verwalten";
+	
+	
+	public static final String BUNDLEARTIKEL = "Bundleartikel";
+	public static final String BUNDLEARTIKEL_NAME = "AutomationTest";
 
+	
 }

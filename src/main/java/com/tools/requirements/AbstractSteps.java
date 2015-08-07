@@ -21,6 +21,8 @@ import com.pages.backend.orders.details.OrderInfoPage;
 import com.pages.backend.orders.details.OrderItemsPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
 import com.pages.backend.orders.details.OrdersActionsPage;
+import com.pages.backend.products.BackendProductDetailsPage;
+import com.pages.backend.products.BackendProductListPage;
 import com.pages.backend.promotion.ShoppingCartPriceRulesPage;
 import com.pages.backend.stylecoach.PartyDetailsBackendPage;
 import com.pages.backend.stylecoach.PartyListBackendPage;
@@ -267,6 +269,14 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public CustomerDetailsPage customerDetailsHomePage() {
 		return getPages().currentPageAt(CustomerDetailsPage.class);
+	}
+	
+	public BackendProductListPage backendProductListPage() {
+		return getPages().currentPageAt(BackendProductListPage.class);
+	}
+	
+	public BackendProductDetailsPage backendProductDetailsPage() {
+		return getPages().currentPageAt(BackendProductDetailsPage.class);
 	}
 
 	public LeadSettingsPage leadSettingsPage() {

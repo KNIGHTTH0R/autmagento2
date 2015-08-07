@@ -3,6 +3,7 @@ package com.steps.backend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
+import com.pages.frontend.ProductListPage;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
@@ -44,6 +45,12 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().clickOnManageCustomers();
 	}
 
+	@Step
+	public void clickOnProducts() {
+		navigationPage().clickOnProducts();
+		navigationPage().clickOnManageProducts();
+	}
+	
 	@Step
 	public void goToNewsletterSubribers() {
 		navigationPage().goToNewsletter();
@@ -248,6 +255,13 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().saveAndContinueEdit();
 		customerDetailsHomePage().verifySaveCustomerSuccessMessage();
 
+	}
+	
+	@Step
+	public String openProductDetails(String emailText) {
+	
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return getDriver().getCurrentUrl();
 	}
 
 }

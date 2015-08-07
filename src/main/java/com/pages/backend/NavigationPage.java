@@ -180,4 +180,31 @@ public class NavigationPage extends AbstractPage {
 		}
 
 	}
+	
+	public void clickOnProducts() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Katalog")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
+
+	public void clickOnManageProducts() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Produkte verwalten")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
+
 }
