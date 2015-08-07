@@ -109,7 +109,7 @@ public class CreateNewContactPage extends AbstractPage {
 	public void submitContact() {
 		element(sumbitContact).waitUntilVisible();
 		sumbitContact.click();
-		waitABit(8000);
+		waitABit(12000);
 	}
 
 }

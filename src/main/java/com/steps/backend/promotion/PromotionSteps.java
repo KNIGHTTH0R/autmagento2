@@ -141,5 +141,21 @@ public class PromotionSteps extends AbstractSteps {
 		Assert.assertTrue("The no of uses per coupon is not the expected one", shoppingCartPriceRulesPage().getUsesPerCouponValue().contentEquals(usesPerCoupon));
 
 	}
+	@Step
+	public void verifyStatusAndUsesPerCoupon(String couponCode, String usesPerCoupon,String status) {
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+		magentoLoginPage().inputUserName(Credentials.BE_USER);
+		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
+		magentoLoginPage().clickOnLogin();
+		navigationPage().clickOnPromotions();
+		navigationPage().clickOnShoppingCartPriceRules();
+		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
+		shoppingCartPriceRulesPage().clickOnSearch();
+		shoppingCartPriceRulesPage().verifyStatusAndOpenRuleDetails("Contact Booster 100 vouchers",status);
+		shoppingCartPriceRulesPage().getUsesPerCouponValue();
+		
+		Assert.assertTrue("The no of uses per coupon is not the expected one", shoppingCartPriceRulesPage().getUsesPerCouponValue().contentEquals(usesPerCoupon));
+		
+	}
 
 }
