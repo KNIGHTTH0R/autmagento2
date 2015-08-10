@@ -68,7 +68,7 @@ public class ShoppingCartPriceRulesPage extends AbstractPage {
 		boolean found = false;
 		theFor: for (WebElement elementNow : listElements) {
 			String name = elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText();
-			if (name.contentEquals(searchTerm)) {
+			if (name.contains(searchTerm)) {
 				elementNow.click();
 				found = true;
 				break theFor;
@@ -85,7 +85,7 @@ public class ShoppingCartPriceRulesPage extends AbstractPage {
 		theFor: for (WebElement elementNow : listElements) {
 			String name = elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText();
 			String state = elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText();
-			if (name.contentEquals(searchTerm) && state.contentEquals(status)) {
+			if (name.contains(searchTerm) && state.contentEquals(status)) {
 				elementNow.click();
 				found = true;
 				break theFor;
