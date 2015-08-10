@@ -84,7 +84,7 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		myBusinessSteps.verifyKoboStatusBeforePlaceTheOrder();
+		myBusinessSteps.verifyKoboOrderProcessingStatus();
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
 		myBusinessSteps.accessKoboCart();
