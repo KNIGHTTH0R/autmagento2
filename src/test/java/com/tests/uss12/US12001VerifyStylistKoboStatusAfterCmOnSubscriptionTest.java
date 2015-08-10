@@ -28,12 +28,10 @@ public class US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest extends Bas
 
 	@Steps
 	public HeaderSteps headerSteps;
-
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
 	public MyBusinessSteps myBusinessSteps;
-
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 
@@ -42,15 +40,12 @@ public class US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest extends Bas
 	@Before
 	public void setUp() {
 
-		DataGrabber.wipe();
-
 		int size = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").size();
 		if (size > 0) {
 			stylistRegistrationData = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").get(0);
 		} else
 			System.out.println("The database has no entries");
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 	@Test

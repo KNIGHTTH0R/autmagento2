@@ -9,15 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.MyBusinessSteps;
 import com.tests.BaseTest;
-import com.tools.SoapKeys;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.datahandlers.DataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -28,12 +25,10 @@ public class US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest exten
 
 	@Steps
 	public HeaderSteps headerSteps;
-
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
 	public MyBusinessSteps myBusinessSteps;
-
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 
@@ -42,19 +37,16 @@ public class US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest exten
 	@Before
 	public void setUp() {
 
-		DataGrabber.wipe();
-
 		int size = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").size();
 		if (size > 0) {
 			stylistRegistrationData = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").get(0);
 		} else
 			System.out.println("The database has no entries");
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 	@Test
-	public void us12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest() {
+	public void us12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest() {
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
