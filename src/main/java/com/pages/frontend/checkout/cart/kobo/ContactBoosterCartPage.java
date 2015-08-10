@@ -12,9 +12,13 @@ public class ContactBoosterCartPage extends AbstractPage {
 	@FindBy(css = "ul.checkout-types li button[onclick*='/simplecheckout/']")
 	private WebElement kasseButton;
 
-	public void selectContactBoosterVoucher() {
+	public void selectContactBooster100Voucher() {
 		waitABit(TimeConstants.TIME_MEDIUM);
 		elementjQueryClick("input#kit_2564");
+	}
+	public void selectContactBooster50Voucher() {
+		waitABit(TimeConstants.TIME_MEDIUM);
+		elementjQueryClick("input#kit_2563");
 	}
 	
 	public void clickToShipping() {

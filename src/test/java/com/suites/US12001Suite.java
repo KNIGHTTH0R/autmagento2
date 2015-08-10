@@ -13,11 +13,13 @@ import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionCmTest;
 import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest;
 import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest;
 import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest;
+import com.tests.uss12.US12001InitialKoboSubscriptionTest;
 import com.tests.uss12.US12001KoboSubscriptionOrderEmailTest;
 import com.tests.uss12.US12001KoboSubscriptionTest;
 import com.tests.uss12.US12001KoboSubscriptionUpgradeOrderEmailTest;
 import com.tests.uss12.US12001KoboSubscriptionUpgradeTest;
-import com.tests.uss12.US12001MarkAsPaidKoboOrderTest;
+import com.tests.uss12.US12001MarkAsPaidInitialKoboOrderTest2;
+import com.tests.uss12.US12001MarkAsPaidKoboOrderTest2;
 import com.tests.uss12.US12001StyleCoachRegistrationTest;
 import com.tests.uss12.US12001StylistActivationTest;
 import com.tests.uss12.US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest;
@@ -28,8 +30,12 @@ import com.tests.uss12.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
 @SuiteClasses({
 	US12001StyleCoachRegistrationTest.class,
 	US12001StylistActivationTest.class,
+	//testing purpose
+	US12001InitialKoboSubscriptionTest.class,
+	//	
 	US12001KoboSubscriptionTest.class,
-	US12001MarkAsPaidKoboOrderTest.class,
+	US12001MarkAsPaidKoboOrderTest2.class,
+	US12001MarkAsPaidInitialKoboOrderTest2.class,
 	US12001KoboSubscriptionOrderEmailTest.class,
 	
 	//

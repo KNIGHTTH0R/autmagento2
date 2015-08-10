@@ -36,7 +36,7 @@ import com.tools.utils.FormatterUtils;
 @WithTag(name = "US12", type = "frontend")
 @Story(Application.KoboSubscription.class)
 @RunWith(ThucydidesRunner.class)
-public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
+public class US12001InitialKoboSubscriptionTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -62,7 +62,6 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 	private CreditCardModel creditCardData = new CreditCardModel();
-	String coboCode;
 
 	@Before
 	public void setUp() {
@@ -79,17 +78,17 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 	}
 
 	@Test
-	public void us12001KoboSubscriptionUpgradeTest() {
+	public void us12001KoboSubscriptionTest() {
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		myBusinessSteps.verifyKoboVoucherIsActive();
+		myBusinessSteps.verifyKoboStatusBeforePlaceTheOrder();
 		loungeSteps.goToMyBusiness();
-		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
+		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
 		myBusinessSteps.accessKoboCart();
-		contactBoosterCartSteps.selectContactBooster100Voucher();
+		contactBoosterCartSteps.selectContactBooster50Voucher();
 		contactBoosterCartSteps.clickToShipping();
 		koboShippingSteps.acceptTerms();
 		shippingSteps.clickGoToPaymentMethod();
@@ -100,21 +99,16 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
 		headerSteps.goToLounge();
-		coboCode = myBusinessSteps.getKoboCode();
+		myBusinessSteps.verifyKoboOrderProcessingStatus();
 		headerSteps.goToMyBusinessPage();
-		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
-		myBusinessSteps.cancelSubstription();
-		headerSteps.goToLounge();
-		myBusinessSteps.verifyCancelledKoboMessageAndActiveUntilDate();
-		headerSteps.goToMyBusinessPage();
-		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.SUBSCRIPTION_CANCELLED);
+		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.WAITING_PAYMENT_CONFIRMATION);
 
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveKoboCode(coboCode, getClass().getSimpleName() + SoapKeys.GRAB);
+
 	}
 
 }

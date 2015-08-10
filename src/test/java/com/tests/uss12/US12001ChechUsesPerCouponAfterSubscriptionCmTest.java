@@ -29,7 +29,7 @@ public class US12001ChechUsesPerCouponAfterSubscriptionCmTest extends BaseTest {
 	@Steps
 	public PromotionSteps promotionSteps;
 	String koboCode;
-	String usesPerCoupon = "100";
+	String usesPerCoupon = "50";
 
 	@Before
 	public void setUp() throws Exception {
@@ -41,6 +41,6 @@ public class US12001ChechUsesPerCouponAfterSubscriptionCmTest extends BaseTest {
 
 	@Test
 	public void us12001ChechUsesPerCouponAfterSubscriptionCMTest() {
-		promotionSteps.verifyStatusAndUsesPerCoupon(koboCode, usesPerCoupon, ConfigConstants.INACTIVE);
+		promotionSteps.verifyStatusAndUsesPerCoupon(koboCode, usesPerCoupon, ConfigConstants.ACTIVE);
 	}
 }

@@ -90,7 +90,7 @@ public class US15003KoboSubscriptionTest extends BaseTest {
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
 		myBusinessSteps.accessKoboCart();
-		contactBoosterCartSteps.selectContactBoosterVoucher();
+		contactBoosterCartSteps.selectContactBooster100Voucher();
 		contactBoosterCartSteps.clickToShipping();
 		koboShippingSteps.acceptTerms();
 		shippingSteps.clickGoToPaymentMethod();

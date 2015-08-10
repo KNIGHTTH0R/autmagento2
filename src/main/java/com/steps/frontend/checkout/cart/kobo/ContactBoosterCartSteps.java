@@ -10,8 +10,12 @@ public class ContactBoosterCartSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void selectContactBoosterVoucher() {
-		contactBoosterCart().selectContactBoosterVoucher();
+	public void selectContactBooster100Voucher() {
+		contactBoosterCart().selectContactBooster100Voucher();
+	}
+	@Step
+	public void selectContactBooster50Voucher() {
+		contactBoosterCart().selectContactBooster50Voucher();
 	}
 
 	@Step

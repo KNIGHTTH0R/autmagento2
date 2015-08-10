@@ -55,7 +55,7 @@ public class US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest extends Bas
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		myBusinessSteps.verifyKoboStatusBeforePlaceTheOrder();
+		myBusinessSteps.verifyKoboVoucherIsActive();
 
 	}
 
