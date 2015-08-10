@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ import com.tools.SoapKeys;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US12", type = "frontend")
@@ -38,6 +40,7 @@ public class US12001VerifyStylistKoboStatusAfterSubscriptionTest extends BaseTes
 	public CustomerRegistrationSteps customerRegistrationSteps;
 
 	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	String coboCode;
 
 	@Before
 	public void setUp() {
@@ -54,14 +57,21 @@ public class US12001VerifyStylistKoboStatusAfterSubscriptionTest extends BaseTes
 	}
 
 	@Test
-	public void us12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest() {
+	public void us12001VerifyStylistKoboStatusAfterSubscriptionTest() {
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		coboCode = myBusinessSteps.getKoboCode();
+		System.out.println("cobocode " + coboCode);
 		myBusinessSteps.verifyKoboVoucherIsActive();
 
+	}
+
+	@After
+	public void saveData() {
+		MongoWriter.saveKoboCode(coboCode, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 }

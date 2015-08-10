@@ -40,13 +40,10 @@ import com.tests.uss12.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
 	US12001CancelCreditMemoForKoboSubscriptionTest.class,
 	US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest.class,
 	US12001ChechUsesPerCouponAfterSubscriptionCancelCmTest.class,
-
 	//
-	
 	US12001KoboSubscriptionUpgradeTest.class,
 	US12001KoboSubscriptionUpgradeOrderEmailTest.class,
 	US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest.class,
-	
 	//
 	US12001ApplyCreditMemoOnKoboUpgradeOrderTest.class,
 	US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest.class,

@@ -34,7 +34,7 @@ public class US12001ChechUsesPerCouponAfterSubscriptionCancelCmTest extends Base
 	@Before
 	public void setUp() throws Exception {
 
-		koboCode = MongoReader.grabKoboModel("US12001KoboSubscriptionTest" + SoapKeys.GRAB);
+		koboCode = MongoReader.grabKoboModel("US12001VerifyStylistKoboStatusAfterSubscriptionTest" + SoapKeys.GRAB);
 		System.out.println(koboCode);
 
 	}
