@@ -21,7 +21,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US15", type = "backend")
 @Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
-public class US12001MarkAsPaidInitialKoboOrderTest2 extends BaseTest {
+public class US12001CancelKoboInitialSubscriptionTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -37,15 +37,13 @@ public class US12001MarkAsPaidInitialKoboOrderTest2 extends BaseTest {
 	}
 
 	@Test
-	public void us12001MarkAsPaidInitialKoboOrderTest2() throws Exception {
+	public void us12001CancelKoboInitialSubscriptionTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
-		ordersSteps.uncancelOrder();
-		ordersSteps.completeOrder();
+		ordersSteps.cancelOrder();
 
 	}
-
 }

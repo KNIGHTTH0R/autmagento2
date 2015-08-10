@@ -8,6 +8,7 @@ import com.tests.uss12.US12001ApplyCreditMemoOnKoboSubscriptionOrderTest;
 import com.tests.uss12.US12001ApplyCreditMemoOnKoboUpgradeOrderTest;
 import com.tests.uss12.US12001CancelCreditMemoForKoboSubscriptionTest;
 import com.tests.uss12.US12001CancelCreditMemoForKoboUpgradeTest;
+import com.tests.uss12.US12001CancelKoboInitialSubscriptionTest;
 import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionCancelCmTest;
 import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionCmTest;
 import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest;
@@ -32,6 +33,7 @@ import com.tests.uss12.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
 	US12001StylistActivationTest.class,
 	//testing purpose
 	US12001InitialKoboSubscriptionTest.class,
+	US12001CancelKoboInitialSubscriptionTest.class,
 	//	
 	US12001KoboSubscriptionTest.class,
 	US12001MarkAsPaidKoboOrderTest2.class,
