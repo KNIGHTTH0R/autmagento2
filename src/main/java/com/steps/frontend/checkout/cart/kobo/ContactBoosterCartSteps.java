@@ -14,8 +14,8 @@ public class ContactBoosterCartSteps extends AbstractSteps {
 		contactBoosterCart().selectContactBooster100Voucher();
 	}
 	@Step
-	public void selectContactBooster50Voucher() {
-		contactBoosterCart().selectContactBooster50Voucher();
+	public void selectContactBooster200Voucher() {
+		contactBoosterCart().selectContactBooster200Voucher();
 	}
 
 	@Step

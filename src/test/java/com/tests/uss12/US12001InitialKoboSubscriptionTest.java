@@ -78,7 +78,7 @@ public class US12001InitialKoboSubscriptionTest extends BaseTest {
 	}
 
 	@Test
-	public void us12001KoboSubscriptionTest() {
+	public void us12001InitialKoboSubscriptionTest() {
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -88,7 +88,7 @@ public class US12001InitialKoboSubscriptionTest extends BaseTest {
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
 		myBusinessSteps.accessKoboCart();
-		contactBoosterCartSteps.selectContactBooster50Voucher();
+		contactBoosterCartSteps.selectContactBooster200Voucher();
 		contactBoosterCartSteps.clickToShipping();
 		koboShippingSteps.acceptTerms();
 		shippingSteps.clickGoToPaymentMethod();
