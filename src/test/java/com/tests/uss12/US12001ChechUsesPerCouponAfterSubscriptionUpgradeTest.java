@@ -28,7 +28,7 @@ public class US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest extends BaseT
 	@Steps
 	public PromotionSteps promotionSteps;
 	String koboCode;
-	String usesPerCoupon = "150";
+	String usesPerCoupon = "125";
 
 	@Before
 	public void setUp() throws Exception {
@@ -39,7 +39,7 @@ public class US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest extends BaseT
 	}
 
 	@Test
-	public void us12001ChechUsesPerCouponAfterSubscriptionTest() {
+	public void us12001ChechUsesPerCouponAfterSubscriptionUpgradeTest() {
 		promotionSteps.verifyThatNoOfUsesPerCouponIsCorrect(koboCode, usesPerCoupon);
 	}
 }

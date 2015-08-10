@@ -29,7 +29,7 @@ public class US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest exten
 	@Steps
 	public PromotionSteps promotionSteps;
 	String koboCode;
-	String usesPerCoupon = "150";
+	String usesPerCoupon = "125";
 
 	@Before
 	public void setUp() throws Exception {
