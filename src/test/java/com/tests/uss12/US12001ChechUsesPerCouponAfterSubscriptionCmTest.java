@@ -34,7 +34,7 @@ public class US12001ChechUsesPerCouponAfterSubscriptionCmTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		koboCode = MongoReader.grabKoboModel("US12001KoboSubscriptionUpgradeTest" + SoapKeys.GRAB);
+		koboCode = MongoReader.grabKoboModel("US12001KoboSubscriptionTest" + SoapKeys.GRAB);
 		System.out.println(koboCode);
 
 	}
