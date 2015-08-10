@@ -135,7 +135,7 @@ public class PromotionSteps extends AbstractSteps {
 		navigationPage().clickOnShoppingCartPriceRules();
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
 		shoppingCartPriceRulesPage().clickOnSearch();
-		shoppingCartPriceRulesPage().openRuleDetails("Contact Booster 100 vouchers");
+		shoppingCartPriceRulesPage().openRuleDetails("Contact Booster");
 		shoppingCartPriceRulesPage().getUsesPerCouponValue();
 
 		Assert.assertTrue("The no of uses per coupon is not the expected one", shoppingCartPriceRulesPage().getUsesPerCouponValue().contentEquals(usesPerCoupon));
@@ -151,7 +151,7 @@ public class PromotionSteps extends AbstractSteps {
 		navigationPage().clickOnShoppingCartPriceRules();
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
 		shoppingCartPriceRulesPage().clickOnSearch();
-		shoppingCartPriceRulesPage().verifyStatusAndOpenRuleDetails("Contact Booster 100 vouchers",status);
+		shoppingCartPriceRulesPage().verifyStatusAndOpenRuleDetails("Contact Booster",status);
 		shoppingCartPriceRulesPage().getUsesPerCouponValue();
 		
 		Assert.assertTrue("The no of uses per coupon is not the expected one", shoppingCartPriceRulesPage().getUsesPerCouponValue().contentEquals(usesPerCoupon));

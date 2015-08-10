@@ -26,6 +26,7 @@ import com.tools.requirements.Application;
 @Story(Application.KoboSubscription.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001ChechUsesPerCouponAfterSubscriptionCmTest extends BaseTest {
+	
 	@Steps
 	public PromotionSteps promotionSteps;
 	String koboCode;
