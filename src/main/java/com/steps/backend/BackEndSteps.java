@@ -136,6 +136,7 @@ public class BackEndSteps extends AbstractSteps {
 	public String openCustomerDetails(String emailText) {
 		customerListPage().openCustomerDetails(emailText);
 		waitABit(TimeConstants.TIME_CONSTANT);
+		refresh();
 		return getDriver().getCurrentUrl();
 	}
 
