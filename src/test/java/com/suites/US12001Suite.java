@@ -19,8 +19,8 @@ import com.tests.uss12.US12001KoboSubscriptionOrderEmailTest;
 import com.tests.uss12.US12001KoboSubscriptionTest;
 import com.tests.uss12.US12001KoboSubscriptionUpgradeOrderEmailTest;
 import com.tests.uss12.US12001KoboSubscriptionUpgradeTest;
-import com.tests.uss12.US12001MarkAsPaidInitialKoboOrderTest2;
-import com.tests.uss12.US12001MarkAsPaidKoboOrderTest2;
+import com.tests.uss12.US12001MarkAsPaidInitialKoboOrderTest;
+import com.tests.uss12.US12001MarkAsPaidKoboOrderTest;
 import com.tests.uss12.US12001StyleCoachRegistrationTest;
 import com.tests.uss12.US12001StylistActivationTest;
 import com.tests.uss12.US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest;
@@ -66,8 +66,8 @@ import com.tests.uss12.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
 	US12001CancelKoboInitialSubscriptionTest.class,
 	//	
 	US12001KoboSubscriptionTest.class,
-	US12001MarkAsPaidKoboOrderTest2.class,
-	US12001MarkAsPaidInitialKoboOrderTest2.class,
+	US12001MarkAsPaidKoboOrderTest.class,
+	US12001MarkAsPaidInitialKoboOrderTest.class,
 	US12001KoboSubscriptionOrderEmailTest.class,
 	US12001VerifyStylistKoboStatusAfterSubscriptionTest.class,
 	

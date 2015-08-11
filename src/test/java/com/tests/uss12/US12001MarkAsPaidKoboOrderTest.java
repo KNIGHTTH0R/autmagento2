@@ -11,21 +11,15 @@ import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
-import com.steps.backend.validations.StylistValidationSteps;
-import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
-import com.tools.data.backend.CustomerConfigurationModel;
-import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.ContextConstants;
+import com.tools.SoapKeys;
+import com.tools.data.backend.OrderModel;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US6", type = "backend")
-@Story(Application.KoboSubscription.class)
+@WithTag(name = "US15", type = "backend")
+@Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 
@@ -33,43 +27,24 @@ public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
-	@Steps
-	public EmailClientSteps emailClientSteps;
-	@Steps
-	public CustomVerification customVerifications;
-	@Steps
-	public StylistValidationSteps stylistValidationSteps;
-	@Steps
-	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
-
-	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
-
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
-	
+	private static OrderModel orderModel = new OrderModel();
 
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").size();
-		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").get(0);
-		} else
-			System.out.println("The database has no entries");
-
+		orderModel = MongoReader.grabOrderModels("US12001KoboSubscriptionTest" +  SoapKeys.GRAB).get(0);
+		System.out.println(orderModel.getOrderId());
 	}
 
 	@Test
-	public void us12001MarkAsPaidKoboOrderTest() {
+	public void us12001MarkAsPaidKoboOrderTest2() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();
-		backEndSteps.searchOrderByName(stylistRegistrationData.getFirstName());
-		backEndSteps.openOrderDetails(stylistRegistrationData.getFirstName());
+		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
+		backEndSteps.openOrderDetails(orderModel.getOrderId());
 		ordersSteps.markOrderAsPaid();
-		// external
-		emailClientSteps.openMailinator();
-		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
-				ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+
 	}
 
 }
