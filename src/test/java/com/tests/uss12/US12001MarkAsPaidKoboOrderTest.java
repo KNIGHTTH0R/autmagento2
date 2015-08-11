@@ -32,7 +32,7 @@ public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		orderModel = MongoReader.grabOrderModels("US12001KoboSubscriptionTest" +  SoapKeys.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US12001KoboSubscriptionTest" + SoapKeys.GRAB).get(0);
 		System.out.println(orderModel.getOrderId());
 	}
 
@@ -46,5 +46,4 @@ public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 		ordersSteps.markOrderAsPaid();
 
 	}
-
 }
