@@ -4,28 +4,31 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.uss12.US12001ApplyCreditMemoOnKoboSubscriptionOrderTest;
-import com.tests.uss12.US12001ApplyCreditMemoOnKoboUpgradeOrderTest;
-import com.tests.uss12.US12001CancelCreditMemoForKoboSubscriptionTest;
-import com.tests.uss12.US12001CancelCreditMemoForKoboUpgradeTest;
-import com.tests.uss12.US12001CancelKoboInitialSubscriptionTest;
-import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionCancelCmTest;
-import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionCmTest;
-import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest;
-import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest;
-import com.tests.uss12.US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest;
-import com.tests.uss12.US12001InitialKoboSubscriptionTest;
-import com.tests.uss12.US12001KoboSubscriptionOrderEmailTest;
-import com.tests.uss12.US12001KoboSubscriptionTest;
-import com.tests.uss12.US12001KoboSubscriptionUpgradeOrderEmailTest;
-import com.tests.uss12.US12001KoboSubscriptionUpgradeTest;
-import com.tests.uss12.US12001MarkAsPaidInitialKoboOrderTest;
-import com.tests.uss12.US12001MarkAsPaidKoboOrderTest;
-import com.tests.uss12.US12001StyleCoachRegistrationTest;
-import com.tests.uss12.US12001StylistActivationTest;
-import com.tests.uss12.US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest;
-import com.tests.uss12.US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest;
-import com.tests.uss12.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
+import com.tests.uss12.uss12001.US12001ApplyCreditMemoOnKoboSubscriptionOrderTest;
+import com.tests.uss12.uss12001.US12001ApplyCreditMemoOnKoboUpgradeOrderTest;
+import com.tests.uss12.uss12001.US12001CancelCreditMemoForKoboSubscriptionTest;
+import com.tests.uss12.uss12001.US12001CancelCreditMemoForKoboUpgradeTest;
+import com.tests.uss12.uss12001.US12001CancelKoboInitialSubscriptionTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionCancelCmTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionCmTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest;
+import com.tests.uss12.uss12001.US12001ConfirmCustomerTest;
+import com.tests.uss12.uss12001.US12001CustomerBuyWithContactBoosterTest;
+import com.tests.uss12.uss12001.US12001InitialKoboSubscriptionTest;
+import com.tests.uss12.uss12001.US12001KoboSubscriptionOrderEmailTest;
+import com.tests.uss12.uss12001.US12001KoboSubscriptionTest;
+import com.tests.uss12.uss12001.US12001KoboSubscriptionUpgradeOrderEmailTest;
+import com.tests.uss12.uss12001.US12001KoboSubscriptionUpgradeTest;
+import com.tests.uss12.uss12001.US12001MarkAsPaidInitialKoboOrderTest;
+import com.tests.uss12.uss12001.US12001MarkAsPaidKoboOrderTest;
+import com.tests.uss12.uss12001.US12001RegularCustomerRegistrationTest;
+import com.tests.uss12.uss12001.US12001StyleCoachRegistrationTest;
+import com.tests.uss12.uss12001.US12001StylistActivationTest;
+import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest;
+import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest;
+import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
 
 
 @SuiteClasses({
@@ -81,6 +84,10 @@ import com.tests.uss12.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
 	US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest.class,
 	US12001CancelCreditMemoForKoboUpgradeTest.class,
 	US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest.class,
+	US12001RegularCustomerRegistrationTest.class,
+	US12001ConfirmCustomerTest.class,
+	US12001CustomerBuyWithContactBoosterTest.class,
+	
 	
 })
 @RunWith(Suite.class)

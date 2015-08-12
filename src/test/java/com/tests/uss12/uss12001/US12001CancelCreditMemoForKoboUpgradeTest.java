@@ -1,4 +1,4 @@
-package com.tests.uss12;
+package com.tests.uss12.uss12001;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -21,7 +21,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US15", type = "backend")
 @Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
-public class US12001ApplyCreditMemoOnKoboUpgradeOrderTest extends BaseTest {
+public class US12001CancelCreditMemoForKoboUpgradeTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -36,13 +36,17 @@ public class US12001ApplyCreditMemoOnKoboUpgradeOrderTest extends BaseTest {
 	}
 
 	@Test
-	public void us12001ApplyCreditMemoOnKoboSubscriptionOrderTest() throws Exception {
+	public void us12001CancelCreditMemoForKoboSubscriptionTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+		backEndSteps.clickOnCreditMemo();
+		backEndSteps.searchCreditMemoByorderId(orderModel.getOrderId());
+		backEndSteps.openCreditMemoDetails(orderModel.getOrderId());
+		backEndSteps.cancelCreditMemo();
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
-		ordersSteps.completeOrder();
-		ordersSteps.refundOrder();
+		ordersSteps.markOrderAsPaid();
 	}
+
 }

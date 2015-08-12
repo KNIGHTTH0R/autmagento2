@@ -1,4 +1,4 @@
-package com.tests.uss12;
+package com.tests.uss12.uss12001;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -21,7 +21,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US15", type = "backend")
 @Story(Application.Newsletter.class)
 @RunWith(ThucydidesRunner.class)
-public class US12001CancelCreditMemoForKoboUpgradeTest extends BaseTest {
+public class US12001CancelCreditMemoForKoboSubscriptionTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -32,7 +32,7 @@ public class US12001CancelCreditMemoForKoboUpgradeTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		orderModel = MongoReader.grabOrderModels("US12001KoboSubscriptionUpgradeTest" + SoapKeys.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US12001KoboSubscriptionTest" + SoapKeys.GRAB).get(0);
 	}
 
 	@Test

@@ -1,4 +1,4 @@
-package com.tests.uss12;
+package com.tests.uss12.uss12001;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -45,7 +45,6 @@ public class US12001StyleCoachRegistrationTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		// Generate data for this test run
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		birthDate.setDate("Feb,1970,12");

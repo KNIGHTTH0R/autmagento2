@@ -1,4 +1,4 @@
-package com.tests.uss12;
+package com.tests.uss12.uss12001;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
