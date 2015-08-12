@@ -29,6 +29,7 @@ import com.tests.uss12.uss12001.US12001StylistActivationTest;
 import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest;
 import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest;
 import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
+import com.tests.uss12.uss12001.US12001VoucherRunOutNotificationEmailTest;
 
 
 @SuiteClasses({
@@ -87,6 +88,7 @@ import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterSubscriptionT
 	US12001RegularCustomerRegistrationTest.class,
 	US12001ConfirmCustomerTest.class,
 	US12001CustomerBuyWithContactBoosterTest.class,
+	US12001VoucherRunOutNotificationEmailTest.class,
 	
 	
 })

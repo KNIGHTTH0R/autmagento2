@@ -40,7 +40,7 @@ public class US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest extends Bas
 	}
 
 	@Test
-	public void us12001ChechUsesPerCouponAfterSubscriptionCMTest() {
+	public void us12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest() {
 		promotionSteps.verifyStatusAndUsesPerCoupon(koboCode, usesPerCoupon, ConfigConstants.ACTIVE);
 	}
 }

@@ -40,7 +40,7 @@ public class US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest exten
 	}
 
 	@Test
-	public void us12001ChechUsesPerCouponAfterSubscriptionCMTest() {
+	public void us12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest() {
 		promotionSteps.verifyStatusAndUsesPerCoupon(koboCode, usesPerCoupon, ConfigConstants.ACTIVE);
 	}
 }

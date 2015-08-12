@@ -5,7 +5,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +23,7 @@ import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -86,8 +86,11 @@ public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 		genProduct1 = ApiCalls.createProductModel();
 		genProduct1.setPrice("89.00");
 		ApiCalls.createApiProduct(genProduct1);
-		
+
 		customerModel = MongoReader.grabCustomerFormModels("US12001RegularCustomerRegistrationTest").get(0);
+
+		voucherCode = MongoReader.grabKoboModel("US12001KoboSubscriptionUpgradeTest" + SoapKeys.GRAB);
+		System.out.println(voucherCode);
 
 	}
 
@@ -126,7 +129,4 @@ public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 
 	}
 
-	@After
-	public void saveData() {
-	}
 }

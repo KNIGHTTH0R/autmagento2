@@ -36,7 +36,7 @@ public class US12001CancelCreditMemoForKoboUpgradeTest extends BaseTest {
 	}
 
 	@Test
-	public void us12001CancelCreditMemoForKoboSubscriptionTest() throws Exception {
+	public void us12001CancelCreditMemoForKoboUpgradeTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCreditMemo();

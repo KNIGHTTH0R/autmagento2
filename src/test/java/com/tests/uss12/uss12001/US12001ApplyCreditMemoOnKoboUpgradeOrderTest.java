@@ -36,7 +36,7 @@ public class US12001ApplyCreditMemoOnKoboUpgradeOrderTest extends BaseTest {
 	}
 
 	@Test
-	public void us12001ApplyCreditMemoOnKoboSubscriptionOrderTest() throws Exception {
+	public void us12001ApplyCreditMemoOnKoboUpgradeOrderTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();
