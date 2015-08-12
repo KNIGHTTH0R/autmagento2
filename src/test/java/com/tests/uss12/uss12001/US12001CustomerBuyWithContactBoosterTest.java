@@ -83,7 +83,7 @@ public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = ApiCalls.createProductModel();
+		genProduct1 = ApiCalls.createPomProductModel();
 		genProduct1.setPrice("89.00");
 		ApiCalls.createApiProduct(genProduct1);
 
