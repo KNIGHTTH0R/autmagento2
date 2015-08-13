@@ -115,7 +115,6 @@ public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 		regularUserCartSteps.submitVoucherCode();
 
 		regularUserCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.clickPartyNoOption();
 
 		shippingSteps.clickGoToPaymentMethod();
 
