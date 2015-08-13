@@ -56,10 +56,10 @@ import com.tests.uss12.uss12001.US12001VoucherRunOutNotificationEmailTest;
 	US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest.class,
 	US12001CancelCreditMemoForKoboUpgradeTest.class,
 	US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest.class,
-//	US12001RegularCustomerRegistrationTest.class,
-//	US12001ConfirmCustomerTest.class,
-//	US12001CustomerBuyWithContactBoosterTest.class,
-//	US12001VoucherRunOutNotificationEmailTest.class,
+	US12001RegularCustomerRegistrationTest.class,
+	US12001ConfirmCustomerTest.class,
+	US12001CustomerBuyWithContactBoosterTest.class,
+	US12001VoucherRunOutNotificationEmailTest.class,
 	
 	
 })
