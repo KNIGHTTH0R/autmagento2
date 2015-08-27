@@ -97,6 +97,7 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 			inputPostcodeFilter(addressModel.getPostCode());
 			selectCountryFilter(addressModel.getCountryName());
 			searchByGeoipSubmit();
+			waitABit(2000);
 			selectFirstStylistFromList();
 			break;
 
