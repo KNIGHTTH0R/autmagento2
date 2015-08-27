@@ -79,8 +79,8 @@ public class US6003StyleCoachRegistrationTest extends BaseTest {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 
-//		headerSteps.navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton();
-//		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+		headerSteps.navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton();
+		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 //
 //		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndJetzStarten();
 //		stylistRegistrationSteps.validateStylistRegisterPageTitle();
