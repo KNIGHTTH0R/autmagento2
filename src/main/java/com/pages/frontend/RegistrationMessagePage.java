@@ -10,7 +10,10 @@ import com.tools.requirements.AbstractPage;
 
 public class RegistrationMessagePage extends AbstractPage {
 
-	@FindBy(css = "div.col-main")
+//	@FindBy(css = "div.col-main")
+//	private WebElement textContainer;
+	
+	@FindBy(css = "section.col-main")
 	private WebElement textContainer;
 
 	public void verifyLink() {
