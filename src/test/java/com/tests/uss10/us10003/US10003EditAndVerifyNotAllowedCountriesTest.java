@@ -99,6 +99,7 @@ public class US10003EditAndVerifyNotAllowedCountriesTest extends BaseTest {
 
 		footerSteps.selectWebsiteFromFooter(ContextConstants.NOT_PREFERED_WEBSITE);
 		if (!headerSteps.succesfullLogin()) {
+			System.out.println(headerSteps.succesfullLogin());
 			customerRegistrationSteps.performLoginAfterChangingWebsite(username, password);
 		}
 		String newUrl = urlModel.getUrl().replace("/" + MongoReader.getContext() + "/", "/" + ContextConstants.NOT_PREFERED_WEBSITE + "/");

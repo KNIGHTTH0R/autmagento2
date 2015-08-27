@@ -62,7 +62,7 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "table.data-table.follow-up-parties")
 	private WebElement folowUpPartysTable;
 
-	@FindBy(css = "div.col-main.pos-rel")
+	@FindBy(css = "section.col-main.pos-rel")
 	private WebElement partyDetailsAndActionsContainer;
 
 	@FindBy(css = "form[action*='placeCustomerOrder'] button")
