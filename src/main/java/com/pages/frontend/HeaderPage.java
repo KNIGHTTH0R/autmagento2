@@ -35,7 +35,7 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(css = "div#topCartContent p.subtotal span.price")
 	private WebElement cartPreviewPrice;
 
-	@FindBy(css = "div.quick-access.clearfix ul.links li:nth-child(2) a")
+	@FindBy(css = "div.quick-access ul.links li:nth-child(2) a")
 	private WebElement profileButton;
 
 	@FindBy(css = "div.categories>ul.clearfix li:last-child a")
