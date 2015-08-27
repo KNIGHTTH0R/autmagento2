@@ -17,7 +17,7 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(id = "search")
 	private WebElementFacade searchInput;
 
-	@FindBy(css = "div.quick-access p.message")
+	@FindBy(css = "div.quick-access")
 	private WebElementFacade succesLoginContainer;
 
 	@FindBy(css = ".top-search-icon")
