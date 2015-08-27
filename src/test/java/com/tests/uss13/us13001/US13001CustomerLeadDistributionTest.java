@@ -55,7 +55,6 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 		while (coordinatesModel.getLattitude() == null) {
 
 			addressModel = randomAddress.getRandomAddressFromFile();
-			addressModel.setPostCode("11111");
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
 			System.out.println(coordinatesModel.getLattitude());
 			System.out.println(coordinatesModel.getLongitude());

@@ -405,7 +405,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	public void searchStylistByGeoipButDoNotSelectAnyStylecoach(AddressModel addressModel) {
 		createCustomerPage().searchStylistByGeoip();
-		createCustomerPage().inputPostcodeFilter(addressModel.getPostCode());
+		createCustomerPage().inputPostcodeFilter("11111");
 		createCustomerPage().selectCountryFilter(addressModel.getCountryName());
 		createCustomerPage().searchByGeoipSubmit();
 
