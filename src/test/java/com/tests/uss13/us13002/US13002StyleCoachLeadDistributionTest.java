@@ -54,6 +54,7 @@ public class US13002StyleCoachLeadDistributionTest extends BaseTest {
 		while (coordinatesModel.getLattitude() == null) {
 
 			addressModel = randomAddress.getRandomAddressFromFile();
+			addressModel.setPostCode("11111");
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
 			System.out.println(coordinatesModel.getLattitude());
 			System.out.println(coordinatesModel.getLongitude());

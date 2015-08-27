@@ -85,10 +85,10 @@ import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 	
 	US18001VerifyProductsInPlaceACustomerOrderModal.class,
 	
-	US19001Suite.class,
-	US19002Suite.class,
-	US19003Suite.class,
-	US19004Suite.class,
+//	US19001Suite.class,
+//	US19002Suite.class,
+//	US19003Suite.class,
+//	US19004Suite.class,
 	
 	
 })
