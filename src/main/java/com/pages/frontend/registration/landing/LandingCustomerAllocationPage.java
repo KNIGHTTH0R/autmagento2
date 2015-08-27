@@ -54,6 +54,7 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 	}
 
 	public void inputPostcodeFilter(String postcode) {
+		searchPostcode.clear();
 		searchPostcode.sendKeys(postcode);
 	}
 
