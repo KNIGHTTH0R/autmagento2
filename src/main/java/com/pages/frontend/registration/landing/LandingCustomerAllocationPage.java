@@ -89,6 +89,7 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 				lastNameInput.sendKeys(lastName);
 			}
 			searchSubmitButton.click();
+			waitABit(2000);
 			selectFirstStylistFromList();
 
 			break;
