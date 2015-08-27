@@ -11,7 +11,7 @@ import com.tools.requirements.AbstractPage;
 
 public class KoboSuccesFormPage extends AbstractPage {
 
-	@FindBy(css = "div.col-main")
+	@FindBy(css = "div.pom-success")
 	private WebElement textContainer;
 
 	public void verifyKoboFormIsSuccsesfullyFilledIn() {
