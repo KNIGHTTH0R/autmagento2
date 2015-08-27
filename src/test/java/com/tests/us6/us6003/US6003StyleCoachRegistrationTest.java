@@ -79,14 +79,14 @@ public class US6003StyleCoachRegistrationTest extends BaseTest {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 
-		headerSteps.navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton();
-		stylistRegistrationSteps.validateStylistRegisterPageTitle();
-
-		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndJetzStarten();
-		stylistRegistrationSteps.validateStylistRegisterPageTitle();
-
-		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt();
-		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+//		headerSteps.navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton();
+//		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+//
+//		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndJetzStarten();
+//		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+//
+//		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt();
+//		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 
 		// navigate to register page being logged in as regular customer
 		customerRegistrationSteps.navigateToLoginPageAndPerformLogin(username, password);
@@ -95,11 +95,11 @@ public class US6003StyleCoachRegistrationTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 
-		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndJetzStarten();
-		stylistRegistrationSteps.validateStylistRegisterPageTitle();
-
-		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt();
-		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+//		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndJetzStarten();
+//		stylistRegistrationSteps.validateStylistRegisterPageTitle();
+//
+//		homeSteps.navigateToRegisterFormFromStyleCoachLinkAndStarteJetzt();
+//		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 
 		footerSteps.navigateToRegisterFormFromRegistrierungLink();
 		stylistRegistrationSteps.validateStylistRegisterPageTitle();
