@@ -64,7 +64,7 @@ public class DysksWorkflows {
 
 	@Step
 	public void validateStylistName(String stylistNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Names dont match: " + stylistNow + " - " + compare, compare.contains(stylistNow));
+		CustomVerification.verifyTrue("Failure: Names dont match: " + stylistNow + " - " + compare, compare.toLowerCase().contains(stylistNow.toLowerCase()));
 	}
 
 }
