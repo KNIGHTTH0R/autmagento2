@@ -430,6 +430,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		createCustomerPage().inputSearchFirstName(firstName);
 		createCustomerPage().inputSearchLastName(lastName);
 		createCustomerPage().searchByNameSubmit();
+		waitABit(2000);
 		if (createCustomerPage().isStylecoachFound()) {
 			createCustomerPage().selectFirstStylistFromList();
 		}
