@@ -4,11 +4,16 @@ import java.io.InputStream;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+
+@RunWith(JUnit4.class)
 public class WFConnectorMain {
 	
-	
-	public static void main(String args[]){
+	@Test
+	public static void main(){
 		try
         {
         String name,add,city,eid;
