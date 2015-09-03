@@ -49,7 +49,7 @@ public class HttpClientExample {
 	public void setAuthentication(String host, int port, String username, String password) {
 		CredentialsProvider credsProvider = new BasicCredentialsProvider();
 		credsProvider.setCredentials(new AuthScope(host, port), new UsernamePasswordCredentials(username, password));
-		CloseableHttpClient httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
+//		CloseableHttpClient httpclient = HttpClients.custom().setDefaultCredentialsProvider(credsProvider).build();
 	}
 
 	public static CoordinatesModel getLatAndLongFromAddress(String url) throws IOException {

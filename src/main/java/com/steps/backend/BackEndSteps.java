@@ -3,7 +3,6 @@ package com.steps.backend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
-import com.pages.frontend.ProductListPage;
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;

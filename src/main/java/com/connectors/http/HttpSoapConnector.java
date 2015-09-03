@@ -90,7 +90,11 @@ public class HttpSoapConnector {
 	protected static String performLogin() throws SOAPException, IOException {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), MongoReader.getSoapURL()
+		// SOAPMessage soapResponse =
+		// soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP,
+		// Credentials.LOGIN_PASS_SOAP), MongoReader.getSoapURL()
+		// + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), "http://staging-aut.pippajean.com/"
 				+ UrlConstants.API_URI);
 		String result = "";
 
@@ -495,5 +499,11 @@ public class HttpSoapConnector {
 		}
 
 		return result;
+	}
+
+	public static void main(String args[]) throws SOAPException, IOException {
+
+		HttpSoapConnector.performLogin();
+
 	}
 }
