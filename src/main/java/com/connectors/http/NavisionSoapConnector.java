@@ -1,10 +1,6 @@
 package com.connectors.http;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.SOAPBody;
@@ -15,7 +11,6 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.DOMException;
 
-import com.sun.jersey.core.util.Base64;
 import com.tools.NavSoapKeys;
 
 public class NavisionSoapConnector {

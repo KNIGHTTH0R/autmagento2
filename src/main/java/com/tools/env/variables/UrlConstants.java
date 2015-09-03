@@ -48,6 +48,10 @@ public class UrlConstants {
 	//Static Pages
 	public static final String REGISTER_LANDING_PAGE = "/register-landing-page";
 	public static final String LANDING_PAGE = "/contact-landing-page";
+	
+	//commision
+	public static final String COMMISION_WEB_BASE = "http://commission-staging-aut.pippajean.com/api/";
+	public static final String COMMISION_STYLIST_SUFFIX = "stylist.json/";
 
 
 }

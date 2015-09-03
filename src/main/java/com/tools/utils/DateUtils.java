@@ -1,5 +1,6 @@
 package com.tools.utils;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,8 +42,8 @@ public class DateUtils {
 		return age.getYears();
 	}
 
-	public static void main(String[] args) {
-		System.out.println(DateUtils.getAge("29/08/2000"));
+	public static String getTimestamp() {
+		return String.valueOf(System.currentTimeMillis() / 1000);
 	}
 
 }
