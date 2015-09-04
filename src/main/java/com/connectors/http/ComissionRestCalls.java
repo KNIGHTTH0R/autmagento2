@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.tools.commision.CommisionResponse;
+import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.variables.Credentials;
 import com.tools.env.variables.UrlConstants;
@@ -53,20 +54,66 @@ public class ComissionRestCalls {
 		return coordinatesModel;
 	}
 
-	public static String getStylistInfo(String stylistId) throws Exception {
+	public static CommissionStylistModel getStylistInfo(String stylistId) throws Exception {
 
 		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX + stylistId + composeAuthenticationSuffix());
-
+		CommissionStylistModel commissionStylistModel = new CommissionStylistModel();
 		ObjectMapper mapper = new ObjectMapper();
 		CommisionResponse res = (CommisionResponse) mapper.readValue(unparsedResponse, CommisionResponse.class);
 		if (res.getStatus().equals("ok")) {
-
-			String name = res.getBody().getName();
-			System.out.println(name);
+			
+			commissionStylistModel.setId(res.getBody().getId());
+			commissionStylistModel.setStylistId(res.getBody().getStylistId());
+			commissionStylistModel.setParentStylistId(res.getBody().getParentStylistId());
+			commissionStylistModel.setName(res.getBody().getName());
+			commissionStylistModel.setCustomerId(res.getBody().getCustomerId());
+			commissionStylistModel.setCity(res.getBody().getCity());
+			commissionStylistModel.setPostcode(res.getBody().getPostcode());
+			commissionStylistModel.setStreet(res.getBody().getStreet());
+			commissionStylistModel.setCountryId(res.getBody().getCountryId());
+			commissionStylistModel.setStatus(res.getBody().getStatus());
+			commissionStylistModel.setCareerLevel(res.getBody().getCareerLevel());
+			commissionStylistModel.setIp(res.getBody().getIp());
+			commissionStylistModel.setIpUnsafe(res.getBody().getIpUnsafe());
+			commissionStylistModel.setIpMonth(res.getBody().getIpMonth());
+			commissionStylistModel.setIpNewFl(res.getBody().getIpNewFl());
+			commissionStylistModel.setTeamPoints(res.getBody().getTeamPoints());
+			commissionStylistModel.setTeamPointsUnsafe(res.getBody().getTeamPointsUnsafe());
+			commissionStylistModel.setRetail(res.getBody().getRetail());
+			commissionStylistModel.setTob(res.getBody().getTob());
+			commissionStylistModel.setPaylevel(res.getBody().getPaylevel());
+			commissionStylistModel.setMinimumPaylevel(res.getBody().getMinimumPaylevel());
+			commissionStylistModel.setMinimumCareerLevel(res.getBody().getMinimumCareerLevel());
+			commissionStylistModel.setJoinedAt(res.getBody().getJoinedAt());
+			commissionStylistModel.setCreatedAt(res.getBody().getCreatedAt());
+			commissionStylistModel.setTeamPointsLevel1(res.getBody().getTeamPointsLevel1());
+			commissionStylistModel.setTeamPointsLevel2(res.getBody().getTeamPointsLevel2());
+			commissionStylistModel.setTeamPointsLevel3(res.getBody().getTeamPointsLevel3());
+			commissionStylistModel.setTeamPointsLevel4(res.getBody().getTeamPointsLevel4());
+			commissionStylistModel.setNrTeamMembersLevel1(res.getBody().getNrTeamMembersLevel1());
+			commissionStylistModel.setNrTeamMembersLevel2(res.getBody().getNrTeamMembersLevel2());
+			commissionStylistModel.setNrTeamMembersLevel3(res.getBody().getNrTeamMembersLevel3());
+			commissionStylistModel.setNrTeamMembersLevel4(res.getBody().getNrTeamMembersLevel4());
+			commissionStylistModel.setActivatedAt(res.getBody().getActivatedAt());
+			commissionStylistModel.setBankAccountOwnerName(res.getBody().getBankAccountOwnerName());
+			commissionStylistModel.setBankAccountBankName(res.getBody().getBankAccountBankName());
+			commissionStylistModel.setBankAccountNumber(res.getBody().getBankAccountNumber());
+			commissionStylistModel.setBankAccountBlz(res.getBody().getBankAccountBlz());
+			commissionStylistModel.setBankAccountVatPayer(res.getBody().getBankAccountNumber());
+			commissionStylistModel.setBankAccountVatNumber(res.getBody().getBankAccountVatNumber());
+			commissionStylistModel.setObtTeam(res.getBody().getObtTeam());
+			commissionStylistModel.setFrontliners(res.getBody().getFrontliners());
+			commissionStylistModel.setFrontlinersQualified(res.getBody().getFrontlinersQualified());
+			commissionStylistModel.setCareer(res.getBody().getCareer());
+			commissionStylistModel.setGoldFrontliners(res.getBody().getGoldFrontliners());
+			commissionStylistModel.setNewFrontliners(res.getBody().getNewFrontliners());
+			commissionStylistModel.setIpForMyself(res.getBody().getIpForMyself());
+			commissionStylistModel.setIpForCustomers(res.getBody().getIpForCustomers());
+			
 		} else {
 			System.out.println(res.getStatus());
 		}
 
-		return unparsedResponse;
+		return commissionStylistModel;
 	}
 }
