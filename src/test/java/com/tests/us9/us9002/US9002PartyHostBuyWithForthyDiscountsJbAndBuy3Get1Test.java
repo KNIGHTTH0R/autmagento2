@@ -205,7 +205,7 @@ public class US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test extends Base
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
-//		confirmationSteps.agreeAndCheckout();
+		confirmationSteps.agreeAndCheckout();
 
 		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, contactBillingAddress);
 		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
