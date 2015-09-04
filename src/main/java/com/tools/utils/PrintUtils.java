@@ -11,6 +11,7 @@ import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.backend.StylistPropertiesModel;
+import com.tools.data.commission.CommissionPartyModel;
 import com.tools.data.email.EmailModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
@@ -55,6 +56,33 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getFinalPrice());
 			System.out.println(cartProductModel.getIpPoints());
 		}
+	}
+	public static void printCommisionPartyModel(CommissionPartyModel commisionPartyModel) {
+		System.out.println(" *** Print Commision Party Model *** ");
+	
+			System.out.println("------------------------");
+			System.out.println(commisionPartyModel.getPartyDateTime());
+			System.out.println(commisionPartyModel.getNrOfOrders());
+			System.out.println(commisionPartyModel.getNrOfInvalidOrders());
+			System.out.println(commisionPartyModel.getRetailValue());
+			System.out.println(commisionPartyModel.getGrandRetailValue());
+			System.out.println(commisionPartyModel.getIp());
+			System.out.println(commisionPartyModel.getStylistId());
+			System.out.println(commisionPartyModel.getContactId());
+			System.out.println(commisionPartyModel.getHostCustomerId());
+			System.out.println(commisionPartyModel.getPartyDateTime());
+			System.out.println(commisionPartyModel.getLocation());
+			System.out.println(commisionPartyModel.getStreet());
+			System.out.println(commisionPartyModel.getPostalCode());
+			System.out.println(commisionPartyModel.getCity());
+			System.out.println(commisionPartyModel.getAdditional());
+			System.out.println(commisionPartyModel.getCreatedAt());
+			System.out.println(commisionPartyModel.getConfirmedAt());
+			System.out.println(commisionPartyModel.getUpdatedAt());
+			System.out.println(commisionPartyModel.getDeletedAt());
+			
+			
+		
 	}
 
 	public static void printListDbStylists(List<DBStylistModel> list) {

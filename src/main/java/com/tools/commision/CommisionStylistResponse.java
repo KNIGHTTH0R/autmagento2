@@ -2,7 +2,7 @@ package com.tools.commision;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-public class CommisionResponse {
+public class CommisionStylistResponse {
 
 	private String status;
 	private StylistBody body;
