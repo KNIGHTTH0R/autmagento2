@@ -17,7 +17,7 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getStylistInfo("1835");
+		ComissionRestCalls.getPartyPerformanceInfo("13941");
 
 	}
 
@@ -67,6 +67,23 @@ public class ComissionRestCalls {
 			System.out.println(res.getStatus());
 		}
 
+		return unparsedResponse;
+	}
+	
+	public static String getPartyPerformanceInfo(String stylistId) throws Exception {
+		
+		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_PARTY_SUFFIX + stylistId + composeAuthenticationSuffix());
+		
+//		ObjectMapper mapper = new ObjectMapper();
+//		CommisionResponse res = (CommisionResponse) mapper.readValue(unparsedResponse, CommisionResponse.class);
+//		if (res.getStatus().equals("ok")) {
+//			
+//			String name = res.getBody().getName();
+//			System.out.println(name);
+//		} else {
+//			System.out.println(res.getStatus());
+//		}
+		
 		return unparsedResponse;
 	}
 }
