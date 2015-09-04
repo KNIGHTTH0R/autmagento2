@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.tools.commision.CommisionResponse;
+import com.tools.commision.CommisionPartyResponse;
+import com.tools.commision.CommisionStylistResponse;
+import com.tools.data.commission.CommissionPartyModel;
 import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.variables.Credentials;
@@ -13,6 +15,7 @@ import com.tools.geolocation.GoogleResponse;
 import com.tools.geolocation.Result;
 import com.tools.utils.DateUtils;
 import com.tools.utils.MD5;
+import com.tools.utils.PrintUtils;
 
 public class ComissionRestCalls {
 
@@ -59,7 +62,7 @@ public class ComissionRestCalls {
 		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX + stylistId + composeAuthenticationSuffix());
 		CommissionStylistModel commissionStylistModel = new CommissionStylistModel();
 		ObjectMapper mapper = new ObjectMapper();
-		CommisionResponse res = (CommisionResponse) mapper.readValue(unparsedResponse, CommisionResponse.class);
+		CommisionStylistResponse res = (CommisionStylistResponse) mapper.readValue(unparsedResponse, CommisionStylistResponse.class);
 		if (res.getStatus().equals("ok")) {
 			
 			commissionStylistModel.setId(res.getBody().getId());
@@ -121,15 +124,33 @@ public class ComissionRestCalls {
 		
 		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_PARTY_SUFFIX + stylistId + composeAuthenticationSuffix());
 		
-//		ObjectMapper mapper = new ObjectMapper();
-//		CommisionResponse res = (CommisionResponse) mapper.readValue(unparsedResponse, CommisionResponse.class);
-//		if (res.getStatus().equals("ok")) {
-//			
-//			String name = res.getBody().getName();
-//			System.out.println(name);
-//		} else {
-//			System.out.println(res.getStatus());
-//		}
+		CommissionPartyModel commissionPartyModel = new CommissionPartyModel();
+				
+		ObjectMapper mapper = new ObjectMapper();
+		CommisionPartyResponse res = (CommisionPartyResponse) mapper.readValue(unparsedResponse, CommisionPartyResponse.class);
+
+		commissionPartyModel.setPartyId(res.getPartyId());	
+		commissionPartyModel.setNrOfOrders(res.getNrOfOrders());
+		commissionPartyModel.setNrOfInvalidOrders(res.getNrOfInvalidOrders());
+		commissionPartyModel.setRetailValue(res.getRetailValue());
+		commissionPartyModel.setGrandRetailValue(res.getGrandRetailValue());
+		commissionPartyModel.setIp(res.getIp());
+		commissionPartyModel.setStylistId(res.getStylistId());
+		commissionPartyModel.setContactId(res.getContactId());
+		commissionPartyModel.setHostCustomerId(res.getHostCustomerId());
+		commissionPartyModel.setPartyDateTime(res.getPartyDateTime());
+		commissionPartyModel.setLocation(res.getLocation());
+		commissionPartyModel.setStreet(res.getStreet());
+		commissionPartyModel.setPostalCode(res.getPostalCode());
+		commissionPartyModel.setCity(res.getCity());
+		commissionPartyModel.setAdditional(res.getAdditional());
+		commissionPartyModel.setCreatedAt(res.getCreatedAt());
+		commissionPartyModel.setConfirmedAt(res.getConfirmedAt());
+		commissionPartyModel.setUpdatedAt(res.getUpdatedAt());
+		commissionPartyModel.setDeletedAt(res.getDeletedAt());
+		
+		PrintUtils.printCommisionPartyModel(commissionPartyModel);
+		
 		
 		return unparsedResponse;
 	}
