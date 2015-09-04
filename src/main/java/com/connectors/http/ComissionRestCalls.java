@@ -57,15 +57,15 @@ public class ComissionRestCalls {
 
 		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX + stylistId + composeAuthenticationSuffix());
 
-//		ObjectMapper mapper = new ObjectMapper();
-//		CommisionResponse res = (CommisionResponse) mapper.readValue(unparsedResponse, CommisionResponse.class);
-//		if (res.getStatus().equals("OK")) {
-//
-//			String name = res.getBody().getName();
-//
-//		} else {
-//			System.out.println(res.getStatus());
-//		}
+		ObjectMapper mapper = new ObjectMapper();
+		CommisionResponse res = (CommisionResponse) mapper.readValue(unparsedResponse, CommisionResponse.class);
+		if (res.getStatus().equals("ok")) {
+
+			String name = res.getBody().getName();
+			System.out.println(name);
+		} else {
+			System.out.println(res.getStatus());
+		}
 
 		return unparsedResponse;
 	}
