@@ -343,6 +343,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	public void selectCountryNameFromPersonalInfo(String countryName) {
 		createCustomerPage().selectCountryNameFromPersonalInfo(countryName);
+		waitABit(1000);
 	}
 
 	@Step
