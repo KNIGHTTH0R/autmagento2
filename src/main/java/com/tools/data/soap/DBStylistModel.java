@@ -3,8 +3,18 @@ package com.tools.data.soap;
 public class DBStylistModel {
 
 	private String stylistId;
+	private String customerId;
+	private String parentId;
+	private String activatedAt;
+	private String createdAt;
+	private String updatedAt;	
 	private String firstName;
 	private String lastName;
+	private String street;
+	private String houseNumber;
+	private String postCode;
+	private String website;
+	private String vatPayer;
 	private String status;
 	private String email;
 	private String lattitude;
@@ -262,6 +272,86 @@ public class DBStylistModel {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getActivatedAt() {
+		return activatedAt;
+	}
+
+	public void setActivatedAt(String activatedAt) {
+		this.activatedAt = activatedAt;
+	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+
+	public String getPostCode() {
+		return postCode;
+	}
+
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public String getVatPayer() {
+		return vatPayer;
+	}
+
+	public void setVatPayer(String vatPayer) {
+		this.vatPayer = vatPayer;
 	}
 
 	

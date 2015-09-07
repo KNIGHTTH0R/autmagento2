@@ -64,7 +64,7 @@ public class ComissionRestCalls {
 		ObjectMapper mapper = new ObjectMapper();
 		CommisionStylistResponse res = (CommisionStylistResponse) mapper.readValue(unparsedResponse, CommisionStylistResponse.class);
 		if (res.getStatus().equals("ok")) {
-			
+
 			commissionStylistModel.setId(res.getBody().getId());
 			commissionStylistModel.setStylistId(res.getBody().getStylistId());
 			commissionStylistModel.setParentStylistId(res.getBody().getParentStylistId());
@@ -112,24 +112,24 @@ public class ComissionRestCalls {
 			commissionStylistModel.setNewFrontliners(res.getBody().getNewFrontliners());
 			commissionStylistModel.setIpForMyself(res.getBody().getIpForMyself());
 			commissionStylistModel.setIpForCustomers(res.getBody().getIpForCustomers());
-			
+
 		} else {
 			System.out.println(res.getStatus());
 		}
 
 		return commissionStylistModel;
 	}
-	
+
 	public static String getPartyPerformanceInfo(String stylistId) throws Exception {
-		
+
 		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_PARTY_SUFFIX + stylistId + composeAuthenticationSuffix());
-		
+
 		CommissionPartyModel commissionPartyModel = new CommissionPartyModel();
-				
+
 		ObjectMapper mapper = new ObjectMapper();
 		CommisionPartyResponse res = (CommisionPartyResponse) mapper.readValue(unparsedResponse, CommisionPartyResponse.class);
 
-		commissionPartyModel.setPartyId(res.getPartyId());	
+		commissionPartyModel.setPartyId(res.getPartyId());
 		commissionPartyModel.setNrOfOrders(res.getNrOfOrders());
 		commissionPartyModel.setNrOfInvalidOrders(res.getNrOfInvalidOrders());
 		commissionPartyModel.setRetailValue(res.getRetailValue());
@@ -148,10 +148,9 @@ public class ComissionRestCalls {
 		commissionPartyModel.setConfirmedAt(res.getConfirmedAt());
 		commissionPartyModel.setUpdatedAt(res.getUpdatedAt());
 		commissionPartyModel.setDeletedAt(res.getDeletedAt());
-		
+
 		PrintUtils.printCommisionPartyModel(commissionPartyModel);
-		
-		
+
 		return unparsedResponse;
 	}
 }

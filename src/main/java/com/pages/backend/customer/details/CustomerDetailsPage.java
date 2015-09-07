@@ -24,7 +24,7 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "reward_points_delta")
 	private WebElement rewardPointsInput;
-	
+
 	@FindBy(css = "input#_accountemail")
 	private WebElement emailInput;
 
@@ -37,6 +37,9 @@ public class CustomerDetailsPage extends AbstractPage {
 	@FindBy(css = "table.box-left tr:nth-child(5) td:last-child")
 	private WebElement customerTypeContainer;
 
+	@FindBy(css = "#customer_info_tabs_customer_edit_tab_view_content div:nth-child(2) table tbody tr[onmouseover*='this.style.backgroundColor']:nth-child(1) td:nth-child(2)")
+	private WebElement incrementIdContainer;
+
 	@FindBy(css = "table.box-left tr:nth-child(2) td:last-child")
 	private WebElement statusContainer;
 
@@ -45,7 +48,7 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "a#customer_info_tabs_addresses")
 	private WebElement addressesTab;
-	
+
 	@FindBy(css = "a#customer_info_tabs_account")
 	private WebElement accountInfoTab;
 
@@ -78,7 +81,7 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "add_address_button")
 	private WebElement addAddressButton;
-	
+
 	@FindBy(css = "li.success-msg")
 	private WebElement successMessage;
 
@@ -156,6 +159,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		element(addressesTab).waitUntilVisible();
 		addressesTab.click();
 	}
+
 	public void clickOnAccountInfoTab() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(accountInfoTab).waitUntilVisible();
@@ -217,6 +221,11 @@ public class CustomerDetailsPage extends AbstractPage {
 		return customerTypeContainer.getText();
 	}
 
+	public String extractCustomerIncrementId() {
+		element(incrementIdContainer).waitUntilVisible();
+		return incrementIdContainer.getText();
+	}
+
 	/**
 	 * Grab customer id from url.
 	 */
@@ -269,6 +278,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		element(rewardPointsInput).waitUntilVisible();
 		element(rewardPointsInput).sendKeys(value);
 	}
+
 	public void typeEmail(String value) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(emailInput).waitUntilVisible();

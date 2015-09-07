@@ -793,4 +793,29 @@ public class MongoReader extends MongoConnector {
 		return koboVoucher;
 
 	}
+
+	public static String grabIncrementId(String testName) {
+		DBObject dbObject = null;
+		String incrementid = "";
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.INCREMENT_ID_TABLE).find();
+
+		try {
+			while (cursor.hasNext()) {
+
+				dbObject = cursor.next();
+				incrementid = MongoUtils.checkField(dbObject, MongoTableKeys.INCREMENT_ID);
+				if (!incrementid.isEmpty()) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return incrementid;
+
+	}
 }

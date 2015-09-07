@@ -316,11 +316,41 @@ public class ApiCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
 					model.setStylistId(childNodes.item(j).getTextContent());
 				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_id")) {
+					model.setCustomerId(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("parent_id")) {
+					model.setParentId(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("activated_at")) {
+					model.setActivatedAt(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
+					model.setCreatedAt(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("updated_at")) {
+					model.setCreatedAt(childNodes.item(j).getTextContent());
+				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_firstname")) {
 					model.setFirstName(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_lastname")) {
 					model.setLastName(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_street")) {
+					model.setStreet(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_house_number")) {
+					model.setHouseNumber(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_postcode")) {
+					model.setPostCode(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("bank_account_vat_payer")) {
+					model.setVatPayer(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_preferred_website")) {
+					model.setWebsite(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("status")) {
 					model.setStatus(childNodes.item(j).getTextContent());

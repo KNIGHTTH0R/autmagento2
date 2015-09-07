@@ -205,6 +205,15 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+	public static void saveIncrementId(String incrementId, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.INCREMENT_ID_TABLE);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.INCREMENT_ID, incrementId);
+		
+		table.insert(document);
+	}
 
 	public static void saveProductBasicModel(ProductBasicModel product, String testName) {
 		workingDB = mongoClient.getDB(testName);
