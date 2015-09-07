@@ -51,6 +51,12 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "a#customer_info_tabs_account")
 	private WebElement accountInfoTab;
+	
+	@FindBy(css = "a#customer_info_tabs_stylecoach_profile")
+	private WebElement styleCoachProfileTab;
+	
+	@FindBy(css = "a#customer_info_tabs_stylecoach_entity")
+	private WebElement styleCoachManagementTab;
 
 	@FindBy(css = "input[id*='street0'][id^='_item']")
 	private WebElement streetInput;
@@ -81,6 +87,9 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "add_address_button")
 	private WebElement addAddressButton;
+	
+	@FindBy(css = "select[name='stylistentity[sponsor_id]']")
+	private WebElement sponsorDropown;
 
 	@FindBy(css = "li.success-msg")
 	private WebElement successMessage;
@@ -153,11 +162,28 @@ public class CustomerDetailsPage extends AbstractPage {
 		element(countrySelect).waitUntilVisible();
 		element(countrySelect).selectByVisibleText(countryName);
 	}
+	
+	public void selectSponsor(String sponsor) {
+		element(sponsorDropown).waitUntilVisible();
+		element(sponsorDropown).selectByVisibleText(sponsor);
+	}
 
 	public void clickOnAddressesTab() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(addressesTab).waitUntilVisible();
 		addressesTab.click();
+	}
+	
+	public void clickOnStylecoachProfileTab() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(styleCoachProfileTab).waitUntilVisible();
+		styleCoachProfileTab.click();
+	}
+	
+	public void clickOnStylecoachManagementTab() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(styleCoachManagementTab).waitUntilVisible();
+		styleCoachManagementTab.click();
 	}
 
 	public void clickOnAccountInfoTab() {

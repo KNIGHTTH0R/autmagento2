@@ -172,6 +172,29 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void editCity(String city) {
+		customerDetailsHomePage().clickOnAddressesTab();
+		customerDetailsHomePage().inputCity(city);
+		customerDetailsHomePage().saveCustomer();
+	}
+	@Step
+	public void changeStylecoachSponsor(String sponsor) {
+		customerDetailsHomePage().clickOnStylecoachManagementTab();
+		customerDetailsHomePage().selectSponsor(sponsor);
+		customerDetailsHomePage().saveCustomer();
+
+	}
+	
+	@Step
+	public void changeStylecoachVatSettings(String vatPayer,String vatNumber) {
+		customerDetailsHomePage().clickOnStylecoachProfileTab();
+		
+		
+		customerDetailsHomePage().saveCustomer();
+		
+	}
+
+	@Step
 	public void editEmail(CustomerFormModel customerData) {
 		customerDetailsHomePage().clickOnAccountInfoTab();
 		customerDetailsHomePage().typeEmail(customerData.getEmailName().replace("@mailinator.com", "@evozon.com"));
