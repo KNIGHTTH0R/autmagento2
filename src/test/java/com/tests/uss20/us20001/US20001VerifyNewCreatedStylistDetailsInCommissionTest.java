@@ -42,7 +42,7 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 	@Test
 	public void us20001VerifyNewCreatedStylistDetailsInCommissionTest() {
 		
-//		commissionValidationWorkflows.validateMailchimpProperties(grabbedModel, expectedModel);
+		commissionValidationWorkflows.validateCommssionStylistProperties(commissionStylistModel, dBStylistModel);
 
 	}
 

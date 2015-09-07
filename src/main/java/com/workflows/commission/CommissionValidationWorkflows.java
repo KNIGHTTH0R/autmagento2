@@ -10,12 +10,26 @@ public class CommissionValidationWorkflows {
 
 	@Step
 	public void validateCommssionStylistProperties(CommissionStylistModel grabbedModel, DBStylistModel expectedModel) {
+
+		if (expectedModel.getStatus().contentEquals("1")) {
+			expectedModel.setStatus("active");
+		} else if (expectedModel.getStatus().contentEquals("0")) {
+			expectedModel.setStatus("inactive");
+		}
+
 		verifyStylistId(grabbedModel.getStylistId(), expectedModel.getStylistId());
 		verifyCustomerId(grabbedModel.getCustomerId(), expectedModel.getCustomerId());
 		verifyParentId(grabbedModel.getParentStylistId(), expectedModel.getParentId());
 		verifyName(grabbedModel.getName(), expectedModel.getFirstName() + " " + expectedModel.getLastName());
 		verifyStylistPostCode(grabbedModel.getPostcode(), expectedModel.getPostCode());
 		verifyStreetAddress(grabbedModel.getStreet(), expectedModel.getStreet() + ", " + expectedModel.getHouseNumber());
+		verifyCountry(grabbedModel.getCountryId().toLowerCase(), expectedModel.getWebsite());
+		verifyStatus(grabbedModel.getStatus(), expectedModel.getStatus());
+		verifyJoinAt(grabbedModel.getJoinedAt(), expectedModel.getCreatedAt());
+		verifyCreatedAt(grabbedModel.getCreatedAt(), expectedModel.getCreatedAt());
+		verifyActivatedAt(grabbedModel.getActivatedAt(), expectedModel.getActivatedAt());
+		verifyVatPayer(grabbedModel.getBankAccountVatPayer(), expectedModel.getVatPayer());
+		verifyCareer(grabbedModel.getCareer(), "Style Coach");
 
 	}
 
@@ -51,7 +65,37 @@ public class CommissionValidationWorkflows {
 
 	@Step
 	public void verifyCountry(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Street address doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+		CustomVerification.verifyTrue("Failure: Contry doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+	}
+
+	@Step
+	public void verifyStatus(String expectedValue, String grabbedValue) {
+		CustomVerification.verifyTrue("Failure: Status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+	}
+
+	@Step
+	public void verifyJoinAt(String expectedValue, String grabbedValue) {
+		CustomVerification.verifyTrue("Failure: join at date doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+	}
+
+	@Step
+	public void verifyCreatedAt(String expectedValue, String grabbedValue) {
+		CustomVerification.verifyTrue("Failure: created at date doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+	}
+
+	@Step
+	public void verifyActivatedAt(String expectedValue, String grabbedValue) {
+		CustomVerification.verifyTrue("Failure: activated at date doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+	}
+
+	@Step
+	public void verifyVatPayer(String expectedValue, String grabbedValue) {
+		CustomVerification.verifyTrue("Failure: vat payer status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+	}
+
+	@Step
+	public void verifyCareer(String expectedValue, String grabbedValue) {
+		CustomVerification.verifyTrue("Failure: career doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
 	}
 
 }
