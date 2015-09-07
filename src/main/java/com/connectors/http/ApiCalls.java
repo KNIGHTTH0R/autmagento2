@@ -329,7 +329,7 @@ public class ApiCalls {
 					model.setCreatedAt(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("updated_at")) {
-					model.setCreatedAt(childNodes.item(j).getTextContent());
+					model.setUpdatedAt(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_firstname")) {
 					model.setFirstName(childNodes.item(j).getTextContent());
@@ -348,6 +348,9 @@ public class ApiCalls {
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("bank_account_vat_payer")) {
 					model.setVatPayer(childNodes.item(j).getTextContent());
+				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("bank_account_vat_number")) {
+					model.setVatNumber(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_preferred_website")) {
 					model.setWebsite(childNodes.item(j).getTextContent());

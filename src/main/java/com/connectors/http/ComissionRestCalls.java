@@ -102,7 +102,7 @@ public class ComissionRestCalls {
 			commissionStylistModel.setBankAccountBankName(res.getBody().getBankAccountBankName());
 			commissionStylistModel.setBankAccountNumber(res.getBody().getBankAccountNumber());
 			commissionStylistModel.setBankAccountBlz(res.getBody().getBankAccountBlz());
-			commissionStylistModel.setBankAccountVatPayer(res.getBody().getBankAccountNumber());
+			commissionStylistModel.setBankAccountVatPayer(res.getBody().getBankAccountVatPayer());
 			commissionStylistModel.setBankAccountVatNumber(res.getBody().getBankAccountVatNumber());
 			commissionStylistModel.setObtTeam(res.getBody().getObtTeam());
 			commissionStylistModel.setFrontliners(res.getBody().getFrontliners());

@@ -29,6 +29,7 @@ public class CommissionValidationWorkflows {
 		verifyCreatedAt(grabbedModel.getCreatedAt(), expectedModel.getCreatedAt());
 		verifyActivatedAt(grabbedModel.getActivatedAt(), expectedModel.getActivatedAt());
 		verifyVatPayer(grabbedModel.getBankAccountVatPayer(), expectedModel.getVatPayer());
+		verifyVatPayer(grabbedModel.getBankAccountVatNumber(), expectedModel.getVatNumber());
 		verifyCareer(grabbedModel.getCareer(), "Style Coach");
 
 	}

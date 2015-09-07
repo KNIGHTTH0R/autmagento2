@@ -23,7 +23,7 @@ import com.workflows.commission.CommissionValidationWorkflows;
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
 public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseTest {
-	
+
 	@Steps
 	public CommissionValidationWorkflows commissionValidationWorkflows;
 
@@ -41,7 +41,7 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 
 	@Test
 	public void us20001VerifyNewCreatedStylistDetailsInCommissionTest() {
-		
+
 		commissionValidationWorkflows.validateCommssionStylistProperties(commissionStylistModel, dBStylistModel);
 
 	}

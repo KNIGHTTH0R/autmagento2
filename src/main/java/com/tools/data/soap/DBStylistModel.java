@@ -15,6 +15,7 @@ public class DBStylistModel {
 	private String postCode;
 	private String website;
 	private String vatPayer;
+	private String vatNumber;
 	private String status;
 	private String email;
 	private String lattitude;
@@ -352,6 +353,14 @@ public class DBStylistModel {
 
 	public void setVatPayer(String vatPayer) {
 		this.vatPayer = vatPayer;
+	}
+
+	public String getVatNumber() {
+		return vatNumber;
+	}
+
+	public void setVatNumber(String vatNumber) {
+		this.vatNumber = vatNumber;
 	}
 
 	
