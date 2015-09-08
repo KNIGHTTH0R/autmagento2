@@ -177,7 +177,7 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	public void selectSponsor(String sponsor) {
 		element(sponsorDropown).waitUntilVisible();
-		element(sponsorDropown).selectByVisibleText(sponsor);
+		element(sponsorDropown).selectByValue(sponsor);
 	}
 
 	public void selectVatPayer(String vatPayer) {
