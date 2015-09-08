@@ -69,7 +69,7 @@ public class US20001GetStylistIncrementIdTest extends BaseTest {
 
 	@After
 	public void tearDown() {
-		MongoWriter.saveKoboCode(incrementId, getClass().getSimpleName());
+		MongoWriter.saveIncrementId(incrementId, getClass().getSimpleName());
 	}
 
 }
