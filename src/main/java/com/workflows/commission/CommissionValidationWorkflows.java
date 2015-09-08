@@ -71,7 +71,7 @@ public class CommissionValidationWorkflows {
 
 	@Step
 	public void verifyStatus(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+		CustomVerification.verifyTrue("Failure: Status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 	}
 
 	@Step
