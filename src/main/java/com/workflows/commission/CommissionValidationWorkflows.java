@@ -16,7 +16,7 @@ public class CommissionValidationWorkflows {
 		} else if (expectedModel.getStatus().contentEquals("0")) {
 			expectedModel.setStatus("inactive");
 		}
-
+		System.out.println(grabbedModel.getStatus() + " " +  expectedModel.getStatus());
 		verifyStylistId(grabbedModel.getStylistId(), expectedModel.getStylistId());
 		verifyCustomerId(grabbedModel.getCustomerId(), expectedModel.getCustomerId());
 		verifyParentId(grabbedModel.getParentStylistId(), expectedModel.getParentId());
@@ -29,7 +29,7 @@ public class CommissionValidationWorkflows {
 		verifyCreatedAt(grabbedModel.getCreatedAt(), expectedModel.getCreatedAt());
 		verifyActivatedAt(grabbedModel.getActivatedAt(), expectedModel.getActivatedAt());
 		verifyVatPayer(grabbedModel.getBankAccountVatPayer(), expectedModel.getVatPayer());
-		verifyVatPayer(grabbedModel.getBankAccountVatNumber(), expectedModel.getVatNumber());
+		verifyVatNumber(grabbedModel.getBankAccountVatNumber(), expectedModel.getVatNumber());
 		verifyCareer(grabbedModel.getCareer(), "Style Coach");
 
 	}
@@ -91,7 +91,12 @@ public class CommissionValidationWorkflows {
 
 	@Step
 	public void verifyVatPayer(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: vat payer status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue,
+		CustomVerification.verifyTrue("Failure: vat payer status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+	}
+
+	@Step
+	public void verifyVatNumber(String expectedValue, String grabbedValue) {
+		CustomVerification.verifyTrue("Failure: vat number status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue,
 				(expectedValue == null ? grabbedValue == null : expectedValue.contains(grabbedValue)));
 	}
 

@@ -31,8 +31,6 @@ public class ComissionRestCalls {
 	public static CommissionStylistModel getStylistInfo(String stylistId) throws Exception {
 
 		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX + stylistId + composeAuthenticationSuffix());
-		System.out.println(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX + stylistId + composeAuthenticationSuffix());
-		System.out.println(unparsedResponse);
 		CommissionStylistModel commissionStylistModel = new CommissionStylistModel();
 		ObjectMapper mapper = new ObjectMapper();
 		CommisionStylistResponse res = (CommisionStylistResponse) mapper.readValue(unparsedResponse, CommisionStylistResponse.class);
