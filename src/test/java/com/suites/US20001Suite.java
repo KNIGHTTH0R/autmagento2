@@ -9,6 +9,7 @@ import com.tests.uss20.us20001.US20001GetStylistIncrementIdTest;
 import com.tests.uss20.us20001.US20001StyleCoachRegistrationTest;
 import com.tests.uss20.us20001.US20001StylistActivationTest;
 import com.tests.uss20.us20001.US20001VerifyNewCreatedStylistDetailsInCommissionTest;
+import com.tests.uss20.us20001.US20001VerifyUpdatedStylistDetailsInCommissionTest;
 
 @SuiteClasses({
 	US20001StyleCoachRegistrationTest.class,
@@ -16,7 +17,7 @@ import com.tests.uss20.us20001.US20001VerifyNewCreatedStylistDetailsInCommission
 	US20001GetStylistIncrementIdTest.class,
 	US20001VerifyNewCreatedStylistDetailsInCommissionTest.class,
 	US20001EditStylistTest.class,
-	US20001VerifyNewCreatedStylistDetailsInCommissionTest.class,
+	US20001VerifyUpdatedStylistDetailsInCommissionTest.class,
 })
 @RunWith(Suite.class)
 public class US20001Suite {

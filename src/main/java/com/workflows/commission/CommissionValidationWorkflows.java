@@ -11,12 +11,6 @@ public class CommissionValidationWorkflows {
 	@Step
 	public void validateCommssionStylistProperties(CommissionStylistModel grabbedModel, DBStylistModel expectedModel) {
 
-		if (expectedModel.getStatus().contentEquals("1")) {
-			expectedModel.setStatus("active");
-		} else if (expectedModel.getStatus().contentEquals("0")) {
-			expectedModel.setStatus("inactive");
-		}
-		System.out.println(grabbedModel.getStatus() + " " +  expectedModel.getStatus());
 		verifyStylistId(grabbedModel.getStylistId(), expectedModel.getStylistId());
 		verifyCustomerId(grabbedModel.getCustomerId(), expectedModel.getCustomerId());
 		verifyParentId(grabbedModel.getParentStylistId(), expectedModel.getParentId());
@@ -24,7 +18,7 @@ public class CommissionValidationWorkflows {
 		verifyStylistPostCode(grabbedModel.getPostcode(), expectedModel.getPostCode());
 		verifyStreetAddress(grabbedModel.getStreet(), expectedModel.getStreet() + ", " + expectedModel.getHouseNumber());
 		verifyCountry(grabbedModel.getCountryId().toLowerCase(), expectedModel.getWebsite());
-		verifyStatus(grabbedModel.getStatus(), expectedModel.getStatus());
+		verifyStatus(grabbedModel.getStatus(), "inactive");
 		verifyJoinAt(grabbedModel.getJoinedAt(), expectedModel.getCreatedAt());
 		verifyCreatedAt(grabbedModel.getCreatedAt(), expectedModel.getCreatedAt());
 		verifyActivatedAt(grabbedModel.getActivatedAt(), expectedModel.getActivatedAt());
