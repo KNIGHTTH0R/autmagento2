@@ -182,7 +182,7 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	public void selectVatPayer(String vatPayer) {
 		element(vatPayerDropown).waitUntilVisible();
-		element(vatPayerDropown).selectByVisibleText(vatPayer);
+		element(vatPayerDropown).selectByValue(vatPayer);
 	}
 
 	public void clickOnAddressesTab() {

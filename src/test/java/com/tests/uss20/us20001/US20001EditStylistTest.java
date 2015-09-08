@@ -66,7 +66,7 @@ public class US20001EditStylistTest extends BaseTest {
 //		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
 		backEndSteps.searchForEmail("apexapex@mailinator.com");
 		backEndSteps.openCustomerDetails("apexapex@mailinator.com");
-		backEndSteps.changeStylecoachVatSettings("Yes", "121212");
+		backEndSteps.changeStylecoachVatSettings("1", "121212");
 		backEndSteps.changeStylecoachSponsor("Qa team (mihaialexandrubarta@gmail.com");
 		backEndSteps.editCity("dssdsd");
 
