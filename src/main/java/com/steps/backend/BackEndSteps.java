@@ -177,6 +177,7 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().inputCity(city);
 		customerDetailsHomePage().saveAndContinueEdit();
 	}
+
 	@Step
 	public void changeStylecoachSponsor(String sponsor) {
 		customerDetailsHomePage().clickOnStylecoachManagementTab();
@@ -184,14 +185,14 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().saveAndContinueEdit();
 
 	}
-	
+
 	@Step
-	public void changeStylecoachVatSettings(String vatPayer,String vatNumber) {
+	public void changeStylecoachVatSettings(String vatPayer, String vatNumber) {
 		customerDetailsHomePage().clickOnStylecoachProfileTab();
 		customerDetailsHomePage().selectVatPayer(vatPayer);
 		customerDetailsHomePage().inputVatNumber(vatNumber);
 		customerDetailsHomePage().saveAndContinueEdit();
-		
+
 	}
 
 	@Step
@@ -245,6 +246,7 @@ public class BackEndSteps extends AbstractSteps {
 		return customerDetailsHomePage().extractCustomerType();
 	}
 
+	@Step
 	public String extractCustomerIncrementId() {
 		return customerDetailsHomePage().extractCustomerIncrementId();
 	}

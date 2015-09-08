@@ -63,6 +63,7 @@ public class US20001StylistActivationTest extends BaseTest {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		
 		backEndSteps.clickOnCustomers();
+		System.out.println(stylistRegistrationData.getEmailName());
 		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
 		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
 		incrementId = backEndSteps.extractCustomerIncrementId();
@@ -71,8 +72,6 @@ public class US20001StylistActivationTest extends BaseTest {
 		backEndSteps.searchOrderByName(stylistRegistrationData.getFirstName());
 		backEndSteps.openOrderDetails(stylistRegistrationData.getFirstName());
 		ordersSteps.markOrderAsPaid();
-		
-	
 
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
