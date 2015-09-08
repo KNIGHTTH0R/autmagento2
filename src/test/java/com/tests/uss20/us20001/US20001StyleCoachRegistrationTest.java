@@ -57,7 +57,7 @@ public class US20001StyleCoachRegistrationTest extends BaseTest {
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerFormPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 		customVerification.printErrors();
-
+		
 	}
 
 	@After
