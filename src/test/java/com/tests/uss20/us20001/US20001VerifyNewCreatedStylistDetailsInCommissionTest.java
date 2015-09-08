@@ -33,7 +33,7 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 	@Before
 	public void setUp() throws Exception {
 
-		String incrementId = MongoReader.grabIncrementId("US20001StylistActivationTest");
+		String incrementId = MongoReader.grabIncrementId("US20001GetStylistIncrementIdTest");
 
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(incrementId);
 		dBStylistModel = ApiCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);
