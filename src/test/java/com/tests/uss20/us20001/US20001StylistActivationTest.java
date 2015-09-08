@@ -70,6 +70,7 @@ public class US20001StylistActivationTest extends BaseTest {
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		System.out.println(stylistRegistrationData.getEmailName());
 		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
