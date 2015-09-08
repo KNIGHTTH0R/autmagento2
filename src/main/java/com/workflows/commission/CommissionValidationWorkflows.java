@@ -91,7 +91,8 @@ public class CommissionValidationWorkflows {
 
 	@Step
 	public void verifyVatPayer(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: vat payer status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+		CustomVerification.verifyTrue("Failure: vat payer status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue,
+				(expectedValue == null ? grabbedValue == null : expectedValue.contains(grabbedValue)));
 	}
 
 	@Step
