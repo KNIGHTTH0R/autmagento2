@@ -175,13 +175,13 @@ public class BackEndSteps extends AbstractSteps {
 	public void editCity(String city) {
 		customerDetailsHomePage().clickOnAddressesTab();
 		customerDetailsHomePage().inputCity(city);
-		customerDetailsHomePage().saveCustomer();
+		customerDetailsHomePage().saveAndContinueEdit();
 	}
 	@Step
 	public void changeStylecoachSponsor(String sponsor) {
 		customerDetailsHomePage().clickOnStylecoachManagementTab();
 		customerDetailsHomePage().selectSponsor(sponsor);
-		customerDetailsHomePage().saveCustomer();
+		customerDetailsHomePage().saveAndContinueEdit();
 
 	}
 	
@@ -190,7 +190,7 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().clickOnStylecoachProfileTab();
 		customerDetailsHomePage().selectVatPayer(vatPayer);
 		customerDetailsHomePage().inputVatNumber(vatNumber);
-		customerDetailsHomePage().saveCustomer();
+		customerDetailsHomePage().saveAndContinueEdit();
 		
 	}
 
