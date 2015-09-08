@@ -51,10 +51,10 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "a#customer_info_tabs_account")
 	private WebElement accountInfoTab;
-	
+
 	@FindBy(css = "a#customer_info_tabs_stylecoach_profile")
 	private WebElement styleCoachProfileTab;
-	
+
 	@FindBy(css = "a#customer_info_tabs_stylecoach_entity")
 	private WebElement styleCoachManagementTab;
 
@@ -87,9 +87,15 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "add_address_button")
 	private WebElement addAddressButton;
-	
+
 	@FindBy(css = "select[name='stylistentity[sponsor_id]']")
 	private WebElement sponsorDropown;
+
+	@FindBy(id = "_stylistprofilebank_account_vat_payer")
+	private WebElement vatPayerDropown;
+
+	@FindBy(id = "_stylistprofilebank_account_vat_number")
+	private WebElement vatNumberInput;
 
 	@FindBy(css = "li.success-msg")
 	private WebElement successMessage;
@@ -158,14 +164,25 @@ public class CustomerDetailsPage extends AbstractPage {
 		element(postCodeInput).sendKeys(code);
 	}
 
+	public void inputVatNumber(String vatNumber) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(vatNumberInput).waitUntilVisible();
+		element(vatNumberInput).sendKeys(vatNumber);
+	}
+
 	public void selectCountryName(String countryName) {
 		element(countrySelect).waitUntilVisible();
 		element(countrySelect).selectByVisibleText(countryName);
 	}
-	
+
 	public void selectSponsor(String sponsor) {
 		element(sponsorDropown).waitUntilVisible();
 		element(sponsorDropown).selectByVisibleText(sponsor);
+	}
+
+	public void selectVatPayer(String vatPayer) {
+		element(vatPayerDropown).waitUntilVisible();
+		element(vatPayerDropown).selectByVisibleText(vatPayer);
 	}
 
 	public void clickOnAddressesTab() {
@@ -173,13 +190,13 @@ public class CustomerDetailsPage extends AbstractPage {
 		element(addressesTab).waitUntilVisible();
 		addressesTab.click();
 	}
-	
+
 	public void clickOnStylecoachProfileTab() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(styleCoachProfileTab).waitUntilVisible();
 		styleCoachProfileTab.click();
 	}
-	
+
 	public void clickOnStylecoachManagementTab() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(styleCoachManagementTab).waitUntilVisible();

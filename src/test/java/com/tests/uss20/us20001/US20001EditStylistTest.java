@@ -44,26 +44,30 @@ public class US20001EditStylistTest extends BaseTest {
 	private CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
 	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
-//Qa team (mihaialexandrubarta@gmail.com)
+
 	String incrementId;
 
-	@Before
-	public void setUp() throws Exception {
-
-		int size = MongoReader.grabCustomerFormModels("US20001StyleCoachRegistrationTest").size();
-		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US20001StyleCoachRegistrationTest").get(0);
-		} else
-			System.out.println("The database has no entries");
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//
+//		int size = MongoReader.grabCustomerFormModels("US20001StyleCoachRegistrationTest").size();
+//		if (size > 0) {
+//			stylistRegistrationData = MongoReader.grabCustomerFormModels("US20001StyleCoachRegistrationTest").get(0);
+//		} else
+//			System.out.println("The database has no entries");
+//	}
 
 	@Test
 	public void us20001StylistActivationTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
-		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
+//		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
+//		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
+		backEndSteps.searchForEmail("apexapex@mailinator.com");
+		backEndSteps.openCustomerDetails("apexapex@mailinator.com");
+		backEndSteps.changeStylecoachVatSettings("Yes", "121212");
+		backEndSteps.changeStylecoachSponsor("Qa team (mihaialexandrubarta@gmail.com");
 		backEndSteps.editCity("dssdsd");
 
 	}

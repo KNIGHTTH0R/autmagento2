@@ -33,30 +33,6 @@ public class ComissionRestCalls {
 		return suffix;
 	}
 
-	public static CoordinatesModel getLatAndLongFromAddress(String url) throws IOException {
-
-		CoordinatesModel coordinatesModel = new CoordinatesModel();
-
-		String unparsedResponse = JerseyClient.sendGet(url);
-		ObjectMapper mapper = new ObjectMapper();
-		GoogleResponse res = (GoogleResponse) mapper.readValue(unparsedResponse, GoogleResponse.class);
-
-		if (res.getStatus().equals("OK")) {
-
-			for (Result result : res.getResults()) {
-
-				coordinatesModel.setLattitude((result.getGeometry().getLocation().getLat()));
-				coordinatesModel.setLongitude((result.getGeometry().getLocation().getLng()));
-				System.out.println(coordinatesModel.getLattitude());
-				System.out.println(coordinatesModel.getLongitude());
-			}
-		} else {
-			System.out.println(res.getStatus());
-		}
-
-		return coordinatesModel;
-	}
-
 	public static CommissionStylistModel getStylistInfo(String stylistId) throws Exception {
 
 		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX + stylistId + composeAuthenticationSuffix());

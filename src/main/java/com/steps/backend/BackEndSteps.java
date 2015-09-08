@@ -188,8 +188,8 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public void changeStylecoachVatSettings(String vatPayer,String vatNumber) {
 		customerDetailsHomePage().clickOnStylecoachProfileTab();
-		
-		
+		customerDetailsHomePage().selectVatPayer(vatPayer);
+		customerDetailsHomePage().inputVatNumber(vatNumber);
 		customerDetailsHomePage().saveCustomer();
 		
 	}
