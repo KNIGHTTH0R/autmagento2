@@ -35,8 +35,8 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 
 		String incrementId = MongoReader.grabIncrementId("US20001StylistActivationTest");
 
-		commissionStylistModel = ComissionRestCalls.getStylistInfo("3111");
-		dBStylistModel = ApiCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, "3111").get(0);
+		commissionStylistModel = ComissionRestCalls.getStylistInfo(incrementId);
+		dBStylistModel = ApiCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);
 	}
 
 	@Test

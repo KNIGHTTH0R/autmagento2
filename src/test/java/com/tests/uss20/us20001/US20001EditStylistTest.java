@@ -5,7 +5,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,11 +16,8 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
@@ -47,28 +43,26 @@ public class US20001EditStylistTest extends BaseTest {
 
 	String incrementId;
 
-//	@Before
-//	public void setUp() throws Exception {
-//
-//		int size = MongoReader.grabCustomerFormModels("US20001StyleCoachRegistrationTest").size();
-//		if (size > 0) {
-//			stylistRegistrationData = MongoReader.grabCustomerFormModels("US20001StyleCoachRegistrationTest").get(0);
-//		} else
-//			System.out.println("The database has no entries");
-//	}
+	@Before
+	public void setUp() throws Exception {
+
+		int size = MongoReader.grabCustomerFormModels("US20001StyleCoachRegistrationTest").size();
+		if (size > 0) {
+			stylistRegistrationData = MongoReader.grabCustomerFormModels("US20001StyleCoachRegistrationTest").get(0);
+		} else
+			System.out.println("The database has no entries");
+	}
 
 	@Test
 	public void us20001StylistActivationTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
-//		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
-//		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
-		backEndSteps.searchForEmail("apexapex@mailinator.com");
-		backEndSteps.openCustomerDetails("apexapex@mailinator.com");
-		backEndSteps.changeStylecoachVatSettings("1", "121212");
+		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
+		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
+		backEndSteps.changeStylecoachVatSettings("1", "32423434");
 		backEndSteps.changeStylecoachSponsor("1835");
-		backEndSteps.editCity("dssdsd");
+		backEndSteps.editCity("Cluj");
 
 	}
 
