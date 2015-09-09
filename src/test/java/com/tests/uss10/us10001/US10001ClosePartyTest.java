@@ -1,4 +1,3 @@
-
 package com.tests.uss10.us10001;
 
 import java.io.File;
@@ -41,19 +40,17 @@ public class US10001ClosePartyTest extends BaseTest {
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;	
+	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
 	boolean runTest = true;
-	public CustomerFormModel customerData;
 
 	@Before
 	public void setUp() throws Exception {
 
-		customerData = new CustomerFormModel();
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -75,16 +72,15 @@ public class US10001ClosePartyTest extends BaseTest {
 				}
 			}
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		dateModel = MongoReader.grabStylistDateModels("US10001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-		
 
 		Long partyCreationTime = Long.parseLong(dateModel.getDate());
 		Long currentTime = System.currentTimeMillis();
-		
+
 		// if less than 30 minutes passed skip the test
 		if (currentTime - partyCreationTime < 1800000) {
 			runTest = false;
@@ -105,11 +101,5 @@ public class US10001ClosePartyTest extends BaseTest {
 			partyDetailsSteps.verifyClosedPartyAvailableActions();
 		}
 	}
-	
-	@After
-	public void saveData() {
-		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName());
-	}
 
 }
-

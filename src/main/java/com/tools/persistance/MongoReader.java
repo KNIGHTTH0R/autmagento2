@@ -24,6 +24,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
+import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -249,6 +250,28 @@ public class MongoReader extends MongoConnector {
 				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.NAME));
 				result.setUrl(MongoUtils.checkField(dbObject, MongoTableKeys.URL_PATH));
 
+				itemList.add(result);
+			}
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+	public static List<PartyBonusCalculationModel> grabPartyBonusCalculationModel(String testName) {
+		DBObject dbObject = null;
+		List<PartyBonusCalculationModel> itemList = new ArrayList<PartyBonusCalculationModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.PARTY_BONUS_CALCULATION_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				PartyBonusCalculationModel result = new PartyBonusCalculationModel();
+				dbObject = cursor.next();
+				
+				result.setTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
+				result.setPercent(MongoUtils.checkField(dbObject, MongoTableKeys.PERCENTAGE));
+				
 				itemList.add(result);
 			}
 		} finally {

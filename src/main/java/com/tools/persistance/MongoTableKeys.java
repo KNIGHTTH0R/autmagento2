@@ -64,6 +64,10 @@ public class MongoTableKeys {
 	public static final String INCREMENT_ID_TABLE = "IncrementIdTable";
 	public static final String INCREMENT_ID = "IncrementId";
 	
+	//party bonus calculation model
+	public static final String PARTY_BONUS_CALCULATION_MODEL = "PartyBonusCalculationModel";
+	public static final String PERCENTAGE = "Percentage";
+	
 	// OrderModel
 	public static final String ORDER_MODEL = "OrderModel";
 	public static final String ORDER_ID = "orderId";

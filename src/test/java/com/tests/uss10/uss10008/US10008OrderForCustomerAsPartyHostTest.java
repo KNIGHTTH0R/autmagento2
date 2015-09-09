@@ -35,12 +35,10 @@ import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
-import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.data.frontend.ShippingModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.variables.UrlConstants;
@@ -85,8 +83,7 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 	public DashboardSteps dashboardSteps;
 
 	private String username, password, customerName;
-
-	private ShippingModel shippingModel;
+	private PartyBonusCalculationModel partyBonusCalculationModel;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	public static UrlModel urlModel = new UrlModel();
@@ -162,7 +159,10 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-		shippingModel = confirmationSteps.grabConfirmationTotals();
+
+		partyBonusCalculationModel.setTotal(confirmationSteps.grabConfirmationTotals().getSubTotal());
+		partyBonusCalculationModel.setPercent("100");
+
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 
@@ -171,7 +171,7 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
-		MongoWriter.saveShippingModel(shippingModel, getClass().getSimpleName());
+		MongoWriter.savePartyBonusCalculationModel(partyBonusCalculationModel, getClass().getSimpleName());
 	}
 
 }

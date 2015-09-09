@@ -23,6 +23,7 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
+import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -193,6 +194,16 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.TOTAL_PRICE, orderModel.getTotalPrice());
 		document.put(MongoTableKeys.STATUS, orderModel.getStatus());
 
+		table.insert(document);
+	}
+	public static void savePartyBonusCalculationModel(PartyBonusCalculationModel partyBonusCalculationModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.PARTY_BONUS_CALCULATION_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.SUBTOTAL, partyBonusCalculationModel.getTotal());
+		document.put(MongoTableKeys.PERCENTAGE, partyBonusCalculationModel.getPercent());
+		
 		table.insert(document);
 	}
 

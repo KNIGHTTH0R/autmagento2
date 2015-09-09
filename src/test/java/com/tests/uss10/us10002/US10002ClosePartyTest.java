@@ -1,4 +1,3 @@
-
 package com.tests.uss10.us10002;
 
 import java.io.File;
@@ -36,7 +35,7 @@ import com.tools.requirements.Application;
 @Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10002ClosePartyTest extends BaseTest {
-	
+
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -49,12 +48,9 @@ public class US10002ClosePartyTest extends BaseTest {
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
 	boolean runTest = true;
-	public CustomerFormModel customerData;
 
 	@Before
 	public void setUp() throws Exception {
-
-		customerData = new CustomerFormModel();
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -77,7 +73,7 @@ public class US10002ClosePartyTest extends BaseTest {
 				}
 			}
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10002CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
@@ -108,9 +104,4 @@ public class US10002ClosePartyTest extends BaseTest {
 		}
 	}
 
-	@After
-	public void saveData() {
-		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName());
-	}
 }
-
