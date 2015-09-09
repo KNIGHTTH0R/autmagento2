@@ -150,7 +150,6 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		hostCartSteps.clickDeliverOnVariousDate();
 		hostCartSteps.clickGoToShipping();
 
 		shippingPartySectionSteps.checkItemNotReceivedYet();
