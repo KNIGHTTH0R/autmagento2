@@ -140,7 +140,7 @@ public class ApiCalls {
 		result.setCategoryIdsArray(categoriesIds);
 
 		StockDataModel stockModel = new StockDataModel();
-		stockModel.setQty("1000");
+		stockModel.setQty("0");
 		stockModel.setIsInStock("1");
 		stockModel.setManageStock("1");
 		stockModel.setUseConfigManageStock("1");
