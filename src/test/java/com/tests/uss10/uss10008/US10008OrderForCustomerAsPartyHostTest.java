@@ -38,6 +38,7 @@ import com.tools.data.UrlModel;
 import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
@@ -85,7 +86,7 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 
 	private String username, password, customerName;
 
-	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
+	private ShippingModel shippingModel;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	public static UrlModel urlModel = new UrlModel();
@@ -139,10 +140,6 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
 
-		String currentTotal = dashboardSteps.getJewelryBonus();
-
-		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal, genProduct1.getJewerlyBonusValue(), true);
-
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
@@ -166,19 +163,16 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-
+		shippingModel = confirmationSteps.grabConfirmationTotals();
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
-
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(HostDataGrabber.orderModel.getOrderId());
 
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
-		MongoWriter.saveJewerlyHistoryModel(expectedJewelryHistoryModelWhenOrderComplete, getClass().getSimpleName() + SoapKeys.COMPLETE);
+		MongoWriter.saveShippingModel(shippingModel, getClass().getSimpleName());
 	}
 
 }

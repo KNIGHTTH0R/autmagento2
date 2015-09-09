@@ -37,6 +37,7 @@ import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.frontend.ShippingModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
@@ -85,6 +86,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 	private String username, password, customerName;
 
 	private CreditCardModel creditCardData = new CreditCardModel();
+	private ShippingModel shippingModel;
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	public static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
@@ -160,7 +162,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-
+		shippingModel = confirmationSteps.grabConfirmationTotals();
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 
@@ -169,6 +171,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(shippingModel, getClass().getSimpleName());
 
 	}
 
