@@ -93,7 +93,6 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 
 	@Before
 	public void setUp() throws Exception {
-		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = ApiCalls.createNotAvailableYetProductModel();
@@ -157,7 +156,7 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 		shippingSteps.clickGoToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
-		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);

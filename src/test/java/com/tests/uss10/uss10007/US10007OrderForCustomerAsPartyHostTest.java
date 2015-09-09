@@ -93,7 +93,6 @@ public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = ApiCalls.createZzzProductModel();
@@ -157,7 +156,7 @@ public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 		shippingSteps.clickGoToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
-		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
@@ -166,8 +165,7 @@ public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(HostDataGrabber.orderModel.getOrderId());
+		
 
 	}
 
