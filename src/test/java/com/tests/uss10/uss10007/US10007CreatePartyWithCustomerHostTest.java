@@ -46,7 +46,7 @@ public class US10007CreatePartyWithCustomerHostTest extends BaseTest {
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
-	
+
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
@@ -97,10 +97,8 @@ public class US10007CreatePartyWithCustomerHostTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		
+
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
-	
-	
+
 }

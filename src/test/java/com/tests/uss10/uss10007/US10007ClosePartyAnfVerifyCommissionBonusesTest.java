@@ -1,4 +1,3 @@
-
 package com.tests.uss10.uss10007;
 
 import java.io.File;
@@ -36,7 +35,7 @@ import com.tools.requirements.Application;
 @Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
-	
+
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -77,35 +76,25 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 				}
 			}
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10002CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
-		dateModel = MongoReader.grabStylistDateModels("US10002CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
-
-		Long partyCreationTime = Long.parseLong(dateModel.getDate());
-		Long currentTime = System.currentTimeMillis();
-
-		// if less than 15 minutes passed skip the test
-		if (currentTime - partyCreationTime < 90000) {
-			runTest = false;
-		}
+		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 
 	}
 
 	@Test
 	public void us10002ClosePartyTest() {
-		if (runTest) {
-			customerRegistrationSteps.performLogin(username, password);
-			if (!headerSteps.succesfullLogin()) {
-				footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
-			}
-			headerSteps.selectLanguage(MongoReader.getContext());
-			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.closeTheParty("10");
-			partyDetailsSteps.verifyClosedPartyAvailableActions();
 
+		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.closeTheParty("10");
+		partyDetailsSteps.verifyClosedPartyAvailableActions();
+
 	}
 
 	@After
@@ -113,4 +102,3 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName());
 	}
 }
-
