@@ -90,12 +90,9 @@ public class US10007CreateFolowUpPartyForActivePartyTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.verifyActivePartyAvailableActions();
 		partyDetailsSteps.createFolowUpParty();
 		partyCreationSteps.fillPartyDetailsForCustomerHost(customerName);		
 		partyDetailsSteps.verifyThatFolowUpPartyAppearsOnPartyDetailsPage(customerName);
-		partyDetailsSteps.closeTheParty("10");
-		partyDetailsSteps.verifyClosedPartyAvailableActions();
 
 	}
 
