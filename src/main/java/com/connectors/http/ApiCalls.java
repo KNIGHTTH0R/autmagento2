@@ -152,7 +152,7 @@ public class ApiCalls {
 		stockModel.setUseConfigMaxSaleQty("");
 		stockModel.setIsQtyDecimal("0");
 		stockModel.setBackorders("1");
-		stockModel.setUseConfigBackorders("1");
+		stockModel.setUseConfigBackorders("0");
 		stockModel.setNotifyStockQty("");
 		stockModel.setUseConfigNotifyStockQty("1");
 		stockModel.setIsDiscontinued("1");
