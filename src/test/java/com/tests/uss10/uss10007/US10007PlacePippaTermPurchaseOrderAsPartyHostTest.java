@@ -95,7 +95,7 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = ApiCalls.createNotAvailableYetProductModel();
-		genProduct1.setPrice("89.00");
+		genProduct1.setPrice("289.00");
 		ApiCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();
@@ -121,10 +121,9 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 			}
 		}
 
-//		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-//
-//		MongoConnector.cleanCollection(getClass().getSimpleName());
-//		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.COMPLETE);
+		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 
@@ -137,8 +136,7 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
 
-//		customerRegistrationSteps.navigate(urlModel.getUrl());
-		customerRegistrationSteps.navigate("http://staging-aut.pippajean.com/de/ioa/stylist/party/details/id/14054/");
+		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();

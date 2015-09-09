@@ -97,7 +97,7 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = ApiCalls.createZzzProductModel();
-		genProduct1.setPrice("89.00");
+		genProduct1.setPrice("300.00");
 		ApiCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();

@@ -95,7 +95,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = ApiCalls.createZzzProductModel();
-		genProduct1.setPrice("89.00");
+		genProduct1.setPrice("389.00");
 		ApiCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();
@@ -124,7 +124,6 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.COMPLETE);
 
 	}
 
@@ -151,7 +150,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 
 		hostCartSteps.clickAllOnThisDate();
 		hostCartSteps.clickGoToShipping();
-		
+
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
 		shippingSteps.clickGoToPaymentMethod();

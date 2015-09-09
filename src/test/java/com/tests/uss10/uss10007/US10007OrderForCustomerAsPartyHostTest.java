@@ -35,7 +35,6 @@ import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
-import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -85,7 +84,6 @@ public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 
 	private String username, password, customerName;
 
-	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	public static UrlModel urlModel = new UrlModel();
@@ -97,7 +95,7 @@ public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = ApiCalls.createZzzProductModel();
-		genProduct1.setPrice("89.00");
+		genProduct1.setPrice("189.00");
 		ApiCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();
@@ -126,7 +124,6 @@ public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.COMPLETE);
 
 	}
 
@@ -138,10 +135,6 @@ public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
-
-		String currentTotal = dashboardSteps.getJewelryBonus();
-
-		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal, genProduct1.getJewerlyBonusValue(), true);
 
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();
@@ -178,7 +171,6 @@ public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
-		MongoWriter.saveJewerlyHistoryModel(expectedJewelryHistoryModelWhenOrderComplete, getClass().getSimpleName() + SoapKeys.COMPLETE);
 	}
 
 }
