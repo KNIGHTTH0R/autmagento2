@@ -35,7 +35,6 @@ import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
-import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -52,7 +51,7 @@ import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 @WithTag(name = "US10", type = "frontend")
 @Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10007PlaceSecondOrderForCustomerAsPartyHostTest extends BaseTest {
+public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -85,7 +84,6 @@ public class US10007PlaceSecondOrderForCustomerAsPartyHostTest extends BaseTest 
 
 	private String username, password, customerName;
 
-	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	public static UrlModel urlModel = new UrlModel();
@@ -139,10 +137,6 @@ public class US10007PlaceSecondOrderForCustomerAsPartyHostTest extends BaseTest 
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
 
-		String currentTotal = dashboardSteps.getJewelryBonus();
-
-		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal, genProduct1.getJewerlyBonusValue(), true);
-
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
@@ -155,8 +149,9 @@ public class US10007PlaceSecondOrderForCustomerAsPartyHostTest extends BaseTest 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
+		hostCartSteps.clickAllOnThisDate();
 		hostCartSteps.clickGoToShipping();
-
+		
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
 		shippingSteps.clickGoToPaymentMethod();
@@ -170,15 +165,12 @@ public class US10007PlaceSecondOrderForCustomerAsPartyHostTest extends BaseTest 
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(HostDataGrabber.orderModel.getOrderId());
-
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
-		MongoWriter.saveJewerlyHistoryModel(expectedJewelryHistoryModelWhenOrderComplete, getClass().getSimpleName() + SoapKeys.COMPLETE);
+
 	}
 
 }

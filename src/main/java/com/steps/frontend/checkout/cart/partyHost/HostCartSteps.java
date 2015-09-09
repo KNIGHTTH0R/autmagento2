@@ -46,6 +46,16 @@ public class HostCartSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void clickDeliverOnVariousDate() {
+		hostCartPage().clickDeliverOnVariousDate();
+	}
+
+	@Step
+	public void clickAllOnThisDate() {
+		hostCartPage().clickAllOnThisDate();
+	}
+
+	@Step
 	public void updateCart() {
 		hostCartPage().clickUpdateCart();
 		getDriver().navigate().refresh();

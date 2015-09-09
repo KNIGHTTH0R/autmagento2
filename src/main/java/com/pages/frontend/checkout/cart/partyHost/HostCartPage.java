@@ -33,8 +33,13 @@ public class HostCartPage extends AbstractPage {
 	@FindBy(css = "ul.checkout-types li button")
 	private WebElement kasseButton;
 
-//	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
-	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")    //int  
+	@FindBy(css = "li input[value='multiple']")
+	private WebElement deliverOnVariousDate;
+
+	@FindBy(css = "li input[value='one_at_date']")
+	private WebElement deliverAllOnThisDate;
+
+	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")
 	private WebElement updateButton;
 
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")
@@ -175,6 +180,16 @@ public class HostCartPage extends AbstractPage {
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
+	}
+	
+	public void clickDeliverOnVariousDate() {
+		element(deliverOnVariousDate).waitUntilVisible();
+		deliverOnVariousDate.click();
+	}
+	
+	public void clickAllOnThisDate() {
+		element(deliverAllOnThisDate).waitUntilVisible();
+		deliverAllOnThisDate.click();
 	}
 
 	public void clickUpdateCart() {

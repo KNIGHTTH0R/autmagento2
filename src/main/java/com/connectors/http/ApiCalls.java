@@ -131,6 +131,39 @@ public class ApiCalls {
 		return result;
 	}
 
+	public static ProductDetailedModel createNotAvailableYetProductModel() {
+		ProductDetailedModel result = createProductModel();
+		result.setSet("15");
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+
+		StockDataModel stockModel = new StockDataModel();
+		stockModel.setQty("1000");
+		stockModel.setIsInStock("1");
+		stockModel.setManageStock("1");
+		stockModel.setUseConfigManageStock("1");
+		stockModel.setMinQty("");
+		stockModel.setUseConfigMinQty("1");
+		stockModel.setMinSaleQty("");
+		stockModel.setUseConfigMinSaleQty("1");
+		stockModel.setMaxSaleQty("");
+		stockModel.setUseConfigMaxSaleQty("");
+		stockModel.setIsQtyDecimal("0");
+		stockModel.setBackorders("");
+		stockModel.setUseConfigBackorders("1");
+		stockModel.setNotifyStockQty("");
+		stockModel.setUseConfigNotifyStockQty("1");
+		stockModel.setIsDiscontinued("0");
+		stockModel.setEarliestAvailability(FormatterUtils.getCustomDate("yyyy.MM.dd", 360000));
+		stockModel.setMaximumPercentageToBorrow("");
+		stockModel.setUseConfigMaximumPercentageToBorrow("80");
+		result.setStockData(stockModel);
+
+		return result;
+	}
+
 	public static ProductDetailedModel createStarterKitProductModel() {
 		ProductDetailedModel result = createProductModel();
 		result.setSet("13");
