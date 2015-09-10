@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -26,6 +25,7 @@ import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.calculation.PartyBonusCalculation;
 import com.tools.data.UrlModel;
+import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -48,10 +48,9 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();
+	ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
 	List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
 	private String username, password;
-	BigDecimal jb;
-	String expectedNoOfFourthyDiscounts = "1";
 
 	@Before
 	public void setUp() throws Exception {
@@ -78,16 +77,17 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 			}
 		}
 
-		
-
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007OrderForCustomerAsPartyHostTest").get(0));
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007PlacePippaTermPurchaseOrderAsPartyHostTest").get(0));
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007PlaceTermPurchaseOrderAsPartyHostTest").get(0));
 
 		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 
-		BigDecimal jb = PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, false);
-		System.out.println(jb);
+		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList)));
+		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
+		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyRetail(partyBonusCalculationModelList)));
+		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
+		expectedClosedPartyPerformanceModel.setIp("50");
 
 	}
 
@@ -101,9 +101,10 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.closeTheParty("10");
-		partyDetailsSteps.closeTheParty("10");
-		commissionPartyValidationWorkflows.verifyClosedPartyJewelryBonus(String.valueOf(jb), partyDetailsSteps.grabClosedPartyReceivedJb());
-		commissionPartyValidationWorkflows.verifyClosedPartyJFourthyDiscount(expectedNoOfFourthyDiscounts, partyDetailsSteps.grabClosedPartyReceivedForthyDiscounts());
+		partyDetailsSteps.returnToParty();
+		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
+
+		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
 
 	}
 }

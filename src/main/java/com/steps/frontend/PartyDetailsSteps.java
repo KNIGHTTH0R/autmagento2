@@ -3,6 +3,7 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
+import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.AbstractSteps;
 
@@ -82,6 +83,16 @@ public class PartyDetailsSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void returnToParty() {
+		partyDetailsPage().returnToParty();
+	}
+
+	@Step
+	public ClosedPartyPerformanceModel grabClosedPartyPerformance() {
+		return partyDetailsPage().grabClosedPartyPerformance();
+	}
+
+	@Step
 	public void orderForCustomerFromParty(String name) {
 		placeCustomerOrderFromPartyPage().typeContactName(name);
 		placeCustomerOrderFromPartyPage().startOrderForCustomer();
@@ -117,17 +128,6 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void verifyClosedPartyAvailableActions() {
 		partyDetailsPage().verifyClosedPartyAvailableActions();
-	}
-
-	@Step
-	public String grabClosedPartyReceivedJb() {
-		return partyDetailsPage().grabClosedPartyReceivedJb();
-	}
-
-	@Step
-	public String grabClosedPartyReceivedForthyDiscounts() {
-		return partyDetailsPage().grabClosedPartyReceivedForthyDiscounts();
-
 	}
 
 	@Step

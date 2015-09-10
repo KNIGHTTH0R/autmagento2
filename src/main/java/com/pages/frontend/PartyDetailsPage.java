@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
@@ -82,15 +83,18 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(css = "input.input-checkbox.contact-chk")
 	private WebElement wishlistProductCheckbox;
-	
+
 	@FindBy(css = "#closeSuccess #jewelry span")
 	private WebElement receivedJbContainer;
-	
+
 	@FindBy(css = "#closeSuccess #fiftydiscount")
 	private WebElement receivedForthyDiscountsContainer;
 
 	@FindBy(css = "div#wishlistGuestsFormContainer form button[class='button blue-button right clear']")
 	private WebElement addToBorrowCart;
+
+	@FindBy(css = "button[onclick*='jQuery.fancybox.close()'")
+	private WebElement backToPartyButton;
 
 	// this is made for a single product.if the products is the expected
 	// one,select it and borrow it
@@ -110,12 +114,18 @@ public class PartyDetailsPage extends AbstractPage {
 			wishlistProductCheckbox.click();
 			waitABit(1000);
 		}
-		//just trying to fix a problem - not needed
+		// just trying to fix a problem - not needed
 		builder.moveToElement(addToBorrowCart).build().perform();
 		addToBorrowCart.click();
 		waitABit(1000);
 
 		Assert.assertTrue("The product expected to be in wishlist is not present !!!", found);
+	}
+
+	public void returnToParty() {
+		element(backToPartyButton).waitUntilVisible();
+		backToPartyButton.click();
+		waitABit(2000);
 	}
 
 	public void orderForCustomer() {
@@ -132,13 +142,19 @@ public class PartyDetailsPage extends AbstractPage {
 		element(sendInvitationToHostess).waitUntilVisible();
 		sendInvitationToHostess.click();
 	}
-	
-	public String grabClosedPartyReceivedJb(){
-		return receivedJbContainer.getText().replace(" €", "").replace(",", ".");
-	}
-	public String grabClosedPartyReceivedForthyDiscounts(){
-		return receivedForthyDiscountsContainer.getText();
-		
+
+	public ClosedPartyPerformanceModel grabClosedPartyPerformance() {
+		ClosedPartyPerformanceModel result = new ClosedPartyPerformanceModel();
+		result.setNoOfOrders(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(1) td:nth-child(2)")).getText());
+		result.setRetail(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(2) td:nth-child(2)")).getText().replace(",", ".").replace(" €", ""));
+		result.setIp(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(3) td:nth-child(2)")).getText());
+		result.setIpInPayment(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(1) td:nth-child(2)")).getText());
+		result.setJewelryBonus(getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(2) .price")).getText());
+		String[] parts = getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(3)")).getText().split(":");
+		result.setFourthyDiscounts(parts[1].trim());
+
+		return result;
+
 	}
 
 	public void closeParty() {

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -25,6 +24,7 @@ import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.calculation.PartyBonusCalculation;
 import com.tools.data.UrlModel;
+import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -47,10 +47,9 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();
+	ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
 	List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
 	private String username, password;
-	BigDecimal jb;
-	String expectedNoOfFourthyDiscounts = "1";
 
 	@Before
 	public void setUp() throws Exception {
@@ -81,8 +80,11 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
 
-		jb = PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, false);
-		System.out.println(jb);
+		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList)));
+		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
+		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyRetail(partyBonusCalculationModelList)));
+		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
+		expectedClosedPartyPerformanceModel.setIp("50");
 
 	}
 
@@ -96,13 +98,10 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.closeTheParty("10");
-		String a = partyDetailsSteps.grabClosedPartyReceivedJb();
-		System.out.println(a);
-		String b = partyDetailsSteps.grabClosedPartyReceivedForthyDiscounts();
-		System.out.println(b);
+		partyDetailsSteps.returnToParty();
+		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
 
-		commissionPartyValidationWorkflows.verifyClosedPartyJewelryBonus(String.valueOf(jb), a);
-		commissionPartyValidationWorkflows.verifyClosedPartyJFourthyDiscount(expectedNoOfFourthyDiscounts, b);
+		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
 
 	}
 }

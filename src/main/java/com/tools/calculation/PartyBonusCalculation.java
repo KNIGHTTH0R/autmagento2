@@ -20,7 +20,7 @@ public class PartyBonusCalculation {
 		return partyRetail.setScale(4);
 	}
 
-	public static BigDecimal calculatePartyJewelryBonus(List<PartyBonusCalculationModel> ordersList, boolean isFollowUp) {
+	public static BigDecimal calculatePartyJewelryBonus(List<PartyBonusCalculationModel> ordersList) {
 
 		BigDecimal partyRetail = calculatePartyRetail(ordersList);
 		BigDecimal partyJb = BigDecimal.ZERO;
@@ -41,7 +41,7 @@ public class PartyBonusCalculation {
 			partyJb = partyJb.divide(BigDecimal.valueOf(100));
 		}
 
-		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 && isFollowUp ? BigDecimal.valueOf(35) : partyJb.setScale(2);
+		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 ? BigDecimal.valueOf(35) : partyJb.setScale(2);
 	}
 
 	public static boolean isBetween(BigDecimal price, BigDecimal start, BigDecimal end) {
