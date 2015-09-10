@@ -23,6 +23,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
+import com.tools.calculation.PartyBonusCalculation;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ShippingModel;
@@ -81,6 +82,8 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007PlaceTermPurchaseOrderAsPartyHostTest").get(0));
 
 		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
+
+		PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, false);
 
 	}
 
