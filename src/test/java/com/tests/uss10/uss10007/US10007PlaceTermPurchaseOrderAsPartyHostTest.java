@@ -85,7 +85,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 	private String username, password, customerName;
 
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private PartyBonusCalculationModel partyBonusCalculationModel;
+	private PartyBonusCalculationModel partyBonusCalculationModel = new PartyBonusCalculationModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	public static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;

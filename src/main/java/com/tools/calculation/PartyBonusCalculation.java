@@ -17,24 +17,29 @@ public class PartyBonusCalculation {
 			partyRetail = partyRetail.add(orderRetail);
 		}
 
-		return partyRetail;
+		return partyRetail.setScale(4);
 	}
 
 	public BigDecimal calculatePartyJewelryBonus(BigDecimal partyRetail, boolean isFollowUp) {
 		BigDecimal partyJb = BigDecimal.ZERO;
 
-		if (isBetween(partyRetail, BigDecimal.valueOf(250), BigDecimal.valueOf(250))) {
+		if (isBetween(partyRetail, BigDecimal.valueOf(250), BigDecimal.valueOf(500))) {
 
 			partyJb = partyRetail.multiply(BigDecimal.valueOf(10));
 			partyJb = partyJb.divide(BigDecimal.valueOf(100));
 
 		} else if (isBetween(partyRetail, BigDecimal.valueOf(500), BigDecimal.valueOf(1000))) {
 
-			partyJb = partyRetail.multiply(BigDecimal.valueOf(10));
+			partyJb = partyRetail.multiply(BigDecimal.valueOf(15));
+			partyJb = partyJb.divide(BigDecimal.valueOf(100));
+
+		} else if (isBetween(partyRetail, BigDecimal.valueOf(1000), BigDecimal.valueOf(100000))) {
+
+			partyJb = partyRetail.multiply(BigDecimal.valueOf(20));
 			partyJb = partyJb.divide(BigDecimal.valueOf(100));
 		}
 
-		return partyJb;
+		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 && isFollowUp ? BigDecimal.valueOf(35) : partyJb.setScale(4);
 	}
 
 	boolean isBetween(BigDecimal price, BigDecimal start, BigDecimal end) {

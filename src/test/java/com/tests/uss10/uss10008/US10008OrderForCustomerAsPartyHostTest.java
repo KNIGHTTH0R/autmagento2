@@ -83,7 +83,7 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 	public DashboardSteps dashboardSteps;
 
 	private String username, password, customerName;
-	private PartyBonusCalculationModel partyBonusCalculationModel;
+	private PartyBonusCalculationModel partyBonusCalculationModel = new PartyBonusCalculationModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
 	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
 	public static UrlModel urlModel = new UrlModel();
