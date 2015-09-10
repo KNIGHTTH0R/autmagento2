@@ -30,6 +30,7 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.commission.CommissionPartyValidationWorkflows;
 
 @WithTag(name = "US10", type = "frontend")
 @Story(Application.StyleParty.class)
@@ -43,10 +44,14 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
+	CommissionPartyValidationWorkflows commissionPartyValidationWorkflows;
+	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();
 	List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
 	private String username, password;
+	BigDecimal jb;
+	String expectedNoOfFourthyDiscounts = "1";
 
 	@Before
 	public void setUp() throws Exception {
@@ -95,8 +100,10 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-//		partyDetailsSteps.closeTheParty("10");
-//		partyDetailsSteps.verifyClosedPartyAvailableActions();
+		partyDetailsSteps.closeTheParty("10");
+		partyDetailsSteps.closeTheParty("10");
+		commissionPartyValidationWorkflows.verifyClosedPartyJewelryBonus(String.valueOf(jb), partyDetailsSteps.grabClosedPartyReceivedJb());
+		commissionPartyValidationWorkflows.verifyClosedPartyJFourthyDiscount(expectedNoOfFourthyDiscounts, partyDetailsSteps.grabClosedPartyReceivedForthyDiscounts());
 
 	}
 }

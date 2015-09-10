@@ -120,6 +120,17 @@ public class PartyDetailsSteps extends AbstractSteps {
 	}
 
 	@Step
+	public String grabClosedPartyReceivedJb() {
+		return partyDetailsPage().grabClosedPartyReceivedJb();
+	}
+
+	@Step
+	public String grabClosedPartyReceivedForthyDiscounts() {
+		return partyDetailsPage().grabClosedPartyReceivedForthyDiscounts();
+
+	}
+
+	@Step
 	public void verifyThatFolowUpPartyAppearsOnPartyDetailsPage(String... terms) {
 		partyDetailsPage().verifyThatFolowUpPartyAppearsOnPartyDetailsPage(terms);
 	}

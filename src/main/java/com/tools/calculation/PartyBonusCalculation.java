@@ -41,7 +41,7 @@ public class PartyBonusCalculation {
 			partyJb = partyJb.divide(BigDecimal.valueOf(100));
 		}
 
-		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 && isFollowUp ? BigDecimal.valueOf(35) : partyJb.setScale(4);
+		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 && isFollowUp ? BigDecimal.valueOf(35) : partyJb.setScale(2);
 	}
 
 	public static boolean isBetween(BigDecimal price, BigDecimal start, BigDecimal end) {

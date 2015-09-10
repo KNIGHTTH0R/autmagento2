@@ -17,7 +17,7 @@ import com.tools.data.soap.DBStylistModel;
 import com.tools.env.constants.SoapConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.commission.CommissionValidationWorkflows;
+import com.workflows.commission.CommissionStylistValidationWorkflows;
 
 @WithTag(name = "US20", type = "external")
 @Story(Application.MassAction.class)
@@ -25,7 +25,7 @@ import com.workflows.commission.CommissionValidationWorkflows;
 public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseTest {
 
 	@Steps
-	public CommissionValidationWorkflows commissionValidationWorkflows;
+	public CommissionStylistValidationWorkflows commissionValidationWorkflows;
 
 	CommissionStylistModel commissionStylistModel;
 	DBStylistModel dBStylistModel;

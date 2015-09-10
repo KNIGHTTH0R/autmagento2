@@ -23,18 +23,18 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
-import com.tools.SoapKeys;
 import com.tools.calculation.PartyBonusCalculation;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.commission.CommissionPartyValidationWorkflows;
 
 @WithTag(name = "US10", type = "frontend")
 @Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
+public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -43,10 +43,14 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
+	CommissionPartyValidationWorkflows commissionPartyValidationWorkflows;
+	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();
 	List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
 	private String username, password;
+	BigDecimal jb;
+	String expectedNoOfFourthyDiscounts = "1";
 
 	@Before
 	public void setUp() throws Exception {
@@ -77,13 +81,13 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
 
-		BigDecimal jb = PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, false);
+		jb = PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, false);
 		System.out.println(jb);
 
 	}
 
 	@Test
-	public void us10007ClosePartyAnfVerifyCommissionBonusesTest() {
+	public void us10008ClosePartyAnfVerifyCommissionBonusesTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
@@ -91,8 +95,14 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		// partyDetailsSteps.closeTheParty("10");
-		// partyDetailsSteps.verifyClosedPartyAvailableActions();
+		partyDetailsSteps.closeTheParty("10");
+		String a = partyDetailsSteps.grabClosedPartyReceivedJb();
+		System.out.println(a);
+		String b = partyDetailsSteps.grabClosedPartyReceivedForthyDiscounts();
+		System.out.println(b);
+
+		commissionPartyValidationWorkflows.verifyClosedPartyJewelryBonus(String.valueOf(jb), a);
+		commissionPartyValidationWorkflows.verifyClosedPartyJFourthyDiscount(expectedNoOfFourthyDiscounts, b);
 
 	}
 }

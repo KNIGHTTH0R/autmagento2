@@ -133,10 +133,11 @@ public class PartyDetailsPage extends AbstractPage {
 		sendInvitationToHostess.click();
 	}
 	
-	public void grabClosedPartyReceivedJb(){
-		
+	public String grabClosedPartyReceivedJb(){
+		return receivedJbContainer.getText().replace(" €", "").replace(",", ".");
 	}
-	public void grabClosedPartyReceivedForthyDiscounts(){
+	public String grabClosedPartyReceivedForthyDiscounts(){
+		return receivedForthyDiscountsContainer.getText();
 		
 	}
 

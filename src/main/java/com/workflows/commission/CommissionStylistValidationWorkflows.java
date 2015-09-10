@@ -6,7 +6,7 @@ import com.tools.CustomVerification;
 import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.soap.DBStylistModel;
 
-public class CommissionValidationWorkflows {
+public class CommissionStylistValidationWorkflows {
 
 	@Step
 	public void validateCommssionStylistProperties(CommissionStylistModel grabbedModel, DBStylistModel expectedModel) {
