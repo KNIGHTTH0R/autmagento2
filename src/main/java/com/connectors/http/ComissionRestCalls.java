@@ -16,14 +16,14 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getPartyPerformanceInfo("14054");
+		ComissionRestCalls.getPartyPerformanceInfo("14094");
 
 	}
 
 	public static String composeAuthenticationSuffix() throws Exception {
 
-		String hash = MD5.getMd5(Credentials.API_KEY + Credentials.API_SECRET + DateUtils.getTimestamp() + "30");
-		String suffix = "?api_sig=" + hash + "&api_key=" + Credentials.API_KEY + "&api_ts=" + DateUtils.getTimestamp() + "&api_ttl=30";
+		String hash = MD5.getMd5(Credentials.API_KEY + Credentials.API_SECRET + DateUtils.getTimestamp() + "300");
+		String suffix = "?api_sig=" + hash + "&api_key=" + Credentials.API_KEY + "&api_ts=" + DateUtils.getTimestamp() + "&api_ttl=300";
 
 		return suffix;
 	}

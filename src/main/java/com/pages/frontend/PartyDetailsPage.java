@@ -82,6 +82,12 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(css = "input.input-checkbox.contact-chk")
 	private WebElement wishlistProductCheckbox;
+	
+	@FindBy(css = "#closeSuccess #jewelry span")
+	private WebElement receivedJbContainer;
+	
+	@FindBy(css = "#closeSuccess #fiftydiscount")
+	private WebElement receivedForthyDiscountsContainer;
 
 	@FindBy(css = "div#wishlistGuestsFormContainer form button[class='button blue-button right clear']")
 	private WebElement addToBorrowCart;
@@ -125,6 +131,13 @@ public class PartyDetailsPage extends AbstractPage {
 	public void sendInvitationToHostess() {
 		element(sendInvitationToHostess).waitUntilVisible();
 		sendInvitationToHostess.click();
+	}
+	
+	public void grabClosedPartyReceivedJb(){
+		
+	}
+	public void grabClosedPartyReceivedForthyDiscounts(){
+		
 	}
 
 	public void closeParty() {
