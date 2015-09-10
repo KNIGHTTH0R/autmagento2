@@ -95,8 +95,8 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.closeTheParty("10");
-		partyDetailsSteps.verifyClosedPartyAvailableActions();
+//		partyDetailsSteps.closeTheParty("10");
+//		partyDetailsSteps.verifyClosedPartyAvailableActions();
 
 	}
 }
