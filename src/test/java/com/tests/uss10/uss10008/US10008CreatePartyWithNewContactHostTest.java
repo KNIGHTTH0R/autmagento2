@@ -90,7 +90,7 @@ public class US10008CreatePartyWithNewContactHostTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -112,6 +112,6 @@ public class US10008CreatePartyWithNewContactHostTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
 	}
 }

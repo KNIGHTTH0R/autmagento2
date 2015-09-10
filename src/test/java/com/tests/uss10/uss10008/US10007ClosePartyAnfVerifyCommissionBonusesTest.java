@@ -75,7 +75,7 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10008OrderForCustomerAsPartyHostTest").get(0));
 
-		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
 
 		BigDecimal jb = PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, false);
 		System.out.println(jb);
