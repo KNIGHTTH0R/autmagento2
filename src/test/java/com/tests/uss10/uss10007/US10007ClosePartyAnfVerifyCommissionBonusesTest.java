@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -16,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -26,7 +27,6 @@ import com.tools.SoapKeys;
 import com.tools.calculation.PartyBonusCalculation;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
-import com.tools.data.frontend.ShippingModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -45,9 +45,7 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();
-	List<PartyBonusCalculationModel> partyBonusCalculationModelList;
-	ShippingModel shippingModel2;
-	ShippingModel shippingModel3;
+	List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
 	private String username, password;
 
 	@Before
@@ -75,7 +73,7 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName());
+		
 
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007OrderForCustomerAsPartyHostTest").get(0));
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007PlacePippaTermPurchaseOrderAsPartyHostTest").get(0));
@@ -83,7 +81,8 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 
-		PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, false);
+		BigDecimal jb = PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, false);
+		System.out.println(jb);
 
 	}
 
