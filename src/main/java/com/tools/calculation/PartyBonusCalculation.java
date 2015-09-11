@@ -20,6 +20,17 @@ public class PartyBonusCalculation {
 		return partyRetail.setScale(4);
 	}
 
+	public static BigDecimal calculatePartyTotal(List<PartyBonusCalculationModel> ordersList) {
+		BigDecimal partyTotal = BigDecimal.ZERO;
+
+		for (PartyBonusCalculationModel order : ordersList) {
+
+			partyTotal = partyTotal.add(BigDecimal.valueOf(Double.parseDouble(order.getTotal())));
+		}
+
+		return partyTotal.setScale(2);
+	}
+
 	public static BigDecimal calculatePartyJewelryBonus(List<PartyBonusCalculationModel> ordersList) {
 
 		BigDecimal partyRetail = calculatePartyRetail(ordersList);

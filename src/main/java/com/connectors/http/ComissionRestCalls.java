@@ -16,7 +16,7 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getPartyPerformanceInfo("14114");
+		ComissionRestCalls.getPartyPerformanceInfo("14118");
 
 	}
 

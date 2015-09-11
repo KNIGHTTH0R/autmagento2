@@ -83,7 +83,7 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
 		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
-		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyRetail(partyBonusCalculationModelList)));
+		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyTotal(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
 		expectedClosedPartyPerformanceModel.setIp("50");
 		expectedClosedPartyPerformanceModel.setIpInPayment("50");

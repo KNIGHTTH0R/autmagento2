@@ -148,7 +148,7 @@ public class PartyDetailsPage extends AbstractPage {
 		result.setNoOfOrders(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(1) td:nth-child(2)")).getText());
 		result.setRetail(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(2) td:nth-child(2)")).getText().replace(",", ".").replace(" €", ""));
 		result.setIp(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(3) td:nth-child(2)")).getText());
-		result.setIpInPayment(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(1) td:nth-child(2)")).getText());
+		result.setIpInPayment(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(4) td:nth-child(2)")).getText());
 		result.setJewelryBonus(getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(2) .price")).getText().replace(",", ".").replace(" €", ""));
 		String[] parts = getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(3)")).getText().split(":");
 		result.setFourthyDiscounts(parts[1].trim());
