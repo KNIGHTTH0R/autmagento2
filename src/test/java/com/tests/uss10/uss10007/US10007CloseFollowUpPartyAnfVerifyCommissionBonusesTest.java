@@ -82,13 +82,12 @@ public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends Bas
 
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007OrderForCustomerAsFollowUpPartyHostTest").get(0));
 
-
 		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
 		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyTotal(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setFourthyDiscounts("0");
-		expectedClosedPartyPerformanceModel.setIp("50");
-		expectedClosedPartyPerformanceModel.setIpInPayment("50");
+		expectedClosedPartyPerformanceModel.setIp(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
+		expectedClosedPartyPerformanceModel.setIpInPayment(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 
 		PrintUtils.printClosedPartyModel(expectedClosedPartyPerformanceModel);
 

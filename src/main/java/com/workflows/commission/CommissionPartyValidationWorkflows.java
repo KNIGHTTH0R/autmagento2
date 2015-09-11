@@ -3,9 +3,7 @@ package com.workflows.commission;
 import net.thucydides.core.annotations.Step;
 
 import com.tools.CustomVerification;
-import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
-import com.tools.data.soap.DBStylistModel;
 
 public class CommissionPartyValidationWorkflows {
 

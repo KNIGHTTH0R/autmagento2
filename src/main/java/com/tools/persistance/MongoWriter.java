@@ -203,6 +203,7 @@ public class MongoWriter extends MongoConnector {
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.SUBTOTAL, partyBonusCalculationModel.getTotal());
 		document.put(MongoTableKeys.PERCENTAGE, partyBonusCalculationModel.getPercent());
+		document.put(MongoTableKeys.IP_POINTS, partyBonusCalculationModel.getIp());
 		
 		table.insert(document);
 	}

@@ -271,6 +271,7 @@ public class MongoReader extends MongoConnector {
 				
 				result.setTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setPercent(MongoUtils.checkField(dbObject, MongoTableKeys.PERCENTAGE));
+				result.setIp(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
 				
 				itemList.add(result);
 			}

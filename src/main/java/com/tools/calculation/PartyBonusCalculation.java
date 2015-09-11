@@ -30,6 +30,16 @@ public class PartyBonusCalculation {
 		}
 		return partyTotal.setScale(2);
 	}
+	
+	public static int calculatePartyIp(List<PartyBonusCalculationModel> ordersList) {
+		BigDecimal partyTotal = BigDecimal.ZERO;
+		
+		for (PartyBonusCalculationModel order : ordersList) {
+			
+			partyTotal = partyTotal.add(BigDecimal.valueOf(Double.parseDouble(order.getIp())));
+		}
+		return partyTotal.setScale(2).intValue();
+	}
 
 	public static BigDecimal calculatePartyJewelryBonus(List<PartyBonusCalculationModel> ordersList) {
 
@@ -52,8 +62,8 @@ public class PartyBonusCalculation {
 			partyJb = partyJb.divide(BigDecimal.valueOf(100).setScale(4, RoundingMode.HALF_UP));
 		}
 
-		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 && ordersList.size() !=0 ? BigDecimal.valueOf(35).setScale(2, RoundingMode.HALF_UP) : partyJb
-				.setScale(2, RoundingMode.HALF_UP);
+		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 && ordersList.size() != 0 ? BigDecimal.valueOf(35).setScale(2, RoundingMode.HALF_UP) : partyJb.setScale(2,
+				RoundingMode.HALF_UP);
 	}
 
 	public static boolean isBetween(BigDecimal price, BigDecimal start, BigDecimal end) {

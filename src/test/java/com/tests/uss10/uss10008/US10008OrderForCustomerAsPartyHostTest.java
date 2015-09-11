@@ -159,6 +159,7 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		partyBonusCalculationModel.setTotal(confirmationSteps.grabConfirmationTotals().getSubTotal());
+		partyBonusCalculationModel.setIp(genProduct1.getIp());
 		partyBonusCalculationModel.setPercent("100");
 
 		confirmationSteps.agreeAndCheckout();

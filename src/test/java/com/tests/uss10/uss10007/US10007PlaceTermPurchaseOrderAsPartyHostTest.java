@@ -162,6 +162,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		partyBonusCalculationModel.setTotal(confirmationSteps.grabConfirmationTotals().getSubTotal());
+		partyBonusCalculationModel.setIp(genProduct1.getIp());
 		partyBonusCalculationModel.setPercent("100");
 
 		confirmationSteps.agreeAndCheckout();

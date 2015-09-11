@@ -3,6 +3,7 @@ package com.tools.data.frontend;
 public class PartyBonusCalculationModel {
 
 	private String total;
+	private String ip;
 	private String percent;
 
 	public String getTotal() {
@@ -19,6 +20,14 @@ public class PartyBonusCalculationModel {
 
 	public void setPercent(String percent) {
 		this.percent = percent;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 }
