@@ -1,6 +1,7 @@
 package com.tools.calculation;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import com.tools.data.frontend.PartyBonusCalculationModel;
@@ -38,20 +39,20 @@ public class PartyBonusCalculation {
 		if (isBetween(partyRetail, BigDecimal.valueOf(250), BigDecimal.valueOf(500))) {
 
 			partyJb = partyRetail.multiply(BigDecimal.valueOf(10));
-			partyJb = partyJb.divide(BigDecimal.valueOf(100));
+			partyJb = partyJb.divide(BigDecimal.valueOf(100).setScale(4, RoundingMode.HALF_UP));
 
 		} else if (isBetween(partyRetail, BigDecimal.valueOf(500), BigDecimal.valueOf(1000))) {
 
 			partyJb = partyRetail.multiply(BigDecimal.valueOf(15));
-			partyJb = partyJb.divide(BigDecimal.valueOf(100));
+			partyJb = partyJb.divide(BigDecimal.valueOf(100).setScale(4, RoundingMode.HALF_UP));
 
 		} else if (isBetween(partyRetail, BigDecimal.valueOf(1000), BigDecimal.valueOf(100000))) {
 
 			partyJb = partyRetail.multiply(BigDecimal.valueOf(20));
-			partyJb = partyJb.divide(BigDecimal.valueOf(100));
+			partyJb = partyJb.divide(BigDecimal.valueOf(100).setScale(4, RoundingMode.HALF_UP));
 		}
 
-		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 ? BigDecimal.valueOf(35).setScale(2) : partyJb.setScale(2);
+		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 ? BigDecimal.valueOf(35).setScale(2, RoundingMode.HALF_UP) : partyJb.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public static boolean isBetween(BigDecimal price, BigDecimal start, BigDecimal end) {
