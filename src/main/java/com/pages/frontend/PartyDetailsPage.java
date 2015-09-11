@@ -93,8 +93,8 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "div#wishlistGuestsFormContainer form button[class='button blue-button right clear']")
 	private WebElement addToBorrowCart;
 
-	@FindBy(css = "button[onclick*='jQuery.fancybox.close()'")
-	private WebElement backToPartyButton;
+	@FindBy(id = "fancybox-close")
+	private WebElement closeFancy;
 
 	// this is made for a single product.if the products is the expected
 	// one,select it and borrow it
@@ -123,8 +123,8 @@ public class PartyDetailsPage extends AbstractPage {
 	}
 
 	public void returnToParty() {
-		element(backToPartyButton).waitUntilVisible();
-		backToPartyButton.click();
+		element(closeFancy).waitUntilVisible();
+		closeFancy.click();
 		waitABit(2000);
 	}
 
