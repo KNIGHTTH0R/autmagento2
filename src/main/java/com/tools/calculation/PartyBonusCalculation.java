@@ -52,7 +52,8 @@ public class PartyBonusCalculation {
 			partyJb = partyJb.divide(BigDecimal.valueOf(100).setScale(4, RoundingMode.HALF_UP));
 		}
 
-		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 ? BigDecimal.valueOf(35).setScale(2, RoundingMode.HALF_UP) : partyJb.setScale(2, RoundingMode.HALF_UP);
+		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 && partyJb.compareTo(BigDecimal.ZERO) != 0 ? BigDecimal.valueOf(35).setScale(2, RoundingMode.HALF_UP) : partyJb
+				.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public static boolean isBetween(BigDecimal price, BigDecimal start, BigDecimal end) {

@@ -23,7 +23,6 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartiesListSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
-import com.tools.SoapKeys;
 import com.tools.calculation.PartyBonusCalculation;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
