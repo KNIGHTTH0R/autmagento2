@@ -47,6 +47,7 @@ import com.pages.frontend.LoginPage;
 import com.pages.frontend.LoungePage;
 import com.pages.frontend.MyBusinessPage;
 import com.pages.frontend.MyContactsListPage;
+import com.pages.frontend.PartiesListPage;
 import com.pages.frontend.PartyCreationPage;
 import com.pages.frontend.PartyDetailsPage;
 import com.pages.frontend.PomProductListPage;
@@ -386,6 +387,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public PartyCreationPage partyCreationPage() {
 		return getPages().currentPageAt(PartyCreationPage.class);
+	}
+	
+	public PartiesListPage partiesListPage() {
+		return getPages().currentPageAt(PartiesListPage.class);
 	}
 
 	public PlaceCustomerOrderFromPartyPage placeCustomerOrderFromPartyPage() {

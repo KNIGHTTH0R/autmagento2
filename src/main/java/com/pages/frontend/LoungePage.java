@@ -18,27 +18,30 @@ public class LoungePage extends AbstractPage {
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(1) > ul li:nth-child(2) a")
 	private WebElement createPartyButton;
 
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(1) > ul li:nth-child(1) a")
+	private WebElement partyListButton;
+
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(1)")
 	private WebElement stylePartiesLink;
-	
+
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(2)")
 	private WebElement myContactsLink;
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(2) > ul li:nth-child(2) a")
 	private WebElement addNewContactLink;
-	
+
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(2) > ul li:nth-child(1) a")
 	private WebElement contactsListLink;
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(3)")
 	private WebElement customerOrderLink;
-	
+
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(6)")
 	private WebElement loanedLink;
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(3) > ul li:nth-child(1) a")
 	private WebElement startOrderForCustomerLink;
-	
+
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(2) > ul > li:nth-child(6) > ul li:nth-child(1) a")
 	private WebElement borrowCartLink;
 
@@ -53,10 +56,10 @@ public class LoungePage extends AbstractPage {
 
 	@FindBy(css = "li.error-msg ul li span")
 	private WebElement errorMessageContainer;
-	
+
 	@FindBy(id = "addContact")
 	private WebElement addContact;
-	
+
 	public void clickAddContact() {
 		element(addContact).waitUntilVisible();
 		addContact.click();
@@ -91,6 +94,18 @@ public class LoungePage extends AbstractPage {
 
 	}
 
+	public void clickGoToPartyList() {
+
+		Actions builder = new Actions(getDriver());
+
+		builder.moveToElement(meinBusinessButton).build().perform();
+		builder.moveToElement(stylePartiesLink).build().perform();
+
+		element(partyListButton).waitUntilVisible();
+		partyListButton.click();
+
+	}
+
 	public void clickOrderForCustomer() {
 
 		Actions builder = new Actions(getDriver());
@@ -102,42 +117,41 @@ public class LoungePage extends AbstractPage {
 		startOrderForCustomerLink.click();
 
 	}
-	
+
 	public void clickGoToBorrowCart() {
-		
+
 		Actions builder = new Actions(getDriver());
-		
+
 		builder.moveToElement(meinBusinessButton).build().perform();
 		builder.moveToElement(loanedLink).build().perform();
-		
+
 		element(borrowCartLink).waitUntilVisible();
 		borrowCartLink.click();
-		
+
 	}
-	
+
 	public void goToToAddNewContact() {
-		
+
 		Actions builder = new Actions(getDriver());
-		
+
 		builder.moveToElement(meinBusinessButton).build().perform();
 		builder.moveToElement(myContactsLink).build().perform();
-		
+
 		element(addNewContactLink).waitUntilVisible();
 		addNewContactLink.click();
-		
+
 	}
+
 	public void goToContactsList() {
-		
+
 		Actions builder = new Actions(getDriver());
-		
+
 		builder.moveToElement(meinBusinessButton).build().perform();
 		builder.moveToElement(myContactsLink).build().perform();
-		
+
 		element(contactsListLink).waitUntilVisible();
 		contactsListLink.click();
-		
-	}
-	
 
+	}
 
 }

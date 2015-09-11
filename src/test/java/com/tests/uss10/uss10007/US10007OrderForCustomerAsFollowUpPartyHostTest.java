@@ -23,6 +23,7 @@ import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
+import com.steps.frontend.PartiesListSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -51,7 +52,7 @@ import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 @WithTag(name = "US10", type = "frontend")
 @Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
-public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
+public class US10007OrderForCustomerAsFollowUpPartyHostTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -81,6 +82,8 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
 	@Steps
 	public DashboardSteps dashboardSteps;
+	@Steps
+	public PartiesListSteps partiesListSteps;
 
 	private String username, password, customerName;
 
@@ -95,7 +98,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = ApiCalls.createZzzProductModel();
-		genProduct1.setPrice("389.00");
+		genProduct1.setPrice("189.00");
 		ApiCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();
@@ -128,15 +131,14 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us10007PlaceSecondOrderForCustomerAsPartyHostTest() {
+	public void us10007OrderForCustomerAsFollowUpPartyHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToProfile();
-
-		customerRegistrationSteps.navigate(urlModel.getUrl());
+		headerSteps.goToPartieList();
+		partiesListSteps.goToFirstParty();
 		partyDetailsSteps.orderForCustomer();
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
@@ -148,7 +150,6 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		hostCartSteps.clickAllOnThisDate();
 		hostCartSteps.clickGoToShipping();
 
 		shippingPartySectionSteps.checkItemNotReceivedYet();
