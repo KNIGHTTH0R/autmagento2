@@ -27,7 +27,6 @@ public class PartyBonusCalculation {
 
 			partyTotal = partyTotal.add(BigDecimal.valueOf(Double.parseDouble(order.getTotal())));
 		}
-
 		return partyTotal.setScale(2);
 	}
 

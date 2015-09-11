@@ -30,7 +30,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US10", type = "frontend")
- @Story(Application.StyleParty.class)
+@Story(Application.StyleParty.class)
 @RunWith(ThucydidesRunner.class)
 public class US10007CreateFolowUpPartyForActivePartyTest extends BaseTest {
 	@Steps
@@ -43,7 +43,7 @@ public class US10007CreateFolowUpPartyForActivePartyTest extends BaseTest {
 	public PartyCreationSteps partyCreationSteps;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
-	
+
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
@@ -62,7 +62,7 @@ public class US10007CreateFolowUpPartyForActivePartyTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
-			
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -91,7 +91,7 @@ public class US10007CreateFolowUpPartyForActivePartyTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.createFolowUpParty();
-		partyCreationSteps.fillPartyDetailsForCustomerHost(customerName);		
+		partyCreationSteps.fillPartyDetailsForCustomerHost(customerName);
 		partyDetailsSteps.verifyThatFolowUpPartyAppearsOnPartyDetailsPage(customerName);
 
 	}
