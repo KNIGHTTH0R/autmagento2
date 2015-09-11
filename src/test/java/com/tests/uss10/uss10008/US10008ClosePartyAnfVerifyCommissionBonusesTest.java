@@ -29,6 +29,7 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.commission.CommissionPartyValidationWorkflows;
 
 @WithTag(name = "US10", type = "frontend")
@@ -85,6 +86,7 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyRetail(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
 		expectedClosedPartyPerformanceModel.setIp("50");
+		PrintUtils.printClosedPartyModel(expectedClosedPartyPerformanceModel);
 
 	}
 
@@ -100,7 +102,7 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		partyDetailsSteps.closeTheParty("10");
 		partyDetailsSteps.returnToParty();
 		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
-
+		PrintUtils.printClosedPartyModel(grabbedClosedPartyPerformanceModel);
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
 
 	}

@@ -19,6 +19,7 @@ import com.tools.data.frontend.BorrowCartTotalsModel;
 import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.DykscSeachModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
@@ -361,6 +362,16 @@ public class PrintUtils {
 		System.out.println(dataModel.getHomeTown());
 		System.out.println(dataModel.getPhoneNumber());
 		System.out.println(dataModel.getCountryName());
+	}
+	
+	public static void printClosedPartyModel(ClosedPartyPerformanceModel model) {
+		System.out.println("---- PRINT Adress Model ----");
+		System.out.println(model.getFourthyDiscounts());
+		System.out.println(model.getIp());
+		System.out.println(model.getIpInPayment());
+		System.out.println(model.getJewelryBonus());
+		System.out.println(model.getNoOfOrders());
+		System.out.println(model.getRetail());
 	}
 
 	public static void printEmailList(List<EmailModel> emailList) {
