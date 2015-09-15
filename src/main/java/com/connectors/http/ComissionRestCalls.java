@@ -16,7 +16,7 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getPartyPerformanceInfo("14118");
+		ComissionRestCalls.getPartyPerformanceInfo("14177");
 
 	}
 
@@ -121,6 +121,13 @@ public class ComissionRestCalls {
 		commissionPartyModel.setDeletedAt(res.getDeletedAt());
 
 		PrintUtils.printCommisionPartyModel(commissionPartyModel);
+
+		return unparsedResponse;
+	}
+
+	public static String getTeamPerformanceInfo(String stylistId) throws Exception {
+
+		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.TEAM_PERFORMANCE_SUFFIX + stylistId + composeAuthenticationSuffix());
 
 		return unparsedResponse;
 	}

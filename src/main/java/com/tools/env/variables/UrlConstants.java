@@ -53,6 +53,7 @@ public class UrlConstants {
 	public static final String COMMISION_WEB_BASE = "http://commission-staging-aut.pippajean.com/api/";
 	public static final String COMMISION_STYLIST_SUFFIX = "stylist.json/";
 	public static final String COMMISION_PARTY_SUFFIX = "party.json/";
+	public static final String TEAM_PERFORMANCE_SUFFIX = "performance-team.json/";
 
 
 }

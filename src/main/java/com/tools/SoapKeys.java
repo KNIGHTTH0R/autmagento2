@@ -102,6 +102,7 @@ public class SoapKeys {
 	public static final String FILTERS = "filters";
 	public static final String COMPLEX_FILTER = "complex_filter";
 	
-	
+	//getOrdersList
+	public static final String ORDERS_LIST = "salesOrderListRequestParam";
 
 }

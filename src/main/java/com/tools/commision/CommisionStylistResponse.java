@@ -3,7 +3,6 @@ package com.tools.commision;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class CommisionStylistResponse {
-
 	private String status;
 	private StylistBody body;
 	@JsonIgnore
