@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
@@ -81,6 +82,18 @@ public class PartyDetailsBackendPage extends AbstractPage {
 		element(successMessage).waitUntilVisible();
 		Assert.assertTrue("Failure: The mesage should be " + ContextConstants.BOUNUS_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(), successMessage.getText().contains(ContextConstants.BOUNUS_SUCCESS_MESSAGE));
 	}
+	
+	public PartyBackendPerformanceModel getPartyBackendPerformance(){
+		PartyBackendPerformanceModel partyModel= new PartyBackendPerformanceModel();
+		partyModel.setNoOfOrders(getDriver().findElement(By.cssSelector("#performance tr:nth-child(1) td:nth-child(2)")).getText().trim());
+		partyModel.setRetail(getDriver().findElement(By.cssSelector("#performance tr:nth-child(2) td:nth-child(2)")).getText().trim().replace("€", ""));
+		partyModel.setIp(getDriver().findElement(By.cssSelector("#performance tr:nth-child(5) td:nth-child(2)")).getText().trim());
+		partyModel.setJewelryBonus(getDriver().findElement(By.cssSelector("#party_hostess_reward tr:nth-child(1) td:nth-child(2)")).getText().trim().replace("€", ""));
+	    partyModel.setFourthyDiscounts(getDriver().findElement(By.cssSelector("#party_hostess_reward tr:nth-child(2) td:nth-child(2)")).getText().trim());
+	    
+	    return partyModel;
+	}
+	
 	
 
 }

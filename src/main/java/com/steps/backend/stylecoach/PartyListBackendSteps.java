@@ -2,6 +2,7 @@ package com.steps.backend.stylecoach;
 
 import net.thucydides.core.annotations.Step;
 
+import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.requirements.AbstractSteps;
 
 public class PartyListBackendSteps extends AbstractSteps {
@@ -24,6 +25,11 @@ public class PartyListBackendSteps extends AbstractSteps {
 		partyListBackendPage().typeIdTo(searchTerm);
 		partyListBackendPage().clickOnSearch();
 		partyListBackendPage().openPartyDetails(searchTerm);
+	}
+
+	@Step
+	public PartyBackendPerformanceModel getPartyBackendPerformance() {
+		return partyDetailsBackendPage().getPartyBackendPerformance();
 	}
 
 }

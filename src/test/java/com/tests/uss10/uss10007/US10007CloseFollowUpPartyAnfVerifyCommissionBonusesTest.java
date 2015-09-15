@@ -31,7 +31,7 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
-import com.workflows.commission.CommissionPartyValidationWorkflows;
+import com.workflows.commission.CommissionPartyPerformanceValidationWorkflows;
 
 @WithTag(name = "US10", type = "frontend")
 @Story(Application.StyleParty.class)
@@ -45,7 +45,7 @@ public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends Bas
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	CommissionPartyValidationWorkflows commissionPartyValidationWorkflows;
+	CommissionPartyPerformanceValidationWorkflows commissionPartyValidationWorkflows;
 	@Steps
 	public PartiesListSteps partiesListSteps;
 	@Steps

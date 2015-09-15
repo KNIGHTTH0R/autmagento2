@@ -58,16 +58,16 @@ public class MongoTableKeys {
 	// Kobo code
 	public static final String KOBO_MODEL = "KoboModel";
 	public static final String KOBO_CODE = "KoboCode";
-	
-	//increment id
-	
+
+	// increment id
+
 	public static final String INCREMENT_ID_TABLE = "IncrementIdTable";
 	public static final String INCREMENT_ID = "IncrementId";
-	
-	//party bonus calculation model
+
+	// party bonus calculation model
 	public static final String PARTY_BONUS_CALCULATION_MODEL = "PartyBonusCalculationModel";
 	public static final String PERCENTAGE = "Percentage";
-	
+
 	// OrderModel
 	public static final String ORDER_MODEL = "OrderModel";
 	public static final String ORDER_ID = "orderId";
@@ -133,6 +133,15 @@ public class MongoTableKeys {
 	// URLModel
 	public static final String URL_MODEL = "UrlModel";
 	public static final String URL_PATH = "url:";
+
+	// ClosedPartyPerformanceModel
+
+	public static final String CLOSED_PARTY_PERFORMANCE_MODEL = "closedPartyPerformanceModel";
+	public static final String NO_OF_ORDERS = "closedPartyPerformanceModel";
+	public static final String RETAIL = "closedPartyPerformanceModel";
+	public static final String IP = "closedPartyPerformanceModel";
+	public static final String JB = "closedPartyPerformanceModel";
+	public static final String FOURTHY_DISCOUNT = "closedPartyPerformanceModel";
 
 	// subscriber model
 	public static final String SUBSCRIBER_MODEL = "SubscriberModel";

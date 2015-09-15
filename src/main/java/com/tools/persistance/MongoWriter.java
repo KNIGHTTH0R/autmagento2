@@ -20,6 +20,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
@@ -404,6 +405,21 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.NAME, urlModel.getName());
 		document.put(MongoTableKeys.URL_PATH, urlModel.getUrl());
 
+		table.insert(document);
+	}
+	public static void saveClosedPartyPerformanceModel(ClosedPartyPerformanceModel model, String testName) {
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.CLOSED_PARTY_PERFORMANCE_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		
+		document.put(MongoTableKeys.NO_OF_ORDERS, model.getNoOfOrders());
+		document.put(MongoTableKeys.RETAIL, model.getRetail());
+		document.put(MongoTableKeys.IP, model.getIp());
+		document.put(MongoTableKeys.JB,model.getJewelryBonus());
+		document.put(MongoTableKeys.FORTY_DISCOUNTS, model.getFourthyDiscounts());
+		
 		table.insert(document);
 	}
 

@@ -1,20 +1,20 @@
-package com.workflows.commission;
+package com.workflows.backend;
 
 import net.thucydides.core.annotations.Step;
 
 import com.tools.CustomVerification;
+import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 
-public class CommissionPartyValidationWorkflows {
+public class BackendPartyPerformanceValidationWorkflows {
 
 	@Step
-	public void validateClosedPartyPerformance(ClosedPartyPerformanceModel grabbedModel, ClosedPartyPerformanceModel expectedModel) {
+	public void validateClosedPartyPerformance(ClosedPartyPerformanceModel grabbedModel, PartyBackendPerformanceModel expectedModel) {
 
 		verifyClosedPartyJewelryBonus(grabbedModel.getJewelryBonus(), expectedModel.getJewelryBonus());
 		verifyClosedPartyJFourthyDiscount(grabbedModel.getFourthyDiscounts(), expectedModel.getFourthyDiscounts());
 		verifyClosedPartyNoOfOrders(grabbedModel.getNoOfOrders(), expectedModel.getNoOfOrders());
 		verifyClosedPartyIp(grabbedModel.getIp(), expectedModel.getIp());
-		verifyClosedPartyInPaymentIp(grabbedModel.getIpInPayment(), expectedModel.getIpInPayment());
 		verifyClosedPartyRetail(grabbedModel.getRetail(), expectedModel.getRetail());
 	}
 

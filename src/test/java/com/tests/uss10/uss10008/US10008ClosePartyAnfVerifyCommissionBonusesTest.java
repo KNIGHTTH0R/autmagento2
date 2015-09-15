@@ -13,6 +13,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,9 +29,10 @@ import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
-import com.workflows.commission.CommissionPartyValidationWorkflows;
+import com.workflows.commission.CommissionPartyPerformanceValidationWorkflows;
 
 @WithTag(name = "US10", type = "frontend")
 @Story(Application.StyleParty.class)
@@ -44,7 +46,7 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	CommissionPartyValidationWorkflows commissionPartyValidationWorkflows;
+	CommissionPartyPerformanceValidationWorkflows commissionPartyValidationWorkflows;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	public static UrlModel urlModel = new UrlModel();
@@ -105,6 +107,11 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
 		PrintUtils.printClosedPartyModel(grabbedClosedPartyPerformanceModel);
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
-
 	}
+
+	@After
+	public void tearDown() {
+		MongoWriter.saveClosedPartyPerformanceModel(expectedClosedPartyPerformanceModel, getClass().getSimpleName());
+	}
+
 }
