@@ -21,6 +21,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
@@ -257,22 +258,23 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+
 	public static List<PartyBonusCalculationModel> grabPartyBonusCalculationModel(String testName) {
 		DBObject dbObject = null;
 		List<PartyBonusCalculationModel> itemList = new ArrayList<PartyBonusCalculationModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.PARTY_BONUS_CALCULATION_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				PartyBonusCalculationModel result = new PartyBonusCalculationModel();
 				dbObject = cursor.next();
-				
+
 				result.setTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setPercent(MongoUtils.checkField(dbObject, MongoTableKeys.PERCENTAGE));
 				result.setIp(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
-				
+
 				itemList.add(result);
 			}
 		} finally {
@@ -792,6 +794,34 @@ public class MongoReader extends MongoConnector {
 		return itemList;
 
 	}
+	public static List<ClosedPartyPerformanceModel> grabClosedPartyPerformanceModel(String testName) {
+		DBObject dbObject = null;
+		List<ClosedPartyPerformanceModel> itemList = new ArrayList<ClosedPartyPerformanceModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CLOSED_PARTY_PERFORMANCE_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				ClosedPartyPerformanceModel result = new ClosedPartyPerformanceModel();
+				dbObject = cursor.next();
+				
+				result.setNoOfOrders(MongoUtils.checkField(dbObject, MongoTableKeys.NO_OF_ORDERS));
+				result.setRetail(MongoUtils.checkField(dbObject, MongoTableKeys.RETAIL));
+				result.setIp(MongoUtils.checkField(dbObject, MongoTableKeys.IP));
+				result.setJewelryBonus(MongoUtils.checkField(dbObject, MongoTableKeys.JB));
+				result.setFourthyDiscounts(MongoUtils.checkField(dbObject, MongoTableKeys.FORTY_DISCOUNTS));
+				
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+		
+	}
 
 	public static String grabKoboModel(String testName) {
 		DBObject dbObject = null;
@@ -842,4 +872,6 @@ public class MongoReader extends MongoConnector {
 		return incrementid;
 
 	}
+
+
 }
