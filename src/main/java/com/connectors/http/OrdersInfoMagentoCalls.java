@@ -1,6 +1,8 @@
 package com.connectors.http;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,13 @@ import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 
 import com.tools.SoapKeys;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.env.constants.SoapConstants;
 import com.tools.env.variables.UrlConstants;
-import com.tools.persistance.MongoReader;
+import com.tools.utils.DateUtils;
 
 /**
  * @author mihaibarta
@@ -26,12 +29,33 @@ import com.tools.persistance.MongoReader;
 
 public class OrdersInfoMagentoCalls {
 
-	public static List<DBOrderModel> getOrdersList(String stylistId, String createdStartDate, String createdEndDate) {
+	public static BigDecimal calculateTotalIpOnPreviousMonth(String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
+		BigDecimal totalMonthIp = BigDecimal.ZERO;
+
+		List<DBOrderModel> allOrdersList = getOrdersList(stylistId, createdStartDate);
+		for (DBOrderModel order : allOrdersList) {
+			System.out.println(order.getStatus());
+			if (!isOrderIncompatibleForIpClaculation(order, createdStartDate, createdEndDate)) {
+
+				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+			}
+		}
+		System.out.println(String.valueOf(totalMonthIp));
+		return totalMonthIp;
+	}
+
+	private static boolean isOrderIncompatibleForIpClaculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
+
+		return !order.getTotalIpRefunded().contentEquals("0") || !order.getStatus().contentEquals("complete")
+				|| !DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd hh:mm:ss");
+	}
+
+	public static List<DBOrderModel> getOrdersList(String stylistId, String createdStartDate) {
 
 		List<DBOrderModel> stylistList = new ArrayList<DBOrderModel>();
 
 		try {
-			SOAPMessage response = soapGetOrdersList(stylistId, createdStartDate, createdEndDate);
+			SOAPMessage response = soapGetOrdersList(stylistId, createdStartDate);
 			System.out.println(response);
 			try {
 				stylistList = extractOrderData(response);
@@ -48,7 +72,7 @@ public class OrdersInfoMagentoCalls {
 		return stylistList;
 	}
 
-	public static SOAPMessage soapGetOrdersList(String stylistId, String createdStartDate, String createdEndDate) throws SOAPException, IOException {
+	public static SOAPMessage soapGetOrdersList(String stylistId, String createdStartDate) throws SOAPException, IOException {
 		String sessID = HttpSoapConnector.performLogin();
 		System.out.println("Sesion id :" + sessID);
 
@@ -57,13 +81,13 @@ public class OrdersInfoMagentoCalls {
 		// SOAPMessage soapResponse = soapConnection.call(getOrdersList(sessID,
 		// stylistId, createdStartDate, createdEndDate),
 		// MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getOrdersList(sessID, stylistId, createdStartDate, createdEndDate), "https://admin-staging-aut.pippajean.com/"
-				+ UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection
+				.call(getOrdersListRequest(sessID, stylistId, createdStartDate), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
 
-	private static SOAPMessage getOrdersList(String ssID, String stylistId, String createdStartDate, String createdEndDate) throws SOAPException, IOException {
+	private static SOAPMessage getOrdersListRequest(String ssID, String stylistId, String createdStartDate) throws SOAPException, IOException {
 		SOAPMessage soapMessage = HttpSoapConnector.createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
@@ -92,16 +116,17 @@ public class OrdersInfoMagentoCalls {
 		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
 		value2B.addTextNode(createdStartDate);
 
+		// testing purpose
 		// SOAPElement complexObjectArrayC =
 		// complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
 		// SOAPElement keyC = complexObjectArrayC.addChildElement(SoapKeys.KEY);
-		// keyC.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
+		// keyC.addTextNode("increment_id");
 		// SOAPElement valueC =
 		// complexObjectArrayC.addChildElement(SoapKeys.VALUE);
 		// SOAPElement key2C = valueC.addChildElement(SoapKeys.KEY);
-		// key2C.addTextNode(SoapConstants.LESS_THAN);
+		// key2C.addTextNode(SoapConstants.EQUAL);
 		// SOAPElement value2C = valueC.addChildElement(SoapKeys.VALUE);
-		// value2C.addTextNode(createdEndDate);
+		// value2C.addTextNode("staging-int00005854");
 
 		soapMessage.saveChanges();
 
@@ -114,48 +139,63 @@ public class OrdersInfoMagentoCalls {
 
 	private static List<DBOrderModel> extractOrderData(SOAPMessage response) throws Exception {
 
-		List<DBOrderModel> stylistModelList = new ArrayList<DBOrderModel>();
+		List<DBOrderModel> orderModelList = new ArrayList<DBOrderModel>();
 
-		NodeList stylistList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
-		for (int i = 0; i < stylistList.getLength(); i++) {
-			DBOrderModel model = new DBOrderModel();
-			NodeList childNodes = stylistList.item(i).getChildNodes();
-			for (int j = 0; j < childNodes.getLength(); j++) {
+		NodeList orderList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
+		for (int i = 0; i < orderList.getLength(); i++) {
+			if (orderList.item(i).getParentNode().getNodeName().equalsIgnoreCase("result")) {
+				DBOrderModel model = new DBOrderModel();
 
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("increment_id")) {
-					model.setIncrementId(childNodes.item(j).getTextContent());
+				model.setTotalIp("0");
+				model.setTotalIpRefunded("0");
+
+				NodeList childNodes = orderList.item(i).getChildNodes();
+				for (int j = 0; j < childNodes.getLength(); j++) {
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("increment_id")) {
+						model.setIncrementId(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
+						model.setStylistId(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_ip")) {
+						model.setTotalIp(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_ip_refunded")) {
+						model.setTotalIpRefunded(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_type")) {
+						model.setOrderType(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("cart_type")) {
+						model.setCartType(childNodes.item(j).getTextContent());
+
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("status_history")) {
+
+						Node firstStatus = childNodes.item(j).getChildNodes().item(1);
+
+						NodeList firstStatusNodes = firstStatus.getChildNodes();
+						for (int k = 0; k < firstStatusNodes.getLength(); k++) {
+							if (firstStatusNodes.item(k).getNodeName().equalsIgnoreCase("created_at")) {
+								model.setPaidAt(firstStatusNodes.item(k).getTextContent());
+							}
+							if (firstStatusNodes.item(k).getNodeName().equalsIgnoreCase("status")) {
+								model.setStatus(firstStatusNodes.item(k).getTextContent());
+							}
+						}
+					}
+
 				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
-					model.setCreatedAt(childNodes.item(j).getTextContent());
-				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
-					model.setStylistId(childNodes.item(j).getTextContent());
-				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_ip")) {
-					model.setTotalIp(childNodes.item(j).getTextContent());
-				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_ip_refunded")) {
-					model.setTotalIpRefunded(childNodes.item(j).getTextContent());
-				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_type")) {
-					model.setOrderType(childNodes.item(j).getTextContent());
-				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("cart_type")) {
-					model.setCartType(childNodes.item(j).getTextContent());
-				}
-				if (childNodes.item(j).getNodeName().equalsIgnoreCase("status")) {
-					model.setStatus(childNodes.item(j).getTextContent());
-				}
+				orderModelList.add(model);
 			}
-			stylistModelList.add(model);
 		}
-		return stylistModelList;
+		System.out.println("size " + orderModelList.size());
+		return orderModelList;
 
 	}
 
-	public static void main(String args[]) {
-		List<DBOrderModel> list = OrdersInfoMagentoCalls.getOrdersList("1835", "2015-09-14", "2015-09-14");
-		System.out.println(list.get(0).getIncrementId());
+	public static void main(String args[]) throws NumberFormatException, ParseException {
+		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-01 23:59:59");
 	}
-
 }

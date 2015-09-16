@@ -1,6 +1,7 @@
 package com.tools.utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,6 +44,12 @@ public class DateUtils {
 
 	public static String getTimestamp() {
 		return String.valueOf(System.currentTimeMillis() / 1000);
+	}
+
+	public static boolean isDateBeetween(String createdAt, String startDate, String endDate, String format) throws ParseException {
+		DateFormat df = new SimpleDateFormat(format);
+
+		return !(df.parse(createdAt).before(df.parse(startDate)) || df.parse(createdAt).after(df.parse(endDate)));
 	}
 
 }

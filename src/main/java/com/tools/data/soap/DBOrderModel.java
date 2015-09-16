@@ -5,6 +5,7 @@ public class DBOrderModel {
 	private String incrementId;
 	private String stylistId;
 	private String createdAt;
+	private String paidAt;
 	private String status;
 	private String orderType;
 	private String cartType;
@@ -82,6 +83,14 @@ public class DBOrderModel {
 
 	public void setGrandTotal(String grandTotal) {
 		this.grandTotal = grandTotal;
+	}
+
+	public String getPaidAt() {
+		return paidAt;
+	}
+
+	public void setPaidAt(String paidAt) {
+		this.paidAt = paidAt;
 	}
 
 }
