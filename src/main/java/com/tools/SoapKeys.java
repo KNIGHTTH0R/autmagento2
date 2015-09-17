@@ -104,5 +104,7 @@ public class SoapKeys {
 	
 	//getOrdersList
 	public static final String ORDERS_LIST = "salesOrderListRequestParam";
+	//getCreditMemosList
+	public static final String CREDIT_MEMOS_LIST = "salesOrderCreditmemoListRequestParam";
 
 }

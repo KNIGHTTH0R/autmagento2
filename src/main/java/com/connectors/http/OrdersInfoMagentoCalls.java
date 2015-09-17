@@ -31,23 +31,29 @@ public class OrdersInfoMagentoCalls {
 
 	public static BigDecimal calculateTotalIpOnPreviousMonth(String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
-
+		int ordersNumber = 0;
 		List<DBOrderModel> allOrdersList = getOrdersList(stylistId, createdStartDate);
 		for (DBOrderModel order : allOrdersList) {
-			System.out.println(order.getStatus());
-			if (!isOrderIncompatibleForIpClaculation(order, createdStartDate, createdEndDate)) {
 
+			if (!isOrderIncompatibleForIpClaculation(order, createdStartDate, createdEndDate)) {
+				ordersNumber++;
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
 		}
-		System.out.println(String.valueOf(totalMonthIp));
+		System.out.println("total: " + String.valueOf(totalMonthIp));
+		System.out.println("orders number: " + ordersNumber);
 		return totalMonthIp;
 	}
 
 	private static boolean isOrderIncompatibleForIpClaculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
 
-		return !order.getTotalIpRefunded().contentEquals("0") || !order.getStatus().contentEquals("complete")
-				|| !DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd hh:mm:ss");
+		return !isPayed(order) || !DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd hh:mm:ss");
+	}
+
+	private static boolean isPayed(DBOrderModel model) {
+
+		return model.getStatus().contentEquals("complete") || model.getStatus().contentEquals("payment_complete") || model.getStatus().contentEquals("closed");
+
 	}
 
 	public static List<DBOrderModel> getOrdersList(String stylistId, String createdStartDate) {
@@ -190,12 +196,11 @@ public class OrdersInfoMagentoCalls {
 				orderModelList.add(model);
 			}
 		}
-		System.out.println("size " + orderModelList.size());
 		return orderModelList;
 
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-01 23:59:59");
+		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
 	}
 }
