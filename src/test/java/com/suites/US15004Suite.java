@@ -25,16 +25,16 @@ import com.tests.uss15.us15004.US15004VerifyDashboardAndJbHistoryMemoAppliedOrde
 //	US15004CancelOrderTest.class,
 //	US15004VerifyDashboardAndJbHistoryCancelledOrderTest.class,
 	US15004CheckSubscriberMagentoConfigTest.class,
-	US15004CheckMailchimpConfigWithZeroRevenuesTest.class,
+//	US15004CheckMailchimpConfigWithZeroRevenuesTest.class,
 	US15004CompleteOrderTest.class,
 	US15004VerifyDashboardAndJbHistoryCompleteOrderTest.class,	
-	US15004CheckMailchimpConfigTest.class,
+//	US15004CheckMailchimpConfigTest.class,
 	US15004ApplyCreditMemoOnOrderTest.class,
 	US15004VerifyDashboardAndJbHistoryMemoAppliedOrderTest.class,
-	US15004CheckMailchimpConfigWithZeroRevenuesTest.class,
+//	US15004CheckMailchimpConfigWithZeroRevenuesTest.class,
 	US15004CancelCreditMemoTest.class,
 	US15004VerifyDashboardAndJbHistoryAfterCmOrderTest.class,
-	US15004CheckMailchimpConfigTest.class,
+//	US15004CheckMailchimpConfigTest.class,
 	
 	
 })
