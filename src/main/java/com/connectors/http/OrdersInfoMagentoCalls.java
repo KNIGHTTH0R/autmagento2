@@ -34,8 +34,7 @@ public class OrdersInfoMagentoCalls {
 		int ordersNumber = 0;
 		List<DBOrderModel> allOrdersList = getOrdersList(stylistId, createdStartDate);
 		for (DBOrderModel order : allOrdersList) {
-
-			if (!isOrderIncompatibleForIpClaculation(order, createdStartDate, createdEndDate)) {
+			if (isOrderCompatibleForIpClaculation(order, createdStartDate, createdEndDate)) {
 				ordersNumber++;
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
@@ -45,15 +44,15 @@ public class OrdersInfoMagentoCalls {
 		return totalMonthIp;
 	}
 
-	private static boolean isOrderIncompatibleForIpClaculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
-
-		return !isPayed(order) || !DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd hh:mm:ss");
+	private static boolean isOrderCompatibleForIpClaculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
+		return isPayed(order)
+				&& DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd HH:mm:ss")
+				&& DateUtils.isDateBeetween(order.getCreatedAt(), createdStartDate, DateUtils.getLastDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
+						"yyyy-MM-dd HH:mm:ss");
 	}
 
 	private static boolean isPayed(DBOrderModel model) {
-
 		return model.getStatus().contentEquals("complete") || model.getStatus().contentEquals("payment_complete") || model.getStatus().contentEquals("closed");
-
 	}
 
 	public static List<DBOrderModel> getOrdersList(String stylistId, String createdStartDate) {
@@ -153,7 +152,6 @@ public class OrdersInfoMagentoCalls {
 				DBOrderModel model = new DBOrderModel();
 
 				model.setTotalIp("0");
-				model.setTotalIpRefunded("0");
 
 				NodeList childNodes = orderList.item(i).getChildNodes();
 				for (int j = 0; j < childNodes.getLength(); j++) {
@@ -161,21 +159,20 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("increment_id")) {
 						model.setIncrementId(childNodes.item(j).getTextContent());
 					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
+						model.setCreatedAt(childNodes.item(j).getTextContent());
+					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
 						model.setStylistId(childNodes.item(j).getTextContent());
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_ip")) {
 						model.setTotalIp(childNodes.item(j).getTextContent());
 					}
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_ip_refunded")) {
-						model.setTotalIpRefunded(childNodes.item(j).getTextContent());
-					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_type")) {
 						model.setOrderType(childNodes.item(j).getTextContent());
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("cart_type")) {
 						model.setCartType(childNodes.item(j).getTextContent());
-
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("status_history")) {
 
@@ -191,16 +188,14 @@ public class OrdersInfoMagentoCalls {
 							}
 						}
 					}
-
 				}
 				orderModelList.add(model);
 			}
 		}
 		return orderModelList;
-
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
+		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-01 00:00:00");
 	}
 }

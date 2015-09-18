@@ -25,6 +25,21 @@ public class DateUtils {
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
 
+	public static String getLastDayOfAGivenMonth(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.MONTH, 1);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.DATE, -1);
+		Date lastDayOfMonth = calendar.getTime();
+		DateFormat sdf = new SimpleDateFormat(formatString);
+
+		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+
 	public static String getCurrentDate(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
 		Date today = new Date();
@@ -50,6 +65,10 @@ public class DateUtils {
 		DateFormat df = new SimpleDateFormat(format);
 
 		return !(df.parse(createdAt).before(df.parse(startDate)) || df.parse(createdAt).after(df.parse(endDate)));
+	}
+
+	public static void main(String[] args) throws ParseException {
+		System.out.println(DateUtils.getLastDayOfAGivenMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 	}
 
 }

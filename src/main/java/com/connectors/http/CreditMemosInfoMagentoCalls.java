@@ -28,50 +28,30 @@ import com.tools.utils.DateUtils;
 
 public class CreditMemosInfoMagentoCalls {
 
-	// TODO combine this 2 methods to return a single result
-	public static BigDecimal calculateTotalIpsToBeDeductedOnPreviousMonth(String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException,
-			ParseException {
+	public static BigDecimal calculateTotalIpsForCreditMemos(String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
+
 		BigDecimal totalMonthRefundedIp = BigDecimal.ZERO;
-		int ordersNumber = 0;
 		List<DBCreditMemoModel> allOrdersList = getCreditMemosList(stylistId, createdStartDate);
+
 		for (DBCreditMemoModel order : allOrdersList) {
 
-			if (!isOrderIncompatibleForDecreasingIp(order, createdStartDate, createdEndDate)) {
-				ordersNumber++;
+			if (isOrderCompatibleForDecreasingIp(order, createdStartDate, createdEndDate)) {
+				totalMonthRefundedIp = totalMonthRefundedIp.subtract(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
+			}
+			if (isOrderCompatibleForIncreasingIp(order, createdStartDate, createdEndDate)) {
 				totalMonthRefundedIp = totalMonthRefundedIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
 			}
 		}
-
-		System.out.println(ordersNumber);
-		System.out.println("total: " + String.valueOf(totalMonthRefundedIp.negate()));
-		return totalMonthRefundedIp.negate();
-	}
-
-	public static BigDecimal calculateTotalIpsToBeAddedOnPreviousMonth(String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException,
-			ParseException {
-		BigDecimal totalMonthRefundedIp = BigDecimal.ZERO;
-		int ordersNumber = 0;
-		List<DBCreditMemoModel> allOrdersList = getCreditMemosList(stylistId, createdStartDate);
-		for (DBCreditMemoModel order : allOrdersList) {
-
-			if (!isOrderIncompatibleForIncreasingIp(order, createdStartDate, createdEndDate)) {
-				ordersNumber++;
-				totalMonthRefundedIp = totalMonthRefundedIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
-			}
-		}
-		System.out.println(ordersNumber);
 		System.out.println("total: " + String.valueOf(totalMonthRefundedIp));
 		return totalMonthRefundedIp;
 	}
 
-	private static boolean isOrderIncompatibleForIncreasingIp(DBCreditMemoModel order, String createdStartDate, String createdEndDate) throws ParseException {
-
-		return !order.getState().contentEquals("3") || !DateUtils.isDateBeetween(order.getCreatedAt(), createdStartDate, createdEndDate, "yyyy-MM-dd hh:mm:ss");
+	private static boolean isOrderCompatibleForIncreasingIp(DBCreditMemoModel order, String createdStartDate, String createdEndDate) throws ParseException {
+		return order.getState().contentEquals("3") && DateUtils.isDateBeetween(order.getCreatedAt(), createdStartDate, createdEndDate, "yyyy-MM-dd HH:mm:ss");
 	}
 
-	private static boolean isOrderIncompatibleForDecreasingIp(DBCreditMemoModel order, String createdStartDate, String createdEndDate) throws ParseException {
-
-		return !DateUtils.isDateBeetween(order.getCreatedAt(), createdStartDate, createdEndDate, "yyyy-MM-dd hh:mm:ss");
+	private static boolean isOrderCompatibleForDecreasingIp(DBCreditMemoModel order, String createdStartDate, String createdEndDate) throws ParseException {
+		return DateUtils.isDateBeetween(order.getCreatedAt(), createdStartDate, createdEndDate, "yyyy-MM-dd HH:mm:ss");
 	}
 
 	public static List<DBCreditMemoModel> getCreditMemosList(String stylistId, String createdStartDate) {
@@ -92,7 +72,6 @@ public class CreditMemosInfoMagentoCalls {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return creditMemoList;
 	}
 
@@ -166,7 +145,6 @@ public class CreditMemosInfoMagentoCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_ip_refunded")) {
 					model.setTotalIpRefunded(childNodes.item(j).getTextContent());
 				}
-
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
 					model.setCreatedAt(childNodes.item(j).getTextContent());
 				}
@@ -174,13 +152,10 @@ public class CreditMemosInfoMagentoCalls {
 			credtMemoModelList.add(model);
 		}
 		return credtMemoModelList;
-
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-		CreditMemosInfoMagentoCalls.calculateTotalIpsToBeDeductedOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
-		System.out.println("---------------------------------------------------------------------------------------------------");
-		CreditMemosInfoMagentoCalls.calculateTotalIpsToBeAddedOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
+		CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
 	}
 
 }

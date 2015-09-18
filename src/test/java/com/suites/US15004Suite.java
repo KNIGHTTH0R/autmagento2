@@ -22,8 +22,8 @@ import com.tests.uss15.us15004.US15004VerifyDashboardAndJbHistoryMemoAppliedOrde
 	
 	US15004OrderForCustomerTest.class,
 	US15004ConfirmCustomerTest.class,
-	US15004CancelOrderTest.class,
-	US15004VerifyDashboardAndJbHistoryCancelledOrderTest.class,
+//	US15004CancelOrderTest.class,
+//	US15004VerifyDashboardAndJbHistoryCancelledOrderTest.class,
 	US15004CheckSubscriberMagentoConfigTest.class,
 	US15004CheckMailchimpConfigWithZeroRevenuesTest.class,
 	US15004CompleteOrderTest.class,
