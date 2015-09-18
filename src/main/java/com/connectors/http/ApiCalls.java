@@ -255,7 +255,7 @@ public class ApiCalls {
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
 		product.setStockData(stockModel);
 
-		product.setJewerlyBonusValue("50");
+		product.setJewerlyBonusValue("50.00");
 		product.setJewelryBonusCart("3,4");
 
 		return product;
