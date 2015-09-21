@@ -25,6 +25,25 @@ public class DateUtils {
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
 
+	public static String getLastDayOfPreviousMonth(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, -1);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.DATE, -1);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 23, 59, 59);
+		Date lastDayOfMonth = calendar.getTime();
+		DateFormat sdf = new SimpleDateFormat(formatString);
+
+		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+
 	public static String getLastDayOfAGivenMonth(String dateString, String formatString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
 		Date date = format.parse(dateString);
@@ -34,6 +53,23 @@ public class DateUtils {
 		calendar.add(Calendar.MONTH, 1);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
 		calendar.add(Calendar.DATE, -1);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 23, 59, 59);
+		Date lastDayOfMonth = calendar.getTime();
+		DateFormat sdf = new SimpleDateFormat(formatString);
+
+		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+
+	public static String getFirstDayOfAGivenMonth(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
 		Date lastDayOfMonth = calendar.getTime();
 		DateFormat sdf = new SimpleDateFormat(formatString);
 
@@ -45,6 +81,19 @@ public class DateUtils {
 		Date today = new Date();
 
 		return String.valueOf(sdf.format(today));
+	}
+
+	public static String getPreviousMonth(String format) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -1);
+		return new SimpleDateFormat(format).format(cal.getTime());
+	}
+
+	public static String getPreviousMonthMiddle(String format) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -1);
+		cal.set(Calendar.DAY_OF_MONTH, 15);
+		return new SimpleDateFormat(format).format(cal.getTime());
 	}
 
 	public static int getAge(String birthDate) {
@@ -68,7 +117,9 @@ public class DateUtils {
 	}
 
 	public static void main(String[] args) throws ParseException {
+		System.out.println(DateUtils.getLastDayOfPreviousMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 		System.out.println(DateUtils.getLastDayOfAGivenMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
+		System.out.println(DateUtils.getFirstDayOfAGivenMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 	}
 
 }

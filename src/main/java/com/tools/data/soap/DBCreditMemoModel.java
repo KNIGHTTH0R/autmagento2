@@ -6,6 +6,9 @@ public class DBCreditMemoModel {
 	private String createdAt;
 	private String state;
 	private String totalIpRefunded;
+	private String orderIncrementId;
+	private String orderCreatedAt;
+	private String orderPaidAt;
 
 	public String getStylistId() {
 		return stylistId;
@@ -37,6 +40,30 @@ public class DBCreditMemoModel {
 
 	public void setTotalIpRefunded(String totalIpRefunded) {
 		this.totalIpRefunded = totalIpRefunded;
+	}
+
+	public String getOrderIncrementId() {
+		return orderIncrementId;
+	}
+
+	public void setOrderIncrementId(String orderIncrementId) {
+		this.orderIncrementId = orderIncrementId;
+	}
+
+	public String getOrderCreatedAt() {
+		return orderCreatedAt;
+	}
+
+	public void setOrderCreatedAt(String orderCreatedAt) {
+		this.orderCreatedAt = orderCreatedAt;
+	}
+
+	public String getOrderPaidAt() {
+		return orderPaidAt;
+	}
+
+	public void setOrderPaidAt(String orderPaidAt) {
+		this.orderPaidAt = orderPaidAt;
 	}
 
 }

@@ -32,9 +32,9 @@ public class OrdersInfoMagentoCalls {
 	public static BigDecimal calculateTotalIpOnPreviousMonth(String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 		int ordersNumber = 0;
-		List<DBOrderModel> allOrdersList = getOrdersList(stylistId, createdStartDate);
+		List<DBOrderModel> allOrdersList = getOrdersList(stylistId);
 		for (DBOrderModel order : allOrdersList) {
-			if (isOrderCompatibleForIpClaculation(order, createdStartDate, createdEndDate)) {
+			if (isOrderCompatibleForIpCalculation(order, createdStartDate, createdEndDate)) {
 				ordersNumber++;
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
@@ -44,23 +44,34 @@ public class OrdersInfoMagentoCalls {
 		return totalMonthIp;
 	}
 
-	private static boolean isOrderCompatibleForIpClaculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
+	private static boolean isOrderCompatibleForIpCalculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
 		return isPayed(order)
-				&& DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(order.getCreatedAt(), createdStartDate, DateUtils.getLastDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
-						"yyyy-MM-dd HH:mm:ss");
+				&& (isOrderCompatibleForIpCalcCase1(order, createdStartDate, createdEndDate) || isOrderCompatibleForIpCalcCase2(order, createdStartDate, createdEndDate));
 	}
 
 	private static boolean isPayed(DBOrderModel model) {
 		return model.getStatus().contentEquals("complete") || model.getStatus().contentEquals("payment_complete") || model.getStatus().contentEquals("closed");
 	}
 
-	public static List<DBOrderModel> getOrdersList(String stylistId, String createdStartDate) {
+	private static boolean isOrderCompatibleForIpCalcCase1(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
+
+		return DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
+				DateUtils.getLastDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
+				&& DateUtils.isDateBeetween(order.getPaidAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"), createdEndDate, "yyyy-MM-dd HH:mm:ss");
+	}
+
+	private static boolean isOrderCompatibleForIpCalcCase2(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
+
+		return DateUtils.isDateBeetween(order.getCreatedAt(), "2015-01-01 00:00:00", DateUtils.getLastDayOfPreviousMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
+				"yyyy-MM-dd HH:mm:ss") && DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd HH:mm:ss");
+	}
+
+	public static List<DBOrderModel> getOrdersList(String stylistId) {
 
 		List<DBOrderModel> stylistList = new ArrayList<DBOrderModel>();
 
 		try {
-			SOAPMessage response = soapGetOrdersList(stylistId, createdStartDate);
+			SOAPMessage response = soapGetOrdersList(stylistId);
 			System.out.println(response);
 			try {
 				stylistList = extractOrderData(response);
@@ -77,7 +88,7 @@ public class OrdersInfoMagentoCalls {
 		return stylistList;
 	}
 
-	public static SOAPMessage soapGetOrdersList(String stylistId, String createdStartDate) throws SOAPException, IOException {
+	public static SOAPMessage soapGetOrdersList(String stylistId) throws SOAPException, IOException {
 		String sessID = HttpSoapConnector.performLogin();
 		System.out.println("Sesion id :" + sessID);
 
@@ -86,13 +97,12 @@ public class OrdersInfoMagentoCalls {
 		// SOAPMessage soapResponse = soapConnection.call(getOrdersList(sessID,
 		// stylistId, createdStartDate, createdEndDate),
 		// MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection
-				.call(getOrdersListRequest(sessID, stylistId, createdStartDate), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
 
-	private static SOAPMessage getOrdersListRequest(String ssID, String stylistId, String createdStartDate) throws SOAPException, IOException {
+	private static SOAPMessage getOrdersListRequest(String ssID, String stylistId) throws SOAPException, IOException {
 		SOAPMessage soapMessage = HttpSoapConnector.createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
@@ -112,14 +122,16 @@ public class OrdersInfoMagentoCalls {
 		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
 		value2.addTextNode(stylistId);
 
-		SOAPElement complexObjectArrayB = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
-		SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
-		keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
-		SOAPElement valueB = complexObjectArrayB.addChildElement(SoapKeys.VALUE);
-		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
-		key2B.addTextNode(SoapConstants.GREATER_THAN);
-		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
-		value2B.addTextNode(createdStartDate);
+		// SOAPElement complexObjectArrayB =
+		// complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		// SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
+		// keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
+		// SOAPElement valueB =
+		// complexObjectArrayB.addChildElement(SoapKeys.VALUE);
+		// SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
+		// key2B.addTextNode(SoapConstants.GREATER_THAN);
+		// SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
+		// value2B.addTextNode(createdStartDate);
 
 		// testing purpose
 		// SOAPElement complexObjectArrayC =
@@ -196,6 +208,6 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-01 00:00:00");
+		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
 	}
 }

@@ -28,6 +28,7 @@ import com.pages.backend.stylecoach.PartyDetailsBackendPage;
 import com.pages.backend.stylecoach.PartyListBackendPage;
 import com.pages.backend.stylecoach.StylecoachListBackendPage;
 import com.pages.external.MailinatorPage;
+import com.pages.external.commission.CommissionReportPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
 import com.pages.external.facebook.FacebookEMBLoginPage;
 import com.pages.external.mailchimp.MailchimpHeaderPage;
@@ -271,11 +272,11 @@ public class AbstractSteps extends ScenarioSteps {
 	public CustomerDetailsPage customerDetailsHomePage() {
 		return getPages().currentPageAt(CustomerDetailsPage.class);
 	}
-	
+
 	public BackendProductListPage backendProductListPage() {
 		return getPages().currentPageAt(BackendProductListPage.class);
 	}
-	
+
 	public BackendProductDetailsPage backendProductDetailsPage() {
 		return getPages().currentPageAt(BackendProductDetailsPage.class);
 	}
@@ -348,15 +349,15 @@ public class AbstractSteps extends ScenarioSteps {
 	public StylistRegistrationPage stylistRegistrationPage() {
 		return getPages().currentPageAt(StylistRegistrationPage.class);
 	}
-	
+
 	public ConnectWithMeRegistrationPage connectWithMeRegistrationPage() {
 		return getPages().currentPageAt(ConnectWithMeRegistrationPage.class);
 	}
-	
+
 	public ConnectWithMeAllocationPage connectWithMeAllocationPage() {
 		return getPages().currentPageAt(ConnectWithMeAllocationPage.class);
 	}
-	
+
 	public ConnectSuccesPage connectSuccesPage() {
 		return getPages().currentPageAt(ConnectSuccesPage.class);
 	}
@@ -388,7 +389,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public PartyCreationPage partyCreationPage() {
 		return getPages().currentPageAt(PartyCreationPage.class);
 	}
-	
+
 	public PartiesListPage partiesListPage() {
 		return getPages().currentPageAt(PartiesListPage.class);
 	}
@@ -501,6 +502,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public StylistsCustomerOrderReportPage stylistsCustomerOrderReportPage() {
 		return getPages().currentPageAt(StylistsCustomerOrderReportPage.class);
 	}
+
 	public JewelryBonusHistoryPage jewelryBonusHistoryPage() {
 		return getPages().currentPageAt(JewelryBonusHistoryPage.class);
 	}
@@ -580,6 +582,11 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public MailchimpSubscriberProfilePage mailchimpSubscriberProfilePage() {
 		return getPages().currentPageAt(MailchimpSubscriberProfilePage.class);
+	}
+
+	// commission
+	public CommissionReportPage commissionReportPage() {
+		return getPages().currentPageAt(CommissionReportPage.class);
 	}
 
 	// ------------------------- Common methods
