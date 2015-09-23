@@ -13,7 +13,10 @@ import com.tools.requirements.AbstractPage;
 public class DashboardPage extends AbstractPage {
 
 	@FindBy(css = "div.dashboard div:nth-child(5) div.col-1 dl dd:nth-child(2)")
-	private WebElement dashboardMenuContainer;
+	private WebElement jewelryContainer;
+
+	@FindBy(css = "div.dashboard div:nth-child(5) div.col-1 dl dd:nth-child(2)")
+	private WebElement marketingBonusContainer;
 
 	public String getStyleCoachFirstNameFromProfile() {
 
@@ -55,7 +58,11 @@ public class DashboardPage extends AbstractPage {
 	}
 
 	public String getJewelryBonus() {
-		return dashboardMenuContainer.getText();
+		return jewelryContainer.getText();
+	}
+
+	public String getMarketingMaterialBonus() {
+		return marketingBonusContainer.getText();
 	}
 
 }

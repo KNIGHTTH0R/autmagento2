@@ -51,5 +51,4 @@ public class US20001CheckStylistBonusesAfterClosedMonthTest extends BaseTest {
 		commissionClosedMonthRewardsValidationWorkflows.validateClosedMonthRewardPoints(finalRewardPointsOfStylistModel, grabbedRewardPointsOfStylistModel);
 
 	}
-
 }
