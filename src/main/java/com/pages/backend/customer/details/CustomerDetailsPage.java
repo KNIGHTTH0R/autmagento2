@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.constants.TimeConstants;
@@ -305,6 +306,19 @@ public class CustomerDetailsPage extends AbstractPage {
 		return jb;
 	}
 
+	public String extractMarketingMaterialBonusValue() {
+		String mmb = "";
+		List<WebElement> list = getDriver().findElements(By.cssSelector("#rewardPointsBalanceGrid_table tbody tr"));
+		for (WebElement item : list) {
+			if (item.getText().contains("Marketing Material Bonus")) {
+				mmb = item.findElement(By.cssSelector("td:nth-child(3)")).getText();
+				break;
+			}
+		}
+
+		return mmb;
+	}
+
 	public void selectRewardPointstype(String reward) {
 		element(rewardType).waitUntilVisible();
 		element(rewardType).selectByVisibleText(reward);
@@ -335,4 +349,10 @@ public class CustomerDetailsPage extends AbstractPage {
 				.getText().contains(ContextConstants.CUSTOMER_SAVE_SUCCESS_MESSAGE));
 	}
 
+	public RewardPointsOfStylistModel getRewardPointsOfStylistModel() {
+		RewardPointsOfStylistModel rewardPoints = new RewardPointsOfStylistModel();
+		rewardPoints.setJewelryBonus(extractJewelryBonusValue());
+		rewardPoints.setMarketingMaterialBonus(extractMarketingMaterialBonusValue());
+		return rewardPoints;
+	}
 }

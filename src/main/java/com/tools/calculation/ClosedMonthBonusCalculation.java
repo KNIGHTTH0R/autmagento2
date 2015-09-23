@@ -5,6 +5,7 @@ import java.text.ParseException;
 
 import com.connectors.http.CreditMemosInfoMagentoCalls;
 import com.connectors.http.OrdersInfoMagentoCalls;
+import com.tools.data.backend.RewardPointsOfStylistModel;
 
 public class ClosedMonthBonusCalculation {
 
@@ -20,4 +21,12 @@ public class ClosedMonthBonusCalculation {
 	public static void main(String[] args) throws NumberFormatException, ParseException {
 		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-08-15 00:00:00", "2015-09-23 00:00:00");
 	}
+
+//	public static RewardPointsOfStylistModel calculateRewards(RewardPointsOfStylistModel model1, RewardPointsOfStylistModel model2) {
+//
+//		RewardPointsOfStylistModel result = new RewardPointsOfStylistModel();
+//		result.setJewelryBonus(String.valueOf(BigDecimal.valueOf(Double.parseDouble(model1.getJewelryBonus())).add(BigDecimal.valueOf(Double.parseDouble(model2.getJewelryBonus())))));
+//		result.setMarketingMaterialBonus(marketingMaterialBonus);
+//		return result;
+//	}
 }

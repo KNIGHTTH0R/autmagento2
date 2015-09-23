@@ -8,6 +8,7 @@ import java.util.Map;
 import com.connectors.mongo.MongoConnector;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.tools.calculation.ClosedMonthBonusCalculation;
 import com.tools.data.BorrowCartCalcDetailsModel;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.HostCartCalcDetailsModel;
@@ -17,6 +18,7 @@ import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.backend.OrderModel;
+import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
@@ -808,7 +810,7 @@ public class MongoReader extends MongoConnector {
 				
 				result.setNoOfOrders(MongoUtils.checkField(dbObject, MongoTableKeys.NO_OF_ORDERS));
 				result.setRetail(MongoUtils.checkField(dbObject, MongoTableKeys.RETAIL));
-				result.setIp(MongoUtils.checkField(dbObject, MongoTableKeys.IP));
+				result.setIp(MongoUtils.checkField(dbObject, MongoTableKeys.IP).trim());
 				result.setJewelryBonus(MongoUtils.checkField(dbObject, MongoTableKeys.JB));
 				result.setFourthyDiscounts(MongoUtils.checkField(dbObject, MongoTableKeys.FORTY_DISCOUNTS));
 				
@@ -870,6 +872,32 @@ public class MongoReader extends MongoConnector {
 			cursor.close();
 		}
 		return incrementid;
+
+	}
+
+	public static List<RewardPointsOfStylistModel> grabReviewPoints(String testName) {
+		DBObject dbObject = null;
+		List<RewardPointsOfStylistModel> itemList = new ArrayList<RewardPointsOfStylistModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.REWARD_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				RewardPointsOfStylistModel result = new RewardPointsOfStylistModel();
+				dbObject = cursor.next();
+				
+				result.setJewelryBonus(MongoUtils.checkField(dbObject, MongoTableKeys.JEWERLY_BONUS));
+				result.setMarketingMaterialBonus(MongoUtils.checkField(dbObject, MongoTableKeys.MARKETING_BONUS));
+				
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
 
 	}
 

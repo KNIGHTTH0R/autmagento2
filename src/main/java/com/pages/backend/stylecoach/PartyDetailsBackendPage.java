@@ -87,9 +87,9 @@ public class PartyDetailsBackendPage extends AbstractPage {
 	public PartyBackendPerformanceModel getPartyBackendPerformance(){
 		PartyBackendPerformanceModel partyModel= new PartyBackendPerformanceModel();
 		partyModel.setNoOfOrders(getDriver().findElement(By.cssSelector("#performance tr:nth-child(1) td:nth-child(2)")).getText().trim());
-		partyModel.setRetail(getDriver().findElement(By.cssSelector("#performance tr:nth-child(2) td:nth-child(2)")).getText().trim().replace("€", ""));
+		partyModel.setRetail(getDriver().findElement(By.cssSelector("#performance tr:nth-child(2) td:nth-child(2)")).getText().replace("€", "").replace(",", ".").trim());
 		partyModel.setIp(getDriver().findElement(By.cssSelector("#performance tr:nth-child(5) td:nth-child(2)")).getText().trim());
-		partyModel.setJewelryBonus(getDriver().findElement(By.cssSelector("#party_hostess_reward tr:nth-child(1) td:nth-child(2)")).getText().trim().replace("€", ""));
+		partyModel.setJewelryBonus(getDriver().findElement(By.cssSelector("#party_hostess_reward tr:nth-child(1) td:nth-child(2)")).getText().replace("€", "").replace(",", ".").trim());
 	    partyModel.setFourthyDiscounts(getDriver().findElement(By.cssSelector("#party_hostess_reward tr:nth-child(2) td:nth-child(2)")).getText().trim());
 	    
 	    PrintUtils.printPartyBackendPerformanceModel(partyModel);
