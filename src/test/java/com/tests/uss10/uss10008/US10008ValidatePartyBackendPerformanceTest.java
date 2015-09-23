@@ -18,6 +18,7 @@ import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.backend.BackendPartyPerformanceValidationWorkflows;
 
 @WithTag(name = "US10", type = "backend")
@@ -40,8 +41,10 @@ public class US10008ValidatePartyBackendPerformanceTest extends BaseTest {
 	public void setUp() {
 		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
 		expectedModel = MongoReader.grabClosedPartyPerformanceModel("US10008ClosePartyAnfVerifyCommissionBonusesTest").get(0);
+		PrintUtils.printClosedPartyModel(expectedModel);
 		String[] parts = urlModel.getUrl().split("/");
 		partyId = parts[parts.length - 1];
+		System.out.println("party Id:" + partyId);
 	}
 
 	@Test

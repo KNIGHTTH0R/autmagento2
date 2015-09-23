@@ -366,7 +366,7 @@ public class PrintUtils {
 	}
 	
 	public static void printClosedPartyModel(ClosedPartyPerformanceModel model) {
-		System.out.println("---- PRINT Adress Model ----");
+		System.out.println("---- print ClosedPartyPerformanceModel ----");
 		System.out.println(model.getFourthyDiscounts());
 		System.out.println(model.getIp());
 		System.out.println(model.getIpInPayment());
