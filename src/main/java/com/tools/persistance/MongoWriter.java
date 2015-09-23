@@ -16,6 +16,7 @@ import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
@@ -458,6 +459,18 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.SUBTOTAL, shippingModel.getSubTotal());
 		document.put(MongoTableKeys.TOTAL_AMOUNT, shippingModel.getTotalAmount());
 
+		table.insert(document);
+	}
+	
+	public static void saveRewardPointsModel(RewardPointsOfStylistModel rewardPointsOfStylistModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.REWARD_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+		
+		document.put(MongoTableKeys.JEWERLY_BONUS, rewardPointsOfStylistModel.getJewelryBonus());
+		document.put(MongoTableKeys.MARKETING_BONUS, rewardPointsOfStylistModel.getMarketingMaterialBonus());
+		
 		table.insert(document);
 	}
 

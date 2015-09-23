@@ -522,10 +522,9 @@ public class PrintUtils {
 		System.out.println("printPartyBackendPerformanceModel -----------------------------");
 		System.out.println("noOfOrders : " + partyModel.getNoOfOrders());
 		System.out.println("retail : " + partyModel.getRetail());
-		System.out.println("ip : " + partyModel.getIp());
-		System.out.println("JB : " + partyModel.getJewelryBonus());
+		System.out.println("ip: " + partyModel.getIp());
+		System.out.println("JB :" + partyModel.getJewelryBonus());
 		System.out.println("Forty discount : " + partyModel.getFourthyDiscounts());
-		
 		
 	}
 }

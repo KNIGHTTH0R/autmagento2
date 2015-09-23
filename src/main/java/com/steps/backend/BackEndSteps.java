@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
+import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -273,6 +274,16 @@ public class BackEndSteps extends AbstractSteps {
 		return datesModel;
 
 	}
+	
+     @Step
+     public void clickOnRewardsPointsTab(){
+    	 customerDetailsHomePage().clickOnRewardsPointsTab();
+     }
+     
+     @Step
+      public RewardPointsOfStylistModel getRewardPointsOfStylistModel(){
+    	 return customerDetailsHomePage().getRewardPointsOfStylistModel();
+     }
 
 	@StepGroup
 	public void addJewelryAndFourthyDiscountBonusToRegularCustomer() {

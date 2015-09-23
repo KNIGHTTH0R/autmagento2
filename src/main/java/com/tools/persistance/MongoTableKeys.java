@@ -49,6 +49,9 @@ public class MongoTableKeys {
 	// Stylist model properties
 	public static final String DATE_MODEL = "DateModel";
 	public static final String REGISTRATION_DATE = "date";
+	public static final String REWARD_MODEL = "rewardModel";
+	public static final String JB_REWARD_MODEL = "jbRewardModel";
+	public static final String MMB_REWARD_MODEL = "mmbRewardModel";
 
 	// Customer configuration model
 	public static final String CUSTOMER_CONFIGURATION_MODEL = "CustomerConfigurationModel";

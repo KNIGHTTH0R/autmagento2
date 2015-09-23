@@ -14,7 +14,7 @@ public class BackendPartyPerformanceValidationWorkflows {
 		verifyClosedPartyJewelryBonus(grabbedModel.getJewelryBonus(), expectedModel.getJewelryBonus());
 		verifyClosedPartyJFourthyDiscount(grabbedModel.getFourthyDiscounts(), expectedModel.getFourthyDiscounts());
 		verifyClosedPartyNoOfOrders(grabbedModel.getNoOfOrders(), expectedModel.getNoOfOrders());
-		verifyClosedPartyIp(grabbedModel.getIp(), expectedModel.getIp());
+//		verifyClosedPartyIp(grabbedModel.getIp(), expectedModel.getIp());
 		verifyClosedPartyRetail(grabbedModel.getRetail(), expectedModel.getRetail());
 	}
 
