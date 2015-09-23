@@ -32,17 +32,19 @@ public class CommissionReportSteps extends AbstractSteps {
 
 	@StepGroup
 	public void closeMonth() throws Exception {
-		commissionReportPage().selectMonthToBeClosed();
-		commissionReportPage().selectCloseMonthDate();
-		commissionReportPage().closeMonth();
-		// get commission last run
-		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-08-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
 
 		if (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")) {
 			ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
 		} else {
 			// set commission run date on 15 of the month
 		}
+
+		commissionReportPage().selectMonthToBeClosed();
+		commissionReportPage().selectCloseMonthDate();
+		commissionReportPage().closeMonth();
+		// get commission last run
+		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-08-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
+
 	}
 
 }

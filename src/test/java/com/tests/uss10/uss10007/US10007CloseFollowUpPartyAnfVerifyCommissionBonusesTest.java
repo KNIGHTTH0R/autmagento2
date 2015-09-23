@@ -13,6 +13,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,12 +24,14 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartiesListSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.calculation.PartyBonusCalculation;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.commission.CommissionPartyPerformanceValidationWorkflows;
@@ -102,7 +105,7 @@ public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends Bas
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToPartieList();
-		partiesListSteps.goToFirstParty();
+		urlModel.setUrl(partiesListSteps.goToFirstParty());
 		partyDetailsSteps.closeTheParty("10");
 		partyDetailsSteps.returnToParty();
 		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
@@ -110,5 +113,11 @@ public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends Bas
 
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
 
+	}
+	
+	@After
+	public void saveData() {
+
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 }

@@ -35,6 +35,7 @@ public class OrdersInfoMagentoCalls {
 		List<DBOrderModel> allOrdersList = getOrdersList(stylistId);
 		for (DBOrderModel order : allOrdersList) {
 			if (isOrderCompatibleForIpCalculation(order, createdStartDate, createdEndDate)) {
+				System.out.println(order.getCreatedAt());
 				ordersNumber++;
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
@@ -164,6 +165,7 @@ public class OrdersInfoMagentoCalls {
 				DBOrderModel model = new DBOrderModel();
 
 				model.setTotalIp("0");
+				model.setPaidAt("2010-01-21 11:45:03");
 
 				NodeList childNodes = orderList.item(i).getChildNodes();
 				for (int j = 0; j < childNodes.getLength(); j++) {
@@ -173,6 +175,9 @@ public class OrdersInfoMagentoCalls {
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
 						model.setCreatedAt(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("payment_complete_at")) {
+						model.setPaidAt(childNodes.item(j).getTextContent());
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
 						model.setStylistId(childNodes.item(j).getTextContent());
@@ -192,9 +197,7 @@ public class OrdersInfoMagentoCalls {
 
 						NodeList firstStatusNodes = firstStatus.getChildNodes();
 						for (int k = 0; k < firstStatusNodes.getLength(); k++) {
-							if (firstStatusNodes.item(k).getNodeName().equalsIgnoreCase("created_at")) {
-								model.setPaidAt(firstStatusNodes.item(k).getTextContent());
-							}
+
 							if (firstStatusNodes.item(k).getNodeName().equalsIgnoreCase("status")) {
 								model.setStatus(firstStatusNodes.item(k).getTextContent());
 							}
@@ -208,6 +211,6 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
+		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-23 00:00:00");
 	}
 }

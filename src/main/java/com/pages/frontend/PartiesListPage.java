@@ -13,9 +13,10 @@ public class PartiesListPage extends AbstractPage {
 	private WebElement firstPartyLink;
 
 
-	public void goToFirstParty() {
+	public String goToFirstParty() {
 		element(firstPartyLink).waitUntilVisible();
 		firstPartyLink.click();
+		return getDriver().getCurrentUrl();
 	}
 	
 

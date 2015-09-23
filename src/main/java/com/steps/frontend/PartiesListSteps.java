@@ -9,8 +9,9 @@ public class PartiesListSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void goToFirstParty() {
-		partiesListPage().goToFirstParty();
+	public String goToFirstParty() {
+		return partiesListPage().goToFirstParty();
+		
 	}
 
 }
