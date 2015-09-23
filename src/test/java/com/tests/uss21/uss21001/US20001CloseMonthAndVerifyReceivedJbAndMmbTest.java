@@ -16,7 +16,6 @@ import com.steps.external.commission.CommissionReportSteps;
 import com.tests.BaseTest;
 import com.tools.calculation.ClosedMonthBonusCalculation;
 import com.tools.requirements.Application;
-import com.tools.utils.DateUtils;
 
 @WithTag(name = "US21", type = "frontend")
 @Story(Application.KoboSubscription.class)
@@ -30,12 +29,15 @@ public class US20001CloseMonthAndVerifyReceivedJbAndMmbTest extends BaseTest {
 
 	@After
 	public void setUp() throws NumberFormatException, ParseException {
-		
-		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "2015-09-01 00:00:00");
+
+		// get commission last run date
+
+		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
 	}
 
 	@Test
 	public void us20001StyleCoachRegistrationTest() throws NumberFormatException, ParseException {
+
 		backEndSteps.navigate("https://commission-staging-aut.pippajean.com/report");
 		commissionReportSteps.closeMonth();
 

@@ -24,6 +24,16 @@ public class DateUtils {
 
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
+	public static boolean isLastDayOfMonth(String dateString, String formatString) throws ParseException
+	{
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
+	    return calendar.get(Calendar.DAY_OF_MONTH) == 1;
+	}
 
 	public static String getLastDayOfPreviousMonth(String dateString, String formatString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
@@ -120,6 +130,7 @@ public class DateUtils {
 		System.out.println(DateUtils.getLastDayOfPreviousMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 		System.out.println(DateUtils.getLastDayOfAGivenMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 		System.out.println(DateUtils.getFirstDayOfAGivenMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
+		System.out.println(DateUtils.isLastDayOfMonth("2015-09-30 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 	}
 
 }

@@ -47,6 +47,8 @@ import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 	US70011Suite.class,
 	US70012Suite.class,
 	
+	US10007SuitePartOne.class,
+	
 	DeactivateBuy3Get1ForRegular.class,
 	US8001Suite.class,
 	US8002Suite.class,
@@ -90,6 +92,11 @@ import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 //	US19002Suite.class,
 //	US19003Suite.class,
 //	US19004Suite.class,
+	
+	US20001Suite.class,
+	
+	US10007SuitePartTwo.class,
+	US10008Suite.class,
 	
 	
 })
