@@ -137,11 +137,11 @@ public class MongoTableKeys {
 	// ClosedPartyPerformanceModel
 
 	public static final String CLOSED_PARTY_PERFORMANCE_MODEL = "closedPartyPerformanceModel";
-	public static final String NO_OF_ORDERS = "closedPartyPerformanceModel";
-	public static final String RETAIL = "closedPartyPerformanceModel";
-	public static final String IP = "closedPartyPerformanceModel";
-	public static final String JB = "closedPartyPerformanceModel";
-	public static final String FOURTHY_DISCOUNT = "closedPartyPerformanceModel";
+	public static final String NO_OF_ORDERS = "noOfOrders";
+	public static final String RETAIL = "retail";
+	public static final String IP = "ip";
+	public static final String JB = "jb";
+	public static final String FOURTHY_DISCOUNT = "fourthyDiscount";
 
 	// subscriber model
 	public static final String SUBSCRIBER_MODEL = "SubscriberModel";

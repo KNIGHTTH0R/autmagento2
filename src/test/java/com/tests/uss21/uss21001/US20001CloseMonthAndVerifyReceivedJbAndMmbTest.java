@@ -36,7 +36,7 @@ public class US20001CloseMonthAndVerifyReceivedJbAndMmbTest extends BaseTest {
 	}
 
 	@Test
-	public void us20001StyleCoachRegistrationTest() throws NumberFormatException, ParseException {
+	public void us20001StyleCoachRegistrationTest() throws Exception {
 
 		backEndSteps.navigate("https://commission-staging-aut.pippajean.com/report");
 		commissionReportSteps.closeMonth();
