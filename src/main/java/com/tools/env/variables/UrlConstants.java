@@ -54,6 +54,7 @@ public class UrlConstants {
 	public static final String COMMISION_STYLIST_SUFFIX = "stylist.json/";
 	public static final String COMMISION_PARTY_SUFFIX = "party.json/";
 	public static final String TEAM_PERFORMANCE_SUFFIX = "performance-team.json/";
+	public static final String COMMISSION_REPORTS_URL = "https://commission-staging-aut.pippajean.com/report";
 
 
 }

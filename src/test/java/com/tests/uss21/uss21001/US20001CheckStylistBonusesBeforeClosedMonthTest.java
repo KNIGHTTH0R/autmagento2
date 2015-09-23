@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.RewardPointsOfStylistModel;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;

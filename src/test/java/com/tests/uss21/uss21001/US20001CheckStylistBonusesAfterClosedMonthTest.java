@@ -16,6 +16,7 @@ import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.commission.CommissionClosedMonthRewardsValidationWorkflows;
 
 @WithTag(name = "US21", type = "backend")
 @Story(Application.Shop.ForMyselfCart.class)
@@ -24,31 +25,30 @@ public class US20001CheckStylistBonusesAfterClosedMonthTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
-	RewardPointsOfStylistModel rewardPointsOfStylistModel = new RewardPointsOfStylistModel();
-	
+	@Steps
+	public CommissionClosedMonthRewardsValidationWorkflows commissionClosedMonthRewardsValidationWorkflows;
+
+	RewardPointsOfStylistModel initialRewardPointsOfStylistModel = new RewardPointsOfStylistModel();
+	RewardPointsOfStylistModel calculatedRewardPointsOfStylistModel = new RewardPointsOfStylistModel();
+	RewardPointsOfStylistModel finalRewardPointsOfStylistModel = new RewardPointsOfStylistModel();
+
 	@Before
 	public void setUp() {
-		rewardPointsOfStylistModel=MongoReader.grabReviewPoints("US20001CheckStylistBonusesBeforeClosedMonthTest").get(0);
-//		rewardPointsOfStylistModel2=MongoReader.grabReviewPoints("US20001CheckStylistBonusesBeforeClosedMonthTest").get(0);
-//		
-//		totalREwords =  ClosedMonthBonusCalculation.calculateRewards(rewardPointsOfStylistModel, rewardPointsOfStylistModel2)
-//	    	
-	
-	}
-	
-	
-	
+		initialRewardPointsOfStylistModel = MongoReader.grabReviewPoints("US20001CheckStylistBonusesBeforeClosedMonthTest").get(0);
+		calculatedRewardPointsOfStylistModel = MongoReader.grabReviewPoints("US20001CloseMonthAndVerifyReceivedJbAndMmbTest").get(0);
+		finalRewardPointsOfStylistModel = ClosedMonthBonusCalculation.calculateRewardPoints(initialRewardPointsOfStylistModel, calculatedRewardPointsOfStylistModel);
 
+	}
 
 	@Test
-	public void us10008ValidatePartyBackendPerformanceTest() {
+	public void us20001CheckStylistBonusesAfterClosedMonthTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail("mihaialexandrubarta@gmail.com");
 		backEndSteps.openCustomerDetails("mihaialexandrubarta@gmail.com");
 		backEndSteps.clickOnRewardsPointsTab();
-		rewardPointsOfStylistModel = backEndSteps.getRewardPointsOfStylistModel();
-		//validations
+		RewardPointsOfStylistModel grabbedRewardPointsOfStylistModel = backEndSteps.getRewardPointsOfStylistModel();
+		commissionClosedMonthRewardsValidationWorkflows.validateClosedMonthRewardPoints(finalRewardPointsOfStylistModel, grabbedRewardPointsOfStylistModel);
 
 	}
 

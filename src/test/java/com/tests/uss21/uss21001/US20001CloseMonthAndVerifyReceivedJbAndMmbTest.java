@@ -1,7 +1,5 @@
 package com.tests.uss21.uss21001;
 
-import java.text.ParseException;
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -14,7 +12,9 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.external.commission.CommissionReportSteps;
 import com.tests.BaseTest;
-import com.tools.calculation.ClosedMonthBonusCalculation;
+import com.tools.data.backend.RewardPointsOfStylistModel;
+import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US21", type = "frontend")
@@ -27,19 +27,18 @@ public class US20001CloseMonthAndVerifyReceivedJbAndMmbTest extends BaseTest {
 	@Steps
 	public CommissionReportSteps commissionReportSteps;
 
-	@After
-	public void setUp() throws NumberFormatException, ParseException {
-
-		// get commission last run date
-
-		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
-	}
+	RewardPointsOfStylistModel calculatedRewordPointsOfStylistModel = new RewardPointsOfStylistModel();
 
 	@Test
 	public void us20001StyleCoachRegistrationTest() throws Exception {
 
-		backEndSteps.navigate("https://commission-staging-aut.pippajean.com/report");
-		commissionReportSteps.closeMonth();
+		backEndSteps.navigate(UrlConstants.COMMISSION_REPORTS_URL);
+		calculatedRewordPointsOfStylistModel = commissionReportSteps.closeMonth();
 
+	}
+
+	@After
+	public void save() {
+		MongoWriter.saveRewardPointsModel(calculatedRewordPointsOfStylistModel, getClass().getSimpleName());
 	}
 }
