@@ -9,7 +9,7 @@ import com.tools.data.frontend.ClosedPartyPerformanceModel;
 public class BackendPartyPerformanceValidationWorkflows {
 
 	@Step
-	public void validateClosedPartyPerformance(ClosedPartyPerformanceModel grabbedModel, PartyBackendPerformanceModel expectedModel) {
+	public void validateClosedPartyPerformance(ClosedPartyPerformanceModel expectedModel, PartyBackendPerformanceModel grabbedModel) {
 
 		verifyClosedPartyJewelryBonus(grabbedModel.getJewelryBonus(), expectedModel.getJewelryBonus());
 		verifyClosedPartyJFourthyDiscount(grabbedModel.getFourthyDiscounts(), expectedModel.getFourthyDiscounts());

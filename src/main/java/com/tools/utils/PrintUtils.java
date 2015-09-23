@@ -10,6 +10,7 @@ import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.commission.CommissionPartyModel;
 import com.tools.data.email.EmailModel;
@@ -516,5 +517,15 @@ public class PrintUtils {
 		System.out.println("ip : " + calculatedDetailsModel.getIpPoints());
 		System.out.println("Segments : " + calculatedDetailsModel.getSegments());
 
+	}
+	public static void printPartyBackendPerformanceModel(PartyBackendPerformanceModel partyModel) {
+		System.out.println("printPartyBackendPerformanceModel -----------------------------");
+		System.out.println("noOfOrders : " + partyModel.getNoOfOrders());
+		System.out.println("retail : " + partyModel.getRetail());
+		System.out.println("ip : " + partyModel.getIp());
+		System.out.println("JB : " + partyModel.getJewelryBonus());
+		System.out.println("Forty discount : " + partyModel.getFourthyDiscounts());
+		
+		
 	}
 }

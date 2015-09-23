@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.PrintUtils;
 
 public class PartyDetailsBackendPage extends AbstractPage {
 
@@ -91,6 +92,7 @@ public class PartyDetailsBackendPage extends AbstractPage {
 		partyModel.setJewelryBonus(getDriver().findElement(By.cssSelector("#party_hostess_reward tr:nth-child(1) td:nth-child(2)")).getText().trim().replace("€", ""));
 	    partyModel.setFourthyDiscounts(getDriver().findElement(By.cssSelector("#party_hostess_reward tr:nth-child(2) td:nth-child(2)")).getText().trim());
 	    
+	    PrintUtils.printPartyBackendPerformanceModel(partyModel);
 	    return partyModel;
 	}
 	
