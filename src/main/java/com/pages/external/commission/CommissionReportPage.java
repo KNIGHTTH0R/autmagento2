@@ -11,6 +11,9 @@ public class CommissionReportPage extends AbstractPage {
 
 	@FindBy(id = "months")
 	private WebElement closedMonthSelect;
+	
+	@FindBy(id = "savecommdate")
+	private WebElement saveCommDateButton;
 
 	@FindBy(id = "commdate")
 	private WebElement closeMonthDate;
@@ -25,6 +28,12 @@ public class CommissionReportPage extends AbstractPage {
 		element(closeMonthButton).waitUntilVisible();
 		closeMonthButton.click();
 	}
+	
+	public void saveCommDate() {
+		element(saveCommDateButton).waitUntilVisible();
+		saveCommDateButton.click();
+		getDriver().switchTo().alert().accept();
+	}
 
 	public void simulateMonth() {
 		element(runSimulationButton).waitUntilVisible();
@@ -38,6 +47,7 @@ public class CommissionReportPage extends AbstractPage {
 
 	public void enterCloseMonthDate() {
 		element(closeMonthDate).waitUntilVisible();
+		closeMonthDate.clear();
 		closeMonthDate.sendKeys(DateUtils.getCurrentDate("yyyy-MM-dd"));
 	}
 }

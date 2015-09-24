@@ -42,6 +42,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().selectMonthToBeClosed();
 		commissionReportPage().enterCloseMonthDate();
 		commissionReportPage().closeMonth();
+		commissionReportPage().saveCommDate();
 		waitABit(300000);
 		// get commission last run
 		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-08-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
