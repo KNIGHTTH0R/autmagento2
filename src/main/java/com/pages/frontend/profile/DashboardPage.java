@@ -60,6 +60,9 @@ public class DashboardPage extends AbstractPage {
 	public String getJewelryBonus() {
 		return jewelryContainer.getText().replace(".", "").replace(",", ".");
 	}
+	public String getJewelryBonusWithFourDecimals() {
+		return jewelryContainer.getText().replace(".", "").replace(",", ".").concat("00");
+	}
 
 	public String getMarketingMaterialBonus() {
 		return marketingBonusContainer.getText().replace(".", "").replace(",", ".");

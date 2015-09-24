@@ -86,7 +86,7 @@ public class US21001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTes
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
 
-		String dashboardTotalJb = dashboardSteps.getJewelryBonus();
+		String dashboardTotalJb = dashboardSteps.getJewelryBonusWithFourDecimals();
 		String dashboardTotalMmb = dashboardSteps.getMarketingMaterialBonus();
 
 		dashboardSteps.validateDashboardTotalJewerlyBonus(finalRewardPointsOfStylistModel.getJewelryBonus(), dashboardTotalJb);
