@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,7 +27,7 @@ public class US20001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	RewardPointsOfStylistModel rewardPointsOfStylistModel = new RewardPointsOfStylistModel();
 
-	@After
+	@Before
 	public void setUp() {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}

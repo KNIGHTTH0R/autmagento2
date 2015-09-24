@@ -6,9 +6,11 @@ import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.steps.external.commission.CommissionReportSteps;
 import com.tests.BaseTest;
@@ -28,6 +30,11 @@ public class US20001CloseMonthAndVerifyReceivedJbAndMmbTest extends BaseTest {
 	public CommissionReportSteps commissionReportSteps;
 
 	RewardPointsOfStylistModel calculatedRewordPointsOfStylistModel = new RewardPointsOfStylistModel();
+
+	@Before
+	public void setUp() {
+		MongoConnector.cleanCollection(getClass().getSimpleName());
+	}
 
 	@Test
 	public void us20001StyleCoachRegistrationTest() throws Exception {
