@@ -40,7 +40,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		}
 
 		commissionReportPage().selectMonthToBeClosed();
-		commissionReportPage().enterCloseMonthDate();
+//		commissionReportPage().enterCloseMonthDate();
 		commissionReportPage().closeMonth();
 		commissionReportPage().saveCommDate();
 		waitABit(300000);
