@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.RewardPointsOfStylistModel;
@@ -24,6 +25,11 @@ public class US20001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 	@Steps
 	public BackEndSteps backEndSteps;
 	RewardPointsOfStylistModel rewardPointsOfStylistModel = new RewardPointsOfStylistModel();
+
+	@After
+	public void setUp() {
+		MongoConnector.cleanCollection(getClass().getSimpleName());
+	}
 
 	@Test
 	public void us20001CheckStylistBonusesBeforeClosedMonthTest() {

@@ -38,14 +38,11 @@ public class CommissionReportSteps extends AbstractSteps {
 		} else {
 			// set commission run date on 15 of the month
 		}
-
 		commissionReportPage().selectMonthToBeClosed();
 		commissionReportPage().enterCloseMonthDate();
-		waitABit(3000);
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
-		waitABit(300000);
-		// get commission last run
+
 		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-08-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
 
 	}

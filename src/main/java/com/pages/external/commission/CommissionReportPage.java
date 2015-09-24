@@ -3,8 +3,12 @@ package com.pages.external.commission;
 import net.thucydides.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
 
@@ -34,6 +38,8 @@ public class CommissionReportPage extends AbstractPage {
 	public void closeMonth() {
 		element(closeMonthButton).waitUntilVisible();
 		closeMonthButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.id("closemonth-wrapper"), "Please wait until we close the month. Do not close the window!"));
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	public void saveCommDate() {
@@ -42,7 +48,6 @@ public class CommissionReportPage extends AbstractPage {
 		saveCommDateButton.click();
 		Alert alert = getDriver().switchTo().alert();
 		System.out.println(alert.getText());
-		waitABit(2000);
 		alert.accept();
 	
 	}
