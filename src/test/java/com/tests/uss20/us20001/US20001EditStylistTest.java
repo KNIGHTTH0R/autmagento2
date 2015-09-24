@@ -54,7 +54,7 @@ public class US20001EditStylistTest extends BaseTest {
 	}
 
 	@Test
-	public void us20001StylistActivationTest() {
+	public void us20001EditStylistTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();

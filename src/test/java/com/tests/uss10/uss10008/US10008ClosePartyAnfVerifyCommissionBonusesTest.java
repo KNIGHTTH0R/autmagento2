@@ -24,6 +24,7 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.calculation.PartyBonusCalculation;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
@@ -50,6 +51,8 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	CommissionPartyPerformanceValidationWorkflows commissionPartyValidationWorkflows;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
+	@Steps 
+	public CustomVerification customVerifications;
 	public static UrlModel urlModel = new UrlModel();
 	ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
 	List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
@@ -110,6 +113,8 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
 		PrintUtils.printClosedPartyModel(grabbedClosedPartyPerformanceModel);
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
+		
+		customVerifications.printErrors();
 	}
 
 	@After

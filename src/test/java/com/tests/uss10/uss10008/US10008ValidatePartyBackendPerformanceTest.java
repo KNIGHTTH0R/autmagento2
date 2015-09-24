@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.stylecoach.PartyListBackendSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
@@ -30,6 +31,8 @@ public class US10008ValidatePartyBackendPerformanceTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public BackendPartyPerformanceValidationWorkflows backendPartyPerformanceValidationWorkflows;
+	@Steps 
+	public CustomVerification customVerifications;
 
 	@Steps
 	public PartyListBackendSteps partyListBackendSteps;
@@ -54,6 +57,8 @@ public class US10008ValidatePartyBackendPerformanceTest extends BaseTest {
 		partyListBackendSteps.openPartyDetails(partyId);
 		PartyBackendPerformanceModel grabbedModel = partyListBackendSteps.getPartyBackendPerformance();
 		backendPartyPerformanceValidationWorkflows.validateClosedPartyPerformance(expectedModel, grabbedModel);
+		
+		customVerifications.printErrors();
 	}
 
 }
