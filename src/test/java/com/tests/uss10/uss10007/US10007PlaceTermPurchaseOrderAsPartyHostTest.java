@@ -158,7 +158,9 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 		String url = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
+		if(MongoReader.getContext().contentEquals("de")){
 		paymentSteps.expandCreditCardForm();
+		}
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		partyBonusCalculationModel.setTotal(confirmationSteps.grabConfirmationTotals().getSubTotal());

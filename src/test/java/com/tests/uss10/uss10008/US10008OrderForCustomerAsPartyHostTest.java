@@ -155,7 +155,9 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 		String url = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
+		if (MongoReader.getContext().contentEquals("de")) {
+			paymentSteps.expandCreditCardForm();
+		}
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		partyBonusCalculationModel.setTotal(confirmationSteps.grabConfirmationTotals().getSubTotal());

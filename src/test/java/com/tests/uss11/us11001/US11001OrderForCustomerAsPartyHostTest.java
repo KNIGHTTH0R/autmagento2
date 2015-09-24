@@ -79,7 +79,7 @@ public class US11001OrderForCustomerAsPartyHostTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	private String username, password, customerName,notAllowedCustomerName;
+	private String username, password, customerName, notAllowedCustomerName;
 	private String discountClass;
 	private String billingAddress;
 	private String shippingValue;
@@ -203,7 +203,9 @@ public class US11001OrderForCustomerAsPartyHostTest extends BaseTest {
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
+		if (MongoReader.getContext().contentEquals("de")) {
+			paymentSteps.expandCreditCardForm();
+		}
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.grabHostProductsList();
