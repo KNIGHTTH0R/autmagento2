@@ -37,7 +37,7 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 	public void setUp() throws Exception {
 
 		String incrementId = MongoReader.grabIncrementId("US20001GetStylistIncrementIdTest");
-
+		
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(incrementId);
 		System.out.println(commissionStylistModel.getBankAccountVatPayer());
 		dBStylistModel = ApiCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);

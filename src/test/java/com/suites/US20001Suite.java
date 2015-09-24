@@ -16,8 +16,8 @@ import com.tests.uss20.us20001.US20001VerifyUpdatedStylistDetailsInCommissionTes
 	US20001StylistActivationTest.class,
 	US20001GetStylistIncrementIdTest.class,
 	US20001VerifyNewCreatedStylistDetailsInCommissionTest.class,
-//	US20001EditStylistTest.class,
-//	US20001VerifyUpdatedStylistDetailsInCommissionTest.class,
+	US20001EditStylistTest.class,
+	US20001VerifyUpdatedStylistDetailsInCommissionTest.class,
 })
 @RunWith(Suite.class)
 public class US20001Suite {

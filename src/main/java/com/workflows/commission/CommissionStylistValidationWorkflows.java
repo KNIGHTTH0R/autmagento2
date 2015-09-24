@@ -85,8 +85,9 @@ public class CommissionStylistValidationWorkflows {
 
 	@Step
 	public void verifyVatPayer(String expectedValue, String grabbedValue) {
-		System.out.println(expectedValue+grabbedValue);
-		CustomVerification.verifyTrue("Failure: vat payer status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+		System.out.println(expectedValue + grabbedValue);
+		CustomVerification.verifyTrue("Failure: vat payer status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue,
+				(expectedValue == null ? grabbedValue == null : expectedValue.contains(grabbedValue)));
 	}
 
 	@Step
