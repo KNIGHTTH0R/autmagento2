@@ -27,6 +27,9 @@ public class CommissionReportPage extends AbstractPage {
 
 	@FindBy(id = "runsimm")
 	private WebElement runSimulationButton;
+	
+	@FindBy(css = ".ui-state-default.ui-state-highlight")
+	private WebElement currentDay;
 
 	public void closeMonth() {
 		element(closeMonthButton).waitUntilVisible();
@@ -55,7 +58,8 @@ public class CommissionReportPage extends AbstractPage {
 
 	public void enterCloseMonthDate() {
 		element(closeMonthDate).waitUntilVisible();
-		closeMonthDate.clear();
-		closeMonthDate.sendKeys(DateUtils.getCurrentDate("yyyy-MM-dd"));
+		closeMonthDate.click();
+		currentDay.click();
+		
 	}
 }
