@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.ApiCalls;
 import com.connectors.http.ComissionRestCalls;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.env.constants.SoapConstants;
@@ -26,6 +27,8 @@ public class US20001VerifyUpdatedStylistDetailsInCommissionTest extends BaseTest
 
 	@Steps
 	public CommissionStylistValidationWorkflows commissionValidationWorkflows;
+	@Steps
+	public CustomVerification customVerifications;
 
 	CommissionStylistModel commissionStylistModel;
 	DBStylistModel dBStylistModel;
@@ -40,9 +43,10 @@ public class US20001VerifyUpdatedStylistDetailsInCommissionTest extends BaseTest
 	}
 
 	@Test
-	public void us20001VerifyNewCreatedStylistDetailsInCommissionTest() {
+	public void us20001VerifyUpdatedStylistDetailsInCommissionTest() {
 
 		commissionValidationWorkflows.validateCommssionStylistProperties(commissionStylistModel, dBStylistModel);
+		customVerifications.printErrors();
 
 	}
 
