@@ -36,8 +36,8 @@ public class CommissionReportPage extends AbstractPage {
 		element(closedMonthSelect).selectByVisibleText(DateUtils.getPreviousMonth("MMMM yyyy"));
 	}
 
-	public void selectCloseMonthDate() {
+	public void enterCloseMonthDate() {
 		element(closeMonthDate).waitUntilVisible();
-		element(closeMonthDate).selectByVisibleText(DateUtils.getCurrentDate("yyyy-MM-dd"));
+		closeMonthDate.sendKeys(DateUtils.getCurrentDate("yyyy-MM-dd"));
 	}
 }

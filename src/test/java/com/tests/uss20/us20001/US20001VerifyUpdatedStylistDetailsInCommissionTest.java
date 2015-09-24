@@ -46,6 +46,7 @@ public class US20001VerifyUpdatedStylistDetailsInCommissionTest extends BaseTest
 	public void us20001VerifyUpdatedStylistDetailsInCommissionTest() {
 
 		commissionValidationWorkflows.validateCommssionStylistProperties(commissionStylistModel, dBStylistModel);
+		
 		customVerifications.printErrors();
 
 	}
