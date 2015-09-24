@@ -2,6 +2,7 @@ package com.pages.external.commission;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 
 import com.tools.requirements.AbstractPage;
@@ -11,9 +12,12 @@ public class CommissionReportPage extends AbstractPage {
 
 	@FindBy(id = "months")
 	private WebElement closedMonthSelect;
-	
+
 	@FindBy(id = "savecommdate")
 	private WebElement saveCommDateButton;
+
+	@FindBy(id = "afterdownload-wrapper")
+	private WebElement afterDownloadContainer;
 
 	@FindBy(id = "commdate")
 	private WebElement closeMonthDate;
@@ -28,11 +32,14 @@ public class CommissionReportPage extends AbstractPage {
 		element(closeMonthButton).waitUntilVisible();
 		closeMonthButton.click();
 	}
-	
+
 	public void saveCommDate() {
 		element(saveCommDateButton).waitUntilVisible();
 		saveCommDateButton.click();
-		getDriver().switchTo().alert().accept();
+		waitABit(1000);
+		Alert alert = getDriver().switchTo().alert();
+		System.out.println(alert.getText());
+		alert.accept();
 	}
 
 	public void simulateMonth() {
