@@ -37,9 +37,6 @@ public class CommissionReportPage extends AbstractPage {
 		element(saveCommDateButton).waitUntilVisible();
 		saveCommDateButton.click();
 		waitABit(1000);
-		Alert alert = getDriver().switchTo().alert();
-		System.out.println(alert.getText());
-		alert.accept();
 	}
 
 	public void simulateMonth() {
