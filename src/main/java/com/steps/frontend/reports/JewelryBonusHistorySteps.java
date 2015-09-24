@@ -42,6 +42,7 @@ public class JewelryBonusHistorySteps extends AbstractSteps {
 
 	@Step
 	private void validateDate(String expectedDate, String actualDate) {
+		System.out.println("@@@@" + expectedDate + "," + actualDate + "@@@");
 		Assert.assertTrue("The dates don't match", expectedDate.contentEquals(actualDate));
 	}
 

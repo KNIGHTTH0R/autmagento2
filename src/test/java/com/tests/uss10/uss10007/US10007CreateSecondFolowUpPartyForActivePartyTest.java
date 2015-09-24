@@ -82,7 +82,7 @@ public class US10007CreateSecondFolowUpPartyForActivePartyTest extends BaseTest 
 	}
 
 	@Test
-	public void us10007CreateFolowUpPartyForActivePartyTest() {
+	public void us10007CreateSecondFolowUpPartyForActivePartyTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

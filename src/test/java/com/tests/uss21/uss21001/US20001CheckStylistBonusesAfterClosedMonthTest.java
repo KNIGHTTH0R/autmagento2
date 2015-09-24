@@ -44,6 +44,7 @@ public class US20001CheckStylistBonusesAfterClosedMonthTest extends BaseTest {
 	public void us20001CheckStylistBonusesAfterClosedMonthTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
+		//TODO remove hardcoded stuff
 		backEndSteps.searchForEmail("mihaialexandrubarta@gmail.com");
 		backEndSteps.openCustomerDetails("mihaialexandrubarta@gmail.com");
 		backEndSteps.clickOnRewardsPointsTab();
