@@ -58,11 +58,11 @@ public class DashboardPage extends AbstractPage {
 	}
 
 	public String getJewelryBonus() {
-		return jewelryContainer.getText();
+		return jewelryContainer.getText().replace(".", "").replace(",", ".");
 	}
 
 	public String getMarketingMaterialBonus() {
-		return marketingBonusContainer.getText();
+		return marketingBonusContainer.getText().replace(".", "").replace(",", ".");
 	}
 
 }
