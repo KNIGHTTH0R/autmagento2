@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.calculation.ClosedMonthBonusCalculation;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.env.variables.Credentials;
@@ -27,6 +28,8 @@ public class US20001CheckStylistBonusesAfterClosedMonthTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public CommissionClosedMonthRewardsValidationWorkflows commissionClosedMonthRewardsValidationWorkflows;
+	@Steps
+	public CustomVerification customVerifications;
 
 	RewardPointsOfStylistModel initialRewardPointsOfStylistModel = new RewardPointsOfStylistModel();
 	RewardPointsOfStylistModel calculatedRewardPointsOfStylistModel = new RewardPointsOfStylistModel();
@@ -50,6 +53,8 @@ public class US20001CheckStylistBonusesAfterClosedMonthTest extends BaseTest {
 		backEndSteps.clickOnRewardsPointsTab();
 		RewardPointsOfStylistModel grabbedRewardPointsOfStylistModel = backEndSteps.getRewardPointsOfStylistModel();
 		commissionClosedMonthRewardsValidationWorkflows.validateClosedMonthRewardPoints(finalRewardPointsOfStylistModel, grabbedRewardPointsOfStylistModel);
+		
+		customVerifications.printErrors();
 
 	}
 }
