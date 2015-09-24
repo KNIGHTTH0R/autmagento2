@@ -64,8 +64,8 @@ public class DashboardPage extends AbstractPage {
 		return jewelryContainer.getText().replace(".", "").replace(",", ".").concat("00");
 	}
 
-	public String getMarketingMaterialBonus() {
-		return marketingBonusContainer.getText().replace(".", "").replace(",", ".");
+	public String getMarketingMaterialBonusWithFourDecimals() {
+		return marketingBonusContainer.getText().replace(".", "").replace(",", ".").concat("00");
 	}
 
 }

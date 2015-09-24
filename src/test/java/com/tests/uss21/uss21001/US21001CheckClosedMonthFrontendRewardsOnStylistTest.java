@@ -87,7 +87,7 @@ public class US21001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTes
 		headerSteps.goToProfile();
 
 		String dashboardTotalJb = dashboardSteps.getJewelryBonusWithFourDecimals();
-		String dashboardTotalMmb = dashboardSteps.getMarketingMaterialBonus();
+		String dashboardTotalMmb = dashboardSteps.getMarketingMaterialBonusWithFourDecimals();
 
 		dashboardSteps.validateDashboardTotalJewerlyBonus(finalRewardPointsOfStylistModel.getJewelryBonus(), dashboardTotalJb);
 		dashboardSteps.validateDashboardTotalMarketingBonus(finalRewardPointsOfStylistModel.getMarketingMaterialBonus(), dashboardTotalMmb);

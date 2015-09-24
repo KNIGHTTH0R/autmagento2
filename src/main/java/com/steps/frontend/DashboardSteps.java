@@ -54,8 +54,8 @@ public class DashboardSteps extends AbstractSteps {
 	}
 
 	@Step
-	public String getMarketingMaterialBonus() {
-		return dashboardPage().getMarketingMaterialBonus();
+	public String getMarketingMaterialBonusWithFourDecimals() {
+		return dashboardPage().getMarketingMaterialBonusWithFourDecimals();
 	}
 
 	@Step
