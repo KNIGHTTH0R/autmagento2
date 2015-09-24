@@ -36,7 +36,9 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 		String incrementId = MongoReader.grabIncrementId("US20001GetStylistIncrementIdTest");
 
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(incrementId);
+		System.out.println(commissionStylistModel.getBankAccountVatPayer());
 		dBStylistModel = ApiCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);
+		System.out.println(dBStylistModel.getVatPayer());
 	}
 
 	@Test

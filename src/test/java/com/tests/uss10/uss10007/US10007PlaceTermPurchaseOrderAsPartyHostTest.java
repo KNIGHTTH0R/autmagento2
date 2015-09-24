@@ -163,7 +163,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 
 		partyBonusCalculationModel.setTotal(confirmationSteps.grabConfirmationTotals().getSubTotal());
 		partyBonusCalculationModel.setIp(genProduct1.getIp());
-		partyBonusCalculationModel.setPercent("100");
+		partyBonusCalculationModel.setPercent("40");
 
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();

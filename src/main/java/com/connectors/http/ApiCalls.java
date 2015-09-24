@@ -346,7 +346,7 @@ public class ApiCalls {
 			NodeList childNodes = stylistList.item(i).getChildNodes();
 			for (int j = 0; j < childNodes.getLength(); j++) {
 
-				model.setVatPayer("false");
+				model.setVatPayer("0");
 
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
 					model.setStylistId(childNodes.item(j).getTextContent());
