@@ -32,6 +32,7 @@ public class PaymentPage extends AbstractPage {
 	public void expandCreditCardForm() {
 		element(creditCardContainer).waitUntilVisible();
 		creditCardContainer.click();
+		waitABit(2000);
 	}
 
 	public void expandBankTransferForm() {

@@ -8,7 +8,7 @@ import com.tools.data.backend.RewardPointsOfStylistModel;
 public class CommissionClosedMonthRewardsValidationWorkflows {
 
 	@Step
-	public void validateClosedMonthRewardPoints(RewardPointsOfStylistModel grabbedModel, RewardPointsOfStylistModel expectedModel) {
+	public void validateClosedMonthRewardPoints(RewardPointsOfStylistModel expectedModel, RewardPointsOfStylistModel grabbedModel) {
 		verifyJewelryBonus(grabbedModel.getJewelryBonus(), expectedModel.getJewelryBonus());
 		verifyMarketingMaterial(grabbedModel.getMarketingMaterialBonus(), expectedModel.getMarketingMaterialBonus());
 	}

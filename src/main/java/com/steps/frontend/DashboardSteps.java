@@ -55,11 +55,11 @@ public class DashboardSteps extends AbstractSteps {
 
 	@Step
 	public void validateDashboardTotalJewerlyBonus(String expectedTotal, String actualTotal) {
-		Assert.assertTrue("The dashboard total JB doesn't match", expectedTotal.contentEquals(actualTotal.replace(".", "").replace(",", ".")));
+		Assert.assertTrue("The dashboard total JB doesn't match", expectedTotal.contains(actualTotal.replace(".", "").replace(",", ".")));
 	}
 	@Step
 	public void validateDashboardTotalMarketingBonus(String expectedTotal, String actualTotal) {
-		Assert.assertTrue("The dashboard totals MMB doesn't match", expectedTotal.contentEquals(actualTotal.replace(".", "").replace(",", ".")));
+		Assert.assertTrue("The dashboard totals MMB doesn't match", expectedTotal.contains(actualTotal.replace(".", "").replace(",", ".")));
 	}
 
 	@Step

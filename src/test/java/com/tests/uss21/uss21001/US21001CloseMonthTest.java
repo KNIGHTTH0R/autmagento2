@@ -22,7 +22,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US21", type = "frontend")
 @Story(Application.KoboSubscription.class)
 @RunWith(ThucydidesRunner.class)
-public class US20001CloseMonthAndVerifyReceivedJbAndMmbTest extends BaseTest {
+public class US21001CloseMonthTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -37,7 +37,7 @@ public class US20001CloseMonthAndVerifyReceivedJbAndMmbTest extends BaseTest {
 	}
 
 	@Test
-	public void us20001StyleCoachRegistrationTest() throws Exception {
+	public void us21001CloseMonthAndVerifyReceivedJbAndMmbTest() throws Exception {
 
 		backEndSteps.navigate(UrlConstants.COMMISSION_REPORTS_URL);
 		calculatedRewordPointsOfStylistModel = commissionReportSteps.closeMonth();

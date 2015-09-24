@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,14 +15,14 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
-import com.tools.data.backend.JewelryHistoryModel;
+import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "frontend")
+@WithTag(name = "US21", type = "frontend")
 @Story(Application.ZzzProducts.class)
 @RunWith(ThucydidesRunner.class)
-public class US20001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTest {
+public class US21001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -36,10 +37,17 @@ public class US20001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTes
 
 	private String username, password;
 
-	private JewelryHistoryModel expectedJewelryHistoryModel = new JewelryHistoryModel();
+	private RewardPointsOfStylistModel finalRewardPointsOfStylistModel = new RewardPointsOfStylistModel();
+
+	@Before
+	public void setUp() {
+
+		finalRewardPointsOfStylistModel = MongoReader.grabReviewPoints("US21001CheckStylistBonusesAfterClosedMonthTest").get(0);
+
+	}
 
 	@Test
-	public void us15004VerifyDashboardAndJbHistoryCompleteOrderTest() {
+	public void us21001CheckClosedMonthFrontendRewardsOnStylistTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -49,8 +57,8 @@ public class US20001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTes
 		String dashboardTotalJb = dashboardSteps.getJewelryBonus();
 		String dashboardTotalMmb = dashboardSteps.getMarketingMaterialBonus();
 
-		dashboardSteps.validateDashboardTotalJewerlyBonus(expectedJewelryHistoryModel.getTotalPoints(), dashboardTotalJb);
-		dashboardSteps.validateDashboardTotalMarketingBonus(expectedJewelryHistoryModel.getTotalPoints(), dashboardTotalMmb);
+		dashboardSteps.validateDashboardTotalJewerlyBonus(finalRewardPointsOfStylistModel.getJewelryBonus(), dashboardTotalJb);
+		dashboardSteps.validateDashboardTotalMarketingBonus(finalRewardPointsOfStylistModel.getMarketingMaterialBonus(), dashboardTotalMmb);
 
 	}
 
