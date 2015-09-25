@@ -57,9 +57,11 @@ public class DashboardPage extends AbstractPage {
 		return styleCoachName;
 	}
 
+	
 	public String getJewelryBonus() {
 		return jewelryContainer.getText().replace(".", "").replace(",", ".");
 	}
+	
 	public String getJewelryBonusWithFourDecimals() {
 		return jewelryContainer.getText().replace(".", "").replace(",", ".").concat("00");
 	}

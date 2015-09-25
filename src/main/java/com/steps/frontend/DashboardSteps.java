@@ -48,10 +48,12 @@ public class DashboardSteps extends AbstractSteps {
 	public String getJewelryBonusWithFourDecimals() {
 		return dashboardPage().getJewelryBonusWithFourDecimals();
 	}
+
 	@Step
 	public String getJewelryBonus() {
 		return dashboardPage().getJewelryBonus();
 	}
+
 
 	@Step
 	public String getMarketingMaterialBonusWithFourDecimals() {
@@ -60,14 +62,12 @@ public class DashboardSteps extends AbstractSteps {
 
 	@Step
 	public void validateDashboardTotalJewerlyBonus(String expectedTotal, String actualTotal) {
-		Assert.assertTrue("The dashboard total JB doesn't match - Expected: " + expectedTotal + "   Actual: " + actualTotal,
-				expectedTotal.contentEquals(actualTotal));
+		Assert.assertTrue("The dashboard total JB doesn't match - Expected: " + expectedTotal + "   Actual: " + actualTotal, expectedTotal.contentEquals(actualTotal));
 	}
 
 	@Step
 	public void validateDashboardTotalMarketingBonus(String expectedTotal, String actualTotal) {
-		Assert.assertTrue("The dashboard totals MMB doesn't match - Expected: " + expectedTotal + "   Actual: " + actualTotal,
-				expectedTotal.contentEquals(actualTotal));
+		Assert.assertTrue("The dashboard totals MMB doesn't match - Expected: " + expectedTotal + "   Actual: " + actualTotal, expectedTotal.contentEquals(actualTotal));
 	}
 
 	@Step

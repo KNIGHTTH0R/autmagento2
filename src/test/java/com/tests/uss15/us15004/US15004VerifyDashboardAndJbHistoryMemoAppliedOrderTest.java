@@ -78,7 +78,7 @@ public class US15004VerifyDashboardAndJbHistoryMemoAppliedOrderTest extends Base
 	}
 
 	@Test
-	public void us15004VerifyDashboardAndJbHistoryCancelledOrderTest() {
+	public void us15004VerifyDashboardAndJbHistoryMemoAppliedOrderTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
