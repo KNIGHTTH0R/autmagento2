@@ -14,6 +14,11 @@ public class PaymentSteps extends AbstractSteps {
 	public void expandCreditCardForm() {
 		paymentPage().expandCreditCardForm();
 	}
+	
+	@Step
+	public boolean isCreditCardFormExpended() {
+		return paymentPage().isCreditCardFormExpended();
+	}
 
 	@Step
 	public void expandBankTransferForm() {

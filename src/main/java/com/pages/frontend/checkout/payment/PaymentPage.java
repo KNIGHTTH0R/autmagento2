@@ -29,9 +29,16 @@ public class PaymentPage extends AbstractPage {
 	@FindBy(css = "input.paySubmit.paySubmitbankTransfer_IBAN")
 	private WebElement confirmPayBankTransferEs;
 
+	@FindBy(id = "card.cardNumber")
+	private WebElement cardNumberInput;
+
 	public void expandCreditCardForm() {
 		element(creditCardContainer).waitUntilVisible();
 		creditCardContainer.click();
+	}
+
+	public boolean isCreditCardFormExpended() {
+		return element(cardNumberInput).isVisible();
 	}
 
 	public void expandBankTransferForm() {

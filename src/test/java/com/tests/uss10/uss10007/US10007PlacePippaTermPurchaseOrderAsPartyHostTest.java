@@ -157,7 +157,7 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 		String url = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		if (MongoReader.getContext().contentEquals("de")) {
+		if (!paymentSteps.isCreditCardFormExpended()) {
 			paymentSteps.expandCreditCardForm();
 		}
 		paymentSteps.fillCreditCardForm(creditCardData);

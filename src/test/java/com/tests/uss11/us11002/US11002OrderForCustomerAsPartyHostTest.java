@@ -193,7 +193,7 @@ public class US11002OrderForCustomerAsPartyHostTest extends BaseTest {
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		if (MongoReader.getContext().contentEquals("de")) {
+		if (!paymentSteps.isCreditCardFormExpended()) {
 			paymentSteps.expandCreditCardForm();
 		}
 		paymentSteps.fillCreditCardForm(creditCardData);
