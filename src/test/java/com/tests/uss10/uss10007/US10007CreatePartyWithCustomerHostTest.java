@@ -25,7 +25,6 @@ import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -48,7 +47,6 @@ public class US10007CreatePartyWithCustomerHostTest extends BaseTest {
 	public PartyCreationSteps partyCreationSteps;
 
 	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
 	private String username, password;
 	private String customerName;
 
@@ -91,7 +89,6 @@ public class US10007CreatePartyWithCustomerHostTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
-		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		partyDetailsSteps.verifyPlannedPartyAvailableActions();
 	}
 

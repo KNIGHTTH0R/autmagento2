@@ -25,7 +25,6 @@ import com.steps.frontend.PartiesListSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
 import com.tools.calculation.PartyBonusCalculation;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
@@ -122,7 +121,7 @@ public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends Bas
 
 	@After
 	public void saveData() {
-
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveClosedPartyPerformanceModel(expectedClosedPartyPerformanceModel, getClass().getSimpleName());
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
 	}
 }

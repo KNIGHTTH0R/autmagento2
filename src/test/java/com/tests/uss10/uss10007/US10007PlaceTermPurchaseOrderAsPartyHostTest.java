@@ -128,7 +128,7 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us10007PlaceSecondOrderForCustomerAsPartyHostTest() {
+	public void us10007PlaceTermPurchaseOrderAsPartyHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

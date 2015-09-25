@@ -27,7 +27,6 @@ import com.tests.BaseTest;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -53,7 +52,6 @@ public class US10008CreatePartyWithNewContactHostTest extends BaseTest {
 	public PartyCreationSteps partyCreationSteps;
 
 	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
 	private String username, password;
 
 	public CustomerFormModel customerData;
@@ -102,7 +100,6 @@ public class US10008CreatePartyWithNewContactHostTest extends BaseTest {
 		headerSteps.goToCreatePartyWithNewContactPage();
 		createNewContactSteps.fillCreateNewContact(customerData, addressData);
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForNewCustomerHost());
-		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		partyDetailsSteps.verifyPlannedPartyAvailableActions();
 		partyDetailsSteps.sendInvitationToGest(inviteData);
 		partyDetailsSteps.verifyThatGuestIsInvited(inviteData.getFirstName());

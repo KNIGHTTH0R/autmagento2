@@ -13,6 +13,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,7 @@ import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.commission.CommissionPartyPerformanceValidationWorkflows;
@@ -49,7 +51,7 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	CommissionPartyPerformanceValidationWorkflows commissionPartyValidationWorkflows;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 	public static UrlModel urlModel = new UrlModel();
 	ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
@@ -113,8 +115,13 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		PrintUtils.printClosedPartyModel(grabbedClosedPartyPerformanceModel);
 
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
-		
+
 		customVerifications.printErrors();
 
+	}
+
+	@After
+	public void tearDown() {
+		MongoWriter.saveClosedPartyPerformanceModel(expectedClosedPartyPerformanceModel, getClass().getSimpleName());
 	}
 }

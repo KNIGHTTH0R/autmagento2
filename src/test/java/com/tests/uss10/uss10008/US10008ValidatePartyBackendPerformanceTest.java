@@ -33,7 +33,6 @@ public class US10008ValidatePartyBackendPerformanceTest extends BaseTest {
 	public BackendPartyPerformanceValidationWorkflows backendPartyPerformanceValidationWorkflows;
 	@Steps 
 	public CustomVerification customVerifications;
-
 	@Steps
 	public PartyListBackendSteps partyListBackendSteps;
 	ClosedPartyPerformanceModel expectedModel;
