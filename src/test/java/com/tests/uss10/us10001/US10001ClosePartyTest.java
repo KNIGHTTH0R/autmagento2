@@ -94,7 +94,7 @@ public class US10001ClosePartyTest extends BaseTest {
 			}
 			headerSteps.selectLanguage(MongoReader.getContext());
 			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.closeTheParty("10");
+			partyDetailsSteps.closeTheParty();
 			partyDetailsSteps.verifyClosedPartyAvailableActions();
 		}
 	}

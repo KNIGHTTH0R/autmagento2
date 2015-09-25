@@ -12,9 +12,9 @@ public class PartyDetailsSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@StepGroup
-	public void closeTheParty(String number) {
+	public void closeTheParty() {
 		partyDetailsPage().closeParty();
-		partyDetailsPage().typePartyAttendersNumber(number);
+		partyDetailsPage().typePartyAttendersNumber("10");
 		partyDetailsPage().popupCloseParty();
 
 	}

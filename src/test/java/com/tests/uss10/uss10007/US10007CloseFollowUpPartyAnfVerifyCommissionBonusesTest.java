@@ -54,7 +54,7 @@ public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends Bas
 	public PartiesListSteps partiesListSteps;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 	public static UrlModel urlModel = new UrlModel();
 	ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
@@ -91,7 +91,7 @@ public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends Bas
 		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
 		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyTotal(partyBonusCalculationModelList)));
-		expectedClosedPartyPerformanceModel.setFourthyDiscounts("0");
+		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
 		expectedClosedPartyPerformanceModel.setIp(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setIpInPayment(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 
@@ -109,17 +109,17 @@ public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends Bas
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToPartieList();
 		urlModel.setUrl(partiesListSteps.goToFirstParty());
-		partyDetailsSteps.closeTheParty("10");
+		partyDetailsSteps.closeTheParty();
 		partyDetailsSteps.returnToParty();
 		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
 		PrintUtils.printClosedPartyModel(grabbedClosedPartyPerformanceModel);
 
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
-		
+
 		customVerifications.printErrors();
 
 	}
-	
+
 	@After
 	public void saveData() {
 

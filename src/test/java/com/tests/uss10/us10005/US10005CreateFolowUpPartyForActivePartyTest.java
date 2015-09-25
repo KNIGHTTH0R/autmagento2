@@ -94,7 +94,7 @@ public class US10005CreateFolowUpPartyForActivePartyTest extends BaseTest {
 		partyDetailsSteps.createFolowUpParty();
 		partyCreationSteps.fillPartyDetailsForCustomerHost(customerName);		
 		partyDetailsSteps.verifyThatFolowUpPartyAppearsOnPartyDetailsPage(customerName);
-		partyDetailsSteps.closeTheParty("10");
+		partyDetailsSteps.closeTheParty();
 		partyDetailsSteps.verifyClosedPartyAvailableActions();
 
 	}
