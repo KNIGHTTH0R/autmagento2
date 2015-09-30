@@ -51,6 +51,11 @@ public class CreateNewContactPage extends AbstractPage {
 		element(firstname).waitUntilVisible();
 		firstname.sendKeys(name);
 	}
+	public void changeClassNameForFirstnameInput() {
+		element(firstname).waitUntilVisible();
+		changeClassName();
+		firstname.sendKeys("");
+	}
 
 	public void lastnameInput(String name) {
 		element(lastname).waitUntilVisible();

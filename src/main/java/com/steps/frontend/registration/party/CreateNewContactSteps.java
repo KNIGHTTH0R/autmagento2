@@ -24,6 +24,18 @@ public class CreateNewContactSteps extends AbstractSteps {
 		waitABit(4000);
 	}
 	@Step
+	public void fillCreateNewContactWithoutFirstname(CustomerFormModel customerData, AddressModel addressData) {
+		createNewContactPage().changeClassNameForFirstnameInput();
+		createNewContactPage().lastnameInput(customerData.getLastName());
+		createNewContactPage().emailInput(customerData.getEmailName());
+		fillContactDetails(addressData);
+		createNewContactPage().checkNewsletter();
+		createNewContactPage().checkParties();
+		createNewContactPage().checkMember();
+		createNewContactPage().submitContact();
+		waitABit(4000);
+	}
+	@Step
 	public void fillCreateNewContactDirectly(CustomerFormModel customerData, AddressModel addressData) {
 		createNewContactPage().firstnameInput(customerData.getFirstName());
 		createNewContactPage().lastnameInput(customerData.getLastName());
