@@ -51,9 +51,10 @@ public class CreateNewContactPage extends AbstractPage {
 		element(firstname).waitUntilVisible();
 		firstname.sendKeys(name);
 	}
-	public void changeClassNameForFirstnameInput() {
+	public void skipFirstnameInput(String name) {
 		element(firstname).waitUntilVisible();
-		changeClassName();
+		firstname.sendKeys(name);
+		evaluateJavascript("document.getElementByName(\"#addContactForm input[name*='firstname']\")[class] = input-text;");
 		firstname.sendKeys("");
 	}
 

@@ -13,7 +13,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 
 	@Step
 	public void fillCreateNewContact(CustomerFormModel customerData, AddressModel addressData) {
-		createNewContactPage().firstnameInput(customerData.getFirstName());
+	
 		createNewContactPage().lastnameInput(customerData.getLastName());
 		createNewContactPage().emailInput(customerData.getEmailName());
 		fillContactDetails(addressData);
@@ -25,7 +25,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 	}
 	@Step
 	public void fillCreateNewContactWithoutFirstname(CustomerFormModel customerData, AddressModel addressData) {
-		createNewContactPage().changeClassNameForFirstnameInput();
+		createNewContactPage().skipFirstnameInput(customerData.getFirstName());
 		createNewContactPage().lastnameInput(customerData.getLastName());
 		createNewContactPage().emailInput(customerData.getEmailName());
 		fillContactDetails(addressData);

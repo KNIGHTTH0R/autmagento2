@@ -72,7 +72,7 @@ public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.goToToAddNewContact();		
+		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContactWithoutFirstname(dataModel, addressModel);
 		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 
