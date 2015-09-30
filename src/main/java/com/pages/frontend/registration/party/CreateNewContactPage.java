@@ -54,9 +54,9 @@ public class CreateNewContactPage extends AbstractPage {
 	public void skipFirstnameInput(String name) {
 //		element(firstname).waitUntilVisible();
 //		firstname.sendKeys(name);
-//		evaluateJavascript("document.getElementsByName('firstname').class = 'input-text';");
-		evaluateJavascript("document.getElementsByName('firstname').removeClass('required-entry input-text')");
-		evaluateJavascript("document.getElementsByName('firstname').removeClass('input-text')");
+		evaluateJavascript("document.getElementsByName('firstname').className = 'input-text';");
+//		evaluateJavascript("document.getElementsByName('firstname').removeClass('required-entry input-text')");
+//		evaluateJavascript("document.getElementsByName('firstname').removeClass('input-text')");
 //		firstname.sendKeys("");
 	}
 
