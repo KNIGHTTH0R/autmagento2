@@ -52,10 +52,10 @@ public class CreateNewContactPage extends AbstractPage {
 		firstname.sendKeys(name);
 	}
 	public void skipFirstnameInput(String name) {
-		element(firstname).waitUntilVisible();
-		firstname.sendKeys(name);
+//		element(firstname).waitUntilVisible();
+//		firstname.sendKeys(name);
 		evaluateJavascript("document.getElementsByName('firstname').class = 'input-text';");
-		firstname.sendKeys("");
+//		firstname.sendKeys("");
 	}
 
 	public void lastnameInput(String name) {
