@@ -51,8 +51,8 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 
 		dateModel = new DateModel();
 		dataModel = new CustomerFormModel();
-		dataModel.setFirstName("NEYJWYYZ");
-		dataModel.setLastName("FCVIZFFT");
+//		dataModel.setFirstName("NEYJWYYZ");
+//		dataModel.setLastName("FCVIZFFT");
 		addressModel = new AddressModel();
 
 		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
@@ -72,7 +72,7 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.goToToAddNewContact();		
+		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
 		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 

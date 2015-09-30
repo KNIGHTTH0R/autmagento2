@@ -28,7 +28,7 @@ import com.tools.utils.DateUtils;
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
+public class US17001AddThirdContactToStyleCoachTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -42,15 +42,18 @@ public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
 	public CreateNewContactSteps createNewContactSteps;
 
 	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel contactModel;
+	public CustomerFormModel dataModel;
 	public DateModel dateModel;
 	public AddressModel addressModel;
 
 	@Before
 	public void setUp() throws Exception {
 
-		contactModel = MongoReader.grabCustomerFormModels("US17001AddNewContactToStyleCoachTest").get(0);
+		dateModel = new DateModel();
+		dataModel = new CustomerFormModel();
+		dataModel.setEmailName();
 		addressModel = new AddressModel();
+		addressModel.setStreetAddress("DDFDFD");
 
 		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
 		if (size > 0) {
@@ -62,7 +65,7 @@ public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
 	}
 
 	@Test
-	public void us17001AddSecondNewContactToStyleCoachTest() {
+	public void us17001AddThirdContactToStyleCoachTest() {
 
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
 		if (!headerSteps.succesfullLogin()) {
@@ -70,14 +73,14 @@ public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
-		createNewContactSteps.fillCreateNewContactWithoutUnrequiredAddressDetailsAndWithoutInterrests(contactModel, addressModel);
+		createNewContactSteps.fillCreateNewContactWithoutScInterrest(dataModel, addressModel);
 		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 
 	}
 
-//	@After
-//	public void saveData() {
-//		MongoWriter.saveCustomerFormModel(contactModel, getClass().getSimpleName());
-//		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
-//	}
+	@After
+	public void saveData() {
+		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
+	}
 }
