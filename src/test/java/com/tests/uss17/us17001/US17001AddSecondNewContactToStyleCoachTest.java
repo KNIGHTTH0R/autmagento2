@@ -43,7 +43,7 @@ public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
 
 	public CustomerFormModel stylistRegistrationData;
 	public CustomerFormModel contactModel;
-	public DateModel dateModel;
+	public DateModel dateModel = new DateModel();
 	public AddressModel addressModel;
 
 	@Before
