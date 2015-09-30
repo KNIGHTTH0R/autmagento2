@@ -13,7 +13,7 @@ import com.tests.uss17.us17001.US17001ReasignContactsTest;
 import com.tests.uss17.us17001.US17001RegularCustomerRegistrationTest;
 import com.tests.uss17.us17001.US17001StyleCoachRegistrationTest;
 import com.tests.uss17.us17001.US17001StyleCoachRegistrationWithKnownSponsorTest;
-import com.tests.uss17.us17001.US17001VerifyThatContactsWhereRedistributedToStylecoachTest;
+import com.tests.uss17.us17001.US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest;
 import com.tests.uss17.us17001.US17001VerifyThatOldStylistWasDeactivatedTest;
 import com.tests.uss17.us17001.US17001CheckReassignedStylecoachSponsorTest;
 
@@ -27,7 +27,7 @@ import com.tests.uss17.us17001.US17001CheckReassignedStylecoachSponsorTest;
 	US17001RegularCustomerRegistrationTest.class,
 	US17001ConfirmCustomerTest.class,
 	US17001ReasignContactsTest.class,
-	US17001VerifyThatContactsWhereRedistributedToStylecoachTest.class,
+	US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest.class,
 	US17001CheckReassignedStylecoachSponsorTest.class,
 	US17001VerifyThatOldStylistWasDeactivatedTest.class,
 })

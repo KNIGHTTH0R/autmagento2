@@ -26,10 +26,17 @@ public class HomePage extends AbstractPage {
 
 	@FindBy(css = "#cssmenu > ul > li:nth-child(2) > ul li > a[href*='neu.html']")
 	private WebElement newMenu;
+	
+	@FindBy(id = "change-shop")
+	private WebElement changeShopButton;
 
 	public void clickStyleCoachLink() {
 		styleCoachLink.click();
 
+	}
+	public void clickChangeShop() {
+		changeShopButton.click();
+		
 	}
 	public void clickStylePartyLink() {
 		stylePartyLink.click();

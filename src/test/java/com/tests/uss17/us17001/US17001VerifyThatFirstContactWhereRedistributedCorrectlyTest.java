@@ -32,7 +32,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US17001VerifyThatContactsWhereRedistributedToStylecoachTest extends BaseTest {
+public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -47,7 +47,6 @@ public class US17001VerifyThatContactsWhereRedistributedToStylecoachTest extends
 
 	public CustomerFormModel stylistRegistrationData;
 
-	public CustomerFormModel customerModel;
 	public CustomerFormModel contactModel;
 	public DateModel dateModel;
 
@@ -79,15 +78,14 @@ public class US17001VerifyThatContactsWhereRedistributedToStylecoachTest extends
 			}
 		}
 
-		customerModel = MongoReader.grabCustomerFormModels("US17001RegularCustomerRegistrationTest").get(0);
 		contactModel = MongoReader.grabCustomerFormModels("US17001AddNewContactToStyleCoachTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US17001AddNewContactToStyleCoachTest").get(0);
+		dateModel = MongoReader.grabStylistDateModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us17001VerifyThatContactsWhereRedistributedToStylecoachTest() {
+	public void us17001VerifyThatFirstContactWhereRedistributedCorrectlyTest() {
 
 		customerRegistrationSteps.performLogin(stylecoachUsername, stylecoachPassword);
 		if (!headerSteps.succesfullLogin()) {
@@ -95,7 +93,6 @@ public class US17001VerifyThatContactsWhereRedistributedToStylecoachTest extends
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyThatContactIsInTheList(customerModel.getEmailName());
 		myContactsListSteps.verifyThatContactMatchesAllTerms(contactModel.getEmailName(), dateModel.getDate());
 		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(contactModel.getFirstName());
 
