@@ -75,9 +75,9 @@ public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
 
 	}
 
-//	@After
-//	public void saveData() {
+	@After
+	public void saveData() {
 //		MongoWriter.saveCustomerFormModel(contactModel, getClass().getSimpleName());
-//		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
-//	}
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
+	}
 }
