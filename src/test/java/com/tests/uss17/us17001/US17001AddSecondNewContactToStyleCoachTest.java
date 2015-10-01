@@ -50,6 +50,7 @@ public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		contactModel = MongoReader.grabCustomerFormModels("US17001AddNewContactToStyleCoachTest").get(0);
+		contactModel.setFirstName();
 		addressModel = new AddressModel();
 
 		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
