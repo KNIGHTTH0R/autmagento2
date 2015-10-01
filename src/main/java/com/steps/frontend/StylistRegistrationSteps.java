@@ -40,9 +40,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		clickOnNachahmePaymentMethod();
-		submitPaymentMethod();
-		finishPayment();
+//		clickOnNachahmePaymentMethod();
+		payWithCreditCard();
+//		submitPaymentMethod();
+//		finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -64,9 +65,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		clickOnNachahmePaymentMethod();
-		submitPaymentMethod();
-		finishPayment();
+		payWithCreditCard();
+//		clickOnNachahmePaymentMethod();
+//		submitPaymentMethod();
+//		finishPayment();
 		
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -139,9 +141,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		clickOnNachahmePaymentMethod();
-		submitPaymentMethod();
-		finishPayment();
+		payWithCreditCard();
+//		clickOnNachahmePaymentMethod();
+//		submitPaymentMethod();
+//		finishPayment();
 		try {
 			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
 					+ addressData.getHomeTown() + "," + addressData.getPostCode());
@@ -169,9 +172,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		clickOnNachahmePaymentMethod();
-		submitPaymentMethod();
-		finishPayment();
+		payWithCreditCard();
+//		clickOnNachahmePaymentMethod();
+//		submitPaymentMethod();
+//		finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -186,9 +190,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		clickOnNachahmePaymentMethod();
-		submitPaymentMethod();
-		finishPayment();
+		payWithCreditCard();
+//		clickOnNachahmePaymentMethod();
+//		submitPaymentMethod();
+//		finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -206,9 +211,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		clickOnNachahmePaymentMethod();
-		submitPaymentMethod();
-		finishPayment();
+		payWithCreditCard();
+//		clickOnNachahmePaymentMethod();
+//		submitPaymentMethod();
+//		finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
