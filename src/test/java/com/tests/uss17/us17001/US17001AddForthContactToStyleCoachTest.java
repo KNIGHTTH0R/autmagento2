@@ -73,7 +73,7 @@ public class US17001AddForthContactToStyleCoachTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
-		createNewContactSteps.fillCreateNewContactWithoutAnyInterrest(contactModel, addressModel);
+		createNewContactSteps.fillCreateNewContactWithoutScInterrestAmdWithoutEmail(contactModel, addressModel);
 		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 
 	}
