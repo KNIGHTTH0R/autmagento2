@@ -41,7 +41,7 @@ public class US17001ChangeFirstCustomersContextTest extends BaseTest {
 	}
 
 	@Test
-	public void us8001CustomerBuyWithForthyDiscountsAndJbTest() {
+	public void us17001ChangeFirstCustomersContextTest() {
 		customerRegistrationSteps.performLoginUnderContext(customerModel.getEmailName(), customerModel.getPassword(),"TvKrmoYdhsCMEAPV");
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
