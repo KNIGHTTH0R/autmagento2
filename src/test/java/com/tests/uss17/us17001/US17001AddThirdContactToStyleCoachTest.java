@@ -51,9 +51,8 @@ public class US17001AddThirdContactToStyleCoachTest extends BaseTest {
 
 		dateModel = new DateModel();
 		dataModel = new CustomerFormModel();
-		dataModel.setEmailName();
 		addressModel = new AddressModel();
-		addressModel.setStreetAddress("DDFDFD");
+		addressModel.setPostCode("445533");
 
 		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
 		if (size > 0) {
@@ -73,7 +72,7 @@ public class US17001AddThirdContactToStyleCoachTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
-		createNewContactSteps.fillCreateNewContactWithoutScInterrest(dataModel, addressModel);
+		createNewContactSteps.fillCreateNewContactWithoutScInterrestAmdWithoutEmail(dataModel, addressModel);
 		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 
 	}

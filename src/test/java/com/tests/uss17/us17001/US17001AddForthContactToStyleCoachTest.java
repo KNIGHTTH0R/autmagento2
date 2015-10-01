@@ -52,7 +52,8 @@ public class US17001AddForthContactToStyleCoachTest extends BaseTest {
 		dateModel = new DateModel();
 		contactModel = MongoReader.grabCustomerFormModels("US17001AddThirdContactToStyleCoachTest").get(0);
 		addressModel = new AddressModel();
-		addressModel.setStreetAddress("DDFDFD");
+		addressModel.setPostCode("445533");
+
 
 		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
 		if (size > 0) {
