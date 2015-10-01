@@ -52,7 +52,7 @@ public class US17001AddThirdContactToStyleCoachTest extends BaseTest {
 		dateModel = new DateModel();
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		addressModel.setPostCode("445533");
+		addressModel.setPostCode("44553");
 
 		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
 		if (size > 0) {
