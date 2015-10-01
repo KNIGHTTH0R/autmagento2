@@ -110,9 +110,6 @@ public class US6003StyleCoachRegistrationTest extends BaseTest {
 		footerSteps.navigateToRegisterFormFromTrainingLink();
 		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 
-		footerSteps.navigateToRegisterFormFromIncentivereisenLink();
-		stylistRegistrationSteps.validateStylistRegisterPageTitle();
-
 		footerSteps.navigateToRegisterFormFromErfolgsgeschichtenLink();
 		stylistRegistrationSteps.validateStylistRegisterPageTitle();
 

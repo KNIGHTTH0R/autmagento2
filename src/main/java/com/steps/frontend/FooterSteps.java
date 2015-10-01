@@ -22,11 +22,6 @@ public class FooterSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void clickIncentivereisenLink() {
-		footerPage().clickIncentivereisenLink();
-	}
-
-	@Step
 	public void clickTrainingLink() {
 		footerPage().clickTrainingLink();
 	}
@@ -55,59 +50,53 @@ public class FooterSteps extends AbstractSteps {
 	// stylistCampaignPage().clickJetztStartenButton();
 	// starterSetPage().clickOnJetztStyleCoachWerdenButton();
 	// }
-	
+
 	@StepGroup
 	public void navigateToRegisterFormFromStarterSetLink() {
 		footerPage().clickStarterSetLink();
 		stylistCampaignPage().clickStartersetOrderButton();
 	}
 
-//	@StepGroup
-//	public void navigateToRegisterFormFromTrainingLink() {
-//		footerPage().clickTrainingLink();
-//		stylistCampaignPage().clickJetztStartenButton();
-//		starterSetPage().clickOnJetztStyleCoachWerdenButton();
-//	}
-	
+	// @StepGroup
+	// public void navigateToRegisterFormFromTrainingLink() {
+	// footerPage().clickTrainingLink();
+	// stylistCampaignPage().clickJetztStartenButton();
+	// starterSetPage().clickOnJetztStyleCoachWerdenButton();
+	// }
+
 	@StepGroup
 	public void navigateToRegisterFormFromTrainingLink() {
 		footerPage().clickTrainingLink();
 		stylistCampaignPage().clickStartersetOrderButton();
 	}
 
-//	@StepGroup
-//	public void navigateToRegisterFormFromIncentivereisenLink() {
-//		footerPage().clickIncentivereisenLink();
-//		stylistCampaignPage().clickStarteJetztButton();
-//		starterSetPage().clickOnJetztStyleCoachWerdenButton();
-//	}
+	// @StepGroup
+	// public void navigateToRegisterFormFromIncentivereisenLink() {
+	// footerPage().clickIncentivereisenLink();
+	// stylistCampaignPage().clickStarteJetztButton();
+	// starterSetPage().clickOnJetztStyleCoachWerdenButton();
+	// }
 
-	@StepGroup
-	public void navigateToRegisterFormFromIncentivereisenLink() {
-		footerPage().clickIncentivereisenLink();
-		stylistCampaignPage().clickStartersetOrderButton();
-	}
+	// @StepGroup
+	// public void navigateToRegisterFormFromErfolgsgeschichtenLink() {
+	// footerPage().clickErfolgsgeschichtenLink();
+	// stylistCampaignPage().clickStarteJetztButton();
+	// starterSetPage().clickOnJetztStyleCoachWerdenButton();
+	// }
 
-//	@StepGroup
-//	public void navigateToRegisterFormFromErfolgsgeschichtenLink() {
-//		footerPage().clickErfolgsgeschichtenLink();
-//		stylistCampaignPage().clickStarteJetztButton();
-//		starterSetPage().clickOnJetztStyleCoachWerdenButton();
-//	}
-	
 	@StepGroup
 	public void navigateToRegisterFormFromErfolgsgeschichtenLink() {
 		footerPage().clickErfolgsgeschichtenLink();
 		stylistCampaignPage().clickStartersetOrderButton();
 	}
 
-//	@StepGroup
-//	public void navigateToRegisterFormFromTraumkarriereStyleCoachLink() {
-//		footerPage().clickTraumkarriereStyleCoachLink();
-//		stylistCampaignPage().clickStarteJetztButton();
-//		starterSetPage().clickOnJetztStyleCoachWerdenButton();
-//	}
-//	
+	// @StepGroup
+	// public void navigateToRegisterFormFromTraumkarriereStyleCoachLink() {
+	// footerPage().clickTraumkarriereStyleCoachLink();
+	// stylistCampaignPage().clickStarteJetztButton();
+	// starterSetPage().clickOnJetztStyleCoachWerdenButton();
+	// }
+	//
 	@StepGroup
 	public void navigateToRegisterFormFromTraumkarriereStyleCoachLink() {
 		footerPage().clickTraumkarriereStyleCoachLink();

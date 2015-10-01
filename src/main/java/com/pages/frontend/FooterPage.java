@@ -13,16 +13,19 @@ import com.tools.requirements.AbstractPage;
 public class FooterPage extends AbstractPage {
 
 	@FindBy(css = "div.columns.last ul li:last-child a")
-	private WebElement registrierungLink;
+	private WebElement styleCoachLoungeLink;
 
 	@FindBy(css = "div.columns.last ul li:nth-child(7) a")
-	private WebElement starterSetLink;
+	private WebElement registrierungLink;
 
 	@FindBy(css = "div.columns.last ul li:nth-child(5) a")
-	private WebElement trainingLink;
+	private WebElement eventsLink;
 
 	@FindBy(css = "div.columns.last ul li:nth-child(4) a")
-	private WebElement incentivereisenLink;
+	private WebElement trainingLink;
+	
+	@FindBy(css = "div.columns.last ul li:nth-child(6) a")
+	private WebElement starterSetLink;
 
 	@FindBy(css = "div.columns.last ul li:nth-child(3) a")
 	private WebElement erfolgsgeschichtenLink;
@@ -71,10 +74,6 @@ public class FooterPage extends AbstractPage {
 
 	public void clickStarterSetLink() {
 		starterSetLink.click();
-	}
-
-	public void clickIncentivereisenLink() {
-		incentivereisenLink.click();
 	}
 
 	public void clickTrainingLink() {
