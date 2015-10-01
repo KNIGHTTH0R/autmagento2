@@ -47,12 +47,11 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 
 	public CustomerFormModel stylistRegistrationData;
 
-	public CustomerFormModel customerModel;
 	public CustomerFormModel contactModel;
 	public DateModel dateModel;
 
-	private String secondStyleCoachUsername;
-	private String secondStyleCoachPassword;
+	private String stylecoachUsername;
+	private String stylecoachPassword;
 
 	@Before
 	public void setUp() throws Exception {
@@ -64,8 +63,8 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
-			secondStyleCoachUsername = prop.getProperty("secondStyleCoachUsername");
-			secondStyleCoachPassword = prop.getProperty("secondStyleCoachPassword");
+			stylecoachUsername = prop.getProperty("stylecoachUsername");
+			stylecoachPassword = prop.getProperty("stylecoachPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -79,9 +78,8 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 			}
 		}
 
-		customerModel = MongoReader.grabCustomerFormModels("US17001RegularCustomerRegistrationTest").get(0);
-		contactModel = MongoReader.grabCustomerFormModels("US17001AddNewContactToStyleCoachTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US17001AddNewContactToStyleCoachTest").get(0);
+		contactModel = MongoReader.grabCustomerFormModels("US17001AddThirdContactToStyleCoachTest").get(0);
+		dateModel = MongoReader.grabStylistDateModels("US17001AddForthContactToStyleCoachTest").get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
@@ -89,13 +87,12 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 	@Test
 	public void us17001VerifyThatSecondContactWhereRedistributedCorrectlyTest() {
 
-		customerRegistrationSteps.performLogin(secondStyleCoachUsername, secondStyleCoachPassword);
+		customerRegistrationSteps.performLogin(stylecoachUsername, stylecoachPassword);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyThatContactIsInTheList(customerModel.getEmailName());
 		myContactsListSteps.verifyThatContactMatchesAllTerms(contactModel.getEmailName(), dateModel.getDate());
 		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(contactModel.getFirstName());
 

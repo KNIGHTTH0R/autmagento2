@@ -32,7 +32,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extends BaseTest {
+public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -47,9 +47,7 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 
 	public CustomerFormModel stylistRegistrationData;
 
-	public CustomerFormModel contactModel;
 	public CustomerFormModel customerModel;
-	public DateModel dateModel;
 
 	private String secondStyleCoachUsername;
 	private String secondStyleCoachPassword;
@@ -79,9 +77,7 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 				}
 			}
 		}
-		customerModel = MongoReader.grabCustomerFormModels("US17001SecondRegularCustomerRegistrationTest").get(0);
-		contactModel = MongoReader.grabCustomerFormModels("US17001AddNewContactToStyleCoachTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
+		customerModel = MongoReader.grabCustomerFormModels("US17001RegularCustomerRegistrationTest").get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
@@ -96,9 +92,6 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
 		myContactsListSteps.verifyThatContactIsInTheList(customerModel.getEmailName());
-		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(customerModel.getFirstName());
-		myContactsListSteps.verifyThatContactMatchesAllTerms(contactModel.getEmailName(), dateModel.getDate());
-		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(contactModel.getFirstName());
 
 	}
 
