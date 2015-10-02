@@ -37,6 +37,7 @@ import com.pages.external.mailchimp.MailchimpListsPage;
 import com.pages.external.mailchimp.MailchimpLoginPage;
 import com.pages.external.mailchimp.MailchimpSearchPage;
 import com.pages.external.mailchimp.MailchimpSubscriberProfilePage;
+import com.pages.frontend.ContactDetailsPage;
 import com.pages.frontend.CreateCustomerPage;
 import com.pages.frontend.FancyBoxPage;
 import com.pages.frontend.FooterPage;
@@ -405,6 +406,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public PartyDetailsPage partyDetailsPage() {
 		return getPages().currentPageAt(PartyDetailsPage.class);
+	}
+	
+	public ContactDetailsPage contactDetailsPage() {
+		return getPages().currentPageAt(ContactDetailsPage.class);
 	}
 
 	public CreateNewContactPage createNewContactPage() {

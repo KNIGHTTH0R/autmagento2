@@ -51,8 +51,6 @@ public class US17002AddNewContactToStyleCoachTest extends BaseTest {
 
 		dateModel = new DateModel();
 		dataModel = new CustomerFormModel();
-//		dataModel.setFirstName("NEYJWYYZ");
-//		dataModel.setLastName("FCVIZFFT");
 		addressModel = new AddressModel();
 
 		int size = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").size();
@@ -82,5 +80,6 @@ public class US17002AddNewContactToStyleCoachTest extends BaseTest {
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(addressModel,  getClass().getSimpleName());
 	}
 }

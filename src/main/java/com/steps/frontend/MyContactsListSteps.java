@@ -13,9 +13,13 @@ public class MyContactsListSteps extends AbstractSteps {
 		myContactsListPage().verifyThatContactIsInTheList(contactName);
 	}
 
+//	@Step
+//	public void verifyThatContactMatchesAllTerms(String... terms) {
+//		myContactsListPage().verifyThatContactMatchesAllTerms(terms);
+//	}
 	@Step
-	public void verifyThatContactMatchesAllTerms(String... terms) {
-		myContactsListPage().verifyThatContactMatchesAllTerms(terms);
+	public void verifyUnicAndOpenContactDetails(String... terms) {
+		myContactsListPage().verifyUnicAndOpenContactDetails(terms);
 	}
 
 	@Step

@@ -43,15 +43,39 @@ public class MyContactsListPage extends AbstractPage {
 		boolean found = false;
 		for (WebElement contact : contactsList) {
 			if (contact.findElement(By.cssSelector("td:nth-child(4) a")).getText().contentEquals(contactName.toUpperCase())) {
-//				Assert.assertTrue("The background is not grey!!!", contact.getAttribute("style").contentEquals("background-color: lightgrey;"));
+				// Assert.assertTrue("The background is not grey!!!",
+				// contact.getAttribute("style").contentEquals("background-color: lightgrey;"));
 				found = true;
 			}
 		}
 		Assert.assertTrue("The contact was not found in the contact list of the stylecoach", found);
 	}
 
-	public void verifyThatContactMatchesAllTerms(String... terms) {
-		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr")).subList(0, 2);
+	// public void verifyThatContactMatchesAllTerms(String... terms) {
+	// List<WebElement> contactsList =
+	// getDriver().findElements(By.cssSelector("form#contacts-form tbody tr")).subList(0,
+	// 2);
+	// boolean found = false;
+	// for (WebElement contact : contactsList) {
+	// boolean matchesAllTerms = true;
+	// for (String term : terms) {
+	// if (!contact.getText().contains(term.toUpperCase())) {
+	// matchesAllTerms = false;
+	// }
+	// }
+	// if (matchesAllTerms) {
+	// Assert.assertTrue("The background is not grey!!!",
+	// contact.getAttribute("style").contentEquals("background-color: lightgrey;"));
+	// found = true;
+	// break;
+	// }
+	//
+	// }
+	// Assert.assertTrue("Contact was not found or not all the terms were found",
+	// found);
+	// }
+	public void verifyUnicAndOpenContactDetails(String... terms) {
+		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
 		boolean found = false;
 		for (WebElement contact : contactsList) {
 			boolean matchesAllTerms = true;
@@ -61,13 +85,16 @@ public class MyContactsListPage extends AbstractPage {
 				}
 			}
 			if (matchesAllTerms) {
-				Assert.assertTrue("The background is not grey!!!", contact.getAttribute("style").contentEquals("background-color: lightgrey;"));
-				found = true;
-				break;
+				if (found) {
+					Assert.fail(String.format("A duplicate of the element was found in the table!"));
+				} else {
+					found = true;
+					contact.findElement(By.cssSelector("td a.blue-text.contact-link"));
+				}
 			}
 
 		}
-		Assert.assertTrue("Contact was not found or not all the terms were found", found);
+		Assert.assertTrue("Contact was not found!!!", found);
 	}
 
 }

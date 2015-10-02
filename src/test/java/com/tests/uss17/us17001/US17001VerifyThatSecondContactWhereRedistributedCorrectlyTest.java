@@ -93,7 +93,7 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyThatContactMatchesAllTerms(contactModel.getEmailName(), dateModel.getDate());
+//		myContactsListSteps.verifyThatContactMatchesAllTerms(contactModel.getEmailName(), dateModel.getDate());
 		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(contactModel.getFirstName());
 
 	}

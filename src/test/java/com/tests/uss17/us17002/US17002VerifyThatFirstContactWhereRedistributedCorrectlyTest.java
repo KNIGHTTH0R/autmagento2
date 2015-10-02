@@ -16,18 +16,22 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.steps.frontend.ContactDetailsSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.MyContactsListSteps;
 import com.tests.BaseTest;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.frontend.contact.ContactValidationWorkflows;
 
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
@@ -44,11 +48,18 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 	public HeaderSteps headerSteps;
 	@Steps
 	public MyContactsListSteps myContactsListSteps;
+	@Steps
+	public ContactDetailsSteps contactDetailsSteps;
+	@Steps
+	public ContactValidationWorkflows contactValidationWorkflows;
 
 	public CustomerFormModel stylistRegistrationData;
 
 	public CustomerFormModel contactModel;
 	public DateModel dateModel;
+	public AddressModel addressModel;
+	public ContactModel grabbedDetailsModel;
+	public ContactModel expectedDetailsModel;
 
 	private String masterSCUsername;
 	private String masterSCPassword;
@@ -80,6 +91,14 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		}
 		contactModel = MongoReader.grabCustomerFormModels("US17002AddNewContactToStyleCoachTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US17002AddNewContactToStyleCoachTest").get(0);
+		addressModel = MongoReader.grabAddressModels("US17002AddNewContactToStyleCoachTest").get(0);
+		expectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
+		expectedDetailsModel.setCreatedAt(dateModel.getDate());
+		expectedDetailsModel.setStreet(addressModel.getStreetAddress());
+		expectedDetailsModel.setNumber(addressModel.getStreetNumber());
+		expectedDetailsModel.setZip(addressModel.getPostCode());
+		expectedDetailsModel.setTown(addressModel.getHomeTown());
+		expectedDetailsModel.setCountry(addressModel.getCountryName());
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
@@ -93,9 +112,9 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyThatContactMatchesAllTerms(contactModel.getEmailName(), dateModel.getDate());
-		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(contactModel.getFirstName());
-
+		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), dateModel.getDate());
+		grabbedDetailsModel = contactDetailsSteps.grabContactDetails();
+		contactValidationWorkflows.validateContactDetails(grabbedDetailsModel, expectedDetailsModel);
 	}
 
 }
