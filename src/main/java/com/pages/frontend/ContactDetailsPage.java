@@ -12,11 +12,11 @@ public class ContactDetailsPage extends AbstractPage {
 
 		ContactModel result = new ContactModel();
 
-		result.setName(getDriver().findElement(By.cssSelector("div.col1-set.page-title .page-title-inner h1 font font")).getText());
-		result.setCreatedAt(getDriver().findElement(By.cssSelector("#contact-source span font font")).getText());
-		result.setPartyHostStatus(getDriver().findElement(By.cssSelector("#contact-interests p:nth-child(2) font")).getText());
-		result.setStyleCoachStatus(getDriver().findElement(By.cssSelector("#contact-interests p:nth-child(3) font")).getText());
-		result.setNewsletterStatus(getDriver().findElement(By.cssSelector("#contact-email-signup p font font")).getText());
+		result.setName(getDriver().findElement(By.cssSelector("div.col1-set.page-title .page-title-inner h1")).getText());
+		result.setCreatedAt(getDriver().findElement(By.cssSelector("#contact-source span")).getText().trim());
+		result.setPartyHostStatus(getDriver().findElement(By.cssSelector("#contact-interests p:nth-child(2)")).getText());
+		result.setStyleCoachStatus(getDriver().findElement(By.cssSelector("#contact-interests p:nth-child(3)")).getText());
+		result.setNewsletterStatus(getDriver().findElement(By.cssSelector("#contact-email-signup p")).getText());
 		result.setStreet(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(3)")).getText());
 		result.setNumber(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(3)")).getText());
 		result.setZip(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(4)")).getText());

@@ -23,6 +23,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.MyContactsListSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -54,6 +55,8 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 	public ContactDetailsSteps contactDetailsSteps;
 	@Steps
 	public ContactValidationWorkflows contactValidationWorkflows;
+	@Steps
+	public CustomVerification customVerifications;
 
 	public CustomerFormModel stylistRegistrationData;
 
@@ -61,7 +64,7 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 	public DateModel dateModel;
 	public AddressModel addressModel;
 	public ContactModel grabbedDetailsModel;
-	public ContactModel expectedDetailsModel;
+	public ContactModel expectedDetailsModel = new ContactModel();
 
 	private String username;
 	private String password;
@@ -96,7 +99,6 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		addressModel = MongoReader.grabAddressModels("US17002AddNewContactToStyleCoachTest").get(0);
 
 		// TODO make this pretty, put it in a method
-		expectedDetailsModel = new ContactModel();
 		expectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
 		expectedDetailsModel.setCreatedAt(dateModel.getDate());
 		expectedDetailsModel.setStreet(addressModel.getStreetAddress());
@@ -107,8 +109,8 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+		
 		PrintUtils.printContactModel(expectedDetailsModel);
-		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -122,7 +124,8 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		loungeSteps.goToContactsList();
 		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), dateModel.getDate());
 		grabbedDetailsModel = contactDetailsSteps.grabContactDetails();
-		contactValidationWorkflows.validateContactDetails(grabbedDetailsModel, expectedDetailsModel);
+		contactValidationWorkflows.validateContactDetails(expectedDetailsModel, grabbedDetailsModel);
+		customVerifications.printErrors();
 	}
 
 }

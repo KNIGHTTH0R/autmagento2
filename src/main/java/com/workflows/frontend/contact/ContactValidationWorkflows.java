@@ -24,7 +24,7 @@ public class ContactValidationWorkflows {
 
 	@Step
 	public void verifyName(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Name doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, grabbedValue.contains(expectedValue));
+		CustomVerification.verifyTrue("Failure: Name doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, grabbedValue.equalsIgnoreCase(expectedValue));
 	}
 
 	@Step

@@ -16,17 +16,24 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.steps.frontend.ContactDetailsSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.MyContactsListSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.FilePaths;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.frontend.contact.ContactValidationWorkflows;
 
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
@@ -43,11 +50,19 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 	public HeaderSteps headerSteps;
 	@Steps
 	public MyContactsListSteps myContactsListSteps;
+	@Steps
+	public ContactValidationWorkflows contactValidationWorkflows;
+	@Steps
+	public ContactDetailsSteps contactDetailsSteps;
+	@Steps
+	public CustomVerification customVerifications;
 
 	public CustomerFormModel stylistRegistrationData;
 
 	public CustomerFormModel customerModel;
-
+	public AddressModel addressModel;
+	public ContactModel expectedDetailsModel = new ContactModel();
+	public DateModel dateModel;
 	private String secondStyleCoachUsername;
 	private String secondStyleCoachPassword;
 
@@ -77,8 +92,20 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 			}
 		}
 		customerModel = MongoReader.grabCustomerFormModels("US17001RegularCustomerRegistrationTest").get(0);
+		addressModel = MongoReader.grabAddressModels("US17001RegularCustomerRegistrationTest").get(0);
+		dateModel = MongoReader.grabStylistDateModels("US17001RegularCustomerRegistrationTest").get(0);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName());
+		expectedDetailsModel.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
+		expectedDetailsModel.setCreatedAt(dateModel.getDate());
+		expectedDetailsModel.setStreet(addressModel.getStreetAddress());
+		expectedDetailsModel.setNumber(addressModel.getStreetNumber());
+		expectedDetailsModel.setZip(addressModel.getPostCode());
+		expectedDetailsModel.setTown(addressModel.getHomeTown());
+		expectedDetailsModel.setCountry(addressModel.getCountryName());
+		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
+		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
+		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+
 	}
 
 	@Test

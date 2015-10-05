@@ -17,10 +17,12 @@ import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.Separators;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 
 @WithTag(name = "US17", type = "frontend")
 @Story(Application.MassAction.class)
@@ -34,11 +36,13 @@ public class US17001RegularCustomerRegistrationTest extends BaseTest {
 
 	public CustomerFormModel dataModel;
 	public AddressModel addressModel;
+	public DateModel dateModel;
 	public CustomerFormModel stylistAddressModel;
 	public StylistDataModel validationModel;
 
 	@Before
 	public void setUp() throws Exception {
+		dateModel = new DateModel();
 		stylistAddressModel = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
@@ -51,12 +55,15 @@ public class US17001RegularCustomerRegistrationTest extends BaseTest {
 		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel,
 				Separators.SLASH + stylistAddressModel.getFirstName() + stylistAddressModel.getLastName());
 		customerRegistrationSteps.verifyCustomerCreation();
+		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(addressModel, getClass().getSimpleName());
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
 	}
 
 }

@@ -16,18 +16,24 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.steps.frontend.ContactDetailsSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.MyContactsListSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.FilePaths;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.frontend.contact.ContactValidationWorkflows;
 
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
@@ -44,12 +50,20 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 	public HeaderSteps headerSteps;
 	@Steps
 	public MyContactsListSteps myContactsListSteps;
+	@Steps
+	public ContactValidationWorkflows contactValidationWorkflows;
+	@Steps
+	public ContactDetailsSteps contactDetailsSteps;
+	@Steps
+	public CustomVerification customVerifications;
 
 	public CustomerFormModel stylistRegistrationData;
 
 	public CustomerFormModel contactModel;
 	public DateModel dateModel;
-
+	ContactModel expectedDetailsModel = new ContactModel();
+	public AddressModel addressModel;
+	public ContactModel grabbedDetailsModel;
 	private String stylecoachUsername;
 	private String stylecoachPassword;
 
@@ -80,6 +94,19 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 
 		contactModel = MongoReader.grabCustomerFormModels("US17001AddThirdContactToStyleCoachTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US17001AddForthContactToStyleCoachTest").get(0);
+		addressModel = MongoReader.grabAddressModels("US17001AddForthContactToStyleCoachTest").get(0);
+
+		expectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
+		expectedDetailsModel.setCreatedAt(dateModel.getDate());
+		expectedDetailsModel.setStreet(addressModel.getStreetAddress());
+		expectedDetailsModel.setNumber(addressModel.getStreetNumber());
+		expectedDetailsModel.setZip(addressModel.getPostCode());
+		expectedDetailsModel.setTown(addressModel.getHomeTown());
+		expectedDetailsModel.setCountry(addressModel.getCountryName());
+
+		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
+		expectedDetailsModel.setStyleCoachStatus(ContextConstants.NO_STYLE_COACH_FLAG_STATUS);
+		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
@@ -93,8 +120,10 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
-//		myContactsListSteps.verifyThatContactMatchesAllTerms(contactModel.getEmailName(), dateModel.getDate());
-		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(contactModel.getFirstName());
+		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), dateModel.getDate());
+		grabbedDetailsModel = contactDetailsSteps.grabContactDetails();
+		contactValidationWorkflows.validateContactDetails(expectedDetailsModel, grabbedDetailsModel);
+		customVerifications.printErrors();
 
 	}
 

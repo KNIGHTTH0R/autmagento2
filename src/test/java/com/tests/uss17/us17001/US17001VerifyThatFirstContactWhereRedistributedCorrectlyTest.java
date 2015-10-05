@@ -16,18 +16,24 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.steps.frontend.ContactDetailsSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.MyContactsListSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.FilePaths;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.frontend.contact.ContactValidationWorkflows;
 
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
@@ -44,12 +50,28 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 	public HeaderSteps headerSteps;
 	@Steps
 	public MyContactsListSteps myContactsListSteps;
+	@Steps
+	public ContactValidationWorkflows contactValidationWorkflows;
+	@Steps
+	public ContactDetailsSteps contactDetailsSteps;
+	@Steps
+	public CustomVerification customVerifications;
 
 	public CustomerFormModel stylistRegistrationData;
 
 	public CustomerFormModel contactModel;
+	public AddressModel contactAddressModel;
+	public DateModel contactDateModel;
+
 	public CustomerFormModel customerModel;
-	public DateModel dateModel;
+	public AddressModel customerAddressModel;
+	public DateModel customerDateModel;
+
+	ContactModel contactExpectedDetailsModel = new ContactModel();
+	ContactModel customerExpectedDetailsModel = new ContactModel();
+
+	ContactModel contactGrabbedDetailsModel = new ContactModel();
+	ContactModel customerGrabbedDetailsModel = new ContactModel();
 
 	private String secondStyleCoachUsername;
 	private String secondStyleCoachPassword;
@@ -80,10 +102,37 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 			}
 		}
 		customerModel = MongoReader.grabCustomerFormModels("US17001SecondRegularCustomerRegistrationTest").get(0);
-		contactModel = MongoReader.grabCustomerFormModels("US17001AddNewContactToStyleCoachTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
+		customerDateModel = MongoReader.grabStylistDateModels("US17001SecondRegularCustomerRegistrationTest").get(0);
+		customerAddressModel = MongoReader.grabAddressModels("US17001SecondRegularCustomerRegistrationTest").get(0);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName());
+		contactModel = MongoReader.grabCustomerFormModels("US17001AddNewContactToStyleCoachTest").get(0);
+		contactDateModel = MongoReader.grabStylistDateModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
+		contactAddressModel = MongoReader.grabAddressModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
+
+		contactExpectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
+		contactExpectedDetailsModel.setCreatedAt(contactDateModel.getDate());
+		contactExpectedDetailsModel.setStreet(contactAddressModel.getStreetAddress());
+		contactExpectedDetailsModel.setNumber(contactAddressModel.getStreetNumber());
+		contactExpectedDetailsModel.setZip(contactAddressModel.getPostCode());
+		contactExpectedDetailsModel.setTown(contactAddressModel.getHomeTown());
+		contactExpectedDetailsModel.setCountry(contactAddressModel.getCountryName());
+
+		contactExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
+		contactExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
+		contactExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+
+		customerExpectedDetailsModel.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
+		customerExpectedDetailsModel.setCreatedAt(customerDateModel.getDate());
+		customerExpectedDetailsModel.setStreet(customerAddressModel.getStreetAddress());
+		customerExpectedDetailsModel.setNumber(customerAddressModel.getStreetNumber());
+		customerExpectedDetailsModel.setZip(customerAddressModel.getPostCode());
+		customerExpectedDetailsModel.setTown(customerAddressModel.getHomeTown());
+		customerExpectedDetailsModel.setCountry(customerAddressModel.getCountryName());
+
+		customerExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
+		customerExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
+		customerExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+
 	}
 
 	@Test
@@ -94,11 +143,18 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyThatContactIsInTheList(customerModel.getEmailName());
-		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(customerModel.getFirstName());
-//		myContactsListSteps.verifyThatContactMatchesAllTerms(contactModel.getEmailName(), dateModel.getDate());
-		myContactsListSteps.verifyThatContactIsUniqueInStylecoachList(contactModel.getFirstName());
+		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), contactDateModel.getDate());
+		contactGrabbedDetailsModel = contactDetailsSteps.grabContactDetails();
+		contactValidationWorkflows.validateContactDetails(contactExpectedDetailsModel, contactGrabbedDetailsModel);
+		customVerifications.printErrors();
+
+		loungeSteps.goToContactsList();
+		myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getEmailName(), customerDateModel.getDate());
+		customerGrabbedDetailsModel = contactDetailsSteps.grabContactDetails();
+		contactValidationWorkflows.validateContactDetails(customerExpectedDetailsModel, customerGrabbedDetailsModel);
+		customVerifications.printErrors();
 
 	}
 
