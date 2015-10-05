@@ -4,6 +4,12 @@ import com.tools.persistance.MongoReader;
 
 public class ContextConstants {
 
+	public static String PARTY_FLAG_STATUS = MongoReader.getDictionaryItem("PARTY_FLAG_STATUS");
+	public static String STYLE_COACH_FLAG_STATUS = MongoReader.getDictionaryItem("STYLE_COACH_FLAG_STATUS");
+	public static String NEWSLETTER_FLAG_STATUS = MongoReader.getDictionaryItem("NEWSLETTER_FLAG_STATUS");
+	public static String NO_PARTY_FLAG_STATUS = MongoReader.getDictionaryItem("NO_PARTY_FLAG_STATUS");
+	public static String NO_STYLE_COACH_FLAG_STATUS = MongoReader.getDictionaryItem("NO_STYLE_COACH_FLAG_STATUS");
+	public static String NO_NEWSLETTER_FLAG_STATUS = MongoReader.getDictionaryItem("NO_NEWSLETTER_FLAG_STATUS");
 	public static String INVOICE_SHIPPING_SUBMITED_MESSAGE = MongoReader.getDictionaryItem("INVOICE_SHIPPING_SUBMITED_MESSAGE");
 	public static String REFUNDED_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("REFUNDED_SUCCESS_MESSAGE");
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
@@ -31,9 +37,7 @@ public class ContextConstants {
 	public static String SUBSCRIPTION_PROCESSING_ORDER = MongoReader.getDictionaryItem("SUBSCRIPTION_PROCESSING_ORDER");
 	public static String SUBSCRIPTION_KOBO_ACTIVE = MongoReader.getDictionaryItem("SUBSCRIPTION_KOBO_ACTIVE");
 	public static String SUBSCRIPTION_BEFORE_PLACE_THE_ORDER = MongoReader.getDictionaryItem("SUBSCRIPTION_BEFORE_PLACE_THE_ORDER");
-	
-	
-	
+
 	public static String INVITE_EMAIL_SUBJECT = MongoReader.getDictionaryItem("INVITE_EMAIL_SUBJECT");
 	public static String PARTY_CREATION_EMAIL_SUBJECT = MongoReader.getDictionaryItem("PARTY_CREATION_EMAIL_SUBJECT");
 	public static String PROFILE_HISTORY = MongoReader.getDictionaryItem("PROFILE_HISTORY");

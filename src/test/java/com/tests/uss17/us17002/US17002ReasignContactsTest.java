@@ -18,7 +18,6 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.stylecoach.StylecoachListBackendSteps;
 import com.tests.BaseTest;
-import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.Credentials;
 import com.tools.env.variables.UrlConstants;
@@ -38,7 +37,6 @@ public class US17002ReasignContactsTest extends BaseTest {
 	@Steps
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
 	private String stylistEmail;
 	private String newStylecoachUsername;
 

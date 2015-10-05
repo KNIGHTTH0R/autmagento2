@@ -8,23 +8,23 @@ import com.tools.data.frontend.ContactModel;
 public class ContactValidationWorkflows {
 
 	@Step
-	public void validateContactDetails(ContactModel grabbedModel, ContactModel expectedModel) {
+	public void validateContactDetails(ContactModel expectedModel, ContactModel grabbedModel) {
 
-		verifyName(grabbedModel.getName(), expectedModel.getName());
-		verifyStreet(grabbedModel.getStreet(), expectedModel.getStreet());
-		verifyNumber(grabbedModel.getNumber(), expectedModel.getNumber());
-		verifyZip(grabbedModel.getZip(), expectedModel.getZip());
-		verifyTown(grabbedModel.getTown(), expectedModel.getTown());
-		verifyCountry(grabbedModel.getCountry(), expectedModel.getCountry());
-		verifyCreatedAt(grabbedModel.getCreatedAt(), expectedModel.getCreatedAt());
-		verifyPartyHostStatus(grabbedModel.getPartyHostStatus(), expectedModel.getPartyHostStatus());
-		verifyStylecoachFlagStatus(grabbedModel.getStyleCoachStatus(), expectedModel.getStyleCoachStatus());
-		verifyNewsletterFlagStatus(grabbedModel.getNewsletterStatus(), expectedModel.getNewsletterStatus());
+		verifyName(expectedModel.getName(), grabbedModel.getName());
+		verifyStreet(expectedModel.getStreet(), grabbedModel.getStreet());
+		verifyNumber(expectedModel.getNumber(), grabbedModel.getNumber());
+		verifyZip(expectedModel.getZip(), grabbedModel.getZip());
+		verifyTown(expectedModel.getTown(), grabbedModel.getTown());
+		verifyCountry(expectedModel.getCountry(), grabbedModel.getCountry());
+		verifyCreatedAt(expectedModel.getCreatedAt(), grabbedModel.getCreatedAt());
+		verifyPartyHostStatus(expectedModel.getPartyHostStatus(), grabbedModel.getPartyHostStatus());
+		verifyStylecoachFlagStatus(expectedModel.getStyleCoachStatus(), grabbedModel.getStyleCoachStatus());
+		verifyNewsletterFlagStatus(expectedModel.getNewsletterStatus(), grabbedModel.getNewsletterStatus());
 	}
 
 	@Step
 	public void verifyName(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Name doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, grabbedValue.contentEquals(expectedValue));
+		CustomVerification.verifyTrue("Failure: Name doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, grabbedValue.contains(expectedValue));
 	}
 
 	@Step

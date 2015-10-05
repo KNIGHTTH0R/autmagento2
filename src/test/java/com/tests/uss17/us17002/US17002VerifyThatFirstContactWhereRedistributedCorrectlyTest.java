@@ -28,6 +28,7 @@ import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.FilePaths;
+import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -92,8 +93,8 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		contactModel = MongoReader.grabCustomerFormModels("US17002AddNewContactToStyleCoachTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US17002AddNewContactToStyleCoachTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US17002AddNewContactToStyleCoachTest").get(0);
-		
-		//TODO make this pretty, put it in a method
+
+		// TODO make this pretty, put it in a method
 		expectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
 		expectedDetailsModel.setCreatedAt(dateModel.getDate());
 		expectedDetailsModel.setStreet(addressModel.getStreetAddress());
@@ -101,6 +102,9 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		expectedDetailsModel.setZip(addressModel.getPostCode());
 		expectedDetailsModel.setTown(addressModel.getHomeTown());
 		expectedDetailsModel.setCountry(addressModel.getCountryName());
+		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
+		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
+		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
