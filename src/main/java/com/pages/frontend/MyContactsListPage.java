@@ -5,6 +5,7 @@ import java.util.List;
 import net.thucydides.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
+import org.openqa.jetty.html.Link;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -75,6 +76,7 @@ public class MyContactsListPage extends AbstractPage {
 	// found);
 	// }
 	public void verifyUnicAndOpenContactDetails(String... terms) {
+		WebElement link = null;
 		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
 		boolean found = false;
 		for (WebElement contact : contactsList) {
@@ -90,10 +92,13 @@ public class MyContactsListPage extends AbstractPage {
 					break;
 				} else {
 					found = true;
-//					contact.findElement(By.cssSelector("td a.blue-text.contact-link")).click();
+					link = contact.findElement(By.cssSelector("td a.blue-text.contact-link"));
 				}
 			}
 
+		}
+		if (found) {
+			link.click();
 		}
 		Assert.assertTrue("Contact was not found!!!", found);
 	}
