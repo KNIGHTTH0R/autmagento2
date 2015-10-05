@@ -87,6 +87,7 @@ public class MyContactsListPage extends AbstractPage {
 			if (matchesAllTerms) {
 				if (found) {
 					Assert.fail(String.format("A duplicate of the element was found in the table!"));
+					break;
 				} else {
 					found = true;
 					contact.findElement(By.cssSelector("td a.blue-text.contact-link")).click();
