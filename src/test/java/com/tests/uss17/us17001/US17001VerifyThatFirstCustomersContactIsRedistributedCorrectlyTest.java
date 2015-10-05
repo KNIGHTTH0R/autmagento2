@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.ContactDetailsSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -62,6 +61,7 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 	public CustomerFormModel customerModel;
 	public AddressModel addressModel;
 	public ContactModel expectedDetailsModel = new ContactModel();
+	public ContactModel grabbedDetailsModel = new ContactModel();
 	public DateModel dateModel;
 	private String secondStyleCoachUsername;
 	private String secondStyleCoachPassword;
@@ -117,7 +117,10 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyThatContactIsInTheList(customerModel.getEmailName());
+		myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getEmailName(), dateModel.getDate());
+		grabbedDetailsModel = contactDetailsSteps.grabContactDetails();
+		contactValidationWorkflows.validateContactDetails(expectedDetailsModel, grabbedDetailsModel);
+		customVerifications.printErrors();
 
 	}
 

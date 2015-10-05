@@ -23,7 +23,6 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.DateUtils;
 
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
