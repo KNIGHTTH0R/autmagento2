@@ -32,6 +32,7 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.frontend.contact.ContactValidationWorkflows;
 
 @WithTag(name = "US17", type = "backend")
@@ -119,6 +120,8 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		contactExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		contactExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		contactExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+		
+		PrintUtils.printContactModel(contactExpectedDetailsModel);
 
 		customerExpectedDetailsModel.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
 		customerExpectedDetailsModel.setCreatedAt(customerDateModel.getDate());
@@ -131,6 +134,8 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		customerExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		customerExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		customerExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+		
+		PrintUtils.printContactModel(customerExpectedDetailsModel);
 
 	}
 

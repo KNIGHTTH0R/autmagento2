@@ -108,7 +108,7 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
-		
+
 		PrintUtils.printContactModel(expectedDetailsModel);
 	}
 

@@ -32,6 +32,7 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.frontend.contact.ContactValidationWorkflows;
 
 @WithTag(name = "US17", type = "backend")
@@ -105,6 +106,8 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+		
+		PrintUtils.printContactModel(expectedDetailsModel);
 
 	}
 
