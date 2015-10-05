@@ -90,7 +90,7 @@ public class MyContactsListPage extends AbstractPage {
 					break;
 				} else {
 					found = true;
-					contact.findElement(By.cssSelector("td a.blue-text.contact-link")).click();
+//					contact.findElement(By.cssSelector("td a.blue-text.contact-link")).click();
 				}
 			}
 
