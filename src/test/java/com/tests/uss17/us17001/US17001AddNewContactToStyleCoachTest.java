@@ -49,10 +49,7 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		dateModel = new DateModel();
 		dataModel = new CustomerFormModel();
-//		dataModel.setFirstName("NEYJWYYZ");
-//		dataModel.setLastName("FCVIZFFT");
 		addressModel = new AddressModel();
 
 		int size = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").size();
@@ -74,13 +71,11 @@ public class US17001AddNewContactToStyleCoachTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
-		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
 	}
 }

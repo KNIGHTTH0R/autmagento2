@@ -49,7 +49,6 @@ public class US17001AddThirdContactToStyleCoachTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		dateModel = new DateModel();
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		addressModel.setPostCode("44553");
@@ -73,13 +72,11 @@ public class US17001AddThirdContactToStyleCoachTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContactWithoutScInterrestAmdWithoutEmail(dataModel, addressModel);
-		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
 	}
 }
