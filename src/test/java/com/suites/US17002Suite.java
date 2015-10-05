@@ -17,9 +17,9 @@ import com.tests.uss17.us17002.US17002VerifyThatOldStylistWasDeactivatedTest;
 	US17002ConfirmStylecoachTest.class,
 	US17002MarkStarterKitOrderAsPaidTest.class,
 	US17002AddNewContactToStyleCoachTest.class,
-	US17002ReasignContactsTest.class,
-	US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest.class,
-	US17002VerifyThatOldStylistWasDeactivatedTest.class,
+//	US17002ReasignContactsTest.class,
+//	US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest.class,
+//	US17002VerifyThatOldStylistWasDeactivatedTest.class,
 	
 })
 @RunWith(Suite.class)
