@@ -32,6 +32,7 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.workflows.frontend.contact.ContactValidationWorkflows;
 
 @WithTag(name = "US17", type = "backend")
@@ -62,8 +63,8 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 	public ContactModel grabbedDetailsModel;
 	public ContactModel expectedDetailsModel;
 
-	private String masterSCUsername;
-	private String masterSCPassword;
+	private String username;
+	private String password;
 
 	@Before
 	public void setUp() throws Exception {
@@ -76,8 +77,8 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17002.properties");
 			prop.load(input);
 
-			masterSCUsername = prop.getProperty("masterSCUsername");
-			masterSCPassword = prop.getProperty("masterSCPassword");
+			username = prop.getProperty("stylecoachUsername");
+			password = prop.getProperty("stylecoachPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -106,14 +107,14 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
-
+		PrintUtils.printContactModel(expectedDetailsModel);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
 	public void us17002VerifyThatFirstContactWhereRedistributedCorrectlyTest() {
 
-		customerRegistrationSteps.performLogin(masterSCUsername, masterSCPassword);
+		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
