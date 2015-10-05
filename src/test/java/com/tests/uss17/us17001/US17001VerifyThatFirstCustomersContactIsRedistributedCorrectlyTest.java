@@ -64,8 +64,8 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 	public ContactModel expectedDetailsModel = new ContactModel();
 	public ContactModel grabbedDetailsModel = new ContactModel();
 	public DateModel dateModel;
-	private String secondStyleCoachUsername;
-	private String secondStyleCoachPassword;
+	private String username;
+	private String password;
 
 	@Before
 	public void setUp() throws Exception {
@@ -78,10 +78,8 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
 
-			secondStyleCoachUsername = prop.getProperty("secondStyleCoachUsername");
-			secondStyleCoachPassword = prop.getProperty("secondStyleCoachPassword");
-			System.out.println(secondStyleCoachUsername);
-			System.out.println(secondStyleCoachPassword);
+			username = prop.getProperty("firstCustomersPreferredSCUsername");
+			password = prop.getProperty("firstCustomersPreferredSCPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -108,7 +106,7 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
-		
+
 		PrintUtils.printContactModel(expectedDetailsModel);
 
 	}
@@ -116,7 +114,7 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 	@Test
 	public void us17001VerifyThatFirstContactWhereRedistributedCorrectlyTest() {
 
-		customerRegistrationSteps.performLogin(secondStyleCoachUsername, secondStyleCoachPassword);
+		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
