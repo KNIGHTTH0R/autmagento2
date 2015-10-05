@@ -95,6 +95,7 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		addressModel = MongoReader.grabAddressModels("US17002AddNewContactToStyleCoachTest").get(0);
 
 		// TODO make this pretty, put it in a method
+		expectedDetailsModel = new ContactModel();
 		expectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
 		expectedDetailsModel.setCreatedAt(dateModel.getDate());
 		expectedDetailsModel.setStreet(addressModel.getStreetAddress());
