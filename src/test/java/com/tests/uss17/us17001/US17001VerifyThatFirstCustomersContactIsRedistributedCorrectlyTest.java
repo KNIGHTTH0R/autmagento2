@@ -80,6 +80,8 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 
 			secondStyleCoachUsername = prop.getProperty("secondStyleCoachUsername");
 			secondStyleCoachPassword = prop.getProperty("secondStyleCoachPassword");
+			System.out.println(secondStyleCoachUsername);
+			System.out.println(secondStyleCoachPassword);
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
