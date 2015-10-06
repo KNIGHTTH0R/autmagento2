@@ -16,7 +16,7 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getStylistInfo("2729");
+		ComissionRestCalls.getStylistInfo("3350");
 
 	}
 

@@ -12,6 +12,7 @@ public class ContactModel {
 	private String partyHostStatus;
 	private String styleCoachStatus;
 	private String newsletterStatus;
+	private String lastHistoryRegistration;
 
 	public String getCreatedAt() {
 		return createdAt;
@@ -91,6 +92,14 @@ public class ContactModel {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getLastHistoryRegistration() {
+		return lastHistoryRegistration;
+	}
+
+	public void setLastHistoryRegistration(String lastHistoryRegistration) {
+		this.lastHistoryRegistration = lastHistoryRegistration;
 	}
 
 }

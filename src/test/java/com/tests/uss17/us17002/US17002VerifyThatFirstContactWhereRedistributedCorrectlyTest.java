@@ -58,7 +58,7 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 	public CustomVerification customVerifications;
 
 	public CustomerFormModel stylistRegistrationData;
-
+	public CustomerFormModel oldStylistModel;
 	public CustomerFormModel contactModel;
 	public DateModel dateModel;
 	public AddressModel addressModel;
@@ -93,18 +93,13 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 				}
 			}
 		}
+		oldStylistModel = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").get(0);
 		contactModel = MongoReader.grabCustomerFormModels("US17002AddNewContactToStyleCoachTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US17002AddNewContactToStyleCoachTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US17002AddNewContactToStyleCoachTest").get(0);
 
-		// TODO make this pretty, put it in a method
-		expectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
-		expectedDetailsModel.setCreatedAt(dateModel.getDate());
-		expectedDetailsModel.setStreet(addressModel.getStreetAddress());
-		expectedDetailsModel.setNumber(addressModel.getStreetNumber());
-		expectedDetailsModel.setZip(addressModel.getPostCode());
-		expectedDetailsModel.setTown(addressModel.getHomeTown());
-		expectedDetailsModel.setCountry(addressModel.getCountryName());
+		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,contactModel, dateModel, addressModel);
+
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);

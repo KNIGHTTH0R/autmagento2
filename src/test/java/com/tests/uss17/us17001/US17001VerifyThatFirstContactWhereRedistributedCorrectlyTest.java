@@ -58,20 +58,20 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 	public CustomVerification customVerifications;
 
 	public CustomerFormModel stylistRegistrationData;
+	public CustomerFormModel oldStylistModel;
+	private CustomerFormModel contactModel;
+	private AddressModel contactAddressModel;
+	private DateModel contactDateModel;
 
-	public CustomerFormModel contactModel;
-	public AddressModel contactAddressModel;
-	public DateModel contactDateModel;
+	private CustomerFormModel customerModel;
+	private AddressModel customerAddressModel;
+	private DateModel customerDateModel;
 
-	public CustomerFormModel customerModel;
-	public AddressModel customerAddressModel;
-	public DateModel customerDateModel;
+	private ContactModel contactExpectedDetailsModel = new ContactModel();
+	private ContactModel customerExpectedDetailsModel = new ContactModel();
 
-	ContactModel contactExpectedDetailsModel = new ContactModel();
-	ContactModel customerExpectedDetailsModel = new ContactModel();
-
-	ContactModel contactGrabbedDetailsModel = new ContactModel();
-	ContactModel customerGrabbedDetailsModel = new ContactModel();
+	private ContactModel contactGrabbedDetailsModel = new ContactModel();
+	private ContactModel customerGrabbedDetailsModel = new ContactModel();
 
 	private String secondStyleCoachUsername;
 	private String secondStyleCoachPassword;
@@ -86,10 +86,12 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
-			//this is the good one
-//			secondStyleCoachUsername = prop.getProperty("secondStyleCoachUsername");
-//			secondStyleCoachPassword = prop.getProperty("secondStyleCoachPassword");
-			// this is just for testing purpose,work-around due to a bug 
+			// this is the good one
+			// secondStyleCoachUsername =
+			// prop.getProperty("secondStyleCoachUsername");
+			// secondStyleCoachPassword =
+			// prop.getProperty("secondStyleCoachPassword");
+			// this is just for testing purpose,work-around due to a bug
 			secondStyleCoachUsername = prop.getProperty("stylecoachUsername");
 			secondStyleCoachPassword = prop.getProperty("stylecoachPassword");
 
@@ -104,6 +106,7 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 				}
 			}
 		}
+		oldStylistModel = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		customerModel = MongoReader.grabCustomerFormModels("US17001SecondRegularCustomerRegistrationTest").get(0);
 		customerDateModel = MongoReader.grabStylistDateModels("US17001SecondRegularCustomerRegistrationTest").get(0);
 		customerAddressModel = MongoReader.grabAddressModels("US17001SecondRegularCustomerRegistrationTest").get(0);
@@ -111,37 +114,21 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		contactModel = MongoReader.grabCustomerFormModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 		contactDateModel = MongoReader.grabStylistDateModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 		contactAddressModel = MongoReader.grabAddressModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
-		
-		contactExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(contactModel, contactDateModel, contactAddressModel); 
 
-//		contactExpectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
-//		contactExpectedDetailsModel.setCreatedAt(contactDateModel.getDate());
-//		contactExpectedDetailsModel.setStreet(contactAddressModel.getStreetAddress());
-//		contactExpectedDetailsModel.setNumber(contactAddressModel.getStreetNumber());
-//		contactExpectedDetailsModel.setZip(contactAddressModel.getPostCode());
-//		contactExpectedDetailsModel.setTown(contactAddressModel.getHomeTown());
-//		contactExpectedDetailsModel.setCountry(contactAddressModel.getCountryName());
+		contactExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,contactModel, contactDateModel, contactAddressModel);
 
 		contactExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		contactExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		contactExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
-		
-		PrintUtils.printContactModel(contactExpectedDetailsModel);
-		
-		customerExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(customerModel, customerDateModel, customerAddressModel); 
 
-//		customerExpectedDetailsModel.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
-//		customerExpectedDetailsModel.setCreatedAt(customerDateModel.getDate());
-//		customerExpectedDetailsModel.setStreet(customerAddressModel.getStreetAddress());
-//		customerExpectedDetailsModel.setNumber(customerAddressModel.getStreetNumber());
-//		customerExpectedDetailsModel.setZip(customerAddressModel.getPostCode());
-//		customerExpectedDetailsModel.setTown(customerAddressModel.getHomeTown());
-//		customerExpectedDetailsModel.setCountry(customerAddressModel.getCountryName());
+		PrintUtils.printContactModel(contactExpectedDetailsModel);
+
+		customerExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,customerModel, customerDateModel, customerAddressModel);
 
 		customerExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		customerExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		customerExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
-		
+
 		PrintUtils.printContactModel(customerExpectedDetailsModel);
 
 	}
@@ -164,6 +151,7 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getEmailName(), customerDateModel.getDate());
 		customerGrabbedDetailsModel = contactDetailsSteps.grabContactDetails();
 		contactValidationWorkflows.validateContactDetails(customerExpectedDetailsModel, customerGrabbedDetailsModel);
+
 		customVerifications.printErrors();
 
 	}

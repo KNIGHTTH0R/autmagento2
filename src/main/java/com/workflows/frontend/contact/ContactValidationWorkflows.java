@@ -7,10 +7,24 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Separators;
 
 public class ContactValidationWorkflows {
+
+	public ContactModel populateExpectedContactModel(CustomerFormModel oldStylecoachModel, CustomerFormModel customerModel, DateModel dateModel, AddressModel addressModel) {
+
+		ContactModel result = new ContactModel();
+
+		result.setName(customerModel.getFirstName() + Separators.SPACE + customerModel.getLastName());
+		result.setCreatedAt(dateModel.getDate());
+		result.setStreet(addressModel.getStreetAddress());
+		result.setNumber(addressModel.getStreetNumber());
+		result.setZip(addressModel.getPostCode());
+		result.setTown(addressModel.getHomeTown());
+		result.setCountry(addressModel.getCountryName());
+		result.setLastHistoryRegistration(oldStylecoachModel.getFirstName() + Separators.SPACE + oldStylecoachModel.getLastName());
+		return result;
+	}
 
 	@Step
 	public void validateContactDetails(ContactModel expectedModel, ContactModel grabbedModel) {
@@ -25,6 +39,13 @@ public class ContactValidationWorkflows {
 		verifyPartyHostStatus(expectedModel.getPartyHostStatus(), grabbedModel.getPartyHostStatus());
 		verifyStylecoachFlagStatus(expectedModel.getStyleCoachStatus(), grabbedModel.getStyleCoachStatus());
 		verifyNewsletterFlagStatus(expectedModel.getNewsletterStatus(), grabbedModel.getNewsletterStatus());
+		verifyLastHistoryRegistration(expectedModel.getLastHistoryRegistration(), grabbedModel.getLastHistoryRegistration());
+	}
+
+	@Step
+	public void verifyLastHistoryRegistration(String expectedValue, String grabbedValue) {
+		CustomVerification.verifyTrue("Failure: Last history registration doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue,
+				grabbedValue.contains(expectedValue));
 	}
 
 	@Step
@@ -78,21 +99,6 @@ public class ContactValidationWorkflows {
 	public void verifyNewsletterFlagStatus(String expectedValue, String grabbedValue) {
 		CustomVerification.verifyTrue("Failure: Newsletter flag status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue,
 				grabbedValue.contentEquals(expectedValue));
-	}
-
-	public ContactModel populateExpectedContactModel(CustomerFormModel customerModel, DateModel dateModel, AddressModel addressModel) {
-
-		ContactModel result = new ContactModel();
-
-		result.setName(customerModel.getFirstName() + Separators.SPACE + customerModel.getLastName());
-		result.setCreatedAt(dateModel.getDate());
-		result.setStreet(addressModel.getStreetAddress());
-		result.setNumber(addressModel.getStreetNumber());
-		result.setZip(addressModel.getPostCode());
-		result.setTown(addressModel.getHomeTown());
-		result.setCountry(addressModel.getCountryName());
-
-		return result;
 	}
 
 }

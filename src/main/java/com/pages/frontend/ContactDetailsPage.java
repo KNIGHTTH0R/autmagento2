@@ -22,6 +22,8 @@ public class ContactDetailsPage extends AbstractPage {
 		result.setZip(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(4)")).getText());
 		result.setTown(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(5)")).getText());
 		result.setCountry(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(6)")).getText());
+		result.setLastHistoryRegistration(getDriver().findElement(By.cssSelector("#reports-table-default tr.first.last.odd:first-child")).getText());
+		
 
 		PrintUtils.printContactModel(result);
 

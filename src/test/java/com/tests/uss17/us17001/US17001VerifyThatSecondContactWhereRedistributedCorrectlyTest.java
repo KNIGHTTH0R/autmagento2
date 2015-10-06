@@ -59,7 +59,7 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 	public CustomVerification customVerifications;
 
 	public CustomerFormModel stylistRegistrationData;
-
+	public CustomerFormModel oldStylistModel;
 	public CustomerFormModel contactModel;
 	public DateModel dateModel;
 	public AddressModel addressModel;
@@ -94,18 +94,12 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 				}
 			}
 		}
-
+		oldStylistModel = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		contactModel = MongoReader.grabCustomerFormModels("US17001AddThirdContactToStyleCoachTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US17001AddForthContactToStyleCoachTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US17001AddForthContactToStyleCoachTest").get(0);
-
-		expectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
-		expectedDetailsModel.setCreatedAt(dateModel.getDate());
-		expectedDetailsModel.setStreet(addressModel.getStreetAddress());
-		expectedDetailsModel.setNumber(addressModel.getStreetNumber());
-		expectedDetailsModel.setZip(addressModel.getPostCode());
-		expectedDetailsModel.setTown(addressModel.getHomeTown());
-		expectedDetailsModel.setCountry(addressModel.getCountryName());
+		
+		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,contactModel, dateModel, addressModel); 
 
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.NO_STYLE_COACH_FLAG_STATUS);

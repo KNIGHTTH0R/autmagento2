@@ -59,6 +59,7 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 
 	public CustomerFormModel stylistRegistrationData;
 
+	public CustomerFormModel oldStylistModel;
 	public CustomerFormModel customerModel;
 	public AddressModel addressModel;
 	public ContactModel expectedDetailsModel = new ContactModel();
@@ -92,17 +93,13 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 				}
 			}
 		}
+		oldStylistModel = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		customerModel = MongoReader.grabCustomerFormModels("US17001RegularCustomerRegistrationTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US17001RegularCustomerRegistrationTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US17001RegularCustomerRegistrationTest").get(0);
+		
+		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,customerModel, dateModel, addressModel); 
 
-		expectedDetailsModel.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
-		expectedDetailsModel.setCreatedAt(dateModel.getDate());
-		expectedDetailsModel.setStreet(addressModel.getStreetAddress());
-		expectedDetailsModel.setNumber(addressModel.getStreetNumber());
-		expectedDetailsModel.setZip(addressModel.getPostCode());
-		expectedDetailsModel.setTown(addressModel.getHomeTown());
-		expectedDetailsModel.setCountry(addressModel.getCountryName());
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
