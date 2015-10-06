@@ -1,4 +1,4 @@
-package com.tests.uss17.us17002;
+package com.tests.uss17.us17003;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -28,7 +28,7 @@ import com.tools.utils.DateUtils;
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US17002AddNewContactToStyleCoachTest extends BaseTest {
+public class US17003AddNewContactToStyleCoachTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -53,9 +53,9 @@ public class US17002AddNewContactToStyleCoachTest extends BaseTest {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 
-		int size = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationTest").size();
 		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").get(0);
+			stylistRegistrationData = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationTest").get(0);
 		} else
 			System.out.println("The database has no entries");
 
@@ -63,7 +63,7 @@ public class US17002AddNewContactToStyleCoachTest extends BaseTest {
 	}
 
 	@Test
-	public void us17002AddNewContactToStyleCoachTest() {
+	public void us17003AddNewContactToStyleCoachTest() {
 
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
 		if (!headerSteps.succesfullLogin()) {

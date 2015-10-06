@@ -1,4 +1,4 @@
-package com.tests.uss17.us17003;
+package com.tests.uss17.us17002;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -27,7 +27,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US17", type = "frontend")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US17003StyleCoachRegistrationWithKnownSponsorTest extends BaseTest {
+public class US17002StyleCoachRegistrationWithKnownSponsorTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -47,7 +47,7 @@ public class US17003StyleCoachRegistrationWithKnownSponsorTest extends BaseTest 
 	@Before
 	public void setUp() throws Exception {
 
-		sponsorStylecoachData = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationTest").get(0);
+		sponsorStylecoachData = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").get(0);
 
 		stylecoachFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
@@ -56,7 +56,7 @@ public class US17003StyleCoachRegistrationWithKnownSponsorTest extends BaseTest 
 	}
 
 	@Test
-	public void us17003StyleCoachRegistrationWithKnownSponsorTest() {
+	public void us17002StyleCoachRegistrationWithKnownSponsorTest() {
 		headerSteps.navigateToStylecoachRegisterFormUnderContext(sponsorStylecoachData.getFirstName() + sponsorStylecoachData.getLastName());
 		stylistRegistrationSteps.fillCreateStylecoachFormWithKnownSponsorPayWithVisa(stylecoachFormData, customerFormAddress, birthDate.getDate());
 		customVerification.printErrors();

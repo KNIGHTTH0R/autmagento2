@@ -20,6 +20,15 @@ public class StylecoachListBackendSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void reassignCustomers(String initialStylecoachName) {
+		stylecoachListBackendPage().inputEmailFilter(initialStylecoachName);
+		stylecoachListBackendPage().clickOnSearch();
+		stylecoachListBackendPage().checkDesiredStylecoach(initialStylecoachName);
+		stylecoachListBackendPage().selectActionList();
+		stylecoachListBackendPage().clickOnsubmitReassignStylecoach();
+	}
+
+	@Step
 	public void verifyStylecoachEmailAndStatus(String stylecoachEmail) {
 		stylecoachListBackendPage().inputEmailFilter(stylecoachEmail);
 		stylecoachListBackendPage().clickOnSearch();

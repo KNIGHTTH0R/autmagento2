@@ -1,4 +1,4 @@
-package com.tests.uss17.us17003;
+package com.tests.uss17.us17002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +27,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US17", type = "frontend")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US17003CheckReassignedStylecoachSponsorTest extends BaseTest {
+public class US17002CheckReassignedStylecoachSponsorTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -47,9 +47,9 @@ public class US17003CheckReassignedStylecoachSponsorTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17002.properties");
 			prop.load(input);
-			
+
 			newStylecoachUsername = prop.getProperty("stylecoachUsername");
 
 		} catch (IOException ex) {
@@ -64,17 +64,17 @@ public class US17003CheckReassignedStylecoachSponsorTest extends BaseTest {
 			}
 		}
 
-		int size = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationWithKnownSponsorTest").size();
+		int size = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationWithKnownSponsorTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationWithKnownSponsorTest").get(0).getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationWithKnownSponsorTest").get(0).getPassword();
+			stylistEmail = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationWithKnownSponsorTest").get(0).getEmailName();
+			stylistPassword = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationWithKnownSponsorTest").get(0).getPassword();
 		} else
 			System.out.println("The database has no entries");
 
 	}
 
 	@Test
-	public void us7003CheckReassignedStylecoachSponsorTest() {
+	public void us17002CheckReassignedStylecoachSponsorTest() {
 
 		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
 		headerSteps.goToProfile();

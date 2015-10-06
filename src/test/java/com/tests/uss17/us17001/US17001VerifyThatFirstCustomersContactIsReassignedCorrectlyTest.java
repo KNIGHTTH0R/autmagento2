@@ -1,4 +1,4 @@
-package com.tests.uss17.us17002;
+package com.tests.uss17.us17001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,7 +38,7 @@ import com.workflows.frontend.contact.ContactValidationWorkflows;
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extends BaseTest {
+public class US17001VerifyThatFirstCustomersContactIsReassignedCorrectlyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -51,20 +51,20 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 	@Steps
 	public MyContactsListSteps myContactsListSteps;
 	@Steps
-	public ContactDetailsSteps contactDetailsSteps;
-	@Steps
 	public ContactValidationWorkflows contactValidationWorkflows;
+	@Steps
+	public ContactDetailsSteps contactDetailsSteps;
 	@Steps
 	public CustomVerification customVerifications;
 
 	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel oldStylistModel;
-	public CustomerFormModel contactModel;
-	public DateModel dateModel;
-	public AddressModel addressModel;
-	public ContactModel grabbedDetailsModel;
-	public ContactModel expectedDetailsModel = new ContactModel();
 
+	public CustomerFormModel oldStylistModel;
+	public CustomerFormModel customerModel;
+	public AddressModel addressModel;
+	public ContactModel expectedDetailsModel = new ContactModel();
+	public ContactModel grabbedDetailsModel = new ContactModel();
+	public DateModel dateModel;
 	private String username;
 	private String password;
 
@@ -76,11 +76,11 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17002.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
 
-			username = prop.getProperty("stylecoachUsername");
-			password = prop.getProperty("stylecoachPassword");
+			username = prop.getProperty("firstCustomersPreferredSCUsername");
+			password = prop.getProperty("firstCustomersPreferredSCPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -93,22 +93,23 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 				}
 			}
 		}
-		oldStylistModel = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").get(0);
-		contactModel = MongoReader.grabCustomerFormModels("US17002AddNewContactToStyleCoachTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US17002AddNewContactToStyleCoachTest").get(0);
-		addressModel = MongoReader.grabAddressModels("US17002AddNewContactToStyleCoachTest").get(0);
-
-		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, contactModel, dateModel, addressModel);
+		oldStylistModel = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
+		customerModel = MongoReader.grabCustomerFormModels("US17001RegularCustomerRegistrationTest").get(0);
+		addressModel = MongoReader.grabAddressModels("US17001RegularCustomerRegistrationTest").get(0);
+		dateModel = MongoReader.grabStylistDateModels("US17001RegularCustomerRegistrationTest").get(0);
+		
+		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,customerModel, dateModel, addressModel); 
 
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
 
 		PrintUtils.printContactModel(expectedDetailsModel);
+
 	}
 
 	@Test
-	public void us17002VerifyThatFirstContactWhereRedistributedCorrectlyTest() {
+	public void us17001VerifyThatFirstCustomersContactIsReassignedCorrectlyTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
@@ -116,10 +117,11 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), dateModel.getDate());
+		myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getEmailName(), dateModel.getDate());
 		grabbedDetailsModel = contactDetailsSteps.grabContactDetails();
 		contactValidationWorkflows.validateContactDetails(expectedDetailsModel, grabbedDetailsModel);
 		customVerifications.printErrors();
+
 	}
 
 }

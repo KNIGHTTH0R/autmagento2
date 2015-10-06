@@ -13,9 +13,14 @@ import com.tests.uss17.us17001.US17001ConfirmCustomerTest;
 import com.tests.uss17.us17001.US17001ConfirmSecondCustomerTest;
 import com.tests.uss17.us17001.US17001ConfirmStylecoachTest;
 import com.tests.uss17.us17001.US17001MarkStarterKitOrderAsPaidTest;
+import com.tests.uss17.us17001.US17001ReasignContactsTest;
 import com.tests.uss17.us17001.US17001RegularCustomerRegistrationTest;
 import com.tests.uss17.us17001.US17001SecondRegularCustomerRegistrationTest;
 import com.tests.uss17.us17001.US17001StyleCoachRegistrationTest;
+import com.tests.uss17.us17001.US17001VerifyThatFirstContactWasReassignedCorrectlyTest;
+import com.tests.uss17.us17001.US17001VerifyThatFirstCustomersContactIsReassignedCorrectlyTest;
+import com.tests.uss17.us17001.US17001VerifyThatOldStylistWasDeactivatedTest;
+import com.tests.uss17.us17001.US17001VerifyThatSecondContactWasReassignedCorrectlyTest;
 
 @SuiteClasses({
 	US17001StyleCoachRegistrationTest.class,
@@ -32,10 +37,12 @@ import com.tests.uss17.us17001.US17001StyleCoachRegistrationTest;
 	US17001ChangeFirstCustomersContextTest.class,
 	US17001SecondRegularCustomerRegistrationTest.class,
 	US17001ConfirmSecondCustomerTest.class,	
-//	US17001ReasignContactsTest.class,
-//	US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest.class,
+	US17001ReasignContactsTest.class,
+	US17001VerifyThatFirstContactWasReassignedCorrectlyTest.class,
 //	US17001CheckReassignedStylecoachSponsorTest.class,
-//	US17001VerifyThatOldStylistWasDeactivatedTest.class,
+	US17001VerifyThatFirstCustomersContactIsReassignedCorrectlyTest.class,
+	US17001VerifyThatSecondContactWasReassignedCorrectlyTest.class,
+	US17001VerifyThatOldStylistWasDeactivatedTest.class,
 })
 @RunWith(Suite.class)
 public class US17001Suite {
