@@ -98,7 +98,7 @@ public class US17002VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		dateModel = MongoReader.grabStylistDateModels("US17002AddNewContactToStyleCoachTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US17002AddNewContactToStyleCoachTest").get(0);
 
-		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,contactModel, dateModel, addressModel);
+		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, contactModel, dateModel, addressModel);
 
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
