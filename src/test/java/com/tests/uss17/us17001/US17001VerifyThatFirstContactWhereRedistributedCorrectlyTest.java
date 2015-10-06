@@ -86,9 +86,12 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
-
-			secondStyleCoachUsername = prop.getProperty("secondStyleCoachUsername");
-			secondStyleCoachPassword = prop.getProperty("secondStyleCoachPassword");
+			//this is the good one
+//			secondStyleCoachUsername = prop.getProperty("secondStyleCoachUsername");
+//			secondStyleCoachPassword = prop.getProperty("secondStyleCoachPassword");
+			// this is just for testing purpose,work-around due to a bug 
+			secondStyleCoachUsername = prop.getProperty("stylecoachUsername");
+			secondStyleCoachPassword = prop.getProperty("stylecoachPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

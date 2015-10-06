@@ -110,7 +110,7 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.NO_STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
-		
+
 		PrintUtils.printContactModel(expectedDetailsModel);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
