@@ -108,7 +108,7 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		customerDateModel = MongoReader.grabStylistDateModels("US17001SecondRegularCustomerRegistrationTest").get(0);
 		customerAddressModel = MongoReader.grabAddressModels("US17001SecondRegularCustomerRegistrationTest").get(0);
 
-		contactModel = MongoReader.grabCustomerFormModels("US17001AddNewContactToStyleCoachTest").get(0);
+		contactModel = MongoReader.grabCustomerFormModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 		contactDateModel = MongoReader.grabStylistDateModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 		contactAddressModel = MongoReader.grabAddressModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 
