@@ -41,24 +41,19 @@ public class MyContactsListPage extends AbstractPage {
 	// // are the first two from the list we get only the first two rows of the
 	// // table (performance improved also)
 	//
-	// public void verifyThatContactIsInTheList(String contactName) {
-	// List<WebElement> contactsList =
-	// getDriver().findElements(By.cssSelector("form#contacts-form tbody tr")).subList(0,
-	// 2);
-	// boolean found = false;
-	// for (WebElement contact : contactsList) {
-	// if
-	// (contact.findElement(By.cssSelector("td:nth-child(4) a")).getText().contentEquals(contactName.toUpperCase()))
-	// {
-	// // Assert.assertTrue("The background is not grey!!!",
-	// //
-	// contact.getAttribute("style").contentEquals("background-color: lightgrey;"));
-	// found = true;
-	// }
-	// }
-	// Assert.assertTrue("The contact was not found in the contact list of the stylecoach",
-	// found);
-	// }
+	public void verifyThatContactIsInTheList(String contactName) {
+		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
+		boolean found = false;
+		for (WebElement contact : contactsList) {
+			if (contact.findElement(By.cssSelector("td:nth-child(4) a")).getText().contentEquals(contactName.toUpperCase())) {
+				Assert.assertTrue("The background is not grey!!!",
+
+				contact.getAttribute("style").contentEquals("background-color: lightgrey;"));
+				found = true;
+			}
+		}
+		Assert.assertTrue("The contact was not found in the contact list of the stylecoach", found);
+	}
 
 	// public void verifyThatContactMatchesAllTerms(String... terms) {
 	// List<WebElement> contactsList =
