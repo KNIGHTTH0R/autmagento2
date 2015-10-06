@@ -6,4 +6,5 @@ public class Separators {
 	public static final String LINE_SEPARATOR = "\n";
 	public static final String COMMA_SEPARATOR = ",";
 	public static final String SLASH = "/";
+	public static final String SPACE = " ";
 }

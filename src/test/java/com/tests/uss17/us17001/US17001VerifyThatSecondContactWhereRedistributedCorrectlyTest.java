@@ -62,8 +62,8 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 
 	public CustomerFormModel contactModel;
 	public DateModel dateModel;
-	ContactModel expectedDetailsModel = new ContactModel();
 	public AddressModel addressModel;
+	ContactModel expectedDetailsModel = new ContactModel();
 	public ContactModel grabbedDetailsModel;
 	private String stylecoachUsername;
 	private String stylecoachPassword;

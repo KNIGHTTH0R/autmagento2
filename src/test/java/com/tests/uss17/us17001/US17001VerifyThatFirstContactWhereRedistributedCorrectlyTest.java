@@ -111,28 +111,32 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		contactModel = MongoReader.grabCustomerFormModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 		contactDateModel = MongoReader.grabStylistDateModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 		contactAddressModel = MongoReader.grabAddressModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
+		
+		contactExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(contactModel, contactDateModel, contactAddressModel); 
 
-		contactExpectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
-		contactExpectedDetailsModel.setCreatedAt(contactDateModel.getDate());
-		contactExpectedDetailsModel.setStreet(contactAddressModel.getStreetAddress());
-		contactExpectedDetailsModel.setNumber(contactAddressModel.getStreetNumber());
-		contactExpectedDetailsModel.setZip(contactAddressModel.getPostCode());
-		contactExpectedDetailsModel.setTown(contactAddressModel.getHomeTown());
-		contactExpectedDetailsModel.setCountry(contactAddressModel.getCountryName());
+//		contactExpectedDetailsModel.setName(contactModel.getFirstName() + " " + contactModel.getLastName());
+//		contactExpectedDetailsModel.setCreatedAt(contactDateModel.getDate());
+//		contactExpectedDetailsModel.setStreet(contactAddressModel.getStreetAddress());
+//		contactExpectedDetailsModel.setNumber(contactAddressModel.getStreetNumber());
+//		contactExpectedDetailsModel.setZip(contactAddressModel.getPostCode());
+//		contactExpectedDetailsModel.setTown(contactAddressModel.getHomeTown());
+//		contactExpectedDetailsModel.setCountry(contactAddressModel.getCountryName());
 
 		contactExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		contactExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
 		contactExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
 		
 		PrintUtils.printContactModel(contactExpectedDetailsModel);
+		
+		customerExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(customerModel, customerDateModel, customerAddressModel); 
 
-		customerExpectedDetailsModel.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
-		customerExpectedDetailsModel.setCreatedAt(customerDateModel.getDate());
-		customerExpectedDetailsModel.setStreet(customerAddressModel.getStreetAddress());
-		customerExpectedDetailsModel.setNumber(customerAddressModel.getStreetNumber());
-		customerExpectedDetailsModel.setZip(customerAddressModel.getPostCode());
-		customerExpectedDetailsModel.setTown(customerAddressModel.getHomeTown());
-		customerExpectedDetailsModel.setCountry(customerAddressModel.getCountryName());
+//		customerExpectedDetailsModel.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
+//		customerExpectedDetailsModel.setCreatedAt(customerDateModel.getDate());
+//		customerExpectedDetailsModel.setStreet(customerAddressModel.getStreetAddress());
+//		customerExpectedDetailsModel.setNumber(customerAddressModel.getStreetNumber());
+//		customerExpectedDetailsModel.setZip(customerAddressModel.getPostCode());
+//		customerExpectedDetailsModel.setTown(customerAddressModel.getHomeTown());
+//		customerExpectedDetailsModel.setCountry(customerAddressModel.getCountryName());
 
 		customerExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		customerExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
