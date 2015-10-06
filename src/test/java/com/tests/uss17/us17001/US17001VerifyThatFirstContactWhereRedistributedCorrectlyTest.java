@@ -155,7 +155,6 @@ public class US17001VerifyThatFirstContactWhereRedistributedCorrectlyTest extend
 		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), contactDateModel.getDate());
 		contactGrabbedDetailsModel = contactDetailsSteps.grabContactDetails();
 		contactValidationWorkflows.validateContactDetails(contactExpectedDetailsModel, contactGrabbedDetailsModel);
-		customVerifications.printErrors();
 
 		loungeSteps.goToContactsList();
 		myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getEmailName(), customerDateModel.getDate());

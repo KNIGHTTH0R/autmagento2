@@ -112,7 +112,7 @@ public class US17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest 
 	}
 
 	@Test
-	public void us17001VerifyThatFirstContactWhereRedistributedCorrectlyTest() {
+	public void us17001VerifyThatFirstCustomersContactIsRedistributedCorrectlyTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
