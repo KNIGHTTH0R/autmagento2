@@ -29,28 +29,36 @@ public class MyContactsListPage extends AbstractPage {
 		searchSubmit.click();
 	}
 
-	public void verifyThatContactIsUniqueInStylecoachList() {
-		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
-		Assert.assertTrue("There should be only one row (contact) found !!!", contactsList.size() == 1);
-	}
-
-	// only two contacts should be redistributed each time and the contacts
-	// should be in the top of the list.So in order be sure that the contacts
-	// are the first two from the list we get only the first two rows of the
-	// table (performance improved also)
-
-	public void verifyThatContactIsInTheList(String contactName) {
-		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr")).subList(0, 2);
-		boolean found = false;
-		for (WebElement contact : contactsList) {
-			if (contact.findElement(By.cssSelector("td:nth-child(4) a")).getText().contentEquals(contactName.toUpperCase())) {
-				// Assert.assertTrue("The background is not grey!!!",
-				// contact.getAttribute("style").contentEquals("background-color: lightgrey;"));
-				found = true;
-			}
-		}
-		Assert.assertTrue("The contact was not found in the contact list of the stylecoach", found);
-	}
+	// public void verifyThatContactIsUniqueInStylecoachList() {
+	// List<WebElement> contactsList =
+	// getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
+	// Assert.assertTrue("There should be only one row (contact) found !!!",
+	// contactsList.size() == 1);
+	// }
+	//
+	// // only two contacts should be redistributed each time and the contacts
+	// // should be in the top of the list.So in order be sure that the contacts
+	// // are the first two from the list we get only the first two rows of the
+	// // table (performance improved also)
+	//
+	// public void verifyThatContactIsInTheList(String contactName) {
+	// List<WebElement> contactsList =
+	// getDriver().findElements(By.cssSelector("form#contacts-form tbody tr")).subList(0,
+	// 2);
+	// boolean found = false;
+	// for (WebElement contact : contactsList) {
+	// if
+	// (contact.findElement(By.cssSelector("td:nth-child(4) a")).getText().contentEquals(contactName.toUpperCase()))
+	// {
+	// // Assert.assertTrue("The background is not grey!!!",
+	// //
+	// contact.getAttribute("style").contentEquals("background-color: lightgrey;"));
+	// found = true;
+	// }
+	// }
+	// Assert.assertTrue("The contact was not found in the contact list of the stylecoach",
+	// found);
+	// }
 
 	// public void verifyThatContactMatchesAllTerms(String... terms) {
 	// List<WebElement> contactsList =

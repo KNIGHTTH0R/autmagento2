@@ -80,6 +80,8 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 			prop.load(input);
 			stylecoachUsername = prop.getProperty("stylecoachUsername");
 			stylecoachPassword = prop.getProperty("stylecoachPassword");
+			System.out.println(stylecoachUsername);
+			System.out.println(stylecoachPassword);
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -123,7 +125,7 @@ public class US17001VerifyThatSecondContactWhereRedistributedCorrectlyTest exten
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), dateModel.getDate());
+		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getFirstName(), dateModel.getDate());
 		grabbedDetailsModel = contactDetailsSteps.grabContactDetails();
 		contactValidationWorkflows.validateContactDetails(expectedDetailsModel, grabbedDetailsModel);
 		customVerifications.printErrors();

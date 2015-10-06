@@ -8,10 +8,10 @@ public class MyContactsListSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
-	@Step
-	public void verifyThatContactIsInTheList(String contactName) {
-		myContactsListPage().verifyThatContactIsInTheList(contactName);
-	}
+//	@Step
+//	public void verifyThatContactIsInTheList(String contactName) {
+//		myContactsListPage().verifyThatContactIsInTheList(contactName);
+//	}
 
 //	@Step
 //	public void verifyThatContactMatchesAllTerms(String... terms) {
@@ -22,12 +22,12 @@ public class MyContactsListSteps extends AbstractSteps {
 		myContactsListPage().verifyUnicAndOpenContactDetails(terms);
 	}
 
-	@Step
-	public void verifyThatContactIsUniqueInStylecoachList(String contactName) {
-		myContactsListPage().inputSearchTerm(contactName);
-		myContactsListPage().submitContactSearch();
-		myContactsListPage().verifyThatContactIsUniqueInStylecoachList();
-
-	}
+//	@Step
+//	public void verifyThatContactIsUniqueInStylecoachList(String contactName) {
+//		myContactsListPage().inputSearchTerm(contactName);
+//		myContactsListPage().submitContactSearch();
+//		myContactsListPage().verifyThatContactIsUniqueInStylecoachList();
+//
+//	}
 
 }
