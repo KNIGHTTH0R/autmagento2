@@ -78,9 +78,12 @@ public class US17002VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17002.properties");
 			prop.load(input);
-
+			//this is only for testing due to a bug
 			username = prop.getProperty("stylecoachUsername");
 			password = prop.getProperty("stylecoachPassword");
+			//this is the correct one
+//			username = prop.getProperty("masterSCUsername");
+//			password = prop.getProperty("masterSCPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
