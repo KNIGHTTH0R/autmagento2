@@ -83,8 +83,8 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 
 	@Test
 	public void us17003StyleCoachRegistrationTest() {
-		headerSteps.navigateToRegisterForm();
-		stylistRegistrationSteps.fillCreateStylecoachFormWithKnownSponsorPayWithVisa(context, customerFormData, customerFormAddress, birthDate.getDate());
+		headerSteps.navigateToStylecoachRegisterFormUnderContext(context);
+		stylistRegistrationSteps.fillCreateStylecoachFormWithKnownSponsorPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
 		customVerification.printErrors();
 	}
 
