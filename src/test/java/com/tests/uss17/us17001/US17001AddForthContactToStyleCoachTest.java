@@ -41,10 +41,10 @@ public class US17001AddForthContactToStyleCoachTest extends BaseTest {
 	@Steps
 	public CreateNewContactSteps createNewContactSteps;
 
-	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel contactModel;
-	public DateModel dateModel;
-	public AddressModel addressModel;
+	private CustomerFormModel stylistRegistrationData;
+	private CustomerFormModel contactModel;
+	private DateModel dateModel;
+	private AddressModel addressModel;
 
 	@Before
 	public void setUp() throws Exception {

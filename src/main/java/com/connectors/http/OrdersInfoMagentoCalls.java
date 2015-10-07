@@ -210,6 +210,6 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-08-15 00:00:00", "2015-09-23 00:00:00");
+		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-09-24 15:19:00", "2015-10-07 17:00:00");
 	}
 }

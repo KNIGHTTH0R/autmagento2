@@ -58,13 +58,12 @@ public class US17001VerifyThatSecondContactWasReassignedCorrectlyTest extends Ba
 	@Steps
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel oldStylistModel;
-	public CustomerFormModel contactModel;
-	public DateModel dateModel;
-	public AddressModel addressModel;
-	ContactModel expectedDetailsModel = new ContactModel();
-	public ContactModel grabbedDetailsModel;
+	private CustomerFormModel oldStylistModel;
+	private CustomerFormModel contactModel;
+	private DateModel dateModel;
+	private AddressModel addressModel;
+	private ContactModel expectedDetailsModel = new ContactModel();
+	private ContactModel grabbedDetailsModel;
 	private String stylecoachUsername;
 	private String stylecoachPassword;
 

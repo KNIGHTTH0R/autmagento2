@@ -57,14 +57,12 @@ public class US17001VerifyThatFirstCustomersContactIsReassignedCorrectlyTest ext
 	@Steps
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel stylistRegistrationData;
-
-	public CustomerFormModel oldStylistModel;
-	public CustomerFormModel customerModel;
-	public AddressModel addressModel;
-	public ContactModel expectedDetailsModel = new ContactModel();
-	public ContactModel grabbedDetailsModel = new ContactModel();
-	public DateModel dateModel;
+	private CustomerFormModel oldStylistModel;
+	private CustomerFormModel customerModel;
+	private AddressModel addressModel;
+	private ContactModel expectedDetailsModel = new ContactModel();
+	private ContactModel grabbedDetailsModel = new ContactModel();
+	private DateModel dateModel;
 	private String username;
 	private String password;
 

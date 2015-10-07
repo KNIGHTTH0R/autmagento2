@@ -57,13 +57,12 @@ public class US17002VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 	@Steps
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel oldStylistModel;
-	public CustomerFormModel contactModel;
-	public DateModel dateModel;
-	public AddressModel addressModel;
-	public ContactModel grabbedDetailsModel;
-	public ContactModel expectedDetailsModel = new ContactModel();
+	private CustomerFormModel oldStylistModel;
+	private CustomerFormModel contactModel;
+	private DateModel dateModel;
+	private AddressModel addressModel;
+	private ContactModel grabbedDetailsModel;
+	private ContactModel expectedDetailsModel = new ContactModel();
 
 	private String username;
 	private String password;

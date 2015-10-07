@@ -57,8 +57,7 @@ public class US17001VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 	@Steps
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel oldStylistModel;
+	private CustomerFormModel oldStylistModel;
 	private CustomerFormModel contactModel;
 	private AddressModel contactAddressModel;
 	private DateModel contactDateModel;
@@ -86,7 +85,7 @@ public class US17001VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
-			
+
 			secondStyleCoachUsername = prop.getProperty("stylecoachUsername");
 			secondStyleCoachPassword = prop.getProperty("stylecoachPassword");
 

@@ -57,8 +57,7 @@ public class US17003VerifyThatContactWasReassignedCorrectlyTest extends BaseTest
 	@Steps
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel oldStylistModel;
+	private CustomerFormModel oldStylistModel;
 	private CustomerFormModel contactModel;
 	private AddressModel contactAddressModel;
 	private DateModel contactDateModel;
