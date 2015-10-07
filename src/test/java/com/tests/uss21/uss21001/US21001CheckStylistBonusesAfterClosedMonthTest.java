@@ -30,7 +30,7 @@ import com.tools.requirements.Application;
 import com.workflows.commission.CommissionClosedMonthRewardsValidationWorkflows;
 
 @WithTag(name = "US21", type = "backend")
-@Story(Application.Shop.ForMyselfCart.class)
+@Story(Application.Commission.CloseMonthRewardPoints.class)
 @RunWith(ThucydidesRunner.class)
 public class US21001CheckStylistBonusesAfterClosedMonthTest extends BaseTest {
 

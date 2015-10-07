@@ -21,7 +21,7 @@ import com.tools.requirements.Application;
 import com.workflows.commission.CommissionStylistValidationWorkflows;
 
 @WithTag(name = "US20", type = "external")
-@Story(Application.MassAction.class)
+@Story(Application.Commission.StylecoachInfo.class)
 @RunWith(ThucydidesRunner.class)
 public class US20001VerifyUpdatedStylistDetailsInCommissionTest extends BaseTest {
 

@@ -33,7 +33,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@Story(Application.Commission.PartyPerformance.class)
 @RunWith(ThucydidesRunner.class)
 public class US10008CreatePartyWithNewContactHostTest extends BaseTest {
 

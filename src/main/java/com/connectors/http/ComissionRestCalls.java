@@ -16,7 +16,7 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getStylistInfo("3350");
+		ComissionRestCalls.getStylistInfo("1835");
 
 	}
 	//TODO clean the hardcoded values

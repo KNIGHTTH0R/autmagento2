@@ -24,7 +24,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US20", type = "frontend")
-@Story(Application.KoboSubscription.class)
+@Story(Application.Commission.StylecoachInfo.class)
 @RunWith(ThucydidesRunner.class)
 public class US20001StyleCoachRegistrationTest extends BaseTest {
 

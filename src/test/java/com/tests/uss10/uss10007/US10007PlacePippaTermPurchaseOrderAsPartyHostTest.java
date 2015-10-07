@@ -49,7 +49,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
 @WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@Story(Application.Commission.PartyPerformance.class)
 @RunWith(ThucydidesRunner.class)
 public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest {
 
