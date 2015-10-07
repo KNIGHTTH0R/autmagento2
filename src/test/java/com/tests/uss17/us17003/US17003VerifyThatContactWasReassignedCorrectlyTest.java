@@ -79,12 +79,12 @@ public class US17003VerifyThatContactWasReassignedCorrectlyTest extends BaseTest
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17003.properties");
 			prop.load(input);
-//			//this is the good one
-//			username = prop.getProperty("masterSCUsername");
-//			password = prop.getProperty("masterSCPassword");
-			//this is for testing purpose,workaround for a bug
-			username = prop.getProperty("stylecoachUsername");
-			password = prop.getProperty("stylecoachPassword");
+			//this is the good one
+			username = prop.getProperty("masterSCUsername");
+			password = prop.getProperty("masterSCPassword");
+//			//this is for testing purpose,workaround for a bug
+//			username = prop.getProperty("stylecoachUsername");
+//			password = prop.getProperty("stylecoachPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
