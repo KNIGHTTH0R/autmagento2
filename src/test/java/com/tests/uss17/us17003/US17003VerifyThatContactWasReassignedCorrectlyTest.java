@@ -66,8 +66,8 @@ public class US17003VerifyThatContactWasReassignedCorrectlyTest extends BaseTest
 	private ContactModel contactExpectedDetailsModel = new ContactModel();
 	private ContactModel contactGrabbedDetailsModel = new ContactModel();
 
-	private String secondStyleCoachUsername;
-	private String secondStyleCoachPassword;
+	private String username;
+	private String password;
 
 	@Before
 	public void setUp() throws Exception {
@@ -79,9 +79,12 @@ public class US17003VerifyThatContactWasReassignedCorrectlyTest extends BaseTest
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17003.properties");
 			prop.load(input);
-			
-			secondStyleCoachUsername = prop.getProperty("stylecoachUsername");
-			secondStyleCoachPassword = prop.getProperty("stylecoachPassword");
+//			//this is the good one
+//			username = prop.getProperty("masterSCUsername");
+//			password = prop.getProperty("masterSCPassword");
+			//this is for testing purpose,workaround for a bug
+			username = prop.getProperty("stylecoachUsername");
+			password = prop.getProperty("stylecoachPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -113,7 +116,7 @@ public class US17003VerifyThatContactWasReassignedCorrectlyTest extends BaseTest
 	@Test
 	public void us17003VerifyThatContactWasReassignedCorrectlyTest() {
 
-		customerRegistrationSteps.performLogin(secondStyleCoachUsername, secondStyleCoachPassword);
+		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}

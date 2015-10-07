@@ -50,7 +50,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	}
 	@StepGroup
 	@Title("Fill create stylecoach form with known sponsor")
-	public String fillCreateStylecoachFormWithKnownSponsor(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+	public String fillCreateStylecoachFormWithKnownSponsorPayWithVisa(String context,CustomerFormModel customerData, AddressModel addressData, String birthDate) {
 		
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
@@ -61,7 +61,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		fillContactDetails(addressData);
 		checkIAgree();
 		submitStep();
-		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		inputStylistRef(context);
 		submitStep();
 		selectStarterKit();
 		submitStep();
