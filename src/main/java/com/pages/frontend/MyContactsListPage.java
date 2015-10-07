@@ -80,7 +80,7 @@ public class MyContactsListPage extends AbstractPage {
 	// }
 	public void verifyUnicAndOpenContactDetails(String... terms) {
 		WebElement link = null;
-		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
+		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr[class*='grey']"));
 		boolean found = false;
 		for (WebElement contact : contactsList) {
 			boolean matchesAllTerms = true;

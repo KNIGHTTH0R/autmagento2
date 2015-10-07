@@ -86,12 +86,7 @@ public class US17001VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
-			// this is the good one
-			// secondStyleCoachUsername =
-			// prop.getProperty("secondStyleCoachUsername");
-			// secondStyleCoachPassword =
-			// prop.getProperty("secondStyleCoachPassword");
-			// this is just for testing purpose,work-around due to a bug
+			
 			secondStyleCoachUsername = prop.getProperty("stylecoachUsername");
 			secondStyleCoachPassword = prop.getProperty("stylecoachPassword");
 
@@ -115,7 +110,7 @@ public class US17001VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 		contactDateModel = MongoReader.grabStylistDateModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 		contactAddressModel = MongoReader.grabAddressModels("US17001AddSecondNewContactToStyleCoachTest").get(0);
 
-		contactExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,contactModel, contactDateModel, contactAddressModel);
+		contactExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, contactModel, contactDateModel, contactAddressModel);
 
 		contactExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		contactExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
@@ -123,7 +118,7 @@ public class US17001VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 
 		PrintUtils.printContactModel(contactExpectedDetailsModel);
 
-		customerExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,customerModel, customerDateModel, customerAddressModel);
+		customerExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, customerModel, customerDateModel, customerAddressModel);
 
 		customerExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		customerExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);

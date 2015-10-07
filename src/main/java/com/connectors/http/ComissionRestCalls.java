@@ -19,7 +19,7 @@ public class ComissionRestCalls {
 		ComissionRestCalls.getStylistInfo("3350");
 
 	}
-
+	//TODO clean the hardcoded values
 	public static String composeAuthenticationSuffix() throws Exception {
 
 		String hash = MD5.getMd5(Credentials.API_KEY + Credentials.API_SECRET + DateUtils.getTimestamp() + "300");

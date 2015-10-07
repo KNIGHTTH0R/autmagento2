@@ -97,8 +97,8 @@ public class US17001VerifyThatFirstCustomersContactIsReassignedCorrectlyTest ext
 		customerModel = MongoReader.grabCustomerFormModels("US17001RegularCustomerRegistrationTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US17001RegularCustomerRegistrationTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US17001RegularCustomerRegistrationTest").get(0);
-		
-		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,customerModel, dateModel, addressModel); 
+
+		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, customerModel, dateModel, addressModel);
 
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
 		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
