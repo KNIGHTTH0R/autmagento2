@@ -2,6 +2,7 @@ package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 
+import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.requirements.AbstractSteps;
 
 public class LoungeSteps extends AbstractSteps {
@@ -50,4 +51,8 @@ public class LoungeSteps extends AbstractSteps {
 		loungePage().clickAddContact();
 	}
 
+	@Step
+	public LoungeIpPerformanceModel grabSCPerformanceIpLogic() {
+		return loungePage().grabSCPerformanceIpLogic();
+	}
 }
