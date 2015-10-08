@@ -80,6 +80,12 @@ public class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		//if something goes wrong on backwards compatibility delete this - start
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 00, 00, 00);
+		//end
 		Date lastDayOfMonth = calendar.getTime();
 		DateFormat sdf = new SimpleDateFormat(formatString);
 

@@ -196,7 +196,7 @@ public class CreditMemosInfoMagentoCalls {
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-		CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos("1835", "2015-08-15 00:00:00", "2015-09-16 00:00:00");
+		CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos("1835", "2015-10-07 17:00:00", "2015-09-16 00:00:00");
 	}
 
 }

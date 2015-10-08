@@ -24,7 +24,7 @@ public class ClosedMonthBonusCalculation {
 
 		result.setJewelryBonus(String.valueOf(determineJewelryBonusAmount(totalIp)));
 		result.setMarketingMaterialBonus(String.valueOf(determineMarketingMaterialBonusAmount(totalIp)));
-		
+
 		System.out.println(result.getJewelryBonus());
 		System.out.println(result.getMarketingMaterialBonus());
 
@@ -35,8 +35,8 @@ public class ClosedMonthBonusCalculation {
 	public static RewardPointsOfStylistModel calculateRewardPoints(RewardPointsOfStylistModel model1, RewardPointsOfStylistModel model2) {
 
 		RewardPointsOfStylistModel result = new RewardPointsOfStylistModel();
-		result.setJewelryBonus(String.valueOf(BigDecimal.valueOf(Double.parseDouble(model1.getJewelryBonus()))
-				.add(BigDecimal.valueOf(Double.parseDouble(model2.getJewelryBonus())).setScale(4))));
+		result.setJewelryBonus(String.valueOf(BigDecimal.valueOf(Double.parseDouble(model1.getJewelryBonus())).add(
+				BigDecimal.valueOf(Double.parseDouble(model2.getJewelryBonus())).setScale(4))));
 		result.setMarketingMaterialBonus(String.valueOf(BigDecimal.valueOf(Double.parseDouble(model1.getMarketingMaterialBonus())).add(
 				BigDecimal.valueOf(Double.parseDouble(model2.getMarketingMaterialBonus())).setScale(4))));
 
@@ -70,6 +70,6 @@ public class ClosedMonthBonusCalculation {
 	}
 
 	public static void main(String[] args) throws NumberFormatException, ParseException {
-		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-08-15 00:00:00", "2015-09-23 00:00:00");
+		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-10-08 10:00:00", "2015-10-08 10:00:00");
 	}
 }
