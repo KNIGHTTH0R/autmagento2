@@ -30,7 +30,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@Story(Application.Commission.PartyPerformance.class)
 @RunWith(ThucydidesRunner.class)
 public class US10007CreateSecondFolowUpPartyForActivePartyTest extends BaseTest {
 	@Steps

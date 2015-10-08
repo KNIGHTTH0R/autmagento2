@@ -20,7 +20,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US21", type = "frontend")
-@Story(Application.KoboSubscription.class)
+@Story(Application.Commission.CloseMonthRewardPoints.class)
 @RunWith(ThucydidesRunner.class)
 public class US21001CloseMonthTest extends BaseTest {
 

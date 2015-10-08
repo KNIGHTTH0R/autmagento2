@@ -28,7 +28,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US21", type = "frontend")
-@Story(Application.ZzzProducts.class)
+@Story(Application.Commission.CloseMonthRewardPoints.class)
 @RunWith(ThucydidesRunner.class)
 public class US21001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTest {
 

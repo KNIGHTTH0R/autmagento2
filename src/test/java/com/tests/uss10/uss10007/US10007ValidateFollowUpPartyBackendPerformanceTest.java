@@ -23,7 +23,7 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.BackendPartyPerformanceValidationWorkflows;
 
 @WithTag(name = "US10", type = "backend")
-@Story(Application.Shop.ForMyselfCart.class)
+@Story(Application.Commission.PartyPerformance.class)
 @RunWith(ThucydidesRunner.class)
 public class US10007ValidateFollowUpPartyBackendPerformanceTest extends BaseTest {
 

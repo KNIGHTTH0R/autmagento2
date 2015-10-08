@@ -1,5 +1,11 @@
 package com.tests.uss17.us17003;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -20,6 +26,8 @@ import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.env.constants.FilePaths;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -41,9 +49,32 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 	public DateModel birthDate = new DateModel();
 	public AddressModel customerFormAddress;
 	public StylistDataModel validationModel;
+	private String context;
 
 	@Before
 	public void setUp() throws Exception {
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17003.properties");
+			prop.load(input);
+
+			context = prop.getProperty("context");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		birthDate.setDate("Feb,1970,12");
@@ -52,8 +83,8 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 
 	@Test
 	public void us17003StyleCoachRegistrationTest() {
-		headerSteps.navigateToRegisterForm();
-		stylistRegistrationSteps.fillCreateCustomerFormPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
+		headerSteps.navigateToStylecoachRegisterFormUnderContext(context);
+		stylistRegistrationSteps.fillCreateStylecoachFormWithKnownSponsorPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
 		customVerification.printErrors();
 	}
 

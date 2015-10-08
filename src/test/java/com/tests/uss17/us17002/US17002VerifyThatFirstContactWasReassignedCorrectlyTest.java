@@ -57,13 +57,12 @@ public class US17002VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 	@Steps
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel oldStylistModel;
-	public CustomerFormModel contactModel;
-	public DateModel dateModel;
-	public AddressModel addressModel;
-	public ContactModel grabbedDetailsModel;
-	public ContactModel expectedDetailsModel = new ContactModel();
+	private CustomerFormModel oldStylistModel;
+	private CustomerFormModel contactModel;
+	private DateModel dateModel;
+	private AddressModel addressModel;
+	private ContactModel grabbedDetailsModel;
+	private ContactModel expectedDetailsModel = new ContactModel();
 
 	private String username;
 	private String password;
@@ -78,12 +77,9 @@ public class US17002VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17002.properties");
 			prop.load(input);
-			//this is only for testing due to a bug
+			
 			username = prop.getProperty("stylecoachUsername");
 			password = prop.getProperty("stylecoachPassword");
-			//this is the correct one
-//			username = prop.getProperty("masterSCUsername");
-//			password = prop.getProperty("masterSCPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

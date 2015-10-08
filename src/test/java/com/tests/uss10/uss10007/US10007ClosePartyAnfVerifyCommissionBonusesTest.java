@@ -37,7 +37,7 @@ import com.tools.utils.PrintUtils;
 import com.workflows.commission.CommissionPartyPerformanceValidationWorkflows;
 
 @WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@Story(Application.Commission.PartyPerformance.class)
 @RunWith(ThucydidesRunner.class)
 public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 

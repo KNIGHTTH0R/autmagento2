@@ -27,7 +27,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US21", type = "backend")
-@Story(Application.Shop.ForMyselfCart.class)
+@Story(Application.Commission.CloseMonthRewardPoints.class)
 @RunWith(ThucydidesRunner.class)
 public class US21001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 

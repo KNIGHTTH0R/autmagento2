@@ -24,7 +24,7 @@ import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "U20", type = "backend")
-@Story(Application.KoboSubscription.class)
+@Story(Application.Commission.StylecoachInfo.class)
 @RunWith(ThucydidesRunner.class)
 public class US20001GetStylistIncrementIdTest extends BaseTest {
 

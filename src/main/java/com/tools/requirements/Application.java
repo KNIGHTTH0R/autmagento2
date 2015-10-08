@@ -43,6 +43,16 @@ public class Application {
 	public class KoboSubscription {
 
 	}
+	
+	@Feature
+	public class Commission {
+		public class StylecoachInfo {
+		}
+		public class PartyPerformance {
+		}
+		public class CloseMonthRewardPoints {
+		}
+	}
 
 	@Feature
 	public class StyleParty {

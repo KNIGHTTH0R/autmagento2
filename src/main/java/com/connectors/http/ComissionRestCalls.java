@@ -16,10 +16,10 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getStylistInfo("3350");
+		ComissionRestCalls.getStylistInfo("1835");
 
 	}
-
+	//TODO clean the hardcoded values
 	public static String composeAuthenticationSuffix() throws Exception {
 
 		String hash = MD5.getMd5(Credentials.API_KEY + Credentials.API_SECRET + DateUtils.getTimestamp() + "300");
