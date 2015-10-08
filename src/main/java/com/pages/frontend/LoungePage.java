@@ -2,9 +2,11 @@ package com.pages.frontend;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.requirements.AbstractPage;
 
 public class LoungePage extends AbstractPage {
@@ -59,6 +61,9 @@ public class LoungePage extends AbstractPage {
 
 	@FindBy(id = "addContact")
 	private WebElement addContact;
+
+	@FindBy(css = ".performance-table")
+	private WebElement performanceTable;
 
 	public void clickAddContact() {
 		element(addContact).waitUntilVisible();
@@ -152,6 +157,22 @@ public class LoungePage extends AbstractPage {
 		element(contactsListLink).waitUntilVisible();
 		contactsListLink.click();
 
+	}
+
+	public LoungeIpPerformanceModel grabSCPerformanceIpLogic() {
+
+		LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
+
+		WebElement performanceTable = getDriver().findElement(By.cssSelector(".performance-table tbody"));
+		result.setCareerLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(1) td:nth-child(2)")).getText());
+		result.setPayLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(2) td:nth-child(2)")).getText());
+		result.setIndividualPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(3) td:nth-child(2)")).getText());
+		result.setTeamPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(4) td:nth-child(2)")).getText());
+		result.setStyleCoachFirstLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(5) td:nth-child(2)")).getText());
+		result.setGoldStyleCoaches(performanceTable.findElement(By.cssSelector("tr:nth-child(6) td:nth-child(2)")).getText());
+		result.setMonthYear(getDriver().findElement(By.cssSelector("month_year option:first-child font font")).getText());
+
+		return result;
 	}
 
 }
