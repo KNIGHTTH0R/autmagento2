@@ -170,7 +170,7 @@ public class LoungePage extends AbstractPage {
 		result.setTeamPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(4) td:nth-child(2)")).getText());
 		result.setStyleCoachFirstLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(5) td:nth-child(2)")).getText());
 		result.setGoldStyleCoaches(performanceTable.findElement(By.cssSelector("tr:nth-child(6) td:nth-child(2)")).getText());
-		result.setMonthYear(getDriver().findElement(By.cssSelector("month_year option:first-child font font")).getText());
+		result.setMonthYear(getDriver().findElement(By.cssSelector("#month_year option:first-child")).getText());
 
 		return result;
 	}

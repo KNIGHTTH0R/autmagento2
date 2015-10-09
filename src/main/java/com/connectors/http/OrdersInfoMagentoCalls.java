@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.soap.SOAPBody;
@@ -29,12 +30,29 @@ import com.tools.utils.DateUtils;
 
 public class OrdersInfoMagentoCalls {
 
-	public static BigDecimal calculateTotalIpOnPreviousMonth(String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
+	private static List<String> unsafeIpStatusesList = new ArrayList<String>(Arrays.asList("processing", "waiting_authorozation", "payment_review", "payment_failed",
+			"pending_payment", "payment_in_progress", "pending_payment_hold"));
+
+	public static BigDecimal calculateTotalIpOnPreviousMonth(List<DBOrderModel> allOrdersList,String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 		int ordersNumber = 0;
-		List<DBOrderModel> allOrdersList = getOrdersList(stylistId);
 		for (DBOrderModel order : allOrdersList) {
 			if (isOrderCompatibleForIpCalculation(order, createdStartDate, createdEndDate)) {
+				ordersNumber++;
+				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+			}
+		}
+		System.out.println("total: " + String.valueOf(totalMonthIp));
+		System.out.println("orders number: " + ordersNumber);
+		return totalMonthIp;
+	}
+
+	public static BigDecimal calculateTotalUnsafeIpOnCurrentMonth(List<DBOrderModel> allOrdersList,String stylistId, String createdStartDate) throws NumberFormatException, ParseException {
+		BigDecimal totalMonthIp = BigDecimal.ZERO;
+		int ordersNumber = 0;
+//		List<DBOrderModel> allOrdersList = getOrdersList(stylistId);
+		for (DBOrderModel order : allOrdersList) {
+			if (isOrderCompatibleForUnsafeIpCalc(order, createdStartDate)) {
 				ordersNumber++;
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
@@ -53,6 +71,16 @@ public class OrdersInfoMagentoCalls {
 		return model.getStatus().contentEquals("complete") || model.getStatus().contentEquals("payment_complete") || model.getStatus().contentEquals("closed");
 	}
 
+	private static boolean hasUnsafeIpStatus(DBOrderModel model) {
+		boolean found = false;
+		for (String status : unsafeIpStatusesList) {
+			if (model.getStatus().contentEquals(status)) {
+				found = true;
+			}
+		}
+		return found;
+	}
+
 	private static boolean isOrderCompatibleForIpCalcCase1(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
 
 		return DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
@@ -64,6 +92,13 @@ public class OrdersInfoMagentoCalls {
 
 		return DateUtils.isDateBeetween(order.getCreatedAt(), "2015-01-01 00:00:00", DateUtils.getLastDayOfPreviousMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
 				"yyyy-MM-dd HH:mm:ss") && DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd HH:mm:ss");
+	}
+
+	private static boolean isOrderCompatibleForUnsafeIpCalc(DBOrderModel order, String createEndDate) throws ParseException {
+
+		return DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth("1970-10-10 00:00:00", "yyyy-MM-dd HH:mm:ss"),
+				DateUtils.getLastDayOfAGivenMonth(createEndDate, "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
+				&& !isPayed(order) && hasUnsafeIpStatus(order);
 	}
 
 	public static List<DBOrderModel> getOrdersList(String stylistId) {
@@ -175,6 +210,9 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
 						model.setCreatedAt(childNodes.item(j).getTextContent());
 					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("status")) {
+						model.setStatus(childNodes.item(j).getTextContent());
+					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("payment_complete_at")) {
 						model.setPaidAt(childNodes.item(j).getTextContent());
 					}
@@ -190,18 +228,6 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("cart_type")) {
 						model.setCartType(childNodes.item(j).getTextContent());
 					}
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("status_history")) {
-
-						Node firstStatus = childNodes.item(j).getChildNodes().item(1);
-
-						NodeList firstStatusNodes = firstStatus.getChildNodes();
-						for (int k = 0; k < firstStatusNodes.getLength(); k++) {
-
-							if (firstStatusNodes.item(k).getNodeName().equalsIgnoreCase("status")) {
-								model.setStatus(firstStatusNodes.item(k).getTextContent());
-							}
-						}
-					}
 				}
 				orderModelList.add(model);
 			}
@@ -210,6 +236,6 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-		OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth("1835", "2015-09-24 15:19:00", "2015-10-07 17:00:00");
+//		OrdersInfoMagentoCalls.calculateTotalUnsafeIpOnCurrentMonth("1835", "2015-10-10 00:00:00");
 	}
 }

@@ -48,22 +48,6 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 	public FooterSteps footerSteps;
 	@Steps
 	public HeaderSteps headerSteps;
-	@Steps
-	public MyContactsListSteps myContactsListSteps;
-	@Steps
-	public ContactValidationWorkflows contactValidationWorkflows;
-	@Steps
-	public ContactDetailsSteps contactDetailsSteps;
-	@Steps
-	public CustomVerification customVerifications;
-
-	private CustomerFormModel oldStylistModel;
-	private CustomerFormModel contactModel;
-	private AddressModel contactAddressModel;
-	private DateModel contactDateModel;
-
-	private ContactModel contactExpectedDetailsModel = new ContactModel();
-	private ContactModel contactGrabbedDetailsModel = new ContactModel();
 
 	private String username;
 	private String password;
@@ -78,12 +62,9 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17003.properties");
 			prop.load(input);
-			//this is the good one
+
 			username = prop.getProperty("masterSCUsername");
 			password = prop.getProperty("masterSCPassword");
-//			//this is for testing purpose,workaround for a bug
-//			username = prop.getProperty("stylecoachUsername");
-//			password = prop.getProperty("stylecoachPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -96,19 +77,6 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 				}
 			}
 		}
-		oldStylistModel = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationTest").get(0);
-		contactModel = MongoReader.grabCustomerFormModels("US17003AddNewContactToStyleCoachTest").get(0);
-		contactDateModel = MongoReader.grabStylistDateModels("US17003AddNewContactToStyleCoachTest").get(0);
-		contactAddressModel = MongoReader.grabAddressModels("US17003AddNewContactToStyleCoachTest").get(0);
-
-		contactExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,contactModel, contactDateModel, contactAddressModel);
-
-		contactExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
-		contactExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
-		contactExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
-
-		PrintUtils.printContactModel(contactExpectedDetailsModel);
-
 
 	}
 
@@ -120,13 +88,6 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-
-		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), contactDateModel.getDate());
-		contactGrabbedDetailsModel = contactDetailsSteps.grabContactDetails();
-		contactValidationWorkflows.validateContactDetails(contactExpectedDetailsModel, contactGrabbedDetailsModel);
-
-		customVerifications.printErrors();
 
 	}
 

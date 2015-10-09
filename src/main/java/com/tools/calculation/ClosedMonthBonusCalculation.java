@@ -2,10 +2,14 @@ package com.tools.calculation;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.util.List;
 
 import com.connectors.http.CreditMemosInfoMagentoCalls;
 import com.connectors.http.OrdersInfoMagentoCalls;
+import com.tools.data.backend.IpModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
+import com.tools.data.soap.DBCreditMemoModel;
+import com.tools.data.soap.DBOrderModel;
 
 public class ClosedMonthBonusCalculation {
 
@@ -14,8 +18,12 @@ public class ClosedMonthBonusCalculation {
 		RewardPointsOfStylistModel result = new RewardPointsOfStylistModel();
 		BigDecimal totalIp = BigDecimal.ZERO;
 
-		BigDecimal ipForOrders = OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth(stylistId, startDate, endDate);
-		BigDecimal ipForCreditMemos = CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos(stylistId, startDate, endDate);
+		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
+		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
+		List<DBCreditMemoModel> completeCMList = CreditMemosInfoMagentoCalls.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
+
+		BigDecimal ipForOrders = OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
+		BigDecimal ipForCreditMemos = CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
 
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
@@ -27,6 +35,33 @@ public class ClosedMonthBonusCalculation {
 
 		System.out.println(result.getJewelryBonus());
 		System.out.println(result.getMarketingMaterialBonus());
+
+		return result;
+
+	}
+
+	public static IpModel calculateCurrentMonthBonuses(String stylistId, String startDate, String endDate) throws NumberFormatException, ParseException {
+
+		IpModel result = new IpModel();
+		BigDecimal totalIp = BigDecimal.ZERO;
+
+		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
+		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
+		List<DBCreditMemoModel> completeCMList = CreditMemosInfoMagentoCalls.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
+
+		BigDecimal ipForOrders = OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
+		BigDecimal ipForCreditMemos = CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
+
+		totalIp = totalIp.add(ipForOrders);
+		totalIp = totalIp.add(ipForCreditMemos);
+
+		BigDecimal unsafeIpForOrders = OrdersInfoMagentoCalls.calculateTotalUnsafeIpOnCurrentMonth(allOrdersList, stylistId, endDate);
+
+		result.setIp(String.valueOf(totalIp));
+		result.setUnsafeIp(String.valueOf(unsafeIpForOrders));
+
+		System.out.println(result.getIp());
+		System.out.println(result.getUnsafeIp());
 
 		return result;
 
@@ -70,6 +105,6 @@ public class ClosedMonthBonusCalculation {
 	}
 
 	public static void main(String[] args) throws NumberFormatException, ParseException {
-		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-10-08 10:00:00", "2015-10-08 10:00:00");
+		ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835", "2015-10-10 00:00:00", "2015-10-10 00:00:00");
 	}
 }

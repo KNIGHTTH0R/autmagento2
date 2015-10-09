@@ -29,12 +29,12 @@ import com.tools.utils.DateUtils;
 
 public class CreditMemosInfoMagentoCalls {
 
-	public static BigDecimal calculateTotalIpsForCreditMemos(String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
+	public static BigDecimal calculateTotalIpsForCreditMemos(List<DBCreditMemoModel> completeCMList, String stylistId, String createdStartDate, String createdEndDate)
+			throws NumberFormatException, ParseException {
 
 		BigDecimal totalMonthRefundedIp = BigDecimal.ZERO;
-		List<DBCreditMemoModel> allOrdersList = populateCreditMemosListWithOrderDetails(stylistId, createdStartDate);
 
-		for (DBCreditMemoModel order : allOrdersList) {
+		for (DBCreditMemoModel order : completeCMList) {
 
 			if (isOrderCompatibleForDecreasingIp(order, createdStartDate, createdEndDate)) {
 				totalMonthRefundedIp = totalMonthRefundedIp.subtract(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
@@ -107,8 +107,7 @@ public class CreditMemosInfoMagentoCalls {
 		// soapConnection.call(getCreditMemosList(sessID, stylistId,
 		// createdStartDate, createdEndDate), MongoReader.getSoapURL() +
 		// UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/"
-				+ UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -133,14 +132,16 @@ public class CreditMemosInfoMagentoCalls {
 		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
 		value2.addTextNode(stylistId);
 
-//		SOAPElement complexObjectArrayB = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
-//		SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
-//		keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
-//		SOAPElement valueB = complexObjectArrayB.addChildElement(SoapKeys.VALUE);
-//		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
-//		key2B.addTextNode(SoapConstants.GREATER_THAN);
-//		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
-//		value2B.addTextNode(createdStartDate);
+		// SOAPElement complexObjectArrayB =
+		// complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		// SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
+		// keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
+		// SOAPElement valueB =
+		// complexObjectArrayB.addChildElement(SoapKeys.VALUE);
+		// SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
+		// key2B.addTextNode(SoapConstants.GREATER_THAN);
+		// SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
+		// value2B.addTextNode(createdStartDate);
 
 		soapMessage.saveChanges();
 
@@ -179,10 +180,13 @@ public class CreditMemosInfoMagentoCalls {
 		return credtMemoModelList;
 	}
 
-	private static List<DBCreditMemoModel> populateCreditMemosListWithOrderDetails(String stylistId, String createdStartDate) {
+	public static List<DBCreditMemoModel> populateCreditMemosListWithOrderDetails(List<DBCreditMemoModel> creditMemoList, List<DBOrderModel> orderList, String stylistId,
+			String createdStartDate) {
 
-		List<DBCreditMemoModel> creditMemoList = getCreditMemosList(stylistId);
-		List<DBOrderModel> orderList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
+		// List<DBCreditMemoModel> creditMemoList =
+		// getCreditMemosList(stylistId);
+		// List<DBOrderModel> orderList =
+		// OrdersInfoMagentoCalls.getOrdersList(stylistId);
 
 		for (DBCreditMemoModel creditMemo : creditMemoList) {
 			for (DBOrderModel order : orderList) {
@@ -196,7 +200,8 @@ public class CreditMemosInfoMagentoCalls {
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-		CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos("1835", "2015-10-07 17:00:00", "2015-09-16 00:00:00");
+		// CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos("1835",
+		// "2015-10-07 17:00:00", "2015-09-16 00:00:00");
 	}
 
 }
