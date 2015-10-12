@@ -54,21 +54,18 @@ public class CommissionReportSteps extends AbstractSteps {
 	@StepGroup
 	public IpModel closeLastMonthAndGetCurrentMonthIps(String stylistId) throws Exception {
 
-		if (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")) {
-			ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
-			ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
-			waitABit(10000);
-			getDriver().navigate().refresh();
-			waitABit(TimeConstants.TIME_CONSTANT);
-		} else {
-			// set commission run date on 15 of the month
-		}
+		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
+		ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
+		waitABit(10000);
+		getDriver().navigate().refresh();
+		waitABit(TimeConstants.TIME_CONSTANT);
 		commissionReportPage().selectMonthToBeClosed();
 		commissionReportPage().enterCloseMonthDate();
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses(stylistId, DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses(stylistId, DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00",
+				DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
 
 	}
 

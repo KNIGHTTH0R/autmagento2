@@ -33,12 +33,14 @@ public class OrdersInfoMagentoCalls {
 	private static List<String> unsafeIpStatusesList = new ArrayList<String>(Arrays.asList("processing", "waiting_authorozation", "payment_review", "payment_failed",
 			"pending_payment", "payment_in_progress", "pending_payment_hold"));
 
-	public static BigDecimal calculateTotalIpOnPreviousMonth(List<DBOrderModel> allOrdersList,String stylistId, String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
+	private static List<String> payedStatusesList = new ArrayList<String>(Arrays.asList("complete", "payment_complete", "closed"));
+
+	public static BigDecimal calculateTotalIpOnPreviousMonth(List<DBOrderModel> allOrdersList, String stylistId, String createdStartDate, String createdEndDate)
+			throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 		int ordersNumber = 0;
 		for (DBOrderModel order : allOrdersList) {
 			if (isOrderCompatibleForIpCalculation(order, createdStartDate, createdEndDate)) {
-				System.out.println(order.getCreatedAt() + "       " + order.getIncrementId());
 				ordersNumber++;
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
@@ -48,10 +50,11 @@ public class OrdersInfoMagentoCalls {
 		return totalMonthIp;
 	}
 
-	public static BigDecimal calculateTotalUnsafeIpOnCurrentMonth(List<DBOrderModel> allOrdersList,String stylistId, String createdStartDate) throws NumberFormatException, ParseException {
+	public static BigDecimal calculateTotalUnsafeIpOnCurrentMonth(List<DBOrderModel> allOrdersList, String stylistId, String createdStartDate) throws NumberFormatException,
+			ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 		int ordersNumber = 0;
-//		List<DBOrderModel> allOrdersList = getOrdersList(stylistId);
+		// List<DBOrderModel> allOrdersList = getOrdersList(stylistId);
 		for (DBOrderModel order : allOrdersList) {
 			if (isOrderCompatibleForUnsafeIpCalc(order, createdStartDate)) {
 				ordersNumber++;
@@ -69,7 +72,13 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	private static boolean isPayed(DBOrderModel model) {
-		return model.getStatus().contentEquals("complete") || model.getStatus().contentEquals("payment_complete") || model.getStatus().contentEquals("closed");
+		boolean found = false;
+		for (String status : payedStatusesList) {
+			if (model.getStatus().contentEquals(status)) {
+				found = true;
+			}
+		}
+		return found;
 	}
 
 	private static boolean hasUnsafeIpStatus(DBOrderModel model) {
@@ -237,6 +246,7 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	public static void main(String args[]) throws NumberFormatException, ParseException {
-//		OrdersInfoMagentoCalls.calculateTotalUnsafeIpOnCurrentMonth("1835", "2015-10-10 00:00:00");
+		// OrdersInfoMagentoCalls.calculateTotalUnsafeIpOnCurrentMonth("1835",
+		// "2015-10-10 00:00:00");
 	}
 }
