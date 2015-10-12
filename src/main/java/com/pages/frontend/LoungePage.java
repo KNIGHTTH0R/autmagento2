@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.PrintUtils;
 
 public class LoungePage extends AbstractPage {
 
@@ -170,7 +171,9 @@ public class LoungePage extends AbstractPage {
 		result.setTeamPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(4) td:nth-child(2)")).getText());
 		result.setStyleCoachFirstLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(5) td:nth-child(2)")).getText());
 		result.setGoldStyleCoaches(performanceTable.findElement(By.cssSelector("tr:nth-child(6) td:nth-child(2)")).getText());
-
+ 
+		PrintUtils.printLoungeIpPerformanceModel(result);
+		
 		return result;
 	}
 

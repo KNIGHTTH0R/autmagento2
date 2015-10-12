@@ -5,17 +5,14 @@ import net.thucydides.core.annotations.Step;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.requirements.AbstractSteps;
 
-public class CustomerDetailsBackendSteps  extends AbstractSteps{
+public class CustomerDetailsBackendSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void clickOnPerformanceTab(){
+	public LoungeIpPerformanceModel grabSCPerformanceIpLogicAdmin() {
 		customerDetailsHomePage().clickOnPerformanceTab();
-	}
-	
-	@Step
-	public LoungeIpPerformanceModel grabSCPerformanceIpLogicAdmin(){
+		waitABit(5000);
 		return customerDetailsHomePage().grabSCPerformanceIpLogicAdmin();
 	}
 }

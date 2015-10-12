@@ -372,7 +372,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		
 		LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
 		
-		result.setCareerLevel(getDriver().findElement(By.cssSelector("#performance-data tbody tr:first-child td:nth-child(2) div")).getText());
+		result.setCareerLevel(getDriver().findElement(By.cssSelector("#career")).getText());
 		result.setPayLevel(getDriver().findElement(By.cssSelector("#paylevel")).getText());
 		result.setIndividualPoints(getDriver().findElement(By.cssSelector("#ip")).getText());
         result.setTeamPoints(getDriver().findElement(By.cssSelector("#teamPoints")).getText());
