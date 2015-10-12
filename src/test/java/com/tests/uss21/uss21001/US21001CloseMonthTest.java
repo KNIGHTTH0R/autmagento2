@@ -40,7 +40,7 @@ public class US21001CloseMonthTest extends BaseTest {
 	public void us21001CloseMonthAndVerifyReceivedJbAndMmbTest() throws Exception {
 
 		backEndSteps.navigate(UrlConstants.COMMISSION_REPORTS_URL);
-		calculatedRewordPointsOfStylistModel = commissionReportSteps.closeMonth();
+		calculatedRewordPointsOfStylistModel = commissionReportSteps.closeMonth("1835");
 
 	}
 

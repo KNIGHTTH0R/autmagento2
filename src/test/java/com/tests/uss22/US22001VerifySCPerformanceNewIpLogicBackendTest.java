@@ -84,7 +84,7 @@ public class US22001VerifySCPerformanceNewIpLogicBackendTest extends BaseTest {
 
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(stylistId);
 		backEndSteps.navigate(UrlConstants.COMMISSION_REPORTS_URL);
-		ipModel = commissionReportSteps.closeLastMonthAndGetCurrentMonthIps();
+		ipModel = commissionReportSteps.closeLastMonthAndGetCurrentMonthIps(stylistId);
 		expectedLoungeIpPerformanceModel = stylecoachPerformanceValidationWorkflow.populateLoungeIpPerformanceModel(ipModel, commissionStylistModel);
 	}
 

@@ -102,7 +102,7 @@ public class CustomerDetailsPage extends AbstractPage {
 	@FindBy(css = "li.success-msg")
 	private WebElement successMessage;
 	
-	@FindBy(css = "customer_info_tabs_performance")
+	@FindBy(id = "customer_info_tabs_stylecoach_profile")
 	private WebElement performanceTab;
 	
 

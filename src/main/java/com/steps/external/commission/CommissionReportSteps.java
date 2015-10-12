@@ -32,7 +32,7 @@ public class CommissionReportSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public RewardPointsOfStylistModel closeMonth() throws Exception {
+	public RewardPointsOfStylistModel closeMonth(String stylistId) throws Exception {
 
 		if (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")) {
 			ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
@@ -47,15 +47,16 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-08-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
+		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId, "2015-08-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
 
 	}
 
 	@StepGroup
-	public IpModel closeLastMonthAndGetCurrentMonthIps() throws Exception {
+	public IpModel closeLastMonthAndGetCurrentMonthIps(String stylistId) throws Exception {
 
 		if (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")) {
 			ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
+			ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
 			waitABit(10000);
 			getDriver().navigate().refresh();
 			waitABit(TimeConstants.TIME_CONSTANT);
@@ -67,7 +68,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses(stylistId, DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
 
 	}
 
