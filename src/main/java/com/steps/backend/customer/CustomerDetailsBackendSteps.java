@@ -12,7 +12,6 @@ public class CustomerDetailsBackendSteps extends AbstractSteps {
 	@Step
 	public LoungeIpPerformanceModel grabSCPerformanceIpLogicAdmin() {
 		customerDetailsHomePage().clickOnPerformanceTab();
-		waitABit(5000);
 		return customerDetailsHomePage().grabSCPerformanceIpLogicAdmin();
 	}
 }

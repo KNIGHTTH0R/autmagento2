@@ -365,22 +365,23 @@ public class CustomerDetailsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(performanceTab).waitUntilVisible();
 		performanceTab.click();
+		waitABit(5000);
 
 	}
 
-	public LoungeIpPerformanceModel grabSCPerformanceIpLogicAdmin(){
-		
+	public LoungeIpPerformanceModel grabSCPerformanceIpLogicAdmin() {
+
 		LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
-		
+
 		result.setCareerLevel(getDriver().findElement(By.cssSelector("#career")).getText());
 		result.setPayLevel(getDriver().findElement(By.cssSelector("#paylevel")).getText());
 		result.setIndividualPoints(getDriver().findElement(By.cssSelector("#ip")).getText());
-        result.setTeamPoints(getDriver().findElement(By.cssSelector("#teamPoints")).getText());
+		result.setTeamPoints(getDriver().findElement(By.cssSelector("#teamPoints")).getText());
 		result.setStyleCoachFirstLevel(getDriver().findElement(By.cssSelector("#frontliners")).getText());
 		result.setGoldStyleCoaches(getDriver().findElement(By.cssSelector("#goldStylists")).getText());
-		
+
 		PrintUtils.printLoungeIpPerformanceModel(result);
- 		
+
 		return result;
 	}
 }
