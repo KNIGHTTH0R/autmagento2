@@ -5,6 +5,7 @@ public class LoungeIpPerformanceModel {
 	private String careerLevel;
 	private String payLevel;
 	private String individualPoints;
+	private String unsafeIndividualPoints;
 	private String teamPoints;
 	private String styleCoachFirstLevel;
 	private String goldStyleCoaches;
@@ -64,6 +65,14 @@ public class LoungeIpPerformanceModel {
 
 	public void setGoldStyleCoaches(String goldStyleCoaches) {
 		this.goldStyleCoaches = goldStyleCoaches;
+	}
+
+	public String getUnsafeIndividualPoints() {
+		return unsafeIndividualPoints;
+	}
+
+	public void setUnsafeIndividualPoints(String unsafeIndividualPoints) {
+		this.unsafeIndividualPoints = unsafeIndividualPoints;
 	}
 
 }

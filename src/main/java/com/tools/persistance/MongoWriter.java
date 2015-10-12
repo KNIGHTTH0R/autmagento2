@@ -25,6 +25,7 @@ import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
+import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -198,15 +199,16 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void savePartyBonusCalculationModel(PartyBonusCalculationModel partyBonusCalculationModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.PARTY_BONUS_CALCULATION_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.SUBTOTAL, partyBonusCalculationModel.getTotal());
 		document.put(MongoTableKeys.PERCENTAGE, partyBonusCalculationModel.getPercent());
 		document.put(MongoTableKeys.IP_POINTS, partyBonusCalculationModel.getIp());
-		
+
 		table.insert(document);
 	}
 
@@ -219,13 +221,14 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void saveIncrementId(String incrementId, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.INCREMENT_ID_TABLE);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.INCREMENT_ID, incrementId);
-		
+
 		table.insert(document);
 	}
 
@@ -408,19 +411,20 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void saveClosedPartyPerformanceModel(ClosedPartyPerformanceModel model, String testName) {
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.CLOSED_PARTY_PERFORMANCE_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
-		
+
 		document.put(MongoTableKeys.NO_OF_ORDERS, model.getNoOfOrders());
 		document.put(MongoTableKeys.RETAIL, model.getRetail());
 		document.put(MongoTableKeys.IP, model.getIp());
-		document.put(MongoTableKeys.JB,model.getJewelryBonus());
+		document.put(MongoTableKeys.JB, model.getJewelryBonus());
 		document.put(MongoTableKeys.FORTY_DISCOUNTS, model.getFourthyDiscounts());
-		
+
 		table.insert(document);
 	}
 
@@ -461,16 +465,33 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
-	
+
 	public static void saveRewardPointsModel(RewardPointsOfStylistModel rewardPointsOfStylistModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.REWARD_MODEL);
 
 		BasicDBObject document = new BasicDBObject();
-		
+
 		document.put(MongoTableKeys.JEWERLY_BONUS, rewardPointsOfStylistModel.getJewelryBonus());
 		document.put(MongoTableKeys.MARKETING_BONUS, rewardPointsOfStylistModel.getMarketingMaterialBonus());
-		
+
+		table.insert(document);
+	}
+
+	public static void saveLoungeIpPerformanceModel(LoungeIpPerformanceModel loungeIpPerformanceModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.IP_PERFORMANCE_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+
+		document.put(MongoTableKeys.CAREER_LEVEL, loungeIpPerformanceModel.getCareerLevel());
+		document.put(MongoTableKeys.PAY_LEVEL, loungeIpPerformanceModel.getPayLevel());
+		document.put(MongoTableKeys.INDIVIDUAL_POINTS, loungeIpPerformanceModel.getIndividualPoints());
+		document.put(MongoTableKeys.UNSAFE_INDIVIDUAL_POINTS, loungeIpPerformanceModel.getUnsafeIndividualPoints());
+		document.put(MongoTableKeys.TEAM_POINTS, loungeIpPerformanceModel.getTeamPoints());
+		document.put(MongoTableKeys.STYLECOACH_FIRST_LEVEL, loungeIpPerformanceModel.getStyleCoachFirstLevel());
+		document.put(MongoTableKeys.GOLD_STYLECOACHES, loungeIpPerformanceModel.getGoldStyleCoaches());
+
 		table.insert(document);
 	}
 

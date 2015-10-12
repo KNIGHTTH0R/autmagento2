@@ -178,5 +178,15 @@ public class MongoTableKeys {
 	public static final String COORDINATES_MODEL = "CoordinatesModel";
 	public static final String LATTITUDE = "Lattitude";
 	public static final String LONGITUDE = "Longitude";
+	
+	public static final String IP_PERFORMANCE_MODEL = "IpPerformanceModel";
+	
+	public static final String CAREER_LEVEL = "CareerLevel";
+	public static final String PAY_LEVEL = "PayLevel";
+	public static final String INDIVIDUAL_POINTS = "IndividualPoints";
+	public static final String UNSAFE_INDIVIDUAL_POINTS = "UnsafeIndividualPoints";
+	public static final String TEAM_POINTS = "TeamPoints";
+	public static final String STYLECOACH_FIRST_LEVEL = "StyleCoachFirstLevel";
+	public static final String GOLD_STYLECOACHES = "GoldStyleCoaches";
 
 }

@@ -38,6 +38,7 @@ public class OrdersInfoMagentoCalls {
 		int ordersNumber = 0;
 		for (DBOrderModel order : allOrdersList) {
 			if (isOrderCompatibleForIpCalculation(order, createdStartDate, createdEndDate)) {
+				System.out.println(order.getCreatedAt() + "       " + order.getIncrementId());
 				ordersNumber++;
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}

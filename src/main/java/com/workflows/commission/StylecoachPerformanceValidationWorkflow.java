@@ -6,10 +6,9 @@ import com.tools.CustomVerification;
 import com.tools.data.backend.IpModel;
 import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
-import com.tools.env.constants.Separators;
 
 public class StylecoachPerformanceValidationWorkflow {
-	
+
 	public LoungeIpPerformanceModel populateLoungeIpPerformanceModel(IpModel ipModel, CommissionStylistModel commissionStylistModel) {
 
 		LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
@@ -17,9 +16,11 @@ public class StylecoachPerformanceValidationWorkflow {
 		result.setCareerLevel(commissionStylistModel.getCareerLevel());
 		result.setPayLevel(commissionStylistModel.getPaylevel());
 		result.setIndividualPoints(ipModel.getIp());
+		result.setUnsafeIndividualPoints(ipModel.getUnsafeIp());
 		result.setTeamPoints(String.valueOf(commissionStylistModel.getTeamPoints()));
 		result.setGoldStyleCoaches(commissionStylistModel.getGoldFrontliners());
-		
+		result.setStyleCoachFirstLevel(commissionStylistModel.getNrTeamMembersLevel1());
+
 		return result;
 	}
 
@@ -29,14 +30,8 @@ public class StylecoachPerformanceValidationWorkflow {
 		verifyPayLevel(expectedModel.getPayLevel(), grabbedModel.getPayLevel());
 		verifyIndividulPoints(expectedModel.getIndividualPoints(), grabbedModel.getIndividualPoints());
 		verifyTeamPoints(expectedModel.getTeamPoints(), grabbedModel.getTeamPoints());
-//		verifyStylecoachFirstLevel(expectedModel.getStyleCoachFirstLevel(), grabbedModel.getStyleCoachFirstLevel());
+		verifyStylecoachFirstLevel(expectedModel.getStyleCoachFirstLevel(), grabbedModel.getStyleCoachFirstLevel());
 		verifyGoldStyleCoaches(expectedModel.getGoldStyleCoaches(), grabbedModel.getGoldStyleCoaches());
-//		verifyMonthYear(expectedModel.getMonthYear(), grabbedModel.getMonthYear());
-	}
-
-	private void verifyMonthYear(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Month and year doesn't match: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
-
 	}
 
 	private void verifyGoldStyleCoaches(String expectedValue, String grabbedValue) {

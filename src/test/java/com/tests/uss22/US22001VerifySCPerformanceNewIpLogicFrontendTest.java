@@ -15,25 +15,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.frontend.ContactDetailsSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
-import com.steps.frontend.MyContactsListSteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
-import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.ContactModel;
-import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.env.constants.FilePaths;
-import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
-import com.workflows.frontend.contact.ContactValidationWorkflows;
+import com.workflows.commission.StylecoachPerformanceValidationWorkflow;
 
 @WithTag(name = "US17", type = "backend")
 @Story(Application.MassAction.class)
@@ -48,7 +40,11 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 	public FooterSteps footerSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public StylecoachPerformanceValidationWorkflow stylecoachPerformanceValidationWorkflow;
 
+	private LoungeIpPerformanceModel expectedLoungeIpPerformanceModel;
+	private LoungeIpPerformanceModel grabbedLoungeIpPerformanceModel;
 	private String username;
 	private String password;
 
@@ -60,11 +56,10 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17003.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_22_FOLDER + File.separator + "us22001.properties");
 			prop.load(input);
-
-			username = prop.getProperty("masterSCUsername");
-			password = prop.getProperty("masterSCPassword");
+			username = prop.getProperty("username");
+			password = prop.getProperty("password");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -77,18 +72,21 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 				}
 			}
 		}
-
+		expectedLoungeIpPerformanceModel = MongoReader.grabLoungeIpPerformance("US22001VerifySCPerformanceNewIpLogicBackendTest").get(0);
 	}
 
 	@Test
-	public void us17003VerifyThatContactWasReassignedCorrectlyTest() {
+	public void us22001VerifySCPerformanceNewIpLogicFrontendTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		headerSteps.goToLounge();
+		grabbedLoungeIpPerformanceModel = loungeSteps.grabSCPerformanceIpLogic();
 
+		stylecoachPerformanceValidationWorkflow.validatePerformanceValues(expectedLoungeIpPerformanceModel, grabbedLoungeIpPerformanceModel);
 	}
 
 }

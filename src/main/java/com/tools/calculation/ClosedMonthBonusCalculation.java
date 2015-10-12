@@ -105,6 +105,6 @@ public class ClosedMonthBonusCalculation {
 	}
 
 	public static void main(String[] args) throws NumberFormatException, ParseException {
-		ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835", "2015-10-10 00:00:00", "2015-10-10 00:00:00");
+		ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835", "2015-10-12 00:00:00", "2015-10-12 00:00:00");
 	}
 }

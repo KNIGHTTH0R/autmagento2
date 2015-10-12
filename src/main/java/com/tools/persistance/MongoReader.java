@@ -26,6 +26,7 @@ import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
+import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -795,24 +796,25 @@ public class MongoReader extends MongoConnector {
 		return itemList;
 
 	}
+
 	public static List<ClosedPartyPerformanceModel> grabClosedPartyPerformanceModel(String testName) {
 		DBObject dbObject = null;
 		List<ClosedPartyPerformanceModel> itemList = new ArrayList<ClosedPartyPerformanceModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CLOSED_PARTY_PERFORMANCE_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				ClosedPartyPerformanceModel result = new ClosedPartyPerformanceModel();
 				dbObject = cursor.next();
-				
+
 				result.setNoOfOrders(MongoUtils.checkField(dbObject, MongoTableKeys.NO_OF_ORDERS));
 				result.setRetail(MongoUtils.checkField(dbObject, MongoTableKeys.RETAIL));
 				result.setIp(MongoUtils.checkField(dbObject, MongoTableKeys.IP).trim());
 				result.setJewelryBonus(MongoUtils.checkField(dbObject, MongoTableKeys.JB));
 				result.setFourthyDiscounts(MongoUtils.checkField(dbObject, MongoTableKeys.FORTY_DISCOUNTS));
-				
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -821,7 +823,7 @@ public class MongoReader extends MongoConnector {
 			cursor.close();
 		}
 		return itemList;
-		
+
 	}
 
 	public static String grabKoboModel(String testName) {
@@ -880,15 +882,15 @@ public class MongoReader extends MongoConnector {
 
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.REWARD_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				RewardPointsOfStylistModel result = new RewardPointsOfStylistModel();
 				dbObject = cursor.next();
-				
+
 				result.setJewelryBonus(MongoUtils.checkField(dbObject, MongoTableKeys.JEWERLY_BONUS));
 				result.setMarketingMaterialBonus(MongoUtils.checkField(dbObject, MongoTableKeys.MARKETING_BONUS));
-				
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -900,5 +902,35 @@ public class MongoReader extends MongoConnector {
 
 	}
 
+	public static List<LoungeIpPerformanceModel> grabLoungeIpPerformance(String testName) {
+		DBObject dbObject = null;
+		List<LoungeIpPerformanceModel> itemList = new ArrayList<LoungeIpPerformanceModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.IP_PERFORMANCE_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
+				dbObject = cursor.next();
+
+				result.setCareerLevel(MongoUtils.checkField(dbObject, MongoTableKeys.CAREER_LEVEL));
+				result.setPayLevel(MongoUtils.checkField(dbObject, MongoTableKeys.PAY_LEVEL));
+				result.setIndividualPoints(MongoUtils.checkField(dbObject, MongoTableKeys.INDIVIDUAL_POINTS));
+				result.setUnsafeIndividualPoints(MongoUtils.checkField(dbObject, MongoTableKeys.UNSAFE_INDIVIDUAL_POINTS));
+				result.setTeamPoints(MongoUtils.checkField(dbObject, MongoTableKeys.TEAM_POINTS));
+				result.setStyleCoachFirstLevel(MongoUtils.checkField(dbObject, MongoTableKeys.STYLECOACH_FIRST_LEVEL));
+				result.setGoldStyleCoaches(MongoUtils.checkField(dbObject, MongoTableKeys.GOLD_STYLECOACHES));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+
+	}
 
 }
