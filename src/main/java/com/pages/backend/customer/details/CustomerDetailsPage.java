@@ -15,6 +15,7 @@ import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.PrintUtils;
 
 public class CustomerDetailsPage extends AbstractPage {
 
@@ -101,10 +102,9 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "li.success-msg")
 	private WebElement successMessage;
-	
+
 	@FindBy(id = "customer_info_tabs_stylecoach_profile")
 	private WebElement performanceTab;
-	
 
 	public void addNewAddress() {
 		evaluateJavascript("jQuery.noConflict();");
@@ -331,7 +331,7 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	public void clickOnRewardsPointsTab() {
 		evaluateJavascript("jQuery.noConflict();");
-		element(rewardPointsTab).waitUntilVisible(); 
+		element(rewardPointsTab).waitUntilVisible();
 		rewardPointsTab.click();
 	}
 
@@ -360,17 +360,17 @@ public class CustomerDetailsPage extends AbstractPage {
 		rewardPoints.setMarketingMaterialBonus(extractMarketingMaterialBonusValue());
 		return rewardPoints;
 	}
-	
+
 	public void clickOnPerformanceTab() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(performanceTab).waitUntilVisible();
 		performanceTab.click();
-	
+
 	}
-	
+
 	public LoungeIpPerformanceModel grabSCPerformanceIpLogicAdmin(){
 		
-		LoungeIpPerformanceModel result=new LoungeIpPerformanceModel();
+		LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
 		
 		result.setCareerLevel(getDriver().findElement(By.id("career")).getText());
 		result.setPayLevel(getDriver().findElement(By.id("paylevel")).getText());
@@ -378,8 +378,9 @@ public class CustomerDetailsPage extends AbstractPage {
         result.setTeamPoints(getDriver().findElement(By.id("teamPoints")).getText());
 		result.setStyleCoachFirstLevel(getDriver().findElement(By.id("frontliners")).getText());
 		result.setGoldStyleCoaches(getDriver().findElement(By.id("goldStylists")).getText());
-		result.setMonthYear(getDriver().findElement(By.cssSelector("#month_year option:first-child")).getText());
 		
+		PrintUtils.printLoungeIpPerformanceModel(result);
+ 		
 		return result;
 	}
 }

@@ -57,8 +57,8 @@ public class ClosedMonthBonusCalculation {
 
 		BigDecimal unsafeIpForOrders = OrdersInfoMagentoCalls.calculateTotalUnsafeIpOnCurrentMonth(allOrdersList, stylistId, endDate);
 
-		result.setIp(String.valueOf(totalIp));
-		result.setUnsafeIp(String.valueOf(unsafeIpForOrders));
+		result.setIp(String.valueOf(totalIp.intValue()));
+		result.setUnsafeIp(String.valueOf(unsafeIpForOrders.intValue()));
 
 		System.out.println(result.getIp());
 		System.out.println(result.getUnsafeIp());

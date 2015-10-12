@@ -26,6 +26,7 @@ import com.tools.data.frontend.DykscSeachModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
+import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
@@ -544,6 +545,17 @@ public class PrintUtils {
 		System.out.println("SC :" + contactModel.getStyleCoachStatus());
 		System.out.println("newsletter :" + contactModel.getNewsletterStatus());
 		System.out.println("Created at : " + contactModel.getCreatedAt());
+
+	}
+
+	public static void printLoungeIpPerformanceModel(LoungeIpPerformanceModel loungeIpPerformanceModel) {
+		System.out.println("printLoungeIpPerformanceModel -----------------------------");
+		System.out.println("Carrer : " + loungeIpPerformanceModel.getCareerLevel());
+		System.out.println("Pay level : " + loungeIpPerformanceModel.getPayLevel());
+		System.out.println("Ip : " + loungeIpPerformanceModel.getIndividualPoints());
+		System.out.println("TP : " + loungeIpPerformanceModel.getTeamPoints());
+		System.out.println("Frontliners : " + loungeIpPerformanceModel.getStyleCoachFirstLevel());
+		System.out.println("Gold SC : " + loungeIpPerformanceModel.getGoldStyleCoaches());
 
 	}
 }

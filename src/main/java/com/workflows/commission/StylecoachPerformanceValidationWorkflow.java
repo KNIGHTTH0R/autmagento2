@@ -13,13 +13,13 @@ public class StylecoachPerformanceValidationWorkflow {
 
 		LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
 
-		result.setCareerLevel(commissionStylistModel.getCareerLevel());
+		result.setCareerLevel(commissionStylistModel.getCareer());
 		result.setPayLevel(commissionStylistModel.getPaylevel());
 		result.setIndividualPoints(ipModel.getIp());
 		result.setUnsafeIndividualPoints(ipModel.getUnsafeIp());
 		result.setTeamPoints(String.valueOf(commissionStylistModel.getTeamPoints()));
 		result.setGoldStyleCoaches(commissionStylistModel.getGoldFrontliners());
-		result.setStyleCoachFirstLevel(commissionStylistModel.getNrTeamMembersLevel1());
+		result.setStyleCoachFirstLevel(commissionStylistModel.getFrontliners());
 
 		return result;
 	}
