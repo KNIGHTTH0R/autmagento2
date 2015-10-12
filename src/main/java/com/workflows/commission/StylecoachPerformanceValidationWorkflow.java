@@ -35,32 +35,32 @@ public class StylecoachPerformanceValidationWorkflow {
 	}
 
 	private void verifyGoldStyleCoaches(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Gold Style coach value doesn't match: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
+		CustomVerification.verifyTrue("Failure: Gold Style coach value doesn't match: Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 
 	}
 
 	private void verifyStylecoachFirstLevel(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Style coach first value doesn't match: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
+		CustomVerification.verifyTrue("Failure: Style coach first value doesn't match: Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 
 	}
 
 	private void verifyTeamPoints(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Team points value doesn't match: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
+		CustomVerification.verifyTrue("Failure: Team points value doesn't match: Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 
 	}
 
 	private void verifyIndividulPoints(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Individual points value doesn't match: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
+		CustomVerification.verifyTrue("Failure: Individual points value doesn't match: Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 
 	}
 
 	private void verifyPayLevel(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Pay Level doesn't match: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
+		CustomVerification.verifyTrue("Failure: Pay Level doesn't match: Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 
 	}
 
 	private void verifyCareerLevel(String expectedValue, String grabbedValue) {
-		CustomVerification.verifyTrue("Failure: Career level doesn't match: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
+		CustomVerification.verifyTrue("Failure: Career level doesn't match: Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 	}
 
 }
