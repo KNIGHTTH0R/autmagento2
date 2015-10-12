@@ -20,6 +20,7 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
@@ -42,6 +43,8 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 	public HeaderSteps headerSteps;
 	@Steps
 	public StylecoachPerformanceValidationWorkflow stylecoachPerformanceValidationWorkflow;
+	@Steps
+	public CustomVerification customVerifications;
 
 	private LoungeIpPerformanceModel expectedLoungeIpPerformanceModel;
 	private LoungeIpPerformanceModel grabbedLoungeIpPerformanceModel;
@@ -87,6 +90,8 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 		grabbedLoungeIpPerformanceModel = loungeSteps.grabSCPerformanceIpLogic();
 
 		stylecoachPerformanceValidationWorkflow.validatePerformanceValues(expectedLoungeIpPerformanceModel, grabbedLoungeIpPerformanceModel);
+		
+		customVerifications.printErrors();
 	}
 
 }

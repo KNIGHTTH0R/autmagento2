@@ -23,6 +23,7 @@ import com.steps.backend.customer.CustomerDetailsBackendSteps;
 import com.steps.backend.stylecoach.StylecoachListBackendSteps;
 import com.steps.external.commission.CommissionReportSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.backend.IpModel;
 import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
@@ -48,6 +49,8 @@ public class US22001VerifySCPerformanceNewIpLogicBackendTest extends BaseTest {
 	public CommissionReportSteps commissionReportSteps;
 	@Steps
 	public CustomerDetailsBackendSteps customerDetailsBackendSteps;
+	@Steps
+	public CustomVerification customVerifications;
 
 	private IpModel ipModel;
 	private CommissionStylistModel commissionStylistModel;
@@ -98,6 +101,8 @@ public class US22001VerifySCPerformanceNewIpLogicBackendTest extends BaseTest {
 		grabbedLoungeIpPerformanceModel = customerDetailsBackendSteps.grabSCPerformanceIpLogicAdmin();
 
 		stylecoachPerformanceValidationWorkflow.validatePerformanceValues(expectedLoungeIpPerformanceModel, grabbedLoungeIpPerformanceModel);
+		
+		customVerifications.printErrors();
 
 	}
 
