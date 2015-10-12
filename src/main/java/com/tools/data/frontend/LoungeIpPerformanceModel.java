@@ -9,15 +9,6 @@ public class LoungeIpPerformanceModel {
 	private String teamPoints;
 	private String styleCoachFirstLevel;
 	private String goldStyleCoaches;
-	private String monthYear;
-
-	public String getMonthYear() {
-		return monthYear;
-	}
-
-	public void setMonthYear(String monthYear) {
-		this.monthYear = monthYear;
-	}
 
 	public String getCareerLevel() {
 		return careerLevel;

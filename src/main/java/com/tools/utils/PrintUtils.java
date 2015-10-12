@@ -549,6 +549,7 @@ public class PrintUtils {
 	}
 
 	public static void printLoungeIpPerformanceModel(LoungeIpPerformanceModel loungeIpPerformanceModel) {
+		
 		System.out.println("printLoungeIpPerformanceModel -----------------------------");
 		System.out.println("Carrer : " + loungeIpPerformanceModel.getCareerLevel());
 		System.out.println("Pay level : " + loungeIpPerformanceModel.getPayLevel());
