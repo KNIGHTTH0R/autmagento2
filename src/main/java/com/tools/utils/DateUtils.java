@@ -34,6 +34,15 @@ public class DateUtils {
 		calendar.add(Calendar.DAY_OF_MONTH, 1);
 	    return calendar.get(Calendar.DAY_OF_MONTH) == 1;
 	}
+	public static boolean isFirstDayOfMonth(String dateString, String formatString) throws ParseException
+	{
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get(Calendar.DAY_OF_MONTH) == 1;
+	}
 
 	public static String getLastDayOfPreviousMonth(String dateString, String formatString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
@@ -109,8 +118,13 @@ public class DateUtils {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, -1);
 		cal.set(Calendar.DAY_OF_MONTH, 15);
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DATE);
+		cal.set(year, month, day, 00, 00, 00);
 		return new SimpleDateFormat(format).format(cal.getTime());
 	}
+
 
 	public static int getAge(String birthDate) {
 		String[] parts = birthDate.split("/");
@@ -133,7 +147,7 @@ public class DateUtils {
 	}
 
 	public static void main(String[] args) throws ParseException {
-		System.out.println(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+		System.out.println(DateUtils.getPreviousMonthMiddle("yyyy-MM-dd HH:mm:ss"));
 //		System.out.println(DateUtils.getLastDayOfAGivenMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 //		System.out.println(DateUtils.getFirstDayOfAGivenMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 //		System.out.println(DateUtils.isLastDayOfMonth("2015-09-30 00:00:00", "yyyy-MM-dd HH:mm:ss"));

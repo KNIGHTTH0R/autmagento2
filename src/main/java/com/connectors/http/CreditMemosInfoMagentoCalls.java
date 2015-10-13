@@ -13,6 +13,7 @@ import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.w3c.dom.NodeList;
 
 import com.tools.SoapKeys;
@@ -54,7 +55,7 @@ public class CreditMemosInfoMagentoCalls {
 	}
 
 	private static boolean isOrderCompatibleForDecreasingIp(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
-		return isCreditMemoCompatibleForIpCalcCase1(creditMemo, createdStartDate, createdEndDate)
+		return creditMemo.getState().contentEquals("2") && isCreditMemoCompatibleForIpCalcCase1(creditMemo, createdStartDate, createdEndDate)
 				|| isCreditMemoCompatibleForIpCalcCase2(creditMemo, createdStartDate, createdEndDate);
 	}
 
@@ -171,22 +172,31 @@ public class CreditMemosInfoMagentoCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
 					model.setCreatedAt(childNodes.item(j).getTextContent());
 				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("updated_at")) {
+					model.setUpdatedAt(childNodes.item(j).getTextContent());
+				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_increment_id")) {
 					model.setOrderIncrementId(childNodes.item(j).getTextContent());
 				}
 			}
-			credtMemoModelList.add(model);
+			if (model.getState().equals("2")) {
+				credtMemoModelList.add(model);
+
+			} else if (model.getState().equals("3")) {
+				DBCreditMemoModel newModel = (DBCreditMemoModel) model.clone();
+				model.setState("2");
+				newModel.setCreatedAt(newModel.getUpdatedAt());
+				credtMemoModelList.add(model);
+				credtMemoModelList.add(newModel);
+
+			}
+
 		}
 		return credtMemoModelList;
 	}
 
 	public static List<DBCreditMemoModel> populateCreditMemosListWithOrderDetails(List<DBCreditMemoModel> creditMemoList, List<DBOrderModel> orderList, String stylistId,
 			String createdStartDate) {
-
-		// List<DBCreditMemoModel> creditMemoList =
-		// getCreditMemosList(stylistId);
-		// List<DBOrderModel> orderList =
-		// OrdersInfoMagentoCalls.getOrdersList(stylistId);
 
 		for (DBCreditMemoModel creditMemo : creditMemoList) {
 			for (DBOrderModel order : orderList) {

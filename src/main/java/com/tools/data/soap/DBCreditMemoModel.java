@@ -1,14 +1,19 @@
 package com.tools.data.soap;
 
-public class DBCreditMemoModel {
+public class DBCreditMemoModel implements Cloneable {
 
 	private String stylistId;
 	private String createdAt;
+	private String updatedAt;
 	private String state;
 	private String totalIpRefunded;
 	private String orderIncrementId;
 	private String orderCreatedAt;
 	private String orderPaidAt;
+
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 
 	public String getStylistId() {
 		return stylistId;
@@ -64,6 +69,14 @@ public class DBCreditMemoModel {
 
 	public void setOrderPaidAt(String orderPaidAt) {
 		this.orderPaidAt = orderPaidAt;
+	}
+
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }
