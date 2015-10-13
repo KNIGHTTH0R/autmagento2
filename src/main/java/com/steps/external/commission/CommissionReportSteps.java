@@ -47,7 +47,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId, "2015-08-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
+		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId, "2015-09-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
 
 	}
 
