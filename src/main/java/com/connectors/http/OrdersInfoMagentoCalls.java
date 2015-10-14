@@ -15,7 +15,6 @@ import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 
 import com.tools.SoapKeys;
 import com.tools.data.soap.DBOrderModel;
@@ -245,8 +244,4 @@ public class OrdersInfoMagentoCalls {
 		return orderModelList;
 	}
 
-	public static void main(String args[]) throws NumberFormatException, ParseException {
-		// OrdersInfoMagentoCalls.calculateTotalUnsafeIpOnCurrentMonth("1835",
-		// "2015-10-10 00:00:00");
-	}
 }

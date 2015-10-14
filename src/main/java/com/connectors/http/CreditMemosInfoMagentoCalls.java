@@ -13,7 +13,6 @@ import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-import org.apache.commons.lang3.SerializationUtils;
 import org.w3c.dom.NodeList;
 
 import com.tools.SoapKeys;
@@ -209,9 +208,5 @@ public class CreditMemosInfoMagentoCalls {
 		return creditMemoList;
 	}
 
-	public static void main(String args[]) throws NumberFormatException, ParseException {
-		// CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos("1835",
-		// "2015-10-07 17:00:00", "2015-09-16 00:00:00");
-	}
 
 }
