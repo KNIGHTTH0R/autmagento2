@@ -1,4 +1,4 @@
-package com.tests.us6.us6002;
+package com.tests.us6.us6002b;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -20,7 +20,6 @@ import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.backend.StylistPropertiesModel;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.ConfigConstants;
@@ -35,7 +34,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 @WithTag(name = "US6", type = "frontend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US6002StyleCoachRegistrationTest extends BaseTest{
+public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	
 	@Steps
 	public HeaderSteps headerSteps;	
@@ -53,7 +52,7 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
 	public static DateModel formDate = new DateModel();
-	public AddressModel stylistAddressModel;
+	
 	public StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	
 	public CustomerFormModel stylistData = new CustomerFormModel("");
@@ -62,20 +61,20 @@ public class US6002StyleCoachRegistrationTest extends BaseTest{
 	@Before
 	public void setUp() throws Exception {
 		// Generate data for this test run
-		stylistAddressModel = new AddressModel();
+		
 		birthDate = "Feb,1970,12";
 		expectedBeforeLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.NOT_CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-		int size = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").size();
+		int size = MongoReader.grabCustomerFormModels("US6002bCreateCustomerTest").size();
 		if (size > 0) {
-			stylistData = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").get(0);
+			stylistData = MongoReader.grabCustomerFormModels("US6002bCreateCustomerTest").get(0);
 		} else
 			Assert.assertTrue("Failure: No test data has been found.", false);
 	}
 	
 	@Test
-	public void us6002StyleCoachRegistrationTest() {
+	public void us6002bScRegExistingCustForbiddenCountryTest() {
 		
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();

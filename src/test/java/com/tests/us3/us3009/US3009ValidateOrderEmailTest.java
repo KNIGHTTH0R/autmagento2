@@ -78,7 +78,7 @@ public class US3009ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US3009Test" + SoapKeys.GRAB);
+		orderModel = MongoReader.getOrderModel("US3009SfmNoVatNoSmbBillingShippingDeTest" + SoapKeys.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		

@@ -1,4 +1,4 @@
-package com.tests.us7.us7001b;
+package com.tests.us7.us7001;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -17,14 +17,13 @@ import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US7", type = "frontend")
 @Story(Application.Registration.Customer.class)
 @RunWith(ThucydidesRunner.class)
-public class US7001bRegularCustomerRegistrationTest extends BaseTest {
+public class US7001RegularCustRegOnMasterTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -40,13 +39,11 @@ public class US7001bRegularCustomerRegistrationTest extends BaseTest {
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		addressModel.setPostCode(ContextConstants.NOT_PREFEERD_WEBSITE_POST_CODE);
-		addressModel.setCountryName(ContextConstants.NOT_PREFERED_LANGUAGE);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us7001bRegularCustomerRegistrationTest() {
+	public void us7001RegularCustRegOnMasterTest() {
 
 		customerRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();

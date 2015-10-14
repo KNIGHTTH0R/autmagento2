@@ -1,4 +1,4 @@
-package com.tests.us6.us6001;
+package com.tests.us6.us6001b;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -20,13 +20,14 @@ import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US6", type = "frontend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US6001StyleCoachRegistrationTest extends BaseTest {
+public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -48,17 +49,18 @@ public class US6001StyleCoachRegistrationTest extends BaseTest {
 		// Generate data for this test run
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
+		customerFormAddress.setCountryName(ContextConstants.NOT_PREFERED_LANGUAGE);
 		birthDate.setDate("Feb,1970,12");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us6001StyleCoachRegistrationTest() {
+	public void us6001bScRegistrationNewCustForbiddenCountryTest(){ 
 		headerSteps.navigateToRegisterForm();
-		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
+		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerFormFirstWithForbiddenCountry(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 		customVerification.printErrors();
-
+		
 	}
 
 	@After

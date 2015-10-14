@@ -94,10 +94,10 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001Test" + SoapKeys.GRAB);
-		productsList = MongoReader.grabBasicProductModel("US3001Test" + SoapKeys.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US3001Test" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3001Test" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabBasicProductModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+		shippingModelList = MongoReader.grabShippingModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 

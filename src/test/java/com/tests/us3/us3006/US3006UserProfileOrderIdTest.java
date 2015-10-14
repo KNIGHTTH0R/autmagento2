@@ -75,12 +75,12 @@ public class US3006UserProfileOrderIdTest extends BaseTest{
 
 
 		
-		orderModel = MongoReader.grabOrderModels("US3006Test" + SoapKeys.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US3006SfmValidVatSmbBillingShippingDeTest" + SoapKeys.GRAB).get(0);
 		
 	}
 	
 	@Test
-	public void us3006UserProfileOrderIdTest() {
+	public void us3006SfmValidVatSmbBillingShippingDeTest() {
 		
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

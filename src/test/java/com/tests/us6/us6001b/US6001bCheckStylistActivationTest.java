@@ -59,10 +59,10 @@ public class US6001bCheckStylistActivationTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		formCreationDate = MongoReader.grabStylistDateModels("US6001bStyleCoachRegistrationTest").get(0).getDate();
-		int size = MongoReader.grabCustomerFormModels("US6001bStyleCoachRegistrationTest").size();
+		formCreationDate = MongoReader.grabStylistDateModels("US6001bScRegistrationNewCustForbiddenCountryTest").get(0).getDate();
+		int size = MongoReader.grabCustomerFormModels("US6001bScRegistrationNewCustForbiddenCountryTest").size();
 		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US6001bStyleCoachRegistrationTest").get(0);
+			stylistRegistrationData = MongoReader.grabCustomerFormModels("US6001bScRegistrationNewCustForbiddenCountryTest").get(0);
 		} else
 			System.out.println("The database has no entries");
 

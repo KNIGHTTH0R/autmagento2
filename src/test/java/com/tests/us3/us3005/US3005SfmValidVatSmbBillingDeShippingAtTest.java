@@ -47,7 +47,7 @@ import com.workflows.frontend.ValidationWorkflows;
 @WithTag(name = "US3", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US3005Test extends BaseTest {
+public class US3005SfmValidVatSmbBillingDeShippingAtTest extends BaseTest {
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;

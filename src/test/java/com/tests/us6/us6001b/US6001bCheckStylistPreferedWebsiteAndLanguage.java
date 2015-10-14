@@ -27,9 +27,9 @@ public class US6001bCheckStylistPreferedWebsiteAndLanguage extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US6001bStyleCoachRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US6001bScRegistrationNewCustForbiddenCountryTest").size();
 		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US6001bStyleCoachRegistrationTest").get(0);
+			stylistRegistrationData = MongoReader.grabCustomerFormModels("US6001bScRegistrationNewCustForbiddenCountryTest").get(0);
 		} else
 			System.out.println("The database has no entries");
 	}

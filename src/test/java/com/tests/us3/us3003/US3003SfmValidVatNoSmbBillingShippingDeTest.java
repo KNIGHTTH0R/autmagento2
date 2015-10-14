@@ -1,4 +1,4 @@
-package com.tests.us3.us3004;
+package com.tests.us3.us3003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,8 +47,7 @@ import com.workflows.frontend.ValidationWorkflows;
 @WithTag(name = "US3", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US3004Test extends BaseTest {
-
+public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -64,13 +63,13 @@ public class US3004Test extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public AddProductsWorkflow addProductsWorkflow;
-	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
-	public ValidationWorkflows validationWorkflows;
-	@Steps
 	public CustomVerification customVerifications;
+	@Steps
+	public AddProductsWorkflow addProductsWorkflow;
+	@Steps
+	public ValidationWorkflows validationWorkflows;
 
 	private String username, password;
 	private static String billingAddress;
@@ -106,7 +105,7 @@ public class US3004Test extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3004.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -114,6 +113,9 @@ public class US3004Test extends BaseTest {
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
+			if (!MongoReader.getContext().contentEquals("de")) {
+				shippingValue = "7.56";
+			}
 			taxClass = prop.getProperty("taxClass");
 
 			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
@@ -139,7 +141,7 @@ public class US3004Test extends BaseTest {
 	}
 
 	@Test
-	public void us3004CartSegmentationWithVatAndSmbBillingShippingATTest() {
+	public void us3003SfmValidVatNoSmbBillingShippingDeTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -147,9 +149,8 @@ public class US3004Test extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.clickonGeneralView();
 		customerRegistrationSteps.wipeCart();
-		BasicProductModel productData;
 
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
+		BasicProductModel productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
@@ -174,9 +175,12 @@ public class US3004Test extends BaseTest {
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
-
 		cartSteps.grabTotals();
 		cartSteps.clickGoToShipping();
+
+		if (!MongoReader.getContext().contentEquals("de")) {
+			CartCalculator.calculateShippingWith19PercentRemoved(shippingValue);
+		}
 
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
@@ -200,9 +204,15 @@ public class US3004Test extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 
-		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		validationWorkflows.performCartValidations();
+		System.out.println("CartCalculator.productsList25: " + CartCalculator.productsList25);
+		System.out.println("DataGrabber.cartProductsWith25Discount: " + DataGrabber.cartProductsWith25Discount);
 
+		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		if (!MongoReader.getContext().contentEquals("de")) {
+			validationWorkflows.performCartValidations119Vat();
+		} else {
+			validationWorkflows.performCartValidations();
+		}
 		customVerifications.printErrors();
 	}
 

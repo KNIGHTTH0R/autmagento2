@@ -79,7 +79,7 @@ public class US4002ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US4002Test" + SoapKeys.GRAB);
+		orderModel = MongoReader.getOrderModel("US4002ShopForMyselfWithBuy3GetOneTest" + SoapKeys.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
@@ -96,17 +96,6 @@ public class US4002ValidateOrderEmailTest extends BaseTest{
 		frontEndSteps.performLogin(email, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
-		
-		Pattern pattern = Pattern.compile("<span class=\"price\">(.*?)</span>");
-		Matcher matcher = pattern.matcher(message);
-		if (matcher.find())
-		{
-		    System.out.println("cucuuuuuuuuuuuuuuuuu" + matcher.group(1));
-		}
-		
-		System.out.println(message);
-		System.out.println(orderModel.get(0).getOrderId());
-		System.out.println(orderModel.get(0).getTotalPrice());
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 		customVerifications.printErrors();
 	

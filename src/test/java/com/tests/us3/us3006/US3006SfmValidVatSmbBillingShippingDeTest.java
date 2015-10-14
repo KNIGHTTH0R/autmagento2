@@ -1,4 +1,4 @@
-package com.tests.us3.us3009;
+package com.tests.us3.us3006;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,12 +47,16 @@ import com.workflows.frontend.ValidationWorkflows;
 @WithTag(name = "US3", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US3009Test extends BaseTest {
+public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
@@ -63,10 +67,6 @@ public class US3009Test extends BaseTest {
 	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public PaymentSteps paymentSteps;
-	@Steps
-	public HomeSteps homeSteps;
-	@Steps
-	public FooterSteps footerSteps;
 	@Steps
 	public ValidationWorkflows validationWorkflows;
 	@Steps 
@@ -83,7 +83,6 @@ public class US3009Test extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -107,7 +106,7 @@ public class US3009Test extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3009.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3006.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -140,7 +139,7 @@ public class US3009Test extends BaseTest {
 	}
 
 	@Test
-	public void us3009CartSegmentationWithVatAndSmbBillingDeShippingAtTest() {
+	public void us3006CartSegmentationWithVatAndSmbBillingDeShippingAtTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

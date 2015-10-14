@@ -47,7 +47,7 @@ import com.workflows.frontend.ValidationWorkflows;
 @WithTag(name = "US3", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US3002Test extends BaseTest {
+public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -144,7 +144,7 @@ public class US3002Test extends BaseTest {
 	}
 
 	@Test
-	public void us3002CartSegmentationWithVatBillingTest() {
+	public void us3002SfmValidVatNoSmbBillingDeShippingAtTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

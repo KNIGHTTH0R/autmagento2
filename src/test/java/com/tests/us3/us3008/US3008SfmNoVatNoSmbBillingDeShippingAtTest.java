@@ -1,4 +1,4 @@
-package com.tests.us3.us3007;
+package com.tests.us3.us3008;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,7 +35,6 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -47,19 +46,18 @@ import com.workflows.frontend.ValidationWorkflows;
 @WithTag(name = "US3", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
-public class US3007Test extends BaseTest {
-	
+public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public CartSteps cartSteps;
-	@Steps
 	public HomeSteps homeSteps;
 	@Steps
 	public FooterSteps footerSteps;
+	@Steps
+	public CartSteps cartSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
@@ -75,6 +73,7 @@ public class US3007Test extends BaseTest {
 	
 	private String username, password;
 	private static String billingAddress;
+	private static String shippingAddress;
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
@@ -101,17 +100,18 @@ public class US3007Test extends BaseTest {
 		genProduct3 = ApiCalls.createMarketingProductModel();
 		genProduct3.setPrice("229.00");
 		ApiCalls.createApiProduct(genProduct3);
-
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3007.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us3" + File.separator + "us3008.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
+			shippingAddress = prop.getProperty("shippingAddress");
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
@@ -140,7 +140,7 @@ public class US3007Test extends BaseTest {
 	}
 
 	@Test
-	public void us3007CartSegmentationWithVatBillingShippingDeTest() {
+	public void us3008SfmNoVatNoSmbBillingDeShippingAtTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -158,7 +158,7 @@ public class US3007Test extends BaseTest {
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
+		
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -172,6 +172,8 @@ public class US3007Test extends BaseTest {
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
 		
+		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
+		
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
@@ -179,7 +181,9 @@ public class US3007Test extends BaseTest {
 		cartSteps.clickGoToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);	
+		shippingSteps.setSameAsBilling(false);
+		shippingSteps.selectShippingAddress(shippingAddress);
+		
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.clickGoToPaymentMethod();
@@ -200,7 +204,7 @@ public class US3007Test extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 		
-		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		validationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
 		validationWorkflows.performCartValidations();
 		
 		customVerifications.printErrors();
@@ -216,5 +220,6 @@ public class US3007Test extends BaseTest {
 		for (BasicProductModel product : CartCalculator.allProductsListRecalculated) {
 			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
 		}
-	}
+	}	
+
 }

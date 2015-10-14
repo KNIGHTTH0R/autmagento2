@@ -40,9 +40,9 @@ public class US7001bCheckCustomerActivation extends BaseTest {
 	public void setUp() throws Exception {
 		
 
-		int size = MongoReader.grabCustomerFormModels("US7001bRegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7001bRegularCustRegOnNotPrefCountryTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7001bRegularCustomerRegistrationTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7001bRegularCustRegOnNotPrefCountryTest").get(0).getEmailName();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");

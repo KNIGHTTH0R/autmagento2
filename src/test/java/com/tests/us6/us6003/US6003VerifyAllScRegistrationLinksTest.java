@@ -29,7 +29,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US6", type = "frontend")
 @Story(Application.Registration.Stylist.class)
 @RunWith(ThucydidesRunner.class)
-public class US6003StyleCoachRegistrationTest extends BaseTest {
+public class US6003VerifyAllScRegistrationLinksTest extends BaseTest {
 
 	@Steps
 	public FooterSteps footerSteps;
@@ -73,7 +73,7 @@ public class US6003StyleCoachRegistrationTest extends BaseTest {
 	}
 
 	@Test
-	public void us6003NavigateToStyleCoachRegisterPageTest() {
+	public void us6003VerifyAllScRegistrationLinksTest() {
 
 		// navigate to register page without being logged in
 		headerSteps.navigateToRegisterForm();

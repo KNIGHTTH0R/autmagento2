@@ -73,7 +73,7 @@ public class US3002UserProfileOrderIdTest extends BaseTest{
 			}
 		}
 
-		orderModel = MongoReader.grabOrderModels("US3002Test" + SoapKeys.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US3002SfmValidVatNoSmbBillingDeShippingAtTest" + SoapKeys.GRAB).get(0);
 		
 	}
 	

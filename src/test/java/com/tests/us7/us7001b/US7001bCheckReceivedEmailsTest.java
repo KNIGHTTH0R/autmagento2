@@ -29,9 +29,9 @@ public class US7001bCheckReceivedEmailsTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US7001bRegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7001bRegularCustRegOnNotPrefCountryTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7001bRegularCustomerRegistrationTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7001bRegularCustRegOnNotPrefCountryTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
 
