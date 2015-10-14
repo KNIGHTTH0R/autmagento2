@@ -188,7 +188,7 @@ public class CreditMemosInfoMagentoCalls {
 				newModel.setCreatedAt(newModel.getUpdatedAt());
 				credtMemoModelList.add(model);
 				credtMemoModelList.add(newModel);
-
+				
 			}
 
 		}
