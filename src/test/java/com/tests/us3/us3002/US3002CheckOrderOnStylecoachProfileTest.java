@@ -78,7 +78,7 @@ public class US3002CheckOrderOnStylecoachProfileTest extends BaseTest{
 	}
 	
 	@Test
-	public void us3001CheckOrderOnStylecoachProfileTest() {
+	public void us3002CheckOrderOnStylecoachProfileTest() {
 		
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
