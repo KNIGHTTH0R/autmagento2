@@ -154,7 +154,7 @@ public class US10007OrderForCustomerAsFollowUpPartyHostTest extends BaseTest {
 
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));

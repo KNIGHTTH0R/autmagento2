@@ -1,13 +1,15 @@
 package com.workflows.backend;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
 import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 
 public class BackendPartyPerformanceValidationWorkflows {
-
+	
+	@Title("Validate that closed party performance is correct")
 	@Step
 	public void validateClosedPartyPerformance(ClosedPartyPerformanceModel expectedModel, PartyBackendPerformanceModel grabbedModel) {
 

@@ -66,10 +66,10 @@ public class US11001ValidateOrderBackOfficeTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US11001OrderForCustomerAsPartyHostTest" + SoapKeys.GRAB);
-		productsList = MongoReader.grabHostBasicProductModel("US11001OrderForCustomerAsPartyHostTest" + SoapKeys.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US11001OrderForCustomerAsPartyHostTest" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabHostCartCalcDetailsModels("US11001OrderForCustomerAsPartyHostTest" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US11001PartyHostBuysForCustomerWithVoucherTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabHostBasicProductModel("US11001PartyHostBuysForCustomerWithVoucherTest" + SoapKeys.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US11001PartyHostBuysForCustomerWithVoucherTest" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabHostCartCalcDetailsModels("US11001PartyHostBuysForCustomerWithVoucherTest" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -113,7 +113,7 @@ public class US11001ValidateOrderBackOfficeTest extends BaseTest {
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
 		ordersSteps.openOrder(orderId);
-		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
+		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderProducts();
 		orderTotalsModel = ordersSteps.grabTotals();
 		orderInfoModel = ordersSteps.grabOrderInfo();
 

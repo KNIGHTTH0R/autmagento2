@@ -197,7 +197,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	
 		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
 	
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");

@@ -9,14 +9,14 @@ import com.tests.uss15.us15004.US15004CancelCreditMemoTest;
 import com.tests.uss15.us15004.US15004CheckSubscriberMagentoConfigTest;
 import com.tests.uss15.us15004.US15004CompleteOrderTest;
 import com.tests.uss15.us15004.US15004ConfirmCustomerTest;
-import com.tests.uss15.us15004.US15004OrderForCustomerTest;
+import com.tests.uss15.us15004.US15004OrderZzzProductsForCustomerTest;
 import com.tests.uss15.us15004.US15004VerifyDashboardAndJbHistoryAfterCmOrderTest;
 import com.tests.uss15.us15004.US15004VerifyDashboardAndJbHistoryCompleteOrderTest;
 import com.tests.uss15.us15004.US15004VerifyDashboardAndJbHistoryMemoAppliedOrderTest;
 
 @SuiteClasses({
 	
-	US15004OrderForCustomerTest.class,
+	US15004OrderZzzProductsForCustomerTest.class,
 	US15004ConfirmCustomerTest.class,
 //	US15004CancelOrderTest.class,
 //	US15004VerifyDashboardAndJbHistoryCancelledOrderTest.class,

@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -36,7 +34,7 @@ import com.tools.requirements.Application;
 
 
 @WithTag(name = "US4", type = "external")
-@Story(Application.Shop.ForMyselfCart.class)
+@Story(Application.ShopForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US4002ValidateOrderEmailTest extends BaseTest{
 	

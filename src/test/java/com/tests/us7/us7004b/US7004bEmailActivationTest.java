@@ -36,9 +36,9 @@ public class US7004bEmailActivationTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US7004bRegularUserRegistrationLandingPageTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7004bRegCustRegLandingPageNotPrefCountryTest").size();
 		if (size > 0) {
-			clientName = MongoReader.grabCustomerFormModels("US7004bRegularUserRegistrationLandingPageTest").get(0).getEmailName();
+			clientName = MongoReader.grabCustomerFormModels("US7004bRegCustRegLandingPageNotPrefCountryTest").get(0).getEmailName();
 			System.out.println(clientName);
 		} else
 			System.out.println("The database has no entries");

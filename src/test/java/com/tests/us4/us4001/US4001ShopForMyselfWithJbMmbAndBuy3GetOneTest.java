@@ -44,7 +44,7 @@ import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
 @WithTag(name = "US4", type = "frontend")
-@Story(Application.Shop.ForMyselfCart.class)
+@Story(Application.ShopForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 	
@@ -191,13 +191,13 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
 		cartSteps.grabTotals();
-		cartSteps.clickGoToShipping();
+		cartSteps.goToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);	
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");

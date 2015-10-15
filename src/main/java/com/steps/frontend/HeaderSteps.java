@@ -48,13 +48,14 @@ public class HeaderSteps extends AbstractSteps {
 		waitABit(1000);
 
 	}
+
 	@Step
 	@Title("Go to parties list")
 	public void goToPartieList() {
 		headerPage().clickLounge();
 		loungePage().clickGoToPartyList();
 		waitABit(1000);
-		
+
 	}
 
 	@Step

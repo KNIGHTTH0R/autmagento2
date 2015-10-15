@@ -19,7 +19,7 @@ public class KoboSuccesFormPage extends AbstractPage {
 		Assert.assertTrue("Failure: Email notification text was not found. ", textContainer.getText().contains(ContextConstants.SUCCES_KOBO_FORM));
 	}
 
-	public void verifyThatTheWebsiteChanged() {
+	public void verifyThatTheWebsiteHasChanged() {
 		System.out.println(getDriver().getCurrentUrl());
 		System.out.println(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE);
 		Assert.assertTrue("The url does not reflect the website change !!", getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));

@@ -274,16 +274,16 @@ public class BackEndSteps extends AbstractSteps {
 		return datesModel;
 
 	}
-	
-     @Step
-     public void clickOnRewardsPointsTab(){
-    	 customerDetailsHomePage().clickOnRewardsPointsTab();
-     }
-     
-     @Step
-      public RewardPointsOfStylistModel getRewardPointsOfStylistModel(){
-    	 return customerDetailsHomePage().getRewardPointsOfStylistModel();
-     }
+
+	@Step
+	public void clickOnRewardsPointsTab() {
+		customerDetailsHomePage().clickOnRewardsPointsTab();
+	}
+
+	@Step
+	public RewardPointsOfStylistModel getRewardPointsOfStylistModel() {
+		return customerDetailsHomePage().getRewardPointsOfStylistModel();
+	}
 
 	@StepGroup
 	public void addJewelryAndFourthyDiscountBonusToRegularCustomer() {

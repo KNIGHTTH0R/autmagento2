@@ -77,7 +77,7 @@ public class US11001ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US11001OrderForCustomerAsPartyHostTest" + SoapKeys.GRAB);
+		orderModel = MongoReader.getOrderModel("US11001PartyHostBuysForCustomerWithVoucherTest" + SoapKeys.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		

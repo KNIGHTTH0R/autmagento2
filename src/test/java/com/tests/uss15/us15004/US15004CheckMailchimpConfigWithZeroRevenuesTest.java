@@ -62,10 +62,10 @@ public class US15004CheckMailchimpConfigWithZeroRevenuesTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		dataModel = MongoReader.grabCustomerFormModels("US15004OrderForCustomerTest").get(0);
+		dataModel = MongoReader.grabCustomerFormModels("US15004OrderZzzProductsForCustomerTest").get(0);
 		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
-		product = MongoReader.grabHostBasicProductModel("US15004OrderForCustomerTest").get(2);
-		shippingModel = MongoReader.grabShippingModel("US15004OrderForCustomerTest").get(0);
+		product = MongoReader.grabHostBasicProductModel("US15004OrderZzzProductsForCustomerTest").get(2);
+		shippingModel = MongoReader.grabShippingModel("US15004OrderZzzProductsForCustomerTest").get(0);
 		dateModel = MongoReader.grabStylistDateModels("US15004ConfirmCustomerTest").get(0);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 

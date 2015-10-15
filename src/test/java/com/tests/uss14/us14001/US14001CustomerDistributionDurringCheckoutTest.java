@@ -92,7 +92,7 @@ public class US14001CustomerDistributionDurringCheckoutTest extends BaseTest {
 		headerSteps.goToCart();
 		regularUserCartSteps.clickGoToShipping();
 		shippingSteps.selectKnowStylistNoOption();
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 		String url = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 		paymentSteps.expandCreditCardForm();

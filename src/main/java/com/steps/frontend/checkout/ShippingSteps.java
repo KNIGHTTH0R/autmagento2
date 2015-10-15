@@ -3,6 +3,7 @@ package com.steps.frontend.checkout;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
@@ -22,7 +23,7 @@ public class ShippingSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void clickGoToPaymentMethod() {
+	public void goToPaymentMethod() {
 		surveyPage().clickGoToPaymentMethod();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
@@ -66,7 +67,7 @@ public class ShippingSteps extends AbstractSteps {
 	public void checkTermsCheckbox() {
 		shippingFormPage().checkTermsCheckbox();
 	}
-
+	@Title("Get order id and total from url")
 	@Step
 	public String grabUrl() {
 		return getDriver().getCurrentUrl();

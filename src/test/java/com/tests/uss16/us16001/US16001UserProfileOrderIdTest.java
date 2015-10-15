@@ -73,7 +73,7 @@ public class US16001UserProfileOrderIdTest extends BaseTest{
 			}
 		}
 
-		orderModel = MongoReader.grabOrderModels("US16001StyleCoachBorrowCartTest" + SoapKeys.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US16001StyleCoachBorrowsProductsTest" + SoapKeys.GRAB).get(0);
 		
 	}
 	

@@ -35,10 +35,10 @@ public class US7002ValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7002RegularCustRegistrationOnContextTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").get(0).getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").get(0).getPassword();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7002RegularCustRegistrationOnContextTest").get(0).getEmailName();
+			stylistPassword = MongoReader.grabCustomerFormModels("US7002RegularCustRegistrationOnContextTest").get(0).getPassword();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");

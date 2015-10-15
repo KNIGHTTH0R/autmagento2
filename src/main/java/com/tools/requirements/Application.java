@@ -19,8 +19,21 @@ public class Application {
 		}
 	}
 
+	public class ShopForMyselfCart {
+	}
+
+	public class RegularCart {
+	}
+
+	public class HostessCart {
+	}
+
+	public class BorrowCart {
+	}
+
 	@Feature
 	public class Registration {
+
 		public class Customer {
 		}
 
@@ -43,14 +56,19 @@ public class Application {
 	public class KoboSubscription {
 
 	}
-	
+
 	@Feature
 	public class Commission {
 		public class StylecoachInfo {
 		}
+
 		public class PartyPerformance {
 		}
+
 		public class CloseMonthRewardPoints {
+		}
+
+		public class NewIpLogicStylecoachPerformance {
 		}
 	}
 

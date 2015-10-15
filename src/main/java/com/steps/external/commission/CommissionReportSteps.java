@@ -2,6 +2,7 @@ package com.steps.external.commission;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
 import com.connectors.http.ApacheHttpHelper;
 import com.tools.calculation.ClosedMonthBonusCalculation;
@@ -32,7 +33,7 @@ public class CommissionReportSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public RewardPointsOfStylistModel closeMonth(String stylistId) throws Exception {
+	public RewardPointsOfStylistModel closeMonthAndCalculateRewardPoints(String stylistId) throws Exception {
 
 		if (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")) {
 			ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
@@ -50,7 +51,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId, "2015-09-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
 
 	}
-
+	@Title("Close last month and get current month ips")
 	@StepGroup
 	public IpModel closeLastMonthAndGetCurrentMonthIps(String stylistId) throws Exception {
 		

@@ -34,8 +34,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US3", type = "external")
-@Story(Application.Shop.ForMyselfCart.class)
+@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT")
+@Story(Application.ShopForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US3001ValidateOrderEmailTest extends BaseTest{
 	

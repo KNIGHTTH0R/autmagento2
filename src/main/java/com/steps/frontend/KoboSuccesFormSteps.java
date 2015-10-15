@@ -14,8 +14,8 @@ public class KoboSuccesFormSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void verifyThatTheWebsiteChanged() {
-		koboSuccesFormPage().verifyThatTheWebsiteChanged();
+	public void verifyThatTheWebsiteHasChanged() {
+		koboSuccesFormPage().verifyThatTheWebsiteHasChanged();
 	}
 
 }

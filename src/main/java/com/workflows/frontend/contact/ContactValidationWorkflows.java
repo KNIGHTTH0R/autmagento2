@@ -1,6 +1,7 @@
 package com.workflows.frontend.contact;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
@@ -25,7 +26,7 @@ public class ContactValidationWorkflows {
 		result.setLastHistoryRegistration(oldStylecoachModel.getFirstName() + Separators.SPACE + oldStylecoachModel.getLastName());
 		return result;
 	}
-
+	@Title("Validate contact details")
 	@Step
 	public void validateContactDetails(ContactModel expectedModel, ContactModel grabbedModel) {
 

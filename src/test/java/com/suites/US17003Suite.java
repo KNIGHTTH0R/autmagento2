@@ -9,7 +9,7 @@ import com.tests.uss17.us17003.US17003ConfirmStylecoachTest;
 import com.tests.uss17.us17003.US17003MarkStarterKitOrderAsPaidTest;
 import com.tests.uss17.us17003.US17003ReasignContactsTest;
 import com.tests.uss17.us17003.US17003StyleCoachRegistrationTest;
-import com.tests.uss17.us17003.US17003VerifyThatContactWasReassignedCorrectlyTest;
+import com.tests.uss17.us17003.US17003VerifyContactIsReassignedUpOnCanceledScHierarchyTest;
 import com.tests.uss17.us17003.US17003VerifyThatOldStylistWasDeactivatedTest;
 
 @SuiteClasses({
@@ -19,7 +19,7 @@ import com.tests.uss17.us17003.US17003VerifyThatOldStylistWasDeactivatedTest;
 	US17003AddNewContactToStyleCoachTest.class,
 	US17003ReasignContactsTest.class,
 	US17003VerifyThatOldStylistWasDeactivatedTest.class,
-	US17003VerifyThatContactWasReassignedCorrectlyTest.class,
+	US17003VerifyContactIsReassignedUpOnCanceledScHierarchyTest.class,
 	
 })
 @RunWith(Suite.class)

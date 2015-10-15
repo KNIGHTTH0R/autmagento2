@@ -31,7 +31,7 @@ public class US15004MarkAsPaidOrderTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		orderModel = MongoReader.grabOrderModels("US15004OrderForCustomerTest").get(0);
+		orderModel = MongoReader.grabOrderModels("US15004OrderZzzProductsForCustomerTest").get(0);
 		System.out.println(orderModel.getOrderId());
 	}
 

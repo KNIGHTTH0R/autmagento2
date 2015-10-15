@@ -93,7 +93,7 @@ public class US15003KoboSubscriptionTest extends BaseTest {
 		contactBoosterCartSteps.selectContactBooster100Voucher();
 		contactBoosterCartSteps.clickToShipping();
 		koboShippingSteps.acceptTerms();
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));

@@ -5,14 +5,14 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us2.US002CartSegmentationLogicTest;
-import com.tests.us2.US002UserProfileOrderIdTest;
+import com.tests.us2.US002CheckOrderOnStylecoachProfileTest;
 import com.tests.us2.US002ValidateOrderBackOfficeTest;
 import com.tests.us2.US002ValidateOrderEmailTest;
 
 
 @SuiteClasses({
 	US002CartSegmentationLogicTest.class,
-	US002UserProfileOrderIdTest.class,
+	US002CheckOrderOnStylecoachProfileTest.class,
 	US002ValidateOrderEmailTest.class,
 	US002ValidateOrderBackOfficeTest.class,
 })

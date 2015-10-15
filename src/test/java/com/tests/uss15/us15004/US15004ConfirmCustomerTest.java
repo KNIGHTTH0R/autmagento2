@@ -38,7 +38,7 @@ public class US15004ConfirmCustomerTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		dateModel = new DateModel();
-		stylistEmail = MongoReader.grabCustomerFormModels("US15004OrderForCustomerTest").get(0).getEmailName();
+		stylistEmail = MongoReader.grabCustomerFormModels("US15004OrderZzzProductsForCustomerTest").get(0).getEmailName();
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}

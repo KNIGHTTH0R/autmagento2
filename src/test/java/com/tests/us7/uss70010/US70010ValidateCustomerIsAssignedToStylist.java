@@ -63,10 +63,10 @@ public class US70010ValidateCustomerIsAssignedToStylist extends BaseTest {
 			}
 		}
 
-		int size = MongoReader.grabCustomerFormModels("US70010KoboRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US70010KoboRegOnVoucherOwnerContextTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US70010KoboRegistrationTest").get(0).getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US70010KoboRegistrationTest").get(0).getPassword();
+			stylistEmail = MongoReader.grabCustomerFormModels("US70010KoboRegOnVoucherOwnerContextTest").get(0).getEmailName();
+			stylistPassword = MongoReader.grabCustomerFormModels("US70010KoboRegOnVoucherOwnerContextTest").get(0).getPassword();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");

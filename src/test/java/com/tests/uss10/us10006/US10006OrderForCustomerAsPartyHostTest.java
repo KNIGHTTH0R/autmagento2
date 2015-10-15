@@ -165,7 +165,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));

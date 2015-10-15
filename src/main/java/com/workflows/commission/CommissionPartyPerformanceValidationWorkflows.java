@@ -1,12 +1,13 @@
 package com.workflows.commission;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 
 public class CommissionPartyPerformanceValidationWorkflows {
-
+	@Title("Validate that closes party performance is correct")
 	@Step
 	public void validateClosedPartyPerformance(ClosedPartyPerformanceModel grabbedModel, ClosedPartyPerformanceModel expectedModel) {
 

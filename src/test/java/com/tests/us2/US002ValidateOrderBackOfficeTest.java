@@ -40,8 +40,8 @@ import com.tools.requirements.Application;
 import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
 
-@WithTag(name = "US2", type = "backend")
-@Story(Application.Shop.ForMyselfCart.class)
+@WithTag(name = "US2 Shop for myself cart with segmentation logic")
+@Story(Application.ShopForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US002ValidateOrderBackOfficeTest extends BaseTest {
 
@@ -141,7 +141,7 @@ public class US002ValidateOrderBackOfficeTest extends BaseTest {
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
 		ordersSteps.openOrder(orderId);
-		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
+		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderProducts();
 		orderTotalsModel = ordersSteps.grabTotals();
 		orderInfoModel = ordersSteps.grabOrderInfo();
 

@@ -77,7 +77,7 @@ public class US16001ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US16001StyleCoachBorrowCartTest" + SoapKeys.GRAB);
+		orderModel = MongoReader.getOrderModel("US16001StyleCoachBorrowsProductsTest" + SoapKeys.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		

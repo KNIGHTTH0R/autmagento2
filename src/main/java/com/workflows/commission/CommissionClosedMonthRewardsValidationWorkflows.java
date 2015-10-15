@@ -1,12 +1,13 @@
 package com.workflows.commission;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 
 public class CommissionClosedMonthRewardsValidationWorkflows {
-
+	@Title("Validate that closed month reward points are correct")
 	@Step
 	public void validateClosedMonthRewardPoints(RewardPointsOfStylistModel expectedModel, RewardPointsOfStylistModel grabbedModel) {
 		verifyJewelryBonus(grabbedModel.getJewelryBonus(), expectedModel.getJewelryBonus());

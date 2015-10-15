@@ -43,8 +43,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US2", type = "frontend")
-@Story(Application.Shop.ForMyselfCart.class)
+@WithTag(name = "US2 Shop for myself cart with segmentation logic")
+@Story(Application.ShopForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US002CartSegmentationLogicTest extends BaseTest {
 
@@ -197,11 +197,11 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
 		
 		cartSteps.grabTotals();
-		cartSteps.clickGoToShipping();
+		cartSteps.goToShipping();
 		
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");

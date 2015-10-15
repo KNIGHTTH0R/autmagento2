@@ -44,8 +44,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3", type = "frontend")
-@Story(Application.Shop.ForMyselfCart.class)
+@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping DE")
+@Story(Application.ShopForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 	@Steps
@@ -176,7 +176,7 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
 		cartSteps.grabTotals();
-		cartSteps.clickGoToShipping();
+		cartSteps.goToShipping();
 
 		if (!MongoReader.getContext().contentEquals("de")) {
 			CartCalculator.calculateShippingWith19PercentRemoved(shippingValue);
@@ -186,7 +186,7 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");

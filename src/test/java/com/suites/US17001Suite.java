@@ -17,10 +17,10 @@ import com.tests.uss17.us17001.US17001ReasignContactsTest;
 import com.tests.uss17.us17001.US17001RegularCustomerRegistrationTest;
 import com.tests.uss17.us17001.US17001SecondRegularCustomerRegistrationTest;
 import com.tests.uss17.us17001.US17001StyleCoachRegistrationTest;
-import com.tests.uss17.us17001.US17001VerifyThatFirstContactWasReassignedCorrectlyTest;
-import com.tests.uss17.us17001.US17001VerifyThatFirstCustomersContactIsReassignedCorrectlyTest;
+import com.tests.uss17.us17001.US17001VerifyThatContactsWereReassignedToSelectedScTest;
+import com.tests.uss17.us17001.US17001VerifyThatFirstCustContactIsReassignedToCustPreffScTest;
 import com.tests.uss17.us17001.US17001VerifyThatOldStylistWasDeactivatedTest;
-import com.tests.uss17.us17001.US17001VerifyThatSecondContactWasReassignedCorrectlyTest;
+import com.tests.uss17.us17001.US17001VerifyThatContactWasReassignedToUnqualifiedSelectedScTest;
 
 @SuiteClasses({
 	US17001StyleCoachRegistrationTest.class,
@@ -36,9 +36,9 @@ import com.tests.uss17.us17001.US17001VerifyThatSecondContactWasReassignedCorrec
 	US17001SecondRegularCustomerRegistrationTest.class,
 	US17001ConfirmSecondCustomerTest.class,	
 	US17001ReasignContactsTest.class,
-	US17001VerifyThatFirstContactWasReassignedCorrectlyTest.class,
-	US17001VerifyThatFirstCustomersContactIsReassignedCorrectlyTest.class,
-	US17001VerifyThatSecondContactWasReassignedCorrectlyTest.class,
+	US17001VerifyThatContactsWereReassignedToSelectedScTest.class,
+	US17001VerifyThatFirstCustContactIsReassignedToCustPreffScTest.class,
+	US17001VerifyThatContactWasReassignedToUnqualifiedSelectedScTest.class,
 	US17001VerifyThatOldStylistWasDeactivatedTest.class,
 })
 @RunWith(Suite.class)

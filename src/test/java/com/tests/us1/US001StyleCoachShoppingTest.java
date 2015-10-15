@@ -43,8 +43,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US1", type = "frontend")
-@Story(Application.Shop.ForMyselfCart.class)
+@WithTag(name = "US1 Shop for myself")
+@Story(Application.ShopForMyselfCart.class)
 @RunWith(ThucydidesRunner.class)
 public class US001StyleCoachShoppingTest extends BaseTest {
 	
@@ -177,12 +177,12 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		
 		cartSteps.grabTotals();
 		
-		cartSteps.clickGoToShipping();
+		cartSteps.goToShipping();
 
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");

@@ -1,13 +1,15 @@
 package com.workflows.commission;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
 import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.soap.DBStylistModel;
 
 public class CommissionStylistValidationWorkflows {
-
+	
+	@Title("Validate that SC properties are correct in commission")
 	@Step
 	public void validateCommssionStylistProperties(CommissionStylistModel grabbedModel, DBStylistModel expectedModel) {
 

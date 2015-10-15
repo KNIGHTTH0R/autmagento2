@@ -68,9 +68,9 @@ public class US7006bEmailActivationTest extends BaseTest{
 			}
 		}
 
-		int size = MongoReader.grabCustomerFormModels("US7006bUserRegistrationSpecificStylistLandingPageTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7006bLandingPageRegSelectedScNotPrefCountryTest").size();
 		if (size > 0) {
-			clientName = MongoReader.grabCustomerFormModels("US7006bUserRegistrationSpecificStylistLandingPageTest").get(0).getEmailName();
+			clientName = MongoReader.grabCustomerFormModels("US7006bLandingPageRegSelectedScNotPrefCountryTest").get(0).getEmailName();
 			System.out.println(clientName);
 		} else
 			System.out.println("The database has no entries");

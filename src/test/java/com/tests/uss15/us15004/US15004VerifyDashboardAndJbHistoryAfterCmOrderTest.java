@@ -56,7 +56,7 @@ public class US15004VerifyDashboardAndJbHistoryAfterCmOrderTest extends BaseTest
 
 		try {
 
-			expectedJewelryHistoryModel = MongoReader.grabJewerlyHistoryModels("US15004OrderForCustomerTest" + SoapKeys.COMPLETE).get(0);
+			expectedJewelryHistoryModel = MongoReader.grabJewerlyHistoryModels("US15004OrderZzzProductsForCustomerTest" + SoapKeys.COMPLETE).get(0);
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15004.properties");
 			prop.load(input);

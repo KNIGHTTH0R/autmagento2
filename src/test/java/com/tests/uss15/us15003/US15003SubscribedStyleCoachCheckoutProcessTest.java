@@ -139,9 +139,9 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		cartSteps.clickGoToShipping();
+		cartSteps.goToShipping();
 
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));

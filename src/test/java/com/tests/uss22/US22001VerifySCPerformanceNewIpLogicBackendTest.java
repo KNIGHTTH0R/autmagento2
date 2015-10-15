@@ -35,7 +35,7 @@ import com.tools.requirements.Application;
 import com.workflows.commission.StylecoachPerformanceValidationWorkflow;
 
 @WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@Story(Application.Commission.NewIpLogicStylecoachPerformance.class)
 @RunWith(ThucydidesRunner.class)
 public class US22001VerifySCPerformanceNewIpLogicBackendTest extends BaseTest {
 

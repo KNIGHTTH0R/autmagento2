@@ -6,11 +6,11 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us7.us7006b.US7006bCheckCustomerActivationTest;
 import com.tests.us7.us7006b.US7006bEmailActivationTest;
-import com.tests.us7.us7006b.US7006bUserRegistrationSpecificStylistLandingPageTest;
+import com.tests.us7.us7006b.US7006bLandingPageRegSelectedScNotPrefCountryTest;
 
 @SuiteClasses({
 
-	US7006bUserRegistrationSpecificStylistLandingPageTest.class,
+	US7006bLandingPageRegSelectedScNotPrefCountryTest.class,
 	US7006bEmailActivationTest.class,
 	US7006bCheckCustomerActivationTest.class,
 })

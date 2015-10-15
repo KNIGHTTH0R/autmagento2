@@ -26,7 +26,7 @@ public class OrdersSteps extends AbstractSteps {
 	}
 
 	@Step
-	public List<OrderItemModel> grabOrderData() {
+	public List<OrderItemModel> grabOrderProducts() {
 		return orderItemsPage().grabOrderItems();
 	}
 
