@@ -76,7 +76,6 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	private String username, password;
 
 
-	// Test data Credit card details
 	private static String cardNumber;
 	private static String cardName;
 	private static String cardMonth;
