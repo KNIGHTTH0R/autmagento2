@@ -61,7 +61,6 @@ public class US17002AddNewContactToStyleCoachTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
-
 	@Test
 	public void us17002AddNewContactToStyleCoachTest() {
 

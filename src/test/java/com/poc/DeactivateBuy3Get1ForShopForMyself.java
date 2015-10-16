@@ -9,20 +9,20 @@ import org.junit.runner.RunWith;
 import com.steps.backend.promotion.PromotionSteps;
 import com.tests.BaseTest;
 
+
 /**
- * Activate 3+1 rule in backend
+ * Deactivate 3+1 rule in backend
  * @author voicu.vac
  *
  */
 @RunWith(ThucydidesRunner.class)
-public class ActivateRule extends BaseTest{
+public class DeactivateBuy3Get1ForShopForMyself extends BaseTest{
 	@Steps
 	public PromotionSteps promotionSteps;
 	
 	@Test
 	public void changeRuleStatusTest(){
-		
-		promotionSteps.activateRule();		
+		promotionSteps.deactivateRule();	
 		
 	}
 }

@@ -16,13 +16,13 @@ import com.tests.BaseTest;
  *
  */
 @RunWith(ThucydidesRunner.class)
-public class DeactivateRule extends BaseTest{
+public class DeactivateBuy3Get1ForRegularTest extends BaseTest{
 	@Steps
 	public PromotionSteps promotionSteps;
 	
 	@Test
 	public void changeRuleStatusTest(){
-		promotionSteps.deactivateRule();	
+		promotionSteps.deactivateBuy3Get1ForRegular();
 		
 	}
 }

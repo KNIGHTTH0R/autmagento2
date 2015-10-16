@@ -10,19 +10,19 @@ import com.steps.backend.promotion.PromotionSteps;
 import com.tests.BaseTest;
 
 /**
- * Activate 3+1 rule in backend for host cart
+ * Activate 3+1 rule in backend
  * @author voicu.vac
  *
  */
 @RunWith(ThucydidesRunner.class)
-public class ActivateBuyGet1ForHost extends BaseTest{
+public class ActivateBuy3Get1ForShopForMyselfTest extends BaseTest{
 	@Steps
 	public PromotionSteps promotionSteps;
 	
 	@Test
 	public void changeRuleStatusTest(){
 		
-		promotionSteps.activateBuy3Get1ForHost();		
+		promotionSteps.activateRule();		
 		
 	}
 }

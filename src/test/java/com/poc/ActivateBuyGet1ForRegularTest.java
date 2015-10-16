@@ -15,7 +15,7 @@ import com.tests.BaseTest;
  *
  */
 @RunWith(ThucydidesRunner.class)
-public class ActivateBuyGet1ForRegular extends BaseTest{
+public class ActivateBuyGet1ForRegularTest extends BaseTest{
 	@Steps
 	public PromotionSteps promotionSteps;
 	

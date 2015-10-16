@@ -4,16 +4,16 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.poc.ActivateRule;
-import com.poc.DeactivateBuy3Get1ForHost;
-import com.poc.DeactivateBuy3Get1ForRegular;
-import com.poc.DeactivateRule;
+import com.poc.ActivateBuy3Get1ForShopForMyselfTest;
+import com.poc.DeactivateBuy3Get1ForHostTest;
+import com.poc.DeactivateBuy3Get1ForRegularTest;
+import com.poc.DeactivateBuy3Get1ForShopForMyself;
 import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 
 @SuiteClasses({
 	
 	US10CreateAllPartiesSuite.class,
-	DeactivateRule.class,
+	DeactivateBuy3Get1ForShopForMyself.class,
 	US001Suite.class,
 	US002Suite.class,
 	US3001Suite.class,
@@ -49,18 +49,18 @@ import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 	
 	US10007SuitePartOne.class,
 	
-	DeactivateBuy3Get1ForRegular.class,
+	DeactivateBuy3Get1ForRegularTest.class,
 	US8001Suite.class,
 	US8002Suite.class,
 	US8003Suite.class,	
 	
-	ActivateRule.class,
+	ActivateBuy3Get1ForShopForMyselfTest.class,
 	US4001Suite.class,
 	US4002Suite.class,
-	DeactivateRule.class,
+	DeactivateBuy3Get1ForShopForMyself.class,
 	US10001AndUS10002ClosePartiesSuite.class,
 	
-	DeactivateBuy3Get1ForHost.class,
+	DeactivateBuy3Get1ForHostTest.class,
 	US9001Suite.class,
 	US9002Suite.class,
 	
