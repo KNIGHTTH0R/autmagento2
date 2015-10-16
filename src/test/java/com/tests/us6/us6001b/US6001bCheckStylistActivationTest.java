@@ -28,7 +28,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US6.1b Sc Registration New Customer Forbidden Country Test ", type = "Scenario")
+@WithTag(name = "US6.1b Sc Registration New Customer Forbidden Country Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US6001bCheckStylistActivationTest extends BaseTest {
@@ -74,7 +74,7 @@ public class US6001bCheckStylistActivationTest extends BaseTest {
 	}
 
 	@Test
-	public void us6001bCheckCustomerActivationTest() {
+	public void us6001bCheckStylistActivationTest() {
 		
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();

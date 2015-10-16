@@ -32,7 +32,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -90,10 +89,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	private String voucherValue;
 	private String firstVoucherCode;
 	private String secondVoucherCode;
-
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;

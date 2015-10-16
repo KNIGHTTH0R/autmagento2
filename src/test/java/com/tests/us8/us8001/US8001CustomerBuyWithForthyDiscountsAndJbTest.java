@@ -31,7 +31,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -44,11 +43,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenario")
+@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
@@ -86,10 +84,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
-
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -170,8 +165,6 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		// TODO put the updateProductList in selectProductDiscountType method
-		// (maybe)
 		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
@@ -179,12 +172,10 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
 		regularUserCartSteps.submitVoucherCode();
-		// TODO move this (maybe)
 		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
-		PrintUtils.printRegularUserCartTotalsModel(RegularUserDataGrabber.regularUserGrabbedCartTotals);
 
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
 

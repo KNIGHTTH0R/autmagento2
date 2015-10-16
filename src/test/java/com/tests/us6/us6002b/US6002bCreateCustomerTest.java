@@ -44,7 +44,7 @@ public class US6002bCreateCustomerTest extends BaseTest{
 	}
 
 	@Test
-	public void us6002bCreateFECustomerTest() {
+	public void us6002bCreateCustomerTest() {
 		System.out.println(customerData.getEmailName());
 		customerRegistrationSteps.fillCreateCustomerForm(customerData, customerAddressData);
 		customerRegistrationSteps.verifyCustomerCreation();

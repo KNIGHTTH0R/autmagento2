@@ -15,7 +15,7 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6.1b Sc Registration New Customer Forbidden Country Test ", type = "Scenario")
+@WithTag(name = "US6.1b Sc Registration New Customer Forbidden Country Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US6001bCheckStylistPreferedWebsiteAndLanguage extends BaseTest {
@@ -35,7 +35,7 @@ public class US6001bCheckStylistPreferedWebsiteAndLanguage extends BaseTest {
 	}
 
 	@Test
-	public void us6001bCheckCustomerActivationTest() {
+	public void us6001bCheckStylistPreferedWebsiteAndLanguage() {
 
 		customerRegistrationSteps.performLoginAndVerifyWebsiteAndLanguage(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword(),MongoReader.getContext(),MongoReader.getContext());
 

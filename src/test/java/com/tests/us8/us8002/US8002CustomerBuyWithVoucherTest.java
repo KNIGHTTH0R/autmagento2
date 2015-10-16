@@ -31,7 +31,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -84,10 +83,7 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
-
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -175,7 +171,6 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
-	
 
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
 		

@@ -27,7 +27,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenario")
+@WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US6001CheckStylistActivationTest extends BaseTest {

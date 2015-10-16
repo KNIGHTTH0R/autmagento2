@@ -31,7 +31,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -44,7 +43,6 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
@@ -87,10 +85,7 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
-
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -170,8 +165,7 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		// TODO put the updateProductList in selectProductDiscountType method
-		// (maybe)
+		
 		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
@@ -179,12 +173,11 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
 		regularUserCartSteps.submitVoucherCode();
-		// TODO move this (maybe)
+
 		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
-		PrintUtils.printRegularUserCartTotalsModel(RegularUserDataGrabber.regularUserGrabbedCartTotals);
 
 		RegularUserCartCalculator.calculateCartBuy3Get1CartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
 

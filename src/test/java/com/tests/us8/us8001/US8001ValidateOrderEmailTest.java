@@ -33,7 +33,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenario")
+@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US8001ValidateOrderEmailTest extends BaseTest{
