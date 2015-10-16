@@ -11,7 +11,6 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTagValuesOf;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
@@ -43,8 +42,7 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
 
-@WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT",type = "Scenarios")
-@WithTagValuesOf({"US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT","Backend"})
+@WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US3002ValidateOrderBackOfficeTest extends BaseTest {
@@ -59,7 +57,7 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 	public OrderProductsWorkflows orderProductsWorkflows;
 	@Steps
 	public OrderWorkflows orderWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
@@ -70,7 +68,7 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	private String orderId;
-	private String beUser,bePass;
+	private String beUser, bePass;
 
 	@Before
 	public void setUp() {
@@ -115,7 +113,7 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 		if (shippingModelList.size() != 1) {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
@@ -130,8 +128,10 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
 		// Constants added
 		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
-		//on spanish vebsite the because billing and shipping address can be only Spain we encounter the 0 vat case on every valid vat and no smb SC. 
-		if(!MongoReader.getContext().contentEquals("de")){
+		// on spanish vebsite the because billing and shipping address can be
+		// only Spain we encounter the 0 vat case on every valid vat and no smb
+		// SC.
+		if (!MongoReader.getContext().contentEquals("de")) {
 			shopTotalsModel.setTax("0.00");
 		}
 		shopTotalsModel.setTotalPaid("0.00");
@@ -164,9 +164,10 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 
 		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
-		
-//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
-		
+
+		// orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(),
+		// "Zahlung geplant");
+
 		customVerifications.printErrors();
 	}
 

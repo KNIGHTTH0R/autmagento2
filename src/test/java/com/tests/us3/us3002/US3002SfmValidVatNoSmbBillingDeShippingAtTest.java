@@ -9,7 +9,6 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTagValuesOf;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
@@ -46,7 +45,6 @@ import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
 @WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT",type = "Scenarios")
-@WithTagValuesOf({"US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT","Frontend"})
 @Story(Application.ShopForMyselfCart.US3_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
