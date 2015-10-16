@@ -18,16 +18,16 @@ public class Application {
 		public class BorrowCart {
 		}
 	}
-
+	@Feature
 	public class ShopForMyselfCart {
 	}
-
+	@Feature
 	public class RegularCart {
 	}
-
+	@Feature
 	public class HostessCart {
 	}
-
+	@Feature
 	public class BorrowCart {
 	}
 
