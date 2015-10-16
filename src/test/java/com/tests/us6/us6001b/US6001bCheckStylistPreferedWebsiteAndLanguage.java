@@ -15,8 +15,8 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "backend")
-@Story(Application.Registration.Stylist.class)
+@WithTag(name = "US6.1b Sc Registration New Customer Forbidden Country Test ", type = "Scenario")
+@Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US6001bCheckStylistPreferedWebsiteAndLanguage extends BaseTest {
 

@@ -23,8 +23,8 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "frontend")
-@Story(Application.Registration.Stylist.class)
+@WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenario")
+@Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 

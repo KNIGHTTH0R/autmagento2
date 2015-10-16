@@ -22,13 +22,43 @@ public class Application {
 	@Feature
 	public class ShopForMyselfCart {
 
-		public class Stories {
+		public class US1 {
+		}
+
+		public class US2 {
+		}
+
+		public class US3_1 {
+		}
+
+		public class US3_2 {
+		}
+
+		public class US3_3 {
 		}
 
 	}
 
 	@Feature
+	public class StylecoachRegistration {
+		public class US6_1 {
+		}
+
+		public class US6_2 {
+		}
+
+		public class US6_3 {
+		}
+
+		public class US6_4 {
+		}
+	}
+
+	@Feature
 	public class RegularCart {
+
+		public class US8_1 {
+		}
 	}
 
 	@Feature

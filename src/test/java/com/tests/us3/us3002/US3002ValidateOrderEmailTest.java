@@ -35,7 +35,7 @@ import com.tools.requirements.Application;
 
 
 @WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT",type = "Scenarios")
-@Story(Application.ShopForMyselfCart.Stories.class)
+@Story(Application.ShopForMyselfCart.US3_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US3002ValidateOrderEmailTest extends BaseTest{
 	

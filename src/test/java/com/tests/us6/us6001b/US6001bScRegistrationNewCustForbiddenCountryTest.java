@@ -24,8 +24,8 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "frontend")
-@Story(Application.Registration.Stylist.class)
+@WithTag(name = "US6.1b Sc Registration New Customer Forbidden Country Test ", type = "Scenario")
+@Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 

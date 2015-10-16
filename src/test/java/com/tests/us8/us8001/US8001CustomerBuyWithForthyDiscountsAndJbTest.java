@@ -48,8 +48,8 @@ import com.tools.utils.PrintUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
+@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenario")
+@Story(Application.RegularCart.US8_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
