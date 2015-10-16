@@ -21,8 +21,8 @@ public class Application {
 
 	@Feature
 	public class ShopForMyselfCart {
-		
-		public class Empty {
+
+		public class Stories {
 		}
 
 	}

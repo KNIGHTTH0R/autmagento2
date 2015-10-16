@@ -44,8 +44,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3.3 Shop for myself VAT valid and no SMB billing and shipping DE",type = "Stories")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US3.3 Shop for myself VAT valid and no SMB billing and shipping DE",type = "Scenarios")
+@Story(Application.ShopForMyselfCart.Stories.class)
 @RunWith(ThucydidesRunner.class)
 public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 	@Steps
