@@ -168,11 +168,8 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		headerSteps.goToCart();
 
 		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
-		System.out.println("DataGrabber.cartProductsWith50Discount: " + DataGrabber.cartProductsWith50Discount.size());
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
-		System.out.println("DataGrabber.cartProductsWith25Discount: " + DataGrabber.cartProductsWith25Discount.size());
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-		System.out.println("DataGrabber.cartMarketingMaterialsProducts: " + DataGrabber.cartMarketingMaterialsProducts.size());
 
 		cartSteps.typeJewerlyBonus(jewelryDiscount);
 		cartSteps.updateJewerlyBonus();

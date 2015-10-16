@@ -18,15 +18,23 @@ public class Application {
 		public class BorrowCart {
 		}
 	}
+
 	@Feature
 	public class ShopForMyselfCart {
+		
+		public class Empty {
+		}
+
 	}
+
 	@Feature
 	public class RegularCart {
 	}
+
 	@Feature
 	public class HostessCart {
 	}
+
 	@Feature
 	public class BorrowCart {
 	}
@@ -59,6 +67,7 @@ public class Application {
 
 	@Feature
 	public class Commission {
+
 		public class StylecoachInfo {
 		}
 
