@@ -119,12 +119,6 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 				shippingValue = "7.56";
 			}
 			taxClass = prop.getProperty("taxClass");
-			
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

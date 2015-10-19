@@ -85,12 +85,6 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	private static String addressString;
-	// Test data Credit card details
-	private static String cardNumber;
-	private static String cardName;
-	private static String cardMonth;
-	private static String cardYear;
-	private static String cardCVC;
 	
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
@@ -137,20 +131,14 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
 			prop.load(input);
+			
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-
 			jewelryDisount = prop.getProperty("jewelryDisount");
 			marketingDisount = prop.getProperty("marketingDisount");
 			addressString = prop.getProperty("addressString");
 			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
-
-			cardNumber = prop.getProperty("cardNumber");
-			cardName = prop.getProperty("cardName");
-			cardMonth = prop.getProperty("cardMonth");
-			cardYear = prop.getProperty("cardYear");
-			cardCVC = prop.getProperty("cardCVC");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -163,12 +151,6 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 				}
 			}
 		}
-
-		creditCardData.setCardNumber(cardNumber);
-		creditCardData.setCardName(cardName);
-		creditCardData.setMonthExpiration(cardMonth);
-		creditCardData.setYearExpiration(cardYear);
-		creditCardData.setCvcNumber(cardCVC);
 		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
