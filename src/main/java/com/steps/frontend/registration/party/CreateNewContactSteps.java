@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.StepGroup;
 
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class CreateNewContactSteps extends AbstractSteps {
@@ -21,7 +22,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().checkParties();
 		createNewContactPage().checkMember();
 		createNewContactPage().submitContact();
-		waitABit(4000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -31,7 +32,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().emailInput(customerData.getEmailName());
 		fillContactDetails(addressData);
 		createNewContactPage().submitContact();
-		waitABit(4000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -40,7 +41,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().lastnameInput(customerData.getLastName());
 		fillContactDetails(addressData);
 		createNewContactPage().submitContact();
-		waitABit(4000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -52,7 +53,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().checkNewsletter();
 		createNewContactPage().checkParties();
 		createNewContactPage().submitContact();
-		waitABit(4000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -63,7 +64,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().checkNewsletter();
 		createNewContactPage().checkParties();
 		createNewContactPage().submitContact();
-		waitABit(4000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -73,7 +74,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().emailInput(customerData.getEmailName());
 		fillCountry(addressData);
 		createNewContactPage().submitContact();
-		waitABit(4000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -86,7 +87,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().checkParties();
 		createNewContactPage().checkMember();
 		createNewContactPage().submitContact();
-		waitABit(2000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		loungePage().startOrderForCustomer();
 	}
 

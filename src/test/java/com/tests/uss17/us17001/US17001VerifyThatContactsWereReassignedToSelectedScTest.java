@@ -35,8 +35,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.contact.ContactValidationWorkflows;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.1 Check reassigned duplicate contacts and customer associated contacts when new SC is selected", type = "Scenarios")
+@Story(Application.MassAction.US17_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US17001VerifyThatContactsWereReassignedToSelectedScTest extends BaseTest {
 
@@ -128,7 +128,7 @@ public class US17001VerifyThatContactsWereReassignedToSelectedScTest extends Bas
 	}
 
 	@Test
-	public void us17001VerifyThatFirstContactWasReassignedCorrectlyTest() {
+	public void us17001VerifyThatContactsWereReassignedToSelectedScTest() {
 
 		customerRegistrationSteps.performLogin(secondStyleCoachUsername, secondStyleCoachPassword);
 		if (!headerSteps.succesfullLogin()) {

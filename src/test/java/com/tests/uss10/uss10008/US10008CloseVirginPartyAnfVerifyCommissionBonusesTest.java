@@ -36,10 +36,10 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.commission.CommissionPartyPerformanceValidationWorkflows;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.Commission.PartyPerformance.class)
+@WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
+@Story(Application.PartyPerformance.US10_8.class)
 @RunWith(ThucydidesRunner.class)
-public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
+public class US10008CloseVirginPartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -53,9 +53,10 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps 
 	public CustomVerification customVerifications;
-	public static UrlModel urlModel = new UrlModel();
-	ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
-	List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
+	
+	private static UrlModel urlModel = new UrlModel();
+	private ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
+	private List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
 	private String username, password;
 
 	@Before
@@ -100,7 +101,7 @@ public class US10008ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	}
 
 	@Test
-	public void us10008ClosePartyAnfVerifyCommissionBonusesTest() {
+	public void us10008CloseVirginPartyAnfVerifyCommissionBonusesTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

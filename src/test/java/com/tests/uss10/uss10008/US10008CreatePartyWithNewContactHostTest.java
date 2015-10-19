@@ -32,8 +32,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.Commission.PartyPerformance.class)
+@WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
+@Story(Application.PartyPerformance.US10_8.class)
 @RunWith(ThucydidesRunner.class)
 public class US10008CreatePartyWithNewContactHostTest extends BaseTest {
 
@@ -51,12 +51,11 @@ public class US10008CreatePartyWithNewContactHostTest extends BaseTest {
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
 
-	public static UrlModel urlModel = new UrlModel();
+	private static UrlModel urlModel = new UrlModel();
 	private String username, password;
-
-	public CustomerFormModel customerData;
-	public CustomerFormModel inviteData;
-	public AddressModel addressData;
+	private CustomerFormModel customerData;
+	private CustomerFormModel inviteData;
+	private AddressModel addressData;
 
 	@Before
 	public void setUp() throws Exception {

@@ -21,8 +21,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US7", type = "backend")
-@Story(Application.KoboRegistration.class)
+@WithTag(name = "US7.9 Kobo Registration Not On Voucher Owner Context Test ", type = "Scenarios")
+@Story(Application.KoboRegistration.US7_9.class)
 @RunWith(ThucydidesRunner.class)
 public class US7009CheckCustomerActivation extends BaseTest {
 
@@ -33,8 +33,8 @@ public class US7009CheckCustomerActivation extends BaseTest {
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
-	public String stylistEmail;
+	private StylistPropertiesModel afterLinkConfirmationStylistExpectedProperties = new StylistPropertiesModel();
+	private String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {

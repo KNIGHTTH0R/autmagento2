@@ -1,6 +1,5 @@
 package com.tests.us7.us7001b;
 
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -17,8 +16,8 @@ import com.tests.BaseTest;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.1b Regular Customer Registration on Master Not Preffered Country Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US7001bValidateCustomerIsAssignedToStylist extends BaseTest {
 	
@@ -29,8 +28,8 @@ public class US7001bValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Steps
 	public DashboardSteps dashboardSteps;
 
-	public String stylistEmail;
-	public String stylistPassword;
+	private String stylistEmail;
+	private String stylistPassword;
 
 	@Before
 	public void setUp() throws Exception {

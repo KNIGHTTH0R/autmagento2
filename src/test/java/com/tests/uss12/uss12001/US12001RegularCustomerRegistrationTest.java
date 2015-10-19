@@ -14,7 +14,6 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.constants.Separators;
@@ -22,8 +21,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US12", type = "frontend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
+@Story(Application.KoboSubscription.US12_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001RegularCustomerRegistrationTest extends BaseTest {
 
@@ -32,10 +31,9 @@ public class US12001RegularCustomerRegistrationTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel dataModel;
-	public AddressModel addressModel;
-	public CustomerFormModel stylistAddressModel;
-	public StylistDataModel validationModel;
+	private CustomerFormModel dataModel;
+	private AddressModel addressModel;
+	private CustomerFormModel stylistAddressModel;
 
 	@Before
 	public void setUp() throws Exception {

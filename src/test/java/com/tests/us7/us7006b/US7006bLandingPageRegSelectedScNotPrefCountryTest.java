@@ -28,8 +28,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.6b Landing Page Registration Selected SC Not Pref Country Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US7006bLandingPageRegSelectedScNotPrefCountryTest extends BaseTest {
 
@@ -68,7 +68,6 @@ public class US7006bLandingPageRegSelectedScNotPrefCountryTest extends BaseTest 
 			}
 		}
 
-		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		addressModel.setPostCode(ContextConstants.NOT_PREFEERD_WEBSITE_POST_CODE);
@@ -82,7 +81,7 @@ public class US7006bLandingPageRegSelectedScNotPrefCountryTest extends BaseTest 
 	 * @throws Exception
 	 */
 	@Test
-	public void us7006bUserRegistrationSpecificStylistLandingPageTest() {
+	public void us7006bLandingPageRegSelectedScNotPrefCountryTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
 		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN, addressModel);

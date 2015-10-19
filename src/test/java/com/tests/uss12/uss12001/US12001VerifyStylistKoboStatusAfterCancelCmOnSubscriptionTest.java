@@ -18,8 +18,8 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US12", type = "frontend")
-@Story(Application.KoboSubscription.class)
+@WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
+@Story(Application.KoboSubscription.US12_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest extends BaseTest {
 
@@ -32,7 +32,7 @@ public class US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest exten
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 
 	@Before
 	public void setUp() {

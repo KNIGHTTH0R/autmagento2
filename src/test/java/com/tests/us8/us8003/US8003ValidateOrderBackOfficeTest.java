@@ -41,8 +41,8 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.regularUser.RegularUserOrderProductsWorkflows;
 
-@WithTag(name = "US8", type = "backend")
-@Story(Application.Shop.RegularCart.class)
+@WithTag(name = "US8.3 Customer Buy With 40% Discount,JB and Buy 3 get 1 for 50 %", type = "Scenarios")
+@Story(Application.RegularCart.US8_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US8003ValidateOrderBackOfficeTest extends BaseTest {
 
@@ -59,8 +59,8 @@ public class US8003ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
-	public static List<RegularCartCalcDetailsModel> calcDetailsModelList = new ArrayList<RegularCartCalcDetailsModel>();
+	private static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
+	private static List<RegularCartCalcDetailsModel> calcDetailsModelList = new ArrayList<RegularCartCalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();

@@ -1,4 +1,3 @@
-
 package com.tests.uss11.us11001;
 
 import java.io.File;
@@ -31,8 +30,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US11", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US11001CreatePartyWithStylistHostTest extends BaseTest {
 
@@ -46,8 +45,9 @@ public class US11001CreatePartyWithStylistHostTest extends BaseTest {
 
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
-	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
+	
+	private static UrlModel urlModel = new UrlModel();
+	private static DateModel dateModel = new DateModel();
 	private String username, password;
 
 	@Before

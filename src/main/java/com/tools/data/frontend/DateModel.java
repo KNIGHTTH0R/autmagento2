@@ -4,6 +4,7 @@ public class DateModel {
 
 	private String date;
 
+
 	public String getDate() {
 		return date;
 	}

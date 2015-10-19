@@ -1,11 +1,5 @@
 package com.tests.us7.us7006;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -21,12 +15,11 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "external")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.6 Landing Page Registration Selected SC Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US7006EmailActivationTest extends BaseTest {
 
@@ -37,36 +30,10 @@ public class US7006EmailActivationTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	public String clientName;
-	public String validateURL;
-
-	// private String styleCoachFN;
-	// private String styleCoachLN;
+	private String clientName;
 
 	@Before
 	public void setUp() throws Exception {
-
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7006.properties");
-			prop.load(input);
-			// styleCoachFN = prop.getProperty("styleCoachFN");
-			// styleCoachLN = prop.getProperty("styleCoachLN");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 
 		int size = MongoReader.grabCustomerFormModels("US7006LandingPageRegistrationSelectedScTest").size();
 		if (size > 0) {
@@ -79,19 +46,8 @@ public class US7006EmailActivationTest extends BaseTest {
 	@Test
 	public void us7006EmailActivationTest() {
 
-		// emailClientSteps.openMailinator();
-		// validateURL = emailClientSteps.grabEmail(clientName.replace("@" +
-		// ConfigConstants.WEB_MAIL, ""));
-		// System.out.println(validateURL);
-		// emailSteps.validateURL(validateURL, "customer/account/confirm");
-		// System.out.println("!!!!!!  " + validateURL);
-		// System.out.println("!!!!!!  " + styleCoachFN.toLowerCase());
-		// emailSteps.validateContextFromURL(validateURL,
-		// styleCoachFN.toLowerCase());
-
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
-
 		customVerifications.printErrors();
 	}
 

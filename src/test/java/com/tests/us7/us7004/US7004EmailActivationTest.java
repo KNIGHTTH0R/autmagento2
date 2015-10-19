@@ -18,8 +18,8 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "external")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.4 Regular Customer Registration from Landing Page Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_4.class)
 @RunWith(ThucydidesRunner.class)
 public class US7004EmailActivationTest extends BaseTest {
 
@@ -30,8 +30,7 @@ public class US7004EmailActivationTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	public String clientName;
-	public String validateURL;
+	private String clientName;
 
 	@Before
 	public void setUp() throws Exception {
@@ -46,14 +45,6 @@ public class US7004EmailActivationTest extends BaseTest {
 
 	@Test
 	public void us7004EmailActivationTest() {
-
-		// emailClientSteps.openMailinator();
-		// validateURL = emailClientSteps.grabEmail(clientName.replace("@" +
-		// ConfigConstants.WEB_MAIL, ""));
-		// // System.out.println(validateURL);
-		// emailSteps.validateURL(validateURL, "customer/account/confirm");
-		//
-		// customVerifications.printErrors();
 
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);

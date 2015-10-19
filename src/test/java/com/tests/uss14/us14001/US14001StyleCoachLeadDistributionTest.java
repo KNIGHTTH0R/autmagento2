@@ -21,8 +21,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;
 
-@WithTag(name = "US13", type = "frontend")
-@Story(Application.Distribution.StyleCoachLead.class)
+@WithTag(name = "US14.1 Distribution during checkout to SC lead qualified SC", type = "Scenarios")
+@Story(Application.DistributionDuringCheckout.US14_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US14001StyleCoachLeadDistributionTest extends BaseTest {
 

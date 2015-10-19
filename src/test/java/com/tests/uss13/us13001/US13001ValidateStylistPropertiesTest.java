@@ -22,8 +22,8 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US13", type = "backend")
-@Story(Application.Distribution.CustomerLead.class)
+@WithTag(name = "US13.1 Distribution to customer lead qualified SC", type = "Scenarios")
+@Story(Application.Distribution.US13_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US13001ValidateStylistPropertiesTest extends BaseTest {
 
@@ -34,10 +34,10 @@ public class US13001ValidateStylistPropertiesTest extends BaseTest {
 	@Steps
 	public ValidationSteps validationSteps;
 
-	public StylistDataModel validationModel = new StylistDataModel();
+	private StylistDataModel validationModel = new StylistDataModel();
 
-	DBStylistModel stylist = new DBStylistModel();
-	public static List<DBStylistModel> stylistsList = new ArrayList<DBStylistModel>();
+	private DBStylistModel stylist = new DBStylistModel();
+	private static List<DBStylistModel> stylistsList = new ArrayList<DBStylistModel>();
 
 	@Before
 	public void setUp() throws Exception {

@@ -42,8 +42,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 
-@WithTag(name = "US15", type = "frontend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.3 Check SC kobo subscription and SFM order details in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 
@@ -74,8 +74,8 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 	private static String marketingDiscount;
 	private static String shippingValue;
 	private static String taxClass;
-	CustomerFormModel dataModel;
-	String coboCode;
+	private CustomerFormModel dataModel;
+	private String coboCode;
 
 	private ProductDetailedModel genProduct1;
 

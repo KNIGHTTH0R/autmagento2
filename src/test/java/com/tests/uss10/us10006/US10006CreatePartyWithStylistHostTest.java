@@ -32,8 +32,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
+@Story(Application.StyleParty.US10_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 
@@ -50,8 +50,8 @@ public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
 
-	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
+	private static UrlModel urlModel = new UrlModel();
+	private static DateModel dateModel = new DateModel();
 	private String username, password;
 	private String customerEmail, customerName;
 

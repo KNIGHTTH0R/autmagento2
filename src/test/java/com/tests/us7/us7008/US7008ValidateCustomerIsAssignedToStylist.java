@@ -23,8 +23,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.KoboRegistration.class)
+@WithTag(name = "US7.8 Kobo Registration on Master Not Pref Country Test ", type = "Scenarios")
+@Story(Application.KoboRegistration.US7_8.class)
 @RunWith(ThucydidesRunner.class)
 public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 
@@ -35,9 +35,9 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Steps
 	public DashboardSteps dashboardSteps;
 
-	public String stylistEmail;
-	public String stylistPassword;
-	public String expectedStyleCoach;
+	private String stylistEmail;
+	private String stylistPassword;
+	private String expectedStyleCoach;
 
 	@Before
 	public void setUp() throws Exception {

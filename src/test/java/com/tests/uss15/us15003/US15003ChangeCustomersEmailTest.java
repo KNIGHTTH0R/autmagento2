@@ -16,7 +16,6 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
@@ -24,23 +23,18 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.RandomAddress;
 
-@WithTag(name = "US15", type = "backend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.3 Check SC kobo subscription and SFM order details in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003ChangeCustomersEmailTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
 
-	public String stylistEmail;
 	private CustomerFormModel dataModel;
-
-	public AddressModel addressModel;
-	CoordinatesModel coordinatesModel = new CoordinatesModel();
-	RandomAddress randomAddress;
-	List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
+	private CoordinatesModel coordinatesModel = new CoordinatesModel();
+	private List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
 
 	@Before
 	public void setUp() throws Exception {

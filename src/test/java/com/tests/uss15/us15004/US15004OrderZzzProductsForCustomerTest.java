@@ -9,6 +9,7 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
+import net.thucydides.core.annotations.WithTags;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
@@ -50,8 +51,9 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US15", type = "frontend")
-@Story(Application.Newsletter.class)
+@WithTags({ @WithTag(name = "US15.4 Validate Zzz Product JB for all order states", type = "Scenarios"),
+	@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
+@Story(Application.Newsletter.US15_4.class)
 @RunWith(ThucydidesRunner.class)
 public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 
@@ -90,7 +92,6 @@ public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 	private String discountClass;
 	private String shippingValue;
 	private String voucherValue;
-
 	private DateModel dateModel = new DateModel();
 	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
 	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderCancelled = new JewelryHistoryModel();

@@ -33,7 +33,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
@@ -48,8 +47,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.Commission.PartyPerformance.class)
+@WithTag(name = "US10.7 Check party and follow up party performance and bonuses", type = "Scenarios")
+@Story(Application.PartyPerformance.US10_7.class)
 @RunWith(ThucydidesRunner.class)
 public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 
@@ -86,8 +85,7 @@ public class US10007OrderForCustomerAsPartyHostTest extends BaseTest {
 
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private PartyBonusCalculationModel partyBonusCalculationModel = new PartyBonusCalculationModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-	public static UrlModel urlModel = new UrlModel();
+	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 
 	@Before

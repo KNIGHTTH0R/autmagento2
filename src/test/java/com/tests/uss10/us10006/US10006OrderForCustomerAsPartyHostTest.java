@@ -33,7 +33,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -49,8 +48,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
+@Story(Application.StyleParty.US10_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
@@ -87,8 +86,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-	public static UrlModel urlModel = new UrlModel();
+	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 
 	@Before
@@ -110,12 +108,6 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
-
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

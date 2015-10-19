@@ -16,14 +16,15 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "backend")
-@Story(Application.Registration.Stylist.class)
+@WithTag(name = "US6.2b SC Registration Existing Customer Forbidden Country Test ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002bCheckStylistPreferedWebsiteAndLanguage extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 
 	@Before
 	public void setUp() throws Exception {

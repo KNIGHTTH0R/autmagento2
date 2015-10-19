@@ -17,8 +17,8 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.3 Check reassigned contacts up on canceled SC hierarchy when no new Sc is selected", type = "Scenarios")
+@Story(Application.MassAction.US17_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US17003MarkStarterKitOrderAsPaidTest extends BaseTest {
 
@@ -27,7 +27,7 @@ public class US17003MarkStarterKitOrderAsPaidTest extends BaseTest {
 	@Steps
 	public OrdersSteps ordersSteps;
 
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 
 	@Before
 	public void setUp() throws Exception {

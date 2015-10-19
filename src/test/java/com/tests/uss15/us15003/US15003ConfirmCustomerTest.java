@@ -20,8 +20,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "external")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.3 Check SC kobo subscription and SFM order details in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003ConfirmCustomerTest extends BaseTest {
 

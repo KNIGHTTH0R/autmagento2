@@ -21,9 +21,8 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.4b Regular Customer Registration from Landing Page Not Pref Country Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_4.class)
 @RunWith(ThucydidesRunner.class)
 public class US7004bRegCustRegLandingPageNotPrefCountryTest extends BaseTest{
 	
@@ -58,10 +57,8 @@ public class US7004bRegCustRegLandingPageNotPrefCountryTest extends BaseTest{
 		customerRegistrationSteps.selectStylistOption(StyleMode.DefaultStylist, "", "",addressModel);
 		customerRegistrationSteps.submitStylistSelection();
 		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
-		
 		customerRegistrationSteps.verifyCustomerEmail(dataModel.getEmailName(), email);
 		customerRegistrationSteps.verifySuccessLink();
-		
 		customVerifications.printErrors();
 	}
 

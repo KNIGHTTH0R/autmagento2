@@ -33,12 +33,11 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US3", type = "external")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US3.6 Shop for myself VAT valid and SMB billing and shipping DE", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_6.class)
 @RunWith(ThucydidesRunner.class)
-public class US3006ValidateOrderEmailTest extends BaseTest{
-	
+public class US3006ValidateOrderEmailTest extends BaseTest {
+
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -47,12 +46,12 @@ public class US3006ValidateOrderEmailTest extends BaseTest{
 	public ProfileSteps profileSteps;
 	@Steps
 	public EmailSteps emailSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private String email, password, emailPassword;
 	private List<OrderModel> orderModel = new ArrayList<OrderModel>();
-	
+
 	@Before
 	public void setUp() throws Exception {
 		Properties prop = new Properties();
@@ -77,31 +76,31 @@ public class US3006ValidateOrderEmailTest extends BaseTest{
 				}
 			}
 		}
-		
+
 		orderModel = MongoReader.getOrderModel("US3006SfmValidVatSmbBillingShippingDeTest" + SoapKeys.GRAB);
-		
+
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
-		
+
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
 		emailData.setProtocol(EmailConstants.PROTOCOL);
 		emailData.setUsername(email);
 		emailData.setPassword(emailPassword);
-        
+
 		gmailConnector = new GmailConnector(emailData);
 	}
-	
+
 	@Test
 	public void us3006ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(email, password);
-		
+
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
 		System.out.println(message);
 		System.out.println(orderModel.get(0).getOrderId());
 		System.out.println(orderModel.get(0).getTotalPrice());
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
-		
+
 		customVerifications.printErrors();
-	
+
 	}
 
 }

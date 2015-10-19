@@ -41,8 +41,8 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
-@WithTag(name = "US9", type = "backend")
-@Story(Application.Shop.HostessCart.class)
+@WithTag(name = "US9.1 Place Host Order With 40% Discount and JB Test", type = "Scenarios")
+@Story(Application.HostCart.US9_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US9001ValidateOrderBackOfficeTest extends BaseTest {
 
@@ -59,8 +59,8 @@ public class US9001ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public static List<HostBasicProductModel> productsList = new ArrayList<HostBasicProductModel>();
-	public static List<HostCartCalcDetailsModel> calcDetailsModelList = new ArrayList<HostCartCalcDetailsModel>();
+	private static List<HostBasicProductModel> productsList = new ArrayList<HostBasicProductModel>();
+	private static List<HostCartCalcDetailsModel> calcDetailsModelList = new ArrayList<HostCartCalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();

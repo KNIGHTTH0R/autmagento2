@@ -28,8 +28,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.commission.StylecoachPerformanceValidationWorkflow;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.Commission.NewIpLogicStylecoachPerformance.class)
+@WithTag(name = "US22.1 Verify SC Performance based on new IP logic on backend and frontend", type = "Scenarios")
+@Story(Application.NewIpLogicStylecoachPerformance.US22_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 

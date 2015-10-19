@@ -25,8 +25,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.1 Check reassigned duplicate contacts and customer associated contacts when new SC is selected", type = "Scenarios")
+@Story(Application.MassAction.US17_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US17001AddForthContactToStyleCoachTest extends BaseTest {
 

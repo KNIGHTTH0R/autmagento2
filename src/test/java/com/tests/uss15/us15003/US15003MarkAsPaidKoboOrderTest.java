@@ -15,7 +15,6 @@ import com.steps.backend.validations.StylistValidationSteps;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
@@ -24,8 +23,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US6", type = "backend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.3 Check SC kobo subscription and SFM order details in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003MarkAsPaidKoboOrderTest extends BaseTest {
 
@@ -42,9 +41,7 @@ public class US15003MarkAsPaidKoboOrderTest extends BaseTest {
 	@Steps
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
-
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 
 	@Before
 	public void setUp() throws Exception {
@@ -59,7 +56,7 @@ public class US15003MarkAsPaidKoboOrderTest extends BaseTest {
 	}
 
 	@Test
-	public void us12001MarkAsPaidKoboOrderTest() {
+	public void us15003MarkAsPaidKoboOrderTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();

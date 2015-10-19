@@ -22,8 +22,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US15", type = "backend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US15002CheckSubscriberMagentoConfigTest extends BaseTest {
 
@@ -36,7 +36,7 @@ public class US15002CheckSubscriberMagentoConfigTest extends BaseTest {
 	@Steps
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	CustomerFormModel dataModel;
+	private CustomerFormModel dataModel;
 
 	@Before
 	public void setUp() throws Exception {

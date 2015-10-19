@@ -20,8 +20,8 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "frontend")
-@Story(Application.Registration.Stylist.class)
+@WithTag(name = "US6.2b SC Registration Existing Customer Forbidden Country Test ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002bCreateCustomerTest extends BaseTest{
 
@@ -30,8 +30,8 @@ public class US6002bCreateCustomerTest extends BaseTest{
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel customerData;
-	public AddressModel customerAddressData;
+	private CustomerFormModel customerData;
+	private AddressModel customerAddressData;
 
 	@Before
 	public void setUp() throws Exception {

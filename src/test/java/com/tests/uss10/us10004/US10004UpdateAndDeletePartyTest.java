@@ -24,13 +24,12 @@ import com.steps.frontend.UpdatePartySteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.4 Update and Delete Party Test", type = "Scenarios")
+@Story(Application.StyleParty.US10_4.class)
 @RunWith(ThucydidesRunner.class)
 public class US10004UpdateAndDeletePartyTest extends BaseTest {
 	@Steps
@@ -44,8 +43,7 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 
-	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
+	private static UrlModel urlModel = new UrlModel();
 	private String username, password;
 
 	@Before
@@ -76,8 +74,6 @@ public class US10004UpdateAndDeletePartyTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10004CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-		dateModel = MongoReader.grabStylistDateModels("US10004CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-
 	}
 
 	@Test

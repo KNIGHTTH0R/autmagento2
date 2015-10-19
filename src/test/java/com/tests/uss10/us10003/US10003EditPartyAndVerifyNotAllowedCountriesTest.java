@@ -26,17 +26,16 @@ import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.3 Edit Party and Verify Not Allowed Countries Test", type = "Scenarios")
+@Story(Application.StyleParty.US10_3.class)
 @RunWith(ThucydidesRunner.class)
-public class US10003EditAndVerifyNotAllowedCountriesTest extends BaseTest {
+public class US10003EditPartyAndVerifyNotAllowedCountriesTest extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -48,11 +47,10 @@ public class US10003EditAndVerifyNotAllowedCountriesTest extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 
-	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
+	private static UrlModel urlModel = new UrlModel();
 	private String username, password;
 	boolean runTest = true;
-	public CustomerFormModel customerData;
+	private CustomerFormModel customerData;
 
 	@Before
 	public void setUp() throws Exception {
@@ -84,12 +82,11 @@ public class US10003EditAndVerifyNotAllowedCountriesTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10003CreatePartyWithNewContactHostTest" + SoapKeys.GRAB).get(0);
-		dateModel = MongoReader.grabStylistDateModels("US10003CreatePartyWithNewContactHostTest" + SoapKeys.GRAB).get(0);
 
 	}
 
 	@Test
-	public void us10003EditAndVerifyNotAllowedCountriesTest() {
+	public void us10003EditPartyAndVerifyNotAllowedCountriesTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

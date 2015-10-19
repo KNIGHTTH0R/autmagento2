@@ -17,15 +17,15 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "frontend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.1 Check simple subscriber in mailchimp", type = "Scenarios")
+@Story(Application.Newsletter.US15_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US15001SubscribeToNewsletterTest extends BaseTest {
 
 	@Steps
 	FooterSteps footerSteps;
 
-	public CustomerFormModel dataModel;
+	private CustomerFormModel dataModel;
 
 	@Before
 	public void setUp() throws Exception {

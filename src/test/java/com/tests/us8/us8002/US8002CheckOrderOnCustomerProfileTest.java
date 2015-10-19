@@ -29,8 +29,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US8", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
+@WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
+@Story(Application.RegularCart.US8_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US8002CheckOrderOnCustomerProfileTest extends BaseTest {
 

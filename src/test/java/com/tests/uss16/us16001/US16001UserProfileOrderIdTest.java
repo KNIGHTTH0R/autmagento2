@@ -29,9 +29,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US16", type = "frontend")
-@Story(Application.Shop.BorrowCart.class)
+@WithTag(name = "US16.1 SC borrow products Test", type = "Scenarios")
+@Story(Application.BorrowCart.US16_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US16001UserProfileOrderIdTest extends BaseTest{
 	

@@ -47,8 +47,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.KoboRegistration.class)
+@WithTag(name = "US7.9 Kobo Registration Not On Voucher Owner Context Test ", type = "Scenarios")
+@Story(Application.KoboRegistration.US7_9.class)
 @RunWith(ThucydidesRunner.class)
 public class US7009KoboRegOnNotVoucherOwnerContextTest extends BaseTest {
 

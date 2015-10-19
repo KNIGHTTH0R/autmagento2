@@ -8,7 +8,7 @@ import com.poc.ActivateBuy3Get1ForShopForMyselfTest;
 import com.poc.DeactivateBuy3Get1ForHostTest;
 import com.poc.DeactivateBuy3Get1ForRegularTest;
 import com.poc.DeactivateBuy3Get1ForShopForMyself;
-import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
+import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 
 @SuiteClasses({
 	
@@ -69,6 +69,7 @@ import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 	
 	US11001Suite.class,
 	US11002Suite.class,
+	US11003VerifyProductsInPlaceACustomerOrderModal.class,
 	
 	US12001Suite.class,
 	
@@ -86,7 +87,7 @@ import com.tests.uss18.US18001VerifyProductsInPlaceACustomerOrderModal;
 	
 //	US17001Suite.class,
 	
-	US18001VerifyProductsInPlaceACustomerOrderModal.class,
+	
 	
 //	US19001Suite.class,
 //	US19002Suite.class,

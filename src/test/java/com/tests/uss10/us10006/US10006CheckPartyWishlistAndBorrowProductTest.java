@@ -33,7 +33,6 @@ import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
@@ -46,8 +45,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
 import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
+@Story(Application.StyleParty.US10_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 
@@ -74,12 +73,10 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
+	private static UrlModel urlModel = new UrlModel();
 	private String username, password;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
-	public static List<BorrowProductModel> borrowCartProductsList = new ArrayList<BorrowProductModel>();
+	private static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
 	private String productName;
 	private static String billingAddress;
 	private static String shippingValue;

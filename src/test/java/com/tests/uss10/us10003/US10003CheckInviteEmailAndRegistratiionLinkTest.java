@@ -16,15 +16,15 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "external")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.3 Edit Party and Verify Not Allowed Countries Test", type = "Scenarios")
+@Story(Application.StyleParty.US10_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US10003CheckInviteEmailAndRegistratiionLinkTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
 	
-	public String stylistEmail;
+	private String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {
@@ -39,7 +39,7 @@ public class US10003CheckInviteEmailAndRegistratiionLinkTest extends BaseTest {
 	}
 
 	@Test
-	public void us10003CheckInviteEmailTest() {
+	public void us10003CheckInviteEmailAndRegistratiionLinkTest() {
 		emailClientSteps.openMailinator();
 		emailClientSteps.validateThatEmailIsReceivedAndClickRegister(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.INVITE_EMAIL_SUBJECT);
 

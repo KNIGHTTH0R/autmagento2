@@ -18,8 +18,8 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "backend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.6b Landing Page Registration Selected SC Not Pref Country Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US7006bCheckCustomerActivationTest extends BaseTest {
 
@@ -30,9 +30,8 @@ public class US7006bCheckCustomerActivationTest extends BaseTest {
 	@Steps 
 	public StylistValidationSteps stylistValidationSteps;
 
-	public String clientName;
-	public String grabStatus;
-	public String expectedStatus;
+	private String clientName;
+	private String grabStatus;
 
 	@Before
 	public void setUp() throws Exception {
@@ -55,11 +54,7 @@ public class US7006bCheckCustomerActivationTest extends BaseTest {
 		backEndSteps.searchForEmail(clientName);
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
-
-//		System.out.println("grabStatus: " + grabStatus);
-//		System.out.println("expectedStatus: " + expectedStatus);
 		stylistValidationSteps.validateStatus(grabStatus, ConfigConstants.CONFIRMED);
-		
 		customVerifications.printErrors();
 	}
 

@@ -27,8 +27,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "frontend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
+@Story(Application.StyleParty.US10_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006VerifyDashboardAndJbHistoryCompleteOrderTest extends BaseTest {
 
@@ -79,7 +79,7 @@ public class US10006VerifyDashboardAndJbHistoryCompleteOrderTest extends BaseTes
 	}
 
 	@Test
-	public void us15004VerifyDashboardAndJbHistoryCompleteOrderTest() {
+	public void us10006VerifyDashboardAndJbHistoryCompleteOrderTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

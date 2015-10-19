@@ -37,8 +37,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
+@Story(Application.StyleParty.US10_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 
@@ -52,10 +52,10 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 	public AddRegularProductsWorkflow addRegularProductsWorkflow;
 
 	private String username, password;
-	public static List<RegularBasicProductModel> allProductsList = new ArrayList<RegularBasicProductModel>();
+	private static List<RegularBasicProductModel> allProductsList = new ArrayList<RegularBasicProductModel>();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
-	public static UrlModel urlModel = new UrlModel();
+	private static UrlModel urlModel = new UrlModel();
 
 	@Before
 	public void setUp() throws Exception {

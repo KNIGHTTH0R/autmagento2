@@ -33,8 +33,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 
-@WithTag(name = "US12", type = "frontend")
-@Story(Application.KoboSubscription.class)
+@WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
+@Story(Application.KoboSubscription.US12_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001KoboSubscriptionTest extends BaseTest {
 
@@ -60,7 +60,8 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 	private CreditCardModel creditCardData = new CreditCardModel();
 
 	@Before

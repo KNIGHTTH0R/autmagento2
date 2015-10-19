@@ -17,7 +17,6 @@ import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
@@ -29,20 +28,19 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
 
-@WithTag(name = "US13", type = "frontend")
-@Story(Application.Distribution.HostLead.class)
+@WithTag(name = "US13.3 Distribution to party host lead qualified SC", type = "Scenarios")
+@Story(Application.Distribution.US13_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US13003HostLeadDistributionTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 
-	public CustomerFormModel dataModel;
-	public AddressModel addressModel;
-	public StylistDataModel validationModel;
-	CoordinatesModel coordinatesModel = new CoordinatesModel();
-	RandomAddress randomAddress;
-	List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
+	private CustomerFormModel dataModel;
+	private AddressModel addressModel;
+	private CoordinatesModel coordinatesModel = new CoordinatesModel();
+	private RandomAddress randomAddress;
+	private List<DBStylistModel> compatibleStylistList = new ArrayList<DBStylistModel>();
 
 	@Before
 	public void setUp() throws Exception {

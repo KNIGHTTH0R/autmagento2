@@ -17,15 +17,15 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "external")
-@Story(Application.KoboRegistration.class)
+@WithTag(name = "US7.8 Kobo Registration on Master Not Pref Country Test ", type = "Scenarios")
+@Story(Application.KoboRegistration.US7_8.class)
 @RunWith(ThucydidesRunner.class)
 public class US7008CheckReceivedEmailsTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
 
-	public String stylistEmail;
+	private String stylistEmail;
 	private static OrderModel orderModel = new OrderModel();
 
 	@Before

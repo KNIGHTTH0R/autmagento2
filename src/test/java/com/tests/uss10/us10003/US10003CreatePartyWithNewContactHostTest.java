@@ -34,8 +34,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.3 Edit Party and Verify Not Allowed Countries Test", type = "Scenarios")
+@Story(Application.StyleParty.US10_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 
@@ -53,13 +53,13 @@ public class US10003CreatePartyWithNewContactHostTest extends BaseTest {
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
 
-	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
+	private static UrlModel urlModel = new UrlModel();
+	private static DateModel dateModel = new DateModel();
 	private String username, password;
 
-	public CustomerFormModel customerData;
-	public CustomerFormModel inviteData;
-	public AddressModel addressData;
+	private CustomerFormModel customerData;
+	private CustomerFormModel inviteData;
+	private AddressModel addressData;
 
 	@Before
 	public void setUp() throws Exception {

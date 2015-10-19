@@ -44,8 +44,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3", type = "frontend")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US3.7 Shop for myself no valid VAT and no SMB billing and shipping AT", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_7.class)
 @RunWith(ThucydidesRunner.class)
 public class US3007SfmNoVatNoSmbBillingShippingAtTest extends BaseTest {
 	
@@ -116,12 +116,6 @@ public class US3007SfmNoVatNoSmbBillingShippingAtTest extends BaseTest {
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
-			
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

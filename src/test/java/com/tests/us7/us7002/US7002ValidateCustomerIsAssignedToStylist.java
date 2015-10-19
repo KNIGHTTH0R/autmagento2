@@ -16,8 +16,8 @@ import com.tests.BaseTest;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.2 Regular Customer Registration on Context Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US7002ValidateCustomerIsAssignedToStylist extends BaseTest {
 
@@ -28,9 +28,9 @@ public class US7002ValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Steps
 	public DashboardSteps dashboardSteps;
 
-	public String stylistEmail;
-	public String stylistPassword;
-	public String context;
+	private String stylistEmail;
+	private String stylistPassword;
+	private String context;
 
 	@Before
 	public void setUp() throws Exception {

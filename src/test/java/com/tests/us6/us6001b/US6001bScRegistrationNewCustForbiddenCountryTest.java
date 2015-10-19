@@ -16,7 +16,6 @@ import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -38,11 +37,10 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerification;
 
-	public CustomerFormModel customerFormData;
-	public DateModel customerFormDate = new DateModel();
-	public DateModel birthDate = new DateModel();
-	public AddressModel customerFormAddress;
-	public StylistDataModel validationModel;
+	private CustomerFormModel customerFormData;
+	private DateModel customerFormDate = new DateModel();
+	private DateModel birthDate = new DateModel();
+	private AddressModel customerFormAddress;
 
 	@Before
 	public void setUp() throws Exception {

@@ -32,7 +32,6 @@ import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
@@ -47,8 +46,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.Commission.PartyPerformance.class)
+@WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
+@Story(Application.PartyPerformance.US10_8.class)
 @RunWith(ThucydidesRunner.class)
 public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 
@@ -84,8 +83,7 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 	private String username, password, customerName;
 	private PartyBonusCalculationModel partyBonusCalculationModel = new PartyBonusCalculationModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-	public static UrlModel urlModel = new UrlModel();
+	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 
 	@Before

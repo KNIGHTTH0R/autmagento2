@@ -18,8 +18,8 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "backend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
+@Story(Application.KoboSubscription.US12_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 
@@ -27,6 +27,7 @@ public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
+	
 	private static OrderModel orderModel = new OrderModel();
 
 	@Before
@@ -37,7 +38,7 @@ public class US12001MarkAsPaidKoboOrderTest extends BaseTest {
 	}
 
 	@Test
-	public void us12001MarkAsPaidKoboOrderTest2() throws Exception {
+	public void us12001MarkAsPaidKoboOrderTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();

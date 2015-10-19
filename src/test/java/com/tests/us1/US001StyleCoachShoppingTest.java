@@ -43,11 +43,11 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US1 Shop for myself")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US1 Shop for myself", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US1.class)
 @RunWith(ThucydidesRunner.class)
 public class US001StyleCoachShoppingTest extends BaseTest {
-	
+
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -74,15 +74,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	private String username, password;
 	private String billingAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	
-	//Test data Credit card details
-	private static String cardNumber;
-	private static String cardName;
-	private static String cardMonth;
-	private static String cardYear;
-	private static String cardCVC;
 	private static String taxClass;
-	
+
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -91,19 +84,19 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public void setUp() {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
-		
+
 		genProduct1 = ApiCalls.createProductModel();
 		genProduct1.setPrice("129.00");
 		ApiCalls.createApiProduct(genProduct1);
-		
+
 		genProduct2 = ApiCalls.createProductModel();
 		genProduct2.setPrice("79.00");
 		ApiCalls.createApiProduct(genProduct2);
-		
+
 		genProduct3 = ApiCalls.createMarketingProductModel();
 		genProduct3.setPrice("84.00");
 		ApiCalls.createApiProduct(genProduct3);
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -113,12 +106,7 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
-			
-			cardNumber = prop.getProperty("cardNumber");
-			cardName = prop.getProperty("cardName");
-			cardMonth = prop.getProperty("cardMonth");
-			cardYear = prop.getProperty("cardYear");
-			cardCVC = prop.getProperty("cardCVC");
+
 			taxClass = prop.getProperty("taxClass");
 
 		} catch (IOException ex) {
@@ -133,12 +121,6 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 			}
 		}
 
-		creditCardData.setCardNumber(cardNumber);
-		creditCardData.setCardName(cardName);
-		creditCardData.setMonthExpiration(cardMonth);
-		creditCardData.setYearExpiration(cardYear);
-		creditCardData.setCvcNumber(cardCVC);
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
@@ -152,15 +134,15 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
-		
-		BasicProductModel productData;		
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_50);
+
+		BasicProductModel productData;
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_50);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
 		CartCalculator.calculateJMDiscounts("0", "0", taxClass, "0");
 
@@ -170,18 +152,18 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-		
+
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
-		
+
 		cartSteps.grabTotals();
-		
+
 		cartSteps.goToShipping();
 
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
-		
+
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
@@ -199,15 +181,14 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		
-		validationWorkflows.setBillingShippingAddress(billingAddress,billingAddress);
+
+		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		validationWorkflows.performCartValidations();
-		
+
 		customVerifications.printErrors();
 
 	}
-	
-	
+
 	@After
 	public void saveData() {
 		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);

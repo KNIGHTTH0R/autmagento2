@@ -60,8 +60,8 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
-	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
+	private static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
+	private static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();

@@ -16,15 +16,15 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US13", type = "external")
-@Story(Application.DykscPlzAndCountry.StyleCoachLead.class)
+@WithTag(name = "US13.5 DYKSC Assignation to SC qualified lead SC", type = "Scenarios")
+@Story(Application.Distribution.US13_5.class)
 @RunWith(ThucydidesRunner.class)
 public class US13005ConfirmCustomerTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
 
-	public String stylistEmail;
+	private String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {

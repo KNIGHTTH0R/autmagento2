@@ -18,39 +18,32 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.7 Widget Registration Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_7.class)
 @RunWith(ThucydidesRunner.class)
-public class US7007UserRegistrationWidgetRegistrationTest extends BaseTest{
-	
+public class US7007WidgetUserRegistrationTest extends BaseTest {
+
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private CustomerFormModel dataModel;
 	private String memberCode;
-	
 
 	@Before
 	public void setUp() throws Exception {
-		// Generate data for this test run
+
 		dataModel = new CustomerFormModel();
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		memberCode = "123aa11";
 	}
 
-	/**
-	 * FrontEnd steps in this test
-	 * 
-	 * @throws Exception
-	 */
 	@Test
-	public void us7007UserRegistrationWidgetRegistrationTest() {
+	public void us7007WidgetUserRegistrationTest() {
 
 		customerRegistrationSteps.fillWidgetRegistrationForm(memberCode, dataModel);
-		
+
 		customVerifications.printErrors();
 	}
 
@@ -58,6 +51,5 @@ public class US7007UserRegistrationWidgetRegistrationTest extends BaseTest{
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 	}
-	
-	
+
 }

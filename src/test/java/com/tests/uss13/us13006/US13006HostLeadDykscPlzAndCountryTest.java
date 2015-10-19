@@ -17,7 +17,6 @@ import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DykscSeachModel;
@@ -31,8 +30,8 @@ import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
 import com.workflows.frontend.DysksWorkflows;
 
-@WithTag(name = "US13", type = "frontend")
-@Story(Application.DykscPlzAndCountry.HostLead.class)
+@WithTag(name = "US13.6 DYKSC Assignation to party host qualified lead SC", type = "Scenarios")
+@Story(Application.Distribution.US13_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US13006HostLeadDykscPlzAndCountryTest extends BaseTest {
 
@@ -41,13 +40,12 @@ public class US13006HostLeadDykscPlzAndCountryTest extends BaseTest {
 	@Steps
 	public DysksWorkflows dysksWorkflows;
 
-	public CustomerFormModel dataModel;
-	public AddressModel addressModel;
-	public StylistDataModel validationModel;
-	CoordinatesModel coordinatesModel = new CoordinatesModel();
-	RandomAddress randomAddress;
-	List<DBStylistModel> searchByPlzAndCountryStylistList = new ArrayList<DBStylistModel>();
-	List<DykscSeachModel> dysksStylecoachesList = new ArrayList<DykscSeachModel>();
+	private CustomerFormModel dataModel;
+	private AddressModel addressModel;
+	private CoordinatesModel coordinatesModel = new CoordinatesModel();
+	private RandomAddress randomAddress;
+	private List<DBStylistModel> searchByPlzAndCountryStylistList = new ArrayList<DBStylistModel>();
+	private List<DykscSeachModel> dysksStylecoachesList = new ArrayList<DykscSeachModel>();
 
 	@Before
 	public void setUp() throws Exception {

@@ -42,8 +42,8 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
 
-@WithTag(name = "US3", type = "backend")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US3.7 Shop for myself no valid VAT and no SMB billing and shipping AT", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_7.class)
 @RunWith(ThucydidesRunner.class)
 public class US3007ValidateOrderBackOfficeTest extends BaseTest {
 

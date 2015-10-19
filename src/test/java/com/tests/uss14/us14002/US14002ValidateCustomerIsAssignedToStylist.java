@@ -23,8 +23,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US13", type = "frontend")
-@Story(Application.Distribution.StyleCoachLead.class)
+@WithTag(name = "US14.2 Distribution during checkout to party host lead qualified SC", type = "Scenarios")
+@Story(Application.DistributionDuringCheckout.US14_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US14002ValidateCustomerIsAssignedToStylist extends BaseTest {
 

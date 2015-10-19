@@ -36,8 +36,8 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.borrowCart.BorrowCartOrderProductsWorkflows;
 
-@WithTag(name = "US16", type = "backend")
-@Story(Application.Shop.BorrowCart.class)
+@WithTag(name = "US16.1 SC borrow products Test", type = "Scenarios")
+@Story(Application.BorrowCart.US16_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US16001ValidateOrderBackOfficeTest extends BaseTest {
 	
@@ -54,8 +54,8 @@ public class US16001ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public static List<BorrowProductModel> productsList = new ArrayList<BorrowProductModel>();
-	public static List<BorrowCartCalcDetailsModel> calcDetailsModelList = new ArrayList<BorrowCartCalcDetailsModel>();
+	private static List<BorrowProductModel> productsList = new ArrayList<BorrowProductModel>();
+	private static List<BorrowCartCalcDetailsModel> calcDetailsModelList = new ArrayList<BorrowCartCalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();

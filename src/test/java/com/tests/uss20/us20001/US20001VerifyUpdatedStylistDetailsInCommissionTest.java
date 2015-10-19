@@ -20,8 +20,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.commission.CommissionStylistValidationWorkflows;
 
-@WithTag(name = "US20", type = "external")
-@Story(Application.Commission.StylecoachInfo.class)
+@WithTag(name = "US20.1 Verify new SC and updated SC details in Commission", type = "Scenarios")
+@Story(Application.StylecoachInfo.US20_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US20001VerifyUpdatedStylistDetailsInCommissionTest extends BaseTest {
 

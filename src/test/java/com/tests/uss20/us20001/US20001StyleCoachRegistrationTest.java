@@ -23,8 +23,8 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US20", type = "frontend")
-@Story(Application.Commission.StylecoachInfo.class)
+@WithTag(name = "US20.1 Verify new SC and updated SC details in Commission", type = "Scenarios")
+@Story(Application.StylecoachInfo.US20_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US20001StyleCoachRegistrationTest extends BaseTest {
 

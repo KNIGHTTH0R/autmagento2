@@ -30,9 +30,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-
-@WithTag(name = "US6", type = "frontend")
-@Story(Application.Registration.Stylist.class)
+@WithTag(name = "US6.2b SC Registration Existing Customer Forbidden Country Test ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	
@@ -51,12 +50,10 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public static DateModel formDate = new DateModel();
-	
-	public StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
-	
-	public CustomerFormModel stylistData = new CustomerFormModel("");
-	public String birthDate;
+	private static DateModel formDate = new DateModel();
+	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
+	private CustomerFormModel stylistData = new CustomerFormModel("");
+	private String birthDate;
 
 	@Before
 	public void setUp() throws Exception {

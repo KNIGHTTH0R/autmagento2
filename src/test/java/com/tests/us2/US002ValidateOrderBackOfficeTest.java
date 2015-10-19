@@ -40,8 +40,8 @@ import com.tools.requirements.Application;
 import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
 
-@WithTag(name = "US2 Shop for myself cart with segmentation logic")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US2 Shop for myself cart with segmentation logic",type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US2.class)
 @RunWith(ThucydidesRunner.class)
 public class US002ValidateOrderBackOfficeTest extends BaseTest {
 

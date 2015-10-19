@@ -23,24 +23,22 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US12", type = "frontend")
-@Story(Application.KoboSubscription.class)
+@WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
+@Story(Application.KoboSubscription.US12_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001VerifyStylistKoboStatusAfterSubscriptionTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
-
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
 	public MyBusinessSteps myBusinessSteps;
-
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
-	String coboCode;
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	private String coboCode;
 
 	@Before
 	public void setUp() {

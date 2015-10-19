@@ -1,4 +1,4 @@
-package com.tests.uss18;
+package com.tests.uss11.us11003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,10 +29,10 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "frontend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US11.3 Verify products in place a customer order modal window", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_3.class)
 @RunWith(ThucydidesRunner.class)
-public class US18001VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
+public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -48,11 +48,7 @@ public class US18001VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 	public OrderForCustomerCartSteps orderForCustomerCartSteps;
 
 	private String username, password, customerName;
-
 	private ProductDetailedModel genProduct1;
-
-	// private ProductDetailedModel genProduct2;
-	// private ProductDetailedModel genProduct3;
 
 	@Before
 	public void setUp() throws Exception {
@@ -61,16 +57,6 @@ public class US18001VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 		genProduct1.setPrice("89.00");
 		genProduct1.setIp("75");
 		ApiCalls.createApiProduct(genProduct1);
-
-		// genProduct2 = ApiCalls.createBundleProductModel();
-		// genProduct2.setPrice("89.00");
-		// genProduct2.setIp("75");
-		// ApiCalls.createApiProduct(genProduct2);
-		//
-		// genProduct3 = ApiCalls.createConfigurableProductModel();
-		// genProduct3.setPrice("89.00");
-		// genProduct3.setIp("75");
-		// ApiCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -102,7 +88,7 @@ public class US18001VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 	}
 
 	@Test
-	public void us18001OrderForCustomerTest() {
+	public void us11003VerifyProductsInPlaceACustomerOrderModal() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

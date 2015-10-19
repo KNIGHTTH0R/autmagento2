@@ -123,12 +123,6 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 			voucherCode = prop.getProperty("voucherCode");
 			voucherValue = prop.getProperty("voucherValue");
 
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
-
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {

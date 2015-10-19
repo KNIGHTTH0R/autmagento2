@@ -17,15 +17,15 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US12", type = "external")
-@Story(Application.MassAction.class)
+@WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
+@Story(Application.KoboSubscription.US12_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001ConfirmCustomerTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
 
-	public String stylistEmail;
+	private String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {

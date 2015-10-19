@@ -36,8 +36,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.commission.CommissionPartyPerformanceValidationWorkflows;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.Commission.PartyPerformance.class)
+@WithTag(name = "US10.7 Check party and follow up party performance and bonuses", type = "Scenarios")
+@Story(Application.PartyPerformance.US10_7.class)
 @RunWith(ThucydidesRunner.class)
 public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
@@ -53,9 +53,10 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public CustomVerification customVerifications;
-	public static UrlModel urlModel = new UrlModel();
-	ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
-	List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
+	
+	private static UrlModel urlModel = new UrlModel();
+	private ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
+	private List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
 	private String username, password;
 
 	@Before

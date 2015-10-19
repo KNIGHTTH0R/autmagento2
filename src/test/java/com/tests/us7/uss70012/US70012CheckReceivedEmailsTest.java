@@ -17,15 +17,15 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "external")
-@Story(Application.KoboCampaign.class)
+@WithTag(name = "US7.12 Kobo Campaign Registration On Context Test ", type = "Scenarios")
+@Story(Application.KoboCampaign.US7_11.class)
 @RunWith(ThucydidesRunner.class)
 public class US70012CheckReceivedEmailsTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
 
-	public String stylistEmail;
+	private String stylistEmail;
 	private static OrderModel orderModel = new OrderModel();
 
 	@Before
@@ -37,7 +37,7 @@ public class US70012CheckReceivedEmailsTest extends BaseTest {
 	}
 
 	@Test
-	public void us70011CheckReceivedEmailsTest() {
+	public void us70012CheckReceivedEmailsTest() {
 
 		emailClientSteps.openMailinator();
 		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), orderModel.getOrderId());

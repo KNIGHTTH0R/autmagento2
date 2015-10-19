@@ -23,8 +23,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.KoboCampaign.class)
+@WithTag(name = "US7.12 Kobo Campaign Registration On Context Test ", type = "Scenarios")
+@Story(Application.KoboCampaign.US7_11.class)
 @RunWith(ThucydidesRunner.class)
 public class US70012ValidateCustomerIsAssignedToStylist extends BaseTest {
 
@@ -35,9 +35,9 @@ public class US70012ValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Steps
 	public DashboardSteps dashboardSteps;
 
-	public String stylistEmail;
-	public String stylistPassword;
-	public String expectedStyleCoach;
+	private String stylistEmail;
+	private String stylistPassword;
+	private String expectedStyleCoach;
 
 	@Before
 	public void setUp() throws Exception {
@@ -49,6 +49,7 @@ public class US70012ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us70012.properties");
 			prop.load(input);
+			
 			expectedStyleCoach = prop.getProperty("expectedStyleCoach");	
 
 		} catch (IOException ex) {
@@ -82,7 +83,7 @@ public class US70012ValidateCustomerIsAssignedToStylist extends BaseTest {
 		System.out.println(dashboardSteps.getStyleCoachFirstNameFromProfile());
 	
 		dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), dashboardSteps.getStyleCoachFirstNameFromProfile());		
-
+		dashboardSteps.validateCustomerIsAssignedToStyleCoach(expectedStyleCoach, dashboardSteps.getStyleCoachFullNameFromProfile());
 	}
 
 }

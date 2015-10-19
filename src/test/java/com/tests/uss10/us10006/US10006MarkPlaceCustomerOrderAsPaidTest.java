@@ -17,8 +17,8 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "backend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
+@Story(Application.StyleParty.US10_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US10006MarkPlaceCustomerOrderAsPaidTest extends BaseTest {
 
@@ -26,6 +26,7 @@ public class US10006MarkPlaceCustomerOrderAsPaidTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
+	
 	private static OrderModel orderModel = new OrderModel();
 
 	@Before
@@ -35,7 +36,7 @@ public class US10006MarkPlaceCustomerOrderAsPaidTest extends BaseTest {
 	}
 
 	@Test
-	public void us15004MarkAsPaidOrderTest() throws Exception {
+	public void us10006MarkPlaceCustomerOrderAsPaidTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSalesOrders();

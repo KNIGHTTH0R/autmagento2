@@ -16,15 +16,15 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "external")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.1 Regular Customer Registration on Master Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US7001ConfirmCustomerTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
 
-	public String stylistEmail;
+	private String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {

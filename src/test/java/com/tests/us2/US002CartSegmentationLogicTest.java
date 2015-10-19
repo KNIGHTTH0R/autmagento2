@@ -43,8 +43,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US2 Shop for myself cart with segmentation logic")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US2 Shop for myself cart with segmentation logic",type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US2.class)
 @RunWith(ThucydidesRunner.class)
 public class US002CartSegmentationLogicTest extends BaseTest {
 
@@ -74,13 +74,6 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 
 	private String username, password;
-
-
-	private static String cardNumber;
-	private static String cardName;
-	private static String cardMonth;
-	private static String cardYear;
-	private static String cardCVC;
 	private static String taxClass;
 
 	private ProductDetailedModel genProduct1;
@@ -122,12 +115,6 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-
-			cardNumber = prop.getProperty("cardNumber");
-			cardName = prop.getProperty("cardName");
-			cardMonth = prop.getProperty("cardMonth");
-			cardYear = prop.getProperty("cardYear");
-			cardCVC = prop.getProperty("cardCVC");
 			taxClass = prop.getProperty("taxClass");
 
 		} catch (IOException ex) {
@@ -141,12 +128,6 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 				}
 			}
 		}
-
-		creditCardData.setCardNumber(cardNumber);
-		creditCardData.setCardName(cardName);
-		creditCardData.setMonthExpiration(cardMonth);
-		creditCardData.setYearExpiration(cardYear);
-		creditCardData.setCvcNumber(cardCVC);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);

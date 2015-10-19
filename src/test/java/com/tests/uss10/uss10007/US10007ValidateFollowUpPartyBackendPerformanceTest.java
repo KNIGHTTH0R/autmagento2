@@ -22,8 +22,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.BackendPartyPerformanceValidationWorkflows;
 
-@WithTag(name = "US10", type = "backend")
-@Story(Application.Commission.PartyPerformance.class)
+@WithTag(name = "US10.7 Check party and follow up party performance and bonuses", type = "Scenarios")
+@Story(Application.PartyPerformance.US10_7.class)
 @RunWith(ThucydidesRunner.class)
 public class US10007ValidateFollowUpPartyBackendPerformanceTest extends BaseTest {
 
@@ -31,33 +31,34 @@ public class US10007ValidateFollowUpPartyBackendPerformanceTest extends BaseTest
 	public BackEndSteps backEndSteps;
 	@Steps
 	public BackendPartyPerformanceValidationWorkflows backendPartyPerformanceValidationWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 	@Steps
 	public PartyListBackendSteps partyListBackendSteps;
-	ClosedPartyPerformanceModel expectedModel;
-	public static UrlModel urlModel = new UrlModel();
-	String partyId;
+	
+	private ClosedPartyPerformanceModel expectedModel;
+	private static UrlModel urlModel = new UrlModel();
+	private String partyId;
 
 	@Before
 	public void setUp() {
 		urlModel = MongoReader.grabUrlModels("US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest").get(0);
 		expectedModel = MongoReader.grabClosedPartyPerformanceModel("US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest").get(0);
 		PrintUtils.printClosedPartyModel(expectedModel);
-		//TODO make a method or smth for this
+		// TODO make a method or smth for this
 		String[] parts = urlModel.getUrl().split("/");
 		partyId = parts[parts.length - 1];
 		System.out.println("party Id:" + partyId);
 	}
 
 	@Test
-	public void us10007ValidatePartyBackendPerformanceTest() {
+	public void us10007ValidateFollowUpPartyBackendPerformanceTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStyleParties();
 		partyListBackendSteps.openPartyDetails(partyId);
 		PartyBackendPerformanceModel grabbedModel = partyListBackendSteps.getPartyBackendPerformance();
 		backendPartyPerformanceValidationWorkflows.validateClosedPartyPerformance(expectedModel, grabbedModel);
-		
+
 		customVerifications.printErrors();
 	}
 

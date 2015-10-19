@@ -26,8 +26,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "frontend")
-@Story(Application.Registration.Stylist.class)
+@WithTag(name = "US6.3 Verify all SC Registration Links Test ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US6003VerifyAllScRegistrationLinksTest extends BaseTest {
 

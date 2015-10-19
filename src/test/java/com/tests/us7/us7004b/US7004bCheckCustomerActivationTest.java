@@ -18,21 +18,20 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "backend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.4b Regular Customer Registration from Landing Page Not Pref Country Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_4.class)
 @RunWith(ThucydidesRunner.class)
 public class US7004bCheckCustomerActivationTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	@Steps 
+	@Steps
 	public StylistValidationSteps stylistValidationSteps;
 
-	public String clientName;
-	public String grabStatus;
-	public String expectedStatus;
+	private String clientName;
+	private String grabStatus;
 
 	@Before
 	public void setUp() throws Exception {
@@ -43,8 +42,6 @@ public class US7004bCheckCustomerActivationTest extends BaseTest {
 			System.out.println(clientName);
 		} else
 			System.out.println("The database has no entries");
-
-		
 	}
 
 	@Test
@@ -56,7 +53,6 @@ public class US7004bCheckCustomerActivationTest extends BaseTest {
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
 		stylistValidationSteps.validateStatus(grabStatus, ConfigConstants.CONFIRMED);
-		
 		customVerifications.printErrors();
 	}
 

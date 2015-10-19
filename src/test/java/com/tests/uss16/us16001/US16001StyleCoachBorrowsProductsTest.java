@@ -46,8 +46,8 @@ import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
 import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 
-@WithTag(name = "US16", type = "frontend")
-@Story(Application.Shop.BorrowCart.class)
+@WithTag(name = "US16.1 SC borrow products Test", type = "Scenarios")
+@Story(Application.BorrowCart.US16_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 

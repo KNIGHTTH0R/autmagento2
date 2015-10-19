@@ -18,11 +18,10 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US7", type = "external")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.7 Widget Registration Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_7.class)
 @RunWith(ThucydidesRunner.class)
-public class US7007EmailActivationTest extends BaseTest{
+public class US7007EmailActivationTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -30,27 +29,25 @@ public class US7007EmailActivationTest extends BaseTest{
 	public EmailSteps emailSteps;
 	@Steps
 	public CustomVerification customVerifications;
-	
-	public String clientName;
-	public String validateMessageMail;
-	
+
+	private String clientName;
+
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US7007UserRegistrationWidgetRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7007WidgetUserRegistrationTest").size();
 		if (size > 0) {
-			clientName = MongoReader.grabCustomerFormModels("US7007UserRegistrationWidgetRegistrationTest").get(0).getEmailName();
+			clientName = MongoReader.grabCustomerFormModels("US7007WidgetUserRegistrationTest").get(0).getEmailName();
 			System.out.println(clientName);
 		} else
 			System.out.println("The database has no entries");
 	}
-	
+
 	@Test
-	public void us7006EmailActivationTest() {
+	public void us7007EmailActivationTest() {
 
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
-	
-	
+
 }

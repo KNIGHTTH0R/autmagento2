@@ -16,15 +16,15 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "external")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.4 Update and Delete Party Test", type = "Scenarios")
+@Story(Application.StyleParty.US10_4.class)
 @RunWith(ThucydidesRunner.class)
 public class US10004CheckInviteEmailTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
 	
-	public String stylistEmail;
+	private String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {

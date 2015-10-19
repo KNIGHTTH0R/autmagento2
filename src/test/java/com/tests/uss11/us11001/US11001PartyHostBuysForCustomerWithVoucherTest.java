@@ -31,7 +31,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
@@ -47,8 +46,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US11", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
+@WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
@@ -87,8 +86,7 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 	private String voucherValue;
 
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-	public static UrlModel urlModel = new UrlModel();
+	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -132,12 +130,6 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
 			voucherCode = prop.getProperty("voucherCode");
 			voucherValue = prop.getProperty("voucherValue");
-
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

@@ -22,7 +22,8 @@ public class US6001CheckStylistPreferedWebsiteAndLanguage extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 
 	@Before
 	public void setUp() throws Exception {

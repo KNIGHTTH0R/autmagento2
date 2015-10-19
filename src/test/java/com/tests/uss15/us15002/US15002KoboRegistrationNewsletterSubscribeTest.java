@@ -47,8 +47,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 
-@WithTag(name = "US15", type = "frontend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 
@@ -80,7 +80,6 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private CustomerFormModel dataModel;
-
 	private AddressModel addressModel;
 	private String koboCode;
 	private CreditCardModel creditCardData = new CreditCardModel();

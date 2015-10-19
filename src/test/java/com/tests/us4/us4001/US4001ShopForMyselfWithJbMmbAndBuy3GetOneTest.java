@@ -43,11 +43,11 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US4", type = "frontend")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US4.1 Shop for myself with JB,MMB and Buy 3 get 1 for 50 %", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US4_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
-	
+
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -68,9 +68,9 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private String username, password;
 	private String billingAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
@@ -79,11 +79,6 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 	private static String shippingValue;
 	private static String shippingValueForLessThan150;
 	private static String taxClass;
-	private static String cardNumber;
-	private static String cardName;
-	private static String cardMonth;
-	private static String cardYear;
-	private static String cardCVC;	
 
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
@@ -120,12 +115,6 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 			shippingValueForLessThan150 = prop.getProperty("shippingPriceForLessThan150");
 			taxClass = prop.getProperty("taxClass");
 
-			cardNumber = prop.getProperty("cardNumber");
-			cardName = prop.getProperty("cardName");
-			cardMonth = prop.getProperty("cardMonth");
-			cardYear = prop.getProperty("cardYear");
-			cardCVC = prop.getProperty("cardCVC");
-
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -138,17 +127,10 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 			}
 		}
 
-		creditCardData.setCardNumber(cardNumber);
-		creditCardData.setCardName(cardName);
-		creditCardData.setMonthExpiration(cardMonth);
-		creditCardData.setYearExpiration(cardYear);
-		creditCardData.setCvcNumber(cardCVC);
-
-		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
-	}	
+	}
 
 	@Test
 	public void us4001ShopForMyselfWithJbMmbAndBuy3GetOneTest() {
@@ -171,30 +153,30 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		CartCalculator.productsListMarketing.add(productData);
 
 		headerSteps.openCartPreview();
-		headerSteps.goToCart();	
-		
+		headerSteps.goToCart();
+
 		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-		
+
 		CartCalculator.calculate3P1Rule(jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValueForLessThan150);
 		DataGrabber.addAll25AndMmProducts();
-		
+
 		cartSteps.typeJewerlyBonus(jewelryDiscount);
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
-		
-		CartCalculator.calculateJMDiscountsForBuy3Get1Rule(jewelryDiscount, marketingDiscount, taxClass, shippingValue,shippingValueForLessThan150);
-		
+
+		CartCalculator.calculateJMDiscountsForBuy3Get1Rule(jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValueForLessThan150);
+
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
-		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
+		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
 		cartSteps.grabTotals();
 		cartSteps.goToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);	
+		shippingSteps.setSameAsBilling(true);
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
@@ -214,12 +196,12 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		
-		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);		
-		
+
+		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+
 		validationWorkflows.performCartValidationsBuy3Get1RuleJbAndMbApplied();
-		
-		customVerifications.printErrors();		
+
+		customVerifications.printErrors();
 
 	}
 
@@ -237,4 +219,3 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 	}
 
 }
-

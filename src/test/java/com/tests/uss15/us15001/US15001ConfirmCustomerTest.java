@@ -22,16 +22,15 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "external")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.1 Check simple subscriber in mailchimp", type = "Scenarios")
+@Story(Application.Newsletter.US15_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US15001ConfirmCustomerTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
 
-	public String stylistEmail;
-
+	private String stylistEmail;
 	private DateModel dateModel;
 
 	@Before

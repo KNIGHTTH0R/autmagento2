@@ -31,8 +31,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.5 Create Follow Up Party", type = "Scenarios")
+@Story(Application.StyleParty.US10_5.class)
 @RunWith(ThucydidesRunner.class)
 public class US10005CreatePartyWithCustomerHostTest extends BaseTest {
 

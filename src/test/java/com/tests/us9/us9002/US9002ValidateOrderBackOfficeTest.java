@@ -41,8 +41,8 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
-@WithTag(name = "US9", type = "backend")
-@Story(Application.Shop.HostessCart.class)
+@WithTag(name = "US9.2 Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
+@Story(Application.HostCart.US9_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US9002ValidateOrderBackOfficeTest extends BaseTest {
 
@@ -59,8 +59,8 @@ public class US9002ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public static List<HostBasicProductModel> productsList = new ArrayList<HostBasicProductModel>();
-	public static List<HostCartCalcDetailsModel> calcDetailsModelList = new ArrayList<HostCartCalcDetailsModel>();
+	private static List<HostBasicProductModel> productsList = new ArrayList<HostBasicProductModel>();
+	private static List<HostCartCalcDetailsModel> calcDetailsModelList = new ArrayList<HostCartCalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
@@ -116,12 +116,9 @@ public class US9002ValidateOrderBackOfficeTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
-		// Setup Data from all models in first test
-		// from Shipping calculations
 		shopTotalsModel.setSubtotal(shippingModelList.get(0).getSubTotal());
 		shopTotalsModel.setShipping(shippingModelList.get(0).getShippingPrice());
 		shopTotalsModel.setTotalAmount(shippingModelList.get(0).getTotalAmount());
-		// Constants added
 		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
 		shopTotalsModel.setTotalPaid("0.00");
 		shopTotalsModel.setTotalRefunded("0.00");
@@ -130,9 +127,6 @@ public class US9002ValidateOrderBackOfficeTest extends BaseTest {
 
 	}
 
-	/**
-	 * BackEnd steps in this test
-	 */
 	@Test
 	public void us9002ValidateOrderBackOfficeTest() {
 		backEndSteps.performAdminLogin(beUser, bePass);

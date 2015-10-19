@@ -24,13 +24,12 @@ import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "frontend")
- @Story(Application.StyleParty.class)
+@WithTag(name = "US10.5 Create Follow Up Party", type = "Scenarios")
+@Story(Application.StyleParty.US10_5.class)
 @RunWith(ThucydidesRunner.class)
 public class US10005CreateFolowUpPartyForActivePartyTest extends BaseTest {
 	@Steps
@@ -44,8 +43,7 @@ public class US10005CreateFolowUpPartyForActivePartyTest extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	
-	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
+	private static UrlModel urlModel = new UrlModel();
 	private String username, password;
 	private String customerName;
 

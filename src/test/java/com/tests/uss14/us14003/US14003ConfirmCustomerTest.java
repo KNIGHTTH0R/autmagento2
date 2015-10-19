@@ -16,8 +16,8 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US13", type = "external")
-@Story(Application.Distribution.HostLead.class)
+@WithTag(name = "US14.3 Distribution during checkout to customer lead qualified SC", type = "Scenarios")
+@Story(Application.DistributionDuringCheckout.US14_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US14003ConfirmCustomerTest extends BaseTest {
 

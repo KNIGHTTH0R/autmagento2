@@ -30,7 +30,6 @@ import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -45,8 +44,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US15", type = "frontend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest {
 
@@ -81,10 +80,7 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 	private String shippingValue;
 	private String discountClass;
 	private String voucherValue;
-
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-	CustomerFormModel dataModel;
-
+	private CustomerFormModel dataModel;
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;

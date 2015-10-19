@@ -21,8 +21,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "external")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US10.3 Edit Party and Verify Not Allowed Countries Test", type = "Scenarios")
+@Story(Application.StyleParty.US10_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US10003VerifyHostPartyCreationEmailTest extends BaseTest {
 

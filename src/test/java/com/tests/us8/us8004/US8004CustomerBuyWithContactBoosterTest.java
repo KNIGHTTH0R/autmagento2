@@ -46,8 +46,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
+@WithTag(name = "US8.4 Customer Buy With Kobo", type = "Scenarios")
+@Story(Application.RegularCart.US8_4.class)
 @RunWith(ThucydidesRunner.class)
 public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 
@@ -66,7 +66,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	@Steps
 	public HomeSteps homeSteps;
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;	
+	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public AddRegularProductsWorkflow addRegularProductsWorkflow;
 	@Steps
@@ -131,12 +131,6 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 			secondVoucherCode = prop.getProperty("secondVoucherCode");
 
 			initialStylistName = prop.getProperty("initialStylistName");
-
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

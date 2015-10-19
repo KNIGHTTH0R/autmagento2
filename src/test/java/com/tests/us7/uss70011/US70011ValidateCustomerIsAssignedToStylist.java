@@ -1,11 +1,5 @@
 package com.tests.us7.uss70011;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -19,12 +13,11 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.KoboCampaign.class)
+@WithTag(name = "US7.11 Kobo Campaign Registration On Master Test ", type = "Scenarios")
+@Story(Application.KoboCampaign.US7_11.class)
 @RunWith(ThucydidesRunner.class)
 public class US70011ValidateCustomerIsAssignedToStylist extends BaseTest {
 
@@ -35,33 +28,11 @@ public class US70011ValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Steps
 	public DashboardSteps dashboardSteps;
 
-	public String stylistEmail;
-	public String stylistPassword;
-	public String expectedStyleCoach;
+	private String stylistEmail;
+	private String stylistPassword;
 
 	@Before
 	public void setUp() throws Exception {
-		
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us70011.properties");
-			prop.load(input);
-			expectedStyleCoach = prop.getProperty("expectedStyleCoach");	
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 
 		int size = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").size();
 		if (size > 0) {
@@ -75,13 +46,13 @@ public class US70011ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 	@Test
 	public void us70011ValidateCustomerIsAssignedToStylist() {
-		
-		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);	
+
+		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
 		headerSteps.goToProfile();
 		System.out.println(headerSteps.getBoutiqueName());
 		System.out.println(dashboardSteps.getStyleCoachFirstNameFromProfile());
-	
-		dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), dashboardSteps.getStyleCoachFirstNameFromProfile());		
+
+		dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), dashboardSteps.getStyleCoachFirstNameFromProfile());
 
 	}
 

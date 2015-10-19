@@ -30,8 +30,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US3", type = "frontend")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US3.6 Shop for myself VAT valid and SMB billing and shipping DE",type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US3006CheckOrderOnStylecoachProfileTest extends BaseTest{
 	

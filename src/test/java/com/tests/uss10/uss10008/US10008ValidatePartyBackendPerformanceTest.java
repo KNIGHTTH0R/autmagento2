@@ -22,8 +22,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.BackendPartyPerformanceValidationWorkflows;
 
-@WithTag(name = "US10", type = "backend")
-@Story(Application.Commission.PartyPerformance.class)
+@WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
+@Story(Application.PartyPerformance.US10_8.class)
 @RunWith(ThucydidesRunner.class)
 public class US10008ValidatePartyBackendPerformanceTest extends BaseTest {
 
@@ -35,14 +35,15 @@ public class US10008ValidatePartyBackendPerformanceTest extends BaseTest {
 	public CustomVerification customVerifications;
 	@Steps
 	public PartyListBackendSteps partyListBackendSteps;
-	ClosedPartyPerformanceModel expectedModel;
-	public static UrlModel urlModel = new UrlModel();
-	String partyId;
+	
+	private ClosedPartyPerformanceModel expectedModel;
+	private static UrlModel urlModel = new UrlModel();
+	private String partyId;
 
 	@Before
 	public void setUp() {
 		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
-		expectedModel = MongoReader.grabClosedPartyPerformanceModel("US10008ClosePartyAnfVerifyCommissionBonusesTest").get(0);
+		expectedModel = MongoReader.grabClosedPartyPerformanceModel("US10008CloseVirginPartyAnfVerifyCommissionBonusesTest").get(0);
 		PrintUtils.printClosedPartyModel(expectedModel);
 		String[] parts = urlModel.getUrl().split("/");
 		partyId = parts[parts.length - 1];

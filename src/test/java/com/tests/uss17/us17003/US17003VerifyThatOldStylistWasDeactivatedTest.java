@@ -17,8 +17,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.3 Check reassigned contacts up on canceled SC hierarchy when no new Sc is selected", type = "Scenarios")
+@Story(Application.MassAction.US17_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US17003VerifyThatOldStylistWasDeactivatedTest extends BaseTest {
 

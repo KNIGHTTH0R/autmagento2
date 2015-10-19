@@ -59,13 +59,12 @@ public class US8001ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
-	public static List<RegularCartCalcDetailsModel> calcDetailsModelList = new ArrayList<RegularCartCalcDetailsModel>();
+	private static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
+	private static List<RegularCartCalcDetailsModel> calcDetailsModelList = new ArrayList<RegularCartCalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
-
 	private String orderId;
 	private String beUser,bePass;
 

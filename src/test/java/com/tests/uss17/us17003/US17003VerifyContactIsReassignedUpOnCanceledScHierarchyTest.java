@@ -35,8 +35,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.contact.ContactValidationWorkflows;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.3 Check reassigned contacts up on canceled SC hierarchy when no new Sc is selected", type = "Scenarios")
+@Story(Application.MassAction.US17_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US17003VerifyContactIsReassignedUpOnCanceledScHierarchyTest extends BaseTest {
 
@@ -78,12 +78,9 @@ public class US17003VerifyContactIsReassignedUpOnCanceledScHierarchyTest extends
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17003.properties");
 			prop.load(input);
-			//this is the good one
+			
 			username = prop.getProperty("masterSCUsername");
 			password = prop.getProperty("masterSCPassword");
-//			//this is for testing purpose,workaround for a bug
-//			username = prop.getProperty("stylecoachUsername");
-//			password = prop.getProperty("stylecoachPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -113,7 +110,7 @@ public class US17003VerifyContactIsReassignedUpOnCanceledScHierarchyTest extends
 	}
 
 	@Test
-	public void us17003VerifyThatContactWasReassignedCorrectlyTest() {
+	public void us17003VerifyContactIsReassignedUpOnCanceledScHierarchyTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

@@ -44,8 +44,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3", type = "frontend")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US3.5 Shop for myself VAT valid and SMB billing DE and shipping AT",type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_5.class)
 @RunWith(ThucydidesRunner.class)
 public class US3005SfmValidVatSmbBillingDeShippingAtTest extends BaseTest {
 	
@@ -117,12 +117,6 @@ public class US3005SfmValidVatSmbBillingDeShippingAtTest extends BaseTest {
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
-			
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -141,7 +135,7 @@ public class US3005SfmValidVatSmbBillingDeShippingAtTest extends BaseTest {
 	}
 
 	@Test
-	public void us3005CartSegmentationWithVatAndSmbBillingDeShippingAtTest() {
+	public void us3005SfmValidVatSmbBillingDeShippingAtTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

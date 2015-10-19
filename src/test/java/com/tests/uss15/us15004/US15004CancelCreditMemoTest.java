@@ -3,6 +3,7 @@ package com.tests.uss15.us15004;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
+import net.thucydides.core.annotations.WithTags;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
@@ -19,8 +20,9 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "backend")
-@Story(Application.Newsletter.class)
+@WithTags({ @WithTag(name = "US15.4 Validate Zzz Product JB for all order states", type = "Scenarios"),
+	@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
+@Story(Application.Newsletter.US15_4.class)
 @RunWith(ThucydidesRunner.class)
 public class US15004CancelCreditMemoTest extends BaseTest {
 

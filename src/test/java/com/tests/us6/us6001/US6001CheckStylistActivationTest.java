@@ -15,7 +15,6 @@ import com.steps.backend.validations.StylistValidationSteps;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -45,16 +44,12 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 	@Steps
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
-
-	public StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
-	public StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
-	public StylistPropertiesModel expectedOrderPaidStylistData = new StylistPropertiesModel();
-	public RegistrationActivationDateModel datesExpected = new RegistrationActivationDateModel();
-
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
-	
-	public String formCreationDate;
+	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
+	private StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
+	private StylistPropertiesModel expectedOrderPaidStylistData = new StylistPropertiesModel();
+	private RegistrationActivationDateModel datesExpected = new RegistrationActivationDateModel();
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	private String formCreationDate;
 
 	@Before
 	public void setUp() throws Exception {

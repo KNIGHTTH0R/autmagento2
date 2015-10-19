@@ -29,9 +29,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US3", type = "frontend")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US3.9 Shop for myself no valid VAT and no SMB billing and shipping DE", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_9.class)
 @RunWith(ThucydidesRunner.class)
 public class US3009CheckOrderOnStylecoachProfileTest extends BaseTest{
 	

@@ -21,8 +21,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US7", type = "backend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.2 Regular Customer Registration on Context Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US7002CheckCustomerActivation extends BaseTest {
 
@@ -33,8 +33,8 @@ public class US7002CheckCustomerActivation extends BaseTest {
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public StylistPropertiesModel expectedCustomerData = new StylistPropertiesModel();
-	public String stylistEmail;
+	private StylistPropertiesModel expectedCustomerData = new StylistPropertiesModel();
+	private String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {

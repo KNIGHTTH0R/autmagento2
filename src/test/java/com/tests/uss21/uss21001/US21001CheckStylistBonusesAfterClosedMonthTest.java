@@ -29,8 +29,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.commission.CommissionClosedMonthRewardsValidationWorkflows;
 
-@WithTag(name = "US21", type = "backend")
-@Story(Application.Commission.CloseMonthRewardPoints.class)
+@WithTag(name = "US21.1 Verify Closed Month Frontend and Backend Performance", type = "Scenarios")
+@Story(Application.CloseMonthRewardPoints.US21_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US21001CheckStylistBonusesAfterClosedMonthTest extends BaseTest {
 

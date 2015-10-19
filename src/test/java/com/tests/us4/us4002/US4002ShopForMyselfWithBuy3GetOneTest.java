@@ -43,8 +43,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US4", type = "frontend")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US4.2 Shop for myself with Buy 3 get 1 for 50 %", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US4_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 
@@ -117,12 +117,6 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 			shippingValueForLessThan150 = prop.getProperty("shippingPriceForLessThan150");
 			taxClass = prop.getProperty("taxClass");
 
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
-
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -135,7 +129,6 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 			}
 		}
 
-		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 

@@ -31,8 +31,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 
-@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT",type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US3001CheckOrderOnStylecoachProfileTest extends BaseTest{
 

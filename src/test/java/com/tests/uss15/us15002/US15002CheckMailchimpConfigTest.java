@@ -26,8 +26,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.mailchimp.MailchimpValidationWorkflows;
 
-@WithTag(name = "US15", type = "external")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US15002CheckMailchimpConfigTest extends BaseTest {
 
@@ -42,14 +42,13 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 	@Steps
 	public MailchimpSubscriberProfileSteps mailchimpSubscriberProfileSteps;
 
-	SubscriberModel grabbedSubscriberModel = new SubscriberModel();
-	SubscriberModel expectedSubscriberModel = new SubscriberModel();
+	private SubscriberModel grabbedSubscriberModel = new SubscriberModel();
+	private SubscriberModel expectedSubscriberModel = new SubscriberModel();
 	private ShippingModel shippingModel = new ShippingModel();
-	public BasicProductModel product = new BasicProductModel();
-	CustomerFormModel dataModel;
-	DateModel dateModel;
-	String koboCode;
-
+	private BasicProductModel product = new BasicProductModel();
+	private CustomerFormModel dataModel;
+	private DateModel dateModel;
+	private String koboCode;
 	private String listName = "staging_AUT_newsletter_all_subscribers";
 
 	@Before

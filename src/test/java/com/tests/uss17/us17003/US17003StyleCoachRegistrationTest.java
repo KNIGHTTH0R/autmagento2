@@ -22,7 +22,6 @@ import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -31,8 +30,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US17", type = "frontend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.3 Check reassigned contacts up on canceled SC hierarchy when no new Sc is selected", type = "Scenarios")
+@Story(Application.MassAction.US17_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US17003StyleCoachRegistrationTest extends BaseTest {
 
@@ -45,10 +44,9 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerification;
 
-	public CustomerFormModel customerFormData;
-	public DateModel birthDate = new DateModel();
-	public AddressModel customerFormAddress;
-	public StylistDataModel validationModel;
+	private CustomerFormModel customerFormData;
+	private DateModel birthDate = new DateModel();
+	private AddressModel customerFormAddress;
 	private String context;
 
 	@Before

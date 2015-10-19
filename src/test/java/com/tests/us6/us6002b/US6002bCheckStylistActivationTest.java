@@ -23,8 +23,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US6", type = "backend")
-@Story(Application.Registration.Stylist.class)
+@WithTag(name = "US6.2b SC Registration Existing Customer Forbidden Country Test ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002bCheckStylistActivationTest extends BaseTest {
 
@@ -37,11 +37,11 @@ public class US6002bCheckStylistActivationTest extends BaseTest {
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
-	public StylistPropertiesModel expectedAfterOrderPaidStylistData = new StylistPropertiesModel();
-	public RegistrationActivationDateModel expectedDateModel = new RegistrationActivationDateModel();
+	private StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
+	private StylistPropertiesModel expectedAfterOrderPaidStylistData = new StylistPropertiesModel();
+	private RegistrationActivationDateModel expectedDateModel = new RegistrationActivationDateModel();
 
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 
 	@Before
 	public void setUp() throws Exception {

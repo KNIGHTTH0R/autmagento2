@@ -27,8 +27,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.6 Landing Page Registration Selected SC Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US7006LandingPageRegistrationSelectedScTest extends BaseTest {
 
@@ -79,7 +79,7 @@ public class US7006LandingPageRegistrationSelectedScTest extends BaseTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void us7006UserRegistrationSpecificStylistLandingPageTest() {
+	public void us7006LandingPageRegistrationSelectedScTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
 		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN, addressModel);

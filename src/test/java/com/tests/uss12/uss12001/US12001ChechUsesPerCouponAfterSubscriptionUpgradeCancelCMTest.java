@@ -16,20 +16,15 @@ import com.tools.env.constants.ConfigConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-/**
- * Deactivate 3+1 rule in backend for host cart
- * 
- * @author voicu.vac
- *
- */
-@WithTag(name = "US12", type = "backend")
-@Story(Application.KoboSubscription.class)
+@WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
+@Story(Application.KoboSubscription.US12_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest extends BaseTest {
 	@Steps
 	public PromotionSteps promotionSteps;
-	String koboCode;
-	String usesPerCoupon = "125";
+	
+	private String koboCode;
+	private String usesPerCoupon = "125";
 
 	@Before
 	public void setUp() throws Exception {

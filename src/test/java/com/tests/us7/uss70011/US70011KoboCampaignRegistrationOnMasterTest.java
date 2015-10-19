@@ -47,8 +47,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.KoboCampaign.class)
+@WithTag(name = "US7.11 Kobo Campaign Registration On Master Test ", type = "Scenarios")
+@Story(Application.KoboCampaign.US7_11.class)
 @RunWith(ThucydidesRunner.class)
 public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 
@@ -117,14 +117,13 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 				}
 			}
 		}
-		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us70011KoboCampaignRegistrationTest() {
+	public void us70011KoboCampaignRegistrationOnMasterTest() {
 		koboValidationSteps.startKoboCampaignProcess(MongoReader.getBaseURL() + UrlConstants.KOBO_CAMPAIGN);
 		koboCampaignSteps.fillKoboCampaignRegistrationFormOnMasterShop(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();

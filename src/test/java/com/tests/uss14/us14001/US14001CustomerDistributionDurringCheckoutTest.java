@@ -32,8 +32,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
-@WithTag(name = "US8", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
+@WithTag(name = "US14.1 Distribution during checkout to SC lead qualified SC", type = "Scenarios")
+@Story(Application.DistributionDuringCheckout.US14_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US14001CustomerDistributionDurringCheckoutTest extends BaseTest {
 

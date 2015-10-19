@@ -16,15 +16,14 @@ import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15", type = "frontend")
-@Story(Application.Newsletter.class)
+@WithTag(name = "US15.3 Check SC kobo subscription and SFM order details in mailchimp ", type = "Scenarios")
+@Story(Application.Newsletter.US15_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US15003StyleCoachRegistrationTest extends BaseTest {
 
@@ -37,11 +36,10 @@ public class US15003StyleCoachRegistrationTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerification;
 
-	public CustomerFormModel customerFormData;
-	public DateModel customerFormDate = new DateModel();
-	public DateModel birthDate = new DateModel();
-	public AddressModel customerFormAddress;
-	public StylistDataModel validationModel;
+	private CustomerFormModel customerFormData;
+	private DateModel customerFormDate = new DateModel();
+	private DateModel birthDate = new DateModel();
+	private AddressModel customerFormAddress;
 
 	@Before
 	public void setUp() throws Exception {

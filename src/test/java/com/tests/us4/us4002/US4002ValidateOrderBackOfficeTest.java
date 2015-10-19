@@ -41,8 +41,8 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
 
-@WithTag(name = "US4", type = "backend")
-@Story(Application.ShopForMyselfCart.class)
+@WithTag(name = "US4.2 Shop for myself with Buy 3 get 1 for 50 %", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US4_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US4002ValidateOrderBackOfficeTest extends BaseTest {
 
@@ -59,8 +59,8 @@ public class US4002ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
-	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
+	private static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
+	private static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();

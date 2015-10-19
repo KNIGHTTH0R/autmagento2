@@ -1,6 +1,5 @@
 package com.tests.us6.us6001b;
 
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;

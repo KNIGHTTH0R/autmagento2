@@ -14,14 +14,13 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "frontend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.1 Regular Customer Registration on Master Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US7001RegularCustRegOnMasterTest extends BaseTest {
 
@@ -30,9 +29,8 @@ public class US7001RegularCustRegOnMasterTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	public CustomerFormModel dataModel;
-	public AddressModel addressModel;
-	public StylistDataModel validationModel;
+	private CustomerFormModel dataModel;
+	private AddressModel addressModel;
 
 	@Before
 	public void setUp() throws Exception {

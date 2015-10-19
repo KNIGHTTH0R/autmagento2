@@ -32,9 +32,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US9", type = "external")
-@Story(Application.Shop.HostessCart.class)
+@WithTag(name = "US9.2 Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
+@Story(Application.HostCart.US9_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US9002ValidateOrderEmailTest extends BaseTest{
 	

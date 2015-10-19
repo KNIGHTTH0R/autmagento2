@@ -29,8 +29,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
 
-@WithTag(name = "US14", type = "backend")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US14.2 Distribution during checkout to party host lead qualified SC", type = "Scenarios")
+@Story(Application.DistributionDuringCheckout.US14_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US14002ChangeCustomerAddressTest extends BaseTest {
 

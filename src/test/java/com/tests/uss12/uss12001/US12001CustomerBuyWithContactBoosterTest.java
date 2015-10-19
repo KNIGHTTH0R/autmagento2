@@ -24,7 +24,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -36,8 +35,8 @@ import com.tools.requirements.Application;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US12", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
+@WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
+@Story(Application.KoboSubscription.US12_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 
@@ -70,12 +69,9 @@ public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 	@Steps
 	public DashboardSteps dashboardSteps;
 
-	CustomerFormModel customerModel;
+	private CustomerFormModel customerModel;
 	private String voucherCode;
-
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-
 	private ProductDetailedModel genProduct1;
 
 	@Before

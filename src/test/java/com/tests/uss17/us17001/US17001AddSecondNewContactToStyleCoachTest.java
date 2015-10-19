@@ -25,8 +25,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.1 Check reassigned duplicate contacts and customer associated contacts when new SC is selected", type = "Scenarios")
+@Story(Application.MassAction.US17_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
 
@@ -41,10 +41,10 @@ public class US17001AddSecondNewContactToStyleCoachTest extends BaseTest {
 	@Steps
 	public CreateNewContactSteps createNewContactSteps;
 
-	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel contactModel;
-	public DateModel dateModel = new DateModel();
-	public AddressModel addressModel;
+	private CustomerFormModel stylistRegistrationData;
+	private CustomerFormModel contactModel;
+	private DateModel dateModel = new DateModel();
+	private AddressModel addressModel;
 
 	@Before
 	public void setUp() throws Exception {

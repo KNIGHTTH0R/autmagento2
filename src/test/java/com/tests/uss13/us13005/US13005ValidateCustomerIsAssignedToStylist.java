@@ -23,8 +23,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US13", type = "frontend")
-@Story(Application.DykscPlzAndCountry.StyleCoachLead.class)
+@WithTag(name = "US13.5 DYKSC Assignation to SC qualified lead SC", type = "Scenarios")
+@Story(Application.Distribution.US13_5.class)
 @RunWith(ThucydidesRunner.class)
 public class US13005ValidateCustomerIsAssignedToStylist extends BaseTest {
 
@@ -35,10 +35,10 @@ public class US13005ValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Steps
 	public DashboardSteps dashboardSteps;
 
-	public String stylistEmail;
-	public String stylistPassword;
-	public static List<DBStylistModel> stylistsList = new ArrayList<DBStylistModel>();
-	DBStylistModel distStylist = new DBStylistModel();
+	private String stylistEmail;
+	private String stylistPassword;
+	private static List<DBStylistModel> stylistsList = new ArrayList<DBStylistModel>();
+	private DBStylistModel distStylist = new DBStylistModel();
 
 	@Before
 	public void setUp() throws Exception {

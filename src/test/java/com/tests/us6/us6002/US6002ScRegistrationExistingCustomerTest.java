@@ -20,7 +20,6 @@ import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.backend.StylistPropertiesModel;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.ConfigConstants;
@@ -31,9 +30,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-
-@WithTag(name = "US6", type = "frontend")
-@Story(Application.Registration.Stylist.class)
+@WithTag(name = "US6.2 Sc Registration Existing Customer Test ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 	
@@ -52,17 +50,13 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public static DateModel formDate = new DateModel();
-	public AddressModel stylistAddressModel;
-	public StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
-	
-	public CustomerFormModel stylistData = new CustomerFormModel("");
-	public String birthDate;
+	private static DateModel formDate = new DateModel();
+	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
+	private CustomerFormModel stylistData = new CustomerFormModel("");
+	private String birthDate;
 
 	@Before
 	public void setUp() throws Exception {
-		// Generate data for this test run
-		stylistAddressModel = new AddressModel();
 		birthDate = "Feb,1970,12";
 		expectedBeforeLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.NOT_CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
 		

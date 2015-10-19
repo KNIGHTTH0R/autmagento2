@@ -1,6 +1,5 @@
 package com.tests.us7.us7002;
 
-
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -12,44 +11,36 @@ import org.junit.runner.RunWith;
 
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
-import com.tools.data.backend.RegistrationActivationDateModel;
-import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "external")
-@Story(Application.Registration.Customer.class)
+@WithTag(name = "US7.2 Regular Customer Registration on Context Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US7002ConfirmCustomerTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
 
-	public StylistPropertiesModel expectedCustomerData = new StylistPropertiesModel();
-	public RegistrationActivationDateModel datesModel = new RegistrationActivationDateModel();
-
-	public String stylistEmail;
+	private String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {
-		
 
 		int size = MongoReader.grabCustomerFormModels("US7002RegularCustRegistrationOnContextTest").size();
 		if (size > 0) {
 			stylistEmail = MongoReader.grabCustomerFormModels("US7002RegularCustRegistrationOnContextTest").get(0).getEmailName();
 		} else
 			System.out.println("The database has no entries");
-		
-		expectedCustomerData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
+
 	}
-	
+
 	@Test
 	public void us7002ConfirmCustomerTest() {
-		
+
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
 }
-

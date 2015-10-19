@@ -31,7 +31,6 @@ import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostS
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
@@ -49,8 +48,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US9", type = "frontend")
-@Story(Application.Shop.HostessCart.class)
+@WithTag(name = "US9.2 Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
+@Story(Application.HostCart.US9_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends BaseTest {
 
@@ -85,11 +84,8 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 	private String discountClass;
 	private String contactBillingAddress;
 	private String shippingValue;
-
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-	public static UrlModel partyUrlModel = new UrlModel();
-
+	private static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
