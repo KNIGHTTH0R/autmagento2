@@ -4,6 +4,7 @@ import com.tools.persistance.MongoReader;
 
 public class ContextConstants {
 
+	public static String SUCCESSFULY_CLOSED_PARTY = MongoReader.getDictionaryItem("SUCCESSFULY_CLOSED_PARTY");
 	public static String LOADING_MESSAGE = MongoReader.getDictionaryItem("LOADING_MESSAGE");
 	public static String PARTY_FLAG_STATUS = MongoReader.getDictionaryItem("PARTY_FLAG_STATUS");
 	public static String STYLE_COACH_FLAG_STATUS = MongoReader.getDictionaryItem("STYLE_COACH_FLAG_STATUS");

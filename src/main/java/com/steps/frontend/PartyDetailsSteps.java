@@ -3,8 +3,13 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class PartyDetailsSteps extends AbstractSteps {
@@ -16,7 +21,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 		partyDetailsPage().closeParty();
 		partyDetailsPage().typePartyAttendersNumber("10");
 		partyDetailsPage().popupCloseParty();
-
+		ExpectedConditions.textToBePresentInElement(getDriver().findElement(By.id("closePartyWrapper")), ContextConstants.SUCCESSFULY_CLOSED_PARTY);
 	}
 
 	@StepGroup
@@ -39,7 +44,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void sendInvitationToHostess() {
 		partyDetailsPage().sendInvitationToHostess();
 		partyDetailsPage().hostessInviteConfirmation();
-		waitABit(3000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -67,7 +72,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void editParty() {
 		partyDetailsPage().editParty();
-		waitABit(1000);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	@Step
