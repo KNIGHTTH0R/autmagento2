@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
+import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
@@ -110,14 +111,14 @@ public class PartyDetailsPage extends AbstractPage {
 		boolean found = false;
 		if (wishlistProductNameContainer.getText().contains(productName)) {
 			found = true;
-			waitABit(1000);
+			waitABit(TimeConstants.WAIT_TIME_SMALL);
 			wishlistProductCheckbox.click();
-			waitABit(1000);
+			waitABit(TimeConstants.WAIT_TIME_SMALL);
 		}
 		// just trying to fix a problem - not needed
 		builder.moveToElement(addToBorrowCart).build().perform();
 		addToBorrowCart.click();
-		waitABit(1000);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 
 		Assert.assertTrue("The product expected to be in wishlist is not present !!!", found);
 	}
@@ -125,7 +126,7 @@ public class PartyDetailsPage extends AbstractPage {
 	public void returnToParty() {
 		element(closeFancy).waitUntilVisible();
 		closeFancy.click();
-		waitABit(2000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	public void orderForCustomer() {
