@@ -203,7 +203,7 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	public void selectContractStatus(String status) {
 		element(vatPayerDropown).waitUntilVisible();
-		element(vatPayerDropown).selectByValue(status);
+		element(vatPayerDropown).selectByVisibleText(status);
 	}
 
 	public void inputQuitDate() {

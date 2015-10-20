@@ -18,7 +18,7 @@ public class CustomerDetailsBackendSteps extends AbstractSteps {
 	@Step
 	public void markStylecoachAsQuit() {
 		customerDetailsHomePage().clickOnProfileTab();
-		customerDetailsHomePage().selectContractStatus("3");
+		customerDetailsHomePage().selectContractStatus("SC gekündigt");
 		customerDetailsHomePage().inputQuitDate();
 		customerDetailsHomePage().saveCustomer();
 	}
