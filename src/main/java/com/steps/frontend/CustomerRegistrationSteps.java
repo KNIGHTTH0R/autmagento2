@@ -288,6 +288,24 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
+	@StepGroup
+	@Title("Fill create customer form under context with no member flag checked")
+	public void fillCreateCustomerFormNoMemberUnderContext(CustomerFormModel customerData, AddressModel addressData, String context) {
+		
+		getDriver().get(MongoReader.getBaseURL() + context);
+		System.out.println(MongoReader.getBaseURL() + context);
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		fillContactDetails(addressData);
+		checkIAgree();
+		clickCompleteButton();
+	}
 
 	@StepGroup
 	@Title("Fill contact details")

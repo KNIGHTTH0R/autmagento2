@@ -77,7 +77,7 @@ public class US17002VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17002.properties");
 			prop.load(input);
-			
+
 			username = prop.getProperty("stylecoachUsername");
 			password = prop.getProperty("stylecoachPassword");
 
@@ -93,14 +93,14 @@ public class US17002VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 			}
 		}
 		oldStylistModel = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").get(0);
-		contactModel = MongoReader.grabCustomerFormModels("US17002AddNewContactToStyleCoachTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US17002AddNewContactToStyleCoachTest").get(0);
-		addressModel = MongoReader.grabAddressModels("US17002AddNewContactToStyleCoachTest").get(0);
+		contactModel = MongoReader.grabCustomerFormModels("US17002RegularCustomerRegistrationTest").get(0);
+		dateModel = MongoReader.grabStylistDateModels("US17002RegularCustomerRegistrationTest").get(0);
+		addressModel = MongoReader.grabAddressModels("US17002RegularCustomerRegistrationTest").get(0);
 
 		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, contactModel, dateModel, addressModel);
 
 		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
-		expectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
+		expectedDetailsModel.setStyleCoachStatus(ContextConstants.NO_STYLE_COACH_FLAG_STATUS);
 		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
 
 		PrintUtils.printContactModel(expectedDetailsModel);

@@ -16,18 +16,16 @@ import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US17", type = "frontend")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US17002StyleCoachRegistrationWithKnownSponsorTest extends BaseTest {
+public class US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -38,16 +36,12 @@ public class US17002StyleCoachRegistrationWithKnownSponsorTest extends BaseTest 
 	@Steps
 	public CustomVerification customVerification;
 
-	public CustomerFormModel stylecoachFormData;
-	public DateModel birthDate = new DateModel();
-	public AddressModel customerFormAddress;
-	public StylistDataModel validationModel;
-	private CustomerFormModel sponsorStylecoachData;
+	private CustomerFormModel stylecoachFormData;
+	private DateModel birthDate = new DateModel();
+	private AddressModel customerFormAddress;
 
 	@Before
 	public void setUp() throws Exception {
-
-		sponsorStylecoachData = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").get(0);
 
 		stylecoachFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
@@ -56,8 +50,8 @@ public class US17002StyleCoachRegistrationWithKnownSponsorTest extends BaseTest 
 	}
 
 	@Test
-	public void us17002StyleCoachRegistrationWithKnownSponsorTest() {
-		headerSteps.navigateToStylecoachRegisterFormUnderContext(sponsorStylecoachData.getFirstName() + sponsorStylecoachData.getLastName());
+	public void us17002StyleCoachRegistrationToBecomeCustomersPrefferedTest() {
+		headerSteps.navigateToStylecoachRegisterFormUnderContext("thomas");
 		stylistRegistrationSteps.fillCreateStylecoachFormWithKnownSponsorPayWithVisa(stylecoachFormData, customerFormAddress, birthDate.getDate());
 		customVerification.printErrors();
 	}

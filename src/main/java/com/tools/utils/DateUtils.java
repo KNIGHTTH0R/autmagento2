@@ -147,7 +147,7 @@ public class DateUtils {
 	}
 
 	public static void main(String[] args) throws ParseException {
-		System.out.println(DateUtils.getPreviousMonthMiddle("yyyy-MM-dd HH:mm:ss"));
+		System.out.println(DateUtils.getCurrentDate("dd/MM/yyyy"));
 //		System.out.println(DateUtils.getLastDayOfAGivenMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 //		System.out.println(DateUtils.getFirstDayOfAGivenMonth("2015-08-15 00:00:00", "yyyy-MM-dd HH:mm:ss"));
 //		System.out.println(DateUtils.isLastDayOfMonth("2015-09-30 00:00:00", "yyyy-MM-dd HH:mm:ss"));

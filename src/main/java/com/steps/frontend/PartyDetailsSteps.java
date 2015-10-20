@@ -55,7 +55,6 @@ public class PartyDetailsSteps extends AbstractSteps {
 
 	@Step
 	public void typePartyAttendersNumber(String number) {
-
 		partyDetailsPage().typePartyAttendersNumber(number);
 	}
 

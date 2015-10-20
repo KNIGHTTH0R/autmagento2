@@ -20,7 +20,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US17", type = "external")
 @Story(Application.MassAction.class)
 @RunWith(ThucydidesRunner.class)
-public class US17002ConfirmStylecoachToBeReassignedTest extends BaseTest {
+public class US17002ConfirmSecondStylecoachTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -30,13 +30,13 @@ public class US17002ConfirmStylecoachToBeReassignedTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		stylistEmail = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationWithKnownSponsorTest").get(0).getEmailName();
+		stylistEmail = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest").get(0).getEmailName();
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us17002ConfirmStylecoachToBeReassignedTest() {
+	public void us17002ConfirmSecondStylecoachTest() {
 
 		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);

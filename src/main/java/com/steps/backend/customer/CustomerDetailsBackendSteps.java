@@ -14,4 +14,12 @@ public class CustomerDetailsBackendSteps extends AbstractSteps {
 		customerDetailsHomePage().clickOnPerformanceTab();
 		return customerDetailsHomePage().grabSCPerformanceIpLogicAdmin();
 	}
+
+	@Step
+	public void markStylecoachAsQuit() {
+		customerDetailsHomePage().clickOnProfileTab();
+		customerDetailsHomePage().selectContractStatus("3");
+		customerDetailsHomePage().inputQuitDate();
+		customerDetailsHomePage().saveCustomer();
+	}
 }

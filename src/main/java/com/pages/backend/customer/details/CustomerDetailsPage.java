@@ -15,6 +15,7 @@ import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.DateUtils;
 import com.tools.utils.PrintUtils;
 
 public class CustomerDetailsPage extends AbstractPage {
@@ -33,6 +34,9 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "customer_info_tabs_stylecoach_lead_manage")
 	private WebElement leadSettingsButton;
+
+	@FindBy(id = "customer_info_tabs_stylecoach_profile")
+	private WebElement profileTab;
 
 	@FindBy(css = "#rewardPointsBalanceGrid_table tbody tr:nth-child(2) td:nth-child(3)")
 	private WebElement jewerlyContainer;
@@ -105,6 +109,12 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "customer_info_tabs_performance")
 	private WebElement performanceTab;
+
+	@FindBy(id = "_stylistprofilestylist_contract_status")
+	private WebElement contractStatusDropdown;
+
+	@FindBy(id = "_stylistprofilestylist_quit_date")
+	private WebElement quitDateInput;
 
 	public void addNewAddress() {
 		evaluateJavascript("jQuery.noConflict();");
@@ -189,6 +199,16 @@ public class CustomerDetailsPage extends AbstractPage {
 	public void selectVatPayer(String vatPayer) {
 		element(vatPayerDropown).waitUntilVisible();
 		element(vatPayerDropown).selectByValue(vatPayer);
+	}
+
+	public void selectContractStatus(String status) {
+		element(vatPayerDropown).waitUntilVisible();
+		element(vatPayerDropown).selectByValue(status);
+	}
+
+	public void inputQuitDate() {
+		element(vatPayerDropown).waitUntilVisible();
+		element(vatPayerDropown).sendKeys(DateUtils.getCurrentDate("dd/MM/yyyy"));
 	}
 
 	public void clickOnAddressesTab() {
@@ -333,6 +353,12 @@ public class CustomerDetailsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(rewardPointsTab).waitUntilVisible();
 		rewardPointsTab.click();
+	}
+
+	public void clickOnProfileTab() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(profileTab).waitUntilVisible();
+		profileTab.click();
 	}
 
 	public void typeRewardsPointsValue(String value) {
