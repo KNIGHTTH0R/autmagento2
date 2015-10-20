@@ -38,7 +38,7 @@ public class US17002SetCustomersPrefferdToBeQuitTest extends BaseTest {
 	}
 
 	@Test
-	public void us17002MarkSecondStarterKitOrderAsPaidTest() {
+	public void us17002SetCustomersPrefferdToBeQuitTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 

@@ -202,13 +202,13 @@ public class CustomerDetailsPage extends AbstractPage {
 	}
 
 	public void selectContractStatus(String status) {
-		element(vatPayerDropown).waitUntilVisible();
-		element(vatPayerDropown).selectByVisibleText(status);
+		element(contractStatusDropdown).waitUntilVisible();
+		element(contractStatusDropdown).selectByVisibleText(status);
 	}
 
 	public void inputQuitDate() {
-		element(vatPayerDropown).waitUntilVisible();
-		element(vatPayerDropown).sendKeys(DateUtils.getCurrentDate("dd/MM/yyyy"));
+		element(quitDateInput).waitUntilVisible();
+		element(quitDateInput).sendKeys(DateUtils.getCurrentDate("dd/MM/yyyy"));
 	}
 
 	public void clickOnAddressesTab() {
