@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.stylecoach.StylecoachListBackendSteps;
 import com.tests.BaseTest;
-import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -31,12 +30,10 @@ public class US17002ReasignContactsTest extends BaseTest {
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
 	private String stylistEmail;
-	private CustomerFormModel newStylistModel;
 
 	@Before
 	public void setUp() throws Exception {
 
-		newStylistModel = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest").get(0);
 		stylistEmail = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").get(0).getEmailName();
 
 	}
@@ -46,7 +43,7 @@ public class US17002ReasignContactsTest extends BaseTest {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStylecoachList();
-		stylecoachListBackendSteps.reassignCustomersToAnotherStylecoach(stylistEmail, newStylistModel.getEmailName());
+		stylecoachListBackendSteps.reassignCustomers(stylistEmail);
 		stylecoachListBackendSteps.verifyStylecoachEmailAndStatus(stylistEmail);
 	}
 
