@@ -22,8 +22,8 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US17", type = "frontend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.2 Check reassigned contacts on customer's preffered SC hierarchy if customer's preffered is quit", type = "Scenarios")
+@Story(Application.MassAction.US17_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest extends BaseTest {
 

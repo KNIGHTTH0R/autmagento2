@@ -35,10 +35,10 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.contact.ContactValidationWorkflows;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.2 Check reassigned contacts on customer's preffered SC hierarchy if customer's preffered is quit", type = "Scenarios")
+@Story(Application.MassAction.US17_2.class)
 @RunWith(ThucydidesRunner.class)
-public class US17002VerifyThatFirstContactWasReassignedCorrectlyTest extends BaseTest {
+public class US17002VerifyThatContactWasReassignedCorrectlyTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -63,7 +63,6 @@ public class US17002VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 	private AddressModel addressModel;
 	private ContactModel grabbedDetailsModel;
 	private ContactModel expectedDetailsModel = new ContactModel();
-
 	private String username;
 	private String password;
 
@@ -107,7 +106,7 @@ public class US17002VerifyThatFirstContactWasReassignedCorrectlyTest extends Bas
 	}
 
 	@Test
-	public void us17002VerifyThatFirstContactWasReassignedCorrectlyTest() {
+	public void us17002VerifyThatContactWasReassignedCorrectlyTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

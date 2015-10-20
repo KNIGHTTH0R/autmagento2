@@ -19,7 +19,7 @@ import com.tools.env.constants.Separators;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US17.2 Check reassigned duplicate contacts and customer associated contacts when new SC is selected", type = "Scenarios")
+@WithTag(name = "US17.2 Check reassigned contacts on customer's preffered SC hierarchy if customer's preffered is quit", type = "Scenarios")
 @Story(Application.MassAction.US17_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US17002ChangeCustomersContextTest extends BaseTest {
@@ -33,8 +33,8 @@ public class US17002ChangeCustomersContextTest extends BaseTest {
 	@Steps
 	public FooterSteps footerSteps;
 
-	public CustomerFormModel customerModel;
-	public CustomerFormModel newStylistData;
+	private CustomerFormModel customerModel;
+	private CustomerFormModel newStylistData;
 
 	@Before
 	public void setUp() throws Exception {

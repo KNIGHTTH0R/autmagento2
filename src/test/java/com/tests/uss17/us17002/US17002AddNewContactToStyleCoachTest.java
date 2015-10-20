@@ -25,8 +25,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.2 Check reassigned contacts on customer's preffered SC hierarchy if customer's preffered is quit", type = "Scenarios")
+@Story(Application.MassAction.US17_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US17002AddNewContactToStyleCoachTest extends BaseTest {
 
@@ -41,10 +41,10 @@ public class US17002AddNewContactToStyleCoachTest extends BaseTest {
 	@Steps
 	public CreateNewContactSteps createNewContactSteps;
 
-	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel dataModel;
-	public DateModel dateModel;
-	public AddressModel addressModel;
+	private CustomerFormModel stylistRegistrationData;
+	private CustomerFormModel dataModel;
+	private DateModel dateModel;
+	private AddressModel addressModel;
 
 	@Before
 	public void setUp() throws Exception {

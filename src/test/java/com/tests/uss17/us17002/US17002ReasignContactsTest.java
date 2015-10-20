@@ -17,8 +17,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US17", type = "backend")
-@Story(Application.MassAction.class)
+@WithTag(name = "US17.2 Check reassigned contacts on customer's preffered SC hierarchy if customer's preffered is quit", type = "Scenarios")
+@Story(Application.MassAction.US17_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US17002ReasignContactsTest extends BaseTest {
 

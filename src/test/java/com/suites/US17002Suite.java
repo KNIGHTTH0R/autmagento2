@@ -15,7 +15,7 @@ import com.tests.uss17.us17002.US17002RegularCustomerRegistrationTest;
 import com.tests.uss17.us17002.US17002SetCustomersPrefferdToBeQuitTest;
 import com.tests.uss17.us17002.US17002StyleCoachRegistrationTest;
 import com.tests.uss17.us17002.US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest;
-import com.tests.uss17.us17002.US17002VerifyThatFirstContactWasReassignedCorrectlyTest;
+import com.tests.uss17.us17002.US17002VerifyThatContactWasReassignedCorrectlyTest;
 
 @SuiteClasses({
 	US17002StyleCoachRegistrationTest.class,
@@ -29,7 +29,7 @@ import com.tests.uss17.us17002.US17002VerifyThatFirstContactWasReassignedCorrect
 	US17002ChangeCustomersContextTest.class,
 	US17002SetCustomersPrefferdToBeQuitTest.class,
 	US17002ReasignContactsTest.class,
-	US17002VerifyThatFirstContactWasReassignedCorrectlyTest.class,
+	US17002VerifyThatContactWasReassignedCorrectlyTest.class,
 	
 })
 @RunWith(Suite.class)
