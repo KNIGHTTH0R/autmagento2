@@ -12,6 +12,7 @@ import org.junit.Assert;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
+import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoReader;
@@ -330,6 +331,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	@Step
 	public void inputStylistRef(String ref) {
 		stylistRegistrationPage().inputStylistRef(ref);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	// ----------------------------Main Form from create customer
