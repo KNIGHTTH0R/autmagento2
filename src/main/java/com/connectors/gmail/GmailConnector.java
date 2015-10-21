@@ -13,8 +13,6 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
 
-import org.junit.Assert;
-
 import com.sun.mail.imap.protocol.FLAGS;
 import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
