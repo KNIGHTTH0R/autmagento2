@@ -21,7 +21,7 @@ public class DeactivateBuy3Get1ForShopForMyself extends BaseTest{
 	public PromotionSteps promotionSteps;
 	
 	@Test
-	public void changeRuleStatusTest(){
+	public void deactivateBuy3Get1ForShopForMyself(){
 		promotionSteps.deactivateRule();	
 		
 	}

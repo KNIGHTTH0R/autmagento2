@@ -20,7 +20,7 @@ public class ActivateBuy3Get1ForShopForMyselfTest extends BaseTest{
 	public PromotionSteps promotionSteps;
 	
 	@Test
-	public void changeRuleStatusTest(){
+	public void activateBuy3Get1ForShopForMyselfTest(){
 		
 		promotionSteps.activateRule();		
 		
