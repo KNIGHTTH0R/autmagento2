@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.env.constants.TimeConstants;
@@ -196,6 +197,7 @@ public class PartyDetailsPage extends AbstractPage {
 	public void popupCloseParty() {
 		element(popupPartyCloseButton).waitUntilVisible();
 		popupPartyCloseButton.click();
+		waitFor(ExpectedConditions.textToBePresentInElement(getDriver().findElement(By.id("closePartyWrapper")), ContextConstants.SUCCESSFULY_CLOSED_PARTY));
 	}
 
 	public void verifyHostessInviteLink(boolean hostessInviteLinkIsPresent) {
