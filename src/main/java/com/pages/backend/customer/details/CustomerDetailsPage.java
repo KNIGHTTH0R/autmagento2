@@ -391,7 +391,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(performanceTab).waitUntilVisible();
 		performanceTab.click();
-		waitABit(5000);
+		waitABit(TimeConstants.TIME_MEDIUM);
 
 	}
 

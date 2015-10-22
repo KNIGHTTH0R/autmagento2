@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class CustomerListPage extends AbstractPage {
@@ -35,7 +36,7 @@ public class CustomerListPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
-		waitABit(2000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 	public void clickOnResetFilter() {
 		evaluateJavascript("jQuery.noConflict();");

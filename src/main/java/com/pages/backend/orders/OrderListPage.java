@@ -24,13 +24,6 @@ public class OrderListPage extends AbstractPage {
 	@FindBy(css = "table#sales_order_grid_table tbody")
 	private WebElement listContainer;
 
-//	public void inputOderId(String orderId) {
-//		evaluateJavascript("jQuery.noConflict();");
-//		waitFor(ExpectedConditions.visibilityOf(orderIdInput));
-//		orderIdInput.clear();
-//		element(orderIdInput).typeAndEnter(orderId);
-//	}
-	
 	public void inputOderId(String name) {
 		WebElement element = getDriver().findElement(By.id("sales_order_grid_filter_real_order_id"));
 		element.clear();

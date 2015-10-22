@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class BackendProductDetailsPage extends AbstractPage {
@@ -46,7 +47,7 @@ public class BackendProductDetailsPage extends AbstractPage {
 			System.out.println(option.getText());
 			if (option.getText().contains(searchedOption)) {
 				option.findElement(By.cssSelector("a")).click();
-				waitABit(2000);
+				waitABit(TimeConstants.TIME_CONSTANT);
 				break;
 			}
 		}

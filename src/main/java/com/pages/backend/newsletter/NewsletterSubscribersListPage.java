@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class NewsletterSubscribersListPage extends AbstractPage {
@@ -46,7 +47,7 @@ public class NewsletterSubscribersListPage extends AbstractPage {
 	public void checkSubscriberDetails(String searchTerm) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(listContainer).waitUntilVisible();
-		waitABit(2000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		List<WebElement> listElements = listContainer.findElements(By.cssSelector("tbody > tr"));
 
 		theFor: for (WebElement elementNow : listElements) {
