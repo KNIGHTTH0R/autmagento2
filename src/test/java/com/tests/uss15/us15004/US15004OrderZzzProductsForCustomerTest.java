@@ -203,7 +203,7 @@ public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 		}
 
 		confirmationSteps.agreeAndCheckout();
-		dateModel.setDate(DateUtils.getCurrentDate("MM/dd/YYYY"));
+		dateModel.setDate(DateUtils.getCurrentDateOneHourBack("MM/dd/YYYY"));
 
 	}
 
