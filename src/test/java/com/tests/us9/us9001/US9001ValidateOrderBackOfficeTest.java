@@ -93,10 +93,10 @@ public class US9001ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US9001PartyHostBuyWithForthyDiscountsAndJbTest" + SoapKeys.GRAB);
-		productsList = MongoReader.grabHostBasicProductModel("US9001PartyHostBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US9001PartyHostBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabHostCartCalcDetailsModels("US9001PartyHostBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US9001PlaceHostOrderWithForthyDiscountsAndJbTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabHostBasicProductModel("US9001PlaceHostOrderWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US9001PlaceHostOrderWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabHostCartCalcDetailsModels("US9001PlaceHostOrderWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 

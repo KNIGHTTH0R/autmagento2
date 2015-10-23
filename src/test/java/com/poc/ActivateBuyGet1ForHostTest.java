@@ -20,7 +20,7 @@ public class ActivateBuyGet1ForHostTest extends BaseTest{
 	public PromotionSteps promotionSteps;
 	
 	@Test
-	public void changeRuleStatusTest(){
+	public void activateBuyGet1ForHostTest(){
 		
 		promotionSteps.activateBuy3Get1ForHost();		
 		

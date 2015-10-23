@@ -73,7 +73,7 @@ public class US9002CheckOrderOnStylecoachProfileTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
-		orderModel = MongoReader.grabOrderModels("US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test" + SoapKeys.GRAB).get(0);
+		orderModel = MongoReader.grabOrderModels("US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test" + SoapKeys.GRAB).get(0);
 
 	}
 

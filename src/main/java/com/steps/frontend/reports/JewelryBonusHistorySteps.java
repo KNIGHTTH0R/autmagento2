@@ -1,6 +1,7 @@
 package com.steps.frontend.reports;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
@@ -22,6 +23,7 @@ public class JewelryBonusHistorySteps extends AbstractSteps {
 		dashboardMenuPage().clickOnJewelryBonusHistory();
 	}
 
+	@Title("Validate the new JB history registration")
 	@Step
 	public void validateNewHistoryRegistration(JewelryHistoryModel expectedHistoryRegistration, JewelryHistoryModel actualHistoryRegistration) {
 		validateTotal(expectedHistoryRegistration.getTotalPoints(), actualHistoryRegistration.getTotalPoints());
@@ -50,6 +52,5 @@ public class JewelryBonusHistorySteps extends AbstractSteps {
 	private void validateReason(String expectedReason, String actualReason) {
 		Assert.assertTrue("The reason doesn't match", expectedReason.contentEquals(actualReason));
 	}
-
 
 }

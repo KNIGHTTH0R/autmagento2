@@ -76,7 +76,7 @@ public class US9002ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US9002PartyHostBuyWithForthyDiscountsJbAndBuy3Get1Test" + SoapKeys.GRAB);
+		orderModel = MongoReader.getOrderModel("US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test" + SoapKeys.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		

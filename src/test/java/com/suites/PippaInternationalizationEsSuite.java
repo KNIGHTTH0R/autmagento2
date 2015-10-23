@@ -53,6 +53,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US8001Suite.class,
 	US8002Suite.class,
 	US8003Suite.class,	
+	US8004Suite.class,	
 	
 	ActivateBuy3Get1ForShopForMyselfTest.class,
 	US4001Suite.class,

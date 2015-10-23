@@ -21,7 +21,7 @@ public class DeactivateBuy3Get1ForHostTest extends BaseTest{
 	public PromotionSteps promotionSteps;
 	
 	@Test
-	public void changeRuleStatusTest(){
+	public void deactivateBuy3Get1ForHostTest(){
 		promotionSteps.deactivateBuy3Get1ForHost();	
 		
 	}
