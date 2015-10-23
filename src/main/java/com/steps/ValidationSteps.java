@@ -3,6 +3,7 @@ package com.steps;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
@@ -30,6 +31,7 @@ public class ValidationSteps extends AbstractSteps {
 
 	}
 
+	@Title("Validate customer leads number")
 	@StepGroup
 	public void validateCustomerLeadData(DBStylistModel initialData, StylistDataModel finalData) {
 
@@ -37,6 +39,7 @@ public class ValidationSteps extends AbstractSteps {
 
 	}
 
+	@Title("Validate customer leads and style coach leads number")
 	@StepGroup
 	public void validateStyleCoachLeadData(DBStylistModel initialData, StylistDataModel finalData) {
 		verifyValues("Customer Leads", initialData.getTotalCustomerReceived(), finalData.getCustomerLeads());
@@ -45,6 +48,7 @@ public class ValidationSteps extends AbstractSteps {
 
 	}
 
+	@Title("Validate customer leads and host leads number")
 	@StepGroup
 	public void validateHostLeadData(DBStylistModel initialData, StylistDataModel finalData) {
 		verifyValues("Customer Leads ", initialData.getTotalCustomerReceived(), finalData.getCustomerLeads());

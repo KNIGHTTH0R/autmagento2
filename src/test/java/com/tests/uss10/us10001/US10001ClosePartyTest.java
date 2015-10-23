@@ -28,8 +28,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.StyleParty.class)
+@WithTag(name = "US9.1 Place Host Order With 40% Discount and JB Test", type = "Scenarios")
+@Story(Application.HostCart.US9_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US10001ClosePartyTest extends BaseTest {
 	@Steps
