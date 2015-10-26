@@ -37,7 +37,7 @@ public class RegularCartTotalsCalculation {
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
 		
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
-		tax = totalAmount.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 		
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
@@ -79,7 +79,7 @@ public class RegularCartTotalsCalculation {
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
 		
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
-		tax = totalAmount.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 		
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
