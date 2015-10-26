@@ -118,7 +118,7 @@ public class CreateNewContactPage extends AbstractPage {
 	public void submitContact() {
 		element(sumbitContact).waitUntilVisible();
 		sumbitContact.click();
-		WebDriverWait wait = new WebDriverWait(getDriver(),60);
+		WebDriverWait wait = new WebDriverWait(getDriver(),120);
 		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
