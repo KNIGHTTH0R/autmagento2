@@ -55,7 +55,7 @@ public class CommissionReportSteps extends AbstractSteps {
 	@StepGroup
 	public IpModel closeLastMonthAndGetCurrentMonthIps(String stylistId) throws Exception {
 		
-//		ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
+		ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
 		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
 	
 		waitABit(10000);

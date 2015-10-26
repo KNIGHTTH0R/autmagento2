@@ -46,15 +46,18 @@ public class ClosedMonthBonusCalculation {
 		BigDecimal totalIp = BigDecimal.ZERO;
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
-		System.out.println("orders done !!!");
+		System.out.println("orders done !!!   " + allOrdersList.size());
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
+		System.out.println("credit memos done !!!   " + creditMemoList.size());
 		List<DBCreditMemoModel> completeCMList = CreditMemosInfoMagentoCalls.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
 
 		BigDecimal ipForOrders = OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
+		System.out.println("orders calculated !!!   " + allOrdersList.size());
 		BigDecimal ipForCreditMemos = CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
-
+		System.out.println("cm calculated !!!   " + allOrdersList.size());
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
+		System.out.println("dsddddddddddddddddddddddd      " + totalIp);
 
 		BigDecimal unsafeIpForOrders = OrdersInfoMagentoCalls.calculateTotalUnsafeIpOnCurrentMonth(allOrdersList, stylistId, endDate);
 
@@ -106,6 +109,6 @@ public class ClosedMonthBonusCalculation {
 	}
 
 	public static void main(String[] args) throws NumberFormatException, ParseException {
-		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-10-15 00:00:00", "2015-10-14 12:00:00");
+		ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835", "2015-10-26 00:00:00", "2015-10-26 12:00:00");
 	}
 }

@@ -132,16 +132,16 @@ public class CreditMemosInfoMagentoCalls {
 		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
 		value2.addTextNode(stylistId);
 
-		// SOAPElement complexObjectArrayB =
-		// complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
-		// SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
-		// keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
-		// SOAPElement valueB =
-		// complexObjectArrayB.addChildElement(SoapKeys.VALUE);
-		// SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
-		// key2B.addTextNode(SoapConstants.GREATER_THAN);
-		// SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
-		// value2B.addTextNode(createdStartDate);
+		 SOAPElement complexObjectArrayB =
+		 complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		 SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
+		 keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
+		 SOAPElement valueB =
+		 complexObjectArrayB.addChildElement(SoapKeys.VALUE);
+		 SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
+		 key2B.addTextNode(SoapConstants.GREATER_THAN);
+		 SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
+		 value2B.addTextNode("2015-07-01 00:00:00");
 
 		soapMessage.saveChanges();
 
