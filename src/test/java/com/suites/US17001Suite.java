@@ -36,11 +36,11 @@ import com.tests.uss17.us17001.US17001VerifyThatOldStylistWasDeactivatedTest;
 	US17001ConfirmCustomerInBackendTest.class,
 	US17001ConfirmSecondCustomerInBackendTest.class,
 	US17001ChangeFirstCustomersContextTest.class,
-	US17001ReasignContactsTest.class,
-	US17001VerifyThatContactsWereReassignedToSelectedScTest.class,
-	US17001VerifyThatFirstCustContactIsReassignedToCustPreffScTest.class,
-	US17001VerifyThatContactWasReassignedToUnqualifiedSelectedScTest.class,
-	US17001VerifyThatOldStylistWasDeactivatedTest.class,
+//	US17001ReasignContactsTest.class,
+//	US17001VerifyThatContactsWereReassignedToSelectedScTest.class,
+//	US17001VerifyThatFirstCustContactIsReassignedToCustPreffScTest.class,
+//	US17001VerifyThatContactWasReassignedToUnqualifiedSelectedScTest.class,
+//	US17001VerifyThatOldStylistWasDeactivatedTest.class,
 })
 @RunWith(Suite.class)
 public class US17001Suite {
