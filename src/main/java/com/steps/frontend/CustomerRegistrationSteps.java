@@ -282,7 +282,6 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputEmail(customerData.getEmailName());
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
-		System.out.println(getDriver().getCurrentUrl());
 		checkParties();
 		checkMember();
 		fillContactDetails(addressData);

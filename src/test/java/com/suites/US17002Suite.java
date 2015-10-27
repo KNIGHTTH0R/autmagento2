@@ -7,6 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.tests.uss17.us17002.US17002ChangeCustomersContextTest;
 import com.tests.uss17.us17002.US17002ConfirmCustomerInBackendTest;
 import com.tests.uss17.us17002.US17002ConfirmSecondStylecoachTest;
+import com.tests.uss17.us17002.US17002ConfirmStylecoachTest;
 import com.tests.uss17.us17002.US17002MarkSecondStarterKitOrderAsPaidTest;
 import com.tests.uss17.us17002.US17002MarkStarterKitOrderAsPaidTest;
 import com.tests.uss17.us17002.US17002ReasignContactsTest;
@@ -18,8 +19,8 @@ import com.tests.uss17.us17002.US17002VerifyThatContactWasReassignedCorrectlyTes
 
 @SuiteClasses({
 	US17002StyleCoachRegistrationTest.class,
-//	US17002ConfirmStylecoachTest.class,
 	US17002MarkStarterKitOrderAsPaidTest.class,
+	US17002ConfirmStylecoachTest.class,
 	US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest.class,
 	US17002ConfirmSecondStylecoachTest.class,
 	US17002MarkSecondStarterKitOrderAsPaidTest.class,
