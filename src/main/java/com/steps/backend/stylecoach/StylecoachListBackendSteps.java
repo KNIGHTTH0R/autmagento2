@@ -11,21 +11,21 @@ public class StylecoachListBackendSteps extends AbstractSteps {
 
 	@Step
 	public void reassignCustomersToAnotherStylecoach(String initialStylecoachName, String finalStylecoachName) {
-		stylecoachListBackendPage().inputEmailFilter(initialStylecoachName);
-		stylecoachListBackendPage().clickOnSearch();
-		stylecoachListBackendPage().checkDesiredStylecoach(initialStylecoachName);
-		stylecoachListBackendPage().selectActionList();
-		stylecoachListBackendPage().selectStylecoachToReassignContactsTo(finalStylecoachName);
-		stylecoachListBackendPage().clickOnsubmitReassignStylecoach();
+		inputEmailFilter(initialStylecoachName);
+		searchForStylist();
+		checkDesiredStylecoach(initialStylecoachName);
+		selectAction();
+		selectStylecoachToReassignContactsTo(finalStylecoachName);
+		submitReassignStylecoach();
 	}
 
 	@Step
 	public void reassignCustomers(String initialStylecoachName) {
-		stylecoachListBackendPage().inputEmailFilter(initialStylecoachName);
-		stylecoachListBackendPage().clickOnSearch();
-		stylecoachListBackendPage().checkDesiredStylecoach(initialStylecoachName);
-		stylecoachListBackendPage().selectActionList();
-		stylecoachListBackendPage().clickOnsubmitReassignStylecoach();
+		inputEmailFilter(initialStylecoachName);
+		searchForStylist();
+		checkDesiredStylecoach(initialStylecoachName);
+		selectAction();
+		submitReassignStylecoach();
 	}
 
 	@Step
@@ -33,5 +33,35 @@ public class StylecoachListBackendSteps extends AbstractSteps {
 		stylecoachListBackendPage().inputEmailFilter(stylecoachEmail);
 		stylecoachListBackendPage().clickOnSearch();
 		stylecoachListBackendPage().verifyStylecoachEmailAndStatus(ConfigConstants.REASSIGNED_PREFIX + stylecoachEmail);
+	}
+
+	@Step
+	public void inputEmailFilter(String email) {
+		stylecoachListBackendPage().inputEmailFilter(email);
+	}
+
+	@Step
+	public void searchForStylist() {
+		stylecoachListBackendPage().clickOnSearch();
+	}
+
+	@Step
+	public void checkDesiredStylecoach(String email) {
+		stylecoachListBackendPage().checkDesiredStylecoach(email);
+	}
+
+	@Step
+	public void selectAction() {
+		stylecoachListBackendPage().selectActionList();
+	}
+
+	@Step
+	public void selectStylecoachToReassignContactsTo(String email) {
+		stylecoachListBackendPage().selectStylecoachToReassignContactsTo(email);
+	}
+
+	@Step
+	public void submitReassignStylecoach() {
+		stylecoachListBackendPage().clickOnsubmitReassignStylecoach();
 	}
 }

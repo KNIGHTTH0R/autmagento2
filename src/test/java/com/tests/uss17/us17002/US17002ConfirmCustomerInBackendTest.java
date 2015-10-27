@@ -1,4 +1,4 @@
-package com.tests.uss17.us17003;
+package com.tests.uss17.us17002;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -17,33 +17,28 @@ import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US17.3 Check reassigned contacts up on canceled SC hierarchy when no new Sc is selected", type = "Scenarios")
-@Story(Application.MassAction.US17_3.class)
+@WithTag(name = "US17.1 Check reassigned duplicate contacts and customer associated contacts when new SC is selected", type = "Scenarios")
+@Story(Application.MassAction.US17_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US17003MarkStarterKitOrderAsPaidTest extends BaseTest {
+public class US17002ConfirmCustomerInBackendTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
 
-	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	private CustomerFormModel stylistRegistrationData;
 
 	@Before
 	public void setUp() throws Exception {
-		stylistRegistrationData = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationTest").get(0);
+
+		stylistRegistrationData = MongoReader.grabCustomerFormModels("US17002RegularCustomerRegistrationTest").get(0);
 	}
 
 	@Test
-	public void us17003MarkStarterKitOrderAsPaidTest() {
+	public void us17002ConfirmCustomerInBackendTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-
-		backEndSteps.clickOnSalesOrders();
-		backEndSteps.searchOrderByName(stylistRegistrationData.getFirstName());
-		backEndSteps.openOrderDetails(stylistRegistrationData.getFirstName());
-		ordersSteps.markOrderAsPaid();
-		
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
 		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());

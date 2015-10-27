@@ -36,7 +36,7 @@ public class US17001ConfirmSecondCustomerInBackendTest extends BaseTest {
 	}
 
 	@Test
-	public void us17001ConfirmCustomerInBackendTest() {
+	public void us17001ConfirmSecondCustomerInBackendTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
