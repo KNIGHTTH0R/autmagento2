@@ -41,6 +41,7 @@ public class US17001ConfirmSecondCustomerInBackendTest extends BaseTest {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
+		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
 		backEndSteps.confirmCustomer();
 	}
 
