@@ -49,7 +49,7 @@ public class US17001RegularCustomerRegistrationTest extends BaseTest {
 
 	@Test
 	public void us17001RegularCustomerRegistrationTest() {
-
+		
 		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel,
 				Separators.SLASH + stylistAddressModel.getFirstName() + stylistAddressModel.getLastName());
 		customerRegistrationSteps.verifyCustomerCreation();
