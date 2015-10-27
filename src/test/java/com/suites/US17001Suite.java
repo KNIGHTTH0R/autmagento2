@@ -9,8 +9,8 @@ import com.tests.uss17.us17001.US17001AddNewContactToStyleCoachTest;
 import com.tests.uss17.us17001.US17001AddSecondNewContactToStyleCoachTest;
 import com.tests.uss17.us17001.US17001AddThirdContactToStyleCoachTest;
 import com.tests.uss17.us17001.US17001ChangeFirstCustomersContextTest;
-import com.tests.uss17.us17001.US17001ConfirmCustomerInBackendTest;
-import com.tests.uss17.us17001.US17001ConfirmSecondCustomerInBackendTest;
+import com.tests.uss17.us17001.US17001ConfirmCustomerTest;
+import com.tests.uss17.us17001.US17001ConfirmSecondCustomerTest;
 import com.tests.uss17.us17001.US17001ConfirmStylecoachTest;
 import com.tests.uss17.us17001.US17001MarkStarterKitOrderAsPaidTest;
 import com.tests.uss17.us17001.US17001ReasignContactsTest;
@@ -30,12 +30,10 @@ import com.tests.uss17.us17001.US17001VerifyThatOldStylistWasDeactivatedTest;
 	US17001SecondRegularCustomerRegistrationTest.class,
 	US17001AddNewContactToStyleCoachTest.class,
 	US17001AddSecondNewContactToStyleCoachTest.class,
+	US17001ConfirmCustomerTest.class,
+	US17001ConfirmSecondCustomerTest.class,	
 	US17001AddThirdContactToStyleCoachTest.class,
 	US17001AddForthContactToStyleCoachTest.class,
-//	US17001ConfirmCustomerTest.class,
-//	US17001ConfirmSecondCustomerTest.class,	
-	US17001ConfirmCustomerInBackendTest.class,
-	US17001ConfirmSecondCustomerInBackendTest.class,
 	US17001ChangeFirstCustomersContextTest.class,
 	US17001ReasignContactsTest.class,
 	US17001VerifyThatContactsWereReassignedToSelectedScTest.class,
