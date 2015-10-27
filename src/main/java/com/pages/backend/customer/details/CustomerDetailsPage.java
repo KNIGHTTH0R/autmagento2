@@ -116,6 +116,9 @@ public class CustomerDetailsPage extends AbstractPage {
 	@FindBy(id = "_stylistprofilestylist_quit_date")
 	private WebElement quitDateInput;
 
+	@FindBy(id = "_accountconfirmation")
+	private WebElement accountConfirmationDropdown;
+
 	public void addNewAddress() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(addAddressButton).waitUntilVisible();
@@ -189,6 +192,11 @@ public class CustomerDetailsPage extends AbstractPage {
 	public void selectCountryName(String countryName) {
 		element(countrySelect).waitUntilVisible();
 		element(countrySelect).selectByVisibleText(countryName);
+	}
+
+	public void selectConfirmationStatus(String status) {
+		element(accountConfirmationDropdown).waitUntilVisible();
+		element(accountConfirmationDropdown).selectByVisibleText(status);
 	}
 
 	public void selectSponsor(String sponsor) {

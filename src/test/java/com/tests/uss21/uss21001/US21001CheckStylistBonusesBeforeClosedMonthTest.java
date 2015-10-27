@@ -59,6 +59,7 @@ public class US21001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 				}
 			}
 		}
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 

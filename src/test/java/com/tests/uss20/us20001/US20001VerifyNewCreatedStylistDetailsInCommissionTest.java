@@ -45,6 +45,7 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 		
 		//TODO this is temporarily placed here.it only has to run before calculating the current month bonuses
 		ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
+		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
 	}
 
 	@Test

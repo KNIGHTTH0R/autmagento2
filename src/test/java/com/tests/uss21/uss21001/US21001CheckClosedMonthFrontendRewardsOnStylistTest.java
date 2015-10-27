@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
@@ -23,6 +24,7 @@ import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.env.constants.FilePaths;
+import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -78,7 +80,7 @@ public class US21001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTes
 	}
 
 	@Test
-	public void us21001CheckClosedMonthFrontendRewardsOnStylistTest() {
+	public void us21001CheckClosedMonthFrontendRewardsOnStylistTest() throws Exception {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -91,6 +93,9 @@ public class US21001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTes
 
 		dashboardSteps.validateDashboardTotalJewerlyBonus(finalRewardPointsOfStylistModel.getJewelryBonus(), dashboardTotalJb);
 		dashboardSteps.validateDashboardTotalMarketingBonus(finalRewardPointsOfStylistModel.getMarketingMaterialBonus(), dashboardTotalMmb);
+		
+		// this is here for the previous test
+		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
 
 	}
 

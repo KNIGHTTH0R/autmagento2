@@ -195,11 +195,18 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().saveAndContinueEdit();
 
 	}
-
+	
 	@Step
 	public void editEmail(CustomerFormModel customerData) {
 		customerDetailsHomePage().clickOnAccountInfoTab();
 		customerDetailsHomePage().typeEmail(customerData.getEmailName().replace("@mailinator.com", "@evozon.com"));
+		customerDetailsHomePage().saveCustomer();
+	}
+
+	@Step
+	public void confirmCustomer() {
+		customerDetailsHomePage().clickOnAccountInfoTab();
+		customerDetailsHomePage().selectConfirmationStatus("Confirmed");
 		customerDetailsHomePage().saveCustomer();
 	}
 
