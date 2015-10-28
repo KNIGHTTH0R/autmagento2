@@ -46,6 +46,25 @@ public class CreditMemosInfoMagentoCalls {
 		System.out.println("total: " + String.valueOf(totalMonthRefundedIp));
 		return totalMonthRefundedIp;
 	}
+	
+
+	public static BigDecimal calculateTotalIpsForCreditMemosInTakeOfPeriod(List<DBCreditMemoModel> completeCMList, String stylistId, String activationDate)
+			throws NumberFormatException, ParseException {
+
+		BigDecimal totalMonthRefundedIp = BigDecimal.ZERO;
+
+		for (DBCreditMemoModel order : completeCMList) {
+
+			if (isOrderCompatibleForDecreasingIpForTob(order, activationDate)) {
+				totalMonthRefundedIp = totalMonthRefundedIp.subtract(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
+			}
+			if (isOrderCompatibleForIncreasingIpForTob(order, activationDate)) {
+				totalMonthRefundedIp = totalMonthRefundedIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
+			}
+		}
+		System.out.println("total: " + String.valueOf(totalMonthRefundedIp));
+		return totalMonthRefundedIp;
+	}
 
 	private static boolean isOrderCompatibleForIncreasingIp(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
 		return creditMemo.getState().contentEquals("3")
@@ -53,9 +72,21 @@ public class CreditMemosInfoMagentoCalls {
 						createdEndDate));
 	}
 
+	private static boolean isOrderCompatibleForIncreasingIpForTob(DBCreditMemoModel creditMemo, String activationDate) throws ParseException {
+		return creditMemo.getState().contentEquals("3")
+				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
+				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss");
+	}
+
 	private static boolean isOrderCompatibleForDecreasingIp(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
 		return creditMemo.getState().contentEquals("2") && isCreditMemoCompatibleForIpCalcCase1(creditMemo, createdStartDate, createdEndDate)
 				|| isCreditMemoCompatibleForIpCalcCase2(creditMemo, createdStartDate, createdEndDate);
+	}
+
+	private static boolean isOrderCompatibleForDecreasingIpForTob(DBCreditMemoModel creditMemo, String activationDate) throws ParseException {
+		return creditMemo.getState().contentEquals("2")
+				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
+				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss");
 	}
 
 	private static boolean isCreditMemoCompatibleForIpCalcCase1(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
@@ -132,16 +163,14 @@ public class CreditMemosInfoMagentoCalls {
 		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
 		value2.addTextNode(stylistId);
 
-		 SOAPElement complexObjectArrayB =
-		 complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
-		 SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
-		 keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
-		 SOAPElement valueB =
-		 complexObjectArrayB.addChildElement(SoapKeys.VALUE);
-		 SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
-		 key2B.addTextNode(SoapConstants.GREATER_THAN);
-		 SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
-		 value2B.addTextNode("2015-07-01 00:00:00");
+		SOAPElement complexObjectArrayB = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
+		keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
+		SOAPElement valueB = complexObjectArrayB.addChildElement(SoapKeys.VALUE);
+		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
+		key2B.addTextNode(SoapConstants.GREATER_THAN);
+		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
+		value2B.addTextNode("2015-07-01 00:00:00");
 
 		soapMessage.saveChanges();
 
@@ -207,6 +236,5 @@ public class CreditMemosInfoMagentoCalls {
 		}
 		return creditMemoList;
 	}
-
 
 }

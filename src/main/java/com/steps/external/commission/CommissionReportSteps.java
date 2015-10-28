@@ -33,7 +33,7 @@ public class CommissionReportSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public RewardPointsOfStylistModel closeMonthAndCalculateRewardPoints(String stylistId) throws Exception {
+	public RewardPointsOfStylistModel closeMonthAndCalculateRewardPoints(String stylistId, String activationDate) throws Exception {
 
 		if (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")) {
 			ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
@@ -48,7 +48,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId, "2015-09-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
+		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId,activationDate, "2015-09-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
 
 	}
 	@Title("Close last month and get current month ips")

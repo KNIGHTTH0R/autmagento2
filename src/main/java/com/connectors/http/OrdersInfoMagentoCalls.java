@@ -49,11 +49,26 @@ public class OrdersInfoMagentoCalls {
 		return totalMonthIp;
 	}
 
+	public static BigDecimal calculateTotalIpFromOrdersInTakeOfPeriod(List<DBOrderModel> allOrdersList, String stylistId, String activationDate) throws NumberFormatException,
+			ParseException {
+		BigDecimal totalMonthIp = BigDecimal.ZERO;
+		int ordersNumber = 0;
+		for (DBOrderModel order : allOrdersList) {
+			if (isOrderCompatibleForIpCalculationInTob(order, activationDate)) {
+				ordersNumber++;
+				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+			}
+		}
+		System.out.println("total: " + String.valueOf(totalMonthIp));
+		System.out.println("orders number: " + ordersNumber);
+		return totalMonthIp;
+	}
+
 	public static BigDecimal calculateTotalUnsafeIpOnCurrentMonth(List<DBOrderModel> allOrdersList, String stylistId, String createdStartDate) throws NumberFormatException,
 			ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 		int ordersNumber = 0;
-		// List<DBOrderModel> allOrdersList = getOrdersList(stylistId);
+		
 		for (DBOrderModel order : allOrdersList) {
 			if (isOrderCompatibleForUnsafeIpCalc(order, createdStartDate)) {
 				ordersNumber++;
@@ -63,6 +78,11 @@ public class OrdersInfoMagentoCalls {
 		System.out.println("total: " + String.valueOf(totalMonthIp));
 		System.out.println("orders number: " + ordersNumber);
 		return totalMonthIp;
+	}
+
+	private static boolean isOrderCompatibleForIpCalculationInTob(DBOrderModel order, String activationDate) throws ParseException {
+		return isPayed(order) && DateUtils.isDateBeetween(order.getCreatedAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
+				&& DateUtils.isDateBeetween(order.getPaidAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss");
 	}
 
 	private static boolean isOrderCompatibleForIpCalculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
@@ -166,16 +186,14 @@ public class OrdersInfoMagentoCalls {
 		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
 		value2.addTextNode(stylistId);
 
-		 SOAPElement complexObjectArrayB =
-		 complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
-		 SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
-		 keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
-		 SOAPElement valueB =
-		 complexObjectArrayB.addChildElement(SoapKeys.VALUE);
-		 SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
-		 key2B.addTextNode(SoapConstants.GREATER_THAN);
-		 SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
-		 value2B.addTextNode("2015-07-01 00:00:00");
+		SOAPElement complexObjectArrayB = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
+		keyB.addTextNode(SoapConstants.SOAP_CREATED_AT_FILTER);
+		SOAPElement valueB = complexObjectArrayB.addChildElement(SoapKeys.VALUE);
+		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
+		key2B.addTextNode(SoapConstants.GREATER_THAN);
+		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
+		value2B.addTextNode("2015-07-01 00:00:00");
 
 		// testing purpose
 		// SOAPElement complexObjectArrayC =

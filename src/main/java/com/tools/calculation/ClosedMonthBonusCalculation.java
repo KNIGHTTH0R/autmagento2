@@ -1,6 +1,8 @@
 package com.tools.calculation;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.List;
 
@@ -13,10 +15,12 @@ import com.tools.data.soap.DBOrderModel;
 
 public class ClosedMonthBonusCalculation {
 
-	public static RewardPointsOfStylistModel calculateClosedMonthBonuses(String stylistId, String startDate, String endDate) throws NumberFormatException, ParseException {
+	public static RewardPointsOfStylistModel calculateClosedMonthBonuses(String stylistId, String activationDate, String startDate, String endDate) throws NumberFormatException,
+			ParseException {
 
 		RewardPointsOfStylistModel result = new RewardPointsOfStylistModel();
 		BigDecimal totalIp = BigDecimal.ZERO;
+		BigDecimal totalIpForTob = BigDecimal.ZERO;
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
@@ -28,9 +32,15 @@ public class ClosedMonthBonusCalculation {
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
 
-		System.out.println("total ip: " + totalIp);
+		BigDecimal tobIpForOrders = OrdersInfoMagentoCalls.calculateTotalIpFromOrdersInTakeOfPeriod(allOrdersList, stylistId, activationDate);
+		BigDecimal tobIpForCreditMemos = CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemosInTakeOfPeriod(completeCMList, stylistId, activationDate);
 
-		result.setJewelryBonus(String.valueOf(determineJewelryBonusAmount(totalIp)));
+		totalIpForTob = totalIpForTob.add(tobIpForOrders);
+		totalIpForTob = totalIpForTob.add(tobIpForCreditMemos);
+
+		System.out.println("TOB jewelry " + determineJewelryBonusAmountForTob(totalIpForTob));
+
+		result.setJewelryBonus(String.valueOf(determineJewelryBonusAmount(totalIp).add(determineJewelryBonusAmountForTob(totalIpForTob))));
 		result.setMarketingMaterialBonus(String.valueOf(determineMarketingMaterialBonusAmount(totalIp)));
 
 		System.out.println(result.getJewelryBonus());
@@ -46,18 +56,13 @@ public class ClosedMonthBonusCalculation {
 		BigDecimal totalIp = BigDecimal.ZERO;
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
-		System.out.println("orders done !!!   " + allOrdersList.size());
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
-		System.out.println("credit memos done !!!   " + creditMemoList.size());
 		List<DBCreditMemoModel> completeCMList = CreditMemosInfoMagentoCalls.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
 
 		BigDecimal ipForOrders = OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
-		System.out.println("orders calculated !!!   " + allOrdersList.size());
 		BigDecimal ipForCreditMemos = CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
-		System.out.println("cm calculated !!!   " + allOrdersList.size());
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
-		System.out.println("dsddddddddddddddddddddddd      " + totalIp);
 
 		BigDecimal unsafeIpForOrders = OrdersInfoMagentoCalls.calculateTotalUnsafeIpOnCurrentMonth(allOrdersList, stylistId, endDate);
 
@@ -93,6 +98,18 @@ public class ClosedMonthBonusCalculation {
 		return jewelry;
 	}
 
+	public static BigDecimal determineJewelryBonusAmountForTob(BigDecimal totalIpForTob) {
+		
+		BigDecimal jewelry = BigDecimal.ZERO;
+		
+		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);
+		int tobNumber = totalIpForTob.divide(BigDecimal.valueOf(5750),mc).intValue();
+		tobNumber = tobNumber < 6 ? tobNumber : 6;
+		jewelry = BigDecimal.valueOf(tobNumber).multiply(BigDecimal.valueOf(300));
+
+		return jewelry;
+	}
+
 	public static BigDecimal determineMarketingMaterialBonusAmount(BigDecimal totalIp) {
 		BigDecimal marketingMaterial = BigDecimal.ZERO;
 
@@ -109,6 +126,6 @@ public class ClosedMonthBonusCalculation {
 	}
 
 	public static void main(String[] args) throws NumberFormatException, ParseException {
-		ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835", "2015-10-26 00:00:00", "2015-10-26 12:00:00");
+		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-09-20 12:06:49", "2015-09-15 00:00:00", "2015-10-28 00:00:00");
 	}
 }

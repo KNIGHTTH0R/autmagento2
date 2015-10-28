@@ -99,9 +99,7 @@ public class US22001VerifySCPerformanceNewIpLogicBackendTest extends BaseTest {
 		backEndSteps.searchForEmail(email);
 		backEndSteps.openCustomerDetails(email);
 		grabbedLoungeIpPerformanceModel = customerDetailsBackendSteps.grabSCPerformanceIpLogicAdmin();
-
 		stylecoachPerformanceValidationWorkflow.validatePerformanceValues(expectedLoungeIpPerformanceModel, grabbedLoungeIpPerformanceModel);
-
 		customVerifications.printErrors();
 
 	}
