@@ -81,8 +81,8 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	private static boolean isOrderCompatibleForIpCalculationInTob(DBOrderModel order, String activationDate) throws ParseException {
-		return isPayed(order) && DateUtils.isDateBeetween(order.getCreatedAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(order.getPaidAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss");
+		return isPayed(order) && DateUtils.isDateBeetween(order.getCreatedAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate,"yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
+				&& DateUtils.isDateBeetween(order.getPaidAt(), activationDate,  DateUtils.getLastDayOfAGivenMonth(activationDate,"yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss");
 	}
 
 	private static boolean isOrderCompatibleForIpCalculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {

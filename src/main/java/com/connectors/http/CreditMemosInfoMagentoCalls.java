@@ -46,7 +46,6 @@ public class CreditMemosInfoMagentoCalls {
 		System.out.println("total: " + String.valueOf(totalMonthRefundedIp));
 		return totalMonthRefundedIp;
 	}
-	
 
 	public static BigDecimal calculateTotalIpsForCreditMemosInTakeOfPeriod(List<DBCreditMemoModel> completeCMList, String stylistId, String activationDate)
 			throws NumberFormatException, ParseException {
@@ -74,8 +73,10 @@ public class CreditMemosInfoMagentoCalls {
 
 	private static boolean isOrderCompatibleForIncreasingIpForTob(DBCreditMemoModel creditMemo, String activationDate) throws ParseException {
 		return creditMemo.getState().contentEquals("3")
-				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss");
+				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate, "yyyy-MM-dd HH:mm:ss"),
+						"yyyy-MM-dd HH:mm:ss")
+				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate, "yyyy-MM-dd HH:mm:ss"),
+						"yyyy-MM-dd HH:mm:ss");
 	}
 
 	private static boolean isOrderCompatibleForDecreasingIp(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
@@ -85,8 +86,10 @@ public class CreditMemosInfoMagentoCalls {
 
 	private static boolean isOrderCompatibleForDecreasingIpForTob(DBCreditMemoModel creditMemo, String activationDate) throws ParseException {
 		return creditMemo.getState().contentEquals("2")
-				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), activationDate, DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss");
+				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate, "yyyy-MM-dd HH:mm:ss"),
+						"yyyy-MM-dd HH:mm:ss")
+				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate, "yyyy-MM-dd HH:mm:ss"),
+						"yyyy-MM-dd HH:mm:ss");
 	}
 
 	private static boolean isCreditMemoCompatibleForIpCalcCase1(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
