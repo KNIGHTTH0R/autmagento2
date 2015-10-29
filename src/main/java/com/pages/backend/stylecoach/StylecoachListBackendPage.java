@@ -72,7 +72,7 @@ public class StylecoachListBackendPage extends AbstractPage {
 	public void openStylistDetails(){
 		evaluateJavascript("jQuery.noConflict();");
 		element(styleCoachRow).waitUntilVisible();
-		styleCoachRow.click();
+		getDriver().get(styleCoachRow.getAttribute("title"));
 	}
 
 	public void verifyStylecoachEmailAndStatus(String stylecoachEmail) {
