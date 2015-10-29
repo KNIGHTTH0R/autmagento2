@@ -42,7 +42,7 @@ public class StylecoachListBackendSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void openStylistDetails(String stylecoachEmail) {
+	public void openStylistDetails() {
 		stylecoachListBackendPage().openStylistDetails();
 	}
 

@@ -87,6 +87,7 @@ public class US21001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 
 		backEndSteps.clickOnStylecoachList();
 		stylecoachListBackendSteps.searchForStylist(email);
+		stylecoachListBackendSteps.openStylistDetails();
 		stylecoachDetailsBackendSteps.typeNewActivatedAtDate(DateUtils.getPreviousMonthMiddle(DateConstants.FORMAT));
 		dateModel.setDate(DateUtils.addDaysToAAGivenDate(DateUtils.getPreviousMonthMiddle(DateConstants.FORMAT), DateConstants.FORMAT_12_HOURS, 2));
 	}
