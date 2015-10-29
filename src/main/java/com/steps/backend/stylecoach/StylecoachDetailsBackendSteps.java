@@ -11,6 +11,12 @@ public class StylecoachDetailsBackendSteps extends AbstractSteps {
 	@Step
 	public void typeNewActivatedAtDate(String date) {
 		stylecoachDetailsBackendPage().inputActivatedAtDate(date);
+		stylecoachDetailsBackendPage().saveStylecoach();
+	}
+
+	@Step
+	public void saveStylecoach() {
+		stylecoachDetailsBackendPage().saveStylecoach();
 	}
 
 }
