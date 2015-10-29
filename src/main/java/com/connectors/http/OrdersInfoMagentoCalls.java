@@ -1,10 +1,7 @@
 package com.connectors.http;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.soap.SOAPBody;
@@ -20,7 +17,6 @@ import com.tools.SoapKeys;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.env.constants.SoapConstants;
 import com.tools.env.variables.UrlConstants;
-import com.tools.utils.DateUtils;
 
 /**
  * @author mihaibarta
@@ -28,107 +24,6 @@ import com.tools.utils.DateUtils;
  */
 
 public class OrdersInfoMagentoCalls {
-
-	private static List<String> unsafeIpStatusesList = new ArrayList<String>(Arrays.asList("processing", "waiting_authorozation", "payment_review", "payment_failed",
-			"pending_payment", "payment_in_progress", "pending_payment_hold"));
-
-	private static List<String> payedStatusesList = new ArrayList<String>(Arrays.asList("complete", "payment_complete", "closed"));
-
-	public static BigDecimal calculateTotalIpOnPreviousMonth(List<DBOrderModel> allOrdersList, String stylistId, String createdStartDate, String createdEndDate)
-			throws NumberFormatException, ParseException {
-		BigDecimal totalMonthIp = BigDecimal.ZERO;
-		int ordersNumber = 0;
-		for (DBOrderModel order : allOrdersList) {
-			if (isOrderCompatibleForIpCalculation(order, createdStartDate, createdEndDate)) {
-				ordersNumber++;
-				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
-			}
-		}
-		System.out.println("total: " + String.valueOf(totalMonthIp));
-		System.out.println("orders number: " + ordersNumber);
-		return totalMonthIp;
-	}
-
-	public static BigDecimal calculateTotalIpFromOrdersInTakeOfPeriod(List<DBOrderModel> allOrdersList, String stylistId, String activationDate) throws NumberFormatException,
-			ParseException {
-		BigDecimal totalMonthIp = BigDecimal.ZERO;
-		int ordersNumber = 0;
-		for (DBOrderModel order : allOrdersList) {
-			if (isOrderCompatibleForIpCalculationInTob(order, activationDate)) {
-				ordersNumber++;
-				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
-			}
-		}
-		System.out.println("total: " + String.valueOf(totalMonthIp));
-		System.out.println("orders number: " + ordersNumber);
-		return totalMonthIp;
-	}
-
-	public static BigDecimal calculateTotalUnsafeIpOnCurrentMonth(List<DBOrderModel> allOrdersList, String stylistId, String createdStartDate) throws NumberFormatException,
-			ParseException {
-		BigDecimal totalMonthIp = BigDecimal.ZERO;
-		int ordersNumber = 0;
-		
-		for (DBOrderModel order : allOrdersList) {
-			if (isOrderCompatibleForUnsafeIpCalc(order, createdStartDate)) {
-				ordersNumber++;
-				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
-			}
-		}
-		System.out.println("total: " + String.valueOf(totalMonthIp));
-		System.out.println("orders number: " + ordersNumber);
-		return totalMonthIp;
-	}
-
-	private static boolean isOrderCompatibleForIpCalculationInTob(DBOrderModel order, String activationDate) throws ParseException {
-		return isPayed(order) && DateUtils.isDateBeetween(order.getCreatedAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate,"yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(order.getPaidAt(), activationDate,  DateUtils.getLastDayOfAGivenMonth(activationDate,"yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss");
-	}
-
-	private static boolean isOrderCompatibleForIpCalculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
-		return isPayed(order)
-				&& (isOrderCompatibleForIpCalcCase1(order, createdStartDate, createdEndDate) || isOrderCompatibleForIpCalcCase2(order, createdStartDate, createdEndDate));
-	}
-
-	private static boolean isPayed(DBOrderModel model) {
-		boolean found = false;
-		for (String status : payedStatusesList) {
-			if (model.getStatus().contentEquals(status)) {
-				found = true;
-			}
-		}
-		return found;
-	}
-
-	private static boolean hasUnsafeIpStatus(DBOrderModel model) {
-		boolean found = false;
-		for (String status : unsafeIpStatusesList) {
-			if (model.getStatus().contentEquals(status)) {
-				found = true;
-			}
-		}
-		return found;
-	}
-
-	private static boolean isOrderCompatibleForIpCalcCase1(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
-
-		return DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
-				DateUtils.getLastDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(order.getPaidAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"), createdEndDate, "yyyy-MM-dd HH:mm:ss");
-	}
-
-	private static boolean isOrderCompatibleForIpCalcCase2(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
-
-		return DateUtils.isDateBeetween(order.getCreatedAt(), "2015-01-01 00:00:00", DateUtils.getLastDayOfPreviousMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
-				"yyyy-MM-dd HH:mm:ss") && DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd HH:mm:ss");
-	}
-
-	private static boolean isOrderCompatibleForUnsafeIpCalc(DBOrderModel order, String createEndDate) throws ParseException {
-
-		return DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth("1970-10-10 00:00:00", "yyyy-MM-dd HH:mm:ss"),
-				DateUtils.getLastDayOfAGivenMonth(createEndDate, "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
-				&& !isPayed(order) && hasUnsafeIpStatus(order);
-	}
 
 	public static List<DBOrderModel> getOrdersList(String stylistId) {
 

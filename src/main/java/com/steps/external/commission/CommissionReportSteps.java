@@ -8,6 +8,7 @@ import com.connectors.http.ApacheHttpHelper;
 import com.tools.calculation.ClosedMonthBonusCalculation;
 import com.tools.data.backend.IpModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
+import com.tools.env.constants.DateConstants;
 import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
@@ -35,7 +36,7 @@ public class CommissionReportSteps extends AbstractSteps {
 	@StepGroup
 	public RewardPointsOfStylistModel closeMonthAndCalculateRewardPoints(String stylistId, String activationDate) throws Exception {
 
-		if (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")) {
+		if (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate(DateConstants.FORMAT), DateConstants.FORMAT)) {
 			ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
 			waitABit(10000);
 			getDriver().navigate().refresh();
@@ -67,7 +68,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().closeMonth();
 
 		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses(stylistId, DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00",
-				DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+				DateUtils.getCurrentDate(DateConstants.FORMAT));
 
 	}
 

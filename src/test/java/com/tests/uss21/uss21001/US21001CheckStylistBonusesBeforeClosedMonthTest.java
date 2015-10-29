@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -18,13 +20,18 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
+import com.steps.backend.stylecoach.StylecoachDetailsBackendSteps;
+import com.steps.backend.stylecoach.StylecoachListBackendSteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.RewardPointsOfStylistModel;
+import com.tools.data.frontend.DateModel;
+import com.tools.env.constants.DateConstants;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.Credentials;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 
 @WithTag(name = "US21.1 Verify Closed Month Frontend and Backend Performance", type = "Scenarios")
 @Story(Application.CloseMonthRewardPoints.US21_1.class)
@@ -33,6 +40,12 @@ public class US21001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
+	@Steps
+	public StylecoachListBackendSteps stylecoachListBackendSteps;
+	@Steps
+	public StylecoachDetailsBackendSteps stylecoachDetailsBackendSteps;
+
+	DateModel dateModel = new DateModel();
 	RewardPointsOfStylistModel rewardPointsOfStylistModel = new RewardPointsOfStylistModel();
 	String email;
 
@@ -59,23 +72,29 @@ public class US21001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 				}
 			}
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us21001CheckStylistBonusesBeforeClosedMonthTest() {
+	public void us21001CheckStylistBonusesBeforeClosedMonthTest() throws ParseException {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(email);
 		backEndSteps.openCustomerDetails(email);
 		backEndSteps.clickOnRewardsPointsTab();
 		rewardPointsOfStylistModel = backEndSteps.getRewardPointsOfStylistModel();
+
+		backEndSteps.clickOnStylecoachList();
+		stylecoachListBackendSteps.searchForStylist(email);
+		stylecoachDetailsBackendSteps.typeNewActivatedAtDate(DateUtils.getPreviousMonthMiddle(DateConstants.FORMAT));
+		dateModel.setDate(DateUtils.addDaysToAAGivenDate(DateUtils.getPreviousMonthMiddle(DateConstants.FORMAT), DateConstants.FORMAT_12_HOURS, 2));
 	}
 
 	@After
 	public void save() {
 		MongoWriter.saveRewardPointsModel(rewardPointsOfStylistModel, getClass().getSimpleName());
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
 	}
 
 }

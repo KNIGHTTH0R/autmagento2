@@ -68,6 +68,12 @@ public class StylecoachListBackendPage extends AbstractPage {
 		searchButton.click();
 		waitABit(2000);
 	}
+	
+	public void openStylistDetails(){
+		evaluateJavascript("jQuery.noConflict();");
+		element(styleCoachRow).waitUntilVisible();
+		styleCoachRow.click();
+	}
 
 	public void verifyStylecoachEmailAndStatus(String stylecoachEmail) {
 		evaluateJavascript("jQuery.noConflict();");

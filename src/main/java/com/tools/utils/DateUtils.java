@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
@@ -99,6 +100,27 @@ public class DateUtils {
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
 
+	public static String addDaysToAAGivenDate(String dateString, String formatString, int days) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DATE, days);
+
+		return String.valueOf(format.format(calendar.getTime()));
+	}
+	public static String addHoursToAGivenDate(String dateString, String formatString, int hours) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.HOUR, hours);
+		
+		return String.valueOf(format.format(calendar.getTime()));
+	}
+
 	public static String getCurrentDate(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
 
@@ -149,6 +171,27 @@ public class DateUtils {
 		DateFormat df = new SimpleDateFormat(format);
 
 		return !(df.parse(createdAt).before(df.parse(startDate)) || df.parse(createdAt).after(df.parse(endDate)));
+	}
+
+	public static int getNumberOfDaysBeetweenTwoDates(String firstDate, String secondDate, String formatString) throws ParseException {
+		Calendar cal1 = new GregorianCalendar();
+		Calendar cal2 = new GregorianCalendar();
+		SimpleDateFormat sdf = new SimpleDateFormat(formatString);
+
+		Date date = sdf.parse(firstDate);
+		cal1.setTime(date);
+		date = sdf.parse(secondDate);
+		cal2.setTime(date);
+
+		return daysBetween(cal1.getTime(), cal2.getTime());
+	}
+
+	public static int daysBetween(Date d1, Date d2) {
+		return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+	}
+
+	public static void main(String[] args) throws ParseException {
+		System.out.println(DateUtils.addHoursToAGivenDate("2015-07-20 00:00:00", "yyyy-MM-dd hh:mm:ss",2));
 	}
 
 }

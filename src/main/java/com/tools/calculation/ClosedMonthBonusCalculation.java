@@ -12,6 +12,7 @@ import com.tools.data.backend.IpModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.soap.DBCreditMemoModel;
 import com.tools.data.soap.DBOrderModel;
+import com.tools.env.constants.ComissionConfigConstants;
 
 public class ClosedMonthBonusCalculation {
 
@@ -24,16 +25,16 @@ public class ClosedMonthBonusCalculation {
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
-		List<DBCreditMemoModel> completeCMList = CreditMemosInfoMagentoCalls.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
+		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
 
-		BigDecimal ipForOrders = OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
-		BigDecimal ipForCreditMemos = CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
+		BigDecimal ipForOrders = OrdersCalculation.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
+		BigDecimal ipForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
 
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
 
-		BigDecimal tobIpForOrders = OrdersInfoMagentoCalls.calculateTotalIpFromOrdersInTakeOfPeriod(allOrdersList, stylistId, activationDate);
-		BigDecimal tobIpForCreditMemos = CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemosInTakeOfPeriod(completeCMList, stylistId, activationDate);
+		BigDecimal tobIpForOrders = OrdersCalculation.calculateTotalIpFromOrdersInTakeOfPeriod(allOrdersList, stylistId, activationDate, startDate);
+		BigDecimal tobIpForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemosInTakeOfPeriod(completeCMList, stylistId, activationDate, startDate);
 
 		totalIpForTob = totalIpForTob.add(tobIpForOrders);
 		totalIpForTob = totalIpForTob.add(tobIpForCreditMemos);
@@ -57,14 +58,14 @@ public class ClosedMonthBonusCalculation {
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
-		List<DBCreditMemoModel> completeCMList = CreditMemosInfoMagentoCalls.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
+		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
 
-		BigDecimal ipForOrders = OrdersInfoMagentoCalls.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
-		BigDecimal ipForCreditMemos = CreditMemosInfoMagentoCalls.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
+		BigDecimal ipForOrders = OrdersCalculation.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
+		BigDecimal ipForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
 
-		BigDecimal unsafeIpForOrders = OrdersInfoMagentoCalls.calculateTotalUnsafeIpOnCurrentMonth(allOrdersList, stylistId, endDate);
+		BigDecimal unsafeIpForOrders = OrdersCalculation.calculateTotalUnsafeIpOnCurrentMonth(allOrdersList, stylistId, endDate);
 
 		result.setIp(String.valueOf(totalIp.intValue()));
 		result.setUnsafeIp(String.valueOf(unsafeIpForOrders.intValue()));
@@ -90,22 +91,22 @@ public class ClosedMonthBonusCalculation {
 	public static BigDecimal determineJewelryBonusAmount(BigDecimal totalIp) {
 		BigDecimal jewelry = BigDecimal.ZERO;
 
-		if (isBetween(totalIp, BigDecimal.valueOf(750), BigDecimal.valueOf(1000))) {
-			jewelry = totalIp.multiply(BigDecimal.valueOf(0.03));
-		} else if (isBetween(totalIp, BigDecimal.valueOf(1000), BigDecimal.valueOf(100000000))) {
-			jewelry = totalIp.multiply(BigDecimal.valueOf(0.05));
+		if (isBetween(totalIp, BigDecimal.valueOf(ComissionConfigConstants.JEWERLY_FIRST_LIMIT), BigDecimal.valueOf(ComissionConfigConstants.JEWERLY_SECOND_LIMIT))) {
+			jewelry = totalIp.multiply(BigDecimal.valueOf(ComissionConfigConstants.JEWERLY_FIRST_RANGE_PERCENTAGE));
+		} else if (isBetween(totalIp, BigDecimal.valueOf(ComissionConfigConstants.JEWERLY_SECOND_LIMIT), BigDecimal.valueOf(ComissionConfigConstants.JEWERLY_LAST_LIMIT))) {
+			jewelry = totalIp.multiply(BigDecimal.valueOf(ComissionConfigConstants.JEWERLY_SECOND_RANGE_PERCENTAGE));
 		}
 		return jewelry;
 	}
 
 	public static BigDecimal determineJewelryBonusAmountForTob(BigDecimal totalIpForTob) {
-		
+
 		BigDecimal jewelry = BigDecimal.ZERO;
-		
+
 		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);
-		int tobNumber = totalIpForTob.divide(BigDecimal.valueOf(5750),mc).intValue();
-		tobNumber = tobNumber < 6 ? tobNumber : 6;
-		jewelry = BigDecimal.valueOf(tobNumber).multiply(BigDecimal.valueOf(300));
+		int tobNumber = totalIpForTob.divide(BigDecimal.valueOf(ComissionConfigConstants.TOB_MARGIN_VALUE), mc).intValue();
+		tobNumber = tobNumber < ComissionConfigConstants.TOB_MAX_NO ? tobNumber : ComissionConfigConstants.TOB_MAX_NO;
+		jewelry = BigDecimal.valueOf(tobNumber).multiply(BigDecimal.valueOf(ComissionConfigConstants.TOB_VALUE));
 
 		return jewelry;
 	}
@@ -113,10 +114,10 @@ public class ClosedMonthBonusCalculation {
 	public static BigDecimal determineMarketingMaterialBonusAmount(BigDecimal totalIp) {
 		BigDecimal marketingMaterial = BigDecimal.ZERO;
 
-		if (isBetween(totalIp, BigDecimal.valueOf(500), BigDecimal.valueOf(1500))) {
-			marketingMaterial = totalIp.multiply(BigDecimal.valueOf(0.03));
-		} else if (isBetween(totalIp, BigDecimal.valueOf(1500), BigDecimal.valueOf(100000000))) {
-			marketingMaterial = totalIp.multiply(BigDecimal.valueOf(0.05));
+		if (isBetween(totalIp, BigDecimal.valueOf(ComissionConfigConstants.MARKETING_FIRST_LIMIT), BigDecimal.valueOf(ComissionConfigConstants.MARKETING_SECOND_LIMIT))) {
+			marketingMaterial = totalIp.multiply(BigDecimal.valueOf(ComissionConfigConstants.MARKETING_FIRST_RANGE_PERCENTAGE));
+		} else if (isBetween(totalIp, BigDecimal.valueOf(ComissionConfigConstants.MARKETING_SECOND_LIMIT), BigDecimal.valueOf(ComissionConfigConstants.MARKETING_LAST_LIMIT))) {
+			marketingMaterial = totalIp.multiply(BigDecimal.valueOf(ComissionConfigConstants.MARKETING_SECOND_RANGE_PERCENTAGE));
 		}
 		return marketingMaterial;
 	}
@@ -126,6 +127,6 @@ public class ClosedMonthBonusCalculation {
 	}
 
 	public static void main(String[] args) throws NumberFormatException, ParseException {
-		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-09-20 12:06:49", "2015-09-15 00:00:00", "2015-10-28 00:00:00");
+		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835", "2015-07-20 12:06:49", "2015-09-15 00:00:00", "2015-10-28 00:00:00");
 	}
 }

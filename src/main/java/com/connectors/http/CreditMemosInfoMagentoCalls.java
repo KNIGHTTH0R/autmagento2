@@ -1,8 +1,6 @@
 package com.connectors.http;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +15,8 @@ import org.w3c.dom.NodeList;
 
 import com.tools.SoapKeys;
 import com.tools.data.soap.DBCreditMemoModel;
-import com.tools.data.soap.DBOrderModel;
 import com.tools.env.constants.SoapConstants;
 import com.tools.env.variables.UrlConstants;
-import com.tools.utils.DateUtils;
 
 /**
  * @author mihaibarta
@@ -28,87 +24,6 @@ import com.tools.utils.DateUtils;
  */
 
 public class CreditMemosInfoMagentoCalls {
-
-	public static BigDecimal calculateTotalIpsForCreditMemos(List<DBCreditMemoModel> completeCMList, String stylistId, String createdStartDate, String createdEndDate)
-			throws NumberFormatException, ParseException {
-
-		BigDecimal totalMonthRefundedIp = BigDecimal.ZERO;
-
-		for (DBCreditMemoModel order : completeCMList) {
-
-			if (isOrderCompatibleForDecreasingIp(order, createdStartDate, createdEndDate)) {
-				totalMonthRefundedIp = totalMonthRefundedIp.subtract(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
-			}
-			if (isOrderCompatibleForIncreasingIp(order, createdStartDate, createdEndDate)) {
-				totalMonthRefundedIp = totalMonthRefundedIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
-			}
-		}
-		System.out.println("total: " + String.valueOf(totalMonthRefundedIp));
-		return totalMonthRefundedIp;
-	}
-
-	public static BigDecimal calculateTotalIpsForCreditMemosInTakeOfPeriod(List<DBCreditMemoModel> completeCMList, String stylistId, String activationDate)
-			throws NumberFormatException, ParseException {
-
-		BigDecimal totalMonthRefundedIp = BigDecimal.ZERO;
-
-		for (DBCreditMemoModel order : completeCMList) {
-
-			if (isOrderCompatibleForDecreasingIpForTob(order, activationDate)) {
-				totalMonthRefundedIp = totalMonthRefundedIp.subtract(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
-			}
-			if (isOrderCompatibleForIncreasingIpForTob(order, activationDate)) {
-				totalMonthRefundedIp = totalMonthRefundedIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
-			}
-		}
-		System.out.println("total: " + String.valueOf(totalMonthRefundedIp));
-		return totalMonthRefundedIp;
-	}
-
-	private static boolean isOrderCompatibleForIncreasingIp(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
-		return creditMemo.getState().contentEquals("3")
-				&& (isCreditMemoCompatibleForIpCalcCase1(creditMemo, createdStartDate, createdEndDate) || isCreditMemoCompatibleForIpCalcCase2(creditMemo, createdStartDate,
-						createdEndDate));
-	}
-
-	private static boolean isOrderCompatibleForIncreasingIpForTob(DBCreditMemoModel creditMemo, String activationDate) throws ParseException {
-		return creditMemo.getState().contentEquals("3")
-				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate, "yyyy-MM-dd HH:mm:ss"),
-						"yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate, "yyyy-MM-dd HH:mm:ss"),
-						"yyyy-MM-dd HH:mm:ss");
-	}
-
-	private static boolean isOrderCompatibleForDecreasingIp(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
-		return creditMemo.getState().contentEquals("2") && isCreditMemoCompatibleForIpCalcCase1(creditMemo, createdStartDate, createdEndDate)
-				|| isCreditMemoCompatibleForIpCalcCase2(creditMemo, createdStartDate, createdEndDate);
-	}
-
-	private static boolean isOrderCompatibleForDecreasingIpForTob(DBCreditMemoModel creditMemo, String activationDate) throws ParseException {
-		return creditMemo.getState().contentEquals("2")
-				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate, "yyyy-MM-dd HH:mm:ss"),
-						"yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), activationDate, DateUtils.getLastDayOfAGivenMonth(activationDate, "yyyy-MM-dd HH:mm:ss"),
-						"yyyy-MM-dd HH:mm:ss");
-	}
-
-	private static boolean isCreditMemoCompatibleForIpCalcCase1(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
-
-		return DateUtils.isDateBeetween(creditMemo.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
-				DateUtils.getLastDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"), createdEndDate,
-						"yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"), createdEndDate,
-						"yyyy-MM-dd HH:mm:ss");
-	}
-
-	private static boolean isCreditMemoCompatibleForIpCalcCase2(DBCreditMemoModel creditMemo, String createdStartDate, String createdEndDate) throws ParseException {
-
-		return DateUtils.isDateBeetween(creditMemo.getOrderCreatedAt(), "2015-01-01 00:00:00", DateUtils.getLastDayOfPreviousMonth(createdStartDate, "yyyy-MM-dd HH:mm:ss"),
-				"yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(creditMemo.getOrderPaidAt(), createdStartDate, createdEndDate, "yyyy-MM-dd HH:mm:ss")
-				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), createdStartDate, createdEndDate, "yyyy-MM-dd HH:mm:ss");
-	}
 
 	public static List<DBCreditMemoModel> getCreditMemosList(String stylistId) {
 
@@ -224,20 +139,6 @@ public class CreditMemosInfoMagentoCalls {
 
 		}
 		return credtMemoModelList;
-	}
-
-	public static List<DBCreditMemoModel> populateCreditMemosListWithOrderDetails(List<DBCreditMemoModel> creditMemoList, List<DBOrderModel> orderList, String stylistId,
-			String createdStartDate) {
-
-		for (DBCreditMemoModel creditMemo : creditMemoList) {
-			for (DBOrderModel order : orderList) {
-				if (creditMemo.getOrderIncrementId().contentEquals(order.getIncrementId())) {
-					creditMemo.setOrderCreatedAt(order.getCreatedAt());
-					creditMemo.setOrderPaidAt(order.getPaidAt());
-				}
-			}
-		}
-		return creditMemoList;
 	}
 
 }

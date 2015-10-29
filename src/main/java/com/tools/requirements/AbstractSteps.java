@@ -26,6 +26,7 @@ import com.pages.backend.products.BackendProductListPage;
 import com.pages.backend.promotion.ShoppingCartPriceRulesPage;
 import com.pages.backend.stylecoach.PartyDetailsBackendPage;
 import com.pages.backend.stylecoach.PartyListBackendPage;
+import com.pages.backend.stylecoach.StylecoachDetailsBackendPage;
 import com.pages.backend.stylecoach.StylecoachListBackendPage;
 import com.pages.external.MailinatorPage;
 import com.pages.external.commission.CommissionReportPage;
@@ -317,6 +318,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public ShoppingCartPriceRulesPage shoppingCartPriceRulesPage() {
 		return getPages().currentPageAt(ShoppingCartPriceRulesPage.class);
+	}
+	
+	public StylecoachDetailsBackendPage stylecoachDetailsBackendPage() {
+		return getPages().currentPageAt(StylecoachDetailsBackendPage.class);
 	}
 
 	// -----------------------FE-----------------------------------
