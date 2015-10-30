@@ -94,7 +94,7 @@ public class US17001VerifyThatFirstCustContactIsReassignedToCustPreffScTest exte
 		oldStylistModel = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		customerModel = MongoReader.grabCustomerFormModels("US17001RegularCustomerRegistrationTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US17001RegularCustomerRegistrationTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US17001RegularCustomerRegistrationTest").get(0);
+		dateModel = MongoReader.grabDateModels("US17001RegularCustomerRegistrationTest").get(0);
 
 		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, customerModel, dateModel, addressModel);
 

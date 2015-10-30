@@ -367,7 +367,7 @@ public class MongoReader extends MongoConnector {
 		return itemList;
 	}
 
-	public static List<DateModel> grabStylistDateModels(String testName) {
+	public static List<DateModel> grabDateModels(String testName) {
 		DBObject dbObject = null;
 		List<DateModel> itemList = new ArrayList<DateModel>();
 

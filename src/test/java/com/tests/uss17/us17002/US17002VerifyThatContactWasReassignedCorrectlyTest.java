@@ -93,7 +93,7 @@ public class US17002VerifyThatContactWasReassignedCorrectlyTest extends BaseTest
 		}
 		oldStylistModel = MongoReader.grabCustomerFormModels("US17002StyleCoachRegistrationTest").get(0);
 		contactModel = MongoReader.grabCustomerFormModels("US17002RegularCustomerRegistrationTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US17002RegularCustomerRegistrationTest").get(0);
+		dateModel = MongoReader.grabDateModels("US17002RegularCustomerRegistrationTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US17002RegularCustomerRegistrationTest").get(0);
 
 		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, contactModel, dateModel, addressModel);

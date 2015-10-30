@@ -95,7 +95,7 @@ public class US17003VerifyContactIsReassignedUpOnCanceledScHierarchyTest extends
 		}
 		oldStylistModel = MongoReader.grabCustomerFormModels("US17003StyleCoachRegistrationTest").get(0);
 		contactModel = MongoReader.grabCustomerFormModels("US17003AddNewContactToStyleCoachTest").get(0);
-		contactDateModel = MongoReader.grabStylistDateModels("US17003AddNewContactToStyleCoachTest").get(0);
+		contactDateModel = MongoReader.grabDateModels("US17003AddNewContactToStyleCoachTest").get(0);
 		contactAddressModel = MongoReader.grabAddressModels("US17003AddNewContactToStyleCoachTest").get(0);
 
 		contactExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,contactModel, contactDateModel, contactAddressModel);

@@ -94,7 +94,7 @@ public class US17001VerifyThatContactWasReassignedToUnqualifiedSelectedScTest ex
 		}
 		oldStylistModel = MongoReader.grabCustomerFormModels("US17001StyleCoachRegistrationTest").get(0);
 		contactModel = MongoReader.grabCustomerFormModels("US17001AddThirdContactToStyleCoachTest").get(0);
-		dateModel = MongoReader.grabStylistDateModels("US17001AddForthContactToStyleCoachTest").get(0);
+		dateModel = MongoReader.grabDateModels("US17001AddForthContactToStyleCoachTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US17001AddForthContactToStyleCoachTest").get(0);
 		
 		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,contactModel, dateModel, addressModel); 

@@ -54,7 +54,7 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		formCreationDate = MongoReader.grabStylistDateModels("US6001ScRegistrationNewCustomerTest").get(0).getDate();
+		formCreationDate = MongoReader.grabDateModels("US6001ScRegistrationNewCustomerTest").get(0).getDate();
 		int size = MongoReader.grabCustomerFormModels("US6001ScRegistrationNewCustomerTest").size();
 		if (size > 0) {
 			stylistRegistrationData = MongoReader.grabCustomerFormModels("US6001ScRegistrationNewCustomerTest").get(0);

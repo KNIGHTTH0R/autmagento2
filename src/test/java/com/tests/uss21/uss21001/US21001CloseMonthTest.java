@@ -1,5 +1,11 @@
 package com.tests.uss21.uss21001;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -15,7 +21,10 @@ import com.steps.backend.BackEndSteps;
 import com.steps.external.commission.CommissionReportSteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.RewardPointsOfStylistModel;
+import com.tools.data.frontend.DateModel;
+import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -30,18 +39,45 @@ public class US21001CloseMonthTest extends BaseTest {
 	public CommissionReportSteps commissionReportSteps;
 
 	RewardPointsOfStylistModel calculatedRewordPointsOfStylistModel = new RewardPointsOfStylistModel();
+	DateModel registrationModel = new DateModel();
+	private String stylistId;
+	private String lastCommissionRun;
 
 	@Before
 	public void setUp() {
+
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_21_FOLDER + File.separator + "us21001.properties");
+			prop.load(input);
+
+			lastCommissionRun = prop.getProperty("lastCommissionRun");
+			stylistId = prop.getProperty("stylistId");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+		registrationModel = MongoReader.grabDateModels("US21001CheckStylistBonusesBeforeClosedMonthTest").get(0);
 	}
 
 	@Test
 	public void us21001CloseMonthTest() throws Exception {
 
 		backEndSteps.navigate(UrlConstants.COMMISSION_REPORTS_URL);
-		// get from previous test activation date
-		calculatedRewordPointsOfStylistModel = commissionReportSteps.closeMonthAndCalculateRewardPoints("1835", "2015-07-15 02:00:00", "2015-09-15 00:00:00");
+		calculatedRewordPointsOfStylistModel = commissionReportSteps.closeMonthAndCalculateRewardPoints(stylistId, registrationModel.getDate(), lastCommissionRun);
 
 	}
 
