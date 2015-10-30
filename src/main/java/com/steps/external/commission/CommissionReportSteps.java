@@ -49,7 +49,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId,activationDate, "2015-09-15 00:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
+		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId,activationDate, "2015-07-15 02:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
 
 	}
 	@Title("Close last month and get current month ips")
