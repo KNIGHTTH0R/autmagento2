@@ -40,7 +40,7 @@ public class US21001CloseMonthTest extends BaseTest {
 	public void us21001CloseMonthTest() throws Exception {
 
 		backEndSteps.navigate(UrlConstants.COMMISSION_REPORTS_URL);
-		//change stylist activation date
+		//get from previous test activation date
 		calculatedRewordPointsOfStylistModel = commissionReportSteps.closeMonthAndCalculateRewardPoints("1835","2015-09-20 12:06:49");
 
 	}
