@@ -126,6 +126,19 @@ public class DateUtils {
 
 		return String.valueOf(sdf.format(new Date()));
 	}
+	
+	public static String getCurrentDateBegining(String format) {
+		DateFormat sdf = new SimpleDateFormat(format);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 00, 00, 00);
+		
+		return String.valueOf(sdf.format(calendar.getTime()));
+	}
 
 	public static String getCurrentDateOneHourBack(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
@@ -202,6 +215,7 @@ public class DateUtils {
 
 	public static void main(String[] args) throws ParseException {
 		System.out.println(DateUtils.addHoursToAGivenDate("2015-07-20 00:00:00", "yyyy-MM-dd hh:mm:ss",2));
+		System.out.println(DateUtils.getCurrentDateBegining("yyyy-MM-dd HH:mm:ss"));
 	}
 
 }

@@ -34,31 +34,34 @@ public class CommissionReportSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public RewardPointsOfStylistModel closeMonthAndCalculateRewardPoints(String stylistId, String activationDate) throws Exception {
+	public RewardPointsOfStylistModel closeMonthAndCalculateRewardPoints(String stylistId, String activationDate, String lastCommissionRunDate) throws Exception {
 
-		if (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate(DateConstants.FORMAT), DateConstants.FORMAT)) {
-			ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
-			waitABit(10000);
-			getDriver().navigate().refresh();
-			waitABit(TimeConstants.TIME_CONSTANT);
-		} else {
-			// set commission run date on 15 of the month
-		}
+		// if
+		// (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate(DateConstants.FORMAT),
+		// DateConstants.FORMAT)) {
+		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
+		waitABit(10000);
+		getDriver().navigate().refresh();
+		waitABit(TimeConstants.TIME_CONSTANT);
+		// } else {
+		// // set commission run date on 15 of the month
+		// }
 		commissionReportPage().selectMonthToBeClosed();
 		commissionReportPage().enterCloseMonthDate();
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId,activationDate, "2015-07-15 02:00:00", DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00");
+		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId, activationDate, lastCommissionRunDate, DateUtils.getCurrentDateBegining(DateConstants.FORMAT));
 
 	}
+
 	@Title("Close last month and get current month ips")
 	@StepGroup
 	public IpModel closeLastMonthAndGetCurrentMonthIps(String stylistId) throws Exception {
-		
-//		ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
+
+		// ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
 		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
-	
+
 		waitABit(10000);
 		getDriver().navigate().refresh();
 		waitABit(TimeConstants.TIME_CONSTANT);
@@ -67,7 +70,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses(stylistId, DateUtils.getCurrentDate("yyyy-MM-dd") + " 00:00:00",
+		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses(stylistId, DateUtils.getCurrentDateBegining(DateConstants.FORMAT),
 				DateUtils.getCurrentDate(DateConstants.FORMAT));
 
 	}
