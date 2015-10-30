@@ -45,6 +45,7 @@ public class CommissionReportPage extends AbstractPage {
 		element(saveCommDateButton).waitUntilVisible();
 		System.out.println(saveCommDateButton.getText());
 		saveCommDateButton.click();
+		waitFor(ExpectedConditions.alertIsPresent());
 		Alert alert = getDriver().switchTo().alert();
 		System.out.println(alert.getText());
 		alert.accept();
@@ -59,13 +60,13 @@ public class CommissionReportPage extends AbstractPage {
 	public void selectMonthToBeClosed() {
 		element(closedMonthSelect).waitUntilVisible();
 		element(closedMonthSelect).selectByVisibleText(DateUtils.getPreviousMonth("MMMM yyyy"));
+		
 	}
 
 	public void enterCloseMonthDate() {
 		element(closeMonthDate).waitUntilVisible();
 		closeMonthDate.click();
 		currentDay.click();
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		
 	}
 }
