@@ -65,6 +65,7 @@ public class CommissionReportPage extends AbstractPage {
 		element(closeMonthDate).waitUntilVisible();
 		closeMonthDate.click();
 		currentDay.click();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		
 	}
 }
