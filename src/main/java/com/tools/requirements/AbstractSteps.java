@@ -8,10 +8,6 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.security.UserAndPassword;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
@@ -103,7 +99,6 @@ import com.pages.frontend.reports.JewelryBonusHistoryPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -240,7 +235,8 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void navigateAndAuthenticate(String URL) throws IOException {
 		getDriver().get(URL);
-		Runtime.getRuntime().exec("C:\\Users\\mihaibarta\\git\\PippaAutomation\\src\\main\\resources\\FirefoxLogin.exe");
+		Runtime.getRuntime().exec("\\src\\main\\resources\\FirefoxLogin.exe");
+		
 //		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
 //		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 //		alert.authenticateUsing(new UserAndPassword(UrlConstants.INTERFACE_USERNAME, UrlConstants.INTERFACE_PASSWORD));
