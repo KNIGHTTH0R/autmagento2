@@ -246,7 +246,7 @@ public class AbstractSteps extends ScenarioSteps {
 		profile.setPreference("network.http.phishy-userpass-length", 255);
 		profile.setPreference("network.automatic-ntlm-auth.trusted-uris", "http://148.251.178.207");
 		WebDriver driver = new FirefoxDriver(profile);
-		driver.get(URL);
+		getDriver().get(URL);
 
 //		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
 //		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
