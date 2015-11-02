@@ -1,5 +1,8 @@
 package com.tools.requirements;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.Set;
 
 import net.thucydides.core.annotations.Screenshots;
@@ -7,6 +10,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
@@ -229,6 +233,32 @@ public class AbstractSteps extends ScenarioSteps {
 	public void navigate(String URL) {
 		getDriver().get(URL);
 
+	}
+	@Step
+	public void navigateAndAuthenticate(String URL) {
+		getDriver().get(URL);
+		 Alert alert = getDriver().switchTo().alert();
+
+
+		    try {
+		        Robot robot = new Robot();
+		        alert.sendKeys("Navision");
+
+		        robot.keyPress(KeyEvent.VK_TAB);//go to password feild
+
+		        robot.keyPress(KeyEvent.VK_P);
+		        robot.keyPress(KeyEvent.VK_A);
+		        robot.keyPress(KeyEvent.VK_S);
+		        robot.keyPress(KeyEvent.VK_S);
+
+		        robot.keyPress(KeyEvent.VK_ENTER);
+
+
+		        } catch (AWTException e) {
+		        e.printStackTrace();
+		        }
+
+		
 	}
 
 	public AbstractPage abstractPage() {

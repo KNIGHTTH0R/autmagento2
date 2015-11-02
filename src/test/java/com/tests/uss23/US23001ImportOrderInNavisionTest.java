@@ -24,9 +24,10 @@ public class US23001ImportOrderInNavisionTest extends BaseTest {
 
 
 	@Test
-	public void us21001CloseMonthTest() throws Exception {
+	public void us23001ImportOrderInNavisionTest() throws Exception {
 
-		backEndSteps.navigate(UrlConstants.IMPORT_INTERFACE_URL);
+		backEndSteps.navigateAndAuthenticate(UrlConstants.IMPORT_INTERFACE_URL);
+		
 
 	}
 
