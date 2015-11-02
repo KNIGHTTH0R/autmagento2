@@ -233,9 +233,10 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 
 	@Step
-	public void navigateAndAuthenticate(String URL) throws IOException {
+	public void navigateAndAuthenticate(String URL) throws IOException, InterruptedException {
 		getDriver().get(URL);
-		Runtime.getRuntime().exec("src/main/resources/FirefoxLogin.exe");
+		Runtime.getRuntime().exec("src\\main\\resources\\FirefoxLogin.exe");
+		Thread.sleep(5000);
 		
 //		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
 //		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
