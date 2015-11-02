@@ -240,18 +240,11 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void navigateAndAuthenticate(String URL) throws IOException, InterruptedException {
-		// getDriver().get(URL);
-		// System.out.println(URL);
 		FirefoxProfile profile = new FirefoxProfile();
 		profile.setPreference("network.http.phishy-userpass-length", 255);
 		profile.setPreference("network.automatic-ntlm-auth.trusted-uris", "http://148.251.178.207");
 		WebDriver driver = new FirefoxDriver(profile);
-		getDriver().get(URL);
-
-//		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
-//		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-//		alert.accept();
-
+		driver.get(URL);
 	}
 
 	public AbstractPage abstractPage() {
