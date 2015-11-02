@@ -11,6 +11,8 @@ import net.thucydides.core.steps.ScenarioSteps;
 
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.security.UserAndPassword;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -241,10 +243,13 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void navigateAndAuthenticate(String URL) {
-		getDriver().get(URL);
-		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
-		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-		alert.authenticateUsing(new UserAndPassword(UrlConstants.INTERFACE_USERNAME, UrlConstants.INTERFACE_PASSWORD));
+//		getDriver().get(URL);
+		FirefoxProfile profile = new FirefoxProfile();
+		FirefoxDriver driver = new FirefoxDriver(profile);
+		driver.get(URL);
+//		WebDriverWait wait = new WebDriverWait(driver, 120);
+//		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+//		alert.authenticateUsing(new UserAndPassword(UrlConstants.INTERFACE_USERNAME, UrlConstants.INTERFACE_PASSWORD));
 
 	}
 
