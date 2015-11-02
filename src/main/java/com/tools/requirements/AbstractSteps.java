@@ -1,6 +1,5 @@
 package com.tools.requirements;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
@@ -9,6 +8,9 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
@@ -237,9 +239,9 @@ public class AbstractSteps extends ScenarioSteps {
 	public void navigateAndAuthenticate(String URL) throws IOException, InterruptedException {
 		getDriver().get(URL);
 		
-//		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
-//		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-//		alert.authenticateUsing(new UserAndPassword(UrlConstants.INTERFACE_USERNAME, UrlConstants.INTERFACE_PASSWORD));
+		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+		alert.accept();
 
 	}
 
