@@ -236,7 +236,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void navigateAndAuthenticate(String URL) throws IOException, InterruptedException {
 		getDriver().get(URL);
-		File f = new File("FirefoxLogin.exe");
+		File f = new File("\\src\\main\\resources\\FirefoxLogin.exe");
 		System.out.println(f.getAbsolutePath());
 		Runtime.getRuntime().exec("\\src\\main\\resources\\FirefoxLogin.exe");
 		Thread.sleep(5000);
