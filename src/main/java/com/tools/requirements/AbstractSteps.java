@@ -240,7 +240,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void navigateAndAuthenticate(String URL) throws IOException {
 		getDriver().get(URL);
-		Runtime.getRuntime().exec("C:\\Users\\mihaibarta\\git\\PippaAutomation\\resources\\FirefoxLofin.exe");
+		Runtime.getRuntime().exec("C:\\Users\\mihaibarta\\git\\PippaAutomation\\src\\main\\resources\\FirefoxLogin.exe");
 //		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
 //		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 //		alert.authenticateUsing(new UserAndPassword(UrlConstants.INTERFACE_USERNAME, UrlConstants.INTERFACE_PASSWORD));
