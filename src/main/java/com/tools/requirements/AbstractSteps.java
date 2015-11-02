@@ -238,7 +238,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void navigateAndAuthenticate(String URL) throws IOException, InterruptedException {
 		getDriver().get(URL);
-		
+		System.out.println(URL);
 		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
 		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 		alert.accept();
