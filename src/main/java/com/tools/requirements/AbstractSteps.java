@@ -248,9 +248,9 @@ public class AbstractSteps extends ScenarioSteps {
 		WebDriver driver = new FirefoxDriver(profile);
 		driver.get(URL);
 
-		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
-		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-		alert.accept();
+//		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+//		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+//		alert.accept();
 
 	}
 
