@@ -28,7 +28,6 @@ public class US23001ImportOrderInNavisionTest extends BaseTest {
 
 		backEndSteps.navigateAndAuthenticate(UrlConstants.IMPORT_INTERFACE_URL);
 		
-
 	}
 
 }
