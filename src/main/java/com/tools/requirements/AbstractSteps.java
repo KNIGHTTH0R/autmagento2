@@ -11,6 +11,9 @@ import net.thucydides.core.steps.ScenarioSteps;
 
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.security.UserAndPassword;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
@@ -102,6 +105,7 @@ import com.pages.frontend.reports.JewelryBonusHistoryPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 
 public class AbstractSteps extends ScenarioSteps {
@@ -234,32 +238,14 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().get(URL);
 
 	}
+
 	@Step
 	public void navigateAndAuthenticate(String URL) {
 		getDriver().get(URL);
-		 Alert alert = getDriver().switchTo().alert();
-		 System.out.println(alert.getText());
+		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+		alert.authenticateUsing(new UserAndPassword(UrlConstants.INTERFACE_USERNAME, UrlConstants.INTERFACE_PASSWORD));
 
-
-		    try {
-		        Robot robot = new Robot();
-		        alert.sendKeys("Navision");
-
-		        robot.keyPress(KeyEvent.VK_TAB);//go to password feild
-
-		        robot.keyPress(KeyEvent.VK_P);
-		        robot.keyPress(KeyEvent.VK_A);
-		        robot.keyPress(KeyEvent.VK_S);
-		        robot.keyPress(KeyEvent.VK_S);
-
-		        robot.keyPress(KeyEvent.VK_ENTER);
-
-
-		        } catch (AWTException e) {
-		        e.printStackTrace();
-		        }
-
-		
 	}
 
 	public AbstractPage abstractPage() {
@@ -350,7 +336,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public ShoppingCartPriceRulesPage shoppingCartPriceRulesPage() {
 		return getPages().currentPageAt(ShoppingCartPriceRulesPage.class);
 	}
-	
+
 	public StylecoachDetailsBackendPage stylecoachDetailsBackendPage() {
 		return getPages().currentPageAt(StylecoachDetailsBackendPage.class);
 	}
@@ -443,7 +429,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public PartyDetailsPage partyDetailsPage() {
 		return getPages().currentPageAt(PartyDetailsPage.class);
 	}
-	
+
 	public ContactDetailsPage contactDetailsPage() {
 		return getPages().currentPageAt(ContactDetailsPage.class);
 	}
