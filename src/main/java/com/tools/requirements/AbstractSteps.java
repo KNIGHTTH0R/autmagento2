@@ -1,5 +1,6 @@
 package com.tools.requirements;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
@@ -235,7 +236,9 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void navigateAndAuthenticate(String URL) throws IOException, InterruptedException {
 		getDriver().get(URL);
-		Runtime.getRuntime().exec(".\\src\\main\\resources\\FirefoxLogin.exe");
+		File f = new File("FirefoxLogin.exe");
+		System.out.println(f.getAbsolutePath());
+		Runtime.getRuntime().exec("\\src\\main\\resources\\FirefoxLogin.exe");
 		Thread.sleep(5000);
 		
 //		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
