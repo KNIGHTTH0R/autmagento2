@@ -238,6 +238,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public void navigateAndAuthenticate(String URL) {
 		getDriver().get(URL);
 		 Alert alert = getDriver().switchTo().alert();
+		 System.out.println(alert.getText());
 
 
 		    try {
