@@ -55,6 +55,10 @@ public class UrlConstants {
 	public static final String COMMISION_PARTY_SUFFIX = "party.json/";
 	public static final String TEAM_PERFORMANCE_SUFFIX = "performance-team.json/";
 	public static final String COMMISSION_REPORTS_URL = "https://commission-staging-aut.pippajean.com/report";
-
+	
+	//navision
+	public static final String IMPORT_INTERFACE_URL = "http://Navision:_N1v2s34N_@148.251.178.207/PjOrderImport/Home/ImportierenAut";
+	public static final String INTERFACE_USERNAME = "Navision";
+	public static final String INTERFACE_PASSWORD = "_N1v2s34N_";
 
 }
