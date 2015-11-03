@@ -10,11 +10,12 @@ import com.tools.data.navision.SyncInfoModel;
 
 public class NavQueries {
 
+	private static Connection connection = SqlServerConnector.connectToSqlServer();
+
 	public static OrderStatusModel getProductSyncronizedStatus(String sku) throws SQLException {
 
 		OrderStatusModel result = new OrderStatusModel();
 
-		Connection connection = SqlServerConnector.connectToSqlServer();
 		Statement statement = connection.createStatement();
 		String queryString = "select * from OrderStatusAut WHERE ItemNo = '" + sku + "'";
 		ResultSet rs = statement.executeQuery(queryString);
@@ -33,7 +34,6 @@ public class NavQueries {
 
 		SyncInfoModel result = new SyncInfoModel();
 
-		Connection connection = SqlServerConnector.connectToSqlServer();
 		Statement statement = connection.createStatement();
 		String queryString = "select * from SyncInfoAut WHERE  SyncInfoAut.[Item No_] = '" + sku + "'";
 		ResultSet rs = statement.executeQuery(queryString);
