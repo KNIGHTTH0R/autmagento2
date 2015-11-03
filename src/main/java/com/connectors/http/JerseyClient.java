@@ -31,7 +31,7 @@ public class JerseyClient {
 		return output;
 	}
 
-	public void sendPost(String url, String paramsString) {
+	public static void sendPost(String url, String paramsString) {
 		try {
 
 			Client client = Client.create();
@@ -52,4 +52,6 @@ public class JerseyClient {
 
 		}
 	}
+
+
 }

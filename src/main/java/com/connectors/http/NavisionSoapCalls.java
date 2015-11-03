@@ -29,6 +29,7 @@ public class NavisionSoapCalls {
 
 	public static void main(String args[]) throws SOAPException, IOException {
 
+
 		System.setProperty("http.proxyHost", "localhost");
 		System.setProperty("http.proxyPort", "8080");
 

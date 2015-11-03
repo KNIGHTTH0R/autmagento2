@@ -21,13 +21,11 @@ public class US23001ImportOrderInNavisionTest extends BaseTest {
 	@Steps
 	public BackEndSteps backEndSteps;
 
-
-
 	@Test
 	public void us23001ImportOrderInNavisionTest() throws Exception {
 
 		backEndSteps.navigateAndAuthenticate(UrlConstants.IMPORT_INTERFACE_URL);
-		
+
 	}
 
 }

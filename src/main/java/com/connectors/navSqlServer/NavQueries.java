@@ -8,7 +8,7 @@ import java.sql.Statement;
 import com.tools.data.navision.OrderStatusModel;
 import com.tools.data.navision.SyncInfoModel;
 
-public class NavStatements {
+public class NavQueries {
 
 	public static OrderStatusModel getProductSyncronizedStatus(String sku) throws SQLException {
 
@@ -19,6 +19,7 @@ public class NavStatements {
 		String queryString = "select * from OrderStatusAut WHERE ItemNo = '" + sku + "'";
 		ResultSet rs = statement.executeQuery(queryString);
 		while (rs.next()) {
+
 			result.setSyncStatus(rs.getString("Synced"));
 			result.setSku(sku);
 			result.setSyncDate(rs.getString("SyncDateTime"));
@@ -34,11 +35,17 @@ public class NavStatements {
 
 		Connection connection = SqlServerConnector.connectToSqlServer();
 		Statement statement = connection.createStatement();
-		String queryString = "select * from SyncInfoAut WHERE ItemNo = '" + sku + "'";
+		String queryString = "select * from SyncInfoAut WHERE  SyncInfoAut.[Item No_] = '" + sku + "'";
 		ResultSet rs = statement.executeQuery(queryString);
 		while (rs.next()) {
+
 			result.setSku(sku);
 			result.setQuantity(rs.getString("Quantity"));
+			result.setEarliestAvailability(rs.getString("Earliest Av_ Date"));
+			result.setMinumimQuantity(rs.getString("Minimum Quantity"));
+			result.setIsDiscontinued(rs.getString("Shop IsDiscontinued"));
+			result.setTotalQuantity(rs.getString("Total Qty"));
+			result.setMaxPercentToBorrow(rs.getString("Max_ Percent to Borrow"));
 		}
 
 		return result;
@@ -46,8 +53,15 @@ public class NavStatements {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		OrderStatusModel result = NavStatements.getProductSyncronizedStatus("R132RS");
-		System.out.println(result.getSyncStatus());
+		SyncInfoModel result = NavQueries.getSyncProductInfo("A004BK");
+		System.out.println(result.getQuantity());
+		System.out.println(result.getEarliestAvailability());
+		System.out.println(result.getMaxPercentToBorrow());
+
+		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("A004BK");
+		System.out.println(result2.getSyncDate());
+		System.out.println(result2.getSyncStatus());
+
 	}
 
 }
