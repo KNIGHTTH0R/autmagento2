@@ -106,5 +106,9 @@ public class SoapKeys {
 	public static final String ORDERS_LIST = "salesOrderListRequestParam";
 	//getCreditMemosList
 	public static final String CREDIT_MEMOS_LIST = "salesOrderCreditmemoListRequestParam";
-
+	
+	//get product info   
+	
+	public static final String PRODUCT_INFO = "catalogInventoryStockItemListRequestParam";
+	public static final String PRODUCT_IDS = "productIds";
 }

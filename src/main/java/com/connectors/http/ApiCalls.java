@@ -9,9 +9,11 @@ import java.util.List;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.tools.data.geolocation.CoordinatesModel;
+import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
@@ -332,6 +334,28 @@ public class ApiCalls {
 		return stylistList;
 	}
 
+	public static SyncInfoModel getMagProductInfo(String productId) {
+
+		SyncInfoModel result = new SyncInfoModel();
+
+		try {
+			SOAPMessage response = HttpSoapConnector.soapProductInfo(productId);
+			System.out.println(response.toString());
+			try {
+				result = extractProductInfo(response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 	private static String extractResult(SOAPMessage response) throws SOAPException, IOException {
 		return response.getSOAPBody().getElementsByTagName("result").item(0).getFirstChild().getNodeValue();
 	}
@@ -465,6 +489,31 @@ public class ApiCalls {
 			stylistModelList.add(model);
 		}
 		return stylistModelList;
+
+	}
+
+	private static SyncInfoModel extractProductInfo(SOAPMessage response) throws Exception {
+
+		SyncInfoModel result = new SyncInfoModel();
+
+		NodeList productInfoList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
+		Node productInfo = productInfoList.item(0);
+		NodeList childNodes = productInfo.getChildNodes();
+		for (int j = 0; j < childNodes.getLength(); j++) {
+
+			if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {
+				result.setSku(childNodes.item(j).getTextContent());
+			}
+			if (childNodes.item(j).getNodeName().equalsIgnoreCase("qty")) {
+				result.setQuantity(childNodes.item(j).getTextContent());
+			}
+			if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_discontinued")) {
+				result.setIsDiscontinued(childNodes.item(j).getTextContent());
+			}
+
+		}
+
+		return result;
 
 	}
 
@@ -800,6 +849,11 @@ public class ApiCalls {
 
 	public static int calculateStylistAge(DBStylistModel stylist) {
 		return DateUtils.getAge(stylist.getBirthDate());
+	}
+
+	public static void main(String args[]) throws SOAPException, IOException {
+
+		ApiCalls.getMagProductInfo("3609");
 	}
 
 }

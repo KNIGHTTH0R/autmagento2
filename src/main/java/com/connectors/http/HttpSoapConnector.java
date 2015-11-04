@@ -79,6 +79,18 @@ public class HttpSoapConnector {
 		return soapResponse;
 	}
 
+	public static SOAPMessage soapProductInfo(String productId) throws SOAPException, IOException {
+		String sessID = performLogin();
+		System.out.println("Sesion id :" + sessID);
+
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+//		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), "http://staging-aut.pippajean.com/" + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+
 	/**
 	 * This method will login with a user in {@link SoapKeys} and return the
 	 * sessionID.
@@ -266,6 +278,27 @@ public class HttpSoapConnector {
 
 		soapMessage.saveChanges();
 
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+
+	private static SOAPMessage getProductInfo(String ssID, String productId) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+
+		SOAPElement getProductRequestParam = soapBody.addChildElement(SoapKeys.PRODUCT_INFO, SoapKeys.URN_PREFIX);
+		SOAPElement sessionID = getProductRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+
+		SOAPElement productIds = getProductRequestParam.addChildElement(SoapKeys.PRODUCT_IDS);
+		SOAPElement complexObjectArray = productIds.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		complexObjectArray.addTextNode(productId);
+
+		soapMessage.saveChanges();
 		System.out.print("Request SOAP Message:");
 		soapMessage.writeTo(System.out);
 		System.out.println();
@@ -503,7 +536,6 @@ public class HttpSoapConnector {
 
 	public static void main(String args[]) throws SOAPException, IOException {
 
-		HttpSoapConnector.performLogin();
 
 	}
 }
