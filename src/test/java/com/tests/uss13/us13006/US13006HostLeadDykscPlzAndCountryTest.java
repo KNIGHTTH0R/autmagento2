@@ -58,7 +58,7 @@ public class US13006HostLeadDykscPlzAndCountryTest extends BaseTest {
 		while (coordinatesModel.getLattitude() == null) {
 
 			addressModel = randomAddress.getRandomAddressFromFile();
-			coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
+			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
 			System.out.println(coordinatesModel.getLattitude());
 			System.out.println(coordinatesModel.getLongitude());
 
