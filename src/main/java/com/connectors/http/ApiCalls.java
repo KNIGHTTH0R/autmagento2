@@ -851,9 +851,4 @@ public class ApiCalls {
 		return DateUtils.getAge(stylist.getBirthDate());
 	}
 
-	public static void main(String args[]) throws SOAPException, IOException {
-
-		ApiCalls.getMagProductInfo("3609");
-	}
-
 }
