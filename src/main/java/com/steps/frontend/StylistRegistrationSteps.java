@@ -41,18 +41,19 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-//		clickOnNachahmePaymentMethod();
+		// clickOnNachahmePaymentMethod();
 		payWithCreditCard();
-//		submitPaymentMethod();
-//		finishPayment();
+		// submitPaymentMethod();
+		// finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
+
 	@StepGroup
 	@Title("Fill create stylecoach form with known sponsor")
 	public String fillCreateStylecoachFormWithKnownSponsor(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
-		
+
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		selectBirthDate(birthDate);
@@ -67,10 +68,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-//		clickOnNachahmePaymentMethod();
-//		submitPaymentMethod();
-//		finishPayment();
-		
+		// clickOnNachahmePaymentMethod();
+		// submitPaymentMethod();
+		// finishPayment();
+
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
@@ -98,11 +99,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
-	
+
 	@StepGroup
 	@Title("Fill create customer form and pay with visa")
 	public String fillCreateStylecoachFormWithKnownSponsorPayWithVisa(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
-		
+
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		selectBirthDate(birthDate);
@@ -117,7 +118,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-		
+
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
@@ -143,9 +144,9 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-//		clickOnNachahmePaymentMethod();
-//		submitPaymentMethod();
-//		finishPayment();
+		// clickOnNachahmePaymentMethod();
+		// submitPaymentMethod();
+		// finishPayment();
 		try {
 			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
 					+ addressData.getHomeTown() + "," + addressData.getPostCode());
@@ -174,9 +175,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-//		clickOnNachahmePaymentMethod();
-//		submitPaymentMethod();
-//		finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -192,9 +190,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-//		clickOnNachahmePaymentMethod();
-//		submitPaymentMethod();
-//		finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -213,9 +208,9 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-//		clickOnNachahmePaymentMethod();
-//		submitPaymentMethod();
-//		finishPayment();
+		// clickOnNachahmePaymentMethod();
+		// submitPaymentMethod();
+		// finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -304,7 +299,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 			stylistRegistrationPage().selectCardType("Visa/Electron");
 		}
 		stylistRegistrationPage().inputCardNumber("4548812049400004");
-		stylistRegistrationPage().inputCardExpiryMonth("11");
+		stylistRegistrationPage().inputCardExpiryMonth("12");
 		stylistRegistrationPage().inputCardExpiryYear("2015");
 		stylistRegistrationPage().submitCreditCard();
 		stylistRegistrationPage().inputCardCvv("285");

@@ -30,12 +30,12 @@ public class NavQueries {
 
 	}
 
-	public static SyncInfoModel getSyncProductInfo(String sku) throws SQLException {
+	public static SyncInfoModel getSyncProductInfo(String sku, String variantCode) throws SQLException {
 
 		SyncInfoModel result = new SyncInfoModel();
 
 		Statement statement = connection.createStatement();
-		String queryString = "select * from SyncInfoAut WHERE  SyncInfoAut.[Item No_] = '" + sku + "'";
+		String queryString = "select * from SyncInfoAut WHERE SyncInfoAut.[Variant Code] = '" + variantCode + "' AND SyncInfoAut.[Item No_] = '" + sku + "'";
 		ResultSet rs = statement.executeQuery(queryString);
 		while (rs.next()) {
 
@@ -53,12 +53,13 @@ public class NavQueries {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		SyncInfoModel result = NavQueries.getSyncProductInfo("M085");
+		SyncInfoModel result = NavQueries.getSyncProductInfo("N012GR", "");
 		System.out.println(result.getQuantity());
 		System.out.println(result.getEarliestAvailability());
 		System.out.println(result.getMaxPercentToBorrow());
+		System.out.println(result.getTotalQuantity());
 
-		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("M085");
+		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("R065SV");
 		System.out.println(result2.getSyncDate());
 		System.out.println(result2.getSyncStatus());
 
