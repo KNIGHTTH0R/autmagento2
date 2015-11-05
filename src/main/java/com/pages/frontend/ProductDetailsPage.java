@@ -46,8 +46,8 @@ public class ProductDetailsPage extends AbstractPage {
 
 	public void selectValueFromDropDown(String size) {
 		element(selectInput).waitUntilVisible();
-//		selectFromDropdown(selectInput, size);
-		element(selectInput).selectByVisibleText(size);
+		selectFromDropdown(selectInput, size);
+//		element(selectInput).selectByVisibleText(size);
 	}
 
 	public void addToCart() {

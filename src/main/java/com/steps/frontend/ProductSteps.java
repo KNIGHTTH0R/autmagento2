@@ -42,6 +42,7 @@ public class ProductSteps extends AbstractSteps {
 	public BasicProductModel setBasicProductAddToCart(String qty, String size, String askingPrice, String finalPrice, String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();
 		if (!size.contentEquals("0")) {
+			waitABit(TimeConstants.TIME_CONSTANT);
 			setDropDownValue(size);
 		}
 		setQuantity(qty);
@@ -159,6 +160,7 @@ public class ProductSteps extends AbstractSteps {
 	public HostBasicProductModel setHostBasicProductAddToCart(String qty, String size, String finalPrice, String ipPoints) {
 		HostBasicProductModel result = new HostBasicProductModel();
 		if (!size.contentEquals("0")) {
+			System.out.println(!size.contentEquals("0"));
 			setDropDownValue(size);
 		}
 		setQuantity(qty);

@@ -109,7 +109,6 @@ public class US23001SfmTest extends BaseTest {
 				}
 			}
 		}
-		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
