@@ -28,9 +28,9 @@ public class AddProductsWorkflow {
 	 * @return 
 	 */
 	@StepGroup
-	public ProductBasicModel setProductToCart(String productCode, String productName, String qty, String productProperty){
+	public void setProductToCart(String productCode, String productName, String qty, String productProperty){
 		searchSteps.searchAndSelectProduct(productCode, productName);
-		return productSteps.setProductAddToCart(qty, productProperty);
+		productSteps.setProductAddToCart(qty, productProperty);
 	}
 	
 	@StepGroup

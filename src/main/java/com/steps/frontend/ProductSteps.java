@@ -25,17 +25,13 @@ public class ProductSteps extends AbstractSteps {
 	 * @param size
 	 */
 	@StepGroup
-	public ProductBasicModel setProductAddToCart(String qty, String size) {
+	public void setProductAddToCart(String qty, String size) {
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
 		}
-
 		setQuantity(qty);
-
-		ProductBasicModel result = productDetailsPage().grabProductData();
 		addToCart();
 		waitABit(TimeConstants.TIME_CONSTANT);
-		return result;
 	}
 
 	@StepGroup
