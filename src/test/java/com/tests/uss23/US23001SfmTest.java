@@ -80,7 +80,7 @@ public class US23001SfmTest extends BaseTest {
 		genProduct1.setSku("R065SV");
 		genProduct2.setName("MARY NECKLACE");
 		genProduct2.setSku("N093SV");
-		genProduct3.setName("PIPPA&JEAN Dreamees Kollektions-Update: Broschüre (50 Stück)");
+		genProduct3.setName("PIPPA&JEAN DREAMEES KOLLEKTIONS-UPDATE: BROSCHÜRE (50 STÜCK)");
 		genProduct3.setSku("M164");
 		genProduct4.setName("BIANCA MIT BALLCHAIN 45 CM");
 		genProduct4.setSku("N052NL");
