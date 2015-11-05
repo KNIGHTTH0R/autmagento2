@@ -41,8 +41,8 @@ public class ProductSteps extends AbstractSteps {
 	@StepGroup
 	public BasicProductModel setBasicProductAddToCart(String qty, String size, String askingPrice, String finalPrice, String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();
+		System.out.println(!size.contentEquals("0"));
 		if (!size.contentEquals("0")) {
-			System.out.println(!size.contentEquals("0"));
 			waitABit(TimeConstants.TIME_CONSTANT);
 			setDropDownValue(size);
 		}
@@ -87,16 +87,17 @@ public class ProductSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
+
 	@StepGroup
 	public BorrowProductModel setBorrowedProductAddToCart(RegularBasicProductModel model, String finalPrice) {
 		BorrowProductModel result = new BorrowProductModel();
-		
+
 		result.setName(model.getName());
 		result.setProdCode(model.getProdCode());
 		result.setUnitPrice(finalPrice);
 		result.setFinalPrice(finalPrice);
 		result.setIpPoints("0");
-		
+
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
