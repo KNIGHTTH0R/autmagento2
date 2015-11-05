@@ -6,7 +6,6 @@ import net.thucydides.core.annotations.StepGroup;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
-import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.TimeConstants;
@@ -37,13 +36,11 @@ public class ProductSteps extends AbstractSteps {
 	@StepGroup
 	public BasicProductModel setBasicProductAddToCart(String qty, String size, String askingPrice, String finalPrice, String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();
-		System.out.println(!size.contentEquals("0"));
 		if (!size.contentEquals("0")) {
 			waitABit(TimeConstants.TIME_CONSTANT);
 			setDropDownValue(size);
 		}
 		setQuantity(qty);
-
 		result = productDetailsPage().grabBasicProductData();
 		result.setDiscountClass(discountClass);
 		result.setProductsPrice(askingPrice);

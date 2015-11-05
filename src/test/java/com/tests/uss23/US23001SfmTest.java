@@ -11,6 +11,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,15 +27,17 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
@@ -70,6 +73,8 @@ public class US23001SfmTest extends BaseTest {
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct5 = new ProductDetailedModel();
+
+	private OrderModel orderModel;
 
 	@Before
 	public void setUp() throws Exception {
@@ -123,11 +128,11 @@ public class US23001SfmTest extends BaseTest {
 		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
 
-		addProductsWorkflow.setProductToCart(genProduct1.getSku(),genProduct1.getName(), "1", "18");
-		addProductsWorkflow.setProductToCart(genProduct2.getSku(),genProduct2.getName(), "1", "0");
-		addProductsWorkflow.setProductToCart(genProduct3.getSku(),genProduct3.getName(), "1", "0");
-		addProductsWorkflow.setProductToCart(genProduct4.getSku(),genProduct4.getName(), "1", "0");
-		addProductsWorkflow.setProductToCart(genProduct5.getSku(),genProduct5.getName(), "1", "0");
+		addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "1", "18");
+		addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "1", "0");
+		addProductsWorkflow.setProductToCart(genProduct3.getSku(), genProduct3.getName(), "1", "0");
+		addProductsWorkflow.setProductToCart(genProduct4.getSku(), genProduct4.getName(), "1", "0");
+		addProductsWorkflow.setProductToCart(genProduct5.getSku(), genProduct5.getName(), "1", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -137,10 +142,19 @@ public class US23001SfmTest extends BaseTest {
 
 		shippingSteps.goToPaymentMethod();
 
+		String url = shippingSteps.grabUrl();
+		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.agreeAndCheckout();
+	}
+
+	@After
+	public void saveData() {
+		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 	}
 
 }
