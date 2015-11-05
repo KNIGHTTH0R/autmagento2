@@ -75,24 +75,24 @@ public class US23001SfmTest extends BaseTest {
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct5 = new ProductDetailedModel();
 
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1.setName("VDOTGJDSJ");
-		genProduct1.setSku("KKZWJRSUI");
-		genProduct1.setIp("84");
-		genProduct1.setPrice("49.90");
-		genProduct2.setName("RNTDRTVZE");
-		genProduct2.setSku("KODQWWIEU");
-		genProduct2.setIp("25");
-		genProduct2.setPrice("89.00");
-		genProduct3.setName("ZPFXMHPCG");
-		genProduct3.setSku("ZIIIKSGTC");
-		genProduct3.setIp("0");
-		genProduct3.setPrice("229.00");
+		genProduct1.setName("LIQUID MOON SMALL");
+		genProduct1.setSku("R065SV");
+		genProduct2.setName("MARY NECKLACE");
+		genProduct2.setSku("N093SV");
+		genProduct3.setName("PIPPA&JEAN Dreamees Kollektions-Update: Broschüre (50 Stück)");
+		genProduct3.setSku("M164");
+		genProduct4.setName("BIANCA MIT BALLCHAIN 45 CM");
+		genProduct4.setSku("N052NL");
+		genProduct5.setName("FUNKY SOLITAIRE SET");
+		genProduct5.setSku("K091MC");
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -131,9 +131,11 @@ public class US23001SfmTest extends BaseTest {
 		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
 
-		addProductsWorkflow.setBasicProductToCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_25);
+		addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "18", ConfigConstants.DISCOUNT_25);
 		addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
 		addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_0);
+		addProductsWorkflow.setBasicProductToCart(genProduct4, "1", "0", ConfigConstants.DISCOUNT_0);
+		addProductsWorkflow.setBasicProductToCart(genProduct5, "1", "0", ConfigConstants.DISCOUNT_0);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
