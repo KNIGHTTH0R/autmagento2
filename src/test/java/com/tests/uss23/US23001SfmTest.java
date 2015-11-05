@@ -123,11 +123,11 @@ public class US23001SfmTest extends BaseTest {
 		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
 
-		addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "18", ConfigConstants.DISCOUNT_25);
-		addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
-		addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_0);
-		addProductsWorkflow.setBasicProductToCart(genProduct4, "1", "0", ConfigConstants.DISCOUNT_0);
-		addProductsWorkflow.setBasicProductToCart(genProduct5, "1", "0", ConfigConstants.DISCOUNT_0);
+		addProductsWorkflow.setProductToCart(genProduct1.getSku(),genProduct1.getName(), "1", "18");
+		addProductsWorkflow.setProductToCart(genProduct2.getSku(),genProduct2.getName(), "1", "0");
+		addProductsWorkflow.setProductToCart(genProduct3.getSku(),genProduct3.getName(), "1", "0");
+		addProductsWorkflow.setProductToCart(genProduct4.getSku(),genProduct4.getName(), "1", "0");
+		addProductsWorkflow.setProductToCart(genProduct5.getSku(),genProduct5.getName(), "1", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
