@@ -61,7 +61,7 @@ public class HostCartValidationWorkflows {
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals, HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 		
-		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, HostCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.setVerifyAdyenTotals(HostDataGrabber.orderModel, HostCartCalculator.shippingCalculatedModel);
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 		
 		AddressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
