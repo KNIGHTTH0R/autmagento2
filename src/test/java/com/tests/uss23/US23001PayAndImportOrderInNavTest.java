@@ -69,11 +69,7 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 
 		for (String sku : skuList) {
 			String[] skuParts = sku.split("-");
-			if (skuParts.length == 1) {
-				skuParts[1] = "";
-			}
-			syncronizedNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts[1]));
+			syncronizedNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
 	}
-
 }
