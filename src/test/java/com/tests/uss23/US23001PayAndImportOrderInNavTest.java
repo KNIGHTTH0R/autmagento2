@@ -53,13 +53,13 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 	@Test
 	public void us23001PayAndImportOrderInNavTest() throws SQLException {
 
-		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnSalesOrders();
-		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
-		ordersSteps.openOrder(orderModel.getOrderId());
-		ordersSteps.markOrderAsPaid();
-
-		ImportInterfaceCalls.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
+//		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+//		backEndSteps.clickOnSalesOrders();
+//		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
+//		ordersSteps.openOrder(orderModel.getOrderId());
+//		ordersSteps.markOrderAsPaid();
+//
+//		ImportInterfaceCalls.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
 
 		for (String id : idsList) {
 			syncronizedMagentoProducts.add(ApiCalls.getMagProductInfo(id));
@@ -67,6 +67,7 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 
 		for (String sku : skuList) {
 			String[] skuParts = sku.split("-");
+			System.out.println(skuParts[0] + "    " + skuParts[1]);
 			syncronizedNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts[1]));
 		}
 	}
