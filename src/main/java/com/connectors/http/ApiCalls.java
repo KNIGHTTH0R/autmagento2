@@ -510,7 +510,9 @@ public class ApiCalls {
 			if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_discontinued")) {
 				result.setIsDiscontinued(childNodes.item(j).getTextContent());
 			}
-
+			if (childNodes.item(j).getNodeName().equalsIgnoreCase("qty_pending")) {
+				result.setPendingQuantity(childNodes.item(j).getTextContent());
+			}
 		}
 
 		return result;
@@ -849,6 +851,11 @@ public class ApiCalls {
 
 	public static int calculateStylistAge(DBStylistModel stylist) {
 		return DateUtils.getAge(stylist.getBirthDate());
+	}
+
+	public static void main(String[] args) {
+		SyncInfoModel syncInfoModel = ApiCalls.getMagProductInfo("1292");
+		System.out.println(syncInfoModel.getQuantity());
 	}
 
 }

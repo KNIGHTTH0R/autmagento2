@@ -9,6 +9,7 @@ public class SyncInfoModel {
 	private String totalQuantity;
 	private String maxPercentToBorrow;
 	private String earliestAvailability;
+	private String pendingQuantity;
 
 	public String getSku() {
 		return sku;
@@ -64,6 +65,14 @@ public class SyncInfoModel {
 
 	public void setEarliestAvailability(String earliestAvailability) {
 		this.earliestAvailability = earliestAvailability;
+	}
+
+	public String getPendingQuantity() {
+		return pendingQuantity;
+	}
+
+	public void setPendingQuantity(String pendingQuantity) {
+		this.pendingQuantity = pendingQuantity;
 	}
 
 }

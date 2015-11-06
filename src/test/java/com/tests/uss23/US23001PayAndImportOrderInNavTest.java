@@ -39,8 +39,8 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 
 	private OrderModel orderModel;
 
-	List<SyncInfoModel> syncronizedMagentoProducts;
-	List<SyncInfoModel> syncronizedNavProducts;
+	List<SyncInfoModel> syncronizedMagentoProducts = new ArrayList<SyncInfoModel>();
+	List<SyncInfoModel> syncronizedNavProducts = new ArrayList<SyncInfoModel>();
 
 	private static List<String> idsList = new ArrayList<String>(Arrays.asList("1292", "1658"));
 	private static List<String> skuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV-"));
