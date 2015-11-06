@@ -86,6 +86,8 @@ public class ShippingAndConfirmationWorkflows {
 		System.out.println(shippingGrabbedModel.getDiscountPrice() + " - " + shippingCalculatedModel.getDiscountPrice());
 		verifySubTotals(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
 		System.out.println(shippingGrabbedModel.getSubTotal() + " - " + shippingCalculatedModel.getSubTotal());
+//		verifyAdyenTotal(shippingGrabbedModel.getSubTotal(), shippingCalculatedModel.getSubTotal());
+//		System.out.println(shippingGrabbedModel.getSubTotal() + " - " + shippingCalculatedModel.getSubTotal());
 	}
 
 	@Step
@@ -105,6 +107,10 @@ public class ShippingAndConfirmationWorkflows {
 
 	@Step
 	public void verifyDiscountsPrice(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
+	@Step
+	public void verifyAdyenTotal(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 

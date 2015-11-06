@@ -16,6 +16,8 @@ public class ValidationWorkflows {
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
+	@Steps
+	public AdyenWorkflows adyenWorkflows;
 
 	public static String billingAddress;
 	public static String shippingAddress;
@@ -106,6 +108,9 @@ public class ValidationWorkflows {
 
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel);
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
 		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
