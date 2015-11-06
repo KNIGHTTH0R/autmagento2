@@ -30,8 +30,11 @@ public class AdyenWorkflows {
 	@Step
 	public void verifyTotal(String adyenTotal, String compare) {
 		BigDecimal total = BigDecimal.valueOf(Double.parseDouble(adyenTotal));
+		System.out.println(total);
 		MathContext mc = new MathContext(2, RoundingMode.HALF_UP);
-		total = total.divide(BigDecimal.valueOf(100), mc);
+//		total = total.divide(BigDecimal.valueOf(100), mc);
+		total = total.divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP);
+		System.out.println(total);
 		CustomVerification.verifyTrue("Failure: Adyen totals doesn't match   Expected: " + compare + " Actual: " + String.valueOf(total),
 				adyenTotal.contains(String.valueOf(total)));
 	}
