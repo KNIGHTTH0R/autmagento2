@@ -9,6 +9,7 @@ import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
 import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
 import com.workflows.frontend.AddressWorkflows;
+import com.workflows.frontend.AdyenWorkflows;
 
 public class BorrowCartValidationWorkflows {
 
@@ -18,6 +19,8 @@ public class BorrowCartValidationWorkflows {
 	public BorrowCartShippingAndConfirmationWorkflows borrowCartShippingAndConfirmationWorkflows;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
+	@Steps
+	public AdyenWorkflows adyenWorkflows;
 
 	public static String billingAddress;
 	public static String shippingAddress;
@@ -54,6 +57,9 @@ public class BorrowCartValidationWorkflows {
 
 		borrowCartShippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, BorrowCartCalculator.shippingCalculatedModel);
 		borrowCartShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, BorrowCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
 		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");

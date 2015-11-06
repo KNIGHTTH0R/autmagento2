@@ -10,12 +10,15 @@ import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.AddressWorkflows;
+import com.workflows.frontend.AdyenWorkflows;
 
 public class HostCartValidationWorkflows {	
 	@Steps
 	public HostCartWorkflows hostCartWorkflows;
 	@Steps
 	public HostShippingAndConfirmationWorkflows hostShippingAndConfirmationWorkflows;
+	@Steps
+	public AdyenWorkflows adyenWorkflows;
 //	@Steps
 //	public AddressWorkflows addressWorkflows;
 	@Steps
@@ -58,6 +61,9 @@ public class HostCartValidationWorkflows {
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals, HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 		
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, HostCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+		
 		AddressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
 		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 		
@@ -88,6 +94,9 @@ public class HostCartValidationWorkflows {
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals, HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 		
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, HostCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+		
 		AddressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
 		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 		
@@ -117,6 +126,9 @@ public class HostCartValidationWorkflows {
 
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals, HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, HostCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 		
 		AddressWorkflows.setBillingAddressModels(billingAddress,DataGrabber.grabbedBillingAddress);
 		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
