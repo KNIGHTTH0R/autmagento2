@@ -235,14 +235,14 @@ public class AbstractSteps extends ScenarioSteps {
 
 	}
 
-	@Step
-	public void navigateAndAuthenticate(String URL) throws IOException, InterruptedException {
-		FirefoxProfile profile = new FirefoxProfile();
-		profile.setPreference("network.http.phishy-userpass-length", 255);
-		profile.setPreference("network.automatic-ntlm-auth.trusted-uris", "http://148.251.178.207");
-		WebDriver driver = new FirefoxDriver(profile);
-		driver.get(URL);
-	}
+//	@Step
+//	public void navigateAndAuthenticate(String URL) throws IOException, InterruptedException {
+//		FirefoxProfile profile = new FirefoxProfile();
+//		profile.setPreference("network.http.phishy-userpass-length", 255);
+//		profile.setPreference("network.automatic-ntlm-auth.trusted-uris", "http://148.251.178.207");
+//		WebDriver driver = new FirefoxDriver(profile);
+//		driver.get(URL);
+//	}
 
 	public AbstractPage abstractPage() {
 		return getPages().currentPageAt(AbstractPage.class);

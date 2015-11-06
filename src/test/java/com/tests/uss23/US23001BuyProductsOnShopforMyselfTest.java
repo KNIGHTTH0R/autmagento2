@@ -43,7 +43,7 @@ import com.workflows.frontend.AddProductsWorkflow;
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US23001SfmTest extends BaseTest {
+public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -119,7 +119,7 @@ public class US23001SfmTest extends BaseTest {
 	}
 
 	@Test
-	public void us23001SfmTest() {
+	public void us23001BuyProductsOnShopforMyselfTest() {
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

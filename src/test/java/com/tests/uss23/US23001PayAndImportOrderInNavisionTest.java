@@ -30,7 +30,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US23001PayAndImportOrderInNavTest extends BaseTest {
+public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -42,34 +42,21 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 	List<SyncInfoModel> syncronizedMagentoProducts = new ArrayList<SyncInfoModel>();
 	List<SyncInfoModel> syncronizedNavProducts = new ArrayList<SyncInfoModel>();
 
-	private static List<String> idsList = new ArrayList<String>(Arrays.asList("1292", "1658"));
-	private static List<String> skuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV"));
-
 	@Before
 	public void setUp() throws Exception {
-		orderModel = MongoReader.getOrderModel("US23001SfmTest").get(0);
+		orderModel = MongoReader.getOrderModel("US23001BuyProductsOnShopforMyselfTest").get(0);
 	}
 
 	@Test
-	public void us23001PayAndImportOrderInNavTest() throws SQLException {
+	public void us23001PayAndImportOrderInNavisionTest() throws SQLException {
 
-		// backEndSteps.performAdminLogin(Credentials.BE_USER,
-		// Credentials.BE_PASS);
-		// backEndSteps.clickOnSalesOrders();
-		// ordersSteps.findOrderByOrderId(orderModel.getOrderId());
-		// ordersSteps.openOrder(orderModel.getOrderId());
-		// ordersSteps.markOrderAsPaid();
-		//
-		// ImportInterfaceCalls.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL,
-		// orderModel.getOrderId());
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+		backEndSteps.clickOnSalesOrders();
+		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
+		ordersSteps.openOrder(orderModel.getOrderId());
+		ordersSteps.markOrderAsPaid();
 
-		for (String id : idsList) {
-			syncronizedMagentoProducts.add(ApiCalls.getMagProductInfo(id));
-		}
+		ImportInterfaceCalls.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
 
-		for (String sku : skuList) {
-			String[] skuParts = sku.split("-");
-			syncronizedNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
-		}
 	}
 }
