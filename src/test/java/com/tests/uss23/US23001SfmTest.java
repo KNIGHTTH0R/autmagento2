@@ -74,7 +74,7 @@ public class US23001SfmTest extends BaseTest {
 	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct5 = new ProductDetailedModel();
 
-	private OrderModel orderModel;
+	private OrderModel orderModel = new OrderModel();
 
 	@Before
 	public void setUp() throws Exception {

@@ -59,11 +59,11 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 		ordersSteps.openOrder(orderModel.getOrderId());
 		ordersSteps.markOrderAsPaid();
 
+		ImportInterfaceCalls.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
+
 		for (String id : idsList) {
 			syncronizedMagentoProducts.add(ApiCalls.getMagProductInfo(id));
 		}
-
-		ImportInterfaceCalls.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
 
 		for (String sku : skuList) {
 			String[] skuParts = sku.split("-");
