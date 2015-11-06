@@ -43,7 +43,7 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 	List<SyncInfoModel> syncronizedNavProducts = new ArrayList<SyncInfoModel>();
 
 	private static List<String> idsList = new ArrayList<String>(Arrays.asList("1292", "1658"));
-	private static List<String> skuList = new ArrayList<String>(Arrays.asList("R065SV-18","N093SV-"));
+	private static List<String> skuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV-"));
 
 	@Before
 	public void setUp() throws Exception {
@@ -53,13 +53,15 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 	@Test
 	public void us23001PayAndImportOrderInNavTest() throws SQLException {
 
-//		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-//		backEndSteps.clickOnSalesOrders();
-//		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
-//		ordersSteps.openOrder(orderModel.getOrderId());
-//		ordersSteps.markOrderAsPaid();
-//
-//		ImportInterfaceCalls.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
+		// backEndSteps.performAdminLogin(Credentials.BE_USER,
+		// Credentials.BE_PASS);
+		// backEndSteps.clickOnSalesOrders();
+		// ordersSteps.findOrderByOrderId(orderModel.getOrderId());
+		// ordersSteps.openOrder(orderModel.getOrderId());
+		// ordersSteps.markOrderAsPaid();
+		//
+		// ImportInterfaceCalls.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL,
+		// orderModel.getOrderId());
 
 		for (String id : idsList) {
 			syncronizedMagentoProducts.add(ApiCalls.getMagProductInfo(id));
@@ -67,8 +69,9 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 
 		for (String sku : skuList) {
 			String[] skuParts = sku.split("-");
-			System.out.println("length " + skuParts.length);
-			System.out.println(skuParts[0] + "    " + skuParts[1]);
+			if (skuParts.length == 1) {
+				skuParts[1] = "";
+			}
 			syncronizedNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts[1]));
 		}
 	}
