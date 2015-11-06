@@ -43,7 +43,7 @@ public class US23001PayAndImportOrderInNavTest extends BaseTest {
 	List<SyncInfoModel> syncronizedNavProducts = new ArrayList<SyncInfoModel>();
 
 	private static List<String> idsList = new ArrayList<String>(Arrays.asList("1292", "1658"));
-	private static List<String> skuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV-"));
+	private static List<String> skuList = new ArrayList<String>(Arrays.asList("R065SV-18"));
 
 	@Before
 	public void setUp() throws Exception {
