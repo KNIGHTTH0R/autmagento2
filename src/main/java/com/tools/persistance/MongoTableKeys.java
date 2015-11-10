@@ -155,6 +155,17 @@ public class MongoTableKeys {
 	public static final String HOST_BASIC_PRODUCT_MODEL = "HostBasicProductModel";
 	public static final String BORROW_BASIC_PRODUCT_MODEL = "BorrowBasicProductModel";
 
+	// syncInfoModel
+	public static final String STOCK_INFO_MODEL = "StockInfoModel";
+	public static final String SKU = "sku";
+	public static final String STOC_QUANTITY = "quantity";
+	public static final String MINUMIM_QUANTITY = "minumimQuantity";
+	public static final String IS_DISCONTINUED = "isDiscontinued";
+	public static final String TOTAL_QUANTITY = "totalQuantity";
+	public static final String MAX_PERCENT_TO_BORROW = "maxPercentToBorrow";
+	public static final String EARLIEST_AVAILABILITY = "earliestAvailability";
+	public static final String PENDING_QUANTITY = "pendingQuantity";
+
 	// DBStylistModel
 	public static final String DB_STYLIST_MODEL = "dbStylistModel";
 	public static final String DB_STYLIST_EMAIL = "stylistEmail";
@@ -178,9 +189,9 @@ public class MongoTableKeys {
 	public static final String COORDINATES_MODEL = "CoordinatesModel";
 	public static final String LATTITUDE = "Lattitude";
 	public static final String LONGITUDE = "Longitude";
-	
+
 	public static final String IP_PERFORMANCE_MODEL = "IpPerformanceModel";
-	
+
 	public static final String CAREER_LEVEL = "CareerLevel";
 	public static final String PAY_LEVEL = "PayLevel";
 	public static final String INDIVIDUAL_POINTS = "IndividualPoints";

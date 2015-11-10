@@ -25,7 +25,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US23001VerifyStockIsSyncronizedTest extends BaseTest {
+public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -52,7 +52,7 @@ public class US23001VerifyStockIsSyncronizedTest extends BaseTest {
 	}
 
 	@Test
-	public void us23001PayAndImportOrderInNavTest() throws SQLException {
+	public void us23001VerifyStockSyncAfterOrderImportTest() throws SQLException {
 
 	}
 }

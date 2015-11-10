@@ -10,6 +10,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,9 @@ import com.connectors.navSqlServer.NavQueries;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
+import com.tools.SoapKeys;
 import com.tools.data.navision.SyncInfoModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
@@ -32,27 +35,57 @@ public class US23001GetMagAndNavStockBerforeOrderTest extends BaseTest {
 	@Steps
 	public OrdersSteps ordersSteps;
 
-	List<SyncInfoModel> syncronizedMagentoProducts = new ArrayList<SyncInfoModel>();
-	List<SyncInfoModel> syncronizedNavProducts = new ArrayList<SyncInfoModel>();
+	private List<SyncInfoModel> magentoProductsToBeDeacreased = new ArrayList<SyncInfoModel>();
+	private List<SyncInfoModel> navProductsToBeDecreased = new ArrayList<SyncInfoModel>();
 
-	private static List<String> idsList = new ArrayList<String>(Arrays.asList("1292", "1658"));
-	private static List<String> skuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV"));
+	private List<SyncInfoModel> constantStockMagentoProducts = new ArrayList<SyncInfoModel>();
+	private List<SyncInfoModel> constantStockNavProducts = new ArrayList<SyncInfoModel>();
+
+	private static List<String> idListToBeDecreased = new ArrayList<String>(Arrays.asList("1292", "1658"));
+	private static List<String> skuListToBeDecreased = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV"));
+
+	private static List<String> constantStockIdList = new ArrayList<String>(Arrays.asList("5037"));
+	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M164"));
 
 	@Before
 	public void setUp() throws Exception {
 
-		for (String id : idsList) {
-			syncronizedMagentoProducts.add(ApiCalls.getMagProductInfo(id));
+		for (String id : idListToBeDecreased) {
+			magentoProductsToBeDeacreased.add(ApiCalls.getMagProductInfo(id));
 		}
-
-		for (String sku : skuList) {
+		for (String sku : skuListToBeDecreased) {
 			String[] skuParts = sku.split("-");
-			syncronizedNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
+			navProductsToBeDecreased.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
+		}
+		for (String id : constantStockIdList) {
+			constantStockMagentoProducts.add(ApiCalls.getMagProductInfo(id));
+		}
+		for (String sku : constantStockSkuList) {
+			String[] skuParts = sku.split("-");
+			constantStockNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
 	}
 
 	@Test
 	public void us23001GetMagAndNavStockBerforeOrderTest() throws SQLException {
+
+	}
+
+	@After
+	public void saveData() {
+
+		for (SyncInfoModel product : magentoProductsToBeDeacreased) {
+			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
+		}
+		for (SyncInfoModel product : navProductsToBeDecreased) {
+			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
+		}
+		for (SyncInfoModel product : constantStockMagentoProducts) {
+			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
+		}
+		for (SyncInfoModel product : constantStockNavProducts) {
+			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
+		}
 
 	}
 }

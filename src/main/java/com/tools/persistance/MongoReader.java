@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.connectors.mongo.MongoConnector;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.tools.data.BorrowCartCalcDetailsModel;
@@ -31,6 +32,7 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.DBStylistModel;
 
 public class MongoReader extends MongoConnector {
@@ -557,7 +559,37 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+	
+	public static List<SyncInfoModel> grabStockInfoModel(String testName) {
+		DBObject dbObject = null;
+		List<SyncInfoModel> itemList = new ArrayList<SyncInfoModel>();
 
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STOCK_INFO_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				SyncInfoModel result = new SyncInfoModel();
+				dbObject = cursor.next();
+
+				result.setSku(MongoUtils.checkField(dbObject, MongoTableKeys.SKU));
+				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.STOC_QUANTITY));
+				result.setMinumimQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.MINUMIM_QUANTITY));
+				result.setIsDiscontinued(MongoUtils.checkField(dbObject, MongoTableKeys.IS_DISCONTINUED));
+				result.setTotalQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_QUANTITY));
+				result.setMaxPercentToBorrow(MongoUtils.checkField(dbObject, MongoTableKeys.MAX_PERCENT_TO_BORROW));
+				result.setEarliestAvailability(MongoUtils.checkField(dbObject, MongoTableKeys.EARLIEST_AVAILABILITY));
+				result.setPendingQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.PENDING_QUANTITY));
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+	
 	// @SuppressWarnings("unchecked")
 	@SuppressWarnings("unchecked")
 	public static List<CartTotalsModel> grabTotalsModels(String testName) {

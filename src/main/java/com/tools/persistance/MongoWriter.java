@@ -31,6 +31,7 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.geolocation.CoordinatesModel;
+import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.newsletter.SubscriberModel;
 import com.tools.data.soap.DBStylistModel;
 
@@ -115,7 +116,24 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+	
+	public static void saveStockInfoModel(SyncInfoModel syncInfoModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.STOCK_INFO_MODEL);
 
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.SKU, syncInfoModel.getSku());
+		document.put(MongoTableKeys.STOC_QUANTITY, syncInfoModel.getQuantity());
+		document.put(MongoTableKeys.MINUMIM_QUANTITY, syncInfoModel.getMinumimQuantity());
+		document.put(MongoTableKeys.IS_DISCONTINUED, syncInfoModel.getIsDiscontinued());
+		document.put(MongoTableKeys.TOTAL_QUANTITY, syncInfoModel.getTotalQuantity());
+		document.put(MongoTableKeys.MAX_PERCENT_TO_BORROW, syncInfoModel.getMaxPercentToBorrow());
+		document.put(MongoTableKeys.EARLIEST_AVAILABILITY, syncInfoModel.getEarliestAvailability());
+		document.put(MongoTableKeys.PENDING_QUANTITY, syncInfoModel.getPendingQuantity());
+
+		table.insert(document);
+	}
+	
 	public static void saveJewerlyHistoryModel(JewelryHistoryModel jewelryHistoryModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.JEWERLY_HISTORY_MODEL);
