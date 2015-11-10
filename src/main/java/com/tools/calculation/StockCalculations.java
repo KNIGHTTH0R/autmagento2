@@ -7,7 +7,7 @@ import com.tools.data.navision.SyncInfoModel;
 
 public class StockCalculations {
 
-	public static List<SyncInfoModel> calculateMagStockAfterPlaceOrder(List<SyncInfoModel> initialList, String quantityOnOrder, boolean isConstantStock) {
+	public static List<SyncInfoModel> calculateNewStock(List<SyncInfoModel> initialList, String quantity, boolean isConstantStock) {
 
 		List<SyncInfoModel> finalList = new ArrayList<SyncInfoModel>();
 
@@ -16,7 +16,7 @@ public class StockCalculations {
 			if (isConstantStock)
 				product.setQuantity(product.getQuantity());
 			else
-				product.setQuantity(calculateNewStock(product.getQuantity(), quantityOnOrder));
+				product.setQuantity(calculateStock(product.getQuantity(), quantity));
 
 			product.setEarliestAvailability(product.getEarliestAvailability());
 			product.setIsDiscontinued(product.getIsDiscontinued());
@@ -30,7 +30,30 @@ public class StockCalculations {
 		return finalList;
 	}
 
-	public static String calculateNewStock(String currentStock, String quantityOnOrder) {
+	public static List<SyncInfoModel> calculateStockBasedOnPendingOrders(List<SyncInfoModel> initialList) {
+		List<SyncInfoModel> finalList = new ArrayList<SyncInfoModel>();
+
+		for (SyncInfoModel product : initialList) {
+
+			product.setQuantity(addPendingStockToStock(product));
+			product.setEarliestAvailability(product.getEarliestAvailability());
+			product.setIsDiscontinued(product.getIsDiscontinued());
+			product.setMaxPercentToBorrow(product.getMaxPercentToBorrow());
+			product.setMinumimQuantity(product.getMinumimQuantity());
+			product.setPendingQuantity(product.getPendingQuantity());
+
+			finalList.add(product);
+
+		}
+		return finalList;
+	}
+
+	private static String calculateStock(String currentStock, String quantityOnOrder) {
 		return String.valueOf(Integer.parseInt(currentStock) + Integer.parseInt(quantityOnOrder));
 	}
+
+	private static String addPendingStockToStock(SyncInfoModel product) {
+		return String.valueOf(Integer.parseInt(product.getQuantity()) + Integer.parseInt(product.getPendingQuantity()));
+	}
+
 }
