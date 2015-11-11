@@ -20,7 +20,7 @@ public class StockSyncValidations {
 			if (compare.getSku() != null) {
 				validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
 				validateIsDiscontinued(productNow.getIsDiscontinued(), compare.getIsDiscontinued());
-				validateEarliestAvailability(productNow.getEarliestAvailability(), compare.getEarliestAvailability());
+//				validateEarliestAvailability(productNow.getEarliestAvailability(), compare.getEarliestAvailability());
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
