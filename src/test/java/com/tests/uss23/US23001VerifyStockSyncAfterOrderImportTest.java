@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
@@ -16,16 +17,23 @@ import org.junit.runner.RunWith;
 import com.connectors.http.ApiCalls;
 import com.connectors.navSqlServer.NavQueries;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.SoapKeys;
 import com.tools.calculation.StockCalculations;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.stockSynk.StockSyncValidations;
 
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
+
+	@Steps
+	StockSyncValidations stockSyncValidations;
+	@Steps
+	public CustomVerification customVerifications;
 
 	List<SyncInfoModel> initialChangingMagentoProducts = new ArrayList<SyncInfoModel>();
 	List<SyncInfoModel> initialChangingNavProducts = new ArrayList<SyncInfoModel>();
@@ -81,7 +89,18 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	@Test
 	public void us23001VerifyStockSyncAfterOrderImportTest() throws SQLException {
 
-		// validations
+		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
+		stockSyncValidations.validateProducts("VALIDATE CHANGING STOCK NAVISION PRODUCTS");
 
+		stockSyncValidations.setValidateProductsModels(initialConstantNavProducts, constantStockNavProducts);
+		stockSyncValidations.validateProducts("VALIDATE CHANGING STOCK NAVISION PRODUCTS");
+
+		stockSyncValidations.setValidateProductsModels(changingStockNavProduct, changingStockMagentoProducts);
+		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CONSTANT STOCK PRODUCTS");
+
+		stockSyncValidations.setValidateProductsModels(constantStockNavProducts, constantStockMagentoProducts);
+		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CONSTANT STOCK PRODUCTS");
+
+		customVerifications.printErrors();
 	}
 }

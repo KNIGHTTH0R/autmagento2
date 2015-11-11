@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ImportInterfaceCalls;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.external.navision.NavisionImportSteps;
