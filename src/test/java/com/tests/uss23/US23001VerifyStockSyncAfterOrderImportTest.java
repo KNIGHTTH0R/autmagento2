@@ -96,7 +96,7 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 		stockSyncValidations.validateProducts("VALIDATE CHANGING STOCK NAVISION PRODUCTS");
 
 		stockSyncValidations.setValidateProductsModels(changingStockNavProduct, changingStockMagentoProducts);
-		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CONSTANT STOCK PRODUCTS");
+		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CHANGING STOCK PRODUCTS");
 
 		stockSyncValidations.setValidateProductsModels(constantStockNavProducts, constantStockMagentoProducts);
 		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CONSTANT STOCK PRODUCTS");
