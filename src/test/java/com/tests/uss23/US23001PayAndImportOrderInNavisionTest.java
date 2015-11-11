@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.ImportInterfaceCalls;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
+import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
@@ -33,6 +34,8 @@ public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
+	@Steps
+	public NavisionImportSteps navisionImportSteps;
 
 	private OrderModel orderModel;
 
@@ -53,7 +56,7 @@ public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 		ordersSteps.openOrder(orderModel.getOrderId());
 		ordersSteps.markOrderAsPaid();
 
-		ImportInterfaceCalls.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
+		navisionImportSteps.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
 
 	}
 }
