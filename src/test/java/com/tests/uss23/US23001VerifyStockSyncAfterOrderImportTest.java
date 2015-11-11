@@ -63,10 +63,8 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 
 		orderModel = MongoReader.getOrderModel("US23001BuyProductsOnShopforMyselfTest").get(0);
 		OrderStatusModel orderStatusModel = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase());
-		System.out.println(orderStatusModel.getSyncDate());
-		String[] parts = orderStatusModel.getSyncDate().split(".");
+		String[] parts = orderStatusModel.getSyncDate().split(":");
 		String syncDate = parts[0];
-		System.out.println(parts[0]);
 
 		initialChangingMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
 		initialChangingNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
