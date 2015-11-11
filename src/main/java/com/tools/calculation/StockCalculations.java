@@ -49,11 +49,11 @@ public class StockCalculations {
 	}
 
 	private static String calculateStock(String currentStock, String quantityOnOrder) {
-		return String.valueOf(Integer.parseInt(currentStock) + Integer.parseInt(quantityOnOrder));
+		return String.valueOf(Integer.parseInt(currentStock.replace(".0000", "")) + Integer.parseInt(quantityOnOrder));
 	}
 
 	private static String addPendingStockToStock(SyncInfoModel product) {
-		return String.valueOf(Integer.parseInt(product.getQuantity()) + Integer.parseInt(product.getPendingQuantity()));
+		return String.valueOf(Integer.parseInt(product.getQuantity().replace(".0000", "")) + Integer.parseInt(product.getPendingQuantity()));
 	}
 
 }
