@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 
 import org.junit.Assert;
 
@@ -20,7 +21,7 @@ public class StockSyncValidations {
 		this.list2 = list2;
 	}
 
-	@Step
+	@StepGroup
 	public void validateProducts(String message) {
 
 		for (SyncInfoModel productNow : list1) {
