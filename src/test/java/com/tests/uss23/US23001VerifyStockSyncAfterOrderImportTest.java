@@ -64,6 +64,7 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 
 		orderModel = MongoReader.getOrderModel("US23001BuyProductsOnShopforMyselfTest").get(0);
 		OrderStatusModel orderStatusModel = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase());
+		System.out.println(orderStatusModel.getSyncDate());
 		String[] parts = orderStatusModel.getSyncDate().split(".");
 		syncDate = parts[0];
 
