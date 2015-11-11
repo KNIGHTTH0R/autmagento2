@@ -3,15 +3,17 @@ package com.workflows.stockSynk;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Steps;
 
 import org.junit.Assert;
 
-import com.tools.CustomVerification;
 import com.tools.data.navision.SyncInfoModel;
 
 public class StockSyncValidations {
+
+	@Steps
+	StockProductsValidations stockProductsValidations;
 
 	private List<SyncInfoModel> list1 = new ArrayList<SyncInfoModel>();
 	private List<SyncInfoModel> list2 = new ArrayList<SyncInfoModel>();
@@ -28,9 +30,9 @@ public class StockSyncValidations {
 			SyncInfoModel compare = findProduct(productNow.getSku(), list2);
 
 			if (compare.getSku() != null) {
-				validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
-				validateIsDiscontinued(productNow.getIsDiscontinued(), compare.getIsDiscontinued());
-				validateEarliestAvailability(productNow.getEarliestAvailability(), compare.getEarliestAvailability());
+				stockProductsValidations.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
+				stockProductsValidations.validateIsDiscontinued(productNow.getIsDiscontinued(), compare.getIsDiscontinued());
+				stockProductsValidations.validateEarliestAvailability(productNow.getEarliestAvailability(), compare.getEarliestAvailability());
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
@@ -48,21 +50,6 @@ public class StockSyncValidations {
 			}
 		}
 		return result;
-	}
-
-	@Step
-	private void validateMatchQuantity(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, compare.contains(productNow));
-	}
-
-	@Step
-	private void validateIsDiscontinued(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Is discontinued status doesn't match: " + productNow + " - " + compare, productNow.contentEquals(compare));
-	}
-
-	@Step
-	private void validateEarliestAvailability(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Quantity values doesn't match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
 
 }
