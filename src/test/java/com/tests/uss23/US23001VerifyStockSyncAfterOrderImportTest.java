@@ -51,13 +51,13 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 		initialChangingNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
 		initialConstantMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
 		initialConstantNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
-		
-		System.out.println("FFDFDSFSDFSDFDF  " +  initialChangingNavProducts.get(0).getQuantity());
+
+		System.out.println("FFDFDSFSDFSDFDF  " + initialChangingNavProducts.get(0).getQuantity());
 
 		initialChangingNavProducts = StockCalculations.calculateNewStock(initialChangingMagentoProducts, "-1", false);
 		initialConstantNavProducts = StockCalculations.calculateNewStock(initialConstantMagentoProducts, "-1", true);
-		
-		System.out.println("FFDFDSFSDFSDFDF  " +  initialChangingNavProducts.get(0).getQuantity());
+
+		System.out.println("FFDFDSFSDFSDFDF  " + initialChangingNavProducts.get(0).getQuantity());
 
 		for (String id : changingStockIdList) {
 			changingStockMagentoProducts.add(ApiCalls.getMagProductInfo(id));
@@ -73,6 +73,9 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 			String[] skuParts = sku.split("-");
 			constantStockNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
+
+		changingStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(changingStockMagentoProducts);
+		constantStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(constantStockMagentoProducts);
 	}
 
 	@Test

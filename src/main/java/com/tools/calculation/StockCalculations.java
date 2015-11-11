@@ -53,7 +53,7 @@ public class StockCalculations {
 	}
 
 	private static String addPendingStockToStock(SyncInfoModel product) {
-		return String.valueOf(Integer.parseInt(product.getQuantity().replace(".0000", "")) + Integer.parseInt(product.getPendingQuantity()));
+		return String.valueOf(Double.parseDouble(product.getQuantity()) + Double.parseDouble(product.getPendingQuantity()));
 	}
 
 }
