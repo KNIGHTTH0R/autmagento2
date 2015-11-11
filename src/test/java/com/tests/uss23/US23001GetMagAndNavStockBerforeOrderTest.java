@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.ApiCalls;
+import com.connectors.mongo.MongoConnector;
 import com.connectors.navSqlServer.NavQueries;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
@@ -64,6 +65,11 @@ public class US23001GetMagAndNavStockBerforeOrderTest extends BaseTest {
 			String[] skuParts = sku.split("-");
 			constantStockNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
+
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 	}
 
 	@Test

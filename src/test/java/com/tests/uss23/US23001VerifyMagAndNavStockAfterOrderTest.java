@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
@@ -16,8 +15,6 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.ApiCalls;
 import com.connectors.navSqlServer.NavQueries;
-import com.steps.backend.BackEndSteps;
-import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.calculation.StockCalculations;
