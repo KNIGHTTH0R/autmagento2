@@ -854,7 +854,7 @@ public class ApiCalls {
 	}
 
 	public static void main(String[] args) {
-		SyncInfoModel syncInfoModel = ApiCalls.getMagProductInfo("1292");
+		SyncInfoModel syncInfoModel = ApiCalls.getMagProductInfo("5037");
 		System.out.println(syncInfoModel.getQuantity());
 	}
 

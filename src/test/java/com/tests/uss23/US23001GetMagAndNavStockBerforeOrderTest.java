@@ -80,18 +80,18 @@ public class US23001GetMagAndNavStockBerforeOrderTest extends BaseTest {
 	@After
 	public void saveData() {
 
-		for (SyncInfoModel product : magentoProductsToBeDeacreased) {
-			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
-		}
-		for (SyncInfoModel product : navProductsToBeDecreased) {
-			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
-		}
-		for (SyncInfoModel product : constantStockMagentoProducts) {
-			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
-		}
-		for (SyncInfoModel product : constantStockNavProducts) {
-			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
-		}
+//		for (SyncInfoModel product : magentoProductsToBeDeacreased) {
+//			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
+//		}
+//		for (SyncInfoModel product : navProductsToBeDecreased) {
+//			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
+//		}
+//		for (SyncInfoModel product : constantStockMagentoProducts) {
+//			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
+//		}
+//		for (SyncInfoModel product : constantStockNavProducts) {
+//			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
+//		}
 
 	}
 }
