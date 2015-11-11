@@ -41,7 +41,8 @@ public class NavQueries {
 
 			result.setSku(sku);
 			result.setQuantity(rs.getString("Quantity"));
-			result.setEarliestAvailability(rs.getString("Earliest Av_ Date"));
+			String[] parts = rs.getString("Earliest Av_ Date").split(" ");
+			result.setEarliestAvailability(parts[0]);
 			result.setMinumimQuantity(rs.getString("Minimum Quantity"));
 			result.setIsDiscontinued(rs.getString("Shop IsDiscontinued"));
 			result.setTotalQuantity(rs.getString("Total Qty"));

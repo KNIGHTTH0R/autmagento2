@@ -501,6 +501,8 @@ public class ApiCalls {
 		NodeList childNodes = productInfo.getChildNodes();
 		for (int j = 0; j < childNodes.getLength(); j++) {
 
+			result.setEarliestAvailability("1753-01-01");
+
 			if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {
 				result.setSku(childNodes.item(j).getTextContent());
 			}
@@ -512,6 +514,11 @@ public class ApiCalls {
 			}
 			if (childNodes.item(j).getNodeName().equalsIgnoreCase("qty_pending")) {
 				result.setPendingQuantity(childNodes.item(j).getTextContent());
+			}
+			if (childNodes.item(j).getNodeName().equalsIgnoreCase("earliest_availability")) {
+
+				String[] parts = childNodes.item(j).getTextContent().split(" ");
+				result.setEarliestAvailability(parts[0]);
 			}
 		}
 
