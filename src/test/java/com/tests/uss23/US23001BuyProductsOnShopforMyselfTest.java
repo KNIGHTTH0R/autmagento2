@@ -26,7 +26,6 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
-import com.tools.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;

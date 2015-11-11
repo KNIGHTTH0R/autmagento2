@@ -56,5 +56,5 @@ public class StockSyncValidations {
 		}
 		return result;
 	}
-
+	
 }

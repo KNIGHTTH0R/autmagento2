@@ -1,6 +1,7 @@
 package com.workflows.stockSynk;
 
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
 import com.tools.requirements.AbstractSteps;
@@ -13,7 +14,7 @@ public class StockProductsValidations extends AbstractSteps {
 	public void validateSku(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: SKU doesn't match: " + productNow + " - " + compare, compare.contains(productNow));
 	}
-	
+
 	@Step
 	public void validateMatchQuantity(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, compare.contains(productNow));
@@ -27,6 +28,12 @@ public class StockProductsValidations extends AbstractSteps {
 	@Step
 	public void validateEarliestAvailability(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Quantity values doesn't match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+	}
+
+	@Title("Verify that order is syncronyzed in NAV")
+	@Step
+	public void validateSyncronizedStatus(boolean status) {
+		CustomVerification.verifyTrue("Failure: Products are not syncronized !!", status = true);
 	}
 
 }
