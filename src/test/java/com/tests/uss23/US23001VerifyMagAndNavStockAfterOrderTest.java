@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
@@ -16,16 +17,23 @@ import org.junit.runner.RunWith;
 import com.connectors.http.ApiCalls;
 import com.connectors.navSqlServer.NavQueries;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.SoapKeys;
 import com.tools.calculation.StockCalculations;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.stockSynk.StockSyncValidations;
 
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
+
+	@Steps
+	StockSyncValidations stockSyncValidations;
+	@Steps
+	public CustomVerification customVerifications;
 
 	List<SyncInfoModel> initialChangingMagentoProducts = new ArrayList<SyncInfoModel>();
 	List<SyncInfoModel> initialChangingNavProducts = new ArrayList<SyncInfoModel>();
@@ -53,8 +61,7 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 		initialConstantNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 
 		initialChangingMagentoProducts = StockCalculations.calculateNewStock(initialChangingMagentoProducts, "-1", false);
-		initialConstantMagentoProducts = StockCalculations.calculateNewStock(initialConstantMagentoProducts, "-1", true);
-		
+		initialConstantMagentoProducts = StockCalculations.calculateNewStock(initialConstantMagentoProducts, "-1", false);
 
 		for (String id : changingStockIdList) {
 			changingStockMagentoProducts.add(ApiCalls.getMagProductInfo(id));
@@ -70,17 +77,23 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 			String[] skuParts = sku.split("-");
 			constantStockNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
-		
-		
 	}
 
 	@Test
 	public void us23001VerifyMagAndNavStockAfterOrderTest() throws SQLException {
 
-		//validate initial nav stock vs current nav stock (current = initial -1) for changing stock products 
-		//validate initial nav stock vs current nav stock(current = initial) for constant stock products
+		stockSyncValidations.validateProducts(initialChangingMagentoProducts, changingStockMagentoProducts);
+		stockSyncValidations.validateProducts(initialConstantMagentoProducts, constantStockMagentoProducts);
 		
-		//validate nav stock vs magento stock (where mag stock = quantity + pending quantity)
+		customVerifications.printErrors();
+
+		// validate initial mag stock vs current mag stock (current = initial
+		// -1) for changing stock products
+		// validate initial mag stock vs current mag stock(current = initial)
+		// for constant stock products
+
+		// validate nav stock vs magento stock (where mag stock = quantity +
+		// pending quantity)
 
 	}
 }

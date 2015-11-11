@@ -54,8 +54,8 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 
 		System.out.println("FFDFDSFSDFSDFDF  " + initialChangingNavProducts.get(0).getQuantity());
 
-		initialChangingNavProducts = StockCalculations.calculateNewStock(initialChangingMagentoProducts, "-1", false);
-		initialConstantNavProducts = StockCalculations.calculateNewStock(initialConstantMagentoProducts, "-1", true);
+		initialChangingNavProducts = StockCalculations.calculateNewStock(initialChangingNavProducts, "-1", false);
+		initialConstantNavProducts = StockCalculations.calculateNewStock(initialConstantNavProducts, "-1", true);
 
 		System.out.println("FFDFDSFSDFSDFDF  " + initialChangingNavProducts.get(0).getQuantity());
 
@@ -79,7 +79,7 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	}
 
 	@Test
-	public void us23001VerifyMagAndNavStockAfterOrderTest() throws SQLException {
+	public void us23001VerifyStockSyncAfterOrderImportTest() throws SQLException {
 
 		// validations
 
