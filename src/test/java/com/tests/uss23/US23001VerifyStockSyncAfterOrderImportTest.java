@@ -56,7 +56,6 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M164"));
 
 	private OrderModel orderModel;
-	String syncDate;
 	boolean isSyncronyzed = false;
 
 	@Before
@@ -66,8 +65,8 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 		OrderStatusModel orderStatusModel = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase());
 		System.out.println(orderStatusModel.getSyncDate());
 		String[] parts = orderStatusModel.getSyncDate().split(".");
-		syncDate = parts[1];
-		System.out.println(parts[1]);
+		String syncDate = parts[0];
+		System.out.println(parts[0]);
 
 		initialChangingMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
 		initialChangingNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
