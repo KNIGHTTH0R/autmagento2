@@ -9,9 +9,9 @@ public class SoapKeys {
 	public static final String COMPLETE = "Complete";
 	public static final String CANCELED = "Cancelled";
 	public static final String MAGENTO_INITIAL_CHANGING_STOCK = "MICS";
-	public static final String NAVISION_INITIAL_CHANGING_STOCK = "NavisionInitialChangingStock";
-	public static final String MAGENTO_INITIAL_CONSTANT_STOCK = "MagentoInitialConstantStock";
-	public static final String NAVISION_INITIAL_CONSTANT_STOCK = "NavisionInitialConstantStock";
+	public static final String NAVISION_INITIAL_CHANGING_STOCK = "NICS";
+	public static final String MAGENTO_INITIAL_CONSTANT_STOCK = "MIConsS";
+	public static final String NAVISION_INITIAL_CONSTANT_STOCK = "NIConsS";
 	public static final String MAGENTO_AFTER_ORDER_PLACED_STOCK = "MagentoAfterOrderPlacedStock";
 	public static final String NAVISION_AFTER_ORDER_PLACED_STOCK = "NavisionAfterOrderPlacedStock";
 	public static final String MAGENTO_AFTER_ORDER_IMPORTED_STOCK = "MagentoAfterOrderImportedStock";
