@@ -34,7 +34,7 @@ public class StockSyncValidations {
 				int intProductNowQuantity = (int) Math.round(Double.parseDouble(productNow.getQuantity()));
 				int intCompareQuantity = (int) Math.round(Double.parseDouble(compare.getQuantity()));
 				
-				stockProductsValidations.validateIsDiscontinued(productNow.getSku(), compare.getSku());
+				stockProductsValidations.validateSku(productNow.getSku(), compare.getSku());
 				stockProductsValidations.validateMatchQuantity(String.valueOf(intProductNowQuantity), String.valueOf(intCompareQuantity));
 				stockProductsValidations.validateIsDiscontinued(productNow.getIsDiscontinued(), compare.getIsDiscontinued());
 				stockProductsValidations.validateEarliestAvailability(productNow.getEarliestAvailability(), compare.getEarliestAvailability());

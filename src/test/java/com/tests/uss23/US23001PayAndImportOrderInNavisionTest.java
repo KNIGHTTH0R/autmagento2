@@ -25,7 +25,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
-@Story(Application.ShopForMyselfCart.US3_1.class)
+@Story(Application.StockSync.US23_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 

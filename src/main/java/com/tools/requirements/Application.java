@@ -294,7 +294,7 @@ public class Application {
 
 	@Feature
 	public class MassAction {
-		
+
 		public class US17_1 {
 		}
 
@@ -307,6 +307,12 @@ public class Application {
 
 	@Feature
 	public class External {
+	}
+
+	@Feature
+	public class StockSync {
+		public class US23_1 {
+		}
 	}
 
 }
