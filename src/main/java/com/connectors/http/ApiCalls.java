@@ -501,7 +501,7 @@ public class ApiCalls {
 		NodeList childNodes = productInfo.getChildNodes();
 		for (int j = 0; j < childNodes.getLength(); j++) {
 
-			result.setEarliestAvailability("1753-01-01");
+			result.setEarliestAvailability("1753-01-01dsdsds");
 
 			if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {
 				result.setSku(childNodes.item(j).getTextContent());
@@ -521,7 +521,6 @@ public class ApiCalls {
 				result.setEarliestAvailability(parts[0]);
 			}
 		}
-
 		return result;
 
 	}
