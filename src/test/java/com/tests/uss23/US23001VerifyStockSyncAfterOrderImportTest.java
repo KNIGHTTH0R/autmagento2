@@ -90,10 +90,10 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	public void us23001VerifyStockSyncAfterOrderImportTest() throws SQLException {
 
 		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
-		stockSyncValidations.validateProducts("VALIDATE CHANGING STOCK NAVISION PRODUCTS");
+		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");
 
 		stockSyncValidations.setValidateProductsModels(initialConstantNavProducts, constantStockNavProducts);
-		stockSyncValidations.validateProducts("VALIDATE CONSTANT STOCK NAVISION PRODUCTS");
+		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS THE SAME - CONSTANT STOCK NAVISION PRODUCTS");
 
 		stockSyncValidations.setValidateProductsModels(changingStockNavProduct, changingStockMagentoProducts);
 		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CHANGING STOCK PRODUCTS");

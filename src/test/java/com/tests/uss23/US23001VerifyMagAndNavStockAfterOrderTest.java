@@ -83,26 +83,17 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 	public void us23001VerifyMagAndNavStockAfterOrderTest() throws SQLException {
 
 		stockSyncValidations.setValidateProductsModels(initialChangingMagentoProducts, changingStockMagentoProducts);
-		stockSyncValidations.validateProducts("VALIDATE CHANGING STOCK MAGENTO PRODUCTS");
+		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS DECREASED -  CHANGING STOCK MAGENTO PRODUCTS");
 
 		stockSyncValidations.setValidateProductsModels(initialConstantMagentoProducts, constantStockMagentoProducts);
-		stockSyncValidations.validateProducts("VALIDATE CONSTANT STOCK MAGENTO PRODUCTS");
-		
+		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS DECREASED -  CONSTANT STOCK MAGENTO PRODUCTS");
+
 		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
-		stockSyncValidations.validateProducts("VALIDATE CONSTANT STOCK MAGENTO PRODUCTS");
-		
+		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS THE SAME - CHANGING STOCK NAVISION PRODUCTS");
+
 		stockSyncValidations.setValidateProductsModels(initialConstantNavProducts, constantStockNavProducts);
-		stockSyncValidations.validateProducts("VALIDATE CONSTANT STOCK MAGENTO PRODUCTS");
+		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS THE SAME -  CONSTANT STOCK NAVISION PRODUCTS");
 
 		customVerifications.printErrors();
-
-		// validate initial mag stock vs current mag stock (current = initial
-		// -1) for changing stock products
-		// validate initial mag stock vs current mag stock(current = initial)
-		// for constant stock products
-
-		// validate nav stock vs magento stock (where mag stock = quantity +
-		// pending quantity)
-
 	}
 }
