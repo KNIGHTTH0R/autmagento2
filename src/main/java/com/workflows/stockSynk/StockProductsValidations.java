@@ -33,7 +33,7 @@ public class StockProductsValidations extends AbstractSteps {
 	@Title("Verify that order is syncronyzed in NAV")
 	@Step
 	public void validateSyncronizedStatus(boolean status) {
-		CustomVerification.verifyTrue("Failure: Products are not syncronized !!", status = true);
+		CustomVerification.verifyTrue("Failure: Products are not syncronized !!", status == true);
 	}
 
 }
