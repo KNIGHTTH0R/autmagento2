@@ -87,6 +87,12 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 
 		stockSyncValidations.setValidateProductsModels(initialConstantMagentoProducts, constantStockMagentoProducts);
 		stockSyncValidations.validateProducts("VALIDATE CONSTANT STOCK MAGENTO PRODUCTS");
+		
+		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
+		stockSyncValidations.validateProducts("VALIDATE CONSTANT STOCK MAGENTO PRODUCTS");
+		
+		stockSyncValidations.setValidateProductsModels(initialConstantNavProducts, constantStockNavProducts);
+		stockSyncValidations.validateProducts("VALIDATE CONSTANT STOCK MAGENTO PRODUCTS");
 
 		customVerifications.printErrors();
 
