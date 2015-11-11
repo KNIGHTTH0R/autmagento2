@@ -1,5 +1,6 @@
 package com.workflows.stockSynk;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
@@ -11,8 +12,16 @@ import com.tools.data.navision.SyncInfoModel;
 
 public class StockSyncValidations {
 
+	private List<SyncInfoModel> list1 = new ArrayList<SyncInfoModel>();
+	private List<SyncInfoModel> list2 = new ArrayList<SyncInfoModel>();
+
+	public void setValidateProductsModels(List<SyncInfoModel> list1, List<SyncInfoModel> list2) {
+		this.list1 = list1;
+		this.list2 = list2;
+	}
+
 	@Step
-	public void validateProducts(List<SyncInfoModel> list1, List<SyncInfoModel> list2) {
+	public void validateProducts(String message) {
 
 		for (SyncInfoModel productNow : list1) {
 			SyncInfoModel compare = findProduct(productNow.getSku(), list2);

@@ -82,9 +82,12 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 	@Test
 	public void us23001VerifyMagAndNavStockAfterOrderTest() throws SQLException {
 
-		stockSyncValidations.validateProducts(initialChangingMagentoProducts, changingStockMagentoProducts);
-		stockSyncValidations.validateProducts(initialConstantMagentoProducts, constantStockMagentoProducts);
-		
+		stockSyncValidations.setValidateProductsModels(initialChangingMagentoProducts, changingStockMagentoProducts);
+		stockSyncValidations.validateProducts("VALIDATE CHANGING STOCK MAGENTO PRODUCTS");
+
+		stockSyncValidations.setValidateProductsModels(initialConstantMagentoProducts, constantStockMagentoProducts);
+		stockSyncValidations.validateProducts("VALIDATE CONSTANT STOCK MAGENTO PRODUCTS");
+
 		customVerifications.printErrors();
 
 		// validate initial mag stock vs current mag stock (current = initial
