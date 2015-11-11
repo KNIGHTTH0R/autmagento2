@@ -10,6 +10,11 @@ public class StockProductsValidations extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
+	public void validateSku(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: SKU doesn't match: " + productNow + " - " + compare, compare.contains(productNow));
+	}
+	
+	@Step
 	public void validateMatchQuantity(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, compare.contains(productNow));
 	}
