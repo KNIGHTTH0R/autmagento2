@@ -20,9 +20,12 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
 import com.tools.calculation.StockCalculations;
+import com.tools.data.backend.OrderModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 import com.workflows.stockSynk.StockSyncValidations;
 
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
@@ -52,20 +55,24 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	private static List<String> constantStockIdList = new ArrayList<String>(Arrays.asList("5037"));
 	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M164"));
 
+	private OrderModel orderModel;
+	String syncDate;
+	boolean isSyncronyzed = false;
+
 	@Before
 	public void setUp() throws Exception {
+
+		orderModel = MongoReader.getOrderModel("US23001BuyProductsOnShopforMyselfTest").get(0);
+		String[] parts = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase()).getSyncDate().split(".");
+		syncDate = parts[0];
 
 		initialChangingMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
 		initialChangingNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
 		initialConstantMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
 		initialConstantNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 
-		System.out.println("FFDFDSFSDFSDFDF  " + initialChangingNavProducts.get(0).getQuantity());
-
 		initialChangingNavProducts = StockCalculations.calculateNewStock(initialChangingNavProducts, "-1", false);
 		initialConstantNavProducts = StockCalculations.calculateNewStock(initialConstantNavProducts, "-1", true);
-
-		System.out.println("FFDFDSFSDFSDFDF  " + initialChangingNavProducts.get(0).getQuantity());
 
 		for (String id : changingStockIdList) {
 			changingStockMagentoProducts.add(ApiCalls.getMagProductInfo(id));
@@ -84,23 +91,33 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 
 		changingStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(changingStockMagentoProducts);
 		constantStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(constantStockMagentoProducts);
+
+		if (DateUtils.isDateAfter(DateUtils.getCurrentDate("MM/dd/YYYY HH:mm:ss"), syncDate, "MM/dd/YYYY HH:mm:ss")) {
+			isSyncronyzed = true;
+		}
+
+		System.out.println("isSyncronyzed: " + isSyncronyzed);
+
 	}
 
 	@Test
 	public void us23001VerifyStockSyncAfterOrderImportTest() throws SQLException {
 
-		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
-		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");
+		if (orderModel.getStatus().contentEquals("Yes")) {
 
-		stockSyncValidations.setValidateProductsModels(initialConstantNavProducts, constantStockNavProducts);
-		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS THE SAME - CONSTANT STOCK NAVISION PRODUCTS");
+			stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
+			stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");
 
-		stockSyncValidations.setValidateProductsModels(changingStockNavProduct, changingStockMagentoProducts);
-		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CHANGING STOCK PRODUCTS");
+			stockSyncValidations.setValidateProductsModels(initialConstantNavProducts, constantStockNavProducts);
+			stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS THE SAME - CONSTANT STOCK NAVISION PRODUCTS");
 
-		stockSyncValidations.setValidateProductsModels(constantStockNavProducts, constantStockMagentoProducts);
-		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CONSTANT STOCK PRODUCTS");
+			stockSyncValidations.setValidateProductsModels(changingStockNavProduct, changingStockMagentoProducts);
+			stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CHANGING STOCK PRODUCTS");
 
-		customVerifications.printErrors();
+			stockSyncValidations.setValidateProductsModels(constantStockNavProducts, constantStockMagentoProducts);
+			stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CONSTANT STOCK PRODUCTS");
+
+			customVerifications.printErrors();
+		}
 	}
 }

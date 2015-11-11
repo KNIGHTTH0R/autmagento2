@@ -2,17 +2,8 @@ package com.tools.data.navision;
 
 public class OrderStatusModel {
 
-	private String sku;
 	private String syncDate;
 	private String syncStatus;
-
-	public String getSku() {
-		return sku;
-	}
-
-	public void setSku(String sku) {
-		this.sku = sku;
-	}
 
 	public String getSyncDate() {
 		return syncDate;

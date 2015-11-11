@@ -110,14 +110,15 @@ public class DateUtils {
 
 		return String.valueOf(format.format(calendar.getTime()));
 	}
+
 	public static String addHoursToAGivenDate(String dateString, String formatString, int hours) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
 		Date date = format.parse(dateString);
-		
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.add(Calendar.HOUR, hours);
-		
+
 		return String.valueOf(format.format(calendar.getTime()));
 	}
 
@@ -126,17 +127,17 @@ public class DateUtils {
 
 		return String.valueOf(sdf.format(new Date()));
 	}
-	
+
 	public static String getCurrentDateBegining(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
-		
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		int year = calendar.get(Calendar.YEAR);
 		int month = calendar.get(Calendar.MONTH);
 		int day = calendar.get(Calendar.DATE);
 		calendar.set(year, month, day, 00, 00, 00);
-		
+
 		return String.valueOf(sdf.format(calendar.getTime()));
 	}
 
@@ -165,6 +166,7 @@ public class DateUtils {
 		cal.set(year, month, day, 00, 00, 00);
 		return new SimpleDateFormat(format).format(cal.getTime());
 	}
+
 	public static String getThreeMonthsBackMiddle(String format) {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, -3);
@@ -196,6 +198,12 @@ public class DateUtils {
 		return !(df.parse(createdAt).before(df.parse(startDate)) || df.parse(createdAt).after(df.parse(endDate)));
 	}
 
+	public static boolean isDateAfter(String currentDate, String startingDate, String format) throws ParseException {
+		DateFormat df = new SimpleDateFormat(format);
+
+		return !(df.parse(currentDate).before(df.parse(startingDate)));
+	}
+
 	public static int getNumberOfDaysBeetweenTwoDates(String firstDate, String secondDate, String formatString) throws ParseException {
 		Calendar cal1 = new GregorianCalendar();
 		Calendar cal2 = new GregorianCalendar();
@@ -214,7 +222,7 @@ public class DateUtils {
 	}
 
 	public static void main(String[] args) throws ParseException {
-		System.out.println(DateUtils.addHoursToAGivenDate("2015-07-20 00:00:00", "yyyy-MM-dd hh:mm:ss",2));
+		System.out.println(DateUtils.addHoursToAGivenDate("2015-07-20 00:00:00", "yyyy-MM-dd hh:mm:ss", 2));
 		System.out.println(DateUtils.getCurrentDateBegining("yyyy-MM-dd HH:mm:ss"));
 	}
 

@@ -12,17 +12,16 @@ public class NavQueries {
 
 	private static Connection connection = SqlServerConnector.connectToSqlServer();
 
-	public static OrderStatusModel getProductSyncronizedStatus(String sku) throws SQLException {
+	public static OrderStatusModel getProductSyncronizedStatus(String orderId) throws SQLException {
 
 		OrderStatusModel result = new OrderStatusModel();
 
 		Statement statement = connection.createStatement();
-		String queryString = "select * from OrderStatusAut WHERE ItemNo = '" + sku + "'";
+		String queryString = "select * from OrderStatusAut WHERE OrderId = '" + orderId + "'";
 		ResultSet rs = statement.executeQuery(queryString);
 		while (rs.next()) {
 
 			result.setSyncStatus(rs.getString("Synced"));
-			result.setSku(sku);
 			result.setSyncDate(rs.getString("SyncDateTime"));
 		}
 
@@ -54,13 +53,13 @@ public class NavQueries {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		SyncInfoModel result = NavQueries.getSyncProductInfo("M164", "");
+		SyncInfoModel result = NavQueries.getSyncProductInfo("N093SV", "");
 		System.out.println(result.getQuantity());
 		System.out.println(result.getEarliestAvailability());
 		System.out.println(result.getMaxPercentToBorrow());
 		System.out.println(result.getTotalQuantity());
 
-		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("N094SV");
+		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("STAGING-INT00009454");
 		System.out.println(result2.getSyncDate());
 		System.out.println(result2.getSyncStatus());
 
