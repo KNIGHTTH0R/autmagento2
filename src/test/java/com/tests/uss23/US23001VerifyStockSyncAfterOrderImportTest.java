@@ -21,7 +21,7 @@ import com.tools.CustomVerification;
 import com.tools.SoapKeys;
 import com.tools.calculation.StockCalculations;
 import com.tools.data.backend.OrderModel;
-import com.tools.data.frontend.DateModel;
+import com.tools.data.navision.OrderStatusModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -63,7 +63,8 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		orderModel = MongoReader.getOrderModel("US23001BuyProductsOnShopforMyselfTest").get(0);
-		String[] parts = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase()).getSyncDate().split(".");
+		OrderStatusModel orderStatusModel = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase());
+		String[] parts = orderStatusModel.getSyncDate().split(".");
 		syncDate = parts[0];
 
 		initialChangingMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
@@ -92,7 +93,7 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 		changingStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(changingStockMagentoProducts);
 		constantStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(constantStockMagentoProducts);
 
-		if (DateUtils.isDateAfter(DateUtils.getCurrentDate("MM/dd/YYYY HH:mm:ss"), syncDate, "MM/dd/YYYY HH:mm:ss")) {
+		if (DateUtils.isDateAfter(DateUtils.getCurrentDate("MM/dd/YYYY HH:mm:ss"), syncDate, "MM/dd/YYYY HH:mm:ss") && orderStatusModel.getSyncStatus().contentEquals("Yes")) {
 			isSyncronyzed = true;
 		}
 
@@ -103,7 +104,7 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	@Test
 	public void us23001VerifyStockSyncAfterOrderImportTest() throws SQLException {
 
-		if (orderModel.getStatus().contentEquals("Yes")) {
+		if (isSyncronyzed) {
 
 			stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
 			stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");
