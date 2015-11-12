@@ -53,8 +53,8 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	private List<SyncInfoModel> constantStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private List<SyncInfoModel> constantStockNavProducts = new ArrayList<SyncInfoModel>();
 
-	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658","2558","4835"));
-	private static List<String> changingStockSkuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV","N052NL","K091MC"));
+	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "2558","1872","2552"));
+	private static List<String> changingStockSkuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV", "N052NL","N094SV","B098BK"));
 
 	private static List<String> constantStockIdList = new ArrayList<String>(Arrays.asList("5037"));
 	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M164"));

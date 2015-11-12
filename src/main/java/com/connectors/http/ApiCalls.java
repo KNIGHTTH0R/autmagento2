@@ -860,7 +860,7 @@ public class ApiCalls {
 	}
 
 	public static void main(String[] args) {
-		SyncInfoModel syncInfoModel = ApiCalls.getMagProductInfo("5037");
+		SyncInfoModel syncInfoModel = ApiCalls.getMagProductInfo("4835");
 		System.out.println(syncInfoModel.getQuantity());
 	}
 
