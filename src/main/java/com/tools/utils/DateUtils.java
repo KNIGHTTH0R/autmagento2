@@ -153,7 +153,7 @@ public class DateUtils {
 		DateFormat sdf = new SimpleDateFormat(format);
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-		calendar.add(Calendar.HOUR_OF_DAY, -2);
+		calendar.add(Calendar.HOUR_OF_DAY, -3);
 		
 		return String.valueOf(sdf.format(calendar.getTime()));
 	}
