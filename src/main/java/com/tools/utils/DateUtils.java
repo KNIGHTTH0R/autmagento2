@@ -149,6 +149,14 @@ public class DateUtils {
 
 		return String.valueOf(sdf.format(calendar.getTime()));
 	}
+	public static String getCurrentDateTwoHoursBack(String format) {
+		DateFormat sdf = new SimpleDateFormat(format);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.add(Calendar.HOUR_OF_DAY, -2);
+		
+		return String.valueOf(sdf.format(calendar.getTime()));
+	}
 
 	public static String getPreviousMonth(String format) {
 		Calendar cal = Calendar.getInstance();

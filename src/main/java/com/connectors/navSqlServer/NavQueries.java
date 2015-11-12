@@ -59,7 +59,7 @@ public class NavQueries {
 		System.out.println(result.getMaxPercentToBorrow());
 		System.out.println(result.getTotalQuantity());
 
-		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("STAGING-INT00009454");
+		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("STAGING-INT00009505");
 		System.out.println(result2.getSyncDate());
 		System.out.println(result2.getSyncStatus());
 
