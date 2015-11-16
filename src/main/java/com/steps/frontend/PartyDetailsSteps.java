@@ -118,6 +118,11 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void verifyPlannedPartyAvailableActions() {
 		partyDetailsPage().verifyPlannedPartyAvailableActions();
 	}
+	
+	@Step
+	public void verifyThatBonusesAreRemovedFromParty() {
+		partyDetailsPage().verifyThatBonusesAreRemovedFromParty();
+	}
 
 	@Step
 	public void verifyActivePartyAvailableActions() {

@@ -117,7 +117,6 @@ public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends Bas
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
 
 		customVerifications.printErrors();
-
 	}
 
 	@After

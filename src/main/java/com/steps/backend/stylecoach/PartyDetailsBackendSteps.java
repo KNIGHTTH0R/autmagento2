@@ -35,9 +35,15 @@ public class PartyDetailsBackendSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void reopenParty() {
+		partyDetailsBackendPage().reopenParty();
+	}
+
+	@Step
 	public void goToBonusTab() {
 		partyDetailsBackendPage().goToBonusTab();
 	}
+
 	@Step
 	public void verifyAddBonusSuccessMessage() {
 		partyDetailsBackendPage().verifyAddBonusSuccessMessage();
@@ -59,6 +65,15 @@ public class PartyDetailsBackendSteps extends AbstractSteps {
 		partyDetailsBackendPage().verifyAddBonusSuccessMessage();
 
 	}
-
+	@StepGroup
+	public void addJewelryBonusToParty(String bonus) {
+		partyDetailsBackendPage().goToBonusTab();
+		partyDetailsBackendPage().addNewBonus();
+		partyDetailsBackendPage().selectBonusType("Jewelry bonus");
+		partyDetailsBackendPage().typeBonusValue(bonus);
+		partyDetailsBackendPage().saveBonus();
+		partyDetailsBackendPage().verifyAddBonusSuccessMessage();
+		
+	}
 
 }

@@ -148,7 +148,8 @@ public class PartyDetailsPage extends AbstractPage {
 	public ClosedPartyPerformanceModel grabClosedPartyPerformance() {
 		ClosedPartyPerformanceModel result = new ClosedPartyPerformanceModel();
 		result.setNoOfOrders(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(1) td:nth-child(2)")).getText());
-		result.setRetail(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(2) td:nth-child(2)")).getText().replace(",", ".").replace(" €", "").replace("€ ", ""));
+		result.setRetail(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(2) td:nth-child(2)")).getText().replace(",", ".").replace(" €", "")
+				.replace("€ ", ""));
 		result.setIp(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(3) td:nth-child(2)")).getText());
 		result.setIpInPayment(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(4) td:nth-child(2)")).getText());
 		result.setJewelryBonus(getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(2) .price")).getText().replace(",", ".").replace(" €", "").replace("€ ", "").trim());
@@ -269,6 +270,12 @@ public class PartyDetailsPage extends AbstractPage {
 		Assert.assertTrue("The status should be " + status + " and it's not ", messageContainer.getText().contains(status));
 
 	}
+	public void verifyPartyAutomaticallyCloseDate(String status) {
+		getDriver().navigate().refresh();
+		element(messageContainer).waitUntilVisible();
+		Assert.assertTrue("The status should be " + status + " and it's not ", messageContainer.getText().contains(status));
+		
+	}
 
 	public void verifyPlannedPartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
@@ -278,7 +285,7 @@ public class PartyDetailsPage extends AbstractPage {
 		verifyDeleteLink(true);
 		verifyInviteGuestsLink(true);
 		verifyFolowUpPartyLink(false);
-		verifyCustomerOrderLink(false);
+		verifyCustomerOrderLink(true);
 		verifyClosePartyLink(false);
 	}
 
@@ -372,6 +379,12 @@ public class PartyDetailsPage extends AbstractPage {
 
 		}
 		Assert.assertTrue("The order was not found in orders list", found);
+	}
+
+	public void verifyThatBonusesAreRemovedFromParty() {
+		Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.GUESTS));
+		Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDERS));
+		Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.HOSTESS_BONUS));
 	}
 
 }

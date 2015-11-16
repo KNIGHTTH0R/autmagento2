@@ -1,6 +1,5 @@
 package com.tools.requirements;
 
-import java.io.IOException;
 import java.util.Set;
 
 import net.thucydides.core.annotations.Screenshots;
@@ -8,9 +7,6 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;

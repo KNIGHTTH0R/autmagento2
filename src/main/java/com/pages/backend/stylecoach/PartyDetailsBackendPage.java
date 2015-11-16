@@ -17,6 +17,9 @@ public class PartyDetailsBackendPage extends AbstractPage {
 
 	@FindBy(css = "#party_details_view li")
 	private WebElement optionsList;
+	
+	@FindBy(css = "button[onClick*='reopenParty']")
+	private WebElement reopenPartyButton;
 
 	@FindBy(css = "button.scalable.add")
 	private WebElement addBonusButton;
@@ -66,6 +69,12 @@ public class PartyDetailsBackendPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(saveBonus).waitUntilVisible();
 		saveBonus.click();
+	}
+	
+	public void reopenParty() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(reopenPartyButton).waitUntilVisible();
+		reopenPartyButton.click();
 	}
 
 	public void selectBonusType(String type) {
