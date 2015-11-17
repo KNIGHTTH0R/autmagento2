@@ -23,7 +23,7 @@ import com.tools.utils.PrintUtils;
 @WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_8.class)
 @RunWith(ThucydidesRunner.class)
-public class US10008ReopenPartyTest extends BaseTest {
+public class US10008AddManuallyBonusOnPartyTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -47,12 +47,11 @@ public class US10008ReopenPartyTest extends BaseTest {
 	}
 
 	@Test
-	public void us10008ReopenPartyTest() {
-
+	public void us10008AddManuallyBonusOnPartyTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStyleParties();
 		partyListBackendSteps.openPartyDetails(partyId);
-		partyDetailsBackendSteps.reopenParty();
-
+		partyDetailsBackendSteps.goToBonusTab();
+		partyDetailsBackendSteps.addJewelryBonusToParty("100");
 	}
 }
