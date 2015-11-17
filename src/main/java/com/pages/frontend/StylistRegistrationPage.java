@@ -14,7 +14,7 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class StylistRegistrationPage extends AbstractPage {
-	
+
 	@FindBy(id = "toggle_cctab")
 	private WebElement expandCredtCardButton;
 
@@ -142,7 +142,7 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	@FindBy(css = "input[name='pin']")
 	private WebElement pinInput;
-	
+
 	@FindBy(css = "a[href='javascript:submiteCip()']")
 	private WebElement submitFinalVisaStep;
 
@@ -176,8 +176,11 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void inputStylistRef(String ref) {
 		element(stylistref).waitUntilVisible();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		stylistref.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		element(stylistref).sendKeys(ref);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	public void inputStylistEmail(String stylistEmail) {
@@ -189,6 +192,7 @@ public class StylistRegistrationPage extends AbstractPage {
 		element(cartTypeSelect).waitUntilVisible();
 		element(cartTypeSelect).selectByVisibleText(cardType);
 	}
+
 	public void selectCardTypeEs(String cardType) {
 		element(cartTypeSelect).waitUntilVisible();
 		element(cartTypeSelect).selectByVisibleText(cardType);
@@ -198,6 +202,7 @@ public class StylistRegistrationPage extends AbstractPage {
 		element(creditCardCVVInput).waitUntilVisible();
 		element(creditCardCVVInput).sendKeys(cvv);
 	}
+
 	public void inputCardPin(String pin) {
 		element(pinInput).waitUntilVisible();
 		element(pinInput).sendKeys(pin);
@@ -223,7 +228,7 @@ public class StylistRegistrationPage extends AbstractPage {
 		element(submitCC).waitUntilVisible();
 		submitCC.click();
 	}
-	
+
 	public void submitVisaFinalStep() {
 		element(submitFinalVisaStep).waitUntilVisible();
 		submitFinalVisaStep.click();
@@ -266,7 +271,7 @@ public class StylistRegistrationPage extends AbstractPage {
 		element(expandCredtCardButton).waitUntilVisible();
 		expandCredtCardButton.click();
 	}
-	
+
 	public void clickOnNachahmePaymentMethod() {
 		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
 		element(weiter).waitUntilVisible();
