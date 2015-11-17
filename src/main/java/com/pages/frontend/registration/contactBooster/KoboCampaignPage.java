@@ -8,7 +8,7 @@ import com.tools.requirements.AbstractPage;
 
 public class KoboCampaignPage extends AbstractPage {
 
-	@FindBy(css = "a.button.variable-color")
+	@FindBy(css = "a[href*='registerCampaign'] img")
 	private WebElement registerButton;
 
 	@FindBy(id = "firstname")
