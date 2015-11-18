@@ -51,9 +51,9 @@ public class US10008CloseVirginPartyAnfVerifyCommissionBonusesTest extends BaseT
 	CommissionPartyPerformanceValidationWorkflows commissionPartyValidationWorkflows;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private static UrlModel urlModel = new UrlModel();
 	private ClosedPartyPerformanceModel expectedClosedPartyPerformanceModel = new ClosedPartyPerformanceModel();
 	private List<PartyBonusCalculationModel> partyBonusCalculationModelList = new ArrayList<PartyBonusCalculationModel>();
@@ -88,14 +88,14 @@ public class US10008CloseVirginPartyAnfVerifyCommissionBonusesTest extends BaseT
 
 		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
 
-		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList,"100")));
+		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, "100")));
 		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
 		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyTotal(partyBonusCalculationModelList)));
-		expectedClosedPartyPerformanceModel.setFourthyDiscounts("2");
+		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
 		expectedClosedPartyPerformanceModel.setIp(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setIpInPayment(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 		PrintUtils.printClosedPartyModel(expectedClosedPartyPerformanceModel);
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
@@ -114,7 +114,7 @@ public class US10008CloseVirginPartyAnfVerifyCommissionBonusesTest extends BaseT
 		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
 		PrintUtils.printClosedPartyModel(grabbedClosedPartyPerformanceModel);
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
-		
+
 		customVerifications.printErrors();
 	}
 
