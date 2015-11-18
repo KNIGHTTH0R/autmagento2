@@ -388,8 +388,6 @@ public class PartyDetailsPage extends AbstractPage {
 	}
 
 	public void verifyThatBonusesAreRemovedFromParty() {
-		Assert.assertTrue("Guest sections is present and should be not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.GUESTS));
-		Assert.assertTrue("Orders sections is present and should be not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDERS));
 		Assert.assertTrue("Bonus sections is present and should be not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.HOSTESS_BONUS));
 	}
 
