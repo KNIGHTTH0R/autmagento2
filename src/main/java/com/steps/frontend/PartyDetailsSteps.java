@@ -1,5 +1,7 @@
 package com.steps.frontend;
 
+import java.text.ParseException;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
@@ -117,6 +119,11 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void verifyPlannedPartyAvailableActions() {
 		partyDetailsPage().verifyPlannedPartyAvailableActions();
+	}
+	
+	@Step
+	public void verifyThatAutomaticallyClosePartyDateIsCorrect() throws ParseException {
+		partyDetailsPage().verifyThatAutomaticallyClosePartyDateIsCorrect();
 	}
 	
 	@Step

@@ -30,21 +30,22 @@ public class PartyBonusCalculation {
 		}
 		return partyTotal.setScale(2);
 	}
-	
+
 	public static int calculatePartyIp(List<PartyBonusCalculationModel> ordersList) {
 		BigDecimal partyTotal = BigDecimal.ZERO;
-		
+
 		for (PartyBonusCalculationModel order : ordersList) {
-			
+
 			partyTotal = partyTotal.add(BigDecimal.valueOf(Double.parseDouble(order.getIp())));
 		}
 		return partyTotal.setScale(2).intValue();
 	}
 
-	public static BigDecimal calculatePartyJewelryBonus(List<PartyBonusCalculationModel> ordersList) {
+	public static BigDecimal calculatePartyJewelryBonus(List<PartyBonusCalculationModel> ordersList, String manualJwewlryBonus) {
 
 		BigDecimal partyRetail = calculatePartyRetail(ordersList);
 		BigDecimal partyJb = BigDecimal.ZERO;
+		partyJb = partyJb.add(BigDecimal.valueOf(Double.parseDouble(manualJwewlryBonus)));
 
 		if (isBetween(partyRetail, BigDecimal.valueOf(250), BigDecimal.valueOf(500))) {
 

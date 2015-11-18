@@ -32,15 +32,12 @@ public class US10008ReopenPartyTest extends BaseTest {
 	@Steps
 	public PartyDetailsBackendSteps partyDetailsBackendSteps;
 
-	private ClosedPartyPerformanceModel expectedModel;
 	private static UrlModel urlModel = new UrlModel();
 	private String partyId;
 
 	@Before
 	public void setUp() {
 		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
-		expectedModel = MongoReader.grabClosedPartyPerformanceModel("US10008CloseVirginPartyAnfVerifyCommissionBonusesTest").get(0);
-		PrintUtils.printClosedPartyModel(expectedModel);
 		String[] parts = urlModel.getUrl().split("/");
 		partyId = parts[parts.length - 1];
 		System.out.println("party Id:" + partyId);

@@ -38,8 +38,8 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US7008Suite.class,
 	US7009Suite.class,
 	US70010Suite.class,
-	US70011Suite.class,
-	US70012Suite.class,
+//	US70011Suite.class,
+//	US70012Suite.class,
 	
 	US10007SuitePartOne.class,
 	

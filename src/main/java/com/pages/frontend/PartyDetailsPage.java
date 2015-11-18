@@ -1,5 +1,6 @@
 package com.pages.frontend;
 
+import java.text.ParseException;
 import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
@@ -14,6 +15,7 @@ import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.DateUtils;
 
 public class PartyDetailsPage extends AbstractPage {
 
@@ -58,6 +60,9 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(css = "div.style-party-detail > p")
 	private WebElement messageContainer;
+
+	@FindBy(css = "div.style-party-detail > div > div > p")
+	private WebElement closeDateContainer;
 
 	@FindBy(css = ".button[type*='submit'][value*='YES']")
 	private WebElement popupPartyCloseButton;
@@ -270,11 +275,12 @@ public class PartyDetailsPage extends AbstractPage {
 		Assert.assertTrue("The status should be " + status + " and it's not ", messageContainer.getText().contains(status));
 
 	}
+
 	public void verifyPartyAutomaticallyCloseDate(String status) {
 		getDriver().navigate().refresh();
 		element(messageContainer).waitUntilVisible();
 		Assert.assertTrue("The status should be " + status + " and it's not ", messageContainer.getText().contains(status));
-		
+
 	}
 
 	public void verifyPlannedPartyAvailableActions() {
@@ -385,6 +391,13 @@ public class PartyDetailsPage extends AbstractPage {
 		Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.GUESTS));
 		Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDERS));
 		Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.HOSTESS_BONUS));
+	}
+
+	public void verifyThatAutomaticallyClosePartyDateIsCorrect() throws ParseException {
+		System.out.println(closeDateContainer.getText());
+		System.out.println(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy"), "dd. MMM. yyyy", 5));
+		Assert.assertTrue("Automatically close date is not correct",
+				closeDateContainer.getText().contains(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy"), "dd. MMM. yyyy", 5)));
 	}
 
 }

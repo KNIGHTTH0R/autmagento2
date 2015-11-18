@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -89,7 +90,7 @@ public class US10008CloseAgainPartyAnfVerifyCommissionBonusesTest extends BaseTe
 
 		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
 
-		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList)));
+		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, "100")));
 		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
 		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyTotal(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setFourthyDiscounts("2");
@@ -102,7 +103,7 @@ public class US10008CloseAgainPartyAnfVerifyCommissionBonusesTest extends BaseTe
 	}
 
 	@Test
-	public void us10008CloseVirginPartyAnfVerifyCommissionBonusesTest() {
+	public void us10008CloseAgainPartyAnfVerifyCommissionBonusesTest() throws ParseException {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
@@ -110,7 +111,7 @@ public class US10008CloseAgainPartyAnfVerifyCommissionBonusesTest extends BaseTe
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		// verify hear automatically close date
+		partyDetailsSteps.verifyThatAutomaticallyClosePartyDateIsCorrect();
 		partyDetailsSteps.verifyThatBonusesAreRemovedFromParty();
 		partyDetailsSteps.closeTheParty();
 		partyDetailsSteps.returnToParty();

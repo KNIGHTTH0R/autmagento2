@@ -230,8 +230,7 @@ public class DateUtils {
 	}
 
 	public static void main(String[] args) throws ParseException {
-		System.out.println(DateUtils.addHoursToAGivenDate("2015-07-20 00:00:00", "yyyy-MM-dd hh:mm:ss", 2));
-		System.out.println(DateUtils.getCurrentDateBegining("yyyy-MM-dd HH:mm:ss"));
-	}
+		System.out.println(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy"), "dd. MMM. yyyy", 5));
+	} 
 
 }
