@@ -191,7 +191,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public void wipeCart() {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("stylist/lounge/", "checkout/cart/clearAllItems/");
-		getDriver().get(modiURL);
+		navigate(modiURL);
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(initURL);
 		waitABit(TimeConstants.TIME_CONSTANT);
@@ -200,7 +200,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public void wipeRegularCart() {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("schmuckstucke/neu.html", "checkout/cart/clearAllItems/");
-		getDriver().get(modiURL);
+		navigate(modiURL);
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(initURL);
 		waitABit(TimeConstants.TIME_CONSTANT);
@@ -209,7 +209,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public void wipeHostCart() {
 		String initURL = getDriver().getCurrentUrl();
 		String modiURL = getDriver().getCurrentUrl().replace("checkout/cart/", "checkout/cart/clearAllItems/");
-		getDriver().get(modiURL);
+		navigate(modiURL);
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(initURL);
 		waitABit(TimeConstants.TIME_CONSTANT);
@@ -227,18 +227,12 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void navigate(String URL) {
-		getDriver().get(URL);
+		// failsafe in case of redirects to live
+		if (!URL.contains("www.pippajean.com")) {
+			getDriver().get(URL);
+		}
 
 	}
-
-//	@Step
-//	public void navigateAndAuthenticate(String URL) throws IOException, InterruptedException {
-//		FirefoxProfile profile = new FirefoxProfile();
-//		profile.setPreference("network.http.phishy-userpass-length", 255);
-//		profile.setPreference("network.automatic-ntlm-auth.trusted-uris", "http://148.251.178.207");
-//		WebDriver driver = new FirefoxDriver(profile);
-//		driver.get(URL);
-//	}
 
 	public AbstractPage abstractPage() {
 		return getPages().currentPageAt(AbstractPage.class);

@@ -21,7 +21,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
-		getDriver().get(url);
+		navigate(url);
 
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail();
@@ -44,7 +44,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
-		getDriver().get(url);
+		navigate(url);
 
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail(title);
@@ -66,7 +66,7 @@ public class EmailClientSteps extends AbstractSteps {
 		waitABit(5000);
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
-		getDriver().get(url);
+		navigate(url);
 
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail(title);
@@ -87,7 +87,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
-		getDriver().get(url);
+		navigate(url);
 
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail(title);
@@ -107,20 +107,12 @@ public class EmailClientSteps extends AbstractSteps {
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 
 		System.out.println("URL : " + url);
-		getDriver().get(url);
+		navigate(url);
 
 		waitABit(5000);
 		String couponCode = mailinatorPage().grabEmail(title);
 
 		couponCode = mailinatorPage().grabCouponCode();
-		// couponCode =
-		// couponCode.replace("Gratuliere! Du hast einen Gutschein für Deine Registrierung erhalten.",
-		// "");
-		// couponCode = couponCode.replace("Dein Gutscheincode lautet: ", "");
-		// couponCode =
-		// couponCode.replace("Diesen Code gibst Du im Warenkorb ein, nachdem Du Deine Lieblingsstücke ausgewählt hast.",
-		// "");
-		// couponCode = couponCode.trim();
 		System.out.println(couponCode);
 		waitABit(2000);
 
@@ -133,7 +125,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
-		getDriver().get(url);
+		navigate(url);
 
 		waitABit(5000);
 		mailinatorPage().grabEmail(title);
@@ -145,7 +137,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
-		getDriver().get(url);
+		navigate(url);
 
 		waitABit(5000);
 		return mailinatorPage().grabEmail(title);
@@ -157,7 +149,7 @@ public class EmailClientSteps extends AbstractSteps {
 
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
 		System.out.println("URL : " + url);
-		getDriver().get(url);
+		navigate(url);
 
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail(title);
@@ -177,11 +169,9 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String validateThatEmailIsReceivedAndClickRegister(String email, String title) {
 
-		// waitABit(5000);
 		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
-
 		System.out.println("URL : " + url);
-		getDriver().get(url);
+		navigate(url);
 
 		waitABit(5000);
 		String welcomeMessage = mailinatorPage().grabEmail(title);

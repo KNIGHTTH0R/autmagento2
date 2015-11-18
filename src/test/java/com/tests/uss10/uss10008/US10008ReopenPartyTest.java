@@ -14,11 +14,9 @@ import com.steps.backend.stylecoach.PartyDetailsBackendSteps;
 import com.steps.backend.stylecoach.PartyListBackendSteps;
 import com.tests.BaseTest;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 
 @WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_8.class)
