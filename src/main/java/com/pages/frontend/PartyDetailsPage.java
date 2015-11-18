@@ -388,7 +388,9 @@ public class PartyDetailsPage extends AbstractPage {
 	}
 
 	public void verifyThatBonusesAreRemovedFromParty() {
-		Assert.assertTrue("Bonus sections is present and should be not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.HOSTESS_BONUS));
+		Assert.assertTrue("Bonus sections is present and should be not", !partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDERS));
+		Assert.assertTrue("Bonus sections is present and should be not", !partyDetailsAndActionsContainer.getText().contains(ContextConstants.GUESTS));
+		Assert.assertTrue("Bonus sections is present and should be not", !partyDetailsAndActionsContainer.getText().contains(ContextConstants.HOSTESS_BONUS));
 	}
 
 	public void verifyThatAutomaticallyClosePartyDateIsCorrect() throws ParseException {
