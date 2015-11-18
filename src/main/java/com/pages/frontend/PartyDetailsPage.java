@@ -388,14 +388,12 @@ public class PartyDetailsPage extends AbstractPage {
 	}
 
 	public void verifyThatBonusesAreRemovedFromParty() {
-		Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.GUESTS));
-		Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDERS));
-		Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.HOSTESS_BONUS));
+		Assert.assertTrue("Guest sections is present and should be not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.GUESTS));
+		Assert.assertTrue("Orders sections is present and should be not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDERS));
+		Assert.assertTrue("Bonus sections is present and should be not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.HOSTESS_BONUS));
 	}
 
 	public void verifyThatAutomaticallyClosePartyDateIsCorrect() throws ParseException {
-		System.out.println(closeDateContainer.getText());
-		System.out.println(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy"), "dd. MMM. yyyy", 5));
 		Assert.assertTrue("Automatically close date is not correct",
 				closeDateContainer.getText().contains(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy"), "dd. MMM. yyyy", 5)));
 	}
