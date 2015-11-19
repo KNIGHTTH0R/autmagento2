@@ -15,6 +15,7 @@ import com.steps.external.mailchimp.MailchimpLoginSteps;
 import com.steps.external.mailchimp.MailchimpSearchSteps;
 import com.steps.external.mailchimp.MailchimpSubscriberProfileSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -42,6 +43,8 @@ public class US15002CheckRevenuesZeroInMailchimpConfigTest extends BaseTest {
 	public MailchimpValidationWorkflows mailchimpValidationWorkflows;
 	@Steps
 	public MailchimpSubscriberProfileSteps mailchimpSubscriberProfileSteps;
+	@Steps
+	public CustomVerification customVerifications;
 
 	private SubscriberModel grabbedSubscriberModel = new SubscriberModel();
 	private SubscriberModel expectedSubscriberModel = new SubscriberModel();
@@ -62,7 +65,7 @@ public class US15002CheckRevenuesZeroInMailchimpConfigTest extends BaseTest {
 		dateModel = MongoReader.grabDateModels("US15002ConfirmCustomerTest").get(0);
 		koboCode = MongoReader.grabKoboModel("US15002KoboRegistrationNewsletterSubscribeTest");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
-	
+
 	}
 
 	@Test
@@ -75,9 +78,10 @@ public class US15002CheckRevenuesZeroInMailchimpConfigTest extends BaseTest {
 
 		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewCustomerWithKoboFromExistingDataWithZeroRevenue(dataModel, dateModel, product, shippingModel, koboCode);
 
-		 System.out.println("---------------");
-		 PrintUtils.printCustomerSubscriberData(expectedSubscriberModel);
-		 mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel,
-		 expectedSubscriberModel);
+		System.out.println("---------------");
+		PrintUtils.printCustomerSubscriberData(expectedSubscriberModel);
+		mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
+
+		customVerifications.printErrors();
 	}
 }

@@ -15,6 +15,7 @@ import com.steps.external.mailchimp.MailchimpLoginSteps;
 import com.steps.external.mailchimp.MailchimpSearchSteps;
 import com.steps.external.mailchimp.MailchimpSubscriberProfileSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -41,6 +42,8 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 	public MailchimpValidationWorkflows mailchimpValidationWorkflows;
 	@Steps
 	public MailchimpSubscriberProfileSteps mailchimpSubscriberProfileSteps;
+	@Steps
+	public CustomVerification customVerifications;
 
 	private SubscriberModel grabbedSubscriberModel = new SubscriberModel();
 	private SubscriberModel expectedSubscriberModel = new SubscriberModel();
@@ -72,5 +75,7 @@ public class US15002CheckMailchimpConfigTest extends BaseTest {
 		grabbedSubscriberModel = mailchimpSubscriberProfileSteps.grabSubribersData();
 		expectedSubscriberModel = mailchimpValidationWorkflows.populateNewCustomerWithKoboFromExistingData(dataModel, dateModel, product, shippingModel, koboCode);
 		mailchimpValidationWorkflows.validateNewCustomerOrderWithKoboMailchimpProperties(grabbedSubscriberModel, expectedSubscriberModel);
+		
+		customVerifications.printErrors();
 	}
 }
