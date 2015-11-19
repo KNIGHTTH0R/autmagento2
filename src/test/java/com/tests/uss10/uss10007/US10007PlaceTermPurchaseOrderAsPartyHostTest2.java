@@ -50,7 +50,7 @@ import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 @WithTag(name = "US10.7 Check party and follow up party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_7.class)
 @RunWith(ThucydidesRunner.class)
-public class US10007PlaceTermPurchaseOrderAsPartyHostTest extends BaseTest {
+public class US10007PlaceTermPurchaseOrderAsPartyHostTest2 extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;

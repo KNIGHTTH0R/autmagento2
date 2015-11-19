@@ -50,7 +50,7 @@ import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 @WithTag(name = "US10.7 Check party and follow up party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_7.class)
 @RunWith(ThucydidesRunner.class)
-public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest {
+public class US10007PlaceThirdOrderAsPartyHostTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -92,8 +92,8 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = ApiCalls.createNotAvailableYetProductModel();
-		genProduct1.setPrice("289.00");
+		genProduct1 = ApiCalls.createZzzProductModel();
+		genProduct1.setPrice("389.00");
 		ApiCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();
@@ -126,7 +126,7 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 	}
 
 	@Test
-	public void us10007PlacePippaTermPurchaseOrderAsPartyHostTest() {
+	public void us10007PlaceThirdOrderAsPartyHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -162,10 +162,11 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest extends BaseTest 
 
 		partyBonusCalculationModel.setTotal(confirmationSteps.grabConfirmationTotals().getSubTotal());
 		partyBonusCalculationModel.setIp(genProduct1.getIp());
-		partyBonusCalculationModel.setPercent("50");
+		partyBonusCalculationModel.setPercent("100");
 
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
+
 	}
 
 	@After
