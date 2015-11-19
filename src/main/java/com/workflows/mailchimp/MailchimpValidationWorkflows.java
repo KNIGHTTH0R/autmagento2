@@ -50,7 +50,7 @@ public class MailchimpValidationWorkflows {
 		verifyPreferredWebsite(grabbedModel.getPreferredWebsite(),expectedModel.getPreferredWebsite());
 		verifyContactOrUser(grabbedModel.getContactOrUser(),expectedModel.getContactOrUser());
 		verifyStylistFlag(grabbedModel.getFlagStylist(),expectedModel.getFlagStylist());
-		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
+//		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
 	}
 	@Step
 	public void validateNewCustomerOrderWithKoboMailchimpProperties(SubscriberModel grabbedModel, SubscriberModel expectedModel) {
