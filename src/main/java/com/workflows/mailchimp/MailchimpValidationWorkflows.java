@@ -91,7 +91,7 @@ public class MailchimpValidationWorkflows {
 		verifyPreferredWebsite(grabbedModel.getPreferredWebsite(), expectedModel.getPreferredWebsite());
 		verifyContactOrUser(grabbedModel.getContactOrUser(), expectedModel.getContactOrUser());
 		verifyStylistFlag(grabbedModel.getFlagStylist(), expectedModel.getFlagStylist());
-		verifyHostFlag(grabbedModel.getFlagHost(), expectedModel.getFlagHost());
+//		verifyHostFlag(grabbedModel.getFlagHost(), expectedModel.getFlagHost());
 		verifyKoboCode(grabbedModel.getKoboCode(), expectedModel.getKoboCode());
 		verifyFirstName(grabbedModel.getFirstName(), expectedModel.getFirstName());
 		verifyLastName(grabbedModel.getLastName(), expectedModel.getLastName());
@@ -235,7 +235,7 @@ public class MailchimpValidationWorkflows {
 		resultSubscriber.setPreferredWebsite(MongoReader.getContext());
 		resultSubscriber.setContactOrUser(ConfigConstants.USER);
 		resultSubscriber.setFlagStylist(ConfigConstants.NO);
-//		resultSubscriber.setFlagHost(ConfigConstants.YES);
+		resultSubscriber.setFlagHost(ConfigConstants.YES);
 		resultSubscriber.setFirstName(dataModel.getFirstName());
 		resultSubscriber.setLastName(dataModel.getLastName());
 		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
@@ -261,7 +261,7 @@ public class MailchimpValidationWorkflows {
 		resultSubscriber.setPreferredWebsite(MongoReader.getContext());
 		resultSubscriber.setContactOrUser(ConfigConstants.USER);
 		resultSubscriber.setFlagStylist(ConfigConstants.NO);
-//		resultSubscriber.setFlagHost(ConfigConstants.YES);
+		resultSubscriber.setFlagHost(ConfigConstants.YES);
 		resultSubscriber.setFirstName(dataModel.getFirstName());
 		resultSubscriber.setLastName(dataModel.getLastName());
 		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
