@@ -14,10 +14,8 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.FooterSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.DateUtils;
 
 @WithTag(name = "US15.1 Check simple subscriber in mailchimp", type = "Scenarios")
 @Story(Application.Newsletter.US15_1.class)
@@ -28,14 +26,12 @@ public class US15001SubscribeToNewsletterTest extends BaseTest {
 	FooterSteps footerSteps;
 
 	private CustomerFormModel dataModel;
-	private DateModel dateModel;
 
 	@Before
 	public void setUp() throws Exception {
 
 		dataModel = new CustomerFormModel();
-		dateModel = new DateModel();
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -43,14 +39,12 @@ public class US15001SubscribeToNewsletterTest extends BaseTest {
 	public void us15001SubscribeToNewsletterTest() {
 
 		footerSteps.subscribeToNewsletter(dataModel);
-		dateModel.setDate(DateUtils.getCurrentDate("MM/dd/yyyy"));
 
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
 
 	}
 
