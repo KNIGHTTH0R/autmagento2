@@ -41,7 +41,7 @@ public class US15001CheckSubscriberMagentoConfigTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
+		dataModel = MongoReader.grabCustomerFormModels("US15001SubscribeToNewsletterTest").get(0);
 		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
 
 	}
