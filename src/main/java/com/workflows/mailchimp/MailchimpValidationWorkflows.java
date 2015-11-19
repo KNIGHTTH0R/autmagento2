@@ -12,6 +12,7 @@ import com.tools.data.frontend.ShippingModel;
 import com.tools.data.newsletter.SubscriberModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.persistance.MongoReader;
+import com.tools.utils.PrintUtils;
 
 public class MailchimpValidationWorkflows {
 	
@@ -125,6 +126,8 @@ public class MailchimpValidationWorkflows {
 		resultSubscriber.setContactOrUser(ConfigConstants.CONTACT);
 		resultSubscriber.setFlagStylist(ConfigConstants.NO);
 		resultSubscriber.setFlagHost(ConfigConstants.NO);
+		
+		PrintUtils.printSubscriberData(resultSubscriber);
 		
 		return resultSubscriber;
 	}
