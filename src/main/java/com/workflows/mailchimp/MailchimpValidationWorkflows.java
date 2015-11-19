@@ -44,13 +44,13 @@ public class MailchimpValidationWorkflows {
 	@Step
 	public void validateNewContactSubscriberMailchimpProperties(SubscriberModel grabbedModel, SubscriberModel expectedModel) {
 		verifyEmail(grabbedModel.getEmail(),expectedModel.getEmail());
-//		verifyActivatedAt(grabbedModel.getActivatedAt(),expectedModel.getActivatedAt());
-//		verifyIsStylist(grabbedModel.getIsStylist(),expectedModel.getIsStylist());
-//		verifyLastDatePurchase(grabbedModel.getLastPurchase(), expectedModel.getLastPurchase());
-//		verifyPreferredWebsite(grabbedModel.getPreferredWebsite(),expectedModel.getPreferredWebsite());
-//		verifyContactOrUser(grabbedModel.getContactOrUser(),expectedModel.getContactOrUser());
-//		verifyStylistFlag(grabbedModel.getFlagStylist(),expectedModel.getFlagStylist());
-//		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
+		verifyActivatedAt(grabbedModel.getActivatedAt(),expectedModel.getActivatedAt());
+		verifyIsStylist(grabbedModel.getIsStylist(),expectedModel.getIsStylist());
+		verifyLastDatePurchase(grabbedModel.getLastPurchase(), expectedModel.getLastPurchase());
+		verifyPreferredWebsite(grabbedModel.getPreferredWebsite(),expectedModel.getPreferredWebsite());
+		verifyContactOrUser(grabbedModel.getContactOrUser(),expectedModel.getContactOrUser());
+		verifyStylistFlag(grabbedModel.getFlagStylist(),expectedModel.getFlagStylist());
+		verifyHostFlag(grabbedModel.getFlagHost(),expectedModel.getFlagHost());
 	}
 	@Step
 	public void validateNewCustomerOrderWithKoboMailchimpProperties(SubscriberModel grabbedModel, SubscriberModel expectedModel) {
