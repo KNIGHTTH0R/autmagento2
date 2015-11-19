@@ -34,6 +34,7 @@ public class US15001SubscribeToNewsletterTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		dataModel = new CustomerFormModel();
+		dateModel = new DateModel();
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
