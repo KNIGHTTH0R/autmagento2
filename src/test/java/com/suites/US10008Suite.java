@@ -12,12 +12,12 @@ import com.tests.uss10.uss10008.US10008PlaceAnotherOrderForCustomerAsPartyHostTe
 import com.tests.uss10.uss10008.US10008ReopenPartyTest;
 
 @SuiteClasses({	
-	US10008OrderForCustomerAsPartyHostTest.class,
-	US10008CloseVirginPartyAnfVerifyCommissionBonusesTest.class,
+//	US10008OrderForCustomerAsPartyHostTest.class,
+//	US10008CloseVirginPartyAnfVerifyCommissionBonusesTest.class,
 	US10008AddManuallyBonusOnPartyTest.class,
 	US10008ReopenPartyTest.class,
 	US10008PlaceAnotherOrderForCustomerAsPartyHostTest.class,
-	US10008CloseAgainPartyAnfVerifyCommissionBonusesTest.class,
+//	US10008CloseAgainPartyAnfVerifyCommissionBonusesTest.class,
 	
 })
 @RunWith(Suite.class)
