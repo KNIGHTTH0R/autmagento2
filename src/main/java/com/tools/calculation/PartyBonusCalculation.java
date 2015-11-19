@@ -45,7 +45,6 @@ public class PartyBonusCalculation {
 
 		BigDecimal partyRetail = calculatePartyRetail(ordersList);
 		BigDecimal partyJb = BigDecimal.ZERO;
-		partyJb = partyJb.add(BigDecimal.valueOf(Double.parseDouble(manualJwewlryBonus)));
 
 		if (isBetween(partyRetail, BigDecimal.valueOf(250), BigDecimal.valueOf(500))) {
 
@@ -63,8 +62,10 @@ public class PartyBonusCalculation {
 			partyJb = partyJb.divide(BigDecimal.valueOf(100).setScale(4, RoundingMode.HALF_UP));
 		}
 
-		return partyJb.compareTo(BigDecimal.valueOf(35)) < 0 && ordersList.size() != 0 ? BigDecimal.valueOf(35).setScale(2, RoundingMode.HALF_UP) : partyJb.setScale(2,
+		partyJb = partyJb.compareTo(BigDecimal.valueOf(35)) < 0 && ordersList.size() != 0 ? BigDecimal.valueOf(35).setScale(2, RoundingMode.HALF_UP) : partyJb.setScale(2,
 				RoundingMode.HALF_UP);
+
+		return partyJb.add(BigDecimal.valueOf(Double.parseDouble(manualJwewlryBonus)));
 	}
 
 	public static boolean isBetween(BigDecimal price, BigDecimal start, BigDecimal end) {

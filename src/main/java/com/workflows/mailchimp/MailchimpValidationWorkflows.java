@@ -230,12 +230,12 @@ public class MailchimpValidationWorkflows {
 
 		resultSubscriber.setEmail(dataModel.getEmailName());
 		resultSubscriber.setActivatedAt(dateModel.getDate());
-		resultSubscriber.setIsStylist(ConfigConstants.NO);
+		resultSubscriber.setIsStylist(ConfigConstants.YES);
 		resultSubscriber.setLastPurchase(dateModel.getDate());
 		resultSubscriber.setPreferredWebsite(MongoReader.getContext());
 		resultSubscriber.setContactOrUser(ConfigConstants.USER);
-		resultSubscriber.setFlagStylist(ConfigConstants.YES);
-		resultSubscriber.setFlagHost(ConfigConstants.YES);
+		resultSubscriber.setFlagStylist(ConfigConstants.NO);
+//		resultSubscriber.setFlagHost(ConfigConstants.YES);
 		resultSubscriber.setFirstName(dataModel.getFirstName());
 		resultSubscriber.setLastName(dataModel.getLastName());
 		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
@@ -256,12 +256,12 @@ public class MailchimpValidationWorkflows {
 
 		resultSubscriber.setEmail(dataModel.getEmailName());
 		resultSubscriber.setActivatedAt(dateModel.getDate());
-		resultSubscriber.setIsStylist(ConfigConstants.NO);
+		resultSubscriber.setIsStylist(ConfigConstants.YES);
 		resultSubscriber.setLastPurchase(dateModel.getDate());
 		resultSubscriber.setPreferredWebsite(MongoReader.getContext());
 		resultSubscriber.setContactOrUser(ConfigConstants.USER);
-		resultSubscriber.setFlagStylist(ConfigConstants.YES);
-		resultSubscriber.setFlagHost(ConfigConstants.YES);
+		resultSubscriber.setFlagStylist(ConfigConstants.NO);
+//		resultSubscriber.setFlagHost(ConfigConstants.YES);
 		resultSubscriber.setFirstName(dataModel.getFirstName());
 		resultSubscriber.setLastName(dataModel.getLastName());
 		resultSubscriber.setCountry(MongoReader.getContext().toUpperCase());
