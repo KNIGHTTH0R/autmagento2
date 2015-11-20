@@ -78,11 +78,6 @@ public class US000GrabStylistPropertiesTest extends BaseTest {
 		backEndSteps.openCustomerDetails(stylistName);
 		backEndSteps.clickOnLeadSettings();
 		validationModel = backEndSteps.grabLeadSettingsData();
-		System.out.println(validationModel.getCustomerLeads());
-		System.out.println(validationModel.getHostessLeads());
-		System.out.println(validationModel.getHostessLeadsWeek());
-		System.out.println(validationModel.getStyleCoachLeads());
-		System.out.println(validationModel.getStyleCoachLeadsWeek());
 
 		customVerifications.printErrors();
 	}

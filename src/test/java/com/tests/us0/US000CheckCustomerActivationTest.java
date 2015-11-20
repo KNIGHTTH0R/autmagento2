@@ -77,7 +77,6 @@ public class US000CheckCustomerActivationTest extends BaseTest {
 			if (validateEmail.contains("Willkommen")) {
 				emailActive = true;
 			}
-			// protect config file from special chars in German -- Bestätigt
 			if (validateAccount.contains("Bestätigt")) {
 				accountActive = true;
 			}

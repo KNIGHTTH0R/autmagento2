@@ -16,6 +16,8 @@ public class NavigationPage extends AbstractPage {
 
 	@FindBy(id = "message-popup-window")
 	private WebElement popUpWindow;
+	
+	//TODO  refactoring here
 
 	public void clickOnPromotions() {
 		element(navigationBar).waitUntilVisible();

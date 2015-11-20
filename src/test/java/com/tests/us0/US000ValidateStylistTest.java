@@ -98,9 +98,6 @@ public class US000ValidateStylistTest extends BaseTest{
 		backEndSteps.openCustomerDetails(stylistName);
 		backEndSteps.clickOnLeadSettings();
 		finalValidation = backEndSteps.grabLeadSettingsData();
-	
-		
-		//this line is just to use emailActive var.
 		emailActive.contentEquals("true");
 		
 		
