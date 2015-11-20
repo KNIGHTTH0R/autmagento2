@@ -49,6 +49,20 @@ public class StylistBody {
 	private int newFrontliners;
 	private int ipForMyself;
 	private int ipForCustomers;
+	private int teamPointsTpr;
+	private int teamPointsIpTpr;
+	private int ppr;
+	private int tpr;
+	private int tprLevel1;
+	private int tprLevel2;
+	private int tpr_diff;
+	private int diffPath;
+	private int autoBonus;
+	private int teamPointsLevel1Tpr;
+	private int teamPointsLevel2Tpr;
+	private String matchingBonus;
+	private int tprDiff;
+	private int stylistMatching;
 
 	public String getId() {
 		return id;
@@ -424,6 +438,119 @@ public class StylistBody {
 
 	public void setIpForCustomers(int ipForCustomers) {
 		this.ipForCustomers = ipForCustomers;
+	}
+
+	public int getTeamPointsTpr() {
+		return teamPointsTpr;
+	}
+
+	public void setTeamPointsTpr(int teamPointsTpr) {
+		this.teamPointsTpr = teamPointsTpr;
+	}
+
+	public int getTeamPointsIpTpr() {
+		return teamPointsIpTpr;
+	}
+
+	public void setTeamPointsIpTpr(int teamPointsIpTpr) {
+		this.teamPointsIpTpr = teamPointsIpTpr;
+	}
+
+	public int getPpr() {
+		return ppr;
+	}
+
+	public void setPpr(int ppr) {
+		this.ppr = ppr;
+	}
+
+	public int getTpr() {
+		return tpr;
+	}
+
+	public void setTpr(int tpr) {
+		this.tpr = tpr;
+	}
+
+	public int getTprLevel1() {
+		return tprLevel1;
+	}
+
+	public void setTprLevel1(int tprLevel1) {
+		this.tprLevel1 = tprLevel1;
+	}
+
+	public int getTprLevel2() {
+		return tprLevel2;
+	}
+
+	public void setTprLevel2(int tprLevel2) {
+		this.tprLevel2 = tprLevel2;
+	}
+
+	public int getTpr_diff() {
+		return tpr_diff;
+	}
+
+	public void setTpr_diff(int tpr_diff) {
+		this.tpr_diff = tpr_diff;
+	}
+
+	public int getDiffPath() {
+		return diffPath;
+	}
+
+	public void setDiffPath(int diffPath) {
+		this.diffPath = diffPath;
+	}
+
+	public int getAutoBonus() {
+		return autoBonus;
+	}
+
+	public void setAutoBonus(int autoBonus) {
+		this.autoBonus = autoBonus;
+	}
+
+	public int getTeamPointsLevel1Tpr() {
+		return teamPointsLevel1Tpr;
+	}
+
+	public void setTeamPointsLevel1Tpr(int teamPointsLevel1Tpr) {
+		this.teamPointsLevel1Tpr = teamPointsLevel1Tpr;
+	}
+
+	public int getTeamPointsLevel2Tpr() {
+		return teamPointsLevel2Tpr;
+	}
+
+	public void setTeamPointsLevel2Tpr(int teamPointsLevel2Tpr) {
+		this.teamPointsLevel2Tpr = teamPointsLevel2Tpr;
+	}
+
+
+	public int getTprDiff() {
+		return tprDiff;
+	}
+
+	public void setTprDiff(int tprDiff) {
+		this.tprDiff = tprDiff;
+	}
+
+	public int getStylistMatching() {
+		return stylistMatching;
+	}
+
+	public void setStylistMatching(int stylistMatching) {
+		this.stylistMatching = stylistMatching;
+	}
+
+	public void setMatchingBonus(String matchingBonus) {
+		this.matchingBonus = matchingBonus;
+	}
+
+	public String getMatchingBonus() {
+		return matchingBonus;
 	}
 
 }
