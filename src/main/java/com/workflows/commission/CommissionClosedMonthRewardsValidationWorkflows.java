@@ -10,8 +10,8 @@ public class CommissionClosedMonthRewardsValidationWorkflows {
 	@Title("Validate that closed month reward points are correct")
 	@Step
 	public void validateClosedMonthRewardPoints(RewardPointsOfStylistModel expectedModel, RewardPointsOfStylistModel grabbedModel) {
-		verifyJewelryBonus(grabbedModel.getJewelryBonus(), expectedModel.getJewelryBonus());
-		verifyMarketingMaterial(grabbedModel.getMarketingMaterialBonus(), expectedModel.getMarketingMaterialBonus());
+		verifyJewelryBonus(expectedModel.getJewelryBonus(), grabbedModel.getJewelryBonus());
+		verifyMarketingMaterial(expectedModel.getMarketingMaterialBonus(), grabbedModel.getMarketingMaterialBonus());
 	}
 
 	@Step

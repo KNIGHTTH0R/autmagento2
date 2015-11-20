@@ -17,7 +17,6 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -63,9 +62,6 @@ public class US15003MarkAsPaidKoboOrderTest extends BaseTest {
 		backEndSteps.searchOrderByName(stylistRegistrationData.getFirstName());
 		backEndSteps.openOrderDetails(stylistRegistrationData.getFirstName());
 		ordersSteps.markOrderAsPaid();
-		// external
-		emailClientSteps.openMailinator();
-		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
 
 }
