@@ -56,7 +56,6 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void setSameAsBilling(boolean checked) {
 		shippingFormPage().setSameAsBilling(checked);
-		waitABit(1000);
 	}
 
 	@Step

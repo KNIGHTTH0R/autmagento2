@@ -140,7 +140,7 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 		loungeSteps.clickGoToBorrowCart();
 		borrowCartSteps.clickWipeCart();
 		BorrowProductModel productData;
-		
+
 		productData = addBorrowedProductsWorkflow.setBorrowedDefaultProductToCart();
 		BorrowCartCalculator.allBorrowedProductsList.add(productData);
 		productData = addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct1, "0.00");

@@ -3,7 +3,9 @@ package com.pages.frontend.checkout.shipping;
 import net.thucydides.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
@@ -45,7 +47,7 @@ public class ShippingFormPage extends AbstractPage {
 
 	@FindBy(id = "know_stylist_no")
 	private WebElement knowStylistNo;
-	
+
 	@FindBy(id = "terms")
 	private WebElement termsCheckbox;
 
@@ -53,6 +55,7 @@ public class ShippingFormPage extends AbstractPage {
 		element(knowStylistNo).waitUntilVisible();
 		knowStylistNo.click();
 	}
+
 	public void checkTermsCheckbox() {
 		element(termsCheckbox).waitUntilVisible();
 		termsCheckbox.click();
@@ -105,6 +108,8 @@ public class ShippingFormPage extends AbstractPage {
 
 		if ((checked && !isSelected) || (!checked && isSelected))
 			sameAsBilling.click();
+		
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void selectShippingAddress(String value) {

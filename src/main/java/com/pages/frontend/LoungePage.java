@@ -168,9 +168,8 @@ public class LoungePage extends AbstractPage {
 		result.setCareerLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(1) td:nth-child(2)")).getText());
 		result.setPayLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(2) td:nth-child(2)")).getText());
 		result.setIndividualPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(3) td:nth-child(2)")).getText());
-		result.setTeamPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(4) td:nth-child(2)")).getText());
-		result.setStyleCoachFirstLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(5) td:nth-child(2)")).getText());
-		result.setGoldStyleCoaches(performanceTable.findElement(By.cssSelector("tr:nth-child(6) td:nth-child(2)")).getText());
+		result.setUnsafeIndividualPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(4) td:nth-child(2)")).getText());
+		result.setTeamPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(5) td:nth-child(2)")).getText());
  
 		PrintUtils.printLoungeIpPerformanceModel(result);
 		

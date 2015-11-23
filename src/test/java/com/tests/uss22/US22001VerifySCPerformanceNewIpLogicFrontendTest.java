@@ -89,7 +89,7 @@ public class US22001VerifySCPerformanceNewIpLogicFrontendTest extends BaseTest {
 		headerSteps.goToLounge();
 		grabbedLoungeIpPerformanceModel = loungeSteps.grabSCPerformanceIpLogic();
 
-		stylecoachPerformanceValidationWorkflow.validatePerformanceValues(expectedLoungeIpPerformanceModel, grabbedLoungeIpPerformanceModel);
+		stylecoachPerformanceValidationWorkflow.validatePerformanceValuesInFrontend(expectedLoungeIpPerformanceModel, grabbedLoungeIpPerformanceModel);
 		
 		customVerifications.printErrors();
 	}

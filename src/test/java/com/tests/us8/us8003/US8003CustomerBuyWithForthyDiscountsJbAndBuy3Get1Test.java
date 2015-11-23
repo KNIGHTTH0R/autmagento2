@@ -77,7 +77,6 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 	public RegularCartValidationWorkflows regularCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
-	
 
 	private String username, password;
 	private String discountClass;
@@ -159,7 +158,7 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
+
 		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
