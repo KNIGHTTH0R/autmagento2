@@ -51,18 +51,18 @@ public class StylistBody {
 	private int ipForCustomers;
 	private int teamPointsTpr;
 	private int teamPointsIpTpr;
-	private int ppr;
-	private int tpr;
-	private int tprLevel1;
-	private int tprLevel2;
-	private int tpr_diff;
+	private String ppr;
+	private String tpr;
+	private String tprLevel1;
+	private String tprLevel2;
+	private String tpr_diff;
 	private int diffPath;
-	private int autoBonus;
-	private int teamPointsLevel1Tpr;
-	private int teamPointsLevel2Tpr;
+	private String autoBonus;
+	private String teamPointsLevel1Tpr;
+	private String teamPointsLevel2Tpr;
 	private String matchingBonus;
-	private int tprDiff;
-	private int stylistMatching;
+	private String tprDiff;
+	private String stylistMatching;
 
 	public String getId() {
 		return id;
@@ -456,45 +456,6 @@ public class StylistBody {
 		this.teamPointsIpTpr = teamPointsIpTpr;
 	}
 
-	public int getPpr() {
-		return ppr;
-	}
-
-	public void setPpr(int ppr) {
-		this.ppr = ppr;
-	}
-
-	public int getTpr() {
-		return tpr;
-	}
-
-	public void setTpr(int tpr) {
-		this.tpr = tpr;
-	}
-
-	public int getTprLevel1() {
-		return tprLevel1;
-	}
-
-	public void setTprLevel1(int tprLevel1) {
-		this.tprLevel1 = tprLevel1;
-	}
-
-	public int getTprLevel2() {
-		return tprLevel2;
-	}
-
-	public void setTprLevel2(int tprLevel2) {
-		this.tprLevel2 = tprLevel2;
-	}
-
-	public int getTpr_diff() {
-		return tpr_diff;
-	}
-
-	public void setTpr_diff(int tpr_diff) {
-		this.tpr_diff = tpr_diff;
-	}
 
 	public int getDiffPath() {
 		return diffPath;
@@ -504,46 +465,6 @@ public class StylistBody {
 		this.diffPath = diffPath;
 	}
 
-	public int getAutoBonus() {
-		return autoBonus;
-	}
-
-	public void setAutoBonus(int autoBonus) {
-		this.autoBonus = autoBonus;
-	}
-
-	public int getTeamPointsLevel1Tpr() {
-		return teamPointsLevel1Tpr;
-	}
-
-	public void setTeamPointsLevel1Tpr(int teamPointsLevel1Tpr) {
-		this.teamPointsLevel1Tpr = teamPointsLevel1Tpr;
-	}
-
-	public int getTeamPointsLevel2Tpr() {
-		return teamPointsLevel2Tpr;
-	}
-
-	public void setTeamPointsLevel2Tpr(int teamPointsLevel2Tpr) {
-		this.teamPointsLevel2Tpr = teamPointsLevel2Tpr;
-	}
-
-
-	public int getTprDiff() {
-		return tprDiff;
-	}
-
-	public void setTprDiff(int tprDiff) {
-		this.tprDiff = tprDiff;
-	}
-
-	public int getStylistMatching() {
-		return stylistMatching;
-	}
-
-	public void setStylistMatching(int stylistMatching) {
-		this.stylistMatching = stylistMatching;
-	}
 
 	public void setMatchingBonus(String matchingBonus) {
 		this.matchingBonus = matchingBonus;
@@ -551,6 +472,86 @@ public class StylistBody {
 
 	public String getMatchingBonus() {
 		return matchingBonus;
+	}
+
+	public String getPpr() {
+		return ppr;
+	}
+
+	public void setPpr(String ppr) {
+		this.ppr = ppr;
+	}
+
+	public String getTpr() {
+		return tpr;
+	}
+
+	public void setTpr(String tpr) {
+		this.tpr = tpr;
+	}
+
+	public String getTprLevel1() {
+		return tprLevel1;
+	}
+
+	public void setTprLevel1(String tprLevel1) {
+		this.tprLevel1 = tprLevel1;
+	}
+
+	public String getTprLevel2() {
+		return tprLevel2;
+	}
+
+	public void setTprLevel2(String tprLevel2) {
+		this.tprLevel2 = tprLevel2;
+	}
+
+	public String getAutoBonus() {
+		return autoBonus;
+	}
+
+	public void setAutoBonus(String autoBonus) {
+		this.autoBonus = autoBonus;
+	}
+
+	public String getTeamPointsLevel1Tpr() {
+		return teamPointsLevel1Tpr;
+	}
+
+	public void setTeamPointsLevel1Tpr(String teamPointsLevel1Tpr) {
+		this.teamPointsLevel1Tpr = teamPointsLevel1Tpr;
+	}
+
+	public String getTeamPointsLevel2Tpr() {
+		return teamPointsLevel2Tpr;
+	}
+
+	public void setTeamPointsLevel2Tpr(String teamPointsLevel2Tpr) {
+		this.teamPointsLevel2Tpr = teamPointsLevel2Tpr;
+	}
+
+	public String getTpr_diff() {
+		return tpr_diff;
+	}
+
+	public void setTpr_diff(String tpr_diff) {
+		this.tpr_diff = tpr_diff;
+	}
+
+	public String getTprDiff() {
+		return tprDiff;
+	}
+
+	public void setTprDiff(String tprDiff) {
+		this.tprDiff = tprDiff;
+	}
+
+	public String getStylistMatching() {
+		return stylistMatching;
+	}
+
+	public void setStylistMatching(String stylistMatching) {
+		this.stylistMatching = stylistMatching;
 	}
 
 }

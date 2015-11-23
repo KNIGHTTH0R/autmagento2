@@ -15,7 +15,7 @@ public class DashboardPage extends AbstractPage {
 	@FindBy(css = "div.dashboard div:nth-child(5) div.col-1 dl dd:nth-child(2)")
 	private WebElement jewelryContainer;
 
-	@FindBy(css = "div.dashboard div:nth-child(5) div.col-1 dl dd:nth-child(2)")
+	@FindBy(css = "div.dashboard div:nth-child(5) div.col-1 dl dd:nth-child(4)")
 	private WebElement marketingBonusContainer;
 
 	public String getStyleCoachFirstNameFromProfile() {
