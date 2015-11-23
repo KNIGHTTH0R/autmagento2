@@ -3,7 +3,9 @@ package com.pages.frontend.checkout.shipping;
 import net.thucydides.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
@@ -52,6 +54,7 @@ public class BillingFormPage extends AbstractPage {
 	public void selectAdressDropdown(String value) {
 		element(addressDropDown).waitUntilVisible();
 		element(addressDropDown).selectByVisibleText(value);
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void inputFirstName(String firstName) {
