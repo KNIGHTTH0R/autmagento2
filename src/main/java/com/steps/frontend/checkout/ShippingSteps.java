@@ -50,6 +50,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void selectAddress(String address) {
 		billingFormPage().selectAdressDropdown(address);
+		waitABit(3000);
 		// billingFormPage().verifyThatYouCannotBillOnRestrictedCountries();
 	}
 
