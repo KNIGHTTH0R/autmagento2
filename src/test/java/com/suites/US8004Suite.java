@@ -4,8 +4,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.us8.us8004.US8004CustomerBuyWithContactBoosterTest;
+import com.tests.us8.us8004.US8004ChangeBackCustomersContextTest;
 import com.tests.us8.us8004.US8004CheckOrderOnCustomerProfileTest;
+import com.tests.us8.us8004.US8004CustomerBuyWithContactBoosterTest;
 import com.tests.us8.us8004.US8004ValidateOrderBackOfficeTest;
 import com.tests.us8.us8004.US8004ValidateOrderEmailTest;
 import com.tests.us8.us8004.US8004ValidateOrderInStylistsCustomerOrderReportTest;
@@ -16,6 +17,7 @@ import com.tests.us8.us8004.US8004ValidateOrderInStylistsCustomerOrderReportTest
 	US8004ValidateOrderEmailTest.class,	
 	US8004ValidateOrderBackOfficeTest.class,
 	US8004ValidateOrderInStylistsCustomerOrderReportTest.class,
+	US8004ChangeBackCustomersContextTest.class,
 	
 })
 @RunWith(Suite.class)
