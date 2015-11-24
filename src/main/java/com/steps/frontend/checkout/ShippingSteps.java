@@ -35,7 +35,6 @@ public class ShippingSteps extends AbstractSteps {
 
 	public List<RegularUserCartProductModel> grabRegularProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);
-		waitABit(10000);
 		return surveyPage().grabRegularProductsList();
 	}
 
