@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class ShoppingCartPriceRulesPage extends AbstractPage {
@@ -43,6 +44,7 @@ public class ShoppingCartPriceRulesPage extends AbstractPage {
 	public void saveRule() {
 		element(saveRule).waitUntilVisible();
 		element(saveRule).click();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	public void typeRuleName(String id) {
