@@ -26,7 +26,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
-@UseTestDataFrom("\\resources\\csv\\validPlzTestData.csv")
+@UseTestDataFrom("/resources/validPlzTestData.csv")
 public class US24001ScRegistrationNewCustomerTest extends BaseTest {
 
 	@Steps
