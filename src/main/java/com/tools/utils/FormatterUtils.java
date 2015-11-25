@@ -125,4 +125,8 @@ public class FormatterUtils {
 		}
 		return elems;
 	}
+	
+	public static void main(String[] args){
+		System.out.println(FormatterUtils.getCustomDate("yyyy.MM.dd HH:mm:ss", 3600));
+	}
 }
