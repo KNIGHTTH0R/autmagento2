@@ -46,7 +46,7 @@ public class US24001ScRegistrationNewCustomerTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		// Generate data for this test run
+		
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		customerFormAddress.setPostCode(plz);
