@@ -27,7 +27,7 @@ import com.tools.requirements.Application;
 @Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom("/src/main/resources/csv/validPlzTestData.csv")
-public class US6001ScRegistrationNewCustomerTest extends BaseTest {
+public class US24001ScRegistrationNewCustomerTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -53,7 +53,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	}
 
 	@Test
-	public void us6001ScRegistrationNewCustomerTest() {
+	public void us24001ScRegistrationNewCustomerTest() {
 		headerSteps.navigateToRegisterForm();
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
