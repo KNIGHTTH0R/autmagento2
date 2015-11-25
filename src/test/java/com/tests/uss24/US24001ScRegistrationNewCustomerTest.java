@@ -3,6 +3,7 @@ package com.tests.uss24;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
+import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
 
@@ -44,9 +45,14 @@ public class US24001ScRegistrationNewCustomerTest extends BaseTest {
 	private AddressModel customerFormAddress;
 	private String plz;
 
+	@Qualifier
+	public String getQualifier() {
+		return plz;
+	}
+
 	@Before
 	public void setUp() throws Exception {
-		
+
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		customerFormAddress.setPostCode(plz);
