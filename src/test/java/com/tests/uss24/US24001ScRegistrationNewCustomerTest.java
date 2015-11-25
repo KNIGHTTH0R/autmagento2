@@ -26,7 +26,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
-@UseTestDataFrom("/src/main/resources/csv/validPlzTestData.csv")
+@UseTestDataFrom("/resources/csv/validPlzTestData.csv")
 public class US24001ScRegistrationNewCustomerTest extends BaseTest {
 
 	@Steps
@@ -42,12 +42,14 @@ public class US24001ScRegistrationNewCustomerTest extends BaseTest {
 	private DateModel customerFormDate = new DateModel();
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
+	private String plz;
 
 	@Before
 	public void setUp() throws Exception {
 		// Generate data for this test run
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
+		customerFormAddress.setPostCode(plz);
 		birthDate.setDate("Feb,1970,12");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
