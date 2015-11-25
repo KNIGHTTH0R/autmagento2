@@ -7,12 +7,10 @@ import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
@@ -21,14 +19,13 @@ import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001ScRegistrationNewCustomerTest extends BaseTest {
+public class US24001StylistRegistrationPlzValidationTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -40,7 +37,6 @@ public class US24001ScRegistrationNewCustomerTest extends BaseTest {
 	public CustomVerification customVerification;
 
 	private CustomerFormModel customerFormData;
-	private DateModel customerFormDate = new DateModel();
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	private String plz;
@@ -57,22 +53,14 @@ public class US24001ScRegistrationNewCustomerTest extends BaseTest {
 		customerFormAddress = new AddressModel();
 		customerFormAddress.setPostCode(plz);
 		birthDate.setDate("Feb,1970,12");
-		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
 	public void us24001ScRegistrationNewCustomerTest() {
 		headerSteps.navigateToRegisterForm();
-		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
-		customerFormDate.setDate(formCreationDate);
+		stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customVerification.printErrors();
 
 	}
 
-	@After
-	public void saveData() {
-		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
-		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
-
-	}
 }
