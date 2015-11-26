@@ -60,6 +60,7 @@ public class ShippingSteps extends AbstractSteps {
 	public void addNewAddressForBilling(AddressModel addressModel) {
 		billingFormPage().clickAddNewAddress();
 		billingFormPage().inputStreet1Address(addressModel.getStreetAddress());
+		System.out.println(addressModel.getStreetAddress());
 		billingFormPage().inputStreetNumber(addressModel.getStreetNumber());
 		billingFormPage().inputPostCode(addressModel.getPostCode());
 		billingFormPage().inputHomeTown(addressModel.getHomeTown());

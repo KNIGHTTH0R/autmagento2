@@ -45,12 +45,12 @@ public class AddressWorkflows {
 	}
 
 	@Step
-	public static void validateBillingPostcode(String message) {
+	public static void validateBillingPostcode() {
 		verifyCountry(billingPlz, billingAddress.getPostCode());
 	}
 
 	@Step
-	public static void validateShippingPostcode(String message) {
+	public static void validateShippingPostcode() {
 		verifyCountry(shippingPlz, shippingAddress.getPostCode());
 	}
 

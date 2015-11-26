@@ -139,10 +139,10 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 		AddressModel checkoutStepTwoShipAddress = confirmationSteps.grabSippingData();
 
 		AddressWorkflows.setBillingAddressModels(addressModel.getPostCode(), checkoutStepTwoBillAddress);
-		AddressWorkflows.validateBillingPostcode("BILLING PLZ");
+		AddressWorkflows.validateBillingPostcode();
 
 		AddressWorkflows.setBillingAddressModels(addressModel.getPostCode(), checkoutStepTwoShipAddress);
-		AddressWorkflows.validateShippingPostcode("SHIPPING PLZ");
+		AddressWorkflows.validateShippingPostcode();
 
 		checkoutValidationSteps.verifySuccessMessage();
 
