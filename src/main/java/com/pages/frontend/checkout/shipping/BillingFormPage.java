@@ -21,7 +21,7 @@ public class BillingFormPage extends AbstractPage {
 	@FindBy(css = "input[name='billing[lastname]']")
 	private WebElement lastNameInput;
 
-	@FindBy(css = "input[name='billing[street][]'][title='Address (street, house number, postcode)']")
+	@FindBy(css = "input[name='billing[street][]'][id*='billing:street1']")
 	private WebElement street1Input;
 
 	@FindBy(css = "input[name='billing[house_number]']")

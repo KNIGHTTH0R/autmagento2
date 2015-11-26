@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.ApiCalls;
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -28,7 +27,6 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -112,7 +110,7 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 	}
 
 	@Test
-	public void us3004SfmValidVatSmbBillingShippingAtTest() {
+	public void us24001ShopForMyselfPlzValidationTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

@@ -22,7 +22,7 @@ public class ShippingFormPage extends AbstractPage {
 	@FindBy(css = "input[name='shipping[lastname]']")
 	private WebElement lastNameInput;
 
-	@FindBy(css = "input[name='shipping[street][]'][title='Address (street, house number, postcode)']")
+	@FindBy(css = "input[name='billing[street][]'][id*='sheeping:street1']")
 	private WebElement street1Input;
 
 	@FindBy(css = "input[name='shipping[house_number]']")
