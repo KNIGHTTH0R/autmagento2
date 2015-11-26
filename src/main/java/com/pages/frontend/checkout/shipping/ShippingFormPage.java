@@ -49,6 +49,9 @@ public class ShippingFormPage extends AbstractPage {
 	@FindBy(id = "terms")
 	private WebElement termsCheckbox;
 
+	@FindBy(id = "new-shipping-address")
+	private WebElement newShippingAddress;
+
 	public void selectKnowStylistNoOption() {
 		element(knowStylistNo).waitUntilVisible();
 		knowStylistNo.click();
@@ -114,6 +117,11 @@ public class ShippingFormPage extends AbstractPage {
 		Assert.assertTrue("The ddl contains the country name and it should not !!!", !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE)
 				|| !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
 		System.out.println(addressDropDown.getText());
+	}
+	
+	public void clickAddNewAddress() {
+		element(newShippingAddress).waitUntilVisible();
+		newShippingAddress.click();
 	}
 
 }
