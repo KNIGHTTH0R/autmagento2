@@ -8,7 +8,6 @@ import net.thucydides.core.annotations.Title;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -121,6 +120,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void inputBillingPostCode(String postCode) {
 		billingFormPage().inputPostCode(postCode);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -131,6 +131,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void selectBillingCountryName(String countryName) {
 		billingFormPage().selectCountryName(countryName);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -151,6 +152,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void inputShippingPostCode(String postCode) {
 		shippingFormPage().inputPostCode(postCode);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -161,6 +163,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void selectShippingCountryName(String countryName) {
 		shippingFormPage().selectCountryName(countryName);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
