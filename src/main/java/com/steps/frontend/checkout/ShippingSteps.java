@@ -63,6 +63,7 @@ public class ShippingSteps extends AbstractSteps {
 		billingFormPage().inputStreet1Address(addressModel.getStreetAddress());
 		billingFormPage().inputStreetNumber(addressModel.getStreetNumber());
 		billingFormPage().inputPostCode(addressModel.getPostCode());
+		shippingFormPage().inputHomeTown(addressModel.getHomeTown());
 		billingFormPage().selectCountryName(addressModel.getCountryName());
 		billingFormPage().inputPhoneNumber(addressModel.getPhoneNumber());
 	}
