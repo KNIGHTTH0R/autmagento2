@@ -4,10 +4,6 @@ import com.tools.env.variables.ContextConstants;
 
 public class AddressModel {
 
-	/**
-	 * Simona Test Popa second billing, 2 89357 Cluj Austria
-	 */
-
 	private String streetAddress;
 	private String streetNumber;
 	private String homeTown;

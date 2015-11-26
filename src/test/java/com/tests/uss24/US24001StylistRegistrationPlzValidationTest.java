@@ -7,6 +7,7 @@ import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
@@ -63,4 +65,8 @@ public class US24001StylistRegistrationPlzValidationTest extends BaseTest {
 
 	}
 
+	@After
+	public void saveData() {
+		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
+	}
 }

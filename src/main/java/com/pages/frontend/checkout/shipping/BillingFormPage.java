@@ -15,35 +15,41 @@ public class BillingFormPage extends AbstractPage {
 	@FindBy(css = "select#billing-address-select")
 	private WebElement addressDropDown;
 
-	@FindBy(css = "input#billing:firstname")
+	@FindBy(css = "input[name='billing[firstname]']")
 	private WebElement firstNameInput;
 
-	@FindBy(css = "input#billing:lastname")
+	@FindBy(css = "input[name='billing[lastname]']")
 	private WebElement lastNameInput;
 
-	@FindBy(css = "input#billing:street1")
+	@FindBy(css = "input[name='billing[street][]'][title='Address (street, house number, postcode)']")
 	private WebElement street1Input;
 
-	@FindBy(css = "input#billing:house_number")
+	@FindBy(css = "input[name='billing[house_number]']")
 	private WebElement houseNumberInput;
 
-	@FindBy(css = "input#billing:street2")
-	private WebElement street2Input;
-
-	@FindBy(css = "input#billing:postcode")
+	@FindBy(css = "input[name='billing[postcode]']")
 	private WebElement postcodeInput;
 
-	@FindBy(css = "input#billing:city")
+	@FindBy(css = "input[name='billing[city]']")
 	private WebElement cityInput;
 
-	@FindBy(css = "select#billing:country_id")
+	@FindBy(css = "select[name='billing[country_id]']")
 	private WebElement countryDropDown;
 
-	@FindBy(css = "select#billing:telephone")
+	@FindBy(css = "input[name='billing[telephone]']")
 	private WebElement telephoneInput;
-	
-	public void verifyThatYouCannotBillOnRestrictedCountries(){
-		Assert.assertTrue("The ddl contains the country name and it should not !!!", !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE) || !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
+
+	@FindBy(id = "new-billing-address")
+	private WebElement newBillingAddress;
+
+	public void clickAddNewAddress() {
+		element(newBillingAddress).waitUntilVisible();
+		newBillingAddress.click();
+	}
+
+	public void verifyThatYouCannotBillOnRestrictedCountries() {
+		Assert.assertTrue("The ddl contains the country name and it should not !!!", !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE)
+				|| !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
 		System.out.println(addressDropDown.getText());
 		waitABit(2000);
 	}
@@ -74,11 +80,6 @@ public class BillingFormPage extends AbstractPage {
 
 	public void inputStreetNumber(String streetNumber) {
 		houseNumberInput.sendKeys(streetNumber);
-	}
-
-	public void inputStreet2Address(String streetAddress) {
-		element(street2Input).waitUntilVisible();
-		street2Input.sendKeys(streetAddress);
 	}
 
 	public void inputPostCode(String postCode) {

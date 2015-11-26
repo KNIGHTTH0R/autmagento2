@@ -20,8 +20,7 @@ import org.junit.runner.RunWith;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.PartyCreationSteps;
-import com.steps.frontend.PartyDetailsSteps;
+import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.AddressModel;
@@ -30,28 +29,27 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10.3 Edit Party and Verify Not Allowed Countries Test", type = "Scenarios")
-@Story(Application.StyleParty.US10_3.class)
+@WithTag(name = "US17.1 Check reassigned duplicate contacts and customer associated contacts when new SC is selected", type = "Scenarios")
+@Story(Application.MassAction.US17_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001CreatePartyWithNewContactPlzValidationTest extends BaseTest {
+public class US24001AddNewContactToStyleCoachTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public CreateNewContactSteps createNewContactSteps;
-	@Steps
-	public HeaderSteps headerSteps;
+	public LoungeSteps loungeSteps;
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
-	public PartyDetailsSteps partyDetailsSteps;
+	public HeaderSteps headerSteps;
 	@Steps
-	public PartyCreationSteps partyCreationSteps;
+	public CreateNewContactSteps createNewContactSteps;
 
-	private String username, password;
-	private CustomerFormModel customerData;
-	private AddressModel addressData;
+	private CustomerFormModel dataModel;
+	private AddressModel addressModel;
+	private String username;
+	private String password;
 	private String plz;
 
 	@Qualifier
@@ -62,9 +60,9 @@ public class US24001CreatePartyWithNewContactPlzValidationTest extends BaseTest 
 	@Before
 	public void setUp() throws Exception {
 
-		customerData = new CustomerFormModel();
-		addressData = new AddressModel();
-		addressData.setPostCode(plz);
+		dataModel = new CustomerFormModel();
+		addressModel = new AddressModel();
+		addressModel.setPostCode(plz);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -91,16 +89,15 @@ public class US24001CreatePartyWithNewContactPlzValidationTest extends BaseTest 
 	}
 
 	@Test
-	public void us24001CreatePartyWithNewContactPlzValidationTest() {
+	public void us24001AddNewContactToStyleCoachTest() {
+
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToCreatePartyWithNewContactPage();
-		createNewContactSteps.fillCreateNewContact(customerData, addressData);
-		partyCreationSteps.fillPartyDetailsForNewCustomerHost();
-		partyDetailsSteps.verifyPlannedPartyAvailableActions();
+		loungeSteps.goToToAddNewContact();
+		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
 	}
 
 }

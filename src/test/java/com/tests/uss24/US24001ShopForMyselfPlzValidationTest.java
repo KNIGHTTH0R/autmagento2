@@ -16,37 +16,39 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.ApiCalls;
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
-import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
-import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
-import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
-import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
-import com.steps.frontend.reports.JewelryBonusHistorySteps;
+import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.SoapKeys;
-import com.tools.data.UrlModel;
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.datahandlers.CartCalculator;
+import com.tools.datahandlers.DataGrabber;
+import com.tools.env.constants.ConfigConstants;
+import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
+import com.workflows.frontend.AddProductsWorkflow;
+import com.workflows.frontend.AddressWorkflows;
 
-@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
-@Story(Application.StyleParty.US10_6.class)
+@WithTag(name = "US3.4 Shop for myself VAT valid and SMB billing and shipping AT", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_4.class)
 @RunWith(ThucydidesRunner.class)
-public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
+public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 
+	@Steps
+	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -54,53 +56,46 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
-	public PartyDetailsSteps partyDetailsSteps;
+	public CartSteps cartSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
-	public PaymentSteps paymentSteps;
-	@Steps
-	public HostCartSteps hostCartSteps;
-	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public ShippingPartySectionSteps shippingPartySectionSteps;
+	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps
-	public AddRegularProductsWorkflow addRegularProductsWorkflow;
+	public PaymentSteps paymentSteps;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
-	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
-	@Steps
-	public DashboardSteps dashboardSteps;
+	public CustomVerification customVerifications;
 
-	private String username, password, customerName;
-
+	private String username, password;
+	private AddressModel addressModel;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private static UrlModel urlModel = new UrlModel();
+
 	private ProductDetailedModel genProduct1;
 
 	@Before
 	public void setUp() throws Exception {
-		RegularUserCartCalculator.wipe();
-		RegularUserDataGrabber.wipe();
+		CartCalculator.wipe();
+		DataGrabber.wipe();
 
-		genProduct1 = ApiCalls.createZzzProductModel();
-		genProduct1.setPrice("89.00");
-		ApiCalls.createJbZzzApiProduct(genProduct1);
+		addressModel = new AddressModel();
+
+		genProduct1 = ApiCalls.createProductModel();
+		genProduct1.setPrice("49.90");
+		ApiCalls.createApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10006.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3004.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			customerName = prop.getProperty("customerName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -114,42 +109,46 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-
 	}
 
 	@Test
-	public void us24001OrderForCustomerPlzValidationTest() {
+	public void us3004SfmValidVatSmbBillingShippingAtTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToProfile();
+		homeSteps.clickonGeneralView();
+		customerRegistrationSteps.wipeCart();
 
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
-		customerRegistrationSteps.wipeHostCart();
-		RegularBasicProductModel productData;
-
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
+		addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		hostCartSteps.clickGoToShipping();
+		cartSteps.grabTotals();
+		cartSteps.goToShipping();
 
-		shippingPartySectionSteps.checkItemNotReceivedYet();
-
-		shippingSteps.goToPaymentMethod();
-
+		shippingSteps.addNewAddressForBilling(addressModel);
+		shippingSteps.setSameAsBilling(false);
+		shippingSteps.addNewAddressForShipping(addressModel);
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.agreeAndCheckout();
+
+		AddressModel checkoutStepTwoBillAddress = confirmationSteps.grabBillingData();
+		AddressModel checkoutStepTwoShipAddress = confirmationSteps.grabSippingData();
+
+		AddressWorkflows.setBillingAddressModels(addressModel.getPostCode(), checkoutStepTwoBillAddress);
+		AddressWorkflows.validateBillingPostcode("BILLING PLZ");
+
+		AddressWorkflows.setBillingAddressModels(addressModel.getPostCode(), checkoutStepTwoShipAddress);
+		AddressWorkflows.validateShippingPostcode("SHIPPING PLZ");
+
 		checkoutValidationSteps.verifySuccessMessage();
+
+		customVerifications.printErrors();
 
 	}
 

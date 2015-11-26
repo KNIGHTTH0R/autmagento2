@@ -103,7 +103,6 @@ public class US24001KoboCampaignRegistrationPlzValidationTest extends BaseTest {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us70011.properties");
 			prop.load(input);
 
-
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {

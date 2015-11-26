@@ -5,8 +5,10 @@ import java.util.List;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Title;
 
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -42,6 +44,7 @@ public class ShippingSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabHostProductsList();
 	}
+
 	public List<BorrowedCartModel> grabBorrowedProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabBorrowedProductsList();
@@ -54,6 +57,27 @@ public class ShippingSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void addNewAddressForBilling(AddressModel addressModel) {
+		billingFormPage().clickAddNewAddress();
+		billingFormPage().inputStreet1Address(addressModel.getStreetAddress());
+		billingFormPage().inputStreetNumber(addressModel.getStreetNumber());
+		billingFormPage().inputPostCode(addressModel.getPostCode());
+		billingFormPage().inputHomeTown(addressModel.getHomeTown());
+		billingFormPage().selectCountryName(addressModel.getCountryName());
+		billingFormPage().inputPhoneNumber(addressModel.getPhoneNumber());
+	}
+
+	@Step
+	public void addNewAddressForShipping(AddressModel addressModel) {
+		shippingFormPage().inputStreet1Address(addressModel.getStreetAddress());
+		shippingFormPage().inputStreetNumber(addressModel.getStreetNumber());
+		shippingFormPage().inputPostCode(addressModel.getPostCode());
+		shippingFormPage().inputHomeTown(addressModel.getHomeTown());
+		shippingFormPage().selectCountryName(addressModel.getCountryName());
+		shippingFormPage().inputPhoneNumber(addressModel.getPhoneNumber());
+	}
+
+	@Step
 	public void setSameAsBilling(boolean checked) {
 		shippingFormPage().setSameAsBilling(checked);
 	}
@@ -62,10 +86,12 @@ public class ShippingSteps extends AbstractSteps {
 	public void selectKnowStylistNoOption() {
 		shippingFormPage().selectKnowStylistNoOption();
 	}
+
 	@Step
 	public void checkTermsCheckbox() {
 		shippingFormPage().checkTermsCheckbox();
 	}
+
 	@Title("Get order id and total from url")
 	@Step
 	public String grabUrl() {

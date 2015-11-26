@@ -15,31 +15,29 @@ public class ShippingFormPage extends AbstractPage {
 	@FindBy(css = "select#shipping-address-select")
 	private WebElement addressDropDown;
 
-	@FindBy(css = "input#shipping:firstname")
+
+	@FindBy(css = "input[name='shipping[firstname]']")
 	private WebElement firstNameInput;
 
-	@FindBy(css = "input#shipping:lastname")
+	@FindBy(css = "input[name='shipping[lastname]']")
 	private WebElement lastNameInput;
 
-	@FindBy(css = "input#shipping:street1")
+	@FindBy(css = "input[name='shipping[street][]'][title='Address (street, house number, postcode)']")
 	private WebElement street1Input;
 
-	@FindBy(css = "input#shipping:house_number")
+	@FindBy(css = "input[name='shipping[house_number]']")
 	private WebElement houseNumberInput;
 
-	@FindBy(css = "input#shipping:street2")
-	private WebElement street2Input;
-
-	@FindBy(css = "input#shipping:postcode")
+	@FindBy(css = "input[name='shipping[postcode]']")
 	private WebElement postcodeInput;
 
-	@FindBy(css = "input#shipping:city")
+	@FindBy(css = "input[name='shipping[city]']")
 	private WebElement cityInput;
 
-	@FindBy(css = "select#shipping:country_id")
+	@FindBy(css = "select[name='shipping[country_id]']")
 	private WebElement countryDropDown;
 
-	@FindBy(css = "select#shipping:telephone")
+	@FindBy(css = "input[name='shipping[telephone]']")
 	private WebElement telephoneInput;
 
 	@FindBy(css = "input#same_as_billing")
@@ -78,11 +76,6 @@ public class ShippingFormPage extends AbstractPage {
 
 	public void inputStreetNumber(String streetNumber) {
 		houseNumberInput.sendKeys(streetNumber);
-	}
-
-	public void inputStreet2Address(String streetAddress) {
-		element(street2Input).waitUntilVisible();
-		street2Input.sendKeys(streetAddress);
 	}
 
 	public void inputPostCode(String postCode) {

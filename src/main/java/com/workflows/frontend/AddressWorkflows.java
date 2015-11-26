@@ -9,14 +9,21 @@ public class AddressWorkflows {
 
 	private static AddressModel billingAddress = new AddressModel();
 	private static String billingCountryName;
+	private static String billingPlz;
 	private static AddressModel shippingAddress = new AddressModel();
 	private static String shippingCountryName;
+	private static String shippingPlz;
 
 	public static void setBillingAddressModels(String billingCountryNameValue, AddressModel billingAddressValue) {
-		System.out.println("HERE __AddressWorkflows__ setBillingAddressModels");
 		billingAddress = billingAddressValue;
 		billingCountryName = billingCountryNameValue;
 	}
+
+	public static void setBillingPlz(String billingCountryNameValue, AddressModel billingAddressValue) {
+		billingAddress = billingAddressValue;
+		billingPlz = billingCountryNameValue;
+	}
+
 	@Step
 	public static void validateBillingAddress(String message) {
 		verifyCountry(billingCountryName, billingAddress.getCountryName());
@@ -26,12 +33,28 @@ public class AddressWorkflows {
 		shippingAddress = shippingAddressValue;
 		shippingCountryName = shippingCountryNameValue;
 	}
+
+	public static void setShippingPlz(String shippingCountryNameValue, AddressModel shippingAddressValue) {
+		shippingAddress = shippingAddressValue;
+		shippingPlz = shippingCountryNameValue;
+	}
+
 	@Step
 	public static void validateShippingAddress(String message) {
 		verifyCountry(shippingCountryName, shippingAddress.getCountryName());
 	}
 
-//	@Step
+	@Step
+	public static void validateBillingPostcode(String message) {
+		verifyCountry(billingPlz, billingAddress.getPostCode());
+	}
+
+	@Step
+	public static void validateShippingPostcode(String message) {
+		verifyCountry(shippingPlz, shippingAddress.getPostCode());
+	}
+
+	// @Step
 	public static void verifyCountry(String address, String countryName) {
 		CustomVerification.verifyTrue("Failure: Countries dont match !", address.contains(countryName));
 	}
