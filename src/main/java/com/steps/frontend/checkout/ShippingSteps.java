@@ -60,24 +60,24 @@ public class ShippingSteps extends AbstractSteps {
 	public void addNewAddressForBilling(AddressModel addressModel) {
 		billingFormPage().clickAddNewAddress();
 		waitABit(TimeConstants.TIME_CONSTANT);
-		billingFormPage().inputStreet1Address(addressModel.getStreetAddress());
-		billingFormPage().inputStreetNumber(addressModel.getStreetNumber());
-		billingFormPage().inputPostCode(addressModel.getPostCode());
-		billingFormPage().inputHomeTown(addressModel.getHomeTown());
-		billingFormPage().selectCountryName(addressModel.getCountryName());
-		billingFormPage().inputPhoneNumber(addressModel.getPhoneNumber());
+		inputBillingStreetAddress(addressModel.getStreetAddress());
+		inputBillingStreetNumber(addressModel.getStreetNumber());
+		inputBillingPostCode(addressModel.getPostCode());
+		inputBillingHomeTown(addressModel.getHomeTown());
+		selectBillingCountryName(addressModel.getCountryName());
+		inputBillingPhoneNumber(addressModel.getPhoneNumber());
 	}
 
 	@Step
 	public void addNewAddressForShipping(AddressModel addressModel) {
 		shippingFormPage().clickAddNewAddress();
 		waitABit(TimeConstants.TIME_CONSTANT);
-		shippingFormPage().inputStreet1Address(addressModel.getStreetAddress());
-		shippingFormPage().inputStreetNumber(addressModel.getStreetNumber());
-		shippingFormPage().inputPostCode(addressModel.getPostCode());
-		shippingFormPage().inputHomeTown(addressModel.getHomeTown());
-		shippingFormPage().selectCountryName(addressModel.getCountryName());
-		shippingFormPage().inputPhoneNumber(addressModel.getPhoneNumber());
+		inputShippingStreetAddress(addressModel.getStreetAddress());
+		inputShippingStreetNumber(addressModel.getStreetNumber());
+		inputShippingPostCode(addressModel.getPostCode());
+		inputShippingHomeTown(addressModel.getHomeTown());
+		selectShippingCountryName(addressModel.getCountryName());
+		inputShippingPhoneNumber(addressModel.getPhoneNumber());
 	}
 
 	@Step
@@ -106,6 +106,66 @@ public class ShippingSteps extends AbstractSteps {
 		// shippingFormPage().verifyThatYouCannotShipOnRestrictedCountries();
 		shippingFormPage().selectShippingAddress(value);
 		waitABit(1000);
+	}
+
+	@Step
+	public void inputBillingStreetAddress(String streetAddress) {
+		billingFormPage().inputStreet1Address(streetAddress);
+	}
+
+	@Step
+	public void inputBillingStreetNumber(String streetNumber) {
+		billingFormPage().inputStreetNumber(streetNumber);
+	}
+
+	@Step
+	public void inputBillingPostCode(String postCode) {
+		billingFormPage().inputPostCode(postCode);
+	}
+
+	@Step
+	public void inputBillingHomeTown(String homeTown) {
+		billingFormPage().inputHomeTown(homeTown);
+	}
+
+	@Step
+	public void selectBillingCountryName(String countryName) {
+		billingFormPage().selectCountryName(countryName);
+	}
+
+	@Step
+	public void inputBillingPhoneNumber(String phoneNumber) {
+		billingFormPage().inputPhoneNumber(phoneNumber);
+	}
+
+	@Step
+	public void inputShippingStreetAddress(String streetAddress) {
+		shippingFormPage().inputStreet1Address(streetAddress);
+	}
+
+	@Step
+	public void inputShippingStreetNumber(String streetNumber) {
+		shippingFormPage().inputStreetNumber(streetNumber);
+	}
+
+	@Step
+	public void inputShippingPostCode(String postCode) {
+		shippingFormPage().inputPostCode(postCode);
+	}
+
+	@Step
+	public void inputShippingHomeTown(String homeTown) {
+		shippingFormPage().inputHomeTown(homeTown);
+	}
+
+	@Step
+	public void selectShippingCountryName(String countryName) {
+		shippingFormPage().selectCountryName(countryName);
+	}
+
+	@Step
+	public void inputShippingPhoneNumber(String phoneNumber) {
+		shippingFormPage().inputPhoneNumber(phoneNumber);
 	}
 
 }

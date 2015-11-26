@@ -78,14 +78,17 @@ public class ShippingFormPage extends AbstractPage {
 	}
 
 	public void inputStreetNumber(String streetNumber) {
+		element(houseNumberInput).waitUntilVisible();
 		houseNumberInput.sendKeys(streetNumber);
 	}
 
 	public void inputPostCode(String postCode) {
+		element(postcodeInput).waitUntilVisible();
 		postcodeInput.sendKeys(postCode);
 	}
 
 	public void inputHomeTown(String homeTown) {
+		element(cityInput).waitUntilVisible();
 		cityInput.sendKeys(homeTown);
 	}
 
@@ -95,6 +98,7 @@ public class ShippingFormPage extends AbstractPage {
 	}
 
 	public void inputPhoneNumber(String phoneNumber) {
+		element(telephoneInput).waitUntilVisible();
 		telephoneInput.sendKeys(phoneNumber);
 	}
 
