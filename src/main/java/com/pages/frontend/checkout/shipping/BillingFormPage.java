@@ -91,11 +91,13 @@ public class BillingFormPage extends AbstractPage {
 
 	public void inputHomeTown(String homeTown) {
 		element(cityInput).waitUntilVisible();
+		cityInput.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		cityInput.sendKeys(homeTown);
 	}
 
 	public void selectCountryName(String countryName) {
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+
 		element(countryDropDown).waitUntilVisible();
 		element(countryDropDown).selectByVisibleText(countryName);
 	}
