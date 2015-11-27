@@ -27,6 +27,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
+import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -73,6 +74,8 @@ public class US24001HostOrderPlzValidationTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public HostCartValidationWorkflows hostCartValidationWorkflows;
+	@Steps
+	public ContactHostShippingHostSteps contactHostShippingHostSteps;
 	@Steps
 	public CustomVerification customVerifications;
 
@@ -142,7 +145,9 @@ public class US24001HostOrderPlzValidationTest extends BaseTest {
 		headerSteps.goToCart();
 
 		hostCartSteps.clickGoToShipping();
-		shippingSteps.addNewAddressForBilling(addressModel);
+		contactHostShippingHostSteps.checkItemNotReceivedYet();
+		shippingSteps.clearAndInputNewPostCode(addressModel.getPostCode());
+		shippingSteps.clearAndInputNewHomeTown(addressModel.getHomeTown());
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.goToPaymentMethod();
 		paymentSteps.expandCreditCardForm();
