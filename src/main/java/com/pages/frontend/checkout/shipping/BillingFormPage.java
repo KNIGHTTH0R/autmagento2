@@ -99,6 +99,7 @@ public class BillingFormPage extends AbstractPage {
 
 	public void clearAndInputNewPostCode(String postCode) {
 		element(postcodeInput).waitUntilVisible();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		postcodeInput.clear();
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		postcodeInput.sendKeys(postCode);
@@ -109,7 +110,7 @@ public class BillingFormPage extends AbstractPage {
 		element(cityInput).waitUntilVisible();
 		cityInput.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
-		postcodeInput.clear();
+		cityInput.clear();
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		cityInput.sendKeys(homeTown);
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
