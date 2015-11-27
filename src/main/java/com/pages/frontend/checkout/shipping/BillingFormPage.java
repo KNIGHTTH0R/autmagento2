@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
@@ -86,7 +87,6 @@ public class BillingFormPage extends AbstractPage {
 
 	public void inputPostCode(String postCode) {
 		element(postcodeInput).waitUntilVisible();
-		postcodeInput.clear();
 		postcodeInput.sendKeys(postCode);
 	}
 
@@ -94,8 +94,25 @@ public class BillingFormPage extends AbstractPage {
 		element(cityInput).waitUntilVisible();
 		cityInput.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
-		postcodeInput.clear();
 		cityInput.sendKeys(homeTown);
+	}
+
+	public void clearAndInputNewPostCode(String postCode) {
+		element(postcodeInput).waitUntilVisible();
+		postcodeInput.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		postcodeInput.sendKeys(postCode);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
+
+	public void clearAndInputNewHomeTown(String homeTown) {
+		element(cityInput).waitUntilVisible();
+		cityInput.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		postcodeInput.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		cityInput.sendKeys(homeTown);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	public void selectCountryName(String countryName) {

@@ -58,7 +58,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void addNewAddressForBilling(AddressModel addressModel) {
 		billingFormPage().clickAddNewAddress();
-		
+
 		waitABit(TimeConstants.TIME_CONSTANT);
 		inputBillingStreetAddress(addressModel.getStreetAddress());
 		inputBillingStreetNumber(addressModel.getStreetNumber());
@@ -122,6 +122,16 @@ public class ShippingSteps extends AbstractSteps {
 	public void inputBillingPostCode(String postCode) {
 		billingFormPage().inputPostCode(postCode);
 		waitABit(TimeConstants.TIME_CONSTANT);
+	}
+
+	@Step
+	public void clearAndInputNewPostCode(String postCode) {
+		billingFormPage().clearAndInputNewPostCode(postCode);
+	}
+
+	@Step
+	public void clearAndInputNewHomeTown(String homeTown) {
+		billingFormPage().clearAndInputNewHomeTown(homeTown);
 	}
 
 	@Step

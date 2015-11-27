@@ -160,8 +160,8 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
-		shippingSteps.inputBillingPostCode(addressModel.getPostCode());
-		shippingSteps.inputBillingHomeTown(addressModel.getHomeTown());
+		shippingSteps.clearAndInputNewPostCode(addressModel.getPostCode());
+		shippingSteps.clearAndInputNewHomeTown(addressModel.getHomeTown());
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.goToPaymentMethod();
 		paymentSteps.expandCreditCardForm();
