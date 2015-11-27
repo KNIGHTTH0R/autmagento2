@@ -56,6 +56,8 @@ public class AddressWorkflows {
 
 	// @Step
 	public static void verifyCountry(String address, String countryName) {
+		System.out.println(address);
+		System.out.println(countryName);
 		CustomVerification.verifyTrue("Failure: Don't match !", address.contains(countryName));
 	}
 
