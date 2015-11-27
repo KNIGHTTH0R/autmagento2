@@ -86,12 +86,14 @@ public class BillingFormPage extends AbstractPage {
 
 	public void inputPostCode(String postCode) {
 		element(postcodeInput).waitUntilVisible();
+		postcodeInput.clear();
 		postcodeInput.sendKeys(postCode);
 	}
 
 	public void inputHomeTown(String homeTown) {
 		element(cityInput).waitUntilVisible();
 		cityInput.click();
+		postcodeInput.clear();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		cityInput.sendKeys(homeTown);
 	}
