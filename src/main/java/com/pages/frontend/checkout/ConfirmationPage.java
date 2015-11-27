@@ -56,12 +56,12 @@ public class ConfirmationPage extends AbstractPage {
 		if (splittedText.length == 4) {
 
 			String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
-			String streetName = streetData[0];
-			String streetNumber = streetData[1];
+			String streetName = streetData[0].trim();
+			String streetNumber = streetData[1].trim();
 
 			String[] townData = splittedText[2].split(Separators.COMMA_SEPARATOR);
-			String homeTown = townData[0];
-			String postCode = townData[1];
+			String homeTown = townData[0].trim();
+			String postCode = townData[1].trim();
 
 			result.setStreetAddress(streetName);
 			result.setStreetNumber(streetNumber);
@@ -69,18 +69,18 @@ public class ConfirmationPage extends AbstractPage {
 			result.setHomeTown(homeTown);
 			result.setPostCode(postCode);
 
-			result.setCountryName(splittedText[3]);
+			result.setCountryName(splittedText[3].trim());
 
 		}
 		if (textparse.split(Separators.LINE_SEPARATOR).length == 5) {
 
 			String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
-			String streetName = streetData[0];
-			String streetNumber = streetData[1];
+			String streetName = streetData[0].trim();
+			String streetNumber = streetData[1].trim();
 
 			String[] townData = splittedText[2].split(Separators.COMMA_SEPARATOR);
-			String homeTown = townData[0];
-			String postCode = townData[1];
+			String homeTown = townData[0].trim();
+			String postCode = townData[1].trim();
 
 			result.setStreetAddress(streetName);
 			result.setStreetNumber(streetNumber);
@@ -88,7 +88,7 @@ public class ConfirmationPage extends AbstractPage {
 			result.setHomeTown(homeTown);
 			result.setPostCode(postCode);
 
-			result.setCountryName(splittedText[3]);
+			result.setCountryName(splittedText[3].trim());
 
 		} else {
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page");
