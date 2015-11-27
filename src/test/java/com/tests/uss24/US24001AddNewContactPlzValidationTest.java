@@ -33,7 +33,7 @@ import com.tools.requirements.Application;
 @Story(Application.MassAction.US17_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001AddNewContactToStyleCoachTest extends BaseTest {
+public class US24001AddNewContactPlzValidationTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -48,9 +48,9 @@ public class US24001AddNewContactToStyleCoachTest extends BaseTest {
 
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
+	private String plz;
 	private String username;
 	private String password;
-	private String plz;
 
 	@Qualifier
 	public String getQualifier() {
@@ -69,7 +69,7 @@ public class US24001AddNewContactToStyleCoachTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us9" + File.separator + "us9001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -85,11 +85,10 @@ public class US24001AddNewContactToStyleCoachTest extends BaseTest {
 				}
 			}
 		}
-
 	}
 
 	@Test
-	public void us24001AddNewContactToStyleCoachTest() {
+	public void us24001AddNewContactPlzValidationTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
@@ -98,6 +97,6 @@ public class US24001AddNewContactToStyleCoachTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
-	}
 
+	}
 }

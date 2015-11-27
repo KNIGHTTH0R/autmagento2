@@ -19,74 +19,69 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.ApiCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
-import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
-import com.steps.frontend.PartyDetailsSteps;
+import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
-import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
-import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
-import com.steps.frontend.reports.JewelryBonusHistorySteps;
+import com.steps.frontend.checkout.cart.borrowCart.BorrowCartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.UrlModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.datahandlers.DataGrabber;
+import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
+import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
+import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.AddressWorkflows;
-import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
+import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
+import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 
-@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
-@Story(Application.StyleParty.US10_6.class)
+@WithTag(name = "US16.1 SC borrow products Test", type = "Scenarios")
+@Story(Application.BorrowCart.US16_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
+public class US24001BorrowCartPlzValidationTest extends BaseTest {
 
-	@Steps
-	public HeaderSteps headerSteps;
-	@Steps
-	public HomeSteps homeSteps;
-	@Steps
-	public FooterSteps footerSteps;
-	@Steps
-	public PartyDetailsSteps partyDetailsSteps;
-	@Steps
-	public ShippingSteps shippingSteps;
-	@Steps
-	public PaymentSteps paymentSteps;
-	@Steps
-	public HostCartSteps hostCartSteps;
-	@Steps
-	public ConfirmationSteps confirmationSteps;
-	@Steps
-	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public AddRegularProductsWorkflow addRegularProductsWorkflow;
+	public HeaderSteps headerSteps;
+	@Steps
+	public BorrowCartSteps borrowCartSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public LoungeSteps loungeSteps;
+	@Steps
+	public FooterSteps footerSteps;
+	@Steps
+	public ShippingSteps shippingSteps;
+	@Steps
+	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public AddProductsWorkflow addProductsWorkflow;
+	@Steps
+	public AddBorrowedProductsWorkflow addBorrowedProductsWorkflow;
+	@Steps
+	public PaymentSteps paymentSteps;
+	@Steps
+	public BorrowCartValidationWorkflows borrowCartValidationWorkflows;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
-	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
-	@Steps
-	public DashboardSteps dashboardSteps;
-	@Steps
 	public CustomVerification customVerifications;
 
-	private String username, password, customerName;
-
+	private String username, password;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private static UrlModel urlModel = new UrlModel();
 	private AddressModel addressModel;
 	private ProductDetailedModel genProduct1;
 	private String plz;
@@ -98,26 +93,26 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		RegularUserCartCalculator.wipe();
-		RegularUserDataGrabber.wipe();
+		BorrowCartCalculator.wipe();
+		BorrowDataGrabber.wipe();
+		DataGrabber.wipe();
 
 		addressModel = new AddressModel();
 		addressModel.setPostCode(plz);
 
-		genProduct1 = ApiCalls.createZzzProductModel();
-		genProduct1.setPrice("89.00");
-		ApiCalls.createJbZzzApiProduct(genProduct1);
+		genProduct1 = ApiCalls.createProductModel();
+		genProduct1.setPrice("49.90");
+		ApiCalls.createApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10006.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_16_FOLDER + File.separator + "us16001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			customerName = prop.getProperty("customerName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -130,35 +125,24 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 				}
 			}
 		}
-
-		urlModel = MongoReader.grabUrlModels("US24001CreatePartyWithNewContactPlzValidationTest" + plz).get(0);
-
 	}
 
 	@Test
-	public void us24001OrderForCustomerPlzValidationTest() {
+	public void us24001BorrowCartPlzValidationTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToProfile();
+		loungeSteps.clickGoToBorrowCart();
+		borrowCartSteps.clickWipeCart();
 
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
-		customerRegistrationSteps.wipeHostCart();
-		RegularBasicProductModel productData;
-
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
+		addBorrowedProductsWorkflow.setBorrowedDefaultProductToCart();
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		hostCartSteps.clickGoToShipping();
-
-		shippingPartySectionSteps.checkItemNotReceivedYet();
+		borrowCartSteps.clickGoToShipping();
 
 		shippingSteps.addNewAddressForBilling(addressModel);
 		shippingSteps.setSameAsBilling(true);
@@ -180,7 +164,6 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 		checkoutValidationSteps.verifySuccessMessage();
 
 		customVerifications.printErrors();
-
 	}
 
 }

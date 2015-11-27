@@ -13,49 +13,39 @@ import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
-import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10.3 Edit Party and Verify Not Allowed Countries Test", type = "Scenarios")
-@Story(Application.StyleParty.US10_3.class)
+@WithTag(name = "US9.2 Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
+@Story(Application.HostCart.US9_2.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001CreatePartyWithNewContactPlzValidationTest extends BaseTest {
+public class US24001ClosePartyTest extends BaseTest {
 
-	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps
-	public CreateNewContactSteps createNewContactSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
-	public PartyDetailsSteps partyDetailsSteps;
+	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public PartyCreationSteps partyCreationSteps;
-
+	public PartyDetailsSteps partyDetailsSteps;
+	public static UrlModel urlModel = new UrlModel();
+	public static DateModel dateModel = new DateModel();
 	private String username, password;
-	private CustomerFormModel customerData;
-	private static UrlModel urlModel = new UrlModel();
-	private AddressModel addressData;
 	private String plz;
 
 	@Qualifier
@@ -65,10 +55,6 @@ public class US24001CreatePartyWithNewContactPlzValidationTest extends BaseTest 
 
 	@Before
 	public void setUp() throws Exception {
-
-		customerData = new CustomerFormModel();
-		addressData = new AddressModel();
-		addressData.setPostCode(plz);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -92,24 +78,23 @@ public class US24001CreatePartyWithNewContactPlzValidationTest extends BaseTest 
 			}
 		}
 
+		MongoConnector.cleanCollection(getClass().getSimpleName());
+
+		urlModel = MongoReader.grabUrlModels("US24001CreatePartyWithNewContactPlzValidationTest" + plz).get(0);
+
 	}
 
 	@Test
-	public void us24001CreatePartyWithNewContactPlzValidationTest() {
+	public void us24001ClosePartyTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToCreatePartyWithNewContactPage();
-		createNewContactSteps.fillCreateNewContact(customerData, addressData);
-		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForNewCustomerHost());
-		partyDetailsSteps.verifyPlannedPartyAvailableActions();
-	}
+		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.closeTheParty();
+		partyDetailsSteps.verifyClosedPartyAvailableActions();
 
-	@After
-	public void saveData() {
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + plz);
 	}
 
 }
