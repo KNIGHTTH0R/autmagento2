@@ -2,6 +2,7 @@ package com.pages.frontend;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
@@ -14,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
 
@@ -392,8 +394,19 @@ public class PartyDetailsPage extends AbstractPage {
 	}
 
 	public void verifyThatAutomaticallyClosePartyDateIsCorrect() throws ParseException {
-		Assert.assertTrue("Automatically close date is not correct",
-				closeDateContainer.getText().contains(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy"), "dd. MMM. yyyy", 5)));
-	}
+		if (MongoReader.getContext() == "de") {
 
+			Assert.assertTrue(
+					"Automatically close date is not correct",
+					closeDateContainer.getText().contains(
+							DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy", Locale.GERMANY), "dd. MMM. yyyy", Locale.GERMANY, 5)));
+
+		} else if (MongoReader.getContext() == "es") {
+
+			final Locale spanish = new Locale("es", "ES");
+			Assert.assertTrue("Automatically close date is not correct",
+					closeDateContainer.getText().contains(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy", spanish), "dd. MMM. yyyy", spanish, 5)));
+
+		}
+	}
 }

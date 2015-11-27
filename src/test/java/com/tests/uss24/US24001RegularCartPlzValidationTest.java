@@ -26,54 +26,59 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
-import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
+import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
+import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.CartCalculator;
-import com.tools.datahandlers.DataGrabber;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.FilePaths;
+import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
+import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.AddressWorkflows;
+import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
+import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US3.4 Shop for myself VAT valid and SMB billing and shipping AT", type = "Scenarios")
-@Story(Application.ShopForMyselfCart.US3_4.class)
+@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
+@Story(Application.RegularCart.US8_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
+public class US24001RegularCartPlzValidationTest extends BaseTest {
 
-	@Steps
-	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public HomeSteps homeSteps;
-	@Steps
-	public FooterSteps footerSteps;
-	@Steps
-	public CartSteps cartSteps;
-	@Steps
 	public ShippingSteps shippingSteps;
-	@Steps
-	public ConfirmationSteps confirmationSteps;
-	@Steps
-	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
+	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public ShippingPartySectionSteps shippingPartySectionSteps;
+	@Steps
+	public RegularUserCartSteps regularUserCartSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public CustomerRegistrationSteps customerRegistrationSteps;
+	@Steps
+	public AddRegularProductsWorkflow addRegularProductsWorkflow;
+	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
+	public RegularCartValidationWorkflows regularCartValidationWorkflows;
+	@Steps
 	public CustomVerification customVerifications;
+	@Steps
+	public FooterSteps footerSteps;
 
 	private String username, password;
-	private AddressModel addressModel;
 	private CreditCardModel creditCardData = new CreditCardModel();
+	private ProductDetailedModel genProduct1;
+	private AddressModel addressModel;
 	private String plz;
 
 	@Qualifier
@@ -81,18 +86,16 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 		return plz;
 	}
 
-	private ProductDetailedModel genProduct1;
-
 	@Before
 	public void setUp() throws Exception {
-		CartCalculator.wipe();
-		DataGrabber.wipe();
+		RegularUserCartCalculator.wipe();
+		RegularUserDataGrabber.wipe();
 
 		addressModel = new AddressModel();
 		addressModel.setPostCode(plz);
 
 		genProduct1 = ApiCalls.createProductModel();
-		genProduct1.setPrice("49.90");
+		genProduct1.setPrice("89.00");
 		ApiCalls.createApiProduct(genProduct1);
 
 		Properties prop = new Properties();
@@ -100,7 +103,7 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3004.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -120,21 +123,22 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 	}
 
 	@Test
-	public void us24001ShopForMyselfPlzValidationTest() {
+	public void u24001RegularCartPlzValidationTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		homeSteps.clickonGeneralView();
-		customerRegistrationSteps.wipeCart();
+		homeSteps.goToNewItems();
+		customerRegistrationSteps.wipeRegularCart();
 
-		addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
+		addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		cartSteps.goToShipping();
+		regularUserCartSteps.clickGoToShipping();
+		shippingPartySectionSteps.clickPartyNoOption();
 
 		shippingSteps.addNewAddressForBilling(addressModel);
 		shippingSteps.setSameAsBilling(true);
@@ -156,7 +160,6 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 		checkoutValidationSteps.verifySuccessMessage();
 
 		customVerifications.printErrors();
-
 	}
 
 }

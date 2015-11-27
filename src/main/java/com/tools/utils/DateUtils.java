@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import java.util.Locale;
+
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
@@ -111,6 +113,17 @@ public class DateUtils {
 		return String.valueOf(format.format(calendar.getTime()));
 	}
 
+	public static String addDaysToAAGivenDate(String dateString, String formatString, Locale locale, int days) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString, locale);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DATE, days);
+
+		return String.valueOf(format.format(calendar.getTime()));
+	}
+
 	public static String addHoursToAGivenDate(String dateString, String formatString, int hours) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
 		Date date = format.parse(dateString);
@@ -124,6 +137,12 @@ public class DateUtils {
 
 	public static String getCurrentDate(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
+
+		return String.valueOf(sdf.format(new Date()));
+	}
+
+	public static String getCurrentDate(String format, Locale locale) {
+		DateFormat sdf = new SimpleDateFormat(format, locale);
 
 		return String.valueOf(sdf.format(new Date()));
 	}
@@ -149,12 +168,13 @@ public class DateUtils {
 
 		return String.valueOf(sdf.format(calendar.getTime()));
 	}
+
 	public static String getCurrentDateTwoHoursBack(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		calendar.add(Calendar.HOUR_OF_DAY, -2);
-		
+
 		return String.valueOf(sdf.format(calendar.getTime()));
 	}
 
@@ -230,7 +250,8 @@ public class DateUtils {
 	}
 
 	public static void main(String[] args) throws ParseException {
-		System.out.println(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy"), "dd. MMM. yyyy", 5));
-	} 
+		final Locale spanish = new Locale("es", "ES");
+		System.out.println(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy", Locale.GERMANY), "dd. MMM. yyyy", Locale.GERMANY, 5));
+	}
 
 }
