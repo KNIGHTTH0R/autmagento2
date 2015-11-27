@@ -74,6 +74,7 @@ public class BillingFormPage extends AbstractPage {
 	}
 
 	public void inputStreet1Address(String streetAddress) {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		element(street1Input).waitUntilVisible();
 		street1Input.sendKeys(streetAddress);
 	}
@@ -94,6 +95,7 @@ public class BillingFormPage extends AbstractPage {
 	}
 
 	public void selectCountryName(String countryName) {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		element(countryDropDown).waitUntilVisible();
 		element(countryDropDown).selectByVisibleText(countryName);
 	}

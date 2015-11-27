@@ -58,6 +58,7 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void addNewAddressForBilling(AddressModel addressModel) {
 		billingFormPage().clickAddNewAddress();
+		
 		waitABit(TimeConstants.TIME_CONSTANT);
 		inputBillingStreetAddress(addressModel.getStreetAddress());
 		inputBillingStreetNumber(addressModel.getStreetNumber());
