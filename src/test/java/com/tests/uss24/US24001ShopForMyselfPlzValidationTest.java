@@ -133,10 +133,10 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-		confirmationSteps.agreeAndCheckout();
-
 		AddressModel checkoutStepTwoBillAddress = confirmationSteps.grabBillingData();
 		AddressModel checkoutStepTwoShipAddress = confirmationSteps.grabSippingData();
+
+		confirmationSteps.agreeAndCheckout();
 
 		AddressWorkflows.setBillingAddressModels(addressModel.getPostCode(), checkoutStepTwoBillAddress);
 		AddressWorkflows.validateBillingPostcode();
