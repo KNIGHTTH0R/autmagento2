@@ -101,6 +101,7 @@ public class BillingFormPage extends AbstractPage {
 		element(postcodeInput).waitUntilVisible();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		postcodeInput.clear();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		postcodeInput.sendKeys(postCode);
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
@@ -117,7 +118,6 @@ public class BillingFormPage extends AbstractPage {
 	}
 
 	public void selectCountryName(String countryName) {
-
 		element(countryDropDown).waitUntilVisible();
 		element(countryDropDown).selectByVisibleText(countryName);
 	}
