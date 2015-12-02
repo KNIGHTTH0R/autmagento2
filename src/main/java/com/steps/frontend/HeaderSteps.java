@@ -104,16 +104,17 @@ public class HeaderSteps extends AbstractSteps {
 			wishlistPage().addAllProductsToCArt();
 		}
 	}
-
+	@Step
 	public void redirectToStylistsCustomerOrderReport() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
+	@Step
 	public void redirectToStylistReports() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
 	}
-
+	@Step
 	public void redirectToCartPage() {
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);
 	}
