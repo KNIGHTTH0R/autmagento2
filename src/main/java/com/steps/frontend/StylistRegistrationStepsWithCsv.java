@@ -1,25 +1,27 @@
 package com.steps.frontend;
 
-import com.tools.requirements.AbstractSteps;
-
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.pages.Pages;
 import net.thucydides.core.steps.ScenarioSteps;
 
-public class StylistRegistrationStepsWithCsv extends AbstractSteps {
+import com.pages.frontend.StylistRegistrationPage;
+
+public class StylistRegistrationStepsWithCsv extends ScenarioSteps {
 
 	private static final long serialVersionUID = 1L;
 
 	private String plz;
 
+	StylistRegistrationPage stylistRegistrationPage;
+
 	public StylistRegistrationStepsWithCsv(Pages pages) {
-		new ScenarioSteps(pages);
+		super(pages);
 	}
 
 	@Step
 	public void inputPostCodeCsv() {
-		stylistRegistrationPage().inputPostCode(plz);
-		stylistRegistrationPage().submitStep();
+		stylistRegistrationPage.inputPostCode(plz);
+		stylistRegistrationPage.submitStep();
 	}
 
 }
