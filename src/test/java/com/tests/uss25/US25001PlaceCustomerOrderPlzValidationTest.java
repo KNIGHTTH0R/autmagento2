@@ -11,7 +11,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
-import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
+import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,9 +48,9 @@ import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
-@RunWith(ThucydidesParameterizedRunner.class)
+@RunWith(ThucydidesRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001PlaceCustomerOrderPlzValidationTest extends BaseTest {
+public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;

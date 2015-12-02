@@ -26,7 +26,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US24001RegularCustRegPlzRegistrationTest extends BaseTest {
+public class US25001RegularCustRegPlzRegistrationTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -52,7 +52,8 @@ public class US24001RegularCustRegPlzRegistrationTest extends BaseTest {
 	}
 
 	@Test
-	public void us24001RegularCustRegPlzRegistrationTest() {
+	public void us25001RegularCustRegPlzRegistrationTest() {
+		
 
 		customerRegistrationSteps.fillCreateCustomerFormWithoutPlz(dataModel, addressModel);
 		try {
