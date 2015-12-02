@@ -2,6 +2,7 @@ package com.steps.frontend.registration.party;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -77,6 +78,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
+	@Title("Fill new contact details and address")
 	@Step
 	public void fillCreateNewContactDirectly(CustomerFormModel customerData, AddressModel addressData) {
 		createNewContactPage().firstnameInput(customerData.getFirstName());

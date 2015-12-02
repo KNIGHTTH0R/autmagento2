@@ -153,6 +153,7 @@ public class US24001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 		headerSteps.goToCart();
 
 		orderForCustomerCartSteps.clickGoToShipping();
+		shippingPartySectionSteps.clickPartyNoOption();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 		shippingSteps.clearAndInputNewPostCode(addressData.getPostCode());
 		shippingSteps.clearAndInputNewHomeTown(addressData.getHomeTown());
