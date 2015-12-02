@@ -118,14 +118,13 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	public void redirectToStylistReports() {
 		
-		FirefoxProfile firefoxProfile = new FirefoxProfile();
-		firefoxProfile.setPreference("browser.download.dir","D:\\workshop\\");
-		firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk","application/pdf,text/plain,text/xml,image/jpeg");
-		
-		WebDriver driver = new FirefoxDriver(firefoxProfile);
+//		FirefoxProfile firefoxProfile = new FirefoxProfile();
+//		firefoxProfile.setPreference("browser.download.dir","D:\\workshop\\");
+//		firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk","application/pdf,text/plain,text/xml,image/jpeg");
+//		WebDriver driver = new FirefoxDriver(firefoxProfile);
 		
 		waitABit(TimeConstants.TIME_CONSTANT);
-		driver.get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
 	}
 	@Step
 	public void redirectToCartPage() {
