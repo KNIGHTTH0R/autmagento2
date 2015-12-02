@@ -8,8 +8,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.Qualifier;
-import net.thucydides.junit.annotations.UseTestDataFrom;
-import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
+import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -30,8 +29,8 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
-@RunWith(ThucydidesParameterizedRunner.class)
-@UseTestDataFrom(value = "resources/validPlzTestData.csv")
+@RunWith(ThucydidesRunner.class)
+// @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US25001StylistRegistrationPlzValidationTest extends BaseTest {
 
 	@Steps
@@ -46,24 +45,17 @@ public class US25001StylistRegistrationPlzValidationTest extends BaseTest {
 	private CustomerFormModel customerFormData;
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
-	private String plz;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
 
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
-		customerFormAddress.setPostCode(plz);
 		birthDate.setDate("Feb,1970,12");
 	}
 
 	@Test
-	public void us24001ScRegistrationNewCustomerTest() {
+	public void us25001ScRegistrationNewCustomerTest() {
 		headerSteps.navigateToRegisterForm();
 
 		try {
