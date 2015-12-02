@@ -14,6 +14,7 @@ public class ReportsPage extends AbstractPage {
 	public void downloadProductsOrderedBySku() {
 		element(downloadBySkuLink).waitUntilVisible();
 		downloadBySkuLink.click();
+		waitABit(10000);
 	}
 
 }

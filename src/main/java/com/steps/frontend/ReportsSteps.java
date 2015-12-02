@@ -11,7 +11,6 @@ public class ReportsSteps extends AbstractSteps {
 	@Step
 	public void downloadProductsOrderedBySku() {
 		reportsPage().downloadProductsOrderedBySku();
-		waitABit(10000);
 	}
 
 }

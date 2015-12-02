@@ -22,6 +22,7 @@
 		<runContext>de</runContext>
 		<runEnv>staging-aut</runEnv>
 		<browser.download.dir>${basedir}/resources/downloads</browser.download.dir>
+		<browser.helperApps.neverAsk.saveToDisk>text/csv</browser.helperApps.neverAsk.saveToDisk>
 	</properties>
 
 	<repositories>
