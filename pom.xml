@@ -21,6 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<runContext>de</runContext>
 		<runEnv>staging-aut</runEnv>
+		<browser.download.dir>${basedir}/resources/downloads</browser.download.dir>
 	</properties>
 
 	<repositories>
