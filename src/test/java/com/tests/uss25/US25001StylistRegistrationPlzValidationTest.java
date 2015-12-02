@@ -57,7 +57,7 @@ public class US25001StylistRegistrationPlzValidationTest extends BaseTest {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.fillCreateCustomerFormCsv(customerFormData, customerFormAddress, birthDate.getDate());
 		try {
-			withTestDataFrom("resources/validPlzTestData.csv").run(stylistRegistrationSteps).inputPostCodeCsv();
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(stylistRegistrationSteps).inputPostCodeCsv();
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail("Failed !!!");
