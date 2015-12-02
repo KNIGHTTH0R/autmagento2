@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.pages.Pages;
+import net.thucydides.core.steps.ScenarioSteps;
 
 import org.junit.Assert;
 
@@ -21,9 +22,9 @@ import com.tools.requirements.AbstractSteps;
 import com.tools.utils.FormatterUtils;
 
 public class StylistRegistrationSteps extends AbstractSteps {
-	
+
 	public StylistRegistrationSteps(Pages pages) {
-		super();
+		new ScenarioSteps(pages);
 	}
 
 	private static final long serialVersionUID = 743498685895573421L;
@@ -52,10 +53,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
+
 	@StepGroup
 	@Title("Fill create stylecoach form using csv for plz")
 	public String fillCreateCustomerFormCsv(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
-		
+
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		selectBirthDate(birthDate);
@@ -71,7 +73,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-		
+
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
@@ -244,6 +246,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 
 	}
+
 	@StepGroup
 	@Title("Fill contact details with csv ")
 	public void fillContactDetailsCsv(AddressModel addressData) {
@@ -253,7 +256,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputHomeTown(addressData.getHomeTown());
 		selectCountryName(addressData.getCountryName());
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
-		
+
 	}
 
 	@StepGroup
@@ -301,6 +304,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	public void inputPostCode(String postCode) {
 		stylistRegistrationPage().inputPostCode(postCode);
 	}
+
 	@Step
 	public void inputPostCodeCsv() {
 		stylistRegistrationPage().inputPostCode(plz);
