@@ -138,6 +138,7 @@ public class US24001BorrowCartPlzValidationTest extends BaseTest {
 		borrowCartSteps.clickWipeCart();
 
 		addBorrowedProductsWorkflow.setBorrowedDefaultProductToCart();
+		addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct1, "0.00");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
