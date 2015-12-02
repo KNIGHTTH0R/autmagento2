@@ -109,6 +109,10 @@ public class HeaderSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
+	public void redirectToStylistReports() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
+	}
 
 	public void redirectToCartPage() {
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);

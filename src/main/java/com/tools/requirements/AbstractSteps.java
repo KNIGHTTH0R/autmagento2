@@ -4,7 +4,6 @@ import java.util.Set;
 
 import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.pages.Pages;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import org.junit.Assert;
@@ -58,6 +57,7 @@ import com.pages.frontend.PomProductListPage;
 import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
+import com.pages.frontend.ReportsPage;
 import com.pages.frontend.StarterSetPage;
 import com.pages.frontend.StylistCampaignPage;
 import com.pages.frontend.StylistRegistrationPage;
@@ -375,6 +375,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public CreateCustomerPage createCustomerPage() {
 		return getPages().currentPageAt(CreateCustomerPage.class);
+	}
+	public ReportsPage reportsPage() {
+		return getPages().currentPageAt(ReportsPage.class);
 	}
 
 	public RegistrationMessagePage registrationMessagePage() {
