@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
+import com.steps.frontend.StylistRegistrationStepsWithCsv;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
@@ -38,6 +39,8 @@ public class US25001StylistRegistrationPlzValidationTest extends BaseTest {
 	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
 	@Steps
+	public StylistRegistrationStepsWithCsv stylistRegistrationStepsWithCsv;
+	@Steps
 	public CustomVerification customVerification;
 
 	private CustomerFormModel customerFormData;
@@ -57,7 +60,7 @@ public class US25001StylistRegistrationPlzValidationTest extends BaseTest {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.fillCreateCustomerFormCsv(customerFormData, customerFormAddress, birthDate.getDate());
 		try {
-			withTestDataFrom("resources/invalidPlzTestData.csv").run(stylistRegistrationSteps).inputPostCodeCsv();
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(stylistRegistrationStepsWithCsv).inputPostCodeCsv();
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail("Failed !!!");
