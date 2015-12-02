@@ -369,7 +369,6 @@ public class StylistRegistrationPage extends AbstractPage {
 		} else {
 			Assert.assertFalse("The message and the link were not found", true);
 		}
-
 	}
 
 	public String getStylistRegisterPageTitle() {
