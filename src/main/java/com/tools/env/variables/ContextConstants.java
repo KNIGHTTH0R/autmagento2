@@ -3,7 +3,7 @@ package com.tools.env.variables;
 import com.tools.persistance.MongoReader;
 
 public class ContextConstants {
-
+	public static final String PLZ_ERROR_MESSAGE = MongoReader.getDictionaryItem("PLZ_ERROR_MESSAGE");
 	public static String GUESTS = MongoReader.getDictionaryItem("GUESTS");
 	public static String ORDERS = MongoReader.getDictionaryItem("ORDERS");
 	public static String HOSTESS_BONUS = MongoReader.getDictionaryItem("HOSTESS_BONUS");

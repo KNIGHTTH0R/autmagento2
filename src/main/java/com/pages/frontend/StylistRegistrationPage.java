@@ -383,7 +383,6 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void validateZipValidationErrorMessage() {
 		element(zipValidationMessage).waitUntilVisible();
-		Assert.assertTrue("The message from validation message is not the expected one!!",
-				zipValidationMessage.getText().contains("Textlänge entspricht nicht dem angegebenen Textbereich."));
+		Assert.assertTrue("The message from validation message is not the expected one!!", zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
 	}
 }
