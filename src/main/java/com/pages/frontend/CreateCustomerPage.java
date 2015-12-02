@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -104,6 +105,9 @@ public class CreateCustomerPage extends AbstractPage {
 
 	@FindBy(css = "button[name='search_by_name_submit']")
 	private WebElement searchByNameSubmitButton;
+	
+	@FindBy(id = "advice-validate-length-zip")
+	private WebElement zipValidationMessage;
 
 	// ---------------------------------------------------
 
@@ -172,6 +176,16 @@ public class CreateCustomerPage extends AbstractPage {
 		postCodeInput.clear();
 		postCodeInput.sendKeys(postCode);
 		waitABit(1000);
+	}
+	
+	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
+		element(postCodeInput).waitUntilVisible();
+		postCodeInput.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		element(postCodeInput).typeAndTab(postCode);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		validateZipValidationErrorMessage();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	public void inputPostCodeFromPersonalInfo(String postCode) {
@@ -265,6 +279,10 @@ public class CreateCustomerPage extends AbstractPage {
 		element(styleCoachNameResult).waitUntilVisible();
 		return !styleCoachNameResult.getText().contains(ContextConstants.NO_SC_FOUND_BY_GEOIP);
 
+	}
+	public void validateZipValidationErrorMessage() {
+		element(zipValidationMessage).waitUntilVisible();
+		Assert.assertTrue("The message from validation message is not the expected one!!", zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
 	}
 
 }

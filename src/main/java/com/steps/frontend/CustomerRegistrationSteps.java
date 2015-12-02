@@ -40,6 +40,24 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
+	@StepGroup
+	public void fillCreateCustomerFormCsv(CustomerFormModel customerData, AddressModel addressData) {
+		
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		// checkMember();
+		fillContactDetailsCsv(addressData);
+		searchStylistByGeoip(addressData);
+		checkIAgree();
+		clickCompleteButton();
+	}
 
 	// for distribution and DYSKS
 	
@@ -318,6 +336,17 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		waitABit(1000);
 		selectCountryName(addressData.getCountryName());
 
+	}
+	@StepGroup
+	@Title("Fill contact details")
+	public void fillContactDetailsCsv(AddressModel addressData) {
+		inputStreetAddress(addressData.getStreetAddress());
+		inputStreetNumber(addressData.getStreetNumber());
+		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
+		inputHomeTown(addressData.getHomeTown());
+		waitABit(1000);
+		selectCountryName(addressData.getCountryName());
+		
 	}
 
 	@StepGroup
