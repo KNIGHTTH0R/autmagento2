@@ -22,6 +22,7 @@ import com.tools.utils.FormatterUtils;
 public class StylistRegistrationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 743498685895573421L;
+	private String plz;
 
 	@StepGroup
 	@Title("Fill create stylecoach form")
@@ -41,11 +42,31 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		// clickOnNachahmePaymentMethod();
 		payWithCreditCard();
-		// submitPaymentMethod();
-		// finishPayment();
 
+		String date = FormatterUtils.getAndFormatCurrentDate();
+		return date;
+	}
+	@StepGroup
+	@Title("Fill create stylecoach form using csv for plz")
+	public String fillCreateCustomerFormCsv(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+		
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetailsCsv(addressData);
+		checkNoCoachCheckbox();
+		checkIAgree();
+		submitStep();
+		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		submitStep();
+		selectStarterKit();
+		submitStep();
+		payWithCreditCard();
+		
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
@@ -68,9 +89,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-		// clickOnNachahmePaymentMethod();
-		// submitPaymentMethod();
-		// finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -144,9 +162,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-		// clickOnNachahmePaymentMethod();
-		// submitPaymentMethod();
-		// finishPayment();
 		try {
 			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
 					+ addressData.getHomeTown() + "," + addressData.getPostCode());
@@ -208,9 +223,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		submitStep();
 		payWithCreditCard();
-		// clickOnNachahmePaymentMethod();
-		// submitPaymentMethod();
-		// finishPayment();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -226,6 +238,17 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectCountryName(addressData.getCountryName());
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 
+	}
+	@StepGroup
+	@Title("Fill contact details with csv ")
+	public void fillContactDetailsCsv(AddressModel addressData) {
+		inputStreetAddress(addressData.getStreetAddress());
+		inputStreetNumber(addressData.getStreetNumber());
+		inputPostCodeCsv();
+		inputHomeTown(addressData.getHomeTown());
+		selectCountryName(addressData.getCountryName());
+		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
+		
 	}
 
 	@StepGroup
@@ -259,7 +282,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		verifyLink();
 	}
 
-	// ------------------Secondary Form - create customer - Address fields
 	@Step
 	public void inputStreetAddress(String addressName) {
 		stylistRegistrationPage().inputStreetAddress(addressName);
@@ -273,6 +295,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	@Step
 	public void inputPostCode(String postCode) {
 		stylistRegistrationPage().inputPostCode(postCode);
+	}
+	@Step
+	public void inputPostCodeCsv() {
+		stylistRegistrationPage().inputPostCode(plz);
 	}
 
 	@Step
@@ -329,7 +355,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
-	// ----------------------------Main Form from create customer
 	@Step
 	public void inputStylistEmail(String stylistEmail) {
 		stylistRegistrationPage().inputStylistEmail(stylistEmail);
