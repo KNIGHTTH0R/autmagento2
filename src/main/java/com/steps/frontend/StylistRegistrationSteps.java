@@ -312,8 +312,8 @@ public class StylistRegistrationSteps extends AbstractSteps {
 			stylistRegistrationPage().selectCardType("Visa/Electron");
 		}
 		stylistRegistrationPage().inputCardNumber("4548812049400004");
-		stylistRegistrationPage().inputCardExpiryMonth("12");
-		stylistRegistrationPage().inputCardExpiryYear("2015");
+		stylistRegistrationPage().inputCardExpiryMonth("06");
+		stylistRegistrationPage().inputCardExpiryYear("2016");
 		stylistRegistrationPage().submitCreditCard();
 		stylistRegistrationPage().inputCardCvv("285");
 		stylistRegistrationPage().submitPaymentMethod();
