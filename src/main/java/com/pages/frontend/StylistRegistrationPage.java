@@ -123,6 +123,9 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(id = "fancybox-close")
 	private WebElement closeInfoBox;
 
+	@FindBy(id = "advice-validate-length-zip")
+	private WebElement zipValidationMessage;
+
 	// ---------------------------------------------------
 
 	@FindBy(css = "select#addCreditCardIssuer")
@@ -297,6 +300,14 @@ public class StylistRegistrationPage extends AbstractPage {
 		postCodeInput.sendKeys(postCode);
 	}
 
+	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
+		element(postCodeInput).waitUntilVisible();
+		element(postCodeInput).typeAndTab(postCode);
+		validateZipValidationErrorMessage();
+		postCodeInput.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
+
 	public void inputHomeTown(String homeTown) {
 		cityInput.sendKeys(homeTown);
 	}
@@ -367,5 +378,11 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void validateInfoBoxMessage() {
 		element(infoBox).waitUntilVisible();
 		Assert.assertTrue("The message from infobox is not the expected one!!", infoBox.getText().contains(ContextConstants.CHANGE_WEBSITE_POPUP_MESSAGE));
+	}
+
+	public void validateZipValidationErrorMessage() {
+		element(zipValidationMessage).waitUntilVisible();
+		Assert.assertTrue("The message from validation message is not the expected one!!",
+				zipValidationMessage.getText().contains("Textlänge entspricht nicht dem angegebenen Textbereich."));
 	}
 }

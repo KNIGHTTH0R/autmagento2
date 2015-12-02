@@ -20,7 +20,7 @@ public class StylistRegistrationStepsWithCsv extends ScenarioSteps {
 
 	@Step
 	public void inputPostCodeCsv() {
-		stylistRegistrationPage.inputPostCode(plz);
+		stylistRegistrationPage.inputPostCodeAndValdiateErrorMessage(plz);
 		stylistRegistrationPage.submitStep();
 	}
 
