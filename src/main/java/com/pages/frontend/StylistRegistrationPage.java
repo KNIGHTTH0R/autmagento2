@@ -303,6 +303,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
 		element(postCodeInput).waitUntilVisible();
 		element(postCodeInput).typeAndTab(postCode);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		validateZipValidationErrorMessage();
 		postCodeInput.clear();
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
