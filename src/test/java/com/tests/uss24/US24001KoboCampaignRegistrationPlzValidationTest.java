@@ -43,8 +43,8 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7.11 Kobo Campaign Registration On Master Test ", type = "Scenarios")
-@Story(Application.KoboCampaign.US7_11.class)
+@WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
+@Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US24001KoboCampaignRegistrationPlzValidationTest extends BaseTest {

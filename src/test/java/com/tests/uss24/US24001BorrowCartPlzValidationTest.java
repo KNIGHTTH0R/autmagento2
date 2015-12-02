@@ -45,8 +45,8 @@ import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
 import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 
-@WithTag(name = "US16.1 SC borrow products Test", type = "Scenarios")
-@Story(Application.BorrowCart.US16_1.class)
+@WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
+@Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US24001BorrowCartPlzValidationTest extends BaseTest {

@@ -9,7 +9,6 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
@@ -47,9 +46,8 @@ import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTags({ @WithTag(name = "US15.4 Validate Zzz Product JB for all order states", type = "Scenarios"),
-		@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
-@Story(Application.Newsletter.US15_4.class)
+@WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
+@Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US24001PlaceCustomerOrderPlzValidationTest extends BaseTest {

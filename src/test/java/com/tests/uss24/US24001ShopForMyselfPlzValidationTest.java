@@ -42,8 +42,8 @@ import com.tools.requirements.Application;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.AddressWorkflows;
 
-@WithTag(name = "US3.4 Shop for myself VAT valid and SMB billing and shipping AT", type = "Scenarios")
-@Story(Application.ShopForMyselfCart.US3_4.class)
+@WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
+@Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US24001ShopForMyselfPlzValidationTest extends BaseTest {

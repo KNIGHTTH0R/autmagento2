@@ -33,8 +33,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10.3 Edit Party and Verify Not Allowed Countries Test", type = "Scenarios")
-@Story(Application.StyleParty.US10_3.class)
+@WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
+@Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US24001CreatePartyWithNewContactPlzValidationTest extends BaseTest {

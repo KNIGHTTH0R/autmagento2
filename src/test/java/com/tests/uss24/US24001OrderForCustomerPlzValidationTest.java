@@ -46,8 +46,8 @@ import com.tools.requirements.Application;
 import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
-@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
-@Story(Application.StyleParty.US10_6.class)
+@WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
+@Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US24001OrderForCustomerPlzValidationTest extends BaseTest {

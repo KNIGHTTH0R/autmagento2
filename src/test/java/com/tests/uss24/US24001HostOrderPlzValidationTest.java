@@ -44,8 +44,8 @@ import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US9.1 Place Host Order With 40% Discount and JB Test", type = "Scenarios")
-@Story(Application.HostCart.US9_1.class)
+@WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
+@Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US24001HostOrderPlzValidationTest extends BaseTest {

@@ -314,5 +314,10 @@ public class Application {
 		public class US23_1 {
 		}
 	}
+	@Feature
+	public class PlzValidation {
+		public class US24_1 {
+		}
+	}
 
 }
