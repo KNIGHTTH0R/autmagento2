@@ -8,6 +8,7 @@ public class ReportsSteps extends AbstractSteps {
 
 	public void downloadProductsOrderedBySku() {
 		reportsPage().downloadProductsOrderedBySku();
+		waitABit(10000);
 	}
 
 }
