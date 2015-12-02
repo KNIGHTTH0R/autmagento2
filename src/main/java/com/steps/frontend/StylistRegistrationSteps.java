@@ -56,7 +56,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@StepGroup
 	@Title("Fill create stylecoach form using csv for plz")
-	public String fillCreateCustomerFormCsv(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+	public void fillCreateCustomerFormCsv(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
 
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
@@ -65,17 +65,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		fillContactDetailsCsv(addressData);
-		checkNoCoachCheckbox();
-		checkIAgree();
-		submitStep();
-		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		submitStep();
-		selectStarterKit();
-		submitStep();
-		payWithCreditCard();
-
-		String date = FormatterUtils.getAndFormatCurrentDate();
-		return date;
 	}
 
 	@StepGroup
@@ -236,7 +225,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	@Title("Fill contact details ")
+	@Title("Fill contact details")
 	public void fillContactDetails(AddressModel addressData) {
 		inputStreetAddress(addressData.getStreetAddress());
 		inputStreetNumber(addressData.getStreetNumber());
@@ -248,11 +237,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	@Title("Fill contact details with csv ")
+	@Title("Fill contact details with csv")
 	public void fillContactDetailsCsv(AddressModel addressData) {
 		inputStreetAddress(addressData.getStreetAddress());
 		inputStreetNumber(addressData.getStreetNumber());
-		inputPostCodeCsv();
 		inputHomeTown(addressData.getHomeTown());
 		selectCountryName(addressData.getCountryName());
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
@@ -308,6 +296,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	@Step
 	public void inputPostCodeCsv() {
 		stylistRegistrationPage().inputPostCode(plz);
+		submitStep();
 	}
 
 	@Step

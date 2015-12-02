@@ -7,7 +7,6 @@ import java.io.IOException;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
@@ -30,7 +29,6 @@ import com.tools.requirements.Application;
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesRunner.class)
-// @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US25001StylistRegistrationPlzValidationTest extends BaseTest {
 
 	@Steps
@@ -57,9 +55,9 @@ public class US25001StylistRegistrationPlzValidationTest extends BaseTest {
 	@Test
 	public void us25001ScRegistrationNewCustomerTest() {
 		headerSteps.navigateToRegisterForm();
-
+		stylistRegistrationSteps.fillCreateCustomerFormCsv(customerFormData, customerFormAddress, birthDate.getDate());
 		try {
-			withTestDataFrom("resources/validPlzTestData.csv").run(stylistRegistrationSteps).fillCreateCustomerFormCsv(customerFormData, customerFormAddress, birthDate.getDate());
+			withTestDataFrom("resources/validPlzTestData.csv").run(stylistRegistrationSteps).inputPostCodeCsv();
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail("Failed !!!");
