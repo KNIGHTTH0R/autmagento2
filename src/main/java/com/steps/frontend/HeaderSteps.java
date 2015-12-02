@@ -1,8 +1,14 @@
 package com.steps.frontend;
 
+import java.sql.Driver;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
 import com.tools.env.constants.Separators;
 import com.tools.env.constants.TimeConstants;
@@ -111,8 +117,15 @@ public class HeaderSteps extends AbstractSteps {
 	}
 	@Step
 	public void redirectToStylistReports() {
+		
+		FirefoxProfile firefoxProfile = new FirefoxProfile();
+		firefoxProfile.setPreference("browser.download.dir","D:\\workshop\\");
+		firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk","application/pdf,text/plain,text/xml,image/jpeg");
+		
+		WebDriver driver = new FirefoxDriver(firefoxProfile);
+		
 		waitABit(TimeConstants.TIME_CONSTANT);
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
+		driver.get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
 	}
 	@Step
 	public void redirectToCartPage() {
