@@ -41,7 +41,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		clickCompleteButton();
 	}
 	@StepGroup
-	public void fillCreateCustomerFormCsv(CustomerFormModel customerData, AddressModel addressData) {
+	public void fillCreateCustomerFormWithoutPlz(CustomerFormModel customerData, AddressModel addressData) {
 		
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
@@ -53,7 +53,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputConfirmation(customerData.getPassword());
 		checkParties();
 		// checkMember();
-		fillContactDetailsCsv(addressData);
+		fillContactDetailsWithoutPlz(addressData);
 		searchStylistByGeoip(addressData);
 		checkIAgree();
 		clickCompleteButton();
@@ -339,7 +339,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 	@StepGroup
 	@Title("Fill contact details")
-	public void fillContactDetailsCsv(AddressModel addressData) {
+	public void fillContactDetailsWithoutPlz(AddressModel addressData) {
 		inputStreetAddress(addressData.getStreetAddress());
 		inputStreetNumber(addressData.getStreetNumber());
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());

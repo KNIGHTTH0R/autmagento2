@@ -46,7 +46,7 @@ import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001RegularCartPlzValidationTest extends BaseTest {
+public class US25001RegularCartPlzValidationTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;

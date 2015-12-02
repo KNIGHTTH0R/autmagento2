@@ -51,7 +51,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@StepGroup
 	@Title("Fill create stylecoach form using csv for plz")
-	public void fillCreateCustomerFormCsv(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+	public void fillCreateCustomerFormWithoutPlz(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
 
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
@@ -59,7 +59,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputEmail(customerData.getEmailName());
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
-		fillContactDetailsCsv(addressData);
+		fillContactDetailsWithoutPlz(addressData);
 	}
 
 	@StepGroup
@@ -233,7 +233,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@StepGroup
 	@Title("Fill contact details with csv")
-	public void fillContactDetailsCsv(AddressModel addressData) {
+	public void fillContactDetailsWithoutPlz(AddressModel addressData) {
 		inputStreetAddress(addressData.getStreetAddress());
 		inputStreetNumber(addressData.getStreetNumber());
 		inputHomeTown(addressData.getHomeTown());

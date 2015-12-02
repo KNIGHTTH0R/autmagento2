@@ -54,7 +54,7 @@ public class US24001RegularCustRegPlzRegistrationTest extends BaseTest {
 	@Test
 	public void us24001RegularCustRegPlzRegistrationTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormCsv(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerFormWithoutPlz(dataModel, addressModel);
 		try {
 			withTestDataFrom("resources/invalidPlzTestData.csv").run(customerRegistrationStepsWithCsv).inputPostCodeCsv();
 		} catch (IOException e) {

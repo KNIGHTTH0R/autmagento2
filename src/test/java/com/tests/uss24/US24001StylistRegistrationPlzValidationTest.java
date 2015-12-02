@@ -58,7 +58,7 @@ public class US24001StylistRegistrationPlzValidationTest extends BaseTest {
 	}
 
 	@Test
-	public void us24001ScRegistrationNewCustomerTest() {
+	public void us24001StylistRegistrationPlzValidationTest() {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customVerification.printErrors();
