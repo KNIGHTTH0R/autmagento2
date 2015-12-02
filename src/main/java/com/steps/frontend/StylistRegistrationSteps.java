@@ -23,9 +23,9 @@ import com.tools.utils.FormatterUtils;
 
 public class StylistRegistrationSteps extends AbstractSteps {
 
-	public StylistRegistrationSteps(Pages pages) {
-		new ScenarioSteps(pages);
-	}
+//	public StylistRegistrationSteps(Pages pages) {
+//		new ScenarioSteps(pages);
+//	}
 
 	private static final long serialVersionUID = 743498685895573421L;
 	private String plz;
