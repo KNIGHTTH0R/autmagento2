@@ -142,7 +142,7 @@
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
 						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver.exe</webdriver.chrome.driver>
 						<webdriver.ie.driver>${basedir}/src/main/resources/IEDriverServer.exe</webdriver.ie.driver>
-						<firefox.preferences>browser.download.dir=F:\Work;browser.helperApps.alwaysAsk.force=false;browser.download.manager.showWhenStarting=false;browser.download.manager.alertOnEXEOpen=false;browser.download.manager.useWindow=false;pdfjs.disabled=true;browser.helperApps.neverAsk.saveToDisk=application/msword,
+						<firefox.preferences>browser.download.folderList=2;browser.download.dir=F:\Work;browser.helperApps.alwaysAsk.force=false;browser.download.manager.showWhenStarting=false;browser.download.manager.alertOnEXEOpen=false;browser.download.manager.useWindow=false;pdfjs.disabled=true;browser.helperApps.neverAsk.saveToDisk=application/msword,
 							application/csv, application/ris, text/csv, image/png,
 							application/pdf, text/html, text/plain, application/zip,
 							application/x-zip, application/x-zip-compressed,
