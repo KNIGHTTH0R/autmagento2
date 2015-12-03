@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.thucydides.core.Thucydides;
+import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.junit.runners.ThucydidesRunner;
@@ -14,7 +14,7 @@ import net.thucydides.junit.runners.ThucydidesRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.WebDriver;
 
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -30,6 +30,9 @@ import com.tools.requirements.Application;
 @Story(Application.RegularCart.US8_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US26001DownloadProductsBySkuTest extends BaseTest {
+	
+	@Managed(uniqueSession = false)
+	public WebDriver webdriver;
 
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
@@ -48,6 +51,7 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 

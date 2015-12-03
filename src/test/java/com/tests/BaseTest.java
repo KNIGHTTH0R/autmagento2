@@ -38,12 +38,11 @@ public class BaseTest {
 	@Before
 	public void startComponents() throws IOException {
 		
+		
 		FirefoxProfile profile = new FirefoxProfile();
 		profile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
 		profile.setPreference("browser.download.dir","F:/Work"); 
 		Thucydides.useFirefoxProfile(profile);
-		System.out.println(Thucydides.getFirefoxProfile().toString());
-		System.out.println(Thucydides.getFirefoxProfile().toJson());
 		
 		try {
 			System.err.println("--------------------------------- Test Start---------------------------------------");
