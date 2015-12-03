@@ -70,7 +70,7 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 		}
 
 		FirefoxProfile profile = new FirefoxProfile();
-		profile.setPreference("browser.helperApps.neverAsk.saveToDisk","application/pdf");
+		profile.setPreference("browser.helperApps.neverAsk.saveToDisk","application/pdf;application/xml");
 		profile.setPreference("browser.download.dir","/resources/downloads"); 
 		Thucydides.useFirefoxProfile(profile);
 
