@@ -16,7 +16,7 @@ public class ReportsSteps extends AbstractSteps {
 	@Step
 	public void downloadProductsOrderedBySku() throws IOException {
 
-		File downloadsdirectory = new File("/resources/downloads");
+		File downloadsdirectory = new File("F:/CIRemote/JenkinsCIPippaJean/workspace/RUN_SINGLE_TEST/resources/downloads");
 		FileUtils.cleanDirectory(downloadsdirectory);
 		reportsPage().downloadProductsOrderedBySku();
 	}
