@@ -73,6 +73,7 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 		profile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
 		profile.setPreference("browser.download.dir","F:/Work"); 
 		Thucydides.useFirefoxProfile(profile);
+		System.out.println(Thucydides.getFirefoxProfile());
 
 	}
 
