@@ -117,7 +117,6 @@ public class HeaderSteps extends AbstractSteps {
 	}
 	@Step
 	public void redirectToStylistReports() {
-		
 		waitABit(TimeConstants.TIME_CONSTANT);
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
 	}
