@@ -13,7 +13,6 @@ import net.thucydides.core.pages.Pages;
 
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
 import com.connectors.gmail.GmailConnector;
@@ -42,8 +41,7 @@ public class BaseTest {
 		profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
 		profile.setPreference("browser.download.dir", "F:/Work");
 		Thucydides.useFirefoxProfile(profile);
-
-		webdriver = new FirefoxDriver(profile);
+		Thucydides.getFirefoxProfile().setPreference("browser.helperApps.neverAsk.saveToDisk", "text/html,application/xhtml+xml,application/xml;application/pdf");
 
 		try {
 			System.err.println("--------------------------------- Test Start---------------------------------------");
