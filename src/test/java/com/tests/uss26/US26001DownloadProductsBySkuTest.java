@@ -32,9 +32,6 @@ import com.tools.requirements.Application;
 @RunWith(ThucydidesRunner.class)
 public class US26001DownloadProductsBySkuTest extends BaseTest {
 	
-	@Managed(uniqueSession = false)
-	public WebDriver webdriver;
-
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
 	@Steps
