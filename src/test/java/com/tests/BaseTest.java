@@ -4,15 +4,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.util.Properties;
 
+import net.thucydides.core.Thucydides;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.ManagedPages;
 import net.thucydides.core.pages.Pages;
 
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
@@ -35,7 +36,15 @@ public class BaseTest {
 	public GmailConnector gmailConnector;
 
 	@Before
-	public void startComponents() throws MalformedURLException {
+	public void startComponents() throws IOException {
+		
+		FirefoxProfile profile = new FirefoxProfile();
+		profile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+		profile.setPreference("browser.download.dir","F:/Work"); 
+		Thucydides.useFirefoxProfile(profile);
+		System.out.println(Thucydides.getFirefoxProfile().toString());
+		System.out.println(Thucydides.getFirefoxProfile().toJson());
+		
 		try {
 			System.err.println("--------------------------------- Test Start---------------------------------------");
 
