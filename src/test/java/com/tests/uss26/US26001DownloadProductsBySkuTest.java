@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.thucydides.core.Thucydides;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.junit.runners.ThucydidesRunner;
@@ -13,6 +14,7 @@ import net.thucydides.junit.runners.ThucydidesRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -66,6 +68,11 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 				}
 			}
 		}
+
+		FirefoxProfile profile = new FirefoxProfile();
+		profile.setPreference("browser.helperApps.neverAsk.saveToDisk","application/pdf");
+		profile.setPreference("browser.download.dir","/resources/downloads"); 
+		Thucydides.useFirefoxProfile(profile);
 
 	}
 

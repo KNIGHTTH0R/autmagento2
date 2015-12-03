@@ -376,6 +376,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public CreateCustomerPage createCustomerPage() {
 		return getPages().currentPageAt(CreateCustomerPage.class);
 	}
+
 	public ReportsPage reportsPage() {
 		return getPages().currentPageAt(ReportsPage.class);
 	}
