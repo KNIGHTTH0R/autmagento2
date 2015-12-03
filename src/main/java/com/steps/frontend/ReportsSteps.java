@@ -21,12 +21,12 @@ public class ReportsSteps extends AbstractSteps {
 	@Step
 	public void downloadProductsOrderedBySku() throws IOException {
 
-		String projectBuildPath = System.getProperty("project.build.directory");
-		System.out.println(projectBuildPath);
-		projectBuildPath = projectBuildPath.replace("/target", "");
-		System.out.println(projectBuildPath);
+		String basedir = System.getProperty("basedir");
+		System.out.println(basedir);
+//		basedir = basedir.replace("/target", "");
+		System.out.println(basedir);
 
-		File downloadsdirectory = new File(projectBuildPath + "/resources/downloads");
+		File downloadsdirectory = new File(basedir + "/resources/downloads");
 		FileUtils.cleanDirectory(downloadsdirectory);
 		reportsPage().downloadProductsOrderedBySku();
 	}
