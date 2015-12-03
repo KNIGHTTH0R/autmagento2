@@ -13,10 +13,19 @@ public class ReportsSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * the download directory is configured in pom to be "resources/downloads";
+	 * we will clean that directory each time before another download
+	 *
+	 */
 	@Step
 	public void downloadProductsOrderedBySku() throws IOException {
 
 		String projectBuildPath = System.getProperty("project.build.directory").replace("\target", "");
+		System.out.println(projectBuildPath);
+		projectBuildPath = projectBuildPath.replace("\target", "");
+		System.out.println(projectBuildPath);
+		projectBuildPath = projectBuildPath.replace("/target", "");
 		System.out.println(projectBuildPath);
 
 		File downloadsdirectory = new File(projectBuildPath + "/resources/downloads");
