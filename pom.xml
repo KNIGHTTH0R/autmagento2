@@ -136,6 +136,7 @@
 						<include>**/*${runSuite}.class</include>
 					</includes>
 					<systemPropertyVariables>
+						<project.build.directory>${project.build.directory}</project.build.directory>
 						<runContext>${runContext}</runContext>
 						<runEnv>${runEnv}</runEnv>
 						<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
