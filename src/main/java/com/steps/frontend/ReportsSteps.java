@@ -21,9 +21,7 @@ public class ReportsSteps extends AbstractSteps {
 	@Step
 	public void downloadProductsOrderedBySku() throws IOException {
 
-		String projectBuildPath = System.getProperty("project.build.directory").replace("\target", "");
-		System.out.println(projectBuildPath);
-		projectBuildPath = projectBuildPath.replace("\target", "");
+		String projectBuildPath = System.getProperty("project.build.directory");
 		System.out.println(projectBuildPath);
 		projectBuildPath = projectBuildPath.replace("/target", "");
 		System.out.println(projectBuildPath);
