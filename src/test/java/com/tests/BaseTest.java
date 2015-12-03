@@ -13,6 +13,7 @@ import net.thucydides.core.pages.Pages;
 
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
 import com.connectors.gmail.GmailConnector;
@@ -27,7 +28,6 @@ import com.tools.persistance.MongoWriter;
 public class BaseTest {
 	@Managed(uniqueSession = false)
 	public WebDriver webdriver;
-	
 
 	@ManagedPages(defaultUrl = "http://staging-aut.pippajean.com/customer/account/login/")
 	public Pages pages;
@@ -37,13 +37,14 @@ public class BaseTest {
 
 	@Before
 	public void startComponents() throws IOException {
-		
-		
+
 		FirefoxProfile profile = new FirefoxProfile();
-		profile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-		profile.setPreference("browser.download.dir","F:/Work"); 
+		profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+		profile.setPreference("browser.download.dir", "F:/Work");
 		Thucydides.useFirefoxProfile(profile);
-		
+
+		webdriver = new FirefoxDriver(profile);
+
 		try {
 			System.err.println("--------------------------------- Test Start---------------------------------------");
 
