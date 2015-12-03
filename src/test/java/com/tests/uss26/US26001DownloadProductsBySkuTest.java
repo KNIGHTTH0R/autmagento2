@@ -71,7 +71,7 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 	}
 
 	@Test
-	public void us26001DownloadProductsBySkuTest() {
+	public void us26001DownloadProductsBySkuTest() throws IOException {
 
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
