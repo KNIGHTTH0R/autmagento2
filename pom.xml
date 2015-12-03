@@ -142,7 +142,7 @@
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
 						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver.exe</webdriver.chrome.driver>
 						<webdriver.ie.driver>${basedir}/src/main/resources/IEDriverServer.exe</webdriver.ie.driver>
-						<firefox.preferences>browser.download.folderList=2;browser.download.dir=F:\Work;browser.helperApps.alwaysAsk.force=false;browser.download.manager.showWhenStarting=false</firefox.preferences>
+						<firefox.preferences>browser.download.folderList=2;browser.download.dir=F:\Work;browser.helperApps.alwaysAsk.force=false;browser.download.manager.showWhenStarting=false;browser.helperApps.neverAsk.saveToDisk=application/octet-stream,application/pdf;browser.download.manager.focusWhenStarting=false;browser.download.manager.useWindow=false;browser.download.manager.closeWhenDone=true;browser.download.manager.showWhenStarting=false;</firefox.preferences>
 <!-- 						<firefox.preferences>browser.download.folderList=2;browser.download.dir=F:\Work;browser.helperApps.neverAsk.saveToDisk=text/html,application/xhtml+xml,application/xml;application/pdf;</firefox.preferences> -->
 					</systemPropertyVariables>
 				</configuration>
