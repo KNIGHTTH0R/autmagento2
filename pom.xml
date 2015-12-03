@@ -142,6 +142,7 @@
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
 						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver.exe</webdriver.chrome.driver>
 						<webdriver.ie.driver>${basedir}/src/main/resources/IEDriverServer.exe</webdriver.ie.driver>
+						<firefox.preferences>browser.download.folderList=2;browser.download.dir=F:\Work;browser.helperApps.neverAsk.saveToDisk=text/html,application/xhtml+xml,application/xml;application/pdf</firefox.preferences>
 					</systemPropertyVariables>
 				</configuration>
 				<executions>
