@@ -181,7 +181,6 @@ public class HeaderSteps extends AbstractSteps {
 		partyCreationPage().clickOrderForHostess();
 	}
 
-	@Step
 	public boolean succesfullLogin() {
 		return headerPage().succesfullLogin();
 	}
