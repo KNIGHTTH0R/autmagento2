@@ -24,7 +24,6 @@ import com.tools.CustomVerification;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PdfUtils;
 
 @Story(Application.RegularCart.US8_3.class)
 @RunWith(ThucydidesRunner.class)
@@ -81,6 +80,6 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 		}
 		headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
-		reportsSteps.verifyThatProductHasNotAvailableForTheMomentStatus("K007GO");
+		reportsSteps.verifyThatProductHasNotAvailableForTheMomentStatus("R099BK-21");
 	}
 }
