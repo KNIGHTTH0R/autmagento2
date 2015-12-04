@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApiCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -21,6 +22,7 @@ import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -43,9 +45,14 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 	public CustomVerification customVerifications;
 
 	private String stylistUsername, stylistPassword;
+	private ProductDetailedModel genProduct1;
 
 	@Before
 	public void setUp() throws Exception {
+		
+		genProduct1 = ApiCalls.createProductModel();
+		genProduct1.setStockData(ApiCalls.createNotAvailableForTheMomentStockData());
+		ApiCalls.createApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -80,6 +87,6 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 		}
 		headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
-		reportsSteps.verifyThatProductHasNotAvailableForTheMomentStatus("R099BK-21");
+		reportsSteps.verifyThatProductHasNotAvailableForTheMomentStatus(genProduct1.getSku());
 	}
 }

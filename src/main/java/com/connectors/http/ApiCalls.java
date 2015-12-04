@@ -264,6 +264,60 @@ public class ApiCalls {
 
 	}
 
+	public static StockDataModel createNotAvailableForTheMomentStockData() {
+
+		StockDataModel stockModel = new StockDataModel();
+
+		stockModel.setQty("0");
+		stockModel.setIsInStock("0");
+		stockModel.setManageStock("1");
+		stockModel.setUseConfigManageStock("1");
+		stockModel.setMinQty("");
+		stockModel.setUseConfigMinQty("1");
+		stockModel.setMinSaleQty("");
+		stockModel.setUseConfigMinSaleQty("1");
+		stockModel.setMaxSaleQty("");
+		stockModel.setUseConfigMaxSaleQty("");
+		stockModel.setIsQtyDecimal("0");
+		stockModel.setBackorders("");
+		stockModel.setUseConfigBackorders("1");
+		stockModel.setNotifyStockQty("");
+		stockModel.setUseConfigNotifyStockQty("1");
+		stockModel.setIsDiscontinued("0");
+		stockModel.setEarliestAvailability("");
+		stockModel.setMaximumPercentageToBorrow("");
+		stockModel.setUseConfigMaximumPercentageToBorrow("80");
+
+		return stockModel;
+	}
+
+	public static StockDataModel createNotAvailableStockData() {
+
+		StockDataModel stockModel = new StockDataModel();
+
+		stockModel.setQty("0");
+		stockModel.setIsInStock("0");
+		stockModel.setManageStock("1");
+		stockModel.setUseConfigManageStock("1");
+		stockModel.setMinQty("");
+		stockModel.setUseConfigMinQty("1");
+		stockModel.setMinSaleQty("");
+		stockModel.setUseConfigMinSaleQty("1");
+		stockModel.setMaxSaleQty("");
+		stockModel.setUseConfigMaxSaleQty("");
+		stockModel.setIsQtyDecimal("0");
+		stockModel.setBackorders("");
+		stockModel.setUseConfigBackorders("1");
+		stockModel.setNotifyStockQty("");
+		stockModel.setUseConfigNotifyStockQty("1");
+		stockModel.setIsDiscontinued("1");
+		stockModel.setEarliestAvailability("");
+		stockModel.setMaximumPercentageToBorrow("");
+		stockModel.setUseConfigMaximumPercentageToBorrow("80");
+
+		return stockModel;
+	}
+
 	public static String createApiProduct(ProductDetailedModel product) {
 
 		String resultID = null;
