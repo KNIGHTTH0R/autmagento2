@@ -63,6 +63,10 @@ public class SoapKeys {
 	public static final String NEWS_FROM_DATE = "news_from_date";
 	public static final String NEWS_TO_DATE = "news_to_date";
 	
+	// update Product Keys
+	public static final String UPDATE_PRODUCT_CATALOG_CONTAINER = "catalogProductUpdateRequestParam";
+	public static final String PRODUCT_ID = "productId";
+	
 	// Stock Data
 	public static final String STOCK_DATA = "stock_data";
 	public static final String QTY = "qty";

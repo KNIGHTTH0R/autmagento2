@@ -263,6 +263,35 @@ public class ApiCalls {
 		return product;
 
 	}
+	public static ProductDetailedModel updateProductStockModel() {
+		ProductDetailedModel product = new ProductDetailedModel();
+		
+		StockDataModel stockModel = new StockDataModel();
+		stockModel.setQty("1000");
+		stockModel.setIsInStock("1");
+		stockModel.setManageStock("1");
+		stockModel.setUseConfigManageStock("1");
+		stockModel.setMinQty("");
+		stockModel.setUseConfigMinQty("1");
+		stockModel.setMinSaleQty("");
+		stockModel.setUseConfigMinSaleQty("1");
+		stockModel.setMaxSaleQty("");
+		stockModel.setUseConfigMaxSaleQty("");
+		stockModel.setIsQtyDecimal("0");
+		stockModel.setBackorders("");
+		stockModel.setUseConfigBackorders("1");
+		stockModel.setNotifyStockQty("");
+		stockModel.setUseConfigNotifyStockQty("1");
+		stockModel.setIsDiscontinued("0");
+		stockModel.setEarliestAvailability("");
+		stockModel.setMaximumPercentageToBorrow("");
+		stockModel.setUseConfigMaximumPercentageToBorrow("80");
+		product.setStockData(stockModel);
+		
+		
+		return product;
+		
+	}
 
 	public static StockDataModel createNotAvailableForTheMomentStockData() {
 
@@ -331,6 +360,21 @@ public class ApiCalls {
 			e.printStackTrace();
 		}
 
+		return resultID;
+	}
+	public static String updateApiProduct(ProductDetailedModel product, String productId) {
+		
+		String resultID = null;
+		try {
+			SOAPMessage response = HttpSoapConnector.soapUpdateProduct(product, productId);
+			resultID = extractResult(response);
+			System.out.println("resultID: " + resultID);
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return resultID;
 	}
 

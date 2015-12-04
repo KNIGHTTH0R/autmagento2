@@ -46,6 +46,17 @@ public class HttpSoapConnector {
 		return soapResponse;
 	}
 
+	public static SOAPMessage soapUpdateProduct(ProductDetailedModel product, String productId) throws SOAPException, IOException {
+		String sessID = performLogin();
+		System.out.println("Sesion id :" + sessID);
+
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(updateProduct(product, sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+
 	public static SOAPMessage soapCreateJbZzzProduct(ProductDetailedModel product) throws SOAPException, IOException {
 		String sessID = performLogin();
 		System.out.println("Sesion id :" + sessID);
@@ -85,7 +96,8 @@ public class HttpSoapConnector {
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		// SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID,
+		// productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
 		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), "http://staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
@@ -186,6 +198,28 @@ public class HttpSoapConnector {
 
 		SOAPElement store = catalogProductCreateRequestParam.addChildElement(SoapKeys.STORE);
 		store.addTextNode(product.getStore());
+
+		soapMessage.saveChanges();
+
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+
+	private static SOAPMessage updateProduct(ProductDetailedModel product, String ssID, String productId) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement catalogProductUpdateRequestParam = soapBody.addChildElement(SoapKeys.UPDATE_PRODUCT_CATALOG_CONTAINER, SoapKeys.URN_PREFIX);
+		SOAPElement sessionID = catalogProductUpdateRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+		SOAPElement productIdNode = catalogProductUpdateRequestParam.addChildElement(SoapKeys.PRODUCT_ID);
+		productIdNode.addTextNode(productId);
+		
+		// Add product data here
+		catalogProductUpdateRequestParam = generateProductUpdateStockMessage(catalogProductUpdateRequestParam, product);
 
 		soapMessage.saveChanges();
 
@@ -352,6 +386,15 @@ public class HttpSoapConnector {
 		productData.addChildElement(generateTierPriceMessage(product.getTierPriceList(), productData));
 
 		// Lists and other objects
+		return productData;
+
+	}
+
+	private static SOAPElement generateProductUpdateStockMessage(SOAPElement bodyElement, ProductDetailedModel product) throws SOAPException {
+		SOAPElement productData = bodyElement.addChildElement(SoapKeys.PRODUCT_DATA);
+
+		productData.addChildElement(generateStockDataMessage(product.getStockData(), productData));
+
 		return productData;
 
 	}
@@ -535,7 +578,6 @@ public class HttpSoapConnector {
 	}
 
 	public static void main(String args[]) throws SOAPException, IOException {
-
 
 	}
 }
