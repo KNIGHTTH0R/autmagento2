@@ -8,7 +8,8 @@ import org.apache.pdfbox.util.PDFTextStripperByArea;
 
 public class PdfUtils {
 
-	public static void readPdf(String file) {
+	public static String readPdf(String file) {
+		String st = "";
 		try {
 			PDDocument document = null;
 			document = PDDocument.load(new File(file));
@@ -17,12 +18,14 @@ public class PdfUtils {
 				PDFTextStripperByArea stripper = new PDFTextStripperByArea();
 				stripper.setSortByPosition(true);
 				PDFTextStripper Tstripper = new PDFTextStripper();
-				String st = Tstripper.getText(document);
+				st = Tstripper.getText(document);
 				System.out.println("Text:" + st);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		return st;
 	}
 
 }

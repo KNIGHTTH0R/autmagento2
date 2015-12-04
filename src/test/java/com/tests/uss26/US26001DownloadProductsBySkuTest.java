@@ -29,7 +29,7 @@ import com.tools.utils.PdfUtils;
 @Story(Application.RegularCart.US8_3.class)
 @RunWith(ThucydidesRunner.class)
 public class US26001DownloadProductsBySkuTest extends BaseTest {
-	
+
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
 	@Steps
@@ -47,7 +47,7 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -81,15 +81,6 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 		}
 		headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
-		
-		
-		String basedir = System.getProperty("basedir");
-		String downloadsdirectory = basedir + "/resources/downloads/";
-		System.out.println(downloadsdirectory);
-		
-		File folder = new File(downloadsdirectory);
-		File[] listOfFiles = folder.listFiles();
-		System.out.println(downloadsdirectory + listOfFiles[0].getName());
-		PdfUtils.readPdf(downloadsdirectory + listOfFiles[0].getName());
+		reportsSteps.verifyThatProductHasNotAvailableForTheMomentStatus("K007GO");
 	}
 }

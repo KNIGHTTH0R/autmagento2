@@ -1,14 +1,8 @@
 package com.steps.frontend;
 
-import java.sql.Driver;
-
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 
 import com.tools.env.constants.Separators;
 import com.tools.env.constants.TimeConstants;
