@@ -84,18 +84,12 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 		
 		
 		String basedir = System.getProperty("basedir");
-		String downloadsdirectory = basedir + "/resources/downloads";
+		String downloadsdirectory = basedir + "/resources/downloads/";
 		System.out.println(downloadsdirectory);
 		
 		File folder = new File(downloadsdirectory);
 		File[] listOfFiles = folder.listFiles();
-		
-		for (File file : listOfFiles) {
-		    if (file.isFile()) {
-		        System.out.println(file.getName());
-		    }
-		}
-		
-		PdfUtils.readPdf(downloadsdirectory);
+		System.out.println(downloadsdirectory + listOfFiles[0].getName());
+		PdfUtils.readPdf(downloadsdirectory + listOfFiles[0].getName());
 	}
 }
