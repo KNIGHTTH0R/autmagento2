@@ -4,12 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
@@ -24,14 +23,13 @@ import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
-import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@Story(Application.RegularCart.US8_3.class)
+@WithTag(name = "US26.1 Check products in availability report", type = "Scenarios")
+@Story(Application.AvailabilityReport.US26_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US26001VerifyProdNotAvailableInAvailabilityReportTest extends BaseTest {
 
@@ -52,7 +50,6 @@ public class US26001VerifyProdNotAvailableInAvailabilityReportTest extends BaseT
 	private String stylistUsername, stylistPassword;
 	private ProductDetailedModel updatedProduct;
 	private String incrementId;
-	
 
 	@Before
 	public void setUp() throws Exception {

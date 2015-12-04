@@ -207,6 +207,11 @@ public class Application {
 		public class US21_1 {
 		}
 	}
+	@Feature
+	public class AvailabilityReport {
+		public class US26_1 {
+		}
+	}
 
 	@Feature
 	public class NewIpLogicStylecoachPerformance {
