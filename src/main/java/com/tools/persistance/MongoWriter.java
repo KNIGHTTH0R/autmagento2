@@ -34,6 +34,7 @@ import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.newsletter.SubscriberModel;
 import com.tools.data.soap.DBStylistModel;
+import com.tools.data.soap.ProductDetailedModel;
 
 public class MongoWriter extends MongoConnector {
 
@@ -116,7 +117,7 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
-	
+
 	public static void saveStockInfoModel(SyncInfoModel syncInfoModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.STOCK_INFO_MODEL);
@@ -133,7 +134,7 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
-	
+
 	public static void saveJewerlyHistoryModel(JewelryHistoryModel jewelryHistoryModel, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.JEWERLY_HISTORY_MODEL);
@@ -259,6 +260,17 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.TYPE, product.getType());
 		document.put(MongoTableKeys.PRICE, product.getPrice());
 		document.put(MongoTableKeys.QUANTITY, product.getQuantity());
+
+		table.insert(document);
+	}
+
+	public static void saveProductDetailedModel(ProductDetailedModel product, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.PRODUCT_DETAILED_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
+		document.put(MongoTableKeys.PRODUCT_CODE, product.getSku());
 
 		table.insert(document);
 	}

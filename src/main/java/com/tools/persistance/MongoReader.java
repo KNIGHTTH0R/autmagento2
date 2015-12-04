@@ -33,6 +33,7 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.DBStylistModel;
+import com.tools.data.soap.ProductDetailedModel;
 
 public class MongoReader extends MongoConnector {
 
@@ -465,6 +466,31 @@ public class MongoReader extends MongoConnector {
 				result.setPriceIP(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
 				result.setDiscountClass(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_CLASS));
 
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+	public static List<ProductDetailedModel> grabProductDetailedModel(String testName) {
+		DBObject dbObject = null;
+		List<ProductDetailedModel> itemList = new ArrayList<ProductDetailedModel>();
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.PRODUCT_DETAILED_MODEL).find();
+		
+		try {
+			while (cursor.hasNext()) {
+				ProductDetailedModel result = new ProductDetailedModel();
+				dbObject = cursor.next();
+				
+				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
+				result.setSku(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
+			
+				
 				itemList.add(result);
 			}
 		} catch (Exception e) {

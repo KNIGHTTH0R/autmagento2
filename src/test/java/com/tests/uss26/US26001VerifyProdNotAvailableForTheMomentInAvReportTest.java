@@ -10,6 +10,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,11 +26,12 @@ import com.tools.CustomVerification;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @Story(Application.RegularCart.US8_3.class)
 @RunWith(ThucydidesRunner.class)
-public class US26001DownloadProductsBySkuTest extends BaseTest {
+public class US26001VerifyProdNotAvailableForTheMomentInAvReportTest extends BaseTest {
 
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
@@ -46,13 +48,14 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 
 	private String stylistUsername, stylistPassword;
 	private ProductDetailedModel genProduct1;
+	private String incrementId;
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		genProduct1 = ApiCalls.createProductModel();
 		genProduct1.setStockData(ApiCalls.createNotAvailableForTheMomentStockData());
-		ApiCalls.createApiProduct(genProduct1);
+		incrementId = ApiCalls.createApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -78,7 +81,7 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 	}
 
 	@Test
-	public void us26001DownloadProductsBySkuTest() throws IOException {
+	public void us26001VerifyProdNotAvailableForTheMomentInAvReportTest() throws IOException {
 
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
@@ -88,5 +91,11 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 		headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
 		reportsSteps.verifyThatProductHasNotAvailableForTheMomentStatus(genProduct1.getSku());
+	}
+
+	@After
+	public void tearDown() {
+		MongoWriter.saveProductDetailedModel(genProduct1, getClass().getSimpleName());
+		MongoWriter.saveIncrementId(incrementId, getClass().getSimpleName());
 	}
 }

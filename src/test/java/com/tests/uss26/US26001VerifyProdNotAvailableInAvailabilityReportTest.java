@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -22,6 +24,8 @@ import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.SoapKeys;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -44,15 +48,21 @@ public class US26001VerifyProdNotAvailableInAvailabilityReportTest extends BaseT
 	@Steps
 	public CustomVerification customVerifications;
 
+	private static ProductDetailedModel generatedProduct = new ProductDetailedModel();
 	private String stylistUsername, stylistPassword;
-	private ProductDetailedModel genProduct1;
+	private ProductDetailedModel updatedProduct;
+	private String incrementId;
+	
 
 	@Before
 	public void setUp() throws Exception {
-		
-		genProduct1 = ApiCalls.updateProductStockModel();
-		genProduct1.setStockData(ApiCalls.createNotAvailableStockData());
-		ApiCalls.updateApiProduct(genProduct1,"GBAEJMZSF");
+
+		generatedProduct = MongoReader.grabProductDetailedModel("US26001VerifyProdNotAvailableForTheMomentInAvReportTest").get(0);
+		incrementId = MongoReader.grabIncrementId("US26001VerifyProdNotAvailableForTheMomentInAvReportTest");
+
+		updatedProduct = ApiCalls.updateProductStockModel();
+		updatedProduct.setStockData(ApiCalls.createNotAvailableStockData());
+		ApiCalls.updateApiProduct(updatedProduct, incrementId);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -78,7 +88,7 @@ public class US26001VerifyProdNotAvailableInAvailabilityReportTest extends BaseT
 	}
 
 	@Test
-	public void us26001DownloadProductsBySkuTest() throws IOException {
+	public void us26001VerifyProdNotAvailableInAvailabilityReportTest() throws IOException {
 
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
@@ -87,6 +97,6 @@ public class US26001VerifyProdNotAvailableInAvailabilityReportTest extends BaseT
 		}
 		headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
-		reportsSteps.verifyThatProductHasNotAvailableForTheMomentStatus(genProduct1.getSku());
+		reportsSteps.verifyThatProductHasNotAvailableStatus(generatedProduct.getSku());
 	}
 }

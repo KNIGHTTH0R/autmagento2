@@ -91,6 +91,8 @@ public class MongoTableKeys {
 	public static final String IP_POINTS = "ipPoints";
 	public static final String DISCOUNT_LIST = "discounts";
 
+	public static final String PRODUCT_DETAILED_MODEL = "ProductDetailedModel";
+	
 	public static final String PRODUCT_BASIC_MODEL = "ProductBasicModel";
 	public static final String NAME = "name";
 	public static final String TYPE = "type";
