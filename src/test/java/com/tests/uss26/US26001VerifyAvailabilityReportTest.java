@@ -24,11 +24,10 @@ import com.tools.CustomVerification;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PdfUtils;
 
 @Story(Application.RegularCart.US8_3.class)
 @RunWith(ThucydidesRunner.class)
-public class US26001DownloadProductsBySkuTest extends BaseTest {
+public class US26001VerifyAvailabilityReportTest extends BaseTest {
 	
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
@@ -72,7 +71,7 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 	}
 
 	@Test
-	public void us26001DownloadProductsBySkuTest() throws IOException {
+	public void us26001VerifyAvailabilityReportTest() throws IOException {
 
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
@@ -81,21 +80,5 @@ public class US26001DownloadProductsBySkuTest extends BaseTest {
 		}
 		headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
-		
-		
-		String basedir = System.getProperty("basedir");
-		String downloadsdirectory = basedir + "/resources/downloads";
-		System.out.println(downloadsdirectory);
-		
-		File folder = new File(downloadsdirectory);
-		File[] listOfFiles = folder.listFiles();
-		
-		for (File file : listOfFiles) {
-		    if (file.isFile()) {
-		        System.out.println(file.getName());
-		    }
-		}
-		
-		PdfUtils.readPdf(downloadsdirectory);
 	}
 }
