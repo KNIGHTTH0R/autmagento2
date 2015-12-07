@@ -34,7 +34,6 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().checkNewsletter();
 		createNewContactPage().checkParties();
 		createNewContactPage().checkMember();
-		createNewContactPage().submitContact();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
