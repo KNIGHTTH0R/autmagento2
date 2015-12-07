@@ -9,8 +9,7 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.UseTestDataFrom;
-import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
+import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +29,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
-@RunWith(ThucydidesParameterizedRunner.class)
-@UseTestDataFrom(value = "resources/validPlzTestData.csv")
+@RunWith(ThucydidesRunner.class)
 public class US25001ClosePartyTest extends BaseTest {
 
 	@Steps

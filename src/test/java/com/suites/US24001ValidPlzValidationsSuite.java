@@ -33,6 +33,6 @@ import com.tests.uss24.US24001StylistRegistrationPlzValidationTest;
 	
 })
 @RunWith(Suite.class)
-public class US24001PlzValidationsSuite {
+public class US24001ValidPlzValidationsSuite {
 
 }
