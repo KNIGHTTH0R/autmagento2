@@ -13,10 +13,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
+import com.tools.calculation.StylistListCalculation;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
@@ -61,7 +61,7 @@ public class US14003AddAddressToCustomerTest extends BaseTest {
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
 
 		}
-		compatibleStylistList = ApiCalls.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.STYLIST_ID_FILTER,
+		compatibleStylistList = StylistListCalculation.getCompatibleStylistsInRangeFromList(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.STYLIST_ID_FILTER,
 				SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 4);
 
 		PrintUtils.printListDbStylists(compatibleStylistList);

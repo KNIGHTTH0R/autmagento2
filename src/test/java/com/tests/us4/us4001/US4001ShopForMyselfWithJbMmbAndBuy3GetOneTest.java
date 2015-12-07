@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -89,16 +89,16 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1 = ApiCalls.createProductModel();
+		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("100");
-		ApiCalls.createApiProduct(genProduct1);
+		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct2.setName("QPIWDODRU");
 		genProduct2.setSku("DFCDVEUBK");
 		genProduct2.setIp("42");
 		genProduct2.setPrice("49.90");
-		genProduct3 = ApiCalls.createMarketingProductModel();
+		genProduct3 = MagentoProductCalls.createMarketingProductModel();
 		genProduct3.setPrice("5.00");
-		ApiCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);
 		Properties prop = new Properties();
 		InputStream input = null;
 

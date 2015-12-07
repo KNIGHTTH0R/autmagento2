@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
@@ -106,10 +106,10 @@ public class US24001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 		addressData = new AddressModel();
 		addressData.setPostCode(plz);
 
-		genProduct1 = ApiCalls.createZzzProductModel();
+		genProduct1 = MagentoProductCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");
 		genProduct1.setIp("75");
-		ApiCalls.createJbZzzApiProduct(genProduct1);
+		MagentoProductCalls.createJbZzzApiProduct(genProduct1);
 		Properties prop = new Properties();
 		InputStream input = null;
 

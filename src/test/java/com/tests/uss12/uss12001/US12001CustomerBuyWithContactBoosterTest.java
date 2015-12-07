@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
@@ -79,9 +79,9 @@ public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = ApiCalls.createPomProductModel();
+		genProduct1 = MagentoProductCalls.createPomProductModel();
 		genProduct1.setPrice("89.00");
-		ApiCalls.createApiProduct(genProduct1);
+		MagentoProductCalls.createApiProduct(genProduct1);
 
 		customerModel = MongoReader.grabCustomerFormModels("US12001RegularCustomerRegistrationTest").get(0);
 

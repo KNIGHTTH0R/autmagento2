@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
@@ -109,20 +109,20 @@ public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 		customerData = new CustomerFormModel();
 		addressData = new AddressModel();
 
-		genProduct1 = ApiCalls.createZzzProductModel();
+		genProduct1 = MagentoProductCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");
 		genProduct1.setIp("75");
-		ApiCalls.createJbZzzApiProduct(genProduct1);
+		MagentoProductCalls.createJbZzzApiProduct(genProduct1);
 
-		genProduct2 = ApiCalls.createProductModel();
+		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.setPrice("49.90");
 		genProduct2.setIp("42");
-		ApiCalls.createApiProduct(genProduct2);
+		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = ApiCalls.createProductModel();
+		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("99.00");
 		genProduct3.setIp("84");
-		ApiCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);
 		Properties prop = new Properties();
 		InputStream input = null;
 

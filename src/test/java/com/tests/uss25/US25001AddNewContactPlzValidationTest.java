@@ -31,7 +31,7 @@ import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
+@WithTag(name = "US25.1 Check invalid plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US25001AddNewContactPlzValidationTest extends BaseTest {

@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -100,9 +100,9 @@ public class US24001BorrowCartPlzValidationTest extends BaseTest {
 		addressModel = new AddressModel();
 		addressModel.setPostCode(plz);
 
-		genProduct1 = ApiCalls.createProductModel();
+		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.90");
-		ApiCalls.createApiProduct(genProduct1);
+		MagentoProductCalls.createApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;

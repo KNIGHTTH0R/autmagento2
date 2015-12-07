@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 import java.util.Locale;
 
 import org.joda.time.LocalDate;
@@ -247,11 +246,6 @@ public class DateUtils {
 
 	public static int daysBetween(Date d1, Date d2) {
 		return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
-	}
-
-	public static void main(String[] args) throws ParseException {
-		final Locale spanish = new Locale("es", "ES");
-		System.out.println(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy", Locale.GERMANY), "dd. MMM. yyyy", Locale.GERMANY, 5));
 	}
 
 }

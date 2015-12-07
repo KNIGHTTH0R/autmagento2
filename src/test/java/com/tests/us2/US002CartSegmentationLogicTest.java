@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -89,25 +89,25 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		Properties prop = new Properties();
 		InputStream input = null;
 
-		genProduct1 = ApiCalls.createProductModel();
+		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("129.00");
-		ApiCalls.createApiProduct(genProduct1);
+		MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct2 = ApiCalls.createProductModel();
+		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.setPrice("79.00");
-		ApiCalls.createApiProduct(genProduct2);
+		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = ApiCalls.createProductModel();
+		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("84.00");
-		ApiCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);
 		
-		genProduct4 = ApiCalls.createMarketingProductModel();
+		genProduct4 = MagentoProductCalls.createMarketingProductModel();
 		genProduct4.setPrice("5.00");
-		ApiCalls.createApiProduct(genProduct4);
+		MagentoProductCalls.createApiProduct(genProduct4);
 		
-		genProduct5 = ApiCalls.createMarketingProductModel();
+		genProduct5 = MagentoProductCalls.createMarketingProductModel();
 		genProduct5.setPrice("229.00");
-		ApiCalls.createApiProduct(genProduct5);
+		MagentoProductCalls.createApiProduct(genProduct5);
 
 		try {
 

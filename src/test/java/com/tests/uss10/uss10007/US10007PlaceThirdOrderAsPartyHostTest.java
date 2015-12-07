@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
@@ -92,9 +92,9 @@ public class US10007PlaceThirdOrderAsPartyHostTest extends BaseTest {
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = ApiCalls.createZzzProductModel();
+		genProduct1 = MagentoProductCalls.createZzzProductModel();
 		genProduct1.setPrice("389.00");
-		ApiCalls.createJbZzzApiProduct(genProduct1);
+		MagentoProductCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;

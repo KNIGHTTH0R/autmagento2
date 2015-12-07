@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -57,9 +57,9 @@ public class US26001VerifyProdNotAvailableInAvailabilityReportTest extends BaseT
 		generatedProduct = MongoReader.grabProductDetailedModel("US26001VerifyProdNotAvailableForTheMomentInAvReportTest").get(0);
 		incrementId = MongoReader.grabIncrementId("US26001VerifyProdNotAvailableForTheMomentInAvReportTest");
 
-		updatedProduct = ApiCalls.updateProductStockModel();
-		updatedProduct.setStockData(ApiCalls.createNotAvailableStockData());
-		ApiCalls.updateApiProduct(updatedProduct, incrementId);
+		updatedProduct = MagentoProductCalls.updateProductStockModel();
+		updatedProduct.setStockData(MagentoProductCalls.createNotAvailableStockData());
+		MagentoProductCalls.updateApiProduct(updatedProduct, incrementId);
 
 		Properties prop = new Properties();
 		InputStream input = null;

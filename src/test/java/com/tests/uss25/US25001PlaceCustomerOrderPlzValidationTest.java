@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
@@ -46,7 +46,7 @@ import com.tools.requirements.Application;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
+@WithTag(name = "US25.1 Check invalid plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
@@ -99,10 +99,10 @@ public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 		customerData = new CustomerFormModel();
 		addressData = new AddressModel();
 
-		genProduct1 = ApiCalls.createZzzProductModel();
+		genProduct1 = MagentoProductCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");
 		genProduct1.setIp("75");
-		ApiCalls.createJbZzzApiProduct(genProduct1);
+		MagentoProductCalls.createJbZzzApiProduct(genProduct1);
 		Properties prop = new Properties();
 		InputStream input = null;
 

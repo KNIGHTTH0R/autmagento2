@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.ApacheHttpHelper;
-import com.connectors.http.ApiCalls;
 import com.connectors.http.ComissionRestCalls;
+import com.connectors.http.StylistListMagentoCalls;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.commission.CommissionStylistModel;
@@ -41,7 +41,7 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 		String incrementId = MongoReader.grabIncrementId("US20001GetStylistIncrementIdTest");
 		
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(incrementId);
-		dBStylistModel = ApiCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);
+		dBStylistModel = StylistListMagentoCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);
 		
 		//TODO this is temporarily placed here.it only has to run before calculating the current month bonuses
 		ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);

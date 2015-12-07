@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
@@ -99,18 +99,18 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = ApiCalls.createProductModel();
+		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
-		ApiCalls.createApiProduct(genProduct1);
+		MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct2 = ApiCalls.createPomProductModel();
+		genProduct2 = MagentoProductCalls.createPomProductModel();
 		genProduct2.setPrice("49.90");
 		voucherValue = genProduct2.getPrice();
-		ApiCalls.createApiProduct(genProduct2);
+		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = ApiCalls.createProductModel();
+		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("10.00");
-		ApiCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;

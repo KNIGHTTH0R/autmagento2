@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -55,9 +55,9 @@ public class US26001VerifyProdNotAvailableForTheMomentInAvReportTest extends Bas
 	@Before
 	public void setUp() throws Exception {
 
-		genProduct1 = ApiCalls.createProductModel();
-		genProduct1.setStockData(ApiCalls.createNotAvailableForTheMomentStockData());
-		incrementId = ApiCalls.createApiProduct(genProduct1);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setStockData(MagentoProductCalls.createNotAvailableForTheMomentStockData());
+		incrementId = MagentoProductCalls.createApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;

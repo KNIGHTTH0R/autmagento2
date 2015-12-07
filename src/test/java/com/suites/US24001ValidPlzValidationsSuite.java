@@ -7,7 +7,6 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.tests.uss24.US24001AddNewContactPlzValidationTest;
 import com.tests.uss24.US24001BorrowCartPlzValidationTest;
 import com.tests.uss24.US24001ClosePartyTest;
-import com.tests.uss24.US24001CreatePartyWithNewContactPlzValidationTest;
 import com.tests.uss24.US24001HostOrderPlzValidationTest;
 import com.tests.uss24.US24001OrderForCustomerPlzValidationTest;
 import com.tests.uss24.US24001PlaceCustomerOrderPlzValidationTest;
@@ -18,7 +17,6 @@ import com.tests.uss24.US24001StylistRegistrationPlzValidationTest;
 
 @SuiteClasses({
 	
-	US24001CreatePartyWithNewContactPlzValidationTest.class,
 	US24001StylistRegistrationPlzValidationTest.class,
 	US24001RegularCustRegPlzRegistrationTest.class,
 	US24001AddNewContactPlzValidationTest.class,

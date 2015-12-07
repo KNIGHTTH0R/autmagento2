@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -90,17 +90,17 @@ public class US3007SfmNoVatNoSmbBillingShippingAtTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 		
-		genProduct1 = ApiCalls.createProductModel();		
+		genProduct1 = MagentoProductCalls.createProductModel();		
 		genProduct1.setPrice("49.90");
-		ApiCalls.createApiProduct(genProduct1);
+		MagentoProductCalls.createApiProduct(genProduct1);
 		
-		genProduct2 = ApiCalls.createProductModel();		
+		genProduct2 = MagentoProductCalls.createProductModel();		
 		genProduct2.setPrice("89.00");
-		ApiCalls.createApiProduct(genProduct2);
+		MagentoProductCalls.createApiProduct(genProduct2);
 		
-		genProduct3 = ApiCalls.createMarketingProductModel();
+		genProduct3 = MagentoProductCalls.createMarketingProductModel();
 		genProduct3.setPrice("229.00");
-		ApiCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;

@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApiCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.navSqlServer.NavQueries;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -64,14 +64,14 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 		initialConstantMagentoProducts = StockCalculations.calculateNewStock(initialConstantMagentoProducts, "-1", false);
 
 		for (String id : changingStockIdList) {
-			changingStockMagentoProducts.add(ApiCalls.getMagProductInfo(id));
+			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 		for (String sku : changingStockSkuList) {
 			String[] skuParts = sku.split("-");
 			changingStockNavProduct.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
 		for (String id : constantStockIdList) {
-			constantStockMagentoProducts.add(ApiCalls.getMagProductInfo(id));
+			constantStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 		for (String sku : constantStockSkuList) {
 			String[] skuParts = sku.split("-");
