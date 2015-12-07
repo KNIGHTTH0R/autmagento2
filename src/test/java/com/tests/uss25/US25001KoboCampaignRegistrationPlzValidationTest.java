@@ -1,5 +1,7 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,9 +11,9 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +23,7 @@ import com.steps.external.EmailClientSteps;
 import com.steps.frontend.FancyBoxSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.KoboCampaignSteps;
+import com.steps.frontend.KoboRegistrationStepsWithCsv;
 import com.steps.frontend.KoboSuccesFormSteps;
 import com.steps.frontend.KoboValidationSteps;
 import com.steps.frontend.PomProductDetailsSteps;
@@ -32,12 +35,9 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPomSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -72,18 +72,13 @@ public class US25001KoboCampaignRegistrationPlzValidationTest extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
+	public KoboRegistrationStepsWithCsv koboRegistrationStepsWithCsv;
+	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
-	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1;
-	private String plz;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -114,26 +109,18 @@ public class US25001KoboCampaignRegistrationPlzValidationTest extends BaseTest {
 		}
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		addressModel.setPostCode(plz);
 	}
 
 	@Test
 	public void us25001KoboCampaignRegistrationPlzValidationTest() {
 		koboValidationSteps.startKoboCampaignProcess(MongoReader.getBaseURL() + UrlConstants.KOBO_CAMPAIGN);
-		koboCampaignSteps.fillKoboCampaignRegistrationFormOnMasterShop(dataModel, addressModel);
-		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
-		emailClientSteps.openMailinator();
-		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
-				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
-		koboCampaignSteps.navigate(url);
-		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
-		fancyBoxSteps.goToShipping();
-		shippingSteps.goToPaymentMethod();
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-		confirmationSteps.agreeAndCheckout();
-		checkoutValidationSteps.verifySuccessMessage();
-
+		koboCampaignSteps.fillKoboCampaignRegistrationFormOnMasterShopWithoutPlz(dataModel, addressModel);
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(koboRegistrationStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 	}
 
 }

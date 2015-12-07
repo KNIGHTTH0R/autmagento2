@@ -2,8 +2,11 @@ package com.pages.frontend.registration.contactBooster;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
+import com.tools.env.constants.TimeConstants;
+import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class KoboCampaignPage extends AbstractPage {
@@ -43,6 +46,9 @@ public class KoboCampaignPage extends AbstractPage {
 
 	@FindBy(css = "#selectContainer input#by_default")
 	private WebElement noInviteCheckbox;
+	
+	@FindBy(id = "advice-validate-length-zip")
+	private WebElement zipValidationMessage;
 
 	// ---------------------------------------------------
 	@FindBy(id = "street_1")
@@ -132,6 +138,16 @@ public class KoboCampaignPage extends AbstractPage {
 		postCodeInput.clear();
 		postCodeInput.sendKeys(postCode);
 	}
+	
+	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
+		element(postCodeInput).waitUntilVisible();
+		postCodeInput.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		element(postCodeInput).typeAndTab(postCode);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		validateZipValidationErrorMessage();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
 
 	public void inputHomeTown(String homeTown) {
 		cityInput.sendKeys(homeTown);
@@ -152,4 +168,10 @@ public class KoboCampaignPage extends AbstractPage {
 		noInviteCheckbox.click();
 		waitABit(2000);
 	}
+	
+	public void validateZipValidationErrorMessage() {
+		element(zipValidationMessage).waitUntilVisible();
+		Assert.assertTrue("The message from validation message is not the expected one!!", zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
+	}
+	
 }

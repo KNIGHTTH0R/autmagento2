@@ -110,15 +110,34 @@ public class KoboCampaignSteps extends AbstractSteps {
 		koboCampaignPage().inputPhoneNumber(addressModel.getPhoneNumber());
 		koboCampaignPage().inputPostCode(addressModel.getPostCode());
 		koboCampaignPage().inputHomeTown(addressModel.getHomeTown());
-		koboCampaignPage().selectCountryName(addressModel.getCountryName());	
+		koboCampaignPage().selectCountryName(addressModel.getCountryName());
 		koboCampaignPage().passwordInput(dataModel.getPassword());
 		koboCampaignPage().passwordConfirmInput(dataModel.getPassword());
 		koboCampaignPage().emailInput(dataModel.getEmailName());
-//		koboCampaignPage().checkStyleMemberCheckbox();
+		// koboCampaignPage().checkStyleMemberCheckbox();
 		koboCampaignPage().checkStylePartiesCheckbox();
 		koboCampaignPage().checkIAgree();
 		koboCampaignPage().submitAndContinue();
 	}
+
+	@Step
+	@Title("Fill kobo campaign registration form on master shop")
+	public void fillKoboCampaignRegistrationFormOnMasterShopWithoutPlz(CustomerFormModel dataModel, AddressModel addressModel) {
+		koboCampaignPage().firstNameInput(dataModel.getFirstName());
+		koboCampaignPage().lastNameInput(dataModel.getLastName());
+		koboCampaignPage().inputStreetAddress(addressModel.getStreetAddress());
+		koboCampaignPage().inputStreetNumber(addressModel.getStreetNumber());
+		koboCampaignPage().inputPhoneNumber(addressModel.getPhoneNumber());
+		koboCampaignPage().inputHomeTown(addressModel.getHomeTown());
+		koboCampaignPage().selectCountryName(addressModel.getCountryName());
+		koboCampaignPage().passwordInput(dataModel.getPassword());
+		koboCampaignPage().passwordConfirmInput(dataModel.getPassword());
+		koboCampaignPage().emailInput(dataModel.getEmailName());
+		// koboCampaignPage().checkStyleMemberCheckbox();
+		koboCampaignPage().checkStylePartiesCheckbox();
+		koboCampaignPage().checkIAgree();
+	}
+
 	@Step
 	@Title("Fill kobo campaign registration form on SC context")
 	public void fillKoboCampaignRegistrationFormOnStyleCoachContext(CustomerFormModel dataModel, AddressModel addressModel) {
@@ -129,7 +148,7 @@ public class KoboCampaignSteps extends AbstractSteps {
 		koboCampaignPage().inputPhoneNumber(addressModel.getPhoneNumber());
 		koboCampaignPage().inputPostCode(addressModel.getPostCode());
 		koboCampaignPage().inputHomeTown(addressModel.getHomeTown());
-		koboCampaignPage().selectCountryName(addressModel.getCountryName());		
+		koboCampaignPage().selectCountryName(addressModel.getCountryName());
 		koboCampaignPage().passwordInput(dataModel.getPassword());
 		koboCampaignPage().passwordConfirmInput(dataModel.getPassword());
 		koboCampaignPage().emailInput(dataModel.getEmailName());
