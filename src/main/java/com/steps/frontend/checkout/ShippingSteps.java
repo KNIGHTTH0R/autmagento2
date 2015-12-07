@@ -55,8 +55,10 @@ public class ShippingSteps extends AbstractSteps {
 		// billingFormPage().verifyThatYouCannotBillOnRestrictedCountries();
 	}
 
+	@Title("Fill new address for billing")
 	@Step
 	public void addNewAddressForBilling(AddressModel addressModel) {
+
 		billingFormPage().clickAddNewAddress();
 
 		waitABit(TimeConstants.TIME_CONSTANT);
@@ -68,6 +70,21 @@ public class ShippingSteps extends AbstractSteps {
 		inputBillingPhoneNumber(addressModel.getPhoneNumber());
 	}
 
+	@Title("Fill new address for billing without plz")
+	@Step
+	public void addNewAddressForBillingWithoutPlz(AddressModel addressModel) {
+
+		billingFormPage().clickAddNewAddress();
+
+		waitABit(TimeConstants.TIME_CONSTANT);
+		inputBillingStreetAddress(addressModel.getStreetAddress());
+		inputBillingStreetNumber(addressModel.getStreetNumber());
+		inputBillingHomeTown(addressModel.getHomeTown());
+		selectBillingCountryName(addressModel.getCountryName());
+		inputBillingPhoneNumber(addressModel.getPhoneNumber());
+	}
+
+	@Title("Fill new address for shipping")
 	@Step
 	public void addNewAddressForShipping(AddressModel addressModel) {
 		shippingFormPage().clickAddNewAddress();

@@ -1,5 +1,7 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,19 +29,18 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
@@ -52,6 +54,8 @@ public class US25001RegularCartPlzValidationTest extends BaseTest {
 	public HeaderSteps headerSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
+	@Steps
+	public ShippingStepsWithCsvStepsWithCsv shippingStepsWithCsvStepsWithCsv;
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
@@ -76,7 +80,6 @@ public class US25001RegularCartPlzValidationTest extends BaseTest {
 	public FooterSteps footerSteps;
 
 	private String username, password;
-	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1;
 	private AddressModel addressModel;
 	private String plz;
@@ -123,7 +126,7 @@ public class US25001RegularCartPlzValidationTest extends BaseTest {
 	}
 
 	@Test
-	public void u24001RegularCartPlzValidationTest() {
+	public void us25001RegularCartPlzValidationTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -140,26 +143,15 @@ public class US25001RegularCartPlzValidationTest extends BaseTest {
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
 
-		shippingSteps.addNewAddressForBilling(addressModel);
-		shippingSteps.setSameAsBilling(true);
-		shippingSteps.goToPaymentMethod();
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+		shippingSteps.addNewAddressForBillingWithoutPlz(addressModel);
 
-		AddressModel checkoutStepTwoBillAddress = confirmationSteps.grabBillingData();
-		AddressModel checkoutStepTwoShipAddress = confirmationSteps.grabSippingData();
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 
-		confirmationSteps.agreeAndCheckout();
-
-		AddressWorkflows.setBillingPlz(addressModel.getPostCode(), checkoutStepTwoBillAddress);
-		AddressWorkflows.validateBillingPostcode();
-
-		AddressWorkflows.setShippingPlz(addressModel.getPostCode(), checkoutStepTwoShipAddress);
-		AddressWorkflows.validateShippingPostcode();
-
-		checkoutValidationSteps.verifySuccessMessage();
-
-		customVerifications.printErrors();
 	}
 
 }

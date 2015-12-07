@@ -42,6 +42,9 @@ public class BillingFormPage extends AbstractPage {
 
 	@FindBy(id = "new-billing-address")
 	private WebElement newBillingAddress;
+	
+	@FindBy(id = "advice-validate-length-zip")
+	private WebElement zipValidationMessage;
 
 	public void clickAddNewAddress() {
 		element(newBillingAddress).waitUntilVisible();
@@ -89,6 +92,16 @@ public class BillingFormPage extends AbstractPage {
 		element(postcodeInput).waitUntilVisible();
 		postcodeInput.sendKeys(postCode);
 	}
+	
+	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
+		element(postcodeInput).waitUntilVisible();
+		postcodeInput.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		element(postcodeInput).typeAndTab(postCode);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		validateZipValidationErrorMessage();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
 
 	public void inputHomeTown(String homeTown) {
 		element(cityInput).waitUntilVisible();
@@ -125,6 +138,11 @@ public class BillingFormPage extends AbstractPage {
 	public void inputPhoneNumber(String phoneNumber) {
 		element(telephoneInput).waitUntilVisible();
 		telephoneInput.sendKeys(phoneNumber);
+	}
+	
+	public void validateZipValidationErrorMessage() {
+		element(zipValidationMessage).waitUntilVisible();
+		Assert.assertTrue("The message from validation message is not the expected one!!", zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
 	}
 
 }
