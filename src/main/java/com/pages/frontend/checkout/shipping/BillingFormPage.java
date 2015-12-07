@@ -43,7 +43,7 @@ public class BillingFormPage extends AbstractPage {
 	@FindBy(id = "new-billing-address")
 	private WebElement newBillingAddress;
 	
-	@FindBy(id = "advice-validate-length-zip")
+	@FindBy(id = "advice-validate-length-billing:postcode")
 	private WebElement zipValidationMessage;
 
 	public void clickAddNewAddress() {
