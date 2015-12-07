@@ -3,7 +3,6 @@ package com.tests.uss25;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
@@ -22,7 +21,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US24001UpdatePartyBonusesTest extends BaseTest {
+public class US25001UpdatePartyBonusesTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -33,24 +32,18 @@ public class US24001UpdatePartyBonusesTest extends BaseTest {
 
 	public static UrlModel urlModel = new UrlModel();
 	private String partyId;
-	private String plz;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
 
-		urlModel = MongoReader.grabUrlModels("US24001CreatePartyWithNewContactPlzValidationTest" + plz).get(0);
+		urlModel = MongoReader.grabUrlModels("US25001CreatePartyWithNewContactTest").get(0);
 		String[] bits = urlModel.getUrl().split("/");
 		partyId = bits[bits.length - 1];
 		System.out.println(partyId);
 	}
 
 	@Test
-	public void us24001UpdatePartyBonusesTest() {
+	public void us25001UpdatePartyBonusesTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStyleParties();

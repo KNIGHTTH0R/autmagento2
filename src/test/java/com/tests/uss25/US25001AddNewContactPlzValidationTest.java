@@ -11,9 +11,7 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
-import net.thucydides.junit.annotations.UseTestDataFrom;
-import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
+import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,8 +33,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
-@RunWith(ThucydidesParameterizedRunner.class)
-@UseTestDataFrom(value = "resources/validPlzTestData.csv")
+@RunWith(ThucydidesRunner.class)
 public class US25001AddNewContactPlzValidationTest extends BaseTest {
 
 	@Steps
@@ -54,21 +51,14 @@ public class US25001AddNewContactPlzValidationTest extends BaseTest {
 
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
-	private String plz;
 	private String username;
 	private String password;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
 
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		addressModel.setPostCode(plz);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -103,7 +93,7 @@ public class US25001AddNewContactPlzValidationTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContactWithoutPlz(dataModel, addressModel);
-		
+
 		try {
 			withTestDataFrom("resources/invalidPlzTestData.csv").run(createNewContactStepsWithCsv).inputPostCodeCsv();
 		} catch (IOException e) {

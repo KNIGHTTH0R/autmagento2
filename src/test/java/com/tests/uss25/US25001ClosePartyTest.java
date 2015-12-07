@@ -9,7 +9,6 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
 
@@ -33,7 +32,7 @@ import com.tools.requirements.Application;
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001ClosePartyTest extends BaseTest {
+public class US25001ClosePartyTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -46,12 +45,6 @@ public class US24001ClosePartyTest extends BaseTest {
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
-	private String plz;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -80,12 +73,12 @@ public class US24001ClosePartyTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US24001CreatePartyWithNewContactPlzValidationTest" + plz).get(0);
+		urlModel = MongoReader.grabUrlModels("US25001CreatePartyWithNewContactTest").get(0);
 
 	}
 
 	@Test
-	public void us24001ClosePartyTest() {
+	public void us25001ClosePartyTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

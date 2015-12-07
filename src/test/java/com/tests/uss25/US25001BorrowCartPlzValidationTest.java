@@ -11,7 +11,6 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Assert;
@@ -85,12 +84,6 @@ public class US25001BorrowCartPlzValidationTest extends BaseTest {
 	private String username, password;
 	private AddressModel addressModel;
 	private ProductDetailedModel genProduct1;
-	private String plz;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -99,7 +92,6 @@ public class US25001BorrowCartPlzValidationTest extends BaseTest {
 		DataGrabber.wipe();
 
 		addressModel = new AddressModel();
-		addressModel.setPostCode(plz);
 
 		genProduct1 = ApiCalls.createProductModel();
 		genProduct1.setPrice("49.90");

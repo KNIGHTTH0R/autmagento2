@@ -11,7 +11,6 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Assert;
@@ -35,7 +34,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.AddressModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
@@ -83,22 +81,12 @@ public class US25001HostOrderPlzValidationTest extends BaseTest {
 
 	private String username, password;
 	private static UrlModel partyUrlModel = new UrlModel();
-	private AddressModel addressModel;
 	private ProductDetailedModel genProduct1;
-	private String plz;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
-
-		addressModel = new AddressModel();
-		addressModel.setPostCode(plz);
 
 		genProduct1 = ApiCalls.createProductModel();
 		genProduct1.setPrice("89.00");
@@ -126,7 +114,7 @@ public class US25001HostOrderPlzValidationTest extends BaseTest {
 			}
 		}
 
-		partyUrlModel = MongoReader.grabUrlModels("US24001CreatePartyWithNewContactPlzValidationTest" + plz).get(0);
+		partyUrlModel = MongoReader.grabUrlModels("US25001CreatePartyWithNewContactTest").get(0);
 	}
 
 	@Test

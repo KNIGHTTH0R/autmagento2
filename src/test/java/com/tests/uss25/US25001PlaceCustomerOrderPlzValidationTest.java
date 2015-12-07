@@ -11,7 +11,6 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Assert;
@@ -37,7 +36,6 @@ import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
@@ -45,7 +43,6 @@ import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
@@ -90,16 +87,9 @@ public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 	public CustomVerification customVerifications;
 
 	private String username, password;
-	private CreditCardModel creditCardData = new CreditCardModel();
 	private CustomerFormModel customerData;
 	private AddressModel addressData;
 	private ProductDetailedModel genProduct1;
-	private String plz;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -108,7 +98,6 @@ public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 
 		customerData = new CustomerFormModel();
 		addressData = new AddressModel();
-		addressData.setPostCode(plz);
 
 		genProduct1 = ApiCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");

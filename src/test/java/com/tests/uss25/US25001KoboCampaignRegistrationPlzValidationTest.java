@@ -45,7 +45,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US24001KoboCampaignRegistrationPlzValidationTest extends BaseTest {
+public class US25001KoboCampaignRegistrationPlzValidationTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -118,7 +118,7 @@ public class US24001KoboCampaignRegistrationPlzValidationTest extends BaseTest {
 	}
 
 	@Test
-	public void us24001KoboCampaignRegistrationPlzValidationTest() {
+	public void us25001KoboCampaignRegistrationPlzValidationTest() {
 		koboValidationSteps.startKoboCampaignProcess(MongoReader.getBaseURL() + UrlConstants.KOBO_CAMPAIGN);
 		koboCampaignSteps.fillKoboCampaignRegistrationFormOnMasterShop(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();

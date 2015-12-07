@@ -7,7 +7,6 @@ import java.io.IOException;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Assert;
@@ -37,18 +36,11 @@ public class US25001RegularCustRegPlzRegistrationTest extends BaseTest {
 
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
-	private String plz;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		addressModel.setPostCode(plz);
 	}
 
 	@Test

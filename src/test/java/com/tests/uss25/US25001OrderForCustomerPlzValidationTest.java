@@ -11,7 +11,6 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Assert;
@@ -37,8 +36,6 @@ import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
@@ -46,7 +43,6 @@ import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
@@ -89,24 +85,13 @@ public class US25001OrderForCustomerPlzValidationTest extends BaseTest {
 
 	private String username, password, customerName;
 
-	private CreditCardModel creditCardData = new CreditCardModel();
 	private static UrlModel urlModel = new UrlModel();
-	private AddressModel addressModel;
 	private ProductDetailedModel genProduct1;
-	private String plz;
-
-	@Qualifier
-	public String getQualifier() {
-		return plz;
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
-
-		addressModel = new AddressModel();
-		addressModel.setPostCode(plz);
 
 		genProduct1 = ApiCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");
@@ -135,7 +120,7 @@ public class US25001OrderForCustomerPlzValidationTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US24001CreatePartyWithNewContactPlzValidationTest" + plz).get(0);
+		urlModel = MongoReader.grabUrlModels("US25001CreatePartyWithNewContactTest").get(0);
 
 	}
 
