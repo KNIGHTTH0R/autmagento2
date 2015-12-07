@@ -2,6 +2,7 @@ package com.pages.frontend.registration.party;
 
 import net.thucydides.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -52,6 +53,9 @@ public class CreateNewContactPage extends AbstractPage {
 	@FindBy(css = "#addContactForm button[type*='submit']")
 	private WebElement sumbitContact;
 
+	@FindBy(id = "advice-validate-length-zip")
+	private WebElement zipValidationMessage;
+
 	public void firstnameInput(String name) {
 		element(firstname).waitUntilVisible();
 		firstname.sendKeys(name);
@@ -86,6 +90,16 @@ public class CreateNewContactPage extends AbstractPage {
 		postcode.sendKeys(code);
 	}
 
+	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
+		element(postcode).waitUntilVisible();
+		postcode.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		element(postcode).typeAndTab(postCode);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		validateZipValidationErrorMessage();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
+
 	public void cityInput(String city) {
 		element(cityInput).waitUntilVisible();
 		cityInput.sendKeys(city);
@@ -118,9 +132,14 @@ public class CreateNewContactPage extends AbstractPage {
 	public void submitContact() {
 		element(sumbitContact).waitUntilVisible();
 		sumbitContact.click();
-		WebDriverWait wait = new WebDriverWait(getDriver(),120);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
 		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.TIME_CONSTANT);
+	}
+
+	public void validateZipValidationErrorMessage() {
+		element(zipValidationMessage).waitUntilVisible();
+		Assert.assertTrue("The message from validation message is not the expected one!!", zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
 	}
 
 }

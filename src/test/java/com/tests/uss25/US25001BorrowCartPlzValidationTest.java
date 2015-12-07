@@ -1,5 +1,7 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,9 +12,9 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.Qualifier;
-import net.thucydides.junit.annotations.UseTestDataFrom;
-import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
+import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,42 +24,45 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
+import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
-import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
+import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
+import com.steps.frontend.checkout.cart.borrowCart.BorrowCartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
-import com.tools.env.constants.ConfigConstants;
+import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
+import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.frontend.AddProductsWorkflow;
-import com.workflows.frontend.AddressWorkflows;
+import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
+import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
-@RunWith(ThucydidesParameterizedRunner.class)
-@UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
+@RunWith(ThucydidesRunner.class)
+public class US25001BorrowCartPlzValidationTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
+	public BorrowCartSteps borrowCartSteps;
+	@Steps
 	public HomeSteps homeSteps;
 	@Steps
-	public FooterSteps footerSteps;
+	public LoungeSteps loungeSteps;
 	@Steps
-	public CartSteps cartSteps;
+	public FooterSteps footerSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
@@ -65,7 +70,13 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
+	public AddBorrowedProductsWorkflow addBorrowedProductsWorkflow;
+	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public ShippingStepsWithCsvStepsWithCsv shippingStepsWithCsvStepsWithCsv;
+	@Steps
+	public BorrowCartValidationWorkflows borrowCartValidationWorkflows;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
@@ -73,7 +84,7 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 
 	private String username, password;
 	private AddressModel addressModel;
-	private CreditCardModel creditCardData = new CreditCardModel();
+	private ProductDetailedModel genProduct1;
 	private String plz;
 
 	@Qualifier
@@ -81,11 +92,10 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 		return plz;
 	}
 
-	private ProductDetailedModel genProduct1;
-
 	@Before
 	public void setUp() throws Exception {
-		CartCalculator.wipe();
+		BorrowCartCalculator.wipe();
+		BorrowDataGrabber.wipe();
 		DataGrabber.wipe();
 
 		addressModel = new AddressModel();
@@ -100,7 +110,7 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3004.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_16_FOLDER + File.separator + "us16001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -116,47 +126,34 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 				}
 			}
 		}
-
 	}
 
 	@Test
-	public void us24001ShopForMyselfPlzValidationTest() {
+	public void us25001BorrowCartPlzValidationTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		homeSteps.clickonGeneralView();
-		customerRegistrationSteps.wipeCart();
+		loungeSteps.clickGoToBorrowCart();
+		borrowCartSteps.clickWipeCart();
 
-		addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
+		addBorrowedProductsWorkflow.setBorrowedDefaultProductToCart();
+		addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct1, "0.00");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		cartSteps.goToShipping();
+		borrowCartSteps.clickGoToShipping();
 
-		shippingSteps.addNewAddressForBilling(addressModel);
-		shippingSteps.setSameAsBilling(true);
-		shippingSteps.goToPaymentMethod();
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+		shippingSteps.addNewAddressForBillingWithoutPlz(addressModel);
 
-		AddressModel checkoutStepTwoBillAddress = confirmationSteps.grabBillingData();
-		AddressModel checkoutStepTwoShipAddress = confirmationSteps.grabSippingData();
-
-		confirmationSteps.agreeAndCheckout();
-
-		AddressWorkflows.setBillingPlz(addressModel.getPostCode(), checkoutStepTwoBillAddress);
-		AddressWorkflows.validateBillingPostcode();
-
-		AddressWorkflows.setShippingPlz(addressModel.getPostCode(), checkoutStepTwoShipAddress);
-		AddressWorkflows.validateShippingPostcode();
-
-		checkoutValidationSteps.verifySuccessMessage();
-
-		customVerifications.printErrors();
-
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 	}
 
 }

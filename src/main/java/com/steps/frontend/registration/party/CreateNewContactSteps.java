@@ -25,6 +25,18 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().submitContact();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
+	@Step
+	public void fillCreateNewContactWithoutPlz(CustomerFormModel customerData, AddressModel addressData) {
+		createNewContactPage().firstnameInput(customerData.getFirstName());
+		createNewContactPage().lastnameInput(customerData.getLastName());
+		createNewContactPage().emailInput(customerData.getEmailName());
+		fillContactDetailsWithoutPlz(addressData);
+		createNewContactPage().checkNewsletter();
+		createNewContactPage().checkParties();
+		createNewContactPage().checkMember();
+		createNewContactPage().submitContact();
+		waitABit(TimeConstants.TIME_CONSTANT);
+	}
 
 	@Step
 	public void fillCreateNewContactWithoutAnyInterrest(CustomerFormModel customerData, AddressModel addressData) {
@@ -95,6 +107,15 @@ public class CreateNewContactSteps extends AbstractSteps {
 
 	@StepGroup
 	public void fillContactDetails(AddressModel addressData) {
+		createNewContactPage().streetInput(addressData.getStreetAddress());
+		createNewContactPage().houseNumberInput(addressData.getStreetNumber());
+		createNewContactPage().postcodeInput(addressData.getPostCode());
+		createNewContactPage().cityInput(addressData.getHomeTown());
+		createNewContactPage().selectCountryName(addressData.getCountryName());
+		createNewContactPage().inputPhoneNumber(addressData.getPhoneNumber());
+	}
+	@StepGroup
+	public void fillContactDetailsWithoutPlz(AddressModel addressData) {
 		createNewContactPage().streetInput(addressData.getStreetAddress());
 		createNewContactPage().houseNumberInput(addressData.getStreetNumber());
 		createNewContactPage().postcodeInput(addressData.getPostCode());

@@ -1,5 +1,7 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,9 +12,9 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.Qualifier;
-import net.thucydides.junit.annotations.UseTestDataFrom;
-import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
+import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +30,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
@@ -48,9 +51,8 @@ import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
-@RunWith(ThucydidesParameterizedRunner.class)
-@UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
+@RunWith(ThucydidesRunner.class)
+public class US25001OrderForCustomerPlzValidationTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -78,6 +80,8 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
+	@Steps
+	public ShippingStepsWithCsvStepsWithCsv shippingStepsWithCsvStepsWithCsv;
 	@Steps
 	public DashboardSteps dashboardSteps;
 	@Steps
@@ -136,7 +140,7 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 	}
 
 	@Test
-	public void us24001OrderForCustomerPlzValidationTest() {
+	public void us25001OrderForCustomerPlzValidationTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -160,27 +164,13 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
-		shippingSteps.clearAndInputNewPostCode(addressModel.getPostCode());
-		shippingSteps.clearAndInputNewHomeTown(addressModel.getHomeTown());
-		shippingSteps.setSameAsBilling(true);
-		shippingSteps.goToPaymentMethod();
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 
-		AddressModel checkoutStepTwoBillAddress = confirmationSteps.grabBillingData();
-		AddressModel checkoutStepTwoShipAddress = confirmationSteps.grabSippingData();
-
-		confirmationSteps.agreeAndCheckout();
-
-		AddressWorkflows.setBillingPlz(addressModel.getPostCode(), checkoutStepTwoBillAddress);
-		AddressWorkflows.validateBillingPostcode();
-
-		AddressWorkflows.setShippingPlz(addressModel.getPostCode(), checkoutStepTwoShipAddress);
-		AddressWorkflows.validateShippingPostcode();
-
-		checkoutValidationSteps.verifySuccessMessage();
-
-		customVerifications.printErrors();
 
 	}
 

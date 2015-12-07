@@ -1,5 +1,7 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +25,7 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
+import com.steps.frontend.registration.party.CreateNewContactStepsWithCsv;
 import com.tests.BaseTest;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -33,7 +37,7 @@ import com.tools.requirements.Application;
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001AddNewContactPlzValidationTest extends BaseTest {
+public class US25001AddNewContactPlzValidationTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -45,6 +49,8 @@ public class US24001AddNewContactPlzValidationTest extends BaseTest {
 	public HeaderSteps headerSteps;
 	@Steps
 	public CreateNewContactSteps createNewContactSteps;
+	@Steps
+	public CreateNewContactStepsWithCsv createNewContactStepsWithCsv;
 
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
@@ -88,7 +94,7 @@ public class US24001AddNewContactPlzValidationTest extends BaseTest {
 	}
 
 	@Test
-	public void us24001AddNewContactPlzValidationTest() {
+	public void us25001AddNewContactPlzValidationTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
@@ -96,7 +102,14 @@ public class US24001AddNewContactPlzValidationTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
-		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
+		createNewContactSteps.fillCreateNewContactWithoutPlz(dataModel, addressModel);
+		
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(createNewContactStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 
 	}
 }

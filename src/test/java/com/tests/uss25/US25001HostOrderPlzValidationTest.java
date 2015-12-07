@@ -1,5 +1,7 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,9 +12,9 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.Qualifier;
-import net.thucydides.junit.annotations.UseTestDataFrom;
-import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
+import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +28,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
@@ -33,22 +36,19 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.partyHost.HostCartCalculator;
 import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
-@RunWith(ThucydidesParameterizedRunner.class)
-@UseTestDataFrom(value = "resources/validPlzTestData.csv")
-public class US24001HostOrderPlzValidationTest extends BaseTest {
+@RunWith(ThucydidesRunner.class)
+public class US25001HostOrderPlzValidationTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -77,10 +77,11 @@ public class US24001HostOrderPlzValidationTest extends BaseTest {
 	@Steps
 	public ContactHostShippingHostSteps contactHostShippingHostSteps;
 	@Steps
+	public ShippingStepsWithCsvStepsWithCsv shippingStepsWithCsvStepsWithCsv;
+	@Steps
 	public CustomVerification customVerifications;
 
 	private String username, password;
-	private CreditCardModel creditCardData = new CreditCardModel();
 	private static UrlModel partyUrlModel = new UrlModel();
 	private AddressModel addressModel;
 	private ProductDetailedModel genProduct1;
@@ -129,13 +130,12 @@ public class US24001HostOrderPlzValidationTest extends BaseTest {
 	}
 
 	@Test
-	public void us24001HostOrderPlzValidationTest() {
+	public void us25001HostOrderPlzValidationTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		// homeSteps.clickonGeneralView();
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		customerRegistrationSteps.wipeHostCart();
 
@@ -146,27 +146,13 @@ public class US24001HostOrderPlzValidationTest extends BaseTest {
 
 		hostCartSteps.clickGoToShipping();
 		contactHostShippingHostSteps.checkItemNotReceivedYet();
-		shippingSteps.clearAndInputNewPostCode(addressModel.getPostCode());
-		shippingSteps.clearAndInputNewHomeTown(addressModel.getHomeTown());
-		shippingSteps.setSameAsBilling(true);
-		shippingSteps.goToPaymentMethod();
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
-		AddressModel checkoutStepTwoBillAddress = confirmationSteps.grabBillingData();
-		AddressModel checkoutStepTwoShipAddress = confirmationSteps.grabSippingData();
-
-		confirmationSteps.agreeAndCheckout();
-
-		AddressWorkflows.setBillingPlz(addressModel.getPostCode(), checkoutStepTwoBillAddress);
-		AddressWorkflows.validateBillingPostcode();
-
-		AddressWorkflows.setShippingPlz(addressModel.getPostCode(), checkoutStepTwoShipAddress);
-		AddressWorkflows.validateShippingPostcode();
-
-		checkoutValidationSteps.verifySuccessMessage();
-
-		customVerifications.printErrors();
+		
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 	}
 
 }

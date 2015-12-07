@@ -1,5 +1,7 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,9 +12,9 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.Qualifier;
-import net.thucydides.junit.annotations.UseTestDataFrom;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +29,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
@@ -49,7 +52,6 @@ import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesRunner.class)
-@UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 
 	@Steps
@@ -64,6 +66,8 @@ public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 	public CreateNewContactSteps createNewContactSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public ShippingStepsWithCsvStepsWithCsv shippingStepsWithCsvStepsWithCsv;
 	@Steps
 	public OrderForCustomerCartSteps orderForCustomerCartSteps;
 	@Steps
@@ -153,29 +157,13 @@ public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 		headerSteps.goToCart();
 
 		orderForCustomerCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.clickPartyNoOption();
-		shippingPartySectionSteps.checkItemNotReceivedYet();
-		shippingSteps.clearAndInputNewPostCode(addressData.getPostCode());
-		shippingSteps.clearAndInputNewHomeTown(addressData.getHomeTown());
-		shippingSteps.setSameAsBilling(true);
-		shippingSteps.goToPaymentMethod();
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
-		AddressModel checkoutStepTwoBillAddress = confirmationSteps.grabBillingData();
-		AddressModel checkoutStepTwoShipAddress = confirmationSteps.grabSippingData();
-
-		confirmationSteps.agreeAndCheckout();
-
-		AddressWorkflows.setBillingPlz(addressData.getPostCode(), checkoutStepTwoBillAddress);
-		AddressWorkflows.validateBillingPostcode();
-
-		AddressWorkflows.setShippingPlz(addressData.getPostCode(), checkoutStepTwoShipAddress);
-		AddressWorkflows.validateShippingPostcode();
-
-		checkoutValidationSteps.verifySuccessMessage();
-
-		customVerifications.printErrors();
+		
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 
 	}
 
