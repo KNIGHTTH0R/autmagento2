@@ -95,8 +95,6 @@ public class RegularUserCartWorkflows {
 	public void verifyTotalsDiscountWith40JbAndBuy3Get1Discount(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		// verifyTax(discountTotals.getTax(),
-		// discountCalculationModel.getTax());
 		verifyForthyDiscount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_40_BONUS));
 		verifyJewelryDiscount(discountTotals.getDiscount(ConfigConstants.JEWELRY_BONUS), discountCalculationModel.findSegment(ConfigConstants.JEWELRY_BONUS));
 		verifyBuy3Get1Discount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_BUY_3_GET_1), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1));
@@ -106,8 +104,6 @@ public class RegularUserCartWorkflows {
 	public void verifyTotalsDiscountWith40AndJbDiscount(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		// verifyTax(discountTotals.getTax(),
-		// discountCalculationModel.getTax());
 		verifyForthyDiscount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_40_BONUS));
 		verifyJewelryDiscount(discountTotals.getDiscount(ConfigConstants.JEWELRY_BONUS), discountCalculationModel.findSegment(ConfigConstants.JEWELRY_BONUS));
 
@@ -117,8 +113,6 @@ public class RegularUserCartWorkflows {
 	public void verifyTotalsDiscountWithVoucher(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		// verifyTax(discountTotals.getTax(),
-		// discountCalculationModel.getTax());
 		verifyVoucherDiscount(discountTotals.getDiscount(ConfigConstants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(ConfigConstants.VOUCHER_DISCOUNT));
 
 	}

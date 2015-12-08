@@ -102,7 +102,7 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("100.00");
+		genProduct3.setPrice("10.00");
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
