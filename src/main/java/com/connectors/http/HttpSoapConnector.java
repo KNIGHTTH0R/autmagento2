@@ -26,6 +26,12 @@ import com.tools.persistance.MongoReader;
 
 public class HttpSoapConnector {
 
+	private static String sessID;
+
+	public HttpSoapConnector() throws SOAPException, IOException {
+		sessID = performLogin();
+	}
+
 	/**
 	 * Create a product and return the message. Performs login and creates a xml
 	 * based on the provided product model.
@@ -36,7 +42,7 @@ public class HttpSoapConnector {
 	 * @throws IOException
 	 */
 	public static SOAPMessage soapCreateProduct(ProductDetailedModel product) throws SOAPException, IOException {
-		String sessID = performLogin();
+		// String sessID = performLogin();
 		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -47,7 +53,7 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapUpdateProduct(ProductDetailedModel product, String productId) throws SOAPException, IOException {
-		String sessID = performLogin();
+//		String sessID = performLogin();
 		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -58,7 +64,7 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapCreateJbZzzProduct(ProductDetailedModel product) throws SOAPException, IOException {
-		String sessID = performLogin();
+//		String sessID = performLogin();
 		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -69,7 +75,7 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapGetStylistInfo(String stylistId) throws SOAPException, IOException {
-		String sessID = performLogin();
+//		String sessID = performLogin();
 		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -80,7 +86,7 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapGetStylistList(String filter, String operand, String filterValue) throws SOAPException, IOException {
-		String sessID = performLogin();
+//		String sessID = performLogin();
 		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -91,7 +97,7 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapProductInfo(String productId) throws SOAPException, IOException {
-		String sessID = performLogin();
+//		String sessID = performLogin();
 		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -217,7 +223,7 @@ public class HttpSoapConnector {
 		sessionID.addTextNode(ssID);
 		SOAPElement productIdNode = catalogProductUpdateRequestParam.addChildElement(SoapKeys.PRODUCT_ID);
 		productIdNode.addTextNode(productId);
-		
+
 		// Add product data here
 		catalogProductUpdateRequestParam = generateProductUpdateStockMessage(catalogProductUpdateRequestParam, product);
 
