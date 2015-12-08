@@ -1,7 +1,6 @@
 package com.connectors.http;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.connectors.navSqlServer.SqlServerConnector;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
@@ -27,9 +25,6 @@ import com.tools.utils.FormatterUtils;
  */
 
 public class MagentoProductCalls {
-	
-	
-	
 
 	public static ProductDetailedModel createPomProductModel() {
 		ProductDetailedModel result = createProductModel();

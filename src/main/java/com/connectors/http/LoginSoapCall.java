@@ -16,48 +16,38 @@ import org.w3c.dom.NodeList;
 import com.tools.SoapKeys;
 import com.tools.env.variables.Credentials;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 
 public class LoginSoapCall {
-
-
 
 	/**
 	 * This method will login with a user in {@link SoapKeys} and return the
 	 * sessionID.
 	 * 
 	 * @return
-	 * @throws UnsupportedOperationException 
+	 * @throws UnsupportedOperationException
 	 * @throws SOAPException
 	 * @throws IOException
 	 */
-	public static String performLogin(){
+	public static String performLogin() {
 		SOAPConnectionFactory soapConnectionFactory = null;
 		try {
 			soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		} catch (UnsupportedOperationException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (SOAPException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		SOAPConnection soapConnection = null;
 		try {
 			soapConnection = soapConnectionFactory.createConnection();
 		} catch (SOAPException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		// SOAPMessage soapResponse =
-		// soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP,
-		// Credentials.LOGIN_PASS_SOAP), MongoReader.getSoapURL()
-		// + UrlConstants.API_URI);
 		SOAPMessage soapResponse = null;
 		try {
-			soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), "http://staging-aut.pippajean.com/"
-					+ UrlConstants.API_URI);
+			soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), MongoReader.getSoapURL() + UrlConstants.API_URI);
 		} catch (SOAPException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		String result = "";
@@ -66,7 +56,6 @@ public class LoginSoapCall {
 		try {
 			returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);
 		} catch (SOAPException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		if (returnList.getLength() == 1) {
@@ -79,11 +68,9 @@ public class LoginSoapCall {
 			try {
 				soapResponse.writeTo(System.out);
 			} catch (SOAPException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
@@ -113,18 +100,14 @@ public class LoginSoapCall {
 
 			soapMessage.writeTo(System.out);
 		} catch (DOMException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SOAPException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		// SOAP Body
-
 
 		return soapMessage;
 	}
@@ -149,6 +132,5 @@ public class LoginSoapCall {
 		return soapMessage;
 
 	}
-
 
 }

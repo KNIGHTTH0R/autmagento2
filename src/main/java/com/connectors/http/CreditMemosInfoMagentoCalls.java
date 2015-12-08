@@ -17,6 +17,7 @@ import com.tools.SoapKeys;
 import com.tools.data.soap.DBCreditMemoModel;
 import com.tools.env.constants.SoapConstants;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 
 /**
  * @author mihaibarta
@@ -24,6 +25,8 @@ import com.tools.env.variables.UrlConstants;
  */
 
 public class CreditMemosInfoMagentoCalls {
+
+	private static String sessID = LoginSoapCall.performLogin();
 
 	public static List<DBCreditMemoModel> getCreditMemosList(String stylistId) {
 
@@ -47,16 +50,12 @@ public class CreditMemosInfoMagentoCalls {
 	}
 
 	public static SOAPMessage soapGetCreditMemosList(String stylistId) throws SOAPException, IOException {
-		String sessID = HttpSoapConnector.performLogin();
-		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		// SOAPMessage soapResponse =
-		// soapConnection.call(getCreditMemosList(sessID, stylistId,
-		// createdStartDate, createdEndDate), MongoReader.getSoapURL() +
-		// UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		 SOAPMessage soapResponse =
+		 soapConnection.call(getCreditMemosListRequest(sessID, stylistId), MongoReader.getSoapURL() +
+		 UrlConstants.API_URI);
 
 		return soapResponse;
 	}

@@ -1,7 +1,6 @@
 package com.connectors.http;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
@@ -14,22 +13,18 @@ import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.NodeList;
 
-import com.connectors.navSqlServer.SqlServerConnector;
 import com.tools.SoapKeys;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
 import com.tools.env.constants.SoapConstants;
-import com.tools.env.variables.Credentials;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 
 public class HttpSoapConnector {
 
-	
-//	private static String sessID = LoginSoapCall.performLogin();
+	private static String sessID = LoginSoapCall.performLogin();
 
 	/**
 	 * Create a product and return the message. Performs login and creates a xml
@@ -41,8 +36,6 @@ public class HttpSoapConnector {
 	 * @throws IOException
 	 */
 	public static SOAPMessage soapCreateProduct(ProductDetailedModel product) throws SOAPException, IOException {
-		String sessID = performLogin();
-		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
@@ -52,8 +45,6 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapUpdateProduct(ProductDetailedModel product, String productId) throws SOAPException, IOException {
-		String sessID = performLogin();
-		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
@@ -63,8 +54,6 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapCreateJbZzzProduct(ProductDetailedModel product) throws SOAPException, IOException {
-		String sessID = performLogin();
-		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
@@ -74,8 +63,6 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapGetStylistInfo(String stylistId) throws SOAPException, IOException {
-		String sessID = performLogin();
-		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
@@ -85,8 +72,6 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapGetStylistList(String filter, String operand, String filterValue) throws SOAPException, IOException {
-		String sessID = performLogin();
-		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
@@ -96,74 +81,79 @@ public class HttpSoapConnector {
 	}
 
 	public static SOAPMessage soapProductInfo(String productId) throws SOAPException, IOException {
-		String sessID = performLogin();
-		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		// SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID,
-		// productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), "http://staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
 
-	/**
-	 * This method will login with a user in {@link SoapKeys} and return the
-	 * sessionID.
-	 * 
-	 * @return
-	 * @throws SOAPException
-	 * @throws IOException
-	 */
-	protected static String performLogin() throws SOAPException, IOException {
-		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		// SOAPMessage soapResponse =
-		// soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP,
-		// Credentials.LOGIN_PASS_SOAP), MongoReader.getSoapURL()
-		// + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), "http://staging-aut.pippajean.com/"
-				+ UrlConstants.API_URI);
-		String result = "";
-
-		NodeList returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);
-		if (returnList.getLength() == 1) {
-			result = returnList.item(0).getTextContent();
-		}
-
-		System.out.println("SessionID -> " + result);
-		System.out.println("Login Response  ");
-		soapResponse.writeTo(System.out);
-		return result;
-	}
-
-	/**
-	 * Create a login message for SOAP call.
-	 * 
-	 * @param user
-	 * @param pass
-	 * @return
-	 * @throws SOAPException
-	 * @throws IOException
-	 */
-	public static SOAPMessage createLoginRequest(String user, String pass) throws SOAPException, IOException {
-		SOAPMessage soapMessage = createSoapDefaultMessage();
-
-		// SOAP Body
-		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement loginContainer = soapBody.addChildElement(SoapKeys.LOGIN_PARAM, SoapKeys.URN_PREFIX);
-		SOAPElement userBody = loginContainer.addChildElement(SoapKeys.USER_NAME);
-		userBody.addTextNode(user);
-		SOAPElement apikeyBody = loginContainer.addChildElement(SoapKeys.API_KEY);
-		apikeyBody.addTextNode(pass);
-
-		soapMessage.saveChanges();
-
-		soapMessage.writeTo(System.out);
-
-		return soapMessage;
-	}
+	// /**
+	// * This method will login with a user in {@link SoapKeys} and return the
+	// * sessionID.
+	// *
+	// * @return
+	// * @throws SOAPException
+	// * @throws IOException
+	// */
+	// protected static String performLogin() throws SOAPException, IOException
+	// {
+	// SOAPConnectionFactory soapConnectionFactory =
+	// SOAPConnectionFactory.newInstance();
+	// SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+	// // SOAPMessage soapResponse =
+	// // soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP,
+	// // Credentials.LOGIN_PASS_SOAP), MongoReader.getSoapURL()
+	// // + UrlConstants.API_URI);
+	// SOAPMessage soapResponse =
+	// soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP,
+	// Credentials.LOGIN_PASS_SOAP), "http://staging-aut.pippajean.com/"
+	// + UrlConstants.API_URI);
+	// String result = "";
+	//
+	// NodeList returnList =
+	// soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);
+	// if (returnList.getLength() == 1) {
+	// result = returnList.item(0).getTextContent();
+	// }
+	//
+	// System.out.println("SessionID -> " + result);
+	// System.out.println("Login Response  ");
+	// soapResponse.writeTo(System.out);
+	// return result;
+	// }
+	//
+	// /**
+	// * Create a login message for SOAP call.
+	// *
+	// * @param user
+	// * @param pass
+	// * @return
+	// * @throws SOAPException
+	// * @throws IOException
+	// */
+	// public static SOAPMessage createLoginRequest(String user, String pass)
+	// throws SOAPException, IOException {
+	// SOAPMessage soapMessage = createSoapDefaultMessage();
+	//
+	// // SOAP Body
+	// SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+	// SOAPElement loginContainer =
+	// soapBody.addChildElement(SoapKeys.LOGIN_PARAM, SoapKeys.URN_PREFIX);
+	// SOAPElement userBody =
+	// loginContainer.addChildElement(SoapKeys.USER_NAME);
+	// userBody.addTextNode(user);
+	// SOAPElement apikeyBody =
+	// loginContainer.addChildElement(SoapKeys.API_KEY);
+	// apikeyBody.addTextNode(pass);
+	//
+	// soapMessage.saveChanges();
+	//
+	// soapMessage.writeTo(System.out);
+	//
+	// return soapMessage;
+	// }
 
 	/**
 	 * Create default message with standard envelopes

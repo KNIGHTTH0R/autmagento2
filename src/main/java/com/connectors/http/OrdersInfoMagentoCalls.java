@@ -17,6 +17,7 @@ import com.tools.SoapKeys;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.env.constants.SoapConstants;
 import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 
 /**
  * @author mihaibarta
@@ -24,6 +25,8 @@ import com.tools.env.variables.UrlConstants;
  */
 
 public class OrdersInfoMagentoCalls {
+
+	private static String sessID = LoginSoapCall.performLogin();
 
 	public static List<DBOrderModel> getOrdersList(String stylistId) {
 
@@ -48,15 +51,10 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	public static SOAPMessage soapGetOrdersList(String stylistId) throws SOAPException, IOException {
-		String sessID = HttpSoapConnector.performLogin();
-		System.out.println("Sesion id :" + sessID);
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		// SOAPMessage soapResponse = soapConnection.call(getOrdersList(sessID,
-		// stylistId, createdStartDate, createdEndDate),
-		// MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
 
 		return soapResponse;
 	}

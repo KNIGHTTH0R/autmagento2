@@ -17,17 +17,10 @@ import com.tools.persistance.MongoReader;
 
 public class DeleteCustomer extends HttpSoapConnector {
 
-	public DeleteCustomer() throws SOAPException, IOException {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public static void main(String args[]) throws SOAPException, IOException {
-		deleteCustomer("26236");
-	}
+	private static String sessID = LoginSoapCall.performLogin();
 
 	public static SOAPMessage deleteCustomer(String customerId) throws SOAPException, IOException {
-		String sessID = HttpSoapConnector.performLogin();
+//		String sessID = HttpSoapConnector.performLogin();
 
 		System.out.println("Sesion id :" + sessID);
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
