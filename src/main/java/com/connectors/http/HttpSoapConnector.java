@@ -28,9 +28,11 @@ public class HttpSoapConnector {
 
 	private static String sessID;
 
-	public HttpSoapConnector() throws SOAPException, IOException {
+	public HttpSoapConnector HttpSoapConnector() throws SOAPException, IOException {
 		sessID = performLogin();
+		return new HttpSoapConnector();
 	}
+	
 
 	/**
 	 * Create a product and return the message. Performs login and creates a xml

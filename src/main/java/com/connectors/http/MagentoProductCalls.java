@@ -25,6 +25,7 @@ import com.tools.utils.FormatterUtils;
  */
 
 public class MagentoProductCalls {
+	
 
 	public static ProductDetailedModel createPomProductModel() {
 		ProductDetailedModel result = createProductModel();
