@@ -102,7 +102,7 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("10.00");
+		genProduct3.setPrice("5.00");
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
