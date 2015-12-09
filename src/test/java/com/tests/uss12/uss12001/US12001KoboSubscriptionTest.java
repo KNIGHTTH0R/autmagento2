@@ -30,6 +30,7 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
+import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
 import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -75,6 +76,8 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 	@Before
 	public void setUp() {
 
+		BorrowCartCalculator.wipe();
+		BorrowDataGrabber.wipe();
 		DataGrabber.wipe();
 
 		int size = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").size();
