@@ -81,6 +81,7 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 	private String username, password, customerName, notAllowedCustomerName;
 	private String discountClass;
 	private String billingAddress;
+	private String shippingAddress;
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
@@ -96,21 +97,6 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		genProduct1.setIp("75");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("49.90");
-//		genProduct2.setIp("42");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("99.00");
-//		genProduct3.setIp("84");
-//		MagentoProductCalls.createApiProduct(genProduct3);
-		
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("29.00");
 		genProduct1.setIp("25");
@@ -141,6 +127,7 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
+			shippingAddress = prop.getProperty("shippingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 
 			voucherCode = prop.getProperty("voucherCode");
@@ -198,6 +185,8 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
+		shippingPartySectionSteps.clickShipToHostessButton();
+		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();

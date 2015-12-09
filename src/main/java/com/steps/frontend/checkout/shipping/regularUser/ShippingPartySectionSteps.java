@@ -28,4 +28,24 @@ public class ShippingPartySectionSteps extends AbstractSteps {
 		regularUserShippingPage().selectCountry(country);
 	}
 
+	@Step
+	public void clickShipToHostessButton() {
+		regularUserShippingPage().clickShipToHostessButton();
+	}
+
+	@Step
+	public void clickShipToStylecoach() {
+		regularUserShippingPage().clickShipToStylecoach();
+	}
+
+	@Step
+	public void selectShipToHostessAddress(String address) {
+		regularUserShippingPage().selectShipToHostessAddress(address);
+	}
+
+	@Step
+	public void selectShipToStylecoachAddress(String address) {
+		regularUserShippingPage().selectShipToStylecoachAddress(address);
+	}
+
 }
