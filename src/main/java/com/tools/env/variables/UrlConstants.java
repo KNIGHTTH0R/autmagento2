@@ -32,18 +32,11 @@ public class UrlConstants {
 	public static final String WISHLIST_URL = "/wishlist/";
 	public static final String KOBO_CAMPAIGN = "/kobo-campaign/";
 
-//	public static final String PROFILE_HISTORY_URL = "simona/sales/order/history/";
 	public static final String PROFILE_HISTORY_URL = "/sales/order/history/";
 	public static final String STYLISTS_CUSTOMER_ORDER_REPORT = "/stylereports/order/myorders/?type=customerorders";
 	public static final String STYLISTS_REPORTS = "/stylereports/";
 	public static final String CART_PAGE_URL = "simona/checkout/cart/";
 	
-	
-//	public static final String URL_CART_SUCCESS = "simona/simplecheckout/process/success/";
-//	public static final String PARTY_DETAILS_URL = "qateam/stylist/party/details/id/";
-//	public static final String BASE_URL_FE = "customer/account/create/";
-	
-
 	//SOAP API
 	public static final String API_URI = "index.php/api/v2_soap/index/";
 

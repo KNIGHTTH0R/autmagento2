@@ -101,11 +101,6 @@ public class US70012KoboCampaignRegistrationUnderContextTest extends BaseTest {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us70012.properties");
 			prop.load(input);
 			context = prop.getProperty("context");
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -118,7 +113,6 @@ public class US70012KoboCampaignRegistrationUnderContextTest extends BaseTest {
 				}
 			}
 		}
-		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		MongoConnector.cleanCollection(getClass().getSimpleName());

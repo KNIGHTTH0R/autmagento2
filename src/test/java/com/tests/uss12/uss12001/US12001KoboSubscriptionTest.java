@@ -1,5 +1,11 @@
 package com.tests.uss12.uss12001;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -32,6 +38,7 @@ import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
 import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
 import com.tools.env.variables.ContextConstants;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -72,6 +79,8 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 
 	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 	private CreditCardModel creditCardData = new CreditCardModel();
+	private String discountClass;
+	private String shippingValue;
 
 	@Before
 	public void setUp() {
@@ -79,6 +88,29 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		BorrowCartCalculator.wipe();
 		BorrowDataGrabber.wipe();
 		DataGrabber.wipe();
+
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss12" + File.separator + "us12001.properties");
+			prop.load(input);
+
+			discountClass = prop.getProperty("discountClass");
+			shippingValue = prop.getProperty("shippingValue");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 		int size = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").size();
 		if (size > 0) {
@@ -108,7 +140,7 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		productData = productSteps.setKoboProductAddToCart("Kontakt-Booster 100", "Z980", "100.00", "100");
 		BorrowCartCalculator.allBorrowedProductsList.add(productData);
 
-		BorrowCartCalculator.calculateCartAndShippingTotals("19", "0.00");
+		BorrowCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
 
 		contactBoosterCartSteps.selectContactBooster100Voucher();
 		contactBoosterCartSteps.clickToShipping();
@@ -129,7 +161,6 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 
 		borrowCartShippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, BorrowCartCalculator.shippingCalculatedModel);
 		borrowCartShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-
 	}
 
 	@After
