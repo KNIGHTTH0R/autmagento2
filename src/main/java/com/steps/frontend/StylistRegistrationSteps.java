@@ -178,6 +178,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
 		submitStep();
 		selectStarterKit();
+		grabCartTotal();
 		submitStep();
 		payWithCreditCard();
 
