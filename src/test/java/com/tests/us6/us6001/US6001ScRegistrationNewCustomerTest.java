@@ -54,7 +54,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		calculatedTotals = new StylistRegistrationCartTotalModel();
-		calculatedTotals.setDelivery("0.00");
+		calculatedTotals.setDelivery("03.00");
 		calculatedTotals.setTotalPrice("100.00");
 		birthDate.setDate("Feb,1970,12");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
