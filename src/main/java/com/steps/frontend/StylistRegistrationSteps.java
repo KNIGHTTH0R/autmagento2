@@ -40,6 +40,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
 		submitStep();
 		selectStarterKit();
+		grabCartTotal();
 		submitStep();
 		payWithCreditCard();
 
@@ -428,6 +429,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	@Step
 	public void selectStarterKit() {
 		stylistRegistrationPage().selectStarterKit();
+	}
+	@Step
+	public void grabCartTotal() {
+		stylistRegistrationPage().grabCartTotal();
 	}
 
 	@Step

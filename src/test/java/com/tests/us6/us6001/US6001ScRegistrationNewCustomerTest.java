@@ -68,7 +68,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(calculatedTotals, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount();
-		
+
 		customVerification.printErrors();
 
 	}
