@@ -9,9 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
+import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.FormatterUtils;
 
 public class StylistRegistrationPage extends AbstractPage {
 
@@ -339,6 +342,23 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void selectStarterKit() {
 		waitABit(TimeConstants.TIME_MEDIUM);
 		elementjQueryClick("input#kit_2941");
+	}
+
+	public StylistRegistrationCartTotalModel grabCartTotal() {
+
+		StylistRegistrationCartTotalModel result = new StylistRegistrationCartTotalModel();
+
+		result.setDelivery(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#shipping-value")).getText()));
+		result.setTotalPrice(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#total-price-value")).getText()));
+		
+		StylistRegDataGrabber.cartTotals = result;
+
+		return result;
+
+	}
+	
+	public static void verifyCartTotals(){
+		
 	}
 
 	public void selectMonth(String month) {
