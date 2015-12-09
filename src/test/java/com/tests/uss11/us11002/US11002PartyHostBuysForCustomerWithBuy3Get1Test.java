@@ -111,7 +111,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 		
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("29.00");
-		genProduct1.setIp("24");
+		genProduct1.setIp("75");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		
 		genProduct2 = MagentoProductCalls.createProductModel();
@@ -121,8 +121,9 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 		
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("14.00");
-		genProduct3.setIp("12");
+		genProduct3.setIp("84");
 		MagentoProductCalls.createApiProduct(genProduct3);
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 
