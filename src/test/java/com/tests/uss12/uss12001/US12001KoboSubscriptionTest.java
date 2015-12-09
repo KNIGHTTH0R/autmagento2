@@ -100,15 +100,16 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
 		myBusinessSteps.accessKoboCart();
-		
-		//we use borrow cart models and calculations because it contains the same data
+
+		// we use borrow cart models and calculations because it contains the
+		// same data
 		BorrowProductModel productData;
-		
+
 		productData = productSteps.setKoboProductAddToCart("Kontakt-Booster 100", "Z980", "100.00", "100");
 		BorrowCartCalculator.allBorrowedProductsList.add(productData);
-		
+
 		BorrowCartCalculator.calculateCartAndShippingTotals("19", "0.00");
-		
+
 		contactBoosterCartSteps.selectContactBooster100Voucher();
 		contactBoosterCartSteps.clickToShipping();
 		shippingSteps.grabSurveyData();
@@ -123,11 +124,11 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		borrowCartShippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, BorrowCartCalculator.shippingCalculatedModel);
 		borrowCartShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
-//		confirmationSteps.agreeAndCheckout();
-//		headerSteps.goToLounge();
-//		myBusinessSteps.verifyKoboOrderProcessingStatus();
-//		headerSteps.goToMyBusinessPage();
-//		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.WAITING_PAYMENT_CONFIRMATION);
+		confirmationSteps.agreeAndCheckout();
+		headerSteps.goToLounge();
+		myBusinessSteps.verifyKoboOrderProcessingStatus();
+		headerSteps.goToMyBusinessPage();
+		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.WAITING_PAYMENT_CONFIRMATION);
 
 	}
 
