@@ -144,6 +144,9 @@ public class Application {
 
 		public class US11_3 {
 		}
+
+		public class US11_4 {
+		}
 	}
 
 	@Feature
@@ -207,6 +210,7 @@ public class Application {
 		public class US21_1 {
 		}
 	}
+
 	@Feature
 	public class AvailabilityReport {
 		public class US26_1 {
@@ -319,6 +323,7 @@ public class Application {
 		public class US23_1 {
 		}
 	}
+
 	@Feature
 	public class PlzValidation {
 		public class US24_1 {

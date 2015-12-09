@@ -47,7 +47,7 @@ import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
 @WithTag(name = "US11.4 Party Host Buys For Customer With Voucher Test", type = "Scenarios")
-@Story(Application.PlaceACustomerOrderCart.US11_1.class)
+@Story(Application.PlaceACustomerOrderCart.US11_4.class)
 @RunWith(ThucydidesRunner.class)
 public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
@@ -213,7 +213,7 @@ public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 
-		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
 		hostCartValidationWorkflows.performCartValidationsWithVoucherDiscount();
 
 		customVerifications.printErrors();
