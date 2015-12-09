@@ -116,8 +116,8 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct1);
 		
 		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setPrice("20.00");
-		genProduct2.setIp("18");
+		genProduct2.setPrice("10.00");
+		genProduct2.setIp("8");
 		MagentoProductCalls.createApiProduct(genProduct2);
 		
 		genProduct3 = MagentoProductCalls.createProductModel();
