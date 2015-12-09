@@ -27,6 +27,7 @@ public class AdyenWorkflows {
 	@Step
 	public void verifyTotal(String adyenTotal, String compare) {
 		BigDecimal total = BigDecimal.valueOf(Double.parseDouble(adyenTotal));
+		System.out.println(adyenTotal + "     " + compare);
 		total = total.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
 		CustomVerification.verifyTrue("Failure: Adyen totals doesn't match   Expected: " + compare + " Actual: " + String.valueOf(total), String.valueOf(total).contains(compare));
 	}
