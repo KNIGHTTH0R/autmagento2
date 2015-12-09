@@ -1,6 +1,7 @@
 package com.tools.calculation;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,8 @@ public class HostCartBuy3Get1Calculation {
 			newProduct.setFinalPrice(product.getFinalPrice());
 			newProduct.setIpPoints(product.getIpPoints());
 
-			ipDiscount = BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())).divide(BigDecimal.valueOf(Double.parseDouble(product.getQuantity())), 5, BigDecimal.ROUND_HALF_UP);
+//			ipDiscount = BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())).divide(BigDecimal.valueOf(Double.parseDouble(product.getQuantity())), 5, BigDecimal.ROUND_HALF_UP);
+			ipDiscount = BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())).divide(BigDecimal.valueOf(Double.parseDouble(product.getQuantity())),MathContext.DECIMAL128);
 			ipDiscount = ipDiscount.divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
 			ipDiscount = ipDiscount.multiply(noOfDiscounts);
 

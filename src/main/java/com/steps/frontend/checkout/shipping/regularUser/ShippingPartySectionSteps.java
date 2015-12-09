@@ -17,10 +17,15 @@ public class ShippingPartySectionSteps extends AbstractSteps {
 	public void clickPartyNoOption() {
 		regularUserShippingPage().clickPartyNoOption();
 	}
-	
+
 	@Step
-	public void checkItemNotReceivedYet(){
+	public void checkItemNotReceivedYet() {
 		regularUserShippingPage().checkItemNotReceivedYet();
+	}
+
+	@Step
+	public void selectCountry(String country) {
+		regularUserShippingPage().selectCountry(country);
 	}
 
 }

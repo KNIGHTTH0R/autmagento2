@@ -17,6 +17,9 @@ public class ShippingPartySectionPage extends AbstractPage {
 	@FindBy(css = "div#preshipped-prod input[value*='0']")
 	private WebElement itemNotReceived;
 
+	@FindBy(css = "select[id='billing:country_id']")
+	private WebElement countrySelect;
+
 	public void checkItemNotReceivedYet() {
 		element(itemNotReceived).waitUntilVisible();
 		itemNotReceived.click();
@@ -30,6 +33,11 @@ public class ShippingPartySectionPage extends AbstractPage {
 	public void clickPartyNoOption() {
 		element(noPartyOption).waitUntilVisible();
 		noPartyOption.click();
+	}
+
+	public void selectCountry(String country) {
+		element(countrySelect).waitUntilVisible();
+		element(countrySelect).selectByVisibleText(country);
 	}
 
 }
