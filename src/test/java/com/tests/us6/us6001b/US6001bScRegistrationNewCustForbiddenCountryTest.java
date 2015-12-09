@@ -62,7 +62,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 	}
 
 	@Test
-	public void us6001bScRegistrationNewCustForbiddenCountryTest(){ 
+	public void us6001bScRegistrationNewCustForbiddenCountryTest(){
 		headerSteps.navigateToRegisterForm();
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerFormFirstWithForbiddenCountry(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
