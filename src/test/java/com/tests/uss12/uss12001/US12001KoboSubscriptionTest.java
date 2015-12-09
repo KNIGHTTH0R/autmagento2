@@ -121,14 +121,14 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-		borrowCartShippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, BorrowCartCalculator.shippingCalculatedModel);
-		borrowCartShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-
 		confirmationSteps.agreeAndCheckout();
 		headerSteps.goToLounge();
 		myBusinessSteps.verifyKoboOrderProcessingStatus();
 		headerSteps.goToMyBusinessPage();
 		myBusinessSteps.verifyKoboSectionContainsText(ContextConstants.WAITING_PAYMENT_CONFIRMATION);
+
+		borrowCartShippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, BorrowCartCalculator.shippingCalculatedModel);
+		borrowCartShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
 	}
 
