@@ -22,5 +22,10 @@ public class ContactHostShippingHostSteps extends AbstractSteps {
 	public void verifyStyleCoachAndOrderForDetails(String details) {
 		contactHostShippingPage().verifyStyleCoachAndOrderForDetails(details);
 	}
+	
+	@Step
+	public void selectCountry(String country) {
+		contactHostShippingPage().selectCountry(country);
+	}
 
 }

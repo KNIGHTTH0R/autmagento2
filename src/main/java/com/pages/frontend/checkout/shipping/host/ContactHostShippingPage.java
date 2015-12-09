@@ -34,5 +34,10 @@ public class ContactHostShippingPage extends AbstractPage {
 		element(detailsContainer).waitUntilVisible();
 		Assert.assertTrue("style coach and order for don't match", detailsContainer.getText().contains(details));
 	}
+	
+	public void selectCountry(String country) {
+		element(countryDdl).waitUntilVisible();
+		element(countryDdl).selectByVisibleText(country);
+	}
 
 }

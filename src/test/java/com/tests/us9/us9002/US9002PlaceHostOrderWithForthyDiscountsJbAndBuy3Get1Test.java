@@ -84,6 +84,7 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 	private String discountClass;
 	private String contactBillingAddress;
 	private String shippingValue;
+	private String country;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
@@ -95,18 +96,30 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("89.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createProductModel();
+//		genProduct2.setPrice("49.90");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//
+//		genProduct3 = MagentoProductCalls.createProductModel();
+//		genProduct3.setPrice("100.00");
+//		MagentoProductCalls.createApiProduct(genProduct3);
+		
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
+		genProduct1.setPrice("29.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
-
+		
 		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setPrice("49.90");
+		genProduct2.setPrice("10.00");
 		MagentoProductCalls.createApiProduct(genProduct2);
-
+		
 		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("100.00");
+		genProduct3.setPrice("29.90");
 		MagentoProductCalls.createApiProduct(genProduct3);
-
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -119,6 +132,7 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 
 			discountClass = prop.getProperty("discountClass");
 			contactBillingAddress = prop.getProperty("contactBillingAddress");
+			country = prop.getProperty("country");
 			shippingValue = prop.getProperty("shippingValue");
 
 		} catch (IOException ex) {
@@ -174,6 +188,7 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 		hostCartSteps.clickGoToShipping();
 		contactHostShippingHostSteps.checkItemNotReceivedYet();
 		contactHostShippingHostSteps.verifyThatRestrictedCountriesAreNotAvailable();
+		contactHostShippingHostSteps.selectCountry(country);
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 
