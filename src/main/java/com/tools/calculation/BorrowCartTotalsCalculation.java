@@ -7,6 +7,7 @@ import java.util.List;
 import com.tools.data.BorrowCartCalcDetailsModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.utils.PrintUtils;
 
 public class BorrowCartTotalsCalculation {
 
@@ -34,6 +35,8 @@ public class BorrowCartTotalsCalculation {
 
 		result.setTax(String.valueOf(tax));
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
+		
+		PrintUtils.printBorrowCartCalcDetailsModel(result);
 
 		return result;
 	}
@@ -49,6 +52,8 @@ public class BorrowCartTotalsCalculation {
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())));
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		result.setTotalAmount(totalAmountCalculation.toString());
+		
+		PrintUtils.printShippingTotals(result);
 
 		return result;
 	}

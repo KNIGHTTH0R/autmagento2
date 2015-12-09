@@ -83,6 +83,14 @@ public class CartCalculator {
 		PrintUtils.printShippingTotals(shippingCalculatedModel);
 	}
 	
+	public static void calculateKoboSubscriptionTotals(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue){
+		
+		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsList, jewelryDiscount, marketingDiscount,taxClass,shippingValue,shippingValue);
+		PrintUtils.printCalcDetailsModel(calculatedTotalsDiscounts);
+		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+		PrintUtils.printShippingTotals(shippingCalculatedModel);
+	}
+	
 	public static void calculateJMDiscountsForBuy3Get1Rule(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue, String shippingValueForLessThan150){
 		allProductsList.clear();
 		allProductsList.addAll(productsList25);

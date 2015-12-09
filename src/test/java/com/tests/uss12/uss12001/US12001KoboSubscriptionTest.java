@@ -17,6 +17,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.MyBusinessSteps;
+import com.steps.frontend.ProductSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
@@ -24,14 +25,17 @@ import com.steps.frontend.checkout.cart.kobo.ContactBoosterCartSteps;
 import com.steps.frontend.checkout.shipping.kobo.KoboShippingSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
+import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
 import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
+import com.workflows.frontend.borrowCart.BorrowCartShippingAndConfirmationWorkflows;
 
 @WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
 @Story(Application.KoboSubscription.US12_1.class)
@@ -60,7 +64,11 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	
+	@Steps
+	public ProductSteps productSteps;
+	@Steps
+	public BorrowCartShippingAndConfirmationWorkflows borrowCartShippingAndConfirmationWorkflows;
+
 	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 	private CreditCardModel creditCardData = new CreditCardModel();
 
@@ -89,8 +97,18 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
 		myBusinessSteps.accessKoboCart();
+		
+		//we use borrow cart models and calculations because it contains the same data
+		BorrowProductModel productData;
+		
+		productData = productSteps.setKoboProductAddToCart("Kontakt-Booster 100", "Z980", "100.00", "100");
+		BorrowCartCalculator.allBorrowedProductsList.add(productData);
+		
+		BorrowCartCalculator.calculateCartAndShippingTotals("19", "0.00");
+		
 		contactBoosterCartSteps.selectContactBooster100Voucher();
 		contactBoosterCartSteps.clickToShipping();
+		shippingSteps.grabSurveyData();
 		koboShippingSteps.acceptTerms();
 		shippingSteps.goToPaymentMethod();
 		String url = shippingSteps.grabUrl();
@@ -98,6 +116,10 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
+
+		borrowCartShippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, BorrowCartCalculator.shippingCalculatedModel);
+		borrowCartShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
 		confirmationSteps.agreeAndCheckout();
 		headerSteps.goToLounge();
 		myBusinessSteps.verifyKoboOrderProcessingStatus();

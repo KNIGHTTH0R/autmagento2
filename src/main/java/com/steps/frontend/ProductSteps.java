@@ -94,6 +94,19 @@ public class ProductSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
+	@StepGroup
+	public BorrowProductModel setKoboProductAddToCart(String name, String code, String price, String ip) {
+		BorrowProductModel result = new BorrowProductModel();
+		
+		result.setName(name);
+		result.setProdCode(code);
+		result.setUnitPrice(price);
+		result.setFinalPrice(price);
+		result.setIpPoints(ip);
+		
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return result;
+	}
 
 	@StepGroup
 	public BorrowProductModel setBorrowedDefaultProductAddToCart() {
