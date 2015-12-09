@@ -178,6 +178,9 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
+		
+		shippingSteps.selectAddress(billingAddress);
+		shippingSteps.setSameAsBilling(false);
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();

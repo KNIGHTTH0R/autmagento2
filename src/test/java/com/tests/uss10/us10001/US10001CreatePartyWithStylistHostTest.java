@@ -46,8 +46,9 @@ public class US10001CreatePartyWithStylistHostTest extends BaseTest {
 
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
-	public static UrlModel urlModel = new UrlModel();
-	public static DateModel dateModel = new DateModel();
+	
+	private static UrlModel urlModel = new UrlModel();
+	private static DateModel dateModel = new DateModel();
 	private String username, password;
 
 	@Before
