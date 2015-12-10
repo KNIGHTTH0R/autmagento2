@@ -41,6 +41,7 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.PomCartCalculator;
+import com.tools.datahandlers.partyHost.HostDataGrabber;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
@@ -49,6 +50,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
+import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.AdyenWorkflows;
 import com.workflows.frontend.ShippingAndConfirmationWorkflows;
 
@@ -96,10 +98,11 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private String discountClass;
 	private String shippingValue;
+	private String billingAddress;
 
 	@Before
 	public void setUp() throws Exception {
-		RegularUserDataGrabber.wipe();
+		DataGrabber.wipe();
 		PomCartCalculator.wipe();
 
 		Properties prop = new Properties();
@@ -107,7 +110,7 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss12" + File.separator + "us12001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us70011.properties");
 			prop.load(input);
 
 			discountClass = prop.getProperty("discountClass");
@@ -153,12 +156,13 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		PomCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
 
 		fancyBoxSteps.goToShipping();
-		shippingSteps.goToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
-		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));
-		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(shippingUrl));
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
+		DataGrabber.shippingTotals = shippingSteps.grabSurveyData();
+		shippingSteps.goToPaymentMethod();
+		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));
+		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(shippingUrl));
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
 //		confirmationSteps.agreeAndCheckout();
 //		checkoutValidationSteps.verifySuccessMessage();
 //		headerSteps.redirectToProfileHistory();
@@ -172,13 +176,15 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 
 		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, PomCartCalculator.shippingCalculatedModel);
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+		
+
 
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());
 	}
 
 }

@@ -513,7 +513,7 @@ public class PrintUtils {
 
 	}
 	public static void printPomCartCalcDetailsModel(PomCartCalcDetailsModel calculatedDetailsModel) {
-		System.out.println("printBorrowCartCalcDetailsModel -----------------------------");
+		System.out.println("printPomCartCalcDetailsModel -----------------------------");
 		
 		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
 		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());

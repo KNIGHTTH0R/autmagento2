@@ -31,10 +31,10 @@ public class PomCartTotalsCalculation {
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 
-		result.setTotalAmount(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
+		result.setTotalAmount(String.valueOf(subtotal.subtract(discount).setScale(2, RoundingMode.HALF_UP)));
 
 		result.setTax(String.valueOf(tax));
-		result.setPomDiscount(String.valueOf(discount));
+		result.setPomDiscount(String.valueOf(discount.negate()));
 
 		PrintUtils.printPomCartCalcDetailsModel(result);
 
