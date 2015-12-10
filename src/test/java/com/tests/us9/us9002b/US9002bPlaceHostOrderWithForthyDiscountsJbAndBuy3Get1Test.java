@@ -188,22 +188,22 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//
-//		confirmationSteps.grabHostProductsList();
-//
-//		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-//
-//		confirmationSteps.grabBillingData();
-//		confirmationSteps.grabSippingData();
-//
-//		confirmationSteps.agreeAndCheckout();
-//
-//		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, shippingAddress);
-//		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
-//
-//		customVerifications.printErrors();
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+
+		confirmationSteps.grabHostProductsList();
+
+		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
+
+		confirmationSteps.grabBillingData();
+		confirmationSteps.grabSippingData();
+
+		confirmationSteps.agreeAndCheckout();
+
+		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, shippingAddress);
+		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
+
+		customVerifications.printErrors();
 	}
 
 	@After
