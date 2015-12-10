@@ -54,7 +54,9 @@ public class HostCartCalculator {
 
 	public static void calculateCartAndShippingTotals(List<HostBasicProductModel> prodList, String discountClass, String shippingValue) {
 		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotals(allProductsList, discountClass);
+		PrintUtils.printHostCartCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+		PrintUtils.printShippingTotals(shippingCalculatedModel);
 	}
 
 	public static void calculateOrderForCustomerCartAndShippingTotals(String discountClass, String shippingValue, String voucherValue) {

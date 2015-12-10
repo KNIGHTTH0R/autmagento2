@@ -166,7 +166,7 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		hostCartSteps.grabProductsData();
+		hostCartSteps.grabProductsDataWhenThereIsNoBonus();
 		hostCartSteps.grabTotals();
 
 		HostCartCalculator.calculateCartAndShippingTotals(HostCartCalculator.allProductsList, discountClass, shippingValue);

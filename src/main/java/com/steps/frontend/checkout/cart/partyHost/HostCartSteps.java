@@ -29,6 +29,10 @@ public class HostCartSteps extends AbstractSteps {
 	public List<HostCartProductModel> grabProductsData() {
 		return hostCartPage().grabProductsData();
 	}
+	@Step
+	public List<HostCartProductModel> grabProductsDataWhenThereIsNoBonus() {
+		return hostCartPage().grabProductsDataWhenNoBonus();
+	}
 
 	@Step
 	public HostCartTotalsModel grabTotals() {

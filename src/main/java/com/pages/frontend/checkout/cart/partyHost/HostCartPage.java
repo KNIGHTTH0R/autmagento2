@@ -124,6 +124,28 @@ public class HostCartPage extends AbstractPage {
 
 		return resultList;
 	}
+	public List<HostCartProductModel> grabProductsDataWhenNoBonus() {
+		element(cartTable).waitUntilVisible();
+		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
+		
+		// waitABit(Constants.TIME_CONSTANT);
+		List<HostCartProductModel> resultList = new ArrayList<HostCartProductModel>();
+		
+		for (WebElement webElementNow : entryList) {
+			HostCartProductModel productNow = new HostCartProductModel();
+			
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
+			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
+			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(1).price")).getText()));
+			productNow.setIpPoints(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(2).price")).getText()));
+			resultList.add(productNow);
+		}
+		HostDataGrabber.grabbedHostCartProductsList = resultList;
+		
+		return resultList;
+	}
 
 	public HostCartTotalsModel grabTotals() {
 		HostCartTotalsModel resultModel = new HostCartTotalsModel();
