@@ -98,7 +98,6 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private String discountClass;
 	private String shippingValue;
-	private String billingAddress;
 
 	@Before
 	public void setUp() throws Exception {
