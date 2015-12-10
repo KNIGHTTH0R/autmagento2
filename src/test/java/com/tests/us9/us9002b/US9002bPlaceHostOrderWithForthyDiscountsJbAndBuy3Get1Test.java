@@ -28,6 +28,7 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostSteps;
+import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.SoapKeys;
@@ -73,6 +74,8 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
+	public ShippingPartySectionSteps shippingPartySectionSteps;
+	@Steps
 	public HostCartValidationWorkflows hostCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
@@ -82,6 +85,7 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 	private String username, password;
 	private String discountClass;
 	private String contactBillingAddress;
+	private String shippingAddress;
 	private String shippingValue;
 	private String country;
 	private CreditCardModel creditCardData = new CreditCardModel();
@@ -112,13 +116,14 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us9" + File.separator + "us9002.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us9" + File.separator + "us9002b.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 
 			discountClass = prop.getProperty("discountClass");
 			contactBillingAddress = prop.getProperty("contactBillingAddress");
+			shippingAddress = prop.getProperty("shippingAddress");
 			country = prop.getProperty("country");
 			shippingValue = prop.getProperty("shippingValue");
 
@@ -170,6 +175,8 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 		contactHostShippingHostSteps.checkItemNotReceivedYet();
 		contactHostShippingHostSteps.verifyThatRestrictedCountriesAreNotAvailable();
 		contactHostShippingHostSteps.selectCountry(country);
+		shippingPartySectionSteps.clickShipToStylecoach();
+		shippingPartySectionSteps.selectShipToStylecoachAddress(shippingAddress);
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 
@@ -181,22 +188,22 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
-		confirmationSteps.grabHostProductsList();
-
-		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-
-		confirmationSteps.grabBillingData();
-		confirmationSteps.grabSippingData();
-
-		confirmationSteps.agreeAndCheckout();
-
-		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, contactBillingAddress);
-		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
-
-		customVerifications.printErrors();
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+//
+//		confirmationSteps.grabHostProductsList();
+//
+//		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
+//
+//		confirmationSteps.grabBillingData();
+//		confirmationSteps.grabSippingData();
+//
+//		confirmationSteps.agreeAndCheckout();
+//
+//		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, shippingAddress);
+//		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
+//
+//		customVerifications.printErrors();
 	}
 
 	@After
