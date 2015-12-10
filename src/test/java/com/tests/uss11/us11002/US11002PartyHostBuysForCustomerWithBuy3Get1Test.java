@@ -46,7 +46,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US11.2 Party Host Buys For Customer With Buy 3 Get 1 For 50% ", type = "Scenarios")
+@WithTag(name = "US11.2 Party Host Buys For Customer With Buy 3 Get 1 For 50%, ship to customer ", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
@@ -95,21 +95,6 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		genProduct1.setIp("75");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("49.90");
-//		genProduct2.setIp("42");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("99.00");
-//		genProduct3.setIp("84");
-//		MagentoProductCalls.createApiProduct(genProduct3);
-		
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("29.00");
 		genProduct1.setIp("25");

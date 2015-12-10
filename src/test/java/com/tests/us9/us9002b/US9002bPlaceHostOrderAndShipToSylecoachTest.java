@@ -48,10 +48,10 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US9.2b Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
+@WithTag(name = "US9.2b Place Host Order (customer host) and ship to stylecoach", type = "Scenarios")
 @Story(Application.HostCart.US9_2.class)
 @RunWith(ThucydidesRunner.class)
-public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends BaseTest {
+public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -146,7 +146,7 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 	}
 
 	@Test
-	public void us9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test() {
+	public void us9002bPlaceHostOrderAndShipToSylecoachTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -201,7 +201,7 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 		confirmationSteps.agreeAndCheckout();
 
 		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, shippingAddress);
-		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
+		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJb();
 
 		customVerifications.printErrors();
 	}

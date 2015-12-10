@@ -59,11 +59,11 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US4001Suite.class,
 	US4002Suite.class,
 	DeactivateBuy3Get1ForShopForMyself.class,
-	US10001AndUS10002ClosePartiesSuite.class,
 	
 	DeactivateBuy3Get1ForHostTest.class,
 	US9001Suite.class,
 	US9002Suite.class,
+	US9002bSuite.class,
 	
 	US10005Suite.class,
 	US10006Suite.class,
@@ -73,6 +73,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US11001Suite.class,
 	US11002Suite.class,
 	US11003VerifyProductsInPlaceACustomerOrderModal.class,
+	US11004Suite.class,
 	
 	US12001Suite.class,
 	

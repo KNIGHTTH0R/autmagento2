@@ -46,7 +46,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test", type = "Scenarios")
+@WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test, ship to host", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
