@@ -7,7 +7,6 @@ import com.tools.calculation.BorrowCartTotalsCalculation;
 import com.tools.data.BorrowCartCalcDetailsModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.utils.PrintUtils;
 
 public class BorrowCartCalculator {
 
@@ -20,7 +19,7 @@ public class BorrowCartCalculator {
 		allBorrowedProductsList = new ArrayList<BorrowProductModel>();
 		borrowCartCalcDetailsModel = new BorrowCartCalcDetailsModel();
 		shippingCalculatedModel = new ShippingModel();
-		
+
 	}
 
 	public static void calculateCartAndShippingTotals(String discountClass, String shippingValue) {

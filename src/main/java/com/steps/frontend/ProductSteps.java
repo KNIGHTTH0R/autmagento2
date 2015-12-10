@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.StepGroup;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
+import com.tools.data.frontend.PomProductModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.TimeConstants;
@@ -103,6 +104,19 @@ public class ProductSteps extends AbstractSteps {
 		result.setUnitPrice(price);
 		result.setFinalPrice(price);
 		result.setIpPoints(ip);
+		
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return result;
+	}
+	
+	@StepGroup
+	public PomProductModel setPomProductAddToCart(String name, String code, String price) {
+		PomProductModel result = new PomProductModel();
+		
+		result.setName(name);
+		result.setProdCode(code);
+		result.setUnitPrice(price);
+		result.setFinalPrice(price);
 		
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;

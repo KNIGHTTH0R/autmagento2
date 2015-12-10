@@ -6,6 +6,7 @@ import com.tools.data.BorrowCartCalcDetailsModel;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.HostCartCalcDetailsModel;
+import com.tools.data.PomCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -510,6 +511,15 @@ public class PrintUtils {
 		System.out.println("tax : " + calculatedDetailsModel.getTax());
 		System.out.println("ip points : " + calculatedDetailsModel.getIpPoints());
 
+	}
+	public static void printPomCartCalcDetailsModel(PomCartCalcDetailsModel calculatedDetailsModel) {
+		System.out.println("printBorrowCartCalcDetailsModel -----------------------------");
+		
+		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
+		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());
+		System.out.println("tax : " + calculatedDetailsModel.getTax());
+		System.out.println("discopunt : " + calculatedDetailsModel.getPomDiscount());
+		
 	}
 
 	public static void printHostCartCalcDetailsModel(HostCartCalcDetailsModel calculatedDetailsModel) {
