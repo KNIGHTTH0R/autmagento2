@@ -20,24 +20,24 @@ public class PomCartTotalsCalculation {
 		BigDecimal tax = BigDecimal.ZERO;
 
 		for (PomProductModel product : productsList) {
-			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
+			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())));
 
 		}
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 
 		// the discount is equal to the first product added into the cart price
 		discount = discount.add(BigDecimal.valueOf(Double.parseDouble(productsList.get(0).getUnitPrice())));
+		result.setPomDiscount(String.valueOf(discount.negate().setScale(2, RoundingMode.HALF_UP)));
+		
 		totalAmount = subtotal.subtract(discount);
+		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
 
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 
-		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
-
-		result.setTax(String.valueOf(tax));
-		result.setPomDiscount(String.valueOf(discount.negate()));
-
+		result.setTax(String.valueOf(tax.setScale(2, RoundingMode.HALF_UP)));
+	
 		PrintUtils.printPomCartCalcDetailsModel(result);
 
 		return result;

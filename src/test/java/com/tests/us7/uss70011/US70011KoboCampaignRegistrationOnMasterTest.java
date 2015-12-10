@@ -148,10 +148,8 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 
 		PomProductModel productData;
-
 		productData = productSteps.setPomProductAddToCart(genProduct1.getName(), genProduct1.getSku(), genProduct1.getPrice());
 		PomCartCalculator.allBorrowedProductsList.add(productData);
-
 		PomCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
 
 		fancyBoxSteps.goToShipping();
