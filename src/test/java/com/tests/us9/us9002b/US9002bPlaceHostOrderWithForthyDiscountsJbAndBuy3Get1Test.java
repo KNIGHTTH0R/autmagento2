@@ -100,7 +100,7 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 		HostDataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("29.00");
+		genProduct1.setPrice("19.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
 		genProduct2 = MagentoProductCalls.createProductModel();
@@ -108,7 +108,7 @@ public class US9002bPlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends B
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("29.90");
+		genProduct3.setPrice("24.90");
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
