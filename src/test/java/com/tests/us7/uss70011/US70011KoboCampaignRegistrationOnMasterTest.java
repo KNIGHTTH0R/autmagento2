@@ -163,21 +163,20 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(shippingUrl));
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-//		confirmationSteps.agreeAndCheckout();
-//		checkoutValidationSteps.verifySuccessMessage();
-//		headerSteps.redirectToProfileHistory();
-//		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-//
-//		String orderId = orderHistory.get(0).getOrderId();
-//		profileSteps.verifyOrderId(orderId, RegularUserDataGrabber.orderModel.getOrderId());
-		
+		// confirmationSteps.agreeAndCheckout();
+		// checkoutValidationSteps.verifySuccessMessage();
+		// headerSteps.redirectToProfileHistory();
+		// List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+		//
+		// String orderId = orderHistory.get(0).getOrderId();
+		// profileSteps.verifyOrderId(orderId,
+		// RegularUserDataGrabber.orderModel.getOrderId());
+
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, PomCartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
 		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, PomCartCalculator.shippingCalculatedModel);
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
-		
-
 
 	}
 
