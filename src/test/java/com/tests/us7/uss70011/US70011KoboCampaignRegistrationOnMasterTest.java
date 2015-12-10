@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -34,13 +33,13 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPomSteps;
 import com.tests.BaseTest;
-import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.PomProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
+import com.tools.datahandlers.CartCalculator;
+import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.PomCartCalculator;
 import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.constants.ConfigConstants;
@@ -50,6 +49,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
+import com.workflows.frontend.AdyenWorkflows;
+import com.workflows.frontend.ShippingAndConfirmationWorkflows;
 
 @WithTag(name = "US7.11 Kobo Campaign Registration On Master Test ", type = "Scenarios")
 @Story(Application.KoboCampaign.US7_11.class)
@@ -84,6 +85,10 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public ProductSteps productSteps;
+	@Steps
+	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
+	@Steps
+	public AdyenWorkflows adyenWorkflows;
 
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
@@ -161,6 +166,12 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 //
 //		String orderId = orderHistory.get(0).getOrderId();
 //		profileSteps.verifyOrderId(orderId, RegularUserDataGrabber.orderModel.getOrderId());
+		
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, PomCartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, PomCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 	}
 
