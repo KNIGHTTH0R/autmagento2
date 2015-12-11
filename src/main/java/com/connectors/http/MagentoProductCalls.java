@@ -28,7 +28,7 @@ public class MagentoProductCalls {
 
 	public static ProductDetailedModel createPomProductModel() {
 		ProductDetailedModel result = createProductModel();
-		result.setSku("POM" + result.getSku());
+		result.setName("POM_Automation_" + result.getName());
 		List<String> categoriesIds = new ArrayList<String>();
 		categoriesIds.add("52");
 		categoriesIds.add("52");
