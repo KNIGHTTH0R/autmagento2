@@ -47,7 +47,7 @@ public class PomCartTotalsCalculation {
 		ShippingModel result = new ShippingModel();
 
 		result.setSubTotal(discountCalculationModel.getSubTotal());
-		result.setDiscountPrice("0");
+		result.setDiscountPrice(discountCalculationModel.getPomDiscount());
 		result.setShippingPrice(shippingValue);
 		// totals calculation
 		BigDecimal totalAmountCalculation = BigDecimal.ZERO;

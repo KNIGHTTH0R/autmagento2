@@ -33,6 +33,7 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPomSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -91,6 +92,8 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
 	@Steps
 	public AdyenWorkflows adyenWorkflows;
+	@Steps
+	public CustomVerification customVerifications;
 
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
@@ -150,13 +153,13 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		PomProductModel productData;
 		productData = productSteps.setPomProductAddToCart(genProduct1.getName(), genProduct1.getSku(), genProduct1.getPrice());
 		PomCartCalculator.allBorrowedProductsList.add(productData);
+
 		PomCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
 
 		fancyBoxSteps.goToShipping();
+		shippingSteps.goToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
 		DataGrabber.shippingTotals = shippingSteps.grabSurveyData();
-		shippingSteps.goToPaymentMethod();
-		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(shippingUrl));
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
@@ -174,6 +177,8 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 
 		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, PomCartCalculator.shippingCalculatedModel);
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+
+		customVerifications.printErrors();
 
 	}
 

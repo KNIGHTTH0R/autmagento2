@@ -101,20 +101,6 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		
 		productsList = MongoReader.grabBasicProductModel("US3001BuyProductsForTheFirstTimeTest" + SoapKeys.GRAB);
 
-//		genProduct1 = CreateProduct.createProductModel();	
-//		genProduct1.setIp("84");
-//		genProduct1.setPrice("49.90");
-//		CreateProduct.createApiProduct(genProduct1);
-//		
-//		genProduct2 = CreateProduct.createProductModel();		
-//		genProduct2.setIp("25");
-//		genProduct2.setPrice("89.00");
-//		CreateProduct.createApiProduct(genProduct2);
-//		
-//		genProduct3 = CreateProduct.createMarketingProductModel();
-//		genProduct3.setIp("0");
-//		genProduct3.setPrice("229.00");
-//		CreateProduct.createApiProduct(genProduct3);
 		
 		genProduct1.setName(productsList.get(0).getName());
 		genProduct1.setSku(productsList.get(0).getProdCode());
@@ -179,12 +165,7 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		CartCalculator.productsList25.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0",ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-//		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "2", "17",ConfigConstants.DISCOUNT_25);
-//		CartCalculator.productsList25.add(productData);
-//		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "16",ConfigConstants.DISCOUNT_25);
-//		CartCalculator.productsList25.add(productData);
-//		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0",ConfigConstants.DISCOUNT_0);
-//		CartCalculator.productsListMarketing.add(productData);
+		
 		CartCalculator.calculateJMDiscounts(jewelryDisount, marketingDisount, taxClass, shippingValue);	
 
 		headerSteps.openCartPreview();
