@@ -157,6 +157,7 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 
 		fancyBoxSteps.goToShipping();
 		DataGrabber.shippingTotals = shippingSteps.grabSurveyData();
+		System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDD    " + DataGrabber.shippingTotals.getDiscountPrice());
 		shippingSteps.goToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(shippingUrl));
