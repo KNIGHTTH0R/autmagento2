@@ -157,9 +157,9 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		PomCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
 
 		fancyBoxSteps.goToShipping();
+		DataGrabber.shippingTotals = shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
-		DataGrabber.shippingTotals = shippingSteps.grabSurveyData();
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(shippingUrl));
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
