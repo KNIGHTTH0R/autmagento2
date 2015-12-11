@@ -406,6 +406,22 @@ public class MagentoProductCalls {
 
 		return result;
 	}
+	
+	public static String deleteApiProduct(String productId) {
+
+		String resultID = null;
+		try {
+			SOAPMessage response = DeleteProduct.deleteProduct(productId);
+			resultID = extractResult(response);
+			System.out.println("result: " + resultID);
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return resultID;
+	}
 
 	private static String extractResult(SOAPMessage response) throws SOAPException, IOException {
 		return response.getSOAPBody().getElementsByTagName("result").item(0).getFirstChild().getNodeValue();

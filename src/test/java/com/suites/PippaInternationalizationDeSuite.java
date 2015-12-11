@@ -86,13 +86,16 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 //	US19003Suite.class,
 //	US19004Suite.class,
 	
+	US23001PartOneSuite.class,
 	US20001Suite.class,
 	US21001Suite.class,
 	US22001Suite.class,
 	
 	US10007SuitePartTwo.class,
 	US10008Suite.class,
+	US23001PartTwoSuite.class,
 	
+	US26001Suite.class,
 	
 })
 @RunWith(Suite.class)

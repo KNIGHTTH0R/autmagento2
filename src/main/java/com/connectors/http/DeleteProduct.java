@@ -15,28 +15,28 @@ import com.tools.SoapKeys;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 
-public class DeleteCustomer extends HttpSoapConnector {
+public class DeleteProduct extends HttpSoapConnector {
 
-	public static SOAPMessage deleteCustomer(String customerId) throws SOAPException, IOException {
-		
+	public static SOAPMessage deleteProduct(String customerId) throws SOAPException, IOException {
+
 		String sessID = performLogin();
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(deleteCustomerMessage(sessID, customerId), MongoReader.getBaseURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(deleteProductMessage(sessID, customerId), MongoReader.getBaseURL() + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
 
-	private static SOAPMessage deleteCustomerMessage(String sessID, String customerId) throws DOMException, SOAPException, IOException {
-		
+	private static SOAPMessage deleteProductMessage(String sessID, String customerId) throws DOMException, SOAPException, IOException {
+
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement customerCustomerDeleteRequestParam = soapBody.addChildElement(SoapKeys.CUSTOMER_CUSTOMER_DELETE_REQUEST_PARAM, SoapKeys.URN_PREFIX);
-		SOAPElement sessionID = customerCustomerDeleteRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		SOAPElement catalogProductDeleteRequestParam = soapBody.addChildElement(SoapKeys.CATALOG_PRODUCT_DELETE_REQUEST_PARAM, SoapKeys.URN_PREFIX);
+		SOAPElement sessionID = catalogProductDeleteRequestParam.addChildElement(SoapKeys.SESSION_ID);
 		sessionID.addTextNode(sessID);
-		SOAPElement customerIdElement = customerCustomerDeleteRequestParam.addChildElement(SoapKeys.CUSTOMER_ID);
+		SOAPElement customerIdElement = catalogProductDeleteRequestParam.addChildElement(SoapKeys.PRODUCT_ID);
 		customerIdElement.addTextNode(customerId);
 
 		soapMessage.saveChanges();
@@ -45,6 +45,10 @@ public class DeleteCustomer extends HttpSoapConnector {
 		soapMessage.writeTo(System.out);
 		System.out.println();
 		return soapMessage;
+	}
+
+	public static void main(String args[]) throws SOAPException, IOException {
+		MagentoProductCalls.deleteApiProduct("19481");
 	}
 
 }

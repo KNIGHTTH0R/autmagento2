@@ -8,7 +8,6 @@ import com.tests.uss23.US23001BuyProductsOnShopforMyselfTest;
 import com.tests.uss23.US23001GetMagAndNavStockBerforeOrderTest;
 import com.tests.uss23.US23001PayAndImportOrderInNavisionTest;
 import com.tests.uss23.US23001VerifyMagAndNavStockAfterOrderTest;
-import com.tests.uss23.US23001VerifyStockSyncAfterOrderImportTest;
 
 
 @SuiteClasses({
@@ -16,9 +15,8 @@ import com.tests.uss23.US23001VerifyStockSyncAfterOrderImportTest;
 	US23001BuyProductsOnShopforMyselfTest.class,
 	US23001VerifyMagAndNavStockAfterOrderTest.class,
 	US23001PayAndImportOrderInNavisionTest.class,
-	US23001VerifyStockSyncAfterOrderImportTest.class,
 })
 @RunWith(Suite.class)
-public class US23001Suite {
+public class US23001PartOneSuite {
 
 }

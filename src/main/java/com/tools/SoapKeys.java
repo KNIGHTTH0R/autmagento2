@@ -107,6 +107,9 @@ public class SoapKeys {
 	public static final String CUSTOMER_CUSTOMER_DELETE_REQUEST_PARAM = "customerCustomerDeleteRequestParam";
 	public static final String CUSTOMER_ID = "customerId";
 	
+	// delete product
+	public static final String CATALOG_PRODUCT_DELETE_REQUEST_PARAM = "catalogProductDeleteRequestParam";
+	
 	//getStylistList
 	public static final String STYLIST_LIST = "stylistStylistListRequestParam";
 	public static final String STYLIST_ID = "stylistId";
