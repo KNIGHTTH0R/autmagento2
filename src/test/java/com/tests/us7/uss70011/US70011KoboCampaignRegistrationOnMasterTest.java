@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -34,6 +35,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPomSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -41,6 +43,7 @@ import com.tools.data.frontend.PomProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.PomCartCalculator;
+import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
@@ -160,14 +163,13 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-		// confirmationSteps.agreeAndCheckout();
-		// checkoutValidationSteps.verifySuccessMessage();
-		// headerSteps.redirectToProfileHistory();
-		// List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-		//
-		// String orderId = orderHistory.get(0).getOrderId();
-		// profileSteps.verifyOrderId(orderId,
-		// RegularUserDataGrabber.orderModel.getOrderId());
+		confirmationSteps.agreeAndCheckout();
+		checkoutValidationSteps.verifySuccessMessage();
+		headerSteps.redirectToProfileHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+
+		String orderId = orderHistory.get(0).getOrderId();
+		profileSteps.verifyOrderId(orderId, RegularUserDataGrabber.orderModel.getOrderId());
 
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, PomCartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
