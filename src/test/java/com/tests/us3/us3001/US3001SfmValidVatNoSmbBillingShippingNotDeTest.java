@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -89,11 +91,15 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
+	
+	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
 
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
+		
+		productsList = MongoReader.grabBasicProductModel("US3001BuyProductsForTheFirstTimeTest" + SoapKeys.GRAB);
 
 //		genProduct1 = CreateProduct.createProductModel();	
 //		genProduct1.setIp("84");
@@ -110,16 +116,16 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 //		genProduct3.setPrice("229.00");
 //		CreateProduct.createApiProduct(genProduct3);
 		
-		genProduct1.setName("VDOTGJDSJ");
-		genProduct1.setSku("KKZWJRSUI");
+		genProduct1.setName(productsList.get(0).getName());
+		genProduct1.setSku(productsList.get(0).getProdCode());
 		genProduct1.setIp("84");
 		genProduct1.setPrice("49.90");
-		genProduct2.setName("RNTDRTVZE");
-		genProduct2.setSku("KODQWWIEU");
+		genProduct2.setName(productsList.get(1).getName());
+		genProduct2.setSku(productsList.get(1).getProdCode());
 		genProduct2.setIp("25");
 		genProduct2.setPrice("89.00");
-		genProduct3.setName("ZPFXMHPCG");
-		genProduct3.setSku("ZIIIKSGTC");
+		genProduct3.setName(productsList.get(2).getName());
+		genProduct3.setSku(productsList.get(2).getProdCode());
 		genProduct3.setIp("0");
 		genProduct3.setPrice("229.00");
 

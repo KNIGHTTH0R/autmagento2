@@ -26,7 +26,7 @@ import com.tools.persistance.MongoReader;
 
 public class OrdersInfoMagentoCalls {
 
-	private static String sessID = LoginSoapCall.performLogin();
+//	private static String sessID = LoginSoapCall.performLogin();
 
 	public static List<DBOrderModel> getOrdersList(String stylistId) {
 
@@ -51,7 +51,7 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	public static SOAPMessage soapGetOrdersList(String stylistId) throws SOAPException, IOException {
-
+		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
