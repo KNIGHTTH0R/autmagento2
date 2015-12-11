@@ -97,6 +97,18 @@ public class FormatterUtils {
 		
 		return result;
 	}
+	public static String cleanToInteger(String unitPrice) {
+		String result = unitPrice;
+		result = result.replace(" €", "");
+		result = result.replace("€ ", "");
+		result = result.replace(".", "");
+		result = result.replace(" IP", "");
+		result = result.replace("IP", "");
+		result = result.replace(",", ".");
+		result = result.replace("%", "");
+		
+		return result;
+	}
 
 	public static int cleanNumberToInt(String unitPrice) {
 		String result = unitPrice;

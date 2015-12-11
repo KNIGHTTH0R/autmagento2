@@ -39,11 +39,8 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.PomProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.CartCalculator;
 import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.PomCartCalculator;
-import com.tools.datahandlers.partyHost.HostDataGrabber;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
@@ -51,7 +48,6 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.AdyenWorkflows;
 import com.workflows.frontend.ShippingAndConfirmationWorkflows;
 
@@ -161,6 +157,7 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(shippingUrl));
+		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		// confirmationSteps.agreeAndCheckout();
