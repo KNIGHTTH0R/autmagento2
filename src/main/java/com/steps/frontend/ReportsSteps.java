@@ -27,6 +27,7 @@ public class ReportsSteps extends AbstractSteps {
 
 		String basedir = System.getProperty("basedir");
 		File downloadsdirectory = new File(basedir + "/resources/downloads");
+		FileUtils.forceMkdir(downloadsdirectory);
 		FileUtils.cleanDirectory(downloadsdirectory);
 		reportsPage().downloadProductsOrderedBySku();
 	}
