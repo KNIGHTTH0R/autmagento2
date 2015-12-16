@@ -60,6 +60,21 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputConfirmation(customerData.getPassword());
 		fillContactDetailsWithoutPlz(addressData);
 	}
+	@StepGroup
+	@Title("Fill create stylecoach form using csv for context")
+	public void fillCreateCustomerFormWithoutContext(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+		
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetails(addressData);
+		checkNoCoachCheckbox();
+		checkIAgree();
+		submitStep();
+	}
 
 	@StepGroup
 	@Title("Fill create stylecoach form with known sponsor")
