@@ -56,7 +56,7 @@ public class US26001VerifyProdNotAvailableForTheMomentInAvReportTest extends Bas
 	public void setUp() throws Exception {
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setName("For_Availability_Report_Automation");
+		genProduct1.setName("FOR_AVAILABILITY_REPORT_AUTOMATION_" + genProduct1.getName());
 		genProduct1.setStockData(MagentoProductCalls.createNotAvailableForTheMomentStockData());
 		incrementId = MagentoProductCalls.createApiProduct(genProduct1);
 

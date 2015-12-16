@@ -28,7 +28,7 @@ public class MagentoProductCalls {
 
 	public static ProductDetailedModel createPomProductModel() {
 		ProductDetailedModel result = createProductModel();
-		result.setName("POM_Aut_" + result.getName());
+		result.setName("POM_AUT_" + result.getName());
 		List<String> categoriesIds = new ArrayList<String>();
 		categoriesIds.add("52");
 		categoriesIds.add("52");
