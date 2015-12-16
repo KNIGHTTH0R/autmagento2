@@ -117,9 +117,6 @@ public class HostCartWorkflows {
 	public void verifyCartTotals(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		verifyForthyDiscount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_40_BONUS), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_40_BONUS));
-		verifyJewelryDiscount(discountTotals.getDiscount(ConfigConstants.JEWELRY_BONUS), discountCalculationModel.findSegment(ConfigConstants.JEWELRY_BONUS));
-		
 	}
 
 	@StepGroup
