@@ -24,6 +24,7 @@ public class ProductListPage extends AbstractPage {
 
 		theFor: for (WebElement webElement : productsList) {
 			String productText = webElement.findElement(By.cssSelector("a.prod-name")).getText();
+			System.out.println(productText);
 			if (productText.contains(productName)) {
 				System.out.println("Yeeeeeeeees");
 				resultEntry.setName(productText);
