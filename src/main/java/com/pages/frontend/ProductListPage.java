@@ -16,7 +16,6 @@ public class ProductListPage extends AbstractPage {
 	private WebElement productCatalogContainer;
 
 	public ProductBasicModel findProductAndClick(String productName) {
-		System.out.println(productName);
 		element(productCatalogContainer).waitUntilVisible();
 		List<WebElement> productsList = productCatalogContainer.findElements(By.cssSelector("li.item"));
 
@@ -24,9 +23,7 @@ public class ProductListPage extends AbstractPage {
 
 		theFor: for (WebElement webElement : productsList) {
 			String productText = webElement.findElement(By.cssSelector("a.prod-name")).getText();
-			System.out.println(productText);
 			if (productText.contains(productName)) {
-				System.out.println("Yeeeeeeeees");
 				resultEntry.setName(productText);
 				resultEntry.setType(webElement.findElement(By.cssSelector("span.product-cat-code")).getText());
 				resultEntry.setPrice(webElement.findElement(By.cssSelector("span.price")).getText());
