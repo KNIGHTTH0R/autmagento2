@@ -198,10 +198,10 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
-//		confirmationSteps.agreeAndCheckout();
+		confirmationSteps.agreeAndCheckout();
 
 		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, shippingAddress);
-		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJb();
+		hostCartValidationWorkflows.performCartValidations();
 
 		customVerifications.printErrors();
 	}
