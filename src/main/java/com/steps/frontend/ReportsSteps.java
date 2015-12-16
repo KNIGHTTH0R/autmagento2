@@ -26,6 +26,7 @@ public class ReportsSteps extends AbstractSteps {
 	public void downloadProductsOrderedBySku() throws IOException {
 
 		String basedir = System.getProperty("basedir");
+		System.out.println(basedir);
 		File downloadsdirectory = new File(basedir + "/resources/downloads");
 		FileUtils.cleanDirectory(downloadsdirectory);
 		reportsPage().downloadProductsOrderedBySku();
