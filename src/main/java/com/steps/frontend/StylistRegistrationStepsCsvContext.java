@@ -11,11 +11,11 @@ public class StylistRegistrationStepsCsvContext extends ScenarioSteps {
 
 	private static final long serialVersionUID = 1L;
 
-	private String plz;
+	private String context;
 
 	@Qualifier
 	public String getQualifier() {
-		return plz;
+		return context;
 	}
 
 	StylistRegistrationPage stylistRegistrationPage;
@@ -25,8 +25,8 @@ public class StylistRegistrationStepsCsvContext extends ScenarioSteps {
 	}
 
 	@Step
-	public void inputPostCodeCsv() {
-		stylistRegistrationPage.inputPostCodeAndValdiateErrorMessage(plz);
+	public void inputContextCsv() {
+		stylistRegistrationPage.inputContextCodeAndValdiateErrorMessage(context);
 		stylistRegistrationPage.submitStep();
 	}
 

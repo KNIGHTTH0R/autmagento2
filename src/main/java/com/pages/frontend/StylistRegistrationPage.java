@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
 import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
@@ -313,6 +314,19 @@ public class StylistRegistrationPage extends AbstractPage {
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
+	public void inputContextCodeAndValdiateErrorMessage(String postCode) {
+		
+		element(stylistref).waitUntilVisible();
+		stylistref.clear();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		element(stylistref).typeAndTab(postCode);
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		validateZipValidationErrorMessage();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
+
 	public void inputHomeTown(String homeTown) {
 		cityInput.sendKeys(homeTown);
 	}
@@ -350,15 +364,15 @@ public class StylistRegistrationPage extends AbstractPage {
 
 		result.setDelivery(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#shipping-value")).getText()));
 		result.setTotalPrice(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#total-price-value")).getText()));
-		
+
 		StylistRegDataGrabber.cartTotals = result;
 
 		return result;
 
 	}
-	
-	public static void verifyCartTotals(){
-		
+
+	public static void verifyCartTotals() {
+
 	}
 
 	public void selectMonth(String month) {
