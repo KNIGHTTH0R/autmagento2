@@ -4,6 +4,7 @@ import com.tools.persistance.MongoReader;
 
 public class ContextConstants {
 	public static final String PLZ_ERROR_MESSAGE = MongoReader.getDictionaryItem("PLZ_ERROR_MESSAGE");
+	public static final String CONTEXT_ERROR_MESSAGE = MongoReader.getDictionaryItem("CONTEXT_ERROR_MESSAGE");
 	public static final String NOT_AVAILABLE = MongoReader.getDictionaryItem("NOT_AVAILABLE");
 	public static final String NOT_AVAILABLE_FOR_THE_MOMENT = MongoReader.getDictionaryItem("NOT_AVAILABLE_FOR_THE_MOMENT");
 	public static String GUESTS = MongoReader.getDictionaryItem("GUESTS");

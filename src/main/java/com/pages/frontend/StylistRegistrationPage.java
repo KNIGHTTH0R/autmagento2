@@ -96,6 +96,9 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(css = "ul.messages li ul li span")
 	private WebElement existingAccountMessageContainer;
 
+	@FindBy(css = "li.error-msg ul li span font font")
+	private WebElement contextErrorMessageContainer;
+
 	@FindBy(css = "div.page-title h1")
 	private WebElement stylistRegisterPageTitleContainer;
 
@@ -315,15 +318,15 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void inputContextCodeAndValdiateErrorMessage(String postCode) {
-		
+
 		element(stylistref).waitUntilVisible();
 		stylistref.clear();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
-		element(stylistref).typeAndTab(postCode);
+		element(stylistref).type(postCode);
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
-		validateZipValidationErrorMessage();
+		validateContextValidationErrorMessage();
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
@@ -418,5 +421,10 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void validateZipValidationErrorMessage() {
 		element(zipValidationMessage).waitUntilVisible();
 		Assert.assertTrue("The message from validation message is not the expected one!!", zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
+	}
+
+	public void validateContextValidationErrorMessage() {
+		element(zipValidationMessage).waitUntilVisible();
+		Assert.assertTrue("The message from context validation message is not the expected one!!", element(contextErrorMessageContainer).isDisplayed());
 	}
 }
