@@ -323,7 +323,7 @@ public class StylistRegistrationPage extends AbstractPage {
 		stylistref.clear();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
-		element(stylistref).type(postCode);
+		element(stylistref).typeAndEnter(postCode);
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		validateContextValidationErrorMessage();
