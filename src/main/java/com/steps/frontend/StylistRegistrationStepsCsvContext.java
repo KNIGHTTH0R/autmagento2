@@ -27,7 +27,6 @@ public class StylistRegistrationStepsCsvContext extends ScenarioSteps {
 	@Step
 	public void inputContextCsv() {
 		stylistRegistrationPage.inputContextCodeAndValdiateErrorMessage(context);
-		stylistRegistrationPage.submitStep();
 		stylistRegistrationPage.validateContextValidationErrorMessage();
 		
 	}
