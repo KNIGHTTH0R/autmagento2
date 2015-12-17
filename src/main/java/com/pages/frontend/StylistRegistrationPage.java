@@ -325,7 +325,7 @@ public class StylistRegistrationPage extends AbstractPage {
 		element(stylistref).typeAndEnter(postCode);
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
-//		validateContextValidationErrorMessage();
+		validateContextValidationErrorMessage();
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
@@ -423,7 +423,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void validateContextValidationErrorMessage() {
-		element(zipValidationMessage).waitUntilVisible();
+		element(contextErrorMessageContainer).waitUntilVisible();
 		Assert.assertTrue("The message from context validation message is not the expected one!!", element(contextErrorMessageContainer).isDisplayed());
 	}
 }
