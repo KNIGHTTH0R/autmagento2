@@ -322,11 +322,11 @@ public class StylistRegistrationPage extends AbstractPage {
 		element(stylistref).waitUntilVisible();
 		stylistref.clear();
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
-		element(stylistref).typeAndEnter(postCode);
+		element(stylistref).type(postCode);
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
-		validateContextValidationErrorMessage();
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
+//		validateContextValidationErrorMessage();
+//		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	public void inputHomeTown(String homeTown) {
@@ -345,6 +345,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void submitStep() {
 		element(submitStepButton).waitUntilVisible();
 		submitStepButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void submitPaymentMethod() {
