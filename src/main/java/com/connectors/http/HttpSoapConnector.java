@@ -16,6 +16,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
 import com.tools.SoapKeys;
+import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
@@ -37,6 +38,15 @@ public class HttpSoapConnector {
 	 * @throws SOAPException
 	 * @throws IOException
 	 */
+	public static SOAPMessage soapCreateCategory(CategoryModel category, String parentId) throws SOAPException, IOException {
+		String sessID = performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+
 	public static SOAPMessage soapCreateProduct(ProductDetailedModel product) throws SOAPException, IOException {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -167,6 +177,28 @@ public class HttpSoapConnector {
 
 		return soapMessage;
 
+	}
+
+	private static SOAPMessage createCategory(CategoryModel category, String parentId, String ssID) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement categoryCreateRequestParam = soapBody.addChildElement(SoapKeys.CATEGORY_CREATE_REQUEST, SoapKeys.URN_PREFIX);
+		SOAPElement sessionID = categoryCreateRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+		SOAPElement parent = categoryCreateRequestParam.addChildElement(SoapKeys.PARENT_ID);
+		parent.addTextNode(parentId);
+
+		// Add product data here
+		categoryCreateRequestParam = generateCategoryData(categoryCreateRequestParam, category);
+
+		soapMessage.saveChanges();
+
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
 	}
 
 	private static SOAPMessage createProduct(ProductDetailedModel product, String ssID) throws SOAPException, IOException {
@@ -378,6 +410,23 @@ public class HttpSoapConnector {
 
 	}
 
+	private static SOAPElement generateCategoryData(SOAPElement bodyElement, CategoryModel cat) throws SOAPException {
+		SOAPElement categoryData = bodyElement.addChildElement(SoapKeys.CATEGORY_DATA);
+
+		categoryData = addOptionalField(SoapKeys.NAME, cat.getName(), categoryData);
+		categoryData = addOptionalField(SoapKeys.IS_ACTIVE, cat.getIsActive(), categoryData);
+		categoryData = addOptionalField(SoapKeys.NAME, cat.getName(), categoryData);
+		categoryData = addOptionalField(SoapKeys.INCLUDE_IN_MENU, cat.getIncludeInMenu(), categoryData);
+
+		categoryData.addChildElement(generateFilters(cat.getAvailableSortBy(), categoryData));
+
+		categoryData = addOptionalField(SoapKeys.DEFAULT_SORT_BY, cat.getDefaultSortBy(), categoryData);
+
+		// Lists and other objects
+		return categoryData;
+
+	}
+
 	private static SOAPElement generateProductUpdateStockMessage(SOAPElement bodyElement, ProductDetailedModel product) throws SOAPException {
 		SOAPElement productData = bodyElement.addChildElement(SoapKeys.PRODUCT_DATA);
 
@@ -474,6 +523,20 @@ public class HttpSoapConnector {
 	 * @return
 	 * @throws SOAPException
 	 */
+	private static SOAPElement generateFilters(List<String> idsList, SOAPElement bodyElement) throws SOAPException {
+		SOAPElement websiteIds = bodyElement.addChildElement(SoapKeys.AVAILABLE_SORT_BY);
+
+		if (idsList.size() > 0) {
+			for (String product : idsList) {
+				SOAPElement objArray = websiteIds.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+				objArray.addTextNode(product);
+			}
+		} else {
+			System.out.println("Warning: Product - Website Ids list is empty - see soap - generateTierPriceMessage()");
+		}
+		return websiteIds;
+	}
+
 	private static SOAPElement generateWebsiteIds(List<String> idsList, SOAPElement bodyElement) throws SOAPException {
 		SOAPElement websiteIds = bodyElement.addChildElement(SoapKeys.WEBSITE_IDS);
 

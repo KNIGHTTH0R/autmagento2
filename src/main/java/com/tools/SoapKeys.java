@@ -1,5 +1,7 @@
 package com.tools;
 
+import javax.xml.soap.Name;
+
 
 public class SoapKeys {
 	
@@ -126,4 +128,13 @@ public class SoapKeys {
 	
 	public static final String PRODUCT_INFO = "catalogInventoryStockItemListRequestParam";
 	public static final String PRODUCT_IDS = "productIds";
+	
+	//create category
+	public static final String CATEGORY_CREATE_REQUEST = "catalogCategoryCreateRequestParam";
+	public static final String PARENT_ID = "parentId";
+	public static final String CATEGORY_DATA = "categoryData";
+	public static final String IS_ACTIVE = "is_active";
+	public static final String INCLUDE_IN_MENU = "include_in_menu";
+	public static final String DEFAULT_SORT_BY = "default_sort_by";
+	public static final String AVAILABLE_SORT_BY = "available_sort_by";
 }

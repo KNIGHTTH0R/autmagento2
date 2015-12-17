@@ -69,8 +69,4 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 
 	}
 
-	@After
-	public void saveData() {
-		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
-	}
 }
