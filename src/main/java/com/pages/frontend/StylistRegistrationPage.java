@@ -96,7 +96,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(css = "ul.messages li ul li span")
 	private WebElement existingAccountMessageContainer;
 
-	@FindBy(css = "li.error-msg ul li span font font")
+	@FindBy(css = "li.error-msg ul li span")
 	private WebElement contextErrorMessageContainer;
 
 	@FindBy(css = "div.page-title h1")
@@ -324,7 +324,7 @@ public class StylistRegistrationPage extends AbstractPage {
 //		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		element(stylistref).typeAndEnter(postCode);
-//		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		validateContextValidationErrorMessage();
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
