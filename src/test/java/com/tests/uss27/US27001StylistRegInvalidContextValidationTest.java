@@ -15,7 +15,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoCategoriesCalls;
+import com.connectors.http.ApacheHttpHelper;
+import com.connectors.http.DeleteCategory;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
@@ -26,6 +27,8 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.soap.CategoryModel;
+import com.tools.env.constants.JenkinsConstants;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US25.1 Check invalid plz validation on all carts and registration processes", type = "Scenarios")
@@ -48,12 +51,12 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	CategoryModel categoryModel;
+	String categoryId;
 
 	@Before
 	public void setUp() throws Exception {
 
-		categoryModel = MagentoCategoriesCalls.createCategoryModel();
-		MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
+		categoryId = MongoReader.grabIncrementId("US27001CreateCategoryAndProductTest");
 
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
@@ -73,10 +76,11 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 		customVerification.printErrors();
 
 	}
-	
+
 	@After
-	public void tearDown(){
-		
+	public void tearDown() throws Exception {
+		DeleteCategory.deleteApiCategory(categoryId);
+		ApacheHttpHelper.sendGet(JenkinsConstants.REINDEX_SC_CONTEXT_JOB);
 	}
 
 }

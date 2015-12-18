@@ -48,13 +48,13 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 	private ProductDetailedModel genProduct;
 	private CategoryModel categoryModel = new CategoryModel();
 	private List<String> lines;
-	private String id;
+	private String categoryId;
 
 	@Test
 	public void us27001CreateCategoryAndProductTest() throws IOException {
 
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
-		id = MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
+		categoryId = MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
 
 		genProduct = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct);
@@ -69,7 +69,7 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveIncrementId(id, getClass().getSimpleName());
+		MongoWriter.saveIncrementId(categoryId, getClass().getSimpleName());
 	}
 
 }

@@ -12,7 +12,6 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.DOMException;
 
 import com.tools.SoapKeys;
-import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 
