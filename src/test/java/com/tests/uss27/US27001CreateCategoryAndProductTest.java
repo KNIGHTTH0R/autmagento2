@@ -44,14 +44,15 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 	public CustomVerification customVerification;
 
 	private ProductDetailedModel genProduct;
-	CategoryModel categoryModel;
-	List<String> lines = new ArrayList<String>();
+	private CategoryModel categoryModel;
+	private List<String> lines = new ArrayList<String>();
+	private String id;
 
 	@Test
 	public void us27001CreateCategoryAndProductTest() throws IOException {
 
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
-		String id = MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
+		id = MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
 		genProduct = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct);
 
@@ -69,6 +70,7 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 	public void saveData() {
 		MongoWriter.saveCategoryModel(categoryModel, getClass().getSimpleName());
 		MongoWriter.saveProductDetailedModel(genProduct, getClass().getSimpleName());
+		MongoWriter.saveIncrementId(id, getClass().getSimpleName());
 	}
 
 }
