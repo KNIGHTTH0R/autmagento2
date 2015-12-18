@@ -52,7 +52,6 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
 		categoryModel.setId(MagentoCategoriesCalls.createApiCategory(categoryModel, "52"));
-		
 
 		genProduct = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct);

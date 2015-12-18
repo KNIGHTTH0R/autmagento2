@@ -9,13 +9,13 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoCategoriesCalls;
-import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
@@ -72,6 +72,11 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 		}
 		customVerification.printErrors();
 
+	}
+	
+	@After
+	public void tearDown(){
+		
 	}
 
 }

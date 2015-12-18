@@ -20,7 +20,7 @@ public class MagentoCategoriesCalls {
 
 	public static CategoryModel createCategoryModel() {
 		CategoryModel result = new CategoryModel();
-		result.setName("AUTOMATION_" + FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS));
+		result.setName("AUT_" + FieldGenerators.generateRandomString(6, Mode.ALPHA_CAPS));
 		result.setParentId("52");
 		List<String> categoriesFilters = new ArrayList<String>();
 		categoriesFilters.add("name");
@@ -28,7 +28,7 @@ public class MagentoCategoriesCalls {
 		result.setIsActive("1");
 		result.setDefaultSortBy("name");
 		result.setIncludeInMenu("1");
-		result.setUrlKey(result.getName());
+		result.setUrlKey(FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS));
 		return result;
 	}
 

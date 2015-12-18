@@ -12,13 +12,14 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.DOMException;
 
 import com.tools.SoapKeys;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 
 public class DeleteCategory extends HttpSoapConnector {
 
 	public static SOAPMessage deleteCategory(String categoryId) throws SOAPException, IOException {
-		
+
 		String sessID = performLogin();
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
@@ -29,7 +30,7 @@ public class DeleteCategory extends HttpSoapConnector {
 	}
 
 	private static SOAPMessage deleteCategoryMessage(String sessID, String categoryId) throws DOMException, SOAPException, IOException {
-		
+
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
@@ -45,6 +46,26 @@ public class DeleteCategory extends HttpSoapConnector {
 		soapMessage.writeTo(System.out);
 		System.out.println();
 		return soapMessage;
+	}
+
+	public static String deleteApiCategory(String categoryId) {
+
+		String resultID = null;
+		try {
+			SOAPMessage response = deleteCategory(categoryId);
+			resultID = extractResult(response);
+			System.out.println("resultID: " + resultID);
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return resultID;
+	}
+
+	private static String extractResult(SOAPMessage response) throws SOAPException, IOException {
+		return response.getSOAPBody().getElementsByTagName("result").item(0).getFirstChild().getNodeValue();
 	}
 
 }
