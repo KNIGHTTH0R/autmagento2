@@ -36,7 +36,6 @@ import com.tools.data.frontend.DateModel;
 import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.JenkinsConstants;
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US25.1 Check invalid plz validation on all carts and registration processes", type = "Scenarios")
@@ -61,13 +60,10 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 	private CategoryModel categoryModel;
 	private ProductDetailedModel genProduct;
 	private List<String> lines;
-	String categoryId;
+	private String categoryId;
 
 	@Before
 	public void setUp() throws Exception {
-
-		// categoryId =
-		// MongoReader.grabIncrementId("US27001CreateCategoryAndProductTest");
 
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
 		categoryId = MagentoCategoriesCalls.createApiCategory(categoryModel, "52");

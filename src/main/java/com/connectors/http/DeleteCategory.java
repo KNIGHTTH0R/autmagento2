@@ -23,7 +23,8 @@ public class DeleteCategory extends HttpSoapConnector {
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(deleteCategoryMessage(sessID, categoryId), MongoReader.getBaseURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(deleteCategoryMessage(sessID, categoryId), MongoReader.getBaseURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(deleteCategoryMessage(sessID, categoryId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -66,5 +67,7 @@ public class DeleteCategory extends HttpSoapConnector {
 	private static String extractResult(SOAPMessage response) throws SOAPException, IOException {
 		return response.getSOAPBody().getElementsByTagName("result").item(0).getFirstChild().getNodeValue();
 	}
+	
+	
 
 }
