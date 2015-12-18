@@ -37,9 +37,10 @@ import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.JenkinsConstants;
 import com.tools.requirements.Application;
+import com.workflows.file.FileWorkflows;
 
-@WithTag(name = "US25.1 Check invalid plz validation on all carts and registration processes", type = "Scenarios")
-@Story(Application.PlzValidation.US24_1.class)
+@WithTag(name = "US.27.1 Check that categories and product url keys are not allowed as SC context", type = "Scenarios")
+@Story(Application.StylecoachContextValidation.US27_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 
@@ -65,6 +66,10 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
+		customerFormData = new CustomerFormModel();
+		customerFormAddress = new AddressModel();
+		birthDate.setDate("Feb,1970,12");
+
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
 		categoryId = MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
 
@@ -72,14 +77,8 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct);
 
 		lines = new ArrayList<String>(Arrays.asList("context", categoryModel.getUrlKey(), genProduct.getUrlKey()));
+		FileWorkflows.writeLinesToInvalidContextCsv("invalidContextData.csv", lines);
 
-		String basedir = System.getProperty("basedir");
-		File downloadsdirectory = new File(basedir + "/resources/invalidContextData.csv");
-		FileUtils.writeLines(downloadsdirectory, lines, false);
-
-		customerFormData = new CustomerFormModel();
-		customerFormAddress = new AddressModel();
-		birthDate.setDate("Feb,1970,12");
 	}
 
 	@Test

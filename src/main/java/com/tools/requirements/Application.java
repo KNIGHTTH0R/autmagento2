@@ -329,5 +329,10 @@ public class Application {
 		public class US24_1 {
 		}
 	}
+	@Feature
+	public class StylecoachContextValidation {
+		public class US27_1 {
+		}
+	}
 
 }
