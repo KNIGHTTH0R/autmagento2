@@ -46,7 +46,7 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 	public CustomVerification customVerification;
 
 	private ProductDetailedModel genProduct;
-	private CategoryModel categoryModel;
+	private CategoryModel categoryModel = new CategoryModel();
 	private List<String> lines;
 	private String id;
 
