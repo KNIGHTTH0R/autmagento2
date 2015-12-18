@@ -3,6 +3,7 @@ package com.tests.uss27;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.thucydides.core.annotations.Steps;
@@ -10,6 +11,7 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +47,7 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 
 	private ProductDetailedModel genProduct;
 	private CategoryModel categoryModel;
-	private List<String> lines = new ArrayList<String>();
+	private List<String> lines;
 	private String id;
 
 	@Test
@@ -53,16 +55,15 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
 		id = MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
+
 		genProduct = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct);
 
-		lines.add("context");
-		lines.add(categoryModel.getUrlKey());
-		lines.add(genProduct.getUrlKey());
+		lines = new ArrayList<String>(Arrays.asList("context", categoryModel.getUrlKey(), genProduct.getUrlKey()));
 
 		String basedir = System.getProperty("basedir");
 		File downloadsdirectory = new File(basedir + "/resources/invalidContextData.csv");
-		org.apache.commons.io.FileUtils.writeLines(downloadsdirectory, lines, false);
+		FileUtils.writeLines(downloadsdirectory, lines, false);
 
 	}
 
