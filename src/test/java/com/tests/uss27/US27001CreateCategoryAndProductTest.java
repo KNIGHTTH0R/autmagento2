@@ -44,14 +44,15 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 	public CustomVerification customVerification;
 
 	private ProductDetailedModel genProduct;
-	CategoryModel categoryModel;
+	CategoryModel categoryModel = new CategoryModel();
 	List<String> lines = new ArrayList<String>();
 
 	@Test
 	public void us27001CreateCategoryAndProductTest() throws IOException {
 
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
-		MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
+		categoryModel.setId(MagentoCategoriesCalls.createApiCategory(categoryModel, "52"));
+		
 
 		genProduct = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct);
@@ -66,10 +67,10 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 
 	}
 
-//	@After
-//	public void saveData() {
-//		MongoWriter.saveCategoryModel(categoryModel, getClass().getSimpleName());
-//		MongoWriter.saveProductDetailedModel(genProduct, getClass().getSimpleName());
-//	}
+	@After
+	public void saveData() {
+		MongoWriter.saveCategoryModel(categoryModel, getClass().getSimpleName());
+		MongoWriter.saveProductDetailedModel(genProduct, getClass().getSimpleName());
+	}
 
 }
