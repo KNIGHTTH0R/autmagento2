@@ -1,6 +1,7 @@
 package com.tests.uss27;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 	List<String> lines = new ArrayList<String>();
 
 	@Test
-	public void us27001CreateCategoryAndProductTest() {
+	public void us27001CreateCategoryAndProductTest() throws IOException {
 
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
 		categoryModel.setId(MagentoCategoriesCalls.createApiCategory(categoryModel, "52"));
@@ -61,7 +62,8 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 		lines.add(genProduct.getUrlKey());
 
 		String basedir = System.getProperty("basedir");
-		FileUtils.writeToFile(basedir + "/resources/invalidContextData", lines);
+		File downloadsdirectory = new File(basedir + "/resources/invalidContextData.csv");
+		org.apache.commons.io.FileUtils.writeLines(downloadsdirectory, lines, false);
 
 	}
 
