@@ -51,8 +51,8 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 	public void us27001CreateCategoryAndProductTest() throws IOException {
 
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
-		categoryModel.setId(MagentoCategoriesCalls.createApiCategory(categoryModel, "52"));
-
+		String id = MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
+		categoryModel.setId(id);
 		genProduct = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct);
 
@@ -63,7 +63,6 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 		String basedir = System.getProperty("basedir");
 		File downloadsdirectory = new File(basedir + "/resources/invalidContextData.csv");
 		org.apache.commons.io.FileUtils.writeLines(downloadsdirectory, lines, false);
-		//blabla
 
 	}
 

@@ -2,7 +2,7 @@ package com.tools.data.soap;
 
 import java.util.List;
 
-public class CategoryModel {
+public class CategoryModel implements Cloneable {
 
 	private String parentId;
 	private String name;
@@ -12,6 +12,15 @@ public class CategoryModel {
 	private String defaultSortBy;
 	private List<String> availableSortBy;
 	private String id;
+
+	public CategoryModel clone() {
+		try {
+			return (CategoryModel) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
 
 	public String getParentId() {
 		return parentId;
