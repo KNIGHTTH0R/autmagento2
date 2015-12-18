@@ -69,8 +69,6 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCategoryModel(categoryModel, getClass().getSimpleName());
-		MongoWriter.saveProductDetailedModel(genProduct, getClass().getSimpleName());
 		MongoWriter.saveIncrementId(id, getClass().getSimpleName());
 	}
 
