@@ -137,4 +137,8 @@ public class SoapKeys {
 	public static final String INCLUDE_IN_MENU = "include_in_menu";
 	public static final String DEFAULT_SORT_BY = "default_sort_by";
 	public static final String AVAILABLE_SORT_BY = "available_sort_by";
+	
+	//delete category
+	public static final String CATEGORY_ID = "categoryId";
+	public static final String CATEGORY_DELETE_REQUEST = "catalogCategoryDeleteRequestParam";
 }

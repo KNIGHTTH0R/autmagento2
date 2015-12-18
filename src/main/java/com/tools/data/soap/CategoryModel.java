@@ -11,6 +11,7 @@ public class CategoryModel {
 	private String urlKey;
 	private String defaultSortBy;
 	private List<String> availableSortBy;
+	private String id;
 
 	public String getParentId() {
 		return parentId;
@@ -68,5 +69,12 @@ public class CategoryModel {
 		this.availableSortBy = availableSortBy;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 }

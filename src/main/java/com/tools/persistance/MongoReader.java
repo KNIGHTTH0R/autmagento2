@@ -32,6 +32,7 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.navision.SyncInfoModel;
+import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
 
@@ -475,22 +476,22 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+
 	public static List<ProductDetailedModel> grabProductDetailedModel(String testName) {
 		DBObject dbObject = null;
 		List<ProductDetailedModel> itemList = new ArrayList<ProductDetailedModel>();
-		
+
 		workingDB = mongoClient.getDB(testName);
 		DBCursor cursor = workingDB.getCollection(MongoTableKeys.PRODUCT_DETAILED_MODEL).find();
-		
+
 		try {
 			while (cursor.hasNext()) {
 				ProductDetailedModel result = new ProductDetailedModel();
 				dbObject = cursor.next();
-				
+
 				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
 				result.setSku(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
-			
-				
+
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -584,7 +585,7 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
-	
+
 	public static List<SyncInfoModel> grabStockInfoModel(String testName) {
 		DBObject dbObject = null;
 		List<SyncInfoModel> itemList = new ArrayList<SyncInfoModel>();
@@ -614,7 +615,7 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
-	
+
 	// @SuppressWarnings("unchecked")
 	@SuppressWarnings("unchecked")
 	public static List<CartTotalsModel> grabTotalsModels(String testName) {
@@ -785,6 +786,32 @@ public class MongoReader extends MongoConnector {
 				result.setShippingPrice(MongoUtils.checkField(dbObject, MongoTableKeys.SHIPPING));
 				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+
+	public static List<CategoryModel> grabCategoryModel(String testName) {
+		DBObject dbObject = null;
+		List<CategoryModel> itemList = new ArrayList<CategoryModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.CATEGORY_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				CategoryModel result = new CategoryModel();
+				dbObject = cursor.next();
+
+				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.CATEGORY_NAME));
+				result.setUrlKey(MongoUtils.checkField(dbObject, MongoTableKeys.CATEGORY_URL));
+				result.setId(MongoUtils.checkField(dbObject, MongoTableKeys.CATEGORY_ID));
 
 				itemList.add(result);
 			}

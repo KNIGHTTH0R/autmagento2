@@ -42,7 +42,8 @@ public class HttpSoapConnector {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -413,7 +414,6 @@ public class HttpSoapConnector {
 	private static SOAPElement generateCategoryData(SOAPElement bodyElement, CategoryModel cat) throws SOAPException {
 		SOAPElement categoryData = bodyElement.addChildElement(SoapKeys.CATEGORY_DATA);
 
-		categoryData = addOptionalField(SoapKeys.NAME, cat.getName(), categoryData);
 		categoryData = addOptionalField(SoapKeys.IS_ACTIVE, cat.getIsActive(), categoryData);
 		categoryData = addOptionalField(SoapKeys.NAME, cat.getName(), categoryData);
 		categoryData = addOptionalField(SoapKeys.INCLUDE_IN_MENU, cat.getIncludeInMenu(), categoryData);
@@ -421,6 +421,7 @@ public class HttpSoapConnector {
 		categoryData.addChildElement(generateFilters(cat.getAvailableSortBy(), categoryData));
 
 		categoryData = addOptionalField(SoapKeys.DEFAULT_SORT_BY, cat.getDefaultSortBy(), categoryData);
+		categoryData = addOptionalField(SoapKeys.URL_KEY, cat.getUrlKey(), categoryData);
 
 		// Lists and other objects
 		return categoryData;

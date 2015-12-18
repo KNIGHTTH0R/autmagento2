@@ -1,16 +1,15 @@
 package com.tests.uss27;
 
-import static net.thucydides.core.steps.StepData.withTestDataFrom;
-
-import java.io.IOException;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.Assert;
-import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,16 +21,16 @@ import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.StylistRegistrationStepsCsvContext;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.data.soap.CategoryModel;
+import com.tools.data.soap.ProductDetailedModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.FileUtils;
 
 @WithTag(name = "US25.1 Check invalid plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
+public class US27001CreateCategoryAndProductTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -44,34 +43,32 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerification;
 
-	private CustomerFormModel customerFormData;
-	private DateModel birthDate = new DateModel();
-	private AddressModel customerFormAddress;
+	private ProductDetailedModel genProduct;
 	CategoryModel categoryModel;
-
-	@Before
-	public void setUp() throws Exception {
-
-		categoryModel = MagentoCategoriesCalls.createCategoryModel();
-		MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
-
-		customerFormData = new CustomerFormModel();
-		customerFormAddress = new AddressModel();
-		birthDate.setDate("Feb,1970,12");
-	}
+	List<String> lines = new ArrayList<String>();
 
 	@Test
-	public void us27001StylistRegInvalidContextValidationTest() {
-		headerSteps.navigateToRegisterForm();
-		stylistRegistrationSteps.fillCreateCustomerFormWithoutContext(customerFormData, customerFormAddress, birthDate.getDate());
-		try {
-			withTestDataFrom("resources/invalidContextData.csv").run(stylistRegistrationStepsCsvContext).inputContextCsv();
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail("Failed !!!");
-		}
-		customVerification.printErrors();
+	public void us27001CreateCategoryAndProductTest() {
 
+		categoryModel = MagentoCategoriesCalls.createCategoryModel();
+		categoryModel.setId(MagentoCategoriesCalls.createApiCategory(categoryModel, "52"));
+
+		genProduct = MagentoProductCalls.createProductModel();
+		MagentoProductCalls.createApiProduct(genProduct);
+
+		lines.add("context");
+		lines.add(categoryModel.getUrlKey());
+		lines.add(genProduct.getUrlKey());
+
+		String basedir = System.getProperty("basedir");
+		FileUtils.writeToFile(basedir + "/resources/invalidContextData", lines);
+
+	}
+
+	@After
+	public void saveData() {
+		MongoWriter.saveCategoryModel(categoryModel, getClass().getSimpleName());
+		MongoWriter.saveProductDetailedModel(genProduct, getClass().getSimpleName());
 	}
 
 }

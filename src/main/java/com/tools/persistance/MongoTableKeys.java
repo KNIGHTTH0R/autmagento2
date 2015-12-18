@@ -201,5 +201,11 @@ public class MongoTableKeys {
 	public static final String TEAM_POINTS = "TeamPoints";
 	public static final String STYLECOACH_FIRST_LEVEL = "StyleCoachFirstLevel";
 	public static final String GOLD_STYLECOACHES = "GoldStyleCoaches";
+	
+	//category
+	public static final String CATEGORY_MODEL = null;
+	public static final String CATEGORY_NAME = null;
+	public static final String CATEGORY_URL = null;
+	public static final String CATEGORY_ID = null;
 
 }

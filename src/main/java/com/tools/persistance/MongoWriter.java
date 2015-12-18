@@ -33,6 +33,7 @@ import com.tools.data.frontend.ShippingModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.newsletter.SubscriberModel;
+import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
 
@@ -275,6 +276,17 @@ public class MongoWriter extends MongoConnector {
 		table.insert(document);
 	}
 
+	public static void saveCategoryModel(CategoryModel category, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.CATEGORY_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.CATEGORY_NAME, category.getName());
+		document.put(MongoTableKeys.CATEGORY_URL, category.getUrlKey());
+		document.put(MongoTableKeys.CATEGORY_ID, category.getId());
+		
+		table.insert(document);
+	}
 	public static void saveBasicProductModel(BasicProductModel product, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.BASIC_PRODUCT_MODEL);
