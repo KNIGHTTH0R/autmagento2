@@ -51,7 +51,7 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 	public void us27001CreateCategoryAndProductTest() throws IOException {
 
 		categoryModel = MagentoCategoriesCalls.createCategoryModel();
-		categoryModel.setId(MagentoCategoriesCalls.createApiCategory(categoryModel, "52"));
+		MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
 
 		genProduct = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct);
