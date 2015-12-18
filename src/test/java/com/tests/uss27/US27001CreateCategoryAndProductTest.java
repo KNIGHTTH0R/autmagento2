@@ -26,7 +26,6 @@ import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.FileUtils;
 
 @WithTag(name = "US25.1 Check invalid plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
@@ -67,10 +66,10 @@ public class US27001CreateCategoryAndProductTest extends BaseTest {
 
 	}
 
-	@After
-	public void saveData() {
-		MongoWriter.saveCategoryModel(categoryModel, getClass().getSimpleName());
-		MongoWriter.saveProductDetailedModel(genProduct, getClass().getSimpleName());
-	}
+//	@After
+//	public void saveData() {
+//		MongoWriter.saveCategoryModel(categoryModel, getClass().getSimpleName());
+//		MongoWriter.saveProductDetailedModel(genProduct, getClass().getSimpleName());
+//	}
 
 }
