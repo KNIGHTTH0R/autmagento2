@@ -13,7 +13,6 @@ import org.w3c.dom.DOMException;
 
 import com.tools.SoapKeys;
 import com.tools.env.variables.UrlConstants;
-import com.tools.persistance.MongoReader;
 
 public class DeleteCategory extends HttpSoapConnector {
 
@@ -23,8 +22,8 @@ public class DeleteCategory extends HttpSoapConnector {
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(deleteCategoryMessage(sessID, categoryId), MongoReader.getBaseURL() + UrlConstants.API_URI);
-//		SOAPMessage soapResponse = soapConnection.call(deleteCategoryMessage(sessID, categoryId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(deleteCategoryMessage(sessID, categoryId), MongoReader.getBaseURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(deleteCategoryMessage(sessID, categoryId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
