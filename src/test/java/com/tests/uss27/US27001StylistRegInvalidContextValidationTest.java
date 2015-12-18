@@ -2,13 +2,18 @@ package com.tests.uss27;
 
 import static net.thucydides.core.steps.StepData.withTestDataFrom;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,6 +22,8 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.DeleteCategory;
+import com.connectors.http.MagentoCategoriesCalls;
+import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
@@ -27,6 +34,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.soap.CategoryModel;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.JenkinsConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -50,13 +58,28 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 	private CustomerFormModel customerFormData;
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
-	CategoryModel categoryModel;
+	private CategoryModel categoryModel;
+	private ProductDetailedModel genProduct;
+	private List<String> lines;
 	String categoryId;
 
 	@Before
 	public void setUp() throws Exception {
 
-		categoryId = MongoReader.grabIncrementId("US27001CreateCategoryAndProductTest");
+		// categoryId =
+		// MongoReader.grabIncrementId("US27001CreateCategoryAndProductTest");
+
+		categoryModel = MagentoCategoriesCalls.createCategoryModel();
+		categoryId = MagentoCategoriesCalls.createApiCategory(categoryModel, "52");
+
+		genProduct = MagentoProductCalls.createProductModel();
+		MagentoProductCalls.createApiProduct(genProduct);
+
+		lines = new ArrayList<String>(Arrays.asList("context", categoryModel.getUrlKey(), genProduct.getUrlKey()));
+
+		String basedir = System.getProperty("basedir");
+		File downloadsdirectory = new File(basedir + "/resources/invalidContextData.csv");
+		FileUtils.writeLines(downloadsdirectory, lines, false);
 
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
