@@ -57,6 +57,11 @@ public class ClosedMonthBonusCalculation {
 		BigDecimal totalIp = BigDecimal.ZERO;
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
+		System.out.println("orders list sizes is : " + allOrdersList.size());
+		System.out.println();
+		for (DBOrderModel dbOrderModel : allOrdersList) {
+			System.out.println(dbOrderModel.getIncrementId());
+		}
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
 		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
 
@@ -127,6 +132,7 @@ public class ClosedMonthBonusCalculation {
 	}
 
 	public static void main(String[] args) throws NumberFormatException, ParseException {
-		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835","2015-08-15 02:00:00", "2015-10-15 16:00:00", "2016-01-04 00:00:00");
+//		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835","2015-08-15 02:00:00", "2015-12-15 16:00:00", "2016-01-04 12:00:00");
+		ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835","2016-01-04 00:00:00", "2016-01-04 16:00:00");
 	}
 }
