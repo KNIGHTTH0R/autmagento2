@@ -54,7 +54,8 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -86,7 +87,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
 		key2B.addTextNode(SoapConstants.GREATER_THAN);
 		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
-		value2B.addTextNode("2015-07-01 00:00:00");
+		value2B.addTextNode("2015-09-01 00:00:00");
 
 		// testing purpose
 		// SOAPElement complexObjectArrayC =
@@ -153,6 +154,10 @@ public class OrdersInfoMagentoCalls {
 			}
 		}
 		return orderModelList;
+	}
+	
+	public static void main(String args[]){
+		OrdersInfoMagentoCalls.getOrdersList("1835");
 	}
 
 }
