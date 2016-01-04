@@ -85,7 +85,7 @@ public class CreditMemosInfoMagentoCalls {
 		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
 		key2B.addTextNode(SoapConstants.GREATER_THAN);
 		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
-		value2B.addTextNode("2015-07-01 00:00:00");
+		value2B.addTextNode("2015-09-01 00:00:00");
 
 		soapMessage.saveChanges();
 
