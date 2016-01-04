@@ -51,7 +51,7 @@ public class HostCartTotalsCalculation {
 		return result;
 	}
 
-	public static HostCartCalcDetailsModel calculateOrderForCustomerTotals(List<HostBasicProductModel> productsList, String taxClass, String voucherValue) {
+	public static HostCartCalcDetailsModel calculateOrderForCustomerTotals(List<HostBasicProductModel> productsList, String taxClass, String voucherValue, String shippingValue) {
 		HostCartCalcDetailsModel result = new HostCartCalcDetailsModel();
 
 		BigDecimal subtotal = BigDecimal.ZERO;
@@ -76,7 +76,8 @@ public class HostCartTotalsCalculation {
 			}
 		}
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherVal);
-		tax = totalAmount.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
@@ -90,7 +91,7 @@ public class HostCartTotalsCalculation {
 	}
 
 	public static HostCartCalcDetailsModel calculateTotalsWithBuy3Get1Active(List<HostBasicProductModel> productsList, List<HostBasicProductModel> productsListForBuy3Get1,
-			String taxClass) {
+			String taxClass,String shippingValue) {
 		HostCartCalcDetailsModel result = new HostCartCalcDetailsModel();
 
 		BigDecimal subtotal = BigDecimal.ZERO;
@@ -115,9 +116,11 @@ public class HostCartTotalsCalculation {
 			}
 		}
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherDiscount);
-
-		tax = totalAmount.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		
+		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
+		
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));

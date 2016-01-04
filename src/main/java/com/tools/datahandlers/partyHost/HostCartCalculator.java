@@ -61,7 +61,7 @@ public class HostCartCalculator {
 
 	public static void calculateOrderForCustomerCartAndShippingTotals(String discountClass, String shippingValue, String voucherValue) {
 		allProductsListwithVoucher = OrderForCustomerDiscountsCalculation.calculateProductsWithVoucherApplied(allProductsList, voucherValue);
-		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateOrderForCustomerTotals(allProductsListwithVoucher, discountClass, voucherValue);
+		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateOrderForCustomerTotals(allProductsListwithVoucher, discountClass, voucherValue, shippingValue);
 		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 	}
 
@@ -71,7 +71,7 @@ public class HostCartCalculator {
 		allProductsListWithoutRegularPrice = getProductsWithoutRegularPriceFromList(allProductsList);
 		allProductsListWithBuy3Get1Applied = HostCartBuy3Get1Calculation.applyBuy3Get1OnTheCart(allProductsListWithRegularPrice);
 		allProductsListWithBuy3Get1Applied.addAll(allProductsListWithoutRegularPrice);
-		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsListWithBuy3Get1Applied, allProductsListWithRegularPrice, discountClass);
+		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsListWithBuy3Get1Applied, allProductsListWithRegularPrice, discountClass, shippingValue);
 		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 
 	}
@@ -85,7 +85,7 @@ public class HostCartCalculator {
 		allProductsListWithBuy3Get1Applied = HostCartBuy3Get1Calculation.applyBuy3Get1OnTheCart(allProductsListwithVoucher);		
 		System.out.println("here:allProductsListWithBuy3Get1Applied");
 		PrintUtils.printListHostBasicProductModel(allProductsListWithBuy3Get1Applied);
-		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsListWithBuy3Get1Applied, allProductsListwithVoucher, discountClass);
+		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsListWithBuy3Get1Applied, allProductsListwithVoucher, discountClass, shippingValue);
 		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 		
 	}
