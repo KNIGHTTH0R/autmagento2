@@ -53,7 +53,8 @@ public class CreditMemosInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -85,7 +86,7 @@ public class CreditMemosInfoMagentoCalls {
 		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
 		key2B.addTextNode(SoapConstants.GREATER_THAN);
 		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
-		value2B.addTextNode("2015-09-01 00:00:00");
+		value2B.addTextNode("2015-09-18 00:00:00");
 
 		soapMessage.saveChanges();
 
