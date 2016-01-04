@@ -53,8 +53,8 @@ public class CreditMemosInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
