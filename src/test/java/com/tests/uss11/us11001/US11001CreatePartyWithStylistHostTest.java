@@ -30,7 +30,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test", type = "Scenarios")
+@WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test, ship to host", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US11001CreatePartyWithStylistHostTest extends BaseTest {

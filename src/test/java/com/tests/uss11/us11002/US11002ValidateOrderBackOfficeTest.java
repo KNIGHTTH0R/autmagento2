@@ -36,7 +36,7 @@ import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
-@WithTag(name = "US11.2 Party Host Buys For Customer With Buy 3 Get 1 For 50% ", type = "Scenarios")
+@WithTag(name = "US11.2 Party Host Buys For Customer With Buy 3 Get 1 For 50%, ship to customer ", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_2.class)
 @RunWith(ThucydidesRunner.class)
 public class US11002ValidateOrderBackOfficeTest extends BaseTest {
