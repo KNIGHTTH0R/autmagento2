@@ -53,10 +53,10 @@ public class NavQueries {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		SyncInfoModel result = NavQueries.getSyncProductInfo("B098BK", "");
-		System.out.println(result.getQuantity());
+//		SyncInfoModel result = NavQueries.getSyncProductInfo("B098BK", "");
+//		System.out.println(result.getQuantity());
 
-		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("STAGING-INT00009505");
+		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("STAGING-INT00012061");
 		System.out.println(result2.getSyncDate());
 
 	}

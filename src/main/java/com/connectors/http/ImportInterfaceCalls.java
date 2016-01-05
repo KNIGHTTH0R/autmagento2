@@ -21,7 +21,7 @@ public class ImportInterfaceCalls {
 			webResource
 					.setProperty(
 							"Authorization",
-							"Negotiate TlRMTVNTUAADAAAAGAAYAHQAAABIAUgBjAAAAAAAAABYAAAAEAAQAFgAAAAMAAwAaAAAABAAEADUAQAAFYKI4gYBsR0AAAAPhnRX+4Ouw2JL/3WYH3JmWk4AYQB2AGkAcwBpAG8AbgBFAFYATwAwADIANgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC9V2TYGnXKBDaMcESDnX0/AQEAAAAAAAD2KUS5LhbRAYpcC2DcugJYAAAAAAIAHgBPAFcATgBFAFIATwBSAC0ATwBWAEQASAAxAEoARQABAB4ATwBXAE4ARQBSAE8AUgAtAE8AVgBEAEgAMQBKAEUABAAeAE8AVwBOAEUAUgBPAFIALQBPAFYARABIADEASgBFAAMAHgBPAFcATgBFAFIATwBSAC0ATwBWAEQASAAxAEoARQAHAAgA9ilEuS4W0QEGAAQAAgAAAAgAMAAwAAAAAAAAAAEAAAAAIAAAGpzmCfLzDASXWj1RIuPNNnuWtt4RPC7jKbPe3N9bdL0KABAAAAAAAAAAAAAAAAAAAAAAAAkAKABIAFQAVABQAC8AMQA0ADgALgAyADUAMQAuADEANwA4AC4AMgAwADcAAAAAAAAAAAAAAAAAA+ybUlFuKJUFv+7sEub8iw==");
+							"Negotiate TlRMTVNTUAADAAAAGAAYAHQAAABIAUgBjAAAAAAAAABYAAAAEAAQAFgAAAAMAAwAaAAAABAAEADUAQAAFYKI4gYBsR0AAAAPRoPk1mVjd79tQNQ+SiGbEU4AYQB2AGkAcwBpAG8AbgBFAFYATwAwADIANgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAns315L3KkdDxpNCO+Au+ZAQEAAAAAAABl3harm0fRAbkjeT0pgUM1AAAAAAIAHgBPAFcATgBFAFIATwBSAC0ATwBWAEQASAAxAEoARQABAB4ATwBXAE4ARQBSAE8AUgAtAE8AVgBEAEgAMQBKAEUABAAeAE8AVwBOAEUAUgBPAFIALQBPAFYARABIADEASgBFAAMAHgBPAFcATgBFAFIATwBSAC0ATwBWAEQASAAxAEoARQAHAAgAZd4Wq5tH0QEGAAQAAgAAAAgAMAAwAAAAAAAAAAEAAAAAIAAAB1FSrDodQ818QD6iTyeTGJb6Viv3tX8yQrVYN/3hahYKABAAAAAAAAAAAAAAAAAAAAAAAAkAKABIAFQAVABQAC8AMQA0ADgALgAyADUAMQAuADEANwA4AC4AMgAwADcAAAAAAAAAAAAAAAAAoCEKGQYKxJkf9HE27Gh5eQ==");
 			ClientResponse response = webResource.type("application/x-www-form-urlencoded").post(ClientResponse.class, composeParamsString(orderId));
 
 			if (response.getStatus() != 200) {
@@ -37,6 +37,7 @@ public class ImportInterfaceCalls {
 			e.printStackTrace();
 
 		}
+		
 
 		System.setProperty("http.proxyHost", "null");
 		System.setProperty("http.proxyPort", "null");
@@ -44,13 +45,19 @@ public class ImportInterfaceCalls {
 
 	public static String composeParamsString(String orderId) {
 
-		return "__RequestVerificationToken=r34aqAgltwCNGO9-IustNI4LCjV-CWEvORYXoQ466JzEO-2rKLfALZiCYgA0x6yqmWJfG0P9jy_q40H_v_gTFwjvIOsrSiq68lK0hO7ZH_nrVa5vrNiGj5u5mBC3e4Kg0&AuftragNo="
-				+ orderId + "&Command=Automation+Auftrag+Importieren&Betriebsergebniss=" + orderId + "+erfolgreich+importiert+%21";
+		// return
+		// "__RequestVerificationToken=r34aqAgltwCNGO9-IustNI4LCjV-CWEvORYXoQ466JzEO-2rKLfALZiCYgA0x6yqmWJfG0P9jy_q40H_v_gTFwjvIOsrSiq68lK0hO7ZH_nrVa5vrNiGj5u5mBC3e4Kg0&AuftragNo="
+		// + orderId +
+		// "&Command=Automation+Auftrag+Importieren&Betriebsergebniss=" +
+		// orderId + "+erfolgreich+importiert+%21";
+		return "__RequestVerificationToken=QiGkETM3hpv_wduPdAFwjzrs5DkmUBb_WZ8INRIyfFssCQmBtA821XA0VAmV2OTZnOHCtwhosV-oxoPiazaDo_RLdAO-QyMoZ8v2bQqcBiWkrld7pWX-gwhRXNNJaav60&AuftragNo="
+				+ orderId + "&Command=Automation+Auftrag+Importieren&Betriebsergebniss=";
+
 	}
 
 	public static void main(String[] args) {
 
-		ImportInterfaceCalls.importOrderInNav("http://148.251.178.207/PjOrderImport/Home/ImportierenAut", "staging-int00009088");
+		ImportInterfaceCalls.importOrderInNav("http://148.251.178.207/PjOrderImport/Home/ImportierenAut", "staging-int00012061");
 
 	}
 

@@ -95,8 +95,6 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 
 		changingStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(changingStockMagentoProducts);
 		constantStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(constantStockMagentoProducts);
-		System.out.println("current: " + DateUtils.getCurrentDateTwoHoursBack("MM-dd-YYYY HH:mm:ss"));
-		System.out.println("sync: " + syncDate);
 
 		if (DateUtils.isDateAfter(DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"), syncDate, "YYYY-MM-dd HH:mm:ss")
 				&& orderStatusModel.getSyncStatus().contentEquals("Yes")) {
