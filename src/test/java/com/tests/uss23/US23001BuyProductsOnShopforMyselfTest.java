@@ -71,7 +71,7 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct5 = new ProductDetailedModel();
+//	private ProductDetailedModel genProduct5 = new ProductDetailedModel();
 
 	private OrderModel orderModel = new OrderModel();
 
@@ -88,8 +88,8 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		genProduct3.setSku("M164");
 		genProduct4.setName("BIANCA MIT BALLCHAIN 45 CM");
 		genProduct4.setSku("N052NL");
-		genProduct5.setName("FUNKY SOLITAIRE SET");
-		genProduct5.setSku("K091MC");
+//		genProduct5.setName("FUNKY SOLITAIRE SET");
+//		genProduct5.setSku("K091MC");
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -130,7 +130,7 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "1", "0");
 		addProductsWorkflow.setProductToCart(genProduct3.getSku(), genProduct3.getName(), "1", "0");
 		addProductsWorkflow.setProductToCart(genProduct4.getSku(), genProduct4.getName(), "1", "0");
-		addProductsWorkflow.setProductToCart(genProduct5.getSku(), genProduct5.getName(), "1", "0");
+//		addProductsWorkflow.setProductToCart(genProduct5.getSku(), genProduct5.getName(), "1", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
