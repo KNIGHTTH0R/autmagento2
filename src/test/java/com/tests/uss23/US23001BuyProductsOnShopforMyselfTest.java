@@ -129,7 +129,7 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "1", "18");
 		addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "1", "0");
 		addProductsWorkflow.setProductToCart(genProduct3.getSku(), genProduct3.getName(), "1", "0");
-		addProductsWorkflow.setProductToCart(genProduct4.getSku(), genProduct4.getName(), "1", "0");
+//		addProductsWorkflow.setProductToCart(genProduct4.getSku(), genProduct4.getName(), "1", "0");
 //		addProductsWorkflow.setProductToCart(genProduct5.getSku(), genProduct5.getName(), "1", "0");
 
 		headerSteps.openCartPreview();
