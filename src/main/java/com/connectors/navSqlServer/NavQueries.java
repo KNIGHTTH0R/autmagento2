@@ -56,7 +56,7 @@ public class NavQueries {
 //		SyncInfoModel result = NavQueries.getSyncProductInfo("B098BK", "");
 //		System.out.println(result.getQuantity());
 
-		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("STAGING-INT00012107");
+		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("STAGING-INT00012109");
 		System.out.println(result2.getSyncDate());
 		
 
