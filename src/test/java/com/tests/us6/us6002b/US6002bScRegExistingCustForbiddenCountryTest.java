@@ -48,20 +48,21 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	public StylistRegistrationSteps stylistRegistrationSteps;
 	@Steps 
 	public CustomVerification customVerifications;
-	@Steps
-	public PaymentSteps paymentSteps;
-	@Steps
-	public ConfirmationSteps confirmationSteps;
 	@Steps 
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
+	@Steps
+	public PaymentSteps paymentSteps;
+	@Steps
+	public ConfirmationSteps confirmationSteps;
 
+	private CreditCardModel creditCardData = new CreditCardModel();
 	private static DateModel formDate = new DateModel();
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");
 	private String birthDate;
-	private CreditCardModel creditCardData = new CreditCardModel();
+	
 
 	@Before
 	public void setUp() throws Exception {

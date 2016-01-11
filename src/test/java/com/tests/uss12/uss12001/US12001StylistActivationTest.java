@@ -14,10 +14,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -34,8 +31,6 @@ public class US12001StylistActivationTest extends BaseTest {
 	public OrdersSteps ordersSteps;
 	@Steps
 	public EmailClientSteps emailClientSteps;
-	@Steps
-	public CustomVerification customVerifications;
 	@Steps
 	public StylistValidationSteps stylistValidationSteps;
 	@Steps
@@ -62,8 +57,8 @@ public class US12001StylistActivationTest extends BaseTest {
 		backEndSteps.openOrderDetails(stylistRegistrationData.getFirstName());
 		ordersSteps.markOrderAsPaid();
 		
-		emailClientSteps.openMailinator();
-		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+//		emailClientSteps.openMailinator();
+//		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
 
 }

@@ -44,10 +44,6 @@ public class US17001MarkStarterKitOrderAsPaidTest extends BaseTest {
 		backEndSteps.openOrderDetails(stylistRegistrationData.getFirstName());
 		ordersSteps.markOrderAsPaid();
 		
-		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
-		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
-		backEndSteps.confirmCustomer();
 	}
 
 }

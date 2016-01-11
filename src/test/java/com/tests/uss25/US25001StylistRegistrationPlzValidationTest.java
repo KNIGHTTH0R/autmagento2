@@ -42,7 +42,6 @@ public class US25001StylistRegistrationPlzValidationTest extends BaseTest {
 	public StylistRegistrationStepsWithCsv stylistRegistrationStepsWithCsv;
 	@Steps
 	public CustomVerification customVerification;
-
 	private CustomerFormModel customerFormData;
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;

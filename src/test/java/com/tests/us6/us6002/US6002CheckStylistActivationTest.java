@@ -37,11 +37,11 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
-	public StylistPropertiesModel expectedAfterOrderPaidStylistData = new StylistPropertiesModel();
-	public RegistrationActivationDateModel expectedDateModel = new RegistrationActivationDateModel();
+	private StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
+	private StylistPropertiesModel expectedAfterOrderPaidStylistData = new StylistPropertiesModel();
+	private RegistrationActivationDateModel expectedDateModel = new RegistrationActivationDateModel();
 
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 
 	@Before
 	public void setUp() throws Exception {
@@ -54,7 +54,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 			System.out.println("The database has no entries");
 
 		
-		expectedAfterLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
+		expectedAfterLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.STYLIST);
 		expectedAfterOrderPaidStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.STYLIST);
 		expectedDateModel = new RegistrationActivationDateModel(formDateCreation,formDateCreation);
 		

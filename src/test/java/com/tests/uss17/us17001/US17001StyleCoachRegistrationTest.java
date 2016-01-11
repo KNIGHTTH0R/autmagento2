@@ -14,9 +14,11 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
+import com.steps.frontend.checkout.ConfirmationSteps;
+import com.steps.frontend.checkout.PaymentSteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
@@ -34,8 +36,11 @@ public class US17001StyleCoachRegistrationTest extends BaseTest {
 	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
 	@Steps
-	public CustomVerification customVerification;
+	public PaymentSteps paymentSteps;
+	@Steps
+	public ConfirmationSteps confirmationSteps;
 
+	private CreditCardModel creditCardData = new CreditCardModel();
 	private CustomerFormModel customerFormData;
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
@@ -52,7 +57,10 @@ public class US17001StyleCoachRegistrationTest extends BaseTest {
 	public void us17001StyleCoachRegistrationTest() {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.fillCreateCustomerFormPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
-		customVerification.printErrors();
+		
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+		confirmationSteps.agreeAndCheckout();
 	}
 
 	@After

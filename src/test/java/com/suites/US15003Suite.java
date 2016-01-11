@@ -11,7 +11,6 @@ import com.tests.uss15.us15003.US15003ChangeCustomersEmailTest;
 import com.tests.uss15.us15003.US15003CheckMailchimpConfigTest;
 import com.tests.uss15.us15003.US15003CheckRevenuesZeroInMailchimpConfigTest;
 import com.tests.uss15.us15003.US15003CheckSubscriberMagentoConfigTest;
-import com.tests.uss15.us15003.US15003ConfirmCustomerTest;
 import com.tests.uss15.us15003.US15003KoboSubscriptionTest;
 import com.tests.uss15.us15003.US15003MarkAsPaidKoboOrderTest;
 import com.tests.uss15.us15003.US15003MarkStarterKitOrderAsPaidTest;
@@ -22,7 +21,7 @@ import com.tests.uss15.us15003.US15003UncancelOrderTest;
 @SuiteClasses({
 	
 	US15003StyleCoachRegistrationTest.class,
-	US15003ConfirmCustomerTest.class,
+//	US15003ConfirmCustomerTest.class,
 	US15003ChangeCustomersEmailTest.class,
 	US15003MarkStarterKitOrderAsPaidTest.class,
 	US15003KoboSubscriptionTest.class,
