@@ -93,7 +93,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		payWithCreditCard();
+//		payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -117,7 +117,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		payWithCreditCard();
+//		payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -140,7 +140,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		payWithCreditCard();
+//		payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -166,7 +166,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		payWithCreditCard();
+//		payWithCreditCard();
 		try {
 			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
 					+ addressData.getHomeTown() + "," + addressData.getPostCode());
@@ -195,7 +195,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		grabCartTotal();
 		submitStep();
-		payWithCreditCard();
+//		payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -210,7 +210,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		payWithCreditCard();
+//		payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -228,7 +228,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 		selectStarterKit();
 		submitStep();
-		payWithCreditCard();
+//		payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;

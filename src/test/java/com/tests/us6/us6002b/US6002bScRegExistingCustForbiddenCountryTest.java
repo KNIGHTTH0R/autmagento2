@@ -17,9 +17,12 @@ import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistRegistrationSteps;
+import com.steps.frontend.checkout.ConfirmationSteps;
+import com.steps.frontend.checkout.PaymentSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.backend.StylistPropertiesModel;
+import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.ConfigConstants;
@@ -45,6 +48,10 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	public StylistRegistrationSteps stylistRegistrationSteps;
 	@Steps 
 	public CustomVerification customVerifications;
+	@Steps
+	public PaymentSteps paymentSteps;
+	@Steps
+	public ConfirmationSteps confirmationSteps;
 	@Steps 
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps 
@@ -54,6 +61,7 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");
 	private String birthDate;
+	private CreditCardModel creditCardData = new CreditCardModel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -88,6 +96,10 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 		customerRegistrationSteps.performLogin(stylistData.getEmailName(), stylistData.getPassword());
 		String formCreationDate = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), birthDate);
 		formDate.setDate(formCreationDate);
+		
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+		confirmationSteps.agreeAndCheckout();
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");

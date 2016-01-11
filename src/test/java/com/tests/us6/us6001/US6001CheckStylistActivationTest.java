@@ -44,7 +44,7 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 	@Steps
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
+//	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
 	private StylistPropertiesModel expectedOrderPaidStylistData = new StylistPropertiesModel();
 	private RegistrationActivationDateModel datesExpected = new RegistrationActivationDateModel();
@@ -61,7 +61,7 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 
-		expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel(ConfigConstants.NOT_CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
+//		expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel(ConfigConstants.NOT_CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
 		expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
 		expectedOrderPaidStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.STYLIST);
 		datesExpected = new RegistrationActivationDateModel(formCreationDate, formCreationDate);
@@ -74,15 +74,15 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
-		String customerURL = backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
+		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
 
-		StylistPropertiesModel grabBeforeLinkConfirmationStylistData = backEndSteps.grabCustomerConfiguration();
+//		StylistPropertiesModel grabBeforeLinkConfirmationStylistData = backEndSteps.grabCustomerConfiguration();
 
-		// external
-		emailClientSteps.openMailinator();
-		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+//		// external
+//		emailClientSteps.openMailinator();
+//		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 
-		backEndSteps.navigate(customerURL);
+//		backEndSteps.navigate(customerURL);
 		StylistPropertiesModel grabAfterLinkConfirmationStylistData = backEndSteps.grabCustomerConfiguration();
 
 		backEndSteps.clickOnSalesOrders();
@@ -97,10 +97,10 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		StylistPropertiesModel grabOrderPaidStylistData = backEndSteps.grabCustomerConfiguration();
 		RegistrationActivationDateModel grabDatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
 
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);
-		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
-		PrintUtils.printStylistPropertiesModel(grabBeforeLinkConfirmationStylistData);
-		PrintUtils.printStylistPropertiesModel(expectedBeforeLinkConfirmationStylistData);
+//		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);
+//		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
+//		PrintUtils.printStylistPropertiesModel(grabBeforeLinkConfirmationStylistData);
+//		PrintUtils.printStylistPropertiesModel(expectedBeforeLinkConfirmationStylistData);
 
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabAfterLinkConfirmationStylistData, expectedAfterLinkConfirmationStylistData);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
