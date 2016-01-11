@@ -13,7 +13,8 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public void openMailinator() {
 		waitABit(2000);
-		getDriver().get(UrlConstants.URL_WEB_MAIL);
+		navigate(UrlConstants.URL_WEB_MAIL);
+//		getDriver().get(UrlConstants.URL_WEB_MAIL);
 	}
 
 	@Step
@@ -30,7 +31,8 @@ public class EmailClientSteps extends AbstractSteps {
 			String confirmLink = mailinatorPage().confirmEmail();
 
 			waitABit(2000);
-			getDriver().get(confirmLink);
+			navigate(confirmLink);
+//			getDriver().get(confirmLink);
 			welcomeMessage = confirmLink;
 		}
 
@@ -52,7 +54,8 @@ public class EmailClientSteps extends AbstractSteps {
 		if (welcomeMessage.isEmpty()) {
 			String confirmLink = mailinatorPage().confirmEmail();
 			waitABit(2000);
-			getDriver().get(confirmLink);
+			navigate(confirmLink);
+//			getDriver().get(confirmLink);
 			welcomeMessage = confirmLink;
 		}
 		waitABit(6000);
@@ -158,7 +161,8 @@ public class EmailClientSteps extends AbstractSteps {
 			String confirmLink = mailinatorPage().confirmEmail();
 
 			waitABit(2000);
-			getDriver().get(confirmLink);
+			navigate(confirmLink);
+//			getDriver().get(confirmLink);
 			welcomeMessage = confirmLink;
 		}
 
@@ -180,7 +184,8 @@ public class EmailClientSteps extends AbstractSteps {
 			String confirmLink = mailinatorPage().registerFromEmail();
 
 			waitABit(2000);
-			getDriver().get(confirmLink);
+			navigate(confirmLink);
+//			getDriver().get(confirmLink);
 			welcomeMessage = confirmLink;
 		}
 
