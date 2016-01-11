@@ -51,6 +51,9 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
+	}
+	
+	public void waitForLoading(){
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"), ConfigConstants.LOADING));
 	}
@@ -62,8 +65,6 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"), ConfigConstants.LOADING));
 	}
 	
 	public void uncancelOrder() {
@@ -76,8 +77,6 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"), ConfigConstants.LOADING));
 	}
 
 	public void clickInvoiceButton() {
