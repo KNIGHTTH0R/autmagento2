@@ -3,8 +3,12 @@ package com.pages.backend.orders.details;
 import net.thucydides.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.tools.env.constants.ConfigConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
@@ -47,6 +51,8 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"), ConfigConstants.LOADING));
 	}
 
 	public void cancelOrder() {
@@ -56,6 +62,8 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"), ConfigConstants.LOADING));
 	}
 	
 	public void uncancelOrder() {
@@ -68,6 +76,8 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"), ConfigConstants.LOADING));
 	}
 
 	public void clickInvoiceButton() {

@@ -43,19 +43,19 @@ public class OrdersSteps extends AbstractSteps {
 	@Step
 	public void markOrderAsPaid() {
 		ordersActionsPage().markOrderAsPaid();
-		waitABit(TimeConstants.WAIT_TIME_LONG);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	@Step
 	public void cancelOrder() {
 		ordersActionsPage().cancelOrder();
-		waitABit(TimeConstants.WAIT_TIME_LONG);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	@Step
 	public void uncancelOrder() {
 		ordersActionsPage().uncancelOrder();
-		waitABit(TimeConstants.WAIT_TIME_LONG);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	@Step

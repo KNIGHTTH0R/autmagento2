@@ -68,6 +68,7 @@ public class ConfigConstants {
 	
 	public static final String BUNDLEARTIKEL = "Bundleartikel";
 	public static final String BUNDLEARTIKEL_NAME = "AutomationTest";
+	public static final String LOADING = "Bitte warten";
 	
 
 	
