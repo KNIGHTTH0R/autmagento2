@@ -44,7 +44,7 @@ public class OrdersSteps extends AbstractSteps {
 	public void markOrderAsPaid() {
 		ordersActionsPage().markOrderAsPaid();
 		ordersActionsPage().waitForLoading();
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		waitABit(15000);
 	}
 
 	@Step
