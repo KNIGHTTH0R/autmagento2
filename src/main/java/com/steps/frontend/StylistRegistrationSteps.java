@@ -42,7 +42,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectStarterKit();
 		grabCartTotal();
 		submitStep();
-		payWithCreditCard();
+//		payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;

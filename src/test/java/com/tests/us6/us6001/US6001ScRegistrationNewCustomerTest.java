@@ -15,9 +15,12 @@ import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationC
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
+import com.steps.frontend.checkout.ConfirmationSteps;
+import com.steps.frontend.checkout.PaymentSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
@@ -37,6 +40,10 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
 	@Steps
+	public PaymentSteps paymentSteps;
+	@Steps
+	public ConfirmationSteps confirmationSteps;
+	@Steps
 	public CustomVerification customVerification;
 	@Steps
 	public StylecoachRegistrationCartWorkflows stylecoachRegistrationCartWorkflows;
@@ -46,6 +53,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	private StylistRegistrationCartTotalModel calculatedTotals;
+	private CreditCardModel creditCardData = new CreditCardModel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -65,6 +73,10 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		headerSteps.navigateToRegisterForm();
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
+		
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+		confirmationSteps.agreeAndCheckout();
 
 		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(calculatedTotals, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount();
