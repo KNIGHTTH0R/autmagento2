@@ -179,13 +179,14 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		hostCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
-
+		
 		hostCartSteps.grabProductsData();
 		hostCartSteps.grabTotals();
 
 		HostCartCalculator.calculateCartBuy3Get1CartAndShippingTotals(HostCartCalculator.allProductsList, discountClass, shippingValue);
 
 		hostCartSteps.clickGoToShipping();
+		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
 		contactHostShippingHostSteps.checkItemNotReceivedYet();
 		contactHostShippingHostSteps.verifyThatRestrictedCountriesAreNotAvailable();
 		contactHostShippingHostSteps.selectCountry(country);

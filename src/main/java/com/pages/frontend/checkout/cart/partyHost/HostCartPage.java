@@ -50,6 +50,9 @@ public class HostCartPage extends AbstractPage {
 
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
+	
+	@FindBy(css = "button.button.blue-button[value='YES']")
+	private WebElement acceptNotConsumedBonusButton;
 
 	public void selectProductDiscountType(String productCode, String discountType) {
 		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
@@ -228,6 +231,11 @@ public class HostCartPage extends AbstractPage {
 
 		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 
+	}
+	
+	public void acceptInfoPopupForNotConsumedBonus(){
+		element(acceptNotConsumedBonusButton).waitUntilVisible();
+		acceptNotConsumedBonusButton.click();
 	}
 
 }

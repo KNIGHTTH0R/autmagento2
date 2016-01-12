@@ -171,6 +171,7 @@ public class US9001PlaceHostOrderWithForthyDiscountsAndJbTest extends BaseTest {
 		HostCartCalculator.calculateCartAndShippingTotals(HostCartCalculator.allProductsList, discountClass, shippingValue);
 
 		hostCartSteps.clickGoToShipping();
+		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 

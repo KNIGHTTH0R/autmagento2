@@ -29,6 +29,7 @@ public class HostCartSteps extends AbstractSteps {
 	public List<HostCartProductModel> grabProductsData() {
 		return hostCartPage().grabProductsData();
 	}
+
 	@Step
 	public List<HostCartProductModel> grabProductsDataWhenThereIsNoBonus() {
 		return hostCartPage().grabProductsDataWhenNoBonus();
@@ -63,6 +64,11 @@ public class HostCartSteps extends AbstractSteps {
 	public void updateCart() {
 		hostCartPage().clickUpdateCart();
 		getDriver().navigate().refresh();
+	}
+
+	@Step
+	public void acceptInfoPopupForNotConsumedBonus() {
+		hostCartPage().acceptInfoPopupForNotConsumedBonus();
 	}
 
 }
