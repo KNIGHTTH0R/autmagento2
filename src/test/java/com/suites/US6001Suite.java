@@ -16,7 +16,6 @@ import com.tests.us6.us6001.US6001ScRegistrationNewCustomerTest;
 	US6001CheckStylistActivationTest.class,
 	US6001CheckStylistPreferedWebsiteAndLanguage.class,
 	US6001CancelStarterSetOrderTest.class,
-	US6001CancelStarterSetOrderTest.class,
 	US6001CheckStylistActivationStarterkitCanceledTest.class,
 })
 @RunWith(Suite.class)
