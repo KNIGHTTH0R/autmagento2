@@ -38,6 +38,9 @@ public class CustomerAndStylistRegistrationWorkflows {
 		stylistValidationSteps.validateDates(grabbedDatesModel.getConfirmationDate(), expectedDatesModel.getConfirmationDate());
 	
 	}
+	public void validateCustomerRegistrationDate(String string) {
+		stylistValidationSteps.validateDates(grabbedDatesModel.getRegistrationDate(), expectedDatesModel.getRegistrationDate());
+	}
 	
 	
 

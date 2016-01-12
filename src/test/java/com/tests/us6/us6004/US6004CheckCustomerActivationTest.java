@@ -59,7 +59,7 @@ public class US6004CheckCustomerActivationTest extends BaseTest {
 			System.out.println("The database has no entries");
 
 		expectedStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
-		datesExpected = new RegistrationActivationDateModel(formCreationDate, "");
+		datesExpected = new RegistrationActivationDateModel(formCreationDate, formCreationDate);
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class US6004CheckCustomerActivationTest extends BaseTest {
 		PrintUtils.printStylistPropertiesModel(expectedStylistData);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabDatesModel, datesExpected);
-		customerAndStylistRegistrationWorkflows.validateStylistDAtes("VALIDATE REGISTRATION AND ACTIVATION DATES");
+		customerAndStylistRegistrationWorkflows.validateCustomerRegistrationDate("VALIDATE CUSTOMER ACCOUNT REGISTRATION DATE");
 
 		customVerifications.printErrors();
 	}
