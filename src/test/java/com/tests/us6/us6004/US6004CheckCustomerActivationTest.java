@@ -59,7 +59,7 @@ public class US6004CheckCustomerActivationTest extends BaseTest {
 			System.out.println("The database has no entries");
 
 		expectedStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
-		datesExpected = new RegistrationActivationDateModel(formCreationDate, formCreationDate);
+		datesExpected = new RegistrationActivationDateModel(formCreationDate, "");
 	}
 
 	@Test
