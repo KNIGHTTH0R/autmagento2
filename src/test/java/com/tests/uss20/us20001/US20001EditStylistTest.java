@@ -62,7 +62,6 @@ public class US20001EditStylistTest extends BaseTest {
 		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
 		backEndSteps.changeStylecoachVatSettings("1", "32423434");
 		backEndSteps.changeStylecoachSponsor("1835");
-		backEndSteps.editCity("Cluj");
 
 	}
 

@@ -59,6 +59,10 @@ public class CommissionStylistValidationWorkflows {
 	public void verifyStreetAddress(String expectedValue, String grabbedValue) {
 		CustomVerification.verifyTrue("Failure: Street address doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
 	}
+	@Step
+	public void verifyCity(String expectedValue, String grabbedValue) {
+		CustomVerification.verifyTrue("Failure: City doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contains(grabbedValue));
+	}
 
 	@Step
 	public void verifyCountry(String expectedValue, String grabbedValue) {
