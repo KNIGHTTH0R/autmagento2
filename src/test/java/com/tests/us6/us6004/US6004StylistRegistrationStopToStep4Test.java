@@ -53,8 +53,9 @@ public class US6004StylistRegistrationStopToStep4Test extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
 		StylistRegDataGrabber.wipe();
-		// Generate data for this test run
+
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		birthDate.setDate("Feb,1970,12");

@@ -17,15 +17,18 @@ import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
+import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.stylecoachRegistration.StylecoachRegistrationCartWorkflows;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
@@ -43,6 +46,8 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public ShippingSteps shippingSteps;
 	@Steps
 	public CustomVerification customVerification;
 	@Steps
@@ -74,6 +79,10 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 		
+		String url = shippingSteps.grabUrl();
+		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+		
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
@@ -82,13 +91,12 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount();
 
 		customVerification.printErrors();
-
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
-
+		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());
 	}
 }
