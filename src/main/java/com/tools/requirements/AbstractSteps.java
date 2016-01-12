@@ -231,7 +231,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public void navigate(String URL) {
 		// failsafe in case of redirects to live
 		if (!URL.contains("www.pippajean.com")) {
-			getDriver().manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+//			getDriver().manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 			getDriver().get(URL);
 		}
 
