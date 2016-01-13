@@ -183,14 +183,14 @@ public class StylistRegistrationPage extends AbstractPage {
 		confirmationeInput.sendKeys(passText);
 	}
 
-	public void inputStylistRef(String ref) {
-		element(stylistref).waitUntilVisible();
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
-		stylistref.clear();
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
-		element(stylistref).sendKeys(ref);
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
-	}
+//	public void inputStylistRef(String ref) {
+//		element(stylistref).waitUntilVisible();
+//		waitABit(TimeConstants.WAIT_TIME_SMALL);
+//		stylistref.clear();
+//		waitABit(TimeConstants.WAIT_TIME_SMALL);
+//		element(stylistref).sendKeys(ref);
+//		waitABit(TimeConstants.WAIT_TIME_SMALL);
+//	}
 
 	public void inputStylistEmail(String stylistEmail) {
 		invitationEmailInput.sendKeys(stylistEmail);
@@ -356,10 +356,10 @@ public class StylistRegistrationPage extends AbstractPage {
 		finishPayment.click();
 	}
 
-	public void selectStarterKit() {
-		waitABit(TimeConstants.TIME_MEDIUM);
-		elementjQueryClick("input#kit_2941");
-	}
+//	public void selectStarterKit() {
+//		waitABit(TimeConstants.TIME_MEDIUM);
+//		elementjQueryClick("input#kit_2941");
+//	}
 
 	public StylistRegistrationCartTotalModel grabCartTotal() {
 

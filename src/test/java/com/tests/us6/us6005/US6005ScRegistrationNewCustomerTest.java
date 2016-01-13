@@ -12,12 +12,12 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.StarterSetSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
-import com.steps.frontend.checkout.shipping.stylistRegistration.StarterKitShipingSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
@@ -42,7 +42,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
 	@Steps
-	public StarterKitShipingSteps starterKitShipingSteps;
+	public StarterSetSteps starterSetSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
@@ -91,9 +91,9 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.changeShippingAddress();
-		starterKitShipingSteps.setSameAsBilling(false);
-		starterKitShipingSteps.fillNewAddressForShipping(newShippingAddress);
-		starterKitShipingSteps.goToPaymentMethod();
+		starterSetSteps.setSameAsBilling(false);
+		starterSetSteps.fillNewAddressForShipping(newShippingAddress);
+		starterSetSteps.goToPaymentMethod();
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.changeBillingAddress();

@@ -12,7 +12,6 @@ import org.junit.Assert;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
-import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoReader;
@@ -37,12 +36,12 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkNoCoachCheckbox();
 		checkIAgree();
 		submitStep();
-		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
 		submitStep();
-		selectStarterKit();
+		starterSetPage().selectStarterKit();
 		grabCartTotal();
 		submitStep();
-//		payWithCreditCard();
+		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -60,10 +59,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputConfirmation(customerData.getPassword());
 		fillContactDetailsWithoutPlz(addressData);
 	}
+
 	@StepGroup
 	@Title("Fill create stylecoach form using csv for context")
 	public void fillCreateCustomerFormWithoutContext(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
-		
+
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
 		selectBirthDate(birthDate);
@@ -89,11 +89,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		fillContactDetails(addressData);
 		checkIAgree();
 		submitStep();
-		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
 		submitStep();
-		selectStarterKit();
+		starterSetPage().selectStarterKit();
 		submitStep();
-//		payWithCreditCard();
+		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -113,11 +113,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkNoCoachCheckbox();
 		checkIAgree();
 		submitStep();
-		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
 		submitStep();
-		selectStarterKit();
+		starterSetPage().selectStarterKit();
 		submitStep();
-//		payWithCreditCard();
+		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -136,11 +136,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		fillContactDetails(addressData);
 		checkIAgree();
 		submitStep();
-		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
 		submitStep();
-		selectStarterKit();
+		starterSetPage().selectStarterKit();
 		submitStep();
-//		payWithCreditCard();
+		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -162,11 +162,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkNoCoachCheckbox();
 		checkIAgree();
 		submitStep();
-		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
 		submitStep();
-		selectStarterKit();
+		starterSetPage().selectStarterKit();
 		submitStep();
-//		payWithCreditCard();
+		// payWithCreditCard();
 		try {
 			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
 					+ addressData.getHomeTown() + "," + addressData.getPostCode());
@@ -190,12 +190,12 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkNoCoachCheckbox();
 		checkIAgree();
 		submitStep();
-		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
 		submitStep();
-		selectStarterKit();
+		starterSetPage().selectStarterKit();
 		grabCartTotal();
 		submitStep();
-//		payWithCreditCard();
+		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -206,11 +206,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectBirthDate(birthDate);
 		checkIAgree();
 		submitStep();
-		inputStylistRef(name);
+		stylistContextPage().inputStylistRef(name);
 		submitStep();
-		selectStarterKit();
+		starterSetPage().selectStarterKit();
 		submitStep();
-//		payWithCreditCard();
+		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -224,11 +224,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectBirthDate(birthDate);
 		checkIAgree();
 		submitStep();
-		inputStylistRef(name);
+		stylistContextPage().inputStylistRef(name);
 		submitStep();
-		selectStarterKit();
+		starterSetPage().selectStarterKit();
 		submitStep();
-//		payWithCreditCard();
+		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -351,11 +351,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		stylistRegistrationPage().inputPhoneNumber(phoneNumber);
 	}
 
-	@Step
-	public void inputStylistRef(String ref) {
-		stylistRegistrationPage().inputStylistRef(ref);
-		waitABit(TimeConstants.TIME_CONSTANT);
-	}
+	// @Step
+	// public void inputStylistRef(String ref) {
+	// stylistRegistrationPage().inputStylistRef(ref);
+	// waitABit(TimeConstants.TIME_CONSTANT);
+	// }
 
 	@Step
 	public void inputStylistEmail(String stylistEmail) {
@@ -442,10 +442,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		stylistRegistrationPage().selectDay(day);
 	}
 
-	@Step
-	public void selectStarterKit() {
-		stylistRegistrationPage().selectStarterKit();
-	}
+	// @Step
+	// public void selectStarterKit() {
+	// stylistRegistrationPage().selectStarterKit();
+	// }
 	@Step
 	public void grabCartTotal() {
 		stylistRegistrationPage().grabCartTotal();
