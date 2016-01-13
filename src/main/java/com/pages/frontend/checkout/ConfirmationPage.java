@@ -36,6 +36,12 @@ public class ConfirmationPage extends AbstractPage {
 
 	@FindBy(id = "terms")
 	private WebElement acceptTerms;
+	
+	@FindBy(id = "change-shipping-address")
+	private WebElement changeShippingButton;
+	
+	@FindBy(id = "change-billing-address")
+	private WebElement changeBillingButton;
 
 	@FindBy(id = "submit-confirmation-step")
 	private WebElement submitButton;
@@ -117,6 +123,14 @@ public class ConfirmationPage extends AbstractPage {
 	public void clickIAgree() {
 		element(acceptTerms).waitUntilVisible();
 		acceptTerms.click();
+	}
+	public void changeShippingAddress() {
+		element(changeShippingButton).waitUntilVisible();
+		changeShippingButton.click();
+	}
+	public void changeBillingAddress() {
+		element(changeBillingButton).waitUntilVisible();
+		changeBillingButton.click();
 	}
 
 	public void clickOnSubmit() {

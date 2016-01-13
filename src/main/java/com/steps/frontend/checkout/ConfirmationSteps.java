@@ -22,6 +22,16 @@ public class ConfirmationSteps extends AbstractSteps {
 		return confirmationPage().grabShippingData();
 	}
 
+	@Step
+	public void changeShippingAddress() {
+		confirmationPage().changeShippingAddress();
+	}
+
+	@Step
+	public void changeBillingAddress() {
+		confirmationPage().changeBillingAddress();
+	}
+
 	public AddressModel grabBillingData() {
 		return confirmationPage().grabBillingData();
 	}
