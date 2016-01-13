@@ -1,7 +1,6 @@
 package com.tools.requirements;
 
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
@@ -81,6 +80,7 @@ import com.pages.frontend.checkout.shipping.SurveyPage;
 import com.pages.frontend.checkout.shipping.host.ContactHostShippingPage;
 import com.pages.frontend.checkout.shipping.kobo.KoboShippingPage;
 import com.pages.frontend.checkout.shipping.regularUser.ShippingPartySectionPage;
+import com.pages.frontend.checkout.shipping.stylistRegistration.StarterKitShippingPage;
 import com.pages.frontend.checkout.wishlist.WishlistPage;
 import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.DashboardPage;
@@ -361,6 +361,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public StylistRegistrationPage stylistRegistrationPage() {
 		return getPages().currentPageAt(StylistRegistrationPage.class);
+	}
+	
+	public StarterKitShippingPage starterKitShippingPage() {
+		return getPages().currentPageAt(StarterKitShippingPage.class);
 	}
 
 	public ConnectWithMeRegistrationPage connectWithMeRegistrationPage() {

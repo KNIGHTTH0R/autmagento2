@@ -295,14 +295,17 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void inputStreetAddress(String streetAddress) {
 		element(streetInput).waitUntilVisible();
+		streetInput.clear();
 		streetInput.sendKeys(streetAddress);
 	}
 
 	public void inputStreetNumber(String streetNumber) {
+		streetNumberInput.clear();
 		streetNumberInput.sendKeys(streetNumber);
 	}
 
 	public void inputPostCode(String postCode) {
+		postCodeInput.clear();
 		postCodeInput.sendKeys(postCode);
 	}
 
@@ -327,6 +330,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void inputHomeTown(String homeTown) {
+		cityInput.clear();
 		cityInput.sendKeys(homeTown);
 	}
 

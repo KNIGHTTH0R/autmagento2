@@ -17,6 +17,7 @@ import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.shipping.stylistRegistration.StarterKitShipingSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
@@ -40,6 +41,8 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 	public StylistCampaignSteps stylistCampaignSteps;
 	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
+	@Steps
+	public StarterKitShipingSteps starterKitShipingSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
@@ -87,15 +90,12 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-
 		confirmationSteps.changeShippingAddress();
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.fillNewAddressForShipping(newShippingAddress);
-		shippingSteps.goToPaymentMethod();
-
+		starterKitShipingSteps.setSameAsBilling(false);
+		starterKitShipingSteps.fillNewAddressForShipping(newShippingAddress);
+		starterKitShipingSteps.goToPaymentMethod();
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-
 		confirmationSteps.changeShippingAddress();
 		stylistRegistrationSteps.inputPassword(customerFormData.getPassword());
 		stylistRegistrationSteps.inputConfirmation(customerFormData.getPassword());
@@ -103,10 +103,8 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		stylistRegistrationSteps.submitStep();
 		stylistRegistrationSteps.submitStep();
 		stylistRegistrationSteps.submitStep();
-
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-
 		confirmationSteps.agreeAndCheckout();
 
 		customVerification.printErrors();

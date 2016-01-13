@@ -207,6 +207,7 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputPhoneNumber(String phoneNumber) {
+		telephoneInput.clear();
 		telephoneInput.sendKeys(phoneNumber);
 	}
 
