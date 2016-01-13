@@ -96,6 +96,18 @@ public class ShippingSteps extends AbstractSteps {
 		selectShippingCountryName(addressModel.getCountryName());
 		inputShippingPhoneNumber(addressModel.getPhoneNumber());
 	}
+	
+	@Title("Fill new address for shipping")
+	@Step
+	public void fillNewAddressForShipping(AddressModel addressModel) {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		inputShippingStreetAddress(addressModel.getStreetAddress());
+		inputShippingStreetNumber(addressModel.getStreetNumber());
+		inputShippingPostCode(addressModel.getPostCode());
+		inputShippingHomeTown(addressModel.getHomeTown());
+		selectShippingCountryName(addressModel.getCountryName());
+		inputShippingPhoneNumber(addressModel.getPhoneNumber());
+	}
 
 	@Step
 	public void setSameAsBilling(boolean checked) {

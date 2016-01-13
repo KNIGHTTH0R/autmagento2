@@ -90,7 +90,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 
 		confirmationSteps.changeShippingAddress();
 		shippingSteps.setSameAsBilling(false);
-		shippingSteps.addNewAddressForShipping(newShippingAddress);
+		shippingSteps.fillNewAddressForShipping(newShippingAddress);
 		shippingSteps.goToPaymentMethod();
 
 		paymentSteps.expandCreditCardForm();
