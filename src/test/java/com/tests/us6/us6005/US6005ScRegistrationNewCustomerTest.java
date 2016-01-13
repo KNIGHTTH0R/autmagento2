@@ -67,9 +67,9 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		newShippingAddress = new AddressModel();
-		newBillingAddress.setPostCode("55555");
+		newShippingAddress.setPostCode("55555");
 		newBillingAddress = new AddressModel();
-		newShippingAddress.setPostCode("66666");
+		newBillingAddress.setPostCode("66666");
 		birthDate.setDate("Feb,1970,12");
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
