@@ -96,7 +96,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		starterKitShipingSteps.goToPaymentMethod();
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-		confirmationSteps.changeShippingAddress();
+		confirmationSteps.changeBillingAddress();
 		stylistRegistrationSteps.inputPassword(customerFormData.getPassword());
 		stylistRegistrationSteps.inputConfirmation(customerFormData.getPassword());
 		stylistRegistrationSteps.fillContactDetails(newBillingAddress);
