@@ -100,6 +100,8 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		stylistRegistrationSteps.inputPassword(customerFormData.getPassword());
 		stylistRegistrationSteps.inputConfirmation(customerFormData.getPassword());
 		stylistRegistrationSteps.fillContactDetails(newBillingAddress);
+		stylistRegistrationSteps.checkNoCoachCheckbox();
+		stylistRegistrationSteps.checkIAgree();
 		stylistRegistrationSteps.submitStep();
 		stylistRegistrationSteps.submitStep();
 		stylistRegistrationSteps.submitStep();
