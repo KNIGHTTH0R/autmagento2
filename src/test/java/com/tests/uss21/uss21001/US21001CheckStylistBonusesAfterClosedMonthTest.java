@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -68,6 +69,8 @@ public class US21001CheckStylistBonusesAfterClosedMonthTest extends BaseTest {
 				}
 			}
 		}
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		initialRewardPointsOfStylistModel = MongoReader.grabReviewPoints("US21001CheckStylistBonusesBeforeClosedMonthTest").get(0);
 		calculatedRewardPointsOfStylistModel = MongoReader.grabReviewPoints("US21001CloseMonthTest").get(0);

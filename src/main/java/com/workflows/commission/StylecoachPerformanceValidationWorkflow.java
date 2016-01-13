@@ -24,7 +24,7 @@ public class StylecoachPerformanceValidationWorkflow {
 
 		return result;
 	}
-	@Title("Validate that SC performance values are correct")
+	@Title("Validate that SC performance values are correct in backend")
 	@Step
 	public void validatePerformanceValues(LoungeIpPerformanceModel expectedModel, LoungeIpPerformanceModel grabbedModel) {
 		verifyCareerLevel(expectedModel.getCareerLevel(), grabbedModel.getCareerLevel());
@@ -34,6 +34,7 @@ public class StylecoachPerformanceValidationWorkflow {
 		verifyStylecoachFirstLevel(expectedModel.getStyleCoachFirstLevel(), grabbedModel.getStyleCoachFirstLevel());
 		verifyGoldStyleCoaches(expectedModel.getGoldStyleCoaches(), grabbedModel.getGoldStyleCoaches());
 	}
+	@Title("Validate that SC performance values are correct in frontend")
 	@Step
 	public void validatePerformanceValuesInFrontend(LoungeIpPerformanceModel expectedModel, LoungeIpPerformanceModel grabbedModel) {
 		verifyCareerLevel(expectedModel.getCareerLevel(), grabbedModel.getCareerLevel());
