@@ -101,7 +101,6 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void fillNewAddressForShipping(AddressModel addressModel) {
 		waitABit(TimeConstants.TIME_CONSTANT);
-		inputShippingStreetAddress(addressModel.getStreetAddress());
 		inputShippingStreetNumber(addressModel.getStreetNumber());
 		inputShippingPostCode(addressModel.getPostCode());
 		inputShippingHomeTown(addressModel.getHomeTown());
