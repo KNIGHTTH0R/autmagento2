@@ -104,8 +104,6 @@ public class ShippingSteps extends AbstractSteps {
 		inputShippingStreetNumber(addressModel.getStreetNumber());
 		inputShippingPostCode(addressModel.getPostCode());
 		inputShippingHomeTown(addressModel.getHomeTown());
-		selectShippingCountryName(addressModel.getCountryName());
-		inputShippingPhoneNumber(addressModel.getPhoneNumber());
 	}
 
 	@Step
