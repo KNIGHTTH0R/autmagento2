@@ -1,5 +1,6 @@
 package com.pages.backend.customer.details;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
@@ -417,5 +418,26 @@ public class CustomerDetailsPage extends AbstractPage {
 		PrintUtils.printLoungeIpPerformanceModel(result);
 
 		return result;
+	}
+
+	public void verifyThatAddressExist(AddressModel addressModel) {
+		List<WebElement> addressList = getDriver().findElements(By.cssSelector("#address_list li"));
+		boolean found = false;
+
+		for (WebElement address : addressList) {
+			boolean containsAll = false;
+			for (Field field : addressModel.getClass().getDeclaredFields()) {
+				System.out.println(field.getName());
+				if (!address.getText().contains("66666")) {
+					containsAll = false;
+				}
+			}
+			if (containsAll) {
+				found = true;
+				break;
+			}
+		}
+
+		Assert.assertFalse("The reccord was found in the table and it shouldn't", found);
 	}
 }

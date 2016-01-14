@@ -30,8 +30,8 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.stylecoachRegistration.StylecoachRegistrationCartWorkflows;
 
-@WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
-@Story(Application.StylecoachRegistration.US6_1.class)
+@WithTag(name = "US6.5 Stylist registration with redirects From Step 5 to Step 1 and Steo 3 ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_5.class)
 @RunWith(ThucydidesRunner.class)
 public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 
@@ -115,7 +115,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
-		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
-		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(newShippingAddress, getClass().getSimpleName() + "shipping");
+		MongoWriter.saveAddressModel(newBillingAddress, getClass().getSimpleName() + "billing");
 	}
 }

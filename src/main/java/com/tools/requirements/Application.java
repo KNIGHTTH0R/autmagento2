@@ -76,6 +76,8 @@ public class Application {
 
 		public class US6_4 {
 		}
+		public class US6_5 {
+		}
 	}
 
 	@Feature

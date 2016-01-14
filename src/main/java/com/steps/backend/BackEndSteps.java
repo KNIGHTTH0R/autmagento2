@@ -195,7 +195,7 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().saveAndContinueEdit();
 
 	}
-	
+
 	@Step
 	public void editEmail(CustomerFormModel customerData) {
 		customerDetailsHomePage().clickOnAccountInfoTab();
@@ -304,6 +304,11 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().saveAndContinueEdit();
 		customerDetailsHomePage().verifySaveCustomerSuccessMessage();
 
+	}
+
+	@Step
+	public void verifyThatAddressExist(AddressModel addressModel) {
+		customerDetailsHomePage().verifyThatAddressExist(addressModel);
 	}
 
 	@Step
