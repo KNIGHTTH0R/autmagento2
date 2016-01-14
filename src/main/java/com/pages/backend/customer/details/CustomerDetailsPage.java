@@ -8,6 +8,8 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.frontend.AddressModel;
@@ -423,7 +425,7 @@ public class CustomerDetailsPage extends AbstractPage {
 	public void verifyThatAddressExist(AddressModel addressModel) {
 		List<WebElement> addressList = getDriver().findElements(By.cssSelector("#address_list li"));
 		boolean found = false;
-
+		
 		for (WebElement address : addressList) {
 			boolean containsAll = false;
 			for (Field field : addressModel.getClass().getDeclaredFields()) {
@@ -437,7 +439,8 @@ public class CustomerDetailsPage extends AbstractPage {
 				break;
 			}
 		}
-
+		
+	
 		Assert.assertFalse("The reccord was found in the table and it shouldn't", found);
 	}
 }

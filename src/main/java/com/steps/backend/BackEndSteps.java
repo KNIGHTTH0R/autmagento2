@@ -2,6 +2,7 @@ package com.steps.backend;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
@@ -306,6 +307,7 @@ public class BackEndSteps extends AbstractSteps {
 
 	}
 
+	@Title("Verify that stylist has the address set in backend")
 	@Step
 	public void verifyThatAddressExist(AddressModel addressModel) {
 		customerDetailsHomePage().verifyThatAddressExist(addressModel);
