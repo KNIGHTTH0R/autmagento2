@@ -69,9 +69,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(id = "by_default")
 	private WebElement noInviteCheckbox;
 
-	// @FindBy(css = "button[title*='Senden']")
 	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")
-	// int
 	private WebElement completeButton;
 
 	@FindBy(id = "submit-step")
@@ -183,15 +181,6 @@ public class StylistRegistrationPage extends AbstractPage {
 		confirmationeInput.sendKeys(passText);
 	}
 
-//	public void inputStylistRef(String ref) {
-//		element(stylistref).waitUntilVisible();
-//		waitABit(TimeConstants.WAIT_TIME_SMALL);
-//		stylistref.clear();
-//		waitABit(TimeConstants.WAIT_TIME_SMALL);
-//		element(stylistref).sendKeys(ref);
-//		waitABit(TimeConstants.WAIT_TIME_SMALL);
-//	}
-
 	public void inputStylistEmail(String stylistEmail) {
 		invitationEmailInput.sendKeys(stylistEmail);
 	}
@@ -230,7 +219,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void inputCardExpiryYear(String year) {
 		element(creditCardYearInput).waitUntilVisible();
 		element(creditCardYearInput).selectByValue(year);
-		waitABit(2000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	public void submitCreditCard() {
@@ -319,16 +308,6 @@ public class StylistRegistrationPage extends AbstractPage {
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
-	public void inputContextCodeAndValdiateErrorMessage(String postCode) {
-
-		element(stylistref).waitUntilVisible();
-		stylistref.clear();
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
-		element(stylistref).typeAndEnter(postCode);
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
-	}
-
 	public void inputHomeTown(String homeTown) {
 		cityInput.clear();
 		cityInput.sendKeys(homeTown);
@@ -355,11 +334,6 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void finishPayment() {
 		finishPayment.click();
 	}
-
-//	public void selectStarterKit() {
-//		waitABit(TimeConstants.TIME_MEDIUM);
-//		elementjQueryClick("input#kit_2941");
-//	}
 
 	public StylistRegistrationCartTotalModel grabCartTotal() {
 

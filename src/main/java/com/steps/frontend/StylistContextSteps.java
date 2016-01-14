@@ -14,5 +14,10 @@ public class StylistContextSteps extends AbstractSteps {
 		stylistContextPage().inputStylistRef(ref);
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
+	
+	@Step
+	public void submitContextStep() {
+		stylistContextPage().submitStep();
+	}
 
 }

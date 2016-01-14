@@ -37,11 +37,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		submitStep();
 		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		submitStep();
+		stylistContextPage().submitStep();
 		starterSetPage().selectStarterKit();
 		grabCartTotal();
-		submitStep();
-		// payWithCreditCard();
+		starterSetPage().submitStep();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -90,13 +89,24 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		submitStep();
 		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		submitStep();
+		stylistContextPage().submitStep();
 		starterSetPage().selectStarterKit();
-		submitStep();
-		// payWithCreditCard();
+		starterSetPage().submitStep();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
+	}
+	
+	@StepGroup
+	@Title("Update stylist data in step 1")
+	public void updateStylistData(CustomerFormModel customerData, AddressModel addressModel){
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetails(addressModel);
+		checkNoCoachCheckbox();
+		checkIAgree();
+		submitStep();
+		
 	}
 
 	@StepGroup
@@ -114,10 +124,9 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		submitStep();
 		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		submitStep();
+		stylistContextPage().submitStep();
 		starterSetPage().selectStarterKit();
-		submitStep();
-		// payWithCreditCard();
+		starterSetPage().submitStep();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -137,10 +146,9 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		submitStep();
 		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		submitStep();
+		stylistContextPage().submitStep();
 		starterSetPage().selectStarterKit();
-		submitStep();
-		// payWithCreditCard();
+		starterSetPage().submitStep();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -163,10 +171,9 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		submitStep();
 		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		submitStep();
+		stylistContextPage().submitStep();
 		starterSetPage().selectStarterKit();
-		submitStep();
-		// payWithCreditCard();
+		starterSetPage().submitStep();
 		try {
 			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
 					+ addressData.getHomeTown() + "," + addressData.getPostCode());
@@ -191,11 +198,10 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		submitStep();
 		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		submitStep();
+		stylistContextPage().submitStep();
 		starterSetPage().selectStarterKit();
 		grabCartTotal();
-		submitStep();
-		// payWithCreditCard();
+		starterSetPage().submitStep();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -207,9 +213,9 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		submitStep();
 		stylistContextPage().inputStylistRef(name);
-		submitStep();
+		stylistContextPage().submitStep();
 		starterSetPage().selectStarterKit();
-		submitStep();
+		starterSetPage().submitStep();
 		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
@@ -225,10 +231,9 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		submitStep();
 		stylistContextPage().inputStylistRef(name);
-		submitStep();
+		stylistContextPage().submitStep();
 		starterSetPage().selectStarterKit();
-		submitStep();
-		// payWithCreditCard();
+		starterSetPage().submitStep();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
@@ -442,10 +447,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		stylistRegistrationPage().selectDay(day);
 	}
 
-	// @Step
-	// public void selectStarterKit() {
-	// stylistRegistrationPage().selectStarterKit();
-	// }
 	@Step
 	public void grabCartTotal() {
 		stylistRegistrationPage().grabCartTotal();

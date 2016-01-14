@@ -25,7 +25,7 @@ import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StylistCampaignSteps;
 import com.steps.frontend.StylistRegistrationSteps;
-import com.steps.frontend.StylistRegistrationStepsCsvContext;
+import com.steps.frontend.StylistContextStepsCsv;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
@@ -49,7 +49,7 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
 	@Steps
-	public StylistRegistrationStepsCsvContext stylistRegistrationStepsCsvContext;
+	public StylistContextStepsCsv stylistContextStepsCsv;
 	@Steps
 	public CustomVerification customVerification;
 
@@ -84,7 +84,7 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.fillCreateCustomerFormWithoutContext(customerFormData, customerFormAddress, birthDate.getDate());
 		try {
-			withTestDataFrom("resources/invalidContextData.csv").run(stylistRegistrationStepsCsvContext).inputContextCsv();
+			withTestDataFrom("resources/invalidContextData.csv").run(stylistContextStepsCsv).inputContextCsv();
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail("Failed !!!");

@@ -5,9 +5,10 @@ import net.thucydides.core.pages.Pages;
 import net.thucydides.core.steps.ScenarioSteps;
 import net.thucydides.junit.annotations.Qualifier;
 
+import com.pages.frontend.StylistContextPage;
 import com.pages.frontend.StylistRegistrationPage;
 
-public class StylistRegistrationStepsCsvContext extends ScenarioSteps {
+public class StylistContextStepsCsv extends ScenarioSteps {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,14 +20,15 @@ public class StylistRegistrationStepsCsvContext extends ScenarioSteps {
 	}
 
 	StylistRegistrationPage stylistRegistrationPage;
+	StylistContextPage stylistContextPage;
 
-	public StylistRegistrationStepsCsvContext(Pages pages) {
+	public StylistContextStepsCsv(Pages pages) {
 		super(pages);
 	}
 
 	@Step
 	public void inputContextCsv() {
-		stylistRegistrationPage.inputContextCodeAndValdiateErrorMessage(context);
+		stylistContextPage.inputContextCodeAndValdiateErrorMessage(context);
 		stylistRegistrationPage.validateContextValidationErrorMessage();
 		
 	}

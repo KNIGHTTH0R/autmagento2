@@ -23,12 +23,12 @@ public class ConfirmationSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void changeShippingAddress() {
+	public void clickOnChangeShippingAddress() {
 		confirmationPage().changeShippingAddress();
 	}
 
 	@Step
-	public void changeBillingAddress() {
+	public void clickOnChangeBillingAddress() {
 		confirmationPage().changeBillingAddress();
 	}
 

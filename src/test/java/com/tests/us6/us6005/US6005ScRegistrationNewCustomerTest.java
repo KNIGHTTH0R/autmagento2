@@ -14,6 +14,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StarterSetSteps;
 import com.steps.frontend.StylistCampaignSteps;
+import com.steps.frontend.StylistContextSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -45,6 +46,8 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 	public StarterSetSteps starterSetSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public StylistContextSteps stylistContextSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
@@ -92,21 +95,16 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-		confirmationSteps.changeShippingAddress();
+		confirmationSteps.clickOnChangeShippingAddress();
 		starterSetSteps.setSameAsBilling(false);
 		starterSetSteps.fillNewAddressForShipping(newShippingAddress);
 		starterSetSteps.goToPaymentMethod();
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-		confirmationSteps.changeBillingAddress();
-		stylistRegistrationSteps.inputPassword(customerFormData.getPassword());
-		stylistRegistrationSteps.inputConfirmation(customerFormData.getPassword());
-		stylistRegistrationSteps.fillContactDetails(newBillingAddress);
-		stylistRegistrationSteps.checkNoCoachCheckbox();
-		stylistRegistrationSteps.checkIAgree();
-		stylistRegistrationSteps.submitStep();
-		stylistRegistrationSteps.submitStep();
-		stylistRegistrationSteps.submitStep();
+		confirmationSteps.clickOnChangeBillingAddress();
+		stylistRegistrationSteps.updateStylistData(customerFormData, newBillingAddress);
+		stylistContextSteps.submitContextStep();
+		starterSetSteps.submitstarterSetStep();
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();

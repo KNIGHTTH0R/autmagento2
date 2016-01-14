@@ -32,6 +32,14 @@ public class StarterSetPage extends AbstractPage {
 
 	@FindBy(css = "button#submit-step")
 	private WebElement toPaymentButton;
+	
+	@FindBy(id = "submit-step")
+	private WebElement submitStepButton;
+
+	public void submitStep() {
+		element(submitStepButton).waitUntilVisible();
+		submitStepButton.click();
+	}
 
 	public void clickGoToPaymentMethod() {
 		element(toPaymentButton).waitUntilVisible();

@@ -62,4 +62,9 @@ public class StarterSetSteps extends AbstractSteps {
 		starterSetPage().selectStarterKit();
 	}
 
+	@Step
+	public void submitstarterSetStep() {
+		starterSetPage().submitStep();
+	}
+
 }
