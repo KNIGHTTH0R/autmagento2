@@ -76,6 +76,8 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		birthDate.setDate("Feb,1970,12");
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "shipping");
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "billing");
 	}
 
 	@Test
