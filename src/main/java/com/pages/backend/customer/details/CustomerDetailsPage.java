@@ -448,6 +448,6 @@ public class CustomerDetailsPage extends AbstractPage {
 			}
 		}
 
-		Assert.assertFalse("The address was not found", found);
+		Assert.assertTrue("The address was not found", found);
 	}
 }
