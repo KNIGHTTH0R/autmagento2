@@ -115,7 +115,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
-		MongoWriter.saveAddressModel(newShippingAddress, getClass().getSimpleName() + "Shipping");
-		MongoWriter.saveAddressModel(newBillingAddress, getClass().getSimpleName() + "Billing");
+		MongoWriter.saveAddressModel(newShippingAddress, getClass().getSimpleName() + "shipping");
+		MongoWriter.saveAddressModel(newBillingAddress, getClass().getSimpleName() + "billing");
 	}
 }

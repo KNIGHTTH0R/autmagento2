@@ -2,6 +2,8 @@ package com.pages.backend.customer.details;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.thucydides.core.annotations.findby.FindBy;
@@ -425,17 +427,19 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	public void verifyThatAddressExist(AddressModel addressModel) {
 
+		List<String> addressData = new ArrayList<String>(Arrays.asList(addressModel.getStreetNumber(), addressModel.getStreetAddress(), addressModel.getHomeTown(),
+				addressModel.getPostCode(), addressModel.getCountryName()));
+
 		List<WebElement> addressList = getDriver().findElements(By.cssSelector("#address_list li"));
 		boolean found = false;
 
 		for (WebElement address : addressList) {
 			boolean containsAll = false;
-			for (Method method : addressModel.getClass().getMethods()) {
-				System.out.println(method.getName());
-				if (method.getName().contains("get")) {
-					if (!address.getText().contains(method.getName())) {
-						containsAll = false;
-					}
+			System.out.println(address.getText());
+			for (String addr : addressData) {
+				System.out.println(addr);
+				if (!address.getText().contains(addr)) {
+					containsAll = false;
 				}
 			}
 			if (containsAll) {
@@ -444,6 +448,6 @@ public class CustomerDetailsPage extends AbstractPage {
 			}
 		}
 
-		Assert.assertFalse("The reccord was found in the table and it shouldn't", found);
+		Assert.assertFalse("The address was not found", found);
 	}
 }
