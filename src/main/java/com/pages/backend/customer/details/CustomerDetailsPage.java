@@ -1,7 +1,5 @@
 package com.pages.backend.customer.details;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,8 +9,6 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.frontend.AddressModel;
@@ -435,9 +431,7 @@ public class CustomerDetailsPage extends AbstractPage {
 
 		for (WebElement address : addressList) {
 			boolean containsAll = true;
-			System.out.println("address webelelemnt: " + address.getText());
 			for (String addr : addressData) {
-				System.out.println("Addr: " + addr);
 				if (!address.getText().contains(addr)) {
 					containsAll = false;
 				}
