@@ -42,8 +42,8 @@ public class US6005VerifyStylistAddressesTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		stylistEmail = MongoReader.grabCustomerFormModels("US6005ScRegistrationNewCustomerTest").get(0).getEmailName();
-		newShippingAddress = MongoReader.grabAddressModels("US6005ScRegistrationNewCustomerTest" + "Shipping").get(0);
-		newBillingAddress = MongoReader.grabAddressModels("US6005ScRegistrationNewCustomerTest" + "Billing").get(0);
+		newShippingAddress = MongoReader.grabAddressModels("US6005ScRegistrationNewCustomerTest" + "shipping").get(0);
+		newBillingAddress = MongoReader.grabAddressModels("US6005ScRegistrationNewCustomerTest" + "billing").get(0);
 	}
 
 	@Test
