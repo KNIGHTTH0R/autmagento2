@@ -430,7 +430,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		List<String> addressData = new ArrayList<String>(Arrays.asList(addressModel.getStreetNumber(), addressModel.getStreetAddress(), addressModel.getHomeTown(),
 				addressModel.getPostCode(), addressModel.getCountryName()));
 
-		List<WebElement> addressList = getDriver().findElements(By.cssSelector("#address_list li"));
+		List<WebElement> addressList = getDriver().findElements(By.cssSelector("#address_list li address"));
 		boolean found = false;
 
 		for (WebElement address : addressList) {
