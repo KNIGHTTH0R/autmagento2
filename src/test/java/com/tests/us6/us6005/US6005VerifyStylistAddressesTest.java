@@ -53,6 +53,7 @@ public class US6005VerifyStylistAddressesTest extends BaseTest {
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
+		backEndSteps.clickOnAddressesTab();
 		backEndSteps.verifyThatAddressExist(newShippingAddress);
 		backEndSteps.verifyThatAddressExist(newBillingAddress);
 
