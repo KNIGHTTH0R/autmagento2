@@ -83,7 +83,6 @@ public class US21001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 		backEndSteps.openCustomerDetails(email);
 		backEndSteps.clickOnRewardsPointsTab();
 		rewardPointsOfStylistModel = backEndSteps.getRewardPointsOfStylistModel();
-
 		backEndSteps.clickOnStylecoachList();
 		stylecoachListBackendSteps.searchForStylist(email);
 		stylecoachListBackendSteps.openStylistDetails();
