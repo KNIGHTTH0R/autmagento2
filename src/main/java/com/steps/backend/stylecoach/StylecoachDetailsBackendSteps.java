@@ -9,7 +9,7 @@ public class StylecoachDetailsBackendSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void typeNewActivatedAtDate(String date) {
+	public void addNewActivatedAtDate(String date) {
 		stylecoachDetailsBackendPage().inputActivatedAtDate(date);
 		stylecoachDetailsBackendPage().saveStylecoach();
 	}
