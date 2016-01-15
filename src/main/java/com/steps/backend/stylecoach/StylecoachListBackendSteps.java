@@ -36,6 +36,13 @@ public class StylecoachListBackendSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void openContactDetails(String stylecoachEmail) {
+		contactListBackendPage().inputEmailFilter(stylecoachEmail);
+		contactListBackendPage().clickOnSearch();
+		contactListBackendPage().openContactDetails();
+	}
+
+	@Step
 	public void searchForStylist(String stylecoachEmail) {
 		stylecoachListBackendPage().inputEmailFilter(stylecoachEmail);
 		stylecoachListBackendPage().clickOnSearch();

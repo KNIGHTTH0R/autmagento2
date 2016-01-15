@@ -1,14 +1,9 @@
 package com.pages.backend.stylecoach;
 
-import java.util.List;
-
 import net.thucydides.core.annotations.findby.FindBy;
 
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.constants.ConfigConstants;
 import com.tools.requirements.AbstractPage;
 
 public class ContactListBackendPage extends AbstractPage {
@@ -37,7 +32,7 @@ public class ContactListBackendPage extends AbstractPage {
 		waitABit(2000);
 	}
 
-	public void openStylistDetails() {
+	public void openContactDetails() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(styleCoachRow).waitUntilVisible();
 		getDriver().get(styleCoachRow.getAttribute("title"));

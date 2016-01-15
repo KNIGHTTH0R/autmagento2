@@ -430,10 +430,8 @@ public class CustomerDetailsPage extends AbstractPage {
 		boolean found = false;
 
 		for (WebElement address : addressList) {
-			System.out.println(address.getText());
 			boolean containsAll = true;
 			for (String addr : addressData) {
-				System.out.println("addr: " + addr);
 				if (!address.getText().contains(addr)) {
 					containsAll = false;
 				}

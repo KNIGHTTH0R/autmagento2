@@ -82,6 +82,18 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
+	public void clickOnContactList() {
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+		
+		for (WebElement elementNow : elementList) {
+			if (elementNow.getText().contentEquals("Kontakte")) {
+				elementNow.click();
+				break;
+			}
+		}
+	}
 
 	public void clickOnCustomers() {
 		element(navigationBar).waitUntilVisible();
