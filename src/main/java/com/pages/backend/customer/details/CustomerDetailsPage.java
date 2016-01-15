@@ -424,7 +424,7 @@ public class CustomerDetailsPage extends AbstractPage {
 	public void verifyThatAddressExist(AddressModel addressModel) {
 
 		List<String> addressData = new ArrayList<String>(Arrays.asList(addressModel.getStreetNumber(), addressModel.getStreetAddress(), addressModel.getHomeTown(),
-				addressModel.getPostCode(), addressModel.getCountryName()));
+				addressModel.getPostCode()));
 
 		List<WebElement> addressList = getDriver().findElements(By.cssSelector("#address_list li address"));
 		boolean found = false;
