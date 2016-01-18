@@ -23,11 +23,12 @@ public class ContactDetailsBackendPage extends AbstractPage {
 
 		String valueTransformer = "";
 		element(contactDetailsTable).waitUntilVisible();
+		System.out.println("Bum 1");
 
-		waitFor(ExpectedConditions.visibilityOfAllElements(contactDetailsTable.findElements(By.tagName("tr"))));
+//		waitFor(ExpectedConditions.visibilityOfAllElements(contactDetailsTable.findElements(By.tagName("tr"))));
 		List<WebElement> valuesList = contactDetailsTable.findElements(By.cssSelector("tr"));
 		
-		System.out.println("Bum 1");
+		System.out.println("Bum 2");
 
 		for (WebElement itemNow : valuesList) {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
