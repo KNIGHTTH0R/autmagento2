@@ -8,7 +8,7 @@ import com.tools.requirements.AbstractPage;
 
 public class ContactListBackendPage extends AbstractPage {
 
-	@FindBy(id = "contact_grid_filter_customer_email")
+	@FindBy(id = "contact_grid_filter_email")
 	private WebElement emailFilterInput;
 
 	@FindBy(css = "#contact_grid_table tbody tr:nth-child(1)")
