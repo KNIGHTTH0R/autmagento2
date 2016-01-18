@@ -234,13 +234,14 @@ public class NavigationPage extends AbstractPage {
 		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li"));
 
 		for (WebElement menuNow : menuList) {
-			if (menuNow.getText().contentEquals(menu)) {
+			if (menuNow.findElement(By.cssSelector("a")).getText().contentEquals(menu)) {
+				System.out.println("menu found");
 				builder.moveToElement(menuNow).build().perform();
-
 				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li > a"));
 
 				for (WebElement submenuNow : submenuList) {
 					if (submenuNow.getText().contentEquals(submenu)) {
+						System.out.println("submenu found");
 						submenuNow.click();
 						break;
 					}
