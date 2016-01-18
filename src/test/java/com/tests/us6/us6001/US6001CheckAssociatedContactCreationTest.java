@@ -56,7 +56,7 @@ public class US6001CheckAssociatedContactCreationTest extends BaseTest {
 	public void us6001CheckAssociatedContactCreationTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.goToContactList();
+		backEndSteps.clickOnContactList();
 		stylecoachListBackendSteps.openContactDetails(customerFormModel.getEmailName());
 		ContactDetailsModel grabbedContactDetailsModel = stylecoachListBackendSteps.grabContactDetails();
 		contactBackendValidationWorkflows.verifyContactDetails(grabbedContactDetailsModel, expectedContactDetailsModel);

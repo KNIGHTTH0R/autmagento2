@@ -42,62 +42,102 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void clickOnCustomers() {
-		navigationPage().clickOnCustomers();
-		navigationPage().clickOnManageCustomers();
+		navigationPage().selectMenuFromNavbar("Kunden", "Kunden verwalten");
 	}
+
+	// @Step
+	// public void clickOnCustomers() {
+	// navigationPage().clickOnCustomers();
+	// navigationPage().clickOnManageCustomers();
+	// }
 
 	@Step
 	public void clickOnProducts() {
-		navigationPage().clickOnProducts();
-		navigationPage().clickOnManageProducts();
+		navigationPage().selectMenuFromNavbar("Katalog", "Produkte verwalten");
 	}
+
+	// @Step
+	// public void clickOnProducts() {
+	// navigationPage().clickOnProducts();
+	// navigationPage().clickOnManageProducts();
+	// }
 
 	@Step
 	public void goToNewsletterSubribers() {
-		navigationPage().goToNewsletter();
-		navigationPage().goToNewsletterSubribers();
+		navigationPage().selectMenuFromNavbar("Newsletter", "Newsletter Bezieher");
 	}
+
+	// @Step
+	// public void goToNewsletterSubribers() {
+	// navigationPage().goToNewsletter();
+	// navigationPage().goToNewsletterSubribers();
+	// }
 
 	@Step
 	public void clickOnStyleParties() {
-		navigationPage().clickOnStyleCoach();
-		navigationPage().clickOnStyleParties();
+		navigationPage().selectMenuFromNavbar("Stylecoach", "Style Parties");
 	}
+
+	// @Step
+	// public void clickOnStyleParties() {
+	// navigationPage().clickOnStyleCoach();
+	// navigationPage().clickOnStyleParties();
+	// }
 
 	@Step
 	public void clickOnStylecoachList() {
-		navigationPage().clickOnStyleCoach();
-		navigationPage().clickOnStylecoachList();
+		navigationPage().selectMenuFromNavbar("Stylecoach", "Stylecoach List");
 	}
+
+	// @Step
+	// public void clickOnStylecoachList() {
+	// navigationPage().clickOnStyleCoach();
+	// navigationPage().clickOnStylecoachList();
+	// }
+
+	// @Step
+	// public void clickOnContactList() {
+	// navigationPage().clickOnStyleCoach();
+	// navigationPage().clickOnContactList();
+	// }
 
 	@Step
 	public void clickOnContactList() {
-		navigationPage().clickOnStyleCoach();
-		navigationPage().clickOnContactList();
-	}
-
-	@Step
-	public void goToContactList() {
 		navigationPage().selectMenuFromNavbar("Stylecoach", "Kontakte");
 	}
 
 	@Step
 	public void clickOnShoppingCartPriceRules() {
-		navigationPage().clickOnPromotions();
-		navigationPage().clickOnShoppingCartPriceRules();
+		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 	}
+
+	// @Step
+	// public void clickOnShoppingCartPriceRules() {
+	// navigationPage().clickOnPromotions();
+	// navigationPage().clickOnShoppingCartPriceRules();
+	// }
 
 	@Step
 	public void clickOnSalesOrders() {
-		navigationPage().clickOrdersPage();
-		navigationPage().clickOnSales();
+		navigationPage().selectMenuFromNavbar("Verkäufe", "Aufträge");
 	}
+
+	// @Step
+	// public void clickOnSalesOrders() {
+	// navigationPage().clickOrdersPage();
+	// navigationPage().clickOnSales();
+	// }
 
 	@Step
 	public void clickOnCreditMemo() {
-		navigationPage().clickOrdersPage();
-		navigationPage().clickOnCreditMemo();
+		navigationPage().selectMenuFromNavbar("Verkäufe", "Gutschriften");
 	}
+
+	// @Step
+	// public void clickOnCreditMemo() {
+	// navigationPage().clickOrdersPage();
+	// navigationPage().clickOnCreditMemo();
+	// }
 
 	@Step
 	public void searchForEmail(String emailText) {
