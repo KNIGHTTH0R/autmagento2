@@ -35,12 +35,6 @@ public class LeadSettingsPage extends AbstractPage {
 		stylistData.setStyleCoachLeadsWeek(styleCoachLeadsWeek.getAttribute("value"));
 		stylistData.setHostessLeadsWeek(hostessLeadsWeek.getAttribute("value"));
 
-		System.out.println("styleCoachLeads: " + stylistData.getStyleCoachLeads());
-		System.out.println("hostessLeads: " + stylistData.getHostessLeads());
-		System.out.println("customerLeads: " + stylistData.getCustomerLeads());
-		System.out.println("styleCoachLeadsWeek: " + stylistData.getStyleCoachLeadsWeek());
-		System.out.println("hostessLeadsWeek: " + stylistData.getHostessLeadsWeek());
-
 		return stylistData;
 
 	}
