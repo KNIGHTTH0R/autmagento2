@@ -14,7 +14,7 @@ import com.tools.utils.FormatterUtils;
 
 public class ContactDetailsBackendPage extends AbstractPage {
 
-	@FindBy(id = "contact_details table tbody")
+	@FindBy(css = "#contact_details table tbody")
 	private WebElement contactDetailsTable;
 
 	public ContactDetailsModel grabContactDetails() {
@@ -25,7 +25,7 @@ public class ContactDetailsBackendPage extends AbstractPage {
 		element(contactDetailsTable).waitUntilVisible();
 		System.out.println("Bum 1");
 
-//		waitFor(ExpectedConditions.visibilityOfAllElements(contactDetailsTable.findElements(By.tagName("tr"))));
+		waitFor(ExpectedConditions.visibilityOfAllElements(contactDetailsTable.findElements(By.cssSelector("tr"))));
 		List<WebElement> valuesList = contactDetailsTable.findElements(By.cssSelector("tr"));
 		
 		System.out.println("Bum 2");
