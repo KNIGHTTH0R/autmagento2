@@ -98,5 +98,6 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(customerFormAddress, getClass().getSimpleName());
 	}
 }

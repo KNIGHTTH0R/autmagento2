@@ -65,5 +65,6 @@ public class ContactDetailsModel {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
+	
 
 }

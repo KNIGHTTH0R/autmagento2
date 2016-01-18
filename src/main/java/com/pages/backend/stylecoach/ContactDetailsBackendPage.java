@@ -23,13 +23,10 @@ public class ContactDetailsBackendPage extends AbstractPage {
 
 		String valueTransformer = "";
 		element(contactDetailsTable).waitUntilVisible();
-		System.out.println("Bum 1");
 
 		waitFor(ExpectedConditions.visibilityOfAllElements(contactDetailsTable.findElements(By.cssSelector("tr"))));
 		List<WebElement> valuesList = contactDetailsTable.findElements(By.cssSelector("tr"));
 		
-		System.out.println("Bum 2");
-
 		for (WebElement itemNow : valuesList) {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 			WebElement valueTr = itemNow.findElement(By.cssSelector("td:last-child"));
@@ -64,8 +61,6 @@ public class ContactDetailsBackendPage extends AbstractPage {
 				resultModel.setActivatedAt(valueTransformer);
 			}
 		}
-		System.out.println(resultModel.getActivatedAt());
-		System.out.println(resultModel.getStreetAddress());
 		return resultModel;
 	}
 
