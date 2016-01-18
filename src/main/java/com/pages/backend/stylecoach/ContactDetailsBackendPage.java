@@ -57,7 +57,7 @@ public class ContactDetailsBackendPage extends AbstractPage {
 				resultModel.setCountryCode(valueTransformer);
 			}
 			if (key.contains("Erstellt am")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = itemNow.findElement(By.cssSelector("td:last-child")).getText();
 				resultModel.setActivatedAt(valueTransformer);
 			}
 		}
