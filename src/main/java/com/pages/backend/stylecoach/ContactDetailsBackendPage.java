@@ -15,17 +15,17 @@ import com.tools.utils.FormatterUtils;
 public class ContactDetailsBackendPage extends AbstractPage {
 
 	@FindBy(id = "contact_details table tbody")
-	private WebElement contactDetailstable;
+	private WebElement contactDetailsTable;
 
 	public ContactDetailsModel grabContactDetails() {
 
 		ContactDetailsModel resultModel = new ContactDetailsModel();
 
 		String valueTransformer = "";
-		element(contactDetailstable).waitUntilVisible();
+		element(contactDetailsTable).waitUntilVisible();
 
-		waitFor(ExpectedConditions.visibilityOfAllElements(contactDetailstable.findElements(By.tagName("tr"))));
-		List<WebElement> valuesList = contactDetailstable.findElements(By.cssSelector("tr"));
+		waitFor(ExpectedConditions.visibilityOfAllElements(contactDetailsTable.findElements(By.tagName("tr"))));
+		List<WebElement> valuesList = contactDetailsTable.findElements(By.cssSelector("tr"));
 
 		for (WebElement itemNow : valuesList) {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
