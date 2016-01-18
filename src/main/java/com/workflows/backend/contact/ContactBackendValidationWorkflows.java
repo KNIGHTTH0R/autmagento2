@@ -8,6 +8,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.ContactDetailsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.persistance.MongoReader;
 
 public class ContactBackendValidationWorkflows {
 
@@ -16,7 +17,7 @@ public class ContactBackendValidationWorkflows {
 		ContactDetailsModel result = new ContactDetailsModel();
 
 		result.setEmail(customerFormModel.getEmailName());
-		result.setCountryCode(addressModel.getPostCode());
+		result.setCountryCode(MongoReader.getContext().toUpperCase());
 		result.setHouseNumber(addressModel.getStreetNumber());
 		result.setActivatedAt(dateModel.getDate());
 		result.setPlz(addressModel.getPostCode());
