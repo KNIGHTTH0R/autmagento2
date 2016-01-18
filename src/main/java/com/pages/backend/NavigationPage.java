@@ -231,7 +231,7 @@ public class NavigationPage extends AbstractPage {
 
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
-		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li a"));
+		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li > a"));
 
 		for (WebElement menuNow : menuList) {
 			if (menuNow.getText().contentEquals(menu)) {
