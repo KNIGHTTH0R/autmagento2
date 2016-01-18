@@ -32,28 +32,28 @@ public class ContactDetailsBackendPage extends AbstractPage {
 			WebElement valueTr = itemNow.findElement(By.cssSelector("td:last-child"));
 
 			if (key.contains("Style Coach")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(valueTr.getText());
+				valueTransformer = valueTr.getText();
 				resultModel.setParentId(valueTransformer);
 			}
 			if (key.contains("E-Mail")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(valueTr.getText());
+				valueTransformer = valueTr.getText();
 
 				resultModel.setEmail(valueTransformer);
 			}
 			if (key.contains("Straße")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(valueTr.getText());
+				valueTransformer = valueTr.getText();
 				resultModel.setStreetAddress(valueTransformer);
 			}
 			if (key.contains("Hausnr.")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(valueTr.getText());
+				valueTransformer = valueTr.getText();
 				resultModel.setHouseNumber(valueTransformer);
 			}
 			if (key.contains("PLZ")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(valueTr.getText());
+				valueTransformer = valueTr.getText();
 				resultModel.setPlz(valueTransformer);
 			}
 			if (key.contains("Country Code")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(valueTr.getText());
+				valueTransformer = valueTr.getText();
 				resultModel.setCountryCode(valueTransformer);
 			}
 			if (key.contains("Erstellt am")) {
