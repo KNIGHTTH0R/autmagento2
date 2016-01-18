@@ -2,6 +2,7 @@ package com.workflows.backend.contact;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
@@ -26,7 +27,7 @@ public class ContactBackendValidationWorkflows {
 
 		return result;
 	}
-
+	@Title("Validate contact details")
 	@StepGroup
 	public void verifyContactDetails(ContactDetailsModel grabbedModel, ContactDetailsModel expectedModel) {
 
