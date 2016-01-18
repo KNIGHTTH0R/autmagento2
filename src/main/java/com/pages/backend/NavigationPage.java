@@ -241,12 +241,14 @@ public class NavigationPage extends AbstractPage {
 
 				for (WebElement submenuNow : submenuList) {
 					if (submenuNow.getText().contentEquals("Stylecoach")) {
-						builder.moveToElement(submenuNow).build().perform();
+						submenuNow.click();
+						break;
 					}
-					break;
+
 				}
+				break;
 			}
-			break;
+
 		}
 	}
 }
