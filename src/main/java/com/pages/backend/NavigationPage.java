@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.tools.requirements.AbstractPage;
 
@@ -16,8 +17,8 @@ public class NavigationPage extends AbstractPage {
 
 	@FindBy(id = "message-popup-window")
 	private WebElement popUpWindow;
-	
-	//TODO  refactoring here
+
+	// TODO refactoring here
 
 	public void clickOnPromotions() {
 		element(navigationBar).waitUntilVisible();
@@ -70,11 +71,12 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
+
 	public void clickOnStylecoachList() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
 		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-		
+
 		for (WebElement elementNow : elementList) {
 			if (elementNow.getText().contentEquals("Stylecoach List")) {
 				elementNow.click();
@@ -82,11 +84,12 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
+
 	public void clickOnContactList() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
 		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-		
+
 		for (WebElement elementNow : elementList) {
 			if (elementNow.getText().contentEquals("Kontakte")) {
 				elementNow.click();
@@ -133,7 +136,7 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
-	
+
 	public void goToNewsletterSubribers() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
@@ -160,12 +163,13 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
+
 	public void clickOnCreditMemo() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
-		
+
 		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-		
+
 		for (WebElement elementNow : elementList) {
 			if (elementNow.getText().contentEquals("Gutschriften")) {
 				elementNow.click();
@@ -194,7 +198,7 @@ public class NavigationPage extends AbstractPage {
 		}
 
 	}
-	
+
 	public void clickOnProducts() {
 		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
@@ -221,4 +225,28 @@ public class NavigationPage extends AbstractPage {
 		}
 	}
 
+	public void selectMenuFromNavbar(String menu, String submenu) {
+
+		Actions builder = new Actions(getDriver());
+
+		element(navigationBar).waitUntilVisible();
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li"));
+
+		for (WebElement menuNow : menuList) {
+			if (menuNow.getText().contentEquals("Stylecoach")) {
+				builder.moveToElement(menuNow).build().perform();
+
+				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li > a"));
+
+				for (WebElement submenuNow : submenuList) {
+					if (submenuNow.getText().contentEquals("Stylecoach")) {
+						builder.moveToElement(submenuNow).build().perform();
+					}
+					break;
+				}
+			}
+			break;
+		}
+	}
 }

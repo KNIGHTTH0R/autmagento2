@@ -69,11 +69,16 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().clickOnStyleCoach();
 		navigationPage().clickOnStylecoachList();
 	}
-	
+
 	@Step
 	public void clickOnContactList() {
 		navigationPage().clickOnStyleCoach();
 		navigationPage().clickOnContactList();
+	}
+
+	@Step
+	public void goToContactList() {
+		navigationPage().selectMenuFromNavbar("Stylecoach", "Kontakte");
 	}
 
 	@Step

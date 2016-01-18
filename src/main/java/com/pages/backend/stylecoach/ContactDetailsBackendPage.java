@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.frontend.ContactDetailsModel;
 import com.tools.requirements.AbstractPage;
-import com.tools.utils.FormatterUtils;
 
 public class ContactDetailsBackendPage extends AbstractPage {
 
