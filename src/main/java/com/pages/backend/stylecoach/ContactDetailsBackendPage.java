@@ -61,7 +61,8 @@ public class ContactDetailsBackendPage extends AbstractPage {
 				resultModel.setActivatedAt(valueTransformer);
 			}
 		}
-
+		System.out.println(resultModel.getActivatedAt());
+		System.out.println(resultModel.getStreetAddress());
 		return resultModel;
 	}
 

@@ -17,8 +17,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US17.1 Check reassigned duplicate contacts and customer associated contacts when new SC is selected", type = "Scenarios")
-@Story(Application.MassAction.US17_1.class)
+@WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US6001CheckAssociatedContactCreationTest extends BaseTest {
 
@@ -40,12 +40,14 @@ public class US6001CheckAssociatedContactCreationTest extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 	}
+
 	@Test
 	public void us6001CheckAssociatedContactCreationTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnContactList();
 		stylecoachListBackendSteps.openContactDetails(stylistEmail);
+		stylecoachListBackendSteps.grabContactDetails();
 	}
 
 }
