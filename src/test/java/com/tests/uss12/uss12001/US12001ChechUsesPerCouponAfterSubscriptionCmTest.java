@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.backend.promotion.PromotionSteps;
+import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.tests.BaseTest;
 import com.tools.SoapKeys;
 import com.tools.env.constants.ConfigConstants;
@@ -22,7 +22,7 @@ import com.tools.requirements.Application;
 public class US12001ChechUsesPerCouponAfterSubscriptionCmTest extends BaseTest {
 	
 	@Steps
-	public PromotionSteps promotionSteps;
+	public ShoppingCartPriceRulesSteps promotionSteps;
 	
 	private String koboCode;
 	private String usesPerCoupon = "125";

@@ -8,7 +8,7 @@ import net.thucydides.junit.runners.ThucydidesRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.backend.promotion.PromotionSteps;
+import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.tests.BaseTest;
 import com.tools.requirements.Application;
 
@@ -18,10 +18,10 @@ import com.tools.requirements.Application;
 public class US4001DeactivateBuy3Get1Test extends BaseTest {
 
 	@Steps
-	public PromotionSteps promotionSteps;
+	public ShoppingCartPriceRulesSteps shoppingCartPriceRulesSteps;
 
 	@Test
 	public void us4001DeactivateBuy3Get1Test() {
-		promotionSteps.deactivateRule();
+		shoppingCartPriceRulesSteps.deactivateRule("Buy 3 get 1 for 50% - stylist");
 	}
 }

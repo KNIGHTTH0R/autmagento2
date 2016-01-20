@@ -27,6 +27,7 @@ public class ContactBackendValidationWorkflows {
 
 		return result;
 	}
+
 	@Title("Validate contact details")
 	@StepGroup
 	public void verifyContactDetails(ContactDetailsModel grabbedModel, ContactDetailsModel expectedModel) {
