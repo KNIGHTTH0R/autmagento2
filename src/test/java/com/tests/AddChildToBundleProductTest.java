@@ -36,7 +36,5 @@ public class AddChildToBundleProductTest extends BaseTest {
 		backendProductDetailsSteps.selectBundleItemMenu();
 		backendProductDetailsSteps.addChildToBundleProduct("K031SV");
 		
-		
-
 	}
 }

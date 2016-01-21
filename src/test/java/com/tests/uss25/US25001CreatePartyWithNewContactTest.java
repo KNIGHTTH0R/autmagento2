@@ -86,7 +86,6 @@ public class US25001CreatePartyWithNewContactTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
-
 	@Test
 	public void us25001CreatePartyWithNewContactTest() {
 		customerRegistrationSteps.performLogin(username, password);

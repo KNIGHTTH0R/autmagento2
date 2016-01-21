@@ -129,7 +129,8 @@ public class GmailConnector {
 
 			Store store = session2.getStore(protocol);
 			store.connect(host, username, password);
-			Folder folder = store.getFolder("INBOX");
+//			Folder folder = store.getFolder("IMBOX");
+			Folder folder = store.getFolder("SPAM");
 
 			folder.open(Folder.READ_WRITE);
 			message = folder.getMessages();

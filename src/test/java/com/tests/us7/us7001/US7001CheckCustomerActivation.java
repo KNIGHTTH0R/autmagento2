@@ -61,9 +61,7 @@ public class US7001CheckCustomerActivation extends BaseTest {
 
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
-		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistProperties);
-		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistExpectedProperties);
-
+		
 		customVerifications.printErrors();
 	}
 
