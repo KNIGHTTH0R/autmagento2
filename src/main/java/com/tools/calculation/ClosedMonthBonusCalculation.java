@@ -57,11 +57,7 @@ public class ClosedMonthBonusCalculation {
 		BigDecimal totalIp = BigDecimal.ZERO;
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
-		System.out.println("orders list sizes is : " + allOrdersList.size());
-		System.out.println();
-		for (DBOrderModel dbOrderModel : allOrdersList) {
-			System.out.println(dbOrderModel.getIncrementId());
-		}
+	
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
 		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
 

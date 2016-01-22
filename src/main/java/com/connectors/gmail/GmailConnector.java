@@ -135,6 +135,7 @@ public class GmailConnector {
 
 			folder.open(Folder.READ_WRITE);
 			message = folder.getMessages();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
