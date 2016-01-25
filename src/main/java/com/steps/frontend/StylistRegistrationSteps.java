@@ -96,17 +96,17 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
-	
+
 	@StepGroup
 	@Title("Update stylist data in step 1")
-	public void updateStylistData(CustomerFormModel customerData, AddressModel addressModel){
+	public void updateStylistData(CustomerFormModel customerData, AddressModel addressModel) {
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		fillContactDetails(addressModel);
 		checkNoCoachCheckbox();
 		checkIAgree();
 		submitStep();
-		
+
 	}
 
 	@StepGroup
@@ -270,9 +270,9 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputPostCode(addressData.getPostCode());
 		inputHomeTown(addressData.getHomeTown());
 		selectCountryName(addressData.getCountryName());
-		validateInfoBoxMessage();
-		closeInfoBox();
-		addressData.setCountryName(ContextConstants.COUNTRY_NAME);
+		// validateInfoBoxMessage();
+		// closeInfoBox();
+		// addressData.setCountryName(ContextConstants.COUNTRY_NAME);
 		selectCountryName(addressData.getCountryName());
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 
