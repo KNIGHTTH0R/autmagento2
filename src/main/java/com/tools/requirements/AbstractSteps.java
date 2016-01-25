@@ -179,7 +179,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void navigateToLoginPageAndPerformLogin(String userName, String userPass) {
-		// getDriver().get(UrlConstants.BASE_FE_URL);
+		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
