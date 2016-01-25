@@ -32,6 +32,7 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 		element(selectContact).waitUntilVisible();
 		element(selectContact).click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	public void startOrderForCustomer() {
