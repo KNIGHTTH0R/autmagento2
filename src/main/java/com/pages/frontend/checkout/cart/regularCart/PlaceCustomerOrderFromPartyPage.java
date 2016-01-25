@@ -3,8 +3,11 @@ package com.pages.frontend.checkout.cart.regularCart;
 import net.thucydides.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
@@ -25,8 +28,10 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 	public void typeContactName(String name) {
 		element(contactInput).waitUntilVisible();
 		contactInput.sendKeys(name);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		element(selectContact).waitUntilVisible();
 		element(selectContact).click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void startOrderForCustomer() {
