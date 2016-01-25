@@ -53,6 +53,7 @@ public class FooterSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormFromStarterSetLink() {
+		getDriver().get(MongoReader.getBaseURL());
 		footerPage().clickStarterSetLink();
 		stylistCampaignPage().clickStartersetOrderButton();
 	}
@@ -99,12 +100,14 @@ public class FooterSteps extends AbstractSteps {
 	//
 	@StepGroup
 	public void navigateToRegisterFormFromTraumkarriereStyleCoachLink() {
+		getDriver().get(MongoReader.getBaseURL());
 		footerPage().clickTraumkarriereStyleCoachLink();
 		stylistCampaignPage().clickStartersetOrderButton();
 	}
 
 	@StepGroup
 	public void navigateToRegisterFormFromRegistrierungLink() {
+		getDriver().get(MongoReader.getBaseURL());
 		footerPage().clickRegistrierungLink();
 
 	}
