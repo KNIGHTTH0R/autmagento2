@@ -85,7 +85,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 	@Test
 	public void us6001ScRegistrationNewCustomerTest() {
-		
+
 		headerSteps.navigateToRegisterForm();
 
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
