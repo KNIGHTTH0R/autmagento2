@@ -3,6 +3,7 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Title;
 
+import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
@@ -58,13 +59,18 @@ public class StarterSetSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void submitstarterSetStep() {
+		starterSetPage().submitStep();
+	}
+
+	@Step
 	public void selectStarterKit() {
 		starterSetPage().selectStarterKit();
 	}
 
 	@Step
-	public void submitstarterSetStep() {
-		starterSetPage().submitStep();
+	public StylistRegistrationCartTotalModel grabCartTotal() {
+		return starterSetPage().grabCartTotal();
 	}
 
 }

@@ -4,6 +4,7 @@ public class StylistRegistrationCartTotalModel {
 	
 	private String delivery;
 	private String totalPrice;
+	private String voucher;
 
 	public String getDelivery() {
 		return delivery;
@@ -19,6 +20,14 @@ public class StylistRegistrationCartTotalModel {
 
 	public void setTotalPrice(String totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public String getVoucher() {
+		return voucher;
+	}
+
+	public void setVoucher(String voucher) {
+		this.voucher = voucher;
 	}
 
 }

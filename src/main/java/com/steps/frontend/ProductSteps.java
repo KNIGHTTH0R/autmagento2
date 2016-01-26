@@ -8,6 +8,7 @@ import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.PomProductModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.frontend.StarterSetProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
@@ -95,30 +96,41 @@ public class ProductSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
+
 	@StepGroup
 	public BorrowProductModel setKoboProductAddToCart(String name, String code, String price, String ip) {
 		BorrowProductModel result = new BorrowProductModel();
-		
+
 		result.setName(name);
 		result.setProdCode(code);
 		result.setUnitPrice(price);
 		result.setFinalPrice(price);
 		result.setIpPoints(ip);
-		
+
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
-	
+
 	@StepGroup
 	public PomProductModel setPomProductAddToCart(String name, String code, String price) {
 		PomProductModel result = new PomProductModel();
-		
+
 		result.setName(name);
 		result.setProdCode(code);
 		result.setUnitPrice(price);
 		result.setFinalPrice(price);
-		
+
 		waitABit(TimeConstants.TIME_CONSTANT);
+		return result;
+	}
+
+	@StepGroup
+	public StarterSetProductModel setStarterSetProductAddToCart() {
+		StarterSetProductModel result = new StarterSetProductModel();
+
+		result.setName("IRI_STARTER_SET");
+		result.setUnitPrice("100.00");
+
 		return result;
 	}
 

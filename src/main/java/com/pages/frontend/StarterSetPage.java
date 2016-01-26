@@ -6,9 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
+import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.FormatterUtils;
 
 public class StarterSetPage extends AbstractPage {
 
@@ -17,7 +20,7 @@ public class StarterSetPage extends AbstractPage {
 
 	@FindBy(css = "div.starter-sets.clearfix.gold-bg div:nth-child(4) a")
 	private WebElement jetztStartenFromStarterSet;
-	
+
 	@FindBy(css = "input[name='shipping[house_number]']")
 	private WebElement houseNumberInput;
 
@@ -32,7 +35,7 @@ public class StarterSetPage extends AbstractPage {
 
 	@FindBy(css = "button#submit-step")
 	private WebElement toPaymentButton;
-	
+
 	@FindBy(id = "submit-step")
 	private WebElement submitStepButton;
 
@@ -74,7 +77,7 @@ public class StarterSetPage extends AbstractPage {
 
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
-	
+
 	public void clickOnJetztStyleCoachWerdenButton() {
 		element(jetztStyleCoachWerdenButton).waitUntilVisible();
 		jetztStyleCoachWerdenButton.click();
@@ -84,10 +87,23 @@ public class StarterSetPage extends AbstractPage {
 		element(jetztStartenFromStarterSet).waitUntilVisible();
 		jetztStartenFromStarterSet.click();
 	}
-	
+
 	public void selectStarterKit() {
 		waitABit(TimeConstants.TIME_MEDIUM);
 		elementjQueryClick("input#kit_2941");
+	}
+
+	public StylistRegistrationCartTotalModel grabCartTotal() {
+
+		StylistRegistrationCartTotalModel result = new StylistRegistrationCartTotalModel();
+
+		result.setDelivery(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#shipping-value")).getText()));
+		result.setTotalPrice(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#total-price-value")).getText()));
+
+		StylistRegDataGrabber.cartTotals = result;
+
+		return result;
+
 	}
 
 }

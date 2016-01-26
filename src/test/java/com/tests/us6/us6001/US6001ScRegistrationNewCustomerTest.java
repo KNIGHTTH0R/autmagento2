@@ -13,7 +13,9 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.StarterSetSteps;
 import com.steps.frontend.StylistCampaignSteps;
+import com.steps.frontend.StylistContextSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -29,6 +31,7 @@ import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
+import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkflow;
 import com.workflows.frontend.stylecoachRegistration.StylecoachRegistrationCartWorkflows;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
@@ -49,9 +52,15 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
+	public StylistContextSteps stylistContextSteps;
+	@Steps
+	public StarterSetSteps starterSetSteps;
+	@Steps
 	public CustomVerification customVerification;
 	@Steps
 	public StylecoachRegistrationCartWorkflows stylecoachRegistrationCartWorkflows;
+	@Steps
+	public AddStarterSetProductsWorkflow addStarterSetProductsWorkflow;
 
 	private CustomerFormModel customerFormData;
 	private DateModel customerFormDate = new DateModel();
@@ -71,13 +80,21 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		calculatedTotals.setTotalPrice("100.00");
 		birthDate.setDate("Feb,1970,12");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+
 	}
 
 	@Test
 	public void us6001ScRegistrationNewCustomerTest() {
+		
 		headerSteps.navigateToRegisterForm();
+
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
+
+		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
+		starterSetSteps.selectStarterKit();
+		starterSetSteps.grabCartTotal();
+		starterSetSteps.submitstarterSetStep();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));

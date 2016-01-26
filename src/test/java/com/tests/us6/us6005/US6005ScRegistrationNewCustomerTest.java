@@ -89,6 +89,11 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 
+		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
+		starterSetSteps.selectStarterKit();
+		starterSetSteps.grabCartTotal();
+		starterSetSteps.submitstarterSetStep();
+
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));

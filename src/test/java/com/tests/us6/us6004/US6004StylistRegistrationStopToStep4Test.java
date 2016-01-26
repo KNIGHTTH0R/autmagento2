@@ -12,7 +12,9 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.StarterSetSteps;
 import com.steps.frontend.StylistCampaignSteps;
+import com.steps.frontend.StylistContextSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -42,6 +44,10 @@ public class US6004StylistRegistrationStopToStep4Test extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
+	public StylistContextSteps stylistContextSteps;
+	@Steps
+	public StarterSetSteps starterSetSteps;
+	@Steps
 	public CustomVerification customVerification;
 	@Steps
 	public StylecoachRegistrationCartWorkflows stylecoachRegistrationCartWorkflows;
@@ -53,7 +59,7 @@ public class US6004StylistRegistrationStopToStep4Test extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		StylistRegDataGrabber.wipe();
 
 		customerFormData = new CustomerFormModel();
@@ -67,7 +73,12 @@ public class US6004StylistRegistrationStopToStep4Test extends BaseTest {
 		headerSteps.navigateToRegisterForm();
 		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
-		
+
+		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
+		starterSetSteps.selectStarterKit();
+		starterSetSteps.grabCartTotal();
+		starterSetSteps.submitstarterSetStep();
+
 	}
 
 	@After
