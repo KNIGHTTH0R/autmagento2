@@ -197,11 +197,11 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkNoCoachCheckbox();
 		checkIAgree();
 		submitStep();
-		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		stylistContextPage().submitStep();
-		starterSetPage().selectStarterKit();
-		grabCartTotal();
-		starterSetPage().submitStep();
+//		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+//		stylistContextPage().submitStep();
+//		starterSetPage().selectStarterKit();
+//		grabCartTotal();
+//		starterSetPage().submitStep();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
