@@ -103,7 +103,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		StylistRegistrationCartCalculator.calculateCartAndShippingTotals("24", "0.00", "50", false);
 
 		starterSetSteps.grabCartTotal(true);
-		starterSetSteps.submitstarterSetStep();
+		starterSetSteps.submitStarterSetStep();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));

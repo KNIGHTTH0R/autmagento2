@@ -59,7 +59,7 @@ public class StarterSetSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void submitstarterSetStep() {
+	public void submitStarterSetStep() {
 		starterSetPage().submitStep();
 	}
 

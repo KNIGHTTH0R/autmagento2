@@ -52,6 +52,7 @@ public class StarterSetPage extends AbstractPage {
 	public void submitVoucherCode() {
 		element(submitCodeButton).waitUntilVisible();
 		submitCodeButton.click();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 	
 	public void inputVoucherCode(String code) {

@@ -25,11 +25,11 @@ public class StylistRegistrationCartTotalsCalculation {
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())));
 		}
 
-		tax = subtotal.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		totalAmount = calculateTotalAmount(subtotal, voucherPrice, isVoucherFixPrice);
+		
+		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
-
-		totalAmount = calculateTotalAmount(subtotal, voucherPrice, isVoucherFixPrice);
 
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 		result.setTax(String.valueOf(tax));

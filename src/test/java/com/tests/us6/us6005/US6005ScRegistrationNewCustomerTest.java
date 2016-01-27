@@ -92,7 +92,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 		starterSetSteps.selectStarterKit();
 		starterSetSteps.grabCartTotal(false);
-		starterSetSteps.submitstarterSetStep();
+		starterSetSteps.submitStarterSetStep();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
@@ -109,7 +109,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		confirmationSteps.clickOnChangeBillingAddress();
 		stylistRegistrationSteps.updateStylistData(customerFormData, newBillingAddress);
 		stylistContextSteps.submitContextStep();
-		starterSetSteps.submitstarterSetStep();
+		starterSetSteps.submitStarterSetStep();
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
