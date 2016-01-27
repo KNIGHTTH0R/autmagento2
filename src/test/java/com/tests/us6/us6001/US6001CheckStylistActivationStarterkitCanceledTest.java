@@ -58,7 +58,7 @@ public class US6001CheckStylistActivationStarterkitCanceledTest extends BaseTest
 		} else
 			System.out.println("The database has no entries");
 
-		expectedStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
+		expectedStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.GENERAL);
 		datesExpected = new RegistrationActivationDateModel(formCreationDate, formCreationDate);
 	}
 

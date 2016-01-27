@@ -31,7 +31,7 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.stylecoachRegistration.StylecoachRegistrationCartWorkflows;
 
-@WithTag(name = "US6.5 Stylist registration with redirects From Step 5 to Step 1 and Steo 3 ", type = "Scenarios")
+@WithTag(name = "US6.5 Stylist registration with redirects From Step 5 back to Step 1 and Step 3 ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_5.class)
 @RunWith(ThucydidesRunner.class)
 public class US6005ScRegistrationNewCustomerTest extends BaseTest {
