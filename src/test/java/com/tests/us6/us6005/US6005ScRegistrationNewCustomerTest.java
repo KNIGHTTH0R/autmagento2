@@ -91,7 +91,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 		starterSetSteps.selectStarterKit();
-		starterSetSteps.grabCartTotal();
+		starterSetSteps.grabCartTotal(false);
 		starterSetSteps.submitstarterSetStep();
 
 		String url = shippingSteps.grabUrl();

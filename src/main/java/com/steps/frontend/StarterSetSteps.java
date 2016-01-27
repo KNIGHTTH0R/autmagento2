@@ -69,8 +69,8 @@ public class StarterSetSteps extends AbstractSteps {
 	}
 
 	@Step
-	public StylistRegistrationCartTotalModel grabCartTotal() {
-		return starterSetPage().grabCartTotal();
+	public StylistRegistrationCartTotalModel grabCartTotal(boolean isVoucherApplied) {
+		return starterSetPage().grabCartTotal(isVoucherApplied);
 	}
 
 }

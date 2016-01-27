@@ -23,11 +23,15 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.StarterSetProductModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
 import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
+import com.tools.datahandlers.stylistRegistration.StylistRegistrationCartCalculator;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -92,8 +96,15 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		customerFormDate.setDate(formCreationDate);
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
-		starterSetSteps.selectStarterKit();
-		starterSetSteps.grabCartTotal();
+
+		StarterSetProductModel productData;
+
+		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart();
+		StylistRegistrationCartCalculator.allProductsList.add(productData);
+
+		StylistRegistrationCartCalculator.calculateCartAndShippingTotals("24", "0.00", "50", false);
+
+		starterSetSteps.grabCartTotal(false);
 		starterSetSteps.submitstarterSetStep();
 
 		String url = shippingSteps.grabUrl();

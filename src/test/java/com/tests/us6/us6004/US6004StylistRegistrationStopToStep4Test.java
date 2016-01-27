@@ -76,7 +76,7 @@ public class US6004StylistRegistrationStopToStep4Test extends BaseTest {
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 		starterSetSteps.selectStarterKit();
-		starterSetSteps.grabCartTotal();
+		starterSetSteps.grabCartTotal(false);
 		starterSetSteps.submitstarterSetStep();
 
 	}

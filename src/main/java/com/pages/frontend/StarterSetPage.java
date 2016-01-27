@@ -93,13 +93,15 @@ public class StarterSetPage extends AbstractPage {
 		elementjQueryClick("input#kit_2941");
 	}
 
-	public StylistRegistrationCartTotalModel grabCartTotal() {
+	public StylistRegistrationCartTotalModel grabCartTotal(boolean isVoucherApplied) {
 
 		StylistRegistrationCartTotalModel result = new StylistRegistrationCartTotalModel();
 
 		result.setDelivery(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#shipping-value")).getText()));
 		result.setTotalPrice(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#total-price-value")).getText()));
-
+		if (isVoucherApplied) {
+			result.setVoucher(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#voucher-container")).getText()));
+		}
 		StylistRegDataGrabber.cartTotals = result;
 
 		return result;
