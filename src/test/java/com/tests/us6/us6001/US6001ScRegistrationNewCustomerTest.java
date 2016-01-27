@@ -33,6 +33,7 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.StarterSetProductModel;
 import com.tools.datahandlers.DataGrabber;
+import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
 import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
 import com.tools.datahandlers.stylistRegistration.StylistRegistrationCartCalculator;
 import com.tools.env.variables.UrlConstants;
@@ -40,6 +41,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkflow;
+import com.workflows.frontend.stylecoachRegistration.StarterSetConfirmationWorkflows;
 import com.workflows.frontend.stylecoachRegistration.StylecoachRegistrationCartWorkflows;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
@@ -69,6 +71,8 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	public StylecoachRegistrationCartWorkflows stylecoachRegistrationCartWorkflows;
 	@Steps
 	public AddStarterSetProductsWorkflow addStarterSetProductsWorkflow;
+	@Steps
+	public StarterSetConfirmationWorkflows starterSetConfirmationWorkflows;
 
 	private CustomerFormModel customerFormData;
 	private DateModel customerFormDate = new DateModel();
@@ -143,10 +147,14 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
+		confirmationSteps.grabConfirmationTotals();
 		confirmationSteps.agreeAndCheckout();
 
 		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount();
+
+		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
+		starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
 
 		customVerification.printErrors();
 	}
