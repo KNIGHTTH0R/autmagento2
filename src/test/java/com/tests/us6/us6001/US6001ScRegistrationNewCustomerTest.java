@@ -1,5 +1,11 @@
 package com.tests.us6.us6001;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
@@ -32,6 +38,7 @@ import com.tools.datahandlers.DataGrabber;
 import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
 import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
 import com.tools.datahandlers.stylistRegistration.StylistRegistrationCartCalculator;
+import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -71,14 +78,42 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
+	private String taxClass, shippingValue, voucherValue, voucherCode;
 
 	@Before
 	public void setUp() throws Exception {
 		StylistRegDataGrabber.wipe();
-		// Generate data for this test run
+		StylistRegistrationCartCalculator.wipe();
+
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		birthDate.setDate("Feb,1970,12");
+
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6001.properties");
+			prop.load(input);
+			
+			taxClass = prop.getProperty("taxClass");
+			shippingValue = prop.getProperty("shippingValue");
+			voucherValue = prop.getProperty("voucherValue");
+			voucherCode = prop.getProperty("voucherCode");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
@@ -97,10 +132,10 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart();
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
-		
+
 		starterSetSteps.applyVoucher("24TQQEV4");
 
-		StylistRegistrationCartCalculator.calculateCartAndShippingTotals("24", "0.00", "50", false);
+		StylistRegistrationCartCalculator.calculateCartAndShippingTotals("24", "0.00", "50.00", false);
 
 		starterSetSteps.grabCartTotal(true);
 		starterSetSteps.submitStarterSetStep();
