@@ -33,7 +33,6 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.StarterSetProductModel;
 import com.tools.datahandlers.DataGrabber;
-import com.tools.datahandlers.borrowCart.BorrowCartCalculator;
 import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
 import com.tools.datahandlers.stylistRegistration.StylistRegistrationCartCalculator;
 import com.tools.env.variables.UrlConstants;
@@ -83,6 +82,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
+		DataGrabber.wipe();
 		StylistRegDataGrabber.wipe();
 		StylistRegistrationCartCalculator.wipe();
 
@@ -161,6 +161,9 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 	@After
 	public void saveData() {
+
+		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());

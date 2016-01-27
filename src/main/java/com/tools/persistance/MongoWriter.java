@@ -10,6 +10,7 @@ import com.tools.data.CalcDetailsModel;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistDataModel;
+import com.tools.data.StylistRegistrationCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.JewelryHistoryModel;
@@ -279,14 +280,15 @@ public class MongoWriter extends MongoConnector {
 	public static void saveCategoryModel(CategoryModel category, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.CATEGORY_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.CATEGORY_NAME, category.getName());
 		document.put(MongoTableKeys.CATEGORY_URL, category.getUrlKey());
 		document.put(MongoTableKeys.CATEGORY_ID, category.getId());
-		
+
 		table.insert(document);
 	}
+
 	public static void saveBasicProductModel(BasicProductModel product, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.BASIC_PRODUCT_MODEL);
@@ -392,6 +394,21 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.SUBTOTAL, calcDetailsModel.getSubTotal());
 		document.put(MongoTableKeys.TAX, calcDetailsModel.getTax());
 		document.put(MongoTableKeys.IP_POINTS, calcDetailsModel.getIpPoints());
+		// last two are maps
+
+		table.insert(document);
+	}
+
+	public static void saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalcDetailsModel calcDetailsModel, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.STARTER_SET_CART_CALC_DETAILS_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+
+		document.put(MongoTableKeys.TOTAL_AMOUNT, calcDetailsModel.getTotalAmount());
+		document.put(MongoTableKeys.SUBTOTAL, calcDetailsModel.getSubTotal());
+		document.put(MongoTableKeys.TAX, calcDetailsModel.getTax());
+		document.put(MongoTableKeys.DISCOUNT, calcDetailsModel.getVoucherDiscount());
 		// last two are maps
 
 		table.insert(document);

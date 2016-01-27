@@ -117,6 +117,9 @@ public class MongoTableKeys {
 	public static final String MARKETING_BONUS = "MarketingBonus";
 	public static final String SEGMENTS = "Segments";
 	public static final String CALCULATIONS = "Calculations";
+	
+	//StarterSetCalcDetailsModel
+	public static final String STARTER_SET_CART_CALC_DETAILS_MODEL = "StarterSetCartCalcDetailsModel";
 
 	// OrderInfoModel
 	public static final String ORDER_INFO_MODEL = "OrderInfoModel";

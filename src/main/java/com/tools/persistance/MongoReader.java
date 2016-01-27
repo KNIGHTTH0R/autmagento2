@@ -13,6 +13,7 @@ import com.tools.data.CalcDetailsModel;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistDataModel;
+import com.tools.data.StylistRegistrationCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.JewelryHistoryModel;
@@ -699,6 +700,34 @@ public class MongoReader extends MongoConnector {
 				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
 				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+
+	}
+
+	public static List<StylistRegistrationCartCalcDetailsModel> grabStarterSetCartCalcDetailsModels(String testName) {
+		DBObject dbObject = null;
+		List<StylistRegistrationCartCalcDetailsModel> itemList = new ArrayList<StylistRegistrationCartCalcDetailsModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STARTER_SET_CART_CALC_DETAILS_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				StylistRegistrationCartCalcDetailsModel result = new StylistRegistrationCartCalcDetailsModel();
+				dbObject = cursor.next();
+
+				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
+				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
+				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+				result.setVoucherDiscount(MongoUtils.checkField(dbObject, MongoTableKeys.DISCOUNT));
 
 				itemList.add(result);
 			}
