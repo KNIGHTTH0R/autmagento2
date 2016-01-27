@@ -97,6 +97,8 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart();
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
+		
+		starterSetSteps.applyVoucher("24TQQEV4");
 
 		StylistRegistrationCartCalculator.calculateCartAndShippingTotals("24", "0.00", "50", false);
 

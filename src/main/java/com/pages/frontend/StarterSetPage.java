@@ -38,10 +38,26 @@ public class StarterSetPage extends AbstractPage {
 
 	@FindBy(id = "submit-step")
 	private WebElement submitStepButton;
+	
+	@FindBy(id = "coupon_code")
+	private WebElement coucherInput;
+	
+	@FindBy(css = "#voucher-button-active button")
+	private WebElement submitCodeButton;
 
 	public void submitStep() {
 		element(submitStepButton).waitUntilVisible();
 		submitStepButton.click();
+	}
+	public void submitVoucherCode() {
+		element(submitCodeButton).waitUntilVisible();
+		submitCodeButton.click();
+	}
+	
+	public void inputVoucherCode(String code) {
+		element(coucherInput).waitUntilVisible();
+		coucherInput.clear();
+		coucherInput.sendKeys(code);
 	}
 
 	public void clickGoToPaymentMethod() {

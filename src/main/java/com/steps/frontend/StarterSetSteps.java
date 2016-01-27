@@ -69,6 +69,12 @@ public class StarterSetSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void applyVoucher(String code) {
+		starterSetPage().inputVoucherCode(code);
+		starterSetPage().submitVoucherCode();
+	}
+
+	@Step
 	public StylistRegistrationCartTotalModel grabCartTotal(boolean isVoucherApplied) {
 		return starterSetPage().grabCartTotal(isVoucherApplied);
 	}

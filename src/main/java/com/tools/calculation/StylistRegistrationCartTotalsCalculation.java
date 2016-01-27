@@ -36,7 +36,7 @@ public class StylistRegistrationCartTotalsCalculation {
 		result.setTotalAmount(String.valueOf(totalAmount));
 		result.setVoucherDiscount(voucherValue);
 		result.setShipping(shippingValue);
-		
+
 		PrintUtils.printStarterSetCalcDetailsTotals(result);
 
 		return result;
@@ -46,7 +46,7 @@ public class StylistRegistrationCartTotalsCalculation {
 		ShippingModel result = new ShippingModel();
 
 		result.setSubTotal(cartCalcDetailsModel.getSubTotal());
-		result.setDiscountPrice("0");
+		result.setDiscountPrice(cartCalcDetailsModel.getVoucherDiscount());
 		result.setShippingPrice(shippingValue);
 		// totals calculation
 		BigDecimal totalAmountCalculation = BigDecimal.ZERO;
