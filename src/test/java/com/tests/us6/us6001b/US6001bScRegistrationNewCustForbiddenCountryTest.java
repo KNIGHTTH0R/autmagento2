@@ -87,7 +87,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6002.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6001b.properties");
 			prop.load(input);
 
 			taxClass = prop.getProperty("taxClass");
