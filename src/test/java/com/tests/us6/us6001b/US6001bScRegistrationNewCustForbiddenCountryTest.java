@@ -79,6 +79,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
+		DataGrabber.wipe();
 		StylistRegDataGrabber.wipe();
 		StylistRegistrationCartCalculator.wipe();
 
@@ -140,7 +141,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 
 		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount("STARTER SET TOTALS");
-		
+
 		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
 		starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
 
@@ -150,6 +151,8 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 
 	@After
 	public void saveData() {
+		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
 
