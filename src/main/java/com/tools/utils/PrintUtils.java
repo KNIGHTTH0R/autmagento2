@@ -477,6 +477,7 @@ public class PrintUtils {
 		System.out.println("DiscountPrice " + stylistRegistrationCartCalcDetailsModel.getVoucherDiscount());
 		System.out.println("ShippingPrice " + stylistRegistrationCartCalcDetailsModel.getShipping());
 		System.out.println("Tax " + stylistRegistrationCartCalcDetailsModel.getTax());
+		System.out.println("Total amount " + stylistRegistrationCartCalcDetailsModel.getTotalAmount());
 	}
 
 	public static void printProductBasicModel(ProductBasicModel productNow) {
