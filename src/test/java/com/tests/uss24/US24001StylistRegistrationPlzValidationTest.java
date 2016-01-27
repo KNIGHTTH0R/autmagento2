@@ -13,7 +13,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.StarterSetSteps;
 import com.steps.frontend.StylistCampaignSteps;
+import com.steps.frontend.StylistContextSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -22,6 +24,8 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.StarterSetProductModel;
+import com.tools.datahandlers.stylistRegistration.StylistRegistrationCartCalculator;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
@@ -39,6 +43,11 @@ public class US24001StylistRegistrationPlzValidationTest extends BaseTest {
 	public StylistRegistrationSteps stylistRegistrationSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+
+	@Steps
+	public StylistContextSteps stylistContextSteps;
+	@Steps
+	public StarterSetSteps starterSetSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 
@@ -66,6 +75,11 @@ public class US24001StylistRegistrationPlzValidationTest extends BaseTest {
 	public void us24001StylistRegistrationPlzValidationTest() {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
+
+		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
+		starterSetSteps.selectStarterKit();
+		starterSetSteps.grabCartTotal(false);
+		starterSetSteps.submitStarterSetStep();
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
