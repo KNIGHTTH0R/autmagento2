@@ -35,6 +35,9 @@ public class StylistRegistrationCartTotalsCalculation {
 		result.setTax(String.valueOf(tax));
 		result.setTotalAmount(String.valueOf(totalAmount));
 		result.setVoucherDiscount(voucherValue);
+		result.setShipping(shippingValue);
+		
+		PrintUtils.printStarterSetCalcDetailsTotals(result);
 
 		return result;
 	}

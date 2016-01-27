@@ -70,7 +70,6 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	private DateModel customerFormDate = new DateModel();
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
-	private StylistRegistrationCartTotalModel calculatedTotals;
 	private CreditCardModel creditCardData = new CreditCardModel();
 
 	@Before
@@ -79,9 +78,6 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		// Generate data for this test run
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
-		calculatedTotals = new StylistRegistrationCartTotalModel();
-		calculatedTotals.setDelivery("0.00");
-		calculatedTotals.setTotalPrice("100.00");
 		birthDate.setDate("Feb,1970,12");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
@@ -104,7 +100,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 		StylistRegistrationCartCalculator.calculateCartAndShippingTotals("24", "0.00", "50", false);
 
-		starterSetSteps.grabCartTotal(false);
+		starterSetSteps.grabCartTotal(true);
 		starterSetSteps.submitstarterSetStep();
 
 		String url = shippingSteps.grabUrl();
@@ -115,7 +111,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
 
-		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(calculatedTotals, StylistRegDataGrabber.cartTotals);
+		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount();
 
 		customVerification.printErrors();

@@ -79,8 +79,8 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
 
-		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(calculatedTotals, StylistRegDataGrabber.cartTotals);
-		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount();
+//		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(calculatedTotals, StylistRegDataGrabber.cartTotals);
+//		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount();
 
 		customVerification.printErrors();
 

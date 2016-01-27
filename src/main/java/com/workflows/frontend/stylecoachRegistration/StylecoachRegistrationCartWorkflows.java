@@ -5,13 +5,14 @@ import net.thucydides.core.annotations.StepGroup;
 
 import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
 import com.tools.CustomVerification;
+import com.tools.data.StylistRegistrationCartCalcDetailsModel;
 
 public class StylecoachRegistrationCartWorkflows {
 
-	private StylistRegistrationCartTotalModel calculatedTotals = new StylistRegistrationCartTotalModel();
+	private StylistRegistrationCartCalcDetailsModel calculatedTotals = new StylistRegistrationCartCalcDetailsModel();
 	private StylistRegistrationCartTotalModel grabbedTotals = new StylistRegistrationCartTotalModel();
 
-	public void setVerifyTotalsDiscount(StylistRegistrationCartTotalModel calculatedTotals, StylistRegistrationCartTotalModel grabbedTotals) {
+	public void setVerifyTotalsDiscount(StylistRegistrationCartCalcDetailsModel calculatedTotals, StylistRegistrationCartTotalModel grabbedTotals) {
 		this.grabbedTotals = grabbedTotals;
 		this.calculatedTotals = calculatedTotals;
 
@@ -19,8 +20,9 @@ public class StylecoachRegistrationCartWorkflows {
 
 	@StepGroup
 	public void verifyTotalsDiscount() {
-		verifyTotalPrice(calculatedTotals.getTotalPrice(), grabbedTotals.getTotalPrice());
-		verifyShippingPrice(calculatedTotals.getDelivery(), grabbedTotals.getDelivery());
+		verifyTotalPrice(calculatedTotals.getTotalAmount(), grabbedTotals.getTotalPrice());
+		verifyVoucherPrice(calculatedTotals.getVoucherDiscount(), grabbedTotals.getVoucher());
+		verifyShippingPrice(calculatedTotals.getShipping(), grabbedTotals.getDelivery());
 
 	}
 
@@ -32,6 +34,11 @@ public class StylecoachRegistrationCartWorkflows {
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
 		CustomVerification.verifyTrue("Failure: Shipping Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+	}
+
+	@Step
+	public void verifyVoucherPrice(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Voucher Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
 }

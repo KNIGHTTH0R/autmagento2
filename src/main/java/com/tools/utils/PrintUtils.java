@@ -8,6 +8,7 @@ import com.tools.data.CalculationModel;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.PomCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
+import com.tools.data.StylistRegistrationCartCalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
@@ -468,6 +469,14 @@ public class PrintUtils {
 		System.out.println("DiscountPrice " + shippingTotals.getDiscountPrice());
 		System.out.println("ShippingPrice " + shippingTotals.getShippingPrice());
 		System.out.println("TotalAmount " + shippingTotals.getTotalAmount());
+	}
+	
+	public static void printStarterSetCalcDetailsTotals(StylistRegistrationCartCalcDetailsModel stylistRegistrationCartCalcDetailsModel) {
+		System.out.println("------------------------");
+		System.out.println("SubTotal " + stylistRegistrationCartCalcDetailsModel.getSubTotal());
+		System.out.println("DiscountPrice " + stylistRegistrationCartCalcDetailsModel.getTotalAmount());
+		System.out.println("ShippingPrice " + stylistRegistrationCartCalcDetailsModel.getVoucherDiscount());
+		System.out.println("TotalAmount " + stylistRegistrationCartCalcDetailsModel.getTax());
 	}
 
 	public static void printProductBasicModel(ProductBasicModel productNow) {

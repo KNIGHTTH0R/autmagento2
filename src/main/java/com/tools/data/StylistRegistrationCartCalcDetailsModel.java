@@ -12,6 +12,7 @@ public class StylistRegistrationCartCalcDetailsModel {
 	private String subTotal;
 	private String tax;
 	private String voucherDiscount;
+	private String shipping;
 
 	public String getTotalAmount() {
 		return totalAmount;
@@ -43,6 +44,14 @@ public class StylistRegistrationCartCalcDetailsModel {
 
 	public void setTax(String tax) {
 		this.tax = tax;
+	}
+
+	public String getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(String shipping) {
+		this.shipping = shipping;
 	}
 
 }
