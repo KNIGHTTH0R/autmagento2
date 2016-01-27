@@ -151,7 +151,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 
 		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
-		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount();
+		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount("STARTER SET TOTALS");
 
 		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
 		starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");

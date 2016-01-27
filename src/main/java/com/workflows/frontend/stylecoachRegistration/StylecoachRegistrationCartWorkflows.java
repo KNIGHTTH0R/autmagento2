@@ -19,7 +19,7 @@ public class StylecoachRegistrationCartWorkflows {
 	}
 
 	@StepGroup
-	public void verifyTotalsDiscount() {
+	public void verifyTotalsDiscount(String name) {
 		verifyTotalPrice(calculatedTotals.getTotalAmount(), grabbedTotals.getTotalPrice());
 		verifyVoucherPrice(calculatedTotals.getVoucherDiscount(), grabbedTotals.getVoucher());
 		verifyShippingPrice(calculatedTotals.getShipping(), grabbedTotals.getDelivery());
