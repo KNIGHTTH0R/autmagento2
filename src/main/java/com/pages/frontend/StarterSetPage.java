@@ -116,7 +116,7 @@ public class StarterSetPage extends AbstractPage {
 		result.setDelivery(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#shipping-value")).getText()));
 		result.setTotalPrice(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#total-price-value")).getText()));
 		if (isVoucherApplied) {
-			result.setVoucher(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#voucher-container")).getText()));
+			result.setVoucher(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#voucher-value")).getText()));
 		}
 		StylistRegDataGrabber.cartTotals = result;
 
