@@ -96,7 +96,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6001.properties");
 			prop.load(input);
-			
+
 			taxClass = prop.getProperty("taxClass");
 			shippingValue = prop.getProperty("shippingValue");
 			voucherValue = prop.getProperty("voucherValue");
@@ -133,9 +133,9 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart();
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
 
-		starterSetSteps.applyVoucher("24TQQEV4");
+		starterSetSteps.applyVoucher(voucherCode);
 
-		StylistRegistrationCartCalculator.calculateCartAndShippingTotals("24", "0.00", "50.00", false);
+		StylistRegistrationCartCalculator.calculateCartAndShippingTotals(taxClass, shippingValue, voucherValue, false);
 
 		starterSetSteps.grabCartTotal(true);
 		starterSetSteps.submitStarterSetStep();
