@@ -17,7 +17,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
-import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.StarterSetSteps;
 import com.steps.frontend.StylistCampaignSteps;
@@ -121,7 +120,6 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
 		StarterSetProductModel productData;
-
 		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart();
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
 
@@ -131,7 +129,6 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 
 		starterSetSteps.grabCartTotal(true);
 		starterSetSteps.submitStarterSetStep();
-
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
