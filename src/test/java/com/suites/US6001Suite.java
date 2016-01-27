@@ -10,6 +10,7 @@ import com.tests.us6.us6001.US6001CheckStylistActivationStarterkitCanceledTest;
 import com.tests.us6.us6001.US6001CheckStylistActivationTest;
 import com.tests.us6.us6001.US6001CheckStylistPreferedWebsiteAndLanguage;
 import com.tests.us6.us6001.US6001ScRegistrationNewCustomerTest;
+import com.tests.us6.us6001.US6001ValidateStarterSetOrderInBackendTest;
 
 
 @SuiteClasses({
@@ -19,6 +20,7 @@ import com.tests.us6.us6001.US6001ScRegistrationNewCustomerTest;
 	US6001CancelStarterSetOrderTest.class,
 	US6001CheckStylistActivationStarterkitCanceledTest.class,
 	US6001CheckAssociatedContactCreationTest.class,
+	US6001ValidateStarterSetOrderInBackendTest.class,
 })
 @RunWith(Suite.class)
 public class US6001Suite {
