@@ -194,7 +194,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		validationWorkflows.performCartValidations();
+		validationWorkflows.performCartValidationsWithDiscountRuleActive();
 		
 		customVerifications.printErrors();
 	}
