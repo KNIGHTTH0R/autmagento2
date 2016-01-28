@@ -44,11 +44,11 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3.6 Shop for myself VAT valid and SMB billing and shipping DE",type = "Scenarios")
+@WithTag(name = "US3.6 Shop for myself VAT valid and SMB billing and shipping DE", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
-	
+
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -69,9 +69,9 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ValidationWorkflows validationWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private String username, password;
 	private static String billingAddress;
 	private static String voucherDiscount;
@@ -80,26 +80,26 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	
+
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
-		
+
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		
-		genProduct2 = MagentoProductCalls.createProductModel();	
+
+		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct2);
-		
+
 		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("229.00");
+		genProduct3.setPrice("229.90");
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
@@ -109,6 +109,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3006.properties");
 			prop.load(input);
+			
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
@@ -144,16 +145,17 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		homeSteps.clickonGeneralView();
 		customerRegistrationSteps.wipeCart();
 		BasicProductModel productData;
-		
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_50);
+
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_50);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher("100.00",jewelryDiscount, marketingDiscount, taxClass, shippingValue);
+
+		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher(voucherDiscount, jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -161,15 +163,15 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-		
+
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
-		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();		
+		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
 		cartSteps.grabTotals();
 		cartSteps.goToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);	
+		shippingSteps.setSameAsBilling(true);
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
@@ -189,10 +191,10 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		
+
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		validationWorkflows.performCartValidationsWithDiscountRuleActive();
-		
+
 		customVerifications.printErrors();
 	}
 
