@@ -137,12 +137,7 @@ public class CartDiscountsCalculation {
 
 	}
 
-	public static List<BasicProductModel> calculateAskingPriceWithActiveDiscountRule(List<BasicProductModel> productsList, String ruleDiscount) {
-
-		BigDecimal sum = calculateSubtotal(productsList);
-
-		System.out.println(sum);
-		System.out.println(ruleDiscount);
+	public static List<BasicProductModel> calculateAskingPriceWithActiveDiscountRule(List<BasicProductModel> productsList, String ruleDiscount, BigDecimal productsSum) {
 
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 
@@ -158,7 +153,7 @@ public class CartDiscountsCalculation {
 			newProduct.setProductsPrice(product.getProductsPrice());
 			newProduct.setPriceIP(product.getPriceIP());
 			newProduct.setFinalPrice(calculateRuleDiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())),
-					BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())), BigDecimal.valueOf(Double.parseDouble(ruleDiscount)), sum));
+					BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())), BigDecimal.valueOf(Double.parseDouble(ruleDiscount)), productsSum));
 			product.getFinalPrice();
 			cartProducts.add(newProduct);
 		}

@@ -1,5 +1,6 @@
 package com.tools.datahandlers;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,21 +98,23 @@ public class CartCalculator {
 		allProductsList.addAll(productsList25);
 		allProductsList.addAll(productsList50);
 		allProductsList.addAll(productsListMarketing);
+		
+		BigDecimal productsSum = CartDiscountsCalculation.calculateSubtotal(allProductsList);
 
-		allProductsListDiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(allProductsList, ruleDiscount);
+		allProductsListDiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(allProductsList, ruleDiscount, productsSum);
 		
 		System.out.println("MACEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEL");
 		PrintUtils.printListBasicProductModel(allProductsListDiscountRule);
 		
-		productsList25DiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList25, ruleDiscount);
-		productsList50DiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList50, ruleDiscount); 
-		productsListMarketingDiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsListMarketing, ruleDiscount); 
+		productsList25DiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList25, ruleDiscount,productsSum);
+		productsList50DiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList50, ruleDiscount,productsSum); 
+		productsListMarketingDiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsListMarketing, ruleDiscount,productsSum); 
 
-		calculatedProductsList25 = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList25DiscountRule, jewelryDiscount);
+		calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25DiscountRule, jewelryDiscount);
 
-		calculatedProductsList50 = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList50DiscountRule, jewelryDiscount);
+		calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50DiscountRule, productsList25DiscountRule, jewelryDiscount);
 
-		calculatedProductsListMarketing = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsListMarketingDiscountRule, marketingDiscount);
+		calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketingDiscountRule, marketingDiscount);
 
 		allProductsListRecalculated.addAll(calculatedProductsList50);
 		allProductsListRecalculated.addAll(calculatedProductsList25);
