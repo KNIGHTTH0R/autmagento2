@@ -19,6 +19,7 @@ public class CartTotalsCalculation {
 		BigDecimal rabatt50 = BigDecimal.ZERO;
 		BigDecimal rabatt25 = BigDecimal.ZERO;
 		BigDecimal rabattBuy3Get1 = BigDecimal.ZERO;
+		BigDecimal voucherDiscount = BigDecimal.ZERO;
 		BigDecimal tax = BigDecimal.ZERO;
 		BigDecimal totalAmount = BigDecimal.ZERO;
 		BigDecimal ipPoints = BigDecimal.ZERO;
@@ -48,6 +49,7 @@ public class CartTotalsCalculation {
 		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
 		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
+		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherDiscount));
 
 		return result;
 	}
@@ -90,6 +92,7 @@ public class CartTotalsCalculation {
 		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
 		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
+		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(discountRule));
 		
 		return result;
 	}
@@ -181,6 +184,7 @@ public class CartTotalsCalculation {
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal rabatt50 = BigDecimal.ZERO;
 		BigDecimal rabatt25 = BigDecimal.ZERO;
+		BigDecimal voucherDiscount = BigDecimal.ZERO;
 		BigDecimal rabattBuy3Get1 = CartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsList);
 		BigDecimal tax = BigDecimal.ZERO;
 		BigDecimal totalAmount = BigDecimal.ZERO;
@@ -211,6 +215,7 @@ public class CartTotalsCalculation {
 		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
 		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(CartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsList)));
+		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherDiscount));
 
 		return result;
 	}

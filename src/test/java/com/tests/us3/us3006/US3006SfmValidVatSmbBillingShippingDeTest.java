@@ -151,7 +151,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher("100.00","0.00", "0.00", taxClass, shippingValue);
+		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher("100.00","0.00", "0.00", taxClass, "0.00");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
