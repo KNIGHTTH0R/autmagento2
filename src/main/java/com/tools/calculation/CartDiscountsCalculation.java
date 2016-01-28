@@ -157,9 +157,9 @@ public class CartDiscountsCalculation {
 			newProduct.setQuantity(product.getQuantity());
 			newProduct.setProductsPrice(product.getProductsPrice());
 			newProduct.setPriceIP(product.getPriceIP());
-			newProduct.setFinalPrice(calculateRuleDiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
-					BigDecimal.valueOf(Double.parseDouble(ruleDiscount)), sum));
-
+			newProduct.setFinalPrice(calculateRuleDiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())),
+					BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())), BigDecimal.valueOf(Double.parseDouble(ruleDiscount)), sum));
+			product.getFinalPrice();
 			cartProducts.add(newProduct);
 		}
 
@@ -265,7 +265,7 @@ public class CartDiscountsCalculation {
 		return String.valueOf(result.setScale(2));
 	}
 
-	public static String calculateRuleDiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal ruleDiscount, BigDecimal totalAmount) {
+	public static String calculateRuleDiscountCartProductFinalPrice(BigDecimal finalPrice, BigDecimal askingPrice, BigDecimal ruleDiscount, BigDecimal totalAmount) {
 
 		BigDecimal result = BigDecimal.ZERO;
 		if (totalAmount.compareTo(ruleDiscount) < 0) {
@@ -276,6 +276,7 @@ public class CartDiscountsCalculation {
 			result = result.add(askingPrice);
 			result = result.multiply(BigDecimal.valueOf(100));
 			result = result.divide(totalAmount, 2, BigDecimal.ROUND_HALF_UP);
+			result = finalPrice.subtract(result);
 
 		}
 
