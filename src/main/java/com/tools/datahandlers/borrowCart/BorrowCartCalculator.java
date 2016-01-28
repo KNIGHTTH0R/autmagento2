@@ -26,5 +26,10 @@ public class BorrowCartCalculator {
 		borrowCartCalcDetailsModel = BorrowCartTotalsCalculation.calculateTotals(allBorrowedProductsList, discountClass, shippingValue);
 		shippingCalculatedModel = BorrowCartTotalsCalculation.calculateShippingTotals(borrowCartCalcDetailsModel, shippingValue);
 	}
+	
+	public static void calculateCartAndShippingTotalsDiscountRuleActive(String discountClass,String ruleDiscount, String shippingValue) {
+		borrowCartCalcDetailsModel = BorrowCartTotalsCalculation.calculateTotalsDiscountRuleActive(allBorrowedProductsList, discountClass,ruleDiscount, shippingValue);
+		shippingCalculatedModel = BorrowCartTotalsCalculation.calculateShippingTotals(borrowCartCalcDetailsModel, shippingValue);
+	}
 
 }

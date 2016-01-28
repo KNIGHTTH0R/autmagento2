@@ -29,13 +29,49 @@ public class BorrowCartTotalsCalculation {
 		tax = subtotal.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
+
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
-
 		result.setTotalAmount(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
-
 		result.setTax(String.valueOf(tax));
 		result.setIpPoints(String.valueOf(ipPoints.intValue()));
+
+		PrintUtils.printBorrowCartCalcDetailsModel(result);
+
+		return result;
+	}
+
+	public static BorrowCartCalcDetailsModel calculateTotalsDiscountRuleActive(List<BorrowProductModel> productsList, String taxClass, String ruleDiscount, String shippingValue) {
+		BorrowCartCalcDetailsModel result = new BorrowCartCalcDetailsModel();
+
+		BigDecimal subtotal = BigDecimal.ZERO;
+		BigDecimal totalAmount = BigDecimal.ZERO;
+		BigDecimal tax = BigDecimal.ZERO;
+		BigDecimal ipPoints = BigDecimal.ZERO;
+
+		for (BorrowProductModel product : productsList) {
+			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
+			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
+		}
+		System.out.println(BigDecimal.valueOf(Double.parseDouble(ruleDiscount)).compareTo(subtotal) < 0);
+
+		// the discount rule will be substracted from subtotal only if it's less
+		// than the subtotal,
+		// otherwise will remain 0
 		
+		if (BigDecimal.valueOf(Double.parseDouble(ruleDiscount)).compareTo(subtotal) > 0) {
+
+			totalAmount = subtotal.subtract(BigDecimal.valueOf(Double.parseDouble(ruleDiscount)));
+		}
+
+		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
+
+		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
+		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
+		result.setTax(String.valueOf(tax));
+		result.setIpPoints(String.valueOf(ipPoints.intValue()));
+
 		PrintUtils.printBorrowCartCalcDetailsModel(result);
 
 		return result;
@@ -52,7 +88,7 @@ public class BorrowCartTotalsCalculation {
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())));
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		result.setTotalAmount(totalAmountCalculation.toString());
-		
+
 		PrintUtils.printShippingTotals(result);
 
 		return result;
