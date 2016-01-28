@@ -91,7 +91,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		DataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("49.90");
+		genProduct1.setPrice("49.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
 		genProduct2 = MagentoProductCalls.createProductModel();
@@ -99,7 +99,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("229.90");
+		genProduct3.setPrice("239.00");
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
