@@ -223,6 +223,10 @@ public class CartPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(MongoTableKeys.DISCOUNT_3_PLUS_1, valueTransformer);
 			}
+			if (key.contains("AUT-Money voucher working on shipping fee")) {
+				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				resultModel.addDiscount(MongoTableKeys.VOUCHER_DISCOUNT, valueTransformer);
+			}
 			if (key.contains(ContextConstants.GESAMTBETRAG)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);

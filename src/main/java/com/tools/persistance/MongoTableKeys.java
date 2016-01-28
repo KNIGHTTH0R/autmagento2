@@ -85,6 +85,7 @@ public class MongoTableKeys {
 	public static final String SUBTOTAL = "subtotal";
 	public static final String JEWERLY_BONUS = "jewelryBonus";
 	public static final String DISCOUNT_3_PLUS_1 = "discount3To1";
+	public static final String VOUCHER_DISCOUNT = "discount3To1";
 	public static final String TAX = "tax";
 	public static final String SHIPPING = "shipping";
 	public static final String TOTAL_AMOUNT = "totalAmount";

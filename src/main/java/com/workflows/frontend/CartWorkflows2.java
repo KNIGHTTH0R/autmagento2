@@ -92,7 +92,6 @@ public class CartWorkflows2 {
 		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());
 		verifyMarketingBonus(discountTotals.getMarketingBonus(), discountCalculationModel.getMarketingBonus());
 		verifyIP(discountTotals.getIpPoints(), discountCalculationModel.getIpPoints());
-
 	}
 
 	@StepGroup

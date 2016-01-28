@@ -109,7 +109,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3006.properties");
 			prop.load(input);
-			
+
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
