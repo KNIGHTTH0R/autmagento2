@@ -275,7 +275,7 @@ public class CartDiscountsCalculation {
 
 			result = result.add(askingPrice);
 			result = result.multiply(BigDecimal.valueOf(100));
-			result = result.divide(totalAmount, 10, BigDecimal.ROUND_HALF_UP);
+			result = result.divide(totalAmount, 2, BigDecimal.ROUND_HALF_UP);
 
 		}
 
