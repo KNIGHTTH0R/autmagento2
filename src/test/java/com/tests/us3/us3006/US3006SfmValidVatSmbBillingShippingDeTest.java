@@ -74,6 +74,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 	
 	private String username, password;
 	private static String billingAddress;
+	private static String voucherDiscount;
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
@@ -111,6 +112,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
+			voucherDiscount = prop.getProperty("voucherDiscount");
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
@@ -151,7 +153,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher("100.00","0", "0", taxClass, "0.00");
+		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher("100.00",jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -159,15 +161,10 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-
-//		cartSteps.typeJewerlyBonus(jewelryDiscount);
-//		cartSteps.updateJewerlyBonus();
-//		cartSteps.typeMarketingBonus(marketingDiscount);
-//		cartSteps.updateMarketingBonus();
 		
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
-		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
+		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();		
 		cartSteps.grabTotals();
 		cartSteps.goToShipping();
 

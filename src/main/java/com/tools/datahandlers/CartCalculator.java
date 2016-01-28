@@ -98,17 +98,12 @@ public class CartCalculator {
 		allProductsList.addAll(productsList25);
 		allProductsList.addAll(productsList50);
 		allProductsList.addAll(productsListMarketing);
-		
+
 		BigDecimal productsSum = CartDiscountsCalculation.calculateSubtotal(allProductsList);
 
-		allProductsListDiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(allProductsList, ruleDiscount, productsSum);
-		
-		System.out.println("MACEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEL");
-		PrintUtils.printListBasicProductModel(allProductsListDiscountRule);
-		
-		productsList25DiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList25, ruleDiscount,productsSum);
-		productsList50DiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList50, ruleDiscount,productsSum); 
-		productsListMarketingDiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsListMarketing, ruleDiscount,productsSum); 
+		productsList25DiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList25, ruleDiscount, productsSum);
+		productsList50DiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList50, ruleDiscount, productsSum);
+		productsListMarketingDiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsListMarketing, ruleDiscount, productsSum);
 
 		calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25DiscountRule, jewelryDiscount);
 
@@ -122,8 +117,8 @@ public class CartCalculator {
 
 		PrintUtils.printListBasicProductModel(allProductsListRecalculated);
 
-		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotalsWithDiscountRuleActive(allProductsListRecalculated,ruleDiscount, jewelryDiscount, marketingDiscount, taxClass, shippingValue,
-				shippingValue);
+		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotalsWithDiscountRuleActive(allProductsListRecalculated, ruleDiscount, jewelryDiscount,
+				marketingDiscount, taxClass, shippingValue, shippingValue);
 		PrintUtils.printCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 		PrintUtils.printShippingTotals(shippingCalculatedModel);

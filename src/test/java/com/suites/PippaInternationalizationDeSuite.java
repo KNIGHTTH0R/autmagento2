@@ -16,7 +16,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US3003Suite.class,
 	US3004Suite.class,
 	US3005Suite.class,
-	US3006Suite.class,
+//	US3006Suite.class,              work in progress
 	US3007Suite.class,
 	US3008Suite.class,
 	US3009Suite.class,
