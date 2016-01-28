@@ -54,7 +54,7 @@ public class BorrowCartTotalsCalculation {
 		}
 		System.out.println(BigDecimal.valueOf(Double.parseDouble(ruleDiscount)).compareTo(subtotal) < 0);
 
-		// the discount rule will be substracted from subtotal only if it's less
+		// the discount rule will be substracted from subtotal if it's less
 		// than the subtotal,
 		// otherwise will remain 0
 		
