@@ -148,7 +148,7 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 		productData = addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct2, "0.00");
 		BorrowCartCalculator.allBorrowedProductsList.add(productData);
 
-		BorrowCartCalculator.calculateCartAndShippingTotalsDiscountRuleActive(taxClass,"0.00", shippingValue);
+		BorrowCartCalculator.calculateCartAndShippingTotals(taxClass, shippingValue);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
