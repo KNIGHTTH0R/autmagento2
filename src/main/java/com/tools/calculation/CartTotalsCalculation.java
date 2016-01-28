@@ -51,6 +51,48 @@ public class CartTotalsCalculation {
 
 		return result;
 	}
+	public static CalcDetailsModel calculateCartProductsTotalsWithDiscountRuleActive(List<BasicProductModel> productsList, String discountRule, String jewerlyDiscount, String marketingDiscount, String taxClass, String shipping,
+			String shippingForLessThan150) {
+		CalcDetailsModel result = new CalcDetailsModel();
+		String shippingValue;
+		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
+		
+		BigDecimal subtotal = BigDecimal.ZERO;
+		BigDecimal rabatt50 = BigDecimal.ZERO;
+		BigDecimal rabatt25 = BigDecimal.ZERO;
+		BigDecimal rabattBuy3Get1 = BigDecimal.ZERO;
+		BigDecimal tax = BigDecimal.ZERO;
+		BigDecimal totalAmount = BigDecimal.ZERO;
+		BigDecimal ipPoints = BigDecimal.ZERO;
+		
+		for (BasicProductModel product : productsList) {
+			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())));
+			rabatt50 = calculate50Discount(productsList);
+			rabatt25 = calculate25Discount(productsList, BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), sum25);
+			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())));
+		}
+		
+		totalAmount = calculateTotalAmountWithDiscountRuleActive(subtotal,BigDecimal.valueOf(Double.parseDouble(discountRule)), BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50, rabatt25,
+				rabattBuy3Get1);
+		
+		shippingValue = Double.parseDouble(String.valueOf(totalAmount)) >= 150 ? shipping : shippingForLessThan150;
+		
+		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
+		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
+		
+		result.setSubTotal(String.valueOf(subtotal));
+		result.setJewelryBonus(jewerlyDiscount);
+		result.setMarketingBonus(marketingDiscount);
+		result.setTotalAmount(String.valueOf(totalAmount));
+		result.setIpPoints(String.valueOf(ipPoints.intValue()));
+		result.setTax(String.valueOf(tax));
+		result.addSegment(ConfigConstants.DISCOUNT_50, String.valueOf(rabatt50));
+		result.addSegment(ConfigConstants.DISCOUNT_25, String.valueOf(rabatt25));
+		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(rabattBuy3Get1));
+		
+		return result;
+	}
 
 	private static BigDecimal calculate50Discount(List<BasicProductModel> productsList) {
 
@@ -91,6 +133,22 @@ public class CartTotalsCalculation {
 		result = result.subtract(sum50Discount);
 		result = result.subtract(buy3Get1);
 
+		return result;
+	}
+	
+	private static BigDecimal calculateTotalAmountWithDiscountRuleActive(BigDecimal subtotal,BigDecimal ruleDiscount, BigDecimal jewelryDiscount, BigDecimal marketingDiscount, BigDecimal sum50Discount, BigDecimal sum25Discount,
+			BigDecimal buy3Get1) {
+		
+		BigDecimal result = BigDecimal.ZERO;
+		
+		result = result.add(subtotal);
+		result = result.subtract(ruleDiscount);
+		result = result.subtract(jewelryDiscount);
+		result = result.subtract(marketingDiscount);
+		result = result.subtract(sum25Discount);
+		result = result.subtract(sum50Discount);
+		result = result.subtract(buy3Get1);
+		
 		return result;
 	}
 

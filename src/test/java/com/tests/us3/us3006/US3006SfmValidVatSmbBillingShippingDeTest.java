@@ -151,7 +151,7 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher("100.00",jewelryDiscount, marketingDiscount, taxClass, shippingValue);
+		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher("100.00","0.00", "0.00", taxClass, shippingValue);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -160,10 +160,10 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
 
-//		cartSteps.typeJewerlyBonus(jewelryDiscount);
-//		cartSteps.updateJewerlyBonus();
-//		cartSteps.typeMarketingBonus(marketingDiscount);
-//		cartSteps.updateMarketingBonus();
+		cartSteps.typeJewerlyBonus(jewelryDiscount);
+		cartSteps.updateJewerlyBonus();
+		cartSteps.typeMarketingBonus(marketingDiscount);
+		cartSteps.updateMarketingBonus();
 		
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();

@@ -119,7 +119,7 @@ public class CartCalculator {
 
 		PrintUtils.printListBasicProductModel(allProductsListRecalculated);
 
-		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass, shippingValue,
+		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotalsWithDiscountRuleActive(allProductsListRecalculated,ruleDiscount, jewelryDiscount, marketingDiscount, taxClass, shippingValue,
 				shippingValue);
 		PrintUtils.printCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
