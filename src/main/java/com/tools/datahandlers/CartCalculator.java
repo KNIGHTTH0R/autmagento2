@@ -107,11 +107,11 @@ public class CartCalculator {
 		productsList50DiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList50, ruleDiscount); 
 		productsListMarketingDiscountRule = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsListMarketing, ruleDiscount); 
 
-		calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25DiscountRule, jewelryDiscount);
+		calculatedProductsList25 = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList25DiscountRule, jewelryDiscount);
 
-		calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50DiscountRule, productsList25DiscountRule, jewelryDiscount);
+		calculatedProductsList50 = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsList50DiscountRule, jewelryDiscount);
 
-		calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketingDiscountRule, marketingDiscount);
+		calculatedProductsListMarketing = CartDiscountsCalculation.calculateAskingPriceWithActiveDiscountRule(productsListMarketingDiscountRule, marketingDiscount);
 
 		allProductsListRecalculated.addAll(calculatedProductsList50);
 		allProductsListRecalculated.addAll(calculatedProductsList25);
