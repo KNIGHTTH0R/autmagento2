@@ -272,7 +272,7 @@ public class CartDiscountsCalculation {
 			result = result.multiply(BigDecimal.valueOf(100));
 			result = result.divide(totalAmount, 2, BigDecimal.ROUND_HALF_UP);
 			result = finalPrice.subtract(result);
-
+			result = result.compareTo(BigDecimal.ZERO) > 0 ? result : BigDecimal.ZERO;
 		}
 
 		return String.valueOf(result.setScale(2));
