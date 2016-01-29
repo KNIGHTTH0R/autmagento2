@@ -24,6 +24,7 @@ import com.steps.frontend.StylistContextSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
+import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
@@ -38,6 +39,7 @@ import com.tools.env.variables.ContextConstants;
 import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkflow;
 import com.workflows.frontend.stylecoachRegistration.StarterSetConfirmationWorkflows;
 import com.workflows.frontend.stylecoachRegistration.StylecoachRegistrationCartWorkflows;
@@ -61,6 +63,8 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 	public StylistContextSteps stylistContextSteps;
 	@Steps
 	public StarterSetSteps starterSetSteps;
+	@Steps
+	public ShippingSteps shippingSteps;
 	@Steps
 	public CustomVerification customVerification;
 	@Steps
@@ -134,6 +138,11 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 
 		starterSetSteps.grabCartTotal(true);
 		starterSetSteps.submitStarterSetStep();
+
+		String url = shippingSteps.grabUrl();
+		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.grabConfirmationTotals();
@@ -155,6 +164,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());
 
 	}
 }
