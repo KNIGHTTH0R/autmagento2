@@ -80,6 +80,8 @@ public class CartTotalsCalculation {
 		shipping = calculateNewShippingBasedOnRemaingSumFromVoucher(totalAmount, BigDecimal.valueOf(Double.parseDouble(discountRule)),
 				BigDecimal.valueOf(Double.parseDouble(shipping)));
 
+		System.out.println(shipping);
+
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shipping)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
