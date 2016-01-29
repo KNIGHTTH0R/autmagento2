@@ -55,9 +55,8 @@ public class CartTotalsCalculation {
 	}
 
 	public static CalcDetailsModel calculateCartProductsTotalsWithDiscountRuleActive(List<BasicProductModel> productsList, String discountRule, String jewerlyDiscount,
-			String marketingDiscount, String taxClass, String shipping, String shippingForLessThan150) {
+			String marketingDiscount, String taxClass, String shipping) {
 		CalcDetailsModel result = new CalcDetailsModel();
-		String shippingValue;
 		BigDecimal sum25 = CartDiscountsCalculation.calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
 
 		BigDecimal subtotal = BigDecimal.ZERO;
@@ -78,12 +77,10 @@ public class CartTotalsCalculation {
 		totalAmount = calculateTotalAmountWithDiscountRuleActive(subtotal, BigDecimal.valueOf(Double.parseDouble(discountRule)),
 				BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50, rabatt25, rabattBuy3Get1);
 
-		shippingForLessThan150 = calculateNewShippingBasedOnRemaingSumFromVoucher(totalAmount, BigDecimal.valueOf(Double.parseDouble(discountRule)),
-				BigDecimal.valueOf(Double.parseDouble(shippingForLessThan150)));
+		shipping = calculateNewShippingBasedOnRemaingSumFromVoucher(totalAmount, BigDecimal.valueOf(Double.parseDouble(discountRule)),
+				BigDecimal.valueOf(Double.parseDouble(shipping)));
 
-		shippingValue = Double.parseDouble(String.valueOf(totalAmount)) >= 150 ? shipping : shippingForLessThan150;
-
-		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shipping)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 

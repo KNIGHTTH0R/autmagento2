@@ -51,7 +51,6 @@ public class CartCalculator {
 		calculatedProductsList50 = new ArrayList<BasicProductModel>();
 		calculatedProductsListMarketing = new ArrayList<BasicProductModel>();
 		allProductsListRecalculated = new ArrayList<BasicProductModel>();
-
 		calculatedTotalsDiscounts = new CalcDetailsModel();
 		shippingCalculatedModel = new ShippingModel();
 
@@ -118,7 +117,7 @@ public class CartCalculator {
 		PrintUtils.printListBasicProductModel(allProductsListRecalculated);
 
 		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotalsWithDiscountRuleActive(allProductsListRecalculated, ruleDiscount, jewelryDiscount,
-				marketingDiscount, taxClass, shippingValue, shippingValue);
+				marketingDiscount, taxClass, shippingValue);
 		PrintUtils.printCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 		PrintUtils.printShippingTotals(shippingCalculatedModel);

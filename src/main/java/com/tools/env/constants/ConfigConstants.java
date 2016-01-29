@@ -25,6 +25,7 @@ public class ConfigConstants {
 	public static final String DISCOUNT_40_BONUS = "40% Rabatt Gutschein";
 	public static final String REGULAR_PRICE = "Regulärer Preis";
 	public static final String VOUCHER_DISCOUNT = "Voucher Discount";
+	public static final String VOUCHER_REMAINING_ON_SHIPPING = "Voucher Remaining On Shipping";
 
 	// Webmail suffix
 	public static final String WEB_MAIL = "mailinator.com";
