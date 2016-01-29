@@ -78,6 +78,9 @@ public class CartTotalsCalculation {
 		totalAmount = calculateTotalAmountWithDiscountRuleActive(subtotal, BigDecimal.valueOf(Double.parseDouble(discountRule)),
 				BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50, rabatt25, rabattBuy3Get1);
 
+		shippingForLessThan150 = calculateNewShippingBasedOnRemaingSumFromVoucher(totalAmount, BigDecimal.valueOf(Double.parseDouble(discountRule)),
+				BigDecimal.valueOf(Double.parseDouble(shippingForLessThan150)));
+
 		shippingValue = Double.parseDouble(String.valueOf(totalAmount)) >= 150 ? shipping : shippingForLessThan150;
 
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
@@ -109,6 +112,19 @@ public class CartTotalsCalculation {
 		}
 		return discountSum;
 
+	}
+
+	public static String calculateNewShippingBasedOnRemaingSumFromVoucher(BigDecimal totalAmount, BigDecimal voucherDiscount, BigDecimal shipping) {
+
+		BigDecimal newShipping = BigDecimal.ZERO;
+
+		if (voucherDiscount.compareTo(totalAmount) > 0) {
+			BigDecimal remainingSum = voucherDiscount.subtract(totalAmount);
+			newShipping = shipping.subtract(remainingSum);
+			newShipping = newShipping.compareTo(BigDecimal.ZERO) > 0 ? newShipping : BigDecimal.ZERO;
+		}
+
+		return String.valueOf(newShipping);
 	}
 
 	private static BigDecimal calculate25Discount(List<BasicProductModel> productsList, BigDecimal jewelryDiscount, BigDecimal sum25Section) {

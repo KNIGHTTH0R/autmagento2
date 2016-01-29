@@ -28,7 +28,7 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 	public void typeContactName(String name) {
 		element(contactInput).waitUntilVisible();
 		contactInput.sendKeys(name);
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		element(selectContact).waitUntilVisible();
 		element(selectContact).click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
