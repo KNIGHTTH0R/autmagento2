@@ -93,9 +93,19 @@ public class PartyDetailsSteps extends AbstractSteps {
 		return partyDetailsPage().grabClosedPartyPerformance();
 	}
 
-	@Step
+	@StepGroup
 	public void orderForCustomerFromParty(String name) {
+		typeContactName(name);
+		startOrderForCustomer();
+	}
+
+	@Step
+	public void typeContactName(String name) {
 		placeCustomerOrderFromPartyPage().typeContactName(name);
+	}
+
+	@Step
+	public void startOrderForCustomer() {
 		placeCustomerOrderFromPartyPage().startOrderForCustomer();
 	}
 
@@ -120,12 +130,12 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void verifyPlannedPartyAvailableActions() {
 		partyDetailsPage().verifyPlannedPartyAvailableActions();
 	}
-	
+
 	@Step
 	public void verifyThatAutomaticallyClosePartyDateIsCorrect() throws ParseException {
 		partyDetailsPage().verifyThatAutomaticallyClosePartyDateIsCorrect();
 	}
-	
+
 	@Step
 	public void verifyThatBonusesAreRemovedFromParty() {
 		partyDetailsPage().verifyThatBonusesAreRemovedFromParty();
