@@ -57,9 +57,9 @@ public class US6001bValidateStarterSetOrderInBackendTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US6001bScRegistrationNewCustomerTest");
-		shippingModelList = MongoReader.grabShippingModel("US6001bScRegistrationNewCustomerTest");
-		calcDetailsModelList = MongoReader.grabStarterSetCartCalcDetailsModels("US6001bScRegistrationNewCustomerTest");
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US6001bScRegistrationNewCustForbiddenCountryTest");
+		shippingModelList = MongoReader.grabShippingModel("US6001bScRegistrationNewCustForbiddenCountryTest");
+		calcDetailsModelList = MongoReader.grabStarterSetCartCalcDetailsModels("US6001bScRegistrationNewCustForbiddenCountryTest");
 
 		if (orderModelList.size() == 1) {
 
