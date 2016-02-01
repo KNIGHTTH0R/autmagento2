@@ -24,8 +24,10 @@ public class ClosedMonthBonusCalculation {
 		BigDecimal totalIpForTob = BigDecimal.ZERO;
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
+		System.out.println("orders list size: " + allOrdersList.size());
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
 		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
+		System.out.println("creditMemo list size: " + creditMemoList.size());
 		
 		BigDecimal ipForOrders = OrdersCalculation.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
 		BigDecimal ipForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
@@ -68,8 +70,8 @@ public class ClosedMonthBonusCalculation {
 
 		BigDecimal unsafeIpForOrders = OrdersCalculation.calculateTotalUnsafeIpOnCurrentMonth(allOrdersList, stylistId, endDate);
 
-		result.setIp(String.valueOf(totalIp.intValue()));
-		result.setUnsafeIp(String.valueOf(unsafeIpForOrders.intValue()));
+		result.setIp("ip: " + String.valueOf(totalIp.intValue()));
+		result.setUnsafeIp("unsafe ip: " + String.valueOf(unsafeIpForOrders.intValue()));
 
 		System.out.println(result.getIp());
 		System.out.println(result.getUnsafeIp());
@@ -128,7 +130,7 @@ public class ClosedMonthBonusCalculation {
 	}
 
 	public static void main(String[] args) throws NumberFormatException, ParseException {
-//		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835","2015-08-15 02:00:00", "2015-12-15 16:00:00", "2016-01-04 12:00:00");
-		ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835","2016-01-04 00:00:00", "2016-01-04 16:00:00");
+		ClosedMonthBonusCalculation.calculateClosedMonthBonuses("1835","2015-11-15 01:00:00", "2016-01-15 00:00:00", "2016-02-01 15:00:00");
+//		ClosedMonthBonusCalculation.calculateCurrentMonthBonuses("1835","2016-01-04 00:00:00", "2016-01-04 16:00:00");
 	}
 }
