@@ -201,7 +201,7 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		checkoutValidationSteps.verifySuccessMessage();
 
 		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		regularCartValidationWorkflows.performCartValidationsWithVoucherApplied();
+		regularCartValidationWorkflows.performCartValidationsWithVoucherApplied(true);
 
 		customVerifications.printErrors();
 	}

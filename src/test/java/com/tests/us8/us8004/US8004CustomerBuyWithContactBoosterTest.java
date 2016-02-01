@@ -216,7 +216,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		checkoutValidationSteps.verifySuccessMessage();
 
 		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		regularCartValidationWorkflows.performCartValidationsWithVoucherApplied();
+		regularCartValidationWorkflows.performCartValidationsWithVoucherApplied(true);
 
 		customVerifications.printErrors();
 	}
