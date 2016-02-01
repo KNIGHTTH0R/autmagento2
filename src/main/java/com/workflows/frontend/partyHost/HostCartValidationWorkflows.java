@@ -5,9 +5,9 @@ import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
-import com.tools.datahandlers.DataGrabber;
-import com.tools.datahandlers.partyHost.HostCartCalculator;
-import com.tools.datahandlers.partyHost.HostDataGrabber;
+import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.datahandler.DataGrabber;
+import com.tools.datahandler.HostDataGrabber;
 import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.AdyenWorkflows;
 

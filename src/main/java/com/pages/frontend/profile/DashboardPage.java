@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.variables.ContextConstants;
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class DashboardPage extends AbstractPage {

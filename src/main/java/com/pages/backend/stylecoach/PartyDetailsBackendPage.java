@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.data.backend.PartyBackendPerformanceModel;
-import com.tools.env.variables.ContextConstants;
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.PrintUtils;
 

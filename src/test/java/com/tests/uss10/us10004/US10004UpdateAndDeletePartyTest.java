@@ -22,9 +22,9 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.UpdatePartySteps;
 import com.tests.BaseTest;
-import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.SoapKeys;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

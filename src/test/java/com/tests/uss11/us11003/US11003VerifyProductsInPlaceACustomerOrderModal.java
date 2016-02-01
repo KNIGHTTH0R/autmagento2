@@ -25,7 +25,7 @@ import com.steps.frontend.checkout.cart.partyHost.AddProductsModalSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.tests.BaseTest;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

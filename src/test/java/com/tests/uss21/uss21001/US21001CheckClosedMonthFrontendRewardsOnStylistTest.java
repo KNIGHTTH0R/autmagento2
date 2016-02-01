@@ -23,7 +23,7 @@ import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.env.constants.FilePaths;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

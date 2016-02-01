@@ -15,7 +15,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.Credentials;
+import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 

@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.Step;
 
 import org.junit.Assert;
 
-import com.tools.env.variables.ContextConstants;
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class EmailSteps extends AbstractSteps {

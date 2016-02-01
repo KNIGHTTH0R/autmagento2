@@ -7,8 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
-import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class BillingFormPage extends AbstractPage {

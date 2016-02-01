@@ -6,7 +6,7 @@ import net.thucydides.core.pages.WebElementFacade;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-import com.tools.env.variables.ContextConstants;
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
 

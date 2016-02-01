@@ -36,10 +36,10 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.ContextConstants;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.ContextConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

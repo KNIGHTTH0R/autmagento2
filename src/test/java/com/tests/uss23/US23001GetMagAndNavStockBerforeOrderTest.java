@@ -21,8 +21,8 @@ import com.connectors.navSqlServer.NavQueries;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
-import com.tools.SoapKeys;
 import com.tools.data.navision.SyncInfoModel;
+import com.tools.env.constants.SoapKeys;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 

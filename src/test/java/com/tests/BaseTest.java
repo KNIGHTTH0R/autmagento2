@@ -15,9 +15,9 @@ import org.openqa.selenium.WebDriver;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
-import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.EmailConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;

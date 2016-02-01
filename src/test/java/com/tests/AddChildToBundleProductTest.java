@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.products.BackendProductDetailsSteps;
 import com.steps.backend.products.BackendProductListSteps;
-import com.tools.env.variables.Credentials;
+import com.tools.env.constants.Credentials;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US3", type = "backend")

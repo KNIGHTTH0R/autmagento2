@@ -21,7 +21,7 @@ import com.steps.backend.BackEndSteps;
 import com.steps.external.FacebookRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.env.constants.FilePaths;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.requirements.Application;
 
 

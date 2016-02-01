@@ -19,10 +19,10 @@ import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.EmailConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

@@ -16,7 +16,7 @@ import com.tools.CustomVerification;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
-import com.tools.env.variables.Credentials;
+import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;

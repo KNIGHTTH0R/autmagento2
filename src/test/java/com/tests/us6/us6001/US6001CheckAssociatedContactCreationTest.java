@@ -17,7 +17,7 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.ContactDetailsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.env.variables.Credentials;
+import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.contact.ContactBackendValidationWorkflows;

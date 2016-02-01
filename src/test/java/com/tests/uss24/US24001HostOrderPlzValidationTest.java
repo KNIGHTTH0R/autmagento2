@@ -31,13 +31,13 @@ import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostS
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.partyHost.HostCartCalculator;
-import com.tools.datahandlers.partyHost.HostDataGrabber;
-import com.tools.env.variables.UrlConstants;
+import com.tools.datahandler.HostDataGrabber;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.frontend.AddressWorkflows;

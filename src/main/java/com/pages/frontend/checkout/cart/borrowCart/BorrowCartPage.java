@@ -12,9 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.frontend.BorrowCartTotalsModel;
 import com.tools.data.frontend.BorrowedCartModel;
-import com.tools.datahandlers.borrowCart.BorrowDataGrabber;
+import com.tools.datahandler.BorrowDataGrabber;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
-import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
