@@ -58,7 +58,6 @@ public class NavQueries {
 
 //		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("STAGING-INT00012111");
 //		System.out.println(result2.getSyncDate());
-		
 
 	}
 

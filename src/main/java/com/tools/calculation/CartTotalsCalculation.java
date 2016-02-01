@@ -77,7 +77,7 @@ public class CartTotalsCalculation {
 		totalAmount = calculateTotalAmountWithDiscountRuleActive(subtotal, BigDecimal.valueOf(Double.parseDouble(discountRule)),
 				BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50, rabatt25, rabattBuy3Get1);
 
-		shipping = calculateNewShippingBasedOnRemaingSumFromVoucher(totalAmount, BigDecimal.valueOf(Double.parseDouble(discountRule)),
+		shipping = calculateNewShippingBasedOnRemaingSumFromRuleDiscount(totalAmount, BigDecimal.valueOf(Double.parseDouble(discountRule)),
 				BigDecimal.valueOf(Double.parseDouble(shipping)));
 
 		System.out.println(shipping);
@@ -113,14 +113,16 @@ public class CartTotalsCalculation {
 
 	}
 
-	public static String calculateNewShippingBasedOnRemaingSumFromVoucher(BigDecimal totalAmount, BigDecimal voucherDiscount, BigDecimal shipping) {
+	public static String calculateNewShippingBasedOnRemaingSumFromRuleDiscount(BigDecimal totalAmount, BigDecimal ruleDiscount, BigDecimal shipping) {
 
 		BigDecimal newShipping = BigDecimal.ZERO;
 
-		if (voucherDiscount.compareTo(totalAmount) > 0) {
-			BigDecimal remainingSum = voucherDiscount.subtract(totalAmount);
+		if (ruleDiscount.compareTo(totalAmount) > 0) {
+			BigDecimal remainingSum = ruleDiscount.subtract(totalAmount);
 			newShipping = shipping.subtract(remainingSum);
 			newShipping = newShipping.compareTo(BigDecimal.ZERO) > 0 ? newShipping : BigDecimal.ZERO;
+		} else {
+			newShipping = shipping;
 		}
 
 		return String.valueOf(newShipping);
