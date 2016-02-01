@@ -214,7 +214,7 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		hostCartValidationWorkflows.performCartValidationsWithVoucherDiscount();
+		hostCartValidationWorkflows.performCartValidationsWithVoucherDiscount(true);
 
 		customVerifications.printErrors();
 

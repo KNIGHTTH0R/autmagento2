@@ -105,7 +105,7 @@ public class HostCartValidationWorkflows {
 
 	@StepGroup
 	@Screenshots(onlyOnFailures = true)
-	public void performCartValidationsWithVoucherDiscount() {
+	public void performCartValidationsWithVoucherDiscount(boolean shouldBeVisible) {
 
 		checkoutValidationSteps.verifySuccessMessage();
 
@@ -119,7 +119,7 @@ public class HostCartValidationWorkflows {
 		hostShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
 		hostCartWorkflows.setVerifyTotalsDiscount(HostDataGrabber.hostGrabbedCartTotals, HostCartCalculator.calculatedTotalsDiscounts);
-		hostCartWorkflows.verifyTotalsDiscountWithVoucher("CART TOTALS");
+		hostCartWorkflows.verifyTotalsDiscountWithVoucher("CART TOTALS", shouldBeVisible);
 
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostShippingTotals, HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");

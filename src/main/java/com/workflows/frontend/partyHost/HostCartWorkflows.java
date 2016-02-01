@@ -98,6 +98,7 @@ public class HostCartWorkflows {
 		verifyJewelryDiscount(discountTotals.getDiscount(ConfigConstants.JEWELRY_BONUS), discountCalculationModel.findSegment(ConfigConstants.JEWELRY_BONUS));
 		verifyBuy3Get1Discount(discountTotals.getDiscount(ConfigConstants.DISCOUNT_BUY_3_GET_1), discountCalculationModel.findSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1));
 	}
+
 	@StepGroup
 	public void verifyTotalsWithBuy3Get1Discount(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
@@ -113,6 +114,7 @@ public class HostCartWorkflows {
 		verifyJewelryDiscount(discountTotals.getDiscount(ConfigConstants.JEWELRY_BONUS), discountCalculationModel.findSegment(ConfigConstants.JEWELRY_BONUS));
 
 	}
+
 	@StepGroup
 	public void verifyCartTotals(String message) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
@@ -120,11 +122,12 @@ public class HostCartWorkflows {
 	}
 
 	@StepGroup
-	public void verifyTotalsDiscountWithVoucher(String message) {
+	public void verifyTotalsDiscountWithVoucher(String message, boolean shouldBeVisible) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		verifyVoucherDiscount(discountTotals.getDiscount(ConfigConstants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(ConfigConstants.VOUCHER_DISCOUNT));
-
+		if (shouldBeVisible) {
+			verifyVoucherDiscount(discountTotals.getDiscount(ConfigConstants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(ConfigConstants.VOUCHER_DISCOUNT));
+		}
 	}
 
 	@Step

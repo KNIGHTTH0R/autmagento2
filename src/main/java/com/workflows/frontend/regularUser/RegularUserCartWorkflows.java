@@ -110,11 +110,12 @@ public class RegularUserCartWorkflows {
 	}
 
 	@StepGroup
-	public void verifyTotalsDiscountWithVoucher(String message) {
+	public void verifyTotalsDiscountWithVoucher(String message, boolean shouldVoucherBeVisible) {
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
-		verifyVoucherDiscount(discountTotals.getDiscount(ConfigConstants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(ConfigConstants.VOUCHER_DISCOUNT));
-
+		if (shouldVoucherBeVisible) {
+			verifyVoucherDiscount(discountTotals.getDiscount(ConfigConstants.VOUCHER_DISCOUNT), discountCalculationModel.findSegment(ConfigConstants.VOUCHER_DISCOUNT));
+		}
 	}
 
 	@Step
