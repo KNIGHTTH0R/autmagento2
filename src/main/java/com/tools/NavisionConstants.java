@@ -1,4 +1,4 @@
-package com.tools.env.constants;
+package com.tools;
 
 public class NavisionConstants {
 

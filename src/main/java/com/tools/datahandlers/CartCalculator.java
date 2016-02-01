@@ -51,7 +51,6 @@ public class CartCalculator {
 		calculatedProductsList50 = new ArrayList<BasicProductModel>();
 		calculatedProductsListMarketing = new ArrayList<BasicProductModel>();
 		allProductsListRecalculated = new ArrayList<BasicProductModel>();
-
 		calculatedTotalsDiscounts = new CalcDetailsModel();
 		shippingCalculatedModel = new ShippingModel();
 
@@ -60,12 +59,7 @@ public class CartCalculator {
 	public static void calculateShippingWith19PercentRemoved(String shippingValue) {
 
 		shippingCalculatedModel = CartCalculation.remove119VAT(calculatedTotalsDiscounts, shippingValue);
-		System.out.println("#####################");
-		PrintUtils.printShippingTotals(shippingCalculatedModel);
-		System.out.println("#####################");
 		shippingProductsList = CartCalculation.remove19(allProductsList);
-		PrintUtils.printListBasicProductModel(shippingProductsList);
-		System.out.println("#####################");
 
 	}
 
@@ -84,13 +78,9 @@ public class CartCalculator {
 		allProductsListRecalculated.addAll(calculatedProductsList25);
 		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
 
-		PrintUtils.printListBasicProductModel(allProductsListRecalculated);
-
 		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass, shippingValue,
 				shippingValue);
-		PrintUtils.printCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
-		PrintUtils.printShippingTotals(shippingCalculatedModel);
 	}
 
 	public static void calculateJMDiscountsWithActiveDiscountVoucher(String ruleDiscount, String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue) {
@@ -118,10 +108,9 @@ public class CartCalculator {
 		PrintUtils.printListBasicProductModel(allProductsListRecalculated);
 
 		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotalsWithDiscountRuleActive(allProductsListRecalculated, ruleDiscount, jewelryDiscount,
-				marketingDiscount, taxClass, shippingValue, shippingValue);
+				marketingDiscount, taxClass, shippingValue);
 		PrintUtils.printCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
-		PrintUtils.printShippingTotals(shippingCalculatedModel);
 	}
 
 	public static void calculateKoboSubscriptionTotals(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue) {

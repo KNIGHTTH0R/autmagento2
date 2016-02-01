@@ -11,6 +11,8 @@ import java.util.Locale;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
+import com.tools.env.constants.DateConstants;
+
 public class DateUtils {
 
 	public static String getLastDayOfTheCurrentMonth(String format) {
@@ -246,6 +248,10 @@ public class DateUtils {
 
 	public static int daysBetween(Date d1, Date d2) {
 		return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+	}
+	
+	public static void main(String args[]) throws ParseException{
+		System.out.println(DateUtils.addHoursToAGivenDate(DateUtils.getThreeMonthsBackMiddle(DateConstants.FORMAT), DateConstants.FORMAT_12_HOURS, 1));
 	}
 
 }

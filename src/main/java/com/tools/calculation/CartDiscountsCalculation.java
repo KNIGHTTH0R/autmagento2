@@ -234,7 +234,6 @@ public class CartDiscountsCalculation {
 		result = result.divide(sampleAskingSum, 5, BigDecimal.ROUND_DOWN);
 		result = askingPrice.subtract(result);
 		result = result.divide(BigDecimal.valueOf(2), 2, BigDecimal.ROUND_HALF_UP);
-		System.out.println("REZ-----------------------------------------------------------------------------------------------------------" + result.setScale(3));
 		return String.valueOf(result.setScale(2));
 	}
 
@@ -269,10 +268,10 @@ public class CartDiscountsCalculation {
 		} else {
 
 			result = result.add(askingPrice);
-			result = result.multiply(BigDecimal.valueOf(100));
+			result = result.multiply(ruleDiscount);
 			result = result.divide(totalAmount, 2, BigDecimal.ROUND_HALF_UP);
 			result = finalPrice.subtract(result);
-
+			result = result.compareTo(BigDecimal.ZERO) > 0 ? result : BigDecimal.ZERO;
 		}
 
 		return String.valueOf(result.setScale(2));

@@ -16,15 +16,17 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
+//		System.setProperty("http.proxyHost", "localhost");
+//		System.setProperty("http.proxyPort", "8080");
+
 		ComissionRestCalls.getStylistInfo("1835");
 
 	}
 
-	// TODO clean the hardcoded values
 	public static String composeAuthenticationSuffix() throws Exception {
 
-		String hash = MD5.getMd5(Credentials.API_KEY + Credentials.API_SECRET + DateUtils.getTimestamp() + "300");
-		String suffix = "?api_sig=" + hash + "&api_key=" + Credentials.API_KEY + "&api_ts=" + DateUtils.getTimestamp() + "&api_ttl=300";
+		String hash = MD5.getMd5(Credentials.API_KEY + Credentials.API_SECRET + DateUtils.getTimestamp() + "30");
+		String suffix = "?api_sig=" + hash + "&api_key=" + Credentials.API_KEY + "&api_ts=" + DateUtils.getTimestamp() + "&api_ttl=30";
 
 		return suffix;
 	}

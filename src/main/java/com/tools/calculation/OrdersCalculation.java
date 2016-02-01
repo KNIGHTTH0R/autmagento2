@@ -36,7 +36,7 @@ public class OrdersCalculation {
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
 		}
-		System.out.println("total: " + String.valueOf(totalMonthIp));
+		System.out.println("total ip take of period: " + String.valueOf(totalMonthIp));
 		return totalMonthIp;
 	}
 

@@ -48,7 +48,6 @@ import com.workflows.frontend.ValidationWorkflows;
 @RunWith(ThucydidesRunner.class)
 public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 
-
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
@@ -69,7 +68,7 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	private String username, password;
