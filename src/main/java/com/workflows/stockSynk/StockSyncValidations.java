@@ -33,7 +33,7 @@ public class StockSyncValidations {
 
 				int intProductNowQuantity = (int) Math.round(Double.parseDouble(productNow.getQuantity()));
 				int intCompareQuantity = (int) Math.round(Double.parseDouble(compare.getQuantity()));
-				
+
 				stockProductsValidations.validateSku(productNow.getSku(), compare.getSku());
 				stockProductsValidations.validateMatchQuantity(String.valueOf(intProductNowQuantity), String.valueOf(intCompareQuantity));
 				stockProductsValidations.validateIsDiscontinued(productNow.getIsDiscontinued(), compare.getIsDiscontinued());
@@ -56,5 +56,5 @@ public class StockSyncValidations {
 		}
 		return result;
 	}
-	
+
 }
