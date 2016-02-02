@@ -5,8 +5,8 @@ import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
-import com.tools.datahandlers.CartCalculator;
-import com.tools.datahandlers.DataGrabber;
+import com.tools.cartcalculations.smf.CartCalculator;
+import com.tools.datahandler.DataGrabber;
 
 public class ValidationWorkflows {
 

@@ -14,9 +14,9 @@ import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
 
 import com.sun.mail.imap.protocol.FLAGS;
-import com.tools.EmailConstants;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.data.email.EmailModel;
+import com.tools.env.constants.EmailConstants;
 
 /**
  * Due to new implementation Gmail Connector needs to be initialized with

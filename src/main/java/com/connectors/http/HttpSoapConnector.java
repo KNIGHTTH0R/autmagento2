@@ -15,14 +15,14 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
-import com.tools.SoapKeys;
 import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
+import com.tools.env.constants.Credentials;
 import com.tools.env.constants.SoapConstants;
-import com.tools.env.variables.Credentials;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.SoapKeys;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 
 public class HttpSoapConnector {

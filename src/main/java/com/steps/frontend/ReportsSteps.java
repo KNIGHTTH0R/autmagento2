@@ -9,7 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 
-import com.tools.env.variables.ContextConstants;
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.PdfUtils;
 

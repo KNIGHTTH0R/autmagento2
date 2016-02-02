@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.stylecoach.StylecoachListBackendSteps;
 import com.tests.BaseTest;
-import com.tools.env.variables.Credentials;
+import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;

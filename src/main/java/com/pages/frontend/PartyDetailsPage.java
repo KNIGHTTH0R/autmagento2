@@ -13,8 +13,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
-import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;

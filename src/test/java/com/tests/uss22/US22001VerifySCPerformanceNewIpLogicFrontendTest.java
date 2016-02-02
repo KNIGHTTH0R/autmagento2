@@ -23,7 +23,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.env.constants.FilePaths;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.commission.StylecoachPerformanceValidationWorkflow;

@@ -13,7 +13,7 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.OrderModel;
 import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.ContextConstants;
+import com.tools.env.constants.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

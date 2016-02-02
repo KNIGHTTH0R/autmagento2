@@ -5,9 +5,9 @@ import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
-import com.tools.datahandlers.DataGrabber;
-import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
+import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.datahandler.DataGrabber;
+import com.tools.datahandler.RegularUserDataGrabber;
 import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.AdyenWorkflows;
 
@@ -39,30 +39,9 @@ public class RegularCartValidationWorkflows {
 	public void performCartValidationsWith40DiscountAndJb() {
 
 		checkoutValidationSteps.verifySuccessMessage();
-		// System.out.println("CartCalculator.productsList50: " +
-		// RegularUserCartCalculator.allProductsList.size());
-		// System.out.println("DataGrabber.cartProductsWith50Discount: " +
-		// RegularUserDataGrabber.grabbedRegularCartProductsList.size());
-		// System.out.println("------------------");
-		// PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
-		// System.out.println("------------------");
-		// PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularCartProductsList);
-		// System.out.println("------------------");
 
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
-
-		// System.out.println("--shipping calculated----------------");
-		// PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
-		// System.out.println("----shipping grabbed--------------");
-		// PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularShippingProductsList);
-		// System.out.println("------------------");
-
-		// System.out.println("--conf calculated----------------");
-		// PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
-		// System.out.println("----conf grabbed--------------");
-		// PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularConfirmationProductsList);
-		// System.out.println("------------------");
 
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularShippingProductsList);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
@@ -146,7 +125,7 @@ public class RegularCartValidationWorkflows {
 
 	@StepGroup
 	@Screenshots(onlyOnFailures = true)
-	public void performCartValidationsWithVoucherApplied(boolean shouldVoucherBeVisible ) {
+	public void performCartValidationsWithVoucherApplied(boolean shouldVoucherBeVisible) {
 
 		checkoutValidationSteps.verifySuccessMessage();
 

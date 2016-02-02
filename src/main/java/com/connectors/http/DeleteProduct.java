@@ -11,8 +11,8 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.DOMException;
 
-import com.tools.SoapKeys;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.SoapKeys;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 
 public class DeleteProduct extends HttpSoapConnector {

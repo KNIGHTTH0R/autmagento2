@@ -7,9 +7,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import com.tools.data.frontend.AddressModel;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.Separators;
-import com.tools.env.variables.ContextConstants;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.utils.FieldGenerators.Mode;
 

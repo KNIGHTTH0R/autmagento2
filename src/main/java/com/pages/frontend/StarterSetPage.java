@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
-import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
+import com.tools.datahandler.StylistRegDataGrabber;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
-import com.tools.env.variables.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 

@@ -21,9 +21,9 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
-import com.tools.SoapKeys;
 import com.tools.data.backend.JewelryHistoryModel;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.SoapKeys;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

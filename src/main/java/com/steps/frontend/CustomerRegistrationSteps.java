@@ -14,7 +14,7 @@ import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.Sty
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DykscSeachModel;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 

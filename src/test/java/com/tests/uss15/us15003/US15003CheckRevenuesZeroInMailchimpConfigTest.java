@@ -22,7 +22,7 @@ import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.newsletter.SubscriberModel;
 import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.Credentials;
+import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;

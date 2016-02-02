@@ -10,8 +10,8 @@ import com.tools.data.frontend.PomProductModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.StarterSetProductModel;
 import com.tools.data.soap.ProductDetailedModel;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
-import com.tools.env.variables.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 

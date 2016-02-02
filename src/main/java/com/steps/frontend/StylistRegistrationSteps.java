@@ -12,7 +12,7 @@ import org.junit.Assert;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.geolocation.CoordinatesModel;
-import com.tools.env.variables.ContextConstants;
+import com.tools.env.constants.ContextConstants;
 import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;

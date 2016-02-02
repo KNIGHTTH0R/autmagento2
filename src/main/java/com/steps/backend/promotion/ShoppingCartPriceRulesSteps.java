@@ -4,8 +4,8 @@ import org.junit.Assert;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.env.variables.Credentials;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.Credentials;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 

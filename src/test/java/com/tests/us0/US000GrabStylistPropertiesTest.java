@@ -20,8 +20,8 @@ import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.StylistDataModel;
-import com.tools.env.variables.Credentials;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.Credentials;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoWriter;
 
 @WithTag(name = "US000", type = "backend")

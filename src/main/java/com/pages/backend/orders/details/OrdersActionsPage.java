@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.ContextConstants;
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class OrdersActionsPage extends AbstractPage {

@@ -19,7 +19,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

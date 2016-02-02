@@ -23,7 +23,7 @@ import com.tools.CustomVerification;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.datahandlers.stylistRegistration.StylistRegDataGrabber;
+import com.tools.datahandler.StylistRegDataGrabber;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.stylecoachRegistration.StylecoachRegistrationCartWorkflows;

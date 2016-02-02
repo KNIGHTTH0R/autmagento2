@@ -19,8 +19,8 @@ import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
-import com.tools.env.variables.Credentials;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.Credentials;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

@@ -22,7 +22,7 @@ import com.tools.data.StylistRegistrationCartCalcDetailsModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.variables.Credentials;
+import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;

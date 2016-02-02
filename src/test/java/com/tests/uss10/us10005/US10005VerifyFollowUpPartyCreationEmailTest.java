@@ -20,12 +20,12 @@ import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.EmailConstants;
-import com.tools.SoapKeys;
 import com.tools.data.UrlModel;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.variables.ContextConstants;
-import com.tools.env.variables.UrlConstants;
+import com.tools.env.constants.ContextConstants;
+import com.tools.env.constants.EmailConstants;
+import com.tools.env.constants.SoapKeys;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
