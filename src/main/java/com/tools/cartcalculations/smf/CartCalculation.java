@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.BasicProductModel;
@@ -652,7 +653,7 @@ public class CartCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getMarketingBonus())));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getJewelryBonus())));
 
-		shippingValue = CartTotalsCalculation
+		shippingValue = GeneralCartCalculations
 				.calculateNewShippingBasedOnRemaingSumFromRuleDiscount(BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getTotalAmount())),
 						BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))),
 						BigDecimal.valueOf(Double.parseDouble(shippingValue)));

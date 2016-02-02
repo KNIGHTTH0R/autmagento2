@@ -163,7 +163,7 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
-		// we use host cart even if it's not a host order because is the same
+		
 		HostBasicProductModel productData;
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");

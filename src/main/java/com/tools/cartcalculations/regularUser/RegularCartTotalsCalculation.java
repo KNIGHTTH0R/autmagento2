@@ -35,11 +35,11 @@ public class RegularCartTotalsCalculation {
 			}
 		}
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
-		
+
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
-		
+
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
 		result.setTax(String.valueOf(tax));
@@ -52,8 +52,8 @@ public class RegularCartTotalsCalculation {
 	}
 
 	public static RegularCartCalcDetailsModel calculateTotalsWithBuy3Get1Active(List<RegularBasicProductModel> productsList,
-			List<RegularBasicProductModel> productsListForBuy3Get1, String taxClass, String voucherValue,String shippingValue) {
-		
+			List<RegularBasicProductModel> productsListForBuy3Get1, String taxClass, String voucherValue, String shippingValue) {
+
 		RegularCartCalcDetailsModel result = new RegularCartCalcDetailsModel();
 
 		BigDecimal subtotal = BigDecimal.ZERO;
@@ -62,7 +62,6 @@ public class RegularCartTotalsCalculation {
 		BigDecimal jewerlyDiscount = BigDecimal.ZERO;
 		BigDecimal forthyDiscount = BigDecimal.ZERO;
 		BigDecimal buy3Get1 = RegularCartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(productsListForBuy3Get1);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% " + buy3Get1);
 		BigDecimal voucherPrice = BigDecimal.valueOf(Double.parseDouble(voucherValue));
 
 		for (RegularBasicProductModel product : productsList) {
@@ -77,11 +76,11 @@ public class RegularCartTotalsCalculation {
 			}
 		}
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
-		
+
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
-		
+
 		result.setSubTotal(String.valueOf(subtotal.setScale(2, RoundingMode.HALF_UP)));
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
 		result.setTax(String.valueOf(tax));
@@ -102,7 +101,9 @@ public class RegularCartTotalsCalculation {
 		result = result.subtract(forthyDiscount);
 		result = result.subtract(buy3Get1);
 		result = result.subtract(voucherPrice);
-		
+
+		result = result.compareTo(BigDecimal.ZERO) > 0 ? result : BigDecimal.ZERO;
+
 		return result.setScale(2, RoundingMode.HALF_UP);
 	}
 

@@ -3,6 +3,7 @@ package com.tools.cartcalculations.smf;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.env.constants.ConfigConstants;
@@ -77,7 +78,7 @@ public class CartTotalsCalculation {
 		totalAmount = calculateTotalAmountWithDiscountRuleActive(subtotal, BigDecimal.valueOf(Double.parseDouble(discountRule)),
 				BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)), BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50, rabatt25, rabattBuy3Get1);
 
-		shipping = calculateNewShippingBasedOnRemaingSumFromRuleDiscount(totalAmount, BigDecimal.valueOf(Double.parseDouble(discountRule)),
+		shipping = GeneralCartCalculations.calculateNewShippingBasedOnRemaingSumFromRuleDiscount(totalAmount, BigDecimal.valueOf(Double.parseDouble(discountRule)),
 				BigDecimal.valueOf(Double.parseDouble(shipping)));
 
 		System.out.println(shipping);
@@ -113,21 +114,6 @@ public class CartTotalsCalculation {
 
 	}
 
-	public static String calculateNewShippingBasedOnRemaingSumFromRuleDiscount(BigDecimal totalAmount, BigDecimal ruleDiscount, BigDecimal shipping) {
-
-		BigDecimal newShipping = BigDecimal.ZERO;
-
-		if (ruleDiscount.compareTo(totalAmount) > 0) {
-			BigDecimal remainingSum = ruleDiscount.subtract(totalAmount);
-			newShipping = shipping.subtract(remainingSum);
-			newShipping = newShipping.compareTo(BigDecimal.ZERO) > 0 ? newShipping : BigDecimal.ZERO;
-		} else {
-			newShipping = shipping;
-		}
-
-		return String.valueOf(newShipping);
-	}
-
 	private static BigDecimal calculate25Discount(List<BasicProductModel> productsList, BigDecimal jewelryDiscount, BigDecimal sum25Section) {
 
 		BigDecimal discountSum = BigDecimal.ZERO;
@@ -155,6 +141,8 @@ public class CartTotalsCalculation {
 		result = result.subtract(sum50Discount);
 		result = result.subtract(buy3Get1);
 
+		result = result.compareTo(BigDecimal.ZERO) > 0 ? result : BigDecimal.ZERO;
+
 		return result;
 	}
 
@@ -170,6 +158,8 @@ public class CartTotalsCalculation {
 		result = result.subtract(sum25Discount);
 		result = result.subtract(sum50Discount);
 		result = result.subtract(buy3Get1);
+		
+		result = result.compareTo(BigDecimal.ZERO) > 0 ? result : BigDecimal.ZERO;
 
 		return result;
 	}

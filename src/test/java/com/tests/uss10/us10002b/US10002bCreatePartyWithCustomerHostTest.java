@@ -86,7 +86,7 @@ public class US10002bCreatePartyWithCustomerHostTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToCreatePartyPage();;
+		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 	}
