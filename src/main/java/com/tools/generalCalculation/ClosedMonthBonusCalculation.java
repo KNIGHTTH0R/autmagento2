@@ -70,8 +70,8 @@ public class ClosedMonthBonusCalculation {
 
 		BigDecimal unsafeIpForOrders = OrdersCalculation.calculateTotalUnsafeIpOnCurrentMonth(allOrdersList, stylistId, endDate);
 
-		result.setIp("ip: " + String.valueOf(totalIp.intValue()));
-		result.setUnsafeIp("unsafe ip: " + String.valueOf(unsafeIpForOrders.intValue()));
+		result.setIp(String.valueOf(totalIp.intValue()));
+		result.setUnsafeIp(String.valueOf(unsafeIpForOrders.intValue()));
 
 		System.out.println(result.getIp());
 		System.out.println(result.getUnsafeIp());
