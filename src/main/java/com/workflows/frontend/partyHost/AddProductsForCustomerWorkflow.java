@@ -34,9 +34,15 @@ public class AddProductsForCustomerWorkflow {
 	public HostBasicProductModel setHostProductToCart(ProductDetailedModel model, String qty, String productProperty) {
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
-		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(),qty);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 
 		return productSteps.setHostBasicProductAddToCart(qty, productProperty, finalPrice, ipPoints);
+	}
+
+	@StepGroup
+	@Title("Add product to cart")
+	public void addProductToCart(ProductDetailedModel model, String qty, String productProperty) {
+		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
 	}
 
 }

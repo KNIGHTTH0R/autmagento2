@@ -137,18 +137,12 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		customerRegistrationSteps.wipeHostCart();
-		HostBasicProductModel productData;
 
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "18");
-		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
-		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "1", "0");
-		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct4, "1", "0");
-		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct5, "1", "0");
-		HostCartCalculator.allProductsList.add(productData);
+		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "18");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct4, "1", "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct5, "1", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
