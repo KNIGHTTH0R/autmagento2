@@ -43,6 +43,7 @@ public class AddProductsForCustomerWorkflow {
 	@Title("Add product to cart")
 	public void addProductToCart(ProductDetailedModel model, String qty, String productProperty) {
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		productSteps.setQuantityAndAddToCart(qty, productProperty);
 	}
 
 }
