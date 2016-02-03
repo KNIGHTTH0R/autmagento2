@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
@@ -29,6 +31,7 @@ import com.tests.BaseTest;
 import com.tools.cartcalculations.smf.CartCalculator;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.env.constants.FilePaths;
@@ -66,6 +69,8 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 
 	private String username, password;
+
+	List<SyncInfoModel> magentoProducts = new ArrayList<SyncInfoModel>();
 
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();

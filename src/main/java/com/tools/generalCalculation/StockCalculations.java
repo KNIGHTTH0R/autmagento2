@@ -1,5 +1,6 @@
 package com.tools.generalCalculation;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,17 @@ public class StockCalculations {
 
 	private static String addPendingStockToStock(SyncInfoModel product) {
 		return String.valueOf(Double.parseDouble(product.getQuantity()) + Double.parseDouble(product.getPendingQuantity()));
+	}
+
+	public static String determineQuantityToBeBoughtForTermPurchase(String currentStock) {
+		BigDecimal stock = BigDecimal.valueOf(Double.parseDouble(currentStock));
+		stock = stock.add(BigDecimal.valueOf(1.00));
+
+		return String.valueOf(stock.intValue());
+	}
+
+	public static void main(String args[]) {
+		System.out.println(StockCalculations.determineQuantityToBeBoughtForTermPurchase("1045.0000"));
 	}
 
 }
