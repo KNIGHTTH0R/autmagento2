@@ -78,7 +78,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
+//	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct5 = new ProductDetailedModel();
 
@@ -92,8 +92,8 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		genProduct1.setSku("R065SV");
 		genProduct2.setName("MARY NECKLACE");
 		genProduct2.setSku("N093SV");
-		genProduct3.setName("PIPPA&JEAN DREAMEES KOLLEKTIONS-UPDATE: BROSCHÜRE (50 STÜCK)");
-		genProduct3.setSku("M164");
+//		genProduct3.setName("PIPPA&JEAN DREAMEES KOLLEKTIONS-UPDATE: BROSCHÜRE (50 STÜCK)");
+//		genProduct3.setSku("M164");
 		genProduct4.setName("BIANCA MIT BALLCHAIN 45 CM");
 		genProduct4.setSku("N052NL");
 		genProduct5.setName("FUNKY SOLITAIRE SET");
@@ -140,7 +140,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "18");
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
+//		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
 		addProductsForCustomerWorkflow.addProductToCart(genProduct4, "1", "0");
 		addProductsForCustomerWorkflow.addProductToCart(genProduct5, "1", "0");
 

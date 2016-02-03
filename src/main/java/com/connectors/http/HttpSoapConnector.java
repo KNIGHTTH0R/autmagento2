@@ -98,7 +98,7 @@ public class HttpSoapConnector {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
-
+//		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 		return soapResponse;
 	}
 

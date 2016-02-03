@@ -57,8 +57,9 @@ public class NavQueries {
 		System.out.println(result.getQuantity());
 		System.out.println(result.getMinumimQuantity());
 
-//		OrderStatusModel result2 = NavQueries.getProductSyncronizedStatus("STAGING-INT00012111");
-//		System.out.println(result2.getSyncDate());
+		// OrderStatusModel result2 =
+		// NavQueries.getProductSyncronizedStatus("STAGING-INT00012111");
+		// System.out.println(result2.getSyncDate());
 
 	}
 
