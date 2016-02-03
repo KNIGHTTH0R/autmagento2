@@ -30,6 +30,11 @@ public class StockProductsValidations extends AbstractSteps {
 		CustomVerification.verifyTrue("Failure: Quantity values doesn't match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
 
+	@Step
+	public void validateMinimumQuantity(String productNow, String compare) {
+		CustomVerification.verifyTrue("Failure: Min quantity values don't match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+	}
+
 	@Title("Verify that order is syncronyzed in NAV")
 	@Step
 	public void validateSyncronizedStatus(boolean status) {

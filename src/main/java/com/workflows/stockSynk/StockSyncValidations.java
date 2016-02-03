@@ -38,6 +38,7 @@ public class StockSyncValidations {
 				stockProductsValidations.validateMatchQuantity(String.valueOf(intProductNowQuantity), String.valueOf(intCompareQuantity));
 				stockProductsValidations.validateIsDiscontinued(productNow.getIsDiscontinued(), compare.getIsDiscontinued());
 				stockProductsValidations.validateEarliestAvailability(productNow.getEarliestAvailability(), compare.getEarliestAvailability());
+				stockProductsValidations.validateMinimumQuantity(productNow.getMinumimQuantity(), compare.getMinumimQuantity());
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
