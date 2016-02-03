@@ -9,7 +9,6 @@ import java.util.Properties;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
@@ -43,9 +42,8 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 
-@WithTags({ @WithTag(name = "US15.4 Validate Zzz Product JB for all order states", type = "Scenarios"),
-		@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
-@Story(Application.Newsletter.US15_4.class)
+@WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
+@Story(Application.StockSync.US23_1.class)
 @RunWith(ThucydidesRunner.class)
 public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 
@@ -77,7 +75,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	private String username, password;
 	private CustomerFormModel customerData;
 	private AddressModel addressData;
-	
+
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
@@ -141,11 +139,15 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;
 
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "18");
 		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "2", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
 		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "4", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "1", "0");
+		HostCartCalculator.allProductsList.add(productData);
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct4, "1", "0");
+		HostCartCalculator.allProductsList.add(productData);
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct5, "1", "0");
 		HostCartCalculator.allProductsList.add(productData);
 
 		headerSteps.openCartPreview();
