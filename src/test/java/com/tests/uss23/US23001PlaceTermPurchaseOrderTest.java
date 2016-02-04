@@ -105,6 +105,8 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 				BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(4).getQuantity()))) > 0 ? changingStockMagentoProducts.get(4).getQuantity()
 				: changingStockMagentoProducts.get(3).getQuantity();
 
+		System.out.println(qtyForBundle);
+
 		genProduct1.setName("LIQUID MOON SMALL");
 		genProduct1.setSku("R065SV");
 		genProduct2.setName("MARY NECKLACE");
@@ -152,6 +154,12 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		customerRegistrationSteps.wipeHostCart();
+		
+		System.out.println(changingStockMagentoProducts.get(0).getQuantity());
+		System.out.println(changingStockMagentoProducts.get(1).getQuantity());
+		System.out.println(changingStockMagentoProducts.get(2).getQuantity());
+		System.out.println(changingStockMagentoProducts.get(3).getQuantity());
+		System.out.println(changingStockMagentoProducts.get(4).getQuantity());
 
 		// we order from each product the available quantity + 1 (term purchase)
 		addProductsForCustomerWorkflow.addProductToCart(genProduct1, StockCalculations.determineQuantity(changingStockMagentoProducts.get(0).getQuantity()), "18");
