@@ -57,7 +57,12 @@ public class StockCalculations {
 		return String.valueOf(Double.parseDouble(product.getQuantity()) + Double.parseDouble(product.getPendingQuantity()));
 	}
 
-	public static String determineQuantityToBeBoughtForTermPurchase(String currentStock) {
+	/**
+	 * Determine Quantity To Be Bought For Term Purchase
+	 * @param currentStock
+	 * @return
+	 */
+	public static String determineQuantity(String currentStock) {
 		BigDecimal stock = BigDecimal.valueOf(Double.parseDouble(currentStock));
 		stock = stock.add(BigDecimal.valueOf(1.00));
 
@@ -65,7 +70,7 @@ public class StockCalculations {
 	}
 
 	public static void main(String args[]) {
-		System.out.println(StockCalculations.determineQuantityToBeBoughtForTermPurchase("1045.0000"));
+		System.out.println(StockCalculations.determineQuantity("1045.0000"));
 	}
 
 }

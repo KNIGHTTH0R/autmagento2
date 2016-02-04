@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,7 +80,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	private String username, password;
 	private CustomerFormModel customerData;
 	private AddressModel addressData;
-	// List<SyncInfoModel> magentoProducts = new ArrayList<SyncInfoModel>();
+	private String qtyForBundle;
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
 
@@ -98,9 +99,11 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 
-		// magentoProducts =
-		// MongoReader.grabStockInfoModel("US23001VerifyStockSyncAfterOrderImportTest"
-		// + SoapKeys.MAGENTO_AFTER_ORDER_IMPORTED_STOCK);
+		// we calculate which one of the bundle children has the less stock and
+		// we use that as quantity ordered
+		qtyForBundle = BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(3).getQuantity())).compareTo(
+				BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(4).getQuantity()))) > 0 ? changingStockMagentoProducts.get(4).getQuantity()
+				: changingStockMagentoProducts.get(3).getQuantity();
 
 		genProduct1.setName("LIQUID MOON SMALL");
 		genProduct1.setSku("R065SV");
@@ -150,14 +153,11 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		customerRegistrationSteps.wipeHostCart();
 
-		addProductsForCustomerWorkflow.addProductToCart(genProduct1,
-				StockCalculations.determineQuantityToBeBoughtForTermPurchase(changingStockMagentoProducts.get(0).getQuantity()), "18");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct2,
-				StockCalculations.determineQuantityToBeBoughtForTermPurchase(changingStockMagentoProducts.get(1).getQuantity()), "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct3,
-				StockCalculations.determineQuantityToBeBoughtForTermPurchase(changingStockMagentoProducts.get(2).getQuantity()), "0");
-		// TODO heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeere
-		addProductsForCustomerWorkflow.addProductToCart(genProduct4, "1", "0");
+		// we order from each product the available quantity + 1 (term purchase)
+		addProductsForCustomerWorkflow.addProductToCart(genProduct1, StockCalculations.determineQuantity(changingStockMagentoProducts.get(0).getQuantity()), "18");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct2, StockCalculations.determineQuantity(changingStockMagentoProducts.get(1).getQuantity()), "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct3, StockCalculations.determineQuantity(changingStockMagentoProducts.get(2).getQuantity()), "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct4, StockCalculations.determineQuantity(qtyForBundle), "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
