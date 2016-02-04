@@ -217,7 +217,7 @@ public class ProductSteps extends AbstractSteps {
 			System.out.println(!size.contentEquals("0"));
 			setDropDownValue(size);
 		}
-
+		setQuantity(qty);
 		addToCart();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
