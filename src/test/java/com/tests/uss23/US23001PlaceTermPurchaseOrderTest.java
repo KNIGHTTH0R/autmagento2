@@ -154,7 +154,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		customerRegistrationSteps.wipeHostCart();
-		
+
 		System.out.println(changingStockMagentoProducts.get(0).getQuantity());
 		System.out.println(changingStockMagentoProducts.get(1).getQuantity());
 		System.out.println(changingStockMagentoProducts.get(2).getQuantity());

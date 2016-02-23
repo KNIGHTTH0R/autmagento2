@@ -49,7 +49,7 @@ public class OrdersCalculation {
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
 		}
-		System.out.println("total: " + String.valueOf(totalMonthIp));
+		System.out.println("total unsafe: " + String.valueOf(totalMonthIp));
 		return totalMonthIp;
 	}
 

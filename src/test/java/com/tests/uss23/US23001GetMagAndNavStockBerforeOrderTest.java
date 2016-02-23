@@ -92,6 +92,5 @@ public class US23001GetMagAndNavStockBerforeOrderTest extends BaseTest {
 		for (SyncInfoModel product : constantStockNavProducts) {
 			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 		}
-
 	}
 }
