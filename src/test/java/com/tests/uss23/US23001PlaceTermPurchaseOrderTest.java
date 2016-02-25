@@ -35,6 +35,7 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -81,6 +82,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	private CustomerFormModel customerData;
 	private AddressModel addressData;
 	private String qtyForBundle;
+	private CreditCardModel creditCardData = new CreditCardModel();
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
 
@@ -176,11 +178,14 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 
 		shippingSteps.goToPaymentMethod();
 
-		if (MongoReader.getContext().contentEquals("de")) {
-			paymentSteps.payWithBankTransfer();
-		} else {
-			paymentSteps.payWithBankTransferEs();
-		}
+//		if (MongoReader.getContext().contentEquals("de")) {
+//			paymentSteps.payWithBankTransfer();
+//		} else {
+//			paymentSteps.payWithBankTransferEs();
+//		}
+		
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.agreeAndCheckout();
 

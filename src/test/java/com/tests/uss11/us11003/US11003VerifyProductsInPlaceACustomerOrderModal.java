@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -81,9 +80,6 @@ public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 				}
 			}
 		}
-
-		MongoConnector.cleanCollection(getClass().getSimpleName());
-		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 
