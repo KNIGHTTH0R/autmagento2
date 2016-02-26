@@ -164,15 +164,15 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		System.out.println(changingStockMagentoProducts.get(4).getQuantity());
 
 		// we order from each product the available quantity + 1 (term purchase)
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct1, StockCalculations.determineQuantity(changingStockMagentoProducts.get(0).getQuantity()), "18");
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct2, StockCalculations.determineQuantity(changingStockMagentoProducts.get(1).getQuantity()), "0");
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct3, StockCalculations.determineQuantity(changingStockMagentoProducts.get(2).getQuantity()), "0");
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct4, StockCalculations.determineQuantity(qtyForBundle), "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct1, StockCalculations.determineQuantity(changingStockMagentoProducts.get(0).getQuantity()), "18");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct2, StockCalculations.determineQuantity(changingStockMagentoProducts.get(1).getQuantity()), "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct3, StockCalculations.determineQuantity(changingStockMagentoProducts.get(2).getQuantity()), "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct4, StockCalculations.determineQuantity(qtyForBundle), "0");
 		
-		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "200", "18");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "200", "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "200", "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct4, "200", "0");
+//		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "200", "18");
+//		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "200", "0");
+//		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "200", "0");
+//		addProductsForCustomerWorkflow.addProductToCart(genProduct4, "200", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -183,12 +183,6 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 
 		shippingSteps.goToPaymentMethod();
 
-//		if (MongoReader.getContext().contentEquals("de")) {
-//			paymentSteps.payWithBankTransfer();
-//		} else {
-//			paymentSteps.payWithBankTransferEs();
-//		}
-		
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
