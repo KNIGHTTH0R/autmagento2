@@ -58,7 +58,7 @@ public class ContactBackendValidationWorkflows {
 
 	@Step
 	public void verifyActivatedAt(String grabbed, String expected) {
-		CustomVerification.verifyTrue("Failure: Date doesn't match Expected: " + expected + " Actual: " + grabbed, grabbed.contentEquals(expected));
+		CustomVerification.verifyTrue("Failure: Date doesn't match Expected: " + expected + " Actual: " + grabbed, grabbed.contains(expected));
 	}
 
 	@Step
