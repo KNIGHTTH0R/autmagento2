@@ -169,10 +169,10 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 //		addProductsForCustomerWorkflow.addProductToCart(genProduct3, StockCalculations.determineQuantity(changingStockMagentoProducts.get(2).getQuantity()), "0");
 //		addProductsForCustomerWorkflow.addProductToCart(genProduct4, StockCalculations.determineQuantity(qtyForBundle), "0");
 		
-		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "200", "18");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "200", "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "200", "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct4, "200", "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "18");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct4, "1", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
