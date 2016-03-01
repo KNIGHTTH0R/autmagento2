@@ -40,7 +40,6 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.HostDataGrabber;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.constants.UrlConstants;
 import com.tools.generalCalculation.StockCalculations;
@@ -174,7 +173,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		addProductsForCustomerWorkflow.addProductToCart(genProduct1, boughtProductsQuantities.get(0), "18");
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, boughtProductsQuantities.get(1), "0");
 		addProductsForCustomerWorkflow.addProductToCart(genProduct3, boughtProductsQuantities.get(2), "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct4, boughtProductsQuantities.get(4), "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct4, boughtProductsQuantities.get(3), "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();

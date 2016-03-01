@@ -46,7 +46,7 @@ public class US23001VerifyMagAndNavStockAfterTPOrderTest extends BaseTest {
 
 		initialChangingMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
 		boughtProductsQuantities = MongoReader.grabStringValue("US23001PlaceTermPurchaseOrderTest");
-		
+
 		initialChangingMagentoProducts = StockCalculations.calculateNewStock(initialChangingMagentoProducts, boughtProductsQuantities);
 
 		for (String id : changingStockIdList) {
