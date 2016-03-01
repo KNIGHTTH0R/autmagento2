@@ -77,8 +77,8 @@ public class US23001VerifyStockSyncAfterTpImportTest extends BaseTest {
 		initialConstantMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
 		initialConstantNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 
-		initialChangingNavProducts = StockCalculations.calculateNewStock(initialChangingNavProducts, "-1", false);
-		initialConstantNavProducts = StockCalculations.calculateNewStock(initialConstantNavProducts, "-1", true);
+		initialChangingNavProducts = StockCalculations.calculateNewStock(initialChangingNavProducts, "1", false);
+		initialConstantNavProducts = StockCalculations.calculateNewStock(initialConstantNavProducts, "1", true);
 
 		for (String id : changingStockIdList) {
 			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));

@@ -86,7 +86,7 @@ public class StockCalculations {
 	}
 
 	private static String calculateStock(String currentStock, String quantityOnOrder) {
-		return String.valueOf(Double.parseDouble(currentStock) + Integer.parseInt(quantityOnOrder));
+		return String.valueOf(Double.parseDouble(currentStock) - Integer.parseInt(quantityOnOrder));
 	}
 
 	private static String addPendingStockToStock(SyncInfoModel product) {

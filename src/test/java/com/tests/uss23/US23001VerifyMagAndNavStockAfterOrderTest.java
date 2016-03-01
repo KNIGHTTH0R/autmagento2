@@ -60,8 +60,8 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 		initialConstantMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
 		initialConstantNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 
-		initialChangingMagentoProducts = StockCalculations.calculateNewStock(initialChangingMagentoProducts, "-1", false);
-		initialConstantMagentoProducts = StockCalculations.calculateNewStock(initialConstantMagentoProducts, "-1", false);
+		initialChangingMagentoProducts = StockCalculations.calculateNewStock(initialChangingMagentoProducts, "1", false);
+		initialConstantMagentoProducts = StockCalculations.calculateNewStock(initialConstantMagentoProducts, "1", false);
 
 		for (String id : changingStockIdList) {
 			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
