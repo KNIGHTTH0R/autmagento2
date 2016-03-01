@@ -29,7 +29,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.StockSync.US23_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US23001GetMagAndNavStockBerforeOrderTest extends BaseTest {
+public class US23001GetMagAndNavStockBerforeTpOrderTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -39,22 +39,14 @@ public class US23001GetMagAndNavStockBerforeOrderTest extends BaseTest {
 	private List<SyncInfoModel> magentoProductsToBeDeacreased = new ArrayList<SyncInfoModel>();
 	private List<SyncInfoModel> navProductsToBeDecreased = new ArrayList<SyncInfoModel>();
 
-	private List<SyncInfoModel> constantStockMagentoProducts = new ArrayList<SyncInfoModel>();
-	private List<SyncInfoModel> constantStockNavProducts = new ArrayList<SyncInfoModel>();
-
 	private static List<String> idListToBeDecreased = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
 	private static List<String> skuListToBeDecreased = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV", "N052NL", "N094SV", "B098BK"));
-
-	private static List<String> constantStockIdList = new ArrayList<String>(Arrays.asList("5037"));
-	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M164"));
 
 	@Before
 	public void setUp() throws Exception {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 	}
 
 	@Test
@@ -67,13 +59,6 @@ public class US23001GetMagAndNavStockBerforeOrderTest extends BaseTest {
 			String[] skuParts = sku.split("-");
 			navProductsToBeDecreased.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
-		for (String id : constantStockIdList) {
-			constantStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
-		}
-		for (String sku : constantStockSkuList) {
-			String[] skuParts = sku.split("-");
-			constantStockNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
-		}
 
 	}
 
@@ -85,12 +70,6 @@ public class US23001GetMagAndNavStockBerforeOrderTest extends BaseTest {
 		}
 		for (SyncInfoModel product : navProductsToBeDecreased) {
 			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
-		}
-		for (SyncInfoModel product : constantStockMagentoProducts) {
-			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
-		}
-		for (SyncInfoModel product : constantStockNavProducts) {
-			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 		}
 	}
 }

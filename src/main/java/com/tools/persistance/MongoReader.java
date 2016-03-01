@@ -964,6 +964,28 @@ public class MongoReader extends MongoConnector {
 
 	}
 
+	public static List<String> grabStringValue(String testName) {
+		DBObject dbObject = null;
+		List<String> quantitiesList = new ArrayList<String>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.STRING_VALUE).find();
+
+		try {
+			while (cursor.hasNext()) {
+
+				dbObject = cursor.next();
+				quantitiesList.add(MongoUtils.checkField(dbObject, MongoTableKeys.STOC_QUANTITY));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return quantitiesList;
+
+	}
+
 	public static String grabIncrementId(String testName) {
 		DBObject dbObject = null;
 		String incrementid = "";

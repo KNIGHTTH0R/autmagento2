@@ -56,6 +56,7 @@ public class NavQueries {
 		SyncInfoModel result = NavQueries.getSyncProductInfo("N093SV", "");
 		System.out.println(result.getQuantity());
 		System.out.println(result.getMinumimQuantity());
+		System.out.println(result.getEarliestAvailability());
 
 		// OrderStatusModel result2 =
 		// NavQueries.getProductSyncronizedStatus("STAGING-INT00012111");

@@ -83,6 +83,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	private AddressModel addressData;
 	private String qtyForBundle;
 	private CreditCardModel creditCardData = new CreditCardModel();
+	private List<String> boughtProductsQuantities = new ArrayList<String>();
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
 
@@ -101,11 +102,15 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 
-		// we calculate which one of the bundle children has the less stock and
-		// we use that as quantity ordered
 		qtyForBundle = BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(3).getQuantity())).compareTo(
 				BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(4).getQuantity()))) > 0 ? changingStockMagentoProducts.get(4).getQuantity()
 				: changingStockMagentoProducts.get(3).getQuantity();
+
+		boughtProductsQuantities.add(StockCalculations.determineQuantity(changingStockMagentoProducts.get(0).getQuantity()));
+		boughtProductsQuantities.add(StockCalculations.determineQuantity(changingStockMagentoProducts.get(1).getQuantity()));
+		boughtProductsQuantities.add(StockCalculations.determineQuantity(changingStockMagentoProducts.get(2).getQuantity()));
+		boughtProductsQuantities.add(StockCalculations.determineQuantity(qtyForBundle));
+		boughtProductsQuantities.add(StockCalculations.determineQuantity(qtyForBundle));
 
 		System.out.println(qtyForBundle);
 
@@ -163,16 +168,10 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		System.out.println(changingStockMagentoProducts.get(3).getQuantity());
 		System.out.println(changingStockMagentoProducts.get(4).getQuantity());
 
-		// we order from each product the available quantity + 1 (term purchase)
-		addProductsForCustomerWorkflow.addProductToCart(genProduct1, StockCalculations.determineQuantity(changingStockMagentoProducts.get(0).getQuantity()), "18");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct2, StockCalculations.determineQuantity(changingStockMagentoProducts.get(1).getQuantity()), "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct3, StockCalculations.determineQuantity(changingStockMagentoProducts.get(2).getQuantity()), "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct4, StockCalculations.determineQuantity(qtyForBundle), "0");
-		
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "200", "18");
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "200", "0");
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "200", "0");
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct4, "200", "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct1, boughtProductsQuantities.get(0), "18");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct2, boughtProductsQuantities.get(1), "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct3, boughtProductsQuantities.get(2), "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct4, boughtProductsQuantities.get(4), "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -193,6 +192,13 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName());
+
+		for (SyncInfoModel product : changingStockMagentoProducts) {
+			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName());
+		}
+		for (String product : boughtProductsQuantities) {
+			MongoWriter.saveStringValue(product, getClass().getSimpleName());
+		}
 	}
 
 }

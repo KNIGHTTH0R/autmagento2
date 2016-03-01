@@ -35,7 +35,7 @@ import com.workflows.stockSynk.StockSyncValidations;
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.StockSync.US23_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
+public class US23001VerifyStockSyncAfterTpImportTest extends BaseTest {
 
 	@Steps
 	StockSyncValidations stockSyncValidations;
@@ -130,6 +130,5 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 		for (SyncInfoModel product : changingStockMagentoProducts) {
 			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.MAGENTO_AFTER_ORDER_IMPORTED_STOCK);
 		}
-		
 	}
 }

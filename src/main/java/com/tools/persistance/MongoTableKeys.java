@@ -61,6 +61,10 @@ public class MongoTableKeys {
 	// Kobo code
 	public static final String KOBO_MODEL = "KoboModel";
 	public static final String KOBO_CODE = "KoboCode";
+	
+	// Kobo code
+	public static final String STRING_VALUE = "StringValue";
+	public static final String STOCK = "stock";
 
 	// increment id
 

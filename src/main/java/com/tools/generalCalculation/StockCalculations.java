@@ -6,6 +6,10 @@ import java.util.List;
 
 import com.tools.data.navision.SyncInfoModel;
 
+/**
+ * @author mihaibarta
+ *
+ */
 public class StockCalculations {
 
 	public static List<SyncInfoModel> calculateNewStock(List<SyncInfoModel> initialList, String quantity, boolean isConstantStock) {
@@ -16,8 +20,40 @@ public class StockCalculations {
 
 			if (isConstantStock)
 				product.setQuantity(product.getQuantity());
-			else
+			else {
 				product.setQuantity(calculateStock(product.getQuantity(), quantity));
+			}
+
+			product.setEarliestAvailability(product.getEarliestAvailability());
+			product.setIsDiscontinued(product.getIsDiscontinued());
+			product.setMaxPercentToBorrow(product.getMaxPercentToBorrow());
+			product.setMinumimQuantity(product.getMinumimQuantity());
+			product.setPendingQuantity(product.getPendingQuantity());
+
+			finalList.add(product);
+
+		}
+		return finalList;
+	}
+
+	/**
+	 * calculates new stock based on a list of quantities bought from each
+	 * product
+	 * 
+	 * @see dsdsds
+	 * @param initialList
+	 * @param quantities
+	 * @return
+	 */
+	public static List<SyncInfoModel> calculateNewStock(List<SyncInfoModel> initialList, List<String> quantities) {
+
+		List<SyncInfoModel> finalList = new ArrayList<SyncInfoModel>();
+
+		for (SyncInfoModel product : initialList) {
+
+			int index = initialList.indexOf(product);
+
+			product.setQuantity(calculateStock(product.getQuantity(), quantities.get(index)));
 
 			product.setEarliestAvailability(product.getEarliestAvailability());
 			product.setIsDiscontinued(product.getIsDiscontinued());
@@ -59,6 +95,7 @@ public class StockCalculations {
 
 	/**
 	 * Determine Quantity To Be Bought For Term Purchase
+	 * 
 	 * @param currentStock
 	 * @return
 	 */
