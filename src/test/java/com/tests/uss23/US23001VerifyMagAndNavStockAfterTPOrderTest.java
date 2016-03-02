@@ -56,7 +56,7 @@ public class US23001VerifyMagAndNavStockAfterTPOrderTest extends BaseTest {
 	}
 
 	@Test
-	public void us23001VerifyMagAndNavStockAfterOrderTest() throws SQLException {
+	public void us23001VerifyMagAndNavStockAfterTPOrderTest() throws SQLException {
 
 		stockSyncValidations.setValidateProductsModels(initialChangingMagentoProducts, changingStockMagentoProducts);
 		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS DECREASED -  CHANGING STOCK MAGENTO PRODUCTS");
