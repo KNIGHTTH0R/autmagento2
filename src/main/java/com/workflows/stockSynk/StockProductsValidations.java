@@ -12,7 +12,7 @@ public class StockProductsValidations extends AbstractSteps {
 
 	@Step
 	public void validateSku(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: SKU doesn't match: " + productNow + " - " + compare, compare.contentEquals(productNow));
+		CustomVerification.verifyTrue("Failure: SKU doesn't match: " + productNow + " - " + compare, compare.contains(productNow));
 	}
 
 	@Step
