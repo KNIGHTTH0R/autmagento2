@@ -11,7 +11,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +25,6 @@ import com.tools.data.navision.SyncInfoModel;
 import com.tools.env.constants.SoapKeys;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.stockSynk.StockProductsValidations;
@@ -51,9 +49,6 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private List<SyncInfoModel> changingStockNavProduct = new ArrayList<SyncInfoModel>();
-
-	private List<SyncInfoModel> constantStockMagentoProducts = new ArrayList<SyncInfoModel>();
-	private List<SyncInfoModel> constantStockNavProducts = new ArrayList<SyncInfoModel>();
 
 	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
 	private static List<String> changingStockSkuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV", "N052NL", "N094SV", "B098BK"));
@@ -84,7 +79,6 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 		}
 
 		changingStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(changingStockMagentoProducts);
-		constantStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(constantStockMagentoProducts);
 
 		if (DateUtils.isDateAfter(DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"), syncDate, "YYYY-MM-dd HH:mm:ss")
 				&& orderStatusModel.getSyncStatus().contentEquals("Yes")) {
@@ -102,9 +96,6 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 
 		stockSyncValidations.setValidateProductsModels(changingStockNavProduct, changingStockMagentoProducts);
 		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CHANGING STOCK PRODUCTS");
-
-		stockSyncValidations.setValidateProductsModels(constantStockNavProducts, constantStockMagentoProducts);
-		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CONSTANT STOCK PRODUCTS");
 
 		customVerifications.printErrors();
 	}

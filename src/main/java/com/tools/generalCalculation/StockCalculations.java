@@ -101,7 +101,7 @@ public class StockCalculations {
 	 */
 	public static String determineQuantity(String currentStock) {
 		BigDecimal stock = BigDecimal.valueOf(Double.parseDouble(currentStock));
-		stock = stock.add(BigDecimal.valueOf(1.00));
+		stock = stock.add(BigDecimal.valueOf(60.00));
 
 		return String.valueOf(stock.intValue());
 	}
