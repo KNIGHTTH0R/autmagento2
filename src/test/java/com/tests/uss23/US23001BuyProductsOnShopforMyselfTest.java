@@ -141,7 +141,6 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
-		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();

@@ -96,6 +96,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US23001PartTwoSuite.class,
 	
 	US26001Suite.class,
+	US23001PartThreeSuite.class,
 	
 })
 @RunWith(Suite.class)

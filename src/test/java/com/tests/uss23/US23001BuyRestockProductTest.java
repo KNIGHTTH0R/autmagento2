@@ -64,13 +64,8 @@ public class US23001BuyRestockProductTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 
 	private CreditCardModel creditCardData = new CreditCardModel();
-
 	private String username, password;
-
-
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
-
-
 	private OrderModel orderModel = new OrderModel();
 
 	@Before
@@ -127,7 +122,6 @@ public class US23001BuyRestockProductTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
-		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();

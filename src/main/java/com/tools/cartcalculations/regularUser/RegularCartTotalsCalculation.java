@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
+import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -35,6 +36,9 @@ public class RegularCartTotalsCalculation {
 			}
 		}
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
+		
+		shippingValue = GeneralCartCalculations.calculateNewShipping(totalAmount, BigDecimal.valueOf(Double.parseDouble(voucherValue)),
+				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
@@ -119,6 +123,11 @@ public class RegularCartTotalsCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_BUY_3_GET_1))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))));
 
+		shippingValue = GeneralCartCalculations
+				.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())),
+						BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))),
+						BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		
 		result.setDiscountPrice(discountCalculation.toString());
 		result.setShippingPrice(shippingValue);
 

@@ -4,7 +4,16 @@ import java.math.BigDecimal;
 
 public class GeneralCartCalculations {
 
-	public static String calculateNewShippingBasedOnRemaingSumFromRuleDiscount(BigDecimal totalAmount, BigDecimal ruleDiscount, BigDecimal shipping) {
+	/**
+	 * Calculates new shipping based on remaining sum if voucher is bigger than
+	 * total amount
+	 * 
+	 * @param totalAmount
+	 * @param ruleDiscount
+	 * @param shipping
+	 * @return
+	 */
+	public static String calculateNewShipping(BigDecimal totalAmount, BigDecimal ruleDiscount, BigDecimal shipping) {
 
 		if (ruleDiscount.compareTo(totalAmount) > 0) {
 

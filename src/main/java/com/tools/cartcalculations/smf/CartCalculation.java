@@ -14,7 +14,6 @@ import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 
 public class CartCalculation {
 
@@ -78,7 +77,7 @@ public class CartCalculation {
 			result.setFinalPrice(finalPriceSum);
 			result.setIpPoints(ipSum);
 
-			PrintUtils.printCalculationModel(result);
+//			PrintUtils.printCalculationModel(result);
 
 		} else {
 			System.out.println("Failure: Product list is empty!!! - see Calculus Steps");
@@ -194,7 +193,6 @@ public class CartCalculation {
 		result = result.divide(sampleAskingSum, 5, BigDecimal.ROUND_DOWN);
 		result = askingPrice.subtract(result);
 		result = result.divide(BigDecimal.valueOf(2), 2, BigDecimal.ROUND_HALF_UP);
-		System.out.println("calculate50Discount Rezult => " + result.setScale(3));
 		return String.valueOf(result.setScale(2));
 	}
 
@@ -290,10 +288,6 @@ public class CartCalculation {
 		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_50);
 		BigDecimal jewelryUsed = calculateUsedJewelryBonus(list25DiscountProducts, jewelryDiscount);
 
-		System.out.println(sum50);
-		System.out.println(jewelryDiscount);
-		System.out.println(jewelryUsed);
-
 		List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
 
 		for (CartProductModel product : productsList) {
@@ -320,9 +314,6 @@ public class CartCalculation {
 	public static List<CartProductModel> calculateProductsfor25Discount(List<CartProductModel> productsList, String jewelryDiscount) {
 
 		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
-
-		System.out.println(sum25);
-		System.out.println(jewelryDiscount);
 
 		List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
 
@@ -595,9 +586,6 @@ public class CartCalculation {
 	public static BigDecimal apply119VAT(BigDecimal value, int precision, int roundMode) {
 		BigDecimal result = BigDecimal.ZERO;
 		if (value.compareTo(BigDecimal.ZERO) > 0) {
-			// result =
-			// value.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), 2,
-			// BigDecimal.ROUND_HALF_EVEN);
 			result = value.divide(BigDecimal.valueOf(Double.parseDouble("1.19")), precision, roundMode);
 		} else {
 			System.out.println("Error: Cannot apply 119 VAT value is not greater than 0. " + value.toString());
@@ -654,7 +642,7 @@ public class CartCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getJewelryBonus())));
 
 		shippingValue = GeneralCartCalculations
-				.calculateNewShippingBasedOnRemaingSumFromRuleDiscount(BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getTotalAmount())),
+				.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getTotalAmount())),
 						BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))),
 						BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 

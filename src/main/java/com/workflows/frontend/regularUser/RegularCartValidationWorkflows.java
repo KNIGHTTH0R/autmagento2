@@ -127,7 +127,7 @@ public class RegularCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWithVoucherApplied(boolean shouldVoucherBeVisible) {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
