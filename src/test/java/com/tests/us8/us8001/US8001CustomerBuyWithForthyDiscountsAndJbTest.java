@@ -201,7 +201,6 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		checkoutValidationSteps.verifySuccessMessage();
 
 		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		regularCartValidationWorkflows.performCartValidationsWith40DiscountAndJb();
