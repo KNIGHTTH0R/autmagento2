@@ -37,7 +37,7 @@ public class NavQueries {
 		String queryString = "select * from SyncInfoAut WHERE SyncInfoAut.[Variant Code] = '" + variantCode + "' AND SyncInfoAut.[Item No_] = '" + sku + "'";
 		ResultSet rs = statement.executeQuery(queryString);
 		while (rs.next()) {
-
+			
 			result.setSku(sku);
 			result.setQuantity(rs.getString("Quantity"));
 			String[] parts = rs.getString("Earliest Av_ Date").split(" ");

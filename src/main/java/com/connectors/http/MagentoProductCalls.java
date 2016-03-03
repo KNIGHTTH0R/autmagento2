@@ -457,6 +457,9 @@ public class MagentoProductCalls {
 			if (childNodes.item(j).getNodeName().equalsIgnoreCase("qty_pending")) {
 				result.setPendingQuantity(childNodes.item(j).getTextContent());
 			}
+			if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_in_stock")) {
+				result.setIsInStock(childNodes.item(j).getTextContent());
+			}
 			if (childNodes.item(j).getNodeName().equalsIgnoreCase("min_qty")) {
 				result.setMinumimQuantity(childNodes.item(j).getTextContent());
 			}

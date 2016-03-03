@@ -42,7 +42,7 @@ import com.workflows.frontend.AddProductsWorkflow;
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.StockSync.US23_1.class)
 @RunWith(ThucydidesRunner.class)
-public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
+public class US23001BuyRestockProductTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -67,11 +67,9 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 
 	private String username, password;
 
+
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
-	private ProductDetailedModel genProduct5 = new ProductDetailedModel();
+
 
 	private OrderModel orderModel = new OrderModel();
 
@@ -80,16 +78,8 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1.setName("LIQUID MOON SMALL");
-		genProduct1.setSku("R065SV");
-		genProduct2.setName("MARY NECKLACE");
-		genProduct2.setSku("N093SV");
-		genProduct3.setName("PIPPA&JEAN DREAMEES KOLLEKTIONS-UPDATE: BROSCHÜRE (50 STÜCK)");
-		genProduct3.setSku("M164");
-		genProduct4.setName("BIANCA MIT BALLCHAIN 45 CM");
-		genProduct4.setSku("N052NL");
-		genProduct5.setName("FUNKY SOLITAIRE SET");
-		genProduct5.setSku("K091MC");
+		genProduct1.setName("SOYXMZKHB");
+		genProduct1.setSku("RESTOCK");
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -117,7 +107,7 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 	}
 
 	@Test
-	public void us23001BuyProductsOnShopforMyselfTest() {
+	public void us23001BuyRestockProductTest() {
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -126,11 +116,7 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
 
-		addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "1", "18");
-		addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "1", "0");
-		addProductsWorkflow.setProductToCart(genProduct3.getSku(), genProduct3.getName(), "1", "0");
-		addProductsWorkflow.setProductToCart(genProduct4.getSku(), genProduct4.getName(), "1", "0");
-		addProductsWorkflow.setProductToCart(genProduct5.getSku(), genProduct5.getName(), "1", "0");
+		addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "1", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();

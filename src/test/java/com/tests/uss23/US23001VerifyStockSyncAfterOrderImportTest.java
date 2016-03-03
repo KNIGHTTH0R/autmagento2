@@ -11,7 +11,6 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.runners.ThucydidesRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +25,6 @@ import com.tools.data.navision.SyncInfoModel;
 import com.tools.env.constants.SoapKeys;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.stockSynk.StockProductsValidations;
@@ -124,12 +122,4 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 		customVerifications.printErrors();
 	}
 
-	@After
-	public void saveData() {
-
-		for (SyncInfoModel product : changingStockMagentoProducts) {
-			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.MAGENTO_AFTER_ORDER_IMPORTED_STOCK);
-		}
-		
-	}
 }

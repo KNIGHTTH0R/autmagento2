@@ -4,6 +4,7 @@ public class SyncInfoModel {
 
 	private String sku;
 	private String quantity;
+	private String isInStock;
 	private String minumimQuantity;
 	private String isDiscontinued;
 	private String totalQuantity;
@@ -73,6 +74,14 @@ public class SyncInfoModel {
 
 	public void setPendingQuantity(String pendingQuantity) {
 		this.pendingQuantity = pendingQuantity;
+	}
+
+	public String getIsInStock() {
+		return isInStock;
+	}
+
+	public void setIsInStock(String isInStock) {
+		this.isInStock = isInStock;
 	}
 
 }
