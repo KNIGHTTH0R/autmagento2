@@ -37,7 +37,7 @@ public class RegularCartTotalsCalculation {
 		}
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
 
-		shippingValue = GeneralCartCalculations.calculateNewShipping(totalAmount, BigDecimal.valueOf(Double.parseDouble(voucherValue)),
+		shippingValue = GeneralCartCalculations.calculateNewShipping(subtotal, BigDecimal.valueOf(Double.parseDouble(voucherValue)),
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		
 		System.out.println(" new shippingValue: " + shippingValue);
@@ -55,7 +55,6 @@ public class RegularCartTotalsCalculation {
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherValue));
 
 		if (voucherPrice.compareTo(subtotal) > 0) {
-			System.out.println("YYYYYYYYYYYYYYES");
 			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(subtotal));
 		}
 
