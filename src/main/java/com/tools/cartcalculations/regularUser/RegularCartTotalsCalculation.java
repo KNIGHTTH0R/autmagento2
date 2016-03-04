@@ -52,9 +52,9 @@ public class RegularCartTotalsCalculation {
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherValue));
 
-		if (voucherPrice.compareTo(subtotal) > 0) {
-			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(subtotal));
-		}
+//		if (voucherPrice.compareTo(subtotal) > 0) {
+//			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(subtotal));
+//		}
 
 		return result;
 	}
@@ -129,6 +129,8 @@ public class RegularCartTotalsCalculation {
 		String newShippingValue = GeneralCartCalculations.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
 				BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))),
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		
+		System.out.println("newShippingValue " + newShippingValue);
 
 		result.setDiscountPrice(discountCalculation.toString());
 		result.setShippingPrice(shippingValue);
