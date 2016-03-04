@@ -95,7 +95,7 @@ public class RegularUserShippingAndConfirmationWorkflows {
 
 	@Step
 	public void verifyShippingPrice(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Shipping Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+		CustomVerification.verifyTrue("Failure: Shipping Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contentEquals(compare));
 	}
 
 	@Step

@@ -36,7 +36,7 @@ public class RegularCartTotalsCalculation {
 			}
 		}
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
-		
+
 		shippingValue = GeneralCartCalculations.calculateNewShipping(totalAmount, BigDecimal.valueOf(Double.parseDouble(voucherValue)),
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 
@@ -51,6 +51,10 @@ public class RegularCartTotalsCalculation {
 		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherValue));
+
+		if (voucherPrice.compareTo(totalAmount) > 0) {
+			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(totalAmount));
+		}
 
 		return result;
 	}
@@ -123,18 +127,17 @@ public class RegularCartTotalsCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_BUY_3_GET_1))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))));
 
-		shippingValue = GeneralCartCalculations
-				.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())),
-						BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))),
-						BigDecimal.valueOf(Double.parseDouble(shippingValue)));
-		
+		String newShippingValue = GeneralCartCalculations.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())),
+				BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))),
+				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+
 		result.setDiscountPrice(discountCalculation.toString());
 		result.setShippingPrice(shippingValue);
 
 		// totals calculation
 		BigDecimal totalAmountCalculation = BigDecimal.ZERO;
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())));
-		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(newShippingValue)));
 		result.setTotalAmount(totalAmountCalculation.toString());
 
 		return result;
