@@ -39,6 +39,8 @@ public class RegularCartTotalsCalculation {
 
 		shippingValue = GeneralCartCalculations.calculateNewShipping(totalAmount, BigDecimal.valueOf(Double.parseDouble(voucherValue)),
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		
+		System.out.println(" new shippingValue: " + shippingValue);
 
 		tax = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		tax = tax.multiply(BigDecimal.valueOf(Double.parseDouble(taxClass)));
