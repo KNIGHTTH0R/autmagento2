@@ -55,6 +55,7 @@ public class RegularCartTotalsCalculation {
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherValue));
 
 		if (voucherPrice.compareTo(subtotal) > 0) {
+			System.out.println("YYYYYYYYYYYYYYES");
 			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(subtotal));
 		}
 

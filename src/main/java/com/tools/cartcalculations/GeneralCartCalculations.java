@@ -19,7 +19,9 @@ public class GeneralCartCalculations {
 
 			BigDecimal remainingSum = ruleDiscount.subtract(totalAmount);
 			shipping = shipping.subtract(remainingSum);
+			System.out.println("BOOM " + shipping);
 			shipping = shipping.compareTo(BigDecimal.ZERO) > 0 ? shipping : BigDecimal.ZERO;
+			System.out.println("BOOM " + shipping);
 		}
 
 		return String.valueOf(shipping);
