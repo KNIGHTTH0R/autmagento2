@@ -39,7 +39,6 @@ public class CartDiscountsCalculation {
 		discountValue = discountValue.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
 
 		result = askPrice.subtract(discountValue);
-		System.out.println(result.setScale(4, BigDecimal.ROUND_HALF_UP));
 
 		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_DOWN));
 	}
@@ -47,8 +46,6 @@ public class CartDiscountsCalculation {
 	public static List<BasicProductModel> calculateProductsforMarketingMaterial(List<BasicProductModel> productsList, String marketingDiscount) {
 
 		BigDecimal sumMarketingMaterial = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_0);
-
-		System.out.println(sumMarketingMaterial);
 
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 
@@ -79,10 +76,6 @@ public class CartDiscountsCalculation {
 		BigDecimal sum50 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_50);
 		BigDecimal jewelryUsed = calculateUsedJewelryBonus(list25DiscountProducts, jewelryDiscount);
 
-		System.out.println(sum50);
-		System.out.println(jewelryDiscount);
-		System.out.println(jewelryUsed);
-
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 
 		for (BasicProductModel product : productsList) {
@@ -109,9 +102,6 @@ public class CartDiscountsCalculation {
 	public static List<BasicProductModel> calculateProductsfor25Discount(List<BasicProductModel> productsList, String jewelryDiscount) {
 
 		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
-
-		System.out.println(sum25);
-		System.out.println(jewelryDiscount);
 
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 

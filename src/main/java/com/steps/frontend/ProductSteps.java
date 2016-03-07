@@ -194,7 +194,6 @@ public class ProductSteps extends AbstractSteps {
 	public HostBasicProductModel setHostBasicProductAddToCart(String qty, String size, String finalPrice, String ipPoints) {
 		HostBasicProductModel result = new HostBasicProductModel();
 		if (!size.contentEquals("0")) {
-			System.out.println(!size.contentEquals("0"));
 			setDropDownValue(size);
 		}
 		setQuantity(qty);
@@ -214,7 +213,6 @@ public class ProductSteps extends AbstractSteps {
 	@Step
 	public void setQuantityAndAddToCart(String qty, String size) {
 		if (!size.contentEquals("0")) {
-			System.out.println(!size.contentEquals("0"));
 			setDropDownValue(size);
 		}
 		setQuantity(qty);

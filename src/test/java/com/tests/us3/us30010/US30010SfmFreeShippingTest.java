@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -34,7 +33,6 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.FilePaths;
-import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -42,8 +40,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3.9 Shop for myself no valid VAT and no SMB billing and shipping DE", type = "Scenarios")
-@Story(Application.ShopForMyselfCart.US3_9.class)
+@WithTag(name = "US3.10 Shop For Myself With Free Shipping ", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_10.class)
 @RunWith(ThucydidesRunner.class)
 public class US30010SfmFreeShippingTest extends BaseTest {
 
@@ -148,7 +146,6 @@ public class US30010SfmFreeShippingTest extends BaseTest {
 
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
-		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
 
