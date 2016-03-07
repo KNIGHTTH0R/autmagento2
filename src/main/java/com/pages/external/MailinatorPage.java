@@ -12,7 +12,10 @@ import com.tools.requirements.AbstractPage;
 
 public class MailinatorPage extends AbstractPage {
 
-	@FindBy(id = "mailcontainer")
+//	@FindBy(id = "mailcontainer")
+//	private WebElement inboxContainer;
+	
+	@FindBy(css = "div.someviewport")
 	private WebElement inboxContainer;
 
 	@FindBy(className = "mailview")
@@ -25,7 +28,7 @@ public class MailinatorPage extends AbstractPage {
 		element(inboxContainer).waitUntilVisible();
 		String returnText = "";
 
-		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("li"));
+		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("div[ng-repeat='email in emails']"));
 
 		for (WebElement itemNow : emailList) {
 			String allText = itemNow.getText();
