@@ -18,8 +18,8 @@ public class OrderForCustomerCartSteps extends AbstractSteps {
 	}
 
 	@Step
-	public HostCartTotalsModel grabTotals() {
-		return orderForCustomerCartPage().grabTotals();
+	public HostCartTotalsModel grabTotals(String voucherLabel) {
+		return orderForCustomerCartPage().grabTotals(voucherLabel);
 	}
 
 	@Step
@@ -32,7 +32,7 @@ public class OrderForCustomerCartSteps extends AbstractSteps {
 		orderForCustomerCartPage().clickUpdateCart();
 		getDriver().navigate().refresh();
 	}
-	
+
 	@Step
 	public void typeCouponCode(String code) {
 		orderForCustomerCartPage().typeCouponCode(code);
@@ -42,6 +42,7 @@ public class OrderForCustomerCartSteps extends AbstractSteps {
 	public void submitVoucherCode() {
 		orderForCustomerCartPage().submitVoucherCode();
 	}
+
 	@Step
 	public void openSearchProductsModal() {
 		orderForCustomerCartPage().openSearchProductsModal();

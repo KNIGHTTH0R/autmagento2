@@ -180,7 +180,7 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 		orderForCustomerCartSteps.submitVoucherCode();
 
 		orderForCustomerCartSteps.grabProductsData();
-		orderForCustomerCartSteps.grabTotals();
+		orderForCustomerCartSteps.grabTotals(voucherCode);
 		HostCartCalculator.calculateOrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
 
 		orderForCustomerCartSteps.clickGoToShipping();

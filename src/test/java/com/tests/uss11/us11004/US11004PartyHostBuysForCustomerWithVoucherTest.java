@@ -180,7 +180,7 @@ public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		orderForCustomerCartSteps.submitVoucherCode();
 
 		orderForCustomerCartSteps.grabProductsData();
-		orderForCustomerCartSteps.grabTotals();
+		orderForCustomerCartSteps.grabTotals(voucherCode);
 		HostCartCalculator.calculateOrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
 
 		orderForCustomerCartSteps.clickGoToShipping();

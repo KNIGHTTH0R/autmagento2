@@ -176,7 +176,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 		headerSteps.goToCart();
 
 		orderForCustomerCartSteps.grabProductsData();
-		orderForCustomerCartSteps.grabTotals();
+		orderForCustomerCartSteps.grabTotals("No Voucher");
 		HostCartCalculator.calculateCartBuy3Get1OrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
 
 		orderForCustomerCartSteps.clickGoToShipping();

@@ -75,7 +75,7 @@ public class OrderForCustomerCartPage extends AbstractPage {
 		return resultList;
 	}
 
-	public HostCartTotalsModel grabTotals() {
+	public HostCartTotalsModel grabTotals(String voucherLabel) {
 		HostCartTotalsModel resultModel = new HostCartTotalsModel();
 		waitABit(TimeConstants.TIME_CONSTANT);
 
@@ -104,7 +104,7 @@ public class OrderForCustomerCartPage extends AbstractPage {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.JEWELRY_BONUS, valueTransformer);
 			}
-			if (key.contains("G025FMDE")) {
+			if (key.contains(voucherLabel)) {
 				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}
