@@ -21,7 +21,9 @@ public class MailinatorPage extends AbstractPage {
 	@FindBy(className = "mailview")
 	private WebElement mailContainer;
 
-	@FindBy(css = "div#mailshowdivbody iframe")
+//	@FindBy(css = "div#mailshowdivbody iframe")
+//	private WebElement iFrameElement;
+	@FindBy(id = "publicshowmaildivcontent")
 	private WebElement iFrameElement;
 
 	public String grabEmail() {
