@@ -124,6 +124,25 @@ public class ValidationWorkflows {
 
 	@StepGroup
 	@Screenshots(onlyOnFailures = true)
+	public void performCartValidationsTotals() {
+
+		// checkoutValidationSteps.verifySuccessMessage();
+
+		cartWorkflows2.setVerifyTotalsDiscount(DataGrabber.cartTotals, CartCalculator.calculatedTotalsDiscounts);
+		cartWorkflows2.verifyTotalsDiscount("CART TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel);
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+	}
+
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWithDiscountRuleActive() {
 
 		checkoutValidationSteps.verifySuccessMessage();
