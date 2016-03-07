@@ -40,9 +40,10 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
+
 	@StepGroup
 	public void fillCreateCustomerFormWithoutPlz(CustomerFormModel customerData, AddressModel addressData) {
-		
+
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
@@ -60,10 +61,10 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	// for distribution and DYSKS
-	
+
 	@Title("Fill create customer form with no member checked checked and select firts SC found by name - host retrieval")
 	@StepGroup
-	public List<DykscSeachModel> fillCreateCustomerFormAnReturnFoundByNameStylecoaches(CustomerFormModel customerData, AddressModel addressData,String firstName,String lastName) {
+	public List<DykscSeachModel> fillCreateCustomerFormAnReturnFoundByNameStylecoaches(CustomerFormModel customerData, AddressModel addressData, String firstName, String lastName) {
 
 		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 
@@ -306,10 +307,11 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
+
 	@StepGroup
 	@Title("Fill create customer form under context with no member flag checked")
 	public void fillCreateCustomerFormNoMemberUnderContext(CustomerFormModel customerData, AddressModel addressData, String context) {
-		
+
 		getDriver().get(MongoReader.getBaseURL() + context);
 		System.out.println(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
@@ -337,6 +339,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		selectCountryName(addressData.getCountryName());
 
 	}
+
 	@StepGroup
 	@Title("Fill contact details")
 	public void fillContactDetailsWithoutPlz(AddressModel addressData) {
@@ -346,7 +349,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputHomeTown(addressData.getHomeTown());
 		waitABit(1000);
 		selectCountryName(addressData.getCountryName());
-		
+
 	}
 
 	@StepGroup
@@ -449,7 +452,8 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			createCustomerPage().selectFirstStylistFromList();
 		}
 	}
-
+	
+	@Title("Search for stylist by geoip but do not select any SC")
 	@Step
 	public void searchStylistByGeoipButDoNotSelectAnyStylecoach(AddressModel addressModel) {
 		createCustomerPage().searchStylistByGeoip();
@@ -459,6 +463,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 	}
 
+	@Title("Search for stylist by geoip and return found SC")
 	@Step
 	public List<DykscSeachModel> searchStylistByGeoipAndReturnFoundStylecoaches(AddressModel addressModel) {
 		createCustomerPage().searchStylistByGeoip();
@@ -472,6 +477,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		return createCustomerPage().getFoundStylecoachesData();
 
 	}
+
 	@Step
 	public List<DykscSeachModel> searchStylistByNameStylecoaches(String firstName, String lastName) {
 		createCustomerPage().searchStylistByName();
@@ -482,9 +488,9 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		if (createCustomerPage().isStylecoachFound()) {
 			createCustomerPage().selectFirstStylistFromList();
 		}
-		
+
 		return createCustomerPage().getFoundStylecoachesData();
-		
+
 	}
 
 	@Step
