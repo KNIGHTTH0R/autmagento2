@@ -29,6 +29,7 @@ public class MailinatorPage extends AbstractPage {
 		String returnText = "";
 
 		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("div[ng-repeat='email in emails']"));
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + emailList.size());
 		System.out.println(emailList.get(0).getText());
 
 		for (WebElement itemNow : emailList) {
