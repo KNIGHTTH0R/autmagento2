@@ -74,27 +74,10 @@ public class RegularCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWith40DiscountAndJbAndBuy3Get1() {
 
-		checkoutValidationSteps.verifySuccessMessage();
-
-		// System.out.println("CartCalculator.productsList50: " +
-		// CartCalculator.productsList50.size());
-		// System.out.println("DataGrabber.cartProductsWith50Discount: " +
-		// DataGrabber.cartProductsWith50Discount.size());
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
-
-		// System.out.println("--shipping calculated----------------");
-		// PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
-		// System.out.println("----shipping grabbed--------------");
-		// PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularShippingProductsList);
-		// System.out.println("------------------");
-
-		// System.out.println("--conf calculated----------------");
-		// PrintUtils.printListRegularBasicProductModel(RegularUserCartCalculator.allProductsList);
-		// System.out.println("----conf grabbed--------------");
-		// PrintUtils.printListRegularCartProductModel(RegularUserDataGrabber.grabbedRegularConfirmationProductsList);
-		// System.out.println("------------------");
 
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularShippingProductsList);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");

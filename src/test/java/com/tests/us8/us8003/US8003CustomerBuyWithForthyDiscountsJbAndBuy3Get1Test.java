@@ -202,7 +202,6 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		checkoutValidationSteps.verifySuccessMessage();
 
 		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		regularCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
