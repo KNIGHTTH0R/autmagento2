@@ -80,7 +80,6 @@ public class US30010SfmFreeShippingTest extends BaseTest {
 
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
 
 	@Before
 	public void setUp() throws Exception {
@@ -88,16 +87,12 @@ public class US30010SfmFreeShippingTest extends BaseTest {
 		DataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("49.90");
+		genProduct1.setPrice("49.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
 		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("229.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -126,8 +121,6 @@ public class US30010SfmFreeShippingTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
 
 	@Test
@@ -143,8 +136,8 @@ public class US30010SfmFreeShippingTest extends BaseTest {
 
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
-		CartCalculator.productsList25.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_50);
+		CartCalculator.productsList50.add(productData);
 		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 
 		headerSteps.openCartPreview();
