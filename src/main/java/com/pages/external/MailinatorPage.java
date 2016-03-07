@@ -90,25 +90,22 @@ public class MailinatorPage extends AbstractPage {
 
 	public String confirmEmail() {
 		getDriver().switchTo().frame(iFrameElement);
-		System.out.println("QQQQQQQQQQQQQQQQQQQ");
-//		element(mailContainer).waitUntilVisible();
 		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
 		System.out.println("Confirm link: " + confirmLink);
 		return confirmLink;
 	}
 	public void clickConfirmEmail() {
 		getDriver().switchTo().frame(iFrameElement);
-		element(mailContainer).waitUntilVisible();
-		mailContainer.findElement(By.cssSelector("a[href*='confirm']")).click();
+		getDriver().findElement(By.cssSelector("a[href*='confirm']")).click();
 		
 	
 	}
 
 	public String registerFromEmail() {
 		getDriver().switchTo().frame(iFrameElement);
-		element(mailContainer).waitUntilVisible();
+//		element(mailContainer).waitUntilVisible();
 //		String confirmLink = mailContainer.findElement(By.cssSelector("a[href*='https://staging-aut.pippajean.com/qateam/customer/account/create/']")).getAttribute("href");
-		String confirmLink = mailContainer.findElement(By.cssSelector("/customer/account/create/']")).getAttribute("href");
+		String confirmLink = getDriver().findElement(By.cssSelector("/customer/account/create/']")).getAttribute("href");
 		System.out.println("Confirm link: " + confirmLink);
 		return confirmLink;
 	}
@@ -119,7 +116,7 @@ public class MailinatorPage extends AbstractPage {
 	public String grabCouponCode() {
 
 		getDriver().switchTo().frame(iFrameElement);
-		String codeSection = mailContainer.findElement(By.cssSelector("table[bgcolor='#FFFFFF'] tbody > tr:nth-child(3)")).getText();
+		String codeSection = getDriver().findElement(By.cssSelector("table[bgcolor='#FFFFFF'] tbody > tr:nth-child(3)")).getText();
 
 		return codeSection;
 	}
