@@ -89,7 +89,7 @@ public class MailinatorPage extends AbstractPage {
 	}
 
 	public String confirmEmail() {
-//		getDriver().switchTo().frame(iFrameElement);
+		getDriver().switchTo().frame(iFrameElement);
 		element(mailContainer).waitUntilVisible();
 		String confirmLink = mailContainer.findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
 		System.out.println("Confirm link: " + confirmLink);
