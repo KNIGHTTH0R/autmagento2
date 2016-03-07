@@ -96,7 +96,7 @@ public class ShippingSteps extends AbstractSteps {
 		selectShippingCountryName(addressModel.getCountryName());
 		inputShippingPhoneNumber(addressModel.getPhoneNumber());
 	}
-	
+
 	@Title("Fill new address for shipping")
 	@Step
 	public void fillNewAddressForShipping(AddressModel addressModel) {

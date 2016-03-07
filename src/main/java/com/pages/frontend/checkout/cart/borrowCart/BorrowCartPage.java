@@ -70,7 +70,6 @@ public class BorrowCartPage extends AbstractPage {
 		}
 
 		BorrowDataGrabber.grabbedBorrowCartProductsList = resultList;
-		PrintUtils.printBorrowedCartList(resultList);
 
 		return resultList;
 	}
@@ -107,7 +106,6 @@ public class BorrowCartPage extends AbstractPage {
 		}
 
 		BorrowDataGrabber.borrowCartGrabbedCartTotals = resultModel;
-		PrintUtils.printBorrowCartTotalsModel(resultModel);
 
 		return resultModel;
 	}
@@ -127,8 +125,6 @@ public class BorrowCartPage extends AbstractPage {
 	 */
 	public void verifyWipeCart() {
 		element(cartMainContainer).waitUntilVisible();
-		System.out.println("TEXT from CONTAINER: " + cartMainContainer.getText());
-
 		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 
 	}

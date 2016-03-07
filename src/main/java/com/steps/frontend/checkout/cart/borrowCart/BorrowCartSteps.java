@@ -25,8 +25,8 @@ public class BorrowCartSteps extends AbstractSteps {
 	@Step
 	public void clickGoToShipping() {
 		borrowCartPage().clickToShipping();
-//		waitABit(TimeConstants.TIME_CONSTANT);
 	}
+
 	@Step
 	public void clickWipeCart() {
 		borrowCartPage().clickWipeCart();
