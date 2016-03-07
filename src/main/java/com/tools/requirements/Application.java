@@ -54,6 +54,7 @@ public class Application {
 
 		public class US3_9 {
 		}
+
 		public class US3_10 {
 		}
 
@@ -78,6 +79,7 @@ public class Application {
 
 		public class US6_4 {
 		}
+
 		public class US6_5 {
 		}
 	}
@@ -121,9 +123,10 @@ public class Application {
 
 		public class US8_4 {
 		}
-		
+
 		public class US8_5 {
 		}
+
 		public class US8_6 {
 		}
 	}
@@ -141,6 +144,9 @@ public class Application {
 	public class BorrowCart {
 		public class US16_1 {
 		}
+
+		public class US16_2 {
+		}
 	}
 
 	@Feature
@@ -156,9 +162,10 @@ public class Application {
 
 		public class US11_4 {
 		}
-		
+
 		public class US11_5 {
 		}
+
 		public class US11_6 {
 		}
 	}
@@ -343,6 +350,7 @@ public class Application {
 		public class US24_1 {
 		}
 	}
+
 	@Feature
 	public class StylecoachContextValidation {
 		public class US27_1 {
