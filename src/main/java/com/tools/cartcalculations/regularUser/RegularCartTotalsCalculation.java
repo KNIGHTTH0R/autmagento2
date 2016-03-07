@@ -50,11 +50,12 @@ public class RegularCartTotalsCalculation {
 		result.addSegment(ConfigConstants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
+		result.addSegment(ConfigConstants.VOUCHER_SHIPPING, String.valueOf(voucherValue));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherValue));
 
-//		if (voucherPrice.compareTo(subtotal) > 0) {
-//			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(subtotal));
-//		}
+		if (voucherPrice.compareTo(subtotal) > 0) {
+			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(subtotal));
+		}
 
 		return result;
 	}
@@ -95,7 +96,12 @@ public class RegularCartTotalsCalculation {
 		result.addSegment(ConfigConstants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
+		result.addSegment(ConfigConstants.VOUCHER_SHIPPING, String.valueOf(voucherValue));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherValue));
+
+		if (voucherPrice.compareTo(subtotal) > 0) {
+			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(subtotal));
+		}
 
 		return result;
 	}
@@ -124,13 +130,11 @@ public class RegularCartTotalsCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.JEWELRY_BONUS))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_40_BONUS))));
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.DISCOUNT_BUY_3_GET_1))));
-		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))));
+		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))));
 
 		String newShippingValue = GeneralCartCalculations.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
-				BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))),
+				BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))),
 				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
-		
-		System.out.println("newShippingValue " + newShippingValue);
 
 		result.setDiscountPrice(discountCalculation.toString());
 		result.setShippingPrice(shippingValue);
