@@ -160,6 +160,8 @@ public class HostCartTotalsCalculation {
 		result = result.subtract(forthyDiscount);
 		result = result.subtract(buy3Get1);
 		result = result.subtract(voucherValue);
+		
+		result = result.compareTo(BigDecimal.ZERO) > 0 ? result : BigDecimal.ZERO;
 
 		return result.setScale(2, RoundingMode.HALF_UP);
 	}
