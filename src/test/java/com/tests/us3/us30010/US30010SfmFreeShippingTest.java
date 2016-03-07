@@ -160,6 +160,7 @@ public class US30010SfmFreeShippingTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
+		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
