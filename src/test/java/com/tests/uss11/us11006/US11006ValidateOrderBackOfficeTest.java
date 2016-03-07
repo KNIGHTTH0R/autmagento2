@@ -1,12 +1,7 @@
-package com.tests.us8.us8006;
+package com.tests.uss11.us11006;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -25,26 +20,26 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.RegularCartCalcDetailsModel;
+import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
-import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.env.constants.Credentials;
 import com.tools.env.constants.SoapKeys;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
-import com.workflows.backend.regularUser.RegularUserOrderProductsWorkflows;
+import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
-@WithTag(name = "US8.6 Customer Buy With Voucher Applied Partially On Shipping Test", type = "Scenarios")
-@Story(Application.RegularCart.US8_6.class)
+@WithTag(name = "US11.6 Party Host Buys For Customer With Voucher Applied partially on Shipping Test, ship to host", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_6.class)
 @RunWith(ThucydidesRunner.class)
-public class US8006ValidateOrderBackOfficeTest extends BaseTest {
+public class US11006ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -53,50 +48,28 @@ public class US8006ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps
 	public OrderValidationSteps orderValidationSteps;
 	@Steps
-	public RegularUserOrderProductsWorkflows regularUserOrderProductsWorkflows;
+	public HostOrderProductsWorkflows hostOrderProductsWorkflows;
 	@Steps
 	public OrderWorkflows orderWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
-	private static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
-	private static List<RegularCartCalcDetailsModel> calcDetailsModelList = new ArrayList<RegularCartCalcDetailsModel>();
+	private static List<HostBasicProductModel> productsList = new ArrayList<HostBasicProductModel>();
+	private static List<HostCartCalcDetailsModel> calcDetailsModelList = new ArrayList<HostCartCalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	private String orderId;
-	private String beUser,bePass;
 
 	@Before
 	public void setUp() {
-		Properties prop = new Properties();
-		InputStream input = null;
 
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8006.properties");
-			prop.load(input);
-			beUser = prop.getProperty("beUser");
-			bePass = prop.getProperty("bePass");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8006CustomerBuyWithVoucherPartiallyOnShippingTest" + SoapKeys.GRAB);
-		productsList = MongoReader.grabRegularBasicProductModel("US8006CustomerBuyWithVoucherPartiallyOnShippingTest" + SoapKeys.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US8006CustomerBuyWithVoucherPartiallyOnShippingTest" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabRegularCartCalcDetailsModels("US8006CustomerBuyWithVoucherPartiallyOnShippingTest" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US11006OrderForCustomerWithVoucherPartiallyOnShippingTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabHostBasicProductModel("US11006OrderForCustomerWithVoucherPartiallyOnShippingTest" + SoapKeys.CALC);
+		shippingModelList = MongoReader.grabShippingModel("US11006OrderForCustomerWithVoucherPartiallyOnShippingTest" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabHostCartCalcDetailsModels("US11006OrderForCustomerWithVoucherPartiallyOnShippingTest" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -112,7 +85,7 @@ public class US8006ValidateOrderBackOfficeTest extends BaseTest {
 		if (shippingModelList.size() != 1) {
 			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
@@ -134,8 +107,8 @@ public class US8006ValidateOrderBackOfficeTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us8006ValidateOrderBackOfficeTest() {
-		backEndSteps.performAdminLogin(beUser, bePass);
+	public void us11006ValidateOrderBackOfficeTest() {
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
@@ -150,12 +123,12 @@ public class US8006ValidateOrderBackOfficeTest extends BaseTest {
 
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateRegularUserCalculationTotals("TOTALS VALIVATION");
+		hostOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
+		hostOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 
-		regularUserOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
-		regularUserOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
-		
-//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
-		
+		// orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(),
+		// "Zahlung geplant");
+
 		customVerifications.printErrors();
 	}
 

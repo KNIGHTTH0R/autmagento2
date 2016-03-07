@@ -45,8 +45,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
-@Story(Application.RegularCart.US8_2.class)
+@WithTag(name = "US8.6 Customer Buy With Voucher Applied Partially On Shipping Test", type = "Scenarios")
+@Story(Application.RegularCart.US8_6.class)
 @RunWith(ThucydidesRunner.class)
 public class US8006CustomerBuyWithVoucherPartiallyOnShippingTest extends BaseTest {
 
