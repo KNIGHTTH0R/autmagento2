@@ -12,17 +12,17 @@ import com.tools.requirements.AbstractPage;
 
 public class MailinatorPage extends AbstractPage {
 
-//	@FindBy(id = "mailcontainer")
-//	private WebElement inboxContainer;
-	
+	// @FindBy(id = "mailcontainer")
+	// private WebElement inboxContainer;
+
 	@FindBy(css = "div.someviewport")
 	private WebElement inboxContainer;
 
 	@FindBy(className = "mailview")
 	private WebElement mailContainer;
 
-//	@FindBy(css = "div#mailshowdivbody iframe")
-//	private WebElement iFrameElement;
+	// @FindBy(css = "div#mailshowdivbody iframe")
+	// private WebElement iFrameElement;
 	@FindBy(id = "publicshowmaildivcontent")
 	private WebElement iFrameElement;
 
@@ -94,24 +94,22 @@ public class MailinatorPage extends AbstractPage {
 		System.out.println("Confirm link: " + confirmLink);
 		return confirmLink;
 	}
+
 	public void clickConfirmEmail() {
 		getDriver().switchTo().frame(iFrameElement);
 		getDriver().findElement(By.cssSelector("a[href*='confirm']")).click();
-		
-	
+
 	}
 
 	public String registerFromEmail() {
 		getDriver().switchTo().frame(iFrameElement);
-//		element(mailContainer).waitUntilVisible();
-//		String confirmLink = mailContainer.findElement(By.cssSelector("a[href*='https://staging-aut.pippajean.com/qateam/customer/account/create/']")).getAttribute("href");
+		// element(mailContainer).waitUntilVisible();
+		// String confirmLink =
+		// mailContainer.findElement(By.cssSelector("a[href*='https://staging-aut.pippajean.com/qateam/customer/account/create/']")).getAttribute("href");
 		String confirmLink = getDriver().findElement(By.cssSelector("/customer/account/create/']")).getAttribute("href");
 		System.out.println("Confirm link: " + confirmLink);
 		return confirmLink;
 	}
-	
-
-
 
 	public String grabCouponCode() {
 
