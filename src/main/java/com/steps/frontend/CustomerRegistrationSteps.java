@@ -122,28 +122,28 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		clickCompleteButton();
 	}
 
-	@Title("Fill create customer form without party and stylecoach checkboxes checked and select firts SC - customer retrieval")
-	@StepGroup
-	public List<DykscSeachModel> fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedAndReturnFoundStylecoaches(CustomerFormModel customerData, AddressModel addressData) {
-
-		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
-
-		getDriver().get(MongoReader.getBaseURL());
-		headerPage().clickAnmeldenButton();
-		loginPage().clickGoToCustomerRegistration();
-		inputFirstName(customerData.getFirstName());
-		inputLastName(customerData.getLastName());
-		inputEmail(customerData.getEmailName());
-		inputPassword(customerData.getPassword());
-		inputConfirmation(customerData.getPassword());
-		inputPostCodeFromPersonalInfo(addressData.getPostCode());
-		selectCountryNameFromPersonalInfo(addressData.getCountryName());
-		result = searchStylistByGeoipAndReturnFoundStylecoaches(addressData);
-		checkIAgree();
-		clickCompleteButton();
-
-		return result;
-	}
+//	@Title("Fill create customer form without party and stylecoach checkboxes checked and select firts SC - customer retrieval")
+//	@StepGroup
+//	public List<DykscSeachModel> fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedAndReturnFoundStylecoaches(CustomerFormModel customerData, AddressModel addressData) {
+//
+//		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
+//
+//		getDriver().get(MongoReader.getBaseURL());
+//		headerPage().clickAnmeldenButton();
+//		loginPage().clickGoToCustomerRegistration();
+//		inputFirstName(customerData.getFirstName());
+//		inputLastName(customerData.getLastName());
+//		inputEmail(customerData.getEmailName());
+//		inputPassword(customerData.getPassword());
+//		inputConfirmation(customerData.getPassword());
+//		inputPostCodeFromPersonalInfo(addressData.getPostCode());
+//		selectCountryNameFromPersonalInfo(addressData.getCountryName());
+//		result = searchStylistByGeoipAndReturnFoundStylecoaches(addressData);
+//		checkIAgree();
+//		clickCompleteButton();
+//
+//		return result;
+//	}
 	
 	@Title("Fill create customer form without party and stylecoach checkboxes checked and select autoserch firts SC - customer retrieval")
 	@StepGroup
@@ -284,7 +284,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputConfirmation(customerData.getPassword());
 		checkParties();
 		fillContactDetails(addressData);
-		result = searchStylistByGeoipAndReturnFoundStylecoaches(addressData);
+		result = returnAutosearchFoundStylecoaches();
 		checkIAgree();
 		clickCompleteButton();
 
