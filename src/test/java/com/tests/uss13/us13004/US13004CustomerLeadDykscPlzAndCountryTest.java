@@ -76,7 +76,7 @@ public class US13004CustomerLeadDykscPlzAndCountryTest extends BaseTest {
 	@Test
 	public void us13004CustomerLeadDykscPlzAndCountryTest() {
 
-		dysksStylecoachesList = customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedAndReturnFoundStylecoaches(dataModel, addressModel);
+		dysksStylecoachesList = customerRegistrationSteps.fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedAndReturnAutosearchFoundStylecoaches(dataModel, addressModel);
 		System.out.println("--grabbed dysks---------");
 		PrintUtils.printListDykscSeachModel(dysksStylecoachesList);
 

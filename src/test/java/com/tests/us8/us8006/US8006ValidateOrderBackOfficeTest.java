@@ -37,7 +37,6 @@ import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.regularUser.RegularUserOrderProductsWorkflows;
 
@@ -143,10 +142,6 @@ public class US8006ValidateOrderBackOfficeTest extends BaseTest {
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderProducts();
 		orderTotalsModel = ordersSteps.grabTotals();
 		orderInfoModel = ordersSteps.grabOrderInfo();
-
-		PrintUtils.printOrderItemsList(orderItemsList);
-		PrintUtils.printOrderTotals(orderTotalsModel);
-		PrintUtils.printOrderInfo(orderInfoModel);
 
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateRegularUserCalculationTotals("TOTALS VALIVATION");

@@ -15,13 +15,13 @@ import com.tools.requirements.Application;
 @WithTag(name = "US16.2 SC borrows with free shipping Test", type = "Scenarios")
 @Story(Application.BorrowCart.US16_2.class)
 @RunWith(ThucydidesRunner.class)
-public class US16002DeactivatefreeShippingRuleTest extends BaseTest {
+public class US16002DeactivateFreeShippingRuleTest extends BaseTest {
 
 	@Steps
 	public ShoppingCartPriceRulesSteps shoppingCartPriceRulesSteps;
 
 	@Test
-	public void us16002DeactivatefreeShippingRuleTest() {
+	public void us16002DeactivateFreeShippingRuleTest() {
 		shoppingCartPriceRulesSteps.deactivateRule("AUT-Free Shipping Rule For All Carts");
 	}
 }

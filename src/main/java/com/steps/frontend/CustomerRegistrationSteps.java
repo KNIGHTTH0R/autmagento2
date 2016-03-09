@@ -144,6 +144,29 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 		return result;
 	}
+	
+	@Title("Fill create customer form without party and stylecoach checkboxes checked and select autoserch firts SC - customer retrieval")
+	@StepGroup
+	public List<DykscSeachModel> fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedAndReturnAutosearchFoundStylecoaches(CustomerFormModel customerData, AddressModel addressData) {
+		
+		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
+		
+		getDriver().get(MongoReader.getBaseURL());
+		headerPage().clickAnmeldenButton();
+		loginPage().clickGoToCustomerRegistration();
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		inputPostCodeFromPersonalInfo(addressData.getPostCode());
+		selectCountryNameFromPersonalInfo(addressData.getCountryName());
+		result = returnAutosearchFoundStylecoaches();
+		checkIAgree();
+		clickCompleteButton();
+		
+		return result;
+	}
 
 	@StepGroup
 	public void fillCreateCustomerFormAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
@@ -452,7 +475,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			createCustomerPage().selectFirstStylistFromList();
 		}
 	}
-	
+
 	@Title("Search for stylist by geoip but do not select any SC")
 	@Step
 	public void searchStylistByGeoipButDoNotSelectAnyStylecoach(AddressModel addressModel) {
@@ -470,6 +493,17 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		createCustomerPage().inputPostcodeFilter(addressModel.getPostCode());
 		createCustomerPage().selectCountryFilter(addressModel.getCountryName());
 		createCustomerPage().searchByGeoipSubmit();
+		if (createCustomerPage().isStylecoachFound()) {
+			createCustomerPage().selectFirstStylistFromList();
+		}
+
+		return createCustomerPage().getFoundStylecoachesData();
+
+	}
+
+	@Title("return autosearch found SC")
+	@Step
+	public List<DykscSeachModel> returnAutosearchFoundStylecoaches() {
 		if (createCustomerPage().isStylecoachFound()) {
 			createCustomerPage().selectFirstStylistFromList();
 		}
