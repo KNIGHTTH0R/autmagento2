@@ -25,7 +25,7 @@ public class BackEndSteps extends AbstractSteps {
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
-//		dismissPopUp();
+		// dismissPopUp();
 	}
 
 	@Step
@@ -46,61 +46,25 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().selectMenuFromNavbar("Kunden", "Kunden verwalten");
 	}
 
-	// @Step
-	// public void clickOnCustomers() {
-	// navigationPage().clickOnCustomers();
-	// navigationPage().clickOnManageCustomers();
-	// }
-
 	@Step
 	public void clickOnProducts() {
 		navigationPage().selectMenuFromNavbar("Katalog", "Produkte verwalten");
 	}
-
-	// @Step
-	// public void clickOnProducts() {
-	// navigationPage().clickOnProducts();
-	// navigationPage().clickOnManageProducts();
-	// }
 
 	@Step
 	public void goToNewsletterSubribers() {
 		navigationPage().selectMenuFromNavbar("Newsletter", "Newsletter Bezieher");
 	}
 
-	// @Step
-	// public void goToNewsletterSubribers() {
-	// navigationPage().goToNewsletter();
-	// navigationPage().goToNewsletterSubribers();
-	// }
-
 	@Step
 	public void clickOnStyleParties() {
 		navigationPage().selectMenuFromNavbar("Stylecoach", "Style Parties");
 	}
 
-	// @Step
-	// public void clickOnStyleParties() {
-	// navigationPage().clickOnStyleCoach();
-	// navigationPage().clickOnStyleParties();
-	// }
-
 	@Step
 	public void clickOnStylecoachList() {
 		navigationPage().selectMenuFromNavbar("Stylecoach", "Stylecoach List");
 	}
-
-	// @Step
-	// public void clickOnStylecoachList() {
-	// navigationPage().clickOnStyleCoach();
-	// navigationPage().clickOnStylecoachList();
-	// }
-
-	// @Step
-	// public void clickOnContactList() {
-	// navigationPage().clickOnStyleCoach();
-	// navigationPage().clickOnContactList();
-	// }
 
 	@Step
 	public void clickOnContactList() {
@@ -112,33 +76,15 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 	}
 
-	// @Step
-	// public void clickOnShoppingCartPriceRules() {
-	// navigationPage().clickOnPromotions();
-	// navigationPage().clickOnShoppingCartPriceRules();
-	// }
-
 	@Step
 	public void clickOnSalesOrders() {
 		navigationPage().selectMenuFromNavbar("Verkäufe", "Aufträge");
 	}
 
-	// @Step
-	// public void clickOnSalesOrders() {
-	// navigationPage().clickOrdersPage();
-	// navigationPage().clickOnSales();
-	// }
-
 	@Step
 	public void clickOnCreditMemo() {
 		navigationPage().selectMenuFromNavbar("Verkäufe", "Gutschriften");
 	}
-
-	// @Step
-	// public void clickOnCreditMemo() {
-	// navigationPage().clickOrdersPage();
-	// navigationPage().clickOnCreditMemo();
-	// }
 
 	@Step
 	public void searchForEmail(String emailText) {
