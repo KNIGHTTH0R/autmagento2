@@ -25,6 +25,7 @@ public class BackEndSteps extends AbstractSteps {
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
+		dismissPopUp();
 	}
 
 	@Step
