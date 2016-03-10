@@ -240,9 +240,8 @@ public class NavigationPage extends AbstractPage {
 	}
 
 	public void selectMenuFromNavbar(String menu, String submenu) {
-
-		element(navigationBar).waitUntilVisible();
 		evaluateJavascript("jQuery.noConflict();");
+		element(navigationBar).waitUntilVisible();
 		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li"));
 
 		for (WebElement menuNow : menuList) {
