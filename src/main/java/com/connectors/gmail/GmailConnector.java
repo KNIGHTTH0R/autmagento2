@@ -147,7 +147,7 @@ public class GmailConnector {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return spamMessage;
+		return message;
 	}
 
 	/**
