@@ -134,20 +134,20 @@ public class GmailConnector {
 
 			Store store = session2.getStore(protocol);
 			store.connect(host, username, password);
-			Folder imboxFolder = store.getFolder("INBOX");
-			imboxFolder.open(Folder.READ_WRITE);
+//			Folder imboxFolder = store.getFolder("INBOX");
+//			imboxFolder.open(Folder.READ_WRITE);
 			Folder spamFolder = store.getFolder("[Gmail]/Spam");
 			spamFolder.open(Folder.READ_WRITE);
 
-			imboxMessage = imboxFolder.getMessages();
+//			imboxMessage = imboxFolder.getMessages();
 			spamMessage = spamFolder.getMessages();
 
-			message = ArrayUtils.addAll(imboxMessage, spamMessage);
+//			message = ArrayUtils.addAll(imboxMessage, spamMessage);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return message;
+		return spamMessage;
 	}
 
 	/**
