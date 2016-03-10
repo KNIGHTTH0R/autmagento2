@@ -13,6 +13,8 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.sun.mail.imap.protocol.FLAGS;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.data.email.EmailModel;
@@ -110,12 +112,12 @@ public class GmailConnector {
 				break;
 			}
 		}
-//		Assert.assertTrue("The searched email was not found", found);
+		// Assert.assertTrue("The searched email was not found", found);
 		return returnMessage;
 	}
 
 	/**
-	 * Connect to email account and return INBOX messages.
+	 * Connect to email account and return INBOX and SPAM messages.
 	 * 
 	 * @return
 	 */
@@ -123,19 +125,25 @@ public class GmailConnector {
 		Properties props2 = System.getProperties();
 		Session session2 = Session.getDefaultInstance(props2, null);
 		props2.setProperty(EmailConstants.EMAIL_STORE, protocol);
+
 		Message message[] = null;
+		Message imboxMessage[] = null;
+		Message spamMessage[] = null;
 
 		try {
 
 			Store store = session2.getStore(protocol);
 			store.connect(host, username, password);
-			Folder folder = store.getFolder("INBOX");
-			
-//			Folder folder = store.getFolder("[Gmail]/Spam");
+			Folder imboxFolder = store.getFolder("INBOX");
+			imboxFolder.open(Folder.READ_WRITE);
+			Folder spamFolder = store.getFolder("[Gmail]/Spam");
+			spamFolder.open(Folder.READ_WRITE);
 
-			folder.open(Folder.READ_WRITE);
-			message = folder.getMessages();
-			
+			imboxMessage = imboxFolder.getMessages();
+			spamMessage = spamFolder.getMessages();
+
+			message = ArrayUtils.addAll(imboxMessage, spamMessage);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
