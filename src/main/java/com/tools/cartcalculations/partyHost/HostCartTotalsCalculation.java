@@ -47,6 +47,7 @@ public class HostCartTotalsCalculation {
 		result.addSegment(ConfigConstants.JEWELRY_BONUS, String.valueOf(jewerlyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_40_BONUS, String.valueOf(forthyDiscount));
 		result.addSegment(ConfigConstants.DISCOUNT_BUY_3_GET_1, String.valueOf(buy3Get1));
+		result.addSegment(ConfigConstants.VOUCHER_SHIPPING, String.valueOf(voucherDiscount));
 		result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(voucherDiscount));
 
 		return result;
