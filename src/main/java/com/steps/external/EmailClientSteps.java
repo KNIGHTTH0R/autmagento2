@@ -44,7 +44,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String grabEmail(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox2.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email;
 		System.out.println("URL : " + url);
 		navigate(url);
 
@@ -67,7 +67,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String grabConfirmationLinkFromEmail(String email, String title) {
 		waitABit(5000);
-		String url = UrlConstants.URL_WEB_MAIL + "inbox2.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email;
 		System.out.println("URL : " + url);
 		navigate(url);
 
@@ -88,7 +88,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String confirmEmail(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox2.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email;
 		System.out.println("URL : " + url);
 		navigate(url);
 
@@ -107,7 +107,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String grabEmailCoupon(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox2.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email;
 
 		System.out.println("URL : " + url);
 		navigate(url);
@@ -126,7 +126,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public void validateThatEmailIsReceived(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox2.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email;
 		System.out.println("URL : " + url);
 		navigate(url);
 
@@ -138,7 +138,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String validateEmailContent(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox2.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email;
 		System.out.println("URL : " + url);
 		navigate(url);
 
@@ -150,7 +150,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String validateThatEmailIsReceivedAndConfirm(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox2.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email;
 		System.out.println("URL : " + url);
 		navigate(url);
 
@@ -173,7 +173,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public String validateThatEmailIsReceivedAndClickRegister(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox2.jsp?to=" + email;
+		String url = UrlConstants.URL_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email;
 		System.out.println("URL : " + url);
 		navigate(url);
 

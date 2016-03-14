@@ -29,14 +29,10 @@ public class MailinatorPage extends AbstractPage {
 	public String grabEmail() {
 		element(inboxContainer).waitUntilVisible();
 		String returnText = "";
-		System.out.println("###########################");
 		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("div[ng-repeat='email in emails']"));
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + emailList.size());
-		System.out.println(emailList.get(0).getText());
 
 		for (WebElement itemNow : emailList) {
 			String allText = itemNow.getText();
-			System.out.println("Row: " + allText);
 			if (allText.contains("Willkommen")) {
 				returnText = allText;
 				break;
@@ -77,7 +73,6 @@ public class MailinatorPage extends AbstractPage {
 
 		for (WebElement itemNow : emailList) {
 			String allText = itemNow.getText();
-			System.out.println("Row: " + allText);
 			if (allText.contains(title)) {
 				itemNow.findElement(By.cssSelector("div.innermail.ng-binding")).click();
 				foundEmail = true;
