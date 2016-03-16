@@ -257,7 +257,7 @@ public class ValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBuy3Get1RuleJbAndMbApplied() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		// validations before JB and MM Discounts - in this phase ,on products
 		// is applied buy3Get1 rule, so we are validating those prices
