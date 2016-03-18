@@ -11,8 +11,8 @@ import com.tests.uss16.us16001.US16001ValidateOrderEmailTest;
 
 @SuiteClasses({
 	US16001StyleCoachBorrowsProductsTest.class,
-	US16001UserProfileOrderIdTest.class,	
-	US16001ValidateOrderEmailTest.class,	
+//	US16001UserProfileOrderIdTest.class,	
+//	US16001ValidateOrderEmailTest.class,	
 	US16001ValidateOrderBackOfficeTest.class,	
 })
 @RunWith(Suite.class)

@@ -5,14 +5,12 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us3.us3009.US3009SfmNoVatNoSmbBillingShippingDeTest;
-import com.tests.us3.us3009.US3009CheckOrderOnStylecoachProfileTest;
 import com.tests.us3.us3009.US3009ValidateOrderBackOfficeTest;
-import com.tests.us3.us3009.US3009ValidateOrderEmailTest;
 
 @SuiteClasses({
 	US3009SfmNoVatNoSmbBillingShippingDeTest.class,
-	US3009CheckOrderOnStylecoachProfileTest.class,
-	US3009ValidateOrderEmailTest.class,
+//	US3009CheckOrderOnStylecoachProfileTest.class,
+//	US3009ValidateOrderEmailTest.class,
 	US3009ValidateOrderBackOfficeTest.class,
 })
 @RunWith(Suite.class)
