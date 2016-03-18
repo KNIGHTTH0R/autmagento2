@@ -50,9 +50,8 @@ import com.tests.uss11.us11005.US11005CreatePartyWithStylistHostTest;
 	US4001Suite.class,
 	US4002Suite.class,
 	
-	US9001Suite.class,
-	US9002Suite.class,
-	US9002bSuite.class,
+	US16001Suite.class,
+	US16002Suite.class,
 	
 	US11001Suite.class,
 	US11002Suite.class,
@@ -61,8 +60,11 @@ import com.tests.uss11.us11005.US11005CreatePartyWithStylistHostTest;
 	US11005Suite.class,
 	US11006Suite.class,
 	
-	US16001Suite.class,
-	US16002Suite.class,
+	US9001Suite.class,
+	US9002Suite.class,
+	US9002bSuite.class,
+	
+
 	
 	
 	
