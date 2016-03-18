@@ -38,7 +38,7 @@ public class BorrowCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performBorrowCartValidations() {
 
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		borrowCartWorkflows.setValidateProductsModels(BorrowCartCalculator.allBorrowedProductsList, BorrowDataGrabber.grabbedBorrowCartProductsList);
 		borrowCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");

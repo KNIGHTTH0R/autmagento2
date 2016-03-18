@@ -107,7 +107,7 @@ public class HostCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWithVoucherDiscount(boolean shouldBeVisible) {
 
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListwithVoucher, HostDataGrabber.grabbedHostCartProductsList);
 		hostCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
@@ -175,7 +175,7 @@ public class HostCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWithBuy3Get1() {
 
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListWithBuy3Get1Applied, HostDataGrabber.grabbedHostCartProductsList);
 		hostCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");

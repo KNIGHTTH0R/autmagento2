@@ -74,7 +74,7 @@ public class RegularCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWith40DiscountAndJbAndBuy3Get1() {
 
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
@@ -110,7 +110,7 @@ public class RegularCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWithVoucherApplied(boolean shouldVoucherBeVisible) {
 
-//		checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
