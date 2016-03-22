@@ -20,6 +20,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US3007Suite.class,
 	US3008Suite.class,
 	US3009Suite.class,
+	US30010Suite.class,
 	
 	US6001Suite.class,
 	US6001bSuite.class,
@@ -47,6 +48,8 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US8002Suite.class,
 	US8003Suite.class,	
 	US8004Suite.class,
+	US8005Suite.class,
+	US8006Suite.class,
 	
 	US4001Suite.class,
 	US4002Suite.class,
@@ -64,6 +67,8 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US11002Suite.class,
 	US11003VerifyProductsInPlaceACustomerOrderModal.class,
 	US11004Suite.class,
+	US11005Suite.class,
+	US11006Suite.class,
 	
 	US12001Suite.class,
 	

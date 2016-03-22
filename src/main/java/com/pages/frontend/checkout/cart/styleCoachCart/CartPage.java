@@ -123,7 +123,6 @@ public class CartPage extends AbstractPage {
 		element(formContainer).waitUntilVisible();
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-50-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
-		System.out.println(resultList.size());
 
 		for (WebElement webElementNow : entryList) {
 			CartProductModel productNow = new CartProductModel();
@@ -153,7 +152,6 @@ public class CartPage extends AbstractPage {
 		element(formContainer).waitUntilVisible();
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-table-marketing-material tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
-		System.out.println(resultList.size());
 
 		for (WebElement webElementNow : entryList) {
 			CartProductModel productNow = new CartProductModel();

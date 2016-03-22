@@ -18,8 +18,6 @@ public class HostCartValidationWorkflows {
 	public HostShippingAndConfirmationWorkflows hostShippingAndConfirmationWorkflows;
 	@Steps
 	public AdyenWorkflows adyenWorkflows;
-	// @Steps
-	// public AddressWorkflows addressWorkflows;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 

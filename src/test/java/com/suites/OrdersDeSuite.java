@@ -36,6 +36,7 @@ import com.tests.uss11.us11005.US11005CreatePartyWithStylistHostTest;
 	US3007Suite.class,
 	US3008Suite.class,
 	US3009Suite.class,
+	US30010Suite.class,
 	
 	US6001Suite.class,
 	US6001bSuite.class,

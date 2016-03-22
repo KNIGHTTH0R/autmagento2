@@ -10,10 +10,6 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 4274219181280984116L;
 
-	/**
-	 * Validate that the message from the succcess screen, on order process is
-	 * displayd.
-	 */
 	@Step
 	public void verifySuccessMessage() {
 		successPage().verifySuccessMessage();
