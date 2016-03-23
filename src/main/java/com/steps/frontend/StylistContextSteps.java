@@ -25,6 +25,7 @@ public class StylistContextSteps extends AbstractSteps {
 	public void addStylistReference(String ref) {
 		inputStylistRef(ref);
 		submitContextStep();
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 }
