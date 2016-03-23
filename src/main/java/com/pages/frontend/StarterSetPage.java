@@ -12,6 +12,7 @@ import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
+import com.tools.utils.PrintUtils;
 
 public class StarterSetPage extends AbstractPage {
 
@@ -111,6 +112,8 @@ public class StarterSetPage extends AbstractPage {
 	}
 
 	public StylistRegistrationCartTotalModel grabCartTotal(boolean isVoucherApplied) {
+		
+		waitABit(TimeConstants.TIME_CONSTANT);
 
 		StylistRegistrationCartTotalModel result = new StylistRegistrationCartTotalModel();
 
@@ -120,7 +123,11 @@ public class StarterSetPage extends AbstractPage {
 			result.setVoucher(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#voucher-value")).getText()));
 		}
 		StylistRegDataGrabber.cartTotals = result;
-
+		
+		System.out.println(result.getTotalPrice());
+		System.out.println(result.getTotalPrice());
+		System.out.println(result.getVoucher());
+		
 		return result;
 
 	}
