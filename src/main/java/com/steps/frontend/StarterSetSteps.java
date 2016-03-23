@@ -72,6 +72,7 @@ public class StarterSetSteps extends AbstractSteps {
 	public void applyVoucher(String code) {
 		starterSetPage().inputVoucherCode(code);
 		starterSetPage().submitVoucherCode();
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
