@@ -20,6 +20,7 @@ public class AddStarterSetProductsWorkflow {
 	public StarterSetProductModel setStarterSetProductToCart() {
 
 		starterSetSteps.selectStarterKit();
+		
 
 		return productSteps.setStarterSetProductAddToCart();
 	}

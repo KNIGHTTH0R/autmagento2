@@ -66,6 +66,7 @@ public class StarterSetSteps extends AbstractSteps {
 	@Step
 	public void selectStarterKit() {
 		starterSetPage().selectStarterKit();
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
