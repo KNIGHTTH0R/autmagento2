@@ -216,7 +216,7 @@
 				<artifactId>jmeter-graph-maven-plugin</artifactId>
 				<version>0.1.0</version>
 				<configuration>
-					<inputFile>${project.build.directory}/jmeter/report/Workshop.jtl</inputFile>
+					<inputFile>${project.build.directory}/jmeter/report/PippaBackend2016.jtl</inputFile>
 					<graphs>
 						<graph>
 							<pluginType>ThreadsStateOverTime</pluginType>
