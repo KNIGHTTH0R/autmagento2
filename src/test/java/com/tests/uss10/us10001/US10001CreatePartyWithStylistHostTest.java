@@ -96,4 +96,5 @@ public class US10001CreatePartyWithStylistHostTest extends BaseTest {
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
+
 }
