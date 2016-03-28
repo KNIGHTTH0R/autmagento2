@@ -57,6 +57,16 @@
             <stringProp name="Argument.value">admin.</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="adminUser" elementType="Argument">
+            <stringProp name="Argument.name">adminUser</stringProp>
+            <stringProp name="Argument.value">oana.axente</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="adminPass" elementType="Argument">
+            <stringProp name="Argument.name">adminPass</stringProp>
+            <stringProp name="Argument.value">cocacola7</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
         </collectionProp>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
@@ -181,14 +191,14 @@
               <elementProp name="login[username]" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
                 <stringProp name="Argument.name">login[username]</stringProp>
-                <stringProp name="Argument.value">dsdsds</stringProp>
+                <stringProp name="Argument.value">${adminUser}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="login[password]" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
                 <stringProp name="Argument.name">login[password]</stringProp>
-                <stringProp name="Argument.value">dsdsd</stringProp>
+                <stringProp name="Argument.value">${adminPass}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
