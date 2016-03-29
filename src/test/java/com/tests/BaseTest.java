@@ -50,6 +50,7 @@ public class BaseTest {
 		MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
 		String contextValue = System.getProperty("runContext");
 		String envValue = System.getProperty("runEnv");
+		System.out.println("run context: " + contextValue);
 		MongoWriter.saveEnvContext(envValue, contextValue);
 
 		String baseUrl = "";
