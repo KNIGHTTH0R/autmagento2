@@ -126,7 +126,7 @@
 					<systemPropertyVariables>
 						<project.build.directory>${project.build.directory}</project.build.directory>
 						<webdriver.remote.url>${host.remote}</webdriver.remote.url>
-						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver.exe</webdriver.chrome.driver>
+						<webdriver.chrome.driver>${basedir}/src/main/resources/chromedriver2016.exe</webdriver.chrome.driver>
 						<webdriver.ie.driver>${basedir}/src/main/resources/IEDriverServer.exe</webdriver.ie.driver>
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
 					</systemPropertyVariables>
