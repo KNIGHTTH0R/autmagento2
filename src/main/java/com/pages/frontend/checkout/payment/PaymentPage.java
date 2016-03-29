@@ -38,7 +38,7 @@ public class PaymentPage extends AbstractPage {
 	}
 
 	public boolean isCreditCardFormExpended() {
-		return element(cardNumberInput).isVisible();
+		return element(cardNumberInput).isCurrentlyVisible();
 	}
 
 	public void expandBankTransferForm() {
