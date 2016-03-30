@@ -28,7 +28,26 @@
 			<id>my-local-repo</id>
 			<url>file://${basedir}/my-repo</url>
 		</repository>
+
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>bintray</name>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>bintray-plugins</name>
+			<url>http://jcenter.bintray.com</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
@@ -62,16 +81,16 @@
 			<artifactId>jersey-client</artifactId>
 			<version>1.8</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>net.thucydides</groupId> -->
-<!-- 			<artifactId>thucydides-core</artifactId> -->
-<!-- 			<version>${thucydides.version}</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>net.thucydides</groupId> -->
+		<!-- <artifactId>thucydides-core</artifactId> -->
+		<!-- <version>${thucydides.version}</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
 			<artifactId>serenity-junit</artifactId>
 			<version>${serenity.version}</version>
-<!-- 			<scope>test</scope> -->
+			<!-- <scope>test</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
