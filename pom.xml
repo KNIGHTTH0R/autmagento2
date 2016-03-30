@@ -11,7 +11,7 @@
 	<name>Pippa Jean Test Automation </name>
 
 	<properties>
-		<serenity.version>1.1.21</serenity.version>
+		<serenity.version>1.1.29-rc.1</serenity.version>
 		<webdriver.driver>firefox</webdriver.driver>
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
 		<webdriver.base.url>http://staging-aut.pippajean.com/customer/account/login/</webdriver.base.url>
@@ -60,11 +60,11 @@
 			<version>1.1</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-firefox-driver</artifactId>
-			<version>2.53.0</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.seleniumhq.selenium</groupId> -->
+<!-- 			<artifactId>selenium-firefox-driver</artifactId> -->
+<!-- 			<version>2.53.0</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
