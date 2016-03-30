@@ -13,11 +13,13 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
+	@Step
 	public void activateRule(String ruleName) {
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().dismissPopUp();
 		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 		shoppingCartPriceRulesPage().typeRuleName(ruleName);
 		shoppingCartPriceRulesPage().clickOnSearch();
@@ -25,7 +27,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 		shoppingCartPriceRulesPage().activateRule();
 		shoppingCartPriceRulesPage().saveRule();
 	}
-
+	@Step
 	public void deactivateRule(String ruleName) {
 		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
@@ -46,6 +48,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().dismissPopUp();
 		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
 		shoppingCartPriceRulesPage().clickOnSearch();
@@ -62,6 +65,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().dismissPopUp();
 		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
 		shoppingCartPriceRulesPage().clickOnSearch();
