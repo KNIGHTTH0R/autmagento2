@@ -11,7 +11,6 @@
 	<name>Pippa Jean Test Automation </name>
 
 	<properties>
-		<!-- <thucydides.version>0.9.268</thucydides.version> -->
 		<serenity.version>1.1.21</serenity.version>
 		<webdriver.driver>firefox</webdriver.driver>
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
@@ -63,16 +62,16 @@
 			<artifactId>jersey-client</artifactId>
 			<version>1.8</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>net.thucydides</groupId> -->
-		<!-- <artifactId>thucydides-core</artifactId> -->
-		<!-- <version>${thucydides.version}</version> -->
-		<!-- </dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>net.thucydides</groupId> -->
+<!-- 			<artifactId>thucydides-core</artifactId> -->
+<!-- 			<version>${thucydides.version}</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
 			<artifactId>serenity-junit</artifactId>
 			<version>${serenity.version}</version>
-			<scope>test</scope>
+<!-- 			<scope>test</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
