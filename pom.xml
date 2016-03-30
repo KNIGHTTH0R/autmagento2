@@ -12,7 +12,7 @@
 
 	<properties>
 		<!-- <thucydides.version>0.9.268</thucydides.version> -->
-		<serenity.version>1.1.26</serenity.version>
+		<serenity.version>1.1.17</serenity.version>
 		<webdriver.driver>firefox</webdriver.driver>
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
 		<webdriver.base.url>http://staging-aut.pippajean.com/customer/account/login/</webdriver.base.url>
