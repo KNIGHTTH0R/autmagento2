@@ -2,7 +2,7 @@ package com.pages.backend.products;
 
 import java.util.List;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

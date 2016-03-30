@@ -1,7 +1,7 @@
 package com.pages.frontend;
 
-import net.thucydides.core.annotations.findby.FindBy;
-import net.thucydides.core.pages.WebElementFacade;
+import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;

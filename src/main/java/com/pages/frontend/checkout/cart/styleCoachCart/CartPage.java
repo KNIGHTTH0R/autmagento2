@@ -3,7 +3,7 @@ package com.pages.frontend.checkout.cart.styleCoachCart;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;

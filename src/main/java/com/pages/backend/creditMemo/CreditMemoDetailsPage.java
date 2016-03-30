@@ -1,6 +1,7 @@
 package com.pages.backend.creditMemo;
 
-import net.thucydides.core.annotations.findby.FindBy;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;

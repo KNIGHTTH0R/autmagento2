@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;

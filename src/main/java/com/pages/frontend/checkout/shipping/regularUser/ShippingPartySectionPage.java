@@ -1,6 +1,6 @@
 package com.pages.frontend.checkout.shipping.regularUser;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.WebElement;
 

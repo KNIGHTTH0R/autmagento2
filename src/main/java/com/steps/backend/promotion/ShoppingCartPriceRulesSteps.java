@@ -31,6 +31,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
+		navigationPage().dismissPopUp();
 		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 		shoppingCartPriceRulesPage().typeRuleName(ruleName);
 		shoppingCartPriceRulesPage().clickOnSearch();

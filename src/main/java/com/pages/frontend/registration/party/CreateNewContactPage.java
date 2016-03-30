@@ -1,6 +1,6 @@
 package com.pages.frontend.registration.party;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;

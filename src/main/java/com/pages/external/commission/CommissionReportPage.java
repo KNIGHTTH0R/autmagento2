@@ -1,6 +1,6 @@
 package com.pages.external.commission;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
