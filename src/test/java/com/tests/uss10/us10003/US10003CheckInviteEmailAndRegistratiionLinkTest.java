@@ -1,9 +1,9 @@
 package com.tests.uss10.us10003;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US10.3 Edit Party and Verify Not Allowed Countries Test", type = "Scenarios")
 @Story(Application.StyleParty.US10_3.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US10003CheckInviteEmailAndRegistratiionLinkTest extends BaseTest {
 
 	@Steps

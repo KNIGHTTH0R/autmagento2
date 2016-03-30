@@ -1,9 +1,9 @@
 package com.tests.us7.us7001;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US7.1 Regular Customer Registration on Master Test ", type = "Scenarios")
 @Story(Application.CustomerRegistration.US7_1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US7001CheckCustomerActivation extends BaseTest {
 
 	@Steps

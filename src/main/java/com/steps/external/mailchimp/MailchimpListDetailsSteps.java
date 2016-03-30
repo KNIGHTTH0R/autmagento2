@@ -1,8 +1,8 @@
 package com.steps.external.mailchimp;
 
-import com.tools.requirements.AbstractSteps;
-
 import net.thucydides.core.annotations.Step;
+
+import com.tools.requirements.AbstractSteps;
 
 public class MailchimpListDetailsSteps extends AbstractSteps {
 

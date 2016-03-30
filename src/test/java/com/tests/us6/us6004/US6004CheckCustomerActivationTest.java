@@ -1,9 +1,9 @@
 package com.tests.us6.us6004;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US6.4 Stylist Registration abandoned before payment", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_4.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US6004CheckCustomerActivationTest extends BaseTest {
 
 	@Steps

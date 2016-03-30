@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -42,7 +42,7 @@ import com.workflows.backend.OrderWorkflows;
 
 @WithTag(name = "US1 Shop for myself",type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US001ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps

@@ -3,10 +3,10 @@ package com.tests.uss11.us11001;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -37,7 +37,7 @@ import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
 @WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test, ship to host", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US11001ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps

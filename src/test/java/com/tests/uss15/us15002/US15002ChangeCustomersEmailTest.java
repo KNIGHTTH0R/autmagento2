@@ -3,10 +3,10 @@ package com.tests.uss15.us15002;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,7 +26,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp ", type = "Scenarios")
 @Story(Application.Newsletter.US15_2.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US15002ChangeCustomersEmailTest extends BaseTest {
 
 	@Steps

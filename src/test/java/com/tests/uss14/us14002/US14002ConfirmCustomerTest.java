@@ -1,9 +1,9 @@
 package com.tests.uss14.us14002;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US14.2 Distribution during checkout to party host lead qualified SC", type = "Scenarios")
 @Story(Application.DistributionDuringCheckout.US14_2.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US14002ConfirmCustomerTest extends BaseTest {
 
 	@Steps

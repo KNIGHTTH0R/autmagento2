@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -29,7 +29,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US7.6 Landing Page Registration Selected SC Test ", type = "Scenarios")
 @Story(Application.CustomerRegistration.US7_6.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US7006LandingPageRegistrationSelectedScTest extends BaseTest {
 
 	@Steps

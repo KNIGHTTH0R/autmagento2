@@ -1,9 +1,9 @@
 package com.tests.uss12.uss12001;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +23,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US12.1 Validate all kobo subscription and upgrade states", type = "Scenarios")
 @Story(Application.KoboSubscription.US12_1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US12001RegularCustomerRegistrationTest extends BaseTest {
 
 	@Steps

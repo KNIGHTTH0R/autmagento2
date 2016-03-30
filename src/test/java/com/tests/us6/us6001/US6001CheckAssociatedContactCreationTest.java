@@ -1,9 +1,9 @@
 package com.tests.us6.us6001;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ import com.workflows.backend.contact.ContactBackendValidationWorkflows;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US6001CheckAssociatedContactCreationTest extends BaseTest {
 
 	@Steps

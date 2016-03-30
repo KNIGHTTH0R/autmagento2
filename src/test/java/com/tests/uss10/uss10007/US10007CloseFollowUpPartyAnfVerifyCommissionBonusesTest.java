@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,7 +38,7 @@ import com.workflows.commission.CommissionPartyPerformanceValidationWorkflows;
 
 @WithTag(name = "US10.7 Check party and follow up party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_7.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US10007CloseFollowUpPartyAnfVerifyCommissionBonusesTest extends BaseTest {
 
 	@Steps

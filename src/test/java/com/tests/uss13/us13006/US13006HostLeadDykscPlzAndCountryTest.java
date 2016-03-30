@@ -3,10 +3,10 @@ package com.tests.uss13.us13006;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,7 +31,7 @@ import com.workflows.frontend.DysksWorkflows;
 
 @WithTag(name = "US13.6 DYKSC Assignation to party host qualified lead SC", type = "Scenarios")
 @Story(Application.Distribution.US13_6.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US13006HostLeadDykscPlzAndCountryTest extends BaseTest {
 
 	@Steps

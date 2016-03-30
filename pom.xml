@@ -11,7 +11,8 @@
 	<name>Pippa Jean Test Automation </name>
 
 	<properties>
-		<thucydides.version>0.9.268</thucydides.version>
+		<!-- <thucydides.version>0.9.268</thucydides.version> -->
+		<serenity.version>1.1.17</serenity.version>
 		<webdriver.driver>firefox</webdriver.driver>
 		<host.remote>http://172.22.0.87:5555/wd/hub</host.remote>
 		<webdriver.base.url>http://staging-aut.pippajean.com/customer/account/login/</webdriver.base.url>
@@ -62,10 +63,21 @@
 			<artifactId>jersey-client</artifactId>
 			<version>1.8</version>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>net.thucydides</groupId> -->
+		<!-- <artifactId>thucydides-core</artifactId> -->
+		<!-- <version>${thucydides.version}</version> -->
+		<!-- </dependency> -->
 		<dependency>
-			<groupId>net.thucydides</groupId>
-			<artifactId>thucydides-core</artifactId>
-			<version>${thucydides.version}</version>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-junit</artifactId>
+			<version>${serenity.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-core</artifactId>
+			<version>${serenity.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -92,11 +104,11 @@
 			<artifactId>jackson-core-asl</artifactId>
 			<version>1.8.5</version>
 		</dependency>
-		<dependency>
-			<groupId>net.thucydides</groupId>
-			<artifactId>thucydides-junit</artifactId>
-			<version>${thucydides.version}</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>net.thucydides</groupId> -->
+		<!-- <artifactId>thucydides-junit</artifactId> -->
+		<!-- <version>${thucydides.version}</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -181,13 +193,27 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- <plugin> -->
+			<!-- <groupId>net.thucydides.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-thucydides-plugin</artifactId> -->
+			<!-- <version>${thucydides.version}</version> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>thucydides-reports</id> -->
+			<!-- <phase>post-integration-test</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>aggregate</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 			<plugin>
-				<groupId>net.thucydides.maven.plugins</groupId>
-				<artifactId>maven-thucydides-plugin</artifactId>
-				<version>${thucydides.version}</version>
+				<groupId>net.serenity-bdd.maven.plugins</groupId>
+				<artifactId>serenity-maven-plugin</artifactId>
+				<version>${serenity.version}</version>
 				<executions>
 					<execution>
-						<id>thucydides-reports</id>
+						<id>serenity-reports</id>
 						<phase>post-integration-test</phase>
 						<goals>
 							<goal>aggregate</goal>

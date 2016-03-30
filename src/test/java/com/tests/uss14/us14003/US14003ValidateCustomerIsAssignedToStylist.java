@@ -3,10 +3,10 @@ package com.tests.uss14.us14003;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,7 +25,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US14.3 Distribution during checkout to customer lead qualified SC", type = "Scenarios")
 @Story(Application.DistributionDuringCheckout.US14_3.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US14003ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 	@Steps

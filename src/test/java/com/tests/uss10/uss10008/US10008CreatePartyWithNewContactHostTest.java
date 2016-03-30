@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +34,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_8.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US10008CreatePartyWithNewContactHostTest extends BaseTest {
 
 	@Steps

@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -54,7 +54,7 @@ import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 @WithTags({ @WithTag(name = "US15.4 Validate Zzz Product JB for all order states", type = "Scenarios"),
 	@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
 @Story(Application.Newsletter.US15_4.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 
 	@Steps

@@ -1,8 +1,8 @@
 package com.tests.us0;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +21,7 @@ import com.tools.persistance.MongoWriter;
 
 @WithTag(name = "US000", type = "external")
 //@Story(Application.Stylist.CreateColaborator.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US000CheckCustomerActivationTest extends BaseTest {
 
 	@Steps

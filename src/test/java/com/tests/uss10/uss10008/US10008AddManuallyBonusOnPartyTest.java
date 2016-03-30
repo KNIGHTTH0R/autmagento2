@@ -1,9 +1,9 @@
 package com.tests.uss10.uss10008;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ import com.tools.utils.PrintUtils;
 
 @WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_8.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US10008AddManuallyBonusOnPartyTest extends BaseTest {
 
 	@Steps

@@ -1,9 +1,9 @@
 package com.tests.us3.us30010;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US3.10 Shop For Myself With Free Shipping ", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_10.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US30010DeactivatefreeShippingRuleTest extends BaseTest {
 
 	@Steps

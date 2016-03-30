@@ -1,11 +1,11 @@
 package com.tests.uss24;
 
+import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.Qualifier;
 import net.thucydides.junit.annotations.UseTestDataFrom;
-import net.thucydides.junit.runners.ThucydidesParameterizedRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US24.1 Check plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
-@RunWith(ThucydidesParameterizedRunner.class)
+@RunWith(SerenityParameterizedRunner.class)
 @UseTestDataFrom(value = "resources/validPlzTestData.csv")
 public class US24001RegularCustRegPlzRegistrationTest extends BaseTest {
 

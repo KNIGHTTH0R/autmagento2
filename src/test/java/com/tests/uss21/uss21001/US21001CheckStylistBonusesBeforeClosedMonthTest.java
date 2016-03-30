@@ -7,10 +7,10 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +34,7 @@ import com.tools.utils.DateUtils;
 
 @WithTag(name = "US21.1 Verify Closed Month Frontend and Backend Performance", type = "Scenarios")
 @Story(Application.CloseMonthRewardPoints.US21_1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US21001CheckStylistBonusesBeforeClosedMonthTest extends BaseTest {
 
 	@Steps

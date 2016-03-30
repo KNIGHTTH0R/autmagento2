@@ -1,8 +1,8 @@
 package com.pages.backend.customer.details;
 
-import org.openqa.selenium.WebElement;
-
 import net.thucydides.core.annotations.findby.FindBy;
+
+import org.openqa.selenium.WebElement;
 
 import com.tools.data.StylistDataModel;
 import com.tools.requirements.AbstractPage;

@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +36,7 @@ import com.workflows.commission.StylecoachPerformanceValidationWorkflow;
 
 @WithTag(name = "US22.1 Verify SC Performance based on new IP logic on backend and frontend", type = "Scenarios")
 @Story(Application.NewIpLogicStylecoachPerformance.US22_1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US22001VerifySCPerformanceNewIpLogicBackendTest extends BaseTest {
 
 	@Steps

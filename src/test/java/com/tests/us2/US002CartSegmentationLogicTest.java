@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,7 +45,7 @@ import com.workflows.frontend.ValidationWorkflows;
 
 @WithTag(name = "US2 Shop for myself cart with segmentation logic",type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US2.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US002CartSegmentationLogicTest extends BaseTest {
 
 	@Steps

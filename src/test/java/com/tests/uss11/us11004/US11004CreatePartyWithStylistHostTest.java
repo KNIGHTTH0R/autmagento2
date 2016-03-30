@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +32,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US11.4 Party Host Buys For Customer With Voucher Test, ship to stylecoach", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_4.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US11004CreatePartyWithStylistHostTest extends BaseTest {
 
 	@Steps

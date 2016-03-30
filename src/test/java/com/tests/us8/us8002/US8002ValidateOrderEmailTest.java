@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_2.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US8002ValidateOrderEmailTest extends BaseTest{
 	
 	@Steps

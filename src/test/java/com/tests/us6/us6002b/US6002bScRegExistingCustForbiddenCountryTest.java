@@ -1,9 +1,9 @@
 package com.tests.us6.us6002b;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -35,7 +35,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US6.2b SC Registration Existing Customer Forbidden Country Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_2.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	
 	@Steps

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +26,7 @@ import com.workflows.stockSynk.StockSyncValidations;
 
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.StockSync.US23_1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US23001VerifyMagAndNavStockAfterTPOrderTest extends BaseTest {
 
 	@Steps

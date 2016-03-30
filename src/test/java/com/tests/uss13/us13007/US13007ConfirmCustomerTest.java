@@ -1,9 +1,9 @@
 package com.tests.uss13.us13007;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US13.7 DYKSC By Name Assignation", type = "Scenarios")
 @Story(Application.Distribution.US13_7.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US13007ConfirmCustomerTest extends BaseTest {
 
 	@Steps

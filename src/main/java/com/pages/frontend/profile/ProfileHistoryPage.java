@@ -3,10 +3,10 @@ package com.pages.frontend.profile;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.thucydides.core.annotations.findby.FindBy;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import net.thucydides.core.annotations.findby.FindBy;
 
 import com.tools.data.backend.OrderModel;
 import com.tools.requirements.AbstractPage;

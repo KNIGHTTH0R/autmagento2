@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,7 +38,7 @@ import com.workflows.frontend.DysksWorkflows;
 
 @WithTag(name = "US13.7 DYKSC By Name Assignation", type = "Scenarios")
 @Story(Application.Distribution.US13_7.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US13007DykscSearchByNameTest extends BaseTest {
 
 	@Steps

@@ -1,9 +1,9 @@
 package com.tests.uss19.us19001;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -24,7 +24,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US19", type = "frontend")
 @Story(Application.KoboCampaign.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US19001UnregisteredConnectWithMeOnMasterSearchByPlzTest extends BaseTest {
 
 	@Steps

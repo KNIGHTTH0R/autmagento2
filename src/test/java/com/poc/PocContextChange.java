@@ -1,9 +1,9 @@
 package com.poc;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ import com.workflows.frontend.ValidationWorkflows;
 
 @WithTag(name = "US3", type = "frontend")
 @Story(Application.Shop.ForMyselfCart.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class PocContextChange extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;

@@ -7,10 +7,10 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +31,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US16.1 SC borrow products Test", type = "Scenarios")
 @Story(Application.BorrowCart.US16_1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US16001UserProfileOrderIdTest extends BaseTest{
 	
 	@Steps

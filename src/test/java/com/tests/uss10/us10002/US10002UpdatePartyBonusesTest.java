@@ -1,9 +1,9 @@
 package com.tests.uss10.us10002;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US9.2 Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
 @Story(Application.HostCart.US9_2.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US10002UpdatePartyBonusesTest extends BaseTest {
 
 	@Steps

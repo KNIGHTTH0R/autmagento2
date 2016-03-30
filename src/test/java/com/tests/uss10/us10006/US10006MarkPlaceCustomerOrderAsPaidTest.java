@@ -1,9 +1,9 @@
 package com.tests.uss10.us10006;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
 @Story(Application.StyleParty.US10_6.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US10006MarkPlaceCustomerOrderAsPaidTest extends BaseTest {
 
 	@Steps

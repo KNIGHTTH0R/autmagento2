@@ -3,10 +3,10 @@ package com.tests.uss13.us13004;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US13.4 DYKSC Assignation to customer lead SC", type = "Scenarios")
 @Story(Application.Distribution.US13_4.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US13004ValidateStylistPropertiesTest extends BaseTest {
 
 	@Steps

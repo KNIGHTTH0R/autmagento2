@@ -1,9 +1,9 @@
 package com.tests.uss14.us14003;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
 @WithTag(name = "US14.3 Distribution during checkout to customer lead qualified SC", type = "Scenarios")
 @Story(Application.DistributionDuringCheckout.US14_3.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US14003CustomerDistributionDurringCheckoutTest extends BaseTest {
 
 	@Steps

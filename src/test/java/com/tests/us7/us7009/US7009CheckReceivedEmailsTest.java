@@ -1,9 +1,9 @@
 package com.tests.us7.us7009;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US7.9 Kobo Registration Not On Voucher Owner Context Test ", type = "Scenarios")
 @Story(Application.KoboRegistration.US7_9.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US7009CheckReceivedEmailsTest extends BaseTest {
 
 	@Steps

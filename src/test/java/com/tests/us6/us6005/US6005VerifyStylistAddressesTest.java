@@ -3,10 +3,10 @@ package com.tests.us6.us6005;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ import com.tools.utils.RandomAddress;
 
 @WithTag(name = "US6.5 Stylist registration with redirects From Step 5 back to Step 1 and Step 3 ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_5.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US6005VerifyStylistAddressesTest extends BaseTest {
 
 	@Steps

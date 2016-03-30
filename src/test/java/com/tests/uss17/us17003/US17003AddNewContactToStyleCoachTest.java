@@ -1,9 +1,9 @@
 package com.tests.uss17.us17003;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,7 +27,7 @@ import com.tools.utils.DateUtils;
 
 @WithTag(name = "US17.3 Check reassigned contacts up on canceled SC hierarchy when no new Sc is selected", type = "Scenarios")
 @Story(Application.MassAction.US17_3.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US17003AddNewContactToStyleCoachTest extends BaseTest {
 
 	@Steps

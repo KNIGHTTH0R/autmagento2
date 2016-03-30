@@ -1,9 +1,9 @@
 package com.tests.uss20.us20001;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,7 +25,7 @@ import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTag(name = "US20.1 Verify new SC and updated SC details in Commission", type = "Scenarios")
 @Story(Application.StylecoachInfo.US20_1.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US20001GetStylistIncrementIdTest extends BaseTest {
 
 	@Steps

@@ -1,8 +1,8 @@
 package com.steps.backend.promotion;
 
-import org.junit.Assert;
-
 import net.thucydides.core.annotations.Step;
+
+import org.junit.Assert;
 
 import com.tools.env.constants.Credentials;
 import com.tools.env.constants.UrlConstants;

@@ -1,9 +1,9 @@
 package com.tests.us6.us6002;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +21,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US6.2 Sc Registration Existing Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_2.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US6002CreateCustomerTest extends BaseTest {
 
 	@Steps

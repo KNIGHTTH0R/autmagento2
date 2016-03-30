@@ -1,9 +1,9 @@
 package com.tests.us7.us7008;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US7.8 Kobo Registration on Master Not Pref Country Test ", type = "Scenarios")
 @Story(Application.KoboRegistration.US7_8.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US7008CheckReceivedEmailsTest extends BaseTest {
 
 	@Steps

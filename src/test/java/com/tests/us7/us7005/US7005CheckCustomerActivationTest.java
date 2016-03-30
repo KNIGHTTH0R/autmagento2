@@ -1,9 +1,9 @@
 package com.tests.us7.us7005;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import com.tools.requirements.Application;
 
 @WithTag(name = "US7", type = "backend")
 @Story(Application.Registration.Customer.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US7005CheckCustomerActivationTest extends BaseTest {
 
 	@Steps
