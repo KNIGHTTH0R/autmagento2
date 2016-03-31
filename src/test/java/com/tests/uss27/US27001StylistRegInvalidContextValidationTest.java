@@ -1,10 +1,12 @@
 package com.tests.uss27;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +32,7 @@ import com.workflows.file.FileWorkflows;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.steps.stepdata.StepData;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
@@ -78,13 +81,15 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 	@Test
 	public void us27001StylistRegInvalidContextValidationTest() {
 		headerSteps.navigateToRegisterForm();
-		stylistRegistrationSteps.fillCreateCustomerFormWithoutContext(customerFormData, customerFormAddress, birthDate.getDate());
-//		try {
-//			withTestDataFrom("resources/invalidContextData.csv").run(stylistContextStepsCsv).inputContextCsv();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
+		stylistRegistrationSteps.fillCreateCustomerFormWithoutContext(customerFormData, customerFormAddress,
+				birthDate.getDate());
+		try {
+			net.thucydides.core.steps.stepdata.StepData.withTestDataFrom("resources/invalidContextData.csv")
+					.run(stylistContextStepsCsv).inputContextCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 		customVerification.printErrors();
 
 	}
