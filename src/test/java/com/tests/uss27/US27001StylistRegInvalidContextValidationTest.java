@@ -1,17 +1,10 @@
 package com.tests.uss27;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +27,11 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.JenkinsConstants;
 import com.tools.requirements.Application;
 import com.workflows.file.FileWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US.27.1 Check that categories and product url keys are not allowed as SC context", type = "Scenarios")
 @Story(Application.StylecoachContextValidation.US27_1.class)
