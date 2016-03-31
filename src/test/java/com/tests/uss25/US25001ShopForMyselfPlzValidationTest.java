@@ -1,11 +1,14 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,7 +75,6 @@ public class US25001ShopForMyselfPlzValidationTest extends BaseTest {
 	private String username, password;
 	private AddressModel addressModel;
 
-
 	private ProductDetailedModel genProduct1;
 
 	@Before
@@ -91,7 +93,8 @@ public class US25001ShopForMyselfPlzValidationTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3004.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3004.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -129,12 +132,13 @@ public class US25001ShopForMyselfPlzValidationTest extends BaseTest {
 
 		shippingSteps.addNewAddressForBillingWithoutPlz(addressModel);
 
-//		try {
-//			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv)
+					.inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 
 	}
 

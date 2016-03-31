@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,11 +97,11 @@ public class US25001CreatePartyWithNewContactPlzValidationTest extends BaseTest 
 
 		createNewContactSteps.fillCreateNewContactWithoutPlz(customerData, addressData);
 
-//		try {
-//			withTestDataFrom("resources/invalidPlzTestData.csv").run(createNewContactStepsWithCsv).inputPostCodeCsv();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(createNewContactStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 	}
 }

@@ -32,7 +32,7 @@ import com.workflows.file.FileWorkflows;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.steps.stepdata.StepData;
+import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
@@ -84,7 +84,7 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 		stylistRegistrationSteps.fillCreateCustomerFormWithoutContext(customerFormData, customerFormAddress,
 				birthDate.getDate());
 		try {
-			net.thucydides.core.steps.stepdata.StepData.withTestDataFrom("resources/invalidContextData.csv")
+			withTestDataFrom("resources/invalidContextData.csv")
 					.run(stylistContextStepsCsv).inputContextCsv();
 		} catch (IOException e) {
 			e.printStackTrace();

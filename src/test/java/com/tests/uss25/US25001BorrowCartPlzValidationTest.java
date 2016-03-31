@@ -6,9 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
 
 import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -137,12 +140,12 @@ public class US25001BorrowCartPlzValidationTest extends BaseTest {
 
 		shippingSteps.addNewAddressForBillingWithoutPlz(addressModel);
 
-//		try {
-//			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 	}
 
 }

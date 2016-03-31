@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
@@ -28,7 +27,6 @@ public class ApacheHttpHelper {
 	// HTTP GET request
 	public static String sendGet(String url) throws Exception {
 		HttpGet request = new HttpGet(url);
-		new AuthScope(AuthScope.ANY_HOST,AuthScope.ANY_PORT);
 		System.out.println("Sending GET request to: " + url);
 		request.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials(JenkinsConstants.USERNAME, JenkinsConstants.PASSWORD), "UTF-8", false));
 

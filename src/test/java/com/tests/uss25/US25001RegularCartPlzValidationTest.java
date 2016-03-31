@@ -1,11 +1,14 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -140,12 +143,12 @@ public class US25001RegularCartPlzValidationTest extends BaseTest {
 
 		shippingSteps.addNewAddressForBillingWithoutPlz(addressModel);
 
-//		try {
-//			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 
 	}
 

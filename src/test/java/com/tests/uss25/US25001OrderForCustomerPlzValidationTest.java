@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +42,8 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
+
+import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
 
 @WithTag(name = "US25.1 Check invalid plz validation on all carts and registration processes", type = "Scenarios")
 @Story(Application.PlzValidation.US24_1.class)
@@ -146,12 +149,12 @@ public class US25001OrderForCustomerPlzValidationTest extends BaseTest {
 
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
-//		try {
-//			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 
 
 	}

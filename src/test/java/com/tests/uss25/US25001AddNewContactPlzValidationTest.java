@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -91,12 +93,12 @@ public class US25001AddNewContactPlzValidationTest extends BaseTest {
 		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContactWithoutPlz(dataModel, addressModel);
 
-//		try {
-//			withTestDataFrom("resources/invalidPlzTestData.csv").run(createNewContactStepsWithCsv).inputPostCodeCsv();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(createNewContactStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 
 	}
 }

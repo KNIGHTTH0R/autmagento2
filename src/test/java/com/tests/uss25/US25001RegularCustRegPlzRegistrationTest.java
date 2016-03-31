@@ -1,5 +1,7 @@
 package com.tests.uss25;
 
+import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
+
 import java.io.IOException;
 
 import org.junit.Assert;
@@ -46,12 +48,12 @@ public class US25001RegularCustRegPlzRegistrationTest extends BaseTest {
 		
 
 		customerRegistrationSteps.fillCreateCustomerFormWithoutPlz(dataModel, addressModel);
-//		try {
-//			withTestDataFrom("resources/invalidPlzTestData.csv").run(customerRegistrationStepsWithCsv).inputPostCodeCsv();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
+		try {
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(customerRegistrationStepsWithCsv).inputPostCodeCsv();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail("Failed !!!");
+		}
 		customVerifications.printErrors();
 	}
 
