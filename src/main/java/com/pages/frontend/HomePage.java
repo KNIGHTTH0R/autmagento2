@@ -1,17 +1,17 @@
 package com.pages.frontend;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.tools.requirements.AbstractPage;
 
+import net.serenitybdd.core.annotations.findby.FindBy;
+
 public class HomePage extends AbstractPage {
 
 	@FindBy(css = "div.categories li:nth-child(3) a")
 	private WebElement styleCoachLink;
-	
+
 	@FindBy(css = "div.categories li:nth-child(2) a")
 	private WebElement stylePartyLink;
 
@@ -26,7 +26,7 @@ public class HomePage extends AbstractPage {
 
 	@FindBy(css = "#cssmenu > ul > li:nth-child(2) > ul li > a[href*='neu.html']")
 	private WebElement newMenu;
-	
+
 	@FindBy(id = "change-shop")
 	private WebElement changeShopButton;
 
@@ -34,13 +34,15 @@ public class HomePage extends AbstractPage {
 		styleCoachLink.click();
 
 	}
+
 	public void clickChangeShop() {
 		changeShopButton.click();
-		
+
 	}
+
 	public void clickStylePartyLink() {
 		stylePartyLink.click();
-		
+
 	}
 
 	public void clickOnContactBoosterDetails() {
@@ -63,5 +65,9 @@ public class HomePage extends AbstractPage {
 		element(newMenu).waitUntilVisible();
 		newMenu.click();
 	}
+
+	// public void goToNewItems() {
+	// getDriver().findElement(By.cssSelector("div.nav-toggle")).click();
+	// }
 
 }

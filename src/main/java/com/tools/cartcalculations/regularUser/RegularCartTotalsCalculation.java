@@ -1,6 +1,7 @@
 package com.tools.cartcalculations.regularUser;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.ContextConstants;
+import com.tools.utils.PrintUtils;
+
+import net.thucydides.core.matchers.BigDecimalValueMatcher;
 
 public class RegularCartTotalsCalculation {
 
@@ -120,6 +124,17 @@ public class RegularCartTotalsCalculation {
 
 		return result.setScale(2, RoundingMode.HALF_UP);
 	}
+	
+	private static BigDecimal calculateVoucherRatio(BigDecimal cartSubtotal, BigDecimal shippingSectionSubtotal, BigDecimal voucherValue) {
+
+		BigDecimal result = BigDecimal.ZERO;
+
+		result = result.add(shippingSectionSubtotal);
+		result = result.multiply(voucherValue);
+		result = result.divide(cartSubtotal,2,BigDecimal.ROUND_HALF_UP);
+
+		return result.setScale(2, RoundingMode.HALF_UP);
+	}
 
 	public static ShippingModel calculateShippingTotals(RegularCartCalcDetailsModel discountCalculationModel, String shippingValue) {
 		ShippingModel result = new ShippingModel();
@@ -143,6 +158,56 @@ public class RegularCartTotalsCalculation {
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())));
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(newShippingValue)));
 		result.setTotalAmount(totalAmountCalculation.toString());
+
+		return result;
+	}
+	
+	public static ShippingModel calculateShippingTotals(List<RegularBasicProductModel> allProdList,List<RegularBasicProductModel> prodList, String voucherValue, String shippingValue,boolean isTpOrder) {
+		ShippingModel result = new ShippingModel();
+		
+
+		BigDecimal subtotal = BigDecimal.ZERO;
+		BigDecimal jewerlyDiscount = BigDecimal.ZERO;
+		BigDecimal forthyDiscount = BigDecimal.ZERO;
+		BigDecimal totalAmount = BigDecimal.ZERO;
+//		BigDecimal buy3Get1 = RegularCartBuy3Get1Calculation.calculateTotalBuy3Get1Discount(prodList);
+		BigDecimal buy3Get1 = BigDecimal.ZERO;
+		BigDecimal voucherPrice = BigDecimal.valueOf(Double.parseDouble(voucherValue));
+		BigDecimal wholeSubtotal = BigDecimal.ZERO;
+		
+		for (RegularBasicProductModel product : allProdList) {
+			wholeSubtotal = wholeSubtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
+		}	
+		
+		for (RegularBasicProductModel product : prodList) {
+			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
+			if (product.getBonusType().contentEquals(ContextConstants.JEWELRY_BONUS)) {
+				jewerlyDiscount = jewerlyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
+				jewerlyDiscount.setScale(2, RoundingMode.HALF_UP);
+			}
+			if (product.getBonusType().contentEquals(ContextConstants.DISCOUNT_40_BONUS)) {
+				forthyDiscount = forthyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
+				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
+			}
+		}
+		if(!isTpOrder)
+			shippingValue = GeneralCartCalculations.calculateNewShipping(subtotal, BigDecimal.valueOf(Double.parseDouble(voucherValue)),
+				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		else 
+			shippingValue = "0.00";
+		
+		voucherPrice = calculateVoucherRatio(wholeSubtotal, subtotal, voucherPrice);
+		
+		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
+		totalAmount = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		
+		result.setSubTotal(String.valueOf(subtotal));
+		result.setShippingPrice(shippingValue);
+		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
+		result.setDiscountPrice("not yet");
+		
+		System.out.println("NEBUNIEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+		PrintUtils.printShippingTotals(result);
 
 		return result;
 	}

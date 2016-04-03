@@ -93,7 +93,7 @@ public class US10007PlacePippaTermPurchaseOrderAsPartyHostTest2 extends BaseTest
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct1.setPrice("289.00");
+		genProduct1.setPrice("19.00");
 		MagentoProductCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();

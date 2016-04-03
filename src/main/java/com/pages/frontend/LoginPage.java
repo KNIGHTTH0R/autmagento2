@@ -16,6 +16,9 @@ public class LoginPage extends AbstractPage {
 
 	@FindBy(id = "send2")
 	private WebElement loginButton;
+	
+	@FindBy(id = "rememberme")
+	private WebElement rememberMeButton;
 
 	@FindBy(css = "button[rel='facebook-connect']")
 	private WebElement facebookLoginButton;

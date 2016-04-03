@@ -12,15 +12,25 @@ import com.tools.utils.PrintUtils;
 public class RegularUserCartCalculator {
 
 	public static List<RegularBasicProductModel> allProductsList = new ArrayList<RegularBasicProductModel>();
+	public static List<RegularBasicProductModel> allProductsListTp0 = new ArrayList<RegularBasicProductModel>();
+	public static List<RegularBasicProductModel> allProductsListTp1 = new ArrayList<RegularBasicProductModel>();
+	public static List<RegularBasicProductModel> allProductsListTp2 = new ArrayList<RegularBasicProductModel>();
 	public static List<RegularBasicProductModel> allProductsListWithRegularPrice = new ArrayList<RegularBasicProductModel>();
 	public static RegularCartCalcDetailsModel calculatedTotalsDiscounts = new RegularCartCalcDetailsModel();
 	public static ShippingModel shippingCalculatedModel = new ShippingModel();
+	public static ShippingModel shippingCalculatedModelTp1 = new ShippingModel();
+	public static ShippingModel shippingCalculatedModelTp2 = new ShippingModel();
 
 	public static void wipe() {
 		allProductsList = new ArrayList<RegularBasicProductModel>();
+		allProductsListTp0 = new ArrayList<RegularBasicProductModel>();
+		allProductsListTp1 = new ArrayList<RegularBasicProductModel>();
+		allProductsListTp2 = new ArrayList<RegularBasicProductModel>();
 		allProductsListWithRegularPrice = new ArrayList<RegularBasicProductModel>();
 		calculatedTotalsDiscounts = new RegularCartCalcDetailsModel();
 		shippingCalculatedModel = new ShippingModel();
+		shippingCalculatedModelTp1 = new ShippingModel();
+		shippingCalculatedModelTp2 = new ShippingModel();
 	}
 
 	public static List<RegularBasicProductModel> getProductswithRegularPriceFromList(List<RegularBasicProductModel> productsList) {
@@ -37,6 +47,17 @@ public class RegularUserCartCalculator {
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass, voucherValue,shippingValue);
 		PrintUtils.printRegularCartCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+	}
+	public static void calculateCartTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {
+		System.out.println(allProductsList.size());
+		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass, voucherValue,shippingValue);
+		PrintUtils.printRegularCartCalcDetailsModel(calculatedTotalsDiscounts);
+	}
+	public static void calculateShippingTotals(String shippingValue, String voucherValue) {
+		
+		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(allProductsList,allProductsListTp0, voucherValue,shippingValue,false);
+		shippingCalculatedModelTp1 = RegularCartTotalsCalculation.calculateShippingTotals(allProductsList,allProductsListTp1, voucherValue,shippingValue,true);
+		shippingCalculatedModelTp2 = RegularCartTotalsCalculation.calculateShippingTotals(allProductsList,allProductsListTp2, voucherValue,shippingValue,true);
 	}
 
 	public static void calculateCartBuy3Get1CartAndShippingTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {

@@ -133,7 +133,6 @@ public class MagentoProductCalls {
 
 	public static ProductDetailedModel createNotAvailableYetProductModel() {
 		ProductDetailedModel result = createProductModel();
-		result.setSet("15");
 		List<String> categoriesIds = new ArrayList<String>();
 		categoriesIds.add("52");
 		categoriesIds.add("52");
