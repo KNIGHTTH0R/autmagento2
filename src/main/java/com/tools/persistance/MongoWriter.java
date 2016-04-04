@@ -531,6 +531,7 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.SHIPPING, shippingModel.getShippingPrice());
 		document.put(MongoTableKeys.SUBTOTAL, shippingModel.getSubTotal());
 		document.put(MongoTableKeys.TOTAL_AMOUNT, shippingModel.getTotalAmount());
+		document.put(MongoTableKeys.TAX, shippingModel.getTax());
 
 		table.insert(document);
 	}

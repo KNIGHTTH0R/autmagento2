@@ -43,7 +43,7 @@ import com.workflows.backend.regularUser.RegularUserOrderProductsWorkflows;
 @WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_2.class)
 @RunWith(SerenityRunner.class)
-public class US8002ValidateOrderBackOfficeTest extends BaseTest {
+public class US8007ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -55,18 +55,17 @@ public class US8002ValidateOrderBackOfficeTest extends BaseTest {
 	public RegularUserOrderProductsWorkflows regularUserOrderProductsWorkflows;
 	@Steps
 	public OrderWorkflows orderWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	private static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
-	private static List<RegularCartCalcDetailsModel> calcDetailsModelList = new ArrayList<RegularCartCalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	private String orderId;
-	private String beUser,bePass;
+	private String beUser, bePass;
 
 	@Before
 	public void setUp() {
@@ -92,26 +91,11 @@ public class US8002ValidateOrderBackOfficeTest extends BaseTest {
 			}
 		}
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8002CustomerBuyWithVoucherTest" + SoapKeys.GRAB);
-		productsList = MongoReader.grabRegularBasicProductModel("US8002CustomerBuyWithVoucherTest" + SoapKeys.CALC);
-		shippingModelList = MongoReader.grabShippingModel("US8002CustomerBuyWithVoucherTest" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabRegularCartCalcDetailsModels("US8002CustomerBuyWithVoucherTest" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8007CustomerBuyWithTpTest" + "TP0");
+		productsList = MongoReader.grabRegularBasicProductModel("US8007CustomerBuyWithTpTest" + "TP0");
+		shippingModelList = MongoReader.grabShippingModel("US8007CustomerBuyWithTpTest" + "TP0");
+		orderId = orderModelList.get(0).getOrderId();
 
-		if (orderModelList.size() == 1) {
-
-			orderId = orderModelList.get(0).getOrderId();
-		} else {
-			Assert.assertTrue("Failure: Could not retrieve orderId. ", orderModelList.size() == 1);
-		}
-
-		if (calcDetailsModelList.size() != 1) {
-			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
-		}
-
-		if (shippingModelList.size() != 1) {
-			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
-		}
-		
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
@@ -121,7 +105,7 @@ public class US8002ValidateOrderBackOfficeTest extends BaseTest {
 		shopTotalsModel.setShipping(shippingModelList.get(0).getShippingPrice());
 		shopTotalsModel.setTotalAmount(shippingModelList.get(0).getTotalAmount());
 		// Constants added
-		shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
+		shopTotalsModel.setTax(shippingModelList.get(0).getTax());
 		shopTotalsModel.setTotalPaid("0.00");
 		shopTotalsModel.setTotalRefunded("0.00");
 		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());
@@ -148,15 +132,11 @@ public class US8002ValidateOrderBackOfficeTest extends BaseTest {
 
 		regularUserOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		regularUserOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
-		
-//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
-		
+
+		 orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(),
+		 "Zahlung geplant");
+
 		customVerifications.printErrors();
 	}
 
-	@After
-	public void saveData() {
-		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveOrderTotalsModel(orderTotalsModel, getClass().getSimpleName() + SoapKeys.GRAB);
-	}
 }

@@ -53,11 +53,11 @@ public class RegularUserCartCalculator {
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass, voucherValue,shippingValue);
 		PrintUtils.printRegularCartCalcDetailsModel(calculatedTotalsDiscounts);
 	}
-	public static void calculateShippingTotals(String shippingValue, String voucherValue) {
+	public static void calculateShippingTotals(String shippingValue, String voucherValue, String taxClass) {
 		
-		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(allProductsList,allProductsListTp0, voucherValue,shippingValue,false);
-		shippingCalculatedModelTp1 = RegularCartTotalsCalculation.calculateShippingTotals(allProductsList,allProductsListTp1, voucherValue,shippingValue,true);
-		shippingCalculatedModelTp2 = RegularCartTotalsCalculation.calculateShippingTotals(allProductsList,allProductsListTp2, voucherValue,shippingValue,true);
+		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(allProductsList,allProductsListTp0, voucherValue,shippingValue,taxClass,true);
+		shippingCalculatedModelTp1 = RegularCartTotalsCalculation.calculateShippingTotals(allProductsList,allProductsListTp1, voucherValue,shippingValue,taxClass,false);
+		shippingCalculatedModelTp2 = RegularCartTotalsCalculation.calculateShippingTotals(allProductsList,allProductsListTp2, voucherValue,shippingValue,taxClass,true);
 	}
 
 	public static void calculateCartBuy3Get1CartAndShippingTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {

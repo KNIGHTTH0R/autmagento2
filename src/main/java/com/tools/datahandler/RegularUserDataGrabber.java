@@ -13,6 +13,8 @@ public class RegularUserDataGrabber {
 
 	public static UrlModel urlModel = new UrlModel();
 	public static OrderModel orderModel = new OrderModel();
+	public static OrderModel orderModelTp1 = new OrderModel();
+	public static OrderModel orderModelTp2 = new OrderModel();
 
 	public static RegularUserCartTotalsModel regularUserGrabbedCartTotals = new RegularUserCartTotalsModel();
 	public static ShippingModel regularUserShippingTotals = new ShippingModel();
@@ -25,6 +27,8 @@ public class RegularUserDataGrabber {
 
 		urlModel = new UrlModel();
 		orderModel = new OrderModel();
+		orderModelTp1 = new OrderModel();
+		orderModelTp2 = new OrderModel();
 
 		regularUserGrabbedCartTotals = new RegularUserCartTotalsModel();
 		grabbedRegularCartProductsList = new ArrayList<RegularUserCartProductModel>();

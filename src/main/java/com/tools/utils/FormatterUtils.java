@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 
 import com.tools.env.constants.Separators;
@@ -73,6 +74,23 @@ public class FormatterUtils {
 		return result;
 	}
 
+	/**
+	 * return new order id after order is splitted for term purchase. add 1 to
+	 * adyen order id for regular order, add 2 for TP because of pippajean, add
+	 * 3 for TP because of customer
+	 * 
+	 * @param incrementNumber
+	 * @return new order id
+	 */
+
+	public static String getOrderId(String url, int incrementNumber) {
+
+		String result = extractOrderIDFromURL(url).replace("staging-int", "");
+		int number = Integer.parseInt(result) + incrementNumber;
+
+		return result = "staging-int" + StringUtils.leftPad(String.valueOf(number), 10, "0");
+	}
+
 	public static String cleanNumberToString(String unitPrice) {
 		String result = unitPrice;
 		result = result.replace(" €", "");
@@ -86,6 +104,7 @@ public class FormatterUtils {
 
 		return result;
 	}
+
 	public static String cleanString(String unitPrice) {
 		String result = unitPrice;
 		result = result.replace(" €", "");
@@ -94,9 +113,10 @@ public class FormatterUtils {
 		result = result.replace(",", ".");
 		result = result.replace("-", "");
 		result = result.replace("%", "");
-		
+
 		return result;
 	}
+
 	public static String cleanToInteger(String unitPrice) {
 		String result = unitPrice;
 		result = result.replace(" €", "");
@@ -106,7 +126,7 @@ public class FormatterUtils {
 		result = result.replace("IP", "");
 		result = result.replace(",", ".");
 		result = result.replace("%", "");
-		
+
 		return result;
 	}
 
@@ -130,15 +150,17 @@ public class FormatterUtils {
 		return finalResult;
 	}
 
+	// coleague
 	public static String[] splitDate(String dateOfBirth) {
 		String elems[] = dateOfBirth.split(Separators.DATE_SEPARATOR);
 		if (elems.length != 3) {
-			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'", elems.length != 3);
+			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'",
+					elems.length != 3);
 		}
 		return elems;
 	}
-	
-	public static void main(String[] args){
-		System.out.println(FormatterUtils.getCustomDate("yyyy.MM.dd HH:mm:ss", 3600));
+
+	public static void main(String[] args) {
+		System.out.println(FormatterUtils.getOrderId("staging-int0003232323", 1));
 	}
 }

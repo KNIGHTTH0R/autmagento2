@@ -815,6 +815,7 @@ public class MongoReader extends MongoConnector {
 				result.setShippingPrice(MongoUtils.checkField(dbObject, MongoTableKeys.SHIPPING));
 				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
+				result.setTax(MongoUtils.checkField(dbObject, MongoTableKeys.TAX));
 
 				itemList.add(result);
 			}

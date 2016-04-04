@@ -469,6 +469,7 @@ public class PrintUtils {
 		System.out.println("DiscountPrice " + shippingTotals.getDiscountPrice());
 		System.out.println("ShippingPrice " + shippingTotals.getShippingPrice());
 		System.out.println("TotalAmount " + shippingTotals.getTotalAmount());
+		System.out.println("TAX - only for tp orders " + shippingTotals.getTax());
 	}
 	
 	public static void printStarterSetCalcDetailsTotals(StylistRegistrationCartCalcDetailsModel stylistRegistrationCartCalcDetailsModel) {

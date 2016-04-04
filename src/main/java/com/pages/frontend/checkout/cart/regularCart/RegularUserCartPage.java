@@ -99,6 +99,30 @@ public class RegularUserCartPage extends AbstractPage {
 		}
 		Assert.assertTrue("The product with the product code " + productCode + " was not found", foundProduct);
 	}
+	
+	/**
+	 * @param productCode
+	 * selects the second delivery date from dropdown -> term purchase because of customer
+	 * the first available delivery date is for term purchase beacuse of pippajean
+	 * @return selected delivery date
+	 */
+	public String selectDeliveryDate(String productCode) {
+		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
+		String deliveryDate = "";
+		boolean foundProduct = false;
+		for (WebElement product : cartList) {
+			if (product.getText().contains(productCode)) {
+				foundProduct = true;
+				WebElement delivery = element(product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option:nth-child(2)")));
+				deliveryDate = delivery.getText();
+				delivery.click();
+				break;
+			}
+		}
+		Assert.assertTrue("The product with the product code " + productCode + " was not found", foundProduct);
+		
+		return deliveryDate;
+	}
 
 	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode, String discountType) {
 		for (RegularBasicProductModel product : productsList) {

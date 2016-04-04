@@ -22,13 +22,20 @@ public class RegularUserCartSteps extends AbstractSteps {
 	}
 
 	@Step
+	public String selectDeliveryDate(String productCode) {
+		return regularUserCartPage().selectDeliveryDate(productCode);
+	}
+
+	@Step
 	public void validateThatVoucherCannotBeAppliedMessage() {
 		regularUserCartPage().validateThatVoucherCannotBeAppliedMessage();
 	}
+
 	@Step
 	public void validateNotPrefferedShopAndGoToPreferredOne() {
 		regularUserCartPage().validateNotPrefferedShopAndGoToPreferredOne();
 	}
+
 	@Step
 	public void validateThatShippingOnSelectedCountryIsNotAllowed() {
 		regularUserCartPage().validateThatShippingOnSelectedCountryIsNotAllowed();
@@ -36,7 +43,8 @@ public class RegularUserCartSteps extends AbstractSteps {
 
 	@Step
 	@Title("Update product list")
-	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode, String discountType) {
+	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode,
+			String discountType) {
 		regularUserCartPage().updateProductList(productsList, productCode, discountType);
 	}
 
@@ -77,5 +85,3 @@ public class RegularUserCartSteps extends AbstractSteps {
 	}
 
 }
-
-

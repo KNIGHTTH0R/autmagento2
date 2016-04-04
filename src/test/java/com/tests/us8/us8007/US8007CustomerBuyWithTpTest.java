@@ -36,6 +36,7 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -79,7 +80,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 
 	private String username, password;
 	private String discountClass;
-	private String billingAddress,shippingAddress;
+	private String billingAddress, shippingAddress;
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
@@ -101,16 +102,16 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		genProduct2.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct2);
 
-//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-//		genProduct3.setPrice("5.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+		genProduct3.setPrice("5.00");
+		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8002.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8007.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -140,7 +141,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 	}
 
 	@Test
-	public void us8002CustomerBuyWithVoucherTest() {
+	public void us8007CustomerBuyWithTpTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -154,70 +155,91 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		RegularUserCartCalculator.allProductsListTp0.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
 		RegularUserCartCalculator.allProductsListTp1.add(productData);
-//		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0");
-//		RegularUserCartCalculator.allProductsList.add(productData);
-		
+		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0");
+		RegularUserCartCalculator.allProductsListTp2.add(productData);
+
 		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp0);
 		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp1);
 
 		headerSteps.openCartPreview();
-		headerSteps.goToCart();		
+		headerSteps.goToCart();
 
-		regularUserCartSteps.typeCouponCode(voucherCode);
-		regularUserCartSteps.submitVoucherCode();
+		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsListTp0, genProduct1.getSku(),
+				ContextConstants.JEWELRY_BONUS);
+		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsListTp1, genProduct2.getSku(),
+				ContextConstants.DISCOUNT_40_BONUS);
+		System.out.println(regularUserCartSteps.selectDeliveryDate(genProduct3.getSku()));
 
-		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
+		// regularUserCartSteps.typeCouponCode(voucherCode);
+		// regularUserCartSteps.submitVoucherCode();
+
+		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
 
-		RegularUserCartCalculator.calculateCartTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
-		RegularUserCartCalculator.calculateShippingTotals(shippingValue, voucherValue);
-		
-//		regularUserCartSteps.clickGoToShipping();
-//		shippingPartySectionSteps.clickPartyNoOption();
-//		shippingSteps.selectAddress(billingAddress);
-//		shippingSteps.setSameAsBilling(false);
-//		shippingSteps.selectShippingAddress(shippingAddress);
-//
-//		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
-//	
-//		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
-//	
-//		shippingSteps.goToPaymentMethod();
-//
-//		String url = shippingSteps.grabUrl();
-//		DataGrabber.urlModel.setName("Payment URL");
-//		DataGrabber.urlModel.setUrl(url);
-//		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-//		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-//
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//	
-//		confirmationSteps.grabRegularProductsList();
-//		
-//		RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-//		
-//		confirmationSteps.grabBillingData();
-//		confirmationSteps.grabSippingData();
-//
-//		confirmationSteps.agreeAndCheckout();
-//
-//		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-//		regularCartValidationWorkflows.performCartValidationsWithVoucherApplied(true);
-//
-//		customVerifications.printErrors();
+		RegularUserCartCalculator.calculateCartTotals(RegularUserCartCalculator.allProductsList, discountClass,
+				shippingValue, voucherValue);
+		RegularUserCartCalculator.calculateShippingTotals(shippingValue, voucherValue, discountClass);
+
+		regularUserCartSteps.clickGoToShipping();
+		shippingPartySectionSteps.clickPartyNoOption();
+		shippingSteps.selectAddress(billingAddress);
+		shippingSteps.setSameAsBilling(false);
+		shippingSteps.selectShippingAddress(shippingAddress);
+		//
+		// RegularUserDataGrabber.grabbedRegularShippingProductsList =
+		// shippingSteps.grabRegularProductsList();
+		//
+		// RegularUserDataGrabber.regularUserShippingTotals =
+		// shippingSteps.grabSurveyData();
+		//
+		shippingSteps.goToPaymentMethod();
+
+		String url = shippingSteps.grabUrl();
+		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
+		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
+		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
+
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+		//
+		// confirmationSteps.grabRegularProductsList();
+		//
+		// RegularUserDataGrabber.regularUserConfirmationTotals =
+		// confirmationSteps.grabConfirmationTotals();
+		//
+		// confirmationSteps.grabBillingData();
+		// confirmationSteps.grabSippingData();
+		//
+		confirmationSteps.agreeAndCheckout();
+		//
+		// regularCartValidationWorkflows.setBillingShippingAddress(billingAddress,
+		// shippingAddress);
+		// regularCartValidationWorkflows.performCartValidationsWithVoucherApplied(true);
+		//
+		// customVerifications.printErrors();
 	}
 
-//	@After
-//	public void saveData() {
-//		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
-//		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-//		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
-//		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
-//		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
-//			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
-//		}
-//	}
+	@After
+	public void saveData() {
+		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + "TP0");
+		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
+		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
+		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + "TP0");
+		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModelTp1,
+				getClass().getSimpleName() + "TP1");
+		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModelTp2,
+				getClass().getSimpleName() + "TP2");
+		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsListTp0) {
+			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + "TP0");
+		}
+		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsListTp1) {
+			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + "TP1");
+		}
+		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsListTp2) {
+			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + "TP2");
+		}
+	}
 }
-
-
