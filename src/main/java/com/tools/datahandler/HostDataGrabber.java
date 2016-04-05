@@ -19,7 +19,13 @@ public class HostDataGrabber {
 	public static ShippingModel hostConfirmationTotals = new ShippingModel();
 	public static List<HostCartProductModel> grabbedHostCartProductsList = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostShippingProductsList = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostShippingProductsListTp0 = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostShippingProductsListTp1 = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostShippingProductsListTp2 = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostConfirmationProductsList = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostConfirmationProductsListTp0 = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostConfirmationProductsListTp1 = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostConfirmationProductsListTp2 = new ArrayList<HostCartProductModel>();
 
 	public static void wipe() {
 
@@ -29,10 +35,16 @@ public class HostDataGrabber {
 		hostGrabbedCartTotals = new HostCartTotalsModel();
 		grabbedHostCartProductsList = new ArrayList<HostCartProductModel>();
 		grabbedHostShippingProductsList = new ArrayList<HostCartProductModel>();
+		grabbedHostShippingProductsListTp0 = new ArrayList<HostCartProductModel>();
+		grabbedHostShippingProductsListTp1 = new ArrayList<HostCartProductModel>();
+		grabbedHostShippingProductsListTp2 = new ArrayList<HostCartProductModel>();
 		hostShippingTotals = new ShippingModel();
 		hostConfirmationTotals = new ShippingModel();
 		grabbedHostConfirmationProductsList = new ArrayList<HostCartProductModel>();
-		
+		grabbedHostConfirmationProductsListTp0 = new ArrayList<HostCartProductModel>();
+		grabbedHostConfirmationProductsListTp1 = new ArrayList<HostCartProductModel>();
+		grabbedHostConfirmationProductsListTp2 = new ArrayList<HostCartProductModel>();
+
 	}
 
 }

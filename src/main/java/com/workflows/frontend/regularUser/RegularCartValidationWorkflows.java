@@ -40,27 +40,33 @@ public class RegularCartValidationWorkflows {
 
 		checkoutValidationSteps.verifySuccessMessage();
 
-		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
+		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
+				RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
 
-		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularShippingProductsList);
+		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
+				RegularUserDataGrabber.grabbedRegularShippingProductsList);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
 				RegularUserDataGrabber.grabbedRegularConfirmationProductsList);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
-		regularUserCartWorkflows.setVerifyTotalsDiscount(RegularUserDataGrabber.regularUserGrabbedCartTotals, RegularUserCartCalculator.calculatedTotalsDiscounts);
+		regularUserCartWorkflows.setVerifyTotalsDiscount(RegularUserDataGrabber.regularUserGrabbedCartTotals,
+				RegularUserCartCalculator.calculatedTotalsDiscounts);
 		regularUserCartWorkflows.verifyTotalsDiscountWith40AndJbDiscount("CART TOTALS WITH 40% AND JB APPLIED");
 
-		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
-		regularUserShippingAndConfirmationWorkflows
-				.setVerifyShippingTotals(RegularUserDataGrabber.regularUserConfirmationTotals, RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserConfirmationTotals,
+				RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel, RegularUserCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
+				RegularUserCartCalculator.shippingCalculatedModel);
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
@@ -76,28 +82,118 @@ public class RegularCartValidationWorkflows {
 
 		checkoutValidationSteps.verifySuccessMessage();
 
-		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
+		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
+				RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
 
-		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularShippingProductsList);
+		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
+				RegularUserDataGrabber.grabbedRegularShippingProductsList);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
 				RegularUserDataGrabber.grabbedRegularConfirmationProductsList);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
-		regularUserCartWorkflows.setVerifyTotalsDiscount(RegularUserDataGrabber.regularUserGrabbedCartTotals, RegularUserCartCalculator.calculatedTotalsDiscounts);
+		regularUserCartWorkflows.setVerifyTotalsDiscount(RegularUserDataGrabber.regularUserGrabbedCartTotals,
+				RegularUserCartCalculator.calculatedTotalsDiscounts);
 		regularUserCartWorkflows.verifyTotalsDiscountWith40JbAndBuy3Get1Discount("CART TOTALS WITH 40% AND JB APPLIED");
 
-		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
-		regularUserShippingAndConfirmationWorkflows
-				.setVerifyShippingTotals(RegularUserDataGrabber.regularUserConfirmationTotals, RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserConfirmationTotals,
+				RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel, RegularUserCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
+				RegularUserCartCalculator.shippingCalculatedModel);
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
+
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performCartValidationsSplittedQuote() {
+
+		checkoutValidationSteps.verifySuccessMessage();
+
+		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
+				RegularUserDataGrabber.grabbedRegularCartProductsList);
+		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+		
+		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
+				RegularUserCartCalculator.allProductsListTp0,
+				RegularUserDataGrabber.grabbedRegularShippingProductsListTp0);
+		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+		
+		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
+				RegularUserCartCalculator.allProductsListTp1,
+				RegularUserDataGrabber.grabbedRegularShippingProductsListTp1);
+		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP1");
+		
+		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
+				RegularUserCartCalculator.allProductsListTp2,
+				RegularUserDataGrabber.grabbedRegularShippingProductsListTp2);
+		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP2");
+
+		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
+				RegularUserCartCalculator.allProductsListTp0,
+				RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp0);
+		regularUserShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
+				RegularUserCartCalculator.allProductsListTp1,
+				RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp1);
+		regularUserShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP1");
+		
+		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
+				RegularUserCartCalculator.allProductsListTp2,
+				RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp2);
+		regularUserShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP2");
+
+		regularUserCartWorkflows.setVerifyTotalsDiscount(RegularUserDataGrabber.regularUserGrabbedCartTotals,
+				RegularUserCartCalculator.calculatedTotalsDiscounts);
+		regularUserCartWorkflows.verifyTotalsDiscountWith40AndJbDiscount("CART TOTALS WITH 40% AND JB APPLIED");
+
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserShippingTotalsTp0, RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserShippingTotalsTp1,
+				RegularUserCartCalculator.shippingCalculatedModelTp1);
+		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS TP1");
+
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserShippingTotalsTp2,
+				RegularUserCartCalculator.shippingCalculatedModelTp2);
+		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS TP2");
+
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserConfirmationTotalsTp0,
+				RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserConfirmationTotalsTp1,
+				RegularUserCartCalculator.shippingCalculatedModelTp1);
+		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP1");
+		
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserConfirmationTotalsTp2,
+				RegularUserCartCalculator.shippingCalculatedModelTp2);
+		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP2");
+
+		// adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
+		// RegularUserCartCalculator.shippingCalculatedModel);
+		// adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
 		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
@@ -112,27 +208,34 @@ public class RegularCartValidationWorkflows {
 
 		checkoutValidationSteps.verifySuccessMessage();
 
-		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularCartProductsList);
+		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
+				RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
 
-		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList, RegularUserDataGrabber.grabbedRegularShippingProductsList);
+		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
+				RegularUserDataGrabber.grabbedRegularShippingProductsList);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
 				RegularUserDataGrabber.grabbedRegularConfirmationProductsList);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
 
-		regularUserCartWorkflows.setVerifyTotalsDiscount(RegularUserDataGrabber.regularUserGrabbedCartTotals, RegularUserCartCalculator.calculatedTotalsDiscounts);
-		regularUserCartWorkflows.verifyTotalsDiscountWithVoucher("CART TOTALS WITH VOUCHER APPLIED", shouldVoucherBeVisible);
+		regularUserCartWorkflows.setVerifyTotalsDiscount(RegularUserDataGrabber.regularUserGrabbedCartTotals,
+				RegularUserCartCalculator.calculatedTotalsDiscounts);
+		regularUserCartWorkflows.verifyTotalsDiscountWithVoucher("CART TOTALS WITH VOUCHER APPLIED",
+				shouldVoucherBeVisible);
 
-		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
-		regularUserShippingAndConfirmationWorkflows
-				.setVerifyShippingTotals(RegularUserDataGrabber.regularUserConfirmationTotals, RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserConfirmationTotals,
+				RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel, RegularUserCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
+				RegularUserCartCalculator.shippingCalculatedModel);
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);

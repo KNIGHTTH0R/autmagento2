@@ -43,14 +43,27 @@ public class OrderListPage extends AbstractPage {
 		searchButton.click();
 	}
 
+//	public void openOrderDetails(String name) {
+//		evaluateJavascript("jQuery.noConflict();");
+//		element(listContainer).waitUntilVisible();
+//		List<WebElement> listElements = listContainer.findElements(By.tagName("tr"));
+//		theFor: for (WebElement elementNow : listElements) {
+//			WebElement currentLink = elementNow.findElement(By.cssSelector("td a[href*='admin/sales_order']"));
+//			if (listContainer.getText().contains(name)) {
+//				System.out.println(listContainer.getText());
+//				currentLink.click();
+//				break theFor;
+//			}
+//		}
+//	}
 	public void openOrderDetails(String name) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(listContainer).waitUntilVisible();
 		List<WebElement> listElements = listContainer.findElements(By.tagName("tr"));
 		theFor: for (WebElement elementNow : listElements) {
-			WebElement currentLink = elementNow.findElement(By.cssSelector("td a[href*='admin/sales_order']"));
-			if (listContainer.getText().contains(name)) {
-				currentLink.click();
+			if (elementNow.getText().contains(name)) {
+				System.out.println(elementNow.getText());
+				elementNow.findElement(By.cssSelector("td a[href*='admin/sales_order']")).click();
 				break theFor;
 			}
 		}

@@ -1,6 +1,7 @@
 package com.tools.cartcalculations;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class GeneralCartCalculations {
 
@@ -22,7 +23,7 @@ public class GeneralCartCalculations {
 			shipping = shipping.compareTo(BigDecimal.ZERO) > 0 ? shipping : BigDecimal.ZERO;
 		}
 
-		return String.valueOf(shipping);
+		return String.valueOf(shipping.setScale(2, RoundingMode.HALF_UP));
 	}
 
 }

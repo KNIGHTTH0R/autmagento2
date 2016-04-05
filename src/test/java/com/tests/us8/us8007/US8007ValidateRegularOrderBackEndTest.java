@@ -43,7 +43,7 @@ import com.workflows.backend.regularUser.RegularUserOrderProductsWorkflows;
 @WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_2.class)
 @RunWith(SerenityRunner.class)
-public class US8007ValidateOrderBackOfficeTest extends BaseTest {
+public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -117,7 +117,7 @@ public class US8007ValidateOrderBackOfficeTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us8002ValidateOrderBackOfficeTest() {
+	public void us8007ValidateRegularOrderBackEndTest() {
 		backEndSteps.performAdminLogin(beUser, bePass);
 
 		backEndSteps.clickOnSalesOrders();

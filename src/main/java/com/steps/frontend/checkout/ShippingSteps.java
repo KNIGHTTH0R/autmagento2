@@ -23,6 +23,21 @@ public class ShippingSteps extends AbstractSteps {
 		return surveyPage().grabSurveyData();
 	}
 
+	public ShippingModel grabSurveyDataTp0() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return surveyPage().grabSurveyDataTp0();
+	}
+
+	public ShippingModel grabSurveyDataTp1() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return surveyPage().grabSurveyDataTp1();
+	}
+
+	public ShippingModel grabSurveyDataTp2() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return surveyPage().grabSurveyDataTp2();
+	}
+
 	@Step
 	public void goToPaymentMethod() {
 		surveyPage().clickGoToPaymentMethod();
@@ -37,6 +52,21 @@ public class ShippingSteps extends AbstractSteps {
 	public List<RegularUserCartProductModel> grabRegularProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabRegularProductsList();
+	}
+
+	public List<RegularUserCartProductModel> grabRegularProductsListTp0() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return surveyPage().grabRegularProductsListTp0();
+	}
+
+	public List<RegularUserCartProductModel> grabRegularProductsListTp1() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return surveyPage().grabRegularProductsListTp1();
+	}
+
+	public List<RegularUserCartProductModel> grabRegularProductsListTp2() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return surveyPage().grabRegularProductsListTp2();
 	}
 
 	public List<HostCartProductModel> grabHostProductsList() {

@@ -93,6 +93,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
+		DataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
@@ -136,8 +137,9 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP0");
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
 	}
 
 	@Test
@@ -160,6 +162,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 
 		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp0);
 		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp1);
+		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp2);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -170,10 +173,8 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsListTp1, genProduct2.getSku(),
 				ContextConstants.DISCOUNT_40_BONUS);
-		System.out.println(regularUserCartSteps.selectDeliveryDate(genProduct3.getSku()));
-
-		// regularUserCartSteps.typeCouponCode(voucherCode);
-		// regularUserCartSteps.submitVoucherCode();
+		
+		regularUserCartSteps.selectDeliveryDate(genProduct3.getSku());
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
@@ -187,13 +188,15 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(false);
 		shippingSteps.selectShippingAddress(shippingAddress);
-		//
-		// RegularUserDataGrabber.grabbedRegularShippingProductsList =
-		// shippingSteps.grabRegularProductsList();
-		//
-		// RegularUserDataGrabber.regularUserShippingTotals =
-		// shippingSteps.grabSurveyData();
-		//
+
+		shippingSteps.grabRegularProductsListTp0();
+		shippingSteps.grabRegularProductsListTp1();
+		shippingSteps.grabRegularProductsListTp2();
+
+		RegularUserDataGrabber.regularUserShippingTotalsTp0 = shippingSteps.grabSurveyDataTp0();
+		RegularUserDataGrabber.regularUserShippingTotalsTp1 = shippingSteps.grabSurveyDataTp1();
+		RegularUserDataGrabber.regularUserShippingTotalsTp1 = shippingSteps.grabSurveyDataTp1();
+
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
@@ -203,22 +206,24 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-		//
-		// confirmationSteps.grabRegularProductsList();
-		//
-		// RegularUserDataGrabber.regularUserConfirmationTotals =
-		// confirmationSteps.grabConfirmationTotals();
-		//
-		// confirmationSteps.grabBillingData();
-		// confirmationSteps.grabSippingData();
-		//
+
+		confirmationSteps.grabRegularProductsListTp0();
+		confirmationSteps.grabRegularProductsListTp1();
+		confirmationSteps.grabRegularProductsListTp2();
+
+		RegularUserDataGrabber.regularUserConfirmationTotalsTp0 = confirmationSteps.grabConfirmationTotalsTp0();
+		RegularUserDataGrabber.regularUserConfirmationTotalsTp1 = confirmationSteps.grabConfirmationTotalsTp1();
+		RegularUserDataGrabber.regularUserConfirmationTotalsTp2 = confirmationSteps.grabConfirmationTotalsTp2();
+
+		confirmationSteps.grabBillingData();
+		confirmationSteps.grabSippingData();
+
 		confirmationSteps.agreeAndCheckout();
-		//
-		// regularCartValidationWorkflows.setBillingShippingAddress(billingAddress,
-		// shippingAddress);
-		// regularCartValidationWorkflows.performCartValidationsWithVoucherApplied(true);
-		//
-		// customVerifications.printErrors();
+
+		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
+		regularCartValidationWorkflows.performCartValidationsSplittedQuote();
+
+		customVerifications.printErrors();
 	}
 
 	@After

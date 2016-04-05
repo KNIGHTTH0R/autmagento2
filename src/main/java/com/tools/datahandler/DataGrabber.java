@@ -30,14 +30,24 @@ public class DataGrabber {
 
 	// Phase Three
 	public static ShippingModel shippingTotals = new ShippingModel();
+	public static ShippingModel shippingTotalsTp0 = new ShippingModel();
+	public static ShippingModel shippingTotalsTp1 = new ShippingModel();
+	public static ShippingModel shippingTotalsTp2 = new ShippingModel();
 	public static List<CartProductModel> shippingProducts = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> shippingProductsTp1 = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> shippingProductsTp2 = new ArrayList<CartProductModel>();
 
 	// Phase Four
 	public static List<CartProductModel> confirmationProducts = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> confirmationProductsTp1 = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> confirmationProductsTp2 = new ArrayList<CartProductModel>();
 	public static AddressModel grabbedBillingAddress = new AddressModel();
 	public static AddressModel grabbedShippingAddress = new AddressModel();
 
 	public static ShippingModel confirmationTotals = new ShippingModel();
+	public static ShippingModel confirmationTotalsTp0 = new ShippingModel();
+	public static ShippingModel confirmationTotalsTp1 = new ShippingModel();
+	public static ShippingModel confirmationTotalsTp2 = new ShippingModel();
 
 	public static void wipe() {
 		urlModel = new UrlModel();
@@ -57,14 +67,24 @@ public class DataGrabber {
 
 		// Phase Three
 		shippingTotals = new ShippingModel();
+		shippingTotalsTp0 = new ShippingModel();
+		shippingTotalsTp1 = new ShippingModel();
+		shippingTotalsTp2 = new ShippingModel();
 		shippingProducts = new ArrayList<CartProductModel>();
+		shippingProductsTp1 = new ArrayList<CartProductModel>();
+		shippingProductsTp2 = new ArrayList<CartProductModel>();
 
 		// Phase Four
 		confirmationProducts = new ArrayList<CartProductModel>();
+		confirmationProductsTp1 = new ArrayList<CartProductModel>();
+		confirmationProductsTp2 = new ArrayList<CartProductModel>();
+		confirmationTotals = new ShippingModel();
+		confirmationTotalsTp0 = new ShippingModel();
+		confirmationTotalsTp1 = new ShippingModel();
+		confirmationTotalsTp2 = new ShippingModel();
+		
 		grabbedBillingAddress = new AddressModel();
 		grabbedShippingAddress = new AddressModel();
-
-		confirmationTotals = new ShippingModel();
 	}
 
 	public static void addAll25AndMmProducts() {
