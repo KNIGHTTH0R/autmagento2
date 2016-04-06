@@ -49,7 +49,6 @@ public class RegularUserCartCalculator {
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 	}
 	public static void calculateCartTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {
-		System.out.println(allProductsList.size());
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass, voucherValue,shippingValue);
 		PrintUtils.printRegularCartCalcDetailsModel(calculatedTotalsDiscounts);
 	}

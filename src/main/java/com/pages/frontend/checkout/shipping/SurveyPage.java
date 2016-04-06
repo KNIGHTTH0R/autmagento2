@@ -30,7 +30,7 @@ public class SurveyPage extends AbstractPage {
 	@FindBy(css = "div#cart-section-2 div.checkout-totals-section")
 	private WebElement surveyTotalsContainerTp1;
 
-	@FindBy(css = "div#cart-section-2 div.checkout-totals-section")
+	@FindBy(css = "div#cart-section-3 div.checkout-totals-section")
 	private WebElement surveyTotalsContainerTp2;
 
 	@FindBy(css = "button#submit-step")

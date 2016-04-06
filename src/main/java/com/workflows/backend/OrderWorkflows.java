@@ -221,5 +221,10 @@ public class OrderWorkflows {
 		CustomVerification.verifyTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
 
 	}
+	@Step
+	public void validateScheduledDeliveryDate(String orderStatus, String string) {
+		CustomVerification.verifyTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
+		
+	}
 
 }

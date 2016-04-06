@@ -25,14 +25,12 @@ public class OrderTotalsPage extends AbstractPage {
 
 		List<WebElement> listEntries = tableContainer.findElements(By.cssSelector("tr"));
 		waitFor(ExpectedConditions.visibilityOfAllElements(listEntries));
-		System.out.println(listEntries.size());
 
 		String valueTransformer = "";
 
 		for (WebElement elementNow : listEntries) {
 
 			String key = elementNow.findElement(By.cssSelector("td:first-child")).getText();
-			System.out.println(key);
 
 			if (key.contains("Zwischensumme")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());

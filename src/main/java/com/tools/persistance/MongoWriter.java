@@ -215,6 +215,7 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.DATE, orderModel.getDate());
 		document.put(MongoTableKeys.INVOICE_CONTACT, orderModel.getInvoiceContact());
 		document.put(MongoTableKeys.DELIVERY_CONTACT, orderModel.getDeliveryContact());
+		document.put(MongoTableKeys.DELIVERY_DATE, orderModel.getDeliveryDate());
 		document.put(MongoTableKeys.TOTAL_PRICE, orderModel.getTotalPrice());
 		document.put(MongoTableKeys.STATUS, orderModel.getStatus());
 

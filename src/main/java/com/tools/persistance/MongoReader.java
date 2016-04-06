@@ -203,6 +203,7 @@ public class MongoReader extends MongoConnector {
 				result.setDate(MongoUtils.checkField(dbObject, MongoTableKeys.DATE));
 				result.setInvoiceContact(MongoUtils.checkField(dbObject, MongoTableKeys.INVOICE_CONTACT));
 				result.setDeliveryContact(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_CONTACT));
+				result.setDeliveryDate(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_DATE));
 				result.setTotalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_PRICE));
 				result.setStatus(MongoUtils.checkField(dbObject, MongoTableKeys.STATUS));
 

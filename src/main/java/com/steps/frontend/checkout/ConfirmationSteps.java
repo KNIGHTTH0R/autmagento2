@@ -65,6 +65,15 @@ public class ConfirmationSteps extends AbstractSteps {
 	public List<HostCartProductModel> grabHostProductsList() {
 		return confirmationPage().grabHostProductsList();
 	}
+	public List<HostCartProductModel> grabHostProductsListTp0() {
+		return confirmationPage().grabHostProductsListTp0();
+	}
+	public List<HostCartProductModel> grabHostProductsListTp1() {
+		return confirmationPage().grabHostProductsListTp1();
+	}
+	public List<HostCartProductModel> grabHostProductsListTp2() {
+		return confirmationPage().grabHostProductsListTp2();
+	}
 
 	public ShippingModel grabConfirmationTotals() {
 		waitABit(TimeConstants.TIME_CONSTANT);

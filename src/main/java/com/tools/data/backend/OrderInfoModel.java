@@ -6,6 +6,15 @@ public class OrderInfoModel {
 	private String orderStatus;
 	private String aquiredBy;
 	private String orderIP;
+	private String deliveryDate;
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
 
 	public String getOrderDate() {
 		return orderDate;

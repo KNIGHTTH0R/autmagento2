@@ -202,5 +202,63 @@ public class HostCartValidationWorkflows {
 		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
 		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
+	
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performTpCartValidations() {
+		
+		checkoutValidationSteps.verifySuccessMessage();
+		
+		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListwithVoucher, HostDataGrabber.grabbedHostCartProductsList);
+		hostCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListTp0, HostDataGrabber.grabbedHostShippingProductsListTp0);
+		hostShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListTp1, HostDataGrabber.grabbedHostShippingProductsListTp1);
+		hostShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP1");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListTp2, HostDataGrabber.grabbedHostShippingProductsListTp2);
+		hostShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP2");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListTp0, HostDataGrabber.grabbedHostConfirmationProductsListTp0);
+		hostShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListTp1, HostDataGrabber.grabbedHostConfirmationProductsListTp1);
+		hostShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListTp2, HostDataGrabber.grabbedHostConfirmationProductsListTp2);
+		hostShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		
+		hostCartWorkflows.setVerifyTotalsDiscount(HostDataGrabber.hostGrabbedCartTotals, HostCartCalculator.calculatedTotalsDiscounts);
+		hostCartWorkflows.verifyTotalsDiscountWithVoucher("CART TOTALS",true);
+		
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostShippingTotalsTp0, HostCartCalculator.shippingCalculatedModel);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostShippingTotalsTp1, HostCartCalculator.shippingCalculatedModelTp1);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostShippingTotalsTp2, HostCartCalculator.shippingCalculatedModelTp2);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotalsTp0, HostCartCalculator.shippingCalculatedModel);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotalsTp1, HostCartCalculator.shippingCalculatedModelTp1);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotalsTp2, HostCartCalculator.shippingCalculatedModelTp2);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+//		adyenWorkflows.setVerifyAdyenTotals(HostDataGrabber.orderModel, HostCartCalculator.shippingCalculatedModel);
+//		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+		
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
 
 }

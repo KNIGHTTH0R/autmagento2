@@ -1,12 +1,7 @@
-package com.tests.us8.us8007;
+package com.tests.uss11.us11007;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,23 +16,23 @@ import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
-import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.constants.UrlConstants;
+import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.OrderWorkflows;
-import com.workflows.backend.regularUser.RegularUserOrderProductsWorkflows;
+import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
-@Story(Application.RegularCart.US8_2.class)
+@WithTag(name = "US11.2 Party Host Buys For Customer With Buy 3 Get 1 For 50%, ship to customer ", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_2.class)
 @RunWith(SerenityRunner.class)
-public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
+public class US11007ValidateOrdersBackEndTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -46,7 +41,7 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 	@Steps
 	public OrderValidationSteps orderValidationSteps;
 	@Steps
-	public RegularUserOrderProductsWorkflows regularUserOrderProductsWorkflows;
+	public HostOrderProductsWorkflows hostOrderProductsWorkflows;
 	@Steps
 	public OrderWorkflows orderWorkflows;
 	@Steps
@@ -64,55 +59,32 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 	private static OrderTotalsModel shopTotalsModelTp1 = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModelTp2 = new OrderTotalsModel();
 
-	private static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
+	private static List<HostBasicProductModel> productsList = new ArrayList<HostBasicProductModel>();
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 	List<OrderModel> orderModelList = new ArrayList<OrderModel>();
 
-	private static List<RegularBasicProductModel> productsListTp1 = new ArrayList<RegularBasicProductModel>();
+	private static List<HostBasicProductModel> productsListTp1 = new ArrayList<HostBasicProductModel>();
 	private static List<ShippingModel> shippingModelListTp1 = new ArrayList<ShippingModel>();
 	List<OrderModel> orderModelListTp1 = new ArrayList<OrderModel>();
 
-	private static List<RegularBasicProductModel> productsListTp2 = new ArrayList<RegularBasicProductModel>();
+	private static List<HostBasicProductModel> productsListTp2 = new ArrayList<HostBasicProductModel>();
 	private static List<ShippingModel> shippingModelListTp2 = new ArrayList<ShippingModel>();
 	List<OrderModel> orderModelListTp2 = new ArrayList<OrderModel>();
 
-	private String beUser, bePass;
-
 	@Before
 	public void setUp() {
-		Properties prop = new Properties();
-		InputStream input = null;
-		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8002.properties");
-			prop.load(input);
-			beUser = prop.getProperty("beUser");
-			bePass = prop.getProperty("bePass");
+		orderModelList = MongoReader.getOrderModel("US11007PartyHostBuysForCustomerTpTest" + "TP0");
+		productsList = MongoReader.grabHostBasicProductModel("US11007PartyHostBuysForCustomerTpTest" + "TP0");
+		shippingModelList = MongoReader.grabShippingModel("US11007PartyHostBuysForCustomerTpTest" + "TP0");
 
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		orderModelListTp1 = MongoReader.getOrderModel("US11007PartyHostBuysForCustomerTpTest" + "TP1");
+		productsListTp1 = MongoReader.grabHostBasicProductModel("US11007PartyHostBuysForCustomerTpTest" + "TP1");
+		shippingModelListTp1 = MongoReader.grabShippingModel("US11007PartyHostBuysForCustomerTpTest" + "TP1");
 
-		orderModelList = MongoReader.getOrderModel("US8007CustomerBuyWithTpTest" + "TP0");
-		productsList = MongoReader.grabRegularBasicProductModel("US8007CustomerBuyWithTpTest" + "TP0");
-		shippingModelList = MongoReader.grabShippingModel("US8007CustomerBuyWithTpTest" + "TP0");
-
-		orderModelListTp1 = MongoReader.getOrderModel("US8007CustomerBuyWithTpTest" + "TP1");
-		productsListTp1 = MongoReader.grabRegularBasicProductModel("US8007CustomerBuyWithTpTest" + "TP1");
-		shippingModelListTp1 = MongoReader.grabShippingModel("US8007CustomerBuyWithTpTest" + "TP1");
-
-		orderModelListTp2 = MongoReader.getOrderModel("US8007CustomerBuyWithTpTest" + "TP2");
-		productsListTp2 = MongoReader.grabRegularBasicProductModel("US8007CustomerBuyWithTpTest" + "TP2");
-		shippingModelListTp2 = MongoReader.grabShippingModel("US8007CustomerBuyWithTpTest" + "TP2");
-
+		orderModelListTp2 = MongoReader.getOrderModel("US11007PartyHostBuysForCustomerTpTest" + "TP2");
+		productsListTp2 = MongoReader.grabHostBasicProductModel("US11007PartyHostBuysForCustomerTpTest" + "TP2");
+		shippingModelListTp2 = MongoReader.grabShippingModel("US11007PartyHostBuysForCustomerTpTest" + "TP2");
 
 		// Setup Data from all models in first test
 		// from Shipping calculations
@@ -152,8 +124,8 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us8007ValidateRegularOrderBackEndTest() {
-		backEndSteps.performAdminLogin(beUser, bePass);
+	public void us11002ValidateOrderBackOfficeTest() {
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderModelList.get(0).getOrderId());
@@ -179,20 +151,20 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateRegularUserCalculationTotals("TOTALS VALIVATION");
 
-		regularUserOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
-		regularUserOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
+		hostOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
+		hostOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModelTp1, shopTotalsModelTp1);
 		orderWorkflows.validateRegularUserCalculationTotals("TOTALS VALIVATION");
 
-		regularUserOrderProductsWorkflows.setValidateProductsModels(productsListTp1, orderItemsListTp1);
-		regularUserOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
+		hostOrderProductsWorkflows.setValidateProductsModels(productsListTp1, orderItemsListTp1);
+		hostOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModelTp2, shopTotalsModelTp2);
 		orderWorkflows.validateRegularUserCalculationTotals("TOTALS VALIVATION");
 
-		regularUserOrderProductsWorkflows.setValidateProductsModels(productsListTp2, orderItemsListTp2);
-		regularUserOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
+		hostOrderProductsWorkflows.setValidateProductsModels(productsListTp2, orderItemsListTp2);
+		hostOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 
 		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
 		orderWorkflows.validateOrderStatus(orderInfoModelTp1.getOrderStatus(), "Zahlung geplant");
@@ -201,7 +173,6 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 		orderWorkflows.validateOrderStatus(orderInfoModelTp2.getOrderStatus(), "Zahlung geplant");
 		orderWorkflows.validateScheduledDeliveryDate(orderInfoModelTp2.getDeliveryDate(),
 				orderInfoModelTp2.getDeliveryDate());
-		
 		customVerifications.printErrors();
 	}
 

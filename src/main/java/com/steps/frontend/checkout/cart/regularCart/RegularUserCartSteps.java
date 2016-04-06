@@ -1,6 +1,7 @@
 
 package com.steps.frontend.checkout.cart.regularCart;
 
+import java.text.ParseException;
 import java.util.List;
 
 import net.thucydides.core.annotations.Step;
@@ -22,8 +23,13 @@ public class RegularUserCartSteps extends AbstractSteps {
 	}
 
 	@Step
-	public String selectDeliveryDate(String productCode) {
+	public String selectDeliveryDate(String productCode) throws ParseException {
 		return regularUserCartPage().selectDeliveryDate(productCode);
+	}
+
+	@Step
+	public String getDeliveryDate(String productCode) throws ParseException {
+		return regularUserCartPage().getDeliveryDate(productCode);
 	}
 
 	@Step
@@ -71,6 +77,11 @@ public class RegularUserCartSteps extends AbstractSteps {
 	@Step
 	public void selectShippingOption(String option) {
 		regularUserCartPage().selectShippingOption(option);
+	}
+
+	@Step
+	public void verifyMultipleDeliveryOption() {
+		regularUserCartPage().verifyMultipleDeliveryOption();
 	}
 
 	@Step

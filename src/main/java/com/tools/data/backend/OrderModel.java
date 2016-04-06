@@ -11,6 +11,7 @@ public class OrderModel {
 
 	private String orderId;
 	private String date;
+	private String deliveryDate;
 	private String invoiceContact;
 	private String deliveryContact;
 	private String totalPrice;
@@ -19,10 +20,19 @@ public class OrderModel {
 	public OrderModel() {
 		setOrderId("");
 		setDate("");
+		setDeliveryDate("");
 		setInvoiceContact("");
 		setDeliveryContact("");
 		setTotalPrice("");
 		setStatus("");
+	}
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 
 	public String getOrderId() {

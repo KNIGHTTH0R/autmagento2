@@ -4,12 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.Properties;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
@@ -37,7 +33,6 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -45,6 +40,11 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_2.class)
@@ -143,7 +143,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 	}
 
 	@Test
-	public void us8007CustomerBuyWithTpTest() {
+	public void us8007CustomerBuyWithTpTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -173,8 +173,11 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsListTp1, genProduct2.getSku(),
 				ContextConstants.DISCOUNT_40_BONUS);
-		
-		regularUserCartSteps.selectDeliveryDate(genProduct3.getSku());
+
+		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku());
+		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku());
+
+		regularUserCartSteps.verifyMultipleDeliveryOption();
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
@@ -195,14 +198,16 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 
 		RegularUserDataGrabber.regularUserShippingTotalsTp0 = shippingSteps.grabSurveyDataTp0();
 		RegularUserDataGrabber.regularUserShippingTotalsTp1 = shippingSteps.grabSurveyDataTp1();
-		RegularUserDataGrabber.regularUserShippingTotalsTp1 = shippingSteps.grabSurveyDataTp1();
+		RegularUserDataGrabber.regularUserShippingTotalsTp2 = shippingSteps.grabSurveyDataTp2();
 
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
 		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
+		RegularUserDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
+		RegularUserDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);

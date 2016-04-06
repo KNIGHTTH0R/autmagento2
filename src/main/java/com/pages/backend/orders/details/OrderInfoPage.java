@@ -40,6 +40,10 @@ public class OrderInfoPage extends AbstractPage {
 			if (elementLabel.contains("Bestellt von IP Nummer")) {
 				orderInfo.setOrderIP(webElement.findElement(By.cssSelector("td:last-child")).getText());
 			}
+			if (elementLabel.contains("Scheduled Delivery Date")) {
+				String[] tokens = webElement.findElement(By.cssSelector("td:last-child")).getText().split(" ");
+				orderInfo.setDeliveryDate(tokens[0]);
+			}
 		}
 
 		return orderInfo;

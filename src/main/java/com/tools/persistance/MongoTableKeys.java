@@ -81,6 +81,7 @@ public class MongoTableKeys {
 	public static final String DATE = "date";
 	public static final String INVOICE_CONTACT = "invoiceTo";
 	public static final String DELIVERY_CONTACT = "deliveryTo";
+	public static final String DELIVERY_DATE = "deliveryDate";
 	public static final String TOTAL_PRICE = "totalPrice";
 	public static final String STATUS = "status";
 
