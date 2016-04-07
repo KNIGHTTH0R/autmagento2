@@ -3,10 +3,6 @@ package com.tools.requirements;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import net.thucydides.core.annotations.Screenshots;
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
-
 import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
@@ -41,6 +37,7 @@ import com.pages.external.mailchimp.MailchimpListsPage;
 import com.pages.external.mailchimp.MailchimpLoginPage;
 import com.pages.external.mailchimp.MailchimpSearchPage;
 import com.pages.external.mailchimp.MailchimpSubscriberProfilePage;
+import com.pages.external.unbounce.UnbouncePage;
 import com.pages.frontend.ContactDetailsPage;
 import com.pages.frontend.CreateCustomerPage;
 import com.pages.frontend.FancyBoxPage;
@@ -105,6 +102,10 @@ import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
 
+import net.thucydides.core.annotations.Screenshots;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
+
 public class AbstractSteps extends ScenarioSteps {
 
 	private static final long serialVersionUID = 7370145458268780962L;
@@ -117,7 +118,7 @@ public class AbstractSteps extends ScenarioSteps {
 	 */
 	@Step
 	public void performLogin(String userName, String userPass) {
-//		getDriver().manage().window().maximize();
+		// getDriver().manage().window().maximize();
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -136,7 +137,8 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 
 	@Step
-	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass, String language, String website) {
+	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass, String language,
+			String website) {
 		getDriver().get(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -155,7 +157,8 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
-		Assert.assertTrue(getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));
+		Assert.assertTrue(
+				getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));
 		footerPage().verifyThatFooterWebsiteIsCorrect(ContextConstants.NOT_PREFERED_WEBSITE);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -276,11 +279,11 @@ public class AbstractSteps extends ScenarioSteps {
 	public StylecoachListBackendPage stylecoachListBackendPage() {
 		return getPages().currentPageAt(StylecoachListBackendPage.class);
 	}
-	
+
 	public ContactListBackendPage contactListBackendPage() {
 		return getPages().currentPageAt(ContactListBackendPage.class);
 	}
-	
+
 	public ContactDetailsBackendPage contactDetailsBackendPage() {
 		return getPages().currentPageAt(ContactDetailsBackendPage.class);
 	}
@@ -373,7 +376,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public StylistRegistrationPage stylistRegistrationPage() {
 		return getPages().currentPageAt(StylistRegistrationPage.class);
 	}
-	
+
 	public StylistContextPage stylistContextPage() {
 		return getPages().currentPageAt(StylistContextPage.class);
 	}
@@ -620,6 +623,11 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(MailchimpSubscriberProfilePage.class);
 	}
 
+	// unbounce
+	public UnbouncePage unbouncePage() {
+		return getPages().currentPageAt(UnbouncePage.class);
+	}
+
 	// commission
 	public CommissionReportPage commissionReportPage() {
 		return getPages().currentPageAt(CommissionReportPage.class);
@@ -629,7 +637,8 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	@Screenshots(onlyOnFailures = true)
-	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads, String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
+	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads,
+			String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
 		System.out.println(" -- Print Totals - " + message);
 		System.out.println("CUSTOMERLEADS: " + customerLeads);
 		System.out.println("HOSTESSLEADS: " + hostessLeads);

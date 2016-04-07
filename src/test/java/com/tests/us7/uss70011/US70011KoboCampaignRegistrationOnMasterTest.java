@@ -144,13 +144,15 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		koboCampaignSteps.fillKoboCampaignRegistrationFormOnMasterShop(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
 		emailClientSteps.openMailinator();
-		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
+		String url = emailClientSteps.grabConfirmationLinkFromEmail(
+				dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		koboCampaignSteps.navigate(url);
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 
 		PomProductModel productData;
-		productData = productSteps.setPomProductAddToCart(genProduct1.getName(), genProduct1.getSku(), genProduct1.getPrice());
+		productData = productSteps.setPomProductAddToCart(genProduct1.getName(), genProduct1.getSku(),
+				genProduct1.getPrice());
 		PomCartCalculator.allBorrowedProductsList.add(productData);
 
 		PomCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
@@ -171,10 +173,12 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		String orderId = orderHistory.get(0).getOrderId();
 		profileSteps.verifyOrderId(orderId, RegularUserDataGrabber.orderModel.getOrderId());
 
-		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, PomCartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals,
+				PomCartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
 
-		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, PomCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel,
+				PomCartCalculator.shippingCalculatedModel.getTotalAmount());
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		customVerifications.printErrors();

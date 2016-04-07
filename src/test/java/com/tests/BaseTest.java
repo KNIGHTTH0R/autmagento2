@@ -25,7 +25,7 @@ import com.tools.persistance.MongoWriter;
 public class BaseTest {
 	@Managed(uniqueSession = false)
 	public WebDriver webdriver;
-
+	
 	@ManagedPages(defaultUrl = "http://staging-aut.pippajean.com/customer/account/login/")
 	public Pages pages;
 
@@ -34,7 +34,7 @@ public class BaseTest {
 
 	@Before
 	public void startComponents() throws IOException {
-
+		
 		try {
 			System.err.println("--------------------------------- Test Start---------------------------------------");
 

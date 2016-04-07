@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.env.constants.ContextConstants;
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class PartyCreationPage extends AbstractPage {
@@ -71,7 +72,7 @@ public class PartyCreationPage extends AbstractPage {
 	public String submitParty() {
 		element(partySubmitButton).waitUntilVisible();
 		partySubmitButton.click();
-		waitABit(1000);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		return getDriver().getCurrentUrl();
 		
 	}
@@ -79,7 +80,7 @@ public class PartyCreationPage extends AbstractPage {
 	public void checkHostedByCustomer() {
 		element(hostedByCustomer).waitUntilVisible();
 		hostedByCustomer.click();
-		waitABit(1000);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 
 	}
 
@@ -93,9 +94,7 @@ public class PartyCreationPage extends AbstractPage {
 		element(customerName).sendKeys(name);
 		element(selectContact).waitUntilVisible();
 		element(selectContact).click();
-		waitABit(2000);
-		
-		
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	public void selectFirstAvailableDate() {

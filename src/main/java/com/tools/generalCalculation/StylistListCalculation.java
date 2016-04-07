@@ -34,7 +34,6 @@ public class StylistListCalculation {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-
 				}
 				break;
 
@@ -43,7 +42,6 @@ public class StylistListCalculation {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-
 				}
 				break;
 
@@ -52,7 +50,6 @@ public class StylistListCalculation {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-
 				}
 				break;
 
@@ -61,7 +58,6 @@ public class StylistListCalculation {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-
 				}
 				break;
 			}
@@ -92,7 +88,6 @@ public class StylistListCalculation {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-
 				}
 				break;
 
@@ -101,7 +96,6 @@ public class StylistListCalculation {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-
 				}
 				break;
 
@@ -110,7 +104,6 @@ public class StylistListCalculation {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-
 				}
 				break;
 
@@ -119,7 +112,6 @@ public class StylistListCalculation {
 
 					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
-
 				}
 				break;
 			}

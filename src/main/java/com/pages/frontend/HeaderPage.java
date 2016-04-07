@@ -61,8 +61,6 @@ public class HeaderPage extends AbstractPage {
 		List<WebElement> languagesList = websiteContainer.findElements(By.cssSelector("ul#select-website > li a"));
 		for (WebElement lang : languagesList) {
 			if (lang.getText().contentEquals(language.toUpperCase())) {
-				System.out.println("match");
-				System.out.println(lang.getText());
 				lang.click();
 				waitABit(2000);
 				break;
@@ -76,7 +74,6 @@ public class HeaderPage extends AbstractPage {
 		boolean found = false;
 		for (WebElement web : websites) {
 			if (web.getText().contentEquals(website.toUpperCase())) {
-
 				found = true;
 				break;
 			}

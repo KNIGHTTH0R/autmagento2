@@ -5,8 +5,11 @@ import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
+import com.tools.cartcalculations.GeneralCartCalculations;
+import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.datahandler.DataGrabber;
+import com.tools.datahandler.HostDataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.AdyenWorkflows;
@@ -66,7 +69,7 @@ public class RegularCartValidationWorkflows {
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
 		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
-				RegularUserCartCalculator.shippingCalculatedModel);
+				RegularUserCartCalculator.shippingCalculatedModel.getTotalAmount());
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
@@ -108,7 +111,7 @@ public class RegularCartValidationWorkflows {
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
 		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
-				RegularUserCartCalculator.shippingCalculatedModel);
+				RegularUserCartCalculator.shippingCalculatedModel.getTotalAmount());
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
@@ -127,17 +130,17 @@ public class RegularCartValidationWorkflows {
 		regularUserCartWorkflows.setValidateProductsModels(RegularUserCartCalculator.allProductsList,
 				RegularUserDataGrabber.grabbedRegularCartProductsList);
 		regularUserCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
-		
+
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
 				RegularUserCartCalculator.allProductsListTp0,
 				RegularUserDataGrabber.grabbedRegularShippingProductsListTp0);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
-		
+
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
 				RegularUserCartCalculator.allProductsListTp1,
 				RegularUserDataGrabber.grabbedRegularShippingProductsListTp1);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP1");
-		
+
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
 				RegularUserCartCalculator.allProductsListTp2,
 				RegularUserDataGrabber.grabbedRegularShippingProductsListTp2);
@@ -147,12 +150,12 @@ public class RegularCartValidationWorkflows {
 				RegularUserCartCalculator.allProductsListTp0,
 				RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp0);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
-		
+
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
 				RegularUserCartCalculator.allProductsListTp1,
 				RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp1);
 		regularUserShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP1");
-		
+
 		regularUserShippingAndConfirmationWorkflows.setValidateProductsModels(
 				RegularUserCartCalculator.allProductsListTp2,
 				RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp2);
@@ -180,20 +183,21 @@ public class RegularCartValidationWorkflows {
 				RegularUserDataGrabber.regularUserConfirmationTotalsTp0,
 				RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
-		
+
 		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
 				RegularUserDataGrabber.regularUserConfirmationTotalsTp1,
 				RegularUserCartCalculator.shippingCalculatedModelTp1);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP1");
-		
+
 		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
 				RegularUserDataGrabber.regularUserConfirmationTotalsTp2,
 				RegularUserCartCalculator.shippingCalculatedModelTp2);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP2");
 
-		// adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
-		// RegularUserCartCalculator.shippingCalculatedModel);
-		// adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
+				GeneralCartCalculations.calculateAdyenTotal(RegularUserCartCalculator.shippingCalculatedModel,
+						RegularUserCartCalculator.shippingCalculatedModelTp1, RegularUserCartCalculator.shippingCalculatedModelTp2));
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
 		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
@@ -235,7 +239,7 @@ public class RegularCartValidationWorkflows {
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
 		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
-				RegularUserCartCalculator.shippingCalculatedModel);
+				RegularUserCartCalculator.shippingCalculatedModel.getTotalAmount());
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);

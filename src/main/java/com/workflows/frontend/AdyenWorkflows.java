@@ -11,17 +11,17 @@ import com.tools.data.frontend.ShippingModel;
 public class AdyenWorkflows {
 
 	private OrderModel orderModel = new OrderModel();;
-	private ShippingModel shippingCalculatedModel = new ShippingModel();
+	private String totalAmount = new String();
 
-	public void setVerifyAdyenTotals(OrderModel orderModel, ShippingModel shippingCalculatedModel) {
-		this.shippingCalculatedModel = shippingCalculatedModel;
+	public void setVerifyAdyenTotals(OrderModel orderModel, String totalAmount) {
+		this.totalAmount = totalAmount;
 		this.orderModel = orderModel;
 	}
 
 	@Step
 	public void veryfyAdyenTotals(String string) {
 
-		verifyTotal(orderModel.getTotalPrice(), shippingCalculatedModel.getTotalAmount());
+		verifyTotal(orderModel.getTotalPrice(), totalAmount);
 	}
 
 	@Step

@@ -27,6 +27,9 @@ public class UrlConstants {
 	
 	public static final String URL_CHIMPMAIL = "https://login.mailchimp.com/";
 	
+	//unbounce
+	public static final String URL_UNBOUNCE = "http://unbouncepages.com/mihai-aut/";
+	
 	//Frontend Composed URLS
 	public static final String BASE_URL_BE = "/index.php/admin/";
 	public static final String BASE_URL_AUT = "/customer/account/login/";

@@ -1,4 +1,4 @@
-package com.tests.uss11.us11007;
+package com.tests.us9.us9004;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +29,10 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US11.7 Party Host Buys For Customer With Term Purchase Test", type = "Scenarios")
-@Story(Application.PlaceACustomerOrderCart.US11_7.class)
+@WithTag(name = "US9.4 Place Host Order With Term Purchase Test", type = "Scenarios")
+@Story(Application.HostCart.US9_4.class)
 @RunWith(SerenityRunner.class)
-public class US11007ValidateOrdersBackEndTest extends BaseTest {
+public class US9004ValidateOrdersInBackendTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -74,17 +74,17 @@ public class US11007ValidateOrdersBackEndTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		orderModelList = MongoReader.getOrderModel("US11007PartyHostBuysForCustomerTpTest" + "TP0");
-		productsList = MongoReader.grabHostBasicProductModel("US11007PartyHostBuysForCustomerTpTest" + "TP0");
-		shippingModelList = MongoReader.grabShippingModel("US11007PartyHostBuysForCustomerTpTest" + "TP0");
+		orderModelList = MongoReader.getOrderModel("US9004PlaceHostOrderWithTpTest" + "TP0");
+		productsList = MongoReader.grabHostBasicProductModel("US9004PlaceHostOrderWithTpTest" + "TP0");
+		shippingModelList = MongoReader.grabShippingModel("US9004PlaceHostOrderWithTpTest" + "TP0");
 
-		orderModelListTp1 = MongoReader.getOrderModel("US11007PartyHostBuysForCustomerTpTest" + "TP1");
-		productsListTp1 = MongoReader.grabHostBasicProductModel("US11007PartyHostBuysForCustomerTpTest" + "TP1");
-		shippingModelListTp1 = MongoReader.grabShippingModel("US11007PartyHostBuysForCustomerTpTest" + "TP1");
+		orderModelListTp1 = MongoReader.getOrderModel("US9004PlaceHostOrderWithTpTest" + "TP1");
+		productsListTp1 = MongoReader.grabHostBasicProductModel("US9004PlaceHostOrderWithTpTest" + "TP1");
+		shippingModelListTp1 = MongoReader.grabShippingModel("US9004PlaceHostOrderWithTpTest" + "TP1");
 
-		orderModelListTp2 = MongoReader.getOrderModel("US11007PartyHostBuysForCustomerTpTest" + "TP2");
-		productsListTp2 = MongoReader.grabHostBasicProductModel("US11007PartyHostBuysForCustomerTpTest" + "TP2");
-		shippingModelListTp2 = MongoReader.grabShippingModel("US11007PartyHostBuysForCustomerTpTest" + "TP2");
+		orderModelListTp2 = MongoReader.getOrderModel("US9004PlaceHostOrderWithTpTest" + "TP2");
+		productsListTp2 = MongoReader.grabHostBasicProductModel("US9004PlaceHostOrderWithTpTest" + "TP2");
+		shippingModelListTp2 = MongoReader.grabShippingModel("US9004PlaceHostOrderWithTpTest" + "TP2");
 
 		// Setup Data from all models in first test
 		// from Shipping calculations
@@ -124,7 +124,7 @@ public class US11007ValidateOrdersBackEndTest extends BaseTest {
 	 * BackEnd steps in this test
 	 */
 	@Test
-	public void us11007ValidateOrdersBackEndTest() {
+	public void us9004ValidateOrdersInBackendTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 
 		backEndSteps.clickOnSalesOrders();
@@ -175,5 +175,4 @@ public class US11007ValidateOrdersBackEndTest extends BaseTest {
 				orderInfoModelTp2.getDeliveryDate());
 		customVerifications.printErrors();
 	}
-
 }

@@ -169,7 +169,7 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 		hostCartSteps.grabProductsDataWhenThereIsNoBonus();
 		hostCartSteps.grabTotals();
 
-		HostCartCalculator.calculateCartAndShippingTotals(HostCartCalculator.allProductsList, discountClass, shippingValue);
+		HostCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
 
 		hostCartSteps.clickGoToShipping();
 		contactHostShippingHostSteps.checkItemNotReceivedYet();

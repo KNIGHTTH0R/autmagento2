@@ -66,8 +66,8 @@ public class AddressConverter {
 
 		CoordinatesModel coordinatesModel = new CoordinatesModel();
 
-		GoogleResponse res = new AddressConverter().convertToLatLong(model.getStreetAddress() + " " + model.getStreetNumber() + "," + model.getPostCode() + ","
-				+ model.getHomeTown());
+		GoogleResponse res = new AddressConverter().convertToLatLong(model.getStreetAddress() + " "
+				+ model.getStreetNumber() + "," + model.getPostCode() + "," + model.getHomeTown());
 		if (res.getStatus().equals("OK")) {
 
 			for (Result result : res.getResults()) {
@@ -86,7 +86,8 @@ public class AddressConverter {
 
 		CoordinatesModel coordinatesModel = new CoordinatesModel();
 
-		GoogleResponse res = new AddressConverter().convertToLatLongWithComponents("postal_code:" + model.getPostCode() + "|" + "country:" + MongoReader.getContext());
+		GoogleResponse res = new AddressConverter().convertToLatLongWithComponents(
+				"postal_code:" + model.getPostCode() + "|" + "country:" + MongoReader.getContext());
 		if (res.getStatus().equals("OK")) {
 
 			for (Result result : res.getResults()) {

@@ -58,7 +58,7 @@ public class BorrowCartValidationWorkflows {
 		borrowCartShippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, BorrowCartCalculator.shippingCalculatedModel);
 		borrowCartShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 		
-		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, BorrowCartCalculator.shippingCalculatedModel);
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, BorrowCartCalculator.shippingCalculatedModel.getTotalAmount());
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);

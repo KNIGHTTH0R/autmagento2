@@ -3,6 +3,8 @@ package com.tools.cartcalculations;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import com.tools.data.frontend.ShippingModel;
+
 public class GeneralCartCalculations {
 
 	/**
@@ -24,6 +26,16 @@ public class GeneralCartCalculations {
 		}
 
 		return String.valueOf(shipping.setScale(2, RoundingMode.HALF_UP));
+	}
+	
+	public static String calculateAdyenTotal(ShippingModel... shippingModelsList) {
+
+		BigDecimal total = BigDecimal.ZERO;
+
+		for (ShippingModel list : shippingModelsList) {
+			total = total.add(BigDecimal.valueOf(Double.parseDouble(list.getTotalAmount())));
+		}
+		return String.valueOf(total);
 	}
 
 }

@@ -52,8 +52,6 @@ public class RegularUserCartWorkflows {
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
 				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
 				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());
-				// checkoutValidationSteps.verifyBonusType(productNow.getBonusType(),
-				// compare.getBonusType());
 
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);

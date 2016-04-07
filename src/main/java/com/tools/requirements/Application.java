@@ -129,6 +129,9 @@ public class Application {
 
 		public class US8_6 {
 		}
+
+		public class US8_7 {
+		}
 	}
 
 	@Feature
@@ -137,6 +140,9 @@ public class Application {
 		}
 
 		public class US9_2 {
+		}
+
+		public class US9_4 {
 		}
 	}
 
@@ -167,6 +173,9 @@ public class Application {
 		}
 
 		public class US11_6 {
+		}
+
+		public class US11_7 {
 		}
 	}
 

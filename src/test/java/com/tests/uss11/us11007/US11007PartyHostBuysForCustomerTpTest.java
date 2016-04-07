@@ -47,8 +47,8 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US11.2 Party Host Buys For Customer With Buy 3 Get 1 For 50%, ship to customer ", type = "Scenarios")
-@Story(Application.PlaceACustomerOrderCart.US11_2.class)
+@WithTag(name = "US11.7 Party Host Buys For Customer With Term Purchase Test", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_7.class)
 @RunWith(SerenityRunner.class)
 public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 
@@ -209,6 +209,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 
 		String url = shippingSteps.grabUrl();
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
+		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
@@ -233,7 +234,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		hostCartValidationWorkflows.performTpCartValidations();
+		hostCartValidationWorkflows.performTpCartValidationsWithVoucher();
 
 		customVerifications.printErrors();
 

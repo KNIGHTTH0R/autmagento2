@@ -46,8 +46,8 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
-@Story(Application.RegularCart.US8_2.class)
+@WithTag(name = "US8.7 Customer Buy With Term Purchase Test", type = "Scenarios")
+@Story(Application.RegularCart.US8_7.class)
 @RunWith(SerenityRunner.class)
 public class US8007CustomerBuyWithTpTest extends BaseTest {
 
@@ -203,7 +203,9 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
+		System.out.println(url);
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
+		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
 		RegularUserDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));

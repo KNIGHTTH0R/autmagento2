@@ -3,7 +3,6 @@ package com.tools.cartcalculations.partyHost;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tools.cartcalculations.regularUser.RegularCartTotalsCalculation;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
@@ -63,13 +62,17 @@ public class HostCartCalculator {
 		return newProductsList;
 	}
 
-	public static void calculateCartAndShippingTotals(List<HostBasicProductModel> prodList, String discountClass,
-			String shippingValue) {
+	public static void calculateCartAndShippingTotals(String discountClass, String shippingValue) {
 		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotals(allProductsList, discountClass);
 		PrintUtils.printHostCartCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = HostCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts,
 				shippingValue);
 		PrintUtils.printShippingTotals(shippingCalculatedModel);
+	}
+
+	public static void calculateHostCartTotals(String discountClass, String shippingValue) {
+		calculatedTotalsDiscounts = HostCartTotalsCalculation.calculateTotals(allProductsList, discountClass);
+		PrintUtils.printHostCartCalcDetailsModel(calculatedTotalsDiscounts);
 	}
 
 	public static void calculateOrderForCustomerCartAndShippingTotals(String discountClass, String shippingValue,
