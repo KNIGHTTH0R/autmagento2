@@ -13,8 +13,23 @@ import com.tools.utils.DateUtils;
 
 public class StylistListCalculation {
 
-	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinatesModel, String range, String filter, String operand, String operand2,
-			String filterValue, int mode) {
+	/**
+	 * Takes the whole list of stylecoaches in two rounds(memory
+	 * constraints),filters the list by qualifications and returns compatible
+	 * list in range.If more than five exist, returns 5 closest
+	 * 
+	 * mode - 1 for customer lead ,2 for host lead and 3 for stylecoach lead
+	 * 
+	 * @param coordinatesModel
+	 * @param range
+	 * @param filter
+	 * @param operand
+	 * @param operand2
+	 * @param filterValue
+	 * @param mode
+	 */
+	public static List<DBStylistModel> getCompatibleStylistsInRangeFromList(CoordinatesModel coordinatesModel,
+			String range, String filter, String operand, String operand2, String filterValue, int mode) {
 
 		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
 		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
@@ -32,7 +47,8 @@ public class StylistListCalculation {
 			case 1:
 				if (!isStylistIncompatibleForCustomerRetrieval(dbStylistModel)) {
 
-					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					dbStylistModel.setDistanceFromCoordinates(
+							calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 				}
 				break;
@@ -40,7 +56,8 @@ public class StylistListCalculation {
 			case 2:
 				if (!isStylistIncompatibleForHost(dbStylistModel)) {
 
-					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					dbStylistModel.setDistanceFromCoordinates(
+							calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 				}
 				break;
@@ -48,7 +65,8 @@ public class StylistListCalculation {
 			case 3:
 				if (!isStylistIncompatibleForSCRetrieval(dbStylistModel)) {
 
-					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					dbStylistModel.setDistanceFromCoordinates(
+							calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 				}
 				break;
@@ -56,7 +74,8 @@ public class StylistListCalculation {
 			case 4:
 				if (!isStylistIncompatibleForDistributionDuringCheckout(dbStylistModel)) {
 
-					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					dbStylistModel.setDistanceFromCoordinates(
+							calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 				}
 				break;
@@ -67,8 +86,8 @@ public class StylistListCalculation {
 
 	}
 
-	public static List<DBStylistModel> getCompatibleStylistsForDysks(CoordinatesModel coordinatesModel, String range, String filter, String operand, String operand2,
-			String filterValue, int mode) {
+	public static List<DBStylistModel> getCompatibleStylistsForDysks(CoordinatesModel coordinatesModel, String range,
+			String filter, String operand, String operand2, String filterValue, int mode) {
 
 		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
 		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
@@ -86,7 +105,8 @@ public class StylistListCalculation {
 			case 1:
 				if (!isStylistIncompatibleForCustomerRetrievalAssignation(dbStylistModel)) {
 
-					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					dbStylistModel.setDistanceFromCoordinates(
+							calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 				}
 				break;
@@ -94,7 +114,8 @@ public class StylistListCalculation {
 			case 2:
 				if (!isStylistIncompatibleForHostAssignation(dbStylistModel)) {
 
-					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					dbStylistModel.setDistanceFromCoordinates(
+							calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 				}
 				break;
@@ -102,7 +123,8 @@ public class StylistListCalculation {
 			case 3:
 				if (!isStylistIncompatibleForSCRetrievalAssignation(dbStylistModel)) {
 
-					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					dbStylistModel.setDistanceFromCoordinates(
+							calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 				}
 				break;
@@ -110,7 +132,8 @@ public class StylistListCalculation {
 			case 4:
 				if (!isStylistIncompatibleForDistributionDuringCheckout(dbStylistModel)) {
 
-					dbStylistModel.setDistanceFromCoordinates(calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					dbStylistModel.setDistanceFromCoordinates(
+							calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
 					compatibleList.add(dbStylistModel);
 				}
 				break;
@@ -121,7 +144,8 @@ public class StylistListCalculation {
 
 	}
 
-	public static List<DBStylistModel> getDykscStylistByName(String firstName, String lastName, String filter, String operand, String operand2, String filterValue, int mode) {
+	public static List<DBStylistModel> getDykscStylistByName(String firstName, String lastName, String filter,
+			String operand, String operand2, String filterValue, int mode) {
 
 		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
 		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
@@ -144,65 +168,93 @@ public class StylistListCalculation {
 	}
 
 	private static boolean isStylistIncompatibleForCustomerRetrieval(DBStylistModel stylistModel) {
-		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedCustomer().contentEquals("0") || stylistModel.getStylistId().contentEquals("1")
-				|| !stylistModel.getStylistQuiteDate().contentEquals("0") || !stylistModel.getStylistContractStatus().contentEquals("0")
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0")
+				|| stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedCustomer().contentEquals("0")
+				|| stylistModel.getStylistId().contentEquals("1")
+				|| !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0")
 				|| stylistModel.getStylistContractStatus().contentEquals("3");
 
 	}
 
 	private static boolean isStylistIncompatibleForCustomerRetrievalAssignation(DBStylistModel stylistModel) {
-		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedCustomer().contentEquals("0") || stylistModel.getStylistId().contentEquals("1")
-				|| !stylistModel.getStylistQuiteDate().contentEquals("0") || !stylistModel.getStylistContractStatus().contentEquals("0")
-				|| stylistModel.getStylistContractStatus().contentEquals("3") || !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1")
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0")
+				|| stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedCustomer().contentEquals("0")
+				|| stylistModel.getStylistId().contentEquals("1")
+				|| !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0")
+				|| stylistModel.getStylistContractStatus().contentEquals("3")
+				|| !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1")
 				|| !stylistModel.getSlogan().contentEquals("1") || stylistModel.getBirthDate().contentEquals("");
 
 	}
 
 	private static boolean isStylistIncompatibleForSCRetrieval(DBStylistModel stylistModel) {
-		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getStylistId().contentEquals("1") || stylistModel.getQualifiedSC().contentEquals("0") || !stylistModel.getStylistQuiteDate().contentEquals("0")
-				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3")
-				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek());
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0")
+				|| stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getStylistId().contentEquals("1") || stylistModel.getQualifiedSC().contentEquals("0")
+				|| !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0")
+				|| stylistModel.getStylistContractStatus().contentEquals("3")
+				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer
+						.parseInt(stylistModel.getMaxSCPerWeek());
 	}
 
 	private static boolean isStylistIncompatibleForSCRetrievalAssignation(DBStylistModel stylistModel) {
-		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getStylistId().contentEquals("1") || stylistModel.getQualifiedSC().contentEquals("0") || !stylistModel.getStylistQuiteDate().contentEquals("0")
-				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3")
-				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer.parseInt(stylistModel.getMaxSCPerWeek()) || !stylistModel.getConfirmed().contentEquals("1")
-				|| !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1") || stylistModel.getBirthDate().contentEquals("");
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0")
+				|| stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getStylistId().contentEquals("1") || stylistModel.getQualifiedSC().contentEquals("0")
+				|| !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0")
+				|| stylistModel.getStylistContractStatus().contentEquals("3")
+				|| Integer.parseInt(stylistModel.getTotalSCCurrentWeek()) >= Integer
+						.parseInt(stylistModel.getMaxSCPerWeek())
+				|| !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1")
+				|| !stylistModel.getSlogan().contentEquals("1") || stylistModel.getBirthDate().contentEquals("");
 	}
 
 	private static boolean isStylistIncompatibleForHost(DBStylistModel stylistModel) {
-		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1") || !stylistModel.getStylistQuiteDate().contentEquals("0")
-				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3");
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0")
+				|| stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1")
+				|| !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0")
+				|| stylistModel.getStylistContractStatus().contentEquals("3");
 	}
 
 	private static boolean isStylistIncompatibleForHostAssignation(DBStylistModel stylistModel) {
-		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
-				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1") || !stylistModel.getStylistQuiteDate().contentEquals("0")
-				|| !stylistModel.getStylistContractStatus().contentEquals("0") || stylistModel.getStylistContractStatus().contentEquals("3")
-				|| !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1")
-				|| stylistModel.getBirthDate().contentEquals("");
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0")
+				|| stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getQualifiedHost().contentEquals("0") || stylistModel.getStylistId().contentEquals("1")
+				|| !stylistModel.getStylistQuiteDate().contentEquals("0")
+				|| !stylistModel.getStylistContractStatus().contentEquals("0")
+				|| stylistModel.getStylistContractStatus().contentEquals("3")
+				|| !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1")
+				|| !stylistModel.getSlogan().contentEquals("1") || stylistModel.getBirthDate().contentEquals("");
 	}
 
 	private static boolean isStylistIncompatibleForDistributionDuringCheckout(DBStylistModel stylistModel) {
-		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0") || stylistModel.getQualifiedCustomer().contentEquals("0")
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLattitude().contentEquals("0")
+				|| stylistModel.getQualifiedCustomer().contentEquals("0")
 				|| stylistModel.getStylistId().contentEquals("1");
 	}
 
-	private static boolean isStylistIncompatibleForDykscSearchByName(DBStylistModel stylistModel, String firstName, String lastName) {
-		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1") || stylistModel.getStylistId().contentEquals("1")
-				|| !stylistModel.getConfirmed().contentEquals("1") || !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1")
-				|| stylistModel.getBirthDate().contentEquals("") || !stylistModel.getFirstName().contains(firstName) || !stylistModel.getLastName().contains(lastName);
+	private static boolean isStylistIncompatibleForDykscSearchByName(DBStylistModel stylistModel, String firstName,
+			String lastName) {
+		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
+				|| stylistModel.getStylistId().contentEquals("1") || !stylistModel.getConfirmed().contentEquals("1")
+				|| !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1")
+				|| stylistModel.getBirthDate().contentEquals("") || !stylistModel.getFirstName().contains(firstName)
+				|| !stylistModel.getLastName().contains(lastName);
 	}
 
-	public static boolean isStylistInRange(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel, String range) {
-		double distance = DistanceCalculator.getDistance(Double.parseDouble(coordinateaModel.getLattitude()), Double.parseDouble(coordinateaModel.getLongitude()),
-				Double.parseDouble(dBStylistModel.getLattitude()), Double.parseDouble(dBStylistModel.getLongitude()), "K");
+	public static boolean isStylistInRange(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel,
+			String range) {
+		double distance = DistanceCalculator.getDistance(Double.parseDouble(coordinateaModel.getLattitude()),
+				Double.parseDouble(coordinateaModel.getLongitude()), Double.parseDouble(dBStylistModel.getLattitude()),
+				Double.parseDouble(dBStylistModel.getLongitude()), "K");
 		return distance <= Double.parseDouble(range);
 	}
 
@@ -211,7 +263,8 @@ public class StylistListCalculation {
 		Collections.sort(stylistsList, new Comparator<DBStylistModel>() {
 
 			public int compare(DBStylistModel stylist1, DBStylistModel stylist2) {
-				double delta = Double.parseDouble(stylist1.getDistanceFromCoordinates()) - Double.parseDouble(stylist2.getDistanceFromCoordinates());
+				double delta = Double.parseDouble(stylist1.getDistanceFromCoordinates())
+						- Double.parseDouble(stylist2.getDistanceFromCoordinates());
 				if (delta > 0)
 					return 1;
 				if (delta < 0)
@@ -233,7 +286,8 @@ public class StylistListCalculation {
 	 * @param range
 	 * @return compatibleStylistsInRange
 	 */
-	public static List<DBStylistModel> getFirstFiveStylistInRangeOrClosest(CoordinatesModel coordinatesModel, List<DBStylistModel> stylistsList, String range) {
+	public static List<DBStylistModel> getFirstFiveStylistInRangeOrClosest(CoordinatesModel coordinatesModel,
+			List<DBStylistModel> stylistsList, String range) {
 
 		stylistsList = sortStylistListByRange(stylistsList);
 
@@ -268,7 +322,8 @@ public class StylistListCalculation {
 	 * @return compatibleStylistsInRange
 	 */
 
-	public static List<DBStylistModel> getFiveStylistsFromListForeachAgeCategoryIfExist(CoordinatesModel coordinatesModel, List<DBStylistModel> stylistsList, String range) {
+	public static List<DBStylistModel> getFiveStylistsFromListForeachAgeCategoryIfExist(
+			CoordinatesModel coordinatesModel, List<DBStylistModel> stylistsList, String range) {
 
 		stylistsList = sortStylistListByRange(stylistsList);
 
@@ -328,9 +383,11 @@ public class StylistListCalculation {
 		return compatibleStylists;
 	}
 
-	public static String calculateDistanceFromCustomersCoordinates(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel) {
-		double distance = DistanceCalculator.getDistance(Double.parseDouble(coordinateaModel.getLattitude()), Double.parseDouble(coordinateaModel.getLongitude()),
-				Double.parseDouble(dBStylistModel.getLattitude()), Double.parseDouble(dBStylistModel.getLongitude()), "K");
+	public static String calculateDistanceFromCustomersCoordinates(CoordinatesModel coordinateaModel,
+			DBStylistModel dBStylistModel) {
+		double distance = DistanceCalculator.getDistance(Double.parseDouble(coordinateaModel.getLattitude()),
+				Double.parseDouble(coordinateaModel.getLongitude()), Double.parseDouble(dBStylistModel.getLattitude()),
+				Double.parseDouble(dBStylistModel.getLongitude()), "K");
 
 		return String.valueOf(distance);
 	}

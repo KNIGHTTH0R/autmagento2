@@ -1,9 +1,6 @@
-package com.tests.us6.us6001;
+package com.tests.uss28.us28001;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,15 +14,25 @@ import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.ContactDetailsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.soap.DBStylistModel;
 import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.workflows.backend.contact.ContactBackendValidationWorkflows;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Managed;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithDriver;
+import net.thucydides.core.annotations.WithTag;
+
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(SerenityRunner.class)
-public class US6001CheckAssociatedContactCreationTest extends BaseTest {
+public class US28001CheckContactInBackendTest extends BaseTest {
+
+	@Managed(uniqueSession = false, driver = "firefox")
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -40,27 +47,36 @@ public class US6001CheckAssociatedContactCreationTest extends BaseTest {
 	private CustomerFormModel customerFormModel;
 	private AddressModel addressModel;
 	private DateModel dateModel;
-	private String prefferedStylist = "PIPPA&JEAN Stylecoach (1)";
+	private static List<DBStylistModel> stylistsList;
 
 	@Before
 	public void setUp() throws Exception {
 
-		customerFormModel = MongoReader.grabCustomerFormModels("US6001ScRegistrationNewCustomerTest").get(0);
-		addressModel = MongoReader.grabAddressModels("US6001ScRegistrationNewCustomerTest").get(0);
-		dateModel = MongoReader.grabDateModels("US6001ScRegistrationNewCustomerTest").get(0);
+		System.setProperty("webdriver.driver", "firefox");
 
-		expectedContactDetailsModel = contactBackendValidationWorkflows.populateContactDetailsModel(customerFormModel, addressModel, dateModel, prefferedStylist);
+		customerFormModel = MongoReader.grabCustomerFormModels("US28001UnbounceRegistrationTest").get(0);
+		addressModel = MongoReader.grabAddressModels("US28001UnbounceRegistrationTest").get(0);
+		dateModel = MongoReader.grabDateModels("US28001UnbounceRegistrationTest").get(0);
+
+		stylistsList = MongoReader.grabDbStylistModels("US28001UnbounceRegistrationTest");
+
+		expectedContactDetailsModel = contactBackendValidationWorkflows.populateContactDetailsModel(customerFormModel,
+				addressModel, dateModel);
 	}
 
 	@Test
-	public void us6001CheckAssociatedContactCreationTest() {
+	@WithDriver("firefox")
+	public void us28001CheckContactInBackendTest() {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnContactList();
 		stylecoachListBackendSteps.openContactDetails(customerFormModel.getEmailName());
 		ContactDetailsModel grabbedContactDetailsModel = stylecoachListBackendSteps.grabContactDetails();
-		contactBackendValidationWorkflows.verifyContactDetails(grabbedContactDetailsModel, expectedContactDetailsModel);
-		
+		contactBackendValidationWorkflows.verifyUnbounceContactDetails(grabbedContactDetailsModel,
+				expectedContactDetailsModel);
+		contactBackendValidationWorkflows.validateContactsParentStylecoach(stylistsList,
+				grabbedContactDetailsModel.getParentId());
+
 		customVerifications.printErrors();
 	}
 

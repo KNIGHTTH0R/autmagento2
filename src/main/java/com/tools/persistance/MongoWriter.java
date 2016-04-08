@@ -166,6 +166,10 @@ public class MongoWriter extends MongoConnector {
 
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.DB_STYLIST_EMAIL, stylistModel.getEmail());
+		// document.put(MongoTableKeys.DB_STYLIST_ID,
+		// stylistModel.getStylistId());
+		document.put(MongoTableKeys.DB_STYLIST_FIRSTNAME, stylistModel.getFirstName());
+		document.put(MongoTableKeys.DB_STYLIST_LASTNAME, stylistModel.getLastName());
 		document.put(MongoTableKeys.DB_TOTAL_SC_RECEIVED, stylistModel.getTotalSCReceived());
 		document.put(MongoTableKeys.DB_TOTAL_HOST_RECEIVED, stylistModel.getTotalHostReceived());
 		document.put(MongoTableKeys.DB_TOTAL_CUSTOMER_RECEIVED, stylistModel.getTotalCustomerReceived());
@@ -195,7 +199,8 @@ public class MongoWriter extends MongoConnector {
 		table.insert(document);
 	}
 
-	public static void saveCustomerConfigurationModel(CustomerConfigurationModel customerConfigurationModel, String testName) {
+	public static void saveCustomerConfigurationModel(CustomerConfigurationModel customerConfigurationModel,
+			String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.CUSTOMER_CONFIGURATION_MODEL);
 
@@ -222,7 +227,8 @@ public class MongoWriter extends MongoConnector {
 		table.insert(document);
 	}
 
-	public static void savePartyBonusCalculationModel(PartyBonusCalculationModel partyBonusCalculationModel, String testName) {
+	public static void savePartyBonusCalculationModel(PartyBonusCalculationModel partyBonusCalculationModel,
+			String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.PARTY_BONUS_CALCULATION_MODEL);
 
@@ -243,14 +249,14 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
-	
+
 	public static void saveStringValue(String value, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.STRING_VALUE);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.STOC_QUANTITY, value);
-		
+
 		table.insert(document);
 	}
 
@@ -410,7 +416,8 @@ public class MongoWriter extends MongoConnector {
 		table.insert(document);
 	}
 
-	public static void saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalcDetailsModel calcDetailsModel, String testName) {
+	public static void saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalcDetailsModel calcDetailsModel,
+			String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.STARTER_SET_CART_CALC_DETAILS_MODEL);
 
@@ -549,7 +556,8 @@ public class MongoWriter extends MongoConnector {
 		table.insert(document);
 	}
 
-	public static void saveLoungeIpPerformanceModel(LoungeIpPerformanceModel loungeIpPerformanceModel, String testName) {
+	public static void saveLoungeIpPerformanceModel(LoungeIpPerformanceModel loungeIpPerformanceModel,
+			String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.IP_PERFORMANCE_MODEL);
 

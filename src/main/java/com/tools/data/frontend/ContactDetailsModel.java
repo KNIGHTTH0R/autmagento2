@@ -9,6 +9,15 @@ public class ContactDetailsModel {
 	private String plz;
 	private String activatedAt;
 	private String countryCode;
+	private String source;
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
 
 	public String getParentId() {
 		return parentId;
@@ -65,6 +74,5 @@ public class ContactDetailsModel {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	
 
 }

@@ -38,6 +38,7 @@ import com.pages.external.mailchimp.MailchimpLoginPage;
 import com.pages.external.mailchimp.MailchimpSearchPage;
 import com.pages.external.mailchimp.MailchimpSubscriberProfilePage;
 import com.pages.external.unbounce.UnbouncePage;
+import com.pages.external.unbounce.UnbounceRegSuccesPage;
 import com.pages.frontend.ContactDetailsPage;
 import com.pages.frontend.CreateCustomerPage;
 import com.pages.frontend.FancyBoxPage;
@@ -626,6 +627,10 @@ public class AbstractSteps extends ScenarioSteps {
 	// unbounce
 	public UnbouncePage unbouncePage() {
 		return getPages().currentPageAt(UnbouncePage.class);
+	}
+	
+	public UnbounceRegSuccesPage unbounceRegSuccesPage() {
+		return getPages().currentPageAt(UnbounceRegSuccesPage.class);
 	}
 
 	// commission

@@ -356,11 +356,17 @@ public class MongoReader extends MongoConnector {
 				dbObject = cursor.next();
 
 				result.setEmail(MongoUtils.checkField(dbObject, MongoTableKeys.DB_STYLIST_EMAIL));
+				// result.setStylistId(MongoUtils.checkField(dbObject,
+				// MongoTableKeys.DB_STYLIST_ID));
+				result.setFirstName(MongoUtils.checkField(dbObject, MongoTableKeys.DB_STYLIST_FIRSTNAME));
+				result.setLastName(MongoUtils.checkField(dbObject, MongoTableKeys.DB_STYLIST_LASTNAME));
 				result.setTotalSCReceived(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_SC_RECEIVED));
 				result.setTotalHostReceived(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_HOST_RECEIVED));
-				result.setTotalCustomerReceived(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_CUSTOMER_RECEIVED));
+				result.setTotalCustomerReceived(
+						MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_CUSTOMER_RECEIVED));
 				result.setTotalSCCurrentWeek(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_SC_CURRENT_WEEK));
-				result.setTotalHostCurrentWeek(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_HOST_CURRENT_WEEK));
+				result.setTotalHostCurrentWeek(
+						MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_HOST_CURRENT_WEEK));
 
 				itemList.add(result);
 			}
@@ -1054,7 +1060,8 @@ public class MongoReader extends MongoConnector {
 				result.setCareerLevel(MongoUtils.checkField(dbObject, MongoTableKeys.CAREER_LEVEL));
 				result.setPayLevel(MongoUtils.checkField(dbObject, MongoTableKeys.PAY_LEVEL));
 				result.setIndividualPoints(MongoUtils.checkField(dbObject, MongoTableKeys.INDIVIDUAL_POINTS));
-				result.setUnsafeIndividualPoints(MongoUtils.checkField(dbObject, MongoTableKeys.UNSAFE_INDIVIDUAL_POINTS));
+				result.setUnsafeIndividualPoints(
+						MongoUtils.checkField(dbObject, MongoTableKeys.UNSAFE_INDIVIDUAL_POINTS));
 				result.setTeamPoints(MongoUtils.checkField(dbObject, MongoTableKeys.TEAM_POINTS));
 				result.setStyleCoachFirstLevel(MongoUtils.checkField(dbObject, MongoTableKeys.STYLECOACH_FIRST_LEVEL));
 				result.setGoldStyleCoaches(MongoUtils.checkField(dbObject, MongoTableKeys.GOLD_STYLECOACHES));

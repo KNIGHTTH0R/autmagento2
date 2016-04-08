@@ -2,11 +2,10 @@ package com.workflows.frontend;
 
 import java.math.BigDecimal;
 
-import net.thucydides.core.annotations.Step;
-
 import com.tools.CustomVerification;
 import com.tools.data.backend.OrderModel;
-import com.tools.data.frontend.ShippingModel;
+
+import net.thucydides.core.annotations.Step;
 
 public class AdyenWorkflows {
 

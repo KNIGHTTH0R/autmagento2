@@ -25,7 +25,7 @@ public class ContactDetailsBackendPage extends AbstractPage {
 
 		waitFor(ExpectedConditions.visibilityOfAllElements(contactDetailsTable.findElements(By.cssSelector("tr"))));
 		List<WebElement> valuesList = contactDetailsTable.findElements(By.cssSelector("tr"));
-		
+
 		for (WebElement itemNow : valuesList) {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 			WebElement valueTr = itemNow.findElement(By.cssSelector("td:last-child"));
@@ -59,6 +59,7 @@ public class ContactDetailsBackendPage extends AbstractPage {
 				valueTransformer = itemNow.findElement(By.cssSelector("td:last-child")).getText();
 				resultModel.setActivatedAt(valueTransformer);
 			}
+
 		}
 		return resultModel;
 	}

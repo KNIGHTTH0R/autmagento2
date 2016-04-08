@@ -7,6 +7,10 @@ import com.tools.requirements.AbstractPage;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+/**
+ * @author mihai
+ *
+ */
 public class UnbouncePage extends AbstractPage {
 
 	@FindBy(id = "vorname")
@@ -23,12 +27,6 @@ public class UnbouncePage extends AbstractPage {
 
 	@FindBy(id = "email")
 	private WebElement emailInput;
-
-	@FindBy(id = "terms_and_conditions_")
-	private WebElement termsConditionsInput;
-
-	@FindBy(id = "lp-pom-button-11")
-	private WebElement submitButton;
 
 	public void enterFirstname(String name) {
 		element(firstnameInput).waitUntilVisible();
@@ -55,17 +53,23 @@ public class UnbouncePage extends AbstractPage {
 		element(emailInput).sendKeys(email);
 	}
 
+	/**
+	 * js used to work on Android also
+	 */
 	public void acceptTerms() {
-//		element(termsConditionsInput).waitUntilVisible();
-//		termsConditionsInput.click();
-		
-		JavascriptExecutor js = (JavascriptExecutor)getDriver();
+
+		JavascriptExecutor js = (JavascriptExecutor) getDriver();
 		js.executeScript("window.document.getElementById('terms_and_conditions_').click()");
+
 	}
 
+	/**
+	 * js used to work on Android also
+	 */
 	public void submitForm() {
-		element(submitButton).waitUntilVisible();
-		submitButton.click();
+
+		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		js.executeScript("window.document.getElementById('lp-pom-button-11').click()");
 	}
 
 }

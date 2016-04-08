@@ -9,10 +9,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.steps.external.unbounce.UnbounceRegSuccessSteps;
 import com.steps.external.unbounce.UnbounceSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.env.constants.SoapConstants;
@@ -35,8 +37,11 @@ public class US28001UnbounceRegistrationTest extends BaseTest {
 
 	@Steps
 	public UnbounceSteps unbounceSteps;
+	@Steps
+	public UnbounceRegSuccessSteps unbounceRegSuccessSteps;
 
 	private CustomerFormModel dataModel;
+	private DateModel customerFormDate;
 	private AddressModel addressModel;
 	private CoordinatesModel coordinatesModel = new CoordinatesModel();
 	private RandomAddress randomAddress;
@@ -45,26 +50,23 @@ public class US28001UnbounceRegistrationTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
+		customerFormDate = new DateModel();
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		randomAddress = new RandomAddress();
 
-		// while (coordinatesModel.getLattitude() == null) {
-		//
-		// addressModel = randomAddress.getRandomAddressFromFile();
-		// coordinatesModel =
-		// AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
-		// System.out.println(coordinatesModel.getLattitude());
-		// System.out.println(coordinatesModel.getLongitude());
-		//
-		// }
-		// compatibleStylistListForDistribution =
-		// StylistListCalculation.getCompatibleStylistsInRangeFromList(
-		// coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE,
-		// SoapConstants.STYLIST_ID_FILTER,
-		// SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN,
-		// SoapConstants.STYLIST_ID_2000, 1);
-		// PrintUtils.printListDbStylists(compatibleStylistListForDistribution);
+		while (coordinatesModel.getLattitude() == null) {
+
+			addressModel = randomAddress.getRandomAddressFromFile();
+			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
+			System.out.println(coordinatesModel.getLattitude());
+			System.out.println(coordinatesModel.getLongitude());
+
+		}
+		compatibleStylistListForDistribution = StylistListCalculation.getCompatibleStylistsInRangeFromList(
+				coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE, SoapConstants.STYLIST_ID_FILTER,
+				SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 3);
+		PrintUtils.printListDbStylists(compatibleStylistListForDistribution);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
@@ -74,14 +76,17 @@ public class US28001UnbounceRegistrationTest extends BaseTest {
 	public void us28001UnbounceRegistrationTest() {
 
 		unbounceSteps.navigateToUnbouncePage();
-		unbounceSteps.fillUnbounceDetails(dataModel, addressModel);
+		String date = unbounceSteps.fillUnbounceDetails(dataModel, addressModel);
+		customerFormDate.setDate(date);
 		unbounceSteps.submitUnbounceForm();
+		unbounceRegSuccessSteps.verifySuccessMessage();
 	}
 
 	@After
 	public void saveData() {
+		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
-		MongoWriter.saveCoordinatesModel(coordinatesModel, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(addressModel, getClass().getSimpleName());
 		for (DBStylistModel stylist : compatibleStylistListForDistribution) {
 			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
 		}

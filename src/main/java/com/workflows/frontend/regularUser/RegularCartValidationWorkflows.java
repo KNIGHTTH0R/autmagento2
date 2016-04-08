@@ -1,18 +1,16 @@
 package com.workflows.frontend.regularUser;
 
-import net.thucydides.core.annotations.Screenshots;
-import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Steps;
-
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.cartcalculations.GeneralCartCalculations;
-import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.datahandler.DataGrabber;
-import com.tools.datahandler.HostDataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.AdyenWorkflows;
+
+import net.thucydides.core.annotations.Screenshots;
+import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Steps;
 
 public class RegularCartValidationWorkflows {
 

@@ -48,7 +48,9 @@ public class ConfigConstants {
 	public static final String INACTIVE = "Inactive";
 	public static final String REASSIGNED_PREFIX = "gesperrt_";
 	
+	//unbounce success registration page
 	
+	public static final String UNBOUNCE_SUCCESS_MESSAGE = "Vielen Dank für deine Anmeldung.";
 	//backend horizontal menu cons
 	
 	public static final String PROMOTIONEN = "Promotionen";
