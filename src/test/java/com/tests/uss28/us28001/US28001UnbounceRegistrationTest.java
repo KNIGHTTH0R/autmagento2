@@ -30,8 +30,8 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US13.1 Distribution to customer lead qualified SC", type = "Scenarios")
-@Story(Application.Distribution.US13_1.class)
+@WithTag(name = "US28.1 Unbounce registration with regular distribution", type = "Scenarios")
+@Story(Application.UnbounceRegistration.US28_1.class)
 @RunWith(SerenityRunner.class)
 public class US28001UnbounceRegistrationTest extends BaseTest {
 

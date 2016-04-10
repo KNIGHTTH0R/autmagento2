@@ -365,5 +365,10 @@ public class Application {
 		public class US27_1 {
 		}
 	}
+	@Feature
+	public class UnbounceRegistration {
+		public class US28_1 {
+		}
+	}
 
 }

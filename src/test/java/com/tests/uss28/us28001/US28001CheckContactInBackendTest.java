@@ -27,12 +27,10 @@ import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithDriver;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
-@Story(Application.StylecoachRegistration.US6_1.class)
+@WithTag(name = "US28.1 Unbounce registration with regular distribution", type = "Scenarios")
+@Story(Application.UnbounceRegistration.US28_1.class)
 @RunWith(SerenityRunner.class)
 public class US28001CheckContactInBackendTest extends BaseTest {
-
-	@Managed(uniqueSession = false, driver = "firefox")
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -51,8 +49,6 @@ public class US28001CheckContactInBackendTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-
-		System.setProperty("webdriver.driver", "firefox");
 
 		customerFormModel = MongoReader.grabCustomerFormModels("US28001UnbounceRegistrationTest").get(0);
 		addressModel = MongoReader.grabAddressModels("US28001UnbounceRegistrationTest").get(0);
