@@ -43,9 +43,9 @@ public class US28001UnbounceRegistrationTest extends BaseTest {
 	private CustomerFormModel dataModel;
 	private DateModel customerFormDate;
 	private AddressModel addressModel;
-	private CoordinatesModel coordinatesModel = new CoordinatesModel();
+	private CoordinatesModel coordinatesModel;
 	private RandomAddress randomAddress;
-	private List<DBStylistModel> compatibleStylistListForDistribution = new ArrayList<DBStylistModel>();
+	private List<DBStylistModel> compatibleStylistListForDistribution;
 
 	@Before
 	public void setUp() throws Exception {
@@ -59,8 +59,6 @@ public class US28001UnbounceRegistrationTest extends BaseTest {
 
 			addressModel = randomAddress.getRandomAddressFromFile();
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
-			System.out.println(coordinatesModel.getLattitude());
-			System.out.println(coordinatesModel.getLongitude());
 
 		}
 		compatibleStylistListForDistribution = StylistListCalculation.getCompatibleStylistsInRangeFromList(

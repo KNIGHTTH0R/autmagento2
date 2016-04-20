@@ -1,17 +1,7 @@
 package com.tests.us9.us9001;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -32,13 +22,18 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.env.constants.Credentials;
 import com.tools.env.constants.SoapKeys;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US9.1 Place Host Order With 40% Discount and JB Test", type = "Scenarios")
 @Story(Application.HostCart.US9_1.class)
@@ -66,31 +61,9 @@ public class US9001ValidateOrderBackOfficeTest extends BaseTest {
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	private String orderId;
-	private String beUser,bePass;
 
 	@Before
 	public void setUp() {
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us9" + File.separator + "us9001.properties");
-			prop.load(input);
-			beUser = prop.getProperty("beUser");
-			bePass = prop.getProperty("bePass");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 
 		List<OrderModel> orderModelList = MongoReader.getOrderModel("US9001PlaceHostOrderWithForthyDiscountsAndJbTest" + SoapKeys.GRAB);
 		productsList = MongoReader.grabHostBasicProductModel("US9001PlaceHostOrderWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
@@ -134,7 +107,8 @@ public class US9001ValidateOrderBackOfficeTest extends BaseTest {
 	 */
 	@Test
 	public void us9001ValidateOrderBackOfficeTest() {
-		backEndSteps.performAdminLogin(beUser, bePass);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);

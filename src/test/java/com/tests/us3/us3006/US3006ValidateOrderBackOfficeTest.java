@@ -1,17 +1,7 @@
 package com.tests.us3.us3006;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -32,14 +22,18 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.constants.FilePaths;
+import com.tools.env.constants.Credentials;
 import com.tools.env.constants.SoapKeys;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US3.6 Shop for myself VAT valid and SMB billing and shipping DE",type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_6.class)
@@ -67,31 +61,9 @@ public class US3006ValidateOrderBackOfficeTest extends BaseTest {
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	private String orderId;
-	private String beUser,bePass;
 
 	@Before
 	public void setUp() {
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3006.properties");
-			prop.load(input);
-			beUser = prop.getProperty("beUser");
-			bePass = prop.getProperty("bePass");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 
 		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3006SfmValidVatSmbBillingShippingDeTest" + SoapKeys.GRAB);
 		productsList = MongoReader.grabBasicProductModel("US3006SfmValidVatSmbBillingShippingDeTest" + SoapKeys.GRAB);
@@ -139,7 +111,7 @@ public class US3006ValidateOrderBackOfficeTest extends BaseTest {
 	 */
 	@Test
 	public void us3006ValidateOrderBackOfficeTest() {
-		backEndSteps.performAdminLogin(beUser, bePass);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);

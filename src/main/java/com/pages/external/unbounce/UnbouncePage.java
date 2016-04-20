@@ -28,6 +28,9 @@ public class UnbouncePage extends AbstractPage {
 	@FindBy(id = "email")
 	private WebElement emailInput;
 
+	@FindBy(id = "terms_and_conditions_")
+	private WebElement terms;
+
 	public void enterFirstname(String name) {
 		element(firstnameInput).waitUntilVisible();
 		element(firstnameInput).sendKeys(name);
@@ -60,7 +63,6 @@ public class UnbouncePage extends AbstractPage {
 
 		JavascriptExecutor js = (JavascriptExecutor) getDriver();
 		js.executeScript("window.document.getElementById('terms_and_conditions_').click()");
-
 	}
 
 	/**

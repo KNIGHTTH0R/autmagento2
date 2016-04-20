@@ -115,9 +115,9 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
-			if (!MongoReader.getContext().contentEquals("de")) {
-				shippingValue = "7.56";
-			}
+//			if (!MongoReader.getContext().contentEquals("de")) {
+//				shippingValue = "7.56";
+//			}
 			taxClass = prop.getProperty("taxClass");
 
 		} catch (IOException ex) {

@@ -23,9 +23,10 @@ import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
 
 public class BaseTest {
+	
 	@Managed(uniqueSession = false)
 	public WebDriver webdriver;
-	
+
 	@ManagedPages(defaultUrl = "http://staging-aut.pippajean.com/customer/account/login/")
 	public Pages pages;
 
@@ -100,13 +101,15 @@ public class BaseTest {
 	public static void updateDictionary() {
 		MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG, MongoTableKeys.DICTIONARY_MODEL);
 
-		System.out.println("Dictionary PATH: " + UrlConstants.CONTEXT_PATH + MongoReader.getContext() + File.separator + "dictionary.properties");
+		System.out.println("Dictionary PATH: " + UrlConstants.CONTEXT_PATH + MongoReader.getContext() + File.separator
+				+ "dictionary.properties");
 		System.out.println("Load Dictionary... ");
 
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-			input = new FileInputStream(UrlConstants.CONTEXT_PATH + MongoReader.getContext() + File.separator + "dictionary.properties");
+			input = new FileInputStream(
+					UrlConstants.CONTEXT_PATH + MongoReader.getContext() + File.separator + "dictionary.properties");
 			prop.load(input);
 			for (Object keyNow : prop.keySet()) {
 				String value = prop.getProperty(String.valueOf(keyNow));
