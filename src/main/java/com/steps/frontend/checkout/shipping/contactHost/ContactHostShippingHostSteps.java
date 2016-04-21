@@ -28,4 +28,9 @@ public class ContactHostShippingHostSteps extends AbstractSteps {
 		contactHostShippingPage().selectCountry(country);
 	}
 
+	@Step
+	public void enterPLZ(String plz) {
+		contactHostShippingPage().enterPLZ(plz);
+	}
+
 }

@@ -88,6 +88,7 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 	private String shippingAddress;
 	private String shippingValue;
 	private String country;
+	private String plz;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
@@ -125,6 +126,7 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 			contactBillingAddress = prop.getProperty("contactBillingAddress");
 			shippingAddress = prop.getProperty("shippingAddress");
 			country = prop.getProperty("country");
+			plz = prop.getProperty("plz");
 			shippingValue = prop.getProperty("shippingValue");
 
 		} catch (IOException ex) {
@@ -175,6 +177,7 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 		contactHostShippingHostSteps.checkItemNotReceivedYet();
 		contactHostShippingHostSteps.verifyThatRestrictedCountriesAreNotAvailable();
 		contactHostShippingHostSteps.selectCountry(country);
+		contactHostShippingHostSteps.enterPLZ(plz);
 		shippingPartySectionSteps.clickShipToStylecoach();
 		shippingPartySectionSteps.selectShipToStylecoachAddress(shippingAddress);
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();

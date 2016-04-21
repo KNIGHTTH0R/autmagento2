@@ -85,6 +85,7 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 	private String contactBillingAddress;
 	private String shippingValue;
 	private String country;
+	private String plz;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
@@ -133,6 +134,7 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 			discountClass = prop.getProperty("discountClass");
 			contactBillingAddress = prop.getProperty("contactBillingAddress");
 			country = prop.getProperty("country");
+			plz = prop.getProperty("plz");
 			shippingValue = prop.getProperty("shippingValue");
 
 		} catch (IOException ex) {
@@ -190,6 +192,7 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 		contactHostShippingHostSteps.checkItemNotReceivedYet();
 		contactHostShippingHostSteps.verifyThatRestrictedCountriesAreNotAvailable();
 		contactHostShippingHostSteps.selectCountry(country);
+		contactHostShippingHostSteps.enterPLZ(plz);
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 
