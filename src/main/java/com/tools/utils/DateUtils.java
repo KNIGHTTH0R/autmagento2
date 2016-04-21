@@ -11,6 +11,8 @@ import java.util.Locale;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
+import com.tools.persistance.MongoReader;
+
 public class DateUtils {
 
 	public static String getLastDayOfTheCurrentMonth(String format) {
@@ -147,9 +149,9 @@ public class DateUtils {
 		return String.valueOf(sdf.format(new Date()));
 	}
 
-	public static String parseDate(String dateString, String initialFormatString, String finalFormatString)
-			throws ParseException {
-		DateFormat formatInitial = new SimpleDateFormat(initialFormatString);
+	public static String parseDate(String dateString, String initialFormatString, Locale locale,
+			String finalFormatString) throws ParseException {
+		DateFormat formatInitial = new SimpleDateFormat(initialFormatString, locale);
 		DateFormat formatFinal = new SimpleDateFormat(finalFormatString);
 		Date date = formatInitial.parse(dateString);
 
@@ -262,9 +264,8 @@ public class DateUtils {
 		return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
 	}
 
-	// public static void main(String args[]) throws ParseException {
-	// System.out.println(DateUtils.parseDate("15. Apr. 16", "dd. MMM. yy",
-	// "dd.MM.YYYY"));
-	// }
+	public static void main(String args[]) throws ParseException {
+		System.out.println(DateUtils.parseDate("15. May. 16", "dd. MMM. yy",new Locale.Builder().setLanguage("es").build(), "dd.MM.YYYY"));
+	}
 
 }

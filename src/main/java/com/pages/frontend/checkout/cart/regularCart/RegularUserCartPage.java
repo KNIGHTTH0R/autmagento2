@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -114,7 +115,7 @@ public class RegularUserCartPage extends AbstractPage {
 	 * @return selected delivery date
 	 * @throws ParseException
 	 */
-	public String selectDeliveryDate(String productCode) throws ParseException {
+	public String selectDeliveryDate(String productCode,Locale locale) throws ParseException {
 		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
 		String deliveryDate = "";
 		boolean foundProduct = false;
@@ -124,7 +125,7 @@ public class RegularUserCartPage extends AbstractPage {
 				WebElement delivery = element(
 						product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option:nth-child(2)")));
 				String[] tokens = delivery.getText().split(", ");
-				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", "dd.MM.YYYY");
+				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy",locale, "dd.MM.YYYY");
 				delivery.click();
 				break;
 			}
@@ -141,7 +142,7 @@ public class RegularUserCartPage extends AbstractPage {
 	 * @throws ParseException
 	 */
 
-	public String getDeliveryDate(String productCode) throws ParseException {
+	public String getDeliveryDate(String productCode,Locale locale) throws ParseException {
 		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
 		String deliveryDate = "";
 		boolean foundProduct = false;
@@ -151,7 +152,7 @@ public class RegularUserCartPage extends AbstractPage {
 				WebElement delivery = element(product
 						.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[selected='selected']")));
 				String[] tokens = delivery.getText().split(", ");
-				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", "dd.MM.YYYY");
+				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy",locale, "dd.MM.YYYY");
 				break;
 			}
 		}

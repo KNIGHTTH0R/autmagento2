@@ -27,6 +27,10 @@ public class ShippingPartySectionSteps extends AbstractSteps {
 	public void selectCountry(String country) {
 		regularUserShippingPage().selectCountry(country);
 	}
+	@Step
+	public void enterPLZ(String plz) {
+		regularUserShippingPage().enterPLZ(plz);
+	}
 
 	@Step
 	public void clickShipToHostessButton() {

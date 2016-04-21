@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.junit.After;
@@ -85,6 +86,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 	private String discountClass;
 	private String billingAddress;
 	private String country;
+	private String plz;
 	private String voucherCode;
 	private String shippingValue;
 	private String voucherValue;
@@ -126,6 +128,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 			customerName = prop.getProperty("customerName");
 
 			country = prop.getProperty("country");
+			plz = prop.getProperty("plz");
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
@@ -179,8 +182,10 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku());
-		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku());
+		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku(),
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
 		regularUserCartSteps.verifyMultipleDeliveryOption();
 
@@ -196,6 +201,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
 		shippingPartySectionSteps.selectCountry(country);
+		shippingPartySectionSteps.enterPLZ(plz);
 
 		shippingSteps.grabHostProductsListTp0();
 		shippingSteps.grabHostProductsListTp1();

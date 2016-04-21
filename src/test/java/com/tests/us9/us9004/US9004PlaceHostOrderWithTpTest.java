@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.junit.After;
@@ -176,8 +177,10 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct2.getSku(),
 				ContextConstants.DISCOUNT_40_BONUS);
 
-		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku());
-		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku());
+		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku(),
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
 		hostCartSteps.grabProductsData();
 		hostCartSteps.grabTotals();

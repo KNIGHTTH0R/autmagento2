@@ -82,6 +82,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 	private String discountClass;
 	private String billingAddress;
 	private String country;
+	private String plz;
 	private String shippingValue;
 	private String voucherValue;
 	private CreditCardModel creditCardData = new CreditCardModel();
@@ -122,6 +123,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 			customerName = prop.getProperty("customerName");
 
 			country = prop.getProperty("country");
+			plz = prop.getProperty("plz");
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
@@ -183,6 +185,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 		
 		shippingPartySectionSteps.selectCountry(country);
+		shippingPartySectionSteps.enterPLZ(plz);
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();

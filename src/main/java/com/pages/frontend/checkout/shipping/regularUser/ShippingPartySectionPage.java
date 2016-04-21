@@ -19,6 +19,9 @@ public class ShippingPartySectionPage extends AbstractPage {
 
 	@FindBy(css = "select[id='billing:country_id']")
 	private WebElement countrySelect;
+	
+	@FindBy(css = "input[name='billing[postcode]']")
+	private WebElement plzInput;
 
 	@FindBy(id = "to_hostess")
 	private WebElement shipToHostessButton;
@@ -60,6 +63,12 @@ public class ShippingPartySectionPage extends AbstractPage {
 	public void selectCountry(String country) {
 		element(countrySelect).waitUntilVisible();
 		element(countrySelect).selectByVisibleText(country);
+	}
+	
+	public void enterPLZ(String plz) {
+		element(plzInput).waitUntilVisible();
+		element(plzInput).clear();
+		element(plzInput).sendKeys(plz);;
 	}
 
 	public void selectShipToHostessAddress(String address) {
