@@ -16,44 +16,42 @@ import com.tests.uss11.us11005.US11005CreatePartyWithStylistHostTest;
 
 @SuiteClasses({
 	
-	US3002Suite.class,
-	
-	US10001CreatePartyWithStylistHostTest.class,
-	US10001bCreatePartyWithStylistHostTest.class,
-	US10002CreatePartyWithCustomerHostTest.class,
-	US10002bCreatePartyWithCustomerHostTest.class,
-	US11001CreatePartyWithStylistHostTest.class,
-	US11002CreatePartyWithCustomerHostTest.class,
-	US11004CreatePartyWithStylistHostTest.class,
-	US11005CreatePartyWithStylistHostTest.class,
-	
-	US001Suite.class,
-	US002Suite.class,
-	US3001Suite.class,
-	US3002Suite.class,
-	US3003Suite.class,
-	US3004Suite.class,
-	US3006Suite.class,
-	US3007Suite.class,
-	US3009Suite.class,
-	US30010Suite.class,
-	
-	US6001Suite.class,
-	US6001bSuite.class,
-	
-//	US8001Suite.class,
-	US8002Suite.class,
-	US8003Suite.class,	
-	US8004Suite.class,
-	US8005Suite.class,
-	US8006Suite.class,
-	US8007Suite.class,
-	
-//	US4001Suite.class,
-	US4002Suite.class,
-	
-	US16001Suite.class,
-	US16002Suite.class,
+//	US10001CreatePartyWithStylistHostTest.class,
+//	US10001bCreatePartyWithStylistHostTest.class,
+//	US10002CreatePartyWithCustomerHostTest.class,
+//	US10002bCreatePartyWithCustomerHostTest.class,
+//	US11001CreatePartyWithStylistHostTest.class,
+//	US11002CreatePartyWithCustomerHostTest.class,
+//	US11004CreatePartyWithStylistHostTest.class,
+//	US11005CreatePartyWithStylistHostTest.class,
+//	
+//	US001Suite.class,
+//	US002Suite.class,
+//	US3001Suite.class,
+//	US3002Suite.class,
+//	US3003Suite.class,
+//	US3004Suite.class,
+//	US3006Suite.class,
+//	US3007Suite.class,
+//	US3009Suite.class,
+//	US30010Suite.class,
+//	
+//	US6001Suite.class,
+//	US6001bSuite.class,
+//	
+////	US8001Suite.class,
+//	US8002Suite.class,
+//	US8003Suite.class,	
+//	US8004Suite.class,
+//	US8005Suite.class,
+//	US8006Suite.class,
+//	US8007Suite.class,
+//	
+////	US4001Suite.class,
+//	US4002Suite.class,
+//	
+//	US16001Suite.class,
+//	US16002Suite.class,
 	
 	US11001Suite.class,
 	US11002Suite.class,

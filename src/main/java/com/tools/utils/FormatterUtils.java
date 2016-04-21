@@ -43,6 +43,7 @@ public class FormatterUtils {
 		String result = unitPrice;
 		result = result.replace(" €", "");
 		result = result.replace("€ ", "");
+		result = result.replace("€", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace(",", ".");
@@ -95,6 +96,7 @@ public class FormatterUtils {
 		String result = unitPrice;
 		result = result.replace(" €", "");
 		result = result.replace("€ ", "");
+		result = result.replace("€", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace("IP", "");
@@ -109,6 +111,7 @@ public class FormatterUtils {
 		String result = unitPrice;
 		result = result.replace(" €", "");
 		result = result.replace("€ ", "");
+		result = result.replace("€", "");
 		result = result.replace(".", "");
 		result = result.replace(",", ".");
 		result = result.replace("-", "");
@@ -121,6 +124,7 @@ public class FormatterUtils {
 		String result = unitPrice;
 		result = result.replace(" €", "");
 		result = result.replace("€ ", "");
+		result = result.replace("€", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace("IP", "");
@@ -135,6 +139,7 @@ public class FormatterUtils {
 		int finalResult = 0;
 		result = result.replace(" €", "");
 		result = result.replace("€ ", "");
+		result = result.replace("€", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace("IP", "");

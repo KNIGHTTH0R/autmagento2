@@ -124,7 +124,7 @@ public class US16002StyleCoachBorrowsWithFreeShippingTest extends BaseTest {
 	}
 
 	@Test
-	public void us16001StyleCoachBorrowsProductsTest() {
+	public void us16002StyleCoachBorrowsWithFreeShippingTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
