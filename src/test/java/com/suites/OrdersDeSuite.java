@@ -70,6 +70,9 @@ import com.tests.uss11.us11005.US11005CreatePartyWithStylistHostTest;
 	US9002bSuite.class,
 	US9004Suite.class,
 	
+	US15004Suite.class,
+	US12001Suite.class,
+	
 
 	
 	
