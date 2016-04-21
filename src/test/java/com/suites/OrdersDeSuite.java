@@ -61,17 +61,13 @@ import com.tests.uss11.us11005.US11005CreatePartyWithStylistHostTest;
 //	US11006Suite.class,
 //	US11007Suite.class,
 	
-	US9001Suite.class,
-	US9002Suite.class,
-	US9002bSuite.class,
-	US9004Suite.class,
+//	US9001Suite.class,
+//	US9002Suite.class,
+//	US9002bSuite.class,
+//	US9004Suite.class,
 	
 	US15004Suite.class,
 	US12001Suite.class,
-	
-
-	
-	
 	
 })
 @RunWith(Suite.class)
