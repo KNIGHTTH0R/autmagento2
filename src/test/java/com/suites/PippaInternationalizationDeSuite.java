@@ -47,6 +47,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US8004Suite.class,
 	US8005Suite.class,
 	US8006Suite.class,
+	US8007Suite.class,
 	
 	US4001Suite.class,
 	US4002Suite.class,
@@ -54,6 +55,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US9001Suite.class,
 	US9002Suite.class,
 	US9002bSuite.class,
+	US9004Suite.class,
 	
 	US10005Suite.class,
 	US10006Suite.class,
@@ -66,6 +68,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US11004Suite.class,
 	US11005Suite.class,
 	US11006Suite.class,
+	US11007Suite.class,
 	
 	US12001Suite.class,
 	
@@ -78,6 +81,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US13007Suite.class,
 	
 	US16001Suite.class,
+	US16002Suite.class,
 	
 	US17001Suite.class,
 	US17002Suite.class,
@@ -88,17 +92,17 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 //	US19003Suite.class,
 //	US19004Suite.class,
 	
-	US23001PartOneSuite.class,
+//	US23001PartOneSuite.class,
 	US20001Suite.class,
-	US21001Suite.class,
-	US22001Suite.class,
+//	US21001Suite.class,
+//	US22001Suite.class,
 	
 	US10007SuitePartTwo.class,
 	US10008Suite.class,
-	US23001PartTwoSuite.class,
+//	US23001PartTwoSuite.class,
 	
 	US26001Suite.class,
-	US23001PartThreeSuite.class,
+//	US23001PartThreeSuite.class,
 	
 })
 @RunWith(Suite.class)
