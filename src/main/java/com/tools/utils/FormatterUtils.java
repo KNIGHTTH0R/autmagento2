@@ -3,6 +3,8 @@ package com.tools.utils;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +13,8 @@ import org.junit.Assert;
 import com.tools.env.constants.Separators;
 
 public class FormatterUtils {
+
+	ArrayList<String> places = new ArrayList<String>(Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
 
 	/**
 	 * This is a helper method to aproximate the (local time RO) of a form
@@ -107,6 +111,34 @@ public class FormatterUtils {
 		return result;
 	}
 
+	public static String getIntegerNumberFromString(String s) {
+		StringBuilder t = new StringBuilder();
+		for (int i = 0; i < s.length(); i++) {
+			char ch = s.charAt(i);
+			if (Character.isDigit(ch)) {
+				t.append(ch);
+			}
+		}
+		return String.valueOf(t);
+	}
+
+	/**
+	 * adds decimal point to a string.The decimals parameter tells how many
+	 * digits remain after the decimal point
+	 * 
+	 * @param value
+	 * @param decimals
+	 * @return
+	 */
+	public static String parseValue(String value, int decimals) {
+		String cleanValue = getIntegerNumberFromString(value);
+		StringBuilder builder = new StringBuilder(cleanValue);
+		if (decimals != 0)
+			builder.insert(builder.length() - decimals, ".");
+
+		return String.valueOf(builder);
+	}
+
 	public static String cleanString(String unitPrice) {
 		String result = unitPrice;
 		result = result.replace(" €", "");
@@ -166,6 +198,6 @@ public class FormatterUtils {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(FormatterUtils.getOrderId("staging-int0003232323", 1));
+		System.out.println(FormatterUtils.parseValue("45IP", 0));
 	}
 }

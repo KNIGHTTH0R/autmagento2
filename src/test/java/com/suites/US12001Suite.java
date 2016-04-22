@@ -35,7 +35,7 @@ import com.tests.uss12.uss12001.US12001VoucherRunOutNotificationEmailTest;
 @SuiteClasses({
 	
 	US12001StyleCoachRegistrationTest.class,
-	US12001StylistActivationTest.class,
+//	US12001StylistActivationTest.class,
 	US12001InitialKoboSubscriptionTest.class,
 	US12001CancelKoboInitialSubscriptionTest.class,
 	US12001KoboSubscriptionTest.class,

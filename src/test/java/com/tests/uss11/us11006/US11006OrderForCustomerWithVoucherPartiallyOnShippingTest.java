@@ -85,6 +85,8 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
+	private String country;
+	private String plz;
 
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static UrlModel urlModel = new UrlModel();
@@ -123,8 +125,8 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
 			notAllowedCustomerName = prop.getProperty("notAllowedCustomerName");
-			System.out.println(notAllowedCustomerName);
-
+			country = prop.getProperty("country");
+			plz = prop.getProperty("plz");
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
 			shippingAddress = prop.getProperty("shippingAddress");
@@ -185,6 +187,8 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
+		shippingPartySectionSteps.selectCountry(country);
+		shippingPartySectionSteps.enterPLZ(plz);
 		shippingPartySectionSteps.clickShipToHostessButton();
 		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 
