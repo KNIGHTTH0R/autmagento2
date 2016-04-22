@@ -101,7 +101,7 @@ public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
 
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
+		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "2", "0");
 		RegularUserCartCalculator.allProductsList.add(productData);
 
 		headerSteps.openCartPreview();
@@ -111,6 +111,7 @@ public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 		regularUserCartSteps.submitVoucherCode();
 
 		regularUserCartSteps.clickGoToShipping();
+		shippingPartySectionSteps.clickPartyNoOption();
 
 		shippingSteps.goToPaymentMethod();
 

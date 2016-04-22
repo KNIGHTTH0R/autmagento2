@@ -14,8 +14,6 @@ import com.tools.env.constants.Separators;
 
 public class FormatterUtils {
 
-	ArrayList<String> places = new ArrayList<String>(Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
-
 	/**
 	 * This is a helper method to aproximate the (local time RO) of a form
 	 * creation. 1 Hour is substracted from the time (GMT offset)
@@ -139,6 +137,22 @@ public class FormatterUtils {
 		return String.valueOf(builder);
 	}
 
+	public static String parseValueToTwoDecimals(String value) {
+		return parseValue(value, 2);
+	}
+
+	public static String parseValueToZeroDecimals(String value) {
+		return parseValue(value, 0);
+	}
+
+	public static int parseValueToInt(String value) {
+		return Integer.parseInt(parseValue(value, 0));
+	}
+
+	public static BigDecimal parseValueToBigDecimal(String value) {
+		return BigDecimal.valueOf(Double.parseDouble(parseValue(value, 0)));
+	}
+
 	public static String cleanString(String unitPrice) {
 		String result = unitPrice;
 		result = result.replace(" €", "");
@@ -198,6 +212,6 @@ public class FormatterUtils {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(FormatterUtils.parseValue("45IP", 0));
+		System.out.println(FormatterUtils.parseValue("7,90&nbsp;€", 2));
 	}
 }
