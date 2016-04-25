@@ -268,7 +268,8 @@ public class RegularUserCartPage extends AbstractPage {
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}
-			if (key.contains(ContextConstants.DISCOUNT_40_BONUS)) {
+			if ((key.contains("40%") && key.contains(ContextConstants.RABATT))
+					|| (key.contains("FORTY") && key.contains(ContextConstants.RABATT))) {
 				valueTransformer = FormatterUtils
 						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.DISCOUNT_40_BONUS, valueTransformer);
