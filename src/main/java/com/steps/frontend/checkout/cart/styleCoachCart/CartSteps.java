@@ -2,13 +2,12 @@ package com.steps.frontend.checkout.cart.styleCoachCart;
 
 import java.util.List;
 
-import net.thucydides.core.annotations.Step;
-
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
-import com.tools.utils.PrintUtils;
+
+import net.thucydides.core.annotations.Step;
 
 public class CartSteps extends  AbstractSteps{
 	
@@ -30,7 +29,6 @@ public class CartSteps extends  AbstractSteps{
 	 * @return
 	 */
 	public List<CartProductModel> grabProductsDataWith25PercentDiscount(){
-		PrintUtils.printList(cartPage().grabProductsDataWith25Discount());
 		
 		return cartPage().grabProductsDataWith25Discount();
 	}

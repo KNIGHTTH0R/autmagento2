@@ -70,7 +70,8 @@ public class ProductDetailsPage extends AbstractPage {
 
 		result.setName(productName.getText());
 		result.setType(type);
-		result.setPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+//		result.setPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+		result.setPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
@@ -85,7 +86,8 @@ public class ProductDetailsPage extends AbstractPage {
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
-		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+//		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
@@ -100,7 +102,8 @@ public class ProductDetailsPage extends AbstractPage {
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
-		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+//		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
@@ -115,7 +118,8 @@ public class ProductDetailsPage extends AbstractPage {
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
-		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+//		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;

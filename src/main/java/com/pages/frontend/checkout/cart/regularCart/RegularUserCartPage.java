@@ -115,7 +115,7 @@ public class RegularUserCartPage extends AbstractPage {
 	 * @return selected delivery date
 	 * @throws ParseException
 	 */
-	public String selectDeliveryDate(String productCode,Locale locale) throws ParseException {
+	public String selectDeliveryDate(String productCode, Locale locale) throws ParseException {
 		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
 		String deliveryDate = "";
 		boolean foundProduct = false;
@@ -125,7 +125,7 @@ public class RegularUserCartPage extends AbstractPage {
 				WebElement delivery = element(
 						product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option:nth-child(2)")));
 				String[] tokens = delivery.getText().split(", ");
-				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy",locale, "dd.MM.YYYY");
+				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
 				delivery.click();
 				break;
 			}
@@ -142,7 +142,7 @@ public class RegularUserCartPage extends AbstractPage {
 	 * @throws ParseException
 	 */
 
-	public String getDeliveryDate(String productCode,Locale locale) throws ParseException {
+	public String getDeliveryDate(String productCode, Locale locale) throws ParseException {
 		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
 		String deliveryDate = "";
 		boolean foundProduct = false;
@@ -152,7 +152,7 @@ public class RegularUserCartPage extends AbstractPage {
 				WebElement delivery = element(product
 						.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[selected='selected']")));
 				String[] tokens = delivery.getText().split(", ");
-				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy",locale, "dd.MM.YYYY");
+				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
 				break;
 			}
 		}
@@ -199,8 +199,9 @@ public class RegularUserCartPage extends AbstractPage {
 
 	public void verifyMultipleDeliveryOption() {
 		System.out.println(getDriver().findElement(By.id("cart-tp-type-multiple")).getAttribute("checked"));
-//		Assert.assertTrue("Wrong shipping option checked", getDriver().findElement(By.id("cart-tp-type-multiple"))
-//				.getAttribute("checked").contentEquals("checked"));
+		// Assert.assertTrue("Wrong shipping option checked",
+		// getDriver().findElement(By.id("cart-tp-type-multiple"))
+		// .getAttribute("checked").contentEquals("checked"));
 	}
 
 	public List<RegularUserCartProductModel> grabProductsData() {
@@ -215,11 +216,11 @@ public class RegularUserCartPage extends AbstractPage {
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
 					.replace(productNow.getName(), "").trim());
-			productNow.setQuantity(FormatterUtils.cleanNumberToString(
+			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(
 					webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(
 					webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
 
 			resultList.add(productNow);
@@ -244,42 +245,42 @@ public class RegularUserCartPage extends AbstractPage {
 
 			if (key.contains(ContextConstants.ZWISCHENSUMME)) {
 				valueTransformer = FormatterUtils
-						.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setSubtotal(valueTransformer);
 			}
 			if (key.contains(ContextConstants.STEUER)) {
 				valueTransformer = FormatterUtils
-						.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTax(valueTransformer);
 			}
 			if (key.contains(ContextConstants.VERSANDKOSTENFREI)) {
 				valueTransformer = FormatterUtils
-						.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setShipping(valueTransformer);
 			}
 			if (key.contains(ContextConstants.SCHMUCK_BONUS)) {
 				valueTransformer = FormatterUtils
-						.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.JEWELRY_BONUS, valueTransformer);
 			}
 			if (key.contains(voucherCodeLabel)) {
 				valueTransformer = FormatterUtils
-						.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}
-			if (key.contains("40%") && key.contains(ContextConstants.RABATT)) {
+			if (key.contains(ContextConstants.DISCOUNT_40_BONUS)) {
 				valueTransformer = FormatterUtils
-						.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.DISCOUNT_40_BONUS, valueTransformer);
 			}
 			if (key.contains("BUY 3 GET 1 FOR 50%")) {
 				valueTransformer = FormatterUtils
-						.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.DISCOUNT_BUY_3_GET_1, valueTransformer);
 			}
 			if (key.contains(ContextConstants.GESAMTBETRAG)) {
 				valueTransformer = FormatterUtils
-						.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
 			}
 		}

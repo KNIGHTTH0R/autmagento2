@@ -212,6 +212,7 @@ public class FormatterUtils {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(FormatterUtils.parseValue("7,90&nbsp;€", 2));
+		System.out.println(FormatterUtils.parseValueToZeroDecimals("0"));
+		System.out.println(FormatterUtils.cleanNumberToString("45"));
 	}
 }

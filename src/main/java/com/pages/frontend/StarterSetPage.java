@@ -116,16 +116,12 @@ public class StarterSetPage extends AbstractPage {
 
 		StylistRegistrationCartTotalModel result = new StylistRegistrationCartTotalModel();
 
-		result.setDelivery(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#shipping-value")).getText()));
-		result.setTotalPrice(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#total-price-value")).getText()));
+		result.setDelivery(FormatterUtils.parseValueToTwoDecimals(getDriver().findElement(By.cssSelector("#shipping-value")).getText()));
+		result.setTotalPrice(FormatterUtils.parseValueToTwoDecimals(getDriver().findElement(By.cssSelector("#total-price-value")).getText()));
 		if (isVoucherApplied) {
-			result.setVoucher(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#voucher-value")).getText()));
+			result.setVoucher(FormatterUtils.parseValueToTwoDecimals(getDriver().findElement(By.cssSelector("#voucher-value")).getText()));
 		}
 		StylistRegDataGrabber.cartTotals = result;
-		
-		System.out.println(result.getTotalPrice());
-		System.out.println(result.getTotalPrice());
-		System.out.println(result.getVoucher());
 		
 		return result;
 

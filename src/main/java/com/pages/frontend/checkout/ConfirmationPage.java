@@ -179,13 +179,13 @@ public class ConfirmationPage extends AbstractPage {
 		element(element).waitUntilVisible();
 
 		result.setSubTotal(FormatterUtils
-				.cleanNumberToString(element.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
+				.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
 		result.setDiscountPrice(FormatterUtils
-				.cleanToInteger(element.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
+				.parseValueToTwoDecimals("-" + element.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
 		result.setShippingPrice(FormatterUtils
-				.cleanNumberToString(element.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
+				.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
 		result.setTotalAmount(FormatterUtils
-				.cleanNumberToString(element.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
+				.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
 
 		DataGrabber.confirmationTotals = result;
 		return result;
@@ -231,14 +231,14 @@ public class ConfirmationPage extends AbstractPage {
 			CartProductModel productNow = new CartProductModel();
 
 			String parseQty = FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setProductsPrice("");
 			productNow.setFinalPrice("");
 			productNow.setPriceIP("");
@@ -261,7 +261,7 @@ public class ConfirmationPage extends AbstractPage {
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setUnitPrice(FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			productNow.setIpPoints("");
 
@@ -282,14 +282,14 @@ public class ConfirmationPage extends AbstractPage {
 			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
 
 			String parseQty = FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			resultList.add(productNow);
 
@@ -338,7 +338,7 @@ public class ConfirmationPage extends AbstractPage {
 			HostCartProductModel productNow = new HostCartProductModel();
 
 			String parseQty = FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 			parseQty = parseQty.replace(" x", "").trim();
 
@@ -346,7 +346,7 @@ public class ConfirmationPage extends AbstractPage {
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			resultList.add(productNow);
 
@@ -360,28 +360,24 @@ public class ConfirmationPage extends AbstractPage {
 	public List<HostCartProductModel> grabHostProductsList() {
 		List<HostCartProductModel> resultList = grabHostProductsList(productListContainer);
 		HostDataGrabber.grabbedHostConfirmationProductsList = resultList;
-		PrintUtils.printListHostCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<HostCartProductModel> grabHostProductsListTp0() {
 		List<HostCartProductModel> resultList = grabHostProductsList(productListContainer);
 		HostDataGrabber.grabbedHostConfirmationProductsListTp0 = resultList;
-		PrintUtils.printListHostCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<HostCartProductModel> grabHostProductsListTp1() {
 		List<HostCartProductModel> resultList = grabHostProductsList(productListContainerTp1);
 		HostDataGrabber.grabbedHostConfirmationProductsListTp1 = resultList;
-		PrintUtils.printListHostCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<HostCartProductModel> grabHostProductsListTp2() {
 		List<HostCartProductModel> resultList = grabHostProductsList(productListContainerTp2);
 		HostDataGrabber.grabbedHostConfirmationProductsListTp2 = resultList;
-		PrintUtils.printListHostCartProductModel(resultList);
 		return resultList;
 	}
 

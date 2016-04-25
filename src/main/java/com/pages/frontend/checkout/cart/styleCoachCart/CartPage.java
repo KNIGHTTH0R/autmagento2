@@ -71,11 +71,11 @@ public class CartPage extends AbstractPage {
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
-			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
 			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
-			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
+			productNow.setPriceIP(FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
 			productNow.setDiscountClass("");
 
 			resultList.add(productNow);
@@ -94,20 +94,23 @@ public class CartPage extends AbstractPage {
 		element(formContainer).waitUntilVisible();
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-25-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
-		System.out.println(resultList.size());
 
 		for (WebElement webElementNow : entryList) {
 			CartProductModel productNow = new CartProductModel();
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
-			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
-			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
-			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
+			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+			productNow.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setProductsPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
+			productNow.setPriceIP(FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
+//			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+//			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+//			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
+//			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
+//			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
 			productNow.setDiscountClass(ConfigConstants.DISCOUNT_25);
-			PrintUtils.printCartProductModel(productNow);
 			resultList.add(productNow);
 		}
 
@@ -129,11 +132,16 @@ public class CartPage extends AbstractPage {
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
-			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
-			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
-			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
+			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+			productNow.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setProductsPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
+			productNow.setPriceIP(FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
+//			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+//			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+//			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
+//			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
+//			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
 			productNow.setDiscountClass(ConfigConstants.DISCOUNT_50);
 
 		
@@ -158,11 +166,16 @@ public class CartPage extends AbstractPage {
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
-			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
-			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
-			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
+			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+			productNow.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setProductsPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
+			productNow.setPriceIP(FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
+//			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+//			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+//			productNow.setProductsPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
+//			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
+//			productNow.setPriceIP(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.ff-Ge")).getText()));
 			productNow.setDiscountClass(ConfigConstants.DISCOUNT_0);
 		
 			resultList.add(productNow);
@@ -185,11 +198,11 @@ public class CartPage extends AbstractPage {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 
 			if (key.contains(ContextConstants.ZWISCHENSUMME)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setSubtotal(valueTransformer);
 			}
 			if (key.contains(ContextConstants.SCHMUCK_BONUS)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
+				valueTransformer = FormatterUtils.parseValueToZeroDecimals(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
 
 				if (!valueTransformer.contains(".")) {
 					valueTransformer += ".00";
@@ -198,39 +211,39 @@ public class CartPage extends AbstractPage {
 				resultModel.setJewelryBonus(valueTransformer);
 			}
 			if (key.contains(ContextConstants.MARKETING_BONUS)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
+				valueTransformer = FormatterUtils.parseValueToZeroDecimals(itemNow.findElement(By.cssSelector("td:last-child form input[type*='text']")).getAttribute("value"));
 				resultModel.setMarketingBonus(valueTransformer);
 			}
 			if (key.contains(ContextConstants.STEUER)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTax(valueTransformer);
 			}
 			if (key.contains(ContextConstants.VERSANDKOSTENFREI)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setShipping(valueTransformer);
 			}
 			if (key.contains("25%") && key.contains(ContextConstants.RABATT)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(MongoTableKeys.DISCOUNT_25_KEY, valueTransformer);
 			}
 			if (key.contains("50%") && key.contains(ContextConstants.RABATT)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(MongoTableKeys.DISCOUNT_50_KEY, valueTransformer);
 			}
 			if (key.contains("BUY 3 GET 1 FOR 50%")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(MongoTableKeys.DISCOUNT_3_PLUS_1, valueTransformer);
 			}
 			if (key.contains("AUT-Money voucher working on shipping fee")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(MongoTableKeys.VOUCHER_DISCOUNT, valueTransformer);
 			}
 			if (key.contains(ContextConstants.GESAMTBETRAG)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
 			}
 			if (key.contains(ContextConstants.IP_PUNKTE)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToZeroDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setIpPoints(valueTransformer);
 			}
 

@@ -56,13 +56,13 @@ public class SurveyPage extends AbstractPage {
 		element(element).waitUntilVisible();
 
 		result.setSubTotal(FormatterUtils
-				.cleanNumberToString(element.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
-		result.setDiscountPrice(FormatterUtils
-				.cleanToInteger(element.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
+				.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
+		result.setDiscountPrice(FormatterUtils.parseValueToTwoDecimals(
+				"-" + element.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
 		result.setShippingPrice(FormatterUtils
-				.cleanNumberToString(element.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
+				.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
 		result.setTotalAmount(FormatterUtils
-				.cleanNumberToString(element.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
+				.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
 
 		DataGrabber.shippingTotals = result;
 		return result;
@@ -108,14 +108,14 @@ public class SurveyPage extends AbstractPage {
 			CartProductModel productNow = new CartProductModel();
 
 			String parseQty = FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setProductsPrice("");
 			productNow.setFinalPrice("");
 			productNow.setPriceIP("");
@@ -141,7 +141,7 @@ public class SurveyPage extends AbstractPage {
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setUnitPrice(FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			productNow.setIpPoints("");
 
@@ -164,21 +164,20 @@ public class SurveyPage extends AbstractPage {
 			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
 
 			String parseQty = FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			resultList.add(productNow);
 
 		}
 
-		 RegularUserDataGrabber.grabbedRegularShippingProductsList =
-		 resultList;
+		RegularUserDataGrabber.grabbedRegularShippingProductsList = resultList;
 
 		return resultList;
 	}
@@ -186,28 +185,24 @@ public class SurveyPage extends AbstractPage {
 	public List<RegularUserCartProductModel> grabRegularProductsList() {
 		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainer);
 		RegularUserDataGrabber.grabbedRegularShippingProductsList = resultList;
-		PrintUtils.printListRegularCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<RegularUserCartProductModel> grabRegularProductsListTp0() {
 		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainer);
 		RegularUserDataGrabber.grabbedRegularShippingProductsListTp0 = resultList;
-		PrintUtils.printListRegularCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<RegularUserCartProductModel> grabRegularProductsListTp1() {
 		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainerTp1);
 		RegularUserDataGrabber.grabbedRegularShippingProductsListTp1 = resultList;
-		PrintUtils.printListRegularCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<RegularUserCartProductModel> grabRegularProductsListTp2() {
 		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainerTp2);
 		RegularUserDataGrabber.grabbedRegularShippingProductsListTp2 = resultList;
-		PrintUtils.printListRegularCartProductModel(resultList);
 		return resultList;
 	}
 
@@ -221,7 +216,7 @@ public class SurveyPage extends AbstractPage {
 			HostCartProductModel productNow = new HostCartProductModel();
 
 			String parseQty = FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 			parseQty = parseQty.replace(" x", "").trim();
 
@@ -229,7 +224,7 @@ public class SurveyPage extends AbstractPage {
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
 			productNow.setUnitPrice(FormatterUtils
-					.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			resultList.add(productNow);
 
@@ -239,32 +234,28 @@ public class SurveyPage extends AbstractPage {
 
 		return resultList;
 	}
-	
+
 	public List<HostCartProductModel> grabHostProductsList() {
 		List<HostCartProductModel> resultList = grabHostProductsList(productListContainer);
 		HostDataGrabber.grabbedHostShippingProductsList = resultList;
-		PrintUtils.printListHostCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<HostCartProductModel> grabHostProductsListTp0() {
 		List<HostCartProductModel> resultList = grabHostProductsList(productListContainer);
 		HostDataGrabber.grabbedHostShippingProductsListTp0 = resultList;
-		PrintUtils.printListHostCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<HostCartProductModel> grabHostProductsListTp1() {
 		List<HostCartProductModel> resultList = grabHostProductsList(productListContainerTp1);
 		HostDataGrabber.grabbedHostShippingProductsListTp1 = resultList;
-		PrintUtils.printListHostCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<HostCartProductModel> grabHostProductsListTp2() {
 		List<HostCartProductModel> resultList = grabHostProductsList(productListContainerTp2);
 		HostDataGrabber.grabbedHostShippingProductsListTp2 = resultList;
-		PrintUtils.printListHostCartProductModel(resultList);
 		return resultList;
 	}
 

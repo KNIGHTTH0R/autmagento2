@@ -32,6 +32,7 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.env.constants.Credentials;
 import com.tools.env.constants.FilePaths;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
@@ -140,7 +141,7 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 	 */
 	@Test
 	public void us3001ValidateOrderBackOfficeTest() {
-		backEndSteps.performAdminLogin(beUser, bePass);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
