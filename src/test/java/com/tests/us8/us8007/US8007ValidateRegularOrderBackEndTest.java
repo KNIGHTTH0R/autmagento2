@@ -23,6 +23,7 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.env.constants.Credentials;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -76,30 +77,8 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 	private static List<ShippingModel> shippingModelListTp2 = new ArrayList<ShippingModel>();
 	List<OrderModel> orderModelListTp2 = new ArrayList<OrderModel>();
 
-	private String beUser, bePass;
-
 	@Before
 	public void setUp() {
-		Properties prop = new Properties();
-		InputStream input = null;
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8002.properties");
-			prop.load(input);
-			beUser = prop.getProperty("beUser");
-			bePass = prop.getProperty("bePass");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 
 		orderModelList = MongoReader.getOrderModel("US8007CustomerBuyWithTpTest" + "TP0");
 		productsList = MongoReader.grabRegularBasicProductModel("US8007CustomerBuyWithTpTest" + "TP0");
@@ -112,7 +91,6 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 		orderModelListTp2 = MongoReader.getOrderModel("US8007CustomerBuyWithTpTest" + "TP2");
 		productsListTp2 = MongoReader.grabRegularBasicProductModel("US8007CustomerBuyWithTpTest" + "TP2");
 		shippingModelListTp2 = MongoReader.grabShippingModel("US8007CustomerBuyWithTpTest" + "TP2");
-
 
 		// Setup Data from all models in first test
 		// from Shipping calculations
@@ -153,7 +131,7 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 	 */
 	@Test
 	public void us8007ValidateRegularOrderBackEndTest() {
-		backEndSteps.performAdminLogin(beUser, bePass);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderModelList.get(0).getOrderId());
@@ -201,7 +179,7 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 		orderWorkflows.validateOrderStatus(orderInfoModelTp2.getOrderStatus(), "Zahlung geplant");
 		orderWorkflows.validateScheduledDeliveryDate(orderInfoModelTp2.getDeliveryDate(),
 				orderInfoModelTp2.getDeliveryDate());
-		
+
 		customVerifications.printErrors();
 	}
 

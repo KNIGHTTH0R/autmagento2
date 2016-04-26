@@ -214,7 +214,8 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
 		RegularUserDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
 
-		paymentSteps.expandCreditCardForm();
+		if (!paymentSteps.isCreditCardFormExpended())
+			paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.grabRegularProductsListTp0();

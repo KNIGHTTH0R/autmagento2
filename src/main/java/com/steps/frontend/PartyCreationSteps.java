@@ -2,6 +2,7 @@ package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class PartyCreationSteps extends AbstractSteps {
@@ -37,9 +38,9 @@ public class PartyCreationSteps extends AbstractSteps {
 	public void typeLocation(String location) {
 		partyCreationPage().typeLocation(location);
 	}
-	
+
 	@Step
-	public void verifyThatPartyCountryListDoesNotContainCountry(){
+	public void verifyThatPartyCountryListDoesNotContainCountry() {
 		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
 	}
 
@@ -49,7 +50,7 @@ public class PartyCreationSteps extends AbstractSteps {
 		partyCreationPage().selectFirstAvailableHour();
 		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
 		return partyCreationPage().submitParty();
-		
+
 	}
 
 	@Step
@@ -59,9 +60,10 @@ public class PartyCreationSteps extends AbstractSteps {
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
 		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
+		partyCreationPage().selectPartyCountry(ContextConstants.COUNTRY_NAME);
 		waitABit(1000);
 		return partyCreationPage().submitParty();
-		
+
 	}
 
 	@Step

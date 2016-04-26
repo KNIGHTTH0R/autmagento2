@@ -51,6 +51,9 @@ public class PartyCreationPage extends AbstractPage {
 	@FindBy(id = "city")
 	private WebElement cityInput;
 	
+	@FindBy(id = "country")
+	private WebElement countryInput;
+	
 	@FindBy(css = "#form-stylist-party-create #country")
 	private WebElement countryDdl;
 	
@@ -89,6 +92,13 @@ public class PartyCreationPage extends AbstractPage {
 		locationContainer.sendKeys(location);
 
 	}
+
+	public void selectPartyCountry(String country) {
+		element(countryInput).waitUntilVisible();
+		countryInput.sendKeys(country);
+
+	}
+
 	public void typeCustomerName(String name) {
 		element(customerName).waitUntilVisible();
 		element(customerName).sendKeys(name);

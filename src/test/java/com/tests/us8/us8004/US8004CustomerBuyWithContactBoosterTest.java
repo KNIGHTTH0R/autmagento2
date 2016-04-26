@@ -156,6 +156,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
+		System.out.println(dashboardSteps.getStyleCoachFullNameFromProfile());
 		voucherCode = dashboardSteps.getStyleCoachFullNameFromProfile().contentEquals(initialStylistName) ? secondVoucherCode : firstVoucherCode;
 		homeSteps.goToNewItems();
 		customerRegistrationSteps.wipeRegularCart();

@@ -50,7 +50,7 @@ public class HostCartPage extends AbstractPage {
 
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
-	
+
 	@FindBy(css = "button.button.blue-button[value='YES']")
 	private WebElement acceptNotConsumedBonusButton;
 
@@ -60,7 +60,8 @@ public class HostCartPage extends AbstractPage {
 		for (WebElement product : cartList) {
 			if (product.getText().contains(productCode)) {
 				foundProduct = true;
-				element(product.findElement(By.cssSelector("select.validate-select.discountSelect"))).selectByVisibleText(discountType);
+				element(product.findElement(By.cssSelector("select.validate-select.discountSelect")))
+						.selectByVisibleText(discountType);
 
 				break;
 			}
@@ -75,7 +76,8 @@ public class HostCartPage extends AbstractPage {
 				product.setBonusType(discountType);
 				if (discountType.contentEquals(ContextConstants.DISCOUNT_40_BONUS)) {
 					product.setBunosValue(String.valueOf(calculate40Discount(product.getFinalPrice())));
-					product.setIpPoints(String.valueOf(HostCartTotalsCalculation.calculate40DiscountForIp(product.getIpPoints())));
+					product.setIpPoints(
+							String.valueOf(HostCartTotalsCalculation.calculate40DiscountForIp(product.getIpPoints())));
 				} else if (discountType.contentEquals(ContextConstants.JEWELRY_BONUS)) {
 					product.setBunosValue(product.getFinalPrice());
 					product.setIpPoints(String.valueOf(BigDecimal.ZERO));
@@ -94,7 +96,8 @@ public class HostCartPage extends AbstractPage {
 	}
 
 	public void selectShippingOption(String option) {
-		List<WebElement> shippingOptionsList = getDriver().findElements(By.cssSelector("ul.purchase-options.form-list li.control"));
+		List<WebElement> shippingOptionsList = getDriver()
+				.findElements(By.cssSelector("ul.purchase-options.form-list li.control"));
 		boolean foundOption = false;
 		for (WebElement shippingOption : shippingOptionsList) {
 			if (shippingOption.getText().contentEquals(option)) {
@@ -116,37 +119,48 @@ public class HostCartPage extends AbstractPage {
 			HostCartProductModel productNow = new HostCartProductModel();
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
-			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
-			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span:nth-child(1).price")).getText()));
-			productNow.setIpPoints(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span:nth-child(2).price")).getText()));
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
+					.replace(productNow.getName(), "").trim());
+			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
+			productNow.setUnitPrice(FormatterUtils
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(6) span:nth-child(1).price")).getText()));
+			productNow.setIpPoints(FormatterUtils.parseValueToZeroDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(6) span:nth-child(2).price")).getText()));
 			resultList.add(productNow);
 		}
 		HostDataGrabber.grabbedHostCartProductsList = resultList;
 
 		return resultList;
 	}
+
 	public List<HostCartProductModel> grabProductsDataWhenNoBonus() {
 		element(cartTable).waitUntilVisible();
 		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
-		
+
 		// waitABit(Constants.TIME_CONSTANT);
 		List<HostCartProductModel> resultList = new ArrayList<HostCartProductModel>();
-		
+
 		for (WebElement webElementNow : entryList) {
 			HostCartProductModel productNow = new HostCartProductModel();
-			
+
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
-			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
-			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(1).price")).getText()));
-			productNow.setIpPoints(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(2).price")).getText()));
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
+					.replace(productNow.getName(), "").trim());
+			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
+			productNow.setUnitPrice(FormatterUtils
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(1).price")).getText()));
+			productNow.setIpPoints(FormatterUtils.parseValueToZeroDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(2).price")).getText()));
 			resultList.add(productNow);
 		}
 		HostDataGrabber.grabbedHostCartProductsList = resultList;
-		
+
 		return resultList;
 	}
 
@@ -164,35 +178,44 @@ public class HostCartPage extends AbstractPage {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 
 			if (key.contains(ContextConstants.ZWISCHENSUMME)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setSubtotal(valueTransformer);
 			}
 			if (key.contains(ContextConstants.STEUER)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTax(valueTransformer);
 			}
 			if (key.contains(ContextConstants.VERSANDKOSTENFREI)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setShipping(valueTransformer);
 			}
 			if (key.contains(ContextConstants.SCHMUCK_BONUS)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.JEWELRY_BONUS, valueTransformer);
 			}
 			if (key.contains("G025FMDE")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}
-			if (key.contains("40%") && key.contains(ContextConstants.RABATT)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+			if ((key.contains("40%") && key.contains(ContextConstants.RABATT))
+					|| (key.contains("FORTY") && key.contains(ContextConstants.RABATT))) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.DISCOUNT_40_BONUS, valueTransformer);
 			}
 			if (key.contains("BUY 3 GET 1 FOR 50%")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.DISCOUNT_BUY_3_GET_1, valueTransformer);
 			}
 			if (key.contains(ContextConstants.GESAMTBETRAG)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
 			}
 		}
@@ -206,12 +229,12 @@ public class HostCartPage extends AbstractPage {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
 	}
-	
+
 	public void clickDeliverOnVariousDate() {
 		element(deliverOnVariousDate).waitUntilVisible();
 		deliverOnVariousDate.click();
 	}
-	
+
 	public void clickAllOnThisDate() {
 		element(deliverAllOnThisDate).waitUntilVisible();
 		deliverAllOnThisDate.click();
@@ -232,8 +255,8 @@ public class HostCartPage extends AbstractPage {
 		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 
 	}
-	
-	public void acceptInfoPopupForNotConsumedBonus(){
+
+	public void acceptInfoPopupForNotConsumedBonus() {
 		element(acceptNotConsumedBonusButton).waitUntilVisible();
 		acceptNotConsumedBonusButton.click();
 	}

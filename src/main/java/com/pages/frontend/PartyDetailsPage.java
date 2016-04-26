@@ -109,9 +109,11 @@ public class PartyDetailsPage extends AbstractPage {
 	// one,select it and borrow it
 	public void selectWishlistProductAndAddItToBorrowCart(String productName) {
 		element(wishlistProductImage).waitUntilVisible();
-		List<WebElement> wishlistProductsList = getDriver().findElements(By.cssSelector("div.customer-list-container.clearfix .mini-box img"));
+		List<WebElement> wishlistProductsList = getDriver()
+				.findElements(By.cssSelector("div.customer-list-container.clearfix .mini-box img"));
 
-		Assert.assertTrue("There are produscts in party wishlist which should not be there !!!", wishlistProductsList.size() == 1);
+		Assert.assertTrue("There are produscts in party wishlist which should not be there !!!",
+				wishlistProductsList.size() == 1);
 
 		Actions builder = new Actions(getDriver());
 		builder.moveToElement(wishlistProductImage).build().perform();
@@ -154,12 +156,20 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public ClosedPartyPerformanceModel grabClosedPartyPerformance() {
 		ClosedPartyPerformanceModel result = new ClosedPartyPerformanceModel();
-		result.setNoOfOrders(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(1) td:nth-child(2)")).getText());
-		result.setRetail(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(2) td:nth-child(2)")).getText().replace(",", ".").replace(" €", "")
-				.replace("€ ", ""));
-		result.setIp(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(3) td:nth-child(2)")).getText());
-		result.setIpInPayment(getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(4) td:nth-child(2)")).getText());
-		result.setJewelryBonus(getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(2) .price")).getText().replace(",", ".").replace(" €", "").replace("€ ", "").trim());
+		result.setNoOfOrders(
+				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(1) td:nth-child(2)"))
+						.getText());
+		result.setRetail(
+				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(2) td:nth-child(2)"))
+						.getText().replace(",", ".").replace(" €", "").replace("€ ", ""));
+		result.setIp(
+				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(3) td:nth-child(2)"))
+						.getText());
+		result.setIpInPayment(
+				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(4) td:nth-child(2)"))
+						.getText());
+		result.setJewelryBonus(getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(2) .price")).getText()
+				.replace(",", ".").replace(" €", "").replace("€ ", "").trim());
 		String[] parts = getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(3)")).getText().split(":");
 		result.setFourthyDiscounts(parts[1].trim());
 
@@ -205,68 +215,83 @@ public class PartyDetailsPage extends AbstractPage {
 	public void popupCloseParty() {
 		element(popupPartyCloseButton).waitUntilVisible();
 		popupPartyCloseButton.click();
-		waitFor(ExpectedConditions.textToBePresentInElement(getDriver().findElement(By.id("closePartyWrapper")), ContextConstants.SUCCESSFULY_CLOSED_PARTY));
+		waitFor(ExpectedConditions.textToBePresentInElement(getDriver().findElement(By.id("closePartyWrapper")),
+				ContextConstants.SUCCESSFULY_CLOSED_PARTY));
 	}
 
 	public void verifyHostessInviteLink(boolean hostessInviteLinkIsPresent) {
 		if (hostessInviteLinkIsPresent) {
-			Assert.assertTrue("The invite hostess link should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_HOSTESS));
+			Assert.assertTrue("The invite hostess link should be present and it's not",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_HOSTESS));
 		} else {
-			Assert.assertFalse("The invite hostess link should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_HOSTESS));
+			Assert.assertFalse("The invite hostess link should not be present",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_HOSTESS));
 		}
 
 	}
 
 	public void verifyEditLink(boolean editLinkIsPresent) {
 		if (editLinkIsPresent) {
-			Assert.assertTrue("The edit link should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.UPDATE_PARTY));
+			Assert.assertTrue("The edit link should be present and it's not",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.UPDATE_PARTY));
 		} else {
-			Assert.assertFalse("The edit link should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.UPDATE_PARTY));
+			Assert.assertFalse("The edit link should not be present",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.UPDATE_PARTY));
 		}
 
 	}
 
 	public void verifyDeleteLink(boolean deleteLinkIsPresent) {
 		if (deleteLinkIsPresent) {
-			Assert.assertTrue("The delete link should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.DELETE_PARTY));
+			Assert.assertTrue("The delete link should be present and it's not",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.DELETE_PARTY));
 		} else {
-			Assert.assertFalse("The delete link should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.DELETE_PARTY));
+			Assert.assertFalse("The delete link should not be present",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.DELETE_PARTY));
 		}
 
 	}
 
 	public void verifyInviteGuestsLink(boolean inviteGuestsLinkIsPresent) {
 		if (inviteGuestsLinkIsPresent) {
-			Assert.assertTrue("The invite guests button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_GUEST));
+			Assert.assertTrue("The invite guests button should be present and it's not",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_GUEST));
 		} else {
-			Assert.assertFalse("The invite guests button should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_GUEST));
+			Assert.assertFalse("The invite guests button should not be present",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.INVITE_GUEST));
 		}
 
 	}
 
 	public void verifyFolowUpPartyLink(boolean folowUpPartyLinkIsPresent) {
 		if (folowUpPartyLinkIsPresent) {
-			Assert.assertTrue("The follow up button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.CREATE_FOLLOW_UP_PARTY));
+			Assert.assertTrue("The follow up button should be present and it's not",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.CREATE_FOLLOW_UP_PARTY));
 		} else {
-			Assert.assertFalse("The follow up button should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.CREATE_FOLLOW_UP_PARTY));
+			Assert.assertFalse("The follow up button should not be present",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.CREATE_FOLLOW_UP_PARTY));
 		}
 
 	}
 
 	public void verifyCustomerOrderLink(boolean customerOrderLinkIsPresent) {
 		if (customerOrderLinkIsPresent) {
-			Assert.assertTrue("The customer order button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDER_FOR_CUSTOMER));
+			Assert.assertTrue("The customer order button should be present and it's not",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDER_FOR_CUSTOMER));
 		} else {
-			Assert.assertFalse("The customer order button should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDER_FOR_CUSTOMER));
+			Assert.assertFalse("The customer order button should not be present",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.ORDER_FOR_CUSTOMER));
 		}
 
 	}
 
 	public void verifyClosePartyLink(boolean closePartyLinkIsPresent) {
 		if (closePartyLinkIsPresent) {
-			Assert.assertTrue("The close party button should be present and it's not", partyDetailsAndActionsContainer.getText().contains(ContextConstants.CLOSE_PARTY));
+			Assert.assertTrue("The close party button should be present and it's not",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.CLOSE_PARTY));
 		} else {
-			Assert.assertFalse("The close party  button should not be present", partyDetailsAndActionsContainer.getText().contains(ContextConstants.CLOSE_PARTY));
+			Assert.assertFalse("The close party  button should not be present",
+					partyDetailsAndActionsContainer.getText().contains(ContextConstants.CLOSE_PARTY));
 		}
 
 	}
@@ -274,14 +299,16 @@ public class PartyDetailsPage extends AbstractPage {
 	public void verifyPartyStatus(String status) {
 		getDriver().navigate().refresh();
 		element(messageContainer).waitUntilVisible();
-		Assert.assertTrue("The status should be " + status + " and it's not ", messageContainer.getText().contains(status));
+		Assert.assertTrue("The status should be " + status + " and it's not ",
+				messageContainer.getText().contains(status));
 
 	}
 
 	public void verifyPartyAutomaticallyCloseDate(String status) {
 		getDriver().navigate().refresh();
 		element(messageContainer).waitUntilVisible();
-		Assert.assertTrue("The status should be " + status + " and it's not ", messageContainer.getText().contains(status));
+		Assert.assertTrue("The status should be " + status + " and it's not ",
+				messageContainer.getText().contains(status));
 
 	}
 
@@ -390,22 +417,32 @@ public class PartyDetailsPage extends AbstractPage {
 	}
 
 	public void verifyThatBonusesAreRemovedFromParty() {
-		Assert.assertTrue("Bonus sections is present and should be not", !partyDetailsAndActionsContainer.getText().contains(ContextConstants.HOSTESS_BONUS));
+		Assert.assertTrue("Bonus sections is present and should be not",
+				!partyDetailsAndActionsContainer.getText().contains(ContextConstants.HOSTESS_BONUS));
 	}
 
 	public void verifyThatAutomaticallyClosePartyDateIsCorrect() throws ParseException {
 		if (MongoReader.getContext() == "de") {
 
-			Assert.assertTrue(
-					"Automatically close date is not correct",
-					closeDateContainer.getText().contains(
-							DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy", Locale.GERMANY), "dd. MMM. yyyy", Locale.GERMANY, 5)));
+			Assert.assertTrue("Automatically close date is not correct",
+					closeDateContainer.getText()
+							.contains(DateUtils.addDaysToAAGivenDate(
+									DateUtils.getCurrentDate("dd. MMM. yyyy", Locale.GERMANY), "dd. MMM. yyyy",
+									Locale.GERMANY, 5)));
 
 		} else if (MongoReader.getContext() == "es") {
 
 			final Locale spanish = new Locale("es", "ES");
 			Assert.assertTrue("Automatically close date is not correct",
-					closeDateContainer.getText().contains(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd. MMM. yyyy", spanish), "dd. MMM. yyyy", spanish, 5)));
+					closeDateContainer.getText().contains(DateUtils.addDaysToAAGivenDate(
+							DateUtils.getCurrentDate("dd. MMM. yyyy", spanish), "dd. MMM. yyyy", spanish, 5)));
+
+		} else if (MongoReader.getContext() == "en") {
+
+			final Locale english = new Locale("en", "EN");
+			Assert.assertTrue("Automatically close date is not correct",
+					closeDateContainer.getText().contains(DateUtils.addDaysToAAGivenDate(
+							DateUtils.getCurrentDate("dd. MMM. yyyy", english), "dd. MMM. yyyy", english, 5)));
 
 		}
 	}
