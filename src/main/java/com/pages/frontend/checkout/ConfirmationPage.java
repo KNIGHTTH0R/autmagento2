@@ -303,28 +303,24 @@ public class ConfirmationPage extends AbstractPage {
 	public List<RegularUserCartProductModel> grabRegularProductsList() {
 		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainer);
 		RegularUserDataGrabber.grabbedRegularConfirmationProductsList = resultList;
-		PrintUtils.printListRegularCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<RegularUserCartProductModel> grabRegularProductsListTp0() {
 		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainer);
 		RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp0 = resultList;
-		PrintUtils.printListRegularCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<RegularUserCartProductModel> grabRegularProductsListTp1() {
 		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainerTp1);
 		RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp1 = resultList;
-		PrintUtils.printListRegularCartProductModel(resultList);
 		return resultList;
 	}
 
 	public List<RegularUserCartProductModel> grabRegularProductsListTp2() {
 		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainerTp2);
 		RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp2 = resultList;
-		PrintUtils.printListRegularCartProductModel(resultList);
 		return resultList;
 	}
 

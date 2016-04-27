@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +41,11 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 @WithTag(name = "US11.5 Party Host Buys For Customer With Free Shipping Voucher Test, ship to host", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_5.class)
 @RunWith(SerenityRunner.class)
@@ -78,7 +78,7 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	private String username, password, customerName, notAllowedCustomerName;
+	private String username, password, customerName;
 	private String discountClass;
 	private String billingAddress;
 	private String shippingAddress;
@@ -122,8 +122,6 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
-			notAllowedCustomerName = prop.getProperty("notAllowedCustomerName");
-			System.out.println(notAllowedCustomerName);
 
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
@@ -160,10 +158,9 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
-		// we use host cart even if it's not a host order because is the same
+		
 		HostBasicProductModel productData;
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");

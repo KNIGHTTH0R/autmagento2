@@ -210,7 +210,8 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
 
-		paymentSteps.expandCreditCardForm();
+		if (!paymentSteps.isCreditCardFormExpended())
+			paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.grabHostProductsListTp0();

@@ -36,7 +36,8 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public BasicProductModel setBasicProductAddToCart(String qty, String size, String askingPrice, String finalPrice, String ip, String discountClass) {
+	public BasicProductModel setBasicProductAddToCart(String qty, String size, String askingPrice, String finalPrice,
+			String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();
 		if (!size.contentEquals("0")) {
 			waitABit(TimeConstants.TIME_CONSTANT);
@@ -55,7 +56,8 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public BasicProductModel updateProduct(String qty, String size, String askingPrice, String finalPrice, String ip, String discountClass) {
+	public BasicProductModel updateProduct(String qty, String size, String askingPrice, String finalPrice, String ip,
+			String discountClass) {
 		BasicProductModel result = new BasicProductModel();
 
 		result = productDetailsPage().grabBasicProductData();
@@ -143,7 +145,7 @@ public class ProductSteps extends AbstractSteps {
 		if (MongoReader.getContext().contentEquals("de")) {
 			result.setUnitPrice("6.00");
 			result.setFinalPrice("6.00");
-		} else if (MongoReader.getContext().contentEquals("es")) {
+		} else {
 			result.setUnitPrice("30.00");
 			result.setFinalPrice("30.00");
 		}
@@ -191,7 +193,8 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@Step
-	public HostBasicProductModel setHostBasicProductAddToCart(String qty, String size, String finalPrice, String ipPoints) {
+	public HostBasicProductModel setHostBasicProductAddToCart(String qty, String size, String finalPrice,
+			String ipPoints) {
 		HostBasicProductModel result = new HostBasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);

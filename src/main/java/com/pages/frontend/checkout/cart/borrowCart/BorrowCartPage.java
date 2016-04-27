@@ -49,9 +49,9 @@ public class BorrowCartPage extends AbstractPage {
 
 		defaultProduct.setName(prodListFirstRow.findElement(By.cssSelector("h2.product-name")).getText().replace(" Z999", "").trim());
 		defaultProduct.setProdCode(prodListFirstRow.findElement(By.cssSelector("h2.product-name")).getText().replace(defaultProduct.getName(), "").trim());
-		defaultProduct.setUnitPrice(FormatterUtils.cleanNumberToString(prodListFirstRow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-		defaultProduct.setFinalPrice(FormatterUtils.cleanNumberToString(prodListFirstRow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(1).price")).getText()));
-		defaultProduct.setIpPoints(FormatterUtils.cleanNumberToString(prodListFirstRow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(2).price")).getText()));
+		defaultProduct.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(prodListFirstRow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+		defaultProduct.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(prodListFirstRow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(1).price")).getText()));
+		defaultProduct.setIpPoints(FormatterUtils.parseValueToZeroDecimals(prodListFirstRow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(2).price")).getText()));
 
 		resultList.add(defaultProduct);
 
@@ -61,9 +61,9 @@ public class BorrowCartPage extends AbstractPage {
 
 			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim());
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(1).price")).getText()));
-			productNow.setIpPoints(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(2).price")).getText()));
+			productNow.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(1).price")).getText()));
+			productNow.setIpPoints(FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(5) span:nth-child(2).price")).getText()));
 
 			resultList.add(productNow);
 		}
@@ -87,19 +87,19 @@ public class BorrowCartPage extends AbstractPage {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 
 			if (key.contains(ContextConstants.ZWISCHENSUMME)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setSubtotal(valueTransformer);
 			}
 			if (key.contains(ContextConstants.STEUER)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTax(valueTransformer);
 			}
 			if (key.contains(ContextConstants.GESAMTBETRAG)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
 			}
 			if (key.contains(ContextConstants.IP_PUNKTE)) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils.parseValueToZeroDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setIpPoints(valueTransformer);
 			}
 		}

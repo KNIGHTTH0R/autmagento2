@@ -85,7 +85,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 	private String plz;
 	private String shippingValue;
 	private String voucherValue;
-	private CreditCardModel creditCardData = new CreditCardModel();
+	private CreditCardModel creditCardData;
 	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -96,21 +96,23 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
+		creditCardData = new CreditCardModel();
+
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("29.00");
 		genProduct1.setIp("25");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		
+
 		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.setPrice("10.00");
 		genProduct2.setIp("8");
 		MagentoProductCalls.createApiProduct(genProduct2);
-		
+
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("29.90");
 		genProduct3.setIp("25");
 		MagentoProductCalls.createApiProduct(genProduct3);
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -128,12 +130,6 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 			voucherValue = prop.getProperty("voucherValue");
-
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -179,11 +175,12 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 
 		orderForCustomerCartSteps.grabProductsData();
 		orderForCustomerCartSteps.grabTotals("No Voucher");
-		HostCartCalculator.calculateCartBuy3Get1OrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
+		HostCartCalculator.calculateCartBuy3Get1OrderForCustomerCartAndShippingTotals(discountClass, shippingValue,
+				voucherValue);
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
-		
+
 		shippingPartySectionSteps.selectCountry(country);
 		shippingPartySectionSteps.enterPLZ(plz);
 
@@ -221,9 +218,11 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveUrlModel(HostDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);

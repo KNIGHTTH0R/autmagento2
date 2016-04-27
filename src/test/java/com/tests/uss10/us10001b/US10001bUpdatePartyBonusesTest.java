@@ -37,7 +37,7 @@ public class US10001bUpdatePartyBonusesTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		String[] bits = urlModel.getUrl().split("/");
 		partyId = bits[bits.length - 1];
 		System.out.println(partyId);

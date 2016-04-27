@@ -78,7 +78,7 @@ public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	private String username, password, customerName, notAllowedCustomerName;
+	private String username, password, customerName;
 	private String discountClass;
 	private String billingAddress;
 	private String shippingAddress;
@@ -86,7 +86,7 @@ public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 	private String voucherCode;
 	private String voucherValue;
 
-	private CreditCardModel creditCardData = new CreditCardModel();
+	private CreditCardModel creditCardData;
 	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -96,6 +96,8 @@ public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
+
+		creditCardData = new CreditCardModel();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("29.00");
@@ -122,8 +124,6 @@ public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
-			notAllowedCustomerName = prop.getProperty("notAllowedCustomerName");
-			System.out.println(notAllowedCustomerName);
 
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
@@ -160,7 +160,6 @@ public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
 
@@ -222,9 +221,11 @@ public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveUrlModel(HostDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);

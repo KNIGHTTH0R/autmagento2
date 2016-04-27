@@ -78,7 +78,7 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 	@Steps
 	public CustomVerification customVerifications;
 
-	private String username, password, customerName, notAllowedCustomerName;
+	private String username, password, customerName;
 	private String discountClass;
 	private String billingAddress;
 	private String shippingAddress;
@@ -124,7 +124,6 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
-			notAllowedCustomerName = prop.getProperty("notAllowedCustomerName");
 			country = prop.getProperty("country");
 			plz = prop.getProperty("plz");
 			discountClass = prop.getProperty("discountClass");
@@ -162,7 +161,6 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
 		

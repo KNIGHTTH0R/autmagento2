@@ -25,7 +25,7 @@ public class ProductDetailsPage extends AbstractPage {
 
 	@FindBy(css = "button#add-to-cart")
 	private WebElement addToCartButton;
-	
+
 	@FindBy(css = "div.product-attributes.clearfix a")
 	private WebElement addToWishlistButton;
 
@@ -52,25 +52,25 @@ public class ProductDetailsPage extends AbstractPage {
 	public void addToCart() {
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), ContextConstants.PRODUCT_ADDED_INTO_CART));
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"),
+				ContextConstants.PRODUCT_ADDED_INTO_CART));
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
+
 	public void addToWishlist() {
 		element(addToWishlistButton).waitUntilVisible();
 		addToWishlistButton.click();
-		
+
 	}
 
 	public ProductBasicModel grabProductData() {
 		ProductBasicModel result = new ProductBasicModel();
 		element(productName).waitUntilVisible();
 
-		// clean productCode
 		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setType(type);
-//		result.setPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
 		result.setPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
@@ -81,12 +81,10 @@ public class ProductDetailsPage extends AbstractPage {
 		BasicProductModel result = new BasicProductModel();
 		element(productName).waitUntilVisible();
 
-		// clean productCode
 		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
-//		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
 		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
@@ -97,12 +95,10 @@ public class ProductDetailsPage extends AbstractPage {
 		RegularBasicProductModel result = new RegularBasicProductModel();
 		element(productName).waitUntilVisible();
 
-		// clean productCode
 		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
-//		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
 		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
@@ -113,19 +109,17 @@ public class ProductDetailsPage extends AbstractPage {
 		HostBasicProductModel result = new HostBasicProductModel();
 		element(productName).waitUntilVisible();
 
-		// clean productCode
 		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
-//		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
 		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
 	}
-	
-	private String cleanProductCode(String code){
+
+	private String cleanProductCode(String code) {
 		return code.replace(ContextConstants.ARTICLE_NUMBER, "");
 	}
 }
