@@ -1,6 +1,5 @@
 package com.tests.uss28.us28001;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -43,7 +42,7 @@ public class US28001UnbounceRegistrationTest extends BaseTest {
 	private CustomerFormModel dataModel;
 	private DateModel customerFormDate;
 	private AddressModel addressModel;
-	private CoordinatesModel coordinatesModel;
+	private CoordinatesModel coordinatesModel = new CoordinatesModel();
 	private RandomAddress randomAddress;
 	private List<DBStylistModel> compatibleStylistListForDistribution;
 
@@ -54,7 +53,7 @@ public class US28001UnbounceRegistrationTest extends BaseTest {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		randomAddress = new RandomAddress();
-
+		
 		while (coordinatesModel.getLattitude() == null) {
 
 			addressModel = randomAddress.getRandomAddressFromFile();

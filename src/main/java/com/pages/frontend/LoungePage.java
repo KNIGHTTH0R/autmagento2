@@ -1,7 +1,5 @@
 package com.pages.frontend;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -9,6 +7,8 @@ import org.openqa.selenium.interactions.Actions;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.PrintUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class LoungePage extends AbstractPage {
 

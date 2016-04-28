@@ -25,7 +25,6 @@ import com.tests.uss12.uss12001.US12001MarkAsPaidInitialKoboOrderTest;
 import com.tests.uss12.uss12001.US12001MarkAsPaidKoboOrderTest;
 import com.tests.uss12.uss12001.US12001RegularCustomerRegistrationTest;
 import com.tests.uss12.uss12001.US12001StyleCoachRegistrationTest;
-import com.tests.uss12.uss12001.US12001StylistActivationTest;
 import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest;
 import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest;
 import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
@@ -35,7 +34,6 @@ import com.tests.uss12.uss12001.US12001VoucherRunOutNotificationEmailTest;
 @SuiteClasses({
 	
 	US12001StyleCoachRegistrationTest.class,
-//	US12001StylistActivationTest.class,
 	US12001InitialKoboSubscriptionTest.class,
 	US12001CancelKoboInitialSubscriptionTest.class,
 	US12001KoboSubscriptionTest.class,
