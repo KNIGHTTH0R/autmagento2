@@ -3,8 +3,6 @@ package com.pages.frontend.checkout.shipping;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,7 +18,8 @@ import com.tools.datahandler.HostDataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class SurveyPage extends AbstractPage {
 

@@ -1,12 +1,7 @@
 package com.tests.us3.us3001;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -28,9 +23,7 @@ import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.env.constants.Credentials;
-import com.tools.env.constants.FilePaths;
 import com.tools.env.constants.SoapKeys;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -68,31 +61,9 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	private String orderId;
-	private String beUser,bePass;
 
 	@Before
 	public void setUp() {
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
-			prop.load(input);
-			beUser = prop.getProperty("beUser");
-			bePass = prop.getProperty("bePass");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 
 		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
 		productsList = MongoReader.grabBasicProductModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);

@@ -3,8 +3,6 @@ package com.pages.frontend.checkout;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -22,7 +20,8 @@ import com.tools.env.constants.Separators;
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class ConfirmationPage extends AbstractPage {
 

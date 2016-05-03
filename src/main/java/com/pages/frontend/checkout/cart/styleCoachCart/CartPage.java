@@ -3,8 +3,6 @@ package com.pages.frontend.checkout.cart.styleCoachCart;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,7 +17,8 @@ import com.tools.env.constants.TimeConstants;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class CartPage extends AbstractPage {
 
@@ -29,8 +28,7 @@ public class CartPage extends AbstractPage {
 	@FindBy(css = "div.page-title ul.checkout-types button:last-child")
 	private WebElement kasseButton;
 
-//	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
-	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")    //int  
+	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")
 	private WebElement updateButton;
 
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")

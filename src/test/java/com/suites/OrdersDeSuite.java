@@ -4,16 +4,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.uss10.us10001.US10001CreatePartyWithStylistHostTest;
-import com.tests.uss10.us10001b.US10001bCreatePartyWithStylistHostTest;
-import com.tests.uss10.us10002.US10002CreatePartyWithCustomerHostTest;
-import com.tests.uss10.us10002b.US10002bCreatePartyWithCustomerHostTest;
-import com.tests.uss11.us11001.US11001CreatePartyWithStylistHostTest;
-import com.tests.uss11.us11002.US11002CreatePartyWithCustomerHostTest;
-import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
-import com.tests.uss11.us11004.US11004CreatePartyWithStylistHostTest;
-import com.tests.uss11.us11005.US11005CreatePartyWithStylistHostTest;
-
 @SuiteClasses({
 	
 //	US10001CreatePartyWithStylistHostTest.class,
