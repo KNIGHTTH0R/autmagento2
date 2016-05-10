@@ -1,10 +1,5 @@
 package com.tests.us6.us6004;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +17,12 @@ import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.4 Stylist Registration abandoned before payment", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_4.class)
@@ -74,10 +73,7 @@ public class US6004CheckCustomerActivationTest extends BaseTest {
 		RegistrationActivationDateModel grabDatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
 
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabStylistData, expectedStylistData);
-		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
-		PrintUtils.printStylistPropertiesModel(grabStylistData);
-		PrintUtils.printStylistPropertiesModel(expectedStylistData);
-		
+		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER AUTO CONFIRMATION");
 		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabDatesModel, datesExpected);
 		customerAndStylistRegistrationWorkflows.validateCustomerRegistrationDate("VALIDATE CUSTOMER ACCOUNT REGISTRATION DATE");
 

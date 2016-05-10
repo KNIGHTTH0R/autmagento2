@@ -168,7 +168,6 @@ public class US8006CustomerBuyWithVoucherPartiallyOnShippingTest extends BaseTes
 
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
 		
-
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
 		shippingSteps.selectAddress(billingAddress);

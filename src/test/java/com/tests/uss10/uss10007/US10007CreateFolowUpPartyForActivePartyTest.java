@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +22,11 @@ import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US10.7 Check party and follow up party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_7.class)
@@ -45,7 +45,6 @@ public class US10007CreateFolowUpPartyForActivePartyTest extends BaseTest {
 
 	private static UrlModel urlModel = new UrlModel();
 	private String username, password;
-	private String customerName;
 
 	@Before
 	public void setUp() throws Exception {
@@ -59,7 +58,6 @@ public class US10007CreateFolowUpPartyForActivePartyTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			customerName = prop.getProperty("customerName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -75,7 +73,7 @@ public class US10007CreateFolowUpPartyForActivePartyTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
 	}
 
@@ -89,8 +87,7 @@ public class US10007CreateFolowUpPartyForActivePartyTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.createFolowUpParty();
-		partyCreationSteps.fillPartyDetailsForCustomerHost(customerName);
-		partyDetailsSteps.verifyThatFolowUpPartyAppearsOnPartyDetailsPage(customerName);
+		partyCreationSteps.fillPartyDetailsForStylistHost();
 
 	}
 

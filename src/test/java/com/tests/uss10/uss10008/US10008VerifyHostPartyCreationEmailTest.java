@@ -1,4 +1,4 @@
-package com.tests.uss10.us10005;
+package com.tests.uss10.uss10008;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +32,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US10.5 Create Follow Up Party", type = "Scenarios")
 @Story(Application.StyleParty.US10_5.class)
 @RunWith(SerenityRunner.class)
-public class US10005VerifyHostPartyCreationEmailTest extends BaseTest {
+public class US10008VerifyHostPartyCreationEmailTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -80,7 +80,7 @@ public class US10005VerifyHostPartyCreationEmailTest extends BaseTest {
 	}
 
 	@Test
-	public void us10005VerifyHostPartyCreationEmailTest() {
+	public void us10008VerifyHostPartyCreationEmailTest() {
 
 		frontEndSteps.performLogin(email, password);
 

@@ -1,10 +1,5 @@
 package com.tests.us6.us6001;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +17,12 @@ import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
@@ -43,7 +42,8 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 	@Steps
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-//	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
+	// private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData
+	// = new StylistPropertiesModel();
 	private StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
 	private StylistPropertiesModel expectedOrderPaidStylistData = new StylistPropertiesModel();
 	private RegistrationActivationDateModel datesExpected = new RegistrationActivationDateModel();
@@ -60,9 +60,10 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 
-//		expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel(ConfigConstants.NOT_CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
-		expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.STYLIST);
-		expectedOrderPaidStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.STYLIST);
+		expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED,
+				ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.STYLIST);
+		expectedOrderPaidStylistData = new StylistPropertiesModel(ConfigConstants.CONFIRMED,
+				ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.STYLIST);
 		datesExpected = new RegistrationActivationDateModel(formCreationDate, formCreationDate);
 
 	}
@@ -75,13 +76,6 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
 		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
 
-//		StylistPropertiesModel grabBeforeLinkConfirmationStylistData = backEndSteps.grabCustomerConfiguration();
-
-//		// external
-//		emailClientSteps.openMailinator();
-//		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
-
-//		backEndSteps.navigate(customerURL);
 		StylistPropertiesModel grabAfterLinkConfirmationStylistData = backEndSteps.grabCustomerConfiguration();
 
 		backEndSteps.clickOnSalesOrders();
@@ -96,20 +90,13 @@ public class US6001CheckStylistActivationTest extends BaseTest {
 		StylistPropertiesModel grabOrderPaidStylistData = backEndSteps.grabCustomerConfiguration();
 		RegistrationActivationDateModel grabDatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
 
-//		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);
-//		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
-//		PrintUtils.printStylistPropertiesModel(grabBeforeLinkConfirmationStylistData);
-//		PrintUtils.printStylistPropertiesModel(expectedBeforeLinkConfirmationStylistData);
-
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabAfterLinkConfirmationStylistData, expectedAfterLinkConfirmationStylistData);
+		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabAfterLinkConfirmationStylistData,
+				expectedAfterLinkConfirmationStylistData);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
-		PrintUtils.printStylistPropertiesModel(grabAfterLinkConfirmationStylistData);
-		PrintUtils.printStylistPropertiesModel(expectedAfterLinkConfirmationStylistData);
 
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabOrderPaidStylistData, expectedOrderPaidStylistData);
+		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabOrderPaidStylistData,
+				expectedOrderPaidStylistData);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER MARK AS PAID ");
-		PrintUtils.printStylistPropertiesModel(grabOrderPaidStylistData);
-		PrintUtils.printStylistPropertiesModel(expectedOrderPaidStylistData);
 
 		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabDatesModel, datesExpected);
 		customerAndStylistRegistrationWorkflows.validateStylistDAtes("VALIDATE REGISTRATION AND ACTIVATION DATES");

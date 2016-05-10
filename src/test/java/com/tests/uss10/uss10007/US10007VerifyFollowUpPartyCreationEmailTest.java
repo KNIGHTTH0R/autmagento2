@@ -1,4 +1,4 @@
-package com.tests.uss10.us10006;
+package com.tests.uss10.uss10007;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +20,6 @@ import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
 import com.tools.data.UrlModel;
 import com.tools.data.email.EmailCredentialsModel;
 import com.tools.env.constants.ContextConstants;
@@ -30,17 +29,15 @@ import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
-@Story(Application.StyleParty.US10_6.class)
+@WithTag(name = "US10.5 Create Follow Up Party", type = "Scenarios")
+@Story(Application.StyleParty.US10_5.class)
 @RunWith(SerenityRunner.class)
-public class US10006VerifyInviteForStylistHostEmailTest extends BaseTest {
+public class US10007VerifyFollowUpPartyCreationEmailTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
 	public EmailSteps emailSteps;
-	@Steps
-	public CustomVerification customVerifications;
 
 	private String email, password, emailPassword;
 	private UrlModel urlModel = new UrlModel();
@@ -52,9 +49,8 @@ public class US10006VerifyInviteForStylistHostEmailTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10006.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
-
 			email = prop.getProperty("username");
 			password = prop.getProperty("password");
 			emailPassword = prop.getProperty("emailPassword");
@@ -83,14 +79,13 @@ public class US10006VerifyInviteForStylistHostEmailTest extends BaseTest {
 	}
 
 	@Test
-	public void us10006VerifyInviteForStylistHostEmailTest() {
+	public void us10007VerifyFollowUpPartyCreationEmailTest() {
 
 		frontEndSteps.performLogin(email, password);
 
 		String message = gmailConnector.searchForMail("", ContextConstants.PARTY_CREATION_EMAIL_SUBJECT, true);
 		urlModel.setUrl(emailSteps.extractUrlFromEmailMessage(message, "customer/party/confirm"));
-		System.out.println(urlModel.getUrl());
-		customVerifications.printErrors();
+
 	}
 
 	@After

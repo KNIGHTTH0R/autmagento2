@@ -121,7 +121,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithNewContactHostTest" + SoapKeys.GRAB).get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.COMPLETE);

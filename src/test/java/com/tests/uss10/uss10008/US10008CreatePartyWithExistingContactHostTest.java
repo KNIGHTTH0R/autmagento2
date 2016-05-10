@@ -1,15 +1,10 @@
-package com.tests.uss10.us10006;
+package com.tests.uss10.uss10008;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,53 +17,54 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
-import com.steps.frontend.UpdatePartySteps;
+import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.DateModel;
-import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
-@Story(Application.StyleParty.US10_6.class)
-@RunWith(SerenityRunner.class)
-public class US10006CreatePartyWithStylistHostTest extends BaseTest {
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
-	@Steps
-	public PartyDetailsSteps partyDetailsSteps;
+@WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
+@Story(Application.PartyPerformance.US10_8.class)
+@RunWith(SerenityRunner.class)
+public class US10008CreatePartyWithExistingContactHostTest extends BaseTest {
+
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
+	public CreateNewContactSteps createNewContactSteps;
+	@Steps
 	public HeaderSteps headerSteps;
+
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
-	public UpdatePartySteps updatePartySteps;
+	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
 
 	private static UrlModel urlModel = new UrlModel();
-	private static DateModel dateModel = new DateModel();
-	private String username, password;
-	private String customerEmail, customerName;
+	private String username, password, customerName;
 
 	@Before
 	public void setUp() throws Exception {
+
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10006.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-
-			customerEmail = prop.getProperty("customerUsername");
 			customerName = prop.getProperty("customerName");
 
 		} catch (IOException ex) {
@@ -83,31 +79,24 @@ public class US10006CreatePartyWithStylistHostTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us10006CreatePartyWithStylistHostTest() {
+	public void us10008CreatePartyWithExistingContactHostTest() {
+
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
-		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
-		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
-		partyDetailsSteps.verifyPlannedPartyAvailableActions();
-		partyDetailsSteps.sendInvitationToGest(customerName, customerEmail);
-		partyDetailsSteps.verifyThatGuestIsInvited(customerName);
-		updatePartySteps.updatePartyDateAndHour();
-		partyDetailsSteps.sendInvitationToHostess();
+		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
 
 	}
 
 	@After
 	public void saveData() {
-
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
 	}
 }

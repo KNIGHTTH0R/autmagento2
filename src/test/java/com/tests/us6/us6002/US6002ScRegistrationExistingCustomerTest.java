@@ -102,7 +102,7 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
 		
-		customVerifications.printErrors();	
+//		customVerifications.printErrors();	
 	}
 	
 	@After

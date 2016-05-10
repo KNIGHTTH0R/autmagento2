@@ -47,7 +47,8 @@ public class US7007EmailCodeTest extends BaseTest {
 
 	@Test
 	public void us7007EmailCodeTest() {
-		validateMessageMail = emailClientSteps.grabEmailCoupon(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.WELCOME_MAIL_SUBJECT);
+		validateMessageMail = emailClientSteps.grabEmailCoupon(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""),
+				ContextConstants.WELCOME_MAIL_SUBJECT);
 		System.out.println(validateMessageMail);
 		emailSteps.validateEmail("123aa11", validateMessageMail);
 

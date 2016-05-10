@@ -35,7 +35,7 @@ public class ProfileSteps extends AbstractSteps {
 
 	@Step
 	public void verifyOrderPrice(String orderPrice, String compare) {
-		orderPrice = FormatterUtils.cleanNumberToString(orderPrice).replace(".", "");
+		orderPrice = FormatterUtils.parseValueToZeroDecimals(orderPrice);
 		Assert.assertTrue("Failure: Order Price is not as expected. Expected: " + compare + " Actual: " + orderPrice, orderPrice.contentEquals(compare));
 	}
 

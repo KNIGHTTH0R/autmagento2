@@ -66,11 +66,16 @@ public class PartyDetailsBackendSteps extends AbstractSteps {
 
 	}
 	@StepGroup
-	public void addJewelryBonusToParty(String bonus) {
+	public void addJewelryAndFourthyDiscountBonusToParty(String jewelryBonus, String forthyDiscount) {
 		partyDetailsBackendPage().goToBonusTab();
 		partyDetailsBackendPage().addNewBonus();
 		partyDetailsBackendPage().selectBonusType("Jewelry bonus");
-		partyDetailsBackendPage().typeBonusValue(bonus);
+		partyDetailsBackendPage().typeBonusValue(jewelryBonus);
+		partyDetailsBackendPage().saveBonus();
+		partyDetailsBackendPage().verifyAddBonusSuccessMessage();
+		partyDetailsBackendPage().addNewBonus();
+		partyDetailsBackendPage().selectBonusType("40% discount bonus");
+		partyDetailsBackendPage().typeBonusValue(forthyDiscount);
 		partyDetailsBackendPage().saveBonus();
 		partyDetailsBackendPage().verifyAddBonusSuccessMessage();
 		

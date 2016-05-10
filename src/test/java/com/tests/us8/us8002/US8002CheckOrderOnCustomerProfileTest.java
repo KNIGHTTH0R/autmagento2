@@ -92,7 +92,6 @@ public class US8002CheckOrderOnCustomerProfileTest extends BaseTest {
 		String orderPrice = orderHistory.get(0).getTotalPrice();
 		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
 		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
-		orderModel = orderHistory.get(0);
 
 		customVerifications.printErrors();
 	}

@@ -41,7 +41,7 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -49,7 +49,7 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7008.properties");
 			prop.load(input);
-			expectedStyleCoach = prop.getProperty("expectedStyleCoach");	
+			expectedStyleCoach = prop.getProperty("expectedStyleCoach");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -65,8 +65,10 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 		int size = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").get(0).getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").get(0).getPassword();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").get(0)
+					.getEmailName();
+			stylistPassword = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").get(0)
+					.getPassword();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
@@ -80,11 +82,11 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 		headerSteps.goToProfile();
 		headerSteps.getBoutiqueName();
-		dashboardSteps.getStyleCoachFirstNameFromProfile();
-		dashboardSteps.getStyleCoachFullNameFromProfile();
 
-		dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), dashboardSteps.getStyleCoachFirstNameFromProfile());
-		dashboardSteps.validateCustomerIsAssignedToStyleCoach(expectedStyleCoach, dashboardSteps.getStyleCoachFullNameFromProfile());
+		dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(),
+				dashboardSteps.getStyleCoachFirstNameFromProfile());
+		dashboardSteps.validateCustomerIsAssignedToStyleCoach(expectedStyleCoach,
+				dashboardSteps.getStyleCoachFullNameFromProfile());
 
 	}
 

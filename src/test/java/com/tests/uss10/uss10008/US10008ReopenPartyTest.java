@@ -35,7 +35,7 @@ public class US10008ReopenPartyTest extends BaseTest {
 
 	@Before
 	public void setUp() {
-		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
+		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
 		String[] parts = urlModel.getUrl().split("/");
 		partyId = parts[parts.length - 1];
 		System.out.println("party Id:" + partyId);

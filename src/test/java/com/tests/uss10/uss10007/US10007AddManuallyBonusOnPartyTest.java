@@ -1,4 +1,4 @@
-package com.tests.uss10.uss10008;
+package com.tests.uss10.uss10007;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +10,7 @@ import com.steps.backend.stylecoach.PartyListBackendSteps;
 import com.tests.BaseTest;
 import com.tools.data.UrlModel;
 import com.tools.env.constants.Credentials;
+import com.tools.env.constants.SoapKeys;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -18,10 +19,10 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
+@WithTag(name = "US10.7 Check party and follow up party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_8.class)
 @RunWith(SerenityRunner.class)
-public class US10008AddManuallyBonusOnPartyTest extends BaseTest {
+public class US10007AddManuallyBonusOnPartyTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -35,18 +36,17 @@ public class US10008AddManuallyBonusOnPartyTest extends BaseTest {
 
 	@Before
 	public void setUp() {
-		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
+		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		String[] parts = urlModel.getUrl().split("/");
 		partyId = parts[parts.length - 1];
-		System.out.println("party Id:" + partyId);
 	}
 
 	@Test
-	public void us10008AddManuallyBonusOnPartyTest() {
+	public void us10007AddManuallyBonusOnPartyTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnStyleParties();
 		partyListBackendSteps.openPartyDetails(partyId);
 		partyDetailsBackendSteps.goToBonusTab();
-		partyDetailsBackendSteps.addJewelryAndFourthyDiscountBonusToParty("1000","1");
+		partyDetailsBackendSteps.addJewelryAndFourthyDiscountBonusToParty("1000", "1");
 	}
 }

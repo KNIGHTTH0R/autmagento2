@@ -1,11 +1,6 @@
 package com.tests.us7.uss70011;
 
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +13,12 @@ import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US7.11 Kobo Campaign Registration On Master Test ", type = "Scenarios")
 @Story(Application.KoboCampaign.US7_11.class)
@@ -62,8 +61,6 @@ public class US70011CheckCustomerActivation extends BaseTest {
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(afterLinkConfirmationStylistProperties, afterLinkConfirmationStylistExpectedProperties);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
-		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistProperties);
-		PrintUtils.printStylistPropertiesModel(afterLinkConfirmationStylistExpectedProperties);
 			
 		customVerifications.printErrors();
 	}

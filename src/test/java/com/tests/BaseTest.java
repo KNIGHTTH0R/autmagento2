@@ -79,8 +79,6 @@ public class BaseTest {
 			}
 		}
 
-		System.out.println("Base URL: " + baseUrl);
-		System.out.println("Soap URL: " + soapUrl);
 		MongoWriter.saveStoreUrl(storeIDs, baseUrl, soapUrl);
 
 		EmailCredentialsModel emailDefaults = new EmailCredentialsModel();

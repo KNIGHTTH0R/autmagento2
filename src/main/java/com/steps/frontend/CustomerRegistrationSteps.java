@@ -34,7 +34,6 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		checkParties();
-		// checkMember();
 		fillContactDetails(addressData);
 		searchStylistByGeoip(addressData);
 		checkIAgree();
@@ -615,7 +614,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			waitABit(2000);
 			pageTitle = thankYouPage().pageTitle();
 			counter++;
-		} while (!pageTitle.contains("Thank you page") && counter < 60);
+		} while (!pageTitle.contains("PIPPA") && counter < 60);
 		System.out.println(pageTitle);
 		Assert.assertTrue("Failure: Page title is not as expected. Might be a wrong page. Actual: " + pageTitle, pageTitle.contains("PIPPA&JEAN"));
 

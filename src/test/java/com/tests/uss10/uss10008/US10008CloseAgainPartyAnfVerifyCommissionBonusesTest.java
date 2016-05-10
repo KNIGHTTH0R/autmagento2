@@ -88,12 +88,13 @@ public class US10008CloseAgainPartyAnfVerifyCommissionBonusesTest extends BaseTe
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10008OrderForCustomerAsPartyHostTest").get(0));
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10008PlaceAnotherOrderForCustomerAsPartyHostTest").get(0));
 
-		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
+		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
 
-		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, "100")));
+		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, "1000")));
 		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
 		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyTotal(partyBonusCalculationModelList)));
-		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
+		// 1 forthy discount from order and 1 added manually
+		expectedClosedPartyPerformanceModel.setFourthyDiscounts("2");
 		expectedClosedPartyPerformanceModel.setIp(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setIpInPayment(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 		PrintUtils.printClosedPartyModel(expectedClosedPartyPerformanceModel);

@@ -82,7 +82,8 @@ public class US7006LandingPageRegistrationSelectedScTest extends BaseTest {
 	public void us7006LandingPageRegistrationSelectedScTest() {
 
 		customerRegistrationSteps.fillLandingPageForm(dataModel, addressModel);
-		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN, addressModel);
+		customerRegistrationSteps.selectStylistOption(StyleMode.CustomStylist, styleCoachFN, styleCoachLN,
+				addressModel);
 		customerRegistrationSteps.submitStylistSelection();
 		String email = customerRegistrationSteps.fillThankYouForm(dataModel.getPassword());
 		customerRegistrationSteps.verifyCustomerEmail(dataModel.getEmailName(), email);

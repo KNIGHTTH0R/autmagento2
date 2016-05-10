@@ -117,7 +117,7 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
+		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 

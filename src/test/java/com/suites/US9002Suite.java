@@ -8,13 +8,11 @@ import com.tests.us9.us9002.US9002ActivateBuyGet1Test;
 import com.tests.us9.us9002.US9002DeactivateBuy3Get1Test;
 import com.tests.us9.us9002.US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test;
 import com.tests.us9.us9002.US9002ValidateOrderBackOfficeTest;
-import com.tests.uss10.us10002.US10002ClosePartyTest;
-import com.tests.uss10.us10002.US10002UpdatePartyBonusesTest;
 
 @SuiteClasses({
 	
-	US10002ClosePartyTest.class,	
-	US10002UpdatePartyBonusesTest.class,
+//	US10002ClosePartyTest.class,	
+//	US10002UpdatePartyBonusesTest.class,
 	US9002ActivateBuyGet1Test.class,
 	US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test.class,
 //	US9002CheckOrderOnStylecoachProfileTest.class,	

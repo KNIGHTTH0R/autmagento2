@@ -27,6 +27,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
+import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -77,6 +78,8 @@ public class US9001PlaceHostOrderWithForthyDiscountsAndJbTest extends BaseTest {
 	@Steps
 	public HostCartValidationWorkflows hostCartValidationWorkflows;
 	@Steps
+	public ContactHostShippingHostSteps contactHostShippingHostSteps;
+	@Steps
 	public CustomVerification customVerifications;
 
 	private String username, password;
@@ -119,6 +122,7 @@ public class US9001PlaceHostOrderWithForthyDiscountsAndJbTest extends BaseTest {
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
+			
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -135,7 +139,7 @@ public class US9001PlaceHostOrderWithForthyDiscountsAndJbTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 		
-		partyUrlModel = MongoReader.grabUrlModels("US10001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		partyUrlModel = MongoReader.grabUrlModels("US10007CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 

@@ -18,7 +18,6 @@ public class ProfileHistoryPage extends AbstractPage {
 
 	public List<OrderModel> grabOrderHistory() {
 
-		System.out.println("------------ Order History");
 		element(listContainer).waitUntilVisible();
 		List<WebElement> orderList = listContainer.findElements(By.cssSelector("tbody > tr"));
 

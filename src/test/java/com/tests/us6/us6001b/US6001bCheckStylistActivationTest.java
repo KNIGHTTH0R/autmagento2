@@ -1,10 +1,5 @@
 package com.tests.us6.us6001b;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,8 +18,12 @@ import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.1b Sc Registration New Customer Forbidden Country Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
@@ -46,7 +45,6 @@ public class US6001bCheckStylistActivationTest extends BaseTest {
 
 	public CustomerConfigurationModel customerConfigurationModel = new CustomerConfigurationModel();
 	
-//	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
 	private StylistPropertiesModel expectedOrderPaidStylistData = new StylistPropertiesModel();
 	private RegistrationActivationDateModel datesExpected = new RegistrationActivationDateModel();
@@ -78,13 +76,6 @@ public class US6001bCheckStylistActivationTest extends BaseTest {
 		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
 		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
 		
-//		StylistPropertiesModel grabBeforeLinkConfirmationStylistData =  backEndSteps.grabCustomerConfiguration();
-//		
-//		//external 
-//		emailClientSteps.openMailinator();
-//		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
-//		
-//		backEndSteps.navigate(customerURL);
 		StylistPropertiesModel grabAfterLinkConfirmationStylistData =  backEndSteps.grabCustomerConfiguration();
 
 		backEndSteps.clickOnSalesOrders();
@@ -99,20 +90,12 @@ public class US6001bCheckStylistActivationTest extends BaseTest {
 		StylistPropertiesModel grabOrderPaidStylistData =  backEndSteps.grabCustomerConfiguration();	
 		RegistrationActivationDateModel grabDatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
 
-//		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	
-//		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
-//		PrintUtils.printStylistPropertiesModel(grabBeforeLinkConfirmationStylistData);
-//		PrintUtils.printStylistPropertiesModel(expectedBeforeLinkConfirmationStylistData);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabAfterLinkConfirmationStylistData, expectedAfterLinkConfirmationStylistData);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
-		PrintUtils.printStylistPropertiesModel(grabAfterLinkConfirmationStylistData);
-		PrintUtils.printStylistPropertiesModel(expectedAfterLinkConfirmationStylistData);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabOrderPaidStylistData, expectedOrderPaidStylistData);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER MARK AS PAID ");
-		PrintUtils.printStylistPropertiesModel(grabOrderPaidStylistData);
-		PrintUtils.printStylistPropertiesModel(expectedOrderPaidStylistData);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabDatesModel,datesExpected);
 		customerAndStylistRegistrationWorkflows.validateStylistDAtes("VALIDATE REGISTRATION AND ACTIVATION DATES");

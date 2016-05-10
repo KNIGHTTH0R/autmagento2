@@ -57,7 +57,7 @@ public class UnbouncePage extends AbstractPage {
 	}
 
 	/**
-	 * js used to work on Android also
+	 * js used to work on Android too
 	 */
 	public void acceptTerms() {
 

@@ -83,7 +83,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 		RegistrationActivationDateModel grabDatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
 	
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabAfterLinkConfirmationStylistData, expectedAfterLinkConfirmationStylistData);
-		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
+		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER REGISTRATION FROM EXISTING CUSTOMER");
 		PrintUtils.printStylistPropertiesModel(grabAfterLinkConfirmationStylistData);
 		PrintUtils.printStylistPropertiesModel(expectedAfterLinkConfirmationStylistData);
 		

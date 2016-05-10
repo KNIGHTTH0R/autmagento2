@@ -10,8 +10,10 @@ import com.tests.uss10.uss10008.US10008CloseVirginPartyAnfVerifyCommissionBonuse
 import com.tests.uss10.uss10008.US10008OrderForCustomerAsPartyHostTest;
 import com.tests.uss10.uss10008.US10008PlaceAnotherOrderForCustomerAsPartyHostTest;
 import com.tests.uss10.uss10008.US10008ReopenPartyTest;
+import com.tests.uss10.uss10008.US10008VerifyHostPartyCreationEmailTest;
 
 @SuiteClasses({	
+	US10008VerifyHostPartyCreationEmailTest.class,
 	US10008OrderForCustomerAsPartyHostTest.class,
 	US10008CloseVirginPartyAnfVerifyCommissionBonusesTest.class,
 	US10008AddManuallyBonusOnPartyTest.class,

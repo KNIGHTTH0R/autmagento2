@@ -42,7 +42,7 @@ public class US10008ValidatePartyBackendPerformanceTest extends BaseTest {
 
 	@Before
 	public void setUp() {
-		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
+		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
 		expectedModel = MongoReader.grabClosedPartyPerformanceModel("US10008CloseVirginPartyAnfVerifyCommissionBonusesTest").get(0);
 		PrintUtils.printClosedPartyModel(expectedModel);
 		String[] parts = urlModel.getUrl().split("/");

@@ -86,7 +86,7 @@ public class US10008CloseVirginPartyAnfVerifyCommissionBonusesTest extends BaseT
 
 		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10008OrderForCustomerAsPartyHostTest").get(0));
 
-		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
+		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
 
 		expectedClosedPartyPerformanceModel.setJewelryBonus(String.valueOf(PartyBonusCalculation.calculatePartyJewelryBonus(partyBonusCalculationModelList, "0")));
 		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));

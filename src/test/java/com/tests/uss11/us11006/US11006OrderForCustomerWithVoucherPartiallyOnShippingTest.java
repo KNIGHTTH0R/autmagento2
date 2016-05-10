@@ -146,7 +146,7 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US11001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);

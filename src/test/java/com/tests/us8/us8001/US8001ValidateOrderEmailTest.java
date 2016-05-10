@@ -85,9 +85,6 @@ public class US8001ValidateOrderEmailTest extends BaseTest{
 		emailData.setProtocol(EmailConstants.PROTOCOL);
 		emailData.setUsername(email);
 		emailData.setPassword(emailPassword);
-		System.out.println(email);
-		System.out.println(password);
-		System.out.println(emailPassword);
         
 		gmailConnector = new GmailConnector(emailData);
 	}
@@ -97,9 +94,6 @@ public class US8001ValidateOrderEmailTest extends BaseTest{
 		frontEndSteps.performLogin(email, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
-		System.out.println(message);
-		System.out.println(orderModel.get(0).getOrderId());
-		System.out.println(orderModel.get(0).getTotalPrice());
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 		
 		customVerifications.printErrors();

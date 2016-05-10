@@ -1,4 +1,4 @@
-package com.tests.uss10.us10001;
+package com.tests.uss10.uss10007;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,33 +21,32 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyCreationSteps;
+import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US9.1 Place Host Order With 40% Discount and JB Test", type = "Scenarios")
-@Story(Application.HostCart.US9_1.class)
+@WithTag(name = "US10.7 Check party and follow up party performance and bonuses", type = "Scenarios")
+@Story(Application.PartyPerformance.US10_7.class)
 @RunWith(SerenityRunner.class)
-public class US10001CreatePartyWithStylistHostTest extends BaseTest {
+public class US10007CreatePartyWithStylistHostTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
-
 	@Steps
 	public FooterSteps footerSteps;
-
+	@Steps
+	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
 
 	private static UrlModel urlModel = new UrlModel();
-	private static DateModel dateModel = new DateModel();
 	private String username, password;
 
 	@Before
@@ -80,7 +79,7 @@ public class US10001CreatePartyWithStylistHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us10001CreatePartyWithStylistHostTest() {
+	public void us10007CreatePartyWithStylistHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -88,13 +87,14 @@ public class US10001CreatePartyWithStylistHostTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
-		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
+		partyDetailsSteps.verifyPlannedPartyAvailableActions();
+		partyDetailsSteps.sendInvitationToHostess();
 	}
 
 	@After
 	public void saveData() {
+
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 }

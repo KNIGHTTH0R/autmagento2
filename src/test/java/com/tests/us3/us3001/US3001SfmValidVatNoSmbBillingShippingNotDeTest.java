@@ -46,7 +46,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT",type = "Scenarios")
+@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
 public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
@@ -76,9 +76,8 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-
 	private CreditCardModel creditCardData = new CreditCardModel();
-	
+
 	// Test data - from property file
 	private String username, password;
 	// Test data fields
@@ -87,21 +86,20 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	private static String addressString;
-	
+
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
-	
+
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
 
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
-		
+
 		productsList = MongoReader.grabBasicProductModel("US3001BuyProductsForTheFirstTimeTest" + SoapKeys.GRAB);
 
-		
 		genProduct1.setName(productsList.get(0).getName());
 		genProduct1.setSku(productsList.get(0).getProdCode());
 		genProduct1.setIp("84");
@@ -115,15 +113,15 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		genProduct3.setIp("0");
 		genProduct3.setPrice("229.00");
 
-		
 		Properties prop = new Properties();
 		InputStream input = null;
-		
+
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
 			prop.load(input);
-			
+
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			jewelryDisount = prop.getProperty("jewelryDisount");
@@ -143,7 +141,7 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 				}
 			}
 		}
-		// Clean DB
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
@@ -157,20 +155,20 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.clickonGeneralView();
 		frontEndSteps.wipeCart();
-		BasicProductModel productData;		
-		
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "2", "0",ConfigConstants.DISCOUNT_25);
+		BasicProductModel productData;
+
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0",ConfigConstants.DISCOUNT_0);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-		
-		CartCalculator.calculateJMDiscounts(jewelryDisount, marketingDisount, taxClass, shippingValue);	
+
+		CartCalculator.calculateJMDiscounts(jewelryDisount, marketingDisount, taxClass, shippingValue);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
+
 		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
@@ -179,23 +177,23 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDisount);
 		cartSteps.updateMarketingBonus();
-		
+
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
-		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
-		
+		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
+
 		cartSteps.grabTotals();
 		cartSteps.goToShipping();
-		
+
 		CartCalculator.calculateShippingWith19PercentRemoved(shippingValue);
 
 		shippingSteps.selectAddress(addressString);
-		shippingSteps.setSameAsBilling(true);	
+		shippingSteps.setSameAsBilling(true);
 		shippingSteps.refresh();
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
-		
+
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
 		DataGrabber.urlModel.setUrl(url);
@@ -213,14 +211,16 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		validationWorkflows.setBillingShippingAddress(addressString, addressString);
 		validationWorkflows.performCartValidations119Vat();
-		
+
 		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
-		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);

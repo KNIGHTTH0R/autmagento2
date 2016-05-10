@@ -210,7 +210,7 @@ public class FormatterUtils {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(FormatterUtils.parseValueToZeroDecimals("0"));
-		System.out.println(FormatterUtils.cleanNumberToString("45"));
+		System.out.println(FormatterUtils.parseValueToZeroDecimals("€131,60 €"));
+		System.out.println(FormatterUtils.cleanNumberToString("131,60 €").replace(".", ""));
 	}
 }

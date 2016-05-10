@@ -7,7 +7,6 @@ import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.env.constants.ContextConstants;
-import com.tools.utils.PrintUtils;
 
 public class RegularUserCartCalculator {
 
@@ -45,12 +44,10 @@ public class RegularUserCartCalculator {
 
 	public static void calculateCartAndShippingTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass, voucherValue,shippingValue);
-		PrintUtils.printRegularCartCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 	}
 	public static void calculateCartTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotals(allProductsList, discountClass, voucherValue,shippingValue);
-		PrintUtils.printRegularCartCalcDetailsModel(calculatedTotalsDiscounts);
 	}
 	public static void calculateShippingTotals(String shippingValue, String voucherValue, String taxClass) {
 		
@@ -62,7 +59,6 @@ public class RegularUserCartCalculator {
 	public static void calculateCartBuy3Get1CartAndShippingTotals(List<RegularBasicProductModel> prodList, String discountClass, String shippingValue, String voucherValue) {
 		allProductsListWithRegularPrice = getProductswithRegularPriceFromList(allProductsList);
 		calculatedTotalsDiscounts = RegularCartTotalsCalculation.calculateTotalsWithBuy3Get1Active(allProductsList, allProductsListWithRegularPrice, discountClass, voucherValue,shippingValue);
-		PrintUtils.printRegularCartCalcDetailsModel(calculatedTotalsDiscounts);
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 
 	}

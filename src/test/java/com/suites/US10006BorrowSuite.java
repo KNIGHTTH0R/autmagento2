@@ -6,11 +6,11 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.uss10.us10006.US10006ChechEmailAndAcceptInvitationTest;
 import com.tests.uss10.us10006.US10006CheckPartyWishlistAndBorrowProductTest;
-import com.tests.uss10.us10006.US10006CreatePartyWithStylistHostTest;
+import com.tests.uss10.us10006.US10006CreatePartyWithNewContactHostTest;
 import com.tests.uss10.us10006.US10006CustomerAddProductIntoWishlistTest;
 
 @SuiteClasses({	
-	US10006CreatePartyWithStylistHostTest.class,
+	US10006CreatePartyWithNewContactHostTest.class,
 	US10006ChechEmailAndAcceptInvitationTest.class,
 	US10006CustomerAddProductIntoWishlistTest.class,	
 	US10006CheckPartyWishlistAndBorrowProductTest.class,

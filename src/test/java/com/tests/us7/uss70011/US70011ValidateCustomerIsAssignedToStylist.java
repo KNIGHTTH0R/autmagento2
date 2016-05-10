@@ -36,8 +36,10 @@ public class US70011ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 		int size = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").get(0).getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").get(0).getPassword();
+			stylistEmail = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").get(0)
+					.getEmailName();
+			stylistPassword = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").get(0)
+					.getPassword();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
@@ -49,10 +51,9 @@ public class US70011ValidateCustomerIsAssignedToStylist extends BaseTest {
 
 		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
 		headerSteps.goToProfile();
-		System.out.println(headerSteps.getBoutiqueName());
-		System.out.println(dashboardSteps.getStyleCoachFirstNameFromProfile());
 
-		dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), dashboardSteps.getStyleCoachFirstNameFromProfile());
+		dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(),
+				dashboardSteps.getStyleCoachFirstNameFromProfile());
 
 	}
 

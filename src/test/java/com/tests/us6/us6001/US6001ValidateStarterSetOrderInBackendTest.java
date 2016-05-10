@@ -3,11 +3,6 @@ package com.tests.us6.us6001;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,9 +20,13 @@ import com.tools.data.frontend.ShippingModel;
 import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.borrowCart.BorrowCartOrderProductsWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
@@ -88,10 +87,8 @@ public class US6001ValidateStarterSetOrderInBackendTest extends BaseTest {
 		ordersSteps.openOrder(orderId);
 		orderTotalsModel = ordersSteps.grabTotals();
 
-		PrintUtils.printOrderTotals(orderTotalsModel);
-
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
-		orderWorkflows.validateBorrowCartCalculationTotals("TOTALS VALIVATION");
+		orderWorkflows.validateStarterSetCartCalculationTotals("TOTALS VALIVATION");
 
 		customVerifications.printErrors();
 	}

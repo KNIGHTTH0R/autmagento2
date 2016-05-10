@@ -20,7 +20,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US7.1 Regular Customer Registration on Master Test ", type = "Scenarios")
 @Story(Application.CustomerRegistration.US7_1.class)
 @RunWith(SerenityRunner.class)
-public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {
+public class US7001ValidateBoutiqueTest extends BaseTest {
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -48,7 +48,7 @@ public class US7001ValidateCustomerIsAssignedToStylist extends BaseTest {
 		
 	}
 	@Test
-	public void us7001ValidateCustomerIsAssignedToStylist() {
+	public void us7001ValidateBoutiqueTest() {
 		
 		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);	
 		headerSteps.goToProfile();
