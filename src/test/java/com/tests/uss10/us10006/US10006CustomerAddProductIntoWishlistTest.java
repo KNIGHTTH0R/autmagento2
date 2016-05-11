@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +20,6 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
-import com.tools.data.UrlModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.RegularUserDataGrabber;
@@ -36,6 +30,11 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
 @Story(Application.StyleParty.US10_6.class)
@@ -55,7 +54,6 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 	private static List<RegularBasicProductModel> allProductsList = new ArrayList<RegularBasicProductModel>();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
-	private static UrlModel urlModel = new UrlModel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -95,8 +93,6 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
-		urlModel = MongoReader.grabUrlModels("US10006ChechEmailAndAcceptInvitationTest").get(0);
-		System.out.println(urlModel.getUrl());
 	}
 
 	@Test

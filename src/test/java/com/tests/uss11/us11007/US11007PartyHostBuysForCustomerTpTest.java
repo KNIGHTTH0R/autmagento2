@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -32,6 +34,7 @@ import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
+import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
 import com.tools.env.constants.SoapKeys;
@@ -96,6 +99,11 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
 
+	private List<PartyBonusCalculationModel> partyBonusCalculationModeList = new ArrayList<PartyBonusCalculationModel>();
+	private PartyBonusCalculationModel partyBonusCalculationModelTp0 = new PartyBonusCalculationModel();
+	private PartyBonusCalculationModel partyBonusCalculationModelTp1 = new PartyBonusCalculationModel();
+	private PartyBonusCalculationModel partyBonusCalculationModelTp2 = new PartyBonusCalculationModel();
+
 	@Before
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
@@ -147,7 +155,10 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US11002CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
+		// urlModel =
+		// MongoReader.grabUrlModels("US10002bCreatePartyWithCustomerHostTest" +
+		// SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP0");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
@@ -242,6 +253,21 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		hostCartValidationWorkflows.performTpCartValidationsWithVoucher();
 
+		partyBonusCalculationModelTp0.setTotal(HostCartCalculator.shippingCalculatedModel.getTotalAmount());
+		partyBonusCalculationModelTp0.setIp(HostCartCalculator.allProductsListwithVoucher.get(0).getIpPoints());
+		partyBonusCalculationModelTp0.setPercent("100");
+		partyBonusCalculationModeList.add(partyBonusCalculationModelTp0);
+
+		partyBonusCalculationModelTp1.setTotal(HostCartCalculator.shippingCalculatedModelTp1.getTotalAmount());
+		partyBonusCalculationModelTp1.setIp(HostCartCalculator.allProductsListwithVoucher.get(1).getIpPoints());
+		partyBonusCalculationModelTp1.setPercent("100");
+		partyBonusCalculationModeList.add(partyBonusCalculationModelTp1);
+
+		partyBonusCalculationModelTp2.setTotal(HostCartCalculator.shippingCalculatedModelTp2.getTotalAmount());
+		partyBonusCalculationModelTp2.setIp(HostCartCalculator.allProductsListwithVoucher.get(2).getIpPoints());
+		partyBonusCalculationModelTp2.setPercent("100");
+		partyBonusCalculationModeList.add(partyBonusCalculationModelTp2);
+
 		customVerifications.printErrors();
 
 	}
@@ -264,6 +290,9 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		}
 		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp2) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP2");
+		}
+		for (PartyBonusCalculationModel model : partyBonusCalculationModeList) {
+			MongoWriter.savePartyBonusCalculationModel(model, getClass().getSimpleName());
 		}
 	}
 

@@ -84,9 +84,7 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 			}
 		}
 
-		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007OrderForCustomerAsPartyHostTest").get(0));
-		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007PlaceSecondOrderAsPartyHostTest").get(0));
-		partyBonusCalculationModelList.add(MongoReader.grabPartyBonusCalculationModel("US10007PlaceThirdOrderAsPartyHostTest").get(0));
+		partyBonusCalculationModelList = MongoReader.grabPartyBonusCalculationModel("US11007PartyHostBuysForCustomerTpTest");
 
 		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 

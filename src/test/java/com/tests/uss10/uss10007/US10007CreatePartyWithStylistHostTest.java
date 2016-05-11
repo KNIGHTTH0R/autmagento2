@@ -87,7 +87,6 @@ public class US10007CreatePartyWithStylistHostTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
-		partyDetailsSteps.verifyPlannedPartyAvailableActions();
 		partyDetailsSteps.sendInvitationToHostess();
 	}
 
