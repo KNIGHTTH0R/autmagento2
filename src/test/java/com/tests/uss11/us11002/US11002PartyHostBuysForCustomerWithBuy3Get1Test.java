@@ -46,7 +46,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US11.2 Party Host Buys For Customer With Buy 3 Get 1 For 50%, ship to customer ", type = "Scenarios")
+@WithTag(name = "US11.2 Party Host Buys For Customer With Buy 3 Get 1 For 50%, ship to customer", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_2.class)
 @RunWith(SerenityRunner.class)
 public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {

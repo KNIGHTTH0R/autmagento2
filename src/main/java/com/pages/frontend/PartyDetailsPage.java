@@ -358,7 +358,6 @@ public class PartyDetailsPage extends AbstractPage {
 				if (!party.getText().contains(term)) {
 					foundAllTerms = false;
 				}
-
 			}
 			if (foundAllTerms) {
 				foundParty = true;

@@ -155,9 +155,6 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 			}
 		}
 
-		// urlModel =
-		// MongoReader.grabUrlModels("US10002bCreatePartyWithCustomerHostTest" +
-		// SoapKeys.GRAB).get(0);
 		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP0");

@@ -62,7 +62,6 @@ public class US12001VerifyStylistKoboStatusAfterSubscriptionTest extends BaseTes
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		coboCode = myBusinessSteps.getKoboCode();
-		System.out.println("cobocode " + coboCode);
 		myBusinessSteps.verifyKoboVoucherIsActive();
 
 	}

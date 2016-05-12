@@ -43,6 +43,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 //	US70012Suite.class,
 	
 	US10006Suite.class,
+	US11007Suite.class,
 	US10007SuitePartOne.class,
 	US10008Suite.class,
 	
@@ -60,7 +61,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US11004Suite.class,
 	US11005Suite.class,
 	US11006Suite.class,
-	US11007Suite.class,
+
 	
 	US9001Suite.class,
 	US9002Suite.class,

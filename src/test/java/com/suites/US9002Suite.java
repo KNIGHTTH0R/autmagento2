@@ -11,8 +11,6 @@ import com.tests.us9.us9002.US9002ValidateOrderBackOfficeTest;
 
 @SuiteClasses({
 	
-//	US10002ClosePartyTest.class,	
-//	US10002UpdatePartyBonusesTest.class,
 	US9002ActivateBuyGet1Test.class,
 	US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test.class,
 //	US9002CheckOrderOnStylecoachProfileTest.class,	

@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,8 +28,12 @@ import com.tools.generalCalculation.PartyBonusCalculation;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.commission.CommissionPartyPerformanceValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US10.8 Check virgin party performance and bonuses", type = "Scenarios")
 @Story(Application.PartyPerformance.US10_8.class)
@@ -94,7 +93,6 @@ public class US10008CloseVirginPartyAnfVerifyCommissionBonusesTest extends BaseT
 		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
 		expectedClosedPartyPerformanceModel.setIp(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setIpInPayment(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
-		PrintUtils.printClosedPartyModel(expectedClosedPartyPerformanceModel);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
@@ -112,7 +110,6 @@ public class US10008CloseVirginPartyAnfVerifyCommissionBonusesTest extends BaseT
 		partyDetailsSteps.closeTheParty();
 		partyDetailsSteps.returnToParty();
 		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
-		PrintUtils.printClosedPartyModel(grabbedClosedPartyPerformanceModel);
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
 
 		customVerifications.printErrors();

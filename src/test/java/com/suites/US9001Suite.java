@@ -9,8 +9,6 @@ import com.tests.us9.us9001.US9001ValidateOrderBackOfficeTest;
 
 @SuiteClasses({
 	
-//	US10001ClosePartyTest.class,
-//	US10001UpdatePartyBonusesTest.class,
 	US9001PlaceHostOrderWithForthyDiscountsAndJbTest.class,
 //	US9001CheckOrderOnStylecoachProfileTest.class,	
 //	US9001ValidateOrderEmailTest.class,	

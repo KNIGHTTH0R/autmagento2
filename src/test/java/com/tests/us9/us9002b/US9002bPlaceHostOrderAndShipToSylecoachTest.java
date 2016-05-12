@@ -175,7 +175,6 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 
 		hostCartSteps.clickGoToShipping();
 		contactHostShippingHostSteps.checkItemNotReceivedYet();
-		contactHostShippingHostSteps.verifyThatRestrictedCountriesAreNotAvailable();
 		contactHostShippingHostSteps.selectCountry(country);
 		contactHostShippingHostSteps.enterPLZ(plz);
 		shippingPartySectionSteps.clickShipToStylecoach();
