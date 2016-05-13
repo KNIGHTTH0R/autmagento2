@@ -18,8 +18,6 @@ import com.tests.uss15.us15004.US15004VerifyDashboardAndJbHistoryMemoAppliedOrde
 	
 	US15004OrderZzzProductsForCustomerTest.class,
 	US15004ConfirmCustomerTest.class,
-//	US15004CancelOrderTest.class,
-//	US15004VerifyDashboardAndJbHistoryCancelledOrderTest.class,
 	US15004CheckSubscriberMagentoConfigTest.class,
 //	US15004CheckMailchimpConfigWithZeroRevenuesTest.class,
 	US15004CompleteOrderTest.class,
@@ -27,10 +25,10 @@ import com.tests.uss15.us15004.US15004VerifyDashboardAndJbHistoryMemoAppliedOrde
 //	US15004CheckMailchimpConfigTest.class,
 	US15004ApplyCreditMemoOnOrderTest.class,
 	US15004VerifyDashboardAndJbHistoryMemoAppliedOrderTest.class,
-//	US15004CheckMailchimpConfigWithZeroRevenuesTest.class,
+//	US15004CheckMailchimpAfterCmTest.class,
 	US15004CancelCreditMemoTest.class,
 	US15004VerifyDashboardAndJbHistoryAfterCmOrderTest.class,
-//	US15004CheckMailchimpConfigTest.class,
+//	us15004CheckMailchimpAfterCancelCmTest.class,
 	
 	
 })

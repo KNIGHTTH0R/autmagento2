@@ -21,7 +21,7 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US15.3 Check SC kobo subscription and SFM order details in mailchimp ", type = "Scenarios")
-@Story(Application.Newsletter.US15_3.class)
+@Story(Application.Newsletter.US15_2.class)
 @RunWith(SerenityRunner.class)
 public class US15003ConfirmCustomerTest extends BaseTest {
 
@@ -36,7 +36,7 @@ public class US15003ConfirmCustomerTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		dateModel = new DateModel();
-		stylistEmail = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0).getEmailName();
+		stylistEmail = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0).getEmailName();
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
@@ -45,7 +45,7 @@ public class US15003ConfirmCustomerTest extends BaseTest {
 	public void us15003ConfirmCustomerTest() {
 
 		emailClientSteps.openMailinator();
-		dateModel.setDate(emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT));
+		dateModel.setDate(emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT));
 
 	}
 

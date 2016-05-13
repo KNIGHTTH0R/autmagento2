@@ -19,7 +19,7 @@ import com.tools.env.constants.JenkinsConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp ", type = "Scenarios")
+@WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp", type = "Scenarios")
 @Story(Application.Newsletter.US15_2.class)
 @RunWith(SerenityRunner.class)
 public class US15002ApplyCreditMemoOnOrderTest extends BaseTest {

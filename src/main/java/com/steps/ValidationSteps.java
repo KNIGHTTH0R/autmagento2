@@ -43,7 +43,7 @@ public class ValidationSteps extends AbstractSteps {
 	@StepGroup
 	public void validateStyleCoachLeadData(DBStylistModel initialData, StylistDataModel finalData) {
 		verifyValues("Customer Leads", initialData.getTotalCustomerReceived(), finalData.getCustomerLeads());
-		verifyValues("Style Coach Leads ", initialData.getTotalSCReceived(), finalData.getStyleCoachLeads());
+		verifyValues("Style Coach Leads", initialData.getTotalSCReceived(), finalData.getStyleCoachLeads());
 		verifyValues("Style Coach Leads Week ", initialData.getTotalSCCurrentWeek(), finalData.getStyleCoachLeadsWeek());
 
 	}

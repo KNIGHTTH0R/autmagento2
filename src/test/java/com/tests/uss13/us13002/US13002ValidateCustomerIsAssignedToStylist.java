@@ -64,8 +64,6 @@ public class US13002ValidateCustomerIsAssignedToStylist extends BaseTest {
 			headerSteps.goToProfile();
 			dashboardSteps.validateCustomeStyleCoachName(headerSteps.getBoutiqueName(), dashboardSteps.getStyleCoachFirstNameFromProfile());
 			distStylist = dashboardSteps.validateCustomerIsAssignedToOneOfTheStyleCoachesAndGetConfig(stylistsList, dashboardSteps.getStyleCoachEmailFromProfile());
-			System.out.println("@@@@@@@@@@" + distStylist.getTotalSCReceived());
-			System.out.println("@@@@@@@@@@" + distStylist.getTotalSCCurrentWeek());
 		}
 	}
 

@@ -39,7 +39,7 @@ import com.workflows.mailchimp.MailchimpValidationWorkflows;
 	@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
 @Story(Application.Newsletter.US15_4.class)
 @RunWith(SerenityRunner.class)
-public class US15004CheckMailchimpConfigWithZeroRevenuesTest extends BaseTest {
+public class US15004CheckMailchimpAfterCmTest extends BaseTest {
 
 	@Steps
 	public MailchimpLoginSteps mailchimpLoginSteps;
@@ -95,7 +95,7 @@ public class US15004CheckMailchimpConfigWithZeroRevenuesTest extends BaseTest {
 	}
 
 	@Test
-	public void us15004CheckMailchimpConfigWithZeroRevenuesTest() {
+	public void us15004CheckMailchimpAfterCmTest() {
 
 		mailchimpLoginSteps.loginOnMailchimp(Credentials.MAILCHIMP_USERNAME, Credentials.MAILCHIMP_PASSWORD);
 		mailchimpListsSteps.goToDesiredList(listName);

@@ -11,7 +11,6 @@ import com.tests.uss17.us17001.US17001AddThirdContactToStyleCoachTest;
 import com.tests.uss17.us17001.US17001ChangeFirstCustomersContextTest;
 import com.tests.uss17.us17001.US17001ConfirmCustomerTest;
 import com.tests.uss17.us17001.US17001ConfirmSecondCustomerTest;
-import com.tests.uss17.us17001.US17001MarkStarterKitOrderAsPaidTest;
 import com.tests.uss17.us17001.US17001ReasignContactsTest;
 import com.tests.uss17.us17001.US17001RegularCustomerRegistrationTest;
 import com.tests.uss17.us17001.US17001SecondRegularCustomerRegistrationTest;
@@ -23,8 +22,6 @@ import com.tests.uss17.us17001.US17001VerifyThatOldStylistWasDeactivatedTest;
 
 @SuiteClasses({
 	US17001StyleCoachRegistrationTest.class,
-	US17001MarkStarterKitOrderAsPaidTest.class,
-//	US17001ConfirmStylecoachTest.class,
 	US17001RegularCustomerRegistrationTest.class,
 	US17001SecondRegularCustomerRegistrationTest.class,
 	US17001AddNewContactToStyleCoachTest.class,
