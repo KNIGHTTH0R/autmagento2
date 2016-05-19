@@ -24,10 +24,8 @@ public class ClosedMonthBonusCalculation {
 		BigDecimal totalIpForTob = BigDecimal.ZERO;
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
-		System.out.println("orders list size: " + allOrdersList.size());
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
 		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
-		System.out.println("creditMemo list size: " + creditMemoList.size());
 		
 		BigDecimal ipForOrders = OrdersCalculation.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
 		BigDecimal ipForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
@@ -41,13 +39,8 @@ public class ClosedMonthBonusCalculation {
 		totalIpForTob = totalIpForTob.add(tobIpForOrders);
 		totalIpForTob = totalIpForTob.add(tobIpForCreditMemos);
 
-		System.out.println("TOB jewelry " + determineJewelryBonusAmountForTob(totalIpForTob));
-
 		result.setJewelryBonus(String.valueOf(determineJewelryBonusAmount(totalIp).add(determineJewelryBonusAmountForTob(totalIpForTob))));
 		result.setMarketingMaterialBonus(String.valueOf(determineMarketingMaterialBonusAmount(totalIp)));
-
-		System.out.println(result.getJewelryBonus());
-		System.out.println(result.getMarketingMaterialBonus());
 
 		return result;
 
@@ -59,7 +52,6 @@ public class ClosedMonthBonusCalculation {
 		BigDecimal totalIp = BigDecimal.ZERO;
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
-		System.out.println("orders list size: " + allOrdersList.size());
 	
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
 		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList, stylistId, startDate);
@@ -73,9 +65,6 @@ public class ClosedMonthBonusCalculation {
 
 		result.setIp(String.valueOf(totalIp.intValue()));
 		result.setUnsafeIp(String.valueOf(unsafeIpForOrders.intValue()));
-
-		System.out.println(result.getIp());
-		System.out.println(result.getUnsafeIp());
 
 		return result;
 

@@ -21,7 +21,7 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void performAdminLogin(String userName, String userPass) {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
@@ -30,12 +30,12 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void goToBackend() {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 	}
 
 	@Step
 	public void performLogin(String userName, String userPass) {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_AUT);
+		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_AUT);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
@@ -88,8 +88,8 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void searchForEmail(String emailText) {
-		customerListPage().clickOnResetFilter();
-		waitABit(3000);
+//		customerListPage().clickOnResetFilter();
+//		waitABit(3000);
 		customerListPage().inputEmailFilter(emailText);
 		customerListPage().clickOnSearch();
 

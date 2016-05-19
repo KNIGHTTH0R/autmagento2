@@ -1,7 +1,5 @@
 package com.pages.frontend;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +10,8 @@ import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class StarterSetPage extends AbstractPage {
 
@@ -106,8 +106,9 @@ public class StarterSetPage extends AbstractPage {
 	}
 
 	public void selectStarterKit() {
-		waitABit(TimeConstants.TIME_MEDIUM);
+		waitFor(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input#kit_2941")));
 		elementjQueryClick("input#kit_2941");
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	public StylistRegistrationCartTotalModel grabCartTotal(boolean isVoucherApplied) {

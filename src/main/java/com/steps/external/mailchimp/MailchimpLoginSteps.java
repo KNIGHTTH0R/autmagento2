@@ -13,7 +13,7 @@ public class MailchimpLoginSteps extends AbstractSteps {
 
 	@StepGroup
 	public void loginOnMailchimp(String username, String password) {
-		getDriver().get(UrlConstants.URL_CHIMPMAIL);
+		navigate(UrlConstants.URL_CHIMPMAIL);
 		mailchimpLoginPage().enterUsername(username);
 		mailchimpLoginPage().enterPassword(password);
 		mailchimpLoginPage().submitLogin();

@@ -25,7 +25,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -43,7 +43,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerFormWithoutPlz(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -67,7 +67,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -87,7 +87,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerFormWithNoStylePartyAndStyleCoachChecked(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -106,7 +106,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedNoStylistSelected(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -127,7 +127,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 //
 //		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 //
-//		getDriver().get(MongoReader.getBaseURL());
+//		navigate(MongoReader.getBaseURL());
 //		headerPage().clickAnmeldenButton();
 //		loginPage().clickGoToCustomerRegistration();
 //		inputFirstName(customerData.getFirstName());
@@ -150,7 +150,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		
 		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 		
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -170,7 +170,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerFormAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -190,7 +190,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerFormNoStylistSelected(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -212,7 +212,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -233,7 +233,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerFormNoMemberAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -252,7 +252,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerFormNoMemberFlagAndNoStylistSelected(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -273,7 +273,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -295,7 +295,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerFormNoPartiesAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -314,7 +314,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Title("Fill create customer form under context")
 	public void fillCreateCustomerFormUnderContext(CustomerFormModel customerData, AddressModel addressData, String context) {
 
-		getDriver().get(MongoReader.getBaseURL() + context);
+		navigate(MongoReader.getBaseURL() + context);
 		System.out.println(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
@@ -334,7 +334,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Title("Fill create customer form under context with no member flag checked")
 	public void fillCreateCustomerFormNoMemberUnderContext(CustomerFormModel customerData, AddressModel addressData, String context) {
 
-		getDriver().get(MongoReader.getBaseURL() + context);
+		navigate(MongoReader.getBaseURL() + context);
 		System.out.println(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
@@ -581,7 +581,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	@Title("Fill landing page form")
 	public void fillLandingPageForm(CustomerFormModel dataModel, AddressModel addressModel) {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.LANDING_PAGE);
+		navigate(MongoReader.getBaseURL() + UrlConstants.LANDING_PAGE);
 		contactLandingPage().selectGender(true);
 		contactLandingPage().inputFirstName(dataModel.getFirstName());
 		contactLandingPage().inputLastName(dataModel.getLastName());
@@ -693,7 +693,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	@Title("Fill widget registration form")
 	public void fillWidgetRegistrationForm(String code, CustomerFormModel dataModel) {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.REGISTER_LANDING_PAGE);
+		navigate(MongoReader.getBaseURL() + UrlConstants.REGISTER_LANDING_PAGE);
 		registerLandingPage().memberCodeInput(code);
 		registerLandingPage().firstNameInput(dataModel.getFirstName());
 		registerLandingPage().lastNameInput(dataModel.getLastName());

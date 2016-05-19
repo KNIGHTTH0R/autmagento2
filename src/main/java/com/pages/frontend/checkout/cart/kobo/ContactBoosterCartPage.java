@@ -15,10 +15,12 @@ public class ContactBoosterCartPage extends AbstractPage {
 	public void selectContactBooster100Voucher() {
 		waitABit(TimeConstants.TIME_MEDIUM);
 		elementjQueryClick("input#kit_2493");
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 	public void selectContactBooster200Voucher() {
 		waitABit(TimeConstants.TIME_MEDIUM);
 		elementjQueryClick("input#kit_13270");
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 	
 	public void clickToShipping() {

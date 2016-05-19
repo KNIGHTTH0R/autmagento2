@@ -38,12 +38,11 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 	@Before
 	public void setUp() throws Exception {
 
-		String incrementId = MongoReader.grabIncrementId("US20001GetStylistIncrementIdTest");
+		String incrementId = MongoReader.grabIncrementId("US20001StylistActivationTest");
 		
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(incrementId);
 		dBStylistModel = StylistListMagentoCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);
 		
-		//TODO this is temporarily placed here.it only has to run before calculating the current month bonuses
 		ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
 		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
 	}

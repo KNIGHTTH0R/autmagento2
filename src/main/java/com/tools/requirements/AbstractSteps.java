@@ -120,7 +120,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void performLogin(String userName, String userPass) {
 		// getDriver().manage().window().maximize();
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -140,7 +140,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass, String language,
 			String website) {
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -153,7 +153,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void performLoginOnPreferedWebsite(String userName, String userPass) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -174,8 +174,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void performLoginUnderContext(String userName, String userPass, String context) {
-		getDriver().get(MongoReader.getBaseURL() + context);
-		System.out.println(MongoReader.getBaseURL() + context);
+		navigate(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -184,7 +183,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	public void navigateToLoginPageAndPerformLogin(String userName, String userPass) {
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -238,8 +237,9 @@ public class AbstractSteps extends ScenarioSteps {
 	public void navigate(String URL) {
 		// failsafe in case of redirects to live
 		if (!URL.contains("www.pippajean.com")) {
-			getDriver().manage().timeouts().pageLoadTimeout(3600, TimeUnit.SECONDS);
+//			getDriver().manage().timeouts().pageLoadTimeout(3600, TimeUnit.SECONDS);
 			getDriver().get(URL);
+			getDriver().manage().window().maximize();
 		}
 
 	}

@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,7 @@ import com.tools.CustomVerification;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
@@ -63,9 +65,16 @@ public class US20001StylistActivationTest extends BaseTest {
 		backEndSteps.openOrderDetails(stylistRegistrationData.getFirstName());
 		ordersSteps.markOrderAsPaid();
 
-//		emailClientSteps.openMailinator();
-//		emailClientSteps.grabEmail(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+		backEndSteps.clickOnCustomers();
+		backEndSteps.searchForEmail(stylistRegistrationData.getEmailName());
+		backEndSteps.openCustomerDetails(stylistRegistrationData.getEmailName());
+		incrementId = backEndSteps.extractCustomerIncrementId();
 
+	}
+
+	@After
+	public void tearDown() {
+		MongoWriter.saveIncrementId(incrementId, getClass().getSimpleName());
 	}
 
 }

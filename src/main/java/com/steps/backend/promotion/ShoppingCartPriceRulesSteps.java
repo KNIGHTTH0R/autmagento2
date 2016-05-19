@@ -15,7 +15,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 
 	@Step
 	public void activateRule(String ruleName) {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -29,7 +29,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 	}
 	@Step
 	public void deactivateRule(String ruleName) {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -44,7 +44,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 
 	@Step
 	public void verifyThatNoOfUsesPerCouponIsCorrect(String couponCode, String usesPerCoupon) {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
@@ -61,7 +61,7 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 
 	@Step
 	public void verifyStatusAndUsesPerCoupon(String couponCode, String usesPerCoupon, String status) {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();

@@ -39,7 +39,7 @@ public class FooterSteps extends AbstractSteps {
 	@StepGroup
 	public void subscribeToNewsletter(CustomerFormModel model) {
 
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		footerPage().inputNewsletterEmail(model.getEmailName());
 		footerPage().submitNesletter();
 	}
@@ -53,7 +53,7 @@ public class FooterSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormFromStarterSetLink() {
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		footerPage().clickStarterSetLink();
 		stylistCampaignPage().clickStartersetOrderButton();
 	}

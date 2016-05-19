@@ -59,7 +59,7 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "zip")
 	private WebElement postCodeInput;
 
-	@FindBy(id = "distribution_zip")
+	@FindBy(id = "distribution_postcode")
 	private WebElement distributionZip;
 
 	@FindBy(id = "city")

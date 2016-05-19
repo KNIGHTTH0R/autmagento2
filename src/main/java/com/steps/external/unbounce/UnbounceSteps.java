@@ -16,7 +16,7 @@ public class UnbounceSteps extends AbstractSteps {
 
 	@Step
 	public void navigateToUnbouncePage() {
-		getDriver().get(UrlConstants.URL_UNBOUNCE);
+		navigate(UrlConstants.URL_UNBOUNCE);
 	}
 
 	@Title("Fill in unbounce details")

@@ -36,7 +36,7 @@ public class US20001VerifyUpdatedStylistDetailsInCommissionTest extends BaseTest
 	@Before
 	public void setUp() throws Exception {
 
-		String incrementId = MongoReader.grabIncrementId("US20001GetStylistIncrementIdTest");
+		String incrementId = MongoReader.grabIncrementId("US20001StylistActivationTest");
 
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(incrementId);
 		dBStylistModel = StylistListMagentoCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);

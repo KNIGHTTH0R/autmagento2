@@ -8,6 +8,7 @@ import com.tests.uss24.US24001AddNewContactPlzValidationTest;
 import com.tests.uss24.US24001BorrowCartPlzValidationTest;
 import com.tests.uss24.US24001ClosePartyTest;
 import com.tests.uss24.US24001HostOrderPlzValidationTest;
+import com.tests.uss24.US24001KoboCampaignRegistrationPlzValidationTest;
 import com.tests.uss24.US24001OrderForCustomerPlzValidationTest;
 import com.tests.uss24.US24001PlaceCustomerOrderPlzValidationTest;
 import com.tests.uss24.US24001RegularCartPlzValidationTest;
@@ -20,7 +21,7 @@ import com.tests.uss24.US24001StylistRegistrationPlzValidationTest;
 	US24001StylistRegistrationPlzValidationTest.class,
 	US24001RegularCustRegPlzRegistrationTest.class,
 	US24001AddNewContactPlzValidationTest.class,
-//	US24001KoboCampaignRegistrationPlzValidationTest.class,
+	US24001KoboCampaignRegistrationPlzValidationTest.class,
 	US24001ShopForMyselfPlzValidationTest.class,
 	US24001OrderForCustomerPlzValidationTest.class,
 	US24001BorrowCartPlzValidationTest.class,

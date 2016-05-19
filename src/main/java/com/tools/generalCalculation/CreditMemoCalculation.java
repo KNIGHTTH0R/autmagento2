@@ -25,7 +25,6 @@ public class CreditMemoCalculation {
 				totalMonthRefundedIp = totalMonthRefundedIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
 			}
 		}
-		System.out.println("total IpsForCreditMemos: " + String.valueOf(totalMonthRefundedIp));
 		return totalMonthRefundedIp;
 	}
 
@@ -43,7 +42,6 @@ public class CreditMemoCalculation {
 				totalMonthRefundedIp = totalMonthRefundedIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
 			}
 		}
-		System.out.println("total ip credit memo take of period: " + String.valueOf(totalMonthRefundedIp));
 		return totalMonthRefundedIp;
 	}
 

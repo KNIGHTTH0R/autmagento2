@@ -7,6 +7,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class NavigationPage extends AbstractPage {
@@ -34,6 +35,7 @@ public class NavigationPage extends AbstractPage {
 
 			if (menuNow.findElement(By.cssSelector("a")).getText().contentEquals(menu)) {
 				menuNow.click();
+				waitABit(TimeConstants.WAIT_TIME_SMALL);
 
 				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li > a"));
 
@@ -41,6 +43,7 @@ public class NavigationPage extends AbstractPage {
 
 					if (submenuNow.getText().contentEquals(submenu)) {
 						submenuNow.click();
+						waitABit(TimeConstants.WAIT_TIME_SMALL);
 						break;
 					}
 				}

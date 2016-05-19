@@ -142,10 +142,6 @@ public class HeaderPage extends AbstractPage {
 		return brandContainer.getText().split("'")[0].toLowerCase();
 	}
 
-	public void navigateToPartyPage(String url) {
-		getDriver().get(url);
-	}
-
 	public boolean succesfullLogin() {
 		return succesLoginContainer.getText().contains("¡BIENVENIDO,") || succesLoginContainer.getText().contains("HI,");
 	}

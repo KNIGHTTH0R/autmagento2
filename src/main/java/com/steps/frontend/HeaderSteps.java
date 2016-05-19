@@ -88,13 +88,13 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	public void redirectToProfileHistory() {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
+		navigate(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
 
 	}
 
 	@Step
 	public void redirectToWishlist() {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.WISHLIST_URL);
+		navigate(MongoReader.getBaseURL() + UrlConstants.WISHLIST_URL);
 
 	}
 
@@ -107,21 +107,21 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	public void redirectToStylistsCustomerOrderReport() {
 		waitABit(TimeConstants.TIME_CONSTANT);
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
+		navigate(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 	@Step
 	public void redirectToStylistReports() {
 		waitABit(TimeConstants.TIME_CONSTANT);
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
+		navigate(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
 	}
 	@Step
 	public void redirectToCartPage() {
-		getDriver().get(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);
+		navigate(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);
 	}
 
 	@StepGroup
 	public void navigateToRegisterForm() {
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		footerPage().clickRegistrierungLink();
 
@@ -129,16 +129,15 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToStylecoachRegisterFormUnderContext(String context) {
-		getDriver().get(MongoReader.getBaseURL() + Separators.SLASH + context.toLowerCase());
+		navigate(MongoReader.getBaseURL() + Separators.SLASH + context.toLowerCase());
 		waitABit(2000);
-		System.out.println(MongoReader.getBaseURL() + Separators.SLASH + context.toLowerCase());
 		footerPage().clickRegistrierungLink();
 
 	}
 
 	@StepGroup
 	public void navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton() {
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();
 		stylistCampaignPage().clickStarteJetztButton();
@@ -148,7 +147,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormAndLogout() {
-		getDriver().get(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
 		footerPage().clickRegistrierungLink();
@@ -177,7 +176,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@Step
 	public void navigateToPartyPageAndStartOrder(String url) {
-		headerPage().navigateToPartyPage(url);
+		navigate(url);
 		partyCreationPage().clickOrderForHostess();
 	}
 
