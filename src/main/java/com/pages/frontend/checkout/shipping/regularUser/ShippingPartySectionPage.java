@@ -2,8 +2,11 @@ package com.pages.frontend.checkout.shipping.regularUser;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class ShippingPartySectionPage extends AbstractPage {
@@ -38,26 +41,31 @@ public class ShippingPartySectionPage extends AbstractPage {
 	public void checkItemNotReceivedYet() {
 		element(itemNotReceived).waitUntilVisible();
 		itemNotReceived.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickPartyYesOption() {
 		element(yesPartyOption).waitUntilVisible();
 		yesPartyOption.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickPartyNoOption() {
 		element(noPartyOption).waitUntilVisible();
 		noPartyOption.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickShipToHostessButton() {
 		element(shipToHostessButton).waitUntilVisible();
 		shipToHostessButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickShipToStylecoach() {
 		element(shipToStylecoachButton).waitUntilVisible();
 		shipToStylecoachButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void selectCountry(String country) {
