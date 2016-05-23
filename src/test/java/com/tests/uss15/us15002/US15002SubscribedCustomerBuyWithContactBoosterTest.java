@@ -114,9 +114,12 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15002.properties");
 			prop.load(input);
 
-			koboCode = prop.getProperty("koboCode");
 			discountClass = prop.getProperty("discountClass");
 			shippingValue = prop.getProperty("shippingValue");
+			
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH_COMMON + "koboVouchers.properties");
+			prop.load(input);
+			koboCode = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

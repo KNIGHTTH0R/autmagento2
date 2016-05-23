@@ -101,9 +101,11 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7008.properties");
 			prop.load(input);
-
 			context = prop.getProperty("context");
-			koboCode = prop.getProperty("koboCode");
+			
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH_COMMON + "koboVouchers.properties");
+			prop.load(input);
+			koboCode = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

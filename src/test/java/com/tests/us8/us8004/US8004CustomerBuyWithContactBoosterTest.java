@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +40,11 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US8.4 Customer Buy With Kobo", type = "Scenarios")
 @Story(Application.RegularCart.US8_4.class)
@@ -87,8 +87,8 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	private String initialStylistName;
 	private String voucherCode;
 	private String voucherValue;
-	private String firstVoucherCode;
-	private String secondVoucherCode;
+	private String koboCode1;
+	private String koboCode2;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -98,6 +98,41 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
+
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8004.properties");
+			prop.load(input);
+			username = prop.getProperty("username");
+			password = prop.getProperty("password");
+			discountClass = prop.getProperty("discountClass");
+			billingAddress = prop.getProperty("billingAddress");
+			shippingAddress = prop.getProperty("shippingAddress");
+			shippingValue = prop.getProperty("shippingValue");
+			initialStylistName = prop.getProperty("initialStylistName");
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH_COMMON + "koboVouchers.properties");
+			prop.load(input);
+
+			koboCode1 = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");
+			koboCode2 = prop.getProperty("koboCodesimona.popa@evozon.com");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		System.out.println(username);
+		System.out.println(koboCode2);
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
@@ -112,38 +147,6 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		genProduct3.setPrice("10.00");
 		MagentoProductCalls.createApiProduct(genProduct3);
 
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8004.properties");
-			prop.load(input);
-			username = prop.getProperty("username");
-			password = prop.getProperty("password");
-
-			discountClass = prop.getProperty("discountClass");
-			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
-			shippingValue = prop.getProperty("shippingValue");
-
-			firstVoucherCode = prop.getProperty("firstVoucherCode");
-			secondVoucherCode = prop.getProperty("secondVoucherCode");
-
-			initialStylistName = prop.getProperty("initialStylistName");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
@@ -157,7 +160,8 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
 		System.out.println(dashboardSteps.getStyleCoachFullNameFromProfile());
-		voucherCode = dashboardSteps.getStyleCoachFullNameFromProfile().contentEquals(initialStylistName) ? secondVoucherCode : firstVoucherCode;
+		voucherCode = dashboardSteps.getStyleCoachFullNameFromProfile().contentEquals(initialStylistName) ? koboCode2
+				: koboCode1;
 		homeSteps.goToNewItems();
 		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
@@ -183,7 +187,8 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
 
-		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
+		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList,
+				discountClass, shippingValue, voucherValue);
 
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
@@ -223,9 +228,11 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);

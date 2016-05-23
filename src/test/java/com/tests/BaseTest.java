@@ -6,10 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.ManagedPages;
-import net.thucydides.core.pages.Pages;
-
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 
@@ -21,6 +17,10 @@ import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
+
+import net.thucydides.core.annotations.Managed;
+import net.thucydides.core.annotations.ManagedPages;
+import net.thucydides.core.pages.Pages;
 
 public class BaseTest {
 	

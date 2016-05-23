@@ -15,6 +15,7 @@ public class UrlConstants {
 	
 //	public static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "staging-aut" + File.separator;
 	public static String RESOURCES_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + MongoReader.getEnvironment() + File.separator + MongoReader.getContext() + File.separator;
+	public static String RESOURCES_PATH_COMMON = "src" + File.separator + "main" + File.separator + "resources" + File.separator + MongoReader.getEnvironment() + File.separator;
 	public static String CONTEXT_PATH = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "context" + File.separator;
 	public static String RESOURCES = "resources" + File.separator;
 

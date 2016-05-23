@@ -1,16 +1,10 @@
 package com.tests.uss15.us15002;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
@@ -46,6 +40,11 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US15.2 Check registered user with kobo all states in mailchimp ", type = "Scenarios")
 @Story(Application.Newsletter.US15_2.class)
@@ -98,10 +97,9 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15002.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH_COMMON + "koboVouchers.properties");
 			prop.load(input);
-
-			koboCode = prop.getProperty("koboCode");
+			koboCode = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
