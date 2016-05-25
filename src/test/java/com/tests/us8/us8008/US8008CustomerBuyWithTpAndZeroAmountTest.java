@@ -1,4 +1,4 @@
-package com.tests.us8.us8007;
+package com.tests.us8.us8008;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,6 +38,7 @@ import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
@@ -50,7 +51,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US8.7 Customer Buy With Term Purchase Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_7.class)
 @RunWith(SerenityRunner.class)
-public class US8007CustomerBuyWithTpTest extends BaseTest {
+public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -83,7 +84,6 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 	private String discountClass;
 	private String billingAddress, shippingAddress;
 	private String shippingValue;
-	private String voucherCode;
 	private String voucherValue;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1;
@@ -95,17 +95,18 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 		DataGrabber.wipe();
-		
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("49.90");
+		genProduct1 = MagentoProductCalls.createProductModel();
+		MagentoProductCalls.createApiProduct(genProduct1);
+		
+		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.setStockData(
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("dd.MM.YYYY")));
 		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct3.setPrice("5.00");
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setStockData(MagentoProductCalls
+				.createNotAvailableYetStockData(DateUtils.getLastDayOfTheCurrentMonth("dd.MM.YYYY")));
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
@@ -123,7 +124,6 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 			shippingAddress = prop.getProperty("shippingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 
-			voucherCode = prop.getProperty("voucherCode");
 			voucherValue = prop.getProperty("voucherValue");
 
 		} catch (IOException ex) {
@@ -144,7 +144,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 	}
 
 	@Test
-	public void us8007CustomerBuyWithTpTest() throws ParseException {
+	public void us8008CustomerBuyWithTpAndZeroAmountTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -180,68 +180,52 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
-		regularUserCartSteps.verifyMultipleDeliveryOption();
-
-		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
-		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
-
 		RegularUserCartCalculator.calculateCartTotals(RegularUserCartCalculator.allProductsList, discountClass,
 				shippingValue, voucherValue);
 		RegularUserCartCalculator.calculateShippingTotals(shippingValue, voucherValue, discountClass);
-
-		regularUserCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.clickPartyNoOption();
-		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.selectShippingAddress(shippingAddress);
-
-		shippingSteps.grabRegularProductsListTp0();
-		shippingSteps.grabRegularProductsListTp1();
-		shippingSteps.grabRegularProductsListTp2();
-
-		RegularUserDataGrabber.regularUserShippingTotalsTp0 = shippingSteps.grabSurveyDataTp0();
-		RegularUserDataGrabber.regularUserShippingTotalsTp1 = shippingSteps.grabSurveyDataTp1();
-		RegularUserDataGrabber.regularUserShippingTotalsTp2 = shippingSteps.grabSurveyDataTp2();
-
-		shippingSteps.goToPaymentMethod();
-
-		String url = shippingSteps.grabUrl();
-		System.out.println(url);
-		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
-		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
-		RegularUserDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
-		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
-		RegularUserDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
-
-		if (!paymentSteps.isCreditCardFormExpended())
-			paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
-		confirmationSteps.grabRegularProductsListTp0();
-		confirmationSteps.grabRegularProductsListTp1();
-		confirmationSteps.grabRegularProductsListTp2();
-
-		RegularUserDataGrabber.regularUserConfirmationTotalsTp0 = confirmationSteps.grabConfirmationTotalsTp0();
-		RegularUserDataGrabber.regularUserConfirmationTotalsTp1 = confirmationSteps.grabConfirmationTotalsTp1();
-		RegularUserDataGrabber.regularUserConfirmationTotalsTp2 = confirmationSteps.grabConfirmationTotalsTp2();
-
-		confirmationSteps.grabBillingData();
-		confirmationSteps.grabSippingData();
-
-		confirmationSteps.agreeAndCheckout();
-
-		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		regularCartValidationWorkflows.performCartValidationsSplittedQuote();
-
-		customVerifications.printErrors();
+		//
+		// regularUserCartSteps.clickGoToShipping();
+		// shippingPartySectionSteps.clickPartyNoOption();
+		// shippingSteps.selectAddress(billingAddress);
+		// shippingSteps.setSameAsBilling(false);
+		// shippingSteps.selectShippingAddress(shippingAddress);
+		//
+		// shippingSteps.goToPaymentMethod();
+		//
+		// String url = shippingSteps.grabUrl();
+		// System.out.println(url);
+		// RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url,
+		// 1));
+		// RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		// RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url,
+		// 2));
+		//// RegularUserDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
+		//// RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url,
+		// 3));
+		//// RegularUserDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
+		//
+		// if (!paymentSteps.isCreditCardFormExpended())
+		// paymentSteps.expandCreditCardForm();
+		// paymentSteps.fillCreditCardForm(creditCardData);
+		//
+		// confirmationSteps.agreeAndCheckout();
+		//
+		// regularCartValidationWorkflows.setBillingShippingAddress(billingAddress,
+		// shippingAddress);
+		// regularCartValidationWorkflows.performCartValidationsSplittedQuote();
+		//
+		// customVerifications.printErrors();
 	}
 
+	//
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + "TP0");
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
+		// MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel,
+		// getClass().getSimpleName() + "TP0");
+		// MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp1,
+		// getClass().getSimpleName() + "TP1");
+		// MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp2,
+		// getClass().getSimpleName() + "TP2");
 		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel,
 				getClass().getSimpleName() + "TP0");
 		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModelTp1,

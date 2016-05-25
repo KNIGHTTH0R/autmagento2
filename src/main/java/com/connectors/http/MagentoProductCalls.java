@@ -343,6 +343,33 @@ public class MagentoProductCalls {
 		return stockModel;
 	}
 
+	public static StockDataModel createNotAvailableYetStockData(String earliestAvailability) {
+
+		StockDataModel stockModel = new StockDataModel();
+
+		stockModel.setQty("0");
+		stockModel.setIsInStock("1");
+		stockModel.setManageStock("1");
+		stockModel.setUseConfigManageStock("1");
+		stockModel.setMinQty("-10");
+		stockModel.setUseConfigMinQty("0");
+		stockModel.setMinSaleQty("");
+		stockModel.setUseConfigMinSaleQty("1");
+		stockModel.setMaxSaleQty("");
+		stockModel.setUseConfigMaxSaleQty("");
+		stockModel.setIsQtyDecimal("0");
+		stockModel.setBackorders("1");
+		stockModel.setUseConfigBackorders("0");
+		stockModel.setNotifyStockQty("");
+		stockModel.setUseConfigNotifyStockQty("1");
+		stockModel.setIsDiscontinued("1");
+		stockModel.setEarliestAvailability(earliestAvailability);
+		stockModel.setMaximumPercentageToBorrow("");
+		stockModel.setUseConfigMaximumPercentageToBorrow("80");
+
+		return stockModel;
+	}
+
 	public static String createApiProduct(ProductDetailedModel product) {
 
 		String resultID = null;

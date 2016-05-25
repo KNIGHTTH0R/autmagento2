@@ -204,6 +204,16 @@ public class DateUtils {
 		cal.set(year, month, day, 00, 00, 00);
 		return new SimpleDateFormat(format).format(cal.getTime());
 	}
+	public static String getNextMonthMiddle(String format) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, 1);
+		cal.set(Calendar.DAY_OF_MONTH, 15);
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DATE);
+		cal.set(year, month, day, 00, 00, 00);
+		return new SimpleDateFormat(format).format(cal.getTime());
+	}
 
 	public static String getThreeMonthsBackMiddle(String format) {
 		Calendar cal = Calendar.getInstance();
@@ -263,7 +273,7 @@ public class DateUtils {
 	}
 
 	public static void main(String args[]) throws ParseException {
-		System.out.println(DateUtils.parseDate("15. May. 16", "dd. MMM. yy",new Locale.Builder().setLanguage("es").build(), "dd.MM.YYYY"));
+		System.out.println(DateUtils.getNextMonthMiddle("dd.MM.YYYY"));
 	}
 
 }
