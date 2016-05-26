@@ -177,10 +177,15 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		HostBasicProductModel productData;
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		productData.setIsTP(genProduct1.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
 		HostCartCalculator.allProductsListTp0.add(productData);
+
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "2", "0");
+		productData.setIsTP(genProduct1.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
 		HostCartCalculator.allProductsListTp1.add(productData);
+
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "4", "0");
+		productData.setIsTP(genProduct1.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
 		HostCartCalculator.allProductsListTp2.add(productData);
 
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp0);

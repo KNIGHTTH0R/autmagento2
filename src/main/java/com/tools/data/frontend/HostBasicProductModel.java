@@ -10,6 +10,29 @@ public class HostBasicProductModel {
 	private String bonusType;
 	private String bunosValue;
 	private String ipPoints;
+	private String deliveryDate;
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	private boolean isTP;
+
+	public void setTP(boolean isTP) {
+		this.isTP = isTP;
+	}
+
+	public boolean getIsTP() {
+		return isTP;
+	}
+
+	public void setIsTP(boolean isTP) {
+		this.isTP = isTP;
+	}
 
 	public String getName() {
 		return name;

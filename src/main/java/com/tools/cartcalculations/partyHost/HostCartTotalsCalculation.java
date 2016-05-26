@@ -2,14 +2,17 @@ package com.tools.cartcalculations.partyHost;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.ParseException;
 import java.util.List;
 
 import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.ContextConstants;
+import com.tools.utils.DateUtils;
 import com.tools.utils.PrintUtils;
 
 public class HostCartTotalsCalculation {
@@ -106,6 +109,25 @@ public class HostCartTotalsCalculation {
 		}
 
 		return result;
+	}
+
+	public static void calculateTermPurchaseIpPoints(List<HostBasicProductModel> productsList)
+			throws NumberFormatException, ParseException {
+
+		TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
+		BigDecimal currentMonthIp = BigDecimal.ZERO;
+		BigDecimal nextMonthIp = BigDecimal.ZERO;
+
+		for (HostBasicProductModel product : productsList) {
+			if (DateUtils.isDateInCurrentMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
+				currentMonthIp = currentMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
+			} else if (DateUtils.isDateInNextMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
+				nextMonthIp = nextMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
+			}
+		}
+		ipModel.setCurrentMonthIp(String.valueOf(currentMonthIp));
+		ipModel.setNextMonthIp(String.valueOf(nextMonthIp));
+
 	}
 
 	public static HostCartCalcDetailsModel calculateTotalsWithBuy3Get1Active(List<HostBasicProductModel> productsList,

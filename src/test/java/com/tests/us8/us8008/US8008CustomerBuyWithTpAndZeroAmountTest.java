@@ -76,8 +76,6 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 	@Steps
 	public RegularCartValidationWorkflows regularCartValidationWorkflows;
 	@Steps
-	public CustomVerification customVerifications;
-	@Steps
 	public FooterSteps footerSteps;
 
 	private String username, password;
@@ -97,16 +95,19 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		DataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("50.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		
+
 		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.setPrice("89.00");
 		genProduct2.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("dd.MM.YYYY")));
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("dd.MM.yyyy")));
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct2.setPrice("49.90");
 		genProduct3.setStockData(MagentoProductCalls
-				.createNotAvailableYetStockData(DateUtils.getLastDayOfTheCurrentMonth("dd.MM.YYYY")));
+				.createNotAvailableYetStockData(DateUtils.getLastDayOfTheCurrentMonth("dd.MM.yyyy")));
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
@@ -180,52 +181,47 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
+		regularUserCartSteps.typeCouponCode("");
+		regularUserCartSteps.submitVoucherCode();
+
 		RegularUserCartCalculator.calculateCartTotals(RegularUserCartCalculator.allProductsList, discountClass,
 				shippingValue, voucherValue);
 		RegularUserCartCalculator.calculateShippingTotals(shippingValue, voucherValue, discountClass);
-		//
-		// regularUserCartSteps.clickGoToShipping();
-		// shippingPartySectionSteps.clickPartyNoOption();
-		// shippingSteps.selectAddress(billingAddress);
-		// shippingSteps.setSameAsBilling(false);
-		// shippingSteps.selectShippingAddress(shippingAddress);
-		//
-		// shippingSteps.goToPaymentMethod();
-		//
-		// String url = shippingSteps.grabUrl();
-		// System.out.println(url);
-		// RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url,
-		// 1));
-		// RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		// RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url,
-		// 2));
-		//// RegularUserDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
-		//// RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url,
-		// 3));
-		//// RegularUserDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
-		//
-		// if (!paymentSteps.isCreditCardFormExpended())
-		// paymentSteps.expandCreditCardForm();
-		// paymentSteps.fillCreditCardForm(creditCardData);
-		//
-		// confirmationSteps.agreeAndCheckout();
-		//
-		// regularCartValidationWorkflows.setBillingShippingAddress(billingAddress,
-		// shippingAddress);
-		// regularCartValidationWorkflows.performCartValidationsSplittedQuote();
-		//
-		// customVerifications.printErrors();
+
+		regularUserCartSteps.clickGoToShipping();
+		shippingPartySectionSteps.clickPartyNoOption();
+		shippingSteps.selectAddress(billingAddress);
+		shippingSteps.setSameAsBilling(false);
+		shippingSteps.selectShippingAddress(shippingAddress);
+
+		shippingSteps.goToPaymentMethod();
+
+		String url = shippingSteps.grabUrl();
+		System.out.println(url);
+		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
+		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
+		RegularUserDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
+		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
+		RegularUserDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
+
+		if (!paymentSteps.isCreditCardFormExpended())
+			paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+
+		confirmationSteps.agreeAndCheckout();
+		checkoutValidationSteps.verifySuccessMessage();
 	}
 
 	//
 	@After
 	public void saveData() {
-		// MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel,
-		// getClass().getSimpleName() + "TP0");
-		// MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp1,
-		// getClass().getSimpleName() + "TP1");
-		// MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp2,
-		// getClass().getSimpleName() + "TP2");
+		 MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel,
+		 getClass().getSimpleName() + "TP0");
+		 MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp1,
+		 getClass().getSimpleName() + "TP1");
+		 MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp2,
+		 getClass().getSimpleName() + "TP2");
 		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel,
 				getClass().getSimpleName() + "TP0");
 		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModelTp1,

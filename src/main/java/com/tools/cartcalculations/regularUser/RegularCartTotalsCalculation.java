@@ -248,6 +248,7 @@ public class RegularCartTotalsCalculation {
 
 		return result;
 	}
+	
 
 
 }

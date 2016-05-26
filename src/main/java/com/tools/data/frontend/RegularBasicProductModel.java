@@ -9,6 +9,15 @@ public class RegularBasicProductModel {
 	private String finalPrice;
 	private String bonusType;
 	private String bunosValue;
+	private String ipPoints;
+
+	public String getIpPoints() {
+		return ipPoints;
+	}
+
+	public void setIpPoints(String ipPoints) {
+		this.ipPoints = ipPoints;
+	}
 
 	public String getName() {
 		return name;

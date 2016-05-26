@@ -101,12 +101,76 @@ public class DateUtils {
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
 
-	public static String addDaysToAAGivenDate(String dateString, String formatString, int days) throws ParseException {
+	// public static String getLastDayOfCurrentMonth(String formatString) throws
+	// ParseException {
+	//
+	// Calendar calendar = Calendar.getInstance();
+	// calendar.add(Calendar.MONTH, 1);
+	// calendar.set(Calendar.DAY_OF_MONTH, 1);
+	// calendar.add(Calendar.DATE, -1);
+	// int year = calendar.get(Calendar.YEAR);
+	// int month = calendar.get(Calendar.MONTH);
+	// int day = calendar.get(Calendar.DATE);
+	// calendar.set(year, month, day, 23, 59, 59);
+	// Date lastDayOfMonth = calendar.getTime();
+	// DateFormat sdf = new SimpleDateFormat(formatString);
+	//
+	// return String.valueOf(sdf.format(lastDayOfMonth));
+	// }
+
+	public static String getFirstDayOfCurrentMonth(String formatString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
-		Date date = format.parse(dateString);
 
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 00, 00, 00);
+		Date lastDayOfMonth = calendar.getTime();
+		DateFormat sdf = new SimpleDateFormat(formatString);
+
+		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+
+	public static String getLastDayOfNextMonth(String formatString) throws ParseException {
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MONTH, 1);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		calendar.add(Calendar.DATE, -1);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 23, 59, 59);
+		Date lastDayOfMonth = calendar.getTime();
+		DateFormat sdf = new SimpleDateFormat(formatString);
+
+		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+
+	public static String getFirstDayOfNextMonth(String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.MONTH, 1);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 00, 00, 00);
+		Date lastDayOfMonth = calendar.getTime();
+		DateFormat sdf = new SimpleDateFormat(formatString);
+
+		return String.valueOf(sdf.format(lastDayOfMonth));
+	}
+
+	public static String addDaysToAAGivenDate(String dateString, String formatString, int days) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(format.parse(dateString));
 		calendar.add(Calendar.DATE, days);
 
 		return String.valueOf(format.format(calendar.getTime()));
@@ -120,6 +184,20 @@ public class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.add(Calendar.DATE, days);
+
+		return String.valueOf(format.format(calendar.getTime()));
+	}
+
+	public static String getFirstFridayAfterDate(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
 
 		return String.valueOf(format.format(calendar.getTime()));
 	}
@@ -204,6 +282,7 @@ public class DateUtils {
 		cal.set(year, month, day, 00, 00, 00);
 		return new SimpleDateFormat(format).format(cal.getTime());
 	}
+
 	public static String getNextMonthMiddle(String format) {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, 1);
@@ -248,6 +327,18 @@ public class DateUtils {
 		return !(df.parse(createdAt).before(df.parse(startDate)) || df.parse(createdAt).after(df.parse(endDate)));
 	}
 
+	public static boolean isDateInCurrentMonth(String date, String format) throws ParseException {
+
+		return DateUtils.isDateBeetween(date, DateUtils.getFirstDayOfCurrentMonth(format),
+				DateUtils.getLastDayOfTheCurrentMonth(format), format);
+	}
+
+	public static boolean isDateInNextMonth(String date, String format) throws ParseException {
+
+		return DateUtils.isDateBeetween(date, DateUtils.getFirstDayOfNextMonth(format),
+				DateUtils.getLastDayOfNextMonth(format), format);
+	}
+
 	public static boolean isDateAfter(String currentDate, String startingDate, String format) throws ParseException {
 		DateFormat df = new SimpleDateFormat(format);
 
@@ -273,7 +364,6 @@ public class DateUtils {
 	}
 
 	public static void main(String args[]) throws ParseException {
-		System.out.println(DateUtils.getNextMonthMiddle("dd.MM.YYYY"));
 	}
 
 }

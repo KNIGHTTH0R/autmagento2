@@ -38,7 +38,7 @@ public class OrderForCustomerDiscountsCalculation {
 		return cartProducts;
 
 	}
-
+	
 	public static BigDecimal calculateUsedJewelryBonus(List<BasicProductModel> productsList, String jewelryDiscount) {
 
 		BigDecimal jBRegularItems = BigDecimal.ZERO;
