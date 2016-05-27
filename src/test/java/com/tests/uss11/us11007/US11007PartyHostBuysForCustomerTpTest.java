@@ -164,6 +164,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP0");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 

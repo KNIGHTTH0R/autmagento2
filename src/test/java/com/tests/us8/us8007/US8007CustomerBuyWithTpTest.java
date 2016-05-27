@@ -145,6 +145,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP0");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -159,16 +160,19 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
+		productData.setIsTP(genProduct1.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
 		if (productData.getIsTP())
 			productData.setDeliveryDate(DateUtils
 					.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		RegularUserCartCalculator.allProductsListTp0.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
+		productData.setIsTP(genProduct2.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
 		if (productData.getIsTP())
 			productData.setDeliveryDate(DateUtils
 					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		RegularUserCartCalculator.allProductsListTp1.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0");
+		productData.setIsTP(genProduct3.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
 		if (productData.getIsTP())
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
 					genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
