@@ -119,7 +119,6 @@ public class DateUtils {
 	// }
 
 	public static String getFirstDayOfCurrentMonth(String formatString) throws ParseException {
-		DateFormat format = new SimpleDateFormat(formatString);
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
@@ -151,7 +150,6 @@ public class DateUtils {
 	}
 
 	public static String getFirstDayOfNextMonth(String formatString) throws ParseException {
-		DateFormat format = new SimpleDateFormat(formatString);
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.DAY_OF_MONTH, 1);

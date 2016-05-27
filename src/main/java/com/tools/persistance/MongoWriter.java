@@ -31,6 +31,7 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.newsletter.SubscriberModel;
@@ -349,6 +350,16 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
 		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getIpPoints());
 
+		table.insert(document);
+	}
+	public static void saveIpModel(TermPurchaseIpModel model, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.TERM_PURCHASE_IP_MODEL);
+		
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.CURRENT_MONTH_IP, model.getCurrentMonthIp());
+		document.put(MongoTableKeys.NEXT_MONTH_IP, model.getNextMonthIp());
+		
 		table.insert(document);
 	}
 

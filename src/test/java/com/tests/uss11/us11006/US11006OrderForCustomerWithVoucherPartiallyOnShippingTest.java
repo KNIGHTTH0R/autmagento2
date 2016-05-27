@@ -185,8 +185,8 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
-		shippingPartySectionSteps.selectCountry(country);
 		shippingPartySectionSteps.enterPLZ(plz);
+		shippingPartySectionSteps.selectCountry(country);
 		shippingPartySectionSteps.clickShipToHostessButton();
 		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 

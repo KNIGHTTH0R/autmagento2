@@ -31,10 +31,12 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.cartcalculations.partyHost.HostCartTotalsCalculation;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
+import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
 import com.tools.env.constants.SoapKeys;
@@ -42,6 +44,7 @@ import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
@@ -98,6 +101,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
+	private TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
 
 	private List<PartyBonusCalculationModel> partyBonusCalculationModeList = new ArrayList<PartyBonusCalculationModel>();
 	private PartyBonusCalculationModel partyBonusCalculationModelTp0 = new PartyBonusCalculationModel();
@@ -175,17 +179,26 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;
-
+		//TODO hide this somehow
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 		productData.setIsTP(genProduct1.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
+		if (productData.getIsTP())
+			productData.setDeliveryDate(DateUtils
+					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp0.add(productData);
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "2", "0");
-		productData.setIsTP(genProduct1.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
+		productData.setIsTP(genProduct2.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
+		if (productData.getIsTP())
+			productData.setDeliveryDate(DateUtils
+					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp1.add(productData);
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "4", "0");
-		productData.setIsTP(genProduct1.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
+		productData.setIsTP(genProduct3.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
+		if (productData.getIsTP())
+			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
+					genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp2.add(productData);
 
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp0);
@@ -209,13 +222,15 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		orderForCustomerCartSteps.grabTotals(voucherCode);
 		HostCartCalculator.calculateOrderForCustomerTotals(discountClass, shippingValue, voucherValue);
 		HostCartCalculator.calculateShippingTotals(shippingValue, voucherValue, discountClass);
+		ipModel = HostCartTotalsCalculation
+				.calculateTermPurchaseIpPoints(HostCartCalculator.allProductsListwithVoucher);
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
-
-		shippingPartySectionSteps.selectCountry(country);
+		
 		shippingPartySectionSteps.enterPLZ(plz);
-
+		shippingPartySectionSteps.selectCountry(country);
+		
 		shippingSteps.grabHostProductsListTp0();
 		shippingSteps.grabHostProductsListTp1();
 		shippingSteps.grabHostProductsListTp2();
@@ -296,6 +311,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		for (PartyBonusCalculationModel model : partyBonusCalculationModeList) {
 			MongoWriter.savePartyBonusCalculationModel(model, getClass().getSimpleName());
 		}
+		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
 	}
 
 }

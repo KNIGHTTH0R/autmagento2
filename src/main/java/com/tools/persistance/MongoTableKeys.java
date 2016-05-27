@@ -61,7 +61,7 @@ public class MongoTableKeys {
 	// Kobo code
 	public static final String KOBO_MODEL = "KoboModel";
 	public static final String KOBO_CODE = "KoboCode";
-	
+
 	// Kobo code
 	public static final String STRING_VALUE = "StringValue";
 	public static final String STOCK = "stock";
@@ -97,8 +97,13 @@ public class MongoTableKeys {
 	public static final String IP_POINTS = "ipPoints";
 	public static final String DISCOUNT_LIST = "discounts";
 
+	/// TermPurchaseIpModel
+	public static final String TERM_PURCHASE_IP_MODEL = "TermPurchaseIpModel";
+	public static final String CURRENT_MONTH_IP = "currentMonthIp";
+	public static final String NEXT_MONTH_IP = "nextMonthIp";
+
 	public static final String PRODUCT_DETAILED_MODEL = "ProductDetailedModel";
-	
+
 	public static final String PRODUCT_BASIC_MODEL = "ProductBasicModel";
 	public static final String NAME = "name";
 	public static final String TYPE = "type";
@@ -123,8 +128,8 @@ public class MongoTableKeys {
 	public static final String MARKETING_BONUS = "MarketingBonus";
 	public static final String SEGMENTS = "Segments";
 	public static final String CALCULATIONS = "Calculations";
-	
-	//StarterSetCalcDetailsModel
+
+	// StarterSetCalcDetailsModel
 	public static final String STARTER_SET_CART_CALC_DETAILS_MODEL = "StarterSetCartCalcDetailsModel";
 
 	// OrderInfoModel
@@ -213,8 +218,8 @@ public class MongoTableKeys {
 	public static final String TEAM_POINTS = "TeamPoints";
 	public static final String STYLECOACH_FIRST_LEVEL = "StyleCoachFirstLevel";
 	public static final String GOLD_STYLECOACHES = "GoldStyleCoaches";
-	
-	//category
+
+	// category
 	public static final String CATEGORY_MODEL = null;
 	public static final String CATEGORY_NAME = null;
 	public static final String CATEGORY_URL = null;

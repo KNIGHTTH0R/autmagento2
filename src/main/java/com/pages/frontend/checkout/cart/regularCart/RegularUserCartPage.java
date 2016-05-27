@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.cartcalculations.regularUser.RegularCartTotalsCalculation;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
@@ -168,8 +169,11 @@ public class RegularUserCartPage extends AbstractPage {
 				product.setBonusType(discountType);
 				if (discountType.contentEquals(ContextConstants.DISCOUNT_40_BONUS)) {
 					product.setBunosValue(String.valueOf(calculate40Discount(product.getFinalPrice())));
+					product.setIpPoints(String
+							.valueOf(RegularCartTotalsCalculation.calculate40DiscountForIp(product.getIpPoints())));
 				} else if (discountType.contentEquals(ContextConstants.JEWELRY_BONUS)) {
 					product.setBunosValue(product.getFinalPrice());
+					product.setIpPoints(String.valueOf(BigDecimal.ZERO));
 				}
 			}
 		}
@@ -294,7 +298,8 @@ public class RegularUserCartPage extends AbstractPage {
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickUpdateCart() {

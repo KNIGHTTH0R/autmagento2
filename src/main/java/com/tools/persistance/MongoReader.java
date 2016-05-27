@@ -32,6 +32,7 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.DBStylistModel;
@@ -206,6 +207,31 @@ public class MongoReader extends MongoConnector {
 				result.setDeliveryDate(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_DATE));
 				result.setTotalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_PRICE));
 				result.setStatus(MongoUtils.checkField(dbObject, MongoTableKeys.STATUS));
+
+				itemList.add(result);
+			}
+		} finally {
+			cursor.close();
+		}
+
+		return itemList;
+	}
+
+	public static List<TermPurchaseIpModel> getIpModel(String testName) {
+
+		DBObject dbObject = null;
+		List<TermPurchaseIpModel> itemList = new ArrayList<TermPurchaseIpModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.TERM_PURCHASE_IP_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				TermPurchaseIpModel result = new TermPurchaseIpModel();
+				dbObject = cursor.next();
+
+				result.setCurrentMonthIp(MongoUtils.checkField(dbObject, MongoTableKeys.CURRENT_MONTH_IP));
+				result.setNextMonthIp(MongoUtils.checkField(dbObject, MongoTableKeys.NEXT_MONTH_IP));
 
 				itemList.add(result);
 			}

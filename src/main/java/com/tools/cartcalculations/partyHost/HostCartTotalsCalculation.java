@@ -111,7 +111,7 @@ public class HostCartTotalsCalculation {
 		return result;
 	}
 
-	public static void calculateTermPurchaseIpPoints(List<HostBasicProductModel> productsList)
+	public static TermPurchaseIpModel calculateTermPurchaseIpPoints(List<HostBasicProductModel> productsList)
 			throws NumberFormatException, ParseException {
 
 		TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
@@ -119,14 +119,18 @@ public class HostCartTotalsCalculation {
 		BigDecimal nextMonthIp = BigDecimal.ZERO;
 
 		for (HostBasicProductModel product : productsList) {
-			if (DateUtils.isDateInCurrentMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
-				currentMonthIp = currentMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
-			} else if (DateUtils.isDateInNextMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
-				nextMonthIp = nextMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
+			if (product.getIsTP()) {
+				if (DateUtils.isDateInCurrentMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
+					currentMonthIp = currentMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
+				} else if (DateUtils.isDateInNextMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
+					nextMonthIp = nextMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
+				}
 			}
 		}
 		ipModel.setCurrentMonthIp(String.valueOf(currentMonthIp));
 		ipModel.setNextMonthIp(String.valueOf(nextMonthIp));
+
+		return ipModel;
 
 	}
 

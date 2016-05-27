@@ -2,17 +2,116 @@ package com.tools.cartcalculations.regularUser;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.ContextConstants;
+import com.tools.utils.DateUtils;
 import com.tools.utils.PrintUtils;
 
 public class RegularCartTotalsCalculation {
+
+	public static List<RegularBasicProductModel> calculateProductsWithVoucherApplied(
+			List<RegularBasicProductModel> productsList, String voucherValue) {
+
+		BigDecimal sum = calculateProductsSum(productsList);
+
+		List<RegularBasicProductModel> cartProducts = new ArrayList<RegularBasicProductModel>();
+
+		for (RegularBasicProductModel product : productsList) {
+
+			RegularBasicProductModel newProduct = new RegularBasicProductModel();
+
+			newProduct.setName(product.getName());
+			newProduct.setUnitPrice(product.getUnitPrice());
+			newProduct.setProdCode(product.getProdCode());
+			newProduct.setQuantity(product.getQuantity());
+			newProduct.setIpPoints(
+					calculateIpForEachProduct(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())),
+							BigDecimal.valueOf(Double.parseDouble(voucherValue)), sum));
+			newProduct.setFinalPrice(product.getFinalPrice());
+			newProduct.setBonusType(product.getBonusType());
+			newProduct.setBunosValue(product.getBunosValue());
+			newProduct.setIsTP(product.getIsTP());
+			newProduct.setDeliveryDate(product.getDeliveryDate());
+
+			cartProducts.add(newProduct);
+		}
+
+		return cartProducts;
+
+	}
+
+	public static BigDecimal calculateProductsSum(List<RegularBasicProductModel> productsList) {
+		BigDecimal sum = BigDecimal.ZERO;
+		for (RegularBasicProductModel product : productsList) {
+			sum = sum.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
+		}
+		return sum;
+	}
+
+	public static String calculateIpForEachProduct(BigDecimal initialIpNumber, BigDecimal voucherValue,
+			BigDecimal sum) {
+
+		BigDecimal result = BigDecimal.ZERO;
+		if (sum.compareTo(voucherValue) < 0) {
+			result = BigDecimal.ZERO;
+
+		} else {
+
+			result = result.add(voucherValue);
+			result = result.multiply(BigDecimal.valueOf(100));
+			result = result.divide(sum, 4);
+			result = result.multiply(initialIpNumber);
+			result = result.divide(BigDecimal.valueOf(100), 2);
+			result = initialIpNumber.subtract(result);
+			if (result.compareTo(BigDecimal.ZERO) < 0) {
+				result = BigDecimal.ZERO;
+			}
+		}
+		return result.setScale(0, RoundingMode.HALF_UP).toString();
+
+	}
+
+	public static TermPurchaseIpModel calculateTermPurchaseIpPoints(List<RegularBasicProductModel> productsList)
+			throws NumberFormatException, ParseException {
+
+		TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
+		BigDecimal currentMonthIp = BigDecimal.ZERO;
+		BigDecimal nextMonthIp = BigDecimal.ZERO;
+
+		for (RegularBasicProductModel product : productsList) {
+			if (product.getIsTP()) {
+				if (DateUtils.isDateInCurrentMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
+					currentMonthIp = currentMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
+				} else if (DateUtils.isDateInNextMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
+					nextMonthIp = nextMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
+				}
+			}
+		}
+		ipModel.setCurrentMonthIp(String.valueOf(currentMonthIp));
+		ipModel.setNextMonthIp(String.valueOf(nextMonthIp));
+
+		return ipModel;
+
+	}
+
+	public static BigDecimal calculate40DiscountForIp(String ipPoints) {
+
+		BigDecimal ip = BigDecimal.valueOf(Double.parseDouble(ipPoints));
+		BigDecimal reducedIp = BigDecimal.valueOf(Double.parseDouble(ipPoints));
+		reducedIp = reducedIp.multiply(BigDecimal.valueOf(40));
+		reducedIp = reducedIp.divide(BigDecimal.valueOf(100), 0, RoundingMode.HALF_UP);
+
+		return ip.subtract(reducedIp);
+	}
 
 	public static RegularCartCalcDetailsModel calculateTotals(List<RegularBasicProductModel> productsList,
 			String taxClass, String voucherValue, String shippingValue) {
@@ -138,9 +237,9 @@ public class RegularCartTotalsCalculation {
 	}
 
 	public static BigDecimal calculateTax(BigDecimal totalAmount, BigDecimal taxClass) {
-		
+
 		BigDecimal tax = BigDecimal.ZERO;
-		
+
 		tax = tax.add(totalAmount);
 		tax = tax.multiply(taxClass);
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100")).add(taxClass), 2, BigDecimal.ROUND_HALF_UP);
@@ -234,7 +333,7 @@ public class RegularCartTotalsCalculation {
 
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
 		totalAmount = totalAmount.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
-		
+
 		BigDecimal tax = calculateTax(totalAmount, BigDecimal.valueOf(Double.parseDouble(taxClass)));
 		BigDecimal discountTotal = calculateDiscountTotal(jewerlyDiscount, forthyDiscount, buy3Get1, voucherPrice);
 
@@ -248,7 +347,5 @@ public class RegularCartTotalsCalculation {
 
 		return result;
 	}
-	
-
 
 }

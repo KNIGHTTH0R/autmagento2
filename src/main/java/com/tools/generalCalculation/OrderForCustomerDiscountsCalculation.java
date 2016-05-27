@@ -31,6 +31,8 @@ public class OrderForCustomerDiscountsCalculation {
 			newProduct.setFinalPrice(product.getFinalPrice());
 			newProduct.setBonusType(product.getBonusType());
 			newProduct.setBunosValue(product.getBunosValue());
+			newProduct.setIsTP(product.getIsTP());
+			newProduct.setDeliveryDate(product.getDeliveryDate());
 
 			cartProducts.add(newProduct);
 		}

@@ -155,7 +155,7 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@Step
-	public RegularBasicProductModel setRegularBasicProductAddToCart(String qty, String size, String finalPrice) {
+	public RegularBasicProductModel setRegularBasicProductAddToCart(String qty, String size, String finalPrice,String ipPoints) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
@@ -167,6 +167,7 @@ public class ProductSteps extends AbstractSteps {
 		result.setFinalPrice(finalPrice);
 		result.setBonusType(ContextConstants.REGULAR_PRICE);
 		result.setBunosValue("0");
+		result.setIpPoints(ipPoints);
 
 		addToCart();
 		waitABit(TimeConstants.TIME_CONSTANT);

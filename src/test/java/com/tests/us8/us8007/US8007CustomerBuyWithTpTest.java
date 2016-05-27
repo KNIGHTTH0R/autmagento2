@@ -27,9 +27,11 @@ import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.cartcalculations.regularUser.RegularCartTotalsCalculation;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
@@ -38,6 +40,7 @@ import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
@@ -89,13 +92,14 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
+	private TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
 
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 		DataGrabber.wipe();
-		
+
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
@@ -155,10 +159,19 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
+		if (productData.getIsTP())
+			productData.setDeliveryDate(DateUtils
+					.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		RegularUserCartCalculator.allProductsListTp0.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
+		if (productData.getIsTP())
+			productData.setDeliveryDate(DateUtils
+					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		RegularUserCartCalculator.allProductsListTp1.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0");
+		if (productData.getIsTP())
+			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
+					genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
 		RegularUserCartCalculator.allProductsListTp2.add(productData);
 
 		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp0);
@@ -188,6 +201,8 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		RegularUserCartCalculator.calculateCartTotals(RegularUserCartCalculator.allProductsList, discountClass,
 				shippingValue, voucherValue);
 		RegularUserCartCalculator.calculateShippingTotals(shippingValue, voucherValue, discountClass);
+		ipModel = RegularCartTotalsCalculation
+				.calculateTermPurchaseIpPoints(RegularUserCartCalculator.allProductsListwithVoucher);
 
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
@@ -206,7 +221,6 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
-		System.out.println(url);
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
@@ -257,5 +271,6 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsListTp2) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + "TP2");
 		}
+		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
 	}
 }

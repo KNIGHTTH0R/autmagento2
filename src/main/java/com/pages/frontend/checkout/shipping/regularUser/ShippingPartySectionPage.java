@@ -71,6 +71,7 @@ public class ShippingPartySectionPage extends AbstractPage {
 	public void selectCountry(String country) {
 		element(countrySelect).waitUntilVisible();
 		element(countrySelect).selectByVisibleText(country);
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 	
 	public void enterPLZ(String plz) {
@@ -82,11 +83,13 @@ public class ShippingPartySectionPage extends AbstractPage {
 	public void selectShipToHostessAddress(String address) {
 		element(shipHostessAddressSelect).waitUntilVisible();
 		element(shipHostessAddressSelect).selectByVisibleText(address);
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void selectShipToStylecoachAddress(String address) {
 		element(shipStylecoachAddressSelect).waitUntilVisible();
 		element(shipStylecoachAddressSelect).selectByVisibleText(address);
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 }

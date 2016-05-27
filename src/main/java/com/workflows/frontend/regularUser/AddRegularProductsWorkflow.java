@@ -33,8 +33,9 @@ public class AddRegularProductsWorkflow {
 	public RegularBasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(),qty);
 
-		return productSteps.setRegularBasicProductAddToCart(qty, productProperty, finalPrice);
+		return productSteps.setRegularBasicProductAddToCart(qty, productProperty, finalPrice, ipPoints);
 	}
 	@StepGroup
 	@Title("Add product to wishlist")

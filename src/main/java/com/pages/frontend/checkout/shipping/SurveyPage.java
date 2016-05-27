@@ -16,6 +16,7 @@ import com.tools.datahandler.BorrowDataGrabber;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.HostDataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 
@@ -95,6 +96,7 @@ public class SurveyPage extends AbstractPage {
 		element(toPaymentButton).waitUntilVisible();
 		waitFor(ExpectedConditions.elementToBeClickable(toPaymentButton));
 		toPaymentButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public List<CartProductModel> grabProductsList() {

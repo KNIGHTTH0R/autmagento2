@@ -29,6 +29,7 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.cartcalculations.partyHost.HostCartTotalsCalculation;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
@@ -46,7 +47,6 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-import freemarker.template.utility.DateUtil;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -164,14 +164,14 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		productData.setIsTP(genProduct1.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
 		if (productData.getIsTP())
 			productData.setDeliveryDate(DateUtils
-					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+					.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp0.add(productData);
 
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct2, "1", "0");
 		productData.setIsTP(genProduct2.getStockData().getEarliestAvailability().contentEquals("") ? false : true);
 		if (productData.getIsTP())
 			productData.setDeliveryDate(DateUtils
-					.getFirstFridayAfterDate(genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp1.add(productData);
 
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct3, "4", "0");
@@ -184,13 +184,6 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp0);
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp1);
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp2);
-
-		System.out.println("distractia incepe");
-
-		for (HostBasicProductModel iterable_element : HostCartCalculator.allProductsList) {
-			System.out.println(iterable_element.getIsTP());
-			System.out.println(iterable_element.getDeliveryDate());
-		}
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -211,6 +204,7 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		hostCartSteps.grabTotals();
 		HostCartCalculator.calculateHostCartTotals(discountClass, shippingValue);
 		HostCartCalculator.calculateShippingTotals(shippingValue, voucherValue, discountClass);
+		ipModel = HostCartTotalsCalculation.calculateTermPurchaseIpPoints(HostCartCalculator.allProductsList);
 
 		hostCartSteps.clickGoToShipping();
 		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
@@ -277,5 +271,6 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp2) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP2");
 		}
+		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
 	}
 }
