@@ -119,7 +119,7 @@ public class HostCartTotalsCalculation {
 		BigDecimal nextMonthIp = BigDecimal.ZERO;
 
 		for (HostBasicProductModel product : productsList) {
-			if (product.getIsTP()) {
+			if (product.getDeliveryDate() != null) {
 				if (DateUtils.isDateInCurrentMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
 					currentMonthIp = currentMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
 				} else if (DateUtils.isDateInNextMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {

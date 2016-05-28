@@ -33,13 +33,20 @@ public class ReportsSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void clickOnIpReports() {
+		reportsPage().clickOnIpReports();
+	}
+
+	@Step
 	public void verifyThatProductHasNotAvailableStatus(String sku) {
-		Assert.assertTrue("The product is not in the expected section", getNotAvailableProductsSectionText().contains(sku));
+		Assert.assertTrue("The product is not in the expected section",
+				getNotAvailableProductsSectionText().contains(sku));
 	}
 
 	@Step
 	public void verifyThatProductHasNotAvailableForTheMomentStatus(String sku) {
-		Assert.assertTrue("The product is not in the expected section", getNotAvailableForTheMomentProductsSectionText().contains(sku));
+		Assert.assertTrue("The product is not in the expected section",
+				getNotAvailableForTheMomentProductsSectionText().contains(sku));
 
 	}
 
@@ -63,7 +70,8 @@ public class ReportsSteps extends AbstractSteps {
 		File[] listOfFiles = folder.listFiles();
 		String text = PdfUtils.readPdf(downloadsdirectory + listOfFiles[0].getName());
 
-		return StringUtils.substringBetween(text, ContextConstants.NOT_AVAILABLE_FOR_THE_MOMENT, ContextConstants.NOT_AVAILABLE);
+		return StringUtils.substringBetween(text, ContextConstants.NOT_AVAILABLE_FOR_THE_MOMENT,
+				ContextConstants.NOT_AVAILABLE);
 	}
 
 }

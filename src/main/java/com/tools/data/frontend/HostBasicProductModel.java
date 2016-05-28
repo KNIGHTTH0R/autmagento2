@@ -10,7 +10,6 @@ public class HostBasicProductModel {
 	private String bonusType;
 	private String bunosValue;
 	private String ipPoints;
-	private boolean isTP;
 	private String deliveryDate;
 
 	public String getDeliveryDate() {
@@ -19,14 +18,6 @@ public class HostBasicProductModel {
 
 	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
-	}
-
-	public boolean getIsTP() {
-		return isTP;
-	}
-
-	public void setIsTP(boolean isTP) {
-		this.isTP = isTP;
 	}
 
 	public String getName() {

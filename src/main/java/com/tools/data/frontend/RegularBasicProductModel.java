@@ -10,16 +10,7 @@ public class RegularBasicProductModel {
 	private String bonusType;
 	private String bunosValue;
 	private String ipPoints;
-	private boolean isTP;
 	private String deliveryDate;
-
-	public boolean getIsTP() {
-		return isTP;
-	}
-
-	public void setIsTP(boolean isTP) {
-		this.isTP = isTP;
-	}
 
 	public String getDeliveryDate() {
 		return deliveryDate;

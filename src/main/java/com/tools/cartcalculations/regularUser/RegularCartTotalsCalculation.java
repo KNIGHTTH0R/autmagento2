@@ -39,7 +39,6 @@ public class RegularCartTotalsCalculation {
 			newProduct.setFinalPrice(product.getFinalPrice());
 			newProduct.setBonusType(product.getBonusType());
 			newProduct.setBunosValue(product.getBunosValue());
-			newProduct.setIsTP(product.getIsTP());
 			newProduct.setDeliveryDate(product.getDeliveryDate());
 
 			cartProducts.add(newProduct);
@@ -88,7 +87,7 @@ public class RegularCartTotalsCalculation {
 		BigDecimal nextMonthIp = BigDecimal.ZERO;
 
 		for (RegularBasicProductModel product : productsList) {
-			if (product.getIsTP()) {
+			if (product.getDeliveryDate() != null) {
 				if (DateUtils.isDateInCurrentMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
 					currentMonthIp = currentMonthIp.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
 				} else if (DateUtils.isDateInNextMonth(product.getDeliveryDate(), "yyyy-MM-dd")) {
