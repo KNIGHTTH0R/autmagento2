@@ -1,4 +1,4 @@
-package com.pages.frontend;
+package com.pages.frontend.reports;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,7 +19,6 @@ public class IpReportsPage extends AbstractPage {
 
 		ipModel.setCurrentMonthIp(openIpsTable.findElement(By.cssSelector("tr:nth-child(4) td:last-child")).getText());
 		ipModel.setNextMonthIp(openIpsTable.findElement(By.cssSelector("tr:nth-child(5) td:last-child")).getText());
-		
 
 		return ipModel;
 

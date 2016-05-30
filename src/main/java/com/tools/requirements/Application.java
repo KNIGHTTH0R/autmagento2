@@ -370,5 +370,10 @@ public class Application {
 		public class US28_1 {
 		}
 	}
+	@Feature
+	public class IpReport {
+		public class US29_1 {
+		}
+	}
 
 }

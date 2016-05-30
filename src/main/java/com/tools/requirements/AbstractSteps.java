@@ -96,6 +96,7 @@ import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
 import com.pages.frontend.registration.landing.ThankYouPage;
 import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
+import com.pages.frontend.reports.IpReportsPage;
 import com.pages.frontend.reports.JewelryBonusHistoryPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.env.constants.ContextConstants;
@@ -466,6 +467,9 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public PomProductListPage pomProductListPage() {
 		return getPages().currentPageAt(PomProductListPage.class);
+	}
+	public IpReportsPage ipReportsPage() {
+		return getPages().currentPageAt(IpReportsPage.class);
 	}
 
 	// cart
