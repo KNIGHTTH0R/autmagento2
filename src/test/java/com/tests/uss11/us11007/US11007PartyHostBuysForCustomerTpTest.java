@@ -123,9 +123,11 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		genProduct2.setIp("8");
 		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("29.90");
 		genProduct3.setIp("25");
+		genProduct3.setStockData(
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();

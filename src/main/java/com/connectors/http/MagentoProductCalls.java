@@ -155,7 +155,7 @@ public class MagentoProductCalls {
 		stockModel.setNotifyStockQty("");
 		stockModel.setUseConfigNotifyStockQty("1");
 		stockModel.setIsDiscontinued("1");
-		stockModel.setEarliestAvailability(FormatterUtils.getCustomDate("yyyy-MM-dd", 360000));
+		stockModel.setEarliestAvailability(FormatterUtils.getCustomDate("yyyy-MM-dd", 86000));
 		stockModel.setMaximumPercentageToBorrow("");
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
 		result.setStockData(stockModel);

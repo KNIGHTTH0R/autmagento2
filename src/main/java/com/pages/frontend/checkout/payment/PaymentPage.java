@@ -31,6 +31,9 @@ public class PaymentPage extends AbstractPage {
 
 	@FindBy(id = "card.cardNumber")
 	private WebElement cardNumberInput;
+	
+	@FindBy(id = "mainBack")
+	private WebElement backButton;
 
 	public void expandCreditCardForm() {
 		element(creditCardContainer).waitUntilVisible();
@@ -39,6 +42,11 @@ public class PaymentPage extends AbstractPage {
 
 	public boolean isCreditCardFormExpended() {
 		return element(cardNumberInput).isCurrentlyVisible();
+	}
+	
+	public void goBack() {
+		element(backButton).waitUntilVisible();
+		backButton.click();
 	}
 
 	public void expandBankTransferForm() {

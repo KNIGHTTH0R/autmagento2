@@ -73,14 +73,17 @@ public class ShippingSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabHostProductsList();
 	}
+
 	public List<HostCartProductModel> grabHostProductsListTp0() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabHostProductsListTp0();
 	}
+
 	public List<HostCartProductModel> grabHostProductsListTp1() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabHostProductsListTp1();
 	}
+
 	public List<HostCartProductModel> grabHostProductsListTp2() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabHostProductsListTp2();
@@ -151,6 +154,11 @@ public class ShippingSteps extends AbstractSteps {
 	@Step
 	public void setSameAsBilling(boolean checked) {
 		shippingFormPage().setSameAsBilling(checked);
+	}
+
+	@Step
+	public void goBack() {
+		shippingFormPage().goBack();
 	}
 
 	@Step

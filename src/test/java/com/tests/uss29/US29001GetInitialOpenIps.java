@@ -91,7 +91,7 @@ public class US29001GetInitialOpenIps extends BaseTest {
 		reportsSteps.clickOnIpReports();
 		ipModel = ipReportsSteps.grabIpsInfo();
 
-		ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
+		ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_STAGING_AUT_JOB_URL);
 	}
 
 	@After

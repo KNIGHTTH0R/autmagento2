@@ -15,7 +15,6 @@ public class ShippingFormPage extends AbstractPage {
 	@FindBy(css = "select#shipping-address-select")
 	private WebElement addressDropDown;
 
-
 	@FindBy(css = "input[name='shipping[firstname]']")
 	private WebElement firstNameInput;
 
@@ -49,12 +48,20 @@ public class ShippingFormPage extends AbstractPage {
 	@FindBy(id = "terms")
 	private WebElement termsCheckbox;
 
+	@FindBy(id = "back-step")
+	private WebElement goBackButton;
+
 	@FindBy(id = "new-shipping-address")
 	private WebElement newShippingAddress;
 
 	public void selectKnowStylistNoOption() {
 		element(knowStylistNo).waitUntilVisible();
 		knowStylistNo.click();
+	}
+
+	public void goBack() {
+		element(goBackButton).waitUntilVisible();
+		goBackButton.click();
 	}
 
 	public void checkTermsCheckbox() {
@@ -108,8 +115,9 @@ public class ShippingFormPage extends AbstractPage {
 
 		if ((checked && !isSelected) || (!checked && isSelected))
 			sameAsBilling.click();
-		
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void selectShippingAddress(String value) {
@@ -118,11 +126,12 @@ public class ShippingFormPage extends AbstractPage {
 	}
 
 	public void verifyThatYouCannotShipOnRestrictedCountries() {
-		Assert.assertTrue("The ddl contains the country name and it should not !!!", !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE)
-				|| !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
+		Assert.assertTrue("The ddl contains the country name and it should not !!!",
+				!addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE)
+						|| !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
 		System.out.println(addressDropDown.getText());
 	}
-	
+
 	public void clickAddNewAddress() {
 		element(newShippingAddress).waitUntilVisible();
 		newShippingAddress.click();

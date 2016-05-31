@@ -62,8 +62,10 @@ public class HomePage extends AbstractPage {
 	public void goToNewItems() {
 		Actions builder = new Actions(getDriver());
 		builder.moveToElement(jewelriesMenu).build().perform();
+		waitABit(1000);
 		element(newMenu).waitUntilVisible();
 		newMenu.click();
+		waitABit(1000);
 	}
 
 	// public void goToNewItems() {
