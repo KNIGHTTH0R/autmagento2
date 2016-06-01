@@ -1,4 +1,4 @@
-package com.tests.us8.us8008;
+package com.tests.us9.us9005;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,33 +23,39 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
-import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.data.UrlModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.DataGrabber;
-import com.tools.datahandler.RegularUserDataGrabber;
+import com.tools.datahandler.HostDataGrabber;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
-import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
-import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
+import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US8.8 Customer Buy With 0 Amount Immediate and Tp products", type = "Scenarios")
-@Story(Application.RegularCart.US8_8.class)
+@WithTag(name = "US9.5 Place Host Order With 0 Amount Immediate and Tp Products", type = "Scenarios")
+@Story(Application.HostCart.US9_5.class)
 @RunWith(SerenityRunner.class)
-public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
+public class US9005PlaceHostOrderWithTpAndZeroAmountTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
@@ -59,41 +65,40 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
-	public RegularUserCartSteps regularUserCartSteps;
+	public HostCartSteps hostCartSteps;
 	@Steps
-	public HomeSteps homeSteps;
+	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public AddRegularProductsWorkflow addRegularProductsWorkflow;
+	public AddHostProductsWorkflow addHostProductsWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
-	public RegularCartValidationWorkflows regularCartValidationWorkflows;
-	@Steps
-	public FooterSteps footerSteps;
 
 	private String username, password;
-	private String billingAddress, shippingAddress;
+	private String billingAddress;
+	private static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
 
 	@Before
 	public void setUp() throws Exception {
-		RegularUserCartCalculator.wipe();
-		RegularUserDataGrabber.wipe();
-		DataGrabber.wipe();
+		HostCartCalculator.wipe();
+		HostDataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("50.00");
+		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
 		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("29.00");
+		genProduct2.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct3.setPrice("49.90");
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("100.00");
+		genProduct3.setStockData(
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
@@ -101,13 +106,12 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8007.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us9" + File.separator + "us9001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 
 			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -124,40 +128,42 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP0");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
+
+		partyUrlModel = MongoReader.grabUrlModels("US10009CreatePartyWithStylistHostTest").get(0);
 	}
 
 	@Test
-	public void us8008CustomerBuyWithTpAndZeroAmountTest() throws ParseException {
+	public void us9005PlaceHostOrderWithTpAndZeroAmountTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		homeSteps.goToNewItems();
-		customerRegistrationSteps.wipeRegularCart();
+		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
+		customerRegistrationSteps.wipeHostCart();
 
-		addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
-		addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
-		addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0");
+		addHostProductsWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		addHostProductsWorkflow.setHostProductToCart(genProduct2, "1", "0");
+		addHostProductsWorkflow.setHostProductToCart(genProduct3, "4", "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		regularUserCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.clickPartyNoOption();
+		hostCartSteps.clickGoToShipping();
+		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.selectShippingAddress(shippingAddress);
+		shippingSteps.setSameAsBilling(true);
 
 		// go to payment without bonuses first in order to get the order id
 		// (which is dysplayed only on that page);if you apply bonuses in order
 		// to place 0 amount order that page will be skipped
 		shippingSteps.goToPaymentMethod();
+
 		String url = shippingSteps.grabUrl();
-		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
-		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
-		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
+		HostDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
+		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
+		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
 
 		paymentSteps.goBack();
 		shippingSteps.goBack();
@@ -165,14 +171,14 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
-		regularUserCartSteps.typeCouponCode("G160FMDE");
-		regularUserCartSteps.submitVoucherCode();
+		hostCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
+		hostCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.JEWELRY_BONUS);
+		hostCartSteps.selectProductDiscountType(genProduct3.getSku(), ContextConstants.JEWELRY_BONUS);
 
-		regularUserCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.clickPartyNoOption();
+		hostCartSteps.clickGoToShipping();
+		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.selectShippingAddress(shippingAddress);
+		shippingSteps.setSameAsBilling(true);
 
 		shippingSteps.goToPaymentMethod();
 
@@ -182,8 +188,8 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + "TP0");
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
+		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + "TP0");
+		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
+		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
 	}
 }

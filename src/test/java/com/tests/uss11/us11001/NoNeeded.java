@@ -1,4 +1,4 @@
-package com.tests.uss11.us11005;
+package com.tests.uss11.us11001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,10 +30,10 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US11.5 Party Host Buys For Customer With Free Shipping Voucher Test, ship to host", type = "Scenarios")
-@Story(Application.PlaceACustomerOrderCart.US11_5.class)
+@WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test, ship to host", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_1.class)
 @RunWith(SerenityRunner.class)
-public class US11005CreatePartyWithStylistHostTest extends BaseTest {
+public class NoNeeded extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -58,7 +58,7 @@ public class US11005CreatePartyWithStylistHostTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11005.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -80,7 +80,7 @@ public class US11005CreatePartyWithStylistHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us11005CreatePartyWithStylistHostTest() {
+	public void us11001CreatePartyWithStylistHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

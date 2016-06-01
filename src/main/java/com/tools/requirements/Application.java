@@ -132,6 +132,9 @@ public class Application {
 
 		public class US8_7 {
 		}
+
+		public class US8_8 {
+		}
 	}
 
 	@Feature
@@ -143,6 +146,9 @@ public class Application {
 		}
 
 		public class US9_4 {
+		}
+
+		public class US9_5 {
 		}
 	}
 
@@ -176,6 +182,9 @@ public class Application {
 		}
 
 		public class US11_7 {
+		}
+
+		public class US11_8 {
 		}
 	}
 
@@ -365,11 +374,13 @@ public class Application {
 		public class US27_1 {
 		}
 	}
+
 	@Feature
 	public class UnbounceRegistration {
 		public class US28_1 {
 		}
 	}
+
 	@Feature
 	public class IpReport {
 		public class US29_1 {

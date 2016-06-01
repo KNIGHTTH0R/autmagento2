@@ -1,4 +1,4 @@
-package com.tests.uss11.us11001;
+package com.tests.uss11.us11008;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,33 +21,32 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyCreationSteps;
+import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test, ship to host", type = "Scenarios")
-@Story(Application.PlaceACustomerOrderCart.US11_1.class)
+@WithTag(name = "US11.8 Party Host Buys For Customer With 0 Amount Immediate and Tp Products", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_8.class)
 @RunWith(SerenityRunner.class)
-public class US11001CreatePartyWithStylistHostTest extends BaseTest {
+public class US10009CreatePartyWithStylistHostTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
-	
 	@Steps
 	public FooterSteps footerSteps;
-
+	@Steps
+	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
-	
+
 	private static UrlModel urlModel = new UrlModel();
-	private static DateModel dateModel = new DateModel();
 	private String username, password;
 
 	@Before
@@ -58,7 +57,7 @@ public class US11001CreatePartyWithStylistHostTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -80,7 +79,7 @@ public class US11001CreatePartyWithStylistHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us11001CreatePartyWithStylistHostTest() {
+	public void us10007CreatePartyWithStylistHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -88,13 +87,13 @@ public class US11001CreatePartyWithStylistHostTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
-		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
+		partyDetailsSteps.sendInvitationToHostess();
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
-	}
-}
 
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
+	}
+
+}
