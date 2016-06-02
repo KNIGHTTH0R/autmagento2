@@ -19,13 +19,10 @@ public class PdfUtils {
 				stripper.setSortByPosition(true);
 				PDFTextStripper Tstripper = new PDFTextStripper();
 				st = Tstripper.getText(document);
-				System.out.println("Text:" + st);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return st;
 	}
-
 }

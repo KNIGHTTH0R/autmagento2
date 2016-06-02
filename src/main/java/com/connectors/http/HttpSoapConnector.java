@@ -42,8 +42,8 @@ public class HttpSoapConnector {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -97,8 +97,8 @@ public class HttpSoapConnector {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 		return soapResponse;
 	}
 
@@ -113,12 +113,11 @@ public class HttpSoapConnector {
 	protected static String performLogin() throws SOAPException, IOException {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		// SOAPMessage soapResponse =
-		// soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP,
-		// Credentials.LOGIN_PASS_SOAP), MongoReader.getSoapURL()
-		// + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), "http://staging-aut.pippajean.com/"
-				+ UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(
+				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
+				MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), "http://staging-aut.pippajean.com/"
+//				+ UrlConstants.API_URI);
 		String result = "";
 
 		NodeList returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);

@@ -233,6 +233,16 @@ public class DateUtils {
 
 	}
 
+	public static String parseDate(String dateString, String initialFormatString, String finalFormatString,
+			Locale locale) throws ParseException {
+		DateFormat formatInitial = new SimpleDateFormat(initialFormatString);
+		DateFormat formatFinal = new SimpleDateFormat(finalFormatString, locale);
+		Date date = formatInitial.parse(dateString);
+
+		return String.valueOf(formatFinal.format(date));
+
+	}
+
 	public static String getCurrentDateBegining(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
 

@@ -35,7 +35,7 @@ public class NavigationPage extends AbstractPage {
 
 			if (menuNow.findElement(By.cssSelector("a")).getText().contentEquals(menu)) {
 				menuNow.click();
-				waitABit(3000);
+				waitABit(TimeConstants.WAIT_TIME_SMALL);
 
 				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li > a"));
 
@@ -43,7 +43,7 @@ public class NavigationPage extends AbstractPage {
 
 					if (submenuNow.getText().contentEquals(submenu)) {
 						submenuNow.click();
-						waitABit(3000);
+						waitABit(TimeConstants.WAIT_TIME_SMALL);
 						break;
 					}
 				}
