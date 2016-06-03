@@ -65,7 +65,7 @@ public class US26001VerifyProdNotAvailableInAvailabilityReportTest extends BaseT
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8003.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss26" + File.separator + "us26001.properties");
 			prop.load(input);
 			stylistUsername = prop.getProperty("stylistUsername");
 			stylistPassword = prop.getProperty("stylistPassword");
@@ -92,6 +92,7 @@ public class US26001VerifyProdNotAvailableInAvailabilityReportTest extends BaseT
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
 		reportsSteps.verifyThatProductHasNotAvailableStatus(generatedProduct.getSku());

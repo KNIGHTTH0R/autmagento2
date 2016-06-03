@@ -16,7 +16,9 @@ import com.tools.requirements.AbstractSteps;
 import com.tools.utils.DateUtils;
 import com.tools.utils.PdfUtils;
 
+import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 /**
  * @author mihai
@@ -59,12 +61,50 @@ public class ReportsSteps extends AbstractSteps {
 
 	}
 
+	@Title("Verify TP info message")
 	@Step
-	public void verifyThatProductHasAsteriscNextToAvDate(ProductDetailedModel model) throws ParseException {
+	@Screenshots(onlyOnFailures = true)
+	public void verifyTpInfoMessage(boolean shouldBePresent) throws ParseException {
+		if (shouldBePresent) {
+			Assert.assertTrue("The message is not displayed",
+					getProductLine(ContextConstants.NOT_AVAILABLE_FOR_THE_MOMENT)
+							.contains(ContextConstants.TP_INFO_MESSAGE));
+		} else {
+			Assert.assertTrue("The message is displayed and it shouldn't",
+					!getProductLine(ContextConstants.NOT_AVAILABLE_FOR_THE_MOMENT)
+							.contains(ContextConstants.TP_INFO_MESSAGE));
+		}
+
+	}
+
+	@Title("Verify product has * next to earliest availability date")
+	@Step
+	@Screenshots(onlyOnFailures = true)
+	public void verifyAsteriscNextToAvDate(ProductDetailedModel model) throws ParseException {
 		Assert.assertTrue("The product is not marked correctly",
 				getProductLine(model.getSku()).contains(
 						DateUtils.parseDate(model.getStockData().getEarliestAvailability(), "yyyy-MM-dd", "dd. MMMM",
 								new Locale.Builder().setLanguage(MongoReader.getContext()).build()) + " *"));
+	}
+
+	@Title("Verify product has no * next to earliest availability date")
+	@Step
+	@Screenshots(onlyOnFailures = true)
+	public void verifyNoAsteriscNextToAvDate(ProductDetailedModel model) throws ParseException {
+		String line = getProductLine(model.getSku());
+		Assert.assertTrue("The product is not marked correctly",
+				line.contains(DateUtils.parseDate(model.getStockData().getEarliestAvailability(), "yyyy-MM-dd",
+						"dd. MMMM", new Locale.Builder().setLanguage(MongoReader.getContext()).build()))
+						&& !line.contains("*"));
+	}
+
+	@Title("Verify product has no * next to will be announced status")
+	@Step
+	@Screenshots(onlyOnFailures = true)
+	public void verifyNoAsteriscNextToWillBeAnnouncedStatus(ProductDetailedModel model) throws ParseException {
+		String line = getProductLine(model.getSku());
+		Assert.assertTrue("The product is not marked correctly",
+				line.contains(ContextConstants.WILL_BE_ANNOUNCED) && !line.contains("*"));
 	}
 
 	private String getNotAvailableProductsSectionText() {
@@ -86,14 +126,13 @@ public class ReportsSteps extends AbstractSteps {
 		File folder = new File(downloadsdirectory);
 		File[] listOfFiles = folder.listFiles();
 		String text = PdfUtils.readPdf(downloadsdirectory + listOfFiles[0].getName());
-		
+
 		return StringUtils.substringBetween(text, ContextConstants.NOT_AVAILABLE_FOR_THE_MOMENT,
 				ContextConstants.NOT_AVAILABLE);
 	}
 
 	public String getProductLine(String sku) {
 		String[] lines = getNotAvailableForTheMomentProductsSectionText().split("\r\n");
-		System.out.println("lines" + lines.length);
 		String searchedLine = "";
 		for (String line : lines) {
 			if (line.contains(sku)) {

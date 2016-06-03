@@ -34,7 +34,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US26.1 Check products in availability report", type = "Scenarios")
 @Story(Application.AvailabilityReport.US26_1.class)
 @RunWith(SerenityRunner.class)
-public class USTest extends BaseTest {
+public class US26001VerifyTpProductsForNotAllowedForTpStylistTest extends BaseTest {
 
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
@@ -80,9 +80,9 @@ public class USTest extends BaseTest {
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setName("AV_REPORT_AUT_" + genProduct3.getName());
 		stockData = MagentoProductCalls.createNotAvailableYetStockData("");
-		stockData.setQty("-5");
-		stockData.setMinQty("-10");
-		stockData.setIsInStock("1");
+		stockData.setQty("0");
+		stockData.setMinQty("0");
+		stockData.setIsInStock("0");
 		stockData.setIsDiscontinued("0");
 		genProduct3.setStockData(stockData);
 		MagentoProductCalls.createApiProduct(genProduct3);
@@ -91,10 +91,10 @@ public class USTest extends BaseTest {
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8003.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss26" + File.separator + "us26001.properties");
 			prop.load(input);
-			stylistUsername = prop.getProperty("stylistUsername");
-			stylistPassword = prop.getProperty("stylistPassword");
+			stylistUsername = prop.getProperty("noTpStylistUsername");
+			stylistPassword = prop.getProperty("noTpStylistPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -110,16 +110,20 @@ public class USTest extends BaseTest {
 	}
 
 	@Test
-	public void usTest() throws IOException, ParseException {
+	public void us26001VerifyTpProductsForNotAllowedForTpStylistTest() throws IOException, ParseException {
 
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
-		reportsSteps.verifyThatProductHasAsteriscNextToAvDate(genProduct1);
+//		reportsSteps.verifyTpInfoMessage(false);
+		reportsSteps.verifyNoAsteriscNextToAvDate(genProduct1);
+		reportsSteps.verifyNoAsteriscNextToAvDate(genProduct2);
+		reportsSteps.verifyNoAsteriscNextToWillBeAnnouncedStatus(genProduct3);
 	}
 
 }
