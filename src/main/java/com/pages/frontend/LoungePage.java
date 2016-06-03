@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.tools.data.frontend.LoungeIpPerformanceModel;
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.PrintUtils;
 
@@ -93,8 +94,9 @@ public class LoungePage extends AbstractPage {
 		Actions builder = new Actions(getDriver());
 
 		builder.moveToElement(meinBusinessButton).build().perform();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		builder.moveToElement(stylePartiesLink).build().perform();
-
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		element(createPartyButton).waitUntilVisible();
 		createPartyButton.click();
 
@@ -105,7 +107,9 @@ public class LoungePage extends AbstractPage {
 		Actions builder = new Actions(getDriver());
 
 		builder.moveToElement(meinBusinessButton).build().perform();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		builder.moveToElement(stylePartiesLink).build().perform();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 
 		element(partyListButton).waitUntilVisible();
 		partyListButton.click();
@@ -117,8 +121,9 @@ public class LoungePage extends AbstractPage {
 		Actions builder = new Actions(getDriver());
 
 		builder.moveToElement(meinBusinessButton).build().perform();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		builder.moveToElement(customerOrderLink).build().perform();
-
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		element(startOrderForCustomerLink).waitUntilVisible();
 		startOrderForCustomerLink.click();
 
