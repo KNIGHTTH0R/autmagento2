@@ -181,7 +181,6 @@ public class ShippingSteps extends AbstractSteps {
 	public void selectShippingAddress(String value) {
 		// shippingFormPage().verifyThatYouCannotShipOnRestrictedCountries();
 		shippingFormPage().selectShippingAddress(value);
-		waitABit(1000);
 	}
 
 	@Step

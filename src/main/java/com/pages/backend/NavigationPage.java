@@ -6,6 +6,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
@@ -24,16 +25,21 @@ public class NavigationPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(popUpWindow).waitUntilVisible();
 		popUpWindow.findElement(By.cssSelector("div.message-popup-head > a")).click();
+		waitABit(1000);
 	}
 
 	public void selectMenuFromNavbar(String menu, String submenu) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(navigationBar).waitUntilVisible();
 		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li"));
+		Actions builder = new Actions(getDriver());
+
+		
 
 		for (WebElement menuNow : menuList) {
 
 			if (menuNow.findElement(By.cssSelector("a")).getText().contentEquals(menu)) {
+				builder.moveToElement(menuNow.findElement(By.cssSelector("a"))).build().perform();
 				menuNow.click();
 				waitABit(TimeConstants.WAIT_TIME_SMALL);
 

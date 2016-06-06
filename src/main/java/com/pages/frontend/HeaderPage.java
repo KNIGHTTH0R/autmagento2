@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class HeaderPage extends AbstractPage {
@@ -110,6 +111,7 @@ public class HeaderPage extends AbstractPage {
 		element(goToCartButton).waitUntilVisible();
 		waitFor(ExpectedConditions.elementToBeClickable(goToCartButton));
 		goToCartButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickShoppingBag() {

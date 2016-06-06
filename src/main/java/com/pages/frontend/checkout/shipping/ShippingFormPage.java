@@ -123,6 +123,8 @@ public class ShippingFormPage extends AbstractPage {
 	public void selectShippingAddress(String value) {
 		element(addressDropDown).waitUntilVisible();
 		element(addressDropDown).selectByVisibleText(value);
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void verifyThatYouCannotShipOnRestrictedCountries() {

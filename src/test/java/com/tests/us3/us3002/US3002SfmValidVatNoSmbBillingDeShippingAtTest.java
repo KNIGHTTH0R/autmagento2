@@ -44,7 +44,7 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT",type = "Scenarios")
+@WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_2.class)
 @RunWith(SerenityRunner.class)
 public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
@@ -69,12 +69,11 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ValidationWorkflows validationWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private String username, password;
 	private static String billingAddress;
-	private static String shippingAddress;
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
@@ -83,20 +82,20 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
-		
-		genProduct1 = MagentoProductCalls.createProductModel();		
+
+		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		
-		genProduct2 = MagentoProductCalls.createProductModel();		
+
+		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct2);
-		
+
 		genProduct3 = MagentoProductCalls.createMarketingProductModel();
 		genProduct3.setPrice("229.00");
 		MagentoProductCalls.createApiProduct(genProduct3);
@@ -106,18 +105,15 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3002.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
-//			if (!MongoReader.getContext().contentEquals("de")) {
-//				shippingValue = "7.56";
-//			}
 			taxClass = prop.getProperty("taxClass");
 
 		} catch (IOException ex) {
@@ -146,14 +142,14 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		homeSteps.clickonGeneralView();
 		customerRegistrationSteps.wipeCart();
 		BasicProductModel productData;
-		
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_50);
+
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_50);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
 		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 
@@ -168,21 +164,18 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
-		
+
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
-		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();			
+		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
 		cartSteps.grabTotals();
 		cartSteps.goToShipping();
 		
-		if (!MongoReader.getContext().contentEquals("de")) {
-			CartCalculator.calculateShippingWith19PercentRemoved(shippingValue);
-		}
+		CartCalculator.calculateShippingWith19PercentRemoved(shippingValue);
 
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.selectShippingAddress(shippingAddress);
-		
+		shippingSteps.setSameAsBilling(true);
+
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
@@ -202,21 +195,19 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		
-		validationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		if (!MongoReader.getContext().contentEquals("de")) {
-			validationWorkflows.performCartValidations119Vat();
-		} else {
-			validationWorkflows.performCartValidations();
-		}
-		
+
+		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		validationWorkflows.performCartValidations119Vat();
+
 		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
-		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
