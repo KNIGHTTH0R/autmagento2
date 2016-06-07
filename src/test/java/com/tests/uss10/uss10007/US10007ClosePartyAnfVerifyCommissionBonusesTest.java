@@ -22,6 +22,7 @@ import com.tools.CustomVerification;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.generalCalculation.PartyBonusCalculation;
@@ -104,10 +105,12 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.verifyPartyStatus(ContextConstants.PARTY_ACTIVE_WITH_ORDERS);
 		partyDetailsSteps.verifyActivePartyAvailableActions();
 		partyDetailsSteps.closeTheParty();
-		partyDetailsSteps.verifyClosedPartyAvailableActions();
 		partyDetailsSteps.returnToParty();
+		partyDetailsSteps.verifyClosedPartyAvailableActions();
+		
 		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
 
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);

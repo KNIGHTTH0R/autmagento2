@@ -19,8 +19,6 @@ public class NavigationPage extends AbstractPage {
 	@FindBy(id = "message-popup-window")
 	private WebElement popUpWindow;
 
-
-
 	public void dismissPopUp() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(popUpWindow).waitUntilVisible();
@@ -32,21 +30,20 @@ public class NavigationPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(navigationBar).waitUntilVisible();
 		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li"));
-		Actions builder = new Actions(getDriver());
 
-		
+		Actions builder = new Actions(getDriver());
 
 		for (WebElement menuNow : menuList) {
 
 			if (menuNow.findElement(By.cssSelector("a")).getText().contentEquals(menu)) {
-				builder.moveToElement(menuNow.findElement(By.cssSelector("a"))).build().perform();
-				menuNow.click();
+				builder.moveToElement(menuNow).build().perform();
+				waitABit(TimeConstants.WAIT_TIME_SMALL);
 				waitABit(TimeConstants.WAIT_TIME_SMALL);
 
 				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li > a"));
 
 				for (WebElement submenuNow : submenuList) {
-
+					System.out.println(submenuNow.getText());
 					if (submenuNow.getText().contentEquals(submenu)) {
 						submenuNow.click();
 						waitABit(TimeConstants.WAIT_TIME_SMALL);
@@ -55,7 +52,6 @@ public class NavigationPage extends AbstractPage {
 				}
 				break;
 			}
-
 		}
 	}
 }

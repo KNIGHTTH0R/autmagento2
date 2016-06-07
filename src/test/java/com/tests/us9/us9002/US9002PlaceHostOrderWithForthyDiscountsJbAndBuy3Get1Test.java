@@ -152,7 +152,7 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
-		partyUrlModel = MongoReader.grabUrlModels("US10008CreatePartyWithNewContactHostTest").get(0);
+		partyUrlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
 	}
 
 	@Test

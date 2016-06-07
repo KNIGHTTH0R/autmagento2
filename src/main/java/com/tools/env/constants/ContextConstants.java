@@ -37,6 +37,7 @@ public class ContextConstants {
 	public static String PARTY_PLANNED = MongoReader.getDictionaryItem("PARTY_PLANNED");
 	public static String PARTY_ACTIVE = MongoReader.getDictionaryItem("PARTY_ACTIVE");
 	public static String PARTY_CLOSED = MongoReader.getDictionaryItem("PARTY_CLOSED");
+	public static String PARTY_ACTIVE_WITH_ORDERS = MongoReader.getDictionaryItem("PARTY_ACTIVE_WITH_ORDERS");
 	public static String BOUNUS_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("BOUNUS_SUCCESS_MESSAGE");
 	public static String CREDIT_MEMO_REFUNDED = MongoReader.getDictionaryItem("CREDIT_MEMO_REFUNDED");
 	public static String CUSTOMER_SAVE_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("CUSTOMER_SAVE_SUCCESS_MESSAGE");

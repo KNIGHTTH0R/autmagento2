@@ -53,6 +53,9 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US11006Suite.class,
 	US11007Suite.class,
 	
+	US10007SuitePartOne.class,
+	US10008Suite.class,
+	
 	US9001Suite.class,
 	US9002Suite.class,
 	US9002bSuite.class,
