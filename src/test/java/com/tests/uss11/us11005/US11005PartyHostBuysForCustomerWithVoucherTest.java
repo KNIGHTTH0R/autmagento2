@@ -174,7 +174,6 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		headerSteps.goToCart();
 
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
-		orderForCustomerCartSteps.submitVoucherCode();
 
 		orderForCustomerCartSteps.grabProductsData();
 		orderForCustomerCartSteps.grabTotals(voucherCode);

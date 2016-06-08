@@ -174,7 +174,7 @@ public class OrderForCustomerCartPage extends AbstractPage {
 	public void submitVoucherCode() {
 		element(submitVoucherCode).waitUntilVisible();
 		submitVoucherCode.click();
-		waitABit(2000);
+		waitABit(3000);
 	}
 
 }

@@ -122,7 +122,7 @@ public class US9001ValidateOrderBackOfficeTest extends BaseTest {
 		hostOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		hostOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
-		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung wird geprüft");
 		
 		customVerifications.printErrors();
 	}

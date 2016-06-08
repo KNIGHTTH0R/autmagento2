@@ -37,8 +37,7 @@ public class NavigationPage extends AbstractPage {
 
 			if (menuNow.findElement(By.cssSelector("a")).getText().contentEquals(menu)) {
 				builder.moveToElement(menuNow).build().perform();
-				waitABit(TimeConstants.WAIT_TIME_SMALL);
-				waitABit(TimeConstants.WAIT_TIME_SMALL);
+				waitABit(TimeConstants.TIME_CONSTANT);
 
 				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li > a"));
 

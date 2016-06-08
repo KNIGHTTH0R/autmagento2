@@ -177,7 +177,6 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 		headerSteps.goToCart();
 
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
-		orderForCustomerCartSteps.submitVoucherCode();
 
 		orderForCustomerCartSteps.grabProductsData();
 		orderForCustomerCartSteps.grabTotals(voucherCode);

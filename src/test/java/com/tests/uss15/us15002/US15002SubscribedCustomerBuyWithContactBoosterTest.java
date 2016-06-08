@@ -159,7 +159,6 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 		headerSteps.goToCart();
 
 		regularUserCartSteps.typeCouponCode(koboCode);
-		regularUserCartSteps.submitVoucherCode();
 
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
 

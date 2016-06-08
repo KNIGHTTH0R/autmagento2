@@ -177,6 +177,8 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 		contactHostShippingHostSteps.checkItemNotReceivedYet();
 		contactHostShippingHostSteps.selectCountry(country);
 		contactHostShippingHostSteps.enterPLZ(plz);
+		//the following line is duplicate (is a workaround due to a bug)
+		contactHostShippingHostSteps.checkItemNotReceivedYet();
 		shippingPartySectionSteps.clickShipToStylecoach();
 		shippingPartySectionSteps.selectShipToStylecoachAddress(shippingAddress);
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();

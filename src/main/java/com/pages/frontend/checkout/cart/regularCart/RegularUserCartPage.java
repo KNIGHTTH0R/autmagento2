@@ -85,6 +85,7 @@ public class RegularUserCartPage extends AbstractPage {
 	public void submitVoucherCode() {
 		element(submitVoucherCode).waitUntilVisible();
 		submitVoucherCode.click();
+		waitABit(3000);
 	}
 
 	public void validateNotPrefferedShopAndGoToPreferredOne() {

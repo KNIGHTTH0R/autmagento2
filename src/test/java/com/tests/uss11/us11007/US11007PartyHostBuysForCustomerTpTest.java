@@ -216,7 +216,6 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		regularUserCartSteps.verifyMultipleDeliveryOption();
 
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
-		orderForCustomerCartSteps.submitVoucherCode();
 
 		orderForCustomerCartSteps.grabProductsData();
 		orderForCustomerCartSteps.grabTotals(voucherCode);

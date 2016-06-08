@@ -161,7 +161,6 @@ public class US8006CustomerBuyWithVoucherPartiallyOnShippingTest extends BaseTes
 		headerSteps.goToCart();		
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
-		regularUserCartSteps.submitVoucherCode();
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);

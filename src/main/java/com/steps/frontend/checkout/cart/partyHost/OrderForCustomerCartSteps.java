@@ -36,12 +36,13 @@ public class OrderForCustomerCartSteps extends AbstractSteps {
 	@Step
 	public void typeCouponCode(String code) {
 		orderForCustomerCartPage().typeCouponCode(code);
-	}
-
-	@Step
-	public void submitVoucherCode() {
 		orderForCustomerCartPage().submitVoucherCode();
 	}
+
+//	@Step
+//	public void submitVoucherCode() {
+//		orderForCustomerCartPage().submitVoucherCode();
+//	}
 
 	@Step
 	public void openSearchProductsModal() {

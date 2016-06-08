@@ -177,12 +177,10 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		headerSteps.goToCart();
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
-		regularUserCartSteps.submitVoucherCode();
 
 		regularUserCartSteps.validateNotPrefferedShopAndGoToPreferredOne();
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
-		regularUserCartSteps.submitVoucherCode();
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
