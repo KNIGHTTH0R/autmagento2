@@ -2,14 +2,15 @@ package com.pages.backend;
 
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class NavigationPage extends AbstractPage {
 
@@ -29,20 +30,19 @@ public class NavigationPage extends AbstractPage {
 	public void selectMenuFromNavbar(String menu, String submenu) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(navigationBar).waitUntilVisible();
-		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li"));
-
-		Actions builder = new Actions(getDriver());
-
+		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li.parent.level0"));
+		Actions action = new Actions(getDriver());
 		for (WebElement menuNow : menuList) {
 
 			if (menuNow.findElement(By.cssSelector("a")).getText().contentEquals(menu)) {
-				builder.moveToElement(menuNow).build().perform();
-				waitABit(TimeConstants.TIME_CONSTANT);
-
-				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li > a"));
+				
+				action.moveToElement(menuNow).build().perform();
+				
+				waitFor(ExpectedConditions.visibilityOfAllElements(menuNow.findElements(By.cssSelector("ul > li.level1 > a > span"))));
+				
+				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li.level1"));
 
 				for (WebElement submenuNow : submenuList) {
-					System.out.println(submenuNow.getText());
 					if (submenuNow.getText().contentEquals(submenu)) {
 						submenuNow.click();
 						waitABit(TimeConstants.WAIT_TIME_SMALL);

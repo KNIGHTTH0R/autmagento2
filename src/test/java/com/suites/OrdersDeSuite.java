@@ -17,8 +17,6 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US10007CreatePartyWithStylistHostTest.class,
 	US10008CreatePartyWithExistingContactHostTest.class,
 	
-	US001Suite.class,
-	US002Suite.class,
 	US3001Suite.class,
 	US3002Suite.class,
 	US3003Suite.class,

@@ -192,6 +192,10 @@ public class DateUtils {
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
+		//if the current day is Friday we want to return the next friday
+		if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY){
+			calendar.add(Calendar.DATE, 1);
+		}
 
 		while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.FRIDAY) {
 			calendar.add(Calendar.DATE, 1);
