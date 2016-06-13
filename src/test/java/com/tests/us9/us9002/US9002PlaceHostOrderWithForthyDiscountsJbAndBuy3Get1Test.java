@@ -216,12 +216,12 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
-//		confirmationSteps.agreeAndCheckout();
-//
-//		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, contactBillingAddress);
-//		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
-//
-//		customVerifications.printErrors();
+		confirmationSteps.agreeAndCheckout();
+
+		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, contactBillingAddress);
+		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
+
+		customVerifications.printErrors();
 	}
 
 	@After
