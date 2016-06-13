@@ -51,7 +51,7 @@ public class ProductSteps extends AbstractSteps {
 		result.setPriceIP(ip);
 
 		addToCart();
-		waitABit(TimeConstants.TIME_CONSTANT);
+//		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
 

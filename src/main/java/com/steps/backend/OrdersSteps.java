@@ -67,7 +67,7 @@ public class OrdersSteps extends AbstractSteps {
 		ordersActionsPage().checkCreateShippment();
 		ordersActionsPage().submitInvoice();
 		ordersActionsPage().verifyInvoiceShippingSubmitedMessage();
-		waitABit(5000);
+		
 	}
 
 	@Step

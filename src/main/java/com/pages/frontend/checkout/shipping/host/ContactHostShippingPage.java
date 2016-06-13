@@ -32,6 +32,7 @@ public class ContactHostShippingPage extends AbstractPage {
 	public void checkItemNotReceivedYet() {
 		element(itemNotReceived).waitUntilVisible();
 		itemNotReceived.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void verifyStyleCoachAndOrderForDetails(String details) {
@@ -47,6 +48,7 @@ public class ContactHostShippingPage extends AbstractPage {
 	public void enterPLZ(String plz) {
 		element(plzInput).waitUntilVisible();
 		element(plzInput).clear();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		element(plzInput).sendKeys(plz);
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}

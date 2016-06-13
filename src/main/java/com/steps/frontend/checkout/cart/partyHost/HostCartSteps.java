@@ -19,8 +19,6 @@ public class HostCartSteps extends AbstractSteps {
 		hostCartPage().selectProductDiscountType(productCode, discountType);
 	}
 
-	@Step
-	@Title("Update product list")
 	public void updateProductList(List<HostBasicProductModel> productsList, String productCode, String discountType) {
 		hostCartPage().updateProductList(productsList, productCode, discountType);
 	}

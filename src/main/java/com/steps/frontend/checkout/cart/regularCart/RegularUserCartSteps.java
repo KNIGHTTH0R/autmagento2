@@ -5,15 +5,9 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.thoughtworks.selenium.Wait;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
-import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;
@@ -54,8 +48,6 @@ public class RegularUserCartSteps extends AbstractSteps {
 		regularUserCartPage().validateThatShippingOnSelectedCountryIsNotAllowed();
 	}
 
-	@Step
-	@Title("Update product list")
 	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode,
 			String discountType) {
 		regularUserCartPage().updateProductList(productsList, productCode, discountType);

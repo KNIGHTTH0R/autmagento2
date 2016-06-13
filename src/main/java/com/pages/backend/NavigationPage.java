@@ -12,6 +12,10 @@ import com.tools.requirements.AbstractPage;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+/**
+ * @author mihai
+ *
+ */
 public class NavigationPage extends AbstractPage {
 
 	@FindBy(id = "nav")
@@ -35,20 +39,30 @@ public class NavigationPage extends AbstractPage {
 		for (WebElement menuNow : menuList) {
 
 			if (menuNow.findElement(By.cssSelector("a")).getText().contentEquals(menu)) {
-				
+
 				action.moveToElement(menuNow).build().perform();
-				
-				waitFor(ExpectedConditions.visibilityOfAllElements(menuNow.findElements(By.cssSelector("ul > li.level1 > a > span"))));
-				
+
 				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li.level1"));
 
 				for (WebElement submenuNow : submenuList) {
-					if (submenuNow.getText().contentEquals(submenu)) {
+					if (submenuNow.findElement(By.cssSelector("a > span")).getText().contentEquals(submenu)) {
 						submenuNow.click();
 						waitABit(TimeConstants.WAIT_TIME_SMALL);
 						break;
 					}
 				}
+				break;
+			}
+		}
+	}
+
+	public void selectSubmenu(String submenu) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(navigationBar).waitUntilVisible();
+		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li.parent.level0 ul > li.level1 > a"));
+		for (WebElement menuNow : menuList) {
+			if (menuNow.getAttribute("href").contains(submenu)) {
+				getDriver().get(menuNow.getAttribute("href"));
 				break;
 			}
 		}

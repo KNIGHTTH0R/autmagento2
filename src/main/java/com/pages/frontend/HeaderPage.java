@@ -2,9 +2,6 @@ package com.pages.frontend;
 
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-import net.serenitybdd.core.pages.WebElementFacade;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,6 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
 
 public class HeaderPage extends AbstractPage {
 
@@ -83,7 +83,7 @@ public class HeaderPage extends AbstractPage {
 	}
 
 	public void searchInput(String seachKey) {
-		element(searchInput).waitUntilVisible();
+		element(searchInput).waitUntilClickable();
 		searchInput.sendKeys(seachKey);
 	}
 
@@ -118,6 +118,7 @@ public class HeaderPage extends AbstractPage {
 		element(shoppingBagButton).waitUntilVisible();
 		waitFor(ExpectedConditions.elementToBeClickable(shoppingBagButton));
 		shoppingBagButton.click();
+		waitABit(1000);
 	}
 
 	public String getShoppingBagTotalSum() {

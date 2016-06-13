@@ -1,7 +1,5 @@
 package com.pages.frontend;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +12,8 @@ import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class ProductDetailsPage extends AbstractPage {
 
@@ -52,9 +52,10 @@ public class ProductDetailsPage extends AbstractPage {
 	public void addToCart() {
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"),
-				ContextConstants.PRODUCT_ADDED_INTO_CART));
-		waitABit(TimeConstants.TIME_CONSTANT);
+		//TODO add a retry here
+		while (getDriver().findElement(By.cssSelector("div#add-to-cart-modal")).isDisplayed()) {
+			waitABit(1000);
+		}
 	}
 
 	public void addToWishlist() {

@@ -41,55 +41,92 @@ public class BackEndSteps extends AbstractSteps {
 		magentoLoginPage().clickOnLogin();
 	}
 
+//	@Step
+//	public void clickOnCustomers() {
+//		navigationPage().selectMenuFromNavbar("Kunden", "Kunden verwalten");
+//	}
 	@Step
 	public void clickOnCustomers() {
-		navigationPage().selectMenuFromNavbar("Kunden", "Kunden verwalten");
+		navigationPage().selectSubmenu("customer");
 	}
 
+//	@Step
+//	public void clickOnProducts() {
+//		navigationPage().selectMenuFromNavbar("Katalog", "Produkte verwalten");
+//	}
 	@Step
 	public void clickOnProducts() {
-		navigationPage().selectMenuFromNavbar("Katalog", "Produkte verwalten");
+		navigationPage().selectSubmenu("catalog_product");
 	}
 
+//	@Step
+//	public void goToNewsletterSubribers() {
+//		navigationPage().selectMenuFromNavbar("Newsletter", "Newsletter Bezieher");
+//	}
 	@Step
 	public void goToNewsletterSubribers() {
-		navigationPage().selectMenuFromNavbar("Newsletter", "Newsletter Bezieher");
+		navigationPage().selectSubmenu("newsletter_subscriber");
 	}
 
+//	@Step
+//	public void clickOnStyleParties() {
+//		navigationPage().selectMenuFromNavbar("Stylecoach", "Style Parties");
+//	}
 	@Step
 	public void clickOnStyleParties() {
-		navigationPage().selectMenuFromNavbar("Stylecoach", "Style Parties");
+		navigationPage().selectSubmenu("party");
 	}
 
+//	@Step
+//	public void clickOnStylecoachList() {
+//		navigationPage().selectMenuFromNavbar("Stylecoach", "Stylecoach List");
+//	}
 	@Step
 	public void clickOnStylecoachList() {
-		navigationPage().selectMenuFromNavbar("Stylecoach", "Stylecoach List");
+		navigationPage().selectSubmenu("stylist");
 	}
 
+	// @Step
+	// public void clickOnContactList() {
+	// navigationPage().selectMenuFromNavbar("Stylecoach", "Kontakte");
+	// }
 	@Step
 	public void clickOnContactList() {
-		navigationPage().selectMenuFromNavbar("Stylecoach", "Kontakte");
+		navigationPage().selectSubmenu("contact");
 	}
 
+	// @Step
+	// public void clickOnShoppingCartPriceRules() {
+	// navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb
+	// Preisgebote");
+	// }
 	@Step
 	public void clickOnShoppingCartPriceRules() {
-		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
+		navigationPage().selectSubmenu("promo_quote");
 	}
 
+	// @Step
+	// public void clickOnSalesOrders() {
+	// navigationPage().selectMenuFromNavbar("Verkäufe", "Aufträge");
+	// }
 	@Step
 	public void clickOnSalesOrders() {
-		navigationPage().selectMenuFromNavbar("Verkäufe", "Aufträge");
+		navigationPage().selectSubmenu("sales_order");
 	}
 
+//	@Step
+//	public void clickOnCreditMemo() {
+//		navigationPage().selectMenuFromNavbar("Verkäufe", "Gutschriften");
+//	}
 	@Step
 	public void clickOnCreditMemo() {
-		navigationPage().selectMenuFromNavbar("Verkäufe", "Gutschriften");
+		navigationPage().selectSubmenu("sales_creditmemo");
 	}
 
 	@Step
 	public void searchForEmail(String emailText) {
-//		customerListPage().clickOnResetFilter();
-//		waitABit(3000);
+		// customerListPage().clickOnResetFilter();
+		// waitABit(3000);
 		customerListPage().inputEmailFilter(emailText);
 		customerListPage().clickOnSearch();
 

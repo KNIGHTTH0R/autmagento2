@@ -193,6 +193,8 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 		contactHostShippingHostSteps.verifyThatRestrictedCountriesAreNotAvailable();
 		contactHostShippingHostSteps.selectCountry(country);
 		contactHostShippingHostSteps.enterPLZ(plz);
+		//the following line is duplicate (is a workaround due to a bug)
+		contactHostShippingHostSteps.checkItemNotReceivedYet();
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 
@@ -214,12 +216,12 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
-		confirmationSteps.agreeAndCheckout();
-
-		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, contactBillingAddress);
-		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
-
-		customVerifications.printErrors();
+//		confirmationSteps.agreeAndCheckout();
+//
+//		hostCartValidationWorkflows.setBillingShippingAddress(contactBillingAddress, contactBillingAddress);
+//		hostCartValidationWorkflows.performCartValidationsWith40DiscountAndJbAndBuy3Get1();
+//
+//		customVerifications.printErrors();
 	}
 
 	@After
