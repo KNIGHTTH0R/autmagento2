@@ -2,13 +2,12 @@ package com.steps.frontend.checkout.cart.partyHost;
 
 import java.util.List;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Title;
-
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
 
 public class HostCartSteps extends AbstractSteps {
 

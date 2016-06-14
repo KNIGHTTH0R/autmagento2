@@ -92,7 +92,7 @@ public class BackEndSteps extends AbstractSteps {
 	// }
 	@Step
 	public void clickOnContactList() {
-		navigationPage().selectSubmenu("contact");
+		navigationPage().selectSubmenu("contact/index/key/");
 	}
 
 	// @Step
