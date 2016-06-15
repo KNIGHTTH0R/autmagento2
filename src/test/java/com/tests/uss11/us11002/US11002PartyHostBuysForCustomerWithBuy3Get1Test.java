@@ -157,12 +157,15 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
+//		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			partyDetailsSteps.orderForCustomerFromParty(customerName);
+//			System.out.println(!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName));
+//		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName));
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;
-
+		
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 		HostCartCalculator.allProductsList.add(productData);
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "2", "0");
@@ -182,7 +185,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 		shippingPartySectionSteps.enterPLZ(plz);
 		shippingPartySectionSteps.selectCountry(country);
-	
+
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 

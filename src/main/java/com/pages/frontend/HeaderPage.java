@@ -24,8 +24,8 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(css = ".top-search-icon")
 	private WebElement submitSearch;
 
-	@FindBy(id = "#add-to-cart")
-	private WebElement addToCartButton;
+//	@FindBy(id = "#add-to-cart")
+//	private WebElement addToCartButton;
 
 	@FindBy(css = "a.button[href*='cart']")
 	private WebElement goToCartButton;
@@ -102,10 +102,10 @@ public class HeaderPage extends AbstractPage {
 		wishlist.click();
 	}
 
-	public void clickAddToCart() {
-		element(addToCartButton).waitUntilVisible();
-		addToCartButton.click();
-	}
+//	public void clickAddToCart() {
+//		element(addToCartButton).waitUntilVisible();
+//		addToCartButton.click();
+//	}
 
 	public void clickGoToCart() {
 		element(goToCartButton).waitUntilVisible();
@@ -116,6 +116,7 @@ public class HeaderPage extends AbstractPage {
 
 	public void clickShoppingBag() {
 		element(shoppingBagButton).waitUntilVisible();
+		element(shoppingBagButton).waitUntilEnabled();
 		waitFor(ExpectedConditions.elementToBeClickable(shoppingBagButton));
 		shoppingBagButton.click();
 		waitABit(1000);

@@ -54,6 +54,7 @@ public class ProductDetailsPage extends AbstractPage {
 		while (getDriver().findElement(By.cssSelector("div#add-to-cart-modal")).isDisplayed()) {
 			waitABit(1000);
 		}
+		waitABit(500);
 	}
 
 	public void addToWishlist() {

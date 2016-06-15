@@ -30,9 +30,15 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 		contactInput.sendKeys(name);
 		waitABit(TimeConstants.TIME_CONSTANT);
 		element(selectContact).waitUntilVisible();
-		element(selectContact).click();
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		if (selectContact.getText().contentEquals(name)) {
+			element(selectContact).click();
+			waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+					ContextConstants.LOADING_MESSAGE));
+			waitABit(TimeConstants.WAIT_TIME_SMALL);
+		} else {
+			Assert.fail("The contact was not found");
+		}
+
 	}
 
 	public void startOrderForCustomer() {
@@ -41,6 +47,7 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 	}
 
 	public void verifyCustomerIsNotSuitableForTheOrderErrorMessage() {
-		Assert.assertTrue("The error message should be present !!!", errorMessageContainer.getText().contains(ContextConstants.ORDER_FOR_WRONG_CUSTOMER_ERROR_MESSAGE));
+		Assert.assertTrue("The error message should be present !!!",
+				errorMessageContainer.getText().contains(ContextConstants.ORDER_FOR_WRONG_CUSTOMER_ERROR_MESSAGE));
 	}
 }
