@@ -158,9 +158,11 @@ public class US11004PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			partyDetailsSteps.orderForCustomerFromParty(customerName);
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		customerRegistrationSteps.wipeHostCart();
 
 		HostBasicProductModel productData;

@@ -29,6 +29,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
+import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
@@ -69,6 +70,8 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 	public ConfirmationSteps confirmationSteps;
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
+	@Steps
+	public OrderForCustomerCartSteps orderForCustomerCartSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -130,11 +133,11 @@ public class US10008OrderForCustomerAsPartyHostTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToProfile();
-
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			partyDetailsSteps.orderForCustomerFromParty(customerName);
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		customerRegistrationSteps.wipeHostCart();
 		RegularBasicProductModel productData;
 

@@ -1,10 +1,13 @@
 package com.pages.frontend;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.frontend.LoungeIpPerformanceModel;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.PrintUtils;
@@ -75,8 +78,16 @@ public class LoungePage extends AbstractPage {
 	public void typeContactName(String name) {
 		element(contactInput).waitUntilVisible();
 		contactInput.sendKeys(name);
+		waitABit(TimeConstants.TIME_CONSTANT);
 		element(selectContact).waitUntilVisible();
-		element(selectContact).click();
+		if (selectContact.getText().contentEquals(name)) {
+			element(selectContact).click();
+			waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+					ContextConstants.LOADING_MESSAGE));
+			waitABit(TimeConstants.WAIT_TIME_SMALL);
+		} else {
+			Assert.fail("The contact was not found");
+		}
 	}
 
 	public void startOrderForCustomer() {

@@ -95,6 +95,8 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
+		
+		System.out.println("WARENKORB FR CHARLIE BARAIAN ARTIKEL IN DEN WARENKORB LEGEN WARENKORB IST LEER".contains("CHARLIE BARAIAN"));
 
 		creditCardData = new CreditCardModel();
 
@@ -157,12 +159,11 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-//		do {
+		do {
 			customerRegistrationSteps.navigate(urlModel.getUrl());
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
-//			System.out.println(!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName));
-//		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName));
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		customerRegistrationSteps.wipeHostCart();
 		HostBasicProductModel productData;
 		

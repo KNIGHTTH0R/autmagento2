@@ -16,7 +16,7 @@ public class SuccessPage extends AbstractPage {
 	private WebElement messageContainer;
 
 	public void verifySuccessMessage() {
-		waitABit(TimeConstants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_MEDIUM);
 		element(messageContainer).waitUntilVisible();
 		String pageText = messageContainer.getText();
 		Assert.assertTrue("Failure: Success message has not been found.", pageText.contains(ContextConstants.SUCCES_MESSAGE));
