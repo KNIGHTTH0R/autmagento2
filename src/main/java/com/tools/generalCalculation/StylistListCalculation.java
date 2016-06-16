@@ -85,7 +85,21 @@ public class StylistListCalculation {
 		return getFirstFiveStylistInRangeOrClosest(coordinatesModel, compatibleList, range);
 
 	}
-
+	/**
+	 * Takes the whole list of stylecoaches in two rounds(memory
+	 * constraints),filters the list by qualifications and returns compatible
+	 * list in range.If more than five exist, returns 5 from each category
+	 * 
+	 * mode - 1 for customer lead ,2 for host lead and 3 for stylecoach lead
+	 * 
+	 * @param coordinatesModel
+	 * @param range
+	 * @param filter
+	 * @param operand
+	 * @param operand2
+	 * @param filterValue
+	 * @param mode
+	 */
 	public static List<DBStylistModel> getCompatibleStylistsForDysks(CoordinatesModel coordinatesModel, String range,
 			String filter, String operand, String operand2, String filterValue, int mode) {
 

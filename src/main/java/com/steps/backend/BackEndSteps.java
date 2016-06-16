@@ -85,6 +85,10 @@ public class BackEndSteps extends AbstractSteps {
 	public void clickOnCreditMemo() {
 		navigationPage().selectMenuFromNavbar("Verkäufe", "Gutschriften");
 	}
+	@Step
+	public void clickOnTermPurchaseGrid() {
+		navigationPage().selectSubmenu("scheduledorders");
+	}
 
 	@Step
 	public void searchForEmail(String emailText) {

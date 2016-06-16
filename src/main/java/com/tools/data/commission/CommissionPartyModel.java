@@ -1,5 +1,7 @@
 package com.tools.data.commission;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class CommissionPartyModel {
 	
 	private String partyId;
@@ -21,6 +23,8 @@ public class CommissionPartyModel {
 	private String confirmedAt;
 	private String updatedAt;
 	private String deletedAt;
+	@JsonIgnore
+	private String status;
 	
 	
 	public String getPartyId() {

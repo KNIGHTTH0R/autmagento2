@@ -84,12 +84,16 @@ public class FormatterUtils {
 	 * @return new order id
 	 */
 
-	public static String getOrderId(String url, int incrementNumber) {
+	public static String getOrderId(String url) {
 
-		String result = extractOrderIDFromURL(url).replace("staging-int", "");
-		int number = Integer.parseInt(result) + incrementNumber;
+		return extractOrderIDFromURL(url).replace("staging-int", "");
+	}
 
-		return result = "staging-int" + StringUtils.leftPad(String.valueOf(number), 10, "0");
+	public static String incrementOrderId(String orderId, int incrementNumber) {
+
+		int number = Integer.parseInt(orderId) + incrementNumber;
+
+		return "staging-int" + StringUtils.leftPad(String.valueOf(number), 10, "0");
 	}
 
 	public static String cleanNumberToString(String unitPrice) {
@@ -203,8 +207,7 @@ public class FormatterUtils {
 	public static String[] splitDate(String dateOfBirth) {
 		String elems[] = dateOfBirth.split(Separators.DATE_SEPARATOR);
 		if (elems.length != 3) {
-			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'",
-					elems.length != 3);
+			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'", elems.length != 3);
 		}
 		return elems;
 	}

@@ -89,7 +89,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();

@@ -159,11 +159,10 @@ public class US9005PlaceHostOrderWithTpAndZeroAmountTest extends BaseTest {
 		// to place 0 amount order that page will be skipped
 		shippingSteps.goToPaymentMethod();
 
-		String url = shippingSteps.grabUrl();
-		HostDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
-		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
-		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
+		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
+		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
+		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
+		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 
 		paymentSteps.goBack();
 		shippingSteps.goBack();

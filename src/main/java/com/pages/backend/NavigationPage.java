@@ -18,8 +18,6 @@ public class NavigationPage extends AbstractPage {
 	@FindBy(id = "message-popup-window")
 	private WebElement popUpWindow;
 
-
-
 	public void dismissPopUp() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(popUpWindow).waitUntilVisible();
@@ -50,6 +48,18 @@ public class NavigationPage extends AbstractPage {
 				break;
 			}
 
+		}
+	}
+
+	public void selectSubmenu(String submenu) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(navigationBar).waitUntilVisible();
+		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li.parent.level0 ul > li.level1 > a"));
+		for (WebElement menuNow : menuList) {
+			if (menuNow.getAttribute("href").contains(submenu)) {
+				getDriver().get(menuNow.getAttribute("href"));
+				break;
+			}
 		}
 	}
 }

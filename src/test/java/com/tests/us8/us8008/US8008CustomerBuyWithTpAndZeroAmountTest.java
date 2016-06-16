@@ -153,11 +153,11 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		// (which is dysplayed only on that page);if you apply bonuses in order
 		// to place 0 amount order that page will be skipped
 		shippingSteps.goToPaymentMethod();
-		String url = shippingSteps.grabUrl();
-		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
-		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
-		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
+		
+		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
+		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
+		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
+		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 
 		paymentSteps.goBack();
 		shippingSteps.goBack();

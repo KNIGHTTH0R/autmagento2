@@ -21,7 +21,7 @@ public class StockCalculations {
 			if (isConstantStock)
 				product.setQuantity(product.getQuantity());
 			else {
-				product.setQuantity(calculateStock(product.getQuantity(), quantity));
+				product.setQuantity(calculateStockToDouble(product.getQuantity(), quantity));
 			}
 
 			product.setEarliestAvailability(product.getEarliestAvailability());
@@ -53,7 +53,7 @@ public class StockCalculations {
 
 			int index = initialList.indexOf(product);
 
-			product.setQuantity(calculateStock(product.getQuantity(), quantities.get(index)));
+			product.setQuantity(calculateStockToDouble(product.getQuantity(), quantities.get(index)));
 
 			product.setEarliestAvailability(product.getEarliestAvailability());
 			product.setIsDiscontinued(product.getIsDiscontinued());
@@ -85,10 +85,13 @@ public class StockCalculations {
 		return finalList;
 	}
 
-	private static String calculateStock(String currentStock, String quantityOnOrder) {
+	public static String calculateStockToDouble(String currentStock, String quantityOnOrder) {
 		return String.valueOf(Double.parseDouble(currentStock) - Integer.parseInt(quantityOnOrder));
 	}
-
+	public static String calculateStockToInt(String currentStock, String quantityOnOrder) {
+		return String.valueOf(Integer.parseInt(currentStock) - Integer.parseInt(quantityOnOrder));
+	}
+	
 	private static String addPendingStockToStock(SyncInfoModel product) {
 		return String.valueOf(Double.parseDouble(product.getQuantity()) + Double.parseDouble(product.getPendingQuantity()));
 	}
@@ -105,7 +108,7 @@ public class StockCalculations {
 
 		return String.valueOf(stock.intValue());
 	}
-
+	
 	public static void main(String args[]) {
 		System.out.println(StockCalculations.determineQuantity("1045.0000"));
 	}

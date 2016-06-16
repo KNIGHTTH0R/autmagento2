@@ -73,7 +73,52 @@ public class ConfigConstants {
 	public static final String BUNDLEARTIKEL_NAME = "AutomationTest";
 	public static final String LOADING = "Bitte warten ...";
 	
+	//term purchase grid - Reasons
+	public static final String REASON_POSTPONED_BY_ADMIN = "postponed by admin";
+	public static final String REASON_POSTPONED_NOT_ENOUGH_STOCK = "postponed because there is not enough stock";
+	public static final String REASON_POSTPONED_EARLIEST_AV_CHANGED = "postponed because earliest availability date of product has changed";
+	public static final String REASON_CANCEL_SOLD_OUT = "canceled because item is sold out";
+	public static final String REASON_CANCEL_POSTPONING_LIMIT_REACHED = "canceled because postponing limit was reached";
+	public static final String REASON_CANCEL_PAYMENT_FAILED = "canceled because payment failed";
 	
+	//term purchase grid - Recomandations
+	public static final String NO_RECOMMENDATION = "Keine Empfehlung";
+	public static final String RECOMMENDATION_TO_CANCEL = "Verschiebung empfohlen";
+	public static final String RECOMMENDATION_TO_POSTPONE = "Verschiebung empfohlen";
+	public static final String RECOMMENDATION_TO_RELEASE = "Freigabe empfohlen";
+	
+	//term purchase grid - Order statuses
+	public static final String TP_GRID_PAYMENT_ON_HOLD = "Payment on Hold";
+	public static final String TP_GRID_PAYMENT_COMPLETE = "Payment Complete";
+	public static final String TP_GRID_CANCELED = "Canceled";
+	public static final String TP_GRID_COMPLETE = "Complete";
+	public static final String TP_GRID_CLOSED = "Closed";
+	
+	//term purchase grid - Order statuses
+	public static final String PAYMENT_ON_HOLD = "Zahlung geplant";
+	public static final String PAYMENT_COMPLETE = "Zahlung erfolgreich";
+	public static final String CANCELED = "Canceled";
+	public static final String COMPLETE = "Complete";
+	public static final String CLOSED = "Closed";
+	public static final String PAYMENT_IN_PROGRESS = "Zahlung wird geprüft";
+	
+	//term purchase grid - Scheduled Payment statuses
+	public static final String PENDING = "Offene Bestellung";
+	public static final String POSTPONED = "Postponed";
 
+	//Term purchase grid -Actions
+	public static final String POSTPONE = "Postpone Order";
+	public static final String CANCEL = "Cancel Order";
+	public static final String RELEASE = "Release Order";
+	public static final String POSTPONE_ONE_WEEK = "1 week";
+	public static final String POSTPONE_TWO_WEEKS = "2 weeks";
+	public static final String POSTPONE_THREE_WEEKS = "3 weeks";
+	public static final String POSTPONE_FOUR_WEEKS = "4 weeks";
+	public static final String POSTPONE_FIVE_WEEKS = "5 weeks";
+	public static final String POSTPONE_SIX_WEEKS = "6 weeks";
+	public static final String POSTPONE_SEVEN_WEEKS = "7 weeks";
+	public static final String POSTPONE_EIGHT_WEEKS = "8 weeks";
+	
+	
 	
 }

@@ -251,6 +251,7 @@ public class MagentoProductCalls {
 		stockModel.setEarliestAvailability("");
 		stockModel.setMaximumPercentageToBorrow("");
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
+		
 		product.setStockData(stockModel);
 
 		product.setJewerlyBonusValue("50.00");

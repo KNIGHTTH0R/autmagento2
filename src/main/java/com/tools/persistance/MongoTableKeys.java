@@ -101,8 +101,11 @@ public class MongoTableKeys {
 	public static final String TERM_PURCHASE_IP_MODEL = "TermPurchaseIpModel";
 	public static final String CURRENT_MONTH_IP = "currentMonthIp";
 	public static final String NEXT_MONTH_IP = "nextMonthIp";
-
+ 
+	//ProductDetailedModel
 	public static final String PRODUCT_DETAILED_MODEL = "ProductDetailedModel";
+	public static final String NAMcvcvcvE = "name";
+	
 
 	public static final String PRODUCT_BASIC_MODEL = "ProductBasicModel";
 	public static final String NAME = "name";
@@ -120,6 +123,11 @@ public class MongoTableKeys {
 	public static final String PRODUCT_ASKING_PRICE = "askingPrice";
 	public static final String PRODUCT_FINAL_PRICE = "finalPrice";
 	public static final String PRODUCT_IP_POINTS = "ipPoints";
+	public static final String PRODUCT_DELIVERY_DATE = "deliveryDate";
+	public static final String PRODUCT_IN_STOCK = "inStock";
+	public static final String PRODUCT_MIN_QUANTITY = "minQty";
+	public static final String PRODUCT_IS_DISCONTINUED = "isDiscontinued";
+	public static final String STOCK_DATA_OBJECT = "stockDataObject";
 
 	// CalcDetailsModel
 	public static final String CALC_DETAILS_MODEL = "CalcDetailsModel";

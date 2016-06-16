@@ -6,8 +6,6 @@ import java.util.List;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 
-import org.junit.Assert;
-
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.DykscSeachModel;
@@ -30,25 +28,10 @@ public class DysksWorkflows {
 	public void validateStylists(String message) {
 
 		for (DBStylistModel stylistNow : dBStylistList) {
-			DykscSeachModel compare = findStylist(stylistNow.getStylistId(), dysksStylistList);
+			DykscSeachModel dykscStylist = findStylist(stylistNow.getStylistId(), dysksStylistList);
 
-			if (compare.getId() != null) {
-				validateStylistName(stylistNow.getFirstName(), compare.getName());
-
-			} else {
-				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
-			}
-
-			int index = dysksStylistList.indexOf(compare);
-			if (index > -1) {
-				dysksStylistList.remove(index);
-				System.out.println("index of " + compare.getName() + " removed");
-				System.out.println(dysksStylistList.size() + " items remained");
-			}
+			validateStylistName(stylistNow.getFirstName(), dykscStylist.getName());
 		}
-		Assert.assertTrue("Failure: Products list is empty. ", dBStylistList.size() != 0);
-		Assert.assertTrue("Failure: Not all products have been validated . ", dysksStylistList.size() == 0);
-
 	}
 
 	public DykscSeachModel findStylist(String id, List<DykscSeachModel> dysksStylistList) {

@@ -46,7 +46,7 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "accept-checkbox")
 	private WebElement iAgreeCheckbox;
 
-	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")
+	@FindBy(css = "div.buttons-set.form-buttons.page-bottom button")
 	private WebElement completeButton;
 
 	// ---------------------------------------------------

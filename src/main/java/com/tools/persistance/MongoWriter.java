@@ -291,7 +291,12 @@ public class MongoWriter extends MongoConnector {
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
 		document.put(MongoTableKeys.PRODUCT_CODE, product.getSku());
-
+		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getStockData().getQty());
+		document.put(MongoTableKeys.PRODUCT_IN_STOCK, product.getStockData().getIsInStock());
+		document.put(MongoTableKeys.PRODUCT_MIN_QUANTITY, product.getStockData().getMinQty());
+		document.put(MongoTableKeys.PRODUCT_IS_DISCONTINUED, product.getStockData().getIsDiscontinued());
+		document.put(MongoTableKeys.PRODUCT_DELIVERY_DATE, product.getStockData().getEarliestAvailability());
+		
 		table.insert(document);
 	}
 
@@ -349,6 +354,7 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getQuantity());
 		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
 		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getIpPoints());
+		document.put(MongoTableKeys.PRODUCT_DELIVERY_DATE, product.getDeliveryDate());
 
 		table.insert(document);
 	}

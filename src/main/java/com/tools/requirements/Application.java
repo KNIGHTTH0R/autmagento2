@@ -386,5 +386,10 @@ public class Application {
 		public class US29_1 {
 		}
 	}
-
+	
+	@Feature
+	public class CustomerRegistrationIoana {
+		public class US33_1 {
+		}
+	}
 }

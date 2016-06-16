@@ -15,25 +15,35 @@ public class HostDataGrabber {
 	public static OrderModel orderModel = new OrderModel();
 	public static OrderModel orderModelTp1 = new OrderModel();
 	public static OrderModel orderModelTp2 = new OrderModel();
+	public static OrderModel orderModelTp3 = new OrderModel();
+	public static OrderModel orderModelTp4 = new OrderModel();
 
 	public static HostCartTotalsModel hostGrabbedCartTotals = new HostCartTotalsModel();
 	public static ShippingModel hostShippingTotals = new ShippingModel();
 	public static ShippingModel hostShippingTotalsTp0 = new ShippingModel();
 	public static ShippingModel hostShippingTotalsTp1 = new ShippingModel();
 	public static ShippingModel hostShippingTotalsTp2 = new ShippingModel();
+	public static ShippingModel hostShippingTotalsTp3 = new ShippingModel();
+	public static ShippingModel hostShippingTotalsTp4 = new ShippingModel();
 	public static ShippingModel hostConfirmationTotals = new ShippingModel();
 	public static ShippingModel hostConfirmationTotalsTp0 = new ShippingModel();
 	public static ShippingModel hostConfirmationTotalsTp1 = new ShippingModel();
 	public static ShippingModel hostConfirmationTotalsTp2 = new ShippingModel();
+	public static ShippingModel hostConfirmationTotalsTp3 = new ShippingModel();
+	public static ShippingModel hostConfirmationTotalsTp4 = new ShippingModel();
 	public static List<HostCartProductModel> grabbedHostCartProductsList = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostShippingProductsList = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostShippingProductsListTp0 = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostShippingProductsListTp1 = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostShippingProductsListTp2 = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostShippingProductsListTp3 = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostShippingProductsListTp4 = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostConfirmationProductsList = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostConfirmationProductsListTp0 = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostConfirmationProductsListTp1 = new ArrayList<HostCartProductModel>();
 	public static List<HostCartProductModel> grabbedHostConfirmationProductsListTp2 = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostConfirmationProductsListTp3 = new ArrayList<HostCartProductModel>();
+	public static List<HostCartProductModel> grabbedHostConfirmationProductsListTp4 = new ArrayList<HostCartProductModel>();
 
 	public static void wipe() {
 
@@ -41,6 +51,8 @@ public class HostDataGrabber {
 		orderModel = new OrderModel();
 		orderModelTp1 = new OrderModel();
 		orderModelTp2 = new OrderModel();
+		orderModelTp3 = new OrderModel();
+		orderModelTp4 = new OrderModel();
 		
 		hostGrabbedCartTotals = new HostCartTotalsModel();
 		grabbedHostCartProductsList = new ArrayList<HostCartProductModel>();
@@ -48,18 +60,26 @@ public class HostDataGrabber {
 		grabbedHostShippingProductsListTp0 = new ArrayList<HostCartProductModel>();
 		grabbedHostShippingProductsListTp1 = new ArrayList<HostCartProductModel>();
 		grabbedHostShippingProductsListTp2 = new ArrayList<HostCartProductModel>();
+		grabbedHostShippingProductsListTp3 = new ArrayList<HostCartProductModel>();
+		grabbedHostShippingProductsListTp4 = new ArrayList<HostCartProductModel>();
 		hostShippingTotals = new ShippingModel();
 		hostShippingTotalsTp0 = new ShippingModel();
 		hostShippingTotalsTp1 = new ShippingModel();
 		hostShippingTotalsTp2 = new ShippingModel();
+		hostShippingTotalsTp3 = new ShippingModel();
+		hostShippingTotalsTp4 = new ShippingModel();
 		hostConfirmationTotals = new ShippingModel();
 		hostConfirmationTotalsTp0 = new ShippingModel();
 		hostConfirmationTotalsTp1 = new ShippingModel();
 		hostConfirmationTotalsTp2 = new ShippingModel();
+		hostConfirmationTotalsTp3 = new ShippingModel();
+		hostConfirmationTotalsTp4 = new ShippingModel();
 		grabbedHostConfirmationProductsList = new ArrayList<HostCartProductModel>();
 		grabbedHostConfirmationProductsListTp0 = new ArrayList<HostCartProductModel>();
 		grabbedHostConfirmationProductsListTp1 = new ArrayList<HostCartProductModel>();
 		grabbedHostConfirmationProductsListTp2 = new ArrayList<HostCartProductModel>();
+		grabbedHostConfirmationProductsListTp3 = new ArrayList<HostCartProductModel>();
+		grabbedHostConfirmationProductsListTp4 = new ArrayList<HostCartProductModel>();
 
 	}
 

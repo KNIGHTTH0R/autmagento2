@@ -2,6 +2,10 @@ package com.tools.requirements;
 
 import java.util.Set;
 
+import net.thucydides.core.annotations.Screenshots;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
+
 import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
@@ -26,6 +30,7 @@ import com.pages.backend.stylecoach.PartyDetailsBackendPage;
 import com.pages.backend.stylecoach.PartyListBackendPage;
 import com.pages.backend.stylecoach.StylecoachDetailsBackendPage;
 import com.pages.backend.stylecoach.StylecoachListBackendPage;
+import com.pages.backend.termPurchase.TermPurchaseGridPage;
 import com.pages.external.MailinatorPage;
 import com.pages.external.commission.CommissionReportPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
@@ -36,6 +41,7 @@ import com.pages.external.mailchimp.MailchimpListsPage;
 import com.pages.external.mailchimp.MailchimpLoginPage;
 import com.pages.external.mailchimp.MailchimpSearchPage;
 import com.pages.external.mailchimp.MailchimpSubscriberProfilePage;
+import com.pages.external.unbounce.UnbounceDykscPage;
 import com.pages.external.unbounce.UnbouncePage;
 import com.pages.external.unbounce.UnbounceRegSuccesPage;
 import com.pages.frontend.ContactDetailsPage;
@@ -102,10 +108,6 @@ import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
-
-import net.thucydides.core.annotations.Screenshots;
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -343,6 +345,10 @@ public class AbstractSteps extends ScenarioSteps {
 	public StylecoachDetailsBackendPage stylecoachDetailsBackendPage() {
 		return getPages().currentPageAt(StylecoachDetailsBackendPage.class);
 	}
+	
+	public TermPurchaseGridPage termPurchaseGridPage() {
+		return getPages().currentPageAt(TermPurchaseGridPage.class);
+	}
 
 	// -----------------------FE-----------------------------------
 	public LoginPage loginPage() {
@@ -470,6 +476,9 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 	public IpReportsPage ipReportsPage() {
 		return getPages().currentPageAt(IpReportsPage.class);
+	}
+	public UnbounceDykscPage unbounceDykscPage() {
+		return getPages().currentPageAt(UnbounceDykscPage.class);
 	}
 
 	// cart

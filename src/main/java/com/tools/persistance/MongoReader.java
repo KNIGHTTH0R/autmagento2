@@ -37,6 +37,7 @@ import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
+import com.tools.data.soap.StockDataModel;
 
 public class MongoReader extends MongoConnector {
 
@@ -388,11 +389,9 @@ public class MongoReader extends MongoConnector {
 				result.setLastName(MongoUtils.checkField(dbObject, MongoTableKeys.DB_STYLIST_LASTNAME));
 				result.setTotalSCReceived(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_SC_RECEIVED));
 				result.setTotalHostReceived(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_HOST_RECEIVED));
-				result.setTotalCustomerReceived(
-						MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_CUSTOMER_RECEIVED));
+				result.setTotalCustomerReceived(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_CUSTOMER_RECEIVED));
 				result.setTotalSCCurrentWeek(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_SC_CURRENT_WEEK));
-				result.setTotalHostCurrentWeek(
-						MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_HOST_CURRENT_WEEK));
+				result.setTotalHostCurrentWeek(MongoUtils.checkField(dbObject, MongoTableKeys.DB_TOTAL_HOST_CURRENT_WEEK));
 
 				itemList.add(result);
 			}
@@ -521,10 +520,17 @@ public class MongoReader extends MongoConnector {
 		try {
 			while (cursor.hasNext()) {
 				ProductDetailedModel result = new ProductDetailedModel();
+				StockDataModel stockData = new StockDataModel();
 				dbObject = cursor.next();
 
 				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
 				result.setSku(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
+				stockData.setQty(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_QUANTITY));
+				stockData.setIsInStock(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IN_STOCK));
+				stockData.setMinQty(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_MIN_QUANTITY));
+				stockData.setIsDiscontinued(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IS_DISCONTINUED));
+				stockData.setEarliestAvailability(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DELIVERY_DATE));
+				result.setStockData(stockData);
 
 				itemList.add(result);
 			}
@@ -610,6 +616,7 @@ public class MongoReader extends MongoConnector {
 				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_QUANTITY));
 				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
 				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
+				result.setDeliveryDate(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DELIVERY_DATE));
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -1086,8 +1093,7 @@ public class MongoReader extends MongoConnector {
 				result.setCareerLevel(MongoUtils.checkField(dbObject, MongoTableKeys.CAREER_LEVEL));
 				result.setPayLevel(MongoUtils.checkField(dbObject, MongoTableKeys.PAY_LEVEL));
 				result.setIndividualPoints(MongoUtils.checkField(dbObject, MongoTableKeys.INDIVIDUAL_POINTS));
-				result.setUnsafeIndividualPoints(
-						MongoUtils.checkField(dbObject, MongoTableKeys.UNSAFE_INDIVIDUAL_POINTS));
+				result.setUnsafeIndividualPoints(MongoUtils.checkField(dbObject, MongoTableKeys.UNSAFE_INDIVIDUAL_POINTS));
 				result.setTeamPoints(MongoUtils.checkField(dbObject, MongoTableKeys.TEAM_POINTS));
 				result.setStyleCoachFirstLevel(MongoUtils.checkField(dbObject, MongoTableKeys.STYLECOACH_FIRST_LEVEL));
 				result.setGoldStyleCoaches(MongoUtils.checkField(dbObject, MongoTableKeys.GOLD_STYLECOACHES));

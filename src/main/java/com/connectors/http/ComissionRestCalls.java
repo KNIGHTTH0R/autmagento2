@@ -20,6 +20,7 @@ public class ComissionRestCalls {
 //		System.setProperty("http.proxyPort", "8080");
 
 		ComissionRestCalls.getStylistInfo("1835");
+		ComissionRestCalls.getPartyPerformanceInfo("57937");
 
 	}
 
@@ -94,9 +95,9 @@ public class ComissionRestCalls {
 		return commissionStylistModel;
 	}
 
-	public static String getPartyPerformanceInfo(String stylistId) throws Exception {
+	public static String getPartyPerformanceInfo(String partyId) throws Exception {
 
-		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_PARTY_SUFFIX + stylistId + composeAuthenticationSuffix());
+		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_PARTY_SUFFIX + partyId + composeAuthenticationSuffix());
 
 		CommissionPartyModel commissionPartyModel = new CommissionPartyModel();
 
@@ -127,6 +128,7 @@ public class ComissionRestCalls {
 
 		return unparsedResponse;
 	}
+
 
 	public static String getTeamPerformanceInfo(String stylistId) throws Exception {
 

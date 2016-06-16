@@ -39,6 +39,7 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
+import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -241,12 +242,11 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 
 		shippingSteps.goToPaymentMethod();
 
-		String url = shippingSteps.grabUrl();
-		HostDataGrabber.orderModel.setOrderId(FormatterUtils.getOrderId(url, 1));
-		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.getOrderId(url, 2));
+		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
+		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
+		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
-		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.getOrderId(url, 3));
+		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
 
 		if (!paymentSteps.isCreditCardFormExpended()) {
