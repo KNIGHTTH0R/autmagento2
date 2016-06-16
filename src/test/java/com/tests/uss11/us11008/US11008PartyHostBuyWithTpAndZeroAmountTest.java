@@ -174,7 +174,6 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 		regularUserCartSteps.verifyMultipleDeliveryOption();
 
 		orderForCustomerCartSteps.typeCouponCode("G160FMDE");
-		orderForCustomerCartSteps.submitVoucherCode();
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();

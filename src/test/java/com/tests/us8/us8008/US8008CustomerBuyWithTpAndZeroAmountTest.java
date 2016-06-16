@@ -166,7 +166,6 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
 		regularUserCartSteps.typeCouponCode("G160FMDE");
-		regularUserCartSteps.submitVoucherCode();
 
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();

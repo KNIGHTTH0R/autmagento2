@@ -1,9 +1,8 @@
 package com.steps.frontend.checkout.cart.kobo;
 
-import net.thucydides.core.annotations.Step;
-
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
 
 public class ContactBoosterCartSteps extends AbstractSteps {
 
@@ -21,7 +20,6 @@ public class ContactBoosterCartSteps extends AbstractSteps {
 	@Step
 	public void clickToShipping() {
 		contactBoosterCart().clickToShipping();
-		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 }

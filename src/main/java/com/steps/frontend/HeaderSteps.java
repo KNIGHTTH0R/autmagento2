@@ -43,7 +43,6 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	@Title("Go to create party page")
 	public void goToCreatePartyPage() {
-		headerPage().clickLounge();
 		loungePage().clickCreateParty();
 		waitABit(1000);
 
@@ -52,7 +51,6 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	@Title("Go to parties list")
 	public void goToPartieList() {
-		headerPage().clickLounge();
 		loungePage().clickGoToPartyList();
 		waitABit(1000);
 

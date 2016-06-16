@@ -265,6 +265,7 @@ public class CartPage extends AbstractPage {
 	public void clickUpdateJewerlyBonus() {
 		element(updateJewerlyBonus).waitUntilVisible();
 		updateJewerlyBonus.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickUpdateMarketingBonus() {

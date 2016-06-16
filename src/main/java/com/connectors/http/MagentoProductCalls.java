@@ -218,7 +218,7 @@ public class MagentoProductCalls {
 				webSiteIds.add(string);
 			}
 		}
-
+		
 		product.setWebsiteIdsArray(webSiteIds);
 
 		List<String> categoriesIds = new ArrayList<String>();

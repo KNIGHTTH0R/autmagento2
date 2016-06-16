@@ -48,8 +48,6 @@ public class RegularUserCartSteps extends AbstractSteps {
 		regularUserCartPage().validateThatShippingOnSelectedCountryIsNotAllowed();
 	}
 
-	@Step
-	@Title("Update product list")
 	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode,
 			String discountType) {
 		regularUserCartPage().updateProductList(productsList, productCode, discountType);
@@ -68,12 +66,14 @@ public class RegularUserCartSteps extends AbstractSteps {
 	@Step
 	public void typeCouponCode(String code) {
 		regularUserCartPage().typeCouponCode(code);
+		regularUserCartPage().submitVoucherCode();
+	
 	}
 
-	@Step
-	public void submitVoucherCode() {
-		regularUserCartPage().submitVoucherCode();
-	}
+//	@Step
+//	public void submitVoucherCode() {
+//		regularUserCartPage().submitVoucherCode();
+//	}
 
 	@Step
 	public void selectShippingOption(String option) {

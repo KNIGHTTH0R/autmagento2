@@ -101,6 +101,7 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(submitInvoice).waitUntilVisible();
 		submitInvoice.click();
+		waitFor(ExpectedConditions.visibilityOf(successMessage));
 	}
 
 	public void refundOffline() {

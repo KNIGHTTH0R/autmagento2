@@ -1,14 +1,15 @@
 package com.pages.frontend;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-import net.serenitybdd.core.pages.WebElementFacade;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
 import com.tools.env.constants.ContextConstants;
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
 
 public class MyBusinessPage extends AbstractPage {
 
@@ -45,6 +46,7 @@ public class MyBusinessPage extends AbstractPage {
 	public void confirmCancelSubstription() {
 		element(confirmCancelSubstription).waitUntilVisible();
 		confirmCancelSubstription.click();
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	public void cancelSubstription() {

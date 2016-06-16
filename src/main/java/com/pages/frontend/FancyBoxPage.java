@@ -2,8 +2,11 @@ package com.pages.frontend;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class FancyBoxPage extends AbstractPage {
@@ -31,6 +34,7 @@ public class FancyBoxPage extends AbstractPage {
 	public void goToShipping() {
 		element(goToShipping).waitUntilVisible();
 		goToShipping.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void submitProduct() {

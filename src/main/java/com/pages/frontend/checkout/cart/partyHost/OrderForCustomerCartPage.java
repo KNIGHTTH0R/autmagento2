@@ -21,6 +21,9 @@ import com.tools.utils.FormatterUtils;
 
 public class OrderForCustomerCartPage extends AbstractPage {
 
+	@FindBy(css = ".main.col1-layout .col-main.pos-rel")
+	private WebElement cartOwnerContainer;
+
 	@FindBy(id = "shopping-cart-table")
 	private WebElement cartTable;
 
@@ -50,6 +53,10 @@ public class OrderForCustomerCartPage extends AbstractPage {
 
 	@FindBy(id = "empty-add-items-button")
 	private WebElement searchProductsModal;
+
+	public String getCartOwnerInfo() {
+		return cartOwnerContainer.getText();
+	}
 
 	public List<HostCartProductModel> grabProductsData() {
 		element(cartTable).waitUntilVisible();
@@ -174,7 +181,7 @@ public class OrderForCustomerCartPage extends AbstractPage {
 	public void submitVoucherCode() {
 		element(submitVoucherCode).waitUntilVisible();
 		submitVoucherCode.click();
-		waitABit(2000);
+		waitABit(3000);
 	}
 
 }

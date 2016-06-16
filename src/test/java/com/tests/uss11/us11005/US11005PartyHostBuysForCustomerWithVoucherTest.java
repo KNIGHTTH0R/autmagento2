@@ -101,12 +101,12 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		genProduct1.setPrice("29.00");
 		genProduct1.setIp("25");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		
+
 		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.setPrice("10.00");
 		genProduct2.setIp("8");
 		MagentoProductCalls.createApiProduct(genProduct2);
-		
+
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("29.90");
 		genProduct3.setIp("25");
@@ -157,10 +157,13 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			partyDetailsSteps.orderForCustomerFromParty(customerName);
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		customerRegistrationSteps.wipeHostCart();
-		
+
 		HostBasicProductModel productData;
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
@@ -174,7 +177,6 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		headerSteps.goToCart();
 
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
-		orderForCustomerCartSteps.submitVoucherCode();
 
 		orderForCustomerCartSteps.grabProductsData();
 		orderForCustomerCartSteps.grabTotals(voucherCode);
@@ -219,9 +221,11 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveUrlModel(HostDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);

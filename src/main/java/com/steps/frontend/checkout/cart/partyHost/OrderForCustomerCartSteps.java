@@ -16,6 +16,10 @@ public class OrderForCustomerCartSteps extends AbstractSteps {
 	public List<HostCartProductModel> grabProductsData() {
 		return orderForCustomerCartPage().grabProductsData();
 	}
+	@Step
+	public String getCartOwnerInfo() {
+		return orderForCustomerCartPage().getCartOwnerInfo();
+	}
 
 	@Step
 	public HostCartTotalsModel grabTotals(String voucherLabel) {
@@ -36,12 +40,13 @@ public class OrderForCustomerCartSteps extends AbstractSteps {
 	@Step
 	public void typeCouponCode(String code) {
 		orderForCustomerCartPage().typeCouponCode(code);
-	}
-
-	@Step
-	public void submitVoucherCode() {
 		orderForCustomerCartPage().submitVoucherCode();
 	}
+
+//	@Step
+//	public void submitVoucherCode() {
+//		orderForCustomerCartPage().submitVoucherCode();
+//	}
 
 	@Step
 	public void openSearchProductsModal() {

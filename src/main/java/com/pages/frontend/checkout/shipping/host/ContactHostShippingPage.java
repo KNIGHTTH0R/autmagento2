@@ -3,7 +3,9 @@ package com.pages.frontend.checkout.shipping.host;
 import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
@@ -30,6 +32,7 @@ public class ContactHostShippingPage extends AbstractPage {
 	public void checkItemNotReceivedYet() {
 		element(itemNotReceived).waitUntilVisible();
 		itemNotReceived.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void verifyStyleCoachAndOrderForDetails(String details) {
@@ -45,7 +48,9 @@ public class ContactHostShippingPage extends AbstractPage {
 	public void enterPLZ(String plz) {
 		element(plzInput).waitUntilVisible();
 		element(plzInput).clear();
-		element(plzInput).sendKeys(plz);;
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		element(plzInput).sendKeys(plz);
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 }

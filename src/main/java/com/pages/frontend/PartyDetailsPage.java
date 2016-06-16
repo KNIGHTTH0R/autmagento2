@@ -326,7 +326,6 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void verifyActivePartyAvailableActions() {
 		element(partyDetailsAndActionsContainer).waitUntilVisible();
-		verifyPartyStatus(ContextConstants.PARTY_ACTIVE);
 		verifyHostessInviteLink(false);
 		verifyEditLink(false);
 		verifyDeleteLink(false);

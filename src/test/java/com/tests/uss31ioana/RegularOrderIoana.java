@@ -150,7 +150,6 @@ public class RegularOrderIoana extends BaseTest {
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 		
 		regularUserCartSteps.typeCouponCode(voucherCode);
-		regularUserCartSteps.submitVoucherCode();
 		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
 		
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		

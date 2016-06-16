@@ -166,7 +166,7 @@ public class US8007ValidateRegularOrderBackEndTest extends BaseTest {
 		regularUserOrderProductsWorkflows.setValidateProductsModels(productsListTp2, orderItemsListTp2);
 		regularUserOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 
-		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung wird geprüft");
 		orderWorkflows.validateOrderStatus(orderInfoModelTp1.getOrderStatus(), "Zahlung geplant");
 		orderWorkflows.validateScheduledDeliveryDate(orderInfoModelTp1.getDeliveryDate(),
 				orderInfoModelTp1.getDeliveryDate());

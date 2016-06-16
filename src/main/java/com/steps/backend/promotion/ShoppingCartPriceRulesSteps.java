@@ -14,13 +14,14 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void activateRule(String ruleName) {
+	public void activateRule(String ruleName){
 		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().dismissPopUp();
-		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
+//		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
+		navigationPage().selectSubmenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleName(ruleName);
 		shoppingCartPriceRulesPage().clickOnSearch();
 		shoppingCartPriceRulesPage().openRuleDetails(ruleName);
@@ -34,7 +35,8 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().dismissPopUp();
-		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
+//		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
+		navigationPage().selectSubmenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleName(ruleName);
 		shoppingCartPriceRulesPage().clickOnSearch();
 		shoppingCartPriceRulesPage().openRuleDetails(ruleName);
@@ -49,7 +51,8 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().dismissPopUp();
-		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
+//		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
+		navigationPage().selectSubmenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
 		shoppingCartPriceRulesPage().clickOnSearch();
 		shoppingCartPriceRulesPage().openRuleDetails("Contact Booster");
@@ -66,7 +69,8 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
 		magentoLoginPage().clickOnLogin();
 		navigationPage().dismissPopUp();
-		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
+//		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
+		navigationPage().selectSubmenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
 		shoppingCartPriceRulesPage().clickOnSearch();
 		shoppingCartPriceRulesPage().verifyStatusAndOpenRuleDetails("Contact Booster", status);

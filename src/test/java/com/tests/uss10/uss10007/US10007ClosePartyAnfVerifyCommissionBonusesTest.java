@@ -104,10 +104,12 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.verifyActivePartyAvailableActions();
+//		partyDetailsSteps.verifyPartyStatus(ContextConstants.PARTY_ACTIVE_WITH_ORDERS);
+//		partyDetailsSteps.verifyActivePartyAvailableActions();
 		partyDetailsSteps.closeTheParty();
-		partyDetailsSteps.verifyClosedPartyAvailableActions();
 		partyDetailsSteps.returnToParty();
+//		partyDetailsSteps.verifyClosedPartyAvailableActions();
+		
 		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
 
 		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
