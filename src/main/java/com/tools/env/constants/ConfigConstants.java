@@ -97,7 +97,7 @@ public class ConfigConstants {
 	//term purchase grid - Order statuses
 	public static final String PAYMENT_ON_HOLD = "Zahlung geplant";
 	public static final String PAYMENT_COMPLETE = "Zahlung erfolgreich";
-	public static final String CANCELED = "Canceled";
+	public static final String CANCELED = "Storniert";
 	public static final String COMPLETE = "Complete";
 	public static final String CLOSED = "Closed";
 	public static final String PAYMENT_IN_PROGRESS = "Zahlung wird geprüft";
@@ -119,6 +119,10 @@ public class ConfigConstants {
 	public static final String POSTPONE_SEVEN_WEEKS = "7 weeks";
 	public static final String POSTPONE_EIGHT_WEEKS = "8 weeks";
 	
+	//Term purchase grid -messages
 	
-	
+	public static final String POSTPONE_SUCCESS_MESSAGE = "1 order(s) have been postponed.";
+	public static final String CANCEL_SUCCESS_MESSAGE = "1 Bestellung(en) wurde(n) storniert.";
+	public static final String RELEASE_SUCCESS_MESSAGE = "1 order(s) have been released.";
+	public static final String RELEASE_ERROR_MESSAGE = "No order(s) were released";
 }

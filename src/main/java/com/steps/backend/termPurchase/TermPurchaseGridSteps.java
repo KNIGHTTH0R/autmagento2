@@ -42,6 +42,11 @@ public class TermPurchaseGridSteps extends AbstractSteps {
 	}
 	
 	@Step
+	public void validateMessage(String expectedMessage) {
+		termPurchaseGridPage().validateMessage(expectedMessage);
+	}
+	
+	@Step
 	public void postponeOrder(String incrementId) {
 		termPurchaseGridPage().selectOrder(incrementId);
 		termPurchaseGridPage().selectAction(ConfigConstants.POSTPONE);

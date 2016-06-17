@@ -78,7 +78,6 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 		
 		expectedModel3 = new TermPurchaseOrderModel();
 		expectedModel3.setIncrementId(orderModelListTp3.getOrderId());
-		//expectedModel1.setExecutionDate(DateUtils.addDaysToAAGivenDate(productsListTp1.get(0).getDeliveryDate(), "yyyy-MM-dd", 7));
 		expectedModel3.setExecutionDate(productsListTp3.get(0).getDeliveryDate());
 		expectedModel3.setProductSku(productsListTp3.get(0).getProdCode());
 		expectedModel3.setIsDiscontinued(detailedProdListTp3.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
@@ -103,7 +102,7 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 		expectedModel4.setBoughtQty(productsListTp4.get(0).getQuantity());
 		expectedModel4.setReason("");
 		expectedModel4.setRecomandation(ConfigConstants.NO_RECOMMENDATION);
-		expectedModel4.setOrderStatus(ConfigConstants.CANCELED);
+		expectedModel4.setOrderStatus(ConfigConstants.TP_GRID_CANCELED);
 		expectedModel4.setScheduledPaymentStatus(ConfigConstants.PENDING);
 		expectedModel4.setProductQty(detailedProdListTp4.getStockData().getQty());
 
@@ -120,7 +119,6 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 		
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp3.getOrderId());
-		//termPurchaseGridSteps.checkOrderIsNotPresentInGrid(orderModelListTp1.getOrderId());
 		TermPurchaseOrderModel grabbedModel3 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp3.getOrderId());
 		
 		backEndSteps.clickOnSalesOrders();
@@ -130,7 +128,6 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 		
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp4.getOrderId());
-	//	termPurchaseGridSteps.checkOrderIsNotPresentInGrid(orderModelListTp1.getOrderId());
 		TermPurchaseOrderModel grabbedModel4 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp4.getOrderId());
 
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel3, expectedModel3);

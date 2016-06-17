@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.data.backend.TermPurchaseOrderModel;
+import com.tools.env.constants.ConfigConstants;
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
 
@@ -33,6 +35,10 @@ public class TermPurchaseGridPage extends AbstractPage {
 
 	@FindBy(css = "button[onclick='scheduledOrders_massactionJsObject.apply()']")
 	private WebElement submitMassAction;
+	
+	@FindBy(id = "messages")
+	private WebElement message;
+	
 
 	public void inputOderId(String incrementId) {
 		WebElement element = getDriver().findElement(By.id("scheduledOrders_filter_order_id"));
@@ -123,5 +129,25 @@ public class TermPurchaseGridPage extends AbstractPage {
 		}
 		Assert.assertFalse("The order should not be present!!!", found);
 	}
+	
+	public void validateMessage(String expectedMessage) {
+		element(message).waitUntilVisible();
+		Assert.assertTrue("The message from validation message is not the expected one!!", message.getText().contains(expectedMessage));
+	}
+	
+//	public void validateCancelMessage() {
+//		element(message).waitUntilVisible();
+//		Assert.assertTrue("The message from validation message is not the expected one!!", message.getText().contains(ConfigConstants.CANCEL_SUCCESS_MESSAGE));
+//	}
+//	
+//	public void validateReleaseMessage() {
+//		element(message).waitUntilVisible();
+//		Assert.assertTrue("The message from validation message is not the expected one!!", message.getText().contains(ConfigConstants.RELEASE_SUCCESS_MESSAGE));
+//	}
+//	
+//	public void validateErrorMessage() {
+//		element(message).waitUntilVisible();
+//		Assert.assertTrue("The message from validation message is not the expected one!!", message.getText().contains(ConfigConstants.RELEASE_ERROR_MESSAGE));
+//	}
 
 }

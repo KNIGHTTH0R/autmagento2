@@ -66,11 +66,11 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 	private static List<HostBasicProductModel> productsListTp2 = new ArrayList<HostBasicProductModel>();
 	private static ProductDetailedModel detailedProdListTp2 = new ProductDetailedModel();
 	OrderModel orderModelListTp2 = new OrderModel();
-	
+
 	private static List<HostBasicProductModel> productsListTp3 = new ArrayList<HostBasicProductModel>();
 	private static ProductDetailedModel detailedProdListTp3 = new ProductDetailedModel();
-	OrderModel orderModelListTp3= new OrderModel();
-	
+	OrderModel orderModelListTp3 = new OrderModel();
+
 	private static List<HostBasicProductModel> productsListTp4 = new ArrayList<HostBasicProductModel>();
 	private static ProductDetailedModel detailedProdListTp4 = new ProductDetailedModel();
 	OrderModel orderModelListTp4 = new OrderModel();
@@ -81,15 +81,15 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 		orderModelListTp1 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		productsListTp1 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP1");
-		
+
 		orderModelListTp2 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP2").get(0);
 		detailedProdListTp2 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP2").get(0);
 		productsListTp2 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP2");
-		
+
 		orderModelListTp3 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP3").get(0);
 		detailedProdListTp3 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP3").get(0);
 		productsListTp3 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP3");
-		
+
 		orderModelListTp4 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP4").get(0);
 		detailedProdListTp4 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP4").get(0);
 		productsListTp4 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP4");
@@ -108,7 +108,7 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 		expectedModel1.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
 		expectedModel1.setScheduledPaymentStatus(ConfigConstants.PENDING);
 		expectedModel1.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(), productsListTp1.get(0).getQuantity()));
-		
+
 		expectedModel2 = new TermPurchaseOrderModel();
 		expectedModel2.setIncrementId(orderModelListTp2.getOrderId());
 		expectedModel2.setExecutionDate(productsListTp2.get(0).getDeliveryDate());
@@ -123,7 +123,7 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 		expectedModel2.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
 		expectedModel2.setScheduledPaymentStatus(ConfigConstants.PENDING);
 		expectedModel2.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp2.getStockData().getQty(), productsListTp2.get(0).getQuantity()));
-		
+
 		expectedModel3 = new TermPurchaseOrderModel();
 		expectedModel3.setIncrementId(orderModelListTp3.getOrderId());
 		expectedModel3.setExecutionDate(productsListTp3.get(0).getDeliveryDate());
@@ -138,7 +138,7 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 		expectedModel3.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
 		expectedModel3.setScheduledPaymentStatus(ConfigConstants.PENDING);
 		expectedModel3.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp3.getStockData().getQty(), productsListTp3.get(0).getQuantity()));
-		
+
 		expectedModel4 = new TermPurchaseOrderModel();
 		expectedModel4.setIncrementId(orderModelListTp4.getOrderId());
 		expectedModel4.setExecutionDate(productsListTp4.get(0).getDeliveryDate());
@@ -162,29 +162,25 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp1.getOrderId());
 		TermPurchaseOrderModel grabbedModel1 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp1.getOrderId());
-		
+
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp2.getOrderId());
 		TermPurchaseOrderModel grabbedModel2 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp2.getOrderId());
-		
+
 		termPurchaseGridSteps.searchForOrder(orderModelListTp3.getOrderId());
 		TermPurchaseOrderModel grabbedModel3 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp3.getOrderId());
-		
+
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp4.getOrderId());
 		TermPurchaseOrderModel grabbedModel4 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp4.getOrderId());
-		
+
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel1, expectedModel1);
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel2, expectedModel2);
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel3, expectedModel3);
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel4, expectedModel4);
-		
 
 		customVerifications.printErrors();
-	
 
 	}
-	
-	
 
 }

@@ -62,10 +62,6 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 	private static ProductDetailedModel detailedProdListTp1 = new ProductDetailedModel();
 	OrderModel orderModelListTp1 = new OrderModel();
 
-	private static List<HostBasicProductModel> productsListTp2 = new ArrayList<HostBasicProductModel>();
-	private static ProductDetailedModel detailedProdListTp2 = new ProductDetailedModel();
-	OrderModel orderModelListTp2 = new OrderModel();
-
 	@Before
 	public void setUp() throws ParseException {
 
@@ -73,9 +69,6 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		productsListTp1 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP1");
 		
-		orderModelListTp2 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP2").get(0);
-		detailedProdListTp2 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP2").get(0);
-		productsListTp2 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP2");
 		
 		expectedModel1 = new TermPurchaseOrderModel();
 		expectedModel1.setIncrementId(orderModelListTp1.getOrderId());
@@ -92,22 +85,6 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		expectedModel1.setScheduledPaymentStatus(ConfigConstants.POSTPONED);
 		expectedModel1.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(), productsListTp1.get(0).getQuantity()));
 		
-//		expectedModel2 = new TermPurchaseOrderModel();
-//		expectedModel2.setIncrementId(orderModelListTp2.getOrderId());
-//		expectedModel2.setExecutionDate(productsListTp2.get(0).getDeliveryDate());
-//		expectedModel2.setProductSku(productsListTp2.get(0).getProdCode());
-//		expectedModel2.setIsDiscontinued(detailedProdListTp2.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
-//		expectedModel2.setEarliestAv(detailedProdListTp2.getStockData().getEarliestAvailability());
-//		expectedModel2.setInStock(detailedProdListTp2.getStockData().getIsInStock().contentEquals("1") ? "Yes" : "No");
-//		expectedModel2.setMinimumQty(detailedProdListTp2.getStockData().getMinQty());
-//		expectedModel2.setBoughtQty(productsListTp2.get(0).getQuantity());
-//		expectedModel2.setReason("");
-//		expectedModel2.setRecomandation("");
-//		expectedModel2.setOrderStatus(ConfigConstants.PAYMENT_ON_HOLD);
-//		expectedModel2.setScheduledPaymentStatus(ConfigConstants.PENDING);
-//		expectedModel2.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp2.getStockData().getQty(), productsListTp2.get(0).getQuantity()));
-
-
 	}
 
 	@Test
@@ -115,22 +92,14 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp1.getOrderId());
-		//postpone 
+	
 		termPurchaseGridSteps.postponeOrder(orderModelListTp1.getOrderId());
-		
+		termPurchaseGridSteps.validateMessage(ConfigConstants.POSTPONE_SUCCESS_MESSAGE);
+	
 		TermPurchaseOrderModel grabbedModel1 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp1.getOrderId());
 		
-//		backEndSteps.clickOnTermPurchaseGrid();
-//		termPurchaseGridSteps.searchForOrder(orderModelListTp2.getOrderId());
-//		//released
-//		termPurchaseGridSteps.cancelOrder(orderModelListTp2.getOrderId());
-//		TermPurchaseOrderModel grabbedModel2 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp2.getOrderId());
-
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel1, expectedModel1);
-//		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel2, expectedModel2);
 		
-		
-
 		customVerifications.printErrors();
 	
 
