@@ -90,8 +90,11 @@ public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.clickOrderForCustomer();
-		loungeSteps.selectCustomerToOrderFor(customerName);
+		do {
+			headerSteps.goToLounge();
+			loungeSteps.clickOrderForCustomer();
+			loungeSteps.selectCustomerToOrderFor(customerName);
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		customerRegistrationSteps.wipeHostCart();
 		orderForCustomerCartSteps.openSearchProductsModal();
 

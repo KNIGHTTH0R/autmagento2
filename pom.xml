@@ -148,6 +148,32 @@
 			<version>1.7.0</version>
 		</dependency>
 	</dependencies>
+	<!-- Configuration for environment specific propeties -->
+	<!-- They are picked up based on OS type -->
+	<profiles>
+		<profile>
+			<id>win</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<webdriver.chrome.path>${basedir}${file.separator}resources${file.separator}chromedriver.exe</webdriver.chrome.path>
+			</properties>
+		</profile>
+		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<family>!windows</family>
+				</os>
+			</activation>
+			<properties>
+				<webdriver.chrome.path>resources${file.separator}chromedriver220</webdriver.chrome.path>
+			</properties>
+		</profile>
+	</profiles>
 	<build>
 		<plugins>
 			<plugin>
@@ -162,7 +188,7 @@
 					<systemPropertyVariables>
 						<project.build.directory>${project.build.directory}</project.build.directory>
 						<webdriver.remote.url>${host.remote}</webdriver.remote.url>
-						<webdriver.chrome.driver>${basedir}/resources/chromedriver.exe</webdriver.chrome.driver>
+						<webdriver.chrome.driver>${webdriver.chrome.path}</webdriver.chrome.driver>
 						<webdriver.ie.driver>${basedir}/src/main/resources/IEDriverServer.exe</webdriver.ie.driver>
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
 					</systemPropertyVariables>
@@ -182,7 +208,7 @@
 						<runEnv>${runEnv}</runEnv>
 						<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
-						<webdriver.chrome.driver>${basedir}/resources/chromedriver.exe</webdriver.chrome.driver>
+						<webdriver.chrome.driver>${webdriver.chrome.path}</webdriver.chrome.driver>
 						<webdriver.ie.driver>${basedir}/src/main/resources/IEDriverServer.exe</webdriver.ie.driver>
 						<firefox.preferences>browser.download.folderList=2;browser.download.dir=${basedir}\resources\downloads;browser.helperApps.alwaysAsk.force=false;browser.download.manager.showWhenStarting=false;browser.download.manager.alertOnEXEOpen=false;browser.download.manager.useWindow=false;pdfjs.disabled=true;browser.helperApps.neverAsk.saveToDisk=application/msword,
 							application/csv, application/ris, text/csv, image/png,
