@@ -129,6 +129,8 @@ public class RegularUserCartPage extends AbstractPage {
 				String[] tokens = delivery.getText().split(", ");
 				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
 				delivery.click();
+				waitFor(ExpectedConditions.invisibilityOfElementWithText(
+						By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 				break;
 			}
 		}

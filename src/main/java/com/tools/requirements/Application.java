@@ -383,7 +383,7 @@ public class Application {
 
 	@Feature
 	public class IpReport {
-		public class US29_1 {
+		public class US30_1 {
 		}
 	}
 	

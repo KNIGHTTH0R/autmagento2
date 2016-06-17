@@ -1,16 +1,10 @@
 package com.tests.uss29.us29001;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
@@ -18,29 +12,21 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.stylecoach.StylecoachListBackendSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.email.EmailCredentialsModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.ContactDetailsModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.env.constants.Credentials;
-import com.tools.env.constants.EmailConstants;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoTableKeys;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.contact.ContactBackendValidationWorkflows;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.ManagedPages;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithDriver;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.pages.Pages;
 
 @WithTag(name = "US28.1 Unbounce registration with regular distribution", type = "Scenarios")
 @Story(Application.UnbounceRegistration.US28_1.class)

@@ -39,7 +39,6 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
-import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -243,9 +242,10 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 
 		shippingSteps.goToPaymentMethod();
 
-		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
+		String url = shippingSteps.grabUrl();
+		String orderId = FormatterUtils.getOrderId(url);
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
-		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
+		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);

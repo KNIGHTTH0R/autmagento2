@@ -34,7 +34,6 @@ import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
-import com.tools.datahandler.HostDataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.UrlConstants;
@@ -167,13 +166,13 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 			productData.setDeliveryDate(DateUtils
 					.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		RegularUserCartCalculator.allProductsListTp0.add(productData);
-		
+
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
 		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils
 					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		RegularUserCartCalculator.allProductsListTp1.add(productData);
-		
+
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0");
 		if (!genProduct3.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
@@ -225,14 +224,16 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		RegularUserDataGrabber.regularUserShippingTotalsTp2 = shippingSteps.grabSurveyDataTp2();
 
 		shippingSteps.goToPaymentMethod();
-
-		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
+		
+		String url = shippingSteps.grabUrl();
+		String orderId = FormatterUtils.getOrderId(url);
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
+		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
 		RegularUserDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 		RegularUserDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
-		
+
 		if (!paymentSteps.isCreditCardFormExpended())
 			paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);

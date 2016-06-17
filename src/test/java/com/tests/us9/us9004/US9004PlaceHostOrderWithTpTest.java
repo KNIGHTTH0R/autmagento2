@@ -220,9 +220,11 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		HostDataGrabber.hostShippingTotalsTp2 = shippingSteps.grabSurveyDataTp2();
 
 		shippingSteps.goToPaymentMethod();
-
-		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
+		
+		String url = shippingSteps.grabUrl();
+		String orderId = FormatterUtils.getOrderId(url);
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
+		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
