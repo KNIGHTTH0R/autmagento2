@@ -7,7 +7,9 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class AddProductsModalPage extends AbstractPage {
@@ -26,7 +28,8 @@ public class AddProductsModalPage extends AbstractPage {
 		for (WebElement product : cartList) {
 			if (product.findElement(By.cssSelector("td:nth-child(3)")).getText().contains(productCode)) {
 				foundProduct = true;
-				Assert.assertTrue("Product name is not correct !!!", product.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(productName));
+				Assert.assertTrue("Product name is not correct !!!",
+						product.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(productName));
 				break;
 			}
 		}
@@ -42,6 +45,10 @@ public class AddProductsModalPage extends AbstractPage {
 	public void submitSearch() {
 		element(submitSearch).waitUntilVisible();
 		submitSearch.click();
-		waitABit(1000);
+
+//		while (getDriver().findElement(By.cssSelector(".blockUI.blockMsg.blockElement")).isDisplayed()) {
+//			waitABit(1000);
+//		}
+		waitABit(2000);
 	}
 }
