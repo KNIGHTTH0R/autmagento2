@@ -77,13 +77,13 @@ public class ConfigConstants {
 	public static final String REASON_POSTPONED_BY_ADMIN = "postponed by admin";
 	public static final String REASON_POSTPONED_NOT_ENOUGH_STOCK = "postponed because there is not enough stock";
 	public static final String REASON_POSTPONED_EARLIEST_AV_CHANGED = "postponed because earliest availability date of product has changed";
-	public static final String REASON_CANCEL_SOLD_OUT = "canceled because item is sold out";
+	public static final String REASON_CANCEL_SOLD_OUT = "canceled because at least one item is sold out";
 	public static final String REASON_CANCEL_POSTPONING_LIMIT_REACHED = "canceled because postponing limit was reached";
 	public static final String REASON_CANCEL_PAYMENT_FAILED = "canceled because payment failed";
 	
 	//term purchase grid - Recomandations
 	public static final String NO_RECOMMENDATION = "Keine Empfehlung";
-	public static final String RECOMMENDATION_TO_CANCEL = "Verschiebung empfohlen";
+	public static final String RECOMMENDATION_TO_CANCEL = "Stonierung empfohlen";
 	public static final String RECOMMENDATION_TO_POSTPONE = "Verschiebung empfohlen";
 	public static final String RECOMMENDATION_TO_RELEASE = "Freigabe empfohlen";
 	

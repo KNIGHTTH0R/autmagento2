@@ -218,7 +218,7 @@ public class MagentoProductCalls {
 				webSiteIds.add(string);
 			}
 		}
-		
+
 		product.setWebsiteIdsArray(webSiteIds);
 
 		List<String> categoriesIds = new ArrayList<String>();
@@ -251,7 +251,7 @@ public class MagentoProductCalls {
 		stockModel.setEarliestAvailability("");
 		stockModel.setMaximumPercentageToBorrow("");
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
-		
+
 		product.setStockData(stockModel);
 
 		product.setJewerlyBonusValue("50.00");

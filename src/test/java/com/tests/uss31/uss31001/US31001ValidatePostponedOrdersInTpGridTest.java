@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.backend.termPurchase.TermPurchaseGridSteps;
@@ -20,6 +21,7 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
+import com.tools.env.constants.JenkinsConstants;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -64,7 +66,7 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 
 	@Before
 	public void setUp() throws ParseException {
-
+		
 		orderModelListTp1 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		productsListTp1 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP1");
@@ -72,18 +74,35 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		
 		expectedModel1 = new TermPurchaseOrderModel();
 		expectedModel1.setIncrementId(orderModelListTp1.getOrderId());
-		expectedModel1.setExecutionDate(DateUtils.addDaysToAAGivenDate(productsListTp1.get(0).getDeliveryDate(), "yyyy-MM-dd", 7));
+		expectedModel1.setExecutionDate(DateUtils.getCurrentDate("yyyy-MM-dd"));
 		expectedModel1.setProductSku(productsListTp1.get(0).getProdCode());
 		expectedModel1.setIsDiscontinued(detailedProdListTp1.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
 		expectedModel1.setEarliestAv(detailedProdListTp1.getStockData().getEarliestAvailability());
 		expectedModel1.setInStock(detailedProdListTp1.getStockData().getIsInStock().contentEquals("1") ? "Yes" : "No");
 		expectedModel1.setMinimumQty(detailedProdListTp1.getStockData().getMinQty());
 		expectedModel1.setBoughtQty(productsListTp1.get(0).getQuantity());
-		expectedModel1.setReason(ConfigConstants.REASON_POSTPONED_BY_ADMIN);
-		expectedModel1.setRecomandation(ConfigConstants.NO_RECOMMENDATION);
+		//expectedModel1.setReason(ConfigConstants.REASON_POSTPONED_BY_ADMIN);
+		expectedModel1.setReason("");
+		expectedModel1.setRecomandation(ConfigConstants.RECOMMENDATION_TO_POSTPONE);
 		expectedModel1.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
-		expectedModel1.setScheduledPaymentStatus(ConfigConstants.POSTPONED);
+		expectedModel1.setScheduledPaymentStatus(ConfigConstants.PENDING);
 		expectedModel1.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(), productsListTp1.get(0).getQuantity()));
+		
+		expectedModel2 = new TermPurchaseOrderModel();
+		expectedModel2.setIncrementId(orderModelListTp1.getOrderId());
+		expectedModel2.setExecutionDate(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 7));
+		expectedModel2.setProductSku(productsListTp1.get(0).getProdCode());
+		expectedModel2.setIsDiscontinued(detailedProdListTp1.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
+		expectedModel2.setEarliestAv(detailedProdListTp1.getStockData().getEarliestAvailability());
+		expectedModel2.setInStock(detailedProdListTp1.getStockData().getIsInStock().contentEquals("1") ? "Yes" : "No");
+		expectedModel2.setMinimumQty(detailedProdListTp1.getStockData().getMinQty());
+		expectedModel2.setBoughtQty(productsListTp1.get(0).getQuantity());
+		expectedModel2.setReason(ConfigConstants.REASON_POSTPONED_BY_ADMIN);
+		//expectedModel2.setReason("");
+		expectedModel2.setRecomandation(ConfigConstants.RECOMMENDATION_TO_POSTPONE);
+		expectedModel2.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
+		expectedModel2.setScheduledPaymentStatus(ConfigConstants.POSTPONE);
+		expectedModel2.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(), productsListTp1.get(0).getQuantity()));
 		
 	}
 
@@ -93,17 +112,20 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp1.getOrderId());
 	
+		TermPurchaseOrderModel grabbedModel1 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp1.getOrderId());
 		termPurchaseGridSteps.postponeOrder(orderModelListTp1.getOrderId());
 		termPurchaseGridSteps.validateMessage(ConfigConstants.POSTPONE_SUCCESS_MESSAGE);
-	
-		TermPurchaseOrderModel grabbedModel1 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp1.getOrderId());
+		TermPurchaseOrderModel grabbedModel2 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp1.getOrderId());
 		
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel1, expectedModel1);
+		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel2, expectedModel2);
 		
 		customVerifications.printErrors();
 	
 
 	}
+	
+
 	
 	
 

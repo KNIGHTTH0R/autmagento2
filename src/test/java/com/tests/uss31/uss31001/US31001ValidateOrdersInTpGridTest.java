@@ -4,10 +4,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
+import com.connectors.http.MagentoProductCalls;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.backend.termPurchase.TermPurchaseGridSteps;
@@ -20,6 +23,7 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
+import com.tools.env.constants.JenkinsConstants;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -58,6 +62,9 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 	TermPurchaseOrderModel expectedModel2;
 	TermPurchaseOrderModel expectedModel3;
 	TermPurchaseOrderModel expectedModel4;
+	
+	private String prod1IncrementId, prod2IncrementId;
+	private ProductDetailedModel updated1Product, updated2Product;
 
 	private static List<HostBasicProductModel> productsListTp1 = new ArrayList<HostBasicProductModel>();
 	private static ProductDetailedModel detailedProdListTp1 = new ProductDetailedModel();
@@ -81,10 +88,12 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 		orderModelListTp1 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		productsListTp1 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP1");
+		prod1IncrementId = MongoReader.grabIncrementId("US31001PartyHostBuysForCustomerTpTest" + "TP1");
 
 		orderModelListTp2 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP2").get(0);
 		detailedProdListTp2 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP2").get(0);
 		productsListTp2 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP2");
+		prod2IncrementId = MongoReader.grabIncrementId("US31001PartyHostBuysForCustomerTpTest" + "TP2");
 
 		orderModelListTp3 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP3").get(0);
 		detailedProdListTp3 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP3").get(0);
@@ -181,6 +190,25 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 
 		customVerifications.printErrors();
 
+	}
+	
+	@After
+	public void runCron() throws Exception{
+		
+		updated1Product = MagentoProductCalls.updateProductStockModel();
+		updated1Product.getStockData().setMinQty("-10");
+		updated1Product.getStockData().setQty("-10");
+		updated1Product.getStockData().setIsInStock("0");
+		updated1Product.getStockData().setIsDiscontinued("1");
+		MagentoProductCalls.updateApiProduct(updated1Product, prod1IncrementId);
+
+		updated2Product = MagentoProductCalls.updateProductStockModel();
+		updated2Product.getStockData().setIsDiscontinued("1");
+		MagentoProductCalls.updateApiProduct(updated2Product, prod2IncrementId);
+		
+		//script for updating deliveryDates
+		
+//		ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
 	}
 
 }
