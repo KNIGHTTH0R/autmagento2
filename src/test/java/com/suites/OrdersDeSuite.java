@@ -9,6 +9,8 @@ import com.tests.uss10.us10002b.US10002bCreatePartyWithCustomerHostTest;
 import com.tests.uss10.uss10007.US10007CreatePartyWithStylistHostTest;
 import com.tests.uss10.uss10008.US10008CreatePartyWithExistingContactHostTest;
 import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
+import com.tests.uss30.uss30001.US30001GetInitialOpenIps;
+import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 
 @SuiteClasses({
 	
@@ -16,9 +18,9 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US10002bCreatePartyWithCustomerHostTest.class,
 	US10007CreatePartyWithStylistHostTest.class,
 	US10008CreatePartyWithExistingContactHostTest.class,
+	US30001GetInitialOpenIps.class,
 	
 	US3001Suite.class,
-	US3002Suite.class,
 	US3003Suite.class,
 	US3004Suite.class,
 	US3006Suite.class,
@@ -36,6 +38,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US8005Suite.class,
 	US8006Suite.class,
 	US8007Suite.class,
+	US8008Suite.class,
 	
 	US4001Suite.class,
 	US4002Suite.class,
@@ -50,6 +53,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US11005Suite.class,
 	US11006Suite.class,
 	US11007Suite.class,
+	US11008Suite.class,
 	
 	US10007SuitePartOne.class,
 	US10008Suite.class,
@@ -58,9 +62,12 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US9002Suite.class,
 	US9002bSuite.class,
 	US9004Suite.class,
+	US9005Suite.class,
 	
 	US15004Suite.class,
 	US12001Suite.class,
+	
+	US30001VerifyOpenIpsAfterNewOrdersTest.class,
 	
 })
 @RunWith(Suite.class)

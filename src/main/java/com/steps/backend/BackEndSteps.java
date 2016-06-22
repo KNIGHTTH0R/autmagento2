@@ -83,7 +83,7 @@ public class BackEndSteps extends AbstractSteps {
 //	}
 	@Step
 	public void clickOnStylecoachList() {
-		navigationPage().selectSubmenu("stylist");
+		navigationPage().selectSubmenu("stylist/index/key/");
 	}
 
 	// @Step

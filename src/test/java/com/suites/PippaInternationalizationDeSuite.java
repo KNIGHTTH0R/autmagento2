@@ -5,12 +5,14 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
+import com.tests.uss30.uss30001.US30001GetInitialOpenIps;
+import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 
 @SuiteClasses({
 	
 	US10CreateAllPartiesSuite.class,
-	US001Suite.class,
-	US002Suite.class,
+	US30001GetInitialOpenIps.class,
+
 	US3001Suite.class,
 	US3003Suite.class,
 	US3004Suite.class,
@@ -43,9 +45,6 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 //	US70012Suite.class,
 	
 	US10006Suite.class,
-	US11007Suite.class,
-	US10007SuitePartOne.class,
-	US10008Suite.class,
 	
 	US8001Suite.class,
 	US8002Suite.class,
@@ -54,6 +53,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US8005Suite.class,
 	US8006Suite.class,
 	US8007Suite.class,
+	US8008Suite.class,
 	
 	US11001Suite.class,
 	US11002Suite.class,
@@ -61,14 +61,17 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US11004Suite.class,
 	US11005Suite.class,
 	US11006Suite.class,
-
+	US11007Suite.class,
+	US11008Suite.class,
+	
+	US10007SuitePartOne.class,
+	US10008Suite.class,
 	
 	US9001Suite.class,
 	US9002Suite.class,
 	US9002bSuite.class,
 	US9004Suite.class,
-	
-	
+	US9005Suite.class,
 	
 	US15004Suite.class,
 	
@@ -89,11 +92,6 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US17002Suite.class,
 	US17003Suite.class,
 	
-//	US19001Suite.class,
-//	US19002Suite.class,
-//	US19003Suite.class,
-//	US19004Suite.class,
-	
 //	US23001PartOneSuite.class,
 	US20001Suite.class,
 //	US21001Suite.class,
@@ -105,6 +103,8 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	
 	US26001Suite.class,
 //	US23001PartThreeSuite.class,
+	
+	US30001VerifyOpenIpsAfterNewOrdersTest.class,
 	
 })
 @RunWith(Suite.class)

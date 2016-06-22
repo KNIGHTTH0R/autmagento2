@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -37,6 +38,7 @@ import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
 import com.tools.env.constants.ContextConstants;
+import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -274,5 +276,11 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP2");
 		}
 		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
+		
+		try {
+			ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_STAGING_AUT_JOB_URL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

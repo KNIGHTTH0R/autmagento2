@@ -93,10 +93,12 @@ public class US9005PlaceHostOrderWithTpAndZeroAmountTest extends BaseTest {
 
 		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct2.setPrice("49.90");
+		genProduct1.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("100.00");
+		genProduct1.setIp("0");
 		genProduct3.setStockData(
 				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct3);

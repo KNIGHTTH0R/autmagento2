@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -39,6 +40,7 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
+import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -246,6 +248,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		String orderId = FormatterUtils.getOrderId(url);
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
@@ -313,6 +316,12 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 			MongoWriter.savePartyBonusCalculationModel(model, getClass().getSimpleName());
 		}
 		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
+		
+		try {
+			ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_STAGING_AUT_JOB_URL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
