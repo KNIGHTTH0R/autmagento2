@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -36,6 +37,7 @@ import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.env.constants.ContextConstants;
+import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -277,6 +279,12 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsListTp2) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + "TP2");
 		}
-		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
+		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName()); 
+		
+		try {
+			ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_STAGING_AUT_JOB_URL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

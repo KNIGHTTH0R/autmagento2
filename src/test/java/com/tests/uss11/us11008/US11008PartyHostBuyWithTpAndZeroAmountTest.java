@@ -92,10 +92,12 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 
 		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct2.setPrice("29.00");
+		genProduct1.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct3.setPrice("9.90");
+		genProduct1.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();

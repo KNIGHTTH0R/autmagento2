@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApacheHttpHelper;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -21,7 +20,6 @@ import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.env.constants.FilePaths;
-import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -91,7 +89,6 @@ public class US30001GetInitialOpenIps extends BaseTest {
 		reportsSteps.clickOnIpReports();
 		ipModel = ipReportsSteps.grabIpsInfo();
 
-		ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_STAGING_AUT_JOB_URL);
 	}
 
 	@After

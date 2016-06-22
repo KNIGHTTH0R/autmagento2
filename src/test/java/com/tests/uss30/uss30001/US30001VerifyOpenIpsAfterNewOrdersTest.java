@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -21,6 +22,7 @@ import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.env.constants.FilePaths;
+import com.tools.env.constants.JenkinsConstants;
 import com.tools.env.constants.UrlConstants;
 import com.tools.generalCalculation.IpReportCalculation;
 import com.tools.persistance.MongoReader;
@@ -67,6 +69,8 @@ public class US30001VerifyOpenIpsAfterNewOrdersTest extends BaseTest {
 		ipModelList.add(MongoReader.getIpModel("US11007PartyHostBuysForCustomerTpTest").get(0));
 		
 		expectedIpModel = IpReportCalculation.calculateTermPurchaseIps(ipModelList);
+		
+		ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_STAGING_AUT_JOB_URL);
 
 		Properties prop = new Properties();
 		InputStream input = null;
