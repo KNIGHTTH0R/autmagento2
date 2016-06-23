@@ -62,6 +62,8 @@ public class ShippingFormPage extends AbstractPage {
 	public void goBack() {
 		element(goBackButton).waitUntilVisible();
 		goBackButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void checkTermsCheckbox() {

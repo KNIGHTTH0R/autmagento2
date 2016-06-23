@@ -124,3 +124,16 @@
 [0621/110720:ERROR:exception_snapshot_win.cc(57)] thread ID 7712 not found in process
 [0621/110720:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
 >>>>>>> branch '20160330stable' of git@evogit.evozon.com:pippajeanautotester/pippajeanautotester.git
+[0623/101849:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0623/101849:ERROR:exception_snapshot_win.cc(57)] thread ID 7264 not found in process
+[0623/101849:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0623/130943:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0623/130943:ERROR:exception_snapshot_win.cc(57)] thread ID 7356 not found in process
+[0623/130943:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0623/132650:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0623/132650:ERROR:exception_snapshot_win.cc(57)] thread ID 8800 not found in process
+[0623/132650:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0623/141827:ERROR:process_reader_win.cc(141)] SuspendThread: Access is denied. (0x5)
+[0623/141827:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0623/141827:ERROR:exception_snapshot_win.cc(57)] thread ID 7732 not found in process
+[0623/141827:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed

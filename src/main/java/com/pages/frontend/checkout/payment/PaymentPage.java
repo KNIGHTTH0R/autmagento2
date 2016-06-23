@@ -2,8 +2,11 @@ package com.pages.frontend.checkout.payment;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 /**
@@ -47,6 +50,8 @@ public class PaymentPage extends AbstractPage {
 	public void goBack() {
 		element(backButton).waitUntilVisible();
 		backButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void expandBankTransferForm() {

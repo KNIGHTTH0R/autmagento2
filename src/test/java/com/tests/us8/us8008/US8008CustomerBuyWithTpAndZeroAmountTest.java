@@ -73,6 +73,7 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 	public FooterSteps footerSteps;
 
 	private String username, password;
+	private String voucherCode;
 	private String billingAddress, shippingAddress;
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -103,10 +104,12 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8007.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8008.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			
+			voucherCode = prop.getProperty("voucherCode");
 
 			billingAddress = prop.getProperty("billingAddress");
 			shippingAddress = prop.getProperty("shippingAddress");
@@ -167,7 +170,7 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
-		regularUserCartSteps.typeCouponCode("G160FMDE");
+		regularUserCartSteps.typeCouponCode(voucherCode);
 
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
