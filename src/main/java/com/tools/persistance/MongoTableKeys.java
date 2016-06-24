@@ -178,6 +178,10 @@ public class MongoTableKeys {
 	public static final String HOST_CART_CALC_DETAILS_MODEL = "HostCartCalcDetailsModel";
 	public static final String HOST_BASIC_PRODUCT_MODEL = "HostBasicProductModel";
 	public static final String BORROW_BASIC_PRODUCT_MODEL = "BorrowBasicProductModel";
+	
+	//TERM_PURCHASE_MODEL
+	public static final String TERM_PURCHASE_MODEL = "TermPurchaseModel";
+	public static final String EXECUTION_DATE = "executionDate";
 
 	// syncInfoModel
 	public static final String STOCK_INFO_MODEL = "StockInfoModel";

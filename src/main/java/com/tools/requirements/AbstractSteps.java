@@ -10,6 +10,7 @@ import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
+import com.pages.backend.SystemConfigurationPage;
 import com.pages.backend.creditMemo.CreditMemoDetailsPage;
 import com.pages.backend.creditMemo.CreditMemoListPage;
 import com.pages.backend.customer.CustomerListPage;
@@ -348,6 +349,10 @@ public class AbstractSteps extends ScenarioSteps {
 	
 	public TermPurchaseGridPage termPurchaseGridPage() {
 		return getPages().currentPageAt(TermPurchaseGridPage.class);
+	}
+	
+	public SystemConfigurationPage systemConfigurationPage() {
+		return getPages().currentPageAt(SystemConfigurationPage.class);
 	}
 
 	// -----------------------FE-----------------------------------

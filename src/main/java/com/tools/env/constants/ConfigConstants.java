@@ -125,4 +125,9 @@ public class ConfigConstants {
 	public static final String CANCEL_SUCCESS_MESSAGE = "1 Bestellung(en) wurde(n) storniert.";
 	public static final String RELEASE_SUCCESS_MESSAGE = "1 order(s) have been released.";
 	public static final String RELEASE_ERROR_MESSAGE = "No order(s) were released";
+	
+	//Execution type
+	public static final String MANUAL = "Manuell";
+	public static final String AUTOMATED = "Automated";
+	public static final String SEMIAUTOMATED = "Semi-automated";
 }

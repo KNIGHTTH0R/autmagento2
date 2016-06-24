@@ -10,6 +10,7 @@ import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -358,5 +359,24 @@ public class BackEndSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return getDriver().getCurrentUrl();
 	}
+	
+	
+	@Step
+	public void clickOnSystemConfiguration() {
+		navigationPage().selectSubmenu("system_config");
+	}
+	
+	@Step
+	public void goToTermPurchaseTab() {
+		systemConfigurationPage().clickOnDesiredTab("Zielkauf");
+	}
+	
+	@Step
+	public void selectCronExecutionType(String executionType) {
+		
+		systemConfigurationPage().selectExecutionType(executionType);
+		systemConfigurationPage().saveConfiguration();
+	}
+	
 
 }

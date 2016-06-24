@@ -106,6 +106,11 @@ public class ContextConstants {
 	public static String CODE_LABEL = MongoReader.getDictionaryItem("CODE_LABEL");
 	public static String WILL_BE_ANNOUNCED = MongoReader.getDictionaryItem("WILL_BE_ANNOUNCED");
 	public static String TP_INFO_MESSAGE = MongoReader.getDictionaryItem("TP_INFO_MESSAGE");
+	//email subject
+	public static String POSTPONED_ORDER_SUBJECT = MongoReader.getDictionaryItem("POSTPONED_ORDER_SUBJECT");
+	public static String CANCELED_ORDER_SUBJECT = MongoReader.getDictionaryItem("CANCELED_ORDER_SUBJECT");
+	
+	
 	
 	
 

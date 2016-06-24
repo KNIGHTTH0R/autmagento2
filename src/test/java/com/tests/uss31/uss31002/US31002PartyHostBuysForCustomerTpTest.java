@@ -113,17 +113,17 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		genProduct3.setIp("25");
 		genProduct3.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		prod2IncrementId = MagentoProductCalls.createApiProduct(genProduct3);
-		
+
 		genProduct4 = MagentoProductCalls.createProductModel();
 		genProduct4.setPrice("30.00");
 		genProduct4.setIp("25");
-		genProduct4.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"),"yyyy-MM-dd",7)));
+		genProduct4.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 7)));
 		prod3IncrementId = MagentoProductCalls.createApiProduct(genProduct4);
-		
+
 		genProduct5 = MagentoProductCalls.createProductModel();
 		genProduct5.setPrice("40.00");
 		genProduct5.setIp("25");
-		genProduct5.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"),"yyyy-MM-dd",14)));
+		genProduct5.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 14)));
 		prod4IncrementId = MagentoProductCalls.createApiProduct(genProduct5);
 
 		Properties prop = new Properties();
@@ -163,7 +163,7 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 	}
 
 	@Test
-	public void us31001PartyHostBuysForCustomerTpTest() throws ParseException {
+	public void us31002PartyHostBuysForCustomerTpTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -186,12 +186,12 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		if (!genProduct3.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp2.add(productData);
-		
+
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct4, "2", "0");
 		if (!genProduct4.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp3.add(productData);
-		
+
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct5, "4", "0");
 		if (!genProduct5.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct5.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
@@ -261,9 +261,12 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP4");
 		}
 		MongoWriter.saveIncrementId(prod1IncrementId, getClass().getSimpleName() + "TP1");
-		MongoWriter.saveIncrementId(prod2IncrementId, getClass().getSimpleName()+ "TP2");
+		MongoWriter.saveIncrementId(prod2IncrementId, getClass().getSimpleName() + "TP2");
 		MongoWriter.saveIncrementId(prod3IncrementId, getClass().getSimpleName() + "TP3");
-		MongoWriter.saveIncrementId(prod4IncrementId, getClass().getSimpleName()+ "TP4");
+		MongoWriter.saveIncrementId(prod4IncrementId, getClass().getSimpleName() + "TP4");
+
+		// script for updating deliveryDates
+		// ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
 	}
 
 }

@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.backend.termPurchase.TermPurchaseGridSteps;
@@ -26,7 +25,6 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
-import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
@@ -96,7 +94,7 @@ public class US31001ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 		expectedModel1.setReason(ConfigConstants.REASON_CANCEL_SOLD_OUT);
 		expectedModel1.setRecomandation(ConfigConstants.RECOMMENDATION_TO_CANCEL);
 		expectedModel1.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
-		expectedModel1.setScheduledPaymentStatus(ConfigConstants.PENDING);
+		expectedModel1.setScheduledPaymentStatus(ConfigConstants.POSTPONED);
 		expectedModel1.setProductQty(detailedProdListTp1.getStockData().getQty());
 
 		expectedModel2 = new TermPurchaseOrderModel();
@@ -122,11 +120,12 @@ public class US31001ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp1.getOrderId());
-		termPurchaseGridSteps.releaseOrder(orderModelListTp1.getOrderId());
-		termPurchaseGridSteps.validateMessage(ConfigConstants.RELEASE_ERROR_MESSAGE);
 		//validate cancel recomandation
 		TermPurchaseOrderModel grabbedModel1 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp1.getOrderId());
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel1, expectedModel1);
+		termPurchaseGridSteps.releaseOrder(orderModelListTp1.getOrderId());
+		termPurchaseGridSteps.validateMessage(ConfigConstants.RELEASE_ERROR_MESSAGE);
+		
 		termPurchaseGridSteps.cancelOrder(orderModelListTp1.getOrderId());
 		termPurchaseGridSteps.validateMessage(ConfigConstants.CANCEL_SUCCESS_MESSAGE);
 		termPurchaseGridSteps.checkOrderIsNotPresentInGrid(orderModelListTp1.getOrderId());

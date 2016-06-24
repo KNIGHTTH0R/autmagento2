@@ -19,6 +19,7 @@ import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
+import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
@@ -740,6 +741,32 @@ public class MongoReader extends MongoConnector {
 				result.setSubTotal(MongoUtils.checkField(dbObject, MongoTableKeys.SUBTOTAL));
 				result.setTotalAmount(MongoUtils.checkField(dbObject, MongoTableKeys.TOTAL_AMOUNT));
 				result.setIpPoints(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+
+	}
+
+	public static List<TermPurchaseOrderModel> grabTermPurchaseOrderModel(String testName) {
+		DBObject dbObject = null;
+		List<TermPurchaseOrderModel> itemList = new ArrayList<TermPurchaseOrderModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.TERM_PURCHASE_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				TermPurchaseOrderModel result = new TermPurchaseOrderModel();
+				dbObject = cursor.next();
+
+				result.setExecutionDate(MongoUtils.checkField(dbObject, MongoTableKeys.EXECUTION_DATE));
+				result.setIncrementId(MongoUtils.checkField(dbObject, MongoTableKeys.INCREMENT_ID));
 
 				itemList.add(result);
 			}

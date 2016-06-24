@@ -20,8 +20,8 @@ public class EmailSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void validateEmailContent(String orderId, String message) {
-		Assert.assertTrue("Failure: Message does not contain the total price", message.contains(orderId));
+	public void validateEmailContent(String text, String message) {
+		Assert.assertTrue("Failure: Message does not contain text", message.contains(text));
 	}
 
 	@Step

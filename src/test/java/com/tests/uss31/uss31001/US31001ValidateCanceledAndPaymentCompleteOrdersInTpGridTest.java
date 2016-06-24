@@ -23,6 +23,7 @@ import com.tools.env.constants.Credentials;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.TermPurchase.TermPurcaseOrderValidationWorkflows;
 import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
@@ -78,7 +79,7 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 		
 		expectedModel3 = new TermPurchaseOrderModel();
 		expectedModel3.setIncrementId(orderModelListTp3.getOrderId());
-		expectedModel3.setExecutionDate(productsListTp3.get(0).getDeliveryDate());
+		expectedModel3.setExecutionDate(DateUtils.getCurrentDate("yyyy-MM-dd"));
 		expectedModel3.setProductSku(productsListTp3.get(0).getProdCode());
 		expectedModel3.setIsDiscontinued(detailedProdListTp3.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
 		expectedModel3.setEarliestAv(detailedProdListTp3.getStockData().getEarliestAvailability());
@@ -93,7 +94,7 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 		
 		expectedModel4 = new TermPurchaseOrderModel();
 		expectedModel4.setIncrementId(orderModelListTp4.getOrderId());
-		expectedModel4.setExecutionDate(productsListTp4.get(0).getDeliveryDate());
+		expectedModel4.setExecutionDate(DateUtils.getCurrentDate("yyyy-MM-dd"));
 		expectedModel4.setProductSku(productsListTp4.get(0).getProdCode());
 		expectedModel4.setIsDiscontinued(detailedProdListTp4.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
 		expectedModel4.setEarliestAv(detailedProdListTp4.getStockData().getEarliestAvailability());
@@ -132,6 +133,10 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel3, expectedModel3);
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel4, expectedModel4);
+		
+		//razvan cron
+		
+		//validate ca nu exista
 		
 		
 

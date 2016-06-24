@@ -355,10 +355,24 @@ public class DateUtils {
 		return DateUtils.isDateBeetween(date, DateUtils.getFirstDayOfNextMonth(format), DateUtils.getLastDayOfNextMonth(format), format);
 	}
 
+	/*
+	 * 
+	 * returns true if currentDate is after or equal to startingDate
+	 */
 	public static boolean isDateAfter(String currentDate, String startingDate, String format) throws ParseException {
 		DateFormat df = new SimpleDateFormat(format);
 
 		return !(df.parse(currentDate).before(df.parse(startingDate)));
+	}
+
+	/*
+	 * 
+	 * returns true if date1 is before or equal to date2
+	 */
+	public static boolean isDateBefore(String date1, String date2, String format) throws ParseException {
+		DateFormat df = new SimpleDateFormat(format);
+
+		return !(df.parse(date1).after(df.parse(date2)));
 	}
 
 	public static int getNumberOfDaysBeetweenTwoDates(String firstDate, String secondDate, String formatString) throws ParseException {
@@ -379,8 +393,7 @@ public class DateUtils {
 	}
 
 	public static void main(String args[]) throws ParseException {
-		System.out.println(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate("2016-06-10", "yyyy-MM-dd", 7),
-				"yyyy-MM-dd"));
+		System.out.println("SDSDSD " + DateUtils.parseDate("2016-07-01", "yyyy-MM-dd", "dd MMM yyyy", new Locale.Builder().setLanguage("de").build()));
 	}
 
 }

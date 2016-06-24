@@ -15,12 +15,12 @@ public class TermPurchaseGridSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 
-
 	@Step
 	public void searchForOrder(String incrementId) {
 		termPurchaseGridPage().inputOderId(incrementId);
 		termPurchaseGridPage().clickOnSearch();
 	}
+
 	@Step
 	public void checkOrderIsNotPresentInGrid(String incrementId) {
 		termPurchaseGridPage().verifyOrderIsNotInTheGrid(incrementId);
@@ -37,15 +37,20 @@ public class TermPurchaseGridSteps extends AbstractSteps {
 	}
 
 	@Step
+	public TermPurchaseOrderModel grabOrderDetailsAutomatedCron(String incrementId) throws ParseException {
+		return termPurchaseGridPage().grabOrderDetailsAutomatedCron(incrementId);
+	}
+
+	@Step
 	public void selectAction(String action) {
 		termPurchaseGridPage().selectAction(action);
 	}
-	
+
 	@Step
 	public void validateMessage(String expectedMessage) {
 		termPurchaseGridPage().validateMessage(expectedMessage);
 	}
-	
+
 	@Step
 	public void postponeOrder(String incrementId) {
 		termPurchaseGridPage().selectOrder(incrementId);
@@ -53,12 +58,14 @@ public class TermPurchaseGridSteps extends AbstractSteps {
 		termPurchaseGridPage().selectPostponePeriod(ConfigConstants.POSTPONE_ONE_WEEK);
 		termPurchaseGridPage().submitMassAction();
 	}
+
 	@Step
 	public void cancelOrder(String incrementId) {
 		termPurchaseGridPage().selectOrder(incrementId);
 		termPurchaseGridPage().selectAction(ConfigConstants.CANCEL);
 		termPurchaseGridPage().submitMassAction();
 	}
+
 	@Step
 	public void releaseOrder(String incrementId) {
 		termPurchaseGridPage().selectOrder(incrementId);

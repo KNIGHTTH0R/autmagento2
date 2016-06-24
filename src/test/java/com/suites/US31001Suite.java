@@ -18,6 +18,6 @@ import com.tests.uss31.uss31001.US31001ValidatePostponedOrdersInTpGridTest;
 	US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest.class
 })
 @RunWith(Suite.class)
-public class US30001Suite {
+public class US31001Suite {
 
 }
