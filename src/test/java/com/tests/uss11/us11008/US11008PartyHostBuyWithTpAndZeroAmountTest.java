@@ -76,6 +76,7 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 	private String username, password, customerName;
 	private String country;
 	private String plz;
+	private String voucherCode;
 	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -105,12 +106,13 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11007.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11008.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
-
+			voucherCode = prop.getProperty("voucherCode");
+			
 			country = prop.getProperty("country");
 			plz = prop.getProperty("plz");
 
@@ -141,9 +143,11 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			partyDetailsSteps.orderForCustomerFromParty(customerName);
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		customerRegistrationSteps.wipeHostCart();
 
 		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
@@ -175,7 +179,7 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 
 		regularUserCartSteps.verifyMultipleDeliveryOption();
 
-		orderForCustomerCartSteps.typeCouponCode("G160FMDE");
+		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();

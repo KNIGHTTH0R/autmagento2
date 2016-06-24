@@ -77,13 +77,13 @@ import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 	
 	US12001Suite.class,
 	
-	US13001Suite.class,
-	US13002Suite.class,
-	US13003Suite.class,
-	US13004Suite.class,
-	US13005Suite.class,
-	US13006Suite.class,
-	US13007Suite.class,
+//	US13001Suite.class,
+//	US13002Suite.class,
+//	US13003Suite.class,
+//	US13004Suite.class,
+//	US13005Suite.class,
+//	US13006Suite.class,
+//	US13007Suite.class,
 	
 	US16001Suite.class,
 	US16002Suite.class,
@@ -101,7 +101,7 @@ import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 
 //	US23001PartTwoSuite.class,
 	
-	US26001Suite.class,
+//	US26001Suite.class,
 //	US23001PartThreeSuite.class,
 	
 	US30001VerifyOpenIpsAfterNewOrdersTest.class,

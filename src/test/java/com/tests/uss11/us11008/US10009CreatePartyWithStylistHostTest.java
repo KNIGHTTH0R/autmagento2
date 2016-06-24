@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,11 +19,15 @@ import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.data.UrlModel;
-import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US11.8 Party Host Buys For Customer With 0 Amount Immediate and Tp Products", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_8.class)
@@ -74,7 +73,7 @@ public class US10009CreatePartyWithStylistHostTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 
