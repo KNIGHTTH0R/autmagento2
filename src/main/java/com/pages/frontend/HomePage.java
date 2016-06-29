@@ -60,12 +60,16 @@ public class HomePage extends AbstractPage {
 
 	// TODO a switch-case should be added here
 	public void goToNewItems() {
+		//to to a bug on chrome move mouse works only if the mouse is out of the browser
+//		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+//		js.executeScript("document.onmouseout = function(){alert('out');};");
+
 		Actions builder = new Actions(getDriver());
-		builder.moveToElement(jewelriesMenu).build().perform();
-		waitABit(1000);
-		element(newMenu).waitUntilVisible();
-		newMenu.click();
-		waitABit(1000);
+		builder.moveToElement(jewelriesMenu).moveToElement(newMenu).click().build().perform();
+		// waitABit(1000);
+		// element(newMenu).waitUntilVisible();
+		// newMenu.click();
+		// waitABit(1000);
 	}
 
 	// public void goToNewItems() {

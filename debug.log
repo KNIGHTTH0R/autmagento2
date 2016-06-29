@@ -176,3 +176,27 @@
 [0623/141827:ERROR:exception_snapshot_win.cc(57)] thread ID 7732 not found in process
 [0623/141827:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
 >>>>>>> branch '20160330stable' of git@evogit.evozon.com:pippajeanautotester/pippajeanautotester.git
+[0627/105057:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0627/105057:ERROR:exception_snapshot_win.cc(57)] thread ID 2948 not found in process
+[0627/105057:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0627/112404:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0627/112404:ERROR:exception_snapshot_win.cc(57)] thread ID 2004 not found in process
+[0627/112404:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0628/142152:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0628/142152:ERROR:exception_snapshot_win.cc(57)] thread ID 6408 not found in process
+[0628/142152:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0628/160900:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0628/160900:ERROR:exception_snapshot_win.cc(57)] thread ID 8672 not found in process
+[0628/160900:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0628/161644:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0628/161644:ERROR:exception_snapshot_win.cc(57)] thread ID 4656 not found in process
+[0628/161644:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0628/161838:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0628/161838:ERROR:exception_snapshot_win.cc(57)] thread ID 840 not found in process
+[0628/161838:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0628/162235:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0628/162235:ERROR:exception_snapshot_win.cc(57)] thread ID 5140 not found in process
+[0628/162235:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed
+[0628/180413:ERROR:process_reader_win.cc(113)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0628/180413:ERROR:exception_snapshot_win.cc(57)] thread ID 6708 not found in process
+[0628/180413:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::InitializeException failed

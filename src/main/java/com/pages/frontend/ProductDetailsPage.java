@@ -27,7 +27,7 @@ public class ProductDetailsPage extends AbstractPage {
 	@FindBy(css = "div.product-attributes.clearfix a")
 	private WebElement addToWishlistButton;
 
-	@FindBy(css = "p.product-ids.dp-inbl")
+	@FindBy(css = "p.product-ids")
 	private WebElement productCode;
 
 	@FindBy(css = "span[id*='product-price']")
@@ -48,8 +48,10 @@ public class ProductDetailsPage extends AbstractPage {
 	}
 
 	public void addToCart() {
+		System.out.println("inainte de click");
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
+		System.out.println("am dat click dar degeaba");
 		//TODO add a retry here
 		while (getDriver().findElement(By.cssSelector("div#add-to-cart-modal")).isDisplayed()) {
 			waitABit(1000);

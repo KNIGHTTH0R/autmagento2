@@ -104,7 +104,7 @@ import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 //	US26001Suite.class,
 //	US23001PartThreeSuite.class,
 	
-	US30001VerifyOpenIpsAfterNewOrdersTest.class,
+//	US30001VerifyOpenIpsAfterNewOrdersTest.class,
 	
 })
 @RunWith(Suite.class)
