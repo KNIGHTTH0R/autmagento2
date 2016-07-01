@@ -12,8 +12,8 @@ public class CreditCardModel {
 		super();
 		this.cardNumber = "4111 1111 1111 1111";
 		this.cardName = "test";
-		this.monthExpiration = "06";
-		this.yearExpiration = "2016";
+		this.monthExpiration = "08";
+		this.yearExpiration = "2018";
 		this.cvcNumber = "737";
 	}
 

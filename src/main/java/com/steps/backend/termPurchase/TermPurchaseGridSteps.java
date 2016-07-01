@@ -2,14 +2,11 @@ package com.steps.backend.termPurchase;
 
 import java.text.ParseException;
 
-import org.junit.Assert;
-
-import net.thucydides.core.annotations.Step;
-
-import com.kenai.constantine.Constant;
 import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
 
 public class TermPurchaseGridSteps extends AbstractSteps {
 

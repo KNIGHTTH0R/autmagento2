@@ -48,10 +48,8 @@ public class ProductDetailsPage extends AbstractPage {
 	}
 
 	public void addToCart() {
-		System.out.println("inainte de click");
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
-		System.out.println("am dat click dar degeaba");
 		//TODO add a retry here
 		while (getDriver().findElement(By.cssSelector("div#add-to-cart-modal")).isDisplayed()) {
 			waitABit(1000);

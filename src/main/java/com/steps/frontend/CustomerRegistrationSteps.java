@@ -21,7 +21,7 @@ import com.tools.requirements.AbstractSteps;
 public class CustomerRegistrationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 743498685895573421L;
-
+	@Title("Fill create customer form")
 	@StepGroup
 	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
 
@@ -39,7 +39,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
-
+	@Title("Fill create customer form without plz")
 	@StepGroup
 	public void fillCreateCustomerFormWithoutPlz(CustomerFormModel customerData, AddressModel addressData) {
 
@@ -83,7 +83,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 		return result;
 	}
-
+	@Title("Fill create customer form without SC and party host interests")
 	@StepGroup
 	public void fillCreateCustomerFormWithNoStylePartyAndStyleCoachChecked(CustomerFormModel customerData, AddressModel addressData) {
 

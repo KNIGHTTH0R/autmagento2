@@ -14,7 +14,6 @@ import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.data.backend.StylistPropertiesModel;
-import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.data.commission.CommissionPartyModel;
 import com.tools.data.email.EmailModel;
 import com.tools.data.frontend.AddressModel;

@@ -16,28 +16,31 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-//		System.setProperty("http.proxyHost", "localhost");
-//		System.setProperty("http.proxyPort", "8080");
+		// System.setProperty("http.proxyHost", "localhost");
+		// System.setProperty("http.proxyPort", "8080");
 
 		ComissionRestCalls.getStylistInfo("1835");
-		ComissionRestCalls.getPartyPerformanceInfo("57937");
+		// ComissionRestCalls.getPartyPerformanceInfo("57937");
 
 	}
 
 	public static String composeAuthenticationSuffix() throws Exception {
 
 		String hash = MD5.getMd5(Credentials.API_KEY + Credentials.API_SECRET + DateUtils.getTimestamp() + "30");
-		String suffix = "?api_sig=" + hash + "&api_key=" + Credentials.API_KEY + "&api_ts=" + DateUtils.getTimestamp() + "&api_ttl=30";
+		String suffix = "?api_sig=" + hash + "&api_key=" + Credentials.API_KEY + "&api_ts=" + DateUtils.getTimestamp()
+				+ "&api_ttl=30";
 
 		return suffix;
 	}
 
 	public static CommissionStylistModel getStylistInfo(String stylistId) throws Exception {
 
-		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX + stylistId + composeAuthenticationSuffix());
+		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE
+				+ UrlConstants.COMMISION_STYLIST_SUFFIX + stylistId + composeAuthenticationSuffix());
 		CommissionStylistModel commissionStylistModel = new CommissionStylistModel();
 		ObjectMapper mapper = new ObjectMapper();
-		CommisionStylistResponse res = (CommisionStylistResponse) mapper.readValue(unparsedResponse, CommisionStylistResponse.class);
+		CommisionStylistResponse res = (CommisionStylistResponse) mapper.readValue(unparsedResponse,
+				CommisionStylistResponse.class);
 		if (res.getStatus().equals("ok")) {
 
 			commissionStylistModel.setId(res.getBody().getId());
@@ -97,12 +100,14 @@ public class ComissionRestCalls {
 
 	public static String getPartyPerformanceInfo(String partyId) throws Exception {
 
-		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_PARTY_SUFFIX + partyId + composeAuthenticationSuffix());
+		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE
+				+ UrlConstants.COMMISION_PARTY_SUFFIX + partyId + composeAuthenticationSuffix());
 
 		CommissionPartyModel commissionPartyModel = new CommissionPartyModel();
 
 		ObjectMapper mapper = new ObjectMapper();
-		CommisionPartyResponse res = (CommisionPartyResponse) mapper.readValue(unparsedResponse, CommisionPartyResponse.class);
+		CommisionPartyResponse res = (CommisionPartyResponse) mapper.readValue(unparsedResponse,
+				CommisionPartyResponse.class);
 
 		commissionPartyModel.setPartyId(res.getPartyId());
 		commissionPartyModel.setNrOfOrders(res.getNrOfOrders());
@@ -129,11 +134,12 @@ public class ComissionRestCalls {
 		return unparsedResponse;
 	}
 
-
 	public static String getTeamPerformanceInfo(String stylistId) throws Exception {
 
-		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.TEAM_PERFORMANCE_SUFFIX + stylistId + composeAuthenticationSuffix());
+		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE
+				+ UrlConstants.TEAM_PERFORMANCE_SUFFIX + stylistId + composeAuthenticationSuffix());
 
 		return unparsedResponse;
 	}
+
 }

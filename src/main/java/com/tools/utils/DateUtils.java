@@ -11,8 +11,6 @@ import java.util.Locale;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
-import com.tools.persistance.MongoReader;
-
 public class DateUtils {
 
 	public static String getLastDayOfTheCurrentMonth(String format) {

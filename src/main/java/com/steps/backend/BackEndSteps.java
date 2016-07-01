@@ -1,20 +1,19 @@
 package com.steps.backend;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Title;
-
 import com.tools.data.StylistDataModel;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
 public class BackEndSteps extends AbstractSteps {
 

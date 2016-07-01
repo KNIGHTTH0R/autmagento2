@@ -6,7 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 import com.tests.uss30.uss30001.US30001GetInitialOpenIps;
-import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 
 @SuiteClasses({
 	

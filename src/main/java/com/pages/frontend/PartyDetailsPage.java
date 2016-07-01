@@ -3,6 +3,7 @@ package com.pages.frontend;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
@@ -215,7 +216,7 @@ public class PartyDetailsPage extends AbstractPage {
 	public void popupCloseParty() {
 		element(popupPartyCloseButton).waitUntilVisible();
 		popupPartyCloseButton.click();
-		waitFor(ExpectedConditions.textToBePresentInElement(getDriver().findElement(By.id("closePartyWrapper")),
+		withTimeoutOf(5, TimeUnit.SECONDS).waitFor(ExpectedConditions.textToBePresentInElement(getDriver().findElement(By.id("closePartyWrapper")),
 				ContextConstants.SUCCESSFULY_CLOSED_PARTY));
 	}
 

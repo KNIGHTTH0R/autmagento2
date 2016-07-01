@@ -4,6 +4,7 @@ import net.thucydides.core.pages.PageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import com.tools.env.constants.TimeConstants;
 
 public class AbstractPage extends PageObject {
 
@@ -28,5 +29,17 @@ public class AbstractPage extends PageObject {
 		evaluateJavascript("var dd =jQuery(' " + element + " ').eq(1);dd.mouseover(); ");
 	}
 
+	/**
+	 * Wait for document ready state for {@link Constants}.PAGE_LOAD_MAX_RETRY
+	 * time.
+	 */
+	public void waitForPageToLoad() {
+		int retry = 0;
+		do {
+			waitABit(TimeConstants.WAIT_TIME_SMALL);
+			retry++;
+		} while (retry <= TimeConstants.PAGE_LOAD_MAX_RETRY
+				&& evaluateJavascript("return document.readyState").equals("complete") != true);
+	}
 
 }

@@ -7,7 +7,6 @@ import java.util.List;
 import com.tools.data.PomCartCalcDetailsModel;
 import com.tools.data.frontend.PomProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.utils.PrintUtils;
 
 public class PomCartTotalsCalculation {
 
@@ -38,8 +37,6 @@ public class PomCartTotalsCalculation {
 
 		result.setTax(String.valueOf(tax.setScale(2, RoundingMode.HALF_UP)));
 	
-		PrintUtils.printPomCartCalcDetailsModel(result);
-
 		return result;
 	}
 
@@ -54,8 +51,6 @@ public class PomCartTotalsCalculation {
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())));
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 		result.setTotalAmount(totalAmountCalculation.toString());
-
-		PrintUtils.printShippingTotals(result);
 
 		return result;
 	}

@@ -2,15 +2,13 @@ package com.pages.frontend.checkout.cart.partyHost;
 
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class AddProductsModalPage extends AbstractPage {
 

@@ -15,7 +15,7 @@ public class SqlServerConnector {
 		try {
 			Class.forName(NavisionConstants.DRIVER);
 		} catch (ClassNotFoundException e) {
-			System.out.println("No MySQL JDBC Driver was found!");
+			System.out.println("No MySQL SErver Driver was found!");
 			e.printStackTrace();
 
 		}
