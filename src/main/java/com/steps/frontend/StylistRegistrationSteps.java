@@ -44,6 +44,7 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
+		
 	}
 
 	@StepGroup
@@ -75,27 +76,27 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		submitStep();
 	}
 
-	@StepGroup
-	@Title("Fill create stylecoach form with known sponsor")
-	public String fillCreateStylecoachFormWithKnownSponsor(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
-
-		inputFirstName(customerData.getFirstName());
-		inputLastName(customerData.getLastName());
-		selectBirthDate(birthDate);
-		inputEmail(customerData.getEmailName());
-		inputPassword(customerData.getPassword());
-		inputConfirmation(customerData.getPassword());
-		fillContactDetails(addressData);
-		checkIAgree();
-		submitStep();
-		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		stylistContextPage().submitStep();
-		starterSetPage().selectStarterKit();
-		starterSetPage().submitStep();
-
-		String date = FormatterUtils.getAndFormatCurrentDate();
-		return date;
-	}
+//	@StepGroup
+//	@Title("Fill create stylecoach form with known sponsor")
+//	public String fillCreateStylecoachFormWithKnownSponsor(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+//
+//		inputFirstName(customerData.getFirstName());
+//		inputLastName(customerData.getLastName());
+//		selectBirthDate(birthDate);
+//		inputEmail(customerData.getEmailName());
+//		inputPassword(customerData.getPassword());
+//		inputConfirmation(customerData.getPassword());
+//		fillContactDetails(addressData);
+//		checkIAgree();
+//		submitStep();
+////		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+////		stylistContextPage().submitStep();
+////		starterSetPage().selectStarterKit();
+////		starterSetPage().submitStep();
+//
+//		String date = FormatterUtils.getAndFormatCurrentDate();
+//		return date;
+//	}
 
 	@StepGroup
 	@Title("Update stylist data in step 1")
@@ -109,9 +110,32 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	}
 
+//	@StepGroup
+//	@Title("Fill create customer form and pay with visa")
+//	public String fillCreateCustomerFormPayWithVisa(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+//
+//		inputFirstName(customerData.getFirstName());
+//		inputLastName(customerData.getLastName());
+//		selectBirthDate(birthDate);
+//		inputEmail(customerData.getEmailName());
+//		inputPassword(customerData.getPassword());
+//		inputConfirmation(customerData.getPassword());
+//		fillContactDetails(addressData);
+//		checkNoCoachCheckbox();
+//		checkIAgree();
+//		submitStep();
+////		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+////		stylistContextPage().submitStep();
+////		starterSetPage().selectStarterKit();
+////		starterSetPage().submitStep();
+//
+//		String date = FormatterUtils.getAndFormatCurrentDate();
+//		return date;
+//	}
+
 	@StepGroup
 	@Title("Fill create customer form and pay with visa")
-	public String fillCreateCustomerFormPayWithVisa(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+	public String fillCreateStylecoachFormWithKnownSponsor(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
 
 		inputFirstName(customerData.getFirstName());
 		inputLastName(customerData.getLastName());
@@ -120,70 +144,47 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		fillContactDetails(addressData);
-		checkNoCoachCheckbox();
 		checkIAgree();
 		submitStep();
-		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		stylistContextPage().submitStep();
-		starterSetPage().selectStarterKit();
-		starterSetPage().submitStep();
+//		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+//		stylistContextPage().submitStep();
+//		starterSetPage().selectStarterKit();
+//		starterSetPage().submitStep();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
 
-	@StepGroup
-	@Title("Fill create customer form and pay with visa")
-	public String fillCreateStylecoachFormWithKnownSponsorPayWithVisa(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+//	@StepGroup
+//	@Title("Fill create customer form and return customer's lattitude and longitude")
+//	public CoordinatesModel fillCreateStylystFormAndReturnLatAndLong(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+//
+//		CoordinatesModel coordinatesModel = new CoordinatesModel();
+//
+//		inputFirstName(customerData.getFirstName());
+//		inputLastName(customerData.getLastName());
+//		selectBirthDate(birthDate);
+//		inputEmail(customerData.getEmailName());
+//		inputPassword(customerData.getPassword());
+//		inputConfirmation(customerData.getPassword());
+//		fillContactDetails(addressData);
+//		checkNoCoachCheckbox();
+//		checkIAgree();
+//		submitStep();
+////		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+////		stylistContextPage().submitStep();
+////		starterSetPage().selectStarterKit();
+////		starterSetPage().submitStep();
+//		try {
+//			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
+//					+ addressData.getHomeTown() + "," + addressData.getPostCode());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return coordinatesModel;
+//	}
 
-		inputFirstName(customerData.getFirstName());
-		inputLastName(customerData.getLastName());
-		selectBirthDate(birthDate);
-		inputEmail(customerData.getEmailName());
-		inputPassword(customerData.getPassword());
-		inputConfirmation(customerData.getPassword());
-		fillContactDetails(addressData);
-		checkIAgree();
-		submitStep();
-		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		stylistContextPage().submitStep();
-		starterSetPage().selectStarterKit();
-		starterSetPage().submitStep();
-
-		String date = FormatterUtils.getAndFormatCurrentDate();
-		return date;
-	}
-
-	@StepGroup
-	@Title("Fill create customer form and return customer's lattitude and longitude")
-	public CoordinatesModel fillCreateStylystFormAndReturnLatAndLong(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
-
-		CoordinatesModel coordinatesModel = new CoordinatesModel();
-
-		inputFirstName(customerData.getFirstName());
-		inputLastName(customerData.getLastName());
-		selectBirthDate(birthDate);
-		inputEmail(customerData.getEmailName());
-		inputPassword(customerData.getPassword());
-		inputConfirmation(customerData.getPassword());
-		fillContactDetails(addressData);
-		checkNoCoachCheckbox();
-		checkIAgree();
-		submitStep();
-		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
-		stylistContextPage().submitStep();
-		starterSetPage().selectStarterKit();
-		starterSetPage().submitStep();
-		try {
-			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
-					+ addressData.getHomeTown() + "," + addressData.getPostCode());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return coordinatesModel;
-	}
-
-	@StepGroup
+//	@StepGroup
 	@Title("Fill create customer form")
 	public String fillCreateCustomerFormFirstWithForbiddenCountry(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
 
@@ -212,32 +213,32 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		selectBirthDate(birthDate);
 		checkIAgree();
 		submitStep();
-		stylistContextPage().inputStylistRef(name);
-		stylistContextPage().submitStep();
-		starterSetPage().selectStarterKit();
-		starterSetPage().submitStep();
+//		stylistContextPage().inputStylistRef(name);
+//		stylistContextPage().submitStep();
+//		starterSetPage().selectStarterKit();
+//		starterSetPage().submitStep();
 		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
 
-	@StepGroup
-	public String fillStylistRegistrationPredefinedInfoFormWithNotPreferedCountryFirst(String name, AddressModel addressData, String birthDate) {
-		validateInfoBoxMessage();
-		closeInfoBox();
-		addressData.setCountryName(ContextConstants.COUNTRY_NAME);
-		selectBirthDate(birthDate);
-		checkIAgree();
-		submitStep();
-		stylistContextPage().inputStylistRef(name);
-		stylistContextPage().submitStep();
-		starterSetPage().selectStarterKit();
-		starterSetPage().submitStep();
-
-		String date = FormatterUtils.getAndFormatCurrentDate();
-		return date;
-	}
+//	@StepGroup
+//	public String fillStylistRegistrationPredefinedInfoFormWithNotPreferedCountryFirst(String name, AddressModel addressData, String birthDate) {
+//		validateInfoBoxMessage();
+//		closeInfoBox();
+//		addressData.setCountryName(ContextConstants.COUNTRY_NAME);
+//		selectBirthDate(birthDate);
+//		checkIAgree();
+//		submitStep();
+////		stylistContextPage().inputStylistRef(name);
+////		stylistContextPage().submitStep();
+////		starterSetPage().selectStarterKit();
+////		starterSetPage().submitStep();
+//
+//		String date = FormatterUtils.getAndFormatCurrentDate();
+//		return date;
+//	}
 
 	@StepGroup
 	@Title("Fill contact details")

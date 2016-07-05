@@ -101,11 +101,10 @@ public class MongoTableKeys {
 	public static final String TERM_PURCHASE_IP_MODEL = "TermPurchaseIpModel";
 	public static final String CURRENT_MONTH_IP = "currentMonthIp";
 	public static final String NEXT_MONTH_IP = "nextMonthIp";
- 
-	//ProductDetailedModel
+
+	// ProductDetailedModel
 	public static final String PRODUCT_DETAILED_MODEL = "ProductDetailedModel";
 	public static final String NAMcvcvcvE = "name";
-	
 
 	public static final String PRODUCT_BASIC_MODEL = "ProductBasicModel";
 	public static final String NAME = "name";
@@ -178,8 +177,8 @@ public class MongoTableKeys {
 	public static final String HOST_CART_CALC_DETAILS_MODEL = "HostCartCalcDetailsModel";
 	public static final String HOST_BASIC_PRODUCT_MODEL = "HostBasicProductModel";
 	public static final String BORROW_BASIC_PRODUCT_MODEL = "BorrowBasicProductModel";
-	
-	//TERM_PURCHASE_MODEL
+
+	// TERM_PURCHASE_MODEL
 	public static final String TERM_PURCHASE_MODEL = "TermPurchaseModel";
 	public static final String EXECUTION_DATE = "executionDate";
 
@@ -216,6 +215,10 @@ public class MongoTableKeys {
 	public static final String DICTIONARY_MODEL = "DictionaryModel";
 	public static final String STORE_CONFIG_MODEL = "StoreConfigModel";
 	public static final String SOAP_URL_KEY = "soapUrl";
+
+	// starterKit
+	public static final String STARTER_KIT_CODE = "starterKitCode";
+	public static final String STARTER_KIT_PRICE = "starterKitPrice";
 
 	public static final String COORDINATES_MODEL = "CoordinatesModel";
 	public static final String LATTITUDE = "Lattitude";

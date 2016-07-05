@@ -5,6 +5,12 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,6 +22,8 @@ import com.steps.backend.BackEndSteps;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.StarterSetSteps;
+import com.steps.frontend.StylistContextSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -28,10 +36,12 @@ import com.tools.data.frontend.DateModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.Credentials;
+import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
+import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkflow;
 
 @WithTag(name = "US6.2 Sc Registration Existing Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_2.class)
@@ -56,7 +66,15 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
+	@Steps
+	public StylistContextSteps stylistContextSteps;
+	@Steps
+	public AddStarterSetProductsWorkflow addStarterSetProductsWorkflow;
+	@Steps
+	public StarterSetSteps starterSetSteps;
 
+	private String starterSet,starterKitPrice;
+	
 	private static DateModel formDate = new DateModel();
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");
@@ -74,6 +92,29 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 			stylistData = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").get(0);
 		} else
 			Assert.assertTrue("Failure: No test data has been found.", false);
+		
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6001.properties");
+			prop.load(input);
+
+			starterSet = prop.getProperty("starterSet");
+			starterKitPrice = prop.getProperty("starterKitPrice");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	@Test
@@ -94,6 +135,11 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 		customerRegistrationSteps.performLogin(stylistData.getEmailName(), stylistData.getPassword());
 		String formCreationDate = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), birthDate);
 		formDate.setDate(formCreationDate);
+		
+		stylistContextSteps.addStylistReference(stylistData.getFirstName());
+
+		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		starterSetSteps.submitStarterSetStep();
 		
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);

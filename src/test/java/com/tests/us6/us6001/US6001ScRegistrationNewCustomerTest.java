@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +38,11 @@ import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkfl
 import com.workflows.frontend.stylecoachRegistration.StarterSetConfirmationWorkflows;
 import com.workflows.frontend.stylecoachRegistration.StylecoachRegistrationCartWorkflows;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
 @RunWith(SerenityRunner.class)
@@ -61,13 +61,13 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
-	public StylistContextSteps stylistContextSteps;
-	@Steps
 	public StarterSetSteps starterSetSteps;
 	@Steps
 	public CustomVerification customVerification;
 	@Steps
 	public StylecoachRegistrationCartWorkflows stylecoachRegistrationCartWorkflows;
+	@Steps
+	public StylistContextSteps stylistContextSteps;
 	@Steps
 	public AddStarterSetProductsWorkflow addStarterSetProductsWorkflow;
 	@Steps
@@ -78,7 +78,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private String taxClass, shippingValue, voucherValue, voucherCode;
+	private String taxClass, shippingValue, voucherValue, voucherCode, starterSet,starterKitPrice;
 
 	@Before
 	public void setUp() throws Exception {
@@ -102,6 +102,8 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 			shippingValue = prop.getProperty("shippingValue");
 			voucherValue = prop.getProperty("voucherValue");
 			voucherCode = prop.getProperty("voucherCode");
+			starterSet = prop.getProperty("starterSet");
+			starterKitPrice = prop.getProperty("starterKitPrice");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -124,16 +126,17 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 		headerSteps.navigateToRegisterForm();
 
-		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
+		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress,
+				birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
 		StarterSetProductModel productData;
 
-		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart();
+		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
-		
+
 		starterSetSteps.applyVoucher(voucherCode);
 
 		StylistRegistrationCartCalculator.calculateCartAndShippingTotals(taxClass, shippingValue, voucherValue, false);
@@ -150,10 +153,12 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		confirmationSteps.grabConfirmationTotals();
 		confirmationSteps.agreeAndCheckout();
 
-		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
+		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(
+				StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount("STARTER SET TOTALS");
 
-		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
+		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals,
+				StylistRegistrationCartCalculator.shippingCalculatedModel);
 		starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
 
 		customVerification.printErrors();
@@ -162,8 +167,10 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	@After
 	public void saveData() {
 
-		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel, getClass().getSimpleName());
-		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
+		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel,
+				getClass().getSimpleName());
+		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName());
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());

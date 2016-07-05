@@ -75,7 +75,7 @@ public class US24001StylistRegistrationPlzValidationTest extends BaseTest {
 		stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
-		starterSetSteps.selectStarterKit();
+		starterSetSteps.selectStarterKit("input#kit_1959");
 		starterSetSteps.grabCartTotal(false);
 		starterSetSteps.submitStarterSetStep();
 

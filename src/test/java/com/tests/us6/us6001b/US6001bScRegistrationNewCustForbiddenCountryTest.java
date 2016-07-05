@@ -79,7 +79,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private String taxClass, shippingValue, voucherValue, voucherCode;
+	private String taxClass, shippingValue, voucherValue, voucherCode,starterSet,starterKitPrice;
 
 	@Before
 	public void setUp() throws Exception {
@@ -103,6 +103,8 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 			shippingValue = prop.getProperty("shippingValue");
 			voucherValue = prop.getProperty("voucherValue");
 			voucherCode = prop.getProperty("voucherCode");
+			starterSet = prop.getProperty("starterSet");
+			starterKitPrice = prop.getProperty("starterKitPrice");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -129,7 +131,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
 		StarterSetProductModel productData;
-		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart();
+		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
 
 		starterSetSteps.applyVoucher(voucherCode);

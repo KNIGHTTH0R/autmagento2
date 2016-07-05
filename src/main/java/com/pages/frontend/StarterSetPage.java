@@ -105,9 +105,9 @@ public class StarterSetPage extends AbstractPage {
 		jetztStartenFromStarterSet.click();
 	}
 
-	public void selectStarterKit() {
-		waitFor(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input#kit_2941")));
-		elementjQueryClick("input#kit_2941");
+	public void selectStarterKit(String starterKitId) {
+		waitFor(ExpectedConditions.presenceOfElementLocated(By.cssSelector(starterKitId)));
+		elementjQueryClick(starterKitId);
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
