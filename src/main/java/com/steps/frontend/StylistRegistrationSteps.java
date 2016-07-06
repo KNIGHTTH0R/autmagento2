@@ -1,22 +1,19 @@
 package com.steps.frontend;
 
-import java.io.IOException;
 import java.util.Set;
-
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.env.constants.ContextConstants;
-import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.FormatterUtils;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
 public class StylistRegistrationSteps extends AbstractSteps {
 
