@@ -154,7 +154,6 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 
-//		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
