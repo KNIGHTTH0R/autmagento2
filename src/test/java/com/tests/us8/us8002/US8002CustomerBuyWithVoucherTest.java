@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +21,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
@@ -45,6 +41,11 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 @WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_2.class)
 @RunWith(SerenityRunner.class)
@@ -63,6 +64,8 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
+	public GeneralCartSteps generalCartSteps;
+	@Steps
 	public HomeSteps homeSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -79,7 +82,7 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 
 	private String username, password;
 	private String discountClass;
-	private String billingAddress,shippingAddress;
+	private String billingAddress, shippingAddress;
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
@@ -147,7 +150,11 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.goToNewItems();
-		customerRegistrationSteps.wipeRegularCart();
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();
+
+//		customerRegistrationSteps.wipeRegularCart();
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
@@ -158,15 +165,15 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		RegularUserCartCalculator.allProductsList.add(productData);
 
 		headerSteps.openCartPreview();
-		headerSteps.goToCart();		
+		headerSteps.goToCart();
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
 
-		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
+		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
 
-		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
-		
+		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList,
+				discountClass, shippingValue, voucherValue);
 
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
@@ -175,9 +182,9 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		shippingSteps.selectShippingAddress(shippingAddress);
 
 		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
-	
+
 		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
-	
+
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
@@ -188,11 +195,11 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-	
+
 		confirmationSteps.grabRegularProductsList();
-		
+
 		RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-		
+
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
@@ -206,14 +213,14 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
 		}
 	}
 }
-
-

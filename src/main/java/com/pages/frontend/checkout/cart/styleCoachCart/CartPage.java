@@ -51,6 +51,7 @@ public class CartPage extends AbstractPage {
 
 	@FindBy(className = "shopping-bag-form")
 	private WebElement formContainer;
+	
 
 	/**
 	 * Will grab all products data from all carts
@@ -316,5 +317,5 @@ public class CartPage extends AbstractPage {
 		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 
 	}
-
+	
 }

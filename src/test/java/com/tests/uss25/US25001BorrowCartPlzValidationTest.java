@@ -24,6 +24,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.borrowCart.BorrowCartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -60,6 +61,8 @@ public class US25001BorrowCartPlzValidationTest extends BaseTest {
 	public HomeSteps homeSteps;
 	@Steps
 	public LoungeSteps loungeSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps

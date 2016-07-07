@@ -26,6 +26,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
@@ -63,6 +64,8 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
 	public HomeSteps homeSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps

@@ -24,6 +24,7 @@ import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.cartcalculations.smf.CartCalculator;
@@ -52,6 +53,8 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 	public HeaderSteps headerSteps;
 	@Steps
 	public HomeSteps homeSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
@@ -124,8 +127,10 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.clickonGeneralView();
-		frontEndSteps.wipeCart();
-
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();
+		
 		addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "1", "18");
 		addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "1", "0");
 		addProductsWorkflow.setProductToCart(genProduct3.getSku(), genProduct3.getName(), "1", "0");

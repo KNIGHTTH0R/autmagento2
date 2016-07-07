@@ -26,6 +26,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
@@ -61,6 +62,8 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 	public ShippingSteps shippingSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public OrderForCustomerCartSteps orderForCustomerCartSteps;
 	@Steps
@@ -164,7 +167,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
-		customerRegistrationSteps.wipeHostCart();
+		generalCartSteps.clearCart();
 		HostBasicProductModel productData;
 		
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");

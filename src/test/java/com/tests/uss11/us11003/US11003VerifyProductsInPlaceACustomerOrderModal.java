@@ -20,6 +20,7 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.AddProductsModalSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.tests.BaseTest;
@@ -39,6 +40,8 @@ public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 	public FooterSteps footerSteps;
 	@Steps
 	public LoungeSteps loungeSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -95,7 +98,7 @@ public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 			loungeSteps.clickOrderForCustomer();
 			loungeSteps.selectCustomerToOrderFor(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
-		customerRegistrationSteps.wipeHostCart();
+		generalCartSteps.clearCart();
 		orderForCustomerCartSteps.openSearchProductsModal();
 
 		addProductsModalSteps.searchForProduct(genProduct1.getSku());

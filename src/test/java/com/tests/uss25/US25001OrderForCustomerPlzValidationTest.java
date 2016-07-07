@@ -23,7 +23,9 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
+import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
@@ -62,6 +64,10 @@ public class US25001OrderForCustomerPlzValidationTest extends BaseTest {
 	public ShippingSteps shippingSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public OrderForCustomerCartSteps orderForCustomerCartSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public HostCartSteps hostCartSteps;
 	@Steps
@@ -131,12 +137,12 @@ public class US25001OrderForCustomerPlzValidationTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToProfile();
-
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
-		customerRegistrationSteps.wipeHostCart();
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			partyDetailsSteps.orderForCustomerFromParty(customerName);
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
+		generalCartSteps.clearCart();
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
@@ -150,12 +156,12 @@ public class US25001OrderForCustomerPlzValidationTest extends BaseTest {
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
 		try {
-			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
+			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv)
+					.inputPostCodeCsv();
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail("Failed !!!");
 		}
-
 
 	}
 

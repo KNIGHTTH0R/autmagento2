@@ -44,7 +44,7 @@ public class RegularUserCartPage extends AbstractPage {
 
 	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")
 	private WebElement updateButton;
-
+	
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")
 	private WebElement updateJewerlyBonus;
 
@@ -309,6 +309,7 @@ public class RegularUserCartPage extends AbstractPage {
 		element(updateButton).waitUntilVisible();
 		updateButton.click();
 	}
+	
 
 	/**
 	 * Verify Wipe cart if cart contains any data
