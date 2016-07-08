@@ -18,6 +18,10 @@ public class HostCartCalculator {
 	public static List<HostBasicProductModel> allProductsListTp2 = new ArrayList<HostBasicProductModel>();
 	public static List<HostBasicProductModel> allProductsListTp3 = new ArrayList<HostBasicProductModel>();
 	public static List<HostBasicProductModel> allProductsListTp4 = new ArrayList<HostBasicProductModel>();
+	public static List<HostBasicProductModel> allProductsListTp5 = new ArrayList<HostBasicProductModel>();
+	public static List<HostBasicProductModel> allProductsListTp6 = new ArrayList<HostBasicProductModel>();
+	public static List<HostBasicProductModel> allProductsListTp7 = new ArrayList<HostBasicProductModel>();
+	public static List<HostBasicProductModel> allProductsListTp8 = new ArrayList<HostBasicProductModel>();
 	public static List<HostBasicProductModel> allProductsListwithVoucher = new ArrayList<HostBasicProductModel>();
 	public static List<HostBasicProductModel> allProductsListWithRegularPrice = new ArrayList<HostBasicProductModel>();
 	public static List<HostBasicProductModel> allProductsListWithoutRegularPrice = new ArrayList<HostBasicProductModel>();
@@ -28,6 +32,10 @@ public class HostCartCalculator {
 	public static ShippingModel shippingCalculatedModelTp2 = new ShippingModel();
 	public static ShippingModel shippingCalculatedModelTp3 = new ShippingModel();
 	public static ShippingModel shippingCalculatedModelTp4 = new ShippingModel();
+	public static ShippingModel shippingCalculatedModelTp5 = new ShippingModel();
+	public static ShippingModel shippingCalculatedModelTp6 = new ShippingModel();
+	public static ShippingModel shippingCalculatedModelTp7 = new ShippingModel();
+	public static ShippingModel shippingCalculatedModelTp8 = new ShippingModel();
 
 	public static void wipe() {
 		allProductsList = new ArrayList<HostBasicProductModel>();
@@ -36,6 +44,10 @@ public class HostCartCalculator {
 		allProductsListTp2 = new ArrayList<HostBasicProductModel>();
 		allProductsListTp3 = new ArrayList<HostBasicProductModel>();
 		allProductsListTp4 = new ArrayList<HostBasicProductModel>();
+		allProductsListTp5 = new ArrayList<HostBasicProductModel>();
+		allProductsListTp6 = new ArrayList<HostBasicProductModel>();
+		allProductsListTp7 = new ArrayList<HostBasicProductModel>();
+		allProductsListTp8= new ArrayList<HostBasicProductModel>();
 		allProductsListwithVoucher = new ArrayList<HostBasicProductModel>();
 		allProductsListWithRegularPrice = new ArrayList<HostBasicProductModel>();
 		allProductsListWithoutRegularPrice = new ArrayList<HostBasicProductModel>();
@@ -46,6 +58,10 @@ public class HostCartCalculator {
 		shippingCalculatedModelTp2 = new ShippingModel();
 		shippingCalculatedModelTp3 = new ShippingModel();
 		shippingCalculatedModelTp4 = new ShippingModel();
+		shippingCalculatedModelTp5 = new ShippingModel();
+		shippingCalculatedModelTp6 = new ShippingModel();
+		shippingCalculatedModelTp7 = new ShippingModel();
+		shippingCalculatedModelTp8 = new ShippingModel();
 	}
 
 	public static List<HostBasicProductModel> getProductswithRegularPriceFromList(

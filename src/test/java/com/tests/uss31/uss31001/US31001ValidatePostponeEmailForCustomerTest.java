@@ -74,7 +74,7 @@ public class US31001ValidatePostponeEmailForCustomerTest extends BaseTest {
 			}
 		}
 
-		termPurchaseModel = MongoReader.grabTermPurchaseOrderModel("US31001ValidatePostponedOrdersInTpGridTest").get(0);
+		termPurchaseModel = MongoReader.grabTermPurchaseOrderModel("US31001ValidatePostponedOrdersInTpGridTest" + "TP1").get(0);
 
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 
@@ -86,7 +86,7 @@ public class US31001ValidatePostponeEmailForCustomerTest extends BaseTest {
 		gmailConnector = new GmailConnector(emailData);
 		
 		System.out.println("dsdsdsdsd");
-		System.out.println("SDSDSD " + DateUtils.parseDate(termPurchaseModel.getExecutionDate(), "dd-MM-yyyy", "dd MMM yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+		System.out.println("SDSDSD " + DateUtils.parseDate(termPurchaseModel.getExecutionDate(), "yyyy-MM-dd", "dd MMM yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 	}
 
 	@Test
@@ -101,7 +101,7 @@ public class US31001ValidatePostponeEmailForCustomerTest extends BaseTest {
 	
 		emailSteps
 				.validateEmailContent(
-						DateUtils.parseDate(termPurchaseModel.getExecutionDate(), "dd-MM-yyyy", "dd MMM yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()),
+						DateUtils.parseDate(termPurchaseModel.getExecutionDate(), "yyyy-MM-dd", "dd MMM yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()),
 						message);
 
 	}

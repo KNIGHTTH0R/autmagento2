@@ -14,10 +14,10 @@ import com.tests.uss17.us17003.US17003VerifyThatOldStylistWasDeactivatedTest;
 	US17003StyleCoachRegistrationTest.class,
 //	US17003MarkStarterKitOrderAsPaidTest.class,
 //	US17003ConfirmStylecoachTest.class,
-	US17003AddNewContactToStyleCoachTest.class,
-	US17003ReasignContactsTest.class,
+	US17003AddNewContactToStyleCoachTest.class, //add a contact under created SC
+	US17003ReasignContactsTest.class, //cancel the SC
 	US17003VerifyThatOldStylistWasDeactivatedTest.class,
-	US17003VerifyContactIsReassignedUpOnCanceledScHierarchyTest.class,
+	US17003VerifyContactIsReassignedUpOnCanceledScHierarchyTest.class, //verify that the contact is reassigned to a SC from hierarchy(in our case on Master)
 	
 })
 @RunWith(Suite.class)

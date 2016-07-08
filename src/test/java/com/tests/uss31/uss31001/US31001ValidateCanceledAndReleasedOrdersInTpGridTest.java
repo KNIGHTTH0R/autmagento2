@@ -9,10 +9,13 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
+import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.backend.termPurchase.TermPurchaseGridSteps;
@@ -25,7 +28,10 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
+import com.tools.env.constants.JenkinsConstants;
+import com.tools.env.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.backend.OrderWorkflows;
@@ -64,6 +70,8 @@ public class US31001ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 	private static List<HostBasicProductModel> productsListTp2 = new ArrayList<HostBasicProductModel>();
 	private static ProductDetailedModel detailedProdListTp2 = new ProductDetailedModel();
 	OrderModel orderModelListTp2 = new OrderModel();
+	OrderModel orderModelListTp3 = new OrderModel();
+	OrderModel orderModelListTp4 = new OrderModel();
 
 	@Before
 	public void setUp() throws ParseException {
@@ -81,6 +89,9 @@ public class US31001ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 		detailedProdListTp2.getStockData().setIsDiscontinued("1");
 		detailedProdListTp2.getStockData().setQty("1000");
 		productsListTp2 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP2");
+		
+		orderModelListTp3 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP3").get(0);
+	    orderModelListTp4 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP4").get(0);
 
 		expectedModel1 = new TermPurchaseOrderModel();
 		expectedModel1.setIncrementId(orderModelListTp1.getOrderId());
@@ -111,6 +122,10 @@ public class US31001ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 		expectedModel2.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
 		expectedModel2.setScheduledPaymentStatus(ConfigConstants.PENDING);
 		expectedModel2.setProductQty(detailedProdListTp2.getStockData().getQty());
+		
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
 	}
 
 	@Test
@@ -153,5 +168,22 @@ public class US31001ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 		customVerifications.printErrors();
 
 	}
+	
+	@After
+	public void runCron() throws Exception{
+	
+		
+	    ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId() + JenkinsConstants.JOB_TOKEN);
+	    ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp4.getOrderId() + JenkinsConstants.JOB_TOKEN);
+		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
+		
+		MongoWriter.saveTermPurchaseModel(expectedModel1,getClass().getSimpleName()+ "TP1");
+		MongoWriter.saveTermPurchaseModel(expectedModel2,getClass().getSimpleName() + "TP2");
+	}
+	
+	
 
 }

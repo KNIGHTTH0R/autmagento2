@@ -38,8 +38,7 @@ public class AbstractPage extends PageObject {
 		do {
 			waitABit(TimeConstants.WAIT_TIME_SMALL);
 			retry++;
-		} while (retry <= TimeConstants.PAGE_LOAD_MAX_RETRY
-				&& evaluateJavascript("return document.readyState").equals("complete") != true);
+		} while (retry <= TimeConstants.PAGE_LOAD_MAX_RETRY && evaluateJavascript("return document.readyState").equals("complete") != true);
 	}
 
 }

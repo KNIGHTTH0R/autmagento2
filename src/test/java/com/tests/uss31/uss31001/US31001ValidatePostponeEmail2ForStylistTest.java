@@ -35,7 +35,7 @@ import com.tools.utils.DateUtils;
 @WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_2.class)
 @RunWith(SerenityRunner.class)
-public class US31001ValidatePostponeEmailForStylistTest extends BaseTest {
+public class US31001ValidatePostponeEmail2ForStylistTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -55,7 +55,7 @@ public class US31001ValidatePostponeEmailForStylistTest extends BaseTest {
 		InputStream input = null;
 
 		try {
-
+			
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_31_FOLDER + File.separator + "us31001.properties");
 			prop.load(input);
 			email = prop.getProperty("username");
@@ -74,7 +74,9 @@ public class US31001ValidatePostponeEmailForStylistTest extends BaseTest {
 			}
 		}
 
-		termPurchaseModel = MongoReader.grabTermPurchaseOrderModel("US31001ValidatePostponedOrdersInTpGridTest"+ "TP1").get(0);
+		termPurchaseModel = MongoReader.grabTermPurchaseOrderModel("US31001ValidatePostponedOrdersInTpGrid2Test"+ "TP5").get(0);
+		
+		System.out.println(DateUtils.parseDate(termPurchaseModel.getExecutionDate(), "yyyy-MM-dd", "dd MMM yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 
@@ -88,12 +90,12 @@ public class US31001ValidatePostponeEmailForStylistTest extends BaseTest {
 	}
 
 	@Test
-	public void us31001ValidatePostponeEmailForStylistTest() throws ParseException {
+	public void us31001ValidatePostponeEmail2ForStylistTest() throws ParseException {
 		frontEndSteps.performLogin(email, password);
 
 		String message = gmailConnector.searchForMail("", "Bestellung verschieben", true);
 		System.out.println(message);
-		emailSteps.validateEmailContent("wegen verändertem Lieferdatum verschoben.", message);
+		emailSteps.validateEmailContent("wegen niedrigem Warenbestand verschoben.", message);
 		emailSteps.validateEmailContent(termPurchaseModel.getIncrementId(), message);
 		emailSteps
 				.validateEmailContent(
