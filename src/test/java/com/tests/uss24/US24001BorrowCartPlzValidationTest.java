@@ -138,7 +138,7 @@ public class US24001BorrowCartPlzValidationTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.clickGoToBorrowCart();
-		generalCartSteps.clearCart();
+		generalCartSteps.clearBorrowCart();
 
 		addBorrowedProductsWorkflow.setBorrowedDefaultProductToCart();
 		addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct1, "0.00");

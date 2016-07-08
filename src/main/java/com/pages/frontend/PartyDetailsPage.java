@@ -216,7 +216,7 @@ public class PartyDetailsPage extends AbstractPage {
 	public void popupCloseParty() {
 		element(popupPartyCloseButton).waitUntilVisible();
 		popupPartyCloseButton.click();
-		withTimeoutOf(5, TimeUnit.SECONDS).waitFor(ExpectedConditions.textToBePresentInElement(getDriver().findElement(By.id("closePartyWrapper")),
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.textToBePresentInElement(getDriver().findElement(By.id("closePartyWrapper")),
 				ContextConstants.SUCCESSFULY_CLOSED_PARTY));
 	}
 

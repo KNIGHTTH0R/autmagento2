@@ -85,15 +85,18 @@ public class FormatterUtils {
 	 */
 
 	public static String getOrderId(String url) {
-
-		return extractOrderIDFromURL(url).replace("staging-int", "");
+		
+		return extractOrderIDFromURL(url);
 	}
 
 	public static String incrementOrderId(String orderId, int incrementNumber) {
+		
+		String charPart = FormatterUtils.getNotDigitsFromString(orderId);
+		String digitPart = FormatterUtils.getIntegerNumberFromString(orderId);
 
-		int number = Integer.parseInt(orderId) + incrementNumber;
+		int number = Integer.parseInt(digitPart) + incrementNumber;
 
-		return "staging-int" + StringUtils.leftPad(String.valueOf(number), 10, "0");
+		return charPart + StringUtils.leftPad(String.valueOf(number), 10, "0");
 	}
 
 	public static String cleanNumberToString(String unitPrice) {
@@ -116,6 +119,17 @@ public class FormatterUtils {
 		for (int i = 0; i < s.length(); i++) {
 			char ch = s.charAt(i);
 			if (Character.isDigit(ch)) {
+				t.append(ch);
+			}
+		}
+		return String.valueOf(t);
+	}
+	
+	public static String getNotDigitsFromString(String s) {
+		StringBuilder t = new StringBuilder();
+		for (int i = 0; i < s.length(); i++) {
+			char ch = s.charAt(i);
+			if (!Character.isDigit(ch)) {
 				t.append(ch);
 			}
 		}
@@ -212,8 +226,9 @@ public class FormatterUtils {
 		return elems;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(FormatterUtils.parseValueToZeroDecimals("€131,60 €"));
-		System.out.println(FormatterUtils.cleanNumberToString("131,60 €").replace(".", ""));
-	}
+//	public static void main(String[] args) {
+//		System.out.println(FormatterUtils.getIntegerNumberFromString("qa-int0000183500"));
+//		System.out.println(FormatterUtils.getNotDigitsFromString("qa-int0000183500"));
+//		System.out.println(FormatterUtils.incrementOrderId("qa-int0000183500",2));
+//	}
 }

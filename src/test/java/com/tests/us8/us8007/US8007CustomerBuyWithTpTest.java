@@ -233,6 +233,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 		
 		String url = shippingSteps.grabUrl();
+		System.out.println(url);
 		String orderId = FormatterUtils.getOrderId(url);
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));

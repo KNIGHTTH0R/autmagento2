@@ -207,6 +207,8 @@ public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 		dateModel.setDate(DateUtils.getCurrentDateOneHourBack("MM/dd/YYYY"));
+		
+		checkoutValidationSteps.verifySuccessMessage();
 
 	}
 

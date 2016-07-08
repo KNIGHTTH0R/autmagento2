@@ -93,7 +93,7 @@ public class US3004SfmValidVatSmbBillingShippingAtTest extends BaseTest {
 		DataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("49.90");
+		genProduct1.setPrice("49.50");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
 		genProduct2 = MagentoProductCalls.createProductModel();

@@ -10,6 +10,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 public class GeneralCartPage extends AbstractPage {
 	
 	@FindBy(css = "button[value='empty_cart']")
+//	@FindBy(css = "button[title='Warenkorb leeren']")
 	private WebElement clearCartButton;
 	
 	@FindBy(css = "div.main.col1-layout")

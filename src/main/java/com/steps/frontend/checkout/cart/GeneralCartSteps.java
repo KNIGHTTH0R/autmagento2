@@ -16,5 +16,11 @@ public class GeneralCartSteps extends AbstractSteps {
 		}
 
 	}
+	@Step
+	public void clearBorrowCart() {
+		
+			generalCartPage().clickClearCart();
+		
+	}
 
 }

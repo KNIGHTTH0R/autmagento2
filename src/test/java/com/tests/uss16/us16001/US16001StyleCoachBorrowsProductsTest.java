@@ -142,7 +142,7 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.clickGoToBorrowCart();
 		
-		generalCartSteps.clearCart();
+		generalCartSteps.clearBorrowCart();
 		BorrowProductModel productData;
 
 		productData = addBorrowedProductsWorkflow.setBorrowedDefaultProductToCart();
