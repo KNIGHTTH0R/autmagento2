@@ -15,9 +15,9 @@ public class HeaderSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1221784607709066875L;
 
 	@Step
-	public String openCartPreview() {
+	public void openCartPreview() {
 		headerPage().clickShoppingBag();
-		return headerPage().getShoppingBagTotalSum();
+//		return headerPage().getShoppingBagTotalSum();
 	}
 
 	@Step

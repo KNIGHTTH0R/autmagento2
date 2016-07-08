@@ -130,4 +130,5 @@ public class ConfigConstants {
 	public static final String MANUAL = "Manuell";
 	public static final String AUTOMATED = "Automated";
 	public static final String SEMIAUTOMATED = "Semi-automated";
+	
 }

@@ -90,7 +90,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		customerFormDate.setDate(formCreationDate);
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
-		starterSetSteps.selectStarterKit();
+		starterSetSteps.selectStarterKit("input#kit_2941");
 		starterSetSteps.grabCartTotal(false);
 		starterSetSteps.submitStarterSetStep();
 

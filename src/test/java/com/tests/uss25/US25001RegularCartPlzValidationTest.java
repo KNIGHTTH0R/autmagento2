@@ -23,6 +23,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
@@ -58,6 +59,8 @@ public class US25001RegularCartPlzValidationTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
@@ -131,7 +134,9 @@ public class US25001RegularCartPlzValidationTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.goToNewItems();
-		customerRegistrationSteps.wipeRegularCart();
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();
 
 		addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
 

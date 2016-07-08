@@ -25,12 +25,12 @@ public class RegularUserCartSteps extends AbstractSteps {
 
 	@Step
 	public String selectDeliveryDate(String productCode, Locale locale) throws ParseException {
-		return regularUserCartPage().selectDeliveryDate(productCode,locale);
+		return regularUserCartPage().selectDeliveryDate(productCode, locale);
 	}
 
 	@Step
-	public String getDeliveryDate(String productCode,Locale locale) throws ParseException {
-		return regularUserCartPage().getDeliveryDate(productCode,locale);
+	public String getDeliveryDate(String productCode, Locale locale) throws ParseException {
+		return regularUserCartPage().getDeliveryDate(productCode, locale);
 	}
 
 	@Step
@@ -67,13 +67,13 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void typeCouponCode(String code) {
 		regularUserCartPage().typeCouponCode(code);
 		regularUserCartPage().submitVoucherCode();
-	
+
 	}
 
-//	@Step
-//	public void submitVoucherCode() {
-//		regularUserCartPage().submitVoucherCode();
-//	}
+	// @Step
+	// public void submitVoucherCode() {
+	// regularUserCartPage().submitVoucherCode();
+	// }
 
 	@Step
 	public void selectShippingOption(String option) {

@@ -26,6 +26,7 @@ import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.borrowCart.BorrowCartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -65,6 +66,8 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 	public FooterSteps footerSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
@@ -139,7 +142,7 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.clickGoToBorrowCart();
 		
-		borrowCartSteps.clickWipeCart();
+		generalCartSteps.clearCart();
 		BorrowProductModel productData;
 
 		productData = addBorrowedProductsWorkflow.setBorrowedDefaultProductToCart();

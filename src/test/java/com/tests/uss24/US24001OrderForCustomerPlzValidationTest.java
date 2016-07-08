@@ -28,7 +28,9 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
+import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
@@ -63,6 +65,8 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
+	public GeneralCartSteps generalCartSteps;
+	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
 	public HostCartSteps hostCartSteps;
@@ -76,6 +80,8 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 	public AddRegularProductsWorkflow addRegularProductsWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
+	@Steps
+	public OrderForCustomerCartSteps orderForCustomerCartSteps;
 	@Steps
 	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
 	@Steps
@@ -142,12 +148,12 @@ public class US24001OrderForCustomerPlzValidationTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToProfile();
-
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
-		customerRegistrationSteps.wipeHostCart();
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			partyDetailsSteps.orderForCustomerFromParty(customerName);
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
+		generalCartSteps.clearCart();
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");

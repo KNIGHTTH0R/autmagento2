@@ -25,6 +25,7 @@ import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -60,6 +61,8 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	public CartSteps cartSteps;
 	@Steps
 	public HomeSteps homeSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
@@ -133,7 +136,9 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.clickonGeneralView();
-		frontEndSteps.wipeCart();
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();
 
 		BasicProductModel productData;
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);

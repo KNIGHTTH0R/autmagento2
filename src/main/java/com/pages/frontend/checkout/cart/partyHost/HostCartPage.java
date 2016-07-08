@@ -53,6 +53,12 @@ public class HostCartPage extends AbstractPage {
 
 	@FindBy(css = "button.button.blue-button[value='YES']")
 	private WebElement acceptNotConsumedBonusButton;
+	
+	@FindBy(css = "div.buttons-set.to-the-right button:nth-child(1).button.gold-btn.bordered")
+	private WebElement clearCartButton;
+	
+	@FindBy(css = "div.main.col1-layout")
+	private WebElement cartContainer;
 
 	public void selectProductDiscountType(String productCode, String discountType) {
 		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
@@ -260,6 +266,15 @@ public class HostCartPage extends AbstractPage {
 	public void acceptInfoPopupForNotConsumedBonus() {
 		element(acceptNotConsumedBonusButton).waitUntilVisible();
 		acceptNotConsumedBonusButton.click();
+	}
+	
+	public void clickClearCart() {
+		element(clearCartButton).waitUntilVisible();
+		clearCartButton.click();
+	}
+	
+	public boolean isCartEmpty(){
+		return cartContainer.getText().contains(ContextConstants.EMPTY_CART);
 	}
 
 }

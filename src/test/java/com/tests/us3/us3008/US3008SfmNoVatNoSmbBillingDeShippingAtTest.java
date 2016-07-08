@@ -25,6 +25,7 @@ import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -62,6 +63,8 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 	public ShippingSteps shippingSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
@@ -141,7 +144,9 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.clickonGeneralView();
-		customerRegistrationSteps.wipeCart();
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();;
 		BasicProductModel productData;
 		
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_50);

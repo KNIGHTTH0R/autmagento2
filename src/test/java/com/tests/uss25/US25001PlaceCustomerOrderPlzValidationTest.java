@@ -24,6 +24,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
@@ -63,6 +64,8 @@ public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 	public CreateNewContactSteps createNewContactSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public ShippingStepsWithCsvStepsWithCsv shippingStepsWithCsvStepsWithCsv;
 	@Steps
@@ -138,7 +141,7 @@ public class US25001PlaceCustomerOrderPlzValidationTest extends BaseTest {
 
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
-		customerRegistrationSteps.wipeHostCart();
+		generalCartSteps.clearCart();
 
 		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 

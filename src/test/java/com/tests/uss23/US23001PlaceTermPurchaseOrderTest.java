@@ -30,6 +30,7 @@ import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
@@ -66,6 +67,8 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	public CreateNewContactSteps createNewContactSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public OrderForCustomerCartSteps orderForCustomerCartSteps;
 	@Steps
@@ -162,7 +165,7 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
-		customerRegistrationSteps.wipeHostCart();
+		generalCartSteps.clearCart();
 
 		System.out.println(changingStockMagentoProducts.get(0).getQuantity());
 		System.out.println(changingStockMagentoProducts.get(1).getQuantity());

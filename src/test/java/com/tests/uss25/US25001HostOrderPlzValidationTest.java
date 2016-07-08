@@ -21,6 +21,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.ShippingStepsWithCsvStepsWithCsv;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
 import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
@@ -60,6 +61,8 @@ public class US25001HostOrderPlzValidationTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
@@ -125,7 +128,7 @@ public class US25001HostOrderPlzValidationTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
-		customerRegistrationSteps.wipeHostCart();
+		generalCartSteps.clearCart();
 
 		addHostProductsWorkflow.setHostProductToCart(genProduct1, "1", "0");
 

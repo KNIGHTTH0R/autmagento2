@@ -22,7 +22,7 @@ public class StylistRegistrationCartCalculator {
 	}
 
 	public static void calculateCartAndShippingTotals(String taxClass, String shippingValue, String voucherValue, boolean isVoucherFixSum) {
-		cartCalcDetailsModel = StylistRegistrationCartTotalsCalculation.calculateTotals(allProductsList, taxClass, shippingValue, voucherValue, true);
+		cartCalcDetailsModel = StylistRegistrationCartTotalsCalculation.calculateTotals(allProductsList, taxClass, shippingValue, voucherValue, isVoucherFixSum);
 		shippingCalculatedModel = StylistRegistrationCartTotalsCalculation.calculateShippingTotals(cartCalcDetailsModel, shippingValue);
 
 	}

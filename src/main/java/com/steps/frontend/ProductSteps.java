@@ -135,6 +135,15 @@ public class ProductSteps extends AbstractSteps {
 
 		return result;
 	}
+	@StepGroup
+	public StarterSetProductModel setStarterSetProductAddToCart(String price) {
+		StarterSetProductModel result = new StarterSetProductModel();
+		
+		result.setName("IRI_STARTER_SET");
+		result.setUnitPrice(price);
+		
+		return result;
+	}
 
 	@StepGroup
 	public BorrowProductModel setBorrowedDefaultProductAddToCart() {

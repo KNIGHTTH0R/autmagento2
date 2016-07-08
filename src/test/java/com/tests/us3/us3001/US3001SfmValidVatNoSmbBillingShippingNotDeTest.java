@@ -27,6 +27,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -65,6 +66,8 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 	public FooterSteps footerSteps;
 	@Steps
 	public CartSteps cartSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
@@ -153,8 +156,9 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		homeSteps.clickonGeneralView();
-		frontEndSteps.wipeCart();
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();
 		BasicProductModel productData;
 
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_25);

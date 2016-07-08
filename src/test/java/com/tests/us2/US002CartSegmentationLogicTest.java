@@ -25,6 +25,7 @@ import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -56,6 +57,8 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 	public ValidationWorkflows validationWorkflows;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
@@ -141,7 +144,9 @@ public class US002CartSegmentationLogicTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		homeSteps.clickonGeneralView();
-		frontEndSteps.wipeCart();
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();
 		BasicProductModel productData;
 		BasicProductModel productData2;
 		

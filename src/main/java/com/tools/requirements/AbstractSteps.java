@@ -2,10 +2,6 @@ package com.tools.requirements;
 
 import java.util.Set;
 
-import net.thucydides.core.annotations.Screenshots;
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
-
 import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
@@ -72,6 +68,7 @@ import com.pages.frontend.StylistRegistrationPage;
 import com.pages.frontend.UpdatePartyPage;
 import com.pages.frontend.checkout.ConfirmationPage;
 import com.pages.frontend.checkout.SuccessPage;
+import com.pages.frontend.checkout.cart.GeneralCartPage;
 import com.pages.frontend.checkout.cart.borrowCart.BorrowCartPage;
 import com.pages.frontend.checkout.cart.kobo.ContactBoosterCartPage;
 import com.pages.frontend.checkout.cart.partyHost.AddProductsModalPage;
@@ -109,6 +106,10 @@ import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
+
+import net.thucydides.core.annotations.Screenshots;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -566,6 +567,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public JewelryBonusHistoryPage jewelryBonusHistoryPage() {
 		return getPages().currentPageAt(JewelryBonusHistoryPage.class);
+	}
+	
+	public GeneralCartPage generalCartPage() {
+		return getPages().currentPageAt(GeneralCartPage.class);
 	}
 
 	// Profile

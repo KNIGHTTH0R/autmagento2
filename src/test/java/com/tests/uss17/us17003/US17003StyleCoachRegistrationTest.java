@@ -18,7 +18,9 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.StarterSetSteps;
 import com.steps.frontend.StylistCampaignSteps;
+import com.steps.frontend.StylistContextSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -31,6 +33,7 @@ import com.tools.env.constants.FilePaths;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkflow;
 
 @WithTag(name = "US17.3 Check reassigned contacts up on canceled SC hierarchy when no new Sc is selected", type = "Scenarios")
 @Story(Application.MassAction.US17_3.class)
@@ -47,12 +50,20 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public StylistContextSteps stylistContextSteps;
+	@Steps
+	public AddStarterSetProductsWorkflow addStarterSetProductsWorkflow;
+	@Steps
+	public StarterSetSteps starterSetSteps;
+
 
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private CustomerFormModel customerFormData;
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	private String context;
+	private String starterSet,starterKitPrice;
 
 	@Before
 	public void setUp() throws Exception {
@@ -65,6 +76,8 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 			prop.load(input);
 
 			context = prop.getProperty("context");
+			starterSet = prop.getProperty("starterSet");
+			starterKitPrice = prop.getProperty("starterKitPrice");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -87,7 +100,12 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 	@Test
 	public void us17003StyleCoachRegistrationTest() {
 		headerSteps.navigateToStylecoachRegisterFormUnderContext(context);
-		stylistRegistrationSteps.fillCreateStylecoachFormWithKnownSponsorPayWithVisa(customerFormData, customerFormAddress, birthDate.getDate());
+		stylistRegistrationSteps.fillCreateStylecoachFormWithKnownSponsor(customerFormData, customerFormAddress, birthDate.getDate());
+		
+		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
+
+		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		starterSetSteps.submitStarterSetStep();
 		
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
