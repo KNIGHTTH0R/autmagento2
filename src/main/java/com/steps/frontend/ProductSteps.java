@@ -49,7 +49,7 @@ public class ProductSteps extends AbstractSteps {
 		result.setProductsPrice(askingPrice);
 		result.setFinalPrice(finalPrice);
 		result.setPriceIP(ip);
-
+		
 		addToCart();
 //		waitABit(TimeConstants.TIME_CONSTANT);
 		return result;

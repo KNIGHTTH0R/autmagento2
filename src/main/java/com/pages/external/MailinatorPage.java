@@ -67,6 +67,7 @@ public class MailinatorPage extends AbstractPage {
 
 	public String grabEmail(String title) {
 		element(inboxContainer).waitUntilVisible();
+		//TODO fix this always empty return
 		String returnText = "";
 		boolean foundEmail = false;
 		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("div[ng-repeat='email in emails']"));

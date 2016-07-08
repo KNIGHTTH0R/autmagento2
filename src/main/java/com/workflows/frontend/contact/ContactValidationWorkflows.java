@@ -24,6 +24,7 @@ public class ContactValidationWorkflows {
 		result.setTown(addressModel.getHomeTown());
 		result.setCountry(addressModel.getCountryName());
 		result.setLastHistoryRegistration(oldStylecoachModel.getFirstName() + Separators.SPACE + oldStylecoachModel.getLastName());
+		
 		return result;
 	}
 	@Title("Validate contact details")

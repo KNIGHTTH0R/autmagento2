@@ -141,8 +141,7 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 
 	@Step
-	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass, String language,
-			String website) {
+	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass, String language, String website) {
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -161,8 +160,7 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
-		Assert.assertTrue(
-				getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));
+		Assert.assertTrue(getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));
 		footerPage().verifyThatFooterWebsiteIsCorrect(ContextConstants.NOT_PREFERED_WEBSITE);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -173,6 +171,10 @@ public class AbstractSteps extends ScenarioSteps {
 	public void refresh() {
 		getDriver().navigate().refresh();
 		waitABit(TimeConstants.TIME_CONSTANT);
+	}
+
+	public void waitCertainTime(long time) {
+		waitABit(time);
 	}
 
 	@Step
@@ -240,7 +242,8 @@ public class AbstractSteps extends ScenarioSteps {
 	public void navigate(String URL) {
 		// failsafe in case of redirects to live
 		if (!URL.contains("www.pippajean.com")) {
-//			getDriver().manage().timeouts().pageLoadTimeout(3600, TimeUnit.SECONDS);
+			// getDriver().manage().timeouts().pageLoadTimeout(3600,
+			// TimeUnit.SECONDS);
 			getDriver().get(URL);
 			getDriver().manage().window().maximize();
 		}
@@ -347,11 +350,11 @@ public class AbstractSteps extends ScenarioSteps {
 	public StylecoachDetailsBackendPage stylecoachDetailsBackendPage() {
 		return getPages().currentPageAt(StylecoachDetailsBackendPage.class);
 	}
-	
+
 	public TermPurchaseGridPage termPurchaseGridPage() {
 		return getPages().currentPageAt(TermPurchaseGridPage.class);
 	}
-	
+
 	public SystemConfigurationPage systemConfigurationPage() {
 		return getPages().currentPageAt(SystemConfigurationPage.class);
 	}
@@ -480,9 +483,11 @@ public class AbstractSteps extends ScenarioSteps {
 	public PomProductListPage pomProductListPage() {
 		return getPages().currentPageAt(PomProductListPage.class);
 	}
+
 	public IpReportsPage ipReportsPage() {
 		return getPages().currentPageAt(IpReportsPage.class);
 	}
+
 	public UnbounceDykscPage unbounceDykscPage() {
 		return getPages().currentPageAt(UnbounceDykscPage.class);
 	}
@@ -649,7 +654,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public UnbouncePage unbouncePage() {
 		return getPages().currentPageAt(UnbouncePage.class);
 	}
-	
+
 	public UnbounceRegSuccesPage unbounceRegSuccesPage() {
 		return getPages().currentPageAt(UnbounceRegSuccesPage.class);
 	}
@@ -663,8 +668,7 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	@Screenshots(onlyOnFailures = true)
-	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads,
-			String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
+	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads, String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
 		System.out.println(" -- Print Totals - " + message);
 		System.out.println("CUSTOMERLEADS: " + customerLeads);
 		System.out.println("HOSTESSLEADS: " + hostessLeads);

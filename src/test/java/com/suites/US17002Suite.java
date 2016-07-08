@@ -15,15 +15,13 @@ import com.tests.uss17.us17002.US17002VerifyThatContactWasReassignedCorrectlyTes
 
 @SuiteClasses({
 	US17002StyleCoachRegistrationTest.class,
-//	US17002MarkStarterKitOrderAsPaidTest.class,
 	US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest.class,
-//	US17002MarkSecondStarterKitOrderAsPaidTest.class,
-	US17002RegularCustomerRegistrationTest.class,
+	US17002RegularCustomerRegistrationTest.class, //customer registers under SC1 
 	US17002ConfirmCustomerTest.class,
-	US17002ChangeCustomersContextTest.class,
-	US17002SetCustomersPrefferdToBeQuitTest.class,
-	US17002ReasignContactsTest.class,
-	US17002VerifyThatContactWasReassignedCorrectlyTest.class,
+	US17002ChangeCustomersContextTest.class, //customer changes the preffered SC to SC2
+	US17002SetCustomersPrefferdToBeQuitTest.class, //SC2 status = quit
+	US17002ReasignContactsTest.class, // cancel SC1 (the contact of customer is under SC1, not under SC2)
+	US17002VerifyThatContactWasReassignedCorrectlyTest.class, //the contact is reassigned to Master
 	
 })
 @RunWith(Suite.class)

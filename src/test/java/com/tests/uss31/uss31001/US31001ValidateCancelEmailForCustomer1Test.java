@@ -35,7 +35,7 @@ import com.tools.utils.DateUtils;
 @WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_2.class)
 @RunWith(SerenityRunner.class)
-public class US31001ValidatePostponeEmailForStylistTest extends BaseTest {
+public class US31001ValidateCancelEmailForCustomer1Test extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -58,9 +58,9 @@ public class US31001ValidatePostponeEmailForStylistTest extends BaseTest {
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_31_FOLDER + File.separator + "us31001.properties");
 			prop.load(input);
-			email = prop.getProperty("username");
-			password = prop.getProperty("password");
-			emailPassword = prop.getProperty("emailPassword");
+			email = prop.getProperty("customerUsername");
+			password = prop.getProperty("customerPassword");
+			emailPassword = prop.getProperty("customerEmailPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -74,7 +74,7 @@ public class US31001ValidatePostponeEmailForStylistTest extends BaseTest {
 			}
 		}
 
-		termPurchaseModel = MongoReader.grabTermPurchaseOrderModel("US31001ValidatePostponedOrdersInTpGridTest"+ "TP1").get(0);
+		termPurchaseModel = MongoReader.grabTermPurchaseOrderModel("US31001ValidateCanceledAndReleasedOrdersInTpGridTest" + "TP1").get(0);
 
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 
@@ -85,20 +85,20 @@ public class US31001ValidatePostponeEmailForStylistTest extends BaseTest {
 
 		gmailConnector = new GmailConnector(emailData);
 		
+		System.out.println("dsdsdsdsd");
+		System.out.println("SDSDSD " + DateUtils.parseDate(termPurchaseModel.getExecutionDate(), "dd-MM-yyyy", "dd MMM yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 	}
 
 	@Test
-	public void us31001ValidatePostponeEmailForStylistTest() throws ParseException {
+	public void us31001ValidateCancelEmailForCustomer1Test() throws ParseException {
+	
 		frontEndSteps.performLogin(email, password);
 
-		String message = gmailConnector.searchForMail("", "Bestellung verschieben", true);
+		String message = gmailConnector.searchForMail("", "Bestellung stornieren", true);
 		System.out.println(message);
-		emailSteps.validateEmailContent("wegen verändertem Lieferdatum verschoben.", message);
+		emailSteps.validateEmailContent("da ein oder mehrere Artikel ausverkauft sind storniert", message);
 		emailSteps.validateEmailContent(termPurchaseModel.getIncrementId(), message);
-		emailSteps
-				.validateEmailContent(
-						DateUtils.parseDate(termPurchaseModel.getExecutionDate(), "yyyy-MM-dd", "dd MMM yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()),
-						message);
 
 	}
+
 }

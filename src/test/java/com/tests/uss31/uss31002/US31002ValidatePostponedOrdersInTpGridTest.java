@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.MagentoProductCalls;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
@@ -27,6 +28,8 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
+import com.tools.env.constants.JenkinsConstants;
+import com.tools.env.constants.TimeConstants;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -65,16 +68,24 @@ public class US31002ValidatePostponedOrdersInTpGridTest extends BaseTest {
 	private static List<HostBasicProductModel> productsListTp1 = new ArrayList<HostBasicProductModel>();
 	private static ProductDetailedModel detailedProdListTp1 = new ProductDetailedModel();
 	OrderModel orderModelListTp1 = new OrderModel();
+	OrderModel orderModelListTp2 = new OrderModel();
+	OrderModel orderModelListTp3 = new OrderModel();
+	OrderModel orderModelListTp4 = new OrderModel();
 
 	@Before
-	public void setUp() throws ParseException {
+	public void setUp() throws Exception {
 
 		orderModelListTp1 = MongoReader.getOrderModel("US31002PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31002PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		productsListTp1 = MongoReader.grabHostBasicProductModel("US31002PartyHostBuysForCustomerTpTest" + "TP1");
 
 		prod2IncrementId = MongoReader.grabIncrementId("US31002PartyHostBuysForCustomerTpTest" + "TP2");
+		orderModelListTp2 = MongoReader.getOrderModel("US31002PartyHostBuysForCustomerTpTest" + "TP2").get(0);
+		
 		prod3IncrementId = MongoReader.grabIncrementId("US31002PartyHostBuysForCustomerTpTest" + "TP3");
+		orderModelListTp3 = MongoReader.getOrderModel("US31002PartyHostBuysForCustomerTpTest" + "TP3").get(0);
+		
+		orderModelListTp4 = MongoReader.getOrderModel("US31002PartyHostBuysForCustomerTpTest" + "TP4").get(0);
 
 		expectedModel1 = new TermPurchaseOrderModel();
 		expectedModel1.setIncrementId(orderModelListTp1.getOrderId());
@@ -94,7 +105,7 @@ public class US31002ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		expectedModel1.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
 		expectedModel1.setScheduledPaymentStatus(ConfigConstants.POSTPONED);
 		expectedModel1.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(), productsListTp1.get(0).getQuantity()));
-
+		
 	}
 
 	@Test
@@ -126,9 +137,10 @@ public class US31002ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		updated3Product.getStockData().setIsDiscontinued("1");
 		MagentoProductCalls.updateApiProduct(updated3Product, prod3IncrementId);
 
-		// script for updating deliveryDates
-
-		// ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+		 ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId() + JenkinsConstants.JOB_TOKEN);
+		 ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId() + JenkinsConstants.JOB_TOKEN);
+		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+	     ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
 	}
 
 }
