@@ -1,10 +1,5 @@
 package com.tests.us6.us6002b;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +15,12 @@ import com.tools.env.constants.ConfigConstants;
 import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.2b SC Registration Existing Customer Forbidden Country Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_2.class)
@@ -84,13 +83,9 @@ public class US6002bCheckStylistActivationTest extends BaseTest {
 	
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabAfterLinkConfirmationStylistData, expectedAfterLinkConfirmationStylistData);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
-		PrintUtils.printStylistPropertiesModel(grabAfterLinkConfirmationStylistData);
-		PrintUtils.printStylistPropertiesModel(expectedAfterLinkConfirmationStylistData);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabAfterOrderPaidStylistData, expectedAfterOrderPaidStylistData);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER MARK AS PAID");
-		PrintUtils.printStylistPropertiesModel(grabAfterOrderPaidStylistData);
-		PrintUtils.printStylistPropertiesModel(expectedAfterOrderPaidStylistData);
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistDates(grabDatesModel,expectedDateModel);
 		customerAndStylistRegistrationWorkflows.validateStylistDAtes("VALIDATE REGISTRATION AND ACTIVATION DATES");

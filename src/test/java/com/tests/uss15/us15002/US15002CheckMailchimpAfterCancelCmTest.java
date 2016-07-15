@@ -60,7 +60,7 @@ public class US15002CheckMailchimpAfterCancelCmTest extends BaseTest {
 		product = MongoReader.grabBasicProductModel("US15002SubscribedCustomerBuyWithContactBoosterTest").get(2);
 		shippingModel = MongoReader.grabShippingModel("US15002SubscribedCustomerBuyWithContactBoosterTest").get(0);
 		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
-		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
+		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.WEB_MAIL, ConfigConstants.EVOZON));
 		dateModel = MongoReader.grabDateModels("US15002ConfirmCustomerTest").get(0);
 		koboCode = MongoReader.grabKoboModel("US15002KoboRegistrationNewsletterSubscribeTest");
 		MongoConnector.cleanCollection(getClass().getSimpleName());

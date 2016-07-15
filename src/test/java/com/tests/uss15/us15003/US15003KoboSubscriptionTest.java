@@ -72,7 +72,7 @@ public class US15003KoboSubscriptionTest extends BaseTest {
 		int size = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").size();
 		if (size > 0) {
 			stylistRegistrationData = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
-			stylistRegistrationData.setEmailName(stylistRegistrationData.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
+			stylistRegistrationData.setEmailName(stylistRegistrationData.getEmailName().replace(ConfigConstants.WEB_MAIL, ConfigConstants.EVOZON));
 			System.out.println(stylistRegistrationData.getEmailName());
 			
 		} else

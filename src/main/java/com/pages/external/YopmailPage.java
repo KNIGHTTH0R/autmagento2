@@ -8,32 +8,44 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.constants.TimeConstants;
 import com.tools.env.constants.UrlConstants;
 import com.tools.requirements.AbstractPage;
 
-public class MailinatorPage extends AbstractPage {
+public class YopmailPage extends AbstractPage {
 
-	@FindBy(css = "div.someviewport")
+	@FindBy(css = "body.bodyinbox")
 	private WebElement inboxContainer;
 
 	@FindBy(className = "mailview")
 	private WebElement mailContainer;
 
-	@FindBy(id = "publicshowmaildivcontent")
+	@FindBy(css = "iframe#ifmail")
 	private WebElement iFrameElement;
+	
+	@FindBy(id = "ifinbox")
+	private WebElement iFrameInbox;
+	
+	@FindBy(id = "login")
+	private WebElement emailInput;
+	
+	@FindBy(css = "input[type='submit']")
+	private WebElement submitEmailBtn;
 
-	public void openEmail(String email,String title) {
+	public void openEmail(String email,String title) { 
 		
-		navigate(UrlConstants.MAILINATOR_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email);
-		waitABit(TimeConstants.TIME_MEDIUM);
+		navigate(UrlConstants.YOPMAIL_WEB_MAIL);
+		element(emailInput).clear();
+		element(emailInput).sendKeys(email);
+		submitEmailBtn.click();
+		getDriver().switchTo().frame(iFrameInbox);
 		element(inboxContainer).waitUntilVisible();
 		boolean foundEmail = false;
-		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("div[ng-repeat='email in emails']"));
+		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("div.m a"));
 		for (WebElement itemNow : emailList) {
-			String allText = itemNow.getText();
-			if (allText.contains(title)) {
-				itemNow.findElement(By.cssSelector("div.innermail.ng-binding")).click();
+			if (itemNow.getText().contains(title)) {
+				itemNow.click();
+				getDriver().switchTo().defaultContent();
+				waitABit(2000);
 				foundEmail = true;
 				break;
 			}
@@ -42,17 +54,20 @@ public class MailinatorPage extends AbstractPage {
 	}
 
 	public String getConfirmationEmail() {
+		
 		getDriver().switchTo().frame(iFrameElement);
 		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
 		return confirmLink;
 	}
 
 	public void clickConfirmEmail() {
+		
 		getDriver().switchTo().frame(iFrameElement);
 		getDriver().findElement(By.cssSelector("a[href*='confirm']")).click();
 	}
 
 	public String grabCouponCode() {
+		
 		getDriver().switchTo().frame(iFrameElement);
 		return getDriver().findElement(By.cssSelector("table[bgcolor='#FFFFFF'] tbody > tr:nth-child(3)")).getText();
 	}

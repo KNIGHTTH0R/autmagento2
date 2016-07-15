@@ -127,7 +127,6 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 		StylistPropertiesModel grabBeforeLinkConfirmationStylistData =  backEndSteps.grabCustomerConfiguration();
 		
 		//confirmation link
-		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		
 		headerSteps.navigateToRegisterFormAndLogout();

@@ -45,7 +45,6 @@ public class US12001KoboSubscriptionOrderEmailTest extends BaseTest {
 	@Test
 	public void us12001CheckKoboSubscriptionOrderEmailTest() {
 
-		emailClientSteps.openMailinator();
 		emailClientSteps.validateThatEmailIsReceived(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), orderModel.getOrderId());
 
 

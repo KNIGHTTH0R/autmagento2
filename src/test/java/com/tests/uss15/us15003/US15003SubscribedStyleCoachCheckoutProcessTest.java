@@ -97,7 +97,7 @@ public class US15003SubscribedStyleCoachCheckoutProcessTest extends BaseTest {
 		try {
 
 			dataModel = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
-			dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
+			dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.WEB_MAIL, ConfigConstants.EVOZON));
 
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss15" + File.separator + "us15003.properties");
 			prop.load(input);

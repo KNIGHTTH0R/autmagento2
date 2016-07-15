@@ -110,7 +110,7 @@ public class US15002SubscribedCustomerBuyWithContactBoosterTest extends BaseTest
 		InputStream input = null;
 
 		dataModel = MongoReader.grabCustomerFormModels("US15002KoboRegistrationNewsletterSubscribeTest").get(0);
-		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
+		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.WEB_MAIL, ConfigConstants.EVOZON));
 
 		try {
 

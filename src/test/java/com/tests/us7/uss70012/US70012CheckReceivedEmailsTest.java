@@ -39,13 +39,8 @@ public class US70012CheckReceivedEmailsTest extends BaseTest {
 	@Test
 	public void us70012CheckReceivedEmailsTest() {
 
-		emailClientSteps.openMailinator();
 		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), orderModel.getOrderId());
-
-		emailClientSteps.openMailinator();
 		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.WELCOME_MAIL_SUBJECT);
-
-		emailClientSteps.openMailinator();
 		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.NEWSLETTER_MAIL_SUBJECT);
 
 	}

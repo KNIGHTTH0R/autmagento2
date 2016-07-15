@@ -45,7 +45,6 @@ public class US15001ConfirmCustomerTest extends BaseTest {
 	@Test
 	public void us15001ConfirmCustomerTest() throws Exception {
 
-		emailClientSteps.openMailinator();
 		dateModel.setDate(emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.NEWSLETTER_MAIL_SUBJECT));
 		ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_EMAIL_JOB_TRIGGER_URL + stylistEmail + JenkinsConstants.JOB_TOKEN);
 

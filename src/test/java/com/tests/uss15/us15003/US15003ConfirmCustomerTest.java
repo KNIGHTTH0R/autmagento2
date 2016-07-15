@@ -44,7 +44,6 @@ public class US15003ConfirmCustomerTest extends BaseTest {
 	@Test
 	public void us15003ConfirmCustomerTest() {
 
-		emailClientSteps.openMailinator();
 		dateModel.setDate(emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT));
 
 	}

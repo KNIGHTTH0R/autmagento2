@@ -1,4 +1,4 @@
-package com.tests.uss31003;
+package com.tests.uss31.US31003;
 
 import java.text.ParseException;
 import java.util.ArrayList;

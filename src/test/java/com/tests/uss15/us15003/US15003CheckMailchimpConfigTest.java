@@ -60,7 +60,7 @@ public class US15003CheckMailchimpConfigTest extends BaseTest {
 		product = MongoReader.grabBasicProductModel("US15003SubscribedStyleCoachCheckoutProcessTest").get(0);
 		shippingModel = MongoReader.grabShippingModel("US15003SubscribedStyleCoachCheckoutProcessTest").get(0);
 		dataModel = MongoReader.grabCustomerFormModels("US15003StyleCoachRegistrationTest").get(0);
-		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.MAILINATOR, ConfigConstants.EVOZON));
+		dataModel.setEmailName(dataModel.getEmailName().replace(ConfigConstants.WEB_MAIL, ConfigConstants.EVOZON));
 		dateModel = MongoReader.grabDateModels("US15003ConfirmCustomerTest").get(0);
 		koboCode = MongoReader.grabKoboModel("US15003SubscribedStyleCoachCheckoutProcessTest");
 		MongoConnector.cleanCollection(getClass().getSimpleName());

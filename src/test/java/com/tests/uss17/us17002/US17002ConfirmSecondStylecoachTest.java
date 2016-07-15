@@ -38,7 +38,6 @@ public class US17002ConfirmSecondStylecoachTest extends BaseTest {
 	@Test
 	public void us17002ConfirmSecondStylecoachTest() {
 
-		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 
 	}

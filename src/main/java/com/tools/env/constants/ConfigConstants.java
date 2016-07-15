@@ -28,8 +28,12 @@ public class ConfigConstants {
 	public static final String VOUCHER_SHIPPING = "Voucher On Shipping";
 
 	// Webmail suffix
-	public static final String WEB_MAIL = "mailinator.com";
+//	public static final String WEB_MAIL = "mailinator.com";
+	public static final String WEB_MAIL = "yopmail.com";
+	public static final String EVOZON = "evozon.com";
 	public static final String GMAIL = "gmail.com";
+	
+	
 	public static final String MASTER_STYLE_COACH = "";
 
 	public static final String NO = "No";
@@ -37,9 +41,6 @@ public class ConfigConstants {
 	public static final String CONTACT = "contact";
 	public static final String USER = "user";
 	public static final String ZERO = "0";
-
-	public static final String MAILINATOR = "@mailinator.com";
-	public static final String EVOZON = "@evozon.com";
 
 	// backend stylecoach tab
 	public static final String CANCEL_SC_AND_REASSIGN_CONTACTS = "Cancel SC and reassign SC Contacts";

@@ -1,4 +1,4 @@
-package com.tests.uss31003;
+package com.tests.uss31.US31003;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +33,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_2.class)
 @RunWith(SerenityRunner.class)
-public class US31003ValidateCancelEmailForStylistTest extends BaseTest {
+public class US31003ValidateReleaseEmailForStylistTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -72,7 +72,7 @@ public class US31003ValidateCancelEmailForStylistTest extends BaseTest {
 			}
 		}
 
-		termPurchaseModel = MongoReader.grabTermPurchaseOrderModel("US31003ValidateCanceledAndReleasedByAdminOrdersInTpGridTest"+"TP1").get(0);
+		termPurchaseModel = MongoReader.grabTermPurchaseOrderModel("US31003ValidateCanceledAndReleasedByAdminOrdersInTpGridTest").get(1);
 
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 
@@ -86,12 +86,12 @@ public class US31003ValidateCancelEmailForStylistTest extends BaseTest {
 	}
 
 	@Test
-	public void us31003ValidateCancelEmailForStylistTest() throws ParseException {
+	public void us31003ValidateReleaseEmailForStylistTest() throws ParseException {
 		frontEndSteps.performLogin(email, password);
 
-		String message = gmailConnector.searchForMail("", "Bestellung stornieren", true);
+		String message = gmailConnector.searchForMail("", termPurchaseModel.getIncrementId(), true);
 		System.out.println(message);
-		emailSteps.validateEmailContent("von Admin storniert", message);
+		emailSteps.validateEmailContent("Zahlung erfolgreich", message);
 		emailSteps.validateEmailContent(termPurchaseModel.getIncrementId(), message);
 
 

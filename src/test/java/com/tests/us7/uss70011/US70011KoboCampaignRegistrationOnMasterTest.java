@@ -143,7 +143,6 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		koboValidationSteps.startKoboCampaignProcess(MongoReader.getBaseURL() + UrlConstants.KOBO_CAMPAIGN);
 		koboCampaignSteps.fillKoboCampaignRegistrationFormOnMasterShop(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
-		emailClientSteps.openMailinator();
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(
 				dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);

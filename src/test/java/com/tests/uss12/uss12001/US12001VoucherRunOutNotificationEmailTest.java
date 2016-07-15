@@ -40,7 +40,6 @@ public class US12001VoucherRunOutNotificationEmailTest extends BaseTest {
 	@Test
 	public void us12001VoucherRunOutNotificationEmailTest() {
 
-		emailClientSteps.openMailinator();
 		emailClientSteps.validateThatEmailIsReceived(stylistRegistrationData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""), "124");
 
 	}

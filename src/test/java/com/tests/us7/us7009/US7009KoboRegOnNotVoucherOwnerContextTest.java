@@ -128,7 +128,6 @@ public class US7009KoboRegOnNotVoucherOwnerContextTest extends BaseTest {
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL() + context, koboCode);
 		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
-		emailClientSteps.openMailinator();
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		contactBoosterRegistrationSteps.navigate(url);

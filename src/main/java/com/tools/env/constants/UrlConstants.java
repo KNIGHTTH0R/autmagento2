@@ -21,7 +21,9 @@ public class UrlConstants {
 
 	//Staging AUT uRLs 
 
-	public static final String URL_WEB_MAIL = "http://mailinator.com/";
+	public static final String YOPMAIL_WEB_MAIL = "http://yopmail.com/";
+	public static final String YOPMAIL_IMBOX_SUFFIX = "";
+	public static final String MAILINATOR_WEB_MAIL = "http://mailinator.com/";
 	public static final String MAILINATOR_IMBOX_SUFFIX = "inbox2.jsp?public_to=";
 	
 	//mailchimp

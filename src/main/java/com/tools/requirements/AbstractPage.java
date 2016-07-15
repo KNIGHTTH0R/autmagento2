@@ -40,5 +40,12 @@ public class AbstractPage extends PageObject {
 			retry++;
 		} while (retry <= TimeConstants.PAGE_LOAD_MAX_RETRY && evaluateJavascript("return document.readyState").equals("complete") != true);
 	}
+	
+	public void navigate(String URL) {
+		if (!URL.contains("www.pippajean.com")) {
+			getDriver().get(URL);
+			getDriver().manage().window().maximize();
+		}
+	}
 
 }

@@ -124,7 +124,6 @@ public class US24001KoboCampaignRegistrationPlzValidationTest extends BaseTest {
 		koboValidationSteps.startKoboCampaignProcess(MongoReader.getBaseURL() + UrlConstants.KOBO_CAMPAIGN);
 		koboCampaignSteps.fillKoboCampaignRegistrationFormOnMasterShop(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
-		emailClientSteps.openMailinator();
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		koboCampaignSteps.navigate(url);

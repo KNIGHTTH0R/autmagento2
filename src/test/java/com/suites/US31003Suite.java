@@ -4,15 +4,15 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.uss31003.US31003ActivateManualCronTest;
-import com.tests.uss31003.US31003PartyHostBuysForCustomerTpTest;
-import com.tests.uss31003.US31003ValidateCancelEmailForCustomerTest;
-import com.tests.uss31003.US31003ValidateCancelEmailForStylistTest;
-import com.tests.uss31003.US31003ValidateCanceledAndReleasedByAdminOrdersInTpGridTest;
-import com.tests.uss31003.US31003ValidatePostponeEmailForCustomerTest;
-import com.tests.uss31003.US31003ValidatePostponeEmailForStylistTest;
-import com.tests.uss31003.US31003ValidatePostponedByAdminOrdersInTpGridTest;
-import com.tests.uss31003.US31003ValidateReleaseEmailForStylistTest;
+import com.tests.uss31.US31003.US31003ActivateManualCronTest;
+import com.tests.uss31.US31003.US31003PartyHostBuysForCustomerTpTest;
+import com.tests.uss31.US31003.US31003ValidateCancelEmailForCustomerTest;
+import com.tests.uss31.US31003.US31003ValidateCancelEmailForStylistTest;
+import com.tests.uss31.US31003.US31003ValidateCanceledAndReleasedByAdminOrdersInTpGridTest;
+import com.tests.uss31.US31003.US31003ValidatePostponeEmailForCustomerTest;
+import com.tests.uss31.US31003.US31003ValidatePostponeEmailForStylistTest;
+import com.tests.uss31.US31003.US31003ValidatePostponedByAdminOrdersInTpGridTest;
+import com.tests.uss31.US31003.US31003ValidateReleaseEmailForStylistTest;
 
 @SuiteClasses({
 	US31003ActivateManualCronTest.class,

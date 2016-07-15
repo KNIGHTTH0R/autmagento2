@@ -40,7 +40,6 @@ public class US7001ConfirmCustomerTest extends BaseTest {
 	@Test
 	public void us7001ConfirmCustomerTest() {
 
-		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 
 	}

@@ -46,7 +46,6 @@ public class US7006EmailActivationTest extends BaseTest {
 	@Test
 	public void us7006EmailActivationTest() {
 
-		emailClientSteps.openMailinator();
 		emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		customVerifications.printErrors();
 	}
