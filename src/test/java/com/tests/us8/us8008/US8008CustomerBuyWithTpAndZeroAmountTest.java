@@ -98,7 +98,7 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct3.setPrice("49.90");
+		genProduct3.setPrice("19.90");
 		genProduct1.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct3);
 

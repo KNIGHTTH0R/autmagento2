@@ -104,11 +104,11 @@ public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 		addProductsModalSteps.searchForProduct(genProduct1.getSku());
 		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct1.getSku(), genProduct1.getName());
 
-		addProductsModalSteps.searchForProduct("K095MC");
-		addProductsModalSteps.verifyProductPropertiesInModalWindow("K095MC", "TRIPLE TWIST SET");
+		addProductsModalSteps.searchForProduct("K027SV");
+		addProductsModalSteps.verifyProductPropertiesInModalWindow("K027SV", "DYNASTY SET");
 
 		addProductsModalSteps.searchForProduct("R073SV");
-		addProductsModalSteps.verifyProductPropertiesInModalWindow("R073SV", "SYDNEY RING-16");
+		addProductsModalSteps.verifyProductPropertiesInModalWindow("R073SV", "SYDNEY RING");
 
 	}
 

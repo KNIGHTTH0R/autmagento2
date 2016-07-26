@@ -37,6 +37,7 @@ import com.tests.BaseTest;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
@@ -96,6 +97,7 @@ public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 	private String shippingValue;
 	private String voucherValue;
 	private DateModel dateModel = new DateModel();
+	private CreditCardModel creditCardData = new CreditCardModel();
 	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
 	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderCancelled = new JewelryHistoryModel();
 	private CustomerFormModel customerData;
@@ -199,11 +201,15 @@ public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		if (MongoReader.getContext().contentEquals("de")) {
-			paymentSteps.payWithBankTransfer();
-		} else {
-			paymentSteps.payWithBankTransferEs();
+//		if (MongoReader.getContext().contentEquals("de")) {
+//			paymentSteps.payWithBankTransfer();
+//		} else {
+//			paymentSteps.payWithBankTransferEs();
+//		}
+		if (!paymentSteps.isCreditCardFormExpended()) {
+			paymentSteps.expandCreditCardForm();
 		}
+		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.agreeAndCheckout();
 		dateModel.setDate(DateUtils.getCurrentDateOneHourBack("MM/dd/YYYY"));
