@@ -133,7 +133,7 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 		
 		headerSteps.navigateToRegisterFormAndLogout();
 		stylistRegistrationSteps.clickLoginLinkFromMessage();
-		customerRegistrationSteps.performLogin(stylistData.getEmailName(), stylistData.getPassword());
+		customerRegistrationSteps.performLoginAfterChangingWebsite(stylistData.getEmailName(), stylistData.getPassword());
 		String formCreationDate = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), birthDate);
 		formDate.setDate(formCreationDate);
 		
