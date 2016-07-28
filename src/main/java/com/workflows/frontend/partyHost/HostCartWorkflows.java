@@ -42,22 +42,18 @@ public class HostCartWorkflows {
 			if (compare != null) {
 				try {
 					compare.setQuantity(compare.getQuantity().replace("x", "").trim());
-
 				} catch (Exception e) {
 				}
 			}
-
 			if (compare.getName() != null) {
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
 				checkoutValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getQuantity());
 				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());
 				checkoutValidationSteps.validateIpPoints(productNow.getIpPoints(), compare.getIpPoints());
-
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
-
 			int index = cartProductsList.indexOf(compare);
 			if (index > -1) {
 				cartProductsList.remove(index);

@@ -120,7 +120,7 @@ public class HostCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWithVoucherDiscount(boolean shouldBeVisible) {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListwithVoucher,
 				HostDataGrabber.grabbedHostCartProductsList);
@@ -161,7 +161,7 @@ public class HostCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWith40DiscountAndJbAndBuy3Get1() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListWithBuy3Get1Applied,
 				HostDataGrabber.grabbedHostCartProductsList);
@@ -202,7 +202,7 @@ public class HostCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsWithBuy3Get1() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListWithBuy3Get1Applied,
 				HostDataGrabber.grabbedHostCartProductsList);
@@ -243,7 +243,7 @@ public class HostCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performTpCartValidationsWithVoucher() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListwithVoucher,
 				HostDataGrabber.grabbedHostCartProductsList);
@@ -317,7 +317,7 @@ public class HostCartValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performTpCartValidationsWithJbAndForthyDiscount() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		hostCartWorkflows.setValidateProductsModels(HostCartCalculator.allProductsList,
 				HostDataGrabber.grabbedHostCartProductsList);
