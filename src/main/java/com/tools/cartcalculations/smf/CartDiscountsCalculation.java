@@ -40,7 +40,7 @@ public class CartDiscountsCalculation {
 
 		result = askPrice.subtract(discountValue);
 
-		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_DOWN));
+		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
 	}
 
 	public static List<BasicProductModel> calculateProductsforMarketingMaterial(List<BasicProductModel> productsList, String marketingDiscount) {
@@ -119,7 +119,7 @@ public class CartDiscountsCalculation {
 					sum25));
 			newProduct.setFinalPrice(calculate25DiscountCartProductFinalPrice(BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
 					BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25));
-
+			
 			cartProducts.add(newProduct);
 		}
 
@@ -245,7 +245,6 @@ public class CartDiscountsCalculation {
 			result = result.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
 
 		}
-
 		return String.valueOf(result.setScale(2));
 	}
 

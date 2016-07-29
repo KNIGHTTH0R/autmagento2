@@ -21,51 +21,51 @@ import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 	US30001GetInitialOpenIps.class,
 	
 	US3001Suite.class,
-	US3003Suite.class,
+//	US3003Suite.class,
 	US3004Suite.class,
-	US3006Suite.class,
+//	US3006Suite.class,
 	US3007Suite.class,
-	US3009Suite.class,
+//	US3009Suite.class,
 	US30010Suite.class,
 	
 	US6001Suite.class,
-	US6001bSuite.class,
+//	US6001bSuite.class,
 	
-	US8001Suite.class,
+//	US8001Suite.class,
 	US8002Suite.class,
 	US8003Suite.class,	
-	US8004Suite.class,
+//	US8004Suite.class,
 	US8005Suite.class,
 	US8006Suite.class,
 	US8007Suite.class,
-	US8008Suite.class,
+//	US8008Suite.class,
 	
-	US4001Suite.class,
+//	US4001Suite.class,
 	US4002Suite.class,
 	
-	US16001Suite.class,
+//	US16001Suite.class,
 	US16002Suite.class,
 	
 	US11001Suite.class,
 	US11002Suite.class,
-	US11003VerifyProductsInPlaceACustomerOrderModal.class,
+//	US11003VerifyProductsInPlaceACustomerOrderModal.class,
 	US11004Suite.class,
-	US11005Suite.class,
+//	US11005Suite.class,
 	US11006Suite.class,
 	US11007Suite.class,
-	US11008Suite.class,
-	
-	US10007SuitePartOne.class,
-	US10008Suite.class,
-	
-	US9001Suite.class,
-	US9002Suite.class,
-	US9002bSuite.class,
-	US9004Suite.class,
-	US9005Suite.class,
-	
-	US15004Suite.class,
-	US12001Suite.class,
+//	US11008Suite.class,
+//	
+//	US10007SuitePartOne.class,
+//	US10008Suite.class,
+//	
+//	US9001Suite.class,
+//	US9002Suite.class,
+//	US9002bSuite.class,
+//	US9004Suite.class,
+//	US9005Suite.class,
+//	
+//	US15004Suite.class,
+//	US12001Suite.class,
 	
 	US30001VerifyOpenIpsAfterNewOrdersTest.class,
 	
