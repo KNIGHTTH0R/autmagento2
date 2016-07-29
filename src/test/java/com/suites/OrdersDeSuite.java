@@ -18,7 +18,7 @@ import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 	US10002bCreatePartyWithCustomerHostTest.class,
 	US10007CreatePartyWithStylistHostTest.class,
 	US10008CreatePartyWithExistingContactHostTest.class,
-	US30001GetInitialOpenIps.class,
+//	US30001GetInitialOpenIps.class,
 	
 	US3001Suite.class,
 //	US3003Suite.class,
@@ -55,19 +55,19 @@ import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 	US11007Suite.class,
 //	US11008Suite.class,
 //	
-//	US10007SuitePartOne.class,
+	US10007SuitePartOne.class,
 //	US10008Suite.class,
 //	
 //	US9001Suite.class,
 //	US9002Suite.class,
 //	US9002bSuite.class,
-//	US9004Suite.class,
+	US9004Suite.class,
 //	US9005Suite.class,
 //	
 //	US15004Suite.class,
 //	US12001Suite.class,
 	
-	US30001VerifyOpenIpsAfterNewOrdersTest.class,
+//	US30001VerifyOpenIpsAfterNewOrdersTest.class,
 	
 })
 @RunWith(Suite.class)

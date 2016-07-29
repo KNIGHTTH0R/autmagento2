@@ -127,7 +127,6 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 
 	@Test
 	public void us7008KoboRegOnMasterNotPrefCountryTest() {
-		System.out.println(MongoReader.getBaseURL() + context);
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL() + context, koboCode);
 		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);		
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();

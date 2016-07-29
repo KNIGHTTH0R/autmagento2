@@ -36,7 +36,7 @@ import com.tests.uss30.uss30001.US30001GetInitialOpenIps;
 	US7004bSuite.class,
 //	US7006Suite.class,
 //	US7006bSuite.class,
-	US7007Suite.class,	
+//	US7007Suite.class,	
 	US7008Suite.class,
 	US7009Suite.class,
 	US70010Suite.class,
