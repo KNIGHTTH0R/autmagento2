@@ -60,18 +60,21 @@ public class ContactBoosterRegistrationPage extends AbstractPage {
 	// ---------------------------------------------------
 
 	public void checkIsSubscribedCheckbox() {
-		element(isSubscribedCheckbox).waitUntilVisible();
-		isSubscribedCheckbox.click();
+//		element(isSubscribedCheckbox).waitUntilVisible();
+//		isSubscribedCheckbox.click();
+		elementjQueryClick("#is_subscribed");
 	}
 
 	public void checkStylePartiesCheckbox() {
-		element(stylePartiesCheckbox).waitUntilVisible();
-		stylePartiesCheckbox.click();
+//		element(stylePartiesCheckbox).waitUntilVisible();
+//		stylePartiesCheckbox.click();
+		elementjQueryClick("#flag_stylist_parties");
 	}
 
 	public void checkStyleMemberCheckbox() {
-		element(styleMemberCheckbox).waitUntilVisible();
-		styleMemberCheckbox.click();
+//		element(styleMemberCheckbox).waitUntilVisible();
+//		styleMemberCheckbox.click();
+		elementjQueryClick("#flag_stylist_member");
 	}
 
 	public void firstNameInput(String firstName) {
@@ -97,11 +100,14 @@ public class ContactBoosterRegistrationPage extends AbstractPage {
 	public void passwordConfirmInput(String password) {
 		element(passwordConfirmInput).waitUntilVisible();
 		passwordConfirmInput.sendKeys(password);
+		waitABit(2000);
 	}
 
 	public void checkIAgree() {
-		element(termsCheckbox).waitUntilVisible();
-		termsCheckbox.click();
+//		element(termsCheckbox).waitUntilVisible();
+//		termsCheckbox.click();
+		elementjQueryClick("#terms");
+		
 	}
 
 	public void submitAndContinue() {

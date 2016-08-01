@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class PomProductListPage extends AbstractPage {
@@ -18,19 +19,16 @@ public class PomProductListPage extends AbstractPage {
 
 	public void findProductAndClick(String productName) {
 
-		Actions builder = new Actions(getDriver());
-
 		element(productCatalogContainer).waitUntilVisible();
 		List<WebElement> productsList = productCatalogContainer.findElements(By.cssSelector("li.item"));
 		boolean found = false;
 		theFor: for (WebElement webElement : productsList) {
 			String productText = webElement.findElement(By.cssSelector("div h2")).getText();
 			if (productText.contains(productName)) {
-				builder.moveToElement(webElement.findElement(By.cssSelector("div img"))).build().perform();
-				waitABit(3000);
-				webElement.findElement(By.cssSelector("div img")).click();
-				waitABit(2000);
-				webElement.findElement(By.cssSelector("div div a")).click();
+
+				String url = webElement.findElement(By.cssSelector("div div a")).getAttribute("href");
+				elementjQueryClick("a[href='" + url + "']");
+				waitABit(TimeConstants.WAIT_TIME_SMALL);
 				found = true;
 				break theFor;
 			}

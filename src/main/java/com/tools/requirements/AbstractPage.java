@@ -9,8 +9,7 @@ import com.tools.env.constants.TimeConstants;
 public class AbstractPage extends PageObject {
 
 	public void elementjQueryClick(String element) {
-
-		evaluateJavascript("var dd =jQuery(' " + element + " ').eq(0);dd.click(); ");
+		evaluateJavascript("var dd =jQuery(\" " + element + " \").eq(0);dd.click(); ");
 	}
 
 	public void scrollToPageTop() {
@@ -20,7 +19,7 @@ public class AbstractPage extends PageObject {
 	public void scrollPageDown() {
 		getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.PAGE_DOWN);
 	}
-
+	
 	public void elementFocus(String element) {
 		evaluateJavascript("var element =jQuery(' " + element + " ');element.focus();");
 	}

@@ -61,6 +61,7 @@ public class CartSteps extends  AbstractSteps{
 	@Step
 	public void goToShipping(){
 		cartPage().clickToShipping();
+		abstractPage().waitForPageToLoad();
 	}
 
 	@Step

@@ -29,7 +29,7 @@ public class EmailClientSteps extends AbstractSteps {
 		
 		mailPage.openEmail(email,title);
 		
-		return mailinatorPage().getConfirmationEmail();
+		return mailPage.getConfirmationEmail();
 	}
 
 	@Step

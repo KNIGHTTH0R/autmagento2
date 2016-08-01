@@ -127,12 +127,14 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 
 	@Test
 	public void us7008KoboRegOnMasterNotPrefCountryTest() {
+		System.out.println(MongoReader.getBaseURL() + context);
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL() + context, koboCode);
 		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);		
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
 		koboSuccesFormSteps.verifyThatTheWebsiteHasChanged();
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
+		System.out.println(url);
 		contactBoosterRegistrationSteps.navigate(url);
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 		fancyBoxSteps.goToShipping();
