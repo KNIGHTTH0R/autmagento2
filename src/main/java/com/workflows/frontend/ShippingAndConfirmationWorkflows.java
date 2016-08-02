@@ -100,7 +100,7 @@ public class ShippingAndConfirmationWorkflows {
 
 	@Step
 	public void verifyDiscountsPrice(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, compare.contains(productNow));
 	}
 	@Step
 	public void verifyAdyenTotal(String productNow, String compare) {

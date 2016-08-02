@@ -47,8 +47,6 @@ public class US15004CompleteOrderTest extends BaseTest {
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
-//		ordersSteps.markOrderAsPaid();
-//		ordersSteps.completeOrder();
 		ordersSteps.uncancelOrder();
 		ordersSteps.completeOrder();
 		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);

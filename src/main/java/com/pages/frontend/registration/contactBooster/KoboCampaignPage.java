@@ -80,13 +80,15 @@ public class KoboCampaignPage extends AbstractPage {
 	}
 
 	public void checkStylePartiesCheckbox() {
-		element(stylePartiesCheckbox).waitUntilVisible();
-		stylePartiesCheckbox.click();
+//		element(stylePartiesCheckbox).waitUntilVisible();
+//		stylePartiesCheckbox.click();
+		elementjQueryClick("#flag_stylist_parties");
 	}
 
 	public void checkStyleMemberCheckbox() {
-		element(styleMemberCheckbox).waitUntilVisible();
-		styleMemberCheckbox.click();
+//		element(styleMemberCheckbox).waitUntilVisible();
+//		styleMemberCheckbox.click();
+		elementjQueryClick("#flag_stylist_member");
 	}
 
 	public void firstNameInput(String firstName) {
@@ -115,9 +117,10 @@ public class KoboCampaignPage extends AbstractPage {
 	}
 
 	public void checkIAgree() {
-		element(termsCheckbox).waitUntilVisible();
-		termsCheckbox.click();
-		waitABit(1000);
+//		element(termsCheckbox).waitUntilVisible();
+//		termsCheckbox.click();
+//		waitABit(1000);
+		elementjQueryClick("#terms");
 	}
 
 	public void submitAndContinue() {

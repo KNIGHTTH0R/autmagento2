@@ -103,7 +103,7 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "div#wishlistGuestsFormContainer form button[class='button blue-button right clear']")
 	private WebElement addToBorrowCart;
 
-	@FindBy(id = "fancybox-close")
+	@FindBy(css = "a.fancybox-item.fancybox-close")
 	private WebElement closeFancy;
 
 	// this is made for a single product.if the products is the expected

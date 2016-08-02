@@ -506,7 +506,6 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		if (createCustomerPage().isStylecoachFound()) {
 			createCustomerPage().selectFirstStylistFromList();
 		}
-
 		return createCustomerPage().getFoundStylecoachesData();
 
 	}

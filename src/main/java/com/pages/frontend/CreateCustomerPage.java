@@ -189,7 +189,9 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputPostCodeFromPersonalInfo(String postCode) {
+		distributionZip.clear();
 		distributionZip.sendKeys(postCode);
+		waitABit(5000);
 	}
 
 	public void inputHomeTown(String homeTown) {
