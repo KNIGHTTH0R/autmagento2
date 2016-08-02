@@ -2,17 +2,19 @@ package com.pages.frontend;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.serenitybdd.core.annotations.findby.FindBy;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.frontend.DykscSeachModel;
 import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class CreateCustomerPage extends AbstractPage {
 
@@ -174,8 +176,8 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void inputPostCode(String postCode) {
 		postCodeInput.clear();
-		postCodeInput.sendKeys(postCode);
-		waitABit(1000);
+		element(postCodeInput).typeAndTab(postCode);
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
@@ -190,8 +192,8 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void inputPostCodeFromPersonalInfo(String postCode) {
 		distributionZip.clear();
-		distributionZip.sendKeys(postCode);
-		waitABit(5000);
+		element(distributionZip).typeAndTab(postCode);
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void inputHomeTown(String homeTown) {
@@ -221,7 +223,8 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void inputPostcodeFilter(String postcode) {
 		searchPostcode.clear();
-		searchPostcode.sendKeys(postcode);
+		element(searchPostcode).typeAndTab(postcode);
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void selectCountryFilter(String countryName) {
