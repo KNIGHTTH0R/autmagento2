@@ -49,7 +49,6 @@ public class ContextConstants {
 
 	public static String INVITE_EMAIL_SUBJECT = MongoReader.getDictionaryItem("INVITE_EMAIL_SUBJECT");
 	public static String PARTY_CREATION_EMAIL_SUBJECT = MongoReader.getDictionaryItem("PARTY_CREATION_EMAIL_SUBJECT");
-	public static String PROFILE_HISTORY = MongoReader.getDictionaryItem("PROFILE_HISTORY");
 	public static String JEWELRY_HISTORY = MongoReader.getDictionaryItem("JEWELRY_HISTORY");
 	public static String UPDATED_BY_SYSTEM = MongoReader.getDictionaryItem("UPDATED_BY_SYSTEM");
 
@@ -63,6 +62,7 @@ public class ContextConstants {
 	public static String PRODUCT_ADDED_INTO_CART = MongoReader.getDictionaryItem("PRODUCT_ADDED_INTO_CART");
 	public static String SUCCESFULL_REGISTRATION = MongoReader.getDictionaryItem("SUCCESFULL_REGISTRATION");
 	public static String MEIN_STYLE_COACH = MongoReader.getDictionaryItem("MEIN_STYLE_COACH");
+	public static String MEINE_BESTELLUNGEN = MongoReader.getDictionaryItem("MEINE_BESTELLUNGEN");
 
 	public static String INVITE_HOSTESS = MongoReader.getDictionaryItem("INVITE_HOSTESS");
 	public static String UPDATE_PARTY = MongoReader.getDictionaryItem("UPDATE_PARTY");

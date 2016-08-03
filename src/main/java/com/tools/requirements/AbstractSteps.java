@@ -86,9 +86,9 @@ import com.pages.frontend.checkout.shipping.host.ContactHostShippingPage;
 import com.pages.frontend.checkout.shipping.kobo.KoboShippingPage;
 import com.pages.frontend.checkout.shipping.regularUser.ShippingPartySectionPage;
 import com.pages.frontend.checkout.wishlist.WishlistPage;
-import com.pages.frontend.profile.DashboardMenuPage;
 import com.pages.frontend.profile.DashboardPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
+import com.pages.frontend.profile.ProfileNavPage;
 import com.pages.frontend.registration.FacebookRegistrationFormPage;
 import com.pages.frontend.registration.connectWithMe.ConnectSuccesPage;
 import com.pages.frontend.registration.connectWithMe.ConnectWithMeAllocationPage;
@@ -281,6 +281,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public AddProductsModalPage addProductsModalPage() {
 		return getPages().currentPageAt(AddProductsModalPage.class);
+	}
+	
+	public ProfileNavPage profileNavPage() {
+		return getPages().currentPageAt(ProfileNavPage.class);
 	}
 
 	public StylecoachListBackendPage stylecoachListBackendPage() {
@@ -571,11 +575,6 @@ public class AbstractSteps extends ScenarioSteps {
 	
 	public GeneralCartPage generalCartPage() {
 		return getPages().currentPageAt(GeneralCartPage.class);
-	}
-
-	// Profile
-	public DashboardMenuPage dashboardMenuPage() {
-		return getPages().currentPageAt(DashboardMenuPage.class);
 	}
 
 	public ProfileHistoryPage profileHistoryPage() {

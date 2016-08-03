@@ -32,6 +32,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPomSteps;
+import com.steps.frontend.profile.ProfileNavSteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
@@ -74,6 +75,8 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 	public ProfileSteps profileSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
+	@Steps
+	public ProfileNavSteps profileNavSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
@@ -134,7 +137,6 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 		koboSuccesFormSteps.verifyThatTheWebsiteHasChanged();
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
-		System.out.println(url);
 		contactBoosterRegistrationSteps.navigate(url);
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 		fancyBoxSteps.goToShipping();
@@ -146,8 +148,10 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
+		
+		headerSteps.goToProfile();
+		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
 
-		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
 		String orderId = orderHistory.get(0).getOrderId();

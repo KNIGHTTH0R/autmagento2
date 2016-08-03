@@ -20,9 +20,11 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.profile.ProfileNavSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
 import com.tools.data.backend.JewelryHistoryModel;
+import com.tools.env.constants.ContextConstants;
 import com.tools.env.constants.SoapKeys;
 import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
@@ -40,6 +42,8 @@ public class US15004VerifyDashboardAndJbHistoryAfterCmOrderTest extends BaseTest
 	public FooterSteps footerSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
+	@Steps
+	public ProfileNavSteps profileNavSteps;
 	@Steps
 	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
 	@Steps
@@ -75,8 +79,6 @@ public class US15004VerifyDashboardAndJbHistoryAfterCmOrderTest extends BaseTest
 				}
 			}
 		}
-
-
 	}
 
 	@Test
@@ -89,7 +91,7 @@ public class US15004VerifyDashboardAndJbHistoryAfterCmOrderTest extends BaseTest
 		headerSteps.goToProfile();
 		String dashboardTotalJb = dashboardSteps.getJewelryBonus();
 
-		jewelryBonusHistorySteps.navigateToJewelryHistory();
+		profileNavSteps.selectMenu(ContextConstants.JEWELRY_HISTORY);
 		actualJewelryHistoryModel = jewelryBonusHistorySteps.grabJewelryBonusHistory();
 
 		dashboardSteps.validateDashboardTotalJewerlyBonus(expectedJewelryHistoryModel.getTotalPoints(), dashboardTotalJb);
