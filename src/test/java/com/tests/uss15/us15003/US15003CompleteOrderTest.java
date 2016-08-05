@@ -13,9 +13,9 @@ import com.connectors.http.ApacheHttpHelper;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Credentials;
+import com.tools.constants.JenkinsConstants;
 import com.tools.data.backend.OrderModel;
-import com.tools.env.constants.Credentials;
-import com.tools.env.constants.JenkinsConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

@@ -5,9 +5,9 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tools.constants.ConfigConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
-import com.tools.env.constants.ConfigConstants;
 
 public class OrderForCustomerDiscountsCalculation {
 

@@ -21,10 +21,10 @@ import com.pages.frontend.registration.landing.LandingCustomerAllocationPage.Sty
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 

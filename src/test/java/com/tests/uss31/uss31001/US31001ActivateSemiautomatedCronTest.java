@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.Credentials;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.Credentials;
 import com.tools.requirements.Application;
 
 import net.serenitybdd.junit.runners.SerenityRunner;

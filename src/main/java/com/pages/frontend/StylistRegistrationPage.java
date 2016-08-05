@@ -10,9 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.datahandler.StylistRegDataGrabber;
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 

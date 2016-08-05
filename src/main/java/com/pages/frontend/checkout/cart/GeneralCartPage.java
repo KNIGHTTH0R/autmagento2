@@ -2,7 +2,7 @@ package com.pages.frontend.checkout.cart;
 
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.constants.ContextConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 import net.serenitybdd.core.annotations.findby.FindBy;

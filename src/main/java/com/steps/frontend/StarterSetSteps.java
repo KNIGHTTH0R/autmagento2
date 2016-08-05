@@ -4,8 +4,8 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Title;
 
 import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.AddressModel;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class StarterSetSteps extends AbstractSteps {

@@ -2,9 +2,9 @@ package com.steps.frontend.checkout.cart.styleCoachCart;
 
 import java.util.List;
 
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;

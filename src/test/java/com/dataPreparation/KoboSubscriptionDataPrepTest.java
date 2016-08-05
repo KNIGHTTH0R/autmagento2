@@ -27,10 +27,10 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.kobo.ContactBoosterCartSteps;
 import com.steps.frontend.checkout.shipping.kobo.KoboShippingSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Credentials;
+import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.datahandler.DataGrabber;
-import com.tools.env.constants.Credentials;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.utils.FormatterUtils;
 

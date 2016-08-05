@@ -5,11 +5,11 @@ import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
 import com.connectors.http.ApacheHttpHelper;
+import com.tools.constants.DateConstants;
+import com.tools.constants.JenkinsConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.data.backend.IpModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
-import com.tools.env.constants.DateConstants;
-import com.tools.env.constants.JenkinsConstants;
-import com.tools.env.constants.TimeConstants;
 import com.tools.generalCalculation.ClosedMonthBonusCalculation;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.DateUtils;

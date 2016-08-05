@@ -4,9 +4,9 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class CreateNewContactSteps extends AbstractSteps {

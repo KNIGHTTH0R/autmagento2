@@ -5,13 +5,13 @@ import java.util.List;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Title;
 
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class ShippingSteps extends AbstractSteps {

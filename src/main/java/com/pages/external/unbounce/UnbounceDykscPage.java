@@ -8,8 +8,8 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.constants.ContextConstants;
 import com.tools.data.frontend.DykscSeachModel;
-import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class UnbounceDykscPage extends AbstractPage {

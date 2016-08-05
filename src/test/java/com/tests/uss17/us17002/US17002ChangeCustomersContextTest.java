@@ -14,8 +14,8 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Separators;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.Separators;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

@@ -2,8 +2,8 @@ package com.steps.frontend.reports;
 
 import org.junit.Assert;
 
+import com.tools.constants.ContextConstants;
 import com.tools.data.backend.JewelryHistoryModel;
-import com.tools.env.constants.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;

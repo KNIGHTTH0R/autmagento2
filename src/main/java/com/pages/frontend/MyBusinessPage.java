@@ -3,8 +3,8 @@ package com.pages.frontend;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.TimeConstants;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
 

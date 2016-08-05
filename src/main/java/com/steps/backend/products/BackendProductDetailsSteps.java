@@ -2,7 +2,7 @@ package com.steps.backend.products;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.env.constants.ConfigConstants;
+import com.tools.constants.ConfigConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class BackendProductDetailsSteps extends AbstractSteps {

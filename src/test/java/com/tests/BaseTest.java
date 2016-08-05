@@ -11,9 +11,10 @@ import org.openqa.selenium.WebDriver;
 
 import com.connectors.gmail.GmailConnector;
 import com.connectors.mongo.MongoConnector;
+import com.tools.constants.EmailConstants;
+import com.tools.constants.EnvironmentConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.constants.EmailConstants;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.persistance.MongoWriter;
@@ -88,6 +89,8 @@ public class BaseTest {
 		emailDefaults.setPassword(EmailConstants.EMAIL_DEF_PASSWORD);
 		gmailConnector = new GmailConnector(emailDefaults);
 		updateDictionary();
+		updateEnvConstants();
+		System.out.println(EnvironmentConstants.CHANGE_EMAIL_JOB_TRIGGER_URL);
 	}
 
 	/**
@@ -127,4 +130,38 @@ public class BaseTest {
 		}
 
 	}
+	
+	public static void updateEnvConstants() {
+		MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG, MongoTableKeys.ENV_CONSTANTS_MODEL);
+
+		System.out.println("Environment Constants PATH: " + UrlConstants.ENV_PATH + MongoReader.getEnvironment() + File.separator
+				+ "envConstants.properties");
+		System.out.println("Load Env Constants... ");
+
+		Properties prop = new Properties();
+		InputStream input = null;
+		try {
+			input = new FileInputStream(
+					UrlConstants.ENV_PATH + MongoReader.getEnvironment() + File.separator + "envConstants.properties");
+			prop.load(input);
+			for (Object keyNow : prop.keySet()) {
+				String value = prop.getProperty(String.valueOf(keyNow));
+				MongoWriter.saveToEnvConstants(String.valueOf(keyNow), value);
+			}
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	
+	
 }

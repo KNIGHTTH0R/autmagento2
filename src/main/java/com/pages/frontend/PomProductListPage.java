@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.tools.env.constants.TimeConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class PomProductListPage extends AbstractPage {

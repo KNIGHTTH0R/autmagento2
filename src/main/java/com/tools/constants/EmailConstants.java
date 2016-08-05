@@ -1,4 +1,4 @@
-package com.tools.env.constants;
+package com.tools.constants;
 
 public class EmailConstants {
 	public static final String RECEIVING_HOST = "imap.gmail.com";

@@ -4,7 +4,8 @@ import net.thucydides.core.pages.PageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import com.tools.env.constants.TimeConstants;
+
+import com.tools.constants.TimeConstants;
 
 public class AbstractPage extends PageObject {
 
@@ -19,9 +20,13 @@ public class AbstractPage extends PageObject {
 	public void scrollPageDown() {
 		getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.PAGE_DOWN);
 	}
-	
+
 	public void elementFocus(String element) {
 		evaluateJavascript("var element =jQuery(' " + element + " ');element.focus();");
+	}
+
+	public void scrollToElement(String element) {
+		evaluateJavascript("document.getElementById(\"" + element + "\").scrollIntoView();");
 	}
 
 	public void elementjQueryMouseOver(String element) {
@@ -37,9 +42,10 @@ public class AbstractPage extends PageObject {
 		do {
 			waitABit(TimeConstants.WAIT_TIME_SMALL);
 			retry++;
-		} while (retry <= TimeConstants.PAGE_LOAD_MAX_RETRY && evaluateJavascript("return document.readyState").equals("complete") != true);
+		} while (retry <= TimeConstants.PAGE_LOAD_MAX_RETRY
+				&& evaluateJavascript("return document.readyState").equals("complete") != true);
 	}
-	
+
 	public void navigate(String URL) {
 		if (!URL.contains("www.pippajean.com")) {
 			getDriver().get(URL);

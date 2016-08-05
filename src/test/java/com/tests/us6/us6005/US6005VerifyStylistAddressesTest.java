@@ -14,10 +14,10 @@ import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Credentials;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.soap.DBStylistModel;
-import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.RandomAddress;

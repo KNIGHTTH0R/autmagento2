@@ -2,7 +2,7 @@ package com.steps.external.mailchimp;
 
 import net.thucydides.core.annotations.StepGroup;
 
-import com.tools.env.constants.UrlConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class MailchimpLoginSteps extends AbstractSteps {

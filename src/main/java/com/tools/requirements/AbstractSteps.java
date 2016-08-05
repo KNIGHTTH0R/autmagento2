@@ -103,8 +103,8 @@ import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.IpReportsPage;
 import com.pages.frontend.reports.JewelryBonusHistoryPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.TimeConstants;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
 
 import net.thucydides.core.annotations.Screenshots;

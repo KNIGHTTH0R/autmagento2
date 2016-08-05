@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.tools.env.constants.NavisionConstants;
+import com.tools.constants.NavisionConstants;
 
 public class SqlServerConnector {
 

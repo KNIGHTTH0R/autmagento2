@@ -10,10 +10,10 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.tools.constants.Separators;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
-import com.tools.env.constants.Separators;
 import com.tools.persistance.MongoReader;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;

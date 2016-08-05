@@ -1,7 +1,7 @@
 package com.steps.external;
 
 import com.pages.external.YopmailPage;
-import com.tools.env.constants.UrlConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.DateUtils;
 
