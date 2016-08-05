@@ -1,6 +1,6 @@
 package com.tools.data.frontend;
 
-import com.tools.env.constants.ContextConstants;
+import com.tools.constants.ContextConstants;
 
 public class AddressModel {
 

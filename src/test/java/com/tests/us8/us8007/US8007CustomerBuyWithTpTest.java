@@ -31,15 +31,15 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.regularUser.RegularCartTotalsCalculation;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.JenkinsConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.JenkinsConstants;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -288,7 +288,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName()); 
 		
 		try {
-			ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_STAGING_AUT_JOB_URL);
+			ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_JOB_URL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

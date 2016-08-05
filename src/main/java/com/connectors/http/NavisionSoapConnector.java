@@ -11,7 +11,7 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.DOMException;
 
-import com.tools.env.constants.NavSoapKeys;
+import com.tools.constants.NavSoapKeys;
 
 public class NavisionSoapConnector {
 

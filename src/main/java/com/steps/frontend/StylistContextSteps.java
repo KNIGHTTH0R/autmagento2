@@ -3,7 +3,7 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
-import com.tools.env.constants.TimeConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class StylistContextSteps extends AbstractSteps {

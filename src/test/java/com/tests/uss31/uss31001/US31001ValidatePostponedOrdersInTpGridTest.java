@@ -23,14 +23,14 @@ import com.steps.backend.termPurchase.TermPurchaseGridSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.Credentials;
+import com.tools.constants.JenkinsConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.Credentials;
-import com.tools.env.constants.JenkinsConstants;
-import com.tools.env.constants.TimeConstants;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -158,9 +158,9 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId() + JenkinsConstants.JOB_TOKEN);
 		ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId() + JenkinsConstants.JOB_TOKEN);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-        ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_UPGRADE);
+        ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
         backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-        ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT_UPGRADE);
+        ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
         
 		MongoWriter.saveTermPurchaseModel(expectedModel2,getClass().getSimpleName()+"TP1");
         

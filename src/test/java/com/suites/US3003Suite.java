@@ -11,8 +11,8 @@ import com.tests.us3.us3003.US3003ValidateOrderEmailTest;
 @SuiteClasses({
 	US3003SfmValidVatNoSmbBillingShippingDeTest.class,
 //	US3003CheckOrderOnStylecoachProfileTest.class,
-	US3003ValidateOrderEmailTest.class,
 	US3003ValidateOrderBackOfficeTest.class,
+	US3003ValidateOrderEmailTest.class,
 })
 @RunWith(Suite.class)
 public class US3003Suite {

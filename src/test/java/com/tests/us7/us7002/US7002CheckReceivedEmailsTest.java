@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
 
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.ContextConstants;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

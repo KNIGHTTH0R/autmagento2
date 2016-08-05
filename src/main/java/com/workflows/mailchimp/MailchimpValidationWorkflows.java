@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
+import com.tools.constants.ConfigConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -11,7 +12,6 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.newsletter.SubscriberModel;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.utils.PrintUtils;
 

@@ -13,8 +13,8 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.Credentials;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

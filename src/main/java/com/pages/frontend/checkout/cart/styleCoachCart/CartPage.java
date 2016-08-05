@@ -2,18 +2,19 @@ package com.pages.frontend.checkout.cart.styleCoachCart;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.datahandler.DataGrabber;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.TimeConstants;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -256,6 +257,8 @@ public class CartPage extends AbstractPage {
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickUpdateCart() {

@@ -13,8 +13,8 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.backend.customer.CustomerDetailsBackendSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Credentials;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

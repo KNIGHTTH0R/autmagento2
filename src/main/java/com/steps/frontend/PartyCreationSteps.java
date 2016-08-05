@@ -2,7 +2,7 @@ package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 
-import com.tools.env.constants.ContextConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class PartyCreationSteps extends AbstractSteps {

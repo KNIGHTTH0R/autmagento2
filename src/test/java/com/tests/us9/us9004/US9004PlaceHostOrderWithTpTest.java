@@ -32,16 +32,16 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.cartcalculations.partyHost.HostCartTotalsCalculation;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.JenkinsConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.JenkinsConstants;
-import com.tools.env.constants.SoapKeys;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -281,7 +281,7 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
 		
 		try {
-			ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_STAGING_AUT_JOB_URL);
+			ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_JOB_URL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

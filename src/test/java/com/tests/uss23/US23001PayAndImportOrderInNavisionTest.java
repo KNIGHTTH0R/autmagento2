@@ -17,10 +17,10 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Credentials;
+import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
-import com.tools.env.constants.Credentials;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

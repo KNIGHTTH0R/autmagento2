@@ -10,7 +10,6 @@ import com.tests.uss30.uss30001.US30001GetInitialOpenIps;
 @SuiteClasses({
 	
 	US10CreateAllPartiesSuite.class,
-	US30001GetInitialOpenIps.class,
 
 	US3001Suite.class,
 	US3003Suite.class,
@@ -34,9 +33,6 @@ import com.tests.uss30.uss30001.US30001GetInitialOpenIps;
 	US7002Suite.class,
 	US7004Suite.class,
 	US7004bSuite.class,
-//	US7006Suite.class,
-//	US7006bSuite.class,
-//	US7007Suite.class,	
 	US7008Suite.class,
 	US7009Suite.class,
 	US70010Suite.class,
@@ -76,13 +72,13 @@ import com.tests.uss30.uss30001.US30001GetInitialOpenIps;
 	
 	US12001Suite.class,
 	
-	US13001Suite.class,
-	US13002Suite.class,
-	US13003Suite.class,
-	US13004Suite.class,
-	US13005Suite.class,
-	US13006Suite.class,
-	US13007Suite.class,
+//	US13001Suite.class,
+//	US13002Suite.class,
+//	US13003Suite.class,
+//	US13004Suite.class,
+//	US13005Suite.class,
+//	US13006Suite.class,
+//	US13007Suite.class,
 	
 	US16001Suite.class,
 	US16002Suite.class,
@@ -102,8 +98,6 @@ import com.tests.uss30.uss30001.US30001GetInitialOpenIps;
 	
 //	US26001Suite.class,
 //	US23001PartThreeSuite.class,
-	
-//	US30001VerifyOpenIpsAfterNewOrdersTest.class,
 	
 })
 @RunWith(Suite.class)

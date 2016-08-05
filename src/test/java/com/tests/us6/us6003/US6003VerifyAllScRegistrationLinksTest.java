@@ -22,7 +22,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.env.constants.UrlConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

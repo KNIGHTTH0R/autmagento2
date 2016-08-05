@@ -1,12 +1,13 @@
 package com.steps.frontend.reports;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Title;
-
 import org.junit.Assert;
 
+import com.tools.constants.ContextConstants;
 import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 public class JewelryBonusHistorySteps extends AbstractSteps {
 
@@ -15,12 +16,6 @@ public class JewelryBonusHistorySteps extends AbstractSteps {
 	@Step
 	public JewelryHistoryModel grabJewelryBonusHistory() {
 		return jewelryBonusHistoryPage().grabJewelryBonusHistory();
-	}
-
-	@Step
-	public void navigateToJewelryHistory() {
-		headerPage().clickOnProfileButton();
-		dashboardMenuPage().clickOnJewelryBonusHistory();
 	}
 
 	@Title("Validate the new JB history registration")

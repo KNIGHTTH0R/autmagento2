@@ -8,7 +8,7 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 
-import com.tools.env.constants.Separators;
+import com.tools.constants.Separators;
 
 public class FormatterUtils {
 

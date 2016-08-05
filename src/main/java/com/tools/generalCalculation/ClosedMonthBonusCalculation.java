@@ -8,11 +8,11 @@ import java.util.List;
 
 import com.connectors.http.CreditMemosInfoMagentoCalls;
 import com.connectors.http.OrdersInfoMagentoCalls;
+import com.tools.constants.ComissionConfigConstants;
 import com.tools.data.backend.IpModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.soap.DBCreditMemoModel;
 import com.tools.data.soap.DBOrderModel;
-import com.tools.env.constants.ComissionConfigConstants;
 
 public class ClosedMonthBonusCalculation {
 

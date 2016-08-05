@@ -6,7 +6,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.constants.ContextConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class CreditMemoDetailsPage extends AbstractPage {

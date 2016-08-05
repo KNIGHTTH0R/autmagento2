@@ -10,12 +10,12 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.data.geolocation.CoordinatesModel;
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
 import com.tools.utils.PrintUtils;
@@ -141,14 +141,17 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	public void saveCustomer() {
 		evaluateJavascript("jQuery.noConflict();");
+		scrollToPageTop();
 		element(saveCustomer).waitUntilVisible();
 		saveCustomer.click();
 	}
 
 	public void saveAndContinueEdit() {
 		evaluateJavascript("jQuery.noConflict();");
+		scrollToPageTop();
 		element(saveAndContinueEdit).waitUntilVisible();
 		saveAndContinueEdit.click();
+		scrollToPageTop();
 	}
 
 	public void clickOnLeadSettings() {

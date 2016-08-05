@@ -4,11 +4,11 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Title;
 
 import com.tools.CustomVerification;
+import com.tools.constants.Separators;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.ContactModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
-import com.tools.env.constants.Separators;
 
 public class ContactValidationWorkflows {
 

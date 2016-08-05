@@ -20,10 +20,10 @@ import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.IpReportsSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
+import com.tools.constants.FilePaths;
+import com.tools.constants.JenkinsConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.TermPurchaseIpModel;
-import com.tools.env.constants.FilePaths;
-import com.tools.env.constants.JenkinsConstants;
-import com.tools.env.constants.UrlConstants;
 import com.tools.generalCalculation.IpReportCalculation;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -70,7 +70,7 @@ public class US30001VerifyOpenIpsAfterNewOrdersTest extends BaseTest {
 		
 		expectedIpModel = IpReportCalculation.calculateTermPurchaseIps(ipModelList);
 		
-		ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_STAGING_AUT_JOB_URL);
+		ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_JOB_URL);
 
 		Properties prop = new Properties();
 		InputStream input = null;

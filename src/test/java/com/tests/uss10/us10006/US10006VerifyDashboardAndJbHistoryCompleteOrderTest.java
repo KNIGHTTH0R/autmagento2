@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,13 +14,20 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.profile.ProfileNavSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.backend.JewelryHistoryModel;
-import com.tools.env.constants.SoapKeys;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
 @Story(Application.StyleParty.US10_6.class)
@@ -40,6 +42,8 @@ public class US10006VerifyDashboardAndJbHistoryCompleteOrderTest extends BaseTes
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
+	@Steps
+	public ProfileNavSteps profileNavSteps;
 	@Steps
 	public DashboardSteps dashboardSteps;
 
@@ -88,7 +92,7 @@ public class US10006VerifyDashboardAndJbHistoryCompleteOrderTest extends BaseTes
 		headerSteps.goToProfile();
 		String dashboardTotalJb = dashboardSteps.getJewelryBonus();
 		
-		jewelryBonusHistorySteps.navigateToJewelryHistory();
+		profileNavSteps.selectMenu(ContextConstants.JEWELRY_HISTORY);
 		actualJewelryHistoryModel = jewelryBonusHistorySteps.grabJewelryBonusHistory();
 
 		dashboardSteps.validateDashboardTotalJewerlyBonus(expectedJewelryHistoryModel.getTotalPoints(), dashboardTotalJb);

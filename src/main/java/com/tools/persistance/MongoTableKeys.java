@@ -239,5 +239,8 @@ public class MongoTableKeys {
 	public static final String CATEGORY_NAME = null;
 	public static final String CATEGORY_URL = null;
 	public static final String CATEGORY_ID = null;
+	
+	
+	public static final String ENV_CONSTANTS_MODEL = "envConstants";
 
 }

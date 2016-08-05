@@ -6,22 +6,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
-import com.tools.env.constants.UrlConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US7.8 Kobo Registration on Master Not Pref Country Test ", type = "Scenarios")
 @Story(Application.KoboRegistration.US7_8.class)
@@ -32,6 +33,8 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public DashboardSteps dashboardSteps;
 
@@ -79,6 +82,10 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 	public void us7008ValidateCustomerIsAssignedToStylist() {
 
 		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
 
 		headerSteps.goToProfile();
 		headerSteps.getBoutiqueName();

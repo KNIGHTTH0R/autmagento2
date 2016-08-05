@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.constants.ConfigConstants;
+import com.tools.constants.ConfigConstants;
 import com.tools.requirements.AbstractPage;
 
 public class StylecoachListBackendPage extends AbstractPage {

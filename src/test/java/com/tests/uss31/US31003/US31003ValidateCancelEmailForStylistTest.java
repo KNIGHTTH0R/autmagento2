@@ -22,11 +22,11 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
+import com.tools.constants.EmailConstants;
+import com.tools.constants.FilePaths;
+import com.tools.constants.UrlConstants;
 import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.constants.EmailConstants;
-import com.tools.env.constants.FilePaths;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

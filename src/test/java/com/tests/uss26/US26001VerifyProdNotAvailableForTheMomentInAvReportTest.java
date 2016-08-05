@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -24,8 +25,8 @@ import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.UrlConstants;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -80,6 +81,8 @@ public class US26001VerifyProdNotAvailableForTheMomentInAvReportTest extends Bas
 				}
 			}
 		}
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 

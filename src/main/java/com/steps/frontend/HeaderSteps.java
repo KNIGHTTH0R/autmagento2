@@ -4,9 +4,9 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
-import com.tools.env.constants.Separators;
-import com.tools.env.constants.TimeConstants;
-import com.tools.env.constants.UrlConstants;
+import com.tools.constants.Separators;
+import com.tools.constants.TimeConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
@@ -17,7 +17,7 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	public void openCartPreview() {
 		headerPage().clickShoppingBag();
-//		return headerPage().getShoppingBagTotalSum();
+		// return headerPage().getShoppingBagTotalSum();
 	}
 
 	@Step
@@ -87,13 +87,12 @@ public class HeaderSteps extends AbstractSteps {
 
 	public void redirectToProfileHistory() {
 		navigate(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
-
+		
 	}
 
 	@Step
 	public void redirectToWishlist() {
 		navigate(MongoReader.getBaseURL() + UrlConstants.WISHLIST_URL);
-
 	}
 
 	@Step
@@ -102,16 +101,19 @@ public class HeaderSteps extends AbstractSteps {
 			wishlistPage().addAllProductsToCArt();
 		}
 	}
+
 	@Step
 	public void redirectToStylistsCustomerOrderReport() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		navigate(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
+
 	@Step
 	public void redirectToStylistReports() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		navigate(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
 	}
+
 	@Step
 	public void redirectToCartPage() {
 		navigate(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);
@@ -145,7 +147,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormAndLogout() {
-//		navigate(MongoReader.getBaseURL());
+		// navigate(MongoReader.getBaseURL());
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
 		footerPage().clickRegistrierungLink();

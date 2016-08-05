@@ -24,11 +24,11 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.EmailConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.constants.EmailConstants;
-import com.tools.env.constants.SoapKeys;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 

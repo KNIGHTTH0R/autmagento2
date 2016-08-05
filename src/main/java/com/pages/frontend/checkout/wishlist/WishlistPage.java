@@ -4,7 +4,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.WebElement;
 
-import com.tools.env.constants.ContextConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class WishlistPage extends AbstractPage {

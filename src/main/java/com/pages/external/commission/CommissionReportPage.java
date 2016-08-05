@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.env.constants.TimeConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
 

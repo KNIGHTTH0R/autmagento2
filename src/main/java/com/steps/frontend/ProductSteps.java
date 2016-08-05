@@ -3,6 +3,8 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
@@ -10,8 +12,6 @@ import com.tools.data.frontend.PomProductModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.StarterSetProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 

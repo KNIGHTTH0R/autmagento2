@@ -12,13 +12,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.cartcalculations.partyHost.HostCartTotalsCalculation;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
 import com.tools.datahandler.HostDataGrabber;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.ContextConstants;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
 

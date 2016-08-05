@@ -6,9 +6,9 @@ import net.thucydides.core.annotations.Step;
 
 import org.junit.Assert;
 
+import com.tools.constants.ContextConstants;
 import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.soap.DBStylistModel;
-import com.tools.env.constants.ContextConstants;
 import com.tools.generalCalculation.JewelryBonusHistoryCalulation;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.DateUtils;

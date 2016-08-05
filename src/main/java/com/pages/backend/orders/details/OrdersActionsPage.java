@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.ContextConstants;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 public class OrdersActionsPage extends AbstractPage {

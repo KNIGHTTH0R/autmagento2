@@ -23,13 +23,13 @@ import com.steps.backend.termPurchase.TermPurchaseGridSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.Credentials;
+import com.tools.constants.JenkinsConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.Credentials;
-import com.tools.env.constants.JenkinsConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -172,7 +172,7 @@ public class US31003ValidateCanceledAndReleasedByAdminOrdersInTpGridTest extends
 	@After
 	public void runCron() throws Exception{
 	
-	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT_UPGRADE);
+	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
 		
 		MongoWriter.saveTermPurchaseModel(expectedModel1,getClass().getSimpleName()+"TP1");
 		MongoWriter.saveTermPurchaseModel(expectedModel2,getClass().getSimpleName()+"TP2");

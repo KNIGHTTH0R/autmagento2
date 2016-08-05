@@ -3,10 +3,10 @@ package com.tools.cartcalculations.regularUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tools.constants.ContextConstants;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.constants.ContextConstants;
 
 public class RegularUserCartCalculator {
 

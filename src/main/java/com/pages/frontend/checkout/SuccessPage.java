@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.tools.env.constants.ContextConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 import net.serenitybdd.core.annotations.findby.FindBy;

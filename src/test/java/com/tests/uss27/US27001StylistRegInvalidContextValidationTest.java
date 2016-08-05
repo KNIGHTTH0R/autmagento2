@@ -21,12 +21,12 @@ import com.steps.frontend.StylistContextStepsCsv;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.JenkinsConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.env.constants.JenkinsConstants;
 import com.tools.requirements.Application;
 import com.workflows.file.FileWorkflows;
 

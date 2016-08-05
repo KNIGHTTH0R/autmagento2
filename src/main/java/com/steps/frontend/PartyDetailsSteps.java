@@ -5,9 +5,9 @@ import java.text.ParseException;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class PartyDetailsSteps extends AbstractSteps {

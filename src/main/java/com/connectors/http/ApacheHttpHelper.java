@@ -12,8 +12,8 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.tools.env.constants.HttpConstants;
-import com.tools.env.constants.JenkinsConstants;
+import com.tools.constants.HttpConstants;
+import com.tools.constants.JenkinsConstants;
 
 //TODO deprecated - try to change this
 

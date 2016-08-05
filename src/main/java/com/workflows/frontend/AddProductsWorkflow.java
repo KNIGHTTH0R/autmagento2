@@ -7,9 +7,9 @@ import net.thucydides.core.annotations.Title;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.tools.cartcalculations.smf.CartDiscountsCalculation;
+import com.tools.constants.ConfigConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.env.constants.ConfigConstants;
 
 public class AddProductsWorkflow {
 	@Steps

@@ -2,8 +2,8 @@ package com.steps.backend.stylecoach;
 
 import net.thucydides.core.annotations.Step;
 
+import com.tools.constants.ConfigConstants;
 import com.tools.data.frontend.ContactDetailsModel;
-import com.tools.env.constants.ConfigConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class StylecoachListBackendSteps extends AbstractSteps {

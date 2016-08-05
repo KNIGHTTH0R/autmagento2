@@ -35,14 +35,14 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.constants.JenkinsConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
-import com.tools.env.constants.JenkinsConstants;
-import com.tools.env.constants.SoapKeys;
-import com.tools.env.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -268,7 +268,7 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveIncrementId(prod4IncrementId, getClass().getSimpleName() + "TP4");
 
 		// script for updating deliveryDates
-		 ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_UPGRADE);
+		 ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
 	}
 
 }

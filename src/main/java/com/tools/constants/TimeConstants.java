@@ -1,4 +1,4 @@
-package com.tools.env.constants;
+package com.tools.constants;
 
 public class TimeConstants {
 	public static final long TIME_MEDIUM = 5000;

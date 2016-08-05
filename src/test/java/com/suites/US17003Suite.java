@@ -12,8 +12,6 @@ import com.tests.uss17.us17003.US17003VerifyThatOldStylistWasDeactivatedTest;
 
 @SuiteClasses({
 	US17003StyleCoachRegistrationTest.class,
-//	US17003MarkStarterKitOrderAsPaidTest.class,
-//	US17003ConfirmStylecoachTest.class,
 	US17003AddNewContactToStyleCoachTest.class, //add a contact under created SC
 	US17003ReasignContactsTest.class, //cancel the SC
 	US17003VerifyThatOldStylistWasDeactivatedTest.class,
