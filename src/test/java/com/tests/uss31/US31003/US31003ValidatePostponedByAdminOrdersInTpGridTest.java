@@ -155,7 +155,7 @@ public class US31003ValidatePostponedByAdminOrdersInTpGridTest extends BaseTest 
 		MagentoProductCalls.updateApiProduct(updated2Product, prod2IncrementId);
 		
 	
-        ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
+        ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT_UPGRADE);
         
         
         

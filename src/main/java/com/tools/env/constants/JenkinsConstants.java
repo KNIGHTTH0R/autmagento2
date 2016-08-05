@@ -14,6 +14,8 @@ public class JenkinsConstants {
 	public static final String JOB_TOKEN = "&token=XDWRmbcL3U1mRlCjOBrF";
 	public static final String RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT = "http://jenkins.pippajean.com/job/RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_STAGING_AUT/build?token=XDWRmbcL3U1mRlCjOBrF";
 	public static final String RUN_POSTPONE_CANCEL_EMAIL_SCRIPT = "http://jenkins.pippajean.com/job/RUN_POSTOPONE_AND_CANCEL_EMAIL_SCRIPT_STAGING_AUT/build?token=XDWRmbcL3U1mRlCjOBrF";
+	public static final String RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_UPGRADE = "http://jenkins.pippajean.com/job/RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_UPGRADE/build?token=XDWRmbcL3U1mRlCjOBrF";
+	public static final String RUN_POSTPONE_CANCEL_EMAIL_SCRIPT_UPGRADE = "http://jenkins.pippajean.com/job/RUN_POSTOPONE_AND_CANCEL_EMAIL_SCRIPT_UPGRADE/build?token=XDWRmbcL3U1mRlCjOBrF";
 	
 
 }

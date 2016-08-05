@@ -85,8 +85,6 @@ public class US31001ValidateCancelEmailForCustomer1Test extends BaseTest {
 
 		gmailConnector = new GmailConnector(emailData);
 		
-		System.out.println("dsdsdsdsd");
-		System.out.println("SDSDSD " + DateUtils.parseDate(termPurchaseModel.getExecutionDate(), "dd-MM-yyyy", "dd MMM yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 	}
 
 	@Test

@@ -33,9 +33,6 @@ import net.thucydides.core.annotations.WithTag;
 @RunWith(SerenityRunner.class)
 public class US29001CheckContactInBackendTest extends BaseTest {
 
-//	@Managed(uniqueSession = false, driver = "firefox")
-//	public WebDriver webdriver;
-
 	public MongoConnector mongoConnector;
 	public GmailConnector gmailConnector;
 
@@ -54,105 +51,14 @@ public class US29001CheckContactInBackendTest extends BaseTest {
 	private DateModel dateModel;
 	private List<DBStylistModel> stylistsList;
 
-//	/**
-//	 * This method will grab dictionary properties by context and save it to
-//	 * MongoDb.
-//	 *
-//	 * @throws InterruptedException
-//	 */
-//	public static void updateDictionary() {
-//		MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG, MongoTableKeys.DICTIONARY_MODEL);
-//
-//		System.out.println("Dictionary PATH: " + UrlConstants.CONTEXT_PATH + MongoReader.getContext() + File.separator
-//				+ "dictionary.properties");
-//		System.out.println("Load Dictionary... ");
-//
-//		Properties prop = new Properties();
-//		InputStream input = null;
-//		try {
-//			input = new FileInputStream(
-//					UrlConstants.CONTEXT_PATH + MongoReader.getContext() + File.separator + "dictionary.properties");
-//			prop.load(input);
-//			for (Object keyNow : prop.keySet()) {
-//				String value = prop.getProperty(String.valueOf(keyNow));
-//				MongoWriter.saveToDictionary(String.valueOf(keyNow), value);
-//			}
-//
-//		} catch (IOException ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			if (input != null) {
-//				try {
-//					input.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//
-//	}
-
 	@Before
 	public void setUp() throws Exception {
 		
-//		try {
-//			System.err.println("--------------------------------- Test Start---------------------------------------");
-//
-//			mongoConnector = new MongoConnector();
-//			System.out.println("Connect to Mongo DB...");
-//			System.out.println("DB: " + mongoConnector.getDbAddress());
-//		} catch (Exception e) {
-//			System.out.println("Error: Mongo connection could not be initialized");
-//			e.printStackTrace();
-//		}
-//
-//		// Context and environment - clean and setup to mongo
-//		MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
-//		String contextValue = System.getProperty("runContext");
-//		String envValue = System.getProperty("runEnv");
-//		MongoWriter.saveEnvContext(envValue, contextValue);
-//
-//		String baseUrl = "";
-//		String storeIDs = "";
-//		String soapUrl = "";
-//		Properties prop = new Properties();
-//		InputStream input = null;
-//
-//		try {
-//
-//			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "config.properties");
-//			prop.load(input);
-//			baseUrl = prop.getProperty("baseUrl");
-//			soapUrl = prop.getProperty("soapUrl");
-//			storeIDs = prop.getProperty("storeIDs");
-//
-//		} catch (IOException ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			if (input != null) {
-//				try {
-//					input.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-//
-//		MongoWriter.saveStoreUrl(storeIDs, baseUrl, soapUrl);
-//
-//		EmailCredentialsModel emailDefaults = new EmailCredentialsModel();
-//		emailDefaults.setHost(EmailConstants.RECEIVING_HOST);
-//		emailDefaults.setProtocol(EmailConstants.PROTOCOL);
-//		emailDefaults.setUsername(EmailConstants.EMAIL_DEF_USERNAME);
-//		emailDefaults.setPassword(EmailConstants.EMAIL_DEF_PASSWORD);
-//		gmailConnector = new GmailConnector(emailDefaults);
-//		updateDictionary();
+		customerFormModel = MongoReader.grabCustomerFormModels("US29001UnbounceDykscRegistrationTest").get(0);
+		addressModel = MongoReader.grabAddressModels("US29001UnbounceDykscRegistrationTest").get(0);
+		dateModel = MongoReader.grabDateModels("US29001UnbounceDykscRegistrationTest").get(0);
 
-		customerFormModel = MongoReader.grabCustomerFormModels("US29001UnbounceRegistrationTest").get(0);
-		addressModel = MongoReader.grabAddressModels("US29001UnbounceRegistrationTest").get(0);
-		dateModel = MongoReader.grabDateModels("US29001UnbounceRegistrationTest").get(0);
-
-		stylistsList = MongoReader.grabDbStylistModels("US29001UnbounceRegistrationTest");
+	//	stylistsList = MongoReader.grabDbStylistModels("US29001UnbounceDykscRegistrationTest");
 
 		expectedContactDetailsModel = contactBackendValidationWorkflows.populateContactDetailsModel(customerFormModel,
 				addressModel, dateModel);

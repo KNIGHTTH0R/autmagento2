@@ -2,11 +2,13 @@ package com.pages.external.unbounce;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.data.frontend.DykscSeachModel;
 import com.tools.env.constants.ContextConstants;
@@ -17,7 +19,7 @@ public class UnbounceDykscPage extends AbstractPage {
 	@FindBy(id = "by_geoip")
 	private WebElement searchByPlzOption;
 
-	@FindBy(css = "search_postcode")
+	@FindBy(id = "search_postcode")
 	private WebElement searchPlzField;
 
 	@FindBy(id = "search_countryId")
@@ -46,13 +48,15 @@ public class UnbounceDykscPage extends AbstractPage {
 
 	@FindBy(css = "ul#stylist-list li:nth-child(1) div button")
 	private WebElement firstStylistContainer;
-	
+
 	@FindBy(id = "kostenlos-anmelden")
 	private WebElement displayedScs;
 
 	public void selectFirstStylistFromList() {
-		element(firstStylistContainer).waitUntilVisible();
-		firstStylistContainer.click();
+//		element(firstStylistContainer).waitUntilVisible();
+//		firstStylistContainer.click();
+		getDriver().findElement(By.cssSelector("ul#stylist-list li:nth-child(1) div button")).click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void selectSearchByPlzOption() {
@@ -64,7 +68,6 @@ public class UnbounceDykscPage extends AbstractPage {
 		element(searchPlzField).waitUntilVisible();
 		element(searchPlzField).clear();
 		element(searchPlzField).sendKeys(plz);
-		;
 	}
 
 	public void selectCountryOption(String country) {
@@ -75,7 +78,7 @@ public class UnbounceDykscPage extends AbstractPage {
 	public void clickSearchStylistByPlz() {
 		element(searchByPlzButton).waitUntilVisible();
 		element(searchByPlzButton).click();
-
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void selectSearchByNameOption() {

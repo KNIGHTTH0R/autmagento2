@@ -17,3 +17,4 @@ import com.tests.us3.us30010.US30010SfmFreeShippingTest;
 public class US30010Suite {
 
 }
+

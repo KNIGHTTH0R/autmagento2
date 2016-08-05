@@ -284,7 +284,7 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		orderModelListTp1 = MongoReader.getOrderModel("US31003PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId() + JenkinsConstants.JOB_TOKEN);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_UPGRADE);
 	
 	}
 	

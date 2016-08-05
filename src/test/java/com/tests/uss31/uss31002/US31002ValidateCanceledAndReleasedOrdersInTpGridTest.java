@@ -94,7 +94,7 @@ public class US31002ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 		// script for updating deliveryDates
 				ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId() + JenkinsConstants.JOB_TOKEN);
 				
-				ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+				ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_UPGRADE);
 	}
 
 }

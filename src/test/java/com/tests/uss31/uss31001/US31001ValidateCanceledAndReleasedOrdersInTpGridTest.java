@@ -176,9 +176,9 @@ public class US31001ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 	    ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId() + JenkinsConstants.JOB_TOKEN);
 	    ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp4.getOrderId() + JenkinsConstants.JOB_TOKEN);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_UPGRADE);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
+	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT_UPGRADE);
 		
 		MongoWriter.saveTermPurchaseModel(expectedModel1,getClass().getSimpleName()+ "TP1");
 		MongoWriter.saveTermPurchaseModel(expectedModel2,getClass().getSimpleName() + "TP2");

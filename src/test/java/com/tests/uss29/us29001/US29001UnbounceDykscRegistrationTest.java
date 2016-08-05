@@ -51,7 +51,7 @@ public class US29001UnbounceDykscRegistrationTest extends BaseTest {
 	private AddressModel addressModel;
 	private CoordinatesModel coordinatesModel = new CoordinatesModel();
 	private RandomAddress randomAddress;
-	private List<DBStylistModel> searchByPlzAndCountryStylistList;
+//	private List<DBStylistModel> searchByPlzAndCountryStylistList;
 	private List<DykscSeachModel> foundScList;
 
 	@Before
@@ -60,15 +60,16 @@ public class US29001UnbounceDykscRegistrationTest extends BaseTest {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		randomAddress = new RandomAddress();
+		customerFormDate = new DateModel();
 
-		while (coordinatesModel.getLattitude() == null) {
-			addressModel = randomAddress.getRandomAddressFromFile();
-			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
-		}
-
-		searchByPlzAndCountryStylistList = StylistListCalculation.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE,
-				SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 3);
-		PrintUtils.printListDbStylists(searchByPlzAndCountryStylistList);
+//		while (coordinatesModel.getLattitude() == null) {
+//			addressModel = randomAddress.getRandomAddressFromFile();
+//			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
+//		}
+//
+//		searchByPlzAndCountryStylistList = StylistListCalculation.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE,
+//				SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 3);
+//		PrintUtils.printListDbStylists(searchByPlzAndCountryStylistList);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
@@ -81,12 +82,11 @@ public class US29001UnbounceDykscRegistrationTest extends BaseTest {
 		doYouKnowAScSteps.searchByPlz(addressModel);
 		foundScList = doYouKnowAScSteps.selectFirstIfFound();
 		customerFormDate.setDate(date);
-		unbounceSteps.submitUnbounceForm();
 
 		unbounceRegSuccessSteps.verifySuccessMessage();
 
-		dysksWorkflows.setValidateStylistsModels(searchByPlzAndCountryStylistList, foundScList);
-		dysksWorkflows.validateStylists("VALIDATE THAT SEARCH BY PLZ AND COUNTRY RETURNS THE CORRECT LIST");
+//		dysksWorkflows.setValidateStylistsModels(searchByPlzAndCountryStylistList, foundScList);
+//		dysksWorkflows.validateStylists("VALIDATE THAT SEARCH BY PLZ AND COUNTRY RETURNS THE CORRECT LIST");
 	}
 
 	@After
@@ -94,9 +94,9 @@ public class US29001UnbounceDykscRegistrationTest extends BaseTest {
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
 		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 		MongoWriter.saveAddressModel(addressModel, getClass().getSimpleName());
-		for (DBStylistModel stylist : searchByPlzAndCountryStylistList) {
-			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
-		}
+//		for (DBStylistModel stylist : searchByPlzAndCountryStylistList) {
+//			MongoWriter.saveDbStylistModel(stylist, getClass().getSimpleName());
+//		}
 	}
 
 }

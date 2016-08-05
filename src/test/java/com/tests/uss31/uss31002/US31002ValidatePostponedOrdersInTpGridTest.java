@@ -140,7 +140,7 @@ public class US31002ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		 ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId() + JenkinsConstants.JOB_TOKEN);
 		 ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId() + JenkinsConstants.JOB_TOKEN);
 		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-	     ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+	     ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_UPGRADE);
 	}
 
 }

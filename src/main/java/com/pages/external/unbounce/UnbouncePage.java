@@ -13,10 +13,10 @@ import net.serenitybdd.core.annotations.findby.FindBy;
  */
 public class UnbouncePage extends AbstractPage {
 
-	@FindBy(id = "vorname")
+	@FindBy(id = "firstname")
 	private WebElement firstnameInput;
 
-	@FindBy(id = "nachname")
+	@FindBy(id = "lastname")
 	private WebElement lastnameInput;
 
 	@FindBy(id = "telefon")
@@ -66,7 +66,7 @@ public class UnbouncePage extends AbstractPage {
 	}
 
 	/**
-	 * js used to work on Android also
+	 * js used to work on Android too
 	 */
 	public void submitForm() {
 

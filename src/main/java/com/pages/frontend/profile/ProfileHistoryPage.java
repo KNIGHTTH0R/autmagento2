@@ -45,5 +45,7 @@ public class ProfileHistoryPage extends AbstractPage {
 
 		return result;
 	}
+	
+	
 
 }

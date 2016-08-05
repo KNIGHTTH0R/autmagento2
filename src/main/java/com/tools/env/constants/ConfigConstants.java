@@ -51,7 +51,7 @@ public class ConfigConstants {
 	
 	//unbounce success registration page
 	
-	public static final String UNBOUNCE_SUCCESS_MESSAGE = "Vielen Dank für deine Anmeldung.";
+	public static final String UNBOUNCE_SUCCESS_MESSAGE = "Vielen Dank für dein Interesse";
 	//backend horizontal menu cons
 	
 	public static final String PROMOTIONEN = "Promotionen";

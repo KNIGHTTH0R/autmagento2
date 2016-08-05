@@ -172,7 +172,7 @@ public class US31003ValidateCanceledAndReleasedByAdminOrdersInTpGridTest extends
 	@After
 	public void runCron() throws Exception{
 	
-	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
+	    ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT_UPGRADE);
 		
 		MongoWriter.saveTermPurchaseModel(expectedModel1,getClass().getSimpleName()+"TP1");
 		MongoWriter.saveTermPurchaseModel(expectedModel2,getClass().getSimpleName()+"TP2");

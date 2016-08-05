@@ -11,7 +11,7 @@ import com.tests.uss10.us10001b.US10001bUpdatePartyBonusesTest;
 
 @SuiteClasses({
 	
-	US10001bClosePartyTest.class,
+//	US10001bClosePartyTest.class,
 	US10001bUpdatePartyBonusesTest.class,
 	US9004PlaceHostOrderWithTpTest.class,
 	US9004ValidateOrdersInBackendTest.class,	

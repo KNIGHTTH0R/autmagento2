@@ -11,7 +11,7 @@ import com.tests.us9.us9005.US9005ValidateTpOrdersStatusesTest;
 
 @SuiteClasses({
 	
-	US10009ClosePartyTest.class,
+//	US10009ClosePartyTest.class,
 	US10009UpdatePartyBonusesTest.class,
 	US9005PlaceHostOrderWithTpAndZeroAmountTest.class,
 	US9005ValidateTpOrdersStatusesTest.class,	

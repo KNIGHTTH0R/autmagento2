@@ -268,7 +268,7 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveIncrementId(prod4IncrementId, getClass().getSimpleName() + "TP4");
 
 		// script for updating deliveryDates
-		 ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+		 ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT_UPGRADE);
 	}
 
 }

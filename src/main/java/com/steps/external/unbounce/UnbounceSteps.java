@@ -27,16 +27,11 @@ public class UnbounceSteps extends AbstractSteps {
 		unbouncePage().enterPhone(addresModel.getPhoneNumber());
 		unbouncePage().enterPlz(addresModel.getPostCode());
 		unbouncePage().enterEmail(customerModel.getEmailName());
-		unbouncePage().acceptTerms();
-
+		unbouncePage().submitForm();
+		
 		String date = FormatterUtils.getAndFormatCurrentDate();
 
 		return date;
-	}
-
-	@Step
-	public void submitUnbounceForm() {
-		unbouncePage().submitForm();
 	}
 
 }

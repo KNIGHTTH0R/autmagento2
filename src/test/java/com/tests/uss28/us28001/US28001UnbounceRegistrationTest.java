@@ -75,7 +75,6 @@ public class US28001UnbounceRegistrationTest extends BaseTest {
 		unbounceSteps.navigateToUnbouncePage();
 		String date = unbounceSteps.fillUnbounceDetails(dataModel, addressModel);
 		customerFormDate.setDate(date);
-		unbounceSteps.submitUnbounceForm();
 		unbounceRegSuccessSteps.verifySuccessMessage();
 	}
 
