@@ -16,6 +16,12 @@ public class ProfileHistoryPage extends AbstractPage {
 	@FindBy(css = "table#my-orders-table")
 	private WebElement listContainer;
 
+	@FindBy(css = "#my-orders-table tbody")
+	private WebElement orderListContainer;
+
+	@FindBy(css = ".block-content li:nth-child(5) a")
+	private WebElement myOrdersLink;
+
 	public List<OrderModel> grabOrderHistory() {
 
 		element(listContainer).waitUntilVisible();
@@ -45,7 +51,17 @@ public class ProfileHistoryPage extends AbstractPage {
 
 		return result;
 	}
-	
-	
+
+	public void clickReorderLink(String name) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(orderListContainer).waitUntilVisible();
+		List<WebElement> listElements = orderListContainer.findElements(By.tagName("tr"));
+		theFor: for (WebElement elementNow : listElements) {
+			if (elementNow.getText().contains(name)) {
+				elementNow.findElement(By.cssSelector("a[href*='reorder']")).click();
+				break theFor;
+			}
+		}
+	}
 
 }

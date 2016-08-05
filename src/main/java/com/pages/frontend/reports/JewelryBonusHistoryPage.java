@@ -12,6 +12,11 @@ public class JewelryBonusHistoryPage extends AbstractPage {
 
 	@FindBy(css = "table#reports-table-default")
 	private WebElement listContainer;
+	
+	@FindBy(css = "#my-orders-table tbody tr a[href*='order']")
+	private WebElement orderListContainer;
+	
+	
 
 	public JewelryHistoryModel grabJewelryBonusHistory() {
 
@@ -27,4 +32,6 @@ public class JewelryBonusHistoryPage extends AbstractPage {
 
 		return historyRegistration;
 	}
+	
+	
 }

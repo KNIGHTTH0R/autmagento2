@@ -49,7 +49,7 @@ public class AddProductsWorkflow {
 		return productSteps.setBasicProductAddToCart(qty, productProperty, askingPrice, finalPrice, ipPoints, discountclass);
 	}
 
-	// @StepGroup
+	 @StepGroup
 	@Title("Update products in list")
 	public BasicProductModel updateBasicProductToCart(ProductDetailedModel model, String qty, String productProperty, String discountclass) {
 		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);

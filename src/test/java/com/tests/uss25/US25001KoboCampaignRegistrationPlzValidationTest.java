@@ -20,12 +20,12 @@ import com.steps.frontend.KoboRegistrationStepsWithCsv;
 import com.steps.frontend.KoboSuccesFormSteps;
 import com.steps.frontend.KoboValidationSteps;
 import com.steps.frontend.PomProductDetailsSteps;
-import com.steps.frontend.ProfileSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPomSteps;
+import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
@@ -39,7 +39,6 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-
 import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
 
 @WithTag(name = "US25.1 Check invalid plz validation on all carts and registration processes", type = "Scenarios")

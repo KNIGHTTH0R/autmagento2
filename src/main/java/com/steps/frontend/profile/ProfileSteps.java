@@ -1,4 +1,4 @@
-package com.steps.frontend;
+package com.steps.frontend.profile;
 
 import java.util.List;
 
@@ -32,6 +32,10 @@ public class ProfileSteps extends AbstractSteps {
 	public void verifyOrderPrice(String orderPrice, String compare) {
 		orderPrice = FormatterUtils.parseValueToZeroDecimals(orderPrice);
 		Assert.assertTrue("Failure: Order Price is not as expected. Expected: " + compare + " Actual: " + orderPrice, orderPrice.contentEquals(compare));
+	}
+	@Step
+	public void clickReorderLink(String orderId) {
+		profileHistoryPage().clickReorderLink(orderId);
 	}
 
 }
