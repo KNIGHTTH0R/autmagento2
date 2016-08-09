@@ -148,7 +148,8 @@ public class US24001BorrowCartPlzValidationTest extends BaseTest {
 
 		borrowCartSteps.clickGoToShipping();
 
-		shippingSteps.addNewAddressForBilling(addressModel);
+		shippingSteps.addNewAddressForBilling();
+		shippingSteps.fillNewAddressForBilling(addressModel);
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.checkTermsCheckbox();
 		shippingSteps.goToPaymentMethod();

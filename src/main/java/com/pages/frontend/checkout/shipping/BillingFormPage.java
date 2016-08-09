@@ -80,16 +80,19 @@ public class BillingFormPage extends AbstractPage {
 	public void inputStreet1Address(String streetAddress) {
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		element(street1Input).waitUntilVisible();
+		street1Input.clear();
 		street1Input.sendKeys(streetAddress);
 	}
 
 	public void inputStreetNumber(String streetNumber) {
 		element(houseNumberInput).waitUntilVisible();
+		houseNumberInput.clear();
 		houseNumberInput.sendKeys(streetNumber);
 	}
 
 	public void inputPostCode(String postCode) {
 		element(postcodeInput).waitUntilVisible();
+		postcodeInput.clear();
 		postcodeInput.sendKeys(postCode);
 	}
 	
@@ -107,6 +110,7 @@ public class BillingFormPage extends AbstractPage {
 		element(cityInput).waitUntilVisible();
 		cityInput.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		cityInput.clear();
 		cityInput.sendKeys(homeTown);
 	}
 
@@ -137,6 +141,7 @@ public class BillingFormPage extends AbstractPage {
 
 	public void inputPhoneNumber(String phoneNumber) {
 		element(telephoneInput).waitUntilVisible();
+		telephoneInput.clear();
 		telephoneInput.sendKeys(phoneNumber);
 	}
 	

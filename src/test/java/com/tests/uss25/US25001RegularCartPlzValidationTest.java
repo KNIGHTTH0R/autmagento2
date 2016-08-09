@@ -146,7 +146,8 @@ public class US25001RegularCartPlzValidationTest extends BaseTest {
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
 
-		shippingSteps.addNewAddressForBillingWithoutPlz(addressModel);
+		shippingSteps.addNewAddressForBilling();
+		shippingSteps.fillNewAddressForBillingWithoutPlz(addressModel);
 
 		try {
 			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();

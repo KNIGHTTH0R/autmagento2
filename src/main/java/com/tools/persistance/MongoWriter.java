@@ -68,7 +68,7 @@ public class MongoWriter extends MongoConnector {
 		table.insert(document);
 	}
 	
-	public static void saveToEnvConstants(String key, String value) {
+	public static void saveToEnvironmentConstants(String key, String value) {
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.ENV_CONSTANTS_MODEL);
 		

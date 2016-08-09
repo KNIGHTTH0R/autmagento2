@@ -14,6 +14,7 @@ import com.tools.data.frontend.StarterSetProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
+import com.tools.utils.FormatterUtils;
 
 public class ProductSteps extends AbstractSteps {
 
@@ -56,11 +57,13 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public BasicProductModel updateProduct(String qty, String size, String askingPrice, String finalPrice, String ip,
+	public BasicProductModel updateProduct(ProductDetailedModel model,String qty, String size, String askingPrice, String finalPrice, String ip,
 			String discountClass) {
 		BasicProductModel result = new BasicProductModel();
 
-		result = productDetailsPage().grabBasicProductData();
+		result.setName(model.getName());
+		result.setProdCode(model.getSku());
+		result.setUnitPrice(model.getPrice());
 		result.setQuantity(qty);
 		result.setDiscountClass(discountClass);
 		result.setProductsPrice(askingPrice);

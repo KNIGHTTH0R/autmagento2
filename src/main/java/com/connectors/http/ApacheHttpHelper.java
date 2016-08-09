@@ -13,7 +13,7 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.tools.constants.HttpConstants;
-import com.tools.constants.JenkinsConstants;
+import com.tools.constants.EnvironmentConstants;
 
 //TODO deprecated - try to change this
 
@@ -28,7 +28,7 @@ public class ApacheHttpHelper {
 	public static String sendGet(String url) throws Exception {
 		HttpGet request = new HttpGet(url);
 		System.out.println("Sending GET request to: " + url);
-		request.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials(JenkinsConstants.USERNAME, JenkinsConstants.PASSWORD), "UTF-8", false));
+		request.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials(EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD), "UTF-8", false));
 
 		// add request header
 		request.addHeader("User-Agent", HttpConstants.USER_AGENT);

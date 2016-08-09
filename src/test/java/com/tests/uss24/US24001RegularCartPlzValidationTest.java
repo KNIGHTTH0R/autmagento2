@@ -145,7 +145,8 @@ public class US24001RegularCartPlzValidationTest extends BaseTest {
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
 
-		shippingSteps.addNewAddressForBilling(addressModel);
+		shippingSteps.addNewAddressForBilling();
+		shippingSteps.fillNewAddressForBilling(addressModel);
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.goToPaymentMethod();
 		paymentSteps.expandCreditCardForm();

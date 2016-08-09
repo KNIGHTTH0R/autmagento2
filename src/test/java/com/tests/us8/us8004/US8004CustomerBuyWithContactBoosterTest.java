@@ -116,7 +116,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 			shippingValue = prop.getProperty("shippingValue");
 			initialStylistName = prop.getProperty("initialStylistName");
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH_COMMON + "koboVouchers.properties");
+			input = new FileInputStream(UrlConstants.ENV_PATH + "koboVouchers.properties");
 			prop.load(input);
 
 			koboCode1 = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");

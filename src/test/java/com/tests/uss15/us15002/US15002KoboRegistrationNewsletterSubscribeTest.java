@@ -97,7 +97,7 @@ public class US15002KoboRegistrationNewsletterSubscribeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH_COMMON + "koboVouchers.properties");
+			input = new FileInputStream(UrlConstants.ENV_PATH + "koboVouchers.properties");
 			prop.load(input);
 			koboCode = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");
 

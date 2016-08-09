@@ -14,7 +14,7 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
 import com.tools.constants.Credentials;
-import com.tools.constants.JenkinsConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -47,7 +47,7 @@ public class US15002UncancelOrderTest extends BaseTest {
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
 		ordersSteps.uncancelOrder();
 		ordersSteps.completeOrder();
-		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL);
 
 	}
 }

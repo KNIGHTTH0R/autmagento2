@@ -131,10 +131,10 @@ public class KoboSubscriptionDataPrepTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH_COMMON + "koboVouchers.properties");
+			input = new FileInputStream(UrlConstants.ENV_PATH + "koboVouchers.properties");
 			prop.load(input);
 			input.close();
-			output = new FileOutputStream(UrlConstants.RESOURCES_PATH_COMMON + "koboVouchers.properties");
+			output = new FileOutputStream(UrlConstants.ENV_PATH + "koboVouchers.properties");
 			prop.setProperty("koboCode" + username, koboCode);
 
 			prop.store(output, null);

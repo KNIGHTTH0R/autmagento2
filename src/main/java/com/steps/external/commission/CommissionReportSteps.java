@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.Title;
 
 import com.connectors.http.ApacheHttpHelper;
 import com.tools.constants.DateConstants;
-import com.tools.constants.JenkinsConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.data.backend.IpModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
@@ -39,7 +39,7 @@ public class CommissionReportSteps extends AbstractSteps {
 		// if
 		// (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate(DateConstants.FORMAT),
 		// DateConstants.FORMAT)) {
-		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB);
 		waitABit(10000);
 		getDriver().navigate().refresh();
 		waitABit(TimeConstants.TIME_CONSTANT);
@@ -59,8 +59,8 @@ public class CommissionReportSteps extends AbstractSteps {
 	@StepGroup
 	public IpModel closeLastMonthAndGetCurrentMonthIps(String stylistId) throws Exception {
 
-		// ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
-		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
+		// ApacheHttpHelper.sendGet(EnvironmentConstants.IMPORT_ALL_JOB);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB);
 
 		waitABit(10000);
 		getDriver().navigate().refresh();

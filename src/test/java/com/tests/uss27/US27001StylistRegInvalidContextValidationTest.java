@@ -21,7 +21,7 @@ import com.steps.frontend.StylistContextStepsCsv;
 import com.steps.frontend.StylistRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.constants.JenkinsConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -97,7 +97,7 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 	@After
 	public void tearDown() throws Exception {
 		DeleteCategory.deleteApiCategory(categoryId);
-		ApacheHttpHelper.sendGet(JenkinsConstants.REINDEX_SC_CONTEXT_JOB);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.REINDEX_SC_CONTEXT_JOB);
 	}
 
 }

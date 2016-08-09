@@ -135,7 +135,8 @@ public class US25001ShopForMyselfPlzValidationTest extends BaseTest {
 
 		cartSteps.goToShipping();
 
-		shippingSteps.addNewAddressForBillingWithoutPlz(addressModel);
+		shippingSteps.addNewAddressForBilling();
+		shippingSteps.fillNewAddressForBillingWithoutPlz(addressModel);
 
 		try {
 			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv)

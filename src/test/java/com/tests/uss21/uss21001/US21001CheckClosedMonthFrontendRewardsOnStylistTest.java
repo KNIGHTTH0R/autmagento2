@@ -93,7 +93,7 @@ public class US21001CheckClosedMonthFrontendRewardsOnStylistTest extends BaseTes
 		dashboardSteps.validateDashboardTotalMarketingBonus(finalRewardPointsOfStylistModel.getMarketingMaterialBonus(), dashboardTotalMmb);
 		
 		// this is here for the previous test
-//		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
+//		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB);
 
 	}
 

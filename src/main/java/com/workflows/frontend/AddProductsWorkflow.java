@@ -37,7 +37,8 @@ public class AddProductsWorkflow {
 
 	@StepGroup
 	@Title("Add product to cart")
-	public BasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty, String discountclass) {
+	public BasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty,
+			String discountclass) {
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
 		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass);
@@ -46,12 +47,14 @@ public class AddProductsWorkflow {
 			ipPoints = "0";
 		}
 
-		return productSteps.setBasicProductAddToCart(qty, productProperty, askingPrice, finalPrice, ipPoints, discountclass);
+		return productSteps.setBasicProductAddToCart(qty, productProperty, askingPrice, finalPrice, ipPoints,
+				discountclass);
 	}
 
-	 @StepGroup
+	@StepGroup
 	@Title("Update products in list")
-	public BasicProductModel updateBasicProductToCart(ProductDetailedModel model, String qty, String productProperty, String discountclass) {
+	public BasicProductModel updateBasicProductToCart(ProductDetailedModel model, String qty, String productProperty,
+			String discountclass) {
 		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
@@ -59,7 +62,8 @@ public class AddProductsWorkflow {
 			ipPoints = "0";
 		}
 
-		return productSteps.updateProduct(qty, productProperty, askingPrice, finalPrice, ipPoints, discountclass);
+		return productSteps.updateProduct(model, qty, productProperty, askingPrice, finalPrice, ipPoints,
+				discountclass);
 	}
 
 }

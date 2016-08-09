@@ -14,7 +14,7 @@ import com.connectors.http.ComissionRestCalls;
 import com.connectors.http.StylistListMagentoCalls;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.constants.JenkinsConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapConstants;
 import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.soap.DBStylistModel;
@@ -43,8 +43,8 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(incrementId);
 		dBStylistModel = StylistListMagentoCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);
 		
-		ApacheHttpHelper.sendGet(JenkinsConstants.IMPORT_ALL_JOB);
-		ApacheHttpHelper.sendGet(JenkinsConstants.REOPEN_MONTH_JOB);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.IMPORT_ALL_JOB);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB);
 	}
 
 	@Test

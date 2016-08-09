@@ -16,7 +16,7 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
-import com.tools.constants.JenkinsConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -46,7 +46,7 @@ public class US15001ConfirmCustomerTest extends BaseTest {
 	public void us15001ConfirmCustomerTest() throws Exception {
 
 		dateModel.setDate(emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.NEWSLETTER_MAIL_SUBJECT));
-		ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_EMAIL_JOB_TRIGGER_URL + stylistEmail + JenkinsConstants.JOB_TOKEN);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_EMAIL_JOB_TRIGGER_URL + stylistEmail + EnvironmentConstants.JOB_TOKEN);
 
 	}
 

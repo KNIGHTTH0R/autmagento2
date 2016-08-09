@@ -34,6 +34,7 @@ import com.tools.constants.ConfigConstants;
 import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -80,8 +81,8 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 	private static String marketingDiscount;
 	private static String shippingValue;
 	private static String taxClass;
-	private CreditCardModel creditCardData = new CreditCardModel();
-
+	private CreditCardModel creditCardData;
+	private AddressModel addressModel;
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -90,6 +91,9 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
+		
+		creditCardData = new CreditCardModel();
+		addressModel = new AddressModel();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.90");
@@ -112,7 +116,6 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			billingAddress = prop.getProperty("billingAddress");
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
@@ -178,8 +181,10 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 			CartCalculator.calculateShippingWith19PercentRemoved(shippingValue);
 		}
 
-		shippingSteps.selectAddress(billingAddress);
+		shippingSteps.fillNewAddressForBilling(addressModel);
 		shippingSteps.setSameAsBilling(true);
+		shippingSteps.goBack();
+		cartSteps.goToShipping();
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
@@ -199,11 +204,7 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-
-		System.out.println("CartCalculator.productsList25: " + CartCalculator.productsList25);
-		System.out.println("DataGrabber.cartProductsWith25Discount: " + DataGrabber.cartProductsWith25Discount);
-
-		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		validationWorkflows.setBillingShippingAddress(addressModel.getCountryName(), addressModel.getCountryName());
 		if (!MongoReader.getContext().contentEquals("de")) {
 			validationWorkflows.performCartValidations119Vat();
 		} else {
@@ -211,7 +212,7 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		}
 		customVerifications.printErrors();
 	}
-
+//OsQiwOUF hBkaqBCT, Filandastraße, 22, 12165 Steglitz, Deutschland
 	@After
 	public void saveData() {
 		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);

@@ -102,9 +102,7 @@ public class ShippingSteps extends AbstractSteps {
 
 	@Title("Fill new address for billing")
 	@Step
-	public void addNewAddressForBilling(AddressModel addressModel) {
-
-		billingFormPage().clickAddNewAddress();
+	public void fillNewAddressForBilling(AddressModel addressModel) {
 
 		waitABit(TimeConstants.TIME_CONSTANT);
 		inputBillingStreetAddress(addressModel.getStreetAddress());
@@ -117,9 +115,7 @@ public class ShippingSteps extends AbstractSteps {
 
 	@Title("Fill new address for billing without plz")
 	@Step
-	public void addNewAddressForBillingWithoutPlz(AddressModel addressModel) {
-
-		billingFormPage().clickAddNewAddress();
+	public void fillNewAddressForBillingWithoutPlz(AddressModel addressModel) {
 
 		waitABit(TimeConstants.TIME_CONSTANT);
 		inputBillingStreetAddress(addressModel.getStreetAddress());
@@ -129,26 +125,31 @@ public class ShippingSteps extends AbstractSteps {
 		inputBillingPhoneNumber(addressModel.getPhoneNumber());
 	}
 
-	@Title("Fill new address for shipping")
+	@Title("Add new address for billing")
 	@Step
-	public void addNewAddressForShipping(AddressModel addressModel) {
+	public void addNewAddressForBilling() {
+		billingFormPage().clickAddNewAddress();
+
+	}
+
+	@Title("Add new address for shipping")
+	@Step
+	public void addNewAddressForShipping() {
 		shippingFormPage().clickAddNewAddress();
-		waitABit(TimeConstants.TIME_CONSTANT);
-		inputShippingStreetAddress(addressModel.getStreetAddress());
-		inputShippingStreetNumber(addressModel.getStreetNumber());
-		inputShippingPostCode(addressModel.getPostCode());
-		inputShippingHomeTown(addressModel.getHomeTown());
-		selectShippingCountryName(addressModel.getCountryName());
-		inputShippingPhoneNumber(addressModel.getPhoneNumber());
+
 	}
 
 	@Title("Fill new address for shipping")
 	@Step
 	public void fillNewAddressForShipping(AddressModel addressModel) {
+
 		waitABit(TimeConstants.TIME_CONSTANT);
+		inputShippingStreetAddress(addressModel.getStreetAddress());
 		inputShippingStreetNumber(addressModel.getStreetNumber());
 		inputShippingPostCode(addressModel.getPostCode());
-		inputShippingHomeTown(addressModel.getHomeTown());
+		clearAndInputNewHomeTown(addressModel.getHomeTown());
+		selectShippingCountryName(addressModel.getCountryName());
+		inputShippingPhoneNumber(addressModel.getPhoneNumber());
 	}
 
 	@Step

@@ -120,7 +120,7 @@ public class MongoReader extends MongoConnector {
 		return value;
 	}
 
-	public static String geteEnvConstantsItem(String key) {
+	public static String geteEnvironmentConstantsItem(String key) {
 
 		DBObject dbObject = null;
 		String value = "";

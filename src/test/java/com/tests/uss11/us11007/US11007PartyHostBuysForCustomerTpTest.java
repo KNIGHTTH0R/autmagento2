@@ -34,7 +34,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.cartcalculations.partyHost.HostCartTotalsCalculation;
-import com.tools.constants.JenkinsConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
@@ -321,7 +321,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
 		
 		try {
-			ApacheHttpHelper.sendGet(JenkinsConstants.RUN_IP_SCRIPT_JOB_URL);
+			ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

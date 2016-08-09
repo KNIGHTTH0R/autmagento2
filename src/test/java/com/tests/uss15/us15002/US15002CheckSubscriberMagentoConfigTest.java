@@ -16,7 +16,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
-import com.tools.constants.JenkinsConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -52,7 +52,7 @@ public class US15002CheckSubscriberMagentoConfigTest extends BaseTest {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.goToNewsletterSubribers();
 		newsleterSubscribersSteps.checkSubscriberDetails(dataModel.getEmailName());
-		ApacheHttpHelper.sendGet(JenkinsConstants.EXPORT_JOB_TRIGGER_URL);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL);
 
 	}
 

@@ -25,7 +25,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
-import com.tools.constants.JenkinsConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.TermPurchaseOrderModel;
@@ -155,12 +155,12 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		
 		
 		//script for updating deliveryDates to today
-		ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId() + JenkinsConstants.JOB_TOKEN);
-		ApacheHttpHelper.sendGet(JenkinsConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId() + JenkinsConstants.JOB_TOKEN);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId() + EnvironmentConstants.JOB_TOKEN);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId() + EnvironmentConstants.JOB_TOKEN);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-        ApacheHttpHelper.sendGet(JenkinsConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+        ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
         backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-        ApacheHttpHelper.sendGet(JenkinsConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
+        ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
         
 		MongoWriter.saveTermPurchaseModel(expectedModel2,getClass().getSimpleName()+"TP1");
         

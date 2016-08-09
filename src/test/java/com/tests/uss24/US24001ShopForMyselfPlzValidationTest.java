@@ -141,7 +141,8 @@ public class US24001ShopForMyselfPlzValidationTest extends BaseTest {
 
 		cartSteps.goToShipping();
 
-		shippingSteps.addNewAddressForBilling(addressModel);
+		shippingSteps.addNewAddressForBilling();
+		shippingSteps.fillNewAddressForBilling(addressModel);
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.goToPaymentMethod();
 		paymentSteps.expandCreditCardForm();

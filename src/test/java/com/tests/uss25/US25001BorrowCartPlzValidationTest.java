@@ -141,7 +141,8 @@ public class US25001BorrowCartPlzValidationTest extends BaseTest {
 
 		borrowCartSteps.clickGoToShipping();
 
-		shippingSteps.addNewAddressForBillingWithoutPlz(addressModel);
+		shippingSteps.addNewAddressForBilling();
+		shippingSteps.fillNewAddressForBillingWithoutPlz(addressModel);
 
 		try {
 			withTestDataFrom("resources/invalidPlzTestData.csv").run(shippingStepsWithCsvStepsWithCsv).inputPostCodeCsv();
