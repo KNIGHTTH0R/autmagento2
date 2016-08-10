@@ -230,6 +230,15 @@ public class CustomerDetailsPage extends AbstractPage {
 		addressesTab.click();
 	}
 
+	public void deleteAllAdresses() {
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> deleteAddressButons = getDriver().findElements(By.cssSelector("a.btn-remove-address"));
+		for (int i = deleteAddressButons.size() - 2; i >= 0; i--) {
+			deleteAddressButons.get(i).click();
+			getAlert().accept();
+		}
+	}
+
 	public void clickOnStylecoachProfileTab() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(styleCoachProfileTab).waitUntilVisible();
@@ -318,7 +327,8 @@ public class CustomerDetailsPage extends AbstractPage {
 	}
 
 	public void deleteCustomer() {
-		List<WebElement> deleteButtons = getDriver().findElements(By.cssSelector("div.main-col div.main-col-inner button.delete"));
+		List<WebElement> deleteButtons = getDriver()
+				.findElements(By.cssSelector("div.main-col div.main-col-inner button.delete"));
 
 		for (WebElement buttonNow : deleteButtons) {
 			buttonNow.click();
@@ -389,8 +399,10 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	public void verifySaveCustomerSuccessMessage() {
 		element(successMessage).waitUntilVisible();
-		Assert.assertTrue("Failure: The mesage should be " + ContextConstants.CUSTOMER_SAVE_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(), successMessage
-				.getText().contains(ContextConstants.CUSTOMER_SAVE_SUCCESS_MESSAGE));
+		Assert.assertTrue(
+				"Failure: The mesage should be " + ContextConstants.CUSTOMER_SAVE_SUCCESS_MESSAGE
+						+ " and it's not! Actual: " + successMessage.getText(),
+				successMessage.getText().contains(ContextConstants.CUSTOMER_SAVE_SUCCESS_MESSAGE));
 	}
 
 	public RewardPointsOfStylistModel getRewardPointsOfStylistModel() {
@@ -426,8 +438,8 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	public void verifyThatAddressExist(AddressModel addressModel) {
 
-		List<String> addressData = new ArrayList<String>(Arrays.asList(addressModel.getStreetNumber(), addressModel.getStreetAddress(), addressModel.getHomeTown(),
-				addressModel.getPostCode()));
+		List<String> addressData = new ArrayList<String>(Arrays.asList(addressModel.getStreetNumber(),
+				addressModel.getStreetAddress(), addressModel.getHomeTown(), addressModel.getPostCode()));
 
 		List<WebElement> addressList = getDriver().findElements(By.cssSelector("#address_list li address"));
 		boolean found = false;

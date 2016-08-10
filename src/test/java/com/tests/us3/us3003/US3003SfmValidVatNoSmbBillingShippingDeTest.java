@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +41,12 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3.3 Shop for myself VAT valid and no SMB billing and shipping DE",type = "Scenarios")
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
+@WithTag(name = "US3.3 Shop for myself VAT valid and no SMB billing and shipping DE", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_3.class)
 @RunWith(SerenityRunner.class)
 public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
@@ -76,7 +76,6 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 	public ValidationWorkflows validationWorkflows;
 
 	private String username, password;
-	private static String billingAddress;
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
@@ -91,7 +90,7 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
-		
+
 		creditCardData = new CreditCardModel();
 		addressModel = new AddressModel();
 
@@ -112,7 +111,8 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3003.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3003.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -149,7 +149,8 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 
-		BasicProductModel productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
+		BasicProductModel productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",
+				ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
@@ -212,11 +213,13 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		}
 		customVerifications.printErrors();
 	}
-//OsQiwOUF hBkaqBCT, Filandastraße, 22, 12165 Steglitz, Deutschland
+
 	@After
 	public void saveData() {
-		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
-		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);

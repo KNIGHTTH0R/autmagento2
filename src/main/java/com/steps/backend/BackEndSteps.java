@@ -212,6 +212,13 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().inputPostCode(addressModel.getPostCode());
 		customerDetailsHomePage().saveCustomer();
 	}
+	
+	@Step
+	public void deleteAllAdresses(){
+		customerDetailsHomePage().clickOnAddressesTab();
+		customerDetailsHomePage().deleteAllAdresses();
+		customerDetailsHomePage().saveCustomer();
+	}
 
 	@Step
 	public void editCity(String city) {

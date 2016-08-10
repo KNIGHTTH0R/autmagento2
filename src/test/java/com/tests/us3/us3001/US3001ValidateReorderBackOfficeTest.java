@@ -88,17 +88,12 @@ public class US3001ValidateReorderBackOfficeTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
-		// Setup Data from all models in first test
-		// from Shipping calculations
 		shopTotalsModel.setSubtotal(shippingModelList.get(0).getSubTotal());
 		shopTotalsModel.setShipping(shippingModelList.get(0).getShippingPrice());
 		shopTotalsModel.setTotalAmount(shippingModelList.get(0).getTotalAmount());
-		// from calcDetails model calculations
 		shopTotalsModel.setTotalIP(calcDetailsModelList.get(0).getIpPoints());
 		shopTotalsModel.setTotalMarketingBonus(calcDetailsModelList.get(0).getMarketingBonus());
 		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
-		// Constants added
-		// shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
 		shopTotalsModel.setTax("0.00");
 		shopTotalsModel.setTotalPaid("0.00");
 		shopTotalsModel.setTotalRefunded("0.00");
