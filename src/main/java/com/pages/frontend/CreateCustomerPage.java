@@ -48,7 +48,8 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "accept-checkbox")
 	private WebElement iAgreeCheckbox;
 
-	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button[type='submit']")
+//	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button[type='submit']")
+	@FindBy(css = ".buttons-set.form-buttons.page-bottom button[type='Submit']")
 	private WebElement completeButton;
 
 	// ---------------------------------------------------
@@ -260,7 +261,8 @@ public class CreateCustomerPage extends AbstractPage {
 			DykscSeachModel model = new DykscSeachModel();
 
 			model.setId(stylecoach.getAttribute("rel"));
-			model.setName(stylecoach.findElement(By.cssSelector("span.sc-name")).getText());
+			model.setName(stylecoach.findElement(By.cssSelector("h4.sc-id span")).getText());
+			System.out.println("NAME :               " + model.getName());
 			resultList.add(model);
 
 		}

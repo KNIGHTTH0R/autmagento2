@@ -3,11 +3,6 @@ package com.tests.uss13.us13004;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +24,11 @@ import com.tools.requirements.Application;
 import com.tools.utils.RandomAddress;
 import com.workflows.frontend.DysksWorkflows;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 @WithTag(name = "US13.4 DYKSC Assignation to customer lead SC", type = "Scenarios")
 @Story(Application.Distribution.US13_4.class)
 @RunWith(SerenityRunner.class)
@@ -41,7 +41,7 @@ public class US13004CustomerLeadDykscPlzAndCountryTest extends BaseTest {
 
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
-	private CoordinatesModel coordinatesModel = new CoordinatesModel();
+	private CoordinatesModel coordinatesModel;
 	private RandomAddress randomAddress;
 	private List<DBStylistModel> searchByPlzAndCountryStylistList = new ArrayList<DBStylistModel>();
 	private List<DykscSeachModel> dysksStylecoachesList = new ArrayList<DykscSeachModel>();
@@ -52,14 +52,15 @@ public class US13004CustomerLeadDykscPlzAndCountryTest extends BaseTest {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		randomAddress = new RandomAddress();
+		coordinatesModel = new CoordinatesModel();
 
-//		while (coordinatesModel.getLattitude() == null) {
-//			addressModel = randomAddress.getRandomAddressFromFile();
-//			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
-//		}
-//
-//		searchByPlzAndCountryStylistList = StylistListCalculation.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE,
-//				SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 1);
+		while (coordinatesModel.getLattitude() == null) {
+			addressModel = randomAddress.getRandomAddressFromFile();
+			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
+		}
+
+		searchByPlzAndCountryStylistList = StylistListCalculation.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE,
+				SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 1);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 

@@ -34,7 +34,6 @@ public class US7001RegularCustRegOnMasterTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		MongoConnector.cleanCollection(getClass().getSimpleName());

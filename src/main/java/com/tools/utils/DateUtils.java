@@ -324,7 +324,7 @@ public class DateUtils {
 	}
 
 	public static int getAge(String birthDate) {
-		String[] parts = birthDate.split("/");
+		String[] parts = birthDate.split("-");
 
 		LocalDate birthdate = new LocalDate(Integer.parseInt(parts[2]), Integer.parseInt(parts[1]), Integer.parseInt(parts[0]));
 		LocalDate now = new LocalDate();
