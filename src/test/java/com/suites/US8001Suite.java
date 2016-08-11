@@ -5,15 +5,19 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us8.us8001.US8001CustomerBuyWithForthyDiscountsAndJbTest;
+import com.tests.us8.us8001.US8001ReorderWithForthyDiscountsAndJbTest;
 import com.tests.us8.us8001.US8001ValidateOrderBackOfficeTest;
 import com.tests.us8.us8001.US8001ValidateOrderEmailTest;
 import com.tests.us8.us8001.US8001ValidateOrderInStylistsCustomerOrderReportTest;
+import com.tests.us8.us8001.US8001ValidateReorderBackOfficeTest;
 
 @SuiteClasses({
 	US8001CustomerBuyWithForthyDiscountsAndJbTest.class,
 //	US8001CheckOrderOnCustomerProfileTest.class,	
 	US8001ValidateOrderBackOfficeTest.class,
 	US8001ValidateOrderInStylistsCustomerOrderReportTest.class,
+	US8001ReorderWithForthyDiscountsAndJbTest.class,
+	US8001ValidateReorderBackOfficeTest.class,
 	US8001ValidateOrderEmailTest.class,	
 	
 })

@@ -104,7 +104,7 @@ public class US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest extends BaseT
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 
-	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> productsList;
 
 	@Before
 	public void setUp() throws Exception {

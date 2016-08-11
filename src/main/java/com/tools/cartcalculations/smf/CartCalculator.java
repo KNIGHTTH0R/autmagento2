@@ -6,12 +6,14 @@ import java.util.List;
 
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.utils.PrintUtils;
 
 public class CartCalculator {
 
 	public static List<BasicProductModel> allProductsList = new ArrayList<BasicProductModel>();
+	//public static List<RegularBasicProductModel> allRegularProductsList = new ArrayList<RegularBasicProductModel>();
 	public static List<BasicProductModel> allProductsListDiscountRule = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> productsList25 = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> productsList50 = new ArrayList<BasicProductModel>();
@@ -33,6 +35,7 @@ public class CartCalculator {
 
 	public static void wipe() {
 		allProductsList = new ArrayList<BasicProductModel>();
+	//	allRegularProductsList = new ArrayList<RegularBasicProductModel>();
 		allProductsListDiscountRule = new ArrayList<BasicProductModel>();
 		productsList25 = new ArrayList<BasicProductModel>();
 		productsList50 = new ArrayList<BasicProductModel>();
