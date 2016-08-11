@@ -5,14 +5,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -25,13 +30,15 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
+import com.steps.frontend.profile.ProfileNavSteps;
+import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -43,11 +50,6 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
@@ -82,6 +84,10 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 	public CustomVerification customVerifications;
 	@Steps
 	public FooterSteps footerSteps;
+	@Steps
+	public ProfileSteps profileSteps;
+	@Steps
+	public ProfileNavSteps profileNavSteps;
 
 	private String username, password;
 	private String discountClass;
@@ -90,26 +96,35 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 	private String voucherCode;
 	private String voucherValue;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
+	public static List<RegularBasicProductModel> productsList;
+	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
+	String orderId;
 	
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
-
-		genProduct1 = MagentoProductCalls.createProductModel();
+		
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.GRAB);
+		orderId = orderModelList.get(0).getOrderId();
+		
+		productsList = MongoReader.grabRegularBasicProductModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
+		System.out.println("dsdsdsdsds " + productsList.size());
+		
+		genProduct1.setName(productsList.get(0).getName());
+		genProduct1.setSku(productsList.get(0).getProdCode());
 		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
-
-		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct1.setIp("0");
+		genProduct2.setName(productsList.get(1).getName());
+		genProduct2.setSku(productsList.get(1).getProdCode());
 		genProduct2.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct2.setIp("0");
+		genProduct3.setName(productsList.get(2).getName());
+		genProduct3.setSku(productsList.get(2).getProdCode());
 		genProduct3.setPrice("10.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct3.setIp("0");
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -151,25 +166,27 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		homeSteps.goToNewItems();
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
+		headerSteps.goToProfile();
+		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
+		profileSteps.clickReorderLink(orderId);
 		
-		BasicProductModel productData;
+		RegularBasicProductModel productData;
 
-//		productData = addRegularProductsWorkflow.updateBasicProductToCart(genProduct1, "1", "0");
-//		RegularUserCartCalculator.allProductsList.add(productData);
-//		productData = addRegularProductsWorkflow.updateBasicProductToCart(genProduct2, "1", "0");
-//		RegularUserCartCalculator.allProductsList.add(productData);
-//		productData = addRegularProductsWorkflow.updateBasicProductToCart(genProduct3, "4", "0");
-//		RegularUserCartCalculator.allProductsList.add(productData);
+		productData = addRegularProductsWorkflow.updateBasicProductToCart(genProduct1, "1", "0");
+		RegularUserCartCalculator.allProductsList.add(productData);
+		productData = addRegularProductsWorkflow.updateBasicProductToCart(genProduct2, "1", "0");
+		RegularUserCartCalculator.allProductsList.add(productData);
+		productData = addRegularProductsWorkflow.updateBasicProductToCart(genProduct3, "4", "0");
+		RegularUserCartCalculator.allProductsList.add(productData);
 
-		headerSteps.openCartPreview();
-		headerSteps.goToCart();
+//		headerSteps.openCartPreview();
+//		headerSteps.goToCart();
 		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
-		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
+	    regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 
 		regularUserCartSteps.typeCouponCode(voucherCode);

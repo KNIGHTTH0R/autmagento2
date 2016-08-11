@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Title;
 
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
+import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.cartcalculations.smf.CartDiscountsCalculation;
 import com.tools.constants.ConfigConstants;
 import com.tools.data.frontend.BasicProductModel;
@@ -35,29 +36,26 @@ public class AddRegularProductsWorkflow {
 	public RegularBasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
-		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(),qty);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 
 		return productSteps.setRegularBasicProductAddToCart(qty, productProperty, finalPrice, ipPoints);
 	}
+
 	@StepGroup
 	@Title("Add product to wishlist")
 	public RegularBasicProductModel setBasicProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
-		
+
 		return productSteps.setRegularBasicProductAddToWishlist(qty, productProperty, finalPrice);
 	}
-	
-	@StepGroup
-	@Title("Update products in list")
-	public BasicProductModel updateBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {
-		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
-		String finalPrice = CartDiscountsCalculation.calculateFinalPriceRegularCart(askingPrice);
-		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
-		
 
-		return productSteps.updateProductRegularCart(model, qty, productProperty, askingPrice, finalPrice, ipPoints);
+	@StepGroup
+	@Title("Add product to wishlist")
+	public RegularBasicProductModel updateBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {
+		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
+		return productSteps.updateRegularBasicProductAddToCart(model, qty, productProperty, finalPrice,ipPoints);
 	}
-	
 
 }

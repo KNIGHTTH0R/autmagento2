@@ -1,5 +1,6 @@
 package com.tools.cartcalculations.regularUser;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +79,15 @@ public class RegularUserCartCalculator {
 				allProductsListWithRegularPrice, discountClass, voucherValue, shippingValue);
 		shippingCalculatedModel = RegularCartTotalsCalculation.calculateShippingTotals(calculatedTotalsDiscounts,
 				shippingValue);
+
+	}
+	
+	public static String calculateAskingPrice(String unitPrice, String quantity) {
+
+		BigDecimal price = BigDecimal.valueOf(Double.parseDouble(unitPrice));
+		BigDecimal qty = BigDecimal.valueOf(Double.parseDouble(quantity));
+
+		return String.valueOf(price.multiply(qty));
 
 	}
 
