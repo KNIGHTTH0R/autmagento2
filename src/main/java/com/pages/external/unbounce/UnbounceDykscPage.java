@@ -79,6 +79,7 @@ public class UnbounceDykscPage extends AbstractPage {
 		element(searchByPlzButton).waitUntilVisible();
 		element(searchByPlzButton).click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		waitABit(1000);
 	}
 
 	public void selectSearchByNameOption() {
@@ -123,7 +124,7 @@ public class UnbounceDykscPage extends AbstractPage {
 			DykscSeachModel model = new DykscSeachModel();
 
 			model.setId(stylecoach.getAttribute("rel"));
-			model.setName(stylecoach.findElement(By.cssSelector("span.sc-name")).getText());
+			model.setName(stylecoach.findElement(By.cssSelector("span")).getText());
 			resultList.add(model);
 
 		}

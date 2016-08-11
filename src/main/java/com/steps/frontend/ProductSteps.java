@@ -72,6 +72,20 @@ public class ProductSteps extends AbstractSteps {
 
 		return result;
 	}
+	@StepGroup
+	public BasicProductModel updateProductRegularCart(ProductDetailedModel model,String qty, String size, String askingPrice, String finalPrice, String ip) {
+		BasicProductModel result = new BasicProductModel();
+		
+		result.setName(model.getName());
+		result.setProdCode(model.getSku());
+		result.setUnitPrice(model.getPrice());
+		result.setQuantity(qty);
+		result.setProductsPrice(askingPrice);
+		result.setFinalPrice(finalPrice);
+		result.setPriceIP(ip);
+		
+		return result;
+	}
 
 	@StepGroup
 	public BorrowProductModel setBorrowedProductAddToCart(ProductDetailedModel model, String finalPrice) {

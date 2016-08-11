@@ -42,6 +42,32 @@ public class CartDiscountsCalculation {
 
 		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
 	}
+	
+	public static String calculateFinalPriceRegularCart(String askingPrice) {
+		
+		BigDecimal result = BigDecimal.ZERO;
+		BigDecimal discountValue = BigDecimal.ZERO;
+		
+		BigDecimal askPrice = BigDecimal.valueOf(Double.parseDouble(askingPrice));
+		discountValue = discountValue.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+		
+		result = askPrice.subtract(discountValue);
+		
+		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
+	}
+	
+	public static String calculateFinalPriceRegular(String askingPrice) {
+
+		BigDecimal result = BigDecimal.ZERO;
+		BigDecimal discountValue = BigDecimal.ZERO;
+
+		BigDecimal askPrice = BigDecimal.valueOf(Double.parseDouble(askingPrice));
+		discountValue = discountValue.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+
+		result = askPrice.subtract(discountValue);
+
+		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
+	}
 
 	public static List<BasicProductModel> calculateProductsforMarketingMaterial(List<BasicProductModel> productsList, String marketingDiscount) {
 

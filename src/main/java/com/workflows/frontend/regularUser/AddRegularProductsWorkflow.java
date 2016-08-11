@@ -7,6 +7,8 @@ import net.thucydides.core.annotations.Title;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.tools.cartcalculations.smf.CartDiscountsCalculation;
+import com.tools.constants.ConfigConstants;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 
@@ -45,5 +47,17 @@ public class AddRegularProductsWorkflow {
 		
 		return productSteps.setRegularBasicProductAddToWishlist(qty, productProperty, finalPrice);
 	}
+	
+	@StepGroup
+	@Title("Update products in list")
+	public BasicProductModel updateBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {
+		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		String finalPrice = CartDiscountsCalculation.calculateFinalPriceRegularCart(askingPrice);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
+		
+
+		return productSteps.updateProductRegularCart(model, qty, productProperty, askingPrice, finalPrice, ipPoints);
+	}
+	
 
 }
