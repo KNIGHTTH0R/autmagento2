@@ -15,8 +15,8 @@ public class UnbounceSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void navigateToUnbouncePage() {
-		navigate(UrlConstants.URL_UNBOUNCE);
+	public void navigateToUnbouncePage(String url) {
+		navigate(url);
 	}
 
 	@Title("Fill in unbounce details")

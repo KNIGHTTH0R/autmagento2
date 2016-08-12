@@ -31,7 +31,9 @@ public class UrlConstants {
 	public static final String URL_CHIMPMAIL = "https://login.mailchimp.com/";
 	
 	//unbounce
-	public static final String URL_UNBOUNCE = "http://unbouncepages.com/aut-testing/";
+	public static final String URL_UNBOUNCE = "http://unbouncepages.com/aut-testing-disabled/";
+	public static final String URL_UNBOUNCE_DYKSC = "http://unbouncepages.com/aut-testing/";
+	
 	
 	//Frontend Composed URLS
 	public static final String BASE_URL_BE = "/index.php/admin/";
