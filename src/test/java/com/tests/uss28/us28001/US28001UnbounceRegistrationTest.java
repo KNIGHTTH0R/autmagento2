@@ -12,6 +12,7 @@ import com.steps.external.unbounce.UnbounceRegSuccessSteps;
 import com.steps.external.unbounce.UnbounceSteps;
 import com.tests.BaseTest;
 import com.tools.constants.SoapConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -72,7 +73,7 @@ public class US28001UnbounceRegistrationTest extends BaseTest {
 	@Test
 	public void us28001UnbounceRegistrationTest() {
 
-		unbounceSteps.navigateToUnbouncePage();
+		unbounceSteps.navigateToUnbouncePage(UrlConstants.URL_UNBOUNCE);
 		String date = unbounceSteps.fillUnbounceDetails(dataModel, addressModel);
 		customerFormDate.setDate(date);
 		unbounceRegSuccessSteps.verifySuccessMessage();

@@ -13,6 +13,7 @@ import com.steps.external.unbounce.UnbounceRegSuccessSteps;
 import com.steps.external.unbounce.UnbounceSteps;
 import com.tests.BaseTest;
 import com.tools.constants.SoapConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -62,7 +63,9 @@ public class US29001UnbounceDykscRegistrationTest extends BaseTest {
 		randomAddress = new RandomAddress();
 		customerFormDate = new DateModel();
 
-		while (coordinatesModel.getLattitude() == null) {
+
+	while (coordinatesModel.getLattitude() == null) {
+
 			addressModel = randomAddress.getRandomAddressFromFile();
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
 		}
@@ -77,7 +80,7 @@ public class US29001UnbounceDykscRegistrationTest extends BaseTest {
 	@Test
 	public void us29001UnbounceDykscRegistrationTest() {
 
-		unbounceSteps.navigateToUnbouncePage();
+		unbounceSteps.navigateToUnbouncePage(UrlConstants.URL_UNBOUNCE_DYKSC);
 		String date = unbounceSteps.fillUnbounceDetails(dataModel, addressModel);
 		doYouKnowAScSteps.searchByPlz(addressModel);
 		foundScList = doYouKnowAScSteps.selectFirstIfFound();
