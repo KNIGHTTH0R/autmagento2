@@ -2,11 +2,6 @@ package com.tests.uss29.us29001;
 
 import java.util.List;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +27,11 @@ import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
 import com.workflows.frontend.DysksWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US28.1 Unbounce registration with regular distribution", type = "Scenarios")
 @Story(Application.UnbounceRegistration.US28_1.class)
@@ -63,7 +63,9 @@ public class US29001UnbounceDykscRegistrationTest extends BaseTest {
 		randomAddress = new RandomAddress();
 		customerFormDate = new DateModel();
 
+
 	while (coordinatesModel.getLattitude() == null) {
+
 			addressModel = randomAddress.getRandomAddressFromFile();
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddressWithComponent(addressModel);
 		}

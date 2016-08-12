@@ -38,7 +38,7 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 
 	private CustomerFormModel dataModel;
 	private AddressModel addressModel;
-	private CoordinatesModel coordinatesModel = new CoordinatesModel();
+	private CoordinatesModel coordinatesModel;
 	private RandomAddress randomAddress;
 	private List<DBStylistModel> compatibleStylistListForDistribution = new ArrayList<DBStylistModel>();
 
@@ -48,6 +48,7 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		randomAddress = new RandomAddress();
+		coordinatesModel = new CoordinatesModel();
 
 		while (coordinatesModel.getLattitude() == null) {
 
