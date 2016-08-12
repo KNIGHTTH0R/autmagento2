@@ -94,8 +94,6 @@ public class US13007DykscSearchByNameTest extends BaseTest {
 		searchByNameStylistList = StylistListCalculation.getDykscStylistByName(firstName, lastName, SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN,
 				SoapConstants.STYLIST_ID_2000, 2);
 
-		System.out.println("--dysks---------");
-		PrintUtils.printListDbStylists(searchByNameStylistList);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -103,8 +101,6 @@ public class US13007DykscSearchByNameTest extends BaseTest {
 	public void us13007DykscSearchByNameTest() {
 
 		dysksStylecoachesList = customerRegistrationSteps.fillCreateCustomerFormAnReturnFoundByNameStylecoaches(dataModel, addressModel, firstName, lastName);
-		System.out.println("--grabbed dysks---------");
-		PrintUtils.printListDykscSeachModel(dysksStylecoachesList);
 
 		customerRegistrationSteps.verifyCustomerCreation();
 		dysksWorkflows.setValidateStylistsModels(searchByNameStylistList, dysksStylecoachesList);

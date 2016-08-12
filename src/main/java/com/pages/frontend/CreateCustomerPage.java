@@ -262,7 +262,6 @@ public class CreateCustomerPage extends AbstractPage {
 
 			model.setId(stylecoach.getAttribute("rel"));
 			model.setName(stylecoach.findElement(By.cssSelector("h4.sc-id span")).getText());
-			System.out.println("NAME :               " + model.getName());
 			resultList.add(model);
 
 		}

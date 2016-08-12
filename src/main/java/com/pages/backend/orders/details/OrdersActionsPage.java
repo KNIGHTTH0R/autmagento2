@@ -1,7 +1,5 @@
 package com.pages.backend.orders.details;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class OrdersActionsPage extends AbstractPage {
 
@@ -52,10 +52,11 @@ public class OrdersActionsPage extends AbstractPage {
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
 	}
-	
-	public void waitForLoading(){
+
+	public void waitForLoading() {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"), ConfigConstants.LOADING));
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"),
+				ConfigConstants.LOADING));
 	}
 
 	public void cancelOrder() {
@@ -66,7 +67,7 @@ public class OrdersActionsPage extends AbstractPage {
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
 	}
-	
+
 	public void uncancelOrder() {
 		element(uncancelOrderButton).waitUntilVisible();
 		String onClick = uncancelOrderButton.getAttribute("onclick");
@@ -113,14 +114,18 @@ public class OrdersActionsPage extends AbstractPage {
 
 	public void verifyInvoiceShippingSubmitedMessage() {
 		element(successMessage).waitUntilVisible();
-		Assert.assertTrue("Failure: The mesage should be " + ContextConstants.INVOICE_SHIPPING_SUBMITED_MESSAGE + " and it's not! Actual: " + successMessage.getText(),
+		Assert.assertTrue(
+				"Failure: The mesage should be " + ContextConstants.INVOICE_SHIPPING_SUBMITED_MESSAGE
+						+ " and it's not! Actual: " + successMessage.getText(),
 				successMessage.getText().contains(ContextConstants.INVOICE_SHIPPING_SUBMITED_MESSAGE));
 	}
 
 	public void verifyRefundedSuccessMessage() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(successMessage).waitUntilVisible();
-		Assert.assertTrue("Failure: The mesage should be " + ContextConstants.REFUNDED_SUCCESS_MESSAGE + " and it's not! Actual: " + successMessage.getText(), successMessage
-				.getText().contains(ContextConstants.REFUNDED_SUCCESS_MESSAGE));
+		Assert.assertTrue(
+				"Failure: The mesage should be " + ContextConstants.REFUNDED_SUCCESS_MESSAGE + " and it's not! Actual: "
+						+ successMessage.getText(),
+				successMessage.getText().contains(ContextConstants.REFUNDED_SUCCESS_MESSAGE));
 	}
 }
