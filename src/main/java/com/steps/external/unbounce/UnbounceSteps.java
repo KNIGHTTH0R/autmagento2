@@ -16,7 +16,7 @@ public class UnbounceSteps extends AbstractSteps {
 
 	@Step
 	public void navigateToUnbouncePage(String url) {
-		navigate(url);
+		navigateWithoutMaximize(url);
 	}
 
 	@Title("Fill in unbounce details")

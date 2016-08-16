@@ -30,6 +30,7 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
@@ -78,6 +79,8 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
+	public GeneralCartSteps generalCartSteps;
+	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
@@ -106,9 +109,8 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 	private String prod4IncrementId;
 	OrderModel orderModelListTp1 = new OrderModel();
 
-
 	@Before
-	public void setUp() throws ParseException  {
+	public void setUp() throws ParseException {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
@@ -124,21 +126,17 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		genProduct3.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		prod2IncrementId = MagentoProductCalls.createApiProduct(genProduct3);
 
-
-
 		genProduct4 = MagentoProductCalls.createProductModel();
 		genProduct4.setPrice("30.00");
 		genProduct4.setIp("25");
 		genProduct4.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 7)));
 		prod3IncrementId = MagentoProductCalls.createApiProduct(genProduct4);
-		
 
 		genProduct5 = MagentoProductCalls.createProductModel();
 		genProduct5.setPrice("40.00");
 		genProduct5.setIp("25");
 		genProduct5.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 14)));
 		prod4IncrementId = MagentoProductCalls.createApiProduct(genProduct5);
-		
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -188,7 +186,7 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
-		customerRegistrationSteps.wipeHostCart();
+		generalCartSteps.clearCart();
 		HostBasicProductModel productData;
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "2", "0");
@@ -252,7 +250,6 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 
 	@After
 	public void saveData() throws Exception {
-		
 
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
@@ -280,14 +277,12 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveIncrementId(prod2IncrementId, getClass().getSimpleName() + "TP2");
 		MongoWriter.saveIncrementId(prod3IncrementId, getClass().getSimpleName() + "TP3");
 		MongoWriter.saveIncrementId(prod4IncrementId, getClass().getSimpleName() + "TP4");
-		
+
 		orderModelListTp1 = MongoReader.getOrderModel("US31003PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId() + EnvironmentConstants.JOB_TOKEN);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-	    ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
-	
-	}
-	
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
 
+	}
 
 }
