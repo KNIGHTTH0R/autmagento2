@@ -249,6 +249,16 @@ public class AbstractSteps extends ScenarioSteps {
 		}
 
 	}
+	@Step
+	public void navigateWithoutMaximize(String URL) {
+		// failsafe in case of redirects to live
+		if (!URL.contains("www.pippajean.com")) {
+			// getDriver().manage().timeouts().pageLoadTimeout(3600,
+			// TimeUnit.SECONDS);
+			getDriver().get(URL);
+		}
+		
+	}
 
 	public AbstractPage abstractPage() {
 		return getPages().currentPageAt(AbstractPage.class);
