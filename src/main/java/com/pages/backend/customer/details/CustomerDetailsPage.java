@@ -9,6 +9,8 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
@@ -144,6 +146,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		scrollToPageTop();
 		element(saveCustomer).waitUntilVisible();
 		saveCustomer.click();
+		waitForPageToLoad();
 	}
 
 	public void saveAndContinueEdit() {
