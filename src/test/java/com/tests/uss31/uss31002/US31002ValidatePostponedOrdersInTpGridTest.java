@@ -30,6 +30,7 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
+import com.tools.datahandler.HostDataGrabber;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -78,6 +79,9 @@ public class US31002ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		orderModelListTp1 = MongoReader.getOrderModel("US31002PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31002PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		productsListTp1 = MongoReader.grabHostBasicProductModel("US31002PartyHostBuysForCustomerTpTest" + "TP1");
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId() + EnvironmentConstants.JOB_TOKEN);
+		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
 
 		prod2IncrementId = MongoReader.grabIncrementId("US31002PartyHostBuysForCustomerTpTest" + "TP2");
 		orderModelListTp2 = MongoReader.getOrderModel("US31002PartyHostBuysForCustomerTpTest" + "TP2").get(0);
@@ -137,7 +141,9 @@ public class US31002ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		updated3Product.getStockData().setIsDiscontinued("1");
 		MagentoProductCalls.updateApiProduct(updated3Product, prod3IncrementId);
 
+		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
 		 ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId() + EnvironmentConstants.JOB_TOKEN);
+		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
 		 ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId() + EnvironmentConstants.JOB_TOKEN);
 		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
 	     ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
