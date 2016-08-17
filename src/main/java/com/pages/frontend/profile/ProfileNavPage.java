@@ -18,7 +18,7 @@ public class ProfileNavPage extends AbstractPage {
 				break;
 			}
 		}
-		Assert.assertTrue("The manu was not found", found);
+		Assert.assertTrue("The menu was not found", found);
 	}
 
 }
