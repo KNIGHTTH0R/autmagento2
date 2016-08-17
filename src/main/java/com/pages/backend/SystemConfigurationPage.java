@@ -31,6 +31,7 @@ public class SystemConfigurationPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(saveConfigurationButton).waitUntilVisible();
 		saveConfigurationButton.click();
+		waitForPageToLoad();
 	}
 
 	public void clickOnDesiredTab(String tabName) {

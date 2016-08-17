@@ -6,6 +6,8 @@ public class EnvironmentConstants {
 	
 	public static final String USERNAME = MongoReader.geteEnvironmentConstantsItem("USERNAME");
 	public static final String PASSWORD = MongoReader.geteEnvironmentConstantsItem("PASSWORD");
+	public static final String USERNAME_JENKINS_COMM = MongoReader.geteEnvironmentConstantsItem("USERNAME_JENKINS_COMM");
+	public static final String PASSWORD_JENKINS_COMM = MongoReader.geteEnvironmentConstantsItem("PASSWORD_JENKINS_COMM");
 	public static final String EXPORT_JOB_TRIGGER_URL = MongoReader.geteEnvironmentConstantsItem("EXPORT_JOB_TRIGGER_URL");
 	public static final String REOPEN_MONTH_JOB = MongoReader.geteEnvironmentConstantsItem("REOPEN_MONTH_JOB");
 	public static final String REINDEX_SC_CONTEXT_JOB = MongoReader.geteEnvironmentConstantsItem("REINDEX_SC_CONTEXT_JOB");

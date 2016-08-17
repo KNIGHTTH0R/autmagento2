@@ -34,12 +34,14 @@ public class CommissionReportSteps extends AbstractSteps {
 	}
 
 	@StepGroup
-	public RewardPointsOfStylistModel closeMonthAndCalculateRewardPoints(String stylistId, String activationDate, String lastCommissionRunDate) throws Exception {
+	public RewardPointsOfStylistModel closeMonthAndCalculateRewardPoints(String stylistId, String activationDate,
+			String lastCommissionRunDate) throws Exception {
 
 		// if
 		// (!DateUtils.isLastDayOfMonth(DateUtils.getCurrentDate(DateConstants.FORMAT),
 		// DateConstants.FORMAT)) {
-		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB, EnvironmentConstants.USERNAME_JENKINS_COMM,
+				EnvironmentConstants.PASSWORD_JENKINS_COMM);
 		waitABit(10000);
 		getDriver().navigate().refresh();
 		waitABit(TimeConstants.TIME_CONSTANT);
@@ -51,7 +53,8 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId, activationDate, lastCommissionRunDate, DateUtils.getCurrentDateBegining(DateConstants.FORMAT));
+		return ClosedMonthBonusCalculation.calculateClosedMonthBonuses(stylistId, activationDate, lastCommissionRunDate,
+				DateUtils.getCurrentDateBegining(DateConstants.FORMAT));
 
 	}
 
@@ -60,7 +63,8 @@ public class CommissionReportSteps extends AbstractSteps {
 	public IpModel closeLastMonthAndGetCurrentMonthIps(String stylistId) throws Exception {
 
 		// ApacheHttpHelper.sendGet(EnvironmentConstants.IMPORT_ALL_JOB);
-		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB, EnvironmentConstants.USERNAME_JENKINS_COMM,
+				EnvironmentConstants.PASSWORD_JENKINS_COMM);
 
 		waitABit(10000);
 		getDriver().navigate().refresh();
@@ -70,8 +74,8 @@ public class CommissionReportSteps extends AbstractSteps {
 		commissionReportPage().saveCommDate();
 		commissionReportPage().closeMonth();
 
-		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses(stylistId, DateUtils.getCurrentDateBegining(DateConstants.FORMAT),
-				DateUtils.getCurrentDate(DateConstants.FORMAT));
+		return ClosedMonthBonusCalculation.calculateCurrentMonthBonuses(stylistId,
+				DateUtils.getCurrentDateBegining(DateConstants.FORMAT), DateUtils.getCurrentDate(DateConstants.FORMAT));
 
 	}
 

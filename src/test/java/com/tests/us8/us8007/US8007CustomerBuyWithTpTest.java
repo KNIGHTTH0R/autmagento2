@@ -231,7 +231,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		RegularUserDataGrabber.regularUserShippingTotalsTp2 = shippingSteps.grabSurveyDataTp2();
 
 		shippingSteps.goToPaymentMethod();
-		
+
 		String url = shippingSteps.grabUrl();
 		System.out.println(url);
 		String orderId = FormatterUtils.getOrderId(url);
@@ -285,10 +285,11 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsListTp2) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + "TP2");
 		}
-		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName()); 
-		
+		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
+
 		try {
-			ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL);
+			ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL,
+					EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

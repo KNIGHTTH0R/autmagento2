@@ -28,7 +28,7 @@ public class US15003CompleteOrderTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
-	
+
 	private static OrderModel orderModel = new OrderModel();
 
 	@Before
@@ -47,7 +47,8 @@ public class US15003CompleteOrderTest extends BaseTest {
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
 		ordersSteps.markOrderAsPaid();
 		ordersSteps.completeOrder();
-		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
 
 	}
 

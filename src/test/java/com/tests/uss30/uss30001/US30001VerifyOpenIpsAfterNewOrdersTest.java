@@ -61,16 +61,17 @@ public class US30001VerifyOpenIpsAfterNewOrdersTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		ipModelList = new ArrayList<TermPurchaseIpModel>();
 		ipModelList.add(MongoReader.getIpModel("US30001GetInitialOpenIps").get(0));
 		ipModelList.add(MongoReader.getIpModel("US8007CustomerBuyWithTpTest").get(0));
 		ipModelList.add(MongoReader.getIpModel("US9004PlaceHostOrderWithTpTest").get(0));
 		ipModelList.add(MongoReader.getIpModel("US11007PartyHostBuysForCustomerTpTest").get(0));
-		
+
 		expectedIpModel = IpReportCalculation.calculateTermPurchaseIps(ipModelList);
-		
-		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL);
+
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL, EnvironmentConstants.USERNAME_JENKINS_COMM,
+				EnvironmentConstants.PASSWORD_JENKINS_COMM);
 
 		Properties prop = new Properties();
 		InputStream input = null;

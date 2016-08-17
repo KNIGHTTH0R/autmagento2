@@ -189,7 +189,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		generalCartSteps.clearCart();
 		HostBasicProductModel productData;
-		//TODO hide this somehow
+		// TODO hide this somehow
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 		if (!genProduct1.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils
@@ -233,10 +233,10 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
-		
+
 		shippingPartySectionSteps.enterPLZ(plz);
 		shippingPartySectionSteps.selectCountry(country);
-		
+
 		shippingSteps.grabHostProductsListTp0();
 		shippingSteps.grabHostProductsListTp1();
 		shippingSteps.grabHostProductsListTp2();
@@ -319,9 +319,10 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 			MongoWriter.savePartyBonusCalculationModel(model, getClass().getSimpleName());
 		}
 		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
-		
+
 		try {
-			ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL);
+			ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL,
+					EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

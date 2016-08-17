@@ -57,6 +57,7 @@ public class BackendProductDetailsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(saveAndContinueEdit).waitUntilVisible();
 		saveAndContinueEdit.click();
+		waitForPageToLoad();
 	}
 
 	public void clickAddNewProductButton() {

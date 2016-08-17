@@ -69,16 +69,19 @@ public class US31001ValidatePostponedOrdersInTpGrid3Test extends BaseTest {
 
 		expectedModel = new TermPurchaseOrderModel();
 		expectedModel.setIncrementId(orderModelListTp.getOrderId());
-		// we add 21 days to initial delivery date because we postponed the order
+		// we add 21 days to initial delivery date because we postponed the
+		// order
 		// 3 times
-		expectedModel.setExecutionDate(DateUtils.addDaysToAAGivenDate(productsListTp.getDeliveryDate(), "yyyy-MM-dd", 21));
-		System.out.println("Dateeeeeeeeee " + DateUtils.addDaysToAAGivenDate(productsListTp.getDeliveryDate(), "yyyy-MM-dd", 21));
-		
-		MongoConnector.cleanCollection(getClass().getSimpleName()+ "TP6");
+		expectedModel
+				.setExecutionDate(DateUtils.addDaysToAAGivenDate(productsListTp.getDeliveryDate(), "yyyy-MM-dd", 21));
+		System.out.println(
+				"Dateeeeeeeeee " + DateUtils.addDaysToAAGivenDate(productsListTp.getDeliveryDate(), "yyyy-MM-dd", 21));
+
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP6");
 
 	}
 
-	 @Test
+	@Test
 	public void us31001ValidatePostponedOrdersInTpGrid3Test() throws ParseException {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnTermPurchaseGrid();
@@ -94,16 +97,18 @@ public class US31001ValidatePostponedOrdersInTpGrid3Test extends BaseTest {
 
 	}
 
-	 @After
+	@After
 	public void runCron() throws Exception {
 
-
-		 ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp.getOrderId() + EnvironmentConstants.JOB_TOKEN);
-		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-	     ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
-	     backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-	     ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
-		 MongoWriter.saveTermPurchaseModel(expectedModel, getClass().getSimpleName()+ "TP6");
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp.getOrderId()
+				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
+				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
+		MongoWriter.saveTermPurchaseModel(expectedModel, getClass().getSimpleName() + "TP6");
 	}
 
 }

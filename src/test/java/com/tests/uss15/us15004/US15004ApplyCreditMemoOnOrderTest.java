@@ -21,7 +21,7 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTags({ @WithTag(name = "US15.4 Validate Zzz Product JB for all order states", type = "Scenarios"),
-	@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
+		@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
 @Story(Application.Newsletter.US15_4.class)
 @RunWith(SerenityRunner.class)
 public class US15004ApplyCreditMemoOnOrderTest extends BaseTest {
@@ -46,7 +46,8 @@ public class US15004ApplyCreditMemoOnOrderTest extends BaseTest {
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
 		ordersSteps.refundOrder();
-		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
 	}
 
 }

@@ -154,7 +154,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		scrollToPageTop();
 		element(saveAndContinueEdit).waitUntilVisible();
 		saveAndContinueEdit.click();
-		scrollToPageTop();
+		waitForPageToLoad();
 	}
 
 	public void clickOnLeadSettings() {
@@ -210,6 +210,8 @@ public class CustomerDetailsPage extends AbstractPage {
 	public void selectSponsor(String sponsor) {
 		element(sponsorDropown).waitUntilVisible();
 		element(sponsorDropown).selectByValue(sponsor);
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
+
 	}
 
 	public void selectVatPayer(String vatPayer) {

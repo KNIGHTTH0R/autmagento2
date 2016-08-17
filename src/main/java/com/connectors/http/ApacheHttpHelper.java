@@ -25,10 +25,10 @@ public class ApacheHttpHelper {
 	private static DefaultHttpClient httpClient = new DefaultHttpClient();
 
 	// HTTP GET request
-	public static String sendGet(String url) throws Exception {
+	public static String sendGet(String url, String username, String pass) throws Exception {
 		HttpGet request = new HttpGet(url);
 		System.out.println("Sending GET request to: " + url);
-		request.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials(EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD), "UTF-8", false));
+		request.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials(username, pass), "UTF-8", false));
 
 		// add request header
 		request.addHeader("User-Agent", HttpConstants.USER_AGENT);

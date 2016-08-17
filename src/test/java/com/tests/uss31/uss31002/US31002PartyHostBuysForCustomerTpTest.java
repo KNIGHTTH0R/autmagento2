@@ -123,19 +123,22 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("29.90");
 		genProduct3.setIp("25");
-		genProduct3.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+		genProduct3.setStockData(
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		prod2IncrementId = MagentoProductCalls.createApiProduct(genProduct3);
 
 		genProduct4 = MagentoProductCalls.createProductModel();
 		genProduct4.setPrice("30.00");
 		genProduct4.setIp("25");
-		genProduct4.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 7)));
+		genProduct4.setStockData(MagentoProductCalls.createNotAvailableYetStockData(
+				DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 7)));
 		prod3IncrementId = MagentoProductCalls.createApiProduct(genProduct4);
 
 		genProduct5 = MagentoProductCalls.createProductModel();
 		genProduct5.setPrice("40.00");
 		genProduct5.setIp("25");
-		genProduct5.setStockData(MagentoProductCalls.createNotAvailableYetStockData(DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 14)));
+		genProduct5.setStockData(MagentoProductCalls.createNotAvailableYetStockData(
+				DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 14)));
 		prod4IncrementId = MagentoProductCalls.createApiProduct(genProduct5);
 
 		Properties prop = new Properties();
@@ -191,31 +194,39 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "2", "0");
 		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+			productData.setDeliveryDate(DateUtils
+					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp1.add(productData);
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "4", "0");
 		if (!genProduct3.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+			productData.setDeliveryDate(DateUtils
+					.getFirstFridayAfterDate(genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp2.add(productData);
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct4, "2", "0");
 		if (!genProduct4.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+			productData.setDeliveryDate(DateUtils
+					.getFirstFridayAfterDate(genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp3.add(productData);
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct5, "4", "0");
 		if (!genProduct5.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct5.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+			productData.setDeliveryDate(DateUtils
+					.getFirstFridayAfterDate(genProduct5.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp4.add(productData);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp2 = regularUserCartSteps.getDeliveryDate(genProduct3.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp3 = regularUserCartSteps.getDeliveryDate(genProduct4.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp4 = regularUserCartSteps.getDeliveryDate(genProduct5.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku(),
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		String deliveryTp2 = regularUserCartSteps.getDeliveryDate(genProduct3.getSku(),
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		String deliveryTp3 = regularUserCartSteps.getDeliveryDate(genProduct4.getSku(),
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		String deliveryTp4 = regularUserCartSteps.getDeliveryDate(genProduct5.getSku(),
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 
@@ -279,9 +290,11 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveIncrementId(prod4IncrementId, getClass().getSimpleName() + "TP4");
 
 		orderModelListTp1 = MongoReader.getOrderModel("US31003PartyHostBuysForCustomerTpTest" + "TP1").get(0);
-		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId() + EnvironmentConstants.JOB_TOKEN);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId()
+				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
+				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 
 	}
 

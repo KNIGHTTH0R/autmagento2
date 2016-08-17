@@ -26,6 +26,7 @@ public class StylecoachDetailsBackendPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(save).waitUntilVisible();
 		save.click();
+		waitForPageToLoad();
 
 	}
 
