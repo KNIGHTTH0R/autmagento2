@@ -118,7 +118,7 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		genProduct2.setPrice("10.00");
 		genProduct2.setIp("8");
 		prod1IncrementId = MagentoProductCalls.createApiProduct(genProduct2);
-		orderModelListTp1 = MongoReader.getOrderModel("US31003PartyHostBuysForCustomerTpTest" + "TP1").get(0);
+		orderModelListTp1 = MongoReader.getOrderModel("US31002PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("29.90");
@@ -261,6 +261,10 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 
 	@After
 	public void saveData() throws Exception {
+		
+//		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + HostDataGrabber.orderModelTp1.getOrderId() + EnvironmentConstants.JOB_TOKEN);
+//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
 
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
@@ -289,13 +293,12 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveIncrementId(prod3IncrementId, getClass().getSimpleName() + "TP3");
 		MongoWriter.saveIncrementId(prod4IncrementId, getClass().getSimpleName() + "TP4");
 
-		orderModelListTp1 = MongoReader.getOrderModel("US31003PartyHostBuysForCustomerTpTest" + "TP1").get(0);
-		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId()
-				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
-		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
-				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+//		orderModelListTp1 = MongoReader.getOrderModel("US31003PartyHostBuysForCustomerTpTest" + "TP1").get(0);
+//		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId()
+//				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
+//				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 
 	}
-
 }
