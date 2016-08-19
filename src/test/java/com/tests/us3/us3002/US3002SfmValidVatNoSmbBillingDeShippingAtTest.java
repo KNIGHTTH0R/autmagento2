@@ -77,6 +77,10 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 	public CustomVerification customVerifications;
 
 	private String username, password;
+	private static String jewelryDiscount;
+	private static String marketingDiscount;
+	private static String shippingValue;
+	private static String taxClass;
 	private static String billingAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();;
@@ -106,7 +110,10 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
-			
+			jewelryDiscount = prop.getProperty("jewelryDiscount");
+			marketingDiscount = prop.getProperty("marketingDiscount");
+			shippingValue = prop.getProperty("shippingPrice");
+			taxClass = prop.getProperty("taxClass");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -139,6 +146,7 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
+		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -171,7 +179,7 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		validationWorkflows.performCartValidations119Vat();
+		validationWorkflows.performCartValidations();
 
 		customVerifications.printErrors();
 	}
