@@ -39,12 +39,15 @@ public class US20001VerifyNewCreatedStylistDetailsInCommissionTest extends BaseT
 	public void setUp() throws Exception {
 
 		String incrementId = MongoReader.grabIncrementId("US20001StylistActivationTest");
-		
+
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(incrementId);
-		dBStylistModel = StylistListMagentoCalls.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);
-		
-		ApacheHttpHelper.sendGet(EnvironmentConstants.IMPORT_ALL_JOB);
-		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB);
+		dBStylistModel = StylistListMagentoCalls
+				.getStylistList(SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, incrementId).get(0);
+
+		ApacheHttpHelper.sendGet(EnvironmentConstants.IMPORT_ALL_JOB, EnvironmentConstants.USERNAME_JENKINS_COMM,
+				EnvironmentConstants.PASSWORD_JENKINS_COMM);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.REOPEN_MONTH_JOB, EnvironmentConstants.USERNAME_JENKINS_COMM,
+				EnvironmentConstants.PASSWORD_JENKINS_COMM);
 	}
 
 	@Test

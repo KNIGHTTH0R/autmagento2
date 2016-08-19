@@ -84,8 +84,7 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 		stylistRegistrationSteps.fillCreateCustomerFormWithoutContext(customerFormData, customerFormAddress,
 				birthDate.getDate());
 		try {
-			withTestDataFrom("resources/invalidContextData.csv")
-					.run(stylistContextStepsCsv).inputContextCsv();
+			withTestDataFrom("resources/invalidContextData.csv").run(stylistContextStepsCsv).inputContextCsv();
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail("Failed !!!");
@@ -97,7 +96,8 @@ public class US27001StylistRegInvalidContextValidationTest extends BaseTest {
 	@After
 	public void tearDown() throws Exception {
 		DeleteCategory.deleteApiCategory(categoryId);
-		ApacheHttpHelper.sendGet(EnvironmentConstants.REINDEX_SC_CONTEXT_JOB);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.REINDEX_SC_CONTEXT_JOB, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
 	}
 
 }

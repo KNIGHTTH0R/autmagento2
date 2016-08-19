@@ -71,6 +71,7 @@ public class US20001StyleCoachRegistrationTest extends BaseTest {
 		customerFormData = new CustomerFormModel();
 		customerFormAddress = new AddressModel();
 		birthDate.setDate("Feb,1970,12");
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		
 		Properties prop = new Properties();

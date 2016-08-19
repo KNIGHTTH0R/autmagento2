@@ -24,7 +24,7 @@ import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
 @WithTags({ @WithTag(name = "US15.4 Validate Zzz Product JB for all order states", type = "Scenarios"),
-	@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
+		@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
 @Story(Application.Newsletter.US15_4.class)
 @RunWith(SerenityRunner.class)
 public class US15004CheckSubscriberMagentoConfigTest extends BaseTest {
@@ -54,7 +54,8 @@ public class US15004CheckSubscriberMagentoConfigTest extends BaseTest {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.goToNewsletterSubribers();
 		newsleterSubscribersSteps.checkSubscriberDetails(dataModel.getEmailName());
-		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
 
 	}
 

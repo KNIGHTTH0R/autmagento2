@@ -69,6 +69,7 @@ public class PartyDetailsBackendPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(saveBonus).waitUntilVisible();
 		saveBonus.click();
+		waitForPageToLoad();
 	}
 	
 	public void reopenParty() {

@@ -28,7 +28,7 @@ public class US15002CancelOrderTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
-	
+
 	private static OrderModel orderModel = new OrderModel();
 
 	@Before
@@ -46,7 +46,8 @@ public class US15002CancelOrderTest extends BaseTest {
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
 		ordersSteps.cancelOrder();
-		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
 
 	}
 }

@@ -28,7 +28,7 @@ public class US15002ApplyCreditMemoOnOrderTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
-	
+
 	private OrderModel orderModel;
 
 	@Before
@@ -45,6 +45,7 @@ public class US15002ApplyCreditMemoOnOrderTest extends BaseTest {
 		backEndSteps.searchOrderByOrderId(orderModel.getOrderId());
 		backEndSteps.openOrderDetails(orderModel.getOrderId());
 		ordersSteps.refundOrder();
-		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
 	}
 }

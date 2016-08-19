@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.StylistValidationSteps;
@@ -17,6 +18,7 @@ import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.Credentials;
+import com.tools.constants.SoapKeys;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
@@ -53,8 +55,10 @@ public class US20001StylistActivationTest extends BaseTest {
 			stylistRegistrationData = MongoReader.grabCustomerFormModels("US20001StyleCoachRegistrationTest").get(0);
 		} else
 			System.out.println("The database has no entries");
+		
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
-
+	
 	@Test
 	public void us20001StylistActivationTest() {
 

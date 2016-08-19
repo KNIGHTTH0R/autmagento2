@@ -52,7 +52,8 @@ public class US15002CheckSubscriberMagentoConfigTest extends BaseTest {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.goToNewsletterSubribers();
 		newsleterSubscribersSteps.checkSubscriberDetails(dataModel.getEmailName());
-		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.EXPORT_JOB_TRIGGER_URL, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
 
 	}
 

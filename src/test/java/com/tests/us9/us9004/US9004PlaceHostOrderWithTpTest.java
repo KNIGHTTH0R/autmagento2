@@ -225,7 +225,7 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		HostDataGrabber.hostShippingTotalsTp2 = shippingSteps.grabSurveyDataTp2();
 
 		shippingSteps.goToPaymentMethod();
-		
+
 		String url = shippingSteps.grabUrl();
 		String orderId = FormatterUtils.getOrderId(url);
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
@@ -234,7 +234,6 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
-
 
 		if (!paymentSteps.isCreditCardFormExpended())
 			paymentSteps.expandCreditCardForm();
@@ -279,9 +278,10 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP2");
 		}
 		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
-		
+
 		try {
-			ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL);
+			ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL,
+					EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

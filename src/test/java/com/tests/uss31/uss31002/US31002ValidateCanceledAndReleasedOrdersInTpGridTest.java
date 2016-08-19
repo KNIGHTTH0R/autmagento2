@@ -82,19 +82,21 @@ public class US31002ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderModelListTp3.getOrderId());
 		ordersSteps.openOrder(orderModelListTp3.getOrderId());
-		//TODO change PAYMENT_IN_PROGRESS in PAYMENT_COMPLETE
-		orderWorkflows.validateOrderStatus(ordersSteps.grabOrderInfo().getOrderStatus(), ConfigConstants.PAYMENT_IN_PROGRESS);
+		// TODO change PAYMENT_IN_PROGRESS in PAYMENT_COMPLETE
+		orderWorkflows.validateOrderStatus(ordersSteps.grabOrderInfo().getOrderStatus(),
+				ConfigConstants.PAYMENT_IN_PROGRESS);
 
 		customVerifications.printErrors();
-		
-		
+
 	}
-	
-	public void runCron() throws Exception{
+
+	public void runCron() throws Exception {
 		// script for updating deliveryDates
-				ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId() + EnvironmentConstants.JOB_TOKEN);
-				
-				ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId()
+				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
+				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 	}
 
 }

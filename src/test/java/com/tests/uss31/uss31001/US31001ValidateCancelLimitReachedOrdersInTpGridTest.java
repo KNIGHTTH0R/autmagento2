@@ -63,25 +63,28 @@ public class US31001ValidateCancelLimitReachedOrdersInTpGridTest extends BaseTes
 
 	TermPurchaseOrderModel expectedModel;
 	TermPurchaseOrderModel expectedModel7;
-	
+
 	private static List<HostBasicProductModel> productsListTp = new ArrayList<HostBasicProductModel>();
 	private static ProductDetailedModel detailedProdListTp = new ProductDetailedModel();
 	OrderModel orderModelListTp = new OrderModel();
 
 	@Before
 	public void setUp() throws ParseException {
-		
+
 		orderModelListTp = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP6").get(0);
-		detailedProdListTp = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP6").get(0);
+		detailedProdListTp = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP6")
+				.get(0);
 		productsListTp = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP6");
-		
+
 		expectedModel = new TermPurchaseOrderModel();
 		expectedModel.setIncrementId(orderModelListTp.getOrderId());
 		expectedModel.setExecutionDate(DateUtils.getCurrentDate("yyyy-MM-dd"));
 		expectedModel.setProductSku(productsListTp.get(0).getProdCode());
-		expectedModel.setIsDiscontinued(detailedProdListTp.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
+		expectedModel.setIsDiscontinued(
+				detailedProdListTp.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
 		expectedModel.setEarliestAv(detailedProdListTp.getStockData().getEarliestAvailability());
-	//	DateUtils.addDaysToAAGivenDate(detailedProdListTp6.getStockData().getEarliestAvailability(), "yyyy-MM-dd", -1)
+		// DateUtils.addDaysToAAGivenDate(detailedProdListTp6.getStockData().getEarliestAvailability(),
+		// "yyyy-MM-dd", -1)
 		expectedModel.setInStock(detailedProdListTp.getStockData().getIsInStock().contentEquals("1") ? "Yes" : "No");
 		expectedModel.setMinimumQty(detailedProdListTp.getStockData().getMinQty());
 		expectedModel.setBoughtQty(productsListTp.get(0).getQuantity());
@@ -89,10 +92,11 @@ public class US31001ValidateCancelLimitReachedOrdersInTpGridTest extends BaseTes
 		expectedModel.setRecomandation(ConfigConstants.RECOMMENDATION_TO_CANCEL);
 		expectedModel.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
 		expectedModel.setScheduledPaymentStatus(ConfigConstants.POSTPONED);
-		expectedModel.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp.getStockData().getQty(), productsListTp.get(0).getQuantity()));
-		
-		MongoConnector.cleanCollection(getClass().getSimpleName()+ "TP6");
-		
+		expectedModel.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp.getStockData().getQty(),
+				productsListTp.get(0).getQuantity()));
+
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP6");
+
 	}
 
 	@Test
@@ -101,10 +105,10 @@ public class US31001ValidateCancelLimitReachedOrdersInTpGridTest extends BaseTes
 
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp.getOrderId());
-		//validate cancel recomandation
+		// validate cancel recomandation
 		TermPurchaseOrderModel grabbedModel = termPurchaseGridSteps.grabOrderDetails(orderModelListTp.getOrderId());
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel, expectedModel);
-        termPurchaseGridSteps.cancelOrder(orderModelListTp.getOrderId());
+		termPurchaseGridSteps.cancelOrder(orderModelListTp.getOrderId());
 		termPurchaseGridSteps.validateMessage(ConfigConstants.CANCEL_SUCCESS_MESSAGE);
 		termPurchaseGridSteps.checkOrderIsNotPresentInGrid(orderModelListTp.getOrderId());
 
@@ -113,26 +117,19 @@ public class US31001ValidateCancelLimitReachedOrdersInTpGridTest extends BaseTes
 		ordersSteps.openOrder(orderModelListTp.getOrderId());
 		orderWorkflows.validateOrderStatus(ordersSteps.grabOrderInfo().getOrderStatus(), ConfigConstants.CANCELED);
 
-		
-		
 		customVerifications.printErrors();
-	
 
 	}
-	
+
 	@After
-	public void runCron() throws Exception{
+	public void runCron() throws Exception {
 
-		
-	
-		
-        ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
-        backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-        ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
-		MongoWriter.saveTermPurchaseModel(expectedModel,getClass().getSimpleName() + "TP6");
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
+				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
+		MongoWriter.saveTermPurchaseModel(expectedModel, getClass().getSimpleName() + "TP6");
 	}
 
-	
-	
-	
 }

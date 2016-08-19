@@ -77,20 +77,23 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 	public void setUp() throws ParseException {
 
 		orderModelListTp1 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP3").get(0);
-		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP3").get(0);
+		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP3")
+				.get(0);
 		productsListTp1 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP3");
-		
+
 		orderModelListTp2 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP4").get(0);
-		detailedProdListTp2 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP4").get(0);
+		detailedProdListTp2 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP4")
+				.get(0);
 		productsListTp2 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP4");
-		
+
 		orderModelListTp3 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP5").get(0);
-		
+
 		expectedModel1 = new TermPurchaseOrderModel();
 		expectedModel1.setIncrementId(orderModelListTp1.getOrderId());
 		expectedModel1.setExecutionDate(DateUtils.getCurrentDate("yyyy-MM-dd"));
 		expectedModel1.setProductSku(productsListTp1.get(0).getProdCode());
-		expectedModel1.setIsDiscontinued(detailedProdListTp1.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
+		expectedModel1.setIsDiscontinued(
+				detailedProdListTp1.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
 		expectedModel1.setEarliestAv(detailedProdListTp1.getStockData().getEarliestAvailability());
 		expectedModel1.setInStock(detailedProdListTp1.getStockData().getIsInStock().contentEquals("1") ? "Yes" : "No");
 		expectedModel1.setMinimumQty(detailedProdListTp1.getStockData().getMinQty());
@@ -99,13 +102,15 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 		expectedModel1.setRecomandation(ConfigConstants.RECOMMENDATION_TO_POSTPONE);
 		expectedModel1.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_COMPLETE);
 		expectedModel1.setScheduledPaymentStatus(ConfigConstants.PENDING);
-		expectedModel1.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(), productsListTp1.get(0).getQuantity()));
-		
+		expectedModel1.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(),
+				productsListTp1.get(0).getQuantity()));
+
 		expectedModel2 = new TermPurchaseOrderModel();
 		expectedModel2.setIncrementId(orderModelListTp2.getOrderId());
 		expectedModel2.setExecutionDate(DateUtils.getCurrentDate("yyyy-MM-dd"));
 		expectedModel2.setProductSku(productsListTp2.get(0).getProdCode());
-		expectedModel2.setIsDiscontinued(detailedProdListTp2.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
+		expectedModel2.setIsDiscontinued(
+				detailedProdListTp2.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
 		expectedModel2.setEarliestAv(detailedProdListTp2.getStockData().getEarliestAvailability());
 		expectedModel2.setInStock(detailedProdListTp2.getStockData().getIsInStock().contentEquals("1") ? "Yes" : "No");
 		expectedModel2.setMinimumQty(detailedProdListTp2.getStockData().getMinQty());
@@ -115,7 +120,7 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 		expectedModel2.setOrderStatus(ConfigConstants.TP_GRID_CANCELED);
 		expectedModel2.setScheduledPaymentStatus(ConfigConstants.PENDING);
 		expectedModel2.setProductQty(detailedProdListTp2.getStockData().getQty());
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP3");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP4");
 
@@ -128,48 +133,46 @@ public class US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest extends
 		backEndSteps.searchOrderByOrderId(orderModelListTp1.getOrderId());
 		backEndSteps.openOrderDetails(orderModelListTp1.getOrderId());
 		ordersSteps.markOrderAsPaid();
-		
+
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp1.getOrderId());
 		TermPurchaseOrderModel grabbedModel1 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp1.getOrderId());
-		
+
 		backEndSteps.clickOnSalesOrders();
 		backEndSteps.searchOrderByOrderId(orderModelListTp2.getOrderId());
 		backEndSteps.openOrderDetails(orderModelListTp2.getOrderId());
 		ordersSteps.cancelOrder();
-		
+
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp2.getOrderId());
 		TermPurchaseOrderModel grabbedModel2 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp2.getOrderId());
 
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel1, expectedModel1);
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel2, expectedModel2);
-		
-		//razvan cron
-		
-		//validate ca nu exista
-		
-		
+
+		// razvan cron
+
+		// validate ca nu exista
 
 		customVerifications.printErrors();
-	
 
 	}
-	
+
 	@After
-	public void runCron() throws Exception{
-	
-		
-	    ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId() + EnvironmentConstants.JOB_TOKEN);
-	    
+	public void runCron() throws Exception {
+
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId()
+				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-	    ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
+				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-	    ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT);
-		
-		MongoWriter.saveTermPurchaseModel(expectedModel1,getClass().getSimpleName()+"TP3");
-		MongoWriter.saveTermPurchaseModel(expectedModel2,getClass().getSimpleName()+"TP4");
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
+
+		MongoWriter.saveTermPurchaseModel(expectedModel1, getClass().getSimpleName() + "TP3");
+		MongoWriter.saveTermPurchaseModel(expectedModel2, getClass().getSimpleName() + "TP4");
 	}
-	
 
 }
