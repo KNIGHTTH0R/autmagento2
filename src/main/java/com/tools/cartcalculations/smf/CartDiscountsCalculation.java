@@ -295,7 +295,7 @@ public class CartDiscountsCalculation {
 	public static String calculateMarketingMaterialCartProductFinalPrice(BigDecimal askingPrice, BigDecimal marketingDiscount, BigDecimal sumMarketingMaterial) {
 
 		BigDecimal result = BigDecimal.ZERO;
-		if (askingPrice.compareTo(marketingDiscount) < 0) {
+		if (sumMarketingMaterial.compareTo(marketingDiscount) < 0) {
 			result = BigDecimal.ZERO;
 		} else {
 			result = result.add(askingPrice);
