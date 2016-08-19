@@ -76,16 +76,9 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 	
 	private String username, password;
 	private static String billingAddress;
-	private static String shippingAddress;
-	private static String jewelryDiscount;
-	private static String marketingDiscount;
-	private static String shippingValue;
-	private static String taxClass;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	
 	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
+	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -93,16 +86,10 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		DataGrabber.wipe();
 		
 		genProduct1 = MagentoProductCalls.createProductModel();		
-		genProduct1.setPrice("49.90");
+		genProduct1.setPrice("39.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		
-		genProduct2 = MagentoProductCalls.createProductModel();		
-		genProduct2.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct2);
-		
-		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("229.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+
 		
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -114,11 +101,7 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
-			jewelryDiscount = prop.getProperty("jewelryDiscount");
-			marketingDiscount = prop.getProperty("marketingDiscount");
-			shippingValue = prop.getProperty("shippingPrice");
-			taxClass = prop.getProperty("taxClass");
+		
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -153,25 +136,13 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_50);
-		CartCalculator.productsList50.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0",ConfigConstants.DISCOUNT_0);
-		CartCalculator.productsListMarketing.add(productData);
-		
+	
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
 		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
-		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-
-		cartSteps.typeJewerlyBonus(jewelryDiscount);
-		cartSteps.updateJewerlyBonus();
-		cartSteps.typeMarketingBonus(marketingDiscount);
-		cartSteps.updateMarketingBonus();
-		
-		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 		
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
@@ -180,8 +151,7 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		cartSteps.goToShipping();
 
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.selectShippingAddress(shippingAddress);
+		shippingSteps.setSameAsBilling(true);
 		
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
@@ -203,7 +173,7 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 		
-		validationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
+		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		validationWorkflows.performCartValidations();
 		
 		customVerifications.printErrors();
