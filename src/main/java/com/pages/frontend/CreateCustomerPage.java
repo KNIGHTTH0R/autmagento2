@@ -150,12 +150,12 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void checkParties() {
 		partiesCheckbox.click();
-		waitABit(1000);
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void checkMember() {
 		memberCheckbox.click();
-		waitABit(1000);
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void checkIAgree() {
@@ -167,6 +167,7 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputStreetAddress(String streetAddress) {
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(streetInput).waitUntilVisible();
 		streetInput.sendKeys(streetAddress);
 	}

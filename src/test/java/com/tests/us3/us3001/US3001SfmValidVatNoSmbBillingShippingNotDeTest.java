@@ -167,7 +167,7 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		CartCalculator.productsList25.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
-
+		System.out.println("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
 		CartCalculator.calculateJMDiscounts(jewelryDisount, marketingDisount, taxClass, shippingValue);
 
 		headerSteps.openCartPreview();
