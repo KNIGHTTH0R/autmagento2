@@ -76,6 +76,11 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 	
 	private String username, password;
 	private static String billingAddress;
+	private static String shippingAddress;
+	private static String jewelryDiscount;
+	private static String marketingDiscount;
+	private static String shippingValue;
+	private static String taxClass;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1;
 	
@@ -100,6 +105,10 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			shippingAddress = prop.getProperty("shippingAddress");
+			jewelryDiscount = prop.getProperty("jewelryDiscount");
+			marketingDiscount = prop.getProperty("marketingDiscount");
+			shippingValue = prop.getProperty("shippingPrice");
 			billingAddress = prop.getProperty("billingAddress");
 		
 
@@ -136,6 +145,7 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
+		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 	
 
 		headerSteps.openCartPreview();
