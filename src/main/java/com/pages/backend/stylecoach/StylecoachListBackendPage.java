@@ -7,6 +7,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.constants.ConfigConstants;
 import com.tools.requirements.AbstractPage;
@@ -59,6 +60,8 @@ public class StylecoachListBackendPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(submitReassignStylecoach).waitUntilVisible();
 		submitReassignStylecoach.click();
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
+		waitForPageToLoad();
 		waitABit(1000);
 	}
 
