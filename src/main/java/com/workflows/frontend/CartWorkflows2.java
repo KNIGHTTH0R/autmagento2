@@ -60,7 +60,7 @@ public class CartWorkflows2 {
 				System.out.println(cartProductsList.size() + " items remained");
 			}
 		}
-		Assert.assertTrue("Failure: Products list is empty. ", basicProductsList.size() != 0);
+//		Assert.assertTrue("Failure: Products list is empty. ", basicProductsList.size() != 0);
 		Assert.assertTrue("Failure: Not all products have been validated . ", cartProductsList.size() == 0);
 
 	}
