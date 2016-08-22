@@ -32,6 +32,7 @@ public class CartCalculator {
 
 	public static CalcDetailsModel calculatedTotalsDiscounts = new CalcDetailsModel();
 	public static ShippingModel shippingCalculatedModel = new ShippingModel();
+	public static String delta = "0";
 
 	public static void wipe() {
 		allProductsList = new ArrayList<BasicProductModel>();
@@ -52,7 +53,7 @@ public class CartCalculator {
 		allProductsListRecalculated = new ArrayList<BasicProductModel>();
 		calculatedTotalsDiscounts = new CalcDetailsModel();
 		shippingCalculatedModel = new ShippingModel();
-
+		delta = "0";
 	}
 
 	public static void calculateShippingWith19PercentRemoved(String shippingValue) {

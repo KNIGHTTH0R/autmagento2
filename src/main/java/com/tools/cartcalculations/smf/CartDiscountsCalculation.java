@@ -32,20 +32,30 @@ public class CartDiscountsCalculation {
 		return String.valueOf(IP.multiply(qty).intValue());
 	}
 
-	public static String calculateFinalPrice(String askingPrice, String discount) {
+	public static String calculateFinalPrice(String askingPrice, String discount, String delta) {
 
 		BigDecimal result = BigDecimal.ZERO;
 		BigDecimal discountValue = BigDecimal.ZERO;
+		BigDecimal diff = BigDecimal.ZERO;
 
 		BigDecimal askPrice = BigDecimal.valueOf(Double.parseDouble(askingPrice));
 		BigDecimal disc = BigDecimal.valueOf(Double.parseDouble(discount));
+		BigDecimal deltaAmount = BigDecimal.valueOf(Double.parseDouble(delta));
+
+		if (discount != ConfigConstants.DISCOUNT_25)
+			deltaAmount = BigDecimal.ZERO;
 
 		discountValue = askPrice.multiply(disc);
-		discountValue = discountValue.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
-
+		diff = discountValue.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+		diff = diff.add(deltaAmount);
+		discountValue = diff.setScale(2, BigDecimal.ROUND_HALF_UP);
+		diff = diff.setScale(4, BigDecimal.ROUND_HALF_UP);
+		diff = diff.subtract(discountValue);
+		CartCalculator.delta = String.valueOf(diff);
 		result = askPrice.subtract(discountValue);
 
 		return String.valueOf(result.setScale(2));
+
 	}
 
 	public static String calculateFinalPriceRegularCart(String askingPrice) {
@@ -290,10 +300,9 @@ public class CartDiscountsCalculation {
 		String[] discountAndRemainder = new String[2];
 
 		BigDecimal result = BigDecimal.ZERO;
-		if (sum25Section.compareTo(jB) < 0) {
-			result = BigDecimal.ZERO;
+		BigDecimal diff = BigDecimal.ZERO;
 
-		} else {
+		if (sum25Section.compareTo(jB) > 0) {
 
 			result = result.add(askingPrice);
 			result = result.multiply(BigDecimal.valueOf(100));
@@ -302,8 +311,6 @@ public class CartDiscountsCalculation {
 			result = result.multiply(jB);
 			result = askingPrice.subtract(result);
 			BigDecimal temp = result;
-
-			BigDecimal diff = BigDecimal.ZERO;
 
 			result = result.multiply(BigDecimal.valueOf(25));
 			// the 25% disc is calculated with 5 decimals precision (we don't
@@ -319,11 +326,13 @@ public class CartDiscountsCalculation {
 			// the next product
 			diff = diff.subtract(result);
 			result = temp.subtract(result);
-			discountAndRemainder[0] = String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
-			System.out.println(discountAndRemainder[0]);
-			discountAndRemainder[1] = String.valueOf(diff.setScale(4, BigDecimal.ROUND_HALF_UP));
-			System.out.println(discountAndRemainder[1]);
+
 		}
+		discountAndRemainder[0] = String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
+		System.out.println(discountAndRemainder[0]);
+		discountAndRemainder[1] = String.valueOf(diff.setScale(4, BigDecimal.ROUND_HALF_UP));
+		System.out.println(discountAndRemainder[1]);
+
 		return discountAndRemainder;
 	}
 
