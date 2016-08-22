@@ -1,6 +1,7 @@
 package com.tools.cartcalculations.smf;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,10 @@ import java.util.List;
 import com.tools.constants.ConfigConstants;
 import com.tools.data.frontend.BasicProductModel;
 
+/**
+ * @author mihai
+ *
+ */
 public class CartDiscountsCalculation {
 
 	public static String calculateAskingPrice(String unitPrice, String quantity) {
@@ -135,6 +140,8 @@ public class CartDiscountsCalculation {
 
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 
+		BigDecimal delta = BigDecimal.ZERO;
+
 		for (BasicProductModel product : productsList) {
 
 			BasicProductModel newProduct = new BasicProductModel();
@@ -148,9 +155,14 @@ public class CartDiscountsCalculation {
 			newProduct
 					.setPriceIP(calculateIpForEachProduct(BigDecimal.valueOf(Double.parseDouble(product.getPriceIP())),
 							BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25));
-			newProduct.setFinalPrice(calculate25DiscountCartProductFinalPrice(
+
+			String[] discounts = calculate25DiscountCartProductFinalPrice(
 					BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
-					BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25));
+					BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25, delta);
+
+			newProduct.setFinalPrice(discounts[0]);
+
+			delta = BigDecimal.valueOf(Double.parseDouble(discounts[1]));
 
 			cartProducts.add(newProduct);
 		}
@@ -264,8 +276,18 @@ public class CartDiscountsCalculation {
 		return String.valueOf(result.setScale(2));
 	}
 
-	public static String calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB,
-			BigDecimal sum25Section) {
+	/**
+	 * @param askingPrice
+	 * @param jB
+	 * @param sum25Section
+	 * 
+	 * @return Returns the discount applied for a product and the remaining
+	 *         discount to be applied on the next product
+	 */
+	public static String[] calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB,
+			BigDecimal sum25Section, BigDecimal deltaDiscount) {
+
+		String[] discountAndRemainder = new String[2];
 
 		BigDecimal result = BigDecimal.ZERO;
 		if (sum25Section.compareTo(jB) < 0) {
@@ -277,14 +299,32 @@ public class CartDiscountsCalculation {
 			result = result.multiply(BigDecimal.valueOf(100));
 			result = result.divide(sum25Section, 4, BigDecimal.ROUND_HALF_UP);
 			result = result.divide(BigDecimal.valueOf(100), 10, BigDecimal.ROUND_HALF_UP);
-			result = result.multiply(jB); 
+			result = result.multiply(jB);
 			result = askingPrice.subtract(result);
 			BigDecimal temp = result;
+
+			BigDecimal diff = BigDecimal.ZERO;
+
 			result = result.multiply(BigDecimal.valueOf(25));
-			result = result.divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
+			// the 25% disc is calculated with 5 decimals precision (we don't
+			// want the 4th decimal rounded)
+			diff = result.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+			diff = diff.add(deltaDiscount);// add delta discount from previous
+											// product
+			// the calculated discount is rounded to 2 decimals- actual discount
+			result = diff.setScale(2, BigDecimal.ROUND_HALF_UP);
+			// the calculated discount is rounded to 4 decimals (expected)
+			diff = diff.setScale(4, BigDecimal.ROUND_HALF_UP);
+			// we calculate the remaining discount difference to be applied on
+			// the next product
+			diff = diff.subtract(result);
 			result = temp.subtract(result);
+			discountAndRemainder[0] = String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
+			System.out.println(discountAndRemainder[0]);
+			discountAndRemainder[1] = String.valueOf(diff.setScale(4, BigDecimal.ROUND_HALF_UP));
+			System.out.println(discountAndRemainder[1]);
 		}
-		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
+		return discountAndRemainder;
 	}
 
 	public static String calculateRuleDiscountCartProductFinalPrice(BigDecimal finalPrice, BigDecimal askingPrice,
