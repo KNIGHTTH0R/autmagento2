@@ -110,6 +110,7 @@ public class US3008SfmNoVatNoSmbBillingDeShippingAtTest extends BaseTest {
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
 			billingAddress = prop.getProperty("billingAddress");
+			taxClass = prop.getProperty("taxClass");
 		
 
 		} catch (IOException ex) {
