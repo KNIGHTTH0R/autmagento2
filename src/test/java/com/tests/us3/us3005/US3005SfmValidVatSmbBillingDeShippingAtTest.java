@@ -78,7 +78,6 @@ public class US3005SfmValidVatSmbBillingDeShippingAtTest extends BaseTest {
 	
 	private String username, password;
 	private static String billingAddress;
-	private static String shippingAddress;
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
@@ -118,7 +117,6 @@ public class US3005SfmValidVatSmbBillingDeShippingAtTest extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
@@ -152,7 +150,6 @@ public class US3005SfmValidVatSmbBillingDeShippingAtTest extends BaseTest {
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 		BasicProductModel productData;
-		
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_25);

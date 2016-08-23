@@ -32,6 +32,12 @@ public class CartDiscountsCalculation {
 		return String.valueOf(IP.multiply(qty).intValue());
 	}
 
+	/**
+	 * @param askingPrice
+	 * @param discount
+	 * @param delta
+	 * @return  Returns the final price based on delta which remains from the previous product
+	 */
 	public static String calculateFinalPrice(String askingPrice, String discount, String delta) {
 
 		BigDecimal result = BigDecimal.ZERO;
@@ -42,15 +48,22 @@ public class CartDiscountsCalculation {
 		BigDecimal disc = BigDecimal.valueOf(Double.parseDouble(discount));
 		BigDecimal deltaAmount = BigDecimal.valueOf(Double.parseDouble(delta));
 
+		//delta is 0 for sample and marketing material products
 		if (discount != ConfigConstants.DISCOUNT_25)
 			deltaAmount = BigDecimal.ZERO;
 
 		discountValue = askPrice.multiply(disc);
+		//we calculate the result with 5 decimals in order to have the four decimals unmodified
 		diff = discountValue.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+		//the delta is added to the discount
 		diff = diff.add(deltaAmount);
+		// the discount after delta is added must have 2 decimals
 		discountValue = diff.setScale(2, BigDecimal.ROUND_HALF_UP);
+		// the difference (the remaining delta for the next product must have 4 decimals)
 		diff = diff.setScale(4, BigDecimal.ROUND_HALF_UP);
+		//the diff will be the result after substracting the 2 decimals result from the 4 decimals rto haesult (Ex: 13.4550 - 13.45 = -0.0050)
 		diff = diff.subtract(discountValue);
+		//we set the value of diff for the static variable CartCalculator.delta
 		CartCalculator.delta = String.valueOf(diff);
 		result = askPrice.subtract(discountValue);
 
@@ -329,9 +342,7 @@ public class CartDiscountsCalculation {
 
 		}
 		discountAndRemainder[0] = String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
-		System.out.println(discountAndRemainder[0]);
 		discountAndRemainder[1] = String.valueOf(diff.setScale(4, BigDecimal.ROUND_HALF_UP));
-		System.out.println(discountAndRemainder[1]);
 
 		return discountAndRemainder;
 	}
