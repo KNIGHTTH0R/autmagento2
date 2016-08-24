@@ -23,9 +23,10 @@ public class MailinatorPage extends AbstractPage {
 	@FindBy(id = "publicshowmaildivcontent")
 	private WebElement iFrameElement;
 
-	public void openEmail(String email,String title) {
-		
+	public void openEmail(String email, String title) {
+
 		navigate(UrlConstants.MAILINATOR_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email);
+		getDriver().navigate().refresh();
 		waitABit(TimeConstants.TIME_MEDIUM);
 		element(inboxContainer).waitUntilVisible();
 		boolean foundEmail = false;

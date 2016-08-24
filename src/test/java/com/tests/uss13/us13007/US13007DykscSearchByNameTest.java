@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,9 +27,13 @@ import com.tools.generalCalculation.StylistListCalculation;
 import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
 import com.workflows.frontend.DysksWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US13.7 DYKSC By Name Assignation", type = "Scenarios")
 @Story(Application.Distribution.US13_7.class)

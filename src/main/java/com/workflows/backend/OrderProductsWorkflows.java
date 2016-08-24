@@ -3,15 +3,14 @@ package com.workflows.backend;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
-
 import org.junit.Assert;
 
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.utils.PrintUtils;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Steps;
 
 public class OrderProductsWorkflows {
 	
@@ -34,7 +33,6 @@ public class OrderProductsWorkflows {
 			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getProdCode(), productNow.getQuantity(), orderProducts);
 
 
-			PrintUtils.printProductsComparisonBackend(productNow, compare);
 			if (compare.getProductName() != null && (productNow.getQuantity().contentEquals(compare.getNumber()))) {
 				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
 				orderValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getOriginalPrice());

@@ -182,7 +182,6 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		customVerifications.printErrors();
-
 	}
 
 	@After

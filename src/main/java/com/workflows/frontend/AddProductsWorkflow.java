@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Title;
 
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
+import com.tools.cartcalculations.smf.CartCalculator;
 import com.tools.cartcalculations.smf.CartDiscountsCalculation;
 import com.tools.constants.ConfigConstants;
 import com.tools.data.frontend.BasicProductModel;
@@ -41,7 +42,7 @@ public class AddProductsWorkflow {
 			String discountclass) {
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
 		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
-		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass);
+		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass,CartCalculator.delta);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 		if (discountclass.equals(ConfigConstants.DISCOUNT_50) || discountclass.equals(ConfigConstants.DISCOUNT_0)) {
 			ipPoints = "0";
@@ -56,7 +57,7 @@ public class AddProductsWorkflow {
 	public BasicProductModel updateBasicProductToCart(ProductDetailedModel model, String qty, String productProperty,
 			String discountclass) {
 		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
-		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass);
+		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass,CartCalculator.delta);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 		if (discountclass.equals(ConfigConstants.DISCOUNT_50) || discountclass.equals(ConfigConstants.DISCOUNT_0)) {
 			ipPoints = "0";
