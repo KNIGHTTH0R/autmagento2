@@ -26,7 +26,7 @@ public class PomCartTotalsCalculation {
 
 		// the discount is equal to the first product added into the cart price
 		discount = discount.add(BigDecimal.valueOf(Double.parseDouble(productsList.get(0).getUnitPrice())));
-		result.setPomDiscount(String.valueOf(discount.negate().setScale(2, RoundingMode.HALF_UP)));
+		result.setPomDiscount(String.valueOf(discount.setScale(2, RoundingMode.HALF_UP)));
 		
 		totalAmount = subtotal.subtract(discount);
 		result.setTotalAmount(String.valueOf(totalAmount.setScale(2, RoundingMode.HALF_UP)));
