@@ -1,4 +1,4 @@
-package com.tests.us3.us3002;
+package com.tests.us3.us3005;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,11 +46,11 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT", type = "Scenarios")
-@Story(Application.ShopForMyselfCart.US3_2.class)
+@WithTag(name = "US3.5 Shop for myself 0.01 Euro difference",type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_5.class)
 @RunWith(SerenityRunner.class)
-public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
-
+public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
+	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -73,48 +73,57 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ValidationWorkflows validationWorkflows;
-	@Steps
+	@Steps 
 	public CustomVerification customVerifications;
-
+	
 	private String username, password;
+	private static String billingAddress;
+	private static String shippingAddress;
 	private static String jewelryDiscount;
 	private static String marketingDiscount;
 	private static String shippingValue;
 	private static String taxClass;
-	private static String billingAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private ProductDetailedModel genProduct1 = new ProductDetailedModel();;
 	
+	private ProductDetailedModel genProduct1= new ProductDetailedModel();
+	private ProductDetailedModel genProduct2= new ProductDetailedModel();
+
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
 
+	
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		productsList = MongoReader.grabBasicProductModel("US3002BuyProductsForTheFirstTimeTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabBasicProductModel("US3005BuyProductsForTheFirstTimeTest" + SoapKeys.GRAB);
 
 		genProduct1.setName(productsList.get(0).getName());
 		genProduct1.setSku(productsList.get(0).getProdCode());
-		genProduct1.setIp("84");
-		genProduct1.setPrice("49.90");
+		genProduct1.setIp("50");
+		genProduct1.setPrice("29.90");
+		
+		genProduct2.setName(productsList.get(1).getName());
+		genProduct2.setSku(productsList.get(1).getProdCode());
+		genProduct2.setIp("60");
+		genProduct2.setPrice("34.90");
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(
-					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3002.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3005.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
+			shippingAddress = prop.getProperty("shippingAddress");
 			jewelryDiscount = prop.getProperty("jewelryDiscount");
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
-
+			
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -132,7 +141,7 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 	}
 
 	@Test
-	public void us3002SfmValidVatNoSmbBillingDeShippingAtTest() {
+	public void us3005SfmScenario2For001DifferenceTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -143,11 +152,14 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 		BasicProductModel productData;
-
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
+		
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
+		CartCalculator.productsList25.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
 		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 		
+
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
@@ -157,7 +169,7 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
-
+		
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
@@ -177,19 +189,17 @@ public class US3002SfmValidVatNoSmbBillingDeShippingAtTest extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-
+		
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		validationWorkflows.performCartValidations();
-
+		
 		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts,
-				getClass().getSimpleName() + SoapKeys.CALC);
-		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
-				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
