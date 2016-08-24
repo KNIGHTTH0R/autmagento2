@@ -1,5 +1,6 @@
 package com.tests.us3.us3001;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.cartcalculations.smf.CartCalculation;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.data.CalcDetailsModel;
@@ -35,7 +37,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT",type = "Scenarios")
+@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
 public class US3001ValidateOrderBackOfficeTest extends BaseTest {
@@ -50,7 +52,7 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 	public OrderWorkflows orderWorkflows;
 	@Steps
 	public OrderProductsWorkflows orderProductsWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
@@ -65,10 +67,14 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
-		productsList = MongoReader.grabBasicProductModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader
+				.getOrderModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+		productsList = MongoReader
+				.grabBasicProductModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+		shippingModelList = MongoReader
+				.grabShippingModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader
+				.grabCalcDetailsModels("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -78,13 +84,15 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 		}
 
 		if (calcDetailsModelList.size() != 1) {
-			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
+			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList,
+					calcDetailsModelList.size() == 1);
 		}
 
 		if (shippingModelList.size() != 1) {
-			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
+			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList,
+					calcDetailsModelList.size() == 1);
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
@@ -95,8 +103,14 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 		shopTotalsModel.setTotalAmount(shippingModelList.get(0).getTotalAmount());
 		// from calcDetails model calculations
 		shopTotalsModel.setTotalIP(calcDetailsModelList.get(0).getIpPoints());
-		shopTotalsModel.setTotalMarketingBonus(calcDetailsModelList.get(0).getMarketingBonus());
-		shopTotalsModel.setTotalBonusJeverly(calcDetailsModelList.get(0).getJewelryBonus());
+		shopTotalsModel.setTotalMarketingBonus(CartCalculation
+				.apply119VAT(BigDecimal.valueOf(Double.parseDouble(calcDetailsModelList.get(0).getMarketingBonus())), 2,
+						BigDecimal.ROUND_HALF_DOWN)
+				.toString());
+		shopTotalsModel.setTotalBonusJeverly(CartCalculation
+				.apply119VAT(BigDecimal.valueOf(Double.parseDouble(calcDetailsModelList.get(0).getJewelryBonus())), 2,
+						BigDecimal.ROUND_HALF_DOWN)
+				.toString());
 		// Constants added
 		// shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
 		shopTotalsModel.setTax("0.00");
@@ -126,9 +140,10 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 
 		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
-		
-//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
-		
+
+		// orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(),
+		// "Zahlung geplant");
+
 		customVerifications.printErrors();
 	}
 
