@@ -21,18 +21,18 @@ public class YopmailPage extends AbstractPage {
 
 	@FindBy(css = "iframe#ifmail")
 	private WebElement iFrameElement;
-	
+
 	@FindBy(id = "ifinbox")
 	private WebElement iFrameInbox;
-	
+
 	@FindBy(id = "login")
 	private WebElement emailInput;
-	
+
 	@FindBy(css = "input[type='submit']")
 	private WebElement submitEmailBtn;
 
-	public void openEmail(String email,String title) { 
-		
+	public void openEmail(String email, String title) {
+
 		navigate(UrlConstants.YOPMAIL_WEB_MAIL);
 		element(emailInput).clear();
 		element(emailInput).sendKeys(email);
@@ -53,21 +53,28 @@ public class YopmailPage extends AbstractPage {
 		Assert.assertTrue("The email with the title " + title + " was not found", foundEmail);
 	}
 
-	public String getConfirmationEmail() {
-		
+	public String getConfirmationLink() {
+
+		getDriver().switchTo().frame(iFrameElement);
+		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
+		return confirmLink;
+	}
+
+	public String getRegisterLink() {
+
 		getDriver().switchTo().frame(iFrameElement);
 		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
 		return confirmLink;
 	}
 
 	public void clickConfirmEmail() {
-		
+
 		getDriver().switchTo().frame(iFrameElement);
 		getDriver().findElement(By.cssSelector("a[href*='confirm']")).click();
 	}
 
 	public String grabCouponCode() {
-		
+
 		getDriver().switchTo().frame(iFrameElement);
 		return getDriver().findElement(By.cssSelector("table[bgcolor='#FFFFFF'] tbody > tr:nth-child(3)")).getText();
 	}

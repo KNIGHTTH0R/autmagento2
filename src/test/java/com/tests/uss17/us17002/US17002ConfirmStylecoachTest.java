@@ -38,7 +38,7 @@ public class US17002ConfirmStylecoachTest extends BaseTest {
 	@Test
 	public void us17002ConfirmStylecoachTest() {
 
-		emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+		emailClientSteps.confirmAccount(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 
 	}
 

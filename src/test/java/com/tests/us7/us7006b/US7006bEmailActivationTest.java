@@ -46,7 +46,7 @@ public class US7006bEmailActivationTest extends BaseTest{
 	
 	@Test
 	public void us7006bEmailActivationTest() {
-		emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+		emailClientSteps.confirmAccount(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		customVerifications.printErrors();
 	}
 	

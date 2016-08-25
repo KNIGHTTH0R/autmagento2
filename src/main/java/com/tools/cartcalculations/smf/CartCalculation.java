@@ -11,124 +11,10 @@ import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.utils.FormatterUtils;
 
 public class CartCalculation {
 
-	/**
-	 * Return product price based on (price - quantity - discount). Discount may
-	 * be 25 or 50.
-	 * 
-	 * @param product
-	 * @return
-	 */
-	public static BigDecimal calculateCartProductsByDiscount(CartProductModel product) {
-
-		BigDecimal productPrice = BigDecimal.valueOf(0);
-
-		if (product.getDiscountClass().contentEquals("25")) {
-			productPrice = productPrice.add(FormatterUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
-			productPrice = productPrice.multiply(FormatterUtils.cleanNumberToBigDecimal(product.getQuantity()));
-			productPrice = productPrice.multiply(BigDecimal.valueOf(25));
-			productPrice = productPrice.divide(BigDecimal.valueOf(100));
-		}
-		if (product.getDiscountClass().contentEquals("50")) {
-			productPrice = productPrice.add(FormatterUtils.cleanNumberToBigDecimal(product.getUnitPrice()));
-			productPrice = productPrice.multiply(FormatterUtils.cleanNumberToBigDecimal(product.getQuantity()));
-			productPrice = productPrice.multiply(BigDecimal.valueOf(50));
-			productPrice = productPrice.divide(BigDecimal.valueOf(100));
-		}
-		return productPrice;
-	}
-
-	public static CalculationModel calculateTableProducts(List<CartProductModel> cartList) {
-		CalculationModel result = new CalculationModel();
-		BigDecimal askingPriceSum = BigDecimal.valueOf(0);
-		BigDecimal finalPriceSum = BigDecimal.valueOf(0);
-		int ipSum = 0;
-
-		if (cartList.size() > 0) {
-
-			result.setTableType(cartList.get(0).getDiscountClass());
-
-			for (CartProductModel cartProductModel : cartList) {
-				BigDecimal transport = BigDecimal.valueOf(0);
-				transport = transport.add(FormatterUtils.cleanNumberToBigDecimal(cartProductModel.getUnitPrice()));
-				transport = transport.multiply(FormatterUtils.cleanNumberToBigDecimal(cartProductModel.getQuantity()));
-				askingPriceSum = askingPriceSum.add(transport);
-
-				ipSum += FormatterUtils.cleanNumberToInt(cartProductModel.getPriceIP());
-			}
-
-			int calcValue = checkCalculusType(result.getTableType());
-
-			BigDecimal partTwo = BigDecimal.valueOf(0);
-
-			partTwo = partTwo.add(askingPriceSum);
-			partTwo = partTwo.multiply(BigDecimal.valueOf(calcValue));
-			partTwo = partTwo.divide(BigDecimal.valueOf(100));
-
-			finalPriceSum = finalPriceSum.add(askingPriceSum);
-			finalPriceSum = finalPriceSum.subtract(partTwo);
-
-			result.setAskingPrice(askingPriceSum);
-			result.setFinalPrice(finalPriceSum);
-			result.setIpPoints(ipSum);
-
-//			PrintUtils.printCalculationModel(result);
-
-		} else {
-			System.out.println("Failure: Product list is empty!!! - see Calculus Steps");
-		}
-		return result;
-
-	}
-
-	public static CalculationModel calculateTotalSum(List<CalculationModel> totalsList) {
-		CalculationModel result = new CalculationModel();
-		BigDecimal askingPrice = BigDecimal.valueOf(0);
-		BigDecimal finalPrice = BigDecimal.valueOf(0);
-		int ipPoints = 0;
-
-		for (CalculationModel total : totalsList) {
-
-			if (total.getAskingPrice() != null) {
-				askingPrice = askingPrice.add(total.getAskingPrice());
-			}
-
-			if (total.getFinalPrice() != null) {
-				finalPrice = finalPrice.add(total.getFinalPrice());
-			}
-
-			ipPoints += total.getIpPoints();
-		}
-
-		finalPrice = finalPrice.divide(BigDecimal.valueOf(100)).setScale(2, BigDecimal.ROUND_DOWN);
-		askingPrice = askingPrice.divide(BigDecimal.valueOf(100));
-
-		result.setAskingPrice(askingPrice);
-		result.setFinalPrice(finalPrice);
-		result.setIpPoints(ipPoints);
-
-		return result;
-	}
-
-	private static int checkCalculusType(String tableType) {
-		int result = 0;
-
-		if (tableType.contentEquals(ConfigConstants.DISCOUNT_25)) {
-			result = 25;
-		}
-		if (tableType.contentEquals(ConfigConstants.DISCOUNT_50)) {
-			result = 50;
-		}
-		if (tableType.contentEquals(ConfigConstants.DISCOUNT_0)) {
-			result = 0;
-		}
-		return result;
-	}
 
 	private static BigDecimal calculateUsedJewelryBonus(List<CartProductModel> productsList, String jewelryDiscount) {
 
@@ -658,22 +544,6 @@ public class CartCalculation {
 		return result;
 	}
 
-	public static List<ProductBasicModel> remove119VAT(List<ProductBasicModel> productsList) {
-
-		List<ProductBasicModel> result = new ArrayList<ProductBasicModel>();
-
-		for (ProductBasicModel productBasicModel : productsList) {
-			ProductBasicModel now = new ProductBasicModel();
-
-			now.setName(productBasicModel.getName());
-			now.setQuantity(productBasicModel.getQuantity());
-			now.setType(productBasicModel.getType());
-			now.setPrice(apply119VAT(BigDecimal.valueOf(Double.parseDouble(productBasicModel.getPrice())), 2, BigDecimal.ROUND_HALF_DOWN).toString());
-
-			result.add(now);
-		}
-		return result;
-	}
 
 	public static List<BasicProductModel> remove19(List<BasicProductModel> productsList) {
 

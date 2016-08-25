@@ -7,17 +7,27 @@ import com.tools.utils.DateUtils;
 import net.thucydides.core.annotations.Step;
 
 public class EmailClientSteps extends AbstractSteps {
-	
+
 	MailinatorPage mailPage;
-//	YopmailPage mailPage;
+	// YopmailPage mailPage;
 
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public String grabEmail(String email, String title) {
+	public String confirmAccount(String email, String title) {
 
-		mailPage.openEmail(email,title);
-		navigate(mailPage.getConfirmationEmail());
+		mailPage.openEmail(email, title);
+		navigate(mailPage.getConfirmationLink());
+
+		return DateUtils.getCurrentDate("MM/dd/YYYY");
+
+	}
+
+	@Step
+	public String registerFromLink(String email, String title) {
+
+		mailPage.openEmail(email, title);
+		navigate(mailPage.getRegisterLink());
 
 		return DateUtils.getCurrentDate("MM/dd/YYYY");
 
@@ -25,16 +35,16 @@ public class EmailClientSteps extends AbstractSteps {
 
 	@Step
 	public String grabConfirmationLinkFromEmail(String email, String title) {
-		
-		mailPage.openEmail(email,title);
-		
-		return mailPage.getConfirmationEmail();
+
+		mailPage.openEmail(email, title);
+
+		return mailPage.getConfirmationLink();
 	}
 
 	@Step
 	public String grabEmailCoupon(String email, String title) {
 
-		mailPage.openEmail(email,title);
+		mailPage.openEmail(email, title);
 
 		return mailPage.grabCouponCode();
 	}
@@ -42,7 +52,7 @@ public class EmailClientSteps extends AbstractSteps {
 	@Step
 	public void validateThatEmailIsReceived(String email, String title) {
 
-		mailPage.openEmail(email,title);
+		mailPage.openEmail(email, title);
 
 	}
 

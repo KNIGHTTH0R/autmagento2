@@ -48,7 +48,7 @@ public class US15004ConfirmCustomerTest extends BaseTest {
 	@Test
 	public void us15004ConfirmCustomerTest() throws Exception {
 
-		dateModel.setDate(emailClientSteps.grabEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""),
+		dateModel.setDate(emailClientSteps.confirmAccount(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.NEWSLETTER_MAIL_SUBJECT));
 		ApacheHttpHelper.sendGet(
 				EnvironmentConstants.CHANGE_EMAIL_JOB_TRIGGER_URL + stylistEmail + EnvironmentConstants.JOB_TOKEN,

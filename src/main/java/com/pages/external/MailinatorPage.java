@@ -42,7 +42,13 @@ public class MailinatorPage extends AbstractPage {
 		Assert.assertTrue("The email with the title " + title + " was not found", foundEmail);
 	}
 
-	public String getConfirmationEmail() {
+	public String getConfirmationLink() {
+		getDriver().switchTo().frame(iFrameElement);
+		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
+		return confirmLink;
+	}
+	
+	public String getRegisterLink() {
 		getDriver().switchTo().frame(iFrameElement);
 		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
 		return confirmLink;
