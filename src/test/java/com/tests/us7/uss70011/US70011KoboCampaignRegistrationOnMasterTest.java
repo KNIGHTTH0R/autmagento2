@@ -171,7 +171,8 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 
 		String orderId = orderHistory.get(0).getOrderId();
 		profileSteps.verifyOrderId(orderId, RegularUserDataGrabber.orderModel.getOrderId());
-
+		System.out.println(DataGrabber.shippingTotals.getDiscountPrice() + " " + 
+				PomCartCalculator.shippingCalculatedModel.getDiscountPrice());
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals,
 				PomCartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");

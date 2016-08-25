@@ -331,6 +331,7 @@ public class CartDiscountsCalculation {
 			diff = result.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
 			diff = diff.add(deltaDiscount);// add delta discount from previous
 											// product
+			System.out.println("fucking diff: " + diff);
 			// the calculated discount is rounded to 2 decimals- actual discount
 			result = diff.setScale(2, BigDecimal.ROUND_HALF_UP);
 			// the calculated discount is rounded to 4 decimals (expected)

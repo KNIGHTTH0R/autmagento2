@@ -35,7 +35,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US3.5 Shop for myself VAT valid and SMB billing DE and shipping AT",type = "Scenarios")
+@WithTag(name = "US3.5 Shop for myself 0.01 Euro difference",type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_5.class)
 @RunWith(SerenityRunner.class)
 public class US3005ValidateOrderBackOfficeTest extends BaseTest {
@@ -65,10 +65,10 @@ public class US3005ValidateOrderBackOfficeTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3005SfmValidVatSmbBillingDeShippingAtTest" + SoapKeys.GRAB);
-		productsList = MongoReader.grabBasicProductModel("US3005SfmValidVatSmbBillingDeShippingAtTest" + SoapKeys.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US3005SfmValidVatSmbBillingDeShippingAtTest" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3005SfmValidVatSmbBillingDeShippingAtTest" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3005SfmScenario2For001DifferenceTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabBasicProductModel("US3005SfmScenario2For001DifferenceTest" + SoapKeys.GRAB);
+		shippingModelList = MongoReader.grabShippingModel("US3005SfmScenario2For001DifferenceTest" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3005SfmScenario2For001DifferenceTest" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
