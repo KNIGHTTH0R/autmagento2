@@ -121,5 +121,8 @@ public class US10006CreatePartyWithNewContactHostTest extends BaseTest {
 
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName()+ SoapKeys.GRAB);
+		
+	
 	}
 }

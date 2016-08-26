@@ -63,6 +63,7 @@ public class ContextConstants {
 	public static String SUCCESFULL_REGISTRATION = MongoReader.getDictionaryItem("SUCCESFULL_REGISTRATION");
 	public static String MEIN_STYLE_COACH = MongoReader.getDictionaryItem("MEIN_STYLE_COACH");
 	public static String MEINE_BESTELLUNGEN = MongoReader.getDictionaryItem("MEINE_BESTELLUNGEN");
+	public static String MEINE_PARTIES = MongoReader.getDictionaryItem("MEINE_PARTIES");
 
 	public static String INVITE_HOSTESS = MongoReader.getDictionaryItem("INVITE_HOSTESS");
 	public static String UPDATE_PARTY = MongoReader.getDictionaryItem("UPDATE_PARTY");

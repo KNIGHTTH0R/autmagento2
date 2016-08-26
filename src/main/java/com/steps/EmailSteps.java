@@ -91,4 +91,5 @@ public class EmailSteps extends AbstractSteps {
 		getDriver().get(link);
 		return link;
 	}
+	
 }

@@ -50,7 +50,7 @@ public class MailinatorPage extends AbstractPage {
 	
 	public String getRegisterLink() {
 		getDriver().switchTo().frame(iFrameElement);
-		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
+		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='/customer/party/confirm']")).getAttribute("href");
 		return confirmLink;
 	}
 

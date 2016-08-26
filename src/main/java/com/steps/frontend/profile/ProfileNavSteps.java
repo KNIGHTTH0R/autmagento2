@@ -1,5 +1,6 @@
 package com.steps.frontend.profile;
 
+import com.tools.CustomVerification;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;
@@ -12,4 +13,15 @@ public class ProfileNavSteps extends AbstractSteps {
 	public void selectMenu(String menu) {
 		profileNavPage().selectMenu(menu);
 	}
+	
+	
+	@Step
+	public void clickStylePartyDetailsButton() {
+		profileNavPage().clickStylePartyDetailsButton();
+	}
+	@Step
+	public void inviteGuestsToPartyButton() {
+		profileNavPage().inviteGuestsToPartyButton();
+	}
+	
 }
