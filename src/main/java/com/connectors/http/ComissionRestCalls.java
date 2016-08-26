@@ -19,7 +19,7 @@ public class ComissionRestCalls {
 		// System.setProperty("http.proxyHost", "localhost");
 		// System.setProperty("http.proxyPort", "8080");
 
-		ComissionRestCalls.getStylistInfo("1835");
+		ComissionRestCalls.getStylistInfo("6000");
 		// ComissionRestCalls.getPartyPerformanceInfo("57937");
 
 	}

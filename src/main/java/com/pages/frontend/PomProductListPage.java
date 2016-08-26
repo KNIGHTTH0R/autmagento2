@@ -1,16 +1,17 @@
 package com.pages.frontend;
 
 import java.util.List;
-
-import net.serenitybdd.core.annotations.findby.FindBy;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class PomProductListPage extends AbstractPage {
 
@@ -28,6 +29,8 @@ public class PomProductListPage extends AbstractPage {
 
 				String url = webElement.findElement(By.cssSelector("div div a")).getAttribute("href");
 				elementjQueryClick("a[href='" + url + "']");
+				withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions
+						.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 				waitABit(TimeConstants.WAIT_TIME_SMALL);
 				found = true;
 				break theFor;
