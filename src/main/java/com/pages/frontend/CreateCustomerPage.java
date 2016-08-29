@@ -109,7 +109,7 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(css = "button[name='search_by_name_submit']")
 	private WebElement searchByNameSubmitButton;
 
-	@FindBy(id = "advice-validate-length-zip")
+	@FindBy(css = "div[id*='advice-validate-zip']")
 	private WebElement zipValidationMessage;
 
 	// ---------------------------------------------------

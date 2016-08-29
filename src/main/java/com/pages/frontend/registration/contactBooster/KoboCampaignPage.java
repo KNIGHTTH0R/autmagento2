@@ -47,7 +47,7 @@ public class KoboCampaignPage extends AbstractPage {
 	@FindBy(css = "#selectContainer input#by_default")
 	private WebElement noInviteCheckbox;
 	
-	@FindBy(id = "advice-validate-length-zip")
+	@FindBy(css = "div[id*='advice-validate-zip']")
 	private WebElement zipValidationMessage;
 
 	// ---------------------------------------------------

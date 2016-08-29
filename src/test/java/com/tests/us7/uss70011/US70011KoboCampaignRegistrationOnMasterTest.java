@@ -7,11 +7,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,13 +41,17 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.PomProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
-import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AdyenWorkflows;
 import com.workflows.frontend.ShippingAndConfirmationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US7.11 Kobo Campaign Registration On Master Test ", type = "Scenarios")
 @Story(Application.KoboCampaign.US7_11.class)
@@ -170,9 +169,7 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
 		String orderId = orderHistory.get(0).getOrderId();
-		profileSteps.verifyOrderId(orderId, RegularUserDataGrabber.orderModel.getOrderId());
-		System.out.println(DataGrabber.shippingTotals.getDiscountPrice() + " " + 
-				PomCartCalculator.shippingCalculatedModel.getDiscountPrice());
+		profileSteps.verifyOrderId(orderId, DataGrabber.orderModel.getOrderId());
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals,
 				PomCartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");

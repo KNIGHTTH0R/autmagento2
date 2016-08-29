@@ -127,7 +127,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(id = "fancybox-close")
 	private WebElement closeInfoBox;
 
-	@FindBy(id = "advice-validate-length-zip")
+	@FindBy(css = "div[id*='advice-validate-zip']")
 	private WebElement zipValidationMessage;
 
 	// ---------------------------------------------------
