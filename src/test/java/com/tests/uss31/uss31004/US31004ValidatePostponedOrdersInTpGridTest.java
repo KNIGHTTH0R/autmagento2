@@ -1,4 +1,4 @@
-package com.tests.uss31.uss31001;
+package com.tests.uss31.uss31004;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -16,7 +16,6 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.MagentoProductCalls;
-import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.backend.termPurchase.TermPurchaseGridSteps;
@@ -33,17 +32,16 @@ import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.TermPurchase.TermPurcaseOrderValidationWorkflows;
 import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
-@WithTag(name = "US31.1 TP execution cron - Semiautomated", type = "Scenarios")
-@Story(Application.TermPurchaseExecution.US31_1.class)
+@WithTag(name = "US31.1 TP execution cron - Automated Only Release", type = "Scenarios")
+@Story(Application.TermPurchaseExecution.US31_4.class)
 @RunWith(SerenityRunner.class)
-public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
+public class US31004ValidatePostponedOrdersInTpGridTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -63,31 +61,39 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 	public TermPurcaseOrderValidationWorkflows termPurcaseOrderValidationWorkflows;
 
 	TermPurchaseOrderModel expectedModel1;
-	TermPurchaseOrderModel expectedModel2;
 
-	private String prod1IncrementId, prod2IncrementId;
-	private ProductDetailedModel updated1Product, updated2Product;
+	private String prod3IncrementId, prod2IncrementId;
+	private ProductDetailedModel updated2Product, updated3Product;
 
 	private static List<HostBasicProductModel> productsListTp1 = new ArrayList<HostBasicProductModel>();
 	private static ProductDetailedModel detailedProdListTp1 = new ProductDetailedModel();
 	OrderModel orderModelListTp1 = new OrderModel();
 	OrderModel orderModelListTp2 = new OrderModel();
+	OrderModel orderModelListTp3 = new OrderModel();
 
 	@Before
-	public void setUp() throws ParseException {
+	public void setUp() throws Exception {
 
-		orderModelListTp1 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP1").get(0);
-		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP1")
-				.get(0);
-		productsListTp1 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP1");
-		prod1IncrementId = MongoReader.grabIncrementId("US31001PartyHostBuysForCustomerTpTest" + "TP1");
+		orderModelListTp1 = MongoReader.getOrderModel("US31004PartyHostBuysForCustomerTpTest" + "TP1").get(0);
+		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31004PartyHostBuysForCustomerTpTest" + "TP1").get(0);
+		productsListTp1 = MongoReader.grabHostBasicProductModel("US31004PartyHostBuysForCustomerTpTest" + "TP1");
+		
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId() + EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 
-		orderModelListTp2 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP2").get(0);
-		prod2IncrementId = MongoReader.grabIncrementId("US31001PartyHostBuysForCustomerTpTest" + "TP2");
+		prod2IncrementId = MongoReader.grabIncrementId("US31004PartyHostBuysForCustomerTpTest" + "TP2");
+		orderModelListTp2 = MongoReader.getOrderModel("US31004PartyHostBuysForCustomerTpTest" + "TP2").get(0);
+
+		prod3IncrementId = MongoReader.grabIncrementId("US31004PartyHostBuysForCustomerTpTest" + "TP3");
+		orderModelListTp3 = MongoReader.getOrderModel("US31004PartyHostBuysForCustomerTpTest" + "TP3").get(0);
 
 		expectedModel1 = new TermPurchaseOrderModel();
 		expectedModel1.setIncrementId(orderModelListTp1.getOrderId());
-		expectedModel1.setExecutionDate(DateUtils.getCurrentDate("yyyy-MM-dd"));
+
+		String executionDate = DateUtils.getCurrentDate("yyyy-MM-dd");
+
+		expectedModel1.setExecutionDate(executionDate);
 		expectedModel1.setProductSku(productsListTp1.get(0).getProdCode());
 		expectedModel1.setIsDiscontinued(
 				detailedProdListTp1.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
@@ -102,41 +108,19 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		expectedModel1.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(),
 				productsListTp1.get(0).getQuantity()));
 
-		expectedModel2 = new TermPurchaseOrderModel();
-		expectedModel2.setIncrementId(orderModelListTp1.getOrderId());
-		expectedModel2.setExecutionDate(
-				DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 7));
-		expectedModel2.setProductSku(productsListTp1.get(0).getProdCode());
-		expectedModel2.setIsDiscontinued(
-				detailedProdListTp1.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
-		expectedModel2.setEarliestAv(detailedProdListTp1.getStockData().getEarliestAvailability());
-		expectedModel2.setInStock(detailedProdListTp1.getStockData().getIsInStock().contentEquals("1") ? "Yes" : "No");
-		expectedModel2.setMinimumQty(detailedProdListTp1.getStockData().getMinQty());
-		expectedModel2.setBoughtQty(productsListTp1.get(0).getQuantity());
-		expectedModel2.setReason(ConfigConstants.REASON_POSTPONED_EARLIEST_AV_CHANGED);
-		expectedModel2.setRecomandation(ConfigConstants.RECOMMENDATION_TO_POSTPONE);
-		expectedModel2.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
-		expectedModel2.setScheduledPaymentStatus(ConfigConstants.POSTPONED);
-		expectedModel2.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(),
-				productsListTp1.get(0).getQuantity()));
-
-		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
-
 	}
 
 	@Test
-	public void us31001ValidatePostponedOrdersInTpGridTest() throws ParseException {
+	public void us31004ValidatePostponedOrdersInTpGridTest() throws ParseException {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp1.getOrderId());
 
-		TermPurchaseOrderModel grabbedModel1 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp1.getOrderId());
-		termPurchaseGridSteps.postponeOrder(orderModelListTp1.getOrderId());
-		termPurchaseGridSteps.validateMessage(ConfigConstants.POSTPONE_SUCCESS_MESSAGE);
-		TermPurchaseOrderModel grabbedModel2 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp1.getOrderId());
+		TermPurchaseOrderModel grabbedModel1 = termPurchaseGridSteps
+				.grabOrderDetails(orderModelListTp1.getOrderId());
+		// termPurchaseGridSteps.validateMessage(ConfigConstants.POSTPONE_SUCCESS_MESSAGE);
 
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel1, expectedModel1);
-		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel2, expectedModel2);
 
 		customVerifications.printErrors();
 
@@ -144,34 +128,33 @@ public class US31001ValidatePostponedOrdersInTpGridTest extends BaseTest {
 
 	@After
 	public void runCron() throws Exception {
-		// update the first product to have recommendation to cancel, because at
-		// least one item is sold out
-		updated1Product = MagentoProductCalls.updateProductStockModel();
-		updated1Product.getStockData().setMinQty("-10");
-		updated1Product.getStockData().setQty("-10");
-		updated1Product.getStockData().setIsInStock("0");
-		updated1Product.getStockData().setIsDiscontinued("1");
-		MagentoProductCalls.updateApiProduct(updated1Product, prod1IncrementId);
 
-		// update the second product to have recommendation to release
 		updated2Product = MagentoProductCalls.updateProductStockModel();
+		updated2Product.getStockData().setMinQty("-10");
+		updated2Product.getStockData().setQty("-10");
+		updated2Product.getStockData().setIsInStock("0");
 		updated2Product.getStockData().setIsDiscontinued("1");
 		MagentoProductCalls.updateApiProduct(updated2Product, prod2IncrementId);
 
-		// script for updating deliveryDates to today
-		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId()
-				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+		updated3Product = MagentoProductCalls.updateProductStockModel();
+		updated3Product.getStockData().setIsDiscontinued("1");
+		updated3Product.getStockData().setQty("10");
+		MagentoProductCalls.updateApiProduct(updated3Product, prod3IncrementId);
+
 		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId()
+				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId()
 				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
 		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
 				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
-		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_POSTPONE_CANCEL_EMAIL_SCRIPT, EnvironmentConstants.USERNAME,
-				EnvironmentConstants.PASSWORD);
-
-		MongoWriter.saveTermPurchaseModel(expectedModel2, getClass().getSimpleName() + "TP1");
-
+		
+//		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+//		 ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp2.getOrderId() + EnvironmentConstants.JOB_TOKEN);
+//		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+//		 ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId() + EnvironmentConstants.JOB_TOKEN);
+//		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+//	     ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
 	}
 
 }

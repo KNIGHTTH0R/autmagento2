@@ -32,8 +32,8 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 
-@WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT", type = "Scenarios")
-@Story(Application.ShopForMyselfCart.US3_2.class)
+@WithTag(name = "US31.1 TP execution cron - Semiautomated", type = "Scenarios")
+@Story(Application.TermPurchaseExecution.US31_1.class)
 @RunWith(SerenityRunner.class)
 public class US31001ValidatePostponeEmailForStylistTest extends BaseTest {
 

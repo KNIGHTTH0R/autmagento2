@@ -14,8 +14,8 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US4.1 Shop for myself with JB,MMB and Buy 3 get 1 for 50 %", type = "Scenarios")
-@Story(Application.ShopForMyselfCart.US4_1.class)
+@WithTag(name = "US31.1 TP execution cron - Manual", type = "Scenarios")
+@Story(Application.TermPurchaseExecution.US31_3.class)
 @RunWith(SerenityRunner.class)
 public class US31003ActivateManualCronTest extends BaseTest {
 

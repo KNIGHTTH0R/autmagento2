@@ -388,8 +388,14 @@ public class Application {
 	}
 	
 	@Feature
-	public class CustomerRegistrationIoana {
-		public class US33_1 {
+	public class TermPurchaseExecution {
+		public class US31_1 {
+		}
+		public class US31_2 {
+		}
+		public class US31_3 {
+		}
+		public class US31_4 {
 		}
 	}
 }

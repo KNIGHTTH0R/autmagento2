@@ -18,9 +18,9 @@ import com.tests.uss31.US31003.US31003ValidateReleaseEmailForStylistTest;
 	US31003ActivateManualCronTest.class,
 	US31003PartyHostBuysForCustomerTpTest.class,
 	US31003ValidatePostponedByAdminOrdersInTpGridTest.class,
+	US31003ValidateCanceledAndReleasedByAdminOrdersInTpGridTest.class,
 	US31003ValidatePostponeEmailForCustomerTest.class,
 	US31003ValidatePostponeEmailForStylistTest.class,
-	US31003ValidateCanceledAndReleasedByAdminOrdersInTpGridTest.class,
 	US31003ValidateCancelEmailForCustomerTest.class,
 	US31003ValidateCancelEmailForStylistTest.class,
 	US31003ValidateReleaseEmailForStylistTest.class//inca nu merge pentru ca nu se face automat payment complete orderul

@@ -1,4 +1,4 @@
-package com.tests.uss31.US31003;
+package com.tests.uss31.uss31004;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,9 +18,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
+import com.steps.backend.BackEndSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -36,10 +36,10 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
-import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
+import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -52,10 +52,10 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US31.1 TP execution cron - Manual", type = "Scenarios")
-@Story(Application.TermPurchaseExecution.US31_3.class)
+@WithTag(name = "US31.1 TP execution cron - Automated Only Release", type = "Scenarios")
+@Story(Application.TermPurchaseExecution.US31_4.class)
 @RunWith(SerenityRunner.class)
-public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
+public class US31004PartyHostBuysForCustomerTpTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -68,8 +68,6 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
-	public GeneralCartSteps generalCartSteps;
-	@Steps
 	public OrderForCustomerCartSteps orderForCustomerCartSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
@@ -77,6 +75,8 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -87,6 +87,8 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 	public HostCartValidationWorkflows hostCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
+	@Steps
+	public BackEndSteps backEndSteps;
 
 	private String username, password, customerName;
 	private String country;
@@ -97,14 +99,13 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
 	private ProductDetailedModel genProduct4;
-	private ProductDetailedModel genProduct5;
 	private String prod1IncrementId;
 	private String prod2IncrementId;
 	private String prod3IncrementId;
-	private String prod4IncrementId;
+	OrderModel orderModelListTp1 = new OrderModel();
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws ParseException {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
@@ -112,6 +113,7 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 		genProduct2.setPrice("10.00");
 		genProduct2.setIp("8");
 		prod1IncrementId = MagentoProductCalls.createApiProduct(genProduct2);
+		orderModelListTp1 = MongoReader.getOrderModel("US31004PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("29.90");
@@ -127,12 +129,6 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 				DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 7)));
 		prod3IncrementId = MagentoProductCalls.createApiProduct(genProduct4);
 
-		genProduct5 = MagentoProductCalls.createProductModel();
-		genProduct5.setPrice("40.00");
-		genProduct5.setIp("25");
-		genProduct5.setStockData(MagentoProductCalls.createNotAvailableYetStockData(
-				DateUtils.addDaysToAAGivenDate(DateUtils.getNextMonthMiddle("yyyy-MM-dd"), "yyyy-MM-dd", 14)));
-		prod4IncrementId = MagentoProductCalls.createApiProduct(genProduct5);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -166,12 +162,11 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP3");
-		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP4");
-
+	
 	}
 
 	@Test
-	public void us31003PartyHostBuysForCustomerTpTest() throws ParseException {
+	public void us31004PartyHostBuysForCustomerTpTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -203,12 +198,6 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 					.getFirstFridayAfterDate(genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp3.add(productData);
 
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct5, "4", "0");
-		if (!genProduct5.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils
-					.getFirstFridayAfterDate(genProduct5.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
-		HostCartCalculator.allProductsListTp4.add(productData);
-
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
@@ -218,8 +207,7 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		String deliveryTp3 = regularUserCartSteps.getDeliveryDate(genProduct4.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp4 = regularUserCartSteps.getDeliveryDate(genProduct5.getSku(),
-				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+	
 
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 
@@ -238,8 +226,7 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
 		HostDataGrabber.orderModelTp3.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp3.setDeliveryDate(deliveryTp3);
-		HostDataGrabber.orderModelTp4.setOrderId(FormatterUtils.incrementOrderId(orderId, 4));
-		HostDataGrabber.orderModelTp4.setDeliveryDate(deliveryTp4);
+	
 
 		if (!paymentSteps.isCreditCardFormExpended()) {
 			paymentSteps.expandCreditCardForm();
@@ -254,15 +241,15 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 
 	@After
 	public void saveData() throws Exception {
+
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp3, getClass().getSimpleName() + "TP3");
-		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp4, getClass().getSimpleName() + "TP4");
 
 		MongoWriter.saveProductDetailedModel(genProduct2, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveProductDetailedModel(genProduct3, getClass().getSimpleName() + "TP2");
 		MongoWriter.saveProductDetailedModel(genProduct4, getClass().getSimpleName() + "TP3");
-		MongoWriter.saveProductDetailedModel(genProduct5, getClass().getSimpleName() + "TP4");
+
 
 		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp1) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP1");
@@ -273,17 +260,10 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp3) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP3");
 		}
-		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp4) {
-			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP4");
-		}
+		
 		MongoWriter.saveIncrementId(prod1IncrementId, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveIncrementId(prod2IncrementId, getClass().getSimpleName() + "TP2");
 		MongoWriter.saveIncrementId(prod3IncrementId, getClass().getSimpleName() + "TP3");
-		MongoWriter.saveIncrementId(prod4IncrementId, getClass().getSimpleName() + "TP4");
 
-		// script for updating deliveryDates
-		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
-				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 	}
-
 }

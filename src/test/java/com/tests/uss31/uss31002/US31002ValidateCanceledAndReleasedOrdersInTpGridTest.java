@@ -29,8 +29,8 @@ import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.TermPurchase.TermPurcaseOrderValidationWorkflows;
 import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
 
-@WithTag(name = "US11.7 Party Host Buys For Customer With Term Purchase Test", type = "Scenarios")
-@Story(Application.PlaceACustomerOrderCart.US11_7.class)
+@WithTag(name = "US31.1 TP execution cron - Automated", type = "Scenarios")
+@Story(Application.TermPurchaseExecution.US31_2.class)
 @RunWith(SerenityRunner.class)
 public class US31002ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTest {
 

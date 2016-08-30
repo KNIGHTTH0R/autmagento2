@@ -55,8 +55,8 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US11.7 Party Host Buys For Customer With Term Purchase Test", type = "Scenarios")
-@Story(Application.PlaceACustomerOrderCart.US11_7.class)
+@WithTag(name = "US31.1 TP execution cron - Automated", type = "Scenarios")
+@Story(Application.TermPurchaseExecution.US31_2.class)
 @RunWith(SerenityRunner.class)
 public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 

@@ -129,7 +129,8 @@ public class ConfigConstants {
 	
 	//Execution type
 	public static final String MANUAL = "Manuell";
-	public static final String AUTOMATED = "Automated";
+	public static final String FULL_AUTOMATED = "Full automated";
 	public static final String SEMIAUTOMATED = "Semi-automated";
+	public static final String AUTOMATED_ONLY_RELEASE = "Automated - Only release";
 	
 }

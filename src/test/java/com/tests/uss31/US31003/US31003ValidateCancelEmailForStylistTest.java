@@ -30,8 +30,8 @@ import com.tools.data.email.EmailCredentialsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US3.2 Shop for myself VAT valid and no SMB billing DE and shipping AT", type = "Scenarios")
-@Story(Application.ShopForMyselfCart.US3_2.class)
+@WithTag(name = "US31.1 TP execution cron - Manual", type = "Scenarios")
+@Story(Application.TermPurchaseExecution.US31_3.class)
 @RunWith(SerenityRunner.class)
 public class US31003ValidateCancelEmailForStylistTest extends BaseTest {
 
