@@ -53,7 +53,7 @@ public class CreateNewContactPage extends AbstractPage {
 	@FindBy(css = "#addContactForm button[type*='submit']")
 	private WebElement sumbitContact;
 
-	@FindBy(id = "advice-validate-length-postcode")
+	@FindBy(css = "div[id*='advice-validate-zip']")
 	private WebElement zipValidationMessage;
 
 	public void firstnameInput(String name) {

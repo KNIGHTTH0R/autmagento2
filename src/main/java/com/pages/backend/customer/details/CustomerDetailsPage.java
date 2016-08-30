@@ -146,6 +146,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		scrollToPageTop();
 		element(saveCustomer).waitUntilVisible();
 		saveCustomer.click();
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
 		waitForPageToLoad();
 	}
 
@@ -154,6 +155,7 @@ public class CustomerDetailsPage extends AbstractPage {
 		scrollToPageTop();
 		element(saveAndContinueEdit).waitUntilVisible();
 		saveAndContinueEdit.click();
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
 		waitForPageToLoad();
 	}
 

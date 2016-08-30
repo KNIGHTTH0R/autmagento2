@@ -109,7 +109,7 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(css = "button[name='search_by_name_submit']")
 	private WebElement searchByNameSubmitButton;
 
-	@FindBy(id = "advice-validate-length-zip")
+	@FindBy(css = "div[id*='advice-validate-zip']")
 	private WebElement zipValidationMessage;
 
 	// ---------------------------------------------------
@@ -230,6 +230,7 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void selectCountryFilter(String countryName) {
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(searchCountry).waitUntilVisible();
 		element(searchCountry).selectByVisibleText(countryName);
 	}
@@ -274,16 +275,19 @@ public class CreateCustomerPage extends AbstractPage {
 	public void searchByGeoipSubmit() {
 		element(searchByGeoipSubmitButton).waitUntilVisible();
 		searchByGeoipSubmitButton.click();
-		waitABit(2000);
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		waitABit(1000);
 	}
 
 	public void searchByNameSubmit() {
 		element(searchByNameSubmitButton).waitUntilVisible();
 		searchByNameSubmitButton.click();
-		waitABit(2000);
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		waitABit(1000);
 	}
 
 	public boolean isStylecoachFound() {
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(styleCoachNameResult).waitUntilVisible();
 		return !styleCoachNameResult.getText().contains(ContextConstants.NO_SC_FOUND_BY_GEOIP);
 

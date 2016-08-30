@@ -128,7 +128,7 @@ public class CreateNewContactSteps extends AbstractSteps {
 	public void fillContactDetailsWithoutPlz(AddressModel addressData) {
 		createNewContactPage().streetInput(addressData.getStreetAddress());
 		createNewContactPage().houseNumberInput(addressData.getStreetNumber());
-		createNewContactPage().postcodeInput(addressData.getPostCode());
+//		createNewContactPage().postcodeInput(addressData.getPostCode());
 		createNewContactPage().cityInput(addressData.getHomeTown());
 		createNewContactPage().selectCountryName(addressData.getCountryName());
 		createNewContactPage().inputPhoneNumber(addressData.getPhoneNumber());
