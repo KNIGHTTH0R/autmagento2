@@ -96,13 +96,6 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void wipeWishlist() {
-		if (!wishlistPage().isWishlistEmpty()) {
-			wishlistPage().addAllProductsToCArt();
-		}
-	}
-
-	@Step
 	public void redirectToStylistsCustomerOrderReport() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		navigate(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);

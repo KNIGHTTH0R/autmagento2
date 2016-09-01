@@ -20,7 +20,7 @@ public class BackendProductDetailsSteps extends AbstractSteps {
 		backendProductDetailsPage().clickAddNewProductButton();
 		backendProductDetailsPage().setTitleForBundleChild(ConfigConstants.BUNDLEARTIKEL_NAME);
 		backendProductDetailsPage().clickAddSelectionButton();
-		backendProductDetailsPage().searchByChild(childSku);
+		backendProductDetailsPage().enterChildSku(childSku);
 		backendProductDetailsPage().clickOnSearch();
 		backendProductDetailsPage().selectFirstProductAsAChild();
 		backendProductDetailsPage().clickAddSelectedProductToOption();

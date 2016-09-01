@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +23,9 @@ import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
+import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
@@ -40,13 +37,17 @@ import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.HostDataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
 @Story(Application.StyleParty.US10_6.class)
@@ -81,6 +82,10 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
 	@Steps
 	public DashboardSteps dashboardSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
+	@Steps
+	public OrderForCustomerCartSteps orderForCustomerCartSteps;
 
 	private String username, password, customerName;
 
@@ -141,10 +146,14 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct1.getJewerlyBonusValue(), true);
 
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.orderForCustomer();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
-		customerRegistrationSteps.wipeHostCart();
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			partyDetailsSteps.orderForCustomerFromParty(customerName);
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
+		
+		generalCartSteps.clearCart();
+		
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
@@ -169,7 +178,7 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 		checkoutValidationSteps.verifySuccessMessage();
 
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(HostDataGrabber.orderModel.getOrderId());
+		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(RegularUserDataGrabber.orderModel.getOrderId());
 
 	}
 

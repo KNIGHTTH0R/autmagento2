@@ -122,4 +122,18 @@ public class ProductDetailsPage extends AbstractPage {
 	private String cleanProductCode(String code) {
 		return code.replace(ContextConstants.ARTICLE_NUMBER, "");
 	}
+	
+	/**
+	 * verifies that Add to cart button is not present
+	 */
+	public boolean verifyIfAddToCartButtonIsPresent(){
+		return addToWishlistButton.isDisplayed();
+	}
+	
+	/**
+	 * verifies that Add to wishlist button is not present
+	 */
+	public boolean verifyIfAddToWishlistButtonIsPresent(){
+		return addToWishlistButton.isDisplayed();
+	}
 }

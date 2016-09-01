@@ -398,4 +398,10 @@ public class Application {
 		public class US31_4 {
 		}
 	}
+	
+	@Feature
+	public class CheckTpProductsRestrictions {
+		public class US32_1 {
+		}
+	}
 }

@@ -1,4 +1,4 @@
-package com.tests.uss10.us10006;
+package com.tests.uss32;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,7 +21,6 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
-import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -40,7 +39,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
 @Story(Application.StyleParty.US10_6.class)
 @RunWith(SerenityRunner.class)
-public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
+public class US32001CustomerAddProductIntoWishlistTest extends BaseTest {
 
 	@Steps
 	public FooterSteps footerSteps;
@@ -108,28 +107,20 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
 		RegularBasicProductModel productData;
+		
+		//the customer adds 2 products into wishlist - 1st is with TP , the second is available
 
 		productData = addRegularProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");
 		allProductsList.add(productData);
 
-		footerSteps.selectWebsiteFromFooter(ContextConstants.NOT_PREFERED_WEBSITE);
-		if (!headerSteps.succesfullLogin()) {
-			customerRegistrationSteps.performLoginAfterChangingWebsite(username, password);
-		}
-		headerSteps.clickOnWishlistButton();
-		wishlistSteps.removeProductsFromWishlist();
-
 		productData = addRegularProductsWorkflow.setBasicProductToWishlist(genProduct2, "1", "0");
+		allProductsList.add(productData);
 
 	}
 
 	@After
 	public void saveData() {
-		// the invited guest can have products in both wishllists( from de and
-		// from es website)
-		// only the expected product to be found in party wishlist will be
-		// added.the second one should not appear,but we will check that only
-		// the product from the preferred website appears in the party wishlist
+		
 		for (RegularBasicProductModel product : allProductsList) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
 		}
