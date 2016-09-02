@@ -94,6 +94,8 @@ public class SurveyPage extends AbstractPage {
 
 	public void clickGoToPaymentMethod() {
 		element(toPaymentButton).waitUntilVisible();
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 		waitFor(ExpectedConditions.elementToBeClickable(toPaymentButton));
 		toPaymentButton.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));

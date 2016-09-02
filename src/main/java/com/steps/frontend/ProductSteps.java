@@ -3,6 +3,8 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
+import org.junit.Assert;
+
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.BasicProductModel;
@@ -50,14 +52,15 @@ public class ProductSteps extends AbstractSteps {
 		result.setProductsPrice(askingPrice);
 		result.setFinalPrice(finalPrice);
 		result.setPriceIP(ip);
-		
+
 		addToCart();
-//		waitABit(TimeConstants.TIME_CONSTANT);
+		// waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
+
 	@StepGroup
-	public BasicProductModel setBasicProductAddToWhislist(String qty, String size, String askingPrice, String finalPrice,
-			String ip, String discountClass) {
+	public BasicProductModel setBasicProductAddToWhislist(String qty, String size, String askingPrice,
+			String finalPrice, String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();
 		if (!size.contentEquals("0")) {
 			waitABit(TimeConstants.TIME_CONSTANT);
@@ -69,15 +72,15 @@ public class ProductSteps extends AbstractSteps {
 		result.setProductsPrice(askingPrice);
 		result.setFinalPrice(finalPrice);
 		result.setPriceIP(ip);
-		
+
 		addToWishlist();
-//		waitABit(TimeConstants.TIME_CONSTANT);
+		// waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
 
 	@StepGroup
-	public BasicProductModel updateProduct(ProductDetailedModel model,String qty, String size, String askingPrice, String finalPrice, String ip,
-			String discountClass) {
+	public BasicProductModel updateProduct(ProductDetailedModel model, String qty, String size, String askingPrice,
+			String finalPrice, String ip, String discountClass) {
 		BasicProductModel result = new BasicProductModel();
 
 		result.setName(model.getName());
@@ -91,11 +94,12 @@ public class ProductSteps extends AbstractSteps {
 
 		return result;
 	}
+
 	@StepGroup
-	public RegularBasicProductModel updateRegularBasicProductAddToCart(ProductDetailedModel model,String qty, String size, String finalPrice, String ip) {
+	public RegularBasicProductModel updateRegularBasicProductAddToCart(ProductDetailedModel model, String qty,
+			String size, String finalPrice, String ip) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
-		
-		
+
 		result.setName(model.getName());
 		result.setProdCode(model.getSku());
 		result.setUnitPrice(model.getPrice());
@@ -104,7 +108,7 @@ public class ProductSteps extends AbstractSteps {
 		result.setBonusType(ContextConstants.REGULAR_PRICE);
 		result.setBunosValue("0");
 		result.setIpPoints(ip);
-		
+
 		return result;
 	}
 
@@ -173,13 +177,14 @@ public class ProductSteps extends AbstractSteps {
 
 		return result;
 	}
+
 	@StepGroup
 	public StarterSetProductModel setStarterSetProductAddToCart(String price) {
 		StarterSetProductModel result = new StarterSetProductModel();
-		
+
 		result.setName("IRI_STARTER_SET");
 		result.setUnitPrice(price);
-		
+
 		return result;
 	}
 
@@ -202,7 +207,8 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@Step
-	public RegularBasicProductModel setRegularBasicProductAddToCart(String qty, String size, String finalPrice,String ipPoints) {
+	public RegularBasicProductModel setRegularBasicProductAddToCart(String qty, String size, String finalPrice,
+			String ipPoints) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
@@ -289,6 +295,17 @@ public class ProductSteps extends AbstractSteps {
 	@Step
 	public void addToWishlist() {
 		productDetailsPage().addToWishlist();
+	}
+
+	@Step
+	public void verifyAddToCartButton(boolean shouldBeVisible) {
+		if (shouldBeVisible) {
+			Assert.assertTrue("The button should be present and it's not !!!",
+					productDetailsPage().getProductDetailsText().contains(ContextConstants.ADD_TO_CART));
+		} else {
+			Assert.assertTrue("The button is present and it shouldn't !!!",
+					!productDetailsPage().getProductDetailsText().contains(ContextConstants.ADD_TO_CART));
+		}
 	}
 
 }

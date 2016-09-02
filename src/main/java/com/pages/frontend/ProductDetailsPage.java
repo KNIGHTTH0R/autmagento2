@@ -35,6 +35,9 @@ public class ProductDetailsPage extends AbstractPage {
 
 	@FindBy(css = "h1.ff-Nb")
 	private WebElement productName;
+	
+	@FindBy(css = "div.product-view")
+	private WebElement productDetailsContainer;
 
 	public void setPrice(String qty) {
 		element(quantityInput).waitUntilVisible();
@@ -135,5 +138,9 @@ public class ProductDetailsPage extends AbstractPage {
 	 */
 	public boolean verifyIfAddToWishlistButtonIsPresent(){
 		return addToWishlistButton.isDisplayed();
+	}
+	
+	public String getProductDetailsText(){
+		return productDetailsContainer.getText();
 	}
 }

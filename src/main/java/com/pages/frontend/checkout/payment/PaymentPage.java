@@ -39,11 +39,15 @@ public class PaymentPage extends AbstractPage {
 	private WebElement backButton;
 
 	public void expandCreditCardForm() {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 		element(creditCardContainer).waitUntilVisible();
 		creditCardContainer.click();
 	}
 
 	public boolean isCreditCardFormExpended() {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 		return element(cardNumberInput).isCurrentlyVisible();
 	}
 	

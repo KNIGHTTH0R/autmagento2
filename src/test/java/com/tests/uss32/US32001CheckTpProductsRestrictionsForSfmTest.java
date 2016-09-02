@@ -15,11 +15,14 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
+import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
+import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.ProductDetailedModel;
@@ -46,6 +49,10 @@ public class US32001CheckTpProductsRestrictionsForSfmTest extends BaseTest {
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
+	public CartSteps cartSteps;
+	@Steps
+	public ProductSteps productSteps;
+	@Steps
 	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public SearchSteps searchSteps;
@@ -60,7 +67,7 @@ public class US32001CheckTpProductsRestrictionsForSfmTest extends BaseTest {
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
 	private ProductDetailedModel genProduct4;
-	
+
 	String incrementIdProd2;
 	String incrementIdProd4;
 
@@ -70,28 +77,30 @@ public class US32001CheckTpProductsRestrictionsForSfmTest extends BaseTest {
 		genProduct1 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct1.getStockData().setIsDiscontinued("0");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		
+
 		genProduct2 = MagentoProductCalls.createProductModel();
 		incrementIdProd2 = MagentoProductCalls.createApiProduct(genProduct2);
-		
+
 		genProduct3 = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		genProduct4 = MagentoProductCalls.createMarketingProductModel();
 		incrementIdProd4 = MagentoProductCalls.createApiProduct(genProduct4);
 
+		System.out.println(genProduct4.getName() + " " + ContextConstants.REMOVE_MESSAGE_ADVICE);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
 			prop.load(input);
 
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -119,32 +128,33 @@ public class US32001CheckTpProductsRestrictionsForSfmTest extends BaseTest {
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
 		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
-		
-		//verify tp product in product details
-		
+		productSteps.verifyAddToCartButton(false);
+		// verify tp product in product details
+
 		addProductsWorkflow.setBasicProductToWishlist(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
 		addProductsWorkflow.setBasicProductToWishlist(genProduct3, "1", "0", ConfigConstants.DISCOUNT_25);
 		addProductsWorkflow.setBasicProductToCart(genProduct4, "1", "0", ConfigConstants.DISCOUNT_25);
-		
+
 		genProduct2.setStockData(MagentoProductCalls.createNotAvailableForTheMomentStockData());
 		MagentoProductCalls.updateApiProduct(genProduct2, incrementIdProd2);
-		
+
 		genProduct4.setStockData(MagentoProductCalls.createNotAvailableForTheMomentStockData());
 		MagentoProductCalls.updateApiProduct(genProduct4, incrementIdProd4);
-		
+
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
-		//verify product in cart - messages and that it cannot be added into the cart
-		
+
+		cartSteps.verifyStockMessageForProduct(genProduct4.getName(), ContextConstants.PRODUCT_CURRENTLY_OUT_OF_SROCK);
+		cartSteps.verifyErrorMessageInCart(genProduct4.getSku() + " " + ContextConstants.REMOVE_MESSAGE_ADVICE);
+		cartSteps.verifyPresenceOfGoToCheckoutButton(false);
+
 		headerSteps.clickOnWishlistButton();
-		
-		//verify that addAlltoCart button does not exist
-		//verify that Add to cart Button for not available product does not exist
-		
-		
+		wishlistSteps.verifyPresenceOfAddAllToCartButton(true);
+		wishlistSteps.verifyThatCannotBeAddedToCart(genProduct2.getName());
+		wishlistSteps.addProductToCart(genProduct3.getName());
+		headerSteps.clickOnWishlistButton();
+		wishlistSteps.verifyPresenceOfAddAllToCartButton(false);
 
 	}
-
 
 }

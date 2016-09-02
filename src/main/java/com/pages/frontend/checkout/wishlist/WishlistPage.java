@@ -19,16 +19,12 @@ public class WishlistPage extends AbstractPage {
 	@FindBy(css = "div.my-wishlist")
 	private WebElement wishlistContainer;
 
-	// public void addAllProductsToCArt() {
-	// element(addAllToCArt).waitUntilVisible();
-	// addAllToCArt.click();
-	// }
-	//
-	// public boolean isWishlistEmpty() {
-	// element(wishlistContainer).waitUntilVisible();
-	// return
-	// wishlistContainer.getText().contains(ContextConstants.EMPTY_WISHLIST_MESSAGE);
-	// }
+	public void addAllProductsToCArt() {
+		if (element(addAllToCArt).isPresent()) {
+			element(addAllToCArt).waitUntilVisible();
+			addAllToCArt.click();
+		}
+	}
 
 	public List<WebElement> getWishlistProducts() {
 		return getDriver().findElements(By.cssSelector("ul#wishlist-table li"));
@@ -46,6 +42,28 @@ public class WishlistPage extends AbstractPage {
 		for (WebElement product : getWishlistProducts()) {
 			if (product.getText().contains(productName)) {
 				Assert.assertTrue(!product.getText().contains(ContextConstants.ADD_TO_CART));
+				break;
+			}
+		}
+	}
+
+	public String getWishlistProductText(String productName) {
+		for (WebElement product : getWishlistProducts()) {
+			if (product.getText().contains(productName)) {
+				return product.getText();
+			}
+		}
+		return null;
+	}
+
+	public String getWishlistText() {
+		return getDriver().findElement(By.cssSelector("div.my-wishlist")).getText();
+	}
+
+	public void addProductToCart(String productName) {
+		for (WebElement product : getWishlistProducts()) {
+			if (product.getText().contains(productName)) {
+				product.findElement(By.cssSelector("button[onclick*='addWItemToCart']")).click();
 				break;
 			}
 		}
