@@ -233,7 +233,7 @@ public class ProductSteps extends AbstractSteps {
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
 		}
-		setQuantity(qty);
+//		setQuantity(qty);
 
 		result = productDetailsPage().grabRegularBasicProductData();
 

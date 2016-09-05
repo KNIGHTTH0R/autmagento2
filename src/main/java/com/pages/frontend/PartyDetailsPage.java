@@ -123,15 +123,22 @@ public class PartyDetailsPage extends AbstractPage {
 		if (wishlistProductNameContainer.getText().contains(productName)) {
 			found = true;
 			waitABit(TimeConstants.WAIT_TIME_SMALL);
-			wishlistProductCheckbox.click();
+			wishlistProductNameContainer.click();
 			waitABit(TimeConstants.WAIT_TIME_SMALL);
 		}
 		// just trying to fix a problem - not needed
 		builder.moveToElement(addToBorrowCart).build().perform();
 		addToBorrowCart.click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 
 		Assert.assertTrue("The product expected to be in wishlist is not present !!!", found);
+	}
+
+	public void checkThatPartyWishlistIsEmpty() {
+		Assert.assertTrue("The product was found in the wishlist and it shouldn't !!!", getDriver()
+				.findElements(By.cssSelector("div.customer-list-container.clearfix .mini-box img")).size() == 0);
 	}
 
 	public void returnToParty() {
@@ -216,8 +223,8 @@ public class PartyDetailsPage extends AbstractPage {
 	public void popupCloseParty() {
 		element(popupPartyCloseButton).waitUntilVisible();
 		popupPartyCloseButton.click();
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.textToBePresentInElement(getDriver().findElement(By.id("closePartyWrapper")),
-				ContextConstants.SUCCESSFULY_CLOSED_PARTY));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.textToBePresentInElement(
+				getDriver().findElement(By.id("closePartyWrapper")), ContextConstants.SUCCESSFULY_CLOSED_PARTY));
 	}
 
 	public void verifyHostessInviteLink(boolean hostessInviteLinkIsPresent) {

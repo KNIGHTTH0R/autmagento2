@@ -26,20 +26,18 @@ public class WishlistPage extends AbstractPage {
 		}
 	}
 
-	public List<WebElement> getWishlistProducts() {
-		return getDriver().findElements(By.cssSelector("ul#wishlist-table li"));
-	}
-
 	public void removeProductsFromWishlist() {
-
-		for (WebElement product : getWishlistProducts()) {
-			product.findElement(By.cssSelector(".remove-link")).click();
+		List<WebElement> productsList = getDriver().findElements(By.cssSelector("ul#wishlist-table li"));
+		for (@SuppressWarnings("unused") WebElement product : productsList) {
+			getDriver().findElement(By.cssSelector(".remove-link")).click();
 			getAlert().accept();
+			waitForPageToLoad();
 		}
 	}
 
 	public void verifyThatProductCannotBeAddedToCart(String productName) {
-		for (WebElement product : getWishlistProducts()) {
+		List<WebElement> productsList = getDriver().findElements(By.cssSelector("ul#wishlist-table li"));
+		for (WebElement product : productsList) {
 			if (product.getText().contains(productName)) {
 				Assert.assertTrue(!product.getText().contains(ContextConstants.ADD_TO_CART));
 				break;
@@ -48,7 +46,8 @@ public class WishlistPage extends AbstractPage {
 	}
 
 	public String getWishlistProductText(String productName) {
-		for (WebElement product : getWishlistProducts()) {
+		List<WebElement> productsList = getDriver().findElements(By.cssSelector("ul#wishlist-table li"));
+		for (WebElement product : productsList) {
 			if (product.getText().contains(productName)) {
 				return product.getText();
 			}
@@ -61,7 +60,8 @@ public class WishlistPage extends AbstractPage {
 	}
 
 	public void addProductToCart(String productName) {
-		for (WebElement product : getWishlistProducts()) {
+		List<WebElement> productsList = getDriver().findElements(By.cssSelector("ul#wishlist-table li"));
+		for (WebElement product : productsList) {
 			if (product.getText().contains(productName)) {
 				product.findElement(By.cssSelector("button[onclick*='addWItemToCart']")).click();
 				break;

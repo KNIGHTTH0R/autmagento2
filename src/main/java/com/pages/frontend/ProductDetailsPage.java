@@ -103,7 +103,7 @@ public class ProductDetailsPage extends AbstractPage {
 		result.setName(productName.getText());
 		result.setProdCode(type);
 		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
-		result.setQuantity(quantityInput.getAttribute("value"));
+//		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
 	}
