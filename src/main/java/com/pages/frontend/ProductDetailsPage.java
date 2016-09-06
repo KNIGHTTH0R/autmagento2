@@ -35,6 +35,9 @@ public class ProductDetailsPage extends AbstractPage {
 
 	@FindBy(css = "h1.ff-Nb")
 	private WebElement productName;
+	
+	@FindBy(css = "div.product-view")
+	private WebElement productDetailsContainer;
 
 	public void setPrice(String qty) {
 		element(quantityInput).waitUntilVisible();
@@ -100,7 +103,7 @@ public class ProductDetailsPage extends AbstractPage {
 		result.setName(productName.getText());
 		result.setProdCode(type);
 		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
-		result.setQuantity(quantityInput.getAttribute("value"));
+//		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
 	}
@@ -121,5 +124,23 @@ public class ProductDetailsPage extends AbstractPage {
 
 	private String cleanProductCode(String code) {
 		return code.replace(ContextConstants.ARTICLE_NUMBER, "");
+	}
+	
+	/**
+	 * verifies that Add to cart button is not present
+	 */
+	public boolean verifyIfAddToCartButtonIsPresent(){
+		return addToWishlistButton.isDisplayed();
+	}
+	
+	/**
+	 * verifies that Add to wishlist button is not present
+	 */
+	public boolean verifyIfAddToWishlistButtonIsPresent(){
+		return addToWishlistButton.isDisplayed();
+	}
+	
+	public String getProductDetailsText(){
+		return productDetailsContainer.getText();
 	}
 }

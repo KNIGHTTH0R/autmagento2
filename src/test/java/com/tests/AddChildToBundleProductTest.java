@@ -27,14 +27,14 @@ public class AddChildToBundleProductTest extends BaseTest {
 	public BackendProductDetailsSteps backendProductDetailsSteps;
 
 	@Test
-	public void us3001ValidateOrderBackOfficeTest() {
+	public void addChildToBundleProductTest() {
 		//TODO change hardcoded params when need this
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnProducts();
-		backendProductListSteps.findProduct("ZUZULINA8");
-		backendProductListSteps.openProductDetails("ZUZULINA8");
+		backendProductListSteps.findProduct("EM004JN");
+		backendProductListSteps.openProductDetails("EM004JN");
 		backendProductDetailsSteps.selectBundleItemMenu();
-		backendProductDetailsSteps.addChildToBundleProduct("K031SV");
+		backendProductDetailsSteps.addChildToBundleProduct("YKCHNZWSC");
 		
 	}
 }

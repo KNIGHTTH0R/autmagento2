@@ -1,17 +1,14 @@
 package com.workflows.frontend.regularUser;
 
+import com.steps.frontend.ProductSteps;
+import com.steps.frontend.SearchSteps;
+import com.tools.cartcalculations.smf.CartDiscountsCalculation;
+import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.soap.ProductDetailedModel;
+
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-
-import com.steps.frontend.ProductSteps;
-import com.steps.frontend.SearchSteps;
-import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
-import com.tools.cartcalculations.smf.CartDiscountsCalculation;
-import com.tools.constants.ConfigConstants;
-import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.data.soap.ProductDetailedModel;
 
 public class AddRegularProductsWorkflow {
 	@Steps

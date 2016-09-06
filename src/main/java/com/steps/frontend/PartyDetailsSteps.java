@@ -167,4 +167,9 @@ public class PartyDetailsSteps extends AbstractSteps {
 		refresh();
 	}
 
+	@Step
+	public void checkThatPartyWishlistIsEmpty() {
+		partyDetailsPage().checkThatPartyWishlistIsEmpty();
+	}
+
 }

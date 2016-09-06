@@ -1,11 +1,13 @@
 package com.pages.backend.products;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
@@ -37,14 +39,13 @@ public class BackendProductDetailsPage extends AbstractPage {
 	private WebElement searchButton;
 	
 	@FindBy(css = "button[onclick='bSelection.productGridAddSelected(event)']")
-	private WebElement AddSelectedProductToOption;
+	private WebElement addSelectedProductToOption;
 
 	public void selectOptionFromProductMenu(String searchedOption) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(optionsList).waitUntilVisible();
 		List<WebElement> optionsList = getDriver().findElements(By.cssSelector("#product_info_tabs li"));
 		for (WebElement option : optionsList) {
-			System.out.println(option.getText());
 			if (option.getText().contains(searchedOption)) {
 				option.findElement(By.cssSelector("a")).click();
 				waitABit(TimeConstants.TIME_CONSTANT);
@@ -57,6 +58,7 @@ public class BackendProductDetailsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(saveAndContinueEdit).waitUntilVisible();
 		saveAndContinueEdit.click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
 		waitForPageToLoad();
 	}
 
@@ -75,12 +77,14 @@ public class BackendProductDetailsPage extends AbstractPage {
 		addBundleChild.click();
 	}
 
-	public void searchByChild(String childName) {
+	public void enterChildSku(String childSku) {
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
 		element(searchChildUsingSkuField).waitUntilVisible();
-		searchChildUsingSkuField.sendKeys(childName);
+		searchChildUsingSkuField.sendKeys(childSku);
 	}
 
 	public void selectFirstProductAsAChild() {
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
 		element(selectFirstChildList).waitUntilVisible();
 		selectFirstChildList.click();
 	}
@@ -90,13 +94,15 @@ public class BackendProductDetailsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
 		waitABit(1000);
+		
 	}
 	
 	public void clickAddSelectedProductToOption() {
 		evaluateJavascript("jQuery.noConflict();");
-		element(AddSelectedProductToOption).waitUntilVisible();
-		AddSelectedProductToOption.click();
+		element(addSelectedProductToOption).waitUntilVisible();
+		addSelectedProductToOption.click();
 		waitABit(1000);
 	}
 }

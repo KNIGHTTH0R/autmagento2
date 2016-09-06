@@ -1,4 +1,4 @@
-package com.tests.uss10.us10006;
+package com.tests.uss32;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,7 +21,6 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
-import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -40,7 +39,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
 @Story(Application.StyleParty.US10_6.class)
 @RunWith(SerenityRunner.class)
-public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
+public class US32001CustomerAddProductIntoWishlistTest extends BaseTest {
 
 	@Steps
 	public FooterSteps footerSteps;
@@ -57,7 +56,6 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 	private static List<RegularBasicProductModel> allProductsList = new ArrayList<RegularBasicProductModel>();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
 
 	@Before
 	public void setUp() throws Exception {
@@ -68,13 +66,9 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.getStockData().setIsDiscontinued("0");
+		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.setPrice("49.00");
 		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("49.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -113,36 +107,20 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
 		RegularBasicProductModel productData;
+		
+		//the customer adds 2 products into wishlist - 1st is with TP , the second is available
 
-		// add a normal product in wishlist (only this product is displayed on
-		// party)
 		productData = addRegularProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");
 		allProductsList.add(productData);
-		// add a TP product in wishlist
-		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct2, "1", "0");
 
-		footerSteps.selectWebsiteFromFooter(ContextConstants.NOT_PREFERED_WEBSITE);
-		if (!headerSteps.succesfullLogin()) {
-			customerRegistrationSteps.performLoginAfterChangingWebsite(username, password);
-		}
-		footerSteps.selectWebsiteFromFooter(ContextConstants.NOT_PREFERED_WEBSITE);
-
-		headerSteps.clickOnWishlistButton();
-		wishlistSteps.removeProductsFromWishlist();
-		// add a normal product in wishlist - not party creation website
-		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct3, "1", "0");
-		// add a TP product in wishlist - not party creation website
-		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct2, "1", "0");
+		productData = addRegularProductsWorkflow.setBasicProductToWishlist(genProduct2, "1", "0");
+		allProductsList.add(productData);
 
 	}
 
 	@After
 	public void saveData() {
-		// the invited guest can have products in both wishlists( from de and
-		// from es website)
-		// in the party wishlist only the available(not tp)products are
-		// displayed
-		//
+		
 		for (RegularBasicProductModel product : allProductsList) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
 		}

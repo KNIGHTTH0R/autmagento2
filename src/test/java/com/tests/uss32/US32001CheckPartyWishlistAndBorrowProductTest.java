@@ -1,4 +1,4 @@
-package com.tests.uss10.us10006;
+package com.tests.uss32;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +7,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,12 +22,10 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
-import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.borrowCart.BorrowCartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -42,15 +45,10 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
 import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 @WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
 @Story(Application.StyleParty.US10_6.class)
 @RunWith(SerenityRunner.class)
-public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
+public class US32001CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -65,15 +63,11 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
-	public LoungeSteps loungeSteps;
-	@Steps
 	public BorrowCartValidationWorkflows borrowCartValidationWorkflows;
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
 	public HeaderSteps headerSteps;
-	@Steps
-	public GeneralCartSteps generalCartSteps;
 	@Steps
 	AddBorrowedProductsWorkflow addBorrowedProductsWorkflow;
 	@Steps
@@ -136,9 +130,11 @@ public class US10006CheckPartyWishlistAndBorrowProductTest extends BaseTest {
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
-		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.clickGoToBorrowCart();
-		generalCartSteps.clearBorrowCart();
+		
+
+		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.selectWishlistProductAndAddItToBorrowCart(productName);
+		borrowCartSteps.clickWipeCart();
 		customerRegistrationSteps.navigate(urlModel.getUrl());
 		partyDetailsSteps.selectWishlistProductAndAddItToBorrowCart(productName);
 		BorrowProductModel productData;

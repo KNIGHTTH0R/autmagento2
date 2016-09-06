@@ -6,6 +6,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.requirements.AbstractPage;
 
@@ -23,17 +24,19 @@ public class BackendProductListPage extends AbstractPage {
 	public void inputSku(String sku) {
 		evaluateJavascript("jQuery.noConflict();");
 		productSkuInput.clear();
-		element(productSkuInput).typeAndEnter(sku);
+		element(productSkuInput).sendKeys(sku);
 	}
 
 	public void clickOnSearch() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
 	}
 
 	public void openProductDetails(String sku) {
 		evaluateJavascript("jQuery.noConflict();");
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.id("loading-mask")));
 		element(listContainer).waitUntilVisible();
 		List<WebElement> listElements = listContainer.findElements(By.tagName("tr"));
 		theFor: for (WebElement elementNow : listElements) {
