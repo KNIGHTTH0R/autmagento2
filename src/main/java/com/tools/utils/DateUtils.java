@@ -101,23 +101,6 @@ public class DateUtils {
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
 
-	// public static String getLastDayOfCurrentMonth(String formatString) throws
-	// ParseException {
-	//
-	// Calendar calendar = Calendar.getInstance();
-	// calendar.add(Calendar.MONTH, 1);
-	// calendar.set(Calendar.DAY_OF_MONTH, 1);
-	// calendar.add(Calendar.DATE, -1);
-	// int year = calendar.get(Calendar.YEAR);
-	// int month = calendar.get(Calendar.MONTH);
-	// int day = calendar.get(Calendar.DATE);
-	// calendar.set(year, month, day, 23, 59, 59);
-	// Date lastDayOfMonth = calendar.getTime();
-	// DateFormat sdf = new SimpleDateFormat(formatString);
-	//
-	// return String.valueOf(sdf.format(lastDayOfMonth));
-	// }
-
 	public static String getFirstDayOfCurrentMonth(String formatString) throws ParseException {
 
 		Calendar calendar = Calendar.getInstance();

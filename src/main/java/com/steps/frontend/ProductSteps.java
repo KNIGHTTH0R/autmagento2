@@ -207,16 +207,18 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@Step
-	public RegularBasicProductModel setRegularBasicProductAddToCart(String qty, String size, String finalPrice,
-			String ipPoints) {
+	public RegularBasicProductModel setRegularBasicProductAddToCart(ProductDetailedModel model, String qty, String size,
+			String finalPrice, String ipPoints) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
 		}
 		setQuantity(qty);
 
-		result = productDetailsPage().grabRegularBasicProductData();
-
+		result.setName(model.getName());
+		result.setProdCode(model.getSku());
+		result.setUnitPrice(model.getPrice());
+		result.setQuantity(qty);
 		result.setFinalPrice(finalPrice);
 		result.setBonusType(ContextConstants.REGULAR_PRICE);
 		result.setBunosValue("0");
@@ -228,15 +230,17 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@Step
-	public RegularBasicProductModel setRegularBasicProductAddToWishlist(String qty, String size, String finalPrice) {
+	public RegularBasicProductModel setRegularBasicProductAddToWishlist(ProductDetailedModel model, String qty,
+			String size, String finalPrice) {
 		RegularBasicProductModel result = new RegularBasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
 		}
-//		setQuantity(qty);
 
-		result = productDetailsPage().grabRegularBasicProductData();
-
+		result.setName(model.getName());
+		result.setProdCode(model.getSku());
+		result.setUnitPrice(model.getPrice());
+		result.setQuantity(qty);
 		result.setFinalPrice(finalPrice);
 		result.setBonusType(ContextConstants.REGULAR_PRICE);
 		result.setBunosValue("0");
@@ -247,16 +251,18 @@ public class ProductSteps extends AbstractSteps {
 	}
 
 	@Step
-	public HostBasicProductModel setHostBasicProductAddToCart(String qty, String size, String finalPrice,
-			String ipPoints) {
+	public HostBasicProductModel setHostBasicProductAddToCart(ProductDetailedModel model, String qty, String size,
+			String finalPrice, String ipPoints) {
 		HostBasicProductModel result = new HostBasicProductModel();
 		if (!size.contentEquals("0")) {
 			setDropDownValue(size);
 		}
 		setQuantity(qty);
 
-		result = productDetailsPage().grabHostBasicProductData();
-
+		result.setName(model.getName());
+		result.setProdCode(model.getSku());
+		result.setUnitPrice(model.getPrice());
+		result.setQuantity(qty);
 		result.setFinalPrice(finalPrice);
 		result.setIpPoints(ipPoints);
 		result.setBonusType(ContextConstants.REGULAR_PRICE);
@@ -306,6 +312,12 @@ public class ProductSteps extends AbstractSteps {
 			Assert.assertTrue("The button is present and it shouldn't !!!",
 					!productDetailsPage().getProductDetailsText().contains(ContextConstants.ADD_TO_CART));
 		}
+	}
+
+	@Step
+	public void verifyThatAvailabilityDateIsCorrect(String avDate) {
+		Assert.assertTrue("The availability date is not correct",
+				productDetailsPage().getStockStatus().contains(avDate));
 	}
 
 }

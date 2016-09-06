@@ -36,7 +36,7 @@ public class AddProductsForCustomerWorkflow {
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 
-		return productSteps.setHostBasicProductAddToCart(qty, productProperty, finalPrice, ipPoints);
+		return productSteps.setHostBasicProductAddToCart(model,qty, productProperty, finalPrice, ipPoints);
 	}
 
 	@StepGroup
