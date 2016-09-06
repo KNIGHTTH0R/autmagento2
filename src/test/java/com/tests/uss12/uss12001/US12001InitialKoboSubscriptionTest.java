@@ -25,6 +25,7 @@ import com.steps.frontend.checkout.shipping.kobo.KoboShippingSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
+import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.datahandler.DataGrabber;
@@ -61,6 +62,8 @@ public class US12001InitialKoboSubscriptionTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	
+	private AddressModel newAddress;
+	
 	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 	private CreditCardModel creditCardData = new CreditCardModel();
 
@@ -68,6 +71,11 @@ public class US12001InitialKoboSubscriptionTest extends BaseTest {
 	public void setUp() {
 
 		DataGrabber.wipe();
+		newAddress = new AddressModel();
+		newAddress.setStreetAddress("test");
+		newAddress.setStreetNumber("12");
+		newAddress.setPostCode("43431");
+		newAddress.setCountryName("Deutschland");
 
 		int size = MongoReader.grabCustomerFormModels("US12001StyleCoachRegistrationTest").size();
 		if (size > 0) {
@@ -92,6 +100,8 @@ public class US12001InitialKoboSubscriptionTest extends BaseTest {
 		contactBoosterCartSteps.selectContactBooster200Voucher();
 		contactBoosterCartSteps.clickToShipping();
 		koboShippingSteps.acceptTerms();
+		shippingSteps.addNewAddressForBilling();
+		shippingSteps.fillNewAddressForBilling(newAddress);
 		shippingSteps.goToPaymentMethod();
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
