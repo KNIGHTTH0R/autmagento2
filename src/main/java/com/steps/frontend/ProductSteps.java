@@ -282,6 +282,14 @@ public class ProductSteps extends AbstractSteps {
 		addToCart();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
+	@Step
+	public void addToWishlist(String qty, String size) {
+		if (!size.contentEquals("0")) {
+			setDropDownValue(size);
+		}
+		addToWishlist();
+		waitABit(TimeConstants.TIME_CONSTANT);
+	}
 
 	@Step
 	public void setDropDownValue(String size) {

@@ -36,7 +36,7 @@ public class AddProductsForCustomerWorkflow {
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 
-		return productSteps.setHostBasicProductAddToCart(model,qty, productProperty, finalPrice, ipPoints);
+		return productSteps.setHostBasicProductAddToCart(model, qty, productProperty, finalPrice, ipPoints);
 	}
 
 	@StepGroup
@@ -44,6 +44,13 @@ public class AddProductsForCustomerWorkflow {
 	public void addProductToCart(ProductDetailedModel model, String qty, String productProperty) {
 		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
 		productSteps.setQuantityAndAddToCart(qty, productProperty);
+	}
+
+	@StepGroup
+	@Title("Add product to wishlist")
+	public void addProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
+		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		productSteps.addToWishlist(qty, productProperty);
 	}
 
 }

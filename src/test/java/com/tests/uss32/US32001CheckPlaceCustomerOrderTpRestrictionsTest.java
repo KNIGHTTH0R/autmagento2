@@ -19,7 +19,8 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
-import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
+import com.steps.frontend.checkout.cart.partyHost.AddProductsModalSteps;
+import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
@@ -54,7 +55,9 @@ public class US32001CheckPlaceCustomerOrderTpRestrictionsTest extends BaseTest {
 	@Steps
 	public CreateNewContactSteps createNewContactSteps;
 	@Steps
-	public ShippingPartySectionSteps shippingPartySectionSteps;
+	public AddProductsModalSteps addProductsModalSteps;
+	@Steps
+	public OrderForCustomerCartSteps orderForCustomerCartSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -114,17 +117,21 @@ public class US32001CheckPlaceCustomerOrderTpRestrictionsTest extends BaseTest {
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		generalCartSteps.clearCart();
-
+		
 		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 
 		String unformatedAvailabilityDate = DateUtils
 				.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd");
 
-		System.out.println(DateUtils.parseDate(unformatedAvailabilityDate, "yyyy-MM-dd", "dd. MMM. yyyy",
-				new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
-
 		productSteps.verifyThatAvailabilityDateIsCorrect(DateUtils.parseDate(unformatedAvailabilityDate, "yyyy-MM-dd",
 				"dd. MMM. yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+
+		addProductsForCustomerWorkflow.addProductToWishlist(genProduct1, "1", "0");
+		
+		orderForCustomerCartSteps.openSearchProductsModal();
+
+		addProductsModalSteps.searchForProduct(genProduct1.getSku());
+		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct1.getSku(), genProduct1.getName());
 
 	}
 
