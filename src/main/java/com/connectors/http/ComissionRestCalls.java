@@ -16,10 +16,7 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		// System.setProperty("http.proxyHost", "localhost");
-		// System.setProperty("http.proxyPort", "8080");
-
-		ComissionRestCalls.getStylistInfo("6000");
+		ComissionRestCalls.getStylistInfo("6126");
 		// ComissionRestCalls.getPartyPerformanceInfo("57937");
 
 	}

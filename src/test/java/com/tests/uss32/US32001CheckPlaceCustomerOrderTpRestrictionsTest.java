@@ -21,6 +21,7 @@ import com.steps.frontend.ProductSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.AddProductsModalSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
+import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
@@ -53,6 +54,8 @@ public class US32001CheckPlaceCustomerOrderTpRestrictionsTest extends BaseTest {
 	@Steps
 	public ProductSteps productSteps;
 	@Steps
+	public WishlistSteps wishlistSteps;
+	@Steps
 	public CreateNewContactSteps createNewContactSteps;
 	@Steps
 	public AddProductsModalSteps addProductsModalSteps;
@@ -70,6 +73,8 @@ public class US32001CheckPlaceCustomerOrderTpRestrictionsTest extends BaseTest {
 	private AddressModel addressData;
 	private ProductDetailedModel genProduct1;
 
+	String formatedAvailabilityDate;
+
 	@Before
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
@@ -81,6 +86,12 @@ public class US32001CheckPlaceCustomerOrderTpRestrictionsTest extends BaseTest {
 		genProduct1 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct1.getStockData().setIsDiscontinued("0");
 		MagentoProductCalls.createApiProduct(genProduct1);
+
+		String unformatedAvailabilityDate = DateUtils
+				.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd");
+
+		formatedAvailabilityDate = DateUtils.parseDate(unformatedAvailabilityDate, "yyyy-MM-dd", "dd. MMM. yyyy",
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -118,20 +129,21 @@ public class US32001CheckPlaceCustomerOrderTpRestrictionsTest extends BaseTest {
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		generalCartSteps.clearCart();
 		
-		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
-
-		String unformatedAvailabilityDate = DateUtils
-				.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd");
-
-		productSteps.verifyThatAvailabilityDateIsCorrect(DateUtils.parseDate(unformatedAvailabilityDate, "yyyy-MM-dd",
-				"dd. MMM. yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
-
-		addProductsForCustomerWorkflow.addProductToWishlist(genProduct1, "1", "0");
-		
 		orderForCustomerCartSteps.openSearchProductsModal();
 
 		addProductsModalSteps.searchForProduct(genProduct1.getSku());
-		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct1.getSku(), genProduct1.getName());
+		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct1.getSku(), genProduct1.getName(),
+				formatedAvailabilityDate);
+		addProductsModalSteps.closeModal();
+
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+
+		productSteps.verifyThatAvailabilityDateIsCorrect(formatedAvailabilityDate);
+
+		addProductsForCustomerWorkflow.addProductToWishlist(genProduct1, "1", "0");
+		
+		wishlistSteps.verifyPresenceOfAddAllToCartButton(true);
+		wishlistSteps.addProductToCart(genProduct1.getName());
 
 	}
 
