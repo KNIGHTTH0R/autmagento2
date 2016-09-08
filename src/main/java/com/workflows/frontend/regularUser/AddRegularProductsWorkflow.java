@@ -55,4 +55,5 @@ public class AddRegularProductsWorkflow {
 		return productSteps.updateRegularBasicProductAddToCart(model, qty, productProperty, finalPrice,ipPoints);
 	}
 
+	
 }

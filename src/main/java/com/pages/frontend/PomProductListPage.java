@@ -17,6 +17,9 @@ public class PomProductListPage extends AbstractPage {
 
 	@FindBy(className = "pom-category-products")
 	private WebElement productCatalogContainer;
+	
+	@FindBy(css = ".product-shop")
+	private WebElement productDetailsContainer;
 
 	public void findProductAndClick(String productName) {
 
@@ -39,4 +42,7 @@ public class PomProductListPage extends AbstractPage {
 		Assert.assertTrue("The searched product was not found !!!", found);
 	}
 
+	public String getProductDetailsText() {
+		return productDetailsContainer.getText();
+	}
 }

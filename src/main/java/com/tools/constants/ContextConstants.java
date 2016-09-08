@@ -11,6 +11,7 @@ public class ContextConstants {
 	public static String ADD_TO_CART = MongoReader.getDictionaryItem("ADD_TO_CART");
 	public static String ADD_ALL_TO_CART = MongoReader.getDictionaryItem("ADD_ALL_TO_CART");
 	public static String PRODUCT_CURRENTLY_OUT_OF_SROCK = MongoReader.getDictionaryItem("PRODUCT_CURRENTLY_OUT_OF_SROCK");
+	public static String CURRENTLY_OUT_OF_STOCK = MongoReader.getDictionaryItem("CURRENTLY_OUT_OF_STOCK");
 	public static String GUESTS = MongoReader.getDictionaryItem("GUESTS");
 	public static String ORDERS = MongoReader.getDictionaryItem("ORDERS");
 	public static String HOSTESS_BONUS = MongoReader.getDictionaryItem("HOSTESS_BONUS");

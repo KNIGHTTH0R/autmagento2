@@ -63,6 +63,11 @@ public class RegularUserCartPage extends AbstractPage {
 
 	@FindBy(css = "li.error-msg span")
 	private WebElement errorMessageContainer;
+	
+	@FindBy(css = ".cart-empty a.variable-text")
+	private WebElement searchProductLink;
+	
+	
 
 	public void validateThatVoucherCannotBeAppliedMessage() {
 		element(errorMessageContainer).waitUntilVisible();
@@ -322,5 +327,13 @@ public class RegularUserCartPage extends AbstractPage {
 		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 
 	}
+	
+	
+	public void searchProductsModal() {
+		element(searchProductLink).waitUntilVisible();
+		searchProductLink.click();
+	}
+	
+
 
 }
