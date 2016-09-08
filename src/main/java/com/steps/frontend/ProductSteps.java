@@ -327,5 +327,11 @@ public class ProductSteps extends AbstractSteps {
 		Assert.assertTrue("The availability date is not correct",
 				productDetailsPage().getStockStatus().contains(avDate));
 	}
+	
+	@Step
+	public void verifyThatProductStatusIsCorrect(String status) {
+		Assert.assertTrue("The product status is not correct",
+				productDetailsPage().getStockStatus().contains(status));
+	}
 
 }

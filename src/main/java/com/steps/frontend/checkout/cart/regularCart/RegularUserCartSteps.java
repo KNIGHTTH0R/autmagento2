@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
 
+import org.junit.Assert;
+
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
@@ -96,4 +98,10 @@ public class RegularUserCartSteps extends AbstractSteps {
 		getDriver().navigate().refresh();
 	}
 
+	@Step
+	public void searchProductsModal() {
+		regularUserCartPage().searchProductsModal();
+		getDriver().navigate().refresh();
+	}
+	
 }

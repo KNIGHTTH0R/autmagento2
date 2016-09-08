@@ -91,6 +91,7 @@ public class US70010KoboRegOnVoucherOwnerContextTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createPomProductModel();
+		genProduct1.setName("POM_" + genProduct1.getName());
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
