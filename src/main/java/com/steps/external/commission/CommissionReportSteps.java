@@ -19,6 +19,18 @@ public class CommissionReportSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
+	public void login() {
+		commissionReportPage().enterUsername("admin");
+		commissionReportPage().enterPassword("qwerty");
+		commissionReportPage().clickLogin();
+	}
+
+	@Step
+	public void selectMenu(String menu) {
+		commissionReportPage().selectNavMenu(menu);
+	}
+
+	@Step
 	public void simulateMonth() {
 		commissionReportPage().simulateMonth();
 	}
