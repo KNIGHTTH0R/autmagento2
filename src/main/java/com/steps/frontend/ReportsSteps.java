@@ -143,5 +143,11 @@ public class ReportsSteps extends AbstractSteps {
 		}
 		return searchedLine;
 	}
+	
+	
+	@Step
+	public void clickOnTeamReports() {
+		reportsPage().clickOnTeamReports();
+	}
 
 }

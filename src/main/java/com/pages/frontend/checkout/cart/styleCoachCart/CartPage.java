@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -55,6 +56,9 @@ public class CartPage extends AbstractPage {
 
 	@FindBy(css = "li.error-msg span")
 	private WebElement errorMessageContainer;
+	
+	@FindBy(css = "li.error-msg span")
+	private WebElement errorJbMessage;
 
 	/**
 	 * Will grab all products data from all carts
@@ -325,6 +329,14 @@ public class CartPage extends AbstractPage {
 		element(jewerlyBonusInput).waitUntilVisible();
 		element(jewerlyBonusInput).clear();
 		element(jewerlyBonusInput).sendKeys(jevewrlyBonus);
+		
+	}
+	
+	public void typeJewerlyBonusAndEnter(String jevewrlyBonus) {
+		element(jewerlyBonusInput).waitUntilVisible();
+		element(jewerlyBonusInput).clear();
+		element(jewerlyBonusInput).sendKeys(jevewrlyBonus);
+		jewerlyBonusInput.sendKeys(Keys.ENTER);
 	}
 
 	public void typeMarketingBonus(String marketingBonus) {
@@ -394,4 +406,13 @@ public class CartPage extends AbstractPage {
 					.findElements(By.cssSelector("div.page-title ul.checkout-types button:last-child")).size() == 0);
 	}
 
+	
+	public void verifyJBErrorMessage(boolean found, String errorMessage) {
+		if (found && cartMainContainer.getText().contains(errorMessage))
+			Assert.assertTrue("The JB error message is visible and it shouldn't !", getDriver()
+					.findElements(By.cssSelector("li.error-msg span")).size() == 0);
+		else
+		Assert.assertTrue("The JB error message should be visible and it's not!", getDriver()
+				.findElement(By.cssSelector("li.error-msg span")).isDisplayed());
+	}
 }

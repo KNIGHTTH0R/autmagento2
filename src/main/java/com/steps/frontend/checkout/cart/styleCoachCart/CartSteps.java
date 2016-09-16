@@ -94,6 +94,11 @@ public class CartSteps extends AbstractSteps {
 	public void typeJewerlyBonus(String jevewrlyBonus) {
 		cartPage().typeJewerlyBonus(jevewrlyBonus);
 	}
+	
+	@Step
+	public void typeJewerlyBonusAndEnter(String jevewrlyBonus) {
+		cartPage().typeJewerlyBonusAndEnter(jevewrlyBonus);
+	}
 
 	@Step
 	public void typeMarketingBonus(String marketingBonus) {
@@ -122,4 +127,8 @@ public class CartSteps extends AbstractSteps {
 		cartPage().verifyPresenceOfGoToCheckoutButton(shouldBePresent);
 	}
 
+	@Step
+	public void verifyJBErrorMessage(boolean shouldBePresent, String message) {
+		cartPage().verifyJBErrorMessage(shouldBePresent, message);
+	}
 }

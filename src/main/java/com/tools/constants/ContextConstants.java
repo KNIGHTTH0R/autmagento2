@@ -51,6 +51,10 @@ public class ContextConstants {
 	public static String SUBSCRIPTION_PROCESSING_ORDER = MongoReader.getDictionaryItem("SUBSCRIPTION_PROCESSING_ORDER");
 	public static String SUBSCRIPTION_KOBO_ACTIVE = MongoReader.getDictionaryItem("SUBSCRIPTION_KOBO_ACTIVE");
 	public static String SUBSCRIPTION_BEFORE_PLACE_THE_ORDER = MongoReader.getDictionaryItem("SUBSCRIPTION_BEFORE_PLACE_THE_ORDER");
+	public static String PRODUCT_SHOULD_BE_REMOVED_FROM_CART = MongoReader.getDictionaryItem("PRODUCT_SHOULD_BE_REMOVED_FROM_CART");
+	public static String SOME_OF_PRODUCTS_ARE_OUT_OF_STOCK = MongoReader.getDictionaryItem("SOME_OF_PRODUCTS_ARE_OUT_OF_STOCK");
+	public static String THIS_ARTICLE_IS_OUT_OF_STOCK = MongoReader.getDictionaryItem("THIS_ARTICLE_IS_OUT_OF_STOCK");
+	
 
 	public static String INVITE_EMAIL_SUBJECT = MongoReader.getDictionaryItem("INVITE_EMAIL_SUBJECT");
 	public static String PARTY_CREATION_EMAIL_SUBJECT = MongoReader.getDictionaryItem("PARTY_CREATION_EMAIL_SUBJECT");

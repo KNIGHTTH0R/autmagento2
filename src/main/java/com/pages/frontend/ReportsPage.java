@@ -13,6 +13,11 @@ public class ReportsPage extends AbstractPage {
 
 	@FindBy(css = "li a[href*='stylereports/order/ipsreport/']")
 	private WebElement ipReportsLink;
+	
+	@FindBy(css = "li a[href*='stylereports/order/myteam/']")
+	private WebElement teamReportsLink;
+	
+	
 
 	public void downloadProductsOrderedBySku() {
 		element(downloadBySkuLink).waitUntilVisible();
@@ -23,6 +28,11 @@ public class ReportsPage extends AbstractPage {
 	public void clickOnIpReports() {
 		element(ipReportsLink).waitUntilVisible();
 		ipReportsLink.click();
+	}
+	
+	public void clickOnTeamReports() {
+		element(teamReportsLink).waitUntilVisible();
+		teamReportsLink.click();
 	}
 
 }

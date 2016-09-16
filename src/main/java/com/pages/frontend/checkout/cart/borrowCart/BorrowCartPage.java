@@ -35,6 +35,14 @@ public class BorrowCartPage extends AbstractPage {
 
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
+	
+	
+	@FindBy(css = "table.cart-table>tbody tr:nth-child(2)")
+	private WebElement borrowProductFromTable;
+	
+	@FindBy(css = "li.error-msg span")
+	private WebElement errorMessageContainer;
+	
 
 	public List<BorrowedCartModel> grabProductsData() {
 		element(cartTable).waitUntilVisible();
@@ -131,4 +139,30 @@ public class BorrowCartPage extends AbstractPage {
 
 	}
 
+	
+	public void verifyStockMessageForProduct(String productName, String stockInfo) {
+		element(borrowProductFromTable).waitUntilVisible();
+		List<WebElement> entryList = getDriver()
+				.findElements(By.cssSelector("table[class*='data-table cart-table'] tbody > tr"));
+		boolean found = false;
+		for (WebElement entry : entryList) {
+			if (entry.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(productName)) {
+				found = true;
+				Assert.assertTrue("The stock message is not correct !!!",
+						entry.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(stockInfo));
+				break;
+			}
+		}
+		Assert.assertTrue("The product was not found in the cart", found);
+	}
+
+	
+	public void verifyPresenceOfGoToCheckoutButton(boolean shouldBePresent) {
+		if (shouldBePresent)
+			Assert.assertTrue("The go to checkout button should be visible and it's not!", getDriver()
+					.findElement(By.cssSelector("div.page-title ul.checkout-types button:last-child")).isDisplayed());
+		else
+			Assert.assertTrue("The go to checkout button is visible and it shouldn't !", getDriver()
+					.findElements(By.cssSelector("div.page-title ul.checkout-types button:last-child")).size() == 0);
+	}
 }
