@@ -77,6 +77,8 @@ public class US21001CloseMonthTest extends BaseTest {
 	public void us21001CloseMonthTest() throws Exception {
 
 		backEndSteps.navigate(UrlConstants.COMMISSION_REPORTS_URL);
+		commissionReportSteps.login();
+		commissionReportSteps.selectMenu("Reports");
 		calculatedRewordPointsOfStylistModel = commissionReportSteps.closeMonthAndCalculateRewardPoints(stylistId, registrationModel.getDate(), lastCommissionRun);
 
 	}
