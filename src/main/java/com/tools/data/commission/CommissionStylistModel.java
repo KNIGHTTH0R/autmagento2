@@ -17,7 +17,7 @@ public class CommissionStylistModel {
 	private String ipUnsafe;
 	private String ipMonth;
 	private String ipNewFl;
-	private int teamPoints;
+	private String teamPoints;
 	private String teamPointsUnsafe;
 	private String retail;
 	private String tob;
@@ -45,11 +45,12 @@ public class CommissionStylistModel {
 	private String frontliners;
 	private int frontlinersQualified;
 	private String career;
-	private String goldFrontliners;
+	private int goldFrontliners;
 	private int newFrontliners;
 	private int ipForMyself;
 	private int ipForCustomers;
 	private int teamPointsTpr;
+	private String ancestors;
 
 	public String getId() {
 		return id;
@@ -169,14 +170,6 @@ public class CommissionStylistModel {
 
 	public void setIpNewFl(String ipNewFl) {
 		this.ipNewFl = ipNewFl;
-	}
-
-	public int getTeamPoints() {
-		return teamPoints;
-	}
-
-	public void setTeamPoints(int teamPoints) {
-		this.teamPoints = teamPoints;
 	}
 
 	public String getTeamPointsUnsafe() {
@@ -395,11 +388,20 @@ public class CommissionStylistModel {
 		this.career = career;
 	}
 
-	public String getGoldFrontliners() {
+
+	public String getTeamPoints() {
+		return teamPoints;
+	}
+
+	public void setTeamPoints(String teamPoints) {
+		this.teamPoints = teamPoints;
+	}
+
+	public int getGoldFrontliners() {
 		return goldFrontliners;
 	}
 
-	public void setGoldFrontliners(String goldFrontliners) {
+	public void setGoldFrontliners(int goldFrontliners) {
 		this.goldFrontliners = goldFrontliners;
 	}
 
@@ -435,4 +437,11 @@ public class CommissionStylistModel {
 		this.teamPointsTpr = teamPointsTpr;
 	}
 
+	public String getAncestors() {
+		return ancestors;
+	}
+
+	public void setAncestors(String ancestors) {
+		this.ancestors = ancestors;
+	}
 }

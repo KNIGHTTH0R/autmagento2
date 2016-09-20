@@ -8,17 +8,11 @@ import java.text.ParseException;
 import java.util.Locale;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
@@ -37,9 +31,7 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
-import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
-import com.tools.constants.TimeConstants;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.OrderModel;
@@ -54,6 +46,11 @@ import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US31.1 TP execution cron - Automated", type = "Scenarios")
 @Story(Application.TermPurchaseExecution.US31_2.class)
@@ -261,10 +258,12 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 
 	@After
 	public void saveData() throws Exception {
-		
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + HostDataGrabber.orderModelTp1.getOrderId() + EnvironmentConstants.JOB_TOKEN);
-//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
+
+		// ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL
+		// + HostDataGrabber.orderModelTp1.getOrderId() +
+		// EnvironmentConstants.JOB_TOKEN);
+		// backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		// ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
 
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
@@ -293,12 +292,16 @@ public class US31002PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveIncrementId(prod3IncrementId, getClass().getSimpleName() + "TP3");
 		MongoWriter.saveIncrementId(prod4IncrementId, getClass().getSimpleName() + "TP4");
 
-//		orderModelListTp1 = MongoReader.getOrderModel("US31003PartyHostBuysForCustomerTpTest" + "TP1").get(0);
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId()
-//				+ EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
-//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
-//				EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
+		// orderModelListTp1 =
+		// MongoReader.getOrderModel("US31003PartyHostBuysForCustomerTpTest" +
+		// "TP1").get(0);
+		// ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL
+		// + orderModelListTp1.getOrderId()
+		// + EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME,
+		// EnvironmentConstants.PASSWORD);
+		// backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		// ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT,
+		// EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 
 	}
 }

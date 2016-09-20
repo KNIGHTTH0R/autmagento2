@@ -1,5 +1,7 @@
 package com.tools.commision;
 
+import com.tools.commision.Parties.Parties;
+
 public class StylistBody {
 
 	private String id;
@@ -17,7 +19,7 @@ public class StylistBody {
 	private String ipUnsafe;
 	private String ipMonth;
 	private String ipNewFl;
-	private int teamPoints;
+	private String teamPoints;
 	private String teamPointsUnsafe;
 	private String retail;
 	private String tob;
@@ -45,12 +47,15 @@ public class StylistBody {
 	private String frontliners;
 	private int frontlinersQualified;
 	private String career;
-	private String goldFrontliners;
+	private int goldFrontliners;
 	private int newFrontliners;
 	private int ipForMyself;
 	private int ipForCustomers;
-	private int teamPointsTpr;
-	private int teamPointsIpTpr;
+	private int payoutForCustomers; 
+	private int payoutForMyself; 
+	private int payoutVia25; 
+	private String teamPointsTpr;
+	private String teamPointsIpTpr;
 	private String ppr;
 	private String tpr;
 	private String tprLevel1;
@@ -63,6 +68,70 @@ public class StylistBody {
 	private String matchingBonus;
 	private String tprDiff;
 	private String stylistMatching;
+	private Parties parties;
+	private String ancestors;
+	private int topNrNewStylists;
+	private int topNrActiveStylist500Ip;
+	private int topIpsNextTob;
+	private int topIp;
+	private String careerLevelName;
+	private String paylevelName;
+
+	public String getAncestors() {
+		return ancestors;
+	}
+
+	public void setAncestors(String ancestors) {
+		this.ancestors = ancestors;
+	}
+
+	public int getTopNrNewStylists() {
+		return topNrNewStylists;
+	}
+
+	public void setTopNrNewStylists(int topNrNewStylists) {
+		this.topNrNewStylists = topNrNewStylists;
+	}
+
+	public int getTopNrActiveStylist500Ip() {
+		return topNrActiveStylist500Ip;
+	}
+
+	public void setTopNrActiveStylist500Ip(int topNrActiveStylist500Ip) {
+		this.topNrActiveStylist500Ip = topNrActiveStylist500Ip;
+	}
+
+	public int getTopIpsNextTob() {
+		return topIpsNextTob;
+	}
+
+	public void setTopIpsNextTob(int topIpsNextTob) {
+		this.topIpsNextTob = topIpsNextTob;
+	}
+
+	public int getTopIp() {
+		return topIp;
+	}
+
+	public void setTopIp(int topIp) {
+		this.topIp = topIp;
+	}
+
+	public String getCareerLevelName() {
+		return careerLevelName;
+	}
+
+	public void setCareerLevelName(String careerLevelName) {
+		this.careerLevelName = careerLevelName;
+	}
+
+	public String getPaylevelName() {
+		return paylevelName;
+	}
+
+	public void setPaylevelName(String paylevelName) {
+		this.paylevelName = paylevelName;
+	}
 
 	public String getId() {
 		return id;
@@ -182,14 +251,6 @@ public class StylistBody {
 
 	public void setIpNewFl(String ipNewFl) {
 		this.ipNewFl = ipNewFl;
-	}
-
-	public int getTeamPoints() {
-		return teamPoints;
-	}
-
-	public void setTeamPoints(int teamPoints) {
-		this.teamPoints = teamPoints;
 	}
 
 	public String getTeamPointsUnsafe() {
@@ -408,14 +469,6 @@ public class StylistBody {
 		this.career = career;
 	}
 
-	public String getGoldFrontliners() {
-		return goldFrontliners;
-	}
-
-	public void setGoldFrontliners(String goldFrontliners) {
-		this.goldFrontliners = goldFrontliners;
-	}
-
 	public int getNewFrontliners() {
 		return newFrontliners;
 	}
@@ -439,23 +492,6 @@ public class StylistBody {
 	public void setIpForCustomers(int ipForCustomers) {
 		this.ipForCustomers = ipForCustomers;
 	}
-
-	public int getTeamPointsTpr() {
-		return teamPointsTpr;
-	}
-
-	public void setTeamPointsTpr(int teamPointsTpr) {
-		this.teamPointsTpr = teamPointsTpr;
-	}
-
-	public int getTeamPointsIpTpr() {
-		return teamPointsIpTpr;
-	}
-
-	public void setTeamPointsIpTpr(int teamPointsIpTpr) {
-		this.teamPointsIpTpr = teamPointsIpTpr;
-	}
-
 
 	public int getDiffPath() {
 		return diffPath;
@@ -553,5 +589,72 @@ public class StylistBody {
 	public void setStylistMatching(String stylistMatching) {
 		this.stylistMatching = stylistMatching;
 	}
+
+	public String getTeamPoints() {
+		return teamPoints;
+	}
+
+	public void setTeamPoints(String teamPoints) {
+		this.teamPoints = teamPoints;
+	}
+
+	public int getGoldFrontliners() {
+		return goldFrontliners;
+	}
+
+	public void setGoldFrontliners(int goldFrontliners) {
+		this.goldFrontliners = goldFrontliners;
+	}
+
+	public String getTeamPointsTpr() {
+		return teamPointsTpr;
+	}
+
+	public void setTeamPointsTpr(String teamPointsTpr) {
+		this.teamPointsTpr = teamPointsTpr;
+	}
+
+	public String getTeamPointsIpTpr() {
+		return teamPointsIpTpr;
+	}
+
+	public void setTeamPointsIpTpr(String teamPointsIpTpr) {
+		this.teamPointsIpTpr = teamPointsIpTpr;
+	}
+
+	public int getPayoutForCustomers() {
+		return payoutForCustomers;
+	}
+
+	public void setPayoutForCustomers(int payoutForCustomers) {
+		this.payoutForCustomers = payoutForCustomers;
+	}
+
+	public int getPayoutForMyself() {
+		return payoutForMyself;
+	}
+
+	public void setPayoutForMyself(int payoutForMyself) {
+		this.payoutForMyself = payoutForMyself;
+	}
+
+	public int getPayoutVia25() {
+		return payoutVia25;
+	}
+
+	public void setPayoutVia25(int payoutVia25) {
+		this.payoutVia25 = payoutVia25;
+	}
+
+	public Parties getParties() {
+		return parties;
+	}
+
+	public void setParties(Parties parties) {
+		this.parties = parties;
+	}
+	
+	
+	
 
 }

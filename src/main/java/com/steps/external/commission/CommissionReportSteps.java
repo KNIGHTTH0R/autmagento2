@@ -8,6 +8,7 @@ import com.connectors.http.ApacheHttpHelper;
 import com.tools.constants.DateConstants;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.TimeConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.data.backend.IpModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.generalCalculation.ClosedMonthBonusCalculation;
@@ -19,9 +20,9 @@ public class CommissionReportSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void login() {
-		commissionReportPage().enterUsername("admin");
-		commissionReportPage().enterPassword("qwerty");
+	public void loginAsAdmin() {
+		commissionReportPage().enterUsername(UrlConstants.COMMISSION_USERNAME);
+		commissionReportPage().enterPassword(UrlConstants.COMMISSION_PASSWORD);
 		commissionReportPage().clickLogin();
 	}
 

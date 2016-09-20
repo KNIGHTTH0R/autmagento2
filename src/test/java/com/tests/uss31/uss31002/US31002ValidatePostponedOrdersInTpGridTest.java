@@ -4,11 +4,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +25,6 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.TermPurchaseOrderModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.HostDataGrabber;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -38,6 +32,11 @@ import com.tools.utils.DateUtils;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.TermPurchase.TermPurcaseOrderValidationWorkflows;
 import com.workflows.backend.partyHost.HostOrderProductsWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US31.1 TP execution cron - Automated", type = "Scenarios")
 @Story(Application.TermPurchaseExecution.US31_2.class)

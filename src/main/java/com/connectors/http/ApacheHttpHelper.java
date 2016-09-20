@@ -13,7 +13,6 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.tools.constants.HttpConstants;
-import com.tools.constants.EnvironmentConstants;
 
 //TODO deprecated - try to change this
 

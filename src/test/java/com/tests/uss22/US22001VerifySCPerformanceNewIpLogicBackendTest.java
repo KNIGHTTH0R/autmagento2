@@ -85,7 +85,9 @@ public class US22001VerifySCPerformanceNewIpLogicBackendTest extends BaseTest {
 		}
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		backEndSteps.navigate(UrlConstants.COMMISSION_REPORTS_URL);
+		backEndSteps.navigate(UrlConstants.COMMISSION_URL);
+		commissionReportSteps.loginAsAdmin();
+		commissionReportSteps.selectMenu(UrlConstants.COMMISSION_REPORTS);
 		ipModel = commissionReportSteps.closeLastMonthAndGetCurrentMonthIps(stylistId);
 		commissionStylistModel = ComissionRestCalls.getStylistInfo(stylistId);
 		expectedLoungeIpPerformanceModel = stylecoachPerformanceValidationWorkflow.populateLoungeIpPerformanceModel(ipModel, commissionStylistModel);

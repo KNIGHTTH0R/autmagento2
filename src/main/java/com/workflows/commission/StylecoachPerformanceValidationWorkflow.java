@@ -19,7 +19,7 @@ public class StylecoachPerformanceValidationWorkflow {
 		result.setIndividualPoints(ipModel.getIp());
 		result.setUnsafeIndividualPoints(ipModel.getUnsafeIp());
 		result.setTeamPoints(String.valueOf(commissionStylistModel.getTeamPoints()));
-		result.setGoldStyleCoaches(commissionStylistModel.getGoldFrontliners());
+		result.setGoldStyleCoaches(String.valueOf(commissionStylistModel.getGoldFrontliners()));
 		result.setStyleCoachFirstLevel(commissionStylistModel.getFrontliners());
 
 		return result;

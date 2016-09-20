@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.utils.PrintUtils;
 

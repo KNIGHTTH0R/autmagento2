@@ -17,6 +17,7 @@ import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.DBOrderModel;
+import com.tools.persistance.MongoReader;
 
 /**
  * @author mihaibarta
@@ -53,8 +54,8 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -86,7 +87,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
 		key2B.addTextNode(SoapConstants.GREATER_THAN);
 		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
-		value2B.addTextNode("2015-11-18 00:00:00");
+		value2B.addTextNode("2016-06-01 00:00:00");
 
 		// testing purpose
 		// SOAPElement complexObjectArrayC =

@@ -24,12 +24,10 @@ import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
-import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
@@ -77,8 +75,6 @@ public class US32001CheckPlaceCustomerOrderTpRestrictionsTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		HostCartCalculator.wipe();
-		HostDataGrabber.wipe();
 
 		customerData = new CustomerFormModel();
 		addressData = new AddressModel();

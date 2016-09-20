@@ -55,10 +55,13 @@ public class UrlConstants {
 	
 	//commision
 	public static final String COMMISION_WEB_BASE = "http://commission-staging-aut.pippajean.com/api/";
-	public static final String COMMISION_STYLIST_SUFFIX = "stylist.json/";
+	public static final String COMMISION_STYLIST_SUFFIX = "stylist.json";
 	public static final String COMMISION_PARTY_SUFFIX = "party.json/";
 	public static final String TEAM_PERFORMANCE_SUFFIX = "performance-team.json/";
-	public static final String COMMISSION_REPORTS_URL = "https://commission-staging-aut.pippajean.com/report";
+	public static final String COMMISSION_URL = "https://commission-staging-aut.pippajean.com";
+	public static final String COMMISSION_USERNAME = "admin";
+	public static final String COMMISSION_PASSWORD = "qwerty";
+	public static final String COMMISSION_REPORTS = "Reports";
 	
 	//navision
 	public static final String IMPORT_INTERFACE_URL = "http://Navision:_N1v2s34N_@148.251.178.207/PjOrderImport/Home/ImportierenAut";
