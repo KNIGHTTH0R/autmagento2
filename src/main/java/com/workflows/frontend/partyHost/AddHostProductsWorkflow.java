@@ -39,4 +39,12 @@ public class AddHostProductsWorkflow {
 		return productSteps.setHostBasicProductAddToCart(model,qty, productProperty, finalPrice, ipPoints);
 	}
 
+
+	@StepGroup
+	@Title("Add product to wishlist")
+	public void addProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
+		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		productSteps.addToWishlist(qty, productProperty);
+	}
+
 }

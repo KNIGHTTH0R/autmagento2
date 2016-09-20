@@ -6,6 +6,8 @@ import net.thucydides.core.annotations.Title;
 
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
+import com.tools.cartcalculations.smf.CartDiscountsCalculation;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -38,4 +40,13 @@ public class AddBorrowedProductsWorkflow {
 		return productSteps.setBorrowedDefaultProductAddToCart();
 	}
 
+	
+	@StepGroup
+	@Title("Add product to wishlist")
+	public RegularBasicProductModel setBasicProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
+		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+
+		return productSteps.setRegularBasicProductAddToWishlist(model,qty, productProperty, finalPrice);
+	}
 }
