@@ -34,6 +34,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.smf.CartCalculator;
 import com.tools.constants.ConfigConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -159,7 +160,7 @@ public class US32001BuyProductsForTheFirstTimeSpecialCaseTest extends BaseTest {
 		cartSteps.updateProductQuantityIn50DiscountArea("2");
 		cartSteps.updateCart();
 		cartSteps.typeJewerlyBonusAndEnter(jewelryDiscount3);
-		cartSteps.verifyJBErrorMessage(true,"SCHMUCKBONUS MUSS ZWISCHEN 0 UND");
+		cartSteps.verifyJBErrorMessage(false,ContextConstants.ERROR_MESSAGE_FOR_JB);
 
 		cartSteps.grabTotals();
 		cartSteps.goToShipping();

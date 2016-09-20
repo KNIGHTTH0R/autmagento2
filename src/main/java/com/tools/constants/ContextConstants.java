@@ -121,6 +121,8 @@ public class ContextConstants {
 	public static String CANCELED_ORDER_SUBJECT = MongoReader.getDictionaryItem("CANCELED_ORDER_SUBJECT");
 	
 	
+	public static String ERROR_MESSAGE_FOR_JB = MongoReader.getDictionaryItem("ERROR_MESSAGE_FOR_JB");
+	
 	
 	
 

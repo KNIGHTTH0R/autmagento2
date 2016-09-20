@@ -104,6 +104,7 @@ import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.IpReportsPage;
 import com.pages.frontend.reports.JewelryBonusHistoryPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
+import com.pages.frontend.reports.TeamReportPage;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
@@ -505,6 +506,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public UnbounceDykscPage unbounceDykscPage() {
 		return getPages().currentPageAt(UnbounceDykscPage.class);
+	}
+	
+	public TeamReportPage teamReportPage() {
+		return getPages().currentPageAt(TeamReportPage.class);
 	}
 
 	// cart
