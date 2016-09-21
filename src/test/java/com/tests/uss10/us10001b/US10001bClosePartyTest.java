@@ -73,15 +73,7 @@ public class US10001bClosePartyTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-		dateModel = MongoReader.grabDateModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-
-		Long partyCreationTime = Long.parseLong(dateModel.getDate());
-		Long currentTime = System.currentTimeMillis();
-
-		// if less than 30 minutes passed skip the test
-		if (currentTime - partyCreationTime < 1800000) {
-			runTest = false;
-		}
+		dateModel = MongoReader.grabDateModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);	
 
 	}
 

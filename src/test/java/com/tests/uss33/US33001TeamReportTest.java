@@ -81,7 +81,8 @@ public class US33001TeamReportTest extends BaseTest {
 
 	@Test
 	public void us33001TeamReportTest() {
-		frontEndSteps.performLogin(username, password);
+	//	frontEndSteps.performLogin(username, password);
+		frontEndSteps.performLogin("irina.neagu@evozon.com", "irina1");
 		
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -89,13 +90,15 @@ public class US33001TeamReportTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.redirectToStylistReports();
 		reportsSteps.clickOnTeamReports();
-		//teamReportSteps.searchInput("mos");
+	//	teamReportSteps.searchInput("roberto");
 		teamReportSteps.clickTeamTab();
-		teamReportSteps.clickStylePartyTab();
-		teamReportSteps.clickTakeOffPhaseTab();
-		teamReportSteps.selectPagination("100");
-		teamReportSteps.clickTeamTab();
-		teamReportSteps.selectMonth("2016-SEP");
+		//teamReportSteps.clickStylePartyTab();
+	//	teamReportSteps.clickTakeOffPhaseTab();
+	//	teamReportSteps.selectPagination("100");
+	//	teamReportSteps.clickTeamTab();
+		teamReportSteps.selectMonth("2016-Sep");
+		teamReportSteps.getStylistName();
+		
 	}
 	
 }
