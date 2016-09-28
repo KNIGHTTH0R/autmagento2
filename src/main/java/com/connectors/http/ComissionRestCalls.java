@@ -3,7 +3,6 @@ package com.connectors.http;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.tools.commision.CommisionPartyResponse;
@@ -15,6 +14,7 @@ import com.tools.constants.Separators;
 import com.tools.constants.UrlConstants;
 import com.tools.data.commission.CommissionPartyModel;
 import com.tools.data.commission.CommissionStylistModel;
+import com.tools.generalCalculation.CommissionService;
 import com.tools.utils.DateUtils;
 import com.tools.utils.MD5;
 import com.tools.utils.PrintUtils;
@@ -23,12 +23,34 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		// ComissionRestCalls.getStylistInfo("1");
-		List<CommissionStylistModel> l = ComissionRestCalls.getStylistsFromLevel("2513",1);
-		for (CommissionStylistModel commissionStylistModel : l) {
+		List<CommissionStylistModel> allStylists = ComissionRestCalls.getStylistListInfo();
+		List<CommissionStylistModel> level1List = CommissionService.getStylistsFromLevel(allStylists,"1030",1);
+		List<CommissionStylistModel> level2List = CommissionService.getStylistsFromLevel(allStylists,"1030",2);
+		List<CommissionStylistModel> level3List = CommissionService.getStylistsFromLevel(allStylists,"1030",3);
+		
+		System.out.println("-----------level 1----------------------------");
+		
+		for (CommissionStylistModel commissionStylistModel : level1List) {
 			System.out.println(commissionStylistModel.getName());
+			System.out.println(commissionStylistModel.getActivatedAt());
+			System.out.println(commissionStylistModel.getParentStylistId());
 		}
-		// ComissionRestCalls.getPartyPerformanceInfo("57937");
+		
+		System.out.println("-------------level 2--------------------------");
+		
+		for (CommissionStylistModel commissionStylistModel : level2List) {
+			System.out.println(commissionStylistModel.getName());
+			System.out.println(commissionStylistModel.getActivatedAt());
+			System.out.println(commissionStylistModel.getParentStylistId());
+		}
+		
+		System.out.println("--------------level 3-------------------------");
+		
+		for (CommissionStylistModel commissionStylistModel : level3List) {
+			System.out.println(commissionStylistModel.getName());
+			System.out.println(commissionStylistModel.getActivatedAt());
+			System.out.println(commissionStylistModel.getParentStylistId());
+		}
 
 	}
 
@@ -221,22 +243,6 @@ public class ComissionRestCalls {
 				+ UrlConstants.TEAM_PERFORMANCE_SUFFIX + stylistId + composeAuthenticationSuffix());
 
 		return unparsedResponse;
-	}
-
-	// TODO move this from here
-	public static List<CommissionStylistModel> getStylistsFromLevel(String stylistId, int level) throws Exception {
-
-		List<CommissionStylistModel> allStylists = ComissionRestCalls.getStylistListInfo();
-
-		List<CommissionStylistModel> levelStylists = new ArrayList<CommissionStylistModel>();
-
-		for (CommissionStylistModel stylist : allStylists) {
-			String[] ancestors = stylist.getAncestors().split(",");
-			if (ArrayUtils.indexOf(ancestors, stylistId) == level - 1) {
-				levelStylists.add(stylist);
-			}
-		}
-		return levelStylists;
 	}
 
 }

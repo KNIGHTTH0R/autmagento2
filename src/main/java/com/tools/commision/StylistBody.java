@@ -1,5 +1,7 @@
 package com.tools.commision;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.tools.commision.Parties.Parties;
 
 public class StylistBody {
@@ -51,9 +53,9 @@ public class StylistBody {
 	private int newFrontliners;
 	private int ipForMyself;
 	private int ipForCustomers;
-	private int payoutForCustomers; 
-	private int payoutForMyself; 
-	private int payoutVia25; 
+	private int payoutForCustomers;
+	private int payoutForMyself;
+	private int payoutVia25;
 	private String teamPointsTpr;
 	private String teamPointsIpTpr;
 	private String ppr;
@@ -61,7 +63,8 @@ public class StylistBody {
 	private String tprLevel1;
 	private String tprLevel2;
 	private String tpr_diff;
-	private int diffPath;
+	@JsonIgnore
+	private String diffPath;
 	private String autoBonus;
 	private String teamPointsLevel1Tpr;
 	private String teamPointsLevel2Tpr;
@@ -493,14 +496,13 @@ public class StylistBody {
 		this.ipForCustomers = ipForCustomers;
 	}
 
-	public int getDiffPath() {
+	public String getDiffPath() {
 		return diffPath;
 	}
 
-	public void setDiffPath(int diffPath) {
+	public void setDiffPath(String diffPath) {
 		this.diffPath = diffPath;
 	}
-
 
 	public void setMatchingBonus(String matchingBonus) {
 		this.matchingBonus = matchingBonus;
@@ -653,8 +655,5 @@ public class StylistBody {
 	public void setParties(Parties parties) {
 		this.parties = parties;
 	}
-	
-	
-	
 
 }
