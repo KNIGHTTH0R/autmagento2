@@ -14,6 +14,7 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.NodeList;
 
 import com.tools.constants.SoapConstants;
+import com.tools.constants.SoapKeys;
 import com.tools.data.soap.DBStylistPartyModel;
 
 public class PartyMagentoCalls {
@@ -53,14 +54,14 @@ public class PartyMagentoCalls {
 		SOAPMessage soapMessage = HttpSoapConnector.createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement getStylisPartytRequestParam = soapBody.addChildElement("stylistPartyListRequestParam", "urn");
+		SOAPElement getStylisPartytRequestParam = soapBody.addChildElement("stylistPartyListRequestParam", SoapKeys.URN_PREFIX);
 
 		SOAPElement sessionID = getStylisPartytRequestParam.addChildElement("sessionId");
 		sessionID.addTextNode(ssID);
 
-		SOAPElement filters = getStylisPartytRequestParam.addChildElement("filters");
-		SOAPElement filter = filters.addChildElement("filter");
-		SOAPElement complexObjectArray = filter.addChildElement("complexObjectArray");
+		SOAPElement filters = getStylisPartytRequestParam.addChildElement(SoapKeys.FILTERS);
+		SOAPElement filter = filters.addChildElement(SoapKeys.FILTER);
+		SOAPElement complexObjectArray = filter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
 		SOAPElement key = complexObjectArray.addChildElement("key");
 		key.addTextNode(SoapConstants.STYLIST_ID_FILTER);
 		SOAPElement value = complexObjectArray.addChildElement("value");
@@ -82,8 +83,8 @@ public class PartyMagentoCalls {
 		NodeList stylistPartyList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
 		for (int i = 0; i < stylistPartyList.getLength(); i++) {
 			DBStylistPartyModel model = new DBStylistPartyModel();
-		//	model.setClosetAt("2054-02-02 11:20:55");
-		//	model.setDeletedAt("2054-02-02 11:20:55");
+//			model.setClosetAt("2100-02-02 00:00:00");
+//			model.setDeletedAt("2100-02-02 00:00:00");
 			NodeList childNodes = stylistPartyList.item(i).getChildNodes();
 			for (int j = 0; j < childNodes.getLength(); j++) {
 
