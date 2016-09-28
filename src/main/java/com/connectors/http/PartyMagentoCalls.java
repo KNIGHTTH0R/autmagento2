@@ -15,10 +15,12 @@ import org.w3c.dom.NodeList;
 
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.soap.DBStylistPartyModel;
+import com.tools.persistance.MongoReader;
 
 public class PartyMagentoCalls {
-	
+
 	public static List<DBStylistPartyModel> getPartyList(String stylistId) {
 
 		List<DBStylistPartyModel> partyList = new ArrayList<DBStylistPartyModel>();
@@ -40,21 +42,25 @@ public class PartyMagentoCalls {
 
 		return partyList;
 	}
-	
+
 	public static SOAPMessage soapGetStylistPartyList(String stylistId) throws SOAPException, IOException {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getStylistPartyList(sessID,stylistId), "https://admin-staging-int.pippajean.com/index.php/api/v2_soap/index/");
+		SOAPMessage soapResponse = soapConnection.call(getStylistPartyList(sessID, stylistId),
+				MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getStylistPartyList(sessID, stylistId),
+//				"https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
-	
+
 	private static SOAPMessage getStylistPartyList(String ssID, String stylistId) throws SOAPException, IOException {
 		SOAPMessage soapMessage = HttpSoapConnector.createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement getStylisPartytRequestParam = soapBody.addChildElement("stylistPartyListRequestParam", SoapKeys.URN_PREFIX);
+		SOAPElement getStylisPartytRequestParam = soapBody.addChildElement("stylistPartyListRequestParam",
+				SoapKeys.URN_PREFIX);
 
 		SOAPElement sessionID = getStylisPartytRequestParam.addChildElement("sessionId");
 		sessionID.addTextNode(ssID);
@@ -75,7 +81,7 @@ public class PartyMagentoCalls {
 
 		return soapMessage;
 	}
-	
+
 	private static List<DBStylistPartyModel> extractStylistPartyData(SOAPMessage response) throws Exception {
 
 		List<DBStylistPartyModel> stylistPartyModelList = new ArrayList<DBStylistPartyModel>();
@@ -83,8 +89,13 @@ public class PartyMagentoCalls {
 		NodeList stylistPartyList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
 		for (int i = 0; i < stylistPartyList.getLength(); i++) {
 			DBStylistPartyModel model = new DBStylistPartyModel();
-//			model.setClosetAt("2100-02-02 00:00:00");
-//			model.setDeletedAt("2100-02-02 00:00:00");
+			// Inn case that the two fields are not defined we set the date in
+			// the future so when we filter the dates we will not get an
+			// exception
+			// Setting the date far in the future means that the party is not
+			// closed or/and is not deleted
+			model.setClosedAt("2100-02-02 00:00:00");
+			model.setDeletedAt("2100-02-02 00:00:00");
 			NodeList childNodes = stylistPartyList.item(i).getChildNodes();
 			for (int j = 0; j < childNodes.getLength(); j++) {
 
@@ -94,18 +105,24 @@ public class PartyMagentoCalls {
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
 					model.setPartyId(childNodes.item(j).getTextContent());
 				}
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("party_date_time")) {
+					model.setPartyDate(childNodes.item(j).getTextContent());
+				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("closed_at")) {
 					model.setClosedAt(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("deleted_at")) {
 					model.setDeletedAt(childNodes.item(j).getTextContent());
 				}
-			
 			}
 			stylistPartyModelList.add(model);
 		}
 		return stylistPartyModelList;
 
 	}
+
+//	public static void main(String args[]) {
+//		PartyMagentoCalls.getPartyList("2513");
+//	}
 
 }
