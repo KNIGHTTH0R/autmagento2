@@ -89,16 +89,16 @@ public class PartyMagentoCalls {
 			for (int j = 0; j < childNodes.getLength(); j++) {
 
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("party_id")) {
-					model.setStylist_id(childNodes.item(j).getTextContent());
+					model.setStylistId(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
-					model.setParty_id(childNodes.item(j).getTextContent());
+					model.setPartyId(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("closed_at")) {
-					model.setStylist_id(childNodes.item(j).getTextContent());
+					model.setClosedAt(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("deleted_at")) {
-					model.setParty_id(childNodes.item(j).getTextContent());
+					model.setDeletedAt(childNodes.item(j).getTextContent());
 				}
 			
 			}
