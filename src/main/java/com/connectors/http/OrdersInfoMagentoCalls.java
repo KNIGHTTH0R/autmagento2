@@ -30,13 +30,13 @@ public class OrdersInfoMagentoCalls {
 
 	public static List<DBOrderModel> getOrdersList(String stylistId) {
 
-		List<DBOrderModel> stylistList = new ArrayList<DBOrderModel>();
+		List<DBOrderModel> orderList = new ArrayList<DBOrderModel>();
 
 		try {
 			SOAPMessage response = soapGetOrdersList(stylistId);
 			System.out.println(response);
 			try {
-				stylistList = extractOrderData(response);
+				orderList = extractOrderData(response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -47,7 +47,29 @@ public class OrdersInfoMagentoCalls {
 			e.printStackTrace();
 		}
 
-		return stylistList;
+		return orderList;
+	}
+	
+	public static List<DBOrderModel> getPartyOrdersList(String partyId) {
+
+		List<DBOrderModel> orderList = new ArrayList<DBOrderModel>();
+
+		try {
+			SOAPMessage response = soapGetPartyOrdersList(partyId);
+			System.out.println(response);
+			try {
+				orderList = extractOrderData(response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return orderList;
 	}
 
 	public static SOAPMessage soapGetOrdersList(String stylistId) throws SOAPException, IOException {
@@ -55,6 +77,16 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+	
+	public static SOAPMessage soapGetPartyOrdersList(String partyId) throws SOAPException, IOException {
+		String sessID = HttpSoapConnector.performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId), MongoReader.getSoapURL() + UrlConstants.API_URI);
 //		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
@@ -89,17 +121,34 @@ public class OrdersInfoMagentoCalls {
 		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
 		value2B.addTextNode("2016-06-01 00:00:00");
 
-		// testing purpose
-		// SOAPElement complexObjectArrayC =
-		// complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
-		// SOAPElement keyC = complexObjectArrayC.addChildElement(SoapKeys.KEY);
-		// keyC.addTextNode("increment_id");
-		// SOAPElement valueC =
-		// complexObjectArrayC.addChildElement(SoapKeys.VALUE);
-		// SOAPElement key2C = valueC.addChildElement(SoapKeys.KEY);
-		// key2C.addTextNode(SoapConstants.EQUAL);
-		// SOAPElement value2C = valueC.addChildElement(SoapKeys.VALUE);
-		// value2C.addTextNode("staging-int00005854");
+		soapMessage.saveChanges();
+
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+	
+	private static SOAPMessage getPartyOrdersListRequest(String ssID, String partyId) throws SOAPException, IOException {
+		SOAPMessage soapMessage = HttpSoapConnector.createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement getStylistRequestParam = soapBody.addChildElement(SoapKeys.ORDERS_LIST, SoapKeys.URN_PREFIX);
+
+		SOAPElement sessionID = getStylistRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+
+		SOAPElement filters = getStylistRequestParam.addChildElement(SoapKeys.FILTERS);
+		SOAPElement complexFilter = filters.addChildElement(SoapKeys.COMPLEX_FILTER);
+		SOAPElement complexObjectArray = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement key = complexObjectArray.addChildElement(SoapKeys.KEY);
+		key.addTextNode(SoapConstants.STYLE_PARTY_ID_FILTER);
+		SOAPElement value = complexObjectArray.addChildElement(SoapKeys.VALUE);
+		SOAPElement key2 = value.addChildElement(SoapKeys.KEY);
+		key2.addTextNode(SoapConstants.EQUAL);
+		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
+		value2.addTextNode(partyId);
 
 		soapMessage.saveChanges();
 

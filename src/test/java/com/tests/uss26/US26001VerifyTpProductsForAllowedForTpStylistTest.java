@@ -113,6 +113,7 @@ public class US26001VerifyTpProductsForAllowedForTpStylistTest extends BaseTest 
 	public void us26001VerifyTpProductsForAllowedForTpStylistTest() throws IOException, ParseException {
 
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
+	//	frontEndSteps.performLogin("irina.neagu@evozon.com", "irina1");
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
