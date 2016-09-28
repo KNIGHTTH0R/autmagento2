@@ -88,6 +88,7 @@ public class US26001VerifyProdNotAvailableInAvailabilityReportTest extends BaseT
 	public void us26001VerifyProdNotAvailableInAvailabilityReportTest() throws IOException {
 
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
+	//	frontEndSteps.performLogin("irina.neagu@evozon.com", "irina1");
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

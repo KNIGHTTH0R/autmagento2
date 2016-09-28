@@ -84,7 +84,7 @@ public class ReportsSteps extends AbstractSteps {
 		Assert.assertTrue("The product is not marked correctly",
 				getProductLine(model.getSku()).contains(
 						DateUtils.parseDate(model.getStockData().getEarliestAvailability(), "yyyy-MM-dd", "dd. MMMM",
-								new Locale.Builder().setLanguage(MongoReader.getContext()).build()) + " *"));
+								new Locale.Builder().setLanguage(MongoReader.getContext()).build()) + "***"));
 	}
 
 	@Title("Verify product has no * next to earliest availability date")
@@ -95,7 +95,7 @@ public class ReportsSteps extends AbstractSteps {
 		Assert.assertTrue("The product is not marked correctly",
 				line.contains(DateUtils.parseDate(model.getStockData().getEarliestAvailability(), "yyyy-MM-dd",
 						"dd. MMMM", new Locale.Builder().setLanguage(MongoReader.getContext()).build()))
-						&& !line.contains("*"));
+						&& !line.contains("***"));
 	}
 
 	@Title("Verify product has no * next to will be announced status")
@@ -104,7 +104,7 @@ public class ReportsSteps extends AbstractSteps {
 	public void verifyNoAsteriscNextToWillBeAnnouncedStatus(ProductDetailedModel model) throws ParseException {
 		String line = getProductLine(model.getSku());
 		Assert.assertTrue("The product is not marked correctly",
-				line.contains(ContextConstants.WILL_BE_ANNOUNCED) && !line.contains("*"));
+				line.contains(ContextConstants.WILL_BE_ANNOUNCED) && !line.contains("***"));
 	}
 
 	private String getNotAvailableProductsSectionText() {

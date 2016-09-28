@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -25,6 +24,8 @@ import com.steps.frontend.reports.TeamReportSteps;
 import com.tests.BaseTest;
 import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
+import com.tools.data.TeamReportTeamTabModel;
+import com.tools.data.commission.CommissionStylistModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -47,12 +48,16 @@ public class US33001TeamReportTest extends BaseTest {
 	@Steps
 	public TeamReportSteps teamReportSteps;
 	
-	
+	CommissionStylistModel expectedModel1;
+	private TeamReportTeamTabModel teamReportTab1 = new TeamReportTeamTabModel();
 	
 	private String username, password;
 	
 	@Before
 	public void setUp() throws Exception {
+		
+//		expectedModel1.setName(teamReportTab1.getStyleCoachName());
+//		expectedModel1.setParentStylistId(teamReportTab1.getSponsorName());
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -77,12 +82,14 @@ public class US33001TeamReportTest extends BaseTest {
 				}
 			}
 		}
+		
+	
 	}
 
 	@Test
 	public void us33001TeamReportTest() {
-	//	frontEndSteps.performLogin(username, password);
-		frontEndSteps.performLogin("irina.neagu@evozon.com", "irina1");
+		frontEndSteps.performLogin(username, password);
+	//	frontEndSteps.performLogin("irina.neagu@evozon.com", "irina1");
 		
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -90,13 +97,13 @@ public class US33001TeamReportTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.redirectToStylistReports();
 		reportsSteps.clickOnTeamReports();
-	//	teamReportSteps.searchInput("roberto");
+		teamReportSteps.searchInput("roberto");
 		teamReportSteps.clickTeamTab();
-		//teamReportSteps.clickStylePartyTab();
-	//	teamReportSteps.clickTakeOffPhaseTab();
-	//	teamReportSteps.selectPagination("100");
-	//	teamReportSteps.clickTeamTab();
-		teamReportSteps.selectMonth("2016-Sep");
+		teamReportSteps.clickStylePartyTab();
+		teamReportSteps.clickTakeOffPhaseTab();
+		teamReportSteps.selectPagination("100");
+		teamReportSteps.clickTeamTab();
+	//	teamReportSteps.selectMonth("2016-Apr");
 		teamReportSteps.getStylistName();
 		
 	}

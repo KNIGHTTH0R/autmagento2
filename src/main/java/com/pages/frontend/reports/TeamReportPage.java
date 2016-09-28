@@ -32,10 +32,10 @@ public class TeamReportPage extends AbstractPage {
 	@FindBy(id = "tab_team")
 	private WebElement teamTab;
 
-	@FindBy(id = "party")
+	@FindBy(id = "tab_party")
 	private WebElement partyTab;
 
-	@FindBy(id = "takeoff")
+	@FindBy(id = "tab_takeoff")
 	private WebElement takeOffPhaseTab;
 
 	@FindBy(css = "#team_report tbody")

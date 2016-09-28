@@ -60,7 +60,7 @@ public class US26001VerifyTpProductsForNotAllowedForTpStylistTest extends BaseTe
 		StockDataModel stockData;
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setName("AV_REPORT_AUT_" + genProduct1.getName());
+		genProduct1.setName("AV_REPORT_AUT1_" + genProduct1.getName());
 		stockData = MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd"));
 		stockData.setMinQty("-10");
 		stockData.setIsInStock("1");
@@ -69,7 +69,7 @@ public class US26001VerifyTpProductsForNotAllowedForTpStylistTest extends BaseTe
 		MagentoProductCalls.createApiProduct(genProduct1);
 
 		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setName("AV_REPORT_AUT_" + genProduct2.getName());
+		genProduct2.setName("AV_REPORT_AUT2_" + genProduct2.getName());
 		stockData = MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd"));
 		stockData.setQty("-10");
 		stockData.setMinQty("-10");
@@ -78,7 +78,7 @@ public class US26001VerifyTpProductsForNotAllowedForTpStylistTest extends BaseTe
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setName("AV_REPORT_AUT_" + genProduct3.getName());
+		genProduct3.setName("AV_REPORT_AUT3_" + genProduct3.getName());
 		stockData = MagentoProductCalls.createNotAvailableYetStockData("");
 		stockData.setQty("0");
 		stockData.setMinQty("0");
@@ -112,7 +112,11 @@ public class US26001VerifyTpProductsForNotAllowedForTpStylistTest extends BaseTe
 	@Test
 	public void us26001VerifyTpProductsForNotAllowedForTpStylistTest() throws IOException, ParseException {
 
+		
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
+		//pentru upgrade
+		//frontEndSteps.performLogin("fdirector@rhyta.com", "emilian1");
+		
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
