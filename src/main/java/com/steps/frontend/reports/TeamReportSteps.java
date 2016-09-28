@@ -54,8 +54,20 @@ public class TeamReportSteps extends AbstractSteps {
 	}
 
 	@Step
-	public List<String> getStylistName() {
-		return teamReportPage().getStylistName();
+	public List<TeamReportTeamTabModel> getTeamReportTeamModel() {
+		return teamReportPage().getTeamReportTeamModel();
+
+	}
+	
+	@Step
+	public List<TeamReportPartyTabModel> getTeamReportPartyModel() {
+		return teamReportPage().getTeamReportPartyModel();
+
+	}
+	
+	@Step
+	public List<TeamReportTakeOffPhaseModel> getTeamReportTakeOffPhaseModel() {
+		return teamReportPage().getTeamReportTakeOffPhaseModel();
 
 	}
 

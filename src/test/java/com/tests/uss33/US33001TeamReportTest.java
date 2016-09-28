@@ -138,13 +138,18 @@ public class US33001TeamReportTest extends BaseTest {
 		reportsSteps.clickOnTeamReports();
 		teamReportSteps.searchInput("roberto");
 		teamReportSteps.clickTeamTab();
-		teamReportSteps.clickStylePartyTab();
-		teamReportSteps.clickTakeOffPhaseTab();
+//		teamReportSteps.clickStylePartyTab();
+//		teamReportSteps.clickTakeOffPhaseTab();
 		teamReportSteps.selectPagination("100");
 		teamReportSteps.clickTeamTab();
-		// teamReportSteps.selectMonth("2016-Apr");
-		teamReportSteps.getStylistName();
-
+	//	teamReportSteps.selectMonth("2016-Apr");
+		
+		teamReportSteps.getTeamReportTeamModel();
+		teamReportSteps.clickStylePartyTab();
+		teamReportSteps.getTeamReportPartyModel();
+		teamReportSteps.clickTakeOffPhaseTab();
+		teamReportSteps.getTeamReportTakeOffPhaseModel();
+		
 	}
 
 }
