@@ -117,6 +117,7 @@ public class SoapKeys {
 	public static final String STYLIST_INFO = "stylistStylistInfoRequestParam";
 	public static final String FILTERS = "filters";
 	public static final String COMPLEX_FILTER = "complex_filter";
+	public static final String FILTER = "filter";
 	
 	//getOrdersList
 	public static final String ORDERS_LIST = "salesOrderListRequestParam";

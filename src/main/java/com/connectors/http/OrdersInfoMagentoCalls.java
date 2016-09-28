@@ -26,7 +26,7 @@ import com.tools.persistance.MongoReader;
 
 public class OrdersInfoMagentoCalls {
 
-//	private static String sessID = LoginSoapCall.performLogin();
+	// private static String sessID = LoginSoapCall.performLogin();
 
 	public static List<DBOrderModel> getOrdersList(String stylistId) {
 
@@ -49,7 +49,7 @@ public class OrdersInfoMagentoCalls {
 
 		return orderList;
 	}
-	
+
 	public static List<DBOrderModel> getPartyOrdersList(String partyId) {
 
 		List<DBOrderModel> orderList = new ArrayList<DBOrderModel>();
@@ -76,18 +76,24 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), MongoReader.getSoapURL() + UrlConstants.API_URI);
-//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
+				MongoReader.getSoapURL() + UrlConstants.API_URI);
+		// SOAPMessage soapResponse =
+		// soapConnection.call(getOrdersListRequest(sessID, stylistId),
+		// "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
-	
+
 	public static SOAPMessage soapGetPartyOrdersList(String partyId) throws SOAPException, IOException {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId), MongoReader.getSoapURL() + UrlConstants.API_URI);
-//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
+				MongoReader.getSoapURL() + UrlConstants.API_URI);
+		// SOAPMessage soapResponse =
+		// soapConnection.call(getOrdersListRequest(sessID, stylistId),
+		// "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -129,8 +135,9 @@ public class OrdersInfoMagentoCalls {
 
 		return soapMessage;
 	}
-	
-	private static SOAPMessage getPartyOrdersListRequest(String ssID, String partyId) throws SOAPException, IOException {
+
+	private static SOAPMessage getPartyOrdersListRequest(String ssID, String partyId)
+			throws SOAPException, IOException {
 		SOAPMessage soapMessage = HttpSoapConnector.createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
@@ -204,8 +211,8 @@ public class OrdersInfoMagentoCalls {
 		}
 		return orderModelList;
 	}
-	
-	public static void main(String args[]){
+
+	public static void main(String args[]) {
 		OrdersInfoMagentoCalls.getOrdersList("1835");
 	}
 
