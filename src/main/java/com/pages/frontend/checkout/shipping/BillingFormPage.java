@@ -101,6 +101,8 @@ public class BillingFormPage extends AbstractPage {
 		element(postcodeInput).waitUntilVisible();
 		postcodeInput.clear();
 		postcodeInput.sendKeys(postCode);
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
