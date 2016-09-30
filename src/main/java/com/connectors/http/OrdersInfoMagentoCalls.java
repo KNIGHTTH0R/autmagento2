@@ -80,7 +80,7 @@ public class OrdersInfoMagentoCalls {
 				MongoReader.getSoapURL() + UrlConstants.API_URI);
 		// SOAPMessage soapResponse =
 		// soapConnection.call(getOrdersListRequest(sessID, stylistId),
-		// "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		// "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -92,8 +92,8 @@ public class OrdersInfoMagentoCalls {
 		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
 				MongoReader.getSoapURL() + UrlConstants.API_URI);
 		// SOAPMessage soapResponse =
-		// soapConnection.call(getOrdersListRequest(sessID, stylistId),
-		// "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		// soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
+		// "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -212,8 +212,8 @@ public class OrdersInfoMagentoCalls {
 		return orderModelList;
 	}
 
-	public static void main(String args[]) {
-		OrdersInfoMagentoCalls.getOrdersList("1835");
-	}
+	// public static void main(String args[]) {
+	// System.out.println(OrdersInfoMagentoCalls.getPartyOrdersList("14830").get(0).getIncrementId());
+	// }
 
 }

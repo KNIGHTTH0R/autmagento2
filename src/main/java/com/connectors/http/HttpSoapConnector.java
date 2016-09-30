@@ -116,8 +116,10 @@ public class HttpSoapConnector {
 		SOAPMessage soapResponse = soapConnection.call(
 				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
 				MongoReader.getSoapURL() + UrlConstants.API_URI);
-//		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), "http://staging-aut.pippajean.com/"
-//				+ UrlConstants.API_URI);
+		// SOAPMessage soapResponse =
+		// soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP,
+		// Credentials.LOGIN_PASS_SOAP), "http://aut-pippajean.evozon.com/"
+		// + UrlConstants.API_URI);
 		String result = "";
 
 		NodeList returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);
@@ -629,6 +631,6 @@ public class HttpSoapConnector {
 	}
 
 	public static void main(String args[]) throws SOAPException, IOException {
-
+		HttpSoapConnector.performLogin();
 	}
 }
