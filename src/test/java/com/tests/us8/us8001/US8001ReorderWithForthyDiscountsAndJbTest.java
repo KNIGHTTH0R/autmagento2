@@ -40,6 +40,7 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.ElvPaymentMethodModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
@@ -95,7 +96,8 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
-	private CreditCardModel creditCardData = new CreditCardModel();
+//	private CreditCardModel creditCardData = new CreditCardModel();
+	private ElvPaymentMethodModel elvPaymentData = new ElvPaymentMethodModel();
 	public static List<RegularBasicProductModel> productsList;
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
@@ -214,8 +216,11 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+		
+		paymentSteps.expandElvForm();
+		paymentSteps.fillElvForm(elvPaymentData);
 	
 		confirmationSteps.grabRegularProductsList();
 		

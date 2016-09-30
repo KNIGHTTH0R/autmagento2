@@ -39,6 +39,9 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.ElvPaymentMethodModel;
+import com.tools.data.frontend.KlarnaPaymentMethodModel;
+import com.tools.data.frontend.SepaPaymentMethodModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.persistance.MongoReader;
@@ -80,6 +83,9 @@ public class US3002BuyProductsForTheFirstTimeTest extends BaseTest {
 	public CustomVerification customVerifications;
 
 	private CreditCardModel creditCardData = new CreditCardModel();
+	private ElvPaymentMethodModel elvPaymentMethodData = new ElvPaymentMethodModel();
+	private SepaPaymentMethodModel sepaPaymentMethodModel = new SepaPaymentMethodModel();
+	private KlarnaPaymentMethodModel klarnaPaymentMethodModel = new KlarnaPaymentMethodModel();
 
 	private String username, password;
 	private static String addressString;
@@ -150,9 +156,12 @@ public class US3002BuyProductsForTheFirstTimeTest extends BaseTest {
 		shippingSteps.refresh();
 		shippingSteps.goToPaymentMethod();
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
+		paymentSteps.expandElvForm();
+		paymentSteps.fillElvForm(elvPaymentMethodData);
+		
+	//	paymentSteps.expandSepaForm();
+	//	paymentSteps.fillSepaForm(sepaPaymentMethodModel);
+		
 		confirmationSteps.agreeAndCheckout();
 	}
 

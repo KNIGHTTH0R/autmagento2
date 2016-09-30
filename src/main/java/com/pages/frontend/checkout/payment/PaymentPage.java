@@ -25,6 +25,9 @@ public class PaymentPage extends AbstractPage {
 
 	@FindBy(css = "#paymentMethods li input.imgB.pmB.pmBbankTransfer_IBAN")
 	private WebElement bankTransferEs;
+	
+	@FindBy(css = "#paymentMethods li input.imgB.pmB.pmBelv")
+	private WebElement elvContainer;
 
 	@FindBy(css = "input.paySubmit.paySubmitbankTransfer_DE")
 	private WebElement confirmPayBankTransfer;
@@ -34,6 +37,22 @@ public class PaymentPage extends AbstractPage {
 
 	@FindBy(id = "card.cardNumber")
 	private WebElement cardNumberInput;
+	
+	@FindBy(id = "bankAccountNumber")
+	private WebElement elvBankAccountInputInput;
+	
+	@FindBy(css = "#paymentMethods li input.imgB.pmB.pmBsepadirectdebit")
+	private WebElement sepaContainer;
+	
+	@FindBy(id = "sepadirectdebit.ownerName")
+	private WebElement sepaNameInput;
+	
+	@FindBy(css = "#paymentMethods li input.imgB.pmB.pmBklarna")
+	private WebElement klarnaContainer;
+	
+	@FindBy(id = "klarna.shopper.firstName")
+	private WebElement klarnaInput;
+
 	
 	@FindBy(id = "mainBack")
 	private WebElement backButton;
@@ -78,4 +97,43 @@ public class PaymentPage extends AbstractPage {
 		confirmPayBankTransferEs.click();
 	}
 
+	
+	public void expandElvForm() {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
+		element(elvContainer).waitUntilVisible();
+		elvContainer.click();
+	}
+	
+	public boolean isElvFormExpended() {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
+		return element(elvBankAccountInputInput).isCurrentlyVisible();
+	}
+	
+	public void expandSepaForm() {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
+		element(sepaContainer).waitUntilVisible();
+		sepaContainer.click();
+	}
+	
+	public boolean isSepaFormExpended() {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
+		return element(sepaNameInput).isCurrentlyVisible();
+	}
+	
+	public void expandKlarnaForm() {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
+		element(klarnaContainer).waitUntilVisible();
+		klarnaContainer.click();
+	}
+	
+	public boolean isKlarnaFormExpended() {
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
+		return element(klarnaInput).isCurrentlyVisible();
+	}
 }

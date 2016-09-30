@@ -196,8 +196,9 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+		paymentSteps.payWithBankTransfer();
 	
 		confirmationSteps.grabRegularProductsList();
 		

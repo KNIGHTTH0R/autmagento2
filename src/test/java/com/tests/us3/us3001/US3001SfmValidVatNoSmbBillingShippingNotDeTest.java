@@ -38,6 +38,7 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.SepaPaymentMethodModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.persistance.MongoReader;
@@ -79,7 +80,7 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	private CreditCardModel creditCardData = new CreditCardModel();
+	private SepaPaymentMethodModel sepaPaymentMethodModel = new SepaPaymentMethodModel();
 
 	// Test data - from property file
 	private String username, password;
@@ -203,8 +204,8 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+		paymentSteps.expandSepaForm();
+		paymentSteps.fillSepaForm(sepaPaymentMethodModel);
 
 		confirmationSteps.grabProductsList();
 		confirmationSteps.grabConfirmationTotals();
