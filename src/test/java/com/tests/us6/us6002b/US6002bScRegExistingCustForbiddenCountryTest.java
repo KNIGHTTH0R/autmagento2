@@ -37,6 +37,7 @@ import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.ElvPaymentMethodModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -73,7 +74,8 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	@Steps
 	public StarterSetSteps starterSetSteps;
 
-	private CreditCardModel creditCardData = new CreditCardModel();
+//	private CreditCardModel creditCardData = new CreditCardModel();
+	private ElvPaymentMethodModel elvPaymentData = new ElvPaymentMethodModel();
 	private static DateModel formDate = new DateModel();
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");
@@ -142,8 +144,11 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
 		starterSetSteps.submitStarterSetStep();
 		
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+		paymentSteps.expandElvForm();
+		paymentSteps.fillElvForm(elvPaymentData);
+		
 		confirmationSteps.agreeAndCheckout();
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	
