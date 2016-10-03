@@ -22,36 +22,7 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-//		List<CommissionStylistModel> allStylists = ComissionRestCalls.getStylistListInfo();
-//		List<CommissionStylistModel> level1List = CommissionService.getStylistsFromLevel(allStylists,"1030",1);
-//		List<CommissionStylistModel> level2List = CommissionService.getStylistsFromLevel(allStylists,"1030",2);
-//		List<CommissionStylistModel> level3List = CommissionService.getStylistsFromLevel(allStylists,"1030",3);
-//		
-//		System.out.println("-----------level 1----------------------------");
-//		
-//		for (CommissionStylistModel commissionStylistModel : level1List) {
-//			System.out.println(commissionStylistModel.getName());
-//			System.out.println(commissionStylistModel.getActivatedAt());
-//			System.out.println(commissionStylistModel.getParentStylistId());
-//		}
-//		
-//		System.out.println("-------------level 2--------------------------");
-//		
-//		for (CommissionStylistModel commissionStylistModel : level2List) {
-//			System.out.println(commissionStylistModel.getName());
-//			System.out.println(commissionStylistModel.getActivatedAt());
-//			System.out.println(commissionStylistModel.getParentStylistId());
-//		}
-//		
-//		System.out.println("--------------level 3-------------------------");
-//		
-//		for (CommissionStylistModel commissionStylistModel : level3List) {
-//			System.out.println(commissionStylistModel.getName());
-//			System.out.println(commissionStylistModel.getActivatedAt());
-//			System.out.println(commissionStylistModel.getParentStylistId());
-//		}
 		ComissionRestCalls.getStylistInfo("1025");
-
 	}
 
 	public static String composeAuthenticationSuffix() throws Exception {
@@ -92,7 +63,7 @@ public class ComissionRestCalls {
 			commissionStylistModel.setTeamPointsUnsafe(res.getBody().getTeamPointsUnsafe());
 			commissionStylistModel.setRetail(res.getBody().getRetail());
 			commissionStylistModel.setTob(res.getBody().getTob());
-			commissionStylistModel.setPaylevel(res.getBody().getPaylevel());
+			commissionStylistModel.setPayLevelName(res.getBody().getPaylevel());
 			commissionStylistModel.setMinimumPaylevel(res.getBody().getMinimumPaylevel());
 			commissionStylistModel.setMinimumCareerLevel(res.getBody().getMinimumCareerLevel());
 			commissionStylistModel.setJoinedAt(res.getBody().getJoinedAt());
@@ -154,6 +125,7 @@ public class ComissionRestCalls {
 				commissionStylistModel.setStatus(body.getStatus());
 				commissionStylistModel.setCareerLevel(body.getCareerLevel());
 				commissionStylistModel.setIp(body.getIp());
+				commissionStylistModel.setIpTop(String.valueOf(body.getTopIp()));
 				commissionStylistModel.setIpUnsafe(body.getIpUnsafe());
 				commissionStylistModel.setIpMonth(body.getIpMonth());
 				commissionStylistModel.setIpNewFl(body.getIpNewFl());
@@ -161,7 +133,7 @@ public class ComissionRestCalls {
 				commissionStylistModel.setTeamPointsUnsafe(body.getTeamPointsUnsafe());
 				commissionStylistModel.setRetail(body.getRetail());
 				commissionStylistModel.setTob(body.getTob());
-				commissionStylistModel.setPaylevel(body.getPaylevel());
+				commissionStylistModel.setPayLevelName(body.getPaylevelName());
 				commissionStylistModel.setMinimumPaylevel(body.getMinimumPaylevel());
 				commissionStylistModel.setMinimumCareerLevel(body.getMinimumCareerLevel());
 				commissionStylistModel.setJoinedAt(body.getJoinedAt());

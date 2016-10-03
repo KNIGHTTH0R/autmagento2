@@ -89,11 +89,11 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
 		// SOAPMessage soapResponse =
 		// soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
-		// "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+		// MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
+				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -183,6 +183,9 @@ public class OrdersInfoMagentoCalls {
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("increment_id")) {
 						model.setIncrementId(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("grand_total")) {
+						model.setGrandTotal(childNodes.item(j).getTextContent());
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
 						model.setCreatedAt(childNodes.item(j).getTextContent());

@@ -17,7 +17,6 @@ import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.DBStylistPartyModel;
-import com.tools.persistance.MongoReader;
 
 public class PartyMagentoCalls {
 
@@ -47,10 +46,11 @@ public class PartyMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		// SOAPMessage soapResponse =
+		// soapConnection.call(getStylistPartyList(sessID, stylistId),
+		// MongoReader.getSoapURL() + UrlConstants.API_URI);
 		SOAPMessage soapResponse = soapConnection.call(getStylistPartyList(sessID, stylistId),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
-//		SOAPMessage soapResponse = soapConnection.call(getStylistPartyList(sessID, stylistId),
-//				"https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -89,21 +89,14 @@ public class PartyMagentoCalls {
 		NodeList stylistPartyList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
 		for (int i = 0; i < stylistPartyList.getLength(); i++) {
 			DBStylistPartyModel model = new DBStylistPartyModel();
-			// Inn case that the two fields are not defined we set the date in
-			// the future so when we filter the dates we will not get an
-			// exception
-			// Setting the date far in the future means that the party is not
-			// closed or/and is not deleted
-			model.setClosedAt("2100-02-02 00:00:00");
-			model.setDeletedAt("2100-02-02 00:00:00");
 			NodeList childNodes = stylistPartyList.item(i).getChildNodes();
 			for (int j = 0; j < childNodes.getLength(); j++) {
 
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("party_id")) {
-					model.setStylistId(childNodes.item(j).getTextContent());
+					model.setPartyId(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_id")) {
-					model.setPartyId(childNodes.item(j).getTextContent());
+					model.setStylistId(childNodes.item(j).getTextContent());
 				}
 				if (childNodes.item(j).getNodeName().equalsIgnoreCase("party_date_time")) {
 					model.setPartyDate(childNodes.item(j).getTextContent());
@@ -120,9 +113,4 @@ public class PartyMagentoCalls {
 		return stylistPartyModelList;
 
 	}
-
-//	public static void main(String args[]) {
-//		PartyMagentoCalls.getPartyList("2513");
-//	}
-
 }

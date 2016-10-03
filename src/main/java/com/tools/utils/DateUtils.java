@@ -157,7 +157,8 @@ public class DateUtils {
 		return String.valueOf(format.format(calendar.getTime()));
 	}
 
-	public static String addDaysToAAGivenDate(String dateString, String formatString, Locale locale, int days) throws ParseException {
+	public static String addDaysToAAGivenDate(String dateString, String formatString, Locale locale, int days)
+			throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString, locale);
 		Date date = format.parse(dateString);
 
@@ -209,7 +210,8 @@ public class DateUtils {
 		return String.valueOf(sdf.format(new Date()));
 	}
 
-	public static String parseDate(String dateString, String initialFormatString, Locale locale, String finalFormatString) throws ParseException {
+	public static String parseDate(String dateString, String initialFormatString, Locale locale,
+			String finalFormatString) throws ParseException {
 		DateFormat formatInitial = new SimpleDateFormat(initialFormatString, locale);
 		DateFormat formatFinal = new SimpleDateFormat(finalFormatString);
 		Date date = formatInitial.parse(dateString);
@@ -218,7 +220,8 @@ public class DateUtils {
 
 	}
 
-	public static String parseDate(String dateString, String initialFormatString, String finalFormatString) throws ParseException {
+	public static String parseDate(String dateString, String initialFormatString, String finalFormatString)
+			throws ParseException {
 		DateFormat formatInitial = new SimpleDateFormat(initialFormatString);
 		DateFormat formatFinal = new SimpleDateFormat(finalFormatString);
 		Date date = formatInitial.parse(dateString);
@@ -227,7 +230,8 @@ public class DateUtils {
 
 	}
 
-	public static String parseDate(String dateString, String initialFormatString, String finalFormatString, Locale locale) throws ParseException {
+	public static String parseDate(String dateString, String initialFormatString, String finalFormatString,
+			Locale locale) throws ParseException {
 		DateFormat formatInitial = new SimpleDateFormat(initialFormatString);
 		DateFormat formatFinal = new SimpleDateFormat(finalFormatString, locale);
 		Date date = formatInitial.parse(dateString);
@@ -309,7 +313,8 @@ public class DateUtils {
 	public static int getAge(String birthDate) {
 		String[] parts = birthDate.split("-");
 
-		LocalDate birthdate = new LocalDate(Integer.parseInt(parts[2]), Integer.parseInt(parts[1]), Integer.parseInt(parts[0]));
+		LocalDate birthdate = new LocalDate(Integer.parseInt(parts[2]), Integer.parseInt(parts[1]),
+				Integer.parseInt(parts[0]));
 		LocalDate now = new LocalDate();
 		Years age = Years.yearsBetween(birthdate, now);
 
@@ -320,7 +325,8 @@ public class DateUtils {
 		return String.valueOf(System.currentTimeMillis() / 1000);
 	}
 
-	public static boolean isDateBeetween(String createdAt, String startDate, String endDate, String format) throws ParseException {
+	public static boolean isDateBeetween(String createdAt, String startDate, String endDate, String format)
+			throws ParseException {
 		DateFormat df = new SimpleDateFormat(format);
 
 		return !(df.parse(createdAt).before(df.parse(startDate)) || df.parse(createdAt).after(df.parse(endDate)));
@@ -328,12 +334,14 @@ public class DateUtils {
 
 	public static boolean isDateInCurrentMonth(String date, String format) throws ParseException {
 
-		return DateUtils.isDateBeetween(date, DateUtils.getFirstDayOfCurrentMonth(format), DateUtils.getLastDayOfTheCurrentMonth(format), format);
+		return DateUtils.isDateBeetween(date, DateUtils.getFirstDayOfCurrentMonth(format),
+				DateUtils.getLastDayOfTheCurrentMonth(format), format);
 	}
 
 	public static boolean isDateInNextMonth(String date, String format) throws ParseException {
 
-		return DateUtils.isDateBeetween(date, DateUtils.getFirstDayOfNextMonth(format), DateUtils.getLastDayOfNextMonth(format), format);
+		return DateUtils.isDateBeetween(date, DateUtils.getFirstDayOfNextMonth(format),
+				DateUtils.getLastDayOfNextMonth(format), format);
 	}
 
 	/*
@@ -356,25 +364,34 @@ public class DateUtils {
 		return !(df.parse(date1).after(df.parse(date2)));
 	}
 
-	public static int getNumberOfDaysBeetweenTwoDates(String firstDate, String secondDate, String formatString) throws ParseException {
+	public static int getNumberOfDaysBeetweenTwoDates(String startDate, String endDate, String formatString)
+			throws ParseException {
 		Calendar cal1 = new GregorianCalendar();
 		Calendar cal2 = new GregorianCalendar();
 		SimpleDateFormat sdf = new SimpleDateFormat(formatString);
 
-		Date date = sdf.parse(firstDate);
+		Date date = sdf.parse(startDate);
 		cal1.setTime(date);
-		date = sdf.parse(secondDate);
+		date = sdf.parse(endDate);
 		cal2.setTime(date);
 
 		return daysBetween(cal1.getTime(), cal2.getTime());
 	}
 
 	public static int daysBetween(Date d1, Date d2) {
-		return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+
+		int result = (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+
+		return result > 0 ? result : 0;
 	}
 
 	public static void main(String args[]) throws ParseException {
-		System.out.println("SDSDSD " + DateUtils.parseDate("2016-07-01", "yyyy-MM-dd", "dd MMM yyyy", new Locale.Builder().setLanguage("de").build()));
+		// System.out.println(DateUtils.getFirstDayOfAGivenMonth("2016-09-30
+		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
+		// System.out.println(DateUtils.getLastDayOfAGivenMonth("2016-09-30
+		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
+//		System.out.println(DateUtils.getNumberOfDaysBeetweenTwoDates(DateUtils.getCurrentDate("dd/MM/yy"), "28/12/13",
+//				"dd/MM/yy"));
 	}
 
 }

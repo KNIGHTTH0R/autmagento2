@@ -14,6 +14,7 @@ public class CommissionStylistModel {
 	private String status;
 	private String careerLevel;
 	private String ip;
+	private String ipTop;
 	private String ipUnsafe;
 	private String ipMonth;
 	private String ipNewFl;
@@ -21,7 +22,7 @@ public class CommissionStylistModel {
 	private String teamPointsUnsafe;
 	private String retail;
 	private String tob;
-	private String paylevel;
+	private String payLevelName;
 	private String minimumPaylevel;
 	private String minimumCareerLevel;
 	private String joinedAt;
@@ -147,6 +148,16 @@ public class CommissionStylistModel {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+	
+	
+
+	public String getIpTop() {
+		return ipTop;
+	}
+
+	public void setIpTop(String ipTop) {
+		this.ipTop = ipTop;
+	}
 
 	public String getIpUnsafe() {
 		return ipUnsafe;
@@ -196,12 +207,12 @@ public class CommissionStylistModel {
 		this.tob = tob;
 	}
 
-	public String getPaylevel() {
-		return paylevel;
+	public String getPayLevelName() {
+		return payLevelName;
 	}
 
-	public void setPaylevel(String paylevel) {
-		this.paylevel = paylevel;
+	public void setPayLevelName(String payLevelName) {
+		this.payLevelName = payLevelName;
 	}
 
 	public String getMinimumPaylevel() {

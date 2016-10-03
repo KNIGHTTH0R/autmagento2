@@ -17,5 +17,7 @@ public class ComissionConfigConstants {
 	public static final int TOB_MAX_NO = 6;
 	public static final int TOB_VALUE = 300;
 	public static final int TOB_MARGIN_VALUE = 5750;
+	
+	public static final int TAKE_OFF_PERIOD = 90;
 
 }

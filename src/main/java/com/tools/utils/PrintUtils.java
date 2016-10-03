@@ -591,7 +591,7 @@ public class PrintUtils {
 		System.out.println("Sponsor name : " + teamReportTeamTabModel.getSponsorName());
 		System.out.println("Activation Date : " + teamReportTeamTabModel.getActivationDate());
 		System.out.println("IPs : " + teamReportTeamTabModel.getIp());
-		System.out.println("TP : " + teamReportTeamTabModel.getTp());
+		System.out.println("TP : " + teamReportTeamTabModel.getTqv());
 		System.out.println("Career Level this month : " + teamReportTeamTabModel.getCarrerLevelThisMonth());
 		System.out.println("Career Level last month : " + teamReportTeamTabModel.getCarrerLevelLastMonth());
 		System.out.println("Pay Level : " + teamReportTeamTabModel.getPayLevel());
