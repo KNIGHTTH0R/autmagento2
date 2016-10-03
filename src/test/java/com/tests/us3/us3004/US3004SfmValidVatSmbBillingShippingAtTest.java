@@ -36,6 +36,8 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.ElvPaymentMethodModel;
+import com.tools.data.frontend.SepaPaymentMethodModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.persistance.MongoReader;
@@ -81,7 +83,7 @@ public class US3004SfmValidVatSmbBillingShippingAtTest extends BaseTest {
 	private static String marketingDiscount;
 	private static String shippingValue;
 	private static String taxClass;
-	private CreditCardModel creditCardData = new CreditCardModel();
+	private SepaPaymentMethodModel sepaPaymentData = new SepaPaymentMethodModel();
 
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -189,9 +191,9 @@ public class US3004SfmValidVatSmbBillingShippingAtTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
+		paymentSteps.expandSepaForm();
+		paymentSteps.fillSepaForm(sepaPaymentData);
+	
 		confirmationSteps.grabProductsList();
 		confirmationSteps.grabConfirmationTotals();
 		confirmationSteps.grabBillingData();

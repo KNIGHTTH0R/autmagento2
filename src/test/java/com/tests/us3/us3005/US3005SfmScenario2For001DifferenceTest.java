@@ -180,6 +180,7 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
+		
 
 		confirmationSteps.grabProductsList();
 		confirmationSteps.grabConfirmationTotals();

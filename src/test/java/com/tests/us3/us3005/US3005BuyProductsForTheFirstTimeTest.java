@@ -39,6 +39,7 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.SepaPaymentMethodModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.persistance.MongoReader;
@@ -79,7 +80,7 @@ public class US3005BuyProductsForTheFirstTimeTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	private CreditCardModel creditCardData = new CreditCardModel();
+	private SepaPaymentMethodModel sepaPaymentData = new SepaPaymentMethodModel();
 
 	private String username, password;
 	private static String addressString;
@@ -160,9 +161,9 @@ public class US3005BuyProductsForTheFirstTimeTest extends BaseTest {
 		shippingSteps.refresh();
 		shippingSteps.goToPaymentMethod();
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
+		paymentSteps.expandSepaForm();
+		paymentSteps.fillSepaForm(sepaPaymentData);
+		
 		confirmationSteps.agreeAndCheckout();
 	}
 

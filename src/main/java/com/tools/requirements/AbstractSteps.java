@@ -79,7 +79,10 @@ import com.pages.frontend.checkout.cart.regularCart.PlaceCustomerOrderFromPartyP
 import com.pages.frontend.checkout.cart.regularCart.RegularUserCartPage;
 import com.pages.frontend.checkout.cart.styleCoachCart.CartPage;
 import com.pages.frontend.checkout.payment.CreditCardFormPage;
+import com.pages.frontend.checkout.payment.ElvPaymentMethodPage;
+import com.pages.frontend.checkout.payment.KlarnaPage;
 import com.pages.frontend.checkout.payment.PaymentPage;
+import com.pages.frontend.checkout.payment.SepaPaymentPage;
 import com.pages.frontend.checkout.shipping.BillingFormPage;
 import com.pages.frontend.checkout.shipping.ShippingFormPage;
 import com.pages.frontend.checkout.shipping.SurveyPage;
@@ -569,6 +572,18 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public CreditCardFormPage creditCardFormPage() {
 		return getPages().currentPageAt(CreditCardFormPage.class);
+	}
+	
+	public ElvPaymentMethodPage elvPaymentMethodPage() {
+		return getPages().currentPageAt(ElvPaymentMethodPage.class);
+	}
+	
+	public SepaPaymentPage sepaPaymentPage() {
+		return getPages().currentPageAt(SepaPaymentPage.class);
+	}
+	
+	public KlarnaPage klarnaPage() {
+		return getPages().currentPageAt(KlarnaPage.class);
 	}
 
 	// confirmation page

@@ -31,6 +31,7 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.frontend.SepaPaymentMethodModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
@@ -87,7 +88,8 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
-	private CreditCardModel creditCardData = new CreditCardModel();
+	//private CreditCardModel creditCardData = new CreditCardModel();
+	private SepaPaymentMethodModel sepaPaymentData= new SepaPaymentMethodModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -194,8 +196,10 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+		paymentSteps.expandSepaForm();
+		paymentSteps.fillSepaForm(sepaPaymentData);
 
 		confirmationSteps.grabRegularProductsList();
 
