@@ -1,6 +1,7 @@
 package com.tools.data;
 
 public class TeamReportTeamTabModel {
+	private String styleCoachId;
 	private String styleCoachName;
 	private String sponsorName;
 	private String activationDate;
@@ -13,6 +14,14 @@ public class TeamReportTeamTabModel {
 	private String vacationMonth;
 	private String newStylist;
 	private String quitDate;
+	
+	public String getStyleCoachId() {
+		return styleCoachId;
+	}
+
+	public void setStyleCoachId(String styleCoachId) {
+		this.styleCoachId = styleCoachId;
+	}
 
 	public String getNewStylist() {
 		return newStylist;

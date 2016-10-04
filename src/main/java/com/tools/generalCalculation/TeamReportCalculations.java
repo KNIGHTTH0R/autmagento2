@@ -11,17 +11,17 @@ import com.connectors.http.ComissionRestCalls;
 import com.connectors.http.OrdersInfoMagentoCalls;
 import com.connectors.http.PartyMagentoCalls;
 import com.tools.constants.ComissionConfigConstants;
-import com.tools.constants.ConfigConstants;
 import com.tools.data.TeamReportModel;
 import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.data.soap.DBStylistPartyModel;
 import com.tools.utils.DateUtils;
+import com.tools.utils.PrintUtils;
 
 public class TeamReportCalculations {
 
 	public static void main(String[] args) throws Exception {
-		TeamReportCalculations.determineTeamReportList("1030", 2, "2016-09-15 10:00:00");
+		TeamReportCalculations.determineTeamReportList("1030", 2, "2016-08-15 12:00:00");
 	}
 
 	private static List<String> payedStatusesList = new ArrayList<String>(
@@ -30,7 +30,11 @@ public class TeamReportCalculations {
 	public static List<TeamReportModel> determineTeamReportList(String stylistId, int level, String month)
 			throws Exception {
 
-		List<CommissionStylistModel> allStylists = ComissionRestCalls.getStylistListInfo();
+		String[] dateFields = DateUtils.getDateFields(month, "yyyy-MM-dd HH:mm:ss");
+		String previousMonth = DateUtils.getPreviousMonth(month, "yyyy-MM-dd HH:mm:ss");
+		String[] dateFieldsPreviousMonth = DateUtils.getDateFields(previousMonth, "yyyy-MM-dd HH:mm:ss");
+
+		List<CommissionStylistModel> allStylists = ComissionRestCalls.getStylistListInfo(dateFields[0], dateFields[1]);
 		List<CommissionStylistModel> levelStylistsList = getStylistsFromLevel(allStylists, stylistId, level);
 
 		List<TeamReportModel> allTeamTabStylists = new ArrayList<TeamReportModel>();
@@ -93,6 +97,9 @@ public class TeamReportCalculations {
 
 			String tqv = calculateTqv(commissionStylistModel.getIp(), commissionStylistModel.getTeamPoints());
 
+			CommissionStylistModel commStylistModelPreviousMonth = ComissionRestCalls.getStylistInfo(
+					commissionStylistModel.getStylistId(), dateFieldsPreviousMonth[0], dateFieldsPreviousMonth[1]);
+
 			teamReportModel.setStyleCoachName(commissionStylistModel.getName());
 			teamReportModel.setActivationDate(
 					DateUtils.parseDate(commissionStylistModel.getActivatedAt(), "yyyy-MM-dd HH:mm:ss", "dd/MM/yy"));
@@ -101,7 +108,7 @@ public class TeamReportCalculations {
 			teamReportModel.setIpTop(commissionStylistModel.getIpTop());
 			teamReportModel.setNewStylistTop(String.valueOf(takeOfPeriodNewSc));
 			teamReportModel.setIpThisMonth(commissionStylistModel.getIp());
-			teamReportModel.setIpLastMonth("");
+			teamReportModel.setIpLastMonth(commStylistModelPreviousMonth.getIp());
 			teamReportModel.setPartiesHeld(String.valueOf(partiesHeld));
 			teamReportModel.setPartiesPlanned(String.valueOf(partiesPlanned));
 			teamReportModel.setPartiesUpcoming(String.valueOf(upcomingParties));
@@ -109,13 +116,14 @@ public class TeamReportCalculations {
 			teamReportModel.setIp(commissionStylistModel.getIp());
 			teamReportModel.setTqv(tqv);
 			teamReportModel.setCarrerLevelThisMonth(commissionStylistModel.getCareer());
+			teamReportModel.setCarrerLevelThisMonth(commStylistModelPreviousMonth.getCareer());
 			teamReportModel.setPayLevel(commissionStylistModel.getPayLevelName());
 			teamReportModel.setIpNewRecruited(commissionStylistModel.getIpNewFl());
 			teamReportModel.setNewStylist(String.valueOf(newSc));
 
 			allTeamTabStylists.add(teamReportModel);
 		}
-
+		PrintUtils.printTeamReportModelList(allTeamTabStylists);
 		return allTeamTabStylists;
 	}
 

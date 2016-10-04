@@ -53,9 +53,9 @@ public class StylistBody {
 	private int newFrontliners;
 	private int ipForMyself;
 	private int ipForCustomers;
-	private int payoutForCustomers;
-	private int payoutForMyself;
-	private int payoutVia25;
+	private String payoutForCustomers;
+	private String payoutForMyself;
+	private String payoutVia25;
 	private String teamPointsTpr;
 	private String teamPointsIpTpr;
 	private String ppr;
@@ -624,36 +624,36 @@ public class StylistBody {
 		this.teamPointsIpTpr = teamPointsIpTpr;
 	}
 
-	public int getPayoutForCustomers() {
-		return payoutForCustomers;
-	}
-
-	public void setPayoutForCustomers(int payoutForCustomers) {
-		this.payoutForCustomers = payoutForCustomers;
-	}
-
-	public int getPayoutForMyself() {
-		return payoutForMyself;
-	}
-
-	public void setPayoutForMyself(int payoutForMyself) {
-		this.payoutForMyself = payoutForMyself;
-	}
-
-	public int getPayoutVia25() {
-		return payoutVia25;
-	}
-
-	public void setPayoutVia25(int payoutVia25) {
-		this.payoutVia25 = payoutVia25;
-	}
-
 	public Parties getParties() {
 		return parties;
 	}
 
 	public void setParties(Parties parties) {
 		this.parties = parties;
+	}
+
+	public String getPayoutForCustomers() {
+		return payoutForCustomers;
+	}
+
+	public void setPayoutForCustomers(String payoutForCustomers) {
+		this.payoutForCustomers = payoutForCustomers;
+	}
+
+	public String getPayoutForMyself() {
+		return payoutForMyself;
+	}
+
+	public void setPayoutForMyself(String payoutForMyself) {
+		this.payoutForMyself = payoutForMyself;
+	}
+
+	public String getPayoutVia25() {
+		return payoutVia25;
+	}
+
+	public void setPayoutVia25(String payoutVia25) {
+		this.payoutVia25 = payoutVia25;
 	}
 
 }
