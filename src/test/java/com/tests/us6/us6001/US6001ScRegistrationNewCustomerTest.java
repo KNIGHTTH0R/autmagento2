@@ -23,6 +23,7 @@ import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.stylistRegistration.StylistRegistrationCartCalculator;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -31,6 +32,7 @@ import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.StarterSetProductModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.StylistRegDataGrabber;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
@@ -78,7 +80,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private String taxClass, shippingValue, voucherValue, voucherCode, starterSet,starterKitPrice;
+	private String taxClass, shippingValue, voucherValue, voucherCode, starterSet, starterKitPrice;
 
 	@Before
 	public void setUp() throws Exception {
@@ -126,15 +128,14 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 		headerSteps.navigateToRegisterForm();
 
-		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress,
-				birthDate.getDate());
+		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
 		StarterSetProductModel productData;
 
-		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet, starterKitPrice);
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
 
 		starterSetSteps.applyVoucher(voucherCode);
@@ -148,18 +149,21 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-		confirmationSteps.grabConfirmationTotals();
-		confirmationSteps.agreeAndCheckout();
-
-		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(
-				StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
+		if (paymentSteps.isKlarnaAvailable()) {
+			paymentSteps.expandKlarnaForm();
+			paymentSteps.fillKlarnaForm();
+		} else {
+			paymentSteps.expandCreditCardForm();
+			paymentSteps.fillCreditCardForm(creditCardData);
+			confirmationSteps.grabConfirmationTotals();
+			confirmationSteps.agreeAndCheckout();
+			
+			starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
+			starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
+		}
+		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount("STARTER SET TOTALS");
 
-		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals,
-				StylistRegistrationCartCalculator.shippingCalculatedModel);
-		starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
 
 		customVerification.printErrors();
 	}
@@ -167,10 +171,8 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	@After
 	public void saveData() {
 
-		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel,
-				getClass().getSimpleName());
-		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel,
-				getClass().getSimpleName());
+		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());

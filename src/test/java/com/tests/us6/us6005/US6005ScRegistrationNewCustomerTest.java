@@ -21,6 +21,7 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.cartcalculations.stylistRegistration.StylistRegistrationCartCalculator;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -110,9 +111,23 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		stylistRegistrationSteps.updateStylistData(customerFormData, newBillingAddress);
 		stylistContextSteps.submitContextStep();
 		starterSetSteps.submitStarterSetStep();
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-		confirmationSteps.agreeAndCheckout();
+//		
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+//		confirmationSteps.agreeAndCheckout();
+//		paymentSteps.expandKlarnaForm();
+//		paymentSteps.fillKlarnaForm();
+		
+		if (paymentSteps.isKlarnaAvailable()) {
+			paymentSteps.expandKlarnaForm();
+			paymentSteps.fillKlarnaForm();
+		} else {
+			paymentSteps.expandCreditCardForm();
+			paymentSteps.fillCreditCardForm(creditCardData);
+			confirmationSteps.grabConfirmationTotals();
+			confirmationSteps.agreeAndCheckout();
+			
+		}
 
 		customVerification.printErrors();
 	}

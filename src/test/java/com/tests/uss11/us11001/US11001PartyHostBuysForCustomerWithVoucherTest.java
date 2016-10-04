@@ -204,9 +204,8 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		if (!paymentSteps.isCreditCardFormExpended()) {
-			paymentSteps.expandCreditCardForm();
-		}
+		
+		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.grabHostProductsList();

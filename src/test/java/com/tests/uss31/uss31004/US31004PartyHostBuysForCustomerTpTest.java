@@ -228,9 +228,8 @@ public class US31004PartyHostBuysForCustomerTpTest extends BaseTest {
 		HostDataGrabber.orderModelTp3.setDeliveryDate(deliveryTp3);
 	
 
-		if (!paymentSteps.isCreditCardFormExpended()) {
-			paymentSteps.expandCreditCardForm();
-		}
+		
+		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.agreeAndCheckout();

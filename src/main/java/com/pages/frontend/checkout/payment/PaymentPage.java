@@ -136,4 +136,13 @@ public class PaymentPage extends AbstractPage {
 				ContextConstants.LOADING_MESSAGE));
 		return element(klarnaInput).isCurrentlyVisible();
 	}
+	
+	public boolean isKlarnaAvailable(){
+	//	if (element(klarnaContainer).isVisible())
+		return	element(klarnaContainer).isVisible();
+	    
+		
+	}
+	
+	
 }

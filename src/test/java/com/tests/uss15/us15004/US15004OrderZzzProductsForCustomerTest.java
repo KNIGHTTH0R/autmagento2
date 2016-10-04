@@ -206,9 +206,8 @@ public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 //		} else {
 //			paymentSteps.payWithBankTransferEs();
 //		}
-		if (!paymentSteps.isCreditCardFormExpended()) {
-			paymentSteps.expandCreditCardForm();
-		}
+	
+		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.agreeAndCheckout();
