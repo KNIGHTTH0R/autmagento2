@@ -15,43 +15,38 @@ public class PaymentSteps extends AbstractSteps {
 
 	@Step
 	public void expandCreditCardForm() {
-		paymentPage().expandCreditCardForm();
+		if (!paymentPage().isCreditCardFormExpended())
+			paymentPage().expandCreditCardForm();
 	}
-	
-	@Step
-	public boolean isCreditCardFormExpended() {
-		return paymentPage().isCreditCardFormExpended();
-	}
-	
+
 	@Step
 	public void expandElvForm() {
-		paymentPage().expandElvForm();
+		if (!paymentPage().isElvFormExpended())
+			paymentPage().expandElvForm();
 	}
-	
-	@Step
-	public boolean isElvFormExpended() {
-		return paymentPage().isElvFormExpended();
-	}
-	
+
 	@Step
 	public void expandSepaForm() {
-		paymentPage().expandSepaForm();
+		if (!paymentPage().isSepaFormExpended())
+			paymentPage().expandSepaForm();
 	}
-	
+
+	@Step
+	public boolean isKlarnaAvailable() {
+		return paymentPage().isKlarnaAvailable();
+	}
+
 	@Step
 	public void expandKlarnaForm() {
-		paymentPage().expandKlarnaForm();
+		if (!paymentPage().isKlarnaFormExpended())
+			paymentPage().expandKlarnaForm();
 	}
-	
-	@Step
-	public boolean isSepaFormExpended() {
-		return paymentPage().isSepaFormExpended();
-	}
+
 	@Step
 	public void goBack() {
-		 paymentPage().goBack();
+		paymentPage().goBack();
 	}
-	
+
 	@Step
 	public void expandBankTransferForm() {
 		paymentPage().expandBankTransferForm();
@@ -68,7 +63,7 @@ public class PaymentSteps extends AbstractSteps {
 		creditCardFormPage().clickOnConfirm();
 		waitABit(2000);
 	}
-	
+
 	@Step
 	@Title("Fill elv form")
 	public void fillElvForm(ElvPaymentMethodModel elvPaymentMethodModel) {
@@ -80,7 +75,7 @@ public class PaymentSteps extends AbstractSteps {
 		elvPaymentMethodPage().clickOnConfirm();
 		waitABit(2000);
 	}
-	
+
 	@Step
 	@Title("Fill sepa form")
 	public void fillSepaForm(SepaPaymentMethodModel sepaPaymentMethodModel) {
@@ -94,28 +89,29 @@ public class PaymentSteps extends AbstractSteps {
 
 	@Step
 	@Title("Fill Klarna form")
-	public void fillKlarnaForm(KlarnaPaymentMethodModel klarnaPaymentMethodModel) {
-		klarnaPage().FirstNameInput(klarnaPaymentMethodModel.getFirstName());
-		klarnaPage().LastNameInput(klarnaPaymentMethodModel.getLastName());
-		klarnaPage().selectGender(klarnaPaymentMethodModel.getGender());
-		klarnaPage().DateOfBirthDayInput(klarnaPaymentMethodModel.getDateOfBirthDay());
-		klarnaPage().DateOfBirthMonthInput(klarnaPaymentMethodModel.getDateOfBirthMonth());
-		klarnaPage().DateOfBirthYearInput(klarnaPaymentMethodModel.getDateOfBirthYear());
-		klarnaPage().mobilePhoneInput(klarnaPaymentMethodModel.getMobileNumber());
-		klarnaPage().streetBillingInput(klarnaPaymentMethodModel.getStreetBilling());
-		klarnaPage().houseNumberBillingInput(klarnaPaymentMethodModel.getHouseNumberBilling());
-		klarnaPage().postalCodeBillingInput(klarnaPaymentMethodModel.getPlzBilling());
-		klarnaPage().cityBillingInput(klarnaPaymentMethodModel.getCityBilling());
-		klarnaPage().countryBillingInput(klarnaPaymentMethodModel.getCountryBilling());
-		klarnaPage().separateAddressCheckbox();
-		klarnaPage().streetShippingInput(klarnaPaymentMethodModel.getStreetShipping());
-		klarnaPage().houseNumberShippingInput(klarnaPaymentMethodModel.getHouseNumberShipping());
-		klarnaPage().postalCodeShippingInput(klarnaPaymentMethodModel.getPlzShipping());
-		klarnaPage().cityShippingInput(klarnaPaymentMethodModel.getCountryShipping());
+	public void fillKlarnaForm() {
+		// klarnaPage().FirstNameInput(klarnaPaymentMethodModel.getFirstName());
+		// klarnaPage().LastNameInput(klarnaPaymentMethodModel.getLastName());
+		// klarnaPage().selectGender(klarnaPaymentMethodModel.getGender());
+		// klarnaPage().DateOfBirthDayInput(klarnaPaymentMethodModel.getDateOfBirthDay());
+		// klarnaPage().DateOfBirthMonthInput(klarnaPaymentMethodModel.getDateOfBirthMonth());
+		// klarnaPage().DateOfBirthYearInput(klarnaPaymentMethodModel.getDateOfBirthYear());
+		// klarnaPage().mobilePhoneInput(klarnaPaymentMethodModel.getMobileNumber());
+		// klarnaPage().streetBillingInput(klarnaPaymentMethodModel.getStreetBilling());
+		// klarnaPage().houseNumberBillingInput(klarnaPaymentMethodModel.getHouseNumberBilling());
+		// klarnaPage().postalCodeBillingInput(klarnaPaymentMethodModel.getPlzBilling());
+		// klarnaPage().cityBillingInput(klarnaPaymentMethodModel.getCityBilling());
+		// klarnaPage().countryBillingInput(klarnaPaymentMethodModel.getCountryBilling());
+		// klarnaPage().separateAddressCheckbox();
+		// klarnaPage().streetShippingInput(klarnaPaymentMethodModel.getStreetShipping());
+		// klarnaPage().houseNumberShippingInput(klarnaPaymentMethodModel.getHouseNumberShipping());
+		// klarnaPage().postalCodeShippingInput(klarnaPaymentMethodModel.getPlzShipping());
+		// klarnaPage().cityShippingInput(klarnaPaymentMethodModel.getCountryShipping());
 		klarnaPage().clickOnTermAndConditions();
 		klarnaPage().clickOnConfirm();
 		waitABit(2000);
 	}
+
 	@Step
 	@Title("Pay With Bank transfer")
 	public void payWithBankTransfer() {

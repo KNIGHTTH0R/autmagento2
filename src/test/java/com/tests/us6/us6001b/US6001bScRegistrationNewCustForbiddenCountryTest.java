@@ -145,16 +145,27 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-		confirmationSteps.grabConfirmationTotals();
-		confirmationSteps.agreeAndCheckout();
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+//
+//		confirmationSteps.grabConfirmationTotals();
+//		confirmationSteps.agreeAndCheckout();
+		
+		if (paymentSteps.isKlarnaAvailable()) {
+			paymentSteps.expandKlarnaForm();
+			paymentSteps.fillKlarnaForm();
+		} else {
+			paymentSteps.expandCreditCardForm();
+			paymentSteps.fillCreditCardForm(creditCardData);
+			confirmationSteps.grabConfirmationTotals();
+			confirmationSteps.agreeAndCheckout();
+			
+			starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
+			starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
+		}
 
 		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount("STARTER SET TOTALS");
-
-		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
-		starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
 
 		customVerification.printErrors();
 

@@ -156,9 +156,8 @@ public class US10007PlaceTermPurchaseOrderAsPartyHostTest2 extends BaseTest {
 		String url = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		if (!paymentSteps.isCreditCardFormExpended()) {
-			paymentSteps.expandCreditCardForm();
-		}
+		
+	    paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		partyBonusCalculationModel.setTotal(confirmationSteps.grabConfirmationTotals().getSubTotal());
