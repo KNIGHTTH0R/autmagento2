@@ -79,7 +79,6 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");
 	private String birthDate;
-	private CreditCardModel creditCardData = new CreditCardModel();
     private	SepaPaymentMethodModel sepaPaymentData=new SepaPaymentMethodModel();
 
 	@Before
