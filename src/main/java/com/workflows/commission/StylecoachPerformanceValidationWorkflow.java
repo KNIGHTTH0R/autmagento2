@@ -15,7 +15,7 @@ public class StylecoachPerformanceValidationWorkflow {
 		LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
 
 		result.setCareerLevel(commissionStylistModel.getCareer());
-		result.setPayLevel(commissionStylistModel.getPaylevel());
+		result.setPayLevel(commissionStylistModel.getPayLevelName());
 		result.setIndividualPoints(ipModel.getIp());
 		result.setUnsafeIndividualPoints(ipModel.getUnsafeIp());
 		result.setTeamPoints(String.valueOf(commissionStylistModel.getTeamPoints()));

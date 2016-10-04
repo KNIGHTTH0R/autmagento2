@@ -115,7 +115,7 @@ public class TeamReportPage extends AbstractPage {
 				teamReportModel.setSponsorName(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
 				teamReportModel.setActivationDate(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
 				teamReportModel.setIp(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
-				teamReportModel.setTp(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
+				teamReportModel.setTqv(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
 				teamReportModel.setCarrerLevelThisMonth(elementNow.findElement(By.cssSelector("td:nth-child(9)")).getText());
 				teamReportModel.setCarrerLevelLastMonth(elementNow.findElement(By.cssSelector("td:nth-child(10)")).getText());
 				teamReportModel.setPayLevel(elementNow.findElement(By.cssSelector("td:nth-child(11)")).getText());

@@ -25,14 +25,12 @@ public class TeamReportSteps extends AbstractSteps {
 	@Step
 	public void clickTeamTab() {
 		teamReportPage().clickTeamTab();
-		;
 
 	}
 
 	@Step
 	public void clickStylePartyTab() {
 		teamReportPage().clickStylePartyTab();
-		;
 
 	}
 
@@ -58,20 +56,21 @@ public class TeamReportSteps extends AbstractSteps {
 		return teamReportPage().getTeamReportTeamModel();
 
 	}
-	
+
 	@Step
 	public List<TeamReportPartyTabModel> getTeamReportPartyModel() {
 		return teamReportPage().getTeamReportPartyModel();
 
 	}
-	
+
 	@Step
 	public List<TeamReportTakeOffPhaseModel> getTeamReportTakeOffPhaseModel() {
 		return teamReportPage().getTeamReportTakeOffPhaseModel();
 
 	}
 
-	public void validateTeamReportTeamTab(List<TeamReportTeamTabModel> expectedList, List<TeamReportTeamTabModel> grabbedList) {
+	public void validateTeamReportTeamTab(List<TeamReportTeamTabModel> expectedList,
+			List<TeamReportTeamTabModel> grabbedList) {
 
 		Assert.assertTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
 
@@ -83,7 +82,7 @@ public class TeamReportSteps extends AbstractSteps {
 				validateSponsorName(stylist.getSponsorName(), compare.getSponsorName());
 				validateStartDate(stylist.getActivationDate(), compare.getActivationDate());
 				validateIp(stylist.getIp(), compare.getIp());
-				validateTp(stylist.getTp(), compare.getTp());
+				validateTp(stylist.getTqv(), compare.getTqv());
 				validateCareerLevelForThisMonth(stylist.getCarrerLevelThisMonth(), compare.getCarrerLevelThisMonth());
 				validateCareerLevelForLastMonth(stylist.getCarrerLevelLastMonth(), compare.getCarrerLevelLastMonth());
 				validatePayLevel(stylist.getPayLevel(), compare.getPayLevel());
@@ -105,7 +104,8 @@ public class TeamReportSteps extends AbstractSteps {
 		Assert.assertTrue("Failure: Not all products have been validated . ", grabbedList.size() == 0);
 	}
 
-	public void validateTeamReportPartyTab(List<TeamReportPartyTabModel> expectedList, List<TeamReportPartyTabModel> grabbedList) {
+	public void validateTeamReportPartyTab(List<TeamReportPartyTabModel> expectedList,
+			List<TeamReportPartyTabModel> grabbedList) {
 
 		Assert.assertTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
 
@@ -132,7 +132,8 @@ public class TeamReportSteps extends AbstractSteps {
 		Assert.assertTrue("Failure: Not all products have been validated . ", grabbedList.size() == 0);
 	}
 
-	public void validateTeamReportTakeOffPhaseTab(List<TeamReportTakeOffPhaseModel> expectedList, List<TeamReportTakeOffPhaseModel> grabbedList) {
+	public void validateTeamReportTakeOffPhaseTab(List<TeamReportTakeOffPhaseModel> expectedList,
+			List<TeamReportTakeOffPhaseModel> grabbedList) {
 
 		Assert.assertTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
 
@@ -199,113 +200,142 @@ public class TeamReportSteps extends AbstractSteps {
 
 	@Step
 	public void validateSponsorName(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Sponsor name dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
-	}
-
-	@Step
-	public void validateStartDate(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Start date dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
-	}
-
-	@Step
-	public void validateIp(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Ip values dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
-	}
-
-	@Step
-	public void validateTp(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Tp values dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
-	}
-
-	@Step
-	public void validateCareerLevelForThisMonth(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Career level for this month dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
-	}
-
-	@Step
-	public void validateCareerLevelForLastMonth(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Career level for last month dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
-	}
-
-	@Step
-	public void validatePayLevel(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Pay levels dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
-	}
-
-	@Step
-	public void validateIpIncludingNewSc(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Ips including new Scs dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
-	}
-
-	@Step
-	public void validateVacationMonth(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Vacation month date dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
-	}
-
-	@Step
-	public void validateNewScs(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: The number of active frontliners with activated at in current month dont match: " + stylistName + " - " + compare,
+		CustomVerification.verifyTrue("Failure: Sponsor name dont match: " + stylistName + " - " + compare,
 				stylistName.contentEquals(compare));
 	}
 
 	@Step
+	public void validateStartDate(String stylistName, String compare) {
+		CustomVerification.verifyTrue("Failure: Start date dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
+	}
+
+	@Step
+	public void validateIp(String stylistName, String compare) {
+		CustomVerification.verifyTrue("Failure: Ip values dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
+	}
+
+	@Step
+	public void validateTp(String stylistName, String compare) {
+		CustomVerification.verifyTrue("Failure: Tp values dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
+	}
+
+	@Step
+	public void validateCareerLevelForThisMonth(String stylistName, String compare) {
+		CustomVerification.verifyTrue(
+				"Failure: Career level for this month dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
+	}
+
+	@Step
+	public void validateCareerLevelForLastMonth(String stylistName, String compare) {
+		CustomVerification.verifyTrue(
+				"Failure: Career level for last month dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
+	}
+
+	@Step
+	public void validatePayLevel(String stylistName, String compare) {
+		CustomVerification.verifyTrue("Failure: Pay levels dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
+	}
+
+	@Step
+	public void validateIpIncludingNewSc(String stylistName, String compare) {
+		CustomVerification.verifyTrue("Failure: Ips including new Scs dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
+	}
+
+	@Step
+	public void validateVacationMonth(String stylistName, String compare) {
+		CustomVerification.verifyTrue("Failure: Vacation month date dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
+	}
+
+	@Step
+	public void validateNewScs(String stylistName, String compare) {
+		CustomVerification
+				.verifyTrue("Failure: The number of active frontliners with activated at in current month dont match: "
+						+ stylistName + " - " + compare, stylistName.contentEquals(compare));
+	}
+
+	@Step
 	public void validateQuitDate(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Quit dates dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Quit dates dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validateIpsThisMonth(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Ips for this month dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Ips for this month dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validateIpsLastMonth(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Ips for last month dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Ips for last month dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validatePartiesHeld(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Number of Parties held dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Number of Parties held dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validatePartiesPlanned(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Number of planned parties dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Number of planned parties dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validateUpcomingParties(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Number of upcoming parties dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue(
+				"Failure: Number of upcoming parties dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validateIpsPerParty(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Number of Ips per party dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Number of Ips per party dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validateStylistActivatedAt(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: The stylist activation date for team member dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue(
+				"Failure: The stylist activation date for team member dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validateTopEndDate(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: TOP end date dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: TOP end date dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validateLeftDays(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Number of days remaining until TOP ends dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue(
+				"Failure: Number of days remaining until TOP ends dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validateIpsOnTakeOffPhase(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Number of Ips in the take Off phase dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue(
+				"Failure: Number of Ips in the take Off phase dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
 	public void validateStylistWon(String stylistName, String compare) {
-		CustomVerification.verifyTrue("Failure: Number of frontliners recruited in TOP dont match: " + stylistName + " - " + compare, stylistName.contentEquals(compare));
+		CustomVerification.verifyTrue(
+				"Failure: Number of frontliners recruited in TOP dont match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 }
