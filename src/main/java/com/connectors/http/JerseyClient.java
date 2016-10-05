@@ -7,7 +7,6 @@ import com.sun.jersey.api.client.WebResource;
 public class JerseyClient {
 
 	public static String sendGet(String url) {
-
 		String output = "";
 
 		try {

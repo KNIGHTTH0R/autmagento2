@@ -9,6 +9,7 @@ import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.PomCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistRegistrationCartCalcDetailsModel;
+import com.tools.data.TeamReportModel;
 import com.tools.data.TeamReportPartyTabModel;
 import com.tools.data.TeamReportTakeOffPhaseModel;
 import com.tools.data.TeamReportTeamTabModel;
@@ -53,6 +54,32 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getProductsPrice());
 			System.out.println(cartProductModel.getFinalPrice());
 			System.out.println(cartProductModel.getPriceIP());
+		}
+	}
+
+	public static void printTeamReportModelList(List<TeamReportModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		for (TeamReportModel model : list) {
+			System.out.println("------------------------");
+			System.out.println("styleCoachName " + model.getStyleCoachName());
+			System.out.println("activationDate " + model.getActivationDate());
+			System.out.println("ip " + model.getIp());
+			System.out.println("ipTop " + model.getIpTop());
+			System.out.println("tqv " + model.getTqv());
+			System.out.println("carrerLevelThisMonth " + model.getCarrerLevelThisMonth());
+			System.out.println("carrerLevelLastMonth " + model.getCarrerLevelLastMonth());
+			System.out.println("payLevel " + model.getPayLevel());
+			System.out.println("ipNewRecruited " + model.getIpNewRecruited());
+			System.out.println("newStylist " + model.getNewStylist());
+			System.out.println("newStylistTop " + model.getNewStylistTop());
+			System.out.println("ipThisMonth " + model.getIpThisMonth());
+			System.out.println("ipLastMonth " + model.getIpLastMonth());
+			System.out.println("partiesPlanned " + model.getPartiesPlanned());
+			System.out.println("partiesHeld " + model.getPartiesHeld());
+			System.out.println("partiesUpcoming " + model.getPartiesUpcoming());
+			System.out.println("revenuePerParty " + model.getRevenuePerParty());
+			System.out.println("takeOffPhaseEndDate " + model.getTakeOffPhaseEndDate());
+			System.out.println("daysLeft " + model.getDaysLeft());
 		}
 	}
 
@@ -474,8 +501,9 @@ public class PrintUtils {
 		System.out.println("TotalAmount " + shippingTotals.getTotalAmount());
 		System.out.println("TAX - only for tp orders " + shippingTotals.getTax());
 	}
-	
-	public static void printStarterSetCalcDetailsTotals(StylistRegistrationCartCalcDetailsModel stylistRegistrationCartCalcDetailsModel) {
+
+	public static void printStarterSetCalcDetailsTotals(
+			StylistRegistrationCartCalcDetailsModel stylistRegistrationCartCalcDetailsModel) {
 		System.out.println("------------------------");
 		System.out.println("SubTotal " + stylistRegistrationCartCalcDetailsModel.getSubTotal());
 		System.out.println("DiscountPrice " + stylistRegistrationCartCalcDetailsModel.getVoucherDiscount());
@@ -526,14 +554,15 @@ public class PrintUtils {
 		System.out.println("ip points : " + calculatedDetailsModel.getIpPoints());
 
 	}
+
 	public static void printPomCartCalcDetailsModel(PomCartCalcDetailsModel calculatedDetailsModel) {
 		System.out.println("printPomCartCalcDetailsModel -----------------------------");
-		
+
 		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
 		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());
 		System.out.println("tax : " + calculatedDetailsModel.getTax());
 		System.out.println("discopunt : " + calculatedDetailsModel.getPomDiscount());
-		
+
 	}
 
 	public static void printHostCartCalcDetailsModel(HostCartCalcDetailsModel calculatedDetailsModel) {
@@ -573,7 +602,7 @@ public class PrintUtils {
 	}
 
 	public static void printLoungeIpPerformanceModel(LoungeIpPerformanceModel loungeIpPerformanceModel) {
-		
+
 		System.out.println("printLoungeIpPerformanceModel -----------------------------");
 		System.out.println("Carrer : " + loungeIpPerformanceModel.getCareerLevel());
 		System.out.println("Pay level : " + loungeIpPerformanceModel.getPayLevel());
@@ -583,51 +612,54 @@ public class PrintUtils {
 		System.out.println("Gold SC : " + loungeIpPerformanceModel.getGoldStyleCoaches());
 
 	}
-	
-  public static void printTeamReportTeamTabModel(List<TeamReportTeamTabModel> list ) {
-	  for (TeamReportTeamTabModel teamReportTeamTabModel : list) {
-		System.out.println("printTeamReportTeamTabModel -----------------------------");
-		System.out.println("Stylist Name : " + teamReportTeamTabModel.getStyleCoachName());
-		System.out.println("Sponsor name : " + teamReportTeamTabModel.getSponsorName());
-		System.out.println("Activation Date : " + teamReportTeamTabModel.getActivationDate());
-		System.out.println("IPs : " + teamReportTeamTabModel.getIp());
-		System.out.println("TP : " + teamReportTeamTabModel.getTqv());
-		System.out.println("Career Level this month : " + teamReportTeamTabModel.getCarrerLevelThisMonth());
-		System.out.println("Career Level last month : " + teamReportTeamTabModel.getCarrerLevelLastMonth());
-		System.out.println("Pay Level : " + teamReportTeamTabModel.getPayLevel());
-		System.out.println("Ips inclu. new recruited : " + teamReportTeamTabModel.getIpNewRecruited());
-		System.out.println("Vacation month : " + teamReportTeamTabModel.getVacationMonth());
-		System.out.println("New Scs : " + teamReportTeamTabModel.getNewStylist());
-		System.out.println("Quit date: " + teamReportTeamTabModel.getQuitDate());
-	  }
+
+	public static void printTeamReportTeamTabModel(List<TeamReportTeamTabModel> list) {
+		for (TeamReportTeamTabModel teamReportTeamTabModel : list) {
+			System.out.println("printTeamReportTeamTabModel -----------------------------");
+			System.out.println("Stylist ID : " + teamReportTeamTabModel.getStyleCoachId());
+			System.out.println("Stylist Name : " + teamReportTeamTabModel.getStyleCoachName());
+			System.out.println("Sponsor name : " + teamReportTeamTabModel.getSponsorName());
+			System.out.println("Activation Date : " + teamReportTeamTabModel.getActivationDate());
+			System.out.println("IPs : " + teamReportTeamTabModel.getIp());
+			System.out.println("TP : " + teamReportTeamTabModel.getTqv());
+			System.out.println("Career Level this month : " + teamReportTeamTabModel.getCarrerLevelThisMonth());
+			System.out.println("Career Level last month : " + teamReportTeamTabModel.getCarrerLevelLastMonth());
+			System.out.println("Pay Level : " + teamReportTeamTabModel.getPayLevel());
+			System.out.println("Ips inclu. new recruited : " + teamReportTeamTabModel.getIpNewRecruited());
+			System.out.println("Vacation month : " + teamReportTeamTabModel.getVacationMonth());
+			System.out.println("New Scs : " + teamReportTeamTabModel.getNewStylist());
+			System.out.println("Quit date: " + teamReportTeamTabModel.getQuitDate());
+		}
 	}
-  
-  public static void printTeamReportPartyTabModel(List<TeamReportPartyTabModel> list ) {
-	  for (TeamReportPartyTabModel teamReportPartyTabModel : list) {
-		System.out.println("printTeamReportPartyTabModel -----------------------------");
-		System.out.println("Stylist Name : " + teamReportPartyTabModel.getStylistName());
-		System.out.println("Sponsor name : " + teamReportPartyTabModel.getSponsorName());
-		System.out.println("Ips this month : " + teamReportPartyTabModel.getIpThisMonth());
-		System.out.println("IPs last month : " + teamReportPartyTabModel.getIpLastMonth());
-		System.out.println("Party Held : " + teamReportPartyTabModel.getPartiesHeld());
-		System.out.println("Party planned : " + teamReportPartyTabModel.getPartiesPlanned());
-		System.out.println("Party Upcoming : " + teamReportPartyTabModel.getPartiesUpcoming());
-		System.out.println("Ips per party : " + teamReportPartyTabModel.getIpPerParty());
-	  }
+
+	public static void printTeamReportPartyTabModel(List<TeamReportPartyTabModel> list) {
+		for (TeamReportPartyTabModel teamReportPartyTabModel : list) {
+			System.out.println("printTeamReportPartyTabModel -----------------------------");
+			System.out.println("Stylist ID : " + teamReportPartyTabModel.getStyleCoachId());
+			System.out.println("Stylist Name : " + teamReportPartyTabModel.getStylistName());
+			System.out.println("Sponsor name : " + teamReportPartyTabModel.getSponsorName());
+			System.out.println("Ips this month : " + teamReportPartyTabModel.getIpThisMonth());
+			System.out.println("IPs last month : " + teamReportPartyTabModel.getIpLastMonth());
+			System.out.println("Party Held : " + teamReportPartyTabModel.getPartiesHeld());
+			System.out.println("Party planned : " + teamReportPartyTabModel.getPartiesPlanned());
+			System.out.println("Party Upcoming : " + teamReportPartyTabModel.getPartiesUpcoming());
+			System.out.println("Ips per party : " + teamReportPartyTabModel.getIpPerParty());
+		}
 	}
-  
-  public static void printTeamReportTakeOffPhaseTabModel(List<TeamReportTakeOffPhaseModel> list ) {
-	  for (TeamReportTakeOffPhaseModel teamReportTakeOffPhaseModel : list) {
-		System.out.println("printTeamReportTakeOffPhaseTabModel -----------------------------");
-		System.out.println("Stylist Name : " + teamReportTakeOffPhaseModel.getStylistName());
-		System.out.println("Sponsor name : " + teamReportTakeOffPhaseModel.getSponsorName());
-		System.out.println("Start date : " + teamReportTakeOffPhaseModel.getActivationDate());
-		System.out.println("End date : " + teamReportTakeOffPhaseModel.getTakeOffPhaseEndDate());
-		System.out.println("Days left: " + teamReportTakeOffPhaseModel.getDaysLeft());
-		System.out.println("Ips : " + teamReportTakeOffPhaseModel.getIp());
-		System.out.println("Style coaches won : " + teamReportTakeOffPhaseModel.getNumberOfFrontliners());
-		
-	  }
+
+	public static void printTeamReportTakeOffPhaseTabModel(List<TeamReportTakeOffPhaseModel> list) {
+		for (TeamReportTakeOffPhaseModel teamReportTakeOffPhaseModel : list) {
+			System.out.println("printTeamReportTakeOffPhaseTabModel -----------------------------");
+			System.out.println("Stylist ID : " + teamReportTakeOffPhaseModel.getStyleCoachId());
+			System.out.println("Stylist Name : " + teamReportTakeOffPhaseModel.getStylistName());
+			System.out.println("Sponsor name : " + teamReportTakeOffPhaseModel.getSponsorName());
+			System.out.println("Start date : " + teamReportTakeOffPhaseModel.getActivationDate());
+			System.out.println("End date : " + teamReportTakeOffPhaseModel.getTakeOffPhaseEndDate());
+			System.out.println("Days left: " + teamReportTakeOffPhaseModel.getDaysLeft());
+			System.out.println("Ips : " + teamReportTakeOffPhaseModel.getIp());
+			System.out.println("Style coaches won : " + teamReportTakeOffPhaseModel.getNumberOfFrontliners());
+
+		}
 	}
 
 }

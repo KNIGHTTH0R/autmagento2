@@ -1,8 +1,8 @@
 package com.tools.data;
 
 public class TeamReportModel {
+	private String styleCoachId;
 	private String styleCoachName;
-	private String sponsorName;
 	private String activationDate;
 	private String ip;
 	private String ipTop;
@@ -11,11 +11,8 @@ public class TeamReportModel {
 	private String carrerLevelLastMonth;
 	private String payLevel;
 	private String ipNewRecruited;
-	private String vacationMonth;
 	private String newStylist;
 	private String newStylistTop;
-	private String quitDate;
-	private String stylistName;
 	private String ipThisMonth;
 	private String ipLastMonth;
 	private String partiesHeld;
@@ -25,7 +22,14 @@ public class TeamReportModel {
 	private String ipPerParty;
 	private String takeOffPhaseEndDate;
 	private String daysLeft;
-	private String numberOfFrontliners;
+
+	public String getStyleCoachId() {
+		return styleCoachId;
+	}
+
+	public void setStyleCoachId(String styleCoachId) {
+		this.styleCoachId = styleCoachId;
+	}
 
 	public String getNewStylist() {
 		return newStylist;
@@ -41,14 +45,6 @@ public class TeamReportModel {
 
 	public void setStyleCoachName(String styleCoachName) {
 		this.styleCoachName = styleCoachName;
-	}
-
-	public String getSponsorName() {
-		return sponsorName;
-	}
-
-	public void setSponsorName(String sponsorName) {
-		this.sponsorName = sponsorName;
 	}
 
 	public String getActivationDate() {
@@ -131,30 +127,6 @@ public class TeamReportModel {
 		this.ipNewRecruited = ipNewRecruited;
 	}
 
-	public String getVacationMonth() {
-		return vacationMonth;
-	}
-
-	public void setVacationMonth(String vacationMonth) {
-		this.vacationMonth = vacationMonth;
-	}
-
-	public String getQuitDate() {
-		return quitDate;
-	}
-
-	public void setQuitDate(String quitDate) {
-		this.quitDate = quitDate;
-	}
-
-	public String getStylistName() {
-		return stylistName;
-	}
-
-	public void setStylistName(String stylistName) {
-		this.stylistName = stylistName;
-	}
-
 	public String getIpThisMonth() {
 		return ipThisMonth;
 	}
@@ -217,14 +189,6 @@ public class TeamReportModel {
 
 	public void setDaysLeft(String daysLeft) {
 		this.daysLeft = daysLeft;
-	}
-
-	public String getNumberOfFrontliners() {
-		return numberOfFrontliners;
-	}
-
-	public void setNumberOfFrontliners(String numberOfFrontliners) {
-		this.numberOfFrontliners = numberOfFrontliners;
 	}
 
 }

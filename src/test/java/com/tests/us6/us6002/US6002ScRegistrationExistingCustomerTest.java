@@ -1,10 +1,5 @@
 package com.tests.us6.us6002;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,7 +29,6 @@ import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.StylistPropertiesModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.SepaPaymentMethodModel;
@@ -43,6 +37,11 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.2 Sc Registration Existing Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_2.class)
@@ -80,7 +79,6 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");
 	private String birthDate;
-	private CreditCardModel creditCardData = new CreditCardModel();
     private	SepaPaymentMethodModel sepaPaymentData=new SepaPaymentMethodModel();
 
 	@Before

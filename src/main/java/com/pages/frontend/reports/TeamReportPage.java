@@ -6,10 +6,12 @@ import java.util.List;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.constants.ContextConstants;
 import com.tools.data.TeamReportPartyTabModel;
 import com.tools.data.TeamReportTakeOffPhaseModel;
 import com.tools.data.TeamReportTeamTabModel;
@@ -62,6 +64,8 @@ public class TeamReportPage extends AbstractPage {
 	public void selectMonthForReport(String monthDate) {
 		monthDateForReport.waitUntilVisible();
 		element(monthDateForReport).selectByVisibleText(monthDate);
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void searchInput(String seachKey) {
@@ -101,7 +105,8 @@ public class TeamReportPage extends AbstractPage {
 		List<TeamReportTeamTabModel> result = new ArrayList<TeamReportTeamTabModel>();
 
 		int currentPage = 1;
-		int numberOfPages = Integer.valueOf(getDriver().findElement(By.cssSelector("#team_report_paginate span a:last-child")).getText());
+		int numberOfPages = Integer
+				.valueOf(getDriver().findElement(By.cssSelector("#team_report_paginate span a:last-child")).getText());
 
 		do {
 			List<WebElement> listEntries = getDriver().findElements(By.cssSelector("#team_report > tbody > tr"));
@@ -111,19 +116,25 @@ public class TeamReportPage extends AbstractPage {
 			for (WebElement elementNow : listEntries) {
 
 				TeamReportTeamTabModel teamReportModel = new TeamReportTeamTabModel();
-				teamReportModel.setStyleCoachName(elementNow.findElement(By.cssSelector("td:nth-child(4) a")).getText());
-				teamReportModel.setSponsorName(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
-				teamReportModel.setActivationDate(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
-				teamReportModel.setIp(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
-				teamReportModel.setTqv(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
-				teamReportModel.setCarrerLevelThisMonth(elementNow.findElement(By.cssSelector("td:nth-child(9)")).getText());
-				teamReportModel.setCarrerLevelLastMonth(elementNow.findElement(By.cssSelector("td:nth-child(10)")).getText());
-				teamReportModel.setPayLevel(elementNow.findElement(By.cssSelector("td:nth-child(11)")).getText());
-				teamReportModel.setIpNewRecruited(elementNow.findElement(By.cssSelector("td:nth-child(12)")).getText());
-				teamReportModel.setVacationMonth(elementNow.findElement(By.cssSelector("td:nth-child(13)")).getText());
-				teamReportModel.setNewStylist(elementNow.findElement(By.cssSelector("td:nth-child(14)")).getText());
-				teamReportModel.setQuitDate(elementNow.findElement(By.cssSelector("td:nth-child(15)")).getText());
-		
+				WebElement nameContainer = elementNow.findElement(By.cssSelector("td:nth-child(1) a"));
+
+				teamReportModel.setStyleCoachId(
+						StringUtils.substringBetween(nameContainer.getAttribute("href"), "userId/", "/userType"));
+				teamReportModel.setStyleCoachName(nameContainer.getText());
+				teamReportModel.setSponsorName(elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText());
+				teamReportModel.setActivationDate(elementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+				teamReportModel.setIp(elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+				teamReportModel.setTqv(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
+				teamReportModel
+						.setCarrerLevelThisMonth(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
+				teamReportModel
+						.setCarrerLevelLastMonth(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
+				teamReportModel.setPayLevel(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
+				teamReportModel.setIpNewRecruited(elementNow.findElement(By.cssSelector("td:nth-child(9)")).getText());
+				teamReportModel.setVacationMonth(elementNow.findElement(By.cssSelector("td:nth-child(10)")).getText());
+				teamReportModel.setNewStylist(elementNow.findElement(By.cssSelector("td:nth-child(11)")).getText());
+				teamReportModel.setQuitDate(elementNow.findElement(By.cssSelector("td:nth-child(12)")).getText());
+
 				result.add(teamReportModel);
 			}
 			reportNextPageButton.click();
@@ -134,13 +145,14 @@ public class TeamReportPage extends AbstractPage {
 		PrintUtils.printTeamReportTeamTabModel(result);
 		return result;
 	}
-	
+
 	public List<TeamReportPartyTabModel> getTeamReportPartyModel() {
 
 		List<TeamReportPartyTabModel> result = new ArrayList<TeamReportPartyTabModel>();
 
 		int currentPage = 1;
-		int numberOfPages = Integer.valueOf(getDriver().findElement(By.cssSelector("#team_report_paginate span a:last-child")).getText());
+		int numberOfPages = Integer
+				.valueOf(getDriver().findElement(By.cssSelector("#team_report_paginate span a:last-child")).getText());
 
 		do {
 			List<WebElement> listEntries = getDriver().findElements(By.cssSelector("#team_report > tbody > tr"));
@@ -150,16 +162,27 @@ public class TeamReportPage extends AbstractPage {
 			for (WebElement elementNow : listEntries) {
 
 				TeamReportPartyTabModel teamReportPartyModel = new TeamReportPartyTabModel();
-				teamReportPartyModel.setStylistName(elementNow.findElement(By.cssSelector("td:nth-child(4) a")).getText());
-				teamReportPartyModel.setSponsorName(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
-				teamReportPartyModel.setIpThisMonth(elementNow.findElement(By.cssSelector("td:nth-child(16)")).getText());
-				teamReportPartyModel.setIpLastMonth(elementNow.findElement(By.cssSelector("td:nth-child(17)")).getText());
-				teamReportPartyModel.setPartiesHeld(elementNow.findElement(By.cssSelector("td:nth-child(18)")).getText());
-				teamReportPartyModel.setPartiesPlanned(elementNow.findElement(By.cssSelector("td:nth-child(19)")).getText());
-				teamReportPartyModel.setPartiesUpcoming(elementNow.findElement(By.cssSelector("td:nth-child(20)")).getText());
-				teamReportPartyModel.setIpPerParty(elementNow.findElement(By.cssSelector("td:nth-child(21)")).getText());
-			
-		
+
+				WebElement nameContainer = elementNow.findElement(By.cssSelector("td:nth-child(1) a"));
+
+				teamReportPartyModel.setStyleCoachId(
+						StringUtils.substringBetween(nameContainer.getAttribute("href"), "userId/", "/userType"));
+				teamReportPartyModel.setStylistName(nameContainer.getText());
+
+				teamReportPartyModel
+						.setSponsorName(elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText());
+				teamReportPartyModel
+						.setIpThisMonth(elementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+				teamReportPartyModel
+						.setIpLastMonth(elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+				teamReportPartyModel
+						.setPartiesHeld(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
+				teamReportPartyModel
+						.setPartiesPlanned(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
+				teamReportPartyModel
+						.setPartiesUpcoming(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
+				teamReportPartyModel.setIpPerParty(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
+
 				result.add(teamReportPartyModel);
 			}
 			reportNextPageButton.click();
@@ -170,13 +193,14 @@ public class TeamReportPage extends AbstractPage {
 		PrintUtils.printTeamReportPartyTabModel(result);
 		return result;
 	}
-	
+
 	public List<TeamReportTakeOffPhaseModel> getTeamReportTakeOffPhaseModel() {
 
 		List<TeamReportTakeOffPhaseModel> result = new ArrayList<TeamReportTakeOffPhaseModel>();
 
 		int currentPage = 1;
-		int numberOfPages = Integer.valueOf(getDriver().findElement(By.cssSelector("#team_report_paginate span a:last-child")).getText());
+		int numberOfPages = Integer
+				.valueOf(getDriver().findElement(By.cssSelector("#team_report_paginate span a:last-child")).getText());
 
 		do {
 			List<WebElement> listEntries = getDriver().findElements(By.cssSelector("#team_report > tbody > tr"));
@@ -185,16 +209,25 @@ public class TeamReportPage extends AbstractPage {
 
 			for (WebElement elementNow : listEntries) {
 
+				WebElement nameContainer = elementNow.findElement(By.cssSelector("td:nth-child(1) a"));
+
 				TeamReportTakeOffPhaseModel teamReportTakeOffPhaseModel = new TeamReportTakeOffPhaseModel();
-				teamReportTakeOffPhaseModel.setStylistName(elementNow.findElement(By.cssSelector("td:nth-child(4) a")).getText());
-				teamReportTakeOffPhaseModel.setSponsorName(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
-				teamReportTakeOffPhaseModel.setActivationDate(elementNow.findElement(By.cssSelector("td:nth-child(22)")).getText());
-				teamReportTakeOffPhaseModel.setTakeOffPhaseEndDate(elementNow.findElement(By.cssSelector("td:nth-child(23)")).getText());
-				teamReportTakeOffPhaseModel.setDaysLeft(elementNow.findElement(By.cssSelector("td:nth-child(24)")).getText());
-				teamReportTakeOffPhaseModel.setIp(elementNow.findElement(By.cssSelector("td:nth-child(25)")).getText());
-				teamReportTakeOffPhaseModel.setNumberOfFrontliners(elementNow.findElement(By.cssSelector("td:nth-child(26)")).getText());
-			
-		
+
+				teamReportTakeOffPhaseModel.setStyleCoachId(
+						StringUtils.substringBetween(nameContainer.getAttribute("href"), "userId/", "/userType"));
+				teamReportTakeOffPhaseModel.setStylistName(nameContainer.getText());
+				teamReportTakeOffPhaseModel
+						.setSponsorName(elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText());
+				teamReportTakeOffPhaseModel
+						.setActivationDate(elementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+				teamReportTakeOffPhaseModel
+						.setTakeOffPhaseEndDate(elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+				teamReportTakeOffPhaseModel
+						.setDaysLeft(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
+				teamReportTakeOffPhaseModel.setIp(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
+				teamReportTakeOffPhaseModel
+						.setNumberOfFrontliners(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
+
 				result.add(teamReportTakeOffPhaseModel);
 			}
 			reportNextPageButton.click();
