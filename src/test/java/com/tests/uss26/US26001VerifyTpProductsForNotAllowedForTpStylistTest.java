@@ -115,7 +115,7 @@ public class US26001VerifyTpProductsForNotAllowedForTpStylistTest extends BaseTe
 		
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		//pentru upgrade
-		//frontEndSteps.performLogin("fdirector@rhyta.com", "emilian1");
+	//	frontEndSteps.performLogin("fdirector@rhyta.com", "emilian1");
 		
 		if (!headerSteps.succesfullLogin()) {
 
