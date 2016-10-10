@@ -1,13 +1,12 @@
 package com.steps.frontend.checkout;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Title;
-
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ElvPaymentMethodModel;
-import com.tools.data.frontend.KlarnaPaymentMethodModel;
 import com.tools.data.frontend.SepaPaymentMethodModel;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 public class PaymentSteps extends AbstractSteps {
 
