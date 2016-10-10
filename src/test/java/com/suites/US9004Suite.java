@@ -6,7 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us9.us9004.US9004PlaceHostOrderWithTpTest;
 import com.tests.us9.us9004.US9004ValidateOrdersInBackendTest;
-import com.tests.uss10.us10001b.US10001bClosePartyTest;
 import com.tests.uss10.us10001b.US10001bUpdatePartyBonusesTest;
 
 @SuiteClasses({

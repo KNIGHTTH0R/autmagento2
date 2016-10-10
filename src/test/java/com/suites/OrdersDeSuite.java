@@ -8,9 +8,6 @@ import com.tests.uss10.us10001b.US10001bCreatePartyWithStylistHostTest;
 import com.tests.uss10.us10002b.US10002bCreatePartyWithCustomerHostTest;
 import com.tests.uss10.uss10007.US10007CreatePartyWithStylistHostTest;
 import com.tests.uss10.uss10008.US10008CreatePartyWithExistingContactHostTest;
-import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
-import com.tests.uss30.uss30001.US30001GetInitialOpenIps;
-import com.tests.uss30.uss30001.US30001VerifyOpenIpsAfterNewOrdersTest;
 
 @SuiteClasses({
 	

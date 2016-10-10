@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,10 +33,7 @@ import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.BasicProductModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ElvPaymentMethodModel;
-import com.tools.data.frontend.KlarnaPaymentMethodModel;
-import com.tools.data.frontend.SepaPaymentMethodModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.persistance.MongoReader;
@@ -49,6 +41,11 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US3.2 Shop for myself 0.01 Euro difference", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
@@ -82,10 +79,7 @@ public class US3002BuyProductsForTheFirstTimeTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	private CreditCardModel creditCardData = new CreditCardModel();
 	private ElvPaymentMethodModel elvPaymentMethodData = new ElvPaymentMethodModel();
-	private SepaPaymentMethodModel sepaPaymentMethodModel = new SepaPaymentMethodModel();
-	private KlarnaPaymentMethodModel klarnaPaymentMethodModel = new KlarnaPaymentMethodModel();
 
 	private String username, password;
 	private static String addressString;
@@ -158,9 +152,6 @@ public class US3002BuyProductsForTheFirstTimeTest extends BaseTest {
 
 		paymentSteps.expandElvForm();
 		paymentSteps.fillElvForm(elvPaymentMethodData);
-		
-	//	paymentSteps.expandSepaForm();
-	//	paymentSteps.fillSepaForm(sepaPaymentMethodModel);
 		
 		confirmationSteps.agreeAndCheckout();
 	}

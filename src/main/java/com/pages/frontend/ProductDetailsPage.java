@@ -1,7 +1,10 @@
 package com.pages.frontend;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.constants.ContextConstants;
 import com.tools.data.frontend.BasicProductModel;
@@ -57,8 +60,9 @@ public class ProductDetailsPage extends AbstractPage {
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
 		// TODO add a retry here
-		while (getDriver().findElement(By.cssSelector("div#add-to-cart-modal")).isDisplayed()) {
-			waitABit(1000);
+		waitABit(500);
+		while (!addToCartButton.isEnabled()) {
+			waitABit(500);
 		}
 		waitABit(500);
 	}

@@ -8,8 +8,8 @@ import com.tests.uss31.uss31001.US31001ActivateSemiautomatedCronTest;
 import com.tests.uss31.uss31001.US31001PartyHostBuysForCustomerTpTest;
 import com.tests.uss31.uss31001.US31001ValidateCancelEmailForCustomer1Test;
 import com.tests.uss31.uss31001.US31001ValidateCancelEmailForStylist1Test;
-import com.tests.uss31.uss31001.US31001ValidateCancelLimitEmailForStylistTest;
 import com.tests.uss31.uss31001.US31001ValidateCancelLimitEmailForCustomerTest;
+import com.tests.uss31.uss31001.US31001ValidateCancelLimitEmailForStylistTest;
 import com.tests.uss31.uss31001.US31001ValidateCancelLimitReachedOrdersInTpGridTest;
 import com.tests.uss31.uss31001.US31001ValidateCanceledAndPaymentCompleteOrdersInTpGridTest;
 import com.tests.uss31.uss31001.US31001ValidateCanceledAndReleasedOrdersInTpGridTest;
@@ -23,7 +23,6 @@ import com.tests.uss31.uss31001.US31001ValidatePostponeEmailForStylistTest;
 import com.tests.uss31.uss31001.US31001ValidatePostponedOrdersInTpGrid2Test;
 import com.tests.uss31.uss31001.US31001ValidatePostponedOrdersInTpGrid3Test;
 import com.tests.uss31.uss31001.US31001ValidatePostponedOrdersInTpGridTest;
-import com.tests.uss31.uss31001.US31001ValidateReleaseEmailForStylist1Test;
 
 @SuiteClasses({
 	US31001ActivateSemiautomatedCronTest.class,

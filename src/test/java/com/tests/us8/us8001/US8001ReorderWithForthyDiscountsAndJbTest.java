@@ -1,17 +1,11 @@
 package com.tests.us8.us8001;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,7 +33,6 @@ import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.ElvPaymentMethodModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -51,6 +44,11 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
@@ -96,25 +94,27 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
-//	private CreditCardModel creditCardData = new CreditCardModel();
+	// private CreditCardModel creditCardData = new CreditCardModel();
 	private ElvPaymentMethodModel elvPaymentData = new ElvPaymentMethodModel();
 	public static List<RegularBasicProductModel> productsList;
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 	String orderId;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
-		
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.GRAB);
+
+		List<OrderModel> orderModelList = MongoReader
+				.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.GRAB);
 		orderId = orderModelList.get(0).getOrderId();
-		
-		productsList = MongoReader.grabRegularBasicProductModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
+
+		productsList = MongoReader
+				.grabRegularBasicProductModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
 		System.out.println("dsdsdsdsds " + productsList.size());
-		
+
 		genProduct1.setName(productsList.get(0).getName());
 		genProduct1.setSku(productsList.get(0).getProdCode());
 		genProduct1.setPrice("89.00");
@@ -174,7 +174,7 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
 		profileSteps.clickReorderLink(orderId);
-		
+
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.updateBasicProductToCart(genProduct1, "1", "0");
@@ -184,20 +184,23 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		productData = addRegularProductsWorkflow.updateBasicProductToCart(genProduct3, "4", "0");
 		RegularUserCartCalculator.allProductsList.add(productData);
 
-//		headerSteps.openCartPreview();
-//		headerSteps.goToCart();
+		// headerSteps.openCartPreview();
+		// headerSteps.goToCart();
 		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
-	    regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(),
+				ContextConstants.JEWELRY_BONUS);
+		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(),
+				ContextConstants.DISCOUNT_40_BONUS);
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
 		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
 
-		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
+		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
 
-		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
+		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList,
+				discountClass, shippingValue, voucherValue);
 
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
@@ -205,9 +208,9 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		shippingSteps.setSameAsBilling(true);
 
 		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
-	
+
 		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
-	
+
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
@@ -216,16 +219,16 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
-		
+		// paymentSteps.expandCreditCardForm();
+		// paymentSteps.fillCreditCardForm(creditCardData);
+
 		paymentSteps.expandElvForm();
 		paymentSteps.fillElvForm(elvPaymentData);
-	
+
 		confirmationSteps.grabRegularProductsList();
-		
+
 		RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-		
+
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
@@ -239,14 +242,14 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
 		}
 	}
 }
-
-

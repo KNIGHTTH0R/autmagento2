@@ -29,7 +29,6 @@ import com.tools.CustomVerification;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.SepaPaymentMethodModel;
 import com.tools.data.soap.ProductDetailedModel;
