@@ -61,6 +61,7 @@ public class PrintUtils {
 		System.out.println(" *** Print List from Cart *** ");
 		for (TeamReportModel model : list) {
 			System.out.println("------------------------");
+			System.out.println("styleCoachID " + model.getStyleCoachId());
 			System.out.println("styleCoachName " + model.getStyleCoachName());
 			System.out.println("activationDate " + model.getActivationDate());
 			System.out.println("ip " + model.getIp());
@@ -80,6 +81,7 @@ public class PrintUtils {
 			System.out.println("revenuePerParty " + model.getRevenuePerParty());
 			System.out.println("takeOffPhaseEndDate " + model.getTakeOffPhaseEndDate());
 			System.out.println("daysLeft " + model.getDaysLeft());
+			System.out.println("level " + model.getLevel());
 		}
 	}
 
@@ -643,7 +645,7 @@ public class PrintUtils {
 			System.out.println("Party Held : " + teamReportPartyTabModel.getPartiesHeld());
 			System.out.println("Party planned : " + teamReportPartyTabModel.getPartiesPlanned());
 			System.out.println("Party Upcoming : " + teamReportPartyTabModel.getPartiesUpcoming());
-			System.out.println("Ips per party : " + teamReportPartyTabModel.getIpPerParty());
+			System.out.println("Ips per party : " + teamReportPartyTabModel.getRevenuePerParty());
 		}
 	}
 
@@ -657,7 +659,7 @@ public class PrintUtils {
 			System.out.println("End date : " + teamReportTakeOffPhaseModel.getTakeOffPhaseEndDate());
 			System.out.println("Days left: " + teamReportTakeOffPhaseModel.getDaysLeft());
 			System.out.println("Ips : " + teamReportTakeOffPhaseModel.getIp());
-			System.out.println("Style coaches won : " + teamReportTakeOffPhaseModel.getNumberOfFrontliners());
+			System.out.println("Style coaches won : " + teamReportTakeOffPhaseModel.getNewStylistTop());
 
 		}
 	}

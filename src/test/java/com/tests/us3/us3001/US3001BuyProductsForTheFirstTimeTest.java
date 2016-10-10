@@ -160,7 +160,7 @@ public class US3001BuyProductsForTheFirstTimeTest extends BaseTest {
 
 		cartSteps.grabTotals();
 		cartSteps.goToShipping();
-
+		
 		shippingSteps.selectAddress(addressString);
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.refresh();

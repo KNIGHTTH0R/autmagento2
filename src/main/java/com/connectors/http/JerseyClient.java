@@ -8,7 +8,7 @@ public class JerseyClient {
 
 	public static String sendGet(String url) {
 		String output = "";
-
+		System.out.println(url);
 		try {
 
 			Client client = Client.create();

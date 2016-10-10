@@ -19,9 +19,9 @@ public class TeamReportModel {
 	private String partiesPlanned;
 	private String partiesUpcoming;
 	private String revenuePerParty;
-	private String ipPerParty;
 	private String takeOffPhaseEndDate;
 	private String daysLeft;
+	private String level;
 
 	public String getStyleCoachId() {
 		return styleCoachId;
@@ -167,14 +167,6 @@ public class TeamReportModel {
 		this.partiesUpcoming = partiesUpcoming;
 	}
 
-	public String getIpPerParty() {
-		return ipPerParty;
-	}
-
-	public void setIpPerParty(String ipPerParty) {
-		this.ipPerParty = ipPerParty;
-	}
-
 	public String getTakeOffPhaseEndDate() {
 		return takeOffPhaseEndDate;
 	}
@@ -189,6 +181,14 @@ public class TeamReportModel {
 
 	public void setDaysLeft(String daysLeft) {
 		this.daysLeft = daysLeft;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 }

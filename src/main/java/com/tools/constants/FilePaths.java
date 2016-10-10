@@ -1,7 +1,7 @@
 package com.tools.constants;
 
 public class FilePaths {
-	//Config folders
+	// Config folders
 	public static final String US_01_FOLDER = "us1";
 	public static final String US_02_FOLDER = "us2";
 	public static final String US_03_FOLDER = "us3";
@@ -20,4 +20,5 @@ public class FilePaths {
 	public static final String US_29_FOLDER = "uss29";
 	public static final String US_30_FOLDER = "uss30";
 	public static final String US_31_FOLDER = "uss31";
+	public static final String US_33_FOLDER = "uss33";
 }

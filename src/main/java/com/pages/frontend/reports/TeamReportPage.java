@@ -3,9 +3,6 @@ package com.pages.frontend.reports;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-import net.serenitybdd.core.pages.WebElementFacade;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,9 +12,13 @@ import com.tools.constants.ContextConstants;
 import com.tools.data.TeamReportPartyTabModel;
 import com.tools.data.TeamReportTakeOffPhaseModel;
 import com.tools.data.TeamReportTeamTabModel;
-import com.tools.datahandler.RegularUserDataGrabber;
+import com.tools.generalCalculation.TeamReportCalculations;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.pages.WebElementFacade;
 
 public class TeamReportPage extends AbstractPage {
 
@@ -42,6 +43,9 @@ public class TeamReportPage extends AbstractPage {
 	@FindBy(id = "tab_party")
 	private WebElement partyTab;
 
+	@FindBy(css = "a[class*='paginate_button'][data-dt-idx='1']")
+	private WebElement firstPageButton;
+
 	@FindBy(id = "tab_takeoff")
 	private WebElement takeOffPhaseTab;
 
@@ -58,7 +62,7 @@ public class TeamReportPage extends AbstractPage {
 
 	public void selectScLevel(String levelNumber) {
 		element(stylistLevel).waitUntilVisible();
-		element(stylistLevel).selectByVisibleText(levelNumber);
+		element(stylistLevel).selectByValue(levelNumber);
 	}
 
 	public void selectMonthForReport(String monthDate) {
@@ -107,6 +111,9 @@ public class TeamReportPage extends AbstractPage {
 		int currentPage = 1;
 		int numberOfPages = Integer
 				.valueOf(getDriver().findElement(By.cssSelector("#team_report_paginate span a:last-child")).getText());
+		// the pagination when changing between tabs remains where it was
+		// before,so we always want to start to grab data fron the first page
+		firstPageButton.click();
 
 		do {
 			List<WebElement> listEntries = getDriver().findElements(By.cssSelector("#team_report > tbody > tr"));
@@ -123,14 +130,18 @@ public class TeamReportPage extends AbstractPage {
 				teamReportModel.setStyleCoachName(nameContainer.getText());
 				teamReportModel.setSponsorName(elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText());
 				teamReportModel.setActivationDate(elementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
-				teamReportModel.setIp(elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
-				teamReportModel.setTqv(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
-				teamReportModel
-						.setCarrerLevelThisMonth(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
-				teamReportModel
-						.setCarrerLevelLastMonth(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
-				teamReportModel.setPayLevel(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
-				teamReportModel.setIpNewRecruited(elementNow.findElement(By.cssSelector("td:nth-child(9)")).getText());
+				teamReportModel.setIp(FormatterUtils
+						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+				teamReportModel.setTqv(FormatterUtils
+						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText()));
+				teamReportModel.setCarrerLevelThisMonth(TeamReportCalculations.getFullNameOfAbbreviation(
+						elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText()));
+				teamReportModel.setCarrerLevelLastMonth(TeamReportCalculations.getFullNameOfAbbreviation(
+						elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText()));
+				teamReportModel.setPayLevel(TeamReportCalculations.getFullNameOfAbbreviation(
+						elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText()));
+				teamReportModel.setIpNewRecruited(FormatterUtils
+						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(9)")).getText()));
 				teamReportModel.setVacationMonth(elementNow.findElement(By.cssSelector("td:nth-child(10)")).getText());
 				teamReportModel.setNewStylist(elementNow.findElement(By.cssSelector("td:nth-child(11)")).getText());
 				teamReportModel.setQuitDate(elementNow.findElement(By.cssSelector("td:nth-child(12)")).getText());
@@ -154,6 +165,10 @@ public class TeamReportPage extends AbstractPage {
 		int numberOfPages = Integer
 				.valueOf(getDriver().findElement(By.cssSelector("#team_report_paginate span a:last-child")).getText());
 
+		// the pagination when changing between tabs remains where it was
+		// before,so we always want to start to grab data fron the first page
+		firstPageButton.click();
+
 		do {
 			List<WebElement> listEntries = getDriver().findElements(By.cssSelector("#team_report > tbody > tr"));
 
@@ -162,7 +177,6 @@ public class TeamReportPage extends AbstractPage {
 			for (WebElement elementNow : listEntries) {
 
 				TeamReportPartyTabModel teamReportPartyModel = new TeamReportPartyTabModel();
-
 				WebElement nameContainer = elementNow.findElement(By.cssSelector("td:nth-child(1) a"));
 
 				teamReportPartyModel.setStyleCoachId(
@@ -171,17 +185,17 @@ public class TeamReportPage extends AbstractPage {
 
 				teamReportPartyModel
 						.setSponsorName(elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText());
-				teamReportPartyModel
-						.setIpThisMonth(elementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
-				teamReportPartyModel
-						.setIpLastMonth(elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText());
+				teamReportPartyModel.setIpThisMonth(FormatterUtils
+						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(3)")).getText()));
+				teamReportPartyModel.setIpLastMonth(FormatterUtils
+						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 				teamReportPartyModel
 						.setPartiesHeld(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
 				teamReportPartyModel
 						.setPartiesPlanned(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
 				teamReportPartyModel
 						.setPartiesUpcoming(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
-				teamReportPartyModel.setIpPerParty(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText());
+				teamReportPartyModel.setRevenuePerParty(FormatterUtils.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText()));
 
 				result.add(teamReportPartyModel);
 			}
@@ -201,6 +215,10 @@ public class TeamReportPage extends AbstractPage {
 		int currentPage = 1;
 		int numberOfPages = Integer
 				.valueOf(getDriver().findElement(By.cssSelector("#team_report_paginate span a:last-child")).getText());
+
+		// the pagination when changing between tabs remains where it was
+		// before,so we always want to start to grab data fron the first page
+		firstPageButton.click();
 
 		do {
 			List<WebElement> listEntries = getDriver().findElements(By.cssSelector("#team_report > tbody > tr"));
@@ -226,7 +244,7 @@ public class TeamReportPage extends AbstractPage {
 						.setDaysLeft(elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText());
 				teamReportTakeOffPhaseModel.setIp(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
 				teamReportTakeOffPhaseModel
-						.setNumberOfFrontliners(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
+						.setNewStylistTop(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
 
 				result.add(teamReportTakeOffPhaseModel);
 			}

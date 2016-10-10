@@ -52,6 +52,7 @@ public class CommissionStylistModel {
 	private int ipForCustomers;
 	private int teamPointsTpr;
 	private String ancestors;
+	private String level;
 
 	public String getId() {
 		return id;
@@ -148,8 +149,6 @@ public class CommissionStylistModel {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
-	
 
 	public String getIpTop() {
 		return ipTop;
@@ -399,7 +398,6 @@ public class CommissionStylistModel {
 		this.career = career;
 	}
 
-
 	public String getTeamPoints() {
 		return teamPoints;
 	}
@@ -455,4 +453,13 @@ public class CommissionStylistModel {
 	public void setAncestors(String ancestors) {
 		this.ancestors = ancestors;
 	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
 }

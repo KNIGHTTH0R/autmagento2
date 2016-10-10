@@ -9,7 +9,7 @@ public class TeamReportPartyTabModel {
 	private String partiesHeld;
 	private String partiesPlanned;
 	private String partiesUpcoming;
-	private String ipPerParty;
+	private String revenuePerParty;
 
 	public String getStyleCoachId() {
 		return styleCoachId;
@@ -75,12 +75,15 @@ public class TeamReportPartyTabModel {
 		this.partiesUpcoming = partiesUpcoming;
 	}
 
-	public String getIpPerParty() {
-		return ipPerParty;
+	public String getRevenuePerParty() {
+		return revenuePerParty;
 	}
 
-	public void setIpPerParty(String ipPerParty) {
-		this.ipPerParty = ipPerParty;
+	public void setRevenuePerParty(String revenuePerParty) {
+		this.revenuePerParty = revenuePerParty;
 	}
+
+
+
 
 }

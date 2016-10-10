@@ -1,6 +1,7 @@
 package com.tools.utils;
 
 import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -419,12 +420,19 @@ public class DateUtils {
 
 	}
 
+	public String formatMonth(int month, Locale locale) {
+		DateFormatSymbols symbols = new DateFormatSymbols(locale);
+		String[] monthNames = symbols.getMonths();
+		return monthNames[month - 1];
+	}
+
 	public static void main(String args[]) throws ParseException {
 		// System.out.println(DateUtils.getFirstDayOfAGivenMonth("2016-09-30
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
 		// System.out.println(DateUtils.getLastDayOfAGivenMonth("2016-09-30
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
-		System.out.println(DateUtils.getDateFields("2016-08-15 12:00:00", "yyyy-MM-dd HH:mm:ss")[2]);
+		System.out.println(DateUtils.parseDate("2016-10-15 12:00:00", "yyyy-MM-dd HH:mm:ss", "yyyy-MMM",
+				new Locale.Builder().setLanguage("de").build()));
 	}
 
 }

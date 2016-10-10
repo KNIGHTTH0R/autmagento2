@@ -1,5 +1,18 @@
 package com.tests.uss33;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +24,16 @@ import com.steps.frontend.HomeSteps;
 import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.TeamReportSteps;
 import com.tests.BaseTest;
-import com.tools.data.commission.CommissionStylistModel;
+import com.tools.constants.FilePaths;
+import com.tools.constants.UrlConstants;
+import com.tools.data.TeamReportModel;
+import com.tools.data.TeamReportPartyTabModel;
+import com.tools.data.TeamReportTakeOffPhaseModel;
+import com.tools.data.TeamReportTeamTabModel;
+import com.tools.generalCalculation.TeamReportCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -38,17 +58,62 @@ public class US33001TeamReportTest extends BaseTest {
 	@Steps
 	public TeamReportSteps teamReportSteps;
 
-	CommissionStylistModel expectedModel1;
+	Map<String, List<TeamReportModel>> expectedTeamMap = new HashMap<String, List<TeamReportModel>>();
+
+	private String username;
+	private String password;
+	private String stylistId;
+	private String reportMonth;
 
 	@Before
 	public void setUp() throws Exception {
 
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_33_FOLDER + File.separator + "us33001.properties");
+			prop.load(input);
+
+			username = prop.getProperty("username");
+			password = prop.getProperty("password");
+			stylistId = prop.getProperty("stylistId");
+			reportMonth = prop.getProperty("reportMonth");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		List<TeamReportModel> teamReportList = TeamReportCalculations.getTeamReportList(stylistId, reportMonth);
+
+		// for java 1.8 or above solution
+		// teamReportList.stream().collect(Collectors.groupingBy(TeamReportModel::getLevel));
+
+		// java 1.7 solution
+		for (TeamReportModel model : teamReportList) {
+			List<TeamReportModel> currentList = expectedTeamMap.get(model.getLevel());
+			if (currentList == null) {
+				expectedTeamMap.put(model.getLevel(), new ArrayList<TeamReportModel>(Arrays.asList(model)));
+			} else {
+				currentList.add(model);
+			}
+		}
 	}
 
 	@Test
-	public void us33001TeamReportTest() {
+	public void us33001TeamReportTest() throws ParseException {
 
-		frontEndSteps.performLogin("irina.neagu@evozon.com", "irina1");
+		frontEndSteps.performLogin(username, password);
 
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -56,15 +121,24 @@ public class US33001TeamReportTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.redirectToStylistReports();
 		reportsSteps.clickOnTeamReports();
-		// teamReportSteps.selectPagination("100");
-		teamReportSteps.clickTeamTab();
-		teamReportSteps.selectMonth("2016-Aug");
-		teamReportSteps.getTeamReportTeamModel();
-		teamReportSteps.clickStylePartyTab();
-		teamReportSteps.getTeamReportPartyModel();
-		teamReportSteps.clickTakeOffPhaseTab();
-		teamReportSteps.getTeamReportTakeOffPhaseModel();
+		teamReportSteps.selectPagination("100");
+		teamReportSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd HH:mm:ss", "yyyy-MMM",
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+
+		for (Map.Entry<String, List<TeamReportModel>> entry : expectedTeamMap.entrySet()) {
+
+			teamReportSteps.selectScLevel(entry.getKey());
+			teamReportSteps.clickTeamTab();
+			List<TeamReportTeamTabModel> grabbedTeamModel = teamReportSteps.getTeamReportTeamModel();
+			teamReportSteps.clickStylePartyTab();
+			List<TeamReportPartyTabModel> grabbedPArtyModel = teamReportSteps.getTeamReportPartyModel();
+			teamReportSteps.clickTakeOffPhaseTab();
+			List<TeamReportTakeOffPhaseModel> takeOffPhaseModel = teamReportSteps.getTeamReportTakeOffPhaseModel();
+
+			teamReportSteps.validateTeamReportTeamTab(entry.getValue(), grabbedTeamModel);
+			teamReportSteps.validateTeamReportPartyTab(entry.getValue(), grabbedPArtyModel);
+			teamReportSteps.validateTeamReportTakeOffPhaseTab(entry.getValue(), takeOffPhaseModel);
+		}
 
 	}
-
 }

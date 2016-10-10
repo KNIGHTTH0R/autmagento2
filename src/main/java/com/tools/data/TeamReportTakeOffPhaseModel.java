@@ -8,7 +8,7 @@ public class TeamReportTakeOffPhaseModel {
 	private String takeOffPhaseEndDate;
 	private String daysLeft;
 	private String ip;
-	private String numberOfFrontliners;
+	private String newStylistTop;
 
 	public String getStyleCoachId() {
 		return styleCoachId;
@@ -36,6 +36,14 @@ public class TeamReportTakeOffPhaseModel {
 
 	public String getActivationDate() {
 		return activationDate;
+	}
+
+	public String getNewStylistTop() {
+		return newStylistTop;
+	}
+
+	public void setNewStylistTop(String newStylistTop) {
+		this.newStylistTop = newStylistTop;
 	}
 
 	public void setActivationDate(String activationDate) {
@@ -66,12 +74,5 @@ public class TeamReportTakeOffPhaseModel {
 		this.ip = ip;
 	}
 
-	public String getNumberOfFrontliners() {
-		return numberOfFrontliners;
-	}
-
-	public void setNumberOfFrontliners(String numberOfFrontliners) {
-		this.numberOfFrontliners = numberOfFrontliners;
-	}
 
 }

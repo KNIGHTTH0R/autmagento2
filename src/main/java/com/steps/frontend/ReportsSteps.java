@@ -81,10 +81,12 @@ public class ReportsSteps extends AbstractSteps {
 	@Step
 	@Screenshots(onlyOnFailures = true)
 	public void verifyAsteriscNextToAvDate(ProductDetailedModel model) throws ParseException {
+		System.out.println(DateUtils.parseDate(model.getStockData().getEarliestAvailability(), "yyyy-MM-dd", "dd. MMMM",
+								new Locale.Builder().setLanguage(MongoReader.getContext()).build()) + " ***");
 		Assert.assertTrue("The product is not marked correctly",
 				getProductLine(model.getSku()).contains(
 						DateUtils.parseDate(model.getStockData().getEarliestAvailability(), "yyyy-MM-dd", "dd. MMMM",
-								new Locale.Builder().setLanguage(MongoReader.getContext()).build()) + "***"));
+								new Locale.Builder().setLanguage(MongoReader.getContext()).build()) + " ***"));
 	}
 
 	@Title("Verify product has no * next to earliest availability date")

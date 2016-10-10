@@ -20,24 +20,38 @@ import com.tools.utils.PrintUtils;
 
 public class TeamReportCalculations {
 
-	public static void main(String[] args) throws Exception {
-		TeamReportCalculations.determineTeamReportList("1030", 2, "2016-08-15 12:00:00");
-	}
+	// public static void main(String[] args) throws Exception {
+	// List<TeamReportModel> list =
+	// TeamReportCalculations.getTeamReportList("1030", "2016-10-15 12:00:00");
+	// }
 
 	private static List<String> payedStatusesList = new ArrayList<String>(
 			Arrays.asList("complete", "payment_complete", "payment_in_progress", "pending_payment_hold", "closed"));
 
-	public static List<TeamReportModel> determineTeamReportList(String stylistId, int level, String month)
-			throws Exception {
+	/**
+	 * returns the list of all stylists (List<TeamReportModel>) containing all
+	 * the data needed for validating team report
+	 * 
+	 * level (1- level 1 , 2 - level 2 , 3- level 3, 4 - all levels ) the month
+	 * is given in the format yyyy-MM-dd HH:mm:ss, but only the year and month
+	 * is essential
+	 * 
+	 * @param stylistId
+	 * @param level
+	 * @param month
+	 * @return
+	 * @throws Exception
+	 */
+	public static List<TeamReportModel> getTeamReportList(String stylistId, String month) throws Exception {
 
 		String[] dateFields = DateUtils.getDateFields(month, "yyyy-MM-dd HH:mm:ss");
 		String previousMonth = DateUtils.getPreviousMonth(month, "yyyy-MM-dd HH:mm:ss");
 		String[] dateFieldsPreviousMonth = DateUtils.getDateFields(previousMonth, "yyyy-MM-dd HH:mm:ss");
 
 		List<CommissionStylistModel> allStylists = ComissionRestCalls.getStylistListInfo(dateFields[0], dateFields[1]);
-		List<CommissionStylistModel> levelStylistsList = getStylistsFromLevel(allStylists, stylistId, level);
+		List<CommissionStylistModel> levelStylistsList = getStylistsForAllLevels(allStylists, stylistId);
 
-		List<TeamReportModel> allTeamTabStylists = new ArrayList<TeamReportModel>();
+		List<TeamReportModel> allTeamReportStylists = new ArrayList<TeamReportModel>();
 
 		for (CommissionStylistModel commissionStylistModel : levelStylistsList) {
 
@@ -48,16 +62,23 @@ public class TeamReportCalculations {
 			double revenuePerParty = 0.0000;
 
 			TeamReportModel teamReportModel = new TeamReportModel();
-
+			// get the list of parties for a style coach
 			List<DBStylistPartyModel> partyList = PartyMagentoCalls.getPartyList(commissionStylistModel.getStylistId());
 			for (DBStylistPartyModel party : partyList) {
-
+				// if the party is placed in the given month and it's not
+				// deleted,increment the
+				// parties held number
 				if (party.getDeletedAt() == null && DateUtils.isDateBeetween(party.getPartyDate(),
 						DateUtils.getFirstDayOfAGivenMonth(month, "yyyy-MM-dd HH:mm:ss"),
 						DateUtils.getLastDayOfAGivenMonth(month, "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")) {
 
 					double partyRevenue = 0.0000;
 					partiesPlanned++;
+					// if the party is placed in the given month and it's not
+					// deleted,get orders(if
+					// the orders has one list party with grand total > 0
+					// increment the parties held number and calculate revenue
+					// per party)
 					List<DBOrderModel> ordersList = OrdersInfoMagentoCalls.getPartyOrdersList(party.getPartyId());
 					for (DBOrderModel order : ordersList) {
 						if (Double.parseDouble(order.getGrandTotal()) > 0 && isPayed(order)) {
@@ -70,6 +91,9 @@ public class TeamReportCalculations {
 					grandRevenue += partyRevenue;
 
 				}
+				// if the party is placed between current date and the last
+				// date of the month and it's not deleted or closed,increment
+				// upcoming parties
 				if (party.getClosedAt() == null && party.getDeletedAt() == null && DateUtils.isDateBeetween(
 						party.getPartyDate(), DateUtils.getCurrentDateBegining("yyyy-MM-dd HH:mm:ss"),
 						DateUtils.getLastDayOfAGivenMonth(month, "yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss")) {
@@ -87,7 +111,6 @@ public class TeamReportCalculations {
 
 			String takeOffEnd = calculateTakeOffPhaseAndDate(commissionStylistModel.getActivatedAt(),
 					"yyyy-MM-dd HH:mm:ss");
-			System.out.println("### " + takeOffEnd);
 
 			int takeOfPeriodNewSc = determineNewSc(commissionStylistModel.getStylistId(), allStylists,
 					commissionStylistModel.getActivatedAt(), takeOffEnd);
@@ -100,6 +123,7 @@ public class TeamReportCalculations {
 			CommissionStylistModel commStylistModelPreviousMonth = ComissionRestCalls.getStylistInfo(
 					commissionStylistModel.getStylistId(), dateFieldsPreviousMonth[0], dateFieldsPreviousMonth[1]);
 
+			teamReportModel.setStyleCoachId(commissionStylistModel.getStylistId());
 			teamReportModel.setStyleCoachName(commissionStylistModel.getName());
 			teamReportModel.setActivationDate(
 					DateUtils.parseDate(commissionStylistModel.getActivatedAt(), "yyyy-MM-dd HH:mm:ss", "dd/MM/yy"));
@@ -116,25 +140,33 @@ public class TeamReportCalculations {
 			teamReportModel.setIp(commissionStylistModel.getIp());
 			teamReportModel.setTqv(tqv);
 			teamReportModel.setCarrerLevelThisMonth(commissionStylistModel.getCareer());
-			teamReportModel.setCarrerLevelThisMonth(commStylistModelPreviousMonth.getCareer());
+			teamReportModel.setCarrerLevelLastMonth(commStylistModelPreviousMonth.getCareer());
 			teamReportModel.setPayLevel(commissionStylistModel.getPayLevelName());
 			teamReportModel.setIpNewRecruited(commissionStylistModel.getIpNewFl());
 			teamReportModel.setNewStylist(String.valueOf(newSc));
+			teamReportModel.setLevel(commissionStylistModel.getLevel());
 
-			allTeamTabStylists.add(teamReportModel);
+			allTeamReportStylists.add(teamReportModel);
 		}
-		PrintUtils.printTeamReportModelList(allTeamTabStylists);
-		return allTeamTabStylists;
+		PrintUtils.printTeamReportModelList(allTeamReportStylists);
+		return allTeamReportStylists;
 	}
 
-	public static List<CommissionStylistModel> getStylistsFromLevel(List<CommissionStylistModel> allStylists,
-			String stylistId, int level) throws Exception {
+	public static List<CommissionStylistModel> getStylistsForAllLevels(List<CommissionStylistModel> allStylists,
+			String stylistId) throws Exception {
 
 		List<CommissionStylistModel> levelStylists = new ArrayList<CommissionStylistModel>();
 
 		for (CommissionStylistModel stylist : allStylists) {
 			String[] ancestors = stylist.getAncestors().split(",");
-			if (ArrayUtils.indexOf(ancestors, stylistId) == level - 1) {
+			// if the index is not -1 it means that the style coach was found
+			// in the ancestors array
+			// because the array start from index 0, for the correct level we
+			// add 1 (Ex: if the style coach is found on the first position in
+			// the
+			// array - position 0 - the level is 1)
+			if (ArrayUtils.indexOf(ancestors, stylistId) != -1) {
+				stylist.setLevel(String.valueOf(1 + ArrayUtils.indexOf(ancestors, stylistId)));
 				levelStylists.add(stylist);
 			}
 		}
@@ -172,4 +204,63 @@ public class TeamReportCalculations {
 	public static String calculateTqv(String ip, String tp) {
 		return String.valueOf(Integer.parseInt(ip) + Integer.parseInt(tp));
 	}
+
+	public static String getFullNameOfAbbreviation(String abbreviation) {
+
+		String result = "";
+
+		switch (abbreviation) {
+
+		case "SC":
+			result = "Style Coach";
+			break;
+
+		case "DIR":
+			result = "Director";
+			break;
+
+		case "PRE":
+			result = "President";
+			break;
+
+		case "BSC":
+			result = "Bronze";
+			break;
+
+		case "BDIR":
+			result = "Bronze Director";
+			break;
+
+		case "RPRE":
+			result = "Ruby President";
+			break;
+
+		case "SSC":
+			result = "Silver";
+			break;
+
+		case "SDIR":
+			result = "Silver Director";
+			break;
+
+		case "EPRE":
+			result = "Emerald President";
+			break;
+
+		case "GSC":
+			result = "Gold";
+			break;
+
+		case "GDIR":
+			result = "Gold Director";
+			break;
+
+		case "DPRE":
+			result = "Diamond President";
+			break;
+
+		}
+		return result;
+	}
+
 }
