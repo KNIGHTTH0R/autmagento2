@@ -62,8 +62,7 @@ public class ShippingFormPage extends AbstractPage {
 	public void goBack() {
 		element(goBackButton).waitUntilVisible();
 		goBackButton.click();
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
-				ContextConstants.LOADING_MESSAGE));
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void checkTermsCheckbox() {
@@ -118,27 +117,32 @@ public class ShippingFormPage extends AbstractPage {
 		if ((checked && !isSelected) || (!checked && isSelected))
 			sameAsBilling.click();
 
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
-				ContextConstants.LOADING_MESSAGE));
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void selectShippingAddress(String value) {
 		element(addressDropDown).waitUntilVisible();
 		element(addressDropDown).selectByVisibleText(value);
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
-				ContextConstants.LOADING_MESSAGE));
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void verifyThatYouCannotShipOnRestrictedCountries() {
-		Assert.assertTrue("The ddl contains the country name and it should not !!!",
-				!addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE)
-						|| !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
+		Assert.assertTrue("The ddl contains the country name and it should not !!!", !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE)
+				|| !addressDropDown.getText().contains(ContextConstants.NOT_PREFERED_LANGUAGE.toUpperCase()));
 		System.out.println(addressDropDown.getText());
 	}
 
 	public void clickAddNewAddress() {
 		element(newShippingAddress).waitUntilVisible();
 		newShippingAddress.click();
+	}
+
+	public void selectPartyNoOptionIfPresent() {
+		// we search for the element as a list because if it's not found we
+		// don't want to throw an exception
+		if (getDriver().findElements(By.id("style_party_no")).size() == 1) {
+			getDriver().findElements(By.id("style_party_no")).get(0).click();
+		}
 	}
 
 }

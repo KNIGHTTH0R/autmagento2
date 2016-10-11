@@ -144,6 +144,7 @@ public class MongoTableKeys {
 	public static final String ORDER_STATUS = "OrderStatus";
 	public static final String ORDER_DATE = "OrderDate";
 	public static final String AQUIRED_BY = "AquiredBy";
+	public static final String PSP_REFERENCE="PspReference";
 
 	// OrderTotalsModel
 	public static final String ORDER_TOTALS_MODEL = "OrderTotalsModel";

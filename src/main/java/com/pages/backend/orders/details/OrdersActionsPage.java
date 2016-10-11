@@ -40,6 +40,10 @@ public class OrdersActionsPage extends AbstractPage {
 
 	@FindBy(css = "button.scalable.save.submit-button")
 	private WebElement submitInvoice;
+	
+	@FindBy(css = "#sales_order_view_tabs_adyenPayment_order_notifications")
+	private WebElement adyenNotificationTab;
+	
 
 	public void markOrderAsPaid() {
 		element(markAsPaidButton).waitUntilVisible();
@@ -128,4 +132,5 @@ public class OrdersActionsPage extends AbstractPage {
 						+ successMessage.getText(),
 				successMessage.getText().contains(ContextConstants.REFUNDED_SUCCESS_MESSAGE));
 	}
+	
 }

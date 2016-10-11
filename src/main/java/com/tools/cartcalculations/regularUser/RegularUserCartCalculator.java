@@ -15,24 +15,28 @@ public class RegularUserCartCalculator {
 	public static List<RegularBasicProductModel> allProductsListTp0 = new ArrayList<RegularBasicProductModel>();
 	public static List<RegularBasicProductModel> allProductsListTp1 = new ArrayList<RegularBasicProductModel>();
 	public static List<RegularBasicProductModel> allProductsListTp2 = new ArrayList<RegularBasicProductModel>();
+	public static List<RegularBasicProductModel> allProductsListTp3 = new ArrayList<RegularBasicProductModel>();
 	public static List<RegularBasicProductModel> allProductsListWithRegularPrice = new ArrayList<RegularBasicProductModel>();
 	public static List<RegularBasicProductModel> allProductsListwithVoucher = new ArrayList<RegularBasicProductModel>();
 	public static RegularCartCalcDetailsModel calculatedTotalsDiscounts = new RegularCartCalcDetailsModel();
 	public static ShippingModel shippingCalculatedModel = new ShippingModel();
 	public static ShippingModel shippingCalculatedModelTp1 = new ShippingModel();
 	public static ShippingModel shippingCalculatedModelTp2 = new ShippingModel();
+	public static ShippingModel shippingCalculatedModelTp3 = new ShippingModel();
 
 	public static void wipe() {
 		allProductsList = new ArrayList<RegularBasicProductModel>();
 		allProductsListTp0 = new ArrayList<RegularBasicProductModel>();
 		allProductsListTp1 = new ArrayList<RegularBasicProductModel>();
 		allProductsListTp2 = new ArrayList<RegularBasicProductModel>();
+		allProductsListTp3 = new ArrayList<RegularBasicProductModel>();
 		allProductsListWithRegularPrice = new ArrayList<RegularBasicProductModel>();
 		calculatedTotalsDiscounts = new RegularCartCalcDetailsModel();
 		allProductsListwithVoucher = new ArrayList<RegularBasicProductModel>();
 		shippingCalculatedModel = new ShippingModel();
 		shippingCalculatedModelTp1 = new ShippingModel();
 		shippingCalculatedModelTp2 = new ShippingModel();
+		
 	}
 
 	public static List<RegularBasicProductModel> getProductswithRegularPriceFromList(

@@ -15,8 +15,10 @@ import com.pages.backend.customer.details.CustomerDetailsPage;
 import com.pages.backend.customer.details.LeadSettingsPage;
 import com.pages.backend.newsletter.NewsletterSubscribersListPage;
 import com.pages.backend.orders.OrderListPage;
+import com.pages.backend.orders.details.OrderDetailsNavPage;
 import com.pages.backend.orders.details.OrderInfoPage;
 import com.pages.backend.orders.details.OrderItemsPage;
+import com.pages.backend.orders.details.OrderNotificationPage;
 import com.pages.backend.orders.details.OrderTotalsPage;
 import com.pages.backend.orders.details.OrdersActionsPage;
 import com.pages.backend.products.BackendProductDetailsPage;
@@ -377,6 +379,16 @@ public class AbstractSteps extends ScenarioSteps {
 	public SystemConfigurationPage systemConfigurationPage() {
 		return getPages().currentPageAt(SystemConfigurationPage.class);
 	}
+	
+	public OrderDetailsNavPage orderDetailsNavPage() {
+		return getPages().currentPageAt(OrderDetailsNavPage.class);
+	}
+	
+	public OrderNotificationPage orderNotificationPage() {
+		return getPages().currentPageAt(OrderNotificationPage.class);
+	}
+	
+	
 
 	// -----------------------FE-----------------------------------
 	public LoginPage loginPage() {

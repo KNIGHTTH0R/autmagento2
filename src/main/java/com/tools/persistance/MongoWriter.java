@@ -510,6 +510,7 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.ORDER_DATE, orderInfoModel.getOrderDate());
 		document.put(MongoTableKeys.IP_POINTS, orderInfoModel.getOrderIP());
 		document.put(MongoTableKeys.AQUIRED_BY, orderInfoModel.getAquiredBy());
+		document.put(MongoTableKeys.PSP_REFERENCE, orderInfoModel.getPspReference());
 
 		table.insert(document);
 	}

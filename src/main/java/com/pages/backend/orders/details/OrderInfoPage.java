@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.FormatterUtils;
 
 public class OrderInfoPage extends AbstractPage {
 
@@ -44,6 +45,9 @@ public class OrderInfoPage extends AbstractPage {
 				String[] tokens = webElement.findElement(By.cssSelector("td:last-child")).getText().split(" ");
 				orderInfo.setDeliveryDate(tokens[0]);
 			}
+			String pspRef = getDriver().findElement(By.cssSelector("div#sales_order_view_tabs_order_info_content .box-left:nth-child(9) fieldset div:nth-child(3) b")).getText();
+			pspRef = FormatterUtils.parseValueToZeroDecimals(pspRef);
+			orderInfo.setPspReference(pspRef);
 		}
 
 		return orderInfo;

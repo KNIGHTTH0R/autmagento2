@@ -16,6 +16,7 @@ public class OrderModel {
 	private String deliveryContact;
 	private String totalPrice;
 	private String status;
+	private String shopperReference;
 
 	public OrderModel() {
 		setOrderId("");
@@ -25,6 +26,7 @@ public class OrderModel {
 		setDeliveryContact("");
 		setTotalPrice("");
 		setStatus("");
+		setShopperReference("");
 	}
 
 	public String getDeliveryDate() {
@@ -82,4 +84,13 @@ public class OrderModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getShopperReference() {
+		return shopperReference;
+	}
+
+	public void setShopperReference(String shopperReference) {
+		this.shopperReference = shopperReference;
+	}
+
 }

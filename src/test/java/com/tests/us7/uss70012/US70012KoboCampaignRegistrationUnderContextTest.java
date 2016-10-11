@@ -130,6 +130,7 @@ public class US70012KoboCampaignRegistrationUnderContextTest extends BaseTest {
 		koboCampaignSteps.navigate(url);
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 		fancyBoxSteps.goToShipping();
+		shippingSteps.selectPartyNoOptionIfPresent();
 		shippingSteps.goToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));

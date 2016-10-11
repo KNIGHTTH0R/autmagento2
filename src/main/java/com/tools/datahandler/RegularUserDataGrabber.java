@@ -15,25 +15,31 @@ public class RegularUserDataGrabber {
 	public static OrderModel orderModel = new OrderModel();
 	public static OrderModel orderModelTp1 = new OrderModel();
 	public static OrderModel orderModelTp2 = new OrderModel();
+	public static OrderModel orderModelTp3 = new OrderModel();
+	public static OrderModel orderModelTp4 = new OrderModel();
 
 	public static RegularUserCartTotalsModel regularUserGrabbedCartTotals = new RegularUserCartTotalsModel();
 	public static ShippingModel regularUserShippingTotals = new ShippingModel();
 	public static ShippingModel regularUserShippingTotalsTp0 = new ShippingModel();
 	public static ShippingModel regularUserShippingTotalsTp1 = new ShippingModel();
 	public static ShippingModel regularUserShippingTotalsTp2 = new ShippingModel();
+	public static ShippingModel regularUserShippingTotalsTp3 = new ShippingModel();
 	public static ShippingModel regularUserConfirmationTotals = new ShippingModel();
 	public static ShippingModel regularUserConfirmationTotalsTp0 = new ShippingModel();
 	public static ShippingModel regularUserConfirmationTotalsTp1 = new ShippingModel();
 	public static ShippingModel regularUserConfirmationTotalsTp2 = new ShippingModel();
+	public static ShippingModel regularUserConfirmationTotalsTp3 = new ShippingModel();
 	public static List<RegularUserCartProductModel> grabbedRegularCartProductsList = new ArrayList<RegularUserCartProductModel>();
 	public static List<RegularUserCartProductModel> grabbedRegularShippingProductsList = new ArrayList<RegularUserCartProductModel>();
 	public static List<RegularUserCartProductModel> grabbedRegularShippingProductsListTp0 = new ArrayList<RegularUserCartProductModel>();
 	public static List<RegularUserCartProductModel> grabbedRegularShippingProductsListTp1 = new ArrayList<RegularUserCartProductModel>();
 	public static List<RegularUserCartProductModel> grabbedRegularShippingProductsListTp2 = new ArrayList<RegularUserCartProductModel>();
+	public static List<RegularUserCartProductModel> grabbedRegularShippingProductsListTp3 = new ArrayList<RegularUserCartProductModel>();
 	public static List<RegularUserCartProductModel> grabbedRegularConfirmationProductsList = new ArrayList<RegularUserCartProductModel>();
 	public static List<RegularUserCartProductModel> grabbedRegularConfirmationProductsListTp0 = new ArrayList<RegularUserCartProductModel>();
 	public static List<RegularUserCartProductModel> grabbedRegularConfirmationProductsListTp1 = new ArrayList<RegularUserCartProductModel>();
 	public static List<RegularUserCartProductModel> grabbedRegularConfirmationProductsListTp2 = new ArrayList<RegularUserCartProductModel>();
+	public static List<RegularUserCartProductModel> grabbedRegularConfirmationProductsListTp3 = new ArrayList<RegularUserCartProductModel>();
 
 	public static void wipe() {
 

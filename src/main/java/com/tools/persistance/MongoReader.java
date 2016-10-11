@@ -17,6 +17,7 @@ import com.tools.data.StylistRegistrationCartCalcDetailsModel;
 import com.tools.data.UrlModel;
 import com.tools.data.backend.CustomerConfigurationModel;
 import com.tools.data.backend.JewelryHistoryModel;
+import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.RewardPointsOfStylistModel;
 import com.tools.data.backend.TermPurchaseOrderModel;
@@ -964,6 +965,35 @@ public class MongoReader extends MongoConnector {
 				result.setDeliveryContact(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_CONTACT));
 				result.setInvoiceContact(MongoUtils.checkField(dbObject, MongoTableKeys.INVOICE_CONTACT));
 				result.setDate(MongoUtils.checkField(dbObject, MongoTableKeys.DATE));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+
+	}
+	
+	public static List<OrderInfoModel> grabAdminOrderModels(String testName) {
+		DBObject dbObject = null;
+		List<OrderInfoModel> itemList = new ArrayList<OrderInfoModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.ORDER_INFO_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				OrderInfoModel result = new OrderInfoModel();
+				dbObject = cursor.next();
+
+				result.setOrderStatus(MongoUtils.checkField(dbObject, MongoTableKeys.ORDER_STATUS));
+				result.setOrderDate(MongoUtils.checkField(dbObject, MongoTableKeys.ORDER_DATE));
+				result.setOrderIP(MongoUtils.checkField(dbObject, MongoTableKeys.IP_POINTS));
+				result.setAquiredBy(MongoUtils.checkField(dbObject, MongoTableKeys.AQUIRED_BY));
+				result.setPspReference(MongoUtils.checkField(dbObject, MongoTableKeys.PSP_REFERENCE));
 
 				itemList.add(result);
 			}

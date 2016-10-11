@@ -37,7 +37,7 @@ public class EmailClientSteps extends AbstractSteps {
 	public String grabConfirmationLinkFromEmail(String email, String title) {
 
 		mailPage.openEmail(email, title);
-
+		System.out.println("foo -thay");
 		return mailPage.getConfirmationLink();
 	}
 
