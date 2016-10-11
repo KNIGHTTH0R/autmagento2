@@ -22,7 +22,7 @@ public class AddBorrowedProductsWorkflow {
 	@Title("Add borrowed product to cart")
 	public BorrowProductModel setBorrowedProductToCart(ProductDetailedModel model, String finalPrice) {
 
-		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		searchSteps.navigateToProductPage(model.getName());
 		return productSteps.setBorrowedProductAddToCart(model, finalPrice);
 	}
 
@@ -44,7 +44,7 @@ public class AddBorrowedProductsWorkflow {
 	@StepGroup
 	@Title("Add product to wishlist")
 	public RegularBasicProductModel setBasicProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		searchSteps.navigateToProductPage(model.getName());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 
 		return productSteps.setRegularBasicProductAddToWishlist(model,qty, productProperty, finalPrice);

@@ -115,7 +115,7 @@ public class US32001CheckRegularOrderTpRestrictionsForNotAllowedCustomerTest ext
 		generalCartSteps.clearCart();
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
-		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
+		searchSteps.navigateToProductPage(genProduct1.getName());
 		productSteps.verifyThatProductStatusIsCorrect(ContextConstants.CURRENTLY_OUT_OF_STOCK);
 		productSteps.verifyAddToCartButton(false);
 		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");

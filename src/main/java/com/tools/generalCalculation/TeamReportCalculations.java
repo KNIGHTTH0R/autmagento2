@@ -40,7 +40,7 @@ public class TeamReportCalculations {
 	 * @param level
 	 * @param month
 	 * @return
-	 * @throws Exception
+	 * @throws Exception 
 	 */
 	public static List<TeamReportModel> getTeamReportList(String stylistId, String month) throws Exception {
 
