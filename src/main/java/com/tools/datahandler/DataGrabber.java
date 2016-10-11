@@ -33,6 +33,7 @@ public class DataGrabber {
 	public static ShippingModel shippingTotalsTp0 = new ShippingModel();
 	public static ShippingModel shippingTotalsTp1 = new ShippingModel();
 	public static ShippingModel shippingTotalsTp2 = new ShippingModel();
+	public static ShippingModel shippingTotalsTp3 = new ShippingModel();
 	public static List<CartProductModel> shippingProducts = new ArrayList<CartProductModel>();
 	public static List<CartProductModel> shippingProductsTp1 = new ArrayList<CartProductModel>();
 	public static List<CartProductModel> shippingProductsTp2 = new ArrayList<CartProductModel>();
@@ -48,6 +49,7 @@ public class DataGrabber {
 	public static ShippingModel confirmationTotalsTp0 = new ShippingModel();
 	public static ShippingModel confirmationTotalsTp1 = new ShippingModel();
 	public static ShippingModel confirmationTotalsTp2 = new ShippingModel();
+	public static ShippingModel confirmationTotalsTp3 = new ShippingModel();
 
 	public static void wipe() {
 		urlModel = new UrlModel();

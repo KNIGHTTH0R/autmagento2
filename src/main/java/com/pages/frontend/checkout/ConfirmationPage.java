@@ -54,6 +54,9 @@ public class ConfirmationPage extends AbstractPage {
 
 	@FindBy(css = "div#cart-section-3 div.items-section")
 	private WebElement productListContainerTp2;
+	//check this after dev implementation
+	@FindBy(css = "div#cart-section-4 div.items-section")
+	private WebElement productListContainerTp3;
 
 	@FindBy(css = "div#cart-section-1 div.checkout-totals-section")
 	private WebElement surveyTotalsContainer;
@@ -63,6 +66,9 @@ public class ConfirmationPage extends AbstractPage {
 
 	@FindBy(css = "div#cart-section-3 div.checkout-totals-section")
 	private WebElement surveyTotalsContainerTp2;
+	//check this after dev implementation
+	@FindBy(css = "div#cart-section-4 div.checkout-totals-section")
+	private WebElement surveyTotalsContainerTp3;
 
 	private AddressModel grabAddressData(WebElement addressPreview) {
 		waitABit(TimeConstants.TIME_MEDIUM);
@@ -213,6 +219,12 @@ public class ConfirmationPage extends AbstractPage {
 		DataGrabber.confirmationTotalsTp2 = result;
 		return result;
 	}
+	
+	public ShippingModel grabConfirmationTotalsTp3() {
+		ShippingModel result = grabSurveyData(surveyTotalsContainerTp3);
+		DataGrabber.confirmationTotalsTp3 = result;
+		return result;
+	}
 
 	/**
 	 * Due to consistency this method returns {@link CartProductModel} list.
@@ -320,6 +332,12 @@ public class ConfirmationPage extends AbstractPage {
 	public List<RegularUserCartProductModel> grabRegularProductsListTp2() {
 		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainerTp2);
 		RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp2 = resultList;
+		return resultList;
+	}
+	
+	public List<RegularUserCartProductModel> grabRegularProductsListTp3() {
+		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainerTp3);
+		RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp3 = resultList;
 		return resultList;
 	}
 

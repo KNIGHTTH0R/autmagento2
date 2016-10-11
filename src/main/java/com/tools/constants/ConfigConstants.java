@@ -133,4 +133,8 @@ public class ConfigConstants {
 	public static final String SEMIAUTOMATED = "Semi-automated";
 	public static final String AUTOMATED_ONLY_RELEASE = "Automated - Only release";
 	
+	//Order details tab
+	public static final String ADYEN_NOTIFICATION_TAB ="Adyen Order Notifications";
+	public static final String ADYEN_AUTHORISATION ="AUTHORISATION";
+	public static final String ADYEN_CAPTURE ="CAPTURE";
 }

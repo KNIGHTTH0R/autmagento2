@@ -61,6 +61,10 @@ public class ConfirmationSteps extends AbstractSteps {
 	public List<RegularUserCartProductModel> grabRegularProductsListTp2() {
 		return confirmationPage().grabRegularProductsListTp2();
 	}
+	
+	public List<RegularUserCartProductModel> grabRegularProductsListTp3() {
+		return confirmationPage().grabRegularProductsListTp3();
+	}
 
 	public List<HostCartProductModel> grabHostProductsList() {
 		return confirmationPage().grabHostProductsList();
@@ -101,6 +105,13 @@ public class ConfirmationSteps extends AbstractSteps {
 		getDriver().navigate().to(getDriver().getCurrentUrl());
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return confirmationPage().grabConfirmationTotalsTp2();
+	}
+	
+	public ShippingModel grabConfirmationTotalsTp3() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		getDriver().navigate().to(getDriver().getCurrentUrl());
+		waitABit(TimeConstants.TIME_CONSTANT);
+		return confirmationPage().grabConfirmationTotalsTp3();
 	}
 
 	@Step

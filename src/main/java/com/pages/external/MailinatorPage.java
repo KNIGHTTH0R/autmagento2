@@ -27,6 +27,7 @@ public class MailinatorPage extends AbstractPage {
 
 		navigate(UrlConstants.MAILINATOR_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email);
 		getDriver().navigate().refresh();
+		waitForPageToLoad();
 		waitABit(TimeConstants.TIME_MEDIUM);
 		element(inboxContainer).waitUntilVisible();
 		boolean foundEmail = false;
@@ -44,6 +45,7 @@ public class MailinatorPage extends AbstractPage {
 
 	public String getConfirmationLink() {
 		getDriver().switchTo().frame(iFrameElement);
+		waitABit(1000);
 		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
 		return confirmLink;
 	}

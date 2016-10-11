@@ -141,6 +141,7 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 		contactBoosterRegistrationSteps.navigate(url);
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
 		fancyBoxSteps.goToShipping();
+		shippingSteps.selectPartyNoOptionIfPresent();
 		shippingSteps.goToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));

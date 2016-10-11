@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 
+import com.pages.backend.orders.details.OrderNotificationPage;
 import com.tools.constants.TimeConstants;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -78,5 +79,24 @@ public class OrdersSteps extends AbstractSteps {
 		ordersActionsPage().verifyRefundedSuccessMessage();
 		waitABit(2000);
 	}
+	
+	
+	@Step
+	public void selectMenu(String tabName){
+		orderDetailsNavPage().selectMenu(tabName);
+	}
+	
+	@Step
+	public void verifyAuthorization(String shopperReference){
+		orderNotificationPage().verifyAuthorization(shopperReference);
+	}
+	
+	@Step
+	public void verifyCapture(String shopperReference){
+		orderNotificationPage().verifyCapture(shopperReference);
+	}
+	
+	
+	
 
 }
