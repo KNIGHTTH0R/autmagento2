@@ -157,7 +157,7 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		PomCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
 
 		fancyBoxSteps.goToShipping();
-	//	shippingSteps.selectPartyNoOptionIfPresent();
+		shippingSteps.selectPartyNoOptionIfPresent();
 		DataGrabber.shippingTotals = shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
 		String shippingUrl = shippingSteps.grabUrl();
