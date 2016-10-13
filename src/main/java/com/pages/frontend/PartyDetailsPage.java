@@ -150,6 +150,8 @@ public class PartyDetailsPage extends AbstractPage {
 	public void orderForCustomer() {
 		element(orderForCustomer).waitUntilVisible();
 		orderForCustomer.click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void hostessInviteConfirmation() {

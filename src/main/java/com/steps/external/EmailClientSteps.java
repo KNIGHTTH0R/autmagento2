@@ -9,7 +9,7 @@ import com.tools.utils.DateUtils;
 public class EmailClientSteps extends AbstractSteps {
 
 	MailinatorPage mailPage;
-	// YopmailPage mailPage;
+//	 YopmailPage mailPage;
 
 	private static final long serialVersionUID = 1L;
 

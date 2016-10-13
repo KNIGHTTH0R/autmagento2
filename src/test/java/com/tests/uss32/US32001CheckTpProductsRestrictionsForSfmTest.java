@@ -127,7 +127,7 @@ public class US32001CheckTpProductsRestrictionsForSfmTest extends BaseTest {
 		generalCartSteps.clearCart();
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
-		searchSteps.searchAndSelectProduct(genProduct1.getSku(), genProduct1.getName());
+		searchSteps.navigateToProductPage(genProduct1.getName());
 		productSteps.verifyAddToCartButton(false);
 		// verify tp product in product details
 

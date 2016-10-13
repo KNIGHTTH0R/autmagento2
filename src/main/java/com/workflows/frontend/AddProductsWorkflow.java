@@ -32,7 +32,7 @@ public class AddProductsWorkflow {
 	 */
 	@StepGroup
 	public void setProductToCart(String productCode, String productName, String qty, String productProperty) {
-		searchSteps.searchAndSelectProduct(productCode, productName);
+		searchSteps.navigateToProductPage(productName);
 		productSteps.setProductAddToCart(qty, productProperty);
 	}
 
@@ -40,7 +40,7 @@ public class AddProductsWorkflow {
 	@Title("Add product to cart")
 	public BasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty,
 			String discountclass) {
-		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		searchSteps.navigateToProductPage(model.getUrlPath());
 		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass,CartCalculator.delta);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
@@ -71,7 +71,7 @@ public class AddProductsWorkflow {
 	@Title("Add product to wishlist")
 	public BasicProductModel setBasicProductToWishlist(ProductDetailedModel model, String qty, String productProperty,
 			String discountclass) {
-		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		searchSteps.navigateToProductPage(model.getUrlPath());
 		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass,CartCalculator.delta);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);

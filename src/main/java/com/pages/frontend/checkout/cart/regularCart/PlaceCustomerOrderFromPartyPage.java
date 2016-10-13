@@ -2,6 +2,8 @@ package com.pages.frontend.checkout.cart.regularCart;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -44,6 +46,8 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 	public void startOrderForCustomer() {
 		element(createOrder).waitUntilVisible();
 		createOrder.click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void verifyCustomerIsNotSuitableForTheOrderErrorMessage() {
