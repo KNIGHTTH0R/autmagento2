@@ -8,7 +8,7 @@ public class SepaPaymentMethodModel {
 	
 	public SepaPaymentMethodModel() {
 		this.bankAccountName = "Schneider";
-		this.country = "Deutschland";
+		this.country = "DE";
 		this.bankAccountNumber = "DE87123456781234567890";
 	}
 

@@ -35,7 +35,8 @@ public class SepaPaymentPage extends AbstractPage {
 	}
 
 	public void selectCountry(String country) {
-		selectFromDropdown(countrySelect, country);
+		element(countrySelect).waitUntilVisible();
+		element(countrySelect).selectByValue(country);
 	}
 
 	public void clickIAgree() {
