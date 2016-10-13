@@ -45,12 +45,15 @@ public class OrderInfoPage extends AbstractPage {
 				String[] tokens = webElement.findElement(By.cssSelector("td:last-child")).getText().split(" ");
 				orderInfo.setDeliveryDate(tokens[0]);
 			}
-			String pspRef = getDriver().findElement(By.cssSelector("div#sales_order_view_tabs_order_info_content .box-left:nth-child(9) fieldset div:nth-child(3) b")).getText();
-			pspRef = FormatterUtils.parseValueToZeroDecimals(pspRef);
-			orderInfo.setPspReference(pspRef);
+			// this field is populated only if the order has a psp reference.Psp
+			// reference is not set for TP orders
+			List<WebElement> pspElement = getDriver().findElements(
+					By.cssSelector("div#sales_order_view_tabs_order_info_content .box-left:nth-child(9) fieldset div:nth-child(3) b"));
+			if (pspElement.size() == 1) {
+				orderInfo.setPspReference(FormatterUtils.parseValueToZeroDecimals(pspElement.get(0).getText()));
+			}
 		}
 
 		return orderInfo;
 	}
-
 }
