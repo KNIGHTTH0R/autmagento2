@@ -1,15 +1,15 @@
 package com.steps.external;
 
-import net.thucydides.core.annotations.Step;
-
-import com.pages.external.MailinatorPage;
+import com.pages.external.YopmailPage;
 import com.tools.requirements.AbstractSteps;
 import com.tools.utils.DateUtils;
 
+import net.thucydides.core.annotations.Step;
+
 public class EmailClientSteps extends AbstractSteps {
 
-	MailinatorPage mailPage;
-//	 YopmailPage mailPage;
+//	MailinatorPage mailPage;
+	 YopmailPage mailPage;
 
 	private static final long serialVersionUID = 1L;
 

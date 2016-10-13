@@ -10,10 +10,10 @@ public class SearchSteps extends AbstractSteps {
 	private static final long serialVersionUID = 3299276083448603139L;
 
 	@StepGroup
-	public void navigateToProductPage(String productName) {
+	public void navigateToProductPage(String pathName) {
 		// searchProduct(searchTerm);
 		// return selectProduct(productName);
-		navigate(MongoReader.getBaseURL() + "/" + productName.toLowerCase() + ".html");
+		navigate(MongoReader.getBaseURL() + "/" + pathName.toLowerCase() + ".html");
 	}
 
 	// @Step

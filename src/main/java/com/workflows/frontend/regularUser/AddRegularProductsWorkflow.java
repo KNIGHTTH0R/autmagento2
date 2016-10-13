@@ -31,7 +31,7 @@ public class AddRegularProductsWorkflow {
 	@StepGroup
 	@Title("Add product to cart")
 	public RegularBasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.navigateToProductPage(model.getUrlPath());
+		searchSteps.navigateToProductPage(model.getSku());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 
@@ -41,7 +41,7 @@ public class AddRegularProductsWorkflow {
 	@StepGroup
 	@Title("Add product to wishlist")
 	public RegularBasicProductModel setBasicProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.navigateToProductPage(model.getUrlPath());
+		searchSteps.navigateToProductPage(model.getSku());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 
 		return productSteps.setRegularBasicProductAddToWishlist(model,qty, productProperty, finalPrice);

@@ -1,16 +1,15 @@
 package com.workflows.frontend.borrowCart;
 
-import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Title;
-
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.tools.cartcalculations.smf.CartDiscountsCalculation;
-import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
+
+import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Title;
 
 public class AddBorrowedProductsWorkflow {
 	@Steps
@@ -22,7 +21,7 @@ public class AddBorrowedProductsWorkflow {
 	@Title("Add borrowed product to cart")
 	public BorrowProductModel setBorrowedProductToCart(ProductDetailedModel model, String finalPrice) {
 
-		searchSteps.navigateToProductPage(model.getUrlPath());
+		searchSteps.navigateToProductPage(model.getSku());
 		return productSteps.setBorrowedProductAddToCart(model, finalPrice);
 	}
 
@@ -44,7 +43,7 @@ public class AddBorrowedProductsWorkflow {
 	@StepGroup
 	@Title("Add product to wishlist")
 	public RegularBasicProductModel setBasicProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.navigateToProductPage(model.getUrlPath());
+		searchSteps.navigateToProductPage(model.getSku());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 
 		return productSteps.setRegularBasicProductAddToWishlist(model,qty, productProperty, finalPrice);

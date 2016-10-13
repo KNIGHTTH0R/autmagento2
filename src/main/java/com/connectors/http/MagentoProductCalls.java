@@ -184,12 +184,12 @@ public class MagentoProductCalls {
 		product.setName(name);
 		product.setDescription("description");
 		product.setShortDescription("desc");
-		product.setUrlPath(name);
+		product.setUrlPath(sku);
 		product.setWeight("2");
 		product.setSku(sku);
 		product.setPrice(FieldGenerators.generateRandomString(2, Mode.NUMERIC));
 		product.setStatus("1");
-		product.setUrlKey(name);
+		product.setUrlKey(sku);
 		product.setVisibility("4");
 		product.setHasOptions("");
 		product.setGiftMessageAvailable("");

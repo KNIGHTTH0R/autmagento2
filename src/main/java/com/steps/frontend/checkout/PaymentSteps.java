@@ -79,7 +79,8 @@ public class PaymentSteps extends AbstractSteps {
 	@Title("Fill sepa form")
 	public void fillSepaForm(SepaPaymentMethodModel sepaPaymentMethodModel) {
 		sepaPaymentPage().bankNameInput(sepaPaymentMethodModel.getBankAccountName());
-		sepaPaymentPage().selectCountry(sepaPaymentMethodModel.getCountry());
+		// this is already preselected
+		// sepaPaymentPage().selectCountry(sepaPaymentMethodModel.getCountry());
 		sepaPaymentPage().bankAccountNumberInput(sepaPaymentMethodModel.getBankAccountNumber());
 		sepaPaymentPage().clickIAgree();
 		sepaPaymentPage().clickOnConfirm();

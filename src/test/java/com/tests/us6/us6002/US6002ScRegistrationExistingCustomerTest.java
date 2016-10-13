@@ -140,14 +140,8 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
 		starterSetSteps.submitStarterSetStep();
 		
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
-	
-		
     	paymentSteps.expandSepaForm();
 	    paymentSteps.fillSepaForm(sepaPaymentData);
-	//	paymentSteps.expandKlarnaForm();
-	//	paymentSteps.fillKlarnaForm();
 		confirmationSteps.agreeAndCheckout();
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	
