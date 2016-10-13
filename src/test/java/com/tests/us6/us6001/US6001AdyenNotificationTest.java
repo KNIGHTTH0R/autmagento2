@@ -2,11 +2,6 @@ package com.tests.us6.us6001;
 
 import java.util.List;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,7 +10,6 @@ import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
-import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.ConfigConstants;
@@ -26,8 +20,11 @@ import com.tools.data.backend.OrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.workflows.backend.OrderWorkflows;
-import com.workflows.backend.borrowCart.BorrowCartOrderProductsWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
@@ -41,15 +38,8 @@ public class US6001AdyenNotificationTest extends BaseTest{
 	@Steps
 	public OrdersSteps ordersSteps;
 	@Steps
-	public OrderValidationSteps orderValidationSteps;
-	@Steps
-	public BorrowCartOrderProductsWorkflows borrowCartOrderProductsWorkflows;
-	@Steps
-	public OrderWorkflows orderWorkflows;
-	@Steps
 	public CustomVerification customVerifications;
 
-	
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 
 	private String orderId;

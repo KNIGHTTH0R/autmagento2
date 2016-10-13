@@ -32,7 +32,7 @@ public class AddProductsForCustomerWorkflow {
 	@StepGroup
 	@Title("Add product to cart")
 	public HostBasicProductModel setHostProductToCart(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.navigateToProductPage(model.getName());
+		searchSteps.navigateToProductPage(model.getUrlPath());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 
@@ -42,14 +42,14 @@ public class AddProductsForCustomerWorkflow {
 	@StepGroup
 	@Title("Add product to cart")
 	public void addProductToCart(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.navigateToProductPage(model.getName());
+		searchSteps.navigateToProductPage(model.getUrlPath());
 		productSteps.setQuantityAndAddToCart(qty, productProperty);
 	}
 
 	@StepGroup
 	@Title("Add product to wishlist")
 	public void addProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.navigateToProductPage(model.getName());
+		searchSteps.navigateToProductPage(model.getUrlPath());
 		productSteps.addToWishlist(qty, productProperty);
 	}
 

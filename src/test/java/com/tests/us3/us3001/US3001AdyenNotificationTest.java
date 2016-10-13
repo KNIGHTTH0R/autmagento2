@@ -135,7 +135,6 @@ public class US3001AdyenNotificationTest extends BaseTest {
 		
 		orderInfoModel = ordersSteps.grabOrderInfo();
 		
-	//	pspReference=orderInfoModel.getPspReference();
 		ordersSteps.selectMenu(ConfigConstants.ADYEN_NOTIFICATION_TAB);
 		
 		ordersSteps.verifyAuthorization(orderInfoModel.getPspReference());

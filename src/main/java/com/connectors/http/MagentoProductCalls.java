@@ -176,6 +176,7 @@ public class MagentoProductCalls {
 
 	public static ProductDetailedModel createProductModel() {
 		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
+		String sku = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
 		ProductDetailedModel product = new ProductDetailedModel();
 
 		product.setType("simple");
@@ -185,7 +186,7 @@ public class MagentoProductCalls {
 		product.setShortDescription("desc");
 		product.setUrlPath(name);
 		product.setWeight("2");
-		product.setSku(FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS));
+		product.setSku(sku);
 		product.setPrice(FieldGenerators.generateRandomString(2, Mode.NUMERIC));
 		product.setStatus("1");
 		product.setUrlKey(name);
