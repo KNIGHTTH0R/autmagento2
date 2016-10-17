@@ -68,7 +68,7 @@ public class OrdersSteps extends AbstractSteps {
 		ordersActionsPage().checkCreateShippment();
 		ordersActionsPage().submitInvoice();
 		ordersActionsPage().verifyInvoiceShippingSubmitedMessage();
-		
+
 	}
 
 	@Step
@@ -79,24 +79,19 @@ public class OrdersSteps extends AbstractSteps {
 		ordersActionsPage().verifyRefundedSuccessMessage();
 		waitABit(2000);
 	}
-	
-	
+
 	@Step
-	public void selectMenu(String tabName){
+	public void selectMenu(String tabName) {
 		orderDetailsNavPage().selectMenu(tabName);
 	}
-	
+
 	@Step
-	public void verifyAuthorization(String shopperReference){
+	public void verifyAuthorization(String shopperReference) {
 		orderNotificationPage().verifyAuthorization(shopperReference);
 	}
-	
+
 	@Step
-	public void verifyCapture(String shopperReference){
+	public void verifyCapture(String shopperReference) {
 		orderNotificationPage().verifyCapture(shopperReference);
 	}
-	
-	
-	
-
 }

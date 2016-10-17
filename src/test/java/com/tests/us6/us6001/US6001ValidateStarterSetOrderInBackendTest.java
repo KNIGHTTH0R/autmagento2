@@ -3,6 +3,7 @@ package com.tests.us6.us6001;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,12 +14,16 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
+import com.tools.constants.SoapKeys;
 import com.tools.data.StylistRegistrationCartCalcDetailsModel;
+import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.borrowCart.BorrowCartOrderProductsWorkflows;
@@ -49,7 +54,9 @@ public class US6001ValidateStarterSetOrderInBackendTest extends BaseTest {
 	private static List<StylistRegistrationCartCalcDetailsModel> calcDetailsModelList = new ArrayList<StylistRegistrationCartCalcDetailsModel>();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
+	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
+
 
 	private String orderId;
 
@@ -75,6 +82,7 @@ public class US6001ValidateStarterSetOrderInBackendTest extends BaseTest {
 		shopTotalsModel.setTotalRefunded("0.00");
 		shopTotalsModel.setTotalPayable(shippingModelList.get(0).getTotalAmount());
 		shopTotalsModel.setTotalFortyDiscounts("0.00");
+		
 
 	}
 
@@ -90,7 +98,18 @@ public class US6001ValidateStarterSetOrderInBackendTest extends BaseTest {
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateStarterSetCartCalculationTotals("TOTALS VALIVATION");
 
+		orderInfoModel = ordersSteps.grabOrderInfo();
+		ordersSteps.selectMenu(ConfigConstants.ADYEN_NOTIFICATION_TAB);
+		ordersSteps.verifyAuthorization(orderInfoModel.getPspReference());
+		ordersSteps.verifyCapture(orderInfoModel.getPspReference());
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung erfolgreich");
+
 		customVerifications.printErrors();
 	}
 	
+	@After
+	public void saveData() {
+		MongoWriter.saveOrderInfoModel(orderInfoModel, getClass().getSimpleName() + SoapKeys.GRAB);
+	}
 }
+

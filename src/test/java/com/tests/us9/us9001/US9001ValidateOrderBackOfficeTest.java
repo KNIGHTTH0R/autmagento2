@@ -15,6 +15,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.data.HostCartCalcDetailsModel;
@@ -122,7 +123,13 @@ public class US9001ValidateOrderBackOfficeTest extends BaseTest {
 		hostOrderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		hostOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
-		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung wird geprüft");
+		orderInfoModel = ordersSteps.grabOrderInfo();
+		ordersSteps.selectMenu(ConfigConstants.ADYEN_NOTIFICATION_TAB);
+		ordersSteps.verifyAuthorization(orderInfoModel.getPspReference());
+		ordersSteps.verifyCapture(orderInfoModel.getPspReference());
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung erfolgreich");
+		
+	//	orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung wird geprüft");
 		
 		customVerifications.printErrors();
 	}
