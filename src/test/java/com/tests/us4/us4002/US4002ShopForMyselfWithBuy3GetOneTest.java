@@ -183,7 +183,6 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
-		DataGrabber.urlModel.setName("Payment URL");
 		DataGrabber.urlModel.setUrl(url);
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
