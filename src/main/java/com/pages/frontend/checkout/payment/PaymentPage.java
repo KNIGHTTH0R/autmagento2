@@ -47,7 +47,7 @@ public class PaymentPage extends AbstractPage {
 	@FindBy(id = "sepadirectdebit.ownerName")
 	private WebElement sepaNameInput;
 	
-	@FindBy(css = "#paymentMethods li input.imgB.pmB.pmBklarna")
+	@FindBy(css = "#paymentMethods li input.imgB.pmB.pmBklarna_de")
 	private WebElement klarnaContainer;
 	
 	@FindBy(id = "klarna.shopper.firstName")

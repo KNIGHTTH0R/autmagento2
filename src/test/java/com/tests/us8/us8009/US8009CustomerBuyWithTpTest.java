@@ -121,8 +121,10 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct3);
 		
 		genProduct4 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("50.00");
+		genProduct4.setPrice("50.00");
 		MagentoProductCalls.createApiProduct(genProduct4);
+		genProduct4.setStockData(
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -157,7 +159,6 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP0");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
-		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP3");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -194,14 +195,13 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct4, "1", "0");
 		if (!genProduct4.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils
-					.getFirstFridayAfterDate(genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
-		RegularUserCartCalculator.allProductsListTp3.add(productData);
+			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
+					genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
+		RegularUserCartCalculator.allProductsListTp2.add(productData);
 
 		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp0);
 		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp1);
 		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp2);
-		RegularUserCartCalculator.allProductsList.addAll(RegularUserCartCalculator.allProductsListTp3);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -216,8 +216,6 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
-				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp3 = regularUserCartSteps.selectDeliveryDate(genProduct4.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		
 
@@ -241,12 +239,10 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		shippingSteps.grabRegularProductsListTp0();
 		shippingSteps.grabRegularProductsListTp1();
 		shippingSteps.grabRegularProductsListTp2();
-		shippingSteps.grabRegularProductsListTp3();
 
 		RegularUserDataGrabber.regularUserShippingTotalsTp0 = shippingSteps.grabSurveyDataTp0();
 		RegularUserDataGrabber.regularUserShippingTotalsTp1 = shippingSteps.grabSurveyDataTp1();
 		RegularUserDataGrabber.regularUserShippingTotalsTp2 = shippingSteps.grabSurveyDataTp2();
-		RegularUserDataGrabber.regularUserShippingTotalsTp3 = shippingSteps.grabSurveyDataTp3();
 
 		shippingSteps.goToPaymentMethod();
 
@@ -259,8 +255,6 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		RegularUserDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 		RegularUserDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
-		RegularUserDataGrabber.orderModelTp3.setOrderId(FormatterUtils.incrementOrderId(orderId, 4));
-		RegularUserDataGrabber.orderModelTp3.setDeliveryDate(deliveryTp3);
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
@@ -268,12 +262,10 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		confirmationSteps.grabRegularProductsListTp0();
 		confirmationSteps.grabRegularProductsListTp1();
 		confirmationSteps.grabRegularProductsListTp2();
-		confirmationSteps.grabRegularProductsListTp3();
 
 		RegularUserDataGrabber.regularUserConfirmationTotalsTp0 = confirmationSteps.grabConfirmationTotalsTp0();
 		RegularUserDataGrabber.regularUserConfirmationTotalsTp1 = confirmationSteps.grabConfirmationTotalsTp1();
 		RegularUserDataGrabber.regularUserConfirmationTotalsTp2 = confirmationSteps.grabConfirmationTotalsTp2();
-		RegularUserDataGrabber.regularUserConfirmationTotalsTp3 = confirmationSteps.grabConfirmationTotalsTp3();
 
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
@@ -291,15 +283,12 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + "TP0");
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
-		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP3");
 		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel,
 				getClass().getSimpleName() + "TP0");
 		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModelTp1,
 				getClass().getSimpleName() + "TP1");
 		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModelTp2,
 				getClass().getSimpleName() + "TP2");
-		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModelTp3,
-				getClass().getSimpleName() + "TP3");
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsListTp0) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + "TP0");
 		}
@@ -308,9 +297,6 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		}
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsListTp2) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + "TP2");
-		}
-		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsListTp3) {
-			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + "TP3");
 		}
 		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
 

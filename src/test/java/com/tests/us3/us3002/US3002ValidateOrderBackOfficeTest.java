@@ -15,6 +15,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.data.CalcDetailsModel;
@@ -123,16 +124,18 @@ public class US3002ValidateOrderBackOfficeTest extends BaseTest {
 		ordersSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderProducts();
 		orderTotalsModel = ordersSteps.grabTotals();
-		orderInfoModel = ordersSteps.grabOrderInfo();
 
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");
 
 		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
-
-		// orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(),
-		// "Zahlung geplant");
+		
+		orderInfoModel = ordersSteps.grabOrderInfo();
+		ordersSteps.selectMenu(ConfigConstants.ADYEN_NOTIFICATION_TAB);
+		ordersSteps.verifyAuthorization(orderInfoModel.getPspReference());
+		ordersSteps.verifyCapture(orderInfoModel.getPspReference());
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung erfolgreich");
 
 		customVerifications.printErrors();
 	}

@@ -17,6 +17,7 @@ import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.smf.CartCalculation;
+import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.data.CalcDetailsModel;
@@ -67,14 +68,10 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		List<OrderModel> orderModelList = MongoReader
-				.getOrderModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
-		productsList = MongoReader
-				.grabBasicProductModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
-		shippingModelList = MongoReader
-				.grabShippingModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader
-				.grabCalcDetailsModels("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabBasicProductModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+		shippingModelList = MongoReader.grabShippingModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -84,13 +81,11 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 		}
 
 		if (calcDetailsModelList.size() != 1) {
-			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList,
-					calcDetailsModelList.size() == 1);
+			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
 
 		if (shippingModelList.size() != 1) {
-			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList,
-					calcDetailsModelList.size() == 1);
+			Assert.assertTrue("Failure: Could not validate Cart Totals Section. " + calcDetailsModelList, calcDetailsModelList.size() == 1);
 		}
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
@@ -103,14 +98,10 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 		shopTotalsModel.setTotalAmount(shippingModelList.get(0).getTotalAmount());
 		// from calcDetails model calculations
 		shopTotalsModel.setTotalIP(calcDetailsModelList.get(0).getIpPoints());
-		shopTotalsModel.setTotalMarketingBonus(CartCalculation
-				.apply119VAT(BigDecimal.valueOf(Double.parseDouble(calcDetailsModelList.get(0).getMarketingBonus())), 2,
-						BigDecimal.ROUND_HALF_DOWN)
-				.toString());
-		shopTotalsModel.setTotalBonusJeverly(CartCalculation
-				.apply119VAT(BigDecimal.valueOf(Double.parseDouble(calcDetailsModelList.get(0).getJewelryBonus())), 2,
-						BigDecimal.ROUND_HALF_DOWN)
-				.toString());
+		shopTotalsModel.setTotalMarketingBonus(CartCalculation.apply119VAT(BigDecimal.valueOf(Double.parseDouble(calcDetailsModelList.get(0).getMarketingBonus())), 2,
+				BigDecimal.ROUND_HALF_DOWN).toString());
+		shopTotalsModel.setTotalBonusJeverly(CartCalculation.apply119VAT(BigDecimal.valueOf(Double.parseDouble(calcDetailsModelList.get(0).getJewelryBonus())), 2,
+				BigDecimal.ROUND_HALF_DOWN).toString());
 		// Constants added
 		// shopTotalsModel.setTax(calcDetailsModelList.get(0).getTax());
 		shopTotalsModel.setTax("0.00");
@@ -133,7 +124,6 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 		ordersSteps.openOrder(orderId);
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderProducts();
 		orderTotalsModel = ordersSteps.grabTotals();
-		orderInfoModel = ordersSteps.grabOrderInfo();
 
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");
@@ -141,9 +131,13 @@ public class US3001ValidateOrderBackOfficeTest extends BaseTest {
 		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 
-		// orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(),
-		// "Zahlung geplant");
+//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
 
+		orderInfoModel = ordersSteps.grabOrderInfo();
+		ordersSteps.selectMenu(ConfigConstants.ADYEN_NOTIFICATION_TAB);
+		ordersSteps.verifyAuthorization(orderInfoModel.getPspReference());
+		ordersSteps.verifyCapture(orderInfoModel.getPspReference());
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung erfolgreich");
 		customVerifications.printErrors();
 	}
 
