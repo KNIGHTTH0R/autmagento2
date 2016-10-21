@@ -1,16 +1,5 @@
 package com.tests.uss17.us17002;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +14,7 @@ import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.tests.BaseTest;
-import com.tools.constants.UrlConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -33,6 +22,11 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US17.2 Check reassigned contacts on customer's preffered SC hierarchy if customer's preffered is quit", type = "Scenarios")
 @Story(Application.MassAction.US17_2.class)
@@ -61,8 +55,6 @@ public class US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest extends
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	
-	private String starterSet,starterKitPrice;
-
 	@Before
 	public void setUp() throws Exception {
 
@@ -71,28 +63,6 @@ public class US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest extends
 		birthDate.setDate("Feb,1970,12");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6001.properties");
-			prop.load(input);
-
-			starterSet = prop.getProperty("starterSet");
-			starterKitPrice = prop.getProperty("starterKitPrice");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 
 	@Test
@@ -102,7 +72,7 @@ public class US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest extends
 		
 		stylistContextSteps.addStylistReference(stylecoachFormData.getFirstName() + stylecoachFormData.getLastName());
 
-		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		starterSetSteps.selectStarterKit(EnvironmentConstants.STARTERSET);
 		starterSetSteps.submitStarterSetStep();
 		
 		paymentSteps.expandCreditCardForm();

@@ -16,6 +16,7 @@ import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -90,7 +91,7 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		customerFormDate.setDate(formCreationDate);
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
-		starterSetSteps.selectStarterKit("input#kit_2941");
+		starterSetSteps.selectStarterKit(EnvironmentConstants.STARTERSET);
 		starterSetSteps.grabCartTotal(false);
 		starterSetSteps.submitStarterSetStep();
 
@@ -110,12 +111,6 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 		stylistRegistrationSteps.updateStylistData(customerFormData, newBillingAddress);
 		stylistContextSteps.submitContextStep();
 		starterSetSteps.submitStarterSetStep();
-//		
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//		confirmationSteps.agreeAndCheckout();
-//		paymentSteps.expandKlarnaForm();
-//		paymentSteps.fillKlarnaForm();
 		
 		if (paymentSteps.isKlarnaAvailable()) {
 			paymentSteps.expandKlarnaForm();
@@ -127,7 +122,6 @@ public class US6005ScRegistrationNewCustomerTest extends BaseTest {
 			confirmationSteps.agreeAndCheckout();
 			
 		}
-
 		customVerification.printErrors();
 	}
 

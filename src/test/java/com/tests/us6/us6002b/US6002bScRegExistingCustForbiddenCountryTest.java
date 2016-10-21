@@ -1,11 +1,5 @@
 package com.tests.us6.us6002b;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,7 +21,7 @@ import com.tools.CustomVerification;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
-import com.tools.constants.UrlConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -73,13 +67,11 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 	@Steps
 	public StarterSetSteps starterSetSteps;
 
-//	private CreditCardModel creditCardData = new CreditCardModel();
 	private ElvPaymentMethodModel elvPaymentData = new ElvPaymentMethodModel();
 	private static DateModel formDate = new DateModel();
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");
 	private String birthDate;
-	private String starterSet,starterKitPrice;
 
 	@Before
 	public void setUp() throws Exception {
@@ -95,29 +87,6 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 		} else
 			Assert.assertTrue("Failure: No test data has been found.", false);
 		
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6001.properties");
-			prop.load(input);
-
-		
-			starterSet = prop.getProperty("starterSet");
-			starterKitPrice = prop.getProperty("starterKitPrice");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 	
 	@Test
@@ -140,7 +109,7 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 		
 		stylistContextSteps.addStylistReference(stylistData.getFirstName());
 
-		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSET, EnvironmentConstants.STARTERKITPRICE);
 		starterSetSteps.submitStarterSetStep();
 		
 //		paymentSteps.expandCreditCardForm();

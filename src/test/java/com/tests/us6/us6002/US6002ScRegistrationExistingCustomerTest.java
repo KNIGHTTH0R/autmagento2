@@ -1,11 +1,5 @@
 package com.tests.us6.us6002;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,7 +21,7 @@ import com.tools.CustomVerification;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
-import com.tools.constants.UrlConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -46,25 +40,25 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US6.2 Sc Registration Existing Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_2.class)
 @RunWith(SerenityRunner.class)
-public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
-	
+public class US6002ScRegistrationExistingCustomerTest extends BaseTest {
+
 	@Steps
-	public HeaderSteps headerSteps;	
+	public HeaderSteps headerSteps;
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
-	public EmailClientSteps emailClientSteps;	
+	public EmailClientSteps emailClientSteps;
 	@Steps
 	public StylistRegistrationSteps stylistRegistrationSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
-	@Steps 
+	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps 
+	@Steps
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 	@Steps
 	public StylistContextSteps stylistContextSteps;
@@ -73,83 +67,64 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest{
 	@Steps
 	public StarterSetSteps starterSetSteps;
 
-	private String starterSet,starterKitPrice;
-	
 	private static DateModel formDate = new DateModel();
 	private StylistPropertiesModel expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel();
 	private CustomerFormModel stylistData = new CustomerFormModel("");
 	private String birthDate;
-    private	SepaPaymentMethodModel sepaPaymentData=new SepaPaymentMethodModel();
+	private SepaPaymentMethodModel sepaPaymentData = new SepaPaymentMethodModel();
 
 	@Before
 	public void setUp() throws Exception {
 		birthDate = "Feb,1970,12";
-		expectedBeforeLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.NOT_CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
-		
+		expectedBeforeLinkConfirmationStylistData = new StylistPropertiesModel(ConfigConstants.NOT_CONFIRMED,
+				ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
+
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		int size = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").size();
 		if (size > 0) {
 			stylistData = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").get(0);
 		} else
 			Assert.assertTrue("Failure: No test data has been found.", false);
-		
-		Properties prop = new Properties();
-		InputStream input = null;
 
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6001.properties");
-			prop.load(input);
-
-			starterSet = prop.getProperty("starterSet");
-			starterKitPrice = prop.getProperty("starterKitPrice");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
-	
+
 	@Test
 	public void us6002ScRegistrationExistingCustomerTest() {
-		
+
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistData.getEmailName());
 		backEndSteps.openCustomerDetails(stylistData.getEmailName());
-		StylistPropertiesModel grabBeforeLinkConfirmationStylistData =  backEndSteps.grabCustomerConfiguration();
-		
-		//confirmation link
-		emailClientSteps.confirmAccount(stylistData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
-		
+		StylistPropertiesModel grabBeforeLinkConfirmationStylistData = backEndSteps.grabCustomerConfiguration();
+
+		// confirmation link
+		emailClientSteps.confirmAccount(stylistData.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
+				ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
+
 		headerSteps.navigateToRegisterFormAndLogout();
 		stylistRegistrationSteps.clickLoginLinkFromMessage();
 		customerRegistrationSteps.performLogin(stylistData.getEmailName(), stylistData.getPassword());
-		String formCreationDate = stylistRegistrationSteps.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), birthDate);
+		String formCreationDate = stylistRegistrationSteps
+				.fillStylistRegistrationPredefinedInfoForm(stylistData.getFirstName(), birthDate);
 		formDate.setDate(formCreationDate);
-		
+
 		stylistContextSteps.addStylistReference(stylistData.getFirstName());
 
-		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSET,
+				EnvironmentConstants.STARTERKITPRICE);
 		starterSetSteps.submitStarterSetStep();
-		
-    	paymentSteps.expandSepaForm();
-	    paymentSteps.fillSepaForm(sepaPaymentData);
+
+		paymentSteps.expandSepaForm();
+		paymentSteps.fillSepaForm(sepaPaymentData);
 		confirmationSteps.agreeAndCheckout();
-		
-		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	
+
+		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData,
+				expectedBeforeLinkConfirmationStylistData);
 		customerAndStylistRegistrationWorkflows.validateStylistProperties("BEFORE CONFIRMATION LINK");
-		
-		customVerifications.printErrors();	
+
+		customVerifications.printErrors();
 	}
-	
+
 	@After
 	public void saveData() {
 		MongoWriter.saveDateModel(formDate, getClass().getSimpleName());

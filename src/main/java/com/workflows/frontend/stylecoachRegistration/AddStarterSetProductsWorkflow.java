@@ -15,21 +15,12 @@ public class AddStarterSetProductsWorkflow {
 	@Steps
 	public StarterSetSteps starterSetSteps;
 
-//	@StepGroup
-//	@Title("Add starter set product to cart")
-//	public StarterSetProductModel setStarterSetProductToCart(String starterKitId) {
-//
-//		starterSetSteps.selectStarterKit(starterKitId);
-//		
-//		return productSteps.setStarterSetProductAddToCart();
-//	}
-	
 	@StepGroup
 	@Title("Add starter set product to cart")
-	public StarterSetProductModel setStarterSetProductToCart(String starterKitId,String price) {
-		
+	public StarterSetProductModel setStarterSetProductToCart(String starterKitId, String price) {
+
 		starterSetSteps.selectStarterKit(starterKitId);
-		
+
 		return productSteps.setStarterSetProductAddToCart(price);
 	}
 }

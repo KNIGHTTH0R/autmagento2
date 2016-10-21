@@ -1,11 +1,5 @@
 package com.tests.uss12.uss12001;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +15,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.constants.UrlConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -65,8 +59,6 @@ public class US12001StyleCoachRegistrationTest extends BaseTest {
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	
-	private String starterSet,starterKitPrice;
-
 	@Before
 	public void setUp() throws Exception {
 		customerFormData = new CustomerFormModel();
@@ -74,28 +66,6 @@ public class US12001StyleCoachRegistrationTest extends BaseTest {
 		birthDate.setDate("Feb,1970,12");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6001.properties");
-			prop.load(input);
-
-			starterSet = prop.getProperty("starterSet");
-			starterKitPrice = prop.getProperty("starterKitPrice");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 
 	@Test
@@ -106,7 +76,7 @@ public class US12001StyleCoachRegistrationTest extends BaseTest {
 		
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
-		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		starterSetSteps.selectStarterKit(EnvironmentConstants.STARTERSET);
 		starterSetSteps.submitStarterSetStep();
 		
 		paymentSteps.expandCreditCardForm();

@@ -1,16 +1,5 @@
 package com.tests.uss20.us20001;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +14,7 @@ import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.tests.BaseTest;
-import com.tools.constants.UrlConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.StylistDataModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -34,6 +23,11 @@ import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.stylecoachRegistration.AddStarterSetProductsWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US20.1 Verify new SC and updated SC details in Commission", type = "Scenarios")
 @Story(Application.StylecoachInfo.US20_1.class)
@@ -64,8 +58,6 @@ public class US20001StyleCoachRegistrationTest extends BaseTest {
 	public AddressModel customerFormAddress;
 	public StylistDataModel validationModel;
 	
-	private String starterSet,starterKitPrice;
-
 	@Before
 	public void setUp() throws Exception {
 		customerFormData = new CustomerFormModel();
@@ -74,28 +66,6 @@ public class US20001StyleCoachRegistrationTest extends BaseTest {
 		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 		
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us6" + File.separator + "us6001.properties");
-			prop.load(input);
-
-			starterSet = prop.getProperty("starterSet");
-			starterKitPrice = prop.getProperty("starterKitPrice");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 	}
 
 	@Test
@@ -106,7 +76,7 @@ public class US20001StyleCoachRegistrationTest extends BaseTest {
 		
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
-		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		starterSetSteps.selectStarterKit(EnvironmentConstants.STARTERSET);
 		starterSetSteps.submitStarterSetStep();
 
 		paymentSteps.expandCreditCardForm();

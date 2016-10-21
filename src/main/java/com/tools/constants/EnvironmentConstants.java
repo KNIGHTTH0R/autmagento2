@@ -19,4 +19,8 @@ public class EnvironmentConstants {
 	public static final String RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT = MongoReader.geteEnvironmentConstantsItem("RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT");
 	public static final String RUN_POSTPONE_CANCEL_EMAIL_SCRIPT = MongoReader.geteEnvironmentConstantsItem("RUN_POSTPONE_CANCEL_EMAIL_SCRIPT");
 	
+	//starterset
+	public static final String STARTERSET = MongoReader.geteEnvironmentConstantsItem("STARTERSET");
+	public static final String STARTERKITPRICE = MongoReader.geteEnvironmentConstantsItem("STARTERKITPRICE");
+	
 }

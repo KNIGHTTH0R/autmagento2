@@ -25,6 +25,7 @@ import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.tests.BaseTest;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
@@ -63,7 +64,6 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	private String context;
-	private String starterSet,starterKitPrice;
 
 	@Before
 	public void setUp() throws Exception {
@@ -76,8 +76,6 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 			prop.load(input);
 
 			context = prop.getProperty("context");
-			starterSet = prop.getProperty("starterSet");
-			starterKitPrice = prop.getProperty("starterKitPrice");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -104,7 +102,7 @@ public class US17003StyleCoachRegistrationTest extends BaseTest {
 		
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
-		addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSET, EnvironmentConstants.STARTERKITPRICE);
 		starterSetSteps.submitStarterSetStep();
 		
 		paymentSteps.expandCreditCardForm();

@@ -20,6 +20,7 @@ import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
@@ -75,7 +76,7 @@ public class US6004StylistRegistrationStopToStep4Test extends BaseTest {
 		customerFormDate.setDate(formCreationDate);
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
-		starterSetSteps.selectStarterKit("input#kit_2941");
+		starterSetSteps.selectStarterKit(EnvironmentConstants.STARTERSET);
 		starterSetSteps.grabCartTotal(false);
 		starterSetSteps.submitStarterSetStep();
 

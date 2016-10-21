@@ -78,7 +78,7 @@ public class US10009CreatePartyWithStylistHostTest extends BaseTest {
 	}
 
 	@Test
-	public void us10007CreatePartyWithStylistHostTest() {
+	public void us10009CreatePartyWithStylistHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

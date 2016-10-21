@@ -1,6 +1,5 @@
 package com.steps.frontend;
 
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.StepGroup;
@@ -13,7 +12,12 @@ public class SearchSteps extends AbstractSteps {
 	public void navigateToProductPage(String pathName) {
 		// searchProduct(searchTerm);
 		// return selectProduct(productName);
-		navigate(MongoReader.getBaseURL() + "/" + pathName.toLowerCase() + ".html");
+		// navigate(MongoReader.getBaseURL() + "/" + pathName.toLowerCase() + ".html");
+		
+		String[] currentUrlSplitted = getDriver().getCurrentUrl().split("/");
+
+		navigate(currentUrlSplitted[0] + "//" + currentUrlSplitted[2] + "/" + currentUrlSplitted[3] + "/"
+				+ pathName.toLowerCase() + ".html");
 	}
 
 	// @Step

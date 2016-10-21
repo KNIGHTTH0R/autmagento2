@@ -29,6 +29,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.stylistRegistration.StylistRegistrationCartCalculator;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -79,7 +80,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 	private DateModel birthDate = new DateModel();
 	private AddressModel customerFormAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private String taxClass, shippingValue, voucherValue, voucherCode,starterSet,starterKitPrice;
+	private String taxClass, shippingValue, voucherValue, voucherCode;
 
 	@Before
 	public void setUp() throws Exception {
@@ -103,8 +104,6 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 			shippingValue = prop.getProperty("shippingValue");
 			voucherValue = prop.getProperty("voucherValue");
 			voucherCode = prop.getProperty("voucherCode");
-			starterSet = prop.getProperty("starterSet");
-			starterKitPrice = prop.getProperty("starterKitPrice");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -131,7 +130,7 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
 		StarterSetProductModel productData;
-		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(starterSet,starterKitPrice);
+		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSET, EnvironmentConstants.STARTERKITPRICE);
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
 
 		starterSetSteps.applyVoucher(voucherCode);

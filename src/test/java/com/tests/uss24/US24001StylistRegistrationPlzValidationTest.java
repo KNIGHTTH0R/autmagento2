@@ -20,6 +20,7 @@ import com.steps.frontend.StylistRegistrationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.tests.BaseTest;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -75,7 +76,7 @@ public class US24001StylistRegistrationPlzValidationTest extends BaseTest {
 		stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
-		starterSetSteps.selectStarterKit("input#kit_1959");
+		starterSetSteps.selectStarterKit(EnvironmentConstants.STARTERSET);
 		starterSetSteps.grabCartTotal(false);
 		starterSetSteps.submitStarterSetStep();
 

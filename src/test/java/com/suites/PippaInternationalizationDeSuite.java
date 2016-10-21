@@ -98,6 +98,8 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 //	US26001Suite.class,
 //	US23001PartThreeSuite.class,
 	
+	NotificationsSuite.class,
+	
 })
 @RunWith(Suite.class)
 public class PippaInternationalizationDeSuite {

@@ -125,6 +125,7 @@ public class US10006CustomerAddProductIntoWishlistTest extends BaseTest {
 		if (!headerSteps.succesfullLogin()) {
 			customerRegistrationSteps.performLoginAfterChangingWebsite(username, password);
 		}
+		
 		footerSteps.selectWebsiteFromFooter(ContextConstants.NOT_PREFERED_WEBSITE);
 
 		headerSteps.clickOnWishlistButton();
