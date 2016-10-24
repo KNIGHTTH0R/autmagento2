@@ -12,6 +12,7 @@ import com.tools.constants.ContextConstants;
 import com.tools.data.TeamReportPartyTabModel;
 import com.tools.data.TeamReportTakeOffPhaseModel;
 import com.tools.data.TeamReportTeamTabModel;
+import com.tools.data.TeamReportTotalsModel;
 import com.tools.generalCalculation.TeamReportCalculations;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -195,7 +196,8 @@ public class TeamReportPage extends AbstractPage {
 						.setPartiesPlanned(elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText());
 				teamReportPartyModel
 						.setPartiesUpcoming(elementNow.findElement(By.cssSelector("td:nth-child(7)")).getText());
-				teamReportPartyModel.setRevenuePerParty(FormatterUtils.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText()));
+				teamReportPartyModel.setRevenuePerParty(FormatterUtils
+						.parseValueToZeroDecimals(elementNow.findElement(By.cssSelector("td:nth-child(8)")).getText()));
 
 				result.add(teamReportPartyModel);
 			}
@@ -257,4 +259,56 @@ public class TeamReportPage extends AbstractPage {
 		return result;
 	}
 
+	public TeamReportTotalsModel getTeamReportTeamTotals(TeamReportTotalsModel totals) {
+
+		clickTeamTab();
+		WebElement teamTabTotalContainer = getDriver().findElement(By.cssSelector("div.dataTables_scrollFoot"));
+
+		totals.setIpTotal(teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip.tab_team")).getText());
+		totals.setTqvTotal(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_team_points.tab_team")).getText());
+		totals.setIpNewInclTotal(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_incl_new_sc.tab_team")).getText());
+		totals.setNewScTotal(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_no_new_sc.tab_team")).getText());
+
+		return totals;
+	}
+
+	public TeamReportTotalsModel getTeamReportPartyTotals(TeamReportTotalsModel totals) {
+
+		clickStylePartyTab();
+		WebElement teamTabTotalContainer = getDriver().findElement(By.cssSelector("div.dataTables_scrollFoot"));
+
+		totals.setIpThisMonthTotal(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_month.tab_party")).getText());
+		totals.setIpLastMonthTotal(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_last_month.tab_party")).getText());
+		totals.setPartiesHeldTotal(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_held_parties.tab_party")).getText());
+		totals.setPartiesPlannedTotal(teamTabTotalContainer
+				.findElement(By.cssSelector("th.table_total_planned_parties.tab_party")).getText());
+		totals.setPartiesUpcomingTotal(teamTabTotalContainer
+				.findElement(By.cssSelector("th.table_total_upcoming_parties.tab_party")).getText());
+		totals.setRevenuePartyTotal(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ip_parties.tab_party")).getText());
+
+		return totals;
+
+	}
+
+	public TeamReportTotalsModel getTeamReportTakeOffTotals(TeamReportTotalsModel totals) {
+
+		clickTakeOffPhaseTab();
+		WebElement teamTabTotalContainer = getDriver().findElement(By.cssSelector("div.dataTables_scrollFoot"));
+
+		totals.setDaysLeftTotal(teamTabTotalContainer
+				.findElement(By.cssSelector("th.table_total_remaining_top.tab_takeoff")).getText());
+		totals.setIpTakeOffTotal(
+				teamTabTotalContainer.findElement(By.cssSelector("th.table_total_ips_in_top.tab_takeoff")).getText());
+		totals.setNewScTakeOffTotal(teamTabTotalContainer
+				.findElement(By.cssSelector("th.table_total_top_new_frontliners.tab_takeoff")).getText());
+
+		return totals;
+	}
 }

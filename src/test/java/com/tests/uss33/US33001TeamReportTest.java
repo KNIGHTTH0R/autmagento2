@@ -30,6 +30,7 @@ import com.tools.data.TeamReportModel;
 import com.tools.data.TeamReportPartyTabModel;
 import com.tools.data.TeamReportTakeOffPhaseModel;
 import com.tools.data.TeamReportTeamTabModel;
+import com.tools.data.TeamReportTotalsModel;
 import com.tools.generalCalculation.TeamReportCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -127,17 +128,28 @@ public class US33001TeamReportTest extends BaseTest {
 
 		for (Map.Entry<String, List<TeamReportModel>> entry : expectedTeamMap.entrySet()) {
 
+			TeamReportTotalsModel calculatedTotals = TeamReportCalculations.calculateTotals(entry.getValue());
+			TeamReportTotalsModel grabbedTotals = new TeamReportTotalsModel();
+
 			teamReportSteps.selectScLevel(entry.getKey());
+
 			teamReportSteps.clickTeamTab();
 			List<TeamReportTeamTabModel> grabbedTeamModel = teamReportSteps.getTeamReportTeamModel();
+			grabbedTotals = teamReportSteps.getTeamReportTeamTotals(grabbedTotals);
+
 			teamReportSteps.clickStylePartyTab();
 			List<TeamReportPartyTabModel> grabbedPArtyModel = teamReportSteps.getTeamReportPartyModel();
+			grabbedTotals = teamReportSteps.getTeamReportPartyTotals(grabbedTotals);
+
 			teamReportSteps.clickTakeOffPhaseTab();
 			List<TeamReportTakeOffPhaseModel> takeOffPhaseModel = teamReportSteps.getTeamReportTakeOffPhaseModel();
+			grabbedTotals = teamReportSteps.getTeamReportTakeOffTotals(grabbedTotals);
 
 			teamReportSteps.validateTeamReportTeamTab(entry.getValue(), grabbedTeamModel);
 			teamReportSteps.validateTeamReportPartyTab(entry.getValue(), grabbedPArtyModel);
 			teamReportSteps.validateTeamReportTakeOffPhaseTab(entry.getValue(), takeOffPhaseModel);
+
+			teamReportSteps.validateTotals(calculatedTotals, grabbedTotals);
 		}
 
 	}

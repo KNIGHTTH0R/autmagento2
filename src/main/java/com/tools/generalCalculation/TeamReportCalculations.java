@@ -12,6 +12,7 @@ import com.connectors.http.OrdersInfoMagentoCalls;
 import com.connectors.http.PartyMagentoCalls;
 import com.tools.constants.ComissionConfigConstants;
 import com.tools.data.TeamReportModel;
+import com.tools.data.TeamReportTotalsModel;
 import com.tools.data.commission.CommissionStylistModel;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.data.soap.DBStylistPartyModel;
@@ -40,7 +41,7 @@ public class TeamReportCalculations {
 	 * @param level
 	 * @param month
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static List<TeamReportModel> getTeamReportList(String stylistId, String month) throws Exception {
 
@@ -261,6 +262,57 @@ public class TeamReportCalculations {
 
 		}
 		return result;
+	}
+
+	public static TeamReportTotalsModel calculateTotals(List<TeamReportModel> teamReportList) {
+
+		int ipTotal = 0;
+		int tqvTotal = 0;
+		int ipNewInclTotal = 0;
+		int newScTotal = 0;
+		int ipLastMonthTotal = 0;
+		int partiesHeldTotal = 0;
+		int partiesPlannedTotal = 0;
+		int partiesUpcomingTotal = 0;
+		double revenuePartyTotal = 0;
+		int daysLeftTotal = 0;
+		int ipTakeOffTotal = 0;
+		int newScTakeOffTotal = 0;
+
+		TeamReportTotalsModel total = new TeamReportTotalsModel();
+
+		for (TeamReportModel teamReportModel : teamReportList) {
+
+			ipTotal = ipTotal + Integer.parseInt(teamReportModel.getIp());
+			tqvTotal = tqvTotal + Integer.parseInt(teamReportModel.getTqv());
+			ipNewInclTotal = ipNewInclTotal + Integer.parseInt(teamReportModel.getIpNewRecruited());
+			newScTotal = newScTotal + Integer.parseInt(teamReportModel.getNewStylist());
+			ipLastMonthTotal = ipLastMonthTotal + Integer.parseInt(teamReportModel.getIpLastMonth());
+			partiesHeldTotal = partiesHeldTotal + Integer.parseInt(teamReportModel.getPartiesHeld());
+			partiesPlannedTotal = partiesPlannedTotal + Integer.parseInt(teamReportModel.getPartiesPlanned());
+			partiesUpcomingTotal = partiesUpcomingTotal + Integer.parseInt(teamReportModel.getPartiesUpcoming());
+			revenuePartyTotal = revenuePartyTotal + Double.parseDouble(teamReportModel.getRevenuePerParty());
+			daysLeftTotal = daysLeftTotal + Integer.parseInt(teamReportModel.getDaysLeft());
+			ipTakeOffTotal = ipTakeOffTotal + Integer.parseInt(teamReportModel.getIpTop());
+			newScTakeOffTotal = newScTakeOffTotal + Integer.parseInt(teamReportModel.getNewStylistTop());
+		}
+
+		total.setIpTotal(String.valueOf(ipTotal));
+		total.setTqvTotal(String.valueOf(tqvTotal));
+		total.setIpNewInclTotal(String.valueOf(ipNewInclTotal));
+		total.setNewScTotal(String.valueOf(newScTotal));
+		total.setIpThisMonthTotal(String.valueOf(ipTotal));
+		total.setIpLastMonthTotal(String.valueOf(ipLastMonthTotal));
+		total.setPartiesHeldTotal(String.valueOf(partiesHeldTotal));
+		total.setPartiesPlannedTotal(String.valueOf(partiesPlannedTotal));
+		total.setPartiesUpcomingTotal(String.valueOf(partiesUpcomingTotal));
+		total.setRevenuePartyTotal(String.valueOf(revenuePartyTotal));
+		total.setDaysLeftTotal(String.valueOf(daysLeftTotal));
+		total.setIpTakeOffTotal(String.valueOf(ipTakeOffTotal));
+		total.setNewScTakeOffTotal(String.valueOf(newScTakeOffTotal));
+
+		return total;
+
 	}
 
 }

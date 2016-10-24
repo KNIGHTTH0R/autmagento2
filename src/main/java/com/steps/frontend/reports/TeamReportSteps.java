@@ -9,6 +9,7 @@ import com.tools.data.TeamReportModel;
 import com.tools.data.TeamReportPartyTabModel;
 import com.tools.data.TeamReportTakeOffPhaseModel;
 import com.tools.data.TeamReportTeamTabModel;
+import com.tools.data.TeamReportTotalsModel;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;
@@ -16,6 +17,7 @@ import net.thucydides.core.annotations.Step;
 public class TeamReportSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
+
 	@Step
 	public void searchInput(String searchKey) {
 		teamReportPage().searchInput(searchKey);
@@ -70,6 +72,24 @@ public class TeamReportSteps extends AbstractSteps {
 	@Step
 	public List<TeamReportTakeOffPhaseModel> getTeamReportTakeOffPhaseModel() {
 		return teamReportPage().getTeamReportTakeOffPhaseModel();
+
+	}
+
+	@Step
+	public TeamReportTotalsModel getTeamReportTeamTotals(TeamReportTotalsModel totals) {
+		return teamReportPage().getTeamReportTeamTotals(totals);
+
+	}
+
+	@Step
+	public TeamReportTotalsModel getTeamReportPartyTotals(TeamReportTotalsModel totals) {
+		return teamReportPage().getTeamReportPartyTotals(totals);
+
+	}
+
+	@Step
+	public TeamReportTotalsModel getTeamReportTakeOffTotals(TeamReportTotalsModel totals) {
+		return teamReportPage().getTeamReportTakeOffTotals(totals);
 
 	}
 
@@ -143,9 +163,9 @@ public class TeamReportSteps extends AbstractSteps {
 				matchStylistName(stylist.getStyleCoachName(), compare.getStylistName());
 				validateStartDate(stylist.getActivationDate(), compare.getActivationDate());
 				validateTopEndDate(stylist.getTakeOffPhaseEndDate(), compare.getTakeOffPhaseEndDate());
-				validateLeftDays(stylist.getDaysLeft(), compare.getDaysLeft());
+				validateTakeOfPhaseLeftDays(stylist.getDaysLeft(), compare.getDaysLeft());
 				validateIpsOnTakeOffPhase(stylist.getIp(), compare.getIp());
-				validateStylistWon(stylist.getNewStylistTop(), compare.getNewStylistTop());
+				validateStylistWonInTakeOffPhase(stylist.getNewStylistTop(), compare.getNewStylistTop());
 
 			} else {
 				Assert.assertTrue("Failure: Could not validate all stylists in the list", compare != null);
@@ -193,9 +213,27 @@ public class TeamReportSteps extends AbstractSteps {
 		return result;
 	}
 
+	public void validateTotals(TeamReportTotalsModel calculatedTotals, TeamReportTotalsModel grabbedTotals) {
+		validateIp(calculatedTotals.getIpTotal(), grabbedTotals.getIpTotal());
+		validateTp(calculatedTotals.getTqvTotal(), grabbedTotals.getTqvTotal());
+		validateIpIncludingNewSc(calculatedTotals.getIpNewInclTotal(), grabbedTotals.getIpNewInclTotal());
+		validateNewScs(calculatedTotals.getNewScTotal(), grabbedTotals.getNewScTotal());
+		validateIpsThisMonth(calculatedTotals.getIpThisMonthTotal(), grabbedTotals.getIpThisMonthTotal());
+		validateIpsLastMonth(calculatedTotals.getIpLastMonthTotal(), grabbedTotals.getIpLastMonthTotal());
+		validatePartiesHeld(calculatedTotals.getPartiesHeldTotal(), grabbedTotals.getPartiesHeldTotal());
+		validatePartiesPlanned(calculatedTotals.getPartiesPlannedTotal(), grabbedTotals.getPartiesPlannedTotal());
+		validateUpcomingParties(calculatedTotals.getPartiesUpcomingTotal(), grabbedTotals.getPartiesUpcomingTotal());
+		validateIpsPerParty(calculatedTotals.getRevenuePartyTotal(), grabbedTotals.getRevenuePartyTotal());
+		validateTakeOfPhaseLeftDays(calculatedTotals.getDaysLeftTotal(), grabbedTotals.getDaysLeftTotal());
+		validateIpsOnTakeOffPhase(calculatedTotals.getIpTakeOffTotal(), grabbedTotals.getIpTakeOffTotal());
+		validateStylistWonInTakeOffPhase(calculatedTotals.getNewScTakeOffTotal(), grabbedTotals.getNewScTakeOffTotal());
+
+	}
 
 	@Step
 	private void matchStylistName(String stylistName, String compare) {
+		CustomVerification.verifyTrue("Failure: SC name doesn't match: " + stylistName + " - " + compare,
+				stylistName.contentEquals(compare));
 	}
 
 	@Step
@@ -318,7 +356,7 @@ public class TeamReportSteps extends AbstractSteps {
 	}
 
 	@Step
-	private void validateLeftDays(String stylistName, String compare) {
+	private void validateTakeOfPhaseLeftDays(String stylistName, String compare) {
 		CustomVerification.verifyTrue(
 				"Failure: Number of days remaining until TOP ends dont match: " + stylistName + " - " + compare,
 				stylistName.contentEquals(compare));
@@ -332,7 +370,7 @@ public class TeamReportSteps extends AbstractSteps {
 	}
 
 	@Step
-	private void validateStylistWon(String stylistName, String compare) {
+	private void validateStylistWonInTakeOffPhase(String stylistName, String compare) {
 		CustomVerification.verifyTrue(
 				"Failure: Number of frontliners recruited in TOP dont match: " + stylistName + " - " + compare,
 				stylistName.contentEquals(compare));
