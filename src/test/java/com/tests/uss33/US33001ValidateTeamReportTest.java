@@ -44,7 +44,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US33.1 Team report scenarios", type = "Scenarios")
 @Story(Application.CheckTpProductsRestrictions.US32_1.class)
 @RunWith(SerenityRunner.class)
-public class US33001TeamReportTest extends BaseTest {
+public class US33001ValidateTeamReportTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
