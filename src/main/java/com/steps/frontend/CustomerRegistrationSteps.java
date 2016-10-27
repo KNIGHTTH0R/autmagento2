@@ -3,11 +3,6 @@ package com.steps.frontend;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Title;
 
 import org.junit.Assert;
 
@@ -18,6 +13,10 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DykscSeachModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Title;
 
 public class CustomerRegistrationSteps extends AbstractSteps {
 
