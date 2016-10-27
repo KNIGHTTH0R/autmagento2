@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,15 +21,16 @@ import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.EmailConstants;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.EmailConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.Application;
 
 
 @WithTag(name = "US7", type = "external")
 @Story(Application.Registration.Customer.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US7003EmailActivationTest extends BaseTest{
 
 	@Steps
@@ -93,7 +94,7 @@ public class US7003EmailActivationTest extends BaseTest{
 		
 		frontEndSteps.performLogin(username, password);
 
-		String message = gmailConnector.searchForMail("", "Benutzerkonto", false);
+		String message = gmailConnector.searchForMail("", ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT, false);
 
 		System.out.println(message);
 		String linkURL = emailSteps.grabConfirmationLink(message);

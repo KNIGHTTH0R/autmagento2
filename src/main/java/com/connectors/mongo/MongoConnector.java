@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 import com.tools.persistance.MongoConstants;
@@ -85,6 +86,19 @@ public class MongoConnector {
 			}
 		}
 		return b;
+	}
+	
+	
+	public static void cleanCollection(String dataBase, String collection) {
+		List<String> dbs = mongoClient.getDatabaseNames();
+		for (String dbme : dbs) {
+			if (dbme.contains(dataBase)) {
+				workingDB = mongoClient.getDB(dataBase);
+				
+				DBCollection dbCollection = workingDB.getCollection(collection);
+				dbCollection.drop();
+			}
+		}
 	}
 
 	public static void cleanCollection(String simpleName) {

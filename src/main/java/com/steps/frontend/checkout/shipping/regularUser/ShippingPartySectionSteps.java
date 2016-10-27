@@ -17,10 +17,39 @@ public class ShippingPartySectionSteps extends AbstractSteps {
 	public void clickPartyNoOption() {
 		regularUserShippingPage().clickPartyNoOption();
 	}
-	
+
 	@Step
-	public void checkItemNotReceivedYet(){
+	public void checkItemNotReceivedYet() {
 		regularUserShippingPage().checkItemNotReceivedYet();
+	}
+
+	@Step
+	public void selectCountry(String country) {
+		regularUserShippingPage().selectCountry(country);
+	}
+	@Step
+	public void enterPLZ(String plz) {
+		regularUserShippingPage().enterPLZ(plz);
+	}
+
+	@Step
+	public void clickShipToHostessButton() {
+		regularUserShippingPage().clickShipToHostessButton();
+	}
+
+	@Step
+	public void clickShipToStylecoach() {
+		regularUserShippingPage().clickShipToStylecoach();
+	}
+
+	@Step
+	public void selectShipToHostessAddress(String address) {
+		regularUserShippingPage().selectShipToHostessAddress(address);
+	}
+
+	@Step
+	public void selectShipToStylecoachAddress(String address) {
+		regularUserShippingPage().selectShipToStylecoachAddress(address);
 	}
 
 }

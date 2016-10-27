@@ -1,11 +1,17 @@
 package com.pages.frontend.checkout;
 
-import net.thucydides.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 //@DefaultUrl(UrlConstants.URL_CART_SUCCESS)
 public class SuccessPage extends AbstractPage {
@@ -14,9 +20,14 @@ public class SuccessPage extends AbstractPage {
 	private WebElement messageContainer;
 
 	public void verifySuccessMessage() {
+
+		Wait<WebDriver> wait = new WebDriverWait(getDriver(), 30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		// withTimeoutOf(5,
+		// TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(messageContainer).waitUntilVisible();
-		String pageText = messageContainer.getText();
-		Assert.assertTrue("Failure: Success message has not been found.", pageText.contains("Wir haben dir eine eMail mit mit den Details zur Bestellung geschickt."));
+		Assert.assertTrue("Failure: Success message has not been found.",
+				messageContainer.getText().contains(ContextConstants.SUCCES_MESSAGE));
 	}
 
 }

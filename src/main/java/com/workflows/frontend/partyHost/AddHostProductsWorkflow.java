@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.Title;
 
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
-import com.tools.calculation.CartDiscountsCalculation;
+import com.tools.cartcalculations.smf.CartDiscountsCalculation;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 
@@ -32,11 +32,19 @@ public class AddHostProductsWorkflow {
 	@StepGroup
 	@Title("Add product to cart")
 	public HostBasicProductModel setHostProductToCart(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		searchSteps.navigateToProductPage(model.getSku());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(),qty);
 
-		return productSteps.setHostBasicProductAddToCart(qty, productProperty, finalPrice, ipPoints);
+		return productSteps.setHostBasicProductAddToCart(model,qty, productProperty, finalPrice, ipPoints);
+	}
+
+
+	@StepGroup
+	@Title("Add product to wishlist")
+	public void addProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
+		searchSteps.navigateToProductPage(model.getSku());
+		productSteps.addToWishlist(qty, productProperty);
 	}
 
 }

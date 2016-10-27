@@ -1,8 +1,12 @@
 package com.steps.frontend;
 
+import java.text.ParseException;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 
+import com.tools.constants.TimeConstants;
+import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.AbstractSteps;
 
@@ -11,11 +15,10 @@ public class PartyDetailsSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1L;
 
 	@StepGroup
-	public void closeTheParty(String number) {
+	public void closeTheParty() {
 		partyDetailsPage().closeParty();
-		partyDetailsPage().typePartyAttendersNumber(number);
+		partyDetailsPage().typePartyAttendersNumber("10");
 		partyDetailsPage().popupCloseParty();
-
 	}
 
 	@StepGroup
@@ -38,7 +41,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void sendInvitationToHostess() {
 		partyDetailsPage().sendInvitationToHostess();
 		partyDetailsPage().hostessInviteConfirmation();
-		waitABit(5000);
+		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
 	@Step
@@ -49,7 +52,6 @@ public class PartyDetailsSteps extends AbstractSteps {
 
 	@Step
 	public void typePartyAttendersNumber(String number) {
-
 		partyDetailsPage().typePartyAttendersNumber(number);
 	}
 
@@ -66,6 +68,7 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void editParty() {
 		partyDetailsPage().editParty();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	@Step
@@ -76,11 +79,41 @@ public class PartyDetailsSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void orderForCustomerFromParty(String name) {
+	public void orderForCustomer() {
 		partyDetailsPage().orderForCustomer();
+	}
+
+	@Step
+	public void returnToParty() {
+		partyDetailsPage().returnToParty();
+	}
+
+	@Step
+	public ClosedPartyPerformanceModel grabClosedPartyPerformance() {
+		return partyDetailsPage().grabClosedPartyPerformance();
+	}
+
+	@StepGroup
+	public void orderForCustomerFromParty(String name) {
+		typeContactName(name);
+		startOrderForCustomer();
+	}
+
+	@Step
+	public void typeContactName(String name) {
+		placeCustomerOrderFromPartyPage().typeContactName(name);
+	}
+
+	@Step
+	public void startOrderForCustomer() {
+		placeCustomerOrderFromPartyPage().startOrderForCustomer();
+	}
+
+	@Step
+	public void verifyCountryRestrictionWhenSelectingCustomerParty(String name) {
 		placeCustomerOrderFromPartyPage().typeContactName(name);
 		placeCustomerOrderFromPartyPage().startOrderForCustomer();
-
+		placeCustomerOrderFromPartyPage().verifyCustomerIsNotSuitableForTheOrderErrorMessage();
 	}
 
 	@Step
@@ -96,6 +129,16 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void verifyPlannedPartyAvailableActions() {
 		partyDetailsPage().verifyPlannedPartyAvailableActions();
+	}
+
+	@Step
+	public void verifyThatAutomaticallyClosePartyDateIsCorrect() throws ParseException {
+		partyDetailsPage().verifyThatAutomaticallyClosePartyDateIsCorrect();
+	}
+
+	@Step
+	public void verifyThatBonusesAreRemovedFromParty() {
+		partyDetailsPage().verifyThatBonusesAreRemovedFromParty();
 	}
 
 	@Step
@@ -117,9 +160,16 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void createFolowUpParty() {
 		partyDetailsPage().createFolowUpParty();
 	}
+
 	@Step
 	public void selectWishlistProductAndAddItToBorrowCart(String productName) {
 		partyDetailsPage().selectWishlistProductAndAddItToBorrowCart(productName);
+		refresh();
+	}
+
+	@Step
+	public void checkThatPartyWishlistIsEmpty() {
+		partyDetailsPage().checkThatPartyWishlistIsEmpty();
 	}
 
 }

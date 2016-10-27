@@ -3,18 +3,19 @@ package com.pages.frontend.checkout;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
-import com.tools.datahandlers.DataGrabber;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.TimeConstants;
+import com.tools.datahandler.DataGrabber;
 import com.tools.persistance.MongoTableKeys;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
@@ -28,7 +29,8 @@ public class CartPage extends AbstractPage {
 	@FindBy(css = "div.page-title ul.checkout-types button:last-child")
 	private WebElement kasseButton;
 
-	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
+//	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
+	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")    //int  
 	private WebElement updateButton;
 
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")
@@ -296,7 +298,7 @@ public class CartPage extends AbstractPage {
 		element(cartMainContainer).waitUntilVisible();
 		System.out.println("TEXT from CONTAINER: " + cartMainContainer.getText());
 		
-		Assert.assertTrue(cartMainContainer.getText().contains("WARENKORB IST LEER"));
+		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 		
 	}
 

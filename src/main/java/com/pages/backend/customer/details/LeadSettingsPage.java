@@ -1,8 +1,8 @@
 package com.pages.backend.customer.details;
 
-import org.openqa.selenium.WebElement;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import org.openqa.selenium.WebElement;
 
 import com.tools.data.StylistDataModel;
 import com.tools.requirements.AbstractPage;
@@ -34,12 +34,6 @@ public class LeadSettingsPage extends AbstractPage {
 		stylistData.setCustomerLeads(customerLeads.getAttribute("value"));
 		stylistData.setStyleCoachLeadsWeek(styleCoachLeadsWeek.getAttribute("value"));
 		stylistData.setHostessLeadsWeek(hostessLeadsWeek.getAttribute("value"));
-
-		System.out.println("styleCoachLeads: " + stylistData.getStyleCoachLeads());
-		System.out.println("hostessLeads: " + stylistData.getHostessLeads());
-		System.out.println("customerLeads: " + stylistData.getCustomerLeads());
-		System.out.println("styleCoachLeadsWeek: " + stylistData.getStyleCoachLeadsWeek());
-		System.out.println("hostessLeadsWeek: " + stylistData.getHostessLeadsWeek());
 
 		return stylistData;
 

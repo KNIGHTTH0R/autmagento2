@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,18 +19,18 @@ import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProfileSteps;
+import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.EmailConstants;
+import com.tools.constants.EmailConstants;
+import com.tools.constants.FilePaths;
+import com.tools.constants.UrlConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.constants.FilePaths;
-import com.tools.env.variables.UrlConstants;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US5", type = "external")
 @Story(Application.External.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US5001ValidateEmailTest extends BaseTest {
 
 	@Steps

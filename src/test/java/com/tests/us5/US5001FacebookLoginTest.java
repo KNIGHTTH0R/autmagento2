@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +18,14 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.steps.external.FacebookRegistrationSteps;
 import com.tests.BaseTest;
-import com.tools.env.constants.FilePaths;
-import com.tools.env.variables.UrlConstants;
+import com.tools.constants.FilePaths;
+import com.tools.constants.UrlConstants;
 import com.tools.requirements.Application;
 
 
 @WithTag(name = "US5", type = "frontend,external")
 @Story(Application.External.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US5001FacebookLoginTest extends BaseTest{
 	
 	@Steps

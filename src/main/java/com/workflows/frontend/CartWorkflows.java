@@ -19,12 +19,10 @@ import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.ShippingModel;
 
-public class CartWorkflows {
+public class CartWorkflows{
 
 	@Steps
-	public static CheckoutValidationSteps checkoutValidationSteps;
-	@Steps
-	public static CustomVerification customVerification;
+	public CheckoutValidationSteps checkoutValidationSteps;
 
 	private static List<CartProductModel> cartProductsModelGrabbedList = new ArrayList<CartProductModel>();
 	private static List<CartProductModel> cartProductsModelCalculatedList = new ArrayList<CartProductModel>();
@@ -32,22 +30,24 @@ public class CartWorkflows {
 	private static List<CartProductModel> cartProducts = new ArrayList<CartProductModel>();
 	private static AddressModel billingAddress = new AddressModel();
 	private static String billingCountryName;
-	private static AddressModel shippingAddress = new AddressModel();
-	private static String shippingCountryName;
 
-	public void setBillingAddressModels(String billingCountryName, AddressModel billingAddress) {
-		CartWorkflows.billingAddress = billingAddress;
-		CartWorkflows.billingCountryName = billingCountryName;
+
+	public void setBillingAddressModels(String billingCountryNameValue, AddressModel billingAddressValue) {
+		billingAddress = billingAddressValue;
+		billingCountryName = billingCountryNameValue;
 	}
 
 	public void validateBillingAddress(String message) {
 		verifyCountry(billingCountryName, billingAddress.getCountryName());
 
 	}
+	
+	private static AddressModel shippingAddress = new AddressModel();
+	private static String shippingCountryName;
 
-	public void setShippingAddressModels(String shippingCountryName, AddressModel shippingAddress) {
-		CartWorkflows.shippingAddress = shippingAddress;
-		CartWorkflows.shippingCountryName = shippingCountryName;
+	public void setShippingAddressModels(String shippingCountryNameValue, AddressModel shippingAddressValue) {
+		shippingAddress = shippingAddressValue;
+		shippingCountryName = shippingCountryNameValue;
 	}
 
 	public void validateShippingAddress(String message) {
@@ -60,9 +60,9 @@ public class CartWorkflows {
 		CustomVerification.verifyTrue("Failure: Countries dont match !", address.contains(countryName));
 	}
 
-	public void setValidateProductsModels(List<ProductBasicModel> productsList, List<CartProductModel> cartProducts) {
-		CartWorkflows.productsList = productsList;
-		CartWorkflows.cartProducts = cartProducts;
+	public void setValidateProductsModels(List<ProductBasicModel> productsListValue, List<CartProductModel> cartProductsValue) {
+		productsList = productsListValue;
+		cartProducts = cartProductsValue;
 	}
 
 	@Step
@@ -95,9 +95,9 @@ public class CartWorkflows {
 
 	}
 
-	public void setRecalculatedCartProductsModels(List<CartProductModel> cartProductsModelGrabbedList, List<CartProductModel> cartProductsModelCalculatedList) {
-		CartWorkflows.cartProductsModelGrabbedList = cartProductsModelGrabbedList;
-		CartWorkflows.cartProductsModelCalculatedList = cartProductsModelCalculatedList;
+	public void setRecalculatedCartProductsModels(List<CartProductModel> cartProductsModelGrabbedListVal, List<CartProductModel> cartProductsModelCalculatedListVal) {
+		cartProductsModelGrabbedList = cartProductsModelGrabbedListVal;
+		cartProductsModelCalculatedList = cartProductsModelCalculatedListVal;
 	}
 
 	@Step
@@ -140,11 +140,6 @@ public class CartWorkflows {
 
 	@StepGroup
 	public void checkCalculationTotals(String message) {
-
-		checkoutValidationSteps.printCalculationModel("Calculated Values", String.valueOf(calculationModel.getAskingPrice()), String.valueOf(calculationModel.getFinalPrice()),
-				String.valueOf(calculationModel.getIpPoints()));
-		checkoutValidationSteps.printTotalsModel("Cart Totals", cartTotalModel.getSubtotal(), cartTotalModel.getDiscountSumString(), cartTotalModel.getTotalAmount(), cartTotalModel.getTax(),
-				cartTotalModel.getShipping(), cartTotalModel.getJewelryBonus(), cartTotalModel.getIpPoints());
 
 		CustomVerification.verifyTrue("The subtotal should be " + cartTotalModel.getSubtotal() + " and it is " + calculationModel.getAskingPrice() + "!",
 				cartTotalModel.getSubtotal().equals(calculationModel.getAskingPrice().toString()));

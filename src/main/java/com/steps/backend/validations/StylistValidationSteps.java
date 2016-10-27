@@ -26,7 +26,7 @@ public class StylistValidationSteps extends AbstractSteps {
 
 	@Step
 	public void validateDates(String grabbedDate, String expectedDate) {
-		CustomVerification.verifyTrue("Failure: The customer type is not as expected!", grabbedDate.contains(expectedDate));
+		CustomVerification.verifyTrue("Failure: The date not as expected! Actual: " + grabbedDate + "Expected : " + expectedDate, grabbedDate.contains(expectedDate));
 	}
 
 }

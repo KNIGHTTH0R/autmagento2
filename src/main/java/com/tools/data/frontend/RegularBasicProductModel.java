@@ -9,6 +9,24 @@ public class RegularBasicProductModel {
 	private String finalPrice;
 	private String bonusType;
 	private String bunosValue;
+	private String ipPoints;
+	private String deliveryDate;
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public String getIpPoints() {
+		return ipPoints;
+	}
+
+	public void setIpPoints(String ipPoints) {
+		this.ipPoints = ipPoints;
+	}
 
 	public String getName() {
 		return name;

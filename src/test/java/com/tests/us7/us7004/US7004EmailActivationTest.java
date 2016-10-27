@@ -1,9 +1,9 @@
 package com.tests.us7.us7004;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,14 +13,15 @@ import com.steps.EmailSteps;
 import com.steps.external.EmailClientSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.constants.ConfigConstants;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.ContextConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "external")
-@Story(Application.Registration.Customer.class)
-@RunWith(ThucydidesRunner.class)
-public class US7004EmailActivationTest extends BaseTest{
+@WithTag(name = "US7.4 Regular Customer Registration from Landing Page Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_4.class)
+@RunWith(SerenityRunner.class)
+public class US7004EmailActivationTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -28,10 +29,9 @@ public class US7004EmailActivationTest extends BaseTest{
 	public EmailSteps emailSteps;
 	@Steps
 	public CustomVerification customVerifications;
-	
-	public String clientName;
-	public String validateURL;
-	
+
+	private String clientName;
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -42,17 +42,11 @@ public class US7004EmailActivationTest extends BaseTest{
 		} else
 			System.out.println("The database has no entries");
 	}
-	
+
 	@Test
 	public void us7004EmailActivationTest() {
 
-		emailClientSteps.openMailinator();
-		validateURL = emailClientSteps.grabEmail(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""));
-//		System.out.println(validateURL);
-		emailSteps.validateURL(validateURL, "customer/account/confirm");
-		
-		customVerifications.printErrors();
+		emailClientSteps.confirmAccount(clientName.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT);
 	}
-	
-	
+
 }

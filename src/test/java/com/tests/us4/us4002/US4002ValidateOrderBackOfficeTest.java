@@ -1,17 +1,7 @@
 package com.tests.us4.us4002;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -25,7 +15,8 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
+import com.tools.constants.Credentials;
+import com.tools.constants.SoapKeys;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -33,17 +24,20 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.PrintUtils;
 import com.workflows.backend.OrderProductsWorkflows;
 import com.workflows.backend.OrderWorkflows;
 
-@WithTag(name = "US4", type = "backend")
-@Story(Application.Shop.ForMyselfCart.class)
-@RunWith(ThucydidesRunner.class)
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
+@WithTag(name = "US4.2 Shop for myself with Buy 3 get 1 for 50 %", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US4_2.class)
+@RunWith(SerenityRunner.class)
 public class US4002ValidateOrderBackOfficeTest extends BaseTest {
 
 	@Steps
@@ -59,44 +53,22 @@ public class US4002ValidateOrderBackOfficeTest extends BaseTest {
 	@Steps 
 	public CustomVerification customVerifications;
 
-	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
-	public static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
+	private static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
+	private static List<CalcDetailsModel> calcDetailsModelList = new ArrayList<CalcDetailsModel>();
 	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderTotalsModel orderTotalsModel = new OrderTotalsModel();
 	private static OrderTotalsModel shopTotalsModel = new OrderTotalsModel();
 	private static List<ShippingModel> shippingModelList = new ArrayList<ShippingModel>();
 
 	private String orderId;
-	private String beUser,bePass;
 
 	@Before
 	public void setUp() {
-		Properties prop = new Properties();
-		InputStream input = null;
 
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us4" + File.separator + "us4002.properties");
-			prop.load(input);
-			beUser = prop.getProperty("beUser");
-			bePass = prop.getProperty("bePass");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US4002Test" + SoapKeys.GRAB);
-		productsList = MongoReader.grabBasicProductModel("US4002Test" + SoapKeys.GRAB);
-		shippingModelList = MongoReader.grabShippingModel("US4002Test" + SoapKeys.CALC);
-		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US4002Test" + SoapKeys.CALC);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US4002ShopForMyselfWithBuy3GetOneTest" + SoapKeys.GRAB);
+		productsList = MongoReader.grabBasicProductModel("US4002ShopForMyselfWithBuy3GetOneTest" + SoapKeys.GRAB);
+		shippingModelList = MongoReader.grabShippingModel("US4002ShopForMyselfWithBuy3GetOneTest" + SoapKeys.CALC);
+		calcDetailsModelList = MongoReader.grabCalcDetailsModels("US4002ShopForMyselfWithBuy3GetOneTest" + SoapKeys.CALC);
 
 		if (orderModelList.size() == 1) {
 
@@ -139,18 +111,14 @@ public class US4002ValidateOrderBackOfficeTest extends BaseTest {
 	 */
 	@Test
 	public void us4002ValidateOrderBackOfficeTest() {
-		backEndSteps.performAdminLogin(beUser, bePass);
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderId);
 		ordersSteps.openOrder(orderId);
-		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderData();
+		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderProducts();
 		orderTotalsModel = ordersSteps.grabTotals();
 		orderInfoModel = ordersSteps.grabOrderInfo();
-
-		PrintUtils.printOrderItemsList(orderItemsList);
-		PrintUtils.printOrderTotals(orderTotalsModel);
-		PrintUtils.printOrderInfo(orderInfoModel);
 
 		orderWorkflows.setValidateCalculationTotals(orderTotalsModel, shopTotalsModel);
 		orderWorkflows.validateCalculationTotals("TOTALS VALIVATION");
@@ -158,7 +126,7 @@ public class US4002ValidateOrderBackOfficeTest extends BaseTest {
 		orderProductsWorkflows.setValidateProductsModels(productsList, orderItemsList);
 		orderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 		
-		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
+//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung geplant");
 		
 		customVerifications.printErrors();
 	}

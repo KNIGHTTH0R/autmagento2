@@ -34,11 +34,11 @@ if $checkWin = 1 Then
 	;ControlClick("")
 	MouseClick("primary", 261, 230, 1)
 	Sleep(500)
-	Send("pippajean")
+	Send("Navision")
 	Sleep(500)
 	Send("{TAB}")
 	Sleep(500)
-	Send("sn0wMob1l!")
+	Send("_N1v2s34N_")
 	Sleep(500)
 	Send("{ENTER}")
 

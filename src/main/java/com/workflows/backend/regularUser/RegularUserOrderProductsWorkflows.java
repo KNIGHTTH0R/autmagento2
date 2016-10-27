@@ -13,9 +13,9 @@ import com.tools.data.backend.OrderItemModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 
 public class RegularUserOrderProductsWorkflows {
-	
+
 	@Steps
-	public static OrderValidationSteps orderValidationSteps;
+	public OrderValidationSteps orderValidationSteps;
 	
 	private List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
 	private List<OrderItemModel> orderProducts = new ArrayList<OrderItemModel>();

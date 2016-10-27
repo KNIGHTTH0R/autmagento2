@@ -1,7 +1,8 @@
 package com.pages.frontend;
 
+import net.serenitybdd.core.annotations.findby.FindBy;
+
 import org.openqa.selenium.WebElement;
-import net.thucydides.core.annotations.findby.FindBy;
 
 import com.tools.requirements.AbstractPage;
 
@@ -15,6 +16,9 @@ public class LoginPage extends AbstractPage {
 
 	@FindBy(id = "send2")
 	private WebElement loginButton;
+	
+	@FindBy(id = "rememberme")
+	private WebElement rememberMeButton;
 
 	@FindBy(css = "button[rel='facebook-connect']")
 	private WebElement facebookLoginButton;

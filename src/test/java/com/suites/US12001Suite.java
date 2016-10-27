@@ -1,0 +1,67 @@
+package com.suites;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+import com.tests.uss12.uss12001.US12001ApplyCreditMemoOnKoboSubscriptionOrderTest;
+import com.tests.uss12.uss12001.US12001ApplyCreditMemoOnKoboUpgradeOrderTest;
+import com.tests.uss12.uss12001.US12001CancelCreditMemoForKoboSubscriptionTest;
+import com.tests.uss12.uss12001.US12001CancelCreditMemoForKoboUpgradeTest;
+import com.tests.uss12.uss12001.US12001CancelKoboInitialSubscriptionTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionCancelCmTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionCmTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest;
+import com.tests.uss12.uss12001.US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest;
+import com.tests.uss12.uss12001.US12001ConfirmCustomerTest;
+import com.tests.uss12.uss12001.US12001CustomerBuyWithContactBoosterTest;
+import com.tests.uss12.uss12001.US12001InitialKoboSubscriptionTest;
+import com.tests.uss12.uss12001.US12001KoboSubscriptionOrderEmailTest;
+import com.tests.uss12.uss12001.US12001KoboSubscriptionTest;
+import com.tests.uss12.uss12001.US12001KoboSubscriptionUpgradeOrderEmailTest;
+import com.tests.uss12.uss12001.US12001KoboSubscriptionUpgradeTest;
+import com.tests.uss12.uss12001.US12001MarkAsPaidInitialKoboOrderTest;
+import com.tests.uss12.uss12001.US12001MarkAsPaidKoboOrderTest;
+import com.tests.uss12.uss12001.US12001RegularCustomerRegistrationTest;
+import com.tests.uss12.uss12001.US12001StyleCoachRegistrationTest;
+import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest;
+import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest;
+import com.tests.uss12.uss12001.US12001VerifyStylistKoboStatusAfterSubscriptionTest;
+import com.tests.uss12.uss12001.US12001VoucherRunOutNotificationEmailTest;
+
+
+@SuiteClasses({
+	
+	US12001StyleCoachRegistrationTest.class,
+	US12001InitialKoboSubscriptionTest.class,
+	US12001CancelKoboInitialSubscriptionTest.class,
+	US12001KoboSubscriptionTest.class,
+	US12001MarkAsPaidKoboOrderTest.class,
+	US12001MarkAsPaidInitialKoboOrderTest.class,
+	US12001KoboSubscriptionOrderEmailTest.class,
+	US12001VerifyStylistKoboStatusAfterSubscriptionTest.class,
+	US12001KoboSubscriptionUpgradeTest.class,
+	US12001KoboSubscriptionUpgradeOrderEmailTest.class,
+	US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest.class,
+	US12001ApplyCreditMemoOnKoboSubscriptionOrderTest.class,
+	US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest.class,
+	US12001ChechUsesPerCouponAfterSubscriptionCmTest.class,
+	US12001CancelCreditMemoForKoboSubscriptionTest.class,
+	US12001VerifyStylistKoboStatusAfterCancelCmOnSubscriptionTest.class,
+	US12001ChechUsesPerCouponAfterSubscriptionCancelCmTest.class,
+	US12001ApplyCreditMemoOnKoboUpgradeOrderTest.class,
+	US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest.class,
+	US12001CancelCreditMemoForKoboUpgradeTest.class,
+	US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest.class,
+	US12001RegularCustomerRegistrationTest.class,
+	US12001ConfirmCustomerTest.class,
+	US12001CustomerBuyWithContactBoosterTest.class,
+	US12001VoucherRunOutNotificationEmailTest.class,
+	
+	
+})
+@RunWith(Suite.class)
+public class US12001Suite {
+
+}

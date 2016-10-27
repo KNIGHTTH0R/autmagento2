@@ -1,14 +1,14 @@
 package com.workflows.frontend.regularUser;
 
+import com.steps.frontend.ProductSteps;
+import com.steps.frontend.SearchSteps;
+import com.tools.cartcalculations.smf.CartDiscountsCalculation;
+import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.soap.ProductDetailedModel;
+
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-
-import com.steps.frontend.ProductSteps;
-import com.steps.frontend.SearchSteps;
-import com.tools.calculation.CartDiscountsCalculation;
-import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.data.soap.ProductDetailedModel;
 
 public class AddRegularProductsWorkflow {
 	@Steps
@@ -31,18 +31,29 @@ public class AddRegularProductsWorkflow {
 	@StepGroup
 	@Title("Add product to cart")
 	public RegularBasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		searchSteps.navigateToProductPage(model.getSku());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 
-		return productSteps.setRegularBasicProductAddToCart(qty, productProperty, finalPrice);
+		return productSteps.setRegularBasicProductAddToCart(model,qty, productProperty, finalPrice, ipPoints);
 	}
+
 	@StepGroup
 	@Title("Add product to wishlist")
 	public RegularBasicProductModel setBasicProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.searchAndSelectProduct(model.getSku(), model.getName());
+		searchSteps.navigateToProductPage(model.getSku());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
-		
-		return productSteps.setRegularBasicProductAddToWishlist(qty, productProperty, finalPrice);
+
+		return productSteps.setRegularBasicProductAddToWishlist(model,qty, productProperty, finalPrice);
 	}
 
+	@StepGroup
+	@Title("Add product to wishlist")
+	public RegularBasicProductModel updateBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {
+		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
+		return productSteps.updateRegularBasicProductAddToCart(model, qty, productProperty, finalPrice,ipPoints);
+	}
+
+	
 }

@@ -1,145 +1,58 @@
 package com.steps.external;
 
+import com.pages.external.MailinatorPage;
+import com.tools.requirements.AbstractSteps;
+import com.tools.utils.DateUtils;
+
 import net.thucydides.core.annotations.Step;
 
-import com.tools.env.variables.UrlConstants;
-import com.tools.requirements.AbstractSteps;
-
 public class EmailClientSteps extends AbstractSteps {
+
+	MailinatorPage mailPage;
+//	 YopmailPage mailPage;
 
 	private static final long serialVersionUID = 1L;
 
 	@Step
-	public void openMailinator() {
-		waitABit(2000);
-		getDriver().get(UrlConstants.URL_WEB_MAIL);
-	}
+	public String confirmAccount(String email, String title) {
 
-	@Step
-	public String grabEmail(String email) {
+		mailPage.openEmail(email, title);
+		navigate(mailPage.getConfirmationLink());
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
-		System.out.println("URL : " + url);
-		getDriver().get(url);
-
-		waitABit(5000);
-		String welcomeMessage = mailinatorPage().grabEmail();
-
-		if (welcomeMessage.isEmpty()) {
-			String confirmLink = mailinatorPage().confirmEmail();
-
-			waitABit(2000);
-			getDriver().get(confirmLink);
-			welcomeMessage = confirmLink;
-		}
-
-		waitABit(6000);
-		return welcomeMessage;
+		return DateUtils.getCurrentDate("MM/dd/YYYY");
 
 	}
 
 	@Step
-	public String grabEmail(String email, String title) {
+	public String registerFromLink(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
-		System.out.println("URL : " + url);
-		getDriver().get(url);
+		mailPage.openEmail(email, title);
+		navigate(mailPage.getRegisterLink());
 
-		waitABit(5000);
-		String welcomeMessage = mailinatorPage().grabEmail(title);
+		return DateUtils.getCurrentDate("MM/dd/YYYY");
 
-		if (welcomeMessage.isEmpty()) {
-			String confirmLink = mailinatorPage().confirmEmail();
+	}
 
-			waitABit(2000);
-			getDriver().get(confirmLink);
-			welcomeMessage = confirmLink;
-		}
+	@Step
+	public String grabConfirmationLinkFromEmail(String email, String title) {
 
-		waitABit(6000);
-		return welcomeMessage;
-
+		mailPage.openEmail(email, title);
+		return mailPage.getConfirmationLink();
 	}
 
 	@Step
 	public String grabEmailCoupon(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
+		mailPage.openEmail(email, title);
 
-		System.out.println("URL : " + url);
-		getDriver().get(url);
-
-		waitABit(5000);
-		String couponCode = mailinatorPage().grabEmail(title);
-
-		if (couponCode.isEmpty()) {
-			couponCode = mailinatorPage().grabCouponCode();
-			couponCode = couponCode.replace("Gratuliere! Du hast einen Gutschein für Deine Registrierung erhalten.", "");
-			couponCode = couponCode.replace("Dein Gutscheincode lautet: ", "");
-			couponCode = couponCode.replace("Diesen Code gibst Du im Warenkorb ein, nachdem Du Deine Lieblingsstücke ausgewählt hast.", "");
-			couponCode = couponCode.trim();
-			waitABit(2000);
-		}
-
-		return couponCode;
-
+		return mailPage.grabCouponCode();
 	}
 
 	@Step
 	public void validateThatEmailIsReceived(String email, String title) {
 
-		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
-		System.out.println("URL : " + url);
-		getDriver().get(url);
-
-		waitABit(5000);
-		mailinatorPage().grabEmail(title);
+		mailPage.openEmail(email, title);
 
 	}
 
-	@Step
-	public String validateThatEmailIsReceivedAndConfirm(String email, String title) {
-
-		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
-		System.out.println("URL : " + url);
-		getDriver().get(url);
-
-		waitABit(5000);
-		String welcomeMessage = mailinatorPage().grabEmail(title);
-
-		if (welcomeMessage.isEmpty()) {
-			String confirmLink = mailinatorPage().confirmEmail();
-
-			waitABit(2000);
-			getDriver().get(confirmLink);
-			welcomeMessage = confirmLink;
-		}
-
-		waitABit(6000);
-		return welcomeMessage;
-	}
-	@Step
-	public String validateThatEmailIsReceivedAndClickRegister(String email, String title) {
-		
-		// waitABit(5000);
-		String url = UrlConstants.URL_WEB_MAIL + "inbox.jsp?to=" + email;
-		
-		System.out.println("URL : " + url);
-		getDriver().get(url);
-		
-		waitABit(5000);
-		String welcomeMessage = mailinatorPage().grabEmail(title);
-		
-		if (welcomeMessage.isEmpty()) {
-			String confirmLink = mailinatorPage().registerFromEmail();
-			
-			waitABit(2000);
-			getDriver().get(confirmLink);
-			welcomeMessage = confirmLink;
-		}
-		
-		waitABit(6000);
-		
-		return welcomeMessage;
-	}
 }

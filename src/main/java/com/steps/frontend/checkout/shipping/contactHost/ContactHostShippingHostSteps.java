@@ -10,12 +10,27 @@ public class ContactHostShippingHostSteps extends AbstractSteps {
 
 	@Step
 	public void checkItemNotReceivedYet() {
-		contactHostShippingPage().checkItemNotReceivedYet();
+		contactHostShippingPage().checkItemNotReceivedYet();		
+	}
+
+	@Step
+	public void verifyThatRestrictedCountriesAreNotAvailable() {
+		contactHostShippingPage().verifyThatRestrictedCountriesAreNotAvailable();
 	}
 
 	@Step
 	public void verifyStyleCoachAndOrderForDetails(String details) {
 		contactHostShippingPage().verifyStyleCoachAndOrderForDetails(details);
+	}
+	
+	@Step
+	public void selectCountry(String country) {
+		contactHostShippingPage().selectCountry(country);
+	}
+
+	@Step
+	public void enterPLZ(String plz) {
+		contactHostShippingPage().enterPLZ(plz);
 	}
 
 }

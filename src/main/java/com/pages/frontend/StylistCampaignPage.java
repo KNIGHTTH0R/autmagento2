@@ -1,6 +1,6 @@
 package com.pages.frontend;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.WebElement;
 
@@ -13,6 +13,9 @@ public class StylistCampaignPage extends AbstractPage {
 
 	@FindBy(css = "div.full-width.chef a")
 	private WebElement starteJetztButton;
+	
+	@FindBy(css = "a[href*='/stylist/register/'].btn.btn-pink")
+	private WebElement startersetOrderButton;
 
 	public void clickJetztStartenButton() {
 		jetztStartenButton.click();
@@ -20,6 +23,10 @@ public class StylistCampaignPage extends AbstractPage {
 
 	public void clickStarteJetztButton() {
 		starteJetztButton.click();
+	}
+	
+	public void clickStartersetOrderButton() {
+		startersetOrderButton.click();
 	}
 
 }

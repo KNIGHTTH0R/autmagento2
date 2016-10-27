@@ -2,6 +2,7 @@ package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class PartyCreationSteps extends AbstractSteps {
@@ -39,10 +40,17 @@ public class PartyCreationSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void verifyThatPartyCountryListDoesNotContainCountry() {
+		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
+	}
+
+	@Step
 	public String fillPartyDetailsForStylistHost() {
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
+		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
 		return partyCreationPage().submitParty();
+
 	}
 
 	@Step
@@ -51,13 +59,18 @@ public class PartyCreationSteps extends AbstractSteps {
 		partyCreationPage().typeCustomerName(name);
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
+		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
+		partyCreationPage().selectPartyCountry(ContextConstants.COUNTRY_NAME);
+		waitABit(1000);
 		return partyCreationPage().submitParty();
+
 	}
 
 	@Step
 	public String fillPartyDetailsForNewCustomerHost() {
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
+		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
 		waitABit(2000);
 		return partyCreationPage().submitParty();
 

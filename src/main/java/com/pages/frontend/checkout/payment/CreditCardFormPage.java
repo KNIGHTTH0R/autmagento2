@@ -1,8 +1,8 @@
 package com.pages.frontend.checkout.payment;
 
-import org.openqa.selenium.WebElement;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import org.openqa.selenium.WebElement;
 
 import com.tools.requirements.AbstractPage;
 

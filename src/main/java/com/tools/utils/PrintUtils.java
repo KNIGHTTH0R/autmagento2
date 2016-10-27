@@ -2,27 +2,44 @@ package com.tools.utils;
 
 import java.util.List;
 
+import com.tools.data.BorrowCartCalcDetailsModel;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.HostCartCalcDetailsModel;
+import com.tools.data.PomCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
+import com.tools.data.StylistRegistrationCartCalcDetailsModel;
+import com.tools.data.TeamReportModel;
+import com.tools.data.TeamReportPartyTabModel;
+import com.tools.data.TeamReportTakeOffPhaseModel;
+import com.tools.data.TeamReportTeamTabModel;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
+import com.tools.data.backend.PartyBackendPerformanceModel;
 import com.tools.data.backend.StylistPropertiesModel;
+import com.tools.data.commission.CommissionPartyModel;
 import com.tools.data.email.EmailModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.frontend.BorrowCartTotalsModel;
+import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.ClosedPartyPerformanceModel;
+import com.tools.data.frontend.ContactModel;
+import com.tools.data.frontend.DykscSeachModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
+import com.tools.data.frontend.LoungeIpPerformanceModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.newsletter.SubscriberModel;
+import com.tools.data.soap.DBStylistModel;
 
 public class PrintUtils {
 
@@ -37,6 +54,98 @@ public class PrintUtils {
 			System.out.println(cartProductModel.getProductsPrice());
 			System.out.println(cartProductModel.getFinalPrice());
 			System.out.println(cartProductModel.getPriceIP());
+		}
+	}
+
+	public static void printTeamReportModelList(List<TeamReportModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		for (TeamReportModel model : list) {
+			System.out.println("------------------------");
+			System.out.println("styleCoachID " + model.getStyleCoachId());
+			System.out.println("styleCoachName " + model.getStyleCoachName());
+			System.out.println("activationDate " + model.getActivationDate());
+			System.out.println("ip " + model.getIp());
+			System.out.println("ipTop " + model.getIpTop());
+			System.out.println("tqv " + model.getTqv());
+			System.out.println("carrerLevelThisMonth " + model.getCarrerLevelThisMonth());
+			System.out.println("carrerLevelLastMonth " + model.getCarrerLevelLastMonth());
+			System.out.println("payLevel " + model.getPayLevel());
+			System.out.println("ipNewRecruited " + model.getIpNewRecruited());
+			System.out.println("newStylist " + model.getNewStylist());
+			System.out.println("newStylistTop " + model.getNewStylistTop());
+			System.out.println("ipThisMonth " + model.getIpThisMonth());
+			System.out.println("ipLastMonth " + model.getIpLastMonth());
+			System.out.println("partiesPlanned " + model.getPartiesPlanned());
+			System.out.println("partiesHeld " + model.getPartiesHeld());
+			System.out.println("partiesUpcoming " + model.getPartiesUpcoming());
+			System.out.println("revenuePerParty " + model.getRevenuePerParty());
+			System.out.println("takeOffPhaseEndDate " + model.getTakeOffPhaseEndDate());
+			System.out.println("daysLeft " + model.getDaysLeft());
+			System.out.println("level " + model.getLevel());
+		}
+	}
+
+	public static void printBorrowedCartList(List<BorrowedCartModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		for (BorrowedCartModel cartProductModel : list) {
+			System.out.println("------------------------");
+			System.out.println(cartProductModel.getName());
+			System.out.println(cartProductModel.getProdCode());
+			System.out.println(cartProductModel.getUnitPrice());
+			System.out.println(cartProductModel.getFinalPrice());
+			System.out.println(cartProductModel.getIpPoints());
+		}
+	}
+
+	public static void printCommisionPartyModel(CommissionPartyModel commisionPartyModel) {
+		System.out.println(" *** Print Commision Party Model *** ");
+
+		System.out.println("------------------------");
+		System.out.println(commisionPartyModel.getPartyDateTime());
+		System.out.println(commisionPartyModel.getNrOfOrders());
+		System.out.println(commisionPartyModel.getNrOfInvalidOrders());
+		System.out.println(commisionPartyModel.getRetailValue());
+		System.out.println(commisionPartyModel.getGrandRetailValue());
+		System.out.println(commisionPartyModel.getIp());
+		System.out.println(commisionPartyModel.getStylistId());
+		System.out.println(commisionPartyModel.getContactId());
+		System.out.println(commisionPartyModel.getHostCustomerId());
+		System.out.println(commisionPartyModel.getPartyDateTime());
+		System.out.println(commisionPartyModel.getLocation());
+		System.out.println(commisionPartyModel.getStreet());
+		System.out.println(commisionPartyModel.getPostalCode());
+		System.out.println(commisionPartyModel.getCity());
+		System.out.println(commisionPartyModel.getAdditional());
+		System.out.println(commisionPartyModel.getCreatedAt());
+		System.out.println(commisionPartyModel.getConfirmedAt());
+		System.out.println(commisionPartyModel.getUpdatedAt());
+		System.out.println(commisionPartyModel.getDeletedAt());
+
+	}
+
+	public static void printListDbStylists(List<DBStylistModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		for (DBStylistModel dBStylistModel : list) {
+			System.out.println("------------------------");
+
+			System.out.println(dBStylistModel.getStylistId());
+			System.out.println(dBStylistModel.getEmail());
+			System.out.println(dBStylistModel.getFirstName());
+			System.out.println(dBStylistModel.getDistanceFromCoordinates());
+			System.out.println("Customer leads: " + dBStylistModel.getTotalCustomerReceived());
+			System.out.println("SC leads: " + dBStylistModel.getTotalSCReceived());
+			System.out.println("Host leads: " + dBStylistModel.getTotalHostReceived());
+		}
+	}
+
+	public static void printListDykscSeachModel(List<DykscSeachModel> list) {
+		System.out.println(" *** Print List from Cart *** ");
+		for (DykscSeachModel stylist : list) {
+			System.out.println("------------------------");
+
+			System.out.println(stylist.getId());
+			System.out.println(stylist.getName());
+
 		}
 	}
 
@@ -156,6 +265,57 @@ public class PrintUtils {
 		System.out.println("ip " + model.getIpPoints());
 	}
 
+	public static void printSubscriberData(SubscriberModel model) {
+		System.out.println(" *** Print Subscriber configuration *** ");
+		System.out.println("------------------------");
+		System.out.println("email: " + model.getEmail());
+		System.out.println("activated at: " + model.getActivatedAt());
+		System.out.println("country: " + model.getCountry());
+		System.out.println("revenue 3 months: " + model.getRevenue3Months());
+		System.out.println("revenue 1 year: " + model.getRevenue1Year());
+		System.out.println("is stylist: " + model.getIsStylist());
+		System.out.println("last Purchase: " + model.getLastPurchase());
+		System.out.println("registration date: " + model.getRegistrationDate());
+		System.out.println("preffered website: " + model.getPreferredWebsite());
+		System.out.println("product sku: " + model.getProductSku());
+		System.out.println("contact or user: " + model.getContactOrUser());
+		System.out.println("revenue 6 months: " + model.getRevenu6Months());
+		System.out.println("Customer used a kobo voucher:" + model.getKoboUsed());
+		System.out.println("FirstName:" + model.getFirstName());
+		System.out.println("LastName:" + model.getLastName());
+		System.out.println("SC is subscribed to kobo:" + model.getKoboCode());
+		System.out.println("SC sponsor Name:" + model.getSCsponsorName());
+		System.out.println("SC sponsor email:" + model.getSCsponsorEmail());
+		System.out.println("SC sponsor phone:" + model.getSCsponsorPhone());
+		System.out.println("SC sponsor shop:" + model.getSCsponsorShop());
+		System.out.println("Product Name:" + model.getProductName());
+		System.out.println("Customer used kobo voucher:" + model.getCustKobo());
+		System.out.println("Flag stylist:" + model.getFlagStylist());
+		System.out.println("Flag host:" + model.getFlagHost());
+
+	}
+
+	public static void printCustomerSubscriberData(SubscriberModel model) {
+		System.out.println(" *** Print Subscriber configuration *** ");
+		System.out.println("------------------------");
+		System.out.println("email: " + model.getEmail());
+		System.out.println("country: " + model.getCountry());
+		System.out.println("revenue 3 months: " + model.getRevenue3Months());
+		System.out.println("revenue 1 year: " + model.getRevenue1Year());
+		System.out.println("is stylist: " + model.getIsStylist());
+		System.out.println("last Purchase: " + model.getLastPurchase());
+		System.out.println("preffered website: " + model.getPreferredWebsite());
+		System.out.println("product sku: " + model.getProductSku());
+		System.out.println("contact or user: " + model.getContactOrUser());
+		System.out.println("revenue 6 months: " + model.getRevenu6Months());
+		System.out.println("FirstName:" + model.getFirstName());
+		System.out.println("LastName:" + model.getLastName());
+		System.out.println("Customer used kobo voucher:" + model.getCustKobo());
+		System.out.println("Flag stylist:" + model.getFlagStylist());
+		System.out.println("Flag host:" + model.getFlagHost());
+
+	}
+
 	public static void printRegularUserCartTotalsModel(RegularUserCartTotalsModel model) {
 		System.out.println(" *** Print Total section from Cart *** ");
 		System.out.println("------------------------");
@@ -181,6 +341,16 @@ public class PrintUtils {
 		System.out.println("tax " + model.getTax());
 		System.out.println("shiping " + model.getShipping());
 		System.out.println("total amount " + model.getTotalAmount());
+
+	}
+
+	public static void printBorrowCartTotalsModel(BorrowCartTotalsModel model) {
+		System.out.println(" *** Print Total section from Cart *** ");
+		System.out.println("------------------------");
+		System.out.println("subtotal " + model.getSubtotal());
+		System.out.println("tax " + model.getTax());
+		System.out.println("total amount " + model.getTotalAmount());
+		System.out.println("ip points " + model.getIpPoints());
 
 	}
 
@@ -232,6 +402,16 @@ public class PrintUtils {
 		System.out.println(dataModel.getHomeTown());
 		System.out.println(dataModel.getPhoneNumber());
 		System.out.println(dataModel.getCountryName());
+	}
+
+	public static void printClosedPartyModel(ClosedPartyPerformanceModel model) {
+		System.out.println("---- print ClosedPartyPerformanceModel ----");
+		System.out.println(model.getFourthyDiscounts());
+		System.out.println(model.getIp());
+		System.out.println(model.getIpInPayment());
+		System.out.println(model.getJewelryBonus());
+		System.out.println(model.getNoOfOrders());
+		System.out.println(model.getRetail());
 	}
 
 	public static void printEmailList(List<EmailModel> emailList) {
@@ -321,6 +501,17 @@ public class PrintUtils {
 		System.out.println("DiscountPrice " + shippingTotals.getDiscountPrice());
 		System.out.println("ShippingPrice " + shippingTotals.getShippingPrice());
 		System.out.println("TotalAmount " + shippingTotals.getTotalAmount());
+		System.out.println("TAX - only for tp orders " + shippingTotals.getTax());
+	}
+
+	public static void printStarterSetCalcDetailsTotals(
+			StylistRegistrationCartCalcDetailsModel stylistRegistrationCartCalcDetailsModel) {
+		System.out.println("------------------------");
+		System.out.println("SubTotal " + stylistRegistrationCartCalcDetailsModel.getSubTotal());
+		System.out.println("DiscountPrice " + stylistRegistrationCartCalcDetailsModel.getVoucherDiscount());
+		System.out.println("ShippingPrice " + stylistRegistrationCartCalcDetailsModel.getShipping());
+		System.out.println("Tax " + stylistRegistrationCartCalcDetailsModel.getTax());
+		System.out.println("Total amount " + stylistRegistrationCartCalcDetailsModel.getTotalAmount());
 	}
 
 	public static void printProductBasicModel(ProductBasicModel productNow) {
@@ -356,6 +547,26 @@ public class PrintUtils {
 
 	}
 
+	public static void printBorrowCartCalcDetailsModel(BorrowCartCalcDetailsModel calculatedDetailsModel) {
+		System.out.println("printBorrowCartCalcDetailsModel -----------------------------");
+
+		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
+		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());
+		System.out.println("tax : " + calculatedDetailsModel.getTax());
+		System.out.println("ip points : " + calculatedDetailsModel.getIpPoints());
+
+	}
+
+	public static void printPomCartCalcDetailsModel(PomCartCalcDetailsModel calculatedDetailsModel) {
+		System.out.println("printPomCartCalcDetailsModel -----------------------------");
+
+		System.out.println("totalAmount : " + calculatedDetailsModel.getTotalAmount());
+		System.out.println("subTotal : " + calculatedDetailsModel.getSubTotal());
+		System.out.println("tax : " + calculatedDetailsModel.getTax());
+		System.out.println("discopunt : " + calculatedDetailsModel.getPomDiscount());
+
+	}
+
 	public static void printHostCartCalcDetailsModel(HostCartCalcDetailsModel calculatedDetailsModel) {
 		System.out.println("printRegularCartCalcDetailsModel -----------------------------");
 
@@ -366,4 +577,91 @@ public class PrintUtils {
 		System.out.println("Segments : " + calculatedDetailsModel.getSegments());
 
 	}
+
+	public static void printPartyBackendPerformanceModel(PartyBackendPerformanceModel partyModel) {
+		System.out.println("printPartyBackendPerformanceModel -----------------------------");
+		System.out.println("noOfOrders : " + partyModel.getNoOfOrders());
+		System.out.println("retail : " + partyModel.getRetail());
+		System.out.println("ip: " + partyModel.getIp());
+		System.out.println("JB :" + partyModel.getJewelryBonus());
+		System.out.println("Forty discount : " + partyModel.getFourthyDiscounts());
+
+	}
+
+	public static void printContactModel(ContactModel contactModel) {
+		System.out.println("printContactModel -----------------------------");
+		System.out.println("name : " + contactModel.getName());
+		System.out.println("street : " + contactModel.getStreet());
+		System.out.println("number : " + contactModel.getNumber());
+		System.out.println("zip : " + contactModel.getZip());
+		System.out.println("town : " + contactModel.getTown());
+		System.out.println("contry : " + contactModel.getCountry());
+		System.out.println("party: " + contactModel.getPartyHostStatus());
+		System.out.println("SC :" + contactModel.getStyleCoachStatus());
+		System.out.println("newsletter :" + contactModel.getNewsletterStatus());
+		System.out.println("Created at : " + contactModel.getCreatedAt());
+
+	}
+
+	public static void printLoungeIpPerformanceModel(LoungeIpPerformanceModel loungeIpPerformanceModel) {
+
+		System.out.println("printLoungeIpPerformanceModel -----------------------------");
+		System.out.println("Carrer : " + loungeIpPerformanceModel.getCareerLevel());
+		System.out.println("Pay level : " + loungeIpPerformanceModel.getPayLevel());
+		System.out.println("Ip : " + loungeIpPerformanceModel.getIndividualPoints());
+		System.out.println("TP : " + loungeIpPerformanceModel.getTeamPoints());
+		System.out.println("Frontliners : " + loungeIpPerformanceModel.getStyleCoachFirstLevel());
+		System.out.println("Gold SC : " + loungeIpPerformanceModel.getGoldStyleCoaches());
+
+	}
+
+	public static void printTeamReportTeamTabModel(List<TeamReportTeamTabModel> list) {
+		for (TeamReportTeamTabModel teamReportTeamTabModel : list) {
+			System.out.println("printTeamReportTeamTabModel -----------------------------");
+			System.out.println("Stylist ID : " + teamReportTeamTabModel.getStyleCoachId());
+			System.out.println("Stylist Name : " + teamReportTeamTabModel.getStyleCoachName());
+			System.out.println("Sponsor name : " + teamReportTeamTabModel.getSponsorName());
+			System.out.println("Activation Date : " + teamReportTeamTabModel.getActivationDate());
+			System.out.println("IPs : " + teamReportTeamTabModel.getIp());
+			System.out.println("TP : " + teamReportTeamTabModel.getTqv());
+			System.out.println("Career Level this month : " + teamReportTeamTabModel.getCarrerLevelThisMonth());
+			System.out.println("Career Level last month : " + teamReportTeamTabModel.getCarrerLevelLastMonth());
+			System.out.println("Pay Level : " + teamReportTeamTabModel.getPayLevel());
+			System.out.println("Ips inclu. new recruited : " + teamReportTeamTabModel.getIpNewRecruited());
+			System.out.println("Vacation month : " + teamReportTeamTabModel.getVacationMonth());
+			System.out.println("New Scs : " + teamReportTeamTabModel.getNewStylist());
+			System.out.println("Quit date: " + teamReportTeamTabModel.getQuitDate());
+		}
+	}
+
+	public static void printTeamReportPartyTabModel(List<TeamReportPartyTabModel> list) {
+		for (TeamReportPartyTabModel teamReportPartyTabModel : list) {
+			System.out.println("printTeamReportPartyTabModel -----------------------------");
+			System.out.println("Stylist ID : " + teamReportPartyTabModel.getStyleCoachId());
+			System.out.println("Stylist Name : " + teamReportPartyTabModel.getStylistName());
+			System.out.println("Sponsor name : " + teamReportPartyTabModel.getSponsorName());
+			System.out.println("Ips this month : " + teamReportPartyTabModel.getIpThisMonth());
+			System.out.println("IPs last month : " + teamReportPartyTabModel.getIpLastMonth());
+			System.out.println("Party Held : " + teamReportPartyTabModel.getPartiesHeld());
+			System.out.println("Party planned : " + teamReportPartyTabModel.getPartiesPlanned());
+			System.out.println("Party Upcoming : " + teamReportPartyTabModel.getPartiesUpcoming());
+			System.out.println("Ips per party : " + teamReportPartyTabModel.getRevenuePerParty());
+		}
+	}
+
+	public static void printTeamReportTakeOffPhaseTabModel(List<TeamReportTakeOffPhaseModel> list) {
+		for (TeamReportTakeOffPhaseModel teamReportTakeOffPhaseModel : list) {
+			System.out.println("printTeamReportTakeOffPhaseTabModel -----------------------------");
+			System.out.println("Stylist ID : " + teamReportTakeOffPhaseModel.getStyleCoachId());
+			System.out.println("Stylist Name : " + teamReportTakeOffPhaseModel.getStylistName());
+			System.out.println("Sponsor name : " + teamReportTakeOffPhaseModel.getSponsorName());
+			System.out.println("Start date : " + teamReportTakeOffPhaseModel.getActivationDate());
+			System.out.println("End date : " + teamReportTakeOffPhaseModel.getTakeOffPhaseEndDate());
+			System.out.println("Days left: " + teamReportTakeOffPhaseModel.getDaysLeft());
+			System.out.println("Ips : " + teamReportTakeOffPhaseModel.getIp());
+			System.out.println("Style coaches won : " + teamReportTakeOffPhaseModel.getNewStylistTop());
+
+		}
+	}
+
 }

@@ -1,15 +1,17 @@
 
 package com.steps.frontend.checkout.cart.regularCart;
 
+import java.text.ParseException;
 import java.util.List;
-
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Title;
+import java.util.Locale;
 
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Title;
 
 public class RegularUserCartSteps extends AbstractSteps {
 
@@ -22,13 +24,32 @@ public class RegularUserCartSteps extends AbstractSteps {
 	}
 
 	@Step
+	public String selectDeliveryDate(String productCode, Locale locale) throws ParseException {
+		return regularUserCartPage().selectDeliveryDate(productCode, locale);
+	}
+
+	@Step
+	public String getDeliveryDate(String productCode, Locale locale) throws ParseException {
+		return regularUserCartPage().getDeliveryDate(productCode, locale);
+	}
+
+	@Step
 	public void validateThatVoucherCannotBeAppliedMessage() {
 		regularUserCartPage().validateThatVoucherCannotBeAppliedMessage();
 	}
 
 	@Step
-	@Title("Update product list")
-	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode, String discountType) {
+	public void validateNotPrefferedShopAndGoToPreferredOne() {
+		regularUserCartPage().validateNotPrefferedShopAndGoToPreferredOne();
+	}
+
+	@Step
+	public void validateThatShippingOnSelectedCountryIsNotAllowed() {
+		regularUserCartPage().validateThatShippingOnSelectedCountryIsNotAllowed();
+	}
+
+	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode,
+			String discountType) {
 		regularUserCartPage().updateProductList(productsList, productCode, discountType);
 	}
 
@@ -38,23 +59,30 @@ public class RegularUserCartSteps extends AbstractSteps {
 	}
 
 	@Step
-	public RegularUserCartTotalsModel grabTotals() {
-		return regularUserCartPage().grabTotals();
+	public RegularUserCartTotalsModel grabTotals(String voucherCodeLabel) {
+		return regularUserCartPage().grabTotals(voucherCodeLabel);
 	}
 
 	@Step
 	public void typeCouponCode(String code) {
 		regularUserCartPage().typeCouponCode(code);
+		regularUserCartPage().submitVoucherCode();
+
 	}
 
-	@Step
-	public void submitVoucherCode() {
-		regularUserCartPage().submitVoucherCode();
-	}
+	// @Step
+	// public void submitVoucherCode() {
+	// regularUserCartPage().submitVoucherCode();
+	// }
 
 	@Step
 	public void selectShippingOption(String option) {
 		regularUserCartPage().selectShippingOption(option);
+	}
+
+	@Step
+	public void verifyMultipleDeliveryOption() {
+		regularUserCartPage().verifyMultipleDeliveryOption();
 	}
 
 	@Step
@@ -68,6 +96,10 @@ public class RegularUserCartSteps extends AbstractSteps {
 		getDriver().navigate().refresh();
 	}
 
+	@Step
+	public void searchProductsModal() {
+		regularUserCartPage().searchProductsModal();
+		getDriver().navigate().refresh();
+	}
+	
 }
-
-

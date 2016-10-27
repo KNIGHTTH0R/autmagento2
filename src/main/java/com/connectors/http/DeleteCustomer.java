@@ -11,27 +11,25 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.DOMException;
 
-import com.tools.SoapKeys;
-import com.tools.env.variables.UrlConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
+import com.tools.persistance.MongoReader;
 
 public class DeleteCustomer extends HttpSoapConnector {
 
-	public static void main(String args[]) throws SOAPException, IOException {
-		deleteCustomer("26236");
-	}
-
 	public static SOAPMessage deleteCustomer(String customerId) throws SOAPException, IOException {
-		String sessID = HttpSoapConnector.performLogin();
+		
+		String sessID = performLogin();
 
-		System.out.println("Sesion id :" + sessID);
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(deleteCustomerMessage(sessID, customerId), UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(deleteCustomerMessage(sessID, customerId), MongoReader.getBaseURL() + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
 
 	private static SOAPMessage deleteCustomerMessage(String sessID, String customerId) throws DOMException, SOAPException, IOException {
+		
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();

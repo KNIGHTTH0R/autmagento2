@@ -8,7 +8,7 @@ import com.tests.us7.us7003.US7003CheckCustomerActivationTest;
 import com.tests.us7.us7003.US7003RegistrationThankYouPageTest;
 
 @SuiteClasses({
-	//setup
+////	//setup
 //	US7003RegularUserRegistrationThankYouPageTest.class,
 //	US7003EmailActivationTest.class,
 	//actual test

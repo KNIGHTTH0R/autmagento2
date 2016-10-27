@@ -14,12 +14,11 @@ import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
 import com.tools.data.frontend.CartTotalsModel;
 import com.tools.data.frontend.ProductBasicModel;
-import com.tools.utils.PrintUtils;
 
 public class OrderWorkflows {
 
 	@Steps
-	public static OrderValidationSteps orderValidationSteps;
+	public OrderValidationSteps orderValidationSteps;
 
 	private List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private List<OrderItemModel> orderProducts = new ArrayList<OrderItemModel>();
@@ -36,20 +35,16 @@ public class OrderWorkflows {
 
 			OrderItemModel compare = orderValidationSteps.findProduct(productNow.getType(), productNow.getQuantity(), orderProducts);
 
-			PrintUtils.printProductsCompareBackend(productNow, compare);
 			if (compare.getProductName() != null && (productNow.getQuantity().contentEquals(compare.getNumber()))) {
 				orderValidationSteps.matchName(productNow.getName(), compare.getProductName());
 				orderValidationSteps.validateMatchPrice(productNow.getPrice(), compare.getPrice());
 				orderValidationSteps.validateMatchQuantity(productNow.getQuantity(), compare.getNumber());
-				// break TheForIN;
 			} else {
 				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
 			}
 			int index = orderProducts.indexOf(compare);
 			if (index > -1) {
 				orderProducts.remove(index);
-				System.out.println("index of " + compare.getProductName() + " removed");
-				System.out.println(orderProducts.size() + " items remained");
 			}
 		}
 
@@ -91,8 +86,6 @@ public class OrderWorkflows {
 	}
 
 	public void validateCalculationTotals(String string) {
-		PrintUtils.printOrderTotals(calculatedTotals);
-		PrintUtils.printOrderTotals(orderTotalsGrabbed);
 
 		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
 		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
@@ -108,8 +101,6 @@ public class OrderWorkflows {
 	}
 
 	public void validateRegularUserCalculationTotals(String string) {
-		PrintUtils.printOrderTotals(calculatedTotals);
-		PrintUtils.printOrderTotals(orderTotalsGrabbed);
 
 		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
 		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
@@ -119,6 +110,28 @@ public class OrderWorkflows {
 		verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
 		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());
 
+	}
+	public void validateBorrowCartCalculationTotals(String string) {
+		
+		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
+		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
+		verifyShipping(orderTotalsGrabbed.getShipping(), calculatedTotals.getShipping());
+		verifyTotalAmount(orderTotalsGrabbed.getTotalAmount(), calculatedTotals.getTotalAmount());
+		verifyTotalPaid(orderTotalsGrabbed.getTotalPaid(), calculatedTotals.getTotalPaid());
+		verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
+		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());
+		
+	}
+	public void validateStarterSetCartCalculationTotals(String string) {
+		
+		verifySubTotals(orderTotalsGrabbed.getSubtotal(), calculatedTotals.getSubtotal());
+		verifyTax(orderTotalsGrabbed.getTax(), calculatedTotals.getTax());
+		verifyShipping(orderTotalsGrabbed.getShipping(), calculatedTotals.getShipping());
+		verifyTotalAmount(orderTotalsGrabbed.getTotalAmount(), calculatedTotals.getTotalAmount());
+		verifyTotalPaid(orderTotalsGrabbed.getTotalPaid(), calculatedTotals.getTotalPaid());
+		verifyTotalRefunded(orderTotalsGrabbed.getTotalRefunded(), calculatedTotals.getTotalRefunded());
+		verifyTotalPayable(orderTotalsGrabbed.getTotalPayable(), calculatedTotals.getTotalPayable());
+		
 	}
 
 	// ----------------------------------------//
@@ -207,6 +220,11 @@ public class OrderWorkflows {
 	public void validateOrderStatus(String orderStatus, String string) {
 		CustomVerification.verifyTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
 
+	}
+	@Step
+	public void validateScheduledDeliveryDate(String orderStatus, String string) {
+		CustomVerification.verifyTrue("Failure: Status expected is " + string + ", actual status is " + orderStatus, orderStatus.contentEquals(string));
+		
 	}
 
 }

@@ -1,9 +1,9 @@
 package com.tests.us7.us7005;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,13 +13,14 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.variables.Credentials;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US7", type = "backend")
 @Story(Application.Registration.Customer.class)
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class US7005CheckCustomerActivationTest extends BaseTest {
 
 	@Steps
@@ -44,7 +45,7 @@ public class US7005CheckCustomerActivationTest extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 
-		expectedStatus = "Bestätigt";
+	
 	}
 
 	@Test
@@ -55,10 +56,8 @@ public class US7005CheckCustomerActivationTest extends BaseTest {
 		backEndSteps.searchForEmail(clientName);
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
-		stylistValidationSteps.validateStatus(grabStatus, expectedStatus);
-		
-		backEndSteps.deleteCustomer();
-		
+		stylistValidationSteps.validateStatus(grabStatus, ConfigConstants.CONFIRMED);		
+		backEndSteps.deleteCustomer();		
 		customVerifications.printErrors();
 	}
 

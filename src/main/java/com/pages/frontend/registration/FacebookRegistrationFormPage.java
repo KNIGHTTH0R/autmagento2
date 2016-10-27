@@ -1,6 +1,6 @@
 package com.pages.frontend.registration;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -43,7 +43,8 @@ public class FacebookRegistrationFormPage extends AbstractPage {
 	@FindBy(id = "accept-checkbox")
 	private WebElement acceptButton;
 
-	@FindBy(css = "button[title='Senden']")
+//	@FindBy(css = "button[title='Senden']")
+	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")     //int
 	private WebElement submitButton;
 
 	public void zipInput(String zipCode) {

@@ -15,14 +15,19 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
-import com.tools.SoapKeys;
+import com.tools.constants.Credentials;
+import com.tools.constants.SoapConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
+import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
-import com.tools.env.variables.Credentials;
-import com.tools.env.variables.UrlConstants;
+import com.tools.persistance.MongoReader;
 
 public class HttpSoapConnector {
+
+	// private static String sessID = LoginSoapCall.performLogin();
 
 	/**
 	 * Create a product and return the message. Performs login and creates a xml
@@ -33,21 +38,74 @@ public class HttpSoapConnector {
 	 * @throws SOAPException
 	 * @throws IOException
 	 */
-	public static SOAPMessage soapCreateProduct(ProductDetailedModel product) throws SOAPException, IOException {
+	public static SOAPMessage soapCreateCategory(CategoryModel category, String parentId) throws SOAPException, IOException {
 		String sessID = performLogin();
-		System.out.println("Sesion id :" + sessID);
-
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createProduct(product, sessID), UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
+		return soapResponse;
+	}
+
+	public static SOAPMessage soapCreateProduct(ProductDetailedModel product) throws SOAPException, IOException {
+		String sessID = performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(createProduct(product, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+
+	public static SOAPMessage soapUpdateProduct(ProductDetailedModel product, String productId) throws SOAPException, IOException {
+		String sessID = performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(updateProduct(product, sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+
+	public static SOAPMessage soapCreateJbZzzProduct(ProductDetailedModel product) throws SOAPException, IOException {
+		String sessID = performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(createJbZzzProduct(product, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+
+	public static SOAPMessage soapGetStylistInfo(String stylistId) throws SOAPException, IOException {
+		String sessID = performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(getStylistInfo(stylistId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+
+	public static SOAPMessage soapGetStylistList(String filter, String operand, String filterValue) throws SOAPException, IOException {
+		String sessID = performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(getStylistList(sessID, filter, operand, filterValue), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+
+	public static SOAPMessage soapProductInfo(String productId) throws SOAPException, IOException {
+		String sessID = performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 		return soapResponse;
 	}
 
 	/**
 	 * This method will login with a user in {@link SoapKeys} and return the
 	 * sessionID.
-	 * 
+	 *
 	 * @return
 	 * @throws SOAPException
 	 * @throws IOException
@@ -55,7 +113,12 @@ public class HttpSoapConnector {
 	protected static String performLogin() throws SOAPException, IOException {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(
+				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
+				MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(
+//				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
+//				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 		String result = "";
 
 		NodeList returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);
@@ -71,7 +134,7 @@ public class HttpSoapConnector {
 
 	/**
 	 * Create a login message for SOAP call.
-	 * 
+	 *
 	 * @param user
 	 * @param pass
 	 * @return
@@ -117,6 +180,28 @@ public class HttpSoapConnector {
 
 	}
 
+	private static SOAPMessage createCategory(CategoryModel category, String parentId, String ssID) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement categoryCreateRequestParam = soapBody.addChildElement(SoapKeys.CATEGORY_CREATE_REQUEST, SoapKeys.URN_PREFIX);
+		SOAPElement sessionID = categoryCreateRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+		SOAPElement parent = categoryCreateRequestParam.addChildElement(SoapKeys.PARENT_ID);
+		parent.addTextNode(parentId);
+
+		// Add product data here
+		categoryCreateRequestParam = generateCategoryData(categoryCreateRequestParam, category);
+
+		soapMessage.saveChanges();
+
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+
 	private static SOAPMessage createProduct(ProductDetailedModel product, String ssID) throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
@@ -137,6 +222,138 @@ public class HttpSoapConnector {
 
 		soapMessage.saveChanges();
 
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+
+	private static SOAPMessage updateProduct(ProductDetailedModel product, String ssID, String productId) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement catalogProductUpdateRequestParam = soapBody.addChildElement(SoapKeys.UPDATE_PRODUCT_CATALOG_CONTAINER, SoapKeys.URN_PREFIX);
+		SOAPElement sessionID = catalogProductUpdateRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+		SOAPElement productIdNode = catalogProductUpdateRequestParam.addChildElement(SoapKeys.PRODUCT_ID);
+		productIdNode.addTextNode(productId);
+
+		// Add product data here
+		catalogProductUpdateRequestParam = generateProductUpdateStockMessage(catalogProductUpdateRequestParam, product);
+
+		soapMessage.saveChanges();
+
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+
+	private static SOAPMessage createJbZzzProduct(ProductDetailedModel product, String ssID) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement catalogProductCreateRequestParam = soapBody.addChildElement(SoapKeys.CATALOG_CONTAINER, SoapKeys.URN_PREFIX);
+		SOAPElement sessionID = catalogProductCreateRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.TYPE, product.getType(), catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SET, product.getSet(), catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SKU, product.getSku(), catalogProductCreateRequestParam);
+
+		// Add product data here
+		catalogProductCreateRequestParam = generateProductMessage(catalogProductCreateRequestParam, product);
+
+		SOAPElement store = catalogProductCreateRequestParam.addChildElement(SoapKeys.STORE);
+		store.addTextNode(product.getStore());
+
+		catalogProductCreateRequestParam.addChildElement(generateCartIds(product.getAvailableCartsArray(), catalogProductCreateRequestParam));
+
+		soapMessage.saveChanges();
+
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+
+	private static SOAPMessage getStylistInfo(String id, String ssID) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement getStylistRequestParam = soapBody.addChildElement(SoapKeys.STYLIST_INFO, SoapKeys.URN_PREFIX);
+
+		SOAPElement sessionID = getStylistRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+
+		SOAPElement stylistId = getStylistRequestParam.addChildElement(SoapKeys.STYLIST_ID);
+		stylistId.addTextNode(id);
+
+		soapMessage.saveChanges();
+
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+
+	private static SOAPMessage getStylistList(String ssID, String filterName, String operand, String filterValue) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement getStylistRequestParam = soapBody.addChildElement(SoapKeys.STYLIST_LIST, SoapKeys.URN_PREFIX);
+
+		SOAPElement sessionID = getStylistRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+
+		SOAPElement filters = getStylistRequestParam.addChildElement(SoapKeys.FILTERS);
+		SOAPElement complexFilter = filters.addChildElement(SoapKeys.COMPLEX_FILTER);
+		SOAPElement complexObjectArray = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement key = complexObjectArray.addChildElement(SoapKeys.KEY);
+		key.addTextNode(filterName);
+		SOAPElement value = complexObjectArray.addChildElement(SoapKeys.VALUE);
+		SOAPElement key2 = value.addChildElement(SoapKeys.KEY);
+		key2.addTextNode(operand);
+		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
+		value2.addTextNode(filterValue);
+
+		// in testing
+		SOAPElement complexObjectArrayB = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
+		keyB.addTextNode(SoapConstants.SOAP_STATUS_FILTER);
+		SOAPElement valueB = complexObjectArrayB.addChildElement(SoapKeys.VALUE);
+		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
+		key2B.addTextNode(SoapConstants.EQUAL);
+		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
+		value2B.addTextNode("1");
+
+		soapMessage.saveChanges();
+
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+
+	private static SOAPMessage getProductInfo(String ssID, String productId) throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+
+		SOAPElement getProductRequestParam = soapBody.addChildElement(SoapKeys.PRODUCT_INFO, SoapKeys.URN_PREFIX);
+		SOAPElement sessionID = getProductRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+
+		SOAPElement productIds = getProductRequestParam.addChildElement(SoapKeys.PRODUCT_IDS);
+		SOAPElement complexObjectArray = productIds.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		complexObjectArray.addTextNode(productId);
+
+		soapMessage.saveChanges();
 		System.out.print("Request SOAP Message:");
 		soapMessage.writeTo(System.out);
 		System.out.println();
@@ -171,6 +388,11 @@ public class HttpSoapConnector {
 		productData = addOptionalField(SoapKeys.PRODUCT_IP, product.getIp(), productData);
 		productData = addOptionalField(SoapKeys.NEWS_FROM_DATE, product.getNewsFromDate(), productData);
 		productData = addOptionalField(SoapKeys.NEWS_TO_DATE, product.getNewsToDate(), productData);
+		productData = addOptionalField(SoapKeys.JEWERLY_BONUS_VALUE, product.getJewerlyBonusValue(), productData);
+		productData = addOptionalField(SoapKeys.ALLOW_JEWERLY_BONUS_CART, product.getJewelryBonusCart(), productData);
+
+		// productData = addOptionalField(SoapKeys.JEWELRY_BONUS,
+		// product.getJewelryBonus(), productData);
 
 		// Added stock data section
 		productData.addChildElement(generateStockDataMessage(product.getStockData(), productData));
@@ -185,6 +407,32 @@ public class HttpSoapConnector {
 		productData.addChildElement(generateTierPriceMessage(product.getTierPriceList(), productData));
 
 		// Lists and other objects
+		return productData;
+
+	}
+
+	private static SOAPElement generateCategoryData(SOAPElement bodyElement, CategoryModel cat) throws SOAPException {
+		SOAPElement categoryData = bodyElement.addChildElement(SoapKeys.CATEGORY_DATA);
+
+		categoryData = addOptionalField(SoapKeys.IS_ACTIVE, cat.getIsActive(), categoryData);
+		categoryData = addOptionalField(SoapKeys.NAME, cat.getName(), categoryData);
+		categoryData = addOptionalField(SoapKeys.INCLUDE_IN_MENU, cat.getIncludeInMenu(), categoryData);
+
+		categoryData.addChildElement(generateFilters(cat.getAvailableSortBy(), categoryData));
+
+		categoryData = addOptionalField(SoapKeys.DEFAULT_SORT_BY, cat.getDefaultSortBy(), categoryData);
+		categoryData = addOptionalField(SoapKeys.URL_KEY, cat.getUrlKey(), categoryData);
+
+		// Lists and other objects
+		return categoryData;
+
+	}
+
+	private static SOAPElement generateProductUpdateStockMessage(SOAPElement bodyElement, ProductDetailedModel product) throws SOAPException {
+		SOAPElement productData = bodyElement.addChildElement(SoapKeys.PRODUCT_DATA);
+
+		productData.addChildElement(generateStockDataMessage(product.getStockData(), productData));
+
 		return productData;
 
 	}
@@ -276,6 +524,20 @@ public class HttpSoapConnector {
 	 * @return
 	 * @throws SOAPException
 	 */
+	private static SOAPElement generateFilters(List<String> idsList, SOAPElement bodyElement) throws SOAPException {
+		SOAPElement websiteIds = bodyElement.addChildElement(SoapKeys.AVAILABLE_SORT_BY);
+
+		if (idsList.size() > 0) {
+			for (String product : idsList) {
+				SOAPElement objArray = websiteIds.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+				objArray.addTextNode(product);
+			}
+		} else {
+			System.out.println("Warning: Product - Website Ids list is empty - see soap - generateTierPriceMessage()");
+		}
+		return websiteIds;
+	}
+
 	private static SOAPElement generateWebsiteIds(List<String> idsList, SOAPElement bodyElement) throws SOAPException {
 		SOAPElement websiteIds = bodyElement.addChildElement(SoapKeys.WEBSITE_IDS);
 
@@ -286,6 +548,20 @@ public class HttpSoapConnector {
 			}
 		} else {
 			System.out.println("Warning: Product - Website Ids list is empty - see soap - generateTierPriceMessage()");
+		}
+		return websiteIds;
+	}
+
+	private static SOAPElement generateCartIds(List<String> idsList, SOAPElement bodyElement) throws SOAPException {
+		SOAPElement websiteIds = bodyElement.addChildElement(SoapKeys.CARTS);
+
+		if (idsList.size() > 0) {
+			for (String product : idsList) {
+				SOAPElement objArray = websiteIds.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+				objArray.addTextNode(product);
+			}
+		} else {
+			System.out.println("Warning: Product - Cart Ids list is empty");
 		}
 		return websiteIds;
 	}
@@ -351,5 +627,9 @@ public class HttpSoapConnector {
 		}
 
 		return result;
+	}
+
+	public static void main(String args[]) throws SOAPException, IOException {
+		HttpSoapConnector.performLogin();
 	}
 }

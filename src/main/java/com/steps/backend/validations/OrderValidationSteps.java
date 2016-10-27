@@ -91,4 +91,19 @@ public class OrderValidationSteps extends AbstractSteps {
 		return result;
 	}
 
+	public OrderItemModel findProduct(String productCode, List<OrderItemModel> orderProducts) {
+		OrderItemModel result = new OrderItemModel();
+
+		theFor: for (OrderItemModel orderProduct : orderProducts) {
+
+			if (orderProduct.getProductCode().contains(productCode)) {
+
+				result = orderProduct;
+
+				break theFor;
+			}
+		}
+		return result;
+	}
+
 }

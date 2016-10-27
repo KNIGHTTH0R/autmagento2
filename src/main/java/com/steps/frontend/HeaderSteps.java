@@ -4,9 +4,9 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
-import org.junit.Assert;
-
-import com.tools.env.variables.UrlConstants;
+import com.tools.constants.Separators;
+import com.tools.constants.TimeConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
@@ -15,9 +15,9 @@ public class HeaderSteps extends AbstractSteps {
 	private static final long serialVersionUID = 1221784607709066875L;
 
 	@Step
-	public String openCartPreview() {
+	public void openCartPreview() {
 		headerPage().clickShoppingBag();
-		return headerPage().getShoppingBagTotalSum();
+		// return headerPage().getShoppingBagTotalSum();
 	}
 
 	@Step
@@ -29,13 +29,51 @@ public class HeaderSteps extends AbstractSteps {
 	public void goToProfile() {
 		headerPage().clickOnProfileButton();
 	}
+
+	@Step
+	public void goToLounge() {
+		headerPage().clickLounge();
+	}
+
+	@Step
+	public void clickOnWishlistButton() {
+		headerPage().clickOnWishlistButton();
+	}
+
 	@Step
 	@Title("Go to create party page")
 	public void goToCreatePartyPage() {
-		headerPage().clickLounge();
 		loungePage().clickCreateParty();
-		
+		waitABit(1000);
+
 	}
+
+	@Step
+	@Title("Go to parties list")
+	public void goToPartieList() {
+		loungePage().clickGoToPartyList();
+		waitABit(1000);
+
+	}
+
+	@Step
+	@Title("Go to Order for customer page")
+	public void goToOrderForCustomerPage() {
+		headerPage().clickLounge();
+		loungePage().clickOrderForCustomer();
+		waitABit(1000);
+
+	}
+
+	@Step
+	@Title("Go to my business page")
+	public void goToMyBusinessPage() {
+		headerPage().clickLounge();
+		loungePage().goToMyBusiness();
+		waitABit(1000);
+
+	}
+
 	@Step
 	@Title("Go to create party for new contact")
 	public void goToCreatePartyWithNewContactPage() {
@@ -43,43 +81,56 @@ public class HeaderSteps extends AbstractSteps {
 		loungePage().clickCreateParty();
 		partyCreationPage().checkHostedByCustomer();
 		partyCreationPage().clickAddContact();
-		
+		waitABit(1000);
+
 	}
 
 	public void redirectToProfileHistory() {
-		getDriver().get(MongoReader.getBaseURL() + "simona/sales/order/history/");
+		navigate(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
+		
 	}
+
 	@Step
 	public void redirectToWishlist() {
-		getDriver().get(UrlConstants.BASE_FE_URL + "qateam/wishlist/");
-//		getDriver().get(UrlConstants.WISHLIST_URL);
-		wishlistPage().addAllProductsToCArt();
+		navigate(MongoReader.getBaseURL() + UrlConstants.WISHLIST_URL);
 	}
 
-	public void redirectTostylistsCustomerOrderReport() {
-		getDriver().get(UrlConstants.BASE_FE_URL + "qateam/stylereports/order/myorders/?type=customerorders");
-//		getDriver().get(UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
+	@Step
+	public void redirectToStylistsCustomerOrderReport() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		navigate(MongoReader.getBaseURL() + UrlConstants.STYLISTS_CUSTOMER_ORDER_REPORT);
 	}
 
+	@Step
+	public void redirectToStylistReports() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		navigate(MongoReader.getBaseURL() + UrlConstants.STYLISTS_REPORTS);
+	}
+
+	@Step
 	public void redirectToCartPage() {
-		getDriver().get(UrlConstants.BASE_FE_URL + "simona/checkout/cart/");
-//		getDriver().get(UrlConstants.CART_PAGE_URL);
+		navigate(MongoReader.getBaseURL() + UrlConstants.CART_PAGE_URL);
 	}
 
 	@StepGroup
 	public void navigateToRegisterForm() {
-		getDriver().get(MongoReader.getBaseURL());
-//		getDriver().get(UrlConstants.BASE_FE_URL);
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
-		loginPage().clickOnStylistRegistrationLink();
-		stylistCampaignPage().clickJetztStartenButton();
-		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		footerPage().clickRegistrierungLink();
+
+	}
+
+	@StepGroup
+	public void navigateToStylecoachRegisterFormUnderContext(String context) {
+		navigate(MongoReader.getBaseURL() + Separators.SLASH + context.toLowerCase());
+		waitABit(2000);
+		footerPage().clickRegistrierungLink();
 
 	}
 
 	@StepGroup
 	public void navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton() {
-		getDriver().get(UrlConstants.BASE_FE_URL);
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickOnStylistRegistrationLink();
 		stylistCampaignPage().clickStarteJetztButton();
@@ -89,13 +140,16 @@ public class HeaderSteps extends AbstractSteps {
 
 	@StepGroup
 	public void navigateToRegisterFormAndLogout() {
-		getDriver().get(UrlConstants.BASE_FE_URL);
+		// navigate(MongoReader.getBaseURL());
 		headerPage().clickAbmeldenButton();
 		headerPage().clickAnmeldenButton();
-		loginPage().clickOnStylistRegistrationLink();
-		stylistCampaignPage().clickJetztStartenButton();
-		starterSetPage().clickOnJetztStyleCoachWerdenButton();
+		footerPage().clickRegistrierungLink();
 
+	}
+
+	@Step
+	public void selectLanguage(String language) {
+		headerPage().selectLanguage(language);
 	}
 
 	@Step
@@ -114,20 +168,13 @@ public class HeaderSteps extends AbstractSteps {
 	}
 
 	@Step
-	public String getStyleCoachFirstNameFromProfile() {
-		return headerPage().getStyleCoachFirstNameFromProfile();
-	}
-
-	@Step
-	public void validateCustomeStyleCoachName(String boutiqueName, String styleCoachName) {
-		Assert.assertTrue("Failure: The stylecoach name and boutique name don't match !", boutiqueName.contentEquals(styleCoachName));
-		Assert.assertFalse("Failure: The stylecoach name and boutique is empty !", boutiqueName.contentEquals(""));
-	}
-
-	@Step
 	public void navigateToPartyPageAndStartOrder(String url) {
-		headerPage().navigateToPartyPage(url);
+		navigate(url);
 		partyCreationPage().clickOrderForHostess();
+	}
+
+	public boolean succesfullLogin() {
+		return headerPage().succesfullLogin();
 	}
 
 }

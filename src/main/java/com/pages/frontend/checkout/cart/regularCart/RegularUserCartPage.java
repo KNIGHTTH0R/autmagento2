@@ -1,25 +1,30 @@
 package com.pages.frontend.checkout.cart.regularCart;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
-import net.thucydides.core.annotations.findby.FindBy;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.cartcalculations.regularUser.RegularCartTotalsCalculation;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.constants.TimeConstants;
-import com.tools.env.variables.ContextConstants;
+import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class RegularUserCartPage extends AbstractPage {
 
@@ -32,15 +37,15 @@ public class RegularUserCartPage extends AbstractPage {
 	@FindBy(id = "coupon_code")
 	private WebElement couponCodeInput;
 
-	@FindBy(css = "a[title='Gutschein einlösen']")
+	@FindBy(css = "#discount-coupon-form a.button.gold-btn.bordered")
 	private WebElement submitVoucherCode;
 
 	@FindBy(css = "div.page-title ul.checkout-types button:last-child")
 	private WebElement kasseButton;
 
-	@FindBy(css = "button[title*='Warenkorb aktualisieren'] span")
+	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")
 	private WebElement updateButton;
-
+	
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")
 	private WebElement updateJewerlyBonus;
 
@@ -50,13 +55,32 @@ public class RegularUserCartPage extends AbstractPage {
 	@FindBy(css = "div.main.col1-layout")
 	private WebElement cartMainContainer;
 
+	@FindBy(css = "a[href*='/changePreferredShop']")
+	private WebElement changePrefferedShopLink;
+
+	@FindBy(css = "ul.messages li.error-msg")
+	private WebElement changePrefferedShopMessage;
+
 	@FindBy(css = "li.error-msg span")
 	private WebElement errorMessageContainer;
+	
+	@FindBy(css = ".cart-empty a.variable-text")
+	private WebElement searchProductLink;
+	
+	
 
 	public void validateThatVoucherCannotBeAppliedMessage() {
 		element(errorMessageContainer).waitUntilVisible();
-		Assert.assertTrue("The message <" + ContextConstants.VOUCHER_DISCOUNT_INCOMPATIBLE + "> dosn't appear and it should!",
+		Assert.assertTrue(
+				"The message <" + ContextConstants.VOUCHER_DISCOUNT_INCOMPATIBLE + "> dosn't appear and it should!",
 				errorMessageContainer.getText().contains(ContextConstants.VOUCHER_DISCOUNT_INCOMPATIBLE));
+	}
+
+	public void validateThatShippingOnSelectedCountryIsNotAllowed() {
+		element(errorMessageContainer).waitUntilVisible();
+		Assert.assertTrue(
+				"The message <" + ContextConstants.VOUCHER_DISCOUNT_INCOMPATIBLE + "> dosn't appear and it should!",
+				errorMessageContainer.getText().contains(ContextConstants.NOT_ALLOWED_TO_SHIP_ON_SELECTED_COUNTRY));
 	}
 
 	public void typeCouponCode(String code) {
@@ -67,6 +91,13 @@ public class RegularUserCartPage extends AbstractPage {
 	public void submitVoucherCode() {
 		element(submitVoucherCode).waitUntilVisible();
 		submitVoucherCode.click();
+		waitABit(3000);
+	}
+
+	public void validateNotPrefferedShopAndGoToPreferredOne() {
+		Assert.assertTrue("The not preffered shop message is missing",
+				changePrefferedShopMessage.getText().contains(ContextConstants.NOT_PREFERED_SHOP_MESSAGE));
+		changePrefferedShopLink.click();
 	}
 
 	public void selectProductDiscountType(String productCode, String discountType) {
@@ -75,7 +106,8 @@ public class RegularUserCartPage extends AbstractPage {
 		for (WebElement product : cartList) {
 			if (product.getText().contains(productCode)) {
 				foundProduct = true;
-				element(product.findElement(By.cssSelector("select.validate-select.discountSelect"))).selectByVisibleText(discountType);
+				element(product.findElement(By.cssSelector("select.validate-select.discountSelect")))
+						.selectByVisibleText(discountType);
 
 				break;
 			}
@@ -83,14 +115,74 @@ public class RegularUserCartPage extends AbstractPage {
 		Assert.assertTrue("The product with the product code " + productCode + " was not found", foundProduct);
 	}
 
-	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode, String discountType) {
+	/**
+	 * @param productCode
+	 *            selects the second delivery date from dropdown -> term
+	 *            purchase because of customer the first available delivery date
+	 *            is for term purchase beacuse of pippajean
+	 * @return selected delivery date
+	 * @throws ParseException
+	 */
+	public String selectDeliveryDate(String productCode, Locale locale) throws ParseException {
+		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
+		String deliveryDate = "";
+		boolean foundProduct = false;
+		for (WebElement product : cartList) {
+			if (product.getText().contains(productCode)) {
+				foundProduct = true;
+				WebElement delivery = element(
+						product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option:nth-child(2)")));
+				String[] tokens = delivery.getText().split(", ");
+				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
+				delivery.click();
+				waitFor(ExpectedConditions.invisibilityOfElementWithText(
+						By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+				break;
+			}
+		}
+		Assert.assertTrue("The product with the product code " + productCode + " was not found", foundProduct);
+
+		return deliveryDate;
+	}
+
+	/**
+	 * @param productCode
+	 * 
+	 * @return selected delivery date
+	 * @throws ParseException
+	 */
+
+	public String getDeliveryDate(String productCode, Locale locale) throws ParseException {
+		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
+		String deliveryDate = "";
+		boolean foundProduct = false;
+		for (WebElement product : cartList) {
+			if (product.getText().contains(productCode)) {
+				foundProduct = true;
+				WebElement delivery = element(product
+						.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[selected='selected']")));
+				String[] tokens = delivery.getText().split(", ");
+				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
+				break;
+			}
+		}
+		Assert.assertTrue("The product with the product code " + productCode + " was not found", foundProduct);
+
+		return deliveryDate;
+	}
+
+	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode,
+			String discountType) {
 		for (RegularBasicProductModel product : productsList) {
 			if (product.getProdCode().contentEquals(productCode)) {
 				product.setBonusType(discountType);
-				if (discountType.contentEquals(ConfigConstants.DISCOUNT_40_BONUS)) {
+				if (discountType.contentEquals(ContextConstants.DISCOUNT_40_BONUS)) {
 					product.setBunosValue(String.valueOf(calculate40Discount(product.getFinalPrice())));
-				} else if (discountType.contentEquals(ConfigConstants.JEWELRY_BONUS)) {
+					product.setIpPoints(String
+							.valueOf(RegularCartTotalsCalculation.calculate40DiscountForIp(product.getIpPoints())));
+				} else if (discountType.contentEquals(ContextConstants.JEWELRY_BONUS)) {
 					product.setBunosValue(product.getFinalPrice());
+					product.setIpPoints(String.valueOf(BigDecimal.ZERO));
 				}
 			}
 		}
@@ -106,7 +198,8 @@ public class RegularUserCartPage extends AbstractPage {
 	}
 
 	public void selectShippingOption(String option) {
-		List<WebElement> shippingOptionsList = getDriver().findElements(By.cssSelector("ul.purchase-options.form-list li.control"));
+		List<WebElement> shippingOptionsList = getDriver()
+				.findElements(By.cssSelector("ul.purchase-options.form-list li.control"));
 		boolean foundOption = false;
 		for (WebElement shippingOption : shippingOptionsList) {
 			if (shippingOption.getText().contentEquals(option)) {
@@ -117,22 +210,31 @@ public class RegularUserCartPage extends AbstractPage {
 		Assert.assertTrue("The " + option + " option was not found", foundOption);
 	}
 
+	public void verifyMultipleDeliveryOption() {
+		System.out.println(getDriver().findElement(By.id("cart-tp-type-multiple")).getAttribute("checked"));
+		// Assert.assertTrue("Wrong shipping option checked",
+		// getDriver().findElement(By.id("cart-tp-type-multiple"))
+		// .getAttribute("checked").contentEquals("checked"));
+	}
+
 	public List<RegularUserCartProductModel> grabProductsData() {
 		element(cartTable).waitUntilVisible();
 		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));
 
-		// waitABit(Constants.TIME_CONSTANT);
 		List<RegularUserCartProductModel> resultList = new ArrayList<RegularUserCartProductModel>();
 
 		for (WebElement webElementNow : entryList) {
 			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
 
-			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText()));
-			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText().replace(productNow.getName(), "").trim()));
-			productNow.setQuantity(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
-			// productNow.setBonusType(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(5) select option[selected='true']")).getText()));
-			productNow.setFinalPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name a")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
+					.replace(productNow.getName(), "").trim());
+			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(3) input")).getAttribute("value")));
+			productNow.setUnitPrice(FormatterUtils
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice(FormatterUtils.parseValueToTwoDecimals(
+					webElementNow.findElement(By.cssSelector("td:nth-child(6) span.price")).getText()));
 
 			resultList.add(productNow);
 		}
@@ -141,7 +243,7 @@ public class RegularUserCartPage extends AbstractPage {
 		return resultList;
 	}
 
-	public RegularUserCartTotalsModel grabTotals() {
+	public RegularUserCartTotalsModel grabTotals(String voucherCodeLabel) {
 		RegularUserCartTotalsModel resultModel = new RegularUserCartTotalsModel();
 		waitABit(TimeConstants.TIME_CONSTANT);
 
@@ -154,36 +256,45 @@ public class RegularUserCartPage extends AbstractPage {
 		for (WebElement itemNow : valuesList) {
 			String key = itemNow.findElement(By.cssSelector("td:first-child")).getText();
 
-			if (key.contains("ZWISCHENSUMME")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+			if (key.contains(ContextConstants.ZWISCHENSUMME)) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setSubtotal(valueTransformer);
 			}
-			if (key.contains("STEUER")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+			if (key.contains(ContextConstants.STEUER)) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTax(valueTransformer);
 			}
-			if (key.contains("VERSANDKOSTENFREI")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+			if (key.contains(ContextConstants.VERSANDKOSTENFREI)) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setShipping(valueTransformer);
 			}
-			if (key.contains("GENUTZTER SCHMUCK BONUS")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+			if (key.contains(ContextConstants.SCHMUCK_BONUS)) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.JEWELRY_BONUS, valueTransformer);
 			}
-			if (key.contains("G025FMDE")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+			if (key.contains(voucherCodeLabel)) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.VOUCHER_DISCOUNT, valueTransformer);
 			}
-			if (key.contains("40%") && key.contains("RABATT")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+			if ((key.contains("40%") && key.contains(ContextConstants.RABATT))
+					|| (key.contains("FORTY") && key.contains(ContextConstants.RABATT))) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.DISCOUNT_40_BONUS, valueTransformer);
 			}
 			if (key.contains("BUY 3 GET 1 FOR 50%")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.addDiscount(ConfigConstants.DISCOUNT_BUY_3_GET_1, valueTransformer);
 			}
-			if (key.contains("GESAMTBETRAG")) {
-				valueTransformer = FormatterUtils.cleanNumberToString(itemNow.findElement(By.cssSelector("td:last-child")).getText());
+			if (key.contains(ContextConstants.GESAMTBETRAG)) {
+				valueTransformer = FormatterUtils
+						.parseValueToTwoDecimals(itemNow.findElement(By.cssSelector("td:last-child")).getText());
 				resultModel.setTotalAmount(valueTransformer);
 			}
 		}
@@ -196,37 +307,15 @@ public class RegularUserCartPage extends AbstractPage {
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickUpdateCart() {
 		element(updateButton).waitUntilVisible();
 		updateButton.click();
 	}
-
-	// public void updateProductQuantity(String quantity, String... terms) {
-	// element(cartTable).waitUntilVisible();
-	// List<WebElement> entryList =
-	// getDriver().findElements(By.cssSelector("#shopping-cart-table tbody > tr"));
-	// boolean containsTerms = true;
-	// for (WebElement webElement : entryList) {
-	// containsTerms = true;
-	// for (String term : terms) {
-	// if
-	// (!webElement.findElement(By.cssSelector("td:nth-child(2)")).getText().contains(term))
-	// {
-	// containsTerms = false;
-	// }
-	// }
-	// if (containsTerms) {
-	// WebElement input =
-	// webElement.findElement(By.cssSelector("td:nth-child(3) input"));
-	// element(input).clear();
-	// element(input).sendKeys(quantity);
-	// break;
-	// }
-	// }
-	// Assert.assertTrue("The product was not found", containsTerms);
-	// }
+	
 
 	/**
 	 * Verify Wipe cart if cart contains any data
@@ -235,8 +324,16 @@ public class RegularUserCartPage extends AbstractPage {
 		element(cartMainContainer).waitUntilVisible();
 		System.out.println("TEXT from CONTAINER: " + cartMainContainer.getText());
 
-		Assert.assertTrue(cartMainContainer.getText().contains("WARENKORB IST LEER"));
+		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 
 	}
+	
+	
+	public void searchProductsModal() {
+		element(searchProductLink).waitUntilVisible();
+		searchProductLink.click();
+	}
+	
+
 
 }

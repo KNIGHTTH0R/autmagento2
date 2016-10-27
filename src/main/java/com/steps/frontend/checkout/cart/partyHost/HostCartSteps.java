@@ -2,13 +2,12 @@ package com.steps.frontend.checkout.cart.partyHost;
 
 import java.util.List;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Title;
-
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.HostCartTotalsModel;
 import com.tools.requirements.AbstractSteps;
+
+import net.thucydides.core.annotations.Step;
 
 public class HostCartSteps extends AbstractSteps {
 
@@ -19,8 +18,6 @@ public class HostCartSteps extends AbstractSteps {
 		hostCartPage().selectProductDiscountType(productCode, discountType);
 	}
 
-	@Step
-	@Title("Update product list")
 	public void updateProductList(List<HostBasicProductModel> productsList, String productCode, String discountType) {
 		hostCartPage().updateProductList(productsList, productCode, discountType);
 	}
@@ -28,6 +25,11 @@ public class HostCartSteps extends AbstractSteps {
 	@Step
 	public List<HostCartProductModel> grabProductsData() {
 		return hostCartPage().grabProductsData();
+	}
+
+	@Step
+	public List<HostCartProductModel> grabProductsDataWhenThereIsNoBonus() {
+		return hostCartPage().grabProductsDataWhenNoBonus();
 	}
 
 	@Step
@@ -46,9 +48,24 @@ public class HostCartSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void clickDeliverOnVariousDate() {
+		hostCartPage().clickDeliverOnVariousDate();
+	}
+
+	@Step
+	public void clickAllOnThisDate() {
+		hostCartPage().clickAllOnThisDate();
+	}
+
+	@Step
 	public void updateCart() {
 		hostCartPage().clickUpdateCart();
 		getDriver().navigate().refresh();
+	}
+
+	@Step
+	public void acceptInfoPopupForNotConsumedBonus() {
+		hostCartPage().acceptInfoPopupForNotConsumedBonus();
 	}
 
 }

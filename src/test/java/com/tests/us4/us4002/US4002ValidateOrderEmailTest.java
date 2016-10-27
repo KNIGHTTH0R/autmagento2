@@ -7,13 +7,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,21 +21,20 @@ import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProfileSteps;
+import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.EmailConstants;
-import com.tools.SoapKeys;
+import com.tools.constants.EmailConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US4", type = "external")
-@Story(Application.Shop.ForMyselfCart.class)
-@RunWith(ThucydidesRunner.class)
+@WithTag(name = "US4.2 Shop for myself with Buy 3 get 1 for 50 %", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US4_2.class)
+@RunWith(SerenityRunner.class)
 public class US4002ValidateOrderEmailTest extends BaseTest{
 	
 	@Steps
@@ -79,7 +76,7 @@ public class US4002ValidateOrderEmailTest extends BaseTest{
 			}
 		}
 		
-		orderModel = MongoReader.getOrderModel("US4002Test" + SoapKeys.GRAB);
+		orderModel = MongoReader.getOrderModel("US4002ShopForMyselfWithBuy3GetOneTest" + SoapKeys.GRAB);
 		
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 		
@@ -95,18 +92,7 @@ public class US4002ValidateOrderEmailTest extends BaseTest{
 	public void us4002ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(email, password);
 		
-		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
-		
-		Pattern pattern = Pattern.compile("<span class=\"price\">(.*?)</span>");
-		Matcher matcher = pattern.matcher(message);
-		if (matcher.find())
-		{
-		    System.out.println("cucuuuuuuuuuuuuuuuuu" + matcher.group(1));
-		}
-		
-		System.out.println(message);
-		System.out.println(orderModel.get(0).getOrderId());
-		System.out.println(orderModel.get(0).getTotalPrice());
+		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), true);
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 		customVerifications.printErrors();
 	

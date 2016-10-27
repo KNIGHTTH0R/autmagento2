@@ -1,10 +1,8 @@
 package com.tools.data.frontend;
 
-public class AddressModel {
+import com.tools.constants.ContextConstants;
 
-	/**
-	 * Simona Test Popa second billing, 2 89357 Cluj Austria
-	 */
+public class AddressModel {
 
 	private String streetAddress;
 	private String streetNumber;
@@ -14,11 +12,11 @@ public class AddressModel {
 	private String phoneNumber;
 
 	public AddressModel() {
-		setStreetAddress("Filandastraße");
-		setStreetNumber("22");
-		setHomeTown("Steglitz");
-		setPostCode("12165");
-		setCountryName("Deutschland");
+		setStreetAddress(ContextConstants.STREET_ADDRESS);
+		setStreetNumber(ContextConstants.STREET_NUMBER);
+		setHomeTown(ContextConstants.HOME_TOWN);
+		setPostCode(ContextConstants.POST_CODE);
+		setCountryName(ContextConstants.COUNTRY_NAME);
 		setPhoneNumber("00555123456");
 	}
 

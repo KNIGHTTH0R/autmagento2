@@ -1,10 +1,10 @@
 package com.tests.us7.us7002;
 
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,17 +13,17 @@ import org.junit.runner.RunWith;
 import com.steps.backend.BackEndSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.Credentials;
 import com.tools.data.backend.StylistPropertiesModel;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US7", type = "backend")
-@Story(Application.Registration.Customer.class)
-@RunWith(ThucydidesRunner.class)
+@WithTag(name = "US7.2 Regular Customer Registration on Context Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_2.class)
+@RunWith(SerenityRunner.class)
 public class US7002CheckCustomerActivation extends BaseTest {
 
 	@Steps
@@ -33,14 +33,14 @@ public class US7002CheckCustomerActivation extends BaseTest {
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public StylistPropertiesModel expectedCustomerData = new StylistPropertiesModel();
-	public String stylistEmail;
+	private StylistPropertiesModel expectedCustomerData = new StylistPropertiesModel();
+	private String stylistEmail;
 
 	@Before
 	public void setUp() throws Exception {
-		int size = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7002RegularCustRegistrationOnContextTest").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7002RegularCustomerRegistrationTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7002RegularCustRegistrationOnContextTest").get(0).getEmailName();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");

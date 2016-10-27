@@ -1,9 +1,9 @@
 package com.tests.us6.us6002;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,14 +19,14 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US6", type = "frontend")
-@Story(Application.Registration.Stylist.class)
-@RunWith(ThucydidesRunner.class)
-public class US6002CreateCustomerTest extends BaseTest{
+@WithTag(name = "US6.2 Sc Registration Existing Customer Test ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_2.class)
+@RunWith(SerenityRunner.class)
+public class US6002CreateCustomerTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
 
 	public CustomerFormModel customerData;
@@ -41,8 +41,7 @@ public class US6002CreateCustomerTest extends BaseTest{
 	}
 
 	@Test
-	public void us6002CreateFECustomerTest() {
-		System.out.println(customerData.getEmailName());
+	public void us6002CreateCustomerTest() {
 		customerRegistrationSteps.fillCreateCustomerForm(customerData, customerAddressData);
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();

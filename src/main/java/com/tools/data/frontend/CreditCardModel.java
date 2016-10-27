@@ -8,6 +8,15 @@ public class CreditCardModel {
 	private String yearExpiration;
 	private String cvcNumber;
 
+	public CreditCardModel() {
+		super();
+		this.cardNumber = "4111 1111 1111 1111";
+		this.cardName = "test";
+		this.monthExpiration = "08";
+		this.yearExpiration = "2018";
+		this.cvcNumber = "737";
+	}
+
 	public String getCardNumber() {
 		return cardNumber;
 	}

@@ -4,10 +4,11 @@ import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 
+import com.pages.backend.orders.details.OrderNotificationPage;
+import com.tools.constants.TimeConstants;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.backend.OrderTotalsModel;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class OrdersSteps extends AbstractSteps {
@@ -26,7 +27,7 @@ public class OrdersSteps extends AbstractSteps {
 	}
 
 	@Step
-	public List<OrderItemModel> grabOrderData() {
+	public List<OrderItemModel> grabOrderProducts() {
 		return orderItemsPage().grabOrderItems();
 	}
 
@@ -43,7 +44,54 @@ public class OrdersSteps extends AbstractSteps {
 	@Step
 	public void markOrderAsPaid() {
 		ordersActionsPage().markOrderAsPaid();
-		waitABit(TimeConstants.WAIT_TIME_LONG);
+		ordersActionsPage().waitForLoading();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
+	@Step
+	public void cancelOrder() {
+		ordersActionsPage().cancelOrder();
+		ordersActionsPage().waitForLoading();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
+
+	@Step
+	public void uncancelOrder() {
+		ordersActionsPage().uncancelOrder();
+		ordersActionsPage().waitForLoading();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
+
+	@Step
+	public void completeOrder() {
+		ordersActionsPage().clickInvoiceButton();
+		ordersActionsPage().checkCreateShippment();
+		ordersActionsPage().submitInvoice();
+		ordersActionsPage().verifyInvoiceShippingSubmitedMessage();
+
+	}
+
+	@Step
+	public void refundOrder() {
+		ordersActionsPage().clickcreditMemoButton();
+		waitABit(1000);
+		ordersActionsPage().refundOffline();
+		ordersActionsPage().verifyRefundedSuccessMessage();
+		waitABit(2000);
+	}
+
+	@Step
+	public void selectMenu(String tabName) {
+		orderDetailsNavPage().selectMenu(tabName);
+	}
+
+	@Step
+	public void verifyAuthorization(String shopperReference) {
+		orderNotificationPage().verifyAuthorization(shopperReference);
+	}
+
+	@Step
+	public void verifyCapture(String shopperReference) {
+		orderNotificationPage().verifyCapture(shopperReference);
+	}
 }

@@ -24,12 +24,28 @@ public class UpdatePartySteps extends AbstractSteps {
 		updatePartyPage().submitParty();
 	}
 
+	@Step
+	public void verifyThatCountryDropdownDoesNotContainNotAllowedCountries() {
+		updatePartyPage().verifyThatCountryDropdownDoesNotContainNotAllowedCountries();
+
+	}
+	@Step
+	public void selectNotAllowedCountryName(String countryName) {
+		partyDetailsPage().editParty();
+		updatePartyPage().selectCountryName(countryName);
+		updatePartyPage().submitParty();
+		
+		
+		
+	}
+
 	@StepGroup
 	public void updatePartyDateAndHour() {
 		partyDetailsPage().editParty();
 		updatePartyPage().selectFirstAvailableDate();
 		updatePartyPage().selectSecondAvailableHour();
 		updatePartyPage().submitParty();
+		waitABit(2000);
 	}
 
 	@StepGroup
@@ -38,6 +54,12 @@ public class UpdatePartySteps extends AbstractSteps {
 		updatePartyPage().confirmMoveParty();
 		updatePartyPage().selectSecondAvailableHour();
 		updatePartyPage().submitParty();
+		waitABit(2000);
+	}
+	@Step
+	public void verifyCountryRestrictionMessage() {
+		updatePartyPage().verifyCountryRestrictionMessage();
+		
 	}
 
 }

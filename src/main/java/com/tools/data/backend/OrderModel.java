@@ -11,18 +11,30 @@ public class OrderModel {
 
 	private String orderId;
 	private String date;
+	private String deliveryDate;
 	private String invoiceContact;
 	private String deliveryContact;
 	private String totalPrice;
 	private String status;
+	private String shopperReference;
 
 	public OrderModel() {
 		setOrderId("");
 		setDate("");
+		setDeliveryDate("");
 		setInvoiceContact("");
 		setDeliveryContact("");
 		setTotalPrice("");
 		setStatus("");
+		setShopperReference("");
+	}
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 
 	public String getOrderId() {
@@ -72,4 +84,13 @@ public class OrderModel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getShopperReference() {
+		return shopperReference;
+	}
+
+	public void setShopperReference(String shopperReference) {
+		this.shopperReference = shopperReference;
+	}
+
 }

@@ -1,6 +1,6 @@
 package com.tools.data.frontend;
 
-import com.tools.env.constants.ConfigConstants;
+import com.tools.constants.ConfigConstants;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;
 

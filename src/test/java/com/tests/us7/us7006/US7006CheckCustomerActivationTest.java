@@ -1,9 +1,9 @@
 package com.tests.us7.us7006;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,37 +13,36 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.validations.StylistValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.env.variables.Credentials;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US7", type = "backend")
-@Story(Application.Registration.Customer.class)
-@RunWith(ThucydidesRunner.class)
+@WithTag(name = "US7.6 Landing Page Registration Selected SC Test ", type = "Scenarios")
+@Story(Application.CustomerRegistration.US7_6.class)
+@RunWith(SerenityRunner.class)
 public class US7006CheckCustomerActivationTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	@Steps 
+	@Steps
 	public StylistValidationSteps stylistValidationSteps;
 
-	public String clientName;
-	public String grabStatus;
-	public String expectedStatus;
+	private String clientName;
+	private String grabStatus;
 
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US7006UserRegistrationSpecificStylistLandingPageTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7006LandingPageRegistrationSelectedScTest").size();
 		if (size > 0) {
-			clientName = MongoReader.grabCustomerFormModels("US7006UserRegistrationSpecificStylistLandingPageTest").get(0).getEmailName();
+			clientName = MongoReader.grabCustomerFormModels("US7006LandingPageRegistrationSelectedScTest").get(0).getEmailName();
 			System.out.println(clientName);
 		} else
 			System.out.println("The database has no entries");
 
-		expectedStatus = "Bestätigt";
 	}
 
 	@Test
@@ -55,11 +54,7 @@ public class US7006CheckCustomerActivationTest extends BaseTest {
 		backEndSteps.searchForEmail(clientName);
 		backEndSteps.openCustomerDetails(clientName);
 		grabStatus = backEndSteps.extractEmailConfirmationStatus();
-
-//		System.out.println("grabStatus: " + grabStatus);
-//		System.out.println("expectedStatus: " + expectedStatus);
-		stylistValidationSteps.validateStatus(grabStatus, expectedStatus);
-		
+		stylistValidationSteps.validateStatus(grabStatus, ConfigConstants.CONFIRMED);
 		customVerifications.printErrors();
 	}
 

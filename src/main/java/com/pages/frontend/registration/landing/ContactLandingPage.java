@@ -1,6 +1,6 @@
 package com.pages.frontend.registration.landing;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.WebElement;
 
@@ -8,10 +8,13 @@ import com.tools.requirements.AbstractPage;
 
 public class ContactLandingPage extends AbstractPage {
 
-	@FindBy(css = "input[value='frau']")
+	
+//	@FindBy(css = "input[value='frau']")
+	@FindBy(css = "li.control div input:nth-child(3)")      //int
 	private WebElement frauRadioButton;
 
-	@FindBy(css = "input[value='herr']")
+//	@FindBy(css = "input[value='herr']")
+	@FindBy(css = "li.control div input:first-child")     //int
 	private WebElement herrRadioButton;
 
 	@FindBy(name = "vorname")
@@ -75,6 +78,7 @@ public class ContactLandingPage extends AbstractPage {
 
 	public void inputPostCode(String postCode) {
 		element(plzInput).waitUntilVisible();
+		plzInput.clear();
 		plzInput.sendKeys(postCode);
 	}
 
@@ -102,5 +106,6 @@ public class ContactLandingPage extends AbstractPage {
 		element(okButton).waitUntilVisible();
 		okButton.click();
 	}
+
 
 }

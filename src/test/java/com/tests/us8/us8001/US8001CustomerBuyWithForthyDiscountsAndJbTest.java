@@ -1,52 +1,55 @@
 package com.tests.us8.us8001;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.CreateProduct;
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
-import com.tools.data.frontend.CreditCardModel;
+import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.DataGrabber;
-import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.UrlConstants;
+import com.tools.datahandler.DataGrabber;
+import com.tools.datahandler.RegularUserDataGrabber;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
-@RunWith(ThucydidesRunner.class)
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
+@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
+@Story(Application.RegularCart.US8_1.class)
+@RunWith(SerenityRunner.class)
 public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 	@Steps
@@ -62,6 +65,10 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
+	public GeneralCartSteps generalCartSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public AddRegularProductsWorkflow addRegularProductsWorkflow;
@@ -71,6 +78,8 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	public RegularCartValidationWorkflows regularCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
+	@Steps
+	public FooterSteps footerSteps;
 
 	private String username, password;
 	private String discountClass;
@@ -78,30 +87,26 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	private String shippingValue;
 	private String voucherCode;
 	private String voucherValue;
-
-	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = CreateProduct.createProductModel();
+		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
-		CreateProduct.createApiProduct(genProduct1);
+		MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct2 = CreateProduct.createProductModel();
+		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.setPrice("49.90");
-		CreateProduct.createApiProduct(genProduct2);
+		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = CreateProduct.createProductModel();
-		genProduct3.setPrice("100.00");
-		CreateProduct.createApiProduct(genProduct3);
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("10.00");
+		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -119,12 +124,6 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 			voucherCode = prop.getProperty("voucherCode");
 			voucherValue = prop.getProperty("voucherValue");
-
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -145,7 +144,15 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	@Test
 	public void us8001CustomerBuyWithForthyDiscountsAndJbTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		customerRegistrationSteps.wipeRegularCart();
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.goToNewItems();
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();
+		
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
@@ -157,20 +164,16 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		// TODO put the updateProductList in selectProductDiscountType method
-		// (maybe)
-		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ConfigConstants.JEWELRY_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ConfigConstants.JEWELRY_BONUS);
-		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ConfigConstants.DISCOUNT_40_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), ConfigConstants.DISCOUNT_40_BONUS);
+		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
+		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
-		regularUserCartSteps.submitVoucherCode();
-		// TODO move this (maybe)
 		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
-		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals();
+		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
 
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
 
@@ -183,7 +186,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	
 		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
 	
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
@@ -191,8 +194,9 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+		paymentSteps.payWithBankTransfer();
 	
 		confirmationSteps.grabRegularProductsList();
 		
@@ -202,7 +206,6 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		checkoutValidationSteps.verifySuccessMessage();
 
 		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		regularCartValidationWorkflows.performCartValidationsWith40DiscountAndJb();

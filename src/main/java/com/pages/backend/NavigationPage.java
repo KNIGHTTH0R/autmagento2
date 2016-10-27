@@ -2,13 +2,19 @@ package com.pages.backend;
 
 import java.util.List;
 
-import net.thucydides.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
+import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
+import net.serenitybdd.core.annotations.findby.FindBy;
+
+/**
+ * @author mihai
+ *
+ */
 public class NavigationPage extends AbstractPage {
 
 	@FindBy(id = "nav")
@@ -17,115 +23,47 @@ public class NavigationPage extends AbstractPage {
 	@FindBy(id = "message-popup-window")
 	private WebElement popUpWindow;
 
-	public void clickOnPromotions() {
-		element(navigationBar).waitUntilVisible();
-		evaluateJavascript("jQuery.noConflict();");
-		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-		
-		for (WebElement elementNow : elementList) {
-			if (elementNow.getText().contentEquals("Promotionen")) {
-				elementNow.click();
-				break;
-			}
-		}
-	}
-	
-	public void clickOnShoppingCartPriceRules() {
-		element(navigationBar).waitUntilVisible();
-		evaluateJavascript("jQuery.noConflict();");
-		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-
-		for (WebElement elementNow : elementList) {
-			if (elementNow.getText().contentEquals("Warenkorb Preisgebote")) {
-				elementNow.click();
-				break;
-			}
-		}
-	}
-	public void clickOnStyleCoach() {
-		element(navigationBar).waitUntilVisible();
-		evaluateJavascript("jQuery.noConflict();");
-		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-
-		for (WebElement elementNow : elementList) {
-			if (elementNow.getText().contentEquals("Stylecoach")) {
-				elementNow.click();
-				break;
-			}
-		}
-	}
-
-	public void clickOnStyleParties() {
-		element(navigationBar).waitUntilVisible();
-		evaluateJavascript("jQuery.noConflict();");
-		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-
-		for (WebElement elementNow : elementList) {
-			if (elementNow.getText().contentEquals("Style Parties")) {
-				elementNow.click();
-				break;
-			}
-		}
-	}
-
-	public void clickOnCustomers() {
-		element(navigationBar).waitUntilVisible();
-		evaluateJavascript("jQuery.noConflict();");
-		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-
-		for (WebElement elementNow : elementList) {
-			if (elementNow.getText().contentEquals("Kunden")) {
-				elementNow.click();
-				break;
-			}
-		}
-	}
-
-	public void clickOnManageCustomers() {
-		element(navigationBar).waitUntilVisible();
-		evaluateJavascript("jQuery.noConflict();");
-		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-
-		for (WebElement elementNow : elementList) {
-			if (elementNow.getText().contentEquals("Kunden verwalten")) {
-				elementNow.click();
-				break;
-			}
-		}
-	}
-
-	public void clickOnSales() {
-		element(navigationBar).waitUntilVisible();
-		evaluateJavascript("jQuery.noConflict();");
-
-		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
-
-		for (WebElement elementNow : elementList) {
-			if (elementNow.getText().contentEquals("Aufträge")) {
-				elementNow.click();
-				break;
-			}
-		}
-	}
-
 	public void dismissPopUp() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(popUpWindow).waitUntilVisible();
 		popUpWindow.findElement(By.cssSelector("div.message-popup-head > a")).click();
+		waitABit(1000);
 	}
 
-	public void clickOrdersPage() {
-
+	public void selectMenuFromNavbar(String menu, String submenu) {
 		evaluateJavascript("jQuery.noConflict();");
 		element(navigationBar).waitUntilVisible();
-		List<WebElement> elementList = navigationBar.findElements(By.cssSelector("li > a"));
+		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li.parent.level0"));
+		Actions action = new Actions(getDriver());
+		for (WebElement menuNow : menuList) {
 
-		for (WebElement elementNow : elementList) {
-			if (elementNow.getText().contentEquals("Verkäufe")) {
-				elementNow.click();
+			if (menuNow.findElement(By.cssSelector("a")).getText().contentEquals(menu)) {
+
+				action.moveToElement(menuNow).build().perform();
+
+				List<WebElement> submenuList = menuNow.findElements(By.cssSelector("ul > li.level1"));
+
+				for (WebElement submenuNow : submenuList) {
+					if (submenuNow.findElement(By.cssSelector("a > span")).getText().contentEquals(submenu)) {
+						submenuNow.click();
+						waitABit(TimeConstants.WAIT_TIME_SMALL);
+						break;
+					}
+				}
 				break;
 			}
 		}
+	}
 
+	public void selectSubmenu(String submenu) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(navigationBar).waitUntilVisible();
+		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li.parent.level0 ul > li.level1 > a"));
+		for (WebElement menuNow : menuList) {
+			if (menuNow.getAttribute("href").contains(submenu)) {
+				getDriver().get(menuNow.getAttribute("href"));
+				break;
+			}
+		}
 	}
 }

@@ -5,9 +5,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 
-import com.tools.env.constants.Separators;
+import com.tools.constants.Separators;
 
 public class FormatterUtils {
 
@@ -42,6 +43,7 @@ public class FormatterUtils {
 		String result = unitPrice;
 		result = result.replace(" €", "");
 		result = result.replace("€ ", "");
+		result = result.replace("€", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
 		result = result.replace(",", ".");
@@ -73,14 +75,122 @@ public class FormatterUtils {
 		return result;
 	}
 
+	/**
+	 * return new order id after order is splitted for term purchase. add 1 to
+	 * adyen order id for regular order, add 2 for TP because of pippajean, add
+	 * 3 for TP because of customer
+	 * 
+	 * @param incrementNumber
+	 * @return new order id
+	 */
+
+	public static String getOrderId(String url) {
+		
+		return extractOrderIDFromURL(url);
+	}
+
+	public static String incrementOrderId(String orderId, int incrementNumber) {
+		
+		String charPart = FormatterUtils.getNotDigitsFromString(orderId);
+		String digitPart = FormatterUtils.getIntegerNumberFromString(orderId);
+
+		int number = Integer.parseInt(digitPart) + incrementNumber;
+
+		return charPart + StringUtils.leftPad(String.valueOf(number), 10, "0");
+	}
+
 	public static String cleanNumberToString(String unitPrice) {
 		String result = unitPrice;
 		result = result.replace(" €", "");
 		result = result.replace("€ ", "");
+		result = result.replace("€", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
+		result = result.replace("IP", "");
 		result = result.replace(",", ".");
 		result = result.replace("-", "");
+		result = result.replace("%", "");
+
+		return result;
+	}
+
+	public static String getIntegerNumberFromString(String s) {
+		StringBuilder t = new StringBuilder();
+		for (int i = 0; i < s.length(); i++) {
+			char ch = s.charAt(i);
+			if (Character.isDigit(ch)) {
+				t.append(ch);
+			}
+		}
+		return String.valueOf(t);
+	}
+	
+	public static String getNotDigitsFromString(String s) {
+		StringBuilder t = new StringBuilder();
+		for (int i = 0; i < s.length(); i++) {
+			char ch = s.charAt(i);
+			if (!Character.isDigit(ch)) {
+				t.append(ch);
+			}
+		}
+		return String.valueOf(t);
+	}
+
+	/**
+	 * adds decimal point to a string.The decimals parameter tells how many
+	 * digits remain after the decimal point
+	 * 
+	 * @param value
+	 * @param decimals
+	 * @return
+	 */
+	public static String parseValue(String value, int decimals) {
+		String cleanValue = getIntegerNumberFromString(value);
+		StringBuilder builder = new StringBuilder(cleanValue);
+		if (decimals != 0)
+			builder.insert(builder.length() - decimals, ".");
+
+		return String.valueOf(builder);
+	}
+
+	public static String parseValueToTwoDecimals(String value) {
+		return parseValue(value, 2);
+	}
+
+	public static String parseValueToZeroDecimals(String value) {
+		return parseValue(value, 0);
+	}
+
+	public static int parseValueToInt(String value) {
+		return Integer.parseInt(parseValue(value, 0));
+	}
+
+	public static BigDecimal parseValueToBigDecimal(String value) {
+		return BigDecimal.valueOf(Double.parseDouble(parseValue(value, 0)));
+	}
+
+	public static String cleanString(String unitPrice) {
+		String result = unitPrice;
+		result = result.replace(" €", "");
+		result = result.replace("€ ", "");
+		result = result.replace("€", "");
+		result = result.replace(".", "");
+		result = result.replace(",", ".");
+		result = result.replace("-", "");
+		result = result.replace("%", "");
+
+		return result;
+	}
+
+	public static String cleanToInteger(String unitPrice) {
+		String result = unitPrice;
+		result = result.replace(" €", "");
+		result = result.replace("€ ", "");
+		result = result.replace("€", "");
+		result = result.replace(".", "");
+		result = result.replace(" IP", "");
+		result = result.replace("IP", "");
+		result = result.replace(",", ".");
 		result = result.replace("%", "");
 
 		return result;
@@ -91,8 +201,10 @@ public class FormatterUtils {
 		int finalResult = 0;
 		result = result.replace(" €", "");
 		result = result.replace("€ ", "");
+		result = result.replace("€", "");
 		result = result.replace(".", "");
 		result = result.replace(" IP", "");
+		result = result.replace("IP", "");
 		result = result.replace(",", ".");
 
 		try {
@@ -105,6 +217,7 @@ public class FormatterUtils {
 		return finalResult;
 	}
 
+	// coleague
 	public static String[] splitDate(String dateOfBirth) {
 		String elems[] = dateOfBirth.split(Separators.DATE_SEPARATOR);
 		if (elems.length != 3) {
@@ -112,4 +225,10 @@ public class FormatterUtils {
 		}
 		return elems;
 	}
+
+//	public static void main(String[] args) {
+//		System.out.println(FormatterUtils.getIntegerNumberFromString("qa-int0000183500"));
+//		System.out.println(FormatterUtils.getNotDigitsFromString("qa-int0000183500"));
+//		System.out.println(FormatterUtils.incrementOrderId("qa-int0000183500",2));
+//	}
 }

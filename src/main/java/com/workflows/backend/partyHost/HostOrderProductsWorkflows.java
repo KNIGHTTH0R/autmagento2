@@ -12,10 +12,9 @@ import com.steps.backend.validations.OrderValidationSteps;
 import com.tools.data.backend.OrderItemModel;
 import com.tools.data.frontend.HostBasicProductModel;
 
-public class HostOrderProductsWorkflows {
-	
+public class HostOrderProductsWorkflows{
 	@Steps
-	public static OrderValidationSteps orderValidationSteps;
+	public OrderValidationSteps orderValidationSteps;
 	
 	private List<HostBasicProductModel> productsList = new ArrayList<HostBasicProductModel>();
 	private List<OrderItemModel> orderProducts = new ArrayList<OrderItemModel>();

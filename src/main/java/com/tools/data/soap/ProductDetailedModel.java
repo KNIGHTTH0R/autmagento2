@@ -12,6 +12,7 @@ public class ProductDetailedModel {
 	private String sku;
 	private List<String> categoriesArray = new ArrayList<String>();
 	private List<String> websiteArray = new ArrayList<String>();
+	private List<String> availableCartsArray = new ArrayList<String>();
 	private String name;
 	private String description;
 	private String shortDescription;
@@ -42,6 +43,8 @@ public class ProductDetailedModel {
 	private String ip;
 	private String newsFromDate;
 	private String newsToDate;
+	private String jewerlyBonusValue;
+	private String jewelryBonusCart;
 
 	public String getType() {
 		return type;
@@ -321,6 +324,30 @@ public class ProductDetailedModel {
 
 	public void setNewsToDate(String newsToDate) {
 		this.newsToDate = newsToDate;
+	}
+
+	public List<String> getAvailableCartsArray() {
+		return availableCartsArray;
+	}
+
+	public void setAvailableCartsArray(List<String> availableCartsArray) {
+		this.availableCartsArray = availableCartsArray;
+	}
+
+	public String getJewerlyBonusValue() {
+		return jewerlyBonusValue;
+	}
+
+	public void setJewerlyBonusValue(String jewerlyBonusValue) {
+		this.jewerlyBonusValue = jewerlyBonusValue;
+	}
+
+	public String getJewelryBonusCart() {
+		return jewelryBonusCart;
+	}
+
+	public void setJewelryBonusCart(String jewelryBonusCart) {
+		this.jewelryBonusCart = jewelryBonusCart;
 	}
 
 }

@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,17 +21,17 @@ import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.EmailConstants;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.EmailConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
 @WithTag(name = "US7", type = "external")
 @Story(Application.Registration.Customer.class)
-@RunWith(ThucydidesRunner.class)
-public class US7005EmailActivationTest extends BaseTest{
+@RunWith(SerenityRunner.class)
+public class US7005EmailActivationTest extends BaseTest {
 
 	@Steps
 	public EmailClientSteps emailClientSteps;
@@ -41,19 +41,17 @@ public class US7005EmailActivationTest extends BaseTest{
 	public CustomVerification customVerifications;
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
-	
+
 	public String clientName;
 	public String validateURL;
 	private String password;
-	private String context;
 	private String username;
 	private String emailUser;
 	private String emailPass;
-	
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -62,8 +60,7 @@ public class US7005EmailActivationTest extends BaseTest{
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7005.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
-			context = prop.getProperty("context");
-			
+
 			emailUser = prop.getProperty("emailUser");
 			emailPass = prop.getProperty("emailPass");
 
@@ -83,11 +80,11 @@ public class US7005EmailActivationTest extends BaseTest{
 		if (size > 0) {
 			clientName = MongoReader.grabCustomerFormModels("US7005RegularKnownUserRegistrationLandingPageTest").get(0).getEmailName();
 			password = MongoReader.grabCustomerFormModels("US7005RegularKnownUserRegistrationLandingPageTest").get(0).getPassword();
-			
+
 			System.out.println(clientName);
 		} else
 			System.out.println("The database has no entries");
-		
+
 		EmailCredentialsModel emailData = new EmailCredentialsModel();
 
 		emailData.setHost(EmailConstants.RECEIVING_HOST);
@@ -97,20 +94,24 @@ public class US7005EmailActivationTest extends BaseTest{
 
 		gmailConnector = new GmailConnector(emailData);
 	}
-	
+
 	@Test
 	public void us7005EmailActivationTest() {
-		
+
 		frontEndSteps.performLogin(username, password);
 
-		String message = gmailConnector.searchForMail("", "Benutzerkonto", false);
+		String message = gmailConnector.searchForMail("", ContextConstants.CONFIRM_ACCOUNT_MAIL_SUBJECT, true);
 
 		System.out.println(message);
+//		emailSteps.extractUrlFromEmailMessage(message,ContextConstants.CONFIRMATION_LINK_TEXT);
 		String linkURL = emailSteps.grabConfirmationLink(message);
+		System.out.println("urllllllllllllllllllllllllllll  " + linkURL);
+
 		emailSteps.navigate(linkURL);
 		emailSteps.validateEmail(password, message);
-		emailSteps.validateEmail(context, linkURL);
+		// emailSteps.validateEmail(context, linkURL);
 
-		customVerifications.printErrors();
+		// customVerifications.printErrors();
+
 	}
 }

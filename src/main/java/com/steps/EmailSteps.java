@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Step;
 
 import org.junit.Assert;
 
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractSteps;
 
 public class EmailSteps extends AbstractSteps {
@@ -19,8 +20,8 @@ public class EmailSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void validateEmailContent(String orderId, String message) {
-		Assert.assertTrue("Failure: Message does not contain the total price", message.contains(orderId));
+	public void validateEmailContent(String text, String message) {
+		Assert.assertTrue("Failure: Message does not contain text", message.contains(text));
 	}
 
 	@Step
@@ -30,6 +31,10 @@ public class EmailSteps extends AbstractSteps {
 
 	@Step
 	public void validateURL(String URL, String context) {
+		Assert.assertTrue("Failure: URL does not contain the string provided", URL.contains(context));
+	}
+	@Step
+	public void validateContextFromURL(String URL, String context) {
 		Assert.assertTrue("Failure: URL does not contain the context provided", URL.contains(context));
 	}
 
@@ -38,7 +43,7 @@ public class EmailSteps extends AbstractSteps {
 		String[] lines = message.split("\n");
 
 		for (String stringNow : lines) {
-			if (stringNow.contains("Bestätigungslink")) {
+			if (stringNow.contains(ContextConstants.CONFIRMATION_LINK_TEXT)) {
 				String[] subLines = stringNow.split("\"");
 				resultURL = subLines[3];
 				break;
@@ -47,6 +52,7 @@ public class EmailSteps extends AbstractSteps {
 
 		return resultURL;
 	}
+
 
 	public String grabRowFromMessage(String message, String searchedRow) {
 		String resultURL = null;
@@ -81,6 +87,9 @@ public class EmailSteps extends AbstractSteps {
 		}
 		link = row.substring(matchStart, matchEnd);
 		Assert.assertTrue("The link is null", link != null);
+		System.out.println(link);
+		getDriver().get(link);
 		return link;
 	}
+	
 }

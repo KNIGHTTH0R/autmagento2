@@ -4,52 +4,49 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
-import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProfileSteps;
-import com.steps.frontend.checkout.CheckoutValidationSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
-import com.tools.calculation.CartCalculation;
-import com.tools.data.CalculationModel;
-import com.tools.data.backend.OrderModel;
-import com.tools.data.frontend.CartProductModel;
-import com.tools.data.frontend.CartTotalsModel;
+import com.tools.cartcalculations.smf.CartCalculator;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
+import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.ProductBasicModel;
-import com.tools.data.frontend.ShippingModel;
-import com.tools.env.variables.UrlConstants;
+import com.tools.data.soap.ProductDetailedModel;
+import com.tools.datahandler.DataGrabber;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
 import com.workflows.frontend.AddProductsWorkflow;
-import com.workflows.frontend.CartWorkflows;
+import com.workflows.frontend.ValidationWorkflows;
 
-@WithTag(name = "US1", type = "frontend")
-@Story(Application.Shop.ForMyselfCart.class)
-@RunWith(ThucydidesRunner.class)
+@WithTag(name = "US1 Shop for myself", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US1.class)
+@RunWith(SerenityRunner.class)
 public class US001StyleCoachShoppingTest extends BaseTest {
 
 	@Steps
@@ -57,60 +54,63 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 	@Steps
 	public AddProductsWorkflow addProductsWorkflow;
 	@Steps
+	public ValidationWorkflows validationWorkflows;
+	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
 	public CartSteps cartSteps;
 	@Steps
-	public ShippingSteps shippingSteps;
+	public HomeSteps homeSteps;
 	@Steps
-	public PaymentSteps paymentSteps;
+	public GeneralCartSteps generalCartSteps;
+	@Steps
+	public FooterSteps footerSteps;
+	@Steps
+	public ShippingSteps shippingSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public EmailSteps emailSteps;
+	public PaymentSteps paymentSteps;
 	@Steps
-	public ProfileSteps profileSteps;
-	@Steps
-	public CartWorkflows cartWorkflows;
-	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
-	@Steps 
 	public CustomVerification customVerifications;
 
-	private static OrderModel orderModel;
-	private static CalculationModel totalsCalculated = new CalculationModel();
-
-	private static List<ProductBasicModel> productsList = new ArrayList<ProductBasicModel>();
 	private String username, password;
-	
+	private String billingAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private List<CalculationModel> calcList = new ArrayList<CalculationModel>();
-	public static CartTotalsModel cartTotals;
-	
-	//Test data Credit card details
-	private static String cardNumber;
-	private static String cardName;
-	private static String cardMonth;
-	private static String cardYear;
-	private static String cardCVC;
+	private static String taxClass;
+
+	private ProductDetailedModel genProduct1;
+	private ProductDetailedModel genProduct2;
+	private ProductDetailedModel genProduct3;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
+		CartCalculator.wipe();
+		DataGrabber.wipe();
+
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("129.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+
+		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.setPrice("79.00");
+		MagentoProductCalls.createApiProduct(genProduct2);
+
+		genProduct3 = MagentoProductCalls.createMarketingProductModel();
+		genProduct3.setPrice("84.00");
+		MagentoProductCalls.createApiProduct(genProduct3);
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
-
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us1" + File.separator + "us001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			
-			cardNumber = prop.getProperty("cardNumber");
-			cardName = prop.getProperty("cardName");
-			cardMonth = prop.getProperty("cardMonth");
-			cardYear = prop.getProperty("cardYear");
-			cardCVC = prop.getProperty("cardCVC");
+			billingAddress = prop.getProperty("billingAddress");
+
+			taxClass = prop.getProperty("taxClass");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -124,104 +124,88 @@ public class US001StyleCoachShoppingTest extends BaseTest {
 			}
 		}
 
-
-		creditCardData.setCardNumber(cardNumber);
-		creditCardData.setCardName(cardName);
-		creditCardData.setMonthExpiration(cardMonth);
-		creditCardData.setYearExpiration(cardYear);
-		creditCardData.setCvcNumber(cardCVC);
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
-
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
 
 	@Test
 	public void us001StyleCoachShoppingTest() {
 		frontEndSteps.performLogin(username, password);
-		frontEndSteps.wipeCart();
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.clickonGeneralView();
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();
 
-		ProductBasicModel productData = addProductsWorkflow.setProductToCart("M081", "BANNER MIT LOGO", "1", "Blue");
-		productsList.add(productData);
+		BasicProductModel productData;
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
+		CartCalculator.productsList50.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
+		CartCalculator.productsList25.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_50);
+		CartCalculator.productsList50.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0", ConfigConstants.DISCOUNT_0);
+		CartCalculator.productsListMarketing.add(productData);
+		CartCalculator.calculateJMDiscounts("0", "0", taxClass, "0");
 
-		productData = addProductsWorkflow.setProductToCart("M058", "GUTSCHEIN FOLGEPARTY", "1", "0");
-		productsList.add(productData);
-
-		productData = addProductsWorkflow.setProductToCart("B040DK", "MAGIC VIOLETTA", "1", "0");
-		productsList.add(productData);
-
-		productData = addProductsWorkflow.setProductToCart("R084BK", "GABRIELLE RING", "1", "18");
-		productsList.add(productData);
-		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		cartTotals = cartSteps.grabTotals();
-		PrintUtils.printCartTotals(cartTotals);
-		
-		List<CartProductModel> cartProducts = cartSteps.grabProductsData();
-		
-		// Calculate cart products by discount
-		List<CartProductModel> cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
-		List<CartProductModel> cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
-		List<CartProductModel> cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
-		calcList.add(CartCalculation.calculateTableProducts(cartProductsWith25Discount));
-		calcList.add(CartCalculation.calculateTableProducts(cartProductsWith50Discount));
-		calcList.add(CartCalculation.calculateTableProducts(cartMarketingMaterialsProducts));
-		totalsCalculated = CartCalculation.calculateTotalSum(calcList);
+		DataGrabber.cartProductsWith50Discount = cartSteps.grabProductsDataWith50PercentDiscount();
+		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
+		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
 
-		cartSteps.clickGoToShipping();
+		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
+		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
+		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
 
-		ShippingModel shippingTotals = shippingSteps.grabSurveyData();
-		PrintUtils.printShippingTotals(shippingTotals);
+		cartSteps.grabTotals();
 
-		List<CartProductModel> shippingProducts = shippingSteps.grabProductsList();
-		PrintUtils.printList(shippingProducts);
+		cartSteps.goToShipping();
 
-		shippingSteps.clickGoToPaymentMethod();
-		
+		shippingSteps.grabProductsList();
+		shippingSteps.grabSurveyData();
+
+		shippingSteps.goToPaymentMethod();
+
 		String url = shippingSteps.grabUrl();
-		orderModel = new OrderModel();
-		orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+		DataGrabber.urlModel.setName("Payment URL");
+		DataGrabber.urlModel.setUrl(url);
+		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
-
 		paymentSteps.fillCreditCardForm(creditCardData);
 
-		List<CartProductModel> confirmationProducts = confirmationSteps.grabProductsList();
+		confirmationSteps.grabProductsList();
+		confirmationSteps.grabConfirmationTotals();
+		confirmationSteps.grabBillingData();
+		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
 
-		checkoutValidationSteps.verifySuccessMessage();
+		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		validationWorkflows.performCartValidations();
 
-		cartWorkflows.setValidateProductsModels(productsList, cartProducts);
-		cartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
-
-		cartWorkflows.setValidateProductsModels(productsList, shippingProducts);
-		cartWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
-
-		cartWorkflows.setValidateProductsModels(productsList, confirmationProducts);
-		cartWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
-
-		cartWorkflows.setCheckCalculationTotalsModels(cartTotals, totalsCalculated);
-		cartWorkflows.checkCalculationTotals("CART TOTALS");
-		
-		//TODO add calculated Shipping values
-		cartWorkflows.setVerifyShippingTotals(shippingTotals, shippingTotals);
-		cartWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-		
-		
-		//TODO add Confirmation values validation
-		
 		customVerifications.printErrors();
+
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveTotalsModel(cartTotals, getClass().getSimpleName() + SoapKeys.GRAB);
-		for (ProductBasicModel product : productsList) {
-			MongoWriter.saveProductBasicModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		for (BasicProductModel product : CartCalculator.allProductsListRecalculated) {
+			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
 		}
 	}
+
 }

@@ -2,24 +2,25 @@ package com.steps.frontend;
 
 import java.util.Set;
 
+import org.junit.Assert;
+
+import com.tools.constants.ContextConstants;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CustomerFormModel;
+import com.tools.persistance.MongoReader;
+import com.tools.requirements.AbstractSteps;
+import com.tools.utils.FormatterUtils;
+
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
-
-import org.junit.Assert;
-
-import com.tools.data.frontend.AddressModel;
-import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.variables.ContextConstants;
-import com.tools.requirements.AbstractSteps;
-import com.tools.utils.FormatterUtils;
 
 public class StylistRegistrationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 743498685895573421L;
 
 	@StepGroup
-	@Title("Fill create customer form")
+	@Title("Fill create stylecoach form")
 	public String fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
 
 		inputFirstName(customerData.getFirstName());
@@ -32,40 +33,244 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		checkNoCoachCheckbox();
 		checkIAgree();
 		submitStep();
-		inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+//		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+//		stylistContextPage().submitStep();
+//		starterSetPage().selectStarterKit();
+//		grabCartTotal();
+//		starterSetPage().submitStep();
+
+		String date = FormatterUtils.getAndFormatCurrentDate();
+		return date;
+		
+	}
+
+	@StepGroup
+	@Title("Fill create stylecoach form using csv for plz")
+	public void fillCreateCustomerFormWithoutPlz(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetailsWithoutPlz(addressData);
+	}
+
+	@StepGroup
+	@Title("Fill create stylecoach form using csv for context")
+	public void fillCreateCustomerFormWithoutContext(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetails(addressData);
+		checkNoCoachCheckbox();
+		checkIAgree();
 		submitStep();
-		selectStarterKit();
+	}
+
+//	@StepGroup
+//	@Title("Fill create stylecoach form with known sponsor")
+//	public String fillCreateStylecoachFormWithKnownSponsor(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+//
+//		inputFirstName(customerData.getFirstName());
+//		inputLastName(customerData.getLastName());
+//		selectBirthDate(birthDate);
+//		inputEmail(customerData.getEmailName());
+//		inputPassword(customerData.getPassword());
+//		inputConfirmation(customerData.getPassword());
+//		fillContactDetails(addressData);
+//		checkIAgree();
+//		submitStep();
+////		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+////		stylistContextPage().submitStep();
+////		starterSetPage().selectStarterKit();
+////		starterSetPage().submitStep();
+//
+//		String date = FormatterUtils.getAndFormatCurrentDate();
+//		return date;
+//	}
+
+	@StepGroup
+	@Title("Update stylist data in step 1")
+	public void updateStylistData(CustomerFormModel customerData, AddressModel addressModel) {
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetails(addressModel);
+		checkNoCoachCheckbox();
+		checkIAgree();
 		submitStep();
-		clickOnNachahmePaymentMethod();
-		submitPaymentMethod();
+
+	}
+
+//	@StepGroup
+//	@Title("Fill create customer form and pay with visa")
+//	public String fillCreateCustomerFormPayWithVisa(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+//
+//		inputFirstName(customerData.getFirstName());
+//		inputLastName(customerData.getLastName());
+//		selectBirthDate(birthDate);
+//		inputEmail(customerData.getEmailName());
+//		inputPassword(customerData.getPassword());
+//		inputConfirmation(customerData.getPassword());
+//		fillContactDetails(addressData);
+//		checkNoCoachCheckbox();
+//		checkIAgree();
+//		submitStep();
+////		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+////		stylistContextPage().submitStep();
+////		starterSetPage().selectStarterKit();
+////		starterSetPage().submitStep();
+//
+//		String date = FormatterUtils.getAndFormatCurrentDate();
+//		return date;
+//	}
+
+	@StepGroup
+	@Title("Fill create customer form and pay with visa")
+	public String fillCreateStylecoachFormWithKnownSponsor(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetails(addressData);
+		checkIAgree();
+		submitStep();
+//		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+//		stylistContextPage().submitStep();
+//		starterSetPage().selectStarterKit();
+//		starterSetPage().submitStep();
+
+		String date = FormatterUtils.getAndFormatCurrentDate();
+		return date;
+	}
+
+//	@StepGroup
+//	@Title("Fill create customer form and return customer's lattitude and longitude")
+//	public CoordinatesModel fillCreateStylystFormAndReturnLatAndLong(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+//
+//		CoordinatesModel coordinatesModel = new CoordinatesModel();
+//
+//		inputFirstName(customerData.getFirstName());
+//		inputLastName(customerData.getLastName());
+//		selectBirthDate(birthDate);
+//		inputEmail(customerData.getEmailName());
+//		inputPassword(customerData.getPassword());
+//		inputConfirmation(customerData.getPassword());
+//		fillContactDetails(addressData);
+//		checkNoCoachCheckbox();
+//		checkIAgree();
+//		submitStep();
+////		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+////		stylistContextPage().submitStep();
+////		starterSetPage().selectStarterKit();
+////		starterSetPage().submitStep();
+//		try {
+//			coordinatesModel = AddressConverter.getLattitudeAndLongitudeFromAddress(addressData.getStreetAddress() + "," + addressData.getStreetNumber() + ","
+//					+ addressData.getHomeTown() + "," + addressData.getPostCode());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return coordinatesModel;
+//	}
+
+//	@StepGroup
+	@Title("Fill create customer form")
+	public String fillCreateCustomerFormFirstWithForbiddenCountry(CustomerFormModel customerData, AddressModel addressData, String birthDate) {
+
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		selectBirthDate(birthDate);
+		inputEmail(customerData.getEmailName());
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		fillContactDetailsFirstWithForbidenCountry(addressData);
+		checkNoCoachCheckbox();
+		checkIAgree();
+		submitStep();
+//		stylistContextPage().inputStylistRef(customerData.getFirstName() + customerData.getLastName());
+//		stylistContextPage().submitStep();
+//		starterSetPage().selectStarterKit();
+//		grabCartTotal();
+//		starterSetPage().submitStep();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
 
 	@StepGroup
-	public String fillStylistRegistrationPredefinedInfoForm(String name, AddressModel addressData, String birthDate) {
+	public String fillStylistRegistrationPredefinedInfoForm(String name, String birthDate) {
 		selectBirthDate(birthDate);
 		checkIAgree();
 		submitStep();
-		inputStylistRef(name);
-		submitStep();
-		selectStarterKit();
-		submitStep();
-		clickOnNachahmePaymentMethod();
-		submitPaymentMethod();
+//		stylistContextPage().inputStylistRef(name);
+//		stylistContextPage().submitStep();
+//		starterSetPage().selectStarterKit();
+//		starterSetPage().submitStep();
+		// payWithCreditCard();
 
 		String date = FormatterUtils.getAndFormatCurrentDate();
 		return date;
 	}
 
+//	@StepGroup
+//	public String fillStylistRegistrationPredefinedInfoFormWithNotPreferedCountryFirst(String name, AddressModel addressData, String birthDate) {
+//		validateInfoBoxMessage();
+//		closeInfoBox();
+//		addressData.setCountryName(ContextConstants.COUNTRY_NAME);
+//		selectBirthDate(birthDate);
+//		checkIAgree();
+//		submitStep();
+////		stylistContextPage().inputStylistRef(name);
+////		stylistContextPage().submitStep();
+////		starterSetPage().selectStarterKit();
+////		starterSetPage().submitStep();
+//
+//		String date = FormatterUtils.getAndFormatCurrentDate();
+//		return date;
+//	}
+
 	@StepGroup
-	@Title("Fill contact details ")
+	@Title("Fill contact details")
 	public void fillContactDetails(AddressModel addressData) {
 		inputStreetAddress(addressData.getStreetAddress());
 		inputStreetNumber(addressData.getStreetNumber());
 		inputPostCode(addressData.getPostCode());
 		inputHomeTown(addressData.getHomeTown());
+		selectCountryName(addressData.getCountryName());
+		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
+
+	}
+
+	@StepGroup
+	@Title("Fill contact details with csv")
+	public void fillContactDetailsWithoutPlz(AddressModel addressData) {
+		inputStreetAddress(addressData.getStreetAddress());
+		inputStreetNumber(addressData.getStreetNumber());
+		inputHomeTown(addressData.getHomeTown());
+		selectCountryName(addressData.getCountryName());
+		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
+
+	}
+
+	@StepGroup
+	@Title("Fill contact details ")
+	public void fillContactDetailsFirstWithForbidenCountry(AddressModel addressData) {
+		inputStreetAddress(addressData.getStreetAddress());
+		inputStreetNumber(addressData.getStreetNumber());
+		inputPostCode(addressData.getPostCode());
+		inputHomeTown(addressData.getHomeTown());
+		selectCountryName(addressData.getCountryName());
+		// validateInfoBoxMessage();
+		// closeInfoBox();
+		// addressData.setCountryName(ContextConstants.COUNTRY_NAME);
 		selectCountryName(addressData.getCountryName());
 		createCustomerPage().inputPhoneNumber(addressData.getPhoneNumber());
 
@@ -86,7 +291,6 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		verifyLink();
 	}
 
-	// ------------------Secondary Form - create customer - Address fields
 	@Step
 	public void inputStreetAddress(String addressName) {
 		stylistRegistrationPage().inputStreetAddress(addressName);
@@ -118,8 +322,31 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void payWithCreditCard() {
+		if (MongoReader.getContext().contentEquals("es")) {
+			stylistRegistrationPage().expandCreditCardForm();
+			stylistRegistrationPage().selectCardTypeEs("Visa/Electron");
+		} else {
+			stylistRegistrationPage().selectCardType("Visa/Electron");
+		}
+		stylistRegistrationPage().inputCardNumber("4548812049400004");
+		stylistRegistrationPage().inputCardExpiryMonth("06");
+		stylistRegistrationPage().inputCardExpiryYear("2016");
+		stylistRegistrationPage().submitCreditCard();
+		stylistRegistrationPage().inputCardCvv("285");
+		stylistRegistrationPage().submitPaymentMethod();
+		stylistRegistrationPage().inputCardPin("123456");
+		stylistRegistrationPage().submitVisaFinalStep();
+	}
+
+	@Step
 	public void submitPaymentMethod() {
 		stylistRegistrationPage().submitPaymentMethod();
+	}
+
+	@Step
+	public void finishPayment() {
+		stylistRegistrationPage().finishPayment();
 	}
 
 	@Step
@@ -127,13 +354,12 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		stylistRegistrationPage().inputPhoneNumber(phoneNumber);
 	}
 
-	@Step
-	public void inputStylistRef(String ref) {
-		stylistRegistrationPage().inputStylistRef(ref);
-	}
-	
+	// @Step
+	// public void inputStylistRef(String ref) {
+	// stylistRegistrationPage().inputStylistRef(ref);
+	// waitABit(TimeConstants.TIME_CONSTANT);
+	// }
 
-	// ----------------------------Main Form from create customer
 	@Step
 	public void inputStylistEmail(String stylistEmail) {
 		stylistRegistrationPage().inputStylistEmail(stylistEmail);
@@ -220,8 +446,8 @@ public class StylistRegistrationSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void selectStarterKit() {
-		stylistRegistrationPage().selectStarterKit();
+	public void grabCartTotal() {
+		stylistRegistrationPage().grabCartTotal();
 	}
 
 	@Step
@@ -254,7 +480,8 @@ public class StylistRegistrationSteps extends AbstractSteps {
 
 	@Step
 	public void validateStylistRegisterPageTitle() {
-		Assert.assertTrue("Failure: You are not on the style coach register page", stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(ContextConstants.STYLE_COACH_REG_PAGE_TITLE));
+		Assert.assertTrue("Failure: You are not on the style coach register page",
+				stylistRegistrationPage().getStylistRegisterPageTitle().contentEquals(ContextConstants.STYLE_COACH_REG_PAGE_TITLE));
 	}
 
 	@Step
@@ -267,5 +494,15 @@ public class StylistRegistrationSteps extends AbstractSteps {
 		facebookEMBLoginPage().inputUser(user);
 		facebookEMBLoginPage().inputPass(pass);
 		facebookEMBLoginPage().clickLogin();
+	}
+
+	@Step
+	public void validateInfoBoxMessage() {
+		stylistRegistrationPage().validateInfoBoxMessage();
+	}
+
+	@Step
+	public void closeInfoBox() {
+		stylistRegistrationPage().closeInfoBox();
 	}
 }

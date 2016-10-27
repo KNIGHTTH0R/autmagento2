@@ -2,18 +2,24 @@ package com.pages.frontend;
 
 import java.util.List;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.tools.env.constants.TimeConstants;
-import com.tools.env.variables.ContextConstants;
+import com.pages.frontend.checkout.cart.stylistRegistration.StylistRegistrationCartTotalModel;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
+import com.tools.datahandler.StylistRegDataGrabber;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.FormatterUtils;
 
 public class StylistRegistrationPage extends AbstractPage {
+
+	@FindBy(id = "toggle_cctab")
+	private WebElement expandCredtCardButton;
 
 	@FindBy(id = "firstname")
 	private WebElement firstnameInput;
@@ -63,14 +69,17 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(id = "by_default")
 	private WebElement noInviteCheckbox;
 
-	@FindBy(css = "button[title*='Senden']")
+	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")
 	private WebElement completeButton;
 
 	@FindBy(id = "submit-step")
 	private WebElement submitStepButton;
 
-	@FindBy(id = "submit_cod")
+	@FindBy(id = "submit_prepaid")
 	private WebElement weiter;
+
+	@FindBy(css = "input#submit_cc")
+	private WebElement submitCC;
 
 	@FindBy(id = "toggle_cctab")
 	private WebElement hinzufugen;
@@ -78,8 +87,14 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(id = "placeYourOrder_bottom")
 	private WebElement submitPaymentMethod;
 
+	@FindBy(id = "continueShopping_top")
+	private WebElement finishPayment;
+
 	@FindBy(css = "ul.messages li ul li span")
 	private WebElement existingAccountMessageContainer;
+
+	@FindBy(css = "li.error-msg ul li span")
+	private WebElement contextErrorMessageContainer;
 
 	@FindBy(css = "div.page-title h1")
 	private WebElement stylistRegisterPageTitleContainer;
@@ -106,7 +121,39 @@ public class StylistRegistrationPage extends AbstractPage {
 	@FindBy(id = "stylistref")
 	private WebElement stylistref;
 
+	@FindBy(id = "fancybox-outer")
+	private WebElement infoBox;
+
+	@FindBy(id = "fancybox-close")
+	private WebElement closeInfoBox;
+
+	@FindBy(css = "div[id*='advice-validate-zip']")
+	private WebElement zipValidationMessage;
+
 	// ---------------------------------------------------
+
+	@FindBy(css = "select#addCreditCardIssuer")
+	private WebElement cartTypeSelect;
+
+	@FindBy(id = "addCreditCardNumber")
+	private WebElement creditCardNumberInput;
+
+	@FindBy(css = "select#addCreditCardMonth")
+	private WebElement creditCardMonthInput;
+
+	@FindBy(css = "select#addCreditCardYear")
+	private WebElement creditCardYearInput;
+
+	@FindBy(css = "input#addCreditCardCVV")
+	private WebElement creditCardCVVInput;
+
+	@FindBy(css = "input[name='pin']")
+	private WebElement pinInput;
+
+	@FindBy(css = "a[href='javascript:submiteCip()']")
+	private WebElement submitFinalVisaStep;
+
+	// ----------------------------------------------------
 
 	public void inputFirstName(String firstName) {
 		element(firstnameInput).waitUntilVisible();
@@ -134,14 +181,55 @@ public class StylistRegistrationPage extends AbstractPage {
 		confirmationeInput.sendKeys(passText);
 	}
 
-	public void inputStylistRef(String ref) {
-		element(stylistref).waitUntilVisible();
-		// stylistref.clear();
-		element(stylistref).typeAndEnter(ref);
-	}
-
 	public void inputStylistEmail(String stylistEmail) {
 		invitationEmailInput.sendKeys(stylistEmail);
+	}
+
+	public void selectCardType(String cardType) {
+		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
+		element(cartTypeSelect).waitUntilVisible();
+		element(cartTypeSelect).selectByVisibleText(cardType);
+	}
+
+	public void selectCardTypeEs(String cardType) {
+		element(cartTypeSelect).waitUntilVisible();
+		element(cartTypeSelect).selectByVisibleText(cardType);
+	}
+
+	public void inputCardCvv(String cvv) {
+		element(creditCardCVVInput).waitUntilVisible();
+		element(creditCardCVVInput).sendKeys(cvv);
+	}
+
+	public void inputCardPin(String pin) {
+		element(pinInput).waitUntilVisible();
+		element(pinInput).sendKeys(pin);
+	}
+
+	public void inputCardNumber(String cardNumber) {
+		element(creditCardNumberInput).waitUntilVisible();
+		element(creditCardNumberInput).sendKeys(cardNumber);
+	}
+
+	public void inputCardExpiryMonth(String month) {
+		element(creditCardMonthInput).waitUntilVisible();
+		element(creditCardMonthInput).selectByValue(month);
+	}
+
+	public void inputCardExpiryYear(String year) {
+		element(creditCardYearInput).waitUntilVisible();
+		element(creditCardYearInput).selectByValue(year);
+		waitABit(TimeConstants.TIME_CONSTANT);
+	}
+
+	public void submitCreditCard() {
+		element(submitCC).waitUntilVisible();
+		submitCC.click();
+	}
+
+	public void submitVisaFinalStep() {
+		element(submitFinalVisaStep).waitUntilVisible();
+		submitFinalVisaStep.click();
 	}
 
 	public void checkParties() {
@@ -172,6 +260,16 @@ public class StylistRegistrationPage extends AbstractPage {
 		dob.click();
 	}
 
+	public void closeInfoBox() {
+		closeInfoBox.click();
+	}
+
+	public void expandCreditCardForm() {
+		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
+		element(expandCredtCardButton).waitUntilVisible();
+		expandCredtCardButton.click();
+	}
+
 	public void clickOnNachahmePaymentMethod() {
 		waitFor(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("payco-iframe-transaction")));
 		element(weiter).waitUntilVisible();
@@ -186,18 +284,32 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void inputStreetAddress(String streetAddress) {
 		element(streetInput).waitUntilVisible();
+		streetInput.clear();
 		streetInput.sendKeys(streetAddress);
 	}
 
 	public void inputStreetNumber(String streetNumber) {
+		streetNumberInput.clear();
 		streetNumberInput.sendKeys(streetNumber);
 	}
 
 	public void inputPostCode(String postCode) {
+		postCodeInput.clear();
 		postCodeInput.sendKeys(postCode);
 	}
 
+	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
+		element(postCodeInput).waitUntilVisible();
+		postCodeInput.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		element(postCodeInput).typeAndTab(postCode);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		validateZipValidationErrorMessage();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
+
 	public void inputHomeTown(String homeTown) {
+		cityInput.clear();
 		cityInput.sendKeys(homeTown);
 	}
 
@@ -211,6 +323,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void submitStep() {
+		element(submitStepButton).waitUntilVisible();
 		submitStepButton.click();
 	}
 
@@ -218,9 +331,25 @@ public class StylistRegistrationPage extends AbstractPage {
 		submitPaymentMethod.click();
 	}
 
-	public void selectStarterKit() {
-		waitABit(TimeConstants.TIME_MEDIUM);
-		elementjQueryClick("input#kit_2567");
+	public void finishPayment() {
+		finishPayment.click();
+	}
+
+	public StylistRegistrationCartTotalModel grabCartTotal() {
+
+		StylistRegistrationCartTotalModel result = new StylistRegistrationCartTotalModel();
+
+		result.setDelivery(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#shipping-value")).getText()));
+		result.setTotalPrice(FormatterUtils.cleanString(getDriver().findElement(By.cssSelector("#total-price-value")).getText()));
+
+		StylistRegDataGrabber.cartTotals = result;
+
+		return result;
+
+	}
+
+	public static void verifyCartTotals() {
+
 	}
 
 	public void selectMonth(String month) {
@@ -252,10 +381,24 @@ public class StylistRegistrationPage extends AbstractPage {
 		} else {
 			Assert.assertFalse("The message and the link were not found", true);
 		}
-
 	}
 
 	public String getStylistRegisterPageTitle() {
 		return stylistRegisterPageTitleContainer.getText();
+	}
+
+	public void validateInfoBoxMessage() {
+		element(infoBox).waitUntilVisible();
+		Assert.assertTrue("The message from infobox is not the expected one!!", infoBox.getText().contains(ContextConstants.CHANGE_WEBSITE_POPUP_MESSAGE));
+	}
+
+	public void validateZipValidationErrorMessage() {
+		element(zipValidationMessage).waitUntilVisible();
+		Assert.assertTrue("The message from validation message is not the expected one!!", zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
+	}
+
+	public void validateContextValidationErrorMessage() {
+		element(contextErrorMessageContainer).waitUntilVisible();
+		Assert.assertTrue("The message from context validation message is not the expected one!!", element(contextErrorMessageContainer).isDisplayed());
 	}
 }

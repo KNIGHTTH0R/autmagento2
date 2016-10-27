@@ -5,21 +5,19 @@ import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
 import com.steps.frontend.checkout.CheckoutValidationSteps;
-import com.tools.datahandlers.CartCalculator;
-import com.tools.datahandlers.DataGrabber;
+import com.tools.cartcalculations.smf.CartCalculator;
+import com.tools.datahandler.DataGrabber;
 
 public class ValidationWorkflows {
 
 	@Steps
 	public CartWorkflows2 cartWorkflows2;
 	@Steps
-	public CartWorkflows cartWorkflows;
-	@Steps
 	public ShippingAndConfirmationWorkflows shippingAndConfirmationWorkflows;
 	@Steps
-	public AddressWorkflows addressWorkflows;
-	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
+	@Steps
+	public AdyenWorkflows adyenWorkflows;
 
 	public static String billingAddress;
 	public static String shippingAddress;
@@ -65,11 +63,14 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
@@ -77,8 +78,6 @@ public class ValidationWorkflows {
 	public void performCartValidations() {
 
 		checkoutValidationSteps.verifySuccessMessage();
-		System.out.println("CartCalculator.productsList50: " + CartCalculator.productsList50.size());
-		System.out.println("DataGrabber.cartProductsWith50Discount: " + DataGrabber.cartProductsWith50Discount.size());
 
 		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
 		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
@@ -113,11 +112,108 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
+
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performCartValidationsTotals() {
+
+		// checkoutValidationSteps.verifySuccessMessage();
+
+		cartWorkflows2.setVerifyTotalsDiscount(DataGrabber.cartTotals, CartCalculator.calculatedTotalsDiscounts);
+		cartWorkflows2.verifyTotalsDiscount("CART TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+	}
+
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performCartValidationsWithDiscountRuleActive() {
+
+		checkoutValidationSteps.verifySuccessMessage();
+
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50DiscountRule, DataGrabber.cartProductsWith50Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
+
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25DiscountRule, DataGrabber.cartProductsWith25Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
+
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketingDiscountRule, DataGrabber.cartMarketingMaterialsProducts);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.shippingProducts);
+		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.confirmationProducts);
+		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows2.setVerifyTotalsDiscount(DataGrabber.cartTotals, CartCalculator.calculatedTotalsDiscounts);
+		cartWorkflows2.verifyTotalsDiscount("CART TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
+
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performSimpleCartValidations() {
+
+		checkoutValidationSteps.verifySuccessMessage();
+
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
+
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
+
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketing, DataGrabber.cartMarketingMaterialsProducts);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.shippingProducts);
+		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.allProductsList, DataGrabber.confirmationProducts);
+		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+
+		cartWorkflows2.setVerifyTotalsDiscount(DataGrabber.cartTotals, CartCalculator.calculatedTotalsDiscounts);
+		cartWorkflows2.verifyTotalsDiscountNoMarketing("CART TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+
 	}
 
 	@StepGroup
@@ -147,18 +243,21 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
-		addressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
 	@StepGroup
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsBuy3Get1RuleJbAndMbApplied() {
 
-		checkoutValidationSteps.verifySuccessMessage();
+//		checkoutValidationSteps.verifySuccessMessage();
 
 		// validations before JB and MM Discounts - in this phase ,on products
 		// is applied buy3Get1 rule, so we are validating those prices
@@ -195,11 +294,14 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 
-		addressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		addressWorkflows.validateBillingAddress("BILLING ADDRESS");
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
 
-		addressWorkflows.setShippingAddressModels(billingAddress, DataGrabber.grabbedShippingAddress);
-		addressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		AddressWorkflows.setShippingAddressModels(billingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 	}
 
 }

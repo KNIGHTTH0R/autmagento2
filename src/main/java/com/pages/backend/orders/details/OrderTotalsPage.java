@@ -2,7 +2,7 @@ package com.pages.backend.orders.details;
 
 import java.util.List;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -25,14 +25,12 @@ public class OrderTotalsPage extends AbstractPage {
 
 		List<WebElement> listEntries = tableContainer.findElements(By.cssSelector("tr"));
 		waitFor(ExpectedConditions.visibilityOfAllElements(listEntries));
-		System.out.println(listEntries.size());
 
 		String valueTransformer = "";
 
 		for (WebElement elementNow : listEntries) {
 
 			String key = elementNow.findElement(By.cssSelector("td:first-child")).getText();
-			System.out.println(key);
 
 			if (key.contains("Zwischensumme")) {
 				valueTransformer = FormatterUtils.cleanNumberToString(elementNow.findElement(By.cssSelector("td:last-child")).getText());

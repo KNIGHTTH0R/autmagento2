@@ -3,10 +3,10 @@ package com.pages.frontend.profile;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.serenitybdd.core.annotations.findby.FindBy;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import net.thucydides.core.annotations.findby.FindBy;
 
 import com.tools.data.backend.OrderModel;
 import com.tools.requirements.AbstractPage;
@@ -16,9 +16,14 @@ public class ProfileHistoryPage extends AbstractPage {
 	@FindBy(css = "table#my-orders-table")
 	private WebElement listContainer;
 
+	@FindBy(css = "#my-orders-table tbody")
+	private WebElement orderListContainer;
+
+	@FindBy(css = ".block-content li:nth-child(5) a")
+	private WebElement myOrdersLink;
+
 	public List<OrderModel> grabOrderHistory() {
 
-		System.out.println("------------ Order History");
 		element(listContainer).waitUntilVisible();
 		List<WebElement> orderList = listContainer.findElements(By.cssSelector("tbody > tr"));
 
@@ -42,16 +47,21 @@ public class ProfileHistoryPage extends AbstractPage {
 
 			result.add(orderNow);
 
-			// System.out.println("------------");
-			// System.out.println(orderId);
-			// System.out.println(date);
-			// System.out.println(invoiceTo);
-			// System.out.println(deliveryTo);
-			// System.out.println(totalSum);
-			// System.out.println(status);
 		}
 
 		return result;
+	}
+
+	public void clickReorderLink(String name) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(orderListContainer).waitUntilVisible();
+		List<WebElement> listElements = orderListContainer.findElements(By.tagName("tr"));
+		theFor: for (WebElement elementNow : listElements) {
+			if (elementNow.getText().contains(name)) {
+				elementNow.findElement(By.cssSelector("a[href*='reorder']")).click();
+				break theFor;
+			}
+		}
 	}
 
 }

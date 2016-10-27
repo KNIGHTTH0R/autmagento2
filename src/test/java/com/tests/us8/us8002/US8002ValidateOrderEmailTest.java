@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,21 +21,20 @@ import com.connectors.gmail.GmailConnector;
 import com.steps.EmailSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.ProfileSteps;
+import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.EmailConstants;
-import com.tools.SoapKeys;
+import com.tools.constants.EmailConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.email.EmailCredentialsModel;
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US8", type = "external")
-@Story(Application.Shop.RegularCart.class)
-@RunWith(ThucydidesRunner.class)
+@WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
+@Story(Application.RegularCart.US8_2.class)
+@RunWith(SerenityRunner.class)
 public class US8002ValidateOrderEmailTest extends BaseTest{
 	
 	@Steps
@@ -85,10 +84,6 @@ public class US8002ValidateOrderEmailTest extends BaseTest{
 		emailData.setProtocol(EmailConstants.PROTOCOL);
 		emailData.setUsername(email);
 		emailData.setPassword(emailPassword);
-		System.out.println(email);
-		System.out.println(password);
-		System.out.println(emailPassword);
-        
 		gmailConnector = new GmailConnector(emailData);
 	}
 	
@@ -97,9 +92,6 @@ public class US8002ValidateOrderEmailTest extends BaseTest{
 		frontEndSteps.performLogin(email, password);
 		
 		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
-		System.out.println(message);
-		System.out.println(orderModel.get(0).getOrderId());
-		System.out.println(orderModel.get(0).getTotalPrice());
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 		
 		customVerifications.printErrors();

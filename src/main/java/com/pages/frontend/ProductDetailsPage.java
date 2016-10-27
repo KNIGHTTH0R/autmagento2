@@ -1,18 +1,16 @@
 package com.pages.frontend;
 
-import net.thucydides.core.annotations.findby.FindBy;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.constants.ContextConstants;
 import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.env.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class ProductDetailsPage extends AbstractPage {
 
@@ -24,11 +22,11 @@ public class ProductDetailsPage extends AbstractPage {
 
 	@FindBy(css = "button#add-to-cart")
 	private WebElement addToCartButton;
-	
+
 	@FindBy(css = "div.product-attributes.clearfix a")
 	private WebElement addToWishlistButton;
 
-	@FindBy(css = "p.product-ids.dp-inbl")
+	@FindBy(css = "p.product-ids")
 	private WebElement productCode;
 
 	@FindBy(css = "span[id*='product-price']")
@@ -36,6 +34,12 @@ public class ProductDetailsPage extends AbstractPage {
 
 	@FindBy(css = "h1.ff-Nb")
 	private WebElement productName;
+
+	@FindBy(css = "div.product-view")
+	private WebElement productDetailsContainer;
+
+	@FindBy(id = "stock-status")
+	private WebElement stockStatusContainer;
 
 	public void setPrice(String qty) {
 		element(quantityInput).waitUntilVisible();
@@ -51,25 +55,29 @@ public class ProductDetailsPage extends AbstractPage {
 	public void addToCart() {
 		element(addToCartButton).waitUntilVisible();
 		addToCartButton.click();
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("div.add-to-cart-modal"), "Der Artikel wurde in den Warenkorb gelegt. Du kannst deinen Einkauf fortsetzen."));
-		waitABit(TimeConstants.TIME_CONSTANT);
+		// TODO add a retry here
+		waitABit(500);
+		while (!addToCartButton.isEnabled()) {
+			waitABit(500);
+		}
+		waitABit(500);
 	}
+
 	public void addToWishlist() {
 		element(addToWishlistButton).waitUntilVisible();
 		addToWishlistButton.click();
-		
+
 	}
 
 	public ProductBasicModel grabProductData() {
 		ProductBasicModel result = new ProductBasicModel();
 		element(productName).waitUntilVisible();
 
-		// clean productCode
 		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setType(type);
-		result.setPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+		result.setPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
@@ -79,12 +87,11 @@ public class ProductDetailsPage extends AbstractPage {
 		BasicProductModel result = new BasicProductModel();
 		element(productName).waitUntilVisible();
 
-		// clean productCode
 		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
-		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
@@ -94,12 +101,11 @@ public class ProductDetailsPage extends AbstractPage {
 		RegularBasicProductModel result = new RegularBasicProductModel();
 		element(productName).waitUntilVisible();
 
-		// clean productCode
 		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
-		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
@@ -109,18 +115,39 @@ public class ProductDetailsPage extends AbstractPage {
 		HostBasicProductModel result = new HostBasicProductModel();
 		element(productName).waitUntilVisible();
 
-		// clean productCode
 		String type = cleanProductCode(productCode.getText());
 
 		result.setName(productName.getText());
 		result.setProdCode(type);
-		result.setUnitPrice(FormatterUtils.cleanNumberToString(productPrice.getText()));
+		result.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(productPrice.getText()));
 		result.setQuantity(quantityInput.getAttribute("value"));
 
 		return result;
 	}
-	
-	private String cleanProductCode(String code){
-		return code.replace("Artikelnummer: ", "");
+
+	private String cleanProductCode(String code) {
+		return code.replace(ContextConstants.ARTICLE_NUMBER, "");
+	}
+
+	/**
+	 * verifies that Add to cart button is not present
+	 */
+	public boolean verifyIfAddToCartButtonIsPresent() {
+		return addToWishlistButton.isDisplayed();
+	}
+
+	/**
+	 * verifies that Add to wishlist button is not present
+	 */
+	public boolean verifyIfAddToWishlistButtonIsPresent() {
+		return addToWishlistButton.isDisplayed();
+	}
+
+	public String getProductDetailsText() {
+		return productDetailsContainer.getText();
+	}
+
+	public String getStockStatus() {
+		return stockStatusContainer.getText();
 	}
 }

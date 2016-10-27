@@ -6,6 +6,15 @@ public class ShippingModel {
 	private String discountPrice;
 	private String shippingPrice;
 	private String totalAmount;
+	private String tax;
+
+	public String getTax() {
+		return tax;
+	}
+
+	public void setTax(String tax) {
+		this.tax = tax;
+	}
 
 	public String getSubTotal() {
 		return subTotal;

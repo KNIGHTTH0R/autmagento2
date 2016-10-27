@@ -3,23 +3,25 @@ package com.pages.frontend.checkout;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.thucydides.core.annotations.findby.FindBy;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.constants.Separators;
+import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.BorrowedCartModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.datahandlers.DataGrabber;
-import com.tools.datahandlers.partyHost.HostDataGrabber;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.constants.Separators;
+import com.tools.datahandler.BorrowDataGrabber;
+import com.tools.datahandler.DataGrabber;
+import com.tools.datahandler.HostDataGrabber;
+import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
-import com.tools.utils.PrintUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class ConfirmationPage extends AbstractPage {
 
@@ -35,16 +37,41 @@ public class ConfirmationPage extends AbstractPage {
 	@FindBy(id = "terms")
 	private WebElement acceptTerms;
 
+	@FindBy(id = "change-shipping-address")
+	private WebElement changeShippingButton;
+
+	@FindBy(id = "change-billing-address")
+	private WebElement changeBillingButton;
+
 	@FindBy(id = "submit-confirmation-step")
 	private WebElement submitButton;
 
 	@FindBy(css = "div#cart-section-1 div.items-section")
 	private WebElement productListContainer;
 
-	@FindBy(css = "div.checkout-totals-section")
+	@FindBy(css = "div#cart-section-2 div.items-section")
+	private WebElement productListContainerTp1;
+
+	@FindBy(css = "div#cart-section-3 div.items-section")
+	private WebElement productListContainerTp2;
+	//check this after dev implementation
+	@FindBy(css = "div#cart-section-4 div.items-section")
+	private WebElement productListContainerTp3;
+
+	@FindBy(css = "div#cart-section-1 div.checkout-totals-section")
 	private WebElement surveyTotalsContainer;
 
+	@FindBy(css = "div#cart-section-2 div.checkout-totals-section")
+	private WebElement surveyTotalsContainerTp1;
+
+	@FindBy(css = "div#cart-section-3 div.checkout-totals-section")
+	private WebElement surveyTotalsContainerTp2;
+	//check this after dev implementation
+	@FindBy(css = "div#cart-section-4 div.checkout-totals-section")
+	private WebElement surveyTotalsContainerTp3;
+
 	private AddressModel grabAddressData(WebElement addressPreview) {
+		waitABit(TimeConstants.TIME_MEDIUM);
 		AddressModel result = new AddressModel();
 		element(addressPreview).waitUntilVisible();
 		String textparse = addressPreview.getText();
@@ -53,12 +80,12 @@ public class ConfirmationPage extends AbstractPage {
 		if (splittedText.length == 4) {
 
 			String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
-			String streetName = streetData[0];
-			String streetNumber = streetData[1];
+			String streetName = streetData[0].trim();
+			String streetNumber = streetData[1].trim();
 
 			String[] townData = splittedText[2].split(Separators.COMMA_SEPARATOR);
-			String homeTown = townData[0];
-			String postCode = townData[1];
+			String homeTown = townData[0].trim();
+			String postCode = townData[1].trim();
 
 			result.setStreetAddress(streetName);
 			result.setStreetNumber(streetNumber);
@@ -66,21 +93,18 @@ public class ConfirmationPage extends AbstractPage {
 			result.setHomeTown(homeTown);
 			result.setPostCode(postCode);
 
-			result.setCountryName(splittedText[3]);
-
-			PrintUtils.printAddressModel(result);
+			result.setCountryName(splittedText[3].trim());
 
 		}
 		if (textparse.split(Separators.LINE_SEPARATOR).length == 5) {
-			System.out.println("FAILURE: error on shipping parsing - Confirmation Page - 5");
 
 			String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
-			String streetName = streetData[0];
-			String streetNumber = streetData[1];
+			String streetName = streetData[0].trim();
+			String streetNumber = streetData[1].trim();
 
 			String[] townData = splittedText[2].split(Separators.COMMA_SEPARATOR);
-			String homeTown = townData[0];
-			String postCode = townData[1];
+			String homeTown = townData[0].trim();
+			String postCode = townData[1].trim();
 
 			result.setStreetAddress(streetName);
 			result.setStreetNumber(streetNumber);
@@ -88,9 +112,8 @@ public class ConfirmationPage extends AbstractPage {
 			result.setHomeTown(homeTown);
 			result.setPostCode(postCode);
 
-			result.setCountryName(splittedText[3]);
+			result.setCountryName(splittedText[3].trim());
 
-			PrintUtils.printAddressModel(result);
 		} else {
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page");
 		}
@@ -120,21 +143,86 @@ public class ConfirmationPage extends AbstractPage {
 		acceptTerms.click();
 	}
 
+	public void changeShippingAddress() {
+		element(changeShippingButton).waitUntilVisible();
+		changeShippingButton.click();
+	}
+
+	public void changeBillingAddress() {
+		element(changeBillingButton).waitUntilVisible();
+		changeBillingButton.click();
+	}
+
 	public void clickOnSubmit() {
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
 	}
 
-	public ShippingModel grabConfirmationTotals() {
-		ShippingModel result = new ShippingModel();
-		element(surveyTotalsContainer).waitUntilVisible();
+	// public ShippingModel grabConfirmationTotals() {
+	// ShippingModel result = new ShippingModel();
+	// element(surveyTotalsContainer).waitUntilVisible();
+	//
+	// result.setSubTotal(FormatterUtils.cleanNumberToString(
+	// surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1)
+	// td.a-right")).getText()));
+	// result.setDiscountPrice(FormatterUtils.cleanNumberToString(
+	// surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2)
+	// td.a-right")).getText()));
+	// result.setShippingPrice(FormatterUtils.cleanNumberToString(
+	// surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax
+	// td.a-right")).getText()));
+	// result.setTotalAmount(FormatterUtils.cleanNumberToString(
+	// surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total
+	// td.a-right")).getText()));
+	//
+	// DataGrabber.confirmationTotals = result;
+	// return result;
+	// }
 
-		result.setSubTotal(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
-		result.setDiscountPrice(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
-		result.setShippingPrice(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
-		result.setTotalAmount(FormatterUtils.cleanNumberToString(surveyTotalsContainer.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
+	public ShippingModel grabSurveyData(WebElement element) {
+		ShippingModel result = new ShippingModel();
+		element(element).waitUntilVisible();
+
+		result.setSubTotal(FormatterUtils
+				.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr:nth-child(1) td.a-right")).getText()));
+		result.setDiscountPrice(FormatterUtils
+				.parseValueToTwoDecimals("-" + element.findElement(By.cssSelector("tr:nth-child(2) td.a-right")).getText()));
+		result.setShippingPrice(FormatterUtils
+				.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.shipping_tax td.a-right")).getText()));
+		result.setTotalAmount(FormatterUtils
+				.parseValueToTwoDecimals(element.findElement(By.cssSelector("tr.grand_total td.a-right")).getText()));
 
 		DataGrabber.confirmationTotals = result;
+		return result;
+	}
+
+	public ShippingModel grabConfirmationTotals() {
+		ShippingModel result = grabSurveyData(surveyTotalsContainer);
+		DataGrabber.confirmationTotals = result;
+		return result;
+	}
+
+	public ShippingModel grabConfirmationTotalsTp0() {
+		ShippingModel result = grabSurveyData(surveyTotalsContainer);
+		DataGrabber.confirmationTotalsTp0 = result;
+		return result;
+	}
+
+	public ShippingModel grabConfirmationTotalsTp1() {
+		ShippingModel result = grabSurveyData(surveyTotalsContainerTp1);
+		DataGrabber.confirmationTotalsTp1 = result;
+		return result;
+	}
+
+	public ShippingModel grabConfirmationTotalsTp2() {
+		ShippingModel result = grabSurveyData(surveyTotalsContainerTp2);
+		DataGrabber.confirmationTotalsTp2 = result;
+		return result;
+	}
+	
+	public ShippingModel grabConfirmationTotalsTp3() {
+		ShippingModel result = grabSurveyData(surveyTotalsContainerTp3);
+		DataGrabber.confirmationTotalsTp3 = result;
 		return result;
 	}
 
@@ -153,13 +241,15 @@ public class ConfirmationPage extends AbstractPage {
 		for (WebElement webElementNow : entryList) {
 			CartProductModel productNow = new CartProductModel();
 
-			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			String parseQty = FormatterUtils
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
-			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
-			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setUnitPrice(FormatterUtils
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setProductsPrice("");
 			productNow.setFinalPrice("");
 			productNow.setPriceIP("");
@@ -171,22 +261,46 @@ public class ConfirmationPage extends AbstractPage {
 		return resultList;
 	}
 
-	public List<RegularUserCartProductModel> grabRegularProductsList() {
-
+	public List<BorrowedCartModel> grabBorrowedProductsList() {
 		element(productListContainer).waitUntilVisible();
 		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
+		List<BorrowedCartModel> resultList = new ArrayList<BorrowedCartModel>();
+
+		for (WebElement webElementNow : entryList) {
+			BorrowedCartModel productNow = new BorrowedCartModel();
+
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
+			productNow.setUnitPrice(FormatterUtils
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setFinalPrice("");
+			productNow.setIpPoints("");
+
+			resultList.add(productNow);
+		}
+
+		BorrowDataGrabber.grabbedBorrowConfirmationProductsList = resultList;
+		return resultList;
+	}
+
+	public List<RegularUserCartProductModel> grabRegularProductsList(WebElement element) {
+
+		element(element).waitUntilVisible();
+		List<WebElement> entryList = element.findElements(By.cssSelector("tbody > tr"));
 		List<RegularUserCartProductModel> resultList = new ArrayList<RegularUserCartProductModel>();
 
 		for (WebElement webElementNow : entryList) {
 			RegularUserCartProductModel productNow = new RegularUserCartProductModel();
 
-			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			String parseQty = FormatterUtils
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
 
-			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
-			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setUnitPrice(FormatterUtils
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			resultList.add(productNow);
 
@@ -197,22 +311,55 @@ public class ConfirmationPage extends AbstractPage {
 		return resultList;
 	}
 
-	public List<HostCartProductModel> grabHostProductsList() {
+	public List<RegularUserCartProductModel> grabRegularProductsList() {
+		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainer);
+		RegularUserDataGrabber.grabbedRegularConfirmationProductsList = resultList;
+		return resultList;
+	}
 
-		element(productListContainer).waitUntilVisible();
-		List<WebElement> entryList = productListContainer.findElements(By.cssSelector("tbody > tr"));
+	public List<RegularUserCartProductModel> grabRegularProductsListTp0() {
+		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainer);
+		RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp0 = resultList;
+		return resultList;
+	}
+
+	public List<RegularUserCartProductModel> grabRegularProductsListTp1() {
+		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainerTp1);
+		RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp1 = resultList;
+		return resultList;
+	}
+
+	public List<RegularUserCartProductModel> grabRegularProductsListTp2() {
+		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainerTp2);
+		RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp2 = resultList;
+		return resultList;
+	}
+	
+	public List<RegularUserCartProductModel> grabRegularProductsListTp3() {
+		List<RegularUserCartProductModel> resultList = grabRegularProductsList(productListContainerTp3);
+		RegularUserDataGrabber.grabbedRegularConfirmationProductsListTp3 = resultList;
+		return resultList;
+	}
+
+	public List<HostCartProductModel> grabHostProductsList(WebElement element) {
+
+		element(element).waitUntilVisible();
+		List<WebElement> entryList = element.findElements(By.cssSelector("tbody > tr"));
 		List<HostCartProductModel> resultList = new ArrayList<HostCartProductModel>();
 
 		for (WebElement webElementNow : entryList) {
 			HostCartProductModel productNow = new HostCartProductModel();
 
-			String parseQty = FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			String parseQty = FormatterUtils
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
 			parseQty = parseQty.replace("x", "").trim();
+			parseQty = parseQty.replace(" x", "").trim();
 
-			productNow.setName(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()));
-			productNow.setProdCode(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim()));
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
 			productNow.setQuantity(parseQty);
-			productNow.setUnitPrice(FormatterUtils.cleanNumberToString(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setUnitPrice(FormatterUtils
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setFinalPrice("");
 			resultList.add(productNow);
 
@@ -220,6 +367,30 @@ public class ConfirmationPage extends AbstractPage {
 
 		HostDataGrabber.grabbedHostConfirmationProductsList = resultList;
 
+		return resultList;
+	}
+
+	public List<HostCartProductModel> grabHostProductsList() {
+		List<HostCartProductModel> resultList = grabHostProductsList(productListContainer);
+		HostDataGrabber.grabbedHostConfirmationProductsList = resultList;
+		return resultList;
+	}
+
+	public List<HostCartProductModel> grabHostProductsListTp0() {
+		List<HostCartProductModel> resultList = grabHostProductsList(productListContainer);
+		HostDataGrabber.grabbedHostConfirmationProductsListTp0 = resultList;
+		return resultList;
+	}
+
+	public List<HostCartProductModel> grabHostProductsListTp1() {
+		List<HostCartProductModel> resultList = grabHostProductsList(productListContainerTp1);
+		HostDataGrabber.grabbedHostConfirmationProductsListTp1 = resultList;
+		return resultList;
+	}
+
+	public List<HostCartProductModel> grabHostProductsListTp2() {
+		List<HostCartProductModel> resultList = grabHostProductsList(productListContainerTp2);
+		HostDataGrabber.grabbedHostConfirmationProductsListTp2 = resultList;
 		return resultList;
 	}
 

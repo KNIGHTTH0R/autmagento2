@@ -6,48 +6,60 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
-
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.CreateProduct;
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.DashboardSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
+import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
+import com.steps.frontend.reports.JewelryBonusHistorySteps;
 import com.tests.BaseTest;
-import com.tools.SoapKeys;
-import com.tools.data.RegularCartCalcDetailsModel;
+import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
+import com.tools.data.backend.JewelryHistoryModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandlers.regularUser.RegularUserCartCalculator;
-import com.tools.datahandlers.regularUser.RegularUserDataGrabber;
-import com.tools.env.variables.UrlConstants;
+import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
-@WithTag(name = "US10", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
-@RunWith(ThucydidesRunner.class)
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
+@WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
+@Story(Application.StyleParty.US10_6.class)
+@RunWith(SerenityRunner.class)
 public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
@@ -66,12 +78,20 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 	public AddRegularProductsWorkflow addRegularProductsWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
-	
+	@Steps
+	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
+	@Steps
+	public DashboardSteps dashboardSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
+	@Steps
+	public OrderForCustomerCartSteps orderForCustomerCartSteps;
+
 	private String username, password, customerName;
 
+	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
 	private CreditCardModel creditCardData = new CreditCardModel();
-	public RegularCartCalcDetailsModel total = new RegularCartCalcDetailsModel();
-	public static UrlModel urlModel = new UrlModel();
+	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 
 	@Before
@@ -79,26 +99,20 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = CreateProduct.createProductModel();
+		genProduct1 = MagentoProductCalls.createZzzProductModel();
 		genProduct1.setPrice("89.00");
-		CreateProduct.createApiProduct(genProduct1);
+		MagentoProductCalls.createJbZzzApiProduct(genProduct1);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss10" + File.separator + "us10006.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
-
-			creditCardData.setCardNumber(prop.getProperty("cardNumber"));
-			creditCardData.setCardName(prop.getProperty("cardName"));
-			creditCardData.setMonthExpiration(prop.getProperty("cardMonth"));
-			creditCardData.setYearExpiration(prop.getProperty("cardYear"));
-			creditCardData.setCvcNumber(prop.getProperty("cardCVC"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -112,19 +126,34 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10006CreatePartyWithNewContactHostTest" + SoapKeys.GRAB).get(0);
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName());
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.COMPLETE);
 
 	}
 
 	@Test
 	public void us10006OrderForCustomerAsPartyHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
-		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.verifyActivePartyAvailableActions();
-		partyDetailsSteps.orderForCustomerFromParty(customerName);
-		customerRegistrationSteps.wipeHostCart();
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		headerSteps.goToProfile();
+
+		String currentTotal = dashboardSteps.getJewelryBonus();
+
+		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal,genProduct1.getJewerlyBonusValue(), true);
+
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			partyDetailsSteps.orderForCustomerFromParty(customerName);
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
+		
+		generalCartSteps.clearCart();
+		
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
@@ -137,10 +166,10 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
-		shippingSteps.clickGoToPaymentMethod();
+		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
-		String order = FormatterUtils.extractOrderIDFromURL(url);
+		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
@@ -149,8 +178,14 @@ public class US10006OrderForCustomerAsPartyHostTest extends BaseTest {
 		checkoutValidationSteps.verifySuccessMessage();
 
 		customerRegistrationSteps.navigate(urlModel.getUrl());
-		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(order);
+		partyDetailsSteps.verifyThatOrderIsInTheOrdersList(RegularUserDataGrabber.orderModel.getOrderId());
 
+	}
+
+	@After
+	public void saveData() {
+		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName());
+		MongoWriter.saveJewerlyHistoryModel(expectedJewelryHistoryModelWhenOrderComplete, getClass().getSimpleName() + SoapKeys.COMPLETE);
 	}
 
 }

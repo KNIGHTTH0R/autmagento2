@@ -1,9 +1,15 @@
 package com.pages.frontend.registration.party;
 
-import net.thucydides.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class CreateNewContactPage extends AbstractPage {
@@ -47,9 +53,16 @@ public class CreateNewContactPage extends AbstractPage {
 	@FindBy(css = "#addContactForm button[type*='submit']")
 	private WebElement sumbitContact;
 
+	@FindBy(css = "div[id*='advice-validate-zip']")
+	private WebElement zipValidationMessage;
+
 	public void firstnameInput(String name) {
 		element(firstname).waitUntilVisible();
 		firstname.sendKeys(name);
+	}
+
+	public void skipFirstnameInput(String name) {
+		evaluateJavascript("document.getElementsByName('firstname').className = 'input-text';");
 	}
 
 	public void lastnameInput(String name) {
@@ -75,6 +88,16 @@ public class CreateNewContactPage extends AbstractPage {
 	public void postcodeInput(String code) {
 		element(postcode).waitUntilVisible();
 		postcode.sendKeys(code);
+	}
+
+	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
+		element(postcode).waitUntilVisible();
+		postcode.clear();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		element(postcode).typeAndTab(postCode);
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		validateZipValidationErrorMessage();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 
 	public void cityInput(String city) {
@@ -109,6 +132,14 @@ public class CreateNewContactPage extends AbstractPage {
 	public void submitContact() {
 		element(sumbitContact).waitUntilVisible();
 		sumbitContact.click();
+		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		waitABit(TimeConstants.TIME_CONSTANT);
+	}
+
+	public void validateZipValidationErrorMessage() {
+		element(zipValidationMessage).waitUntilVisible();
+		Assert.assertTrue("The message from validation message is not the expected one!!", zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
 	}
 
 }

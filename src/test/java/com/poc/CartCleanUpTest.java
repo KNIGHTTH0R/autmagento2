@@ -1,8 +1,8 @@
 package com.poc;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.checkout.cart.styleCoachCart.CartSteps;
 import com.tests.BaseTest;
 
-@RunWith(ThucydidesRunner.class)
+@RunWith(SerenityRunner.class)
 public class CartCleanUpTest extends BaseTest{
 
 	@Steps

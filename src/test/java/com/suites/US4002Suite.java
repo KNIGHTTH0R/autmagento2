@@ -4,20 +4,18 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.poc.ActivateRule;
-import com.poc.DeactivateRule;
-import com.tests.us4.us4002.US4002Test;
-import com.tests.us4.us4002.US4002UserProfileOrderIdTest;
+import com.tests.us4.us4002.US4002ActivateBuy3Get1Test;
+import com.tests.us4.us4002.US4002DeactivateBuy3Get1Test;
+import com.tests.us4.us4002.US4002ShopForMyselfWithBuy3GetOneTest;
 import com.tests.us4.us4002.US4002ValidateOrderBackOfficeTest;
-import com.tests.us4.us4002.US4002ValidateOrderEmailTest;
 
 @SuiteClasses({
-	ActivateRule.class,
-	US4002Test.class,
-	US4002UserProfileOrderIdTest.class,
-	US4002ValidateOrderEmailTest.class,
+	US4002ActivateBuy3Get1Test.class,
+	US4002ShopForMyselfWithBuy3GetOneTest.class,
+//	US4002CheckOrderOnStylecoachProfileTest.class,
+//	US4002ValidateOrderEmailTest.class,
 	US4002ValidateOrderBackOfficeTest.class,
-	DeactivateRule.class,
+	US4002DeactivateBuy3Get1Test.class,
 })
 @RunWith(Suite.class)
 public class US4002Suite {

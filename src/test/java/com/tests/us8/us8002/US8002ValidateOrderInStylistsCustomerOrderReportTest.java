@@ -7,10 +7,10 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,26 +18,28 @@ import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.SoapKeys;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
-import com.tools.env.variables.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US8", type = "frontend")
-@Story(Application.Shop.RegularCart.class)
-@RunWith(ThucydidesRunner.class)
+@WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
+@Story(Application.RegularCart.US8_2.class)
+@RunWith(SerenityRunner.class)
 public class US8002ValidateOrderInStylistsCustomerOrderReportTest extends BaseTest{
 
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public FooterSteps footerSteps;
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps 
@@ -81,8 +83,11 @@ public class US8002ValidateOrderInStylistsCustomerOrderReportTest extends BaseTe
 	public void us8002ValidateOrderInStylistsCustomerOrderReportTest() {
 		
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
-		
-		headerSteps.redirectTostylistsCustomerOrderReport();
+		if (!headerSteps.succesfullLogin()) {
+
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.redirectToStylistsCustomerOrderReport();
 		List<OrderModel> orderHistory = stylistsCustomerOrdersReportSteps.grabOrderReport();
 
 		String orderId = orderHistory.get(0).getOrderId();

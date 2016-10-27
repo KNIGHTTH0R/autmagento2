@@ -1,9 +1,9 @@
 package com.tests.us6.us6002;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.runners.ThucydidesRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,19 +13,19 @@ import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ConfigConstants;
+import com.tools.constants.Credentials;
 import com.tools.data.backend.RegistrationActivationDateModel;
 import com.tools.data.backend.StylistPropertiesModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.env.constants.ConfigConstants;
-import com.tools.env.variables.Credentials;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.PrintUtils;
 import com.workflows.backend.CustomerAndStylistRegistrationWorkflows;
 
-@WithTag(name = "US6", type = "backend")
-@Story(Application.Registration.Stylist.class)
-@RunWith(ThucydidesRunner.class)
+@WithTag(name = "US6.2 Sc Registration Existing Customer Test ", type = "Scenarios")
+@Story(Application.StylecoachRegistration.US6_2.class)
+@RunWith(SerenityRunner.class)
 public class US6002CheckStylistActivationTest extends BaseTest {
 
 	@Steps
@@ -37,16 +37,16 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 	@Steps 
 	public CustomerAndStylistRegistrationWorkflows customerAndStylistRegistrationWorkflows;
 
-	public StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
-	public StylistPropertiesModel expectedAfterOrderPaidStylistData = new StylistPropertiesModel();
-	public RegistrationActivationDateModel expectedDateModel = new RegistrationActivationDateModel();
+	private StylistPropertiesModel expectedAfterLinkConfirmationStylistData = new StylistPropertiesModel();
+	private StylistPropertiesModel expectedAfterOrderPaidStylistData = new StylistPropertiesModel();
+	private RegistrationActivationDateModel expectedDateModel = new RegistrationActivationDateModel();
 
-	public CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
+	private CustomerFormModel stylistRegistrationData = new CustomerFormModel("");
 
 	@Before
 	public void setUp() throws Exception {
 		
-		String formDateCreation = MongoReader.grabStylistDateModels("US6002StyleCoachRegistrationTest").get(0).getDate();
+		String formDateCreation = MongoReader.grabDateModels("US6002ScRegistrationExistingCustomerTest").get(0).getDate();
 		int size = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").size();
 		if (size > 0) {
 			stylistRegistrationData = MongoReader.grabCustomerFormModels("US6002CreateCustomerTest").get(0);
@@ -54,7 +54,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 			System.out.println("The database has no entries");
 
 		
-		expectedAfterLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.GENERAL);
+		expectedAfterLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.STYLIST);
 		expectedAfterOrderPaidStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.STYLIST);
 		expectedDateModel = new RegistrationActivationDateModel(formDateCreation,formDateCreation);
 		
@@ -83,7 +83,7 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 		RegistrationActivationDateModel grabDatesModel = backEndSteps.grabStylistRegistrationAndConfirmationDates();
 	
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabAfterLinkConfirmationStylistData, expectedAfterLinkConfirmationStylistData);
-		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER CONFIRMATION LINK");
+		customerAndStylistRegistrationWorkflows.validateStylistProperties("AFTER REGISTRATION FROM EXISTING CUSTOMER");
 		PrintUtils.printStylistPropertiesModel(grabAfterLinkConfirmationStylistData);
 		PrintUtils.printStylistPropertiesModel(expectedAfterLinkConfirmationStylistData);
 		

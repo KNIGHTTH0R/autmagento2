@@ -6,6 +6,18 @@ public class OrderInfoModel {
 	private String orderStatus;
 	private String aquiredBy;
 	private String orderIP;
+	private String deliveryDate;
+	private String pspReference;
+	
+	
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
 
 	public String getOrderDate() {
 		return orderDate;
@@ -13,6 +25,14 @@ public class OrderInfoModel {
 
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
+	}
+
+	public String getPspReference() {
+		return pspReference;
+	}
+
+	public void setPspReference(String pspReference) {
+		this.pspReference = pspReference;
 	}
 
 	public String getOrderStatus() {
