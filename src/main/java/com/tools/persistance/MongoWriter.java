@@ -312,11 +312,14 @@ public class MongoWriter extends MongoConnector {
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
 		document.put(MongoTableKeys.PRODUCT_CODE, product.getSku());
+		document.put(MongoTableKeys.PRODUCT_IP, product.getIp());
+		document.put(MongoTableKeys.PRODUCT_PRICE, product.getPrice());
 		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getStockData().getQty());
 		document.put(MongoTableKeys.PRODUCT_IN_STOCK, product.getStockData().getIsInStock());
 		document.put(MongoTableKeys.PRODUCT_MIN_QUANTITY, product.getStockData().getMinQty());
 		document.put(MongoTableKeys.PRODUCT_IS_DISCONTINUED, product.getStockData().getIsDiscontinued());
 		document.put(MongoTableKeys.PRODUCT_DELIVERY_DATE, product.getStockData().getEarliestAvailability());
+	
 		
 		table.insert(document);
 	}

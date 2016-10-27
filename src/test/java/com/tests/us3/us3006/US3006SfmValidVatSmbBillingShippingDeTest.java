@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -83,6 +85,8 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	private CreditCardModel creditCardData = new CreditCardModel();
+	
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -92,6 +96,8 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.00");
@@ -101,9 +107,11 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		genProduct2.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("239.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+//		genProduct3 = MagentoProductCalls.createMarketingProductModel();
+//		genProduct3.setPrice("239.00");
+//		MagentoProductCalls.createApiProduct(genProduct3);
+		
+		genProduct3 = createdProductsList.get(2);
 
 		Properties prop = new Properties();
 		InputStream input = null;

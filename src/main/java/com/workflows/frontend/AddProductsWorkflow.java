@@ -51,6 +51,11 @@ public class AddProductsWorkflow {
 		return productSteps.setBasicProductAddToCart(qty, productProperty, askingPrice, finalPrice, ipPoints,
 				discountclass);
 	}
+	
+
+	
+	
+
 
 	@StepGroup
 	@Title("Update products in list")

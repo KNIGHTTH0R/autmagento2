@@ -88,7 +88,7 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 	private ProductDetailedModel genProduct2= new ProductDetailedModel();
 
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
-
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -97,16 +97,21 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 
 		productsList = MongoReader.grabBasicProductModel("US3005BuyProductsForTheFirstTimeTest" + SoapKeys.GRAB);
 
-		genProduct1.setName(productsList.get(0).getName());
-		genProduct1.setSku(productsList.get(0).getProdCode());
-		genProduct1.setIp("50");
-		genProduct1.setPrice("29.90");
-		
-		genProduct2.setName(productsList.get(1).getName());
-		genProduct2.setSku(productsList.get(1).getProdCode());
-		genProduct2.setIp("60");
-		genProduct2.setPrice("34.90");
+//		genProduct1.setName(productsList.get(0).getName());
+//		genProduct1.setSku(productsList.get(0).getProdCode());
+//		genProduct1.setIp("50");
+//		genProduct1.setPrice("29.90");
+//		
+//		genProduct2.setName(productsList.get(1).getName());
+//		genProduct2.setSku(productsList.get(1).getProdCode());
+//		genProduct2.setIp("60");
+//		genProduct2.setPrice("34.90");
 
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(3);
+		genProduct2 = createdProductsList.get(4);
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 

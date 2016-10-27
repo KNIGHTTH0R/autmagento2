@@ -127,7 +127,8 @@ public class MongoTableKeys {
 	public static final String PRODUCT_MIN_QUANTITY = "minQty";
 	public static final String PRODUCT_IS_DISCONTINUED = "isDiscontinued";
 	public static final String STOCK_DATA_OBJECT = "stockDataObject";
-
+	public static final String PRODUCT_IP = "iP";
+	
 	// CalcDetailsModel
 	public static final String CALC_DETAILS_MODEL = "CalcDetailsModel";
 	public static final String REGULAR_CART_CALC_DETAILS_MODEL = "RegularCartCalcDetailsModel";

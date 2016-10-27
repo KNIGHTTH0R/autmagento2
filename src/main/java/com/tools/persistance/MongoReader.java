@@ -526,6 +526,7 @@ public class MongoReader extends MongoConnector {
 				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
 				result.setPriceIP(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
 				result.setDiscountClass(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_CLASS));
+				
 
 				itemList.add(result);
 			}
@@ -559,6 +560,8 @@ public class MongoReader extends MongoConnector {
 				stockData
 						.setEarliestAvailability(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DELIVERY_DATE));
 				result.setStockData(stockData);
+				result.setIp(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP));
+				result.setPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
 
 				itemList.add(result);
 			}

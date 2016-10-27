@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -15,7 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -24,6 +25,7 @@ import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.AddProductsModalSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.tests.BaseTest;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoReader;
@@ -51,14 +53,18 @@ public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 
 	private String username, password, customerName;
 	private ProductDetailedModel genProduct1;
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		genProduct1.setIp("75");
-		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("89.00");
+//		genProduct1.setIp("75");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(1);
 
 		Properties prop = new Properties();
 		InputStream input = null;

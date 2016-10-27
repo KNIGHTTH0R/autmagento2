@@ -5,15 +5,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -29,6 +35,7 @@ import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -38,11 +45,6 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US11.8 Party Host Buys For Customer With 0 Amount Immediate and Tp Products", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_8.class)
@@ -84,25 +86,36 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+	
 
 	@Before
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("50.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("50.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct2.setPrice("29.00");
+//		genProduct1.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//
+//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct3.setPrice("9.90");
+//		genProduct1.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct3);
+		
 
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("29.00");
-		genProduct1.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct3.setPrice("9.90");
-		genProduct1.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+			
+		genProduct1 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(15);
+		genProduct3 = createdProductsList.get(16);
+		
+		
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -189,7 +202,7 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 		shippingPartySectionSteps.enterPLZ(plz);
 		shippingPartySectionSteps.selectCountry(country);
 		shippingSteps.goToPaymentMethod();
-
+		
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
 

@@ -3,6 +3,11 @@ package com.tests.us6.us6001;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,7 +19,6 @@ import com.steps.backend.OrdersSteps;
 import com.steps.backend.validations.OrderValidationSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.data.StylistRegistrationCartCalcDetailsModel;
@@ -27,11 +31,6 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.backend.OrderWorkflows;
 import com.workflows.backend.borrowCart.BorrowCartOrderProductsWorkflows;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US6.1 Sc Registration New Customer Test ", type = "Scenarios")
 @Story(Application.StylecoachRegistration.US6_1.class)
@@ -99,10 +98,10 @@ public class US6001ValidateStarterSetOrderInBackendTest extends BaseTest {
 		orderWorkflows.validateStarterSetCartCalculationTotals("TOTALS VALIVATION");
 
 		orderInfoModel = ordersSteps.grabOrderInfo();
-		ordersSteps.selectMenu(ConfigConstants.ADYEN_NOTIFICATION_TAB);
-		ordersSteps.verifyAuthorization(orderInfoModel.getPspReference());
-		ordersSteps.verifyCapture(orderInfoModel.getPspReference());
-		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung erfolgreich");
+//		ordersSteps.selectMenu(ConfigConstants.ADYEN_NOTIFICATION_TAB);
+//		ordersSteps.verifyAuthorization(orderInfoModel.getPspReference());
+//		ordersSteps.verifyCapture(orderInfoModel.getPspReference());
+//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung erfolgreich");
 
 		customVerifications.printErrors();
 	}

@@ -4,14 +4,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -41,11 +47,6 @@ import com.tools.utils.FormatterUtils;
 import com.tools.utils.PrintUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US8.2 Customer Buy With Voucher Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_2.class)
@@ -92,23 +93,31 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(1);
+		genProduct2 = createdProductsList.get(0);
+		genProduct3 = createdProductsList.get(13);
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("89.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createProductModel();
+//		genProduct2.setPrice("49.90");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+		
+		  
 
-		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("5.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+//		genProduct3 = MagentoProductCalls.createProductModel();
+//		genProduct3.setPrice("5.00");
+//		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;

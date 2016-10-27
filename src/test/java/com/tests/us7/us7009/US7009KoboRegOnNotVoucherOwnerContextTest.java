@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.ContactBoosterRegistrationSteps;
@@ -35,6 +35,7 @@ import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
@@ -85,15 +86,20 @@ public class US7009KoboRegOnNotVoucherOwnerContextTest extends BaseTest {
 	private String koboCode;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1;
-
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+	
 	@Before
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createPomProductModel();
-		genProduct1.setName("POM_" + genProduct1.getName());
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1 = MagentoProductCalls.createPomProductModel();
+//		genProduct1.setName("POM_" + genProduct1.getName());
+//		genProduct1.setPrice("89.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+        
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(7);
+		
 
 		Properties prop = new Properties();
 		InputStream input = null;

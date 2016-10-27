@@ -4,15 +4,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.FancyBoxSteps;
@@ -33,6 +38,7 @@ import com.tools.CustomVerification;
 import com.tools.cartcalculations.borrowCart.PomCartCalculator;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
@@ -47,11 +53,6 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AdyenWorkflows;
 import com.workflows.frontend.ShippingAndConfirmationWorkflows;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US7.11 Kobo Campaign Registration On Master Test ", type = "Scenarios")
 @Story(Application.KoboCampaign.US7_11.class)
@@ -99,6 +100,7 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private String discountClass;
 	private String shippingValue;
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -127,11 +129,14 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 				}
 			}
 		}
-
-		genProduct1 = MagentoProductCalls.createPomProductModel();
-		genProduct1.setName("POM_" + genProduct1.getName());
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct1 = MagentoProductCalls.createPomProductModel();
+//		genProduct1.setName("POM_" + genProduct1.getName());
+//		genProduct1.setPrice("89.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+		
+		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+			genProduct1 = createdProductsList.get(7);
 
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();

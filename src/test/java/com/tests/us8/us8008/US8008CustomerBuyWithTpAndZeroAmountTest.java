@@ -5,15 +5,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -28,6 +34,7 @@ import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
@@ -38,11 +45,6 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US8.8 Customer Buy With 0 Amount Immediate and Tp products", type = "Scenarios")
 @Story(Application.RegularCart.US8_8.class)
@@ -81,26 +83,34 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+
 
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 		DataGrabber.wipe();
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(6);
+		genProduct2 = createdProductsList.get(8);
+		genProduct3 = createdProductsList.get(10);
+		
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("50.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
-
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("29.00");
-		genProduct1.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct3.setPrice("19.90");
-		genProduct1.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct3);
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("50.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct2.setPrice("29.00");
+//		genProduct1.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//
+//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct3.setPrice("19.90");
+//		genProduct1.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;

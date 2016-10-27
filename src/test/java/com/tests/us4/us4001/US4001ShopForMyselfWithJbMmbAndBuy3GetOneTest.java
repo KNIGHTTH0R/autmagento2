@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -86,6 +88,8 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3;
+	
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -95,18 +99,25 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("100");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		genProduct2.setName("QPIWDODRU");
-		genProduct2.setSku("DFCDVEUBK");
-		genProduct2.setIp("42");
-		genProduct2.setPrice("49.90");
+		
+//		genProduct2.setName("QPIWDODRU");
+//		genProduct2.setSku("DFCDVEUBK");
+//		genProduct2.setIp("42");
+//		genProduct2.setPrice("49.90");
+		
 //		genProduct2 = MagentoProductCalls.createProductModel();
 //		genProduct2.setIp("42");
 //		genProduct2.setPrice("49.90");
 //		MagentoProductCalls.createApiProduct(genProduct2);
 		
-		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("5.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+//		genProduct3 = MagentoProductCalls.createMarketingProductModel();
+//		genProduct3.setPrice("5.00");
+//		MagentoProductCalls.createApiProduct(genProduct3);
+		
+        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct2 = createdProductsList.get(0);
+		genProduct3 = createdProductsList.get(5);
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 

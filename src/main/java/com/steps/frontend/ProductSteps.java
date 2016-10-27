@@ -58,6 +58,8 @@ public class ProductSteps extends AbstractSteps {
 		return result;
 	}
 
+	
+
 	@StepGroup
 	public BasicProductModel setBasicProductAddToWhislist(String qty, String size, String askingPrice,
 			String finalPrice, String ip, String discountClass) {

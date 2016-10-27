@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -101,6 +102,7 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 	String orderId;
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -114,19 +116,25 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		productsList = MongoReader
 				.grabRegularBasicProductModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.CALC);
 		System.out.println("dsdsdsdsds " + productsList.size());
+		
+        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		
+		genProduct1 = createdProductsList.get(1);
+		genProduct2 = createdProductsList.get(0);
+		genProduct3 = createdProductsList.get(6);
 
-		genProduct1.setName(productsList.get(0).getName());
-		genProduct1.setSku(productsList.get(0).getProdCode());
-		genProduct1.setPrice("89.00");
-		genProduct1.setIp("0");
-		genProduct2.setName(productsList.get(1).getName());
-		genProduct2.setSku(productsList.get(1).getProdCode());
-		genProduct2.setPrice("49.90");
-		genProduct2.setIp("0");
-		genProduct3.setName(productsList.get(2).getName());
-		genProduct3.setSku(productsList.get(2).getProdCode());
-		genProduct3.setPrice("10.00");
-		genProduct3.setIp("0");
+//		genProduct1.setName(productsList.get(0).getName());
+//		genProduct1.setSku(productsList.get(0).getProdCode());
+//		genProduct1.setPrice("89.00");
+//		genProduct1.setIp("0");
+//		genProduct2.setName(productsList.get(1).getName());
+//		genProduct2.setSku(productsList.get(1).getProdCode());
+//		genProduct2.setPrice("49.90");
+//		genProduct2.setIp("0");
+//		genProduct3.setName(productsList.get(2).getName());
+//		genProduct3.setSku(productsList.get(2).getProdCode());
+//		genProduct3.setPrice("10.00");
+//		genProduct3.setIp("0");
 
 		Properties prop = new Properties();
 		InputStream input = null;

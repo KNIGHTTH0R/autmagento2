@@ -244,6 +244,8 @@ public class AbstractSteps extends ScenarioSteps {
 			}
 		}
 	}
+	
+
 
 	@Step
 	public void navigate(String URL) {

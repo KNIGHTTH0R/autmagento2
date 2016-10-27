@@ -3,6 +3,8 @@ package com.steps.backend.promotion;
 import net.thucydides.core.annotations.Step;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.tools.constants.Credentials;
 import com.tools.constants.UrlConstants;
@@ -12,9 +14,12 @@ import com.tools.requirements.AbstractSteps;
 public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
+	
+	
 
 	@Step
 	public void activateRule(String ruleName){
+
 		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(Credentials.BE_USER);
 		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);

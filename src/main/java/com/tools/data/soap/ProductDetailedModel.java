@@ -350,4 +350,8 @@ public class ProductDetailedModel {
 		this.jewelryBonusCart = jewelryBonusCart;
 	}
 
+	public String toString() {
+		return sku + ", " + name;
+
+	}
 }

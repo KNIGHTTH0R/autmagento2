@@ -5,8 +5,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +21,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.ApacheHttpHelper;
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -33,6 +39,7 @@ import com.tools.cartcalculations.regularUser.RegularCartTotalsCalculation;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.EnvironmentConstants;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -47,11 +54,6 @@ import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US8.9 Customer Buy With Term Purchase Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_7.class)
@@ -99,6 +101,7 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 	private ProductDetailedModel genProduct3;
 	private ProductDetailedModel genProduct4;
 	private TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -106,25 +109,32 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 		DataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
-
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("5.00");
-		genProduct3.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct3);
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("89.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct2.setPrice("49.90");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//
+//		genProduct3 = MagentoProductCalls.createProductModel();
+//		genProduct3.setPrice("5.00");
+//		genProduct3.setStockData(
+//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+//		MagentoProductCalls.createApiProduct(genProduct3);
+//		
+//		genProduct4 = MagentoProductCalls.createProductModel();
+//		genProduct4.setPrice("50.00");
+//		MagentoProductCalls.createApiProduct(genProduct4);
+//		genProduct4.setStockData(
+//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		
-		genProduct4 = MagentoProductCalls.createProductModel();
-		genProduct4.setPrice("50.00");
-		MagentoProductCalls.createApiProduct(genProduct4);
-		genProduct4.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+	    createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+			
+		genProduct1 = createdProductsList.get(1);
+		genProduct2 = createdProductsList.get(8);
+		genProduct3 = createdProductsList.get(9);
+		genProduct4 = createdProductsList.get(11);
 
 		Properties prop = new Properties();
 		InputStream input = null;
