@@ -20,11 +20,6 @@ public class ValidationSteps extends AbstractSteps {
 	@StepGroup
 	public void validateStylistData(StylistDataModel initialData, StylistDataModel finalData) {
 
-		printStylistBackendValues("INITIAL", initialData.getCustomerLeads(), initialData.getHostessLeads(), initialData.getHostessLeadsWeek(), initialData.getStyleCoachLeads(),
-				initialData.getStyleCoachLeadsWeek());
-		printStylistBackendValues("FINAL", finalData.getCustomerLeads(), finalData.getHostessLeads(), finalData.getHostessLeadsWeek(), finalData.getStyleCoachLeads(),
-				finalData.getStyleCoachLeadsWeek());
-
 		verifyValues("Customer Leads ", initialData.getCustomerLeads(), finalData.getCustomerLeads());
 		verifyValues("Hostess Leads ", initialData.getHostessLeads(), finalData.getHostessLeads());
 		verifyValues("Hostess Leads Week ", initialData.getHostessLeadsWeek(), finalData.getHostessLeadsWeek());

@@ -126,7 +126,7 @@ public class ValidationWorkflows {
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidationsTotals() {
 
-		// checkoutValidationSteps.verifySuccessMessage();
+		checkoutValidationSteps.verifySuccessMessage();
 
 		cartWorkflows2.setVerifyTotalsDiscount(DataGrabber.cartTotals, CartCalculator.calculatedTotalsDiscounts);
 		cartWorkflows2.verifyTotalsDiscount("CART TOTALS");

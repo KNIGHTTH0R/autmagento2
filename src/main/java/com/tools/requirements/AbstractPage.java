@@ -1,11 +1,12 @@
 package com.tools.requirements;
 
-import net.thucydides.core.pages.PageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+import com.mysql.jdbc.Constants;
 import com.tools.constants.TimeConstants;
+
+import net.thucydides.core.pages.PageObject;
 
 public class AbstractPage extends PageObject {
 
@@ -32,7 +33,12 @@ public class AbstractPage extends PageObject {
 	public void elementjQueryMouseOver(String element) {
 		evaluateJavascript("var dd =jQuery(' " + element + " ').eq(1);dd.mouseover(); ");
 	}
+	
+	public void openNewTab() {
+		evaluateJavascript("window.open();");
+	}
 
+	
 	/**
 	 * Wait for document ready state for {@link Constants}.PAGE_LOAD_MAX_RETRY
 	 * time.
@@ -52,5 +58,8 @@ public class AbstractPage extends PageObject {
 			getDriver().manage().window().maximize();
 		}
 	}
+
+
+	
 
 }

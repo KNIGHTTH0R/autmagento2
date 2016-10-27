@@ -14,8 +14,6 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = 1L;
 	
-	
-
 	@Step
 	public void activateRule(String ruleName){
 

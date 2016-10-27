@@ -1,5 +1,7 @@
 package com.tools.requirements;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -176,11 +178,34 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 	}
+	
+	public void switchToNewestOpenedTab() {
+		Set<String> winSet = getDriver().getWindowHandles();
+		List<String> winList = new ArrayList<String>(winSet);
+		Assert.assertTrue("There is only one tab!", winList.size() > 1);
+		String newTab = winList.get(winList.size() - 1);
+		getDriver().switchTo().window(newTab);
+		getDriver().manage().window().maximize();
+	}
+
+	public void switchBackToPreviousTab() {
+		Set<String> winSet = getDriver().getWindowHandles();
+		List<String> winList = new ArrayList<String>(winSet);
+		Assert.assertTrue("There is only one tab!", winList.size() > 1);
+		String previousTab = winList.get(winList.size() - 2);
+		getDriver().switchTo().window(previousTab);
+		getDriver().manage().window().maximize();
+	}
 
 	public void refresh() {
 		getDriver().navigate().refresh();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
+	
+	public void openNewTab() {
+		abstractPage().openNewTab();
+	}
+
 
 	public void waitCertainTime(long time) {
 		waitABit(time);
@@ -707,18 +732,5 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 
 	// ------------------------- Common methods
-
-	@Step
-	@Screenshots(onlyOnFailures = true)
-	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads,
-			String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
-		System.out.println(" -- Print Totals - " + message);
-		System.out.println("CUSTOMERLEADS: " + customerLeads);
-		System.out.println("HOSTESSLEADS: " + hostessLeads);
-		System.out.println("HOSTESSLEADSWEEK: " + hostessLeadWeek);
-		System.out.println("STYLECOACHLEADS: " + styleCoachLeads);
-		System.out.println("STYLECOACHLEADSWEEK: " + styleCoachLeadsWeek);
-		getDriver().getCurrentUrl();
-	}
 
 }
