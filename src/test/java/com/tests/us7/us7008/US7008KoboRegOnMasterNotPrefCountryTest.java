@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.ContactBoosterRegistrationSteps;
@@ -36,6 +36,7 @@ import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
@@ -88,15 +89,20 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 	private String koboCode;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1;
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createPomProductModel();
-		genProduct1.setName("POM_" + genProduct1.getName());
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
+		// genProduct1 = MagentoProductCalls.createPomProductModel();
+		// genProduct1.setName("POM_" + genProduct1.getName());
+		// genProduct1.setPrice("89.00");
+		// MagentoProductCalls.createApiProduct(genProduct1);
+
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+
+		genProduct1 = createdProductsList.get(7);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -106,7 +112,7 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us7008.properties");
 			prop.load(input);
 			context = prop.getProperty("context");
-			
+
 			input = new FileInputStream(UrlConstants.ENV_PATH + "koboVouchers.properties");
 			prop.load(input);
 			koboCode = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");
@@ -133,10 +139,11 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 	public void us7008KoboRegOnMasterNotPrefCountryTest() {
 		System.out.println(MongoReader.getBaseURL() + context);
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL() + context, koboCode);
-		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);		
+		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
 		koboSuccesFormSteps.verifyThatTheWebsiteHasChanged();
-		String url = emailClientSteps.grabConfirmationLinkFromEmail(dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
+		String url = emailClientSteps.grabConfirmationLinkFromEmail(
+				dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
 		contactBoosterRegistrationSteps.navigate(url);
 		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
@@ -150,7 +157,7 @@ public class US7008KoboRegOnMasterNotPrefCountryTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
-		
+
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
 

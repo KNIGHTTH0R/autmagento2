@@ -46,11 +46,11 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US3.5 Shop for myself 0.01 Euro difference",type = "Scenarios")
+@WithTag(name = "US3.5 Shop for myself 0.01 Euro difference", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_5.class)
 @RunWith(SerenityRunner.class)
 public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
-	
+
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -73,9 +73,9 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 	public PaymentSteps paymentSteps;
 	@Steps
 	public ValidationWorkflows validationWorkflows;
-	@Steps 
+	@Steps
 	public CustomVerification customVerifications;
-	
+
 	private String username, password;
 	private static String billingAddress;
 	private static String jewelryDiscount;
@@ -83,13 +83,13 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 	private static String shippingValue;
 	private static String taxClass;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	
-	private ProductDetailedModel genProduct1= new ProductDetailedModel();
-	private ProductDetailedModel genProduct2= new ProductDetailedModel();
+
+	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
-	
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
@@ -97,22 +97,27 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 
 		productsList = MongoReader.grabBasicProductModel("US3005BuyProductsForTheFirstTimeTest" + SoapKeys.GRAB);
 
-		genProduct1.setName(productsList.get(0).getName());
-		genProduct1.setSku(productsList.get(0).getProdCode());
-		genProduct1.setIp("50");
-		genProduct1.setPrice("29.90");
-		
-		genProduct2.setName(productsList.get(1).getName());
-		genProduct2.setSku(productsList.get(1).getProdCode());
-		genProduct2.setIp("60");
-		genProduct2.setPrice("34.90");
+		// genProduct1.setName(productsList.get(0).getName());
+		// genProduct1.setSku(productsList.get(0).getProdCode());
+		// genProduct1.setIp("50");
+		// genProduct1.setPrice("29.90");
+		//
+		// genProduct2.setName(productsList.get(1).getName());
+		// genProduct2.setSku(productsList.get(1).getProdCode());
+		// genProduct2.setIp("60");
+		// genProduct2.setPrice("34.90");
+
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(3);
+		genProduct2 = createdProductsList.get(4);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3005.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3005.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -121,7 +126,7 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
-			
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -150,13 +155,12 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 		BasicProductModel productData;
-		
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0",ConfigConstants.DISCOUNT_25);
+
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0",ConfigConstants.DISCOUNT_25);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
 		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
-		
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -167,7 +171,7 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
-		
+
 		shippingSteps.grabProductsList();
 		shippingSteps.grabSurveyData();
 		shippingSteps.goToPaymentMethod();
@@ -180,7 +184,6 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-		
 
 		confirmationSteps.grabProductsList();
 		confirmationSteps.grabConfirmationTotals();
@@ -188,17 +191,19 @@ public class US3005SfmScenario2For001DifferenceTest extends BaseTest {
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		
+
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		validationWorkflows.performCartValidations();
-		
+
 		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
-		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);

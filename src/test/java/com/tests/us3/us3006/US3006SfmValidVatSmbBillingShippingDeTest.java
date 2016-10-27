@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -84,6 +86,8 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 	private static String taxClass;
 	private CreditCardModel creditCardData = new CreditCardModel();
 
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -93,6 +97,8 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
@@ -101,16 +107,19 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		genProduct2.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("239.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		// genProduct3 = MagentoProductCalls.createMarketingProductModel();
+		// genProduct3.setPrice("239.00");
+		// MagentoProductCalls.createApiProduct(genProduct3);
+
+		genProduct3 = createdProductsList.get(2);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3006.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3006.properties");
 			prop.load(input);
 
 			username = prop.getProperty("username");
@@ -160,7 +169,8 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);
 
-		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher(voucherDiscount, jewelryDiscount, marketingDiscount, taxClass, shippingValue);
+		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher(voucherDiscount, jewelryDiscount,
+				marketingDiscount, taxClass, shippingValue);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -205,8 +215,10 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
-		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);

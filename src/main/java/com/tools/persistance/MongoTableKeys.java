@@ -127,6 +127,7 @@ public class MongoTableKeys {
 	public static final String PRODUCT_MIN_QUANTITY = "minQty";
 	public static final String PRODUCT_IS_DISCONTINUED = "isDiscontinued";
 	public static final String STOCK_DATA_OBJECT = "stockDataObject";
+	public static final String PRODUCT_IP = "iP";
 
 	// CalcDetailsModel
 	public static final String CALC_DETAILS_MODEL = "CalcDetailsModel";
@@ -144,7 +145,7 @@ public class MongoTableKeys {
 	public static final String ORDER_STATUS = "OrderStatus";
 	public static final String ORDER_DATE = "OrderDate";
 	public static final String AQUIRED_BY = "AquiredBy";
-	public static final String PSP_REFERENCE="PspReference";
+	public static final String PSP_REFERENCE = "PspReference";
 
 	// OrderTotalsModel
 	public static final String ORDER_TOTALS_MODEL = "OrderTotalsModel";
@@ -240,8 +241,7 @@ public class MongoTableKeys {
 	public static final String CATEGORY_NAME = null;
 	public static final String CATEGORY_URL = null;
 	public static final String CATEGORY_ID = null;
-	
-	
+
 	public static final String ENV_CONSTANTS_MODEL = "EnvironmentConstants";
 
 }

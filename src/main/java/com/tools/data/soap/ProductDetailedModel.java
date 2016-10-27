@@ -1,3 +1,4 @@
+
 package com.tools.data.soap;
 
 import java.util.ArrayList;
@@ -350,4 +351,8 @@ public class ProductDetailedModel {
 		this.jewelryBonusCart = jewelryBonusCart;
 	}
 
+	public String toString() {
+		return sku + ", " + name;
+
+	}
 }

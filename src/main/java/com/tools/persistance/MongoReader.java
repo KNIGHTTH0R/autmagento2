@@ -559,6 +559,8 @@ public class MongoReader extends MongoConnector {
 				stockData
 						.setEarliestAvailability(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DELIVERY_DATE));
 				result.setStockData(stockData);
+				result.setIp(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP));
+				result.setPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
 
 				itemList.add(result);
 			}
@@ -976,7 +978,7 @@ public class MongoReader extends MongoConnector {
 		return itemList;
 
 	}
-	
+
 	public static List<OrderInfoModel> grabAdminOrderModels(String testName) {
 		DBObject dbObject = null;
 		List<OrderInfoModel> itemList = new ArrayList<OrderInfoModel>();

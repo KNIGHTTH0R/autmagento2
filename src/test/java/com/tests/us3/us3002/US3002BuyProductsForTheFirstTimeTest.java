@@ -8,12 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -41,11 +45,6 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US3.2 Shop for myself 0.01 Euro difference", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
@@ -86,23 +85,23 @@ public class US3002BuyProductsForTheFirstTimeTest extends BaseTest {
 
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setIp("84");
-		genProduct1.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct1);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(0);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3002.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3002.properties");
 			prop.load(input);
 
 			username = prop.getProperty("username");
@@ -152,7 +151,7 @@ public class US3002BuyProductsForTheFirstTimeTest extends BaseTest {
 
 		paymentSteps.expandElvForm();
 		paymentSteps.fillElvForm(elvPaymentMethodData);
-		
+
 		confirmationSteps.agreeAndCheckout();
 	}
 

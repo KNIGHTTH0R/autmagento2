@@ -148,7 +148,8 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 
 	@Step
-	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass, String language, String website) {
+	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass, String language,
+			String website) {
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -167,7 +168,8 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
-		Assert.assertTrue(getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));
+		Assert.assertTrue(
+				getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));
 		footerPage().verifyThatFooterWebsiteIsCorrect(ContextConstants.NOT_PREFERED_WEBSITE);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
@@ -249,13 +251,13 @@ public class AbstractSteps extends ScenarioSteps {
 	public void navigate(String URL) {
 		// failsafe in case of redirects to live
 		if (!URL.contains("www.pippajean.com")) {
-			 getDriver().manage().timeouts().pageLoadTimeout(3600,
-			 TimeUnit.SECONDS);
+			getDriver().manage().timeouts().pageLoadTimeout(3600, TimeUnit.SECONDS);
 			getDriver().get(URL);
 			getDriver().manage().window().maximize();
 		}
 
 	}
+
 	@Step
 	public void navigateWithoutMaximize(String URL) {
 		// failsafe in case of redirects to live
@@ -264,7 +266,7 @@ public class AbstractSteps extends ScenarioSteps {
 			// TimeUnit.SECONDS);
 			getDriver().get(URL);
 		}
-		
+
 	}
 
 	public AbstractPage abstractPage() {
@@ -299,7 +301,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public AddProductsModalPage addProductsModalPage() {
 		return getPages().currentPageAt(AddProductsModalPage.class);
 	}
-	
+
 	public ProfileNavPage profileNavPage() {
 		return getPages().currentPageAt(ProfileNavPage.class);
 	}
@@ -379,16 +381,14 @@ public class AbstractSteps extends ScenarioSteps {
 	public SystemConfigurationPage systemConfigurationPage() {
 		return getPages().currentPageAt(SystemConfigurationPage.class);
 	}
-	
+
 	public OrderDetailsNavPage orderDetailsNavPage() {
 		return getPages().currentPageAt(OrderDetailsNavPage.class);
 	}
-	
+
 	public OrderNotificationPage orderNotificationPage() {
 		return getPages().currentPageAt(OrderNotificationPage.class);
 	}
-	
-	
 
 	// -----------------------FE-----------------------------------
 	public LoginPage loginPage() {
@@ -522,7 +522,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public UnbounceDykscPage unbounceDykscPage() {
 		return getPages().currentPageAt(UnbounceDykscPage.class);
 	}
-	
+
 	public TeamReportPage teamReportPage() {
 		return getPages().currentPageAt(TeamReportPage.class);
 	}
@@ -585,15 +585,15 @@ public class AbstractSteps extends ScenarioSteps {
 	public CreditCardFormPage creditCardFormPage() {
 		return getPages().currentPageAt(CreditCardFormPage.class);
 	}
-	
+
 	public ElvPaymentMethodPage elvPaymentMethodPage() {
 		return getPages().currentPageAt(ElvPaymentMethodPage.class);
 	}
-	
+
 	public SepaPaymentPage sepaPaymentPage() {
 		return getPages().currentPageAt(SepaPaymentPage.class);
 	}
-	
+
 	public KlarnaPage klarnaPage() {
 		return getPages().currentPageAt(KlarnaPage.class);
 	}
@@ -615,7 +615,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public JewelryBonusHistoryPage jewelryBonusHistoryPage() {
 		return getPages().currentPageAt(JewelryBonusHistoryPage.class);
 	}
-	
+
 	public GeneralCartPage generalCartPage() {
 		return getPages().currentPageAt(GeneralCartPage.class);
 	}
@@ -710,7 +710,8 @@ public class AbstractSteps extends ScenarioSteps {
 
 	@Step
 	@Screenshots(onlyOnFailures = true)
-	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads, String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
+	public void printStylistBackendValues(String message, String customerLeads, String hostessLeads,
+			String hostessLeadWeek, String styleCoachLeads, String styleCoachLeadsWeek) {
 		System.out.println(" -- Print Totals - " + message);
 		System.out.println("CUSTOMERLEADS: " + customerLeads);
 		System.out.println("HOSTESSLEADS: " + hostessLeads);

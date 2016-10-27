@@ -112,6 +112,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 	private PartyBonusCalculationModel partyBonusCalculationModelTp0 = new PartyBonusCalculationModel();
 	private PartyBonusCalculationModel partyBonusCalculationModelTp1 = new PartyBonusCalculationModel();
 	private PartyBonusCalculationModel partyBonusCalculationModelTp2 = new PartyBonusCalculationModel();
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -134,6 +135,13 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		genProduct3.setStockData(
 				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct3);
+		
+		
+		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+			
+//			genProduct1 = createdProductsList.get(3);
+//			genProduct2 = createdProductsList.get(12);
+//			genProduct3 = createdProductsList.get(11);
 
 		Properties prop = new Properties();
 		InputStream input = null;

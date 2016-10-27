@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -87,6 +89,8 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3;
 
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
@@ -99,15 +103,18 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 		genProduct2.setSku("DFCDVEUBK");
 		genProduct2.setIp("42");
 		genProduct2.setPrice("49.90");
-		
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setIp("42");
-//		genProduct2.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-		
-		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("5.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+
+		// genProduct2 = MagentoProductCalls.createProductModel();
+		// genProduct2.setIp("42");
+		// genProduct2.setPrice("49.90");
+		// MagentoProductCalls.createApiProduct(genProduct2);
+
+		// genProduct3 = MagentoProductCalls.createMarketingProductModel();
+		// genProduct3.setPrice("5.00");
+		// MagentoProductCalls.createApiProduct(genProduct3);
+
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct3 = createdProductsList.get(5);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -183,6 +190,7 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
+		DataGrabber.urlModel.setName("Payment URL");
 		DataGrabber.urlModel.setUrl(url);
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
@@ -197,7 +205,8 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 
-		CartCalculator.calculate3P1Rule(jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValueForLessThan150);
+		CartCalculator.calculate3P1Rule(jewelryDiscount, marketingDiscount, taxClass, shippingValue,
+				shippingValueForLessThan150);
 		DataGrabber.addAll25AndMmProducts();
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		validationWorkflows.performCartValidationsBu3Get1Rule();
@@ -209,8 +218,10 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 	@After
 	public void saveData() {
 
-		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
-		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);

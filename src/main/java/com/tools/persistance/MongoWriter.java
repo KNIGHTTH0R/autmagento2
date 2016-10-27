@@ -67,14 +67,14 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
-	
+
 	public static void saveToEnvironmentConstants(String key, String value) {
 		workingDB = mongoClient.getDB(MongoTableKeys.TEST_CONFIG);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.ENV_CONSTANTS_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(key, value);
-		
+
 		table.insert(document);
 	}
 
@@ -131,14 +131,15 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void saveTermPurchaseModel(TermPurchaseOrderModel model, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.TERM_PURCHASE_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.EXECUTION_DATE, model.getExecutionDate());
 		document.put(MongoTableKeys.ORDER_ID, model.getIncrementId());
-		
+
 		table.insert(document);
 	}
 
@@ -312,12 +313,14 @@ public class MongoWriter extends MongoConnector {
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
 		document.put(MongoTableKeys.PRODUCT_CODE, product.getSku());
+		document.put(MongoTableKeys.PRODUCT_IP, product.getIp());
+		document.put(MongoTableKeys.PRODUCT_PRICE, product.getPrice());
 		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getStockData().getQty());
 		document.put(MongoTableKeys.PRODUCT_IN_STOCK, product.getStockData().getIsInStock());
 		document.put(MongoTableKeys.PRODUCT_MIN_QUANTITY, product.getStockData().getMinQty());
 		document.put(MongoTableKeys.PRODUCT_IS_DISCONTINUED, product.getStockData().getIsDiscontinued());
 		document.put(MongoTableKeys.PRODUCT_DELIVERY_DATE, product.getStockData().getEarliestAvailability());
-		
+
 		table.insert(document);
 	}
 
@@ -379,14 +382,15 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+
 	public static void saveIpModel(TermPurchaseIpModel model, String testName) {
 		workingDB = mongoClient.getDB(testName);
 		DBCollection table = workingDB.getCollection(MongoTableKeys.TERM_PURCHASE_IP_MODEL);
-		
+
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.CURRENT_MONTH_IP, model.getCurrentMonthIp());
 		document.put(MongoTableKeys.NEXT_MONTH_IP, model.getNextMonthIp());
-		
+
 		table.insert(document);
 	}
 

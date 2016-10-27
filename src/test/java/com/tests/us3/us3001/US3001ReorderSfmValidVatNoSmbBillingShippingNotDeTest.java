@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -85,7 +86,6 @@ public class US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest extends BaseT
 	public ProfileSteps profileSteps;
 	@Steps
 	public ProfileNavSteps profileNavSteps;
-	
 
 	private CreditCardModel creditCardData = new CreditCardModel();
 
@@ -98,34 +98,44 @@ public class US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest extends BaseT
 	private static String taxClass;
 	private static String addressString;
 	String orderId;
-	
+
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 
 	public static List<BasicProductModel> productsList;
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		productsList = MongoReader.grabBasicProductModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+		productsList = MongoReader
+				.grabBasicProductModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
+
+		List<OrderModel> orderModelList = MongoReader
+				.getOrderModel("US3001SfmValidVatNoSmbBillingShippingNotDeTest" + SoapKeys.GRAB);
 		orderId = orderModelList.get(0).getOrderId();
-		
-		genProduct1.setName(productsList.get(0).getName());
-		genProduct1.setSku(productsList.get(0).getProdCode());
-		genProduct1.setIp("84");
-		genProduct1.setPrice("49.90");
-		genProduct2.setName(productsList.get(1).getName());
-		genProduct2.setSku(productsList.get(1).getProdCode());
-		genProduct2.setIp("25");
-		genProduct2.setPrice("89.00");
-		genProduct3.setName(productsList.get(2).getName());
-		genProduct3.setSku(productsList.get(2).getProdCode());
-		genProduct3.setIp("0");
-		genProduct3.setPrice("229.00");
+		//
+		// genProduct1.setName(productsList.get(0).getName());
+		// genProduct1.setSku(productsList.get(0).getProdCode());
+		// genProduct1.setIp("84");
+		// genProduct1.setPrice("49.90");
+		// genProduct2.setName(productsList.get(1).getName());
+		// genProduct2.setSku(productsList.get(1).getProdCode());
+		// genProduct2.setIp("25");
+		// genProduct2.setPrice("89.00");
+		// genProduct3.setName(productsList.get(2).getName());
+		// genProduct3.setSku(productsList.get(2).getProdCode());
+		// genProduct3.setIp("0");
+		// genProduct3.setPrice("229.00");
+
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+
+		genProduct1 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(1);
+		genProduct3 = createdProductsList.get(2);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -155,7 +165,7 @@ public class US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest extends BaseT
 				}
 			}
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
@@ -173,7 +183,7 @@ public class US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest extends BaseT
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
 		profileSteps.clickReorderLink(orderId);
-		
+
 		BasicProductModel productData;
 
 		productData = addProductsWorkflow.updateBasicProductToCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_25);

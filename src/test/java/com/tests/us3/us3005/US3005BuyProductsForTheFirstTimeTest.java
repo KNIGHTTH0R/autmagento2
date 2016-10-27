@@ -8,12 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -41,11 +45,6 @@ import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US3.5 Shop for myself 0.01 Euro difference", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
@@ -87,29 +86,34 @@ public class US3005BuyProductsForTheFirstTimeTest extends BaseTest {
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setIp("50");
-		genProduct1.setPrice("29.90");
-		MagentoProductCalls.createApiProduct(genProduct1);
-		
-		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setIp("60");
-		genProduct2.setPrice("34.90");
-		MagentoProductCalls.createApiProduct(genProduct2);
-		
+		// genProduct1 = MagentoProductCalls.createProductModel();
+		// genProduct1.setIp("50");
+		// genProduct1.setPrice("29.90");
+		// MagentoProductCalls.createApiProduct(genProduct1);
+		//
+		// genProduct2 = MagentoProductCalls.createProductModel();
+		// genProduct2.setIp("60");
+		// genProduct2.setPrice("34.90");
+		// MagentoProductCalls.createApiProduct(genProduct2);
+
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(3);
+		genProduct2 = createdProductsList.get(4);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3005.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3005.properties");
 			prop.load(input);
 
 			username = prop.getProperty("username");
@@ -147,7 +151,6 @@ public class US3005BuyProductsForTheFirstTimeTest extends BaseTest {
 		productsList.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_50);
 		productsList.add(productData);
-		
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -162,7 +165,7 @@ public class US3005BuyProductsForTheFirstTimeTest extends BaseTest {
 
 		paymentSteps.expandSepaForm();
 		paymentSteps.fillSepaForm(sepaPaymentData);
-		
+
 		confirmationSteps.agreeAndCheckout();
 	}
 

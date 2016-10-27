@@ -95,6 +95,7 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -102,19 +103,11 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		DataGrabber.wipe();
 
 		productsList = MongoReader.grabBasicProductModel("US3001BuyProductsForTheFirstTimeTest" + SoapKeys.GRAB);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 
-		genProduct1.setName(productsList.get(0).getName());
-		genProduct1.setSku(productsList.get(0).getProdCode());
-		genProduct1.setIp("84");
-		genProduct1.setPrice("49.90");
-		genProduct2.setName(productsList.get(1).getName());
-		genProduct2.setSku(productsList.get(1).getProdCode());
-		genProduct2.setIp("25");
-		genProduct2.setPrice("89.00");
-		genProduct3.setName(productsList.get(2).getName());
-		genProduct3.setSku(productsList.get(2).getProdCode());
-		genProduct3.setIp("0");
-		genProduct3.setPrice("229.00");
+		genProduct1 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(1);
+		genProduct3 = createdProductsList.get(2);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -144,7 +137,7 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 				}
 			}
 		}
-		
+
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
@@ -216,7 +209,7 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		validationWorkflows.performCartValidations119Vat();
 
 		customVerifications.printErrors();
-		
+
 	}
 
 	@After

@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +40,11 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.ValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US3.2 Shop for myself 0.01 Euro difference", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_2.class)
@@ -84,8 +84,9 @@ public class US3002SfmScenario1For001DifferenceTest extends BaseTest {
 	private static String billingAddress;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();;
-	
+
 	public static List<BasicProductModel> productsList = new ArrayList<BasicProductModel>();
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -93,11 +94,14 @@ public class US3002SfmScenario1For001DifferenceTest extends BaseTest {
 		DataGrabber.wipe();
 
 		productsList = MongoReader.grabBasicProductModel("US3002BuyProductsForTheFirstTimeTest" + SoapKeys.GRAB);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 
-		genProduct1.setName(productsList.get(0).getName());
-		genProduct1.setSku(productsList.get(0).getProdCode());
-		genProduct1.setIp("84");
-		genProduct1.setPrice("49.90");
+		genProduct1 = createdProductsList.get(0);
+		//
+		// genProduct1.setName(productsList.get(0).getName());
+		// genProduct1.setSku(productsList.get(0).getProdCode());
+		// genProduct1.setIp("84");
+		// genProduct1.setPrice("49.90");
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -147,7 +151,7 @@ public class US3002SfmScenario1For001DifferenceTest extends BaseTest {
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
 		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
-		
+
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 

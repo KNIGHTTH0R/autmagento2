@@ -1,11 +1,11 @@
+
 package com.pages.backend;
-
-
-import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.WebElement;
 
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class MagentoLoginPage extends AbstractPage {
 

@@ -1,3 +1,4 @@
+
 package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
@@ -282,6 +283,7 @@ public class ProductSteps extends AbstractSteps {
 		addToCart();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
+
 	@Step
 	public void addToWishlist(String qty, String size) {
 		if (!size.contentEquals("0")) {
@@ -327,11 +329,10 @@ public class ProductSteps extends AbstractSteps {
 		Assert.assertTrue("The availability date is not correct",
 				productDetailsPage().getStockStatus().contains(avDate));
 	}
-	
+
 	@Step
 	public void verifyThatProductStatusIsCorrect(String status) {
-		Assert.assertTrue("The product status is not correct",
-				productDetailsPage().getStockStatus().contains(status));
+		Assert.assertTrue("The product status is not correct", productDetailsPage().getStockStatus().contains(status));
 	}
 
 }

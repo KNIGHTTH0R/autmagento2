@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.junit.After;
@@ -85,6 +87,8 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
+	
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
@@ -93,6 +97,9 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 
 		creditCardData = new CreditCardModel();
 		addressModel = new AddressModel();
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct3 = createdProductsList.get(3);
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.90");
@@ -102,9 +109,13 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		genProduct2.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("229.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct3 = createdProductsList.get(2);
+		
+//		genProduct3 = MagentoProductCalls.createMarketingProductModel();
+//		genProduct3.setPrice("229.00");
+//		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
