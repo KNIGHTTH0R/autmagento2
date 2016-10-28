@@ -87,6 +87,7 @@ public class SoapKeys {
 	public static final String USE_CONFIG_NOTIFY_STOCK_QTY = "use_config_notify_stock_qty";
 	public static final String IS_DISCONTINUED = "is_discontinued";
 	public static final String EARLIEST_AVAILABILITY = "earliest_availability";
+	public static final String TP_ENABLED = "tp_enabled";
 	public static final String MAXIMUM_PERCENTAGE_TO_BORROW = "maximum_percent_to_borrow";
 	public static final String USE_CONFIG_MAXIMUM_PERCENTAGE_TO_BORROW = "use_config_maximum_percent_to_borrow";
 	public static final String JEWERLY_BONUS_VALUE = "jewelry_bonus_value";

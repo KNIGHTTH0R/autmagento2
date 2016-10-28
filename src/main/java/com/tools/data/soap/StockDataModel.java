@@ -21,6 +21,7 @@ public class StockDataModel {
 	private String earliestAvailability;
 	private String maximumPercentageToBorrow;
 	private String useConfigMaximumPercentageToBorrow;
+	private String allowedTermPurchase;
 
 	public String getQty() {
 		return qty;
@@ -173,5 +174,15 @@ public class StockDataModel {
 	public void setUseConfigMaximumPercentageToBorrow(String useConfigMaximumPercentageToBorrow) {
 		this.useConfigMaximumPercentageToBorrow = useConfigMaximumPercentageToBorrow;
 	}
+
+	public String getAllowedTermPurchase() {
+		return allowedTermPurchase;
+	}
+
+	public void setAllowedTermPurchase(String allowedTermPurchase) {
+		this.allowedTermPurchase = allowedTermPurchase;
+	}
+	
+	
 
 }

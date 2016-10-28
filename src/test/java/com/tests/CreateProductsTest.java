@@ -131,9 +131,9 @@ public class CreateProductsTest extends BaseTest {
 		//products with TP for regular cart - us8009
 		genProduct12 = MagentoProductCalls.createProductModel();
 		genProduct12.setPrice("50.00");
-		MagentoProductCalls.createApiProduct(genProduct12);
 		genProduct12.setStockData(
 				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+		MagentoProductCalls.createApiProduct(genProduct12);
 		productsList.add(genProduct12);
 		
 		genProduct13 = MagentoProductCalls.createNotAvailableYetProductModel();

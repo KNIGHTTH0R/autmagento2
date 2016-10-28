@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.ApacheHttpHelper;
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -119,29 +118,29 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("29.00");
-		genProduct1.setIp("25");
-		MagentoProductCalls.createApiProduct(genProduct1);
+		// genProduct1 = MagentoProductCalls.createProductModel();
+		// genProduct1.setPrice("29.00");
+		// genProduct1.setIp("25");
+		// MagentoProductCalls.createApiProduct(genProduct1);
+		//
+		// genProduct2 =
+		// MagentoProductCalls.createNotAvailableYetProductModel();
+		// genProduct2.setPrice("10.00");
+		// genProduct2.setIp("8");
+		// MagentoProductCalls.createApiProduct(genProduct2);
+		//
+		// genProduct3 = MagentoProductCalls.createProductModel();
+		// genProduct3.setPrice("29.90");
+		// genProduct3.setIp("25");
+		// genProduct3.setStockData(
+		// MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+		// MagentoProductCalls.createApiProduct(genProduct3);
 
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("10.00");
-		genProduct2.setIp("8");
-		MagentoProductCalls.createApiProduct(genProduct2);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest");
 
-		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("29.90");
-		genProduct3.setIp("25");
-		genProduct3.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct3);
-		
-		
-		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-			
-//			genProduct1 = createdProductsList.get(3);
-//			genProduct2 = createdProductsList.get(12);
-//			genProduct3 = createdProductsList.get(11);
+		genProduct1 = createdProductsList.get(3);
+		genProduct2 = createdProductsList.get(12);
+		genProduct3 = createdProductsList.get(11);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -263,7 +262,6 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
-
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
