@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
@@ -19,10 +18,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
@@ -40,7 +35,6 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
-import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -94,11 +88,9 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 	private String discountClass;
 	private String billingAddress;
 	private String shippingValue;
-	private String voucherCode;
 	private String voucherValue;
 	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
+
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	
@@ -122,8 +114,6 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
 		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(0);
-		genProduct3 = createdProductsList.get(6);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -139,7 +129,6 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 
-			voucherCode = prop.getProperty("voucherCode");
 			voucherValue = prop.getProperty("voucherValue");
 
 		} catch (IOException ex) {
@@ -172,25 +161,12 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 		
 		RegularBasicProductModel productData;
 
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "4", "0");
+		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "3", "0");
 		RegularUserCartCalculator.allProductsList.add(productData);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
-		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
-
-		regularUserCartSteps.typeCouponCode(voucherCode);
-		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
-
-		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();		
-		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
+	
 
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
 
@@ -199,28 +175,16 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 
-		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
-	
-		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
+//		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
+//	
+//		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
 		
-		
-//		shoppingCartPriceRulesSteps.activateRule("Buy 3 get 1 for 50% - regular");
-//		customerRegistrationSteps.performLogin(username, password);
-//		if (!headerSteps.succesfullLogin()) {
-//			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
-//		}
-//		headerSteps.openCartPreview();
-//		headerSteps.goToCart();
-//		regularUserCartSteps.clickGoToShipping();
-//		shippingPartySectionSteps.clickPartyNoOption();
-//		shippingSteps.selectAddress(billingAddress);
-//		shippingSteps.setSameAsBilling(true);
 
-		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
+		shoppingCartPriceRulesSteps.openNewTab();
+		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
+		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
+		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
 	
-		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
-		
-	//	shoppingCartPriceRulesSteps.navigate("https://aut-pippajean.evozon.com/de/ioa/simplecheckout/steps/shippingAndInvoicing/");
 	
 		shippingSteps.goToPaymentMethod();
 
@@ -229,9 +193,6 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 		DataGrabber.urlModel.setUrl(url);
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
 		paymentSteps.payWithBankTransfer();
 	
 		confirmationSteps.grabRegularProductsList();
