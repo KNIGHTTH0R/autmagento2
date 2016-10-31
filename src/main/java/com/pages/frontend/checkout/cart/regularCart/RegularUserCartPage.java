@@ -45,7 +45,7 @@ public class RegularUserCartPage extends AbstractPage {
 
 	@FindBy(css = "div.buttons-set.to-the-right button[type*='submit']")
 	private WebElement updateButton;
-	
+
 	@FindBy(css = "table#shopping-cart-totals-table tr:nth-child(2) td:last-child form button span")
 	private WebElement updateJewerlyBonus;
 
@@ -63,11 +63,9 @@ public class RegularUserCartPage extends AbstractPage {
 
 	@FindBy(css = "li.error-msg span")
 	private WebElement errorMessageContainer;
-	
+
 	@FindBy(css = ".cart-empty a.variable-text")
 	private WebElement searchProductLink;
-	
-	
 
 	public void validateThatVoucherCannotBeAppliedMessage() {
 		element(errorMessageContainer).waitUntilVisible();
@@ -130,8 +128,16 @@ public class RegularUserCartPage extends AbstractPage {
 		for (WebElement product : cartList) {
 			if (product.getText().contains(productCode)) {
 				foundProduct = true;
-				WebElement delivery = element(
-						product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option:nth-child(2)")));
+				WebElement preOrderCheckbox = product.findElement(By.cssSelector("input[id*='tp-status']"));
+				WebElement delivery;
+				if (!preOrderCheckbox.isSelected()) {
+					preOrderCheckbox.click();
+					delivery = element(
+							product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option:nth-child(3)")));
+				} else {
+					delivery = element(
+							product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option:nth-child(2)")));
+				}
 				String[] tokens = delivery.getText().split(", ");
 				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
 				delivery.click();
@@ -216,11 +222,11 @@ public class RegularUserCartPage extends AbstractPage {
 		// getDriver().findElement(By.id("cart-tp-type-multiple"))
 		// .getAttribute("checked").contentEquals("checked"));
 	}
-	
+
 	public void clickDeliverAllAtOnce() {
 		getDriver().findElement(By.id("cart-tp-type-multiple")).click();
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
-				ContextConstants.LOADING_MESSAGE));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public List<RegularUserCartProductModel> grabProductsData() {
@@ -313,15 +319,14 @@ public class RegularUserCartPage extends AbstractPage {
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
-				ContextConstants.LOADING_MESSAGE));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickUpdateCart() {
 		element(updateButton).waitUntilVisible();
 		updateButton.click();
 	}
-	
 
 	/**
 	 * Verify Wipe cart if cart contains any data
@@ -333,13 +338,10 @@ public class RegularUserCartPage extends AbstractPage {
 		Assert.assertTrue(cartMainContainer.getText().contains(ContextConstants.EMPTY_CART));
 
 	}
-	
-	
+
 	public void searchProductsModal() {
 		element(searchProductLink).waitUntilVisible();
 		searchProductLink.click();
 	}
-	
-
 
 }
