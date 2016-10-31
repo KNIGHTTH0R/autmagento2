@@ -458,6 +458,7 @@ public class HttpSoapConnector {
 			stockData = addOptionalField(SoapKeys.USE_CONFIG_NOTIFY_STOCK_QTY, product.getUseConfigNotifyStockQty(), stockData);
 			stockData = addOptionalField(SoapKeys.IS_DISCONTINUED, product.getIsDiscontinued(), stockData);
 			stockData = addOptionalField(SoapKeys.EARLIEST_AVAILABILITY, product.getEarliestAvailability(), stockData);
+			stockData = addOptionalField(SoapKeys.TP_ENABLED, product.getAllowedTermPurchase(), stockData);
 			stockData = addOptionalField(SoapKeys.MAXIMUM_PERCENTAGE_TO_BORROW, product.getMaximumPercentageToBorrow(), stockData);
 			stockData = addOptionalField(SoapKeys.USE_CONFIG_MAXIMUM_PERCENTAGE_TO_BORROW, product.getUseConfigMaximumPercentageToBorrow(), stockData);
 		} else {

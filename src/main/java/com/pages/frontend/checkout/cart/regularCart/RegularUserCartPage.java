@@ -216,6 +216,12 @@ public class RegularUserCartPage extends AbstractPage {
 		// getDriver().findElement(By.id("cart-tp-type-multiple"))
 		// .getAttribute("checked").contentEquals("checked"));
 	}
+	
+	public void clickDeliverAllAtOnce() {
+		getDriver().findElement(By.id("cart-tp-type-multiple")).click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
+	}
 
 	public List<RegularUserCartProductModel> grabProductsData() {
 		element(cartTable).waitUntilVisible();

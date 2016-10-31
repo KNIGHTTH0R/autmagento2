@@ -116,7 +116,6 @@ import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
 
-import net.thucydides.core.annotations.Screenshots;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 

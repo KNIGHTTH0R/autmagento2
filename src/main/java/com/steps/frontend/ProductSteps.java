@@ -1,9 +1,6 @@
 
 package com.steps.frontend;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
-
 import org.junit.Assert;
 
 import com.tools.constants.ContextConstants;
@@ -17,7 +14,9 @@ import com.tools.data.frontend.StarterSetProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
-import com.tools.utils.FormatterUtils;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.StepGroup;
 
 public class ProductSteps extends AbstractSteps {
 

@@ -135,13 +135,13 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		genProduct3.setStockData(
 				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct3);
-		
-		
-		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-			
-//			genProduct1 = createdProductsList.get(3);
-//			genProduct2 = createdProductsList.get(12);
-//			genProduct3 = createdProductsList.get(11);
+
+		// createdProductsList =
+		// MongoReader.grabProductDetailedModel("CreateProductsTest");
+		//
+		// genProduct1 = createdProductsList.get(3);
+		// genProduct2 = createdProductsList.get(12);
+		// genProduct3 = createdProductsList.get(11);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -263,7 +263,6 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
-
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);

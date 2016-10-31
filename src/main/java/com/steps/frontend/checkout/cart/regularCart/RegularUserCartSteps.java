@@ -74,6 +74,11 @@ public class RegularUserCartSteps extends AbstractSteps {
 	// public void submitVoucherCode() {
 	// regularUserCartPage().submitVoucherCode();
 	// }
+	
+	@Step
+	public void clickDeliverAllAtOnce() {
+		regularUserCartPage().clickDeliverAllAtOnce();
+	}
 
 	@Step
 	public void selectShippingOption(String option) {
@@ -101,5 +106,5 @@ public class RegularUserCartSteps extends AbstractSteps {
 		regularUserCartPage().searchProductsModal();
 		getDriver().navigate().refresh();
 	}
-	
+
 }

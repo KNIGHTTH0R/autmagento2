@@ -4,9 +4,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.tests.CreateProductsTest;
 import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 
 @SuiteClasses({
+	
+	CreateProductsTest.class,
 	
 	US10CreateAllPartiesSuite.class,
 
