@@ -164,12 +164,14 @@ public class RegularUserCartPage extends AbstractPage {
 					preOrderCheckbox.click();
 
 				}
-				product.findElement(By.cssSelector("select.tp-cb-item-delivery-date")).click();
+				WebElement dropdown = product.findElement(By.cssSelector("select.tp-cb-item-delivery-date"));
+				dropdown.click();
 				List<WebElement> deliveryoptions = getDriver()
 						.findElements(By.cssSelector("select.tp-cb-item-delivery-date option"));
 				for (WebElement option : deliveryoptions) {
 					if (option.getText().contains(deliveryDate)) {
-						option.click();
+						element(dropdown).selectByIndex(deliveryoptions.indexOf(option));
+						break;
 					}
 				}
 
