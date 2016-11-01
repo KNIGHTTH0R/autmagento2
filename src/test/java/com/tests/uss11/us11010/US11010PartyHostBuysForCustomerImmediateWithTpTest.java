@@ -204,6 +204,7 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		generalCartSteps.clearCart();
+		
 		HostBasicProductModel productData;
 		// TODO hide this somehow
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
@@ -226,8 +227,7 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct4, "1", "0");
 		if (!genProduct4.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
-					genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
+			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp2.add(productData);
 
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp0);
@@ -242,8 +242,8 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
-		regularUserCartSteps.selectDeliveryDate(genProduct4.getSku(),
-				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		regularUserCartSteps.selectDeliveryDate(genProduct4.getSku(), DateUtils
+				.getFirstFridayAfterDate(genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 
 		regularUserCartSteps.verifyMultipleDeliveryOption();
 
@@ -295,7 +295,7 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
-		confirmationSteps.agreeAndCheckout();
+//		confirmationSteps.agreeAndCheckout();
 
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		hostCartValidationWorkflows.performTpCartValidationsWithVoucher();

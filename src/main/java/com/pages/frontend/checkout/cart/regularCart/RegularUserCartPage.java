@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.tools.cartcalculations.regularUser.RegularCartTotalsCalculation;
 import com.tools.constants.ConfigConstants;
@@ -130,6 +131,7 @@ public class RegularUserCartPage extends AbstractPage {
 				foundProduct = true;
 				WebElement preOrderCheckbox = product.findElement(By.cssSelector("input[id*='tp-status']"));
 				WebElement delivery;
+				System.out.println(productCode + " is checked: " + preOrderCheckbox.isSelected());
 				if (!preOrderCheckbox.isSelected()) {
 					preOrderCheckbox.click();
 					delivery = element(
@@ -149,6 +151,35 @@ public class RegularUserCartPage extends AbstractPage {
 		Assert.assertTrue("The product with the product code " + productCode + " was not found", foundProduct);
 
 		return deliveryDate;
+	}
+
+	public void selectDeliveryDate(String productCode, String deliveryDate) throws ParseException {
+		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
+		boolean foundProduct = false;
+		for (WebElement product : cartList) {
+			if (product.getText().contains(productCode)) {
+				foundProduct = true;
+				WebElement preOrderCheckbox = product.findElement(By.cssSelector("input[id*='tp-status']"));
+				if (!preOrderCheckbox.isSelected()) {
+					preOrderCheckbox.click();
+
+				}
+				product.findElement(By.cssSelector("select.tp-cb-item-delivery-date")).click();
+				List<WebElement> deliveryoptions = getDriver()
+						.findElements(By.cssSelector("select.tp-cb-item-delivery-date option"));
+				for (WebElement option : deliveryoptions) {
+					if (option.getText().contains(deliveryDate)) {
+						option.click();
+					}
+				}
+
+				waitFor(ExpectedConditions.invisibilityOfElementWithText(
+						By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+				break;
+			}
+		}
+		Assert.assertTrue("The product with the product code " + productCode + " was not found", foundProduct);
+
 	}
 
 	/**
