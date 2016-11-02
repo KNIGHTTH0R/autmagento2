@@ -117,6 +117,7 @@ public class MongoTableKeys {
 	public static final String PRODUCT_NAME = "name";
 	public static final String PRODUCT_CODE = "code";
 	public static final String PRODUCT_PRICE = "price";
+	public static final String PRODUCT_SPECIAL_PRICE = "special_price";
 	public static final String PRODUCT_QUANTITY = "quantity";
 	public static final String PRODUCT_DISCOUNT_CLASS = "discountClass";
 	public static final String PRODUCT_ASKING_PRICE = "askingPrice";

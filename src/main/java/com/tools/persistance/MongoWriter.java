@@ -352,6 +352,8 @@ public class MongoWriter extends MongoConnector {
 
 		table.insert(document);
 	}
+	
+	
 
 	public static void saveRegularBasicProductModel(RegularBasicProductModel product, String testName) {
 		workingDB = mongoClient.getDB(testName);

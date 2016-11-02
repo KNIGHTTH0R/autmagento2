@@ -105,10 +105,10 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		 genProduct2.setIp("42");
 		 genProduct2.setPrice("49.90");
 
-		 genProduct2 = MagentoProductCalls.createProductModel();
-		 genProduct2.setIp("42");
-		 genProduct2.setPrice("49.90");
-		 MagentoProductCalls.createApiProduct(genProduct2);
+//		 genProduct2 = MagentoProductCalls.createProductModel();
+//		 genProduct2.setIp("42");
+//		 genProduct2.setPrice("49.90");
+//		 MagentoProductCalls.createApiProduct(genProduct2);
 
 		 genProduct3 = MagentoProductCalls.createMarketingProductModel();
 		 genProduct3.setPrice("5.00");
