@@ -166,10 +166,10 @@ public class RegularUserCartPage extends AbstractPage {
 				}
 				WebElement dropdown = product.findElement(By.cssSelector("select.tp-cb-item-delivery-date"));
 				dropdown.click();
-				List<WebElement> deliveryoptions = getDriver()
+				List<WebElement> deliveryoptions = product
 						.findElements(By.cssSelector("select.tp-cb-item-delivery-date option"));
 				for (WebElement option : deliveryoptions) {
-					if (option.getText().contains(deliveryDate)) {
+					if (option.getText().toLowerCase().contains(deliveryDate.toLowerCase())) {
 						element(dropdown).selectByIndex(deliveryoptions.indexOf(option));
 						break;
 					}
