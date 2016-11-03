@@ -228,7 +228,7 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		if (!genProduct7.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct7.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp6.add(productData);
-		
+	
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -282,8 +282,8 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp4, getClass().getSimpleName() + "TP4");
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp5, getClass().getSimpleName() + "TP5");
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp6, getClass().getSimpleName() + "TP6");
-		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp7, getClass().getSimpleName() + "TP7");
-		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp8, getClass().getSimpleName() + "TP8");
+//		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp7, getClass().getSimpleName() + "TP7");
+//		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp8, getClass().getSimpleName() + "TP8");
 
 		MongoWriter.saveProductDetailedModel(genProduct2, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveProductDetailedModel(genProduct3, getClass().getSimpleName() + "TP2");
@@ -310,12 +310,12 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp6) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP6");
 		}
-		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp7) {
-			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP7");
-		}
-		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp8) {
-			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP8");
-		}
+//		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp7) {
+//			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP7");
+//		}
+//		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp8) {
+//			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP8");
+//		}
 		MongoWriter.saveIncrementId(prod1IncrementId, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveIncrementId(prod2IncrementId, getClass().getSimpleName()+ "TP2");
 		MongoWriter.saveIncrementId(prod3IncrementId, getClass().getSimpleName() + "TP3");

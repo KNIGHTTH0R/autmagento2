@@ -204,6 +204,7 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		generalCartSteps.clearCart();
+
 		HostBasicProductModel productData;
 		// TODO hide this somehow
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
@@ -223,12 +224,12 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
 					genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp2.add(productData);
-		
+
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct4, "1", "0");
 		if (!genProduct4.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
-					genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
-		HostCartCalculator.allProductsListTp2.add(productData);
+			productData.setDeliveryDate(DateUtils
+					.getFirstFridayAfterDate(genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+		HostCartCalculator.allProductsListTp1.add(productData);
 
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp0);
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp1);
@@ -242,8 +243,14 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
+		// we set the delivery for product4 to be the same with the delivery for
+		// product 2 (same order)
 		regularUserCartSteps.selectDeliveryDate(genProduct4.getSku(),
-				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+				DateUtils.parseDate(
+						DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(),
+								"yyyy-MM-dd"),
+						"yyyy-MM-dd", "dd. MMM. yy",
+						new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 
 		regularUserCartSteps.verifyMultipleDeliveryOption();
 

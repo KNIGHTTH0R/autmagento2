@@ -91,9 +91,9 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 	private static ProductDetailedModel detailedProdListTp5 = new ProductDetailedModel();
 	OrderModel orderModelListTp5 = new OrderModel();
 
-	private static List<HostBasicProductModel> productsListTp6 = new ArrayList<HostBasicProductModel>();
-	private static ProductDetailedModel detailedProdListTp6 = new ProductDetailedModel();
-	OrderModel orderModelListTp6 = new OrderModel();
+//	private static List<HostBasicProductModel> productsListTp6 = new ArrayList<HostBasicProductModel>();
+//	private static ProductDetailedModel detailedProdListTp6 = new ProductDetailedModel();
+//	OrderModel orderModelListTp6 = new OrderModel();
 
 	@Before
 	public void setUp() {
@@ -124,10 +124,10 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 		productsListTp5 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP5");
 		prod5IncrementId = MongoReader.grabIncrementId("US31001PartyHostBuysForCustomerTpTest" + "TP5");
 
-		orderModelListTp6 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP6").get(0);
-		detailedProdListTp6 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP6")
-				.get(0);
-		productsListTp6 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP6");
+//		orderModelListTp6 = MongoReader.getOrderModel("US31001PartyHostBuysForCustomerTpTest" + "TP6").get(0);
+//		detailedProdListTp6 = MongoReader.grabProductDetailedModel("US31001PartyHostBuysForCustomerTpTest" + "TP6")
+//				.get(0);
+//		productsListTp6 = MongoReader.grabHostBasicProductModel("US31001PartyHostBuysForCustomerTpTest" + "TP6");
 
 		expectedModel1 = new TermPurchaseOrderModel();
 		expectedModel1.setIncrementId(orderModelListTp1.getOrderId());
@@ -214,22 +214,22 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 		expectedModel5.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp5.getStockData().getQty(),
 				productsListTp5.get(0).getQuantity()));
 
-		expectedModel6 = new TermPurchaseOrderModel();
-		expectedModel6.setIncrementId(orderModelListTp6.getOrderId());
-		expectedModel6.setExecutionDate(productsListTp6.get(0).getDeliveryDate());
-		expectedModel6.setProductSku(productsListTp6.get(0).getProdCode());
-		expectedModel6.setIsDiscontinued(
-				detailedProdListTp6.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
-		expectedModel6.setEarliestAv(detailedProdListTp6.getStockData().getEarliestAvailability());
-		expectedModel6.setInStock(detailedProdListTp6.getStockData().getIsInStock().contentEquals("1") ? "Yes" : "No");
-		expectedModel6.setMinimumQty(detailedProdListTp6.getStockData().getMinQty());
-		expectedModel6.setBoughtQty(productsListTp6.get(0).getQuantity());
-		expectedModel6.setReason("");
-		expectedModel6.setRecomandation(ConfigConstants.NO_RECOMMENDATION);
-		expectedModel6.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
-		expectedModel6.setScheduledPaymentStatus(ConfigConstants.PENDING);
-		expectedModel6.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp6.getStockData().getQty(),
-				productsListTp6.get(0).getQuantity()));
+//		expectedModel6 = new TermPurchaseOrderModel();
+//		expectedModel6.setIncrementId(orderModelListTp6.getOrderId());
+//		expectedModel6.setExecutionDate(productsListTp6.get(0).getDeliveryDate());
+//		expectedModel6.setProductSku(productsListTp6.get(0).getProdCode());
+//		expectedModel6.setIsDiscontinued(
+//				detailedProdListTp6.getStockData().getIsDiscontinued().contentEquals("1") ? "Yes" : "No");
+//		expectedModel6.setEarliestAv(detailedProdListTp6.getStockData().getEarliestAvailability());
+//		expectedModel6.setInStock(detailedProdListTp6.getStockData().getIsInStock().contentEquals("1") ? "Yes" : "No");
+//		expectedModel6.setMinimumQty(detailedProdListTp6.getStockData().getMinQty());
+//		expectedModel6.setBoughtQty(productsListTp6.get(0).getQuantity());
+//		expectedModel6.setReason("");
+//		expectedModel6.setRecomandation(ConfigConstants.NO_RECOMMENDATION);
+//		expectedModel6.setOrderStatus(ConfigConstants.TP_GRID_PAYMENT_ON_HOLD);
+//		expectedModel6.setScheduledPaymentStatus(ConfigConstants.PENDING);
+//		expectedModel6.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp6.getStockData().getQty(),
+//				productsListTp6.get(0).getQuantity()));
 
 	}
 
@@ -255,17 +255,17 @@ public class US31001ValidateOrdersInTpGridTest extends BaseTest {
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp5.getOrderId());
 		TermPurchaseOrderModel grabbedModel5 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp5.getOrderId());
-
-		backEndSteps.clickOnTermPurchaseGrid();
-		termPurchaseGridSteps.searchForOrder(orderModelListTp6.getOrderId());
-		TermPurchaseOrderModel grabbedModel6 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp6.getOrderId());
+//
+//		backEndSteps.clickOnTermPurchaseGrid();
+//		termPurchaseGridSteps.searchForOrder(orderModelListTp6.getOrderId());
+//		TermPurchaseOrderModel grabbedModel6 = termPurchaseGridSteps.grabOrderDetails(orderModelListTp6.getOrderId());
 
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel1, expectedModel1);
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel2, expectedModel2);
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel3, expectedModel3);
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel4, expectedModel4);
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel5, expectedModel5);
-		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel6, expectedModel6);
+//		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel6, expectedModel6);
 
 		customVerifications.printErrors();
 
