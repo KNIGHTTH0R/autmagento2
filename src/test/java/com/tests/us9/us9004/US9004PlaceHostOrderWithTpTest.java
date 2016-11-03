@@ -103,6 +103,7 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
+	private ProductDetailedModel genProduct4;
 	private TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
@@ -124,6 +125,14 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		genProduct3.setStockData(
 				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct3);
+		
+		genProduct4 = MagentoProductCalls.createProductModel();
+		genProduct4.getStockData().setAllowedTermPurchase("1");
+		genProduct4.setPrice("50.00");
+		genProduct4.setIp("0");
+		MagentoProductCalls.createApiProduct(genProduct4);
+		genProduct4.setStockData(
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getCurrentDate("yyyy-MM-dd")));
 		
 //        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 //		
@@ -176,29 +185,37 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
 		HostBasicProductModel productData;
+		
+		String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(),
+				"yyyy-MM-dd");
+
+		String deliveryTP2 = DateUtils.getFirstFridayAfterDate(
+				DateUtils.addDaysToAAGivenDate(genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7),
+				"yyyy-MM-dd");
 
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct1, "1", "0");
-		if (!genProduct1.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils
-					.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+		// we don't need to set here the delivery date
 		HostCartCalculator.allProductsListTp0.add(productData);
 
-		productData = addHostProductsWorkflow.setHostProductToCart(genProduct2, "1", "0");
-		if (!genProduct3.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils
-					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+		productData = addHostProductsWorkflow.setHostProductToCart(genProduct2, "2", "0");
+		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
+			productData.setDeliveryDate(deliveryTP1);
 		HostCartCalculator.allProductsListTp1.add(productData);
 
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct3, "4", "0");
 		if (!genProduct3.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
-					genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
+			productData.setDeliveryDate(deliveryTP2);
 		HostCartCalculator.allProductsListTp2.add(productData);
+
+		productData = addHostProductsWorkflow.setHostProductToCart(genProduct4, "1", "0");
+		if (!genProduct4.getStockData().getEarliestAvailability().contentEquals(""))
+			productData.setDeliveryDate(deliveryTP1);
+		HostCartCalculator.allProductsListTp1.add(productData);
 
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp0);
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp1);
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp2);
-
+		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
@@ -208,11 +225,18 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		hostCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
 		hostCartSteps.updateProductList(HostCartCalculator.allProductsList, genProduct2.getSku(),
 				ContextConstants.DISCOUNT_40_BONUS);
+		
+		String deliveryTP1Locale = DateUtils.parseDate(deliveryTP1, "yyyy-MM-dd", "dd. MMM. yy",
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
-		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku(),
+		String deliveryTP2Locale = DateUtils.parseDate(deliveryTP2, "yyyy-MM-dd", "dd. MMM. yy",
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
-				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+
+		// we set the delivery for product4 to be the same with the delivery for
+		// product 2 (same order)
+		regularUserCartSteps.selectDeliveryDate(genProduct2.getSku(), deliveryTP1Locale);
+		regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(), deliveryTP2Locale);
+		regularUserCartSteps.selectDeliveryDate(genProduct4.getSku(), deliveryTP1Locale);
 
 		hostCartSteps.grabProductsData();
 		hostCartSteps.grabTotals();
@@ -240,9 +264,9 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
-		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
+		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTP1);
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
-		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
+		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTP2);
 
 		
 		paymentSteps.expandCreditCardForm();

@@ -43,7 +43,6 @@ public class US10001bClosePartyTest extends BaseTest {
 	public static UrlModel urlModel = new UrlModel();
 	public static DateModel dateModel = new DateModel();
 	private String username, password;
-	boolean runTest = true;
 
 	@Before
 	public void setUp() throws Exception {
@@ -73,22 +72,20 @@ public class US10001bClosePartyTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-		dateModel = MongoReader.grabDateModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);	
+		dateModel = MongoReader.grabDateModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
 	}
 
 	@Test
 	public void us10001bClosePartyTest() {
-		if (runTest) {
-			customerRegistrationSteps.performLogin(username, password);
-			if (!headerSteps.succesfullLogin()) {
-				footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
-			}
-			headerSteps.selectLanguage(MongoReader.getContext());
-			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.closeTheParty();
-			partyDetailsSteps.verifyClosedPartyAvailableActions();
+		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.closeTheParty();
+		partyDetailsSteps.verifyClosedPartyAvailableActions();
 	}
 
 }

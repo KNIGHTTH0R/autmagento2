@@ -166,7 +166,7 @@ public class US11007ValidateOrdersBackEndTest extends BaseTest {
 		hostOrderProductsWorkflows.setValidateProductsModels(productsListTp2, orderItemsListTp2);
 		hostOrderProductsWorkflows.validateProducts("PRODUCTS VALIDATION");
 
-		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung wird geprüft");
+//		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung wird geprüft");
 		orderWorkflows.validateOrderStatus(orderInfoModelTp1.getOrderStatus(), "Zahlung geplant");
 		orderWorkflows.validateScheduledDeliveryDate(orderInfoModelTp1.getDeliveryDate(),
 				orderInfoModelTp1.getDeliveryDate());

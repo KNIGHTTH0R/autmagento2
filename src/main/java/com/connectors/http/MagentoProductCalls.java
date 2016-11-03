@@ -251,7 +251,7 @@ public class MagentoProductCalls {
 		stockModel.setUseConfigNotifyStockQty("1");
 		stockModel.setIsDiscontinued("0");
 		stockModel.setEarliestAvailability("");
-		stockModel.setAllowedTermPurchase("1");
+		stockModel.setAllowedTermPurchase("0");
 		stockModel.setMaximumPercentageToBorrow("");
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
 
@@ -368,7 +368,7 @@ public class MagentoProductCalls {
 		stockModel.setUseConfigNotifyStockQty("1");
 		stockModel.setIsDiscontinued("1");
 		stockModel.setEarliestAvailability(earliestAvailability);
-		stockModel.setAllowedTermPurchase("1");
+		stockModel.setAllowedTermPurchase("0");
 		stockModel.setMaximumPercentageToBorrow("");
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
 
