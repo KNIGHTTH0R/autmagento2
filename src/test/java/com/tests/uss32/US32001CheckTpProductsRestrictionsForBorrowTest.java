@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -105,6 +106,8 @@ public class US32001CheckTpProductsRestrictionsForBorrowTest extends BaseTest {
 				}
 			}
 		}
+		MongoConnector.cleanCollection(getClass().getSimpleName());
+
 	}
 
 	@Test
@@ -121,7 +124,7 @@ public class US32001CheckTpProductsRestrictionsForBorrowTest extends BaseTest {
 		generalCartSteps.clearCart();
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
-		searchSteps.navigateToProductPage(genProduct1.getName());
+		searchSteps.navigateToProductPage(genProduct1.getSku());
 		productSteps.verifyThatProductStatusIsCorrect(ContextConstants.CURRENTLY_OUT_OF_STOCK);
 		productSteps.verifyAddToCartButton(false);
 		addBorrowedProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");

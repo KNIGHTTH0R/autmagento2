@@ -15,6 +15,9 @@ public class SearchSteps extends AbstractSteps {
 		// navigate(MongoReader.getBaseURL() + "/" + pathName.toLowerCase() + ".html");
 		
 		String[] currentUrlSplitted = getDriver().getCurrentUrl().split("/");
+		
+		System.out.println(currentUrlSplitted[0] + "//" + currentUrlSplitted[2] + "/" + currentUrlSplitted[3] + "/"
+				+ pathName.toLowerCase() + ".html");
 
 		navigate(currentUrlSplitted[0] + "//" + currentUrlSplitted[2] + "/" + currentUrlSplitted[3] + "/"
 				+ pathName.toLowerCase() + ".html");
