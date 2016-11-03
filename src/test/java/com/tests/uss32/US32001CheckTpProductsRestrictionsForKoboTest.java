@@ -115,7 +115,7 @@ public class US32001CheckTpProductsRestrictionsForKoboTest extends BaseTest {
 		wishlistSteps.removeProductsFromWishlist();
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.accessKoboCart();
-		searchSteps.navigateToProductPage(genProduct1.getName());
+		searchSteps.navigateToProductPage(genProduct1.getSku());
 		productSteps.verifyThatProductStatusIsCorrect(ContextConstants.CURRENTLY_OUT_OF_STOCK);
 		productSteps.verifyAddToCartButton(false);
 		addBorrowedProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");

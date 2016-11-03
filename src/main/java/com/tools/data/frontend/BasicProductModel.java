@@ -6,6 +6,7 @@ public class BasicProductModel {
 	private String prodCode;
 	private String quantity;
 	private String unitPrice;
+	private String specialPrice;
 	private String productsPrice;
 	private String finalPrice;
 	private String priceIP;
@@ -74,6 +75,14 @@ public class BasicProductModel {
 	public void setDiscountClass(String discountClass) {
 		this.discountClass = discountClass;
 	}
+	
+	public String getSpecialPrice() {
+		return specialPrice;
+	}
+
+	public void setSpecialPrice(String specialPrice) {
+		this.specialPrice = specialPrice;
+	}
 
 	public BasicProductModel newProductObject(BasicProductModel model) {
 		BasicProductModel newProduct = new BasicProductModel();
@@ -85,6 +94,7 @@ public class BasicProductModel {
 		newProduct.setFinalPrice(model.getFinalPrice());
 		newProduct.setPriceIP(model.getPriceIP());
 		newProduct.setDiscountClass(model.getDiscountClass());
+		newProduct.setSpecialPrice(model.getSpecialPrice());
 
 		return newProduct;
 

@@ -84,7 +84,7 @@ public class US31002ValidateCanceledAndReleasedOrdersInTpGridTest extends BaseTe
 		ordersSteps.openOrder(orderModelListTp3.getOrderId());
 		// TODO change PAYMENT_IN_PROGRESS in PAYMENT_COMPLETE
 		orderWorkflows.validateOrderStatus(ordersSteps.grabOrderInfo().getOrderStatus(),
-				ConfigConstants.PAYMENT_IN_PROGRESS);
+				ConfigConstants.PAYMENT_COMPLETE);
 
 		customVerifications.printErrors();
 

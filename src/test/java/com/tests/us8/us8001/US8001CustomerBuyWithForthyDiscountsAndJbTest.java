@@ -107,9 +107,9 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		genProduct2.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct2);
 
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("10.00");
+		MagentoProductCalls.createApiProduct(genProduct3);
 		
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
