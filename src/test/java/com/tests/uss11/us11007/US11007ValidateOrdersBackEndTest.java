@@ -47,7 +47,7 @@ public class US11007ValidateOrdersBackEndTest extends BaseTest {
 	@Steps
 	public CustomVerification customVerifications;
 
-	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
+//	private static OrderInfoModel orderInfoModel = new OrderInfoModel();
 	private static OrderInfoModel orderInfoModelTp1 = new OrderInfoModel();
 	private static OrderInfoModel orderInfoModelTp2 = new OrderInfoModel();
 
@@ -132,7 +132,7 @@ public class US11007ValidateOrdersBackEndTest extends BaseTest {
 		ordersSteps.openOrder(orderModelList.get(0).getOrderId());
 		List<OrderItemModel> orderItemsList = ordersSteps.grabOrderProducts();
 		orderTotalsModel = ordersSteps.grabTotals();
-		orderInfoModel = ordersSteps.grabOrderInfo();
+//		orderInfoModel = ordersSteps.grabOrderInfo();
 
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderModelListTp1.get(0).getOrderId());
