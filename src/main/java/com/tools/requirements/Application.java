@@ -186,6 +186,12 @@ public class Application {
 
 		public class US11_8 {
 		}
+
+		public class US11_9 {
+		}
+
+		public class US11_10 {
+		}
 	}
 
 	@Feature
@@ -386,19 +392,22 @@ public class Application {
 		public class US30_1 {
 		}
 	}
-	
+
 	@Feature
 	public class TermPurchaseExecution {
 		public class US31_1 {
 		}
+
 		public class US31_2 {
 		}
+
 		public class US31_3 {
 		}
+
 		public class US31_4 {
 		}
 	}
-	
+
 	@Feature
 	public class CheckTpProductsRestrictions {
 		public class US32_1 {

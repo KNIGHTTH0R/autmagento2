@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -112,6 +113,7 @@ public class US32001CheckTpProductsRestrictionsForSfmTest extends BaseTest {
 				}
 			}
 		}
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
@@ -127,7 +129,7 @@ public class US32001CheckTpProductsRestrictionsForSfmTest extends BaseTest {
 		generalCartSteps.clearCart();
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
-		searchSteps.navigateToProductPage(genProduct1.getName());
+		searchSteps.navigateToProductPage(genProduct1.getSku());
 		productSteps.verifyAddToCartButton(false);
 		// verify tp product in product details
 
@@ -146,6 +148,12 @@ public class US32001CheckTpProductsRestrictionsForSfmTest extends BaseTest {
 
 		cartSteps.verifyStockMessageForProduct(genProduct4.getName(), ContextConstants.PRODUCT_CURRENTLY_OUT_OF_SROCK);
 		cartSteps.verifyErrorMessageInCart(genProduct4.getSku() + " " + ContextConstants.REMOVE_MESSAGE_ADVICE);
+		//@emilian TODO 
+		//validate the followig message displayed in cart, the scenario to appears this message is : 
+		//Add a product to shopping cart and as admin mark that product as out of stock
+		//in this test this validation should be done for genProduct4
+		//the error message is : EN:Some of the products are currently out of stock,DE:Einige der Artikel sind derzeit nicht auf Lager.
+	
 		cartSteps.verifyPresenceOfGoToCheckoutButton(false);
 
 		headerSteps.clickOnWishlistButton();

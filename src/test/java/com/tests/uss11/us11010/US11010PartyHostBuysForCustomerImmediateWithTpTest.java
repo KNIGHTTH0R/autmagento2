@@ -21,6 +21,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -33,15 +34,10 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
-import com.tools.cartcalculations.partyHost.HostCartTotalsCalculation;
 import com.tools.constants.EnvironmentConstants;
-import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.UrlModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.HostBasicProductModel;
-import com.tools.data.frontend.PartyBonusCalculationModel;
-import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
@@ -57,8 +53,8 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US11.7 Party Host Buys For Customer With Term Purchase Test", type = "Scenarios")
-@Story(Application.PlaceACustomerOrderCart.US11_7.class)
+@WithTag(name = "US11.7 Party Host Buys For Customer With Term Purchase Immediate And Out Of Stock Products Test", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_10.class)
 @RunWith(SerenityRunner.class)
 public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest {
 
@@ -78,6 +74,8 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public LoungeSteps loungeSteps;
 	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
@@ -102,17 +100,11 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 	private String shippingValue;
 	private String voucherValue;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
 	private ProductDetailedModel genProduct4;
-	private TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
 
-	private List<PartyBonusCalculationModel> partyBonusCalculationModeList = new ArrayList<PartyBonusCalculationModel>();
-	private PartyBonusCalculationModel partyBonusCalculationModelTp0 = new PartyBonusCalculationModel();
-	private PartyBonusCalculationModel partyBonusCalculationModelTp1 = new PartyBonusCalculationModel();
-	private PartyBonusCalculationModel partyBonusCalculationModelTp2 = new PartyBonusCalculationModel();
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
@@ -138,6 +130,7 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		genProduct4 = MagentoProductCalls.createProductModel();
+		genProduct4.getStockData().setAllowedTermPurchase("1");
 		genProduct4.setPrice("50.00");
 		genProduct4.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct4);
@@ -182,8 +175,6 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP0");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
@@ -199,36 +190,38 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		do {
-			customerRegistrationSteps.navigate(urlModel.getUrl());
+			loungeSteps.clickOrderForCustomer();
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		generalCartSteps.clearCart();
 
+		String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(),
+				"yyyy-MM-dd");
+
+		String deliveryTP2 = DateUtils.getFirstFridayAfterDate(
+				DateUtils.addDaysToAAGivenDate(genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7),
+				"yyyy-MM-dd");
+
 		HostBasicProductModel productData;
-		// TODO hide this somehow
+		
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
-		if (!genProduct1.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils
-					.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+		// we don't need to set here the delivery date
 		HostCartCalculator.allProductsListTp0.add(productData);
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "2", "0");
 		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils
-					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+			productData.setDeliveryDate(deliveryTP1);
 		HostCartCalculator.allProductsListTp1.add(productData);
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "4", "0");
 		if (!genProduct3.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
-					genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
+			productData.setDeliveryDate(deliveryTP2);
 		HostCartCalculator.allProductsListTp2.add(productData);
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct4, "1", "0");
 		if (!genProduct4.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(DateUtils
-					.getFirstFridayAfterDate(genProduct4.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
+			productData.setDeliveryDate(deliveryTP1);
 		HostCartCalculator.allProductsListTp1.add(productData);
 
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp0);
@@ -238,19 +231,17 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku(),
+		String deliveryTP1Locale = DateUtils.parseDate(deliveryTP1, "yyyy-MM-dd", "dd. MMM. yy",
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
+
+		String deliveryTP2Locale = DateUtils.parseDate(deliveryTP2, "yyyy-MM-dd", "dd. MMM. yy",
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
 		// we set the delivery for product4 to be the same with the delivery for
 		// product 2 (same order)
-		regularUserCartSteps.selectDeliveryDate(genProduct4.getSku(),
-				DateUtils.parseDate(
-						DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(),
-								"yyyy-MM-dd"),
-						"yyyy-MM-dd", "dd. MMM. yy",
-						new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+		regularUserCartSteps.selectDeliveryDate(genProduct2.getSku(), deliveryTP1Locale);
+		regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(), deliveryTP2Locale);
+		regularUserCartSteps.selectDeliveryDate(genProduct4.getSku(), deliveryTP1Locale);
 
 		regularUserCartSteps.verifyMultipleDeliveryOption();
 
@@ -260,10 +251,10 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		orderForCustomerCartSteps.grabTotals(voucherCode);
 		HostCartCalculator.calculateOrderForCustomerTotals(discountClass, shippingValue, voucherValue);
 		HostCartCalculator.calculateShippingTotals(shippingValue, voucherValue, discountClass);
-		ipModel = HostCartTotalsCalculation
-				.calculateTermPurchaseIpPoints(HostCartCalculator.allProductsListwithVoucher);
 
 		orderForCustomerCartSteps.clickGoToShipping();
+
+		shippingPartySectionSteps.clickPartyNoOption();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 
 		shippingPartySectionSteps.enterPLZ(plz);
@@ -284,9 +275,9 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
-		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
+		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTP1);
 		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
-		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
+		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTP2);
 
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
@@ -306,21 +297,6 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		hostCartValidationWorkflows.performTpCartValidationsWithVoucher();
-
-		partyBonusCalculationModelTp0.setTotal(HostCartCalculator.shippingCalculatedModel.getTotalAmount());
-		partyBonusCalculationModelTp0.setIp(HostCartCalculator.allProductsListwithVoucher.get(0).getIpPoints());
-		partyBonusCalculationModelTp0.setPercent("100");
-		partyBonusCalculationModeList.add(partyBonusCalculationModelTp0);
-
-		partyBonusCalculationModelTp1.setTotal(HostCartCalculator.shippingCalculatedModelTp1.getTotalAmount());
-		partyBonusCalculationModelTp1.setIp(HostCartCalculator.allProductsListwithVoucher.get(1).getIpPoints());
-		partyBonusCalculationModelTp1.setPercent("100");
-		partyBonusCalculationModeList.add(partyBonusCalculationModelTp1);
-
-		partyBonusCalculationModelTp2.setTotal(HostCartCalculator.shippingCalculatedModelTp2.getTotalAmount());
-		partyBonusCalculationModelTp2.setIp(HostCartCalculator.allProductsListwithVoucher.get(2).getIpPoints());
-		partyBonusCalculationModelTp2.setPercent("100");
-		partyBonusCalculationModeList.add(partyBonusCalculationModelTp2);
 
 		customVerifications.printErrors();
 
@@ -345,10 +321,6 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp2) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP2");
 		}
-		for (PartyBonusCalculationModel model : partyBonusCalculationModeList) {
-			MongoWriter.savePartyBonusCalculationModel(model, getClass().getSimpleName());
-		}
-		MongoWriter.saveIpModel(ipModel, getClass().getSimpleName());
 
 		try {
 			ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL,
