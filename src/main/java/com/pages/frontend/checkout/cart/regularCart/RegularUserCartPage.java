@@ -210,6 +210,33 @@ public class RegularUserCartPage extends AbstractPage {
 		return deliveryDate;
 	}
 
+	/**
+	 * @param productCode
+	 * 
+	 * @returns all delivery dates
+	 * @throws ParseException
+	 */
+
+	public List<String> getAllDeliveryDates(String productCode, Locale locale) throws ParseException {
+		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
+		List<String> deliveryDates = new ArrayList<String>();
+		boolean foundProduct = false;
+		for (WebElement product : cartList) {
+			if (product.getText().contains(productCode)) {
+				foundProduct = true;
+				List<String> deliverys = element(
+						product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option")).getText());
+				for (String delivery : deliverys) {
+					String[] tokens = delivery.split(", ");
+					deliveryDates.add(DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY"));
+				}
+			}
+		}
+		Assert.assertTrue("The product with the product code " + productCode + " was not found", foundProduct);
+
+		return deliveryDates;
+	}
+
 	public void updateProductList(List<RegularBasicProductModel> productsList, String productCode,
 			String discountType) {
 		for (RegularBasicProductModel product : productsList) {
