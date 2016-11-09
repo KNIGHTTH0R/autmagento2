@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.ContactBoosterRegistrationSteps;
@@ -92,13 +93,14 @@ public class US70010KoboRegOnVoucherOwnerContextTest extends BaseTest {
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
 
-//		genProduct1 = MagentoProductCalls.createPomProductModel();
-//		genProduct1.setName("POM_" + genProduct1.getName());
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(7);
+		genProduct1 = MagentoProductCalls.createPomProductModel();
+		genProduct1.setName("POM_" + genProduct1.getName());
+		genProduct1.setPrice("89.00");
+		genProduct1.setSpecialPrice("79.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1.setPrice(genProduct1.getSpecialPrice());
+//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(7);
 
 		Properties prop = new Properties();
 		InputStream input = null;

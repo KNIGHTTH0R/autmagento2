@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -99,9 +100,9 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
 //
 //		genProduct2 = MagentoProductCalls.createProductModel();
 //		genProduct2.setPrice("49.90");
@@ -113,7 +114,7 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 		
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(1);
+//		genProduct1 = createdProductsList.get(1);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -175,9 +176,9 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 
-//		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
-//	
-//		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
+		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
+	
+		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
 		
 
 		shoppingCartPriceRulesSteps.openNewTab();
@@ -205,7 +206,7 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 
 		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		regularCartValidationWorkflows.performCartValidationsWith40DiscountAndJb();
+		regularCartValidationWorkflows.performCheckoutValidations();
 
 		customVerifications.printErrors();
 	}

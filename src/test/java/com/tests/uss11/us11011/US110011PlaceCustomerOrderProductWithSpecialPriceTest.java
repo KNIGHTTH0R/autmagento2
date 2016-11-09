@@ -1,4 +1,4 @@
-package com.tests.uss11.us11009;
+package com.tests.uss11.us11011;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,6 +34,7 @@ import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -53,7 +54,7 @@ import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 @WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test, ship to host", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_1.class)
 @RunWith(SerenityRunner.class)
-public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
+public class US110011PlaceCustomerOrderProductWithSpecialPriceTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -108,9 +109,14 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("29.00");
-		genProduct1.setIp("25");
+		genProduct1.setSpecialPrice("15.00");
+		genProduct1.setIp("26");
+		
 		MagentoProductCalls.createApiProduct(genProduct1);
-//
+		genProduct1.setIp(GeneralCartCalculations.calculateIpBasedOnSpecialPrice(genProduct1.getIp(),genProduct1.getPrice(),genProduct1.getSpecialPrice()));
+		genProduct1.setPrice(genProduct1.getSpecialPrice());
+//		genProduct1.setIp("13");
+
 //		genProduct2 = MagentoProductCalls.createProductModel();
 //		genProduct2.setPrice("10.00");
 //		genProduct2.setIp("8");
@@ -133,7 +139,7 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us110011.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -168,7 +174,7 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 	}
 
 	@Test
-	public void us11009PartyHostBuysForCustomerSpecialCaseTest() {
+	public void us110011PlaceCustomerOrderProductWithSpecialPriceTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -185,13 +191,15 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 
 		HostBasicProductModel productData;
 
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "3", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 		HostCartCalculator.allProductsList.add(productData);
 		
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
+		orderForCustomerCartSteps.grabProductsData();
+		orderForCustomerCartSteps.grabTotals(voucherCode);
 		HostCartCalculator.calculateOrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
 
 		orderForCustomerCartSteps.clickGoToShipping();
@@ -201,11 +209,6 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
-		
-		shoppingCartPriceRulesSteps.openNewTab();
-		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
-		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
-		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
 
 		shippingSteps.goToPaymentMethod();
 
@@ -229,7 +232,7 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 		
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		hostCartValidationWorkflows.performCheckoutValidations();
+		hostCartValidationWorkflows.performCartValidations();
 		customVerifications.printErrors();
 
 	}

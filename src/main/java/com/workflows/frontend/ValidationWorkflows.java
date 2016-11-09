@@ -140,6 +140,23 @@ public class ValidationWorkflows {
 		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel.getTotalAmount());
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 	}
+	
+	
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performCheckoutValidationsTotals() {
+
+		checkoutValidationSteps.verifySuccessMessage();
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, CartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+	}
 
 	@StepGroup
 	@Screenshots(onlyOnFailures = true)

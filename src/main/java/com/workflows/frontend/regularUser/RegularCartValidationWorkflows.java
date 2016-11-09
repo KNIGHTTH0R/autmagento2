@@ -77,6 +77,33 @@ public class RegularCartValidationWorkflows {
 		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 	
+	
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performCheckoutValidations() {
+
+		checkoutValidationSteps.verifySuccessMessage();
+
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
+				RegularUserDataGrabber.regularUserConfirmationTotals,
+				RegularUserCartCalculator.shippingCalculatedModel);
+		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
+		adyenWorkflows.setVerifyAdyenTotals(RegularUserDataGrabber.orderModel,
+				RegularUserCartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
+	
 	@StepGroup
 	@Screenshots(onlyOnFailures = true)
 	public void performCartValidations() {

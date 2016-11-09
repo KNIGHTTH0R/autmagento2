@@ -26,10 +26,10 @@ public class PomProductDetailsSteps extends AbstractSteps {
 	public void verifyAddToCartButton(boolean shouldBeVisible) {
 		if (shouldBeVisible) {
 			Assert.assertTrue("The button should be present and it's not !!!",
-					pomProductListPage().getProductDetailsText().contains(ContextConstants.ADD_TO_CART));
+					pomProductListPage().getProductDetailsText().contains(ContextConstants.ADD_TO_CART_POM));
 		} else {
 			Assert.assertTrue("The button is present and it shouldn't !!!",
-					!pomProductListPage().getProductDetailsText().contains(ContextConstants.ADD_TO_CART));
+					!pomProductListPage().getProductDetailsText().contains(ContextConstants.ADD_TO_CART_POM));
 		}
 	}
 
