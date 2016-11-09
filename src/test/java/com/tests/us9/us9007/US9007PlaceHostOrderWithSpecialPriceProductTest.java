@@ -1,4 +1,4 @@
-package com.tests.uss11.us11009;
+package com.tests.us9.us9007;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,17 +24,19 @@ import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.PartyDetailsSteps;
+import com.steps.frontend.HomeSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
-import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
+import com.steps.frontend.checkout.cart.partyHost.HostCartSteps;
+import com.steps.frontend.checkout.shipping.contactHost.ContactHostShippingHostSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
@@ -47,59 +49,56 @@ import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
-import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
+import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 
-@WithTag(name = "US11.1 Party Host Buys For Customer With Voucher Test, ship to host", type = "Scenarios")
-@Story(Application.PlaceACustomerOrderCart.US11_1.class)
+@WithTag(name = "US9.1 Place Host Order With 40% Discount and JB Test", type = "Scenarios")
+@Story(Application.HostCart.US9_1.class)
 @RunWith(SerenityRunner.class)
-public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
+public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public FooterSteps footerSteps;
+	public HomeSteps homeSteps;
 	@Steps
-	public PartyDetailsSteps partyDetailsSteps;
+	public FooterSteps footerSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
-	public GeneralCartSteps generalCartSteps;
-	@Steps
-	public OrderForCustomerCartSteps orderForCustomerCartSteps;
-	@Steps
 	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
+	public HostCartSteps hostCartSteps;
+	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
+	public AddHostProductsWorkflow addHostProductsWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public HostCartValidationWorkflows hostCartValidationWorkflows;
 	@Steps
+	public ContactHostShippingHostSteps contactHostShippingHostSteps;
+	@Steps
 	public CustomVerification customVerifications;
 	@Steps
 	public ShoppingCartPriceRulesSteps shoppingCartPriceRulesSteps;
 
-	private String username, password, customerName, notAllowedCustomerName;
-	private String discountClass;
+	private String username, password;
 	private String billingAddress;
-	private String shippingAddress;
 	private String shippingValue;
-	private String voucherCode;
-	private String voucherValue;
-
+	private String discount;
 	private CreditCardModel creditCardData = new CreditCardModel();
-	private static UrlModel urlModel = new UrlModel();
+	private static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
-	
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
-
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -107,25 +106,14 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 		HostDataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("29.00");
-		genProduct1.setIp("25");
+		genProduct1.setPrice("89.00");
+		genProduct1.setSpecialPrice("55.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("10.00");
-//		genProduct2.setIp("8");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("29.90");
-//		genProduct3.setIp("25");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct1.setPrice(genProduct1.getSpecialPrice());
 		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
-//        genProduct1 = createdProductsList.get(1);
-	
-		
+//		genProduct1 = createdProductsList.get(1);
 		
 
 		Properties prop = new Properties();
@@ -133,21 +121,15 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us9" + File.separator + "us9001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			customerName = prop.getProperty("customerName");
-			notAllowedCustomerName = prop.getProperty("notAllowedCustomerName");
-			System.out.println(notAllowedCustomerName);
 
-			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
 			shippingValue = prop.getProperty("shippingValue");
-
-			voucherCode = prop.getProperty("voucherCode");
-			voucherValue = prop.getProperty("voucherValue");
+			discount = prop.getProperty("discount");
+			
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -161,53 +143,45 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		
+		partyUrlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 
 	@Test
-	public void us11009PartyHostBuysForCustomerSpecialCaseTest() {
+	public void us9007PlaceHostOrderWithSpecialPriceProductTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		do {
-			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.orderForCustomer();
-			partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
-			partyDetailsSteps.orderForCustomerFromParty(customerName);
-		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
-		
+		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
-
 		HostBasicProductModel productData;
 
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "3", "0");
+		productData = addHostProductsWorkflow.setHostProductToCart(genProduct1, "3", "0");
 		HostCartCalculator.allProductsList.add(productData);
 		
-
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		HostCartCalculator.calculateOrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
+		hostCartSteps.grabProductsDataWhenThereIsNoBonus();	
+		hostCartSteps.grabTotals();
+		HostCartCalculator.calculateCartAndShippingTotals(discount, shippingValue);
 
-		orderForCustomerCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.checkItemNotReceivedYet();
-		shippingPartySectionSteps.clickShipToHostessButton();
-		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
-
-		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
-		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 		
-		shoppingCartPriceRulesSteps.openNewTab();
-		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
-		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
-		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
-
-		shippingSteps.goToPaymentMethod();
+		
+		hostCartSteps.clickGoToShipping();
+//		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
+		shippingSteps.selectAddress(billingAddress);
+		shippingSteps.setSameAsBilling(true);
+		
+		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();	
+		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
+	
+		shippingSteps.goToPaymentMethod();		
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
@@ -215,36 +189,34 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		
 		paymentSteps.expandCreditCardForm();
 		paymentSteps.fillCreditCardForm(creditCardData);
-
+	
 		confirmationSteps.grabHostProductsList();
-
+		
 		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-
+		
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
-		
-		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		hostCartValidationWorkflows.performCheckoutValidations();
-		customVerifications.printErrors();
 
+
+		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		hostCartValidationWorkflows.performCartValidations();
+
+		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts,
-				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveHostCartCalcDetailsModel(HostCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel,
-				getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveUrlModel(HostDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
 		}
 	}
-
 }
+

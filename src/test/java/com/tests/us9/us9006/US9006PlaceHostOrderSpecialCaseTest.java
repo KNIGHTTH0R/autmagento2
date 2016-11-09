@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -92,6 +93,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 	private String username, password;
 	private String billingAddress;
 	private String shippingValue;
+	private String discount;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
@@ -102,22 +104,14 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
-//
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("100.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
 		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(1);
+//		genProduct1 = createdProductsList.get(1);
 		
 
 		Properties prop = new Properties();
@@ -132,6 +126,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 
 			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
+			discount = prop.getProperty("discount");
 			
 
 		} catch (IOException ex) {
@@ -166,16 +161,18 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct1, "3", "0");
 		HostCartCalculator.allProductsList.add(productData);
-
+		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
 
+		HostCartCalculator.calculateCartAndShippingTotals(discount, shippingValue);
+		
 		hostCartSteps.clickGoToShipping();
-//		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 		
+		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();	
+		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 		
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
@@ -204,7 +201,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 
 
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		hostCartValidationWorkflows.performCartValidations();
+		hostCartValidationWorkflows.performCheckoutValidations();
 
 		customVerifications.printErrors();
 	}

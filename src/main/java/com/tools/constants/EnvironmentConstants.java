@@ -21,6 +21,7 @@ public class EnvironmentConstants {
 	
 	//starterset
 	public static final String STARTERSET = MongoReader.geteEnvironmentConstantsItem("STARTERSET");
+	public static final String STARTERSETSPECIAL = MongoReader.geteEnvironmentConstantsItem("STARTERSETSPECIAL");
 	public static final String STARTERKITPRICE = MongoReader.geteEnvironmentConstantsItem("STARTERKITPRICE");
 	public static final String STARTERKIT_SPECIALPRICE = MongoReader.geteEnvironmentConstantsItem("STARTERKIT_SPECIALPRICE");
 	

@@ -9,6 +9,7 @@ public class ContextConstants {
 	public static final String NOT_AVAILABLE_FOR_THE_MOMENT = MongoReader.getDictionaryItem("NOT_AVAILABLE_FOR_THE_MOMENT");
 	public static String REMOVE_MESSAGE_ADVICE = MongoReader.getDictionaryItem("REMOVE_MESSAGE_ADVICE");
 	public static String ADD_TO_CART = MongoReader.getDictionaryItem("ADD_TO_CART");
+	public static String ADD_TO_CART_POM = MongoReader.getDictionaryItem("ADD_TO_CART_POM");
 	public static String ADD_ALL_TO_CART = MongoReader.getDictionaryItem("ADD_ALL_TO_CART");
 	public static String PRODUCT_CURRENTLY_OUT_OF_SROCK = MongoReader.getDictionaryItem("PRODUCT_CURRENTLY_OUT_OF_SROCK");
 	public static String CURRENTLY_OUT_OF_STOCK = MongoReader.getDictionaryItem("CURRENTLY_OUT_OF_STOCK");

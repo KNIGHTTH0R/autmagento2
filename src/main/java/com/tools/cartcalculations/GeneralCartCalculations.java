@@ -65,7 +65,25 @@ public class GeneralCartCalculations {
 		return availableDates;
 	}
 
+	public static String calculateIpBasedOnSpecialPrice(String initialIp, String price, String specialPrice) {
+
+		BigDecimal specialIps = BigDecimal.ZERO;
+
+		BigDecimal initialProductIps = BigDecimal.valueOf(Double.parseDouble(initialIp));
+		BigDecimal specialProductPrice = BigDecimal.valueOf(Double.parseDouble(specialPrice));
+		BigDecimal productPrice = BigDecimal.valueOf(Double.parseDouble(price));
+
+		specialIps = specialIps.add(specialProductPrice);
+		specialIps = specialIps.divide(productPrice, 4, RoundingMode.HALF_UP);
+		specialIps = specialIps.multiply(initialProductIps);
+
+		return String.valueOf(specialIps.setScale(0, RoundingMode.HALF_UP));
+
+	}
+
 	public static void main(String[] args) throws ParseException {
+		// System.out.println(GeneralCartCalculations.calculateIpBasedOnSpecialPrice("63",
+		// "75.00", "39.00"));
 		List<String> dates = GeneralCartCalculations.calculateDeliveryDates("2016-11-11", "2016-11-20", "2016-11-30",
 				45, 49);
 		for (String date : dates) {

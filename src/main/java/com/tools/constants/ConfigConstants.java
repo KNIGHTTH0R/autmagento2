@@ -137,4 +137,24 @@ public class ConfigConstants {
 	public static final String ADYEN_NOTIFICATION_TAB ="Adyen Order Notifications";
 	public static final String ADYEN_AUTHORISATION ="AUTHORISATION";
 	public static final String ADYEN_CAPTURE ="CAPTURE";
+	
+	//term purchse config
+	
+	public static final String FOR_ALL_PRODUCTS ="For all products";
+	public static final String ONLY_SOME_PRODUCTS ="Only for products which are temporarily not available";
+	public static final String NOT_AVAILABLE_TP ="Not available";
+	public static final String MONDAY ="Montag";
+	public static final String TUESDAY ="Dienstag";
+	public static final String WEDNESDAY ="Mittwoch";
+	public static final String THURSDAY ="Donnerstag";
+	public static final String FRIDAY ="Freitag";
+	public static final String SATURDAY ="Samstag";
+	public static final String SUNDAY ="Sonntag";
+
+	
+	
+	
+
+	
+	
 }

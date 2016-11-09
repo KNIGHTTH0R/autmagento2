@@ -163,6 +163,39 @@ public class MagentoProductCalls {
 
 		return result;
 	}
+	
+	public static ProductDetailedModel createImmediateAndNotAvailableYetProductModel() {
+		ProductDetailedModel result = createProductModel();
+		List<String> categoriesIds = new ArrayList<String>();
+		categoriesIds.add("52");
+		categoriesIds.add("52");
+		result.setCategoryIdsArray(categoriesIds);
+
+		StockDataModel stockModel = new StockDataModel();
+		stockModel.setQty("100");
+		stockModel.setIsInStock("1");
+		stockModel.setManageStock("1");
+		stockModel.setUseConfigManageStock("1");
+		stockModel.setMinQty("-10");
+		stockModel.setUseConfigMinQty("0");
+		stockModel.setMinSaleQty("");
+		stockModel.setUseConfigMinSaleQty("1");
+		stockModel.setMaxSaleQty("");
+		stockModel.setUseConfigMaxSaleQty("");
+		stockModel.setIsQtyDecimal("0");
+		stockModel.setBackorders("1");
+		stockModel.setUseConfigBackorders("0");
+		stockModel.setNotifyStockQty("");
+		stockModel.setUseConfigNotifyStockQty("1");
+		stockModel.setIsDiscontinued("1");
+		stockModel.setEarliestAvailability(FormatterUtils.getCustomDate("yyyy-MM-dd", 86000));
+		stockModel.setAllowedTermPurchase("1");
+		stockModel.setMaximumPercentageToBorrow("");
+		stockModel.setUseConfigMaximumPercentageToBorrow("80");
+		result.setStockData(stockModel);
+
+		return result;
+	}
 
 	public static ProductDetailedModel createStarterKitProductModel() {
 		ProductDetailedModel result = createProductModel();

@@ -132,7 +132,7 @@ public class US6006ScBuyProductwithSpecialPriceTest extends BaseTest {
 
 		StarterSetProductModel productData;
 
-		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSET, EnvironmentConstants.STARTERKIT_SPECIALPRICE);
+		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSETSPECIAL, EnvironmentConstants.STARTERKIT_SPECIALPRICE);
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
 
 		starterSetSteps.applyVoucher(voucherCode);
@@ -145,6 +145,7 @@ public class US6006ScBuyProductwithSpecialPriceTest extends BaseTest {
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+		
 
 		if (paymentSteps.isKlarnaAvailable()) {
 			paymentSteps.expandKlarnaForm();

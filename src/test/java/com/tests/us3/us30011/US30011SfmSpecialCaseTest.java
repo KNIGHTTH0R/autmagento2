@@ -103,7 +103,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		try {
 
 			input = new FileInputStream(
-					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3004.properties");
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us30011.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -151,7 +151,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		cartSteps.grabTotals();
+		
 		cartSteps.goToShipping();
 		
 		shippingSteps.selectAddress(billingAddress);
@@ -160,9 +160,9 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
-		shoppingCartPriceRulesSteps.activateRule("voucher test shop for myself");
+		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
 		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
-
+		
 		
 		shippingSteps.goToPaymentMethod();
 
@@ -178,7 +178,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		validationWorkflows.performCartValidationsTotals();
+		validationWorkflows.performCheckoutValidationsTotals();
 
 		customVerifications.printErrors();
 	}
