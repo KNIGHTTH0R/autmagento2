@@ -12,13 +12,17 @@ import com.tools.utils.DateUtils;
 
 public class OrdersCalculation {
 
-	private static List<String> unsafeIpStatusesList = new ArrayList<String>(Arrays.asList("processing", "waiting_authorozation", "payment_review", "payment_failed",
-			"pending_payment", "payment_in_progress", "pending_payment_hold"));
+	private static List<String> unsafeIpStatusesList = new ArrayList<String>(
+			Arrays.asList("processing", "waiting_authorozation", "payment_review", "payment_failed", "pending_payment",
+					"payment_in_progress", "pending_payment_hold"));
 
-	private static List<String> payedStatusesList = new ArrayList<String>(Arrays.asList("complete", "payment_complete", "closed"));
+	private static List<String> payedStatusesList = new ArrayList<String>(
+			Arrays.asList("complete", "payment_complete", "closed"));
 
-	public static BigDecimal calculateTotalIpOnPreviousMonth(List<DBOrderModel> allOrdersList, String stylistId, String createdStartDate, String createdEndDate)
-			throws NumberFormatException, ParseException {
+	// TODO change the name of the method - this method also applies on any
+	// month not only on previous
+	public static BigDecimal calculateTotalIpOnPreviousMonth(List<DBOrderModel> allOrdersList, String stylistId,
+			String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 		for (DBOrderModel order : allOrdersList) {
 			if (isOrderCompatibleForIpCalculation(order, createdStartDate, createdEndDate)) {
@@ -29,7 +33,9 @@ public class OrdersCalculation {
 		return totalMonthIp;
 	}
 
-	public static BigDecimal calculateTotalIpFromOrdersInTakeOfPeriod(List<DBOrderModel> allOrdersList, String stylistId, String activationDate, String createdStartDate) throws NumberFormatException, ParseException {
+	public static BigDecimal calculateTotalIpFromOrdersInTakeOfPeriod(List<DBOrderModel> allOrdersList,
+			String stylistId, String activationDate, String createdStartDate)
+					throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 		for (DBOrderModel order : allOrdersList) {
 			if (isOrderCompatibleForIpCalculationInTob(order, activationDate, createdStartDate)) {
@@ -40,8 +46,8 @@ public class OrdersCalculation {
 		return totalMonthIp;
 	}
 
-	public static BigDecimal calculateTotalUnsafeIpOnCurrentMonth(List<DBOrderModel> allOrdersList, String stylistId, String createdStartDate) throws NumberFormatException,
-			ParseException {
+	public static BigDecimal calculateTotalUnsafeIpOnCurrentMonth(List<DBOrderModel> allOrdersList, String stylistId,
+			String createdStartDate) throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 
 		for (DBOrderModel order : allOrdersList) {
@@ -53,16 +59,18 @@ public class OrdersCalculation {
 		return totalMonthIp;
 	}
 
-	private static boolean isOrderCompatibleForIpCalculationInTob(DBOrderModel order, String activationDate, String createdStartDate)
-			throws ParseException {
+	private static boolean isOrderCompatibleForIpCalculationInTob(DBOrderModel order, String activationDate,
+			String createdStartDate) throws ParseException {
 
 		return isPayed(order)
-				&& DateUtils.isDateBeetween(order.getCreatedAt(),activationDate,
+				&& DateUtils.isDateBeetween(order.getCreatedAt(), activationDate,
 						DateUtils.getLastDayOfAGivenMonth(createdStartDate, DateConstants.FORMAT), DateConstants.FORMAT)
-				&& DateUtils.isDateBeetween(order.getPaidAt(),activationDate,
+				&& DateUtils.isDateBeetween(order.getPaidAt(), activationDate,
 						DateUtils.getLastDayOfAGivenMonth(createdStartDate, DateConstants.FORMAT), DateConstants.FORMAT)
-				&& DateUtils.getNumberOfDaysBeetweenTwoDates(activationDate, order.getCreatedAt(), DateConstants.FORMAT) <= 91
-				&& DateUtils.getNumberOfDaysBeetweenTwoDates(activationDate, order.getPaidAt(), DateConstants.FORMAT) <= 91;
+				&& DateUtils.getNumberOfDaysBeetweenTwoDates(activationDate, order.getCreatedAt(),
+						DateConstants.FORMAT) <= 91
+				&& DateUtils.getNumberOfDaysBeetweenTwoDates(activationDate, order.getPaidAt(),
+						DateConstants.FORMAT) <= 91;
 
 	}
 
@@ -79,9 +87,10 @@ public class OrdersCalculation {
 	//
 	// }
 
-	private static boolean isOrderCompatibleForIpCalculation(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
-		return isPayed(order)
-				&& (isOrderCompatibleForIpCalcCase1(order, createdStartDate, createdEndDate) || isOrderCompatibleForIpCalcCase2(order, createdStartDate, createdEndDate));
+	private static boolean isOrderCompatibleForIpCalculation(DBOrderModel order, String createdStartDate,
+			String createdEndDate) throws ParseException {
+		return isPayed(order) && (isOrderCompatibleForIpCalcCase1(order, createdStartDate, createdEndDate)
+				|| isOrderCompatibleForIpCalcCase2(order, createdStartDate, createdEndDate));
 	}
 
 	private static boolean isPayed(DBOrderModel model) {
@@ -104,22 +113,30 @@ public class OrdersCalculation {
 		return found;
 	}
 
-	private static boolean isOrderCompatibleForIpCalcCase1(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
+	private static boolean isOrderCompatibleForIpCalcCase1(DBOrderModel order, String createdStartDate,
+			String createdEndDate) throws ParseException {
 
-		return DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, DateConstants.FORMAT),
+		return DateUtils.isDateBeetween(order.getCreatedAt(),
+				DateUtils.getFirstDayOfAGivenMonth(createdStartDate, DateConstants.FORMAT),
 				DateUtils.getLastDayOfAGivenMonth(createdStartDate, DateConstants.FORMAT), DateConstants.FORMAT)
-				&& DateUtils.isDateBeetween(order.getPaidAt(), DateUtils.getFirstDayOfAGivenMonth(createdStartDate, DateConstants.FORMAT), createdEndDate, DateConstants.FORMAT);
+				&& DateUtils.isDateBeetween(order.getPaidAt(),
+						DateUtils.getFirstDayOfAGivenMonth(createdStartDate, DateConstants.FORMAT), createdEndDate,
+						DateConstants.FORMAT);
 	}
 
-	private static boolean isOrderCompatibleForIpCalcCase2(DBOrderModel order, String createdStartDate, String createdEndDate) throws ParseException {
+	private static boolean isOrderCompatibleForIpCalcCase2(DBOrderModel order, String createdStartDate,
+			String createdEndDate) throws ParseException {
 
-		return DateUtils.isDateBeetween(order.getCreatedAt(), "2015-01-01 00:00:00", DateUtils.getLastDayOfPreviousMonth(createdStartDate, DateConstants.FORMAT),
-				DateConstants.FORMAT) && DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, DateConstants.FORMAT);
+		return DateUtils.isDateBeetween(order.getCreatedAt(), "2015-01-01 00:00:00",
+				DateUtils.getLastDayOfPreviousMonth(createdStartDate, DateConstants.FORMAT), DateConstants.FORMAT)
+				&& DateUtils.isDateBeetween(order.getPaidAt(), createdStartDate, createdEndDate, DateConstants.FORMAT);
 	}
 
-	private static boolean isOrderCompatibleForUnsafeIpCalc(DBOrderModel order, String createEndDate) throws ParseException {
+	private static boolean isOrderCompatibleForUnsafeIpCalc(DBOrderModel order, String createEndDate)
+			throws ParseException {
 
-		return DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth("1970-10-10 00:00:00", DateConstants.FORMAT),
+		return DateUtils.isDateBeetween(order.getCreatedAt(),
+				DateUtils.getFirstDayOfAGivenMonth("1970-10-10 00:00:00", DateConstants.FORMAT),
 				DateUtils.getLastDayOfAGivenMonth(createEndDate, DateConstants.FORMAT), DateConstants.FORMAT)
 				&& !isPayed(order) && hasUnsafeIpStatus(order);
 	}

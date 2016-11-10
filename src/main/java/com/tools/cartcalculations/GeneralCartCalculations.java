@@ -6,7 +6,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
+import com.google.common.collect.Sets;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.utils.DateUtils;
 
@@ -50,7 +52,9 @@ public class GeneralCartCalculations {
 		String firstDeliveryDate = DateUtils.getFirstFridayAfterDate(earliestAvailability, "yyyy-MM-dd");
 		String lastDeliveryDate = DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd",
 				maxExecDays);
+		System.out.println(lastDeliveryDate + " lastDeliveryDate");
 		String lastDropdownDay = DateUtils.addDaysToAAGivenDate(firstDeliveryDate, "yyyy-MM-dd", maxDropdownDays);
+		System.out.println(lastDropdownDay + " lastDropdownDay");
 		lastDeliveryDate = DateUtils.isDateBefore(lastDeliveryDate, lastDropdownDay, "yyyy-MM-dd") ? lastDeliveryDate
 				: lastDropdownDay;
 		availableDates = DateUtils.getFridaysBetweenDates(earliestAvailability, lastDeliveryDate, "yyyy-MM-dd");
@@ -64,6 +68,28 @@ public class GeneralCartCalculations {
 
 		return availableDates;
 	}
+
+	public static List<String> getCommonDates(List<List<String>> lists) throws ParseException {
+
+		List<String> commons = new ArrayList<String>();
+
+		commons.addAll(lists.get(0));
+
+		for (ListIterator<List<String>> iter = lists.listIterator(0); iter.hasNext();) {
+			commons.retainAll(iter.next());
+		}
+
+		return commons;
+
+	}
+	
+//	public <T> Set<T> intersection(List<T>... list) {
+//	    Set<T> result = Sets.newHashSet(list[0]);
+//	    for (List<T> numbers : list) {
+//	        result = Sets.intersection(result, Sets.newHashSet(numbers));
+//	    }
+//	    return result;
+//	}
 
 	public static String calculateIpBasedOnSpecialPrice(String initialIp, String price, String specialPrice) {
 
@@ -85,10 +111,13 @@ public class GeneralCartCalculations {
 		// System.out.println(GeneralCartCalculations.calculateIpBasedOnSpecialPrice("63",
 		// "75.00", "39.00"));
 		List<String> dates = GeneralCartCalculations.calculateDeliveryDates("2016-11-11", "2016-11-20", "2016-11-30",
-				45, 49);
+				245, 49);
 		for (String date : dates) {
 			System.out.println(date);
 		}
+
+		System.out.println(dates.get(dates.size() - 1) + " ultimul element din lista ");
+
 	}
 
 }

@@ -211,9 +211,14 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		HostCartCalculator.allProductsListTp1.add(productData);
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "4", "0");
+		
 		if (!genProduct3.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
 					genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
+		
+		
+		
+		
 		HostCartCalculator.allProductsListTp2.add(productData);
 
 		HostCartCalculator.allProductsList.addAll(HostCartCalculator.allProductsListTp0);

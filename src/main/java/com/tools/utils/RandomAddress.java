@@ -33,7 +33,7 @@ public class RandomAddress {
 
 		String[] splittedText = lines.get(randomWordIndex).split(Separators.COMMA_SEPARATOR);
 		String houseNumber = cleanAddress(getFirstIntegerFromString(splittedText[0]));
-
+		
 		addressModel.setStreetNumber(houseNumber);
 		addressModel.setStreetAddress(cleanAddress(splittedText[0].replace(" " + houseNumber, "")));
 		addressModel.setHomeTown(trimQuotes(splittedText[1]));

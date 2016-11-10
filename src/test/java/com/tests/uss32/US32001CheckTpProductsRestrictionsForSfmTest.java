@@ -113,7 +113,6 @@ public class US32001CheckTpProductsRestrictionsForSfmTest extends BaseTest {
 				}
 			}
 		}
-		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test

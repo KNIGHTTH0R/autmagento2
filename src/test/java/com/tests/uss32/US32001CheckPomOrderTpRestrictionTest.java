@@ -105,7 +105,6 @@ public class US32001CheckPomOrderTpRestrictionTest extends BaseTest {
 		// Generate data for this test run
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
