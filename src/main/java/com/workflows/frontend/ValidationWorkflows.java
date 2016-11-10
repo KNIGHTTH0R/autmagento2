@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Steps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.cartcalculations.smf.CartCalculator;
 import com.tools.datahandler.DataGrabber;
+import com.tools.utils.PrintUtils;
 
 public class ValidationWorkflows {
 
@@ -150,6 +151,9 @@ public class ValidationWorkflows {
 
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+		System.out.println("__________________");
+		PrintUtils.printShippingTotals(CartCalculator.shippingCalculatedModel);
+		System.out.println("__________________");
 
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");

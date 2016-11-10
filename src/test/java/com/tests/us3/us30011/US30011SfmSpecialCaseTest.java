@@ -84,6 +84,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 	private static String marketingDiscount;
 	private static String shippingValue;
 	private static String taxClass;
+	private static String voucherDiscount;
 	private CreditCardModel creditCardData = new CreditCardModel();
 
 	private ProductDetailedModel genProduct1;
@@ -112,6 +113,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
+			voucherDiscount = prop.getProperty("voucherDiscount");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -145,20 +147,13 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-		
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
-		
 		cartSteps.goToShipping();
-		
-		
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.grabSurveyData();
-		
-
 
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
@@ -168,7 +163,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		
 		shippingSteps.goToPaymentMethod();
 
-		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
+		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher(voucherDiscount,jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setUrl(url);
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
@@ -178,9 +173,6 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.grabConfirmationTotals();
-//		confirmationSteps.grabProductsList();
-//		confirmationSteps.grabBillingData();
-//		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
 
