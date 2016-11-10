@@ -106,7 +106,6 @@ public class US32001CheckTpProductsRestrictionsForBorrowTest extends BaseTest {
 				}
 			}
 		}
-		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 
@@ -139,7 +138,6 @@ public class US32001CheckTpProductsRestrictionsForBorrowTest extends BaseTest {
 		borrowCartSteps.verifyErrorMessageInCart(ContextConstants.REMOVE_MESSAGE_ADVICE);
 		borrowCartSteps.verifyPresenceOfGoToCheckoutButton(false);
 		
-
 	}
 
 }

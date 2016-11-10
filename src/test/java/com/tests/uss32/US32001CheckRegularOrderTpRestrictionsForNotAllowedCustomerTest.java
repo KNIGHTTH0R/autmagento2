@@ -101,7 +101,6 @@ public class US32001CheckRegularOrderTpRestrictionsForNotAllowedCustomerTest ext
 				}
 			}
 		}
-		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test

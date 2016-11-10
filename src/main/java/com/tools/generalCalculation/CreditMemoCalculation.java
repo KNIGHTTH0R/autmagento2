@@ -93,8 +93,7 @@ public class CreditMemoCalculation {
 				&& DateUtils.isDateBeetween(creditMemo.getCreatedAt(), createdStartDate, createdEndDate, DateConstants.FORMAT);
 	}
 
-	public static List<DBCreditMemoModel> populateCreditMemosListWithOrderDetails(List<DBCreditMemoModel> creditMemoList, List<DBOrderModel> orderList, String stylistId,
-			String createdStartDate) {
+	public static List<DBCreditMemoModel> populateCreditMemosListWithOrderDetails(List<DBCreditMemoModel> creditMemoList, List<DBOrderModel> orderList) {
 
 		for (DBCreditMemoModel creditMemo : creditMemoList) {
 			for (DBOrderModel order : orderList) {

@@ -118,7 +118,7 @@ public class HttpSoapConnector {
 				MongoReader.getSoapURL() + UrlConstants.API_URI);
 //		SOAPMessage soapResponse = soapConnection.call(
 //				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
-//				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+//				"http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
 		String result = "";
 
 		NodeList returnList = soapResponse.getSOAPBody().getElementsByTagName(SoapKeys.RESULT);

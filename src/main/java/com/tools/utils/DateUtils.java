@@ -206,7 +206,7 @@ public class DateUtils {
 			c1.add(Calendar.DATE, 1);
 		}
 		
-		while (c2.after(c1)) {
+		while (c2.after(c1) || c2.equals(c1)) {
 
 			if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
 				dates.add(format.format(c1.getTime()));

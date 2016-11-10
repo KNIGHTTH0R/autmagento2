@@ -46,7 +46,6 @@ public class US13001CustomerLeadDistributionTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		dataModel = new CustomerFormModel();
-		addressModel = new AddressModel();
 		randomAddress = new RandomAddress();
 		coordinatesModel = new CoordinatesModel();
 
