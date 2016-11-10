@@ -4,9 +4,11 @@ import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import org.joda.time.LocalDate;
@@ -186,6 +188,34 @@ public class DateUtils {
 		}
 
 		return String.valueOf(format.format(calendar.getTime()));
+	}
+
+	public static List<String> getFridaysBetweenDates(String startDateString, String endDateString, String formatString)
+			throws ParseException {
+
+		List<String> dates = new ArrayList<String>();
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date startDate = format.parse(startDateString);
+		Date endDate = format.parse(endDateString);
+		Calendar c1 = Calendar.getInstance();
+		c1.setTime(startDate);
+		Calendar c2 = Calendar.getInstance();
+		c2.setTime(endDate);
+		
+		if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+			c1.add(Calendar.DATE, 1);
+		}
+		
+		while (c2.after(c1) || c2.equals(c1)) {
+
+			if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+				dates.add(format.format(c1.getTime()));
+			}
+			c1.add(Calendar.DATE, 1);
+		}
+
+		return dates;
+
 	}
 
 	public static String addHoursToAGivenDate(String dateString, String formatString, int hours) throws ParseException {
@@ -431,8 +461,7 @@ public class DateUtils {
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
 		// System.out.println(DateUtils.getLastDayOfAGivenMonth("2016-09-30
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
-		System.out.println(DateUtils.parseDate("2016-10-15 12:00:00", "yyyy-MM-dd HH:mm:ss", "yyyy-MMM",
-				new Locale.Builder().setLanguage("de").build()));
+		System.out.println(DateUtils.getFridaysBetweenDates("2016-11-11", "2016-12-24", "yyyy-MM-dd"));
 	}
 
 }
