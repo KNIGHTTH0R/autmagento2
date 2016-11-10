@@ -6,7 +6,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
+import com.google.common.collect.Sets;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.utils.DateUtils;
 
@@ -80,6 +82,14 @@ public class GeneralCartCalculations {
 		return commons;
 
 	}
+	
+//	public <T> Set<T> intersection(List<T>... list) {
+//	    Set<T> result = Sets.newHashSet(list[0]);
+//	    for (List<T> numbers : list) {
+//	        result = Sets.intersection(result, Sets.newHashSet(numbers));
+//	    }
+//	    return result;
+//	}
 
 	public static String calculateIpBasedOnSpecialPrice(String initialIp, String price, String specialPrice) {
 

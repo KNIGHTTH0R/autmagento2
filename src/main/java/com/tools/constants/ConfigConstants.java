@@ -141,8 +141,8 @@ public class ConfigConstants {
 	//term purchse config
 	
 	public static final String FOR_ALL_PRODUCTS ="For all products";
-	public static final String ONLY_SOME_PRODUCTS ="Only for products which are temporarily not available";
-	public static final String NOT_AVAILABLE_TP ="Not available";
+	public static final String ONLY_FOR_NOT_AVAILABLE ="Only for products which are temporarily not available";
+	public static final String DISABLED_FOR_ALL ="Not available";
 	public static final String MONDAY ="Montag";
 	public static final String TUESDAY ="Dienstag";
 	public static final String WEDNESDAY ="Mittwoch";
