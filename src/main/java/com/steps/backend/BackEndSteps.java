@@ -373,59 +373,49 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().selectSubmenu("system_config");
 	}
 	
-	@Step
-	public void goToTermPurchaseTab() {
-		systemConfigurationPage().clickOnDesiredTab("Zielkauf");
-	}
 	
-	@Step
-	public void selectCronExecutionType(String executionType) {
-		systemConfigurationPage().selectExecutionType(executionType);
-		systemConfigurationPage().saveConfiguration();
-	}
-	
-	@Step
-	public void selectTermPurchseOption(String termPurchaseType) {
-		systemConfigurationPage().selectTermPurchseOption(termPurchaseType);
-	}
-	
-	@Step
-	public void inputMaxNumberOfDAys(String days) {
-		systemConfigurationPage().inputMaxNumberOfDAys(days);
-	}
-	
-	@Step
-	public void inputStartDateOfTpNotAvailablePeriod(String date) {
-		systemConfigurationPage().inputStartDateOfTpNotAvailablePeriod(date);
-	}
-	
-	
-	@Step
-	public void inputEndDateOfTpNotAvailablePeriod(String date) {
-		systemConfigurationPage().inputEndDateOfTpNotAvailablePeriod(date);
-	}
-	
-	@Step
-	public void selectDayOfWeekOption(String dayOption) {
-		systemConfigurationPage().selectDayOfWeek(dayOption);
-	}
-	
-	@Step
-	public void inputDayToDelay(String days) {
-		systemConfigurationPage().inputDaytoDelay(days);
-		
-	}
-	
-	@Step
-	public void inputDaysBetweenShipments(String daysBetweenShipment) {
-		systemConfigurationPage().inputDaysBetweenShipments(daysBetweenShipment);
-	}
-	
-	@Step
-	public void inputDayBeforeDeliverySchedule(String daysBeforeDeliverySchedule) {
-		systemConfigurationPage().inputDayBeforeDeliverySchedule(daysBeforeDeliverySchedule);
-		systemConfigurationPage().saveConfiguration();
-	}
+//	@Step
+//	public void selectTermPurchseOption(String termPurchaseType) {
+//		systemConfigurationPage().selectTermPurchseOption(termPurchaseType);
+//	}
+//	
+//	@Step
+//	public void inputMaxNumberOfDAys(String days) {
+//		systemConfigurationPage().inputMaxNumberOfDAys(days);
+//	}
+//	
+//	@Step
+//	public void inputStartDateOfTpNotAvailablePeriod(String date) {
+//		systemConfigurationPage().inputStartDateOfTpNotAvailablePeriod(date);
+//	}
+//	
+//	
+//	@Step
+//	public void inputEndDateOfTpNotAvailablePeriod(String date) {
+//		systemConfigurationPage().inputEndDateOfTpNotAvailablePeriod(date);
+//	}
+//	
+//	@Step
+//	public void selectDayOfWeekOption(String dayOption) {
+//		systemConfigurationPage().selectDayOfWeek(dayOption);
+//	}
+//	
+//	@Step
+//	public void inputDayToDelay(String days) {
+//		systemConfigurationPage().inputDaytoDelay(days);
+//		
+//	}
+//	
+//	@Step
+//	public void inputDaysBetweenShipments(String daysBetweenShipment) {
+//		systemConfigurationPage().inputDaysBetweenShipments(daysBetweenShipment);
+//	}
+//	
+//	@Step
+//	public void inputDayBeforeDeliverySchedule(String daysBeforeDeliverySchedule) {
+//		systemConfigurationPage().inputDayBeforeDeliverySchedule(daysBeforeDeliverySchedule);
+//		systemConfigurationPage().saveConfiguration();
+//	}
 	
 
 }

@@ -528,7 +528,7 @@ public class CartCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getJewelryBonus())));
 
 		shippingValue = GeneralCartCalculations
-				.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getTotalAmount())),
+				.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getSubTotal())),
 						BigDecimal.valueOf(Double.parseDouble(calcDetailsModel.getSegments().get(ConfigConstants.VOUCHER_DISCOUNT))),
 						BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 

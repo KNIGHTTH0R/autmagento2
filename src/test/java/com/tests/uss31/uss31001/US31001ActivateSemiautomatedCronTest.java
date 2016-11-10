@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
+import com.steps.backend.termPurchase.TermPurchaseSystemConfigurationSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
@@ -21,12 +22,14 @@ public class US31001ActivateSemiautomatedCronTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
+	@Steps
+	public TermPurchaseSystemConfigurationSteps termPurchaseSystemConfigurationSteps;
 
 	@Test
 	public void us31001ActivateSemiautomatedCronTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSystemConfiguration();
-		backEndSteps.goToTermPurchaseTab();
-		backEndSteps.selectCronExecutionType(ConfigConstants.SEMIAUTOMATED);
+		termPurchaseSystemConfigurationSteps.goToTermPurchaseTab();
+		termPurchaseSystemConfigurationSteps.selectCronExecutionType(ConfigConstants.SEMIAUTOMATED);
 	}
 }

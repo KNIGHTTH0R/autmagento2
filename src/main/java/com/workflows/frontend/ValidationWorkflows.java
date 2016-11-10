@@ -1,12 +1,12 @@
 package com.workflows.frontend;
 
-import net.thucydides.core.annotations.Screenshots;
-import net.thucydides.core.annotations.StepGroup;
-import net.thucydides.core.annotations.Steps;
-
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.tools.cartcalculations.smf.CartCalculator;
 import com.tools.datahandler.DataGrabber;
+
+import net.thucydides.core.annotations.Screenshots;
+import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.Steps;
 
 public class ValidationWorkflows {
 

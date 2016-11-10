@@ -84,6 +84,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 	private static String marketingDiscount;
 	private static String shippingValue;
 	private static String taxClass;
+	private static String voucherDiscount;
 	private CreditCardModel creditCardData = new CreditCardModel();
 
 	private ProductDetailedModel genProduct1;
@@ -112,6 +113,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 			marketingDiscount = prop.getProperty("marketingDiscount");
 			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
+			voucherDiscount = prop.getProperty("voucherDiscount");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -124,9 +126,6 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 				}
 			}
 		}
-
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
 
 	@Test
@@ -146,14 +145,9 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
 
-		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
-
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
-		
 		cartSteps.goToShipping();
-		
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.grabSurveyData();
@@ -162,11 +156,13 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
 		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
 		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
-		
-		
+
 		shippingSteps.goToPaymentMethod();
 
+		CartCalculator.calculateJMDiscountsWithActiveDiscountVoucher(voucherDiscount, jewelryDiscount,
+				marketingDiscount, taxClass, shippingValue);
 		String url = shippingSteps.grabUrl();
+		DataGrabber.urlModel.setUrl(url);
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
@@ -183,17 +179,4 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		customVerifications.printErrors();
 	}
 
-	@After
-	public void saveData() {
-		MongoWriter.saveCalcDetailsModel(CartCalculator.calculatedTotalsDiscounts,
-				getClass().getSimpleName() + SoapKeys.CALC);
-		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
-				getClass().getSimpleName() + SoapKeys.CALC);
-		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		for (BasicProductModel product : CartCalculator.allProductsListRecalculated) {
-			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
-		}
-	}
 }
