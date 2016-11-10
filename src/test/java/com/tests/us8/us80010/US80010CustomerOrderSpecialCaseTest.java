@@ -38,6 +38,7 @@ import com.tools.CustomVerification;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
+import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
@@ -91,6 +92,7 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 	private String shippingValue;
 	private String voucherValue;
 	private ProductDetailedModel genProduct1;
+	private CreditCardModel creditCardData = new CreditCardModel();
 
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
@@ -101,7 +103,7 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
+		genProduct1.setPrice("70.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 //
 //		genProduct2 = MagentoProductCalls.createProductModel();
@@ -121,7 +123,7 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us80010.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -168,40 +170,29 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 	
-
-		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
-
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 
-		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
-	
-		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
-		
-
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
 		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
 		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
-	
-	
-		shippingSteps.goToPaymentMethod();
 
+		shippingSteps.goToPaymentMethod();
+		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
+		
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
 		DataGrabber.urlModel.setUrl(url);
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-		paymentSteps.payWithBankTransfer();
-	
-		confirmationSteps.grabRegularProductsList();
+		
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
 		
 		RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
-		
-		confirmationSteps.grabBillingData();
-		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
 

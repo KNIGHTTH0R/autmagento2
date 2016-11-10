@@ -107,7 +107,7 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 		HostDataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("29.00");
+		genProduct1.setPrice("60");
 		genProduct1.setIp("25");
 		MagentoProductCalls.createApiProduct(genProduct1);
 //
@@ -133,7 +133,7 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11009.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -146,7 +146,6 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 			shippingAddress = prop.getProperty("shippingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 
-			voucherCode = prop.getProperty("voucherCode");
 			voucherValue = prop.getProperty("voucherValue");
 
 		} catch (IOException ex) {
@@ -161,7 +160,7 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US11009CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
@@ -192,20 +191,18 @@ public class US11009PartyHostBuysForCustomerSpecialCaseTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		HostCartCalculator.calculateOrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
-
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 		shippingPartySectionSteps.clickShipToHostessButton();
 		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 
-		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
-		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
 		
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
 		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
 		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
+		
+		HostCartCalculator.calculateOrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
 
 		shippingSteps.goToPaymentMethod();
 

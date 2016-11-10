@@ -85,10 +85,6 @@ public class RegularCartValidationWorkflows {
 		checkoutValidationSteps.verifySuccessMessage();
 
 		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
-				RegularUserDataGrabber.regularUserShippingTotals, RegularUserCartCalculator.shippingCalculatedModel);
-		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-
-		regularUserShippingAndConfirmationWorkflows.setVerifyShippingTotals(
 				RegularUserDataGrabber.regularUserConfirmationTotals,
 				RegularUserCartCalculator.shippingCalculatedModel);
 		regularUserShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
@@ -97,11 +93,7 @@ public class RegularCartValidationWorkflows {
 				RegularUserCartCalculator.shippingCalculatedModel.getTotalAmount());
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
-		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
-
-		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	
 	}
 	
 	@StepGroup

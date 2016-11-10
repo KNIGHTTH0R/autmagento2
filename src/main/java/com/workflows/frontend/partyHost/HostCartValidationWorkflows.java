@@ -124,10 +124,6 @@ public class HostCartValidationWorkflows {
 
 		checkoutValidationSteps.verifySuccessMessage();
 
-		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostShippingTotals,
-				HostCartCalculator.shippingCalculatedModel);
-		hostShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-
 		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals,
 				HostCartCalculator.shippingCalculatedModel);
 		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
@@ -136,11 +132,18 @@ public class HostCartValidationWorkflows {
 				HostCartCalculator.shippingCalculatedModel.getTotalAmount());
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
-		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
-		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+	}
+	
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performHostCheckoutValidations() {
 
-		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
-		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+		checkoutValidationSteps.verifySuccessMessage();
+
+		hostShippingAndConfirmationWorkflows.setVerifyShippingTotals(HostDataGrabber.hostConfirmationTotals,
+				HostCartCalculator.shippingCalculatedModel);
+		hostShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+
 	}
 
 	@StepGroup
