@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
+import com.steps.backend.termPurchase.TermPurchaseSystemConfigurationSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
@@ -21,18 +22,20 @@ public class US32002ActivateTermPurchaseForAllProductsTest extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
+	@Steps
+	public TermPurchaseSystemConfigurationSteps termPurchaseSystemConfigurationSteps;
 
 	@Test
 	public void us32002ActivateTermPurchaseForAllProductsTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSystemConfiguration();
 		backEndSteps.goToTermPurchaseTab();
-		backEndSteps.selectTermPurchseOption(ConfigConstants.FOR_ALL_PRODUCTS);
-		backEndSteps.inputMaxNumberOfDAys("45");
-		backEndSteps.inputStartDateOfTpNotAvailablePeriod("13.12.2016");
-		backEndSteps.inputEndDateOfTpNotAvailablePeriod("27.12.2016");
-		backEndSteps.selectDayOfWeekOption(ConfigConstants.FRIDAY);
-		backEndSteps.inputDayBeforeDeliverySchedule("");
+		termPurchaseSystemConfigurationSteps.selectTermPurchseOption(ConfigConstants.FOR_ALL_PRODUCTS);
+		termPurchaseSystemConfigurationSteps.inputMaxNumberOfDAys("45");
+		termPurchaseSystemConfigurationSteps.inputStartDateOfTpNotAvailablePeriod("13.12.2016");
+		termPurchaseSystemConfigurationSteps.inputEndDateOfTpNotAvailablePeriod("27.12.2016");
+		termPurchaseSystemConfigurationSteps.selectDayOfWeekOption(ConfigConstants.FRIDAY);
+		termPurchaseSystemConfigurationSteps.inputDayBeforeDeliverySchedule("");
 
 	}
 }

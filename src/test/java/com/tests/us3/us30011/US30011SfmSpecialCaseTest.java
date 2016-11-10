@@ -145,8 +145,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		CartCalculator.productsList50.add(productData);
-
-		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
+		
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -154,9 +153,12 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		
 		cartSteps.goToShipping();
 		
+		
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 		shippingSteps.grabSurveyData();
+		
+
 
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
@@ -166,7 +168,9 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		
 		shippingSteps.goToPaymentMethod();
 
+		CartCalculator.calculateJMDiscounts(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 		String url = shippingSteps.grabUrl();
+		DataGrabber.urlModel.setUrl(url);
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
@@ -174,6 +178,9 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.grabConfirmationTotals();
+//		confirmationSteps.grabProductsList();
+//		confirmationSteps.grabBillingData();
+//		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
 

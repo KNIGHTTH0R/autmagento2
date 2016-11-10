@@ -38,6 +38,7 @@ import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 
@@ -98,10 +99,12 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 //		genProduct1.setPrice("50.00");
 //		MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct1 = MagentoProductCalls.createImmediateAndNotAvailableYetProductModel();
-		genProduct1.setPrice("29.00");
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.getStockData().setAllowedTermPurchase("1");
+		genProduct1.setPrice("50.00");
+		genProduct1.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		
+		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 		
 
 //		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
