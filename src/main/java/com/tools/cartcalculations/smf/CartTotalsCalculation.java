@@ -87,7 +87,7 @@ public class CartTotalsCalculation {
 				BigDecimal.valueOf(Double.parseDouble(jewerlyDiscount)),
 				BigDecimal.valueOf(Double.parseDouble(marketingDiscount)), rabatt50, rabatt25, rabattBuy3Get1);
 
-		shipping = GeneralCartCalculations.calculateNewShipping(totalAmount,
+		shipping = GeneralCartCalculations.calculateNewShipping(subtotal,
 				BigDecimal.valueOf(Double.parseDouble(discountRule)), BigDecimal.valueOf(Double.parseDouble(shipping)));
 
 		System.out.println(shipping);
