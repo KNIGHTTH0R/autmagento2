@@ -18,6 +18,17 @@ public class TermPurchaseSystemConfigurationSteps extends AbstractSteps {
 	}
 	
 	@Step
+	public void goToTermPurchaseTab() {
+		systemConfigurationPage().clickOnDesiredTab("Zielkauf");
+	}
+	
+	@Step
+	public void selectCronExecutionType(String executionType) {
+		systemConfigurationPage().selectExecutionType(executionType);
+		systemConfigurationPage().saveConfiguration();
+	}
+	
+	@Step
 	public void inputMaxNumberOfDAys(String days) {
 		systemConfigurationPage().inputMaxNumberOfDAys(days);
 	}
@@ -52,6 +63,9 @@ public class TermPurchaseSystemConfigurationSteps extends AbstractSteps {
 	@Step
 	public void inputDayBeforeDeliverySchedule(String daysBeforeDeliverySchedule) {
 		systemConfigurationPage().inputDayBeforeDeliverySchedule(daysBeforeDeliverySchedule);
+	}
+	@Step
+	public void saveConfiguration() {
 		systemConfigurationPage().saveConfiguration();
 	}
 

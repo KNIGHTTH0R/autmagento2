@@ -1,5 +1,7 @@
 package com.tests.uss32.us32002;
 
+import java.text.ParseException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -9,15 +11,16 @@ import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.Credentials;
 import com.tools.requirements.Application;
+import com.tools.utils.DateUtils;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US31.1 TP execution cron - Semiautomated", type = "Scenarios")
-@Story(Application.TermPurchaseExecution.US31_1.class)
-@RunWith(SerenityRunner.class)
+@WithTag(name = "US31.1 TP execution cron - Semiautomated", type = "Scenarios")   //new tag here
+@Story(Application.TermPurchaseExecution.US31_1.class)                             //new story here
+@RunWith(SerenityRunner.class) 
 public class US32002ActivateTermPurchaseForAllProductsTest extends BaseTest {
 
 	@Steps
@@ -26,16 +29,17 @@ public class US32002ActivateTermPurchaseForAllProductsTest extends BaseTest {
 	public TermPurchaseSystemConfigurationSteps termPurchaseSystemConfigurationSteps;
 
 	@Test
-	public void us32002ActivateTermPurchaseForAllProductsTest() {
+	public void us32002ActivateTermPurchaseForAllProductsTest() throws ParseException {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSystemConfiguration();
-		backEndSteps.goToTermPurchaseTab();
+		termPurchaseSystemConfigurationSteps.goToTermPurchaseTab();
 		termPurchaseSystemConfigurationSteps.selectTermPurchseOption(ConfigConstants.FOR_ALL_PRODUCTS);
 		termPurchaseSystemConfigurationSteps.inputMaxNumberOfDAys("45");
-		termPurchaseSystemConfigurationSteps.inputStartDateOfTpNotAvailablePeriod("13.12.2016");
-		termPurchaseSystemConfigurationSteps.inputEndDateOfTpNotAvailablePeriod("27.12.2016");
+		termPurchaseSystemConfigurationSteps.inputStartDateOfTpNotAvailablePeriod(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd.MM.yyyy"), "dd.MM.yyyy", 14));
+		termPurchaseSystemConfigurationSteps.inputEndDateOfTpNotAvailablePeriod(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd.MM.yyyy"), "dd.MM.yyyy", 28));
 		termPurchaseSystemConfigurationSteps.selectDayOfWeekOption(ConfigConstants.FRIDAY);
 		termPurchaseSystemConfigurationSteps.inputDayBeforeDeliverySchedule("");
+		termPurchaseSystemConfigurationSteps.saveConfiguration();
 
 	}
 }

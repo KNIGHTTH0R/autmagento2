@@ -373,16 +373,6 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().selectSubmenu("system_config");
 	}
 	
-	@Step
-	public void goToTermPurchaseTab() {
-		systemConfigurationPage().clickOnDesiredTab("Zielkauf");
-	}
-	
-	@Step
-	public void selectCronExecutionType(String executionType) {
-		systemConfigurationPage().selectExecutionType(executionType);
-		systemConfigurationPage().saveConfiguration();
-	}
 	
 //	@Step
 //	public void selectTermPurchseOption(String termPurchaseType) {
