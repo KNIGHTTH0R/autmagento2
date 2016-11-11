@@ -94,6 +94,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 	private String billingAddress;
 	private String shippingValue;
 	private String discount;
+	private String voucherValue;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private static UrlModel partyUrlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
@@ -106,7 +107,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 		HostDataGrabber.wipe();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
+		genProduct1.setPrice("80.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
@@ -119,7 +120,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us9" + File.separator + "us9001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us9" + File.separator + "us9006.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -127,6 +128,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 			billingAddress = prop.getProperty("billingAddress");
 			shippingValue = prop.getProperty("shippingValue");
 			discount = prop.getProperty("discount");
+			voucherValue = prop.getProperty("voucherValue");
 			
 
 		} catch (IOException ex) {
@@ -165,32 +167,31 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		HostCartCalculator.calculateCartAndShippingTotals(discount, shippingValue);
 		
 		hostCartSteps.clickGoToShipping();
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
-		
-		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();	
-		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();
+	
 		
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
 		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
 		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
+		
+		HostCartCalculator.calculateOrderForCustomerCartAndShippingTotals(discount, shippingValue, voucherValue);
 	
 		shippingSteps.goToPaymentMethod();		
 
-		String url = shippingSteps.grabUrl();
-		DataGrabber.urlModel.setName("Payment URL");
-		DataGrabber.urlModel.setUrl(url);
-		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-	
-		confirmationSteps.grabHostProductsList();
+//		String url = shippingSteps.grabUrl();
+//		DataGrabber.urlModel.setName("Payment URL");
+//		DataGrabber.urlModel.setUrl(url);
+//		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+//		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+//
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+//	
+//		confirmationSteps.grabHostProductsList();
 		
 		HostDataGrabber.hostConfirmationTotals = confirmationSteps.grabConfirmationTotals();
 		
@@ -201,7 +202,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 
 
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		hostCartValidationWorkflows.performCheckoutValidations();
+		hostCartValidationWorkflows.performHostCheckoutValidations();
 
 		customVerifications.printErrors();
 	}

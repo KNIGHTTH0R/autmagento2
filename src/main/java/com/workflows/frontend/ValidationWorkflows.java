@@ -148,9 +148,6 @@ public class ValidationWorkflows {
 
 		checkoutValidationSteps.verifySuccessMessage();
 
-		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, CartCalculator.shippingCalculatedModel);
-		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, CartCalculator.shippingCalculatedModel);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
 

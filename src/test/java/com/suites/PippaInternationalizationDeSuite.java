@@ -5,7 +5,11 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.CreateProductsTest;
+import com.tests.us3.us30012.US30012SfmSpecialPriceProductTest;
+import com.tests.us6.us6006.US6006ScBuyProductwithSpecialPriceTest;
+import com.tests.us8.us80011.US80011CustomerOrderProductWithSpecialPriceTest;
 import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
+import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPriceTest;
 
 @SuiteClasses({
 	
@@ -20,6 +24,8 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US3007Suite.class,
 	US3009Suite.class,
 	US30010Suite.class,
+	US30011Suite.class,
+	US30012SfmSpecialPriceProductTest.class,
 	
 	US4001Suite.class,
 	US4002Suite.class,
@@ -29,6 +35,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US6002Suite.class,
 	US6002bSuite.class,
 	US6003Suite.class,
+	US6006ScBuyProductwithSpecialPriceTest.class,
 	
 	US7001Suite.class,
 	US7001bSuite.class,
@@ -51,6 +58,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US8006Suite.class,
 	US8007Suite.class,
 	US8008Suite.class,
+	US80011CustomerOrderProductWithSpecialPriceTest.class,
 	
 	US11001Suite.class,
 	US11002Suite.class,
@@ -60,6 +68,7 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US11006Suite.class,
 	US11007Suite.class,
 	US11008Suite.class,
+	US110011PlaceCustomerOrderProductWithSpecialPriceTest.class,
 	
 	US10007SuitePartOne.class,
 	US10008Suite.class,
@@ -69,6 +78,9 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 	US9002bSuite.class,
 	US9004Suite.class,
 	US9005Suite.class,
+	US9006Suite.class,
+	US9007Suite.class,
+	
 	
 	US15004Suite.class,
 	
