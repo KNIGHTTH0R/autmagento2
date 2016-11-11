@@ -94,7 +94,7 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		genProduct1.setIp("84");
 		genProduct1.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
 		//immediate with TP
 		genProduct2 = MagentoProductCalls.createProductModel();

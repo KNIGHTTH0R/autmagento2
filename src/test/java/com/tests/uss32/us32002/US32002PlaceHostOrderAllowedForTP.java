@@ -10,13 +10,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.junit.After;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -36,20 +39,12 @@ import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
-import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
-import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US11.8 Party Host Buys For Customer With 0 Amount Immediate and Tp Products", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_8.class)
@@ -85,29 +80,39 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 	@Steps
 	public LoungeSteps loungeSteps;
 
-	public static List<HostBasicProductModel> allProductsList;
+	public static List<ProductDetailedModel> allProductsList;
 	private String username, password, customerName;
-	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
+	private ProductDetailedModel genProduct1, genProduct2, genProduct3;
 	private static UrlModel partyUrlModel = new UrlModel();
 
 	@Before
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
-		allProductsList = new ArrayList<HostBasicProductModel>();
+		allProductsList = new ArrayList<ProductDetailedModel>();
 
+		//immediate
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.getStockData().setAllowedTermPurchase("1");
-		genProduct1.setPrice("50.00");
-		genProduct1.setIp("0");
+		genProduct1.setIp("84");
+		genProduct1.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("9.90");
+		//immediate with TP
+		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.getStockData().setAllowedTermPurchase("1");
+		genProduct2.setPrice("50.00");
 		genProduct2.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//		allProductsList.add(genProduct2);
+
+		//TP
+		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+		genProduct3.setPrice("9.90");
+		genProduct3.setIp("0");
+		MagentoProductCalls.createApiProduct(genProduct3);
+//		allProductsList.add(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -136,7 +141,7 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 	}
 
 	@Test
-	public void us32002PlaceCustomerOrderAllowedForTP() throws ParseException {
+	public void us32002PlaceHostOrderAllowedForTP() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -146,22 +151,14 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
 
-		String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(),
-				"yyyy-MM-dd");
+	//	String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(),"yyyy-MM-dd");
 
-		HostBasicProductModel productData;
-
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
-		if (!genProduct1.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(deliveryTP1);
-		productData.setEarliestAvailability(genProduct1.getStockData().getEarliestAvailability());
-		allProductsList.add(productData);
-
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
-		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(deliveryTP1);
-		productData.setEarliestAvailability(genProduct2.getStockData().getEarliestAvailability());
-		allProductsList.add(productData);
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
+		allProductsList.add(genProduct1);
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
+		allProductsList.add(genProduct2);
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "1", "0");
+		allProductsList.add(genProduct3);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
@@ -169,17 +166,19 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		// asta e hardcodata,trebe facut ceva
 		String mostAwayEarliest = genProduct2.getStockData().getEarliestAvailability();
 
-		for (HostBasicProductModel product : allProductsList) {
+		for (ProductDetailedModel product : allProductsList) {
 
-			List<String> grabbedDates = regularUserCartSteps.getAllDeliveryDates(product.getProdCode(),
+			List<String> grabbedDates = regularUserCartSteps.getAllDeliveryDates(product.getSku(),
 					new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
 			List<String> expectedDates = GeneralCartCalculations.calculateDeliveryDates(
-					product.getEarliestAvailability(), mostAwayEarliest,
+					product.getStockData().getEarliestAvailability(), mostAwayEarliest,
 					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
 					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
 
 			regularUserCartSteps.validateDeliveryDates(grabbedDates, expectedDates);
 		}
+		
+		
 	}
 }
