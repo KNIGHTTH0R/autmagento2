@@ -30,9 +30,10 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public String selectDeliveryDate(String productCode, Locale locale) throws ParseException {
 		return regularUserCartPage().selectDeliveryDate(productCode, locale);
 	}
+
 	@Step
 	public void selectDeliveryDate(String productCode, String date) throws ParseException {
-		 regularUserCartPage().selectDeliveryDate(productCode, date);
+		regularUserCartPage().selectDeliveryDate(productCode, date);
 	}
 
 	@Step
@@ -113,16 +114,18 @@ public class RegularUserCartSteps extends AbstractSteps {
 		regularUserCartPage().searchProductsModal();
 		getDriver().navigate().refresh();
 	}
-	
+
 	public List<String> getAllDeliveryDates(String productCode, Locale locale) throws ParseException {
 		return regularUserCartPage().getAllDeliveryDates(productCode, locale);
 	}
-	
-	//sku added only for reporting
+
+	// sku added only for reporting
 	@Step
 	public void validateDeliveryDates(String sku, List<String> grabbedDates, List<String> expectedDates) {
-		Assert.assertTrue("The delivery dates for " + sku + " are not correct: Expected list : " + expectedDates + " Actual list: "
-				+ grabbedDates, CollectionUtils.isEqualCollection(grabbedDates, expectedDates));
+		Assert.assertTrue(
+				"The delivery dates for " + sku + " are not correct: Expected list : " + expectedDates
+						+ " Actual list: " + grabbedDates,
+				CollectionUtils.isEqualCollection(grabbedDates, expectedDates));
 	}
 
 }
