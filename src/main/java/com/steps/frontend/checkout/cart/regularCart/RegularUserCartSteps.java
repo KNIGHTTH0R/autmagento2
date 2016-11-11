@@ -5,6 +5,9 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.junit.Assert;
+
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.RegularUserCartProductModel;
 import com.tools.data.frontend.RegularUserCartTotalsModel;
@@ -109,6 +112,17 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void searchProductsModal() {
 		regularUserCartPage().searchProductsModal();
 		getDriver().navigate().refresh();
+	}
+	
+	@Step
+	public List<String> getAllDeliveryDates(String productCode, Locale locale) throws ParseException {
+		return regularUserCartPage().getAllDeliveryDates(productCode, locale);
+	}
+	
+	@Step
+	public void validateDeliveryDates(List<String> grabbedDates, List<String> expectedDates) {
+		Assert.assertTrue("The delivery dates are not correct: Expected list : " + expectedDates + " Actual list: "
+				+ grabbedDates, CollectionUtils.isEqualCollection(grabbedDates, expectedDates));
 	}
 
 }

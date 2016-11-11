@@ -20,6 +20,7 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -30,9 +31,10 @@ import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
+import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.constants.UrlConstants;
-import com.tools.data.UrlModel;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
@@ -78,26 +80,19 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
+	@Steps
+	public LoungeSteps loungeSteps;
 
+	public static List<HostBasicProductModel> allProductsList;
 	private String username, password, customerName;
-	private String country;
-	private String plz;
-	private String voucherCode;
-	private static UrlModel urlModel = new UrlModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
-	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
-	
 
 	@Before
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
-
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("50.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
+		allProductsList = new ArrayList<HostBasicProductModel>();
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.getStockData().setAllowedTermPurchase("1");
@@ -105,21 +100,11 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		genProduct1.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-		
 
-//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-//		genProduct3.setPrice("9.90");
-//		genProduct1.setIp("0");
-//		MagentoProductCalls.createApiProduct(genProduct3);
-		
-
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//			
-//		genProduct1 = createdProductsList.get(0);
-//		genProduct2 = createdProductsList.get(15);
-//		genProduct3 = createdProductsList.get(16);
-		
-		
+		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+		genProduct2.setPrice("9.90");
+		genProduct2.setIp("0");
+		MagentoProductCalls.createApiProduct(genProduct2);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -131,10 +116,6 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			customerName = prop.getProperty("customerName");
-			voucherCode = prop.getProperty("voucherCode");
-			
-			country = prop.getProperty("country");
-			plz = prop.getProperty("plz");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -148,12 +129,6 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10009CreatePartyWithStylistHostTest").get(0);
-
-		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
-//		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
-//		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
-
 	}
 
 	@Test
@@ -164,59 +139,46 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		do {
-			customerRegistrationSteps.navigate(urlModel.getUrl());
+			loungeSteps.clickOrderForCustomer();
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		generalCartSteps.clearCart();
 
-		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
-//		addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
-//		addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "1", "0");
+		String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(),
+				"yyyy-MM-dd");
+
+		HostBasicProductModel productData;
+
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		if (!genProduct1.getStockData().getEarliestAvailability().contentEquals(""))
+			productData.setDeliveryDate(deliveryTP1);
+		productData.setEarliestAvailability(genProduct1.getStockData().getEarliestAvailability());
+		allProductsList.add(productData);
+
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
+		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
+			productData.setDeliveryDate(deliveryTP1);
+		productData.setEarliestAvailability(genProduct2.getStockData().getEarliestAvailability());
+		allProductsList.add(productData);
+
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		orderForCustomerCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.checkItemNotReceivedYet();
-		shippingPartySectionSteps.enterPLZ(plz);
-		shippingPartySectionSteps.selectCountry(country);
+		// asta e hardcodata,trebe facut ceva
+		String mostAwayEarliest = genProduct2.getStockData().getEarliestAvailability();
 
-		// go to payment without bonuses first in order to get the order id
-		// (which is dysplayed only on that page);if you apply bonuses in order
-		// to place 0 amount order that page will be skipped
-		shippingSteps.goToPaymentMethod();
-		
-		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
-		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
-//		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
-//		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
+		for (HostBasicProductModel product : allProductsList) {
 
-		paymentSteps.goBack();
-		shippingSteps.goBack();
+			List<String> grabbedDates = regularUserCartSteps.getAllDeliveryDates(product.getProdCode(),
+					new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
-		regularUserCartSteps.selectDeliveryDate(genProduct1.getSku(),
-				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+			List<String> expectedDates = GeneralCartCalculations.calculateDeliveryDates(
+					product.getEarliestAvailability(), mostAwayEarliest,
+					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
+					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
 
-		regularUserCartSteps.verifyMultipleDeliveryOption();
-
-		orderForCustomerCartSteps.typeCouponCode(voucherCode);
-
-		orderForCustomerCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.checkItemNotReceivedYet();
-		shippingPartySectionSteps.enterPLZ(plz);
-		shippingPartySectionSteps.selectCountry(country);
-		shippingSteps.goToPaymentMethod();
-		
-		confirmationSteps.agreeAndCheckout();
-		checkoutValidationSteps.verifySuccessMessage();
-
+			regularUserCartSteps.validateDeliveryDates(grabbedDates, expectedDates);
+		}
 	}
-
-	@After
-	public void saveData() {
-		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
-//		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
-//		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
-	}
-
 }

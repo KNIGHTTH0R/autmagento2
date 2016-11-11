@@ -11,6 +11,7 @@ public class HostBasicProductModel {
 	private String bunosValue;
 	private String ipPoints;
 	private String deliveryDate;
+	private String earliestAvailability;
 
 	public String getDeliveryDate() {
 		return deliveryDate;
@@ -94,6 +95,14 @@ public class HostBasicProductModel {
 
 	public void setIpPoints(String ipPoints) {
 		this.ipPoints = ipPoints;
+	}
+
+	public String getEarliestAvailability() {
+		return earliestAvailability;
+	}
+
+	public void setEarliestAvailability(String earliestAvailability) {
+		this.earliestAvailability = earliestAvailability;
 	}
 
 }
