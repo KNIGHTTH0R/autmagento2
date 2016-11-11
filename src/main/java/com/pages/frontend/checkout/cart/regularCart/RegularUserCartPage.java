@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 
 import com.tools.cartcalculations.regularUser.RegularCartTotalsCalculation;
 import com.tools.constants.ConfigConstants;
@@ -198,6 +198,7 @@ public class RegularUserCartPage extends AbstractPage {
 		for (WebElement product : cartList) {
 			if (product.getText().contains(productCode)) {
 				foundProduct = true;
+
 				WebElement delivery = element(product
 						.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[selected='selected']")));
 				String[] tokens = delivery.getText().split(", ");
@@ -224,10 +225,19 @@ public class RegularUserCartPage extends AbstractPage {
 		for (WebElement product : cartList) {
 			if (product.getText().contains(productCode)) {
 				foundProduct = true;
-				List<String> deliverys = element(
-						product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option")).getText());
-				for (String delivery : deliverys) {
-					String[] tokens = delivery.split(", ");
+				List<WebElement> deliverys;
+				WebElement preOrderCheckbox = product.findElement(By.cssSelector("input[id*='tp-status']"));
+				if (!preOrderCheckbox.isSelected()) {
+					preOrderCheckbox.click();
+					deliverys = product.findElements(By.cssSelector("select.tp-cb-item-delivery-date option"));
+					// remove immediate option,it's not a date and it cannot be
+					// parsed
+					deliverys.remove(0);
+				} else {
+					deliverys = product.findElements(By.cssSelector("select.tp-cb-item-delivery-date option"));
+				}
+				for (WebElement delivery : deliverys) {
+					String[] tokens = delivery.getText().split(", ");
 					deliveryDates.add(DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY"));
 				}
 			}

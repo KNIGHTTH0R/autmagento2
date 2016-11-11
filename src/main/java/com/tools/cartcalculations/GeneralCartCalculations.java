@@ -4,12 +4,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Set;
 
-import com.google.common.collect.Sets;
+import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.soap.DBStylistModel;
 import com.tools.utils.DateUtils;
 
 public class GeneralCartCalculations {
@@ -45,16 +47,15 @@ public class GeneralCartCalculations {
 		return String.valueOf(total);
 	}
 
-	public static List<String> calculateDeliveryDates(String earliestAvailability, String unavailableStartDate,
-			String unavailableEndDate, int maxExecDays, int maxDropdownDays) throws ParseException {
+	public static List<String> calculateDeliveryDates(String earliestAvailability, String mostAwayEarliest,
+			String unavailableStartDate, String unavailableEndDate, int maxExecDays, int maxDropdownDays)
+			throws ParseException {
 
 		List<String> availableDates = new ArrayList<String>();
-		String firstDeliveryDate = DateUtils.getFirstFridayAfterDate(earliestAvailability, "yyyy-MM-dd");
+		String firstDeliveryDate = DateUtils.getFirstFridayAfterDate(mostAwayEarliest, "yyyy-MM-dd");
 		String lastDeliveryDate = DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd",
 				maxExecDays);
-		System.out.println(lastDeliveryDate + " lastDeliveryDate");
 		String lastDropdownDay = DateUtils.addDaysToAAGivenDate(firstDeliveryDate, "yyyy-MM-dd", maxDropdownDays);
-		System.out.println(lastDropdownDay + " lastDropdownDay");
 		lastDeliveryDate = DateUtils.isDateBefore(lastDeliveryDate, lastDropdownDay, "yyyy-MM-dd") ? lastDeliveryDate
 				: lastDropdownDay;
 		availableDates = DateUtils.getFridaysBetweenDates(earliestAvailability, lastDeliveryDate, "yyyy-MM-dd");
@@ -82,14 +83,47 @@ public class GeneralCartCalculations {
 		return commons;
 
 	}
+
+	public String getMostAwayEarliest(List<HostBasicProductModel> productList) {
+		String earliestAvailability = "";
+		
+		for (HostBasicProductModel product : productList) {
+			
+		}
+		
+		return earliestAvailability;
+	}
 	
-//	public <T> Set<T> intersection(List<T>... list) {
-//	    Set<T> result = Sets.newHashSet(list[0]);
-//	    for (List<T> numbers : list) {
-//	        result = Sets.intersection(result, Sets.newHashSet(numbers));
-//	    }
-//	    return result;
-//	}
+	public static List<String> sortDates(List<String> productList) {
+
+		Collections.sort(productList, new Comparator<String>() {
+
+			public int compare(String date1, String date2) {
+				boolean isAfter = false;
+				try {
+					isAfter = DateUtils.isDateAfter(date2, date1, "yyyy-MM-dd");
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (isAfter)
+					return 1;
+				if (!isAfter)
+					return -1;
+				return 0;
+			}
+		});
+
+		return productList;
+	}
+
+	// public <T> Set<T> intersection(List<T>... list) {
+	// Set<T> result = Sets.newHashSet(list[0]);
+	// for (List<T> numbers : list) {
+	// result = Sets.intersection(result, Sets.newHashSet(numbers));
+	// }
+	// return result;
+	// }
 
 	public static String calculateIpBasedOnSpecialPrice(String initialIp, String price, String specialPrice) {
 
@@ -110,14 +144,12 @@ public class GeneralCartCalculations {
 	public static void main(String[] args) throws ParseException {
 		// System.out.println(GeneralCartCalculations.calculateIpBasedOnSpecialPrice("63",
 		// "75.00", "39.00"));
-		List<String> dates = GeneralCartCalculations.calculateDeliveryDates("2016-11-11", "2016-11-20", "2016-11-30",
-				245, 49);
+		List<String> dates = GeneralCartCalculations.calculateDeliveryDates("2016-11-11", "2016-11-11",
+				DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
+				DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
 		for (String date : dates) {
 			System.out.println(date);
 		}
-
-		System.out.println(dates.get(dates.size() - 1) + " ultimul element din lista ");
-
 	}
 
 }

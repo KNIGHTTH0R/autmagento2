@@ -321,7 +321,6 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp2) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP2");
 		}
-
 		try {
 			ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_IP_SCRIPT_JOB_URL,
 					EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
