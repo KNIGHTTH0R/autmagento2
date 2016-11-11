@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.ListIterator;
 
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
-import com.tools.data.soap.DBStylistModel;
+import com.tools.data.soap.ProductDetailedModel;
 import com.tools.utils.DateUtils;
 
 public class GeneralCartCalculations {
@@ -86,22 +87,22 @@ public class GeneralCartCalculations {
 
 	public String getMostAwayEarliest(List<HostBasicProductModel> productList) {
 		String earliestAvailability = "";
-		
+
 		for (HostBasicProductModel product : productList) {
-			
+
 		}
-		
+
 		return earliestAvailability;
 	}
-	
-	public static List<String> sortDates(List<String> productList) {
 
-		Collections.sort(productList, new Comparator<String>() {
+	public static List<ProductDetailedModel> sortDates(List<ProductDetailedModel> datesList, final String format) {
 
-			public int compare(String date1, String date2) {
+		Collections.sort(datesList, new Comparator<ProductDetailedModel>() {
+
+			public int compare(ProductDetailedModel o1, ProductDetailedModel o2) {
 				boolean isAfter = false;
 				try {
-					isAfter = DateUtils.isDateAfter(date2, date1, "yyyy-MM-dd");
+					isAfter = DateUtils.isDateAfter(o1.getStockData().getEarliestAvailability(), o2.getStockData().getEarliestAvailability(), format);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -112,9 +113,10 @@ public class GeneralCartCalculations {
 					return -1;
 				return 0;
 			}
+
 		});
 
-		return productList;
+		return datesList;
 	}
 
 	// public <T> Set<T> intersection(List<T>... list) {
@@ -144,12 +146,16 @@ public class GeneralCartCalculations {
 	public static void main(String[] args) throws ParseException {
 		// System.out.println(GeneralCartCalculations.calculateIpBasedOnSpecialPrice("63",
 		// "75.00", "39.00"));
-		List<String> dates = GeneralCartCalculations.calculateDeliveryDates("2016-11-11", "2016-11-11",
-				DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
-				DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
-		for (String date : dates) {
-			System.out.println(date);
-		}
+		// List<String> dates =
+		// GeneralCartCalculations.calculateDeliveryDates("2016-11-11",
+		// "2016-11-11",
+		// DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"),
+		// "yyyy-MM-dd", 14),
+		// DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"),
+		// "yyyy-MM-dd", 28), 45, 49);
+		// for (String date : dates) {
+		// System.out.println(date);
+		// }
 	}
 
 }
