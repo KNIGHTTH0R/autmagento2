@@ -4,13 +4,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 
-import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.utils.DateUtils;
@@ -85,16 +83,6 @@ public class GeneralCartCalculations {
 
 	}
 
-	public String getMostAwayEarliest(List<HostBasicProductModel> productList) {
-		String earliestAvailability = "";
-
-		for (HostBasicProductModel product : productList) {
-
-		}
-
-		return earliestAvailability;
-	}
-
 	public static List<ProductDetailedModel> sortDates(List<ProductDetailedModel> datesList, final String format) {
 
 		Collections.sort(datesList, new Comparator<ProductDetailedModel>() {
@@ -113,7 +101,6 @@ public class GeneralCartCalculations {
 					return -1;
 				return 0;
 			}
-
 		});
 
 		return datesList;

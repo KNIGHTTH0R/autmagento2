@@ -10,11 +10,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,6 +40,11 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US11.8 Party Host Buys For Customer With 0 Amount Immediate and Tp Products", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_8.class)
@@ -81,7 +81,7 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 	public LoungeSteps loungeSteps;
 
 	public static List<ProductDetailedModel> allProductsList;
-	private String username, password, customerName;
+	private String username, password;
 	private ProductDetailedModel genProduct1, genProduct2, genProduct3;
 	private static UrlModel partyUrlModel = new UrlModel();
 
@@ -96,7 +96,6 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		genProduct1.setIp("84");
 		genProduct1.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
 		//immediate with TP
 		genProduct2 = MagentoProductCalls.createProductModel();
@@ -105,14 +104,12 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		genProduct2.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct2);
 		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-//		allProductsList.add(genProduct2);
 
 		//TP
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct3.setPrice("9.90");
 		genProduct3.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct3);
-//		allProductsList.add(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -123,7 +120,6 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-			customerName = prop.getProperty("customerName");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -150,10 +146,7 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
 
-	//	String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(),"yyyy-MM-dd");
-
-		addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
-		allProductsList.add(genProduct1);
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 		addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
 		allProductsList.add(genProduct2);
 		addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "1", "0");
@@ -162,8 +155,8 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		// asta e hardcodata,trebe facut ceva
-		String mostAwayEarliest = genProduct2.getStockData().getEarliestAvailability();
+		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
+				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
 
 		for (ProductDetailedModel product : allProductsList) {
 
@@ -177,7 +170,5 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 
 			regularUserCartSteps.validateDeliveryDates(product.getSku(),grabbedDates, expectedDates);
 		}
-		
-		
 	}
 }
