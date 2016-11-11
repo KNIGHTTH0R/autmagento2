@@ -238,7 +238,7 @@ public class RegularUserCartPage extends AbstractPage {
 				}
 				for (WebElement delivery : deliverys) {
 					String[] tokens = delivery.getText().split(", ");
-					deliveryDates.add(DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY"));
+					deliveryDates.add(DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "yyyy-MM-dd"));
 				}
 			}
 		}

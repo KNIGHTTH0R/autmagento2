@@ -89,22 +89,28 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		HostDataGrabber.wipe();
 		allProductsList = new ArrayList<ProductDetailedModel>();
 
+		//immediate
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setIp("84");
 		genProduct1.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
+		//immediate with TP
 		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.getStockData().setAllowedTermPurchase("1");
 		genProduct2.setPrice("50.00");
 		genProduct2.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct2);
 		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+		allProductsList.add(genProduct2);
 
+		//TP
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct3.setPrice("9.90");
 		genProduct3.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct3);
+		allProductsList.add(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -145,13 +151,12 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		generalCartSteps.clearCart();
 
-		HostBasicProductModel productData;
-
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
-		productData.setEarliestAvailability(genProduct1.getStockData().getEarliestAvailability());
-
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
-		productData.setEarliestAvailability(genProduct2.getStockData().getEarliestAvailability());
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
+		allProductsList.add(genProduct1);
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
+		allProductsList.add(genProduct2);
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "1", "0");
+		allProductsList.add(genProduct3);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
