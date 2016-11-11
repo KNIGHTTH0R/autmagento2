@@ -225,7 +225,7 @@ public class RegularUserCartPage extends AbstractPage {
 		for (WebElement product : cartList) {
 			if (product.getText().contains(productCode)) {
 				foundProduct = true;
-				List<WebElement> deliverys;
+				List<WebElement> deliverys = new ArrayList<WebElement>();
 				WebElement preOrderCheckbox = product.findElement(By.cssSelector("input[id*='tp-status']"));
 				if (!preOrderCheckbox.isSelected()) {
 					preOrderCheckbox.click();
