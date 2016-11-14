@@ -1,4 +1,4 @@
-package com.tests.uss32.us32002;
+package com.tests.uss32.us32001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,7 +55,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US33.2 Regular CustomerOrder Allowed For TP", type = "Scenarios")
 @Story(Application.RegularCart.US8_7.class)
 @RunWith(SerenityRunner.class)
-public class US32002RegularOrderAllowedForTPTest extends BaseTest {
+public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -163,7 +163,7 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 	}
 
 	@Test
-	public void us32002RegularOrderAllowedForTPTest() throws ParseException {
+	public void us32001RegularOrderAllowedOnlyForNotAvailableTPTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -174,16 +174,6 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 
-		
-
-		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
-		// allProductsList.add(genProduct2);
-		headerSteps.openCartPreview();
-		headerSteps.goToCart();
-
-		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct2.getSku());
-		regularUserCartSteps.verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
-
 		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
 		allProductsList.add(genProduct3);
 		headerSteps.openCartPreview();
@@ -191,8 +181,8 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 
 		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
 		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
-		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
-		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsChecked();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsEnabled();
 		// click on DeliverALLonThisDates
 
 		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
@@ -212,12 +202,31 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 			regularUserCartSteps.validateDeliveryDates(product.getSku(), grabbedDates, expectedDates);
 
 		}
+		
+
+		List<String> expectedDeliverAllAtOnceDates = GeneralCartCalculations.getCommonDates(dropdownDatesList);
+		List<String> grabedDeliverAllAtOnceDates = regularUserCartSteps
+				.grabbDeliverAllAtOnceDates(new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		regularUserCartSteps.validateDeliverAllAtOnceDates(expectedDeliverAllAtOnceDates, grabedDeliverAllAtOnceDates);
+		
+		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
+		// allProductsList.add(genProduct2);
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+
+
+		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
+		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
+		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct2.getSku());
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
 		allProductsList.add(genProduct1);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
+		
 		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
 		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
 		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();

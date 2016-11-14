@@ -1,4 +1,4 @@
-package com.tests.uss32.us32002;
+package com.tests.uss32.us32001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,114 +10,88 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.MagentoProductCalls;
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
-import com.steps.frontend.HomeSteps;
+import com.steps.frontend.LoungeSteps;
+import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
+import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
-import com.tools.CustomVerification;
 import com.tools.cartcalculations.GeneralCartCalculations;
-import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.RegularBasicProductModel;
-import com.tools.data.frontend.TermPurchaseIpModel;
+import com.tools.data.UrlModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.DataGrabber;
-import com.tools.datahandler.RegularUserDataGrabber;
+import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
-import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
-import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US33.2 Regular CustomerOrder Allowed For TP", type = "Scenarios")
-@Story(Application.RegularCart.US8_7.class)
+@WithTag(name = "US11.8 Party Host Buys For Customer With 0 Amount Immediate and Tp Products", type = "Scenarios")
+@Story(Application.PlaceACustomerOrderCart.US11_8.class)
 @RunWith(SerenityRunner.class)
-public class US32002RegularOrderAllowedForTPTest extends BaseTest {
+public class US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
+	@Steps
+	public FooterSteps footerSteps;
+	@Steps
+	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
 	public ShippingSteps shippingSteps;
 	@Steps
 	public PaymentSteps paymentSteps;
 	@Steps
+	public OrderForCustomerCartSteps orderForCustomerCartSteps;
+	@Steps
 	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public ShippingPartySectionSteps shippingPartySectionSteps;
-	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
-	public HomeSteps homeSteps;
+	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
-	public AddRegularProductsWorkflow addRegularProductsWorkflow;
+	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
 	@Steps
 	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
-	public RegularCartValidationWorkflows regularCartValidationWorkflows;
-	@Steps
-	public CustomVerification customVerifications;
-	@Steps
-	public FooterSteps footerSteps;
-	@Steps
-	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
+	public LoungeSteps loungeSteps;
 
-	private String username, password;
-	private String discountClass;
-	private String billingAddress, shippingAddress;
-	private String shippingValue;
-	private String voucherCode;
-	private String voucherValue;
-	private CreditCardModel creditCardData = new CreditCardModel();
-	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
-	private TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
 	public static List<ProductDetailedModel> allProductsList;
-	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+	private String username, password;
+	private ProductDetailedModel genProduct1, genProduct2, genProduct3;
+	private static UrlModel partyUrlModel = new UrlModel();
 	List<List<String>> dropdownDatesList = new ArrayList<List<String>>();
 
 	@Before
 	public void setUp() throws Exception {
-		RegularUserCartCalculator.wipe();
-		RegularUserDataGrabber.wipe();
-		DataGrabber.wipe();
-
-		// createdProductsList =
-		// MongoReader.grabProductDetailedModel("CreateProductsTest" +
-		// SoapKeys.GRAB);
-		// genProduct1 = createdProductsList.get(1);
-		// genProduct2 = createdProductsList.get(8);
-		// genProduct3 = createdProductsList.get(9);
-
+		HostCartCalculator.wipe();
+		HostDataGrabber.wipe();
 		allProductsList = new ArrayList<ProductDetailedModel>();
-
+		
 		// immediate
 		genProduct1 = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct1);
@@ -138,15 +112,10 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8007.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11008.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-
-			discountClass = prop.getProperty("discountClass");
-			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
-			shippingValue = prop.getProperty("shippingValue");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -159,22 +128,20 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 				}
 			}
 		}
-
+		partyUrlModel = MongoReader.grabUrlModels("US32001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 
 	@Test
-	public void us32002RegularOrderAllowedForTPTest() throws ParseException {
+	public void us32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		homeSteps.goToNewItems();
-		headerSteps.openCartPreview();
-		headerSteps.goToCart();
+		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
 
-		
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
 		// allProductsList.add(genProduct2);
@@ -226,6 +193,6 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 
 		// verify if TP block is not displayed on product side
 
+		
 	}
-
 }
