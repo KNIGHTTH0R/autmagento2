@@ -349,6 +349,17 @@ public class RegularUserCartPage extends AbstractPage {
 				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
+	public List<String> grabbDeliverAllAtOnceDates(Locale locale) throws ParseException {
+		List<String> deliveryDates = new ArrayList<String>();
+		List<WebElement> deliverys = getDriver()
+				.findElements(By.cssSelector("select.tp-select-general-delivery-date option"));
+		for (WebElement delivery : deliverys) {
+			String[] tokens = delivery.getText().split(", ");
+			deliveryDates.add(DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "yyyy-MM-dd"));
+		}
+		return deliveryDates;
+	}
+
 	public List<RegularUserCartProductModel> grabProductsData() {
 		element(cartTable).waitUntilVisible();
 		List<WebElement> entryList = getDriver().findElements(By.cssSelector("div.cart table.cart-table tbody > tr"));

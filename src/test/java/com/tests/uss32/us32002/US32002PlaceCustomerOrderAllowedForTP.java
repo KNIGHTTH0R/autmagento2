@@ -77,6 +77,7 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 	public LoungeSteps loungeSteps;
 
 	public static List<ProductDetailedModel> allProductsList;
+	List<List<String>> dropdownDatesList = new ArrayList<List<String>>();
 	private String username, password, customerName;
 	private ProductDetailedModel genProduct1, genProduct2, genProduct3;
 
@@ -84,18 +85,18 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 	public void setUp() throws Exception {
 		allProductsList = new ArrayList<ProductDetailedModel>();
 
-		//immediate
+		// immediate
 		genProduct1 = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
-		//immediate with TP
+		// immediate with TP
 		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.getStockData().setAllowedTermPurchase("1");
 		MagentoProductCalls.createApiProduct(genProduct2);
 		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
-		//TP
+		// TP
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
 		MagentoProductCalls.createApiProduct(genProduct3);
 
@@ -136,31 +137,37 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
-//		generalCartSteps.clearCart();
+		generalCartSteps.clearCart();
 
-//		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
-//		allProductsList.add(genProduct2);
-//		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
-//		allProductsList.add(genProduct3);
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
+		allProductsList.add(genProduct2);
+		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
+		allProductsList.add(genProduct3);
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
-//		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
-//				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
-//
-//		for (ProductDetailedModel product : allProductsList) {
-//
-//			List<String> grabbedDates = regularUserCartSteps.getAllDeliveryDates(product.getSku(),
-//					new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-//
-//			List<String> expectedDates = GeneralCartCalculations.calculateDeliveryDates(
-//					product.getStockData().getEarliestAvailability(), mostAwayEarliest,
-//					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
-//					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
-//
-//			regularUserCartSteps.validateDeliveryDates(product.getSku(),grabbedDates, expectedDates);
-//		}
+
+		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
+				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
+
+		for (ProductDetailedModel product : allProductsList) {
+
+			List<String> grabbedDates = regularUserCartSteps.getAllDeliveryDates(product.getSku(),
+					new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+
+			List<String> expectedDates = GeneralCartCalculations.calculateDeliveryDates(
+					product.getStockData().getEarliestAvailability(), mostAwayEarliest,
+					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
+					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
+			dropdownDatesList.add(expectedDates);
+
+			regularUserCartSteps.validateDeliveryDates(product.getSku(), grabbedDates, expectedDates);
+
+		}
+		List<String> expectedDeliverAllAtOnceDates = GeneralCartCalculations.getCommonDates(dropdownDatesList);
+		List<String> grabedDeliverAllAtOnceDates = regularUserCartSteps
+				.grabbDeliverAllAtOnceDates(new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		regularUserCartSteps.validateDeliverAllAtOnceDates(expectedDeliverAllAtOnceDates, grabedDeliverAllAtOnceDates);
 	}
 }
