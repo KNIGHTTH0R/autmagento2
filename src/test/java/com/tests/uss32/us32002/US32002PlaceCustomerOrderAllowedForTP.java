@@ -148,10 +148,13 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		regularUserCartSteps.verifyDeliverAllImediatlyIsChecked();
 		regularUserCartSteps.verifyDeliverAllImediatlyIsEnabled();
 		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
-		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsEnabled();
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
 		allProductsList.add(genProduct3);
+		
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
 
 		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
 		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
@@ -186,6 +189,9 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		regularUserCartSteps.validateDeliverAllAtOnceDates(expectedDeliverAllAtOnceDates, grabedDeliverAllAtOnceDates);
 
 		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
 
 		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
 		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();

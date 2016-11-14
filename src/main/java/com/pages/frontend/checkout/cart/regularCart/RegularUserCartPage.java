@@ -357,7 +357,7 @@ public class RegularUserCartPage extends AbstractPage {
 	}
 
 	public void clickDeliverAllAtOnce() {
-		getDriver().findElement(By.id("cart-tp-type-multiple")).click();
+		getDriver().findElement(By.id("cart-tp-type-one-at-date")).click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
 				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
