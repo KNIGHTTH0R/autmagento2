@@ -307,6 +307,19 @@ public class RegularUserCartPage extends AbstractPage {
 		Assert.assertTrue("The product was not found", foundProduct);
 	}
 
+	public void verifyThatTermPurchaseIsNotAvailable(String productCode) {
+		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
+		boolean foundProduct = false;
+		for (WebElement product : cartList) {
+			if (product.getText().contains(productCode)) {
+				foundProduct = true;
+				Assert.assertTrue("Term purchase block is enabled but it shouldn't",
+						product.findElements(By.cssSelector("div.termPurchase")).size() == 0);
+			}
+		}
+		Assert.assertTrue("The product was not found", foundProduct);
+	}
+
 	public void verifyThatMultipleDeliveryOptionIsChecked() {
 		Assert.assertTrue("Multiple delivery option is not checked", multipleDeliveryOption.isSelected());
 	}

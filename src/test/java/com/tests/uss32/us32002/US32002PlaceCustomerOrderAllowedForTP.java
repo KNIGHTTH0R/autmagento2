@@ -139,42 +139,24 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		generalCartSteps.clearCart();
 
-	
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
 		allProductsList.add(genProduct2);
-		
+
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		
-		/*
-		 * product2=immediate 
-		 * TP verify if "pay and ship all items immediately "
-		 * is checked verify if "pay and ship all items immediately " is enabled
-		 * verify if "pay and ship the items on separate dates" is enabled
-		 * verify if "Pay and ship all items on this date" is disabled
-		 */
-		
+
+		regularUserCartSteps.verifyDeliverAllImediatlyIsChecked();
+		regularUserCartSteps.verifyDeliverAllImediatlyIsEnabled();
+		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+
 		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
 		allProductsList.add(genProduct3);
-		
-		/*
-		 * product3=only TP "pay and ship all items immediately " is disabled
-		 * "pay and ship the items on separate dates" is enabled
-		 * "pay and ship the items on separate dates" is checked
-		 * "Pay and ship all items on this date" is enabled
-		 * 
-		 * after "pay and ship all items on this date" is checked, all products TP block is disabled 
-		 * verify "Pay and ship all items on this date" dates
-		 */
-		
-		
-		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 
-		// Validate that "pay and ship all items immediately " is disabled
-		//"pay and ship the items on separate dates" is enabled
-		// validate that "Pay and ship all items on this date" is disabled
-		// validate TP block on product side that is not displayed for
-		// genProduct1
+		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
+		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
+		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsEnabled();
 
 		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
 				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
@@ -193,9 +175,22 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 			regularUserCartSteps.validateDeliveryDates(product.getSku(), grabbedDates, expectedDates);
 
 		}
+
+		regularUserCartSteps.clickDeliverAllAtOnce();
+		regularUserCartSteps.verifyThatDeliveryDateDropdownIsDisabled(genProduct3.getSku());
+		regularUserCartSteps.verifyThatDeliveryDateDropdownIsDisabled(genProduct2.getSku());
+
 		List<String> expectedDeliverAllAtOnceDates = GeneralCartCalculations.getCommonDates(dropdownDatesList);
 		List<String> grabedDeliverAllAtOnceDates = regularUserCartSteps
 				.grabbDeliverAllAtOnceDates(new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		regularUserCartSteps.validateDeliverAllAtOnceDates(expectedDeliverAllAtOnceDates, grabedDeliverAllAtOnceDates);
+
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+
+		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
+		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct1.getSku());
+
 	}
 }
