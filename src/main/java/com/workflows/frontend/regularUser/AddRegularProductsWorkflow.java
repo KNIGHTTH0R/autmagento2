@@ -37,6 +37,13 @@ public class AddRegularProductsWorkflow {
 
 		return productSteps.setRegularBasicProductAddToCart(model,qty, productProperty, finalPrice, ipPoints);
 	}
+	
+	@StepGroup
+	@Title("Add product to cart")
+	public void addProductToCart(ProductDetailedModel model, String qty, String productProperty) {
+		searchSteps.navigateToProductPage(model.getSku());
+		productSteps.setQuantityAndAddToCart(qty, productProperty);
+	}
 
 	@StepGroup
 	@Title("Add product to wishlist")
