@@ -89,13 +89,58 @@ public class RegularUserCartSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void verifyThatDeliveryDateDropdownIsDisabled(String productCode) {
+		regularUserCartPage().verifyThatDeliveryDateDropdownIsDisabled(productCode);
+	}
+
+	@Step
 	public void selectShippingOption(String option) {
 		regularUserCartPage().selectShippingOption(option);
 	}
 
 	@Step
-	public void verifyMultipleDeliveryOption() {
-		regularUserCartPage().verifyMultipleDeliveryOption();
+	public void verifyThatMultipleDeliveryOptionIsChecked() {
+		regularUserCartPage().verifyThatMultipleDeliveryOptionIsChecked();
+	}
+
+	@Step
+	public void verifyMultipleDeliveryOptionIsEnabled() {
+		regularUserCartPage().verifyMultipleDeliveryOptionIsEnabled();
+	}
+
+	@Step
+	public void verifyMultipleDeliveryOptionIsDisabled() {
+		regularUserCartPage().verifyMultipleDeliveryOptionIsDisabled();
+	}
+
+	@Step
+	public void verifyDeliverAllImediatlyIsChecked() {
+		regularUserCartPage().verifyDeliverAllImediatlyIsChecked();
+	}
+
+	@Step
+	public void verifyDeliverAllImediatlyIsEnabled() {
+		regularUserCartPage().verifyDeliverAllImediatlyIsEnabled();
+	}
+
+	@Step
+	public void verifyDeliverAllImediatlyIsDisabled() {
+		regularUserCartPage().verifyDeliverAllImediatlyIsDisabled();
+	}
+
+	@Step
+	public void verifyDeliverAllOnThisDateIsChecked() {
+		regularUserCartPage().verifyDeliverAllOnThisDateIsChecked();
+	}
+
+	@Step
+	public void verifyDeliverAllOnThisDateIsEnabled() {
+		regularUserCartPage().verifyDeliverAllOnThisDateIsEnabled();
+	}
+
+	@Step
+	public void verifyDeliverAllOnThisDateIsDisabled() {
+		regularUserCartPage().verifyDeliverAllOnThisDateIsDisabled();
 	}
 
 	@Step
@@ -118,12 +163,24 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public List<String> getAllDeliveryDates(String productCode, Locale locale) throws ParseException {
 		return regularUserCartPage().getAllDeliveryDates(productCode, locale);
 	}
+	
+	public List<String> grabbDeliverAllAtOnceDates(Locale locale) throws ParseException {
+		return regularUserCartPage().grabbDeliverAllAtOnceDates(locale);
+	}
 
 	// sku added only for reporting
 	@Step
 	public void validateDeliveryDates(String sku, List<String> grabbedDates, List<String> expectedDates) {
 		Assert.assertTrue(
 				"The delivery dates for " + sku + " are not correct: Expected list : " + expectedDates
+						+ " Actual list: " + grabbedDates,
+				CollectionUtils.isEqualCollection(grabbedDates, expectedDates));
+	}
+
+	@Step
+	public void validateDeliverAllAtOnceDates(List<String> grabbedDates, List<String> expectedDates) {
+		Assert.assertTrue(
+				"The delivery dates for deliver all at once are not correct: Expected list : " + expectedDates
 						+ " Actual list: " + grabbedDates,
 				CollectionUtils.isEqualCollection(grabbedDates, expectedDates));
 	}

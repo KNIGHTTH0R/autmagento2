@@ -193,8 +193,6 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 		regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
-		regularUserCartSteps.verifyMultipleDeliveryOption();
-
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 
 		orderForCustomerCartSteps.clickGoToShipping();

@@ -234,7 +234,6 @@ public class US8009CustomerBuyWithTpTest extends BaseTest {
 		regularUserCartSteps.selectDeliveryDate(genProduct4.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
-		regularUserCartSteps.verifyMultipleDeliveryOption();
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);

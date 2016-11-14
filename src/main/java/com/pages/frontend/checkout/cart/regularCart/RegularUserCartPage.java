@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -37,6 +36,15 @@ public class RegularUserCartPage extends AbstractPage {
 
 	@FindBy(id = "coupon_code")
 	private WebElement couponCodeInput;
+
+	@FindBy(id = "cart-tp-type-multiple")
+	private WebElement multipleDeliveryOption;
+
+	@FindBy(id = "cart-tp-type-one-at-date")
+	private WebElement onThisDateOption;
+
+	@FindBy(id = "cart-tp-type-immediate")
+	private WebElement immediateOption;
 
 	@FindBy(css = "#discount-coupon-form a.button.gold-btn.bordered")
 	private WebElement submitVoucherCode;
@@ -286,17 +294,70 @@ public class RegularUserCartPage extends AbstractPage {
 		Assert.assertTrue("The " + option + " option was not found", foundOption);
 	}
 
-	public void verifyMultipleDeliveryOption() {
-		System.out.println(getDriver().findElement(By.id("cart-tp-type-multiple")).getAttribute("checked"));
-		// Assert.assertTrue("Wrong shipping option checked",
-		// getDriver().findElement(By.id("cart-tp-type-multiple"))
-		// .getAttribute("checked").contentEquals("checked"));
+	public void verifyThatDeliveryDateDropdownIsDisabled(String productCode) {
+		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-table tbody tr"));
+		boolean foundProduct = false;
+		for (WebElement product : cartList) {
+			if (product.getText().contains(productCode)) {
+				foundProduct = true;
+				Assert.assertTrue("Delivery dates dropdown is enabled but it shouldn't",
+						!product.findElement(By.cssSelector("select.tp-cb-item-delivery-date")).isEnabled());
+			}
+		}
+		Assert.assertTrue("The product was not found", foundProduct);
+	}
+
+	public void verifyThatMultipleDeliveryOptionIsChecked() {
+		Assert.assertTrue("Multiple delivery option is not checked", multipleDeliveryOption.isSelected());
+	}
+
+	public void verifyMultipleDeliveryOptionIsEnabled() {
+		Assert.assertTrue("Multiple delivery option is not enabled", multipleDeliveryOption.isEnabled());
+	}
+
+	public void verifyMultipleDeliveryOptionIsDisabled() {
+		Assert.assertTrue("Multiple delivery option is enabled", !multipleDeliveryOption.isEnabled());
+	}
+
+	public void verifyDeliverAllImediatlyIsChecked() {
+		Assert.assertTrue("Immediate delivery option is not checked", immediateOption.isSelected());
+	}
+
+	public void verifyDeliverAllImediatlyIsEnabled() {
+		Assert.assertTrue("Immediate delivery option is not enabled", immediateOption.isEnabled());
+	}
+
+	public void verifyDeliverAllImediatlyIsDisabled() {
+		Assert.assertTrue("Immediate delivery option is enabled", !immediateOption.isEnabled());
+	}
+
+	public void verifyDeliverAllOnThisDateIsChecked() {
+		Assert.assertTrue("Deliver all at this date is not checked", onThisDateOption.isSelected());
+	}
+
+	public void verifyDeliverAllOnThisDateIsEnabled() {
+		Assert.assertTrue("Deliver all at this date is not enabled", onThisDateOption.isEnabled());
+	}
+
+	public void verifyDeliverAllOnThisDateIsDisabled() {
+		Assert.assertTrue("Deliver all at this date is enabled", !onThisDateOption.isEnabled());
 	}
 
 	public void clickDeliverAllAtOnce() {
 		getDriver().findElement(By.id("cart-tp-type-multiple")).click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
 				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+	}
+
+	public List<String> grabbDeliverAllAtOnceDates(Locale locale) throws ParseException {
+		List<String> deliveryDates = new ArrayList<String>();
+		List<WebElement> deliverys = getDriver()
+				.findElements(By.cssSelector("select.tp-select-general-delivery-date option"));
+		for (WebElement delivery : deliverys) {
+			String[] tokens = delivery.getText().split(", ");
+			deliveryDates.add(DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "yyyy-MM-dd"));
+		}
+		return deliveryDates;
 	}
 
 	public List<RegularUserCartProductModel> grabProductsData() {

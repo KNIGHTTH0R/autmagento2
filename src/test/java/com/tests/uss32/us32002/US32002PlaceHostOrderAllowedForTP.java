@@ -91,13 +91,13 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		HostDataGrabber.wipe();
 		allProductsList = new ArrayList<ProductDetailedModel>();
 
-		//immediate
+		// immediate
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setIp("84");
 		genProduct1.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
-		//immediate with TP
+		// immediate with TP
 		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.getStockData().setAllowedTermPurchase("1");
 		genProduct2.setPrice("50.00");
@@ -105,7 +105,7 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct2);
 		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
-		//TP
+		// TP
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct3.setPrice("9.90");
 		genProduct3.setIp("0");
@@ -146,14 +146,40 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
 
-		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
+
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
 		allProductsList.add(genProduct2);
-		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
-		allProductsList.add(genProduct3);
+
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+		/*
+		 * product2=immediate TP verify if "pay and ship all items immediately "
+		 * is checked verify if "pay and ship all items immediately " is enabled
+		 * verify if "pay and ship the items on separate dates" is enabled
+		 * verify if "Pay and ship all items on this date" is disabled
+		 */
+
+		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
+		allProductsList.add(genProduct3);
+
+		/*
+		 * product3=only TP "pay and ship all items immediately " is disabled
+		 * "pay and ship the items on separate dates" is enabled
+		 * "Pay and ship all items on this date" is checked
+		 * "Pay and ship all items on this date" is enabled
+		 * 
+		 * after "pay and ship all items on this date" is checked, all products TP block is disabled 
+		 * verify "Pay and ship all items on this date" dates
+		 */
+
+		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
+
+		// Validate that "pay and ship all items immediately " is disabled
+		//"pay and ship the items on separate dates" is enabled
+		// validate that "Pay and ship all items on this date" is disabled
+		// validate TP block on product side that is not displayed for
+		// genProduct1
 
 		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
 				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
@@ -168,7 +194,7 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
 					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
 
-			regularUserCartSteps.validateDeliveryDates(product.getSku(),grabbedDates, expectedDates);
+			regularUserCartSteps.validateDeliveryDates(product.getSku(), grabbedDates, expectedDates);
 		}
 	}
 }

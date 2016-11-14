@@ -233,7 +233,6 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		String deliveryTp2 = regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(),
 				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 
-		regularUserCartSteps.verifyMultipleDeliveryOption();
 
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 

@@ -77,6 +77,7 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 	public LoungeSteps loungeSteps;
 
 	public static List<ProductDetailedModel> allProductsList;
+	List<List<String>> dropdownDatesList = new ArrayList<List<String>>();
 	private String username, password, customerName;
 	private ProductDetailedModel genProduct1, genProduct2, genProduct3;
 
@@ -84,18 +85,18 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 	public void setUp() throws Exception {
 		allProductsList = new ArrayList<ProductDetailedModel>();
 
-		//immediate
+		// immediate
 		genProduct1 = MagentoProductCalls.createProductModel();
 		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
-		//immediate with TP
+		// immediate with TP
 		genProduct2 = MagentoProductCalls.createProductModel();
 		genProduct2.getStockData().setAllowedTermPurchase("1");
 		MagentoProductCalls.createApiProduct(genProduct2);
 		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
-		//TP
+		// TP
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
 		MagentoProductCalls.createApiProduct(genProduct3);
 
@@ -138,14 +139,42 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		generalCartSteps.clearCart();
 
-//		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
-		addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
+	
+		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
 		allProductsList.add(genProduct2);
-		addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "1", "0");
-		allProductsList.add(genProduct3);
-
+		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+		
+		/*
+		 * product2=immediate 
+		 * TP verify if "pay and ship all items immediately "
+		 * is checked verify if "pay and ship all items immediately " is enabled
+		 * verify if "pay and ship the items on separate dates" is enabled
+		 * verify if "Pay and ship all items on this date" is disabled
+		 */
+		
+		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
+		allProductsList.add(genProduct3);
+		
+		/*
+		 * product3=only TP "pay and ship all items immediately " is disabled
+		 * "pay and ship the items on separate dates" is enabled
+		 * "Pay and ship all items on this date" is checked
+		 * "Pay and ship all items on this date" is enabled
+		 * 
+		 * after "pay and ship all items on this date" is checked, all products TP block is disabled 
+		 * verify "Pay and ship all items on this date" dates
+		 */
+		
+		
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+
+		// Validate that "pay and ship all items immediately " is disabled
+		//"pay and ship the items on separate dates" is enabled
+		// validate that "Pay and ship all items on this date" is disabled
+		// validate TP block on product side that is not displayed for
+		// genProduct1
 
 		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
 				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
@@ -159,8 +188,14 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 					product.getStockData().getEarliestAvailability(), mostAwayEarliest,
 					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
 					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
+			dropdownDatesList.add(expectedDates);
 
-			regularUserCartSteps.validateDeliveryDates(product.getSku(),grabbedDates, expectedDates);
+			regularUserCartSteps.validateDeliveryDates(product.getSku(), grabbedDates, expectedDates);
+
 		}
+		List<String> expectedDeliverAllAtOnceDates = GeneralCartCalculations.getCommonDates(dropdownDatesList);
+		List<String> grabedDeliverAllAtOnceDates = regularUserCartSteps
+				.grabbDeliverAllAtOnceDates(new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		regularUserCartSteps.validateDeliverAllAtOnceDates(expectedDeliverAllAtOnceDates, grabedDeliverAllAtOnceDates);
 	}
 }
