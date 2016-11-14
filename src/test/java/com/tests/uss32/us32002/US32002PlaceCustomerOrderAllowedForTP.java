@@ -160,7 +160,7 @@ public class US32002PlaceCustomerOrderAllowedForTP extends BaseTest {
 		/*
 		 * product3=only TP "pay and ship all items immediately " is disabled
 		 * "pay and ship the items on separate dates" is enabled
-		 * "Pay and ship all items on this date" is checked
+		 * "pay and ship the items on separate dates" is checked
 		 * "Pay and ship all items on this date" is enabled
 		 * 
 		 * after "pay and ship all items on this date" is checked, all products TP block is disabled 

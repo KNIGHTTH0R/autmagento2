@@ -153,12 +153,19 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+		
+
 		/*
 		 * product2=immediate TP verify if "pay and ship all items immediately "
 		 * is checked verify if "pay and ship all items immediately " is enabled
 		 * verify if "pay and ship the items on separate dates" is enabled
 		 * verify if "Pay and ship all items on this date" is disabled
 		 */
+		regularUserCartSteps.verifyDeliverAllImediatlyIsChecked();
+		regularUserCartSteps.verifyDeliverAllImediatlyIsEnabled();
+		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+		
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
 		allProductsList.add(genProduct3);
@@ -166,12 +173,15 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		/*
 		 * product3=only TP "pay and ship all items immediately " is disabled
 		 * "pay and ship the items on separate dates" is enabled
-		 * "Pay and ship all items on this date" is checked
+		 * "pay and ship the items on separate dates" is checked
 		 * "Pay and ship all items on this date" is enabled
 		 * 
-		 * after "pay and ship all items on this date" is checked, all products TP block is disabled 
+		 * after "pay and ship all items on this date" is checked, all products TP block are disabled 
 		 * verify "Pay and ship all items on this date" dates
 		 */
+		
+		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
+		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
 
