@@ -16,7 +16,7 @@ public class OrderForCustomerCartSteps extends AbstractSteps {
 	public List<HostCartProductModel> grabProductsData() {
 		return orderForCustomerCartPage().grabProductsData();
 	}
-	@Step
+
 	public String getCartOwnerInfo() {
 		return orderForCustomerCartPage().getCartOwnerInfo();
 	}

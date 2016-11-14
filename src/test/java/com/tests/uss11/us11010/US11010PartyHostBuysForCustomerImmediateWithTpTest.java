@@ -243,8 +243,6 @@ public class US11010PartyHostBuysForCustomerImmediateWithTpTest extends BaseTest
 		regularUserCartSteps.selectDeliveryDate(genProduct3.getSku(), deliveryTP2Locale);
 		regularUserCartSteps.selectDeliveryDate(genProduct4.getSku(), deliveryTP1Locale);
 
-		regularUserCartSteps.verifyMultipleDeliveryOption();
-
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 
 		orderForCustomerCartSteps.grabProductsData();
