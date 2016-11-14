@@ -92,6 +92,10 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void verifyThatDeliveryDateDropdownIsDisabled(String productCode) {
 		regularUserCartPage().verifyThatDeliveryDateDropdownIsDisabled(productCode);
 	}
+	@Step
+	public void verifyThatTermPurchaseIsNotAvailable(String productCode) {
+		regularUserCartPage().verifyThatTermPurchaseIsNotAvailable(productCode);
+	}
 
 	@Step
 	public void selectShippingOption(String option) {
