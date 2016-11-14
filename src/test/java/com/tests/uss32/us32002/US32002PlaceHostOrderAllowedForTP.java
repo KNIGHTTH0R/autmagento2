@@ -182,6 +182,12 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		
 		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
 		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
+		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsEnabled();
+		regularUserCartSteps.clickDeliverAllAtOnce();
+		regularUserCartSteps.verifyThatDeliveryDateDropdownIsDisabled(genProduct3.getSku());
+		regularUserCartSteps.verifyThatDeliveryDateDropdownIsDisabled(genProduct2.getSku());
+	
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
 
@@ -190,6 +196,11 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 		// validate that "Pay and ship all items on this date" is disabled
 		// validate TP block on product side that is not displayed for
 		// genProduct1
+		
+		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
+		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
+		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+		regularUserCartSteps.verifyThatDeliveryDateDropdownIsDisabled(genProduct1.getSku());
 
 		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
 				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
