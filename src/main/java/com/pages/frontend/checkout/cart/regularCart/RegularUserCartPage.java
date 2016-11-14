@@ -488,4 +488,9 @@ public class RegularUserCartPage extends AbstractPage {
 		searchProductLink.click();
 	}
 
+	public void verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable() {
+		Assert.assertTrue("Payment and Shipping block is enabled but it shouldn't",
+				getDriver().findElements(By.cssSelector("ul.purchase-options.form-list li")).size() == 0);
+	}
+
 }

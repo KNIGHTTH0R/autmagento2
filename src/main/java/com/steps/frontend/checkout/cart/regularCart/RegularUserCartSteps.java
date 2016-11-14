@@ -101,6 +101,8 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void selectShippingOption(String option) {
 		regularUserCartPage().selectShippingOption(option);
 	}
+	
+	
 
 	@Step
 	public void verifyThatMultipleDeliveryOptionIsChecked() {
@@ -146,6 +148,7 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void verifyDeliverAllOnThisDateIsDisabled() {
 		regularUserCartPage().verifyDeliverAllOnThisDateIsDisabled();
 	}
+	
 
 	@Step
 	public void clickGoToShipping() {
@@ -188,5 +191,13 @@ public class RegularUserCartSteps extends AbstractSteps {
 						+ " Actual list: " + grabbedDates,
 				CollectionUtils.isEqualCollection(grabbedDates, expectedDates));
 	}
+	
+	@Step
+	public void verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable() {
+		regularUserCartPage().verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
+		
+	}
+
+	
 
 }
