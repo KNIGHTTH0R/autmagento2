@@ -65,10 +65,10 @@ public class US32003CheckRegularOrderTpRestrictionsWhenProcessDisabledTest exten
 	public WishlistSteps wishlistSteps;
 	@Steps
 	public SearchSteps searchSteps;
-	
+
 	@Steps
 	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
-	
+
 	RegularBasicProductModel productData;
 	private String username, password;
 	private ProductDetailedModel genProduct1, genProduct2, genProduct3;
@@ -93,16 +93,15 @@ public class US32003CheckRegularOrderTpRestrictionsWhenProcessDisabledTest exten
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
 		MagentoProductCalls.createApiProduct(genProduct3);
 
-
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8007.properties");
 			prop.load(input);
-			username = prop.getProperty("customerUsername");
-			password = prop.getProperty("customerPassword");
+			username = prop.getProperty("username");
+			password = prop.getProperty("password");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -130,28 +129,29 @@ public class US32003CheckRegularOrderTpRestrictionsWhenProcessDisabledTest exten
 		generalCartSteps.clearCart();
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
+
 		
+
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
-		headerSteps.openCartPreview();
-		headerSteps.goToCart();
-	    regularUserCartSteps.verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
-	    regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct2.getSku());
-		
-		
-		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
-		allProductsList.add(genProduct1);
+//		allProductsList.add(genProduct2);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		regularUserCartSteps.verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
-	    regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct1.getSku());
-	    
-	    searchSteps.navigateToProductPage(genProduct3.getSku());
+		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct2.getSku());
+
+		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
+//		allProductsList.add(genProduct1);
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		regularUserCartSteps.verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
+		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct1.getSku());
+
+		searchSteps.navigateToProductPage(genProduct3.getSku());
 		productSteps.verifyThatProductStatusIsCorrect(ContextConstants.CURRENTLY_OUT_OF_STOCK);
 		productSteps.verifyAddToCartButton(false);
 		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct3, "1", "0");
 		wishlistSteps.verifyPresenceOfAddAllToCartButton(false);
-		
-		
+
 	}
 
 }

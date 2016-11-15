@@ -1,9 +1,11 @@
-package com.tests.uss32;
+package com.tests.uss32.us32004;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.Properties;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -20,56 +22,47 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
-import com.steps.frontend.LoungeSteps;
-import com.steps.frontend.MyBusinessSteps;
 import com.steps.frontend.ProductSteps;
-import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
-import com.steps.frontend.checkout.cart.borrowCart.BorrowCartSteps;
+import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
-import com.tools.constants.ContextConstants;
-import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
+import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
-import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
+import com.tools.utils.DateUtils;
+import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
 @WithTag(name = "US32.1 Check restriction for product available with TP", type = "Scenarios")
 @Story(Application.CheckTpProductsRestrictions.US32_1.class)
 @RunWith(SerenityRunner.class)
-public class US32001CheckTpProductsRestrictionsForKoboTest extends BaseTest {
+public class US32004CheckRegularOrderTpRestrictionsTest extends BaseTest {
 
-	@Steps
-	public CustomerRegistrationSteps frontEndSteps;
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public HomeSteps homeSteps;
-	@Steps
 	public FooterSteps footerSteps;
-	@Steps
-	public BorrowCartSteps borrowCartSteps;
 	@Steps
 	public ProductSteps productSteps;
 	@Steps
+	public HomeSteps homeSteps;
+	@Steps
+	public CustomerRegistrationSteps customerRegistrationSteps;
+	@Steps
 	public GeneralCartSteps generalCartSteps;
 	@Steps
-	public SearchSteps searchSteps;
+	public AddRegularProductsWorkflow addRegularProductsWorkflow;
+	@Steps
+	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
 	public WishlistSteps wishlistSteps;
-	@Steps
-	public AddBorrowedProductsWorkflow addBorrowedProductsWorkflow;
-	@Steps
-	public LoungeSteps loungeSteps;
-	@Steps
-	public MyBusinessSteps myBusinessSteps;
-
+	
+	RegularBasicProductModel productData;
 	private String username, password;
-
-	private ProductDetailedModel genProduct1 ;
-
+	private ProductDetailedModel genProduct1;
+	String formatedAvailabilityDate;
 
 	@Before
 	public void setUp() throws Exception {
@@ -77,16 +70,19 @@ public class US32001CheckTpProductsRestrictionsForKoboTest extends BaseTest {
 		genProduct1 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct1.getStockData().setIsDiscontinued("0");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		
+
+		String unformatedAvailabilityDate = DateUtils.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd");
+
+		formatedAvailabilityDate = DateUtils.parseDate(unformatedAvailabilityDate, "yyyy-MM-dd", "dd. MMM. yyyy", new Locale.Builder().setLanguage(MongoReader.getContext())
+				.build());
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(
-					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8007.properties");
 			prop.load(input);
-
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 
@@ -104,23 +100,24 @@ public class US32001CheckTpProductsRestrictionsForKoboTest extends BaseTest {
 	}
 
 	@Test
-	public void us32001CheckTpProductsRestrictionsForKoboTest() {
-		frontEndSteps.performLogin(username, password);
-		
+	public void us32004CheckRegularOrderTpRestrictionsTest() throws ParseException {
+		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		homeSteps.goToNewItems();
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+		generalCartSteps.clearCart();
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
-		loungeSteps.goToMyBusiness();
-		myBusinessSteps.accessKoboCart();
-		searchSteps.navigateToProductPage(genProduct1.getSku());
-		productSteps.verifyThatProductStatusIsCorrect(ContextConstants.CURRENTLY_OUT_OF_STOCK);
-		productSteps.verifyAddToCartButton(false);
-		addBorrowedProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");
-		wishlistSteps.verifyPresenceOfAddAllToCartButton(false);	
-
+		addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
+		productSteps.verifyThatAvailabilityDateIsCorrect(formatedAvailabilityDate);
+		productSteps.verifyAddToCartButton(true);
+		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");
+		wishlistSteps.verifyPresenceOfAddAllToCartButton(true);
+		wishlistSteps.addProductToCart(genProduct1.getName());
 	}
 
 }

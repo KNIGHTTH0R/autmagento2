@@ -1,4 +1,4 @@
-package com.tests.uss32;
+package com.tests.uss32.us32004;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +17,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
-import com.connectors.mongo.MongoConnector;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.ContactBoosterRegistrationSteps;
 import com.steps.frontend.FancyBoxSteps;
@@ -40,7 +39,7 @@ import com.tools.utils.DateUtils;
 @WithTag(name = "US32.1 Check restriction for product available with TP", type = "Scenarios")
 @Story(Application.KoboRegistration.US7_8.class)
 @RunWith(SerenityRunner.class)
-public class US32001CheckPomOrderTpRestrictionTest extends BaseTest {
+public class US32004CheckPomOrderTpRestrictionTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -108,7 +107,7 @@ public class US32001CheckPomOrderTpRestrictionTest extends BaseTest {
 	}
 
 	@Test
-	public void us32001CheckPomOrderTpRestrictionTest() {
+	public void us32004CheckPomOrderTpRestrictionTest() {
 		
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL() + context, koboCode);
 		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);

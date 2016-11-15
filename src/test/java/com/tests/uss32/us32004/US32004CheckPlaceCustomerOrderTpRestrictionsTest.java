@@ -1,4 +1,4 @@
-package com.tests.uss32;
+package com.tests.uss32.us32004;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,11 +7,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.Properties;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,21 +24,24 @@ import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
-import com.tools.cartcalculations.partyHost.HostCartCalculator;
-import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.UrlModel;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
-import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
+import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US32.1 Check restriction for product available with TP", type = "Scenarios")
 @Story(Application.CheckTpProductsRestrictions.US32_1.class)
 @RunWith(SerenityRunner.class)
-public class US32001CheckPlaceHostOrderTpRestrictionsTest extends BaseTest {
+public class US32004CheckPlaceCustomerOrderTpRestrictionsTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -66,18 +64,20 @@ public class US32001CheckPlaceHostOrderTpRestrictionsTest extends BaseTest {
 	@Steps
 	public GeneralCartSteps generalCartSteps;
 	@Steps
-	public AddHostProductsWorkflow addHostProductsWorkflow;
-	private static UrlModel partyUrlModel = new UrlModel();
+	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
 
 	private String username, password;
+	private CustomerFormModel customerData;
+	private AddressModel addressData;
 	private ProductDetailedModel genProduct1;
 
 	String formatedAvailabilityDate;
 
 	@Before
 	public void setUp() throws Exception {
-		HostCartCalculator.wipe();
-		HostDataGrabber.wipe();
+
+		customerData = new CustomerFormModel();
+		addressData = new AddressModel();
 
 		genProduct1 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct1.getStockData().setIsDiscontinued("0");
@@ -110,21 +110,21 @@ public class US32001CheckPlaceHostOrderTpRestrictionsTest extends BaseTest {
 				}
 			}
 		}
-		
-		partyUrlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 
 	@Test
-	public void us32001CheckPlaceHostOrderTpRestrictionsTest() throws ParseException {
+	public void us32004CheckPlaceCustomerOrderTpRestrictionsTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
-		generalCartSteps.clearCart();
+		headerSteps.goToProfile();
 
+		loungeSteps.orderForNewCustomer();
+		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
+		generalCartSteps.clearCart();
+		
 		orderForCustomerCartSteps.openSearchProductsModal();
 
 		addProductsModalSteps.searchForProduct(genProduct1.getSku());
@@ -132,11 +132,11 @@ public class US32001CheckPlaceHostOrderTpRestrictionsTest extends BaseTest {
 				formatedAvailabilityDate);
 		addProductsModalSteps.closeModal();
 
-		addHostProductsWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 
 		productSteps.verifyThatAvailabilityDateIsCorrect(formatedAvailabilityDate);
 
-		addHostProductsWorkflow.addProductToWishlist(genProduct1, "1", "0");
+		addProductsForCustomerWorkflow.addProductToWishlist(genProduct1, "1", "0");
 		
 		wishlistSteps.verifyPresenceOfAddAllToCartButton(true);
 		wishlistSteps.addProductToCart(genProduct1.getName());

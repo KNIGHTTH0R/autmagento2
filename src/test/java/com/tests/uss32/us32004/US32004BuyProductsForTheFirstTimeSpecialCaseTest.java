@@ -1,4 +1,4 @@
-package com.tests.uss32;
+package com.tests.uss32.us32004;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,7 +51,7 @@ import com.workflows.frontend.ValidationWorkflows;
 @WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
-public class US32001BuyProductsForTheFirstTimeSpecialCaseTest extends BaseTest {
+public class US32004BuyProductsForTheFirstTimeSpecialCaseTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
@@ -137,7 +137,7 @@ public class US32001BuyProductsForTheFirstTimeSpecialCaseTest extends BaseTest {
 	}
 
 	@Test
-	public void us32001BuyProductsForTheFirstTimeSpecialCaseTest() {
+	public void us32004BuyProductsForTheFirstTimeSpecialCaseTest() {
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

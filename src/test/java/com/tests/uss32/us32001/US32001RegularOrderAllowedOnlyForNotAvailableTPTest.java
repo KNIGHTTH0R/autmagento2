@@ -10,14 +10,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.junit.After;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApacheHttpHelper;
 import com.connectors.http.MagentoProductCalls;
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -35,7 +37,6 @@ import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.CreditCardModel;
-import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
@@ -46,11 +47,6 @@ import com.tools.utils.DateUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US33.2 Regular CustomerOrder Allowed For TP", type = "Scenarios")
 @Story(Application.RegularCart.US8_7.class)
@@ -98,7 +94,6 @@ public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTes
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-	private TermPurchaseIpModel ipModel = new TermPurchaseIpModel();
 	public static List<ProductDetailedModel> allProductsList;
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 	List<List<String>> dropdownDatesList = new ArrayList<List<String>>();
