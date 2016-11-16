@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,12 +25,8 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyDetailsSteps;
-import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
-import com.steps.frontend.checkout.PaymentSteps;
-import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
-import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
@@ -41,11 +42,6 @@ import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 @WithTag(name = "US11.8 Party Host Buys For Customer With 0 Amount Immediate and Tp Products", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_8.class)
 @RunWith(SerenityRunner.class)
@@ -58,12 +54,6 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
 	@Steps
-	public ShippingSteps shippingSteps;
-	@Steps
-	public PaymentSteps paymentSteps;
-	@Steps
-	public OrderForCustomerCartSteps orderForCustomerCartSteps;
-	@Steps
 	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
@@ -75,8 +65,6 @@ public class US32002PlaceHostOrderAllowedForTP extends BaseTest {
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
-	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
 	@Steps
 	public LoungeSteps loungeSteps;
 

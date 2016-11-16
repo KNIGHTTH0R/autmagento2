@@ -24,19 +24,14 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
-import com.steps.frontend.checkout.CheckoutValidationSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
-import com.steps.frontend.checkout.PaymentSteps;
-import com.steps.frontend.checkout.ShippingSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
-import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.constants.UrlConstants;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
@@ -45,7 +40,6 @@ import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
-import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
 @WithTag(name = "US33.2 Regular CustomerOrder Allowed For TP", type = "Scenarios")
 @Story(Application.RegularCart.US8_7.class)
@@ -55,15 +49,9 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
-	public ShippingSteps shippingSteps;
-	@Steps
-	public PaymentSteps paymentSteps;
-	@Steps
 	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public ConfirmationSteps confirmationSteps;
-	@Steps
-	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
@@ -73,10 +61,6 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 	@Steps
 	public AddRegularProductsWorkflow addRegularProductsWorkflow;
 	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
-	@Steps
-	public RegularCartValidationWorkflows regularCartValidationWorkflows;
-	@Steps
 	public CustomVerification customVerifications;
 	@Steps
 	public FooterSteps footerSteps;
@@ -84,12 +68,6 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
 
 	private String username, password;
-	private String discountClass;
-	private String billingAddress, shippingAddress;
-	private String shippingValue;
-	private String voucherCode;
-	private String voucherValue;
-	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -136,11 +114,6 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-
-			discountClass = prop.getProperty("discountClass");
-			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
-			shippingValue = prop.getProperty("shippingValue");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

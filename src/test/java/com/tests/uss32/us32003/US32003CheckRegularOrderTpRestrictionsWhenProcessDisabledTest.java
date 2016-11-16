@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -19,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
-import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -65,7 +63,6 @@ public class US32003CheckRegularOrderTpRestrictionsWhenProcessDisabledTest exten
 	public WishlistSteps wishlistSteps;
 	@Steps
 	public SearchSteps searchSteps;
-
 	@Steps
 	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
 

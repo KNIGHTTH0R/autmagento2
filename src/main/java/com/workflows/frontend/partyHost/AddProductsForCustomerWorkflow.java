@@ -8,6 +8,7 @@ import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.tools.cartcalculations.smf.CartDiscountsCalculation;
 import com.tools.data.frontend.HostBasicProductModel;
+import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 
 public class AddProductsForCustomerWorkflow {
@@ -51,6 +52,15 @@ public class AddProductsForCustomerWorkflow {
 	public void addProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
 		searchSteps.navigateToProductPage(model.getSku());
 		productSteps.addToWishlist(qty, productProperty);
+	}
+	
+	@StepGroup
+	@Title("Add product to wishlist")
+	public RegularBasicProductModel setBasicProductToWishlist(ProductDetailedModel model, String qty, String productProperty) {
+		searchSteps.navigateToProductPage(model.getSku());
+		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+
+		return productSteps.setRegularBasicProductAddToWishlist(model,qty, productProperty, finalPrice);
 	}
 
 }

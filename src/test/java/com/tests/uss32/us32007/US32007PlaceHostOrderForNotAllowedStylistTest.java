@@ -1,4 +1,4 @@
-package com.tests.uss32.us32001;
+package com.tests.uss32.us32007;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -25,13 +24,16 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.PartyDetailsSteps;
-import com.steps.frontend.checkout.CheckoutValidationSteps;
+import com.steps.frontend.ProductSteps;
+import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
+import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
+import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
-import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
@@ -41,11 +43,12 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
+import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 
 @WithTag(name = "US11.8 Party Host Buys For Customer With 0 Amount Immediate and Tp Products", type = "Scenarios")
 @Story(Application.PlaceACustomerOrderCart.US11_8.class)
 @RunWith(SerenityRunner.class)
-public class US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest extends BaseTest {
+public class US32007PlaceHostOrderForNotAllowedStylistTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -60,13 +63,22 @@ public class US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest extends BaseT
 	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
+	public ShippingPartySectionSteps shippingPartySectionSteps;
+	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
 	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
 	@Steps
-	public CheckoutValidationSteps checkoutValidationSteps;
-	@Steps
 	public LoungeSteps loungeSteps;
+	@Steps
+	public WishlistSteps wishlistSteps;
+	@Steps
+	public SearchSteps searchSteps;
+	@Steps
+	public ProductSteps productSteps;
+	@Steps
+	public AddRegularProductsWorkflow addRegularProductsWorkflow;
+	
 
 	public static List<ProductDetailedModel> allProductsList;
 	private String username, password;
@@ -100,7 +112,7 @@ public class US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest extends BaseT
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11008.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss32" + File.separator + "us32005.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -116,12 +128,12 @@ public class US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest extends BaseT
 				}
 			}
 		}
-		partyUrlModel = MongoReader.grabUrlModels("US32001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		partyUrlModel = MongoReader.grabUrlModels("US32007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 
 	@Test
-	public void us32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest() throws ParseException {
+	public void us32007PlaceHostOrderForNotAllowedStylistTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -130,57 +142,26 @@ public class US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest extends BaseT
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
 
+		headerSteps.clickOnWishlistButton();
+		wishlistSteps.removeProductsFromWishlist();
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
-		// allProductsList.add(genProduct2);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
-		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct2.getSku());
 		regularUserCartSteps.verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
-
-		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
-		allProductsList.add(genProduct3);
-		headerSteps.openCartPreview();
-		headerSteps.goToCart();
-
-		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
-		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
-		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
-		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
-		// click on DeliverALLonThisDates
-
-		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
-				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
-
-		for (ProductDetailedModel product : allProductsList) {
-
-			List<String> grabbedDates = regularUserCartSteps.getAllDeliveryDates(product.getSku(),
-					new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-
-			List<String> expectedDates = GeneralCartCalculations.calculateDeliveryDates(
-					product.getStockData().getEarliestAvailability(), mostAwayEarliest,
-					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
-					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
-			dropdownDatesList.add(expectedDates);
-
-			regularUserCartSteps.validateDeliveryDates(product.getSku(), grabbedDates, expectedDates);
-
-		}
+		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct2.getSku());
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
-		allProductsList.add(genProduct1);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
-		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
-		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
-		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
-		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+		regularUserCartSteps.verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
 		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct1.getSku());
 
-		// verify if TP block is not displayed on product side
-
+		searchSteps.navigateToProductPage(genProduct3.getSku());
+		productSteps.verifyThatProductStatusIsCorrect(ContextConstants.CURRENTLY_OUT_OF_STOCK);
+		productSteps.verifyAddToCartButton(false);
+		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct3, "1", "0");
+		wishlistSteps.verifyPresenceOfAddAllToCartButton(false);
 		
 	}
 }

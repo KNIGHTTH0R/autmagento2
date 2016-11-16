@@ -1,4 +1,4 @@
-package com.tests.uss32.us32001;
+package com.tests.uss32.us32005;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -24,13 +23,15 @@ import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
+import com.steps.frontend.ProductSteps;
+import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.cart.GeneralCartSteps;
 import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
-import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
+import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
@@ -39,18 +40,18 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
+import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
+import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
 @WithTag(name = "US33.2 Regular CustomerOrder Allowed For TP", type = "Scenarios")
 @Story(Application.RegularCart.US8_7.class)
 @RunWith(SerenityRunner.class)
-public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTest {
+public class US32005RegularOrderForNotAllowedCustomerTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
 	public GeneralCartSteps generalCartSteps;
-	@Steps
-	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
 	@Steps
@@ -58,11 +59,21 @@ public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTes
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
+	public AddRegularProductsWorkflow addRegularProductsWorkflow;
+	@Steps
+	public RegularCartValidationWorkflows regularCartValidationWorkflows;
+	@Steps
 	public CustomVerification customVerifications;
 	@Steps
 	public FooterSteps footerSteps;
 	@Steps
 	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
+	@Steps
+	public WishlistSteps wishlistSteps;
+	@Steps
+	public ProductSteps productSteps;
+	@Steps
+	public SearchSteps searchSteps;
 
 	private String username, password;
 	private ProductDetailedModel genProduct1;
@@ -107,10 +118,10 @@ public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTes
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8007.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss11" + File.separator + "us11001.properties");
 			prop.load(input);
-			username = prop.getProperty("username");
-			password = prop.getProperty("password");
+			username = prop.getProperty("customerUsername");
+			password = prop.getProperty("customerPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -127,7 +138,7 @@ public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTes
 	}
 
 	@Test
-	public void us32001RegularOrderAllowedOnlyForNotAvailableTPTest() throws ParseException {
+	public void us32005RegularOrderAllowedOnlyForNotAvailableTPTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -137,67 +148,30 @@ public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTes
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
+		headerSteps.clickOnWishlistButton();
+		wishlistSteps.removeProductsFromWishlist();
 
-		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
-		allProductsList.add(genProduct3);
-		headerSteps.openCartPreview();
-		headerSteps.goToCart();
-
-		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
-		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
-		regularUserCartSteps.verifyDeliverAllOnThisDateIsChecked();
-		regularUserCartSteps.verifyDeliverAllOnThisDateIsEnabled();
-		// click on DeliverALLonThisDates
-
-		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
-				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
-
-		for (ProductDetailedModel product : allProductsList) {
-
-			List<String> grabbedDates = regularUserCartSteps.getAllDeliveryDates(product.getSku(),
-					new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-
-			List<String> expectedDates = GeneralCartCalculations.calculateDeliveryDates(
-					product.getStockData().getEarliestAvailability(), mostAwayEarliest,
-					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 14),
-					DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("yyyy-MM-dd"), "yyyy-MM-dd", 28), 45, 49);
-			dropdownDatesList.add(expectedDates);
-
-			regularUserCartSteps.validateDeliveryDates(product.getSku(), grabbedDates, expectedDates);
-
-		}
 		
 
-		List<String> expectedDeliverAllAtOnceDates = GeneralCartCalculations.getCommonDates(dropdownDatesList);
-		List<String> grabedDeliverAllAtOnceDates = regularUserCartSteps
-				.grabbDeliverAllAtOnceDates(new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		regularUserCartSteps.validateDeliverAllAtOnceDates(expectedDeliverAllAtOnceDates, grabedDeliverAllAtOnceDates);
-		
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
-		// allProductsList.add(genProduct2);
+//		allProductsList.add(genProduct2);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
-
-		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
-		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
-		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
-		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+		regularUserCartSteps.verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
 		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct2.getSku());
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
-		allProductsList.add(genProduct1);
+//		allProductsList.add(genProduct1);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
-		
-		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
-		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
-		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
-		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
+		regularUserCartSteps.verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
 		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct1.getSku());
 
-		// verify if TP block is not displayed on product side
+		searchSteps.navigateToProductPage(genProduct3.getSku());
+		productSteps.verifyThatProductStatusIsCorrect(ContextConstants.CURRENTLY_OUT_OF_STOCK);
+		productSteps.verifyAddToCartButton(false);
+		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct3, "1", "0");
+		wishlistSteps.verifyPresenceOfAddAllToCartButton(false);
 
 	}
 
