@@ -74,7 +74,7 @@ public class US32001CreatePartyWithStylistHostTest extends BaseTest {
 			}
 		}
 
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 	}
 
@@ -93,7 +93,7 @@ public class US32001CreatePartyWithStylistHostTest extends BaseTest {
 	@After
 	public void saveData() {
 
-		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName());
 	}
 
 }
