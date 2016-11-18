@@ -6,6 +6,11 @@ import com.tools.data.BorrowCartCalcDetailsModel;
 import com.tools.data.CalcDetailsModel;
 import com.tools.data.CalculationModel;
 import com.tools.data.HostCartCalcDetailsModel;
+import com.tools.data.IpOverViewIpCorrectionModel;
+import com.tools.data.IpOverViewOpenIpsModel;
+import com.tools.data.IpOverViewPayedOrdersModel;
+import com.tools.data.IpOverViewReturnsListModel;
+import com.tools.data.IpOverViewSummaryModel;
 import com.tools.data.PomCartCalcDetailsModel;
 import com.tools.data.RegularCartCalcDetailsModel;
 import com.tools.data.StylistRegistrationCartCalcDetailsModel;
@@ -664,4 +669,70 @@ public class PrintUtils {
 		}
 	}
 
+	public static void printSummaryReportModel(IpOverViewSummaryModel ipOverViewSummaryModel) {
+
+		System.out.println("printSummaryReportModel -----------------------------");
+		System.out.println("Payed orders previous month: " + ipOverViewSummaryModel.getPaidOrdersPreviosMonth());
+		System.out.println("Payed orders current month: " + ipOverViewSummaryModel.getPaidOrdersThisMonth());
+		System.out.println("Reversed chargeback accountable in this month : "
+				+ ipOverViewSummaryModel.getReverseChargebackThisMonth());
+		System.out.println("Chargebacks current month: " + ipOverViewSummaryModel.getChargebacksThisMonth());
+		System.out.println("Returns in current month: " + ipOverViewSummaryModel.getReturnsThisMonth());
+		System.out.println("Manual IP Correction: " + ipOverViewSummaryModel.getManualIpCorrection());
+		System.out.println("TOTAL: " + ipOverViewSummaryModel.getTotal());
+
+	}
+
+	public static void printOpenIpsReportMode(IpOverViewOpenIpsModel ipOverViewOpenIpsModel) {
+
+		System.out.println("printOpenIpsReportModel -----------------------------");
+		System.out.println("IPs in payment process (current month): " + ipOverViewOpenIpsModel.getIpThisMonth());
+		System.out.println("IPs in payment process (previous month: " + ipOverViewOpenIpsModel.getIpLastMonth());
+		System.out.println(
+				"Open chargebacks (previous and current month): " + ipOverViewOpenIpsModel.getOpenChargebacks());
+		System.out.println(
+				"IPs in Term Purchase orders (current month): " + ipOverViewOpenIpsModel.getIpTPOrdersThisMonth());
+		System.out.println(
+				"IPs in Term Purchase orders (upcoming months): " + ipOverViewOpenIpsModel.getIpTPOrdersLastMonth());
+		System.out.println("TOTAL: " + ipOverViewOpenIpsModel.getOpenIpTotal());
+
+	}
+
+	public static void printPayedOrderReportModel(List<IpOverViewPayedOrdersModel> result) {
+		for (IpOverViewPayedOrdersModel ipOverViewPayedOrdersModel : result) {
+			System.out.println("printPayedOrderReportModel -----------------------------");
+			System.out.println("OrderID: " + ipOverViewPayedOrdersModel.getOrderID());
+			System.out.println("Customer(invoice To): " + ipOverViewPayedOrdersModel.getCustomerName());
+			System.out.println("OrderDate: " + ipOverViewPayedOrdersModel.getOrderDate());
+			System.out.println("PaymentDate: " + ipOverViewPayedOrdersModel.getPaymentDate());
+			System.out.println("Order Status: " + ipOverViewPayedOrdersModel.getOrderStatus());
+			System.out.println("Amount: " + ipOverViewPayedOrdersModel.getAmount());
+			System.out.println("IP: " + ipOverViewPayedOrdersModel.getIp());
+
+		}
+
+	}
+
+	public static void printReturnsReportModel(List<IpOverViewReturnsListModel> result) {
+		for (IpOverViewReturnsListModel ipOverViewReturnsListModel : result) {
+			System.out.println("printReturnsReportModel -----------------------------");
+			System.out.println("Order number " + ipOverViewReturnsListModel.getOrderId());
+			System.out.println("Refund date: " + ipOverViewReturnsListModel.getRefundDate());
+			System.out.println("Return type: " + ipOverViewReturnsListModel.getRefundType());
+			System.out.println("Amount: " + ipOverViewReturnsListModel.getAmount());
+			System.out.println("Ip: " + ipOverViewReturnsListModel.getIp());
+
+		}
+
+	}
+
+	public static void printIpManualCorrectionReportModel(List<IpOverViewIpCorrectionModel> result) {
+		for (IpOverViewIpCorrectionModel ipOverViewIpCorrectionModel : result) {
+			System.out.println("printIpManualCorrectionReportModel -----------------------------");
+			System.out.println("Comment " + ipOverViewIpCorrectionModel.getComment());
+			System.out.println("Date: " + ipOverViewIpCorrectionModel.getDate());
+			System.out.println("IP : " + ipOverViewIpCorrectionModel.getIp());
+		}
+
+	}
 }
