@@ -376,11 +376,11 @@ public class StylistListCalculation {
 				}
 				if (category45Age.size() > 0) {
 					compatibleStylists.add(category45Age.get(0));
-					category30Age.remove(0);
+					category45Age.remove(0);
 				}
 				if (category100Age.size() > 0) {
 					compatibleStylists.add(category100Age.get(0));
-					category30Age.remove(0);
+					category100Age.remove(0);
 				}
 				// this is because we can reach the 5 elements in the first if
 				// and until we enter in while loop,we can have 6 or 7

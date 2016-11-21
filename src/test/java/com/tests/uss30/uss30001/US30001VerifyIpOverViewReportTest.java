@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -27,7 +26,6 @@ import com.tools.data.IpOverViewOpenIpsModel;
 import com.tools.data.IpOverViewPayedOrdersModel;
 import com.tools.data.IpOverViewReturnsListModel;
 import com.tools.data.IpOverViewSummaryModel;
-import com.tools.data.IpOverviewTotalsModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
@@ -87,6 +85,13 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 				}
 			}
 		}
+		
+		//IpOverViewSummaryModel expectedSummaryModel = Calculation.calculateIpOverViewSummaryModel(stylistId,month);
+		//IpOverViewOpenIpsModel expectedOpenIpsModel = Calculation.calculateIpOverViewOpenIpsModel(stylistId,month);
+		//List<IpOverViewPayedOrdersModel> expectedPayedOrdersModel = Calculation.calculatePaidOrders(stylistId,month);
+		// same for refunds
+		//manual corections ???????
+		
 
 	}
 

@@ -64,6 +64,11 @@ public class SoapKeys {
 	public static final String NEWS_FROM_DATE = "news_from_date";
 	public static final String NEWS_TO_DATE = "news_to_date";
 	
+	public static final String CLIENT_KEY = "clientKey";
+	public static final String CLIENT_KEY_VALUE = "commission-tool";
+	
+	
+	
 	// update Product Keys
 	public static final String UPDATE_PRODUCT_CATALOG_CONTAINER = "catalogProductUpdateRequestParam";
 	public static final String PRODUCT_ID = "productId";

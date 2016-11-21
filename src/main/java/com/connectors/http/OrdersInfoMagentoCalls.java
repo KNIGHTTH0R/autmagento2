@@ -126,6 +126,9 @@ public class OrdersInfoMagentoCalls {
 		key2B.addTextNode(SoapConstants.GREATER_THAN);
 		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
 		value2B.addTextNode("2016-08-01 00:00:00");
+		
+		SOAPElement clinetKey = getStylistRequestParam.addChildElement(SoapKeys.CLIENT_KEY);
+		clinetKey.addTextNode(SoapKeys.CLIENT_KEY_VALUE);
 
 		soapMessage.saveChanges();
 

@@ -22,8 +22,7 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getStylistInfo("1004","2016","10");
-//		ComissionRestCalls.getStylistListInfo("2016","11");
+		ComissionRestCalls.getStylistInfo("2513");
 	}
 
 	public static String composeAuthenticationSuffix() throws Exception {

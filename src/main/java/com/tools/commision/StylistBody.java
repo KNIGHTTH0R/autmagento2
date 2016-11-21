@@ -65,6 +65,8 @@ public class StylistBody {
 	private String tpr_diff;
 	@JsonIgnore
 	private String diffPath;
+	@JsonIgnore
+	private String canceledAt;
 	private String autoBonus;
 	private String teamPointsLevel1Tpr;
 	private String teamPointsLevel2Tpr;
@@ -77,6 +79,7 @@ public class StylistBody {
 	private int topNrActiveStylist500Ip;
 	private int topIpsNextTob;
 	private int topIp;
+	private int top30Ip;
 	private String careerLevelName;
 	private String paylevelName;
 
@@ -624,6 +627,14 @@ public class StylistBody {
 		this.teamPointsIpTpr = teamPointsIpTpr;
 	}
 
+	public int getTop30Ip() {
+		return top30Ip;
+	}
+
+	public void setTop30Ip(int top30Ip) {
+		this.top30Ip = top30Ip;
+	}
+
 	public Parties getParties() {
 		return parties;
 	}
@@ -654,6 +665,14 @@ public class StylistBody {
 
 	public void setPayoutVia25(String payoutVia25) {
 		this.payoutVia25 = payoutVia25;
+	}
+
+	public String getCanceledAt() {
+		return canceledAt;
+	}
+
+	public void setCanceledAt(String canceledAt) {
+		this.canceledAt = canceledAt;
 	}
 
 }

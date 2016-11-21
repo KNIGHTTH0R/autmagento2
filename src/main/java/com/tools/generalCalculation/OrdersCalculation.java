@@ -21,20 +21,21 @@ public class OrdersCalculation {
 
 	// TODO change the name of the method - this method also applies on any
 	// month not only on previous
-	public static BigDecimal calculateTotalIpOnPreviousMonth(List<DBOrderModel> allOrdersList, String stylistId,
+	public static BigDecimal calculateTotalIpsForOrders(List<DBOrderModel> allOrdersList,
 			String createdStartDate, String createdEndDate) throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 		for (DBOrderModel order : allOrdersList) {
 			if (isOrderCompatibleForIpCalculation(order, createdStartDate, createdEndDate)) {
+				System.out.println(order.getIncrementId() + " " + order.getCreatedAt()+ " " + order.getPaidAt());
 				totalMonthIp = totalMonthIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
 		}
-		System.out.println("total IpOnPreviousMonth: " + String.valueOf(totalMonthIp));
+		System.out.println("total Ip: " + String.valueOf(totalMonthIp));
 		return totalMonthIp;
 	}
 
 	public static BigDecimal calculateTotalIpFromOrdersInTakeOfPeriod(List<DBOrderModel> allOrdersList,
-			String stylistId, String activationDate, String createdStartDate)
+			 String activationDate, String createdStartDate)
 					throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 		for (DBOrderModel order : allOrdersList) {
@@ -46,7 +47,7 @@ public class OrdersCalculation {
 		return totalMonthIp;
 	}
 
-	public static BigDecimal calculateTotalUnsafeIpOnCurrentMonth(List<DBOrderModel> allOrdersList, String stylistId,
+	public static BigDecimal calculateTotalUnsafeIp(List<DBOrderModel> allOrdersList,
 			String createdStartDate) throws NumberFormatException, ParseException {
 		BigDecimal totalMonthIp = BigDecimal.ZERO;
 

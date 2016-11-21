@@ -27,14 +27,14 @@ public class ClosedMonthBonusCalculation {
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
 		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList);
 		
-		BigDecimal ipForOrders = OrdersCalculation.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
-		BigDecimal ipForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
+		BigDecimal ipForOrders = OrdersCalculation.calculateTotalIpsForOrders(allOrdersList, startDate, endDate);
+		BigDecimal ipForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemos(completeCMList, startDate, endDate);
 
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
 
-		BigDecimal tobIpForOrders = OrdersCalculation.calculateTotalIpFromOrdersInTakeOfPeriod(allOrdersList, stylistId, activationDate, startDate);
-		BigDecimal tobIpForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemosInTakeOfPeriod(completeCMList, stylistId, activationDate, startDate);
+		BigDecimal tobIpForOrders = OrdersCalculation.calculateTotalIpFromOrdersInTakeOfPeriod(allOrdersList, activationDate, startDate);
+		BigDecimal tobIpForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemosInTakeOfPeriod(completeCMList, activationDate, startDate);
 
 		totalIpForTob = totalIpForTob.add(tobIpForOrders);
 		totalIpForTob = totalIpForTob.add(tobIpForCreditMemos);
@@ -56,12 +56,12 @@ public class ClosedMonthBonusCalculation {
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
 		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList);
 
-		BigDecimal ipForOrders = OrdersCalculation.calculateTotalIpOnPreviousMonth(allOrdersList, stylistId, startDate, endDate);
-		BigDecimal ipForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemos(completeCMList, stylistId, startDate, endDate);
+		BigDecimal ipForOrders = OrdersCalculation.calculateTotalIpsForOrders(allOrdersList ,startDate, endDate);
+		BigDecimal ipForCreditMemos = CreditMemoCalculation.calculateTotalIpsForCreditMemos(completeCMList, startDate, endDate);
 		totalIp = totalIp.add(ipForOrders);
 		totalIp = totalIp.add(ipForCreditMemos);
 
-		BigDecimal unsafeIpForOrders = OrdersCalculation.calculateTotalUnsafeIpOnCurrentMonth(allOrdersList, stylistId, endDate);
+		BigDecimal unsafeIpForOrders = OrdersCalculation.calculateTotalUnsafeIp(allOrdersList, endDate);
 
 		result.setIp(String.valueOf(totalIp.intValue()));
 		result.setUnsafeIp(String.valueOf(unsafeIpForOrders.intValue()));

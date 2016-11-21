@@ -11,7 +11,7 @@ import com.tools.utils.DateUtils;
 
 public class CreditMemoCalculation {
 
-	public static BigDecimal calculateTotalIpsForCreditMemos(List<DBCreditMemoModel> completeCMList, String stylistId, String createdStartDate, String createdEndDate)
+	public static BigDecimal calculateTotalIpsForCreditMemos(List<DBCreditMemoModel> completeCMList, String createdStartDate, String createdEndDate)
 			throws NumberFormatException, ParseException {
 
 		BigDecimal totalMonthRefundedIp = BigDecimal.ZERO;
@@ -20,15 +20,17 @@ public class CreditMemoCalculation {
 
 			if (isOrderCompatibleForDecreasingIp(order, createdStartDate, createdEndDate)) {
 				totalMonthRefundedIp = totalMonthRefundedIp.subtract(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
+				System.out.println(order.getOrderIncrementId()+ " " + order.getCreatedAt()+ " " + order.getOrderCreatedAt()+ " " + order.getOrderPaidAt());
 			}
 			if (isOrderCompatibleForIncreasingIp(order, createdStartDate, createdEndDate)) {
 				totalMonthRefundedIp = totalMonthRefundedIp.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIpRefunded())));
+				System.out.println(order.getOrderIncrementId()+ " " + order.getCreatedAt()+ " " + order.getOrderCreatedAt()+ " " + order.getOrderPaidAt());
 			}
 		}
 		return totalMonthRefundedIp;
 	}
 
-	public static BigDecimal calculateTotalIpsForCreditMemosInTakeOfPeriod(List<DBCreditMemoModel> completeCMList, String stylistId, String activationDate, String createdStartDate)
+	public static BigDecimal calculateTotalIpsForCreditMemosInTakeOfPeriod(List<DBCreditMemoModel> completeCMList, String activationDate, String createdStartDate)
 			throws NumberFormatException, ParseException {
 
 		BigDecimal totalMonthRefundedIp = BigDecimal.ZERO;
