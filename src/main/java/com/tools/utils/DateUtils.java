@@ -117,25 +117,6 @@ public class DateUtils {
 
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
-	
-//	public static String getFirstDayOfPreviousMonth(String dateString, String formatString) throws ParseException {
-//		DateFormat format = new SimpleDateFormat(formatString);
-//		Date date = format.parse(dateString);
-//
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.setTime(date);
-//		calendar.set(Calendar.DAY_OF_MONTH, -1);
-//		calendar.set(Calendar.DAY_OF_MONTH, 1);
-//		calendar.add(Calendar.DATE, -1);
-//		int year = calendar.get(Calendar.YEAR);
-//		int month = calendar.get(Calendar.MONTH);
-//		int day = calendar.get(Calendar.DATE);
-//		calendar.set(year, month, day, 00, 00, 00);
-//		Date firstDayOfMonth = calendar.getTime();
-//		DateFormat sdf = new SimpleDateFormat(formatString);
-//
-//		return String.valueOf(sdf.format(firstDayOfMonth));
-//	}
 
 	public static String getLastDayOfNextMonth(String formatString) throws ParseException {
 
@@ -220,11 +201,11 @@ public class DateUtils {
 		c1.setTime(startDate);
 		Calendar c2 = Calendar.getInstance();
 		c2.setTime(endDate);
-		
+
 		if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
 			c1.add(Calendar.DATE, 1);
 		}
-		
+
 		while (c2.after(c1) || c2.equals(c1)) {
 
 			if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
