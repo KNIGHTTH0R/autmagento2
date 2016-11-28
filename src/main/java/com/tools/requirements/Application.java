@@ -260,6 +260,8 @@ public class Application {
 	public class AvailabilityReport {
 		public class US26_1 {
 		}
+		public class US26_2 {
+		}
 	}
 
 	@Feature

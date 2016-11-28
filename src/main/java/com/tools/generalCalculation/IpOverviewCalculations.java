@@ -22,7 +22,8 @@ public class IpOverviewCalculations {
 
 	private static List<String> notPayedStatusesList = new ArrayList<String>(Arrays.asList("pending_payment", "payment_in_progress", "pending_payment_hold"));
 
-	public static IpOverviewModel calculateIpOverview(String stylistId, String month, String previousComissionRun, String lastComissionRun) throws NumberFormatException, ParseException {
+	public static IpOverviewModel calculateIpOverview(String stylistId, String month, String previousComissionRun, String lastComissionRun) throws NumberFormatException,
+			ParseException {
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
@@ -99,13 +100,13 @@ public class IpOverviewCalculations {
 			if (isReverseCharcheBackCurrentMonth(cm, month)) {
 				reverseChargeBacksCurrentMonth = reverseChargeBacksCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(cm.getTotalIpRefunded())));
 			}
-			if (isCharcheBackCurrentMonth(cm, month)) {
+			if (isChargeBackCurrentMonth(cm, month)) {
 				chargeBacksCurrentMonth = chargeBacksCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(cm.getTotalIpRefunded())));
 			}
 			if (isOpenChargeback(cm, month)) {
 				openChargebackPreviousAndCurrent = openChargebackPreviousAndCurrent.add(BigDecimal.valueOf(Double.parseDouble(cm.getTotalIpRefunded())));
 			}
-			if (isChargebackForCurrentMonth(cm, month)) {
+			if (isCreditMemoForCurrentMonth(cm, month)) {
 				chargebacks.add(populateIpOverViewReturnsListModel(cm));
 			}
 
@@ -134,6 +135,13 @@ public class IpOverviewCalculations {
 		return ipOverviewPaidOrdersModel;
 	}
 
+	private static boolean isOrderCompleteForCurrentMonth(DBOrderModel order, String month) throws ParseException {
+
+		return isPayed(order)
+				&& DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
+						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
+	}
+
 	private static IpOverViewReturnsListModel populateIpOverViewReturnsListModel(DBCreditMemoModel cm) {
 
 		IpOverViewReturnsListModel ipOverViewReturnsListModel = new IpOverViewReturnsListModel();
@@ -153,17 +161,9 @@ public class IpOverviewCalculations {
 
 	private static boolean isOrderCompleteForCurrentMonth(DBOrderModel order, String month, String lastComissionRun) throws ParseException {
 
-		return isPayed(order)
-				&& DateUtils.isDateBefore(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
-				&& DateUtils.isDateBeetween(order.getPaidAt(), lastComissionRun,
-						DateUtils.getCurrentDate(DateConstants.FORMAT),DateConstants.FORMAT);
+		return isPayed(order) && DateUtils.isDateBefore(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
+				&& DateUtils.isDateBeetween(order.getPaidAt(), lastComissionRun, DateUtils.getCurrentDate(DateConstants.FORMAT), DateConstants.FORMAT);
 
-	}
-
-	private static boolean isChargebackForCurrentMonth(DBCreditMemoModel cm, String month) throws ParseException {
-
-		return DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
-				DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
 	}
 
 	private static boolean isOrderCompatibleForIpCalculationPrevMonth(DBOrderModel order, String month) throws ParseException {
@@ -182,20 +182,6 @@ public class IpOverviewCalculations {
 				&& DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
 						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
 				&& DateUtils.isDateBeetween(order.getPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), month, DateConstants.FORMAT);
-	}
-
-	private static boolean isReverseCharcheBackCurrentMonth(DBCreditMemoModel cm, String month) throws ParseException {
-
-		return cm.getState().contentEquals("3")
-				&& DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
-						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
-	}
-
-	private static boolean isCharcheBackCurrentMonth(DBCreditMemoModel cm, String month) throws ParseException {
-
-		return cm.getState().contentEquals("2")
-				&& DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
-						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
 	}
 
 	private static boolean isOpenIpsCurrentMonth(DBOrderModel order, String month) throws ParseException {
@@ -237,6 +223,26 @@ public class IpOverviewCalculations {
 				&& DateUtils.isDateBeetween(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
 						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
 				&& DateUtils.isDateAfter(order.getScheduledDeliveryDate(), DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
+	}
+
+	private static boolean isReverseCharcheBackCurrentMonth(DBCreditMemoModel cm, String month) throws ParseException {
+
+		return cm.getState().contentEquals("3")
+				&& DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
+						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
+	}
+
+	private static boolean isChargeBackCurrentMonth(DBCreditMemoModel cm, String month) throws ParseException {
+
+		return cm.getState().contentEquals("2")
+				&& DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
+						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
+	}
+	
+	private static boolean isCreditMemoForCurrentMonth(DBCreditMemoModel cm, String month) throws ParseException {
+		
+		return DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
+						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
 	}
 
 	/**

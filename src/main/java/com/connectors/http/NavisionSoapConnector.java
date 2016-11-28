@@ -6,6 +6,7 @@ import javax.xml.soap.MessageFactory;
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPConnection;
 import javax.xml.soap.SOAPConnectionFactory;
+import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
@@ -37,12 +38,16 @@ public class NavisionSoapConnector {
 
 	}
 
-	private static SOAPMessage getComp() throws SOAPException, IOException {
+	private static SOAPMessage getOrdersListRequest(String orderIncrementId) throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		soapBody.addChildElement(NavSoapKeys.COMPANIES, NavSoapKeys.URN_PREFIX);
-
+		SOAPElement readMultiple = soapBody.addChildElement(NavSoapKeys.READ_MULTIPLE, NavSoapKeys.URN_PREFIX);
+		SOAPElement filter = readMultiple.addChildElement(NavSoapKeys.FILTER, NavSoapKeys.URN_PREFIX);
+		SOAPElement field = filter.addChildElement(NavSoapKeys.FIELD, NavSoapKeys.URN_PREFIX);
+		field.addTextNode("No");
+		SOAPElement criteria = filter.addChildElement(NavSoapKeys.CRITERIA, NavSoapKeys.URN_PREFIX);
+		criteria.addTextNode(orderIncrementId);
 		soapMessage.saveChanges();
 
 		System.out.print("Request SOAP Message:");
@@ -52,11 +57,11 @@ public class NavisionSoapConnector {
 		return soapMessage;
 	}
 
-	public static SOAPMessage getCompanies() throws SOAPException, IOException {
+	public static SOAPMessage getOrdersList(String filterValue) throws SOAPException, IOException {
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getComp(), NavSoapKeys.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(filterValue), NavSoapKeys.API_URI);
 
 		return soapResponse;
 	}

@@ -350,9 +350,4 @@ public class ProductDetailedModel {
 	public void setJewelryBonusCart(String jewelryBonusCart) {
 		this.jewelryBonusCart = jewelryBonusCart;
 	}
-
-	public String toString() {
-		return sku + ", " + name;
-
-	}
 }

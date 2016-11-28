@@ -3,11 +3,14 @@ package com.steps.frontend;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.tools.constants.ContextConstants;
 import com.tools.data.soap.ProductDetailedModel;
@@ -81,8 +84,6 @@ public class ReportsSteps extends AbstractSteps {
 	@Step
 	@Screenshots(onlyOnFailures = true)
 	public void verifyAsteriscNextToAvDate(ProductDetailedModel model) throws ParseException {
-		System.out.println(DateUtils.parseDate(model.getStockData().getEarliestAvailability(), "yyyy-MM-dd", "dd. MMMM",
-								new Locale.Builder().setLanguage(MongoReader.getContext()).build()) + " ***");
 		Assert.assertTrue("The product is not marked correctly",
 				getProductLine(model.getSku()).contains(
 						DateUtils.parseDate(model.getStockData().getEarliestAvailability(), "yyyy-MM-dd", "dd. MMMM",
@@ -97,7 +98,7 @@ public class ReportsSteps extends AbstractSteps {
 		Assert.assertTrue("The product is not marked correctly",
 				line.contains(DateUtils.parseDate(model.getStockData().getEarliestAvailability(), "yyyy-MM-dd",
 						"dd. MMMM", new Locale.Builder().setLanguage(MongoReader.getContext()).build()))
-						&& !line.contains("***"));
+				&& !line.contains("***"));
 	}
 
 	@Title("Verify product has no * next to will be announced status")
@@ -145,11 +146,16 @@ public class ReportsSteps extends AbstractSteps {
 		}
 		return searchedLine;
 	}
-	
-	
+
 	@Step
 	public void clickOnTeamReports() {
 		reportsPage().clickOnTeamReports();
+	}
+
+	@Step
+	public void clickOnMobileVersionOfAvList() {
+		reportsPage().clickOnMobileVersionOfAvList();
+
 	}
 
 }

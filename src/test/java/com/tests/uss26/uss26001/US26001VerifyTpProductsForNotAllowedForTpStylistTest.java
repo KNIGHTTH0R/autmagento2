@@ -1,4 +1,4 @@
-package com.tests.uss26;
+package com.tests.uss26.uss26001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +34,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US26.1 Check products in availability report", type = "Scenarios")
 @Story(Application.AvailabilityReport.US26_1.class)
 @RunWith(SerenityRunner.class)
-public class US26001VerifyTpProductsForAllowedForTpStylistTest extends BaseTest {
+public class US26001VerifyTpProductsForNotAllowedForTpStylistTest extends BaseTest {
 
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
@@ -60,7 +60,7 @@ public class US26001VerifyTpProductsForAllowedForTpStylistTest extends BaseTest 
 		StockDataModel stockData;
 
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setName("AV_REPORT_AUT_" + genProduct1.getName());
+		genProduct1.setName("AV_REPORT_AUT1_" + genProduct1.getName());
 		stockData = MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd"));
 		stockData.setMinQty("-10");
 		stockData.setIsInStock("1");
@@ -69,7 +69,7 @@ public class US26001VerifyTpProductsForAllowedForTpStylistTest extends BaseTest 
 		MagentoProductCalls.createApiProduct(genProduct1);
 
 		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setName("AV_REPORT_AUT_" + genProduct2.getName());
+		genProduct2.setName("AV_REPORT_AUT2_" + genProduct2.getName());
 		stockData = MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd"));
 		stockData.setQty("-10");
 		stockData.setMinQty("-10");
@@ -78,10 +78,10 @@ public class US26001VerifyTpProductsForAllowedForTpStylistTest extends BaseTest 
 		MagentoProductCalls.createApiProduct(genProduct2);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setName("AV_REPORT_AUT_" + genProduct3.getName());
+		genProduct3.setName("AV_REPORT_AUT3_" + genProduct3.getName());
 		stockData = MagentoProductCalls.createNotAvailableYetStockData("");
-		stockData.setQty("-5");
-		stockData.setMinQty("-10");
+		stockData.setQty("0");
+		stockData.setMinQty("0");
 		stockData.setIsInStock("0");
 		stockData.setIsDiscontinued("0");
 		genProduct3.setStockData(stockData);
@@ -93,8 +93,8 @@ public class US26001VerifyTpProductsForAllowedForTpStylistTest extends BaseTest 
 		try {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss26" + File.separator + "us26001.properties");
 			prop.load(input);
-			stylistUsername = prop.getProperty("stylistUsername");
-			stylistPassword = prop.getProperty("stylistPassword");
+			stylistUsername = prop.getProperty("noTpStylistUsername");
+			stylistPassword = prop.getProperty("noTpStylistPassword");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -110,10 +110,13 @@ public class US26001VerifyTpProductsForAllowedForTpStylistTest extends BaseTest 
 	}
 
 	@Test
-	public void us26001VerifyTpProductsForAllowedForTpStylistTest() throws IOException, ParseException {
+	public void us26001VerifyTpProductsForNotAllowedForTpStylistTest() throws IOException, ParseException {
 
+		
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
-//		frontEndSteps.performLogin("irina.neagu@evozon.com", "irina1");
+		//pentru upgrade
+//		frontEndSteps.performLogin("fdirector@rhyta.com", "emilian1");
+		
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -121,8 +124,8 @@ public class US26001VerifyTpProductsForAllowedForTpStylistTest extends BaseTest 
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
-//		reportsSteps.verifyTpInfoMessage(true);
-		reportsSteps.verifyAsteriscNextToAvDate(genProduct1);
+//		reportsSteps.verifyTpInfoMessage(false);
+		reportsSteps.verifyNoAsteriscNextToAvDate(genProduct1);
 		reportsSteps.verifyNoAsteriscNextToAvDate(genProduct2);
 		reportsSteps.verifyNoAsteriscNextToWillBeAnnouncedStatus(genProduct3);
 	}

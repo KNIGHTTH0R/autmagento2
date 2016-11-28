@@ -13,11 +13,12 @@ public class ReportsPage extends AbstractPage {
 
 	@FindBy(css = "li a[href*='stylereports/order/ipsreport/']")
 	private WebElement ipReportsLink;
-	
+
 	@FindBy(css = "li a[href*='stylereports/order/myteam/']")
 	private WebElement teamReportsLink;
-	
-	
+
+	@FindBy(css = "li a[href*='stock?']")
+	private WebElement mobileVersion;
 
 	public void downloadProductsOrderedBySku() {
 		element(downloadBySkuLink).waitUntilVisible();
@@ -29,10 +30,17 @@ public class ReportsPage extends AbstractPage {
 		element(ipReportsLink).waitUntilVisible();
 		ipReportsLink.click();
 	}
-	
+
 	public void clickOnTeamReports() {
 		element(teamReportsLink).waitUntilVisible();
 		teamReportsLink.click();
+	}
+
+	public void clickOnMobileVersionOfAvList() {
+		
+		element(mobileVersion).waitUntilVisible();
+		mobileVersion.click();
+
 	}
 
 }

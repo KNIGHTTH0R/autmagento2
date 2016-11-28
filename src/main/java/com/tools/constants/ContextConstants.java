@@ -7,6 +7,7 @@ public class ContextConstants {
 	public static final String CONTEXT_ERROR_MESSAGE = MongoReader.getDictionaryItem("CONTEXT_ERROR_MESSAGE");
 	public static final String NOT_AVAILABLE = MongoReader.getDictionaryItem("NOT_AVAILABLE");
 	public static final String NOT_AVAILABLE_FOR_THE_MOMENT = MongoReader.getDictionaryItem("NOT_AVAILABLE_FOR_THE_MOMENT");
+	public static final String WILL_BE_ANNOUNCED_MOBILE = MongoReader.getDictionaryItem("NOT_AVAILABLE_FOR_THE_MOMENT_MOBILE");;
 	public static String REMOVE_MESSAGE_ADVICE = MongoReader.getDictionaryItem("REMOVE_MESSAGE_ADVICE");
 	public static String ADD_TO_CART = MongoReader.getDictionaryItem("ADD_TO_CART");
 	public static String ADD_TO_CART_POM = MongoReader.getDictionaryItem("ADD_TO_CART_POM");
@@ -124,7 +125,16 @@ public class ContextConstants {
 	
 	public static String ERROR_MESSAGE_FOR_JB = MongoReader.getDictionaryItem("ERROR_MESSAGE_FOR_JB");
 	
-	
+	public static final String CATALOG_P= MongoReader.getDictionaryItem("CATALOG_PAGE_SHORT");
+	public static final String CATALOG_PAGE = MongoReader.getDictionaryItem("CATALOG_PAGE");
+	public static final String CATALOG_ROW = MongoReader.getDictionaryItem("CATALOG_ROW");
+	public static final String PRODUCTS_BACK_IN_STOCK= MongoReader.getDictionaryItem("PRODUCTS_BACK_IN_STOCK");
+	public static final String TEMPORARLY_NOT_AVAILABLE= MongoReader.getDictionaryItem("TEMPORARLY_NOT_AVAILABLE");
+	public static final String NO_LONGER_AVAILABLE= MongoReader.getDictionaryItem("NO_LONGER_AVAILABLE");
+	public static final String NECKLACES= MongoReader.getDictionaryItem("NECKLACES");
+	public static final String RINGS= MongoReader.getDictionaryItem("RINGS");
+	public static final String BRECELETES= MongoReader.getDictionaryItem("BRECELETES");
+	public static final String EARRINGS= MongoReader.getDictionaryItem("EARRINGS");
 	
 
 	

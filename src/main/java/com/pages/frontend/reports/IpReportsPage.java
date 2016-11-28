@@ -194,10 +194,5 @@ public class IpReportsPage extends AbstractPage {
 		
 	}
 
-	/*
-	 * public static boolean isElementPresent(String p) { boolean present; try {
-	 * 
-	 * driver.findElement(by); present = true; }catch (NoSuchElementException e)
-	 * { present = false; } return present; }
-	 */
+	
 }

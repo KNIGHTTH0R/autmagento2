@@ -372,6 +372,12 @@ public class BackEndSteps extends AbstractSteps {
 	public void clickOnSystemConfiguration() {
 		navigationPage().selectSubmenu("system_config");
 	}
+
+	@Step
+	public void goToHomePage() {
+		navigationPage().goToHomePage();
+	
+	}
 	
 	
 //	@Step

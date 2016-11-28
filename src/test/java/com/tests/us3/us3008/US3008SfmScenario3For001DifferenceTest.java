@@ -93,8 +93,6 @@ public class US3008SfmScenario3For001DifferenceTest extends BaseTest {
 		genProduct1.setPrice("39.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		
-
-		
 		Properties prop = new Properties();
 		InputStream input = null;
 

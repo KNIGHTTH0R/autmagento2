@@ -108,6 +108,7 @@ import com.pages.frontend.registration.landing.LandingCustomerAllocationPage;
 import com.pages.frontend.registration.landing.ThankYouPage;
 import com.pages.frontend.registration.party.CreateNewContactPage;
 import com.pages.frontend.registration.widget.RegisterLandingPage;
+import com.pages.frontend.reports.AvailabilityReportPage;
 import com.pages.frontend.reports.IpReportsPage;
 import com.pages.frontend.reports.JewelryBonusHistoryPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
@@ -177,7 +178,7 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 	}
-	
+
 	public void switchToNewestOpenedTab() {
 		Set<String> winSet = getDriver().getWindowHandles();
 		List<String> winList = new ArrayList<String>(winSet);
@@ -200,11 +201,10 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().navigate().refresh();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
-	
+
 	public void openNewTab() {
 		abstractPage().openNewTab();
 	}
-
 
 	public void waitCertainTime(long time) {
 		waitABit(time);
@@ -469,6 +469,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public ReportsPage reportsPage() {
 		return getPages().currentPageAt(ReportsPage.class);
+	}
+
+	public AvailabilityReportPage availabilityReportPage() {
+		return getPages().currentPageAt(AvailabilityReportPage.class);
 	}
 
 	public RegistrationMessagePage registrationMessagePage() {
