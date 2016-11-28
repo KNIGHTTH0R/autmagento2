@@ -12,6 +12,25 @@ public class DBOrderModel {
 	private String grandTotal;
 	private String totalIp;
 	private String totalIpRefunded;
+	private String termPurchaseType;
+	private String orderCustomerName;
+	private String scheduledDeliveryDate;
+
+	public String getScheduledDeliveryDate() {
+		return scheduledDeliveryDate;
+	}
+
+	public void setScheduledDeliveryDate(String scheduledDeliveryDate) {
+		this.scheduledDeliveryDate = scheduledDeliveryDate;
+	}
+
+	public String getOrderCustomerName() {
+		return orderCustomerName;
+	}
+
+	public void setOrderCustomerName(String orderCustomerName) {
+		this.orderCustomerName = orderCustomerName;
+	}
 
 	public String getIncrementId() {
 		return incrementId;
@@ -91,6 +110,14 @@ public class DBOrderModel {
 
 	public void setPaidAt(String paidAt) {
 		this.paidAt = paidAt;
+	}
+
+	public String getTermPurchaseType() {
+		return termPurchaseType;
+	}
+
+	public void setTermPurchaseType(String termPurchaseType) {
+		this.termPurchaseType = termPurchaseType;
 	}
 
 }

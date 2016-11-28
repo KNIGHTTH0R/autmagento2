@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,20 +26,16 @@ import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
-import com.tools.data.IpOverViewIpCorrectionModel;
 import com.tools.data.IpOverViewOpenIpsModel;
 import com.tools.data.IpOverViewPayedOrdersModel;
 import com.tools.data.IpOverViewReturnsListModel;
 import com.tools.data.IpOverViewSummaryModel;
+import com.tools.data.IpOverviewModel;
+import com.tools.generalCalculation.IpOverviewCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.reports.IpReportValidationWorkflow;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US30.1 Verify Ip Overview Report", type = "Scenarios")
 @Story(Application.IpReport.US30_1.class)
@@ -59,6 +60,10 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 	private String stylistUsername, stylistPassword;
 	private String reportMonth;
 
+	IpOverviewModel expectedIpOverviewModel;
+	List<IpOverViewPayedOrdersModel> expectedOrdersList;
+	List<IpOverViewReturnsListModel> expectedReturns;
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -67,12 +72,11 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(
-					UrlConstants.RESOURCES_PATH + FilePaths.US_30_FOLDER + File.separator + "us30001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_30_FOLDER + File.separator + "us30001.properties");
 			prop.load(input);
 			stylistUsername = prop.getProperty("username");
 			stylistPassword = prop.getProperty("password");
-			reportMonth= prop.getProperty("reportMonth");
+			reportMonth = prop.getProperty("reportMonth");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -85,13 +89,10 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 				}
 			}
 		}
-		
-		//IpOverViewSummaryModel expectedSummaryModel = Calculation.calculateIpOverViewSummaryModel(stylistId,month);
-		//IpOverViewOpenIpsModel expectedOpenIpsModel = Calculation.calculateIpOverViewOpenIpsModel(stylistId,month);
-		//List<IpOverViewPayedOrdersModel> expectedPayedOrdersModel = Calculation.calculatePaidOrders(stylistId,month);
-		// same for refunds
-		//manual corections ???????
-		
+
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513", "2016-11-11","2016-11-11","" );
+		expectedOrdersList = expectedIpOverviewModel.getPayedOrders();
+		expectedReturns = expectedIpOverviewModel.getReturns();
 
 	}
 
@@ -103,9 +104,8 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 		}
 		headerSteps.redirectToStylistReports();
 		reportsSteps.clickOnIpReports();
-	
-		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd HH:mm:ss", "yyyy-MMM",
-				new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+
+		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd HH:mm:ss", "yyyy-MMM", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 
 		IpOverViewSummaryModel grabbedSummaryModel = ipReportsSteps.getIpOverviewSummaryModel();
 
@@ -115,7 +115,11 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 
 		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
 
-		List<IpOverViewIpCorrectionModel> grabbedIpCorrectionModel = ipReportsSteps.getIpCorrectionModel();
+
+		ipReportsSteps.validateIpOverViewSummaryModel(expectedIpOverviewModel, grabbedSummaryModel);
+		ipReportsSteps.validateOpenIps(expectedIpOverviewModel, grabbedOpenIpsModel);
+		ipReportsSteps.validateIpOverViewPayedOrdersModelList(expectedOrdersList, grabbedPayedOrdersModel);
+		ipReportsSteps.validateIpOverViewRefundAndReturnsModelList(expectedReturns, grabbedReturnsListModel);
 
 	}
 }
