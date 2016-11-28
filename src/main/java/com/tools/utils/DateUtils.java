@@ -480,7 +480,8 @@ public class DateUtils {
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
 		// System.out.println(DateUtils.getLastDayOfAGivenMonth("2016-09-30
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
-		System.out.println(DateUtils.getFridaysBetweenDates("2016-11-11", "2016-12-24", "yyyy-MM-dd"));
+	//	System.out.println(DateUtils.getFridaysBetweenDates("2016-11-11", "2016-12-24", "yyyy-MM-dd"));
+		System.out.println(DateUtils.parseDate("2016-12-15", "yyyy-MM-dd", "dd. MM."));
 	}
 
 }

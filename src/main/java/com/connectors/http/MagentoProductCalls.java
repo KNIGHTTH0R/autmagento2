@@ -163,8 +163,6 @@ public class MagentoProductCalls {
 
 		return result;
 	}
-	
-	
 
 	public static ProductDetailedModel createStarterKitProductModel() {
 		ProductDetailedModel result = createProductModel();
@@ -226,8 +224,17 @@ public class MagentoProductCalls {
 		product.setWebsiteIdsArray(webSiteIds);
 
 		List<String> categoriesIds = new ArrayList<String>();
-		categoriesIds.add("43");
+		/*
+		 * categoriesIds.add("43"); categoriesIds.add("5");
+		 * categoriesIds.add("5"); categoriesIds.add("5");
+		 * categoriesIds.add("5");
+		 */
+
 		categoriesIds.add("5");
+		categoriesIds.add("6");
+		categoriesIds.add("8");
+		categoriesIds.add("7");
+		categoriesIds.add("43");
 		product.setCategoryIdsArray(categoriesIds);
 
 		List<String> cartIds = new ArrayList<String>();

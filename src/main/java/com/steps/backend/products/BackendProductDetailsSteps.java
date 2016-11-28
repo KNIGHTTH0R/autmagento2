@@ -28,4 +28,22 @@ public class BackendProductDetailsSteps extends AbstractSteps {
 
 	}
 
+	@Step
+	public void addCatalogPage(String page) {
+		backendProductDetailsPage().addCatalogPage(page);
+		
+	}
+
+	@Step
+	public void addCatalogRow(String row) {
+		backendProductDetailsPage().addCatalogRow(row);
+		
+	}
+
+	@Step
+	public void saveAndContinue() {
+		backendProductDetailsPage().saveAndContinueEdit();
+		
+	}
+
 }

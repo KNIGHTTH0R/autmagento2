@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 public class BackendProductListPage extends AbstractPage {
@@ -20,7 +21,7 @@ public class BackendProductListPage extends AbstractPage {
 
 	@FindBy(css = "table#productGrid_table tbody")
 	private WebElement listContainer;
-
+	
 	public void inputSku(String sku) {
 		evaluateJavascript("jQuery.noConflict();");
 		productSkuInput.clear();
@@ -47,4 +48,6 @@ public class BackendProductListPage extends AbstractPage {
 			}
 		}
 	}
+
+	
 }

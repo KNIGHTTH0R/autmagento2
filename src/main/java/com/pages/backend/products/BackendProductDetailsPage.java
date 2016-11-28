@@ -40,6 +40,12 @@ public class BackendProductDetailsPage extends AbstractPage {
 	
 	@FindBy(css = "button[onclick='bSelection.productGridAddSelected(event)']")
 	private WebElement addSelectedProductToOption;
+	
+	@FindBy(id = "catalog_page_number")
+	private WebElement catalogPage;
+	
+	@FindBy(id = "catalog_row_number")
+	private WebElement catalogRow;
 
 	public void selectOptionFromProductMenu(String searchedOption) {
 		evaluateJavascript("jQuery.noConflict();");
@@ -105,4 +111,19 @@ public class BackendProductDetailsPage extends AbstractPage {
 		addSelectedProductToOption.click();
 		waitABit(1000);
 	}
+	
+	
+	public void addCatalogPage(String page) {
+		catalogPage.clear();
+		element(catalogPage).sendKeys(page);
+		
+	}
+	
+	public void addCatalogRow(String page) {
+		catalogRow.clear();
+		element(catalogRow).sendKeys(page);
+		
+	}
+
+	
 }

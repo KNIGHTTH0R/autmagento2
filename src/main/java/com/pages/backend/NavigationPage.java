@@ -23,6 +23,9 @@ public class NavigationPage extends AbstractPage {
 	@FindBy(id = "message-popup-window")
 	private WebElement popUpWindow;
 
+	@FindBy(css = ".header-top img[src*='logo']")
+	private WebElement adminHomePage;
+
 	public void dismissPopUp() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(popUpWindow).waitUntilVisible();
@@ -65,5 +68,11 @@ public class NavigationPage extends AbstractPage {
 				break;
 			}
 		}
+	}
+
+	public void goToHomePage() {
+		element(adminHomePage).waitUntilVisible();
+		adminHomePage.click();
+
 	}
 }

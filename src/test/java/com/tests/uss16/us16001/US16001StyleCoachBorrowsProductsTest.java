@@ -93,12 +93,13 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 
+
 	@Before
 	public void setUp() throws Exception {
 		BorrowCartCalculator.wipe();
 		BorrowDataGrabber.wipe();
 		DataGrabber.wipe();
-
+		
 //		genProduct1 = MagentoProductCalls.createProductModel();
 //		genProduct1.setPrice("49.90");
 //		MagentoProductCalls.createApiProduct(genProduct1);
@@ -198,6 +199,7 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 		borrowCartValidationWorkflows.performBorrowCartValidations();
 
 		customVerifications.printErrors();
+	
 	}
 
 	@After
