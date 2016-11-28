@@ -12,6 +12,7 @@ public class DBOrderModel {
 	private String grandTotal;
 	private String totalIp;
 	private String totalIpRefunded;
+	private String termPurchaseType;
 
 	public String getIncrementId() {
 		return incrementId;
@@ -91,6 +92,14 @@ public class DBOrderModel {
 
 	public void setPaidAt(String paidAt) {
 		this.paidAt = paidAt;
+	}
+
+	public String getTermPurchaseType() {
+		return termPurchaseType;
+	}
+
+	public void setTermPurchaseType(String termPurchaseType) {
+		this.termPurchaseType = termPurchaseType;
 	}
 
 }

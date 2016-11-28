@@ -3,10 +3,14 @@ package com.tools.constants;
 public class NavSoapKeys {
 	
 	// General keys
-	public static final String URN_PREFIX = "sys";
+	public static final String URN_PREFIX = "sal";
 	public static final String SOAP_PREFIX = "soapenv";
-	public static final String SERVER_URI = "urn:microsoft-dynamics-schemas/nav/system/";
-	public static final String COMPANIES = "Companies";
-	public static final String API_URI = "http://148.251.178.207:7061/PjAutomation/WS/PippaJeanAut/SystemService";
+	public static final String SERVER_URI = "urn:microsoft-dynamics-schemas/page/salesorder";
+	public static final String READ_MULTIPLE = "ReadMultiple";
+	public static final String FILTER = "filter";
+	public static final String FIELD = "Field";
+	public static final String CRITERIA = "Criteria";
+	public static final String NO = "No";
+	public static final String API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/SalesOrder";
 
 }

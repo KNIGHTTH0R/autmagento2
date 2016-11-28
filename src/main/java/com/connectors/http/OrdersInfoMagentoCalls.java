@@ -177,7 +177,6 @@ public class OrdersInfoMagentoCalls {
 		for (int i = 0; i < orderList.getLength(); i++) {
 			if (orderList.item(i).getParentNode().getNodeName().equalsIgnoreCase("result")) {
 				DBOrderModel model = new DBOrderModel();
-
 				model.setTotalIp("0");
 				model.setPaidAt("2010-01-21 11:45:03");
 
@@ -210,6 +209,9 @@ public class OrdersInfoMagentoCalls {
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("cart_type")) {
 						model.setCartType(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("term_purchase_type")) {
+						model.setTermPurchaseType(childNodes.item(j).getTextContent());
 					}
 				}
 				orderModelList.add(model);
