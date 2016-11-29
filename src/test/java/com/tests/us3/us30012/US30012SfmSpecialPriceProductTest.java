@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.junit.After;
@@ -87,11 +89,17 @@ public class US30012SfmSpecialPriceProductTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 
 	private ProductDetailedModel genProduct1;
+	
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
+		
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(17);
+//		genProduct1.setPrice(genProduct1.getSpecialPrice());
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("120.00");
