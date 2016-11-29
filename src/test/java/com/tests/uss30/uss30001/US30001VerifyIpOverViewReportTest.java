@@ -8,11 +8,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +31,11 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.reports.IpReportValidationWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US30.1 Verify Ip Overview Report", type = "Scenarios")
 @Story(Application.IpReport.US30_1.class)
@@ -90,7 +90,7 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 			}
 		}
 
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513", "2016-11-11","2016-11-11","" );
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513", "2016-11-11","2016-11-11","");
 		expectedOrdersList = expectedIpOverviewModel.getPayedOrders();
 		expectedReturns = expectedIpOverviewModel.getReturns();
 
@@ -108,11 +108,8 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd HH:mm:ss", "yyyy-MMM", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 
 		IpOverViewSummaryModel grabbedSummaryModel = ipReportsSteps.getIpOverviewSummaryModel();
-
 		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModel();
-
 		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
-
 		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
 
 

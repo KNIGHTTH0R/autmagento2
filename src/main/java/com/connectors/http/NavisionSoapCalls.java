@@ -47,17 +47,21 @@ public class NavisionSoapCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("No")) {
 						model.setIncrementId(childNodes.item(j).getTextContent());
 					}
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("SalesLines")) {
+//					more repetition foreach field
+//					if (childNodes.item(j).getNodeName().equalsIgnoreCase("No")) {
+//						model.setIncrementId(childNodes.item(j).getTextContent());
+//					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("SalesLines")) {    
 
 						List<NavOrderLinesModel> orderLinesModel = new ArrayList<NavOrderLinesModel>();
 
-						NodeList orderLinesList = childNodes.item(j).getChildNodes();
+						NodeList orderLinesList = childNodes.item(j).getChildNodes(); 
 						
 						for (int k = 0; k < orderLinesList.getLength(); k++) {
 
 							NavOrderLinesModel line = new NavOrderLinesModel();
 
-							NodeList lineNodes = orderLinesList.item(k).getChildNodes();
+							NodeList lineNodes = orderLinesList.item(k).getChildNodes(); 
 
 							for (int l = 0; l < lineNodes.getLength(); l++) {
 
