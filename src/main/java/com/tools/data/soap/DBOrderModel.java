@@ -1,5 +1,11 @@
 package com.tools.data.soap;
 
+import java.util.List;
+
+import com.tools.data.IpOverViewPayedOrdersModel;
+import com.tools.data.navision.SalesOrderInfoModel;
+
+
 public class DBOrderModel {
 
 	private String incrementId;
@@ -15,9 +21,18 @@ public class DBOrderModel {
 	private String termPurchaseType;
 	private String orderCustomerName;
 	private String scheduledDeliveryDate;
+	private List<SalesOrderInfoModel> itemInfo;
 
 	public String getScheduledDeliveryDate() {
 		return scheduledDeliveryDate;
+	}
+
+	public List<SalesOrderInfoModel> getItemInfo() {
+		return itemInfo;
+	}
+
+	public void setItemInfo(List<SalesOrderInfoModel> itemInfo) {
+		this.itemInfo = itemInfo;
 	}
 
 	public void setScheduledDeliveryDate(String scheduledDeliveryDate) {
