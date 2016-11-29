@@ -114,8 +114,7 @@ public class US80010CustomerOrderSpecialCaseTest extends BaseTest {
 //		genProduct3.setPrice("10.00");
 //		MagentoProductCalls.createApiProduct(genProduct3);
 		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		
+//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 //		genProduct1 = createdProductsList.get(1);
 
 		Properties prop = new Properties();
