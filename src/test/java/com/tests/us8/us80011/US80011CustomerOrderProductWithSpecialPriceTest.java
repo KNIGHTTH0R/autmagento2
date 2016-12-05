@@ -105,18 +105,10 @@ public class US80011CustomerOrderProductWithSpecialPriceTest extends BaseTest {
 		genProduct1.setSpecialPrice("50.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct1.setPrice(genProduct1.getSpecialPrice());
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
-		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		
-//		genProduct1 = createdProductsList.get(1);
+	
+//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(17);
+	//	genProduct1.setPrice(genProduct1.getSpecialPrice());
 
 		Properties prop = new Properties();
 		InputStream input = null;

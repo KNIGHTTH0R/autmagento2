@@ -111,10 +111,9 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct1.setPrice(genProduct1.getSpecialPrice());
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		
-//		genProduct1 = createdProductsList.get(1);
-		
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(17);
+//		genProduct1.setPrice(genProduct1.getSpecialPrice());
 
 		Properties prop = new Properties();
 		InputStream input = null;

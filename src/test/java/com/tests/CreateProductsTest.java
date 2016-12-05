@@ -44,6 +44,8 @@ public class CreateProductsTest extends BaseTest {
 	private ProductDetailedModel genProduct15 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct16 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct17 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct18 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct19 = new ProductDetailedModel();
     String voucherValue;
 	
 	@Steps
@@ -164,6 +166,20 @@ public class CreateProductsTest extends BaseTest {
 		genProduct17.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct17);
 		productsList.add(genProduct17);
+		
+		genProduct18 = MagentoProductCalls.createProductModel();
+		genProduct18.setPrice("120.00");
+		genProduct18.setSpecialPrice("100.00");
+		MagentoProductCalls.createApiProduct(genProduct18);
+		productsList.add(genProduct18);
+		
+		genProduct19 = MagentoProductCalls.createProductModel();
+		genProduct19.setPrice("449.50");
+		MagentoProductCalls.createApiProduct(genProduct19);
+		productsList.add(genProduct19);
+		
+		
+		
 		
 		System.out.println("size " + productsList.size());
 		System.out.println(productsList.get(0));

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
+
 import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
@@ -43,6 +46,9 @@ import com.pages.external.mailchimp.MailchimpListsPage;
 import com.pages.external.mailchimp.MailchimpLoginPage;
 import com.pages.external.mailchimp.MailchimpSearchPage;
 import com.pages.external.mailchimp.MailchimpSubscriberProfilePage;
+import com.pages.external.navision.NavisionHomePage;
+import com.pages.external.navision.NavisionSearchPage;
+import com.pages.external.navision.NavisionSyncDashboardPage;
 import com.pages.external.unbounce.UnbounceDykscPage;
 import com.pages.external.unbounce.UnbouncePage;
 import com.pages.external.unbounce.UnbounceRegSuccesPage;
@@ -116,9 +122,6 @@ import com.pages.frontend.reports.TeamReportPage;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
-
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -735,5 +738,19 @@ public class AbstractSteps extends ScenarioSteps {
 	}
 
 	// ------------------------- Common methods
-
+	public NavisionHomePage navisionHomePage() {
+		return getPages().currentPageAt(NavisionHomePage.class);
+	}
+	
+	public NavisionSearchPage navisionSearchPage() {
+		return getPages().currentPageAt(NavisionSearchPage.class);
+	}
+	
+	public NavisionSyncDashboardPage navisionSyncDashboardPage() {
+		return getPages().currentPageAt(NavisionSyncDashboardPage.class);
+	}
+	
+	
+	
+	
 }
