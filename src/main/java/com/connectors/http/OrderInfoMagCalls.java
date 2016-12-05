@@ -22,15 +22,15 @@ import com.tools.data.soap.DBOrderModel;
 
 public class OrderInfoMagCalls {
 
-	public static DBOrderModel getOrdersInfo(String orderIncrementId) {
+	public static DBOrderModel getOrdersInfo(String orderIncrementId,String sessionId) {
 
-		DBOrderModel orderList = new DBOrderModel();
+		DBOrderModel order = new DBOrderModel();
 
 		try {
-			SOAPMessage response = soapGetOrdersInfo(orderIncrementId);
+			SOAPMessage response = soapGetOrdersInfo(orderIncrementId,sessionId);
 			System.out.println(response);
 			try {
-				orderList = extractOrderInfoData(response);
+				order = extractOrderInfoData(response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -41,17 +41,17 @@ public class OrderInfoMagCalls {
 			e.printStackTrace();
 		}
 
-		return orderList;
+		return order;
 	}
 
-	public static SOAPMessage soapGetOrdersInfo(String orderIncrementId) throws SOAPException, IOException {
-		String sessID = HttpSoapConnector.performLogin();
+	public static SOAPMessage soapGetOrdersInfo(String orderIncrementId,String sessionId) throws SOAPException, IOException {
+		
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		// SOAPMessage soapResponse =
 		// soapConnection.call(getOrdersInfoRequest(sessID, orderIncrementId),
 		// MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessID, orderIncrementId),
+		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
 				"http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
@@ -113,10 +113,10 @@ public class OrderInfoMagCalls {
 		return model;
 	}
 
-//	public static void main(String[] args) {
-//		List<SalesOrderInfoModel> list = OrdersChildrenInfoDemo.getOrdersInfo("qa-int0000862500").getItemInfo();
-//		for (SalesOrderInfoModel salesOrderInfoModel : list) {
-//			System.out.println(salesOrderInfoModel.getSku());
-//		}
-//	}
+	public static void main(String[] args) {
+		List<SalesOrderInfoModel> list = OrderInfoMagCalls.getOrdersInfo("qa-int0000862500","sessionid").getItemInfo();
+		for (SalesOrderInfoModel salesOrderInfoModel : list) {
+			System.out.println(salesOrderInfoModel.getSku());
+		}
+	}
 }
