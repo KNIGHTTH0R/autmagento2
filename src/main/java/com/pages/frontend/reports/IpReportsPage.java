@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.tools.constants.ContextConstants;
 import com.tools.data.IpOverViewIpCorrectionModel;
@@ -28,8 +29,8 @@ public class IpReportsPage extends AbstractPage {
 	@FindBy(css = "table.data-table.mr-t-50.mr-b-50.open-ips tbody")
 	private WebElement openIpsTable;
 
-	@FindBy(id="month-report-selector")
-	private WebElementFacade monthDateForReport;
+	@FindBy(css="#month-report-selector")
+	private WebElement monthDateForReport;
 
 	public TermPurchaseIpModel grabIpsInfo() {
 
@@ -187,10 +188,12 @@ public class IpReportsPage extends AbstractPage {
 	}
 
 	public void selectMonthForReport(String month) {
-		monthDateForReport.waitUntilVisible();
-		element(monthDateForReport).selectByVisibleText(month);
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
-				ContextConstants.LOADING_MESSAGE));
+		Select dropdown = new Select(getDriver().findElement(By.id("month-report-selector")));
+//		monthDateForReport.waitUntilVisible();
+//		element(monthDateForReport).selectByVisibleText(month);
+		dropdown.selectByVisibleText(month);
+//		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+//				ContextConstants.LOADING_MESSAGE));
 		
 	}
 

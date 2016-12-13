@@ -48,7 +48,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US70011Suite.class,
 	US70012Suite.class,
 	
-	US10006Suite.class,
+//	US10006Suite.class,
 	
 	US8001Suite.class,
 	US8002Suite.class,

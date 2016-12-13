@@ -1,18 +1,24 @@
 package com.tests.uss30.uss30001;
 
+import static net.thucydides.core.steps.stepdata.StepData.withTestDataFrom;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
+import net.thucydides.junit.annotations.UseTestDataFrom;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,8 +45,11 @@ import com.workflows.frontend.reports.IpReportValidationWorkflow;
 
 @WithTag(name = "US30.1 Verify Ip Overview Report", type = "Scenarios")
 @Story(Application.IpReport.US30_1.class)
-@RunWith(SerenityRunner.class)
-public class US30001VerifyIpOverViewReportTest extends BaseTest {
+@RunWith(SerenityParameterizedRunner.class)
+@UseTestDataFrom(value="resources/commissionrundate.csv")
+
+public class US30001VerifyIpOverViewReportAfterMonthClosingTest extends BaseTest {
+
 
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
@@ -59,6 +68,7 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 
 	private String stylistUsername, stylistPassword;
 	private String reportMonth;
+	String month,previousCommissionRun,lastCommissionRun,nextCommissionRun;
 
 	IpOverviewModel expectedIpOverviewModel;
 	List<IpOverViewPayedOrdersModel> expectedOrdersList;
@@ -66,6 +76,11 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
+		System.out.println("luna " + month);
+		System.out.println("luna " + previousCommissionRun);
+		System.out.println("luna " + lastCommissionRun);
+		System.out.println("luna " + nextCommissionRun);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -89,37 +104,53 @@ public class US30001VerifyIpOverViewReportTest extends BaseTest {
 				}
 			}
 		}
+		
 
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513", "2016-11-11","2016-11-11","" );
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2016-11-20 12:00:00",previousCommissionRun,lastCommissionRun,nextCommissionRun);
 		expectedOrdersList = expectedIpOverviewModel.getPayedOrders();
-		expectedReturns = expectedIpOverviewModel.getReturns();
+//		expectedReturns = expectedIpOverviewModel.getReturns();
+		System.out.println("expecteeeeed!!!!!!!!!!!!!!" +expectedIpOverviewModel.getPaidOrdersPreviosMonth());
+//		System.out.println("expecteeeeed!!!!!!!!!!!!!!" +expectedIpOverviewModel.getIpLastMonth().toString());
+//		System.out.println("expecteeeeed!!!!!!!!!!!!!!" +expectedIpOverviewModel.getIpThisMonth().toString());
+//		System.out.println("expecteeeeed!!!!!!!!!!!!!!" +expectedIpOverviewModel.getPaidOrdersPreviosMonth());
+		System.out.println("expecteeeeed!!!!!!!!!!!!!!" +expectedOrdersList);
 
 	}
 
 	@Test
-	public void us30001VerifyOpenIpsAfterNewOrdersTest() throws Exception {
+	public void us30001VerifyIpOverViewReportAfterMonthClosingTest() throws Exception {
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
+		
+		
 		headerSteps.redirectToStylistReports();
 		reportsSteps.clickOnIpReports();
+//		
+//		System.out.println("asasasasasa"+ DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+//		
+//		String str =DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+//		ipReportsSteps.selectMonth(str.toUpperCase());
 
-		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd HH:mm:ss", "yyyy-MMM", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+//		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd HH:mm:ss", "yyyy-MMM", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 
-		IpOverViewSummaryModel grabbedSummaryModel = ipReportsSteps.getIpOverviewSummaryModel();
-
-		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModel();
-
-		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
-
-		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
-
-
-		ipReportsSteps.validateIpOverViewSummaryModel(expectedIpOverviewModel, grabbedSummaryModel);
-		ipReportsSteps.validateOpenIps(expectedIpOverviewModel, grabbedOpenIpsModel);
-		ipReportsSteps.validateIpOverViewPayedOrdersModelList(expectedOrdersList, grabbedPayedOrdersModel);
-		ipReportsSteps.validateIpOverViewRefundAndReturnsModelList(expectedReturns, grabbedReturnsListModel);
+//		
+//		IpOverViewSummaryModel grabbedSummaryModel = ipReportsSteps.getIpOverviewSummaryModel();
+//
+//		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModel();
+//
+//		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
+//
+//		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
+//
+//
+//		ipReportsSteps.validateIpOverViewSummaryModel(expectedIpOverviewModel, grabbedSummaryModel);
+//		ipReportsSteps.validateOpenIps(expectedIpOverviewModel, grabbedOpenIpsModel);
+//		ipReportsSteps.validateIpOverViewPayedOrdersModelList(expectedOrdersList, grabbedPayedOrdersModel);
+//		ipReportsSteps.validateIpOverViewRefundAndReturnsModelList(expectedReturns, grabbedReturnsListModel);
 
 	}
+	
+	
 }
