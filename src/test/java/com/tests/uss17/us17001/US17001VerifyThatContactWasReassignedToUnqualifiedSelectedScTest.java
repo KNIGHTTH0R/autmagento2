@@ -99,9 +99,11 @@ public class US17001VerifyThatContactWasReassignedToUnqualifiedSelectedScTest ex
 		
 		expectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel,contactModel, dateModel, addressModel); 
 
-		expectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
-		expectedDetailsModel.setStyleCoachStatus(ContextConstants.NO_STYLE_COACH_FLAG_STATUS);
-		expectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+		expectedDetailsModel.setHasPartyHostInterrest(true);
+		expectedDetailsModel.setHasStyleCoachInterrest(false);
+		expectedDetailsModel.setIsNewsletterSubscribed(true);
+		
+		
 
 		PrintUtils.printContactModel(expectedDetailsModel);
 

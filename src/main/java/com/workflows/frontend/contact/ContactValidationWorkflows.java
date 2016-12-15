@@ -38,9 +38,9 @@ public class ContactValidationWorkflows {
 		verifyTown(expectedModel.getTown(), grabbedModel.getTown());
 		verifyCountry(expectedModel.getCountry(), grabbedModel.getCountry());
 		verifyCreatedAt(expectedModel.getCreatedAt(), grabbedModel.getCreatedAt());
-		verifyPartyHostStatus(expectedModel.getPartyHostStatus(), grabbedModel.getPartyHostStatus());
-		verifyStylecoachFlagStatus(expectedModel.getStyleCoachStatus(), grabbedModel.getStyleCoachStatus());
-		verifyNewsletterFlagStatus(expectedModel.getNewsletterStatus(), grabbedModel.getNewsletterStatus());
+		verifyPartyHostStatus(expectedModel.getHasPartyHostInterrest(), grabbedModel.getHasPartyHostInterrest());
+		verifyStylecoachFlagStatus(expectedModel.getHasPartyHostInterrest(), grabbedModel.getHasPartyHostInterrest());
+//		verifyNewsletterFlagStatus(expectedModel.getNewsletterStatus(), grabbedModel.getNewsletterStatus());
 		verifyLastHistoryRegistration(expectedModel.getLastHistoryRegistration(), grabbedModel.getLastHistoryRegistration());
 	}
 
@@ -86,15 +86,14 @@ public class ContactValidationWorkflows {
 	}
 
 	@Step
-	public void verifyPartyHostStatus(String expectedValue, String grabbedValue) {
+	public void verifyPartyHostStatus(boolean expectedValue, boolean grabbedValue) {
 		CustomVerification
-				.verifyTrue("Failure: Party host status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, grabbedValue.contentEquals(expectedValue));
+				.verifyTrue("Failure: Party host status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, grabbedValue == expectedValue);
 	}
-
 	@Step
-	public void verifyStylecoachFlagStatus(String expectedValue, String grabbedValue) {
+	public void verifyStylecoachFlagStatus(boolean expectedValue, boolean grabbedValue) {
 		CustomVerification.verifyTrue("Failure: Stylecoach flag status doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue,
-				grabbedValue.contentEquals(expectedValue));
+				 grabbedValue == expectedValue);
 	}
 
 	@Step

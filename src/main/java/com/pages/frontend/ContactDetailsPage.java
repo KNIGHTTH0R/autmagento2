@@ -14,17 +14,16 @@ public class ContactDetailsPage extends AbstractPage {
 
 		result.setName(getDriver().findElement(By.cssSelector("div.col1-set.page-title .page-title-inner h1")).getText());
 		result.setCreatedAt(getDriver().findElement(By.cssSelector("#contact-source span")).getText().trim());
-		result.setPartyHostStatus(getDriver().findElement(By.cssSelector("#contact-interests p:nth-child(2)")).getText());
-		result.setStyleCoachStatus(getDriver().findElement(By.cssSelector("#contact-interests p:nth-child(3)")).getText());
-		result.setNewsletterStatus(getDriver().findElement(By.cssSelector("#contact-email-signup p")).getText());
-		result.setStreet(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(3)")).getText());
-		result.setNumber(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(3)")).getText());
-		result.setZip(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(4)")).getText());
-		result.setTown(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(5)")).getText());
-		result.setCountry(getDriver().findElement(By.cssSelector("#contact-information p:nth-child(6)")).getText());
+		result.setHasPartyHostInterrest(getDriver().findElement(By.id("flag_parties")).isSelected());
+		result.setHasStyleCoachInterrest(getDriver().findElement(By.id("flag_member")).isSelected());
+//		result.setIsNewsletterSubscribed(getDriver().findElement(By.id("#contact-email-signup p")).isSelected());
+		result.setStreet(getDriver().findElement(By.xpath("//*[@id='contact-information']/p[2]")).getText());
+		result.setNumber(getDriver().findElement(By.xpath("//*[@id='contact-information']/p[2]")).getText());
+		result.setZip(getDriver().findElement(By.xpath("//*[@id='contact-information']/p[3]")).getText().replace(",", ""));
+		result.setTown(getDriver().findElement(By.xpath("//*[@id='contact-information']/p[4]")).getText());
+		result.setCountry(getDriver().findElement(By.cssSelector("#contact-information p.dp-bl.contact-city")).getText());
 		result.setLastHistoryRegistration(getDriver().findElement(By.cssSelector("#reports-table-default tbody tr:nth-child(1)")).getText());
 		
-
 		PrintUtils.printContactModel(result);
 
 		return result;
@@ -32,3 +31,4 @@ public class ContactDetailsPage extends AbstractPage {
 	}
 
 }
+//*[@id="contact-information"]/p[4]
