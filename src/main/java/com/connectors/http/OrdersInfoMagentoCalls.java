@@ -116,9 +116,15 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
 				MongoReader.getSoapURL() + UrlConstants.API_URI);
-		// SOAPMessage soapResponse =
-		// soapConnection.call(getOrdersListRequest(sessID, stylistId),
-		// "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getOrdersListRequest(sessID, stylistId),
+//		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+//		 SOAPMessage soapResponse =
+//				 soapConnection.call(getOrdersListRequest(sessID, stylistId),
+//				 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+
+	
 
 		return soapResponse;
 	}
@@ -128,11 +134,12 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
-//				MongoReader.getSoapURL() + UrlConstants.API_URI);
-		 SOAPMessage soapResponse =
-		 soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
-		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
+				MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
+//		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+
 
 		return soapResponse;
 	}
@@ -307,6 +314,9 @@ public class OrdersInfoMagentoCalls {
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("term_purchase_type")) {
 						model.setTermPurchaseType(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("scheduled_delivery_date")) {
+						model.setScheduledDeliveryDate(childNodes.item(j).getTextContent());
 					}
 				}
 				orderModelList.add(model);

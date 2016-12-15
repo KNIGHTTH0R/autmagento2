@@ -11,7 +11,7 @@ import com.tests.us9.us9001.US9001ValidateOrderEmailTest;
 	
 	US9001PlaceHostOrderWithForthyDiscountsAndJbTest.class,
 //	US9001CheckOrderOnStylecoachProfileTest.class,	
-	US9001ValidateOrderEmailTest.class,	
+//	US9001ValidateOrderEmailTest.class,	
 })
 @RunWith(Suite.class)
 public class US9001Suite {
