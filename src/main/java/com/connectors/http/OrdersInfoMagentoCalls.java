@@ -315,6 +315,9 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("term_purchase_type")) {
 						model.setTermPurchaseType(childNodes.item(j).getTextContent());
 					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("scheduled_delivery_date")) {
+						model.setScheduledDeliveryDate(childNodes.item(j).getTextContent());
+					}
 				}
 				orderModelList.add(model);
 			}
