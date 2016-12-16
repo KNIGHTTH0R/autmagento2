@@ -2,9 +2,14 @@ package com.pages.frontend.registration.landing;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.constants.ContextConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.requirements.AbstractPage;
 
@@ -61,6 +66,8 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 	public void selectCountryFilter(String countryName) {
 		element(searchCountry).waitUntilVisible();
 		element(searchCountry).selectByVisibleText(countryName);
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void selectFirstStylistFromList() {
@@ -71,6 +78,8 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 	public void searchByGeoipSubmit() {
 		element(searchByGeoipSubmitButton).waitUntilVisible();
 		searchByGeoipSubmitButton.click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public enum StyleMode {
@@ -89,7 +98,8 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 				lastNameInput.sendKeys(lastName);
 			}
 			searchSubmitButton.click();
-			waitABit(2000);
+			withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+					By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 			selectFirstStylistFromList();
 
 			break;
@@ -98,7 +108,8 @@ public class LandingCustomerAllocationPage extends AbstractPage {
 			inputPostcodeFilter(addressModel.getPostCode());
 			selectCountryFilter(addressModel.getCountryName());
 			searchByGeoipSubmit();
-			waitABit(2000);
+			withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+					By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 			selectFirstStylistFromList();
 			break;
 
