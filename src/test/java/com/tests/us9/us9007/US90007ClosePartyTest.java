@@ -16,6 +16,7 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
@@ -71,7 +72,7 @@ public class US90007ClosePartyTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US9007CreatePartyWithStylistHostTest").get(0);
+		urlModel = MongoReader.grabUrlModels("US9007CreatePartyWithStylistHostTest"+ SoapKeys.GRAB).get(0);
 
 	}
 

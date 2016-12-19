@@ -601,9 +601,9 @@ public class PrintUtils {
 		System.out.println("zip : " + contactModel.getZip());
 		System.out.println("town : " + contactModel.getTown());
 		System.out.println("contry : " + contactModel.getCountry());
-		System.out.println("party: " + contactModel.getPartyHostStatus());
-		System.out.println("SC :" + contactModel.getStyleCoachStatus());
-		System.out.println("newsletter :" + contactModel.getNewsletterStatus());
+		System.out.println("party: " + contactModel.getHasPartyHostInterrest());
+		System.out.println("SC :" + contactModel.getHasStyleCoachInterrest());
+//		System.out.println("newsletter :" + contactModel.getNewsletterStatus());
 		System.out.println("Created at : " + contactModel.getCreatedAt());
 
 	}

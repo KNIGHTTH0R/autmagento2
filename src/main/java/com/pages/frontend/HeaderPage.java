@@ -63,7 +63,6 @@ public class HeaderPage extends AbstractPage {
 		for (WebElement lang : languagesList) {
 			if (lang.getText().contentEquals(language.toUpperCase())) {
 				lang.click();
-				waitABit(2000);
 				break;
 			}
 		}
