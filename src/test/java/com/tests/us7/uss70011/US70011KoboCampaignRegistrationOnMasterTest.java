@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.external.EmailClientSteps;
 import com.steps.frontend.FancyBoxSteps;
@@ -130,13 +131,13 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 			}
 		}
 //
-//		genProduct1 = MagentoProductCalls.createPomProductModel();
-//		genProduct1.setName("POM_" + genProduct1.getName());
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = MagentoProductCalls.createPomProductModel();
+		genProduct1.setName("POM_" + genProduct1.getName());
+		genProduct1.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
 		
-		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-			genProduct1 = createdProductsList.get(7);
+		// createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		//	genProduct1 = createdProductsList.get(7);
 
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();

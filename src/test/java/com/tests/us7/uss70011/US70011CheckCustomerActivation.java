@@ -23,7 +23,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US7.11 Kobo Campaign Registration On Master Test ", type = "Scenarios")
 @Story(Application.KoboCampaign.US7_11.class)
 @RunWith(SerenityRunner.class)
-public class US70011CheckCustomerActivation extends BaseTest {
+public class  US70011CheckCustomerActivation extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;

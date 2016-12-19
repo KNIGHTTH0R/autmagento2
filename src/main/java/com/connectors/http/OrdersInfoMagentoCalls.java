@@ -16,8 +16,10 @@ import org.w3c.dom.NodeList;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
+import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.persistance.MongoReader;
+import com.tools.utils.FormatterUtils;
 
 /**
  * @author mihaibarta
@@ -81,9 +83,32 @@ public class OrdersInfoMagentoCalls {
 		
 		for (DBOrderModel order : orderList) {
 			DBOrderModel orderWithInfo = OrderInfoMagCalls.getOrdersInfo(order.getIncrementId(), sessID);
+			
+			//billing address details
 			order.setItemInfo(orderWithInfo.getItemInfo());
+			order.setBillToFirstName(orderWithInfo.getBillToFirstName());
+			order.setBillToLastName(orderWithInfo.getBillToLastName());
+			order.setBillToStreetAddress(orderWithInfo.getBillToStreetAddress());
+			order.setBillToCity(orderWithInfo.getBillToCity());
+			order.setBillCountryId(orderWithInfo.getBillCountryId());
+			order.setBillToPostcode(orderWithInfo.getBillToPostcode());
 
+			//shipping address details
+			order.setShipToFirstName(orderWithInfo.getShipToFirstName());
+			order.setShipToLastName(orderWithInfo.getShipToLastName());
+			order.setShipToStreetAddress(orderWithInfo.getShipToStreetAddress());
+			order.setShipToCity(orderWithInfo.getShipToCity());
+			order.setShipCountryId(orderWithInfo.getShipCountryId());
+			order.setShipToPostcode(orderWithInfo.getShipToPostcode());
+			
+			//
+			order.setUpdatedNav(orderWithInfo.getUpdatedNav());
+			order.setOrderCurrencyCode(orderWithInfo.getOrderCurrencyCode());
+			order.setStylePartyId(orderWithInfo.getStylePartyId());
+			order.setKoboSingleArticle(orderWithInfo.getKoboSingleArticle());
+			
 		}
+		
 		return orderList;
 
 	}
@@ -116,6 +141,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
 				MongoReader.getSoapURL() + UrlConstants.API_URI);
+		
 		// SOAPMessage soapResponse =
 		// soapConnection.call(getOrdersListRequest(sessID, stylistId),
 		// "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
@@ -128,11 +154,12 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
+				MongoReader.getSoapURL() + UrlConstants.API_URI);
+		
 //		SOAPMessage soapResponse = soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
-//				MongoReader.getSoapURL() + UrlConstants.API_URI);
-		 SOAPMessage soapResponse =
-		 soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
-		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+//				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+		
 
 		return soapResponse;
 	}
@@ -143,9 +170,9 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
 				MongoReader.getSoapURL() + UrlConstants.API_URI);
-		// SOAPMessage soapResponse =
-		// soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
-		// "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
+//		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -282,7 +309,9 @@ public class OrdersInfoMagentoCalls {
 					}
 					
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("grand_total")) {
-						model.setGrandTotal(childNodes.item(j).getTextContent());
+						String  vgt= FormatterUtils
+								.parseValueToTwoDecimals(childNodes.item(j).getTextContent());
+						model.setGrandTotal(vgt);
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
 						model.setCreatedAt(childNodes.item(j).getTextContent());
@@ -299,6 +328,10 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_ip")) {
 						model.setTotalIp(childNodes.item(j).getTextContent());
 					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_id")) {
+						model.setOrderId(childNodes.item(j).getTextContent());
+					}
+					
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_type")) {
 						model.setOrderType(childNodes.item(j).getTextContent());
 					}
@@ -308,6 +341,62 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("term_purchase_type")) {
 						model.setTermPurchaseType(childNodes.item(j).getTextContent());
 					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("shipping_amount")) {
+						model.setShippingAmount(childNodes.item(j).getTextContent());
+					}
+					//// am adaugat 
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_id")) {
+						model.setCustomerId(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_customer_id")) {
+						model.setStylistCustomerId(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("payment_method_type")) {
+						model.setPaymentMethodTypet(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("shipping_type")) {
+						model.setShippingType(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("style_party_id")) {
+						model.setStylePartyId(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_preshipped")) {
+						model.setIsPreshipped(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_pom")) {
+						model.setIsPom(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("website_code")) {
+						model.setWebsiteCode(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("store_language")) {
+						model.setStoreLanguage(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_firstname")) {
+						model.setCustomerFirstName(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_lastname")) {
+						model.setCustomerLastName(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_amount")) {
+						model.setTaxAmount(childNodes.item(j).getTextContent());
+					}
+					
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("subtotal")) {
+						model.setBaseSubtotal(childNodes.item(j).getTextContent());
+					}
+					
 				}
 				orderModelList.add(model);
 			}
@@ -317,12 +406,83 @@ public class OrdersInfoMagentoCalls {
 
 	 public static void main(String args[]) throws SOAPException, IOException {
 	// System.out.println(OrdersInfoMagentoCalls.getPartyOrdersList("14830").get(0).getIncrementId());
-		 List<DBOrderModel> list=OrdersInfoMagentoCalls.getOrderWithItems("61671","61672");
-		 for (DBOrderModel dbOrderModel : list) {
-			 System.out.println(dbOrderModel.getIncrementId());
-			 System.out.println(dbOrderModel.getItemInfo().get(0).getSku());
+//		 List<DBOrderModel> list=OrdersInfoMagentoCalls.getOrderWithItems("212468","212468");
+//	
+//		 
+//		 for (DBOrderModel dbOrderModel : list) {
+//			 System.out.println(dbOrderModel.getIncrementId());
+//			 
+//			 List<SalesOrderInfoModel> listmod= dbOrderModel.getItemInfo();
+//			 for (SalesOrderInfoModel salesOrderInfoModel : listmod) {
+//				System.out.println(salesOrderInfoModel.getSku());
+//			}
+//			 
+//			
+//		}
+		 
+		
+			List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getOrderWithItems("212468","212468");
+
+			for (DBOrderModel dbOrderModel : dbmodel) {
+				System.out.println("getIncrementId  : " + dbOrderModel.getIncrementId());
+				System.out.println("getGrandTotal  : " + dbOrderModel.getGrandTotal());
+				System.out.println("getCreatedAt : " + dbOrderModel.getCreatedAt());
+				System.out.println("getBillToStreetAddress : " + dbOrderModel.getBillToStreetAddress());
+				System.out.println("getStatus : " + dbOrderModel.getStatus());
+				System.out.println("getPaidAt : " + dbOrderModel.getPaidAt());
+				
+				System.out.println("getStylistId  : " + dbOrderModel.getStylistId());
+				System.out.println("getTotalIp  : " + dbOrderModel.getTotalIp());
+				System.out.println("getCreatedAt  : " + dbOrderModel.getCreatedAt());
+				System.out.println("getOrderId : " + dbOrderModel.getOrderId());
+				System.out.println("getOrderType : " + dbOrderModel.getOrderType());
+				System.out.println("getCartType : " + dbOrderModel.getCartType());
+				
+				System.out.println("getTermPurchaseType : " + dbOrderModel.getTermPurchaseType());
+				System.out.println("getShippingAmount : " + dbOrderModel.getShippingAmount());
+				System.out.println("getCustomerId : " + dbOrderModel.getCustomerId());
+				System.out.println("getOrderId : " + dbOrderModel.getOrderId());
+				System.out.println("getStylistCustomerId: " + dbOrderModel.getStylistCustomerId());
+				System.out.println("getPaymentMethodTypet: " + dbOrderModel.getPaymentMethodTypet());
+				
+				System.out.println("getShippingType : " + dbOrderModel.getShippingType());
+				System.out.println("getStylePartyId : " + dbOrderModel.getStylePartyId());
+				System.out.println("getIsPreshipped: " + dbOrderModel.getIsPreshipped());
+				System.out.println("getIsPom: " + dbOrderModel.getIsPom());
+				System.out.println("getWebsiteCode : " + dbOrderModel.getWebsiteCode());
+				System.out.println("getStoreLanguage : " + dbOrderModel.getStoreLanguage());
+				
+				System.out.println("getCustomerFirstName  : " + dbOrderModel.getCustomerFirstName());
+				System.out.println("getCustomerLastName  : " + dbOrderModel.getCustomerLastName());
+				System.out.println("getTaxAmount: " + dbOrderModel.getTaxAmount());
+				System.out.println("getBaseSubtotal : " + dbOrderModel.getBaseSubtotal());
 			
-		}
+				
+				
+				
+				
+				System.out.println("bill post  : " + dbOrderModel.getBillToPostcode());
+				System.out.println("bill fname  : " + dbOrderModel.getBillToFirstName());
+				System.out.println("billl lname : " + dbOrderModel.getBillToLastName());
+				System.out.println("bill street : " + dbOrderModel.getBillToStreetAddress());
+				System.out.println("ship city : " + dbOrderModel.getBillToCity());
+				System.out.println("ship country id : " + dbOrderModel.getBillCountryId());
+				
+				//shipp
+
+				System.out.println("shipp post : " + dbOrderModel.getShipToPostcode());
+				System.out.println("fname  : " + dbOrderModel.getShipToFirstName());
+				System.out.println("ship lname : " + dbOrderModel.getShipToLastName());
+				System.out.println("ship street : " + dbOrderModel.getShipToStreetAddress());
+				System.out.println("ship city : " + dbOrderModel.getShipToCity());
+				System.out.println("ship country id : " + dbOrderModel.getShipCountryId());
+
+				List<SalesOrderInfoModel> list = dbOrderModel.getItemInfo();
+				for (SalesOrderInfoModel salesOrderInfoModel : list) {
+					System.out.println("sku: " + salesOrderInfoModel.getSku());
+				}
+			}
+			
 		
 	 
 	 }
