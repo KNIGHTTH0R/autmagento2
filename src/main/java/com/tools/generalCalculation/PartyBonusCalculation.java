@@ -2,12 +2,27 @@ package com.tools.generalCalculation;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.tools.data.frontend.PartyBonusCalculationModel;
+import com.tools.data.soap.DBOrderModel;
 
 public class PartyBonusCalculation {
+	
+	private static List<String> notPayedStatusesList = new ArrayList<String>(Arrays.asList("processing","waiting_authorization","payment_review","payment_failed","payment_pending","payment_in_progress","pending_payment_hold", "pending"));
 
+	
+	private static boolean isNotPayed(PartyBonusCalculationModel model) {
+		boolean found = false;
+		for (String status : notPayedStatusesList) {
+			if (model.getOrderStatus().contentEquals(status)) {
+				found = true;
+			}
+		}
+		return found;
+	}
 	public static BigDecimal calculatePartyRetail(List<PartyBonusCalculationModel> ordersList) {
 		BigDecimal partyRetail = BigDecimal.ZERO;
 
@@ -38,6 +53,18 @@ public class PartyBonusCalculation {
 
 			partyTotal = partyTotal.add(BigDecimal.valueOf(Double.parseDouble(order.getIp())));
 		}
+		return partyTotal.setScale(2).intValue();
+	}
+	
+	public static int calculatePartyIpInPayment(List<PartyBonusCalculationModel> ordersList) {
+		BigDecimal partyTotal = BigDecimal.ZERO;
+
+		
+		for (PartyBonusCalculationModel order : ordersList) {
+           if(isNotPayed(order)){
+        	   
+			partyTotal = partyTotal.add(BigDecimal.valueOf(Double.parseDouble(order.getIp())));
+		}}
 		return partyTotal.setScale(2).intValue();
 	}
 

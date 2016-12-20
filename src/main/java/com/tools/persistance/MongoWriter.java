@@ -259,6 +259,7 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.SUBTOTAL, partyBonusCalculationModel.getTotal());
 		document.put(MongoTableKeys.PERCENTAGE, partyBonusCalculationModel.getPercent());
 		document.put(MongoTableKeys.IP_POINTS, partyBonusCalculationModel.getIp());
+		document.put(MongoTableKeys.ORDER_STATUS, partyBonusCalculationModel.getOrderStatus());
 
 		table.insert(document);
 	}

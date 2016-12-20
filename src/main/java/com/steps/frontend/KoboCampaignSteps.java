@@ -115,7 +115,7 @@ public class KoboCampaignSteps extends AbstractSteps {
 		koboCampaignPage().passwordConfirmInput(dataModel.getPassword());
 		koboCampaignPage().emailInput(dataModel.getEmailName());
 		// koboCampaignPage().checkStyleMemberCheckbox();
-		koboCampaignPage().checkStylePartiesCheckbox();
+//		koboCampaignPage().checkStylePartiesCheckbox();
 		koboCampaignPage().checkIAgree();
 		koboCampaignPage().submitAndContinue();
 	}
