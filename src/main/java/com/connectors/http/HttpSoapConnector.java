@@ -15,7 +15,7 @@ import javax.xml.soap.SOAPMessage;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
-import com.tools.constants.Credentials;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -23,7 +23,6 @@ import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.data.soap.TierPriceModel;
-import com.tools.persistance.MongoReader;
 
 public class HttpSoapConnector {
 
@@ -38,12 +37,16 @@ public class HttpSoapConnector {
 	 * @throws SOAPException
 	 * @throws IOException
 	 */
-	public static SOAPMessage soapCreateCategory(CategoryModel category, String parentId) throws SOAPException, IOException {
+	public static SOAPMessage soapCreateCategory(CategoryModel category, String parentId)
+			throws SOAPException, IOException {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
-//		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createCategory(category, parentId, sessID),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+		// SOAPMessage soapResponse =
+		// soapConnection.call(createCategory(category, parentId, sessID),
+		// "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -52,16 +55,19 @@ public class HttpSoapConnector {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createProduct(product, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createProduct(product, sessID),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
 
-	public static SOAPMessage soapUpdateProduct(ProductDetailedModel product, String productId) throws SOAPException, IOException {
+	public static SOAPMessage soapUpdateProduct(ProductDetailedModel product, String productId)
+			throws SOAPException, IOException {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(updateProduct(product, sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(updateProduct(product, sessID, productId),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -70,7 +76,8 @@ public class HttpSoapConnector {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createJbZzzProduct(product, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createJbZzzProduct(product, sessID),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -79,16 +86,19 @@ public class HttpSoapConnector {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getStylistInfo(stylistId, sessID), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getStylistInfo(stylistId, sessID),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
 
-	public static SOAPMessage soapGetStylistList(String filter, String operand, String filterValue) throws SOAPException, IOException {
+	public static SOAPMessage soapGetStylistList(String filter, String operand, String filterValue)
+			throws SOAPException, IOException {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getStylistList(sessID, filter, operand, filterValue), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getStylistList(sessID, filter, operand, filterValue),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -97,8 +107,11 @@ public class HttpSoapConnector {
 		String sessID = performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), MongoReader.getSoapURL() + UrlConstants.API_URI);
-//		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID, productId),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+		// SOAPMessage soapResponse = soapConnection.call(getProductInfo(sessID,
+		// productId), "https://admin-staging-aut.pippajean.com/" +
+		// UrlConstants.API_URI);
 		return soapResponse;
 	}
 
@@ -114,18 +127,16 @@ public class HttpSoapConnector {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(
-				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
-		
-//		SOAPMessage soapResponse = soapConnection.call(
-//				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
-//				"http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
-		
-//		SOAPMessage soapResponse = soapConnection.call(
-//				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
-//			"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
-		
-		
+				createLoginRequest(EnvironmentConstants.SOAP_USERNAME, EnvironmentConstants.SOAP_PASSWORD),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
+		// SOAPMessage soapResponse = soapConnection.call(
+		// createLoginRequest("username", "pass"),
+		// "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+
+		// SOAPMessage soapResponse = soapConnection.call(
+		// createLoginRequest("username", "pass"),
+		// "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		String result = "";
 
@@ -188,11 +199,13 @@ public class HttpSoapConnector {
 
 	}
 
-	private static SOAPMessage createCategory(CategoryModel category, String parentId, String ssID) throws SOAPException, IOException {
+	private static SOAPMessage createCategory(CategoryModel category, String parentId, String ssID)
+			throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement categoryCreateRequestParam = soapBody.addChildElement(SoapKeys.CATEGORY_CREATE_REQUEST, SoapKeys.URN_PREFIX);
+		SOAPElement categoryCreateRequestParam = soapBody.addChildElement(SoapKeys.CATEGORY_CREATE_REQUEST,
+				SoapKeys.URN_PREFIX);
 		SOAPElement sessionID = categoryCreateRequestParam.addChildElement(SoapKeys.SESSION_ID);
 		sessionID.addTextNode(ssID);
 		SOAPElement parent = categoryCreateRequestParam.addChildElement(SoapKeys.PARENT_ID);
@@ -210,17 +223,22 @@ public class HttpSoapConnector {
 		return soapMessage;
 	}
 
-	private static SOAPMessage createProduct(ProductDetailedModel product, String ssID) throws SOAPException, IOException {
+	private static SOAPMessage createProduct(ProductDetailedModel product, String ssID)
+			throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement catalogProductCreateRequestParam = soapBody.addChildElement(SoapKeys.CATALOG_CONTAINER, SoapKeys.URN_PREFIX);
+		SOAPElement catalogProductCreateRequestParam = soapBody.addChildElement(SoapKeys.CATALOG_CONTAINER,
+				SoapKeys.URN_PREFIX);
 		SOAPElement sessionID = catalogProductCreateRequestParam.addChildElement(SoapKeys.SESSION_ID);
 		sessionID.addTextNode(ssID);
 
-		catalogProductCreateRequestParam = addOptionalField(SoapKeys.TYPE, product.getType(), catalogProductCreateRequestParam);
-		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SET, product.getSet(), catalogProductCreateRequestParam);
-		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SKU, product.getSku(), catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.TYPE, product.getType(),
+				catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SET, product.getSet(),
+				catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SKU, product.getSku(),
+				catalogProductCreateRequestParam);
 
 		// Add product data here
 		catalogProductCreateRequestParam = generateProductMessage(catalogProductCreateRequestParam, product);
@@ -237,11 +255,13 @@ public class HttpSoapConnector {
 		return soapMessage;
 	}
 
-	private static SOAPMessage updateProduct(ProductDetailedModel product, String ssID, String productId) throws SOAPException, IOException {
+	private static SOAPMessage updateProduct(ProductDetailedModel product, String ssID, String productId)
+			throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement catalogProductUpdateRequestParam = soapBody.addChildElement(SoapKeys.UPDATE_PRODUCT_CATALOG_CONTAINER, SoapKeys.URN_PREFIX);
+		SOAPElement catalogProductUpdateRequestParam = soapBody
+				.addChildElement(SoapKeys.UPDATE_PRODUCT_CATALOG_CONTAINER, SoapKeys.URN_PREFIX);
 		SOAPElement sessionID = catalogProductUpdateRequestParam.addChildElement(SoapKeys.SESSION_ID);
 		sessionID.addTextNode(ssID);
 		SOAPElement productIdNode = catalogProductUpdateRequestParam.addChildElement(SoapKeys.PRODUCT_ID);
@@ -259,17 +279,22 @@ public class HttpSoapConnector {
 		return soapMessage;
 	}
 
-	private static SOAPMessage createJbZzzProduct(ProductDetailedModel product, String ssID) throws SOAPException, IOException {
+	private static SOAPMessage createJbZzzProduct(ProductDetailedModel product, String ssID)
+			throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement catalogProductCreateRequestParam = soapBody.addChildElement(SoapKeys.CATALOG_CONTAINER, SoapKeys.URN_PREFIX);
+		SOAPElement catalogProductCreateRequestParam = soapBody.addChildElement(SoapKeys.CATALOG_CONTAINER,
+				SoapKeys.URN_PREFIX);
 		SOAPElement sessionID = catalogProductCreateRequestParam.addChildElement(SoapKeys.SESSION_ID);
 		sessionID.addTextNode(ssID);
 
-		catalogProductCreateRequestParam = addOptionalField(SoapKeys.TYPE, product.getType(), catalogProductCreateRequestParam);
-		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SET, product.getSet(), catalogProductCreateRequestParam);
-		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SKU, product.getSku(), catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.TYPE, product.getType(),
+				catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SET, product.getSet(),
+				catalogProductCreateRequestParam);
+		catalogProductCreateRequestParam = addOptionalField(SoapKeys.SKU, product.getSku(),
+				catalogProductCreateRequestParam);
 
 		// Add product data here
 		catalogProductCreateRequestParam = generateProductMessage(catalogProductCreateRequestParam, product);
@@ -277,7 +302,8 @@ public class HttpSoapConnector {
 		SOAPElement store = catalogProductCreateRequestParam.addChildElement(SoapKeys.STORE);
 		store.addTextNode(product.getStore());
 
-		catalogProductCreateRequestParam.addChildElement(generateCartIds(product.getAvailableCartsArray(), catalogProductCreateRequestParam));
+		catalogProductCreateRequestParam
+				.addChildElement(generateCartIds(product.getAvailableCartsArray(), catalogProductCreateRequestParam));
 
 		soapMessage.saveChanges();
 
@@ -309,7 +335,8 @@ public class HttpSoapConnector {
 		return soapMessage;
 	}
 
-	private static SOAPMessage getStylistList(String ssID, String filterName, String operand, String filterValue) throws SOAPException, IOException {
+	private static SOAPMessage getStylistList(String ssID, String filterName, String operand, String filterValue)
+			throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
@@ -369,7 +396,8 @@ public class HttpSoapConnector {
 		return soapMessage;
 	}
 
-	private static SOAPElement generateProductMessage(SOAPElement bodyElement, ProductDetailedModel product) throws SOAPException {
+	private static SOAPElement generateProductMessage(SOAPElement bodyElement, ProductDetailedModel product)
+			throws SOAPException {
 		SOAPElement productData = bodyElement.addChildElement(SoapKeys.PRODUCT_DATA);
 
 		productData = addOptionalField(SoapKeys.NAME, product.getName(), productData);
@@ -436,7 +464,8 @@ public class HttpSoapConnector {
 
 	}
 
-	private static SOAPElement generateProductUpdateStockMessage(SOAPElement bodyElement, ProductDetailedModel product) throws SOAPException {
+	private static SOAPElement generateProductUpdateStockMessage(SOAPElement bodyElement, ProductDetailedModel product)
+			throws SOAPException {
 		SOAPElement productData = bodyElement.addChildElement(SoapKeys.PRODUCT_DATA);
 
 		productData.addChildElement(generateStockDataMessage(product.getStockData(), productData));
@@ -445,14 +474,16 @@ public class HttpSoapConnector {
 
 	}
 
-	private static SOAPElement generateStockDataMessage(StockDataModel product, SOAPElement bodyElement) throws SOAPException {
+	private static SOAPElement generateStockDataMessage(StockDataModel product, SOAPElement bodyElement)
+			throws SOAPException {
 		SOAPElement stockData = bodyElement.addChildElement(SoapKeys.STOCK_DATA);
 
 		if (product != null) {
 			stockData = addOptionalField(SoapKeys.QTY, product.getQty(), stockData);
 			stockData = addOptionalField(SoapKeys.IS_IN_STOCK, product.getIsInStock(), stockData);
 			stockData = addOptionalField(SoapKeys.MANAGE_STOCK, product.getManageStock(), stockData);
-			stockData = addOptionalField(SoapKeys.USE_CONFIG_MANAGE_STOCK, product.getUseConfigManageStock(), stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_MANAGE_STOCK, product.getUseConfigManageStock(),
+					stockData);
 			stockData = addOptionalField(SoapKeys.MIN_QTY, product.getMinQty(), stockData);
 			stockData = addOptionalField(SoapKeys.USE_CONFIG_MIN_QTY, product.getUseConfigMinQty(), stockData);
 			stockData = addOptionalField(SoapKeys.MIN_SALE_QTY, product.getMinSaleQty(), stockData);
@@ -463,12 +494,15 @@ public class HttpSoapConnector {
 			stockData = addOptionalField(SoapKeys.BACKORDERS, product.getBackorders(), stockData);
 			stockData = addOptionalField(SoapKeys.USE_CONFIG_BACKORDERS, product.getUseConfigBackorders(), stockData);
 			stockData = addOptionalField(SoapKeys.NOTIFY_STOCK_QTY, product.getNotifyStockQty(), stockData);
-			stockData = addOptionalField(SoapKeys.USE_CONFIG_NOTIFY_STOCK_QTY, product.getUseConfigNotifyStockQty(), stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_NOTIFY_STOCK_QTY, product.getUseConfigNotifyStockQty(),
+					stockData);
 			stockData = addOptionalField(SoapKeys.IS_DISCONTINUED, product.getIsDiscontinued(), stockData);
 			stockData = addOptionalField(SoapKeys.EARLIEST_AVAILABILITY, product.getEarliestAvailability(), stockData);
 			stockData = addOptionalField(SoapKeys.TP_ENABLED, product.getAllowedTermPurchase(), stockData);
-			stockData = addOptionalField(SoapKeys.MAXIMUM_PERCENTAGE_TO_BORROW, product.getMaximumPercentageToBorrow(), stockData);
-			stockData = addOptionalField(SoapKeys.USE_CONFIG_MAXIMUM_PERCENTAGE_TO_BORROW, product.getUseConfigMaximumPercentageToBorrow(), stockData);
+			stockData = addOptionalField(SoapKeys.MAXIMUM_PERCENTAGE_TO_BORROW, product.getMaximumPercentageToBorrow(),
+					stockData);
+			stockData = addOptionalField(SoapKeys.USE_CONFIG_MAXIMUM_PERCENTAGE_TO_BORROW,
+					product.getUseConfigMaximumPercentageToBorrow(), stockData);
 		} else {
 			System.out.println("Warning: Product - Stock Data Model is NULL - see soap - generateStockDataMessage()");
 		}
@@ -483,7 +517,8 @@ public class HttpSoapConnector {
 	 * @return
 	 * @throws SOAPException
 	 */
-	private static SOAPElement generateTierPriceMessage(List<TierPriceModel> productList, SOAPElement bodyElement) throws SOAPException {
+	private static SOAPElement generateTierPriceMessage(List<TierPriceModel> productList, SOAPElement bodyElement)
+			throws SOAPException {
 		SOAPElement tierPrices = bodyElement.addChildElement(SoapKeys.TIER_PRICES);
 
 		if (productList.size() > 0) {
@@ -504,12 +539,14 @@ public class HttpSoapConnector {
 
 			}
 		} else {
-			System.out.println("Warning: Product - Tier Price Model list is empty - see soap - generateTierPriceMessage()");
+			System.out.println(
+					"Warning: Product - Tier Price Model list is empty - see soap - generateTierPriceMessage()");
 		}
 		return tierPrices;
 	}
 
-	private static SOAPElement generateAdditionalAttributes(Map<String, String> map, SOAPElement bodyElement) throws SOAPException {
+	private static SOAPElement generateAdditionalAttributes(Map<String, String> map, SOAPElement bodyElement)
+			throws SOAPException {
 		SOAPElement additionalAttributes = bodyElement.addChildElement(SoapKeys.ADDITIONAL_ATTRIBUTES);
 
 		if (map.size() > 0) {
@@ -520,7 +557,8 @@ public class HttpSoapConnector {
 				objArray.addChildElement(addOptionalField(SoapKeys.VALUE, map.get(product), objArray));
 			}
 		} else {
-			System.out.println("Warning: Product - Additional Atributes list is empty - see soap - generateTierPriceMessage()");
+			System.out.println(
+					"Warning: Product - Additional Atributes list is empty - see soap - generateTierPriceMessage()");
 		}
 		return additionalAttributes;
 	}
@@ -589,7 +627,8 @@ public class HttpSoapConnector {
 		return websites;
 	}
 
-	private static SOAPElement generateCategories(List<String> categoriesList, SOAPElement bodyElement) throws SOAPException {
+	private static SOAPElement generateCategories(List<String> categoriesList, SOAPElement bodyElement)
+			throws SOAPException {
 		SOAPElement categories = bodyElement.addChildElement(SoapKeys.CATEGORIES);
 
 		if (categoriesList.size() > 0) {
@@ -603,7 +642,8 @@ public class HttpSoapConnector {
 		return categories;
 	}
 
-	private static SOAPElement generateCategoryIds(List<String> categoriesList, SOAPElement bodyElement) throws SOAPException {
+	private static SOAPElement generateCategoryIds(List<String> categoriesList, SOAPElement bodyElement)
+			throws SOAPException {
 		SOAPElement categoryIDs = bodyElement.addChildElement(SoapKeys.CATEGORY_IDS);
 
 		if (categoriesList.size() > 0) {
@@ -627,7 +667,8 @@ public class HttpSoapConnector {
 	 * @return
 	 * @throws SOAPException
 	 */
-	private static SOAPElement addOptionalField(String fieldKey, String fieldValue, SOAPElement parentElement) throws SOAPException {
+	private static SOAPElement addOptionalField(String fieldKey, String fieldValue, SOAPElement parentElement)
+			throws SOAPException {
 		SOAPElement result = parentElement;
 		if (fieldValue != null && !fieldValue.contentEquals("")) {
 			SOAPElement elemNow = parentElement.addChildElement(fieldKey);

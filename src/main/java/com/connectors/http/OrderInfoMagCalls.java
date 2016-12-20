@@ -14,12 +14,12 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
+import com.tools.constants.EnvironmentConstants;
 //import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
-import com.tools.persistance.MongoReader;
 
 public class OrderInfoMagCalls {
 
@@ -52,7 +52,7 @@ public class OrderInfoMagCalls {
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		 SOAPMessage soapResponse =
 		 soapConnection.call(getOrdersInfoRequest(sessionId,
-		 orderIncrementId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+		 orderIncrementId), EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 //		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
 //				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);

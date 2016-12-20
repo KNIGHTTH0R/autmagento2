@@ -13,12 +13,12 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
-import com.tools.persistance.MongoReader;
 import com.tools.utils.FormatterUtils;
 
 /**
@@ -140,7 +140,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 		
 		// SOAPMessage soapResponse =
@@ -156,7 +156,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 //		 SOAPMessage soapResponse =
 //		 soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
@@ -172,7 +172,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 //		 SOAPMessage soapResponse =
 //		 soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
 //		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);

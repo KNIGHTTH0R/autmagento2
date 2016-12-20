@@ -1,13 +1,13 @@
 package com.pages.frontend;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 import com.tools.constants.ContextConstants;
-import com.tools.persistance.MongoReader;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class KoboSuccesFormPage extends AbstractPage {
 
@@ -21,6 +21,7 @@ public class KoboSuccesFormPage extends AbstractPage {
 	}
 
 	public void verifyThatTheWebsiteHasChanged() {
-		Assert.assertTrue("The url does not reflect the website change !!", getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));
+		//here EnvironmentConstants.SOAP_URL was uses instead of baseURL because the url does not contain any website
+		Assert.assertTrue("The url does not reflect the website change !!", getDriver().getCurrentUrl().contains(EnvironmentConstants.SOAP_URL + ContextConstants.NOT_PREFERED_WEBSITE));
 	}
 }

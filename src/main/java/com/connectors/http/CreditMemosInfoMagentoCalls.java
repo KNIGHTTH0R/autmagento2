@@ -13,11 +13,11 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.DBCreditMemoModel;
-import com.tools.persistance.MongoReader;
 
 /**
  * @author mihaibarta
@@ -55,7 +55,7 @@ public class CreditMemosInfoMagentoCalls {
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		 SOAPMessage soapResponse =
 		 soapConnection.call(getCreditMemosListRequest(sessID, stylistId),
-		 MongoReader.getSoapURL() + UrlConstants.API_URI);
+		 EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 //		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), "https://admin-staging-aut.pippajean.com/" + UrlConstants.API_URI);
 //		SOAPMessage soapResponse = soapConnection.call(getCreditMemosListRequest(sessID, stylistId), "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 		return soapResponse;
