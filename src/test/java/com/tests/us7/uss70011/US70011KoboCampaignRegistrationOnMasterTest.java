@@ -136,8 +136,11 @@ public class US70011KoboCampaignRegistrationOnMasterTest extends BaseTest {
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		
+
 //		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 //			genProduct1 = createdProductsList.get(7);
+
+
 
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();

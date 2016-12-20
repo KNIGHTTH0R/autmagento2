@@ -3,6 +3,7 @@ package com.steps.frontend;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Title;
 
+import com.tools.constants.ContextConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.requirements.AbstractSteps;
@@ -105,12 +106,18 @@ public class KoboCampaignSteps extends AbstractSteps {
 	public void fillKoboCampaignRegistrationFormOnMasterShop(CustomerFormModel dataModel, AddressModel addressModel) {
 		koboCampaignPage().firstNameInput(dataModel.getFirstName());
 		koboCampaignPage().lastNameInput(dataModel.getLastName());
-		koboCampaignPage().inputStreetAddress(addressModel.getStreetAddress());
-		koboCampaignPage().inputStreetNumber(addressModel.getStreetNumber());
+		//koboCampaignPage().inputStreetAddress(addressModel.getStreetAddress());
+		koboCampaignPage().inputStreetAddress("Landsberger Allee");
+		
+//		koboCampaignPage().inputStreetNumber(addressModel.getStreetNumber());
+		koboCampaignPage().inputStreetNumber("106");
 		koboCampaignPage().inputPhoneNumber(addressModel.getPhoneNumber());
-		koboCampaignPage().inputPostCode(addressModel.getPostCode());
-		koboCampaignPage().inputHomeTown(addressModel.getHomeTown());
-		koboCampaignPage().selectCountryName(addressModel.getCountryName());
+//		koboCampaignPage().inputPostCode(addressModel.getPostCode());
+		koboCampaignPage().inputPostCode("10369");
+//		koboCampaignPage().inputHomeTown(addressModel.getHomeTown());
+		koboCampaignPage().inputHomeTown("Berlin");
+//		koboCampaignPage().selectCountryName(addressModel.getCountryName());
+		koboCampaignPage().selectCountryName(ContextConstants.COUNTRY_NAME);
 		koboCampaignPage().passwordInput(dataModel.getPassword());
 		koboCampaignPage().passwordConfirmInput(dataModel.getPassword());
 		koboCampaignPage().emailInput(dataModel.getEmailName());

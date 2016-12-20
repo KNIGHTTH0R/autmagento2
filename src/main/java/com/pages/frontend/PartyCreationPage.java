@@ -2,12 +2,14 @@
 package com.pages.frontend;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
@@ -103,12 +105,12 @@ public class PartyCreationPage extends AbstractPage {
 		element(customerName).sendKeys(name);
 		element(selectContact).waitUntilVisible();
 		element(selectContact).click();
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void selectFirstAvailableDate() {
 		element(dateSelect).waitUntilVisible();
-		waitABit(2000);
 		dateSelect.click();
 		element(firstAvailableDateButton).waitUntilVisible();
 		firstAvailableDateButton.click();

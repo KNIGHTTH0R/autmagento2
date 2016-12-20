@@ -61,7 +61,6 @@ public class FooterPage extends AbstractPage {
 		for (WebElement lang : languagesList) {
 			if (lang.getText().contentEquals(language)) {
 				lang.click();
-				waitABit(2000);
 				break;
 			}
 		}

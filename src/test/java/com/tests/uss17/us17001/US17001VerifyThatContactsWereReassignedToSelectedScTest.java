@@ -112,17 +112,17 @@ public class US17001VerifyThatContactsWereReassignedToSelectedScTest extends Bas
 
 		contactExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, contactModel, contactDateModel, contactAddressModel);
 
-		contactExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
-		contactExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
-		contactExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+		contactExpectedDetailsModel.setHasPartyHostInterrest(true);
+		contactExpectedDetailsModel.setHasStyleCoachInterrest(true);
+		contactExpectedDetailsModel.setIsNewsletterSubscribed(true);
 
 		PrintUtils.printContactModel(contactExpectedDetailsModel);
 
 		customerExpectedDetailsModel = contactValidationWorkflows.populateExpectedContactModel(oldStylistModel, customerModel, customerDateModel, customerAddressModel);
 
-		customerExpectedDetailsModel.setPartyHostStatus(ContextConstants.PARTY_FLAG_STATUS);
-		customerExpectedDetailsModel.setStyleCoachStatus(ContextConstants.STYLE_COACH_FLAG_STATUS);
-		customerExpectedDetailsModel.setNewsletterStatus(ContextConstants.NEWSLETTER_FLAG_STATUS);
+		customerExpectedDetailsModel.setHasPartyHostInterrest(true);
+		customerExpectedDetailsModel.setHasStyleCoachInterrest(true);
+		customerExpectedDetailsModel.setIsNewsletterSubscribed(true);
 
 		PrintUtils.printContactModel(customerExpectedDetailsModel);
 

@@ -2,6 +2,7 @@ package com.connectors.http;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.soap.SOAPBody;
@@ -21,12 +22,12 @@ import com.tools.data.soap.DBOrderModel;
 
 public class OrderInfoMagCalls {
 
-	public static DBOrderModel getOrdersInfo(String orderIncrementId,String sessionId) {
+	public static DBOrderModel getOrdersInfo(String orderIncrementId, String sessionId) {
 
 		DBOrderModel order = new DBOrderModel();
 
 		try {
-			SOAPMessage response = soapGetOrdersInfo(orderIncrementId,sessionId);
+			SOAPMessage response = soapGetOrdersInfo(orderIncrementId, sessionId);
 			System.out.println(response);
 			try {
 				order = extractOrderInfoData(response);
@@ -43,15 +44,22 @@ public class OrderInfoMagCalls {
 		return order;
 	}
 
-	public static SOAPMessage soapGetOrdersInfo(String orderIncrementId,String sessionId) throws SOAPException, IOException {
-		
+	public static SOAPMessage soapGetOrdersInfo(String orderIncrementId, String sessionId)
+			throws SOAPException, IOException {
+
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		// SOAPMessage soapResponse =
-		// soapConnection.call(getOrdersInfoRequest(sessID, orderIncrementId),
-		// MongoReader.getSoapURL() + UrlConstants.API_URI);
-		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
-				"http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getOrdersInfoRequest(sessionId,
+//		 orderIncrementId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+//		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
+//				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+
+		 SOAPMessage soapResponse =
+		 soapConnection.call(getOrdersInfoRequest(sessionId,
+		 orderIncrementId),
+		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -86,36 +94,154 @@ public class OrderInfoMagCalls {
 
 		DBOrderModel model = new DBOrderModel();
 		List<SalesOrderInfoModel> item = new ArrayList<SalesOrderInfoModel>();
-		
+
+		NodeList result = response.getSOAPBody().getElementsByTagName("result");
 		NodeList itemList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
+		NodeList shippingAddress = response.getSOAPBody().getElementsByTagName("shipping_address");
+		NodeList billigAddress = response.getSOAPBody().getElementsByTagName("billing_address");
 
-		for (int i = 0; i < itemList.getLength(); i++) {
-			if (itemList.item(i).getParentNode().getNodeName().equalsIgnoreCase("items")) {
-				SalesOrderInfoModel infoItem = new SalesOrderInfoModel();
+		for (int i = 0; i < result.getLength(); i++) {
+			NodeList resultNodes = result.item(i).getChildNodes();
+			for (int r = 0; r < resultNodes.getLength(); r++) {
 
-				NodeList childNodes = itemList.item(i).getChildNodes();
-				for (int j = 0; j < childNodes.getLength(); j++) {
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("updated_nav")) {
+					model.setUpdatedNav(resultNodes.item(r).getTextContent());
+				}
+				
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("order_currency_code")) {
+					model.setOrderCurrencyCode(resultNodes.item(r).getTextContent());
+				}
+				
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("style_party_id")) {
+					model.setStylePartyId(resultNodes.item(r).getTextContent());
+				}
+				
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("kobo_single_article")) {
+					model.setKoboSingleArticle(resultNodes.item(r).getTextContent());
+					
+				}
+				
+				
+				
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("billing_address")) {
 
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("item_id")) {
-						infoItem.setItem_id(childNodes.item(j).getTextContent());
+					NodeList billingNodes = billigAddress.item(i).getChildNodes();
+					for (int b = 0; b < billingNodes.getLength(); b++) {
+						if (billingNodes.item(b).getNodeName().equalsIgnoreCase("firstname")) {
+							model.setBillToFirstName(billingNodes.item(b).getTextContent());
+						}
 
-					}
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {
-						infoItem.setSku(childNodes.item(j).getTextContent());
+						if (billingNodes.item(b).getNodeName().equalsIgnoreCase("lastname")) {
+							model.setBillToLastName(billingNodes.item(b).getTextContent());
+						}
+
+						if (billingNodes.item(b).getNodeName().equalsIgnoreCase("postcode")) {
+							model.setBillToPostcode(billingNodes.item(b).getTextContent());
+						}
+
+						if (billingNodes.item(b).getNodeName().equalsIgnoreCase("street")) {
+							model.setBillToStreetAddress(billingNodes.item(b).getTextContent());
+						}
+						if (billingNodes.item(b).getNodeName().equalsIgnoreCase("city")) {
+							model.setBillToCity(billingNodes.item(b).getTextContent());
+						}
+						if (billingNodes.item(b).getNodeName().equalsIgnoreCase("country_id")) {
+							model.setBillCountryId(billingNodes.item(b).getTextContent());
+						}
 					}
 				}
-				item.add(infoItem);
+
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("shipping_address")) {
+					NodeList shippingNodes = shippingAddress.item(i).getChildNodes();
+					for (int s = 0; s < shippingNodes.getLength(); s++) {
+						if (shippingNodes.item(s).getNodeName().equalsIgnoreCase("firstname")) {
+							model.setShipToFirstName(shippingNodes.item(s).getTextContent());
+						}
+
+						if (shippingNodes.item(s).getNodeName().equalsIgnoreCase("lastname")) {
+							model.setShipToLastName(shippingNodes.item(s).getTextContent());
+						}
+
+						if (shippingNodes.item(s).getNodeName().equalsIgnoreCase("postcode")) {
+							model.setShipToPostcode(shippingNodes.item(s).getTextContent());
+						}
+
+						if (shippingNodes.item(s).getNodeName().equalsIgnoreCase("street")) {
+							model.setShipToStreetAddress(shippingNodes.item(s).getTextContent());
+						}
+						if (shippingNodes.item(s).getNodeName().equalsIgnoreCase("city")) {
+							model.setShipToCity(shippingNodes.item(s).getTextContent());
+						}
+						if (shippingNodes.item(s).getNodeName().equalsIgnoreCase("country_id")) {
+							model.setShipCountryId(shippingNodes.item(s).getTextContent());
+						}
+					}
+				}
 			}
+
+			for (int c = 0; c < itemList.getLength(); c++) {
+				if (itemList.item(c).getParentNode().getNodeName().equalsIgnoreCase("items")) {
+					SalesOrderInfoModel infoItem = new SalesOrderInfoModel();
+
+					NodeList childNodes = itemList.item(c).getChildNodes();
+
+					for (int j = 0; j < childNodes.getLength(); j++) {
+						if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {
+							// this the bundle and configurable products are
+							// parsed
+							List<String> list = new ArrayList<String>(
+									Arrays.asList(childNodes.item(j).getTextContent().split("-")));
+							String sku = null;
+
+							if (list.size() > 1) {
+								if (containsNumbers(list.get(1).substring(0, 1))
+										|| isLowerCase(list.get(1).substring(0, 1))) {
+									sku = list.get(0) + "-" + list.get(1);
+								}
+							} else {
+								sku = list.get(0);
+							}
+
+							System.out.println("sku parsat" + sku);
+							infoItem.setSku(sku);
+						}
+						
+						if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_percent")) {
+							model.setTaxPrecent(childNodes.item(j).getTextContent());
+							System.out.println("tax_percent " +childNodes.item(j).getTextContent());
+							
+						}
+					}
+					item.add(infoItem);
+				}
+			}
+
 		}
+
 		model.setItemInfo(item);
 
 		return model;
 	}
 
-	public static void main(String[] args) {
-		List<SalesOrderInfoModel> list = OrderInfoMagCalls.getOrdersInfo("qa-int0000862500","sessionid").getItemInfo();
-		for (SalesOrderInfoModel salesOrderInfoModel : list) {
-			System.out.println(salesOrderInfoModel.getSku());
+	public static boolean containsNumbers(String password) {
+		boolean digitFound = false;
+		for (char ch : password.toCharArray()) {
+			if (Character.isDigit(ch)) {
+				digitFound = true;
+			}
 		}
+		return digitFound;
+	}
+
+	public static boolean isLowerCase(String s) {
+		boolean isLowerCase = false;
+		if (Character.isLowerCase(s.charAt(0))) {
+			isLowerCase = true;
+		}
+		return isLowerCase;
+	}
+
+	public static void main(String[] args) throws SOAPException, IOException {
+		
 	}
 }

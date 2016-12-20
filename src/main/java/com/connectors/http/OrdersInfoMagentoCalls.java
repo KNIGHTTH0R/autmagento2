@@ -16,6 +16,7 @@ import org.w3c.dom.NodeList;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
+import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.persistance.MongoReader;
 
@@ -81,9 +82,34 @@ public class OrdersInfoMagentoCalls {
 		
 		for (DBOrderModel order : orderList) {
 			DBOrderModel orderWithInfo = OrderInfoMagCalls.getOrdersInfo(order.getIncrementId(), sessID);
+			
+			//billing address details
 			order.setItemInfo(orderWithInfo.getItemInfo());
+			order.setBillToFirstName(orderWithInfo.getBillToFirstName());
+			order.setBillToLastName(orderWithInfo.getBillToLastName());
+			order.setBillToStreetAddress(orderWithInfo.getBillToStreetAddress());
+			order.setBillToCity(orderWithInfo.getBillToCity());
+			order.setBillCountryId(orderWithInfo.getBillCountryId());
+			order.setBillToPostcode(orderWithInfo.getBillToPostcode());
 
+			//shipping address details
+			order.setShipToFirstName(orderWithInfo.getShipToFirstName());
+			order.setShipToLastName(orderWithInfo.getShipToLastName());
+			order.setShipToStreetAddress(orderWithInfo.getShipToStreetAddress());
+			order.setShipToCity(orderWithInfo.getShipToCity());
+			order.setShipCountryId(orderWithInfo.getShipCountryId());
+			order.setShipToPostcode(orderWithInfo.getShipToPostcode());
+			
+			//
+			order.setUpdatedNav(orderWithInfo.getUpdatedNav());
+			order.setOrderCurrencyCode(orderWithInfo.getOrderCurrencyCode());
+			order.setStylePartyId(orderWithInfo.getStylePartyId());
+			order.setKoboSingleArticle(orderWithInfo.getKoboSingleArticle());
+			
+			order.setTaxPrecent(orderWithInfo.getTaxPrecent());
+			
 		}
+		
 		return orderList;
 
 	}
@@ -114,17 +140,19 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
-//				MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
+				MongoReader.getSoapURL() + UrlConstants.API_URI);
 
-		 SOAPMessage soapResponse =
-		 soapConnection.call(getOrdersListRequest(sessID, stylistId),
-		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getOrdersListRequest(sessID, stylistId),
+//		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
 //		 SOAPMessage soapResponse =
 //				 soapConnection.call(getOrdersListRequest(sessID, stylistId),
 //				 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 	
+
 
 		return soapResponse;
 	}
@@ -134,12 +162,16 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
+//				MongoReader.getSoapURL() + UrlConstants.API_URI);
+
 //		 SOAPMessage soapResponse =
 //		 soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
 //		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
 
+		 SOAPMessage soapResponse =
+				 soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
+				 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -150,9 +182,9 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
 				MongoReader.getSoapURL() + UrlConstants.API_URI);
-		// SOAPMessage soapResponse =
-		// soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
-		// "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
+//		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -289,6 +321,7 @@ public class OrdersInfoMagentoCalls {
 					}
 					
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("grand_total")) {
+						
 						model.setGrandTotal(childNodes.item(j).getTextContent());
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("created_at")) {
@@ -306,6 +339,10 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("total_ip")) {
 						model.setTotalIp(childNodes.item(j).getTextContent());
 					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_id")) {
+						model.setOrderId(childNodes.item(j).getTextContent());
+					}
+					
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_type")) {
 						model.setOrderType(childNodes.item(j).getTextContent());
 					}
@@ -315,9 +352,68 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("term_purchase_type")) {
 						model.setTermPurchaseType(childNodes.item(j).getTextContent());
 					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("shipping_incl_tax")) {
+						model.setShippingAmount(childNodes.item(j).getTextContent());
+					}
+					 
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_id")) {
+						model.setCustomerId(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("stylist_customer_id")) {
+						model.setStylistCustomerId(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("payment_method_type")) {
+						model.setPaymentMethodTypet(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("shipping_type")) {
+						model.setShippingType(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("style_party_id")) {
+						model.setStylePartyId(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_preshipped")) {
+						model.setIsPreshipped(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_pom")) {
+						model.setIsPom(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("website_code")) {
+						model.setWebsiteCode(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("store_language")) {
+						model.setStoreLanguage(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_firstname")) {
+						model.setCustomerFirstName(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_lastname")) {
+						model.setCustomerLastName(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_amount")) {
+						model.setTaxAmount(childNodes.item(j).getTextContent());
+					}
+					
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("subtotal")) {
+						model.setBaseSubtotal(childNodes.item(j).getTextContent());
+					}
+					
+
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("scheduled_delivery_date")) {
 						model.setScheduledDeliveryDate(childNodes.item(j).getTextContent());
 					}
+
 				}
 				orderModelList.add(model);
 			}
@@ -326,13 +422,23 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	 public static void main(String args[]) throws SOAPException, IOException {
-	// System.out.println(OrdersInfoMagentoCalls.getPartyOrdersList("14830").get(0).getIncrementId());
-		 List<DBOrderModel> list=OrdersInfoMagentoCalls.getOrderWithItems("61671","61672");
+	 System.out.println(OrdersInfoMagentoCalls.getPartyOrdersList("14830").get(0).getIncrementId());
+		 List<DBOrderModel> list=OrdersInfoMagentoCalls.getOrderWithItems("212468","212468");
+	
+		 
 		 for (DBOrderModel dbOrderModel : list) {
 			 System.out.println(dbOrderModel.getIncrementId());
-			 System.out.println(dbOrderModel.getItemInfo().get(0).getSku());
+			 
+			 List<SalesOrderInfoModel> listmod= dbOrderModel.getItemInfo();
+			 for (SalesOrderInfoModel salesOrderInfoModel : listmod) {
+				System.out.println(salesOrderInfoModel.getSku());
+			}
+			 
 			
 		}
+		 
+		
+			
 		
 	 
 	 }

@@ -44,7 +44,6 @@ public class HeaderSteps extends AbstractSteps {
 	@Title("Go to create party page")
 	public void goToCreatePartyPage() {
 		loungePage().clickCreateParty();
-		waitABit(1000);
 
 	}
 

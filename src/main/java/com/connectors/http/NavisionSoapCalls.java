@@ -1,6 +1,7 @@
 package com.connectors.http;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class NavisionSoapCalls {
 
 		return orderList;
 	}
-	
+
 	/**
 	 * Create default message with standard envelopes
 	 * 
@@ -52,7 +53,8 @@ public class NavisionSoapCalls {
 
 		soapMessage.getSOAPPart().getEnvelope().setPrefix(NavSoapKeys.SOAP_PREFIX);
 		soapMessage.getSOAPPart().getEnvelope().removeNamespaceDeclaration("SOAP-ENV");
-		soapMessage.getSOAPPart().getEnvelope().addNamespaceDeclaration(NavSoapKeys.SALES_ORDER_URN_PREFIX, NavSoapKeys.SALES_ORDER_SERVER_URI);
+		soapMessage.getSOAPPart().getEnvelope().addNamespaceDeclaration(NavSoapKeys.SALES_ORDER_URN_PREFIX,
+				NavSoapKeys.SALES_ORDER_SERVER_URI);
 		soapMessage.getSOAPBody().setPrefix(NavSoapKeys.SOAP_PREFIX);
 		soapMessage.getSOAPHeader().setPrefix(NavSoapKeys.SOAP_PREFIX);
 
@@ -64,7 +66,8 @@ public class NavisionSoapCalls {
 		SOAPMessage soapMessage = createSalesOrderDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement readMultiple = soapBody.addChildElement(NavSoapKeys.READ_MULTIPLE, NavSoapKeys.SALES_ORDER_URN_PREFIX);
+		SOAPElement readMultiple = soapBody.addChildElement(NavSoapKeys.READ_MULTIPLE,
+				NavSoapKeys.SALES_ORDER_URN_PREFIX);
 		SOAPElement filter = readMultiple.addChildElement(NavSoapKeys.FILTER, NavSoapKeys.SALES_ORDER_URN_PREFIX);
 		SOAPElement field = filter.addChildElement(NavSoapKeys.FIELD, NavSoapKeys.SALES_ORDER_URN_PREFIX);
 		field.addTextNode("No");
@@ -83,7 +86,8 @@ public class NavisionSoapCalls {
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(createOrdersListRequest(filterValue), NavSoapKeys.SALES_ORDER_API_URI);
+		SOAPMessage soapResponse = soapConnection.call(createOrdersListRequest(filterValue),
+				NavSoapKeys.SALES_ORDER_API_URI);
 
 		return soapResponse;
 	}
@@ -93,6 +97,12 @@ public class NavisionSoapCalls {
 		List<NavOrderModel> orderModelList = new ArrayList<NavOrderModel>();
 
 		NodeList orderList = response.getSOAPBody().getElementsByTagName("SalesOrder");
+		BigDecimal grandTotal = BigDecimal.valueOf(0);
+		BigDecimal shippingValue = BigDecimal.valueOf(0);
+		BigDecimal shippingDiscount=BigDecimal.valueOf(0);
+		BigDecimal totalIP=BigDecimal.valueOf(0);
+		
+		
 		for (int i = 0; i < orderList.getLength(); i++) {
 
 			if (orderList.item(i).getParentNode().getNodeName().equalsIgnoreCase("ReadMultiple_Result")) {
@@ -104,37 +114,246 @@ public class NavisionSoapCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("No")) {
 						model.setIncrementId(childNodes.item(j).getTextContent());
 					}
-//					more repetition foreach field
-//					if (childNodes.item(j).getNodeName().equalsIgnoreCase("No")) {
-//						model.setIncrementId(childNodes.item(j).getTextContent());
-//					}
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("SalesLines")) {    
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Total_Amount_Incl_VAT")) {
+						model.setBaseGrandTotal(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Order_Date")) {
+						model.setOrderDate(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Posting_Date")) {
+						model.setPostingDate(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Salesperson_Code")) {
+						model.setSalesPersonCode(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Your_Reference")) {
+						model.setYouRefercences(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("External_Document_No")) {
+						model.setExternalDocumentNo(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Sell_to_Customer_No")) {
+						model.setSellToCustomerNo(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("shop_shipment_method")) {
+						model.setShopShipmentMethod(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Shop_Payment_Method")) {
+						model.setShopPaymentMethod(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Shop_Order_Type")) {
+						model.setShopOrderType(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Shop_Cart_Type")) {
+						model.setShopCartType(childNodes.item(j).getTextContent());
+					}
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("PartyId")) {
+						model.setPartyId(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("IsAlreadyShipped")) {
+						model.setIsAlreadyShipped(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Magento_Grand_Total")) {
+						model.setMagentoGrandTotal(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Shop_is_pom")) {
+						model.setShopIsPom(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Shop_Website_Code")) {
+						model.setShopWebsiteCode(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Shop_store_language")) {
+						model.setShopStoreLanguage(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("kobo_single_article")) {
+						model.setKoboSingleArticle(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Prepmt_Pmt_Discount_Date")) {
+						model.setPrepmtPmtDiscountDate(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Bill_to_Name")) {
+						model.setBillToName(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Bill_to_Address")) {
+						model.setBillToAddress(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Bill_to_Post_Code")) {
+						model.setBillToPostCode(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Bill_to_City")) {
+						model.setBillToCity(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Bill_to_Country_Region_Code")) {
+						model.setBillToCountryRegionCode(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_Name")) {
+						model.setShipToName(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_Address")) {
+						model.setShipToAddress(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_Post_Code")) {
+						model.setShipToPostCode(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_City")) {
+						model.setShipToCity(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_Country_Region_Code")) {
+						model.setShipToCountryRegionCode(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Sell_to_Customer_Name")) {
+						model.setSellToCustomerName(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Contains_BOM")) {
+						model.setContainsBom(childNodes.item(j).getTextContent());
+					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Sell_to_Address")) {
+						model.setSellToAddress(childNodes.item(j).getTextContent());
+					}
+
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("SalesLines")) {
 
 						List<NavOrderLinesModel> orderLinesModel = new ArrayList<NavOrderLinesModel>();
 
-						NodeList orderLinesList = childNodes.item(j).getChildNodes(); 
-						
+						NodeList orderLinesList = childNodes.item(j).getChildNodes();
+
 						for (int k = 0; k < orderLinesList.getLength(); k++) {
+							String charge = null;
 
 							NavOrderLinesModel line = new NavOrderLinesModel();
 
-							NodeList lineNodes = orderLinesList.item(k).getChildNodes(); 
+							NodeList lineNodes = orderLinesList.item(k).getChildNodes();
 
 							for (int l = 0; l < lineNodes.getLength(); l++) {
 
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("No")) {
 									line.setNo(lineNodes.item(l).getTextContent());
 								}
-								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Contains_BOM")) {
-									line.setContainsBom(lineNodes.item(l).getTextContent());
+
+								// emilian
+								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Type")) {
+									if (lineNodes.item(l).getTextContent().contentEquals("Charge_Item")) {
+										charge = lineNodes.item(l).getTextContent();
+									}
+									line.setType(lineNodes.item(l).getTextContent());
+
+								}
+
+								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("BOM_Item_No")) {
+									line.setIsBomItem(true);
+									line.setBomItemNo(lineNodes.item(l).getTextContent());
+								}
+
+								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Shop_Parent_Item_No")) {
+									line.setShopParentItemNo(lineNodes.item(l).getTextContent());
+								}
+
+								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Variant_Code")) {
+									line.setVarianteCode(lineNodes.item(l).getTextContent());
+								}
+
+								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Line_Amount")) {
+									double lineAmountString = Double.parseDouble(lineNodes.item(l).getTextContent());
+									BigDecimal lineAmount = BigDecimal.valueOf(lineAmountString);
+									grandTotal = grandTotal.add(lineAmount);
+									
+								}
+								
+								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Line_Discount_Amount")) {
+									line.setLineDiscountAmount(lineNodes.item(l).getTextContent());
+									shippingDiscount=BigDecimal.valueOf(Double.parseDouble(lineNodes.item(l).getTextContent()));
+								
+									
+								}
+
+								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("VAT_Prod_Posting_Group")) {
+									model.setVatProdPostingGroup(lineNodes.item(l).getTextContent());
+
+								}
+								
+								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Unit_Price")) {
+									if (charge != null) {
+										shippingValue=BigDecimal.valueOf(Double.parseDouble(lineNodes.item(l).getTextContent()));
+										model.setShippingAmount(lineNodes.item(l).getTextContent());
+									}
+
+								}
+								
+								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Item_IP")) {
+									double lineItemIpDouble = Double.parseDouble(lineNodes.item(l).getTextContent());
+									BigDecimal lineItemIp = BigDecimal.valueOf(lineItemIpDouble);
+									totalIP = totalIP.add(lineItemIp);
+
 								}
 							}
 							orderLinesModel.add(line);
+
+							if (orderLinesModel.get(orderLinesModel.size() - 1).getNo() == null) {
+
+								// if product is bom
+								if (orderLinesModel.get(orderLinesModel.size() - 1).getBomItemNo() != null) {
+									String bomItemNo = orderLinesModel.get(orderLinesModel.size() - 1).getBomItemNo();
+									orderLinesModel.get(orderLinesModel.size() - 1).setNo(bomItemNo);
+								}
+								// if this is bundle
+								if (orderLinesModel.get(orderLinesModel.size() - 1).getShopParentItemNo() != null) {
+									String shopParentItemNo = orderLinesModel.get(orderLinesModel.size() - 1)
+											.getShopParentItemNo();
+									orderLinesModel.get(orderLinesModel.size() - 1).setNo(shopParentItemNo);
+								}
+
+							}
+
+							// if product is configurable
+							if (orderLinesModel.get(orderLinesModel.size() - 1).getVarianteCode() != null) {
+								String variantCode = orderLinesModel.get(orderLinesModel.size() - 1).getVarianteCode();
+								String no = orderLinesModel.get(orderLinesModel.size() - 1).getNo();
+
+								orderLinesModel.get(orderLinesModel.size() - 1).setNo(no + "-" + variantCode);
+
+							}
+
 						}
+						grandTotal=grandTotal.add(shippingValue).subtract(shippingDiscount);
+						model.setTotalIp(totalIP.toString());
+						model.setCalculatedGrandTotal(grandTotal.toString());
 						model.setLines(orderLinesModel);
+
 					}
 				}
 				orderModelList.add(model);
+				
 			}
 		}
 		return orderModelList;
@@ -142,15 +361,5 @@ public class NavisionSoapCalls {
 
 	public static void main(String args[]) throws Exception {
 
-		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("10023578400..10023578700");
-		for (NavOrderModel order : ordersList) {
-			System.out.println(order.getIncrementId());
-			for (NavOrderLinesModel line : order.getLines()) {
-				System.out.println(line.getNo());
-
-			}
-		}
-
 	}
-
 }

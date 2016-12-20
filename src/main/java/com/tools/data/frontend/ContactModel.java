@@ -9,9 +9,9 @@ public class ContactModel {
 	private String town;
 	private String country;
 	private String createdAt;
-	private String partyHostStatus;
-	private String styleCoachStatus;
-	private String newsletterStatus;
+	private boolean hasPartyHostInterrest;
+	private boolean hasStyleCoachInterrest;
+	private boolean isNewsletterSubscribed;
 	private String lastHistoryRegistration;
 
 	public String getCreatedAt() {
@@ -22,28 +22,29 @@ public class ContactModel {
 		this.createdAt = createdAt;
 	}
 
-	public String getPartyHostStatus() {
-		return partyHostStatus;
+
+	public boolean getHasPartyHostInterrest() {
+		return hasPartyHostInterrest;
 	}
 
-	public void setPartyHostStatus(String partyHostStatus) {
-		this.partyHostStatus = partyHostStatus;
+	public void setHasPartyHostInterrest(boolean hasPartyHostInterrest) {
+		this.hasPartyHostInterrest = hasPartyHostInterrest;
 	}
 
-	public String getStyleCoachStatus() {
-		return styleCoachStatus;
+	public boolean getHasStyleCoachInterrest() {
+		return hasStyleCoachInterrest;
 	}
 
-	public void setStyleCoachStatus(String styleCoachStatus) {
-		this.styleCoachStatus = styleCoachStatus;
+	public void setHasStyleCoachInterrest(boolean hasStyleCoachInterrest) {
+		this.hasStyleCoachInterrest = hasStyleCoachInterrest;
 	}
 
-	public String getNewsletterStatus() {
-		return newsletterStatus;
+	public boolean getIsNewsletterSubscribed() {
+		return isNewsletterSubscribed;
 	}
 
-	public void setNewsletterStatus(String newsletterStatus) {
-		this.newsletterStatus = newsletterStatus;
+	public void setIsNewsletterSubscribed(boolean isNewsletterSubscribed) {
+		this.isNewsletterSubscribed = isNewsletterSubscribed;
 	}
 
 	public String getName() {

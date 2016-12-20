@@ -415,4 +415,10 @@ public class Application {
 		public class US32_1 {
 		}
 	}
+	
+	@Feature
+	public class ValidateOrderImport {
+		public class US34_1 {
+		}
+	}
 }
