@@ -16,7 +16,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
 import com.tools.constants.NavSoapKeys;
-import com.tools.constants.NavisionConstants;
 
 public class NavisionBillOfMaterialCalls {
 

@@ -9,6 +9,16 @@ public class NavOrderLinesModel {
 	private String shopParentItemNo;
 	private String varianteCode;
 	private String shippingAmount;
+	private String lineDiscountAmount;
+
+	
+	public String getLineDiscountAmount() {
+		return lineDiscountAmount;
+	}
+
+	public void setLineDiscountAmount(String lineDiscountAmount) {
+		this.lineDiscountAmount = lineDiscountAmount;
+	}
 
 	public String getShippingAmount() {
 		return shippingAmount;

@@ -32,6 +32,7 @@ public class DBOrderModel {
 	//should be calculated maybe;
 	private String baseSubtotal;
 	private String taxAmount;
+	private String taxPrecent;
 	
 	
 	private String customerFirstName;
@@ -70,6 +71,16 @@ public class DBOrderModel {
 	private String shippingAmount;
 	
 	
+	
+	
+	public String getTaxPrecent() {
+		return taxPrecent;
+	}
+
+	public void setTaxPrecent(String taxPrecent) {
+		this.taxPrecent = taxPrecent;
+	}
+
 	public String getCustomerId() {
 		return customerId;
 	}

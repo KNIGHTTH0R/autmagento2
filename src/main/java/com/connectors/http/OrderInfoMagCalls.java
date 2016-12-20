@@ -19,7 +19,6 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
-import com.tools.persistance.MongoReader;
 
 public class OrderInfoMagCalls {
 
@@ -50,17 +49,17 @@ public class OrderInfoMagCalls {
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		 SOAPMessage soapResponse =
-		 soapConnection.call(getOrdersInfoRequest(sessionId,
-		 orderIncrementId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getOrdersInfoRequest(sessionId,
+//		 orderIncrementId), MongoReader.getSoapURL() + UrlConstants.API_URI);
 
 //		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
 //				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
-		// SOAPMessage soapResponse =
-		// soapConnection.call(getOrdersInfoRequest(sessionId,
-		// orderIncrementId),
-		// "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+		 SOAPMessage soapResponse =
+		 soapConnection.call(getOrdersInfoRequest(sessionId,
+		 orderIncrementId),
+		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -122,6 +121,8 @@ public class OrderInfoMagCalls {
 					
 				}
 				
+				
+				
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("billing_address")) {
 
 					NodeList billingNodes = billigAddress.item(i).getChildNodes();
@@ -133,8 +134,6 @@ public class OrderInfoMagCalls {
 						if (billingNodes.item(b).getNodeName().equalsIgnoreCase("lastname")) {
 							model.setBillToLastName(billingNodes.item(b).getTextContent());
 						}
-
-						// model.setBillToFirstName("unnume");
 
 						if (billingNodes.item(b).getNodeName().equalsIgnoreCase("postcode")) {
 							model.setBillToPostcode(billingNodes.item(b).getTextContent());
@@ -206,6 +205,12 @@ public class OrderInfoMagCalls {
 							System.out.println("sku parsat" + sku);
 							infoItem.setSku(sku);
 						}
+						
+						if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_percent")) {
+							model.setTaxPrecent(childNodes.item(j).getTextContent());
+							System.out.println("tax_percent " +childNodes.item(j).getTextContent());
+							
+						}
 					}
 					item.add(infoItem);
 				}
@@ -237,38 +242,6 @@ public class OrderInfoMagCalls {
 	}
 
 	public static void main(String[] args) throws SOAPException, IOException {
-		String sessID = HttpSoapConnector.performLogin();
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrdersInfo("10021960100", sessID);
 		
-		System.out.println("style party  : " + dbmodel.getStylePartyId());
-		
-		System.out.println("bill post  : " + dbmodel.getBillToPostcode());
-		System.out.println("bill fname  : " + dbmodel.getBillToFirstName());
-		System.out.println("billl lname : " + dbmodel.getBillToLastName());
-		System.out.println("bill street : " + dbmodel.getBillToStreetAddress());
-		System.out.println("bill city : " + dbmodel.getBillToCity());
-		System.out.println("bill country id : " + dbmodel.getBillCountryId());
-
-		
-		// shipp
-
-		System.out.println("shipp post : " + dbmodel.getShipToPostcode());
-		System.out.println("fname  : " + dbmodel.getShipToFirstName());
-		System.out.println("ship lname : " + dbmodel.getShipToLastName());
-		System.out.println("ship street : " + dbmodel.getShipToStreetAddress());
-		System.out.println("ship city : " + dbmodel.getShipToCity());
-		System.out.println("ship country id : " + dbmodel.getShipCountryId());
-		
-		
-		System.out.println("updated nav: "+dbmodel.getUpdatedNav());
-		System.out.println("order currency code : "+dbmodel.getOrderCurrencyCode());
-		
-		
-		
-		
-		List<SalesOrderInfoModel> list = dbmodel.getItemInfo();
-		for (SalesOrderInfoModel salesOrderInfoModel : list) {
-			System.out.println("sku: " + salesOrderInfoModel.getSku());
-		}
 	}
 }
