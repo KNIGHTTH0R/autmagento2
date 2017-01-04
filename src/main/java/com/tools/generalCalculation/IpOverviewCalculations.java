@@ -20,7 +20,8 @@ public class IpOverviewCalculations {
 
 	private static List<String> payedStatusesList = new ArrayList<String>(Arrays.asList("complete", "payment_complete", "closed"));
 
-	private static List<String> notPayedStatusesList = new ArrayList<String>(Arrays.asList("processing","waiting_authorization","payment_review","payment_failed","payment_pending","payment_in_progress","pending_payment_hold", "pending"));
+	private static List<String> notPayedStatusesList = new ArrayList<String>(Arrays.asList("pending","processing","waiting_authorization","payment_review","payment_failed","pending_payment","payment_in_progress","pending_payment_hold"));
+	
 	private static List<String> notPayedStatusesTPList = new ArrayList<String>(Arrays.asList("pending_payment_hold"));
 
 	public static IpOverviewModel calculateIpOverview(String stylistId, String month, String previousComissionRun, String lastComissionRun,String nextComissionRun) throws NumberFormatException,
@@ -383,7 +384,7 @@ public class IpOverviewCalculations {
 //				);
 //		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList("2513");
 		//lista ordere platite
-		IpOverviewModel model=calculateIpOverview("1030","2016-11-05 12:00:00","2016-10-06 12:00:00","2016-11-07 12:00:00","2016-12-10 12:00:00");
+		IpOverviewModel model=calculateIpOverview("2513","2016-11-05 12:00:00","2016-10-06 12:00:00","2016-11-07 12:00:00","2016-12-10 12:00:00");
 //		IpOverviewModel model=calculateIpOverview("1355","2016-11-05 12:00:00","2016-10-06 12:00:00","2016-11-07 12:00:00","2016-12-10 12:00:00");
 		List<IpOverViewPayedOrdersModel> paidOrders =model.getPayedOrders();
 		List<IpOverViewReturnsListModel> returns=model.getReturns();
@@ -413,11 +414,11 @@ public class IpOverviewCalculations {
 		String reversed=model.getReverseChargebackThisMonth();
 		System.out.println("reversed month"+reversed);
 		String open=model.getIpThisMonth();
-		System.out.println("open month"+open);
+		System.out.println("open ips this month"+open);
 		String openlast=model.getIpLastMonth();
-		System.out.println("open month last"+openlast);
+		System.out.println("open ips last month"+openlast);
 		String chargeback=model.getChargebacksThisMonth();
-		System.out.println("open month"+openlast);
+		System.out.println("chargeback"+chargeback);
 		
 		String tpthis=model.getIpTPOrdersThisMonth();
 		System.out.println("previous"+tpthis);

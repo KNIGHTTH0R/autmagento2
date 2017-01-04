@@ -19,6 +19,10 @@ public class EnvironmentConstants {
 	public static final String RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT = MongoReader.geteEnvironmentConstantsItem("RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT");
 	public static final String RUN_POSTPONE_CANCEL_EMAIL_SCRIPT = MongoReader.geteEnvironmentConstantsItem("RUN_POSTPONE_CANCEL_EMAIL_SCRIPT");
 	
+	public static final String RUN_ORDER_IMPORT = MongoReader.geteEnvironmentConstantsItem("RUN_ORDER_IMPORT");
+	public static final String RUN_CREDITMEMO_IMPORT = MongoReader.geteEnvironmentConstantsItem("RUN_CREDITMEMO_IMPORT");
+	public static final String RUN_SEND_IP_REPORT = MongoReader.geteEnvironmentConstantsItem("RUN_SEND_IP_REPORT");
+	
 	//starterset
 	public static final String STARTERSET = MongoReader.geteEnvironmentConstantsItem("STARTERSET");
 	public static final String STARTERSETSPECIAL = MongoReader.geteEnvironmentConstantsItem("STARTERSETSPECIAL");

@@ -96,7 +96,7 @@ public class MongoTableKeys {
 	public static final String TOTAL_AMOUNT = "totalAmount";
 	public static final String IP_POINTS = "ipPoints";
 	public static final String DISCOUNT_LIST = "discounts";
-
+	
 	/// TermPurchaseIpModel
 	public static final String TERM_PURCHASE_IP_MODEL = "TermPurchaseIpModel";
 	public static final String CURRENT_MONTH_IP = "currentMonthIp";
