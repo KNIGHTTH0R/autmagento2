@@ -37,7 +37,7 @@ public class EnvironmentConstants {
 	
 	//pippajean-uphgrade env  - uncomment following for testing without running the test from cmd line
 //	public static final String COMMISSION_URL = "http://commission.evozon.com/api/";
-//	public static final String SOAP_URL="http://pippajean-upgrade.evozon.com/";
+//	public static final String SOAP_URL="https://pippajean-upgrade.evozon.com/";
 //	public static final String SOAP_USERNAME="automation";
 //	public static final String SOAP_PASSWORD="aut1234";
 	
