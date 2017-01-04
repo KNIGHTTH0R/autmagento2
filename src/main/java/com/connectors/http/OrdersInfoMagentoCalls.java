@@ -16,7 +16,6 @@ import org.w3c.dom.NodeList;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.persistance.MongoReader;
 
@@ -103,7 +102,7 @@ public class OrdersInfoMagentoCalls {
 			//
 			order.setUpdatedNav(orderWithInfo.getUpdatedNav());
 			order.setOrderCurrencyCode(orderWithInfo.getOrderCurrencyCode());
-			order.setStylePartyId(orderWithInfo.getStylePartyId());
+		//	order.setStylePartyId(orderWithInfo.getStylePartyId());
 			order.setKoboSingleArticle(orderWithInfo.getKoboSingleArticle());
 			
 			order.setTaxPrecent(orderWithInfo.getTaxPrecent());
@@ -299,13 +298,16 @@ public class OrdersInfoMagentoCalls {
 	private static List<DBOrderModel> extractOrderData(SOAPMessage response) throws Exception {
 
 		List<DBOrderModel> orderModelList = new ArrayList<DBOrderModel>();
+		
 
 		NodeList orderList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
 		for (int i = 0; i < orderList.getLength(); i++) {
+			String customerName="";
 			if (orderList.item(i).getParentNode().getNodeName().equalsIgnoreCase("result")) {
 				DBOrderModel model = new DBOrderModel();
 				model.setTotalIp("0");
 				model.setPaidAt("2010-01-21 11:45:03");
+				model.setStylePartyId("0");
 
 				NodeList childNodes = orderList.item(i).getChildNodes();
 				for (int j = 0; j < childNodes.getLength(); j++) {
@@ -367,9 +369,10 @@ public class OrdersInfoMagentoCalls {
 						model.setShippingType(childNodes.item(j).getTextContent());
 					}
 					
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("style_party_id")) {
-						model.setStylePartyId(childNodes.item(j).getTextContent());
-					}
+//					if (childNodes.item(j).getNodeName().equalsIgnoreCase("style_party_id")) {
+//						System.out.println(" ce cauti aici ??");
+//						model.setStylePartyId(childNodes.item(j).getTextContent());
+//					}
 					
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("is_preshipped")) {
 						model.setIsPreshipped(childNodes.item(j).getTextContent());
@@ -387,11 +390,11 @@ public class OrdersInfoMagentoCalls {
 					}
 					
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_firstname")) {
-						model.setCustomerFirstName(childNodes.item(j).getTextContent());
+						customerName=customerName.concat(childNodes.item(j).getTextContent()+" ");
 					}
 					
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_lastname")) {
-						model.setCustomerLastName(childNodes.item(j).getTextContent());
+						customerName=customerName.concat(childNodes.item(j).getTextContent());
 					}
 					
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_amount")) {
@@ -408,6 +411,7 @@ public class OrdersInfoMagentoCalls {
 						model.setScheduledDeliveryDate(childNodes.item(j).getTextContent());
 					}
 
+					model.setCustomerName(customerName);
 				}
 				orderModelList.add(model);
 			}
@@ -416,17 +420,22 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	 public static void main(String args[]) throws SOAPException, IOException {
-	 System.out.println(OrdersInfoMagentoCalls.getPartyOrdersList("14830").get(0).getIncrementId());
+	// System.out.println(OrdersInfoMagentoCalls.getPartyOrdersList("14830").get(0).getIncrementId());
+	//	 212468
 		 List<DBOrderModel> list=OrdersInfoMagentoCalls.getOrderWithItems("212468","212468");
 	
 		 
+		 
 		 for (DBOrderModel dbOrderModel : list) {
 			 System.out.println(dbOrderModel.getIncrementId());
+			 System.out.println("customer name "+dbOrderModel.getCustomerName());
+			 System.out.println("party id "+ dbOrderModel.getStylePartyId());
+			 System.out.println("get payed at " +dbOrderModel.getPaidAt());
 			 
-			 List<SalesOrderInfoModel> listmod= dbOrderModel.getItemInfo();
-			 for (SalesOrderInfoModel salesOrderInfoModel : listmod) {
-				System.out.println(salesOrderInfoModel.getSku());
-			}
+//			 List<SalesOrderInfoModel> listmod= dbOrderModel.getItemInfo();
+//			 for (SalesOrderInfoModel salesOrderInfoModel : listmod) {
+//				System.out.println(salesOrderInfoModel.getSku());
+//			}
 			 
 			
 		}

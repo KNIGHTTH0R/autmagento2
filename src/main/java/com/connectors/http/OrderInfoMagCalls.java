@@ -187,8 +187,7 @@ public class OrderInfoMagCalls {
 
 					for (int j = 0; j < childNodes.getLength(); j++) {
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {
-							// this the bundle and configurable products are
-							// parsed
+						
 							List<String> list = new ArrayList<String>(
 									Arrays.asList(childNodes.item(j).getTextContent().split("-")));
 							String sku = null;
@@ -202,13 +201,11 @@ public class OrderInfoMagCalls {
 								sku = list.get(0);
 							}
 
-							System.out.println("sku parsat" + sku);
 							infoItem.setSku(sku);
 						}
 						
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_percent")) {
 							model.setTaxPrecent(childNodes.item(j).getTextContent());
-							System.out.println("tax_percent " +childNodes.item(j).getTextContent());
 							
 						}
 					}
@@ -242,6 +239,38 @@ public class OrderInfoMagCalls {
 	}
 
 	public static void main(String[] args) throws SOAPException, IOException {
+		String sessID = HttpSoapConnector.performLogin();
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrdersInfo("10022002200", sessID);
 		
+		System.out.println("style party  : " + dbmodel.getStylePartyId());
+		
+		System.out.println("bill post  : " + dbmodel.getBillToPostcode());
+		System.out.println("bill fname  : " + dbmodel.getBillToFirstName());
+		System.out.println("billl lname : " + dbmodel.getBillToLastName());
+		System.out.println("bill street : " + dbmodel.getBillToStreetAddress());
+		System.out.println("bill city : " + dbmodel.getBillToCity());
+		System.out.println("bill country id : " + dbmodel.getBillCountryId());
+
+		
+		// shipp
+
+		System.out.println("shipp post : " + dbmodel.getShipToPostcode());
+		System.out.println("fname  : " + dbmodel.getShipToFirstName());
+		System.out.println("ship lname : " + dbmodel.getShipToLastName());
+		System.out.println("ship street : " + dbmodel.getShipToStreetAddress());
+		System.out.println("ship city : " + dbmodel.getShipToCity());
+		System.out.println("ship country id : " + dbmodel.getShipCountryId());
+		
+		
+		System.out.println("updated nav: "+dbmodel.getUpdatedNav());
+		System.out.println("order currency code : "+dbmodel.getOrderCurrencyCode());
+		
+		
+		
+		
+		List<SalesOrderInfoModel> list = dbmodel.getItemInfo();
+		for (SalesOrderInfoModel salesOrderInfoModel : list) {
+			System.out.println("sku: " + salesOrderInfoModel.getSku());
+		}
 	}
 }

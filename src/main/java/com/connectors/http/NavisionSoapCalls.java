@@ -97,17 +97,18 @@ public class NavisionSoapCalls {
 		List<NavOrderModel> orderModelList = new ArrayList<NavOrderModel>();
 
 		NodeList orderList = response.getSOAPBody().getElementsByTagName("SalesOrder");
-		BigDecimal grandTotal = BigDecimal.valueOf(0);
-		BigDecimal shippingValue = BigDecimal.valueOf(0);
-		BigDecimal shippingDiscount=BigDecimal.valueOf(0);
-		BigDecimal totalIP=BigDecimal.valueOf(0);
+		
 		
 		
 		for (int i = 0; i < orderList.getLength(); i++) {
-
+			
 			if (orderList.item(i).getParentNode().getNodeName().equalsIgnoreCase("ReadMultiple_Result")) {
 				NavOrderModel model = new NavOrderModel();
-
+				BigDecimal grandTotal = BigDecimal.valueOf(0);
+				BigDecimal shippingDiscount=BigDecimal.valueOf(0);
+				BigDecimal totalIP=BigDecimal.valueOf(0);
+				
+				model.setShippingAmount("0");
 				NodeList childNodes = orderList.item(i).getChildNodes();
 				for (int j = 0; j < childNodes.getLength(); j++) {
 
@@ -254,9 +255,8 @@ public class NavisionSoapCalls {
 							NavOrderLinesModel line = new NavOrderLinesModel();
 
 							NodeList lineNodes = orderLinesList.item(k).getChildNodes();
-
 							for (int l = 0; l < lineNodes.getLength(); l++) {
-
+								
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("No")) {
 									line.setNo(lineNodes.item(l).getTextContent());
 								}
@@ -292,9 +292,10 @@ public class NavisionSoapCalls {
 								
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Line_Discount_Amount")) {
 									line.setLineDiscountAmount(lineNodes.item(l).getTextContent());
-									shippingDiscount=BigDecimal.valueOf(Double.parseDouble(lineNodes.item(l).getTextContent()));
+									if(line.getType().contains("Charge_Item")){
+										shippingDiscount=BigDecimal.valueOf(Double.parseDouble(lineNodes.item(l).getTextContent()));
+									}
 								
-									
 								}
 
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("VAT_Prod_Posting_Group")) {
@@ -304,7 +305,7 @@ public class NavisionSoapCalls {
 								
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Unit_Price")) {
 									if (charge != null) {
-										shippingValue=BigDecimal.valueOf(Double.parseDouble(lineNodes.item(l).getTextContent()));
+										
 										model.setShippingAmount(lineNodes.item(l).getTextContent());
 									}
 
@@ -345,7 +346,7 @@ public class NavisionSoapCalls {
 							}
 
 						}
-						grandTotal=grandTotal.add(shippingValue).subtract(shippingDiscount);
+						grandTotal=grandTotal.subtract(shippingDiscount);
 						model.setTotalIp(totalIP.toString());
 						model.setCalculatedGrandTotal(grandTotal.toString());
 						model.setLines(orderLinesModel);
@@ -361,5 +362,62 @@ public class NavisionSoapCalls {
 
 	public static void main(String args[]) throws Exception {
 
+		// List<NavOrderModel> ordersList =
+		// NavisionSoapCalls.getOrdersList("10023578400..10023578700");
+		// 10021960100
+
+		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("10023578700");
+
+		for (NavOrderModel order : ordersList) {
+			System.out.println("increment id " + order.getIncrementId());
+
+			System.out.println("base grand total " + order.getBaseGrandTotal());
+			System.out.println("order date " + order.getOrderDate());
+			System.out.println("posting date " + order.getPostingDate());
+			System.out.println("sales person code " + order.getSalesPersonCode());
+			System.out.println("your referecenes " + order.getYouRefercences());
+			System.out.println("external doc no " + order.getExternalDocumentNo());
+			System.out.println("sell customer no " + order.getSellToCustomerNo());
+			System.out.println("shop shipment method " + order.getShopShipmentMethod());
+			System.out.println("shop payment method " + order.getShopPaymentMethod());
+			System.out.println("getShopOrderType " + order.getShopOrderType());
+			System.out.println("getShopCartType " + order.getShopCartType());
+			System.out.println("getSalesPersonCode " + order.getSalesPersonCode());
+			System.out.println("getPartyId " + order.getPartyId());
+			System.out.println("getIsAlreadyShipped " + order.getIsAlreadyShipped());
+			System.out.println("getMagentoGrandTotal " + order.getMagentoGrandTotal());
+			System.out.println("getShopIsPom " + order.getShopIsPom());
+
+			System.out.println("getShopWebsiteCode " + order.getShopWebsiteCode());
+			System.out.println("getShopStoreLanguage " + order.getShopStoreLanguage());
+			System.out.println("getKoboSingleArticle " + order.getKoboSingleArticle());
+			System.out.println("getPrepmtPmtDiscountDate " + order.getPrepmtPmtDiscountDate());
+			System.out.println("getBillToName " + order.getBillToName());
+			System.out.println("getBillToAddress " + order.getBillToAddress());
+			System.out.println("getBillToPostCode " + order.getBillToPostCode());
+			System.out.println("getBillToCity " + order.getBillToCity());
+			System.out.println("getBillToCountryRegionCode " + order.getBillToCountryRegionCode());
+			System.out.println("getShipToName " + order.getShipToName());
+
+			System.out.println("getShipToAddress " + order.getShipToAddress());
+			System.out.println("getShipToPostCode " + order.getShipToPostCode());
+			System.out.println("getShipToCity " + order.getShipToCity());
+			System.out.println("getShipToCountryRegionCode " + order.getShipToCountryRegionCode());
+			System.out.println("getSellToCustomerName " + order.getSellToCustomerName());
+			System.out.println("getSellToAddress " + order.getSellToAddress());
+
+			System.out.println("vat procent " + order.getVatProdPostingGroup());
+			System.out.println("shipping amount " + order.getShippingAmount());
+			
+			System.out.println("Calculated Grand Total " + order.getCalculatedGrandTotal());
+			
+			System.out.println("total ip " + order.getTotalIp());
+
+			for (NavOrderLinesModel line : order.getLines()) {
+				System.out.println("line.getNo() " + line.getNo());
+
+			}
+
+		}
 	}
 }
