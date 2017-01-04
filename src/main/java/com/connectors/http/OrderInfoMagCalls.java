@@ -14,6 +14,7 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
+import com.tools.constants.EnvironmentConstants;
 //import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -49,17 +50,19 @@ public class OrderInfoMagCalls {
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		 SOAPMessage soapResponse =
-//		 soapConnection.call(getOrdersInfoRequest(sessionId,
-//		 orderIncrementId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		 SOAPMessage soapResponse =
+		 soapConnection.call(getOrdersInfoRequest(sessionId,
+		 orderIncrementId), EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
 
 //		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
 //				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
-		 SOAPMessage soapResponse =
-		 soapConnection.call(getOrdersInfoRequest(sessionId,
-		 orderIncrementId),
-		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getOrdersInfoRequest(sessionId,
+//		 orderIncrementId),
+//		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -239,38 +242,6 @@ public class OrderInfoMagCalls {
 	}
 
 	public static void main(String[] args) throws SOAPException, IOException {
-		String sessID = HttpSoapConnector.performLogin();
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrdersInfo("10022002200", sessID);
 		
-		System.out.println("style party  : " + dbmodel.getStylePartyId());
-		
-		System.out.println("bill post  : " + dbmodel.getBillToPostcode());
-		System.out.println("bill fname  : " + dbmodel.getBillToFirstName());
-		System.out.println("billl lname : " + dbmodel.getBillToLastName());
-		System.out.println("bill street : " + dbmodel.getBillToStreetAddress());
-		System.out.println("bill city : " + dbmodel.getBillToCity());
-		System.out.println("bill country id : " + dbmodel.getBillCountryId());
-
-		
-		// shipp
-
-		System.out.println("shipp post : " + dbmodel.getShipToPostcode());
-		System.out.println("fname  : " + dbmodel.getShipToFirstName());
-		System.out.println("ship lname : " + dbmodel.getShipToLastName());
-		System.out.println("ship street : " + dbmodel.getShipToStreetAddress());
-		System.out.println("ship city : " + dbmodel.getShipToCity());
-		System.out.println("ship country id : " + dbmodel.getShipCountryId());
-		
-		
-		System.out.println("updated nav: "+dbmodel.getUpdatedNav());
-		System.out.println("order currency code : "+dbmodel.getOrderCurrencyCode());
-		
-		
-		
-		
-		List<SalesOrderInfoModel> list = dbmodel.getItemInfo();
-		for (SalesOrderInfoModel salesOrderInfoModel : list) {
-			System.out.println("sku: " + salesOrderInfoModel.getSku());
-		}
 	}
 }

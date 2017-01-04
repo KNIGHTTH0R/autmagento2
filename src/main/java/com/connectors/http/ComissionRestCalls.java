@@ -10,6 +10,7 @@ import com.tools.commision.CommisionStylistListResponse;
 import com.tools.commision.CommisionStylistResponse;
 import com.tools.commision.StylistBody;
 import com.tools.constants.Credentials;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.Separators;
 import com.tools.constants.UrlConstants;
 import com.tools.data.commission.CommissionPartyModel;
@@ -22,7 +23,7 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getStylistInfo("2513");
+		ComissionRestCalls.getStylistInfo("5378");
 	}
 
 	public static String composeAuthenticationSuffix() throws Exception {
@@ -44,7 +45,7 @@ public class ComissionRestCalls {
 	public static CommissionStylistModel getStylistInfo(String stylistId) throws Exception {
 
 		String unparsedResponse = JerseyClient
-				.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX + Separators.SLASH
+				.sendGet(EnvironmentConstants.COMMISSION_URL + UrlConstants.COMMISION_STYLIST_SUFFIX + Separators.SLASH
 						+ stylistId + "?page=1&per_page=5000" + composeAuthenticationSuffix());
 		CommissionStylistModel commissionStylistModel = new CommissionStylistModel();
 		ObjectMapper mapper = new ObjectMapper();
@@ -65,7 +66,7 @@ public class ComissionRestCalls {
 	public static CommissionStylistModel getStylistInfo(String stylistId, String year, String month) throws Exception {
 
 		String unparsedResponse = JerseyClient
-				.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX + Separators.SLASH
+				.sendGet(EnvironmentConstants.COMMISSION_URL + UrlConstants.COMMISION_STYLIST_SUFFIX + Separators.SLASH
 						+ stylistId + composePeriodAndPaginationSuffix(year, month) + composeAuthenticationSuffix());
 		CommissionStylistModel commissionStylistModel = new CommissionStylistModel();
 		ObjectMapper mapper = new ObjectMapper();
@@ -86,7 +87,7 @@ public class ComissionRestCalls {
 	public static List<CommissionStylistModel> getStylistListInfo(String year, String month) throws Exception {
 
 		String unparsedResponse = JerseyClient
-				.sendGet(UrlConstants.COMMISION_WEB_BASE + UrlConstants.COMMISION_STYLIST_SUFFIX
+				.sendGet(EnvironmentConstants.COMMISSION_URL + UrlConstants.COMMISION_STYLIST_SUFFIX
 						+ composePeriodAndPaginationSuffix(year, month) + composeAuthenticationSuffix());
 		List<CommissionStylistModel> commissionStylistListModel = new ArrayList<CommissionStylistModel>();
 		ObjectMapper mapper = new ObjectMapper();
@@ -110,7 +111,7 @@ public class ComissionRestCalls {
 
 	public static String getPartyPerformanceInfo(String partyId) throws Exception {
 
-		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE
+		String unparsedResponse = JerseyClient.sendGet(EnvironmentConstants.COMMISSION_URL
 				+ UrlConstants.COMMISION_PARTY_SUFFIX + partyId + composeAuthenticationSuffix());
 
 		CommissionPartyModel commissionPartyModel = new CommissionPartyModel();
@@ -146,7 +147,7 @@ public class ComissionRestCalls {
 
 	public static String getTeamPerformanceInfo(String stylistId) throws Exception {
 
-		String unparsedResponse = JerseyClient.sendGet(UrlConstants.COMMISION_WEB_BASE
+		String unparsedResponse = JerseyClient.sendGet(EnvironmentConstants.COMMISSION_URL
 				+ UrlConstants.TEAM_PERFORMANCE_SUFFIX + stylistId + composeAuthenticationSuffix());
 
 		return unparsedResponse;

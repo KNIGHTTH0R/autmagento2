@@ -13,11 +13,11 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.DBOrderModel;
-import com.tools.persistance.MongoReader;
 
 /**
  * @author mihaibarta
@@ -140,7 +140,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 
 //		 SOAPMessage soapResponse =
@@ -161,16 +161,17 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
-//				MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		SOAPMessage soapResponse = soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
 //		 SOAPMessage soapResponse =
 //		 soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
 //		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
 
-		 SOAPMessage soapResponse =
-				 soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
-				 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+//		 SOAPMessage soapResponse =
+//				 soapConnection.call(getOrdersListRangeRequest(sessID, orderLimit1, orderLimit2),
+//				 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -180,7 +181,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		SOAPMessage soapResponse = soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 //		 SOAPMessage soapResponse =
 //		 soapConnection.call(getPartyOrdersListRequest(sessID, partyId),
 //		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
@@ -426,29 +427,6 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	 public static void main(String args[]) throws SOAPException, IOException {
-	// System.out.println(OrdersInfoMagentoCalls.getPartyOrdersList("14830").get(0).getIncrementId());
-	//	 212468
-		 List<DBOrderModel> list=OrdersInfoMagentoCalls.getOrderWithItems("212468","212468");
-	
-		 
-		 
-		 for (DBOrderModel dbOrderModel : list) {
-			 System.out.println(dbOrderModel.getIncrementId());
-			 System.out.println("customer name "+dbOrderModel.getCustomerName());
-			 System.out.println("party id "+ dbOrderModel.getStylePartyId());
-			 System.out.println("get payed at " +dbOrderModel.getPaidAt());
-			 
-//			 List<SalesOrderInfoModel> listmod= dbOrderModel.getItemInfo();
-//			 for (SalesOrderInfoModel salesOrderInfoModel : listmod) {
-//				System.out.println(salesOrderInfoModel.getSku());
-//			}
-			 
-			
-		}
-		 
-		
-			
-		
 	 
 	 }
 

@@ -13,11 +13,11 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.DBStylistPartyModel;
-import com.tools.persistance.MongoReader;
 
 public class PartyMagentoCalls {
 
@@ -49,7 +49,7 @@ public class PartyMagentoCalls {
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 		 SOAPMessage soapResponse =
 		 soapConnection.call(getStylistPartyList(sessID, stylistId),
-		 MongoReader.getSoapURL() + UrlConstants.API_URI);
+		 EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 //		SOAPMessage soapResponse = soapConnection.call(getStylistPartyList(sessID, stylistId),
 //				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
