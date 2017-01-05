@@ -97,17 +97,18 @@ public class NavisionSoapCalls {
 		List<NavOrderModel> orderModelList = new ArrayList<NavOrderModel>();
 
 		NodeList orderList = response.getSOAPBody().getElementsByTagName("SalesOrder");
-		BigDecimal grandTotal = BigDecimal.valueOf(0);
-		BigDecimal shippingValue = BigDecimal.valueOf(0);
-		BigDecimal shippingDiscount=BigDecimal.valueOf(0);
-		BigDecimal totalIP=BigDecimal.valueOf(0);
+		
 		
 		
 		for (int i = 0; i < orderList.getLength(); i++) {
-
+			
 			if (orderList.item(i).getParentNode().getNodeName().equalsIgnoreCase("ReadMultiple_Result")) {
 				NavOrderModel model = new NavOrderModel();
-
+				BigDecimal grandTotal = BigDecimal.valueOf(0);
+				BigDecimal shippingDiscount=BigDecimal.valueOf(0);
+				BigDecimal totalIP=BigDecimal.valueOf(0);
+				
+				model.setShippingAmount("0");
 				NodeList childNodes = orderList.item(i).getChildNodes();
 				for (int j = 0; j < childNodes.getLength(); j++) {
 
@@ -254,9 +255,8 @@ public class NavisionSoapCalls {
 							NavOrderLinesModel line = new NavOrderLinesModel();
 
 							NodeList lineNodes = orderLinesList.item(k).getChildNodes();
-
 							for (int l = 0; l < lineNodes.getLength(); l++) {
-
+								
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("No")) {
 									line.setNo(lineNodes.item(l).getTextContent());
 								}
@@ -292,9 +292,10 @@ public class NavisionSoapCalls {
 								
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Line_Discount_Amount")) {
 									line.setLineDiscountAmount(lineNodes.item(l).getTextContent());
-									shippingDiscount=BigDecimal.valueOf(Double.parseDouble(lineNodes.item(l).getTextContent()));
+									if(line.getType().contains("Charge_Item")){
+										shippingDiscount=BigDecimal.valueOf(Double.parseDouble(lineNodes.item(l).getTextContent()));
+									}
 								
-									
 								}
 
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("VAT_Prod_Posting_Group")) {
@@ -304,7 +305,7 @@ public class NavisionSoapCalls {
 								
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Unit_Price")) {
 									if (charge != null) {
-										shippingValue=BigDecimal.valueOf(Double.parseDouble(lineNodes.item(l).getTextContent()));
+										
 										model.setShippingAmount(lineNodes.item(l).getTextContent());
 									}
 
@@ -345,7 +346,7 @@ public class NavisionSoapCalls {
 							}
 
 						}
-						grandTotal=grandTotal.add(shippingValue).subtract(shippingDiscount);
+						grandTotal=grandTotal.subtract(shippingDiscount);
 						model.setTotalIp(totalIP.toString());
 						model.setCalculatedGrandTotal(grandTotal.toString());
 						model.setLines(orderLinesModel);
@@ -360,6 +361,10 @@ public class NavisionSoapCalls {
 	}
 
 	public static void main(String args[]) throws Exception {
+
+		// List<NavOrderModel> ordersList =
+		// NavisionSoapCalls.getOrdersList("10023578400..10023578700");
+		// 10021960100
 
 	}
 }

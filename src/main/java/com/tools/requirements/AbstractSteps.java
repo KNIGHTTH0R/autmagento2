@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
-
 import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
@@ -120,8 +117,12 @@ import com.pages.frontend.reports.JewelryBonusHistoryPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.pages.frontend.reports.TeamReportPage;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -175,7 +176,7 @@ public class AbstractSteps extends ScenarioSteps {
 		loginPage().inputUserPass(userPass);
 		loginPage().clickOnLoginButton();
 		Assert.assertTrue(
-				getDriver().getCurrentUrl().contains(MongoReader.getSoapURL() + ContextConstants.NOT_PREFERED_WEBSITE));
+				getDriver().getCurrentUrl().contains(EnvironmentConstants.SOAP_URL + ContextConstants.NOT_PREFERED_WEBSITE));
 		footerPage().verifyThatFooterWebsiteIsCorrect(ContextConstants.NOT_PREFERED_WEBSITE);
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);

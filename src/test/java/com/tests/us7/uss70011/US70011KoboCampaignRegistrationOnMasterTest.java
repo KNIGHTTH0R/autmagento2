@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +34,6 @@ import com.tools.CustomVerification;
 import com.tools.cartcalculations.borrowCart.PomCartCalculator;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
-import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
@@ -54,6 +48,11 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AdyenWorkflows;
 import com.workflows.frontend.ShippingAndConfirmationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US7.11 Kobo Campaign Registration On Master Test ", type = "Scenarios")
 @Story(Application.KoboCampaign.US7_11.class)

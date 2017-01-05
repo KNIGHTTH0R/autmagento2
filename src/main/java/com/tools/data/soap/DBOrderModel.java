@@ -37,6 +37,7 @@ public class DBOrderModel {
 	
 	private String customerFirstName;
 	private String customerLastName;
+	private String customerName;
 
 	// from billing list details
 	private String billToFirstName;
@@ -73,6 +74,14 @@ public class DBOrderModel {
 	
 	
 	
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
 	public String getTaxPrecent() {
 		return taxPrecent;
 	}

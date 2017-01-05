@@ -14,9 +14,9 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
 import com.tools.constants.Credentials;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.persistance.MongoReader;
 
 public class LoginSoapCall {
 
@@ -46,7 +46,7 @@ public class LoginSoapCall {
 		}
 		SOAPMessage soapResponse = null;
 		try {
-			soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), MongoReader.getSoapURL() + UrlConstants.API_URI);
+			soapResponse = soapConnection.call(createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP), EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 		} catch (SOAPException e1) {
 			e1.printStackTrace();
 		}

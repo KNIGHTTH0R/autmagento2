@@ -14,6 +14,7 @@ import javax.xml.soap.SOAPMessage;
 
 import org.w3c.dom.NodeList;
 
+import com.tools.constants.EnvironmentConstants;
 //import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -49,17 +50,19 @@ public class OrderInfoMagCalls {
 
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-//		 SOAPMessage soapResponse =
-//		 soapConnection.call(getOrdersInfoRequest(sessionId,
-//		 orderIncrementId), MongoReader.getSoapURL() + UrlConstants.API_URI);
+
+		 SOAPMessage soapResponse =
+		 soapConnection.call(getOrdersInfoRequest(sessionId,
+		 orderIncrementId), EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
 
 //		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
 //				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
-		 SOAPMessage soapResponse =
-		 soapConnection.call(getOrdersInfoRequest(sessionId,
-		 orderIncrementId),
-		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getOrdersInfoRequest(sessionId,
+//		 orderIncrementId),
+//		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
@@ -187,8 +190,7 @@ public class OrderInfoMagCalls {
 
 					for (int j = 0; j < childNodes.getLength(); j++) {
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {
-							// this the bundle and configurable products are
-							// parsed
+						
 							List<String> list = new ArrayList<String>(
 									Arrays.asList(childNodes.item(j).getTextContent().split("-")));
 							String sku = null;
@@ -202,13 +204,11 @@ public class OrderInfoMagCalls {
 								sku = list.get(0);
 							}
 
-							System.out.println("sku parsat" + sku);
 							infoItem.setSku(sku);
 						}
 						
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_percent")) {
 							model.setTaxPrecent(childNodes.item(j).getTextContent());
-							System.out.println("tax_percent " +childNodes.item(j).getTextContent());
 							
 						}
 					}

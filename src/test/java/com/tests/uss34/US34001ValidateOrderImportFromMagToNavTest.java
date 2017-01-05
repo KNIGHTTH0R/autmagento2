@@ -29,13 +29,17 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 	@Steps
 	public ImportOrdersSteps ordersImport;
 	
-	public List<DBOrderModel> shopListOrders = new ArrayList<DBOrderModel>();
-	public List<NavOrderModel> navListOrders = new ArrayList<NavOrderModel>();
+	private List<DBOrderModel> shopListOrders = new ArrayList<DBOrderModel>();
+	private List<NavOrderModel> navListOrders = new ArrayList<NavOrderModel>();
 
 	@Before
 	public void setUp() throws Exception {
-		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("103587", "103587");
-		navListOrders = NavisionSoapCalls.getOrdersList("100106871");
+	//10021957500
+	
+//		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("103587", "103587");
+//		navListOrders = NavisionSoapCalls.getOrdersList("100106871");
+		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("212971", "212972");
+		navListOrders = NavisionSoapCalls.getOrdersList("10022004700..10022004800");
 		
 	}
 

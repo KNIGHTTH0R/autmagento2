@@ -19,7 +19,7 @@ public class JerseyClient {
 			}
 
 			output = response.getEntity(String.class);
-			System.out.println(output);
+//			System.out.println(output);
 
 		} catch (Exception e) {
 
