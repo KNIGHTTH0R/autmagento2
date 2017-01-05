@@ -9,6 +9,15 @@ public class IpOverViewPayedOrdersModel {
 	private String orderStatus;
 	private String amount;
 	private String ip;
+	private String scheduledDelivery;
+
+	public String getScheduledDelivery() {
+		return scheduledDelivery;
+	}
+
+	public void setScheduledDelivery(String scheduledDelivery) {
+		this.scheduledDelivery = scheduledDelivery;
+	}
 
 	public String getOrderID() {
 		return orderID;

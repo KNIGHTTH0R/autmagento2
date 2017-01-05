@@ -140,13 +140,13 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
-				MongoReader.getSoapURL() + UrlConstants.API_URI);
+//		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
+//				MongoReader.getSoapURL() + UrlConstants.API_URI);
 
 
-//		 SOAPMessage soapResponse =
-//		 soapConnection.call(getOrdersListRequest(sessID, stylistId),
-//		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+		 SOAPMessage soapResponse =
+		 soapConnection.call(getOrdersListRequest(sessID, stylistId),
+		 "http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
 //		 SOAPMessage soapResponse =
 //				 soapConnection.call(getOrdersListRequest(sessID, stylistId),
 //				 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);

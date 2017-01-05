@@ -119,12 +119,12 @@ public class HttpSoapConnector {
 //				MongoReader.getSoapURL() + UrlConstants.API_URI);
 		
 
-		SOAPMessage soapResponse = soapConnection.call(
-			createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
-			MongoReader.getSoapURL() + UrlConstants.API_URI);
 //		SOAPMessage soapResponse = soapConnection.call(
-//				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
-//				"http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
+//			createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
+//			MongoReader.getSoapURL() + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(
+				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
+				"http://aut-pippajean.evozon.com/" + UrlConstants.API_URI);
 //		SOAPMessage soapResponse = soapConnection.call(
 //				createLoginRequest(Credentials.LOGIN_USER_SOAP, Credentials.LOGIN_PASS_SOAP),
 //				"http://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
