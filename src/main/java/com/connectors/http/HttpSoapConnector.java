@@ -127,9 +127,11 @@ public class HttpSoapConnector {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
+
 		SOAPMessage soapResponse = soapConnection.call(
 				createLoginRequest(EnvironmentConstants.SOAP_USERNAME, EnvironmentConstants.SOAP_PASSWORD),
 				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
 
 		// SOAPMessage soapResponse = soapConnection.call(
 		// createLoginRequest("username", "pass"),

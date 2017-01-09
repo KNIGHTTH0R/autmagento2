@@ -139,8 +139,10 @@ public class OrdersInfoMagentoCalls {
 		String sessID = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+
 		SOAPMessage soapResponse = soapConnection.call(getOrdersListRequest(sessID, stylistId),
 				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
 
 
 //		 SOAPMessage soapResponse =
