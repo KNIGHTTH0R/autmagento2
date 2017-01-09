@@ -105,14 +105,14 @@ public class ImportOrdersSteps  {
 
 			importOrders.validateTotalIp(order.getTotalIp(), compare.getTotalIp());
 
-			customVerification.printErrors();
+			
 
 			// should be clarified before, because here we have different value
 			// validateUpdatedNavDate(order.getUpdatedNav(),
 			// compare.getPrepmtPmtDiscountDate());
 			// validateKoboSingleArticle(order.getKoboSingleArticle(),compare.getKoboSingleArticle());
 		}
-
+	//	customVerification.printErrors();
 	}
 
 	
