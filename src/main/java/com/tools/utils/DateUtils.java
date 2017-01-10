@@ -14,6 +14,8 @@ import java.util.Locale;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
+import com.tools.persistance.MongoReader;
+
 public class DateUtils {
 
 	public static String getLastDayOfTheCurrentMonth(String format) {
@@ -463,7 +465,8 @@ public class DateUtils {
 		// System.out.println(DateUtils.getLastDayOfAGivenMonth("2016-09-30
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
 	//	System.out.println(DateUtils.getFridaysBetweenDates("2016-11-11", "2016-12-24", "yyyy-MM-dd"));
-		System.out.println(DateUtils.parseDate("2016-12-15", "yyyy-MM-dd", "dd. MM."));
+//		System.out.println(DateUtils.parseDate("2016-12-15", "yyyy-MM-dd", "dd. MM."));
+		System.out.println(DateUtils.parseDate("07. MRZ. 17", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
 	}
 
 }
