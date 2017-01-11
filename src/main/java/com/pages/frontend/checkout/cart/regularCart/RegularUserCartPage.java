@@ -208,7 +208,7 @@ public class RegularUserCartPage extends AbstractPage {
 				foundProduct = true;
 
 				WebElement delivery = element(product
-						.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[selected='selected']")));
+						.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[ ='selected']")));
 				String[] tokens = delivery.getText().split(", ");
 				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
 				break;

@@ -102,7 +102,7 @@ public class US6001ValidateStarterSetOrderInBackendTest extends BaseTest {
 		ordersSteps.selectMenu(ConfigConstants.ADYEN_NOTIFICATION_TAB);
 		ordersSteps.verifyAuthorization(orderInfoModel.getPspReference());
 		ordersSteps.verifyCapture(orderInfoModel.getPspReference());
-		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Zahlung erfolgreich");
+		orderWorkflows.validateOrderStatus(orderInfoModel.getOrderStatus(), "Storniert");
 
 		customVerifications.printErrors();
 	}

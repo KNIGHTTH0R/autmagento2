@@ -1,6 +1,7 @@
 package com.tools.data.salesOnSpeed;
 
 public class PrimaryPhone {
+	
 	 private String _creator;
 
 	    private String _id;
@@ -95,11 +96,5 @@ public class PrimaryPhone {
 	    public void setType (String type)
 	    {
 	        this.type = type;
-	    }
-
-	    @Override
-	    public String toString()
-	    {
-	        return "PromaryPhone [_creator = "+_creator+", _id = "+_id+", created = "+created+", updated = "+updated+", customFields = "+customFields+", __v = "+__v+", number = "+number+", type = "+type+"]";
 	    }
 }

@@ -1,13 +1,11 @@
-package com.tools.salesOnSpeed;
+package com.tools.data.salesOnSpeed;
 
 import java.util.List;
 
-import com.tools.data.salesOnSpeed.CustomFields;
-import com.tools.data.salesOnSpeed.Notes;
-import com.tools.data.salesOnSpeed.Phones;
-import com.tools.data.salesOnSpeed.PrimaryPhone;
-
-public class SalesOnSpeedCustomerResponse {
+public class SalesOnSpeedContactModel {
+	
+	private PrimaryPhone primaryPhone;
+	
 	private String prename;
 
 	private String street;
@@ -38,35 +36,19 @@ public class SalesOnSpeedCustomerResponse {
 
 	private List<Notes> notes;
 	
+	
 	private CustomFields customFields;
 	
-	private PrimaryPhone primaryPhone;
+	
 
 	public PrimaryPhone getPrimaryPhone() {
 		return primaryPhone;
-	}
-
-	public List<Phones> getPhones() {
-		return phones;
-	}
-
-	public void setPhones(List<Phones> phones) {
-		this.phones = phones;
-	}
-
-	public List<Notes> getNotes() {
-		return notes;
-	}
-
-	public void setNotes(List<Notes> notes) {
-		this.notes = notes;
 	}
 
 	public void setPrimaryPhone(PrimaryPhone primaryPhone) {
 		this.primaryPhone = primaryPhone;
 	}
 
-	
 	public String getPrename() {
 		return prename;
 	}
@@ -116,6 +98,21 @@ public class SalesOnSpeedCustomerResponse {
 	}
 
 
+	public List<Phones> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<Phones> phones) {
+		this.phones = phones;
+	}
+
+	public List<Notes> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<Notes> notes) {
+		this.notes = notes;
+	}
 
 	public String getCity() {
 		return city;
@@ -183,16 +180,12 @@ public class SalesOnSpeedCustomerResponse {
 
 	@Override
 	public String toString() {
-		return "SalesOnSpeedCustomerResponse [prename=" + prename + ", street=" + street + ", __v=" + __v
-				+ ", lastname=" + lastname + ", postcode=" + postcode + ", city=" + city + ", country=" + country
-				+ ", _id=" + _id + ", updated=" + updated + ", created=" + created + ", email=" + email + ", userId="
-				+ userId + ", language=" + language + ", phones=" + phones + ", notes=" + notes + ", customFields="
-				+ customFields + ", primaryPhone=" + primaryPhone + "]";
+		return "SalesOnSpeedCustomerModel [prename = " + prename + ", customFields = " + customFields + ", street = " + street
+				+ ", __v = " + __v + ", lastname = " + lastname + ", postcode = " + postcode + ", phones = " + phones
+				+ ", city = " + city + ", country = " + country + ", _id = " + _id + ", updated = " + updated
+				+ ", created = " + created + ", email = " + email + ", userId = " + userId + ", language = " + language
+				+ ", notes = " + notes + "]";
 	}
-
 	
-
-	
-	
-	
+			
 }
