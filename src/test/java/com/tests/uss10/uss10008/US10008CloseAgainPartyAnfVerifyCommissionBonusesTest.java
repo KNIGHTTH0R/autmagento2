@@ -93,7 +93,8 @@ public class US10008CloseAgainPartyAnfVerifyCommissionBonusesTest extends BaseTe
 		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
 		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyTotal(partyBonusCalculationModelList)));
 		// 1 forthy discount from order and 1 added manually
-		expectedClosedPartyPerformanceModel.setFourthyDiscounts("2");
+//		expectedClosedPartyPerformanceModel.setFourthyDiscounts("2");
+		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
 		expectedClosedPartyPerformanceModel.setIp(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setIpInPayment(String.valueOf(PartyBonusCalculation.calculatePartyIp(partyBonusCalculationModelList)));
 

@@ -16,7 +16,7 @@ import com.tests.us3.us3001.US3001ValidateReorderBackOfficeTest;
 //	US3001CheckOrderOnStylecoachProfileTest.class,
 //	US3001ValidateOrderEmailTest.class,
 	US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest.class,
-	US3001ValidateReorderBackOfficeTest.class,
+	
 	
 })
 @RunWith(Suite.class)
