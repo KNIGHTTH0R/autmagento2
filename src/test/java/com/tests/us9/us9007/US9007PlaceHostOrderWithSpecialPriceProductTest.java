@@ -145,7 +145,7 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 		
-		partyUrlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		partyUrlModel = MongoReader.grabUrlModels("US9007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 
@@ -202,7 +202,7 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 
 
 		hostCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		hostCartValidationWorkflows.performCartValidations();
+		hostCartValidationWorkflows.performCheckoutValidations();
 
 		customVerifications.printErrors();
 	}

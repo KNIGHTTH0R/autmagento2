@@ -218,7 +218,7 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		if (!genProduct5.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct5.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp4.add(productData);
-		
+//		
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct6, "1", "0");
 		if (!genProduct6.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct6.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
@@ -236,10 +236,12 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		String deliveryTp2 = regularUserCartSteps.getDeliveryDate(genProduct3.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		String deliveryTp3 = regularUserCartSteps.getDeliveryDate(genProduct4.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp4 = regularUserCartSteps.getDeliveryDate(genProduct5.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp5 = regularUserCartSteps.getDeliveryDate(genProduct6.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp6 = regularUserCartSteps.getDeliveryDate(genProduct7.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-
+//		String deliveryTp4 = regularUserCartSteps.getDeliveryDate(genProduct5.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+//		String deliveryTp5 = regularUserCartSteps.getDeliveryDate(genProduct6.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+//		String deliveryTp6 = regularUserCartSteps.getDeliveryDate(genProduct7.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		String deliveryTp4 = "03.03.2017";
+		String deliveryTp5 = "10.03.2017";
+		String deliveryTp6 = "17.03.2017";
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 
 		orderForCustomerCartSteps.clickGoToShipping();
@@ -282,8 +284,7 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp4, getClass().getSimpleName() + "TP4");
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp5, getClass().getSimpleName() + "TP5");
 		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp6, getClass().getSimpleName() + "TP6");
-//		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp7, getClass().getSimpleName() + "TP7");
-//		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp8, getClass().getSimpleName() + "TP8");
+		
 
 		MongoWriter.saveProductDetailedModel(genProduct2, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveProductDetailedModel(genProduct3, getClass().getSimpleName() + "TP2");
@@ -309,13 +310,7 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		}
 		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp6) {
 			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP6");
-		}
-//		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp7) {
-//			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP7");
-//		}
-//		for (HostBasicProductModel product : HostCartCalculator.allProductsListTp8) {
-//			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName() + "TP8");
-//		}
+
 		MongoWriter.saveIncrementId(prod1IncrementId, getClass().getSimpleName() + "TP1");
 		MongoWriter.saveIncrementId(prod2IncrementId, getClass().getSimpleName()+ "TP2");
 		MongoWriter.saveIncrementId(prod3IncrementId, getClass().getSimpleName() + "TP3");
@@ -323,5 +318,5 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		MongoWriter.saveIncrementId(prod5IncrementId, getClass().getSimpleName() + "TP5");
 		MongoWriter.saveIncrementId(prod6IncrementId, getClass().getSimpleName()+ "TP6");
 	}
-
+	}
 }

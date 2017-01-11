@@ -209,7 +209,7 @@ public class US31003PartyHostBuysForCustomerTpTest extends BaseTest {
 		String deliveryTp2 = regularUserCartSteps.getDeliveryDate(genProduct3.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		String deliveryTp3 = regularUserCartSteps.getDeliveryDate(genProduct4.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		String deliveryTp4 = regularUserCartSteps.getDeliveryDate(genProduct5.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-
+	//	String deliveryTp4 ="03.03.2017";
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 
 		orderForCustomerCartSteps.clickGoToShipping();

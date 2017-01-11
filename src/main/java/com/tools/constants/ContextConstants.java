@@ -137,6 +137,7 @@ public class ContextConstants {
 	public static final String EARRINGS= MongoReader.getDictionaryItem("EARRINGS");
 	
 
-	
+	public static final String UNICODE = "ÀàÈèÌìÒòÙùÁáÉéÍíÓóÚúÝýÂâÊêÎîÔôÛûŶŷÃãÕõÑñÄäËëÏïÖöÜüŸÿÅåÇçŐőŰű";
+	public static final String PLAIN_ASCII ="AaEeIiOoUuAaEeIiOoUuYyAaEeIiOoUuYyAaOoNnAaEeIiOoUuYyAaCcOoUu";
 	
 }

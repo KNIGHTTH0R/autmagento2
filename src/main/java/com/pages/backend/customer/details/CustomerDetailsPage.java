@@ -121,6 +121,9 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "_accountconfirmation")
 	private WebElement accountConfirmationDropdown;
+	
+	@FindBy(id="customer_info_tabs_stylecoach_salesonspeed_info")
+	private WebElement salesOnSpeedInfo;
 
 	public void addNewAddress() {
 		evaluateJavascript("jQuery.noConflict();");
@@ -424,6 +427,12 @@ public class CustomerDetailsPage extends AbstractPage {
 		performanceTab.click();
 		waitABit(TimeConstants.TIME_MEDIUM);
 
+	}
+	
+	public void clickOnSalesOnSpeedInfo() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(salesOnSpeedInfo).waitUntilVisible();
+		salesOnSpeedInfo.click();
 	}
 
 	public LoungeIpPerformanceModel grabSCPerformanceIpLogicAdmin() {

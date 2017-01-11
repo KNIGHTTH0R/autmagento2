@@ -207,10 +207,14 @@ public class RegularUserCartPage extends AbstractPage {
 			if (product.getText().contains(productCode)) {
 				foundProduct = true;
 
-				WebElement delivery = element(product
-						.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[ ='selected']")));
-				String[] tokens = delivery.getText().split(", ");
-				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
+				WebElement delivery = element(product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[selected='selected']")));
+				String noSpecialChar=toAsciiString(delivery.getText());
+				String[] tokens = noSpecialChar.split(", ");
+				System.out.println("sadasdasdasdas   "+tokens[1]);
+				//the replace is due to a java 8 bug, get rid of this when fixed
+				deliveryDate = DateUtils.parseDate(tokens[1].replace("MAR", "MRZ"), "dd. MMM. yy", locale, "dd.MM.YYYY");
+			
+
 				break;
 			}
 		}
@@ -219,6 +223,25 @@ public class RegularUserCartPage extends AbstractPage {
 		return deliveryDate;
 	}
 
+	
+	 
+	        
+	public static String toAsciiString(String str) {
+	    if (str == null) {
+	        return null;
+	    }
+	    StringBuilder sb = new StringBuilder();
+	    for (int index = 0; index < str.length(); index++) {
+	        char c = str.charAt(index);
+	        int pos = ContextConstants.UNICODE.indexOf(c);
+	        if (pos > -1)
+	            sb.append(ContextConstants.PLAIN_ASCII.charAt(pos));
+	        else {
+	            sb.append(c);
+	        }
+	    }
+	    return sb.toString();
+	}
 	/**
 	 * @param productCode
 	 * 
@@ -492,5 +515,7 @@ public class RegularUserCartPage extends AbstractPage {
 		Assert.assertTrue("Payment and Shipping block is enabled but it shouldn't",
 				getDriver().findElements(By.cssSelector("ul.purchase-options.form-list li")).size() == 0);
 	}
+	
+	
 
 }
