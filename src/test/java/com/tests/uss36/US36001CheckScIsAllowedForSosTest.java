@@ -104,7 +104,7 @@ public class US36001CheckScIsAllowedForSosTest extends BaseTest{
 	}
 	
 	@Test
-	public void us36001CheckScIsAllowedForSosTest() {
+	public void us36001CheckScIsAllowedForSosTest() throws Exception {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(username);
@@ -112,6 +112,8 @@ public class US36001CheckScIsAllowedForSosTest extends BaseTest{
 		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
 		stylecoachSalesOnSpeedBackendSteps.selectAllowSosSync("Ja");
 		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
+		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
+		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
 		
 		frontEndSteps.performLogin(username,password);
 		if (!headerSteps.succesfullLogin()) {
@@ -125,8 +127,8 @@ public class US36001CheckScIsAllowedForSosTest extends BaseTest{
 		loungeSteps.goToContactsList();
 		contactDetailsSteps.checkIsPresentSosButton();
 	    
-//		sosSteps.getSosUserEmail();
-//		sosSteps.getSosPass();
+		sosSteps.getSosUserEmail();
+		sosSteps.getSosPass();
 		
 		
 		customVerifications.printErrors();

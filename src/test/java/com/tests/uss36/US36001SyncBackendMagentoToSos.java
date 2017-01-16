@@ -117,6 +117,8 @@ public class US36001SyncBackendMagentoToSos extends BaseTest {
 		stylecoachSalesOnSpeedBackendSteps.selectAllowSosSync("Ja");
 		stylecoachSalesOnSpeedBackendSteps.clickOnResetAccountButton();
 		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
+		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
+		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
 		
 		frontEndSteps.performLogin("Y8VZ1NotN29o@mailinator.com","q1w2e3");
 		if (!headerSteps.succesfullLogin()) {
@@ -127,7 +129,6 @@ public class US36001SyncBackendMagentoToSos extends BaseTest {
 		profileNavSteps.selectMenu(ContextConstants.SALESONSPEED_INFO);
 		sosSteps.getSosUserEmail();
 		sosSteps.getSosPass();
-		//sosSteps.verifySosMessage();
 		headerSteps.goToLounge();
 		loungeSteps.goToContactsList();
 		contactDetailsSteps.checkIsPresentSosButton();

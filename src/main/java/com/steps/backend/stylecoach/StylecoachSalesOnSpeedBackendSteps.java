@@ -27,4 +27,13 @@ public class StylecoachSalesOnSpeedBackendSteps extends AbstractSteps {
 		sosDetailsBackendPage().clickOnResetAccountButton();
 	}
 	
+	@Step
+	public boolean checkIsPresentResetAccountButton() {
+		return sosDetailsBackendPage().checkIsPresentResetAccountButton();
+	}
+	@Step
+	public boolean checkIsPresentResetContactButton() {
+		return sosDetailsBackendPage().checkIsPresentResetContactButton();
+	}
+	
 }
