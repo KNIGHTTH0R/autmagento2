@@ -22,5 +22,10 @@ public class ProfileNavSteps extends AbstractSteps {
 	public void inviteGuestsToPartyButton() {
 		profileNavPage().inviteGuestsToPartyButton();
 	}
+	
+	@Step
+	public void checkSosMenuIsNotPresent(String menu) {
+		profileNavPage().checkSosMenuIsNotPresent(menu);
+	}
 
 }

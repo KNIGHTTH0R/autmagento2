@@ -1,12 +1,33 @@
 package com.pages.frontend;
 
-import org.openqa.selenium.By;
+import java.util.concurrent.TimeUnit;
 
+import net.serenitybdd.core.annotations.findby.FindBy;
+
+import org.jruby.RubyProcess.Sys;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import com.tools.constants.ContextConstants;
 import com.tools.data.frontend.ContactModel;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.PrintUtils;
 
 public class ContactDetailsPage extends AbstractPage {
+	
+	@FindBy(id = "sosMassSyncContacts")
+	private WebElement sosButton;
+	
+	@FindBy(css = "#sosFormMassSyncContacts button.blue-button")
+	private WebElement submitButton;
+	
+	@FindBy(css = "	a[class='fancybox-item fancybox-close']")
+	private WebElement closeModal;
+	
+	
+	
 
 	public ContactModel grabContactDetails() {
 
@@ -29,6 +50,47 @@ public class ContactDetailsPage extends AbstractPage {
 		return result;
 
 	}
+	
+	public boolean checkIsPresentSosButton(){
+		boolean isVisible = false;
+		if(element(sosButton).isVisible())
+		{
+			isVisible=true;
+			System.out.println("butonul apareeeeeeee"+isVisible);
+			Assert.assertTrue("The menu was  found", isVisible);
+			
+		}
+		else 
+		{
+			isVisible=false;
+			System.out.println("butonul nu apare"+isVisible);
+			Assert.assertFalse("The menu was not found", isVisible);
+		}
+		
+
+		return isVisible;
+	}
+	
+	public void clickOnSosSyncButton() {
+		element(sosButton).waitUntilVisible();
+		sosButton.click();
+		
+	}
+	
+	public void clickOnSubmitSosButton() {
+		element(submitButton).waitUntilVisible();
+		submitButton.click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.SOS_LOADING_MESSAGE));
+	}
+	
+	public void closeModalWindow() {
+		element(closeModal).waitUntilVisible();
+		closeModal.click();
+		waitABit(5000);
+		
+	}
+	
 
 }
 //*[@id="contact-information"]/p[4]

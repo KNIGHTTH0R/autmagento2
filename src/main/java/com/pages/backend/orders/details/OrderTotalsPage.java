@@ -21,6 +21,7 @@ public class OrderTotalsPage extends AbstractPage {
 	public OrderTotalsModel grabTotals() {
 
 		OrderTotalsModel result = new OrderTotalsModel();
+        waitForPageToLoad();
 		element(tableContainer).waitUntilVisible();
 
 		List<WebElement> listEntries = tableContainer.findElements(By.cssSelector("tr"));

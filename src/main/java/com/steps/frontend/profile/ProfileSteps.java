@@ -37,5 +37,10 @@ public class ProfileSteps extends AbstractSteps {
 	public void clickReorderLink(String orderId) {
 		profileHistoryPage().clickReorderLink(orderId);
 	}
+	
+	@Step
+	public void verifySosMessage() {
+		sosPage().verifySosMessage();
+	}
 
 }

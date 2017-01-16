@@ -13,5 +13,21 @@ public class ContactDetailsSteps extends AbstractSteps {
 	public ContactModel grabContactDetails() {
 		return contactDetailsPage().grabContactDetails();
 	}
+	
+	@Step
+	public boolean checkIsPresentSosButton() {
+		return contactDetailsPage().checkIsPresentSosButton();
+	}
 
+	
+	@Step
+	public void clickSosButton() {
+		contactDetailsPage().clickOnSosSyncButton();
+	}
+	
+	@Step
+	public void clickOnSubmitSosButton() {
+		contactDetailsPage().clickOnSubmitSosButton();
+		contactDetailsPage().closeModalWindow();
+	}
 }

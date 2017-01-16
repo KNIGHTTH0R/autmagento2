@@ -41,4 +41,19 @@ public class ProfileNavPage extends AbstractPage {
 		element(sendPartyInvitationButton).waitUntilVisible();
 		sendPartyInvitationButton.click();
 	}
+	
+	public void checkSosMenuIsNotPresent(String menu) {
+		List<WebElement> menuList = getDriver().findElements(By.cssSelector("div.block-content ul li a"));
+		boolean found = false;
+		for (WebElement webElement : menuList) {
+			if (webElement.getText().contains(menu)) {
+				webElement.click();
+				found = true;
+				break;
+			}
+			else Assert.assertFalse("The menu was not found", found);
+		}
+		
+	}
+	
 }

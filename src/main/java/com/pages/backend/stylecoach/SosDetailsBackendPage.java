@@ -1,33 +1,57 @@
 package com.pages.backend.stylecoach;
 
+import java.util.List;
+
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import com.tools.requirements.AbstractPage;
 
 public class SosDetailsBackendPage extends AbstractPage {
 
 	@FindBy(id = "_sosinfosos_password")
-	private WebElement activatedAtInput;
+	private WebElement sosPassword;
 
 	@FindBy(css = "_sosinfosos_sync")
-	private WebElement save;
+	private WebElement allowSosSyncOption;
+	
+	@FindBy(id = "_sosinforeset_account")
+	private WebElement resetAccountButton;
+	
+	
 
-	public void inputActivatedAtDate(String date) {
+	public void selectAllowSosSync(String syncSos) {
 		evaluateJavascript("jQuery.noConflict();");
-		element(activatedAtInput).waitUntilVisible();
-		activatedAtInput.clear();
-		activatedAtInput.sendKeys(date);
-
+		Select dropdown = new Select(getDriver().findElement(By.id("_sosinfosos_sync")));
+		dropdown.selectByVisibleText(syncSos);
+		
+		
 	}
-
-	public void saveStylecoach() {
+	
+	public String checkPasswordField() {
+		String pass = "";
+		WebElement passInput = getDriver().findElement(By.cssSelector("#_sosinfosos_password"));
+		String textFromPasswordInputBox=passInput.getAttribute("value");
+			if (textFromPasswordInputBox.isEmpty()) {
+				System.out.println("Input fields is empty");
+			}else
+			{
+				pass=passInput.getAttribute("value");
+				System.out.println("Password id:"+pass);
+			}
+		return pass;
+	}
+	
+	
+	public void clickOnResetAccountButton() {
 		evaluateJavascript("jQuery.noConflict();");
-		element(save).waitUntilVisible();
-		save.click();
-		waitForPageToLoad();
-
+		element(resetAccountButton).waitUntilVisible();
+		resetAccountButton.click();
 	}
 
 }
+
+
