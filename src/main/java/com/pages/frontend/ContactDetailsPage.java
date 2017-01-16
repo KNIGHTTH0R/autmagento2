@@ -1,6 +1,9 @@
 package com.pages.frontend;
 
+
 import java.util.concurrent.TimeUnit;
+
+
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
@@ -15,6 +18,7 @@ import com.tools.data.frontend.ContactModel;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.PrintUtils;
 
+
 public class ContactDetailsPage extends AbstractPage {
 	
 	@FindBy(id = "sosMassSyncContacts")
@@ -27,8 +31,6 @@ public class ContactDetailsPage extends AbstractPage {
 	private WebElement closeModal;
 	
 	
-	
-
 	public ContactModel grabContactDetails() {
 
 		ContactModel result = new ContactModel();
@@ -44,6 +46,8 @@ public class ContactDetailsPage extends AbstractPage {
 		result.setTown(getDriver().findElement(By.xpath("//*[@id='contact-information']/p[4]")).getText());
 		result.setCountry(getDriver().findElement(By.cssSelector("#contact-information p.dp-bl.contact-city")).getText());
 		result.setLastHistoryRegistration(getDriver().findElement(By.cssSelector("#reports-table-default tbody tr:nth-child(1)")).getText());
+		
+		
 		
 		PrintUtils.printContactModel(result);
 

@@ -16,7 +16,7 @@ public class StylistValidationSteps extends AbstractSteps {
 
 	@Step
 	public void validateJewwelryBonus(String grabbed, String expected) {
-		CustomVerification.verifyTrue("Failure: The jewelry bonus amount is not as expected!", grabbed.contentEquals(expected));
+		CustomVerification.verifyTrue("Failure: The jewelry bonus amount is not as expected!"+"grabbed "+grabbed +"expected "+expected , grabbed.contentEquals(expected));
 	}
 
 	@Step

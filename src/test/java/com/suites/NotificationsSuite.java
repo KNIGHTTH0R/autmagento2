@@ -8,6 +8,7 @@ import com.tests.us3.us3001.US3001ValidateOrderBackOfficeTest;
 import com.tests.us3.us3001.US3001ValidateReorderBackOfficeTest;
 import com.tests.us3.us3002.US3002ValidateOrderBackOfficeTest;
 import com.tests.us6.us6001b.US6001bValidateStarterSetOrderInBackendTest;
+import com.tests.us7.us7001.US7001CheckReceivedEmailsTest;
 import com.tests.us8.us8001.US8001ValidateReorderBackOfficeTest;
 import com.tests.us9.us9001.US9001ValidateOrderBackOfficeTest;
 import com.tests.uss11.us11001.US11001ValidateOrderBackOfficeTest;
@@ -19,7 +20,10 @@ import com.tests.uss11.us11001.US11001ValidateOrderBackOfficeTest;
 	US6001bValidateStarterSetOrderInBackendTest.class,
 	US8001ValidateReorderBackOfficeTest.class,
 	US9001ValidateOrderBackOfficeTest.class,
-	US11001ValidateOrderBackOfficeTest.class,	
+	US11001ValidateOrderBackOfficeTest.class,
+	
+	US7001CheckReceivedEmailsTest.class,
+	
 })
 @RunWith(Suite.class)
 public class NotificationsSuite {

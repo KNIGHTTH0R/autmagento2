@@ -207,14 +207,14 @@ public class RegularUserCartPage extends AbstractPage {
 			if (product.getText().contains(productCode)) {
 				foundProduct = true;
 
-				WebElement delivery = element(product
-						.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[selected='selected']")));
+				WebElement delivery = element(product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option[selected='selected']")));
 				String noSpecialChar=toAsciiString(delivery.getText());
 				String[] tokens = noSpecialChar.split(", ");
 				System.out.println("sadasdasdasdas   "+tokens[1]);
 				//the replace is due to a java 8 bug, get rid of this when fixed
 				deliveryDate = DateUtils.parseDate(tokens[1].replace("MAR", "MRZ"), "dd. MMM. yy", locale, "dd.MM.YYYY");
 			
+
 				break;
 			}
 		}
