@@ -78,4 +78,9 @@ public class NavOrderLinesModel {
 		this.no = no;
 	}
 
+	@Override
+	public String toString() {
+		return "NavOrderLinesModel [no=" + no +  "]";
+	}
+
 }

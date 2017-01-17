@@ -17,6 +17,7 @@ import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
+import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
 
 /**
@@ -82,6 +83,12 @@ public class OrdersInfoMagentoCalls {
 		for (DBOrderModel order : orderList) {
 			DBOrderModel orderWithInfo = OrderInfoMagCalls.getOrdersInfo(order.getIncrementId(), sessID);
 			
+			String customerFirstName=orderWithInfo.getCustomerFirstName();
+			String customerLastName=orderWithInfo.getCustomerLastName().replaceAll("\\s","");
+			
+			order.setCustomerName(customerFirstName.concat(customerLastName));
+			order.setCustomerFirstName(orderWithInfo.getCustomerFirstName());
+			order.setCustomerLastName(orderWithInfo.getCustomerLastName());
 			//billing address details
 			order.setItemInfo(orderWithInfo.getItemInfo());
 			order.setBillToFirstName(orderWithInfo.getBillToFirstName());
@@ -398,11 +405,11 @@ public class OrdersInfoMagentoCalls {
 						model.setStoreLanguage(childNodes.item(j).getTextContent());
 					}
 					
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_firstname")) {
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("firstname")) {
 						customerName=customerName.concat(childNodes.item(j).getTextContent()+" ");
 					}
 					
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("customer_lastname")) {
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("lastname")) {
 						customerName=customerName.concat(childNodes.item(j).getTextContent());
 					}
 					
@@ -420,7 +427,7 @@ public class OrdersInfoMagentoCalls {
 						model.setScheduledDeliveryDate(childNodes.item(j).getTextContent());
 					}
 
-					model.setCustomerName(customerName);
+				//	model.setCustomerName(customerName);
 				}
 				orderModelList.add(model);
 			}
@@ -429,7 +436,90 @@ public class OrdersInfoMagentoCalls {
 	}
 
 	 public static void main(String args[]) throws SOAPException, IOException {
-	 
+		// getOrderWithItems("212953","212953");
+		 
+		// System.out.println(OrdersInfoMagentoCalls.getPartyOrdersList("14830").get(0).getIncrementId());
+//		 List<DBOrderModel> list=OrdersInfoMagentoCalls.getOrderWithItems("212468","212468");
+//	
+//		 
+//		 for (DBOrderModel dbOrderModel : list) {
+//			 System.out.println(dbOrderModel.getIncrementId());
+//			 
+//			 List<SalesOrderInfoModel> listmod= dbOrderModel.getItemInfo();
+//			 for (SalesOrderInfoModel salesOrderInfoModel : listmod) {
+//				System.out.println(salesOrderInfoModel.getSku());
+//			}
+//			 
+//			
+//		}
+		 
+		
+			List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getOrderWithItems("212957","212957");
+
+			for (DBOrderModel dbOrderModel : dbmodel) {
+				
+				System.out.println("f name  "+dbOrderModel.getCustomerFirstName());
+				System.out.println("kobo "+ dbOrderModel.getKoboSingleArticle());
+				System.out.println("customer name "+ dbOrderModel.getCustomerName());
+				System.out.println("getIncrementId  : " + dbOrderModel.getIncrementId());
+				System.out.println("getGrandTotal  : " + dbOrderModel.getGrandTotal());
+				System.out.println("getCreatedAt : " + dbOrderModel.getCreatedAt());
+				System.out.println("getBillToStreetAddress : " + dbOrderModel.getBillToStreetAddress());
+				System.out.println("getStatus : " + dbOrderModel.getStatus());
+				System.out.println("getPaidAt : " + dbOrderModel.getPaidAt());
+				
+				System.out.println("getStylistId  : " + dbOrderModel.getStylistId());
+				System.out.println("getTotalIp  : " + dbOrderModel.getTotalIp());
+				System.out.println("getCreatedAt  : " + dbOrderModel.getCreatedAt());
+				System.out.println("getOrderId : " + dbOrderModel.getOrderId());
+				System.out.println("getOrderType : " + dbOrderModel.getOrderType());
+				System.out.println("getCartType : " + dbOrderModel.getCartType());
+				
+				System.out.println("getTermPurchaseType : " + dbOrderModel.getTermPurchaseType());
+				System.out.println("getShippingAmount : " + dbOrderModel.getShippingAmount());
+				System.out.println("getCustomerId : " + dbOrderModel.getCustomerId());
+				System.out.println("getOrderId : " + dbOrderModel.getOrderId());
+				System.out.println("getStylistCustomerId: " + dbOrderModel.getStylistCustomerId());
+				System.out.println("getPaymentMethodTypet: " + dbOrderModel.getPaymentMethodTypet());
+				
+				System.out.println("getShippingType : " + dbOrderModel.getShippingType());
+				System.out.println("getStylePartyId : " + dbOrderModel.getStylePartyId());
+				System.out.println("getIsPreshipped: " + dbOrderModel.getIsPreshipped());
+				System.out.println("getIsPom: " + dbOrderModel.getIsPom());
+				System.out.println("getWebsiteCode : " + dbOrderModel.getWebsiteCode());
+				System.out.println("getStoreLanguage : " + dbOrderModel.getStoreLanguage());
+				
+				System.out.println("getCustomerFirstName  : " + dbOrderModel.getCustomerFirstName());
+				System.out.println("getCustomerLastName  : " + dbOrderModel.getCustomerLastName());
+				System.out.println("getTaxAmount: " + dbOrderModel.getTaxAmount());
+				System.out.println("getBaseSubtotal : " + dbOrderModel.getBaseSubtotal());
+			
+				
+				
+				
+				
+				System.out.println("bill post  : " + dbOrderModel.getBillToPostcode());
+				System.out.println("bill fname  : " + dbOrderModel.getBillToFirstName());
+				System.out.println("billl lname : " + dbOrderModel.getBillToLastName());
+				System.out.println("bill street : " + dbOrderModel.getBillToStreetAddress());
+				System.out.println("ship city : " + dbOrderModel.getBillToCity());
+				System.out.println("ship country id : " + dbOrderModel.getBillCountryId());
+				
+				//shipp
+
+				System.out.println("shipp post : " + dbOrderModel.getShipToPostcode());
+				System.out.println("fname  : " + dbOrderModel.getShipToFirstName());
+				System.out.println("ship lname : " + dbOrderModel.getShipToLastName());
+				System.out.println("ship street : " + dbOrderModel.getShipToStreetAddress());
+				System.out.println("ship city : " + dbOrderModel.getShipToCity());
+				System.out.println("ship country id : " + dbOrderModel.getShipCountryId());
+
+				List<SalesOrderInfoModel> list = dbOrderModel.getItemInfo();
+				for (SalesOrderInfoModel salesOrderInfoModel : list) {
+					System.out.println("sku: " + salesOrderInfoModel.getSku());
+				}
+			}
+		 
 	 }
 
 }

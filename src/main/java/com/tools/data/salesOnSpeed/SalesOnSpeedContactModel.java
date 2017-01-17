@@ -180,12 +180,13 @@ public class SalesOnSpeedContactModel {
 
 	@Override
 	public String toString() {
-		return "SalesOnSpeedCustomerModel [prename = " + prename + ", customFields = " + customFields + ", street = " + street
-				+ ", __v = " + __v + ", lastname = " + lastname + ", postcode = " + postcode + ", phones = " + phones
-				+ ", city = " + city + ", country = " + country + ", _id = " + _id + ", updated = " + updated
-				+ ", created = " + created + ", email = " + email + ", userId = " + userId + ", language = " + language
-				+ ", notes = " + notes + "]";
+		return "SalesOnSpeedContactModel [primaryPhone=" + primaryPhone + ", prename=" + prename + ", street=" + street
+				+ ", __v=" + __v + ", lastname=" + lastname + ", postcode=" + postcode + ", city=" + city + ", country="
+				+ country + ", _id=" + _id + ", updated=" + updated + ", created=" + created + ", email=" + email
+				+ ", userId=" + userId + ", language=" + language + ", phones=" + phones + ", notes=" + notes
+				+ ", customFields=" + customFields + "]";
 	}
+
 	
 			
 }

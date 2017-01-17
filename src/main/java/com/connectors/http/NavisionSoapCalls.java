@@ -183,7 +183,7 @@ public class NavisionSoapCalls {
 						model.setShopStoreLanguage(childNodes.item(j).getTextContent());
 					}
 
-					if (childNodes.item(j).getNodeName().equalsIgnoreCase("kobo_single_article")) {
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Kobo_Article_Only")) {
 						model.setKoboSingleArticle(childNodes.item(j).getTextContent());
 					}
 
@@ -362,9 +362,61 @@ public class NavisionSoapCalls {
 
 	public static void main(String args[]) throws Exception {
 
-		// List<NavOrderModel> ordersList =
+	//	 List<NavOrderModel> ordersList =
 		// NavisionSoapCalls.getOrdersList("10023578400..10023578700");
 		// 10021960100
+		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("10022005900");
 
+		for (NavOrderModel order : ordersList) {
+			System.out.println("increment id " + order.getIncrementId());
+
+//			System.out.println("base grand total " + order.getBaseGrandTotal());
+//			System.out.println("order date " + order.getOrderDate());
+//			System.out.println("posting date " + order.getPostingDate());
+//			System.out.println("sales person code " + order.getSalesPersonCode());
+//			System.out.println("your referecenes " + order.getYouRefercences());
+//			System.out.println("external doc no " + order.getExternalDocumentNo());
+//			System.out.println("sell customer no " + order.getSellToCustomerNo());
+//			System.out.println("shop shipment method " + order.getShopShipmentMethod());
+//			System.out.println("shop payment method " + order.getShopPaymentMethod());
+//			System.out.println("getShopOrderType " + order.getShopOrderType());
+//			System.out.println("getShopCartType " + order.getShopCartType());
+//			System.out.println("getSalesPersonCode " + order.getSalesPersonCode());
+//			System.out.println("getPartyId " + order.getPartyId());
+//			System.out.println("getIsAlreadyShipped " + order.getIsAlreadyShipped());
+//			System.out.println("getMagentoGrandTotal " + order.getMagentoGrandTotal());
+//			System.out.println("getShopIsPom " + order.getShopIsPom());
+//
+//			System.out.println("getShopWebsiteCode " + order.getShopWebsiteCode());
+//			System.out.println("getShopStoreLanguage " + order.getShopStoreLanguage());
+			System.out.println("getKoboSingleArticle " + order.getKoboSingleArticle());
+//			System.out.println("getPrepmtPmtDiscountDate " + order.getPrepmtPmtDiscountDate());
+//			System.out.println("getBillToName " + order.getBillToName());
+//			System.out.println("getBillToAddress " + order.getBillToAddress());
+//			System.out.println("getBillToPostCode " + order.getBillToPostCode());
+//			System.out.println("getBillToCity " + order.getBillToCity());
+//			System.out.println("getBillToCountryRegionCode " + order.getBillToCountryRegionCode());
+//			System.out.println("getShipToName " + order.getShipToName());
+//
+//			System.out.println("getShipToAddress " + order.getShipToAddress());
+//			System.out.println("getShipToPostCode " + order.getShipToPostCode());
+//			System.out.println("getShipToCity " + order.getShipToCity());
+//			System.out.println("getShipToCountryRegionCode " + order.getShipToCountryRegionCode());
+//			System.out.println("getSellToCustomerName " + order.getSellToCustomerName());
+//			System.out.println("getSellToAddress " + order.getSellToAddress());
+//
+//			System.out.println("vat procent " + order.getVatProdPostingGroup());
+//			System.out.println("shipping amount " + order.getShippingAmount());
+//			
+//			System.out.println("Calculated Grand Total " + order.getCalculatedGrandTotal());
+//			
+//			System.out.println("total ip " + order.getTotalIp());
+
+			for (NavOrderLinesModel line : order.getLines()) {
+				System.out.println("line.getNo() " + line.getNo());
+
+			}
+
+		}
 	}
 }

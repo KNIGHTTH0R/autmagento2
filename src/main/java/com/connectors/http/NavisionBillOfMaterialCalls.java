@@ -16,14 +16,15 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
 import com.tools.constants.NavSoapKeys;
+import com.tools.data.soap.NavOrderLinesModel;
 
 public class NavisionBillOfMaterialCalls {
 
-	public static List<String> getItemsList(String filterValue) throws Exception {
+	public static List<NavOrderLinesModel> getItemsList(String filterValue) throws Exception {
 
 		Authentication.setAuthenticator();
 
-		List<String> items = null;
+		List<NavOrderLinesModel> items = null;
 		try {
 			SOAPMessage response = sendItemsListRequest(filterValue);
 			items = extractItemsList(response);
@@ -36,26 +37,50 @@ public class NavisionBillOfMaterialCalls {
 		return items;
 	}
 
-	private static List<String> extractItemsList(SOAPMessage response) throws Exception {
+	private static List<NavOrderLinesModel> extractItemsList(SOAPMessage response) throws Exception {
 
 		List<String> items = new ArrayList<String>();
 
+		List<NavOrderLinesModel>  billItem =new ArrayList<NavOrderLinesModel>();
+		
+		
 		NodeList orderList = response.getSOAPBody().getElementsByTagName("BillOfMaterial");
 		for (int i = 0; i < orderList.getLength(); i++) {
 
 			if (orderList.item(i).getParentNode().getNodeName().equalsIgnoreCase("ReadMultiple_Result")) {
 
+				NavOrderLinesModel billLine=new NavOrderLinesModel();
 				NodeList childNodes = orderList.item(i).getChildNodes();
 				for (int j = 0; j < childNodes.getLength(); j++) {
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("No")) {
 						items.add(childNodes.item(j).getTextContent());
-						break;
+						billLine.setNo(childNodes.item(j).getTextContent());
+						
 					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Variant_Code")) {
+						billLine.setVarianteCode(childNodes.item(j).getTextContent());
+					}
+					
 				}
+				
+				billItem.add(billLine);
+				
+				
+				if (billItem.get(billItem.size() - 1).getVarianteCode() != null) {
+					String variantCode = billItem.get(billItem.size() - 1).getVarianteCode();
+					String no = billItem.get(billItem.size() - 1).getNo();
+
+					billItem.get(billItem.size() - 1).setNo(no + "-" + variantCode);
+
+				}
+				
+				
+				
 			}
 		}
-		return items;
+		return billItem;
 	}
 
 	protected static SOAPMessage createBillOfMaterialDefaultMessage() throws DOMException, SOAPException, IOException {
@@ -105,9 +130,9 @@ public class NavisionBillOfMaterialCalls {
 
 	public static void main(String args[]) throws Exception {
 
-		List<String> items = NavisionBillOfMaterialCalls.getItemsList("X005");
-		for (String item : items) {
-			System.out.println(item);
+		List<NavOrderLinesModel> items = NavisionBillOfMaterialCalls.getItemsList("X006");
+		for (NavOrderLinesModel item : items) {
+			System.out.println(item.getNo());
 		}
 
 	}

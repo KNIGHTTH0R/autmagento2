@@ -146,10 +146,10 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		if (paymentSteps.isKlarnaAvailable()) {
-			paymentSteps.expandKlarnaForm();
-			paymentSteps.fillKlarnaForm();
-		} else {
+//		if (paymentSteps.isKlarnaAvailable()) {
+//			paymentSteps.expandKlarnaForm();
+//			paymentSteps.fillKlarnaForm();
+//		} else {
 			paymentSteps.expandCreditCardForm();
 			paymentSteps.fillCreditCardForm(creditCardData);
 			confirmationSteps.grabConfirmationTotals();
@@ -157,7 +157,7 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 			
 			starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
 			starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
-		}
+//		}
 		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount("STARTER SET TOTALS");
 

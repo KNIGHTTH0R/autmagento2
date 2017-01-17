@@ -121,10 +121,14 @@ public class OrderInfoMagCalls {
 				
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("kobo_single_article")) {
 					model.setKoboSingleArticle(resultNodes.item(r).getTextContent());
-					
 				}
 				
-				
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("customer_firstname")) {
+					model.setCustomerFirstName(resultNodes.item(r).getTextContent());
+				}
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("customer_lastname")) {
+					model.setCustomerLastName(resultNodes.item(r).getTextContent());
+				}
 				
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("billing_address")) {
 
@@ -242,6 +246,42 @@ public class OrderInfoMagCalls {
 	}
 
 	public static void main(String[] args) throws SOAPException, IOException {
+		 
+		String sessID = HttpSoapConnector.performLogin();
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrdersInfo("10022003900", sessID);
 		
+		System.out.println("style party  : " + dbmodel.getStylePartyId());
+		System.out.println("kobo article "+ dbmodel.getKoboSingleArticle());
+		
+		System.out.println("bill post  : " + dbmodel.getBillToPostcode());
+		System.out.println("bill fname  : " + dbmodel.getBillToFirstName());
+		System.out.println("billl lname : " + dbmodel.getBillToLastName());
+		System.out.println("bill street : " + dbmodel.getBillToStreetAddress());
+		System.out.println("bill city : " + dbmodel.getBillToCity());
+		System.out.println("bill country id : " + dbmodel.getBillCountryId());
+
+		System.out.println("customer_firstname: " + dbmodel.getCustomerFirstName());
+		System.out.println("customer_lastname : " + dbmodel.getCustomerLastName());
+		
+		// shipp
+
+		System.out.println("shipp post : " + dbmodel.getShipToPostcode());
+		System.out.println("fname  : " + dbmodel.getShipToFirstName());
+		System.out.println("ship lname : " + dbmodel.getShipToLastName());
+		System.out.println("ship street : " + dbmodel.getShipToStreetAddress());
+		System.out.println("ship city : " + dbmodel.getShipToCity());
+		System.out.println("ship country id : " + dbmodel.getShipCountryId());
+		
+		
+		System.out.println("updated nav: "+dbmodel.getUpdatedNav());
+		System.out.println("order currency code : "+dbmodel.getOrderCurrencyCode());
+		
+		
+		
+		
+		List<SalesOrderInfoModel> list = dbmodel.getItemInfo();
+		for (SalesOrderInfoModel salesOrderInfoModel : list) {
+			System.out.println("sku: " + salesOrderInfoModel.getSku());
+		}
 	}
 }

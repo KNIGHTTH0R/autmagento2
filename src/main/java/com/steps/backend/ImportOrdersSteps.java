@@ -45,10 +45,10 @@ public class ImportOrdersSteps  {
 
 					if (item.getType().contains("_blank_") && item.isBomItem()) {
 
-						List<String> billOfMaterial = NavisionBillOfMaterialCalls.getItemsList(item.getBomItemNo());
-						for (String childItem : billOfMaterial) {
+						List<NavOrderLinesModel> billOfMaterial = NavisionBillOfMaterialCalls.getItemsList(item.getBomItemNo());
+						for (NavOrderLinesModel childItem : billOfMaterial) {
 							SalesOrderInfoModel infoItem = new SalesOrderInfoModel();
-							infoItem.setSku(childItem);
+							infoItem.setSku(childItem.getNo());
 							infoItemList.add(infoItem);
 						}
 					}
@@ -64,7 +64,7 @@ public class ImportOrdersSteps  {
 			order.setItemInfo(infoItemList);
 			
 			
-
+			System.out.println("open order "+order.getIncrementId());
 			importOrders.validateOrderIncrementId(order.getIncrementId(), compare.getIncrementId());
 			importOrders.validateOrderItemsTest(order.getItemInfo(), compare.getLines());
 			importOrders.validateExternalDocNo(order.getIncrementId(), compare.getExternalDocumentNo());
@@ -72,11 +72,11 @@ public class ImportOrdersSteps  {
 			importOrders.validateGrandTotal(order.getGrandTotal(), compare.getCalculatedGrandTotal());
 			importOrders.validateOrderId(order.getOrderId(), compare.getYouRefercences());
 			importOrders.validateOrderType(order.getOrderType(), compare.getShopOrderType());
-			importOrders.validateCartType(order.getCartType(), compare.getShopCartType());
-			importOrders.validateSalesPersonCode(order.getCustomerId(), compare.getSalesPersonCode());
+		//	importOrders.validateCartType(order.getCartType(), compare.getShopCartType());
+			importOrders.validateSalesPersonCode(order.getStylistCustomerId(), compare.getSalesPersonCode());
 
 			importOrders.validateShippingAmount(order.getShippingAmount(), compare.getShippingAmount());
-			importOrders.validateSaleCustomerNo(order.getStylistCustomerId(), compare.getSellToCustomerNo());
+			importOrders.validateSaleCustomerNo(order.getCustomerId(), compare.getSellToCustomerNo());
 			importOrders.validatePaymentMethod(order.getPaymentMethodTypet(), compare.getShopPaymentMethod());
 			importOrders.validateWebsiteCode(order.getWebsiteCode(), compare.getShopWebsiteCode());
 			importOrders.validateStoreLanguage(order.getStoreLanguage(), compare.getShopStoreLanguage());
@@ -108,9 +108,8 @@ public class ImportOrdersSteps  {
 			
 
 			// should be clarified before, because here we have different value
-			// validateUpdatedNavDate(order.getUpdatedNav(),
-			// compare.getPrepmtPmtDiscountDate());
-			// validateKoboSingleArticle(order.getKoboSingleArticle(),compare.getKoboSingleArticle());
+			importOrders.validateUpdatedNavDate(order.getUpdatedNav());
+			importOrders.validateKoboSingleArticle(order.getKoboSingleArticle(),compare.getKoboSingleArticle());
 		}
 	//	customVerification.printErrors();
 	}

@@ -44,8 +44,6 @@ public class SalesOnSpeedContactResponse {
 
 	private List<Notes> notes;
 	
-	
-	
 	private CustomFields customFields;
 	
 	

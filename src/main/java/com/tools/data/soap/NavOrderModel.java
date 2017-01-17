@@ -401,4 +401,14 @@ public class NavOrderModel {
 		this.containsBom = containsBom;
 	}
 
+	@Override
+	public String toString() {
+		return "NavOrderModel [lines=" + lines
+				+ "]";
+	}
+
+	
+
+
+
 }

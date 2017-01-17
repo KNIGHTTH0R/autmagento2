@@ -1,6 +1,7 @@
 package com.tests.uss34;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
@@ -32,19 +33,39 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 	
 	@Steps
 	CustomVerification customVerification;
-	
+	//before
+//	private List<DBOrderModel> shopListOrders = new ArrayList<DBOrderModel>();
+//	private List<NavOrderModel> navListOrders = new ArrayList<NavOrderModel>();
+	///
 	private List<DBOrderModel> shopListOrders = new ArrayList<DBOrderModel>();
 	private List<NavOrderModel> navListOrders = new ArrayList<NavOrderModel>();
-
+	
+	List<String> shopOrderList = new ArrayList<String>(
+		   Arrays.asList("212000", "212952","212974"));
+			//Arrays.asList("212983"));
+	
 	@Before
 	public void setUp() throws Exception {
-	//10021957500
-	
-//		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("103587", "103587");
-//		navListOrders = NavisionSoapCalls.getOrdersList("100106871");
-		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("212986","212986");
-		navListOrders = NavisionSoapCalls.getOrdersList("10022006500");
+
 		
+		//before
+	//	shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("212000","212000");
+	//	navListOrders = NavisionSoapCalls.getOrdersList("10021901100");
+		///
+		
+		for (String shOrder : shopOrderList) {
+			
+			//am lasat lista pt ca metodele returneaza liste
+			List<DBOrderModel> dbmodel1=new ArrayList<DBOrderModel>();
+			List<NavOrderModel> navListOrders1 = new ArrayList<NavOrderModel>();
+			dbmodel1=OrdersInfoMagentoCalls.getOrderWithItems(shOrder,shOrder);
+			navListOrders1=NavisionSoapCalls.getOrdersList(dbmodel1.get(0).getIncrementId());
+			
+			shopListOrders.add(dbmodel1.get(0));
+			navListOrders.add(navListOrders1.get(0));
+		}
+		
+
 	}
 
 	@Test
