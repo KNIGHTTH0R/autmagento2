@@ -111,13 +111,15 @@ public class US36001SyncFrontendMagentoToSos extends BaseTest {
 	public void us36001SyncFrontendMagentoToSos() throws Exception {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail("AATroxE3vJ5k@mailinator.com");
-		backEndSteps.openCustomerDetails("AATroxE3vJ5k@mailinator.com");
+		backEndSteps.searchForEmail("5WACymVNPxNj@mailinator.com");
+		backEndSteps.openCustomerDetails("5WACymVNPxNj@mailinator.com");
 		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
 		stylecoachSalesOnSpeedBackendSteps.selectAllowSosSync("Ja");
 		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
+		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
+		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
 		
-		frontEndSteps.performLogin("uDuzcJuqd7Jq@mailinator.com","q1w2e3");
+		frontEndSteps.performLogin("5WACymVNPxNj@mailinator.com","q1w2e3");
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -137,6 +139,15 @@ public class US36001SyncFrontendMagentoToSos extends BaseTest {
 		sosSteps.getSosUserEmail();
 		sosSteps.getSosPass();
 	    
+//		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+//		backEndSteps.clickOnCustomers();
+//		backEndSteps.searchForEmail("5WACymVNPxNj@mailinator.com");
+//		backEndSteps.openCustomerDetails("5WACymVNPxNj@mailinator.com");
+//		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
+//		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
+//		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
+//		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
+		
 	
 	
 	}
