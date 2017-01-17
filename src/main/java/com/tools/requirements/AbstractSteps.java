@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
+
 import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
@@ -30,6 +33,7 @@ import com.pages.backend.stylecoach.ContactDetailsBackendPage;
 import com.pages.backend.stylecoach.ContactListBackendPage;
 import com.pages.backend.stylecoach.PartyDetailsBackendPage;
 import com.pages.backend.stylecoach.PartyListBackendPage;
+import com.pages.backend.stylecoach.SosDetailsBackendPage;
 import com.pages.backend.stylecoach.StylecoachDetailsBackendPage;
 import com.pages.backend.stylecoach.StylecoachListBackendPage;
 import com.pages.backend.termPurchase.TermPurchaseGridPage;
@@ -100,6 +104,7 @@ import com.pages.frontend.checkout.wishlist.WishlistPage;
 import com.pages.frontend.profile.DashboardPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.profile.ProfileNavPage;
+import com.pages.frontend.profile.SosPage;
 import com.pages.frontend.registration.FacebookRegistrationFormPage;
 import com.pages.frontend.registration.connectWithMe.ConnectSuccesPage;
 import com.pages.frontend.registration.connectWithMe.ConnectWithMeAllocationPage;
@@ -120,9 +125,6 @@ import com.tools.constants.ContextConstants;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
-
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -750,6 +752,14 @@ public class AbstractSteps extends ScenarioSteps {
 	
 	public NavisionSyncDashboardPage navisionSyncDashboardPage() {
 		return getPages().currentPageAt(NavisionSyncDashboardPage.class);
+	}
+	//sos app
+	public SosDetailsBackendPage sosDetailsBackendPage() {
+		return getPages().currentPageAt(SosDetailsBackendPage.class);
+	}
+	
+	public SosPage sosPage() {
+		return getPages().currentPageAt(SosPage.class);
 	}
 	
 	

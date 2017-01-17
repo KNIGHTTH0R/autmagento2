@@ -22,4 +22,9 @@ public class CustomerDetailsBackendSteps extends AbstractSteps {
 		customerDetailsHomePage().inputQuitDate();
 		customerDetailsHomePage().saveCustomer();
 	}
+	
+	@Step
+	public void clickOnSalesOnSpeedInfo() {
+		customerDetailsHomePage().clickOnSalesOnSpeedInfo();
+	}
 }

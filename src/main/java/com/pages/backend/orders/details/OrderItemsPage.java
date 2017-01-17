@@ -20,7 +20,7 @@ public class OrderItemsPage extends AbstractPage {
 
 	public List<OrderItemModel> grabOrderItems() {
 		List<OrderItemModel> result = new ArrayList<OrderItemModel>();
-
+        waitForPageToLoad();
 		element(tableContainer).waitUntilVisible();
 
 		List<WebElement> listEntries = getDriver().findElements(By.cssSelector("table.order-tables > tbody > tr"));
