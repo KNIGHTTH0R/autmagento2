@@ -23,17 +23,16 @@ import com.tools.data.salesOnSpeed.SalesOnSpeedContactModel;
 import com.tools.data.soap.DBOrderModel;
 
 public class MagentoSosContactItemsCalls {
-	
-	
+
 	public static List<MagentoSOSContactModel> getContactItems(String userId) {
 
-		List<MagentoSOSContactModel> order = new ArrayList<MagentoSOSContactModel>();
+		List<MagentoSOSContactModel> cotactItems = new ArrayList<MagentoSOSContactModel>();
 
 		try {
 			SOAPMessage response = soapGetContactItems(userId);
 			System.out.println(response);
 			try {
-				order = extractOrderInfoData(response);
+				cotactItems = extractOrderInfoData(response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -44,45 +43,42 @@ public class MagentoSosContactItemsCalls {
 			e.printStackTrace();
 		}
 
-		return order;
+		return cotactItems;
 	}
 
-	public static SOAPMessage soapGetContactItems(String userId)
-			throws SOAPException, IOException {
+	public static SOAPMessage soapGetContactItems(String userId) throws SOAPException, IOException {
 		String sessionId = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 
-		 SOAPMessage soapResponse =
-		 soapConnection.call(getContactItemsRequest(sessionId,
-				 userId), EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+		SOAPMessage soapResponse = soapConnection.call(getContactItemsRequest(sessionId, userId),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
 
+		// SOAPMessage soapResponse =
+		// soapConnection.call(getOrdersInfoRequest(sessionId,
+		// orderIncrementId),
+		// "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
-//		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
-//				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
-
-//		 SOAPMessage soapResponse =
-//		 soapConnection.call(getOrdersInfoRequest(sessionId,
-//		 orderIncrementId),
-//		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+		// SOAPMessage soapResponse =
+		// soapConnection.call(getOrdersInfoRequest(sessionId,
+		// orderIncrementId),
+		// "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
 
 		return soapResponse;
 	}
 
-	private static SOAPMessage getContactItemsRequest(String ssID, String userId)
-			throws SOAPException, IOException {
+	private static SOAPMessage getContactItemsRequest(String ssID, String userId) throws SOAPException, IOException {
 		SOAPMessage soapMessage = HttpSoapConnector.createSoapDefaultMessage();
 
 		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
-		SOAPElement getStylistRequestParam = soapBody.addChildElement("sosContactItemsRequestParam",
+		SOAPElement getStylistContactsRequestParam = soapBody.addChildElement("sosContactItemsRequestParam",
 				SoapKeys.URN_PREFIX);
 
-		SOAPElement sessionID = getStylistRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		SOAPElement sessionID = getStylistContactsRequestParam.addChildElement(SoapKeys.SESSION_ID);
 		sessionID.addTextNode(ssID);
 
-		SOAPElement orderIncrementId = getStylistRequestParam.addChildElement("userId");
-		orderIncrementId.addTextNode(userId);
-
+		SOAPElement sosUserId = getStylistContactsRequestParam.addChildElement("userId");
+		sosUserId.addTextNode(userId);
 
 		soapMessage.saveChanges();
 
@@ -96,16 +92,32 @@ public class MagentoSosContactItemsCalls {
 	private static List<MagentoSOSContactModel> extractOrderInfoData(SOAPMessage response) throws Exception {
 
 		List<MagentoSOSContactModel> model = new ArrayList<MagentoSOSContactModel>();
-		
-	
+		NodeList contactList = response.getSOAPBody().getElementsByTagName("SOAP-ENC:Struct");
+
+		for (int i = 0; i < contactList.getLength(); i++) {
+			MagentoSOSContactModel contact = new MagentoSOSContactModel();
+			
+			NodeList childNodes = contactList.item(i).getChildNodes();
+			for (int j = 0; j < childNodes.getLength(); j++) {
+				
+				if (childNodes.item(j).getNodeName().equalsIgnoreCase("contact_id")) {
+					contact.setContactId(childNodes.item(j).getTextContent());
+				}
+			}
+			
+			model.add(contact);
+		}
 
 		return model;
 	}
 
-	
-
 	public static void main(String[] args) throws SOAPException, IOException {
-		 
+
 		
+		List<MagentoSOSContactModel> listaContacte =MagentoSosContactItemsCalls.getContactItems("6490");
+		for (MagentoSOSContactModel magentoSOSContactModel : listaContacte) {
+			System.out.println("contactId "+magentoSOSContactModel.getContactId());
+		}
+		//System.out.println(listaContacte.toString());
 	}
 }

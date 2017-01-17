@@ -35,12 +35,12 @@ import com.tools.data.salesOnSpeed.Wrong_details;
 import com.tools.data.soap.DBOrderModel;
 
 public class MagentoSosContactInfo {
-	public static MagentoSOSContactModel getContactInfo(String userId) {
+	public static MagentoSOSContactModel getContactInfo(String contactId) {
 
 		MagentoSOSContactModel contactInfo = new MagentoSOSContactModel();
 
 		try {
-			SOAPMessage response = soapGetContactInfo(userId);
+			SOAPMessage response = soapGetContactInfo(contactId);
 			System.out.println(response);
 			try {
 				contactInfo = extractContactInfoData(response);
