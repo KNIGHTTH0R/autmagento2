@@ -17,12 +17,12 @@ import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
-import com.tools.data.salesOnSpeed.MagentoSOSInfoModel;
+import com.tools.data.salesOnSpeed.MagentoSOSUserInfoModel;
 
 public class MagentoSosUserItemsInfo {
-	public static List<MagentoSOSInfoModel> getUserItemsInfo() {
+	public static List<MagentoSOSUserInfoModel> getUserItemsInfo() {
 
-		List <MagentoSOSInfoModel> userItemsInfo = new ArrayList<MagentoSOSInfoModel>();
+		List <MagentoSOSUserInfoModel> userItemsInfo = new ArrayList<MagentoSOSUserInfoModel>();
 
 		try {
 			SOAPMessage response = soapGetUserItemsInfo();
@@ -80,16 +80,16 @@ public class MagentoSosUserItemsInfo {
 		return soapMessage;
 	}
 
-	private static List<MagentoSOSInfoModel> extractUserItemsInfoData(SOAPMessage response) throws Exception {
+	private static List<MagentoSOSUserInfoModel> extractUserItemsInfoData(SOAPMessage response) throws Exception {
 
-		List<MagentoSOSInfoModel> model = new ArrayList<MagentoSOSInfoModel>();
+		List<MagentoSOSUserInfoModel> model = new ArrayList<MagentoSOSUserInfoModel>();
 		
 	//	NodeList result = response.getSOAPBody().getElementsByTagName("result");
 	//	NodeList itemList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
 		NodeList userList = response.getSOAPBody().getElementsByTagName("SOAP-ENC:Struct");
 
 		for (int i = 0; i < userList.getLength(); i++) {
-			MagentoSOSInfoModel user = new MagentoSOSInfoModel();
+			MagentoSOSUserInfoModel user = new MagentoSOSUserInfoModel();
 			NodeList resultNodes = userList.item(i).getChildNodes();
 			for (int r = 0; r < resultNodes.getLength(); r++) {
 
@@ -150,8 +150,8 @@ public class MagentoSosUserItemsInfo {
 	}
 
 	public static void main(String[] args) throws SOAPException, IOException {
-		List<MagentoSOSInfoModel> dbmodel = MagentoSosUserItemsInfo.getUserItemsInfo();
-	for (MagentoSOSInfoModel magentoSOSInfoModel : dbmodel) {
+		List<MagentoSOSUserInfoModel> dbmodel = MagentoSosUserItemsInfo.getUserItemsInfo();
+	for (MagentoSOSUserInfoModel magentoSOSInfoModel : dbmodel) {
 		System.out.println(magentoSOSInfoModel.toString());
 	}
 	}

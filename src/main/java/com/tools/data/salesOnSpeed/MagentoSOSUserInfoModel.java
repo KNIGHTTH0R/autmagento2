@@ -2,7 +2,7 @@ package com.tools.data.salesOnSpeed;
 
 import java.util.List;
 
-public class MagentoSOSInfoModel {
+public class MagentoSOSUserInfoModel {
 	private String stylistId;
 	private String stylistRef;
 	private String customerId;
