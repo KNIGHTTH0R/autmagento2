@@ -115,10 +115,7 @@ public class LoungePage extends AbstractPage {
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		element(createPartyButton).waitUntilVisible();
 		
-	//	waitABit(3000);
-		createPartyButton.sendKeys(Keys.RETURN);
-		//createPartyButton.click();
-		
+		createPartyButton.click();
 		
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
 				ContextConstants.LOADING_MESSAGE));
