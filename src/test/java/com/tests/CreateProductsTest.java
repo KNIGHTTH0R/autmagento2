@@ -93,90 +93,90 @@ public class CreateProductsTest extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct5);
 		productsList.add(genProduct5);
 		
-		genProduct6 = MagentoProductCalls.createMarketingProductModel();
-		genProduct6.setPrice("5.00");
-		MagentoProductCalls.createApiProduct(genProduct6);
-		productsList.add(genProduct6);
-		
-		//product for REGULAR CART - us8001
-		genProduct7 = MagentoProductCalls.createProductModel();
-		genProduct7.setPrice("10.00");
-		genProduct7.setIp("8");
-		MagentoProductCalls.createApiProduct(genProduct7);
-		productsList.add(genProduct7);
-		
-		genProduct8 = MagentoProductCalls.createPomProductModel();
-		genProduct8.setPrice("49.90");
-		voucherValue = genProduct8.getPrice();
-		MagentoProductCalls.createApiProduct(genProduct8);
-		productsList.add(genProduct8);
-		
-		//products with TP for regular orders - us8007
-		genProduct9 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct9.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct9);
-		productsList.add(genProduct9);
-
-		genProduct10 = MagentoProductCalls.createProductModel();
-		genProduct10.setPrice("5.00");
-		genProduct10.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct10);
-		productsList.add(genProduct10);
-
-		genProduct11 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct11.setPrice("19.90");
-		genProduct11.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct11);
-		productsList.add(genProduct11);
-		
-		//products with TP for regular cart - us8009
-		genProduct12 = MagentoProductCalls.createProductModel();
-		genProduct12.setPrice("50.00");
-		genProduct12.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct12);
-		productsList.add(genProduct12);
-		
-		genProduct13 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct13.setPrice("10.00");
-		genProduct13.setIp("8");
-		MagentoProductCalls.createApiProduct(genProduct13);
-		productsList.add(genProduct13);
-		
-		genProduct14 = MagentoProductCalls.createProductModel();
-		genProduct14.setPrice("5.00");
-		MagentoProductCalls.createApiProduct(genProduct14);
-		productsList.add(genProduct14);
-		
-		genProduct15 = MagentoProductCalls.createProductModel();
-		genProduct15.setPrice("29.90");
-		genProduct15.setIp("25");
-		MagentoProductCalls.createApiProduct(genProduct15);
-		productsList.add(genProduct15);
-		
-		genProduct16 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct16.setPrice("29.00");
-		genProduct16.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct16);
-		productsList.add(genProduct16);
-
-		genProduct17 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct17.setPrice("9.90");
-		genProduct17.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct17);
-		productsList.add(genProduct17);
-		
-		genProduct18 = MagentoProductCalls.createProductModel();
-		genProduct18.setPrice("120.00");
-		genProduct18.setSpecialPrice("100.00");
-		MagentoProductCalls.createApiProduct(genProduct18);
-		productsList.add(genProduct18);
-		
-		genProduct19 = MagentoProductCalls.createProductModel();
-		genProduct19.setPrice("449.50");
-		MagentoProductCalls.createApiProduct(genProduct19);
-		productsList.add(genProduct19);
+//		genProduct6 = MagentoProductCalls.createMarketingProductModel();
+//		genProduct6.setPrice("5.00");
+//		MagentoProductCalls.createApiProduct(genProduct6);
+//		productsList.add(genProduct6);
+//		
+//		//product for REGULAR CART - us8001
+//		genProduct7 = MagentoProductCalls.createProductModel();
+//		genProduct7.setPrice("10.00");
+//		genProduct7.setIp("8");
+//		MagentoProductCalls.createApiProduct(genProduct7);
+//		productsList.add(genProduct7);
+//		
+//		genProduct8 = MagentoProductCalls.createPomProductModel();
+//		genProduct8.setPrice("49.90");
+//		voucherValue = genProduct8.getPrice();
+//		MagentoProductCalls.createApiProduct(genProduct8);
+//		productsList.add(genProduct8);
+//		
+//		//products with TP for regular orders - us8007
+//		genProduct9 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct9.setPrice("49.90");
+//		MagentoProductCalls.createApiProduct(genProduct9);
+//		productsList.add(genProduct9);
+//
+//		genProduct10 = MagentoProductCalls.createProductModel();
+//		genProduct10.setPrice("5.00");
+//		genProduct10.setStockData(
+//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+//		MagentoProductCalls.createApiProduct(genProduct10);
+//		productsList.add(genProduct10);
+//
+//		genProduct11 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct11.setPrice("19.90");
+//		genProduct11.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct11);
+//		productsList.add(genProduct11);
+//		
+//		//products with TP for regular cart - us8009
+//		genProduct12 = MagentoProductCalls.createProductModel();
+//		genProduct12.setPrice("50.00");
+//		genProduct12.setStockData(
+//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+//		MagentoProductCalls.createApiProduct(genProduct12);
+//		productsList.add(genProduct12);
+//		
+//		genProduct13 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct13.setPrice("10.00");
+//		genProduct13.setIp("8");
+//		MagentoProductCalls.createApiProduct(genProduct13);
+//		productsList.add(genProduct13);
+//		
+//		genProduct14 = MagentoProductCalls.createProductModel();
+//		genProduct14.setPrice("5.00");
+//		MagentoProductCalls.createApiProduct(genProduct14);
+//		productsList.add(genProduct14);
+//		
+//		genProduct15 = MagentoProductCalls.createProductModel();
+//		genProduct15.setPrice("29.90");
+//		genProduct15.setIp("25");
+//		MagentoProductCalls.createApiProduct(genProduct15);
+//		productsList.add(genProduct15);
+//		
+//		genProduct16 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct16.setPrice("29.00");
+//		genProduct16.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct16);
+//		productsList.add(genProduct16);
+//
+//		genProduct17 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct17.setPrice("9.90");
+//		genProduct17.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct17);
+//		productsList.add(genProduct17);
+//		
+//		genProduct18 = MagentoProductCalls.createProductModel();
+//		genProduct18.setPrice("120.00");
+//		genProduct18.setSpecialPrice("100.00");
+//		MagentoProductCalls.createApiProduct(genProduct18);
+//		productsList.add(genProduct18);
+//		
+//		genProduct19 = MagentoProductCalls.createProductModel();
+//		genProduct19.setPrice("449.50");
+//		MagentoProductCalls.createApiProduct(genProduct19);
+//		productsList.add(genProduct19);
 		
 		
 		
