@@ -1,4 +1,4 @@
-package com.tests.uss36;
+package com.tests.uss36.uss36001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,7 +40,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
-public class US36001SyncFrontendMagentoToSos extends BaseTest {
+public class US36001SyncBackendMagentoToSos extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -108,49 +108,38 @@ public class US36001SyncFrontendMagentoToSos extends BaseTest {
 	 * @throws Exception 
 	 */
 	@Test
-	public void us36001SyncFrontendMagentoToSos() throws Exception {
+	public void us36001SyncBackendMagentoToSos() throws Exception {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail("5WACymVNPxNj@mailinator.com");
-		backEndSteps.openCustomerDetails("5WACymVNPxNj@mailinator.com");
+		backEndSteps.searchForEmail("xs2t10fP8Vbw@mailinator.com");
+		backEndSteps.openCustomerDetails("xs2t10fP8Vbw@mailinator.com");
 		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
 		stylecoachSalesOnSpeedBackendSteps.selectAllowSosSync("Ja");
+		stylecoachSalesOnSpeedBackendSteps.clickOnResetAccountButton();
 		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
 		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
 		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
 		
-		frontEndSteps.performLogin("5WACymVNPxNj@mailinator.com","q1w2e3");
+		frontEndSteps.performLogin("xs2t10fP8Vbw@mailinator.com","q1w2e3");
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.SALESONSPEED_INFO);
-		sosSteps.verifySosMessage();
 		sosSteps.getSosUserEmail();
 		sosSteps.getSosPass();
 		headerSteps.goToLounge();
 		loungeSteps.goToContactsList();
 		contactDetailsSteps.checkIsPresentSosButton();
-		contactDetailsSteps.clickSosButton();
-		contactDetailsSteps.clickOnSubmitSosButton();
-		headerSteps.goToProfile();
-		profileNavSteps.selectMenu(ContextConstants.SALESONSPEED_INFO);
-		sosSteps.getSosUserEmail();
-		sosSteps.getSosPass();
-	    
-//		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-//		backEndSteps.clickOnCustomers();
-//		backEndSteps.searchForEmail("5WACymVNPxNj@mailinator.com");
-//		backEndSteps.openCustomerDetails("5WACymVNPxNj@mailinator.com");
-//		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
-//		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
-//		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
-//		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
 		
+	    
 	
 	
 	}
 
-	
+	@After
+	public void saveData() {
+		
+	}
 }

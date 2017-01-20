@@ -1,4 +1,4 @@
-package com.tests.uss36;
+package com.tests.uss36.uss36001;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +11,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,16 +34,30 @@ import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.backend.OrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
-
-@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
-@Story(Application.RegularCart.US8_1.class)
+@WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
-public class US36001CheckScIsNotAllowedForSosTest extends BaseTest{
-	
+public class US36001SyncFrontendMagentoToSos extends BaseTest {
+
+	@Steps
+	public BackEndSteps backEndSteps;
+	@Steps
+	public CustomVerification customVerifications;
+	@Steps
+	public CustomerDetailsBackendSteps customerDetailsBackendSteps;
+	@Steps 
+	public ProfileNavSteps profileNavSteps;
+	@Steps 
+	public LoungeSteps loungeSteps;
+	@Steps 
+	public SosSteps sosSteps;
+	@Steps 
+	public ContactDetailsSteps contactDetailsSteps;
+	@Steps 
+	public StylecoachSalesOnSpeedBackendSteps stylecoachSalesOnSpeedBackendSteps;
 	@Steps
 	public ProfileSteps profileSteps;
 	@Steps
@@ -51,30 +66,16 @@ public class US36001CheckScIsNotAllowedForSosTest extends BaseTest{
 	public FooterSteps footerSteps;
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
-	@Steps 
-	public CustomVerification customVerifications;
-	@Steps 
-	public ProfileNavSteps profileNavSteps;
-	@Steps 
-	public LoungeSteps loungeSteps;
-	@Steps 
-	public SosSteps sosSteps;
-	@Steps 
-	public BackEndSteps backEndSteps;
-	@Steps 
-	public ContactDetailsSteps contactDetailsSteps;
-	@Steps 
-	public CustomerDetailsBackendSteps customerDetailsBackendSteps;
-	@Steps 
-	public StylecoachSalesOnSpeedBackendSteps stylecoachSalesOnSpeedBackendSteps;
 	
 	
-	private static OrderModel orderModel = new OrderModel();
-	private String username, password;
 	
+	String username, password;
+
+
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -95,41 +96,61 @@ public class US36001CheckScIsNotAllowedForSosTest extends BaseTest{
 				}
 			}
 		}
-
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
-		
-		
+
+
+
 	}
-	
+
+	/**
+	 * BackEnd steps in this test
+	 * @throws Exception 
+	 */
 	@Test
-	public void uS36001CheckScIsNotAllowedForSosTest() throws Exception {
+	public void us36001SyncFrontendMagentoToSos() throws Exception {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail(username);
-		backEndSteps.openCustomerDetails(username);
+		backEndSteps.searchForEmail("5WACymVNPxNj@mailinator.com");
+		backEndSteps.openCustomerDetails("5WACymVNPxNj@mailinator.com");
 		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
-		stylecoachSalesOnSpeedBackendSteps.selectAllowSosSync("Nein");
+		stylecoachSalesOnSpeedBackendSteps.selectAllowSosSync("Ja");
 		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
 		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
 		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
 		
-		frontEndSteps.performLogin(username,password);
+		frontEndSteps.performLogin("5WACymVNPxNj@mailinator.com","q1w2e3");
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.goToProfile();
-		profileNavSteps.checkSosMenuIsNotPresent(ContextConstants.SALESONSPEED_INFO);
+		profileNavSteps.selectMenu(ContextConstants.SALESONSPEED_INFO);
+		sosSteps.verifySosMessage();
+		sosSteps.getSosUserEmail();
+		sosSteps.getSosPass();
 		headerSteps.goToLounge();
 		loungeSteps.goToContactsList();
 		contactDetailsSteps.checkIsPresentSosButton();
-	    
+		contactDetailsSteps.clickSosButton();
+		contactDetailsSteps.clickOnSubmitSosButton();
+		headerSteps.goToProfile();
+		profileNavSteps.selectMenu(ContextConstants.SALESONSPEED_INFO);
 		sosSteps.getSosUserEmail();
 		sosSteps.getSosPass();
+	    
+//		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+//		backEndSteps.clickOnCustomers();
+//		backEndSteps.searchForEmail("5WACymVNPxNj@mailinator.com");
+//		backEndSteps.openCustomerDetails("5WACymVNPxNj@mailinator.com");
+//		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
+//		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
+//		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
+//		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
 		
-		
-		customVerifications.printErrors();
+	
+	
 	}
+
+	
 }

@@ -16,7 +16,7 @@ import com.steps.backend.SalesOnSpeed.MagentoToSosContactsSyncSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.SosContactModel;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
-import com.tools.data.salesOnSpeed.MagentoSOSInfoModel;
+import com.tools.data.salesOnSpeed.MagentoSOSUserInfoModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -33,7 +33,7 @@ public class US36001ValidateContatInfoSyncInSosAfterResetAcountTest extends Base
 	private List<MagentoSOSContactModel> contactList = new ArrayList<MagentoSOSContactModel>();
 	private List<MagentoSOSContactModel> contactsInfo = new ArrayList<MagentoSOSContactModel>();
 	private List<MagentoSOSContactModel> sosContactsInfo = new ArrayList<MagentoSOSContactModel>();
-	MagentoSOSInfoModel sosUserInfo = new MagentoSOSInfoModel();
+	MagentoSOSUserInfoModel sosUserInfo = new MagentoSOSUserInfoModel();
 	String sosPassowrd;
 	String sosEmail;
 	String stylistID;

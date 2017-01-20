@@ -5,9 +5,7 @@ import java.util.List;
 
 import com.tools.CustomVerification;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
-import com.tools.data.salesOnSpeed.MagentoSOSInfoModel;
-
-import net.thucydides.core.annotations.Step;
+import com.tools.data.salesOnSpeed.MagentoSOSUserInfoModel;
 
 
 
@@ -23,7 +21,7 @@ public class SosRequestTest {
 		
 		
 		MagentoSOSContactModel contactWithInfo = new MagentoSOSContactModel();
-		MagentoSOSInfoModel sosUserInfo =new MagentoSOSInfoModel();
+		MagentoSOSUserInfoModel sosUserInfo =new MagentoSOSUserInfoModel();
 		MagentoSOSContactModel sosContactInfo=new MagentoSOSContactModel();
 //		contactList=MagentoSosContactItemsCalls.getContactItems("6490");
 //		

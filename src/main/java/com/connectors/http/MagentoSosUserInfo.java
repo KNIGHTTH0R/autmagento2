@@ -15,12 +15,12 @@ import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
-import com.tools.data.salesOnSpeed.MagentoSOSInfoModel;
+import com.tools.data.salesOnSpeed.MagentoSOSUserInfoModel;
 
 public class MagentoSosUserInfo {
-	public static MagentoSOSInfoModel getUserInfo(String userId) {
+	public static MagentoSOSUserInfoModel getUserInfo(String userId) {
 
-		MagentoSOSInfoModel contactInfo = new MagentoSOSInfoModel();
+		MagentoSOSUserInfoModel contactInfo = new MagentoSOSUserInfoModel();
 
 		try {
 			SOAPMessage response = soapGetUserInfo(userId);
@@ -86,9 +86,9 @@ public class MagentoSosUserInfo {
 		return soapMessage;
 	}
 
-	private static MagentoSOSInfoModel extractUserInfoData(SOAPMessage response) throws Exception {
+	private static MagentoSOSUserInfoModel extractUserInfoData(SOAPMessage response) throws Exception {
 
-		MagentoSOSInfoModel model = new MagentoSOSInfoModel();
+		MagentoSOSUserInfoModel model = new MagentoSOSUserInfoModel();
 		NodeList result = response.getSOAPBody().getElementsByTagName("result");
 		
 		NodeList resultNodes = result.item(0).getChildNodes();
@@ -179,7 +179,7 @@ public class MagentoSosUserInfo {
 
 
 	public static void main(String[] args) throws SOAPException, IOException {
-		MagentoSOSInfoModel dbmodel = MagentoSosUserInfo.getUserInfo("6490");
+		MagentoSOSUserInfoModel dbmodel = MagentoSosUserInfo.getUserInfo("6490");
 		System.out.println(dbmodel.toString());
 		
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -43,15 +44,18 @@ public class OrderListPage extends AbstractPage {
 		searchButton.click();
 	}
 
-	public void openOrderDetails(String name) {
-		evaluateJavascript("jQuery.noConflict();");
-		element(listContainer).waitUntilVisible();
-		List<WebElement> listElements = listContainer.findElements(By.tagName("tr"));
-		theFor: for (WebElement elementNow : listElements) {
-			if (elementNow.getText().contains(name)) {
-				elementNow.findElement(By.cssSelector("td a[href*='admin/sales_order']")).click();
-				break theFor;
-			}
-		}
-	}
+	 public void openOrderDetails(String name) {
+		  evaluateJavascript("jQuery.noConflict();");
+		  element(listContainer).waitUntilVisible();
+		  boolean found = false;
+		  List<WebElement> listElements = listContainer.findElements(By.tagName("tr"));
+		  theFor: for (WebElement elementNow : listElements) {
+		   if (elementNow.getText().contains(name)) {
+		    elementNow.findElement(By.cssSelector("td a[href*='admin/sales_order']")).click();
+		    found = true;
+		    break theFor;
+		   }
+		  }
+		  Assert.assertTrue("The order was not found",found);
+		 }
 }
