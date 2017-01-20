@@ -108,6 +108,7 @@ public class SurveyPage extends AbstractPage {
 		waitFor(ExpectedConditions.elementToBeClickable(toPaymentButton));
 		toPaymentButton.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		waitABit(4000);
 	}
 
 	public List<CartProductModel> grabProductsList() {

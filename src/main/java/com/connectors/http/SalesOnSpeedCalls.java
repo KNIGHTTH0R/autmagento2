@@ -5,97 +5,113 @@ import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.tools.data.salesOnSpeed.Campaign_name;
+import com.tools.data.salesOnSpeed.Contacted_progress_0;
+import com.tools.data.salesOnSpeed.Contacted_progress_1;
+import com.tools.data.salesOnSpeed.Contacted_progress_2;
+import com.tools.data.salesOnSpeed.Contacted_progress_3;
+import com.tools.data.salesOnSpeed.Contacted_progress_4;
 import com.tools.data.salesOnSpeed.CustomFields;
-
+import com.tools.data.salesOnSpeed.Flag_contact_booster;
+import com.tools.data.salesOnSpeed.Flag_member;
+import com.tools.data.salesOnSpeed.Flag_parties;
+import com.tools.data.salesOnSpeed.Follow_up_date;
+import com.tools.data.salesOnSpeed.Is_distributed;
+import com.tools.data.salesOnSpeed.Lang_issues;
+import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
+import com.tools.data.salesOnSpeed.Male;
+import com.tools.data.salesOnSpeed.Not_interested;
 import com.tools.data.salesOnSpeed.Notes;
 import com.tools.data.salesOnSpeed.Phones;
-import com.tools.data.salesOnSpeed.SalesOnSpeedContactModel;
+import com.tools.data.salesOnSpeed.PrimaryPhone;
+import com.tools.data.salesOnSpeed.Roadshow_city;
+import com.tools.data.salesOnSpeed.Signup_issues;
+import com.tools.data.salesOnSpeed.Underaged;
+import com.tools.data.salesOnSpeed.Wrong_details;
 import com.tools.salesOnSpeed.SalesOnSpeedContactResponse;
+import com.tools.utils.DateUtils;
 
 public class SalesOnSpeedCalls {
 
-	public static List<SalesOnSpeedContactModel> getListCustomerInfo(String userSosId) throws Exception {
+	public static List<MagentoSOSContactModel> getListCustomerInfo(String userSosId, String email, String password)
+			throws Exception {
 
-		List<SalesOnSpeedContactModel> contact = new ArrayList<SalesOnSpeedContactModel>();
+		List<MagentoSOSContactModel> contactList = new ArrayList<MagentoSOSContactModel>();
 
 		String unparsedResponse = JerseyClientSos
-				.sendGet("https://apidev.salesonspeed.de/contacts/?requestedUserId=" + userSosId);
+				.sendGet("https://apidev.salesonspeed.de/contacts/?requestedUserId=" + userSosId, email, password);
 
 		ObjectMapper mapper = new ObjectMapper();
 		SalesOnSpeedContactResponse[] response = (SalesOnSpeedContactResponse[]) mapper.readValue(unparsedResponse,
 				SalesOnSpeedContactResponse[].class);
 
 		for (SalesOnSpeedContactResponse salesOnSpeedCustomerResponse : response) {
-			SalesOnSpeedContactModel salesOnSpeedCustomerModel = new SalesOnSpeedContactModel();
+			MagentoSOSContactModel magentoCustomerModel = new MagentoSOSContactModel();
 
-			salesOnSpeedCustomerModel = populateModelFromResponse(salesOnSpeedCustomerModel,
-					salesOnSpeedCustomerResponse);
+			magentoCustomerModel = populateModelFromResponse(magentoCustomerModel, salesOnSpeedCustomerResponse);
 
-			contact.add(salesOnSpeedCustomerModel);
-
-//			CustomFields customF = salesOnSpeedCustomerModel.getCustomFields();
-//			Underaged under = customF.getUnderaged();
-//			System.out.println("underaged type " + under.getType());
-//			System.out.println("underaged disabled " + under.getDisabled());
-//			System.out.println("id customer => " + salesOnSpeedCustomerModel.get_id());
-//			System.out.println("phones  => " + salesOnSpeedCustomerModel.getPhones());
-//			System.out.println("notes => " + salesOnSpeedCustomerModel.getNotes());
-//
-//			List<Notes> note = salesOnSpeedCustomerModel.getNotes();
-//			for (Notes notes1 : note) {
-//				System.out.println("note text " + notes1.getText());
-//			}
+			contactList.add(magentoCustomerModel);
 
 		}
-		return contact;
+		return contactList;
 
 	}
 
-	public static SalesOnSpeedContactModel getCustomerInfo(String contactSosId, String userSosId) throws Exception {
+	public static MagentoSOSContactModel getCustomerInfo(String contactSosId, String userSosId, String email,
+			String password) throws Exception {
 
 		// List<SalesOnSpeedCustomerModel> contact = new
 		// ArrayList<SalesOnSpeedCustomerModel>();
 
-		String unparsedResponse = JerseyClientSos
-				.sendGet("https://apidev.salesonspeed.de/contacts/" + contactSosId + "?requestedUserId=" + userSosId);
+		String unparsedResponse = JerseyClientSos.sendGet(
+				"https://apidev.salesonspeed.de/contacts/" + contactSosId + "?requestedUserId=" + userSosId, email,
+				password);
 
 		ObjectMapper mapper = new ObjectMapper();
 		SalesOnSpeedContactResponse response = (SalesOnSpeedContactResponse) mapper.readValue(unparsedResponse,
 				SalesOnSpeedContactResponse.class);
 
-		SalesOnSpeedContactModel salesOnSpeedContactModel = new SalesOnSpeedContactModel();
+		MagentoSOSContactModel salesOnSpeedContactModel = new MagentoSOSContactModel();
 
 		salesOnSpeedContactModel = populateModelFromResponse(salesOnSpeedContactModel, response);
 
-//		CustomFields customF = salesOnSpeedContactModel.getCustomFields();
-//		Underaged under = customF.getUnderaged();
-//		System.out.println("underaged type " + under.getType());
-//		System.out.println("underaged disabled " + under.getDisabled());
-//		System.out.println("id customer => " + salesOnSpeedContactModel.get_id());
-//		System.out.println("phones  => " + salesOnSpeedContactModel.getPhones());
-//		System.out.println("notes => " + salesOnSpeedContactModel.getNotes());
-//
-//		List<Notes> note = salesOnSpeedContactModel.getNotes();
-//		for (Notes notes1 : note) {
-//			System.out.println("note text " + notes1.getText());
-//		}
+		System.out.println(salesOnSpeedContactModel.toString());
+
+		// CustomFields customF = salesOnSpeedContactModel.getCustomFields();
+		// Underaged under = customF.getUnderaged();
+		// System.out.println("underaged type " + under.getType());
+		// System.out.println("underaged disabled " + under.getDisabled());
+		// System.out.println("id customer => " +
+		// salesOnSpeedContactModel.get_id());
+		// System.out.println("phones => " +
+		// salesOnSpeedContactModel.getPhones());
+		// System.out.println("notes => " +
+		// salesOnSpeedContactModel.getNotes());
+		//
+		// List<Notes> note = salesOnSpeedContactModel.getNotes();
+		// for (Notes notes1 : note) {
+		// System.out.println("note text " + notes1.getText());
+		// }
 
 		return salesOnSpeedContactModel;
 
 	}
 
-	private static SalesOnSpeedContactModel populateModelFromResponse(SalesOnSpeedContactModel salesOnSpeedContactModel,
+	private static MagentoSOSContactModel populateModelFromResponse(MagentoSOSContactModel salesOnSpeedContactModel,
 			SalesOnSpeedContactResponse response) {
 
+		List<String> contacted_progress=new ArrayList<String>();
+		
 		salesOnSpeedContactModel.set_id(response.get_id());
 		salesOnSpeedContactModel.set__v(response.get__v());
 		salesOnSpeedContactModel.setStreet(response.getStreet());
+		salesOnSpeedContactModel.setPrename(response.getPrename());
 		salesOnSpeedContactModel.setLastname(response.getLastname());
 		salesOnSpeedContactModel.setPostcode(response.getPostcode());
 		salesOnSpeedContactModel.setCity(response.getCity());
 		salesOnSpeedContactModel.setCountry(response.getCountry());
-		salesOnSpeedContactModel.setUpdated(response.getUpdated());
-		salesOnSpeedContactModel.setCreated(response.getUpdated());
+		salesOnSpeedContactModel.setUpdated(DateUtils.parseMilisDate(response.getUpdated(), "yyyy-MM-dd"));
+		salesOnSpeedContactModel.setCreated(DateUtils.parseMilisDate(response.getCreated(), "yyyy-MM-dd"));
 		salesOnSpeedContactModel.setEmail(response.getEmail());
 		salesOnSpeedContactModel.setUserId(response.getUserId());
 		salesOnSpeedContactModel.setLanguage(response.getLanguage());
@@ -120,36 +136,88 @@ public class SalesOnSpeedCalls {
 
 		CustomFields customfields = response.getCustomFields();
 
-		CustomFields extractedCustomFields = new CustomFields();
+		// CustomFields extractedCustomFields = new CustomFields();
 
-		extractedCustomFields.setUnderaged(customfields.getUnderaged());
-		extractedCustomFields.setNot_interested(customfields.getNot_interested());
-		extractedCustomFields.setFlag_contact_booster(customfields.getFlag_contact_booster());
-		extractedCustomFields.setWrong_details(customfields.getWrong_details());
-		extractedCustomFields.setMale(customfields.getMale());
-		extractedCustomFields.setSignup_issues(customfields.getSignup_issues());
-		extractedCustomFields.setCampaign_name(customfields.getCampaign_name());
-		extractedCustomFields.setFlag_parties(customfields.getFlag_parties());
-		extractedCustomFields.setIs_distributed(customfields.getIs_distributed());
-		extractedCustomFields.setFlag_member(customfields.getFlag_member());
-		extractedCustomFields.setRoadshow_city(customfields.getRoadshow_city());
-		extractedCustomFields.setFollow_up_date(customfields.getFollow_up_date());
-		extractedCustomFields.setLang_issues(customfields.getLang_issues());
-		extractedCustomFields.setContacted_progress_0(customfields.getContacted_progress_0());
-		extractedCustomFields.setContacted_progress_1(customfields.getContacted_progress_1());
-		extractedCustomFields.setContacted_progress_2(customfields.getContacted_progress_2());
-		extractedCustomFields.setContacted_progress_3(customfields.getContacted_progress_3());
-		extractedCustomFields.setContacted_progress_4(customfields.getContacted_progress_4());
+		Underaged underaged = customfields.getUnderaged();
+		salesOnSpeedContactModel.setUnderagedValue(underaged.getValue());
 
-		salesOnSpeedContactModel.setCustomFields(extractedCustomFields);
+		Not_interested notInterested = customfields.getNot_interested();
+		salesOnSpeedContactModel.setNot_interestedValue(notInterested.getValue());
 
-		salesOnSpeedContactModel.setPrimaryPhone(response.getPrimaryPhone());
+		Flag_contact_booster flagContactBooster = customfields.getFlag_contact_booster();
+		salesOnSpeedContactModel.setFlagContactBoosterValue(flagContactBooster.getValue());
+
+		Wrong_details wrongDetails = customfields.getWrong_details();
+		salesOnSpeedContactModel.setWrongDetailsValue(wrongDetails.getValue());
+
+		Male male = customfields.getMale();
+		salesOnSpeedContactModel.setMaleValue(male.getValue());
+
+		Signup_issues signupIssues = customfields.getSignup_issues();
+		salesOnSpeedContactModel.setSignupIssuesValue(signupIssues.getValue());
+
+		Campaign_name campaignName = customfields.getCampaign_name();
+
+		salesOnSpeedContactModel.setCampaignNameValue(campaignName.getValue());
+
+		Flag_parties flagParties = customfields.getFlag_parties();
+		salesOnSpeedContactModel.setFlagPartiesValue(flagParties.getValue());
+
+		Is_distributed isDistributed = customfields.getIs_distributed();
+		salesOnSpeedContactModel.setIsDistributedValue(isDistributed.getValue());
+
+		Flag_member flagMember = customfields.getFlag_member();
+		salesOnSpeedContactModel.setFlagMemberValue(flagMember.getValue());
+
+		Roadshow_city roadShowCity = customfields.getRoadshow_city();
+
+		String roadShowCityValue = roadShowCity.getValue();
+		String roadShowCityValue2 = roadShowCityValue.contains("No registration") ? "" : roadShowCityValue;
+	
+		salesOnSpeedContactModel.setRoadshowCityValue(roadShowCityValue2);
+
+		Follow_up_date followUpDate = customfields.getFollow_up_date();
+		salesOnSpeedContactModel.setFollowUpDateValue(followUpDate.getValue());
+
+		Lang_issues langIssue = customfields.getLang_issues();
+		salesOnSpeedContactModel.setLangIssuesValue(langIssue.getValue());
+
+		Contacted_progress_2 contactedProgress2 =customfields.getContacted_progress_2();
+		contacted_progress.add(contactedProgress2.getValue()=="true"?"2":"false");
+		
+		Contacted_progress_1 contactedProgress1=customfields.getContacted_progress_1();
+		contacted_progress.add(contactedProgress1.getValue()=="true"?"1":"false");
+		
+		Contacted_progress_0 contactedProgress0=customfields.getContacted_progress_0();
+		contacted_progress.add(contactedProgress0.getValue()=="true"?"0":"false");
+		
+		Contacted_progress_3 contactedProgress3=customfields.getContacted_progress_3();
+		contacted_progress.add(contactedProgress3.getValue()=="true"?"3":"false");
+		
+		Contacted_progress_4 contactedProgress4=customfields.getContacted_progress_4();
+		contacted_progress.add(contactedProgress4.getValue()=="true"?"4":"false");
+		
+		
+		for (String progress : contacted_progress) {
+			if(progress!="false"){
+				salesOnSpeedContactModel.setContacted_progress(progress);
+				break;
+			}
+		}
+		
+		if(salesOnSpeedContactModel.getContacted_progress()==null){
+			salesOnSpeedContactModel.setContacted_progress("-1");
+		}
+		PrimaryPhone primaryPhone = response.getPrimaryPhone();
+
+		salesOnSpeedContactModel.setPrimaryPhoneNumber(primaryPhone.getNumber());
 
 		return salesOnSpeedContactModel;
 	}
 
 	public static void main(String[] args) throws Exception {
 		// SalesOnSpeedCalls.getListCustomerInfo("586f530766eeed5a1110c5a7");
-		SalesOnSpeedCalls.getCustomerInfo("586f56ff66eeed5a1110c5d5", "586f530766eeed5a1110c5a7");
+		SalesOnSpeedCalls.getCustomerInfo("587f2a4eb8cc4b0536c7e9fa", "587cb70fb8cc4b0536c7e9a1", "pippajean",
+				"Minerilor62!");
 	}
 }

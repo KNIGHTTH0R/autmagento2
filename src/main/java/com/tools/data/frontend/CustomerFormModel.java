@@ -10,6 +10,16 @@ public class CustomerFormModel {
 	private String lastName;
 	private String emailName;
 	private String password;
+	private String sosPassword;
+
+	
+	public String getSosPassword() {
+		return sosPassword;
+	}
+
+	public void setSosPassword(String sosPassword) {
+		this.sosPassword = sosPassword;
+	}
 
 	public CustomerFormModel() throws Exception {
 		setFirstName();

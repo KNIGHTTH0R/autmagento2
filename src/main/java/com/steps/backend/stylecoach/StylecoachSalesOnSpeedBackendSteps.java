@@ -18,8 +18,13 @@ public class StylecoachSalesOnSpeedBackendSteps extends AbstractSteps {
 		
 	}
 	@Step
-	public void checkSosPassword() {
-		sosDetailsBackendPage().checkPasswordField();
+	public String checkSosPassword() {
+		return sosDetailsBackendPage().checkPasswordField();
+	}
+	
+	@Step
+	public void clickOnResetContactsButton() {
+		sosDetailsBackendPage().clickOnResetContactsButton();
 	}
 	
 	@Step
@@ -35,5 +40,19 @@ public class StylecoachSalesOnSpeedBackendSteps extends AbstractSteps {
 	public boolean checkIsPresentResetContactButton() {
 		return sosDetailsBackendPage().checkIsPresentResetContactButton();
 	}
+	
+	@Step
+	public String grabStyleCoachID() {
+		return sosDetailsBackendPage().grabStyleCoachID();
+	}
+	
+	@Step
+	public void validateSuccessMessage() {
+		// TODO Auto-generated method stub
+		sosDetailsBackendPage().validateSuccessMessage();
+		
+		
+	}
+	
 	
 }

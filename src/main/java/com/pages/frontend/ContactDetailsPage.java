@@ -60,14 +60,12 @@ public class ContactDetailsPage extends AbstractPage {
 		if(element(sosButton).isVisible())
 		{
 			isVisible=true;
-			System.out.println("butonul apareeeeeeee"+isVisible);
 			Assert.assertTrue("The menu was  found", isVisible);
 			
 		}
 		else 
 		{
 			isVisible=false;
-			System.out.println("butonul nu apare"+isVisible);
 			Assert.assertFalse("The menu was not found", isVisible);
 		}
 		

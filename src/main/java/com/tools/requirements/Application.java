@@ -421,4 +421,10 @@ public class Application {
 		public class US34_1 {
 		}
 	}
+	
+	@Feature
+	public class ValidateSosSync {
+		public class US36_1 {
+		}
+	}
 }

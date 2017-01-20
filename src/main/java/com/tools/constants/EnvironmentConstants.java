@@ -34,7 +34,7 @@ public class EnvironmentConstants {
 //	public static final String SOAP_URL=MongoReader.geteEnvironmentConstantsItem("SOAP_URL");
 //	public static final String SOAP_USERNAME=MongoReader.geteEnvironmentConstantsItem("SOAP_USERNAME");
 //	public static final String SOAP_PASSWORD=MongoReader.geteEnvironmentConstantsItem("SOAP_PASSWORD");
-	
+//	
 	//pippajean-uphgrade env  - uncomment following for testing without running the test from cmd line
 //	public static final String COMMISSION_URL = "http://commission.evozon.com/api/";
 //	public static final String SOAP_URL="https://pippajean-upgrade.evozon.com/";
@@ -49,10 +49,10 @@ public class EnvironmentConstants {
 	// staging-aut env  - uncomment following for testing without running the test from cmd line
 	public static final String COMMISSION_URL = "http://commission-staging-aut.pippajean.com/api/";
 	public static final String SOAP_URL="http://aut-pippajean.evozon.com/";
-//	public static final String SOAP_USERNAME="stagingaut";
-//	public static final String SOAP_PASSWORD="stagingaut1";
+	public static final String SOAP_USERNAME="stagingaut";
+	public static final String SOAP_PASSWORD="stagingaut1";
 //	
-	public static final String SOAP_USERNAME="sos";
-	public static final String SOAP_PASSWORD="emilian1";
+//	public static final String SOAP_USERNAME="sos";
+//	public static final String SOAP_PASSWORD="emilian1";
 	
 }

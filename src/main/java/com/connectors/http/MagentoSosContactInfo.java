@@ -1,8 +1,7 @@
 package com.connectors.http;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
 
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPConnection;
@@ -16,23 +15,9 @@ import org.w3c.dom.NodeList;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
-import com.tools.data.salesOnSpeed.CustomFields;
-import com.tools.data.salesOnSpeed.Flag_contact_booster;
-import com.tools.data.salesOnSpeed.Flag_member;
-import com.tools.data.salesOnSpeed.Flag_parties;
-import com.tools.data.salesOnSpeed.Follow_up_date;
-import com.tools.data.salesOnSpeed.Is_distributed;
-import com.tools.data.salesOnSpeed.Lang_issues;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
-import com.tools.data.salesOnSpeed.Male;
-import com.tools.data.salesOnSpeed.Not_interested;
-import com.tools.data.salesOnSpeed.PrimaryPhone;
-import com.tools.data.salesOnSpeed.Roadshow_city;
-import com.tools.data.salesOnSpeed.SalesOnSpeedContactModel;
-import com.tools.data.salesOnSpeed.Signup_issues;
-import com.tools.data.salesOnSpeed.Underaged;
-import com.tools.data.salesOnSpeed.Wrong_details;
-import com.tools.data.soap.DBOrderModel;
+import com.tools.persistance.MongoReader;
+import com.tools.utils.DateUtils;
 
 public class MagentoSosContactInfo {
 	public static MagentoSOSContactModel getContactInfo(String contactId) {
@@ -78,6 +63,53 @@ public class MagentoSosContactInfo {
 
 		return soapResponse;
 	}
+	
+	
+	
+	
+	public static MagentoSOSContactModel getContactInfoSameSess(String contactId,String sessID) {
+
+		MagentoSOSContactModel contactInfo = new MagentoSOSContactModel();
+
+		try {
+			SOAPMessage response = soapGetContactInfoSameSess(contactId,sessID);
+			System.out.println(response);
+			try {
+				contactInfo = extractContactInfoData(response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return contactInfo;
+	}
+
+	public static SOAPMessage soapGetContactInfoSameSess(String userId,String sessID)
+			throws SOAPException, IOException {
+	//	String sessionId = HttpSoapConnector.performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+
+		 SOAPMessage soapResponse =
+		 soapConnection.call(getContactInfoRequest(sessID,
+				 userId), EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
+
+//		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
+//				"https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+
+//		 SOAPMessage soapResponse =
+//		 soapConnection.call(getOrdersInfoRequest(sessionId,
+//		 orderIncrementId),
+//		 "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
 
 	private static SOAPMessage getContactInfoRequest(String ssID, String userId)
 			throws SOAPException, IOException {
@@ -108,19 +140,25 @@ public class MagentoSosContactInfo {
 		MagentoSOSContactModel model = new MagentoSOSContactModel();
 		NodeList result = response.getSOAPBody().getElementsByTagName("result");
 		
+		String phoneNumber="";
+		String areaCode="";
+		String houseNumber="";
+		String street="";
+		
 		NodeList resultNodes = result.item(0).getChildNodes();
 		for (int r = 0; r < resultNodes.getLength(); r++) {
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("telephone")) {
-				
-				model.setPrimaryPhoneNumber(resultNodes.item(r).getTextContent());
+				phoneNumber=resultNodes.item(r).getTextContent();
+			//	model.setPrimaryPhoneNumber(resultNodes.item(r).getTextContent());
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("firstname")) {
 				model.setPrename(resultNodes.item(r).getTextContent());
 			}
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("street")) {
-				model.setStreet(resultNodes.item(r).getTextContent());
+			//	model.setStreet(resultNodes.item(r).getTextContent());
+				street=resultNodes.item(r).getTextContent();
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("lastname")) {
@@ -128,10 +166,19 @@ public class MagentoSosContactInfo {
 			}
 			
 			
-			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("area_code")) {
+			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("house_number")) {
+				model.setHouseNumber(resultNodes.item(r).getTextContent());
+				houseNumber=resultNodes.item(r).getTextContent();
+			}
+			
+			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("postcode")) {
 				model.setPostcode(resultNodes.item(r).getTextContent());
 			}
 			
+			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("area_code")) {
+//			/	model.setAreaCode(resultNodes.item(r).getTextContent());
+				areaCode=resultNodes.item(r).getTextContent();
+			}
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("city")) {
 				model.setCity(resultNodes.item(r).getTextContent());
 			}
@@ -144,13 +191,31 @@ public class MagentoSosContactInfo {
 				model.set_id(resultNodes.item(r).getTextContent());
 			}
 			
+			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("contacted_progress")) {
+				model.setContacted_progress(resultNodes.item(r).getTextContent());
+			}
+			
 			//should be sos created/updated dates ??? 
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("created_at")) {
-				model.setCreated(resultNodes.item(r).getTextContent());
+//				model.setCreated(DateUtils.parseDate(resultNodes.item(r).getTextContent(), "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd",
+//						new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+				
+				
+				model.setCreated(DateUtils.parseDate(resultNodes.item(r).getTextContent(), "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd",
+						new Locale.Builder().setLanguage("de").build()));
+				//model.setCreated(resultNodes.item(r).getTextContent());
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("updated_at")) {
-				model.setUpdated(resultNodes.item(r).getTextContent());
+				
+//				model.setUpdated(DateUtils.parseDate(resultNodes.item(r).getTextContent(), "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd",
+//						new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+				
+				model.setUpdated(DateUtils.parseDate(resultNodes.item(r).getTextContent(), "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd",
+						new Locale.Builder().setLanguage("de").build()));
+				
+				
+			//	model.setUpdated(resultNodes.item(r).getTextContent());
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("email")) {
@@ -164,77 +229,157 @@ public class MagentoSosContactInfo {
 			//language ???
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("underaged")) {
-			
-				model.setUnderagedValue(resultNodes.item(r).getTextContent());
+				String underaged=resultNodes.item(r).getTextContent();
+				if(underaged==null){
+					underaged="null";
+				}else{
+					underaged=underaged== "1" ? "true" : "false";
+				}
+					
+				
+				model.setUnderagedValue(underaged);
 				
 			}
 	
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("not_interesed")) {
-				model.setNot_interestedValue(resultNodes.item(r).getTextContent());
+				
+				String Not_interested=resultNodes.item(r).getTextContent();
+				if(Not_interested==null){
+					Not_interested="null";
+				}else{
+					Not_interested=Not_interested== "1" ? "true" : "false";
+				}
+				model.setNot_interestedValue(Not_interested);
 			}
 			
 			// contacted_progress_2;   ????
 			//Contacted_progress_3 ???
+			
 			//Campaign_name  ??
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("flag_contact_booster")) {
-				
-				model.setFlagContactBoosterValue(resultNodes.item(r).getTextContent());
+				String FlagContactBooster=resultNodes.item(r).getTextContent();
+				if(FlagContactBooster==null){
+					FlagContactBooster="null";
+				}else{
+					FlagContactBooster=FlagContactBooster== "1" ? "true" : "false";
+				}
+				model.setFlagContactBoosterValue(FlagContactBooster);
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("wrong_datails")) {
-				
-				model.setWrongDetailsValue(resultNodes.item(r).getTextContent());
+				String WrongDetails=resultNodes.item(r).getTextContent();
+				if(WrongDetails==null){
+					WrongDetails="null";
+				}else{
+					WrongDetails=WrongDetails== "1" ? "true" : "false";
+				}
+				model.setWrongDetailsValue(WrongDetails);
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("male")) {
-			
-				model.setMaleValue(resultNodes.item(r).getTextContent());
+				String MaleValue=resultNodes.item(r).getTextContent();
+				if(MaleValue==null){
+					MaleValue="null";
+				}else{
+					MaleValue=MaleValue== "1" ? "true" : "false";
+				}
+				
+				model.setMaleValue(MaleValue);
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("signup_issues")) {
 				
-				model.setSignupIssuesValue(resultNodes.item(r).getTextContent());
+				String SignupIssues=resultNodes.item(r).getTextContent();
+				if(SignupIssues==null){
+					SignupIssues="null";
+				}else{
+					SignupIssues=SignupIssues== "1" ? "true" : "false";
+				}
+				
+				model.setSignupIssuesValue(SignupIssues);
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("flag_parties")) {
 				
-				model.setFlagPartiesValue(resultNodes.item(r).getTextContent());
+				String FlagParties=resultNodes.item(r).getTextContent();
+				if(FlagParties==null){
+					FlagParties="null";
+				}else{
+					FlagParties=FlagParties== "1" ? "true" : "false";
+				}
+				
+				model.setFlagPartiesValue(FlagParties);
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("is_distributed")) {
+				String IsDistributed=resultNodes.item(r).getTextContent();
+				if(IsDistributed==null){
+					IsDistributed="null";
+				}else{
+					IsDistributed=IsDistributed== "1" ? "true" : "false";
+				}
 				
-				model.setIsDistributedValue(resultNodes.item(r).getTextContent());
+				
+				model.setIsDistributedValue(IsDistributed);
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("flag_member")) {
 			
-				model.setFlagMemberValue(resultNodes.item(r).getTextContent());
+				String FlagMember=resultNodes.item(r).getTextContent();
+				if(FlagMember==null){
+					FlagMember="null";
+				}else{
+					FlagMember=FlagMember== "1" ? "true" : "false";
+				}
+				
+				model.setFlagMemberValue(FlagMember);
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("roadshow_city")) {
 				
-				model.setRoadshowCityValue(resultNodes.item(r).getTextContent());
+				String RoadshowCityV=resultNodes.item(r).getTextContent();
+				if(RoadshowCityV==null){
+					RoadshowCityV="null";
+				}else{
+					RoadshowCityV=RoadshowCityV== "No registration" ? "" : RoadshowCityV ;
+				}
+				
+				model.setRoadshowCityValue(RoadshowCityV);
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("follow_up_date")) {
-			
-				model.setFollowUpDateValue(resultNodes.item(r).getTextContent());
+				String followUpDate=resultNodes.item(r).getTextContent();
+				if(followUpDate==""){
+					followUpDate="0";
+				}
+				
+				model.setFollowUpDateValue(followUpDate);
 			}
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("lang_issues")) {
 				
-				model.setLangIssuesValue(resultNodes.item(r).getTextContent());
+				String LangIssues=resultNodes.item(r).getTextContent();
+				if(LangIssues==null){
+					LangIssues="null";
+				}else{
+					LangIssues=LangIssues== "1" ? "true" : "false";
+				}
+				
+				model.setLangIssuesValue(LangIssues);
 			}
 			
 		
 		}
+		
+		model.setPrimaryPhoneNumber(areaCode.concat(phoneNumber));
+		model.setStreet(street+" "+houseNumber);
 		return model;
 	}
 
 
 	public static void main(String[] args) throws SOAPException, IOException {
-		MagentoSOSContactModel dbmodel = MagentoSosContactInfo.getContactInfo("54385");
+		MagentoSOSContactModel dbmodel = MagentoSosContactInfo.getContactInfo("56267");
 		System.out.println(dbmodel.toString());
 		
 	}

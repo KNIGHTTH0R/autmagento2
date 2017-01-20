@@ -123,7 +123,7 @@ public class HttpSoapConnector {
 	 * @throws SOAPException
 	 * @throws IOException
 	 */
-	protected static String performLogin() throws SOAPException, IOException {
+	public static String performLogin() throws SOAPException, IOException {
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
 

@@ -228,7 +228,8 @@ public class MongoTableKeys {
 	public static final String LONGITUDE = "Longitude";
 
 	public static final String IP_PERFORMANCE_MODEL = "IpPerformanceModel";
-
+	
+	
 	public static final String CAREER_LEVEL = "CareerLevel";
 	public static final String PAY_LEVEL = "PayLevel";
 	public static final String INDIVIDUAL_POINTS = "IndividualPoints";
@@ -237,6 +238,11 @@ public class MongoTableKeys {
 	public static final String STYLECOACH_FIRST_LEVEL = "StyleCoachFirstLevel";
 	public static final String GOLD_STYLECOACHES = "GoldStyleCoaches";
 
+	//sos
+	public static final String SOS_PASSWORD = "SosPassword";
+	public static final String SOS_EMAIL = "SosEmail";
+	public static final String STYLIST_ID="StylistId";
+	public static final String SOS_CONTACT_MODEL = "SosContactModel";
 	// category
 	public static final String CATEGORY_MODEL = null;
 	public static final String CATEGORY_NAME = null;

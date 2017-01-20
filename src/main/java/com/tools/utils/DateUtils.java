@@ -273,6 +273,19 @@ public class DateUtils {
 
 	}
 
+	public static String parseMilisDate(String dateString, String finalFormatString){
+	
+
+		DateFormat formatter = new SimpleDateFormat(finalFormatString);
+
+		long milliSeconds= Long.parseLong(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(milliSeconds);
+		
+		return String.valueOf(formatter.format(calendar.getTime()));
+		
+	}
 	public static String getCurrentDateBegining(String format) {
 		DateFormat sdf = new SimpleDateFormat(format);
 
@@ -466,7 +479,10 @@ public class DateUtils {
 		// 12:00:00","yyyy-MM-dd HH:mm:ss"));
 	//	System.out.println(DateUtils.getFridaysBetweenDates("2016-11-11", "2016-12-24", "yyyy-MM-dd"));
 //		System.out.println(DateUtils.parseDate("2016-12-15", "yyyy-MM-dd", "dd. MM."));
-		System.out.println(DateUtils.parseDate("07. MRZ. 17", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
+		//System.out.println(DateUtils.parseDate("07. MRZ. 17", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
+		
+		
+		System.out.println(DateUtils.parseDate("1484728910770", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
 	}
 
 }
