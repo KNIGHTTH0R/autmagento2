@@ -21,13 +21,13 @@ import com.tests.uss25.US25001CreatePartyWithNewContactTest;
 	US10002bCreatePartyWithCustomerHostTest.class,
 //	US10006CreatePartyWithNewContactHostTest.class,
 	US10007CreatePartyWithStylistHostTest.class,
-	US10008CreatePartyWithExistingContactHostTest.class,
-	US10009CreatePartyWithStylistHostTest.class,
-	US24001CreatePartyWithNewContactPlzValidationTest.class,
-	US25001CreatePartyWithNewContactTest.class,
-	US9006CreatePartyWithStylistHostTest.class,
-	US9007CreatePartyWithStylistHostTest.class,
-	US11009CreatePartyWithStylistHostTest.class,
+//	US10008CreatePartyWithExistingContactHostTest.class,
+//	US10009CreatePartyWithStylistHostTest.class,
+//	US24001CreatePartyWithNewContactPlzValidationTest.class,
+//	US25001CreatePartyWithNewContactTest.class,
+//	US9006CreatePartyWithStylistHostTest.class,
+//	US9007CreatePartyWithStylistHostTest.class,
+//	US11009CreatePartyWithStylistHostTest.class,
 	
 })
 @RunWith(Suite.class)
