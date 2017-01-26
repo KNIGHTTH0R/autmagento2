@@ -34,6 +34,7 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.frontend.SosContactModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.CategoryModel;
@@ -1194,6 +1195,34 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 
+	}
+	
+	
+	public static List<SosContactModel> grabSosContactModel(String testName){
+		DBObject dbObject = null;
+		List<SosContactModel> itemList = new ArrayList<SosContactModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.SOS_CONTACT_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				SosContactModel result = new SosContactModel();
+				dbObject = cursor.next();
+
+				result.setSosPassword(MongoUtils.checkField(dbObject, MongoTableKeys.SOS_PASSWORD));
+				result.setSosUserEmail(MongoUtils.checkField(dbObject, MongoTableKeys.SOS_EMAIL));
+				result.setStylistId(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_ID));
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+
+		
 	}
 
 }

@@ -11,12 +11,13 @@ public class JerseyClientSos {
 
 	
 	
-	public static String sendGet(String url){
+	public static String sendGet(String url,String email,String password){
 		String output = "";
 		try {
 
 			Client client = Client.create();
-			client.addFilter(new HTTPBasicAuthFilter("pippajean", "Minerilor62!"));
+			//client.addFilter(new HTTPBasicAuthFilter("pippajean", "Minerilor62!"));
+			client.addFilter(new HTTPBasicAuthFilter(email, password));
 			WebResource webResource = client.resource(url);
 			ClientResponse response = webResource.accept("application/xml").get(ClientResponse.class);
 

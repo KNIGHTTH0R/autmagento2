@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -113,9 +114,12 @@ public class LoungePage extends AbstractPage {
 		builder.moveToElement(stylePartiesLink).build().perform();
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		element(createPartyButton).waitUntilVisible();
+		
 		createPartyButton.click();
+		
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
 				ContextConstants.LOADING_MESSAGE));
+		
 		
 	}
 

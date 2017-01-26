@@ -5,6 +5,8 @@ import java.util.List;
 public class MagentoSOSContactModel {
 	private String prename;
 
+	private String contactId;
+
 	private String street;
 
 	private String __v;
@@ -29,11 +31,16 @@ public class MagentoSOSContactModel {
 
 	private String language;
 
+	private String areaCode;
+
+	private String houseNumber;
+
 	private List<Phones> phones;
 
 	private List<Notes> notes;
+	
 
-	//custom fields male , value, number, text 
+	// custom fields male , value, number, text
 	private String primaryPhoneNumber;
 
 	private String underagedValue;
@@ -57,9 +64,44 @@ public class MagentoSOSContactModel {
 	private String followUpDateValue;
 
 	private String langIssuesValue;
+	
+	private String contacted_progress;
+	
+	
+	
 
-	
-	
+	public String getContacted_progress() {
+		return contacted_progress;
+	}
+
+	public void setContacted_progress(String contacted_progress) {
+		this.contacted_progress = contacted_progress;
+	}
+
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+
+	public String getContactId() {
+		return contactId;
+	}
+
+	public void setContactId(String contactId) {
+		this.contactId = contactId;
+	}
+
 	public String getUnderagedValue() {
 		return underagedValue;
 	}
@@ -196,8 +238,6 @@ public class MagentoSOSContactModel {
 		this.primaryPhoneNumber = primaryPhoneNumber;
 	}
 
-	
-
 	public String getNot_interestedValue() {
 		return not_interestedValue;
 	}
@@ -312,21 +352,22 @@ public class MagentoSOSContactModel {
 
 	@Override
 	public String toString() {
-		return "MagentoSOSContactModel [prename=" + prename + ", street=" + street + ", __v=" + __v + ", lastname="
-				+ lastname + ", postcode=" + postcode + ", city=" + city + ", country=" + country + ", _id=" + _id
-				+ ", updated=" + updated + ", created=" + created + ", email=" + email + ", userId=" + userId
-				+ ", language=" + language + ", phones=" + phones + ", notes=" + notes + ", primaryPhoneNumber="
-				+ primaryPhoneNumber + ", underagedValue=" + underagedValue + ", not_interestedValue="
-				+ not_interestedValue + ", contactedProgress_2Value=" + contactedProgress_2Value
-				+ ", flagContactBoosterValue=" + flagContactBoosterValue + ", contactedProgress_3Value="
-				+ contactedProgress_3Value + ", wrongDetailsValue=" + wrongDetailsValue + ", maleValue=" + maleValue
-				+ ", signupIssuesValue=" + signupIssuesValue + ", campaignNameValue=" + campaignNameValue
-				+ ", flagPartiesValue=" + flagPartiesValue + ", isDistributedValue=" + isDistributedValue
-				+ ", flagMemberValue=" + flagMemberValue + ", roadshowCityValue=" + roadshowCityValue
-				+ ", followUpDateValue=" + followUpDateValue + ", langIssuesValue=" + langIssuesValue + "]";
+		return "MagentoSOSContactModel [prename=" + prename + ", contactId=" + contactId + ", street=" + street
+				+ ", __v=" + __v + ", lastname=" + lastname + ", postcode=" + postcode + ", city=" + city + ", country="
+				+ country + ", _id=" + _id + ", updated=" + updated + ", created=" + created + ", email=" + email
+				+ ", userId=" + userId + ", language=" + language + ", areaCode=" + areaCode + ", houseNumber="
+				+ houseNumber + ", phones=" + phones + ", notes=" + notes + ", primaryPhoneNumber=" + primaryPhoneNumber
+				+ ", underagedValue=" + underagedValue + ", not_interestedValue=" + not_interestedValue
+				+ ", contactedProgress_2Value=" + contactedProgress_2Value + ", flagContactBoosterValue="
+				+ flagContactBoosterValue + ", contactedProgress_3Value=" + contactedProgress_3Value
+				+ ", wrongDetailsValue=" + wrongDetailsValue + ", maleValue=" + maleValue + ", signupIssuesValue="
+				+ signupIssuesValue + ", campaignNameValue=" + campaignNameValue + ", flagPartiesValue="
+				+ flagPartiesValue + ", isDistributedValue=" + isDistributedValue + ", flagMemberValue="
+				+ flagMemberValue + ", roadshowCityValue=" + roadshowCityValue + ", followUpDateValue="
+				+ followUpDateValue + ", langIssuesValue=" + langIssuesValue + ", contacted_progress="
+				+ contacted_progress + "]";
 	}
 
-	
-	
-	
+
+
 }

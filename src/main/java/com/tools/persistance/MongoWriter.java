@@ -32,6 +32,7 @@ import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
+import com.tools.data.frontend.SosContactModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.navision.SyncInfoModel;
@@ -618,6 +619,22 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.GOLD_STYLECOACHES, loungeIpPerformanceModel.getGoldStyleCoaches());
 
 		table.insert(document);
+	}
+
+	public static void saveSosCustomerFormModel(SosContactModel sosContact, String testName) {
+		// TODO Auto-generated method stub
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.SOS_CONTACT_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+
+		document.put(MongoTableKeys.SOS_PASSWORD, sosContact.getSosPassword());
+		document.put(MongoTableKeys.SOS_EMAIL, sosContact.getSosUserEmail());
+		document.put(MongoTableKeys.STYLIST_ID, sosContact.getStylistId());		
+
+		table.insert(document);
+		
 	}
 
 }
