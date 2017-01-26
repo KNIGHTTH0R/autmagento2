@@ -68,5 +68,6 @@ public class TermPurchaseSystemConfigurationSteps extends AbstractSteps {
 	public void saveConfiguration() {
 		systemConfigurationPage().saveConfiguration();
 	}
+	
 
 }
