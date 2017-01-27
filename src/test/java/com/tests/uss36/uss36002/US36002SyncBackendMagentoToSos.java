@@ -1,4 +1,15 @@
-package com.tests.uss36;
+package com.tests.uss36.uss36002;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,21 +32,15 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
-import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.SosContactModel;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
-public class US36001SyncBackendMagentoToSos extends BaseTest {
+public class US36002SyncBackendMagentoToSos extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -62,50 +67,60 @@ public class US36001SyncBackendMagentoToSos extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	
-	SosContactModel sosContact=new SosContactModel();
-	String sosPassword;
+	
+	
 	String username, password;
-	public CustomerFormModel stylistRegistrationData;
+
+
 
 	@Before
 	public void setUp() {
 
-		
-		int size = MongoReader.grabCustomerFormModels("US36001StyleCoachRegistrationTest").size();
-		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US36001StyleCoachRegistrationTest").get(0);
-		} else
-			System.out.println("The database has no entries");
+		Properties prop = new Properties();
+		InputStream input = null;
 
-		username=stylistRegistrationData.getEmailName();
-		password=stylistRegistrationData.getPassword();
-	
-		MongoConnector.cleanCollection(getClass().getSimpleName());
+		try {
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss36" + File.separator + "us36001.properties");
+			prop.load(input);
+			username = prop.getProperty("username");
+			password = prop.getProperty("password");			
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+
 
 
 	}
 
-
+	/**
+	 * BackEnd steps in this test
+	 * @throws Exception 
+	 */
 	@Test
-	public void us36001SyncBackendMagentoToSos() throws Exception {
+	public void us36002SyncBackendMagentoToSos() throws Exception {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail(username);
-		backEndSteps.openCustomerDetails(username);
-		
-		String stylistId=stylecoachSalesOnSpeedBackendSteps.grabStyleCoachID();
-		
-		
+		backEndSteps.searchForEmail("xs2t10fP8Vbw@mailinator.com");
+		backEndSteps.openCustomerDetails("xs2t10fP8Vbw@mailinator.com");
 		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
 		stylecoachSalesOnSpeedBackendSteps.selectAllowSosSync("Ja");
 		stylecoachSalesOnSpeedBackendSteps.clickOnResetAccountButton();
-		
-		sosPassword=stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
-		
+		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
 		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
 		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
 		
-		frontEndSteps.performLogin(username,password);
+		frontEndSteps.performLogin("xs2t10fP8Vbw@mailinator.com","q1w2e3");
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -118,15 +133,13 @@ public class US36001SyncBackendMagentoToSos extends BaseTest {
 		loungeSteps.goToContactsList();
 		contactDetailsSteps.checkIsPresentSosButton();
 		
-		sosContact.setSosPassword(sosPassword);
-		sosContact.setSosUserEmail(username);
-		sosContact.setStylistId(stylistId);
+	    
 	
 	
 	}
 
 	@After
 	public void saveData() {
-		MongoWriter.saveSosCustomerFormModel(sosContact, getClass().getSimpleName());
+		
 	}
 }

@@ -1,4 +1,4 @@
-package com.tests.uss36.uss36001;
+package com.tests.uss36.uss36002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,7 +40,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US3.1 Shop for myself VAT valid and no SMB billing and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
-public class US36001SyncFrontendMagentoToSos extends BaseTest {
+public class US36002SyncFrontendMagentoToSos extends BaseTest {
 
 	@Steps
 	public BackEndSteps backEndSteps;
@@ -108,7 +108,7 @@ public class US36001SyncFrontendMagentoToSos extends BaseTest {
 	 * @throws Exception 
 	 */
 	@Test
-	public void us36001SyncFrontendMagentoToSos() throws Exception {
+	public void us36002SyncFrontendMagentoToSos() throws Exception {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail("5WACymVNPxNj@mailinator.com");

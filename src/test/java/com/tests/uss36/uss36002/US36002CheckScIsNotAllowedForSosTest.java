@@ -1,4 +1,4 @@
-package com.tests.uss36.uss36001;
+package com.tests.uss36.uss36002;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,7 +41,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
 @RunWith(SerenityRunner.class)
-public class US36001CheckScIsNotAllowedForSosTest extends BaseTest{
+public class US36002CheckScIsNotAllowedForSosTest extends BaseTest{
 	
 	@Steps
 	public ProfileSteps profileSteps;
@@ -104,7 +104,7 @@ public class US36001CheckScIsNotAllowedForSosTest extends BaseTest{
 	}
 	
 	@Test
-	public void uS36001CheckScIsNotAllowedForSosTest() throws Exception {
+	public void uS36002CheckScIsNotAllowedForSosTest() throws Exception {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(username);

@@ -1,4 +1,4 @@
-package com.tests.uss36;
+package com.tests.uss36.uss36001;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,15 +14,15 @@ import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
-import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
+
 @RunWith(SerenityRunner.class)
-public class US36001AddThirdContactToStyleCoachTest extends BaseTest {
+public class US36001AddNewContactToStyleCoachTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -34,17 +34,15 @@ public class US36001AddThirdContactToStyleCoachTest extends BaseTest {
 	@Steps
 	public CreateNewContactSteps createNewContactSteps;
 
-	public CustomerFormModel stylistRegistrationData;
-	public CustomerFormModel dataModel;
-	public DateModel dateModel;
-	public AddressModel addressModel;
+	private CustomerFormModel stylistRegistrationData;
+	private CustomerFormModel dataModel;
+	private AddressModel addressModel;
 
 	@Before
 	public void setUp() throws Exception {
 
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-		addressModel.setPostCode("44553");
 
 		int size = MongoReader.grabCustomerFormModels("US36001StyleCoachRegistrationTest").size();
 		if (size > 0) {
@@ -56,7 +54,7 @@ public class US36001AddThirdContactToStyleCoachTest extends BaseTest {
 	}
 
 	@Test
-	public void us36001AddThirdContactToStyleCoachTest() {
+	public void u36001AddNewContactToStyleCoachTest() {
 
 		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(), stylistRegistrationData.getPassword());
 		if (!headerSteps.succesfullLogin()) {
@@ -64,7 +62,7 @@ public class US36001AddThirdContactToStyleCoachTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
-		createNewContactSteps.fillCreateNewContactWithoutScInterrestAmdWithoutEmail(dataModel, addressModel);
+		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
 
 	}
 

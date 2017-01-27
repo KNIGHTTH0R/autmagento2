@@ -4,16 +4,16 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.uss36.US36001AddNewContactToStyleCoachTest;
-import com.tests.uss36.US36001AddSecondNewContactToStyleCoachTest;
-import com.tests.uss36.US36001AddThirdContactToStyleCoachTest;
-import com.tests.uss36.US36001ResetAnActiveAccountTest;
-import com.tests.uss36.US36001ResetContactButtonActionTest;
-import com.tests.uss36.US36001StyleCoachRegistrationTest;
-import com.tests.uss36.US36001SyncBackendMagentoToSos;
-import com.tests.uss36.US36001ValidateContactInfoSyncAfterResetAnActiveUserTest;
-import com.tests.uss36.US36001ValidateContactInfoSyncInSosAfterResetContactTest;
-import com.tests.uss36.US36001ValidateContatInfoSyncInSosAfterResetAcountTest;
+import com.tests.uss36.uss36001.US36001AddNewContactToStyleCoachTest;
+import com.tests.uss36.uss36001.US36001AddSecondNewContactToStyleCoachTest;
+import com.tests.uss36.uss36001.US36001AddThirdContactToStyleCoachTest;
+import com.tests.uss36.uss36001.US36001ResetAnActiveAccountTest;
+import com.tests.uss36.uss36001.US36001ResetContactButtonActionTest;
+import com.tests.uss36.uss36001.US36001StyleCoachRegistrationTest;
+import com.tests.uss36.uss36001.US36001SyncBackendMagentoToSos;
+import com.tests.uss36.uss36001.US36001ValidateContactInfoSyncAfterResetAnActiveUserTest;
+import com.tests.uss36.uss36001.US36001ValidateContactInfoSyncInSosAfterResetContactTest;
+import com.tests.uss36.uss36001.US36001ValidateContatInfoSyncInSosAfterResetAcountTest;
 
 @SuiteClasses({
 	US36001StyleCoachRegistrationTest.class,
