@@ -106,7 +106,7 @@ public class US30001VerifyIpOverViewReportAfterMonthClosingTest extends BaseTest
 		}
 		
 
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2016-11-20 12:00:00",previousCommissionRun,lastCommissionRun,nextCommissionRun);
+	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2016-11-20 12:00:00",previousCommissionRun,lastCommissionRun,nextCommissionRun);
 		expectedOrdersList = expectedIpOverviewModel.getPayedOrders();
 //		expectedReturns = expectedIpOverviewModel.getReturns();
 		System.out.println("expecteeeeed!!!!!!!!!!!!!!" +expectedIpOverviewModel.getPaidOrdersPreviosMonth());

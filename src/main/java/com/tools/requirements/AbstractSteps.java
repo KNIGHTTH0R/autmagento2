@@ -13,6 +13,7 @@ import org.junit.Assert;
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
 import com.pages.backend.SystemConfigurationPage;
+import com.pages.backend.borrow.BorrowPage;
 import com.pages.backend.creditMemo.CreditMemoDetailsPage;
 import com.pages.backend.creditMemo.CreditMemoListPage;
 import com.pages.backend.customer.CustomerListPage;
@@ -419,6 +420,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public OrderNotificationPage orderNotificationPage() {
 		return getPages().currentPageAt(OrderNotificationPage.class);
+	}
+	
+	public BorrowPage borrowPage() {
+		return getPages().currentPageAt(BorrowPage.class);
 	}
 
 	// -----------------------FE-----------------------------------

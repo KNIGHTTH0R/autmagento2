@@ -101,7 +101,7 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingTest extends BaseTes
 //			Assert.fail("Failed !!!");
 //		}
 
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2016-11",previousCommissionRun,lastCommissionRun,nextCommissionRun );
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2016-12-05 00:00:00","2016-12-06 00:00:00","2017-01-09 00:00:00");
 		expectedOrdersList = expectedIpOverviewModel.getPayedOrders();
 		expectedReturns = expectedIpOverviewModel.getReturns();
 
@@ -124,8 +124,8 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingTest extends BaseTes
 	ipReportsSteps.selectMonth(str.toUpperCase());
 	
 		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
-		ipReportsSteps.selectMonth("NOV - 2016");
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513", "2016-10-11","2016-11-11","" ,"");
+		ipReportsSteps.selectMonth("DEC - 2016");
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2016-12-05 00:00:00","2016-12-06 00:00:00","2017-01-09 00:00:00");
 		
 	    expectedOrdersList = expectedIpOverviewModel.getPayedOrders();
 		expectedReturns = expectedIpOverviewModel.getReturns();
