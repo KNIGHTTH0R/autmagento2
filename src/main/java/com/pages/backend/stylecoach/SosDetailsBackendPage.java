@@ -156,6 +156,14 @@ public class SosDetailsBackendPage extends AbstractPage {
 		
 	}
 
+	public void validateResetAccountSuccessMessage() {
+		// TODO Auto-generated method stub
+		waitForPageToLoad();
+		element(textSuccessContainer).waitUntilVisible();
+		Assert.assertTrue("Failure: Email notification text was not found. ", textSuccessContainer.getText().contains("The SOS user of the customer was successfully reseted!"));
+		
+	}
+
 }
 
 

@@ -2,7 +2,12 @@ package com.steps.backend.SalesOnSpeed;
 
 import java.util.List;
 
+import org.junit.Assert;
+
+import com.connectors.http.JerseyClientSos;
+import com.connectors.http.SalesOnSpeedCalls;
 import com.tools.CustomVerification;
+import com.tools.constants.SalesOnSpeedConstants;
 import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
 import com.tools.requirements.AbstractSteps;
 
@@ -26,7 +31,7 @@ public class MagentoToSosContactsSyncValidationSteps extends AbstractSteps {
 	@Step
 	public void validateCity(String shopCity, String compare) {
 		CustomVerification.verifyTrue("Failure: City doesn't match: " + shopCity + " - " + compare,
-				shopCity.contentEquals(compare));
+				shopCity == null || shopCity=="" ? compare == null : shopCity.equals(compare));
 	}
 
 	@Step
@@ -38,7 +43,7 @@ public class MagentoToSosContactsSyncValidationSteps extends AbstractSteps {
 	@Step
 	public void validatePostCode(String postcode, String postcode2) {
 		CustomVerification.verifyTrue("Failure: postcode doesn't match: " + postcode + " - " + postcode2,
-				postcode.contentEquals(postcode2));
+				postcode == null || postcode==""? postcode2 == null : postcode.equals(postcode2));
 	}
 
 	@Step
@@ -52,6 +57,9 @@ public class MagentoToSosContactsSyncValidationSteps extends AbstractSteps {
 		}
 		return result;
 	}
+	
+	
+	
 
 	@Step
 	public void validateContactId(String contactId, String sosContactId) {
@@ -90,7 +98,7 @@ public class MagentoToSosContactsSyncValidationSteps extends AbstractSteps {
 	@Step
 	public void validateEmail(String email, String sosEmail) {
 		CustomVerification.verifyTrue("Failure: Email  doesn't match: " + email + " - " + sosEmail,
-				email.contentEquals(sosEmail));
+				email == null || email=="" ? sosEmail == null : email.equals(sosEmail));
 	}
 
 	@Step
@@ -247,6 +255,32 @@ public class MagentoToSosContactsSyncValidationSteps extends AbstractSteps {
 		CustomVerification.verifyTrue(
 				"Failure: langIssuesValue  doesn't match: " + langIssuesValue + " - " + sosLangIssuesValue,
 				langIssuesValue.contentEquals(sosLangIssuesValue));
+		
+	}
+
+	@Step
+	public void validateMagContactSosId(String savedSOSContact,
+			String magentoSOSContact) {
+			Assert.assertFalse("Contact Sos id is equal and should not be ",savedSOSContact.contentEquals(magentoSOSContact));
+	}
+
+	@Step
+	public void validateStylistSosId(String stylistSosId, String stylistNewSosId) {
+		Assert.assertFalse("Stylist Sos id is equal and should not be ",stylistSosId.contentEquals(stylistNewSosId));
+	}
+
+	@Step
+	public void validateSosPasswordIsChanged(String sosPassword, String sosNewPassword) {
+		Assert.assertFalse("Stylist Sos Password  is equal and should not be ",sosPassword.contentEquals(sosNewPassword));
+	}
+
+	@Step
+	public void validateOldCredentials(String stylistSosId, String email, String sosPassword) throws Exception {
+		
+		//SalesOnSpeedCalls.getListCustomerInfo(stylistSosId, email, sosPassword);
+		String responseMessage=JerseyClientSos.sendGetValidation(SalesOnSpeedConstants.SOS_GET_STYLIST_CONTACTS + stylistSosId, email, sosPassword);
+		
+		Assert.assertTrue("The user is allowed for login and should be Unauthorized ",responseMessage.contentEquals(SalesOnSpeedConstants.UNAUTHORIZED));
 		
 	}
 

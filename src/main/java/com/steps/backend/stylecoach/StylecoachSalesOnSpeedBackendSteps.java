@@ -53,6 +53,10 @@ public class StylecoachSalesOnSpeedBackendSteps extends AbstractSteps {
 		
 		
 	}
+	public void validateResetAccountSuccessMessage() {
+		// TODO Auto-generated method stub
+		sosDetailsBackendPage().validateResetAccountSuccessMessage();
+	}
 	
 	
 }

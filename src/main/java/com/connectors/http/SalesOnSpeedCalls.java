@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.tools.constants.SalesOnSpeedConstants;
 import com.tools.data.salesOnSpeed.Campaign_name;
 import com.tools.data.salesOnSpeed.Contacted_progress_0;
 import com.tools.data.salesOnSpeed.Contacted_progress_1;
@@ -60,9 +61,6 @@ public class SalesOnSpeedCalls {
 	public static MagentoSOSContactModel getCustomerInfo(String contactSosId, String userSosId, String email,
 			String password) throws Exception {
 
-		// List<SalesOnSpeedCustomerModel> contact = new
-		// ArrayList<SalesOnSpeedCustomerModel>();
-
 		String unparsedResponse = JerseyClientSos.sendGet(
 				"https://apidev.salesonspeed.de/contacts/" + contactSosId + "?requestedUserId=" + userSosId, email,
 				password);
@@ -77,22 +75,6 @@ public class SalesOnSpeedCalls {
 
 		System.out.println(salesOnSpeedContactModel.toString());
 
-		// CustomFields customF = salesOnSpeedContactModel.getCustomFields();
-		// Underaged under = customF.getUnderaged();
-		// System.out.println("underaged type " + under.getType());
-		// System.out.println("underaged disabled " + under.getDisabled());
-		// System.out.println("id customer => " +
-		// salesOnSpeedContactModel.get_id());
-		// System.out.println("phones => " +
-		// salesOnSpeedContactModel.getPhones());
-		// System.out.println("notes => " +
-		// salesOnSpeedContactModel.getNotes());
-		//
-		// List<Notes> note = salesOnSpeedContactModel.getNotes();
-		// for (Notes notes1 : note) {
-		// System.out.println("note text " + notes1.getText());
-		// }
-
 		return salesOnSpeedContactModel;
 
 	}
@@ -100,8 +82,8 @@ public class SalesOnSpeedCalls {
 	private static MagentoSOSContactModel populateModelFromResponse(MagentoSOSContactModel salesOnSpeedContactModel,
 			SalesOnSpeedContactResponse response) {
 
-		List<String> contacted_progress=new ArrayList<String>();
-		
+		List<String> contacted_progress = new ArrayList<String>();
+
 		salesOnSpeedContactModel.set_id(response.get_id());
 		salesOnSpeedContactModel.set__v(response.get__v());
 		salesOnSpeedContactModel.setStreet(response.getStreet());
@@ -136,8 +118,6 @@ public class SalesOnSpeedCalls {
 
 		CustomFields customfields = response.getCustomFields();
 
-		// CustomFields extractedCustomFields = new CustomFields();
-
 		Underaged underaged = customfields.getUnderaged();
 		salesOnSpeedContactModel.setUnderagedValue(underaged.getValue());
 
@@ -158,7 +138,9 @@ public class SalesOnSpeedCalls {
 
 		Campaign_name campaignName = customfields.getCampaign_name();
 
-		salesOnSpeedContactModel.setCampaignNameValue(campaignName.getValue());
+		String campaignValue = campaignName.getValue();
+		String campaign = SalesOnSpeedConstants.CAMPAIGN_NAME_VALUES.contains(campaignValue) ? "" : campaignValue;
+		salesOnSpeedContactModel.setCampaignNameValue(campaign);
 
 		Flag_parties flagParties = customfields.getFlag_parties();
 		salesOnSpeedContactModel.setFlagPartiesValue(flagParties.getValue());
@@ -172,8 +154,11 @@ public class SalesOnSpeedCalls {
 		Roadshow_city roadShowCity = customfields.getRoadshow_city();
 
 		String roadShowCityValue = roadShowCity.getValue();
-		String roadShowCityValue2 = roadShowCityValue.contains("No registration") ? "" : roadShowCityValue;
-	
+		// if roadshow in mag is empty and in sos contains a specific message
+		// message
+		String roadShowCityValue2 = SalesOnSpeedConstants.ROAD_SHOW_VALUES.contains(roadShowCityValue) ? ""
+				: roadShowCityValue;
+
 		salesOnSpeedContactModel.setRoadshowCityValue(roadShowCityValue2);
 
 		Follow_up_date followUpDate = customfields.getFollow_up_date();
@@ -181,43 +166,52 @@ public class SalesOnSpeedCalls {
 
 		Lang_issues langIssue = customfields.getLang_issues();
 		salesOnSpeedContactModel.setLangIssuesValue(langIssue.getValue());
+		
+		//cause in mag each contactProgress is stored with a corresponding integer 
+		Contacted_progress_2 contactedProgress2 = customfields.getContacted_progress_2();
+		contacted_progress.add(contactedProgress2.getValue() == "true" ? "2" : "false");
 
-		Contacted_progress_2 contactedProgress2 =customfields.getContacted_progress_2();
-		contacted_progress.add(contactedProgress2.getValue()=="true"?"2":"false");
-		
-		Contacted_progress_1 contactedProgress1=customfields.getContacted_progress_1();
-		contacted_progress.add(contactedProgress1.getValue()=="true"?"1":"false");
-		
-		Contacted_progress_0 contactedProgress0=customfields.getContacted_progress_0();
-		contacted_progress.add(contactedProgress0.getValue()=="true"?"0":"false");
-		
-		Contacted_progress_3 contactedProgress3=customfields.getContacted_progress_3();
-		contacted_progress.add(contactedProgress3.getValue()=="true"?"3":"false");
-		
-		Contacted_progress_4 contactedProgress4=customfields.getContacted_progress_4();
-		contacted_progress.add(contactedProgress4.getValue()=="true"?"4":"false");
-		
-		
+		Contacted_progress_1 contactedProgress1 = customfields.getContacted_progress_1();
+		contacted_progress.add(contactedProgress1.getValue() == "true" ? "1" : "false");
+
+		Contacted_progress_0 contactedProgress0 = customfields.getContacted_progress_0();
+		contacted_progress.add(contactedProgress0.getValue() == "true" ? "0" : "false");
+
+		Contacted_progress_3 contactedProgress3 = customfields.getContacted_progress_3();
+		contacted_progress.add(contactedProgress3.getValue() == "true" ? "3" : "false");
+
+		Contacted_progress_4 contactedProgress4 = customfields.getContacted_progress_4();
+		contacted_progress.add(contactedProgress4.getValue() == "true" ? "4" : "false");
+
+		// a work around for the impossibility to grab the -1 progress
 		for (String progress : contacted_progress) {
-			if(progress!="false"){
+			if (progress != "false") {
 				salesOnSpeedContactModel.setContacted_progress(progress);
 				break;
 			}
 		}
-		
-		if(salesOnSpeedContactModel.getContacted_progress()==null){
+
+		if (salesOnSpeedContactModel.getContacted_progress() == null) {
 			salesOnSpeedContactModel.setContacted_progress("-1");
 		}
-		PrimaryPhone primaryPhone = response.getPrimaryPhone();
 
-		salesOnSpeedContactModel.setPrimaryPhoneNumber(primaryPhone.getNumber());
+		// to avoid null pointer exception we set string "null" if the contacts
+		// does not have a phone set
+		if (response.getPrimaryPhone() != null) {
+			PrimaryPhone primaryPhone = response.getPrimaryPhone();
+			salesOnSpeedContactModel.setPrimaryPhoneNumber(primaryPhone.getNumber());
+		} else {
+			salesOnSpeedContactModel.setPrimaryPhoneNumber("null");
+		}
 
 		return salesOnSpeedContactModel;
 	}
 
 	public static void main(String[] args) throws Exception {
-		// SalesOnSpeedCalls.getListCustomerInfo("586f530766eeed5a1110c5a7");
-		SalesOnSpeedCalls.getCustomerInfo("587f2a4eb8cc4b0536c7e9fa", "587cb70fb8cc4b0536c7e9a1", "pippajean",
-				"Minerilor62!");
+		SalesOnSpeedCalls.getListCustomerInfo("5888de32b8cc4b0536c7ebad", "Q6zi4j4nT8Du@mailinator.com", "evmyrpjz");
+		/*
+		 * SalesOnSpeedCalls.getCustomerInfo("587f2a4eb8cc4b0536c7e9fa",
+		 * "587cb70fb8cc4b0536c7e9a1", "pippajean", "Minerilor62!");
+		 */
 	}
 }

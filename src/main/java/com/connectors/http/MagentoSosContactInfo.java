@@ -145,6 +145,7 @@ public class MagentoSosContactInfo {
 		String houseNumber="";
 		String street="";
 		
+		
 		NodeList resultNodes = result.item(0).getChildNodes();
 		for (int r = 0; r < resultNodes.getLength(); r++) {
 			
@@ -256,6 +257,7 @@ public class MagentoSosContactInfo {
 			//Contacted_progress_3 ???
 			
 			//Campaign_name  ??
+			
 			
 			if (resultNodes.item(r).getNodeName().equalsIgnoreCase("flag_contact_booster")) {
 				String FlagContactBooster=resultNodes.item(r).getTextContent();
@@ -371,8 +373,12 @@ public class MagentoSosContactInfo {
 			
 		
 		}
+		if(areaCode!=null && phoneNumber!=null){
+			model.setPrimaryPhoneNumber(areaCode.concat(phoneNumber));
+		}else{
+			model.setPrimaryPhoneNumber("null");
+		}
 		
-		model.setPrimaryPhoneNumber(areaCode.concat(phoneNumber));
 		model.setStreet(street+" "+houseNumber);
 		return model;
 	}

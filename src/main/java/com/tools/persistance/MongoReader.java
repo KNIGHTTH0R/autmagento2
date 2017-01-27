@@ -37,6 +37,7 @@ import com.tools.data.frontend.ShippingModel;
 import com.tools.data.frontend.SosContactModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.navision.SyncInfoModel;
+import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
 import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -1213,6 +1214,7 @@ public class MongoReader extends MongoConnector {
 				result.setSosPassword(MongoUtils.checkField(dbObject, MongoTableKeys.SOS_PASSWORD));
 				result.setSosUserEmail(MongoUtils.checkField(dbObject, MongoTableKeys.SOS_EMAIL));
 				result.setStylistId(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_ID));
+				result.setStylistSosId(MongoUtils.checkField(dbObject, MongoTableKeys.STYLIST_SOS_ID));
 				itemList.add(result);
 			}
 		} catch (Exception e) {
@@ -1225,4 +1227,31 @@ public class MongoReader extends MongoConnector {
 		
 	}
 
+	
+	
+	public static List<MagentoSOSContactModel> grabMagContactFormModel(String testName){
+		DBObject dbObject = null;
+		List<MagentoSOSContactModel> itemList = new ArrayList<MagentoSOSContactModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.MAG_CONTACT_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				MagentoSOSContactModel result = new MagentoSOSContactModel();
+				dbObject = cursor.next();
+
+				result.set_id(MongoUtils.checkField(dbObject, MongoTableKeys.CONTACT_SOS_ID));
+				
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+
+		
+	}
 }

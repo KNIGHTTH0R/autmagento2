@@ -243,6 +243,9 @@ public class MongoTableKeys {
 	public static final String SOS_EMAIL = "SosEmail";
 	public static final String STYLIST_ID="StylistId";
 	public static final String SOS_CONTACT_MODEL = "SosContactModel";
+	public static final String MAG_CONTACT_MODEL = "MagContactModel";
+	public static final String CONTACT_SOS_ID = "ContactSosId";
+	public static final String STYLIST_SOS_ID = "StylistSosId";
 	// category
 	public static final String CATEGORY_MODEL = null;
 	public static final String CATEGORY_NAME = null;
@@ -250,5 +253,7 @@ public class MongoTableKeys {
 	public static final String CATEGORY_ID = null;
 
 	public static final String ENV_CONSTANTS_MODEL = "EnvironmentConstants";
+	
+	
 
 }
