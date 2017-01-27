@@ -2,7 +2,7 @@ package com.tools.data.salesOnSpeed;
 
 public class PrimaryPhone {
 	
-	 private String _creator;
+	 	private String _creator;
 
 	    private String _id;
 

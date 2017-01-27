@@ -5,9 +5,19 @@ public class SosContactModel {
 	String sosPassword;
 	String sosUserEmail;
 	String stylistId;
+	String stylistSosId;
 
 	
 	
+	
+	public String getStylistSosId() {
+		return stylistSosId;
+	}
+
+	public void setStylistSosId(String stylistSosId) {
+		this.stylistSosId = stylistSosId;
+	}
+
 	public String getStylistId() {
 		return stylistId;
 	}

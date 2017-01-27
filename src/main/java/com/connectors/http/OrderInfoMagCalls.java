@@ -193,23 +193,7 @@ public class OrderInfoMagCalls {
 					NodeList childNodes = itemList.item(c).getChildNodes();
 
 					for (int j = 0; j < childNodes.getLength(); j++) {
-						if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {
-						
-							List<String> list = new ArrayList<String>(
-									Arrays.asList(childNodes.item(j).getTextContent().split("-")));
-							String sku = null;
-
-							if (list.size() > 1) {
-								if (containsNumbers(list.get(1).substring(0, 1))
-										|| isLowerCase(list.get(1).substring(0, 1))) {
-									sku = list.get(0) + "-" + list.get(1);
-								}
-							} else {
-								sku = list.get(0);
-							}
-
-							infoItem.setSku(sku);
-						}
+						if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {  }
 						
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_percent")) {
 							model.setTaxPrecent(childNodes.item(j).getTextContent());

@@ -129,6 +129,33 @@ public class JerseyClientSos {
 		}
 	}
 	
+	
+	
+	public static String sendGetValidation(String url,String email,String password){
+		String output = "";
+		try {
+			Client client = Client.create();
+			//client.addFilter(new HTTPBasicAuthFilter("pippajean", "Minerilor62!"));
+			client.addFilter(new HTTPBasicAuthFilter(email, password));
+			WebResource webResource = client.resource(url);
+			ClientResponse response = webResource.accept("application/xml").get(ClientResponse.class);
+
+			if (response.getStatus() == 200) {
+				throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+			}
+
+			output = response.getEntity(String.class);
+		//	System.out.println(output);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		
+		return output;
+	
+	}
 	public static void main(String[] args) {
 		//	sendGet("https://apidev.salesonspeed.de/contacts?requestedUserId=586f530766eeed5a1110c5a7");
 		sendPost();

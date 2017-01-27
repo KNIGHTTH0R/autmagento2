@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.MagentoSosUserInfo;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
+import com.steps.backend.SalesOnSpeed.MagentoToSosContactsSyncSteps;
 import com.steps.backend.customer.CustomerDetailsBackendSteps;
 import com.steps.backend.stylecoach.StylecoachSalesOnSpeedBackendSteps;
 import com.steps.frontend.ContactDetailsSteps;
@@ -30,8 +31,9 @@ import com.tools.persistance.MongoWriter;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
+
 @RunWith(SerenityRunner.class)
-public class US36001ResetContactButtonActionTest extends BaseTest {
+public class US36001ResetAnActiveAccountTest extends BaseTest {
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
@@ -57,12 +59,19 @@ public class US36001ResetContactButtonActionTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps frontEndSteps;
 	
+	@Steps
+	MagentoToSosContactsSyncSteps magentoToSosSync;
+	
+	
+	
+
+	
 	SosContactModel sosContact=new SosContactModel();
 	String sosPassword;
-	String username, password;
+	String email, password;
 	public CustomerFormModel stylistRegistrationData;
-	MagentoSOSUserInfoModel sosUserInfo = new MagentoSOSUserInfoModel();
-
+	MagentoSOSUserInfoModel sosUserInfoBeforeReset = new MagentoSOSUserInfoModel();
+	MagentoSOSUserInfoModel sosUserInfoAfterReset = new MagentoSOSUserInfoModel();
 	@Before
 	public void setUp() {
 
@@ -73,9 +82,8 @@ public class US36001ResetContactButtonActionTest extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 
-		username=stylistRegistrationData.getEmailName();
+		email=stylistRegistrationData.getEmailName();
 		password=stylistRegistrationData.getPassword();
-		
 	
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
@@ -89,36 +97,45 @@ public class US36001ResetContactButtonActionTest extends BaseTest {
 	 * @throws Exception 
 	 */
 	@Test
-	public void us36001ResetContactButtonActionTest() throws Exception {
+	public void us36001ResetAnActiveAccountTest() throws Exception {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail(username);
-		backEndSteps.openCustomerDetails(username);
+		backEndSteps.searchForEmail(email);
+		backEndSteps.openCustomerDetails(email);
 		
 		String stylistId=stylecoachSalesOnSpeedBackendSteps.grabStyleCoachID();
-		sosUserInfo=MagentoSosUserInfo.getUserInfo(stylistId);
-		String stylistSosId=sosUserInfo.getSosId();
+		sosUserInfoBeforeReset=MagentoSosUserInfo.getUserInfo(stylistId);
+		String stylistSosId=sosUserInfoBeforeReset.getSosId();
 		
+		System.out.println("sosUserInfoBeforeReset "+ stylistSosId );
 		
 		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
-		
-		stylecoachSalesOnSpeedBackendSteps.clickOnResetContactsButton();
-		stylecoachSalesOnSpeedBackendSteps.validateSuccessMessage();
 		sosPassword=stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
+		stylecoachSalesOnSpeedBackendSteps.clickOnResetAccountButton();
 		
-
+		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
+		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
+		stylecoachSalesOnSpeedBackendSteps.validateResetAccountSuccessMessage();
+		
+		String sosNewPassword=stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
+		sosUserInfoAfterReset=MagentoSosUserInfo.getUserInfo(stylistId);
+		String stylistNewSosId=sosUserInfoAfterReset.getSosId();
 //
-	
-		sosContact.setSosPassword(sosPassword);
-		sosContact.setSosUserEmail(username);
+		System.out.println("sosUserInfoAfterReset "+stylistNewSosId);
+		sosContact.setSosPassword(sosNewPassword);
+		sosContact.setSosUserEmail(email);
 		sosContact.setStylistId(stylistId);
-		sosContact.setStylistSosId(stylistSosId);
-	
-	
+		sosContact.setStylistSosId(stylistNewSosId);
+		
+		magentoToSosSync.validateStylistSosIdAfterReset(stylistSosId, stylistNewSosId);
+		magentoToSosSync.validateSosPasswordIsChanged(sosPassword,sosNewPassword);
+		magentoToSosSync.validateOldCredential(stylistSosId,email,sosPassword);
+		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
 		MongoWriter.saveSosCustomerFormModel(sosContact, getClass().getSimpleName());
+		
 	}
 }

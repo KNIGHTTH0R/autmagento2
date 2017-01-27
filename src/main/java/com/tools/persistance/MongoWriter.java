@@ -37,6 +37,7 @@ import com.tools.data.frontend.TermPurchaseIpModel;
 import com.tools.data.geolocation.CoordinatesModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.newsletter.SubscriberModel;
+import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
 import com.tools.data.soap.CategoryModel;
 import com.tools.data.soap.DBStylistModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -631,7 +632,23 @@ public class MongoWriter extends MongoConnector {
 
 		document.put(MongoTableKeys.SOS_PASSWORD, sosContact.getSosPassword());
 		document.put(MongoTableKeys.SOS_EMAIL, sosContact.getSosUserEmail());
-		document.put(MongoTableKeys.STYLIST_ID, sosContact.getStylistId());		
+		document.put(MongoTableKeys.STYLIST_ID, sosContact.getStylistId());	
+		document.put(MongoTableKeys.STYLIST_SOS_ID, sosContact.getStylistSosId());	
+
+		table.insert(document);
+		
+	}
+	
+	public static void saveMagContactFormModel(MagentoSOSContactModel magContact, String testName) {
+		// TODO Auto-generated method stub
+		
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.MAG_CONTACT_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+
+		document.put(MongoTableKeys.CONTACT_SOS_ID, magContact.get_id());
+		
 
 		table.insert(document);
 		
