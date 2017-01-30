@@ -202,4 +202,31 @@ public class LoungePage extends AbstractPage {
 		return result;
 	}
 
+	
+	public boolean checkIfBorrowLinkIsDisplayed(){
+		
+		Actions builder = new Actions(getDriver());
+
+		builder.moveToElement(meinBusinessButton).build().perform();
+		builder.moveToElement(loanedLink).build().perform();
+		
+		boolean isVisible = false;
+		
+		if(element(borrowCartLink).isVisible())
+		{
+			isVisible=true;
+			Assert.assertTrue("The button was  found", isVisible);
+			
+		}
+		else 
+		{
+			isVisible=false;
+			Assert.assertFalse("The button was not found", isVisible);
+		}
+
+		return isVisible;
+	}
+		
+
+	
 }

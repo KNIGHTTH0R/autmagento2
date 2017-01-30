@@ -156,16 +156,25 @@ public class US16003BorrowFunctionalityForNotAllowedStylist extends BaseTest {
 		backEndSteps.performAdminLogin("oana.axente", "Camelia.88");
 		backEndSteps.clickOnSystemConfiguration();
 		borrowSystemConfigurationSteps.goToBorrowTab();
+		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Ja");
 		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
+		borrowSystemConfigurationSteps.selectCountries();
 		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
+		borrowSystemConfigurationSteps.saveConfiguration();
+		backEndSteps.clickOnCustomers();
+		backEndSteps.searchForEmail("mihaialexandrubarta@gmail.com");
+		backEndSteps.openCustomerDetails("mihaialexandrubarta@gmail.com");
+		backEndSteps.selectAllowedToBorrow("Nein");
 		
 		
-//		customerRegistrationSteps.performLogin(username, password);
-//		if (!headerSteps.succesfullLogin()) {
-//			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
-//		}
-//		headerSteps.selectLanguage(MongoReader.getContext());
-//		loungeSteps.clickGoToBorrowCart();
+		
+		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+		loungeSteps.clickGoToBorrowCart();
+		loungeSteps.checkIfBorrowLinkIsDisplayed();
 //		
 //		generalCartSteps.clearBorrowCart();
 //		BorrowProductModel productData;

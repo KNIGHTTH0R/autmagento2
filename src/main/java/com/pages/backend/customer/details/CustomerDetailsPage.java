@@ -124,6 +124,9 @@ public class CustomerDetailsPage extends AbstractPage {
 	
 	@FindBy(id="customer_info_tabs_stylecoach_salesonspeed_info")
 	private WebElement salesOnSpeedInfo;
+	
+	@FindBy(id="#_stylistprofileallowed_to_borrow")
+	private WebElement allowedToBorrow;
 
 	public void addNewAddress() {
 		evaluateJavascript("jQuery.noConflict();");
@@ -473,5 +476,10 @@ public class CustomerDetailsPage extends AbstractPage {
 		}
 
 		Assert.assertTrue("The address was not found", found);
+	}
+	
+	public void selectAllowedToBorrow(String allowedToBorrowOption){
+		element(allowedToBorrow).waitUntilVisible();
+		element(allowedToBorrow).selectByVisibleText(allowedToBorrowOption);
 	}
 }

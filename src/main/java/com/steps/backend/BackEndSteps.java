@@ -378,6 +378,14 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().goToHomePage();
 	
 	}
+	@Step
+	public void selectAllowedToBorrow(String allowedToBorrowOption) {
+		customerDetailsHomePage().clickOnStylecoachProfileTab();
+		customerDetailsHomePage().selectAllowedToBorrow(allowedToBorrowOption);
+		customerDetailsHomePage().saveAndContinueEdit();
+	}
+	
+	
 	
 	
 //	@Step

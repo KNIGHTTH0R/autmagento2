@@ -55,4 +55,10 @@ public class LoungeSteps extends AbstractSteps {
 	public LoungeIpPerformanceModel grabSCPerformanceIpLogic() {
 		return loungePage().grabSCPerformanceIpLogic();
 	}
+	
+	@Step
+	public void checkIfBorrowLinkIsDisplayed() {
+		loungePage().checkIfBorrowLinkIsDisplayed();
+
+	}
 }
