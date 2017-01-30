@@ -21,5 +21,6 @@ import com.tests.us9.us9002.US9002ValidateOrderBackOfficeTest;
 })
 @RunWith(Suite.class)
 public class US9002Suite {
+	
 
 }

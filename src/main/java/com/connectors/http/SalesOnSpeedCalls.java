@@ -33,6 +33,8 @@ import com.tools.salesOnSpeed.SalesOnSpeedContactResponse;
 import com.tools.utils.DateUtils;
 
 public class SalesOnSpeedCalls {
+	
+	
 
 	public static List<MagentoSOSContactModel> getListCustomerInfo(String userSosId, String email, String password)
 			throws Exception {
@@ -131,7 +133,7 @@ public class SalesOnSpeedCalls {
 		salesOnSpeedContactModel.setWrongDetailsValue(wrongDetails.getValue());
 
 		Male male = customfields.getMale();
-		salesOnSpeedContactModel.setMaleValue(male.getValue());
+	//	salesOnSpeedContactModel.setMaleValue(male.getValue());
 
 		Signup_issues signupIssues = customfields.getSignup_issues();
 		salesOnSpeedContactModel.setSignupIssuesValue(signupIssues.getValue());

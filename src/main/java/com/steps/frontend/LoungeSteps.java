@@ -61,4 +61,11 @@ public class LoungeSteps extends AbstractSteps {
 		loungePage().checkIfBorrowLinkIsDisplayed();
 
 	}
+
+	public void goToLoungePage() {
+		loungePage().goToLoungeList();
+		
+	}
+
+	
 }
