@@ -34,8 +34,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US16.3 Allowed SC in Top borrow products using new functionality ", type = "Scenarios")
-@Story(Application.BorrowCart.US16_3.class)
+
 @RunWith(SerenityRunner.class)
 public class US16003BorrowFunctionalityForAllowedStylistInTopTest extends BaseTest {
 
@@ -87,32 +86,36 @@ public class US16003BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 	
 	@Test
 	public void us16003BorrowFunctionalityForAllowedStylistInTopTest() {
-		customerRegistrationSteps.performLogin("emborrow@evozon.com","emilian1");
+		
+		
+		
+		
+		customerRegistrationSteps.performLogin("emborrow@yopmail.com","emilian1");
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.clickGoToBorrowCart();
+	//	loungeSteps.clickGoToBorrowCart();
 		// verify if borrow appears in my business menu - done
-		loungeSteps.checkIfBorrowLinkIsDisplayed();
+		loungeSteps.checkIfBorrowLinkIsDisplayed(false);
 		
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
-		
-		
-		//go to product details  page and verify if add to cart is not displayed - >in  progress
-		searchSteps.navigateToProductPage("skuProdus");
-		productSteps.verifyAddToCartButton(false);
-		
-		
-		//must create a product
-		//add product in wish list 
-		//	addRegularProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");
-		//verify add all  to cart buttons are not displayed 
-		//should verify add to cart on product side ???? 
-		wishlistSteps.verifyPresenceOfAddAllToCartButton(false);
-		
-		loungeSteps.goToLoungePage();
+//		
+//		
+//		//go to product details  page and verify if add to cart is not displayed - >in  progress
+//		searchSteps.navigateToProductPage("skuProdus");
+//		productSteps.verifyAddToCartButton(false);
+//		
+//		
+//		//must create a product
+//		//add product in wish list 
+//		//	addRegularProductsWorkflow.setBasicProductToWishlist(genProduct1, "1", "0");
+//		//verify add all  to cart buttons are not displayed 
+//		//should verify add to cart on product side ???? 
+//		wishlistSteps.verifyPresenceOfAddAllToCartButton(false);
+//		
+//		loungeSteps.goToLoungePage();
 		
 		//go to lounge
 		

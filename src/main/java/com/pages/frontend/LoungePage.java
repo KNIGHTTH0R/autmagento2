@@ -58,7 +58,8 @@ public class LoungePage extends AbstractPage {
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(3) > ul li:nth-child(1) a")
 	private WebElement startOrderForCustomerLink;
 
-	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(6) > ul li:nth-child(1) a")
+	
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(6) > ul li:nth-child(1) span")
 	private WebElement borrowCartLink;
 
 	@FindBy(id = "contact")
@@ -209,17 +210,21 @@ public class LoungePage extends AbstractPage {
 	}
 
 	
-	public void checkIfBorrowLinkIsDisplayed(){
+	public void checkIfBorrowLinkIsDisplayed(boolean isDisplayed){
 		
 		Actions builder = new Actions(getDriver());
 
 		builder.moveToElement(meinBusinessButton).build().perform();
 		builder.moveToElement(loanedLink).build().perform();
+
 		
-		borrowCartLink.isDisplayed();
-		
-		
-		Assert.assertTrue("The borrow link is not displayed in menu", borrowCartLink.isDisplayed());
+		if (isDisplayed)
+			Assert.assertTrue("The Add all to cart should be present and it's not !!!",
+					toAsciiString(borrowCartLink.getText()).contains("SCHMUCKSTUCKE AUSLEIHEN"));
+
+		else
+			Assert.assertTrue("The Add all to cart button is present and it shouldn't !!!",
+					!toAsciiString(borrowCartLink.getText()).contains("SCHMUCKSTUCKE AUSLEIHEN"));
 	}
 
 	public void goToLoungeList() {
@@ -227,6 +232,24 @@ public class LoungePage extends AbstractPage {
 		meinStartLink.click();
 		
 	}
+	
+	
+	public static String toAsciiString(String str) {
+	     if (str == null) {
+	         return null;
+	     }
+	     StringBuilder sb = new StringBuilder();
+	     for (int index = 0; index < str.length(); index++) {
+	         char c = str.charAt(index);
+	         int pos = ContextConstants.UNICODE.indexOf(c);
+	         if (pos > -1)
+	             sb.append(ContextConstants.PLAIN_ASCII.charAt(pos));
+	         else {
+	             sb.append(c);
+	         }
+	     }
+	     return sb.toString();
+	 }
 		
 
 	
