@@ -104,128 +104,17 @@ public class US16003BorrowFunctionalityForNotAllowedStylistTest extends BaseTest
 
 	@Before
 	public void setUp() throws Exception {
-		BorrowCartCalculator.wipe();
-		BorrowDataGrabber.wipe();
-		DataGrabber.wipe();
-		
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-		
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//			
-//		genProduct1 = createdProductsList.get(0);
-//		genProduct2 = createdProductsList.get(1);
 
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_16_FOLDER + File.separator + "us16001.properties");
-			prop.load(input);
-			username = prop.getProperty("username");
-			password = prop.getProperty("password");
-			billingAddress = prop.getProperty("billingAddress");
-			shippingValue = prop.getProperty("shippingPrice");
-			taxClass = prop.getProperty("taxClass");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
 
 	@Test
 	public void us16003BorrowFunctionalityForNotAllowedStylistTest() {
 		
-		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnSystemConfiguration();
-		borrowSystemConfigurationSteps.goToBorrowTab();
-		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
-		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
-		borrowSystemConfigurationSteps.selectCountries();
-		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
-		borrowSystemConfigurationSteps.saveConfiguration();
-		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail("urcanioanaemilia@gmail.com");
-		backEndSteps.openCustomerDetails("urcanioanaemilia@gmail.com");
-		backEndSteps.selectAllowedToBorrow("Nein");
-		
-		
-		
-		customerRegistrationSteps.performLogin("urcanioanaemilia@gmail.com", "q1w2e3");
+		customerRegistrationSteps.performLogin("emborrow@evozon.com","emilian1");
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.checkIfBorrowLinkIsDisplayed();
-		loungeSteps.clickGoToBorrowCart();
-		
-//		
-//		generalCartSteps.clearBorrowCart();
-//		BorrowProductModel productData;
-//
-//		productData = addBorrowedProductsWorkflow.setBorrowedDefaultProductToCart();
-//		BorrowCartCalculator.allBorrowedProductsList.add(productData);
-//		productData = addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct1, "0.00");
-//		BorrowCartCalculator.allBorrowedProductsList.add(productData);
-//		productData = addBorrowedProductsWorkflow.setBorrowedProductToCart(genProduct2, "0.00");
-//		BorrowCartCalculator.allBorrowedProductsList.add(productData);
-//
-//		BorrowCartCalculator.calculateCartAndShippingTotals(taxClass, shippingValue);
-//
-//		headerSteps.openCartPreview();
-//		headerSteps.goToCart();
-//
-//		BorrowDataGrabber.grabbedBorrowCartProductsList = borrowCartSteps.grabProductsData();
-//
-//		borrowCartSteps.grabTotals();
-//		borrowCartSteps.clickGoToShipping();
-//
-//		shippingSteps.selectAddress(billingAddress);
-//		shippingSteps.setSameAsBilling(true);
-//		shippingSteps.checkTermsCheckbox();
-//
-//		shippingSteps.grabBorrowedProductsList();
-//		shippingSteps.grabSurveyData();
-//		shippingSteps.goToPaymentMethod();
-//
-//		String url = shippingSteps.grabUrl();
-//		DataGrabber.urlModel.setName("Payment URL");
-//		DataGrabber.urlModel.setUrl(url);
-//		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-//		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-//
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//
-//		confirmationSteps.grabProductsList();
-//		confirmationSteps.grabConfirmationTotals();
-//		confirmationSteps.grabBillingData();
-//		confirmationSteps.grabSippingData();
-//
-//		confirmationSteps.agreeAndCheckout();
-//
-//		borrowCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-//		borrowCartValidationWorkflows.performBorrowCartValidations();
-//
-//		customVerifications.printErrors();
-//	
 	}
 
 //	@After

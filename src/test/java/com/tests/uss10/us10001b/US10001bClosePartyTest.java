@@ -25,6 +25,10 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
+import com.tools.data.salesOnSpeed.CustomFields;
+import com.tools.data.salesOnSpeed.Male;
+import com.tools.data.salesOnSpeed.PrimaryPhone;
+import com.tools.data.salesOnSpeed.SalesOnSpeedContactModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -73,7 +77,7 @@ public class US10001bClosePartyTest extends BaseTest {
 
 		urlModel = MongoReader.grabUrlModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		dateModel = MongoReader.grabDateModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
-
+		
 	}
 
 	@Test
