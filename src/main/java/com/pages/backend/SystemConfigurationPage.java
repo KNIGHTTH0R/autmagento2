@@ -48,6 +48,9 @@ public class SystemConfigurationPage extends AbstractPage {
 	@FindBy(id = "pippajean_termpurchase_term_purchase_term_purchase_schedule_default")
 	private WebElement daysBeforeDeliverySchedule;
 	
+	@FindBy(id = "pippajean_borrow_stylist_borrow_process_disable_borrowed_items")
+	private WebElement selectBorrowOption;
+	
 
 	public void selectExecutionType(String executionType) {
     	element(executionTypeOption).waitUntilVisible();
@@ -80,6 +83,13 @@ public class SystemConfigurationPage extends AbstractPage {
 	public void selectTermPurchseOption(String termPurchaseType) {
     	element(termPurchaseOption).waitUntilVisible();
 		element(termPurchaseOption).selectByVisibleText(termPurchaseType);
+		
+    }
+	
+	public void selectBorrowOption(String borrowOption) {
+    	element(selectBorrowOption).waitUntilVisible();
+		element(selectBorrowOption).selectByVisibleText(borrowOption);
+		
     }
 	
 	public void inputMaxNumberOfDAys(String days) {

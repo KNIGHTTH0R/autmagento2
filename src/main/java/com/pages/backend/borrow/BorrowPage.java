@@ -69,16 +69,16 @@ public class BorrowPage extends AbstractPage {
 	public void selectCountries() {
        Select oSelect = new Select(getDriver().findElement(By.id("pippajean_borrow_stylist_borrow_process_allowed_countries")));
 
-        oSelect.selectByValue("Austria");
-        oSelect.selectByIndex(5);
+        oSelect.selectByIndex(1);
+        oSelect.selectByIndex(8);
 
 	}
 	
 	public void selectProductsForStylistwithExtendedOption() {
 	       Select oSelect = new Select(getDriver().findElement(By.id("pippajean_borrow_stylist_borrow_process_extended_product_sku")));
 
-	        oSelect.selectByValue("4629");
-	        oSelect.selectByIndex(1);
+	        oSelect.selectByValue("23962");
+	  //      oSelect.selectByIndex(1);
 
 		}
 

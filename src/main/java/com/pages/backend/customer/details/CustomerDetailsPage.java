@@ -125,7 +125,7 @@ public class CustomerDetailsPage extends AbstractPage {
 	@FindBy(id="customer_info_tabs_stylecoach_salesonspeed_info")
 	private WebElement salesOnSpeedInfo;
 	
-	@FindBy(id="#_stylistprofileallowed_to_borrow")
+	@FindBy(id="_stylistprofileallowed_to_borrow")
 	private WebElement allowedToBorrow;
 
 	public void addNewAddress() {

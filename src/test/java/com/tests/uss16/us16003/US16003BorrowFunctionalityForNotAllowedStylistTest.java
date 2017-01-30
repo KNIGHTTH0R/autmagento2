@@ -54,7 +54,7 @@ import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 @WithTag(name = "US16.1 SC borrow products Test", type = "Scenarios")
 @Story(Application.BorrowCart.US16_1.class)
 @RunWith(SerenityRunner.class)
-public class US16003BorrowFunctionalityForNotAllowedStylist extends BaseTest {
+public class US16003BorrowFunctionalityForNotAllowedStylistTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -151,30 +151,31 @@ public class US16003BorrowFunctionalityForNotAllowedStylist extends BaseTest {
 	}
 
 	@Test
-	public void us16003BorrowFunctionalityForNotAllowedStylist() {
+	public void us16003BorrowFunctionalityForNotAllowedStylistTest() {
 		
-		backEndSteps.performAdminLogin("oana.axente", "Camelia.88");
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSystemConfiguration();
 		borrowSystemConfigurationSteps.goToBorrowTab();
-		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Ja");
+		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
 		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
 		borrowSystemConfigurationSteps.selectCountries();
 		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
 		borrowSystemConfigurationSteps.saveConfiguration();
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail("mihaialexandrubarta@gmail.com");
-		backEndSteps.openCustomerDetails("mihaialexandrubarta@gmail.com");
+		backEndSteps.searchForEmail("urcanioanaemilia@gmail.com");
+		backEndSteps.openCustomerDetails("urcanioanaemilia@gmail.com");
 		backEndSteps.selectAllowedToBorrow("Nein");
 		
 		
 		
-		customerRegistrationSteps.performLogin(username, password);
+		customerRegistrationSteps.performLogin("urcanioanaemilia@gmail.com", "q1w2e3");
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.clickGoToBorrowCart();
 		loungeSteps.checkIfBorrowLinkIsDisplayed();
+		loungeSteps.clickGoToBorrowCart();
+		
 //		
 //		generalCartSteps.clearBorrowCart();
 //		BorrowProductModel productData;
