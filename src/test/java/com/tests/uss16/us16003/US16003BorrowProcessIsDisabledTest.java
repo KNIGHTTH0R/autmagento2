@@ -158,6 +158,6 @@ public class US16003BorrowProcessIsDisabledTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		loungeSteps.checkIfBorrowLinkIsDisplayed();
+		loungeSteps.checkIfBorrowLinkIsDisplayed(false);
 	}
 }

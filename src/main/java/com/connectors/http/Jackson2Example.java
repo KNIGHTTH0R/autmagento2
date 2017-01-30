@@ -2,17 +2,10 @@ package com.connectors.http;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tools.data.salesOnSpeed.CustomFields;
-import com.tools.data.salesOnSpeed.Male;
-import com.tools.data.salesOnSpeed.Phones;
-import com.tools.data.salesOnSpeed.PrimaryPhone;
 import com.tools.data.salesOnSpeed.SalesOnSpeedContactModel;
 
 public class Jackson2Example {
