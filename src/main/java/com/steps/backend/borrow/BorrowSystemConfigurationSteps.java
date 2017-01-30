@@ -15,8 +15,11 @@ public class BorrowSystemConfigurationSteps extends AbstractSteps {
 
 	@Step
 	public void selectDisabledBorrowOption(String borrowOption) {
-		systemConfigurationPage().selectTermPurchseOption(borrowOption);
+		systemConfigurationPage().selectBorrowOption(borrowOption);
+		systemConfigurationPage().saveConfiguration();
 	}
+	
+	
 	
 	@Step
 	public void goToBorrowTab() {
