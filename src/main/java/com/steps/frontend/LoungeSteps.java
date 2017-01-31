@@ -68,5 +68,16 @@ public class LoungeSteps extends AbstractSteps {
 		
 	}
 
+	@Step
+	public void verifyBorrowBlockStatus(String status) {
+		loungePage().verifyBorrowBlockStatus(status);
+		
+	}
+
+	public void verifyBorrowBlockMessage(String allowedMessage) {
+		loungePage().verifyBorrowBlockMessage(allowedMessage);
+		
+	}
+
 	
 }

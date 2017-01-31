@@ -30,6 +30,9 @@ public class ContactDetailsPage extends AbstractPage {
 	@FindBy(css = "	a[class='fancybox-item fancybox-close']")
 	private WebElement closeModal;
 	
+	@FindBy(css= "customer-infos-accordion ui-accordion")
+	private WebElement customerBlock;
+	
 	
 	public ContactModel grabContactDetails() {
 
@@ -90,6 +93,17 @@ public class ContactDetailsPage extends AbstractPage {
 		element(closeModal).waitUntilVisible();
 		closeModal.click();
 		waitABit(5000);
+		
+	}
+
+	public void checkPresenceOfCustomerInfosBlock(boolean isDisplayed) {
+		if (isDisplayed)
+			Assert.assertTrue("The Customer block should be present and it's not !!!",
+					customerBlock.isDisplayed());
+
+		else
+			Assert.assertTrue("The Customer block is present and it shouldn't !!!",
+					!customerBlock.isDisplayed());
 		
 	}
 	

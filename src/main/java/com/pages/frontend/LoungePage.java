@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.sun.jna.platform.unix.X11;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
@@ -24,7 +25,7 @@ public class LoungePage extends AbstractPage {
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) a")
 	private WebElement meinBusinessLink;
-	
+
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(1)")
 	private WebElement meinStartButton;
 
@@ -58,7 +59,6 @@ public class LoungePage extends AbstractPage {
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(3) > ul li:nth-child(1) a")
 	private WebElement startOrderForCustomerLink;
 
-	
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(6) > ul li:nth-child(1) span")
 	private WebElement borrowCartLink;
 
@@ -79,6 +79,12 @@ public class LoungePage extends AbstractPage {
 
 	@FindBy(css = ".performance-table")
 	private WebElement performanceTable;
+
+	@FindBy(css = ".col-right >.island:nth-child(4) .island-content .text-center:nth-child(1)")
+	private WebElement borrowBlockTitle;
+
+	@FindBy(css = ".col-right >.island:nth-child(4) .island-content .text-center:nth-child(2)")
+	private WebElement borrowBlockText;
 
 	public void clickAddContact() {
 		element(addContact).waitUntilVisible();
@@ -111,7 +117,7 @@ public class LoungePage extends AbstractPage {
 	}
 
 	public void clickCreateParty() {
-		
+
 		scrollToPageTop();
 
 		Actions builder = new Actions(getDriver());
@@ -121,13 +127,12 @@ public class LoungePage extends AbstractPage {
 		builder.moveToElement(stylePartiesLink).build().perform();
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 		element(createPartyButton).waitUntilVisible();
-		
+
 		createPartyButton.click();
-		
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
-				ContextConstants.LOADING_MESSAGE));
-		
-		
+
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+
 	}
 
 	public void clickGoToPartyList() {
@@ -198,59 +203,68 @@ public class LoungePage extends AbstractPage {
 		LoungeIpPerformanceModel result = new LoungeIpPerformanceModel();
 
 		WebElement performanceTable = getDriver().findElement(By.cssSelector(".performance-table tbody"));
-		result.setCareerLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(1) td:nth-child(2)")).getText());
+		result.setCareerLevel(
+				performanceTable.findElement(By.cssSelector("tr:nth-child(1) td:nth-child(2)")).getText());
 		result.setPayLevel(performanceTable.findElement(By.cssSelector("tr:nth-child(2) td:nth-child(2)")).getText());
-		result.setIndividualPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(3) td:nth-child(2)")).getText());
-		result.setUnsafeIndividualPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(4) td:nth-child(2)")).getText());
+		result.setIndividualPoints(
+				performanceTable.findElement(By.cssSelector("tr:nth-child(3) td:nth-child(2)")).getText());
+		result.setUnsafeIndividualPoints(
+				performanceTable.findElement(By.cssSelector("tr:nth-child(4) td:nth-child(2)")).getText());
 		result.setTeamPoints(performanceTable.findElement(By.cssSelector("tr:nth-child(5) td:nth-child(2)")).getText());
- 
+
 		PrintUtils.printLoungeIpPerformanceModel(result);
-		
+
 		return result;
 	}
 
-	
-	public void checkIfBorrowLinkIsDisplayed(boolean isDisplayed){
-		
+	public void checkIfBorrowLinkIsDisplayed(boolean isDisplayed) {
+
 		Actions builder = new Actions(getDriver());
 
 		builder.moveToElement(meinBusinessButton).build().perform();
 		builder.moveToElement(loanedLink).build().perform();
 
-		
 		if (isDisplayed)
-			Assert.assertTrue("The Add all to cart should be present and it's not !!!",
+			Assert.assertTrue("The borrow link should be present and it's not !!!",
 					toAsciiString(borrowCartLink.getText()).contains("SCHMUCKSTUCKE AUSLEIHEN"));
 
 		else
-			Assert.assertTrue("The Add all to cart button is present and it shouldn't !!!",
+			Assert.assertTrue("The borrow is present and it shouldn't !!!",
 					!toAsciiString(borrowCartLink.getText()).contains("SCHMUCKSTUCKE AUSLEIHEN"));
 	}
 
 	public void goToLoungeList() {
 		element(meinStartButton).waitUntilVisible();
 		meinStartLink.click();
+
+	}
+
+	public static String toAsciiString(String str) {
+		if (str == null) {
+			return null;
+		}
+		StringBuilder sb = new StringBuilder();
+		for (int index = 0; index < str.length(); index++) {
+			char c = str.charAt(index);
+			int pos = ContextConstants.UNICODE.indexOf(c);
+			if (pos > -1)
+				sb.append(ContextConstants.PLAIN_ASCII.charAt(pos));
+			else {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
+	}
+
+	public void verifyBorrowBlockStatus(String status) {
+
+		Assert.assertTrue("The status is not as expected expected : "+status+" - actual:"+ borrowBlockTitle.getText(), borrowBlockTitle.getText().contentEquals(status));
+
+	}
+
+	public void verifyBorrowBlockMessage(String allowedMessage) {
+		Assert.assertTrue("The status is not as expected", borrowBlockText.getText().contentEquals(allowedMessage));
 		
 	}
-	
-	
-	public static String toAsciiString(String str) {
-	     if (str == null) {
-	         return null;
-	     }
-	     StringBuilder sb = new StringBuilder();
-	     for (int index = 0; index < str.length(); index++) {
-	         char c = str.charAt(index);
-	         int pos = ContextConstants.UNICODE.indexOf(c);
-	         if (pos > -1)
-	             sb.append(ContextConstants.PLAIN_ASCII.charAt(pos));
-	         else {
-	             sb.append(c);
-	         }
-	     }
-	     return sb.toString();
-	 }
-		
 
-	
 }
