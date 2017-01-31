@@ -146,7 +146,7 @@ public class ContextConstants {
 	public static final String SOS_MESSAGE = MongoReader.getDictionaryItem("SOS_MESSAGE");
 	
 	//new Borrow Process 
-	public static final String ALLOWED_STATUS = MongoReader.getDictionaryItem("ALLOWED");
+	public static final String ALLOWED_STATUS = MongoReader.getDictionaryItem("ALLOWED_STATUS");
 	public static final String WAITING_IN_RETURN  = MongoReader.getDictionaryItem("WAITING_IN_RETURN");
 	public static final String NOT_ELIGIBLE  = MongoReader.getDictionaryItem("NOT_ELIGIBLE ");
 	public static final String ALLOWED_MESSAGE = MongoReader.getDictionaryItem("ALLOWED_MESSAGE ");

@@ -28,6 +28,7 @@ import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -95,8 +96,9 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 	public WishlistSteps wishlistSteps;
 	@Steps
 	ContactDetailsSteps contactDetailsSteps;
-	
+	public String stylistEmail, stylistPassword;
 	public CustomerFormModel customerData;
+	public CustomerFormModel stylistData;
 	public CustomerFormModel contactData;
 	private ProductDetailedModel genProduct1;
 	
@@ -113,9 +115,19 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 			System.out.println("Prod Code "+regularBasicProductModel.getProdCode());
 		}
 		
-		customerData = MongoReader.grabCustomerFormModels("US16004StyleCoachRegistrationTest").get(0);
+		stylistData = MongoReader.grabCustomerFormModels("US16004StyleCoachRegistrationTest").get(0);
+		System.out.println("stylist data "+stylistData.getEmailName());
+		System.out.println("stylist pass "+stylistData.getPassword());
+		
+		stylistEmail=stylistData.getEmailName();
+		stylistPassword=stylistData.getPassword();
+		
+		
+		customerData = MongoReader.grabCustomerFormModels("US16004RegularCustomerRegistrationTest").get(0);
 		System.out.println("customer data "+customerData.getEmailName());
 		System.out.println("customer pass "+customerData.getPassword());
+		
+		
 		contactData= MongoReader.grabCustomerFormModels("US16004AddNewContactToStyleCoachTest").get(0);
 		System.out.println("contact data "+contactData.getEmailName());
 		System.out.println("contact pass "+contactData.getPassword());
@@ -127,11 +139,22 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 
 	@Test
 	public void us16004BorrowFunctionalityForAllowedStylistInTopTest() {
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+		backEndSteps.clickOnSystemConfiguration();
+		borrowSystemConfigurationSteps.goToBorrowTab();
+		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
+		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
+		borrowSystemConfigurationSteps.selectCountries();
+		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
+		borrowSystemConfigurationSteps.saveConfiguration();
+		backEndSteps.clickOnCustomers();
+		backEndSteps.searchForEmail(stylistEmail);
+		backEndSteps.openCustomerDetails(stylistEmail);
+		backEndSteps.selectAllowedToBorrow("Ja");
 		
 		
 		
-		
-		customerRegistrationSteps.performLogin("emborrow@yopmail.com","emilian1");
+		customerRegistrationSteps.performLogin(stylistEmail,stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}

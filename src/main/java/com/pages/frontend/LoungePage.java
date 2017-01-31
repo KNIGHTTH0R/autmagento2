@@ -80,11 +80,18 @@ public class LoungePage extends AbstractPage {
 	@FindBy(css = ".performance-table")
 	private WebElement performanceTable;
 
+
 	@FindBy(css = ".col-right >.island:nth-child(4) .island-content .text-center:nth-child(1)")
 	private WebElement borrowBlockTitle;
 
 	@FindBy(css = ".col-right >.island:nth-child(4) .island-content .text-center:nth-child(2)")
 	private WebElement borrowBlockText;
+
+	
+	@FindBy(css = ".col-right >.island:nth-child(4)")
+	private WebElement borrowBox;
+	
+
 
 	public void clickAddContact() {
 		element(addContact).waitUntilVisible();
@@ -265,6 +272,20 @@ public class LoungePage extends AbstractPage {
 	public void verifyBorrowBlockMessage(String allowedMessage) {
 		Assert.assertTrue("The status is not as expected", borrowBlockText.getText().contentEquals(allowedMessage));
 		
+	}
+
+
+public void checkIfBorrowBoxIsDisplayed(boolean isDisplayed){
+		
+	    element(borrowBox).waitUntilVisible();
+	
+		if (isDisplayed)
+			Assert.assertTrue("The Borrow box should be present and it's not !!!",
+					borrowBox.getText().contains("MY BORROW OPTIONS"));
+
+		else
+			Assert.assertTrue("The Borrow box is present and it shouldn't !!!",
+					!borrowBox.getText().contains("MY BORROW OPTIONS"));
 	}
 
 }
