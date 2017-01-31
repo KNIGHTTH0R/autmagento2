@@ -67,6 +67,12 @@ public class LoungeSteps extends AbstractSteps {
 		loungePage().goToLoungeList();
 		
 	}
+	
+	@Step
+	public void checkIfBorrowBoxIsdisplayed(boolean isDisplayed) {
+		loungePage().checkIfBorrowBoxIsDisplayed(isDisplayed);
+		
+	}
 
 	
 }

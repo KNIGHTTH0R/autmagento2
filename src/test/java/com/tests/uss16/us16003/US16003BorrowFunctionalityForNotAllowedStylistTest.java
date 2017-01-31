@@ -110,11 +110,28 @@ public class US16003BorrowFunctionalityForNotAllowedStylistTest extends BaseTest
 	@Test
 	public void us16003BorrowFunctionalityForNotAllowedStylistTest() {
 		
-		customerRegistrationSteps.performLogin("emborrow@evozon.com","emilian1");
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+		backEndSteps.clickOnSystemConfiguration();
+		borrowSystemConfigurationSteps.goToBorrowTab();
+		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
+		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
+		borrowSystemConfigurationSteps.selectCountries();
+		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
+		borrowSystemConfigurationSteps.saveConfiguration();
+		backEndSteps.clickOnCustomers();
+		backEndSteps.searchForEmail("urcanioanaemilia@gmail.com");
+		backEndSteps.openCustomerDetails("urcanioanaemilia@gmail.com");
+		backEndSteps.selectAllowedToBorrow("Ja");
+		
+		
+		
+		customerRegistrationSteps.performLogin("urcanioanaemilia@gmail.com", "q1w2e3");
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		loungeSteps.checkIfBorrowLinkIsDisplayed(true);
+		loungeSteps.checkIfBorrowBoxIsdisplayed(true);
 	}
 
 //	@After
