@@ -30,4 +30,11 @@ public class ContactDetailsSteps extends AbstractSteps {
 		contactDetailsPage().clickOnSubmitSosButton();
 		contactDetailsPage().closeModalWindow();
 	}
+	
+	
+	@Step
+	public void checkPresenceOfCustomerInfosBlock(boolean isDisplayed) {
+		contactDetailsPage().checkPresenceOfCustomerInfosBlock(isDisplayed);
+		
+	}
 }

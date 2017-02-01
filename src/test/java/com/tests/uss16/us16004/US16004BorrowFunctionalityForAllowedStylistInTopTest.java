@@ -1,4 +1,7 @@
-package com.tests.uss16.us16003;
+package com.tests.uss16.us16004;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +28,11 @@ import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.Credentials;
+import com.tools.constants.SoapKeys;
+import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.RegularBasicProductModel;
+import com.tools.data.salesOnSpeed.MagentoSOSContactModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -40,7 +48,7 @@ import net.thucydides.core.annotations.WithTag;
 
 
 @RunWith(SerenityRunner.class)
-public class US16003BorrowFunctionalityForAllowedStylistInTopTest extends BaseTest {
+public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -88,24 +96,65 @@ public class US16003BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 	public WishlistSteps wishlistSteps;
 	@Steps
 	ContactDetailsSteps contactDetailsSteps;
-	
+	public String stylistEmail, stylistPassword;
+	public CustomerFormModel customerData;
+	public CustomerFormModel stylistData;
+	public CustomerFormModel contactData;
 	private ProductDetailedModel genProduct1;
 	
+	private static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
 	@Before
 	public void setUp() throws Exception {
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
+		
+		productsList = MongoReader.grabRegularBasicProductModel("US16004RegularCustomerOrderTest" + SoapKeys.CALC);
+		
+		for (RegularBasicProductModel regularBasicProductModel : productsList) {
+			System.out.println("Prod Code "+regularBasicProductModel.getProdCode());
+		}
+		
+		stylistData = MongoReader.grabCustomerFormModels("US16004StyleCoachRegistrationTest").get(0);
+		System.out.println("stylist data "+stylistData.getEmailName());
+		System.out.println("stylist pass "+stylistData.getPassword());
+		
+		stylistEmail=stylistData.getEmailName();
+		stylistPassword=stylistData.getPassword();
+		
+		
+		customerData = MongoReader.grabCustomerFormModels("US16004RegularCustomerRegistrationTest").get(0);
+		System.out.println("customer data "+customerData.getEmailName());
+		System.out.println("customer pass "+customerData.getPassword());
+		
+		
+		contactData= MongoReader.grabCustomerFormModels("US16004AddNewContactToStyleCoachTest").get(0);
+		System.out.println("contact data "+contactData.getEmailName());
+		System.out.println("contact pass "+contactData.getPassword());
+		
+
+		
 	}
 	
 
 	@Test
-	public void us16003BorrowFunctionalityForAllowedStylistInTopTest() {
+	public void us16004BorrowFunctionalityForAllowedStylistInTopTest() {
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+		backEndSteps.clickOnSystemConfiguration();
+		borrowSystemConfigurationSteps.goToBorrowTab();
+		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
+		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
+		borrowSystemConfigurationSteps.selectCountries();
+		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
+		borrowSystemConfigurationSteps.saveConfiguration();
+		backEndSteps.clickOnCustomers();
+		backEndSteps.searchForEmail(stylistEmail);
+		backEndSteps.openCustomerDetails(stylistEmail);
+		backEndSteps.selectAllowedToBorrow("Ja");
 		
 		
 		
-		
-		customerRegistrationSteps.performLogin("emborrow@yopmail.com","emilian1");
+		customerRegistrationSteps.performLogin(stylistEmail,stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
@@ -135,9 +184,9 @@ public class US16003BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 		
 		
 		loungeSteps.verifyBorrowBlockStatus(ContextConstants.ALLOWED_STATUS);
-		loungeSteps.verifyBorrowBlockMessage(ContextConstants.ALLOWED_MESSAGE);
+	//	loungeSteps.verifyBorrowBlockMessage(ContextConstants.ALLOWED_MESSAGE);
 		
-		//OTHER TESRT: create a customer ....with 2 products in cart
+		//OTHER TEST: create a customer ....with 2 products in cart
 		// add 2 products in wishlist 
 		
 		//OTHER TESRT: Create a simple contact without customer id
@@ -169,14 +218,16 @@ public class US16003BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 		
 		
 		//verify top block messages 
-		
+		// verify minicart 
 		//go to borrow cart 
 		
 		//verify that default xxx is displayed 
 		
 		// place borrow order 
 		
+		//verify block on lounge page 
 		
+		///todo party wishlist validation 
 		
 	}
 	
