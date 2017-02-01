@@ -36,6 +36,7 @@ import com.steps.frontend.checkout.cart.borrowCart.BorrowCartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.borrowCart.BorrowCartCalculator;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
@@ -141,6 +142,8 @@ public class US16003BorrowFunctionalityForNotAllowedStylistTest extends BaseTest
 		
 		loungeSteps.checkIfBorrowLinkIsDisplayed(true);
 		loungeSteps.checkIfBorrowBoxIsdisplayed(true);
+		loungeSteps.verifyBorrowBlockStatus(ContextConstants.WAITING_IN_RETURN);
+		//	loungeSteps.verifyBorrowBlockMessage(ContextConstants.ALLOWED_MESSAGE);
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.checkIfBorrowCartLinkIsDisplayed(true);
 		headerSteps.goToShop();

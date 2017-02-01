@@ -171,5 +171,12 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public void checkThatPartyWishlistIsEmpty() {
 		partyDetailsPage().checkThatPartyWishlistIsEmpty();
 	}
+	
+	@Step
+	public void checkIfAddToBorrowCartButtonIsDisplayed(boolean isDispalyed) {
+		partyDetailsPage().checkIfAddToBorrowCartButtonIsDisplayed(isDispalyed);
+	}
+	
+	
 
 }

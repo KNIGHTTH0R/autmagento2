@@ -454,4 +454,22 @@ public class PartyDetailsPage extends AbstractPage {
 
 		}
 	}
+	
+	public void checkIfAddToBorrowCartButtonIsDisplayed(boolean isDisplayed) {
+
+		//element(addToBorrowCart).waitUntilVisible();
+
+      List <WebElement> partyButton=getDriver().findElements(By.cssSelector("div#wishlistGuestsFormContainer form button[class='button blue-button right clear'] span"));
+	//	System.out.println("partyyy"+partyButton.get(0).getText());
+      
+      if (isDisplayed)
+			Assert.assertTrue("The Add to borrow cart button should be present and it's not !!!",
+					partyButton.get(0).getText().contains("IN DEN LEIHWARENKORB"));
+		
+
+		else
+//			Assert.assertTrue("The Add to borrow cart button is present and it shouldn't !!!",
+//					!partyButton.get(0).getText().contains("IN DEN LEIHWARENKORB"));
+			Assert.assertTrue("The Add to borrow cart button is present and it shouldn't !!!",partyButton.isEmpty());
+	}
 }
