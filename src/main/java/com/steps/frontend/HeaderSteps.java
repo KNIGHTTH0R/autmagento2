@@ -175,5 +175,11 @@ public class HeaderSteps extends AbstractSteps {
 	public boolean succesfullLogin() {
 		return headerPage().succesfullLogin();
 	}
+	
+	@Step
+	public void goToShop() {
+		headerPage().clickShop();
+		waitABit(1000);
+	}
 
 }

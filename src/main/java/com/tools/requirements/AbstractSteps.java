@@ -74,6 +74,7 @@ import com.pages.frontend.ProductDetailsPage;
 import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
 import com.pages.frontend.ReportsPage;
+import com.pages.frontend.ShopPage;
 import com.pages.frontend.StarterSetPage;
 import com.pages.frontend.StylistCampaignPage;
 import com.pages.frontend.StylistContextPage;
@@ -441,6 +442,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public LoungePage loungePage() {
 		return getPages().currentPageAt(LoungePage.class);
+	}
+	
+	public ShopPage shopPage() {
+		return getPages().currentPageAt(ShopPage.class);
 	}
 
 	public HomePage homePage() {

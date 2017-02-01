@@ -26,6 +26,8 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.LoungeSteps;
+import com.steps.frontend.MyBusinessSteps;
+import com.steps.frontend.ShopSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
@@ -88,6 +90,12 @@ public class US16003BorrowFunctionalityForNotAllowedStylistTest extends BaseTest
 	public BackEndSteps backEndSteps;
 	@Steps
 	public BorrowSystemConfigurationSteps borrowSystemConfigurationSteps;
+	@Steps
+	public MyBusinessSteps myBusinessSteps;
+	@Steps
+	public ShopSteps shopSteps;
+	
+	
 	
 	
 	private String username, password;
@@ -121,7 +129,7 @@ public class US16003BorrowFunctionalityForNotAllowedStylistTest extends BaseTest
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail("urcanioanaemilia@gmail.com");
 		backEndSteps.openCustomerDetails("urcanioanaemilia@gmail.com");
-		backEndSteps.selectAllowedToBorrow("Ja");
+		backEndSteps.selectAllowedToBorrow("Nein");
 		
 		
 		
@@ -130,8 +138,14 @@ public class US16003BorrowFunctionalityForNotAllowedStylistTest extends BaseTest
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		
 		loungeSteps.checkIfBorrowLinkIsDisplayed(true);
 		loungeSteps.checkIfBorrowBoxIsdisplayed(true);
+		loungeSteps.goToMyBusiness();
+		myBusinessSteps.checkIfBorrowCartLinkIsDisplayed(true);
+		headerSteps.goToShop();
+		shopSteps.checkIfBorrowLinkIsdisplayed(true);
+		
 	}
 
 //	@After
