@@ -22,6 +22,13 @@ public class MyContactsListSteps extends AbstractSteps {
 		myContactsListPage().verifyUnicAndOpenContactDetails(terms);
 	}
 
+	
+	@Step
+	public void openContactDetailsPage(String emailName) {
+		myContactsListPage().openContactDetailsPage(emailName);
+		
+	}
+	
 //	@Step
 //	public void verifyThatContactIsUniqueInStylecoachList(String contactName) {
 //		myContactsListPage().inputSearchTerm(contactName);

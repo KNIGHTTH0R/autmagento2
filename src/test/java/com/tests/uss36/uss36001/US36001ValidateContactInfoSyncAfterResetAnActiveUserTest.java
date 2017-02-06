@@ -85,7 +85,7 @@ public class US36001ValidateContactInfoSyncAfterResetAnActiveUserTest extends Ba
 
 	@Test
 	public void us36001ValidateContactInfoSyncAfterResetAnActiveUserTest() throws Exception {
-		
+		//check if previous stylist sos id is different than the new one generated 
 		magentoToSosSync.validateContactInfoList(contactsInfo, sosContactsInfo);
 		customVerification.printErrors();
 	}

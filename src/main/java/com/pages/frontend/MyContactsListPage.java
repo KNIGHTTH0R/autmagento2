@@ -68,4 +68,22 @@ public class MyContactsListPage extends AbstractPage {
 		Assert.assertTrue("Contact was not found!!!", found);
 	}
 
+	public void openContactDetailsPage(String contactEmail) {
+		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
+		WebElement link = null;
+		boolean found = false;
+		for (WebElement contact : contactsList) {
+			if (contact.findElement(By.cssSelector("td:nth-child(4) a")).getText().contentEquals(contactEmail.toUpperCase())) {
+				found = true;
+				link=contact.findElement(By.cssSelector("td:nth-child(3) a"));
+				
+			}
+		}
+		if(found){
+			link.click();
+		}
+		Assert.assertTrue("The contact was not found in the contact list of the stylecoach", found);
+		
+	}
+
 }

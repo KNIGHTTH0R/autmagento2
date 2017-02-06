@@ -48,4 +48,10 @@ public class BorrowedCartModel {
 		this.ipPoints = ipPoints;
 	}
 
+	@Override
+	public String toString() {
+		return "BorrowedCartModel [name=" + name + ", prodCode=" + prodCode + ", unitPrice=" + unitPrice
+				+ ", finalPrice=" + finalPrice + ", ipPoints=" + ipPoints + "]";
+	}
+
 }

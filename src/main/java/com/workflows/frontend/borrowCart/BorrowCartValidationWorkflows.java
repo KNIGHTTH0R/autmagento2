@@ -37,12 +37,9 @@ public class BorrowCartValidationWorkflows {
 	@StepGroup
 	@Screenshots(onlyOnFailures = true)
 	public void performBorrowCartValidations() {
-
-		checkoutValidationSteps.verifySuccessMessage();
-
+		//checkoutValidationSteps.verifySuccessMessage();
 		borrowCartWorkflows.setValidateProductsModels(BorrowCartCalculator.allBorrowedProductsList, BorrowDataGrabber.grabbedBorrowCartProductsList);
 		borrowCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
-
 		borrowCartShippingAndConfirmationWorkflows.setValidateProductsModels(BorrowCartCalculator.allBorrowedProductsList, BorrowDataGrabber.grabbedBorrowShippingProductsList);
 		borrowCartShippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION");
 
@@ -68,6 +65,44 @@ public class BorrowCartValidationWorkflows {
 		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
+	@StepGroup
+	@Screenshots(onlyOnFailures = true)
+	public void performBorrowNewCartValidations() {
 
+		///checkoutValidationSteps.verifySuccessMessage();
+
+		borrowCartWorkflows.setValidateProductsModels(BorrowCartCalculator.allBorrowedProductsList, BorrowDataGrabber.grabbedBorrowCartProductsList);
+	//	borrowCartWorkflows.validateProducts("CART PHASE PRODUCTS VALIDATION");
+		borrowCartWorkflows.validateNewProducts("CART PHASE PRODUCTS VALIDATION");
+		System.out.println("sunt aici 1");
+		
+		borrowCartShippingAndConfirmationWorkflows.setValidateProductsModels(BorrowCartCalculator.allBorrowedProductsList, BorrowDataGrabber.grabbedBorrowShippingProductsList);
+		
+		System.out.println("sunt aici 2");
+		borrowCartShippingAndConfirmationWorkflows.validateNewProducts("SHIPPING PHASE PRODUCTS VALIDATION");
+		System.out.println("sunt aici 3");
+	
+	//	borrowCartShippingAndConfirmationWorkflows.setValidateProductsModels(BorrowCartCalculator.allBorrowedProductsList, BorrowDataGrabber.grabbedBorrowConfirmationProductsList);
+//		System.out.println("sunt aici 4");
+//		borrowCartShippingAndConfirmationWorkflows.validateNewProducts("CONFIRMATION PHASE PRODUCTS VALIDATION");
+		System.out.println("sunt aici 5");
+		borrowCartWorkflows.setVerifyTotalsDiscount(BorrowDataGrabber.borrowCartGrabbedCartTotals, BorrowCartCalculator.borrowCartCalcDetailsModel);
+		borrowCartWorkflows.verifyTotals("CART TOTALS");
+
+		borrowCartShippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals, BorrowCartCalculator.shippingCalculatedModel);
+		borrowCartShippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
+
+		borrowCartShippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotals, BorrowCartCalculator.shippingCalculatedModel);
+		borrowCartShippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS");
+		
+		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel, BorrowCartCalculator.shippingCalculatedModel.getTotalAmount());
+		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
 
 }

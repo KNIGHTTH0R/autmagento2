@@ -205,7 +205,36 @@ public class ProductSteps extends AbstractSteps {
 
 		return result;
 	}
+	
+	@StepGroup
+	public BorrowProductModel setXXXBorrowedProductAddToCart() {
+		BorrowProductModel result = new BorrowProductModel();
 
+		result.setName("Borrow Product XXX");
+		result.setProdCode("xxxx");
+		result.setQty("999");
+		result.setUnitPrice("0.00");
+		result.setFinalPrice("0.00");
+	
+		result.setIpPoints("0");
+
+		return result;
+	}
+
+	@StepGroup
+	public BorrowProductModel setYYYBorrowedProductAddToCart() {
+		BorrowProductModel result = new BorrowProductModel();
+
+		result.setName("Borrow Product YYY");
+		result.setProdCode("yyy");
+		result.setQty("999");
+		result.setUnitPrice("0.00");
+		result.setFinalPrice("0.00");
+	
+		result.setIpPoints("0");
+
+		return result;
+	}
 	@Step
 	public RegularBasicProductModel setRegularBasicProductAddToCart(ProductDetailedModel model, String qty, String size,
 			String finalPrice, String ipPoints) {

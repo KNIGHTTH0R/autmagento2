@@ -56,15 +56,19 @@ public class US16004AddNewContactToStyleCoachTest extends BaseTest {
 	@Test
 	public void us17001AddNewContactToStyleCoachTest() {
 
-		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(),
-				stylistRegistrationData.getPassword());
+//		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(),
+//				stylistRegistrationData.getPassword());
+		
+		customerRegistrationSteps.performLogin("emilian@yopmail.com",
+				"emilian1");
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToToAddNewContact();
 		createNewContactSteps.fillCreateNewContact(dataModel, addressModel);
-
+		System.out.println("password "+dataModel.getPassword());
+		System.out.println("mail "+dataModel.getEmailName());
 	}
 
 	@After

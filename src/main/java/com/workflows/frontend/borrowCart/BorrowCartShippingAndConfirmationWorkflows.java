@@ -37,6 +37,7 @@ public class BorrowCartShippingAndConfirmationWorkflows {
 			BorrowedCartModel compare = findProduct(productNow.getProdCode(), borrowedCartProductsList);
 
 			if (compare.getName() != null) {
+				System.out.println("found");
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
 
@@ -53,6 +54,37 @@ public class BorrowCartShippingAndConfirmationWorkflows {
 		}
 		Assert.assertTrue("Failure: Products list is empty. ", borrowedBasicProductsList.size() != 0);
 		Assert.assertTrue("Failure: Not all products have been validated . ", borrowedCartProductsList.size() == 0);
+
+	}
+	
+	
+	
+	
+	
+	@Step
+	public void validateNewProducts(String message) {
+		
+
+		for (BorrowProductModel productNow : borrowedBasicProductsList) {
+			BorrowedCartModel compare = findProduct(productNow.getProdCode(), borrowedCartProductsList);
+
+			if (compare.getName() != null) {
+				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
+				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
+
+			} else {
+				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+			}
+
+//			int index = borrowedCartProductsList.indexOf(compare);
+//			if (index > -1) {
+//				borrowedCartProductsList.remove(index);
+//				System.out.println("index of " + compare.getName() + " removed");
+//				System.out.println(borrowedCartProductsList.size() + " items remained");
+//			}
+		}
+		Assert.assertTrue("Failure: Products list is empty. ", borrowedBasicProductsList.size() != 0);
+		Assert.assertTrue("Failure: Not all products have been validated . ", borrowedCartProductsList.size() != 0);
 
 	}
 

@@ -38,6 +38,20 @@ public class AddBorrowedProductsWorkflow {
 
 		return productSteps.setBorrowedDefaultProductAddToCart();
 	}
+	
+	@StepGroup
+	@Title("Add xxx borrowed product to cart")
+	public BorrowProductModel setXXXBorrowedProductToCart() {
+
+		return productSteps.setXXXBorrowedProductAddToCart();
+	}
+	
+	@StepGroup
+	@Title("Add xxx borrowed product to cart")
+	public BorrowProductModel setYYYBorrowedProductToCart() {
+
+		return productSteps.setYYYBorrowedProductAddToCart();
+	}
 
 	
 	@StepGroup

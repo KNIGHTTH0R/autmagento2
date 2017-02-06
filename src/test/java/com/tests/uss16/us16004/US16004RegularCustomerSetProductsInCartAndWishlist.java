@@ -99,6 +99,9 @@ public class US16004RegularCustomerSetProductsInCartAndWishlist extends BaseTest
 
 	private String customerEmail;
 	private String customerPassword;
+	
+	public static List<RegularBasicProductModel> allProductsFromCartList = new ArrayList<RegularBasicProductModel>();
+	public static List<RegularBasicProductModel> allProductsFromWishList = new ArrayList<RegularBasicProductModel>();
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
@@ -157,25 +160,31 @@ public class US16004RegularCustomerSetProductsInCartAndWishlist extends BaseTest
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
+		allProductsFromCartList.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
+		allProductsFromCartList.add(productData);
 		
 		
 		headerSteps.clickOnWishlistButton();
 		wishlistSteps.removeProductsFromWishlist();
 		//add in wishlist product 3 & 4
 		searchSteps.navigateToProductPage(genProduct3.getSku());
-		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct3, "1", "0");
+		productData=addRegularProductsWorkflow.setBasicProductToWishlist(genProduct3, "1", "0");
+		allProductsFromWishList.add(productData);
 		searchSteps.navigateToProductPage(genProduct4.getSku());
-		addRegularProductsWorkflow.setBasicProductToWishlist(genProduct4, "1", "0");
+		productData=addRegularProductsWorkflow.setBasicProductToWishlist(genProduct4, "1", "0");
+		allProductsFromWishList.add(productData);
 		customVerifications.printErrors();
 	}
 
 	@After
 	public void saveData() {
-		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
-			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
+		for (RegularBasicProductModel cartProduct : allProductsFromCartList) {
+			MongoWriter.saveRegularBasicProductModel(cartProduct, getClass().getSimpleName() + "CART");
+		}
+		
+		for (RegularBasicProductModel wishListProduct : allProductsFromWishList) {
+			MongoWriter.saveRegularBasicProductModel(wishListProduct, getClass().getSimpleName() + "WISH");
 		}
 		
 	}

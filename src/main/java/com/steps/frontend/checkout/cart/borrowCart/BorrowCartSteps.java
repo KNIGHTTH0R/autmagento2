@@ -18,6 +18,12 @@ public class BorrowCartSteps extends AbstractSteps {
 	public List<BorrowedCartModel> grabProductsData() {
 		return borrowCartPage().grabProductsData();
 	}
+	
+	
+	@Step
+	public List<BorrowedCartModel> grabProductsDataNewFunctionality() {
+		return borrowCartPage().grabProductsDataNewFunctionality();
+	}
 
 	@Step
 	public BorrowCartTotalsModel grabTotals() {
@@ -48,5 +54,28 @@ public class BorrowCartSteps extends AbstractSteps {
 	public void verifyPresenceOfGoToCheckoutButton(boolean shouldBePresent){
 		cartPage().verifyPresenceOfGoToCheckoutButton(shouldBePresent);
 	}
+
+
+	@Step
+	public void checkBorrowCartForNewFunctionality() {
+		//from top of the page
+		borrowCartPage().checkPresenceOfTopCheckoutButton(true);
+		//from down of the page
+		borrowCartPage().verifyPresenceOfGoToCheckoutButton(true);
+		
+		borrowCartPage().checkPresenceOfAddItemsButton(false);
+		borrowCartPage().checkPresenceOfClearCartButton(false);
+		borrowCartPage().checkPresenceOfUpdateCartButton(false);
+	}
+
+
+	public void checkNoOfProductsDisplayedInMiniCart(int size) {
+		borrowCartPage().checkNoOfProductsDisplayedInMiniCart(size);
+		
+	}
+
+
+	
+
 
 }

@@ -7,6 +7,16 @@ public class BorrowProductModel {
 	private String unitPrice;
 	private String finalPrice;
 	private String ipPoints;
+	private String qty;
+
+	
+	public String getQty() {
+		return qty;
+	}
+
+	public void setQty(String qty) {
+		this.qty = qty;
+	}
 
 	public String getName() {
 		return name;

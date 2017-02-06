@@ -16,6 +16,7 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.LoungeSteps;
+import com.steps.frontend.MyContactsListSteps;
 import com.steps.frontend.ProductSteps;
 import com.steps.frontend.SearchSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
@@ -96,23 +97,35 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 	public WishlistSteps wishlistSteps;
 	@Steps
 	ContactDetailsSteps contactDetailsSteps;
+	@Steps
+	MyContactsListSteps myContactsListSteps;
+	
 	public String stylistEmail, stylistPassword;
 	public CustomerFormModel customerData;
 	public CustomerFormModel stylistData;
 	public CustomerFormModel contactData;
 	private ProductDetailedModel genProduct1;
+//	private ProductDetailedModel genProduct1;
+//	private ProductDetailedModel genProduct1;
+//	private ProductDetailedModel genProduct1;
 	
-	private static List<RegularBasicProductModel> productsList = new ArrayList<RegularBasicProductModel>();
+	private static List<RegularBasicProductModel> productsCartList = new ArrayList<RegularBasicProductModel>();
+	private static List<RegularBasicProductModel> productsWishList = new ArrayList<RegularBasicProductModel>();
+	private static List<RegularBasicProductModel> grabbedProductsWishList = new ArrayList<RegularBasicProductModel>();
 	@Before
 	public void setUp() throws Exception {
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		
-		productsList = MongoReader.grabRegularBasicProductModel("US16004RegularCustomerOrderTest" + SoapKeys.CALC);
+		productsCartList = MongoReader.grabRegularBasicProductModel("US16004RegularCustomerSetProductsInCartAndWishlist" + "CART");
+		productsWishList = MongoReader.grabRegularBasicProductModel("US16004RegularCustomerSetProductsInCartAndWishlist" + "WISH");
+		for (RegularBasicProductModel regularBasicProductModel : productsCartList) {
+			System.out.println("Prod From cart Code "+regularBasicProductModel.getProdCode());
+		}
 		
-		for (RegularBasicProductModel regularBasicProductModel : productsList) {
-			System.out.println("Prod Code "+regularBasicProductModel.getProdCode());
+		for (RegularBasicProductModel regularBasicProductModel : productsWishList) {
+			System.out.println("Prod From wish Code "+regularBasicProductModel.getProdCode());
 		}
 		
 		stylistData = MongoReader.grabCustomerFormModels("US16004StyleCoachRegistrationTest").get(0);
@@ -151,7 +164,7 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
 		backEndSteps.selectAllowedToBorrow("Ja");
-		
+	
 		
 		
 		customerRegistrationSteps.performLogin(stylistEmail,stylistPassword);
@@ -160,7 +173,7 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		
-		// verify if borrow appears in my business menu - done
+		//!!!! must be changed with Ioana version- verify if borrow appears in my business menu - done 
 		loungeSteps.checkIfBorrowLinkIsDisplayed(true);
 		loungeSteps.clickGoToBorrowCart();
 		headerSteps.clickOnWishlistButton();
@@ -169,8 +182,8 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 //		
 //		//go to product details  page and verify if add to cart is not displayed - >done
 		searchSteps.navigateToProductPage(genProduct1.getSku());
-		productSteps.verifyAddToCartButton(false);
-//		
+	//	productSteps.verifyAddToCartButton(false);
+		
 //		
 //		//must create a product -> done
 //		//add product in wish list  done
@@ -184,26 +197,60 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 		
 		
 		loungeSteps.verifyBorrowBlockStatus(ContextConstants.ALLOWED_STATUS);
-	//	loungeSteps.verifyBorrowBlockMessage(ContextConstants.ALLOWED_MESSAGE);
 		
-		//OTHER TEST: create a customer ....with 2 products in cart
-		// add 2 products in wishlist 
-		
-		//OTHER TESRT: Create a simple contact without customer id
-		
-		//go to stylist contacts page and search for first contact
+		//should be added on frontend and also in our  constants file
+		//verify top block messages 
+		//	loungeSteps.verifyBorrowBlockMessage(ContextConstants.ALLOWED_MESSAGE);
 		
 		
-		// block should be visible on contact details page 
-		//contactDetailsSteps.checkPresenceOfCustomerInfosBlock(true);
+		
+		
+		
+		//go to stylist contacts page and search for first contact  > done 
+		
+		
+		loungeSteps.goToContactsList();
+		myContactsListSteps.openContactDetailsPage(customerData.getEmailName());
+		//contactDetailsSteps.checkPresenceOfCustomerInfosBlock(true); -> obsolete ??? 
+		//contactDetailsSteps.checkBlockLinesForRegisterContact();
+		contactDetailsSteps.checkBlockLinesForContacts();
+	//	ContactDetailsSteps contactDetailsSteps;  -> validate accordion block presence\ -> done 1 for contact  3 lines from customer should be validated dire
+	// !!!!!! would be great if i will validate the block nr of lines..based on contact status - > should
+	//	MyContactsListSteps myContactsListSteps;  -> find and open contact page -> done
+		
+		//here the new code \\\\\\\\\\\\\
+		
+		
+		
+		
+		// \\\\\\\\\\\\\\\
 		
 		// check each section from block :
-		//1.cart items
-		//2.wishlist items
-		//history
 		
-		//go to stylist contacts page and search for second contact
-		//check that Customer Block is not displayed on this page;
+		//1.cart items
+		
+		//grab on a model the product from cart items section  -> in progress -> it'a bug
+		//compare with the expected list -> in progrress -> it's a bug
+		
+		
+		
+		//2.wishlist items
+		
+		//grab on a model the product from wishlist items section 
+		//compare with the expected list
+		
+		grabbedProductsWishList=contactDetailsSteps.grabWishlistItems();
+		contactDetailsSteps.validateProductWishListBlock(productsWishList, grabbedProductsWishList);
+		//history  ?? 
+		
+		//go to stylist contacts page and search for second contact  -> done 
+		//check that Customer Block is not displayed on this page;  - >done is in fact so this is displayed
+		contactDetailsSteps.clickBackToContactsbutton();
+		myContactsListSteps.openContactDetailsPage(contactData.getEmailName());
+		contactDetailsSteps.checkBlockLinesForContacts();
+		
+	//	contactDetailsSteps.checkBlockLinesForNotRegisterContact();
+		
 		
 		
 		
@@ -217,7 +264,7 @@ public class US16004BorrowFunctionalityForAllowedStylistInTopTest extends BaseTe
 		
 		
 		
-		//verify top block messages 
+		
 		// verify minicart 
 		//go to borrow cart 
 		

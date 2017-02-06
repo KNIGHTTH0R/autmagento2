@@ -37,8 +37,9 @@ public class BorrowCartWorkflows {
 
 		for (BorrowProductModel productNow : borrowedBasicProductsList) {
 			BorrowedCartModel compare = findProduct(productNow.getProdCode(), borrowedCartProductsList);
-
+			System.out.println(productNow.getProdCode() + "|" + compare.getProdCode());
 			if (compare.getName() != null) {
+				System.out.println("found");
 				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
 				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
 				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());
@@ -59,11 +60,37 @@ public class BorrowCartWorkflows {
 		Assert.assertTrue("Failure: Not all products have been validated . ", borrowedCartProductsList.size() == 0);
 
 	}
+	
+	
+	
+	@Step
+	public void validateNewProducts(String message) {
+
+		System.out.println("sunt aici ");
+		for (BorrowProductModel productNow : borrowedBasicProductsList) {
+			BorrowedCartModel compare = findProduct(productNow.getProdCode(), borrowedCartProductsList);
+
+			if (compare.getName() != null) {
+				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
+				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
+				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());
+				checkoutValidationSteps.validateIpPoints(productNow.getIpPoints(), compare.getIpPoints());
+
+			} else {
+				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
+			}
+
+			
+		}
+		Assert.assertTrue("Failure: Products list is empty. ", borrowedBasicProductsList.size() != 0);
+		Assert.assertTrue("Failure: Not all products have been validated . ", borrowedCartProductsList.size() != 0);
+
+	}
 
 	public BorrowedCartModel findProduct(String productCode, List<BorrowedCartModel> cartProducts) {
 		BorrowedCartModel result = new BorrowedCartModel();
 		theFor: for (BorrowedCartModel cartProductModel : cartProducts) {
-			if (cartProductModel.getProdCode().contains(productCode)) {
+			if (cartProductModel.getProdCode().toLowerCase().contains(productCode.toLowerCase())) {
 				result = cartProductModel;
 				break theFor;
 			}

@@ -44,11 +44,16 @@ public class US16004RegularCustomerRegistrationTest extends BaseTest {
 	@Test
 	public void us16004RegularCustomerRegistrationTest() {
 		
+//		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel,
+//				Separators.SLASH + stylistAddressModel.getFirstName() + stylistAddressModel.getLastName());
+		
 		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel,
-				Separators.SLASH + stylistAddressModel.getFirstName() + stylistAddressModel.getLastName());
+				Separators.SLASH + "dkrrywdqrdopslhx");
 		customerRegistrationSteps.verifyCustomerCreation();
 		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 		customVerifications.printErrors();
+		System.out.println("password "+dataModel.getPassword());
+		System.out.println("mail "+dataModel.getEmailName());
 	}
 
 	@After
