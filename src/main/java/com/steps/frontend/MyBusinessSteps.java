@@ -53,5 +53,10 @@ public class MyBusinessSteps extends AbstractSteps {
 	public void verifyKoboVoucherIsActive() {
 		myBusinessPage().verifyKoboVoucherIsActive();
 	}
+	
+	@Step
+	public void checkIfBorrowCartLinkIsDisplayed(boolean isDisplayed) {
+		myBusinessPage().checkIfBorrowCartLinkIsDisplayed(isDisplayed);
+	}
 
 }

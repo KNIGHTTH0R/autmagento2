@@ -33,6 +33,9 @@ public class MyBusinessPage extends AbstractPage {
 
 	@FindBy(css = "#confirmCancelCbSubscriptionModal form button[type='submit']")
 	private WebElementFacade confirmCancelSubstription;
+	
+	@FindBy(css = "#kobo-cancel div.col-2.col li:nth-child(1) a")
+	private WebElementFacade borrowCartLink;
 
 	public void verifyThatNumberOfLinksAreEqualTo(String expectedNoOflinks) {
 		Assert.assertTrue("", getDriver().findElements(By.cssSelector("#kobo-cancel div.col-3.col ul.link-list li")).size() == Integer.parseInt(expectedNoOflinks));
@@ -81,5 +84,36 @@ public class MyBusinessPage extends AbstractPage {
 		System.out.println(voucherlargeContainer.getText());
 		Assert.assertTrue("The Kobo voucher active message is not found", voucherlargeContainer.getText().contains(ContextConstants.SUBSCRIPTION_KOBO_ACTIVE));
 	}
+	
+public void checkIfBorrowCartLinkIsDisplayed(boolean isDisplayed){
+		
+	    element(borrowCartLink).waitUntilVisible();
+	
+	    if (isDisplayed)
+			Assert.assertTrue("The Borrow Link should be present and it's not !!!",
+					toAsciiString(borrowCartLink.getText()).contains("Schmuckstucke Ausleihen"));
 
+		else
+			Assert.assertTrue("The Borrow Link is present and it shouldn't !!!",
+					!toAsciiString(borrowCartLink.getText()).contains("Schmuckstucke Ausleihen"));
+
+}
+
+
+public static String toAsciiString(String str) {
+    if (str == null) {
+        return null;
+    }
+    StringBuilder sb = new StringBuilder();
+    for (int index = 0; index < str.length(); index++) {
+        char c = str.charAt(index);
+        int pos = ContextConstants.UNICODE.indexOf(c);
+        if (pos > -1)
+            sb.append(ContextConstants.PLAIN_ASCII.charAt(pos));
+        else {
+            sb.append(c);
+        }
+    }
+    return sb.toString();
+}
 }

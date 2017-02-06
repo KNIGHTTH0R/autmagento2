@@ -26,6 +26,8 @@ import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.LoungeSteps;
+import com.steps.frontend.MyBusinessSteps;
+import com.steps.frontend.ShopSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
@@ -88,6 +90,10 @@ public class US16003BorrowProcessIsDisabledTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public BorrowSystemConfigurationSteps borrowSystemConfigurationSteps;
+	@Steps
+	public MyBusinessSteps myBusinessSteps;
+	@Steps
+	public ShopSteps shopSteps;
 	
 	
 	private String username, password;
@@ -160,6 +166,11 @@ public class US16003BorrowProcessIsDisabledTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.checkIfBorrowLinkIsDisplayed(false);
 		loungeSteps.checkIfBorrowBoxIsdisplayed(false);
+		loungeSteps.goToMyBusiness();
+		myBusinessSteps.checkIfBorrowCartLinkIsDisplayed(false);
+		
+		headerSteps.goToShop();
+		shopSteps.checkIfBorrowLinkIsdisplayed(false);
 		
 		
 	}

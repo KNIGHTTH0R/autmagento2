@@ -56,6 +56,9 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = "div.switcher-wrapper")
 	private WebElement websiteContainer;
+	
+	@FindBy(css = "div.categories>ul.clearfix li:first-child a")
+	private WebElement shopButton;
 
 	public void selectLanguage(String language) {
 		element(websiteContainer).waitUntilVisible();
@@ -147,6 +150,11 @@ public class HeaderPage extends AbstractPage {
 
 	public boolean succesfullLogin() {
 		return succesLoginContainer.getText().contains("¡BIENVENIDO,") || succesLoginContainer.getText().contains("HI,");
+	}
+	
+	public void clickShop() {
+		element(shopButton).waitUntilVisible();
+		shopButton.click();
 	}
 
 }
