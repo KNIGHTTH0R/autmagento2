@@ -1,4 +1,4 @@
-package com.tests.uss16.us16003;
+package com.tests.uss16.us16005;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,10 +1,4 @@
-package com.tests.uss16.us16005;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+package com.tests.uss16.us16003DataPreparation;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +15,6 @@ import com.steps.frontend.UpdatePartySteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.constants.SoapKeys;
-import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -38,7 +31,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US10.6 Order for Customer as Party host and Validate Party Wishlist", type = "Scenarios")
 @Story(Application.StyleParty.US10_6.class)
 @RunWith(SerenityRunner.class)
-public class US16005CreatePartyWithNewContactHostTest extends BaseTest {
+public class US16003CreatePartyWithNewContactHostTest extends BaseTest {
 
 	@Steps
 	public PartyDetailsSteps partyDetailsSteps;
@@ -62,43 +55,44 @@ public class US16005CreatePartyWithNewContactHostTest extends BaseTest {
 
 	private CustomerFormModel customerData;
 	private AddressModel addressData;
+	private CustomerFormModel stylistRegistrationData;
+	
 
+	
+
+	
 	@Before
 	public void setUp() throws Exception {
 
 		customerData = new CustomerFormModel();
 		addressData = new AddressModel();
 
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss16" + File.separator + "us16005.properties");
-			prop.load(input);
-			username = prop.getProperty("username");
-			password = prop.getProperty("password");
-
-			customerEmail = prop.getProperty("customerUsername");
-			customerName = prop.getProperty("customerName");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		
+		//stylist credentials
+		int size = MongoReader.grabCustomerFormModels("US16003StyleCoachRegistrationTest").size();
+		if (size > 0) {
+			stylistRegistrationData = MongoReader.grabCustomerFormModels("US16003StyleCoachRegistrationTest").get(0);
+		} else
+			System.out.println("The database has no entries");
+	
+		username=stylistRegistrationData.getEmailName();
+		password=stylistRegistrationData.getPassword();
+		
+		//customer credentials
+		int size2 = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").size();
+		if (size2 > 0) {
+			customerEmail = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getEmailName();
+			customerName=MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getFirstName();
+			
+			System.out.println("customer name" +customerName );
+		} else
+			System.out.println("The database has no entries");
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 
 	@Test
-	public void us16005CreatePartyWithNewContactHostTest() {
+	public void us16003CreatePartyWithNewContactHostTest() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
@@ -111,7 +105,7 @@ public class US16005CreatePartyWithNewContactHostTest extends BaseTest {
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		partyDetailsSteps.verifyPlannedPartyAvailableActions();
 		partyDetailsSteps.sendInvitationToGest(customerName, customerEmail);
-		partyDetailsSteps.verifyThatGuestIsInvited(customerName);
+		partyDetailsSteps.verifyGuestIsInvited(customerName);
 		updatePartySteps.updatePartyDateAndHour();
 
 	}

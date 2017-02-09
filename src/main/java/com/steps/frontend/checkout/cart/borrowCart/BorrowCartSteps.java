@@ -47,6 +47,8 @@ public class BorrowCartSteps extends AbstractSteps {
 	
 	@Step
 	public void verifyErrorMessageInCart(String message) {
+		System.out.println("error" + cartPage().getCartErrorMessage());
+		System.out.println("message"+ message);
 		Assert.assertTrue("The error message is not found !!!", cartPage().getCartErrorMessage().contains(message));
 	}
 	
@@ -57,12 +59,13 @@ public class BorrowCartSteps extends AbstractSteps {
 
 
 	@Step
-	public void checkBorrowCartForNewFunctionality() {
+	public void checkBorrowCartForNewFunctionality(boolean topCheckout,boolean buttomCheckout) {
 		//from top of the page
-		borrowCartPage().checkPresenceOfTopCheckoutButton(true);
+		borrowCartPage().checkPresenceOfTopCheckoutButton(topCheckout);
+		System.out.println("from top of the page");
 		//from down of the page
-		borrowCartPage().verifyPresenceOfGoToCheckoutButton(true);
-		
+		borrowCartPage().checkPresenceOfButtomCheckoutButton(buttomCheckout);
+		System.out.println("from down of the page");
 		borrowCartPage().checkPresenceOfAddItemsButton(false);
 		borrowCartPage().checkPresenceOfClearCartButton(false);
 		borrowCartPage().checkPresenceOfUpdateCartButton(false);

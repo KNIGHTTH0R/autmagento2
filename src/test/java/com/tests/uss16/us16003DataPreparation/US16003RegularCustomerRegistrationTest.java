@@ -1,4 +1,4 @@
-package com.tests.uss16.us16004;
+package com.tests.uss16.us16003DataPreparation;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +21,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
-public class US16004RegularCustomerRegistrationTest extends BaseTest {
+public class US16003RegularCustomerRegistrationTest extends BaseTest {
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
 	@Steps
@@ -35,20 +35,19 @@ public class US16004RegularCustomerRegistrationTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		dateModel = new DateModel();
-		stylistAddressModel = MongoReader.grabCustomerFormModels("US16004StyleCoachRegistrationTest").get(0);
+		stylistAddressModel = MongoReader.grabCustomerFormModels("US16003StyleCoachRegistrationTest").get(0);
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us16004RegularCustomerRegistrationTest() {
-		
-//		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel,
-//				Separators.SLASH + stylistAddressModel.getFirstName() + stylistAddressModel.getLastName());
+	public void us16003RegularCustomerRegistrationTest() {
 		
 		customerRegistrationSteps.fillCreateCustomerFormUnderContext(dataModel, addressModel,
-				Separators.SLASH + "dkrrywdqrdopslhx");
+				Separators.SLASH + stylistAddressModel.getFirstName() + stylistAddressModel.getLastName());
+		
+	
 		customerRegistrationSteps.verifyCustomerCreation();
 		dateModel.setDate(DateUtils.getCurrentDate("dd.MM.YYYY"));
 		customVerifications.printErrors();

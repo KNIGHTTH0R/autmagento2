@@ -56,4 +56,13 @@ public class EmailClientSteps extends AbstractSteps {
 
 	}
 
+	@Step
+	public void confirmPartyInvitation(String email, String title) {
+		mailPage.openEmail(email, title);
+		mailPage.clickPartyConfirmationLink();
+
+		
+		
+	}
+
 }

@@ -90,5 +90,10 @@ public class LoungeSteps extends AbstractSteps {
 		
 	}
 
+	public void goToMyBusinessFromCart() {
+		loungePage().goToMyBusinessFromCart();
+		
+	}
+
 	
 }

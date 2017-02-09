@@ -43,9 +43,15 @@ public class ContactDetailsPage extends AbstractPage {
 	@FindBy(css= ".col-left.sidebar .white-button")
 	private WebElement backToContactsBtn;
 	
-	@FindBy(css= ".customer-infos-accordion.ui-accordion .customer-wishlist-items")
-	private WebElement wishlistItems;
+	@FindBy(css= ".customer-infos-accordion.ui-accordion .ui-accordion-header:nth-child(3)")
+	private WebElement wishlistCounter;
 	
+	@FindBy(css= ".customer-infos-accordion.ui-accordion .ui-accordion-header:nth-child(3) span")
+	private WebElement productListCounter;
+	
+	
+	@FindBy(css= "")
+	private WebElement wishlistItems;
 	
 	
 	public ContactModel grabContactDetails() {
@@ -201,15 +207,17 @@ public class ContactDetailsPage extends AbstractPage {
 	}
 
 	public void checkBlockLinesForContacts() {
-		String x="";
-//		3 - stylist
-//		1 - contact 
-//		1- regular 
+	/*if lista1 contains:
+	3 -> stylist
+	1 -> contact 
+	1-> regular */
+		
+		//lines that should be contained by the accordion menu
 		int lineNo;
 		List<WebElement> lista1=getDriver().findElements(By.cssSelector(".col-2 .info-box span"));
 	
 		if(lista1.size()==1){
-			if(x.contains("/")){
+			if(lista1.get(0).getText().contains("Registrierter User /")){
 				lineNo=3;
 				checkBlockLinesForRegisterContact(lineNo);
 			}else{
@@ -221,6 +229,14 @@ public class ContactDetailsPage extends AbstractPage {
 			checkBlockLinesForRegisterContact(lineNo);
 		}
 		
+		
+	}
+
+	public void validateWishlistCounter(int size) {
+		//replace all digits from a string 
+		int counter=Integer.parseInt(wishlistCounter.getText().replaceAll("\\D+",""));
+		
+		Assert.assertTrue("The Wishlist does not contains correct no of products!",size==counter);
 		
 	}
 

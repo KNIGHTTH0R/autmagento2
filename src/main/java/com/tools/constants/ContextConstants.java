@@ -148,7 +148,10 @@ public class ContextConstants {
 	//new Borrow Process 
 	public static final String ALLOWED_STATUS = MongoReader.getDictionaryItem("ALLOWED_STATUS");
 	public static final String WAITING_IN_RETURN  = MongoReader.getDictionaryItem("WAITING_IN_RETURN");
-	public static final String NOT_ELIGIBLE  = MongoReader.getDictionaryItem("NOT_ELIGIBLE ");
-	public static final String ALLOWED_MESSAGE = MongoReader.getDictionaryItem("ALLOWED_MESSAGE ");
-	
+	public static final String NOT_ELIGIBLE  = MongoReader.getDictionaryItem("NOT_ELIGIBLE");
+	public static final String ALLOWED_MESSAGE = MongoReader.getDictionaryItem("ALLOWED_MESSAGE");
+	public static final String WAITING_MESSAGE = MongoReader.getDictionaryItem("WAITING_MESSAGE");
+	public static final String NOT_ELIGIBLE_MESSAGE = MongoReader.getDictionaryItem("NOT_ELIGIBLE_MESSAGE");
+	public static final String NOT_AVAILABLE_CART= MongoReader.getDictionaryItem("NOT_AVAILABLE_CART");
+	public static final String CONTACT_WISHLIST_NO_ITEMS_MESSAGE = MongoReader.getDictionaryItem("CONTACT_WISHLIST_NO_ITEMS_MESSAGE");
 }

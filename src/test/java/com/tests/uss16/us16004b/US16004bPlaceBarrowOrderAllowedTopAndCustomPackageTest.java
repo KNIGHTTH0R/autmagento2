@@ -1,12 +1,14 @@
-package com.tests.uss16.us16004;
+package com.tests.uss16.us16004b;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -23,14 +25,15 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.borrowCart.BorrowCartCalculator;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.BorrowProductModel;
-import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.BorrowDataGrabber;
 import com.tools.datahandler.DataGrabber;
 import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
@@ -41,7 +44,7 @@ import net.thucydides.core.annotations.Steps;
 
 
 @RunWith(SerenityRunner.class)
-public class US16004PlaceBarrowOrderAllowedStylistInTopTest extends BaseTest {
+public class US16004bPlaceBarrowOrderAllowedTopAndCustomPackageTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -81,7 +84,6 @@ public class US16004PlaceBarrowOrderAllowedStylistInTopTest extends BaseTest {
 	private static String billingAddress;
 	private static String shippingValue;
 	private static String taxClass;
-	private CreditCardModel creditCardData = new CreditCardModel();
 
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 	
@@ -100,8 +102,8 @@ public class US16004PlaceBarrowOrderAllowedStylistInTopTest extends BaseTest {
 		
 	//	InputStream input = null;
 		
-		stylistData = MongoReader.grabCustomerFormModels("US16004StyleCoachRegistrationTest").get(0);
-		addressModel=MongoReader.grabAddressModels("US16004StyleCoachRegistrationTest").get(0);
+		stylistData = MongoReader.grabCustomerFormModels("US16003StyleCoachRegistrationTest").get(0);
+		addressModel=MongoReader.grabAddressModels("US16003StyleCoachRegistrationTest").get(0);
 		
 		username = stylistData.getEmailName();
 		password = stylistData.getPassword();
@@ -111,11 +113,11 @@ public class US16004PlaceBarrowOrderAllowedStylistInTopTest extends BaseTest {
 		shippingValue = "3.90";
 		taxClass = "19";
 		
-		
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 	}
 	
 	@Test
-	public void us16004PlaceBarrowOrderAllowedStylistInTopTest() {
+	public void us16004bPlaceBarrowOrderAllowedTopAndCustomPackageTest() {
 		
 		customerRegistrationSteps.performLogin(username,password);
 		if (!headerSteps.succesfullLogin()) {
@@ -167,9 +169,10 @@ public class US16004PlaceBarrowOrderAllowedStylistInTopTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+		paymentSteps.payWithBankTransfer();
+		
 		confirmationSteps.grabProductsList();
 		confirmationSteps.grabConfirmationTotals();
 		confirmationSteps.grabBillingData();
@@ -199,11 +202,15 @@ public class US16004PlaceBarrowOrderAllowedStylistInTopTest extends BaseTest {
 		//	loungeSteps.verifyBorrowBlockMessage(ContextConstants.ALLOWED_MESSAGE);
 		
 		loungeSteps.clickGoToBorrowCart();
-		borrowCartSteps.verifyErrorMessageInCart("You cannot borrow a new package until you return the already borrowed one.");
+		borrowCartSteps.verifyErrorMessageInCart(ContextConstants.WAITING_MESSAGE);
 		
 		
 	}
+	@After
+	public void saveData() {
+	MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	
+	}
 	
 	
 }

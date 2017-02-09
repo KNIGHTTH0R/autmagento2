@@ -1,4 +1,4 @@
-package com.tests.uss16.us16004;
+package com.tests.uss16.us16003DataPreparation;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,7 +26,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
-public class US16004StyleCoachRegistrationTest extends BaseTest {
+public class US16003StyleCoachRegistrationTest extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -60,7 +60,7 @@ public class US16004StyleCoachRegistrationTest extends BaseTest {
 	}
 
 	@Test
-	public void us16004StyleCoachRegistrationTest() {
+	public void us16003StyleCoachRegistrationTest() {
 		headerSteps.navigateToRegisterForm();
 		stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
 		
@@ -79,6 +79,7 @@ public class US16004StyleCoachRegistrationTest extends BaseTest {
 	@After
 	public void saveData() {
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
+		MongoWriter.saveAddressModel(customerFormAddress, getClass().getSimpleName());
 	}
 }
 

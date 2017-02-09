@@ -384,6 +384,13 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().selectAllowedToBorrow(allowedToBorrowOption);
 		customerDetailsHomePage().saveAndContinueEdit();
 	}
+
+	public void selectTopStatus(String topStatus) {
+		customerDetailsHomePage().clickOnStylecoachProfileTab();
+		customerDetailsHomePage().selectTopStatus(topStatus);
+		customerDetailsHomePage().saveAndContinueEdit();
+		
+	}
 	
 	
 	

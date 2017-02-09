@@ -1,6 +1,7 @@
 package com.steps.frontend;
 
 import java.text.ParseException;
+import java.util.List;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
@@ -8,6 +9,7 @@ import net.thucydides.core.annotations.StepGroup;
 import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.requirements.AbstractSteps;
 
 public class PartyDetailsSteps extends AbstractSteps {
@@ -175,6 +177,19 @@ public class PartyDetailsSteps extends AbstractSteps {
 	@Step
 	public void checkIfAddToBorrowCartButtonIsDisplayed(boolean isDispalyed) {
 		partyDetailsPage().checkIfAddToBorrowCartButtonIsDisplayed(isDispalyed);
+	}
+
+	@Step
+	public void verifyGuestIsInvited(String customerName) {
+		// TODO Auto-generated method stub
+		partyDetailsPage().verifyGuestIsInvited(customerName);
+	}
+
+	@Step
+	public void checkWishlistSection(List<RegularBasicProductModel> productsWishList) {
+	
+		partyDetailsPage().checkWishlistSection(productsWishList);
+		
 	}
 	
 	

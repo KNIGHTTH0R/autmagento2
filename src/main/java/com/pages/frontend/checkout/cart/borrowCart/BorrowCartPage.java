@@ -135,9 +135,9 @@ public class BorrowCartPage extends AbstractPage {
 		System.out.println(xxxProduct);
 		BorrowDataGrabber.grabbedBorrowCartProductsList = resultList;
 
-		if(resultList.size()>2  ){
-			Assert.assertTrue("The cart does not contains correct no of items", true);
-		}
+		
+		Assert.assertTrue("The cart does not contains correct no of items", resultList.size()==2 );
+		
 		
 		return resultList;
 	}
@@ -231,10 +231,10 @@ public class BorrowCartPage extends AbstractPage {
 	public void checkPresenceOfAddItemsButton(boolean isDisplayed) {
 		if (isDisplayed)
 			Assert.assertTrue("The Add items to shopping bag button should be visible and it's not!",
-					getDriver().findElement(By.cssSelector(".page-title a span")).isDisplayed());
+					getDriver().findElement(By.cssSelector("#add-items-button span")).isDisplayed());
 		else
 			Assert.assertTrue("The Add items to shopping bag button is visible and it shouldn't !",
-					getDriver().findElements(By.cssSelector(".page-title a span")).size() == 0);
+					getDriver().findElements(By.cssSelector("#add-items-button span")).size() == 0);
 
 	}
 
@@ -243,10 +243,22 @@ public class BorrowCartPage extends AbstractPage {
 
 		if (isDisplayed)
 			Assert.assertTrue("The Proceed to Checkout(from top) button should be visible and it's not!",
-					getDriver().findElement(By.cssSelector(".page-title button[title*=Checkout]")).isDisplayed());
+					getDriver().findElement(By.cssSelector(".page-title button")).isDisplayed());
 		else
 			Assert.assertTrue("The Proceed to Checkout(from top) button is visible and it shouldn't !",
-					getDriver().findElements(By.cssSelector(".page-title button[title*=Checkout]")).size() == 0);
+					getDriver().findElements(By.cssSelector(".checkout-types button")).size() == 0);
+
+	}
+	
+	public void checkPresenceOfButtomCheckoutButton(boolean isDisplayed) {
+		// TODO Auto-generated method stub
+
+		if (isDisplayed)
+			Assert.assertTrue("The Proceed to Checkout(from buttom) button should be visible and it's not!",
+					getDriver().findElement(By.cssSelector(".checkout-types li button")).isDisplayed());
+		else
+			Assert.assertTrue("The Proceed to Checkout(from buttom) button is visible and it shouldn't !",
+					getDriver().findElements(By.cssSelector(".checkout-types li button")).size() == 0);
 
 	}
 

@@ -72,6 +72,8 @@ public class BillingFormPage extends AbstractPage {
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
 				ContextConstants.LOADING_MESSAGE));
 	}
+	
+
 
 	public void inputFirstName(String firstName) {
 		element(firstNameInput).waitUntilVisible();
@@ -164,4 +166,5 @@ public class BillingFormPage extends AbstractPage {
 				zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
 	}
 
+	
 }

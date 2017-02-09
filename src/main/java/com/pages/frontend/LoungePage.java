@@ -23,8 +23,9 @@ public class LoungePage extends AbstractPage {
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3)")
 	private WebElement meinBusinessButton;
 
-	@FindBy(css = "ul.main-nav.type-1.clearfix > li:nth-child(5)")
-	private WebElement meinBusinessButtonFromLonge;
+	@FindBy(css = "ul.main-nav.type-1.clearfix > li:nth-child(6)")
+	private WebElement meinBusinessButtonFromFive;
+	
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) a")
 	private WebElement meinBusinessLink;
 
@@ -124,6 +125,11 @@ public class LoungePage extends AbstractPage {
 		element(meinBusinessButton).waitUntilVisible();
 		meinBusinessLink.click();
 	}
+	
+	public void goToMyBusinessFromCart() {
+		element(meinBusinessButtonFromFive).waitUntilVisible();
+		meinBusinessButtonFromFive.click();
+	}
 
 	public void clickCreateParty() {
 
@@ -187,7 +193,7 @@ public class LoungePage extends AbstractPage {
 
 		Actions builder = new Actions(getDriver());
 
-		builder.moveToElement(meinBusinessButtonFromLonge).build().perform();
+		builder.moveToElement(meinBusinessButtonFromFive).build().perform();
 		builder.moveToElement(loanedLink).build().perform();
 
 		element(borrowCartLink).waitUntilVisible();

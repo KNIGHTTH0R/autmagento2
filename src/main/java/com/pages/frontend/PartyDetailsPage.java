@@ -1,6 +1,7 @@
 package com.pages.frontend;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.ClosedPartyPerformanceModel;
+import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.DateUtils;
@@ -411,6 +413,19 @@ public class PartyDetailsPage extends AbstractPage {
 		Assert.assertTrue("The guest was not found in invites list", found);
 	}
 
+	public void verifyGuestIsInvited(String name) {
+		element(invitationsList).waitUntilVisible();
+		List<WebElement> invitesList = invitationsList.findElements(By.cssSelector("tbody tr"));
+		boolean found = false;
+		for (WebElement invite : invitesList) {
+			if (invite.findElement(By.cssSelector("td:first-child")).getText().contains(name)) {
+				found = true;
+			}
+
+		}
+		Assert.assertTrue("The guest was not found in invites list", found);
+	}
+
 	public void verifyThatOrderIsInTheOrdersList(String order) {
 		element(ordersList).waitUntilVisible();
 		List<WebElement> invitesList = ordersList.findElements(By.cssSelector("tbody tr"));
@@ -454,22 +469,45 @@ public class PartyDetailsPage extends AbstractPage {
 
 		}
 	}
-	
+
 	public void checkIfAddToBorrowCartButtonIsDisplayed(boolean isDisplayed) {
 
-		//element(addToBorrowCart).waitUntilVisible();
+		// element(addToBorrowCart).waitUntilVisible();
 
-      List <WebElement> partyButton=getDriver().findElements(By.cssSelector("div#wishlistGuestsFormContainer form button[class='button blue-button right clear'] span"));
-	//	System.out.println("partyyy"+partyButton.get(0).getText());
-      
-      if (isDisplayed)
+		List<WebElement> partyButton = getDriver().findElements(By.cssSelector(
+				"div#wishlistGuestsFormContainer form button[class='button blue-button right clear'] span"));
+		// System.out.println("partyyy"+partyButton.get(0).getText());
+
+		if (isDisplayed)
 			Assert.assertTrue("The Add to borrow cart button should be present and it's not !!!",
 					partyButton.get(0).getText().contains("IN DEN LEIHWARENKORB"));
-		
 
 		else
-//			Assert.assertTrue("The Add to borrow cart button is present and it shouldn't !!!",
-//					!partyButton.get(0).getText().contains("IN DEN LEIHWARENKORB"));
-			Assert.assertTrue("The Add to borrow cart button is present and it shouldn't !!!",partyButton.isEmpty());
+			// Assert.assertTrue("The Add to borrow cart button is present and
+			// it shouldn't !!!",
+			// !partyButton.get(0).getText().contains("IN DEN LEIHWARENKORB"));
+			Assert.assertTrue("The Add to borrow cart button is present and it shouldn't !!!", partyButton.isEmpty());
+	}
+
+	public void checkWishlistSection(List<RegularBasicProductModel> productsWishList) {
+		List<WebElement> result = new ArrayList<WebElement>();
+		System.out.println("list size " +productsWishList.size());
+		List<WebElement> wishlistProductsList = getDriver()
+				.findElements(By.cssSelector("div.customer-list-container.clearfix .mini-box img"));
+
+		for (int i = 0; i < productsWishList.size(); i++) {
+			for (WebElement item : wishlistProductsList) {
+				System.out.println("product "+productsWishList.get(i).getName());
+				System.out.println("grabbed product " + item.getAttribute("alt"));
+				if (item.getAttribute("alt").contains(productsWishList.get(i).getName())) {
+					result.add(item);
+					break;
+				}
+			}
+
+		}
+		System.out.println("list size " +productsWishList.size());
+		System.out.println("grabbed size " + result.size());
+		Assert.assertTrue("Not all products have been validated ", result.size() == productsWishList.size());
 	}
 }

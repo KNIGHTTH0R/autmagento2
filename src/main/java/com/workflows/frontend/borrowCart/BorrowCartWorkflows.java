@@ -34,9 +34,16 @@ public class BorrowCartWorkflows {
 
 	@Step
 	public void validateProducts(String message) {
-
+		for (BorrowedCartModel borrowProductModel : borrowedCartProductsList) {
+			System.out.println("grabbed prod" + borrowProductModel.getProdCode());
+		}
+		
+		for(BorrowProductModel x:borrowedBasicProductsList){
+			System.out.println("my prod " + x.getProdCode());
+		}
 		for (BorrowProductModel productNow : borrowedBasicProductsList) {
 			BorrowedCartModel compare = findProduct(productNow.getProdCode(), borrowedCartProductsList);
+			
 			System.out.println(productNow.getProdCode() + "|" + compare.getProdCode());
 			if (compare.getName() != null) {
 				System.out.println("found");
@@ -61,31 +68,6 @@ public class BorrowCartWorkflows {
 
 	}
 	
-	
-	
-	@Step
-	public void validateNewProducts(String message) {
-
-		System.out.println("sunt aici ");
-		for (BorrowProductModel productNow : borrowedBasicProductsList) {
-			BorrowedCartModel compare = findProduct(productNow.getProdCode(), borrowedCartProductsList);
-
-			if (compare.getName() != null) {
-				checkoutValidationSteps.matchName(productNow.getName(), compare.getName());
-				checkoutValidationSteps.validateMatchPrice(productNow.getUnitPrice(), compare.getUnitPrice());
-				checkoutValidationSteps.validateMatchFinalPrice(productNow.getFinalPrice(), compare.getFinalPrice());
-				checkoutValidationSteps.validateIpPoints(productNow.getIpPoints(), compare.getIpPoints());
-
-			} else {
-				Assert.assertTrue("Failure: Could not validate all products in the list", compare != null);
-			}
-
-			
-		}
-		Assert.assertTrue("Failure: Products list is empty. ", borrowedBasicProductsList.size() != 0);
-		Assert.assertTrue("Failure: Not all products have been validated . ", borrowedCartProductsList.size() != 0);
-
-	}
 
 	public BorrowedCartModel findProduct(String productCode, List<BorrowedCartModel> cartProducts) {
 		BorrowedCartModel result = new BorrowedCartModel();

@@ -73,12 +73,13 @@ public class ContactDetailsSteps extends AbstractSteps {
 	@Steps
 	ContactDetailsValidationSteps itemValidation;
 
+	@Step
 	public void validateProductWishListBlock(List<RegularBasicProductModel> productsWishList,
 			List<RegularBasicProductModel> grabbedproductsWishList) {
 	
 		Assert.assertTrue("Failure: The list size are not equal", productsWishList.size() == grabbedproductsWishList.size());
+	
 		for (RegularBasicProductModel customerItem : productsWishList) {
-			System.out.println("aici ??");
 			RegularBasicProductModel contactItem = itemValidation.findWishlistItems(customerItem.getProdCode(), grabbedproductsWishList);
 			if (contactItem.getProdCode() != null) {
 
@@ -97,8 +98,15 @@ public class ContactDetailsSteps extends AbstractSteps {
 	
 	}
 
+	@Step
 	public void checkBlockLinesForContacts() {
 		contactDetailsPage().checkBlockLinesForContacts();
+		
+	}
+	
+	@Step
+	public void validateWishlistCounter(int size) {
+		contactDetailsPage().validateWishlistCounter(size);
 		
 	}
 	

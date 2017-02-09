@@ -1,12 +1,7 @@
-package com.tests.uss16.us16004;
+package com.tests.uss16.us16003DataPreparation;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.junit.After;
 import org.junit.Before;
@@ -32,16 +27,12 @@ import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
-import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
-import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
-import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
-import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
@@ -49,7 +40,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
-public class US16004RegularCustomerSetProductsInCartAndWishlist extends BaseTest {
+public class US16003RegularCustomerSetProductsInCartAndWishlist extends BaseTest {
 	@Steps
 	public HeaderSteps headerSteps;
 	@Steps
@@ -86,11 +77,6 @@ public class US16004RegularCustomerSetProductsInCartAndWishlist extends BaseTest
 	public WishlistSteps wishlistSteps;
 
 	
-	private String discountClass;
-	private String billingAddress;
-	private String shippingValue;
-	private String voucherCode;
-	private String voucherValue;
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
@@ -123,29 +109,22 @@ public class US16004RegularCustomerSetProductsInCartAndWishlist extends BaseTest
 		genProduct4.setPrice("15.00");
 		MagentoProductCalls.createApiProduct(genProduct4);
 		
-		
-		
-		// createdProductsList =
-		// MongoReader.grabProductDetailedModel("CreateProductsTest" +
-		// SoapKeys.GRAB);
-		//
-		// genProduct1 = createdProductsList.get(1);
-		// genProduct2 = createdProductsList.get(0);
-		// genProduct3 = createdProductsList.get(6);
 
-		int size = MongoReader.grabCustomerFormModels("US16004RegularCustomerRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").size();
 		if (size > 0) {
-			customerEmail = MongoReader.grabCustomerFormModels("US16004RegularCustomerRegistrationTest").get(0).getEmailName();
-			customerPassword=MongoReader.grabCustomerFormModels("US16004RegularCustomerRegistrationTest").get(0).getPassword();
+			customerEmail = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getEmailName();
+			customerPassword=MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getPassword();
 		} else
 			System.out.println("The database has no entries");
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "CART");
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "WISH");
 	}
 
 	@Test
-	public void us16004RegularCustomerSetProductsInCartAndWishlist() {
+	public void us16003RegularCustomerSetProductsInCartAndWishlist() {
 		customerRegistrationSteps.performLogin(customerEmail, customerPassword);
 	//	customerRegistrationSteps.performLogin("emilian.melian@evozon.com", "emilian1");
 		if (!headerSteps.succesfullLogin()) {

@@ -127,6 +127,11 @@ public class CustomerDetailsPage extends AbstractPage {
 	
 	@FindBy(id="_stylistprofileallowed_to_borrow")
 	private WebElement allowedToBorrow;
+	
+	
+	@FindBy(id="_stylistprofiletake_of_phase_status")
+	private WebElement topStatus;
+	
 
 	public void addNewAddress() {
 		evaluateJavascript("jQuery.noConflict();");
@@ -481,5 +486,11 @@ public class CustomerDetailsPage extends AbstractPage {
 	public void selectAllowedToBorrow(String allowedToBorrowOption){
 		element(allowedToBorrow).waitUntilVisible();
 		element(allowedToBorrow).selectByVisibleText(allowedToBorrowOption);
+	}
+
+	public void selectTopStatus(String status) {
+		element(topStatus).waitUntilVisible();
+		element(topStatus).selectByVisibleText(status);
+		
 	}
 }

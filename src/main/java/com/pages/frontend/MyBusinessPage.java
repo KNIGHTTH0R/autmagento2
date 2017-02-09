@@ -1,5 +1,6 @@
 package com.pages.frontend;
 
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
@@ -88,9 +89,12 @@ public class MyBusinessPage extends AbstractPage {
 public void checkIfBorrowCartLinkIsDisplayed(boolean isDisplayed){
 		
 	    element(borrowCartLink).waitUntilVisible();
-	
+	    String text=toAsciiString(borrowCartLink.getText());
+	    System.out.println("text: " +text);
+	    System.out.println("text2: Schmuckstucke Ausleihen");
 	    if (isDisplayed)
 			Assert.assertTrue("The Borrow Link should be present and it's not !!!",
+					
 					toAsciiString(borrowCartLink.getText()).contains("Schmuckstucke Ausleihen"));
 
 		else

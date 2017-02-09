@@ -1,4 +1,4 @@
-package com.tests.uss16.us16004;
+package com.tests.uss16.us16003DataPreparation;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +21,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
-public class US16004AddNewContactToStyleCoachTest extends BaseTest {
+public class US16003AddNewContactToStyleCoachTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -44,9 +44,9 @@ public class US16004AddNewContactToStyleCoachTest extends BaseTest {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 
-		int size = MongoReader.grabCustomerFormModels("US16004StyleCoachRegistrationTest").size();
+		int size = MongoReader.grabCustomerFormModels("US16003StyleCoachRegistrationTest").size();
 		if (size > 0) {
-			stylistRegistrationData = MongoReader.grabCustomerFormModels("US16004StyleCoachRegistrationTest").get(0);
+			stylistRegistrationData = MongoReader.grabCustomerFormModels("US16003StyleCoachRegistrationTest").get(0);
 		} else
 			System.out.println("The database has no entries");
 
@@ -54,13 +54,12 @@ public class US16004AddNewContactToStyleCoachTest extends BaseTest {
 	}
 
 	@Test
-	public void us17001AddNewContactToStyleCoachTest() {
+	public void us16003AddNewContactToStyleCoachTest() {
 
-//		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(),
-//				stylistRegistrationData.getPassword());
+		customerRegistrationSteps.performLogin(stylistRegistrationData.getEmailName(),
+				stylistRegistrationData.getPassword());
 		
-		customerRegistrationSteps.performLogin("emilian@yopmail.com",
-				"emilian1");
+	//	customerRegistrationSteps.performLogin("emilian@yopmail.com",	"emilian1");
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
