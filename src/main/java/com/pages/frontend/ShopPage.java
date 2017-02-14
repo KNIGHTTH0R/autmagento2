@@ -45,6 +45,9 @@ public class ShopPage extends AbstractPage {
 		else
 			Assert.assertTrue("The Borrow Link is present and it shouldn't !!!",
 					!toAsciiString(borrowCartLink.getText()).contains("SCHMUCKSTUCKE AUSLEIHEN"));
+	    
+	    
+	    waitABit(3000);
 	}
 
      

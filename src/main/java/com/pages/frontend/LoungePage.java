@@ -301,11 +301,11 @@ public void checkIfBorrowBoxIsDisplayed(boolean isDisplayed){
 	
 		if (isDisplayed)
 			Assert.assertTrue("The Borrow box should be present and it's not !!!",
-					borrowBox.getText().contains("MY BORROW OPTIONS"));
+					borrowBox.getText().contains("MEINE LEIHMÖGLICHKEIT"));
 
 		else
 			Assert.assertTrue("The Borrow box is present and it shouldn't !!!",
-					!borrowBox.getText().contains("MY BORROW OPTIONS"));
+					!borrowBox.getText().contains("MEINE LEIHMÖGLICHKEIT"));
 	}
 
 }

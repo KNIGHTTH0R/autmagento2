@@ -167,8 +167,8 @@ public class US16004aNewBorrowWithDefaultTopAndTopPackageTest extends BaseTest {
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.selectTopStatus("Standard verwenden");
-		backEndSteps.selectAllowedToBorrow("Take-of-Phase package");
+		backEndSteps.selectTopStatus(ContextConstants.USE_DEFAULT);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.TOP_PACKAGE);
 
 		customerRegistrationSteps.performLogin(stylistEmail, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {

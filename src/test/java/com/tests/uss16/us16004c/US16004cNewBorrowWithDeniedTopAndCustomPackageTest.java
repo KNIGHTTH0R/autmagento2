@@ -175,8 +175,8 @@ public class US16004cNewBorrowWithDeniedTopAndCustomPackageTest extends BaseTest
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.selectTopStatus("Deny");
-		backEndSteps.selectAllowedToBorrow("Custom package");
+		backEndSteps.selectTopStatus(ContextConstants.DENY_TOP);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.CUSTOM_PACKAGE);
 //	
 		
 		

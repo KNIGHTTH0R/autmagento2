@@ -46,35 +46,35 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	US16003CreatePartyWithNewContactHostTest.class,
 	US16003ChechEmailAndAcceptInvitationTest.class,
 	
-	//stylist in Top, top=allowed, allowed to borrow=TOP package 
-	US16004aNewBorrowWithDefaultTopAndTopPackageTest.class,
-	US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest.class,
-	US16004ValidateOrderWithDefaultTopAndTopPackageEmailTest.class,
-	US16004aValidateOrderWithDefaultTopAndTopPackageBackOfficeTest.class,
-	US16004aCancelOrderDefaultTopAndTopPackageTest.class,
-	
-//	stylist in Top, top=allowed, allowed to borrow=custom package 
-	US16004aNewBorrowWithDefaultTopAndCustomPackageTest.class,
-	US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest.class,
-	US16004aCancelOrderDefaultTopAndCustomPackageTest.class,
-
-	//stylist in Top, top=allowed, allowed to borrow=not eligible 
-
-	US16004bNewBorrowWithAllowedTopAndCustomPackageTest.class,
-	US16004bPlaceBarrowOrderAllowedTopAndCustomPackageTest.class,
-	US16004bCancelOrderAllowedTopAndCustomPackageTest.class,
-	US16004bNewBorrowWithAllowedTopAndTopPackageTest.class,
-	US16004bPlaceBarrowOrderAllowedTopAndTopPackageTest.class,
-	US16004bCancelOrderAllowedTopAndTopPackageTest.class,
-	US16004bNewBorrowWithAllowedTopAndNotEligibleTest.class,
-	
-	
-	//stylist in Top, top=denied, allowed to borrow =custom package
-	US16004cNewBorrowWithDeniedTopAndTopPackageTest.class,
-	US16004cNewBorrowWithDeniedTopAndCustomPackageTest.class,
-	US16004cPlaceBarrowOrderDeniedTopAndCustomPackageTest.class,
-	US16004cCancelOrderDeniedTopAndCustomPackageTest.class,
-	US16004cNewBorrowWithDeniedTopAndNotEligibleTest.class,
+//	//stylist in Top, top=allowed, allowed to borrow=TOP package 
+//	US16004aNewBorrowWithDefaultTopAndTopPackageTest.class,
+//	US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest.class,
+//	US16004ValidateOrderWithDefaultTopAndTopPackageEmailTest.class,
+//	US16004aValidateOrderWithDefaultTopAndTopPackageBackOfficeTest.class,
+//	US16004aCancelOrderDefaultTopAndTopPackageTest.class,
+//	
+////	stylist in Top, top=allowed, allowed to borrow=custom package 
+//	US16004aNewBorrowWithDefaultTopAndCustomPackageTest.class,
+//	US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest.class,
+//	US16004aCancelOrderDefaultTopAndCustomPackageTest.class,
+//
+//	//stylist in Top, top=allowed, allowed to borrow=not eligible 
+//
+//	US16004bNewBorrowWithAllowedTopAndCustomPackageTest.class,
+//	US16004bPlaceBarrowOrderAllowedTopAndCustomPackageTest.class,
+//	US16004bCancelOrderAllowedTopAndCustomPackageTest.class,
+//	US16004bNewBorrowWithAllowedTopAndTopPackageTest.class,
+//	US16004bPlaceBarrowOrderAllowedTopAndTopPackageTest.class,
+//	US16004bCancelOrderAllowedTopAndTopPackageTest.class,
+//	US16004bNewBorrowWithAllowedTopAndNotEligibleTest.class,
+//	
+//	
+//	//stylist in Top, top=denied, allowed to borrow =custom package
+//	US16004cNewBorrowWithDeniedTopAndTopPackageTest.class,
+//	US16004cNewBorrowWithDeniedTopAndCustomPackageTest.class,
+//	US16004cPlaceBarrowOrderDeniedTopAndCustomPackageTest.class,
+//	US16004cCancelOrderDeniedTopAndCustomPackageTest.class,
+//	US16004cNewBorrowWithDeniedTopAndNotEligibleTest.class,
 	
 })
 

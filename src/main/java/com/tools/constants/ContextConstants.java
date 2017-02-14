@@ -154,4 +154,15 @@ public class ContextConstants {
 	public static final String NOT_ELIGIBLE_MESSAGE = MongoReader.getDictionaryItem("NOT_ELIGIBLE_MESSAGE");
 	public static final String NOT_AVAILABLE_CART= MongoReader.getDictionaryItem("NOT_AVAILABLE_CART");
 	public static final String CONTACT_WISHLIST_NO_ITEMS_MESSAGE = MongoReader.getDictionaryItem("CONTACT_WISHLIST_NO_ITEMS_MESSAGE");
+	
+	//Admin-Borrow process
+	public static final String USE_DEFAULT = MongoReader.getDictionaryItem("USE_DEFAULT");
+	
+	public static final String CUSTOM_PACKAGE = MongoReader.getDictionaryItem("CUSTOM_PACKAGE");
+	public static final String NOT_ELIGIBLE_OPTION = MongoReader.getDictionaryItem("NOT_ELIGIBLE_OPTION");
+	public static final String TOP_PACKAGE = MongoReader.getDictionaryItem("TOP_PACKAGE");
+	public static final String ALLOW_TOP = MongoReader.getDictionaryItem("ALLOW_TOP");
+	public static final String DENY_TOP = MongoReader.getDictionaryItem("DENY_TOP");
+	
+	
 }

@@ -147,8 +147,8 @@ public class US16004aNewBorrowWithDefaultTopAndNotEligibleTest extends BaseTest 
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.selectTopStatus("Use default");
-		backEndSteps.selectAllowedToBorrow("Nicht berechtigt");
+		backEndSteps.selectTopStatus(ContextConstants.USE_DEFAULT);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.NOT_ELIGIBLE_OPTION);
 		
 		
 		

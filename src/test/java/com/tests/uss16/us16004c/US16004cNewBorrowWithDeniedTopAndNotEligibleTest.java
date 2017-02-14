@@ -147,8 +147,8 @@ public class US16004cNewBorrowWithDeniedTopAndNotEligibleTest extends BaseTest {
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.selectTopStatus("Deny");
-		backEndSteps.selectAllowedToBorrow("Nicht berechtigt");
+		backEndSteps.selectTopStatus(ContextConstants.DENY_TOP);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.NOT_ELIGIBLE_OPTION);
 		
 		
 		

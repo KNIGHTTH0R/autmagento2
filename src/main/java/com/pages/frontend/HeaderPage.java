@@ -142,6 +142,7 @@ public class HeaderPage extends AbstractPage {
 	public void clickLounge() {
 		element(loungeButton).waitUntilVisible();
 		loungeButton.click();
+		waitABit(5000);
 	}
 
 	public String getBoutiqueName() {
