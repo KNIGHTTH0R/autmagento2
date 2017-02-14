@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
@@ -180,6 +181,29 @@ public class PartyDetailsPage extends AbstractPage {
 		result.setIpInPayment(
 				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(4) td:nth-child(2)"))
 						.getText());
+		result.setJewelryBonus(getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(2) .price")).getText()
+				.replace(",", ".").replace(" €", "").replace("€ ", "").trim());
+		String[] parts = getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(3)")).getText().split(":");
+		result.setFourthyDiscounts(parts[1].trim());
+
+		return result;
+
+	}
+	
+	public ClosedPartyPerformanceModel grabClosedPartyPerformanceNoOrders() {
+		ClosedPartyPerformanceModel result = new ClosedPartyPerformanceModel();
+//		result.setNoOfOrders(
+//				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(1) td:nth-child(2)"))
+//						.getText());
+//		result.setRetail(
+//				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(2) td:nth-child(2)"))
+//						.getText().replace(",", ".").replace(" €", "").replace("€ ", ""));
+//		result.setIp(
+//				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(3) td:nth-child(2)"))
+//						.getText());
+//		result.setIpInPayment(
+//				getDriver().findElement(By.cssSelector("table.party-performance tbody tr:nth-child(4) td:nth-child(2)"))
+//						.getText());
 		result.setJewelryBonus(getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(2) .price")).getText()
 				.replace(",", ".").replace(" €", "").replace("€ ", "").trim());
 		String[] parts = getDriver().findElement(By.cssSelector("div.col-3 p:nth-child(3)")).getText().split(":");
@@ -509,5 +533,18 @@ public class PartyDetailsPage extends AbstractPage {
 		System.out.println("list size " +productsWishList.size());
 		System.out.println("grabbed size " + result.size());
 		Assert.assertTrue("Not all products have been validated ", result.size() == productsWishList.size());
+	}
+
+	public void editTime() {
+		Select oSelect = new Select(getDriver().findElement(By.id("time")));
+	//	oSelect.selectByIndex(1);
+		oSelect.selectByValue("10:45");
+		oSelect.selectByVisibleText("10:45");
+		
+	}
+
+	public void saveEdit() {
+		WebElement save= getDriver().findElement(By.id("save-edit-party"));
+		save.click();
 	}
 }

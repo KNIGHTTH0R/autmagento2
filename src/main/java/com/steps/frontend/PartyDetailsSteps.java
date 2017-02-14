@@ -191,7 +191,26 @@ public class PartyDetailsSteps extends AbstractSteps {
 		partyDetailsPage().checkWishlistSection(productsWishList);
 		
 	}
+
+	public ClosedPartyPerformanceModel grabClosedPartyPerformanceNoOrders() {
+		return partyDetailsPage().grabClosedPartyPerformanceNoOrders();		
+	}
+
 	
+	@Step
+	public void editTime() {
+		partyDetailsPage().editTime();
+		
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		
+	}
 	
+	@Step
+	public void saveTime() {
+		
+		partyDetailsPage().saveEdit();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		
+	}
 
 }

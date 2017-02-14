@@ -272,6 +272,11 @@ public class ShippingSteps extends AbstractSteps {
 	public void selectPartyNoOptionIfPresent() {
 		shippingFormPage().selectPartyNoOptionIfPresent();
 	}
+
+	public void checkIsPreshippedFlag() {
+		shippingFormPage().checkIsPreshippedFlag();
+		
+	}
 	
 
 }

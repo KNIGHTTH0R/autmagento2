@@ -29,10 +29,43 @@ public class GeneralCartCalculations {
 		if (ruleDiscount.compareTo(totalAmount) > 0) {
 
 			BigDecimal remainingSum = ruleDiscount.subtract(totalAmount);
+			System.out.println("remainingSum " + remainingSum);
+
 			shipping = shipping.subtract(remainingSum);
 			shipping = shipping.compareTo(BigDecimal.ZERO) > 0 ? shipping : BigDecimal.ZERO;
+
 		}
 
+		System.out.println("value of shipping " + shipping);
+		return String.valueOf(shipping.setScale(2, RoundingMode.HALF_UP));
+	}
+
+	public static String calculateNewShipping1(BigDecimal subTotal, BigDecimal ruleDiscount, BigDecimal shipping) {
+		System.out.println("totalAmount" + subTotal);
+		if (ruleDiscount.compareTo(subTotal) > 0) {
+
+			BigDecimal remainingSum = ruleDiscount.subtract(subTotal);
+			System.out.println("remainingSum " + remainingSum);
+			if (remainingSum.compareTo(BigDecimal.valueOf(150)) == 1) {
+
+				shipping = BigDecimal.valueOf(0);
+				System.out.println("firt gr" + shipping);
+			} else {
+				shipping = shipping.subtract(remainingSum);
+				shipping = shipping.compareTo(BigDecimal.ZERO) > 0 ? shipping : BigDecimal.ZERO;
+			}
+
+		} else {
+			BigDecimal remainingSum2 = subTotal.subtract(ruleDiscount);
+			
+			if (remainingSum2.compareTo(BigDecimal.valueOf(150)) > -1) {
+
+				shipping = BigDecimal.valueOf(0);
+				System.out.println("firt gr" + shipping);
+			}
+		}
+
+		System.out.println("value of shipping " + shipping);
 		return String.valueOf(shipping.setScale(2, RoundingMode.HALF_UP));
 	}
 
@@ -48,7 +81,7 @@ public class GeneralCartCalculations {
 
 	public static List<String> calculateDeliveryDates(String earliestAvailability, String mostAwayEarliest,
 			String unavailableStartDate, String unavailableEndDate, int maxExecDays, int maxDropdownDays)
-			throws ParseException {
+					throws ParseException {
 
 		List<String> availableDates = new ArrayList<String>();
 		String firstDeliveryDate = DateUtils.getFirstFridayAfterDate(mostAwayEarliest, "yyyy-MM-dd");
@@ -90,7 +123,8 @@ public class GeneralCartCalculations {
 			public int compare(ProductDetailedModel o1, ProductDetailedModel o2) {
 				boolean isAfter = false;
 				try {
-					isAfter = DateUtils.isDateAfter(o1.getStockData().getEarliestAvailability(), o2.getStockData().getEarliestAvailability(), format);
+					isAfter = DateUtils.isDateAfter(o1.getStockData().getEarliestAvailability(),
+							o2.getStockData().getEarliestAvailability(), format);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -131,6 +165,11 @@ public class GeneralCartCalculations {
 	}
 
 	public static void main(String[] args) throws ParseException {
+		BigDecimal totalAmount = BigDecimal.valueOf(159.5);
+		BigDecimal ruleDiscount = BigDecimal.valueOf(25);
+		BigDecimal shipping = BigDecimal.valueOf(0.9);
+		calculateNewShipping1(totalAmount, ruleDiscount, shipping);
+
 		// System.out.println(GeneralCartCalculations.calculateIpBasedOnSpecialPrice("63",
 		// "75.00", "39.00"));
 		// List<String> dates =

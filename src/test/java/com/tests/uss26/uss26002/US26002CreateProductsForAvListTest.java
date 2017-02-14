@@ -113,7 +113,7 @@ public class US26002CreateProductsForAvListTest extends BaseTest {
 	public void us26002CreateProductsForAvListTest() throws IOException, ParseException {
 		
 		
-		backEndSteps.performAdminLogin("oana.axente", "Camelia.99");
+		backEndSteps.performAdminLogin("oana.axente", "Camelia.88");
 		backEndSteps.clickOnProducts();
 		backProductListSteps.findProduct(genProduct1.getSku());
 		backProductListSteps.openProductDetails(genProduct1.getSku());

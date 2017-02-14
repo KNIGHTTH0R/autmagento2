@@ -48,4 +48,13 @@ public class ShippingModel {
 		this.totalAmount = totalAmount;
 	}
 
+	@Override
+	public String toString() {
+		return "ShippingModel [subTotal=" + subTotal + ", discountPrice=" + discountPrice + ", shippingPrice="
+				+ shippingPrice + ", totalAmount=" + totalAmount + ", tax=" + tax + "]";
+	}
+
+	
+	
+	
 }

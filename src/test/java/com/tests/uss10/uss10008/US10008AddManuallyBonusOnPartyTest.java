@@ -36,6 +36,7 @@ public class US10008AddManuallyBonusOnPartyTest extends BaseTest {
 	@Before
 	public void setUp() {
 		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
+		System.out.println("url "+urlModel.getUrl());
 		String[] parts = urlModel.getUrl().split("/");
 		partyId = parts[parts.length - 1];
 		System.out.println("party Id:" + partyId);
@@ -47,6 +48,6 @@ public class US10008AddManuallyBonusOnPartyTest extends BaseTest {
 		backEndSteps.clickOnStyleParties();
 		partyListBackendSteps.openPartyDetails(partyId);
 		partyDetailsBackendSteps.goToBonusTab();
-		partyDetailsBackendSteps.addJewelryAndFourthyDiscountBonusToParty("1000","1");
+		partyDetailsBackendSteps.addJewelryAndFourthyDiscountBonusToParty("1000","2");
 	}
 }
