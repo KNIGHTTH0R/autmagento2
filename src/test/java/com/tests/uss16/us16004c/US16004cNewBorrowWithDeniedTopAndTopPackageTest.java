@@ -145,8 +145,8 @@ public class US16004cNewBorrowWithDeniedTopAndTopPackageTest extends BaseTest {
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.selectTopStatus("Deny");
-		backEndSteps.selectAllowedToBorrow("Take-of-Phase package");
+		backEndSteps.selectTopStatus(ContextConstants.DENY_TOP);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.TOP_PACKAGE);
 		
 		
 		

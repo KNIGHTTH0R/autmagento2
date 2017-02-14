@@ -1,4 +1,4 @@
-package com.tests.uss16.us16005;
+package com.tests.uss16.uss16006;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,12 +21,15 @@ import org.junit.runner.RunWith;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.borrow.BorrowSystemConfigurationSteps;
+import com.steps.frontend.ContactDetailsSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.MyBusinessSteps;
+import com.steps.frontend.MyContactsListSteps;
+import com.steps.frontend.PartyDetailsSteps;
 import com.steps.frontend.ShopSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
@@ -36,12 +39,16 @@ import com.steps.frontend.checkout.cart.borrowCart.BorrowCartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.borrowCart.BorrowCartCalculator;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
+import com.tools.data.UrlModel;
 import com.tools.data.frontend.BorrowProductModel;
 import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.BorrowDataGrabber;
 import com.tools.datahandler.DataGrabber;
@@ -56,7 +63,7 @@ import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 @WithTag(name = "US16.1 SC borrow products Test", type = "Scenarios")
 @Story(Application.BorrowCart.US16_1.class)
 @RunWith(SerenityRunner.class)
-public class US16003BorrowProcessIsDisabledTest extends BaseTest {
+public class US16006BorrowProcessIsDisabledTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -94,9 +101,22 @@ public class US16003BorrowProcessIsDisabledTest extends BaseTest {
 	public MyBusinessSteps myBusinessSteps;
 	@Steps
 	public ShopSteps shopSteps;
+	@Steps
+	MyContactsListSteps myContactsListSteps;
+	@Steps
+	ContactDetailsSteps contactDetailsSteps;
+	@Steps
+	public PartyDetailsSteps partyDetailsSteps;
 	
 	
-	private String username, password;
+	private String username, password, contact, customerData;
+	
+	
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+	private static UrlModel urlModel = new UrlModel();
+	private static List<RegularBasicProductModel> productsWishList = new ArrayList<RegularBasicProductModel>();
+	private static List<RegularBasicProductModel> grabbedProductsWishList = new ArrayList<RegularBasicProductModel>();
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -104,28 +124,21 @@ public class US16003BorrowProcessIsDisabledTest extends BaseTest {
 		BorrowDataGrabber.wipe();
 		DataGrabber.wipe();
 		
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-		
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//			
-//		genProduct1 = createdProductsList.get(0);
-//		genProduct2 = createdProductsList.get(1);
+		productsWishList = MongoReader.grabRegularBasicProductModel("US16006RegularCustomerSetProductsInCartAndWishlistTest" + "WISH");
+		urlModel = MongoReader.grabUrlModels("US16006CreatePartyTest" + SoapKeys.GRAB).get(0);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_16_FOLDER + File.separator + "us16001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_16_FOLDER + File.separator + "us16006.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+			contact = prop.getProperty("contact");
+			customerData=prop.getProperty("customerUsername");
+		
 		
 
 		} catch (IOException ex) {
@@ -145,7 +158,7 @@ public class US16003BorrowProcessIsDisabledTest extends BaseTest {
 	}
 
 	@Test
-	public void us16003BorrowProcessIsDisabledTest() {
+	public void us16006BorrowProcessIsDisabledTest() {
 		
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSystemConfiguration();
@@ -153,24 +166,51 @@ public class US16003BorrowProcessIsDisabledTest extends BaseTest {
 		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Ja");
 		borrowSystemConfigurationSteps.saveConfiguration();
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail("urcanioanaemilia@gmail.com");
-		backEndSteps.openCustomerDetails("urcanioanaemilia@gmail.com");
-		backEndSteps.selectAllowedToBorrow("Ja");
+		backEndSteps.searchForEmail(username);
+		backEndSteps.openCustomerDetails(username);
+		backEndSteps.selectTopStatus(ContextConstants.USE_DEFAULT);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.CUSTOM_PACKAGE);		
 		
-		
-		
-		customerRegistrationSteps.performLogin("urcanioanaemilia@gmail.com", "q1w2e3");
+		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		//check if borrow cart link is displayed on Lounge-My bussiness
 		loungeSteps.checkIfBorrowLinkIsDisplayed(false);
+		//check if borrow cart link is displayed on My Bussiness page
 		loungeSteps.checkIfBorrowBoxIsdisplayed(false);
+		
 		loungeSteps.goToMyBusiness();
 		myBusinessSteps.checkIfBorrowCartLinkIsDisplayed(false);
-		
+		//check if borrow cart link is displayed on Shop-My Bussiness
+		headerSteps.goToLounge();
 		headerSteps.goToShop();
 		shopSteps.checkIfBorrowLinkIsdisplayed(false);
+		//check contact details pages
+		headerSteps.goToLounge();
+		loungeSteps.goToMyBusiness();
+		loungeSteps.goToContactsList();
+		myContactsListSteps.openContactDetailsPage(customerData);
+	 
+		
+		contactDetailsSteps.checkBlockLinesForContacts();
+		
+		grabbedProductsWishList=contactDetailsSteps.grabWishlistItems();
+		contactDetailsSteps.validateWishlistCounter(productsWishList.size());
+		contactDetailsSteps.validateProductWishListBlock(productsWishList, grabbedProductsWishList);
+		
+		contactDetailsSteps.clickBackToContactsbutton();
+		myContactsListSteps.openContactDetailsPage(contact);
+		contactDetailsSteps.checkBlockLinesForContacts();	
+		
+		//party
+		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.checkIfAddToBorrowCartButtonIsDisplayed(false);
+		
+		//check if products are dispalyed 
+		
+		partyDetailsSteps.checkWishlistSection(productsWishList);
 		
 		
 	}

@@ -47,6 +47,7 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	US16003CreatePartyWithNewContactHostTest.class,
 	US16003ChechEmailAndAcceptInvitationTest.class,
 	
+
 	//stylist in Top, top=default, allowed to borrow=TOP package 
 	US16004aNewBorrowWithDefaultTopAndTopPackageTest.class,
 	US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest.class,
@@ -78,6 +79,7 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	US16004cPlaceBarrowOrderDeniedTopAndCustomPackageTest.class,
 	US16004cCancelOrderDeniedTopAndCustomPackageTest.class,
 	US16004cNewBorrowWithDeniedTopAndNotEligibleTest.class,
+
 	
 })
 

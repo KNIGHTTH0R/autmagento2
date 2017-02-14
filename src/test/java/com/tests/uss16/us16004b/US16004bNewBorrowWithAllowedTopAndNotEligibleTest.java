@@ -146,8 +146,8 @@ public class US16004bNewBorrowWithAllowedTopAndNotEligibleTest extends BaseTest 
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.selectTopStatus("Allow");
-		backEndSteps.selectAllowedToBorrow("Nicht berechtigt");
+		backEndSteps.selectTopStatus(ContextConstants.ALLOW_TOP);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.NOT_ELIGIBLE_OPTION);
 		
 		
 		

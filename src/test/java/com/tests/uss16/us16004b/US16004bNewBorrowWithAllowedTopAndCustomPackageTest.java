@@ -3,6 +3,9 @@ package com.tests.uss16.us16004b;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,9 +45,6 @@ import com.workflows.frontend.AddProductsWorkflow;
 import com.workflows.frontend.borrowCart.AddBorrowedProductsWorkflow;
 import com.workflows.frontend.borrowCart.BorrowCartValidationWorkflows;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
 
 
 @RunWith(SerenityRunner.class)
@@ -175,8 +175,8 @@ public class US16004bNewBorrowWithAllowedTopAndCustomPackageTest extends BaseTes
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.selectTopStatus("Allow");
-		backEndSteps.selectAllowedToBorrow("Custom package");
+		backEndSteps.selectTopStatus(ContextConstants.ALLOW_TOP);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.CUSTOM_PACKAGE);
 //	
 		
 		
@@ -239,26 +239,6 @@ public class US16004bNewBorrowWithAllowedTopAndCustomPackageTest extends BaseTes
 		//check if product are dispalyed 
 		
 		partyDetailsSteps.checkWishlistSection(productsWishList);
-		
-		
-		
-		
-	
-		
-		
-		
-		
-		
-		// verify minicart 
-		//go to borrow cart 
-		
-		//verify that default xxx is displayed 
-		
-		// place borrow order 
-		
-		//verify block on lounge page 
-		
-		///todo party wishlist validation 
 		
 	}
 	

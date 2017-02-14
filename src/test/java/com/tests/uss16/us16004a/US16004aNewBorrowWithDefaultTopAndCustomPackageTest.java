@@ -175,8 +175,8 @@ public class US16004aNewBorrowWithDefaultTopAndCustomPackageTest extends BaseTes
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
-		backEndSteps.selectTopStatus("Standard verwenden");
-		backEndSteps.selectAllowedToBorrow("Custom package");
+		backEndSteps.selectTopStatus(ContextConstants.USE_DEFAULT);
+		backEndSteps.selectAllowedToBorrow(ContextConstants.CUSTOM_PACKAGE);
 	
 		
 		
