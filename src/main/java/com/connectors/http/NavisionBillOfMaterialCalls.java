@@ -45,6 +45,7 @@ public class NavisionBillOfMaterialCalls {
 		
 		
 		NodeList orderList = response.getSOAPBody().getElementsByTagName("BillOfMaterial");
+		System.out.println(orderList.getLength());
 		for (int i = 0; i < orderList.getLength(); i++) {
 
 			if (orderList.item(i).getParentNode().getNodeName().equalsIgnoreCase("ReadMultiple_Result")) {

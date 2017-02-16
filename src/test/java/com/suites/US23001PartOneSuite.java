@@ -16,6 +16,7 @@ import com.tests.uss23.US23001VerifyMagAndNavStockAfterOrderTest;
 	US23001VerifyMagAndNavStockAfterOrderTest.class,
 	US23001PayAndImportOrderInNavisionTest.class,
 })
+
 @RunWith(Suite.class)
 public class US23001PartOneSuite {
 

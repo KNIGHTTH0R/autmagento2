@@ -181,12 +181,12 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
 		HostBasicProductModel productData;
 		// qty =1
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "2", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
 		HostCartCalculator.allProductsList.add(productData);
 		// qty =1
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "2", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
 		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "5", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "4", "0");
 		HostCartCalculator.allProductsList.add(productData);
 
 		headerSteps.openCartPreview();
