@@ -105,4 +105,13 @@ public class HostBasicProductModel {
 		this.earliestAvailability = earliestAvailability;
 	}
 
+	@Override
+	public String toString() {
+		return "HostBasicProductModel [name=" + name + ", prodCode=" + prodCode + ", quantity=" + quantity
+				+ ", unitPrice=" + unitPrice + ", finalPrice=" + finalPrice + ", bonusType=" + bonusType
+				+ ", bunosValue=" + bunosValue + ", ipPoints=" + ipPoints + ", deliveryDate=" + deliveryDate
+				+ ", earliestAvailability=" + earliestAvailability + "]";
+	}
+
+	
 }

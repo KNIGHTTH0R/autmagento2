@@ -1,5 +1,7 @@
 package com.pages.frontend.checkout.shipping;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -57,7 +59,21 @@ public class ShippingFormPage extends AbstractPage {
 
 	@FindBy(id = "new-shipping-address")
 	private WebElement newShippingAddress;
+	
+	
+	
+	@FindBy(css = "div#preshipped-prod input[value*='0']")
+	private WebElement itemNotReceived;
 
+	public void checkIsPreshippedFlag() {
+		
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		element(itemNotReceived).waitUntilVisible();
+		itemNotReceived.click();
+	//	waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+	}
+	
 	public void selectKnowStylistNoOption() {
 		element(knowStylistNo).waitUntilVisible();
 		knowStylistNo.click();

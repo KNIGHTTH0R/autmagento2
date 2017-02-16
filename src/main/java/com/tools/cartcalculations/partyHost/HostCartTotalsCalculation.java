@@ -3,6 +3,7 @@ package com.tools.cartcalculations.partyHost;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tools.cartcalculations.GeneralCartCalculations;
@@ -12,6 +13,7 @@ import com.tools.data.HostCartCalcDetailsModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
+import com.tools.generalCalculation.OrderForCustomerDiscountsCalculation;
 import com.tools.utils.DateUtils;
 import com.tools.utils.PrintUtils;
 
@@ -74,6 +76,8 @@ public class HostCartTotalsCalculation {
 		for (HostBasicProductModel product : productsList) {
 			subtotal = subtotal.add(BigDecimal.valueOf(Double.parseDouble(product.getFinalPrice())));
 			ipPoints = ipPoints.add(BigDecimal.valueOf(Double.parseDouble(product.getIpPoints())));
+
+		//	 should be commented in order to test in  eclipse
 			if (product.getBonusType().contentEquals(ContextConstants.JEWELRY_BONUS)) {
 				jewerlyDiscount = jewerlyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				jewerlyDiscount.setScale(2, RoundingMode.HALF_UP);
@@ -82,8 +86,9 @@ public class HostCartTotalsCalculation {
 				forthyDiscount = forthyDiscount.add(BigDecimal.valueOf(Double.parseDouble(product.getBunosValue())));
 				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
-		}
 
+			// until here
+		}
 		totalAmount = calculateTotalAmount(subtotal, jewerlyDiscount, forthyDiscount, buy3Get1, voucherVal);
 
 		shippingValue = GeneralCartCalculations.calculateNewShipping(subtotal,
@@ -108,6 +113,7 @@ public class HostCartTotalsCalculation {
 			result.addSegment(ConfigConstants.VOUCHER_DISCOUNT, String.valueOf(subtotal));
 		}
 
+		System.out.println(result.toString());
 		return result;
 	}
 
@@ -227,14 +233,21 @@ public class HostCartTotalsCalculation {
 		discountCalculation = discountCalculation.add(BigDecimal.valueOf(
 				Double.parseDouble(discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))));
 
+		// String newShippingValue = GeneralCartCalculations
+		// .calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
+		// BigDecimal.valueOf(Double.parseDouble(
+		// discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))),
+		// BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+
 		String newShippingValue = GeneralCartCalculations
-				.calculateNewShipping(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
+				.calculateNewShipping1(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getSubTotal())),
 						BigDecimal.valueOf(Double.parseDouble(
 								discountCalculationModel.getSegments().get(ConfigConstants.VOUCHER_SHIPPING))),
-						BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+				BigDecimal.valueOf(Double.parseDouble(shippingValue)));
 
 		result.setDiscountPrice(discountCalculation.toString());
-		result.setShippingPrice(shippingValue);
+		result.setShippingPrice(newShippingValue);
+		// result.setShippingPrice(shippingValue);
 
 		// totals calculation
 		BigDecimal totalAmountCalculation = BigDecimal.ZERO;
@@ -242,7 +255,7 @@ public class HostCartTotalsCalculation {
 				.add(BigDecimal.valueOf(Double.parseDouble(discountCalculationModel.getTotalAmount())));
 		totalAmountCalculation = totalAmountCalculation.add(BigDecimal.valueOf(Double.parseDouble(newShippingValue)));
 		result.setTotalAmount(totalAmountCalculation.toString());
-
+		System.out.println(result.toString());
 		return result;
 	}
 
@@ -333,4 +346,5 @@ public class HostCartTotalsCalculation {
 		return result;
 	}
 
+	
 }

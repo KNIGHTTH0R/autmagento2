@@ -15,6 +15,7 @@ import com.tests.uss10.us10001b.US10001bUpdatePartyBonusesTest;
 	US10001bUpdatePartyBonusesTest.class,
 	US9004PlaceHostOrderWithTpTest.class,
 	US9004ValidateOrdersInBackendTest.class,	
+	
 })
 @RunWith(Suite.class)
 public class US9004Suite {

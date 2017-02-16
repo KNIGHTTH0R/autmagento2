@@ -34,8 +34,11 @@ public class OrderForCustomerDiscountsCalculation {
 			newProduct.setDeliveryDate(product.getDeliveryDate());
 
 			cartProducts.add(newProduct);
+			
+			
 		}
-
+		System.out.println(cartProducts.toString());
+		
 		return cartProducts;
 
 	}
@@ -87,8 +90,17 @@ public class OrderForCustomerDiscountsCalculation {
 				result = BigDecimal.ZERO;
 			}
 		}
+		System.out.println(result);
 		return result.setScale(0, RoundingMode.HALF_UP).toString();
 
 	}
 
+	
+	public static void main(String[] args) {
+		BigDecimal initialIpNumbe1r=BigDecimal.valueOf(100);
+		BigDecimal voucherValue1=BigDecimal.valueOf(25);
+		BigDecimal sum1=BigDecimal.valueOf(199.40);
+					
+		calculateIpForEachProduct(initialIpNumbe1r,voucherValue1,sum1);
+	}
 }

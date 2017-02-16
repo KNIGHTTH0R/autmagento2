@@ -47,6 +47,8 @@ public class BillingFormPage extends AbstractPage {
 
 	@FindBy(css = "div[id*='advice-validate-zip']")
 	private WebElement zipValidationMessage;
+	
+	
 
 	public void clickAddNewAddress() {
 		element(newBillingAddress).waitUntilVisible();

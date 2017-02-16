@@ -78,4 +78,12 @@ public class HostCartCalcDetailsModel {
 		this.ipPoints = ipPoints;
 	}
 
+	@Override
+	public String toString() {
+		return "HostCartCalcDetailsModel [totalAmount=" + totalAmount + ", subTotal=" + subTotal + ", tax=" + tax
+				+ ", ipPoints=" + ipPoints + ", segmentTotals=" + segmentTotals + "]";
+	}
+
+	
+	
 }
