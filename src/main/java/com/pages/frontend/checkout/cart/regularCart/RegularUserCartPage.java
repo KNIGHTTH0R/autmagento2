@@ -148,8 +148,14 @@ public class RegularUserCartPage extends AbstractPage {
 					delivery = element(
 							product.findElement(By.cssSelector("select.tp-cb-item-delivery-date option:nth-child(2)")));
 				}
-				String[] tokens = delivery.getText().split(", ");
-				deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
+				//String[] tokens = delivery.getText().split(", ");
+				String noSpecialChar=toAsciiString(delivery.getText());
+				String[] tokens = noSpecialChar.split(", ");
+				System.out.println("sadasdasdasdas   "+tokens[1]);
+				//the replace is due to a java 8 bug, get rid of this when fixed
+				deliveryDate = DateUtils.parseDate(tokens[1].replace("MAR", "MRZ"), "dd. MMM. yy", locale, "dd.MM.YYYY");
+
+				//deliveryDate = DateUtils.parseDate(tokens[1], "dd. MMM. yy", locale, "dd.MM.YYYY");
 				delivery.click();
 				waitFor(ExpectedConditions.invisibilityOfElementWithText(
 						By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
