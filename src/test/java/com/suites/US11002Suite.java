@@ -15,7 +15,7 @@ import com.tests.uss11.us11002.US11002ValidateOrderEmailTest;
 	US11002PartyHostBuysForCustomerWithBuy3Get1Test.class,
 //	US11002CheckOrderOnStylecoachProfileTest.class,	
 	US11002ValidateOrderBackOfficeTest.class,
-	US11002ValidateOrderEmailTest.class,	
+//	US11002ValidateOrderEmailTest.class,	i
 	US11002DeactivateBuy3Get1Test.class,
 })
 @RunWith(Suite.class)
