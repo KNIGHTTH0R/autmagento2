@@ -19,11 +19,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.mongo.MongoConnector;
+import com.steps.backend.BackEndSteps;
+import com.steps.backend.borrow.BorrowSystemConfigurationSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
 import com.steps.frontend.LoungeSteps;
+import com.steps.frontend.MyBusinessSteps;
+import com.steps.frontend.ShopSteps;
 import com.steps.frontend.checkout.ConfirmationSteps;
 import com.steps.frontend.checkout.PaymentSteps;
 import com.steps.frontend.checkout.ShippingSteps;
@@ -32,6 +36,8 @@ import com.steps.frontend.checkout.cart.borrowCart.BorrowCartSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.borrowCart.BorrowCartCalculator;
+import com.tools.constants.ContextConstants;
+import com.tools.constants.Credentials;
 import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -81,6 +87,14 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 	public BorrowCartValidationWorkflows borrowCartValidationWorkflows;
 	@Steps
 	public CustomVerification customVerifications;
+	@Steps
+	public BackEndSteps backEndSteps;
+	@Steps
+	public BorrowSystemConfigurationSteps borrowSystemConfigurationSteps;
+	@Steps
+	public MyBusinessSteps myBusinessSteps;
+	@Steps
+	public ShopSteps shopSteps;
 
 	private String username, password;
 	private static String billingAddress;
@@ -144,6 +158,16 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 
 	@Test
 	public void us16001StyleCoachBorrowsProductsTest() {
+		
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+		backEndSteps.clickOnSystemConfiguration();
+		borrowSystemConfigurationSteps.goToBorrowTab();
+		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
+		borrowSystemConfigurationSteps.selectBorrowProcessType("(Old process) Allow all products to be borrowed");
+		borrowSystemConfigurationSteps.selectCountries();
+		borrowSystemConfigurationSteps.saveConfiguration();
+		
+		
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
