@@ -114,9 +114,10 @@ public class US6002bScRegExistingCustForbiddenCountryTest extends BaseTest{
 		
 //		paymentSteps.expandCreditCardForm();
 //		paymentSteps.fillCreditCardForm(creditCardData);
-		paymentSteps.expandElvForm();
-		paymentSteps.fillElvForm(elvPaymentData);
-		
+		paymentSteps.payWithBankTransferEs();
+//		paymentSteps.expandElvForm();
+//		paymentSteps.fillElvForm(elvPaymentData);
+//		
 		confirmationSteps.agreeAndCheckout();
 		
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData, expectedBeforeLinkConfirmationStylistData);	

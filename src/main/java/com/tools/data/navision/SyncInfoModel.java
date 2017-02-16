@@ -84,4 +84,15 @@ public class SyncInfoModel {
 		this.isInStock = isInStock;
 	}
 
+	@Override
+	public String toString() {
+		return "SyncInfoModel [sku=" + sku + ", quantity=" + quantity + ", isInStock=" + isInStock
+				+ ", minumimQuantity=" + minumimQuantity + ", isDiscontinued=" + isDiscontinued + ", totalQuantity="
+				+ totalQuantity + ", maxPercentToBorrow=" + maxPercentToBorrow + ", earliestAvailability="
+				+ earliestAvailability + ", pendingQuantity=" + pendingQuantity + "]";
+	}
+
+	
+	
+	
 }

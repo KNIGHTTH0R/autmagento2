@@ -124,13 +124,15 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 	@Test
 	public void us6001bScRegistrationNewCustForbiddenCountryTest() {
 		headerSteps.navigateToRegisterForm();
-		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerFormFirstWithForbiddenCountry(customerFormData, customerFormAddress, birthDate.getDate());
+		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerFormFirstWithForbiddenCountry(
+				customerFormData, customerFormAddress, birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
 		StarterSetProductModel productData;
-		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSET, EnvironmentConstants.STARTERKITPRICE);
+		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSET,
+				EnvironmentConstants.STARTERKITPRICE);
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
 
 		starterSetSteps.applyVoucher(voucherCode);
@@ -144,26 +146,30 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//
-//		confirmationSteps.grabConfirmationTotals();
-//		confirmationSteps.agreeAndCheckout();
-		
-		if (paymentSteps.isKlarnaAvailable()) {
-			paymentSteps.expandKlarnaForm();
-			paymentSteps.fillKlarnaForm();
-		} else {
-			paymentSteps.expandCreditCardForm();
-			paymentSteps.fillCreditCardForm(creditCardData);
-			confirmationSteps.grabConfirmationTotals();
-			confirmationSteps.agreeAndCheckout();
-			
-			starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
-			starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
-		}
+		// paymentSteps.expandCreditCardForm();
+		// paymentSteps.fillCreditCardForm(creditCardData);
+		//
+		// confirmationSteps.grabConfirmationTotals();
+		// confirmationSteps.agreeAndCheckout();
 
-		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
+		// if (paymentSteps.isKlarnaAvailable()) {
+		// paymentSteps.expandKlarnaForm();
+		// paymentSteps.fillKlarnaForm();
+		// } else {
+
+		// paymentSteps.expandCreditCardForm();
+		// paymentSteps.fillCreditCardForm(creditCardData);
+		paymentSteps.payWithBankTransfer();
+		confirmationSteps.grabConfirmationTotals();
+		confirmationSteps.agreeAndCheckout();
+
+		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals,
+				StylistRegistrationCartCalculator.shippingCalculatedModel);
+		starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
+		// }
+
+		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(
+				StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
 		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount("STARTER SET TOTALS");
 
 		customVerification.printErrors();
@@ -172,8 +178,10 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel, getClass().getSimpleName());
-		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
+		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel,
+				getClass().getSimpleName());
+		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName());
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());

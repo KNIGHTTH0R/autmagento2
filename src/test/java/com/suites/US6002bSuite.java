@@ -18,5 +18,6 @@ import com.tests.us6.us6002b.US6002bScRegExistingCustForbiddenCountryTest;
 })
 @RunWith(Suite.class)
 public class US6002bSuite {
+	
 
 }
