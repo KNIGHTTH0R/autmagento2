@@ -12,7 +12,7 @@ import com.tests.us7.us7001.US7001ValidateBoutiqueTest;
 
 
 @SuiteClasses({
-	US7001RegularCustRegOnMasterTest.class,
+//	US7001RegularCustRegOnMasterTest.class,
 	US7001ConfirmCustomerTest.class,
 	US7001CheckCustomerActivation.class,
 	US7001ValidateBoutiqueTest.class,

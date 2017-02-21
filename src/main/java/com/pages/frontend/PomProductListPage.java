@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -12,6 +13,7 @@ import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
+
 
 public class PomProductListPage extends AbstractPage {
 
@@ -41,8 +43,31 @@ public class PomProductListPage extends AbstractPage {
 		}
 		Assert.assertTrue("The searched product was not found !!!", found);
 	}
+	
+	
+	public void findProductAndClick2(String productName) {
+		@SuppressWarnings("deprecation")
+		WebElement product=getDriver().findElement(net.thucydides.core.annotations.findby.By.jquery("#pom-products-content ul li div.prod-box-name h2:contains('"+productName+"')"));
+		product.click();
+		
+				
+		
+//		JavascriptExecutor js;
+//		if (getDriver() instanceof JavascriptExecutor) {
+//		    js = (JavascriptExecutor)getDriver();
+//		} else {
+//		    throw new IllegalStateException("This driver cannot run JavaScript.");
+//		}
+//		
+//	//	String sa = "#pom-products-content ul li div.prod-box-name h2:contains('"+productName+"')";
+//		WebElement element = (WebElement)js.executeScript("#pom-products-content ul li div.prod-box-name h2:contains('"+productName+"')");
+//		element.click();
+		
+	//	WebElement product=getDriver().findElement(By.)
+	}
 
 	public String getProductDetailsText() {
 		return productDetailsContainer.getText();
 	}
+	
 }
