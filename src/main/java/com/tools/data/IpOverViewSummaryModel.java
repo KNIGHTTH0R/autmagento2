@@ -66,4 +66,11 @@ public class IpOverViewSummaryModel {
 		this.manualIpCorrection = manualIpCorrection;
 	}
 
+	@Override
+	public String toString() {
+		return "IpOverViewSummaryModel [paidOrdersPreviosMonth=" + paidOrdersPreviosMonth + ", paidOrdersThisMonth=" + paidOrdersThisMonth + ", reverseChargebackThisMonth="
+				+ reverseChargebackThisMonth + ", chargebacksThisMonth=" + chargebacksThisMonth + ", returnsThisMonth=" + returnsThisMonth + ", manualIpCorrection="
+				+ manualIpCorrection + ", total=" + total + "]";
+	}
+
 }

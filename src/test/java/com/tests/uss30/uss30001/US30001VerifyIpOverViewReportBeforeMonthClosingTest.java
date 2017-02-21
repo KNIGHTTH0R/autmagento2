@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -20,6 +21,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
+import com.steps.backend.BackEndSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -27,7 +30,9 @@ import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.IpReportsSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.FilePaths;
+import com.tools.constants.TimeConstants;
 import com.tools.constants.UrlConstants;
 import com.tools.data.IpOverViewOpenIpsModel;
 import com.tools.data.IpOverViewPayedOrdersModel;
@@ -59,6 +64,8 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingTest extends BaseTes
 	public IpReportsSteps ipReportsSteps;
 	@Steps
 	public IpReportValidationWorkflow ipReportValidationWorkflow;
+	@Steps
+	public BackEndSteps backEndSteps;
 
 	private String stylistUsername, stylistPassword;
 	private String reportMonth;
@@ -70,6 +77,14 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingTest extends BaseTes
 
 	@Before
 	public void setUp() throws Exception {
+		
+//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_ORDER_IMPORT,
+				EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_CREDITMEMO_IMPORT,
+				EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
+		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SEND_IP_REPORT,
+				EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -101,7 +116,8 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingTest extends BaseTes
 //			Assert.fail("Failed !!!");
 //		}
 
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2016-12-05 00:00:00","2016-12-06 00:00:00","2017-01-09 00:00:00");
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-20 17:00:00");
+		
 		expectedOrdersList = expectedIpOverviewModel.getPayedOrders();
 		expectedReturns = expectedIpOverviewModel.getReturns();
 
@@ -118,26 +134,35 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingTest extends BaseTes
 		headerSteps.redirectToStylistReports();
 		reportsSteps.clickOnIpReports();
 
-	System.out.println("asasasasasa"+ DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+//	System.out.println("asasasasasa"+ DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+//	
+//	String str =DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+//	ipReportsSteps.selectMonth(str.toUpperCase());
 	
-	String str =DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-	ipReportsSteps.selectMonth(str.toUpperCase());
-	
-		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
-		ipReportsSteps.selectMonth("DEC - 2016");
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2016-12-05 00:00:00","2016-12-06 00:00:00","2017-01-09 00:00:00");
+//		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
+		ipReportsSteps.selectMonth("FEB - 2017");
+		//expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverview("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-17 17:00:00");
 		
 	    expectedOrdersList = expectedIpOverviewModel.getPayedOrders();
 		expectedReturns = expectedIpOverviewModel.getReturns();
 		
-		IpOverViewSummaryModel grabbedSummaryModel = ipReportsSteps.getIpOverviewSummaryModel();
+		
+		IpOverViewSummaryModel  grabbedSummaryModel= ipReportsSteps.getIpOverviewSummaryModel();
+		System.out.println("expected values" + expectedIpOverviewModel.toString());
+		System.out.println("grabbed values" +grabbedSummaryModel.toString());
+			
+		
 
 		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModel();
+		
+		ipReportValidationWorkflow.verifyIpOverviewReportDetails(grabbedSummaryModel, expectedIpOverviewModel);
+		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetails(expectedIpOverviewModel, grabbedOpenIpsModel);
 
-		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
-
-		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
+//		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
+//
+//		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
 
 
 	}
+	
 }

@@ -72,7 +72,6 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	US16004bCancelOrderAllowedTopAndTopPackageTest.class,
 	US16004bNewBorrowWithAllowedTopAndNotEligibleTest.class,
 	
-	
 	//stylist in Top, top=denied, allowed to borrow =custom package
 	US16004cNewBorrowWithDeniedTopAndTopPackageTest.class,
 	US16004cNewBorrowWithDeniedTopAndCustomPackageTest.class,

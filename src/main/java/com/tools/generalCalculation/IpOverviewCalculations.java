@@ -93,6 +93,7 @@ public class IpOverviewCalculations {
 				openIpsPreviousMonth=BigDecimal.ZERO;
 				openIpsPreviousMonth = openIpsPreviousMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
+	
 			if (isTermPurchaseIpsCurrentMonth(order, month)) {
 				tpIpsCurrentMonth = tpIpsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
 			}
@@ -395,8 +396,9 @@ public class IpOverviewCalculations {
 	//IpOverviewModel model=calculateIpOverview("2513","2017-01-05 12:00:00","2016-12-06 12:00:00","2017-01-09 12:00:00","2017-02-10 12:00:00");
 		//pentru decembrie luna deschisa
 	//	IpOverviewModel model=calculateIpOverview("2513","2016-12-05 00:00:00","2016-12-06 00:00:00","2017-01-09 00:00:00");
-		//pentru ianuarie
-		IpOverviewModel model=calculateIpOverview("2513","2017-01-05 00:00:00","2017-01-09 00:00:00","2017-02-10 00:00:00");
+		//pentru ianuarie-OKKKK
+		//IpOverviewModel model=calculateIpOverview("2513","2017-01-05 00:00:00","2017-01-09 00:00:00","2017-02-10 00:00:00");
+		IpOverviewModel model=calculateIpOverview("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-17 17:00:00");
 	
 		List<IpOverViewPayedOrdersModel> paidOrders =model.getPayedOrders();
 		List<IpOverViewReturnsListModel> returns=model.getReturns();
