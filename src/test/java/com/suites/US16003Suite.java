@@ -5,10 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.uss16.us16003DataPreparation.US16003AddNewContactToStyleCoachTest;
+import com.tests.uss16.us16003DataPreparation.US16003AddNewContactWithCustomerEmailToSCTest;
 import com.tests.uss16.us16003DataPreparation.US16003ChechEmailAndAcceptInvitationTest;
-import com.tests.uss16.us16003DataPreparation.US16003ConfirmCustomerTest;
 import com.tests.uss16.us16003DataPreparation.US16003CreatePartyWithNewContactHostTest;
-import com.tests.uss16.us16003DataPreparation.US16003RegularCustomerRegistrationTest;
 import com.tests.uss16.us16003DataPreparation.US16003RegularCustomerSetProductsInCartAndWishlist;
 import com.tests.uss16.us16003DataPreparation.US16003SetUpNewBorrowFunctionalityTest;
 import com.tests.uss16.us16003DataPreparation.US16003StyleCoachRegistrationTest;
@@ -41,20 +40,13 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 @SuiteClasses({
 	//data preparation
 	US16003StyleCoachRegistrationTest.class,
-	US16003RegularCustomerRegistrationTest.class,
-	US16003AddNewContactToStyleCoachTest.class,
-	
-//	US16003ConfirmCustomerTest.class,
-//	US16003RegularCustomerSetProductsInCartAndWishlist.class,
 	US16003CreatePartyWithNewContactHostTest.class,
-//	US16003ChechEmailAndAcceptInvitationTest.class,
+	US16003AddNewContactWithCustomerEmailToSCTest.class,
+	US16003AddNewContactToStyleCoachTest.class,
 	US16003SetUpNewBorrowFunctionalityTest.class,
-	US16003ConfirmCustomerTest.class,
 	US16003RegularCustomerSetProductsInCartAndWishlist.class,
 	US16003ChechEmailAndAcceptInvitationTest.class,
 	
-////	
-////
 ////	//stylist in Top, top=default, allowed to borrow=TOP package 
 	
 	
@@ -64,7 +56,6 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	US16004aValidateOrderWithDefaultTopAndTopPackageBackOfficeTest.class,
 	US16004aCancelOrderDefaultTopAndTopPackageTest.class,
 	US16004ValidateOrderWithDefaultTopAndTopPackageEmailTest.class,
-////	
 //////	stylist in Top, top=default, allowed to borrow=custom package 
 	US16004aNewBorrowWithDefaultTopAndCustomPackageTest.class,
 	US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest.class,

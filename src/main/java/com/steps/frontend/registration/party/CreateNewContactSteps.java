@@ -26,6 +26,20 @@ public class CreateNewContactSteps extends AbstractSteps {
 		createNewContactPage().submitContact();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
+	
+	@Title("Fill new contact details with email of an existing customer")
+	@Step
+	public void fillCreateNewContactWithCustomerEmail(CustomerFormModel customerData, AddressModel addressData,String customerEmail) {
+		createNewContactPage().firstnameInput(customerData.getFirstName());
+		createNewContactPage().lastnameInput(customerData.getLastName());
+		createNewContactPage().emailInput(customerEmail);
+		fillContactDetails(addressData);
+		createNewContactPage().checkNewsletter();
+		createNewContactPage().checkParties();
+		createNewContactPage().checkMember();
+		createNewContactPage().submitContact();
+		waitABit(TimeConstants.TIME_CONSTANT);
+	}
 
 	@Title("Fill new contact details without plz")
 	@Step
