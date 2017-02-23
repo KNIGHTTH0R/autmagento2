@@ -41,8 +41,9 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 @SuiteClasses({
 	//data preparation
 	US16003StyleCoachRegistrationTest.class,
-	US16003AddNewContactToStyleCoachTest.class,
 	US16003RegularCustomerRegistrationTest.class,
+	US16003AddNewContactToStyleCoachTest.class,
+	
 //	US16003ConfirmCustomerTest.class,
 //	US16003RegularCustomerSetProductsInCartAndWishlist.class,
 	US16003CreatePartyWithNewContactHostTest.class,
