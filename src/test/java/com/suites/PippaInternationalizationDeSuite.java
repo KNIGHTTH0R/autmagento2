@@ -116,7 +116,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 //	US23001PartThreeSuite.class,
 	
 	NotificationsSuite.class,
-	VerifyOrderEmailsSuite.class
+//	VerifyOrderEmailsSuite.class
 	
 })
 @RunWith(Suite.class)
