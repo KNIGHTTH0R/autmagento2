@@ -75,9 +75,13 @@ public class BorrowPage extends AbstractPage {
 	}
 	
 	public void selectProductsForStylistwithExtendedOption() {
+	//	element(productsAvailableForStylistWithExtendedConditions).waitUntilVisible();
 	       Select oSelect = new Select(getDriver().findElement(By.id("pippajean_borrow_stylist_borrow_process_extended_product_sku")));
 
-	        oSelect.selectByValue("23962");
+	       oSelect.selectByValue("23962");
+	      //  oSelect.selectByVisibleText("Borrow Product XXX");
+	       // oSelect.selectByIndex(1);
+	        
 	  //      oSelect.selectByIndex(1);
 
 		}

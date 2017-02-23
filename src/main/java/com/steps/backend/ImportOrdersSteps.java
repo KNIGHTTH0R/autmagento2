@@ -26,7 +26,8 @@ public class ImportOrdersSteps  {
 	
 	public void validateOrders(List<DBOrderModel> shopOrderList, List<NavOrderModel> navOrderList) throws Exception {
 
-		Assert.assertTrue("Failure: The list size are not equal", shopOrderList.size() == navOrderList.size());
+//		Assert.assertTrue("Failure: The list size are not equal", shopOrderList.size() == navOrderList.size());
+		CustomVerification.verifyTrue("Failure: The list size are not equal", shopOrderList.size() == navOrderList.size());
 		for (DBOrderModel order : shopOrderList) {
 			List<SalesOrderInfoModel> infoItemList = order.getItemInfo();
 			NavOrderModel compare = importOrders.findOrder(order.getIncrementId(), navOrderList);
@@ -34,7 +35,8 @@ public class ImportOrdersSteps  {
 			if (compare.getIncrementId() != null) {
 
 			} else {
-				Assert.assertTrue("Failure: Could not validate all orders in the list", compare != null);
+//				Assert.assertTrue("Failure: Could not validate all orders in the list", compare != null);
+				CustomVerification.verifyTrue("Failure: The list size are not equal", shopOrderList.size() == navOrderList.size());
 			}
 
 			double shippingAmount = Double.parseDouble(order.getShippingAmount());

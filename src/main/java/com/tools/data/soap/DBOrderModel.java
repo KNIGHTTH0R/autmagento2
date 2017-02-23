@@ -476,4 +476,29 @@ public class DBOrderModel {
 		this.termPurchaseType = termPurchaseType;
 	}
 
+	@Override
+	public String toString() {
+		return "DBOrderModel [incrementId=" + incrementId + ", createdAt=" + createdAt + ", customerId=" + customerId
+				+ ", paymentCompleteAt=" + paymentCompleteAt + ", stylistCustomerId=" + stylistCustomerId + ", orderId="
+				+ orderId + ", paymentMethodTypet=" + paymentMethodTypet + ", shippingType=" + shippingType
+				+ ", orderType=" + orderType + ", cartType=" + cartType + ", stylePartyId=" + stylePartyId
+				+ ", grandTotal=" + grandTotal + ", isPreshipped=" + isPreshipped + ", isPom=" + isPom
+				+ ", websiteCode=" + websiteCode + ", storeLanguage=" + storeLanguage + ", koboSingleArticle="
+				+ koboSingleArticle + ", updatedNav=" + updatedNav + ", stylistId=" + stylistId + ", orderCurrencyCode="
+				+ orderCurrencyCode + ", baseSubtotal=" + baseSubtotal + ", taxAmount=" + taxAmount + ", taxPrecent="
+				+ taxPrecent + ", customerFirstName=" + customerFirstName + ", customerLastName=" + customerLastName
+				+ ", customerName=" + customerName + ", billToFirstName=" + billToFirstName + ", billToLastName="
+				+ billToLastName + ", billToPostcode=" + billToPostcode + ", billToStreetAddress=" + billToStreetAddress
+				+ ", billToCity=" + billToCity + ", billCountryId=" + billCountryId + ", shipToFirstName="
+				+ shipToFirstName + ", shipToLastName=" + shipToLastName + ", shipToPostcode=" + shipToPostcode
+				+ ", shipToStreetAddress=" + shipToStreetAddress + ", shipToCity=" + shipToCity + ", shipCountryId="
+				+ shipCountryId + ", shippingInclTax=" + shippingInclTax + ", discountAmount=" + discountAmount
+				+ ", paidAt=" + paidAt + ", status=" + status + ", totalIp=" + totalIp + ", totalIpRefunded="
+				+ totalIpRefunded + ", termPurchaseType=" + termPurchaseType + ", orderCustomerName="
+				+ orderCustomerName + ", scheduledDeliveryDate=" + scheduledDeliveryDate + ", itemInfo=" + itemInfo
+				+ ", itemSku=" + itemSku + ", shippingAmount=" + shippingAmount + "]";
+	}
+
+	
+	
 }

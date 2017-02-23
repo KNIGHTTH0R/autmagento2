@@ -137,13 +137,14 @@ public class US16004aNewBorrowWithDefaultTopAndNotEligibleTest extends BaseTest 
 	public void us16004aNewBorrowWithDefaultTopAndNotEligibleTest() {
 		
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnSystemConfiguration();
-		borrowSystemConfigurationSteps.goToBorrowTab();
-		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
-		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
-		borrowSystemConfigurationSteps.selectCountries();
-		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
-		borrowSystemConfigurationSteps.saveConfiguration();
+//		backEndSteps.clickOnSystemConfiguration();
+//		borrowSystemConfigurationSteps.goToBorrowTab();
+//		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
+//		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
+//		borrowSystemConfigurationSteps.saveConfiguration();
+//		borrowSystemConfigurationSteps.selectCountries();
+//		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
+//		borrowSystemConfigurationSteps.saveConfiguration();
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);

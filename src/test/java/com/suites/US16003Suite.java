@@ -10,6 +10,7 @@ import com.tests.uss16.us16003DataPreparation.US16003ConfirmCustomerTest;
 import com.tests.uss16.us16003DataPreparation.US16003CreatePartyWithNewContactHostTest;
 import com.tests.uss16.us16003DataPreparation.US16003RegularCustomerRegistrationTest;
 import com.tests.uss16.us16003DataPreparation.US16003RegularCustomerSetProductsInCartAndWishlist;
+import com.tests.uss16.us16003DataPreparation.US16003SetUpNewBorrowFunctionalityTest;
 import com.tests.uss16.us16003DataPreparation.US16003StyleCoachRegistrationTest;
 import com.tests.uss16.us16004a.US16004ValidateOrderWithDefaultTopAndTopPackageEmailTest;
 import com.tests.uss16.us16004a.US16004aCancelOrderDefaultTopAndCustomPackageTest;
@@ -46,24 +47,26 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	US16003RegularCustomerSetProductsInCartAndWishlist.class,
 	US16003CreatePartyWithNewContactHostTest.class,
 	US16003ChechEmailAndAcceptInvitationTest.class,
-	
-
-	//stylist in Top, top=default, allowed to borrow=TOP package 
+	US16003SetUpNewBorrowFunctionalityTest.class,
+//	
+//
+//	//stylist in Top, top=default, allowed to borrow=TOP package 
 	US16004aNewBorrowWithDefaultTopAndTopPackageTest.class,
 	US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest.class,
-	US16004ValidateOrderWithDefaultTopAndTopPackageEmailTest.class,
+	
 	US16004aValidateOrderWithDefaultTopAndTopPackageBackOfficeTest.class,
 	US16004aCancelOrderDefaultTopAndTopPackageTest.class,
-	
-//	stylist in Top, top=default, allowed to borrow=custom package 
+	US16004ValidateOrderWithDefaultTopAndTopPackageEmailTest.class,
+//	
+////	stylist in Top, top=default, allowed to borrow=custom package 
 	US16004aNewBorrowWithDefaultTopAndCustomPackageTest.class,
 	US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest.class,
 	US16004aCancelOrderDefaultTopAndCustomPackageTest.class,
-
-	//stylist in Top, top=default, allowed to borrow=not eligible 
+//
+//	//stylist in Top, top=default, allowed to borrow=not eligible 
 	US16004aNewBorrowWithDefaultTopAndNotEligibleTest.class,
-	
-	//stylist in Top, top=allowed, allowed to borrow=not eligible 
+//	
+//	//stylist in Top, top=allowed, allowed to borrow=not eligible 
 	US16004bNewBorrowWithAllowedTopAndCustomPackageTest.class,
 	US16004bPlaceBarrowOrderAllowedTopAndCustomPackageTest.class,
 	US16004bCancelOrderAllowedTopAndCustomPackageTest.class,
@@ -71,7 +74,7 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	US16004bPlaceBarrowOrderAllowedTopAndTopPackageTest.class,
 	US16004bCancelOrderAllowedTopAndTopPackageTest.class,
 	US16004bNewBorrowWithAllowedTopAndNotEligibleTest.class,
-	
+//	
 	
 	//stylist in Top, top=denied, allowed to borrow =custom package
 	US16004cNewBorrowWithDeniedTopAndTopPackageTest.class,

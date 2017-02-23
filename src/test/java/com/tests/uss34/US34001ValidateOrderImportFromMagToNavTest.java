@@ -41,8 +41,12 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 	private List<NavOrderModel> navListOrders = new ArrayList<NavOrderModel>();
 	
 	List<String> shopOrderList = new ArrayList<String>(
-		   Arrays.asList("212000", "212952","212974"));
-			//Arrays.asList("212983"));
+		  // Arrays.asList("212000", "212952","212974"));
+//			Arrays.asList("213310","213311"));
+		//	Arrays.asList("213383")); <- configurable
+		//	Arrays.asList("213385")); <- bundle
+			Arrays.asList("213404")); 
+	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -66,6 +70,13 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 		}
 		
 
+		for (NavOrderModel navOrderModel : navListOrders) {
+			System.out.println(navOrderModel.toString());
+		}
+		
+		for (DBOrderModel dbmodel1 : shopListOrders) {
+			System.out.println(dbmodel1.toString());
+		}
 	}
 
 	@Test

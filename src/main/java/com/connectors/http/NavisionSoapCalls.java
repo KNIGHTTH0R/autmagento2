@@ -328,10 +328,17 @@ public class NavisionSoapCalls {
 									orderLinesModel.get(orderLinesModel.size() - 1).setNo(bomItemNo);
 								}
 								// if this is bundle
-								if (orderLinesModel.get(orderLinesModel.size() - 1).getShopParentItemNo() != null) {
+								/*if (orderLinesModel.get(orderLinesModel.size() - 1).getShopParentItemNo() != null) {
 									String shopParentItemNo = orderLinesModel.get(orderLinesModel.size() - 1)
 											.getShopParentItemNo();
-									orderLinesModel.get(orderLinesModel.size() - 1).setNo(shopParentItemNo);
+//									orderLinesModel.get(orderLinesModel.size() - 1).setNo(shopParentItemNo);
+									
+								}*/
+								
+								//if type=blank and getbomitemno!=null than is bom  else if{type=blank is a bundle
+								if (orderLinesModel.get(orderLinesModel.size() - 1).getType() != "_blank_") {
+									orderLinesModel.get(orderLinesModel.size() - 1).setNo("bundle");
+									
 								}
 
 							}
@@ -346,6 +353,8 @@ public class NavisionSoapCalls {
 							}
 
 						}
+						
+						
 						grandTotal=grandTotal.subtract(shippingDiscount);
 						model.setTotalIp(totalIP.toString());
 						model.setCalculatedGrandTotal(grandTotal.toString());

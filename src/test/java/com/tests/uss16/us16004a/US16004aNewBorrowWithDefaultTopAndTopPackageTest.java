@@ -157,13 +157,14 @@ public class US16004aNewBorrowWithDefaultTopAndTopPackageTest extends BaseTest {
 	@Test
 	public void us16004aNewBorrowWithDefaultTopAndTopPackageTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnSystemConfiguration();
-		borrowSystemConfigurationSteps.goToBorrowTab();
-		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
-		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
-		borrowSystemConfigurationSteps.selectCountries();
-		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
-		borrowSystemConfigurationSteps.saveConfiguration();
+//		backEndSteps.clickOnSystemConfiguration();
+//		borrowSystemConfigurationSteps.goToBorrowTab();
+//		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
+//		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
+//		borrowSystemConfigurationSteps.saveConfiguration();
+//		borrowSystemConfigurationSteps.selectCountries();
+//		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
+//		borrowSystemConfigurationSteps.saveConfiguration();
 		backEndSteps.clickOnCustomers();
 		backEndSteps.searchForEmail(stylistEmail);
 		backEndSteps.openCustomerDetails(stylistEmail);
