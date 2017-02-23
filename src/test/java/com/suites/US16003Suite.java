@@ -43,30 +43,36 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	US16003StyleCoachRegistrationTest.class,
 	US16003AddNewContactToStyleCoachTest.class,
 	US16003RegularCustomerRegistrationTest.class,
+//	US16003ConfirmCustomerTest.class,
+//	US16003RegularCustomerSetProductsInCartAndWishlist.class,
+	US16003CreatePartyWithNewContactHostTest.class,
+//	US16003ChechEmailAndAcceptInvitationTest.class,
+	US16003SetUpNewBorrowFunctionalityTest.class,
 	US16003ConfirmCustomerTest.class,
 	US16003RegularCustomerSetProductsInCartAndWishlist.class,
-	US16003CreatePartyWithNewContactHostTest.class,
 	US16003ChechEmailAndAcceptInvitationTest.class,
-	US16003SetUpNewBorrowFunctionalityTest.class,
-//	
-//
-//	//stylist in Top, top=default, allowed to borrow=TOP package 
+	
+////	
+////
+////	//stylist in Top, top=default, allowed to borrow=TOP package 
+	
+	
 	US16004aNewBorrowWithDefaultTopAndTopPackageTest.class,
 	US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest.class,
 	
 	US16004aValidateOrderWithDefaultTopAndTopPackageBackOfficeTest.class,
 	US16004aCancelOrderDefaultTopAndTopPackageTest.class,
 	US16004ValidateOrderWithDefaultTopAndTopPackageEmailTest.class,
-//	
-////	stylist in Top, top=default, allowed to borrow=custom package 
+////	
+//////	stylist in Top, top=default, allowed to borrow=custom package 
 	US16004aNewBorrowWithDefaultTopAndCustomPackageTest.class,
 	US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest.class,
 	US16004aCancelOrderDefaultTopAndCustomPackageTest.class,
-//
-//	//stylist in Top, top=default, allowed to borrow=not eligible 
+////
+////	//stylist in Top, top=default, allowed to borrow=not eligible 
 	US16004aNewBorrowWithDefaultTopAndNotEligibleTest.class,
-//	
-//	//stylist in Top, top=allowed, allowed to borrow=not eligible 
+////	
+////	//stylist in Top, top=allowed, allowed to borrow=not eligible 
 	US16004bNewBorrowWithAllowedTopAndCustomPackageTest.class,
 	US16004bPlaceBarrowOrderAllowedTopAndCustomPackageTest.class,
 	US16004bCancelOrderAllowedTopAndCustomPackageTest.class,

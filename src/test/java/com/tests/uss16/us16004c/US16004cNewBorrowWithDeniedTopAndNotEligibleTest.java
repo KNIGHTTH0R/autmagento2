@@ -134,7 +134,7 @@ public class US16004cNewBorrowWithDeniedTopAndNotEligibleTest extends BaseTest {
 	}
 
 	@Test
-	public void us16004bNewBorrowWithDeniedTopAndNotEligibleTest() {
+	public void us16004cNewBorrowWithDeniedTopAndNotEligibleTest() {
 		
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 //		backEndSteps.clickOnSystemConfiguration();

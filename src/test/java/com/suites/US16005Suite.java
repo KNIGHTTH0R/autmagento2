@@ -19,18 +19,20 @@ import com.tests.uss16.uss16006.US16006BorrowProcessIsDisabledTest;
 
 @SuiteClasses({
 	//data preparation
-	US16006RegularCustomerSetProductsInCartAndWishlistTest.class,
-	US16006CreatePartyTest.class,
-	US16006ChechEmailAndAcceptInvitationTest.class,
+//	US16006RegularCustomerSetProductsInCartAndWishlistTest.class,
+
 	
-	//stylist which is out Take of Phase period
-	US16005NewBorrowWithDefaultAndTopPackageTest.class,
+//	US16006CreatePartyTest.class,
+//	US16006ChechEmailAndAcceptInvitationTest.class,
+//	
+//	//stylist which is out Take of Phase period
+//	US16005NewBorrowWithDefaultAndTopPackageTest.class,
 	US16005NewBorrowWithAllowAndCustomPackageTest.class,
-	US16005PlaceBorrowOrderAllowTopAndCustomPackageTest.class,
-	US16005CancelOrderAllowTopAndTopPackageTest.class,
-	
-	//Borrow process is Disabled
-	US16006BorrowProcessIsDisabledTest.class
+//	US16005PlaceBorrowOrderAllowTopAndCustomPackageTest.class,
+//	US16005CancelOrderAllowTopAndTopPackageTest.class,
+//	
+//	//Borrow process is Disabled
+//	US16006BorrowProcessIsDisabledTest.class
 	
 
 	

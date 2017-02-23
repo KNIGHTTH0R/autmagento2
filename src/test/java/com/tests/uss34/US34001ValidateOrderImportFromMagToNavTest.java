@@ -45,7 +45,7 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 //			Arrays.asList("213310","213311"));
 		//	Arrays.asList("213383")); <- configurable
 		//	Arrays.asList("213385")); <- bundle
-			Arrays.asList("213404")); 
+			Arrays.asList("213311","213383","213434","213428","213429")); 
 	
 	
 	@Before
