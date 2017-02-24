@@ -88,6 +88,16 @@ public class HeaderSteps extends AbstractSteps {
 		navigate(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
 		
 	}
+	
+	@Step
+	public void redirectToPartyCreate() {
+		waitABit(TimeConstants.TIME_CONSTANT);
+		navigate(MongoReader.getBaseURL() + "/stylist/party/create/");
+		waitABit(TimeConstants.TIME_CONSTANT);
+		partyCreationPage().checkHostedByCustomer();
+		partyCreationPage().clickAddContact();
+		waitABit(1000);
+	}
 
 	@Step
 	public void redirectToWishlist() {

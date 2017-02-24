@@ -98,8 +98,10 @@ public class US16003CreatePartyWithNewContactHostTest extends BaseTest {
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
+		
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToCreatePartyWithNewContactPage();
+		//headerSteps.goToCreatePartyWithNewContactPage();
+		headerSteps.redirectToPartyCreate();
 		createNewContactSteps.fillCreateNewContact(customerData, addressData);
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForNewCustomerHost());
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
