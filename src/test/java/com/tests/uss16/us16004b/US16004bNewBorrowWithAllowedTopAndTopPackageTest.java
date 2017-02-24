@@ -140,9 +140,7 @@ public class US16004bNewBorrowWithAllowedTopAndTopPackageTest extends BaseTest {
 		stylistPassword=stylistData.getPassword();
 		
 		
-//		customerData = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0);
-//		System.out.println("customer data "+customerData.getEmailName());
-//		System.out.println("customer pass "+customerData.getPassword());
+
 		
 		
 		Properties prop = new Properties();
@@ -176,7 +174,7 @@ public class US16004bNewBorrowWithAllowedTopAndTopPackageTest extends BaseTest {
 	
 
 	@Test
-	public void us16004aNewBorrowWithAllowedTopAndTopPackageTest() {
+	public void us16004bNewBorrowWithAllowedTopAndTopPackageTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 //		backEndSteps.clickOnSystemConfiguration();
 //		borrowSystemConfigurationSteps.goToBorrowTab();
