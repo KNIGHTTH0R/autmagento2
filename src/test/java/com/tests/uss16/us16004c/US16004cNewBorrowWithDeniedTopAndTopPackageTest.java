@@ -1,7 +1,12 @@
 package com.tests.uss16.us16004c;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +34,7 @@ import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -91,7 +97,7 @@ public class US16004cNewBorrowWithDeniedTopAndTopPackageTest extends BaseTest {
 	
 	
 	public String stylistEmail, stylistPassword;
-	public CustomerFormModel customerData;
+	public String customerEmail;
 	public CustomerFormModel stylistData;
 	public CustomerFormModel contactData;
 	
@@ -119,12 +125,27 @@ public class US16004cNewBorrowWithDeniedTopAndTopPackageTest extends BaseTest {
 		
 		stylistEmail=stylistData.getEmailName();
 		stylistPassword=stylistData.getPassword();
+			
 		
-		
-		customerData = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0);
-		System.out.println("customer data "+customerData.getEmailName());
-		System.out.println("customer pass "+customerData.getPassword());
-		
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss16" + File.separator + "us16003.properties");
+			prop.load(input);
+			customerEmail = prop.getProperty("customerUsername");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
 		contactData= MongoReader.grabCustomerFormModels("US16003AddNewContactToStyleCoachTest").get(0);
 		System.out.println("contact data "+contactData.getEmailName());
@@ -179,7 +200,7 @@ public class US16004cNewBorrowWithDeniedTopAndTopPackageTest extends BaseTest {
 		//go to contact details and check 
 		
 		loungeSteps.goToContactsList();
-		myContactsListSteps.openContactDetailsPage(customerData.getEmailName());
+		myContactsListSteps.openContactDetailsPage(customerEmail);
 	 
 		//contactDetailsSteps.checkBlockLinesForRegisterContact();
 		contactDetailsSteps.checkBlockLinesForContacts();// maybe is not aplicable here and should be deleted 
