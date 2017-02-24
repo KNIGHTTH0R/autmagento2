@@ -411,12 +411,12 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void typeGuestName(String name) {
 		element(guestName).waitUntilVisible();
-		element(guestName).sendKeys(name);
+		element(guestName).sendKeys(String.valueOf(name));
 	}
 
 	public void typeGuestEmail(String email) {
 		element(guestEmail).waitUntilVisible();
-		element(guestEmail).sendKeys(email);
+		element(guestEmail).sendKeys(String.valueOf(email));
 	}
 
 	public void typeMessageForGuest(String message) {
