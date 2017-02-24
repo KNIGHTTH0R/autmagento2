@@ -117,7 +117,7 @@ public class ImportOrdersSteps  {
 	}
 
 	
-	private String calculateTaxAmount(String taxAmount,String vatPercent,String calculatedGrandTotal){
+	private static String calculateTaxAmount(String taxAmount,String vatPercent,String calculatedGrandTotal){
 		double grandTotalDouble = Double.parseDouble(calculatedGrandTotal);
 		
 		double vatDouble = Double.parseDouble(vatPercent);
@@ -134,4 +134,9 @@ public class ImportOrdersSteps  {
 	}
 
 
+	
+	public static void main(String[] args) {
+		System.out.println(calculateTaxAmount("","19","30.07"));
+	}
+	
 }
