@@ -99,28 +99,28 @@ public class US16003RegularCustomerSetProductsInCartAndWishlist extends BaseTest
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 		//should run before create products suite
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(0);
-		genProduct2 = createdProductsList.get(1);
-		genProduct3 = createdProductsList.get(3);
-		genProduct4 = createdProductsList.get(4);
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(0);
+//		genProduct2 = createdProductsList.get(1);
+//		genProduct3 = createdProductsList.get(3);
+//		genProduct4 = createdProductsList.get(4);
 		
 		
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
-//
-//		genProduct4 = MagentoProductCalls.createProductModel();
-//		genProduct4.setPrice("15.00");
-//		MagentoProductCalls.createApiProduct(genProduct4);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+
+		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.setPrice("49.90");
+		MagentoProductCalls.createApiProduct(genProduct2);
+
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("10.00");
+		MagentoProductCalls.createApiProduct(genProduct3);
+
+		genProduct4 = MagentoProductCalls.createProductModel();
+		genProduct4.setPrice("15.00");
+		MagentoProductCalls.createApiProduct(genProduct4);
 		
 		Properties prop = new Properties();
 		InputStream input = null;

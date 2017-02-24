@@ -1,5 +1,11 @@
 package com.tests.uss16.us16003DataPreparation;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +21,7 @@ import com.steps.frontend.UpdatePartySteps;
 import com.steps.frontend.registration.party.CreateNewContactSteps;
 import com.tests.BaseTest;
 import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
@@ -79,14 +86,26 @@ public class US16003CreatePartyWithNewContactHostTest extends BaseTest {
 		password=stylistRegistrationData.getPassword();
 		
 		//customer credentials
-		int size2 = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").size();
-		if (size2 > 0) {
-			customerEmail = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getEmailName();
-			customerName=MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getFirstName();
-			
-			System.out.println("customer name" +customerName );
-		} else
-			System.out.println("The database has no entries");
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss16" + File.separator + "us16003.properties");
+			prop.load(input);
+			customerEmail = prop.getProperty("customerUsername");
+			customerName= prop.getProperty("customerName");			
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 	}
