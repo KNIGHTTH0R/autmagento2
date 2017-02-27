@@ -41,11 +41,9 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 	private List<NavOrderModel> navListOrders = new ArrayList<NavOrderModel>();
 	
 	List<String> shopOrderList = new ArrayList<String>(
-		  // Arrays.asList("212000", "212952","212974"));
-//			Arrays.asList("213310","213311"));
-		//	Arrays.asList("213383")); <- configurable
-		//	Arrays.asList("213385")); <- bundle
-			Arrays.asList("213311","213383","213434","213428","213429")); 
+		 
+			Arrays.asList("213311","213383","213434","213428","213429","213445","213448","213449"));
+	
 	
 	
 	@Before
@@ -53,8 +51,8 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 
 		
 		//before
-	//	shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("212000","212000");
-	//	navListOrders = NavisionSoapCalls.getOrdersList("10021901100");
+		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("212000","212000");
+		navListOrders = NavisionSoapCalls.getOrdersList("10021901100..10021901100");
 		///
 		
 		for (String shOrder : shopOrderList) {
@@ -64,19 +62,22 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 			List<NavOrderModel> navListOrders1 = new ArrayList<NavOrderModel>();
 			dbmodel1=OrdersInfoMagentoCalls.getOrderWithItems(shOrder,shOrder);
 			navListOrders1=NavisionSoapCalls.getOrdersList(dbmodel1.get(0).getIncrementId());
-			
 			shopListOrders.add(dbmodel1.get(0));
-			navListOrders.add(navListOrders1.get(0));
-		}
+			if(!navListOrders1.isEmpty()){
+				navListOrders.add(navListOrders1.get(0));
+			}
 		
-
-		for (NavOrderModel navOrderModel : navListOrders) {
-			System.out.println(navOrderModel.toString());
 		}
-		
-		for (DBOrderModel dbmodel1 : shopListOrders) {
-			System.out.println(dbmodel1.toString());
-		}
+//		System.out.println("lista shop "+shopListOrders.size());
+//		System.out.println("lista nav" +navListOrders.size());
+//
+//		for (NavOrderModel navOrderModel : navListOrders) {
+//			System.out.println(navOrderModel.toString());
+//		}
+//		
+//		for (DBOrderModel dbmodel1 : shopListOrders) {
+//			System.out.println(dbmodel1.toString());
+//		}
 	}
 
 	@Test
