@@ -102,7 +102,7 @@ public class OrderInfoMagCalls {
 		NodeList itemList = response.getSOAPBody().getElementsByTagName("complexObjectArray");
 		NodeList shippingAddress = response.getSOAPBody().getElementsByTagName("shipping_address");
 		NodeList billigAddress = response.getSOAPBody().getElementsByTagName("billing_address");
-
+		boolean isBundle=false;
 		for (int i = 0; i < result.getLength(); i++) {
 			NodeList resultNodes = result.item(i).getChildNodes();
 			for (int r = 0; r < resultNodes.getLength(); r++) {
@@ -193,7 +193,21 @@ public class OrderInfoMagCalls {
 					NodeList childNodes = itemList.item(c).getChildNodes();
 
 					for (int j = 0; j < childNodes.getLength(); j++) {
-						if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {  }
+						
+						
+						
+						if (childNodes.item(j).getNodeName().equalsIgnoreCase("product_type")) { 
+							isBundle=childNodes.item(j).getTextContent().contentEquals("bundle")?true:false;
+						}
+						if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) { 
+							if(isBundle){
+								//infoItem.setSku(retriveBundleParent(childNodes.item(j).getTextContent()));
+								infoItem.setSku("bundle");
+							}else{
+								infoItem.setSku(childNodes.item(j).getTextContent());
+							}
+							
+						}
 						
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_percent")) {
 							model.setTaxPrecent(childNodes.item(j).getTextContent());
@@ -228,11 +242,31 @@ public class OrderInfoMagCalls {
 		}
 		return isLowerCase;
 	}
+	
+	public static String retriveBundleParent(String sku){
+		
+		System.out.println("skuull"+sku);
+		List<String> list = new ArrayList<String>(Arrays.asList(sku.split("-")));
+		String parentSku = null;
+
+		if (list.size() > 1) {
+			if (containsNumbers(list.get(1).substring(0, 1)) || isLowerCase(list.get(1).substring(0, 1))) {
+				parentSku = list.get(0) + "-" + list.get(1);
+			}else{
+				parentSku = list.get(0);
+			}
+		} else {
+			parentSku = list.get(0);
+		}
+		
+		System.out.println("parintele"+parentSku);
+		return parentSku;
+	}
 
 	public static void main(String[] args) throws SOAPException, IOException {
 		 
 		String sessID = HttpSoapConnector.performLogin();
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrdersInfo("10022003900", sessID);
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrdersInfo("10022046900", sessID);
 		
 		System.out.println("style party  : " + dbmodel.getStylePartyId());
 		System.out.println("kobo article "+ dbmodel.getKoboSingleArticle());

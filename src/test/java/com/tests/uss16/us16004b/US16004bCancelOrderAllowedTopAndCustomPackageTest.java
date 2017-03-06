@@ -26,7 +26,6 @@ public class US16004bCancelOrderAllowedTopAndCustomPackageTest extends BaseTest 
 
 	@Before
 	public void setUp() throws Exception {
-
 		orderModel = MongoReader.grabOrderModels("US16004bPlaceBarrowOrderAllowedTopAndCustomPackageTest" +  SoapKeys.GRAB).get(0);
 		System.out.println(orderModel.getOrderId());
 	}

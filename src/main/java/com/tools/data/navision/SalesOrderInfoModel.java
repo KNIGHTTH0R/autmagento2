@@ -4,8 +4,6 @@ public class SalesOrderInfoModel {
 	private String sku;
 	
 	
-	
-
 	public String getSku() {
 		return sku;
 	}
@@ -14,4 +12,10 @@ public class SalesOrderInfoModel {
 		this.sku = sku;
 	}
 
+	@Override
+	public String toString() {
+		return "SalesOrderInfoModel [sku=" + sku + "]";
+	}
+
+	
 }

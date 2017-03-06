@@ -1,7 +1,12 @@
 package com.tests.uss16.us16003DataPreparation;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,6 +33,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.RegularUserDataGrabber;
@@ -75,7 +81,7 @@ public class US16003RegularCustomerSetProductsInCartAndWishlist extends BaseTest
 	public ProductSteps productSteps;
 	@Steps
 	public WishlistSteps wishlistSteps;
-
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 	
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
@@ -92,7 +98,14 @@ public class US16003RegularCustomerSetProductsInCartAndWishlist extends BaseTest
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
-
+		//should run before create products suite
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(0);
+//		genProduct2 = createdProductsList.get(1);
+//		genProduct3 = createdProductsList.get(3);
+//		genProduct4 = createdProductsList.get(4);
+		
+		
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
@@ -109,14 +122,27 @@ public class US16003RegularCustomerSetProductsInCartAndWishlist extends BaseTest
 		genProduct4.setPrice("15.00");
 		MagentoProductCalls.createApiProduct(genProduct4);
 		
+		Properties prop = new Properties();
+		InputStream input = null;
 
-		int size = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").size();
-		if (size > 0) {
-			customerEmail = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getEmailName();
-			customerPassword=MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getPassword();
-		} else
-			System.out.println("The database has no entries");
+		try {
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss16" + File.separator + "us16003.properties");
+			prop.load(input);
+			customerEmail = prop.getProperty("customerUsername");
+			customerPassword = prop.getProperty("customerPassword");			
 
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "CART");

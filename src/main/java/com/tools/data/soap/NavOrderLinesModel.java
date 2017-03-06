@@ -80,7 +80,11 @@ public class NavOrderLinesModel {
 
 	@Override
 	public String toString() {
-		return "NavOrderLinesModel [no=" + no +  "]";
+		return "NavOrderLinesModel [no=" + no + ", type=" + type + ", bomItem=" + bomItem + ", bomItemNo=" + bomItemNo
+				+ ", shopParentItemNo=" + shopParentItemNo + ", varianteCode=" + varianteCode + ", shippingAmount="
+				+ shippingAmount + ", lineDiscountAmount=" + lineDiscountAmount + "]";
 	}
+
+
 
 }

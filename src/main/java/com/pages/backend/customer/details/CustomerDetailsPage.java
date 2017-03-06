@@ -257,6 +257,7 @@ public class CustomerDetailsPage extends AbstractPage {
 	}
 
 	public void clickOnStylecoachProfileTab() {
+		System.out.println("am ajuns aici");
 		evaluateJavascript("jQuery.noConflict();");
 		element(styleCoachProfileTab).waitUntilVisible();
 		styleCoachProfileTab.click();

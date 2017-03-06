@@ -403,9 +403,27 @@ public class NavOrderModel {
 
 	@Override
 	public String toString() {
-		return "NavOrderModel [lines=" + lines
-				+ "]";
+		return "NavOrderModel [incrementId=" + incrementId + ", navGrandTotal=" + navGrandTotal + ", postingDate="
+				+ postingDate + ", orderDate=" + orderDate + ", externalDocumentNo=" + externalDocumentNo
+				+ ", vatProdPostingGroup=" + vatProdPostingGroup + ", calculatedGrandTotal=" + calculatedGrandTotal
+				+ ", salesPersonCode=" + salesPersonCode + ", youRefercences=" + youRefercences + ", sellToContactNo="
+				+ sellToContactNo + ", sellToCustomerNo=" + sellToCustomerNo + ", shopShipmentMethod="
+				+ shopShipmentMethod + ", shopPaymentMethod=" + shopPaymentMethod + ", shopOrderType=" + shopOrderType
+				+ ", shopCartType=" + shopCartType + ", shippingAmount=" + shippingAmount + ", partyId=" + partyId
+				+ ", isAlreadyShipped=" + isAlreadyShipped + ", magentoGrandTotal=" + magentoGrandTotal + ", shopIsPom="
+				+ shopIsPom + ", shopWebsiteCode=" + shopWebsiteCode + ", shopStoreLanguage=" + shopStoreLanguage
+				+ ", koboSingleArticle=" + koboSingleArticle + ", prepmtPmtDiscountDate=" + prepmtPmtDiscountDate
+				+ ", baseGrandTotal=" + baseGrandTotal + ", discountAmount=" + discountAmount + ", billToName="
+				+ billToName + ", billToAddress=" + billToAddress + ", billToPostCode=" + billToPostCode
+				+ ", billToCity=" + billToCity + ", billToCountryRegionCode=" + billToCountryRegionCode
+				+ ", shipToName=" + shipToName + ", shipToAddress=" + shipToAddress + ", shipToPostCode="
+				+ shipToPostCode + ", shipToCity=" + shipToCity + ", shipToCountryRegionCode=" + shipToCountryRegionCode
+				+ ", sellToCustomerName=" + sellToCustomerName + ", sellToAddress=" + sellToAddress + ", containsBom="
+				+ containsBom + ", status=" + status + ", totalIp=" + totalIp + ", shippingType=" + shippingType
+				+ ", lines=" + lines + "]";
 	}
+
+	
 
 	
 

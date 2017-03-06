@@ -1,5 +1,11 @@
 package com.tests.uss16.us16003DataPreparation;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +14,7 @@ import com.steps.external.EmailClientSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
+import com.tools.constants.UrlConstants;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -26,29 +33,41 @@ public class US16003ChechEmailAndAcceptInvitationTest extends BaseTest {
 	@Steps
 	public EmailClientSteps emailSteps;
 	private String email;
-	
 
 	@Before
 	public void setUp() throws Exception {
+		// customer credentials
+		Properties prop = new Properties();
+		InputStream input = null;
 
-	
-		int size = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").size();
-		if (size > 0) {
-			email = MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getEmailName();
-		//	password=MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getPassword();
-//			emailPassword=MongoReader.grabCustomerFormModels("US16003RegularCustomerRegistrationTest").get(0).getPassword();
-		} else
-			System.out.println("The database has no entries");
+		try {
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss16" + File.separator + "us16003.properties");
+			prop.load(input);
+			email = prop.getProperty("customerUsername");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		
 	}
 
 	@Test
-	public void us7001ConfirmCustomerTest() {
-		//frontEndSteps.performLogin(email, password);
-		
-		//Dich ein zur PIPPA&JEAN Style Party
-		emailSteps.confirmPartyInvitation(email.replace("@" + ConfigConstants.WEB_MAIL, ""), "Dich ein zur PIPPA&JEAN Style Party");
+	public void us16003ChechEmailAndAcceptInvitationTest() {
+		// frontEndSteps.performLogin(email, password);
+
+		// Dich ein zur PIPPA&JEAN Style Party
+		emailSteps.confirmPartyInvitation(email.replace("@" + ConfigConstants.WEB_MAIL, ""),
+				"Dich ein zur PIPPA&JEAN Style Party");
 
 	}
-
 
 }
