@@ -80,7 +80,7 @@ public class IpReportsPage extends AbstractPage {
 	
 	}
 
-	public IpOverViewOpenIpsModel getOpenIpsModel() {
+	public IpOverViewOpenIpsModel getOpenIpsModelNotCurrentMonth() {
 	//	List<IpOverViewOpenIpsModel> result = new ArrayList<IpOverViewOpenIpsModel>();
 
 		List<WebElement> ipTables = getDriver().findElements(By.cssSelector("table.data-table tbody"));
@@ -94,20 +94,49 @@ public class IpReportsPage extends AbstractPage {
 		openIps.setOpenChargebacks(
 				ipTables.get(1).findElement(By.cssSelector("tr:nth-child(3) td:last-child")).getText());
 
-		openIps.setIpTPOrdersThisMonth(
-				ipTables.get(1).findElement(By.cssSelector("tr:nth-child(4) td:last-child")).getText());
+//		openIps.setIpTPOrdersThisMonth(
+//				ipTables.get(1).findElement(By.cssSelector("tr:nth-child(4) td:last-child")).getText());
+//
+//		openIps.setIpTPOrdersLastMonth(
+//				ipTables.get(1).findElement(By.cssSelector("tr:nth-child(5) td:last-child")).getText());
 
-		openIps.setIpTPOrdersLastMonth(
-				ipTables.get(1).findElement(By.cssSelector("tr:nth-child(5) td:last-child")).getText());
+		openIps.setOpenIpTotal(ipTables.get(1).findElement(By.cssSelector("tr:nth-child(4) td:last-child")).getText());
 
-		openIps.setOpenIpTotal(ipTables.get(1).findElement(By.cssSelector("tr:nth-child(6) td:last-child")).getText());
-
-	//	result.add(openIps);
+//		result.add(openIps);
 
 		PrintUtils.printOpenIpsReportMode(openIps);
 
 		return openIps;
 	}
+	
+	public IpOverViewOpenIpsModel getOpenIpsModelCurrentMonth() {
+		//	List<IpOverViewOpenIpsModel> result = new ArrayList<IpOverViewOpenIpsModel>();
+
+			List<WebElement> ipTables = getDriver().findElements(By.cssSelector("table.data-table tbody"));
+			waitFor(ExpectedConditions.visibilityOfAllElements(ipTables));
+
+			IpOverViewOpenIpsModel openIps = new IpOverViewOpenIpsModel();
+			openIps.setIpThisMonth(ipTables.get(1).findElement(By.cssSelector("tr:nth-child(1) td:last-child")).getText());
+
+			openIps.setIpLastMonth(ipTables.get(1).findElement(By.cssSelector("tr:nth-child(2) td:last-child")).getText());
+
+			openIps.setOpenChargebacks(
+					ipTables.get(1).findElement(By.cssSelector("tr:nth-child(3) td:last-child")).getText());
+
+			openIps.setIpTPOrdersThisMonth(
+					ipTables.get(1).findElement(By.cssSelector("tr:nth-child(4) td:last-child")).getText());
+	
+			openIps.setIpTPOrdersLastMonth(
+					ipTables.get(1).findElement(By.cssSelector("tr:nth-child(5) td:last-child")).getText());
+
+			openIps.setOpenIpTotal(ipTables.get(1).findElement(By.cssSelector("tr:nth-child(6) td:last-child")).getText());
+
+//			result.add(openIps);
+
+			PrintUtils.printOpenIpsReportMode(openIps);
+
+			return openIps;
+		}
 
 	public List<IpOverViewPayedOrdersModel> getPayedOrdersModel() {
 		List<IpOverViewPayedOrdersModel> result = new ArrayList<IpOverViewPayedOrdersModel>();

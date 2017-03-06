@@ -34,8 +34,13 @@ public class IpReportsSteps extends AbstractSteps {
 	}
 	
 	@Step
-	public  IpOverViewOpenIpsModel getOpenIpsModel() {
-		return ipReportsPage().getOpenIpsModel();
+	public  IpOverViewOpenIpsModel getOpenIpsModelCurrentMonth() {
+		return ipReportsPage().getOpenIpsModelCurrentMonth();
+	}
+	
+	@Step
+	public  IpOverViewOpenIpsModel getOpenIpsModelNotCurrentMonth() {
+		return ipReportsPage().getOpenIpsModelNotCurrentMonth();
 	}
 
 	@Step
