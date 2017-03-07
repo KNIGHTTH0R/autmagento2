@@ -92,7 +92,7 @@ public class CreateProductsTest extends BaseTest {
 		genProduct5.setPrice("34.90");
 		MagentoProductCalls.createApiProduct(genProduct5);
 		productsList.add(genProduct5);
-		/*
+		
 		genProduct6 = MagentoProductCalls.createMarketingProductModel();
 		genProduct6.setPrice("5.00");
 		MagentoProductCalls.createApiProduct(genProduct6);
@@ -176,7 +176,7 @@ public class CreateProductsTest extends BaseTest {
 		genProduct19 = MagentoProductCalls.createProductModel();
 		genProduct19.setPrice("449.50");
 		MagentoProductCalls.createApiProduct(genProduct19);
-		productsList.add(genProduct19);*/
+		productsList.add(genProduct19);
 		
 		
 		
