@@ -226,6 +226,8 @@ public class PartyDetailsPage extends AbstractPage {
 	public void createFolowUpParty() {
 		element(createFolowUpParty).waitUntilVisible();
 		createFolowUpParty.click();
+		
+		waitForLoadingImageToDissapear();
 	}
 
 	public void deleteParty() {

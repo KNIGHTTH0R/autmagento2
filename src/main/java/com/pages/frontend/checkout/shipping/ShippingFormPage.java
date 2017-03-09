@@ -137,9 +137,11 @@ public class ShippingFormPage extends AbstractPage {
 
 		if ((checked && !isSelected) || (!checked && isSelected))
 			sameAsBilling.click();
+		
+		waitForLoadingImageToDissapear();
 
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
-				ContextConstants.LOADING_MESSAGE));
+//		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+//				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void selectShippingAddress(String value) {

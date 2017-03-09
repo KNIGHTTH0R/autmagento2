@@ -161,6 +161,7 @@ public class US16005NewBorrowWithAllowAndCustomPackageTest extends BaseTest {
 		borrowSystemConfigurationSteps.goToBorrowTab();
 		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
 		borrowSystemConfigurationSteps.selectBorrowProcessType("(New process) Allow defined products to be borrowed");
+		borrowSystemConfigurationSteps.saveConfiguration();
 		borrowSystemConfigurationSteps.selectCountries();
 		borrowSystemConfigurationSteps.selectProductsForStylistwithExtendedOption();
 		borrowSystemConfigurationSteps.saveConfiguration();
