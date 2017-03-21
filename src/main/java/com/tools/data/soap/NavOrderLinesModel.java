@@ -10,8 +10,30 @@ public class NavOrderLinesModel {
 	private String varianteCode;
 	private String shippingAmount;
 	private String lineDiscountAmount;
+	private String qty;
+	private String unitPrice;
 
 	
+	public String getQty() {
+		return qty;
+	}
+
+	public void setQty(String qty) {
+		this.qty = qty;
+	}
+
+	public String getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(String unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+	public void setBomItem(boolean bomItem) {
+		this.bomItem = bomItem;
+	}
+
 	public String getLineDiscountAmount() {
 		return lineDiscountAmount;
 	}
@@ -78,13 +100,18 @@ public class NavOrderLinesModel {
 		this.no = no;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "NavOrderLinesModel [no=" + no + ", type=" + type + ", bomItem=" + bomItem + ", bomItemNo=" + bomItemNo
+//				+ ", shopParentItemNo=" + shopParentItemNo + ", varianteCode=" + varianteCode + ", shippingAmount="
+//				+ shippingAmount + ", lineDiscountAmount=" + lineDiscountAmount + "]";
+//	}
+	
+	
 	@Override
 	public String toString() {
-		return "NavOrderLinesModel [no=" + no + ", type=" + type + ", bomItem=" + bomItem + ", bomItemNo=" + bomItemNo
-				+ ", shopParentItemNo=" + shopParentItemNo + ", varianteCode=" + varianteCode + ", shippingAmount="
-				+ shippingAmount + ", lineDiscountAmount=" + lineDiscountAmount + "]";
+		return "NavOrderLinesModel [no=" + no +  "]";
 	}
-
 
 
 }

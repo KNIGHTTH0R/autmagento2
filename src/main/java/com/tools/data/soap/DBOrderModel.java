@@ -2,7 +2,6 @@ package com.tools.data.soap;
 
 import java.util.List;
 
-import com.tools.data.IpOverViewPayedOrdersModel;
 import com.tools.data.navision.SalesOrderInfoModel;
 
 public class DBOrderModel {
@@ -46,6 +45,7 @@ public class DBOrderModel {
 	private String billToStreetAddress;
 	private String billToCity;
 	private String billCountryId;
+	private String billToHousNumber;
 
 	// from shipping list details
 	private String shipToFirstName;
@@ -54,6 +54,8 @@ public class DBOrderModel {
 	private String shipToStreetAddress;
 	private String shipToCity;
 	private String shipCountryId;
+	private String shipToHousNumber;
+
 
 	// in nav should be extreacted from lines
 	private String shippingInclTax;
@@ -70,10 +72,57 @@ public class DBOrderModel {
 	private List<SalesOrderInfoModel> itemInfo;
 	private List<String> itemSku;
 	private String shippingAmount;
+	private String originalPrice;
+	private String qtyOrdered;
+	private String calculatedGrandTotal;
+	private String calculatedTaxAmount;
+	private String baseDiscountAmount;
+	private String jewelryCreditsUsed;
+	private String marketingCreditsUsed;
+	private String fiftyDiscountsUsed;
+	private String fiftyDiscountsAmount;
+	private String orderCustomerEmail;
+	private String vatNumber;
+	private String smallBusinessMan;
+	private String banckAccountNumber;
+	private String languageCode;
+	private String magentoGrandTotal;
+	private String magentoTaxAmmount;
+	private String contactid;
 	
 	
-	
-	
+	public String getContactid() {
+		return contactid;
+	}
+
+	public void setContactid(String contactid) {
+		this.contactid = contactid;
+	}
+
+	public String getMagentoTaxAmmount() {
+		return magentoTaxAmmount;
+	}
+
+	public void setMagentoTaxAmmount(String magentoTaxAmmount) {
+		this.magentoTaxAmmount = magentoTaxAmmount;
+	}
+
+	public String getMagentoGrandTotal() {
+		return magentoGrandTotal;
+	}
+
+	public void setMagentoGrandTotal(String magentoGrandTotal) {
+		this.magentoGrandTotal = magentoGrandTotal;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -475,30 +524,159 @@ public class DBOrderModel {
 	public void setTermPurchaseType(String termPurchaseType) {
 		this.termPurchaseType = termPurchaseType;
 	}
+	
+	
 
-	@Override
-	public String toString() {
-		return "DBOrderModel [incrementId=" + incrementId + ", createdAt=" + createdAt + ", customerId=" + customerId
-				+ ", paymentCompleteAt=" + paymentCompleteAt + ", stylistCustomerId=" + stylistCustomerId + ", orderId="
-				+ orderId + ", paymentMethodTypet=" + paymentMethodTypet + ", shippingType=" + shippingType
-				+ ", orderType=" + orderType + ", cartType=" + cartType + ", stylePartyId=" + stylePartyId
-				+ ", grandTotal=" + grandTotal + ", isPreshipped=" + isPreshipped + ", isPom=" + isPom
-				+ ", websiteCode=" + websiteCode + ", storeLanguage=" + storeLanguage + ", koboSingleArticle="
-				+ koboSingleArticle + ", updatedNav=" + updatedNav + ", stylistId=" + stylistId + ", orderCurrencyCode="
-				+ orderCurrencyCode + ", baseSubtotal=" + baseSubtotal + ", taxAmount=" + taxAmount + ", taxPrecent="
-				+ taxPrecent + ", customerFirstName=" + customerFirstName + ", customerLastName=" + customerLastName
-				+ ", customerName=" + customerName + ", billToFirstName=" + billToFirstName + ", billToLastName="
-				+ billToLastName + ", billToPostcode=" + billToPostcode + ", billToStreetAddress=" + billToStreetAddress
-				+ ", billToCity=" + billToCity + ", billCountryId=" + billCountryId + ", shipToFirstName="
-				+ shipToFirstName + ", shipToLastName=" + shipToLastName + ", shipToPostcode=" + shipToPostcode
-				+ ", shipToStreetAddress=" + shipToStreetAddress + ", shipToCity=" + shipToCity + ", shipCountryId="
-				+ shipCountryId + ", shippingInclTax=" + shippingInclTax + ", discountAmount=" + discountAmount
-				+ ", paidAt=" + paidAt + ", status=" + status + ", totalIp=" + totalIp + ", totalIpRefunded="
-				+ totalIpRefunded + ", termPurchaseType=" + termPurchaseType + ", orderCustomerName="
-				+ orderCustomerName + ", scheduledDeliveryDate=" + scheduledDeliveryDate + ", itemInfo=" + itemInfo
-				+ ", itemSku=" + itemSku + ", shippingAmount=" + shippingAmount + "]";
+	public String getOriginalPrice() {
+		return originalPrice;
+	}
+
+	public void setOriginalPrice(String originalPrice) {
+		this.originalPrice = originalPrice;
+	}
+
+	public String getQtyOrdered() {
+		return qtyOrdered;
+	}
+
+	public void setQtyOrdered(String qtyOrdered) {
+		this.qtyOrdered = qtyOrdered;
+	}
+
+	public String getCalculatedGrandTotal() {
+		return calculatedGrandTotal;
+	}
+
+	public void setCalculatedGrandTotal(String calculatedGrandTotal) {
+		this.calculatedGrandTotal = calculatedGrandTotal;
+	}
+
+	public String getBaseDiscountAmount() {
+		return baseDiscountAmount;
+	}
+
+	public void setBaseDiscountAmount(String baseDiscountAmount) {
+		this.baseDiscountAmount = baseDiscountAmount;
+	}
+
+	public String getJewelryCreditsUsed() {
+		return jewelryCreditsUsed;
+	}
+
+	public void setJewelryCreditsUsed(String jewelryCreditsUsed) {
+		this.jewelryCreditsUsed = jewelryCreditsUsed;
+	}
+
+	public String getMarketingCreditsUsed() {
+		return marketingCreditsUsed;
+	}
+
+	public void setMarketingCreditsUsed(String marketingCreditsUsed) {
+		this.marketingCreditsUsed = marketingCreditsUsed;
+	}
+
+	public String getFiftyDiscountsUsed() {
+		return fiftyDiscountsUsed;
+	}
+
+	public void setFiftyDiscountsUsed(String fiftyDiscountsUsed) {
+		this.fiftyDiscountsUsed = fiftyDiscountsUsed;
+	}
+
+	public String getFiftyDiscountsAmount() {
+		return fiftyDiscountsAmount;
+	}
+
+	public void setFiftyDiscountsAmount(String fiftyDiscountsAmount) {
+		this.fiftyDiscountsAmount = fiftyDiscountsAmount;
 	}
 
 	
+	
+//	@Override
+//	public String toString() {
+//		return "DBOrderModel [incrementId=" + incrementId + ", createdAt=" + createdAt + ", customerId=" + customerId
+//				+ ", paymentCompleteAt=" + paymentCompleteAt + ", stylistCustomerId=" + stylistCustomerId + ", orderId="
+//				+ orderId + ", paymentMethodTypet=" + paymentMethodTypet + ", shippingType=" + shippingType
+//				+ ", orderType=" + orderType + ", cartType=" + cartType + ", stylePartyId=" + stylePartyId
+//				+ ", grandTotal=" + grandTotal + ", isPreshipped=" + isPreshipped + ", isPom=" + isPom
+//				+ ", websiteCode=" + websiteCode + ", storeLanguage=" + storeLanguage + ", koboSingleArticle="
+//				+ koboSingleArticle + ", updatedNav=" + updatedNav + ", stylistId=" + stylistId + ", orderCurrencyCode="
+//				+ orderCurrencyCode + ", baseSubtotal=" + baseSubtotal + ", taxAmount=" + taxAmount + ", taxPrecent="
+//				+ taxPrecent + ", customerFirstName=" + customerFirstName + ", customerLastName=" + customerLastName
+//				+ ", customerName=" + customerName + ", billToFirstName=" + billToFirstName + ", billToLastName="
+//				+ billToLastName + ", billToPostcode=" + billToPostcode + ", billToStreetAddress=" + billToStreetAddress
+//				+ ", billToCity=" + billToCity + ", billCountryId=" + billCountryId + ", shipToFirstName="
+//				+ shipToFirstName + ", shipToLastName=" + shipToLastName + ", shipToPostcode=" + shipToPostcode
+//				+ ", shipToStreetAddress=" + shipToStreetAddress + ", shipToCity=" + shipToCity + ", shipCountryId="
+//				+ shipCountryId + ", shippingInclTax=" + shippingInclTax + ", discountAmount=" + discountAmount
+//				+ ", paidAt=" + paidAt + ", status=" + status + ", totalIp=" + totalIp + ", totalIpRefunded="
+//				+ totalIpRefunded + ", termPurchaseType=" + termPurchaseType + ", orderCustomerName="
+//				+ orderCustomerName + ", scheduledDeliveryDate=" + scheduledDeliveryDate + ", itemInfo=" + itemInfo
+//				+ ", itemSku=" + itemSku + ", shippingAmount=" + shippingAmount + "]";
+//	}
+
+	public String getBillToHousNumber() {
+		return billToHousNumber;
+	}
+
+	public void setBillToHousNumber(String billToHousNumber) {
+		this.billToHousNumber = billToHousNumber;
+	}
+
+	public String getShipToHousNumber() {
+		return shipToHousNumber;
+	}
+
+	public void setShipToHousNumber(String shipToHousNumber) {
+		this.shipToHousNumber = shipToHousNumber;
+	}
+
+	public String getOrderCustomerEmail() {
+		return orderCustomerEmail;
+	}
+
+	public void setOrderCustomerEmail(String orderCustomerEmail) {
+		this.orderCustomerEmail = orderCustomerEmail;
+	}
+
+	public String getCalculatedTaxAmount() {
+		return calculatedTaxAmount;
+	}
+
+	public void setCalculatedTaxAmount(String calculatedTaxAmount) {
+		this.calculatedTaxAmount = calculatedTaxAmount;
+	}
+
+	
+	
+	public String getVatNumber() {
+		return vatNumber;
+	}
+
+	public void setVatNumber(String vatNumber) {
+		this.vatNumber = vatNumber;
+	}
+
+	public String getSmallBusinessMan() {
+		return smallBusinessMan;
+	}
+
+	public void setSmallBusinessMan(String smallBusinessMan) {
+		this.smallBusinessMan = smallBusinessMan;
+	}
+
+	public String getBanckAccountNumber() {
+		return banckAccountNumber;
+	}
+
+	public void setBanckAccountNumber(String banckAccountNumber) {
+		this.banckAccountNumber = banckAccountNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "DBOrderModel [incrementId=" + incrementId +  ", itemInfo=" + itemInfo+ "]";
+	}
 	
 }

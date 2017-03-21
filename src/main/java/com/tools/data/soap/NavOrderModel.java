@@ -40,8 +40,10 @@ public class NavOrderModel {
 	private String shipToName;
 	private String shipToAddress;
 	private String shipToPostCode;
+	private String shipToEmail;
 	private String shipToCity;
 	private String shipToCountryRegionCode;
+	private String shipToHouseNumber;
 	private String sellToCustomerName;// include firstname +last name
 	private String sellToAddress;
 	private String containsBom;
@@ -50,6 +52,13 @@ public class NavOrderModel {
 	private String status;
 	private String totalIp;
 	private String shippingType;
+	
+	private String vatNumber;
+	private String smallBusinessMan;
+	private String banckAccountNumber;
+	private String languageCode;
+	
+	
 
 	private List<NavOrderLinesModel> lines;
 
@@ -401,27 +410,78 @@ public class NavOrderModel {
 		this.containsBom = containsBom;
 	}
 
-	@Override
-	public String toString() {
-		return "NavOrderModel [incrementId=" + incrementId + ", navGrandTotal=" + navGrandTotal + ", postingDate="
-				+ postingDate + ", orderDate=" + orderDate + ", externalDocumentNo=" + externalDocumentNo
-				+ ", vatProdPostingGroup=" + vatProdPostingGroup + ", calculatedGrandTotal=" + calculatedGrandTotal
-				+ ", salesPersonCode=" + salesPersonCode + ", youRefercences=" + youRefercences + ", sellToContactNo="
-				+ sellToContactNo + ", sellToCustomerNo=" + sellToCustomerNo + ", shopShipmentMethod="
-				+ shopShipmentMethod + ", shopPaymentMethod=" + shopPaymentMethod + ", shopOrderType=" + shopOrderType
-				+ ", shopCartType=" + shopCartType + ", shippingAmount=" + shippingAmount + ", partyId=" + partyId
-				+ ", isAlreadyShipped=" + isAlreadyShipped + ", magentoGrandTotal=" + magentoGrandTotal + ", shopIsPom="
-				+ shopIsPom + ", shopWebsiteCode=" + shopWebsiteCode + ", shopStoreLanguage=" + shopStoreLanguage
-				+ ", koboSingleArticle=" + koboSingleArticle + ", prepmtPmtDiscountDate=" + prepmtPmtDiscountDate
-				+ ", baseGrandTotal=" + baseGrandTotal + ", discountAmount=" + discountAmount + ", billToName="
-				+ billToName + ", billToAddress=" + billToAddress + ", billToPostCode=" + billToPostCode
-				+ ", billToCity=" + billToCity + ", billToCountryRegionCode=" + billToCountryRegionCode
-				+ ", shipToName=" + shipToName + ", shipToAddress=" + shipToAddress + ", shipToPostCode="
-				+ shipToPostCode + ", shipToCity=" + shipToCity + ", shipToCountryRegionCode=" + shipToCountryRegionCode
-				+ ", sellToCustomerName=" + sellToCustomerName + ", sellToAddress=" + sellToAddress + ", containsBom="
-				+ containsBom + ", status=" + status + ", totalIp=" + totalIp + ", shippingType=" + shippingType
-				+ ", lines=" + lines + "]";
+	public String getShipToEmail() {
+		return shipToEmail;
 	}
+
+	public void setShipToEmail(String shipToEmail) {
+		this.shipToEmail = shipToEmail;
+	}
+
+	public String getShipToHouseNumber() {
+		return shipToHouseNumber;
+	}
+
+	public void setShipToHouseNumber(String shipToHouseNumber) {
+		this.shipToHouseNumber = shipToHouseNumber;
+	}
+
+	public String getVatNumber() {
+		return vatNumber;
+	}
+
+	public void setVatNumber(String vatNumber) {
+		this.vatNumber = vatNumber;
+	}
+
+	public String getSmallBusinessMan() {
+		return smallBusinessMan;
+	}
+
+	public void setSmallBusinessMan(String smallBusinessMan) {
+		this.smallBusinessMan = smallBusinessMan;
+	}
+
+	public String getBanckAccountNumber() {
+		return banckAccountNumber;
+	}
+
+	public void setBanckAccountNumber(String banckAccountNumber) {
+		this.banckAccountNumber = banckAccountNumber;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+	
+	
+	
+	
+//	@Override
+//	public String toString() {
+//		return "NavOrderModel [incrementId=" + incrementId + ", navGrandTotal=" + navGrandTotal + ", postingDate="
+//				+ postingDate + ", orderDate=" + orderDate + ", externalDocumentNo=" + externalDocumentNo
+//				+ ", vatProdPostingGroup=" + vatProdPostingGroup + ", calculatedGrandTotal=" + calculatedGrandTotal
+//				+ ", salesPersonCode=" + salesPersonCode + ", youRefercences=" + youRefercences + ", sellToContactNo="
+//				+ sellToContactNo + ", sellToCustomerNo=" + sellToCustomerNo + ", shopShipmentMethod="
+//				+ shopShipmentMethod + ", shopPaymentMethod=" + shopPaymentMethod + ", shopOrderType=" + shopOrderType
+//				+ ", shopCartType=" + shopCartType + ", shippingAmount=" + shippingAmount + ", partyId=" + partyId
+//				+ ", isAlreadyShipped=" + isAlreadyShipped + ", magentoGrandTotal=" + magentoGrandTotal + ", shopIsPom="
+//				+ shopIsPom + ", shopWebsiteCode=" + shopWebsiteCode + ", shopStoreLanguage=" + shopStoreLanguage
+//				+ ", koboSingleArticle=" + koboSingleArticle + ", prepmtPmtDiscountDate=" + prepmtPmtDiscountDate
+//				+ ", baseGrandTotal=" + baseGrandTotal + ", discountAmount=" + discountAmount + ", billToName="
+//				+ billToName + ", billToAddress=" + billToAddress + ", billToPostCode=" + billToPostCode
+//				+ ", billToCity=" + billToCity + ", billToCountryRegionCode=" + billToCountryRegionCode
+//				+ ", shipToName=" + shipToName + ", shipToAddress=" + shipToAddress + ", shipToPostCode="
+//				+ shipToPostCode + ", shipToCity=" + shipToCity + ", shipToCountryRegionCode=" + shipToCountryRegionCode
+//				+ ", sellToCustomerName=" + sellToCustomerName + ", sellToAddress=" + sellToAddress + ", containsBom="
+//				+ containsBom + ", status=" + status + ", totalIp=" + totalIp + ", shippingType=" + shippingType
+//				+ ", lines=" + lines + "]";
+//	}
 
 	
 
