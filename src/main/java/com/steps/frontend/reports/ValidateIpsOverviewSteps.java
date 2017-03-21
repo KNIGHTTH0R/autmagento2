@@ -13,59 +13,79 @@ public class ValidateIpsOverviewSteps extends AbstractSteps{
 	@Step
 	public void verifyPaidOrdersPreviousMonths(String grabbed, String expected) {
 //		CustomVerification.verifyTrue("Failure: Ip value for paid orders from previous months doesn't match Expected: " + expected + " Actual: " + grabbed,
-//				grabbed.contentEquals(expected));
-		Assert.assertTrue("Failure: Ip value for paid orders from previous months doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+////				grabbed.contentEquals(expected));
+//		Assert.assertTrue("Failure: Ip value for paid orders from previous months doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Ip value for paid orders from previous months doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	
 	@Step
 	public void verifyPaidOrdersCurrentMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Ip value for paid orders from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Ip value for paid orders from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Ip value for paid orders from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	
 	@Step
 	public void verifyReverseChargebacksThisMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Ip value for reversed charbacks from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Ip value for reversed charbacks from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Ip value for reversed charbacks from current month doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	
 	@Step
 	public void verifyChargebacksCurrentMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Ip value for charbacks from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Ip value for charbacks from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Ip value for charbacks from current month doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	
 	@Step
 	public void verifyReturns(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Ip value for returns doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Ip value for returns doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Ip value for returns doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	@Step
 	public void verifyOpenIpsCurrentMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Open Ip value for current month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Open Ip value for current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Open Ip value for current month doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	@Step
 	public void verifyOpenIpsPreviousMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Open Ip value for previous month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Open Ip value for previous month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Open Ip value for previous month doesn't match Expected: " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	@Step
 	public void verifyOpenChargebacks(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Open Ips value for charbacks from previous and current month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
-	}
+//		Assert.assertTrue("Failure: Open Ips value for charbacks from previous and current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Open Ips value for charbacks from previous and current month doesn't match Expected " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
+		}
 	@Step
 	public void verifyIpInTermPurchaseCurrentMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Ip value for term purchase orders from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Ip value for term purchase orders from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Ip value for term purchase orders from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	
 	@Step
 	public void verifyIpTermPurchasePreviousMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Ip value for term purchase orders from previous month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Ip value for term purchase orders from previous month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue("Failure: Ip value for term purchase orders from previous month doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 
 }
