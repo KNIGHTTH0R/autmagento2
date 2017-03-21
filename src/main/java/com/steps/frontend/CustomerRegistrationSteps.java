@@ -27,6 +27,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerForm(CustomerFormModel customerData, AddressModel addressData) {
 
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
