@@ -2,6 +2,7 @@ package com.workflows.frontend.reports;
 
 import java.util.List;
 
+
 import org.junit.Assert;
 
 import net.thucydides.core.annotations.Step;
@@ -16,9 +17,6 @@ import com.tools.data.IpOverViewPayedOrdersModel;
 import com.tools.data.IpOverViewReturnsListModel;
 import com.tools.data.IpOverViewSummaryModel;
 import com.tools.data.IpOverviewModel;
-import com.tools.data.TeamReportModel;
-import com.tools.data.TeamReportTakeOffPhaseModel;
-import com.tools.data.TeamReportTeamTabModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
 
 public class IpReportValidationWorkflow {
@@ -56,10 +54,15 @@ public class IpReportValidationWorkflow {
 		validateIpSteps.verifyPaidOrdersCurrentMonth(grabbedModel.getPaidOrdersThisMonth(), expectedModel.getPaidOrdersThisMonth());
 		System.out.println("model validari grabbed"+ grabbedModel.getPaidOrdersThisMonth());
 		System.out.println("model validari expectedd"+ expectedModel.getPaidOrdersThisMonth());
-//		validateIpSteps.verifyReverseChargebacksThisMonth(grabbedModel.getReverseChargebackThisMonth(), expectedModel.getReverseChargebackThisMonth());
-//		validateIpSteps.verifyChargebacksCurrentMonth(grabbedModel.getChargebacksThisMonth(), expectedModel.getChargebacksThisMonth());
+		validateIpSteps.verifyReverseChargebacksThisMonth(grabbedModel.getReverseChargebackThisMonth(), expectedModel.getReverseChargebackThisMonth());
+		System.out.println("model validari grabbed"+ grabbedModel.getReverseChargebackThisMonth());
+		System.out.println("model validari expectedd"+ expectedModel.getReverseChargebackThisMonth());
+		validateIpSteps.verifyChargebacksCurrentMonth(grabbedModel.getChargebacksThisMonth(), expectedModel.getChargebacksThisMonth());
+		System.out.println("model validari grabbed"+ grabbedModel.getChargebacksThisMonth());
+		System.out.println("model validari expectedd"+ expectedModel.getChargebacksThisMonth());
 		validateIpSteps.verifyReturns(grabbedModel.getReturnsThisMonth(), expectedModel.getReturnsThisMonth());
-		
+		System.out.println("model validari grabbed"+ grabbedModel.getReturnsThisMonth());
+		System.out.println("model validari expectedd"+ expectedModel.getReturnsThisMonth());
 	}
 	
 	
@@ -68,8 +71,14 @@ public class IpReportValidationWorkflow {
 	public void verifyOpenIpFromOverviewReportDetailsNotCurrentMonth(IpOverViewOpenIpsModel grabbedModel, IpOverviewModel expectedModel) {
 
 		verifyOpenIpsCurrentMonth(grabbedModel.getIpThisMonth(), expectedModel.getIpThisMonth());
+		System.out.println("model validari grabbed"+ grabbedModel.getIpThisMonth());
+		System.out.println("model validari expectedd"+ expectedModel.getIpThisMonth());
 		verifyOpenIpsPreviousMonth(grabbedModel.getIpLastMonth(), expectedModel.getIpLastMonth());
+		System.out.println("model validari grabbed"+ grabbedModel.getIpLastMonth());
+		System.out.println("model validari expectedd"+ expectedModel.getIpLastMonth());
 		verifyOpenChargebacks(grabbedModel.getOpenChargebacks(), expectedModel.getOpenChargebacks());
+		System.out.println("model validari grabbed"+ grabbedModel.getOpenChargebacks());
+		System.out.println("model validari expectedd"+ expectedModel.getOpenChargebacks());
 		
 	}
 	
@@ -78,10 +87,20 @@ public class IpReportValidationWorkflow {
 	public void verifyOpenIpFromOverviewReportDetailsCurrentMonth(IpOverViewOpenIpsModel grabbedModel, IpOverviewModel expectedModel) {
 
 		verifyOpenIpsCurrentMonth(grabbedModel.getIpThisMonth(), expectedModel.getIpThisMonth());
+		System.out.println("model validari grabbed"+ grabbedModel.getIpThisMonth());
+		System.out.println("model validari expectedd"+ expectedModel.getIpThisMonth());
 		verifyOpenIpsPreviousMonth(grabbedModel.getIpLastMonth(), expectedModel.getIpLastMonth());
+		System.out.println("model validari grabbed"+ grabbedModel.getIpLastMonth());
+		System.out.println("model validari expectedd"+ expectedModel.getIpLastMonth());
 		verifyOpenChargebacks(grabbedModel.getOpenChargebacks(), expectedModel.getOpenChargebacks());
+		System.out.println("model validari grabbed"+ grabbedModel.getOpenChargebacks());
+		System.out.println("model validari expectedd"+ expectedModel.getOpenChargebacks());
 		verifyIpInTermPurchaseCurrentMonth(grabbedModel.getIpTPOrdersThisMonth(), expectedModel.getIpTPOrdersThisMonth());
+		System.out.println("model validari grabbed"+ grabbedModel.getIpTPOrdersThisMonth());
+		System.out.println("model validari expectedd"+ expectedModel.getIpTPOrdersThisMonth());
 		verifyIpTermPurchasePreviousMonth(grabbedModel.getIpTPOrdersLastMonth(), expectedModel.getIpTPOrdersLastMonth());
+		System.out.println("model validari grabbed"+ grabbedModel.getIpTPOrdersLastMonth());
+		System.out.println("model validari expectedd"+ expectedModel.getIpTPOrdersLastMonth());
 		
 	}
 
@@ -273,29 +292,44 @@ public class IpReportValidationWorkflow {
 //	}
 	@Step
 	public void verifyOpenIpsCurrentMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Open ips for current month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Open ips for current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue(
+				"Failure: Open ips for current month doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	@Step
 	public void verifyOpenIpsPreviousMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Open Ip value for previous month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Open Ip value for previous month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue(
+				"Failure: Open Ip value for previous month doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	@Step
 	public void verifyOpenChargebacks(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Open Ips value for charbacks from previous and current month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Open Ips value for charbacks from previous and current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue(
+				"Failure: Open Ips value for charbacks from previous and current month doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	@Step
 	public void verifyIpInTermPurchaseCurrentMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Ip value for term purchase orders from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Ip value for term purchase orders from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue(
+				"Failure: Ip value for term purchase orders from current month doesn't match Expected: " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 	
 	@Step
 	public void verifyIpTermPurchasePreviousMonth(String grabbed, String expected) {
-		Assert.assertTrue("Failure: Ip value for term purchase orders from previous month doesn't match Expected: " + expected + " Actual: " + grabbed,
-				expected.contains(grabbed));
+//		Assert.assertTrue("Failure: Ip value for term purchase orders from previous month doesn't match Expected: " + expected + " Actual: " + grabbed,
+//				expected.contains(grabbed));
+		CustomVerification.verifyTrue(
+				"Failure: Ip value for term purchase orders from previous month doesn't match Expected:  " + expected + " Actual: " + grabbed,
+				grabbed.contentEquals(expected));
 	}
 
 }

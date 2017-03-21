@@ -28,7 +28,7 @@ public class IpOverviewCalculations {
 
 	private static List<String> creditMemoStateList = new ArrayList<String>(Arrays.asList("2", "3"));
 
-	public static IpOverviewModel calculateIpOverviewForOpenMonthAndClosedLastMonth(String stylistId, String month, String lastComissionRun, String nextComissionRun) throws NumberFormatException,
+	public static IpOverviewModel calculateIpOverviewForOpenMonthAndClosedLastMonth(String stylistId, String month,String previousCommissionRun, String lastComissionRun, String nextComissionRun) throws NumberFormatException,
 			ParseException {
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
@@ -38,7 +38,7 @@ public class IpOverviewCalculations {
 		IpOverviewModel result = new IpOverviewModel();
 
 		result = IpOverviewCalculations.calculateOrdersForOpenMonthAndClosedLastMonth(result, allOrdersList, month, lastComissionRun, nextComissionRun);
-		result = IpOverviewCalculations.calculateCreditMemos(result, completeCMList, month, lastComissionRun, nextComissionRun);
+		result = IpOverviewCalculations.calculateCreditMemos(result, completeCMList, month, previousCommissionRun, lastComissionRun);
 
 		return result;
 	}
@@ -58,7 +58,7 @@ result = IpOverviewCalculations.calculateCreditMemos(result, completeCMList, mon
 return result;
 }
 
-	public static IpOverviewModel calculateIpOverviewForClosedMonth(String stylistId, String month, String lastComissionRun, String nextComissionRun) throws NumberFormatException,
+	public static IpOverviewModel calculateIpOverviewForClosedMonth(String stylistId, String month, String previousComissionRun,String lastComissionRun, String nextComissionRun) throws NumberFormatException,
 			ParseException {
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
@@ -68,8 +68,8 @@ return result;
 
 		IpOverviewModel result = new IpOverviewModel();
 
-		result = IpOverviewCalculations.calculateOrdersForClosedMonth(result, allOrdersList, month, lastComissionRun, nextComissionRun);
-		result = IpOverviewCalculations.calculateCreditMemos(result, completeCMList, month, lastComissionRun, nextComissionRun);
+		result = IpOverviewCalculations.calculateOrdersForClosedMonthAndClosedLastMonth(result, allOrdersList, month, previousComissionRun,lastComissionRun, nextComissionRun);
+		result = IpOverviewCalculations.calculateCreditMemosForClosedMonthAndClosedLastMonth(result, completeCMList, month, previousComissionRun,lastComissionRun, nextComissionRun);
 
 		return result;
 	}
@@ -95,25 +95,25 @@ return result;
 			}
 
 			if (isOrderCompatibleForIpCalculationPrevMonth(order, month, lastComissionRun, nextComissionRun)) {
-				ipsPreviousMonth=BigDecimal.ZERO;
+				ipsPreviousMonth=ipsPreviousMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 				
 			}
 			if (isOrderCompatibleForIpCalculationCurrentMonth(order, month, nextComissionRun)) {
-				ipsCurrentMonth = ipsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				ipsCurrentMonth = ipsCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 
 			 if (isOpenIpsCurrentMonthForClosedLastMonth(order, month)) {
-				 openIpsCurrentMonth =openIpsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				 openIpsCurrentMonth =openIpsCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 				 }
 		    if (isOpenIpsPreviousMonthClosedLastMonth(order, month)) {
-				 openIpsPreviousMonth =openIpsPreviousMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				 openIpsPreviousMonth =openIpsPreviousMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 				 }
 
 			if (isTermPurchaseIpsCurrentMonth(order, month)) {
-				tpIpsCurrentMonth = tpIpsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				tpIpsCurrentMonth = tpIpsCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 			if (isTermPurchaseIpsUpcomingMonth(order, month)) {
-				tpIpUpcomingMonths = tpIpUpcomingMonths.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				tpIpUpcomingMonths = tpIpUpcomingMonths.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 
 		}
@@ -150,27 +150,27 @@ return result;
 			}
 
 			if (isOrderCompatibleForIpCalculationPrevMonth(order, month, lastComissionRun, nextComissionRun)) {
-			     ipsPreviousMonth = ipsPreviousMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+			     ipsPreviousMonth = ipsPreviousMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 			
 			if (isOrderCompatibleForIpCalculationCurrentMonth(order, month, nextComissionRun)) {
-				ipsCurrentMonth = ipsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				ipsCurrentMonth = ipsCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 
 			 if (isOpenIpsCurrentMonthForOpenLastMonth(order, month, lastComissionRun )) {
 				 openIpsCurrentMonth =
-				 openIpsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				 openIpsCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 				 }
 		    if (isOpenIpsPreviousMonthOpenLastMonth(order, month)) {
 				 openIpsPreviousMonth =
-				 openIpsPreviousMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				 openIpsPreviousMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 				 }
 
 			if (isTermPurchaseIpsCurrentMonth(order, month)) {
-				tpIpsCurrentMonth = tpIpsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				tpIpsCurrentMonth = tpIpsCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 			if (isTermPurchaseIpsUpcomingMonth(order, month)) {
-				tpIpUpcomingMonths = tpIpUpcomingMonths.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				tpIpUpcomingMonths = tpIpUpcomingMonths.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 
 		}
@@ -187,7 +187,7 @@ return result;
 	}
 
 	
-	public static IpOverviewModel calculateOrdersForClosedMonth(IpOverviewModel ipOverviewModel, List<DBOrderModel> allOrdersList, String month, String lastComissionRun, String nextComissionRun)
+	public static IpOverviewModel calculateOrdersForClosedMonthAndClosedLastMonth(IpOverviewModel ipOverviewModel, List<DBOrderModel> allOrdersList, String month, String previousComissionRun,String lastComissionRun, String nextComissionRun)
 			throws NumberFormatException, ParseException {
 
 		BigDecimal ipsPreviousMonth = BigDecimal.ZERO;
@@ -207,25 +207,22 @@ return result;
 				paidOrderList.add(populateIpOverViewPayedOrdersModel(order));
 			}
 
-			if (isOrderCompatibleForIpCalculationPrevMonth(order, month, lastComissionRun, nextComissionRun)) {
-				ipsPreviousMonth = ipsPreviousMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+			if (isOrderCompatibleForIpCalculationPrevMonthSelected(order, month,lastComissionRun, nextComissionRun)) {
+				ipsPreviousMonth = ipsPreviousMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 			if (isOrderCompatibleForIpCalculationCurrentMonth(order, month, nextComissionRun)) {
-				ipsCurrentMonth = ipsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				ipsCurrentMonth = ipsCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 
 			 if (isOpenIpsCurrentMonthForClosedLastMonth(order, month)) {
-			 openIpsCurrentMonth =openIpsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
-			 }
-			 if (isOpenIpsPreviousMonthClosedLastMonth(order, month)) {
-			 openIpsPreviousMonth =openIpsPreviousMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+			     openIpsCurrentMonth =BigDecimal.ZERO;
 			 }
 
 			if (isTermPurchaseIpsCurrentMonth(order, month)) {
-				tpIpsCurrentMonth = tpIpsCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				tpIpsCurrentMonth = tpIpsCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 			if (isTermPurchaseIpsUpcomingMonth(order, month)) {
-				tpIpUpcomingMonths = tpIpUpcomingMonths.add(BigDecimal.valueOf(Double.parseDouble(order.getTotalIp())));
+				tpIpUpcomingMonths = tpIpUpcomingMonths.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 			}
 
 		}
@@ -240,7 +237,7 @@ return result;
 
 		return ipOverviewModel;
 	}
-	public static IpOverviewModel calculateCreditMemos(IpOverviewModel result, List<DBCreditMemoModel> cmList, String month, String previousCommissiomRun, String lastComissionRun)
+	public static IpOverviewModel calculateCreditMemosForClosedMonthAndClosedLastMonth(IpOverviewModel result, List<DBCreditMemoModel> cmList, String month, String previousCommissiomRun, String lastComissionRun, String nextCommissionRun)
 			throws NumberFormatException, ParseException {
 
 		BigDecimal chargeBacksCurrentMonth = BigDecimal.ZERO;
@@ -251,22 +248,21 @@ return result;
 
 		for (DBCreditMemoModel cm : cmList) {
 
-			if (isReverseCharcheBackCurrentMonthIfLastMonthIsOpened(cm, month, previousCommissiomRun, lastComissionRun)) {
-
-				reverseChargeBacksCurrentMonth = reverseChargeBacksCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(cm.getTotalIpRefunded())));
-				System.out.println("mos craciun     " + String.valueOf(reverseChargeBacksCurrentMonth));
+			if (isReverseCharcheBackCurrentMonthIfLastMonthIsOpened(cm, month, previousCommissiomRun, nextCommissionRun)) {
+				reverseChargeBacksCurrentMonth = reverseChargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
+	
 			}
 			if (isChargeBackCurrentMonthIfLastMonthIsOpened(cm, month, previousCommissiomRun, lastComissionRun)) {
-				chargeBacksCurrentMonth = chargeBacksCurrentMonth.add(BigDecimal.valueOf(Double.parseDouble(cm.getTotalIpRefunded())));
+				chargeBacksCurrentMonth = chargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
 			}
 			if (isOpenChargeback(cm, month)) {
-				openChargebackPreviousAndCurrent = openChargebackPreviousAndCurrent.add(BigDecimal.valueOf(Double.parseDouble(cm.getTotalIpRefunded())));
+				openChargebackPreviousAndCurrent =BigDecimal.ZERO;
 			}
-			if (isCreditMemoForCurrentMonthIfLastMonthIsClosed(cm, month, previousCommissiomRun, lastComissionRun)) {
-				returns = returns.add(BigDecimal.valueOf(Double.parseDouble(cm.getTotalIpRefunded())));
+			if (isCreditMemoForCurrentMonthIfLastMonthIsOpened(cm, month, previousCommissiomRun, lastComissionRun)) {
+				returns = returns.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
 			}
 
-			if (isCreditMemoForCurrentMonthIfLastMonthIsClosed(cm, month, previousCommissiomRun, lastComissionRun)) {
+			if (isCreditMemoForCurrentMonthIfLastMonthIsOpened(cm, month, previousCommissiomRun, lastComissionRun)) {
 				chargebacks.add(populateIpOverViewReturnsListModel(cm));
 			}
 
@@ -275,6 +271,58 @@ return result;
 		result.setReverseChargebackThisMonth(String.valueOf(reverseChargeBacksCurrentMonth));
 		result.setOpenChargebacks(String.valueOf(chargeBacksCurrentMonth.subtract(reverseChargeBacksCurrentMonth)));
 		result.setReturnsThisMonth(String.valueOf(returns));
+//		result.setOpenChargebacks(String.valueOf(openChargebackPreviousAndCurrent));
+//		result.setReturnsThisMonth(String.valueOf(chargeBacksCurrentMonth.subtract(reverseChargeBacksCurrentMonth)));
+		result.setReturns(chargebacks);
+
+		return result;
+	}
+	
+	public static IpOverviewModel calculateCreditMemos(IpOverviewModel result, List<DBCreditMemoModel> cmList, String month, String previousComissionRun, String lastComissionRun)
+			throws NumberFormatException, ParseException {
+
+		BigDecimal chargeBacksCurrentMonth = BigDecimal.ZERO;
+		BigDecimal reverseChargeBacksCurrentMonth = BigDecimal.ZERO;
+		BigDecimal returns = BigDecimal.ZERO;
+		BigDecimal openChargebackPreviousAndCurrent = BigDecimal.ZERO;
+		List<IpOverViewReturnsListModel> chargebacks = new ArrayList<IpOverViewReturnsListModel>();
+
+		for (DBCreditMemoModel cm : cmList) {
+
+			if (isReverseCharcheBackCurrentMonthIfLastMonthIsClosed(cm, month, previousComissionRun, lastComissionRun)) {
+				reverseChargeBacksCurrentMonth = reverseChargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
+	
+			}
+			if (isReverseCharcheBackCurrentMonthIfLastMonthIsOpened(cm, month, previousComissionRun, lastComissionRun)) {
+				reverseChargeBacksCurrentMonth = reverseChargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
+	
+			}
+			if (isChargeBackCurrentMonthIfLastMonthIsClosed(cm, month, previousComissionRun, lastComissionRun)) {
+				chargeBacksCurrentMonth = chargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
+			}
+			if (isChargeBackCurrentMonthIfLastMonthIsOpened(cm, month, previousComissionRun, lastComissionRun)) {
+				chargeBacksCurrentMonth = chargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
+			}
+			if (isOpenChargeback(cm, month)) {
+				openChargebackPreviousAndCurrent =openChargebackPreviousAndCurrent.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));;
+			}
+			if (isCreditMemoForCurrentMonthIfLastMonthIsClosed(cm, month, previousComissionRun, lastComissionRun)) {
+				returns = BigDecimal.ZERO;
+			}
+
+			if (isCreditMemoForCurrentMonthIfLastMonthIsClosed(cm, month, previousComissionRun, lastComissionRun)) {
+				chargebacks.add(populateIpOverViewReturnsListModel(cm));
+			}
+
+		}
+		result.setChargebacksThisMonth(String.valueOf("-" + chargeBacksCurrentMonth));
+		result.setReverseChargebackThisMonth(String.valueOf(reverseChargeBacksCurrentMonth));
+//		result.setOpenChargebacks(String.valueOf(chargeBacksCurrentMonth.subtract(reverseChargeBacksCurrentMonth)));
+//		result.setReturnsThisMonth(String.valueOf(returns));
+		result.setOpenChargebacks(String.valueOf(chargeBacksCurrentMonth.subtract(reverseChargeBacksCurrentMonth)));
+		result.setReturnsThisMonth(String.valueOf(returns));
+		
+		
 		result.setReturns(chargebacks);
 
 		return result;
@@ -331,6 +379,12 @@ return result;
 	}
 
 	private static boolean isOrderCompatibleForIpCalculationPrevMonth(DBOrderModel order, String month, String lastComissionRun, String nextComissionRun) throws ParseException {
+
+		return isPayed(order) && DateUtils.isDateBefore(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
+				&& DateUtils.isDateBeetween(order.getPaidAt(), lastComissionRun, nextComissionRun, DateConstants.FORMAT);
+	}
+	
+	private static boolean isOrderCompatibleForIpCalculationPrevMonthSelected(DBOrderModel order, String month, String lastComissionRun, String nextComissionRun) throws ParseException {
 
 		return isPayed(order) && DateUtils.isDateBefore(order.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
 				&& DateUtils.isDateBeetween(order.getPaidAt(), lastComissionRun, nextComissionRun, DateConstants.FORMAT);
@@ -397,15 +451,16 @@ return result;
 				&& DateUtils.isDateBeetween(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
 						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
 
-				&& DateUtils.isDateBeetween(cm.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), nextComm, DateConstants.FORMAT) && DateUtils
-					.isDateBefore(cm.getCreatedAt(), nextComm, DateConstants.FORMAT));
+				&& DateUtils.isDateBeetween(cm.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), nextComm, DateConstants.FORMAT) 
+				&& DateUtils.isDateBefore(cm.getCreatedAt(), nextComm, DateConstants.FORMAT));
 	}
 		
 		private static boolean isReverseCharcheBackCurrentMonthIfLastMonthIsClosed(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
 
 			return (cm.getState().contentEquals("3")
 						&& DateUtils.isDateBefore(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
-						&& DateUtils.isDateBefore(cm.getOrderPaidAt(), nextComm, DateConstants.FORMAT) && DateUtils.isDateBeetween(cm.getCreatedAt(), previousCommissiomRun,
+						&& DateUtils.isDateBeetween(cm.getOrderPaidAt(),previousCommissiomRun, nextComm, DateConstants.FORMAT) 
+						&& DateUtils.isDateBeetween(cm.getCreatedAt(), previousCommissiomRun,
 						nextComm, DateConstants.FORMAT));
 
 	}

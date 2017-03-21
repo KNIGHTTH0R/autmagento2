@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +31,7 @@ import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.IpReportsSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.FilePaths;
 import com.tools.constants.TimeConstants;
@@ -66,6 +68,8 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTe
 	public IpReportValidationWorkflow ipReportValidationWorkflow;
 	@Steps
 	public BackEndSteps backEndSteps;
+	@Steps
+	public CustomVerification customVerification;
 
 	private String stylistUsername, stylistPassword;
 	private String reportMonth;
@@ -120,10 +124,12 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTe
 
 		//for selecting February from Dropdown
 		//february=Opened,january=closed
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-28 23:59:00");
-		
-		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
-		expectedReturns = expectedIpOverviewModel.getReturns();
+	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-28 23:59:00");
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 23:59:00","2017-03-10 17:00:00","2017-04-10 17:00:00");
+		//pentru martie
+	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
+//		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
+//		expectedReturns = expectedIpOverviewModel.getReturns();
 
 	}
 
@@ -144,36 +150,46 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTe
 //	ipReportsSteps.selectMonth(str.toUpperCase());
 	
 //		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
-		ipReportsSteps.selectMonth("FEB - 2017");
-		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-01");
-		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-02");
+//		pt februarie
+//		ipReportsSteps.selectMonth("FEB - 2017");
+//		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-01");
+//		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-02");
+		//pentru martie
+		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-03");
+
 		
 		//validate Ip overview report -sunt OK
 		IpOverViewSummaryModel  grabbedSummaryModel= ipReportsSteps.getIpOverviewSummaryModel();
+
 		System.out.println("expected values" + expectedIpOverviewModel.toString());
 		System.out.println("grabbed values" +grabbedSummaryModel.toString());
 		ipReportValidationWorkflow.verifyIpOverviewReportDetails(grabbedSummaryModel, expectedIpOverviewModel);
 		
-		//validate Open ips summary - ok
-		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelNotCurrentMonth();
-		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsNotCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
+		//validate Open ips summary - February
+//		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelNotCurrentMonth();
+//		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsNotCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
+		
+		//validate Open ips summary - March
+		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelCurrentMonth();
+		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
 		
 
 		//validate payed orders list -1299 si 1281
-		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
-		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
-		System.out.println("expected"+expectedOrdersList.size());
-		System.out.println("grabbed"+grabbedPayedOrdersModel.size());
-	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
-		
-		
-        //validate returns orders - 34 si 41
-		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
-		ipReportValidationWorkflow.verifyReturnedOrdersList(expectedReturns, grabbedReturnsListModel);
-		System.out.println("expected returns"+expectedReturns.size());
-		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
+//		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
+//		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
+//		System.out.println("expected"+expectedOrdersList.size());
+//		System.out.println("grabbed"+grabbedPayedOrdersModel.size());
+//	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
+//		
+//		
+//        //validate returns orders - 34 si 41
+//		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
+//		ipReportValidationWorkflow.verifyReturnedOrdersList(expectedReturns, grabbedReturnsListModel);
+//		System.out.println("expected returns"+expectedReturns.size());
+//		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
 
         
+		customVerification.printErrors();
 	}
 	
 }

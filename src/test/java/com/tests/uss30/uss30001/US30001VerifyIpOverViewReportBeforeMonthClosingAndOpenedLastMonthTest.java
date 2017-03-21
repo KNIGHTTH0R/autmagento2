@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +31,7 @@ import com.steps.frontend.ReportsSteps;
 import com.steps.frontend.reports.IpReportsSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.FilePaths;
 import com.tools.constants.TimeConstants;
@@ -43,6 +45,7 @@ import com.tools.generalCalculation.IpOverviewCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
+import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.reports.IpReportValidationWorkflow;
 
 @WithTag(name = "US30.1 Verify Ip Overview Report", type = "Scenarios")
@@ -66,6 +69,9 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndOpenedLastMonthTe
 	public IpReportValidationWorkflow ipReportValidationWorkflow;
 	@Steps
 	public BackEndSteps backEndSteps;
+
+	@Steps
+	public CustomVerification customVerification;
 
 	private String stylistUsername, stylistPassword;
 	private String reportMonth;
@@ -120,10 +126,10 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndOpenedLastMonthTe
 
 		//for selecting March from Dropdown
 		//march=Opened,february=Opened
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-03 23:59:00");
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
 		
-		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
-		expectedReturns = expectedIpOverviewModel.getReturns();
+//		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
+//		expectedReturns = expectedIpOverviewModel.getReturns();
 
 	}
 
@@ -155,26 +161,32 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndOpenedLastMonthTe
 		System.out.println("grabbed values" +grabbedSummaryModel.toString());
 		ipReportValidationWorkflow.verifyIpOverviewReportDetails(grabbedSummaryModel, expectedIpOverviewModel);
 		
+		
 		//validate Open ips summary - OK
 		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelCurrentMonth();
 		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
 		
 
-		//validate payed orders list-OK
-		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
-		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
-		System.out.println("expected"+expectedOrdersList.size());
-		System.out.println("grabbed"+grabbedPayedOrdersModel.size());
-	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
+//		//validate payed orders list-OK
+//		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
+//		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
+//		System.out.println("expected"+expectedOrdersList.size());
+//		System.out.println("grabbed"+grabbedPayedOrdersModel.size());
+//	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
+//		
+//		
+//        //validate returns orders - shop=2,comm=6
+//		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
+//		ipReportValidationWorkflow.verifyReturnedOrdersList(expectedReturns, grabbedReturnsListModel);
+//		System.out.println("expected returns"+expectedReturns.size());
+//		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
 		
+		customVerification.printErrors();
 		
-        //validate returns orders - shop=2,comm=6
-		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
-		ipReportValidationWorkflow.verifyReturnedOrdersList(expectedReturns, grabbedReturnsListModel);
-		System.out.println("expected returns"+expectedReturns.size());
-		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
 
         
 	}
+
+	
 	
 }
