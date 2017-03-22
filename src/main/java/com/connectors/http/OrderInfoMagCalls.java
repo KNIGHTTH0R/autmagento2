@@ -359,13 +359,7 @@ public class OrderInfoMagCalls {
 
 		}
 
-		// System.out.println("subtotal " + subtotal);
-		// System.out.println("baseDiscountAmount " + baseDiscountAmount);
-		// System.out.println("jewelryCreditsUsed " + jewelryCreditsUsed);
-		// System.out.println("marketingCreditsUsed " + marketingCreditsUsed);
-		// System.out.println("fiftyDiscountsUsed " + fiftyDiscountsUsed);
-		// System.out.println("fiftyDiscountsAmount " + fiftyDiscountsAmount);
-		// System.out.println("shippingAmount" + shippingAmount);
+
 
 		BigDecimal calculateGrandTotal = subtotal.add(shippingAmount).subtract(baseDiscountAmount)
 				.subtract(jewelryCreditsUsed).subtract(marketingCreditsUsed).subtract(fiftyDiscountsAmount);
