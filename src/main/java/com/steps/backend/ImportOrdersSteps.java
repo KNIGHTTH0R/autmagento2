@@ -145,6 +145,8 @@ public class ImportOrdersSteps {
 				order.setItemInfo(infoItemList);
 
 				System.out.println("open order " + order.getIncrementId());
+				
+				importOrders.validateUpdatedNavDate(order.getUpdatedNav(),"2017-03-24","yyyy-MM-dd");
 
 				importOrders.validateOrderIncrementId(order.getIncrementId(), compare.getIncrementId());
 				importOrders.validateOrderItemsTest(order.getItemInfo(), compare.getLines());
@@ -211,14 +213,16 @@ public class ImportOrdersSteps {
 
 				// should be clarified before, because here we have different
 				// value
-				importOrders.validateUpdatedNavDate(order.getUpdatedNav());
+				  
+				 
+				
 				importOrders.validateKoboSingleArticle(order.getKoboSingleArticle(), compare.getKoboSingleArticle());
 				importOrders.validateVatNumber(order.getVatNumber(), compare.getVatNumber());
 				importOrders.validateSmallBussinessMan(order.getSmallBusinessMan(), compare.getSmallBusinessMan());
 				importOrders.validateBanckAccountNumber(order.getBanckAccountNumber(), compare.getBanckAccountNumber());
 				importOrders.validateLanguageCode(order.getLanguageCode(), compare.getLanguageCode());
 
-			}
+		}
 			// System.out.println("counter
 			// "+customVerification.returnErrorCounter());
 			int cc = customVerification.returnErrorCounter();
@@ -247,7 +251,6 @@ public class ImportOrdersSteps {
 
 			System.out.println("order.getIncrementId() " + order1.getIncrementId());
 			NavOrderModel compare = importOrders.findOrder(order1.getIncrementId(), navOrderList);
-			System.out.println("sunt aici2");
 			// String navShipping = null;
 
 			if (compare.getIncrementId() == null) {
@@ -255,7 +258,8 @@ public class ImportOrdersSteps {
 				CustomVerification.verifyTrueForOrderImport(
 						"Failure: Could not validate order " + order1.getIncrementId(), compare == null);
 			} else {
-				importOrders.validateGrandTotal(order1.getGrandTotal(), compare.getCalculatedGrandTotal());
+			//	importOrders.validateGrandTotal(order1.getGrandTotal(), compare.getCalculatedGrandTotal());
+				importOrders.validateUpdatedNavDate(order1.getUpdatedNav(),"2017-03-25","yyyy-MM-dd");
 				// String navTaxAmount =
 				// calculateTaxAmount(order.getTaxAmount(),
 				// order.getTaxPrecent(),

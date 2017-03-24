@@ -209,7 +209,7 @@ public class NavisionSoapCalls {
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Bill_to_Address")) {
 						billingAddress = childNodes.item(j).getTextContent();
-						System.out.println("billingAddress " +billingAddress);
+						//System.out.println("billingAddress " +billingAddress);
 						model.setBillToAddress(billingAddress.concat(billingAddress1));
 						
 					}

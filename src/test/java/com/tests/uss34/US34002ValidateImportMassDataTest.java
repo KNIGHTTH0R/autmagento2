@@ -48,8 +48,8 @@ public class US34002ValidateImportMassDataTest extends BaseTest {
 		// navListOrders = NavisionSoapCalls.getOrdersList("10021681500
 		// ..10021787300");
 
-		shopListOrders = OrdersInfoMagentoCalls.getOrdersInRangeList("209874","210970");
-		navListOrders = NavisionSoapCalls.getOrdersList("209874..210970");
+		shopListOrders = OrdersInfoMagentoCalls.getOrdersInRangeList("211021","211021");
+		navListOrders = NavisionSoapCalls.getOrdersList("211021..211021");
 
 		
 //		while(max<upperRange){
