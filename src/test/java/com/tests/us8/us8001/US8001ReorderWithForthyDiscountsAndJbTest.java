@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -119,9 +120,28 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(1);
+		/*genProduct1 = createdProductsList.get(1);
 		genProduct2 = createdProductsList.get(0);
-		genProduct3 = createdProductsList.get(6);
+		genProduct3 = createdProductsList.get(6);*/
+		
+		if(!createdProductsList.isEmpty() && createdProductsList.size()>=7){
+			genProduct1 = createdProductsList.get(1);
+			genProduct2 = createdProductsList.get(0);
+			genProduct3 = createdProductsList.get(6);
+		}
+		else{
+			genProduct1 = MagentoProductCalls.createProductModel();
+			genProduct1.setPrice("89.00");
+			MagentoProductCalls.createApiProduct(genProduct1);
+	
+			genProduct2 = MagentoProductCalls.createProductModel();
+			genProduct2.setPrice("49.90");
+			MagentoProductCalls.createApiProduct(genProduct2);
+	
+			genProduct3 = MagentoProductCalls.createProductModel();
+			genProduct3.setPrice("10.00");
+			MagentoProductCalls.createApiProduct(genProduct3);
+		}
 
 //		genProduct1.setName(productsList.get(0).getName());
 //		genProduct1.setSku(productsList.get(0).getProdCode());

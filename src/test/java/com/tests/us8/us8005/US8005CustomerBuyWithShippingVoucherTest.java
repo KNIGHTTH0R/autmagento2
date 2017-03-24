@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -98,8 +99,28 @@ public class US8005CustomerBuyWithShippingVoucherTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(1);
+		/*genProduct1 = createdProductsList.get(1);
 		genProduct2 = createdProductsList.get(0);
+		*/
+		if(!createdProductsList.isEmpty() && createdProductsList.size()>=2){
+			genProduct1 = createdProductsList.get(1);
+			genProduct2 = createdProductsList.get(0);
+		}
+		else{
+			genProduct1 = MagentoProductCalls.createProductModel();
+			genProduct1.setIp("25");
+			genProduct1.setPrice("89.00");
+			MagentoProductCalls.createApiProduct(genProduct1);
+	
+			genProduct2 = MagentoProductCalls.createProductModel();
+			genProduct2.setIp("84");
+			genProduct2.setPrice("49.90");
+			MagentoProductCalls.createApiProduct(genProduct2);
+			
+			
+			
+		
+		}
 
 //		genProduct1 = MagentoProductCalls.createProductModel();
 //		genProduct1.setPrice("89.00");

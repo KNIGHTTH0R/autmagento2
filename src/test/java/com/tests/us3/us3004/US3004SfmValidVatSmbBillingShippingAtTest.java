@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.junit.After;
@@ -86,13 +88,14 @@ public class US3004SfmValidVatSmbBillingShippingAtTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
-
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+	
 	@Before
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
+		/*genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.50");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
@@ -104,7 +107,33 @@ public class US3004SfmValidVatSmbBillingShippingAtTest extends BaseTest {
 
 		genProduct3 = MagentoProductCalls.createMarketingProductModel();
 		genProduct3.setPrice("229.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);*/
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		
+		if(!createdProductsList.isEmpty() && createdProductsList.size()>= 3){
+			genProduct1 = createdProductsList.get(0);
+			genProduct1.setPrice("49.90");
+			genProduct2 = createdProductsList.get(1);
+			genProduct2.setPrice("89.00");
+			genProduct3 = createdProductsList.get(2);
+			genProduct3.setPrice("229.00");
+		}else{
+			genProduct1 = MagentoProductCalls.createProductModel();
+			genProduct1.setPrice("49.90");
+		//	genProduct1.setSpecialPrice("40.00");
+			MagentoProductCalls.createApiProduct(genProduct1);
+			
+			genProduct2 = MagentoProductCalls.createProductModel();
+			genProduct2.setPrice("89.00");
+			MagentoProductCalls.createApiProduct(genProduct2);
+			
+			
+			genProduct3 = MagentoProductCalls.createMarketingProductModel();
+			genProduct3.setPrice("229.00");
+			MagentoProductCalls.createApiProduct(genProduct3);
+		}
+		
 
 		Properties prop = new Properties();
 		InputStream input = null;

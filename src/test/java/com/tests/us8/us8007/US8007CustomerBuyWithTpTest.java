@@ -113,20 +113,28 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 //		genProduct1 = createdProductsList.get(1);
 //		genProduct2 = createdProductsList.get(8);
 //		genProduct3 = createdProductsList.get(9);
+		
+		if(!createdProductsList.isEmpty() && createdProductsList.size()>=10){
+			genProduct1 = createdProductsList.get(1);
+			genProduct2 = createdProductsList.get(8);
+			genProduct3 = createdProductsList.get(9);
+		}else{
+			genProduct1 = MagentoProductCalls.createProductModel();
+			genProduct1.setPrice("89.00");
+			MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
+			genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+			genProduct2.setPrice("49.90");
+			MagentoProductCalls.createApiProduct(genProduct2);
 
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct2);
+			genProduct3 = MagentoProductCalls.createProductModel();
+			genProduct3.setPrice("5.00");
+			genProduct3.setStockData(
+					MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+			MagentoProductCalls.createApiProduct(genProduct3);
+		}
 
-		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("5.00");
-		genProduct3.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct3);
+		
 
 		Properties prop = new Properties();
 		InputStream input = null;

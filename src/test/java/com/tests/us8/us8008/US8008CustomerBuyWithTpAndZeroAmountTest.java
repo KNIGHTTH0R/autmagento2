@@ -96,9 +96,28 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 //		genProduct1 = createdProductsList.get(6);
 //		genProduct2 = createdProductsList.get(8);
 //		genProduct3 = createdProductsList.get(10);
-		
+		if(!createdProductsList.isEmpty() && createdProductsList.size()>=11){
+			genProduct1 = createdProductsList.get(7);
+			genProduct2 = createdProductsList.get(8);
+			genProduct3 = createdProductsList.get(10);
+		}
+		else{
+			genProduct1 = MagentoProductCalls.createProductModel();
+			genProduct1.setPrice("50.00");
+			MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct1 = MagentoProductCalls.createProductModel();
+			genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+			genProduct2.setPrice("29.00");
+			genProduct2.setIp("0");
+			MagentoProductCalls.createApiProduct(genProduct2);
+
+			genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+			genProduct3.setPrice("19.90");
+			genProduct3.setIp("0");
+			MagentoProductCalls.createApiProduct(genProduct3);
+		}
+
+	/*	genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("50.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
@@ -110,7 +129,7 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct3.setPrice("19.90");
 		genProduct3.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);*/
 
 		Properties prop = new Properties();
 		InputStream input = null;

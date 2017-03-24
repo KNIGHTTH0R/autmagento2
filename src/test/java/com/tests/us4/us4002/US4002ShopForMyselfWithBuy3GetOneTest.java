@@ -95,7 +95,7 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
-
+/*
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("100");
 		MagentoProductCalls.createApiProduct(genProduct1);
@@ -115,7 +115,26 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 		 MagentoProductCalls.createApiProduct(genProduct3);
 
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct3 = createdProductsList.get(5);
+		genProduct3 = createdProductsList.get(5);*/
+		
+		if(createdProductsList.size()>=6){
+			genProduct3 = createdProductsList.get(5);
+			
+		}else{
+			genProduct1 = MagentoProductCalls.createProductModel();
+			genProduct1.setPrice("100");
+			MagentoProductCalls.createApiProduct(genProduct1);
+			
+			genProduct2.setName("QPIWDODRU");
+			genProduct2.setSku("DFCDVEUBK");
+			genProduct2.setIp("42");
+			genProduct2.setPrice("49.90");
+			
+			genProduct3 = MagentoProductCalls.createMarketingProductModel();
+			genProduct3.setPrice("5.00");
+			 MagentoProductCalls.createApiProduct(genProduct3);
+		}
+		
 
 		Properties prop = new Properties();
 		InputStream input = null;
