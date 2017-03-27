@@ -120,11 +120,9 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(1);
+        genProduct1 = createdProductsList.get(1);
 		genProduct2 = createdProductsList.get(0);
 		genProduct3 = createdProductsList.get(6);
-		
-		
 
 //		genProduct1.setName(productsList.get(0).getName());
 //		genProduct1.setSku(productsList.get(0).getProdCode());

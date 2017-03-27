@@ -105,8 +105,6 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		genProduct1 = createdProductsList.get(1);
 		genProduct2 = createdProductsList.get(0);
 		genProduct3 = createdProductsList.get(13);
-		
-		
 
 //		genProduct1 = MagentoProductCalls.createProductModel();
 //		genProduct1.setPrice("89.00");

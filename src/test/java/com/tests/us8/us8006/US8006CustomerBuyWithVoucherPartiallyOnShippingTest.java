@@ -103,8 +103,6 @@ public class US8006CustomerBuyWithVoucherPartiallyOnShippingTest extends BaseTes
 		genProduct1 = createdProductsList.get(1);
 		genProduct2 = createdProductsList.get(0);
 		genProduct3 = createdProductsList.get(6);
-		
-
 
 //		genProduct1 = MagentoProductCalls.createProductModel();
 //		genProduct1.setPrice("89.00");

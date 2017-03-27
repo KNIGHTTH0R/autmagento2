@@ -110,23 +110,6 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		genProduct2 = createdProductsList.get(7);
 		voucherValue = genProduct2.getPrice();
 		genProduct3 = createdProductsList.get(6);
-		
-		
-//			genProduct1 = MagentoProductCalls.createProductModel();
-//			genProduct1.setPrice("89.00");
-//			MagentoProductCalls.createApiProduct(genProduct1);
-//	
-//			genProduct2 = MagentoProductCalls.createProductModel();
-//			genProduct2.setPrice("10.00");
-//			genProduct2.setIp("8");
-//			MagentoProductCalls.createApiProduct(genProduct2);
-//			voucherValue = genProduct2.getPrice();
-//			
-//			
-//			genProduct3 = MagentoProductCalls.createPomProductModel();
-//			genProduct3.setPrice("49.90");
-//			voucherValue = genProduct3.getPrice();
-//			MagentoProductCalls.createApiProduct(genProduct3);
 //		
 //		
 		
