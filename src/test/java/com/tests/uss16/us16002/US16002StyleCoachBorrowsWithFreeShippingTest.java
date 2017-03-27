@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -108,6 +109,22 @@ public class US16002StyleCoachBorrowsWithFreeShippingTest extends BaseTest {
 		genProduct1 = createdProductsList.get(0);
 		genProduct2 = createdProductsList.get(1);
 
+		if(!createdProductsList.isEmpty() && createdProductsList.size()>=2){
+			genProduct1 = createdProductsList.get(0);
+			genProduct2 = createdProductsList.get(1);
+		}else{
+			genProduct1 = MagentoProductCalls.createProductModel();
+			 genProduct1.setIp("84");
+			 genProduct1.setPrice("49.90");
+			 MagentoProductCalls.createApiProduct(genProduct1);
+			
+			 genProduct2 = MagentoProductCalls.createProductModel();
+			 genProduct2.setIp("25");
+			 genProduct2.setPrice("89.00");
+			 MagentoProductCalls.createApiProduct(genProduct2);
+			
+		}
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 

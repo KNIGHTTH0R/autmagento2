@@ -4,10 +4,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.us7.us7001.US7001RegularCustRegOnMasterTest;
+import com.tests.CreateProductsTest;
 
 @SuiteClasses({
-	US7001RegularCustRegOnMasterTest.class,
+	CreateProductsTest.class,
+	RegularCartSuite.class,
 })
 @RunWith(Suite.class)
 public class QuickTestsSuite2 {

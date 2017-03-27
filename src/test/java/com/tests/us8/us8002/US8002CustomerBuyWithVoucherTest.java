@@ -102,28 +102,11 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-	/*	genProduct1 = createdProductsList.get(1);
+		genProduct1 = createdProductsList.get(1);
 		genProduct2 = createdProductsList.get(0);
-		genProduct3 = createdProductsList.get(13);*/
+		genProduct3 = createdProductsList.get(13);
 		
-		if(!createdProductsList.isEmpty() && createdProductsList.size()>=14){
-			genProduct1 = createdProductsList.get(1);
-			genProduct2 = createdProductsList.get(0);
-			genProduct3 = createdProductsList.get(13);
-		}
-		else{
-			genProduct1 = MagentoProductCalls.createProductModel();
-			genProduct1.setPrice("89.00");
-			MagentoProductCalls.createApiProduct(genProduct1);
-	
-			genProduct2 = MagentoProductCalls.createProductModel();
-			genProduct2.setPrice("49.90");
-			MagentoProductCalls.createApiProduct(genProduct2);
-	
-			genProduct3 = MagentoProductCalls.createProductModel();
-			genProduct3.setPrice("5.00");
-			MagentoProductCalls.createApiProduct(genProduct3);
-		}
+		
 
 //		genProduct1 = MagentoProductCalls.createProductModel();
 //		genProduct1.setPrice("89.00");

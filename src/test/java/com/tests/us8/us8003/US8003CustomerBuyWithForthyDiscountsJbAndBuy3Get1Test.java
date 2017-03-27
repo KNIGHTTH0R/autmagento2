@@ -99,30 +99,24 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
-		
+
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		genProduct1 = createdProductsList.get(1);
-//		genProduct2 = createdProductsList.get(0);
-//		genProduct3 = createdProductsList.get(6);
-		if(!createdProductsList.isEmpty() && createdProductsList.size()>=7){
-			genProduct1 = createdProductsList.get(1);
-			genProduct2 = createdProductsList.get(0);
-			genProduct3 = createdProductsList.get(6);
-		}else{
-			genProduct1 = MagentoProductCalls.createProductModel();
-			genProduct1.setPrice("89.00");
-			MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = createdProductsList.get(1);
+		genProduct2 = createdProductsList.get(0);
+		genProduct3 = createdProductsList.get(6);
 
-			genProduct2 = MagentoProductCalls.createProductModel();
-			genProduct2.setPrice("49.90");
-			MagentoProductCalls.createApiProduct(genProduct2);
+		// genProduct1 = MagentoProductCalls.createProductModel();
+		// genProduct1.setPrice("89.00");
+		// MagentoProductCalls.createApiProduct(genProduct1);
+		//
+		// genProduct2 = MagentoProductCalls.createProductModel();
+		// genProduct2.setPrice("49.90");
+		// MagentoProductCalls.createApiProduct(genProduct2);
+		//
+		// genProduct3 = MagentoProductCalls.createProductModel();
+		// genProduct3.setPrice("5.00");
+		// MagentoProductCalls.createApiProduct(genProduct3);
 
-			genProduct3 = MagentoProductCalls.createProductModel();
-			genProduct3.setPrice("5.00");
-			MagentoProductCalls.createApiProduct(genProduct3);
-
-		}
-		
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -180,9 +174,11 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 		headerSteps.goToCart();
 
 		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(),
+				ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
+		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(),
+				ContextConstants.DISCOUNT_40_BONUS);
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
 
@@ -191,7 +187,8 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
 
-		RegularUserCartCalculator.calculateCartBuy3Get1CartAndShippingTotals(RegularUserCartCalculator.allProductsList, discountClass, shippingValue, voucherValue);
+		RegularUserCartCalculator.calculateCartBuy3Get1CartAndShippingTotals(RegularUserCartCalculator.allProductsList,
+				discountClass, shippingValue, voucherValue);
 
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
@@ -230,9 +227,11 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 
 	@After
 	public void saveData() {
-		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveRegularCartCalcDetailsModel(RegularUserCartCalculator.calculatedTotalsDiscounts,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveOrderModel(RegularUserDataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
-		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel, getClass().getSimpleName() + SoapKeys.CALC);
+		MongoWriter.saveShippingModel(RegularUserCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveUrlModel(RegularUserDataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (RegularBasicProductModel product : RegularUserCartCalculator.allProductsList) {
 			MongoWriter.saveRegularBasicProductModel(product, getClass().getSimpleName() + SoapKeys.CALC);
