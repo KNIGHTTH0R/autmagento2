@@ -117,7 +117,7 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 //		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 //		genProduct2 = createdProductsList.get(0);
 //		genProduct3 = createdProductsList.get(5);
-
+		 
 		Properties prop = new Properties();
 		InputStream input = null;
 
