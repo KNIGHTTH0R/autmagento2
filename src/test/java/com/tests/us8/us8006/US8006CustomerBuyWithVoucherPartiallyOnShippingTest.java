@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -102,6 +103,8 @@ public class US8006CustomerBuyWithVoucherPartiallyOnShippingTest extends BaseTes
 		genProduct1 = createdProductsList.get(1);
 		genProduct2 = createdProductsList.get(0);
 		genProduct3 = createdProductsList.get(6);
+		
+
 
 //		genProduct1 = MagentoProductCalls.createProductModel();
 //		genProduct1.setPrice("89.00");

@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPConnection;
@@ -22,6 +23,7 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
+import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
 
 public class OrderInfoMagCalls {
@@ -128,7 +130,9 @@ public class OrderInfoMagCalls {
 			for (int r = 0; r < resultNodes.getLength(); r++) {
 
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("updated_nav")) {
-					model.setUpdatedNav(resultNodes.item(r).getTextContent());
+					model.setUpdatedNav(DateUtils.parseDate(resultNodes.item(r).getTextContent(), "yyyy-MM-dd HH:mm:ss",
+							"yyyy-MM-dd", new Locale.Builder().setLanguage("de").build()));
+
 				}
 
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("order_currency_code")) {
@@ -277,7 +281,7 @@ public class OrderInfoMagCalls {
 							for (int m = 0; m < customerNodes.getLength(); m++) {
 								if (customerNodes.item(m).getNodeName().equalsIgnoreCase("vat_valid")) {
 									model.setVatNumber(customerNodes.item(m).getTextContent());
-								
+
 								}
 
 								if (customerNodes.item(m).getNodeName().equalsIgnoreCase("small_business_man")) {
@@ -285,7 +289,8 @@ public class OrderInfoMagCalls {
 								}
 
 								if (customerNodes.item(m).getNodeName().equalsIgnoreCase("bank_account_vat_number")) {
-									if(!customerNodes.item(m).getTextContent().replaceAll("\\s+", "").contentEquals("")){
+									if (!customerNodes.item(m).getTextContent().replaceAll("\\s+", "")
+											.contentEquals("")) {
 										model.setBanckAccountNumber(customerNodes.item(m).getTextContent());
 									}
 								}
@@ -328,8 +333,12 @@ public class OrderInfoMagCalls {
 						}
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("base_price_incl_tax")) {
 							// model.setOriginalPrice(childNodes.item(j).getTextContent());
+
+							System.out.println("formateddd "
+									+ FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent()));
 							originalPrice = BigDecimal.valueOf(0);
-							originalPrice = BigDecimal.valueOf(Double.parseDouble(childNodes.item(j).getTextContent()));
+							originalPrice = BigDecimal.valueOf(Double.parseDouble(
+									FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent())));
 						}
 
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("qty_ordered")) {
@@ -358,14 +367,6 @@ public class OrderInfoMagCalls {
 			}
 
 		}
-
-		// System.out.println("subtotal " + subtotal);
-		// System.out.println("baseDiscountAmount " + baseDiscountAmount);
-		// System.out.println("jewelryCreditsUsed " + jewelryCreditsUsed);
-		// System.out.println("marketingCreditsUsed " + marketingCreditsUsed);
-		// System.out.println("fiftyDiscountsUsed " + fiftyDiscountsUsed);
-		// System.out.println("fiftyDiscountsAmount " + fiftyDiscountsAmount);
-		// System.out.println("shippingAmount" + shippingAmount);
 
 		BigDecimal calculateGrandTotal = subtotal.add(shippingAmount).subtract(baseDiscountAmount)
 				.subtract(jewelryCreditsUsed).subtract(marketingCreditsUsed).subtract(fiftyDiscountsAmount);
@@ -512,7 +513,7 @@ public class OrderInfoMagCalls {
 	public static void main(String[] args) throws SOAPException, IOException {
 
 		String sessID = HttpSoapConnector.performLogin();
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrdersInfo("10021688700", sessID);
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrdersInfo("10021876100", sessID);
 
 		System.out.println("style party  : " + dbmodel.getStylePartyId());
 		System.out.println("kobo article " + dbmodel.getKoboSingleArticle());

@@ -2,6 +2,10 @@ package com.steps.backend;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.tools.CustomVerification;
@@ -402,12 +406,38 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	// @Step
-	public void validateUpdatedNavDate(String updatedNav) {
+	 @Step
+	public void validateUpdatedNavDate(String updatedNav, String compare, String dateFormat) throws ParseException {
 		// TODO Auto-generated method stub
+		System.out.println(" updated  nav test "+updatedNav);
+		
+		DateFormat format = new SimpleDateFormat(dateFormat);
+		boolean updatedNavIsNull=updatedNav.contentEquals("null")?true:false;
+		System.out.println("updatedNavIsNull "+updatedNavIsNull);
+		
+		Date dateTocompare = format.parse(compare);
+		if(updatedNavIsNull){
+			CustomVerification.verifyTrueForOrderImport(
+					"Failure: Updated Nav in shop contains : " + updatedNav + " value " ,
+					false);
+		}else{
+			Date dateUpdatedNav = format.parse(updatedNav);
+			CustomVerification.verifyTrueForOrderImport(
+					"Failure: Updated Nav does not contains correct date : " + dateUpdatedNav ,
+					
+					//updatedNav is equal or is grater than dateToCompare 
+					dateUpdatedNav.compareTo(dateTocompare)>=0);
+			
+		}
+		
+		
+		
+		/*
 		boolean isUpdatedByNav = !updatedNav.isEmpty();
 		CustomVerification.verifyTrueForOrderImport("Failure: The order is not Updated by Nav " + updatedNav,
 				isUpdatedByNav);
+				
+				*/
 	}
 
 	// @Step

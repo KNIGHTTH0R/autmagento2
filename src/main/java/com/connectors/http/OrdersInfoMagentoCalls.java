@@ -3,6 +3,7 @@ package com.connectors.http;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPConnection;
@@ -20,6 +21,7 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.DBOrderModel;
+import com.tools.utils.DateUtils;
 
 /**
  * @author mihaibarta
@@ -354,6 +356,12 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_id")) {
 						model.setOrderId(childNodes.item(j).getTextContent());
 					}
+					
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("updated_nav")) {
+					//	model.setUpdatedNav(childNodes.item(j).getTextContent());
+						model.setUpdatedNav(DateUtils.parseDate(childNodes.item(j).getTextContent(), "yyyy-MM-dd HH:mm:ss",
+								"yyyy-MM-dd", new Locale.Builder().setLanguage("de").build()));
+					}
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_type")) {
 						model.setOrderType(childNodes.item(j).getTextContent());
@@ -493,10 +501,11 @@ public class OrdersInfoMagentoCalls {
 		//
 		// }
 
-		List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getOrderWithItems("10021787500", "10021787500");
+		List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getOrdersInRangeList("211021", "211021");
 		// ("213473", "213474");
 
 		for (DBOrderModel dbOrderModel : dbmodel) {
+			System.out.println("updatednav "+dbOrderModel.getUpdatedNav());
 			System.out.println("open order" + dbOrderModel.getIncrementId());
 			System.out.println("f name  " + dbOrderModel.getCustomerFirstName());
 			System.out.println("kobo " + dbOrderModel.getKoboSingleArticle());
