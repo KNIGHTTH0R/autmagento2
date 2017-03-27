@@ -248,11 +248,17 @@ return result;
 
 		for (DBCreditMemoModel cm : cmList) {
 
-			if (isReverseCharcheBackCurrentMonthIfLastMonthIsOpened(cm, month, previousCommissiomRun, nextCommissionRun)) {
+			if (isReverseChargeeBackCurrentMonthFirstCondition(cm, month, previousCommissiomRun, nextCommissionRun)) {
 				reverseChargeBacksCurrentMonth = reverseChargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
 	
 			}
-			if (isChargeBackCurrentMonthIfLastMonthIsOpened(cm, month, previousCommissiomRun, lastComissionRun)) {
+			if (isReverseChargeBackCurrentMonthSecondCondition(cm, month, previousCommissiomRun, lastComissionRun)) {
+				reverseChargeBacksCurrentMonth = reverseChargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
+			}
+			if (isChargeBackCurrentMonthFirstCondition(cm, month, previousCommissiomRun, lastComissionRun)) {
+				chargeBacksCurrentMonth = chargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
+			}
+			if (isChargeBackCurrentMonthSecondCondition(cm, month, previousCommissiomRun, lastComissionRun)) {
 				chargeBacksCurrentMonth = chargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
 			}
 			if (isOpenChargeback(cm, month)) {
@@ -270,7 +276,7 @@ return result;
 		result.setChargebacksThisMonth(String.valueOf("-" + chargeBacksCurrentMonth));
 		result.setReverseChargebackThisMonth(String.valueOf(reverseChargeBacksCurrentMonth));
 		result.setOpenChargebacks(String.valueOf(chargeBacksCurrentMonth.subtract(reverseChargeBacksCurrentMonth)));
-		result.setReturnsThisMonth(String.valueOf(returns));
+		result.setReturnsThisMonth(String.valueOf(chargeBacksCurrentMonth.subtract(reverseChargeBacksCurrentMonth)));
 //		result.setOpenChargebacks(String.valueOf(openChargebackPreviousAndCurrent));
 //		result.setReturnsThisMonth(String.valueOf(chargeBacksCurrentMonth.subtract(reverseChargeBacksCurrentMonth)));
 		result.setReturns(chargebacks);
@@ -289,18 +295,18 @@ return result;
 
 		for (DBCreditMemoModel cm : cmList) {
 
-			if (isReverseCharcheBackCurrentMonthIfLastMonthIsClosed(cm, month, previousComissionRun, lastComissionRun)) {
+			if (isReverseChargeeBackCurrentMonthFirstCondition(cm, month, previousComissionRun, lastComissionRun)) {
 				reverseChargeBacksCurrentMonth = reverseChargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
 	
 			}
-			if (isReverseCharcheBackCurrentMonthIfLastMonthIsOpened(cm, month, previousComissionRun, lastComissionRun)) {
+			if (isReverseChargeBackCurrentMonthSecondCondition(cm, month, previousComissionRun, lastComissionRun)) {
 				reverseChargeBacksCurrentMonth = reverseChargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
 	
 			}
-			if (isChargeBackCurrentMonthIfLastMonthIsClosed(cm, month, previousComissionRun, lastComissionRun)) {
+			if (isChargeBackCurrentMonthFirstCondition(cm, month, previousComissionRun, lastComissionRun)) {
 				chargeBacksCurrentMonth = chargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
 			}
-			if (isChargeBackCurrentMonthIfLastMonthIsOpened(cm, month, previousComissionRun, lastComissionRun)) {
+			if (isChargeBackCurrentMonthSecondCondition(cm, month, previousComissionRun, lastComissionRun)) {
 				chargeBacksCurrentMonth = chargeBacksCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((cm.getTotalIpRefunded()))));
 			}
 			if (isOpenChargeback(cm, month)) {
@@ -445,42 +451,74 @@ return result;
 				&& DateUtils.isDateAfter(order.getScheduledDeliveryDate(), DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT);
 	}
 
-	private static boolean isReverseCharcheBackCurrentMonthIfLastMonthIsOpened(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
+//	private static boolean isReverseChargeeBackCurrentMonthFirstCondition(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
+//
+//		return (cm.getState().contentEquals("3")
+//				&& DateUtils.isDateBeetween(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
+//				&& DateUtils.isDateBeetween(cm.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), nextComm, DateConstants.FORMAT) 
+//				&& DateUtils.isDateBefore(cm.getCreatedAt(), nextComm, DateConstants.FORMAT));
+//	}
+//		
+//		private static boolean isReverseChargeBackCurrentMonthSecondCondition(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
+//
+//			return (cm.getState().contentEquals("3")
+//						&& DateUtils.isDateBefore(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
+//						&& DateUtils.isDateBefore(cm.getOrderPaidAt(), nextComm, DateConstants.FORMAT) 
+//						&& DateUtils.isDateBeetween(cm.getCreatedAt(), previousCommissiomRun,
+//						nextComm, DateConstants.FORMAT));
+//
+//	}
+//		
+//		private static boolean isChargeBackCurrentMonthFirstCondition(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
+//
+//			return (cm.getState().contentEquals("2")
+//					&& DateUtils.isDateBeetween(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
+//                    && DateUtils.isDateBeetween(cm.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), nextComm, DateConstants.FORMAT)
+//                    && DateUtils.isDateBefore(cm.getCreatedAt(), nextComm, DateConstants.FORMAT));
+//		}
+//			
+//			private static boolean isChargeBackCurrentMonthSecondCondition(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
+//
+//				return (cm.getState().contentEquals("2")
+//							&& DateUtils.isDateBefore(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
+//							&& DateUtils.isDateBefore(cm.getOrderPaidAt(), nextComm, DateConstants.FORMAT) && 
+//							DateUtils.isDateBeetween(cm.getCreatedAt(), previousCommissiomRun,nextComm, DateConstants.FORMAT));
+//
+//		}
+	
+	private static boolean isReverseChargeeBackCurrentMonthFirstCondition(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
 
 		return (cm.getState().contentEquals("3")
-				&& DateUtils.isDateBeetween(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
-						DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
-
+				&& DateUtils.isDateBeetween(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
 				&& DateUtils.isDateBeetween(cm.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), nextComm, DateConstants.FORMAT) 
-				&& DateUtils.isDateBefore(cm.getCreatedAt(), nextComm, DateConstants.FORMAT));
+				&& DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT));
 	}
 		
-		private static boolean isReverseCharcheBackCurrentMonthIfLastMonthIsClosed(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
+		private static boolean isReverseChargeBackCurrentMonthSecondCondition(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
 
 			return (cm.getState().contentEquals("3")
-						&& DateUtils.isDateBefore(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
-						&& DateUtils.isDateBeetween(cm.getOrderPaidAt(),previousCommissiomRun, nextComm, DateConstants.FORMAT) 
-						&& DateUtils.isDateBeetween(cm.getCreatedAt(), previousCommissiomRun,
-						nextComm, DateConstants.FORMAT));
+						&& DateUtils.isDateBefore(cm.getOrderCreatedAt(), DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
+						&& DateUtils.isDateBefore(cm.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT) 
+						&& DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
+								DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT));
 
 	}
 		
-		private static boolean isChargeBackCurrentMonthIfLastMonthIsOpened(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
+		private static boolean isChargeBackCurrentMonthFirstCondition(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
 
 			return (cm.getState().contentEquals("2")
-					&& DateUtils.isDateBeetween(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
-							DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
-
-					&& DateUtils.isDateBeetween(cm.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), nextComm, DateConstants.FORMAT) && DateUtils
-						.isDateBefore(cm.getCreatedAt(), nextComm, DateConstants.FORMAT));
+					&& DateUtils.isDateBeetween(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
+					&& DateUtils.isDateBeetween(cm.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), nextComm, DateConstants.FORMAT) 
+					&& DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT));
 		}
 			
-			private static boolean isChargeBackCurrentMonthIfLastMonthIsClosed(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
+			private static boolean isChargeBackCurrentMonthSecondCondition(DBCreditMemoModel cm, String month, String previousCommissiomRun, String nextComm) throws ParseException {
 
 				return (cm.getState().contentEquals("2")
-							&& DateUtils.isDateBefore(cm.getOrderCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
-							&& DateUtils.isDateBefore(cm.getOrderPaidAt(), nextComm, DateConstants.FORMAT) && DateUtils.isDateBeetween(cm.getCreatedAt(), previousCommissiomRun,
-							nextComm, DateConstants.FORMAT));
+						&& DateUtils.isDateBefore(cm.getOrderCreatedAt(), DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT)
+						&& DateUtils.isDateBefore(cm.getOrderPaidAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT) 
+						&& DateUtils.isDateBeetween(cm.getCreatedAt(), DateUtils.getFirstDayOfAGivenMonth(month, DateConstants.FORMAT),
+								DateUtils.getLastDayOfAGivenMonth(month, DateConstants.FORMAT), DateConstants.FORMAT));
 
 		}
 			

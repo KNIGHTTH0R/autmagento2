@@ -82,15 +82,6 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTe
 	@Before
 	public void setUp() throws Exception {
 		
-//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_ORDER_IMPORT,
-//				EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
-//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_CREDITMEMO_IMPORT,
-//				EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
-//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SEND_IP_REPORT,
-//				EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
 
 		Properties prop = new Properties();
 		InputStream input = null;
