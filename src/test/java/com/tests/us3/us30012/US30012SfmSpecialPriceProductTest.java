@@ -97,21 +97,15 @@ public class US30012SfmSpecialPriceProductTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(17);
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(17);
+//		genProduct1.setPrice(genProduct1.getSpecialPrice());
+
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("120.00");
+		genProduct1.setSpecialPrice("100.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct1.setPrice(genProduct1.getSpecialPrice());
-		
-		if(!createdProductsList.isEmpty() && createdProductsList.size()>=18){
-			genProduct1 = createdProductsList.get(17);
-			genProduct1.setPrice(genProduct1.getSpecialPrice());
-	
-		}else{
-			genProduct1 = MagentoProductCalls.createProductModel();
-			genProduct1.setPrice("120.00");
-			genProduct1.setSpecialPrice("100.00");
-			MagentoProductCalls.createApiProduct(genProduct1);
-			genProduct1.setPrice(genProduct1.getSpecialPrice());
-		}
 	
 
 		Properties prop = new Properties();
