@@ -16,6 +16,7 @@ import org.openqa.selenium.security.UserAndPassword;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.connectors.navisionLogin.LoginWindow;
 import com.tools.requirements.AbstractPage;
 
 public class NavisionSyncDashboardPage extends AbstractPage {
@@ -25,6 +26,16 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 	@FindBy(css = ".ms-nav-ctxmenu-item a[title='Filters']")
 	private WebElement filtersOption;
+	
+	@FindBy(css = "table[summary*='MAGE Job Lines']  tr:nth-child(3) td:nth-child(2) a")
+	private WebElement salesOrderListLine;
+	
+	@FindBy(css = "a.ms-nav-group-caption[title*=Lines]")
+	private WebElement linesDropDown;
+	
+	
+	@FindBy(css = ".ms-nav-ctxmenu-itemlist li a[title*=Filters]")
+	private WebElement filter;
 
 	public void clickLinesLink() {
 		element(linesOption).waitUntilVisible();
@@ -49,74 +60,49 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 		Assert.assertTrue("The table was not found", found);
 	}
 
-	public void insertAuthentificationCredentials() {
-		// WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		// Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-		// alert.authenticateUsing(new UserAndPassword("Tinxit",
-		// "NAV-MAG12#$"));
-
-		// setup web driver
-		// System.setProperty("webdriver.chrome.driver", "path to your
-		// chromedriver.exe");
-		// driver = new ChromeDriver();
-
-		// create new thread for interaction with windows authentication window
-		(new Thread(new LoginWindow())).start();
-
+	public void insertAuthentificationCredentials() throws Exception {
+		
+	//	(new Thread(new LoginWindow())).start();
+		LoginWindow loginthread =new LoginWindow();
+		loginthread.login();
 		// open your url. this will prompt you for windows authentication
-		getDriver().get("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=43%3bh%2fqqAAJ7%2f1AAUABKAF8ATQBJAFgARQBEAF8ATQBBAE4AVQBBAEw%3d&mode=Edit&page=11205257&i=301&IsDlg=1");
+		//getDriver().get("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=43%3bh%2fqqAAJ7%2f1AAUABKAF8ATQBJAFgARQBEAF8ATQBBAE4AVQBBAEw%3d&mode=Edit&page=11205257&i=301&IsDlg=1");
 
+		
 		// add test scripts below ...
 	//	getDriver().findElement(By.linkText("Home")).click();
 
 	}
 
-	public class LoginWindow implements Runnable {
+	
 
-		@Override
-		public void run() {
-			try {
-				login();
-			} catch (Exception ex) {
-				System.out.println("Error in Login Thread: " + ex.getMessage());
-			}
-		}
-
-		public void login() throws Exception {
-
-			// wait - increase this wait period if required
-			Thread.sleep(5000);
-
-			// create robot for keyboard operations
-			Robot rb = new Robot();
-
-			// Enter user name by ctrl-v
-			StringSelection username = new StringSelection("Tinxit");
-			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(username, null);
-			rb.keyPress(KeyEvent.VK_CONTROL);
-			rb.keyPress(KeyEvent.VK_V);
-			rb.keyRelease(KeyEvent.VK_V);
-			rb.keyRelease(KeyEvent.VK_CONTROL);
-
-			// tab to password entry field
-			rb.keyPress(KeyEvent.VK_TAB);
-			rb.keyRelease(KeyEvent.VK_TAB);
-			Thread.sleep(2000);
-
-			// Enter password by ctrl-v
-			StringSelection pwd = new StringSelection("NAV-MAG12#$");
-			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(pwd, null);
-			rb.keyPress(KeyEvent.VK_CONTROL);
-			rb.keyPress(KeyEvent.VK_V);
-			rb.keyRelease(KeyEvent.VK_V);
-			rb.keyRelease(KeyEvent.VK_CONTROL);
-
-			// press enter
-			rb.keyPress(KeyEvent.VK_ENTER);
-			rb.keyRelease(KeyEvent.VK_ENTER);
-
-			// wait
-			Thread.sleep(5000);
-		}
+	public void clickOnSalesOrderListLine() {
+		System.out.println("clickOnSalesOrderListLine sunt aici");
+		waitABit(2000);
+		element(salesOrderListLine).waitUntilVisible();
+		salesOrderListLine.click();
 	}
+	
+	public void clickOnLinesDropdown() {
+		System.out.println("clickOnLinesDropdown sunt aici");
+		waitABit(2000);
+		element(linesDropDown).waitUntilVisible();
+		linesDropDown.click();
+	}
+	
+	public void clickOnFileter() {
+		System.out.println("clickOnFileter sunt aici");
+		waitABit(2000);
+		element(filter).waitUntilVisible();
+		filter.click();
+	}
+
+	public void performOrderImport(String orderId) {
+		
+		
+	}
+	
+	
+	
+	
 }
