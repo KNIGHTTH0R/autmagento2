@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
+import com.connectors.http.NavisionInventorySyncCalls;
 import com.connectors.navSqlServer.NavQueries;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
@@ -72,7 +73,7 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 		for (String sku : changingStockSkuList) {
 			String[] skuParts = sku.split("-");
 			//changingStockNavProduct.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
-		//	changingStockNavProduct
+			changingStockNavProduct.add(NavisionInventorySyncCalls.getItemInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
 		for (String id : constantStockIdList) {
 			constantStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
@@ -80,6 +81,7 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 		for (String sku : constantStockSkuList) {
 			String[] skuParts = sku.split("-");
 			//constantStockNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
+			constantStockNavProducts.add(NavisionInventorySyncCalls.getItemInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
 	}
 
