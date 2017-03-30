@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
+import com.connectors.http.NavisionInventorySyncCalls;
 import com.connectors.mongo.MongoConnector;
 import com.connectors.navSqlServer.NavQueries;
 import com.steps.backend.BackEndSteps;
@@ -50,14 +51,16 @@ public class US23001GetMagAndNavStockBerforeTpOrderTest extends BaseTest {
 	}
 
 	@Test
-	public void us23001GetMagAndNavStockBerforeOrderTest() throws SQLException {
+	public void us23001GetMagAndNavStockBerforeOrderTest() throws Exception {
 
 		for (String id : idListToBeDecreased) {
 			magentoProductsToBeDeacreased.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 		for (String sku : skuListToBeDecreased) {
 			String[] skuParts = sku.split("-");
-			navProductsToBeDecreased.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
+			//ioana
+			//navProductsToBeDecreased.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
+			navProductsToBeDecreased.add(NavisionInventorySyncCalls.getItemInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
 
 	}
