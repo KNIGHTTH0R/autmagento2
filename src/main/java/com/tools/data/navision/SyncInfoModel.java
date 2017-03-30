@@ -12,6 +12,19 @@ public class SyncInfoModel {
 	private String earliestAvailability;
 	private String pendingQuantity;
 
+	public SyncInfoModel() {
+		sku = "null";
+		quantity = "null";
+		isInStock = "null";
+		minumimQuantity = "null";
+		isDiscontinued = "null";
+		totalQuantity = "null";
+		maxPercentToBorrow = "null";
+		earliestAvailability = "null";
+		pendingQuantity = "null";
+
+	}
+
 	public String getSku() {
 		return sku;
 	}
@@ -92,7 +105,4 @@ public class SyncInfoModel {
 				+ earliestAvailability + ", pendingQuantity=" + pendingQuantity + "]";
 	}
 
-	
-	
-	
 }

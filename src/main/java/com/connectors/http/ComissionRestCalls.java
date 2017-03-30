@@ -23,7 +23,10 @@ public class ComissionRestCalls {
 
 	public static void main(String[] args) throws Exception {
 
-		ComissionRestCalls.getStylistInfo("5378");
+	//	ComissionRestCalls.getStylistInfo("1030");
+//		System.setProperty("http.proxyHost", "127.0.0.1");
+//		System.setProperty("http.proxyPort", "8080");
+		ComissionRestCalls.getStylistListInfo("2016", "01");
 	}
 
 	public static String composeAuthenticationSuffix() throws Exception {
@@ -36,9 +39,8 @@ public class ComissionRestCalls {
 	}
 
 	public static String composePeriodAndPaginationSuffix(String year, String month) throws Exception {
-
-		String suffix = "?year=" + year + "&month=" + month + "&page=1&per_page=5000";
-
+		String suffix ="?year=" + year + "&month="+month + "&page=1&per_page=200";
+		
 		return suffix;
 	}
 
@@ -47,6 +49,8 @@ public class ComissionRestCalls {
 		String unparsedResponse = JerseyClient
 				.sendGet(EnvironmentConstants.COMMISSION_URL + UrlConstants.COMMISION_STYLIST_SUFFIX + Separators.SLASH
 						+ stylistId + "?page=1&per_page=5000" + composeAuthenticationSuffix());
+		
+		System.out.println(unparsedResponse);
 		CommissionStylistModel commissionStylistModel = new CommissionStylistModel();
 		ObjectMapper mapper = new ObjectMapper();
 		CommisionStylistResponse res = (CommisionStylistResponse) mapper.readValue(unparsedResponse,
@@ -89,6 +93,8 @@ public class ComissionRestCalls {
 		String unparsedResponse = JerseyClient
 				.sendGet(EnvironmentConstants.COMMISSION_URL + UrlConstants.COMMISION_STYLIST_SUFFIX
 						+ composePeriodAndPaginationSuffix(year, month) + composeAuthenticationSuffix());
+		
+		System.out.println(unparsedResponse);
 		List<CommissionStylistModel> commissionStylistListModel = new ArrayList<CommissionStylistModel>();
 		ObjectMapper mapper = new ObjectMapper();
 		CommisionStylistListResponse res = (CommisionStylistListResponse) mapper.readValue(unparsedResponse,
@@ -113,6 +119,7 @@ public class ComissionRestCalls {
 
 		String unparsedResponse = JerseyClient.sendGet(EnvironmentConstants.COMMISSION_URL
 				+ UrlConstants.COMMISION_PARTY_SUFFIX + partyId + composeAuthenticationSuffix());
+		
 
 		CommissionPartyModel commissionPartyModel = new CommissionPartyModel();
 

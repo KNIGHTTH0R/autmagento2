@@ -7,19 +7,20 @@ import com.sun.jersey.api.client.WebResource;
 public class JerseyClient {
 
 	public static String sendGet(String url) {
+		System.out.println(url);
 		String output = "";
 		try {
 
 			Client client = Client.create();
 			WebResource webResource = client.resource(url);
 			ClientResponse response = webResource.accept("application/xml").get(ClientResponse.class);
-
+			System.out.println(response.getStatus());
 			if (response.getStatus() != 200) {
 				throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
 			}
 
 			output = response.getEntity(String.class);
-//			System.out.println(output);
+			System.out.println(output);
 
 		} catch (Exception e) {
 

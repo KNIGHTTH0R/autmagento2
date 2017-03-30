@@ -121,6 +121,7 @@ public class US33001ValidateTeamReportTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.redirectToStylistReports();
+		System.out.println("aici");
 		reportsSteps.clickOnTeamReports();
 		teamReportSteps.selectPagination("100");
 		teamReportSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd HH:mm:ss", "yyyy-MMM",

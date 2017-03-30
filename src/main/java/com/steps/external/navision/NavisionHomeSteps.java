@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Step;
 
 import com.connectors.http.ImportInterfaceCalls;
 import com.pages.external.navision.NavisionHomePage;
+import com.tools.persistance.MongoReader;
 import com.tools.requirements.AbstractSteps;
 
 public class NavisionHomeSteps extends AbstractSteps {
@@ -38,6 +39,13 @@ public class NavisionHomeSteps extends AbstractSteps {
 	@Step
 	public void clickFilterLink() {
 		navisionSyncDashboardPage().clickFilterLink();;
+	}
+	
+	
+	@Step
+	public void performLoginIntoNavisonWebClient(){
+	//	navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=43%3bh%2fqqAAJ7%2f1AAUABKAF8ATQBJAFgARQBEAF8ATQBBAE4AVQBBAEw%3d&mode=Edit&page=11205257&i=301&IsDlg=1");
+		navisionSyncDashboardPage().insertAuthentificationCredentials();
 	}
 	
 	

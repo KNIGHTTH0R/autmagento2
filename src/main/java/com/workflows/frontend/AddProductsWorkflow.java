@@ -32,6 +32,7 @@ public class AddProductsWorkflow {
 	 */
 	@StepGroup
 	public void setProductToCart(String productCode, String productName, String qty, String productProperty) {
+		System.out.println("productName "+productName);
 		searchSteps.navigateToProductPage(productName);
 		productSteps.setProductAddToCart(qty, productProperty);
 	}

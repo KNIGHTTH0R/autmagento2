@@ -1,5 +1,7 @@
 package com.pages.frontend;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 
 import com.tools.requirements.AbstractPage;
@@ -15,7 +17,7 @@ public class ReportsPage extends AbstractPage {
 	private WebElement ipReportsLink;
 
 	@FindBy(css = "li a[href*='stylereports/order/myteam/']")
-	private WebElement teamReportsLink;
+	private List<WebElement> teamReportsLink;
 
 	@FindBy(css = "li a[href*='stock?']")
 	private WebElement mobileVersion;
@@ -32,8 +34,8 @@ public class ReportsPage extends AbstractPage {
 	}
 
 	public void clickOnTeamReports() {
-		element(teamReportsLink).waitUntilVisible();
-		teamReportsLink.click();
+		element(teamReportsLink.get(1)).waitUntilVisible();
+		teamReportsLink.get(1).click();
 	}
 
 	public void clickOnMobileVersionOfAvList() {

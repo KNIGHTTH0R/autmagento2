@@ -43,15 +43,20 @@ public class TeamReportCalculations {
 	 * @return
 	 * @throws Exception
 	 */
+	
+	public static void main(String[] args) throws Exception {
+		List<CommissionStylistModel> allStylists = ComissionRestCalls.getStylistListInfo("2016", "01");
+		System.out.println("list size "+allStylists.size());
+	}
 	public static List<TeamReportModel> getTeamReportList(String stylistId, String month) throws Exception {
 
 		String[] dateFields = DateUtils.getDateFields(month, "yyyy-MM-dd HH:mm:ss");
 		String previousMonth = DateUtils.getPreviousMonth(month, "yyyy-MM-dd HH:mm:ss");
 		String[] dateFieldsPreviousMonth = DateUtils.getDateFields(previousMonth, "yyyy-MM-dd HH:mm:ss");
-
+		System.out.println(dateFields[0]+" "+dateFields[1]);
+		
 		List<CommissionStylistModel> allStylists = ComissionRestCalls.getStylistListInfo(dateFields[0], dateFields[1]);
 		List<CommissionStylistModel> levelStylistsList = getStylistsForAllLevels(allStylists, stylistId);
-
 		List<TeamReportModel> allTeamReportStylists = new ArrayList<TeamReportModel>();
 
 		for (CommissionStylistModel commissionStylistModel : levelStylistsList) {

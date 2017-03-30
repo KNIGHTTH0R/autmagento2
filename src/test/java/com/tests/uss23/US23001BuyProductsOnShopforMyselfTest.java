@@ -83,39 +83,55 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1.setName("LIQUID MOON SMALL");
+		genProduct1.setName("liquid-moon-small");
 		genProduct1.setSku("R065SV");
-		genProduct2.setName("MARY NECKLACE");
+		genProduct2.setName("mary-necklace");
 		genProduct2.setSku("N093SV");
-		genProduct3.setName("PIPPA&JEAN DREAMEES KOLLEKTIONS-UPDATE: BROSCHÜRE (50 STÜCK)");
-		genProduct3.setSku("M164");
-		genProduct4.setName("BIANCA MIT BALLCHAIN 45 CM");
+//		genProduct3.setName("PIPPA&JEAN DREAMEES KOLLEKTIONS-UPDATE: BROSCHÜRE (50 STÜCK)");
+//		genProduct3.setSku("M164");
+		
+		genProduct3.setName("pippa-jean-make-up-spiegel-10-stck");
+		genProduct3.setSku("M202");
+		
+		
+		genProduct4.setName("bianca-mit-ballchain-45-cm");
 		genProduct4.setSku("N052NL");
-		genProduct5.setName("FUNKY SOLITAIRE SET");
-		genProduct5.setSku("K091MC");
+		
+		//emilian
+//		genProduct5.setName("FUNKY SOLITAIRE SET");
+//		genProduct5.setSku("K091MC");
+		
+		genProduct5.setName("allure-set");
+		genProduct5.setSku("K112GY");
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
-			prop.load(input);
-
-			username = prop.getProperty("username");
-			password = prop.getProperty("password");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+	
+	
+		username = "590178ac_renee-schnee@evozon.com";
+		password="emilian1";
+//		try {
+//
+//			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
+//			prop.load(input);
+//
+//			username = prop.getProperty("username");
+//			password = prop.getProperty("password");
+//			
+//			
+//
+//		} catch (IOException ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			if (input != null) {
+//				try {
+//					input.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -130,6 +146,8 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
+		
+		
 		
 		addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "1", "18");
 		addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "1", "0");

@@ -21,7 +21,7 @@ import com.tools.data.soap.NavOrderLinesModel;
 
 public class NavisionInventorySyncCalls {
 
-	public static List<SyncInfoModel> getItemsList(String filterValue, String filterValue2) throws Exception {
+	public static SyncInfoModel getItemInfo(String filterValue, String filterValue2) throws Exception {
 
 		Authentication.setAuthenticator();
 
@@ -35,7 +35,7 @@ public class NavisionInventorySyncCalls {
 			e.printStackTrace();
 		}
 
-		return items;
+		return items.get(0);
 	}
 
 	private static List<SyncInfoModel> extractItemsList(SOAPMessage response) throws Exception {
@@ -57,48 +57,51 @@ public class NavisionInventorySyncCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Item_No")) {
 						items.add(childNodes.item(j).getTextContent());
 						stockLine.setSku(childNodes.item(j).getTextContent());
-						
+
 					}
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Quantity")) {
 						stockLine.setQuantity(childNodes.item(j).getTextContent());
-						
+
 					}
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Minimum_Quantity")) {
 						stockLine.setMinumimQuantity(childNodes.item(j).getTextContent());
-						
+
 					}
-					
+
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Total_Qty")) {
 						stockLine.setTotalQuantity(childNodes.item(j).getTextContent());
-						
+
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Earliest_Av_Date")) {
-						stockLine.setEarliestAvailability(childNodes.item(j).getTextContent());
-						
+						stockLine
+								.setEarliestAvailability(childNodes.item(j).getTextContent().contentEquals("0001-01-01")
+										? "null" : childNodes.item(j).getTextContent());
+
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Max_Percent_to_Borrow")) {
 						stockLine.setMaxPercentToBorrow(childNodes.item(j).getTextContent());
-						
+
 					}
-					
+
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Shop_IsDiscontinued")) {
-						stockLine.setIsDiscontinued(childNodes.item(j).getTextContent());
-						
+						System.out.println(childNodes.item(j).getTextContent());
+						stockLine.setIsDiscontinued(
+								childNodes.item(j).getTextContent().contentEquals("true") ? "1" : "0");
+
 					}
 				}
 
 				stockItem.add(stockLine);
 
-		/*
-	
-		 *  private String isInStock;
-		 *     private String pendingQuantity;
-		 */
+				/*
+				 * 
+				 * private String isInStock; private String pendingQuantity;
+				 */
 
-		 }
-		 }
+			}
+		}
 		return stockItem;
 	}
 
@@ -158,10 +161,9 @@ public class NavisionInventorySyncCalls {
 
 	public static void main(String args[]) throws Exception {
 
-		List<SyncInfoModel> items = NavisionInventorySyncCalls.getItemsList("R172SV", "18");
+		SyncInfoModel item = NavisionInventorySyncCalls.getItemInfo("N093SV", "");
 
-		for (SyncInfoModel syncInfoModel : items) {
-			System.out.println(syncInfoModel.toString());
-		}
+		System.out.println(item.toString());
+
 	}
 }

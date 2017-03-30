@@ -49,8 +49,11 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
 	private static List<String> changingStockSkuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV", "N052NL", "N094SV", "B098BK"));
 
-	private static List<String> constantStockIdList = new ArrayList<String>(Arrays.asList("5037"));
-	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M164"));
+//	private static List<String> constantStockIdList = new ArrayList<String>(Arrays.asList("5037"));
+//	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M164"));
+	
+	private static List<String> constantStockIdList = new ArrayList<String>(Arrays.asList("3893"));
+	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M202"));
 
 	@Before
 	public void setUp() throws Exception {
@@ -68,14 +71,15 @@ public class US23001VerifyMagAndNavStockAfterOrderTest extends BaseTest {
 		}
 		for (String sku : changingStockSkuList) {
 			String[] skuParts = sku.split("-");
-			changingStockNavProduct.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
+			//changingStockNavProduct.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
+		//	changingStockNavProduct
 		}
 		for (String id : constantStockIdList) {
 			constantStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 		for (String sku : constantStockSkuList) {
 			String[] skuParts = sku.split("-");
-			constantStockNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
+			//constantStockNavProducts.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
 	}
 
