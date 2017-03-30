@@ -334,8 +334,8 @@ public class OrderInfoMagCalls {
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("base_price_incl_tax")) {
 							// model.setOriginalPrice(childNodes.item(j).getTextContent());
 
-							System.out.println("formateddd "
-									+ FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent()));
+//							System.out.println("formateddd "
+//									+ FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent()));
 							originalPrice = BigDecimal.valueOf(0);
 							originalPrice = BigDecimal.valueOf(Double.parseDouble(
 									FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent())));

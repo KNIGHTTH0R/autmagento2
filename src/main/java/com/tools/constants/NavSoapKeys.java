@@ -15,8 +15,15 @@ public class NavSoapKeys {
 	public static final String FIELD = "Field";
 	public static final String CRITERIA = "Criteria";
 	public static final String NO = "No";
-	public static final String SALES_ORDER_API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/SalesOrder";
-	public static final String BILL_OF_MATERIAL_API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/BillOfMaterial";
-	public static final String INVENTORY_SYNC_API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/InvSyncLogEntries";
+	
+	//pippajean-upgrade
+//	public static final String SALES_ORDER_API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/SalesOrder";
+//	public static final String BILL_OF_MATERIAL_API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/BillOfMaterial";
+//	public static final String INVENTORY_SYNC_API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/InvSyncLogEntries";
 
+	
+	//CLOUD: staging-aut
+	public static final String SALES_ORDER_API_URI = "http://185.48.116.231:9953/ErpPippaTestGoLive/WS/PippaJean/Page/SalesOrder";
+	public static final String BILL_OF_MATERIAL_API_URI = "http://185.48.116.231:9953/ErpPippaTestGoLive/WS/PippaJean/Page/BillOfMaterial";
+	public static final String INVENTORY_SYNC_API_URI = "http://185.48.116.231:9953/ErpPippaTestGoLive/WS/PippaJean/Page/InvSyncLogEntries";
 }

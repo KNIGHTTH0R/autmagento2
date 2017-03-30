@@ -57,8 +57,8 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 //		navListOrders = NavisionSoapCalls.getOrdersList("209874..210900");
 		//shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("211021","211943");
 		
-		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("211021","211943");
-		navListOrders = NavisionSoapCalls.getOrdersList("211021..211943");
+		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("209874","209974");
+		navListOrders = NavisionSoapCalls.getOrdersList("209874..209974");
 	
 //		for (String shOrder : shopOrderList) {
 //

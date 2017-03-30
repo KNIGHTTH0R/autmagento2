@@ -48,12 +48,16 @@ public class NavisionHomeSteps extends AbstractSteps {
 		navisionSyncDashboardPage().insertAuthentificationCredentials();
 	}
 
+	@Step
 	public void performOrderImport(String orderId) {
 		navisionSyncDashboardPage().clickOnSalesOrderListLine();
 		navisionSyncDashboardPage().clickOnLinesDropdown();
-		navisionSyncDashboardPage().clickOnFileter();
-		navisionSyncDashboardPage().performOrderImport(orderId);;
-		
+		navisionSyncDashboardPage().clickOnFilter();
+		navisionSyncDashboardPage().inputOrderId(orderId);
+		navisionSyncDashboardPage().closeDialogModal();
+		navisionSyncDashboardPage().selectActionsTab();
+		navisionSyncDashboardPage().performOrderImport();
+		navisionSyncDashboardPage().selectActionsTab();
 	}
 	
 	
