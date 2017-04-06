@@ -131,7 +131,7 @@ public class NavisionBillOfMaterialCalls {
 
 	public static void main(String args[]) throws Exception {
 
-		List<NavOrderLinesModel> items = NavisionBillOfMaterialCalls.getItemsList("X006");
+		List<NavOrderLinesModel> items = NavisionBillOfMaterialCalls.getItemsList("K091MC");
 		for (NavOrderLinesModel item : items) {
 			System.out.println(item.getNo());
 		}

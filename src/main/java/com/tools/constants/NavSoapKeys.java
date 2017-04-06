@@ -1,5 +1,7 @@
 package com.tools.constants;
 
+import com.tools.persistance.MongoReader;
+
 public class NavSoapKeys {
 	
 	// General keys
@@ -15,8 +17,21 @@ public class NavSoapKeys {
 	public static final String FIELD = "Field";
 	public static final String CRITERIA = "Criteria";
 	public static final String NO = "No";
+	
+	// pippajean-upgrade or staging-aut
+//	public static final String SALES_ORDER_API_URI = MongoReader.geteEnvironmentConstantsItem("SALES_ORDER_API_URI");
+//	public static final String BILL_OF_MATERIAL_API_URI=MongoReader.geteEnvironmentConstantsItem("BILL_OF_MATERIAL_API_URI");
+//	public static final String INVENTORY_SYNC_API_URI=MongoReader.geteEnvironmentConstantsItem("INVENTORY_SYNC_API_URI");
+	
+	
+	//pippajean-upgrade
 	public static final String SALES_ORDER_API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/SalesOrder";
 	public static final String BILL_OF_MATERIAL_API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/BillOfMaterial";
 	public static final String INVENTORY_SYNC_API_URI = "http://185.48.116.231:9918/ErpPippaAut/WS/PippaJean/Page/InvSyncLogEntries";
 
+
+	//CLOUD: staging-aut
+//	public static final String SALES_ORDER_API_URI = "http://185.48.116.231:9953/ErpPippaTestGoLive/WS/PippaJean/Page/SalesOrder";
+//	public static final String BILL_OF_MATERIAL_API_URI = "http://185.48.116.231:9953/ErpPippaTestGoLive/WS/PippaJean/Page/BillOfMaterial";
+//	public static final String INVENTORY_SYNC_API_URI = "http://185.48.116.231:9953/ErpPippaTestGoLive/WS/PippaJean/Page/InvSyncLogEntries";
 }

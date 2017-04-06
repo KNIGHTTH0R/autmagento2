@@ -30,9 +30,9 @@ public class US34002ValidateImportMassDataTest extends BaseTest {
 
 	private List<DBOrderModel> shopListOrders = new ArrayList<DBOrderModel>();
 	private List<NavOrderModel> navListOrders = new ArrayList<NavOrderModel>();
-	int upperRange = 209874;
-	int lowerRange = 210970;
-	int limit = 1000;
+	int upperRange = 210175;
+	int lowerRange = 209975;
+	int limit = 100;
 	int max = 0;
 	String minimum;
 	String maximum;
@@ -48,45 +48,45 @@ public class US34002ValidateImportMassDataTest extends BaseTest {
 		// navListOrders = NavisionSoapCalls.getOrdersList("10021681500
 		// ..10021787300");
 
-		shopListOrders = OrdersInfoMagentoCalls.getOrdersInRangeList("211021","211021");
-		navListOrders = NavisionSoapCalls.getOrdersList("211021..211021");
+//		shopListOrders = OrdersInfoMagentoCalls.getOrdersInRangeList("211021","211021");
+//		navListOrders = NavisionSoapCalls.getOrdersList("211021..211021");
 
 		
-//		while(max<upperRange){
-//			max=lowerRange+limit;
-//			if(max>upperRange){
-//				max=upperRange;
-//				//da.add(Integer.toString(min) +" "+Integer.toString(max));
-//				minimum=Integer.toString(lowerRange);
-//				maximum=Integer.toString(max);
-//				shopListOrders.addAll( OrdersInfoMagentoCalls.getOrdersInRangeList(minimum,maximum));
-//				navListOrders.addAll(NavisionSoapCalls.getOrdersList(minimum+".."+maximum));
-//				
-//			}else{
-//			//	da.add(Integer.toString(min) +" "+Integer.toString(max));
-//				minimum=Integer.toString(lowerRange);
-//				maximum=Integer.toString(max);
-//				shopListOrders.addAll( OrdersInfoMagentoCalls.getOrdersInRangeList(minimum,maximum));
-//				navListOrders.addAll(NavisionSoapCalls.getOrdersList(minimum+".."+maximum));
-//				lowerRange=max+1;
-//				
-//				
-//			}
-//			
-//			
-//		}
-
+		while(max<upperRange){
+			max=lowerRange+limit;
+			if(max>upperRange){
+				max=upperRange;
+				//da.add(Integer.toString(min) +" "+Integer.toString(max));
+				minimum=Integer.toString(lowerRange);
+				maximum=Integer.toString(max);
+				shopListOrders.addAll( OrdersInfoMagentoCalls.getOrdersInRangeList(minimum,maximum));
+				navListOrders.addAll(NavisionSoapCalls.getOrdersList(minimum+".."+maximum));
+				
+			}else{
+			//	da.add(Integer.toString(min) +" "+Integer.toString(max));
+				minimum=Integer.toString(lowerRange);
+				maximum=Integer.toString(max);
+				shopListOrders.addAll( OrdersInfoMagentoCalls.getOrdersInRangeList(minimum,maximum));
+				navListOrders.addAll(NavisionSoapCalls.getOrdersList(minimum+".."+maximum));
+				lowerRange=max+1;
+				
+			}
+		}
 	}
 
 	@Test
 	public void us34002ValidateImportMassDataTest() throws Exception {
-		 ordersImport.validateMassOrders(shopListOrders, navListOrders);
-		//
-		// ordersImport.listOfOrdersNotImportedInNav();
-		// //ordersImport.ordersWithProblemslist();
-		//
-		 customVerification.printErrors();
-		 ordersImport.generateMassImportOrdersReport(shopListOrders.size());
+		
+		System.out.println("shopListOrders "+shopListOrders.size());
+		
+		System.out.println("navListOrders "+navListOrders.size());
+//		 ordersImport.validateMassOrders(shopListOrders, navListOrders);
+//		//
+//		// ordersImport.listOfOrdersNotImportedInNav();
+//		// //ordersImport.ordersWithProblemslist();
+//		//
+//		 customVerification.printErrors();
+//		 ordersImport.generateMassImportOrdersReport(shopListOrders.size());
 		// 
 	}
 }

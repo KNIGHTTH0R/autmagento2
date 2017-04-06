@@ -216,7 +216,6 @@ public class NavisionSoapCalls {
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Bill_to_Address_2")) {
 						billingAddress1 = childNodes.item(j).getTextContent();
-						System.out.println("billingAddress1 " +billingAddress1);
 						model.setBillToAddress(billingAddress.concat(" " + billingAddress1));
 					}
 
@@ -238,11 +237,11 @@ public class NavisionSoapCalls {
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_Address")) {
 						shippingAddress = childNodes.item(j).getTextContent();
-						model.setShipToAddress(shippingAddress.concat(shippingAddress1).replaceAll("\\s+", ""));
+						model.setShipToAddress(shippingAddress.replaceAll("\\s+", "").concat(shippingAddress1.replaceAll("\\s+", "")));
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_Address_2")) {
 						shippingAddress1 = childNodes.item(j).getTextContent();
-						model.setShipToAddress(shippingAddress.concat(shippingAddress1).replaceAll("\\s+", ""));
+						model.setShipToAddress(shippingAddress.replaceAll("\\s+", "").concat(" "+shippingAddress1.replaceAll("\\s+", "")));
 					}
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_Post_Code")) {
@@ -512,7 +511,7 @@ public class NavisionSoapCalls {
 		// NavisionSoapCalls.getOrdersList("10023578400..10023578700");
 		// 10021960100
 		System.out.println("test");
-		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("210384..210384");
+		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("210117..210117");
 
 		for (NavOrderModel order : ordersList) {
 			System.out.println("ceva ");

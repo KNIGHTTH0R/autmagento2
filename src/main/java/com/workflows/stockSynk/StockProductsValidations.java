@@ -27,11 +27,13 @@ public class StockProductsValidations extends AbstractSteps {
 
 	@Step
 	public void validateEarliestAvailability(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Quantity values doesn't match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Earliest Availability  doesn't match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
 
 	@Step
 	public void validateMinimumQuantity(String productNow, String compare) {
+		
+		System.out.println("validateMinimumQuantity "+productNow+ " - "+ compare);
 		CustomVerification.verifyTrue("Failure: Min quantity values don't match: " + productNow + " - " + compare, productNow.contentEquals(compare));
 	}
 

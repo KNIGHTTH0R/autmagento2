@@ -13,14 +13,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.OrderInfoMagCalls;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
+import com.steps.external.navision.NavisionHomeSteps;
 import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
 import com.tools.constants.Credentials;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
+import com.tools.data.soap.DBOrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -29,6 +32,9 @@ import com.tools.requirements.Application;
 @RunWith(SerenityRunner.class)
 public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 
+	
+	@Steps
+	public NavisionHomeSteps navisionSteps;
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
@@ -37,7 +43,7 @@ public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 	public NavisionImportSteps navisionImportSteps;
 
 	private OrderModel orderModel;
-
+	private DBOrderModel DBorderModel;
 	List<SyncInfoModel> syncronizedMagentoProducts = new ArrayList<SyncInfoModel>();
 	List<SyncInfoModel> syncronizedNavProducts = new ArrayList<SyncInfoModel>();
 
@@ -47,14 +53,21 @@ public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 	}
 
 	@Test
-	public void us23001PayAndImportOrderInNavisionTest() throws SQLException {
+	public void us23001PayAndImportOrderInNavisionTest() throws Exception {
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+		
+
+		
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
 		ordersSteps.openOrder(orderModel.getOrderId());
 		ordersSteps.markOrderAsPaid();
+		
+	//	ImportSteps.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
 
-		navisionImportSteps.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
+		navisionSteps.performLoginIntoNavisonWebClient();
+		DBorderModel=OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
+		navisionSteps.performOrderImport(DBorderModel.getOrderId());
 	}
 }

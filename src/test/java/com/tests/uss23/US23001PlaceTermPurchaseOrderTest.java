@@ -89,13 +89,22 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private OrderModel orderModel = new OrderModel();
 	private List<String> boughtProductsQuantities = new ArrayList<String>();
-	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
+/*	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
-
+///  2585  , 2584 2583
+	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct4 = new ProductDetailedModel();*/
+	
+	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
+	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("4469", "2358", "4271", "4304"));
+///  2585  , 2584 2583
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -107,48 +116,48 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 
-		qtyForBundle = BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(3).getQuantity())).compareTo(
-				BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(4).getQuantity()))) > 0 ? changingStockMagentoProducts.get(4).getQuantity()
+		qtyForBundle = BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(2).getQuantity())).compareTo(
+				BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(3).getQuantity()))) > 0 ? changingStockMagentoProducts.get(3).getQuantity()
 				: changingStockMagentoProducts.get(3).getQuantity();
 
 		boughtProductsQuantities.add(StockCalculations.determineQuantity(changingStockMagentoProducts.get(0).getQuantity()));
 		boughtProductsQuantities.add(StockCalculations.determineQuantity(changingStockMagentoProducts.get(1).getQuantity()));
-		boughtProductsQuantities.add(StockCalculations.determineQuantity(changingStockMagentoProducts.get(2).getQuantity()));
 		boughtProductsQuantities.add(StockCalculations.determineQuantity(qtyForBundle));
 		boughtProductsQuantities.add(StockCalculations.determineQuantity(qtyForBundle));
 
 		System.out.println(qtyForBundle);
 
-		genProduct1.setName("LIQUID MOON SMALL");
-		genProduct1.setSku("R065SV");
-		genProduct2.setName("MARY NECKLACE");
-		genProduct2.setSku("N093SV");
-		genProduct3.setName("BIANCA MIT BALLCHAIN 45 CM");
-		genProduct3.setSku("N052NL");
-		genProduct4.setName("FUNKY SOLITAIRE SET");
-		genProduct4.setSku("K091MC");
+		genProduct1.setName("spot-on-ring");
+		genProduct1.setSku("R185SV");
+		genProduct2.setName("sweet-melody-bracelet");
+		genProduct2.setSku("B096SV");
+		genProduct3.setName("coin-of-rome-bracelet-1");
+		genProduct3.setSku("K127SV");
 
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
-			prop.load(input);
-			username = prop.getProperty("username");
-			password = prop.getProperty("password");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		
+		username = "9a5a66f2_sonvex115@evozon.com";
+		password="emilian1";
+//		Properties prop = new Properties();
+//		InputStream input = null;
+//
+//		try {
+//
+//			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
+//			prop.load(input);
+//			username = prop.getProperty("username");
+//			password = prop.getProperty("password");
+//
+//		} catch (IOException ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			if (input != null) {
+//				try {
+//					input.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
@@ -171,12 +180,10 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		System.out.println(changingStockMagentoProducts.get(1).getQuantity());
 		System.out.println(changingStockMagentoProducts.get(2).getQuantity());
 		System.out.println(changingStockMagentoProducts.get(3).getQuantity());
-		System.out.println(changingStockMagentoProducts.get(4).getQuantity());
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct1, boughtProductsQuantities.get(0), "18");
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, boughtProductsQuantities.get(1), "0");
 		addProductsForCustomerWorkflow.addProductToCart(genProduct3, boughtProductsQuantities.get(2), "0");
-		addProductsForCustomerWorkflow.addProductToCart(genProduct4, boughtProductsQuantities.get(3), "0");
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();

@@ -190,6 +190,7 @@ public class MongoTableKeys {
 	public static final String SKU = "sku";
 	public static final String STOC_QUANTITY = "quantity";
 	public static final String MINUMIM_QUANTITY = "minumimQuantity";
+	public static final String MINIMUM_QTY = "minumimQuantity";
 	public static final String IS_DISCONTINUED = "isDiscontinued";
 	public static final String TOTAL_QUANTITY = "totalQuantity";
 	public static final String MAX_PERCENT_TO_BORROW = "maxPercentToBorrow";
@@ -253,6 +254,7 @@ public class MongoTableKeys {
 	public static final String CATEGORY_ID = null;
 
 	public static final String ENV_CONSTANTS_MODEL = "EnvironmentConstants";
+	
 	
 	
 

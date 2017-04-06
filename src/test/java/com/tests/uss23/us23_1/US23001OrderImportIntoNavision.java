@@ -60,7 +60,7 @@ public class US23001OrderImportIntoNavision extends BaseTest {
 	@Steps
 	public FooterSteps footerSteps;
 
-	String orderId="343422";
+	String orderId="213747";
 	//String customerId="4343"
 	@Before
 	public void setUp() throws Exception {

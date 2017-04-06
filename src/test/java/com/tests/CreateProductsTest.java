@@ -1,13 +1,20 @@
 package com.tests;
 
+import java.text.DateFormat;
+
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
+import org.joda.time.Interval;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,6 +69,12 @@ public class CreateProductsTest extends BaseTest {
 	public void createProductsTest() {
 		// products for Shop for myself cart- us3001
 		//and regular cart-us8001, us8002,us8003,us8004
+		
+		Calendar cal = Calendar.getInstance();
+		System.out.println(cal.getTimeInMillis() );
+		long startDate =cal.getTimeInMillis();		
+		//System.out.println("star date "+ DateUtils.getCurrentDate("yyyy/MM/dd HH:mm:ss"));
+		
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setIp("84");
 		genProduct1.setPrice("49.90");
@@ -79,6 +92,26 @@ public class CreateProductsTest extends BaseTest {
 		genProduct3.setPrice("229.00");
 		MagentoProductCalls.createApiProduct(genProduct3);
 		productsList.add(genProduct3);
+		
+		
+		Calendar cal434 = Calendar.getInstance();
+		System.out.println(cal434.getTimeInMillis());
+		long endDate =cal434.getTimeInMillis();
+		
+		
+		long duration  = endDate - startDate;
+		System.out.println("duration " +duration);
+
+		long diffInSeconds = TimeUnit.MILLISECONDS.toSeconds(duration);
+		
+		System.out.println("diffInSeconds " +diffInSeconds);
+		long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+		System.out.println("diffInMinutes " +diffInMinutes);
+		long diffInHours = TimeUnit.MILLISECONDS.toHours(duration);
+		System.out.println("diffInHours " +diffInHours);
+		
+		//System.out.println("end date "+ DateUtils.getCurrentDate("yyyy/MM/dd HH:mm:ss"));
+		
 		
 		//products for shop for myself cart - us3005
 		genProduct4 = MagentoProductCalls.createProductModel();
@@ -193,4 +226,5 @@ public class CreateProductsTest extends BaseTest {
 		}
 	}
 
-}
+	}
+

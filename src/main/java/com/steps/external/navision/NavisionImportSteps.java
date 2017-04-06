@@ -2,6 +2,8 @@ package com.steps.external.navision;
 
 import net.thucydides.core.annotations.Step;
 
+import java.util.List;
+
 import com.connectors.http.ImportInterfaceCalls;
 import com.tools.requirements.AbstractSteps;
 
@@ -12,6 +14,12 @@ public class NavisionImportSteps extends AbstractSteps {
 	@Step
 	public void importOrderInNav(String url, String orderId) {
 		ImportInterfaceCalls.importOrderInNav(url, orderId);
+	}
+
+	public void syncQtyAndSetAvDateOnItem(List<String> skuListToBeDecreased) {
+		
+	
+		
 	}
 
 }
