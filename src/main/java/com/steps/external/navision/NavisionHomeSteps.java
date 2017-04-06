@@ -94,6 +94,20 @@ public class NavisionHomeSteps extends AbstractSteps {
 			navisionSyncDashboardPage().confirmSuccesfullyPostedJournalLines();
 		//	navisionSyncDashboardPage().clickOnPostMenuBtn();
 		}
+	
+	
+	@Step
+	public void checkTermPurchasecheckbox(String skuItem) throws Exception {
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=11%3bGwAAAAJ7&mode=View&page=31&i=7A03&IsDlg=1");
+		navisionSyncDashboardPage().insertAuthentificationCredentials();
+		navisionSyncDashboardPage().searchForItem(skuItem);
+		navisionSyncDashboardPage().clickOnEditPoints();
+		navisionSyncDashboardPage().clickOnEditLink();
+		navisionSyncDashboardPage().clickOnTermPurchaseCheckbox();
+		navisionSyncDashboardPage().closeWindow();
+		
+	}
+	
 	}
 	
 	

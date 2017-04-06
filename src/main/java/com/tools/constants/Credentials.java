@@ -10,8 +10,8 @@ public class Credentials {
 //	public static final String LOGIN_PASS_SOAP = "aut1234";
 
 
-	public static final String BE_USER = "admin";
-	public static final String BE_PASS = "admin123";
+//	public static final String BE_USER = "admin";
+//	public static final String BE_PASS = "admin123";
 //	public static final String BE_USER = "oana.axente";
 //	public static final String BE_PASS = "Camelia.88";
 
@@ -20,8 +20,8 @@ public class Credentials {
 //	public static final String BE_PASS = "Camelia.88";
 	
 	//aut-pippajean.evozon.com
-//	public static final String BE_USER = "admin";
-//	public static final String BE_PASS = "admin123";
+	public static final String BE_USER = "admin";
+	public static final String BE_PASS = "admin123";
 	
 
 	public static final String BE_STYLIST = "simona.popa@evozon.com";

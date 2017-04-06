@@ -19,6 +19,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.security.UserAndPassword;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.connectors.navisionLogin.LoginWindow;
@@ -94,6 +95,20 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	 
 	 @FindBy(css = ".ms-cui-tabBody li:nth-child(2) .ms-cui-row-onerow a:nth-child(1)")
 	 private WebElement postButton;
+	 
+	 @FindBy(css = ".ms-list-itemLink-td")
+	 private WebElement clickOnEditPoints;
+	 
+	 @FindBy(css = ".ms-nav-ctxmenu-item [title*='Edit']")
+	 private WebElement clickOnEditLink;
+	 
+	 @FindBy(css = ".ms-nav-band.hide-additional-fields.expanded .collapsibleTab div:nth-child(26) input")
+	 private WebElement clickOnTermPurchaseCheckbox;
+	 
+	 @FindBy(css = ".icon-Dismiss.dialog-close")
+	 private WebElement closeModalWindow;
+	 
+	 
 	
 	 
 	 public void clickLinesLink() {
@@ -317,7 +332,31 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 		  actions.moveToElement(confirmPostJournalLines).click().perform();
 		  waitABit(2000);
 		 }
+		 
+		 public void clickOnEditPoints() {
+			  element(clickOnEditPoints).waitUntilVisible();
+			  waitABit(2000);
+			  clickOnEditPoints.click();
+			 }
+		 
+		 public void clickOnEditLink() throws InterruptedException {
+			 element(clickOnEditLink).waitUntilVisible();
+			 waitABit(2000);
+			 clickOnEditLink.click();
+		 }
 
+		 
+		 public void clickOnTermPurchaseCheckbox() {
+			  element(clickOnTermPurchaseCheckbox).waitUntilVisible();
+			  waitABit(2000);
+			  clickOnTermPurchaseCheckbox.click();
+			 }
+		 
+		 public void closeWindow() {
+			  element(closeModalWindow).waitUntilVisible();
+			  waitABit(2000);
+			  closeModalWindow.click();
+			 }
 		 
 		
 
