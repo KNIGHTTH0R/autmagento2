@@ -1,8 +1,9 @@
 package com.tests;
 
 import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
-import java.time.Instant;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -112,7 +113,7 @@ public class CreateProductsTest extends BaseTest {
 		//System.out.println("end date "+ DateUtils.getCurrentDate("yyyy/MM/dd HH:mm:ss"));
 		
 		
-		/*//products for shop for myself cart - us3005
+		//products for shop for myself cart - us3005
 		genProduct4 = MagentoProductCalls.createProductModel();
 		genProduct4.setIp("25");
 		genProduct4.setPrice("29.90");
@@ -224,6 +225,6 @@ public class CreateProductsTest extends BaseTest {
 			MongoWriter.saveProductDetailedModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
 		}
 	}
-*/
+
 	}
-}
+

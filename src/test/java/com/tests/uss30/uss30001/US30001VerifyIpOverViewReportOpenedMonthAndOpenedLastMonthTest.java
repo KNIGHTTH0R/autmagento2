@@ -51,7 +51,7 @@ import com.workflows.frontend.reports.IpReportValidationWorkflow;
 @WithTag(name = "US30.1 Verify Ip Overview Report", type = "Scenarios")
 @Story(Application.IpReport.US30_1.class)
 @RunWith(SerenityRunner.class)
-public class US30001VerifyIpOverViewReportBeforeMonthClosingAndOpenedLastMonthTest extends BaseTest {
+public class US30001VerifyIpOverViewReportOpenedMonthAndOpenedLastMonthTest extends BaseTest {
 
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
@@ -126,7 +126,10 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndOpenedLastMonthTe
 
 		//for selecting March from Dropdown
 		//march=Opened,february=Opened
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
+	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("2513","2017-04-05 00:00:00","2017-03-10 17:00:00","2017-04-31 23:59:00");
+	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-04-05 00:00:00","2017-02-28 23:59:00","2017-03-10 17:00:00","2017-04-10 17:00:00");
+
 		
 //		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
 //		expectedReturns = expectedIpOverviewModel.getReturns();
@@ -134,7 +137,7 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndOpenedLastMonthTe
 	}
 
 	@Test
-	public void us30001VerifyIpOverViewReportBeforeMonthClosingAndOpenedLastMonthTest() throws Exception {
+	public void us30001VerifyIpOverViewReportOpenedMonthAndOpenedLastMonthTest() throws Exception {
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -151,7 +154,7 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndOpenedLastMonthTe
 	
 //		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 		//ipReportsSteps.selectMonth("MäR - 2017");
-		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-03");
+		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-04");
 
 		
 		

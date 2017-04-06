@@ -69,10 +69,16 @@ public class US23001GetMagAndNavStockBerforeTpOrderTest extends BaseTest {
 
 	@Test
 	public void us23001GetMagAndNavStockBerforeOrderTest() throws Exception {
+		
+	
 
 		
 //		navisionSteps.syncEarliestAvDateOnItem("B096SV");
 //		navisionSteps.syncQtyOnItem("B096SV", "");
+		navisionSteps.checkTermPurchasecheckbox("E010RO");
+	//	for (String id : idListToBeDecreased) {
+
+		
 		for (String id : idListToBeDecreased) {
 			magentoProductsToBeDeacreased.add(MagentoProductCalls.getMagProductInfo(id));
 		}
@@ -114,4 +120,6 @@ public class US23001GetMagAndNavStockBerforeTpOrderTest extends BaseTest {
 			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK_OLD_TP);
 		}
 	}
+
 }
+

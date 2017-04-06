@@ -9,15 +9,21 @@ public class Credentials {
 //	public static final String LOGIN_USER_SOAP = "automation";
 //	public static final String LOGIN_PASS_SOAP = "aut1234";
 
-	//CLOUD: staging-aut
-	public static final String BE_USER = "oana.axente";
-	public static final String BE_PASS = "Camelia.88";
-	
-	//aut-pippajean.evozon.com
+
 //	public static final String BE_USER = "admin";
 //	public static final String BE_PASS = "admin123";
+//	public static final String BE_USER = "oana.axente";
+//	public static final String BE_PASS = "Camelia.88";
+
+	//CLOUD: staging-aut
+//	public static final String BE_USER = "oana.axente";
+//	public static final String BE_PASS = "Camelia.88";
 	
+	//aut-pippajean.evozon.com
+	public static final String BE_USER = "admin";
+	public static final String BE_PASS = "admin123";
 	
+
 	public static final String BE_STYLIST = "simona.popa@evozon.com";
 
 	// mailchimp credentials
