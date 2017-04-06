@@ -6,24 +6,23 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
+import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
+import net.thucydides.junit.annotations.UseTestDataFrom;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.ApacheHttpHelper;
-import com.steps.backend.BackEndSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -32,9 +31,7 @@ import com.steps.frontend.reports.IpReportsSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.FilePaths;
-import com.tools.constants.TimeConstants;
 import com.tools.constants.UrlConstants;
 import com.tools.data.IpOverViewOpenIpsModel;
 import com.tools.data.IpOverViewPayedOrdersModel;
@@ -49,8 +46,11 @@ import com.workflows.frontend.reports.IpReportValidationWorkflow;
 
 @WithTag(name = "US30.1 Verify Ip Overview Report", type = "Scenarios")
 @Story(Application.IpReport.US30_1.class)
-@RunWith(SerenityRunner.class)
-public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTest extends BaseTest {
+@RunWith(SerenityParameterizedRunner.class)
+@UseTestDataFrom(value="resources/commissionrundate.csv")
+
+public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest extends BaseTest {
+
 
 	@Steps
 	public StylistsCustomerOrdersReportSteps stylistsCustomerOrdersReportSteps;
@@ -67,14 +67,13 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTe
 	@Steps
 	public IpReportValidationWorkflow ipReportValidationWorkflow;
 	@Steps
-	public BackEndSteps backEndSteps;
-	@Steps
 	public CustomVerification customVerification;
+	
 
 	private String stylistUsername, stylistPassword;
 	private String reportMonth;
+	String month,previousCommissionRun,lastCommissionRun,nextCommissionRun;
 
-	private String month,previousCommissionRun,lastCommissionRun,nextCommissionRun;
 	IpOverviewModel expectedIpOverviewModel;
 	List<IpOverViewPayedOrdersModel> expectedOrdersList;
 	List<IpOverViewReturnsListModel> expectedReturns;
@@ -82,6 +81,10 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTe
 	@Before
 	public void setUp() throws Exception {
 		
+		System.out.println("luna " + month);
+		System.out.println("luna " + previousCommissionRun);
+		System.out.println("luna " + lastCommissionRun);
+		System.out.println("luna " + nextCommissionRun);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -106,26 +109,16 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTe
 			}
 		}
 		
-//		try {
-//			withTestDataFrom("resources/.commissionrundate.csv");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
-
-		//for selecting February from Dropdown
-		//february=Opened,january=closed
-	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-28 23:59:00");
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 23:59:00","2017-03-10 17:00:00","2017-04-10 17:00:00");
-		//pentru martie
-	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
+        //for february after is closing
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForClosedMonth("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-28 23:59:00","2017-03-10 17:00:00");
+		 //for march after is closing
+		
 //		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
 //		expectedReturns = expectedIpOverviewModel.getReturns();
-
 	}
 
 	@Test
-	public void us30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTest() throws Exception {
+	public void us30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest() throws Exception {
 		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -134,38 +127,21 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTe
 		
 		headerSteps.redirectToStylistReports();
 		reportsSteps.clickOnIpReports();
-
-//	System.out.println("asasasasasa"+ DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
-//	
-//	String str =DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-//	ipReportsSteps.selectMonth(str.toUpperCase());
-	
-//		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
-//		pt februarie
-//		ipReportsSteps.selectMonth("FEB - 2017");
-//		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-01");
-//		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-02");
-		//pentru martie
-		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-03");
-
+		ipReportsSteps.selectMonth("FEB - 2017");
+		//ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 		
-		//validate Ip overview report -sunt OK
+		//validate Ip overview report 
 		IpOverViewSummaryModel  grabbedSummaryModel= ipReportsSteps.getIpOverviewSummaryModel();
-
 		System.out.println("expected values" + expectedIpOverviewModel.toString());
 		System.out.println("grabbed values" +grabbedSummaryModel.toString());
 		ipReportValidationWorkflow.verifyIpOverviewReportDetails(grabbedSummaryModel, expectedIpOverviewModel);
 		
-		//validate Open ips summary - February
-//		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelNotCurrentMonth();
-//		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsNotCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
-		
-		//validate Open ips summary - March
-		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelCurrentMonth();
-		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
+		//validate Open ips summary
+		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelNotCurrentMonth();
+		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsNotCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
 		
 
-		//validate payed orders list -1299 si 1281
+		//validate payed orders list
 //		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
 //		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
 //		System.out.println("expected"+expectedOrdersList.size());
@@ -173,14 +149,16 @@ public class US30001VerifyIpOverViewReportBeforeMonthClosingAndClosedLastMonthTe
 //	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
 //		
 //		
-//        //validate returns orders - 34 si 41
+//        //validate returns orders 
 //		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
 //		ipReportValidationWorkflow.verifyReturnedOrdersList(expectedReturns, grabbedReturnsListModel);
 //		System.out.println("expected returns"+expectedReturns.size());
 //		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
 
-        
 		customVerification.printErrors();
+
 	}
+	
+	
 	
 }

@@ -50,6 +50,8 @@ public class NavisionHomeSteps extends AbstractSteps {
 
 	public void performOrderImport(String orderId) {
 		navisionSyncDashboardPage().clickOnSalesOrderListLine();
+	//	navisionSyncDashboardPage().clickOnLines();
+
 		navisionSyncDashboardPage().clickOnLinesDropdown();
 		navisionSyncDashboardPage().clickOnFileter();
 		navisionSyncDashboardPage().performOrderImport(orderId);;

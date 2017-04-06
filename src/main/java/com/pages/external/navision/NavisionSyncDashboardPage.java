@@ -27,11 +27,15 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	@FindBy(css = ".ms-nav-ctxmenu-item a[title='Filters']")
 	private WebElement filtersOption;
 	
-	@FindBy(css = "table[summary*='MAGE Job Lines']  tr:nth-child(3) td:nth-child(2) a")
+	@FindBy(css = "table[summary*='MAGE Job Lines']  tr:nth-child(3) td:nth-child(4) a")
 	private WebElement salesOrderListLine;
 	
 	@FindBy(css = "a.ms-nav-group-caption[title*=Lines]")
 	private WebElement linesDropDown;
+	
+	@FindBy(css = ".pagetitle-control")
+	private WebElement linesClick;
+	
 	
 	
 	@FindBy(css = ".ms-nav-ctxmenu-itemlist li a[title*=Filters]")
@@ -81,13 +85,28 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 		waitABit(2000);
 		element(salesOrderListLine).waitUntilVisible();
 		salesOrderListLine.click();
+		waitABit(2000);
+//		salesOrderListLine.click();
+//		waitABit(4000);
+	}
+	
+	public void clickOnLines() {
+		System.out.println("clickOnLines sunt aici");
+		waitABit(2000);
+		element(linesClick).waitUntilVisible();
+		linesClick.click();
+		
 	}
 	
 	public void clickOnLinesDropdown() {
 		System.out.println("clickOnLinesDropdown sunt aici");
-		waitABit(2000);
+		waitABit(4000);
 		element(linesDropDown).waitUntilVisible();
+		waitABit(4000);
 		linesDropDown.click();
+		waitABit(4000);
+		linesDropDown.click();
+		
 	}
 	
 	public void clickOnFileter() {

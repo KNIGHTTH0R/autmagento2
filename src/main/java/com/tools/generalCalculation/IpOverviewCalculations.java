@@ -162,8 +162,8 @@ return result;
 				 openIpsCurrentMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
 				 }
 		    if (isOpenIpsPreviousMonthOpenLastMonth(order, month)) {
-				 openIpsPreviousMonth =
-				 openIpsPreviousMonth.add(BigDecimal.valueOf(Integer.parseInt((order.getTotalIp()))));
+				 openIpsPreviousMonth = BigDecimal.ZERO;
+				 
 				 }
 
 			if (isTermPurchaseIpsCurrentMonth(order, month)) {
