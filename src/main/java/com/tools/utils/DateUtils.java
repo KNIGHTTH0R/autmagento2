@@ -442,6 +442,13 @@ public class DateUtils {
 
 		return result > 0 ? result : 0;
 	}
+	
+	public static int timeBetween(Date d1, Date d2) {
+
+		int result = (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+
+		return result > 0 ? result : 0;
+	}
 
 	public static String[] getDateFields(String dateString, String formatString) throws ParseException {
 

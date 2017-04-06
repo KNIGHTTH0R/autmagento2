@@ -90,14 +90,17 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 //		genProduct3.setName("PIPPA&JEAN DREAMEES KOLLEKTIONS-UPDATE: BROSCHÜRE (50 STÜCK)");
 //		genProduct3.setSku("M164");
 		
-		genProduct3.setName("pippa-jean-make-up-spiegel-10-stck");
-		genProduct3.setSku("M202");
+		genProduct3.setName("einladung-postkarte-50-stk");
+		genProduct3.setSku("M014");
 		
 		
-		genProduct4.setName("bianca-mit-ballchain-45-cm");
-		genProduct4.setSku("N052NL");
+		genProduct4.setName("frozen-flower-necklace-pink");
+		genProduct4.setSku("N105MC");
 		
 		//emilian
+//		genProduct4.setName("bianca-1");
+//		genProduct4.setSku("N052NL");
+		
 //		genProduct5.setName("FUNKY SOLITAIRE SET");
 //		genProduct5.setSku("K091MC");
 		
@@ -109,7 +112,7 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 
 	
 	
-		username = "590178ac_renee-schnee@evozon.com";
+		username = "9a5a66f2_sonvex115@evozon.com";
 		password="emilian1";
 //		try {
 //

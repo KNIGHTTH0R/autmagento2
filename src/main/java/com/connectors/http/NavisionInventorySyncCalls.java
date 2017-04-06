@@ -66,7 +66,8 @@ public class NavisionInventorySyncCalls {
 					}
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Minimum_Quantity")) {
-						stockLine.setMinumimQuantity(childNodes.item(j).getTextContent());
+						stockLine.setMinumimQuantity(childNodes.item(j).getTextContent().contentEquals("") ? "null"
+								: childNodes.item(j).getTextContent());
 
 					}
 
@@ -75,10 +76,13 @@ public class NavisionInventorySyncCalls {
 
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Earliest_Av_Date")) {
+						
+						System.out.println("navision av date "+childNodes.item(j).getTextContent());
 						stockLine
 								.setEarliestAvailability(childNodes.item(j).getTextContent().contentEquals("0001-01-01")
-										? "null" : childNodes.item(j).getTextContent());
+										? "1753-01-01" : childNodes.item(j).getTextContent());
 
+						System.out.println("navision  ear date set on model"+stockLine.getEarliestAvailability());
 					}
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Max_Percent_to_Borrow")) {
 						stockLine.setMaxPercentToBorrow(childNodes.item(j).getTextContent());

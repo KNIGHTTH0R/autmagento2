@@ -502,9 +502,12 @@ public class MagentoProductCalls {
 			}
 			if (childNodes.item(j).getNodeName().equalsIgnoreCase("min_qty")) {
 				result.setMinumimQuantity(childNodes.item(j).getTextContent());
+				
+				System.out.println("get min "+ result.getMinumimQuantity());
 			}
 			if (childNodes.item(j).getNodeName().equalsIgnoreCase("earliest_availability")) {
-
+				
+				System.out.println("shop av date: "+childNodes.item(j).getTextContent());
 				String[] parts = childNodes.item(j).getTextContent().split(" ");
 				result.setEarliestAvailability(parts[0]);
 			}

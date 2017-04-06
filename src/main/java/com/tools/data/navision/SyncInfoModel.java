@@ -16,11 +16,11 @@ public class SyncInfoModel {
 		sku = "null";
 		quantity = "null";
 		isInStock = "null";
-		minumimQuantity = "null";
+		minumimQuantity = "";
 		isDiscontinued = "null";
 		totalQuantity = "null";
 		maxPercentToBorrow = "null";
-		earliestAvailability = "null";
+		//earliestAvailability = "1753-01-01";
 		pendingQuantity = "null";
 
 	}

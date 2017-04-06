@@ -21,6 +21,8 @@ import com.connectors.mongo.MongoConnector;
 import com.connectors.navSqlServer.NavQueries;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
+import com.steps.external.navision.NavisionHomeSteps;
+import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
 import com.tools.constants.SoapKeys;
 import com.tools.data.navision.SyncInfoModel;
@@ -36,24 +38,35 @@ public class US23001GetMagAndNavStockBerforeTpOrderTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 	@Steps
 	public OrdersSteps ordersSteps;
+	@Steps
+	public NavisionImportSteps navisionImportSteps;
+	@Steps
+	public NavisionHomeSteps navisionSteps;
 
 	private List<SyncInfoModel> magentoProductsToBeDeacreased = new ArrayList<SyncInfoModel>();
 	private List<SyncInfoModel> navProductsToBeDecreased = new ArrayList<SyncInfoModel>();
 
-	private static List<String> idListToBeDecreased = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
-	private static List<String> skuListToBeDecreased = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV", "N052NL", "N094SV", "B098BK"));
+	private static List<String> idListToBeDecreased = new ArrayList<String>(Arrays.asList("4469", "2358", "4271", "4304"));
+	private static List<String> skuListToBeDecreased = new ArrayList<String>(Arrays.asList("R185SV-18", "B096SV", "E195SV", "B170BR"));
 
-	@Before
+	/*@Before
 	public void setUp() throws Exception {
 
+		navisionSteps.syncQtyAndSetAvDateOnItem("B096SV");
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
-	}
+		
+		
+	}*/
 
 	@Test
 	public void us23001GetMagAndNavStockBerforeOrderTest() throws Exception {
 
-		for (String id : idListToBeDecreased) {
+		
+		navisionSteps.syncEarliestAvDateOnItem("B096SV");
+		navisionSteps.syncQtyOnItem("B096SV", "");
+		/*for (String id : idListToBeDecreased) {
 			magentoProductsToBeDeacreased.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 		for (String sku : skuListToBeDecreased) {
@@ -61,11 +74,11 @@ public class US23001GetMagAndNavStockBerforeTpOrderTest extends BaseTest {
 			//ioana
 			//navProductsToBeDecreased.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 			navProductsToBeDecreased.add(NavisionInventorySyncCalls.getItemInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
-		}
+		}*/
 
 	}
 
-	@After
+	/*@After
 	public void saveData() {
 
 		for (SyncInfoModel product : magentoProductsToBeDeacreased) {
@@ -74,5 +87,5 @@ public class US23001GetMagAndNavStockBerforeTpOrderTest extends BaseTest {
 		for (SyncInfoModel product : navProductsToBeDecreased) {
 			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
 		}
-	}
+	}*/
 }

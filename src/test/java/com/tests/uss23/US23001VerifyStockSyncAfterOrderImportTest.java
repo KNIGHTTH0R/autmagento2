@@ -47,6 +47,10 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	List<SyncInfoModel> initialChangingNavProducts = new ArrayList<SyncInfoModel>();
 	List<SyncInfoModel> initialConstantMagentoProducts = new ArrayList<SyncInfoModel>();
 	List<SyncInfoModel> initialConstantNavProducts = new ArrayList<SyncInfoModel>();
+	
+	
+	List<SyncInfoModel> initialNotChangingMagentoProducts = new ArrayList<SyncInfoModel>();
+	List<SyncInfoModel> initialNotChangingNavProducts = new ArrayList<SyncInfoModel>();
 
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private List<SyncInfoModel> changingStockNavProduct = new ArrayList<SyncInfoModel>();
@@ -54,11 +58,11 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	private List<SyncInfoModel> constantStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private List<SyncInfoModel> constantStockNavProducts = new ArrayList<SyncInfoModel>();
 
-	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
-	private static List<String> changingStockSkuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV", "N052NL", "N094SV", "B098BK"));
+	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "3120", "1872", "2552"));
+	private static List<String> changingStockSkuList = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV", "N105MC", "N094SV", "B098BK"));
 
-	private static List<String> constantStockIdList = new ArrayList<String>(Arrays.asList("5037"));
-	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M164"));
+	private static List<String> constantStockIdList = new ArrayList<String>(Arrays.asList("957"));
+	private static List<String> constantStockSkuList = new ArrayList<String>(Arrays.asList("M014"));
 
 	private OrderModel orderModel;
 	boolean isSyncronyzed = false;
@@ -66,18 +70,31 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		orderModel = MongoReader.getOrderModel("US23001BuyProductsOnShopforMyselfTest").get(0);
-		OrderStatusModel orderStatusModel = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase());
-		String[] parts = orderStatusModel.getSyncDate().split(Pattern.quote("."));
-		String syncDate = parts[0];
+//		orderModel = MongoReader.getOrderModel("US23001BuyProductsOnShopforMyselfTest").get(0);
+//		OrderStatusModel orderStatusModel = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase());
+//		String[] parts = orderStatusModel.getSyncDate().split(Pattern.quote("."));
+//		String syncDate = parts[0];
 
 		initialChangingMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
+		//3 produse
+		
 		initialChangingNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
+		//3 products
+		
+
+		initialNotChangingMagentoProducts=MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_NOT_CHANGING_STOCK);
+		initialNotChangingNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_NOT_CHANGING_STOCK);
+		
 		initialConstantMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
 		initialConstantNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 
+		
+		
+		
 		initialChangingNavProducts = StockCalculations.calculateNewStock(initialChangingNavProducts, "1", false);
 		initialConstantNavProducts = StockCalculations.calculateNewStock(initialConstantNavProducts, "1", true);
+		
+		initialChangingNavProducts.addAll(initialNotChangingNavProducts);
 
 		for (String id : changingStockIdList) {
 			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
@@ -101,16 +118,16 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 		changingStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(changingStockMagentoProducts);
 		constantStockMagentoProducts = StockCalculations.calculateStockBasedOnPendingOrders(constantStockMagentoProducts);
 
-		if (DateUtils.isDateAfter(DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"), syncDate, "YYYY-MM-dd HH:mm:ss")
-				&& orderStatusModel.getSyncStatus().contentEquals("Yes")) {
-			isSyncronyzed = true;
-		}
+//		if (DateUtils.isDateAfter(DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"), syncDate, "YYYY-MM-dd HH:mm:ss")
+//				&& orderStatusModel.getSyncStatus().contentEquals("Yes")) {
+//			isSyncronyzed = true;
+//		}
 	}
 
 	@Test
 	public void us23001VerifyStockSyncAfterOrderImportTest() throws SQLException {
 
-		stockProductsValidations.validateSyncronizedStatus(isSyncronyzed);
+	//	stockProductsValidations.validateSyncronizedStatus(isSyncronyzed);
 
 		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
 		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");

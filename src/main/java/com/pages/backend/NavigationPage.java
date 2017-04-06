@@ -27,6 +27,7 @@ public class NavigationPage extends AbstractPage {
 	private WebElement adminHomePage;
 
 	public void dismissPopUp() {
+		
 		evaluateJavascript("jQuery.noConflict();");
 		element(popUpWindow).waitUntilVisible();
 		popUpWindow.findElement(By.cssSelector("div.message-popup-head > a")).click();
@@ -74,5 +75,13 @@ public class NavigationPage extends AbstractPage {
 		element(adminHomePage).waitUntilVisible();
 		adminHomePage.click();
 
+	}
+
+	public boolean isDismissPopPresent() {
+		// TODO Auto-generated method stub
+	//	element(popUpWindow).waitUntilVisible();
+		System.out.println("size "+ getDriver().findElements(By.cssSelector("#message-popup-window")).size());
+		return getDriver().findElements(By.cssSelector("#message-popup-window")).size() > 0;
+		//return popUpWindow.isDisplayed();
 	}
 }

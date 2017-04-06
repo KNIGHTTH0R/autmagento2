@@ -21,11 +21,26 @@ public class BackEndSteps extends AbstractSteps {
 	private static final long serialVersionUID = 6989975368757184274L;
 
 	@Step
-	public void performAdminLogin(String userName, String userPass) {
+	public void performAdminLogin(String userName, String userPass)  {
 		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
 		magentoLoginPage().clickOnLogin();
+	
+		
+		waitABit(6000);
+		boolean isPresent = isdismissPopUpPresent();
+		
+		System.out.println("da sau nu: " + isPresent);
+		if (isPresent == false) {
+			
+			System.out.println("da da sunt aici");
+			//Thread.sleep(1000);
+			waitABit(3000);
+			magentoLoginPage().inputUserName(userName);
+			magentoLoginPage().inputUserPassword(userPass);
+			magentoLoginPage().clickOnLogin();
+		}
 		dismissPopUp();
 	}
 
@@ -35,53 +50,69 @@ public class BackEndSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void insertCredentials(String userName, String userPass) {
+		getDriver().navigate().refresh();
+		magentoLoginPage().inputUserName(userName);
+		magentoLoginPage().inputUserPassword(userPass);
+		waitABit(5000);
+	}
+
+	@Step
+	public void clickOnLoginButton() throws InterruptedException {
+		magentoLoginPage().clickOnLogin();
+		dismissPopUp();
+	}
+
+	@Step
 	public void performLogin(String userName, String userPass) {
 		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_AUT);
 		magentoLoginPage().inputUserName(userName);
 		magentoLoginPage().inputUserPassword(userPass);
-		magentoLoginPage().clickOnLogin();
+		// emilian shoud adjust
+		// magentoLoginPage().clickOnLogin();
 	}
 
-//	@Step
-//	public void clickOnCustomers() {
-//		navigationPage().selectMenuFromNavbar("Kunden", "Kunden verwalten");
-//	}
+	// @Step
+	// public void clickOnCustomers() {
+	// navigationPage().selectMenuFromNavbar("Kunden", "Kunden verwalten");
+	// }
 	@Step
 	public void clickOnCustomers() {
 		navigationPage().selectSubmenu("customer");
 	}
 
-//	@Step
-//	public void clickOnProducts() {
-//		navigationPage().selectMenuFromNavbar("Katalog", "Produkte verwalten");
-//	}
+	// @Step
+	// public void clickOnProducts() {
+	// navigationPage().selectMenuFromNavbar("Katalog", "Produkte verwalten");
+	// }
 	@Step
 	public void clickOnProducts() {
 		navigationPage().selectSubmenu("catalog_product");
 	}
 
-//	@Step
-//	public void goToNewsletterSubribers() {
-//		navigationPage().selectMenuFromNavbar("Newsletter", "Newsletter Bezieher");
-//	}
+	// @Step
+	// public void goToNewsletterSubribers() {
+	// navigationPage().selectMenuFromNavbar("Newsletter", "Newsletter
+	// Bezieher");
+	// }
 	@Step
 	public void goToNewsletterSubribers() {
 		navigationPage().selectSubmenu("newsletter_subscriber");
 	}
 
-//	@Step
-//	public void clickOnStyleParties() {
-//		navigationPage().selectMenuFromNavbar("Stylecoach", "Style Parties");
-//	}
+	// @Step
+	// public void clickOnStyleParties() {
+	// navigationPage().selectMenuFromNavbar("Stylecoach", "Style Parties");
+	// }
 	@Step
 	public void clickOnStyleParties() {
 		navigationPage().selectSubmenu("party");
 	}
 
-//	@Step
-//	public void clickOnStylecoachList() {
-//		navigationPage().selectMenuFromNavbar("Stylecoach", "Stylecoach List");
-//	}
+	// @Step
+	// public void clickOnStylecoachList() {
+	// navigationPage().selectMenuFromNavbar("Stylecoach", "Stylecoach List");
+	// }
 	@Step
 	public void clickOnStylecoachList() {
 		navigationPage().selectSubmenu("stylist/index/key/");
@@ -115,14 +146,15 @@ public class BackEndSteps extends AbstractSteps {
 		navigationPage().selectSubmenu("sales_order");
 	}
 
-//	@Step
-//	public void clickOnCreditMemo() {
-//		navigationPage().selectMenuFromNavbar("Verkäufe", "Gutschriften");
-//	}
+	// @Step
+	// public void clickOnCreditMemo() {
+	// navigationPage().selectMenuFromNavbar("Verkäufe", "Gutschriften");
+	// }
 	@Step
 	public void clickOnCreditMemo() {
 		navigationPage().selectSubmenu("sales_creditmemo");
 	}
+
 	@Step
 	public void clickOnTermPurchaseGrid() {
 		navigationPage().selectSubmenu("scheduledorders");
@@ -212,9 +244,9 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().inputPostCode(addressModel.getPostCode());
 		customerDetailsHomePage().saveCustomer();
 	}
-	
+
 	@Step
-	public void deleteAllAdresses(){
+	public void deleteAllAdresses() {
 		customerDetailsHomePage().clickOnAddressesTab();
 		customerDetailsHomePage().deleteAllAdresses();
 		customerDetailsHomePage().saveCustomer();
@@ -247,7 +279,8 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public void editEmail(CustomerFormModel customerData) {
 		customerDetailsHomePage().clickOnAccountInfoTab();
-		customerDetailsHomePage().typeEmail(customerData.getEmailName().replace(ConfigConstants.WEB_MAIL, "evozon.com"));
+		customerDetailsHomePage()
+				.typeEmail(customerData.getEmailName().replace(ConfigConstants.WEB_MAIL, "evozon.com"));
 		customerDetailsHomePage().saveCustomer();
 	}
 
@@ -280,6 +313,10 @@ public class BackEndSteps extends AbstractSteps {
 
 	public void dismissPopUp() {
 		navigationPage().dismissPopUp();
+	}
+
+	public boolean isdismissPopUpPresent() {
+		return navigationPage().isDismissPopPresent();
 	}
 
 	public StylistDataModel grabLeadSettingsData() {
@@ -366,8 +403,7 @@ public class BackEndSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return getDriver().getCurrentUrl();
 	}
-	
-	
+
 	@Step
 	public void clickOnSystemConfiguration() {
 		navigationPage().selectSubmenu("system_config");
@@ -376,8 +412,9 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public void goToHomePage() {
 		navigationPage().goToHomePage();
-	
+
 	}
+
 	@Step
 	public void selectAllowedToBorrow(String allowedToBorrowOption) {
 		customerDetailsHomePage().clickOnStylecoachProfileTab();
@@ -389,55 +426,51 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().clickOnStylecoachProfileTab();
 		customerDetailsHomePage().selectTopStatus(topStatus);
 		customerDetailsHomePage().saveAndContinueEdit();
-		
-	}
-	
-	
-	
-	
-//	@Step
-//	public void selectTermPurchseOption(String termPurchaseType) {
-//		systemConfigurationPage().selectTermPurchseOption(termPurchaseType);
-//	}
-//	
-//	@Step
-//	public void inputMaxNumberOfDAys(String days) {
-//		systemConfigurationPage().inputMaxNumberOfDAys(days);
-//	}
-//	
-//	@Step
-//	public void inputStartDateOfTpNotAvailablePeriod(String date) {
-//		systemConfigurationPage().inputStartDateOfTpNotAvailablePeriod(date);
-//	}
-//	
-//	
-//	@Step
-//	public void inputEndDateOfTpNotAvailablePeriod(String date) {
-//		systemConfigurationPage().inputEndDateOfTpNotAvailablePeriod(date);
-//	}
-//	
-//	@Step
-//	public void selectDayOfWeekOption(String dayOption) {
-//		systemConfigurationPage().selectDayOfWeek(dayOption);
-//	}
-//	
-//	@Step
-//	public void inputDayToDelay(String days) {
-//		systemConfigurationPage().inputDaytoDelay(days);
-//		
-//	}
-//	
-//	@Step
-//	public void inputDaysBetweenShipments(String daysBetweenShipment) {
-//		systemConfigurationPage().inputDaysBetweenShipments(daysBetweenShipment);
-//	}
-//	
-//	@Step
-//	public void inputDayBeforeDeliverySchedule(String daysBeforeDeliverySchedule) {
-//		systemConfigurationPage().inputDayBeforeDeliverySchedule(daysBeforeDeliverySchedule);
-//		systemConfigurationPage().saveConfiguration();
-//	}
-	
 
+	}
+
+	// @Step
+	// public void selectTermPurchseOption(String termPurchaseType) {
+	// systemConfigurationPage().selectTermPurchseOption(termPurchaseType);
+	// }
+	//
+	// @Step
+	// public void inputMaxNumberOfDAys(String days) {
+	// systemConfigurationPage().inputMaxNumberOfDAys(days);
+	// }
+	//
+	// @Step
+	// public void inputStartDateOfTpNotAvailablePeriod(String date) {
+	// systemConfigurationPage().inputStartDateOfTpNotAvailablePeriod(date);
+	// }
+	//
+	//
+	// @Step
+	// public void inputEndDateOfTpNotAvailablePeriod(String date) {
+	// systemConfigurationPage().inputEndDateOfTpNotAvailablePeriod(date);
+	// }
+	//
+	// @Step
+	// public void selectDayOfWeekOption(String dayOption) {
+	// systemConfigurationPage().selectDayOfWeek(dayOption);
+	// }
+	//
+	// @Step
+	// public void inputDayToDelay(String days) {
+	// systemConfigurationPage().inputDaytoDelay(days);
+	//
+	// }
+	//
+	// @Step
+	// public void inputDaysBetweenShipments(String daysBetweenShipment) {
+	// systemConfigurationPage().inputDaysBetweenShipments(daysBetweenShipment);
+	// }
+	//
+	// @Step
+	// public void inputDayBeforeDeliverySchedule(String
+	// daysBeforeDeliverySchedule) {
+	// systemConfigurationPage().inputDayBeforeDeliverySchedule(daysBeforeDeliverySchedule);
+	// systemConfigurationPage().saveConfiguration();
+	// }
 
 }

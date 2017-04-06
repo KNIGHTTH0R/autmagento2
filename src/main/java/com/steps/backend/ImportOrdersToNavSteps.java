@@ -113,7 +113,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 	public void validateShippingStreet(String shippingStreet, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
-				"Failure: shippingStreet doesn't match: " + shippingStreet + " - " + compare,
+				"Failure: Shipping Street doesn't match: " + shippingStreet + " - " + compare,
 				shippingStreet.replaceAll("\\s+", "").contentEquals(compare.replaceAll("\\s+", "")));
 
 	}
@@ -179,7 +179,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 		String name = firstname.replaceAll("\\s+", "") + " " + lastName.replaceAll("\\s+", "");
 
 		CustomVerification.verifyTrueForOrderImport(
-				"Failure: Customer Name doesn't match: " + "shop:" + name + " - nav: " + compare,
+				"Failure: Customer Name doesn't match: " + "shop:" + firstname +" "+lastName+ " - nav: " + compare,
 				name.replaceAll("\\s+", "").contains(compare.replaceAll("\\s+", "")));
 
 	}

@@ -152,7 +152,7 @@ public class MongoWriter extends MongoConnector {
 		BasicDBObject document = new BasicDBObject();
 		document.put(MongoTableKeys.SKU, syncInfoModel.getSku());
 		document.put(MongoTableKeys.STOC_QUANTITY, syncInfoModel.getQuantity());
-		document.put(MongoTableKeys.MINUMIM_QUANTITY, syncInfoModel.getMinumimQuantity());
+		document.put(MongoTableKeys.MINIMUM_QTY, syncInfoModel.getMinumimQuantity());
 		document.put(MongoTableKeys.IS_DISCONTINUED, syncInfoModel.getIsDiscontinued());
 		document.put(MongoTableKeys.TOTAL_QUANTITY, syncInfoModel.getTotalQuantity());
 		document.put(MongoTableKeys.MAX_PERCENT_TO_BORROW, syncInfoModel.getMaxPercentToBorrow());

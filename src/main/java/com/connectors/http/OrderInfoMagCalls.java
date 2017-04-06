@@ -28,6 +28,30 @@ import com.tools.utils.FormatterUtils;
 
 public class OrderInfoMagCalls {
 
+	
+	public static DBOrderModel getOrderInfo(String orderIncrementId) {
+
+		DBOrderModel order = new DBOrderModel();
+
+		try {
+			SOAPMessage response = soapGetOrderInfo(orderIncrementId);
+			System.out.println(response);
+			try {
+				order = extractOrderInfoData(response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return order;
+	}
+	
+	
 	public static DBOrderModel getOrdersInfo(String orderIncrementId, String sessionId) {
 
 		DBOrderModel order = new DBOrderModel();
@@ -48,6 +72,28 @@ public class OrderInfoMagCalls {
 		}
 
 		return order;
+	}
+	
+	public static SOAPMessage soapGetOrderInfo(String orderIncrementId)
+			throws SOAPException, IOException {
+		String sessionId = HttpSoapConnector.performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+
+		SOAPMessage soapResponse = soapConnection.call(getOrdersInfoRequest(sessionId, orderIncrementId),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
+		// SOAPMessage soapResponse =
+		// soapConnection.call(getOrdersInfoRequest(sessionId,
+		// orderIncrementId),
+		// "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+
+		// SOAPMessage soapResponse =
+		// soapConnection.call(getOrdersInfoRequest(sessionId,
+		// orderIncrementId),
+		// "https://pippajean-upgrade.evozon.com/" + UrlConstants.API_URI);
+
+		return soapResponse;
 	}
 
 	public static SOAPMessage soapGetOrdersInfo(String orderIncrementId, String sessionId)
@@ -137,6 +183,10 @@ public class OrderInfoMagCalls {
 
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("order_currency_code")) {
 					model.setOrderCurrencyCode(resultNodes.item(r).getTextContent());
+				}
+				
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("order_id")) {
+					model.setOrderId(resultNodes.item(r).getTextContent());
 				}
 
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("grand_total")) {
@@ -513,8 +563,10 @@ public class OrderInfoMagCalls {
 	public static void main(String[] args) throws SOAPException, IOException {
 
 		String sessID = HttpSoapConnector.performLogin();
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrdersInfo("10021876100", sessID);
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10021876100");
 
+		System.out.println("order ID : " + dbmodel.getOrderId());
+		
 		System.out.println("style party  : " + dbmodel.getStylePartyId());
 		System.out.println("kobo article " + dbmodel.getKoboSingleArticle());
 
