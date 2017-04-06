@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
+import com.connectors.http.MagentoProductsInfoCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.DashboardSteps;
@@ -85,10 +86,12 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	private String username, password;
 	private CustomerFormModel customerData;
 	private AddressModel addressData;
-	private String qtyForBundle;
+	private String qtyForBundle1;
+	private String qtyForBundle2;
 	private CreditCardModel creditCardData = new CreditCardModel();
 	private OrderModel orderModel = new OrderModel();
 	private List<String> boughtProductsQuantities = new ArrayList<String>();
+	private List<String> boughtProductsQuantitiesOldTp = new ArrayList<String>();
 /*	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("1292", "1658", "2558", "1872", "2552"));
 ///  2585  , 2584 2583
@@ -99,13 +102,15 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("4469", "2358", "4271", "4304"));
-///  2585  , 2584 2583
+	//,"4599", "4575", "4346", "4345"));
+
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct3 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct4 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct5 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct6 = new ProductDetailedModel();
 	
-
 	@Before
 	public void setUp() throws Exception {
 
@@ -116,23 +121,56 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 
-		qtyForBundle = BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(2).getQuantity())).compareTo(
+		qtyForBundle1 = BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(2).getQuantity())).compareTo(
 				BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(3).getQuantity()))) > 0 ? changingStockMagentoProducts.get(3).getQuantity()
 				: changingStockMagentoProducts.get(3).getQuantity();
+				
+//		qtyForBundle2 = BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(2).getQuantity())).compareTo(
+//				BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(3).getQuantity()))) > 0 ? changingStockMagentoProducts.get(3).getQuantity()
+//				: changingStockMagentoProducts.get(3).getQuantity();
 
 		boughtProductsQuantities.add(StockCalculations.determineQuantity(changingStockMagentoProducts.get(0).getQuantity()));
 		boughtProductsQuantities.add(StockCalculations.determineQuantity(changingStockMagentoProducts.get(1).getQuantity()));
-		boughtProductsQuantities.add(StockCalculations.determineQuantity(qtyForBundle));
-		boughtProductsQuantities.add(StockCalculations.determineQuantity(qtyForBundle));
+		boughtProductsQuantities.add(StockCalculations.determineQuantity(qtyForBundle1));
+		boughtProductsQuantities.add(StockCalculations.determineQuantity(qtyForBundle1));
+		
+		
+		boughtProductsQuantitiesOldTp.add("1");
+		boughtProductsQuantitiesOldTp.add("1");
+		boughtProductsQuantitiesOldTp.add("1");
+		boughtProductsQuantitiesOldTp.add("1");
+		
+	//	boughtProductsQuantities
+		
 
-		System.out.println(qtyForBundle);
+		System.out.println(qtyForBundle1);
 
-		genProduct1.setName("spot-on-ring");
-		genProduct1.setSku("R185SV");
-		genProduct2.setName("sweet-melody-bracelet");
-		genProduct2.setSku("B096SV");
-		genProduct3.setName("coin-of-rome-bracelet-1");
-		genProduct3.setSku("K127SV");
+		
+		//this is parent configurable:R185SV
+		genProduct1= MagentoProductsInfoCalls.getProductInfo("4466");
+		//simple
+		genProduct2=MagentoProductsInfoCalls.getProductInfo("2358");
+		//bundle parent: K112GY-E195SV-B170BR
+		genProduct3=MagentoProductsInfoCalls.getProductInfo("4319");
+	//	genProduct3=MagentoProductsInfoCalls.getProductInfo("4304");
+		
+		
+		//this is parent configurable:R194RS
+		genProduct4= MagentoProductsInfoCalls.getProductInfo("4596");
+		//simple:N348SV
+		genProduct5=MagentoProductsInfoCalls.getProductInfo("4575");
+		//bundle parent: K138SV-A023SV-A022SV
+		genProduct6=MagentoProductsInfoCalls.getProductInfo("4417");
+		
+		
+		
+//		genProduct1.setName("spot-on-ring");
+//		genProduct1.setSku("R185SV");
+//		genProduct2.setName("sweet-melody-bracelet");
+//		genProduct2.setSku("B096SV");
+//		genProduct3.setName("coin-of-rome-bracelet-1");
+//		genProduct3.setSku("K127SV");
+//		
 
 		
 		username = "9a5a66f2_sonvex115@evozon.com";
@@ -185,6 +223,9 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, boughtProductsQuantities.get(1), "0");
 		addProductsForCustomerWorkflow.addProductToCart(genProduct3, boughtProductsQuantities.get(2), "0");
 
+		addProductsForCustomerWorkflow.addProductToCart(genProduct4, boughtProductsQuantitiesOldTp.get(0), "18");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct5, boughtProductsQuantitiesOldTp.get(1), "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct6, boughtProductsQuantitiesOldTp.get(2), "0");
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
@@ -213,6 +254,10 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		}
 		for (String product : boughtProductsQuantities) {
 			MongoWriter.saveStringValue(product, getClass().getSimpleName());
+		}
+		
+		for (String product : boughtProductsQuantitiesOldTp) {
+			MongoWriter.saveStringValue(product, getClass().getSimpleName()+"OLDTP");
 		}
 	}
 
