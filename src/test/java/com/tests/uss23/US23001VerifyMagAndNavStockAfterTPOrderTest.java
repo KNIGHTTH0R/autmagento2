@@ -35,31 +35,32 @@ public class US23001VerifyMagAndNavStockAfterTPOrderTest extends BaseTest {
 	public CustomVerification customVerifications;
 
 	List<SyncInfoModel> initialChangingMagentoProducts = new ArrayList<SyncInfoModel>();
-	List<SyncInfoModel> initialChangingMagentoProductsOldTp = new ArrayList<SyncInfoModel>();
+	List<SyncInfoModel> initialChangingMagentoProductsNewTp = new ArrayList<SyncInfoModel>();
 	private List<String> boughtProductsQuantities = new ArrayList<String>();
-	private List<String> boughtProductsQuantitiesOldTp = new ArrayList<String>();
+	private List<String> boughtProductsQuantitiesNewTp = new ArrayList<String>();
 
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
+	private List<SyncInfoModel> changingStockMagentoProductsNewTp = new ArrayList<SyncInfoModel>();
 
 	private static List<String> changingStockIdList = new ArrayList<String>(Arrays.asList("4469", "2358", "4271", "4304"));
-	private static List<String> changingStockIdListOldTp = new ArrayList<String>(Arrays.asList("4599", "4575", "4346", "4345"));
+	private static List<String> changingStockIdListNewTp = new ArrayList<String>(Arrays.asList("4599", "4575", "4346", "4345"));
 	@Before
 	public void setUp() throws Exception {
 
 		initialChangingMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
-		initialChangingMagentoProductsOldTp=MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK_OLD_TP);
+		initialChangingMagentoProductsNewTp=MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK_NEW_TP);
 		
-		boughtProductsQuantities = MongoReader.grabStringValue("US23001PlaceTermPurchaseOrderTest");
-		boughtProductsQuantitiesOldTp=MongoReader.grabStringValue("US23001PlaceTermPurchaseOrderTest" +"OLDTP");
+		boughtProductsQuantities = MongoReader.grabStringValue("US23001PlaceTermPurchaseOrderTest"+SoapKeys.BOUGHT_PRODUCTS_QUANTITIES);
+		boughtProductsQuantitiesNewTp=MongoReader.grabStringValue("US23001PlaceTermPurchaseOrderTest" +SoapKeys.BOUGHT_PRODUCTS_QUANTITIES_NEW_TP);
 		
 		initialChangingMagentoProducts = StockCalculations.calculateNewStock(initialChangingMagentoProducts, boughtProductsQuantities);
-		initialChangingMagentoProductsOldTp=StockCalculations.calculateNewStock(initialChangingMagentoProductsOldTp, boughtProductsQuantitiesOldTp);
+		initialChangingMagentoProductsNewTp=StockCalculations.calculateNewStock(initialChangingMagentoProductsNewTp, boughtProductsQuantitiesNewTp);
 
 		for (String id : changingStockIdList) {
 			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
 		}
-		for (String id : changingStockIdListOldTp) {
-			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
+		for (String id : changingStockIdListNewTp) {
+			changingStockMagentoProductsNewTp.add(MagentoProductCalls.getMagProductInfo(id));
 		}
 		
 
@@ -71,8 +72,8 @@ public class US23001VerifyMagAndNavStockAfterTPOrderTest extends BaseTest {
 		stockSyncValidations.setValidateProductsModels(initialChangingMagentoProducts, changingStockMagentoProducts);
 		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS DECREASED -  CHANGING STOCK MAGENTO PRODUCTS");
 		
-//		stockSyncValidations.setValidateProductsModels(initialChangingMagentoProductsOldTp, changingStockMagentoProducts);
-//		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS DECREASED -  CHANGING STOCK MAGENTO PRODUCTS");
+		stockSyncValidations.setValidateProductsModels(initialChangingMagentoProductsNewTp, changingStockMagentoProductsNewTp);
+		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS DECREASED -  CHANGING STOCK MAGENTO PRODUCTS");
 		
 
 		customVerifications.printErrors();

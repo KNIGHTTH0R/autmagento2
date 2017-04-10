@@ -86,18 +86,30 @@ public class FormatterUtils {
 	 */
 
 	public static String getOrderId(String url) {
-		
+
 		return extractOrderIDFromURL(url);
 	}
 
 	public static String incrementOrderId(String orderId, int incrementNumber) {
-		
+
 		String charPart = FormatterUtils.getNotDigitsFromString(orderId);
 		String digitPart = FormatterUtils.getIntegerNumberFromString(orderId);
 
 		int number = Integer.parseInt(digitPart) + incrementNumber;
 
 		return charPart + StringUtils.leftPad(String.valueOf(number), 10, "0");
+	}
+
+	public static void main(String[] args) {
+		System.out.println(FormatterUtils.incrementSingleTpOrderId("10026526800", 1));
+	}
+
+	public static String incrementSingleTpOrderId(String orderId, int incrementNumber) {
+
+		String digitPart = FormatterUtils.getIntegerNumberFromString(orderId);
+		String orderWithIncrement = digitPart.substring(0, digitPart.length() - 1) + incrementNumber;
+		
+		return orderWithIncrement;
 	}
 
 	public static String cleanNumberToString(String unitPrice) {
@@ -125,7 +137,7 @@ public class FormatterUtils {
 		}
 		return String.valueOf(t);
 	}
-	
+
 	public static String getNotDigitsFromString(String s) {
 		StringBuilder t = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
@@ -169,8 +181,6 @@ public class FormatterUtils {
 	public static BigDecimal parseValueToBigDecimal(String value) {
 		return BigDecimal.valueOf(Double.parseDouble(parseValue(value, 0)));
 	}
-	
-	
 
 	public static String cleanString(String unitPrice) {
 		String result = unitPrice;
@@ -224,14 +234,15 @@ public class FormatterUtils {
 	public static String[] splitDate(String dateOfBirth) {
 		String elems[] = dateOfBirth.split(Separators.DATE_SEPARATOR);
 		if (elems.length != 3) {
-			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'", elems.length != 3);
+			Assert.assertTrue("Error: birth date provided is not a valid format. Valid format - 'Feb,1970,12'",
+					elems.length != 3);
 		}
 		return elems;
 	}
 
-//	public static void main(String[] args) {
-//		System.out.println(FormatterUtils.getIntegerNumberFromString("qa-int0000183500"));
-//		System.out.println(FormatterUtils.getNotDigitsFromString("qa-int0000183500"));
-//		System.out.println(FormatterUtils.incrementOrderId("qa-int0000183500",2));
-//	}
+	// public static void main(String[] args) {
+	// System.out.println(FormatterUtils.getIntegerNumberFromString("qa-int0000183500"));
+	// System.out.println(FormatterUtils.getNotDigitsFromString("qa-int0000183500"));
+	// System.out.println(FormatterUtils.incrementOrderId("qa-int0000183500",2));
+	// }
 }

@@ -26,6 +26,7 @@ public class StockSyncValidations {
 	@StepGroup
 	public void validateProducts(String message) {
 
+		System.out.println(message);
 		for (SyncInfoModel productNow : list1) {
 			SyncInfoModel compare = findProduct(productNow.getSku(), list2);
 

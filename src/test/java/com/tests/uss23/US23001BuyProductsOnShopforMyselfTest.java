@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductsInfoCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -83,58 +84,46 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1.setName("liquid-moon-small");
-		genProduct1.setSku("R065SV");
-		genProduct2.setName("mary-necklace");
-		genProduct2.setSku("N093SV");
-//		genProduct3.setName("PIPPA&JEAN DREAMEES KOLLEKTIONS-UPDATE: BROSCHÜRE (50 STÜCK)");
-//		genProduct3.setSku("M164");
 		
-		genProduct3.setName("einladung-postkarte-50-stk");
-		genProduct3.setSku("M014");
+		// this is parent configurable:R065SV
+		genProduct1 = MagentoProductsInfoCalls.getProductInfo("1289");
+	
+		// simple :N093SV
+		genProduct2 = MagentoProductsInfoCalls.getProductInfo("1658");
 		
+		//constant stock product:M014 
+		genProduct3 = MagentoProductsInfoCalls.getProductInfo("957");
 		
-		genProduct4.setName("frozen-flower-necklace-pink");
-		genProduct4.setSku("N105MC");
+		//simple:N105MC
+		genProduct4 = MagentoProductsInfoCalls.getProductInfo("3120");
+
+		// bundle parent: K112GY
+		genProduct5 = MagentoProductsInfoCalls.getProductInfo("3906");
 		
-		//emilian
-//		genProduct4.setName("bianca-1");
-//		genProduct4.setSku("N052NL");
-		
-//		genProduct5.setName("FUNKY SOLITAIRE SET");
-//		genProduct5.setSku("K091MC");
-		
-		genProduct5.setName("allure-set");
-		genProduct5.setSku("K112GY");
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
-	
-	
-		username = "9a5a66f2_sonvex115@evozon.com";
-		password="emilian1";
-//		try {
-//
-//			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3001.properties");
-//			prop.load(input);
-//
-//			username = prop.getProperty("username");
-//			password = prop.getProperty("password");
-//			
-//			
-//
-//		} catch (IOException ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			if (input != null) {
-//				try {
-//					input.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
+		try {
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_23_FOLDER + File.separator + "us23001.properties");
+			prop.load(input);
+
+			username = prop.getProperty("username");
+			password = prop.getProperty("password");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
@@ -149,9 +138,7 @@ public class US23001BuyProductsOnShopforMyselfTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
-		
-		
-		
+
 		addProductsWorkflow.setProductToCart(genProduct1.getSku(), genProduct1.getName(), "1", "18");
 		addProductsWorkflow.setProductToCart(genProduct2.getSku(), genProduct2.getName(), "1", "0");
 		addProductsWorkflow.setProductToCart(genProduct3.getSku(), genProduct3.getName(), "1", "0");

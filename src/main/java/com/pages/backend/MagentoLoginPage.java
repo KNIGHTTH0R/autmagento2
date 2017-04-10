@@ -39,7 +39,7 @@ public class MagentoLoginPage extends AbstractPage {
 	}
 
 	public void clickOnLogin(){
-		
+		evaluateJavascript("jQuery.noConflict();");
 		element(loginButton).waitUntilVisible();
 		loginButton.click();
 

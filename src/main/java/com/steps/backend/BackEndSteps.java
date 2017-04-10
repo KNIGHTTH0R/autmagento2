@@ -28,7 +28,7 @@ public class BackEndSteps extends AbstractSteps {
 		magentoLoginPage().clickOnLogin();
 	
 		
-		waitABit(6000);
+		waitABit(2000);
 		boolean isPresent = isdismissPopUpPresent();
 		
 		System.out.println("da sau nu: " + isPresent);
