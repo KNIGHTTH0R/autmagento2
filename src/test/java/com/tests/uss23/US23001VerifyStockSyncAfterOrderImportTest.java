@@ -1,15 +1,10 @@
 package com.tests.uss23;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,19 +12,25 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.http.NavisionInventorySyncCalls;
-import com.connectors.navSqlServer.NavQueries;
+import com.connectors.http.OrderInfoMagCalls;
+import com.steps.backend.ImportOrdersToNavSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.SoapKeys;
 import com.tools.data.backend.OrderModel;
-import com.tools.data.navision.OrderStatusModel;
 import com.tools.data.navision.SyncInfoModel;
+import com.tools.data.soap.DBOrderModel;
 import com.tools.generalCalculation.StockCalculations;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.stockSynk.StockProductsValidations;
 import com.workflows.stockSynk.StockSyncValidations;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.StockSync.US23_1.class)
@@ -42,6 +43,11 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	public CustomVerification customVerifications;
 	@Steps
 	StockProductsValidations stockProductsValidations;
+	@Steps
+	ImportOrdersToNavSteps importedOrderValidation;
+	
+	
+	private DBOrderModel shopOrder = new DBOrderModel();
 
 	List<SyncInfoModel> initialChangingMagentoProducts = new ArrayList<SyncInfoModel>();
 	List<SyncInfoModel> initialChangingNavProducts = new ArrayList<SyncInfoModel>();
@@ -70,7 +76,7 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-//		orderModel = MongoReader.getOrderModel("US23001BuyProductsOnShopforMyselfTest").get(0);
+		orderModel = MongoReader.getOrderModel("US23001BuyProductsOnShopforMyselfTest").get(0);
 //		OrderStatusModel orderStatusModel = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase());
 //		String[] parts = orderStatusModel.getSyncDate().split(Pattern.quote("."));
 //		String syncDate = parts[0];
@@ -81,15 +87,12 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 		initialChangingNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
 		//3 products
 		
-
 		initialNotChangingMagentoProducts=MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_NOT_CHANGING_STOCK);
 		initialNotChangingNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_NOT_CHANGING_STOCK);
 		
 		initialConstantMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.MAGENTO_INITIAL_CONSTANT_STOCK);
 		initialConstantNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeOrderTest" + SoapKeys.NAVISION_INITIAL_CONSTANT_STOCK);
 
-		
-		
 		
 		initialChangingNavProducts = StockCalculations.calculateNewStock(initialChangingNavProducts, "1", false);
 		initialConstantNavProducts = StockCalculations.calculateNewStock(initialConstantNavProducts, "1", true);
@@ -122,12 +125,16 @@ public class US23001VerifyStockSyncAfterOrderImportTest extends BaseTest {
 //				&& orderStatusModel.getSyncStatus().contentEquals("Yes")) {
 //			isSyncronyzed = true;
 //		}
+		
+		shopOrder = OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
 	}
 
 	@Test
-	public void us23001VerifyStockSyncAfterOrderImportTest() throws SQLException {
+	public void us23001VerifyStockSyncAfterOrderImportTest() throws SQLException, ParseException {
 
 	//	stockProductsValidations.validateSyncronizedStatus(isSyncronyzed);
+		
+		importedOrderValidation.validateUpdatedNavDate(shopOrder.getUpdatedNav(),DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"),"yyyy-MM-dd");
 
 		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
 		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");

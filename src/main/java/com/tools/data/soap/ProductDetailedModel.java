@@ -46,6 +46,22 @@ public class ProductDetailedModel {
 	private String newsToDate;
 	private String jewerlyBonusValue;
 	private String jewelryBonusCart;
+	private String quantity;
+
+	
+	
+	
+	public String getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
+
+	public List<TierPriceModel> getTierPrice() {
+		return tierPrice;
+	}
 
 	public String getType() {
 		return type;
@@ -350,4 +366,26 @@ public class ProductDetailedModel {
 	public void setJewelryBonusCart(String jewelryBonusCart) {
 		this.jewelryBonusCart = jewelryBonusCart;
 	}
+
+	@Override
+	public String toString() {
+		return "ProductDetailedModel [type=" + type + ", set=" + set + ", sku=" + sku + ", categoriesArray="
+				+ categoriesArray + ", websiteArray=" + websiteArray + ", availableCartsArray=" + availableCartsArray
+				+ ", name=" + name + ", description=" + description + ", shortDescription=" + shortDescription
+				+ ", weight=" + weight + ", status=" + status + ", urlKey=" + urlKey + ", urlPath=" + urlPath
+				+ ", visibility=" + visibility + ", categoryIdsArray=" + categoryIdsArray + ", websiteIdsArray="
+				+ websiteIdsArray + ", hasOptions=" + hasOptions + ", giftMessageAvailable=" + giftMessageAvailable
+				+ ", price=" + price + ", specialPrice=" + specialPrice + ", specialFromDate=" + specialFromDate
+				+ ", specialToDate=" + specialToDate + ", taxClassId=" + taxClassId + ", tierPrice=" + tierPrice
+				+ ", metaTitle=" + metaTitle + ", metaKeyword=" + metaKeyword + ", metaDescription=" + metaDescription
+				+ ", customDesign=" + customDesign + ", customLayoutUpdate=" + customLayoutUpdate
+				+ ", optionsContainer=" + optionsContainer + ", stockData=" + stockData + ", additionalAttributes="
+				+ additionalAttributes + ", store=" + store + ", ip=" + ip + ", newsFromDate=" + newsFromDate
+				+ ", newsToDate=" + newsToDate + ", jewerlyBonusValue=" + jewerlyBonusValue + ", jewelryBonusCart="
+				+ jewelryBonusCart + ", quantity=" + quantity + "]";
+	}
+	
+	
+	
+	
 }

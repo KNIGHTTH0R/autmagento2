@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.tests.uss23.US23001ActivateTermPurchaseForAllProductsTest;
 import com.tests.uss23.US23001GetMagAndNavStockBerforeTpOrderTest;
 import com.tests.uss23.US23001PayAndImportTermPurchaseOrderTest;
 import com.tests.uss23.US23001PlaceTermPurchaseOrderTest;
@@ -12,6 +13,7 @@ import com.tests.uss23.US23001VerifyStockSyncAfterOrderImportTest;
 
 
 @SuiteClasses({
+	US23001ActivateTermPurchaseForAllProductsTest.class,
 	US23001VerifyStockSyncAfterOrderImportTest.class,
 	US23001GetMagAndNavStockBerforeTpOrderTest.class,
 	US23001PlaceTermPurchaseOrderTest.class,

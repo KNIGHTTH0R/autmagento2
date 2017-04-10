@@ -11,14 +11,24 @@ public class SoapKeys {
 	public static final String CANCELED = "Cancelled";
 	public static final String MAGENTO_INITIAL_CHANGING_STOCK = "MICS";
 	public static final String MAGENTO_INITIAL_NOT_CHANGING_STOCK = "MINCS";
+	public static final String MAGENTO_INITIAL_CHANGING_STOCK_NEW_TP="MICSNTP";
+	public static final String NAVISION_INITIAL_CHANGING_STOCK_NEW_TP = "NICSNTP";
 	public static final String NAVISION_INITIAL_CHANGING_STOCK = "NICS";
 	public static final String NAVISION_INITIAL_NOT_CHANGING_STOCK = "NINCS";
 	public static final String MAGENTO_INITIAL_CONSTANT_STOCK = "MIConsS";
 	public static final String NAVISION_INITIAL_CONSTANT_STOCK = "NIConsS";
+	
+	public static final String CHANGING_STOCK_MAGENTO_PRODUCTS="CSMP";
+	public static final String CHANGING_STOCK_MAGENTO_PRODUCTS_NEW_TP = "CSMPNTP";
+	public static final String BOUGHT_PRODUCTS_QUANTITIES = "BPQ";
+	public static final String BOUGHT_PRODUCTS_QUANTITIES_NEW_TP = "BPQNTP";
+	
+	
 	public static final String MAGENTO_AFTER_ORDER_PLACED_STOCK = "MagentoAfterOrderPlacedStock";
 	public static final String NAVISION_AFTER_ORDER_PLACED_STOCK = "NavisionAfterOrderPlacedStock";
 	public static final String MAGENTO_AFTER_ORDER_IMPORTED_STOCK = "MagentoAfterOrderImportedStock";
 	public static final String NAVISION_AFTER_ORDER_IMPORTED_STOCK = "NavisionAfterOrderImportedStock";
+	
 
 	// General keys
 	public static final String URN_PREFIX = "urn";
@@ -149,4 +159,6 @@ public class SoapKeys {
 	//delete category
 	public static final String CATEGORY_ID = "categoryId";
 	public static final String CATEGORY_DELETE_REQUEST = "catalogCategoryDeleteRequestParam";
+	
+	
 }

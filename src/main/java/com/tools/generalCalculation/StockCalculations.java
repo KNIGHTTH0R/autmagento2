@@ -81,7 +81,7 @@ public class StockCalculations {
 			product.setEarliestAvailability(product.getEarliestAvailability());
 			product.setIsDiscontinued(product.getIsDiscontinued());
 			product.setMaxPercentToBorrow(product.getMaxPercentToBorrow());
-			product.setMinumimQuantity(stock[0]);
+			product.setMinumimQuantity(stock[1]);
 			product.setPendingQuantity(product.getPendingQuantity());
 
 			finalList.add(product);
@@ -148,14 +148,16 @@ public class StockCalculations {
 	 */
 	public static String determineQuantity(String currentStock) {
 		BigDecimal stock = BigDecimal.valueOf(Double.parseDouble(currentStock));
-		stock = stock.add(BigDecimal.valueOf(60.00));
+//		stock = stock.add(BigDecimal.valueOf(60.00));
+		
+		stock = stock.add(BigDecimal.valueOf(2.00));
 
 		return String.valueOf(stock.intValue());
 	}
 	
 	public static void main(String args[]) {
 		//System.out.println(StockCalculations.determineQuantity("59"));
-		System.out.println(StockCalculations.calculateStockToDoubleAfterSync("4","5","-2"));
+		System.out.println(StockCalculations.calculateStockToDoubleAfterSync("4","6","-3"));
 	}
 
 }

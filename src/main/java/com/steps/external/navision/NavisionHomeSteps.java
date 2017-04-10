@@ -63,43 +63,64 @@ public class NavisionHomeSteps extends AbstractSteps {
 		navisionSyncDashboardPage().performOrderImport();
 		navisionSyncDashboardPage().selectActionsTab();
 	}
+	
+	
+	@Step
+	public void accessNavisonWebClientItemList() throws Exception{
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=11%3bGwAAAAJ7&mode=View&page=31&i=7A03&IsDlg=1");
+		navisionSyncDashboardPage().insertAuthentificationCredentials();
+	}
 
 	@Step
-	public void syncEarliestAvDateOnItem(String skuItem) throws Exception {
+	public void syncEarliestAvDateOnItem(String skuItem,String variantCode,String qty) throws Exception {
 			navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=11%3bGwAAAAJ7&mode=View&page=31&i=7A03&IsDlg=1");
-			navisionSyncDashboardPage().insertAuthentificationCredentials();
 			navisionSyncDashboardPage().searchForItem(skuItem);
 			navisionSyncDashboardPage().selectHomeTab();
 			navisionSyncDashboardPage().clickOnItemJournalMenuBtn();
-			navisionSyncDashboardPage().insertValuesForItem(skuItem,"","1100","QS","100");
+			//navisionSyncDashboardPage().insertValuesForItem(skuItem,variantCode,"1100","QS",qty);
+			navisionSyncDashboardPage().insertItemNo(skuItem);
+			navisionSyncDashboardPage().insertItemVariantCode(variantCode);
+			navisionSyncDashboardPage().insertKostenstelleCode("1100");
+			navisionSyncDashboardPage().insertLocationCode("QS");
+			navisionSyncDashboardPage().insertQty(qty);
+			
 			navisionSyncDashboardPage().selectHomeTab();
 			navisionSyncDashboardPage().clickOnPostMenuBtn();
 			navisionSyncDashboardPage().confirmPostJournalLines();
 			navisionSyncDashboardPage().confirmSuccesfullyPostedJournalLines();
+			navisionSyncDashboardPage().closeWindow();
+			waitABit(3000);
 		//	navisionSyncDashboardPage().clickOnPostMenuBtn();
+		//	navisionSyncDashboardPage().closeWindow();
 		}
 		
 	
 	@Step
-	public void syncQtyOnItem(String skuItem,String variantCode) throws Exception {
+	public void syncQtyOnItem(String skuItem,String variantCode,String qty) throws Exception {
 			navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=11%3bGwAAAAJ7&mode=View&page=31&i=7A03&IsDlg=1");
-			navisionSyncDashboardPage().insertAuthentificationCredentials();
 			navisionSyncDashboardPage().searchForItem(skuItem);
 			navisionSyncDashboardPage().selectHomeTab();
 			navisionSyncDashboardPage().clickOnItemJournalMenuBtn();
-			navisionSyncDashboardPage().insertValuesForItem(skuItem,variantCode,"1100","1000","500");
+			System.out.println("Variant code "+ variantCode);
+			//navisionSyncDashboardPage().insertValuesForItem(skuItem,variantCode,"1100","1000",qty);
+			navisionSyncDashboardPage().insertItemNo(skuItem);
+			navisionSyncDashboardPage().insertItemVariantCode(variantCode);
+			navisionSyncDashboardPage().insertKostenstelleCode("1100");
+			navisionSyncDashboardPage().insertLocationCode("1000");
+			navisionSyncDashboardPage().insertQty(qty);
+			
 			navisionSyncDashboardPage().selectHomeTab();
 			navisionSyncDashboardPage().clickOnPostMenuBtn();
 			navisionSyncDashboardPage().confirmPostJournalLines();
 			navisionSyncDashboardPage().confirmSuccesfullyPostedJournalLines();
-		//	navisionSyncDashboardPage().clickOnPostMenuBtn();
+			navisionSyncDashboardPage().closeWindow();
+			waitABit(3000);
 		}
 	
 	
 	@Step
 	public void checkTermPurchasecheckbox(String skuItem) throws Exception {
 		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=11%3bGwAAAAJ7&mode=View&page=31&i=7A03&IsDlg=1");
-		navisionSyncDashboardPage().insertAuthentificationCredentials();
 		navisionSyncDashboardPage().searchForItem(skuItem);
 		navisionSyncDashboardPage().clickOnEditPoints();
 		navisionSyncDashboardPage().clickOnEditLink();

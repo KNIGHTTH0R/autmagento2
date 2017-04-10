@@ -1,13 +1,7 @@
 package com.tests.uss23;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,12 +14,16 @@ import com.steps.external.navision.NavisionHomeSteps;
 import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
 import com.tools.constants.Credentials;
-import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.DBOrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.StockSync.US23_1.class)
@@ -64,8 +62,6 @@ public class US23001PayAndImportOrderInNavisionTest extends BaseTest {
 		ordersSteps.openOrder(orderModel.getOrderId());
 		ordersSteps.markOrderAsPaid();
 		
-	//	ImportSteps.importOrderInNav(UrlConstants.IMPORT_INTERFACE_URL, orderModel.getOrderId());
-
 		navisionSteps.performLoginIntoNavisonWebClient();
 		DBorderModel=OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
 		navisionSteps.performOrderImport(DBorderModel.getOrderId());

@@ -11,8 +11,11 @@ import com.tests.uss23.US23001VerifyStockSyncAfterTpOrderImportTest;
 
 @SuiteClasses({
 	US23001VerifyStockSyncAfterTpOrderImportTest.class,
-	US23001BuyRestockProductTest.class,
-	US23001PayAndImportRestockOrderTest.class,
+	
+	
+	//old implementation 
+//	US23001BuyRestockProductTest.class,
+//	US23001PayAndImportRestockOrderTest.class,
 
 	
 })

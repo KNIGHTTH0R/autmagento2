@@ -34,9 +34,6 @@ public class US23001ActivateTermPurchaseForAllProductsTest extends BaseTest {
 	    backEndSteps.clickOnSystemConfiguration();
 	    termPurchaseSystemConfigurationSteps.goToTermPurchaseTab();
 		termPurchaseSystemConfigurationSteps.selectTermPurchseOption(ConfigConstants.FOR_ALL_PRODUCTS);
-//		termPurchaseSystemConfigurationSteps.inputMaxNumberOfDAys("45");
-//		termPurchaseSystemConfigurationSteps.inputStartDateOfTpNotAvailablePeriod(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd.MM.yyyy"), "dd.MM.yyyy", 14));
-//		termPurchaseSystemConfigurationSteps.inputEndDateOfTpNotAvailablePeriod(DateUtils.addDaysToAAGivenDate(DateUtils.getCurrentDate("dd.MM.yyyy"), "dd.MM.yyyy", 28));
 		termPurchaseSystemConfigurationSteps.selectDayOfWeekOption(ConfigConstants.FRIDAY);
 		termPurchaseSystemConfigurationSteps.inputDayBeforeDeliverySchedule("");
 		termPurchaseSystemConfigurationSteps.saveConfiguration();
