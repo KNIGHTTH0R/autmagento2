@@ -11,12 +11,12 @@ import com.tests.us3.us30012.US30012SfmSpecialPriceProductTest;
 
 @SuiteClasses({
 	
-	CreateProductsTest.class,
+	//CreateProductsTest.class,
 	
-	US10CreateAllPartiesSuite.class,
+	//US10CreateAllPartiesSuite.class,
 
 	US3001Suite.class,
-	US3004Suite.class,
+//	US3004Suite.class,
 //	US3006Suite.class,
 //	US3007Suite.class,
 //	US3009Suite.class,
