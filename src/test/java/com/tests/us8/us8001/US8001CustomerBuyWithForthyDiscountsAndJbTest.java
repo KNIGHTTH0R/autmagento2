@@ -37,6 +37,7 @@ import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
+import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
@@ -92,6 +93,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+	private CreditCardModel creditCardData = new CreditCardModel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -108,13 +110,16 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 //
 //		genProduct3 = MagentoProductCalls.createProductModel();
 //		genProduct3.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+///		MagentoProductCalls.createApiProduct(genProduct3);
 		
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
 		genProduct1 = createdProductsList.get(1);
+		System.out.println(genProduct1.getSku());
 		genProduct2 = createdProductsList.get(0);
+		System.out.println(genProduct2.getSku());
 		genProduct3 = createdProductsList.get(6);
+		System.out.println(genProduct3.getSku());
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -205,9 +210,11 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		// paymentSteps.expandCreditCardForm();
-		// paymentSteps.fillCreditCardForm(creditCardData);
-		paymentSteps.payWithBankTransfer();
+		 paymentSteps.expandCreditCardForm();
+		 paymentSteps.fillCreditCardForm(creditCardData);
+		
+		
+		//paymentSteps.payWithBankTransfer();
 
 		confirmationSteps.grabRegularProductsList();
 

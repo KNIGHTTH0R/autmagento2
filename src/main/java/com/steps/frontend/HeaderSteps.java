@@ -124,6 +124,7 @@ public class HeaderSteps extends AbstractSteps {
 	@StepGroup
 	public void navigateToRegisterForm() {
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		footerPage().clickRegistrierungLink();
 

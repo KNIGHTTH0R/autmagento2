@@ -50,6 +50,7 @@ public class US23001GetMagAndNavStockBerforeOrderTest extends BaseTest {
 	
 	private static List<String> idListToBeDecreased = new ArrayList<String>(Arrays.asList("1292", "1658", "3120"));
 	private static List<String> idListToNotBeDecreased=new ArrayList<String>(Arrays.asList("1872", "2552"));
+	
 	private static List<String> skuListToBeDecreased = new ArrayList<String>(Arrays.asList("R065SV-18", "N093SV", "N105MC"));
 	private static List<String> skuListToNotBeDecreased = new ArrayList<String>(Arrays.asList("N094SV", "B098BK"));
 

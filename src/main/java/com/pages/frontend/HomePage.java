@@ -23,6 +23,9 @@ public class HomePage extends AbstractPage {
 
 	@FindBy(css = "#cssmenu > ul > li:nth-child(2) > a")
 	private WebElement jewelriesMenu;
+	
+	@FindBy(css = "#cssmenu > ul > li:nth-child(1) > a")
+	private WebElement newTabMenu;
 
 	@FindBy(css = "#cssmenu > ul > li:nth-child(2) > ul li > a[href*='neu.html']")
 	private WebElement newMenu;
@@ -64,12 +67,27 @@ public class HomePage extends AbstractPage {
 //		JavascriptExecutor js = (JavascriptExecutor) getDriver();
 //		js.executeScript("document.onmouseout = function(){alert('out');};");
 
-		Actions builder = new Actions(getDriver());
-		builder.moveToElement(jewelriesMenu).moveToElement(newMenu).click().build().perform();
+//		Actions builder = new Actions(getDriver());
+//		builder.moveToElement(jewelriesMenu).moveToElement(newMenu).click().build().perform();
+		
+		
+		
 		// waitABit(1000);
 		// element(newMenu).waitUntilVisible();
 		// newMenu.click();
 		// waitABit(1000);
+		
+		Actions builder = new Actions(getDriver());
+		element(newTabMenu).waitUntilVisible();
+		builder.moveToElement(newTabMenu).build().perform();
+		
+//		System.out.println("sunt aici");
+//		element(newMenu).waitUntilVisible();
+//		System.out.println("sunt aici2");
+//		builder.moveToElement(newMenu).build().perform();
+//		
+//		System.out.println("sunt aici3");
+		
 	}
 
 	// public void goToNewItems() {

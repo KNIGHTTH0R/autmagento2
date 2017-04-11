@@ -14,7 +14,7 @@ import com.tests.us6.us6001.US6001ValidateStarterSetOrderInBackendTest;
 
 
 @SuiteClasses({
-	US6001ScRegistrationNewCustomerTest.class,
+//	US6001ScRegistrationNewCustomerTest.class,
 	US6001CheckStylistActivationTest.class,
 	US6001CheckStylistPreferedWebsiteAndLanguage.class,
 	US6001CancelStarterSetOrderTest.class,

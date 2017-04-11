@@ -17,11 +17,16 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 	@Step
 	public void activateRule(String ruleName){
 
-		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Credentials.BE_USER);
-		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
-		magentoLoginPage().clickOnLogin();
-		navigationPage().dismissPopUp();
+		//emilian due to new cloud env login in admin problems
+//		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+//		magentoLoginPage().inputUserName(Credentials.BE_USER);
+//		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
+//		magentoLoginPage().clickOnLogin();
+//		navigationPage().dismissPopUp();
+//		
+		
+		
+		
 //		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 		navigationPage().selectSubmenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleName(ruleName);
@@ -32,12 +37,17 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 	}
 	@Step
 	public void deactivateRule(String ruleName) {
-		System.out.println(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
-		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Credentials.BE_USER);
-		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
-		magentoLoginPage().clickOnLogin();
-		navigationPage().dismissPopUp();
+		
+		//emilian due to new cloud env login in admin problems
+//		System.out.println(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+//		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+//		magentoLoginPage().inputUserName(Credentials.BE_USER);
+//		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
+//		magentoLoginPage().clickOnLogin();
+//		navigationPage().dismissPopUp();
+		
+		
+		
 //		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 		navigationPage().selectSubmenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleName(ruleName);

@@ -3,6 +3,7 @@ package com.pages.backend.stylecoach;
 import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.tools.requirements.AbstractPage;
 
@@ -16,6 +17,9 @@ public class ContactListBackendPage extends AbstractPage {
 
 	@FindBy(css = "td.filter-actions > button.task")
 	private WebElement searchButton;
+	
+	@FindBy(css = "#contact_tabs li:nth-child(1)")
+	private WebElement contactInformationsTab;
 
 	public void inputEmailFilter(String emailText) {
 		evaluateJavascript("jQuery.noConflict();");
@@ -36,6 +40,16 @@ public class ContactListBackendPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(styleCoachRow).waitUntilVisible();
 		getDriver().get(styleCoachRow.getAttribute("title"));
+		waitABit(3000);
+	}
+	
+	public void clickOnContactInformationsTab(){
+		evaluateJavascript("jQuery.noConflict();");
+		element(contactInformationsTab).waitUntilVisible();
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(contactInformationsTab).click().perform();
+		
+		System.out.println("sunt aici");
 	}
 
 }
