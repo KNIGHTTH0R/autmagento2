@@ -98,8 +98,6 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		creditCardData = new CreditCardModel();
 		addressModel = new AddressModel();
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct3 = createdProductsList.get(3);
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("49.90");
@@ -112,6 +110,8 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 
 		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1=createdProductsList.get(19);
+		genProduct2=createdProductsList.get(20);
 		genProduct3 = createdProductsList.get(2);
 		
 //		genProduct3 = MagentoProductCalls.createMarketingProductModel();

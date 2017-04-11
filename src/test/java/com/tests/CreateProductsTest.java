@@ -53,6 +53,16 @@ public class CreateProductsTest extends BaseTest {
 	private ProductDetailedModel genProduct17 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct18 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct19 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct20 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct21 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct22 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct23 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct24 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct25 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct26 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct27 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct28 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct29 = new ProductDetailedModel();
     String voucherValue;
 	
 	@Steps
@@ -210,6 +220,58 @@ public class CreateProductsTest extends BaseTest {
 		genProduct19.setPrice("449.50");
 		MagentoProductCalls.createApiProduct(genProduct19);
 		productsList.add(genProduct19);
+		
+		genProduct20 = MagentoProductCalls.createProductModel();
+		genProduct20.setPrice("49.90");
+	//	genProduct1.setSpecialPrice("40.00");
+		MagentoProductCalls.createApiProduct(genProduct20);
+		productsList.add(genProduct20);
+
+		genProduct21 = MagentoProductCalls.createProductModel();
+		genProduct21.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct21);
+		productsList.add(genProduct21);
+		
+		genProduct22 = MagentoProductCalls.createProductModel();
+		genProduct22.setPrice("49.50");
+		MagentoProductCalls.createApiProduct(genProduct22);
+		productsList.add(genProduct22);
+
+		genProduct23 = MagentoProductCalls.createProductModel();
+		genProduct23.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct23);
+		productsList.add(genProduct23);
+		
+		genProduct24 = MagentoProductCalls.createProductModel();
+		genProduct24.setPrice("49.00");
+		MagentoProductCalls.createApiProduct(genProduct24);
+		productsList.add(genProduct24);
+
+		genProduct25 = MagentoProductCalls.createProductModel();
+		genProduct25.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct25);
+		productsList.add(genProduct25);
+		
+		genProduct26 = MagentoProductCalls.createProductModel();
+		genProduct26.setPrice("49.90");
+		MagentoProductCalls.createApiProduct(genProduct26);
+		productsList.add(genProduct26);
+		
+		genProduct27 = MagentoProductCalls.createProductModel();
+		genProduct27.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct27);
+		productsList.add(genProduct27);
+		
+		genProduct28 = MagentoProductCalls.createProductModel();
+		genProduct28.setPrice("49.90");
+		MagentoProductCalls.createApiProduct(genProduct28);
+		productsList.add(genProduct28);
+
+		genProduct29 = MagentoProductCalls.createProductModel();
+		genProduct29.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct29);
+		productsList.add(genProduct29);
+		
 		
 		
 		

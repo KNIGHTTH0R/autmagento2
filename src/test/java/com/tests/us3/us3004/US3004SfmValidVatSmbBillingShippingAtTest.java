@@ -95,26 +95,17 @@ public class US3004SfmValidVatSmbBillingShippingAtTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("49.50");
-		MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setPrice("89.00");
-		//genProduct2.setSpecialPrice("80.00");
-		
-		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("229.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+//		genProduct3 = MagentoProductCalls.createMarketingProductModel();
+//		genProduct3.setPrice("229.00");
+//		MagentoProductCalls.createApiProduct(genProduct3);
 
 		
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		
-//		genProduct1 = createdProductsList.get(0);
-//		genProduct2 = createdProductsList.get(1);
-//		genProduct3 = createdProductsList.get(2);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		
+		genProduct1 = createdProductsList.get(21);
+		genProduct2 = createdProductsList.get(22);
+		genProduct3 = createdProductsList.get(2);
 		
 		
 

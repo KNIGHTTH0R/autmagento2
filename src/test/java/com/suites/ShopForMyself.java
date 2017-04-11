@@ -4,8 +4,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.tests.CreateProductsTest;
+
 
 @SuiteClasses({
+	CreateProductsTest.class,
 	US3001Suite.class,
 	US3003Suite.class,
 	US3004Suite.class,
