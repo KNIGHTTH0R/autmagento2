@@ -4,7 +4,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.tests.CreateProductsTest;
+
 @SuiteClasses({
+	CreateProductsTest.class,
 	US8001Suite.class,
 	US8002Suite.class,
 	US8003Suite.class,
