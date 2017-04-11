@@ -107,8 +107,12 @@ public class StarterSetPage extends AbstractPage {
 
 	public void selectStarterKit(String starterKitId) {
 		waitFor(ExpectedConditions.presenceOfElementLocated(By.cssSelector(starterKitId)));
+		System.out.println("zero");
 		elementjQueryClick(starterKitId);
+		System.out.println("unu");
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		
+		System.out.println("doi");
 	}
 
 	public StylistRegistrationCartTotalModel grabCartTotal(boolean isVoucherApplied) {

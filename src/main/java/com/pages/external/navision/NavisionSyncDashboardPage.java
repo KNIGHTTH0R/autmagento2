@@ -159,22 +159,10 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 		System.out.println("clickOnLinesDropdown sunt aici");
 		waitABit(2000);
-		// element(linesDropDown).waitUntilVisible();
-		// linesDropDown.click();
-
+		
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(linesDropDown).click().perform();
-		// actions.moveToElement(element).click().perform();
-
-		// WebDriver webDriver = getDriver();
-		// String jQuerySelector = "'"+linesDropDown+"'";
-		// if (webDriver instanceof JavascriptExecutor) {
-		// ((JavascriptExecutor)webDriver).executeScript("return $(" +
-		// jQuerySelector+ ").get(0);");
-		// } else {
-		// throw new IllegalStateException("This driver does not support
-		// JavaScript!");
-		// }
+		
 	}
 
 	public void clickOnFilter() {
