@@ -31,10 +31,10 @@ public class EnvironmentConstants {
 	
 
 	//comission and magento  soap API
-//	public static final String COMMISSION_URL = MongoReader.geteEnvironmentConstantsItem("COMMISSION_URL");
-//	public static final String SOAP_URL=MongoReader.geteEnvironmentConstantsItem("SOAP_URL");
-//	public static final String SOAP_USERNAME=MongoReader.geteEnvironmentConstantsItem("SOAP_USERNAME");
-//	public static final String SOAP_PASSWORD=MongoReader.geteEnvironmentConstantsItem("SOAP_PASSWORD");
+	public static final String COMMISSION_URL = MongoReader.geteEnvironmentConstantsItem("COMMISSION_URL");
+	public static final String SOAP_URL=MongoReader.geteEnvironmentConstantsItem("SOAP_URL");
+	public static final String SOAP_USERNAME=MongoReader.geteEnvironmentConstantsItem("SOAP_USERNAME");
+	public static final String SOAP_PASSWORD=MongoReader.geteEnvironmentConstantsItem("SOAP_PASSWORD");
 	
 	//pippajean-uphgrade env  - uncomment following for testing without running the test from cmd line
 //	public static final String COMMISSION_URL = "http://commission.evozon.com/api/";
@@ -59,11 +59,11 @@ public class EnvironmentConstants {
 	
 	//CLOUD: staging-aut env  - uncomment following for testing without running the test from cmd line
 	
-	public static final String COMMISSION_URL = "commission-aut.pippajean.com";
-	public static final String SOAP_URL="https://staging-aut.pippajean.com/";
-		
-	public static final String SOAP_USERNAME="navision";
-	public static final String SOAP_PASSWORD=";Bn8NzlGhi[z";
+//	public static final String COMMISSION_URL = "commission-aut.pippajean.com";
+//	public static final String SOAP_URL="https://staging-aut.pippajean.com/";
+//		
+//	public static final String SOAP_USERNAME="navision";
+//	public static final String SOAP_PASSWORD=";Bn8NzlGhi[z";
 //	
 	
 	
