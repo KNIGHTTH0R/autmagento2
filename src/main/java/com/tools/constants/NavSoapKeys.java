@@ -16,7 +16,7 @@ public class NavSoapKeys {
 	public static final String FILTER = "filter";
 	public static final String FIELD = "Field";
 	public static final String CRITERIA = "Criteria";
-	public static final String NO = "No";
+	public static final String NO = "No"; 
 	
 	// pippajean-upgrade or staging-aut
 //	public static final String SALES_ORDER_API_URI = MongoReader.geteEnvironmentConstantsItem("SALES_ORDER_API_URI");
