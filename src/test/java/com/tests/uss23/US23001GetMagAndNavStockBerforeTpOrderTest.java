@@ -61,12 +61,20 @@ public class US23001GetMagAndNavStockBerforeTpOrderTest extends BaseTest {
 		skuListToBeUpdatedOnStock.addAll(skuListToBeDecreasedNewTP);
 
 		navisionSteps.accessNavisonWebClientItemList();
-
-		for (String sku : skuListToBeUpdatedOnStock) {
-			String[] skuParts = sku.split("-");
+		
+		navisionSteps.syncQtyOnItem("R185SV", "18", "0");
+		
+		for(int i=1;i<skuListToBeUpdatedOnStock.size()-1;i++){
+			String[] skuParts = skuListToBeUpdatedOnStock.get(i).split("-");
 			System.out.println(skuParts.length == 1 ? "" : skuParts[1]);
 			navisionSteps.syncQtyOnItem(skuParts[0], skuParts.length == 1 ? "" : skuParts[1], "5");
 		}
+		
+//		for (String sku : skuListToBeUpdatedOnStock) {
+//			String[] skuParts = sku.split("-");
+//			System.out.println(skuParts.length == 1 ? "" : skuParts[1]);
+//			navisionSteps.syncQtyOnItem(skuParts[0], skuParts.length == 1 ? "" : skuParts[1], "5");
+//		}
 
 		for (String sku : skuListToBeDecreased) {
 			String[] skuParts = sku.split("-");

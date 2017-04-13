@@ -14,7 +14,7 @@ public class StylistCampaignPage extends AbstractPage {
 	@FindBy(css = "div.full-width.chef a")
 	private WebElement starteJetztButton;
 	
-	@FindBy(css = "a[href*='/stylist/register/'].btn.btn-pink")
+	@FindBy(css = ".badge-block a[href*='/stylist/register/']")
 	private WebElement startersetOrderButton;
 
 	public void clickJetztStartenButton() {

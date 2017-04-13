@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import javax.swing.plaf.synth.SynthSpinnerUI;
 import javax.xml.soap.SOAPBody;
 import javax.xml.soap.SOAPConnection;
 import javax.xml.soap.SOAPConnectionFactory;
@@ -28,7 +29,6 @@ import com.tools.utils.FormatterUtils;
 
 public class OrderInfoMagCalls {
 
-	
 	public static DBOrderModel getOrderInfo(String orderIncrementId) {
 
 		DBOrderModel order = new DBOrderModel();
@@ -50,8 +50,7 @@ public class OrderInfoMagCalls {
 
 		return order;
 	}
-	
-	
+
 	public static DBOrderModel getOrdersInfo(String orderIncrementId, String sessionId) {
 
 		DBOrderModel order = new DBOrderModel();
@@ -73,9 +72,8 @@ public class OrderInfoMagCalls {
 
 		return order;
 	}
-	
-	public static SOAPMessage soapGetOrderInfo(String orderIncrementId)
-			throws SOAPException, IOException {
+
+	public static SOAPMessage soapGetOrderInfo(String orderIncrementId) throws SOAPException, IOException {
 		String sessionId = HttpSoapConnector.performLogin();
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
 		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
@@ -168,6 +166,10 @@ public class OrderInfoMagCalls {
 		BigDecimal fiftyDiscountsUsed = BigDecimal.valueOf(Double.parseDouble(model.getFiftyDiscountsUsed()));
 		BigDecimal fiftyDiscountsAmount = BigDecimal.valueOf(Double.parseDouble(model.getFiftyDiscountsAmount()));
 
+		BigDecimal fiftyDiscountsAmountExclTax = BigDecimal.valueOf(Double.parseDouble("0"));
+		BigDecimal marketingCreditsUsedExclTax = BigDecimal.valueOf(Double.parseDouble("0"));
+		BigDecimal jewelryCreditsUsedExclTax = BigDecimal.valueOf(Double.parseDouble("0"));
+
 		boolean isBundle = false;
 		boolean isConfigurableParent = false;
 
@@ -184,7 +186,7 @@ public class OrderInfoMagCalls {
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("order_currency_code")) {
 					model.setOrderCurrencyCode(resultNodes.item(r).getTextContent());
 				}
-				
+
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("order_id")) {
 					model.setOrderId(resultNodes.item(r).getTextContent());
 				}
@@ -259,6 +261,32 @@ public class OrderInfoMagCalls {
 
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("order_customer_name")) {
 					model.setOrderCustomerName(resultNodes.item(r).getTextContent());
+				}
+
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("jewelry_credits_used_excl_tax")) {
+					// model.setJewelryCreditsUsed(resultNodes.item(r).getTextContent());
+					jewelryCreditsUsedExclTax = jewelryCreditsUsedExclTax
+							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent())));
+
+					System.out.println("jewelryCreditsUsedExclTax =>> " + jewelryCreditsUsedExclTax);
+				}
+
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("marketing_credits_used_excl_tax")) {
+					// model.setMarketingCreditsUsed(resultNodes.item(r).getTextContent());
+
+					marketingCreditsUsedExclTax = marketingCreditsUsedExclTax
+							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent())));
+				}
+
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("fifty_discounts_amount_excl_tax")) {
+					// model.setFiftyDiscountsAmount(resultNodes.item(r).getTextContent());
+					fiftyDiscountsAmountExclTax = fiftyDiscountsAmountExclTax
+							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent())));
+				}
+
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("is_zero_vat")) {
+					model.setZeroVat(resultNodes.item(r).getTextContent());
+
 				}
 
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("billing_address")) {
@@ -384,8 +412,9 @@ public class OrderInfoMagCalls {
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("base_price_incl_tax")) {
 							// model.setOriginalPrice(childNodes.item(j).getTextContent());
 
-//							System.out.println("formateddd "
-//									+ FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent()));
+							// System.out.println("formateddd "
+							// +
+							// FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent()));
 							originalPrice = BigDecimal.valueOf(0);
 							originalPrice = BigDecimal.valueOf(Double.parseDouble(
 									FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent())));
@@ -409,7 +438,7 @@ public class OrderInfoMagCalls {
 					// bundle items
 					if (isConfigurableParent == false && isBundle == false) {
 
-						subtotal = subtotal.add(originalPrice.multiply(qtyOrdered));
+						subtotal = subtotal.add(originalPrice.multiply(qtyOrdered).setScale(4, RoundingMode.HALF_UP));
 
 					}
 
@@ -417,6 +446,23 @@ public class OrderInfoMagCalls {
 			}
 
 		}
+
+		if (model.getZeroVat().contentEquals("1")) {
+
+			System.out.println("jewelryCreditsUsedExclTax ---- " + jewelryCreditsUsedExclTax);
+			jewelryCreditsUsed = jewelryCreditsUsedExclTax;
+			System.out.println("jewelryCreditsUsed ->>>>> " + jewelryCreditsUsed);
+			marketingCreditsUsed = marketingCreditsUsedExclTax;
+			fiftyDiscountsAmount = fiftyDiscountsAmountExclTax;
+
+		}
+
+		System.out.println("subtotal " + subtotal);
+		System.out.println("shippingAmount " + shippingAmount);
+		System.out.println("baseDiscountAmount " + baseDiscountAmount);
+		System.out.println("jewelryCreditsUsed " + jewelryCreditsUsed);
+		System.out.println("marketingCreditsUsed " + marketingCreditsUsed);
+		System.out.println("marketingCreditsUsed " + marketingCreditsUsed);
 
 		BigDecimal calculateGrandTotal = subtotal.add(shippingAmount).subtract(baseDiscountAmount)
 				.subtract(jewelryCreditsUsed).subtract(marketingCreditsUsed).subtract(fiftyDiscountsAmount);
@@ -519,6 +565,7 @@ public class OrderInfoMagCalls {
 		model.setSmallBusinessMan("null");
 		model.setLanguageCode("null");
 		model.setContactid("null");
+		model.setZeroVat("null");
 		return model;
 	}
 
@@ -563,10 +610,10 @@ public class OrderInfoMagCalls {
 	public static void main(String[] args) throws SOAPException, IOException {
 
 		String sessID = HttpSoapConnector.performLogin();
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10021876100");
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10022556300");
 
 		System.out.println("order ID : " + dbmodel.getOrderId());
-		
+
 		System.out.println("style party  : " + dbmodel.getStylePartyId());
 		System.out.println("kobo article " + dbmodel.getKoboSingleArticle());
 

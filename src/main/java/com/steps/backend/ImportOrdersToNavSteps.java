@@ -22,7 +22,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 	public static final long serialVersionUID = 3609006291221433240L;
 	public static String orderid = "1212323";
 
-	@Step
+	// @Step
 	public void validateTotalIp(String totalIp, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport("Failure: Total IP doesn't match: " + totalIp + " - " + compare,
@@ -30,7 +30,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validatePartyId(String partyId, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport("Failure: Party Id  doesn't match: " + partyId + " - " + compare,
@@ -38,7 +38,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateIsPom(String isPom, String compare) {
 
 		String shopisPom = isPom.contentEquals("1") ? "true" : "false";
@@ -48,7 +48,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateIsPreshipped(String isPreshipped, String compare) {
 
 		String shopIsPreshipped = isPreshipped.contentEquals("1") ? "true" : "false";
@@ -73,16 +73,26 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 	// updatedNav + " - " + compare,
 	// updatedNav.contentEquals(compare));
 	// }
-	@Step
+	// @Step
 	public void validateTaxAmount(String taxAmount, String navTaxAmount) {
+		double magTax = Double.parseDouble(taxAmount);
+		double finalMagTax = Math.round(magTax * 100.0) / 100.0;
 
-		CustomVerification.verifyTrueForOrderImport(
-				"Failure: Tax Amount doesn't match: " + "Shop -> " + taxAmount + " - Nav -> " + navTaxAmount,
-				taxAmount.contains(navTaxAmount.toString()));
+		double navTax = Double.parseDouble(navTaxAmount);
+		double finalNavTax= Math.round(navTax * 100.0) / 100.0;
+
+		double diff = Math.abs(finalMagTax - finalNavTax);
+		System.out.println("diff " + diff);
+		if (diff > 0.01) {
+			CustomVerification.verifyTrueForOrderImport(
+					"Failure: Tax Amount doesn't match: " + "Shop -> " + taxAmount + " - Nav -> " + navTaxAmount,
+					taxAmount.contains(navTaxAmount.toString()));
+		}
+		
 
 	}
 
-	@Step
+	// @Step
 	public void validateShippingPostCode(String shippingPostCode, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
@@ -91,34 +101,34 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateShippingCountryRegionCode(String shippingCountryRegionCode, String compare) {
 
-		CustomVerification.verifyTrueForOrderImport(
-				"Failure: shippingCountryRegionCode doesn't match: " + shippingCountryRegionCode + " - " + compare,
-				shippingCountryRegionCode.contentEquals(compare));
+		CustomVerification.verifyTrueForOrderImport("Failure: shippingCountryRegionCode doesn't match: shop->"
+				+ shippingCountryRegionCode + " - nav->" + compare, shippingCountryRegionCode.contentEquals(compare));
 
 	}
 
-	@Step
+	// @Step
 	public void validateShippingCity(String shippingCity, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
-				"Failure: Shipping City doesn't match: " + shippingCity + " - " + compare,
+				"Failure: Shipping City doesn't match: shop-> " + shippingCity + " - nav-> " + compare,
 				shippingCity.contentEquals(compare));
 
 	}
 
-	@Step
+	// @Step
 	public void validateShippingStreet(String shippingStreet, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
-				"Failure: Shipping Street doesn't match: " + shippingStreet + " - " + compare,
+				"Failure: Shipping Street doesn't match: shop->" + shippingStreet.replaceAll("\\s+", "") + " - nav->"
+						+ compare.replaceAll("\\s+", ""),
 				shippingStreet.replaceAll("\\s+", "").contentEquals(compare.replaceAll("\\s+", "")));
 
 	}
 
-	@Step
+	// @Step
 	public void validateShippingToCustomerName(String firstname, String lastName, String compare) {
 
 		String name = firstname.replaceAll("\\s+", "") + " " + lastName.replaceAll("\\s+", "");
@@ -128,43 +138,43 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateBillingPostCode(String billingPostCode, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
-				"Failure: billingCountryRegionCode doesn't match: " + billingPostCode + " - " + compare,
+				"Failure: billingCountryRegionCode doesn't match: shop-> " + billingPostCode + " - nav->" + compare,
 				billingPostCode.contentEquals(compare));
 
 	}
 
-	@Step
+	// @Step
 	public void validateBillingCity(String billingCity, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
-				"Failure: billingCity doesn't match: " + billingCity + " - " + compare,
+				"Failure: billingCity doesn't match: shop-> " + billingCity + " - nav->" + compare,
 				billingCity.contentEquals(compare));
 
 	}
 
-	@Step
+	// @Step
 	public void validateBillingCountryRegionCode(String billingCountryRegionCode, String compare) {
 
-		CustomVerification.verifyTrueForOrderImport(
-				"Failure: billingCountryRegionCode doesn't match: " + billingCountryRegionCode + " - " + compare,
-				billingCountryRegionCode.contentEquals(compare));
+		CustomVerification.verifyTrueForOrderImport("Failure: billingCountryRegionCode doesn't match: shop-> "
+				+ billingCountryRegionCode + " - nav->" + compare, billingCountryRegionCode.contentEquals(compare));
 
 	}
 
-	@Step
+	// @Step
 	public void validateBillingStreet(String billingStreet, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
-				"Failure: BillingStreet doesn't match: " + billingStreet + " - " + compare,
+				"Failure: BillingStreet doesn't match: shop-> " + billingStreet.replaceAll("\\s+", "") + " - nav-> "
+						+ compare.replaceAll("\\s+", ""),
 				billingStreet.replaceAll("\\s+", "").contentEquals(compare.replaceAll("\\s+", "")));
 
 	}
 
-	@Step
+	// @Step
 	public void validateBillingToCustomerName(String firstname, String lastName, String compare) {
 
 		String name = firstname.replaceAll("\\s+", "") + " " + lastName.replaceAll("\\s+", "");
@@ -174,17 +184,17 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateCustomerName(String firstname, String lastName, String compare) {
 		String name = firstname.replaceAll("\\s+", "") + " " + lastName.replaceAll("\\s+", "");
 
 		CustomVerification.verifyTrueForOrderImport(
-				"Failure: Customer Name doesn't match: " + "shop:" + firstname +" "+lastName+ " - nav: " + compare,
+				"Failure: Customer Name doesn't match: " + "shop:" + firstname + " " + lastName + " - nav: " + compare,
 				name.replaceAll("\\s+", "").contains(compare.replaceAll("\\s+", "")));
 
 	}
 
-	@Step
+	// @Step
 	public void validateStoreLanguage(String storeLanguage, String compare) {
 
 		String comapreStoreLanguage = compare.toLowerCase();
@@ -194,7 +204,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateWebsiteCode(String websiteCode, String compare) {
 
 		String comapreWebsiteCode = compare.toLowerCase();
@@ -204,7 +214,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validatePaymentMethod(String paymentMethod, String compare) {
 
 		// replaceAll("\\s+","") -> replace white spaces
@@ -216,36 +226,31 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateSaleCustomerNo(String saleCustomerNo, String compare) {
 
-		
+		CustomVerification.verifyTrueForOrderImport(
+				"Failure: SaleCustomerNo doesn't match: in shop->" + saleCustomerNo + " - in nav->" + compare,
+				saleCustomerNo.contentEquals(compare));
+
+	}
+
+	// @Step
+	public void contactValidateSaleCustomerNo(String saleCustomerNo, String compare) {
+
+		if (saleCustomerNo.contentEquals("null") && !compare.contains("null")) {
+			CustomVerification.verifyTrueForOrderImport(
+					"Failure: SaleCustomerNo doesn't match: in shop->" + saleCustomerNo + " - in nav->" + compare,
+					saleCustomerNo.contentEquals("null") && !compare.contains("null"));
+		} else {
 			CustomVerification.verifyTrueForOrderImport(
 					"Failure: SaleCustomerNo doesn't match: in shop->" + saleCustomerNo + " - in nav->" + compare,
 					saleCustomerNo.contentEquals(compare));
-		
-		
-
-	}
-	
-	@Step
-		public void contactValidateSaleCustomerNo(String saleCustomerNo, String compare) {
-
-			if(saleCustomerNo.contentEquals("null") && !compare.contains("null")){
-				CustomVerification.verifyTrueForOrderImport(
-						"Failure: SaleCustomerNo doesn't match: in shop->" + saleCustomerNo + " - in nav->" + compare,
-						saleCustomerNo.contentEquals("null") && !compare.contains("null"));
-			}
-			else{
-				CustomVerification.verifyTrueForOrderImport(
-						"Failure: SaleCustomerNo doesn't match: in shop->" + saleCustomerNo + " - in nav->" + compare,
-						saleCustomerNo.contentEquals(compare));
-			}
-			
-
 		}
 
-	@Step
+	}
+
+	// @Step
 	public void validateShippingAmount(String shippingAmount, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
@@ -254,7 +259,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateSalesPersonCode(String customerID, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
@@ -263,7 +268,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateCartType(String cartType, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport("Failure: Cart Type doesn't match: " + cartType + " - " + compare,
@@ -271,7 +276,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateOrderType(String orderType, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport("Failure: OrderType doesn't match: " + orderType + " - " + compare,
@@ -279,7 +284,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public void validateOrderId(String orderId, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport("Failure: OrderId doesn't match: " + orderId + " - " + compare,
@@ -299,7 +304,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 	// createdAt.contentEquals(compare));
 	// }
 
-	@Step
+	// @Step
 	public void validateExternalDocNo(String externalDocNo, String compare) {
 
 		CustomVerification.verifyTrueForOrderImport(
@@ -308,7 +313,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	public NavOrderModel findOrder(String incremenr_id, List<NavOrderModel> grabbedList) {
 		NavOrderModel result = new NavOrderModel();
 		theFor: for (NavOrderModel item : grabbedList) {
@@ -342,7 +347,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	 @Step
+	// @Step
 	public void validateGrandTotal(String magGrandTotal, String compare) {
 		BigDecimal finalMagGrandTotal = BigDecimal.valueOf(Double.parseDouble(magGrandTotal)).setScale(2,
 				RoundingMode.HALF_UP);
@@ -350,13 +355,13 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 				RoundingMode.HALF_UP);
 
 		BigDecimal difference = finalMagGrandTotal.subtract(finalNavGrandTotal).abs();
-		
+
 		BigDecimal value = BigDecimal.valueOf(0.00);
 
 		if (difference.compareTo(value) == 1) {
 			CustomVerification.verifyTrueForOrderImport(
-					"Failure: GT_diff_not_adjusted =[" + difference + "] Grand Total doesn't match: " + "shop->"
-							+ finalMagGrandTotal + " - nav->" + finalNavGrandTotal,
+					"Failure: GT_diff_not_adjusted =[" + difference + "] Grand Total doesn't match: " + "shop -> "
+							+ finalMagGrandTotal + " - nav -> " + finalNavGrandTotal,
 					finalMagGrandTotal.toString().contentEquals(finalNavGrandTotal.toString()));
 		} else {
 			CustomVerification.verifyTrueForOrderImport(
@@ -367,7 +372,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	@Step
+	// @Step
 	@Title("Validate Order Items List")
 	public void validateOrderItemsTest(List<SalesOrderInfoModel> shopLines, List<NavOrderLinesModel> navLines) {
 
@@ -394,7 +399,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 		CustomVerification.verifyTrueForOrderImport(no + " hasn't been found", found);
 	}
 
-	@Step
+	// @Step
 	public void validateKoboSingleArticle(String koboSingleArticleShop, String koboSingleArticleNav) {
 		// TODO Auto-generated method stub
 
@@ -406,53 +411,63 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	 @Step
+	// @Step
 	public void validateUpdatedNavDate(String updatedNav, String compare, String dateFormat) throws ParseException {
 		// TODO Auto-generated method stub
-		System.out.println(" updated  nav test "+updatedNav);
-		
+		System.out.println(" updated  nav test " + updatedNav);
+
 		DateFormat format = new SimpleDateFormat(dateFormat);
-		boolean updatedNavIsNull=updatedNav.contentEquals("null")?true:false;
-		System.out.println("updatedNavIsNull "+updatedNavIsNull);
-		
+		boolean updatedNavIsNull = updatedNav.contentEquals("null") ? true : false;
+		System.out.println("updatedNavIsNull " + updatedNavIsNull);
+
 		Date dateTocompare = format.parse(compare);
-		if(updatedNavIsNull){
+		if (updatedNavIsNull) {
 			CustomVerification.verifyTrueForOrderImport(
-					"Failure: Updated Nav in shop contains : " + updatedNav + " value " ,
-					false);
-		}else{
+					"Failure: Updated Nav in shop contains : " + updatedNav + " value ", false);
+		} else {
 			Date dateUpdatedNav = format.parse(updatedNav);
 			CustomVerification.verifyTrueForOrderImport(
-					"Failure: Updated Nav does not contains correct date : " + dateUpdatedNav ,
-					
-					//updatedNav is equal or is grater than dateToCompare 
-					dateUpdatedNav.compareTo(dateTocompare)>=0);
-			
+					"Failure: Updated Nav does not contains correct date : " + dateUpdatedNav,
+
+					// updatedNav is equal or is grater than dateToCompare
+					dateUpdatedNav.compareTo(dateTocompare) >= 0);
+
 		}
-		
-		
-		
+
 		/*
-		boolean isUpdatedByNav = !updatedNav.isEmpty();
-		CustomVerification.verifyTrueForOrderImport("Failure: The order is not Updated by Nav " + updatedNav,
-				isUpdatedByNav);
-				
-				*/
+		 * boolean isUpdatedByNav = !updatedNav.isEmpty();
+		 * CustomVerification.verifyTrueForOrderImport(
+		 * "Failure: The order is not Updated by Nav " + updatedNav,
+		 * isUpdatedByNav);
+		 * 
+		 */
 	}
 
-	@Step
+	// @Step
 	public void validateMagentoCalculatedGrandTotal(String grandTotal, String calculatedGrandTotal) {
 		// TODO Auto-generated method stub
 		double gt = Double.parseDouble(grandTotal);
 		double finalGrandToal = Math.round(gt * 100.0) / 100.0;
 
+		System.out.println("finalGrandToal "+finalGrandToal);
 		double calcGt = Double.parseDouble(calculatedGrandTotal);
 		double finalMagGrandToal = Math.round(calcGt * 100.0) / 100.0;
+		System.out.println("finalMagGrandToal "+finalMagGrandToal);
+		
+		
+		double diff = Math.abs(finalGrandToal - finalMagGrandToal);
+		double finalDiff = Math.round(diff * 100.0) / 100.0;
+		System.out.println("finalDiff "+finalDiff);
+		
+		
+		
+		if (finalDiff > 0.01) {
+			CustomVerification.verifyTrueForOrderImport(
+					"Failure: Different GrandTotal in SHOP: " + "grabbed->" + finalGrandToal + " - calculated "
+							+ finalMagGrandToal,
+					String.valueOf(finalMagGrandToal).contentEquals(String.valueOf(finalGrandToal)));
+		}
 
-		CustomVerification.verifyTrueForOrderImport(
-				"Failure: Different GrandTotal in SHOP: " + "grabbed->" + finalGrandToal + " - calculated "
-						+ finalMagGrandToal,
-				String.valueOf(finalMagGrandToal).contentEquals(String.valueOf(finalGrandToal)));
 	}
 
 	public void validateMagentoCalculatedTaxAmount(String taxAmount, String calculatedTaxAmount) {

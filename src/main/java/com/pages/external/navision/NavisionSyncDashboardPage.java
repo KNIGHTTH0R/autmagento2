@@ -132,32 +132,22 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 	public void insertAuthentificationCredentials() throws Exception {
 
-		// (new Thread(new LoginWindow())).start();
 		LoginWindow loginthread = new LoginWindow();
 		loginthread.login();
-		// open your url. this will prompt you for windows authentication
-		// getDriver().get("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=43%3bh%2fqqAAJ7%2f1AAUABKAF8ATQBJAFgARQBEAF8ATQBBAE4AVQBBAEw%3d&mode=Edit&page=11205257&i=301&IsDlg=1");
-
-		// add test scripts below ...
-		// getDriver().findElement(By.linkText("Home")).click();
 
 	}
 
 	public void clickOnSalesOrderListLine() {
-		System.out.println("clickOnSalesOrderListLine sunt aici");
 		waitABit(2000);
 		element(salesOrderListLine).waitUntilVisible();
 		salesOrderListLine.click();
 		waitABit(2000);
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(salesOrderListLine).click().perform();
-		// waitABit(2000);
-		// salesOrderListLine.click();
 	}
 
 	public void clickOnLinesDropdown() {
 
-		System.out.println("clickOnLinesDropdown sunt aici");
 		waitABit(2000);
 		
 		Actions actions = new Actions(getDriver());
@@ -166,48 +156,21 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	}
 
 	public void clickOnFilter() {
-		System.out.println("clickOnFileter sunt aici");
 		waitABit(2000);
 		Actions actions = new Actions(getDriver());
-
 		actions.moveToElement(filter).click().perform();
 
 	}
 
 	public void inputOrderId(String orderId) {
-		System.out.println("inputOrderId sunt aici");
-		// element(inputOrderId).waitUntilVisible();
-		// inputOrderId.sendKeys(orderId);
-		//
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(inputOrderId).click().perform();
 		actions.moveToElement(inputOrderId).sendKeys(orderId).perform();
-		// /inputOrderId.sendKeys(orderId);
 	}
 
 	public void performOrderImport() {
-		System.out.println("performOrderImport sunt aici");
 		waitABit(2000);
-		// Actions actions = new Actions(getDriver());
-		// actions.moveToElement(processButton).click().perform();
-
 		element(processButton).waitUntilVisible();
-
-		System.out.println("performOrderImport sunt aici 2 ");
-		// Actions actions = new Actions(getDriver());
-		// processButton.sendKeys(Keys.RETURN);
-		/// actions.moveToElement(processButton).click().perform();
-		//
-		// processButton.click();
-		// processButton.click();
-		// element(processButton).waitUntilVisible();
-		// waitABit(10000);
-
-		// WebElement element = driver.findElement(By.id("something"));
-		// JavascriptExecutor executor = (JavascriptExecutor)getDriver();
-		// executor.executeScript("arguments[0].click();", processButton);
-
-		// WebElement webElement = driver.findElement(By.id("Your ID Here"));
 		Actions builder = new Actions(getDriver());
 		builder.moveToElement(processButton).click(processButton);
 		builder.perform();
@@ -215,7 +178,6 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 	public void closeDialogModal() {
 
-		System.out.println("closeDialogModal sunt aici");
 		element(dialogModal).waitUntilVisible();
 		waitABit(2000);
 		Actions actions = new Actions(getDriver());
@@ -225,7 +187,6 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	}
 
 	public void selectActionsTab() {
-		System.out.println("selectActionsTab sunt aici");
 		element(actionsTab).waitUntilVisible();
 		waitABit(2000);
 		Actions actions = new Actions(getDriver());
@@ -247,9 +208,7 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	}
 
 	public void clickOnItemJournalMenuBtn() {
-		// TODO Auto-generated method stub
 
-		System.out.println("clickOnItemJournalMenuBtn");
 		element(itemJurnalBtn).waitUntilVisible();
 		Actions builder = new Actions(getDriver());
 		builder.moveToElement(itemJurnalBtn).click(itemJurnalBtn);
@@ -259,7 +218,6 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 	public void insertItemNo(String skuItem) {
 		element(insertItemNo).waitUntilVisible();
-		//waitABit(2000);
 		Actions actions = new Actions(getDriver());
 
 		actions.moveToElement(insertItemNo).click().perform();
@@ -268,9 +226,7 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	public void insertItemVariantCode(String variantCode) {
 		element(insertItemVariantCode).waitUntilVisible();
 		Actions actions = new Actions(getDriver());
-		//waitABit(2000);
 		actions.moveToElement(insertItemVariantCode).click().perform();
-		//waitABit(2000);
 		actions.moveToElement(insertItemVariantCode).sendKeys(variantCode).perform();
 	}
 	
@@ -278,25 +234,20 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	public void insertKostenstelleCode(String kostenstelleCode) {
 		element(insertKostenstelleCode).waitUntilVisible();
 		Actions actions = new Actions(getDriver());
-		//waitABit(2000);
 		actions.moveToElement(insertKostenstelleCode).click().perform();
-		//waitABit(2000);
 		actions.moveToElement(insertKostenstelleCode).sendKeys(kostenstelleCode).perform();
 	}
 	
 	public void insertLocationCode(String locationCode) {
 		element(insertLocationCode).waitUntilVisible();
 		Actions actions = new Actions(getDriver());
-		//waitABit(2000);
 		actions.moveToElement(insertLocationCode).click().perform();
-	//	waitABit(2000);
 		actions.moveToElement(insertLocationCode).sendKeys(locationCode).perform();
 	}
 	
 	public void insertQty(String qty) {
 		element(insertQty).waitUntilVisible();
 		Actions actions = new Actions(getDriver());
-		//waitABit(2000);
 		actions.moveToElement(insertQty).click().perform();
 		waitABit(1000);
 		actions.moveToElement(insertQty).sendKeys(qty).perform();
@@ -304,16 +255,11 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 	public void insertValuesForItem(String skuItem, String variantCode, String kostenstelleCode, String locationCode,
 			String qty) {
-		System.out.println("insertValuesForItem");
 		element(insertItemNo).waitUntilVisible();
-		//waitABit(2000);
 		Actions actions = new Actions(getDriver());
 
 		actions.moveToElement(insertItemNo).click().perform();
 		actions.moveToElement(insertItemNo).sendKeys(skuItem).perform();
-		// /"variantCode","Kostenstelle_Code","quantity"
-		// element(insertItemVariantCode).waitUntilVisible();
-		//waitABit(2000);
 		actions.moveToElement(insertItemVariantCode).click().perform();
 		actions.moveToElement(insertItemVariantCode).sendKeys(variantCode).perform();
 
@@ -331,7 +277,6 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	}
 
 	public void clickOnPostMenuBtn() {
-		System.out.println("perform Post  sunt aici");
 		waitABit(2000);
 		element(postButton).waitUntilVisible();
 		System.out.println("postButton sunt aici 2 ");
@@ -344,7 +289,6 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	}
 
 	public void selectHomeTab() {
-		System.out.println("selectHomeTab sunt aici");
 		element(homeTab).waitUntilVisible();
 		waitABit(2000);
 		Actions actions = new Actions(getDriver());
@@ -353,11 +297,6 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	}
 
 	public void confirmPostJournalLines() {
-		// element(dialogTitle).waitUntilVisible();
-		// Assert.assertTrue("The Post JournalLines dialog window is not
-		// present", dialogTitle.getText().contentEquals("Do you want to post
-		// the journal lines?"));
-		//
 		element(confirmPostJournalLines).waitUntilVisible();
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(confirmPostJournalLines).click().perform();
@@ -392,11 +331,6 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 	}
 
 	public void confirmSuccesfullyPostedJournalLines() {
-		// element(dialogTitle).waitUntilVisible();
-		// Assert.assertTrue("The Post JournalLines dialog window is not
-		// present", dialogTitle.getText().contentEquals("The journal lines were
-		// successfully posted."));
-		//
 		waitABit(2000);
 		element(confirmSuccesfullyPosted).waitUntilVisible();
 		Actions actions = new Actions(getDriver());
