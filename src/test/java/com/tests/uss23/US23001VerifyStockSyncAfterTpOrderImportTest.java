@@ -93,8 +93,10 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 		}
 		
 		
-		initialChangingMagentoProductsNewTp = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
+		initialChangingMagentoProductsNewTp = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK_NEW_TP);
 		initialChangingNavProductsNewTp = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK_NEW_TP);
+		
+		
 		for (SyncInfoModel string : initialChangingMagentoProductsNewTp) {
 			System.out.println("2 initialChangingMagentoProductsNewTp"+ string.toString() );
 		}
@@ -143,6 +145,10 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 			changingStockNavProduct.add(NavisionInventorySyncCalls.getItemInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
 		
+		
+			for (SyncInfoModel string : changingStockNavProduct) {
+				System.out.println("csxkskldsd "+string.toString());
+			}
 		for (String id : changingStockIdListNewTp) {
 			changingStockMagentoProductsNewTp.add(MagentoProductCalls.getMagProductInfo(id));
 		}
@@ -170,7 +176,7 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 	public void us23001VerifyStockSyncAfterTpOrderImportTest() throws SQLException, ParseException {
 
 	///	stockProductsValidations.validateSyncronizedStatus(isSyncronyzed);
-		importedOrderValidation.validateUpdatedNavDate(shopOrder.getUpdatedNav(),DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"),"yyyy-MM-dd");
+	//	importedOrderValidation.validateUpdatedNavDate(shopOrder.getUpdatedNav(),DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"),"yyyy-MM-dd");
 
 		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
 		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");

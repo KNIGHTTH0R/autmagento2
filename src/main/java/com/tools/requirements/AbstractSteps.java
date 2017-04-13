@@ -162,6 +162,7 @@ public class AbstractSteps extends ScenarioSteps {
 	public void performLoginAndVerifyWebsiteAndLanguage(String userName, String userPass, String language,
 			String website) {
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);
 		loginPage().inputUserPass(userPass);
@@ -174,6 +175,7 @@ public class AbstractSteps extends ScenarioSteps {
 	@Step
 	public void performLoginOnPreferedWebsite(String userName, String userPass) {
 
+		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().inputUserName(userName);

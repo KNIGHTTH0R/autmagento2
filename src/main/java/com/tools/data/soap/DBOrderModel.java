@@ -89,8 +89,17 @@ public class DBOrderModel {
 	private String magentoGrandTotal;
 	private String magentoTaxAmmount;
 	private String contactid;
+	private String zeroVat;
 	
 	
+	public String getZeroVat() {
+		return zeroVat;
+	}
+
+	public void setZeroVat(String zeroVat) {
+		this.zeroVat = zeroVat;
+	}
+
 	public String getContactid() {
 		return contactid;
 	}

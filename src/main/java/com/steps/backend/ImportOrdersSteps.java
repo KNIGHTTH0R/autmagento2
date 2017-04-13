@@ -146,7 +146,7 @@ public class ImportOrdersSteps {
 
 				System.out.println("open order " + order.getIncrementId());
 				
-				importOrders.validateUpdatedNavDate(order.getUpdatedNav(),"2017-04-10","yyyy-MM-dd");
+				importOrders.validateUpdatedNavDate(order.getUpdatedNav(),"2017-04-11","yyyy-MM-dd");
 
 				importOrders.validateOrderIncrementId(order.getIncrementId(), compare.getIncrementId());
 				importOrders.validateOrderItemsTest(order.getItemInfo(), compare.getLines());
@@ -160,7 +160,7 @@ public class ImportOrdersSteps {
 
 				importOrders.validateMagentoCalculatedGrandTotal(order.getGrandTotal(),
 						order.getCalculatedGrandTotal());
-				importOrders.validateMagentoCalculatedTaxAmount(order.getTaxAmount(), order.getCalculatedTaxAmount());
+				//importOrders.validateMagentoCalculatedTaxAmount(order.getTaxAmount(), order.getCalculatedTaxAmount());
 
 				// 1/03/2017
 				importOrders.validateCartType(order.getCartType(), compare.getShopCartType());
@@ -201,9 +201,8 @@ public class ImportOrdersSteps {
 				importOrders.validateShippingPostCode(order.getShipToPostcode(), compare.getShipToPostCode());
 				importOrders.validateShippingCity(order.getShipToCity(), compare.getShipToCity());
 				importOrders.validateShippingHouseNumber(order.getShipToHousNumber(), compare.getShipToHouseNumber());
-				String navTaxAmount = calculateTaxAmount(order.getTaxAmount(), order.getTaxPrecent(),
-						compare.getCalculatedGrandTotal());
-				importOrders.validateTaxAmount(order.getTaxAmount(), navTaxAmount);
+				String navTaxAmount = calculateTaxAmount(order.getTaxPrecent(),compare.getCalculatedGrandTotal());
+				importOrders.validateTaxAmount(order.getCalculatedTaxAmount(), navTaxAmount);
 
 				importOrders.validateIsPreshipped(order.getIsPreshipped(), compare.getIsAlreadyShipped());
 				importOrders.validateIsPom(order.getIsPom(), compare.getShopIsPom());
@@ -272,7 +271,7 @@ public class ImportOrdersSteps {
 		setOrdersNotImportedInNav(ordersNotImportedInNav);
 	}
 
-	private static String calculateTaxAmount(String taxAmount, String vatPercent, String calculatedGrandTotal) {
+	private static String calculateTaxAmount(String vatPercent, String calculatedGrandTotal) {
 		double grandTotalDouble = Double.parseDouble(calculatedGrandTotal);
 
 		double vatDouble = Double.parseDouble(vatPercent);
@@ -487,7 +486,7 @@ public class ImportOrdersSteps {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(calculateTaxAmount("", "19", "30.07"));
+		System.out.println(calculateTaxAmount("19", "30.07"));
 	}
 
 }

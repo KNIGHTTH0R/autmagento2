@@ -35,18 +35,9 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 	private List<DBOrderModel> shopListOrders = new ArrayList<DBOrderModel>();
 	private List<NavOrderModel> navListOrders = new ArrayList<NavOrderModel>();
 
-//	List<String> shopOrderList = new ArrayList<String>(Arrays.asList("210302","210228 no reference","210243","210253","210254","210255","210314","210321","210329","210493","210545","210644"));
-	//"213450","213451", "213452", "213453"));
-	//"213456","213557",
-//	"213383", "213434", "213428", "213429", "213445", "213448", "213449",
-//"213458", "213462", "213466", "213468", "213470", "213471","213467", "213469","213542"));
-	// Arrays.asList("213462"));
-//	/"213311"
 
 	@Before
 	public void setUp() throws Exception {
-
-
 		
 		// last range ("209874","210900")
 //		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("10021681500 ","10021787300");
@@ -58,26 +49,17 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 		//shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("211021","211943");
 		
 		//last range ("209975","210999");
-		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("217801","217900");
-		navListOrders = NavisionSoapCalls.getOrdersList("217801..217900");
+		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("218450","218450");
+		navListOrders = NavisionSoapCalls.getOrdersList("218450..218450");
 	
-//		for (String shOrder : shopOrderList) {
-//
-//			// am lasat lista pt ca metodele returneaza liste
-//			List<DBOrderModel> dbmodel1 = new ArrayList<DBOrderModel>();
-//			List<NavOrderModel> navListOrders1 = new ArrayList<NavOrderModel>();
-//			dbmodel1 = OrdersInfoMagentoCalls.getOrderWithItems(shOrder, shOrder);
-//			navListOrders1 = NavisionSoapCalls.getOrdersList(dbmodel1.get(0).getIncrementId());
-//			shopListOrders.add(dbmodel1.get(0));
-//			if (!navListOrders1.isEmpty()) {
-//				navListOrders.add(navListOrders1.get(0));
-//			}else{
-//				
-//			}
-//		}
+		
+//		
+//		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("218510","218510");
+//		navListOrders = NavisionSoapCalls.getOrdersList("218510..218510");
+
 		}
 	
-	//}
+	
 
 	@Test
 	public void us34001ValidateOrderIImportFromMagToNavTest() throws Exception {
