@@ -100,28 +100,28 @@ public class US3006SfmValidVatSmbBillingShippingDeTest extends BaseTest {
 		
 		
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("49.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
-
-		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct2);
-
-		// genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		// genProduct3.setPrice("239.00");
-		// MagentoProductCalls.createApiProduct(genProduct3);
-
-		genProduct3 = createdProductsList.get(2);
-		
 //		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		
-//			genProduct1 = createdProductsList.get(0);
-//			genProduct2 = createdProductsList.get(1);
-//			genProduct3 = createdProductsList.get(2);
-//		
+//
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("49.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createProductModel();
+//		genProduct2.setPrice("89.00");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//
+//		// genProduct3 = MagentoProductCalls.createMarketingProductModel();
+//		// genProduct3.setPrice("239.00");
+//		// MagentoProductCalls.createApiProduct(genProduct3);
+//
+//		genProduct3 = createdProductsList.get(2);
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		
+			genProduct1 = createdProductsList.get(23);
+			genProduct2 = createdProductsList.get(24);
+			genProduct3 = createdProductsList.get(2);
+		
 
 
 		Properties prop = new Properties();
