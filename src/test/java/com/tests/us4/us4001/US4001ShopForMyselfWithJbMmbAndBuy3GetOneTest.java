@@ -96,14 +96,14 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("100");
-		MagentoProductCalls.createApiProduct(genProduct1);
-
-		 genProduct2.setName("NXUHTYUXB");
-		 genProduct2.setSku("TIJTYDXYO");
-		 genProduct2.setIp("42");
-		 genProduct2.setPrice("49.90");
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("100");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		 genProduct2.setName("NXUHTYUXB");
+//		 genProduct2.setSku("TIJTYDXYO");
+//		 genProduct2.setIp("42");
+//		 genProduct2.setPrice("49.90");
 
 //		 genProduct2 = MagentoProductCalls.createProductModel();
 //		 genProduct2.setIp("42");
@@ -115,7 +115,8 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 //		 MagentoProductCalls.createApiProduct(genProduct3);
 
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-	//	genProduct2 = createdProductsList.get(0);
+		genProduct1 = createdProductsList.get(31);
+		genProduct2 = createdProductsList.get(0);
 		genProduct3 = createdProductsList.get(5);
 		 
 		Properties prop = new Properties();

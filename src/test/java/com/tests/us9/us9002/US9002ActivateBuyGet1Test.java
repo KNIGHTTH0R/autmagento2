@@ -8,8 +8,10 @@ import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.steps.backend.BackEndSteps;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Credentials;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US9.2 Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
@@ -19,10 +21,12 @@ public class US9002ActivateBuyGet1Test extends BaseTest {
 
 	@Steps
 	public ShoppingCartPriceRulesSteps promotionSteps;
+	@Steps
+	public BackEndSteps backEndSteps;
 
 	@Test
 	public void us9002ActivateBuyGet1Test() {
-
+        backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		promotionSteps.activateRule("Buy 3 get 1 for 50% - host");
 	}
 }

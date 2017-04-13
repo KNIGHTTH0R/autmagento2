@@ -9,8 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.steps.backend.BackEndSteps;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
@@ -21,6 +23,8 @@ import com.tools.requirements.Application;
 public class US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest extends BaseTest {
 	@Steps
 	public ShoppingCartPriceRulesSteps promotionSteps;
+	@Steps
+	public BackEndSteps backEndSteps;
 	
 	private String koboCode;
 	private String usesPerCoupon = "125";
@@ -35,6 +39,7 @@ public class US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest extends BaseT
 
 	@Test
 	public void us12001ChechUsesPerCouponAfterSubscriptionUpgradeTest() {
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		promotionSteps.verifyThatNoOfUsesPerCouponIsCorrect(koboCode, usesPerCoupon);
 	}
 }

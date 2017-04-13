@@ -63,6 +63,9 @@ public class CreateProductsTest extends BaseTest {
 	private ProductDetailedModel genProduct27 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct28 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct29 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct30 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct31 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct32 = new ProductDetailedModel();
     String voucherValue;
 	
 	@Steps
@@ -271,6 +274,21 @@ public class CreateProductsTest extends BaseTest {
 		genProduct29.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct29);
 		productsList.add(genProduct29);
+		
+		genProduct30 = MagentoProductCalls.createProductModel();
+		genProduct30.setPrice("49.00");
+		MagentoProductCalls.createApiProduct(genProduct30);
+		productsList.add(genProduct30);
+		
+		genProduct31 = MagentoProductCalls.createProductModel();
+		genProduct31.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct31);
+		productsList.add(genProduct31);
+		
+		genProduct32 = MagentoProductCalls.createProductModel();
+		genProduct32.setPrice("100");
+		MagentoProductCalls.createApiProduct(genProduct32);
+		productsList.add(genProduct32);
 		
 		
 		

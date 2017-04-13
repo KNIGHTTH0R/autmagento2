@@ -97,11 +97,11 @@ public class US3009SfmNoVatNoSmbBillingShippingDeTest extends BaseTest {
 		DataGrabber.wipe();
 
 		
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		
-//			genProduct1 = createdProductsList.get(27);
-//			genProduct2 = createdProductsList.get(28);
-//			genProduct3 = createdProductsList.get(2);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		
+			genProduct1 = createdProductsList.get(27);
+			genProduct2 = createdProductsList.get(28);
+			genProduct3 = createdProductsList.get(2);
 	
 //			genProduct1 = MagentoProductCalls.createProductModel();
 //			genProduct1.setPrice("49.90");

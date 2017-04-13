@@ -26,6 +26,17 @@ public class ContactBoosterCartPage extends AbstractPage {
 		waitABit(TimeConstants.WAIT_TIME_SMALL);
 	}
 	
+	public void selectContactBooster50Voucher() {
+		waitABit(TimeConstants.TIME_MEDIUM);
+		elementjQueryClick("input#kit_2564");
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
+	public void selectContactBooster25Voucher() {
+		waitABit(TimeConstants.TIME_MEDIUM);
+		elementjQueryClick("input#kit_2563");
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+	}
+	
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
 		kasseButton.click();

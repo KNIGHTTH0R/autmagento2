@@ -8,8 +8,10 @@ import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.steps.backend.BackEndSteps;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Credentials;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US16.2 SC borrows with free shipping Test", type = "Scenarios")
@@ -19,9 +21,12 @@ public class US16002DeactivateFreeShippingRuleTest extends BaseTest {
 
 	@Steps
 	public ShoppingCartPriceRulesSteps shoppingCartPriceRulesSteps;
+	@Steps
+	public BackEndSteps backEndSteps;
 
 	@Test
 	public void us16002DeactivateFreeShippingRuleTest() {
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		shoppingCartPriceRulesSteps.deactivateRule("AUT-Free Shipping Rule For All Carts");
 	}
 }
