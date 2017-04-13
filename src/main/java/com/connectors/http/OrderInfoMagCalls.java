@@ -410,14 +410,18 @@ public class OrderInfoMagCalls {
 
 						}
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("base_price_incl_tax")) {
-							// model.setOriginalPrice(childNodes.item(j).getTextContent());
 
-							// System.out.println("formateddd "
-							// +
-							// FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent()));
+							String basePriceIncTax = childNodes.item(j).getTextContent();
 							originalPrice = BigDecimal.valueOf(0);
-							originalPrice = BigDecimal.valueOf(Double.parseDouble(
-									FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent())));
+							// stupid fix for stupid issue (some value are
+							// 0.00-> wich is goode, some are 0 -> can't be
+							// parsed so we concat .00 to 0 value
+							if (childNodes.item(j).getTextContent().contentEquals("0")) {
+								basePriceIncTax = basePriceIncTax.concat(".00");
+							}
+
+							originalPrice = BigDecimal.valueOf(
+									Double.parseDouble(FormatterUtils.parseValueToTwoDecimals(basePriceIncTax)));
 						}
 
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("qty_ordered")) {
@@ -610,7 +614,7 @@ public class OrderInfoMagCalls {
 	public static void main(String[] args) throws SOAPException, IOException {
 
 		String sessID = HttpSoapConnector.performLogin();
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10022556300");
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10022635100");
 
 		System.out.println("order ID : " + dbmodel.getOrderId());
 

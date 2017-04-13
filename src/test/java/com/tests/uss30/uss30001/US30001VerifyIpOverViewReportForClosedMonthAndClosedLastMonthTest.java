@@ -113,7 +113,7 @@ public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest e
 		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForClosedMonth("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-28 23:59:00","2017-03-10 17:00:00");
 		 //for march after is closing
 		
-//		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
+		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
 //		expectedReturns = expectedIpOverviewModel.getReturns();
 	}
 
@@ -142,11 +142,11 @@ public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest e
 		
 
 		//validate payed orders list
-//		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
-//		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
-//		System.out.println("expected"+expectedOrdersList.size());
-//		System.out.println("grabbed"+grabbedPayedOrdersModel.size());
-//	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
+		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
+		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
+		System.out.println("expected"+expectedOrdersList.size());
+		System.out.println("grabbed"+grabbedPayedOrdersModel.size());
+	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
 //		
 //		
 //        //validate returns orders 

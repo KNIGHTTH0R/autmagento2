@@ -12,6 +12,9 @@ import com.tools.constants.Separators;
 import com.tools.data.IpOverViewSummaryModel;
 
 public class FormatterUtils {
+	
+	
+	
 
 	/**
 	 * This is a helper method to aproximate the (local time RO) of a form
@@ -240,6 +243,8 @@ public class FormatterUtils {
 		return elems;
 	}
 
+	
+	
 	// public static void main(String[] args) {
 	// System.out.println(FormatterUtils.getIntegerNumberFromString("qa-int0000183500"));
 	// System.out.println(FormatterUtils.getNotDigitsFromString("qa-int0000183500"));
