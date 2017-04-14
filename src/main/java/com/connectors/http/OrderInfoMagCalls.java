@@ -432,6 +432,7 @@ public class OrderInfoMagCalls {
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_percent")) {
 							taxPercent = BigDecimal.valueOf(Double.parseDouble(childNodes.item(j).getTextContent()));
 						}
+						
 					}
 					// do not add configurable parent on list
 					if (isConfigurableParent == false) {
