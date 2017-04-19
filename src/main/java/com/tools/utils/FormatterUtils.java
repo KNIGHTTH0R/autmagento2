@@ -184,6 +184,11 @@ public class FormatterUtils {
 	public static BigDecimal parseValueToBigDecimal(String value) {
 		return BigDecimal.valueOf(Double.parseDouble(parseValue(value, 0)));
 	}
+	
+	public static double parseValueToDouble(String value) {
+		return  Double.parseDouble(value);
+	}
+	
 
 	public static String cleanString(String unitPrice) {
 		String result = unitPrice;
@@ -241,6 +246,11 @@ public class FormatterUtils {
 					elems.length != 3);
 		}
 		return elems;
+	}
+
+	public static double roundDouble(double value) {
+		double roudValue = Math.round(value * 100.0) / 100.0;
+		return roudValue;
 	}
 
 	

@@ -50,14 +50,9 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 		
 		//last range ("209975","210999");
 
-		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("217900","218999");
-		navListOrders = NavisionSoapCalls.getOrdersList("217900..218999");
+		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("221175","221440");
+		navListOrders = NavisionSoapCalls.getOrdersList("221175..221440");
 
-	
-		
-//		
-//		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("218510","218510");
-//		navListOrders = NavisionSoapCalls.getOrdersList("218510..218510");
 
 		}
 	

@@ -13,6 +13,7 @@ import com.tools.data.navision.SalesOrderInfoModel;
 import com.tools.data.soap.NavOrderLinesModel;
 import com.tools.data.soap.NavOrderModel;
 import com.tools.requirements.AbstractSteps;
+import com.tools.utils.FormatterUtils;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Title;
@@ -40,7 +41,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	// @Step
 	public void validateIsPom(String isPom, String compare) {
-
+		
 		String shopisPom = isPom.contentEquals("1") ? "true" : "false";
 		CustomVerification.verifyTrueForOrderImport(
 				"Failure: Is Pom Product doesn't match: " + "shop-> " + shopisPom + " - " + "nav->" + compare,
@@ -57,33 +58,15 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 				shopIsPreshipped.contentEquals(compare));
 
 	}
-
-	// public void validateKoboSingleArticle(String koboSingleArticle, String
-	// compare) {
-	// String shopIsKoboSingle = koboSingleArticle == "1" ? "true" : "false";
-	// CustomVerification.verifyTrueForOrderImport("Failure: koboSingleArticle
-	// doesn't match:
-	// " + shopIsKoboSingle + " - " + compare,
-	// shopIsKoboSingle.contentEquals(compare));
-	// }
-	//
-	// public void validateUpdatedNavDate(String updatedNav, String compare) {
-	//
-	// Assert.assertTrue("Failure: Updated Nav Date doesn't match: " +
-	// updatedNav + " - " + compare,
-	// updatedNav.contentEquals(compare));
-	// }
+	
 	// @Step
 	public void validateTaxAmount(String taxAmount, String navTaxAmount) {
-		double magTax = Double.parseDouble(taxAmount);
-		double finalMagTax = Math.round(magTax * 100.0) / 100.0;
-
-		double navTax = Double.parseDouble(navTaxAmount);
-		double finalNavTax= Math.round(navTax * 100.0) / 100.0;
+		double finalMagTax = FormatterUtils.roundDouble(FormatterUtils.parseValueToDouble(taxAmount));
+		double finalNavTax = FormatterUtils.roundDouble(Double.parseDouble(navTaxAmount));
 
 		double diff = Math.abs(finalMagTax - finalNavTax);
-		System.out.println("diff " + diff);
-		if (diff > 0.01) {
+		double finalDiff = FormatterUtils.roundDouble(diff);
+		if (finalDiff > 0.01) {
 			CustomVerification.verifyTrueForOrderImport(
 					"Failure: Tax Amount doesn't match: " + "Shop -> " + taxAmount + " - Nav -> " + navTaxAmount,
 					taxAmount.contains(navTaxAmount.toString()));
@@ -292,18 +275,6 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	// public void validatePaidAtDate(String paidAt, String compare) {
-	// Assert.assertTrue("Failure: PaidAt doesn't match: " + paidAt + " - " +
-	// compare,
-	// paidAt.contentEquals(compare));
-	// }
-	//
-	// public void validateCreatedAtDate(String createdAt, String compare) {
-	// Assert.assertTrue("Failure: createdAt doesn't match: " + createdAt + " -
-	// " + compare,
-	// createdAt.contentEquals(compare));
-	// }
-
 	// @Step
 	public void validateExternalDocNo(String externalDocNo, String compare) {
 
@@ -325,12 +296,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 		return result;
 	}
 
-	// public void validateMagentoGrandTotal(String magGrandTotal, String
-	// compare) {
-	// Assert.assertTrue("Failure: GrandTotal doesn't match: ",
-	// magGrandTotal.contains(compare));
-	//
-	// }
+	
 
 	@Step
 	public void validateOrderIncrementId(String incrementId, String compare) {
@@ -353,7 +319,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 				RoundingMode.HALF_UP);
 		BigDecimal finalNavGrandTotal = BigDecimal.valueOf(Double.parseDouble(compare)).setScale(2,
 				RoundingMode.HALF_UP);
-
+		
 		BigDecimal difference = finalMagGrandTotal.subtract(finalNavGrandTotal).abs();
 
 		BigDecimal value = BigDecimal.valueOf(0.00);
@@ -446,20 +412,12 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 	// @Step
 	public void validateMagentoCalculatedGrandTotal(String grandTotal, String calculatedGrandTotal) {
 		// TODO Auto-generated method stub
-		double gt = Double.parseDouble(grandTotal);
-		double finalGrandToal = Math.round(gt * 100.0) / 100.0;
-
-		System.out.println("finalGrandToal "+finalGrandToal);
-		double calcGt = Double.parseDouble(calculatedGrandTotal);
-		double finalMagGrandToal = Math.round(calcGt * 100.0) / 100.0;
-		System.out.println("finalMagGrandToal "+finalMagGrandToal);
-		
+	
+		double finalGrandToal = FormatterUtils.roundDouble(Double.parseDouble(grandTotal));
+		double finalMagGrandToal = FormatterUtils.roundDouble(Double.parseDouble(calculatedGrandTotal));
 		
 		double diff = Math.abs(finalGrandToal - finalMagGrandToal);
-		double finalDiff = Math.round(diff * 100.0) / 100.0;
-		System.out.println("finalDiff "+finalDiff);
-		
-		
+		double finalDiff =FormatterUtils.roundDouble(diff);
 		
 		if (finalDiff > 0.01) {
 			CustomVerification.verifyTrueForOrderImport(
@@ -471,13 +429,9 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 	}
 
 	public void validateMagentoCalculatedTaxAmount(String taxAmount, String calculatedTaxAmount) {
-		double tax = Double.parseDouble(taxAmount);
-		double finalTaxAmount = Math.round(tax * 100.0) / 100.0;
-
-		double calcTax = Double.parseDouble(calculatedTaxAmount);
-		double finalCalcMagTaxAmount = Math.round(calcTax * 100.0) / 100.0;
-
-		// String finalMagTaxAmount = String.valueOf(roundGt);
+	
+		double finalTaxAmount = FormatterUtils.roundDouble(Double.parseDouble(taxAmount));
+		double finalCalcMagTaxAmount = FormatterUtils.roundDouble(Double.parseDouble(calculatedTaxAmount));
 
 		CustomVerification.verifyTrueForOrderImport(
 				"Failure: Different TaxAmount in SHOP: " + "grabbed-> " + finalTaxAmount + " - calculated "

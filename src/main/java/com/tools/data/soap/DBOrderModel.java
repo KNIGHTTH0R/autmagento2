@@ -91,6 +91,8 @@ public class DBOrderModel {
 	private String contactid;
 	private String zeroVat;
 	
+
+	
 	
 	public String getZeroVat() {
 		return zeroVat;

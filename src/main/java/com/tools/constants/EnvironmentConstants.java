@@ -60,7 +60,7 @@ public class EnvironmentConstants {
 	//CLOUD: staging-aut env  - uncomment following for testing without running the test from cmd line
 	
 	//CLOUD: staging-aut env  - uncomment following for testing without running the test from cmd line
-//	public static final String COMMISSION_URL = "??????????";
+	//public static final String COMMISSION_URL = "??????????";
 //	public static final String COMMISSION_URL = "commission-aut.pippajean.com";
 //	public static final String SOAP_URL="https://staging-aut.pippajean.com/";
 //		

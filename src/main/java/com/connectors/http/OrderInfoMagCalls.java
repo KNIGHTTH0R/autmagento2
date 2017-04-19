@@ -232,9 +232,11 @@ public class OrderInfoMagCalls {
 							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent())));
 				}
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("base_discount_amount")) {
-					model.setBaseDiscountAmount(resultNodes.item(r).getTextContent());
+					
+					String base_Disc = FormatterUtils.parseValueToTwoDecimals(resultNodes.item(r).getTextContent());
+					model.setBaseDiscountAmount(base_Disc);
 					baseDiscountAmount = baseDiscountAmount
-							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent()))).negate();
+							.add(BigDecimal.valueOf(Double.parseDouble(base_Disc)));
 				}
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("jewelry_credits_used")) {
 					model.setJewelryCreditsUsed(resultNodes.item(r).getTextContent());
@@ -472,7 +474,7 @@ public class OrderInfoMagCalls {
 		BigDecimal calculateGrandTotal = subtotal.add(shippingAmount).subtract(baseDiscountAmount)
 				.subtract(jewelryCreditsUsed).subtract(marketingCreditsUsed).subtract(fiftyDiscountsAmount);
 
-		// System.out.println("calculateGrandTotal " + calculateGrandTotal);
+		 System.out.println("calculateGrandTotal " + calculateGrandTotal);
 		BigDecimal calculatedTaxAmount = calcultatedTaxAmount(taxPercent, calculateGrandTotal);
 
 		// System.out.println("calculatedTaxAmount " + calculatedTaxAmount);
@@ -615,7 +617,7 @@ public class OrderInfoMagCalls {
 	public static void main(String[] args) throws SOAPException, IOException {
 
 		String sessID = HttpSoapConnector.performLogin();
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10022635100");
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10022725300");
 
 		System.out.println("order ID : " + dbmodel.getOrderId());
 
