@@ -41,12 +41,12 @@ public class OrderInfoMagCalls {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+  
 		} catch (SOAPException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 
 		return order;
 	}
