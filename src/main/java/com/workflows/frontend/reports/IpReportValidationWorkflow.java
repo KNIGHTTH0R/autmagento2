@@ -108,7 +108,7 @@ public class IpReportValidationWorkflow {
 	@StepGroup
 	public void verifyPayedOrdersList(List<IpOverViewPayedOrdersModel> expectedList, List<IpOverViewPayedOrdersModel> grabbedList) {
 
-		Assert.assertTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
+		CustomVerification.verifyTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
 
 		for (IpOverViewPayedOrdersModel order : expectedList) {
 			IpOverViewPayedOrdersModel compare = findOrder(order.getOrderID(),grabbedList);
@@ -140,7 +140,7 @@ public class IpReportValidationWorkflow {
 	@StepGroup
 	public void verifyReturnedOrdersList(List<IpOverViewReturnsListModel> expectedList, List<IpOverViewReturnsListModel> grabbedList) {
 
-		Assert.assertTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
+		CustomVerification.verifyTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
 
 		for (IpOverViewReturnsListModel returns : expectedList) {
 			IpOverViewReturnsListModel compare = findReturnedOrder(returns.getOrderId(),grabbedList);

@@ -231,11 +231,19 @@ public class OrderInfoMagCalls {
 					shippingAmount = shippingAmount
 							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent())));
 				}
+//				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("base_discount_amount")) {
+//					model.setBaseDiscountAmount(resultNodes.item(r).getTextContent());
+//					baseDiscountAmount = baseDiscountAmount
+//							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent()))).negate();
+//				}
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("base_discount_amount")) {
-					model.setBaseDiscountAmount(resultNodes.item(r).getTextContent());
-					baseDiscountAmount = baseDiscountAmount
-							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent()))).negate();
-				}
+				     
+				     String base_Disc = FormatterUtils.parseValueToTwoDecimals(resultNodes.item(r).getTextContent());
+				     model.setBaseDiscountAmount(base_Disc);
+				     baseDiscountAmount = baseDiscountAmount
+				       .add(BigDecimal.valueOf(Double.parseDouble(base_Disc)));
+				    }
+				
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("jewelry_credits_used")) {
 					model.setJewelryCreditsUsed(resultNodes.item(r).getTextContent());
 					jewelryCreditsUsed = jewelryCreditsUsed
@@ -410,15 +418,19 @@ public class OrderInfoMagCalls {
 
 						}
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("base_price_incl_tax")) {
-							// model.setOriginalPrice(childNodes.item(j).getTextContent());
 
-							// System.out.println("formateddd "
-							// +
-							// FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent()));
+							String basePriceIncTax = childNodes.item(j).getTextContent();
 							originalPrice = BigDecimal.valueOf(0);
-							originalPrice = BigDecimal.valueOf(Double.parseDouble(
-									FormatterUtils.parseValueToTwoDecimals(childNodes.item(j).getTextContent())));
-						}
+							// stupid fix for stupid issue (some value are
+							// 0.00-> wich is goode, some are 0 -> can't be
+							// parsed so we concat .00 to 0 value
+								if (childNodes.item(j).getTextContent().contentEquals("0")) {
+										basePriceIncTax = basePriceIncTax.concat(".00");
+									}
+
+								originalPrice = BigDecimal.valueOf(
+								Double.parseDouble(FormatterUtils.parseValueToTwoDecimals(basePriceIncTax)));
+							}
 
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("qty_ordered")) {
 							// /model.setQtyOrdered(childNodes.item(j).getTextContent());
@@ -610,7 +622,7 @@ public class OrderInfoMagCalls {
 	public static void main(String[] args) throws SOAPException, IOException {
 
 		String sessID = HttpSoapConnector.performLogin();
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10022556300");
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10022765800");
 
 		System.out.println("order ID : " + dbmodel.getOrderId());
 

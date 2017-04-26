@@ -76,10 +76,11 @@ public class HomePage extends AbstractPage {
 		// element(newMenu).waitUntilVisible();
 		// newMenu.click();
 		// waitABit(1000);
-		
+		waitABit(2000);
 		Actions builder = new Actions(getDriver());
 		element(newTabMenu).waitUntilVisible();
 		builder.moveToElement(newTabMenu).build().perform();
+		waitABit(2000);
 		
 //		System.out.println("sunt aici");
 //		element(newMenu).waitUntilVisible();
