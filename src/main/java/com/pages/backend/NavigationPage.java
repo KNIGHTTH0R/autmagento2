@@ -79,9 +79,6 @@ public class NavigationPage extends AbstractPage {
 
 	public boolean isDismissPopPresent() {
 		// TODO Auto-generated method stub
-	//	element(popUpWindow).waitUntilVisible();
-		System.out.println("size "+ getDriver().findElements(By.cssSelector("#message-popup-window")).size());
 		return getDriver().findElements(By.cssSelector("#message-popup-window")).size() > 0;
-		//return popUpWindow.isDisplayed();
 	}
 }

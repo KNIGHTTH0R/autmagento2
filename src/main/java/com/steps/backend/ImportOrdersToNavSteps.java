@@ -377,7 +377,7 @@ public class ImportOrdersToNavSteps extends AbstractSteps {
 
 	}
 
-	// @Step
+	 @Step
 	public void validateUpdatedNavDate(String updatedNav, String compare, String dateFormat) throws ParseException {
 		// TODO Auto-generated method stub
 		System.out.println(" updated  nav test " + updatedNav);

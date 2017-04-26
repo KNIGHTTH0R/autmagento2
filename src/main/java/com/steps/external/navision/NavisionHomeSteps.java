@@ -128,6 +128,30 @@ public class NavisionHomeSteps extends AbstractSteps {
 		navisionSyncDashboardPage().closeWindow();
 		
 	}
+
+	@Step
+	public void loginToTransferQuantityPage() throws Exception{
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=19%3bbBYAAAJ7BDkAMwA0ADI%3d&mode=View&page=5742&i=19B0&IsDlg=1");
+		navisionSyncDashboardPage().insertAuthentificationCredentials();
+	}
+	
+	@Step
+	public void transferQtyFromQSin1000(String sku,String variantCode,String qty) throws Exception {
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=19%3bbBYAAAJ7BDkAMwA0ADI%3d&mode=View&page=5742&i=19B0&IsDlg=1");
+		navisionSyncDashboardPage().clickOnNewEntry();
+		navisionSyncDashboardPage().completeTransferDetails(sku,variantCode,qty,"QS","1000","TRANS","1100");
+		navisionSyncDashboardPage().insertTranferQty(qty);
+		navisionSyncDashboardPage().selectHomeTab();
+		navisionSyncDashboardPage().clickOnPostMenuBtn();
+		navisionSyncDashboardPage().confirmPostedTransferOrders();
+		navisionSyncDashboardPage().clickOnPostMenuBtn();
+		navisionSyncDashboardPage().confirmPostedTransferOrders2();
+		navisionSyncDashboardPage().confirmPostedTransferOrders2();
+		navisionSyncDashboardPage().closeWindow();
+//		navisionSyncDashboardPage().clickOnPost();
+//		navisionSyncDashboardPage().clickOnPost();
+		
+	}
 	
 	}
 	

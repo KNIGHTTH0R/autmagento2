@@ -39,19 +39,8 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		// last range ("209874","210900")
-//		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("10021681500 ","10021787300");
-//		navListOrders = NavisionSoapCalls.getOrdersList("10021681500 ..10021787300");
-//		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("10021787100","10021789400");
-//		navListOrders = NavisionSoapCalls.getOrdersList("10021787100..10021789400");
-//		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("209874","210900");
-//		navListOrders = NavisionSoapCalls.getOrdersList("209874..210900");
-		//shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("211021","211943");
-		
-		//last range ("209975","210999");
-
-		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("221175","221440");
-		navListOrders = NavisionSoapCalls.getOrdersList("221175..221440");
+		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("220140","221140");
+		navListOrders = NavisionSoapCalls.getOrdersList("220140..221140");
 
 
 		}

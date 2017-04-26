@@ -8,8 +8,10 @@ import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.steps.backend.BackEndSteps;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.tests.BaseTest;
+import com.tools.constants.Credentials;
 import com.tools.requirements.Application;
 
 @WithTag(name = "US8.3 Customer Buy With 40% Discount,JB and Buy 3 get 1 for 50 %", type = "Scenarios")
@@ -19,9 +21,12 @@ public class US8003ActivateBuyGet1Test extends BaseTest {
 
 	@Steps
 	ShoppingCartPriceRulesSteps shoppingCartPriceRulesSteps;
+	@Steps
+	public BackEndSteps backEndSteps;
 
 	@Test
 	public void us8003ActivateBuyGet1Test() {
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		shoppingCartPriceRulesSteps.activateRule("Buy 3 get 1 for 50% - regular");
 	}
 }

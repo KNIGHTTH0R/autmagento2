@@ -49,21 +49,30 @@ public class US23001VerifyMagAndNavStockAfterTPOrderTest extends BaseTest {
 
 		initialChangingMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
 		initialChangingMagentoProductsNewTp=MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK_NEW_TP);
-		
+		System.out.println("1 "+ initialChangingMagentoProducts.size());
+		System.out.println("2 "+ initialChangingMagentoProductsNewTp.size());
 		boughtProductsQuantities = MongoReader.grabStringValue("US23001PlaceTermPurchaseOrderTest"+SoapKeys.BOUGHT_PRODUCTS_QUANTITIES);
 		boughtProductsQuantitiesNewTp=MongoReader.grabStringValue("US23001PlaceTermPurchaseOrderTest" +SoapKeys.BOUGHT_PRODUCTS_QUANTITIES_NEW_TP);
-		
+		System.out.println("3 "+ boughtProductsQuantities.size());
+		System.out.println("4 "+ boughtProductsQuantitiesNewTp.size());
 		initialChangingMagentoProducts = StockCalculations.calculateNewStock(initialChangingMagentoProducts, boughtProductsQuantities);
+		System.out.println("vrrerrrr");
 		initialChangingMagentoProductsNewTp=StockCalculations.calculateNewStock(initialChangingMagentoProductsNewTp, boughtProductsQuantitiesNewTp);
 
+		System.out.println("3 "+ initialChangingMagentoProducts.size());
+		System.out.println("4 "+ initialChangingMagentoProductsNewTp.size());
+		
 		for (String id : changingStockIdList) {
 			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
+			
+			System.out.println("ceva 1" +MagentoProductCalls.getMagProductInfo(id).getSku());
 		}
 		for (String id : changingStockIdListNewTp) {
 			changingStockMagentoProductsNewTp.add(MagentoProductCalls.getMagProductInfo(id));
+			System.out.println("ceva 1" +MagentoProductCalls.getMagProductInfo(id).getSku());
 		}
 		
-
+		System.out.println("am ajuns 1");
 	}
 
 	@Test
@@ -73,6 +82,8 @@ public class US23001VerifyMagAndNavStockAfterTPOrderTest extends BaseTest {
 		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS DECREASED -  CHANGING STOCK MAGENTO PRODUCTS");
 		
 		stockSyncValidations.setValidateProductsModels(initialChangingMagentoProductsNewTp, changingStockMagentoProductsNewTp);
+		
+		System.out.println("da da "+ initialChangingMagentoProductsNewTp);
 		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS DECREASED -  CHANGING STOCK MAGENTO PRODUCTS");
 		
 

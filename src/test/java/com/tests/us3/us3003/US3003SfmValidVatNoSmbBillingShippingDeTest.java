@@ -99,24 +99,24 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		addressModel = new AddressModel();
 		
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("49.90");
-//	//	genProduct1.setSpecialPrice("40.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("49.90");
+	//	genProduct1.setSpecialPrice("40.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+
+		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct2);
 
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1=createdProductsList.get(19);
-		genProduct2=createdProductsList.get(20);
-		genProduct3 = createdProductsList.get(2);
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1=createdProductsList.get(19);
+//		genProduct2=createdProductsList.get(20);
+//		genProduct3 = createdProductsList.get(2);
 		
-//		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-//		genProduct3.setPrice("229.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct3 = MagentoProductCalls.createMarketingProductModel();
+		genProduct3.setPrice("229.00");
+		MagentoProductCalls.createApiProduct(genProduct3);
 
 		
 		Properties prop = new Properties();
@@ -168,6 +168,8 @@ public class US3003SfmValidVatNoSmbBillingShippingDeTest extends BaseTest {
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList25.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_50);
+		CartCalculator.productsList50.add(productData);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
 		CartCalculator.productsList50.add(productData);
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0", ConfigConstants.DISCOUNT_0);
 		CartCalculator.productsListMarketing.add(productData);

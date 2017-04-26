@@ -4,6 +4,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
@@ -85,6 +86,9 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 	@FindBy(css = "input[value*='Yes']")
 	private WebElement confirmPostJournalLines;
+	
+	@FindBy(id = "createNewEntityLink")
+	private WebElement clickOnNewItem;
 
 	@FindBy(css = ".dialog-title p")
 	private WebElement dialogTitle;
@@ -106,7 +110,32 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 	@FindBy(css = ".icon-Dismiss.dialog-close")
 	private WebElement closeModalWindow;
-
+	
+	
+	@FindBy(css = "table[summary*='Lookupform'] tbody tr:nth-child(1) td:nth-child(2) a ")
+	private WebElement selectElementInModal;
+	
+	
+	
+	@FindBy(css = ".ms-nav-band.expanded .collapsibleTab .multiple-columns-group div")
+	private List<WebElement> transferFrom;
+	
+		
+	@FindBy(css = "table[summary*='Transfer '] tbody tr:nth-child(1) td:nth-child(3) input[type*='text']")
+	private WebElement inserItemNo;		
+	
+	@FindBy(css = "table[summary*='Transfer '] tbody tr:nth-child(1) td:nth-child(7) input[type*='text']")
+	private WebElement insertQuantity;		
+	
+	@FindBy(css = "table[summary*='Transfer '] tbody tr:nth-child(1) td:nth-child(5) input[type*='text']")
+	private WebElement inserItemVariantNo;		
+	
+	
+	@FindBy(css = ".pagetitle-control")
+	private WebElement titlePage;	
+	
+	
+	
 	public void clickLinesLink() {
 		element(linesOption).waitUntilVisible();
 		linesOption.click();
@@ -336,4 +365,142 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(confirmSuccesfullyPosted).click().perform();
 	}
+	
+	public void confirmPostedTransferOrders() {
+		waitABit(2000);
+		element(confirmSuccesfullyPosted).waitUntilVisible();
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(confirmSuccesfullyPosted).click().perform();
+	}
+	
+	public void confirmPostedTransferOrders2() {
+		waitABit(2000);
+		element(titlePage).waitUntilVisible();
+		String orderId=findInputFieldByLabel("No.").getText();
+		System.out.println("orderId" +orderId);
+		System.out.println();
+		element(confirmSuccesfullyPosted).waitUntilVisible();
+		
+		
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(confirmSuccesfullyPosted).click().perform();
+		
+		
+	}
+
+	public void clickOnNewEntry() {
+		// TODO Auto-generated method stub
+		element(clickOnNewItem).waitUntilVisible();
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(clickOnNewItem).click().perform();
+		waitABit(2000);
+		
+		
+	}
+
+	public void completeTransferDetails(String sku,String variantCode, String qty, String QS, String location_1000, String transitCode,
+			String konstelleCode) {
+		//WebElement transferCode=getDriver().findElements(By.cssSelector(".ms-nav-band.expanded .collapsibleTab .multiple-columns-group")).get(0).getText().contains("");
+		WebElement transferFrom=findInputFieldByLabel("Transfer-from Code");
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(transferFrom).click().perform();
+		waitABit(3000);
+		actions.moveToElement(transferFrom).sendKeys(QS).perform();
+		actions.moveToElement(transferFrom).click().perform();
+		element(selectElementInModal).waitUntilVisible();
+		actions.moveToElement(selectElementInModal).click().perform();
+		
+		waitABit(1000);
+		
+		WebElement transferTo=findInputFieldByLabel("Transfer-to Code");
+		element(transferTo).waitUntilVisible();
+		actions.moveToElement(transferTo).click().perform();
+		actions.moveToElement(transferTo).sendKeys(location_1000).perform();
+		element(selectElementInModal).waitUntilVisible();
+		actions.moveToElement(selectElementInModal).click().perform();
+		
+		waitABit(1000);
+		
+		WebElement inTransitCode=findInputFieldByLabel("In-Transit Code");
+		element(inTransitCode).waitUntilVisible();
+		actions.moveToElement(inTransitCode).click().perform();
+		actions.moveToElement(inTransitCode).sendKeys("TRANS").perform();
+		element(selectElementInModal).waitUntilVisible();
+		actions.moveToElement(selectElementInModal).click().perform();
+		
+		
+		waitABit(1000);
+		
+		WebElement kostenstelleCode=findInputFieldByLabel("Kostenstelle Code");
+		element(kostenstelleCode).waitUntilVisible();
+		actions.moveToElement(kostenstelleCode).click().perform();
+		actions.moveToElement(kostenstelleCode).sendKeys(konstelleCode).perform();
+		element(selectElementInModal).waitUntilVisible();
+
+		actions.moveToElement(selectElementInModal).click().perform();
+
+		
+		waitABit(1000);
+		
+		element(inserItemNo).waitUntilVisible();
+		actions.moveToElement(inserItemNo).click().perform();
+		actions.moveToElement(inserItemNo).sendKeys(sku).perform();
+		element(selectElementInModal).waitUntilVisible();
+		actions.moveToElement(selectElementInModal).click().perform();
+
+		waitABit(2000);
+		
+		
+		element(inserItemVariantNo).waitUntilVisible();
+		actions.moveToElement(inserItemVariantNo).click().perform();
+		actions.moveToElement(inserItemVariantNo).sendKeys(variantCode).perform();
+//		if(!variantCode.contentEquals("")){
+//		element(selectElementInModal).waitUntilVisible();
+//			actions.moveToElement(selectElementInModal).click().perform();
+//		}
+	
+		waitABit(2000);
+		
+		
+		
+		
+	}
+	
+
+	public void insertTranferQty(String qty) {
+		// TODO Auto-generated method stub
+		Actions actions = new Actions(getDriver());
+		element(insertQuantity).waitUntilVisible();
+
+		actions.moveToElement(insertQuantity).click().perform();
+		waitABit(2000);
+		actions.moveToElement(insertQuantity).click().perform();
+		actions.moveToElement(insertQuantity).sendKeys(qty).perform();
+		
+	
+	}
+	
+	public WebElement findInputFieldByLabel(String element){
+		List<WebElement> line = new ArrayList<WebElement>();
+		WebElement inputField = null;
+		
+		for (WebElement webElement : transferFrom) {
+			if(webElement.getText().contains(element)){
+				line.add(webElement);
+				break;
+			}
+		}
+		
+		if(line.size()==1){
+			inputField=line.get(0).findElement(By.cssSelector("div input[name] "));
+		}else{
+			System.out.println("line"+ line);
+		}
+		
+		return inputField;
+		
+	}
+
+	
+
 }

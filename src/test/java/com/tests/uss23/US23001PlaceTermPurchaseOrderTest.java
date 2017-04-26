@@ -95,14 +95,14 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	private OrderModel orderModel = new OrderModel();
 	private List<String> boughtProductsQuantities = new ArrayList<String>();
 	private List<String> boughtProductsQuantitiesNewTp = new ArrayList<String>();
-
-
 	private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
+
+	//private List<SyncInfoModel> changingStockMagentoProducts = new ArrayList<SyncInfoModel>();
 	private List<SyncInfoModel> changingStockMagentoProductsNewTp = new ArrayList<SyncInfoModel>();
-	private static List<String> changingStockIdList = new ArrayList<String>(
-			Arrays.asList("4469", "2358", "4271", "4304"));
-	private static List<String> changingStockIdListNewTp = new ArrayList<String>(
-			Arrays.asList("4599", "4575", "4346", "4345"));
+//	private static List<String> changingStockIdList = new ArrayList<String>(
+//			Arrays.asList("4469", "2358", "4271", "4304"));
+//	private static List<String> changingStockIdListNewTp = new ArrayList<String>(
+//			Arrays.asList("4599", "4575", "4346", "4345"));
 
 	private ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct2 = new ProductDetailedModel();
@@ -117,13 +117,15 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		customerData = new CustomerFormModel();
 		addressData = new AddressModel();
 
-		for (String id : changingStockIdList) {
-			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
-		}
+		changingStockMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
+//		for (String id : changingStockIdList) {
+//			changingStockMagentoProducts.add(MagentoProductCalls.getMagProductInfo(id));
+//		}
 
-		for (String id : changingStockIdListNewTp) {
-			changingStockMagentoProductsNewTp.add(MagentoProductCalls.getMagProductInfo(id));
-		}
+		changingStockMagentoProductsNewTp=MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK_NEW_TP);
+//		for (String id : changingStockIdListNewTp) {
+//			changingStockMagentoProductsNewTp.add(MagentoProductCalls.getMagProductInfo(id));
+//		}
 
 		qtyForBundle1 = BigDecimal.valueOf(Double.parseDouble(changingStockMagentoProducts.get(2).getQuantity()))
 				.compareTo(
@@ -198,12 +200,13 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 	@Test
 	public void us23001PlaceTermPurchaseOrderTest() {
 		customerRegistrationSteps.performLogin(username, password);
+		
+		System.out.println(username +"  "+  password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
-
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		generalCartSteps.clearCart();
@@ -249,16 +252,18 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 		System.out.println("order model " + orderModel.getOrderId());
 		MongoWriter.saveOrderModel(orderModel, getClass().getSimpleName());
 
-		for (SyncInfoModel product : changingStockMagentoProducts) {
-			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.CHANGING_STOCK_MAGENTO_PRODUCTS);
-		}
-
-		for (SyncInfoModel product : changingStockMagentoProductsNewTp) {
-			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.CHANGING_STOCK_MAGENTO_PRODUCTS_NEW_TP);
-		}
+//		for (SyncInfoModel product : changingStockMagentoProducts) {
+//			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.CHANGING_STOCK_MAGENTO_PRODUCTS);
+//		}
+//
+//		for (SyncInfoModel product : changingStockMagentoProductsNewTp) {
+//			MongoWriter.saveStockInfoModel(product, getClass().getSimpleName() + SoapKeys.CHANGING_STOCK_MAGENTO_PRODUCTS_NEW_TP);
+//		}
 		for (String product : boughtProductsQuantities) {
 			MongoWriter.saveStringValue(product, getClass().getSimpleName() + SoapKeys.BOUGHT_PRODUCTS_QUANTITIES);
+			System.out.println("product qty "+product);
 		}
+		
 
 		for (String product : boughtProductsQuantitiesNewTp) {
 			MongoWriter.saveStringValue(product, getClass().getSimpleName() + SoapKeys.BOUGHT_PRODUCTS_QUANTITIES_NEW_TP);

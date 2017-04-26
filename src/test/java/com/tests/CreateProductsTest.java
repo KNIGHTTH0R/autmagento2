@@ -133,7 +133,7 @@ public class CreateProductsTest extends BaseTest {
 		MagentoProductCalls.createApiProduct(genProduct4);
 		productsList.add(genProduct4);
 		
-		genProduct5 = MagentoProductCalls.createProductModel();
+	/*	genProduct5 = MagentoProductCalls.createProductModel();
 		genProduct5.setIp("60");
 		genProduct5.setPrice("34.90");
 		MagentoProductCalls.createApiProduct(genProduct5);
@@ -295,7 +295,7 @@ public class CreateProductsTest extends BaseTest {
 		
 		
 		System.out.println("size " + productsList.size());
-		System.out.println(productsList.get(0));
+		System.out.println(productsList.get(0));*/
 		
 	}
 

@@ -75,11 +75,6 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		orderModel = MongoReader.getOrderModel("US23001PlaceTermPurchaseOrderTest").get(0);
-//		OrderStatusModel orderStatusModel = NavQueries.getProductSyncronizedStatus(orderModel.getOrderId().toUpperCase());
-//		String[] parts = orderStatusModel.getSyncDate().split(Pattern.quote("."));
-//		String syncDate = parts[0];
-
-		
 
 		initialChangingMagentoProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.MAGENTO_INITIAL_CHANGING_STOCK);
 		initialChangingNavProducts = MongoReader.grabStockInfoModel("US23001GetMagAndNavStockBerforeTpOrderTest" + SoapKeys.NAVISION_INITIAL_CHANGING_STOCK);
@@ -175,8 +170,8 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 	@Test
 	public void us23001VerifyStockSyncAfterTpOrderImportTest() throws SQLException, ParseException {
 
-	///	stockProductsValidations.validateSyncronizedStatus(isSyncronyzed);
-	//	importedOrderValidation.validateUpdatedNavDate(shopOrder.getUpdatedNav(),DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"),"yyyy-MM-dd");
+		stockProductsValidations.validateSyncronizedStatus(isSyncronyzed);
+		importedOrderValidation.validateUpdatedNavDate(shopOrder.getUpdatedNav(),DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"),"yyyy-MM-dd");
 
 		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);
 		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");

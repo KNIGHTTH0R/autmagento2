@@ -4,6 +4,7 @@ public class SyncInfoModel {
 
 	private String sku;
 	private String quantity;
+	private String simpleQty;
 	private String isInStock;
 	private String minumimQuantity;
 	private String isDiscontinued;
@@ -20,10 +21,24 @@ public class SyncInfoModel {
 		isDiscontinued = "null";
 		totalQuantity = "null";
 		maxPercentToBorrow = "null";
-		//earliestAvailability = "1753-01-01";
+		// earliestAvailability = "1753-01-01";
 		pendingQuantity = "null";
-
+		simpleQty="null";
 	}
+	
+	
+
+	public String getSimpleQty() {
+		return simpleQty;
+	}
+
+
+
+	public void setSimpleQty(String simpleQty) {
+		this.simpleQty = simpleQty;
+	}
+
+
 
 	public String getSku() {
 		return sku;
@@ -97,12 +112,16 @@ public class SyncInfoModel {
 		this.isInStock = isInStock;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "SyncInfoModel [sku=" + sku + ", quantity=" + quantity + ", isInStock=" + isInStock
-				+ ", minumimQuantity=" + minumimQuantity + ", isDiscontinued=" + isDiscontinued + ", totalQuantity="
-				+ totalQuantity + ", maxPercentToBorrow=" + maxPercentToBorrow + ", earliestAvailability="
-				+ earliestAvailability + ", pendingQuantity=" + pendingQuantity + "]";
+		return "SyncInfoModel [sku=" + sku + ", quantity=" + quantity + ", simpleQty=" + simpleQty + ", isInStock="
+				+ isInStock + ", minumimQuantity=" + minumimQuantity + ", isDiscontinued=" + isDiscontinued
+				+ ", totalQuantity=" + totalQuantity + ", maxPercentToBorrow=" + maxPercentToBorrow
+				+ ", earliestAvailability=" + earliestAvailability + ", pendingQuantity=" + pendingQuantity + "]";
 	}
+
+	
 
 }
