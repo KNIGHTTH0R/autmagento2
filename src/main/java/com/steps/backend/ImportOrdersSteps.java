@@ -146,7 +146,7 @@ public class ImportOrdersSteps {
 
 				System.out.println("open order " + order.getIncrementId());
 				
-				importOrders.validateUpdatedNavDate(order.getUpdatedNav(),"2017-04-11","yyyy-MM-dd");
+				importOrders.validateUpdatedNavDate(order.getUpdatedNav(),"2017-04-19","yyyy-MM-dd");
 
 				importOrders.validateOrderIncrementId(order.getIncrementId(), compare.getIncrementId());
 				importOrders.validateOrderItemsTest(order.getItemInfo(), compare.getLines());
@@ -208,13 +208,6 @@ public class ImportOrdersSteps {
 				importOrders.validateIsPom(order.getIsPom(), compare.getShopIsPom());
 				importOrders.validatePartyId(order.getStylePartyId(), compare.getPartyId());
 
-				importOrders.validateTotalIp(order.getTotalIp(), compare.getTotalIp());
-
-				// should be clarified before, because here we have different
-				// value
-				  
-				 
-				
 				importOrders.validateKoboSingleArticle(order.getKoboSingleArticle(), compare.getKoboSingleArticle());
 				importOrders.validateVatNumber(order.getVatNumber(), compare.getVatNumber());
 				importOrders.validateSmallBussinessMan(order.getSmallBusinessMan(), compare.getSmallBusinessMan());

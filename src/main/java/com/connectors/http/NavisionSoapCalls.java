@@ -111,7 +111,7 @@ public class NavisionSoapCalls {
 				String billingAddress = "";
 				String shippingAddress1 = "";
 				String billingAddress1 = "";
-
+				int count=1;
 				NodeList childNodes = orderList.item(i).getChildNodes();
 				for (int j = 0; j < childNodes.getLength(); j++) {
 
@@ -243,6 +243,7 @@ public class NavisionSoapCalls {
 //						shippingAddress1 = childNodes.item(j).getTextContent();
 //						model.setShipToAddress(shippingAddress.replaceAll("\\s+", "").concat(" "+shippingAddress1.replaceAll("\\s+", "")));
 //					}
+
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_Name_2")) {
 						shippingAddress1 = childNodes.item(j).getTextContent();
 						model.setShipToAddress(shippingAddress.replaceAll("\\s+", "").concat(" "+shippingAddress1.replaceAll("\\s+", "")));
@@ -385,6 +386,9 @@ public class NavisionSoapCalls {
 
 							BigDecimal lineAmount = calculateGrandTotal(lastLine.getUnitPrice(), lastLine.getQty(),
 									lastLine.getLineDiscountAmount());
+							
+							System.out.println("counter "+ count++);
+							System.out.println("lineAmount "+lineAmount);
 							grandTotal = grandTotal.add(lineAmount);
 
 							if (lastLine.getNo() == null) {
@@ -499,12 +503,19 @@ public class NavisionSoapCalls {
 
 	private static BigDecimal calculateGrandTotal(String unitPrice, String qty, String lineDiscountAmount) {
 
+		
 		BigDecimal grandT = BigDecimal.valueOf(0);
-		BigDecimal unitPrice1 = BigDecimal.valueOf(Double.parseDouble(unitPrice));
+		BigDecimal unitPrice1 = BigDecimal.valueOf(Double.parseDouble(unitPrice)).setScale(2, BigDecimal.ROUND_HALF_UP);
 		BigDecimal qty1 = BigDecimal.valueOf(Double.parseDouble(qty));
 		BigDecimal lineDiscountAmount1 = BigDecimal.valueOf(Double.parseDouble(lineDiscountAmount));
 
+		
+		System.out.println("unitPrice1 "+unitPrice1);
+		System.out.println("qty1 "+qty1);
+		System.out.println("lineDiscountAmount1 "+lineDiscountAmount1);
 		grandT = unitPrice1.multiply(qty1).subtract(lineDiscountAmount1);
+		
+		
 		return grandT;
 
 	}
@@ -515,7 +526,7 @@ public class NavisionSoapCalls {
 		// NavisionSoapCalls.getOrdersList("10023578400..10023578700");
 		// 10021960100
 		System.out.println("test");
-		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("210117..210117");
+		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("220570..220570");
 
 		for (NavOrderModel order : ordersList) {
 			System.out.println("ceva ");

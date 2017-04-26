@@ -12,6 +12,9 @@ import com.tools.constants.Separators;
 import com.tools.data.IpOverViewSummaryModel;
 
 public class FormatterUtils {
+	
+	
+	
 
 	/**
 	 * This is a helper method to aproximate the (local time RO) of a form
@@ -181,6 +184,11 @@ public class FormatterUtils {
 	public static BigDecimal parseValueToBigDecimal(String value) {
 		return BigDecimal.valueOf(Double.parseDouble(parseValue(value, 0)));
 	}
+	
+	public static double parseValueToDouble(String value) {
+		return  Double.parseDouble(value);
+	}
+	
 
 	public static String cleanString(String unitPrice) {
 		String result = unitPrice;
@@ -240,6 +248,13 @@ public class FormatterUtils {
 		return elems;
 	}
 
+	public static double roundDouble(double value) {
+		double roudValue = Math.round(value * 100.0) / 100.0;
+		return roudValue;
+	}
+
+	
+	
 	// public static void main(String[] args) {
 	// System.out.println(FormatterUtils.getIntegerNumberFromString("qa-int0000183500"));
 	// System.out.println(FormatterUtils.getNotDigitsFromString("qa-int0000183500"));

@@ -41,12 +41,12 @@ public class OrderInfoMagCalls {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+  
 		} catch (SOAPException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 
 		return order;
 	}
@@ -244,6 +244,7 @@ public class OrderInfoMagCalls {
 				       .add(BigDecimal.valueOf(Double.parseDouble(base_Disc)));
 				    }
 				
+
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("jewelry_credits_used")) {
 					model.setJewelryCreditsUsed(resultNodes.item(r).getTextContent());
 					jewelryCreditsUsed = jewelryCreditsUsed
@@ -424,6 +425,7 @@ public class OrderInfoMagCalls {
 							// stupid fix for stupid issue (some value are
 							// 0.00-> wich is goode, some are 0 -> can't be
 							// parsed so we concat .00 to 0 value
+
 								if (childNodes.item(j).getTextContent().contentEquals("0")) {
 										basePriceIncTax = basePriceIncTax.concat(".00");
 									}
@@ -431,6 +433,7 @@ public class OrderInfoMagCalls {
 								originalPrice = BigDecimal.valueOf(
 								Double.parseDouble(FormatterUtils.parseValueToTwoDecimals(basePriceIncTax)));
 							}
+
 
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("qty_ordered")) {
 							// /model.setQtyOrdered(childNodes.item(j).getTextContent());
@@ -440,6 +443,7 @@ public class OrderInfoMagCalls {
 						if (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_percent")) {
 							taxPercent = BigDecimal.valueOf(Double.parseDouble(childNodes.item(j).getTextContent()));
 						}
+						
 					}
 					// do not add configurable parent on list
 					if (isConfigurableParent == false) {
@@ -479,7 +483,7 @@ public class OrderInfoMagCalls {
 		BigDecimal calculateGrandTotal = subtotal.add(shippingAmount).subtract(baseDiscountAmount)
 				.subtract(jewelryCreditsUsed).subtract(marketingCreditsUsed).subtract(fiftyDiscountsAmount);
 
-		// System.out.println("calculateGrandTotal " + calculateGrandTotal);
+		 System.out.println("calculateGrandTotal " + calculateGrandTotal);
 		BigDecimal calculatedTaxAmount = calcultatedTaxAmount(taxPercent, calculateGrandTotal);
 
 		// System.out.println("calculatedTaxAmount " + calculatedTaxAmount);
@@ -622,7 +626,9 @@ public class OrderInfoMagCalls {
 	public static void main(String[] args) throws SOAPException, IOException {
 
 		String sessID = HttpSoapConnector.performLogin();
+
 		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10022765800");
+
 
 		System.out.println("order ID : " + dbmodel.getOrderId());
 

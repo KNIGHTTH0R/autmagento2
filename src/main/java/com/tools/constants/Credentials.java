@@ -1,5 +1,7 @@
 package com.tools.constants;
 
+import com.tools.persistance.MongoReader;
+
 public class Credentials {
 
 	// SOAP user authentication
@@ -16,13 +18,15 @@ public class Credentials {
 //	public static final String BE_PASS = "Camelia.88";
 
 	//CLOUD: staging-aut
-	public static final String BE_USER = "oana.axente";
-	public static final String BE_PASS = "Camelia.88";
+//	public static final String BE_USER = "oana.axente";
+//	public static final String BE_PASS = "Camelia.88";
 	
 	//aut-pippajean.evozon.com
 //	public static final String BE_USER = "admin";
 //	public static final String BE_PASS = "admin123";
 	
+	public static final String BE_USER=MongoReader.geteEnvironmentConstantsItem("ADMIN_USER");
+	public static final String BE_PASS=MongoReader.geteEnvironmentConstantsItem("ADMIN_PASSWORD");
 
 	public static final String BE_STYLIST = "simona.popa@evozon.com";
 
