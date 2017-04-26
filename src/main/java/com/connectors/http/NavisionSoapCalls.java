@@ -243,7 +243,7 @@ public class NavisionSoapCalls {
 //						shippingAddress1 = childNodes.item(j).getTextContent();
 //						model.setShipToAddress(shippingAddress.replaceAll("\\s+", "").concat(" "+shippingAddress1.replaceAll("\\s+", "")));
 //					}
-					
+
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("Ship_to_Name_2")) {
 						shippingAddress1 = childNodes.item(j).getTextContent();
 						model.setShipToAddress(shippingAddress.replaceAll("\\s+", "").concat(" "+shippingAddress1.replaceAll("\\s+", "")));

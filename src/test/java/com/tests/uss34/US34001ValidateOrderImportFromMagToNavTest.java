@@ -43,6 +43,7 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 		navListOrders = NavisionSoapCalls.getOrdersList("220140..221140");
 
 
+
 		}
 	
 	

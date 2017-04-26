@@ -24,6 +24,7 @@ public class US8003DeactivateBuy3Get1Test extends BaseTest {
 	@Steps
 	public BackEndSteps backEndSteps;
 
+
 	@Test
 	public void us8003DeactivateBuy3Get1Test() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);

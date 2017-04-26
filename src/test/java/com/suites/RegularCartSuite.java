@@ -7,8 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.tests.CreateProductsTest;
 
 @SuiteClasses({
-//	CreateProductsTest.class,
-//	US8001Suite.class,
+	CreateProductsTest.class,
+	US8001Suite.class,
 	US8002Suite.class,
 	US8003Suite.class,
 	US8004Suite.class,

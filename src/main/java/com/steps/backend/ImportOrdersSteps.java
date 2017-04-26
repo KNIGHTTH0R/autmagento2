@@ -358,7 +358,7 @@ public class ImportOrdersSteps {
 				"percent of orders with problems: " + percentOfOrdersWithProblems(shopListSize) + "%");
 		errorList.add(percentOfOrdersWithPr);
 
-		try (Writer writer = new FileWriter("C:/Users/emilianmelian/Desktop/NavReport/orderImport.csv")) {
+		try (Writer writer = new FileWriter("C:/Users/ioanaurcan/Desktop/NavReport/orderImport.csv")) {
 			writer.flush();
 			writer.append("Order increment id").append(',').append("Error Message").append(',')
 					.append("Grand total differences").append(eol);
@@ -442,7 +442,7 @@ public class ImportOrdersSteps {
 				"percent of orders with problems: " + percentOfOrdersWithProblems(shopListSize) + "%");
 		errorList.add(percentOfOrdersWithPr);
 
-		try (Writer writer = new FileWriter("C:/Users/emilianmelian/Desktop/NavReport/massOrderImport.csv")) {
+		try (Writer writer = new FileWriter("C:/Users/ioanaurcan/Desktop/NavReport/massOrderImport.csv")) {
 			writer.flush();
 			writer.append("Order increment id").append(',').append("Error Message").append(',')
 					.append("Grand total differences").append(eol);
