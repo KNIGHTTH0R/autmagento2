@@ -118,12 +118,15 @@ public class US30001VerifyIpOverViewReportForOpenedMonthAndClosedLastMonthTest e
 	   //february=Opened,january=closed
 	   //expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-28 23:59:00");
 	   //march=Opened,february=closed
-		 expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 23:59:00","2017-03-10 17:00:00","2017-04-10 17:00:00");
+		// expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 23:59:00","2017-03-10 17:00:00","2017-04-10 17:00:00");
+
+		 //for cloud - april
+		 expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("6013","2017-04-05 00:00:00","2017-03-06 23:59:00","2017-04-27 17:00:00","2017-05-10 17:00:00");
 
 		//pentru martie
 	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
-//		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
-//		expectedReturns = expectedIpOverviewModel.getReturns();
+		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
+		expectedReturns = expectedIpOverviewModel.getReturns();
 
 	}
 
@@ -149,7 +152,9 @@ public class US30001VerifyIpOverViewReportForOpenedMonthAndClosedLastMonthTest e
 //		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-01");
 //		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-02");
 		//pentru martie
-		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-03");
+		//headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-04");
+		//pentru-cloud
+		headerSteps.navigate("http://staging-aut.pippajean.com/de/ioa/stylereports/order/ipsreport/?month=2017-04");
 
 		
 		//validate Ip overview report -sunt OK
@@ -162,27 +167,27 @@ public class US30001VerifyIpOverViewReportForOpenedMonthAndClosedLastMonthTest e
 	
 		
 		//validate Open ips summary - not current month
-		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelNotCurrentMonth();
-		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsNotCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
-		
+//		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelNotCurrentMonth();
+//		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsNotCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
+//		
 		//validate Open ips summary - current month
-//		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelCurrentMonth();
-//		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
+		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelCurrentMonth();
+		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
 		
 
 		//validate payed orders list -1299 si 1281
-//		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
-//		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
-//		System.out.println("expected"+expectedOrdersList.size());
-//		System.out.println("grabbed"+grabbedPayedOrdersModel.size());
-//	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
-//		
-//		
-//        //validate returns orders - 34 si 41
-//		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
-//		ipReportValidationWorkflow.verifyReturnedOrdersList(expectedReturns, grabbedReturnsListModel);
-//		System.out.println("expected returns"+expectedReturns.size());
-//		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
+		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
+		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
+		System.out.println("expected"+expectedOrdersList.size());
+		System.out.println("grabbed"+grabbedPayedOrdersModel.size());
+	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
+		
+		
+        //validate returns orders - 34 si 41
+		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
+		ipReportValidationWorkflow.verifyReturnedOrdersList(expectedReturns, grabbedReturnsListModel);
+		System.out.println("expected returns"+expectedReturns.size());
+		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
 
         
 		customVerification.printErrors();

@@ -67,7 +67,7 @@ public class EnvironmentConstants {
 //		
 //	public static final String SOAP_USERNAME="navision";
 //	public static final String SOAP_PASSWORD=";Bn8NzlGhi[z";
-//	
+
 
 	
 	
