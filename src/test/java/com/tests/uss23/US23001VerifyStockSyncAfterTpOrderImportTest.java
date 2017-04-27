@@ -177,7 +177,7 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");
 
 		stockSyncValidations.setValidateProductsModels(initialChangingNavProductsNewTp, changingStockNavProductNewTp);
-		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS");
+		stockSyncValidations.validateProducts("VALIDATE NAVISION STOCK IS DECREASED - CHANGING STOCK NAVISION PRODUCTS NEW TP");
 		
 		
 		stockSyncValidations.setValidateProductsModels(changingStockNavProduct, changingStockMagentoProducts);
@@ -185,7 +185,7 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 		
 		
 		stockSyncValidations.setValidateProductsModels(changingStockNavProductNewTp, changingStockMagentoProductsNewTp);
-		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CHANGING STOCK PRODUCTS");
+		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS SYNCRONIZED WITH MAGENTO STOCK - CHANGING STOCK PRODUCTS NEW TP");
 
 		customVerifications.printErrors();
 	}

@@ -168,7 +168,8 @@ public class StockCalculations {
 	}
 
 	private static String calculateMinimumQty(SyncInfoModel product, String transferQty) {
-
+		//need navision formula
+		
 		double transferValue = Double.parseDouble(transferQty) * 0.5;
 		System.out.println("transferValue"+transferValue);
 		System.out.println("product.getMinumimQuantity()"+ product.getMinumimQuantity());

@@ -12,6 +12,8 @@ public class SyncInfoModel {
 	private String maxPercentToBorrow;
 	private String earliestAvailability;
 	private String pendingQuantity;
+	private String safetyQuantity;
+	private String qtyOnOrder;
 
 	public SyncInfoModel() {
 		sku = "null";
@@ -24,6 +26,8 @@ public class SyncInfoModel {
 		// earliestAvailability = "1753-01-01";
 		pendingQuantity = "null";
 		simpleQty="null";
+		safetyQuantity="null";
+		qtyOnOrder="null";
 	}
 	
 	
@@ -114,13 +118,42 @@ public class SyncInfoModel {
 
 
 
+	public String getSafetyQuantity() {
+		return safetyQuantity;
+	}
+
+
+
+	public void setSafetyQuantity(String safetyQuantity) {
+		this.safetyQuantity = safetyQuantity;
+	}
+
+
+
+	public String getQtyOnOrder() {
+		return qtyOnOrder;
+	}
+
+
+
+	public void setQtyOnOrder(String qtyOnOrder) {
+		this.qtyOnOrder = qtyOnOrder;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "SyncInfoModel [sku=" + sku + ", quantity=" + quantity + ", simpleQty=" + simpleQty + ", isInStock="
 				+ isInStock + ", minumimQuantity=" + minumimQuantity + ", isDiscontinued=" + isDiscontinued
 				+ ", totalQuantity=" + totalQuantity + ", maxPercentToBorrow=" + maxPercentToBorrow
-				+ ", earliestAvailability=" + earliestAvailability + ", pendingQuantity=" + pendingQuantity + "]";
+				+ ", earliestAvailability=" + earliestAvailability + ", pendingQuantity=" + pendingQuantity
+				+ ", safetyQuantity=" + safetyQuantity + ", qtyOnOrder=" + qtyOnOrder + "]";
 	}
+
+
+
+	
 
 	
 

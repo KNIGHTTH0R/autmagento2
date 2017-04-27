@@ -175,6 +175,93 @@ public class MagentoProductCalls {
 		return result;
 	}
 
+	public static ProductDetailedModel createProductModelBeta() {
+		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
+		String sku = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
+		ProductDetailedModel product = new ProductDetailedModel();
+
+		product.setType("simple");
+		product.setSet("4");
+		product.setName(name);
+		product.setDescription("description");
+		product.setShortDescription("desc");
+		product.setUrlPath(sku);
+		product.setWeight("2");
+		product.setSku(sku);
+		product.setPrice(FieldGenerators.generateRandomString(2, Mode.NUMERIC));
+		product.setStatus("1");
+		product.setUrlKey(sku);
+		product.setVisibility("4");
+		product.setHasOptions("");
+		product.setGiftMessageAvailable("");
+		product.setSpecialPrice("");
+		product.setSpecialFromDate("");
+		product.setSpecialToDate("");
+		product.setTaxClassId("2");
+		product.setMetaTitle("");
+		product.setMetaKeyword("");
+		product.setMetaDescription("");
+		product.setCustomDesign("");
+		product.setCustomLayoutUpdate("");
+		product.setOptionsContainer("");
+		product.setStore("0");
+		product.setIp("50");
+
+		product.setNewsFromDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 3600));
+		product.setNewsToDate(FormatterUtils.getCustomDate("yyyy.MM.dd", 86400));
+
+		
+
+		List<String> categoriesIds = new ArrayList<String>();
+		/*
+		 * categoriesIds.add("43"); categoriesIds.add("5");
+		 * categoriesIds.add("5"); categoriesIds.add("5");
+		 * categoriesIds.add("5");
+		 */
+
+		categoriesIds.add("5");
+		categoriesIds.add("6");
+		categoriesIds.add("8");
+		categoriesIds.add("7");
+		categoriesIds.add("43");
+		product.setCategoryIdsArray(categoriesIds);
+
+		List<String> cartIds = new ArrayList<String>();
+		cartIds.add("4");
+		cartIds.add("3");
+		product.setAvailableCartsArray(cartIds);
+
+		StockDataModel stockModel = new StockDataModel();
+		stockModel.setQty("1000");
+		stockModel.setIsInStock("1");
+		stockModel.setManageStock("1");
+		stockModel.setUseConfigManageStock("1");
+		stockModel.setMinQty("");
+		stockModel.setUseConfigMinQty("1");
+		stockModel.setMinSaleQty("");
+		stockModel.setUseConfigMinSaleQty("1");
+		stockModel.setMaxSaleQty("");
+		stockModel.setUseConfigMaxSaleQty("");
+		stockModel.setIsQtyDecimal("0");
+		stockModel.setBackorders("");
+		stockModel.setUseConfigBackorders("1");
+		stockModel.setNotifyStockQty("");
+		stockModel.setUseConfigNotifyStockQty("1");
+		stockModel.setIsDiscontinued("0");
+		stockModel.setEarliestAvailability("");
+		stockModel.setAllowedTermPurchase("0");
+		stockModel.setMaximumPercentageToBorrow("");
+		stockModel.setUseConfigMaximumPercentageToBorrow("80");
+
+		product.setStockData(stockModel);
+
+		product.setJewerlyBonusValue("50.00");
+		product.setJewelryBonusCart("3,4");
+
+		return product;
+	}
+	
+	
 	public static ProductDetailedModel createProductModel() {
 		String name = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
 		String sku = FieldGenerators.generateRandomString(9, Mode.ALPHA_CAPS);
