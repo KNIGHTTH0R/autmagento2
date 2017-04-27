@@ -102,6 +102,7 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 		
 		genProduct2.setName("QPIWDODRU");
 		genProduct2.setSku("DFCDVEUBK");
+		genProduct2.setUrlKey("DFCDVEUBK");
 		genProduct2.setIp("42");
 		genProduct2.setPrice("49.90");
 
@@ -114,8 +115,8 @@ public class US4002ShopForMyselfWithBuy3GetOneTest extends BaseTest {
 		 genProduct3.setPrice("5.00");
 		 MagentoProductCalls.createApiProduct(genProduct3);
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct3 = createdProductsList.get(5);
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct3 = createdProductsList.get(5);
 		
 		
 
