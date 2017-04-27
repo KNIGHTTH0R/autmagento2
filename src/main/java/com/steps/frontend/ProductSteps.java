@@ -57,6 +57,23 @@ public class ProductSteps extends AbstractSteps {
 		// waitABit(TimeConstants.TIME_CONSTANT);
 		return result;
 	}
+	
+	public BasicProductModel setBasicProductAddToCartBeta(String qty, String size, String askingPrice, String finalPrice,
+			String ip, String discountClass) {
+		BasicProductModel result = new BasicProductModel();
+		
+		//setQuantity(qty);
+		//result = productDetailsPage().grabBasicProductData();
+		result.setDiscountClass(discountClass);
+		result.setProductsPrice(askingPrice);
+		result.setFinalPrice(finalPrice);
+		result.setPriceIP(ip);
+
+	//	addToCart();
+		// waitABit(TimeConstants.TIME_CONSTANT);
+		return result;
+	}
+	
 
 	@StepGroup
 	public BasicProductModel setBasicProductAddToWhislist(String qty, String size, String askingPrice,

@@ -5,14 +5,24 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.connectors.http.MagentoProductCalls;
 import com.tools.constants.ConfigConstants;
 import com.tools.data.frontend.BasicProductModel;
+import com.tools.data.soap.ProductDetailedModel;
+import com.workflows.frontend.AddProductsWorkflow;
+
+import net.thucydides.core.annotations.Steps;
 
 /**
  * @author mihai
  *
  */
+
+
 public class CartDiscountsCalculation {
+	
+	@Steps
+	public static AddProductsWorkflow addProductsWorkflow;
 
 	public static String calculateAskingPrice(String unitPrice, String quantity) {
 
@@ -314,6 +324,9 @@ public class CartDiscountsCalculation {
 		BigDecimal result = BigDecimal.ZERO;
 		BigDecimal diff = BigDecimal.ZERO;
 
+		System.out.println("jBjBjBjB"+jB);
+		System.out.println(sum25Section.compareTo(jB) > 0);
+		System.out.println("sum25Section "+sum25Section);
 		if (sum25Section.compareTo(jB) > 0) {
 
 			result = result.add(askingPrice);
@@ -323,7 +336,7 @@ public class CartDiscountsCalculation {
 			result = result.multiply(jB);
 			result = askingPrice.subtract(result);
 			BigDecimal temp = result;
-
+			
 			result = result.multiply(BigDecimal.valueOf(25));
 			// the 25% disc is calculated with 5 decimals precision (we don't
 			// want the 4th decimal rounded)
@@ -384,4 +397,70 @@ public class CartDiscountsCalculation {
 		return String.valueOf(result.setScale(2, BigDecimal.ROUND_HALF_UP));
 	}
 
+	
+	
+	public static BasicProductModel addInCart(ProductDetailedModel model, String qty, String productProperty,
+			String discountclass) {
+		
+		String askingPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		String finalPrice = CartDiscountsCalculation.calculateFinalPrice(askingPrice, discountclass,
+				CartCalculator.delta);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
+		if (discountclass.equals(ConfigConstants.DISCOUNT_50) || discountclass.equals(ConfigConstants.DISCOUNT_0)) {
+			ipPoints = "0";
+		}
+
+		BasicProductModel result = new BasicProductModel();
+		
+		System.out.println(discountclass);
+		System.out.println(askingPrice);
+		System.out.println(finalPrice);
+		System.out.println(ipPoints);
+
+		result.setDiscountClass(discountclass);
+		result.setProductsPrice(askingPrice);
+		result.setFinalPrice(finalPrice);
+		result.setPriceIP(ipPoints);	
+		
+		return result;
+	}
+	
+	private static ProductDetailedModel genProduct1 = new ProductDetailedModel();
+	private static ProductDetailedModel genProduct2 = new ProductDetailedModel();
+	private static List<BasicProductModel> productsList =new ArrayList<BasicProductModel>();
+	private static BasicProductModel productData;
+	private static BasicProductModel productData2;
+	public static List<BasicProductModel> productsList25Beta = new ArrayList<BasicProductModel>();
+	
+	
+	public static void main(String[] args) {
+		genProduct1 = MagentoProductCalls.createProductModelBeta();
+		genProduct1.setIp("84");
+		genProduct1.setPrice("49.90");
+		
+		genProduct2 = MagentoProductCalls.createProductModelBeta();
+		genProduct2.setIp("25");
+		genProduct2.setPrice("89.00");
+		
+
+		productData = addInCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
+		productData2=addInCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
+		
+		productsList25Beta.add(productData);
+		productsList25Beta.add(productData2);
+		
+		System.out.println(productsList25Beta.get(0).getFinalPrice());
+//		
+//		
+
+//		
+		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList25Beta, ConfigConstants.DISCOUNT_25);
+		System.out.println("sumaaaa "+sum25);
+	
+		List<BasicProductModel> cartProductsBeta=calculateProductsfor25Discount(productsList25Beta,"120");
+		
+		System.out.println(""+cartProductsBeta.get(0).getFinalPrice());
+		
+		
+	}
 }
