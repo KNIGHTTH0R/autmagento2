@@ -8,7 +8,7 @@ import com.tests.CreateProductsTest;
 
 
 @SuiteClasses({
-	CreateProductsTest.class,
+	//CreateProductsTest.class,
 	US3001Suite.class,
 	US3003Suite.class,
 	US3004Suite.class,
