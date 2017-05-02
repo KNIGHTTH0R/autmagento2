@@ -94,7 +94,7 @@ public class US3001BuyProductsForTheFirstTimeTest extends BaseTest {
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
-
+//
 //		 genProduct1 = MagentoProductCalls.createProductModel();
 //		 genProduct1.setIp("84");
 //		 genProduct1.setPrice("49.90");

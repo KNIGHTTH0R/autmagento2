@@ -1,9 +1,13 @@
 package com.steps.frontend;
 
+import net.serenitybdd.core.annotations.findby.By;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Title;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import com.tools.constants.ContextConstants;
 import com.tools.constants.Separators;
 import com.tools.constants.TimeConstants;
 import com.tools.constants.UrlConstants;
@@ -86,7 +90,7 @@ public class HeaderSteps extends AbstractSteps {
 
 	public void redirectToProfileHistory() {
 		navigate(MongoReader.getBaseURL() + UrlConstants.PROFILE_HISTORY_URL);
-		
+
 	}
 	
 	@Step

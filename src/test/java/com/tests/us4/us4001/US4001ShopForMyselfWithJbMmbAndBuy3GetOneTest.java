@@ -33,6 +33,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.smf.CartCalculator;
 import com.tools.constants.ConfigConstants;
+import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.BasicProductModel;
@@ -100,9 +101,9 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		genProduct1.setPrice("100");
 		MagentoProductCalls.createApiProduct(genProduct1);
 //
-		 genProduct2.setName("IHGQQRXGD");
-		 genProduct2.setSku("NAZYUXMEA");
-		 genProduct2.setUrlKey("NAZYUXMEA");
+		 genProduct2.setName(EnvironmentConstants.PRODUCT_NAME);
+		 genProduct2.setSku(EnvironmentConstants.PRODUCT_SKU);
+		 genProduct2.setUrlKey(EnvironmentConstants.PRODUCT_SKU);
 		 
 		 genProduct2.setIp("84");
 		 genProduct2.setPrice("49.90");

@@ -150,6 +150,7 @@ public class StockCalculations {
 
 	public static List<SyncInfoModel> calculateStockAfterTransferQuantity(List<SyncInfoModel> initialList,
 			List<String> boughtProductsQuantities) {
+
 		List<SyncInfoModel> finalList = new ArrayList<SyncInfoModel>();
 		int counter=0;
 		for (SyncInfoModel product : initialList) {
@@ -251,7 +252,7 @@ public class StockCalculations {
 		BigDecimal stock = BigDecimal.valueOf(Double.parseDouble(currentStock));
 		// stock = stock.add(BigDecimal.valueOf(60.00));
 
-		stock = stock.add(BigDecimal.valueOf(2.00));
+		stock = stock.add(BigDecimal.valueOf(3.00));
 
 		return String.valueOf(stock.intValue());
 	}

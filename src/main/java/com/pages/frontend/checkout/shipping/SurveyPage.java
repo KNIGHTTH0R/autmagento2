@@ -135,11 +135,11 @@ public class SurveyPage extends AbstractPage {
 			productNow.setPriceIP("");
 
 			resultList.add(productNow);
-
+		//	waitABit(2000);
 		}
 
 		DataGrabber.shippingProducts = resultList;
-
+		System.out.println("grabProductsList in for ");
 		return resultList;
 	}
 

@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
 
 import net.serenitybdd.core.annotations.findby.By;
@@ -28,7 +30,10 @@ public class ProfileNavPage extends AbstractPage {
 				break;
 			}
 		}
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		Assert.assertTrue("The menu was not found", found);
+		
+		
 	}
 	
 	

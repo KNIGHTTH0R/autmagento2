@@ -1,5 +1,7 @@
 package com.tools.constants;
 
+import com.tools.persistance.MongoReader;
+
 public class ConfigConstants {
 
 	// statuses
@@ -150,6 +152,7 @@ public class ConfigConstants {
 	public static final String FRIDAY ="Freitag";
 	public static final String SATURDAY ="Samstag";
 	public static final String SUNDAY ="Sonntag";
+	
 
 	
 	

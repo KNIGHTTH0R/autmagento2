@@ -75,14 +75,20 @@ public class US23001TranferQuantityFromQSin1000Test extends BaseTest{
 //		}
 		
 		///////////////transferul
-//		navisionSteps.loginToTransferQuantityPage();
-//	
-//		for (SyncInfoModel product : changingStockMagentoProducts) {
-//			String[] skuParts = product.getSku().split("-");
-//			navisionSteps.transferQtyFromQSin1000(skuParts[0],skuParts.length == 1 ? "" : skuParts[1],boughtProductsQuantities.get(counter));
-//			counter++;
-//		}
+		navisionSteps.loginToTransferQuantityPage();
+	
+		for (SyncInfoModel product : changingStockMagentoProducts) {
+			String[] skuParts = product.getSku().split("-");
+			navisionSteps.transferQtyFromQSin1000(skuParts[0],skuParts.length == 1 ? "" : skuParts[1],boughtProductsQuantities.get(counter));
+			
+			counter++;
+		}
 		
+		navisionSteps.waitAfterTransfer();
+		
+		
+	
+	
 		
 	
 		expectedStockMagentoProductsAfterTransferQty1=StockCalculations.calculateStockAfterTransferQuantity(changingStockMagentoProducts,boughtProductsQuantities);	
@@ -109,6 +115,7 @@ public class US23001TranferQuantityFromQSin1000Test extends BaseTest{
 	@Test
 	public void us23001TranferQuantityFromQSin1000Test() {	
 		//validate expected after transfer with magento grabbed
+		
 		stockSyncValidations.setValidateProductsModels(expectedStockMagentoProductsAfterTransferQty1, changingStockMagentoProductsAfterTransfer);
 		stockSyncValidations.validateProducts("VALIDATE MAGENTO STOCK IS INCREASED AFTER TRANSFER QTY IN NAVISION");
 

@@ -19,13 +19,14 @@ public class ProfileSteps extends AbstractSteps {
 	 * 
 	 * @return
 	 */
+	@Step
 	public List<OrderModel> grabOrderHistory() {
 		return profileHistoryPage().grabOrderHistory();
 	}
 
 	@Step
 	public void verifyOrderId(String orderId, String compare) {
-		Assert.assertTrue("Failure: Order id is not as expected. Expected: " + compare + " Actual: " + orderId, orderId.contains(compare));
+		Assert.assertTrue("Failure: Order id is not as expected. Expected: " + compare + " Actual: " + orderId.toLowerCase(), orderId.toLowerCase().contains(compare.toLowerCase()));
 	}
 
 	@Step
@@ -41,6 +42,11 @@ public class ProfileSteps extends AbstractSteps {
 	@Step
 	public void verifySosMessage() {
 		sosPage().verifySosMessage();
+	}
+	
+	@Step
+	public void clickOnOrder(String orderId) {
+		profileHistoryPage().clickOnOrder(orderId);
 	}
 
 }

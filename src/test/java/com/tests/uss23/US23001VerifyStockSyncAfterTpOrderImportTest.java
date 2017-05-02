@@ -115,7 +115,7 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 //		initialChangingNavProductsNewTp=StockCalculations.calculateNewStock(initialChangingNavProductsNewTp, boughtProductsQuantitiesNewTp);
 		
 		
-		initialChangingNavProducts = StockCalculations.calculateNewStockAfterSync(initialChangingNavProducts, boughtProductsQuantities);
+		initialChangingNavProducts = StockCalculations.calculateNewStockAfterSyncAndTransfer(initialChangingNavProducts, boughtProductsQuantities,boughtProductsQuantities);
 		initialChangingNavProductsNewTp=StockCalculations.calculateNewStockAfterSync(initialChangingNavProductsNewTp, boughtProductsQuantitiesNewTp);
 
 		for (SyncInfoModel string : initialChangingNavProducts) {
@@ -139,6 +139,7 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 			//changingStockNavProduct.add(NavQueries.getSyncProductInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 			changingStockNavProduct.add(NavisionInventorySyncCalls.getItemInfo(skuParts[0], skuParts.length == 1 ? "" : skuParts[1]));
 		}
+		
 		
 		
 			for (SyncInfoModel string : changingStockNavProduct) {
@@ -170,7 +171,6 @@ public class US23001VerifyStockSyncAfterTpOrderImportTest extends BaseTest {
 	@Test
 	public void us23001VerifyStockSyncAfterTpOrderImportTest() throws SQLException, ParseException {
 
-		stockProductsValidations.validateSyncronizedStatus(isSyncronyzed);
 		importedOrderValidation.validateUpdatedNavDate(shopOrder.getUpdatedNav(),DateUtils.getCurrentDateTwoHoursBack("YYYY-MM-dd HH:mm:ss"),"yyyy-MM-dd");
 
 		stockSyncValidations.setValidateProductsModels(initialChangingNavProducts, changingStockNavProduct);

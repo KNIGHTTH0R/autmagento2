@@ -20,9 +20,11 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.profile.ProfileNavSteps;
 import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -46,6 +48,8 @@ public class US3001CheckOrderOnStylecoachProfileTest extends BaseTest{
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps 
 	public CustomVerification customVerifications;
+	@Steps
+	public ProfileNavSteps profileNavSteps;
 	
 	private String username, password;
 	private static OrderModel orderModel = new OrderModel();
@@ -86,14 +90,15 @@ public class US3001CheckOrderOnStylecoachProfileTest extends BaseTest{
 	public void us3001CheckOrderOnStylecoachProfileTest() {
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
-			
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}	
-		headerSteps.redirectToProfileHistory();
+		headerSteps.goToProfile();
+		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
 		String orderId = orderHistory.get(0).getOrderId();
 		String orderPrice = orderHistory.get(0).getTotalPrice();
+		System.out.println("expected "+ orderModel.getOrderId());
 		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
 		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
 		orderModel = orderHistory.get(0);

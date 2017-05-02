@@ -50,7 +50,7 @@ public class ShippingSteps extends AbstractSteps {
 	}
 
 	public List<CartProductModel> grabProductsList() {
-		waitABit(TimeConstants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_MEDIUM);
 		return surveyPage().grabProductsList();
 	}
 

@@ -153,6 +153,13 @@ public class NavisionHomeSteps extends AbstractSteps {
 		
 	}
 	
+	@Step
+	public void waitAfterTransfer(){
+		System.out.println("Sunt aici");
+		waitABit(40000);
+		System.out.println("am asteptat aici");
+	}
+	
 	}
 	
 	

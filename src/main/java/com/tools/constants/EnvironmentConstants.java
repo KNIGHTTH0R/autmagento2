@@ -23,6 +23,15 @@ public class EnvironmentConstants {
 	public static final String RUN_CREDITMEMO_IMPORT = MongoReader.geteEnvironmentConstantsItem("RUN_CREDITMEMO_IMPORT");
 	public static final String RUN_SEND_IP_REPORT = MongoReader.geteEnvironmentConstantsItem("RUN_SEND_IP_REPORT");
 	
+	//PRODUCT CONFING
+	
+	//PRODUCT CONFIG
+	public static final String PRODUCT_NAME = MongoReader.geteEnvironmentConstantsItem("PRODUCT_NAME");
+	public static final String PRODUCT_SKU =MongoReader.geteEnvironmentConstantsItem("PRODUCT_SKU");
+	
+	public static final String PRODUCT_NAME_1 = MongoReader.geteEnvironmentConstantsItem("PRODUCT_NAME_1");
+	public static final String PRODUCT_SKU_1 =MongoReader.geteEnvironmentConstantsItem("PRODUCT_SKU_1");
+	
 	//starterset
 	public static final String STARTERSET = MongoReader.geteEnvironmentConstantsItem("STARTERSET");
 	public static final String STARTERSETSPECIAL = MongoReader.geteEnvironmentConstantsItem("STARTERSETSPECIAL");

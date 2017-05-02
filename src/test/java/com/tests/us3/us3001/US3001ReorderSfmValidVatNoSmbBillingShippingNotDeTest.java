@@ -183,6 +183,7 @@ public class US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest extends BaseT
 		generalCartSteps.clearCart();
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
+		profileSteps.clickOnOrder(orderId);
 		profileSteps.clickReorderLink(orderId);
 
 		BasicProductModel productData;
