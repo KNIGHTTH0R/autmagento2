@@ -23,6 +23,10 @@ import com.tests.us7.uss70010.US70010CheckReceivedEmailsTest;
 	US7001CheckReceivedEmailsTest.class,
 	US7001bCheckReceivedEmailsTest.class,
 	US7002CheckReceivedEmailsTest.class,
+	
+	
+	US7008CheckReceivedEmailsTest.class,
+	US70010CheckReceivedEmailsTest.class,
 //	US7008CheckReceivedEmailsTest.class,
 //	US70010CheckReceivedEmailsTest.class,
 	

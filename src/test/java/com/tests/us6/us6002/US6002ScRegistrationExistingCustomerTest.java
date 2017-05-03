@@ -115,8 +115,9 @@ public class US6002ScRegistrationExistingCustomerTest extends BaseTest {
 				EnvironmentConstants.STARTERKITPRICE);
 		starterSetSteps.submitStarterSetStep();
 
-		paymentSteps.expandSepaForm();
-		paymentSteps.fillSepaForm(sepaPaymentData);
+//		paymentSteps.expandSepaForm();
+//		paymentSteps.fillSepaForm(sepaPaymentData);
+		paymentSteps.payWithBankTransfer();
 		confirmationSteps.agreeAndCheckout();
 
 		customerAndStylistRegistrationWorkflows.setValidateStylistProperties(grabBeforeLinkConfirmationStylistData,
