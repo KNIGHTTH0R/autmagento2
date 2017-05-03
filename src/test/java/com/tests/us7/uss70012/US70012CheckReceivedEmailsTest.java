@@ -31,8 +31,8 @@ public class US70012CheckReceivedEmailsTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		stylistEmail = MongoReader.grabCustomerFormModels("US70012KoboCampaignRegistrationUnderContextTest").get(0).getEmailName();
-		orderModel = MongoReader.grabOrderModels("US70012KoboCampaignRegistrationUnderContextTest").get(0);
+		stylistEmail = MongoReader.grabCustomerFormModels("US70012KoboCampaignRegistrationUnderContextTes1t").get(0).getEmailName();
+		orderModel = MongoReader.grabOrderModels("US70012PlacePomOrderTest").get(0);
 
 	}
 

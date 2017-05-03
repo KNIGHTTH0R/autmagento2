@@ -53,8 +53,8 @@ public class US6002CheckStylistActivationTest extends BaseTest {
 		} else
 			System.out.println("The database has no entries");
 
-		
-		expectedAfterLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_INITIAL_VALUE, ConfigConstants.STYLIST);
+		//final value because is paid with sepa -> payment complete automatically
+		expectedAfterLinkConfirmationStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.STYLIST);
 		expectedAfterOrderPaidStylistData =  new StylistPropertiesModel(ConfigConstants.CONFIRMED, ConfigConstants.JEWELRY_FINAL_VALUE, ConfigConstants.STYLIST);
 		expectedDateModel = new RegistrationActivationDateModel(formDateCreation,formDateCreation);
 		

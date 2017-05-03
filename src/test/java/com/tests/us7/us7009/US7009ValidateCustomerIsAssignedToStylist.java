@@ -63,11 +63,11 @@ public class US7009ValidateCustomerIsAssignedToStylist extends BaseTest {
 			}
 		}
 
-		int size = MongoReader.grabCustomerFormModels("US7009KoboRegOnNotVoucherOwnerContextTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7009KoboRegOnNotVoucherOwnerContextTest1").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7009KoboRegOnNotVoucherOwnerContextTest").get(0)
+			stylistEmail = MongoReader.grabCustomerFormModels("US7009KoboRegOnNotVoucherOwnerContextTest1").get(0)
 					.getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US7009KoboRegOnNotVoucherOwnerContextTest").get(0)
+			stylistPassword = MongoReader.grabCustomerFormModels("US7009KoboRegOnNotVoucherOwnerContextTest1").get(0)
 					.getPassword();
 			System.out.println(stylistEmail);
 		} else

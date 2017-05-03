@@ -150,8 +150,11 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 //			paymentSteps.expandKlarnaForm();
 //			paymentSteps.fillKlarnaForm();
 //		} else {
-			paymentSteps.expandCreditCardForm();
-			paymentSteps.fillCreditCardForm(creditCardData);
+		
+//			paymentSteps.expandCreditCardForm();
+//			paymentSteps.fillCreditCardForm(creditCardData);
+		
+			paymentSteps.payWithBankTransferEs();
 			confirmationSteps.grabConfirmationTotals();
 			confirmationSteps.agreeAndCheckout();
 			

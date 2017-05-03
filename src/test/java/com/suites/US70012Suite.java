@@ -10,7 +10,7 @@ import com.tests.us7.uss70012.US70012KoboCampaignRegistrationUnderContextTest;
 import com.tests.us7.uss70012.US70012ValidateCustomerIsAssignedToStylist;
 
 @SuiteClasses({
-	US70012KoboCampaignRegistrationUnderContextTest.class,
+	//US70012KoboCampaignRegistrationUnderContextTest.class,
 	US70012CheckCustomerActivation.class,
 	US70012CheckReceivedEmailsTest.class,
 	US70012ValidateCustomerIsAssignedToStylist.class,

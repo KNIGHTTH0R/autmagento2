@@ -245,6 +245,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	}
 
 	public void checkIAgree() {
+		System.out.println("i agree");
 		iAgreeCheckbox.click();
 	}
 
@@ -258,6 +259,7 @@ public class StylistRegistrationPage extends AbstractPage {
 
 	public void clickDob() {
 		dob.click();
+		System.out.println("ok");
 	}
 
 	public void closeInfoBox() {

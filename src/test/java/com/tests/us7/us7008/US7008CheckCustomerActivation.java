@@ -37,9 +37,9 @@ public class US7008CheckCustomerActivation extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest1").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").get(0)
+			stylistEmail = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest1").get(0)
 					.getEmailName();
 			System.out.println(stylistEmail);
 		} else

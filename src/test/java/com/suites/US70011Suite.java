@@ -11,7 +11,7 @@ import com.tests.us7.uss70011.US70011ValidateCustomerIsAssignedToStylist;
 
 
 @SuiteClasses({
-	US70011KoboCampaignRegistrationOnMasterTest.class,
+//	US70011KoboCampaignRegistrationOnMasterTest.class,
 	US70011CheckCustomerActivation.class,
 	US70011CheckReceivedEmailsTest.class,
 	US70011ValidateCustomerIsAssignedToStylist.class,

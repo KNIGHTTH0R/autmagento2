@@ -64,11 +64,11 @@ public class US70012ValidateCustomerIsAssignedToStylist extends BaseTest {
 			}
 		}
 
-		int size = MongoReader.grabCustomerFormModels("US70012KoboCampaignRegistrationUnderContextTest").size();
+		int size = MongoReader.grabCustomerFormModels("US70012KoboCampaignRegistrationUnderContextTest1").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US70012KoboCampaignRegistrationUnderContextTest").get(0)
+			stylistEmail = MongoReader.grabCustomerFormModels("US70012KoboCampaignRegistrationUnderContextTest1").get(0)
 					.getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US70012KoboCampaignRegistrationUnderContextTest")
+			stylistPassword = MongoReader.grabCustomerFormModels("US70012KoboCampaignRegistrationUnderContextTest1")
 					.get(0).getPassword();
 			System.out.println(stylistEmail);
 		} else

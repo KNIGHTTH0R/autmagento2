@@ -141,6 +141,13 @@ public class HeaderSteps extends AbstractSteps {
 		footerPage().clickRegistrierungLink();
 
 	}
+	
+	@StepGroup
+	public void navigateToStylecoachRegisterForm() {
+		waitABit(2000);
+		footerPage().clickRegistrierungLink();
+
+	}
 
 	@StepGroup
 	public void navigateToRegisterFormFromStylistRegistrationLinkAndStarteJetzButton() {

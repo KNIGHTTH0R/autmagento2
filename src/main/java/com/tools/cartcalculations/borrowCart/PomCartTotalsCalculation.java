@@ -36,7 +36,7 @@ public class PomCartTotalsCalculation {
 		tax = tax.divide(BigDecimal.valueOf(Double.parseDouble("100") + Double.parseDouble(taxClass)), 2, BigDecimal.ROUND_HALF_UP);
 
 		result.setTax(String.valueOf(tax.setScale(2, RoundingMode.HALF_UP)));
-	
+		System.out.println("rezultatul " + result);
 		return result;
 	}
 

@@ -1,7 +1,13 @@
-package com.tests.us7.uss70010;
+package com.tests.us7.us7009;
 
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,6 +32,8 @@ import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -48,7 +56,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US7.10 Kobo Registration On Voucher Owner Context Test ", type = "Scenarios")
 @Story(Application.KoboRegistration.US7_10.class)
 @RunWith(SerenityRunner.class)
-public class US70010PlacePomOrderTest extends BaseTest{
+public class US7009PlacePomOrderTest extends BaseTest{
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -93,28 +101,32 @@ public class US70010PlacePomOrderTest extends BaseTest{
 		genProduct1 = MagentoProductCalls.createPomProductModel();
 		genProduct1.setName("POM_" + genProduct1.getName());
 		genProduct1.setPrice("89.00");
-		genProduct1.setSpecialPrice("79.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
-		genProduct1.setPrice(genProduct1.getSpecialPrice());
-//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+        
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 //		genProduct1 = createdProductsList.get(7);
+		
 
-		int size = MongoReader.grabCustomerFormModels("US70010KoboRegOnVoucherOwnerContextTest1").size();
+		System.out.println("aici ?");
+		
+		int size = MongoReader.grabCustomerFormModels("US7009KoboRegOnNotVoucherOwnerContextTest1").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US70010KoboRegOnVoucherOwnerContextTest1").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US7009KoboRegOnNotVoucherOwnerContextTest1").get(0).getEmailName();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");
 		
 		
-		// Generate data for this test run
+		
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
+		
+		System.out.println("am ajuns aici");
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 
 	@Test
-	public void us70010PlacePomOrderTest() {
+	public void us7009PlacePomOrderTest() {
 		
 		String url = emailClientSteps.grabConfirmationLinkFromEmail(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""),
 				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
@@ -130,7 +142,7 @@ public class US70010PlacePomOrderTest extends BaseTest{
 		paymentSteps.fillCreditCardForm(creditCardData);
 		confirmationSteps.agreeAndCheckout();
 		checkoutValidationSteps.verifySuccessMessage();
-		
+
 		headerSteps.redirectToProfileHistory();
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 

@@ -66,11 +66,11 @@ public class US7008ValidateCustomerIsAssignedToStylist extends BaseTest {
 			}
 		}
 
-		int size = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").size();
+		int size = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest1").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").get(0)
+			stylistEmail = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest1").get(0)
 					.getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest").get(0)
+			stylistPassword = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest1").get(0)
 					.getPassword();
 			System.out.println(stylistEmail);
 		} else

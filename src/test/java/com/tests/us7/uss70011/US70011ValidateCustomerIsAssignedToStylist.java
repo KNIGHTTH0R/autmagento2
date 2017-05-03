@@ -34,11 +34,11 @@ public class US70011ValidateCustomerIsAssignedToStylist extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").size();
+		int size = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest1").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").get(0)
+			stylistEmail = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest1").get(0)
 					.getEmailName();
-			stylistPassword = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").get(0)
+			stylistPassword = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest1").get(0)
 					.getPassword();
 			System.out.println(stylistEmail);
 		} else

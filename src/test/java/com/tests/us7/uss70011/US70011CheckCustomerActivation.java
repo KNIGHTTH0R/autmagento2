@@ -39,9 +39,9 @@ public class  US70011CheckCustomerActivation extends BaseTest {
 	public void setUp() throws Exception {
 		
 
-		int size = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").size();
+		int size = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest1").size();
 		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest").get(0).getEmailName();
+			stylistEmail = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest1").get(0).getEmailName();
 			System.out.println(stylistEmail);
 		} else
 			System.out.println("The database has no entries");

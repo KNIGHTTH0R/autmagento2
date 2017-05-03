@@ -182,6 +182,7 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		generalCartSteps.clearCart();
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
+		profileSteps.clickOnOrder(orderId);
 		profileSteps.clickReorderLink(orderId);
 
 		RegularBasicProductModel productData;

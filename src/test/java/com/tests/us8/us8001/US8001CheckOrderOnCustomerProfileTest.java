@@ -20,9 +20,11 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.profile.ProfileNavSteps;
 import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
@@ -45,6 +47,8 @@ public class US8001CheckOrderOnCustomerProfileTest extends BaseTest{
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps 
 	public CustomVerification customVerifications;
+	@Steps
+	public ProfileNavSteps profileNavSteps;
 	
 	private static OrderModel orderModel = new OrderModel();
 	private String username, password;
@@ -88,7 +92,8 @@ public class US8001CheckOrderOnCustomerProfileTest extends BaseTest{
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
-		headerSteps.redirectToProfileHistory();
+		headerSteps.goToProfile();
+		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
 		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
 
 		String orderId = orderHistory.get(0).getOrderId();
