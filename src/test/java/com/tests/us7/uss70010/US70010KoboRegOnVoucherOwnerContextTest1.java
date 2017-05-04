@@ -32,11 +32,15 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
+import com.tools.requirements.Application;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
-
+@WithTag(name = "US7.8 Kobo Registration on Master Not Pref Country Test ", type = "Scenarios")
+@Story(Application.KoboRegistration.US7_8.class)
 @RunWith(SerenityRunner.class)
 public class US70010KoboRegOnVoucherOwnerContextTest1 extends BaseTest {
 	@Steps
@@ -115,10 +119,13 @@ public class US70010KoboRegOnVoucherOwnerContextTest1 extends BaseTest {
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		MongoConnector.cleanCollection(getClass().getSimpleName());
+		
 	}
 
 	@Test
 	public void us70010KoboRegOnVoucherOwnerContextTest1() {
+		System.out.println("context" +context);
+		System.out.println("url "+MongoReader.getBaseURL());
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL() + context, koboCode);
 		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();

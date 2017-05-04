@@ -14,8 +14,9 @@ public class HomePage extends AbstractPage {
 
 	@FindBy(css = "div.categories li:nth-child(2) a")
 	private WebElement stylePartyLink;
-
-	@FindBy(css = "a#contactBoosterDetails")
+//a#contactBoosterDetails img.kobo-banner-lg
+	// before :  a#contactBoosterDetails
+	@FindBy(css = "a#contactBoosterDetails img.kobo-banner-lg")
 	private WebElement contactBoosterDetails;
 
 	@FindBy(css = "#cssmenu > ul > li:first-child a")
