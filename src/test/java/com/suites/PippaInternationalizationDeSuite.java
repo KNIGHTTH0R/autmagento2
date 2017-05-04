@@ -63,7 +63,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US11001Suite.class,
 	US11002Suite.class,
 	//should be verified 
-//	US11003VerifyProductsInPlaceACustomerOrderModal.class,
+	US11003VerifyProductsInPlaceACustomerOrderModal.class,
 	US11004Suite.class,
 	US11005Suite.class,
 	US11006Suite.class,
@@ -117,7 +117,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 //	US23001PartThreeSuite.class,
 	
 	NotificationsSuite.class,
-	VerifyOrderEmailsSuite.class
+//	VerifyOrderEmailsSuite.class
 	
 })
 @RunWith(Suite.class)

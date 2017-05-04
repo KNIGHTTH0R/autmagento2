@@ -13,12 +13,10 @@ import com.tests.us7.uss70010.US70010ValidateCustomerIsAssignedToStylist;
 
 @SuiteClasses({
 	//US70010KoboRegOnVoucherOwnerContextTest.class,
-
 	//US70010KoboRegOnVoucherOwnerContextTest1.class,
 	US70010PlacePomOrderTest.class,
-	
 	US70010CheckCustomerActivation.class,
-//	US70010CheckReceivedEmailsTest.class,
+	US70010CheckReceivedEmailsTest.class,
 	US70010ValidateCustomerIsAssignedToStylist.class,
 })
 @RunWith(Suite.class)

@@ -30,13 +30,13 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 	public void typeContactName(String name) {
 		element(contactInput).waitUntilVisible();
 		contactInput.sendKeys(name);
-		waitABit(TimeConstants.TIME_CONSTANT);
+		waitABit(TimeConstants.TIME_MEDIUM);
 		element(selectContact).waitUntilVisible();
 		if (selectContact.getText().contentEquals(name)) {
 			element(selectContact).click();
 			waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
 					ContextConstants.LOADING_MESSAGE));
-			waitABit(TimeConstants.WAIT_TIME_SMALL);
+			waitABit(TimeConstants.TIME_MEDIUM);
 		} else {
 			Assert.fail("The contact was not found");
 		}
