@@ -110,8 +110,8 @@ public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 		addProductsModalSteps.searchForProduct(genProduct1.getSku());
 		addProductsModalSteps.verifyProductPropertiesInModalWindow(genProduct1.getSku(), genProduct1.getName());
 
-		addProductsModalSteps.searchForProduct("K027SV");
-		addProductsModalSteps.verifyProductPropertiesInModalWindow("K027SV", "DYNASTY SET");
+		addProductsModalSteps.searchForProduct("R085SV");
+		addProductsModalSteps.verifyProductPropertiesInModalWindow("R085SV", "JOANNA RING");
 
 		addProductsModalSteps.searchForProduct("R073SV");
 		addProductsModalSteps.verifyProductPropertiesInModalWindow("R073SV", "SYDNEY RING");

@@ -183,9 +183,9 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 		
 		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
-		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
-		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
-		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
+		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 1));
+		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 2));
+		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 3));
 
 		paymentSteps.goBack();
 		shippingSteps.goBack();
