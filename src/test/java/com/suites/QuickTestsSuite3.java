@@ -22,7 +22,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 //	US6006ScBuyProductwithSpecialPriceTest.class,
 	
 	CreateProductsTest.class,
-	
+	//salut
 	US10CreateAllPartiesSuite.class,
 	
 	US11001Suite.class,
