@@ -113,7 +113,7 @@ public class US31004PartyHostBuysForCustomerTpTest extends BaseTest {
 		genProduct2.setPrice("10.00");
 		genProduct2.setIp("8");
 		prod1IncrementId = MagentoProductCalls.createApiProduct(genProduct2);
-		orderModelListTp1 = MongoReader.getOrderModel("US31004PartyHostBuysForCustomerTpTest" + "TP1").get(0);
+		//orderModelListTp1 = MongoReader.getOrderModel("US31004PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("29.90");

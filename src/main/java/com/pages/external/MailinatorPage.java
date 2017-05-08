@@ -66,4 +66,12 @@ public class MailinatorPage extends AbstractPage {
 		return getDriver().findElement(By.cssSelector("table[bgcolor='#FFFFFF'] tbody > tr:nth-child(3)")).getText();
 	}
 
+
+
+	public void clickPartyConfirmationLink() {
+		getDriver().switchTo().frame(iFrameElement);
+		//get first a (link with Yes) from page
+		getDriver().findElements(By.cssSelector("a[href*='invitation']")).get(0).click();
+	}
+	
 }

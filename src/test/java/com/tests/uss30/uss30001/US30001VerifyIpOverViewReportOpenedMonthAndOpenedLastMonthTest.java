@@ -127,7 +127,10 @@ public class US30001VerifyIpOverViewReportOpenedMonthAndOpenedLastMonthTest exte
 		//for selecting March from Dropdown
 		//march=Opened,february=Opened
 	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("2513","2017-04-05 00:00:00","2017-03-10 17:00:00","2017-04-31 23:59:00");
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("6013","2017-05-05 00:00:00","2017-04-27 17:00:00","2017-05-10 17:00:00");
+		
+		
+		//("6013","2017-04-05 00:00:00","2017-03-06 23:59:00","2017-04-27 17:00:00","2017-05-10 17:00:00");
 	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-04-05 00:00:00","2017-02-28 23:59:00","2017-03-10 17:00:00","2017-04-10 17:00:00");
 
 		
@@ -154,21 +157,21 @@ public class US30001VerifyIpOverViewReportOpenedMonthAndOpenedLastMonthTest exte
 	
 //		ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 		//ipReportsSteps.selectMonth("MäR - 2017");
-		headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-04");
-
+		//headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-04");
+		headerSteps.navigate("http://staging-aut.pippajean.com/de/ioa/stylereports/order/ipsreport/?month=2017-05");
 		
 		
 		//validate Ip overview report -sunt OK
-		IpOverViewSummaryModel  grabbedSummaryModel= ipReportsSteps.getIpOverviewSummaryModel();
+	/*	IpOverViewSummaryModel  grabbedSummaryModel= ipReportsSteps.getIpOverviewSummaryModel();
 		System.out.println("expected values" + expectedIpOverviewModel.toString());
 		System.out.println("grabbed values" +grabbedSummaryModel.toString());
-		ipReportValidationWorkflow.verifyIpOverviewReportDetails(grabbedSummaryModel, expectedIpOverviewModel);
+		ipReportValidationWorkflow.verifyIpOverviewReportDetails(grabbedSummaryModel, expectedIpOverviewModel);*/
 		
 		
 		//validate Open ips summary - OK
-		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelCurrentMonth();
+	/*	IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelCurrentMonth();
 		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
-		
+		*/
 
 //		//validate payed orders list-OK
 		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();

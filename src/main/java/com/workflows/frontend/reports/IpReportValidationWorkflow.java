@@ -1,8 +1,9 @@
 package com.workflows.frontend.reports;
 
+import java.text.ParseException;
 import java.util.List;
 
-
+import org.joda.time.format.FormatUtils;
 import org.junit.Assert;
 
 import net.thucydides.core.annotations.Step;
@@ -18,6 +19,7 @@ import com.tools.data.IpOverViewReturnsListModel;
 import com.tools.data.IpOverViewSummaryModel;
 import com.tools.data.IpOverviewModel;
 import com.tools.data.frontend.TermPurchaseIpModel;
+import com.tools.utils.DateUtils;
 
 public class IpReportValidationWorkflow {
 	@Steps
@@ -106,7 +108,7 @@ public class IpReportValidationWorkflow {
 
 	@Title("Validate Orders in Ip overview report")
 	@StepGroup
-	public void verifyPayedOrdersList(List<IpOverViewPayedOrdersModel> expectedList, List<IpOverViewPayedOrdersModel> grabbedList) {
+	public void verifyPayedOrdersList(List<IpOverViewPayedOrdersModel> expectedList, List<IpOverViewPayedOrdersModel> grabbedList) throws ParseException {
 
 
 		CustomVerification.verifyTrue("Failure: The list size are not equal", expectedList.size() == grabbedList.size());
@@ -197,30 +199,40 @@ public class IpReportValidationWorkflow {
 	}
 	
 	@Step
-	public void validateCustomerName(String grabbed, String expected) {
+	public void validateCustomerName(String expected, String grabbed) {
 		CustomVerification.verifyTrue("Failure: Order id doesn't match Expected: " + expected + " Actual: " + grabbed,
 				grabbed.contentEquals(expected));
 	}
 	@Step
-	public void validateOrderDate(String grabbed, String expected) {
-		CustomVerification.verifyTrue("Failure: Order date doesn't match Expected: " + expected + " Actual: " + grabbed,
-				grabbed.contentEquals(expected));
+	public void validateOrderDate(String expected, String grabbed) throws ParseException {
+		System.out.println("expected " +expected);
+		String expectedDate =DateUtils.parseDate(expected, "yyyy-MM-dd HH:mm:ss", "dd.MM.YYYY");;
+		
+		
+		System.out.println("expectedDate "+expectedDate);
+		CustomVerification.verifyTrue("Failure: Order date doesn't match Expected: " + grabbed + " Actual: " + expectedDate,
+				grabbed.contentEquals(expectedDate));
 	}
 	
 	@Step
-	public void validatePaymentDate(String grabbed, String expected) {
-		CustomVerification.verifyTrue("Failure: Payment date doesn't match Expected: " + expected + " Actual: " + grabbed,
-				grabbed.contentEquals(expected));
+	public void validatePaymentDate(String expected , String grabbed) throws ParseException {
+		System.out.println("expected " +expected);
+		String expectedDate =DateUtils.parseDate(expected, "yyyy-MM-dd HH:mm:ss", "dd.MM.YYYY");
+		
+		
+		CustomVerification.verifyTrue("Failure: Payment date doesn't match Expected: " + expectedDate + " Actual: " + grabbed,
+				grabbed.contentEquals(expectedDate));
 	}
 	
 	@Step
-	public void validateOrderStatus(String grabbed, String expected) {
-		CustomVerification.verifyTrue("Failure: Order status doesn't match Expected: " + expected + " Actual: " + grabbed,
-				grabbed.contentEquals(expected));
+	public void validateOrderStatus(String expected, String grabbed) {
+		String englishStatus=grabbed.contentEquals("Zahlung erfolgreich")?"payment_complete":grabbed;
+		CustomVerification.verifyTrue("Failure: Order status doesn't match Expected: " + expected + " Actual: " + englishStatus,
+				englishStatus.contentEquals(expected));
 	}
 	
 	@Step
-	public void validateAmount(String grabbed, String expected) {
+	public void validateAmount(String expected, String grabbed) {
 		CustomVerification.verifyTrue("Failure: Order amount doesn't match Expected: " + expected + " Actual: " + grabbed,
 				grabbed.contentEquals(expected));
 	}

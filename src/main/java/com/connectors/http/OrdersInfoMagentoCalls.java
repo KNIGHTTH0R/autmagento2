@@ -438,12 +438,18 @@ public class OrdersInfoMagentoCalls {
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("firstname")) {
 						customerName = customerName.concat(childNodes.item(j).getTextContent() + " ");
+						System.out.println("firstname "+customerName);
 					}
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("lastname")) {
 						customerName = customerName.concat(childNodes.item(j).getTextContent());
+						System.out.println("lastname  "+customerName);
 					}
-
+					///for ip overview 
+//					if(childNodes.item(j).getNodeName().equalsIgnoreCase("order_customer_name")){
+//						customerName=customerName.concat(childNodes.item(j).getTextContent());
+//						model.setCustomerName(customerName);
+//					}
 					// if
 					// (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_amount"))
 					// {
@@ -501,8 +507,12 @@ public class OrdersInfoMagentoCalls {
 		//
 		// }
 		
-		System.out.println(OrdersInfoMagentoCalls.getOrdersList("2513"));
+	//	System.out.println(OrdersInfoMagentoCalls.getOrdersList("2513"));
 
+		List<DBOrderModel> dbmodel=OrdersInfoMagentoCalls.getOrdersList("6013");
+		for (DBOrderModel dbOrderModel : dbmodel) {
+			System.out.println("customer name "+dbOrderModel.getCustomerName());
+		}
 //		List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getOrdersInRangeList("211021", "211021");
 //		// ("213473", "213474");
 //

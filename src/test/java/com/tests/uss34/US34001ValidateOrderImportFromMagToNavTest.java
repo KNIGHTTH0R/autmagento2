@@ -39,8 +39,8 @@ public class US34001ValidateOrderImportFromMagToNavTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("221240","222240");
-		navListOrders = NavisionSoapCalls.getOrdersList("221240..222240");
+		shopListOrders = OrdersInfoMagentoCalls.getOrderWithItems("222240","223240");
+		navListOrders = NavisionSoapCalls.getOrdersList("222240..223240");
 
 		}
 

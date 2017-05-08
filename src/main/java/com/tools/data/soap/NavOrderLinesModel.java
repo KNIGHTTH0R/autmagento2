@@ -12,8 +12,18 @@ public class NavOrderLinesModel {
 	private String lineDiscountAmount;
 	private String qty;
 	private String unitPrice;
-
+	private String lineAmount;
 	
+	
+	
+	public String getLineAmount() {
+		return lineAmount;
+	}
+
+	public void setLineAmount(String lineAmount) {
+		this.lineAmount = lineAmount;
+	}
+
 	public String getQty() {
 		return qty;
 	}

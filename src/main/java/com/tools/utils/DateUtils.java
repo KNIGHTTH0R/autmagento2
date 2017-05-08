@@ -487,9 +487,10 @@ public class DateUtils {
 	//	System.out.println(DateUtils.getFridaysBetweenDates("2016-11-11", "2016-12-24", "yyyy-MM-dd"));
 //		System.out.println(DateUtils.parseDate("2016-12-15", "yyyy-MM-dd", "dd. MM."));
 		//System.out.println(DateUtils.parseDate("07. MRZ. 17", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
-		
-		
-		System.out.println(DateUtils.parseDate("1484728910770", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
+	////	System.out.println(DateUtils.parseDate(dateString, initialFormatString, finalFormatString));
+		String expectedDate =DateUtils.parseDate("2017-05-04 11:35:03", "yyyy-MM-dd HH:mm:ss", "dd.MM.YYYY");
+		System.out.println(expectedDate);
+	//	System.out.println(DateUtils.parseDate("1484728910770", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
 	}
 
 }

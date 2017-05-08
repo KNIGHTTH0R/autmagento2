@@ -30,8 +30,8 @@ public class ConfigConstants {
 	public static final String VOUCHER_SHIPPING = "Voucher On Shipping";
 
 	// Webmail suffix
-//	public static final String WEB_MAIL = "mailinator.com";
-	public static final String WEB_MAIL = "yopmail.com";
+	public static final String WEB_MAIL = "mailinator.com";
+//	public static final String WEB_MAIL = "yopmail.com";
 	public static final String EVOZON = "evozon.com";
 	public static final String GMAIL = "gmail.com";
 	

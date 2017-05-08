@@ -338,14 +338,15 @@ public class NavisionSoapCalls {
 								}
 
 								if (lineNodes.item(l).getNodeName().equalsIgnoreCase("Line_Amount")) {
-
-									// double lineAmountString =
-									// Double.parseDouble(lineNodes.item(l).getTextContent());
-									// BigDecimal lineAmount =
-									// BigDecimal.valueOf(lineAmountString);
-									// System.out.println(lineAmount);
-									// grandTotal2 =
-									// grandTotal2.add(lineAmount);
+									
+									line.setLineAmount(lineNodes.item(l).getTextContent());
+//									 double lineAmountString =
+//									 Double.parseDouble(lineNodes.item(l).getTextContent());
+//									 BigDecimal lineAmount =
+//									 BigDecimal.valueOf(lineAmountString);
+//									 System.out.println(lineAmount);
+//									 grandTotal2 =
+//									 grandTotal2.add(lineAmount);
 
 								}
 
@@ -383,14 +384,22 @@ public class NavisionSoapCalls {
 							orderLinesModel.add(line);
 
 							NavOrderLinesModel lastLine = orderLinesModel.get(orderLinesModel.size() - 1);
-
-							BigDecimal lineAmount = calculateGrandTotal(lastLine.getUnitPrice(), lastLine.getQty(),
-									lastLine.getLineDiscountAmount());
+							System.out.println("lastLine.getUnitPrice() "+lastLine.getUnitPrice());
+							System.out.println("lastLine.getQty() "+lastLine.getQty());
+							System.out.println("lastLine.getLineDiscountAmount()) "+lastLine.getLineDiscountAmount());
+							
+							double lineAmountString = Double.parseDouble(lastLine.getLineAmount());
+							BigDecimal lineAmount =BigDecimal.valueOf(lineAmountString);
+							System.out.println(lineAmount);
+									 
+							
+//							BigDecimal lineAmount = calculateGrandTotal(lastLine.getUnitPrice(), lastLine.getQty(),
+//									lastLine.getLineDiscountAmount());
 							
 							System.out.println("counter "+ count++);
 							System.out.println("lineAmount "+lineAmount);
 							grandTotal = grandTotal.add(lineAmount);
-
+							System.out.println("grandTotalgrandTotal" +grandTotal);
 							if (lastLine.getNo() == null) {
 
 								// if product is bom else is bundle
@@ -411,7 +420,10 @@ public class NavisionSoapCalls {
 							}
 
 						}
+						System.out.println("grandTotal fara sh "+grandTotal);
+						System.out.println("shippingDiscount "+shippingDiscount);
 						grandTotal = grandTotal.subtract(shippingDiscount);
+						System.out.println("grandTotal "+grandTotal);
 						model.setTotalIp(totalIP.toString());
 						model.setCalculatedGrandTotal(grandTotal.toString());
 						model.setLines(orderLinesModel);
@@ -505,15 +517,15 @@ public class NavisionSoapCalls {
 
 		
 		BigDecimal grandT = BigDecimal.valueOf(0);
-		BigDecimal unitPrice1 = BigDecimal.valueOf(Double.parseDouble(unitPrice)).setScale(2, BigDecimal.ROUND_HALF_UP);
+		BigDecimal unitPrice1 = BigDecimal.valueOf(Double.parseDouble(unitPrice)).setScale(4, BigDecimal.ROUND_HALF_UP);
 		BigDecimal qty1 = BigDecimal.valueOf(Double.parseDouble(qty));
 		BigDecimal lineDiscountAmount1 = BigDecimal.valueOf(Double.parseDouble(lineDiscountAmount));
-
+		
 		
 		System.out.println("unitPrice1 "+unitPrice1);
 		System.out.println("qty1 "+qty1);
 		System.out.println("lineDiscountAmount1 "+lineDiscountAmount1);
-		grandT = unitPrice1.multiply(qty1).subtract(lineDiscountAmount1);
+		grandT = unitPrice1.multiply(qty1).subtract(lineDiscountAmount1).setScale(2,BigDecimal.ROUND_HALF_UP);
 		
 		
 		return grandT;
@@ -525,8 +537,11 @@ public class NavisionSoapCalls {
 		// List<NavOrderModel> ordersList =
 		// NavisionSoapCalls.getOrdersList("10023578400..10023578700");
 		// 10021960100
+		
+		System.out.println("calculata valoare  "+calculateGrandTotal("0.84034", "90", "68.56"));
+		
 		System.out.println("test");
-		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("220570..220570");
+		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("221749..221749");
 
 		for (NavOrderModel order : ordersList) {
 			System.out.println("ceva ");

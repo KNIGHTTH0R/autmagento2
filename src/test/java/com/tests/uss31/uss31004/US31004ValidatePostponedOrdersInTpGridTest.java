@@ -73,16 +73,16 @@ public class US31004ValidatePostponedOrdersInTpGridTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-
+		
 		orderModelListTp1 = MongoReader.getOrderModel("US31004PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		detailedProdListTp1 = MongoReader.grabProductDetailedModel("US31004PartyHostBuysForCustomerTpTest" + "TP1").get(0);
 		productsListTp1 = MongoReader.grabHostBasicProductModel("US31004PartyHostBuysForCustomerTpTest" + "TP1");
-		
+		System.out.println("order id "+orderModelListTp1.getOrderId() );
 		ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp1.getOrderId() + EnvironmentConstants.JOB_TOKEN, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
 		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT, EnvironmentConstants.USERNAME, EnvironmentConstants.PASSWORD);
 
-		prod2IncrementId = MongoReader.grabIncrementId("US31004PartyHostBuysForCustomerTpTest" + "TP2");
+		/*prod2IncrementId = MongoReader.grabIncrementId("US31004PartyHostBuysForCustomerTpTest" + "TP2");
 		orderModelListTp2 = MongoReader.getOrderModel("US31004PartyHostBuysForCustomerTpTest" + "TP2").get(0);
 
 		prod3IncrementId = MongoReader.grabIncrementId("US31004PartyHostBuysForCustomerTpTest" + "TP3");
@@ -107,12 +107,12 @@ public class US31004ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		expectedModel1.setScheduledPaymentStatus(ConfigConstants.PENDING);
 		expectedModel1.setProductQty(StockCalculations.calculateStockToInt(detailedProdListTp1.getStockData().getQty(),
 				productsListTp1.get(0).getQuantity()));
-
+*/
 	}
 
 	@Test
 	public void us31004ValidatePostponedOrdersInTpGridTest() throws ParseException {
-		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+		/*backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnTermPurchaseGrid();
 		termPurchaseGridSteps.searchForOrder(orderModelListTp1.getOrderId());
 
@@ -123,13 +123,13 @@ public class US31004ValidatePostponedOrdersInTpGridTest extends BaseTest {
 		termPurcaseOrderValidationWorkflows.verifyTermPurchaseOrderDetails(grabbedModel1, expectedModel1);
 
 		customVerifications.printErrors();
-
+*/
 	}
 
 	@After
 	public void runCron() throws Exception {
 
-		updated2Product = MagentoProductCalls.updateProductStockModel();
+	/*	updated2Product = MagentoProductCalls.updateProductStockModel();
 		updated2Product.getStockData().setMinQty("-10");
 		updated2Product.getStockData().setQty("-10");
 		updated2Product.getStockData().setIsInStock("0");
@@ -155,6 +155,6 @@ public class US31004ValidatePostponedOrdersInTpGridTest extends BaseTest {
 //		 ApacheHttpHelper.sendGet(EnvironmentConstants.CHANGE_TP_DELIVERY_URL + orderModelListTp3.getOrderId() + EnvironmentConstants.JOB_TOKEN);
 //		 backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
 //	     ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT);
-	}
+*/	}
 
 }
