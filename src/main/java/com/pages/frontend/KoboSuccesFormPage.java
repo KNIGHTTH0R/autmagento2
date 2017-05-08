@@ -17,7 +17,7 @@ public class KoboSuccesFormPage extends AbstractPage {
 	public void verifyKoboFormIsSuccsesfullyFilledIn() {
 		element(textContainer).waitUntilVisible();
 		Assert.assertTrue("Failure: Email notification text was not found. ", textContainer.getText().contains(ContextConstants.SUCCES_KOBO_FORM));
-		waitABit(30000);
+		waitABit(2000);
 	}
 
 	public void verifyThatTheWebsiteHasChanged() {

@@ -28,8 +28,6 @@ import com.tests.us7.uss70010.US70010CheckReceivedEmailsTest;
 	US70012Suite.class,
 	
 	//ce 
-	US7008CheckReceivedEmailsTest.class,
-	US70010CheckReceivedEmailsTest.class,
 	VerifyOrderEmailsSuite.class
 })
 @RunWith(Suite.class)

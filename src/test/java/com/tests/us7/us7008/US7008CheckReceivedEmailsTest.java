@@ -32,14 +32,19 @@ public class US7008CheckReceivedEmailsTest extends BaseTest {
 	public void setUp() throws Exception {
 
 		stylistEmail = MongoReader.grabCustomerFormModels("US7008KoboRegOnMasterNotPrefCountryTest1").get(0).getEmailName();
-		orderModel = MongoReader.grabOrderModels("US7008PlacePomOrderTest").get(0);
-
+//		orderModel = MongoReader.grabOrderModels("US7008PlacePomOrderTest").get(0);
+		System.out.println("stylistEmail "+stylistEmail);
+//		System.out.println("orderModel "+orderModel);
 	}
 
 	@Test
 	public void us7008CheckReceivedEmailsTest() {
 
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.WELCOME_MAIL_SUBJECT);
+	//	emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.WELCOME_MAIL_SUBJECT);
+		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), "Bienvenida");
+		
+		
+		
 		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.NEWSLETTER_MAIL_SUBJECT);
 		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), orderModel.getOrderId());
 

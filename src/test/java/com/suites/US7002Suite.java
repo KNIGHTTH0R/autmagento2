@@ -15,7 +15,7 @@ import com.tests.us7.us7002.US7002ValidateCustomerIsAssignedToStylist;
 //	US7002RegularCustRegistrationOnContextTest.class,
 	US7002ConfirmCustomerTest.class,
 	US7002CheckCustomerActivation.class,
-	US7002CheckReceivedEmailsTest.class,
+	//US7002CheckReceivedEmailsTest.class,
 	US7002ValidateCustomerIsAssignedToStylist.class,
 })
 @RunWith(Suite.class)
