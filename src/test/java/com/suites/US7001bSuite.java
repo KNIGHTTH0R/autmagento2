@@ -16,7 +16,7 @@ import com.tests.us7.us7001b.US7001bValidateCustomerIsAssignedToStylist;
 	US7001bConfirmCustomerTest.class,
 	US7001bCheckCustomerActivation.class,	
 	US7001bValidateCustomerIsAssignedToStylist.class,
-	//US7001bCheckReceivedEmailsTest.class,
+	US7001bCheckReceivedEmailsTest.class,
 })
 @RunWith(Suite.class)
 public class US7001bSuite {

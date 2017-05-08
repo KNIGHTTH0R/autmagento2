@@ -106,39 +106,7 @@ public class US70011KoboCampaignRegistrationOnMasterTest1 extends BaseTest {
 		DataGrabber.wipe();
 		PomCartCalculator.wipe();
 
-		Properties prop = new Properties();
-		InputStream input = null;
-
-		try {
-
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us7" + File.separator + "us70011.properties");
-			prop.load(input);
-
-			discountClass = prop.getProperty("discountClass");
-			shippingValue = prop.getProperty("shippingValue");
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			if (input != null) {
-				try {
-					input.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-//
-//		genProduct1 = MagentoProductCalls.createPomProductModel();
-//		genProduct1.setName("POM_" + genProduct1.getName());
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-		
-
-//		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//			genProduct1 = createdProductsList.get(7);
-
-
+	
 
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
@@ -150,43 +118,6 @@ public class US70011KoboCampaignRegistrationOnMasterTest1 extends BaseTest {
 		koboValidationSteps.startKoboCampaignProcess(MongoReader.getBaseURL() + UrlConstants.KOBO_CAMPAIGN);
 		koboCampaignSteps.fillKoboCampaignRegistrationFormOnMasterShop(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
-//		String url = emailClientSteps.grabConfirmationLinkFromEmail(
-//				dataModel.getEmailName().replace("@" + ConfigConstants.WEB_MAIL, ""),
-//				ContextConstants.KOBO_CONFIRM_ACCOUNT_MAIL_SUBJECT);
-//		koboCampaignSteps.navigate(url);
-//		pomProductDetailsSteps.findStarterProductAndAddItToTheCart(genProduct1.getName());
-//
-//		PomProductModel productData;
-//		productData = productSteps.setPomProductAddToCart(genProduct1.getName(), genProduct1.getSku(),
-//				genProduct1.getPrice());
-//		PomCartCalculator.allBorrowedProductsList.add(productData);
-//
-//		PomCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
-//
-//		fancyBoxSteps.goToShipping();
-//		shippingSteps.selectPartyNoOptionIfPresent();
-//		DataGrabber.shippingTotals = shippingSteps.grabSurveyData();
-//		shippingSteps.goToPaymentMethod();
-//		String shippingUrl = shippingSteps.grabUrl();
-//		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(shippingUrl));
-//		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(shippingUrl));
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
-//		confirmationSteps.agreeAndCheckout();
-//		checkoutValidationSteps.verifySuccessMessage();
-//		headerSteps.redirectToProfileHistory();
-//		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
-//
-//		String orderId = orderHistory.get(0).getOrderId();
-//		profileSteps.verifyOrderId(orderId, DataGrabber.orderModel.getOrderId());
-//		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.shippingTotals,
-//				PomCartCalculator.shippingCalculatedModel);
-//		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS");
-//
-//		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel,
-//				PomCartCalculator.shippingCalculatedModel.getTotalAmount());
-//		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
-
 		customVerifications.printErrors();
 	}
 

@@ -33,7 +33,10 @@ public class US70010CheckReceivedEmailsTest extends BaseTest {
 
 		stylistEmail = MongoReader.grabCustomerFormModels("US70010KoboRegOnVoucherOwnerContextTest1").get(0).getEmailName();
 		orderModel = MongoReader.grabOrderModels("US70010PlacePomOrderTest").get(0);
-
+		
+		System.out.println("stylistEmail "+stylistEmail);
+		System.out.println("orderModel "+orderModel);
+		
 	}
 
 	@Test

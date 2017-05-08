@@ -168,14 +168,17 @@ public class CartDiscountsCalculation {
 	public static List<BasicProductModel> calculateProductsfor25Discount(List<BasicProductModel> productsList,
 			String jewelryDiscount) {
 
+		
 		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList, ConfigConstants.DISCOUNT_25);
 
 		List<BasicProductModel> cartProducts = new ArrayList<BasicProductModel>();
 
 		BigDecimal delta = BigDecimal.ZERO;
 
+		
 		for (BasicProductModel product : productsList) {
-
+			
+			System.out.println("asking price " +product.getProductsPrice());
 			BasicProductModel newProduct = new BasicProductModel();
 
 			newProduct.setDiscountClass(product.getDiscountClass());
@@ -192,6 +195,8 @@ public class CartDiscountsCalculation {
 					BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())),
 					BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25, delta);
 
+			
+			System.out.println("FINAL PRICE " +discounts[0] );
 			newProduct.setFinalPrice(discounts[0]);
 
 			delta = BigDecimal.valueOf(Double.parseDouble(discounts[1]));
@@ -319,6 +324,9 @@ public class CartDiscountsCalculation {
 	public static String[] calculate25DiscountCartProductFinalPrice(BigDecimal askingPrice, BigDecimal jB,
 			BigDecimal sum25Section, BigDecimal deltaDiscount) {
 
+		
+		
+		System.out.println("AAAskingPrice "+askingPrice);
 		String[] discountAndRemainder = new String[2];
 
 		BigDecimal result = BigDecimal.ZERO;
@@ -336,7 +344,7 @@ public class CartDiscountsCalculation {
 			result = result.multiply(jB);
 			result = askingPrice.subtract(result);
 			BigDecimal temp = result;
-			
+			System.out.println("temop "+ temp);
 			result = result.multiply(BigDecimal.valueOf(25));
 			// the 25% disc is calculated with 5 decimals precision (we don't
 			// want the 4th decimal rounded)
@@ -351,6 +359,8 @@ public class CartDiscountsCalculation {
 			// we calculate the remaining discount difference to be applied on
 			// the next product
 			diff = diff.subtract(result);
+			
+			System.out.println("DIF "+diff);
 			result = temp.subtract(result);
 
 		}
@@ -427,9 +437,11 @@ public class CartDiscountsCalculation {
 	
 	private static ProductDetailedModel genProduct1 = new ProductDetailedModel();
 	private static ProductDetailedModel genProduct2 = new ProductDetailedModel();
+	private static ProductDetailedModel genProduct3 = new ProductDetailedModel();
 	private static List<BasicProductModel> productsList =new ArrayList<BasicProductModel>();
 	private static BasicProductModel productData;
 	private static BasicProductModel productData2;
+	private static BasicProductModel productData3;
 	public static List<BasicProductModel> productsList25Beta = new ArrayList<BasicProductModel>();
 	
 	
@@ -442,12 +454,16 @@ public class CartDiscountsCalculation {
 		genProduct2.setIp("25");
 		genProduct2.setPrice("89.00");
 		
-
-		productData = addInCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
-		productData2=addInCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
+		genProduct3 = MagentoProductCalls.createProductModelBeta();
+		genProduct3.setIp("25");
+		genProduct3.setPrice("49.90");
 		
+		productData = addInCart(genProduct1, "2", "0", ConfigConstants.DISCOUNT_25);
+		productData2=addInCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
+		productData3=addInCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_25);
 		productsList25Beta.add(productData);
 		productsList25Beta.add(productData2);
+		productsList25Beta.add(productData3);
 		
 		System.out.println(productsList25Beta.get(0).getFinalPrice());
 //		
@@ -457,7 +473,7 @@ public class CartDiscountsCalculation {
 		BigDecimal sum25 = calculateDiscountAskingPriceSum(productsList25Beta, ConfigConstants.DISCOUNT_25);
 		System.out.println("sumaaaa "+sum25);
 	
-		List<BasicProductModel> cartProductsBeta=calculateProductsfor25Discount(productsList25Beta,"120");
+		List<BasicProductModel> cartProductsBeta=calculateProductsfor25Discount(productsList25Beta,"100");
 		
 		System.out.println(""+cartProductsBeta.get(0).getFinalPrice());
 		

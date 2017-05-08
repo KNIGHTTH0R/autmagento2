@@ -29,10 +29,8 @@ import com.tests.us7.uss70012.US70012KoboCampaignRegistrationUnderContextTest1;
 	
 	
 	US7008KoboRegOnMasterNotPrefCountryTest1.class,
-//	US7009KoboRegOnNotVoucherOwnerContextTest.class,
 	US7009KoboRegOnNotVoucherOwnerContextTest1.class,
 	US70010KoboRegOnVoucherOwnerContextTest1.class,
-//	US70010KoboRegOnVoucherOwnerContextTest.class,
 	US70011KoboCampaignRegistrationOnMasterTest1.class,
 	US70012KoboCampaignRegistrationUnderContextTest1.class,
 })
