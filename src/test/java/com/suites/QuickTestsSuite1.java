@@ -13,7 +13,7 @@ import com.tests.us7.uss70010.US70010CheckReceivedEmailsTest;
 @SuiteClasses({
 //	CreateProductsTest.class,
 //	ShopForMyself.class, 
-	//CreateProductsTest.class,
+	CreateProductsTest.class,
 	US7CreateRegularCustomersSuite.class,
 	
 	US7001Suite.class,

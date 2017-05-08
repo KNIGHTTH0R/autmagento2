@@ -35,7 +35,8 @@ package com.tests.us7.uss70011;
 	import com.tools.cartcalculations.borrowCart.PomCartCalculator;
 	import com.tools.constants.ConfigConstants;
 	import com.tools.constants.ContextConstants;
-	import com.tools.constants.UrlConstants;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
 	import com.tools.data.backend.OrderModel;
 	import com.tools.data.frontend.AddressModel;
 	import com.tools.data.frontend.CreditCardModel;
@@ -116,15 +117,15 @@ package com.tests.us7.uss70011;
 			} else
 				System.out.println("The database has no entries");
 			
-			
-			genProduct1 = MagentoProductCalls.createPomProductModel();
-			genProduct1.setName("POM_" + genProduct1.getName());
-			genProduct1.setPrice("89.00");
-			MagentoProductCalls.createApiProduct(genProduct1);
+//			
+//			genProduct1 = MagentoProductCalls.createPomProductModel();
+//			genProduct1.setName("POM_" + genProduct1.getName());
+//			genProduct1.setPrice("89.00");
+//			MagentoProductCalls.createApiProduct(genProduct1);
 			
 
-//			 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//				genProduct1 = createdProductsList.get(7);
+			 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+				genProduct1 = createdProductsList.get(7);
 
 
 

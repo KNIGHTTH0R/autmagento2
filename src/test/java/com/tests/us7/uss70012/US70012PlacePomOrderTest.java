@@ -93,13 +93,13 @@ public class US70012PlacePomOrderTest extends BaseTest {
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
 
-		 genProduct1 = MagentoProductCalls.createPomProductModel();
-		 genProduct1.setName("POM_" + genProduct1.getName());
-		 genProduct1.setPrice("89.00");
-		 MagentoProductCalls.createApiProduct(genProduct1);
+//		 genProduct1 = MagentoProductCalls.createPomProductModel();
+//		 genProduct1.setName("POM_" + genProduct1.getName());
+//		 genProduct1.setPrice("89.00");
+//		 MagentoProductCalls.createApiProduct(genProduct1);
 
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		genProduct1 = createdProductsList.get(7);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(7);
 
 	
 		int size = MongoReader.grabCustomerFormModels("US70012KoboCampaignRegistrationUnderContextTest1").size();

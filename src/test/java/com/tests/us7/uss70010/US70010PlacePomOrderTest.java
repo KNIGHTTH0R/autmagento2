@@ -26,6 +26,7 @@ import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CreditCardModel;
@@ -90,14 +91,14 @@ public class US70010PlacePomOrderTest extends BaseTest{
 	public void setUp() throws Exception {
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createPomProductModel();
-		genProduct1.setName("POM_" + genProduct1.getName());
-		genProduct1.setPrice("89.00");
-		genProduct1.setSpecialPrice("79.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
-		genProduct1.setPrice(genProduct1.getSpecialPrice());
-//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		genProduct1 = createdProductsList.get(7);
+//		genProduct1 = MagentoProductCalls.createPomProductModel();
+//		genProduct1.setName("POM_" + genProduct1.getName());
+//		genProduct1.setPrice("89.00");
+//		genProduct1.setSpecialPrice("79.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1.setPrice(genProduct1.getSpecialPrice());
+        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(7);
 
 		int size = MongoReader.grabCustomerFormModels("US70010KoboRegOnVoucherOwnerContextTest1").size();
 		if (size > 0) {
