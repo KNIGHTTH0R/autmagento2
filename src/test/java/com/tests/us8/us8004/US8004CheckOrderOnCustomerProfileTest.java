@@ -85,7 +85,7 @@ public class US8004CheckOrderOnCustomerProfileTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.redirectToProfileHistory();
-		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderDetails(orderModel.getOrderId());
 
 		String orderId = orderHistory.get(0).getOrderId();
 		String orderPrice = orderHistory.get(0).getTotalPrice();

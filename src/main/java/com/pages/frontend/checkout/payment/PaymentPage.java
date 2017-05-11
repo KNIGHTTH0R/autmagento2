@@ -53,6 +53,8 @@ public class PaymentPage extends AbstractPage {
 	@FindBy(id = "klarna.shopper.firstName")
 	private WebElement klarnaInput;
 
+	@FindBy(css = "input[value*=weiter]")
+	private WebElement weiterBtn;
 	
 	@FindBy(id = "mainBack")
 	private WebElement backButton;
@@ -141,6 +143,12 @@ public class PaymentPage extends AbstractPage {
 	//	if (element(klarnaContainer).isVisible())
 		return	element(klarnaContainer).isVisible();
 	    
+		
+	}
+
+	public void clickOnWeiterBtn() {
+		element(weiterBtn).waitUntilVisible();
+		weiterBtn.click();
 		
 	}
 	

@@ -175,6 +175,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		headerSteps.goToProfile();
 		voucherCode = dashboardSteps.getStyleCoachFullNameFromProfile().contentEquals(initialStylistName) ? koboCode2
 				: koboCode1;
+		headerSteps.goToShop();
 		homeSteps.goToNewItems();
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();

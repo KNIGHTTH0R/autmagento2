@@ -94,7 +94,7 @@ public class US8001CheckOrderOnCustomerProfileTest extends BaseTest{
 		}
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
-		List<OrderModel> orderHistory = profileSteps.grabOrderHistory();
+		List<OrderModel> orderHistory = profileSteps.grabOrderDetails(orderModel.getOrderId());
 
 		String orderId = orderHistory.get(0).getOrderId();
 		String orderPrice = orderHistory.get(0).getTotalPrice();

@@ -248,7 +248,7 @@ public class OrderInfoMagCalls {
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("jewelry_credits_used")) {
 					model.setJewelryCreditsUsed(resultNodes.item(r).getTextContent());
 					jewelryCreditsUsed = jewelryCreditsUsed
-							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent())));
+							.add(BigDecimal.valueOf(Double.parseDouble(FormatterUtils.parseValueToTwoDecimals(resultNodes.item(r).getTextContent()))));
 				}
 
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("marketing_credits_used")) {
@@ -275,7 +275,7 @@ public class OrderInfoMagCalls {
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("jewelry_credits_used_excl_tax")) {
 					// model.setJewelryCreditsUsed(resultNodes.item(r).getTextContent());
 					jewelryCreditsUsedExclTax = jewelryCreditsUsedExclTax
-							.add(BigDecimal.valueOf(Double.parseDouble(resultNodes.item(r).getTextContent())));
+							.add(BigDecimal.valueOf(Double.parseDouble(FormatterUtils.parseValueToTwoDecimals(resultNodes.item(r).getTextContent()))));
 
 					System.out.println("jewelryCreditsUsedExclTax =>> " + jewelryCreditsUsedExclTax);
 				}
@@ -627,7 +627,7 @@ public class OrderInfoMagCalls {
 
 		String sessID = HttpSoapConnector.performLogin();
 
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10022765800");
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10023165800");
 
 
 		System.out.println("order ID : " + dbmodel.getOrderId());

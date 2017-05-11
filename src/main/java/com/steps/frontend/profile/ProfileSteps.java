@@ -49,4 +49,8 @@ public class ProfileSteps extends AbstractSteps {
 		profileHistoryPage().clickOnOrder(orderId);
 	}
 
+	@Step
+	public List<OrderModel> grabOrderDetails(String orderId) {
+		return profileHistoryPage().grabOrderDetails(orderId);
+	}
 }

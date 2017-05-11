@@ -28,11 +28,9 @@ public class ProfileHistoryPage extends AbstractPage {
 
 	@FindBy(css = "a[href*='reorder']")
 	private WebElement reorderLink;
-	
-	
+
 	@FindBy(css = "#order_history")
 	private WebElement tableOrderHistory;
-	
 
 	public List<OrderModel> grabOrderHistory() {
 		waitABit(5000);
@@ -63,48 +61,85 @@ public class ProfileHistoryPage extends AbstractPage {
 
 		return result;
 	}
-	
-	
-	
-	public void clickOnOrder(String orderId) {
-	//	waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+
+	public List<OrderModel> grabOrderDetails(String idOrder) {
+		// waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+		// ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.TIME_MEDIUM);
 		element(tableOrderHistory).waitUntilVisible();
 		List<WebElement> orderList = tableOrderHistory.findElements(By.cssSelector("tbody > tr"));
-		boolean found=false;
+		System.out.println("idOrder "+idOrder );
+		List<OrderModel> result = new ArrayList<OrderModel>();
+		boolean found = false;
 		theFor: for (WebElement elementNow : orderList) {
 			System.out.println(elementNow.getText());
-			if (elementNow.getText().toLowerCase().contains(orderId)) {
-				System.out.println("l-am gasit");
-				found=true;
-				elementNow.findElement(By.cssSelector("td:nth-child(1) a")).click();
+			if (elementNow.getText().toLowerCase().contains(idOrder)) {
+				found = true;
+				OrderModel orderNow = new OrderModel();
+				String orderId = elementNow.findElement(By.cssSelector("td:nth-child(1)")).getText();
+				String date = elementNow.findElement(By.cssSelector("td:nth-child(2)")).getText();
+				String invoiceTo = elementNow.findElement(By.cssSelector("td:nth-child(3)")).getText();
+				String deliveryTo = elementNow.findElement(By.cssSelector("td:nth-child(4)")).getText();
+				String totalSum = elementNow.findElement(By.cssSelector("td:nth-child(5)")).getText();
+				String status = elementNow.findElement(By.cssSelector("td:nth-child(6)")).getText();
+
+				orderNow.setOrderId(orderId);
+				orderNow.setDate(date);
+				orderNow.setInvoiceContact(invoiceTo);
+				orderNow.setDeliveryContact(deliveryTo);
+				orderNow.setTotalPrice(totalSum);
+				orderNow.setStatus(status);
+
+				result.add(orderNow);
+
 				break theFor;
 			}
 		}
 		Assert.assertTrue("The order was not found in the list !!!", found);
 		
-		
+		return result;
+
 	}
 
-//	public void clickReorderLink(String name) {
-//		evaluateJavascript("jQuery.noConflict();");
-//		element(orderListContainer).waitUntilVisible();
-//		List<WebElement> listElements = orderListContainer.findElements(By.tagName("tr"));
-//		theFor: for (WebElement elementNow : listElements) {
-//			if (elementNow.getText().contains(name)) {
-//				elementNow.findElement(By.cssSelector("a[href*='reorder']")).click();
-//				break theFor;
-//			}
-//		}
-//	}
+	public void clickOnOrder(String orderId) {
+		// waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+		// ContextConstants.LOADING_MESSAGE));
+		waitABit(TimeConstants.TIME_MEDIUM);
+		element(tableOrderHistory).waitUntilVisible();
+		List<WebElement> orderList = tableOrderHistory.findElements(By.cssSelector("tbody > tr"));
+		boolean found = false;
+		theFor: for (WebElement elementNow : orderList) {
+			System.out.println(elementNow.getText());
+			if (elementNow.getText().toLowerCase().contains(orderId)) {
+				System.out.println("l-am gasit");
+				found = true;
+				elementNow.findElement(By.cssSelector("td:nth-child(1) a")).click();
+				break theFor;
+			}
+		}
+		Assert.assertTrue("The order was not found in the list !!!", found);
 
-	
+	}
+
+	// public void clickReorderLink(String name) {
+	// evaluateJavascript("jQuery.noConflict();");
+	// element(orderListContainer).waitUntilVisible();
+	// List<WebElement> listElements =
+	// orderListContainer.findElements(By.tagName("tr"));
+	// theFor: for (WebElement elementNow : listElements) {
+	// if (elementNow.getText().contains(name)) {
+	// elementNow.findElement(By.cssSelector("a[href*='reorder']")).click();
+	// break theFor;
+	// }
+	// }
+	// }
+
 	public void clickReorderLink(String name) {
 		evaluateJavascript("jQuery.noConflict();");
 		System.out.println("Sunt aici");
 		element(reorderLink).waitUntilVisible();
 		reorderLink.click();
-		
+
 	}
 
 }
