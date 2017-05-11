@@ -35,6 +35,7 @@ public class HomeSteps extends AbstractSteps {
 	@Step
 	public void clickonGeneralView() {
 		homePage().clickonGeneralView();
+		waitABit(20000);
 	}
 	
 	@Step

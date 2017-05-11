@@ -59,13 +59,14 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 
 	@Step
 	public void verifyThatNoOfUsesPerCouponIsCorrect(String couponCode, String usesPerCoupon) {
-		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Credentials.BE_USER);
-		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
-		magentoLoginPage().clickOnLogin();
-		navigationPage().dismissPopUp();
+//		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+//		magentoLoginPage().inputUserName(Credentials.BE_USER);
+//		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
+//		magentoLoginPage().clickOnLogin();
+//		navigationPage().dismissPopUp();
 //		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 		navigationPage().selectSubmenu("promo_quote");
+		System.out.println("sunt aici");
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);
 		shoppingCartPriceRulesPage().clickOnSearch();
 		shoppingCartPriceRulesPage().openRuleDetails("Contact Booster");
@@ -77,11 +78,11 @@ public class ShoppingCartPriceRulesSteps extends AbstractSteps {
 
 	@Step
 	public void verifyStatusAndUsesPerCoupon(String couponCode, String usesPerCoupon, String status) {
-		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
-		magentoLoginPage().inputUserName(Credentials.BE_USER);
-		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
-		magentoLoginPage().clickOnLogin();
-		navigationPage().dismissPopUp();
+//		navigate(MongoReader.getBaseURL() + UrlConstants.BASE_URL_BE);
+//		magentoLoginPage().inputUserName(Credentials.BE_USER);
+//		magentoLoginPage().inputUserPassword(Credentials.BE_PASS);
+//		magentoLoginPage().clickOnLogin();
+//		navigationPage().dismissPopUp();
 //		navigationPage().selectMenuFromNavbar("Promotionen", "Warenkorb Preisgebote");
 		navigationPage().selectSubmenu("promo_quote");
 		shoppingCartPriceRulesPage().typeRuleCode(couponCode);

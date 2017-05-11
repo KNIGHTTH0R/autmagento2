@@ -8,6 +8,7 @@ import com.tools.data.backend.OrderModel;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CartProductModel;
 import com.tools.data.frontend.CartTotalsModel;
+import com.tools.data.frontend.HostCartProductModel;
 import com.tools.data.frontend.ShippingModel;
 
 public class DataGrabber {
@@ -51,6 +52,26 @@ public class DataGrabber {
 	public static ShippingModel confirmationTotalsTp2 = new ShippingModel();
 	public static ShippingModel confirmationTotalsTp3 = new ShippingModel();
 
+	public static ShippingModel sfmShippingTotalsTp0 = new ShippingModel();
+	public static ShippingModel sfmShippingTotalsTp1 = new ShippingModel();
+	public static ShippingModel sfmShippingTotalsTp2 = new ShippingModel();
+	public static ShippingModel sfmShippingTotalsTp3 = new ShippingModel();
+
+	public static List<CartProductModel> grabbedSFMConfirmationProductsListTp0 = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> grabbedSFMConfirmationProductsListTp1 = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> grabbedSFMConfirmationProductsListTp2 = new ArrayList<CartProductModel>();
+	public static List<CartProductModel> grabbedSFMConfirmationProductsListTp3 = new ArrayList<CartProductModel>();
+
+	public static List<CartProductModel> grabbedSFMShippingProductsListTp0=new ArrayList<CartProductModel>(); 
+	public static List<CartProductModel> grabbedSFMShippingProductsListTp1=new ArrayList<CartProductModel>(); 
+	public static List<CartProductModel> grabbedSFMShippingProductsListTp2=new ArrayList<CartProductModel>(); 
+	public static List<CartProductModel> grabbedSFMShippingProductsListTp3=new ArrayList<CartProductModel>();
+	
+	public static ShippingModel sfmConfirmationTotalsTp0=new ShippingModel();
+	public static ShippingModel sfmConfirmationTotalsTp1=new ShippingModel();
+	public static ShippingModel sfmConfirmationTotalsTp2=new ShippingModel();
+	public static ShippingModel sfmConfirmationTotalsTp3=new ShippingModel();
+	
 	public static void wipe() {
 		urlModel = new UrlModel();
 		orderModel = new OrderModel();
@@ -84,7 +105,7 @@ public class DataGrabber {
 		confirmationTotalsTp0 = new ShippingModel();
 		confirmationTotalsTp1 = new ShippingModel();
 		confirmationTotalsTp2 = new ShippingModel();
-		
+
 		grabbedBillingAddress = new AddressModel();
 		grabbedShippingAddress = new AddressModel();
 	}

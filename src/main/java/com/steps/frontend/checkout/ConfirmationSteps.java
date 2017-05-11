@@ -40,6 +40,22 @@ public class ConfirmationSteps extends AbstractSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return confirmationPage().grabProductsList();
 	}
+	
+	public List<CartProductModel> grabSFMProductsListTp0() {
+		return confirmationPage().grabSFMProductsListTp0();
+	}
+
+	public List<CartProductModel> grabSFMProductsListTp1() {
+		return confirmationPage().grabSFMProductsListTp1();
+	}
+
+	public List<CartProductModel> grabSFMProductsListTp2() {
+		return confirmationPage().grabSFMProductsListTp2();
+	}
+	
+	public List<CartProductModel> grabSFMProductsListTp3() {
+		return confirmationPage().grabSFMProductsListTp3();
+	}
 
 	public List<BorrowedCartModel> grabBorrowedProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);

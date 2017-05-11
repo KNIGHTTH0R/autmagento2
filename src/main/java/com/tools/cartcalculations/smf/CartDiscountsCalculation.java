@@ -178,7 +178,6 @@ public class CartDiscountsCalculation {
 		
 		for (BasicProductModel product : productsList) {
 			
-			System.out.println("asking price " +product.getProductsPrice());
 			BasicProductModel newProduct = new BasicProductModel();
 
 			newProduct.setDiscountClass(product.getDiscountClass());
@@ -196,7 +195,6 @@ public class CartDiscountsCalculation {
 					BigDecimal.valueOf(Double.parseDouble(jewelryDiscount)), sum25, delta);
 
 			
-			System.out.println("FINAL PRICE " +discounts[0] );
 			newProduct.setFinalPrice(discounts[0]);
 
 			delta = BigDecimal.valueOf(Double.parseDouble(discounts[1]));
@@ -326,15 +324,12 @@ public class CartDiscountsCalculation {
 
 		
 		
-		System.out.println("AAAskingPrice "+askingPrice);
 		String[] discountAndRemainder = new String[2];
 
 		BigDecimal result = BigDecimal.ZERO;
 		BigDecimal diff = BigDecimal.ZERO;
 
-		System.out.println("jBjBjBjB"+jB);
 		System.out.println(sum25Section.compareTo(jB) > 0);
-		System.out.println("sum25Section "+sum25Section);
 		if (sum25Section.compareTo(jB) > 0) {
 
 			result = result.add(askingPrice);
@@ -344,7 +339,6 @@ public class CartDiscountsCalculation {
 			result = result.multiply(jB);
 			result = askingPrice.subtract(result);
 			BigDecimal temp = result;
-			System.out.println("temop "+ temp);
 			result = result.multiply(BigDecimal.valueOf(25));
 			// the 25% disc is calculated with 5 decimals precision (we don't
 			// want the 4th decimal rounded)

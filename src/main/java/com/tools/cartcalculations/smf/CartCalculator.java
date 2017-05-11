@@ -28,9 +28,31 @@ public class CartCalculator {
 	public static List<BasicProductModel> calculatedProductsListMarketing = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> allProductsListRecalculated = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> shippingProductsList = new ArrayList<BasicProductModel>();
-
+	
+	
+	//emilina
+	
+	public static List<BasicProductModel> productsListTp0 = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> productsListTp1 = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> productsListTp2 = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> productsListTp3 = new ArrayList<BasicProductModel>();
+	
 	public static CalcDetailsModel calculatedTotalsDiscounts = new CalcDetailsModel();
+	//emilian
+	public static CalcDetailsModel calculatedTotalsDiscountsTp0 = new CalcDetailsModel();
+	public static CalcDetailsModel calculatedTotalsDiscountsTp1 = new CalcDetailsModel();
+	public static CalcDetailsModel calculatedTotalsDiscountsTp2 = new CalcDetailsModel();
+	public static CalcDetailsModel calculatedTotalsDiscountsTp3 = new CalcDetailsModel();
+			
+			
 	public static ShippingModel shippingCalculatedModel = new ShippingModel();
+	
+	//emilian
+	public static ShippingModel shippingCalculatedModeTP0 = new ShippingModel();
+	public static ShippingModel shippingCalculatedModeTP1 = new ShippingModel();
+	public static ShippingModel shippingCalculatedModeTP2 = new ShippingModel();
+	public static ShippingModel shippingCalculatedModeTP3 = new ShippingModel();
+
 	public static String delta = "0";
 
 	public static void wipe() {
@@ -80,6 +102,37 @@ public class CartCalculator {
 		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass, shippingValue,
 				shippingValue);
 		shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+	}
+	
+	
+	public static void calculateJMDiscountsTP(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue) {
+		allProductsList.addAll(productsList25);
+		allProductsList.addAll(productsList50);
+		allProductsList.addAll(productsListMarketing);
+		
+		
+
+		calculatedProductsList25 = CartDiscountsCalculation.calculateProductsfor25Discount(productsList25, jewelryDiscount);
+		calculatedProductsList50 = CartDiscountsCalculation.calculateProductsfor50Discount(productsList50, productsList25, jewelryDiscount);
+		calculatedProductsListMarketing = CartDiscountsCalculation.calculateProductsforMarketingMaterial(productsListMarketing, marketingDiscount);
+
+		allProductsListRecalculated.addAll(calculatedProductsList50);
+		allProductsListRecalculated.addAll(calculatedProductsList25);
+		allProductsListRecalculated.addAll(calculatedProductsListMarketing);
+
+		calculatedTotalsDiscounts = CartTotalsCalculation.calculateCartProductsTotals(allProductsListRecalculated, jewelryDiscount, marketingDiscount, taxClass, shippingValue,
+				shippingValue);
+		calculatedTotalsDiscountsTp0=CartTotalsCalculation.calculateCartProductsTotalsTP(allProductsListRecalculated,productsListTp0 ,jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValue);
+		calculatedTotalsDiscountsTp1=CartTotalsCalculation.calculateCartProductsTotalsTP(allProductsListRecalculated,productsListTp1 ,jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValue);
+		calculatedTotalsDiscountsTp2=CartTotalsCalculation.calculateCartProductsTotalsTP(allProductsListRecalculated,productsListTp2 ,jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValue);
+		//	calculatedTotalsDiscountsTp3=CartTotalsCalculation.calculateCartProductsTotalsTP(allProductsListRecalculated,productsListTp3 ,jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValue);
+
+		//shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+		
+		shippingCalculatedModeTP0=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp0, shippingValue);
+		shippingCalculatedModeTP1=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp1, "0");
+		shippingCalculatedModeTP2=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp2, shippingValue);
+		//shippingCalculatedModeTP3=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp3, shippingValue);
 	}
 
 	public static void calculateJMDiscountsWithActiveDiscountVoucher(String ruleDiscount, String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue) {

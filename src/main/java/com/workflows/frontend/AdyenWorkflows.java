@@ -19,7 +19,10 @@ public class AdyenWorkflows {
 
 	@Step
 	public void veryfyAdyenTotals(String string) {
-
+		System.out.println(" ");
+		System.out.println(string);
+		System.out.println("orderModel.getTotalPrice()"+orderModel.getTotalPrice());
+		System.out.println("totalAmount" +totalAmount);
 		verifyTotal(orderModel.getTotalPrice(), totalAmount);
 	}
 

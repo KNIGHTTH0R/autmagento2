@@ -169,7 +169,6 @@ public class US70011PlacePomOrderTest extends BaseTest {
 		PomCartCalculator.allBorrowedProductsList.add(productData);
 
 		PomCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
-		System.out.println("am calculat");
 		fancyBoxSteps.goToShipping();
 		shippingSteps.selectPartyNoOptionIfPresent();
 		DataGrabber.shippingTotals = shippingSteps.grabSurveyData();

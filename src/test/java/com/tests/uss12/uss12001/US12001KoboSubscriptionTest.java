@@ -150,8 +150,9 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+		paymentSteps.payWithBankTransfer();
 
 		confirmationSteps.agreeAndCheckout();
 		headerSteps.goToLounge();

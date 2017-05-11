@@ -11,6 +11,35 @@ public class BasicProductModel {
 	private String finalPrice;
 	private String priceIP;
 	private String discountClass;
+	private String deliveryDate;
+	private String earliestAvailability;
+	private String isMarketing;
+
+	
+	
+	public String getIsMarketing() {
+		return isMarketing;
+	}
+
+	public void setIsMarketing(String isMarketing) {
+		this.isMarketing = isMarketing;
+	}
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(String deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public String getEarliestAvailability() {
+		return earliestAvailability;
+	}
+
+	public void setEarliestAvailability(String earliestAvailability) {
+		this.earliestAvailability = earliestAvailability;
+	}
 
 	public String getName() {
 		return name;
@@ -100,4 +129,15 @@ public class BasicProductModel {
 
 	}
 
+	@Override
+	public String toString() {
+		return "BasicProductModel [name=" + name + ", prodCode=" + prodCode + ", quantity=" + quantity + ", unitPrice="
+				+ unitPrice + ", specialPrice=" + specialPrice + ", productsPrice=" + productsPrice + ", finalPrice="
+				+ finalPrice + ", priceIP=" + priceIP + ", discountClass=" + discountClass + ", deliveryDate="
+				+ deliveryDate + ", earliestAvailability=" + earliestAvailability + ", isMarketing=" + isMarketing
+				+ "]";
+	}
+
+	
+	
 }

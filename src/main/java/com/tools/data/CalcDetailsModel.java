@@ -113,4 +113,14 @@ public class CalcDetailsModel {
 		this.segmentTotals = map;
 	}
 
+	@Override
+	public String toString() {
+		return "CalcDetailsModel [jewelryBonus=" + jewelryBonus + ", marketingBonus=" + marketingBonus
+				+ ", totalAmount=" + totalAmount + ", subTotal=" + subTotal + ", ipPoints=" + ipPoints + ", tax=" + tax
+				+ ", segmentTotals=" + segmentTotals + ", calculationsList=" + calculationsList + "]";
+	}
+
+	
+	
+	
 }

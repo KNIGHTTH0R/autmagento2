@@ -54,6 +54,21 @@ public class ShippingSteps extends AbstractSteps {
 		return surveyPage().grabProductsList();
 	}
 
+	public List<CartProductModel> grabSFMProductsListTp0() {
+		waitABit(TimeConstants.TIME_MEDIUM);
+		return surveyPage().grabSFMProductsListTp0();
+	}
+	
+	public List<CartProductModel> grabSFMProductsListTp1() {
+		waitABit(TimeConstants.TIME_MEDIUM);
+		return surveyPage().grabSFMProductsListTp1();
+	}
+	
+	public List<CartProductModel> grabSFMProductsListTp2() {
+		waitABit(TimeConstants.TIME_MEDIUM);
+		return surveyPage().grabSFMProductsListTp2();
+	}
+	
 	public List<RegularUserCartProductModel> grabRegularProductsList() {
 		waitABit(TimeConstants.TIME_CONSTANT);
 		return surveyPage().grabRegularProductsList();

@@ -131,4 +131,9 @@ public class CartSteps extends AbstractSteps {
 	public void verifyJBErrorMessage(boolean shouldBePresent, String message) {
 		cartPage().verifyJBErrorMessage(shouldBePresent, message);
 	}
+
+	public void selectDeliveryDate(String sku, String deliveryTP1Locale,String section) {
+		cartPage().selectDeliveryDate(sku,deliveryTP1Locale,section);
+		
+	}
 }

@@ -260,6 +260,38 @@ public class ConfirmationPage extends AbstractPage {
 		DataGrabber.confirmationProducts = resultList;
 		return resultList;
 	}
+	
+	
+	public List<CartProductModel> grabProductsList(WebElement element) {
+		element(element).waitUntilVisible();
+		List<WebElement> entryList = element.findElements(By.cssSelector("tbody > tr"));
+		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
+
+		for (WebElement webElementNow : entryList) {
+			CartProductModel productNow = new CartProductModel();
+
+			String parseQty = FormatterUtils
+					.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			parseQty = parseQty.replace("x", "").trim();
+
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
+			productNow.setQuantity(parseQty);
+			productNow.setUnitPrice(FormatterUtils
+					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setProductsPrice("");
+			productNow.setFinalPrice("");
+			productNow.setPriceIP("");
+
+			resultList.add(productNow);
+		}
+
+		DataGrabber.confirmationProducts = resultList;
+		return resultList;
+	}
+	
+	
+	
 
 	public List<BorrowedCartModel> grabBorrowedProductsList() {
 		element(productListContainer).waitUntilVisible();
@@ -391,6 +423,30 @@ public class ConfirmationPage extends AbstractPage {
 	public List<HostCartProductModel> grabHostProductsListTp2() {
 		List<HostCartProductModel> resultList = grabHostProductsList(productListContainerTp2);
 		HostDataGrabber.grabbedHostConfirmationProductsListTp2 = resultList;
+		return resultList;
+	}
+
+	public List<CartProductModel> grabSFMProductsListTp0() {
+		List<CartProductModel> resultList = grabProductsList(productListContainer);
+		DataGrabber.grabbedSFMConfirmationProductsListTp0 = resultList;
+		return resultList;
+	}
+
+	public List<CartProductModel> grabSFMProductsListTp1() {
+		List<CartProductModel> resultList = grabProductsList(productListContainerTp1);
+		DataGrabber.grabbedSFMConfirmationProductsListTp1 = resultList;
+		return resultList;
+	}
+
+	public List<CartProductModel> grabSFMProductsListTp2() {
+		List<CartProductModel> resultList = grabProductsList(productListContainerTp2);
+		DataGrabber.grabbedSFMConfirmationProductsListTp2 = resultList;
+		return resultList;
+	}
+
+	public List<CartProductModel> grabSFMProductsListTp3() {
+		List<CartProductModel> resultList = grabProductsList(productListContainerTp3);
+		DataGrabber.grabbedSFMConfirmationProductsListTp3 = resultList;
 		return resultList;
 	}
 

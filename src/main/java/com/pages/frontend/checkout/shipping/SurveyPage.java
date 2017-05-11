@@ -114,6 +114,35 @@ public class SurveyPage extends AbstractPage {
 
 	}
 
+	public List<CartProductModel> grabProductsList(WebElement element) {
+
+		element(element).waitUntilVisible();
+		List<WebElement> entryList = element.findElements(By.cssSelector("tbody > tr"));
+		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
+
+		for (WebElement webElementNow : entryList) {
+			CartProductModel productNow = new CartProductModel();
+
+			String parseQty = FormatterUtils.parseValueToZeroDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			parseQty = parseQty.replace("x", "").trim();
+
+			productNow.setName(webElementNow.findElement(By.cssSelector("h2.product-name")).getText());
+			productNow.setProdCode(webElementNow.findElement(By.cssSelector("dl.item-options")).getText().trim());
+			productNow.setQuantity(parseQty);
+			productNow.setUnitPrice(FormatterUtils.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
+			productNow.setProductsPrice("");
+			productNow.setFinalPrice("");
+			productNow.setPriceIP("");
+
+			resultList.add(productNow);
+		//	waitABit(2000);
+		}
+
+		DataGrabber.shippingProducts = resultList;
+		System.out.println("grabProductsList in for ");
+		return resultList;
+	}
+	
 	public List<CartProductModel> grabProductsList() {
 
 		element(productListContainer).waitUntilVisible();
@@ -273,4 +302,22 @@ public class SurveyPage extends AbstractPage {
 		HostDataGrabber.grabbedHostShippingProductsListTp2 = resultList;
 		return resultList;
 	}
+
+	public List<CartProductModel> grabSFMProductsListTp0() {
+		List<CartProductModel> resultList = grabProductsList(productListContainer);
+		DataGrabber.grabbedSFMShippingProductsListTp0 = resultList;
+		return resultList;
+	}
+
+	public List<CartProductModel> grabSFMProductsListTp1() {
+		List<CartProductModel> resultList = grabProductsList(productListContainerTp1);
+		DataGrabber.grabbedSFMShippingProductsListTp1 = resultList;
+		return resultList;
+	}
+	public List<CartProductModel> grabSFMProductsListTp2() {
+		List<CartProductModel> resultList = grabProductsList(productListContainerTp2);
+		DataGrabber.grabbedSFMShippingProductsListTp2 = resultList;
+		return resultList;
+	}
+	
 }

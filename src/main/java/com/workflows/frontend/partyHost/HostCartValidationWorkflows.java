@@ -376,7 +376,7 @@ public class HostCartValidationWorkflows {
 		hostShippingAndConfirmationWorkflows.setValidateProductsModels(HostCartCalculator.allProductsListTp2,
 				HostDataGrabber.grabbedHostConfirmationProductsListTp2);
 		hostShippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP2");
-
+///
 		hostCartWorkflows.setVerifyTotalsDiscount(HostDataGrabber.hostGrabbedCartTotals,
 				HostCartCalculator.calculatedTotalsDiscounts);
 		hostCartWorkflows.verifyTotalsDiscountWith40AndJbDiscount("CART TOTALS");

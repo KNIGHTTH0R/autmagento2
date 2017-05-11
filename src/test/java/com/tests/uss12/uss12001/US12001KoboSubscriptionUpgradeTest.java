@@ -97,11 +97,13 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		String url = shippingSteps.grabUrl();
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+//		paymentSteps.expandCreditCardForm();
+//		paymentSteps.fillCreditCardForm(creditCardData);
+		paymentSteps.payWithBankTransfer();
 		confirmationSteps.agreeAndCheckout();
 		headerSteps.goToLounge();
 		coboCode = myBusinessSteps.getKoboCode();
+		System.out.println("coboCode"+ coboCode);
 		headerSteps.goToMyBusinessPage();
 		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
 		myBusinessSteps.cancelSubstription();

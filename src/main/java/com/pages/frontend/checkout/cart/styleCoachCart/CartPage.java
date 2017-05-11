@@ -114,7 +114,7 @@ public class CartPage extends AbstractPage {
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
 					.replace(productNow.getName(), "").trim());
 			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(
-					webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+					webElementNow.findElement(By.cssSelector("input[name*=qty]")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils
 					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setProductsPrice(FormatterUtils
@@ -154,7 +154,7 @@ public class CartPage extends AbstractPage {
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
 					.replace(productNow.getName(), "").trim());
 			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(
-					webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+					webElementNow.findElement(By.cssSelector("input[name*=qty]")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils
 					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setProductsPrice(FormatterUtils
@@ -168,6 +168,9 @@ public class CartPage extends AbstractPage {
 			resultList.add(productNow);
 		}
 
+		for (CartProductModel cartProductModel : resultList) {
+		System.out.println("sku grabbed "+cartProductModel.getProdCode());
+		}
 		return resultList;
 	}
 
@@ -189,7 +192,7 @@ public class CartPage extends AbstractPage {
 			productNow.setProdCode(webElementNow.findElement(By.cssSelector("h2.product-name")).getText()
 					.replace(productNow.getName(), "").trim());
 			productNow.setQuantity(FormatterUtils.parseValueToZeroDecimals(
-					webElementNow.findElement(By.cssSelector("input")).getAttribute("value")));
+					webElementNow.findElement(By.cssSelector("input[name*=qty]")).getAttribute("value")));
 			productNow.setUnitPrice(FormatterUtils
 					.parseValueToTwoDecimals(webElementNow.findElement(By.cssSelector("td:nth-child(4)")).getText()));
 			productNow.setProductsPrice(FormatterUtils
@@ -399,5 +402,38 @@ public class CartPage extends AbstractPage {
 		else
 			Assert.assertTrue("The error message should be visible and it isn't!",
 					!cartMainContainer.getText().contains(errorMessage));
+	}
+
+	public void selectDeliveryDate(String productCode, String deliveryDate, String section) {
+	
+		List<WebElement> cartList = getDriver().findElements(By.cssSelector("#shopping-cart-"+section));
+		boolean foundProduct = false;
+		for (WebElement product : cartList) {
+			if (product.getText().contains(productCode)) {
+				foundProduct = true;
+				WebElement preOrderCheckbox = product.findElement(By.cssSelector("input[id*='tp-status']"));
+				if (!preOrderCheckbox.isSelected()) {
+					preOrderCheckbox.click();
+
+				}
+				WebElement dropdown = product.findElement(By.cssSelector("select.tp-cb-item-delivery-date"));
+				dropdown.click();
+				List<WebElement> deliveryoptions = product
+						.findElements(By.cssSelector("select.tp-cb-item-delivery-date option"));
+				for (WebElement option : deliveryoptions) {
+					if (option.getText().toLowerCase().contains(deliveryDate.toLowerCase())) {
+						element(dropdown).selectByIndex(deliveryoptions.indexOf(option));
+						break;
+					}
+				}
+
+				waitFor(ExpectedConditions.invisibilityOfElementWithText(
+						By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+				break;
+			}
+		}
+		Assert.assertTrue("The product with the product code " + productCode + " was not found", foundProduct);
+
+		
 	}
 }

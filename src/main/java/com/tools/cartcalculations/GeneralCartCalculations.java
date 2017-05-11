@@ -72,10 +72,12 @@ public class GeneralCartCalculations {
 	public static String calculateAdyenTotal(ShippingModel... shippingModelsList) {
 
 		BigDecimal total = BigDecimal.ZERO;
-
+		
+		
 		for (ShippingModel list : shippingModelsList) {
 			total = total.add(BigDecimal.valueOf(Double.parseDouble(list.getTotalAmount())));
 		}
+		
 		return String.valueOf(total);
 	}
 

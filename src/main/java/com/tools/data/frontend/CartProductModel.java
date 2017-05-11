@@ -84,4 +84,13 @@ public class CartProductModel {
 		this.priceIP = priceIP;
 	}
 
+	@Override
+	public String toString() {
+		return "CartProductModel [name=" + name + ", prodCode=" + prodCode + ", quantity=" + quantity + ", unitPrice="
+				+ unitPrice + ", productsPrice=" + productsPrice + ", finalPrice=" + finalPrice + ", priceIP=" + priceIP
+				+ ", discountClass=" + discountClass + "]";
+	}
+
+	
+	
 }

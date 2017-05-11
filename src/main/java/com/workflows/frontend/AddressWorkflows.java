@@ -26,6 +26,9 @@ public class AddressWorkflows {
 
 	@Step
 	public static void validateBillingAddress(String message) {
+		
+		System.out.println(" ");
+		System.out.println(message);
 		verifyCountry(billingCountryName, billingAddress.getCountryName());
 	}
 
@@ -41,6 +44,8 @@ public class AddressWorkflows {
 
 	@Step
 	public static void validateShippingAddress(String message) {
+		System.out.println(" ");
+		System.out.println(message);
 		verifyCountry(shippingCountryName, shippingAddress.getCountryName());
 	}
 

@@ -31,10 +31,14 @@ public class CartWorkflows2 {
 
 	@Step
 	public void validateProducts(String message) {
-
+		System.out.println(" ");
+		System.out.println(message);
+		System.out.println("basicProductsListbasicProductsList "+basicProductsList);
+		System.out.println("cartProductsListcartProductsList "+cartProductsList);
 		for (BasicProductModel productNow : basicProductsList) {
 			CartProductModel compare = findProduct(productNow.getProdCode(), productNow.getQuantity(), cartProductsList);
-
+		//	CartProductModel compare = findProduct(productNow.getProdCode(), productNow.getDiscountClass(), cartProductsList);
+			System.out.println("compare "+compare);
 			if (compare != null) {
 				try {
 					compare.setQuantity(compare.getQuantity().replace("x", "").trim());
@@ -69,6 +73,7 @@ public class CartWorkflows2 {
 		CartProductModel result = new CartProductModel();
 		theFor: for (CartProductModel cartProductModel : cartProducts) {
 			if (cartProductModel.getProdCode().contains(productCode) && cartProductModel.getQuantity().contentEquals(quantity)) {
+			//if (cartProductModel.getProdCode().contains(productCode) && cartProductModel.getDiscountClass().contentEquals(quantity)) {
 				result = cartProductModel;
 				break theFor;
 			}
@@ -87,6 +92,8 @@ public class CartWorkflows2 {
 
 	@StepGroup
 	public void verifyTotalsDiscount(String message) {
+		System.out.println(" ");
+		System.out.println(message);
 		verifySubTotals(discountTotals.getSubtotal(), discountCalculationModel.getSubTotal());
 		verifyTotalAmount(discountTotals.getTotalAmount(), discountCalculationModel.getTotalAmount());
 		verifyJewelryBonus(discountTotals.getJewelryBonus(), discountCalculationModel.getJewelryBonus());

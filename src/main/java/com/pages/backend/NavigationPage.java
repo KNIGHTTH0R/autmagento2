@@ -71,6 +71,20 @@ public class NavigationPage extends AbstractPage {
 		}
 	}
 
+	public void selectSubmenuEm(String submenu) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(navigationBar).waitUntilVisible();
+		List<WebElement> menuList = navigationBar.findElements(By.cssSelector("li.parent.level0 ul > li.level1 > a"));
+		
+		for (WebElement menuNow : menuList) {
+			if (menuNow.getAttribute("href").contains(submenu)) {
+				menuNow.click();
+				break;
+			}
+		}
+	}
+	
+	
 	public void goToHomePage() {
 		element(adminHomePage).waitUntilVisible();
 		adminHomePage.click();
