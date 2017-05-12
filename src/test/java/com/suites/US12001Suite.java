@@ -58,7 +58,7 @@ import com.tests.uss12.uss12001.US12001VoucherRunOutNotificationEmailTest;
 	US12001ConfirmCustomerTest.class,
 	US12001CustomerBuyWithContactBoosterTest.class,
 	US12001VoucherRunOutNotificationEmailTest.class,
-	
+	  
 	
 })
 @RunWith(Suite.class)
