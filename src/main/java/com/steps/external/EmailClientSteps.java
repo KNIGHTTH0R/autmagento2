@@ -9,8 +9,8 @@ import net.thucydides.core.annotations.Step;
 
 public class EmailClientSteps extends AbstractSteps {
 
-	MailinatorPage mailPage;
-//	 YopmailPage mailPage;
+//	MailinatorPage mailPage;
+	 YopmailPage mailPage;
 
 	private static final long serialVersionUID = 1L;
 

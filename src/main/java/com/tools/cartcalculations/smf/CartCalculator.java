@@ -129,10 +129,15 @@ public class CartCalculator {
 
 		//shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
 		
-		shippingCalculatedModeTP0=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp0, shippingValue);
+		/*shippingCalculatedModeTP0=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp0, shippingValue);
 		shippingCalculatedModeTP1=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp1, "0");
-		shippingCalculatedModeTP2=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp2, shippingValue);
+		shippingCalculatedModeTP2=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp2, shippingValue);*/
 		//shippingCalculatedModeTP3=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp3, shippingValue);
+	}
+	
+	
+	public static ShippingModel calculateShippingTotalsTP(CalcDetailsModel calculatedTotalsDiscountsTp,String shippingValue){
+		return CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp, shippingValue);
 	}
 
 	public static void calculateJMDiscountsWithActiveDiscountVoucher(String ruleDiscount, String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue) {

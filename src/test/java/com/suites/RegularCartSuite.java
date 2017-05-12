@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.CreateProductsTest;
+import com.tests.us8.us80011.US80011CustomerOrderProductWithSpecialPriceTest;
 
 @SuiteClasses({
 	CreateProductsTest.class,
@@ -16,6 +17,8 @@ import com.tests.CreateProductsTest;
 	US8006Suite.class,
 	US8007Suite.class,
 	US8008Suite.class,
+	
+	//US80011CustomerOrderProductWithSpecialPriceTest.class,
 
 })
 @RunWith(Suite.class)
