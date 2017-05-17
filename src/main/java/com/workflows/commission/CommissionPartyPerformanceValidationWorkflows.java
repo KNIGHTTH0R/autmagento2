@@ -20,23 +20,23 @@ public class CommissionPartyPerformanceValidationWorkflows {
 	}
 
 	@Step
-	public void verifyClosedPartyJewelryBonus(String expectedValue, String grabbedValue) {
+	public void verifyClosedPartyJewelryBonus(String grabbedValue, String expectedValue) {
 		String expectedValue1 = expectedValue.length()>7 ? expectedValue.replaceFirst("[.]", ""):expectedValue;
 		CustomVerification.verifyTrue("Failure: JB doesn't match Expected: " + expectedValue1 + " Actual: " + grabbedValue, expectedValue1.contains(grabbedValue));
 	}
 
 	@Step
-	public void verifyClosedPartyJFourthyDiscount(String expectedValue, String grabbedValue) {
+	public void verifyClosedPartyJFourthyDiscount(String grabbedValue, String expectedValue) {
 		CustomVerification.verifyTrue("Failure: 40 discount doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 	}
 
 	@Step
-	public void verifyClosedPartyNoOfOrders(String expectedValue, String grabbedValue) {
+	public void verifyClosedPartyNoOfOrders(String grabbedValue, String expectedValue) {
 		CustomVerification.verifyTrue("Failure: No of orders doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 	}
 
 	@Step
-	public void verifyClosedPartyIp(String expectedValue, String grabbedValue) {
+	public void verifyClosedPartyIp(String grabbedValue, String expectedValue) {
 		CustomVerification.verifyTrue("Failure: Ip doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 	}
 
@@ -46,7 +46,7 @@ public class CommissionPartyPerformanceValidationWorkflows {
 	}
 
 	@Step
-	public void verifyClosedPartyRetail(String expectedValue, String grabbedValue) {
+	public void verifyClosedPartyRetail(String grabbedValue, String expectedValue) {
 		CustomVerification.verifyTrue("Failure: Retail doesn't match Expected: " + expectedValue + " Actual: " + grabbedValue, expectedValue.contentEquals(grabbedValue));
 	}
 

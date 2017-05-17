@@ -1,6 +1,4 @@
-package com.tests.us3.us30016;
-
-
+package com.tests.us3.us30017;
 
 
 
@@ -42,7 +40,6 @@ import com.tools.data.frontend.BasicProductModel;
 import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
-import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
@@ -59,7 +56,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US3.7 Shop for myself no valid VAT and no SMB billing and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_7.class)
 @RunWith(SerenityRunner.class)
-public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
+public class US30017SfmWithTPProductsOnEachSectionAndHalfDiscountTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -97,7 +94,7 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 	private CreditCardModel creditCardData = new CreditCardModel();
 
 	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
+//	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
 
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
@@ -111,15 +108,9 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 		genProduct1.setPrice("49.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("89.00");
-		genProduct2.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getFirstDayOfNextMonth("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct2);
-		
 
 		genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		genProduct3.setPrice("74.00");
+		genProduct3.setPrice("230.00");
 		genProduct3.setStockData(
 				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct3);
@@ -130,14 +121,14 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 		try {
 
 			input = new FileInputStream(
-					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us3007.properties");
+					UrlConstants.RESOURCES_PATH + FilePaths.US_03_FOLDER + File.separator + "us30014.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			billingAddress = prop.getProperty("billingAddress");
-			jewelryDiscount = "276";
-			marketingDiscount = "148";
-			shippingValue = "0";
+			jewelryDiscount = "49.00";
+			marketingDiscount = "115";
+			shippingValue = prop.getProperty("shippingPrice");
 			taxClass = prop.getProperty("taxClass");
 
 		} catch (IOException ex) {
@@ -157,7 +148,7 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 	}
 
 	@Test
-	public void us30016SfmWithTpOrdersWith0AmountTest() throws ParseException {
+	public void us30014SfmWithTPNoVatNoSmbBillingShippingAtTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -168,15 +159,19 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 		BasicProductModel productData;
+
+		String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(),
+				"yyyy-MM-dd");
+
+		String deliveryTP2 = DateUtils.getFirstFridayAfterDate(
+				DateUtils.addDaysToAAGivenDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7),
+				"yyyy-MM-dd");
 		
-		String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd");
-		System.out.println("deliveryTP1"+ deliveryTP1);
-		String deliveryTP2 = DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd");
-		System.out.println("deliveryTP2"+ deliveryTP2);
-		String deliveryTP3 = DateUtils.getFirstFridayAfterDate(genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd");
-		System.out.println("deliveryTP3"+ deliveryTP3);
-		
-		
+		String deliveryTP3 = DateUtils.getFirstFridayAfterDate(
+				DateUtils.addDaysToAAGivenDate(genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7),
+				"yyyy-MM-dd");
+
+
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);
 		if (!genProduct1.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(deliveryTP1);
@@ -185,27 +180,14 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_25);
 		if (!genProduct1.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(deliveryTP1);
-		CartCalculator.productsList25.add(productData);
-		CartCalculator.productsListTp0.add(productData);
-		
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_50);
-		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(deliveryTP2);
-		CartCalculator.productsList50.add(productData);
-		CartCalculator.productsListTp1.add(productData);
-
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0", ConfigConstants.DISCOUNT_25);
-		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(deliveryTP2);
 		CartCalculator.productsList25.add(productData);
 		CartCalculator.productsListTp1.add(productData);
 
-
-
-		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "2", "0", ConfigConstants.DISCOUNT_0);
+		productData = addProductsWorkflow.setBasicProductToCart(genProduct3, "1", "0", ConfigConstants.DISCOUNT_0);
 		if (!genProduct3.getStockData().getEarliestAvailability().contentEquals(""))
-			productData.setDeliveryDate(deliveryTP3);
+			productData.setDeliveryDate(deliveryTP2);
+
 		CartCalculator.productsListMarketing.add(productData);
 		CartCalculator.productsListTp2.add(productData);
 
@@ -216,57 +198,32 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 		DataGrabber.cartProductsWith25Discount = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProducts = cartSteps.grabMarketingMaterialProductsData();
 
-		
-		cartSteps.goToShipping();
-		
-		
-		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(true);
-		
-		shippingSteps.goToPaymentMethod();
-		
-		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
-		DataGrabber.orderModel.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 1));
-		DataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 2));
-		DataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 3));
-		
-		paymentSteps.goBack();
-		shippingSteps.goBack();
-		
 		cartSteps.typeJewerlyBonus(jewelryDiscount);
 		cartSteps.updateJewerlyBonus();
 		cartSteps.typeMarketingBonus(marketingDiscount);
 		cartSteps.updateMarketingBonus();
 
-//		String deliveryTP1Locale = DateUtils.parseDate(deliveryTP1, "yyyy-MM-dd", "dd. MMM. yy",
-//				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-//
-//		System.out.println("deliveryTP1Locale "+deliveryTP1Locale);
-//		String deliveryTP2Locale = DateUtils.parseDate(deliveryTP2, "yyyy-MM-dd", "dd. MMM. yy",
-//				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-//		
-//		System.out.println("deliveryTP2Locale "+deliveryTP2Locale);
-//		
-//		String deliveryTP3Locale = DateUtils.parseDate(deliveryTP3, "yyyy-MM-dd", "dd. MMM. yy",
-//				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-//		System.out.println("deliveryTP3Locale "+deliveryTP3Locale);
-//
-//		// we set the delivery for product4 to be the same with the delivery for
-//		// product 2 (same order)
-//		cartSteps.selectDeliveryDate(genProduct1.getSku(), deliveryTP1Locale, "50-table");
-//		cartSteps.selectDeliveryDate(genProduct2.getSku(), deliveryTP2Locale, "50-table");
-//	
-//		cartSteps.selectDeliveryDate(genProduct1.getSku(), deliveryTP1Locale, "25-table");
-//		cartSteps.selectDeliveryDate(genProduct2.getSku(), deliveryTP2Locale, "25-table");
+		String deliveryTP1Locale = DateUtils.parseDate(deliveryTP1, "yyyy-MM-dd", "dd. MMM. yy",
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+
+		String deliveryTP2Locale = DateUtils.parseDate(deliveryTP2, "yyyy-MM-dd", "dd. MMM. yy",
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		
-//		cartSteps.selectDeliveryDate(genProduct3.getSku(), deliveryTP3Locale, "table-marketing-material");
+		String deliveryTP3Locale = DateUtils.parseDate(deliveryTP3, "yyyy-MM-dd", "dd. MMM. yy",
+				new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+
+		// we set the delivery for product4 to be the same with the delivery for
+		// product 2 (same order)
+		cartSteps.selectDeliveryDate(genProduct1.getSku(), deliveryTP1Locale, "50-table");
+		cartSteps.selectDeliveryDate(genProduct1.getSku(), deliveryTP2Locale, "25-table");
+		cartSteps.selectDeliveryDate(genProduct3.getSku(), deliveryTP3Locale, "table-marketing-material");
 		
 		CartCalculator.calculateJMDiscountsTP(jewelryDiscount, marketingDiscount, taxClass, shippingValue);
 
-		CartCalculator.shippingCalculatedModeTP0=CartCalculator.calculateShippingTotalsTP(CartCalculator.calculatedTotalsDiscountsTp0, shippingValue);
+		CartCalculator.shippingCalculatedModeTP0=CartCalculator.calculateShippingTotalsTP(CartCalculator.calculatedTotalsDiscountsTp0, "0");
 		CartCalculator.shippingCalculatedModeTP1=CartCalculator.calculateShippingTotalsTP(CartCalculator.calculatedTotalsDiscountsTp1, shippingValue);
 		CartCalculator.shippingCalculatedModeTP2=CartCalculator.calculateShippingTotalsTP(CartCalculator.calculatedTotalsDiscountsTp2, shippingValue);
-		
+
 		DataGrabber.cartProductsWith50DiscountDiscounted = cartSteps.grabProductsDataWith50PercentDiscount();
 		DataGrabber.cartProductsWith25DiscountDiscounted = cartSteps.grabProductsDataWith25PercentDiscount();
 		DataGrabber.cartMarketingMaterialsProductsDiscounted = cartSteps.grabMarketingMaterialProductsData();
@@ -287,20 +244,15 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 
 		shippingSteps.goToPaymentMethod();
 
-//		String url = shippingSteps.grabUrl();
-//		DataGrabber.urlModel.setName("Payment URL");
-//		DataGrabber.urlModel.setUrl(url);
-//		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		String url = shippingSteps.grabUrl();
+		DataGrabber.urlModel.setName("Payment URL");
+		DataGrabber.urlModel.setUrl(url);
+		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 
-//		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
-//		
-//		
-	
-		
-		
-//
-//		paymentSteps.expandCreditCardForm();
-//		paymentSteps.fillCreditCardForm(creditCardData);
+		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
 
 		confirmationSteps.grabSFMProductsListTp0();
 		confirmationSteps.grabSFMProductsListTp1();
@@ -316,7 +268,7 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 		confirmationSteps.agreeAndCheckout();
 
 		validationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
-		validationWorkflows.performCartValidationsZeroAmountTP();
+		validationWorkflows.performCartValidationsTP();
 
 		customVerifications.printErrors();
 	}
@@ -328,16 +280,10 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 		MongoWriter.saveShippingModel(CartCalculator.shippingCalculatedModel,
 				getClass().getSimpleName() + SoapKeys.CALC);
 		MongoWriter.saveShippingModel(DataGrabber.confirmationTotals, getClass().getSimpleName() + SoapKeys.GRAB);
-		//MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveUrlModel(DataGrabber.urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		for (BasicProductModel product : CartCalculator.allProductsListRecalculated) {
 			MongoWriter.saveBasicProductModel(product, getClass().getSimpleName() + SoapKeys.GRAB);
 		}
-		
-		
-		
-		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName() + "TP0");
-		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp1, getClass().getSimpleName() + "TP1");
-		MongoWriter.saveOrderModel(HostDataGrabber.orderModelTp2, getClass().getSimpleName() + "TP2");
 	}
 }

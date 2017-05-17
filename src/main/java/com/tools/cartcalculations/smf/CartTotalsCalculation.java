@@ -51,6 +51,7 @@ public class CartTotalsCalculation {
 				BigDecimal.ROUND_HALF_UP);
 
 		result.setSubTotal(String.valueOf(subtotal));
+		System.out.println("jewerlyDiscount" +jewerlyDiscount);
 		result.setJewelryBonus(jewerlyDiscount);
 		result.setMarketingBonus(marketingDiscount);
 		result.setTotalAmount(String.valueOf(totalAmount));

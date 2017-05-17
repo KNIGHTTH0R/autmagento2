@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
@@ -53,6 +53,11 @@ public class ContactDetailsPage extends AbstractPage {
 	@FindBy(css= "")
 	private WebElement wishlistItems;
 	
+	@FindBy(css=".customer-infos-accordion.ui-accordion h3")
+	private List<WebElement> historyMenu;
+	
+	
+	
 	
 	public ContactModel grabContactDetails() {
 
@@ -68,7 +73,12 @@ public class ContactDetailsPage extends AbstractPage {
 		result.setZip(getDriver().findElement(By.xpath("//*[@id='contact-information']/p[3]")).getText().replace(",", ""));
 		result.setTown(getDriver().findElement(By.xpath("//*[@id='contact-information']/p[4]")).getText());
 		result.setCountry(getDriver().findElement(By.cssSelector("#contact-information p.dp-bl.contact-city")).getText());
-		result.setLastHistoryRegistration(getDriver().findElement(By.cssSelector("#reports-table-default tbody tr:nth-child(1)")).getText());
+//		element(historyMenu).waitUntilVisible();
+//		historyMenu.click();
+		String historyRegistarion=historyDetails("VERLAUF");
+		waitABit(2000);
+		result.setLastHistoryRegistration(historyRegistarion);
+		System.out.println("result history"+result.getLastHistoryRegistration());
 		
 		
 		
@@ -76,6 +86,24 @@ public class ContactDetailsPage extends AbstractPage {
 
 		return result;
 
+	}
+	
+	
+	public String historyDetails(String text){
+		
+		for (WebElement webElement : historyMenu) {
+			System.out.println("webElement "+webElement.getText());
+			if(webElement.getText().contains(text)){
+				System.out.println("here "+webElement.getText());
+				webElement.click();
+				
+				break;
+			}
+		}
+		
+		String lastHystoryRegistration=getDriver().findElement(By.cssSelector("#reports-table-default tbody tr:nth-child(1)")).getText();
+		return lastHystoryRegistration;
+		
 	}
 	
 	public boolean checkIsPresentSosButton(){

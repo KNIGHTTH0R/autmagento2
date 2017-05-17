@@ -29,7 +29,9 @@ public class CartCalculator {
 	public static List<BasicProductModel> allProductsListRecalculated = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> shippingProductsList = new ArrayList<BasicProductModel>();
 	
-	
+	public static List<BasicProductModel> shippingProductsListTp0 = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> shippingProductsListTp1 = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> shippingProductsListTp2 = new ArrayList<BasicProductModel>();
 	//emilina
 	
 	public static List<BasicProductModel> productsListTp0 = new ArrayList<BasicProductModel>();
@@ -83,6 +85,16 @@ public class CartCalculator {
 		shippingProductsList = CartCalculation.remove19(allProductsList);
 
 	}
+	
+	
+	public static ShippingModel calculateShippingWith19PercentRemovedForTp(CalcDetailsModel calculatedTotalsDiscountsTp,String shippingValue) {
+		return CartCalculation.remove119VAT(calculatedTotalsDiscountsTp, shippingValue);
+
+	}
+	
+	public static List<BasicProductModel> calculatedShippingForAllProductsTP(List<BasicProductModel> allProductsList){
+		return CartCalculation.remove19(allProductsList);
+	}
 
 	public static void calculateJMDiscounts(String jewelryDiscount, String marketingDiscount, String taxClass, String shippingValue) {
 		allProductsList.addAll(productsList25);
@@ -134,6 +146,8 @@ public class CartCalculator {
 		shippingCalculatedModeTP2=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp2, shippingValue);*/
 		//shippingCalculatedModeTP3=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp3, shippingValue);
 	}
+	
+	
 	
 	
 	public static ShippingModel calculateShippingTotalsTP(CalcDetailsModel calculatedTotalsDiscountsTp,String shippingValue){

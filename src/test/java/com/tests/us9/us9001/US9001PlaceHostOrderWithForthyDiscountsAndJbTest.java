@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -101,7 +102,7 @@ public class US9001PlaceHostOrderWithForthyDiscountsAndJbTest extends BaseTest {
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
-//
+
 //		genProduct1 = MagentoProductCalls.createProductModel();
 //		genProduct1.setPrice("89.00");
 //		MagentoProductCalls.createApiProduct(genProduct1);

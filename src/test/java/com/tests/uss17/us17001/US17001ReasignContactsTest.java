@@ -51,6 +51,8 @@ public class US17001ReasignContactsTest extends BaseTest {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_17_FOLDER + File.separator + "us17001.properties");
 			prop.load(input);
 			newStylecoachUsername = prop.getProperty("stylecoachUsername");
+			
+			System.out.println("newStylecoachUsername "+newStylecoachUsername);
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

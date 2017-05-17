@@ -539,6 +539,38 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+	
+	public static List<BasicProductModel> grabTPBasicProductModel(String testName) {
+		DBObject dbObject = null;
+		List<BasicProductModel> itemList = new ArrayList<BasicProductModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.BASIC_PRODUCT_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				BasicProductModel result = new BasicProductModel();
+				dbObject = cursor.next();
+
+				result.setName(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_NAME));
+				result.setProdCode(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_CODE));
+				result.setUnitPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_PRICE));
+				result.setQuantity(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_QUANTITY));
+				result.setProductsPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_ASKING_PRICE));
+				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
+				result.setPriceIP(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
+				result.setDiscountClass(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_CLASS));
+				result.setEarliestAvailability(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_EARLIEST_DATE));
+
+				itemList.add(result);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
 
 	public static List<ProductDetailedModel> grabProductDetailedModel(String testName) {
 		DBObject dbObject = null;

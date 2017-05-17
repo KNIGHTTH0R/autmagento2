@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
-import com.connectors.mongo.MongoConnector;
+import com.steps.backend.BackEndSteps;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -29,6 +28,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.smf.CartCalculator;
 import com.tools.constants.ConfigConstants;
+import com.tools.constants.Credentials;
 import com.tools.constants.FilePaths;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
@@ -37,7 +37,6 @@ import com.tools.data.frontend.CreditCardModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.persistance.MongoReader;
-import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.AddProductsWorkflow;
@@ -79,6 +78,8 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 	public CustomVerification customVerifications;
 	@Steps
 	ShoppingCartPriceRulesSteps shoppingCartPriceRulesSteps;
+	@Steps
+	public BackEndSteps backEndSteps;
 
 	private String username, password;
 	private static String billingAddress;
@@ -167,6 +168,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
 		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
 

@@ -30,7 +30,7 @@ public class ContactValidationWorkflows {
 	@Title("Validate contact details")
 	@Step
 	public void validateContactDetails(ContactModel expectedModel, ContactModel grabbedModel) {
-
+		System.out.println("VALIDATE CONTACT DETAILS");
 		verifyName(expectedModel.getName(), grabbedModel.getName());
 		verifyStreet(expectedModel.getStreet(), grabbedModel.getStreet());
 		verifyNumber(expectedModel.getNumber(), grabbedModel.getNumber());

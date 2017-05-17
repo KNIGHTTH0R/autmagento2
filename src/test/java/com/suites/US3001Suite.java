@@ -15,7 +15,7 @@ import com.tests.us3.us3001.US3001SfmValidVatNoSmbBillingShippingNotDeTest;
 	US3001SfmValidVatNoSmbBillingShippingNotDeTest.class,
 	US3001CheckOrderOnStylecoachProfileTest.class,
 //	US3001ValidateOrderEmailTest.class,
-	US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest.class,
+//	US3001ReorderSfmValidVatNoSmbBillingShippingNotDeTest.class,
 	
 	
 })

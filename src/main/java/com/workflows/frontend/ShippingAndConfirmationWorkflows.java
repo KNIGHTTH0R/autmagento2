@@ -33,7 +33,7 @@ public class ShippingAndConfirmationWorkflows {
 		System.out.println(message);
 		
 		System.out.println("basicProductsList" +basicProductsList);
-		System.out.println("cartProductsList" +cartProductsList);
+		System.out.println("cartProductsList= grabbed" +cartProductsList);
 		for (BasicProductModel productNow : basicProductsList) {
 			CartProductModel compare = findProduct(productNow.getProdCode(),productNow.getQuantity(), cartProductsList);
 

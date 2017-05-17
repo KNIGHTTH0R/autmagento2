@@ -122,7 +122,7 @@ public class CartWorkflows2 {
 
 	@Step
 	public void verifyJewelryBonus(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Jewelry Bonus dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
+		CustomVerification.verifyTrue("Failure: Jewelry Bonus dont match Expected(Calculated): " + compare + " Actual(grabbed): " + productNow, productNow.contains(compare));
 	}
 
 	@Step

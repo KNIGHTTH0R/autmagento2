@@ -40,8 +40,10 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US7001Suite.class,
 	US7001bSuite.class,
 	US7002Suite.class,
-	US7004Suite.class,
-	US7004bSuite.class,
+	
+//	emilian
+//	US7004Suite.class,
+//	US7004bSuite.class,
 	US7008Suite.class,
 	US7009Suite.class,
 	US70010Suite.class,
@@ -72,7 +74,8 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US110011PlaceCustomerOrderProductWithSpecialPriceTest.class,
 	
 	US10007SuitePartOne.class,
-	US10008Suite.class,
+	//should be review 10008 emilian
+//	US10008Suite.class,
 	//US9008Suite 
 	US9001Suite.class,
 	US9002Suite.class,
@@ -97,9 +100,9 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	
 	US16001Suite.class,
 	US16002Suite.class,
-	US16003Suite.class,
-	US16005Suite.class,
-	
+//	US16003Suite.class,
+//	US16005Suite.class,
+//	
 	US17001Suite.class,
 	US17002Suite.class,
 	US17003Suite.class,

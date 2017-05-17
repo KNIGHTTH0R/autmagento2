@@ -405,4 +405,86 @@ public class ValidationWorkflows {
 
 	}
 
+	public void performCartValidationsZeroAmountTP() {
+		// TODO Auto-generated method stub
+		checkoutValidationSteps.verifySuccessMessage();
+//      cart  validation 
+		System.out.println("lista produse "+CartCalculator.productsList50);
+		System.out.println("lista grabbed produse " +DataGrabber.cartProductsWith50Discount);
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList50, DataGrabber.cartProductsWith50Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 50 SECTION");
+		
+		
+
+		System.out.println("lista produse 25 "+CartCalculator.productsList25);
+		System.out.println("cartProductsWith25Discount " +DataGrabber.cartProductsWith25Discount);
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsList25, DataGrabber.cartProductsWith25Discount);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR 25 SECTION");
+//
+		
+		
+		System.out.println("productsListMarketing "+CartCalculator.productsListMarketing);
+		System.out.println("cartMarketingMaterialsProducts " +DataGrabber.cartMarketingMaterialsProducts);
+		cartWorkflows2.setValidateProductsModels(CartCalculator.productsListMarketing, DataGrabber.cartMarketingMaterialsProducts);
+		cartWorkflows2.validateProducts("CART PHASE PRODUCTS VALIDATION FOR MARKETING MATERIAL SECTION");
+
+		
+		cartWorkflows2.setVerifyTotalsDiscount(DataGrabber.cartTotals, CartCalculator.calculatedTotalsDiscounts);
+		cartWorkflows2.verifyTotalsDiscount("CART TOTALS");
+		
+
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp0,DataGrabber.grabbedSFMShippingProductsListTp0);
+		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP0");
+		
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp1,DataGrabber.grabbedSFMShippingProductsListTp1);
+		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP1");
+		
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp2,DataGrabber.grabbedSFMShippingProductsListTp2);
+		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP2");
+		
+		
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp0,DataGrabber.grabbedSFMConfirmationProductsListTp0);
+		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP0");
+		
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp1,DataGrabber.grabbedSFMConfirmationProductsListTp1);
+		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP1");
+		
+		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp2,DataGrabber.grabbedSFMConfirmationProductsListTp2);
+		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP2");
+		
+		
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.sfmShippingTotalsTp0, CartCalculator.shippingCalculatedModeTP0);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS TP0");
+
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.sfmShippingTotalsTp1,
+				CartCalculator.shippingCalculatedModeTP1);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS TP1");
+		
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.sfmShippingTotalsTp2,
+				CartCalculator.shippingCalculatedModeTP2);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS TP2");
+		
+		
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotalsTp0, CartCalculator.shippingCalculatedModeTP0);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP0");
+		
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotalsTp1, CartCalculator.shippingCalculatedModeTP1);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP1");
+		
+		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotalsTp2, CartCalculator.shippingCalculatedModeTP2);
+		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP2");
+		
+		
+//		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel,
+//				GeneralCartCalculations.calculateAdyenTotal(CartCalculator.shippingCalculatedModeTP0,
+//						CartCalculator.shippingCalculatedModeTP1, CartCalculator.shippingCalculatedModeTP2));
+//		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
+
+		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);
+		AddressWorkflows.validateBillingAddress("BILLING ADDRESS");
+
+		AddressWorkflows.setShippingAddressModels(shippingAddress, DataGrabber.grabbedShippingAddress);
+		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
+	}
+
 }

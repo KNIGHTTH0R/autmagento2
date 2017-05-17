@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.tools.constants.ContextConstants;
+import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
 
 import net.serenitybdd.core.annotations.findby.By;
@@ -32,7 +33,7 @@ public class ProfileNavPage extends AbstractPage {
 		}
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		Assert.assertTrue("The menu was not found", found);
-		
+		waitABit(TimeConstants.TIME_MEDIUM);
 		
 	}
 	

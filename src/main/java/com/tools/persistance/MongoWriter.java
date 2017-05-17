@@ -356,7 +356,23 @@ public class MongoWriter extends MongoConnector {
 		table.insert(document);
 	}
 	
-	
+	public static void saveTPBasicProductModel(BasicProductModel product, String testName) {
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.BASIC_PRODUCT_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+		document.put(MongoTableKeys.PRODUCT_NAME, product.getName());
+		document.put(MongoTableKeys.PRODUCT_CODE, product.getProdCode());
+		document.put(MongoTableKeys.PRODUCT_PRICE, product.getUnitPrice());
+		document.put(MongoTableKeys.PRODUCT_QUANTITY, product.getQuantity());
+		document.put(MongoTableKeys.PRODUCT_DISCOUNT_CLASS, product.getDiscountClass());
+		document.put(MongoTableKeys.PRODUCT_ASKING_PRICE, product.getProductsPrice());
+		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
+		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getPriceIP());
+		document.put(MongoTableKeys.PRODUCT_EARLIEST_DATE, product.getEarliestAvailability());
+
+		table.insert(document);
+	}
 
 	public static void saveRegularBasicProductModel(RegularBasicProductModel product, String testName) {
 		workingDB = mongoClient.getDB(testName);

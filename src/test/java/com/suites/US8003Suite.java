@@ -15,12 +15,12 @@ import com.tests.us8.us8003.US8003ValidateOrderInStylistsCustomerOrderReportTest
 @SuiteClasses({
 	US8003ActivateBuyGet1Test.class,
 	US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test.class,
-	US8003CheckOrderOnCustomerProfileTest.class,	
+	
 	US8003ValidateOrderEmailTest.class,	
 	US8003ValidateOrderBackOfficeTest.class,
 	US8003ValidateOrderInStylistsCustomerOrderReportTest.class,
 	US8003DeactivateBuy3Get1Test.class,
-	
+	US8003CheckOrderOnCustomerProfileTest.class,	
 })
 @RunWith(Suite.class)
 public class US8003Suite {

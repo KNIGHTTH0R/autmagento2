@@ -1,4 +1,4 @@
-package com.tests.us3.us30011;
+package com.tests.us3.us30018;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -14,10 +14,10 @@ import com.tests.BaseTest;
 import com.tools.constants.Credentials;
 import com.tools.requirements.Application;
 
-@WithTag(name = "US3.6 Shop for myself VAT valid and SMB billing and shipping DE",type = "Scenarios")
-@Story(Application.ShopForMyselfCart.US3_6.class)
+@WithTag(name = "US3.10 Shop For Myself With Free Shipping ", type = "Scenarios")
+@Story(Application.ShopForMyselfCart.US3_10.class)
 @RunWith(SerenityRunner.class)
-public class US30011DeactivateDiscountOnCartRuleTest extends BaseTest {
+public class US30018ActivateFreeShippingRuleTest extends BaseTest {
 
 	@Steps
 	public ShoppingCartPriceRulesSteps shoppingCartPriceRulesSteps;
@@ -25,8 +25,8 @@ public class US30011DeactivateDiscountOnCartRuleTest extends BaseTest {
 	public BackEndSteps backEndSteps;
 
 	@Test
-	public void us30011DeactivateDiscountOnCartRuleTest() {
+	public void us30018ActivateFreeShippingRuleTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		shoppingCartPriceRulesSteps.deactivateRule("AUT-Money voucher working on total - all carts");
+		shoppingCartPriceRulesSteps.activateRule("AUT-Free Shipping Rule For All Carts");
 	}
 }

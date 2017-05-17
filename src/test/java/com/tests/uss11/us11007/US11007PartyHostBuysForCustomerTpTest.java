@@ -197,13 +197,13 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		generalCartSteps.clearCart();
 		HostBasicProductModel productData;
 		// TODO hide this somehow
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "4", "0");
 		if (!genProduct1.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils
 					.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
 		HostCartCalculator.allProductsListTp0.add(productData);
 
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "2", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "3", "0");
 		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils
 					.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
@@ -214,8 +214,6 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		if (!genProduct3.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(DateUtils.addDaysToAAGivenDate(
 					genProduct3.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7), "yyyy-MM-dd"));
-		
-		
 		
 		
 		HostCartCalculator.allProductsListTp2.add(productData);

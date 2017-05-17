@@ -123,6 +123,7 @@ public class MongoTableKeys {
 	public static final String PRODUCT_ASKING_PRICE = "askingPrice";
 	public static final String PRODUCT_FINAL_PRICE = "finalPrice";
 	public static final String PRODUCT_IP_POINTS = "ipPoints";
+	public static final String PRODUCT_EARLIEST_DATE = "earliestDate";
 	public static final String PRODUCT_DELIVERY_DATE = "deliveryDate";
 	public static final String PRODUCT_IN_STOCK = "inStock";
 	public static final String PRODUCT_MIN_QUANTITY = "minQty";
@@ -254,6 +255,7 @@ public class MongoTableKeys {
 	public static final String CATEGORY_ID = null;
 
 	public static final String ENV_CONSTANTS_MODEL = "EnvironmentConstants";
+	
 	
 	
 	

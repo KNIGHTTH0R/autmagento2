@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
+import com.steps.backend.BackEndSteps;
 import com.steps.backend.promotion.ShoppingCartPriceRulesSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -37,6 +38,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.Credentials;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
@@ -89,6 +91,8 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 	public CustomVerification customVerifications;
 	@Steps
 	public ShoppingCartPriceRulesSteps shoppingCartPriceRulesSteps;
+	@Steps
+	public BackEndSteps backEndSteps;
 
 	private String username, password;
 	private String billingAddress;
@@ -175,6 +179,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 		
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
 		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
 		

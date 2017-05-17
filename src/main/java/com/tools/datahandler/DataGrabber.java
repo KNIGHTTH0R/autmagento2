@@ -16,6 +16,8 @@ public class DataGrabber {
 	// Extras
 	public static UrlModel urlModel = new UrlModel();
 	public static OrderModel orderModel = new OrderModel();
+	public static OrderModel orderModelTp1 = new OrderModel();
+	public static OrderModel orderModelTp2 = new OrderModel();
 
 	// Phase One
 	public static List<CartProductModel> cartProductsWith50Discount = new ArrayList<CartProductModel>();
