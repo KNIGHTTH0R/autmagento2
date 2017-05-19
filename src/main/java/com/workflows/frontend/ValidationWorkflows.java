@@ -355,8 +355,11 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp1,DataGrabber.grabbedSFMShippingProductsListTp1);
 		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP1");
 		
-		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp2,DataGrabber.grabbedSFMShippingProductsListTp2);
-		shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP2");
+		if(!CartCalculator.productsListTp2.isEmpty()){
+			shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp2,DataGrabber.grabbedSFMShippingProductsListTp2);
+			shippingAndConfirmationWorkflows.validateProducts("SHIPPING PHASE PRODUCTS VALIDATION TP2");
+		}
+		
 		
 		
 		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp0,DataGrabber.grabbedSFMConfirmationProductsListTp0);
@@ -365,10 +368,11 @@ public class ValidationWorkflows {
 		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp1,DataGrabber.grabbedSFMConfirmationProductsListTp1);
 		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP1");
 		
-		shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp2,DataGrabber.grabbedSFMConfirmationProductsListTp2);
-		shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP2");
-		
-		
+		if(!CartCalculator.productsListTp2.isEmpty()){
+			shippingAndConfirmationWorkflows.setValidateProductsModels(CartCalculator.productsListTp2,DataGrabber.grabbedSFMConfirmationProductsListTp2);
+			shippingAndConfirmationWorkflows.validateProducts("CONFIRMATION PHASE PRODUCTS VALIDATION TP2");
+		}
+	
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.sfmShippingTotalsTp0, CartCalculator.shippingCalculatedModeTP0);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS TP0");
 
@@ -376,24 +380,41 @@ public class ValidationWorkflows {
 				CartCalculator.shippingCalculatedModeTP1);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS TP1");
 		
-		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.sfmShippingTotalsTp2,
-				CartCalculator.shippingCalculatedModeTP2);
-		shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS TP2");
+		
+		if(!CartCalculator.productsListTp2.isEmpty()){
+			shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.sfmShippingTotalsTp2,
+					CartCalculator.shippingCalculatedModeTP2);
+			shippingAndConfirmationWorkflows.verifyShippingTotals("SHIPPING TOTALS TP2");
+		}
+		
 		
 		
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotalsTp0, CartCalculator.shippingCalculatedModeTP0);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP0");
 		
+		
+		System.out.println("Step 1 confirmationTotalsTp1"+ DataGrabber.confirmationTotalsTp1);
+		System.out.println("Step 2 shippingCalculatedModeTP1"+ CartCalculator.shippingCalculatedModeTP1);
 		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotalsTp1, CartCalculator.shippingCalculatedModeTP1);
 		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP1");
 		
-		shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotalsTp2, CartCalculator.shippingCalculatedModeTP2);
-		shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP2");
+		if(!CartCalculator.productsListTp2.isEmpty()){
+			shippingAndConfirmationWorkflows.setVerifyShippingTotals(DataGrabber.confirmationTotalsTp2, CartCalculator.shippingCalculatedModeTP2);
+			shippingAndConfirmationWorkflows.verifyShippingTotals("CONFIRMATION TOTALS TP2");
+		}
 		
 		
-		adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel,
-				GeneralCartCalculations.calculateAdyenTotal(CartCalculator.shippingCalculatedModeTP0,
-						CartCalculator.shippingCalculatedModeTP1, CartCalculator.shippingCalculatedModeTP2));
+		if(!CartCalculator.productsListTp2.isEmpty()){
+			adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel,
+					GeneralCartCalculations.calculateAdyenTotal(CartCalculator.shippingCalculatedModeTP0,
+							CartCalculator.shippingCalculatedModeTP1, CartCalculator.shippingCalculatedModeTP2));
+		}else{
+			adyenWorkflows.setVerifyAdyenTotals(DataGrabber.orderModel,
+					GeneralCartCalculations.calculateAdyenTotal(CartCalculator.shippingCalculatedModeTP0,
+							CartCalculator.shippingCalculatedModeTP1));
+		}
+	
+		
 		adyenWorkflows.veryfyAdyenTotals("ADYEN TOTAL");
 
 		AddressWorkflows.setBillingAddressModels(billingAddress, DataGrabber.grabbedBillingAddress);

@@ -96,6 +96,8 @@ public class ShippingAndConfirmationWorkflows {
 
 	@Step
 	public void verifySubTotals(String productNow, String compare) {
+		System.out.println("productNow "+productNow);
+		System.out.println("compare calculated "+compare);
 		CustomVerification.verifyTrue("Failure: Sub Totals dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 
@@ -110,6 +112,8 @@ public class ShippingAndConfirmationWorkflows {
 	}
 	@Step
 	public void verifyAdyenTotal(String productNow, String compare) {
+		System.out.println("Adyen Total productNow "+productNow);
+		System.out.println("compare calculated "+compare);
 		CustomVerification.verifyTrue("Failure: Discounts Price dont match Expected: " + compare + " Actual: " + productNow, productNow.contains(compare));
 	}
 

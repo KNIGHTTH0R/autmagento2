@@ -107,7 +107,7 @@ public class CreateProductsTest extends BaseTest {
 		productsList.add(genProduct3);
 		
 		
-		Calendar cal434 = Calendar.getInstance();
+	/*	Calendar cal434 = Calendar.getInstance();
 		System.out.println(cal434.getTimeInMillis());
 		long endDate =cal434.getTimeInMillis();
 		
@@ -122,7 +122,7 @@ public class CreateProductsTest extends BaseTest {
 		System.out.println("diffInMinutes " +diffInMinutes);
 		long diffInHours = TimeUnit.MILLISECONDS.toHours(duration);
 		System.out.println("diffInHours " +diffInHours);
-		
+		*/
 		//System.out.println("end date "+ DateUtils.getCurrentDate("yyyy/MM/dd HH:mm:ss"));
 		
 		
@@ -294,8 +294,8 @@ public class CreateProductsTest extends BaseTest {
 		
 		
 		
-		System.out.println("size " + productsList.size());
-		System.out.println(productsList.get(0));
+//		System.out.println("size " + productsList.size());
+//		System.out.println(productsList.get(0));
 		
 	}
 

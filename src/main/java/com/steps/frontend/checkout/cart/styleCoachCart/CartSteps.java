@@ -40,6 +40,7 @@ public class CartSteps extends AbstractSteps {
 	 * 
 	 * @return
 	 */
+	@Step
 	public List<CartProductModel> grabProductsDataWith50PercentDiscount() {
 		return cartPage().grabProductsDataWith50Discount();
 	}

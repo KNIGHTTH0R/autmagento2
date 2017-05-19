@@ -136,15 +136,10 @@ public class CartCalculator {
 				shippingValue);
 		calculatedTotalsDiscountsTp0=CartTotalsCalculation.calculateCartProductsTotalsTP(allProductsListRecalculated,productsListTp0 ,jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValue);
 		calculatedTotalsDiscountsTp1=CartTotalsCalculation.calculateCartProductsTotalsTP(allProductsListRecalculated,productsListTp1 ,jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValue);
-		calculatedTotalsDiscountsTp2=CartTotalsCalculation.calculateCartProductsTotalsTP(allProductsListRecalculated,productsListTp2 ,jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValue);
-		//	calculatedTotalsDiscountsTp3=CartTotalsCalculation.calculateCartProductsTotalsTP(allProductsListRecalculated,productsListTp3 ,jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValue);
-
-		//shippingCalculatedModel = CartCalculation.calculateShippingTotals(calculatedTotalsDiscounts, shippingValue);
+		if(!productsListTp2.isEmpty()){
+			calculatedTotalsDiscountsTp2=CartTotalsCalculation.calculateCartProductsTotalsTP(allProductsListRecalculated,productsListTp2 ,jewelryDiscount, marketingDiscount, taxClass, shippingValue, shippingValue);
+		}
 		
-		/*shippingCalculatedModeTP0=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp0, shippingValue);
-		shippingCalculatedModeTP1=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp1, "0");
-		shippingCalculatedModeTP2=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp2, shippingValue);*/
-		//shippingCalculatedModeTP3=CartCalculation.calculateShippingTotals(calculatedTotalsDiscountsTp3, shippingValue);
 	}
 	
 	

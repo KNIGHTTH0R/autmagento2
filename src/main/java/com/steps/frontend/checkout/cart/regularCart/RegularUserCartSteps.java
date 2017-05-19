@@ -87,6 +87,11 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void clickDeliverAllAtOnce() {
 		regularUserCartPage().clickDeliverAllAtOnce();
 	}
+	
+	@Step
+	public void clickDeliverAtSeparateDate(){
+		regularUserCartPage().clickDeliverAtSeparateDate();
+	}
 
 	@Step
 	public void verifyThatDeliveryDateDropdownIsDisabled(String productCode) {

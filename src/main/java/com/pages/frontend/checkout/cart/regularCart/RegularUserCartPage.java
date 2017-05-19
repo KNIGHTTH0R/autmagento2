@@ -389,6 +389,12 @@ public class RegularUserCartPage extends AbstractPage {
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
 				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
+	
+	public void clickDeliverAtSeparateDate() {
+		getDriver().findElement(By.id("cart-tp-type-multiple")).click();
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+	}
 
 	public List<String> grabbDeliverAllAtOnceDates(Locale locale) throws ParseException {
 		List<String> deliveryDates = new ArrayList<String>();
