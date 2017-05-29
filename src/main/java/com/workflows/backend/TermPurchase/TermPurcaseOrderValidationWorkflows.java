@@ -16,6 +16,7 @@ public class TermPurcaseOrderValidationWorkflows {
 		verifyIncrementId(grabbedModel.getIncrementId(), expectedModel.getIncrementId());
 		verifyExecutionDate(grabbedModel.getExecutionDate(), expectedModel.getExecutionDate());
 		verifyProductSku(grabbedModel.getProductSku(), expectedModel.getProductSku());
+	
 		verifyBoughtQty(grabbedModel.getBoughtQty(), expectedModel.getBoughtQty());
 		verifyInStock(grabbedModel.getInStock(), expectedModel.getInStock());
 		verifyIsDiscontinued(grabbedModel.getIsDiscontinued(), expectedModel.getIsDiscontinued());
@@ -43,6 +44,8 @@ public class TermPurcaseOrderValidationWorkflows {
 
 	@Step
 	public void verifyProductSku(String grabbed, String expected) {
+		System.out.println("sku grabbed "+grabbed);
+		System.out.println("sku expected "+expected);
 		CustomVerification.verifyTrue(
 				"Failure: Product SKU doesn't match Expected: " + expected + " Actual: " + grabbed,
 				grabbed.contentEquals(expected));

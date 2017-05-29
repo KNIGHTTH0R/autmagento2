@@ -48,7 +48,7 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 		createOrder.click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
 				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		waitABit(TimeConstants.TIME_MEDIUM);
 	}
 
 	public void verifyCustomerIsNotSuitableForTheOrderErrorMessage() {

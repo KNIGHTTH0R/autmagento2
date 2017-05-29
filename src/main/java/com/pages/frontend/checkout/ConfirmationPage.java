@@ -76,16 +76,26 @@ public class ConfirmationPage extends AbstractPage {
 		element(addressPreview).waitUntilVisible();
 		String textparse = addressPreview.getText();
 		String[] splittedText = textparse.split(Separators.LINE_SEPARATOR);
+		String streetName;
+		String streetNumber;
 
 		if (splittedText.length == 4) {
 
-			String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
-			String streetName = streetData[0].trim();
-			String streetNumber = streetData[1].trim();
+		//	String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
+			String[] streetData = splittedText[1].split("\\s+");
+			
+			if(streetData.length > 2){
+				 streetName = streetData[0].trim()+" "+streetData[1].trim();
+				 streetNumber = streetData[2].trim();
+			}else{
+				 streetName = streetData[0].trim();
+				 streetNumber = streetData[1].trim();
+			}
+			
 
-			String[] townData = splittedText[2].split(Separators.COMMA_SEPARATOR);
-			String homeTown = townData[0].trim();
-			String postCode = townData[1].trim();
+			String[] townData = splittedText[2].split("\\s+");
+			String homeTown = townData[1].trim();
+			String postCode = townData[0].trim();
 
 			result.setStreetAddress(streetName);
 			result.setStreetNumber(streetNumber);
@@ -98,13 +108,20 @@ public class ConfirmationPage extends AbstractPage {
 		}
 		if (textparse.split(Separators.LINE_SEPARATOR).length == 5) {
 
-			String[] streetData = splittedText[1].split(Separators.COMMA_SEPARATOR);
-			String streetName = streetData[0].trim();
-			String streetNumber = streetData[1].trim();
+			String[] streetData = splittedText[1].split("\\s+");
+			
+			if(streetData.length > 2){
+				 streetName = streetData[0].trim()+" "+streetData[1].trim();
+				 streetNumber = streetData[2].trim();
+			}else{
+				 streetName = streetData[0].trim();
+				 streetNumber = streetData[1].trim();
+			}
 
-			String[] townData = splittedText[2].split(Separators.COMMA_SEPARATOR);
-			String homeTown = townData[0].trim();
-			String postCode = townData[1].trim();
+			
+			String[] townData = splittedText[3].split("\\s+");
+			String homeTown = townData[1].trim();
+			String postCode = townData[0].trim();
 
 			result.setStreetAddress(streetName);
 			result.setStreetNumber(streetNumber);
@@ -112,7 +129,7 @@ public class ConfirmationPage extends AbstractPage {
 			result.setHomeTown(homeTown);
 			result.setPostCode(postCode);
 
-			result.setCountryName(splittedText[3].trim());
+			result.setCountryName(splittedText[4].trim());
 
 		} else {
 			System.out.println("FAILURE: error on shipping parsing - Confirmation Page");

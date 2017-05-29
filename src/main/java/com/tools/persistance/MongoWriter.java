@@ -352,7 +352,7 @@ public class MongoWriter extends MongoConnector {
 		document.put(MongoTableKeys.PRODUCT_ASKING_PRICE, product.getProductsPrice());
 		document.put(MongoTableKeys.PRODUCT_FINAL_PRICE, product.getFinalPrice());
 		document.put(MongoTableKeys.PRODUCT_IP_POINTS, product.getPriceIP());
-
+		document.put(MongoTableKeys.DELIVERY_DATE, product.getDeliveryDate());
 		table.insert(document);
 	}
 	

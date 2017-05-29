@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -58,13 +59,13 @@ public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		genProduct1.setIp("75");
-//		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		genProduct1.setIp("75");
+		MagentoProductCalls.createApiProduct(genProduct1);
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(1);
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(1);
 
 		Properties prop = new Properties();
 		InputStream input = null;

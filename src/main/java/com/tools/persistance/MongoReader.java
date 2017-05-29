@@ -529,7 +529,7 @@ public class MongoReader extends MongoConnector {
 				result.setFinalPrice(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_FINAL_PRICE));
 				result.setPriceIP(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_IP_POINTS));
 				result.setDiscountClass(MongoUtils.checkField(dbObject, MongoTableKeys.PRODUCT_DISCOUNT_CLASS));
-
+				result.setDeliveryDate(MongoUtils.checkField(dbObject, MongoTableKeys.DELIVERY_DATE));
 				itemList.add(result);
 			}
 		} catch (Exception e) {

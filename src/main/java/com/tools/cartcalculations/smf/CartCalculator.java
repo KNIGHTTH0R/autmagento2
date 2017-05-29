@@ -38,6 +38,9 @@ public class CartCalculator {
 	public static List<BasicProductModel> productsListTp1 = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> productsListTp2 = new ArrayList<BasicProductModel>();
 	public static List<BasicProductModel> productsListTp3 = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> productsListTp4 = new ArrayList<BasicProductModel>();
+	public static List<BasicProductModel> productsListTp5 = new ArrayList<BasicProductModel>();
+	
 	
 	public static CalcDetailsModel calculatedTotalsDiscounts = new CalcDetailsModel();
 	//emilian

@@ -111,15 +111,15 @@ public class US36002SyncFrontendMagentoToSos extends BaseTest {
 	public void us36002SyncFrontendMagentoToSos() throws Exception {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnCustomers();
-		backEndSteps.searchForEmail("5WACymVNPxNj@mailinator.com");
-		backEndSteps.openCustomerDetails("5WACymVNPxNj@mailinator.com");
+		backEndSteps.searchForEmail("FWConE3EIoUo@yopmail.com");
+		backEndSteps.openCustomerDetails("FWConE3EIoUo@yopmail.com");
 		customerDetailsBackendSteps.clickOnSalesOnSpeedInfo();
 		stylecoachSalesOnSpeedBackendSteps.selectAllowSosSync("Ja");
 		stylecoachSalesOnSpeedBackendSteps.checkSosPassword();
 		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetAccountButton();
 		stylecoachSalesOnSpeedBackendSteps.checkIsPresentResetContactButton();
 		
-		frontEndSteps.performLogin("5WACymVNPxNj@mailinator.com","q1w2e3");
+		frontEndSteps.performLogin("FWConE3EIoUo@yopmail.com","z831NCwidVZoLq1");
 		if (!headerSteps.succesfullLogin()) {
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

@@ -54,7 +54,7 @@ public class MagentoToSosContactsSyncSteps extends AbstractSteps {
 					sosContact.getFlagContactBoosterValue());
 			contactValidation.validateWrongDetailsValue(shopContact.getWrongDetailsValue(),
 					sosContact.getWrongDetailsValue());
-			contactValidation.validateMaleValue(shopContact.getMaleValue(), sosContact.getMaleValue());
+		//	contactValidation.validateMaleValue(shopContact.getMaleValue(), sosContact.getMaleValue());
 			contactValidation.validateSignUpIssueValue(shopContact.getSignupIssuesValue(),
 					sosContact.getSignupIssuesValue());
 			contactValidation.validateFlagPartiesValue(shopContact.getFlagPartiesValue(),

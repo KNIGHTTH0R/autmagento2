@@ -18,6 +18,10 @@ public class DataGrabber {
 	public static OrderModel orderModel = new OrderModel();
 	public static OrderModel orderModelTp1 = new OrderModel();
 	public static OrderModel orderModelTp2 = new OrderModel();
+	public static OrderModel orderModelTp3=new OrderModel();
+	public static OrderModel orderModelTp4=new OrderModel();
+	public static OrderModel orderModelTp5=new OrderModel();
+	public static OrderModel orderModelTp6=new OrderModel();
 
 	// Phase One
 	public static List<CartProductModel> cartProductsWith50Discount = new ArrayList<CartProductModel>();
@@ -73,6 +77,8 @@ public class DataGrabber {
 	public static ShippingModel sfmConfirmationTotalsTp1=new ShippingModel();
 	public static ShippingModel sfmConfirmationTotalsTp2=new ShippingModel();
 	public static ShippingModel sfmConfirmationTotalsTp3=new ShippingModel();
+	
+	
 	
 	public static void wipe() {
 		urlModel = new UrlModel();

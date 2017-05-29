@@ -14,6 +14,7 @@ import com.connectors.http.MagentoSosUserInfo;
 import com.connectors.http.SalesOnSpeedCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.backend.SalesOnSpeed.MagentoToSosContactsSyncSteps;
+import com.steps.backend.stylecoach.StylecoachSalesOnSpeedBackendSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.data.frontend.SosContactModel;
@@ -43,6 +44,11 @@ public class US36001ValidateContactInfoSyncAfterResetAnActiveUserTest extends Ba
 	@Steps
 	CustomVerification customVerification;
 
+	
+	MagentoSOSUserInfoModel sosUserInfoBeforeReset = new MagentoSOSUserInfoModel();
+	
+	@Steps 
+	public StylecoachSalesOnSpeedBackendSteps stylecoachSalesOnSpeedBackendSteps;
 	@Before
 	public void setUp() throws Exception {
 
@@ -53,10 +59,19 @@ public class US36001ValidateContactInfoSyncAfterResetAnActiveUserTest extends Ba
 			System.out.println("The database has no entries");
 		}
 		
-		sosPassowrd = sosContactModelData.getSosPassword();
-		sosEmail = sosContactModelData.getSosUserEmail();
-		stylistID=sosContactModelData.getStylistId();
-		sosUserID=sosContactModelData.getStylistSosId();
+//		sosPassowrd = sosContactModelData.getSosPassword();
+//		sosEmail = sosContactModelData.getSosUserEmail();
+//		stylistID=sosContactModelData.getStylistId();
+//		sosUserID=sosContactModelData.getStylistSosId();
+		
+		sosUserInfoBeforeReset=MagentoSosUserInfo.getUserInfo("8054");
+		String stylistSosId=sosUserInfoBeforeReset.getSosId();
+		
+		sosPassowrd = "ntpezxlh";
+		sosEmail = "fXUXGAmGxoea@yopmail.com";
+		stylistID="8054";
+		sosUserID=stylistSosId;
+		
 		
 		System.out.println("StylistId " + stylistID);
 		System.out.println("sosEmail "+ sosEmail);
