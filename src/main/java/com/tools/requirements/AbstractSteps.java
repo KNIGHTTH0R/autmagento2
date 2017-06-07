@@ -51,6 +51,8 @@ import com.pages.external.mailchimp.MailchimpSubscriberProfilePage;
 import com.pages.external.navision.NavisionHomePage;
 import com.pages.external.navision.NavisionSearchPage;
 import com.pages.external.navision.NavisionSyncDashboardPage;
+import com.pages.external.ospm.FacebookLoginPage;
+import com.pages.external.ospm.OnlineStylePartyManagerPage;
 import com.pages.external.unbounce.UnbounceDykscPage;
 import com.pages.external.unbounce.UnbouncePage;
 import com.pages.external.unbounce.UnbounceRegSuccesPage;
@@ -199,6 +201,7 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().manage().window().maximize();
 	}
 
+	@Step
 	public void switchBackToPreviousTab() {
 		Set<String> winSet = getDriver().getWindowHandles();
 		List<String> winList = new ArrayList<String>(winSet);
@@ -208,7 +211,9 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().manage().window().maximize();
 	}
 
+	@Step
 	public void refresh() {
+		waitABit(2000);
 		getDriver().navigate().refresh();
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
@@ -674,6 +679,10 @@ public class AbstractSteps extends ScenarioSteps {
 	public FacebookRegistrationFormPage facebookRegistrationFormPage() {
 		return getPages().currentPageAt(FacebookRegistrationFormPage.class);
 	}
+	
+	public FacebookLoginPage facebookLoginPage() {
+		return getPages().currentPageAt(FacebookLoginPage.class);
+	}
 
 	public ContactLandingPage contactLandingPage() {
 		return getPages().currentPageAt(ContactLandingPage.class);
@@ -774,6 +783,9 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(SosPage.class);
 	}
 	
+	public OnlineStylePartyManagerPage onlineStylePartyManagerPage() {
+		return getPages().currentPageAt(OnlineStylePartyManagerPage.class);
+	}
 	
 	
 	

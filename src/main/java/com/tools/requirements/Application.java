@@ -430,4 +430,10 @@ public class Application {
 		public class US36_1 {
 		}
 	}
+	
+	@Feature
+	public class OnlineStylePartyManager {
+		public class US37_1 {
+		}
+	}
 }

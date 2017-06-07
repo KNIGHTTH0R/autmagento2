@@ -53,7 +53,7 @@ public class PaymentPage extends AbstractPage {
 	@FindBy(id = "klarna.shopper.firstName")
 	private WebElement klarnaInput;
 
-	@FindBy(css = "input[value*=weiter]")
+	@FindBy(id = "mainSubmit")
 	private WebElement weiterBtn;
 	
 	@FindBy(id = "mainBack")

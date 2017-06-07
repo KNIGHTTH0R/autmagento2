@@ -195,6 +195,11 @@ public class PartyDetailsSteps extends AbstractSteps {
 	public ClosedPartyPerformanceModel grabClosedPartyPerformanceNoOrders() {
 		return partyDetailsPage().grabClosedPartyPerformanceNoOrders();		
 	}
+	
+	
+	public void clickOnlineStylePartyManagerButton() {
+		 partyDetailsPage().clickOnlineStylePartyManagerButton();		
+	}
 
 	
 	@Step

@@ -1,7 +1,12 @@
 package com.steps.external;
 
+import net.serenitybdd.core.annotations.findby.By;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
+
+import java.util.ArrayList;
+
+import org.openqa.selenium.Keys;
 
 import com.tools.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
@@ -47,5 +52,58 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 		facebookRegistrationFormPage().passwordInput(passsword);
 		facebookRegistrationFormPage().noSearchStyleCoach();
 		facebookRegistrationFormPage().agreeAndConfirm();
+	}
+	
+	@Step 
+	public void loginToFacebookApp(String user,String pass){
+		
+//		getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
+//		ArrayList<String> tabs = new ArrayList<String> (getDriver().getWindowHandles());
+//		getDriver().switchTo().window(tabs.get(1)); //switches to new tab
+//	
+//		getDriver().get("http:\\www.facebook.com");
+//		getDriver().manage().window().maximize();
+		facebookLoginPage().inputUser(user);
+		facebookLoginPage().inputPass(pass);
+		facebookLoginPage().clickLogin();
+		
+	//	getDriver().switchTo().window(tabs.get(0));
+	}
+	
+	@Step 
+	public void loginToFacebook(String user,String pass){
+		
+
+//	
+		getDriver().get("http:\\www.facebook.com");
+		getDriver().manage().window().maximize();
+		facebookLoginPage().inputUser(user);
+		facebookLoginPage().inputPass(pass);
+		facebookLoginPage().clickLogin();
+		onlineStylePartyManagerPage().closePopUp();
+	//	getDriver().switchTo().window(tabs.get(0));
+	}
+	
+	@Step 
+	public void accessSettingsOnFacebookDesktopApp(){
+		
+		getDriver().get("https://www.facebook.com/settings?tab=applications");
+		
+	//	getDriver().switchTo().window(tabs.get(0));
+	}
+
+	@Step
+	public void removeThePJDevApp(String appId) {
+		waitABit(3000);
+		//onlineStylePartyManagerPage().closePopUp();
+		facebookLoginPage().removeThePJDevApp(appId);
+		
+	}
+
+	public void editpermissionsForPJDevApp(String appId) {
+		// TODO Auto-generated method stub
+		waitABit(3000);
+		//onlineStylePartyManagerPage().closePopUp();
+		facebookLoginPage().editpermissionsForPJDevApp(appId);
 	}
 }

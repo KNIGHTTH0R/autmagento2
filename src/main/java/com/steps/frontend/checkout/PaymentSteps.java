@@ -117,7 +117,7 @@ public class PaymentSteps extends AbstractSteps {
 		paymentPage().expandBankTransferForm();
 		paymentPage().confirmPayBankTransfer();
 		paymentPage().clickOnWeiterBtn();
-		waitABit(2000);
+		waitABit(5000);
 	}
 
 	@Step

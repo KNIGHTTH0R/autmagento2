@@ -108,6 +108,11 @@ public class PartyDetailsPage extends AbstractPage {
 
 	@FindBy(css = "a.fancybox-item.fancybox-close")
 	private WebElement closeFancy;
+	
+	@FindBy(css = "div[style*='overflow'] a[class*='right button']")
+	private WebElement clickOSPMbutton;
+	
+	
 
 	// this is made for a single product.if the products is the expected
 	// one,select it and borrow it
@@ -548,5 +553,11 @@ public class PartyDetailsPage extends AbstractPage {
 	public void saveEdit() {
 		WebElement save= getDriver().findElement(By.id("save-edit-party"));
 		save.click();
+	}
+
+	public void clickOnlineStylePartyManagerButton() {
+		element(clickOSPMbutton).waitUntilVisible();
+		clickOSPMbutton.click();
+		
 	}
 }

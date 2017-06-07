@@ -1,9 +1,12 @@
 package com.pages.frontend;
 
+import java.util.List;
+
 import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
+import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
@@ -14,11 +17,19 @@ import net.serenitybdd.core.pages.WebElementFacade;
 
 public class MyBusinessPage extends AbstractPage {
 
-	@FindBy(css = "#kobo-cancel div.col-3.col ul.link-list li:nth-child(1) a")
+//	@FindBy(css = "#kobo-cancel div.col-3.col ul.link-list li:nth-child(1) a")
+//	private WebElementFacade accesKoboCart;
+	
+	@FindBy(css = ".flex-col-set .col-box:nth-child(4) ul.link-list li:nth-child(1) a")
 	private WebElementFacade accesKoboCart;
 
-	@FindBy(css = "#kobo-cancel div.col-3.col ul.link-list li:nth-child(2) a")
+//	@FindBy(css = "#kobo-cancel div.col-3.col ul.link-list li:nth-child(2) a")
+//	private WebElementFacade cancelSubstription;
+	
+	@FindBy(css = ".flex-col-set .col-box:nth-child(4) ul.link-list li:nth-child(2) a")
 	private WebElementFacade cancelSubstription;
+	
+	
 
 	@FindBy(css = "span.cb-code")
 	private WebElementFacade coboCodeContainer;
@@ -29,19 +40,41 @@ public class MyBusinessPage extends AbstractPage {
 	@FindBy(css = "div.cb-sprite-large.contact-booster")
 	private WebElementFacade voucherlargeContainer;
 
-	@FindBy(css = "#kobo-cancel div.col-3.col")
+//	@FindBy(css = "#kobo-cancel div.col-3.col")
+//	private WebElementFacade coboSection;
+	
+	@FindBy(css = ".flex-col-set .col-box:nth-child(4)")
 	private WebElementFacade coboSection;
 
 	@FindBy(css = "#confirmCancelCbSubscriptionModal form button[type='submit']")
 	private WebElementFacade confirmCancelSubstription;
 	
-	@FindBy(css = "#kobo-cancel div.col-2.col li:nth-child(1) a")
+//	@FindBy(css = "#kobo-cancel div.col-2.col li:nth-child(1) a")
+//	private WebElementFacade borrowCartLink;
+	
+	
+	@FindBy(css = ".flex-col-set .col-box:nth-child(3) li:nth-child(1) a")
 	private WebElementFacade borrowCartLink;
-
+	
+	
+	@FindBy(css = ".col-box:nth-child(4) ul.link-list li")
+	private List<WebElementFacade> contactBoosterCartLinks;
+//	public void verifyThatNumberOfLinksAreEqualTo(String expectedNoOflinks) {
+//		Assert.assertTrue("", getDriver().findElements(By.cssSelector("#kobo-cancel div.col-3.col ul.link-list li")).size() == Integer.parseInt(expectedNoOflinks));
+//	}
+	
 	public void verifyThatNumberOfLinksAreEqualTo(String expectedNoOflinks) {
-		Assert.assertTrue("", getDriver().findElements(By.cssSelector("#kobo-cancel div.col-3.col ul.link-list li")).size() == Integer.parseInt(expectedNoOflinks));
+		
+		System.out.println("expected "+expectedNoOflinks);
+		System.out.println("print the size " +contactBoosterCartLinks.size());
+		for (WebElementFacade webElementFacade : contactBoosterCartLinks) {
+			System.out.println("elementul " +webElementFacade.getText());
+		}
+		Assert.assertTrue("No of links are not correct", contactBoosterCartLinks.size() == Integer.parseInt(expectedNoOflinks));
 	}
 
+	
+	
 	public void accessKoboCart() {
 		element(accesKoboCart).waitUntilVisible();
 		accesKoboCart.click();
