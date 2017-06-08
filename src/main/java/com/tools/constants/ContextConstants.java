@@ -164,7 +164,7 @@ public class ContextConstants {
 	public static final String ALLOW_TOP = MongoReader.getDictionaryItem("ALLOW_TOP");
 	public static final String DENY_TOP = MongoReader.getDictionaryItem("DENY_TOP");
 	
-	
-
+	public static final String ALLERT_MESSAGE = MongoReader.getDictionaryItem("ALLERT_MESSAGE");
+	public static final String PARTY_USER = MongoReader.getDictionaryItem("PARTY_USER");
 	
 }

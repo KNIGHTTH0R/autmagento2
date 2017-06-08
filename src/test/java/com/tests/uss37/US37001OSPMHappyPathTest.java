@@ -12,6 +12,7 @@ import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ContextConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
@@ -59,20 +60,12 @@ public class US37001OSPMHappyPathTest extends BaseTest{
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
-		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
+		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(ContextConstants.PARTY_USER));
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		
-		//this is the remove app action 
-/*//		headerSteps.openNewTab();
-//		headerSteps.switchToNewestOpenedTab();
-//		facebookLoginSteps.loginToFacebook("emilianmihai25@gmail.com", "emilian1");
-//		facebookLoginSteps.accessSettingsOnFacebookDesktopApp();
-//		facebookLoginSteps.removeThePJDevApp("app-id-390416157958904");
-//		headerSteps.switchBackToPreviousTab();
-*/		partyDetailsSteps.clickOnlineStylePartyManagerButton();
+		partyDetailsSteps.clickOnlineStylePartyManagerButton();
 		headerSteps.switchToNewestOpenedTab();
 		onlineStylePartyManagerSteps.clickOnLoginWithFacebookButton();
-		//headerSteps.openNewTab();
 		facebookLoginSteps.loginToFacebookApp("emilianmihai25@gmail.com", "emilian1");
 		
 		onlineStylePartyManagerSteps.acceptAllThePermissions();
@@ -82,7 +75,6 @@ public class US37001OSPMHappyPathTest extends BaseTest{
 		onlineStylePartyManagerSteps.verifyIfCommentIsPosted(comment);
 		
 		
-		//should be clarified
 		onlineStylePartyManagerSteps.verifyShopButtonRedirect();
 		onlineStylePartyManagerSteps.verifyContactBoosterButtonRedirect();
 		onlineStylePartyManagerSteps.verifyOverviewButtonRedirect();

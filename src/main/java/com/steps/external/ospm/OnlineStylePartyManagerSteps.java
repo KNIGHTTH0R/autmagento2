@@ -3,7 +3,6 @@ package com.steps.external.ospm;
 import com.tools.requirements.AbstractSteps;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.StepGroup;
 
 public class OnlineStylePartyManagerSteps extends AbstractSteps {
 	

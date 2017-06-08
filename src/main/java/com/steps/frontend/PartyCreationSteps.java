@@ -59,7 +59,7 @@ public class PartyCreationSteps extends AbstractSteps {
 		partyCreationPage().typeCustomerName(name);
 		partyCreationPage().selectFirstAvailableDate();
 		partyCreationPage().selectFirstAvailableHour();
-		partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
+		//partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
 		partyCreationPage().selectPartyCountry(ContextConstants.COUNTRY_NAME);
 		waitABit(1000);
 		return partyCreationPage().submitParty();

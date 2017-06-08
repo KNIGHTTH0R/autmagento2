@@ -13,9 +13,6 @@ import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.data.UrlModel;
-import com.tools.data.frontend.DateModel;
-import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
 import net.serenitybdd.junit.runners.SerenityRunner;

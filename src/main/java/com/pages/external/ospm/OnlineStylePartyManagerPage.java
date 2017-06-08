@@ -156,7 +156,7 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 		waitABit(15000);
 		System.out.println("shop link " + firstComment.getText());
 		CustomVerification.verifyTrue("The shop Link is not posted",
-				firstComment.getText().contains("http://staging-aut.pippajean.com/de/emx?p="));
+				firstComment.getText().contains("emx?p="));
 
 	}
 
@@ -177,7 +177,7 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 		System.out.println("overview link " + firstComment.getText());
 
 		CustomVerification.verifyTrue("The Overview Link is not posted",
-				firstComment.getText().contains("http://staging-aut.pippajean.com/de/emx/schmuckstucke.html?p"));
+				firstComment.getText().contains("schmuckstucke.html?p"));
 
 	}
 
@@ -201,6 +201,7 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	}
 
 	public void verifyMessage(String message) {
+		waitABit(5000);
 		if(alertMessage.size()>0){
 			element(alertMessage.get(0)).waitUntilVisible();
 			CustomVerification.verifyTrue("Failure: The Allert Message Link is not displayed correctly",

@@ -12,6 +12,7 @@ import com.steps.frontend.PartyCreationSteps;
 import com.steps.frontend.PartyDetailsSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ContextConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
@@ -56,7 +57,7 @@ public class US37001OSPMInsufficientPrivilegesLoginTest extends BaseTest{
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
-		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForStylistHost());
+		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(ContextConstants.PARTY_USER));
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		partyDetailsSteps.clickOnlineStylePartyManagerButton();
 		headerSteps.switchToNewestOpenedTab();
@@ -66,7 +67,7 @@ public class US37001OSPMInsufficientPrivilegesLoginTest extends BaseTest{
 		
 	//	onlineStylePartyManagerSteps.acceptAllThePermissions();
 		onlineStylePartyManagerSteps.uncheckTheRemoveManageGroupsPermissions();
-		onlineStylePartyManagerSteps.verifyMessage("Weil wir leider nicht ausrechende Rechte von");
+		onlineStylePartyManagerSteps.verifyMessage(ContextConstants.ALLERT_MESSAGE);
 		customVerification.printErrors();
 	}
 }
