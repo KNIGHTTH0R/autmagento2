@@ -103,13 +103,13 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	}
 
 	public void clickOnFirstGroup() {
-		waitABit(4000);
+		waitABit(7000);
 		element(clickOnFirstGroup).waitUntilVisible();
 		clickOnFirstGroup.click();
 	}
 
 	public void clickOnFirstLiveStreamVideo() {
-		waitABit(5000);
+		waitABit(8000);
 		element(clickOnFirstLiveStreamButton).waitUntilVisible();
 		clickOnFirstLiveStreamButton.click();
 	}
@@ -151,9 +151,7 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	}
 
 	public void verifyShopButtonRedirect() {
-		System.out.println("aici");
 		element(shopButton).waitUntilVisible();
-		System.out.println("aici 2");
 		shopButton.click();
 		waitABit(15000);
 		System.out.println("shop link " + firstComment.getText());
