@@ -1,4 +1,4 @@
-package com.tests.us8.us8004;
+package com.tests.us8a.us8001a;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,11 +7,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
 
 import org.junit.After;
 import org.junit.Before;
@@ -49,10 +44,15 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
+
 @WithTag(name = "US8.4 Customer Buy With Kobo", type = "Scenarios")
 @Story(Application.RegularCart.US8_4.class)
 @RunWith(SerenityRunner.class)
-public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
+public class US8001aCustomerBuyWithContactBoosterTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -89,7 +89,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	private String discountClass;
 	private String billingAddress, shippingAddress;
 	private String shippingValue;
-	private String initialStylistName;
+//	private String initialStylistName;
 	private String voucherCode;
 	private String voucherValue;
 	private String koboCode1;
@@ -105,11 +105,11 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(7);
-		voucherValue = genProduct2.getPrice();
-		genProduct3 = createdProductsList.get(6);
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(1);
+//		genProduct2 = createdProductsList.get(7);
+//		voucherValue = genProduct2.getPrice();
+//		genProduct3 = createdProductsList.get(6);
 //		
 //		
 		
@@ -125,7 +125,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 			billingAddress = prop.getProperty("billingAddress");
 			shippingAddress = prop.getProperty("shippingAddress");
 			shippingValue = prop.getProperty("shippingValue");
-			initialStylistName = prop.getProperty("initialStylistName");
+		//	initialStylistName = prop.getProperty("initialStylistName");
 
 			input = new FileInputStream(UrlConstants.ENV_PATH + "koboVouchers.properties");
 			prop.load(input);
@@ -155,10 +155,10 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 //		genProduct1.setPrice("89.00");
 //		MagentoProductCalls.createApiProduct(genProduct1);
 //
-//		genProduct2 = MagentoProductCalls.createPomProductModel();
-//		genProduct2.setPrice("49.90");
-//		voucherValue = genProduct2.getPrice();
-//		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct2 = MagentoProductCalls.createPomProductModel();
+		genProduct2.setPrice("49.90");
+		voucherValue = genProduct2.getPrice();
+		MagentoProductCalls.createApiProduct(genProduct2);
 //
 //		genProduct3 = MagentoProductCalls.createProductModel();
 //		genProduct3.setPrice("10.00");
@@ -169,15 +169,14 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	}
 
 	@Test
-	public void us8004CustomerBuyWithContactBoosterTest() {
+	public void us8001aCustomerBuyWithContactBoosterTest() throws Exception {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
-//		voucherCode = dashboardSteps.getStyleCoachFullNameFromProfile().contentEquals(initialStylistName) ? koboCode1
-//				: koboCode2;
+
 		voucherCode =koboCode1;
 		headerSteps.goToShop();
 		homeSteps.goToNewItems();
@@ -186,21 +185,16 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		generalCartSteps.clearCart();
 		RegularBasicProductModel productData;
 
-//		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
-//		RegularUserCartCalculator.allProductsList.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
 		RegularUserCartCalculator.allProductsList.add(productData);
-//		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "4", "0");
-//		RegularUserCartCalculator.allProductsList.add(productData);
+
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
 		regularUserCartSteps.typeCouponCode(voucherCode);
 
-	//	regularUserCartSteps.validateNotPrefferedShopAndGoToPreferredOne();
 
-	//	regularUserCartSteps.typeCouponCode(voucherCode);
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);

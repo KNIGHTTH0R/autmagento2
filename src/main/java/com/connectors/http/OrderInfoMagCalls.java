@@ -28,7 +28,7 @@ import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
 
 public class OrderInfoMagCalls {
-
+	
 	public static DBOrderModel getOrderInfo(String orderIncrementId) {
 
 		DBOrderModel order = new DBOrderModel();
@@ -624,42 +624,46 @@ public class OrderInfoMagCalls {
 	}
 
 	public static void main(String[] args) throws SOAPException, IOException {
-
-		String sessID = HttpSoapConnector.performLogin();
-
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10023165800");
-
-
-		System.out.println("order ID : " + dbmodel.getOrderId());
-
-		System.out.println("style party  : " + dbmodel.getStylePartyId());
+		
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10026566600");
 		System.out.println("kobo article " + dbmodel.getKoboSingleArticle());
-
-		System.out.println("bill post  : " + dbmodel.getBillToPostcode());
-		System.out.println("bill fname  : " + dbmodel.getBillToFirstName());
-		System.out.println("billl lname : " + dbmodel.getBillToLastName());
-		System.out.println("bill street : " + dbmodel.getBillToStreetAddress());
-		System.out.println("bill city : " + dbmodel.getBillToCity());
-		System.out.println("bill country id : " + dbmodel.getBillCountryId());
-
-		System.out.println("customer_firstname: " + dbmodel.getCustomerFirstName());
-		System.out.println("customer_lastname : " + dbmodel.getCustomerLastName());
-
-		// shipp
-
-		System.out.println("shipp post : " + dbmodel.getShipToPostcode());
-		System.out.println("fname  : " + dbmodel.getShipToFirstName());
-		System.out.println("ship lname : " + dbmodel.getShipToLastName());
-		System.out.println("ship street : " + dbmodel.getShipToStreetAddress());
-		System.out.println("ship city : " + dbmodel.getShipToCity());
-		System.out.println("ship country id : " + dbmodel.getShipCountryId());
-
-		System.out.println("updated nav: " + dbmodel.getUpdatedNav());
-		System.out.println("order currency code : " + dbmodel.getOrderCurrencyCode());
-
-		List<SalesOrderInfoModel> list = dbmodel.getItemInfo();
-		for (SalesOrderInfoModel salesOrderInfoModel : list) {
-			System.out.println("sku: " + salesOrderInfoModel.getSku());
-		}
+		System.out.println("is Pom " + dbmodel.getIsPom());
+//
+//		String sessID = HttpSoapConnector.performLogin();
+//
+//		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10023165800");
+//
+//
+//		System.out.println("order ID : " + dbmodel.getOrderId());
+//
+//		System.out.println("style party  : " + dbmodel.getStylePartyId());
+//		System.out.println("kobo article " + dbmodel.getKoboSingleArticle());
+//
+//		System.out.println("bill post  : " + dbmodel.getBillToPostcode());
+//		System.out.println("bill fname  : " + dbmodel.getBillToFirstName());
+//		System.out.println("billl lname : " + dbmodel.getBillToLastName());
+//		System.out.println("bill street : " + dbmodel.getBillToStreetAddress());
+//		System.out.println("bill city : " + dbmodel.getBillToCity());
+//		System.out.println("bill country id : " + dbmodel.getBillCountryId());
+//
+//		System.out.println("customer_firstname: " + dbmodel.getCustomerFirstName());
+//		System.out.println("customer_lastname : " + dbmodel.getCustomerLastName());
+//
+//		// shipp
+//
+//		System.out.println("shipp post : " + dbmodel.getShipToPostcode());
+//		System.out.println("fname  : " + dbmodel.getShipToFirstName());
+//		System.out.println("ship lname : " + dbmodel.getShipToLastName());
+//		System.out.println("ship street : " + dbmodel.getShipToStreetAddress());
+//		System.out.println("ship city : " + dbmodel.getShipToCity());
+//		System.out.println("ship country id : " + dbmodel.getShipCountryId());
+//
+//		System.out.println("updated nav: " + dbmodel.getUpdatedNav());
+//		System.out.println("order currency code : " + dbmodel.getOrderCurrencyCode());
+//
+//		List<SalesOrderInfoModel> list = dbmodel.getItemInfo();
+//		for (SalesOrderInfoModel salesOrderInfoModel : list) {
+//			System.out.println("sku: " + salesOrderInfoModel.getSku());
+//		}
 	}
 }

@@ -1,14 +1,20 @@
 package com.workflows.frontend.regularUser;
 
+import java.util.List;
+
 import com.steps.frontend.checkout.CheckoutValidationSteps;
+import com.tools.CustomVerification;
 import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.data.soap.DBOrderModel;
+import com.tools.data.soap.NavOrderModel;
 import com.tools.datahandler.DataGrabber;
 import com.tools.datahandler.RegularUserDataGrabber;
 import com.workflows.frontend.AddressWorkflows;
 import com.workflows.frontend.AdyenWorkflows;
 
 import net.thucydides.core.annotations.Screenshots;
+import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.Steps;
 
@@ -304,4 +310,20 @@ public class RegularCartValidationWorkflows {
 		AddressWorkflows.validateShippingAddress("SHIPPING ADDRESS");
 	}
 
+
+	public void verifyKoboSingleArticle(String grabbedKoboSingleArticle, String expectedKonoSingleArticle) {
+		//CustomVerification.verifyTrue("Failure: Discounts Price dont match Grabbed: " + grabbedKoboSingleArticle + " Expected: " + expectedKonoSingleArticle, grabbedKoboSingleArticle.contains(expectedKonoSingleArticle));
+		regularUserCartWorkflows.verifyKoboSingleArticle(grabbedKoboSingleArticle, expectedKonoSingleArticle);
+	}
+	
+
+	public void verifyIsPom(String grabbedIsPom, String expectedIsPom) {
+		//CustomVerification.verifyTrue("Failure: Discounts Price dont match Grabbed: " + grabbedIsPom + " Expected: " + expectedIsPom, grabbedIsPom.contains(expectedIsPom));
+		regularUserCartWorkflows.verifyIsPom(grabbedIsPom, expectedIsPom);
+	}
+
+//	public void validateOrders(DBOrderModel model, String value) {
+//		regularUserCartWorkflows.verifyKoboSingleArticle(model.getKoboSingleArticle(), value);
+//		regularUserCartWorkflows.verifyKoboSingleArticle(model.getKoboSingleArticle(), value);
+//	}
 }

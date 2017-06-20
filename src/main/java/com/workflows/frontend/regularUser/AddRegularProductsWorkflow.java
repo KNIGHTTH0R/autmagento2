@@ -37,6 +37,17 @@ public class AddRegularProductsWorkflow {
 
 		return productSteps.setRegularBasicProductAddToCart(model,qty, productProperty, finalPrice, ipPoints);
 	}
+	@StepGroup
+	@Title("Add product to cart1")
+	public RegularBasicProductModel setBasicProductToCart1(ProductDetailedModel model, String qty,
+			String productProperty) {
+		searchSteps.navigateToProductPage(model.getName());
+		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
+		System.out.println("finalPrice"+finalPrice);
+		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
+		System.out.println("ipPoints"+ ipPoints);
+		return productSteps.setRegularBasicProductAddToCart(model,qty, productProperty, finalPrice, ipPoints);
+	}
 	
 	@StepGroup
 	@Title("Add product to cart")
@@ -61,6 +72,8 @@ public class AddRegularProductsWorkflow {
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);
 		return productSteps.updateRegularBasicProductAddToCart(model, qty, productProperty, finalPrice,ipPoints);
 	}
+
+	
 
 	
 }

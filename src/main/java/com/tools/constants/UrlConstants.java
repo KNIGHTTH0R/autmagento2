@@ -26,6 +26,10 @@ public class UrlConstants {
 	public static final String MAILINATOR_WEB_MAIL = "http://mailinator.com/";
 	public static final String MAILINATOR_IMBOX_SUFFIX = "inbox2.jsp?public_to=";
 	
+	public static final String FMG_WEB_MAIL = "http://www.fakemailgenerator.com/";
+	public static final String FMG_WEB_MAIL_INBOX_SUFFIX = "inbox/";
+	public static final String FMG_WEB_MAIL_DOMAIN = "rhyta.com/";
+	
 	//mailchimp
 	
 	public static final String URL_CHIMPMAIL = "https://login.mailchimp.com/";

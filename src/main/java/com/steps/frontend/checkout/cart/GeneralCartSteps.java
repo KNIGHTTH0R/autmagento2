@@ -18,5 +18,9 @@ public class GeneralCartSteps extends AbstractSteps {
 			generalCartPage().clickClearCart();
 		
 	}
+	public void waitMethod() {
+		waitABit(30000);
+		
+	}
 
 }

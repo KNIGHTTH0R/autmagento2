@@ -96,4 +96,12 @@ public class RegularBasicProductModel {
 		this.bunosValue = bunosValue;
 	}
 
+	@Override
+	public String toString() {
+		return "RegularBasicProductModel [name=" + name + ", prodCode=" + prodCode + ", quantity=" + quantity
+				+ ", unitPrice=" + unitPrice + ", finalPrice=" + finalPrice + ", bonusType=" + bonusType
+				+ ", bunosValue=" + bunosValue + ", ipPoints=" + ipPoints + ", deliveryDate=" + deliveryDate + "]";
+	}
+
+	
 }

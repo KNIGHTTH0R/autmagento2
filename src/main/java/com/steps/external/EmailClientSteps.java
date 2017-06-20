@@ -1,5 +1,6 @@
 package com.steps.external;
 
+import com.pages.external.FakeMailGenerator;
 import com.pages.external.MailinatorPage;
 import com.pages.external.YopmailPage;
 import com.tools.requirements.AbstractSteps;
@@ -10,7 +11,8 @@ import net.thucydides.core.annotations.Step;
 public class EmailClientSteps extends AbstractSteps {
 
 //	MailinatorPage mailPage;
-	 YopmailPage mailPage;
+//	 YopmailPage mailPage;
+	 FakeMailGenerator mailPage;
 
 	private static final long serialVersionUID = 1L;
 

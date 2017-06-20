@@ -130,7 +130,7 @@ public class US12001KoboSubscriptionTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		myBusinessSteps.verifyKoboStatusBeforePlaceTheOrder();
 		loungeSteps.goToMyBusiness();
-		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
+		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
 		myBusinessSteps.accessKoboCart();
 
 		// we use borrow cart models and calculations because it contains the

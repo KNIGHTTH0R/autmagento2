@@ -20,13 +20,17 @@ public class MyBusinessPage extends AbstractPage {
 //	@FindBy(css = "#kobo-cancel div.col-3.col ul.link-list li:nth-child(1) a")
 //	private WebElementFacade accesKoboCart;
 	
-	@FindBy(css = ".flex-col-set .col-box:nth-child(4) ul.link-list li:nth-child(1) a")
+//	@FindBy(css = ".flex-col-set .col-box:nth-child(4) ul.link-list li:nth-child(1) a")
+//	private WebElementFacade accesKoboCart;
+	
+	@FindBy(css = ".link-list li a[href*='contactBoosterOrder']")
 	private WebElementFacade accesKoboCart;
 
+	
 //	@FindBy(css = "#kobo-cancel div.col-3.col ul.link-list li:nth-child(2) a")
 //	private WebElementFacade cancelSubstription;
 	
-	@FindBy(css = ".flex-col-set .col-box:nth-child(4) ul.link-list li:nth-child(2) a")
+	@FindBy(css = ".flex-col-set .col-box:nth-child(6) ul.link-list li:nth-child(2) a")
 	private WebElementFacade cancelSubstription;
 	
 	
@@ -43,7 +47,7 @@ public class MyBusinessPage extends AbstractPage {
 //	@FindBy(css = "#kobo-cancel div.col-3.col")
 //	private WebElementFacade coboSection;
 	
-	@FindBy(css = ".flex-col-set .col-box:nth-child(4)")
+	@FindBy(css = ".flex-col-set .col-box:nth-child(6)")
 	private WebElementFacade coboSection;
 
 	@FindBy(css = "#confirmCancelCbSubscriptionModal form button[type='submit']")
@@ -53,11 +57,11 @@ public class MyBusinessPage extends AbstractPage {
 //	private WebElementFacade borrowCartLink;
 	
 	
-	@FindBy(css = ".flex-col-set .col-box:nth-child(3) li:nth-child(1) a")
+	@FindBy(css = ".flex-col-set .col-box:nth-child(4) li:nth-child(1) a")
 	private WebElementFacade borrowCartLink;
 	
 	
-	@FindBy(css = ".col-box:nth-child(4) ul.link-list li")
+	@FindBy(css = ".col-box:nth-child(6) ul.link-list li")
 	private List<WebElementFacade> contactBoosterCartLinks;
 //	public void verifyThatNumberOfLinksAreEqualTo(String expectedNoOflinks) {
 //		Assert.assertTrue("", getDriver().findElements(By.cssSelector("#kobo-cancel div.col-3.col ul.link-list li")).size() == Integer.parseInt(expectedNoOflinks));

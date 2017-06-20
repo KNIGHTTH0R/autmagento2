@@ -39,10 +39,10 @@ import com.tests.uss12.uss12001.US12001VoucherRunOutNotificationEmailTest;
 	US12001KoboSubscriptionTest.class,
 	US12001MarkAsPaidKoboOrderTest.class,
 	US12001MarkAsPaidInitialKoboOrderTest.class,
-	US12001KoboSubscriptionOrderEmailTest.class, //not expected mail received
+//	US12001KoboSubscriptionOrderEmailTest.class, //not expected mail received
 	US12001VerifyStylistKoboStatusAfterSubscriptionTest.class,
 	US12001KoboSubscriptionUpgradeTest.class,
-	US12001KoboSubscriptionUpgradeOrderEmailTest.class,//not expected mail received 
+//	US12001KoboSubscriptionUpgradeOrderEmailTest.class,//not expected mail received 
 	US12001ChechUsesPerCouponAfterSubscriptionUpgradeTest.class,
 	US12001ApplyCreditMemoOnKoboSubscriptionOrderTest.class,
 	US12001VerifyStylistKoboStatusAfterCmOnSubscriptionTest.class,

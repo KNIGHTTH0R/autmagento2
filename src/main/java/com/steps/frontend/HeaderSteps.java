@@ -201,7 +201,7 @@ public class HeaderSteps extends AbstractSteps {
 	@Step
 	public void goToShop() {
 		headerPage().clickShop();
-		waitABit(1000);
+		waitABit(30000);
 	}
 
 }

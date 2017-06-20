@@ -88,7 +88,7 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		myBusinessSteps.verifyKoboVoucherIsActive();
 		loungeSteps.goToMyBusiness();
-		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
+		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("3");
 		myBusinessSteps.accessKoboCart();
 		contactBoosterCartSteps.selectContactBooster50Voucher();
 		contactBoosterCartSteps.clickToShipping();
@@ -105,7 +105,7 @@ public class US12001KoboSubscriptionUpgradeTest extends BaseTest {
 		coboCode = myBusinessSteps.getKoboCode();
 		System.out.println("coboCode"+ coboCode);
 		headerSteps.goToMyBusinessPage();
-		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
+		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("3");
 		myBusinessSteps.cancelSubstription();
 		headerSteps.goToLounge();
 		myBusinessSteps.verifyCancelledKoboMessageAndActiveUntilDate();

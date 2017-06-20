@@ -1,4 +1,4 @@
-package com.tests.us8.us8004;
+package com.tests.us8a.US8005a;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
-import com.steps.frontend.DashboardSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.HomeSteps;
@@ -35,6 +34,7 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.CreditCardModel;
@@ -49,10 +49,10 @@ import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.regularUser.AddRegularProductsWorkflow;
 import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 
-@WithTag(name = "US8.4 Customer Buy With Kobo", type = "Scenarios")
-@Story(Application.RegularCart.US8_4.class)
+@WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
+@Story(Application.RegularCart.US8_1.class)
 @RunWith(SerenityRunner.class)
-public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
+public class US8005aCustomerBuyWithSimpleProductTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -63,11 +63,11 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	@Steps
 	public ConfirmationSteps confirmationSteps;
 	@Steps
-	public GeneralCartSteps generalCartSteps;
-	@Steps
 	public ShippingPartySectionSteps shippingPartySectionSteps;
 	@Steps
 	public RegularUserCartSteps regularUserCartSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
 	@Steps
 	public HomeSteps homeSteps;
 	@Steps
@@ -82,59 +82,61 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 	public CustomVerification customVerifications;
 	@Steps
 	public FooterSteps footerSteps;
-	@Steps
-	public DashboardSteps dashboardSteps;
 
 	private String username, password;
 	private String discountClass;
-	private String billingAddress, shippingAddress;
+	private String billingAddress;
 	private String shippingValue;
-	private String initialStylistName;
 	private String voucherCode;
 	private String voucherValue;
-	private String koboCode1;
-	private String koboCode2;
-	private CreditCardModel creditCardData = new CreditCardModel();
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
+	private CreditCardModel creditCardData = new CreditCardModel();
 
 	@Before
 	public void setUp() throws Exception {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(7);
-		voucherValue = genProduct2.getPrice();
-		genProduct3 = createdProductsList.get(6);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createProductModel();
+//		genProduct2.setPrice("49.90");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//
+//		genProduct3 = MagentoProductCalls.createProductModel();
+//		genProduct3.setPrice("10.00");
+//		MagentoProductCalls.createApiProduct(genProduct3);
+	
+//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 //		
-//		
-		
+//		genProduct1 = createdProductsList.get(1);
+//		System.out.println(genProduct1.getSku());
+//		genProduct2 = createdProductsList.get(0);
+//		System.out.println(genProduct2.getSku());
+//		genProduct3 = createdProductsList.get(6);
+//		System.out.println(genProduct3.getSku());
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8004.properties");
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8001.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
+
 			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
-			shippingAddress = prop.getProperty("shippingAddress");
 			shippingValue = prop.getProperty("shippingValue");
-			initialStylistName = prop.getProperty("initialStylistName");
 
-			input = new FileInputStream(UrlConstants.ENV_PATH + "koboVouchers.properties");
-			prop.load(input);
-
-//			koboCode1 = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");
-//			koboCode2 = prop.getProperty("koboCodesimona.popa@evozon.com");
-			koboCode1 = "FBEKLVHR-2017";
-			koboCode2 = "PJLHMVJA-2017";
-
+			voucherCode = prop.getProperty("voucherCode");
+			voucherValue = "0";
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -148,59 +150,38 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 			}
 		}
 
-		System.out.println(username);
-		System.out.println(koboCode2);
-
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createPomProductModel();
-//		genProduct2.setPrice("49.90");
-//		voucherValue = genProduct2.getPrice();
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
-
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
 
 	@Test
-	public void us8004CustomerBuyWithContactBoosterTest() {
+	public void us8005aCustomerBuyWithSimpleProductTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.goToProfile();
-//		voucherCode = dashboardSteps.getStyleCoachFullNameFromProfile().contentEquals(initialStylistName) ? koboCode1
-//				: koboCode2;
-		voucherCode =koboCode1;
-		headerSteps.goToShop();
 		homeSteps.goToNewItems();
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
+		generalCartSteps.waitMethod();
 		RegularBasicProductModel productData;
 
-//		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
-//		RegularUserCartCalculator.allProductsList.add(productData);
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
+		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
 		RegularUserCartCalculator.allProductsList.add(productData);
-//		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "4", "0");
-//		RegularUserCartCalculator.allProductsList.add(productData);
+		
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+//		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
+//		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(),
+//				ContextConstants.JEWELRY_BONUS);
+//		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
+//		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(),
+//				ContextConstants.DISCOUNT_40_BONUS);
 
-		regularUserCartSteps.typeCouponCode(voucherCode);
-
-	//	regularUserCartSteps.validateNotPrefferedShopAndGoToPreferredOne();
-
-	//	regularUserCartSteps.typeCouponCode(voucherCode);
+	
 
 		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
 		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
@@ -211,8 +192,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
 		shippingSteps.selectAddress(billingAddress);
-		shippingSteps.setSameAsBilling(false);
-		shippingSteps.selectShippingAddress(shippingAddress);
+		shippingSteps.setSameAsBilling(true);
 
 		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
 
@@ -226,8 +206,11 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
+		 paymentSteps.expandCreditCardForm();
+		 paymentSteps.fillCreditCardForm(creditCardData);
+		
+		
+		//paymentSteps.payWithBankTransfer();
 
 		confirmationSteps.grabRegularProductsList();
 
@@ -238,8 +221,8 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 
 		confirmationSteps.agreeAndCheckout();
 
-		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, shippingAddress);
-		regularCartValidationWorkflows.performCartValidationsWithVoucherApplied(true);
+		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+		regularCartValidationWorkflows.performCartValidations();
 
 		customVerifications.printErrors();
 	}

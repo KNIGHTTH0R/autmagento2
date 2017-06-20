@@ -169,4 +169,15 @@ public class RegularUserCartWorkflows {
 
 	}
 
+	@Step
+	public void verifyKoboSingleArticle(String grabbedKoboSingleArticle, String expectedKonoSingleArticle) {
+		CustomVerification.verifyTrue("Failure: Discounts Price dont match Grabbed: " + grabbedKoboSingleArticle + " Expected: " + expectedKonoSingleArticle, grabbedKoboSingleArticle.contains(expectedKonoSingleArticle));
+
+	}
+	
+	@Step
+	public void verifyIsPom(String grabbedIsPom, String expectedIsPom) {
+		CustomVerification.verifyTrue("Failure: Discounts Price dont match Grabbed: " + grabbedIsPom + " Expected: " + expectedIsPom, grabbedIsPom.contains(expectedIsPom));
+	}
+	
 }

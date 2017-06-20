@@ -272,6 +272,7 @@ public class ProductSteps extends AbstractSteps {
 
 		addToCart();
 		waitABit(TimeConstants.TIME_CONSTANT);
+		System.out.println("result:: "+result);
 		return result;
 	}
 

@@ -81,6 +81,7 @@ public class ShippingPartySectionPage extends AbstractPage {
 	}
 
 	public void selectShipToHostessAddress(String address) {
+		waitABit(5000);
 		element(shipHostessAddressSelect).waitUntilVisible();
 		element(shipHostessAddressSelect).selectByVisibleText(address);
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));

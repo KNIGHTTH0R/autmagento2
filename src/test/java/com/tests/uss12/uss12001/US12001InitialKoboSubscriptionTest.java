@@ -95,7 +95,7 @@ public class US12001InitialKoboSubscriptionTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		myBusinessSteps.verifyKoboStatusBeforePlaceTheOrder();
 		loungeSteps.goToMyBusiness();
-		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("1");
+		myBusinessSteps.verifyThatNumberOfLinksAreEqualTo("2");
 		myBusinessSteps.accessKoboCart();
 		contactBoosterCartSteps.selectContactBooster200Voucher();
 		contactBoosterCartSteps.clickToShipping();
@@ -119,7 +119,7 @@ public class US12001InitialKoboSubscriptionTest extends BaseTest {
 
 	@After
 	public void saveData() {
-	//	MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
+		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName() + SoapKeys.GRAB);
 
 	}
 

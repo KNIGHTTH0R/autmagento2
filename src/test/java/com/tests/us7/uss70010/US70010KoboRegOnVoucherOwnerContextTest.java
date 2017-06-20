@@ -134,6 +134,8 @@ public class US70010KoboRegOnVoucherOwnerContextTest extends BaseTest {
 
 	@Test
 	public void us70010KoboRegOnVoucherOwnerContextTest() {
+		
+		System.out.println("cobo code: "+koboCode );
 		koboValidationSteps.enterKoboCodeAndGoToRegistrationProcess(MongoReader.getBaseURL() + context, koboCode);
 		contactBoosterRegistrationSteps.fillContactBoosterRegistrationForm(dataModel, addressModel);
 		koboSuccesFormSteps.verifyKoboFormIsSuccsesfullyFilledIn();
