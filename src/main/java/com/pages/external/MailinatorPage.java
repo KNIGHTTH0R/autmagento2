@@ -24,16 +24,19 @@ public class MailinatorPage extends AbstractPage {
 	private WebElement iFrameElement;
 
 	public void openEmail(String email, String title) {
-
-		navigate(UrlConstants.MAILINATOR_WEB_MAIL + UrlConstants.MAILINATOR_IMBOX_SUFFIX + email);
-		getDriver().navigate().refresh();
-		waitForPageToLoad();
+		System.out.println(email);
+		navigate(UrlConstants.MAILINATOR_WEB_MAIL);
+		//getDriver().navigate().refresh();
+		//waitForPageToLoad();
+		
+		
 		waitABit(TimeConstants.TIME_MEDIUM);
 		element(inboxContainer).waitUntilVisible();
 		boolean foundEmail = false;
 		List<WebElement> emailList = inboxContainer.findElements(By.cssSelector("div[ng-repeat='email in emails']"));
 		for (WebElement itemNow : emailList) {
 			String allText = itemNow.getText();
+			System.out.println("countorrr "+allText);
 			if (allText.contains(title)) {
 				itemNow.findElement(By.cssSelector("div.innermail.ng-binding")).click();
 				foundEmail = true;

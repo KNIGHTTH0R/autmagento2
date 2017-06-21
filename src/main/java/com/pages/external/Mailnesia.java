@@ -2,26 +2,31 @@ package com.pages.external;
 
 import java.util.List;
 
+import net.serenitybdd.core.annotations.findby.FindBy;
+
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.CustomVerification;
 import com.tools.constants.UrlConstants;
 import com.tools.requirements.AbstractPage;
 
-import net.serenitybdd.core.annotations.findby.By;
-import net.serenitybdd.core.annotations.findby.FindBy;
+public class Mailnesia extends AbstractPage {
 
-public class FakeMailGenerator extends AbstractPage {
-//	@FindBy(id = "#email-list")
-//	private WebElement inboxContainer;
-	@FindBy(id = "emailFrame")
+
+
+	@FindBy(css = "iframe#ifmail")
+	private WebElement iFrameElement;
+
+	
+	
+	@FindBy(id = "message")
 	private WebElement iFrameInbox;
 	public void openEmail(String email, String title) {
-		System.out.println("this is the email" + email);
-		navigate(UrlConstants.FMG_WEB_MAIL + UrlConstants.FMG_WEB_MAIL_INBOX_SUFFIX + UrlConstants.FMG_WEB_MAIL_DOMAIN+email);
-		waitABit(10000);
-		List<WebElement> emailList = getDriver().findElements(By.cssSelector("#email-list li a"));
+		navigate(UrlConstants.MAILNESIA_WEB_MAIL + UrlConstants.MAILNESIA_MAIL_INBOX_SUFFIX +email);
+		waitABit(2000);
+		List<WebElement> emailList = getDriver().findElements(By.cssSelector(".email tbody tr td:nth-child(4) a"));
 		
 		
 		boolean foundEmail = false;
@@ -31,16 +36,17 @@ public class FakeMailGenerator extends AbstractPage {
 			
 				if (itemNow.getText().contains(title)) {
 					itemNow.click();
+					
 					//getDriver().switchTo().defaultContent();
 					waitABit(5000);
 					foundEmail = true;
-					getDriver().switchTo().frame(iFrameInbox);
+				//	getDriver().switchTo().frame(iFrameInbox);
 					break;
 				}
 			}
 			
 			
-			Assert.assertTrue("The email with the title " + title + " was not found", foundEmail);
+			CustomVerification.verifyTrue("The email with the title " + title + " was not found", foundEmail);
 		}else{
 			CustomVerification.verifyTrue("No emails received", true);
 		}
@@ -73,4 +79,5 @@ public class FakeMailGenerator extends AbstractPage {
 	public void clickPartyConfirmationLink() {
 		getDriver().findElements(By.cssSelector("a[href*='invitation']")).get(0).click();
 	}
+
 }

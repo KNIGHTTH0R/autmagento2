@@ -28,7 +28,22 @@ public class UrlConstants {
 	
 	public static final String FMG_WEB_MAIL = "http://www.fakemailgenerator.com/";
 	public static final String FMG_WEB_MAIL_INBOX_SUFFIX = "inbox/";
-	public static final String FMG_WEB_MAIL_DOMAIN = "rhyta.com/";
+	//public static final String FMG_WEB_MAIL_DOMAIN = "rhyta.com/";
+	public static final String FMG_WEB_MAIL_DOMAIN = "gustr.com/";
+	
+	public static final String MAIL_DROP_WEB_MAIL = "https://maildrop.cc/";
+	public static final String MAIL_DROP_MAIL_INBOX_SUFFIX = "inbox/";
+	
+	
+	public static final String DISPONSTABLE_WEB_MAIL = "http://dispostable.com/";
+	public static final String DISPONSTABLE_MAIL_INBOX_SUFFIX = "inbox/";
+	
+	
+	public static final String MAILNESIA_WEB_MAIL = "http://mailnesia.com/";
+	public static final String MAILNESIA_MAIL_INBOX_SUFFIX = "mailbox/";
+	
+	
+	public static final String TEMPMAIL_WEB_MAIL = "https://temp-mail.org/";
 	
 	//mailchimp
 	

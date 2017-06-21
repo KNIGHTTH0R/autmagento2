@@ -2,28 +2,59 @@ package com.pages.external;
 
 import java.util.List;
 
+import net.serenitybdd.core.annotations.findby.FindBy;
+
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.tools.CustomVerification;
 import com.tools.constants.UrlConstants;
 import com.tools.requirements.AbstractPage;
 
-import net.serenitybdd.core.annotations.findby.By;
-import net.serenitybdd.core.annotations.findby.FindBy;
+public class TempMail extends AbstractPage {
 
-public class FakeMailGenerator extends AbstractPage {
-//	@FindBy(id = "#email-list")
-//	private WebElement inboxContainer;
-	@FindBy(id = "emailFrame")
+
+
+	@FindBy(css = "iframe#ifmail")
+	private WebElement iFrameElement;
+	
+	@FindBy(css = "ul li a[href*='change']")
+	private WebElement changeButton;
+
+	@FindBy(css = "ul li a[href*='refresh']")
+	private WebElement refreshButton;
+	
+	@FindBy(css = "input[name*='mail']")
+	private WebElement mailInput;
+	
+	@FindBy(css = "button[type*='submit']")
+	private WebElement submitButton;
+	
+	
+	
+	@FindBy(id = "message")
 	private WebElement iFrameInbox;
 	public void openEmail(String email, String title) {
-		System.out.println("this is the email" + email);
-		navigate(UrlConstants.FMG_WEB_MAIL + UrlConstants.FMG_WEB_MAIL_INBOX_SUFFIX + UrlConstants.FMG_WEB_MAIL_DOMAIN+email);
-		waitABit(10000);
-		List<WebElement> emailList = getDriver().findElements(By.cssSelector("#email-list li a"));
+		navigate(UrlConstants.TEMPMAIL_WEB_MAIL);
+		waitABit(2000);
+		element(changeButton).waitUntilVisible();
+		changeButton.click();
 		
+		element(mailInput).waitUntilVisible();
+		element(mailInput).clear();
+		mailInput.sendKeys(email);
 		
+		element(submitButton).waitUntilVisible();
+		submitButton.click();
+		
+		element(refreshButton).waitUntilVisible();
+		refreshButton.click();
+		
+		waitABit(5000);
+		List<WebElement> emailList = getDriver().findElements(By.cssSelector("#mails tbody tr td:nth-child(2) a"));
+		
+		System.out.println("size list "+ emailList.size());
 		boolean foundEmail = false;
 		
 		if(emailList.size()!=0){
@@ -31,10 +62,11 @@ public class FakeMailGenerator extends AbstractPage {
 			
 				if (itemNow.getText().contains(title)) {
 					itemNow.click();
+					
 					//getDriver().switchTo().defaultContent();
 					waitABit(5000);
 					foundEmail = true;
-					getDriver().switchTo().frame(iFrameInbox);
+				//	getDriver().switchTo().frame(iFrameInbox);
 					break;
 				}
 			}
@@ -73,4 +105,5 @@ public class FakeMailGenerator extends AbstractPage {
 	public void clickPartyConfirmationLink() {
 		getDriver().findElements(By.cssSelector("a[href*='invitation']")).get(0).click();
 	}
+
 }
