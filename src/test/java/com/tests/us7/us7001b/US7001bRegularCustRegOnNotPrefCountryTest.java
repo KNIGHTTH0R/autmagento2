@@ -46,6 +46,8 @@ public class US7001bRegularCustRegOnNotPrefCountryTest extends BaseTest {
 	public void us7001bRegularCustRegOnNotPrefCountryTest() {
 
 		customerRegistrationSteps.fillCreateCustomerForm(dataModel, addressModel);
+	//	customerRegistrationSteps.fillCreateCustomerFormAnReturnFoundByNameStylecoaches(dataModel, addressModel, "sim", "sim");
+
 		customerRegistrationSteps.verifyCustomerCreation();
 		customVerifications.printErrors();
 	}

@@ -16,7 +16,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	CreateProductsTest.class,
 	
 	US10CreateAllPartiesSuite.class,
-	US7CreateRegularCustomersSuite.class,
+	
 	US3001Suite.class,
 	US3003Suite.class,
 	US3004Suite.class,
@@ -36,7 +36,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US6002bSuite.class,
 	US6003Suite.class,
 	US6006ScBuyProductwithSpecialPriceTest.class,
-	
+	US7CreateRegularCustomersSuite.class,
 	US7001Suite.class,
 	US7001bSuite.class,
 //temporar	US7002Suite.class,

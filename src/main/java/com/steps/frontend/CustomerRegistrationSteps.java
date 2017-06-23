@@ -47,6 +47,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerFormWithoutPlz(CustomerFormModel customerData, AddressModel addressData) {
 
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -72,6 +73,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -94,6 +96,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			AddressModel addressData) {
 
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -113,6 +116,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerFormWithNoStylePartyAndStyleCoachCheckedNoStylistSelected(
 			CustomerFormModel customerData, AddressModel addressData) {
 
+		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
@@ -162,6 +166,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -182,6 +187,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerFormAndGetLatAndLong(CustomerFormModel customerData, AddressModel addressData) {
 
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -201,6 +207,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@StepGroup
 	public void fillCreateCustomerFormNoStylistSelected(CustomerFormModel customerData, AddressModel addressData) {
 
+		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
@@ -225,6 +232,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -247,6 +255,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			AddressModel addressData) {
 
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -266,6 +275,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerFormNoMemberFlagAndNoStylistSelected(CustomerFormModel customerData,
 			AddressModel addressData) {
 
+		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
@@ -288,6 +298,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 		List<DykscSeachModel> result = new ArrayList<DykscSeachModel>();
 
+		navigate(MongoReader.getBaseURL());
 		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
@@ -312,6 +323,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 			AddressModel addressData) {
 
 		navigate(MongoReader.getBaseURL());
+		navigate(MongoReader.getBaseURL());
 		headerPage().clickAnmeldenButton();
 		loginPage().clickGoToCustomerRegistration();
 		inputFirstName(customerData.getFirstName());
@@ -331,6 +343,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerFormUnderContext(CustomerFormModel customerData, AddressModel addressData,
 			String context) {
 
+		navigate(MongoReader.getBaseURL() + context);
 		navigate(MongoReader.getBaseURL() + context);
 		System.out.println(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
@@ -352,6 +365,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerFormNoMemberUnderContext(CustomerFormModel customerData, AddressModel addressData,
 			String context) {
 
+		navigate(MongoReader.getBaseURL() + context);
 		navigate(MongoReader.getBaseURL() + context);
 		System.out.println(MongoReader.getBaseURL() + context);
 		headerPage().clickAnmeldenButton();
@@ -599,6 +613,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Title("Fill landing page form")
 	public void fillLandingPageForm(CustomerFormModel dataModel, AddressModel addressModel) {
 		navigate(MongoReader.getBaseURL() + UrlConstants.LANDING_PAGE);
+		navigate(MongoReader.getBaseURL() + UrlConstants.LANDING_PAGE);
 		contactLandingPage().selectGender(true);
 		contactLandingPage().inputFirstName(dataModel.getFirstName());
 		contactLandingPage().inputLastName(dataModel.getLastName());
@@ -715,6 +730,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	@Title("Fill widget registration form")
 	public void fillWidgetRegistrationForm(String code, CustomerFormModel dataModel) {
+		navigate(MongoReader.getBaseURL() + UrlConstants.REGISTER_LANDING_PAGE);
 		navigate(MongoReader.getBaseURL() + UrlConstants.REGISTER_LANDING_PAGE);
 		registerLandingPage().memberCodeInput(code);
 		registerLandingPage().firstNameInput(dataModel.getFirstName());
