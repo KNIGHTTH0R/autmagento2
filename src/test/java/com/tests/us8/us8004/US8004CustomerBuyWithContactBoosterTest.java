@@ -105,11 +105,11 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(7);
-		voucherValue = genProduct2.getPrice();
-		genProduct3 = createdProductsList.get(6);
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(1);
+//		genProduct2 = createdProductsList.get(7);
+//		voucherValue = genProduct2.getPrice();
+//		genProduct3 = createdProductsList.get(6);
 //		
 //		
 		
@@ -130,10 +130,10 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 			input = new FileInputStream(UrlConstants.ENV_PATH + "koboVouchers.properties");
 			prop.load(input);
 
-//			koboCode1 = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");
-//			koboCode2 = prop.getProperty("koboCodesimona.popa@evozon.com");
-			koboCode1 = "FBEKLVHR-2017";
-			koboCode2 = "PJLHMVJA-2017";
+			koboCode1 = prop.getProperty("koboCodemihaialexandrubarta@gmail.com");
+			koboCode2 = prop.getProperty("koboCodesimona.popa@evozon.com");
+//			koboCode1 = "FBEKLVHR-2017";
+//			koboCode2 = "PJLHMVJA-2017";
 
 
 		} catch (IOException ex) {
@@ -151,18 +151,18 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		System.out.println(username);
 		System.out.println(koboCode2);
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createPomProductModel();
-//		genProduct2.setPrice("49.90");
-//		voucherValue = genProduct2.getPrice();
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+
+		genProduct2 = MagentoProductCalls.createPomProductModel();
+		genProduct2.setPrice("49.90");
+		voucherValue = genProduct2.getPrice();
+		MagentoProductCalls.createApiProduct(genProduct2);
+
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("10.00");
+		MagentoProductCalls.createApiProduct(genProduct3);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);

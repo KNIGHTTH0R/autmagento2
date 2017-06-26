@@ -15,7 +15,7 @@ import com.tests.us8.us8002.US8002ValidateOrderInStylistsCustomerOrderReportTest
 	
 	//US8002ValidateOrderEmailTest.class,	
 	US8002ValidateOrderBackOfficeTest.class,	
-	US8002ValidateOrderInStylistsCustomerOrderReportTest.class,	
+	//US8002ValidateOrderInStylistsCustomerOrderReportTest.class,	
 	US8002CheckOrderOnCustomerProfileTest.class,	
 })
 @RunWith(Suite.class)

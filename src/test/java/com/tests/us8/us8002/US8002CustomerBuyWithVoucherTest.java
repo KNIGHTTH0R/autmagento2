@@ -113,9 +113,9 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 //		genProduct2 = MagentoProductCalls.createProductModel();
 //		genProduct2.setPrice("49.90");
 //		MagentoProductCalls.createApiProduct(genProduct2);
-		
-		  
-
+//		
+//		  
+//
 //		genProduct3 = MagentoProductCalls.createProductModel();
 //		genProduct3.setPrice("5.00");
 //		MagentoProductCalls.createApiProduct(genProduct3);
