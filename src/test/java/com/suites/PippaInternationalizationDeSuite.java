@@ -16,7 +16,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	CreateProductsTest.class,
 	
 	US10CreateAllPartiesSuite.class,
-	
+	//shop for myself suite
 	US3001Suite.class,
 	US3003Suite.class,
 	US3004Suite.class,
@@ -30,23 +30,26 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US4001Suite.class,
 	US4002Suite.class,
 	
+	//SC registration
 	US6001Suite.class,
 	US6001bSuite.class,
 	US6002Suite.class,
 	US6002bSuite.class,
 	US6003Suite.class,
 	US6006ScBuyProductwithSpecialPriceTest.class,
+	
+	//Create customer cart suite
 	US7CreateRegularCustomersSuite.class,
 	US7001Suite.class,
 	US7001bSuite.class,
-//temporar	US7002Suite.class,
+	//temporar	US7002Suite.class,
 	
-//	emilian
-//	US7004Suite.class,
-//	US7004bSuite.class,
+	//	emilian
+	//	US7004Suite.class,
+	//	US7004bSuite.class,
 	
 	//temporar
-//	US7008Suite.class,
+	//	US7008Suite.class,
 	US7009Suite.class,
 	US70010Suite.class,
 	US70011Suite.class,
@@ -54,6 +57,8 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	
 //	US10006Suite.class,
 	
+	
+	//Regualar customer cart suite
 	US8001Suite.class,
 	US8002Suite.class,
 	US8003Suite.class,	
@@ -64,6 +69,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US8008Suite.class,
 	US80011CustomerOrderProductWithSpecialPriceTest.class,
 	
+	//Place customer order 
 	US11001Suite.class,
 	US11002Suite.class,
 	//should be verified 
@@ -75,10 +81,13 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US11008Suite.class,
 	US110011PlaceCustomerOrderProductWithSpecialPriceTest.class,
 	
+	//Party
 	US10007SuitePartOne.class,
-	//should be review 10008 emilian
-//	US10008Suite.class,
+	// should be review 10008 emilian
+	//US10008Suite.class,
 	//US9008Suite 
+	
+	//Place host order
 	US9001Suite.class,
 	US9002Suite.class,
 	US9002bSuite.class,
@@ -110,7 +119,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US17003Suite.class,
 	
 //	US23001PartOneSuite.class,
-	US20001Suite.class,
+//	US20001Suite.class,
 //	US21001Suite.class,
 //	US22001Suite.class,
 	

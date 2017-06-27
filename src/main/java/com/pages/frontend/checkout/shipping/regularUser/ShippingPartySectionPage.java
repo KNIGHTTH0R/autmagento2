@@ -59,6 +59,7 @@ public class ShippingPartySectionPage extends AbstractPage {
 	public void clickShipToHostessButton() {
 		element(shipToHostessButton).waitUntilVisible();
 		shipToHostessButton.click();
+		waitABit(5000);
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 

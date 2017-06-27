@@ -89,6 +89,8 @@ public class US8004CheckOrderOnCustomerProfileTest extends BaseTest {
 
 		String orderId = orderHistory.get(0).getOrderId();
 		String orderPrice = orderHistory.get(0).getTotalPrice();
+		System.out.println("grabbed price" +orderPrice);
+		System.out.println("expected price"+ orderModel.getTotalPrice());
 		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
 		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
 

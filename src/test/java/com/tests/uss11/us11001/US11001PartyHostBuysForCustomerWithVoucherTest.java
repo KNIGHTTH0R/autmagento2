@@ -200,8 +200,8 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
-		shippingPartySectionSteps.clickShipToHostessButton();
-		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
+//		shippingPartySectionSteps.clickShipToHostessButton();
+//		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();

@@ -146,7 +146,7 @@ public class ImportOrdersSteps {
 
 				System.out.println("open order " + order.getIncrementId());
 				
-				importOrders.validateUpdatedNavDate(order.getUpdatedNav(),"2017-04-20","yyyy-MM-dd");
+				importOrders.validateUpdatedNavDate(order.getUpdatedNav(),"2017-06-27","yyyy-MM-dd");
 
 				importOrders.validateOrderIncrementId(order.getIncrementId(), compare.getIncrementId());
 				importOrders.validateOrderItemsTest(order.getItemInfo(), compare.getLines());
