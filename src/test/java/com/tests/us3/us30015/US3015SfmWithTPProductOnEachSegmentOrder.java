@@ -56,7 +56,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US3.7 Shop for myself no valid VAT and no SMB billing and shipping AT", type = "Scenarios")
 @Story(Application.ShopForMyselfCart.US3_7.class)
 @RunWith(SerenityRunner.class)
-public class US3015SfmWithTPProductOnEachSecgmentOrder extends BaseTest {
+public class US3015SfmWithTPProductOnEachSegmentOrder extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -151,7 +151,7 @@ public class US3015SfmWithTPProductOnEachSecgmentOrder extends BaseTest {
 	}
 
 	@Test
-	public void us3015SfmWithTPProductOnEachSecgmentOrder() throws ParseException {
+	public void us3015SfmWithTPProductOnEachSegmentOrder() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

@@ -31,6 +31,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
@@ -81,6 +82,16 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 		DataGrabber.wipe();
 
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsWithTP" + SoapKeys.GRAB);
+		// immediate
+		genProduct1 = createdProductsList.get(0);
+		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+		// immediate with TP
+		genProduct2 = createdProductsList.get(1);
+		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+		//TP
+		genProduct3 = createdProductsList.get(2);
+		
 		// createdProductsList =
 		// MongoReader.grabProductDetailedModel("CreateProductsTest" +
 		// SoapKeys.GRAB);
@@ -89,21 +100,21 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 		// genProduct3 = createdProductsList.get(9);
 
 		allProductsList = new ArrayList<ProductDetailedModel>();
-
-		// immediate
-		genProduct1 = MagentoProductCalls.createProductModel();
-		MagentoProductCalls.createApiProduct(genProduct1);
-		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-
-		// immediate with TP
-		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.getStockData().setAllowedTermPurchase("1");
-		MagentoProductCalls.createApiProduct(genProduct2);
-		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-
-		// TP
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		MagentoProductCalls.createApiProduct(genProduct3);
+//
+//		// immediate
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// immediate with TP
+//		genProduct2 = MagentoProductCalls.createProductModel();
+//		genProduct2.getStockData().setAllowedTermPurchase("1");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// TP
+//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -143,16 +154,15 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 
 		
 
-		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
+		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
 		// allProductsList.add(genProduct2);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct2.getSku());
+		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct1.getSku());
 		regularUserCartSteps.verifyThatTermPurchasePaymentAndShippingBlockIsNotAvailable();
 
 		addProductsForCustomerWorkflow.addProductToCart(genProduct3, "1", "0");
-		allProductsList.add(genProduct3);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
@@ -161,7 +171,8 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
 		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
 		// click on DeliverALLonThisDates
-
+		
+		allProductsList.add(genProduct3);
 		String mostAwayEarliest = GeneralCartCalculations.sortDates(allProductsList, "yyyy-MM-dd")
 				.get(allProductsList.size() - 1).getStockData().getEarliestAvailability();
 
@@ -180,8 +191,8 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 
 		}
 
-		addProductsForCustomerWorkflow.addProductToCart(genProduct1, "1", "0");
-		allProductsList.add(genProduct1);
+		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
+		allProductsList.add(genProduct2);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
@@ -189,7 +200,7 @@ public class US32002RegularOrderAllowedForTPTest extends BaseTest {
 		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
 		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();
 		regularUserCartSteps.verifyDeliverAllOnThisDateIsDisabled();
-		regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct1.getSku());
+	//	regularUserCartSteps.verifyThatTermPurchaseIsNotAvailable(genProduct1.getSku());
 
 		// verify if TP block is not displayed on product side
 

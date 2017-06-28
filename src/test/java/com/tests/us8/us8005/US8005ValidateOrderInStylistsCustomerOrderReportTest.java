@@ -20,9 +20,12 @@ import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.profile.ProfileNavSteps;
+import com.steps.frontend.profile.ProfileSteps;
 import com.steps.frontend.reports.StylistsCustomerOrdersReportSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.backend.OrderModel;
@@ -44,6 +47,10 @@ public class US8005ValidateOrderInStylistsCustomerOrderReportTest extends BaseTe
 	public CustomerRegistrationSteps frontEndSteps;
 	@Steps 
 	public CustomVerification customVerifications;
+	@Steps
+	public ProfileNavSteps profileNavSteps;
+	@Steps
+	public ProfileSteps profileSteps;
 	
 	private static OrderModel orderModel = new OrderModel();
 	private String stylistUsername, stylistPassword;
@@ -87,14 +94,14 @@ public class US8005ValidateOrderInStylistsCustomerOrderReportTest extends BaseTe
 
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
-		headerSteps.redirectToStylistsCustomerOrderReport();
-		List<OrderModel> orderHistory = stylistsCustomerOrdersReportSteps.grabOrderReport();
+		headerSteps.goToProfile();
+		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
+		List<OrderModel> orderHistory = profileSteps.grabOrderDetails(orderModel.getOrderId());
 
 		String orderId = orderHistory.get(0).getOrderId();
 		String orderPrice = orderHistory.get(0).getTotalPrice();
-		stylistsCustomerOrdersReportSteps.verifyOrderId(orderId, orderModel.getOrderId());
-		stylistsCustomerOrdersReportSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
-		orderModel = orderHistory.get(0);
+		profileSteps.verifyOrderId(orderId, orderModel.getOrderId());
+		profileSteps.verifyOrderPrice(orderPrice, orderModel.getTotalPrice());
 		
 		customVerifications.printErrors();
 	}

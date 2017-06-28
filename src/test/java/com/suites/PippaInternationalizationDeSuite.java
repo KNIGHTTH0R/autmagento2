@@ -42,14 +42,12 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US7CreateRegularCustomersSuite.class,
 	US7001Suite.class,
 	US7001bSuite.class,
-	//temporar	US7002Suite.class,
+//	US7002Suite.class,
+//	US7004Suite.class,
+//	//US7004bSuite.class,
 	
-	//	emilian
-	//	US7004Suite.class,
-	//	US7004bSuite.class,
 	
-	//temporar
-	//	US7008Suite.class,
+//	US7008Suite.class,
 	US7009Suite.class,
 	US70010Suite.class,
 	US70011Suite.class,
@@ -73,7 +71,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US11001Suite.class,
 	US11002Suite.class,
 	//should be verified 
-	US11003VerifyProductsInPlaceACustomerOrderModal.class,
+	//US11003VerifyProductsInPlaceACustomerOrderModal.class,
 	US11004Suite.class,
 	US11005Suite.class,
 	US11006Suite.class,

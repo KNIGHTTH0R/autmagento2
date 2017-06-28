@@ -43,7 +43,7 @@ public class AddProductsForCustomerWorkflow {
 	@StepGroup
 	@Title("Add product to cart")
 	public void addProductToCart(ProductDetailedModel model, String qty, String productProperty) {
-		searchSteps.navigateToProductPage(model.getName());
+		searchSteps.navigateToProductPage(model.getSku());
 		productSteps.setQuantityAndAddToCart(qty, productProperty);
 	}
 

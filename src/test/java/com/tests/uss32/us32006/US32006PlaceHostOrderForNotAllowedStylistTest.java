@@ -128,7 +128,7 @@ public class US32006PlaceHostOrderForNotAllowedStylistTest extends BaseTest {
 				}
 			}
 		}
-		partyUrlModel = MongoReader.grabUrlModels("US32005CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		partyUrlModel = MongoReader.grabUrlModels("US32006CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 

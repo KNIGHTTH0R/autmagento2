@@ -10,11 +10,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +26,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.cartcalculations.GeneralCartCalculations;
 import com.tools.cartcalculations.regularUser.RegularUserCartCalculator;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.datahandler.DataGrabber;
@@ -39,6 +35,11 @@ import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 import com.tools.utils.DateUtils;
 import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US33.2 Regular CustomerOrder Allowed For TP", type = "Scenarios")
 @Story(Application.RegularCart.US8_7.class)
@@ -85,22 +86,33 @@ public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTes
 		// genProduct2 = createdProductsList.get(8);
 		// genProduct3 = createdProductsList.get(9);
 
-		allProductsList = new ArrayList<ProductDetailedModel>();
-
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsWithTP" + SoapKeys.GRAB);
 		// immediate
-		genProduct1 = MagentoProductCalls.createProductModel();
-		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = createdProductsList.get(0);
 		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-
 		// immediate with TP
-		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.getStockData().setAllowedTermPurchase("1");
-		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct2 = createdProductsList.get(1);
 		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
-		// TP
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		MagentoProductCalls.createApiProduct(genProduct3);
+		//TP
+		genProduct3 = createdProductsList.get(2);
+
+		allProductsList = new ArrayList<ProductDetailedModel>();
+
+//		// immediate
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// immediate with TP
+//		genProduct2 = MagentoProductCalls.createProductModel();
+//		genProduct2.getStockData().setAllowedTermPurchase("1");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// TP
+//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -166,18 +178,16 @@ public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTes
 			regularUserCartSteps.validateDeliveryDates(product.getSku(), grabbedDates, expectedDates);
 
 		}
-		
 
 		List<String> expectedDeliverAllAtOnceDates = GeneralCartCalculations.getCommonDates(dropdownDatesList);
 		List<String> grabedDeliverAllAtOnceDates = regularUserCartSteps
 				.grabbDeliverAllAtOnceDates(new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		regularUserCartSteps.validateDeliverAllAtOnceDates(expectedDeliverAllAtOnceDates, grabedDeliverAllAtOnceDates);
-		
+
 		addProductsForCustomerWorkflow.addProductToCart(genProduct2, "1", "0");
 		// allProductsList.add(genProduct2);
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
 
 		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
 		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
@@ -190,7 +200,6 @@ public class US32001RegularOrderAllowedOnlyForNotAvailableTPTest extends BaseTes
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 
-		
 		regularUserCartSteps.verifyDeliverAllImediatlyIsDisabled();
 		regularUserCartSteps.verifyMultipleDeliveryOptionIsEnabled();
 		regularUserCartSteps.verifyThatMultipleDeliveryOptionIsChecked();

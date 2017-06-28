@@ -33,7 +33,7 @@ public class ProfileNavPage extends AbstractPage {
 		}
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		Assert.assertTrue("The menu was not found", found);
-		waitABit(TimeConstants.TIME_MEDIUM);
+		waitABit(15000);
 		
 	}
 	

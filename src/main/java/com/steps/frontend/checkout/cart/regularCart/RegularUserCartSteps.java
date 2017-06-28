@@ -101,7 +101,14 @@ public class RegularUserCartSteps extends AbstractSteps {
 	public void verifyThatTermPurchaseIsNotAvailable(String productCode) {
 		regularUserCartPage().verifyThatTermPurchaseIsNotAvailable(productCode);
 	}
+	
+	@Step
+	public void verifyThatTermPurchaseBlockIsDisable(String productCode) {
+		regularUserCartPage().verifyThatTermPurchaseBlockIsDisable(productCode);
+	}
 
+
+	
 	@Step
 	public void selectShippingOption(String option) {
 		regularUserCartPage().selectShippingOption(option);

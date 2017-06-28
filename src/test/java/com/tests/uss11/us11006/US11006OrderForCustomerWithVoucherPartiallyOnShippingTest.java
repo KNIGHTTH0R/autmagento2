@@ -157,7 +157,7 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10001bCreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
@@ -200,7 +200,7 @@ public class US11006OrderForCustomerWithVoucherPartiallyOnShippingTest extends B
 		shippingPartySectionSteps.enterPLZ(plz);
 		shippingPartySectionSteps.selectCountry(country);
 		shippingPartySectionSteps.clickShipToHostessButton();
-		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
+//		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();

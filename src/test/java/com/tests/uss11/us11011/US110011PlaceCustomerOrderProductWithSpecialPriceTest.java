@@ -167,7 +167,7 @@ public class US110011PlaceCustomerOrderProductWithSpecialPriceTest extends BaseT
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US11009CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US100011CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
@@ -205,7 +205,7 @@ public class US110011PlaceCustomerOrderProductWithSpecialPriceTest extends BaseT
 		orderForCustomerCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.checkItemNotReceivedYet();
 		shippingPartySectionSteps.clickShipToHostessButton();
-		shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
+	//	shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 
 		HostDataGrabber.grabbedHostShippingProductsList = shippingSteps.grabHostProductsList();
 		HostDataGrabber.hostShippingTotals = shippingSteps.grabSurveyData();

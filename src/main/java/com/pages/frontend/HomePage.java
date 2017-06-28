@@ -52,6 +52,7 @@ public class HomePage extends AbstractPage {
 	public void clickOnContactBoosterDetails() {
 		element(contactBoosterDetails).waitUntilVisible();
 		contactBoosterDetails.click();
+		waitABit(5000);
 
 	}
 

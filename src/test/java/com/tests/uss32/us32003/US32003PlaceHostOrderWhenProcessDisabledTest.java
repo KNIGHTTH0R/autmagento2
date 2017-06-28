@@ -85,27 +85,38 @@ public class US32003PlaceHostOrderWhenProcessDisabledTest extends BaseTest {
 	private ProductDetailedModel genProduct1, genProduct2, genProduct3;
 	private static UrlModel partyUrlModel = new UrlModel();
 	List<List<String>> dropdownDatesList = new ArrayList<List<String>>();
-
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 	@Before
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 		allProductsList = new ArrayList<ProductDetailedModel>();
 		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsWithTP" + SoapKeys.GRAB);
 		// immediate
-		genProduct1 = MagentoProductCalls.createProductModel();
-		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = createdProductsList.get(0);
 		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-
 		// immediate with TP
-		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.getStockData().setAllowedTermPurchase("1");
-		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct2 = createdProductsList.get(1);
 		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-
-		// TP
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		MagentoProductCalls.createApiProduct(genProduct3);
+		//TP
+		genProduct3 = createdProductsList.get(2);
+		
+		
+//		// immediate
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// immediate with TP
+//		genProduct2 = MagentoProductCalls.createProductModel();
+//		genProduct2.getStockData().setAllowedTermPurchase("1");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// TP
+//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;

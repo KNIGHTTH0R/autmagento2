@@ -68,6 +68,7 @@ public class US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest extends BaseT
 	@Steps
 	public LoungeSteps loungeSteps;
 
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 	public static List<ProductDetailedModel> allProductsList;
 	private String username, password;
 	private ProductDetailedModel genProduct1, genProduct2, genProduct3;
@@ -78,22 +79,37 @@ public class US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest extends BaseT
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
-		allProductsList = new ArrayList<ProductDetailedModel>();
-		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsWithTP" + SoapKeys.GRAB);
 		// immediate
-		genProduct1 = MagentoProductCalls.createProductModel();
-		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = createdProductsList.get(0);
 		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-
 		// immediate with TP
-		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.getStockData().setAllowedTermPurchase("1");
-		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct2 = createdProductsList.get(1);
 		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
 
-		// TP
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		MagentoProductCalls.createApiProduct(genProduct3);
+		//TP
+		genProduct3 = createdProductsList.get(2);
+
+		allProductsList = new ArrayList<ProductDetailedModel>();
+
+		
+		
+//		allProductsList = new ArrayList<ProductDetailedModel>();
+//		
+//		// immediate
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// immediate with TP
+//		genProduct2 = MagentoProductCalls.createProductModel();
+//		genProduct2.getStockData().setAllowedTermPurchase("1");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// TP
+//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -116,7 +132,8 @@ public class US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest extends BaseT
 				}
 			}
 		}
-		partyUrlModel = MongoReader.grabUrlModels("US32001CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		
+		partyUrlModel = MongoReader.grabUrlModels("US32001CreatePartyWithStylistHostTest").get(0);
 		System.out.println("partyUrlModel " + partyUrlModel.getUrl());
 	}
 

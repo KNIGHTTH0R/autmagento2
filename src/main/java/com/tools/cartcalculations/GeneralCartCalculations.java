@@ -9,6 +9,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
+
 import com.tools.data.frontend.ShippingModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.utils.DateUtils;
@@ -119,10 +121,13 @@ public class GeneralCartCalculations {
 	}
 
 	public static List<ProductDetailedModel> sortDates(List<ProductDetailedModel> datesList, final String format) {
-
+		System.out.println("list size"+ datesList.size());
+		System.out.println("format" +format);
 		Collections.sort(datesList, new Comparator<ProductDetailedModel>() {
 
+			
 			public int compare(ProductDetailedModel o1, ProductDetailedModel o2) {
+				
 				boolean isAfter = false;
 				try {
 					isAfter = DateUtils.isDateAfter(o1.getStockData().getEarliestAvailability(),

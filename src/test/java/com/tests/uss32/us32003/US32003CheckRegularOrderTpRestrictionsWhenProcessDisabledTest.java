@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -29,6 +30,7 @@ import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.wishlist.WishlistSteps;
 import com.tests.BaseTest;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.RegularBasicProductModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -71,24 +73,36 @@ public class US32003CheckRegularOrderTpRestrictionsWhenProcessDisabledTest exten
 	private ProductDetailedModel genProduct1, genProduct2, genProduct3;
 	String formatedAvailabilityDate;
 	public static List<ProductDetailedModel> allProductsList;
+	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
 	public void setUp() throws Exception {
 
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsWithTP" + SoapKeys.GRAB);
 		// immediate
-		genProduct1 = MagentoProductCalls.createProductModel();
-		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = createdProductsList.get(0);
 		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-
 		// immediate with TP
-		genProduct2 = MagentoProductCalls.createProductModel();
-		genProduct2.getStockData().setAllowedTermPurchase("1");
-		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct2 = createdProductsList.get(1);
 		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
-
-		// TP
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		MagentoProductCalls.createApiProduct(genProduct3);
+		//TP
+		genProduct3 = createdProductsList.get(2);
+		
+		
+//		// immediate
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// immediate with TP
+//		genProduct2 = MagentoProductCalls.createProductModel();
+//		genProduct2.getStockData().setAllowedTermPurchase("1");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//		genProduct2.getStockData().setEarliestAvailability(DateUtils.getCurrentDate("yyyy-MM-dd"));
+//
+//		// TP
+//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();
 		InputStream input = null;
