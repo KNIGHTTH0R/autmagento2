@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -32,6 +31,7 @@ import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionStep
 import com.tests.BaseTest;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
 import com.tools.constants.ContextConstants;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -39,7 +39,6 @@ import com.tools.datahandler.HostDataGrabber;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
-import com.tools.utils.DateUtils;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 
@@ -93,27 +92,27 @@ public class US9005PlaceHostOrderWithTpAndZeroAmountTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
-
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("49.90");
-		genProduct1.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("100.00");
-		genProduct1.setIp("0");
-		genProduct3.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct3);
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("89.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct2.setPrice("49.90");
+//		genProduct1.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//
+//		genProduct3 = MagentoProductCalls.createProductModel();
+//		genProduct3.setPrice("100.00");
+//		genProduct1.setIp("0");
+//		genProduct3.setStockData(
+//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+//		MagentoProductCalls.createApiProduct(genProduct3);
 		
-//		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//			
-//		 genProduct1 = createdProductsList.get(1);
-//		 genProduct2 = createdProductsList.get(8);
-//		 genProduct3 = createdProductsList.get(11);
+		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+			
+		 genProduct1 = createdProductsList.get(1);
+		 genProduct2 = createdProductsList.get(8);
+		 genProduct3 = createdProductsList.get(11);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -174,9 +173,9 @@ public class US9005PlaceHostOrderWithTpAndZeroAmountTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
-		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
-		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
-		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
+		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 1));
+		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 2));
+		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 3));
 
 		paymentSteps.goBack();
 		shippingSteps.goBack();

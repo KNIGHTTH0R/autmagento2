@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -31,6 +30,7 @@ import com.steps.frontend.checkout.cart.regularCart.RegularUserCartSteps;
 import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
 import com.tests.BaseTest;
 import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.UrlModel;
 import com.tools.data.soap.ProductDetailedModel;
@@ -93,27 +93,27 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
-
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("50.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
-
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("29.00");
-		genProduct1.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct2);
-
-		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct3.setPrice("9.90");
-		genProduct1.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct3);
+//
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("50.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct2.setPrice("29.00");
+//		genProduct1.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//
+//		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct3.setPrice("9.90");
+//		genProduct1.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct3);
 		
 
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//			
-//		genProduct1 = createdProductsList.get(0);
-//		genProduct2 = createdProductsList.get(15);
-//		genProduct3 = createdProductsList.get(16);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+			
+		genProduct1 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(15);
+		genProduct3 = createdProductsList.get(16);
 		
 		
 

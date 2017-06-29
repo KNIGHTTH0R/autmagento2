@@ -21,18 +21,21 @@ import com.tests.uss11.us11008.US10009CreatePartyWithStylistHostTest;
 	US10007CreatePartyWithStylistHostTest.class,
 	US10009CreatePartyWithStylistHostTest.class,
 	
-	US32001Suite.class,
-	US32002Suite.class,
-	US32003Suite.class,
-	
 	US8007Suite.class,
 	US8008Suite.class,
-	US9004Suite.class,
-	US9005Suite.class,
+	
+	
+	
 	
 	US11007Suite.class,
-	
 	US11008Suite.class,
+	
+	US32002Suite.class,
+	US32003Suite.class,
+	US32001Suite.class,
+	
+	US9004Suite.class,
+	US9005Suite.class,
 	//US110010Suite.class,
 	
 })

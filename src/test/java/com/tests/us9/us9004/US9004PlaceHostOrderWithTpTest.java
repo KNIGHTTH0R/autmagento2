@@ -111,21 +111,21 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 	public void setUp() throws Exception {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
-
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
-
-		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-		genProduct2.setPrice("49.90");
-		MagentoProductCalls.createApiProduct(genProduct2);
-
+//
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("89.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//
+//		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct2.setPrice("49.90");
+//		MagentoProductCalls.createApiProduct(genProduct2);
+//
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("100.00");
 		genProduct3.setStockData(
 				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct3);
-		
+//		
 		genProduct4 = MagentoProductCalls.createProductModel();
 		genProduct4.getStockData().setAllowedTermPurchase("1");
 		genProduct4.setPrice("50.00");
@@ -134,11 +134,11 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		genProduct4.setStockData(
 				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getCurrentDate("yyyy-MM-dd")));
 		
-//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 //		
-//		genProduct1 = createdProductsList.get(1);
-//		genProduct2 = createdProductsList.get(8);
-//		genProduct3 = createdProductsList.get(11);
+		genProduct1 = createdProductsList.get(1);
+		genProduct2 = createdProductsList.get(8);
+		genProduct3 = createdProductsList.get(11);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -261,11 +261,11 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 
 		String url = shippingSteps.grabUrl();
 		String orderId = FormatterUtils.getOrderId(url);
-		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
+		HostDataGrabber.orderModel.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 1));
 		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
+		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 2));
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTP1);
-		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
+		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTP2);
 
 		

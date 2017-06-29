@@ -251,11 +251,11 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		String url = shippingSteps.grabUrl();
 		System.out.println(url);
 		String orderId = FormatterUtils.getOrderId(url);
-		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
+		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 1));
 		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
-		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
+		RegularUserDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 2));
 		RegularUserDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
-		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
+		RegularUserDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 3));
 		RegularUserDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
 
 		paymentSteps.expandCreditCardForm();

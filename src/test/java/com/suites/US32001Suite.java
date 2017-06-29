@@ -16,8 +16,8 @@ import com.tests.uss32.us32001.US32001RegularOrderAllowedOnlyForNotAvailableTPTe
 	US32001CreatePartyWithStylistHostTest.class,
 	US32001RegularOrderAllowedOnlyForNotAvailableTPTest.class,
 	US32001PlaceCustomerOrderAllowedOnlyForNotAvailableTPTest.class,
-	US32001ClosePartyTest.class,
-	US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest.class
+//	US32001ClosePartyTest.class,
+//	US32001PlaceHostOrderAllowedOnlyForNotAvailableTPTest.class
 
 	
 })

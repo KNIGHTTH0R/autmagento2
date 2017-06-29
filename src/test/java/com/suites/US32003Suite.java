@@ -16,8 +16,8 @@ import com.tests.uss32.us32003.US32003PlaceHostOrderWhenProcessDisabledTest;
 	US32003CreatePartyWithStylistHostTest.class,
 	US32003CheckRegularOrderTpRestrictionsWhenProcessDisabledTest.class,
 	US32003PlaceCustomerOrderWhenProcessDisabledTest.class,
-	US32003ClosePartyTest.class,
-	US32003PlaceHostOrderWhenProcessDisabledTest.class
+//	US32003ClosePartyTest.class,
+//	US32003PlaceHostOrderWhenProcessDisabledTest.class
 
 	
 })

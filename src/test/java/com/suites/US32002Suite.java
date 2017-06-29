@@ -16,8 +16,8 @@ import com.tests.uss32.us32002.US32002RegularOrderAllowedForTPTest;
 	US32002CreatePartyWithStylistHostTest.class,
 	US32002RegularOrderAllowedForTPTest.class,
 	US32002PlaceCustomerOrderAllowedForTP.class,
-	US32002ClosePartyTest.class,
-	US32002PlaceHostOrderAllowedForTP.class
+//	US32002ClosePartyTest.class,
+//	US32002PlaceHostOrderAllowedForTP.class
 
 	
 })
