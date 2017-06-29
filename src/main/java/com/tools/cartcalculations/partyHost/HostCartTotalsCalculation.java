@@ -358,12 +358,19 @@ public class HostCartTotalsCalculation {
 				forthyDiscount.setScale(2, RoundingMode.HALF_UP);
 			}
 		}
-		if (hasShipping)
-			shippingValue = GeneralCartCalculations.calculateNewShipping(subtotal,
+//		if (hasShipping)
+//			shippingValue = GeneralCartCalculations.calculateNewShipping(subtotal,
+//					BigDecimal.valueOf(Double.parseDouble(voucherValue)),
+//					BigDecimal.valueOf(Double.parseDouble(shippingValue)));
+		if (hasShipping){
+			shippingValue = GeneralCartCalculations.calculateNewShipping1(subtotal,
 					BigDecimal.valueOf(Double.parseDouble(voucherValue)),
 					BigDecimal.valueOf(Double.parseDouble(shippingValue)));
-		else
+		}
+		else{
 			shippingValue = "0.00";
+		}
+			
 
 		voucherPrice = calculateVoucherRatio(wholeSubtotal, subtotal, voucherPrice);
 

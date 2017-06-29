@@ -12,9 +12,9 @@ import com.tests.us8.us8002.US8002ValidateOrderInStylistsCustomerOrderReportTest
 @SuiteClasses({
 	US8002CustomerBuyWithVoucherTest.class,
 	US8002ValidateOrderBackOfficeTest.class,	
-	US8002CheckOrderOnCustomerProfileTest.class,	
+//	US8002CheckOrderOnCustomerProfileTest.class,	
 //	US8002ValidateOrderEmailTest.class,	
-	US8002ValidateOrderInStylistsCustomerOrderReportTest.class,
+	//US8002ValidateOrderInStylistsCustomerOrderReportTest.class,
 })
 @RunWith(Suite.class)
 public class US8002Suite {

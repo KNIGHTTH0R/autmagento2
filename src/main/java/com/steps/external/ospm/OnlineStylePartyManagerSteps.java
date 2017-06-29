@@ -69,9 +69,16 @@ public class OnlineStylePartyManagerSteps extends AbstractSteps {
 		onlineStylePartyManagerPage().verifyContactBoosterButtonRedirect();		
 	}
 
+	@Step
 	public void verifyOverviewButtonRedirect() {
 		onlineStylePartyManagerPage().verifyOverviewButtonRedirect();				
 	}
+	
+	@Step
+	public void verifyRingCalibratorButtonRedirect() {
+		onlineStylePartyManagerPage().verifyRingCalibratorButtonRedirect();				
+	}
+	
 	
 	@Step
 	public void closePopUp(){

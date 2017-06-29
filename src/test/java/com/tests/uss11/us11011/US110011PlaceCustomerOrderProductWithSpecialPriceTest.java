@@ -107,14 +107,14 @@ public class US110011PlaceCustomerOrderProductWithSpecialPriceTest extends BaseT
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("29.00");
-		genProduct1.setSpecialPrice("15.00");
-		genProduct1.setIp("26");
-		
-		MagentoProductCalls.createApiProduct(genProduct1);
-		genProduct1.setIp(GeneralCartCalculations.calculateIpBasedOnSpecialPrice(genProduct1.getIp(),genProduct1.getPrice(),genProduct1.getSpecialPrice()));
-		genProduct1.setPrice(genProduct1.getSpecialPrice());
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("29.00");
+//		genProduct1.setSpecialPrice("15.00");
+//		genProduct1.setIp("26");
+//		
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1.setIp(GeneralCartCalculations.calculateIpBasedOnSpecialPrice(genProduct1.getIp(),genProduct1.getPrice(),genProduct1.getSpecialPrice()));
+//		genProduct1.setPrice(genProduct1.getSpecialPrice());
 //		genProduct1.setIp("13");
 
 //		genProduct2 = MagentoProductCalls.createProductModel();
@@ -129,7 +129,7 @@ public class US110011PlaceCustomerOrderProductWithSpecialPriceTest extends BaseT
 		
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
-//        genProduct1 = createdProductsList.get(1);
+        genProduct1 = createdProductsList.get(1);
 	
 		
 		

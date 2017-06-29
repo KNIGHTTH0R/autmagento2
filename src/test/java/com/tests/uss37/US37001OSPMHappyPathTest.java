@@ -78,6 +78,7 @@ public class US37001OSPMHappyPathTest extends BaseTest{
 		onlineStylePartyManagerSteps.verifyShopButtonRedirect();
 		onlineStylePartyManagerSteps.verifyContactBoosterButtonRedirect();
 		onlineStylePartyManagerSteps.verifyOverviewButtonRedirect();
+		onlineStylePartyManagerSteps.verifyRingCalibratorButtonRedirect();
 		
 		onlineStylePartyManagerSteps.searchForAProduct(product);
 		onlineStylePartyManagerSteps.selectAndLinkSearchedProduct(product);

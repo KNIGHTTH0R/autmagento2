@@ -16,8 +16,8 @@ import com.tests.us8.us8001.US8001ValidateOrderInStylistsCustomerOrderReportTest
 	US8001ValidateOrderBackOfficeTest.class,
 	US8001ReorderWithForthyDiscountsAndJbTest.class,
 	US8001ValidateOrderEmailTest.class,
-	US8001ValidateOrderInStylistsCustomerOrderReportTest.class,
-	US8001CheckOrderOnCustomerProfileTest.class,	
+//	US8001ValidateOrderInStylistsCustomerOrderReportTest.class,
+//	US8001CheckOrderOnCustomerProfileTest.class,	
 	
 })
 @RunWith(Suite.class)

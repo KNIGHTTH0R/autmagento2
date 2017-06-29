@@ -2,15 +2,16 @@ package com.pages.external;
 
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import com.tools.CustomVerification;
 import com.tools.constants.UrlConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class TempMail extends AbstractPage {
 
@@ -44,6 +45,8 @@ public class TempMail extends AbstractPage {
 		element(mailInput).waitUntilVisible();
 		element(mailInput).clear();
 		mailInput.sendKeys(email);
+		
+		selectMailDomain("@mailgov.info");
 		
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
@@ -79,7 +82,15 @@ public class TempMail extends AbstractPage {
 		
 		
 	}
+	
+	public void selectMailDomain(String domainName) {
+		Select oSelect = new Select(getDriver().findElement(By.id("domain")));
 
+		oSelect.selectByVisibleText(domainName);
+
+	}
+	
+	
 	public String getConfirmationLink() {
 		waitABit(4000);
 		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");

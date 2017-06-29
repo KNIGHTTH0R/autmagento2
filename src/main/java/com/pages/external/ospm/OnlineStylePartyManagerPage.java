@@ -28,7 +28,7 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	@FindBy(id = "loginbutton")
 	private WebElement loginButton;
 
-	@FindBy(css = ".mt-20 a")
+	@FindBy(css = ".fb-btn")
 	private WebElement loginWithFacebookbutton;
 
 	@FindBy(css = ".social-circle-wrapper .row:nth-child(1) img")
@@ -37,7 +37,7 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	@FindBy(css = "button[name*='CONFIRM']")
 	private WebElement continueAsUserButton;
 
-	@FindBy(css = ".thumbnail-wrapper .row:nth-child(3) button")
+	@FindBy(css = ".thumbnail-wrapper .row:nth-child(3) a")
 	private WebElement clickOnFirstLiveStreamButton;
 
 	@FindBy(id = "new-comment")
@@ -52,15 +52,18 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	@FindBy(id = "products")
 	private List<WebElement> productList;
 
-	@FindBy(css = ".mb-20 button:nth-child(1)")
+	@FindBy(id = "btn-link-to-shop")
 	private WebElement shopButton;
 
-	@FindBy(css = ".mb-20 button:nth-child(2)")
+	@FindBy(id = "btn-link-to-contact-booster")
 	private WebElement contactBoosterButton;
 
-	@FindBy(css = ".mb-20 button:nth-child(3)")
+	@FindBy(id = "btn-link-to-overview")
 	private WebElement overviewButton;
 
+	@FindBy(id = "btn-link-to-ring-calibrator")
+	private WebElement ringCalibrator;
+	
 	@FindBy(css = "a[action*='cancel']")
 	private WebElement closePopUp;
 
@@ -123,7 +126,7 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	}
 
 	public void verifyIfCommentIsPosted(String text) {
-		CustomVerification.verifyTrue("The comment is not posted", firstComment.getText().contains(text));
+		CustomVerification.verifyTrue("Failure:The comment is not posted", firstComment.getText().contains(text));
 	}
 
 	public void searchForAProduct(String text) {
@@ -133,27 +136,36 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 
 	// Tory Necklace
 	public void selectAndLinkSearchedProduct(String productName) {
+		waitABit(2000);
 		boolean found = false;
-		for (WebElement product : productList) {
-			if (product.getText().contains(productName)) {
-				found = true;
-				product.findElement(By.cssSelector("button")).click();
+		if(productList.size()!=0){
+			for (WebElement product : productList) {
+				if (product.getText().contains(productName)) {
+					found = true;
+					
+					product.findElement(By.cssSelector("button")).click();
+					break;
 
+				}
+				CustomVerification.verifyTrue("Failure: The products is not displayed in the list", found);
 			}
+		}else{
+			CustomVerification.verifyTrue("Failure: product not found", found);
 		}
-		CustomVerification.verifyTrue("The products is not displayed in the list", found);
+		
+		
 	}
 
 	// url-key tory-necklace
 	public void verifyIfProductIsPosted(String productName) {
-		waitABit(15000);
-		CustomVerification.verifyTrue("The product is not posted", firstComment.getText().contains(productName));
+		waitABit(25000);
+		CustomVerification.verifyTrue("Failure:The product is not posted", firstComment.getText().contains(productName));
 	}
 
 	public void verifyShopButtonRedirect() {
 		element(shopButton).waitUntilVisible();
 		shopButton.click();
-		waitABit(15000);
+		waitABit(25000);
 		System.out.println("shop link " + firstComment.getText());
 		CustomVerification.verifyTrue("The shop Link is not posted",
 				firstComment.getText().contains("emx?p="));
@@ -163,21 +175,33 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	public void verifyContactBoosterButtonRedirect() {
 		element(contactBoosterButton).waitUntilVisible();
 		contactBoosterButton.click();
-		waitABit(15000);
+		waitABit(25000);
 		System.out.println("contact Booster link " + firstComment.getText());
 		CustomVerification.verifyTrue("Failure: The Contact Booster Link is not correctly posted ",
-				firstComment.getText().contains("/de/k"));
+				firstComment.getText().contains("/k/"));
 
 	}
 
 	public void verifyOverviewButtonRedirect() {
 		element(overviewButton).waitUntilVisible();
 		overviewButton.click();
-		waitABit(15000);
+		waitABit(25000);
 		System.out.println("overview link " + firstComment.getText());
 
-		CustomVerification.verifyTrue("The Overview Link is not posted",
+		CustomVerification.verifyTrue("Failure:The Overview Link is not posted",
 				firstComment.getText().contains("schmuckstucke.html?p"));
+
+	}
+	
+	
+	public void verifyRingCalibratorButtonRedirect() {
+		element(ringCalibrator).waitUntilVisible();
+		ringCalibrator.click();
+		waitABit(25000);
+		System.out.println("ringCalibrator link " + firstComment.getText());
+
+		CustomVerification.verifyTrue("Failure: The Ring Calibrator Link is not posted",
+				firstComment.getText().contains("ring.pippajean.com"));
 
 	}
 

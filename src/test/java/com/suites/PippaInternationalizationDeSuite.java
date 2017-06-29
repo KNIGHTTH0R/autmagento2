@@ -128,7 +128,10 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 //	US26001Suite.class,
 //	US23001PartThreeSuite.class,
 	
-	NotificationsSuite.class,
+	
+//	please  check it 
+//	NotificationsSuite.class,
+	
 //	VerifyOrderEmailsSuite.class
 	
 })

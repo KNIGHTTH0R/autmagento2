@@ -12,7 +12,7 @@ import com.tests.us8.us8004.US8004ValidateOrderEmailTest;
 @SuiteClasses({
 	US8004CustomerBuyWithContactBoosterTest.class,
 	US8004ValidateOrderBackOfficeTest.class,
-	US8004CheckOrderOnCustomerProfileTest.class,
+//	US8004CheckOrderOnCustomerProfileTest.class,
 	US8004ValidateOrderEmailTest.class,	
 })
 @RunWith(Suite.class)

@@ -17,7 +17,7 @@ import com.tests.us8.us8003.US8003ValidateOrderInStylistsCustomerOrderReportTest
 	US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test.class,
 	US8003ValidateOrderBackOfficeTest.class,
 	US8003DeactivateBuy3Get1Test.class,
-	US8003CheckOrderOnCustomerProfileTest.class,	
+	//US8003CheckOrderOnCustomerProfileTest.class,	
 //	US8003ValidateOrderEmailTest.class,	
 })
 @RunWith(Suite.class)
