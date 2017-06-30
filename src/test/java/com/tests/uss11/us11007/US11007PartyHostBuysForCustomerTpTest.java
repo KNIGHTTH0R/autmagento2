@@ -141,6 +141,8 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 		 genProduct1 = createdProductsList.get(3);
 		 genProduct2 = createdProductsList.get(12);
 		 genProduct3 = createdProductsList.get(11);
+		 
+		
 
 		Properties prop = new Properties();
 		InputStream input = null;

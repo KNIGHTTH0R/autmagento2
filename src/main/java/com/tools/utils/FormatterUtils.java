@@ -104,7 +104,8 @@ public class FormatterUtils {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(FormatterUtils.incrementSingleTpOrderId("10026526800", 2));
+		//System.out.println(FormatterUtils.incrementSingleTpOrderId("10026526800", 2));
+		System.out.println(FormatterUtils.getCustomDate("yyyy-MM-dd", 100000));
 	}
 
 	public static String incrementSingleTpOrderId(String orderId, int incrementNumber) {
@@ -255,9 +256,9 @@ public class FormatterUtils {
 
 	
 	
-	// public static void main(String[] args) {
-	// System.out.println(FormatterUtils.getIntegerNumberFromString("qa-int0000183500"));
-	// System.out.println(FormatterUtils.getNotDigitsFromString("qa-int0000183500"));
-	// System.out.println(FormatterUtils.incrementOrderId("qa-int0000183500",2));
-	// }
+//	 public static void main(String[] args) {
+//	 System.out.println(FormatterUtils.getIntegerNumberFromString("qa-int0000183500"));
+//	 System.out.println(FormatterUtils.getNotDigitsFromString("qa-int0000183500"));
+//	 System.out.println(FormatterUtils.incrementOrderId("qa-int0000183500",2));
+//	 }
 }

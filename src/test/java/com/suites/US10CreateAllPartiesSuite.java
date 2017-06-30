@@ -6,6 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us9.us9006.US9006CreatePartyWithStylistHostTest;
 import com.tests.us9.us9007.US9007CreatePartyWithStylistHostTest;
+import com.tests.uss10.us10001.US10001CreatePartyWithCustomerHostTest;
 import com.tests.uss10.us10001b.US10001bCreatePartyWithStylistHostTest;
 import com.tests.uss10.us10002b.US10002bCreatePartyWithCustomerHostTest;
 import com.tests.uss10.uss10007.US10007CreatePartyWithStylistHostTest;
@@ -16,7 +17,7 @@ import com.tests.uss24.US24001CreatePartyWithNewContactPlzValidationTest;
 import com.tests.uss25.US25001CreatePartyWithNewContactTest;
 
 @SuiteClasses({
-	
+	US10001CreatePartyWithCustomerHostTest.class,
 	US10001bCreatePartyWithStylistHostTest.class,
 	US10002bCreatePartyWithCustomerHostTest.class,
 //	US10006CreatePartyWithNewContactHostTest.class,

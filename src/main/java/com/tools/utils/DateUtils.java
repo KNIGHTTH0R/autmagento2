@@ -316,6 +316,16 @@ public class DateUtils {
 
 		return String.valueOf(sdf.format(calendar.getTime()));
 	}
+	
+	
+	public static String addDaysToCurrentDate(String format, int days)
+    {
+		DateFormat sdf = new SimpleDateFormat(format);
+        Calendar cal = Calendar.getInstance();
+       // cal.setTime(date);
+        cal.add(Calendar.DATE, days); //minus number would decrement the days
+        return String.valueOf(sdf.format(cal.getTime()));
+    }
 
 	public static String getPreviousMonth(String format) {
 		Calendar cal = Calendar.getInstance();
@@ -488,8 +498,10 @@ public class DateUtils {
 //		System.out.println(DateUtils.parseDate("2016-12-15", "yyyy-MM-dd", "dd. MM."));
 		//System.out.println(DateUtils.parseDate("07. MRZ. 17", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
 	////	System.out.println(DateUtils.parseDate(dateString, initialFormatString, finalFormatString));
-		String expectedDate =DateUtils.parseDate("2017-05-04 11:35:03", "yyyy-MM-dd HH:mm:ss", "dd.MM.YYYY");
-		System.out.println(expectedDate);
+//		String expectedDate =DateUtils.parseDate("2017-05-04 11:35:03", "yyyy-MM-dd HH:mm:ss", "dd.MM.YYYY");
+//		System.out.println(expectedDate);
+		
+		//System.out.println(DateUtils.addDays("yyyy-MM-dd", 1));
 	//	System.out.println(DateUtils.parseDate("1484728910770", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
 	}
 

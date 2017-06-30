@@ -15,6 +15,7 @@ import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.data.soap.StockDataModel;
 import com.tools.persistance.MongoReader;
+import com.tools.utils.DateUtils;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;
 import com.tools.utils.FormatterUtils;
@@ -155,7 +156,9 @@ public class MagentoProductCalls {
 		stockModel.setNotifyStockQty("");
 		stockModel.setUseConfigNotifyStockQty("1");
 		stockModel.setIsDiscontinued("1");
-		stockModel.setEarliestAvailability(FormatterUtils.getCustomDate("yyyy-MM-dd", 86000));
+//		stockModel.setEarliestAvailability(FormatterUtils.getCustomDate("yyyy-MM-dd", 86000));
+		//current date+ 2 days
+		stockModel.setEarliestAvailability(DateUtils.addDaysToCurrentDate("yyyy-MM-dd", 2));
 		stockModel.setAllowedTermPurchase("0");
 		stockModel.setMaximumPercentageToBorrow("");
 		stockModel.setUseConfigMaximumPercentageToBorrow("80");
