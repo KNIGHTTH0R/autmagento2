@@ -44,7 +44,7 @@ public class US5001FacebookLoginTest extends BaseTest{
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_05_FOLDER + File.separator + "us0005.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_05_FOLDER + File.separator + "us5001.properties");
 			prop.load(input);
 			fbUser = prop.getProperty("fbUser");
 			fbPass = prop.getProperty("fbPass");
@@ -67,7 +67,7 @@ public class US5001FacebookLoginTest extends BaseTest{
 	
 	@Test
 	public void us5001FacebookLoginTest() {
-		facebookRegistrationSteps.goToFacebookLogin(fbUser, fbPass);
+		facebookRegistrationSteps.goToFacebookLogin();
 		facebookRegistrationSteps.fillFacebookRegistration(zipCode, countryCode, pippaPass);
 		
 	}

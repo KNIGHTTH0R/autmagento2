@@ -115,18 +115,18 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 		BorrowDataGrabber.wipe();
 		DataGrabber.wipe();
 		
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct2);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("49.90");
+		MagentoProductCalls.createApiProduct(genProduct1);
+
+		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct2);
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-			
-		genProduct1 = createdProductsList.get(0);
-		genProduct2 = createdProductsList.get(1);
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//			
+//		genProduct1 = createdProductsList.get(0);
+//		genProduct2 = createdProductsList.get(1);
 		
 		if(!createdProductsList.isEmpty() && createdProductsList.size()>=2){
 			genProduct1 = createdProductsList.get(0);

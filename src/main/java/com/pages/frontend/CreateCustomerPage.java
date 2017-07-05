@@ -130,6 +130,7 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputPassword(String passText) {
+		
 		element(passwordInput).waitUntilVisible();
 		passwordInput.sendKeys(passText);
 
@@ -149,6 +150,8 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void checkParties() {
+		waitABit(2000);
+		element(partiesCheckbox).waitUntilVisible();
 		partiesCheckbox.click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}

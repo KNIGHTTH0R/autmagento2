@@ -40,9 +40,10 @@ public class MyContactsListPage extends AbstractPage {
 		Assert.assertTrue("The contact was not found in the contact list of the stylecoach", found);
 	}
 
+	
 	public void verifyUnicAndOpenContactDetails(String... terms) {
 		WebElement link = null;
-		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr[class*='grey']"));
+		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
 		boolean found = false;
 		for (WebElement contact : contactsList) {
 			boolean matchesAllTerms = true;
@@ -57,7 +58,7 @@ public class MyContactsListPage extends AbstractPage {
 					break;
 				} else {
 					found = true;
-					link = contact.findElement(By.cssSelector("td a.blue-text.contact-link"));
+					link = contact.findElement(By.cssSelector("td a[href*='/index/'] "));
 				}
 			}
 
@@ -67,6 +68,35 @@ public class MyContactsListPage extends AbstractPage {
 		}
 		Assert.assertTrue("Contact was not found!!!", found);
 	}
+
+	
+//	public void verifyUnicAndOpenContactDetails(String... terms) {
+//		WebElement link = null;
+//		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr[class*='grey']"));
+//		boolean found = false;
+//		for (WebElement contact : contactsList) {
+//			boolean matchesAllTerms = true;
+//			for (String term : terms) {
+//				if (!contact.getText().contains(term.toUpperCase())) {
+//					matchesAllTerms = false;
+//				}
+//			}
+//			if (matchesAllTerms) {
+//				if (found) {
+//					Assert.fail(String.format("A duplicate of the element was found in the table!"));
+//					break;
+//				} else {
+//					found = true;
+//					link = contact.findElement(By.cssSelector("td a.blue-text.contact-link"));
+//				}
+//			}
+//
+//		}
+//		if (found) {
+//			link.click();
+//		}
+//		Assert.assertTrue("Contact was not found!!!", found);
+//	}
 
 	public void openContactDetailsPage(String contactEmail) {
 		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));

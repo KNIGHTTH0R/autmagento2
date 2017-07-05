@@ -488,6 +488,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 	@Step
 	public void checkParties() {
+		
 		createCustomerPage().checkParties();
 	}
 
@@ -578,11 +579,27 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	}
 
 	@StepGroup
+	public void fillCreateCustomerByFacebookForm(CustomerFormModel customerData, AddressModel addressData) {
+		waitABit(2000);
+		findFrame("Kundenkonto");
+		
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		fillContactDetails(addressData);
+		searchStylistByGeoip(addressData);
+		checkIAgree();
+		clickCompleteButton();
+	}
+	
+	
+	@StepGroup
 	public void goToFacebookLogin(String user, String pass) {
 		clickOnFacebookLogin();
 		Set<String> windowsList = getDriver().getWindowHandles();
 		for (String string : windowsList) {
 			getDriver().switchTo().window(string);
+			System.out.println("page title "+getDriver().getTitle());
 			if (getDriver().getTitle().trim().contains("Facebook")) {
 				performFacebookLogin(user, pass);
 			}

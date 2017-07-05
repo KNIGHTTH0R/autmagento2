@@ -4,9 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.tests.us5.US5001FacebookCustomerDeleteTest;
-import com.tests.us5.US5001FacebookLoginTest;
-import com.tests.us5.US5001ValidateEmailTest;
+import com.tests.us5.us5001.US5001FacebookCustomerDeleteTest;
 
 
 /**
@@ -15,9 +13,8 @@ import com.tests.us5.US5001ValidateEmailTest;
  *
  */
 @SuiteClasses({
-	US5001FacebookLoginTest.class,
-	US5001ValidateEmailTest.class,
 	US5001FacebookCustomerDeleteTest.class,
+	
 })
 @RunWith(Suite.class)
 public class US5000Suite {

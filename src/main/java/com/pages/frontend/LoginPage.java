@@ -22,6 +22,9 @@ public class LoginPage extends AbstractPage {
 
 	@FindBy(css = "button[rel='facebook-connect']")
 	private WebElement facebookLoginButton;
+	
+	@FindBy(css = ".fieldset button[rel='facebook-connect']:nth-child(1)")
+	private WebElement facebookRegistrationButton;
 
 	@FindBy(css = ".col-2.new-users p a")
 	private WebElement stylistRegistrationlink;
@@ -57,6 +60,12 @@ public class LoginPage extends AbstractPage {
 	public void clickOnStylistRegistrationLink() {
 		element(stylistRegistrationlink).waitUntilVisible();
 		stylistRegistrationlink.click();
+	}
+
+	public void clickOnFacebookRegistrationButton() {
+		element(facebookRegistrationButton).waitUntilVisible();
+		facebookRegistrationButton.click();
+		
 	}
 
 }

@@ -5,6 +5,8 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
+import com.tools.CustomVerification;
 import com.tools.requirements.AbstractPage;
 
 public class FacebookRegistrationFormPage extends AbstractPage {
@@ -43,6 +45,15 @@ public class FacebookRegistrationFormPage extends AbstractPage {
 	@FindBy(id = "accept-checkbox")
 	private WebElement acceptButton;
 
+	
+	@FindBy(css = ".Personal-Fb p:nth-child(2)")
+	private WebElement fbUserName;
+	
+	
+	@FindBy(css = ".Personal-Fb p:nth-child(3)")
+	private WebElement fbUserEmail;
+	
+	
 //	@FindBy(css = "button[title='Senden']")
 	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button")     //int
 	private WebElement submitButton;
@@ -69,7 +80,9 @@ public class FacebookRegistrationFormPage extends AbstractPage {
 	 * @param passsword
 	 */
 	public void passwordInput(String passsword) {
+		element(pass1Input).waitUntilVisible();
 		pass1Input.sendKeys(passsword);
+		element(pass2Input).waitUntilVisible();
 		pass2Input.sendKeys(passsword);
 	}
 
@@ -106,5 +119,16 @@ public class FacebookRegistrationFormPage extends AbstractPage {
 	public void agreeAndConfirm() {
 		acceptButton.click();
 		submitButton.click();
+	}
+
+	public void verifyFbUserName(String fbName) {
+		element(fbUserName).waitUntilVisible();
+		CustomVerification.verifyTrue("Failure: The User Name is not displayed correctly in registration form", fbUserName.getText().contains(fbName));
+	}
+	
+	public void verifyFbUserEmail(String fbEmail) {
+		// TODO Auto-generated method stub
+		element(fbUserEmail).waitUntilVisible();
+		CustomVerification.verifyTrue("Failure: The User Email is not displayed correctly in registration form", fbUserEmail.getText().contains(fbEmail));
 	}
 }

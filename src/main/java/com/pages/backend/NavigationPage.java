@@ -58,6 +58,7 @@ public class NavigationPage extends AbstractPage {
 			}
 		}
 	}
+	
 
 	public void selectSubmenu(String submenu) {
 		evaluateJavascript("jQuery.noConflict();");

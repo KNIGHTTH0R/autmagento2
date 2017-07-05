@@ -14,6 +14,7 @@ import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
 import com.pages.backend.SystemConfigurationPage;
 import com.pages.backend.borrow.BorrowPage;
+import com.pages.backend.contact.ContactListPage;
 import com.pages.backend.creditMemo.CreditMemoDetailsPage;
 import com.pages.backend.creditMemo.CreditMemoListPage;
 import com.pages.backend.customer.CustomerListPage;
@@ -280,7 +281,9 @@ public class AbstractSteps extends ScenarioSteps {
 	public void findFrame(String frameName) {
 		Set<String> windowsList = getDriver().getWindowHandles();
 		for (String string : windowsList) {
+			
 			getDriver().switchTo().window(string);
+			System.out.println(getDriver().getTitle());
 			if (getDriver().getTitle().trim().contains(frameName)) {
 				break;
 			}
@@ -334,6 +337,11 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(CustomerListPage.class);
 	}
 
+	public ContactListPage contactListPage() {
+		return getPages().currentPageAt(ContactListPage.class);
+	}
+
+	
 	public PartyListBackendPage partyListBackendPage() {
 		return getPages().currentPageAt(PartyListBackendPage.class);
 	}

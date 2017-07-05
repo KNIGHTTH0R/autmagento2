@@ -101,4 +101,14 @@ public class OnlineStylePartyManagerSteps extends AbstractSteps {
 	public void verifyMessage(String message) {
 		onlineStylePartyManagerPage().verifyMessage(message);
 	}
+
+	
+	//shoul be updated to not use 2 similar method see you acceptAllPermision()
+	public void acceptAllThePermissionsFBRegistration() {
+		waitABit(3000);
+		onlineStylePartyManagerPage().closePopUp();
+		onlineStylePartyManagerPage().clickContinueAsUser();
+		onlineStylePartyManagerPage().clickContinueAsUser();
+		
+	}
 }

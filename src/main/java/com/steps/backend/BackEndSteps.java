@@ -77,6 +77,10 @@ public class BackEndSteps extends AbstractSteps {
 	public void clickOnCustomers() {
 		navigationPage().selectSubmenu("customer");
 	}
+	
+	public void clickOnContacts() {
+		navigationPage().selectSubmenu("/admin/contact/index/");
+	}
 
 	// @Step
 	// public void clickOnProducts() {
@@ -165,7 +169,15 @@ public class BackEndSteps extends AbstractSteps {
 		customerListPage().clickOnSearch();
 
 	}
+	
+	
+	@StepGroup
+	public void searchForContactEmail(String emailText) {
+		contactListPage().inputEmailFilter(emailText);
+		contactListPage().clickOnSearch();
+	}
 
+	
 	@Step
 	public void searchOrderByName(String name) {
 		orderListPage().inputOrderName(name);
@@ -210,6 +222,22 @@ public class BackEndSteps extends AbstractSteps {
 		refresh();
 		return getDriver().getCurrentUrl();
 	}
+	
+	@Step
+	public boolean selectContact1(String emailText) {
+		return contactListPage().findContactAndCheckIt(emailText);
+		
+	}
+	
+	@Step
+	public void selectContact(String emailText) {
+		contactListPage().selectContact(emailText);
+		
+	}
+	
+	
+	
+
 
 	@Step
 	public void clickOnAddressesTab() {
@@ -344,6 +372,11 @@ public class BackEndSteps extends AbstractSteps {
 	@Step
 	public void deleteCustomer() {
 		customerDetailsHomePage().deleteCustomer();
+	}
+	
+	@Step
+	public void deleteContact() {
+		contactListPage().deleteContact();
 	}
 
 	public StylistPropertiesModel grabCustomerConfiguration() {

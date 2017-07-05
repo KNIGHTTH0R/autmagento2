@@ -56,13 +56,13 @@ public class LoungePage extends AbstractPage {
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(3)")
 	private WebElement customerOrderLink;
 
-	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(6)")
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(4)")
 	private WebElement loanedLink;
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(3) > ul li:nth-child(1) a")
 	private WebElement startOrderForCustomerLink;
 
-	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(6) > ul li:nth-child(1) span")
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(4) > ul li:nth-child(1) span")
 	private WebElement borrowCartLink;
 
 	@FindBy(id = "contact")

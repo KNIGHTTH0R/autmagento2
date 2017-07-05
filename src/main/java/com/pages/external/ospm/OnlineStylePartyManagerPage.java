@@ -66,6 +66,9 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	
 	@FindBy(css = "a[action*='cancel']")
 	private WebElement closePopUp;
+	
+	@FindBy(css = "a[action*='cancel']")
+	private List<WebElement> closePopUpFB;
 
 	@FindBy(css = "._1a_q  a[role*='button']")
 	private WebElement reviewInfoLink;
@@ -205,11 +208,23 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 
 	}
 
+//	public void closePopUp() {
+//		element(closePopUp).waitUntilVisible();
+//		closePopUp.click();
+//
+//	}
+	
+	
 	public void closePopUp() {
-		element(closePopUp).waitUntilVisible();
-		closePopUp.click();
+		if(closePopUpFB.size()!=0){
+			element(closePopUp).waitUntilVisible();
+			closePopUp.click();
+		}
+		
 
 	}
+	
+	
 
 	public void clickReviewInfoYouProvideLink() {
 		waitABit(2000);

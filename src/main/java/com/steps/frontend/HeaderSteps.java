@@ -198,10 +198,21 @@ public class HeaderSteps extends AbstractSteps {
 		return headerPage().succesfullLogin();
 	}
 	
+	
+	public void checkSucesfullLogin() {
+		 headerPage().checkSucesfullLogin();
+	}
+	
+	
 	@Step
 	public void goToShop() {
 		headerPage().clickShop();
 		//waitABit(30000);
+	}
+
+	public void navigateToNotPrefWebsite(String context) {
+		navigate(MongoReader.getBaseURL()+"context");
+		
 	}
 
 }

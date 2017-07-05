@@ -153,6 +153,11 @@ public class HeaderPage extends AbstractPage {
 		return succesLoginContainer.getText().contains("¡BIENVENIDO,") || succesLoginContainer.getText().contains("HI,");
 	}
 	
+	
+	public void checkSucesfullLogin() {
+		Assert.assertTrue("Failure: The login fails ",succesLoginContainer.getText().contains("¡BIENVENIDO,") || succesLoginContainer.getText().contains("HI,"));
+	}
+	
 	public void clickShop() {
 		element(shopButton).waitUntilVisible();
 		shopButton.click();
