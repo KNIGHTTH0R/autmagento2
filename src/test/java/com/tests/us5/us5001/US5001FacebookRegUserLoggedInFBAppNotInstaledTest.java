@@ -110,7 +110,7 @@ public class US5001FacebookRegUserLoggedInFBAppNotInstaledTest extends BaseTest{
 		fBpermissionSteps.acceptAllThePermissionsFBRegistration();
 		facebookRegistrationSteps.verifyFbUserInfo(fbName,fbEmail);
 		facebookRegistrationSteps.fillCreateCustomerByFacebookForm(dataModel, addressModel,fbPass);
-		headerSteps.checkSucesfullLogin();
+		headerSteps.checkSucesfullLoginDE();
 		//verify is autologgedin
 		customVerification.printErrors();
 

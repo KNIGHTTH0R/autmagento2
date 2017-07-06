@@ -42,12 +42,16 @@ public class MyContactsListPage extends AbstractPage {
 
 	
 	public void verifyUnicAndOpenContactDetails(String... terms) {
+		
+		System.out.println("sunt aici");
 		WebElement link = null;
 		List<WebElement> contactsList = getDriver().findElements(By.cssSelector("form#contacts-form tbody tr"));
 		boolean found = false;
 		for (WebElement contact : contactsList) {
+			System.out.println("contact: "+contact);
 			boolean matchesAllTerms = true;
 			for (String term : terms) {
+				System.out.println("term: "+term);
 				if (!contact.getText().contains(term.toUpperCase())) {
 					matchesAllTerms = false;
 				}

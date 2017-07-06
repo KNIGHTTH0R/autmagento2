@@ -56,11 +56,16 @@ public class OrdersActionsPage extends AbstractPage {
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
 	}
+	
+	
+	//////////////emilian pom modfications
 
 	public void waitForLoading() {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"),
-				ConfigConstants.LOADING));
+//		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+//		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"),
+//				ConfigConstants.LOADING));
+		
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("loading_mask_loader"),ConfigConstants.LOADING));
 	}
 
 	public void cancelOrder() {

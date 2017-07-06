@@ -115,7 +115,8 @@ public class US17001VerifyThatFirstCustContactIsReassignedToCustPreffScTest exte
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getEmailName(), dateModel.getDate());
+		myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getFirstName(),customerModel.getLastName());
+	//	myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getEmailName(), dateModel.getDate());
 		grabbedDetailsModel = contactDetailsSteps.grabContactDetails();
 		contactValidationWorkflows.validateContactDetails(expectedDetailsModel, grabbedDetailsModel);
 		customVerifications.printErrors();

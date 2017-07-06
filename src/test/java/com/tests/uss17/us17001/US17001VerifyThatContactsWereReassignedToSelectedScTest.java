@@ -138,12 +138,17 @@ public class US17001VerifyThatContactsWereReassignedToSelectedScTest extends Bas
 		headerSteps.selectLanguage(MongoReader.getContext());
 
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), contactDateModel.getDate());
+		
+		System.out.println("contact "+ contactModel.getFirstName()+"  "+contactModel.getLastName());
+		//myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getEmailName(), contactDateModel.getDate());
+		myContactsListSteps.verifyUnicAndOpenContactDetails(contactModel.getFirstName(),contactModel.getLastName());
 		contactGrabbedDetailsModel = contactDetailsSteps.grabContactDetails();
 		contactValidationWorkflows.validateContactDetails(contactExpectedDetailsModel, contactGrabbedDetailsModel);
 
 		loungeSteps.goToContactsList();
-		myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getEmailName(), customerDateModel.getDate());
+		System.out.println(customerModel.getFirstName()+"  "+customerModel.getLastName());
+		myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getFirstName(),customerModel.getLastName());
+	//	myContactsListSteps.verifyUnicAndOpenContactDetails(customerModel.getEmailName(), customerDateModel.getDate());
 		customerGrabbedDetailsModel = contactDetailsSteps.grabContactDetails();
 		contactValidationWorkflows.validateContactDetails(customerExpectedDetailsModel, customerGrabbedDetailsModel);
 

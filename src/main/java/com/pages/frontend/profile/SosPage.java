@@ -76,8 +76,11 @@ public class SosPage extends AbstractPage {
 
 	public void verifySosMessage() {
 
-		Wait<WebDriver> wait = new WebDriverWait(getDriver(), 30);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+//		Wait<WebDriver> wait = new WebDriverWait(getDriver(), 30);
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+
+		
 		// withTimeoutOf(5,
 		// TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(messageContainer).waitUntilVisible();

@@ -103,7 +103,7 @@ public class US5002FacebookRegUserFBLoggedOutAppInstaledTest extends BaseTest{
 		facebookRegistrationSteps.loginToFacebookPippaAndSwitchPage(fbEmail, fbPass);
 		facebookRegistrationSteps.verifyFbUserInfo(fbName,fbEmail);
 		facebookRegistrationSteps.fillCreateCustomerByFacebookForm(dataModel, addressModel,fbPass);
-		headerSteps.checkSucesfullLogin();
+		headerSteps.checkSucesfullLoginDE();
 		customVerification.printErrors();
 
 	}

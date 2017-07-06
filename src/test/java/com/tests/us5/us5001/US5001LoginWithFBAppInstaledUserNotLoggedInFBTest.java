@@ -68,7 +68,7 @@ public class US5001LoginWithFBAppInstaledUserNotLoggedInFBTest extends BaseTest{
 	public void us5001LoginWithFBAppInstaledUserNotLoggedInFBTest() {
 		facebookRegistrationSteps.goToFacebookLogin();
 		facebookRegistrationSteps.loginToFacebookPippaAndSwitchPage(fbUser, fbPass);
-		headerSteps.checkSucesfullLogin();
+		headerSteps.checkSucesfullLoginDE();
 		
 	}
 }

@@ -1,4 +1,4 @@
-package com.tests.us5.us5003;
+package com.tests.us5.us5005;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,6 +16,7 @@ import com.steps.external.FacebookRegistrationSteps;
 import com.steps.external.ospm.OnlineStylePartyManagerSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
 
@@ -23,17 +24,17 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
-public class US5003LoginWithFBAppNotInstaledUserNotLoggedInFBTest extends BaseTest {
+public class US5005LoginWithFBApInstaledUserLoggedInFBTest extends BaseTest {
 	@Steps
 	public BackEndSteps backEndSteps;
 	@Steps
 	public FacebookRegistrationSteps facebookRegistrationSteps;
-
 	@Steps
 	public HeaderSteps headerSteps;
-
 	@Steps
 	OnlineStylePartyManagerSteps fBpermissionSteps;
+	@Steps
+	CustomVerification customVerification;
 
 	private String fbUser, fbPass;
 	public WebDriver driverx;
@@ -47,7 +48,7 @@ public class US5003LoginWithFBAppNotInstaledUserNotLoggedInFBTest extends BaseTe
 		try {
 
 			input = new FileInputStream(
-					UrlConstants.RESOURCES_PATH + FilePaths.US_05_FOLDER + File.separator + "us5001.properties");
+					UrlConstants.RESOURCES_PATH + FilePaths.US_05_FOLDER + File.separator + "us5004.properties");
 			prop.load(input);
 			fbUser = prop.getProperty("fbUser");
 			fbPass = prop.getProperty("fbPass");
@@ -70,12 +71,16 @@ public class US5003LoginWithFBAppNotInstaledUserNotLoggedInFBTest extends BaseTe
 	}
 
 	@Test
-	public void us5003LoginWithFBAppNotInstaledUserNotLoggedInFBTest() {
-		facebookRegistrationSteps.goToFacebookLogin();
-		facebookRegistrationSteps.loginToFacebookPippa(fbUser, fbPass);
+	public void us5005LoginWithFBApInstaledUserLoggedInFBTest() {
+		
+		facebookRegistrationSteps.loginToFacebook(fbUser, fbPass);
+		headerSteps.openNewTab();
+		headerSteps.switchToNewestOpenedTab();
+		facebookRegistrationSteps.goToTeaserFacebookLogin();
 		fBpermissionSteps.acceptAllThePermissionsFBRegistration();
 		facebookRegistrationSteps.switchToMainPage();
-		headerSteps.checkSucesfullLoginDE();
-
+		//headerSteps.verifyWebsite("es");
+		headerSteps.checkSucesfullLoginES();
+		customVerification.printErrors();
 	}
 }

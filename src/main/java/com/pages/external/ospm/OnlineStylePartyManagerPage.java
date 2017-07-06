@@ -102,7 +102,7 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	}
 
 	public void clickContinueAsUser() {
-		waitABit(2000);
+		waitABit(4000);
 		element(continueAsUserButton).waitUntilVisible();
 		continueAsUserButton.click();
 

@@ -79,8 +79,8 @@ public class US5004LoginWithFBAppNotInstaledUserLoggedInFBTest extends BaseTest 
 		facebookRegistrationSteps.goToTeaserFacebookLogin();
 		fBpermissionSteps.acceptAllThePermissionsFBRegistration();
 		facebookRegistrationSteps.switchToMainPage();
-		headerSteps.checkSucesfullLogin();
-		headerSteps.navigateToNotPrefWebsite("/es");
+//		/headerSteps.checkSucesfullLoginES();
+		headerSteps.verifyWebsiteAndStoreView("es","es_lang_es");
 		customVerification.printErrors();
 	}
 }

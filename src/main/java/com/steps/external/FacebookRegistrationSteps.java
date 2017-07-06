@@ -18,7 +18,7 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 	// driverInit();
 	// }
 
-	String currentWindowHandle;
+	public static String currentWindowHandle;
 
 	@StepGroup
 	public void verifyFbUserInfo(String fbName, String fbEmail) {
@@ -69,6 +69,7 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 
 		inputPassword(password);
 		inputConfirmation(password);
+		
 		checkParties();
 		fillContactDetails(addressData);
 		searchStylistByGeoip(addressData);
@@ -209,6 +210,23 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 		findFrame("Log in With Facebook");
 
 	}
+	
+	@StepGroup
+	public void goToTeaserFacebookLoginEsStoreView() {
+		clickOnTeaserFacebookLoginES();
+		findFrame("Log in With Facebook");
+
+	}
+
+	private void clickOnTeaserFacebookLoginES() {
+		getDriver().get("http://staging-aut.pippajean.com/de/welcome-shop-landing/?___store=de_lang_es");
+		getDriver().get("http://staging-aut.pippajean.com/de/welcome-shop-landing/?___store=de_lang_es");
+		currentWindowHandle = getDriver().getWindowHandle();
+		getDriver().manage().window().maximize();
+		loginPage().clickOnFacebookSignIn();
+		
+	}
+
 
 	@StepGroup
 	public void goToTeaserFacebookLoginUnderContext(String context) {
@@ -313,10 +331,21 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void switchToMainPage() {
-		getDriver().switchTo().window(currentWindowHandle);
+	public void switchToMainPageES() {
+	//	getDriver().switchTo().window(currentWindowHandle);
+		waitABit(8000);
+		findFrame("Facebook");
+		
 	}
 
+	
+	@Step
+	public void switchToMainPage() {
+		waitABit(8000);
+		getDriver().switchTo().window(currentWindowHandle);
+		
+	}
+	
 	@Step
 	public void loginToFacebook(String user, String pass) {
 

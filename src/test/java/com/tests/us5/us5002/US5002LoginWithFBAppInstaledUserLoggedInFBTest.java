@@ -72,7 +72,7 @@ public class US5002LoginWithFBAppInstaledUserLoggedInFBTest extends BaseTest{
 		headerSteps.switchToNewestOpenedTab();
 		facebookRegistrationSteps.goToFacebookLogin();
 		headerSteps.switchToNewestOpenedTab();
-		headerSteps.checkSucesfullLogin();
+		headerSteps.checkSucesfullLoginDE();
 		
 	}
 }

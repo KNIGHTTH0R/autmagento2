@@ -203,7 +203,16 @@ public class HeaderSteps extends AbstractSteps {
 		 headerPage().checkSucesfullLogin();
 	}
 	
+	public void checkSucesfullLoginDE() {
+		// TODO Auto-generated method stub
+		headerPage().checkSucesfullLoginDE();
+	}
 	
+	@Step
+	public void checkSucesfullLoginES() {
+		headerPage().checkSucesfullLoginES();
+		
+	}
 	@Step
 	public void goToShop() {
 		headerPage().clickShop();
@@ -215,4 +224,16 @@ public class HeaderSteps extends AbstractSteps {
 		
 	}
 
+	public void navigateToESWebsite(String context) {
+		navigate("http://staging-aut.pippajean.com/es/");
+	}
+
+	@StepGroup
+	public void verifyWebsiteAndStoreView(String website,String storeView) {
+		headerPage().verifyWebsite(website);
+		headerPage().verifyStoreView(storeView);
+		
+	}
+
+	
 }

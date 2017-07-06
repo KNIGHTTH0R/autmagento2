@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,7 @@ import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
 import com.tools.data.frontend.CustomerFormModel;
+import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -69,9 +71,10 @@ public class US5004FacebookRegUserFBLoggedOutAppNotInstaledTest extends BaseTest
 	public void setUp() throws Exception {
 		
 		dataModel = new CustomerFormModel();
+		
 		addressModel = new AddressModel();
 		addressModel.setPostCode(ContextConstants.NOT_PREFEERD_WEBSITE_POST_CODE);
-		addressModel.setCountryName(ContextConstants.NOT_PREFERED_LANGUAGE);
+		addressModel.setCountryName("España");
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -96,23 +99,30 @@ public class US5004FacebookRegUserFBLoggedOutAppNotInstaledTest extends BaseTest
 				}
 			}
 		}
-
+		dataModel.setEmailName(fbUser);
+		dataModel.setPassword(fbPass);
+		dataModel.setFirstName("Mike");
+		
 	}
 
 	@Test
 	public void us5004FacebookRegUserFBLoggedOutAppNotInstaledTest() throws Exception {
 
 		
-		facebookRegistrationSteps.goToTeaserFacebookLogin();
+		facebookRegistrationSteps.goToTeaserFacebookLoginEsStoreView();
 		facebookRegistrationSteps.loginToFacebookPippa(fbUser, fbPass);
 		fBpermissionSteps.acceptAllThePermissionsFBRegistration();
 		facebookRegistrationSteps.switchToMainPage();
 		facebookRegistrationSteps.fillCreateCustomerByFacebookFormNotPrefCountry(dataModel, addressModel,fbPass);
-		headerSteps.checkSucesfullLogin();
-		//verify is autologgedin
+		headerSteps.checkSucesfullLoginES();
 		customVerification.printErrors();
 		
 		
 
+	}
+	
+	@After
+	public void saveData() {
+		MongoWriter.saveCustomerFormModel(dataModel, getClass().getSimpleName());
 	}
 }

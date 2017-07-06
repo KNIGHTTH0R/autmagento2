@@ -103,15 +103,13 @@ public class US5003FacebookRegUserLoggedInFBAppInstaledTest extends BaseTest{
 	public void us5003FacebookRegUserLoggedInFBAppInstaledTest() throws Exception {
 		//use data from US5002 suite
 		facebookLoginSteps.loginToFacebook(fbEmail, fbPass);
-	//	facebookLoginSteps.accessSettingsOnFacebookDesktopApp();
-	//	facebookLoginSteps.removeTheFbApp(appID);
+
 		headerSteps.openNewTab();
 		headerSteps.switchToNewestOpenedTab();
 		facebookRegistrationSteps.goToTeaserFacebookLoginUnderContext(stylistContext);
-//	/	fBpermissionSteps.acceptAllThePermissionsFBRegistration();
 		facebookRegistrationSteps.verifyFbUserInfo(fbName,fbEmail);
 		facebookRegistrationSteps.fillCreateCustomerByFacebookFormUnderContext(dataModel, addressModel,fbPass);
-		headerSteps.checkSucesfullLogin();
+		headerSteps.checkSucesfullLoginDE();
 		customVerification.printErrors();
 
 	}
