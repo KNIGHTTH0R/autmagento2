@@ -12,9 +12,9 @@ import com.tests.us5.us5003.US5003RemovePippaAppFromFacebookTest;
 
 @SuiteClasses({
 	//use data from US5002 suite
-//	US5003FacebookCustomerDeleteTest.class,
-//	US5003FacebookAsociatedContactDeleteTest.class,
-//	US5003FacebookRegUserLoggedInFBAppInstaledTest.class,
+	US5003FacebookCustomerDeleteTest.class,
+	US5003FacebookAsociatedContactDeleteTest.class,
+	US5003FacebookRegUserLoggedInFBAppInstaledTest.class,
 	US5003RemovePippaAppFromFacebookTest.class,
 	US5003LoginWithFBAppNotInstaledUserNotLoggedInFBTest.class,
 	

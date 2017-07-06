@@ -1,27 +1,15 @@
 package com.pages.external.ospm;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
-import java.awt.AWTException;	
-import java.awt.Robot;	
-import java.awt.event.KeyEvent;	
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.connectors.facebook.FacebookPrb;
-import com.connectors.navisionLogin.LoginWindow;
 import com.tools.CustomVerification;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 /**
  * This page will contain mapping from the pop-up facebook login window.
@@ -87,23 +75,6 @@ public class FacebookLoginPage extends AbstractPage {
 
 	}
 	
-	
-	public void robotAction() throws AWTException, InterruptedException{
-		Robot robot = new Robot();  // Robot class throws AWT Exception	
-//        Thread.sleep(2000); // Thread.sleep throws InterruptedException	
-//        robot.keyPress(KeyEvent);  // press arrow down key of keyboard to navigate and select Save radio button	
-        
-//        Thread.sleep(2000);  // sleep has only been used to showcase each event separately	
-//        robot.keyPress(KeyEvent.VK_TAB);	
-//        Thread.sleep(2000);	
-//        robot.keyPress(KeyEvent.VK_TAB);	
-//        Thread.sleep(2000);	
-//        robot.keyPress(KeyEvent.VK_TAB);	
-        Thread.sleep(2000);	
-        robot.keyPress(KeyEvent.VK_ENTER);	
-    // press enter key of keyboard to perform above selected action	
-	}
-
 	
 	public void removePopUpFb() throws Exception {
 

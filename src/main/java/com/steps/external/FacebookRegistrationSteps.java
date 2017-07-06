@@ -334,7 +334,7 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 	public void accessSettingsOnFacebookDesktopApp() {
 
 		getDriver().get("https://www.facebook.com/settings?tab=applications");
-
+		onlineStylePartyManagerPage().closePopUp();
 	}
 
 	@Step
