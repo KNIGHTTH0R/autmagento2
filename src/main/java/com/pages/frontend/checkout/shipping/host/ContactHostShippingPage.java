@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
@@ -33,6 +34,8 @@ public class ContactHostShippingPage extends AbstractPage {
 		element(itemNotReceived).waitUntilVisible();
 		itemNotReceived.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+//		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+//		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void verifyStyleCoachAndOrderForDetails(String details) {

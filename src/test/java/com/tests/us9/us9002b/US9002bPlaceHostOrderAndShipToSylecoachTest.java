@@ -155,7 +155,9 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 
-		partyUrlModel = MongoReader.grabUrlModels("US10002bCreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
+		partyUrlModel = MongoReader.grabUrlModels(""
+				+ ""
+				+ "" + SoapKeys.GRAB).get(0);
 	}
 
 	@Test

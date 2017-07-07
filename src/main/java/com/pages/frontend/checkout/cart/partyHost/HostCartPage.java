@@ -4,12 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.tools.cartcalculations.partyHost.HostCartTotalsCalculation;
 import com.tools.constants.ConfigConstants;
@@ -21,6 +20,8 @@ import com.tools.data.frontend.HostCartTotalsModel;
 import com.tools.datahandler.HostDataGrabber;
 import com.tools.requirements.AbstractPage;
 import com.tools.utils.FormatterUtils;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class HostCartPage extends AbstractPage {
 
@@ -266,6 +267,9 @@ public class HostCartPage extends AbstractPage {
 	public void acceptInfoPopupForNotConsumedBonus() {
 		element(acceptNotConsumedBonusButton).waitUntilVisible();
 		acceptNotConsumedBonusButton.click();
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+
 	}
 	
 	public void clickClearCart() {

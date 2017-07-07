@@ -74,7 +74,7 @@ public class US9002ClosePartyTest extends BaseTest {
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
-		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest" +SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
 
 	}
 

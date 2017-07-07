@@ -156,8 +156,9 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
-
+		//urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
 	}
@@ -179,9 +180,9 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 
 		HostBasicProductModel productData;
 
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "4", "0");
 		HostCartCalculator.allProductsList.add(productData);
-		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "3", "0");
 		HostCartCalculator.allProductsList.add(productData);
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct3, "4", "0");
 		HostCartCalculator.allProductsList.add(productData);

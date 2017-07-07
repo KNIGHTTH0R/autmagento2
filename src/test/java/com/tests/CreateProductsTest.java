@@ -129,7 +129,7 @@ public class CreateProductsTest extends BaseTest {
 		//products for shop for myself cart - us3005
 		genProduct4 = MagentoProductCalls.createProductModel();
 		genProduct4.setIp("25");
-		genProduct4.setPrice("29.90");
+		genProduct4.setPrice("29.00");
 		MagentoProductCalls.createApiProduct(genProduct4);
 		productsList.add(genProduct4);
 		

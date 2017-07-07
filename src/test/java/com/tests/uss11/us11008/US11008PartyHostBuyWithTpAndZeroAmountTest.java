@@ -145,7 +145,8 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 		}
 
 		urlModel = MongoReader.grabUrlModels("US10009CreatePartyWithStylistHostTest").get(0);
-
+	//	urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP0");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");

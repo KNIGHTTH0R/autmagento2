@@ -4,13 +4,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.tests.us9.us9002.US9002ClosePartyTest;
 import com.tests.uss10.uss10008.US10008AddManuallyBonusOnPartyTest;
-import com.tests.uss10.uss10008.US10008CloseAgainPartyAnfVerifyCommissionBonusesTest;
-import com.tests.uss10.uss10008.US10008CloseVirginPartyAnfVerifyCommissionBonusesTest;
-import com.tests.uss10.uss10008.US10008OrderForCustomerAsPartyHostTest;
-import com.tests.uss10.uss10008.US10008PlaceAnotherOrderForCustomerAsPartyHostTest;
-import com.tests.uss10.uss10008.US10008ReopenPartyTest;
-import com.tests.uss10.uss10008.US10008VerifyHostPartyCreationEmailTest;
 
 @SuiteClasses({	
 //	US10008VerifyHostPartyCreationEmailTest.class,
@@ -26,6 +21,9 @@ import com.tests.uss10.uss10008.US10008VerifyHostPartyCreationEmailTest;
 	// place an host order 
 	// cancel an tp order
 	//verify host reword
+	
+	US9002ClosePartyTest.class,
+	US10008AddManuallyBonusOnPartyTest.class,
 })
 @RunWith(Suite.class)
 public class US10008Suite {

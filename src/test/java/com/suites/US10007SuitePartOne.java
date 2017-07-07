@@ -10,8 +10,8 @@ import com.tests.uss10.uss10007.US10007CreateFolowUpPartyForActivePartyTest;
 import com.tests.uss10.uss10007.US10007CreateSecondFolowUpPartyForActivePartyTest;
 
 @SuiteClasses({	
-	US10007CreateFolowUpPartyForActivePartyTest.class,
-	US10007CreateSecondFolowUpPartyForActivePartyTest.class,
+//	US10007CreateFolowUpPartyForActivePartyTest.class,
+//	US10007CreateSecondFolowUpPartyForActivePartyTest.class,
 	US10007ClosePartyAnfVerifyCommissionBonusesTest.class,
 	US10007AddManuallyBonusOnPartyTest.class,
 //	US10007VerifyInviteForStylistHostEmailTest.class,
