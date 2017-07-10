@@ -411,6 +411,11 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		verifyText();
 		verifyLink();
 	}
+	
+	@StepGroup
+	public void waitForCustomerCreation() {
+		waitABit(30000);
+	}
 
 	// ------------------Secondary Form - create customer - Address fields
 	@Step

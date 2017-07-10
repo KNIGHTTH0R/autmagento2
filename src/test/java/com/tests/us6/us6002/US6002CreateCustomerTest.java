@@ -45,6 +45,7 @@ public class US6002CreateCustomerTest extends BaseTest {
 		//customerRegistrationSteps.fillCreateCustomerForm(customerData, customerAddressData);
 		customerRegistrationSteps.fillCreateCustomerFormAnReturnFoundByNameStylecoaches(customerData,customerAddressData,"Sim","Sim");
 		customerRegistrationSteps.verifyCustomerCreation();
+		customerRegistrationSteps.waitForCustomerCreation();
 		customVerifications.printErrors();
 	}
 
