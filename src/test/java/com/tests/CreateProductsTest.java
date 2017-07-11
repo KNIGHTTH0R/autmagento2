@@ -215,8 +215,10 @@ public class CreateProductsTest extends BaseTest {
 		productsList.add(genProduct17);
 		
 		genProduct18 = MagentoProductCalls.createProductModel();
-		genProduct18.setPrice("120.00");
-		genProduct18.setSpecialPrice("100.00");
+//		genProduct18.setPrice("120.00");
+//		genProduct18.setSpecialPrice("100.00");
+		genProduct1.setPrice("89.00");
+		genProduct1.setSpecialPrice("50.00");
 		MagentoProductCalls.createApiProduct(genProduct18);
 		productsList.add(genProduct18);
 		

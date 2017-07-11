@@ -96,11 +96,15 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 	public void setUp() throws Exception {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
+		
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(31);
+		genProduct3 = createdProductsList.get(5);
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("100");
-		MagentoProductCalls.createApiProduct(genProduct1);
-//
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("100");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+
 		 genProduct2.setName(EnvironmentConstants.PRODUCT_NAME);
 		 genProduct2.setSku(EnvironmentConstants.PRODUCT_SKU);
 		 genProduct2.setUrlKey(EnvironmentConstants.PRODUCT_SKU);
@@ -113,14 +117,13 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 //		 genProduct2.setPrice("49.90");
 //		 MagentoProductCalls.createApiProduct(genProduct2);
 
-		 genProduct3 = MagentoProductCalls.createMarketingProductModel();
-		 genProduct3.setPrice("5.00");
-		 MagentoProductCalls.createApiProduct(genProduct3);
+//		 genProduct3 = MagentoProductCalls.createMarketingProductModel();
+//		 genProduct3.setPrice("5.00");
+//		 MagentoProductCalls.createApiProduct(genProduct3);
 
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		genProduct1 = createdProductsList.get(31);
-////		genProduct2 = createdProductsList.get(0);
-//		genProduct3 = createdProductsList.get(5);
+		
+		
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 

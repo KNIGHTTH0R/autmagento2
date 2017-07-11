@@ -75,6 +75,7 @@ public class US5004FacebookRegUserFBLoggedOutAppNotInstaledTest extends BaseTest
 		addressModel = new AddressModel();
 		addressModel.setPostCode(ContextConstants.NOT_PREFEERD_WEBSITE_POST_CODE);
 		addressModel.setCountryName("España");
+	
 		Properties prop = new Properties();
 		InputStream input = null;
 

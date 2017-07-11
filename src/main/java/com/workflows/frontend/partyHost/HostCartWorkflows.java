@@ -35,7 +35,8 @@ public class HostCartWorkflows {
 
 	@Step
 	public void validateProducts(String message) {
-
+		System.out.println(" ");
+		System.out.println(message);
 		for (HostBasicProductModel productNow : basicProductsList) {
 			HostCartProductModel compare = findProduct(productNow.getProdCode(), productNow.getQuantity(), cartProductsList);
 

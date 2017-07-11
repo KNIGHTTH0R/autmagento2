@@ -110,13 +110,13 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("80.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("80.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
 		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
-//		genProduct1 = createdProductsList.get(1);
+		genProduct1 = createdProductsList.get(1);
 		
 
 		Properties prop = new Properties();

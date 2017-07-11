@@ -120,11 +120,11 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 //		genProduct2.setPrice("49.90");
 //		MagentoProductCalls.createApiProduct(genProduct2);
 //
-		genProduct3 = MagentoProductCalls.createProductModel();
-		genProduct3.setPrice("100.00");
-		genProduct3.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-		MagentoProductCalls.createApiProduct(genProduct3);
+//		genProduct3 = MagentoProductCalls.createProductModel();
+//		genProduct3.setPrice("100.00");
+//		genProduct3.setStockData(
+//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+//		MagentoProductCalls.createApiProduct(genProduct3);
 //		
 		genProduct4 = MagentoProductCalls.createProductModel();
 		genProduct4.getStockData().setAllowedTermPurchase("1");

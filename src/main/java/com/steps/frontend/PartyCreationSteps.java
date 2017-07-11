@@ -65,6 +65,20 @@ public class PartyCreationSteps extends AbstractSteps {
 		return partyCreationPage().submitParty();
 
 	}
+	
+	@Step
+	public String fillPartyDetailsForCustomerHostAT(String name) {
+		partyCreationPage().checkHostedByCustomer();
+		partyCreationPage().typeCustomerName(name);
+		partyCreationPage().selectFirstAvailableDate();
+		partyCreationPage().selectFirstAvailableHour();
+		//partyCreationPage().verifyThatPartyCountryListDoesNotContainRestrictedCountry();
+		partyCreationPage().selectPartyCountry("Österreich");
+		waitABit(1000);
+		return partyCreationPage().submitParty();
+
+	}
+
 
 	@Step
 	public String fillPartyDetailsForNewCustomerHost() {
