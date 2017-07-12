@@ -1,4 +1,4 @@
-package com.steps.external;
+package com.steps.external.faceboook;
 
 import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.AddressModel;
@@ -364,6 +364,14 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 
 		getDriver().get("https://www.facebook.com/settings?tab=applications");
 		onlineStylePartyManagerPage().closePopUp();
+	}
+	
+	@Step
+	public void accesMessagesPage() throws Exception{
+		getDriver().get("https://www.facebook.com/messages/");
+		onlineStylePartyManagerPage().closePopUp();
+		waitABit(3000);
+		facebookLoginPage().removePopUpFb();
 	}
 
 	@Step

@@ -77,6 +77,7 @@ public class ContextConstants {
 	public static String MEINE_BESTELLUNGEN = MongoReader.getDictionaryItem("MEINE_BESTELLUNGEN");
 	public static String SALESONSPEED_INFO = MongoReader.getDictionaryItem("SALESONSPEED_INFO");
 	public static String MEINE_PARTIES = MongoReader.getDictionaryItem("MEINE_PARTIES");
+	public static String MEINE_EINLADUNGEN=MongoReader.getDictionaryItem("MEINE_EINLADUNGEN");
 
 	public static String INVITE_HOSTESS = MongoReader.getDictionaryItem("INVITE_HOSTESS");
 	public static String UPDATE_PARTY = MongoReader.getDictionaryItem("UPDATE_PARTY");

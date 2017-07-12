@@ -1,4 +1,4 @@
-package com.tests.us5.us5003;
+package com.tests.us5a.us5001a;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +29,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US5", type = "frontend,external")
 @Story(Application.External.class)
 @RunWith(SerenityRunner.class)
-public class US5003FacebookAsociatedContactDeleteTest extends BaseTest{
+public class US5001FacebookAsociatedContactDeleteTest extends BaseTest{
 	
 	
 	@Steps
@@ -65,7 +65,7 @@ public class US5003FacebookAsociatedContactDeleteTest extends BaseTest{
 	}
 	
 	@Test
-	public void us5003FacebookAsociatedContactDeleteTest() throws SOAPException, IOException{
+	public void us5001FacebookAsociatedContactDeleteTest() throws SOAPException, IOException{
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnContacts();
 		

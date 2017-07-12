@@ -1,4 +1,4 @@
-package com.tests.us5.us5003;
+package com.tests.us5a.us5001a;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +29,7 @@ import com.tools.requirements.Application;
 @WithTag(name = "US5", type = "frontend,external")
 @Story(Application.External.class)
 @RunWith(SerenityRunner.class)
-public class US5003FacebookAsociatedContactDeleteTest extends BaseTest{
+public class US5001FacebookCustomerDeleteTest extends BaseTest{
 	
 	
 	@Steps
@@ -38,6 +38,7 @@ public class US5003FacebookAsociatedContactDeleteTest extends BaseTest{
 	public FacebookRegistrationSteps facebookRegistrationSteps;
 	
 	private String fbUser;
+	private String beUser,bePass;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -50,6 +51,7 @@ public class US5003FacebookAsociatedContactDeleteTest extends BaseTest{
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_05_FOLDER + File.separator + "us5001.properties");
 			prop.load(input);
 			fbUser = prop.getProperty("fbUser");
+		
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -64,16 +66,16 @@ public class US5003FacebookAsociatedContactDeleteTest extends BaseTest{
 		}
 	}
 	
+	
+	
 	@Test
-	public void us5003FacebookAsociatedContactDeleteTest() throws SOAPException, IOException{
+	public void us5001FacebookDeleteCustomerTest() throws SOAPException, IOException{
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		backEndSteps.clickOnContacts();
-		
-		backEndSteps.searchForContactEmail(fbUser);
-	//	backEndSteps.selectContact(fbUser);
-		backEndSteps.selectContact(fbUser);
-		backEndSteps.deleteContact();
-		
+		backEndSteps.clickOnCustomers();
+		backEndSteps.searchForEmail(fbUser);
+		if(backEndSteps.openCustomerDetails(fbUser)!=null){
+			backEndSteps.deleteCustomer();
+		}
 
 		
 		

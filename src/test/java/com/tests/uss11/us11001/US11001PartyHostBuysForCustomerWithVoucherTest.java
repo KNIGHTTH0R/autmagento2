@@ -96,6 +96,7 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 	private ProductDetailedModel genProduct1;
 	private ProductDetailedModel genProduct2;
 	private ProductDetailedModel genProduct3;
+	private int stopCounter=0;
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 
 	@Before
@@ -170,12 +171,14 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
+		
 		do {
 			customerRegistrationSteps.navigate(urlModel.getUrl());
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
-		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
+			
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()) );
 
 		generalCartSteps.clearCart();
 

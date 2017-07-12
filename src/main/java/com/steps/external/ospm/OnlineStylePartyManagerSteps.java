@@ -111,4 +111,11 @@ public class OnlineStylePartyManagerSteps extends AbstractSteps {
 		onlineStylePartyManagerPage().clickContinueAsUser();
 		
 	}
+
+	public void acceptAllThePermissionsFBInvitation() {
+		waitABit(1000);
+		onlineStylePartyManagerPage().closePopUp();
+		onlineStylePartyManagerPage().clickContinueAsUser();
+	
+	}
 }

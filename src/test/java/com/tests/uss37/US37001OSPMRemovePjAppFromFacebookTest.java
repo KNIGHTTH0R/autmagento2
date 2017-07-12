@@ -4,7 +4,7 @@ package com.tests.uss37;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.steps.external.FacebookRegistrationSteps;
+import com.steps.external.faceboook.FacebookRegistrationSteps;
 import com.steps.external.ospm.OnlineStylePartyManagerSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;

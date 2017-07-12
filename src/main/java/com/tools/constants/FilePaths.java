@@ -7,6 +7,7 @@ public class FilePaths {
 	public static final String US_03_FOLDER = "us3";
 	public static final String US_04_FOLDER = "us4";
 	public static final String US_05_FOLDER = "us5";
+	public static final String US_05a_FOLDER = "us5a";
 	public static final String US_06_FOLDER = "us6";
 	public static final String US_07_FOLDER = "us7";
 	public static final String US_08_FOLDER = "us8";

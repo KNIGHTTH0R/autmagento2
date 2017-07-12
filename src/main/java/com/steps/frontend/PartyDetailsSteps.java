@@ -113,9 +113,11 @@ public class PartyDetailsSteps extends AbstractSteps {
 
 	@Step
 	public void verifyCountryRestrictionWhenSelectingCustomerParty(String name) {
-		placeCustomerOrderFromPartyPage().typeContactName(name);
-		placeCustomerOrderFromPartyPage().startOrderForCustomer();
-		placeCustomerOrderFromPartyPage().verifyCustomerIsNotSuitableForTheOrderErrorMessage();
+		if(placeCustomerOrderFromPartyPage().typeContactName(name)){
+			placeCustomerOrderFromPartyPage().startOrderForCustomer();
+			placeCustomerOrderFromPartyPage().verifyCustomerIsNotSuitableForTheOrderErrorMessage();
+		}
+		
 	}
 
 	@Step

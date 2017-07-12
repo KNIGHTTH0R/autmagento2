@@ -1,7 +1,6 @@
 package com.pages.frontend.checkout.cart.regularCart;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -12,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 
@@ -27,19 +28,32 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 	@FindBy(css = "li.error-msg ul li span")
 	private WebElement errorMessageContainer;
 
-	public void typeContactName(String name) {
+	public boolean typeContactName(String name) {
+		boolean found=false;
 		element(contactInput).waitUntilVisible();
+		contactInput.clear();
 		contactInput.sendKeys(name);
 		waitABit(TimeConstants.TIME_MEDIUM);
-		element(selectContact).waitUntilVisible();
-		if (selectContact.getText().contentEquals(name)) {
-			element(selectContact).click();
-			waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
-					ContextConstants.LOADING_MESSAGE));
-			waitABit(TimeConstants.TIME_MEDIUM);
-		} else {
-			Assert.fail("The contact was not found");
+		List<WebElement> contacts=getDriver().findElements(By.cssSelector("ul li.ui-menu-item a"));
+		
+		System.out.println("contacts.size()" +contacts.size());
+		if(contacts.size()!=0){
+			
+			if (selectContact.getText().contentEquals(name)) {
+				found=true;
+				element(selectContact).click();
+				waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+						ContextConstants.LOADING_MESSAGE));
+				waitABit(TimeConstants.TIME_MEDIUM);
+			} else {
+				Assert.fail("The contact was not found");
+			}
+		}else{
+			System.out.println("Failure : Searched contact does not exist");
+			
 		}
+		return found;
+		
 
 	}
 
@@ -51,8 +65,12 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 		waitABit(TimeConstants.TIME_MEDIUM);
 	}
 
+	
 	public void verifyCustomerIsNotSuitableForTheOrderErrorMessage() {
-		Assert.assertTrue("The error message should be present !!!",
-				errorMessageContainer.getText().contains(ContextConstants.ORDER_FOR_WRONG_CUSTOMER_ERROR_MESSAGE));
+			waitABit(5000);
+			Assert.assertTrue("The error message should be present !!!",
+					errorMessageContainer.getText().contains(ContextConstants.ORDER_FOR_WRONG_CUSTOMER_ERROR_MESSAGE));
+		
+		
 	}
 }

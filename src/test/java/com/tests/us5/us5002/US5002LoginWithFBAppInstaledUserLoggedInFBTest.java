@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.steps.backend.BackEndSteps;
-import com.steps.external.FacebookRegistrationSteps;
+import com.steps.external.faceboook.FacebookRegistrationSteps;
 import com.steps.frontend.HeaderSteps;
 import com.tests.BaseTest;
 import com.tools.constants.FilePaths;

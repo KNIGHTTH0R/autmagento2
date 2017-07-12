@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
-
 import org.junit.Assert;
 
 import com.pages.backend.MagentoLoginPage;
@@ -106,6 +103,8 @@ import com.pages.frontend.checkout.shipping.host.ContactHostShippingPage;
 import com.pages.frontend.checkout.shipping.kobo.KoboShippingPage;
 import com.pages.frontend.checkout.shipping.regularUser.ShippingPartySectionPage;
 import com.pages.frontend.checkout.wishlist.WishlistPage;
+import com.pages.frontend.invitation.FacebookInvitationPage;
+import com.pages.frontend.invitation.FacebookMessagePage;
 import com.pages.frontend.profile.DashboardPage;
 import com.pages.frontend.profile.ProfileHistoryPage;
 import com.pages.frontend.profile.ProfileNavPage;
@@ -130,6 +129,9 @@ import com.tools.constants.ContextConstants;
 import com.tools.constants.EnvironmentConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.persistance.MongoReader;
+
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
 
 public class AbstractSteps extends ScenarioSteps {
 
@@ -289,6 +291,7 @@ public class AbstractSteps extends ScenarioSteps {
 			}
 		}
 	}
+
 
 	@Step
 	public void navigate(String URL) {
@@ -686,6 +689,14 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public FacebookRegistrationFormPage facebookRegistrationFormPage() {
 		return getPages().currentPageAt(FacebookRegistrationFormPage.class);
+	}
+	
+	public FacebookInvitationPage facebookInvitationPage() {
+		return getPages().currentPageAt(FacebookInvitationPage.class);
+	}
+	
+	public FacebookMessagePage facebookMessagePage() {
+		return getPages().currentPageAt(FacebookMessagePage.class);
 	}
 	
 	public FacebookLoginPage facebookLoginPage() {

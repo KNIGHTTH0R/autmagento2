@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.steps.backend.BackEndSteps;
-import com.steps.external.FacebookRegistrationSteps;
+import com.steps.external.faceboook.FacebookRegistrationSteps;
 import com.tests.BaseTest;
 import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
