@@ -112,7 +112,6 @@ public class US80011CustomerOrderProductWithSpecialPriceTest extends BaseTest {
 	
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		genProduct1 = createdProductsList.get(17);
-		genProduct1.setPrice(genProduct1.getSpecialPrice());
 
 		Properties prop = new Properties();
 		InputStream input = null;

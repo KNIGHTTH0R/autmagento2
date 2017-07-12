@@ -101,7 +101,7 @@ public class US8006CustomerBuyWithVoucherPartiallyOnShippingTest extends BaseTes
 		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(27);
 		genProduct3 = createdProductsList.get(6);
 
 //		genProduct1 = MagentoProductCalls.createProductModel();

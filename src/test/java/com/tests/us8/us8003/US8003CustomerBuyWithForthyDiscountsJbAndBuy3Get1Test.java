@@ -102,7 +102,7 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(27);
 		genProduct3 = createdProductsList.get(6);
 		
 //		genProduct1 = MagentoProductCalls.createProductModel();

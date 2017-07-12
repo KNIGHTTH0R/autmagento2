@@ -103,7 +103,7 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(27);
 		genProduct3 = createdProductsList.get(13);
 
 //		genProduct1 = MagentoProductCalls.createProductModel();
@@ -164,6 +164,7 @@ public class US8002CustomerBuyWithVoucherTest extends BaseTest {
 		homeSteps.goToNewItems();
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+		headerSteps.waitABit(20000);
 		generalCartSteps.clearCart();
 
 		RegularBasicProductModel productData;

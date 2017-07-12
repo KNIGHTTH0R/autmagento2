@@ -89,7 +89,6 @@ public class CreateProductsTest extends BaseTest {
 		//System.out.println("star date "+ DateUtils.getCurrentDate("yyyy/MM/dd HH:mm:ss"));
 		
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setIp("84");
 		genProduct1.setPrice("49.90");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		productsList.add(genProduct1);

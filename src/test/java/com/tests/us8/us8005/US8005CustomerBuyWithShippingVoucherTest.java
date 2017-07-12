@@ -100,7 +100,7 @@ public class US8005CustomerBuyWithShippingVoucherTest extends BaseTest {
 		
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(27);
 
 //		genProduct1 = MagentoProductCalls.createProductModel();
 //		genProduct1.setPrice("89.00");
