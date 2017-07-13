@@ -173,6 +173,7 @@ public class US9006PlaceHostOrderSpecialCaseTest extends BaseTest {
 
 		
 		hostCartSteps.clickGoToShipping();
+		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 	
