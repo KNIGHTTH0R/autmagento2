@@ -81,8 +81,8 @@ public class PartyDetailsSteps extends AbstractSteps {
 	}
 
 	@Step
-	public void orderForCustomer() {
-		partyDetailsPage().orderForCustomer();
+	public boolean orderForCustomer() {
+		return partyDetailsPage().orderForCustomer();
 	}
 
 	@Step

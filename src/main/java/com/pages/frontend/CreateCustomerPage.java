@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.data.frontend.DykscSeachModel;
@@ -33,6 +34,9 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "confirmation")
 	private WebElement confirmationeInput;
 
+	@FindBy(css = ".psc-mail")
+	private WebElement stylistEmail;
+
 	@FindBy(id = "invitation_email")
 	private WebElement invitationEmailInput;
 
@@ -48,7 +52,8 @@ public class CreateCustomerPage extends AbstractPage {
 	@FindBy(id = "accept-checkbox")
 	private WebElement iAgreeCheckbox;
 
-//	@FindBy(css = "div.buttons-set.form-buttons.to-the-left button[type='submit']")
+	// @FindBy(css = "div.buttons-set.form-buttons.to-the-left
+	// button[type='submit']")
 	@FindBy(css = ".buttons-set.form-buttons.page-bottom button[type='Submit']")
 	private WebElement completeButton;
 
@@ -130,7 +135,7 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputPassword(String passText) {
-		
+
 		element(passwordInput).waitUntilVisible();
 		passwordInput.sendKeys(passText);
 
@@ -153,12 +158,14 @@ public class CreateCustomerPage extends AbstractPage {
 		waitABit(2000);
 		element(partiesCheckbox).waitUntilVisible();
 		partiesCheckbox.click();
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void checkMember() {
 		memberCheckbox.click();
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void checkIAgree() {
@@ -170,7 +177,8 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputStreetAddress(String streetAddress) {
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(streetInput).waitUntilVisible();
 		streetInput.sendKeys(streetAddress);
 	}
@@ -182,7 +190,8 @@ public class CreateCustomerPage extends AbstractPage {
 	public void inputPostCode(String postCode) {
 		postCodeInput.clear();
 		element(postCodeInput).typeAndTab(postCode);
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void inputPostCodeAndValdiateErrorMessage(String postCode) {
@@ -198,7 +207,8 @@ public class CreateCustomerPage extends AbstractPage {
 	public void inputPostCodeFromPersonalInfo(String postCode) {
 		distributionZip.clear();
 		element(distributionZip).typeAndTab(postCode);
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void inputHomeTown(String homeTown) {
@@ -229,11 +239,13 @@ public class CreateCustomerPage extends AbstractPage {
 	public void inputPostcodeFilter(String postcode) {
 		searchPostcode.clear();
 		element(searchPostcode).typeAndTab(postcode);
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
 
 	public void selectCountryFilter(String countryName) {
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(searchCountry).waitUntilVisible();
 		element(searchCountry).selectByVisibleText(countryName);
 	}
@@ -278,19 +290,22 @@ public class CreateCustomerPage extends AbstractPage {
 	public void searchByGeoipSubmit() {
 		element(searchByGeoipSubmitButton).waitUntilVisible();
 		searchByGeoipSubmitButton.click();
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		waitABit(1000);
 	}
 
 	public void searchByNameSubmit() {
 		element(searchByNameSubmitButton).waitUntilVisible();
 		searchByNameSubmitButton.click();
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		waitABit(1000);
 	}
 
 	public boolean isStylecoachFound() {
-		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(styleCoachNameResult).waitUntilVisible();
 		return !styleCoachNameResult.getText().contains(ContextConstants.NO_SC_FOUND_BY_GEOIP);
 
@@ -300,6 +315,23 @@ public class CreateCustomerPage extends AbstractPage {
 		element(zipValidationMessage).waitUntilVisible();
 		Assert.assertTrue("The message from validation message is not the expected one!!",
 				zipValidationMessage.getText().contains(ContextConstants.PLZ_ERROR_MESSAGE));
+	}
+
+	public void verifyFBUserEmailPrefield(String fbEmail) {
+		element(emailaddressInput).waitUntilVisible();
+		String grabbedEmail = emailaddressInput.getAttribute("value");
+		CustomVerification.verifyTrue("Failure: The fb email input is not prefield correctly" + "grabbed: "
+				+ grabbedEmail + "expected: " + fbEmail, grabbedEmail.contentEquals(fbEmail));
+
+	}
+
+	public void verifyStylistEmail(String stylistEmail2) {
+		element(stylistEmail).waitUntilVisible();
+		String grabbedStylistEmail = stylistEmail.getText();
+		System.out.println("grabbedStylistEmail: "+grabbedStylistEmail );
+		CustomVerification.verifyTrue("Failure: The expected stylist is not preselected" + "expected: " + stylistEmail2
+				+ "grabbed: " + grabbedStylistEmail, grabbedStylistEmail.contains(stylistEmail2));
+
 	}
 
 }

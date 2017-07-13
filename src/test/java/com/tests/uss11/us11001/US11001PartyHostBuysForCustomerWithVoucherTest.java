@@ -175,8 +175,12 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		do {
 			customerRegistrationSteps.navigate(urlModel.getUrl());
 			partyDetailsSteps.orderForCustomer();
-			partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
-			partyDetailsSteps.orderForCustomerFromParty(customerName);
+			if(partyDetailsSteps.orderForCustomer()){
+				partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
+				partyDetailsSteps.orderForCustomerFromParty(customerName);
+			}else{
+				break;
+			}
 			
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()) );
 

@@ -1,4 +1,4 @@
-package com.tests.us5a.us5001a;
+package com.tests.us5a.us5004a;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,7 +40,7 @@ import net.thucydides.core.annotations.Story;
 
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
-public class US5001aInviteFbFriendAppNotInstalledFbLoggedInTest extends BaseTest{
+public class US5004aInviteFbFriendAppNotInstalledFbLoggedOutTest extends BaseTest{
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -60,6 +60,8 @@ public class US5001aInviteFbFriendAppNotInstalledFbLoggedInTest extends BaseTest
 	public FacebookRegistrationSteps facebookLoginSteps;
 	@Steps
 	OnlineStylePartyManagerSteps fBpermissionSteps;
+	@Steps
+	public FacebookRegistrationSteps facebookRegistrationSteps;
 	
 	private String username, password,fbEmail,fbPass, appID,inviteeName  ;
 	private String message;
@@ -93,18 +95,15 @@ public class US5001aInviteFbFriendAppNotInstalledFbLoggedInTest extends BaseTest
 			}
 		}
 
-		message=FieldGenerators.generateRandomString(14, Mode.ALPHANUMERIC);
-		
+		message=FieldGenerators.generateRandomString(10, Mode.ALPHANUMERIC)+"5004a";
+		System.out.println("message: "+message);
 		// Clean DB
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 	
 	
 	@Test
-	public void us5001aInviteFbFriendAppNotInstalledFbLoggedInTest() throws Exception {
-		facebookLoginSteps.loginToFacebook(fbEmail, fbPass);
-		facebookLoginSteps.accessSettingsOnFacebookDesktopApp();
-		facebookLoginSteps.removeTheFbApp(appID);
+	public void us5004aInviteFbFriendAppNotInstalledFbLoggedOutTest() throws Exception {
 		headerSteps.openNewTab();
 		headerSteps.switchToNewestOpenedTab();
 		frontEndSteps.performLogin(username, password);
@@ -114,19 +113,18 @@ public class US5001aInviteFbFriendAppNotInstalledFbLoggedInTest extends BaseTest
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.MEINE_EINLADUNGEN);
 		facebookInvitationSteps.clickOnInviteFacebookButton();
-		fBpermissionSteps.acceptAllThePermissionsFBInvitation();
-		
-		//facebookInvitationSteps.switchToFBiFrame();
+		facebookRegistrationSteps.loginToFacebookApp(fbEmail, fbPass);
+		fBpermissionSteps.acceptAllThePermissionsFBInvitationAndSwitchPage();
+	//	facebookRegistrationSteps.loginToFacebookAndSwitchPage(fbEmail, fbPass);
 		facebookInvitationSteps.selectFriendName(inviteeName);
 		facebookInvitationSteps.insertMessage(message);
 		facebookInvitationSteps.sendFbInvitation();
-	//	facebookInvitationSteps.verifyInvitationSending("emai","status");
 		customVerifications.printErrors();
 	}
 	
 	@After
 	public void saveData() {
-		MongoWriter.saveStringValue(message, getClass().getSimpleName());
+		MongoWriter.saveStringValue(message,getClass().getSimpleName());
 		
 	}
 }

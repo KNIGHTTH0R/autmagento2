@@ -65,7 +65,9 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US8006Suite.class,
 	US8007Suite.class,
 	US8008Suite.class,
-	US80011CustomerOrderProductWithSpecialPriceTest.class,
+	
+	//update shipping on this test
+	///US80011CustomerOrderProductWithSpecialPriceTest.class,
 	
 	//Place customer order 
 	US11001Suite.class,
@@ -123,17 +125,15 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 //	US21001Suite.class,
 //	US22001Suite.class,
 	
-	US10007SuitePartTwo.class,
+	//check it tomorow 14.07
+//	US10007SuitePartTwo.class,
 
 //	US23001PartTwoSuite.class,
-	
 //	US26001Suite.class,
 //	US23001PartThreeSuite.class,
 	
-	
 //	please  check it 
 //	NotificationsSuite.class,
-	
 //	VerifyOrderEmailsSuite.class
 	
 })

@@ -7,13 +7,21 @@ import net.thucydides.core.annotations.Step;
 public class FacebookInvitationSteps extends AbstractSteps {
 
 	private static final long serialVersionUID = -2649339632021723245L;
-
+	public static String currentWindowHandle;
 	@Step
 	public void clickOnInviteFacebookButton() {
+		//currentWindowHandle = getDriver().getWindowHandle();
 		facebookInvitationPage().clickOnInviteFacebookButton();
 		findFrame("Log in With Facebook");
 	}
 
+	@Step
+	public void clickOnInviteFacebookButtonUserLoggedIn() {
+		//currentWindowHandle = getDriver().getWindowHandle();
+		facebookInvitationPage().clickOnInviteFacebookButton();
+		//findFrame("Log in With Facebook");
+	}
+	
 	@Step
 	public void switchToFBiFrame() {
 		// TODO Auto-generated method stub
@@ -23,8 +31,8 @@ public class FacebookInvitationSteps extends AbstractSteps {
 
 	@Step
 	public void selectFriendName(String name) {
-		waitABit(2000);
-		findFrame("Meine Einladungen");
+	//	waitABit(6000);
+//	/	findFrame("Meine Einladungen");
 		facebookInvitationPage().selectFriendName(name);
 		
 	}
@@ -41,20 +49,33 @@ public class FacebookInvitationSteps extends AbstractSteps {
 		
 	}
 
+	@Step
 	public void verifyInvitationSending(String email, String status) {
 		facebookInvitationPage().verifyInvitationSending(email,status);
 		
 	}
 
+	@Step
 	public void selectLatestFBMessage() {
 		waitABit(3000);
 		facebookMessagePage().selectLatestFBMessage();
 	}
 
+	@Step
 	public void verifyInvitationIsReceived(String message) {
 		waitABit(3000);
 		facebookMessagePage().verifyInvitationIsReceived(message);;		
 	}
 	
+	@Step
+	public void clickOnInvitationLink() {
+		facebookMessagePage().clickOnInvitationLink();;		
+	}
+	
+	@Step
+	public void clickOnInvitationLinkAppNotInstalled() {
+		facebookMessagePage().clickOnInvitationLink();
+		findFrame("Log in With Facebook");
+	}
 	
 }

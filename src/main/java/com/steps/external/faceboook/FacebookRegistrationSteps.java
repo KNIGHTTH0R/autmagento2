@@ -31,7 +31,34 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 
 	}
 	
+	@StepGroup
+	public void fillCreateInvitationCustomerForm(CustomerFormModel customerData, AddressModel addressData,String fbEmail,String stylistEmail) {
+
+		inputFirstName(customerData.getFirstName());
+		inputLastName(customerData.getLastName());
+		verifyFBUserEmailPrefield(fbEmail);
+		inputPassword(customerData.getPassword());
+		inputConfirmation(customerData.getPassword());
+		checkParties();
+		fillContactDetails(addressData);
+		verifyStylistEmail(stylistEmail);
+		checkIAgree();
+		clickCompleteButton();
+	}
+
 	
+	
+	
+	private void verifyStylistEmail(String stylistEmail) {
+		
+		createCustomerPage().verifyStylistEmail(stylistEmail);
+	}
+
+	private void verifyFBUserEmailPrefield(String fbEmail) {
+		// TODO Auto-generated method stub
+		createCustomerPage().verifyFBUserEmailPrefield(fbEmail);
+	}
+
 	@StepGroup
 	public void fillCreateCustomerByFacebookForm(CustomerFormModel customerData, AddressModel addressData,
 			String password) {
@@ -77,7 +104,20 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 		clickCompleteButton();
 	}
 
-	
+	@Step
+	public void inputFirstName(String firstName) {
+		createCustomerPage().inputFirstName(firstName);
+	}
+
+	@Step
+	public void inputLastName(String lastName) {
+		createCustomerPage().inputLastName(lastName);
+	}
+
+	@Step
+	public void inputEmail(String emailAddress) {
+		createCustomerPage().inputEmail(emailAddress);
+	}
 	
 	
 	@Step
@@ -111,6 +151,7 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 		inputHomeTown(addressData.getHomeTown());
 		waitABit(1000);
 		selectCountryName(addressData.getCountryName());
+		waitABit(1000);
 
 	}
 
@@ -323,6 +364,16 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 	}
 	
 	@Step
+	public void loginToFacebookAndSwitchPage(String user, String pass) {
+
+		facebookLoginPage().inputUser(user);
+		facebookLoginPage().inputPass(pass);
+		facebookLoginPage().clickLogin();
+		waitABit(5000);
+		findFrame("Meine Einladungen");
+	}
+	
+	@Step
 	public void loginToFacebookPippa(String user, String pass) {
 
 		facebookLoginPage().inputUser(user);
@@ -384,7 +435,7 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 	@Step
 	public void removeTheFbApp(String appId) throws Exception {
 		waitABit(3000);
-		facebookLoginPage().removePopUpFb();
+		//facebookLoginPage().removePopUpFb();
 		facebookLoginPage().removeTheFbApp(appId);
 
 	}

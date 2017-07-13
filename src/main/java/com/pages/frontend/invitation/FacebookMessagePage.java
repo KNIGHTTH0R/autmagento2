@@ -12,12 +12,12 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class FacebookMessagePage extends AbstractPage {
 
-	// mandatory fields
-	@FindBy(id = "distribution_zip")
-	private WebElement submitInvitation;
+	
 
-	@FindBy(id = "distribution_zip")
-	private List<WebElement> messagesList1;
+	@FindBy(css = ".col-main a")
+	private WebElement invitationLink;
+	
+	
 
 	public void selectLatestFBMessage() {
 		List<WebElement> messages = getDriver().findElements(By.cssSelector("ul[aria-label*='Conversation List'] li"));
@@ -49,4 +49,10 @@ public class FacebookMessagePage extends AbstractPage {
 		waitABit(5000);
 	}
 
+	public void clickOnInvitationLink() {
+		element(invitationLink).waitUntilVisible();
+		invitationLink.click();
+	}
+	
+	
 }

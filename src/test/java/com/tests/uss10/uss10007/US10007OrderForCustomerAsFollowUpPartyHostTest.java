@@ -136,8 +136,12 @@ public class US10007OrderForCustomerAsFollowUpPartyHostTest extends BaseTest {
 		do {
 			headerSteps.goToPartieList();
 			partiesListSteps.goToFirstParty();
-			partyDetailsSteps.orderForCustomer();
-			partyDetailsSteps.orderForCustomerFromParty(customerName);
+			if(partyDetailsSteps.orderForCustomer()){
+				partyDetailsSteps.orderForCustomerFromParty(customerName);
+			}else{
+				break;
+			}
+			
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
 		customerRegistrationSteps.wipeHostCart();
 		RegularBasicProductModel productData;

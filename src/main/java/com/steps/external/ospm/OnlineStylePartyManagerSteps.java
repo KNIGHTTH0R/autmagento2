@@ -116,6 +116,20 @@ public class OnlineStylePartyManagerSteps extends AbstractSteps {
 		waitABit(1000);
 		onlineStylePartyManagerPage().closePopUp();
 		onlineStylePartyManagerPage().clickContinueAsUser();
+	}
 	
+	public void acceptAllThePermissionsFBInvitationAppNotInstalled() {
+		waitABit(1000);
+		onlineStylePartyManagerPage().closePopUp();
+		onlineStylePartyManagerPage().clickContinueAsUser();
+		waitABit(4000);
+		findFrame("Kundenkonto");
+	}
+
+	public void acceptAllThePermissionsFBInvitationAndSwitchPage() {
+		waitABit(1000);
+		onlineStylePartyManagerPage().closePopUp();
+		onlineStylePartyManagerPage().clickContinueAsUser();
+		findFrame("Meine Einladungen");
 	}
 }

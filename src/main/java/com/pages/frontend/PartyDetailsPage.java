@@ -155,11 +155,27 @@ public class PartyDetailsPage extends AbstractPage {
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
-	public void orderForCustomer() {
-		element(orderForCustomer).waitUntilVisible();
-		orderForCustomer.click();
-		withTimeoutOf(40, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
-				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+	public boolean orderForCustomer() {
+//		element(orderForCustomer).waitUntilVisible();
+		boolean isDisplayed=false;
+//		if(orderForCustomer.isDisplayed()){
+//			orderForCustomer.click();
+//			isDisplayed=true;
+//		}
+//		orderForCustomer.click();
+//		withTimeoutOf(40, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+//				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		waitABit(5000);
+		List<WebElement> placeCustomerOrderBtn= getDriver().findElements(By.cssSelector("form[action*='placeCustomerOrder'] button"));
+		if(placeCustomerOrderBtn.size()!=0){
+			isDisplayed=true;
+			orderForCustomer.click();
+			withTimeoutOf(40, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
+					By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		}else{
+			Assert.assertTrue("The button is not displayed", isDisplayed);
+		}
+		return isDisplayed;
 	}
 
 	public void hostessInviteConfirmation() {
