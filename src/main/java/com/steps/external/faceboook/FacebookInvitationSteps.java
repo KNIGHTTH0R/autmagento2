@@ -33,6 +33,7 @@ public class FacebookInvitationSteps extends AbstractSteps {
 	public void selectFriendName(String name) {
 	//	waitABit(6000);
 //	/	findFrame("Meine Einladungen");
+	//	findFrame("Mis invitaciones");
 		facebookInvitationPage().selectFriendName(name);
 		
 	}
@@ -46,6 +47,11 @@ public class FacebookInvitationSteps extends AbstractSteps {
 	@Step
 	public void sendFbInvitation() {
 		facebookInvitationPage().sendFbInvitation();
+		
+	}
+	@Step
+	public void sendSharePost() {
+		facebookInvitationPage().sendSharePost();
 		
 	}
 
@@ -76,6 +82,22 @@ public class FacebookInvitationSteps extends AbstractSteps {
 	public void clickOnInvitationLinkAppNotInstalled() {
 		facebookMessagePage().clickOnInvitationLink();
 		findFrame("Log in With Facebook");
+	}
+
+	@Step
+	public void insertShareMessage(String message) {
+		// TODO Auto-generated method stub
+		facebookInvitationPage().insertShareMessage(message);
+	}
+
+	public void verifySharedMessage(String message) {
+		// TODO Auto-generated method stub
+		facebookMessagePage().verifySharedMessage(message);
+	}
+
+	public void sendSharePostAndSwitchPage(String pageTitle) {
+		facebookInvitationPage().sendSharePost();	
+		findFrame(pageTitle);
 	}
 	
 }

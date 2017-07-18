@@ -155,6 +155,7 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
+	
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
@@ -165,7 +166,10 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-
+		
+	
+		System.out.println(discount +" ---------"+shippingValue);
+		
 		hostCartSteps.grabProductsDataWhenThereIsNoBonus();	
 		hostCartSteps.grabTotals();
 		HostCartCalculator.calculateCartAndShippingTotals(discount, shippingValue);

@@ -22,7 +22,7 @@ import com.tests.uss10.uss10008.US10008AddManuallyBonusOnPartyTest;
 	// cancel an tp order
 	//verify host reword
 	
-	US9002ClosePartyTest.class,
+	//US9002ClosePartyTest.class,
 	US10008AddManuallyBonusOnPartyTest.class,
 })
 @RunWith(Suite.class)

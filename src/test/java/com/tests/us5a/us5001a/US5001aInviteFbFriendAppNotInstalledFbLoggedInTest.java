@@ -111,10 +111,11 @@ public class US5001aInviteFbFriendAppNotInstalledFbLoggedInTest extends BaseTest
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}	
+		headerSteps.switchToDeStoreView();
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.MEINE_EINLADUNGEN);
 		facebookInvitationSteps.clickOnInviteFacebookButton();
-		fBpermissionSteps.acceptAllThePermissionsFBInvitation();
+		fBpermissionSteps.acceptAllThePermissionsFBInvitationAndSwitchPage("Meine Einladungen");
 		
 		//facebookInvitationSteps.switchToFBiFrame();
 		facebookInvitationSteps.selectFriendName(inviteeName);

@@ -265,11 +265,17 @@ public class HostCartPage extends AbstractPage {
 	}
 
 	public void acceptInfoPopupForNotConsumedBonus() {
-		element(acceptNotConsumedBonusButton).waitUntilVisible();
-		acceptNotConsumedBonusButton.click();
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
-		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+//		element(acceptNotConsumedBonusButton).waitUntilVisible();
+//		acceptNotConsumedBonusButton.click();
+		
+		List<WebElement> acceptNotConsumedBonusButton=getDriver().findElements(By.cssSelector("button.button.blue-button[value='YES']"));
+		if(acceptNotConsumedBonusButton.size()!=0){
+			acceptNotConsumedBonusButton.get(0).click();
+			WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+			wait.until(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 
+		}
+	
 	}
 	
 	public void clickClearCart() {

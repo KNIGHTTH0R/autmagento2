@@ -109,10 +109,11 @@ public class US5002aInviteFbFriendAppInstalledFbLoggedOutTest extends BaseTest{
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}	
+		headerSteps.switchToDeStoreView();
 		headerSteps.goToProfile();
 		profileNavSteps.selectMenu(ContextConstants.MEINE_EINLADUNGEN);
 		facebookInvitationSteps.clickOnInviteFacebookButton();
-		facebookRegistrationSteps.loginToFacebookAndSwitchPage(fbEmail, fbPass);
+		facebookRegistrationSteps.loginToFacebookAndSwitchPage(fbEmail, fbPass,"Meine Einladungen");
 		facebookInvitationSteps.selectFriendName(inviteeName);
 		facebookInvitationSteps.insertMessage(message);
 		facebookInvitationSteps.sendFbInvitation();

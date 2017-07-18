@@ -131,7 +131,7 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 		
 		genProduct1 = createdProductsList.get(3);
 		genProduct2 = createdProductsList.get(6);
-		genProduct3 = createdProductsList.get(3);
+		genProduct3 = createdProductsList.get(5);
 		
 		Properties prop = new Properties();
 		InputStream input = null;

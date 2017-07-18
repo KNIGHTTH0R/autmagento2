@@ -125,11 +125,20 @@ public class OnlineStylePartyManagerSteps extends AbstractSteps {
 		waitABit(4000);
 		findFrame("Kundenkonto");
 	}
-
-	public void acceptAllThePermissionsFBInvitationAndSwitchPage() {
+	
+	@Step
+	public void acceptAllThePermissionsFBInvitationAndSwitchPage(String pageTitle) {
 		waitABit(1000);
 		onlineStylePartyManagerPage().closePopUp();
 		onlineStylePartyManagerPage().clickContinueAsUser();
-		findFrame("Meine Einladungen");
+		//findFrame("Meine Einladungen");
+		findFrame(pageTitle);
+	}
+	
+	public void acceptAllThePermissionsFBInvitationAndSwitchPageES() {
+		waitABit(2000);
+		onlineStylePartyManagerPage().closePopUp();
+		onlineStylePartyManagerPage().clickContinueAsUser();
+		findFrame("Mis invitaciones");
 	}
 }

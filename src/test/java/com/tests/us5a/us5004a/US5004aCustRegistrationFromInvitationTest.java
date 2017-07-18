@@ -21,6 +21,7 @@ import com.steps.frontend.profile.ProfileNavSteps;
 import com.steps.frontend.profile.ProfileSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
+import com.tools.constants.ContextConstants;
 import com.tools.constants.FilePaths;
 import com.tools.constants.UrlConstants;
 import com.tools.data.frontend.AddressModel;
@@ -66,7 +67,8 @@ public class US5004aCustRegistrationFromInvitationTest extends BaseTest {
 
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
-
+		addressModel.setPostCode(ContextConstants.NOT_PREFEERD_WEBSITE_POST_CODE);
+		addressModel.setCountryName("España");
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -105,7 +107,8 @@ public class US5004aCustRegistrationFromInvitationTest extends BaseTest {
 		fBpermissionSteps.acceptAllThePermissionsFBInvitationAppNotInstalled();
 		facebookRegistrationSteps.fillCreateInvitationCustomerForm(dataModel, addressModel, fbInviteeEmail,
 				stylistEmail);
-		headerSteps.checkSucesfullLoginDE();
+		footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		headerSteps.checkSucesfullLoginES();
 	}
 
 }

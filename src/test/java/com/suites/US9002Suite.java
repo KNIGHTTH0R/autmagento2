@@ -14,7 +14,7 @@ import com.tests.uss10.uss10007.US10007AddManuallyBonusOnPartyTest;
 @SuiteClasses({
 	
 	US9002ActivateBuyGet1Test.class,
-//	US9002ClosePartyTest.class,
+	US9002ClosePartyTest.class,
 	
 	US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test.class,
 //	US9002CheckOrderOnStylecoachProfileTest.class,	

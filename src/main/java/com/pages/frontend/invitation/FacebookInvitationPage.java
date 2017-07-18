@@ -38,6 +38,12 @@ public class FacebookInvitationPage extends AbstractPage {
 	
 	@FindBy(id = "publish")
 	private WebElement submitInvitation;
+	@FindBy(css = "button[name*='CONFIRM']")
+	private WebElement shareButton;
+	
+	@FindBy(id = ".mentionsTextarea.textInput")
+	private WebElement shareMessage;
+	
 	
 	
 	public void verifyFbUserEmail(String fbEmail) {
@@ -103,6 +109,26 @@ public class FacebookInvitationPage extends AbstractPage {
 		waitABit(2000);
 	
 	}
+	
+	public void insertShareMessage(String message) {
+//		List<WebElement> iframe=getDriver().findElements(By.cssSelector(".FB_UI_Dialog"));
+//		getDriver().switchTo().frame(iframe.get(0));
+		
+//		/element(shareMessage).waitUntilVisible();
+		
+		
+		 getDriver().findElement(By.cssSelector(".mentionsTextarea.textInput")).clear();
+		 getDriver().findElement(By.cssSelector(".mentionsTextarea.textInput")).sendKeys(message);
+	//	shareMessage.sendKeys(message);
+//		Actions actions = new Actions(getDriver());
+//		actions.moveToElement(shareMessage);
+//		actions.click();
+//		actions.sendKeys(message);
+//		actions.build().perform();
+	
+		waitABit(2000);
+	}
+	
 
 
 	public void sendFbInvitation() {
@@ -133,6 +159,15 @@ public class FacebookInvitationPage extends AbstractPage {
 		
 		Assert.assertTrue("The email was not found in <Sent invitation> list", found);
 	}
+
+
+	public void sendSharePost() {
+		element(shareButton).waitUntilVisible();
+		shareButton.click();
+		waitABit(4000);
+	}
+
+
 	
 	
 	

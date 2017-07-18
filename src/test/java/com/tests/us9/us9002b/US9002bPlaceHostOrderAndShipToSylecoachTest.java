@@ -119,7 +119,7 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 		
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(0);
+		genProduct1 = createdProductsList.get(19);
 		genProduct2 = createdProductsList.get(6);
 		genProduct3 = createdProductsList.get(1);
 

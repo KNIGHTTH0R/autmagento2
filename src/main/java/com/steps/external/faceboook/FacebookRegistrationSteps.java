@@ -364,13 +364,14 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 	}
 	
 	@Step
-	public void loginToFacebookAndSwitchPage(String user, String pass) {
+	public void loginToFacebookAndSwitchPage(String user, String pass,String pageTitle) {
 
 		facebookLoginPage().inputUser(user);
 		facebookLoginPage().inputPass(pass);
 		facebookLoginPage().clickLogin();
 		waitABit(5000);
-		findFrame("Meine Einladungen");
+		//findFrame("Meine Einladungen");
+		findFrame(pageTitle);
 	}
 	
 	@Step
@@ -410,6 +411,10 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 		onlineStylePartyManagerPage().closePopUp();
 	}
 
+	@Step
+	public void accessFacebookPage(String fbUserName){
+		getDriver().get("http://www.facebook.com/"+fbUserName);
+	}
 	@Step
 	public void accessSettingsOnFacebookDesktopApp() {
 

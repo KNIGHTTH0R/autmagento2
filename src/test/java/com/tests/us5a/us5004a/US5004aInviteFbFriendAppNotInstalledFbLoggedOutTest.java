@@ -104,17 +104,18 @@ public class US5004aInviteFbFriendAppNotInstalledFbLoggedOutTest extends BaseTes
 	
 	@Test
 	public void us5004aInviteFbFriendAppNotInstalledFbLoggedOutTest() throws Exception {
-		headerSteps.openNewTab();
-		headerSteps.switchToNewestOpenedTab();
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
-		}	
+		}
+		
+		
+		headerSteps.switchToEsStoreView();
 		headerSteps.goToProfile();
-		profileNavSteps.selectMenu(ContextConstants.MEINE_EINLADUNGEN);
+		profileNavSteps.selectMenu("MIS INVITACIONES");
 		facebookInvitationSteps.clickOnInviteFacebookButton();
 		facebookRegistrationSteps.loginToFacebookApp(fbEmail, fbPass);
-		fBpermissionSteps.acceptAllThePermissionsFBInvitationAndSwitchPage();
+		fBpermissionSteps.acceptAllThePermissionsFBInvitationAndSwitchPageES();
 	//	facebookRegistrationSteps.loginToFacebookAndSwitchPage(fbEmail, fbPass);
 		facebookInvitationSteps.selectFriendName(inviteeName);
 		facebookInvitationSteps.insertMessage(message);

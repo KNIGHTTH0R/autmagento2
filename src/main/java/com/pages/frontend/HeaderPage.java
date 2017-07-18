@@ -65,6 +65,17 @@ public class HeaderPage extends AbstractPage {
 	
 	@FindBy(css = "div.categories>ul.clearfix li:first-child a")
 	private WebElement shopButton;
+	
+	
+	@FindBy(css = "a[id*='facebookShare']")
+	private WebElement shareKoboLink;
+	
+	@FindBy(css = ".link-list.iconed li:nth-child(1) a")
+	private WebElement shareOnlineBoutiqueLink;
+	
+	@FindBy(css = ".link-list.iconed li:nth-child(2) a")
+	private WebElement inviteFriendsLink;
+	
 
 	public void selectLanguage(String language) {
 		element(websiteContainer).waitUntilVisible();
@@ -168,14 +179,14 @@ public class HeaderPage extends AbstractPage {
 		Assert.assertTrue("Failure: The login fails ",succesLoginContainer.getText().contains("HI,"));
 	}
 	public void checkSucesfullLoginES() {
-		
-		List<WebElement> element = getDriver().findElements(By.cssSelector(".quick-access .message"));
-		if(element.size()!=0){
-			System.out.println("printeaza ceva: "+ element.get(0).getText());
-			//System.out.println("succesLoginContainer.getText(): " +succesLoginContainerES.getText());
-			CustomVerification.verifyTrue("Failure: The login fails ",element.get(0).getText().contains("¡Bienvenido,"));
-		}
-		
+		Assert.assertTrue("Failure: The login fails ",succesLoginContainer.getText().contains("¡BIENVENIDO,"));
+//		List<WebElement> element = getDriver().findElements(By.cssSelector(".quick-access .message"));
+//		if(element.size()!=0){
+//			System.out.println("printeaza ceva: "+ element.get(0).getText());
+//			//System.out.println("succesLoginContainer.getText(): " +succesLoginContainerES.getText());
+//			CustomVerification.verifyTrue("Failure: The login fails ",element.get(0).getText().contains("¡Bienvenido,"));
+//		}
+//		
 //		System.out.println("succesLoginContainer.getText(): " +succesLoginContainerES.getText());
 //		Assert.assertTrue("Failure: The login fails ",succesLoginContainerES.getText().contains("¡Bienvenido,"));
 	}
@@ -191,6 +202,32 @@ public class HeaderPage extends AbstractPage {
 	
 	public void verifyStoreView(String storeView) {
 		Assert.assertTrue("Failure: The Website is not correct ",getDriver().getCurrentUrl().contains(storeView));
+	}
+
+	public void clickOnKoboShare() {
+		// TODO Auto-generated method stub
+		element(shareKoboLink).waitUntilVisible();
+		shareKoboLink.click();
+		waitABit(5000);
+	}
+
+	public void clickOnShareOnlineBootique() {
+		element(shareOnlineBoutiqueLink).waitUntilVisible();
+		shareOnlineBoutiqueLink.click();
+		waitABit(5000);		
+	}
+
+	public void verifyStylistContext(String context) {
+		System.out.println("url: "+getDriver().getCurrentUrl());
+		Assert.assertTrue("Failure: The Website is not correct ",getDriver().getCurrentUrl().contains(context));
+		
+	}
+
+	public void clickInviteFacebookFriends() {
+		// TODO Auto-generated method stub
+		element(inviteFriendsLink).waitUntilVisible();
+		inviteFriendsLink.click();
+		waitABit(5000);		
 	}
 
 	

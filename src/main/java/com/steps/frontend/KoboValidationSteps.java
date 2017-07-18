@@ -15,6 +15,11 @@ public class KoboValidationSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void verifyKoboCodeInModal(String code) {
+		koboValidationPage().verifyKoboCodeInModal(code);
+	}
+	
+	@Step
 	public void submitFormBooster() {
 		koboValidationPage().submitFormBooster();
 	}

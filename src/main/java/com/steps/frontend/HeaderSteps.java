@@ -234,6 +234,38 @@ public class HeaderSteps extends AbstractSteps {
 		headerPage().verifyStoreView(storeView);
 		
 	}
+	
+	@StepGroup
+	public void verifyWebsiteAndStylistContext(String website,String context) {
+		headerPage().verifyWebsite(website);
+		headerPage().verifyStylistContext(context);
+		
+	}
 
+	public void switchToEsStoreView() {
+		getDriver().get(MongoReader.getBaseURL()+"/?___store=de_lang_es");
+		
+	}
+	public void switchToDeStoreView() {
+		getDriver().get(MongoReader.getBaseURL()+"/?___store=de_lang_de");
+		
+	}
+
+	public void clickOnKoboShare() {
+		headerPage().clickOnKoboShare();
+		findFrame("Log in With Facebook");
+		
+	}
+
+	public void clickOnShareOnlineBootique() {
+		headerPage().clickOnShareOnlineBootique();
+		findFrame("Log in With Facebook");
+	}
+
+	public void clickInviteFacebookFriends() {
+		headerPage().clickInviteFacebookFriends();
+		findFrame("Log in With Facebook");
+		
+	}
 	
 }
