@@ -80,7 +80,7 @@ public class ContactListPage extends AbstractPage {
 	public WebElement findContact(String contactEmail) {
 		evaluateJavascript("jQuery.noConflict();");
 		WebElement foundContact = null;
-		element(listContainer).waitUntilVisible();
+		//element(listContainer).waitUntilVisible();
 		List<WebElement> listElements = listContainer.findElements(By.tagName("tr"));
 		for (WebElement elementNow : listElements) {
 			if (elementNow.getText().contains(contactEmail)) {
@@ -107,8 +107,14 @@ public class ContactListPage extends AbstractPage {
 	}
 
 	
-	public void selectContact(String contactEmail) {
-		findContact(contactEmail).findElement(By.cssSelector("td input")).click();
+	public boolean selectContact(String contactEmail) {
+		boolean found=false;
+		WebElement contact=findContact(contactEmail).findElement(By.cssSelector("td input"));
+		if(contact!=null){
+			found=true;
+			contact.click();
+		}
+		return found;
 	
 	}
 	

@@ -105,12 +105,12 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(7);
-		voucherValue = genProduct2.getPrice();
-		genProduct3 = createdProductsList.get(6);
-//		
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(1);
+//		genProduct2 = createdProductsList.get(7);
+//		voucherValue = genProduct2.getPrice();
+//		genProduct3 = createdProductsList.get(6);
+////		
 //		
 		
 		Properties prop = new Properties();
@@ -151,18 +151,18 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		System.out.println(username);
 		System.out.println(koboCode2);
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createPomProductModel();
-//		genProduct2.setPrice("49.90");
-//		voucherValue = genProduct2.getPrice();
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+
+		genProduct2 = MagentoProductCalls.createPomProductModel();
+		genProduct2.setPrice("49.90");
+		voucherValue = genProduct2.getPrice();
+		MagentoProductCalls.createApiProduct(genProduct2);
+
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("10.00");
+		MagentoProductCalls.createApiProduct(genProduct3);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);
@@ -176,6 +176,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
+		headerSteps.waitABit(20000);
 //		voucherCode = dashboardSteps.getStyleCoachFullNameFromProfile().contentEquals(initialStylistName) ? koboCode1
 //				: koboCode2;
 		voucherCode =koboCode1;

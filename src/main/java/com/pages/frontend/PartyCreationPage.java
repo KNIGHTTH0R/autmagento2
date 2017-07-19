@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
@@ -49,6 +50,9 @@ public class PartyCreationPage extends AbstractPage {
 
 	@FindBy(css = ".button[type*='submit']")
 	private WebElement partySubmitButton;
+	
+	@FindBy(id = "is_online")
+	private WebElement onlineStylePartyCheckBox;
 	
 	@FindBy(id = "city")
 	private WebElement cityInput;
@@ -125,5 +129,38 @@ public class PartyCreationPage extends AbstractPage {
 
 	}
 
+	public void checkOnlineStyleParty() {
+		element(onlineStylePartyCheckBox).waitUntilVisible();
+		onlineStylePartyCheckBox.click();
+		waitABit(TimeConstants.WAIT_TIME_SMALL);
+
+		
+	}
+
+	public String grabHostPageURL() {
+		String hostUrlPage="";
+		List<WebElement> hostLink=getDriver().findElements(By.cssSelector(".beta-block tbody tr:nth-child(1) td:nth-child(2)"));
+		for (WebElement link : hostLink) {
+			if(link.getText().contains("p/h/"));
+			hostUrlPage=link.getText();
+		}
+		CustomVerification.verifyTrue("Failure: The host link was not found", hostUrlPage!="");
+		return hostUrlPage;
+	}
+
+	public String grabHostPassword() {
+		List<WebElement> hostPass=getDriver().findElements(By.cssSelector(".beta-block tbody tr:nth-child(2) td:nth-child(2)"));
+		return hostPass.get(1).getText();
+	}
+
+	public String grabPartyId() {
+		String url=getDriver().getCurrentUrl();
+		return extractPartyID(url);
+	}
+	private String extractPartyID(String urlModel) {
+		return urlModel.substring(urlModel.indexOf("id/")+3).replaceAll("\\D+","");
+		
+		
+	}
 }
 

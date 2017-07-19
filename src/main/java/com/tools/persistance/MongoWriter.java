@@ -28,6 +28,7 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
+import com.tools.data.frontend.OnlineStylePartyModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -549,6 +550,21 @@ public class MongoWriter extends MongoConnector {
 
 		document.put(MongoTableKeys.NAME, urlModel.getName());
 		document.put(MongoTableKeys.URL_PATH, urlModel.getUrl());
+
+		table.insert(document);
+	}
+	
+	public static void saveOnlineStylePartyModel(OnlineStylePartyModel ospModel, String testName) {
+
+		workingDB = mongoClient.getDB(testName);
+		DBCollection table = workingDB.getCollection(MongoTableKeys.URL_MODEL);
+
+		BasicDBObject document = new BasicDBObject();
+
+		document.put(MongoTableKeys.HOST_USERNAME, ospModel.getHostUserName());
+		document.put(MongoTableKeys.HOST_PASS, ospModel.getHostPassword());
+		document.put(MongoTableKeys.HOST_PAGE_URL, ospModel.getHostPageUrl());
+		document.put(MongoTableKeys.PARTY_ID, ospModel.getPartyId());
 
 		table.insert(document);
 	}

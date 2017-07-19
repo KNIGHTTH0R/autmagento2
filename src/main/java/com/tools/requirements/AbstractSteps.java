@@ -50,7 +50,9 @@ import com.pages.external.navision.NavisionHomePage;
 import com.pages.external.navision.NavisionSearchPage;
 import com.pages.external.navision.NavisionSyncDashboardPage;
 import com.pages.external.ospm.FacebookLoginPage;
+import com.pages.external.ospm.OnlineStylePartyGuestPage;
 import com.pages.external.ospm.OnlineStylePartyManagerPage;
+import com.pages.external.ospm.OnlineStylePartyStylistPage;
 import com.pages.external.unbounce.UnbounceDykscPage;
 import com.pages.external.unbounce.UnbouncePage;
 import com.pages.external.unbounce.UnbounceRegSuccesPage;
@@ -807,6 +809,14 @@ public class AbstractSteps extends ScenarioSteps {
 	
 	public OnlineStylePartyManagerPage onlineStylePartyManagerPage() {
 		return getPages().currentPageAt(OnlineStylePartyManagerPage.class);
+	}
+	
+	public OnlineStylePartyGuestPage onlineStylePartyGuestPage() {
+		return getPages().currentPageAt(OnlineStylePartyGuestPage.class);
+	}
+	
+	public OnlineStylePartyStylistPage onlineStylePartyStylistPage() {
+		return getPages().currentPageAt(OnlineStylePartyStylistPage.class);
 	}
 	
 	

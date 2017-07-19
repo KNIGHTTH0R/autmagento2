@@ -2,7 +2,9 @@ package com.steps.frontend;
 
 import net.thucydides.core.annotations.Step;
 
+import com.sun.jersey.api.client.filter.OnStartConnectionListener;
 import com.tools.constants.ContextConstants;
+import com.tools.data.frontend.OnlineStylePartyModel;
 import com.tools.requirements.AbstractSteps;
 
 public class PartyCreationSteps extends AbstractSteps {
@@ -88,6 +90,35 @@ public class PartyCreationSteps extends AbstractSteps {
 		waitABit(2000);
 		return partyCreationPage().submitParty();
 
+	}
+
+	public void checkOnlineStyleParty() {
+		partyCreationPage().checkOnlineStyleParty();
+		
+	}
+	
+	public OnlineStylePartyModel grabOspModel(){
+		OnlineStylePartyModel ospModel=new OnlineStylePartyModel();
+		ospModel.setHostPageUrl(grabHostPageURL());
+		ospModel.setHostPassword(grabHostPassword());
+		ospModel.setPartyId(grabPartyId());
+		
+		return ospModel;
+	}
+
+	public String grabHostPageURL() {
+		// TODO Auto-generated method stub
+		return partyCreationPage().grabHostPageURL();
+	}
+
+	public String grabHostPassword() {
+		// TODO Auto-generated method stub
+		return partyCreationPage().grabHostPassword();
+	}
+
+	public String grabPartyId() {
+		// TODO Auto-generated method stub
+		return partyCreationPage().grabPartyId();
 	}
 
 }

@@ -35,7 +35,7 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	private WebElement clickOnFirstGroup;
 
 	@FindBy(css = "button[name*='CONFIRM']")
-	private WebElement continueAsUserButton;
+	private List<WebElement> continueAsUserButton;
 
 	@FindBy(css = ".thumbnail-wrapper .row:nth-child(3) a")
 	private WebElement clickOnFirstLiveStreamButton;
@@ -103,8 +103,11 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 
 	public void clickContinueAsUser() {
 		waitABit(4000);
-		element(continueAsUserButton).waitUntilVisible();
-		continueAsUserButton.click();
+		if(continueAsUserButton.size()!=0){
+			element(continueAsUserButton.get(0)).waitUntilVisible();
+			continueAsUserButton.get(0).click();
+		}
+		
 
 	}
 

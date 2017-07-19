@@ -23,7 +23,7 @@ import com.tests.uss10.uss10008.US10008AddManuallyBonusOnPartyTest;
 	//verify host reword
 	
 	//US9002ClosePartyTest.class,
-	US10008AddManuallyBonusOnPartyTest.class,
+//	US10008AddManuallyBonusOnPartyTest.class,
 })
 @RunWith(Suite.class)
 public class US10008Suite {

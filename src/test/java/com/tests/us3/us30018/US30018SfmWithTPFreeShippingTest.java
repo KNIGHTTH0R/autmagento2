@@ -142,7 +142,7 @@ public class US30018SfmWithTPFreeShippingTest extends BaseTest {
 	}
 
 	@Test
-	public void us30014SfmWithTPNoVatNoSmbBillingShippingAtTest() throws ParseException {
+	public void us30018SfmWithTPFreeShippingTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

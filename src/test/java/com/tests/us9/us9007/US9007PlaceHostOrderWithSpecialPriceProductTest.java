@@ -105,15 +105,15 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		genProduct1.setSpecialPrice("55.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//		genProduct1.setPrice(genProduct1.getSpecialPrice());
-		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(17);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		genProduct1.setSpecialPrice("55.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct1.setPrice(genProduct1.getSpecialPrice());
+		
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(17);
+//		genProduct1.setPrice(genProduct1.getSpecialPrice());
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -150,15 +150,16 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 	}
 
 	@Test
-	public void us9007PlaceHostOrderWithSpecialPriceProductTest() {
+	public void us9007PlaceHostOrderWithSpecialPriceProductTestEm() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
-	
+		
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
+		headerSteps.waitABit(20000);
 		HostBasicProductModel productData;
 
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct1, "3", "0");
@@ -172,6 +173,9 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		
 		hostCartSteps.grabProductsDataWhenThereIsNoBonus();	
 		hostCartSteps.grabTotals();
+		
+		System.out.println("duscount:"+discount+" shipping: "+shippingValue);
+		
 		HostCartCalculator.calculateCartAndShippingTotals(discount, shippingValue);
 
 		

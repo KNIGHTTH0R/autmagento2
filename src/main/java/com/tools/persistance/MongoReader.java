@@ -30,6 +30,7 @@ import com.tools.data.frontend.CustomerFormModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.data.frontend.HostBasicProductModel;
 import com.tools.data.frontend.LoungeIpPerformanceModel;
+import com.tools.data.frontend.OnlineStylePartyModel;
 import com.tools.data.frontend.PartyBonusCalculationModel;
 import com.tools.data.frontend.ProductBasicModel;
 import com.tools.data.frontend.RegularBasicProductModel;
@@ -319,6 +320,32 @@ public class MongoReader extends MongoConnector {
 		}
 		return itemList;
 	}
+	
+	public static List<OnlineStylePartyModel> grabOnlineStylePartyModel(String testName) {
+		DBObject dbObject = null;
+		List<OnlineStylePartyModel> itemList = new ArrayList<OnlineStylePartyModel>();
+
+		workingDB = mongoClient.getDB(testName);
+		DBCursor cursor = workingDB.getCollection(MongoTableKeys.ONLINE_STYLE_PARTY_MODEL).find();
+
+		try {
+			while (cursor.hasNext()) {
+				OnlineStylePartyModel result = new OnlineStylePartyModel();
+				dbObject = cursor.next();
+
+				result.setHostUserName(MongoUtils.checkField(dbObject, MongoTableKeys.HOST_USERNAME));
+				result.setHostPassword(MongoUtils.checkField(dbObject, MongoTableKeys.HOST_PASS));
+				result.setHostPassword(MongoUtils.checkField(dbObject, MongoTableKeys.HOST_PAGE_URL));
+				result.setPartyId(MongoUtils.checkField(dbObject, MongoTableKeys.PARTY_ID));
+
+				itemList.add(result);
+			}
+		} finally {
+			cursor.close();
+		}
+		return itemList;
+	}
+	
 
 	public static List<PartyBonusCalculationModel> grabPartyBonusCalculationModel(String testName) {
 		DBObject dbObject = null;

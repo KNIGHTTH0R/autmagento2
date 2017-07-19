@@ -158,7 +158,7 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 	}
 
 	@Test
-	public void us4001ShopForMyselfWithJbMmbAndBuy3GetOneTest() {
+	public void us4001ShopForMyselfWithJbMmbAndBuy3GetOneTestEm() {
 		frontEndSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

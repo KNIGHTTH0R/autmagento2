@@ -163,6 +163,14 @@ public class MongoTableKeys {
 	// URLModel
 	public static final String URL_MODEL = "UrlModel";
 	public static final String URL_PATH = "url:";
+	
+	//OnlineStylePartyModel
+	
+	public static final String ONLINE_STYLE_PARTY_MODEL = "OnlineStylePartyModel";
+	public static final String HOST_USERNAME = "hostUserName";
+	public static final String HOST_PASS = "hostPassword";
+	public static final String PARTY_ID = "partyId";
+	public static final String HOST_PAGE_URL = "hostPageUrl";
 
 	// ClosedPartyPerformanceModel
 

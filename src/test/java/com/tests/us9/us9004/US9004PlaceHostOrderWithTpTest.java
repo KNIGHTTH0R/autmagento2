@@ -126,13 +126,20 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 //				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 //		MagentoProductCalls.createApiProduct(genProduct3);
 //		
-		genProduct4 = MagentoProductCalls.createProductModel();
+//		genProduct4 = MagentoProductCalls.createProductModel();
+//		genProduct4.getStockData().setAllowedTermPurchase("1");
+//		genProduct4.setPrice("50.00");
+//		genProduct4.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct4);
+//		genProduct4.setStockData(
+//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getCurrentDate("yyyy-MM-dd")));
+		
+		
+		genProduct4 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct4.getStockData().setAllowedTermPurchase("1");
 		genProduct4.setPrice("50.00");
 		genProduct4.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct4);
-		genProduct4.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getCurrentDate("yyyy-MM-dd")));
 		
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 //		

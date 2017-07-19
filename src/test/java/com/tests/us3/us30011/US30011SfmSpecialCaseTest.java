@@ -99,13 +99,13 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(18);
-		genProduct1.setPrice(genProduct1.getSpecialPrice());
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(18);
+//		genProduct1.setPrice(genProduct1.getSpecialPrice());
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("449.50");
-//		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("449.50");
+		MagentoProductCalls.createApiProduct(genProduct1);
 		
 		
 		
@@ -150,6 +150,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		homeSteps.clickonGeneralView();
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+		headerSteps.waitABit(20000);
 		generalCartSteps.clearCart();
 		BasicProductModel productData;
 

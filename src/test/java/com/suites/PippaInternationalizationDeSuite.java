@@ -86,7 +86,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	//Party
 	US10007SuitePartOne.class,
 	// should be review 10008 emilian
-	US10008Suite.class,
+	//US10008Suite.class,
 	//US9008Suite 
 	
 	//Place host order

@@ -148,7 +148,7 @@ public class US30017SfmWithTPProductsOnEachSectionAndHalfDiscountTest extends Ba
 	}
 
 	@Test
-	public void us30014SfmWithTPNoVatNoSmbBillingShippingAtTest() throws ParseException {
+	public void us30017SfmWithTPProductsOnEachSectionAndHalfDiscountTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

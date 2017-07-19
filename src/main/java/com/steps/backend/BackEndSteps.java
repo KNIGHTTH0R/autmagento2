@@ -230,8 +230,8 @@ public class BackEndSteps extends AbstractSteps {
 	}
 	
 	@Step
-	public void selectContact(String emailText) {
-		contactListPage().selectContact(emailText);
+	public boolean selectContact(String emailText) {
+		return contactListPage().selectContact(emailText);
 		
 	}
 	

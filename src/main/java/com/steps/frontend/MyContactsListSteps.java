@@ -22,6 +22,10 @@ public class MyContactsListSteps extends AbstractSteps {
 		myContactsListPage().verifyUnicAndOpenContactDetails(terms);
 	}
 
+	@Step
+	public void verifyContactCreationUnderHost(String... terms) {
+		myContactsListPage().verifyContactCreationUnderHost(terms);
+	}
 	
 	@Step
 	public void openContactDetailsPage(String emailName) {

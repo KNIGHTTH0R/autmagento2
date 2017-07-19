@@ -347,7 +347,7 @@ public class CustomerDetailsPage extends AbstractPage {
 	public void deleteCustomer() {
 		List<WebElement> deleteButtons = getDriver()
 				.findElements(By.cssSelector("div.main-col div.main-col-inner button.delete"));
-
+		
 		for (WebElement buttonNow : deleteButtons) {
 			buttonNow.click();
 			waitABit(TimeConstants.TIME_CONSTANT);

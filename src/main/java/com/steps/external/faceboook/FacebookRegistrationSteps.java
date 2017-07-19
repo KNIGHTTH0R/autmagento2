@@ -474,4 +474,13 @@ public class FacebookRegistrationSteps extends AbstractSteps {
 		facebookRegistrationFormPage().verifyFbUserEmail(fbEmail);
 	}
 
+	public void loginToFacebookPippaAndSwitchToGuestPage(String email, String fbPass) {
+		// TODO Auto-generated method stub
+		facebookLoginPage().inputUser(email);
+		facebookLoginPage().inputPass(fbPass);
+		facebookLoginPage().clickLogin();
+		findFrame("Your Guest page");
+		
+	}
+
 }
