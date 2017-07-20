@@ -23,7 +23,7 @@ public class LoungePage extends AbstractPage {
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3)")
 	private WebElement meinBusinessButton;
 
-	@FindBy(css = "ul.main-nav.type-1.clearfix > li:nth-child(6)")
+	@FindBy(css = "ul.main-nav.type-1.clearfix > li:nth-child(7)")
 	private WebElement meinBusinessButtonFromFive;
 	
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) a")
@@ -253,11 +253,11 @@ public class LoungePage extends AbstractPage {
 
 		if (isDisplayed)
 			Assert.assertTrue("The borrow link should be present and it's not !!!",
-					toAsciiString(borrowCartLink.getText()).contains("SCHMUCKSTUCKE AUSLEIHEN"));
+					toAsciiString(borrowCartLink.getText()).contains("SCHMUCK AUSLEIHEN"));
 
 		else
 			Assert.assertTrue("The borrow is present and it shouldn't !!!",
-					!toAsciiString(borrowCartLink.getText()).contains("SCHMUCKSTUCKE AUSLEIHEN"));
+					!toAsciiString(borrowCartLink.getText()).contains("SCHMUCK AUSLEIHEN"));
 	}
 
 	public void goToLoungeList() {

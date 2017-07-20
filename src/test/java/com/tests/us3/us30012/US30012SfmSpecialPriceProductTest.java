@@ -141,7 +141,7 @@ public class US30012SfmSpecialPriceProductTest extends BaseTest {
 	}
 
 	@Test
-	public void us30012SfmSpecialPriceProductTest() {
+	public void us30012SfmSpecialPriceProductTestEm() {
 
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {

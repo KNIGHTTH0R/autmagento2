@@ -60,6 +60,13 @@ public class EmailClientSteps extends AbstractSteps {
 		mailPage.openEmail(email, title);
 
 	}
+	
+	@Step
+	public void validateThatOrderEmailIsReceived(String email, String title,String order) {
+
+		mailPage.openEmailAndCheck(email, title, order);
+
+	}
 
 	@Step
 	public void confirmPartyInvitation(String email, String title) {

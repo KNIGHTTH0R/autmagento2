@@ -110,6 +110,7 @@ public class ContextConstants {
 	public static String ORDER_ACTUALIZATION_EMAIL = MongoReader.getDictionaryItem("ORDER_ACTUALIZATION_EMAIL");
 	public static String NEWSLETTER_MAIL_SUBJECT = MongoReader.getDictionaryItem("NEWSLETTER_MAIL_SUBJECT");
 	public static String WELCOME_MAIL_SUBJECT = MongoReader.getDictionaryItem("WELCOME_MAIL_SUBJECT");
+	public static String ORDER_EMAIL = MongoReader.getDictionaryItem("ORDER_EMAIL");
 	public static String ORDER_FOR_WRONG_CUSTOMER_ERROR_MESSAGE = MongoReader.getDictionaryItem("ORDER_FOR_WRONG_CUSTOMER_ERROR_MESSAGE");
 	public static String NO_SC_FOUND_BY_GEOIP = MongoReader.getDictionaryItem("NO_SC_FOUND_BY_GEOIP");
 

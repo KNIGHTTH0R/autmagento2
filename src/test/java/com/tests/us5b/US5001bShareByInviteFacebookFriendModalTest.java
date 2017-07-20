@@ -41,7 +41,7 @@ import net.thucydides.core.annotations.Story;
 
 @Story(Application.ShopForMyselfCart.US3_1.class)
 @RunWith(SerenityRunner.class)
-public class US5003bShareByInviteFacebookFriendModalTest extends BaseTest{
+public class US5001bShareByInviteFacebookFriendModalTest extends BaseTest{
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -110,7 +110,7 @@ public class US5003bShareByInviteFacebookFriendModalTest extends BaseTest{
 	
 	
 	@Test
-	public void us5003bShareByInviteFacebookFriendModalTest() throws Exception {
+	public void us5001bShareByInviteFacebookFriendModalTest() throws Exception {
 		frontEndSteps.performLogin("mihaialexandrubarta@gmail.com", password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

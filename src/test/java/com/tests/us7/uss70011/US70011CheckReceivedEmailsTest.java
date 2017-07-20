@@ -31,7 +31,8 @@ public class US70011CheckReceivedEmailsTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		stylistEmail = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest1").get(0).getEmailName();
+		stylistEmail = MongoReader.grabCustomerFormModels("US70011KoboCampaignRegistrationOnMasterTest1").get(0)
+				.getEmailName();
 		orderModel = MongoReader.grabOrderModels("US70011PlacePomOrderTest").get(0);
 
 	}
@@ -39,9 +40,12 @@ public class US70011CheckReceivedEmailsTest extends BaseTest {
 	@Test
 	public void us70011CheckReceivedEmailsTest() {
 
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.WELCOME_MAIL_SUBJECT);
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.NEWSLETTER_MAIL_SUBJECT);
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), orderModel.getOrderId());
+		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""),
+				ContextConstants.WELCOME_MAIL_SUBJECT);
+		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""),
+				ContextConstants.NEWSLETTER_MAIL_SUBJECT);
+		emailClientSteps.validateThatOrderEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""),
+				ContextConstants.ORDER_EMAIL, orderModel.getOrderId());
 
 	}
 

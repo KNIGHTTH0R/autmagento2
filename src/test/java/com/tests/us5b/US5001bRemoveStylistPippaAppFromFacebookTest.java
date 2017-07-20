@@ -30,10 +30,10 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "USS37", type = "facebook login- frontend")
+@WithTag(name = "US5b", type = "remove stylist facebook app")
 @Story(Application.OnlineStylePartyManager.class)
 @RunWith(SerenityRunner.class)
-public class US5003aRemoveStylistPippaAppFromFacebookTest extends BaseTest{
+public class US5001bRemoveStylistPippaAppFromFacebookTest extends BaseTest{
 	
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -88,7 +88,7 @@ public class US5003aRemoveStylistPippaAppFromFacebookTest extends BaseTest{
 	}
 
 	@Test
-	public void us5003aRemoveStylistPippaAppFromFacebookTest() throws Exception {
+	public void us5001bRemoveStylistPippaAppFromFacebookTest() throws Exception {
 
 		facebookLoginSteps.loginToFacebook(fbUser, fbPass);
 		facebookLoginSteps.accessSettingsOnFacebookDesktopApp();

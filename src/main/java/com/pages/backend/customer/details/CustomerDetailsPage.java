@@ -64,6 +64,9 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(css = "a#customer_info_tabs_stylecoach_profile")
 	private WebElement styleCoachProfileTab;
+	
+	@FindBy(css = "a#customer_info_tabs_stylecoach_borrow_info")
+	private WebElement borrowInfoTab;
 
 	@FindBy(css = "a#customer_info_tabs_stylecoach_entity")
 	private WebElement styleCoachManagementTab;
@@ -125,7 +128,7 @@ public class CustomerDetailsPage extends AbstractPage {
 	@FindBy(id="customer_info_tabs_stylecoach_salesonspeed_info")
 	private WebElement salesOnSpeedInfo;
 	
-	@FindBy(id="_stylistprofileallowed_to_borrow")
+	@FindBy(css="select[id=_stylistborrowinfoallowed_to_borrow]")
 	private WebElement allowedToBorrow;
 	
 	
@@ -493,5 +496,13 @@ public class CustomerDetailsPage extends AbstractPage {
 		element(topStatus).waitUntilVisible();
 		element(topStatus).selectByVisibleText(status);
 		
+	}
+
+	public void clickOnBorrowInfoTab() {
+		// TODO Auto-generated method stub
+		System.out.println("am ajuns aici");
+		evaluateJavascript("jQuery.noConflict();");
+		element(borrowInfoTab).waitUntilVisible();
+		borrowInfoTab.click();
 	}
 }

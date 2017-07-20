@@ -132,11 +132,11 @@ public void checkIfBorrowCartLinkIsDisplayed(boolean isDisplayed){
 	    if (isDisplayed)
 			Assert.assertTrue("The Borrow Link should be present and it's not !!!",
 					
-					toAsciiString(borrowCartLink.getText()).contains("Schmuckstucke Ausleihen"));
+					toAsciiString(borrowCartLink.getText()).contains("Schmuck ausleihen"));
 
 		else
 			Assert.assertTrue("The Borrow Link is present and it shouldn't !!!",
-					!toAsciiString(borrowCartLink.getText()).contains("Schmuckstucke Ausleihen"));
+					!toAsciiString(borrowCartLink.getText()).contains("Schmuck ausleihen"));
 
 }
 

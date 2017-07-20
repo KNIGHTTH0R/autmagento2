@@ -447,7 +447,7 @@ public class BackEndSteps extends AbstractSteps {
 
 	@Step
 	public void selectAllowedToBorrow(String allowedToBorrowOption) {
-		customerDetailsHomePage().clickOnStylecoachProfileTab();
+		customerDetailsHomePage().clickOnBorrowInfoTab();
 		customerDetailsHomePage().selectAllowedToBorrow(allowedToBorrowOption);
 		customerDetailsHomePage().saveAndContinueEdit();
 	}

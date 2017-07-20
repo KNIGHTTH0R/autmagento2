@@ -49,7 +49,7 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	
 ////	//stylist in Top, top=default, allowed to borrow=TOP package 
 	
-	
+	/*	
 	US16004aNewBorrowWithDefaultTopAndTopPackageTest.class,
 	US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest.class,
 	
@@ -62,7 +62,7 @@ import com.tests.uss16.us16004c.US16004cPlaceBarrowOrderDeniedTopAndCustomPackag
 	US16004aCancelOrderDefaultTopAndCustomPackageTest.class,
 
 	//stylist in Top, top=default, allowed to borrow=not eligible 
-	US16004aNewBorrowWithDefaultTopAndNotEligibleTest.class,
+	US16004aNewBorrowWithDefaultTopAndNotEligibleTest.class,*/
 	
 //	//stylist in Top, top=allowed, allowed to borrow=not eligible 
 //	US16004bNewBorrowWithAllowedTopAndCustomPackageTest.class,

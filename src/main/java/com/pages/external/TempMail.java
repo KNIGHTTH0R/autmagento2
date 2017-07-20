@@ -83,6 +83,54 @@ public class TempMail extends AbstractPage {
 		
 	}
 	
+	
+	public void openEmailAndCheck(String email, String title, String order) {
+		navigate(UrlConstants.TEMPMAIL_WEB_MAIL);
+		waitABit(2000);
+		element(changeButton).waitUntilVisible();
+		changeButton.click();
+		
+		element(mailInput).waitUntilVisible();
+		element(mailInput).clear();
+		mailInput.sendKeys(email);
+		
+		selectMailDomain("@mailgov.info");
+		
+		element(submitButton).waitUntilVisible();
+		submitButton.click();
+		
+		element(refreshButton).waitUntilVisible();
+		refreshButton.click();
+		
+		waitABit(5000);
+		List<WebElement> emailList = getDriver().findElements(By.cssSelector("#mails tbody tr td:nth-child(2) a"));
+		
+		System.out.println("size list "+ emailList.size());
+		boolean foundEmail = false;
+		
+		if(emailList.size()!=0){
+			for (WebElement itemNow : emailList) {
+			
+				if (itemNow.getText().contains(title)) {
+					itemNow.click();
+					
+					//getDriver().switchTo().defaultContent();
+					waitABit(5000);
+					foundEmail = true;
+				//	getDriver().switchTo().frame(iFrameInbox);
+					break;
+				}
+			}
+			
+			
+			Assert.assertTrue("The email with the title " + title + " was not found", foundEmail);
+		}else{
+			CustomVerification.verifyTrue("No emails received", true);
+		}
+		
+		
+	}
+	
 	public void selectMailDomain(String domainName) {
 		Select oSelect = new Select(getDriver().findElement(By.id("domain")));
 

@@ -93,7 +93,7 @@ public class US8001ValidateOrderEmailTest extends BaseTest{
 	public void us8001ValidateOrderEmailTest() {
 		frontEndSteps.performLogin(email, password);
 		
-		String message = gmailConnector.searchForMail("", orderModel.get(0).getOrderId(), false);
+		String message = gmailConnector.searchForMail(email, orderModel.get(0).getOrderId(), false);
 		emailSteps.validateEmailContent(orderModel.get(0).getOrderId(), message);
 		
 		customVerifications.printErrors();

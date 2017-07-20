@@ -44,8 +44,9 @@ public class US70010CheckReceivedEmailsTest extends BaseTest {
 
 		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.WELCOME_MAIL_SUBJECT);
 		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.NEWSLETTER_MAIL_SUBJECT);
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), orderModel.getOrderId());
-
+	//	emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), orderModel.getOrderId());
+		emailClientSteps.validateThatOrderEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""),
+				ContextConstants.ORDER_EMAIL, orderModel.getOrderId());
 	}
 
 }

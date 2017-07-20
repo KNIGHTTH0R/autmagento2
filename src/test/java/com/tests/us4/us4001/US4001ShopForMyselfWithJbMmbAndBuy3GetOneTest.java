@@ -101,9 +101,9 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		genProduct1 = createdProductsList.get(31);
 		genProduct3 = createdProductsList.get(5);
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("100");
-//		MagentoProductCalls.createApiProduct(genProduct1);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("100");
+		MagentoProductCalls.createApiProduct(genProduct1);
 
 		 genProduct2.setName(EnvironmentConstants.PRODUCT_NAME);
 		 genProduct2.setSku(EnvironmentConstants.PRODUCT_SKU);
@@ -117,9 +117,9 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 //		 genProduct2.setPrice("49.90");
 //		 MagentoProductCalls.createApiProduct(genProduct2);
 
-//		 genProduct3 = MagentoProductCalls.createMarketingProductModel();
-//		 genProduct3.setPrice("5.00");
-//		 MagentoProductCalls.createApiProduct(genProduct3);
+		 genProduct3 = MagentoProductCalls.createMarketingProductModel();
+		 genProduct3.setPrice("5.00");
+		 MagentoProductCalls.createApiProduct(genProduct3);
 
 		
 		
