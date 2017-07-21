@@ -46,7 +46,7 @@ public class TempMail extends AbstractPage {
 		element(mailInput).clear();
 		mailInput.sendKeys(email);
 		
-		selectMailDomain("@mailgov.info");
+		selectMailDomain("@golemico.com");
 		
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
