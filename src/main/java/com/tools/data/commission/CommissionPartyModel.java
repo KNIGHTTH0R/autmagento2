@@ -3,7 +3,7 @@ package com.tools.data.commission;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class CommissionPartyModel {
-	
+
 	private String partyId;
 	private int nrOfOrders;
 	private int nrOfInvalidOrders;

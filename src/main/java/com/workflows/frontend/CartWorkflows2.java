@@ -34,7 +34,7 @@ public class CartWorkflows2 {
 		System.out.println(" ");
 		System.out.println(message);
 		System.out.println("basicProductsListbasicProductsList "+basicProductsList);
-		System.out.println("cartProductsListcartProductsList "+cartProductsList);
+		System.out.println("cartProductsListcartProductsList=grabbed "+cartProductsList);
 		for (BasicProductModel productNow : basicProductsList) {
 			CartProductModel compare = findProduct(productNow.getProdCode(), productNow.getQuantity(), cartProductsList);
 		//	CartProductModel compare = findProduct(productNow.getProdCode(), productNow.getDiscountClass(), cartProductsList);

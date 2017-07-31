@@ -22,7 +22,7 @@ public class CheckoutValidationSteps extends AbstractSteps {
 	 */
 	@Step
 	public void validateMatchPrice(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Price values dont match: " + productNow + " - " + compare, compare.contains(productNow));
+		CustomVerification.verifyTrue("Failure: Price values dont match: expected " + productNow + " - grabbed " + compare, compare.contains(productNow));
 	}
 
 	@Step
@@ -31,15 +31,15 @@ public class CheckoutValidationSteps extends AbstractSteps {
 
 	@Step
 	public void validateMatchQuantity(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Quantity values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Quantity values dont match: expected " + productNow + " - grabbed " + compare, productNow.contentEquals(compare));
 	}
 	@Step
 	public void validateMatchFinalPrice(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Final price values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Final price values dont match: expected " + productNow + " - grabbed" + compare, productNow.contentEquals(compare));
 	}
 	@Step
 	public void validateMatchIpPoints(String productNow, String compare) {
-		CustomVerification.verifyTrue("Failure: Ip points values dont match: " + productNow + " - " + compare, productNow.contentEquals(compare));
+		CustomVerification.verifyTrue("Failure: Ip points values dont match: expected " + productNow + " - grabbed" + compare, productNow.contentEquals(compare));
 	}
 
 	@Step

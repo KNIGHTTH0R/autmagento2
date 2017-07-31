@@ -107,7 +107,6 @@ public class US7009PlacePomOrderTest extends BaseTest{
 		genProduct1 = createdProductsList.get(7);
 		
 
-		System.out.println("aici ?");
 		
 		int size = MongoReader.grabCustomerFormModels("US7009KoboRegOnNotVoucherOwnerContextTest1").size();
 		if (size > 0) {
@@ -121,7 +120,8 @@ public class US7009PlacePomOrderTest extends BaseTest{
 		dataModel = new CustomerFormModel();
 		addressModel = new AddressModel();
 		
-		System.out.println("am ajuns aici");
+
+		
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 

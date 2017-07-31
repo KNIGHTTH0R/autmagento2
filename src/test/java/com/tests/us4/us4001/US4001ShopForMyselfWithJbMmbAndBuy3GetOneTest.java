@@ -97,9 +97,9 @@ public class US4001ShopForMyselfWithJbMmbAndBuy3GetOneTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(31);
-		genProduct3 = createdProductsList.get(5);
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(31);
+//		genProduct3 = createdProductsList.get(5);
 
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("100");

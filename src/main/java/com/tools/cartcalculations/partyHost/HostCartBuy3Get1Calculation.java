@@ -39,7 +39,7 @@ public class HostCartBuy3Get1Calculation {
 	}
 
 	public static List<HostBasicProductModel> applyBuy3Get1OnTheCart(List<HostBasicProductModel> productsList) {
-
+		///emiliano
 		BigDecimal remainder = BigDecimal.ZERO;
 
 		List<HostBasicProductModel> cartProducts = new ArrayList<HostBasicProductModel>();
