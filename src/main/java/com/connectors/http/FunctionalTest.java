@@ -18,7 +18,7 @@ public class FunctionalTest {
         if(baseHost==null){
             baseHost = "http://staging-labs.api-social-media.pippajean.com";
         }
-        RestAssured.baseURI = baseHost;
+        RestAssured.baseURI = baseHost; 
 
     }
 
