@@ -1,5 +1,7 @@
 package com.tools.data.socialMediaApi;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,6 +14,7 @@ public class Data {
 	private String message;
 	private Likes likes;
 	private From from;
+	private Properties[] properties;
 	private String created_time;
 	private Media media;
 	private String is_silhouette;
@@ -106,9 +109,25 @@ public class Data {
 		this.url = url;
 	}
 
+	public Properties[] getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties[] properties) {
+		this.properties = properties;
+	}
+
 	@Override
 	public String toString() {
-		return "Data [url=" + url + ", id=" + id + ", name=" + name + "]";
+		return "Data [url=" + url + ", id=" + id + ", name=" + name + ", target=" + target + ", type=" + type
+				+ ", message=" + message + ", likes=" + likes + ", from=" + from + ", properties="
+				+ Arrays.toString(properties) + ", created_time=" + created_time + ", media=" + media
+				+ ", is_silhouette=" + is_silhouette + "]";
 	}
+
+	
+
+	
+	
 
 }

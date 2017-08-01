@@ -1,26 +1,52 @@
 package com.tests.uss38;
 
-import com.connectors.http.FunctionalTest;
-import com.tools.data.socialMediaApi.Circles;
-
 import static com.jayway.restassured.RestAssured.given;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class GetCirclesInfoTest extends FunctionalTest{
-	public String token = "eyJpdiI6IkVWcHdOaCtzbmtmVGhpb3J4TGRoOVE9PSIsInZhbHVlIjoiMTBFM2dkMVkxdzVFSE1MQ2htZFR6NDJHZjF1bDJvcjExRmxvdXZoa3k1MFRMejEzTnhSeWtqS3B6XC81R3o0T1psUDRENWhseFU4REFMamZjXC9rWG5Nbk1vRFc1ZnUxeHVVZzM3aWpLMndsU2RyMW5BVUZXRzIzZ1crMGIremtBTHE1QTFPdUFcL21YbkgwY0pPV2IwRzhJQVRGUWwyaWdoVVhqc2hyYWJYZFk4OUp2alN3c25JelliN3RpMnRVWkdJQVZneGVsc0lhWXNsUGE4cytucFRkN1lnTlNVVWxUZnIwMnZZa2c1SDNQbnBoQlFkNFdaK2g5RUtjZng0N0duZyIsIm1hYyI6ImZkODAzNmZmYWJlMjcwMmNhODBmZWIyNTVhMjQwY2YyZTRiNjcyZDgyYTMxMTBiZTUxNzc3NTdjYTdlYzU5MGMifQ==";
-	public String circleId="1831408183552808";
-	
-	
-	@Test
-	public void circlePingTest(){
-		Circles[] group = given().when().get("circles?token="+token).then().statusCode(200).extract()
-				.as(Circles[].class);
-		
-		for (Circles circles : group) {
-			System.out.println(circles.getFacebook_group_id());
-		}
-		//or:
-		//System.out.println(group[0].getFacebook_group_id());    ////1831408183552808
+import com.connectors.http.FunctionalTest;
+import com.steps.external.SocialMedia.SocialMediaSteps;
+import com.tests.BaseTest;
+import com.tools.constants.SocialMediaConstansts;
+import com.tools.data.socialMediaApi.Circles;
+import com.tools.persistance.MongoWriter;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+
+@RunWith(SerenityRunner.class)
+public class GetCirclesInfoTest extends BaseTest {
+
+	private String facebookGroupId;
+	@Steps
+	public SocialMediaSteps socialMediaSteps;
+
+	@Before
+	public void setUp() throws Exception {
+
+		FunctionalTest.setup();
 	}
+
+	@Test
+	public void getCirclesInfoTest() {
+		Circles[] circles = given().when().get("circles?token=" + SocialMediaConstansts.Token).then().statusCode(200)
+				.extract().as(Circles[].class);
+	
+		socialMediaSteps.validateFacebookGroupIdIsNotEmpty(circles[0].getFacebook_group_id());
+		facebookGroupId= circles[0].getFacebook_group_id();
+		socialMediaSteps.validateFacebook_nameIsNotEmpty(circles[0].getFacebook_name());
+		socialMediaSteps.validateFacebook_privacyIsNotEmpty(circles[0].getFacebook_privacy());
+
+		System.out.println(facebookGroupId);
+	}
+
+	@After
+	public void saveData() {
+		MongoWriter.saveStringValue(facebookGroupId, getClass().getSimpleName() + "GR_ID");
+
+	}
+
 }

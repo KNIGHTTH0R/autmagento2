@@ -2,28 +2,52 @@ package com.tests.uss38;
 
 import static com.jayway.restassured.RestAssured.given;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.connectors.http.FunctionalTest;
+import com.steps.external.SocialMedia.SocialMediaSteps;
+import com.tests.BaseTest;
+import com.tools.constants.SocialMediaConstansts;
 import com.tools.data.socialMediaApi.Data;
 import com.tools.data.socialMediaApi.LiveStreamsModel;
+import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
 
-public class GetLiveStreamsTest extends FunctionalTest {
-	public String token = "eyJpdiI6IkVWcHdOaCtzbmtmVGhpb3J4TGRoOVE9PSIsInZhbHVlIjoiMTBFM2dkMVkxdzVFSE1MQ2htZFR6NDJHZjF1bDJvcjExRmxvdXZoa3k1MFRMejEzTnhSeWtqS3B6XC81R3o0T1psUDRENWhseFU4REFMamZjXC9rWG5Nbk1vRFc1ZnUxeHVVZzM3aWpLMndsU2RyMW5BVUZXRzIzZ1crMGIremtBTHE1QTFPdUFcL21YbkgwY0pPV2IwRzhJQVRGUWwyaWdoVVhqc2hyYWJYZFk4OUp2alN3c25JelliN3RpMnRVWkdJQVZneGVsc0lhWXNsUGE4cytucFRkN1lnTlNVVWxUZnIwMnZZa2c1SDNQbnBoQlFkNFdaK2g5RUtjZng0N0duZyIsIm1hYyI6ImZkODAzNmZmYWJlMjcwMmNhODBmZWIyNTVhMjQwY2YyZTRiNjcyZDgyYTMxMTBiZTUxNzc3NTdjYTdlYzU5MGMifQ==";
-	public String circleId="1831408183552808";
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+@RunWith(SerenityRunner.class)
+public class GetLiveStreamsTest extends BaseTest {
+	public String circleId,livestreamId;
+	@Steps
+	public SocialMediaSteps socialMediaSteps;
+
+	@Before
+	public void setUp() throws Exception {
+		FunctionalTest.setup();
+		circleId=MongoReader.grabStringValue("GetCirclesInfoTest" + "GR_ID").get(0);
+	}
 	
 	@Test
-	public void circleLiveSteamsPing(){
+	public void LiveStreamsTest(){
 		///not ok 
-		LiveStreamsModel livest = given().when().get("live-streams/1831408183552808?token="+token).then().statusCode(200).extract()
+		LiveStreamsModel livest = given().when().get("live-streams/"+circleId+"?token="+SocialMediaConstansts.Token).then().statusCode(200).extract()
 				.as(LiveStreamsModel.class);
 		
 		Data[] data=livest.getData();
 		
-		
-		for (Data d : data) {
-			System.out.println(d);
-		}
+		socialMediaSteps.validateIdIsNotEmpty(data[0].getId());
+		livestreamId=data[0].getId();
+		socialMediaSteps.validateCreatedTimeIsNotEmpty(data[0].getCreated_time());
+		socialMediaSteps.validateName(data[0].getFrom().getName(), SocialMediaConstansts.Name);
 		
 	}
+	@After
+	public void saveData() {
+		MongoWriter.saveStringValue(livestreamId,getClass().getSimpleName()+"video_id");
+		
+	}
+	
 }

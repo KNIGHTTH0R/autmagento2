@@ -17,6 +17,7 @@ import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.SocialMediaConstansts;
 import com.tools.data.socialMediaApiCommnets.CommentResponse;
+import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.utils.FieldGenerators;
 import com.tools.utils.FieldGenerators.Mode;
@@ -25,39 +26,38 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
-public class PostCommentsTest extends BaseTest {
+public class PostReplyCommentsTest extends BaseTest {
 	Map<String, String> comment = new HashMap<>();
 
-	public String messageValue=FieldGenerators.generateRandomString(10, Mode.ALPHANUMERIC)+"test";
-	CommentResponse postComm=new CommentResponse();
-	
-	
+	private String messageValue = FieldGenerators.generateRandomString(10, Mode.ALPHANUMERIC) + "test";
+	private String messageId;
+	CommentResponse postComm = new CommentResponse();
 	@Steps
 	public SocialMediaSteps socialMediaSteps;
 
 	@Before
 	public void setUp() throws Exception {
-
 		FunctionalTest.setup();
-		MongoConnector.cleanCollection(getClass().getSimpleName()+"MSG");
-		MongoConnector.cleanCollection(getClass().getSimpleName()+"ID");
+		messageId = MongoReader.grabStringValue("PostCommentsTest" + "ID").get(0);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "MSG");
+		MongoConnector.cleanCollection(getClass().getSimpleName() + "ID");
 	}
-	
+
 	@Test
-		public void circleCommentsStatusPing(){
-			comment.put("message", messageValue);
-			postComm=given().contentType("application/json").body(comment).when().post("posts/1831408183552808_1831446426882317/comment?token="+SocialMediaConstansts.Token).then().statusCode(200).extract().as(CommentResponse.class);
-			
-			CustomVerification.verifyTrue("The repoonse id is null", postComm.getId()!=null);
-			
-			
-			
+	public void postReplyCommentsTest() {
+		comment.put("message", messageValue);
+		postComm = given().contentType("application/json").body(comment).when()
+				.post("posts/" + messageId + "/comment?token=" + SocialMediaConstansts.Token).then().statusCode(200)
+				.extract().as(CommentResponse.class);
+
+		CustomVerification.verifyTrue("The reponse id is null", postComm.getId() != null);
+
 	}
-	
+
 	@After
 	public void saveData() {
-		MongoWriter.saveStringValue(messageValue,getClass().getSimpleName()+"MSG");
-		MongoWriter.saveStringValue(postComm.getId(),getClass().getSimpleName()+"ID");
-		
+		MongoWriter.saveStringValue(messageValue, getClass().getSimpleName() + "MSG");
+		MongoWriter.saveStringValue(postComm.getId(), getClass().getSimpleName() + "ID");
+
 	}
 }

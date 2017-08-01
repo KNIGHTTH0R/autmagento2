@@ -1,24 +1,26 @@
 package com.tools.data.socialMediaApiCommnets;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PostsCommentsModel {
-		private Data[] data;
+public class Comments {
+	 private List<Data> data;
 
 	    private Paging paging;
 
-	    public Data[] getData ()
-	    {
-	        return data;
-	    }
+	    
 
-	    public void setData (Data[] data)
-	    {
-	        this.data = data;
-	    }
+	    public List<Data> getData() {
+			return data;
+		}
 
-	    public Paging getPaging ()
+		public void setData(List<Data> data) {
+			this.data = data;
+		}
+
+		public Paging getPaging ()
 	    {
 	        return paging;
 	    }

@@ -18,30 +18,32 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
-public class GetPostsComments extends BaseTest{
+public class GetPostsReplyComments extends BaseTest {
 	@Steps
 	public SocialMediaSteps socialMediaSteps;
 	
-	private String messageValue,messageId;
+	private String replyMessageValue,messageId,replyMessageId;
 
 	@Before
 	public void setUp() throws Exception {
 		FunctionalTest.setup();
-		messageValue = MongoReader.grabStringValue("PostCommentsTest" + "MSG").get(0);
+		replyMessageValue = MongoReader.grabStringValue("PostReplyCommentsTest" + "MSG").get(0);
+		replyMessageId = MongoReader.grabStringValue("PostReplyCommentsTest" + "ID").get(0);
 		messageId = MongoReader.grabStringValue("PostCommentsTest" + "ID").get(0);
 	}
 	
+
 	@Test
-	public void getPostsComments() {
-		/// OOOK
+	public void getPostsReplyComments() {
+
 		PostsCommentsModel status = given().when()
-				.get("posts/1831408183552808_1831446426882317/comments?token=" + SocialMediaConstansts.Token).then()
-				.statusCode(200).extract().as(PostsCommentsModel.class);
+				.get("posts/1831408183552808_1831446426882317/comments?token=" + SocialMediaConstansts.Token).then().statusCode(200).extract()
+				.as(PostsCommentsModel.class);
 
-		
 		Data[] data = status.getData();
-		socialMediaSteps.validateComments(data,messageValue,messageId);
-	
-
+		
+		socialMediaSteps.validateReplyComment(data,replyMessageValue,replyMessageId,messageId);
+		
+		
 	}
 }

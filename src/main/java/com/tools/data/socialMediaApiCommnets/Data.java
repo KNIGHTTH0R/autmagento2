@@ -8,8 +8,18 @@ public class Data {
 	private String url;
 	private String id;
 	private Likes likes;
+	private Comments comments;
 	private From from;
 	private String created_time;
+
+	
+	public Comments getComments() {
+		return comments;
+	}
+
+	public void setComments(Comments comments) {
+		this.comments = comments;
+	}
 
 	public String getIs_silhouette() {
 		return is_silhouette;
