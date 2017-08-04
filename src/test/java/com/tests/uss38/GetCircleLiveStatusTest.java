@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.FunctionalTest;
 import com.steps.external.SocialMedia.SocialMediaSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.constants.SocialMediaConstansts;
 import com.tools.data.socialMediaApi.Data;
 import com.tools.data.socialMediaApi.LiveStatusModel;
@@ -22,7 +23,9 @@ public class GetCircleLiveStatusTest extends BaseTest{
 	public String circleId,livestreamId;
 	@Steps
 	public SocialMediaSteps socialMediaSteps;
-
+	@Steps
+	CustomVerification customVerification;
+	
 	@Before
 	public void setUp() throws Exception {
 
@@ -47,6 +50,6 @@ public class GetCircleLiveStatusTest extends BaseTest{
 		socialMediaSteps.validateStartTime(status.getStart_time(),data[0].getTarget().getBroadcast_start_time());
 		socialMediaSteps.validateDuration(status.getDuration(),data[0].getProperties()[0].getText());
 
-		
+		customVerification.printErrors();
 	}
 }

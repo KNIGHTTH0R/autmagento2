@@ -229,6 +229,7 @@ public class CreateProductsTest extends BaseTest {
 		genProduct20 = MagentoProductCalls.createProductModel();
 		genProduct20.setPrice("49.90");
 	//	genProduct1.setSpecialPrice("40.00");
+		genProduct20.setIp("84");
 		MagentoProductCalls.createApiProduct(genProduct20);
 		productsList.add(genProduct20);
 

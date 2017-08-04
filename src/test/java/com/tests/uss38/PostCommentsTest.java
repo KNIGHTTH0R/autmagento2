@@ -34,6 +34,9 @@ public class PostCommentsTest extends BaseTest {
 	
 	@Steps
 	public SocialMediaSteps socialMediaSteps;
+	@Steps
+	CustomVerification customVerification;
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -50,7 +53,7 @@ public class PostCommentsTest extends BaseTest {
 			
 			CustomVerification.verifyTrue("The repoonse id is null", postComm.getId()!=null);
 			
-			
+			customVerification.printErrors();
 			
 	}
 	

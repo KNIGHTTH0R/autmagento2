@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.FunctionalTest;
 import com.steps.external.SocialMedia.SocialMediaSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.data.socialMediaApi.LoginUrlModel;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -18,7 +19,9 @@ public class GetLoginUrlInfoTest extends BaseTest {
 	private String testUri="testUri";
 	@Steps
 	public SocialMediaSteps socialMediaSteps;
-
+	@Steps
+	CustomVerification customVerification;
+	
 	@Before
 	public void setUp() throws Exception {
 
@@ -29,5 +32,7 @@ public class GetLoginUrlInfoTest extends BaseTest {
 		LoginUrlModel urlLogin= given().when().get("login-url?uri="+testUri).then().statusCode(200).extract().as(LoginUrlModel.class);
 		
 		socialMediaSteps.validateURI(urlLogin.getData().getUrl(),testUri);
+		
+		customVerification.printErrors();
 	}
 }

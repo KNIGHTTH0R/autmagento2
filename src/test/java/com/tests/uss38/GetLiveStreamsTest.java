@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.FunctionalTest;
 import com.steps.external.SocialMedia.SocialMediaSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.constants.SocialMediaConstansts;
 import com.tools.data.socialMediaApi.Data;
 import com.tools.data.socialMediaApi.LiveStreamsModel;
@@ -23,7 +24,9 @@ public class GetLiveStreamsTest extends BaseTest {
 	public String circleId,livestreamId;
 	@Steps
 	public SocialMediaSteps socialMediaSteps;
-
+	@Steps
+	CustomVerification customVerification;
+	
 	@Before
 	public void setUp() throws Exception {
 		FunctionalTest.setup();
@@ -42,7 +45,7 @@ public class GetLiveStreamsTest extends BaseTest {
 		livestreamId=data[0].getId();
 		socialMediaSteps.validateCreatedTimeIsNotEmpty(data[0].getCreated_time());
 		socialMediaSteps.validateName(data[0].getFrom().getName(), SocialMediaConstansts.Name);
-		
+		customVerification.printErrors();
 	}
 	@After
 	public void saveData() {

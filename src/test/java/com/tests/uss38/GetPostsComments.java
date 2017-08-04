@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.FunctionalTest;
 import com.steps.external.SocialMedia.SocialMediaSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.constants.SocialMediaConstansts;
 import com.tools.data.socialMediaApiCommnets.Data;
 import com.tools.data.socialMediaApiCommnets.PostsCommentsModel;
@@ -21,6 +22,8 @@ import net.thucydides.core.annotations.Steps;
 public class GetPostsComments extends BaseTest{
 	@Steps
 	public SocialMediaSteps socialMediaSteps;
+	@Steps
+	CustomVerification customVerification;
 	
 	private String messageValue,messageId;
 
@@ -41,7 +44,7 @@ public class GetPostsComments extends BaseTest{
 		
 		Data[] data = status.getData();
 		socialMediaSteps.validateComments(data,messageValue,messageId);
-	
+		customVerification.printErrors();
 
 	}
 }

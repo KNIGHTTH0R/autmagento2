@@ -125,14 +125,16 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 
 		headerSteps.navigateToRegisterForm();
 
-		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress, birthDate.getDate());
+		String formCreationDate = stylistRegistrationSteps.fillCreateCustomerForm(customerFormData, customerFormAddress,
+				birthDate.getDate());
 		customerFormDate.setDate(formCreationDate);
 
 		stylistContextSteps.addStylistReference(customerFormData.getFirstName() + customerFormData.getLastName());
 
 		StarterSetProductModel productData;
 
-		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSET, EnvironmentConstants.STARTERKITPRICE);
+		productData = addStarterSetProductsWorkflow.setStarterSetProductToCart(EnvironmentConstants.STARTERSET,
+				EnvironmentConstants.STARTERKITPRICE);
 		StylistRegistrationCartCalculator.allProductsList.add(productData);
 
 		starterSetSteps.applyVoucher(voucherCode);
@@ -146,24 +148,25 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-//		if (paymentSteps.isKlarnaAvailable()) {
-//			paymentSteps.expandKlarnaForm();
-//			paymentSteps.fillKlarnaForm();
-//		} else {
-		
-//			paymentSteps.expandCreditCardForm();
-//			paymentSteps.fillCreditCardForm(creditCardData);
-		
-			paymentSteps.payWithBankTransferEs();
-			confirmationSteps.grabConfirmationTotals();
-			confirmationSteps.agreeAndCheckout();
-			
-			starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals, StylistRegistrationCartCalculator.shippingCalculatedModel);
-			starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
-//		}
-		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
-		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount("STARTER SET TOTALS");
+		// if (paymentSteps.isKlarnaAvailable()) {
+		// paymentSteps.expandKlarnaForm();
+		// paymentSteps.fillKlarnaForm();
+		// } else {
 
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+
+		// paymentSteps.payWithBankTransferEs();
+		confirmationSteps.grabConfirmationTotals();
+		confirmationSteps.agreeAndCheckout();
+
+		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals,
+				StylistRegistrationCartCalculator.shippingCalculatedModel);
+		starterSetConfirmationWorkflows.verifyConfirmationTotals("CONFIRMATION TOTALS");
+		// }
+		stylecoachRegistrationCartWorkflows.setVerifyTotalsDiscount(
+				StylistRegistrationCartCalculator.cartCalcDetailsModel, StylistRegDataGrabber.cartTotals);
+		stylecoachRegistrationCartWorkflows.verifyTotalsDiscount("STARTER SET TOTALS");
 
 		customVerification.printErrors();
 	}
@@ -171,8 +174,10 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 	@After
 	public void saveData() {
 
-		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel, getClass().getSimpleName());
-		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
+		MongoWriter.saveStarterSetCartCalcDetailsModel(StylistRegistrationCartCalculator.cartCalcDetailsModel,
+				getClass().getSimpleName());
+		MongoWriter.saveShippingModel(StylistRegistrationCartCalculator.shippingCalculatedModel,
+				getClass().getSimpleName());
 		MongoWriter.saveCustomerFormModel(customerFormData, getClass().getSimpleName());
 		MongoWriter.saveDateModel(customerFormDate, getClass().getSimpleName());
 		MongoWriter.saveOrderModel(DataGrabber.orderModel, getClass().getSimpleName());

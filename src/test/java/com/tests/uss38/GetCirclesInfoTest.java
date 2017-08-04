@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.FunctionalTest;
 import com.steps.external.SocialMedia.SocialMediaSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.constants.SocialMediaConstansts;
 import com.tools.data.socialMediaApi.Circles;
 import com.tools.persistance.MongoWriter;
@@ -23,7 +24,9 @@ public class GetCirclesInfoTest extends BaseTest {
 	private String facebookGroupId;
 	@Steps
 	public SocialMediaSteps socialMediaSteps;
-
+	@Steps
+	CustomVerification customVerification;
+	
 	@Before
 	public void setUp() throws Exception {
 
@@ -40,7 +43,7 @@ public class GetCirclesInfoTest extends BaseTest {
 		socialMediaSteps.validateFacebook_nameIsNotEmpty(circles[0].getFacebook_name());
 		socialMediaSteps.validateFacebook_privacyIsNotEmpty(circles[0].getFacebook_privacy());
 
-		System.out.println(facebookGroupId);
+		customVerification.printErrors();
 	}
 
 	@After

@@ -27,13 +27,18 @@ import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
 public class PostReplyCommentsTest extends BaseTest {
+	@Steps
+	public SocialMediaSteps socialMediaSteps;
+	@Steps
+	CustomVerification customVerification;
+	
+	
 	Map<String, String> comment = new HashMap<>();
 
 	private String messageValue = FieldGenerators.generateRandomString(10, Mode.ALPHANUMERIC) + "test";
 	private String messageId;
 	CommentResponse postComm = new CommentResponse();
-	@Steps
-	public SocialMediaSteps socialMediaSteps;
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -51,7 +56,7 @@ public class PostReplyCommentsTest extends BaseTest {
 				.extract().as(CommentResponse.class);
 
 		CustomVerification.verifyTrue("The reponse id is null", postComm.getId() != null);
-
+		customVerification.printErrors();
 	}
 
 	@After

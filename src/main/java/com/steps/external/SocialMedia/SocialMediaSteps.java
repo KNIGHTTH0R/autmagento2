@@ -102,7 +102,6 @@ public class SocialMediaSteps extends AbstractSteps {
 		for (Data msg : data) {
 			if (msg.getId().contentEquals(messageId)) {
 				found = true;
-				System.out.println(msg.getMessage());
 				validateMessage(msg.getMessage(), messageValue);
 				validateFromName(msg.getFrom().getName(), SocialMediaConstansts.Name);
 			}

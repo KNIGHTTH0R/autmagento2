@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import com.connectors.http.FunctionalTest;
 import com.steps.external.SocialMedia.SocialMediaSteps;
 import com.tests.BaseTest;
+import com.tools.CustomVerification;
 import com.tools.constants.SocialMediaConstansts;
 import com.tools.data.socialMediaApi.MeModel;
 
@@ -17,10 +18,12 @@ import net.thucydides.core.annotations.Steps;
 
 @RunWith(SerenityRunner.class)
 public class GetMeInfoTest extends BaseTest {
-	MeModel meInfo = new MeModel();
-
 	@Steps
 	public SocialMediaSteps socialMediaSteps;
+	@Steps
+	CustomVerification customVerification;
+	
+	MeModel meInfo = new MeModel();
 
 	@Before
 	public void setUp() throws Exception {
@@ -38,6 +41,7 @@ public class GetMeInfoTest extends BaseTest {
 		socialMediaSteps.validateFriendName(meInfo.getFriends().getData()[0].getName(),
 				SocialMediaConstansts.FriendName);
 
+		customVerification.printErrors();
 	}
 
 }
