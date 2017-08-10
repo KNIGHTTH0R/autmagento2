@@ -52,6 +52,7 @@ public class US37001OSPMHappyPathTest extends BaseTest{
 	@Steps
 	CustomVerification customVerification;
 	
+	
 	@Test
 	public void us37001OSPMHappyPathTest() {
 		customerRegistrationSteps.performLogin("emilianmihai25@gmail.com", "emilian1");
