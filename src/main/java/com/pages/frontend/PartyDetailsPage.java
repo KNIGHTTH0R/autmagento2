@@ -109,7 +109,9 @@ public class PartyDetailsPage extends AbstractPage {
 	@FindBy(css = "a.fancybox-item.fancybox-close")
 	private WebElement closeFancy;
 	
-	@FindBy(css = "div[style*='overflow'] a[class*='right button']")
+//	@FindBy(css = "div[style*='overflow'] a[class*='right button']")
+//	private WebElement clickOSPMbutton;
+	@FindBy(css = ".mr-b-20 a")
 	private WebElement clickOSPMbutton;
 	
 	
