@@ -17,8 +17,8 @@ import com.tests.us7.uss70012.US70012KoboCampaignRegistrationUnderContextTest1;
 
 
 @SuiteClasses({
-	US7001RegularCustRegOnMasterTest.class,
-	US7001bRegularCustRegOnNotPrefCountryTest.class,
+//	US7001RegularCustRegOnMasterTest.class,
+//	US7001bRegularCustRegOnNotPrefCountryTest.class,
 
 	//temporar	US7002RegularCustRegistrationOnContextTest.class,
 

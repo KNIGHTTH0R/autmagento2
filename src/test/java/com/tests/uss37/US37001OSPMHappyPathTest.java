@@ -60,6 +60,7 @@ public class US37001OSPMHappyPathTest extends BaseTest{
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
+		partyCreationSteps.checkOnlineStyleParty();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(ContextConstants.PARTY_USER));
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		
