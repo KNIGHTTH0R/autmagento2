@@ -39,6 +39,9 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 
 	@FindBy(css = ".thumbnail-wrapper .row:nth-child(3) a")
 	private WebElement clickOnFirstLiveStreamButton;
+	
+	@FindBy(css = ".circle-header")
+	private List<WebElement> groups;
 
 	@FindBy(id = "new-comment")
 	private WebElement commentTextArea;
@@ -69,6 +72,9 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 	
 	@FindBy(css = "a[action*='cancel']")
 	private List<WebElement> closePopUpFB;
+	
+	@FindBy(css = ".close-modal")
+	private List<WebElement> closeCheckListModal;
 
 	@FindBy(css = "._1a_q  a[role*='button']")
 	private WebElement reviewInfoLink;
@@ -252,5 +258,30 @@ public class OnlineStylePartyManagerPage extends AbstractPage {
 			CustomVerification.verifyTrue("The expected text is not displayed in app", false);
 		}
 		
+	}
+
+	public void closeCheckList() {
+		// TODO Auto-generated method stub
+		if(closeCheckListModal.size()!=0){
+			element(closeCheckListModal.get(0)).waitUntilVisible();
+			closeCheckListModal.get(0).click();
+		}
+		
+		
+	}
+
+	public void selectAGroup(String nameGroup) {
+		// TODO Auto-generated method stub
+		boolean found=false;
+		for (WebElement group : groups) {
+			System.out.println("group.getText()"+group.getText());		
+			if (group.getText().contains(nameGroup)) {
+				
+				group.findElement(By.cssSelector("span")).click();
+				found=true;
+				break;
+			}
+		}
+		CustomVerification.verifyTrue("Failure: Facebook group"+nameGroup+"was not found ", found);
 	}
 }

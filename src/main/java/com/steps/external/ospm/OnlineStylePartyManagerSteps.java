@@ -30,8 +30,13 @@ public class OnlineStylePartyManagerSteps extends AbstractSteps {
 	}
 	
 	@Step
-	public void selectFirstLiveStreamVideo() {
+	public void selectFirstLiveStreamVideo( ) {
 		onlineStylePartyManagerPage().clickOnFirstLiveStreamVideo();
+	}
+	
+	@Step
+	public void selectAGroup(String nameGroup) {
+		onlineStylePartyManagerPage().selectAGroup(nameGroup);
 	}
 	
 	@Step
@@ -140,5 +145,12 @@ public class OnlineStylePartyManagerSteps extends AbstractSteps {
 		onlineStylePartyManagerPage().closePopUp();
 		onlineStylePartyManagerPage().clickContinueAsUser();
 		findFrame("Mis invitaciones");
+	}
+	
+	@Step
+	public void closeCheckList() {
+		waitABit(2000);
+		onlineStylePartyManagerPage().closeCheckList();
+		
 	}
 }

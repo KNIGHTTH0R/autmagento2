@@ -71,8 +71,12 @@ public class US37001OSPMHappyPathTest extends BaseTest{
 		facebookLoginSteps.loginToFacebookApp("emilianmihai25@gmail.com", "emilian1");
 		
 		onlineStylePartyManagerSteps.acceptAllThePermissions();
-		onlineStylePartyManagerSteps.selectFirstGroup();
+		onlineStylePartyManagerSteps.closeCheckList();
+		//onlineStylePartyManagerSteps.selectFirstGroup();
+		onlineStylePartyManagerSteps.selectAGroup("happy group");
 		onlineStylePartyManagerSteps.selectFirstLiveStreamVideo();
+		
+		
 		onlineStylePartyManagerSteps.addSomeTextAsComment(comment);
 		onlineStylePartyManagerSteps.verifyIfCommentIsPosted(comment);
 		
