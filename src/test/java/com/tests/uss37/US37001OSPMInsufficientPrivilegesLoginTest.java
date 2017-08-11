@@ -55,6 +55,9 @@ public class US37001OSPMInsufficientPrivilegesLoginTest extends BaseTest{
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
+		
+		
+		
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
 		partyCreationSteps.checkOnlineStyleParty();
