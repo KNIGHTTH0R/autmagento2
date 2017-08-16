@@ -112,40 +112,49 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 //
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
-//		genProduct2.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("100.00");
-//		genProduct3.setStockData(
-//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
-//		MagentoProductCalls.createApiProduct(genProduct3);
-//		
-//		genProduct4 = MagentoProductCalls.createProductModel();
-//		genProduct4.getStockData().setAllowedTermPurchase("1");
-//		genProduct4.setPrice("50.00");
-//		genProduct4.setIp("0");
-//		MagentoProductCalls.createApiProduct(genProduct4);
-//		genProduct4.setStockData(
-//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getCurrentDate("yyyy-MM-dd")));
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+
+		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
+		genProduct2.setPrice("49.90");
+		MagentoProductCalls.createApiProduct(genProduct2);
+
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("100.00");
+		genProduct3.setStockData(
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+		MagentoProductCalls.createApiProduct(genProduct3);
 		
-		
-		genProduct4 = MagentoProductCalls.createNotAvailableYetProductModel();
+		/*genProduct4 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct4.getStockData().setAllowedTermPurchase("1");
 		genProduct4.setPrice("50.00");
 		genProduct4.setIp("0");
 		MagentoProductCalls.createApiProduct(genProduct4);
+		genProduct4.setStockData(
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getCurrentDate("yyyy-MM-dd")));*/
 		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct4 =  MagentoProductCalls.createNotAvailableYetProductModel();
+		genProduct4.getStockData().setAllowedTermPurchase("1");
+		genProduct4.setPrice("50.00");
+		genProduct4.setIp("0");
+		
+		MagentoProductCalls.createApiProduct(genProduct4);
+//		genProduct4.setStockData(
+//				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getCurrentDate("yyyy-MM-dd")));
+		
+		
+//		genProduct4 = MagentoProductCalls.createNotAvailableYetProductModel();
+//		genProduct4.getStockData().setAllowedTermPurchase("1");
+//		genProduct4.setPrice("50.00");
+//		genProduct4.setIp("0");
+//		MagentoProductCalls.createApiProduct(genProduct4);
 //		
-		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(8);
-		genProduct3 = createdProductsList.get(11);
+//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+////		
+//		genProduct1 = createdProductsList.get(1);
+//		genProduct2 = createdProductsList.get(8);
+//		genProduct3 = createdProductsList.get(11);
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -190,6 +199,7 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
+		headerSteps.waitABit(20000);
 		generalCartSteps.clearCart();
 		HostBasicProductModel productData;
 		

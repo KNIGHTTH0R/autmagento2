@@ -44,6 +44,7 @@ public class HostCartSteps extends AbstractSteps {
 
 	@Step
 	public void clickGoToShipping() {
+		waitABit(2000);
 		hostCartPage().clickToShipping();
 	}
 
