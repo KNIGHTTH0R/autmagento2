@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.tools.CustomVerification;
 import com.tools.constants.UrlConstants;
+
 import com.tools.requirements.AbstractPage;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
@@ -46,7 +47,7 @@ public class TempMail extends AbstractPage {
 		element(mailInput).clear();
 		mailInput.sendKeys(email);
 		
-		selectMailDomain("@golemico.com");
+		selectMailDomain("@binnary.com");
 		
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
@@ -94,7 +95,7 @@ public class TempMail extends AbstractPage {
 		element(mailInput).clear();
 		mailInput.sendKeys(email);
 		
-		selectMailDomain("@golemico.com");
+		selectMailDomain("@binnary.com");
 		
 		element(submitButton).waitUntilVisible();
 		submitButton.click();

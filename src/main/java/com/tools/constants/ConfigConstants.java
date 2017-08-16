@@ -39,7 +39,10 @@ public class ConfigConstants {
 	//public static final String WEB_MAIL = "dispostable.com";
 	///public static final String WEB_MAIL = "mailnesia.com";
 //	public static final String WEB_MAIL = "ipdeer.com";
-	public static final String WEB_MAIL = "golemico.com";
+//	public static final String WEB_MAIL = "golemico.com";
+	public static final String WEB_MAIL = "binnary.com";
+
+	
 	
 	public static final String EVOZON = "evozon.com";
 	public static final String GMAIL = "gmail.com";
