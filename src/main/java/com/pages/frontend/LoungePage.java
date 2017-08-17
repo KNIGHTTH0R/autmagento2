@@ -58,12 +58,18 @@ public class LoungePage extends AbstractPage {
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(4)")
 	private WebElement loanedLink;
+	
+
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(3) > ul li:nth-child(1) a")
 	private WebElement startOrderForCustomerLink;
 
 	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(4) > ul li:nth-child(1) span")
 	private WebElement borrowCartLink;
+	
+	@FindBy(css = "ul.main-nav.type-1.clearfix.logged-in > li:nth-child(3) > ul > li:nth-child(4) > ul li:nth-child(2) span")
+	private WebElement stylistInventoryLink;
+	
 
 	@FindBy(id = "contact")
 	private WebElement contactInput;
@@ -307,5 +313,16 @@ public void checkIfBorrowBoxIsDisplayed(boolean isDisplayed){
 			Assert.assertTrue("The Borrow box is present and it shouldn't !!!",
 					!borrowBox.getText().contains("MEINE LEIHMÖGLICHKEIT"));
 	}
+
+public void clickGoToStylistInventory() {
+	// TODO Auto-generated method stub
+	Actions builder = new Actions(getDriver());
+
+	builder.moveToElement(meinBusinessButton).build().perform();
+	builder.moveToElement(loanedLink).build().perform();
+
+	element(stylistInventoryLink).waitUntilVisible();
+	stylistInventoryLink.click();
+}
 
 }

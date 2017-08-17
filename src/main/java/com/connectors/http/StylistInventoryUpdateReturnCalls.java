@@ -16,8 +16,8 @@ import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
 import com.tools.data.soap.StylistInvetoryUpdateModel;
 
-public class StylistInventoryUpdateBorrowCalls {
-	public static StylistInvetoryUpdateModel getBorrowUpdateInfo(String customerId,String incrementId,String prodSku,String variantCode,String packSku) {
+public class StylistInventoryUpdateReturnCalls {
+	public static StylistInvetoryUpdateModel getReturnUpdateInfo(String customerId,String incrementId,String prodSku,String variantCode,String packSku) {
 
 		StylistInvetoryUpdateModel updateInfo = new StylistInvetoryUpdateModel();
 
@@ -25,7 +25,7 @@ public class StylistInventoryUpdateBorrowCalls {
 			SOAPMessage response = soapGetBorrowInfo(customerId,incrementId,prodSku,variantCode,packSku);
 			System.out.println(response);
 			try {
-				updateInfo = extractBorrowInfo(response);
+				updateInfo = extractReturnInfo(response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -76,10 +76,10 @@ public class StylistInventoryUpdateBorrowCalls {
 		qtyChange.addTextNode("1");
 
 		SOAPElement actualQty = getContactRequestParam.addChildElement("actualQty");
-		actualQty.addTextNode("1");
+		actualQty.addTextNode("0");
 
 		SOAPElement actionType = getContactRequestParam.addChildElement("actionType");
-		actionType.addTextNode("borrow");
+		actionType.addTextNode("return");
 
 		SOAPElement packageSku = getContactRequestParam.addChildElement("packageSku");
 		packageSku.addTextNode(packSku);
@@ -99,7 +99,7 @@ public class StylistInventoryUpdateBorrowCalls {
 		return soapMessage;
 	}
 
-	private static StylistInvetoryUpdateModel extractBorrowInfo(SOAPMessage response) throws Exception {
+	private static StylistInvetoryUpdateModel extractReturnInfo(SOAPMessage response) throws Exception {
 
 		StylistInvetoryUpdateModel result = new StylistInvetoryUpdateModel();
 
@@ -113,7 +113,7 @@ public class StylistInventoryUpdateBorrowCalls {
 	}
 
 	public static void main(String[] args) {
-		StylistInvetoryUpdateModel model = StylistInventoryUpdateBorrowCalls.getBorrowUpdateInfo("123206","10026671700","B002RS","MEDIUM","xxxx");
+		StylistInvetoryUpdateModel model = StylistInventoryUpdateReturnCalls.getReturnUpdateInfo("123206","10026671700","R199RS","18","xxxx");
 		System.out.println(model.toString());
 	}
 }

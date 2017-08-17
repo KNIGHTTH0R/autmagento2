@@ -190,6 +190,10 @@ public class OrderInfoMagCalls {
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("order_id")) {
 					model.setOrderId(resultNodes.item(r).getTextContent());
 				}
+				
+				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("customer_id")) {
+					model.setCustomerId(resultNodes.item(r).getTextContent());
+				}
 
 				if (resultNodes.item(r).getNodeName().equalsIgnoreCase("grand_total")) {
 					String grand_total = FormatterUtils.parseValueToTwoDecimals(resultNodes.item(r).getTextContent());
@@ -625,10 +629,11 @@ public class OrderInfoMagCalls {
 
 	public static void main(String[] args) throws SOAPException, IOException {
 		
-		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10026566600");
+		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10026678900");
 		System.out.println("kobo article " + dbmodel.getKoboSingleArticle());
 		System.out.println("is Pom " + dbmodel.getIsPom());
-//
+		System.out.println("dsds" +dbmodel.getCustomerId());
+//	
 //		String sessID = HttpSoapConnector.performLogin();
 //
 //		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo("10023165800");

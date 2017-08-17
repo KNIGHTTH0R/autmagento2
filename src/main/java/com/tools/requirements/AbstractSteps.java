@@ -125,6 +125,7 @@ import com.pages.frontend.registration.widget.RegisterLandingPage;
 import com.pages.frontend.reports.AvailabilityReportPage;
 import com.pages.frontend.reports.IpReportsPage;
 import com.pages.frontend.reports.JewelryBonusHistoryPage;
+import com.pages.frontend.reports.StylistInventoryPage;
 import com.pages.frontend.reports.StylistsCustomerOrderReportPage;
 import com.pages.frontend.reports.TeamReportPage;
 import com.tools.constants.ContextConstants;
@@ -602,6 +603,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public BorrowCartPage borrowCartPage() {
 		return getPages().currentPageAt(BorrowCartPage.class);
+	}
+	
+	public StylistInventoryPage stylistInventoryPage() {
+		return getPages().currentPageAt(StylistInventoryPage.class);
 	}
 
 	public WishlistPage wishlistPage() {

@@ -30,6 +30,11 @@ public class LoungeSteps extends AbstractSteps {
 	}
 
 	@Step
+	public void clickGoToStylistInventory() {
+		loungePage().clickGoToStylistInventory();
+	}
+	
+	@Step
 	public void goToToAddNewContact() {
 		loungePage().goToToAddNewContact();
 	}
