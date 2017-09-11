@@ -27,7 +27,7 @@ import com.tests.uss39.StylistInventoryReturnTopPackageTest;
 	//stylist inventory return  process 
 	StylistInventoryReturnTopPackageTest.class,
 	
-	
+	US16003StyleCoachRegistrationTest.class,
 	US16004aDefaultTopAndCustomPackageConfigTest.class,
 	US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest.class,
 

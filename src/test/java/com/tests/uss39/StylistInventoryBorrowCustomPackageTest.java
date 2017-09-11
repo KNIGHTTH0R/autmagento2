@@ -16,6 +16,7 @@ import com.steps.frontend.HeaderSteps;
 import com.steps.frontend.LoungeSteps;
 import com.steps.frontend.reports.StylistInventorySteps;
 import com.tests.BaseTest;
+import com.tests.uss16.us16004a.US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest;
 import com.tools.CustomVerification;
 import com.tools.constants.SoapKeys;
 import com.tools.data.frontend.CustomerFormModel;
@@ -32,6 +33,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US39.1 Stylist inventory borrow", type = "Scenarios")
 @RunWith(SerenityRunner.class)
 public class StylistInventoryBorrowCustomPackageTest extends BaseTest {
+
 
 	@Steps
 	CustomVerification customVerification;
@@ -62,7 +64,7 @@ public class StylistInventoryBorrowCustomPackageTest extends BaseTest {
 		username = stylistData.getEmailName();
 		password = stylistData.getPassword();
 		
-		orderIncrementId = MongoReader.grabOrderModels("US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest" +  SoapKeys.GRAB).get(0).getOrderId();
+		orderIncrementId = MongoReader.grabOrderModels("US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest" +  SoapKeys.GRAB).get(0).getOrderId();
 		DBOrderModel dbmodel = OrderInfoMagCalls.getOrderInfo(orderIncrementId);
 		customerId= dbmodel.getCustomerId();
 		
@@ -77,14 +79,14 @@ public class StylistInventoryBorrowCustomPackageTest extends BaseTest {
 			if (navOrderLinesModel.toString().contains("-")) {
 
 				StylistInvetoryUpdateModel model = StylistInventoryUpdateBorrowCalls.getBorrowUpdateInfo(customerId,
-						orderIncrementId, sku[0], sku[1],"yyy");
+						orderIncrementId, sku[0], sku[1],"yyyy");
 				System.out.println("model: " + model.getResult());
 				if (!model.getResult().contentEquals("1")) {
 					System.out.println("ASSSSSSSSERRRRRRRRRRRRRRRRT");
 				}
 			} else {
 				StylistInvetoryUpdateModel model = StylistInventoryUpdateBorrowCalls.getBorrowUpdateInfo(customerId,
-						orderIncrementId, sku[0], "","yyy");
+						orderIncrementId, sku[0], "","yyyy");
 				if (!model.getResult().contentEquals("1")) {
 					System.out.println("ASSSSSSSSERRRRRRRRRRRRRRRRT");
 				}
@@ -94,7 +96,7 @@ public class StylistInventoryBorrowCustomPackageTest extends BaseTest {
 	}
 
 	@Test
-	public void stylistInventoryBorrowTopPackageTest() throws Exception {
+	public void stylistInventoryBorrowCustomPackageTest() throws Exception {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());

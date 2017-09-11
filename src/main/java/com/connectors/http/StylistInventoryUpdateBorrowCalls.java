@@ -113,7 +113,7 @@ public class StylistInventoryUpdateBorrowCalls {
 	}
 
 	public static void main(String[] args) {
-		StylistInvetoryUpdateModel model = StylistInventoryUpdateBorrowCalls.getBorrowUpdateInfo("123206","10026671700","B002RS","MEDIUM","xxxx");
-		System.out.println(model.toString());
+		StylistInvetoryUpdateModel model = StylistInventoryUpdateBorrowCalls.getBorrowUpdateInfo("123248","10026683400","B002MC","MEDIUM","yyyy");
+		System.out.println(model.getResult());
 	}
 }

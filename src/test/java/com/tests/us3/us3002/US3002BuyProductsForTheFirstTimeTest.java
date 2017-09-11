@@ -1,4 +1,4 @@
-package com.tests.us3.us3002;
+ package com.tests.us3.us3002;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -7,10 +7,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 
 	
-	US5001Suite.class,
-	US5002Suite.class,
-	US5003Suite.class,
-	US5004Suite.class,
+	US6001Suite.class,
+	US6001bSuite.class,
+	US6002Suite.class,
 	
 })
 @RunWith(Suite.class)
