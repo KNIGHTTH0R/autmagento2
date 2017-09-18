@@ -7,7 +7,9 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
@@ -157,7 +159,8 @@ public class CreateCustomerPage extends AbstractPage {
 	public void checkParties() {
 		waitABit(2000);
 		element(partiesCheckbox).waitUntilVisible();
-		partiesCheckbox.click();
+		//partiesCheckbox.click();
+		clickElement(partiesCheckbox);
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 	}
@@ -169,25 +172,31 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void checkIAgree() {
-		iAgreeCheckbox.click();
+		clickElement(iAgreeCheckbox);
+		//iAgreeCheckbox.click();
 	}
 
 	public void clickCompleteButton() {
-		completeButton.click();
+		clickElement(completeButton);
+	//	completeButton.click();
 	}
 
 	public void inputStreetAddress(String streetAddress) {
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(streetInput).waitUntilVisible();
+		////
+		clickElement(streetInput);
 		streetInput.sendKeys(streetAddress);
 	}
 
 	public void inputStreetNumber(String streetNumber) {
+		clickElement(streetNumberInput);
 		streetNumberInput.sendKeys(streetNumber);
 	}
 
 	public void inputPostCode(String postCode) {
+		clickElement(postCodeInput);
 		postCodeInput.clear();
 		element(postCodeInput).typeAndTab(postCode);
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
@@ -212,12 +221,24 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputHomeTown(String homeTown) {
+		clickElement(cityInput);
 		cityInput.sendKeys(homeTown);
 	}
 
 	public void selectCountryName(String countryName) {
 		element(countrySelect).waitUntilVisible();
-		element(countrySelect).selectByVisibleText(countryName);
+	//	focusElement("#country");
+//	/	element(countrySelect).selectByVisibleText(countryName);
+		
+		
+		
+		clickElement(countrySelect);
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(countrySelect).perform();
+		
+		Select oSelect = new Select(getDriver().findElement(By.id("country")));
+
+		oSelect.selectByVisibleText(countryName);
 	}
 
 	public void selectCountryNameFromPersonalInfo(String countryName) {
@@ -226,6 +247,7 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void inputPhoneNumber(String phoneNumber) {
+		clickElement(telephoneInput);
 		telephoneInput.clear();
 		telephoneInput.sendKeys(phoneNumber);
 	}
@@ -233,10 +255,12 @@ public class CreateCustomerPage extends AbstractPage {
 	// ---------------Sc search
 
 	public void searchStylistByGeoip() {
-		searchStylistByGeoip.click();
+		clickElement(searchStylistByGeoip);
+	//	searchStylistByGeoip.click();
 	}
 
 	public void inputPostcodeFilter(String postcode) {
+		clickElement(searchPostcode);
 		searchPostcode.clear();
 		element(searchPostcode).typeAndTab(postcode);
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
@@ -247,7 +271,16 @@ public class CreateCustomerPage extends AbstractPage {
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		element(searchCountry).waitUntilVisible();
-		element(searchCountry).selectByVisibleText(countryName);
+		clickElement(searchCountry);
+		
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(countrySelect).perform();
+		
+		Select oSelect = new Select(getDriver().findElement(By.id("country")));
+
+		oSelect.selectByVisibleText(countryName);
+		
+		//element(searchCountry).selectByVisibleText(countryName);
 	}
 
 	public void searchStylistByName() {
@@ -264,7 +297,8 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void selectFirstStylistFromList() {
 		element(firstStylistContainer).waitUntilVisible();
-		firstStylistContainer.click();
+		clickElement(firstStylistContainer);
+	//	firstStylistContainer.click();
 	}
 
 	public List<DykscSeachModel> getFoundStylecoachesData() {
@@ -289,7 +323,8 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void searchByGeoipSubmit() {
 		element(searchByGeoipSubmitButton).waitUntilVisible();
-		searchByGeoipSubmitButton.click();
+	//	searchByGeoipSubmitButton.click();
+		clickElement(searchByGeoipSubmitButton);
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		waitABit(1000);

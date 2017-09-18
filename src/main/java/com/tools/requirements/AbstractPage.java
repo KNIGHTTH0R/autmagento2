@@ -3,7 +3,9 @@ package com.tools.requirements;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.mysql.jdbc.Constants;
@@ -13,6 +15,17 @@ import com.tools.constants.TimeConstants;
 import net.thucydides.core.pages.PageObject;
 
 public class AbstractPage extends PageObject {
+	
+	public void focusElement(String cssSelector) {
+		  ((JavascriptExecutor) getDriver()).executeScript("$('" + cssSelector + "')[0].scrollIntoView(true);");
+		  waitForPageToLoad();
+		 }
+	
+	public void clickElement(WebElement el)
+	 {
+	  JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+	  executor.executeScript("arguments[0].click()", el);
+	 }
 
 	public void elementjQueryClick(String element) {
 		evaluateJavascript("var dd =jQuery(\" " + element + " \").eq(0);dd.click(); ");

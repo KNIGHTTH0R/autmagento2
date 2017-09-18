@@ -8,8 +8,11 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
@@ -79,11 +82,13 @@ public class PartyCreationPage extends AbstractPage {
 
 	public String submitParty() {
 		element(partySubmitButton).waitUntilVisible();
-		partySubmitButton.click();
-		waitABit(TimeConstants.WAIT_TIME_SMALL);
+		clickElement(partySubmitButton);
+		waitABit(TimeConstants.TIME_MEDIUM);
 		return getDriver().getCurrentUrl();
 		
 	}
+	
+
 
 	public void checkHostedByCustomer() {
 		element(hostedByCustomer).waitUntilVisible();
@@ -100,7 +105,13 @@ public class PartyCreationPage extends AbstractPage {
 
 	public void selectPartyCountry(String country) {
 		element(countryInput).waitUntilVisible();
-		countryInput.sendKeys(country);
+		clickElement(countryInput);
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(countryInput).perform();
+		
+		Select oSelect = new Select(getDriver().findElement(By.id("country")));
+
+		oSelect.selectByVisibleText(country);
 
 	}
 
