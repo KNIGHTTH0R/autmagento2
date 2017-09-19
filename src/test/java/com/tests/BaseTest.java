@@ -36,16 +36,15 @@ public class BaseTest {
 	@Before
 	public void startComponents() throws IOException {
 
-//		try {
-//			System.err.println("--------------------------------- Test Start---------------------------------------");
-//
-//			mongoConnector = new MongoConnector();
-//			System.out.println("Connect to Mongo DB...");
-//			System.out.println("DB: " + mongoConnector.getDbAddress());
-//		} catch (Exception e) {
-//			System.out.println("Error: Mongo connection could not be initialized");
-//			e.printStackTrace();
-//		}
+		try {
+			System.err.println("--------------------------------- Test Start---------------------------------------");
+
+			mongoConnector = new MongoConnector();
+			System.out.println("Connect to Mongo DB...");
+ 		} catch (Exception e) {
+			System.out.println("Error: Mongo connection could not be initialized");
+			e.printStackTrace();
+		}
 
 		// Context and environment - clean and setup to mongo
 		MongoConnector.cleanCollection(MongoTableKeys.TEST_CONFIG);
