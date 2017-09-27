@@ -10,30 +10,25 @@ import com.tests.uss11.us11003.US11003VerifyProductsInPlaceACustomerOrderModal;
 import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPriceTest;
 
 @SuiteClasses({
-//	CreateProductsTest.class,
-//	BorrowCartSuite.class, 
-	
-	
-//	US6001Suite.class,
-//	US6001bSuite.class,
-//	US6002Suite.class,
-//	US6002bSuite.class,
-//	US6003Suite.class,
-//	US6006ScBuyProductwithSpecialPriceTest.class,
-	
-	US7CreateRegularCustomersSuite.class,
-	US7001Suite.class,
-	US7001bSuite.class,
-//	US7002Suite.class,
-//	US7004Suite.class,
-//	//US7004bSuite.class,
-	
-	
-//	US7008Suite.class,
-	US7009Suite.class,
-	US70010Suite.class,
-	US70011Suite.class,
-	US70012Suite.class,
+		CreateProductsTest.class,
+		US10CreateAllPartiesSuite.class,
+
+		//Place customer order 
+		US11001Suite.class,
+		US11002Suite.class,
+		//should be verified 
+		//US11003VerifyProductsInPlaceACustomerOrderModal.class,
+		US11004Suite.class,
+		US11005Suite.class,
+		
+		
+//		US11006Suite.class, -> deprecated
+		US11007Suite.class,
+		US11008Suite.class,
+		US110011PlaceCustomerOrderProductWithSpecialPriceTest.class,
+		
+		//Party
+		US10007SuitePartOne.class,
 })
 @RunWith(Suite.class)
 public class QuickTestsSuite3 {
