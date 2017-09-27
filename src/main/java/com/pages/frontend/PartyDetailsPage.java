@@ -171,7 +171,8 @@ public class PartyDetailsPage extends AbstractPage {
 		List<WebElement> placeCustomerOrderBtn= getDriver().findElements(By.cssSelector("form[action*='placeCustomerOrder'] button"));
 		if(placeCustomerOrderBtn.size()!=0){
 			isDisplayed=true;
-			orderForCustomer.click();
+			clickElement(orderForCustomer);
+//			orderForCustomer.click();
 			withTimeoutOf(40, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
 					By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		}else{
@@ -182,12 +183,14 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void hostessInviteConfirmation() {
 		element(hostessInviteConfirmation).waitUntilVisible();
-		hostessInviteConfirmation.click();
+		clickElement(hostessInviteConfirmation);
+		//hostessInviteConfirmation.click();
 	}
 
 	public void sendInvitationToHostess() {
 		element(sendInvitationToHostess).waitUntilVisible();
-		sendInvitationToHostess.click();
+		clickElement(sendInvitationToHostess);
+//		sendInvitationToHostess.click();
 	}
 
 	public ClosedPartyPerformanceModel grabClosedPartyPerformance() {
@@ -275,7 +278,8 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void popupCloseParty() {
 		element(popupPartyCloseButton).waitUntilVisible();
-		popupPartyCloseButton.click();
+		clickElement(popupPartyCloseButton);
+//		popupPartyCloseButton.click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.textToBePresentInElement(
 				getDriver().findElement(By.id("closePartyWrapper")), ContextConstants.SUCCESSFULY_CLOSED_PARTY));
 	}

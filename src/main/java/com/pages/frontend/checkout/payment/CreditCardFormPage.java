@@ -28,15 +28,18 @@ public class CreditCardFormPage extends AbstractPage {
 
 	public void cardNumberInput(String cardNumber) {
 		element(cardNumberInput).waitUntilVisible();
+		clickElement(cardNumberInput);
 		cardNumberInput.sendKeys(cardNumber);
 	}
 
 	public void cardHolderInput(String cardHolder) {
 		element(cardHolderInput).waitUntilVisible();
+		clickElement(cardHolderInput);
 		cardHolderInput.sendKeys(cardHolder);
 	}
 
 	public void selectMonthExpiry(String month) {
+		
 		selectFromDropdown(expiryMonthSelect, month);
 	}
 
@@ -51,6 +54,7 @@ public class CreditCardFormPage extends AbstractPage {
 
 	public void clickOnConfirm() {
 		element(submitButton).waitUntilVisible();
-		submitButton.click();
+		clickElement(submitButton);
+	//	submitButton.click();
 	}
 }

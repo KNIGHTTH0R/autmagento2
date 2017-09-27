@@ -218,13 +218,9 @@ public class US3001SfmValidVatNoSmbBillingShippingNotDeTest extends BaseTest {
 		paymentSteps.fillSepaForm(sepaPaymentMethodModel);
 
 		confirmationSteps.grabProductsList();
-		System.out.println("sunt aici vere");
 		confirmationSteps.grabConfirmationTotals();
-		System.out.println("sunt aici vere 1" );
 		confirmationSteps.grabBillingData();
-		System.out.println("sunt aici vere 2");
 		confirmationSteps.grabSippingData();
-		System.out.println("sunt aici vere 3");
 		
 		confirmationSteps.agreeAndCheckout();
 		validationWorkflows.setBillingShippingAddress(addressString, addressString);

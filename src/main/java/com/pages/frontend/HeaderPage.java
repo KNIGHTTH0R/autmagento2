@@ -113,7 +113,8 @@ public class HeaderPage extends AbstractPage {
 
 	public void clickOnProfileButton() {
 		element(profileButton).waitUntilVisible();
-		profileButton.click();
+		clickElement(profileButton);
+//		profileButton.click();
 	}
 
 	public void clickOnWishlistButton() {

@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
@@ -306,6 +307,8 @@ public class AbstractSteps extends ScenarioSteps {
 			getDriver().manage().timeouts().pageLoadTimeout(3600, TimeUnit.SECONDS);
 			getDriver().get(URL);
 			getDriver().manage().window().maximize();
+			JavascriptExecutor executor = (JavascriptExecutor)getDriver();
+			executor.executeScript("document.body.style.zoom = '0.6'");
 		}
 
 	}

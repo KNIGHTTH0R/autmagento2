@@ -172,7 +172,8 @@ public class ConfirmationPage extends AbstractPage {
 
 	public void clickOnSubmit() {
 		element(submitButton).waitUntilVisible();
-		submitButton.click();
+		clickElement(submitButton);
+	//	submitButton.click();
 	}
 
 	// public ShippingModel grabConfirmationTotals() {

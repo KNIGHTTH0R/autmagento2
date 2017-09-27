@@ -150,7 +150,8 @@ public class OrderForCustomerCartPage extends AbstractPage {
 
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
-		kasseButton.click();
+		clickElement(kasseButton);
+//		kasseButton.click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
 				ContextConstants.LOADING_MESSAGE));
 	}

@@ -59,7 +59,8 @@ public class PlaceCustomerOrderFromPartyPage extends AbstractPage {
 
 	public void startOrderForCustomer() {
 		element(createOrder).waitUntilVisible();
-		createOrder.click();
+		clickElement(createOrder);
+//		createOrder.click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
 				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitABit(TimeConstants.TIME_MEDIUM);

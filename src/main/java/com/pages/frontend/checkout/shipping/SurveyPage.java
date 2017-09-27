@@ -107,7 +107,8 @@ public class SurveyPage extends AbstractPage {
 		element(toPaymentButton).waitUntilVisible();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 		waitFor(ExpectedConditions.elementToBeClickable(toPaymentButton));
-		toPaymentButton.click();
+	//	toPaymentButton.click();
+		clickElement(toPaymentButton);
 		//toPaymentButton.sendKeys(Keys.RETURN);
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
         waitABit(3000);

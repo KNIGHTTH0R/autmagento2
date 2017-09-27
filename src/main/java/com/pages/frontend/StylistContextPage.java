@@ -20,7 +20,8 @@ public class StylistContextPage extends AbstractPage {
 
 	public void submitStep() {
 		element(submitStepButton).waitUntilVisible();
-		submitStepButton.click();
+		clickElement(submitStepButton);
+//		submitStepButton.click();
 	}
 
 	public void inputStylistRef(String ref) {

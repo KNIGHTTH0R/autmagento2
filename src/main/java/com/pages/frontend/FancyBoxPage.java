@@ -33,7 +33,8 @@ public class FancyBoxPage extends AbstractPage {
 
 	public void goToShipping() {
 		element(goToShipping).waitUntilVisible();
-		goToShipping.click();
+		clickElement(goToShipping);
+//		goToShipping.click();
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 
