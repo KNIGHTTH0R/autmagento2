@@ -12,7 +12,6 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 @SuiteClasses({
 		CreateProductsTest.class,
 		US10CreateAllPartiesSuite.class,
-
 		//Place customer order 
 		US11001Suite.class,
 		US11002Suite.class,
@@ -23,12 +22,12 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 		
 		
 //		US11006Suite.class, -> deprecated
-		US11007Suite.class,
-		US11008Suite.class,
-		US110011PlaceCustomerOrderProductWithSpecialPriceTest.class,
-		
-		//Party
-		US10007SuitePartOne.class,
+//		US11007Suite.class,
+//		US11008Suite.class,
+//		US110011PlaceCustomerOrderProductWithSpecialPriceTest.class,
+//		
+//		//Party
+//		US10007SuitePartOne.class,
 })
 @RunWith(Suite.class)
 public class QuickTestsSuite3 {
