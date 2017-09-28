@@ -307,8 +307,8 @@ public class AbstractSteps extends ScenarioSteps {
 			getDriver().manage().timeouts().pageLoadTimeout(3600, TimeUnit.SECONDS);
 			getDriver().get(URL);
 			getDriver().manage().window().maximize();
-			JavascriptExecutor executor = (JavascriptExecutor)getDriver();
-			executor.executeScript("document.body.style.zoom = '0.6'");
+//			JavascriptExecutor executor = (JavascriptExecutor)getDriver();
+//			executor.executeScript("document.body.style.zoom = '0.6'");
 		}
 
 	}
