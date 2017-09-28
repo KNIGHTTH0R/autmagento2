@@ -15,6 +15,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -51,7 +52,7 @@ public class US10001CreatePartyWithCustomerHostTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-
+	
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -81,7 +82,10 @@ public class US10001CreatePartyWithCustomerHostTest extends BaseTest {
 
 	@Test
 	public void us10001CreatePartyWithCustomerHostTest() {
-		customerRegistrationSteps.performLogin(username, password);
+		 DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+		  desiredCapabilities.setCapability("name", "salut vere");
+		
+		  customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
