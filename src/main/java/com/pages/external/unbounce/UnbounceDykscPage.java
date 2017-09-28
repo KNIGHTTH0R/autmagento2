@@ -132,5 +132,11 @@ public class UnbounceDykscPage extends AbstractPage {
 		return resultList;
 
 	}
+	//@emilian DYKSC kobo campaign
+		public void clickSubmitAndContinue() {
+			element(submitButton).waitUntilVisible();
+			submitButton.click();
+		}
+
 
 }

@@ -30,4 +30,9 @@ public class DoYouKnowAScSteps extends AbstractSteps {
 		return null;
 	}
 
+	//@emilian kobo campaing submit and contiunue
+		 @Step
+		 public void submitAndContinue(){
+			 unbounceDykscPage().clickSubmitAndContinue();
+		 }
 }

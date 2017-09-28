@@ -165,4 +165,24 @@ public class KoboCampaignSteps extends AbstractSteps {
 		koboCampaignPage().submitAndContinue();
 	}
 
+	public void fillKoboCampaignRegistrationFormOnMasterShopByDyksc(CustomerFormModel dataModel,
+			AddressModel addressModel) {
+		koboCampaignPage().firstNameInput(dataModel.getFirstName());
+		koboCampaignPage().lastNameInput(dataModel.getLastName());
+		koboCampaignPage().inputStreetAddress(addressModel.getStreetAddress());
+		koboCampaignPage().inputStreetNumber(addressModel.getStreetNumber());
+		koboCampaignPage().inputPhoneNumber(addressModel.getPhoneNumber());
+		koboCampaignPage().inputPostCode(addressModel.getPostCode());
+		koboCampaignPage().inputHomeTown(addressModel.getHomeTown());
+		koboCampaignPage().selectCountryName(addressModel.getCountryName());
+		koboCampaignPage().passwordInput(dataModel.getPassword());
+		koboCampaignPage().passwordConfirmInput(dataModel.getPassword());
+		koboCampaignPage().emailInput(dataModel.getEmailName());//contactEmail for Dyksc
+		// koboCampaignPage().checkStyleMemberCheckbox();
+		koboCampaignPage().checkStylePartiesCheckbox(); //this was set before 
+		koboCampaignPage().checkStyleMemberCheckbox();//maybe becoming a Sc should be checked
+		koboCampaignPage().checkIAgree();
+		koboCampaignPage().submitAndContinue();
+		
+	}
 }
