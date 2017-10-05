@@ -93,6 +93,7 @@ public class US10001CreatePartyWithCustomerHostTest extends BaseTest {
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
+		
 	}
 
 	@After
