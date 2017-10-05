@@ -6,16 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
@@ -25,11 +19,17 @@ import com.steps.frontend.PartyCreationSteps;
 import com.tests.BaseTest;
 import com.tools.constants.SoapKeys;
 import com.tools.constants.UrlConstants;
+import com.tools.customDrivers.CustomZaleniumDriver;
 import com.tools.data.UrlModel;
 import com.tools.data.frontend.DateModel;
 import com.tools.persistance.MongoReader;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US9.2b Place Host Order With 40% Discount, JB and Buy 3 get 1 for 50% Test", type = "Scenarios")
 @Story(Application.HostCart.US9_2.class)
@@ -44,7 +44,7 @@ public class US10001CreatePartyWithCustomerHostTest extends BaseTest {
 	public FooterSteps footerSteps;
 	@Steps
 	public PartyCreationSteps partyCreationSteps;
-	
+
 	private static UrlModel urlModel = new UrlModel();
 	private static DateModel dateModel = new DateModel();
 	private String username, password;
@@ -52,7 +52,8 @@ public class US10001CreatePartyWithCustomerHostTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-	
+		
+		
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -82,10 +83,9 @@ public class US10001CreatePartyWithCustomerHostTest extends BaseTest {
 
 	@Test
 	public void us10001CreatePartyWithCustomerHostTest() {
-		 DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-		  desiredCapabilities.setCapability("name", "salut vere");
+		 
 		
-		  customerRegistrationSteps.performLogin(username, password);
+		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
@@ -97,10 +97,9 @@ public class US10001CreatePartyWithCustomerHostTest extends BaseTest {
 
 	@After
 	public void saveData() {
-		
+
 		MongoWriter.saveUrlModel(urlModel, getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName() + SoapKeys.GRAB);
 	}
-	
-	
+
 }

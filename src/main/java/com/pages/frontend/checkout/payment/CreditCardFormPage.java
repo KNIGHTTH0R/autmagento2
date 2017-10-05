@@ -28,13 +28,13 @@ public class CreditCardFormPage extends AbstractPage {
 
 	public void cardNumberInput(String cardNumber) {
 		element(cardNumberInput).waitUntilVisible();
-		clickElement(cardNumberInput);
+	//	clickElement(cardNumberInput);
 		cardNumberInput.sendKeys(cardNumber);
 	}
 
 	public void cardHolderInput(String cardHolder) {
 		element(cardHolderInput).waitUntilVisible();
-		clickElement(cardHolderInput);
+		//clickElement(cardHolderInput);
 		cardHolderInput.sendKeys(cardHolder);
 	}
 
@@ -54,7 +54,7 @@ public class CreditCardFormPage extends AbstractPage {
 
 	public void clickOnConfirm() {
 		element(submitButton).waitUntilVisible();
-		clickElement(submitButton);
-	//	submitButton.click();
+	//	clickElement(submitButton);
+		submitButton.click();
 	}
 }

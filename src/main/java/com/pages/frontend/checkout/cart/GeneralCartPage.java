@@ -18,8 +18,7 @@ public class GeneralCartPage extends AbstractPage {
 
 	public void clickClearCart() {
 		element(clearCartButton).waitUntilVisible();
-		clickElement(clearCartButton);
-	//	clearCartButton.click();
+		clearCartButton.click();
 	}
 	
 	public boolean isCartEmpty(){

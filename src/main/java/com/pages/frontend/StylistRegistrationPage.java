@@ -327,7 +327,7 @@ public class StylistRegistrationPage extends AbstractPage {
 	public void submitStep() {
 		element(submitStepButton).waitUntilVisible();
 		clickElement(submitStepButton);
-//		submitStepButton.click();
+		//submitStepButton.click();
 	}
 
 	public void submitPaymentMethod() {

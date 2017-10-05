@@ -6,8 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.CreateProductsTest;
 import com.tests.us3.us30012.US30012SfmSpecialPriceProductTest;
-import com.tests.us7.us7001.US7001ConfirmCustomerTest;
-import com.tests.us7.us7001.US7001RegularCustRegOnMasterTest;
 
 
 @SuiteClasses({

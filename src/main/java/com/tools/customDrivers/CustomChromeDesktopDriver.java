@@ -7,6 +7,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import net.thucydides.core.webdriver.DriverSource;
 
@@ -33,10 +34,14 @@ public class CustomChromeDesktopDriver implements DriverSource{
 //		options.addArguments("--disable-notifications");
 //		System.setProperty("webdriver.chrome.driver","C:/Users/emilianmelian/git/pippajeanautotester/resources/chromedriver.exe");
 		
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		
 		Map<String, Object> prefs = new HashMap<String, Object>();
 		prefs.put("profile.default_content_setting_values.notifications", 2);
 		ChromeOptions options = new ChromeOptions();
 		options.setExperimentalOption("prefs", prefs);
+		options.setExperimentalOption("name","emilian");
+		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 		return new ChromeDriver(options);
 		
 		

@@ -4,11 +4,8 @@ package com.pages.frontend;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,6 +15,8 @@ import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class PartyCreationPage extends AbstractPage {
 
@@ -82,7 +81,8 @@ public class PartyCreationPage extends AbstractPage {
 
 	public String submitParty() {
 		element(partySubmitButton).waitUntilVisible();
-		clickElement(partySubmitButton);
+	//	clickElement(partySubmitButton);
+		partySubmitButton.click();
 		waitABit(TimeConstants.TIME_MEDIUM);
 		return getDriver().getCurrentUrl();
 		
@@ -105,7 +105,8 @@ public class PartyCreationPage extends AbstractPage {
 
 	public void selectPartyCountry(String country) {
 		element(countryInput).waitUntilVisible();
-		clickElement(countryInput);
+		//clickElement(countryInput);
+		countryInput.click();
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(countryInput).perform();
 		

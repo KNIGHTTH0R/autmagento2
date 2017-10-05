@@ -20,14 +20,22 @@ public class SafariUsage {
 	 
 	@Test
 	public void safariUsage() throws Exception {
-		RemoteWebDriver driver = new RemoteWebDriver(
-                new URL("http://localhost:4444/wd/hub"),
-                DesiredCapabilities.chrome());
-		driver.get("http://store.demoqa.com");
- 
-		//Find some element on DemoQa.com
-		WebElement element = driver.findElement(By.id("login"));
-		element.click();
+	
+		
+		// Change this to match the location of your server
+	    URL server = new URL("http://172.22.4.79:82/wd/hub");
+
+	    DesiredCapabilities capabilities = new DesiredCapabilities();
+	    capabilities.setBrowserName("firefox");
+	    capabilities.setCapability("name", "Emilian");
+	    System.out.println("Connecting to " + server);
+
+	    WebDriver driver = new RemoteWebDriver(server, capabilities);
+
+	    driver.get("http://www.google.com");
+
+	    driver.quit();
+		
 	}
 //	
 //	public static void main(String[] args)
