@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 
 import com.pages.backend.MagentoLoginPage;
 import com.pages.backend.NavigationPage;
@@ -38,6 +37,9 @@ import com.pages.backend.stylecoach.StylecoachDetailsBackendPage;
 import com.pages.backend.stylecoach.StylecoachListBackendPage;
 import com.pages.backend.termPurchase.TermPurchaseGridPage;
 import com.pages.external.MailinatorPage;
+import com.pages.external.academy.AcademyPage;
+import com.pages.external.academy.AcademyQuizPage;
+import com.pages.external.academy.LoginAcademyPage;
 import com.pages.external.commission.CommissionReportPage;
 import com.pages.external.facebook.FacebookEMBLoginConfirmPage;
 import com.pages.external.facebook.FacebookEMBLoginPage;
@@ -593,6 +595,18 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public UnbounceDykscPage unbounceDykscPage() {
 		return getPages().currentPageAt(UnbounceDykscPage.class);
+	}
+	
+	public AcademyPage academyPage() {
+		return getPages().currentPageAt(AcademyPage.class);
+	}
+	
+	public AcademyQuizPage academyQuizPage() {
+		return getPages().currentPageAt(AcademyQuizPage.class);
+	}
+	
+	public LoginAcademyPage loginAcademyPage() {
+		return getPages().currentPageAt(LoginAcademyPage.class);
 	}
 
 	public TeamReportPage teamReportPage() {

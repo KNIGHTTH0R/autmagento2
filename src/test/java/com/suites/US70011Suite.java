@@ -6,6 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us7.uss70011.US70011CheckCustomerActivation;
 import com.tests.us7.uss70011.US70011CheckReceivedEmailsTest;
+import com.tests.us7.uss70011.US70011KoboCampaignRegistrationOnMasterTest1;
 import com.tests.us7.uss70011.US70011PlacePomOrderTest;
 import com.tests.us7.uss70011.US70011ValidateCustomerIsAssignedToStylist;
 

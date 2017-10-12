@@ -10,7 +10,6 @@ import com.tests.us8.us8006.US8006ValidateOrderBackOfficeTest;
 @SuiteClasses({
 	US8006CustomerBuyWithVoucherPartiallyOnShippingTest.class,
 //	US8006CheckOrderOnCustomerProfileTest.class,	
-
 	US8006ValidateOrderBackOfficeTest.class,	
 //	US8006ValidateOrderEmailTest.class,	
 })

@@ -38,14 +38,11 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US6003Suite.class,
 	US6006ScBuyProductwithSpecialPriceTest.class,
 	
-	//Create customer cart suite
+	//Create customer  suite
 	US7CreateRegularCustomersSuite.class,
 	US7001Suite.class,
 	US7001bSuite.class,
-//	US7002Suite.class,
-//	US7004Suite.class,
-//	//US7004bSuite.class,
-	
+	US7002Suite.class,
 	
 //	US7008Suite.class,
 	US7009Suite.class,
@@ -77,7 +74,6 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US11004Suite.class,
 	US11005Suite.class,
 	
-	
 //	US11006Suite.class, -> deprecated
 	US11007Suite.class,
 	US11008Suite.class,
@@ -99,7 +95,7 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US9007Suite.class,
 	
 	
-	US15004Suite.class,
+	//US15004Suite.class,
 	
 	US12001Suite.class,
 	
@@ -137,7 +133,6 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 //	VerifyOrderEmailsSuite.class
 	
 })
-@RunWith(Suite.class)
-public class PippaInternationalizationDeSuite {
+ public class PippaInternationalizationDeSuite {
 
 }

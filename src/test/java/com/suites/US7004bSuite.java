@@ -9,7 +9,7 @@ import com.tests.us7.us7004b.US7004bEmailActivationTest;
 import com.tests.us7.us7004b.US7004bRegCustRegLandingPageNotPrefCountryTest;
 
 @SuiteClasses({
-//	US7004bRegCustRegLandingPageNotPrefCountryTest.class,
+	US7004bRegCustRegLandingPageNotPrefCountryTest.class,
 	US7004bEmailActivationTest.class,
 	US7004bCheckCustomerActivationTest.class,
 })

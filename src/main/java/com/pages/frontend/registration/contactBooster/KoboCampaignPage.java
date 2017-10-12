@@ -125,7 +125,8 @@ public class KoboCampaignPage extends AbstractPage {
 
 	public void submitAndContinue() {
 		element(submitButton).waitUntilVisible();
-		submitButton.click();
+		clickElement(submitButton);
+	//	submitButton.click();
 	}
 
 	public void inputStreetAddress(String streetAddress) {
