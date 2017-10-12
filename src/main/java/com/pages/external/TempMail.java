@@ -47,7 +47,7 @@ public class TempMail extends AbstractPage {
 		element(mailInput).clear();
 		mailInput.sendKeys(email);
 		
-		selectMailDomain("@coreclip.com");
+		selectMailDomain("@geronra.com");
 		
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
@@ -95,7 +95,7 @@ public class TempMail extends AbstractPage {
 		element(mailInput).clear();
 		mailInput.sendKeys(email);
 		
-		selectMailDomain("@coreclip.com");
+		selectMailDomain("@geronra.com");
 		
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
