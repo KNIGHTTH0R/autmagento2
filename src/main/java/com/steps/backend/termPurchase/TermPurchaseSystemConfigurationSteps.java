@@ -68,6 +68,13 @@ public class TermPurchaseSystemConfigurationSteps extends AbstractSteps {
 	public void saveConfiguration() {
 		systemConfigurationPage().saveConfiguration();
 	}
+
+	@Step
+	public void clickOnTpScheduledPaymentsSettingTab() {
+		// TODO Auto-generated method stub
+		systemConfigurationPage().clickOnTpScheduledPaymentsSettingTab();
+		
+	}
 	
 
 }

@@ -133,6 +133,8 @@ public class ContextConstants {
 	public static final String CATALOG_PAGE = MongoReader.getDictionaryItem("CATALOG_PAGE");
 	public static final String CATALOG_ROW = MongoReader.getDictionaryItem("CATALOG_ROW");
 	public static final String PRODUCTS_BACK_IN_STOCK= MongoReader.getDictionaryItem("PRODUCTS_BACK_IN_STOCK");
+	public static final String STOCK_REPORT = MongoReader.getDictionaryItem("STOCK_REPORT");
+	public static final String LESS_THEN_X_ITEMS= MongoReader.getDictionaryItem("LESS_THEN_X_ITEMS");
 	public static final String TEMPORARLY_NOT_AVAILABLE= MongoReader.getDictionaryItem("TEMPORARLY_NOT_AVAILABLE");
 	public static final String NO_LONGER_AVAILABLE= MongoReader.getDictionaryItem("NO_LONGER_AVAILABLE");
 	public static final String NECKLACES= MongoReader.getDictionaryItem("NECKLACES");
@@ -168,5 +170,6 @@ public class ContextConstants {
 	
 	public static final String ALLERT_MESSAGE = MongoReader.getDictionaryItem("ALLERT_MESSAGE");
 	public static final String PARTY_USER = MongoReader.getDictionaryItem("PARTY_USER");
+	
 	
 }

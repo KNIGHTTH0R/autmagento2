@@ -103,6 +103,7 @@ public class US12001CustomerBuyWithContactBoosterTest extends BaseTest {
 		homeSteps.goToNewItems();
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+		headerSteps.waitABit(10000);
 		generalCartSteps.clearCart();
 		RegularBasicProductModel productData;
 

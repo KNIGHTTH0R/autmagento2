@@ -85,10 +85,36 @@ public class AvailabilityReportSteps extends AbstractSteps {
 		availabilityReportPage().reloadReports();
 
 	}
-
+	@Step
 	public void verifyIfProductIsNotDisplayedinSelectedTab(String sku) {
 		availabilityReportPage().verifyIfProductIsNotDisplayedinSelectedTab(sku);
 		
+	}
+	@Step
+	public void clickOnStockReportTabProductsTab() {
+		availabilityReportPage().clickOnStockReportTabProductsTab();
+		
+	}
+	@Step
+	public void verifyIfStockPoductsTabIsSelected() {
+		availabilityReportPage().verifyIfStockPoductsTabIsSelected();		
+	}
+
+	@Step
+	public void clickOnLessThenXProductsTab() {
+		availabilityReportPage().clickOnLessThenXProductsTab();
+		
+	}
+	@Step
+	public void verifyIfLessThenXPoductsTabIsSelected() {
+		// TODO Auto-generated method stub
+		availabilityReportPage().verifyIfLessThenXPoductsTabIsSelected();	
+	}
+
+	@Step
+	public void verifyReportIsOpen() {
+		// TODO Auto-generated method stub
+		availabilityReportPage().verifyReportIsOpen();	
 	}
 
 }

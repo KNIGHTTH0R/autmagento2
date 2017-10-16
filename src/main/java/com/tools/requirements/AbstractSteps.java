@@ -230,6 +230,7 @@ public class AbstractSteps extends ScenarioSteps {
 		waitABit(TimeConstants.TIME_CONSTANT);
 	}
 
+	@Step
 	public void openNewTab() {
 		abstractPage().openNewTab();
 	}

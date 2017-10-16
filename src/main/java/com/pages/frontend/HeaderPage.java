@@ -25,10 +25,12 @@ public class HeaderPage extends AbstractPage {
 	
 	@FindBy(css = ".quick-access p")
 	private WebElementFacade succesLoginContainerES;
-	
-	
+
 	@FindBy(css = ".top-search-icon")
 	private WebElement submitSearch;
+	
+	@FindBy(css = ".links li:nth-child(3) a")
+	private WebElement log0utBtn;
 
 //	@FindBy(id = "#add-to-cart")
 //	private WebElement addToCartButton;
@@ -229,6 +231,11 @@ public class HeaderPage extends AbstractPage {
 		element(inviteFriendsLink).waitUntilVisible();
 		inviteFriendsLink.click();
 		waitABit(5000);		
+	}
+
+	public void checkSucesfullLoginInPippa() {
+		// TODO Auto-generated method stub
+		CustomVerification.verifyTrue("The user seems to not be logged in Pippajean", log0utBtn.getText().contains("ABMELDEN"));
 	}
 
 	

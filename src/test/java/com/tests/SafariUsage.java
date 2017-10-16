@@ -1,5 +1,7 @@
 package com.tests;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 
 import org.junit.After;
@@ -17,8 +19,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import net.serenitybdd.core.annotations.findby.By;
 
 public class SafariUsage {
+	
+	public static void main(String[] args) {
+		String mesaj="You have reached 5 of 6 point(s), (80.00%)";
+		String no=mesaj.substring(mesaj.indexOf( '(' ),mesaj.indexOf( '%' )).replaceAll("[^\\d.]", "") ;
+		BigDecimal money = new BigDecimal(no);
+		System.out.println(money);
+		
+		/*BigDecimal value=new BigDecimal(80);
+		if(exactScore.compareTo(value)>=0){
+			System.out.println("da cursul ar trebui sa fie ok");
+		}*/
+	}
 	 
-	@Test
+	/*@Test
 	public void safariUsage() throws Exception {
 	
 		
@@ -36,7 +50,7 @@ public class SafariUsage {
 
 	    driver.quit();
 		
-	}
+	}*/
 //	
 //	public static void main(String[] args)
 //	{

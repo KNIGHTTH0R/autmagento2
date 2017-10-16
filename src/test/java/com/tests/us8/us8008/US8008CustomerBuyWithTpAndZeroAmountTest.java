@@ -155,6 +155,7 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		homeSteps.goToNewItems();
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
+		//headerSteps.waitABit(10000);
 		generalCartSteps.clearCart();
 
 		addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");

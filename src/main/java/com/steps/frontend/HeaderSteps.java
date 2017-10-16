@@ -267,5 +267,10 @@ public class HeaderSteps extends AbstractSteps {
 		findFrame("Log in With Facebook");
 		
 	}
+
+	public void checkSucesfullLoginInPippa() {
+		// TODO Auto-generated method stub
+		headerPage().checkSucesfullLoginInPippa();
+	}
 	
 }

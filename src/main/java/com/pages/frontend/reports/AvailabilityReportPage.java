@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.tools.CustomVerification;
 import com.tools.constants.ContextConstants;
 import com.tools.data.soap.ProductDetailedModel;
 import com.tools.requirements.AbstractPage;
@@ -28,6 +29,12 @@ public class AvailabilityReportPage extends AbstractPage {
 
 	@FindBy(id = "report3")
 	private WebElement notLongerAvailableProducts;
+	
+	@FindBy(id = "report4")
+	private WebElement lessThenXProducts;
+	
+	@FindBy(id = "report5")
+	private WebElement stockReportProducts;
 
 	@FindBy(css = ".btn-reload ")
 	private WebElement reloadButton;
@@ -69,6 +76,15 @@ public class AvailabilityReportPage extends AbstractPage {
 
 	}
 
+	public void verifyReportIsOpen(){
+		List<WebElement> lines = getDriver().findElements(By.cssSelector("table.table tr"));
+		if (!lines.isEmpty()) {
+			System.out.println("---> Report opened correctly <---");
+		}else{
+			CustomVerification.verifyTrue("The report is not displayed", true);
+		}
+	}
+	
 	private WebElement getProductRow(String sku) {
 		List<WebElement> lines = getDriver().findElements(By.cssSelector("table.table tr"));
 		WebElement searchedLine = null;
@@ -194,6 +210,34 @@ public class AvailabilityReportPage extends AbstractPage {
 	public void verifyIfProductIsNotDisplayedinSelectedTab(String sku) {
 		Assert.assertFalse("the product is displayed and should not be", !isProductDisplayed(sku));
 
+	}
+
+	public void clickOnStockReportTabProductsTab() {
+		element(stockReportProducts).waitUntilVisible();
+		stockReportProducts.click();
+		
+	}
+
+	public void verifyIfStockPoductsTabIsSelected() {
+		// TODO Auto-generated method stub
+		Assert.assertTrue("The message is not displayed",
+				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
+						.contains(ContextConstants.STOCK_REPORT));
+	}
+
+	public void clickOnLessThenXProductsTab() {
+		element(lessThenXProducts).waitUntilVisible();
+		lessThenXProducts.click();
+	}
+
+	public void verifyIfLessThenXPoductsTabIsSelected() {
+//		Assert.assertTrue("The message is not displayed",
+//				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
+//						.contains(ContextConstants.LESS_THEN_X_ITEMS));
+		
+		Assert.assertTrue("The message is not displayed",
+				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
+						.contains("Weniger als 20 Stück verfügbar"));
 	}
 
 }

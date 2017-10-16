@@ -2,15 +2,15 @@ package com.pages.backend;
 
 import java.util.List;
 
-
-import net.serenitybdd.core.annotations.findby.FindBy;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class SystemConfigurationPage extends AbstractPage {
 
@@ -50,6 +50,11 @@ public class SystemConfigurationPage extends AbstractPage {
 	
 	@FindBy(id = "pippajean_borrow_stylist_borrow_process_disable_borrowed_items")
 	private WebElement selectBorrowOption;
+	
+	@FindBy(css = ".section-config:nth-child(2) a")
+	private WebElement pj_tp_schedule_payments;
+	
+//	/
 	
 
 	public void selectExecutionType(String executionType) {
@@ -130,6 +135,20 @@ public class SystemConfigurationPage extends AbstractPage {
 		element(daysBeforeDeliverySchedule).clear();
 		element(daysBeforeDeliverySchedule).waitUntilVisible();
 		daysBeforeDeliverySchedule.sendKeys(numberDays);
+	}
+	public void clickOnTpScheduledPaymentsSettingTab() {
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> lista=getDriver().findElements(By.cssSelector(".section-config:nth-child(2).active"));
+		
+		if(lista.size()==0){
+			element(pj_tp_schedule_payments).waitUntilVisible();
+			Actions actions = new Actions(getDriver());
+			actions.moveToElement(pj_tp_schedule_payments).click().perform();
+			waitABit(4000);
+		}
+		
+		
+		
 	}
 	
 

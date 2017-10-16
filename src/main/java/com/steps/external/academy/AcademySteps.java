@@ -31,9 +31,34 @@ public class AcademySteps extends AbstractSteps {
 	public void completeCourse(String courseNo) {
 		academyPage().completeCourse(courseNo);
 	}
+	
+	@Step
+	public void completeSingleCourse(String courseNo) {
+		boolean isComplete=academyPage().completeSingleCourse(courseNo);
+		if(courseNo.contentEquals("1") || courseNo.contentEquals("2") ||courseNo.contentEquals("7")){
+			System.out.println("courseNo______________: "+courseNo);
+			verifyCourseIsCompleteInTrainingPage(courseNo,isComplete);
+		}else{
+			boolean courseIsComplete=verifyQuizIsComplete(isComplete);
+			verifyCourseIsCompleteInTrainingPage(courseNo,courseIsComplete);
+		}
+		
+	}
+	
 	@Step
 	public void startQuiz(){
 		academyPage().startQuiz();
+	}
+	
+	@Step
+	public boolean verifyQuizIsComplete(boolean quizNo){
+		
+		return academyPage().verifyCompleteQuiz(quizNo);
+	}
+	
+	@Step
+	public void verifyCourseIsCompleteInTrainingPage(String courseNo,boolean isComplete){
+		academyPage().verifyCourseIsCompleteInTrainingPage(courseNo,isComplete);
 	}
 	
 	@Step
@@ -41,6 +66,7 @@ public class AcademySteps extends AbstractSteps {
 		startQuiz();
 		academyPage().startTest();
 		academyQuizPage().completeQuizCourse1();
+	
 		
 	}
 }

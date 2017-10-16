@@ -174,6 +174,8 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		}
 
 		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
+		
+		System.out.println("urlModel : "+urlModel.getUrl());
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP1");
 		MongoConnector.cleanCollection(getClass().getSimpleName() + "TP2");
@@ -199,6 +201,8 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		generalCartSteps.clearCart();
 		HostBasicProductModel productData;
 
+		
+		headerSteps.waitABit(10000);
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct2, "1", "0");
 		if (!genProduct2.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(), "yyyy-MM-dd"));
@@ -236,12 +240,12 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		String deliveryTp1 = regularUserCartSteps.getDeliveryDate(genProduct2.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		String deliveryTp2 = regularUserCartSteps.getDeliveryDate(genProduct3.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
 		String deliveryTp3 = regularUserCartSteps.getDeliveryDate(genProduct4.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-//		String deliveryTp4 = regularUserCartSteps.getDeliveryDate(genProduct5.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-//		String deliveryTp5 = regularUserCartSteps.getDeliveryDate(genProduct6.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-//		String deliveryTp6 = regularUserCartSteps.getDeliveryDate(genProduct7.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-		String deliveryTp4 = "03.03.2017";
-		String deliveryTp5 = "10.03.2017";
-		String deliveryTp6 = "17.03.2017";
+		String deliveryTp4 = regularUserCartSteps.getDeliveryDate(genProduct5.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		String deliveryTp5 = regularUserCartSteps.getDeliveryDate(genProduct6.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		String deliveryTp6 = regularUserCartSteps.getDeliveryDate(genProduct7.getSku(), new Locale.Builder().setLanguage(MongoReader.getContext()).build());
+//		String deliveryTp4 = "03.03.2017";
+//		String deliveryTp5 = "10.03.2017";
+//		String deliveryTp6 = "17.03.2017";
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 
 		orderForCustomerCartSteps.clickGoToShipping();
