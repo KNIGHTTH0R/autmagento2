@@ -257,17 +257,19 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
-		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
+		System.out.println();
+		
+		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 1));
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
-		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
+		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 2));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
-		HostDataGrabber.orderModelTp3.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
+		HostDataGrabber.orderModelTp3.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp3.setDeliveryDate(deliveryTp3);
-		HostDataGrabber.orderModelTp4.setOrderId(FormatterUtils.incrementOrderId(orderId, 4));
+		HostDataGrabber.orderModelTp4.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 4));
 		HostDataGrabber.orderModelTp4.setDeliveryDate(deliveryTp4);
-		HostDataGrabber.orderModelTp5.setOrderId(FormatterUtils.incrementOrderId(orderId, 5));
+		HostDataGrabber.orderModelTp5.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 5));
 		HostDataGrabber.orderModelTp5.setDeliveryDate(deliveryTp5);
-		HostDataGrabber.orderModelTp6.setOrderId(FormatterUtils.incrementOrderId(orderId, 6));
+		HostDataGrabber.orderModelTp6.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 6));
 		HostDataGrabber.orderModelTp6.setDeliveryDate(deliveryTp6);
 
 	

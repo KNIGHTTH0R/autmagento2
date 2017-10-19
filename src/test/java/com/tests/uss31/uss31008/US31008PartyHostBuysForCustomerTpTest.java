@@ -53,7 +53,7 @@ import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 @WithTag(name = "US31.1 TP execution cron - Semiautomated", type = "Scenarios")
 @Story(Application.TermPurchaseExecution.US31_1.class)
 @RunWith(SerenityRunner.class)
-public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
+public class US31008PartyHostBuysForCustomerTpTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -185,7 +185,7 @@ public class US31001PartyHostBuysForCustomerTpTest extends BaseTest {
 	}
 
 	@Test
-	public void us31001PartyHostBuysForCustomerTpTest() throws ParseException {
+	public void us31008PartyHostBuysForCustomerTpTest() throws ParseException {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
