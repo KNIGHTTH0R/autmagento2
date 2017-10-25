@@ -69,7 +69,8 @@ public class US13003HostLeadDistributionTest extends BaseTest {
 	@Test
 	public void us13003HostLeadDistributionTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormNoMemberFlagAndNoStylistSelected(dataModel, addressModel);
+	//	customerRegistrationSteps.fillCreateCustomerFormNoMemberFlagAndNoStylistSelected(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerFormNoMemberAndReturnFoundStylecoaches(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
 	}
 

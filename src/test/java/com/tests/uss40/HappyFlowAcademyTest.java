@@ -34,7 +34,6 @@ public class HappyFlowAcademyTest extends BaseTest {
 		//verify login in pippajean
 		academySteps.clickEnrollButton();
 		academySteps.startTraining();
-		academySteps.completeCourse("1");
 		academySteps.completeQuiz("1");
 		
 	}

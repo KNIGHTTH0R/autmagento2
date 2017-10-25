@@ -39,6 +39,28 @@ public class StylistListMagentoCalls {
 
 		return stylistList;
 	}
+	
+	public static List<DBStylistModel> getStylistListInRange(String filter, String operand1,String operand2,String filterValue1,String filterValue2) {
+
+		List<DBStylistModel> stylistList = new ArrayList<DBStylistModel>();
+
+		try {
+			SOAPMessage response = HttpSoapConnector.soapGetStylistListInRange(filter, operand1,operand2, filterValue1,filterValue2);
+			System.out.println(response);
+			try {
+				stylistList = extractStylistData(response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return stylistList;
+	}
 
 	private static List<DBStylistModel> extractStylistData(SOAPMessage response) throws Exception {
 

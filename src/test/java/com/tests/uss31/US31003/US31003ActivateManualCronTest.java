@@ -30,6 +30,7 @@ public class US31003ActivateManualCronTest extends BaseTest {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSystemConfiguration();
 		termPurchaseSystemConfigurationSteps.goToTermPurchaseTab();
+		termPurchaseSystemConfigurationSteps.clickOnTpScheduledPaymentsSettingTab();
 		termPurchaseSystemConfigurationSteps.selectCronExecutionType(ConfigConstants.MANUAL);
 	}
 }

@@ -31,7 +31,7 @@ public class AcademyQuizPage extends AbstractPage {
 	
 
 
-	public void completeQuizCourse1() {
+	public void completeQuizAcademyLesson() {
 		List<WebElement> pagini=getDriver().findElements(By.cssSelector(".wpProQuiz_list .wpProQuiz_listItem"));
 		System.out.println("pageQuiz: "+pagini);
 		Map<Object, List<String>> mymap=quizDatabase();

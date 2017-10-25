@@ -282,6 +282,14 @@ public class CreateCustomerPage extends AbstractPage {
 		
 		//element(searchCountry).selectByVisibleText(countryName);
 	}
+	
+	public void selectCountryFilterLead(String countryName) {
+		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
+				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
+		waitABit(4000);
+		Select oSelect = new Select(getDriver().findElement(By.id("search_countryId")));
+		oSelect.selectByVisibleText(countryName);
+	}
 
 	public void searchStylistByName() {
 		searchStylistByName.click();

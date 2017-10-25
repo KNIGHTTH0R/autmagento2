@@ -49,7 +49,7 @@ public class US13002StyleCoachLeadDistributionTest extends BaseTest {
 		addressModel = new AddressModel();
 		randomAddress = new RandomAddress();
 
-		while (coordinatesModel.getLattitude() == null) {
+		while (coordinatesModel.getLattitude() == null || coordinatesModel.getLongitude()==null) {
 
 			addressModel = randomAddress.getRandomAddressFromFile();
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
@@ -67,7 +67,8 @@ public class US13002StyleCoachLeadDistributionTest extends BaseTest {
 	@Test
 	public void us13002StyleCoachLeadDistributionTest() {
 
-		customerRegistrationSteps.fillCreateCustomerFormNoStylistSelected(dataModel, addressModel);
+		//customerRegistrationSteps.fillCreateCustomerFormNoStylistSelected(dataModel, addressModel);
+		customerRegistrationSteps.fillCreateCustomerFormAndReturnFoundStylecoaches(dataModel, addressModel);
 		customerRegistrationSteps.verifyCustomerCreation();
 	}
 

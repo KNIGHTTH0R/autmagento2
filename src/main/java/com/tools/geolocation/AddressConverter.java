@@ -84,6 +84,7 @@ public class AddressConverter {
 
 	public static CoordinatesModel calculateLatAndLongFromAddressWithComponent(AddressModel model) throws IOException {
 
+		
 		CoordinatesModel coordinatesModel = new CoordinatesModel();
 
 		GoogleResponse res = new AddressConverter().convertToLatLongWithComponents(

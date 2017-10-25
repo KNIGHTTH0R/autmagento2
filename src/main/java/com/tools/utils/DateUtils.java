@@ -380,12 +380,11 @@ public class DateUtils {
 
 	public static int getAge(String birthDate) {
 		String[] parts = birthDate.split("-");
-
-		LocalDate birthdate = new LocalDate(Integer.parseInt(parts[2]), Integer.parseInt(parts[1]),
-				Integer.parseInt(parts[0]));
+		
+		LocalDate birthdate = new LocalDate(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]),
+				Integer.parseInt(parts[2]));
 		LocalDate now = new LocalDate();
 		Years age = Years.yearsBetween(birthdate, now);
-
 		return age.getYears();
 	}
 

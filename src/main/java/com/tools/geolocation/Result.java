@@ -1,7 +1,8 @@
 package com.tools.geolocation;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Result {
 
 	@JsonIgnore

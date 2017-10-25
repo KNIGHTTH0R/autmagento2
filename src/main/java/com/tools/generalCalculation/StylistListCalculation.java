@@ -33,10 +33,24 @@ public class StylistListCalculation {
 
 		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
 		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart3 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart4 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart5 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart6 = new ArrayList<DBStylistModel>();
 
-		initialList = StylistListMagentoCalls.getStylistList(filter, operand, filterValue);
-		initialListPart2 = StylistListMagentoCalls.getStylistList(filter, operand2, filterValue);
+		initialList = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "0", "1000");
+		initialListPart2 = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "1001", "2000");
+		initialListPart3 = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "2001", "3000");
+		initialListPart4 = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "3001", "4000");
+		initialListPart5= StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "4001", "5000");
+		initialListPart6 =StylistListMagentoCalls.getStylistList(filter, "gt", "5000");
 		initialList.addAll(initialListPart2);
+		initialList.addAll(initialListPart3);
+		initialList.addAll(initialListPart4);
+		initialList.addAll(initialListPart5);
+		initialList.addAll(initialListPart6);
+		
+	//	System.out.println(initialList);
 
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
 
@@ -103,24 +117,47 @@ public class StylistListCalculation {
 	public static List<DBStylistModel> getCompatibleStylistsForDysks(CoordinatesModel coordinatesModel, String range,
 			String filter, String operand, String operand2, String filterValue, int mode) {
 
-		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+		/*List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
 		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
 
 		initialList = StylistListMagentoCalls.getStylistList(filter, operand, filterValue);
 		initialListPart2 = StylistListMagentoCalls.getStylistList(filter, operand2, filterValue);
 		initialList.addAll(initialListPart2);
+		*/
+		
+		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart3 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart4 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart5 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart6 = new ArrayList<DBStylistModel>();
 
+		initialList = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "0", "1000");
+		initialListPart2 = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "1001", "2000");
+		initialListPart3 = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "2001", "3000");
+		initialListPart4 = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "3001", "4000");
+		initialListPart5= StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "4001", "5000");
+		initialListPart6 =StylistListMagentoCalls.getStylistList(filter, "gt", "5000");
+		
+		initialList.addAll(initialListPart2);
+		initialList.addAll(initialListPart3);
+		initialList.addAll(initialListPart4);
+		initialList.addAll(initialListPart5);
+		initialList.addAll(initialListPart6);
+		
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
 
 		for (DBStylistModel dbStylistModel : initialList) {
 
 			switch (mode) {
 
+		
 			case 1:
 				if (!isStylistIncompatibleForCustomerRetrievalAssignation(dbStylistModel)) {
 
 					dbStylistModel.setDistanceFromCoordinates(
 							calculateDistanceFromCustomersCoordinates(coordinatesModel, dbStylistModel));
+					System.out.println("stylist compatibil: "+dbStylistModel.getEmail());
 					compatibleList.add(dbStylistModel);
 				}
 				break;
@@ -339,8 +376,8 @@ public class StylistListCalculation {
 	public static List<DBStylistModel> getFiveStylistsFromListForeachAgeCategoryIfExist(
 			CoordinatesModel coordinatesModel, List<DBStylistModel> stylistsList, String range) {
 
+		
 		stylistsList = sortStylistListByRange(stylistsList);
-
 		List<DBStylistModel> category30Age = new ArrayList<DBStylistModel>();
 		List<DBStylistModel> category45Age = new ArrayList<DBStylistModel>();
 		List<DBStylistModel> category100Age = new ArrayList<DBStylistModel>();
@@ -348,9 +385,7 @@ public class StylistListCalculation {
 		List<DBStylistModel> compatibleStylists = new ArrayList<DBStylistModel>();
 
 		for (DBStylistModel stylist : stylistsList) {
-
 			if (isStylistInRange(coordinatesModel, stylist, range)) {
-
 				if (calculateStylistAge(stylist) <= 30) {
 					category30Age.add(stylist);
 
@@ -389,7 +424,6 @@ public class StylistListCalculation {
 			}
 
 		} else if (compatibleStylists.size() == 0) {
-
 			compatibleStylists.add(stylistsList.get(0));
 
 		}

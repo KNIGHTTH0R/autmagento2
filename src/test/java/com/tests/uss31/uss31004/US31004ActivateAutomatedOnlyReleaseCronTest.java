@@ -30,6 +30,7 @@ public class US31004ActivateAutomatedOnlyReleaseCronTest extends BaseTest {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSystemConfiguration();
 		termPurchaseSystemConfigurationSteps.goToTermPurchaseTab();
+		termPurchaseSystemConfigurationSteps.clickOnTpScheduledPaymentsSettingTab();
 		termPurchaseSystemConfigurationSteps.selectCronExecutionType(ConfigConstants.AUTOMATED_ONLY_RELEASE);
 	}
 }

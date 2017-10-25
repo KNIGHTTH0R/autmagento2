@@ -102,6 +102,17 @@ public class HttpSoapConnector {
 
 		return soapResponse;
 	}
+	
+	public static SOAPMessage soapGetStylistListInRange(String filter, String operand1,String operand2, String filterValue1,String filterValue2)
+			throws SOAPException, IOException {
+		String sessID = performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		SOAPMessage soapResponse = soapConnection.call(getStylistListInRange(sessID, filter, operand1, operand2, filterValue1, filterValue2),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
 
 	public static SOAPMessage soapProductInfo(String productId) throws SOAPException, IOException {
 		String sessID = performLogin();
@@ -378,6 +389,57 @@ public class HttpSoapConnector {
 		return soapMessage;
 	}
 
+	
+	private static SOAPMessage getStylistListInRange(String ssID, String filterName, String operand1,String operand2, String filterValue1,String filterValue2)
+			throws SOAPException, IOException {
+		SOAPMessage soapMessage = createSoapDefaultMessage();
+
+		SOAPBody soapBody = soapMessage.getSOAPPart().getEnvelope().getBody();
+		SOAPElement getStylistRequestParam = soapBody.addChildElement(SoapKeys.STYLIST_LIST, SoapKeys.URN_PREFIX);
+
+		SOAPElement sessionID = getStylistRequestParam.addChildElement(SoapKeys.SESSION_ID);
+		sessionID.addTextNode(ssID);
+
+		SOAPElement filters = getStylistRequestParam.addChildElement(SoapKeys.FILTERS);
+		SOAPElement complexFilter = filters.addChildElement(SoapKeys.COMPLEX_FILTER);
+		SOAPElement complexObjectArray = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement key = complexObjectArray.addChildElement(SoapKeys.KEY);
+		key.addTextNode(filterName);
+		SOAPElement value = complexObjectArray.addChildElement(SoapKeys.VALUE);
+		SOAPElement key2 = value.addChildElement(SoapKeys.KEY);
+		key2.addTextNode(operand1);
+		SOAPElement value2 = value.addChildElement(SoapKeys.VALUE);
+		value2.addTextNode(filterValue1);
+		
+		
+		SOAPElement complexObjectArrayA = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement keyA = complexObjectArrayA.addChildElement(SoapKeys.KEY);
+		keyA.addTextNode(filterName);
+		SOAPElement valueA = complexObjectArrayA.addChildElement(SoapKeys.VALUE);
+		SOAPElement key1A = valueA.addChildElement(SoapKeys.KEY);
+		key1A.addTextNode(operand2);
+		SOAPElement value1A = valueA.addChildElement(SoapKeys.VALUE);
+		value1A.addTextNode(filterValue2);
+
+		// in testing
+		SOAPElement complexObjectArrayB = complexFilter.addChildElement(SoapKeys.COMPLEX_OBJECT_ARRAY);
+		SOAPElement keyB = complexObjectArrayB.addChildElement(SoapKeys.KEY);
+		keyB.addTextNode(SoapConstants.SOAP_STATUS_FILTER);
+		SOAPElement valueB = complexObjectArrayB.addChildElement(SoapKeys.VALUE);
+		SOAPElement key2B = valueB.addChildElement(SoapKeys.KEY);
+		key2B.addTextNode(SoapConstants.EQUAL);
+		SOAPElement value2B = valueB.addChildElement(SoapKeys.VALUE);
+		value2B.addTextNode("1");
+
+		soapMessage.saveChanges();
+
+		System.out.print("Request SOAP Message:");
+		soapMessage.writeTo(System.out);
+		System.out.println();
+
+		return soapMessage;
+	}
+	
 	private static SOAPMessage getProductInfo(String ssID, String productId) throws SOAPException, IOException {
 		SOAPMessage soapMessage = createSoapDefaultMessage();
 

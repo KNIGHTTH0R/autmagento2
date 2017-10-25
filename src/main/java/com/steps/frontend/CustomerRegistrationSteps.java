@@ -127,7 +127,8 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		inputConfirmation(customerData.getPassword());
 		inputPostCodeFromPersonalInfo(addressData.getPostCode());
 		selectCountryNameFromPersonalInfo(addressData.getCountryName());
-		searchStylistByGeoipButDoNotSelectAnyStylecoach(addressData);
+		//fillContactDetails(addressData);
+		searchStylistByGeoipButDoNotSelectAnyStylecoachLead(addressData);
 		checkIAgree();
 		clickCompleteButton();
 	}
@@ -411,7 +412,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		verifyText();
 		verifyLink();
 	}
-	
+
 	@StepGroup
 	public void waitForCustomerCreation() {
 		waitABit(30000);
@@ -493,7 +494,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 
 	@Step
 	public void checkParties() {
-		
+
 		createCustomerPage().checkParties();
 	}
 
@@ -517,10 +518,28 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	@Step
 	public void searchStylistByGeoipButDoNotSelectAnyStylecoach(AddressModel addressModel) {
 		createCustomerPage().searchStylistByGeoip();
-		createCustomerPage().inputPostcodeFilter("11111");
+		System.out.println("aici1");
+		// createCustomerPage().inputPostcodeFilter("11111");
+		createCustomerPage().inputPostcodeFilter(addressModel.getPostCode());
+		System.out.println("aici2");
 		createCustomerPage().selectCountryFilter(addressModel.getCountryName());
+		System.out.println("aici3");
 		createCustomerPage().searchByGeoipSubmit();
-
+		System.out.println("aici4");
+	}
+	
+	@Title("Search for stylist by geoip but do not select any SC(customer lead)")
+	@Step
+	public void searchStylistByGeoipButDoNotSelectAnyStylecoachLead(AddressModel addressModel) {
+		createCustomerPage().searchStylistByGeoip();
+		System.out.println("aici1");
+		// createCustomerPage().inputPostcodeFilter("11111");
+		createCustomerPage().inputPostcodeFilter(addressModel.getPostCode());
+		System.out.println("aici2");
+		createCustomerPage().selectCountryFilterLead(addressModel.getCountryName());
+		System.out.println("aici3");
+		createCustomerPage().searchByGeoipSubmit();
+		System.out.println("aici4");
 	}
 
 	@Title("Search for stylist by geoip and return found SC")
@@ -587,7 +606,7 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 	public void fillCreateCustomerByFacebookForm(CustomerFormModel customerData, AddressModel addressData) {
 		waitABit(2000);
 		findFrame("Kundenkonto");
-		
+
 		inputPassword(customerData.getPassword());
 		inputConfirmation(customerData.getPassword());
 		checkParties();
@@ -596,15 +615,14 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		checkIAgree();
 		clickCompleteButton();
 	}
-	
-	
+
 	@StepGroup
 	public void goToFacebookLogin(String user, String pass) {
 		clickOnFacebookLogin();
 		Set<String> windowsList = getDriver().getWindowHandles();
 		for (String string : windowsList) {
 			getDriver().switchTo().window(string);
-			System.out.println("page title "+getDriver().getTitle());
+			System.out.println("page title " + getDriver().getTitle());
 			if (getDriver().getTitle().trim().contains("Facebook")) {
 				performFacebookLogin(user, pass);
 			}

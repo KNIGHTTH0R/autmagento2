@@ -118,10 +118,10 @@ public class AcademyPage extends AbstractPage {
 
 	}
 
-	public boolean completeSingleCourse(String courseNo) {
+	public boolean completeSingleLesson(String lessonNo) {
 		boolean completeCourse = false;
 
-		openCourse(courseNo);
+		openCourse(lessonNo);
 		List<WebElement> completeBtn = getDriver().findElements(By.cssSelector("#learndash_mark_complete_button"));
 		List<WebElement> quiz = getDriver().findElements(By.cssSelector("#learndash_quizzes"));
 		if (completeBtn.size() == 1) {
@@ -317,7 +317,7 @@ public class AcademyPage extends AbstractPage {
 		multiMap.put("Mehr Licht ist besser. Stimmt die Aussage?", quiz5_5);
 		multiMap.put("Warum sollte man jedes Mal eine Probeaufnahme machen? (Mehrfachauswahl möglich)", quiz5_6);
 
-		multiMap.put("Was ist beim Anlegen der Party zu beachten?)", quiz6_1);
+		multiMap.put("Was ist beim Anlegen der Party zu beachten?", quiz6_1);
 		multiMap.put("Welche Art Facebook Gruppe sollte ich anlegen?", quiz6_2);
 		multiMap.put("Warum sollte ich immer Bilder und Texte von PIPPA&JEAN verwenden? (Mehrfachauswahl möglich)",
 				quiz6_3);
@@ -364,14 +364,13 @@ public class AcademyPage extends AbstractPage {
 
 	}
 
-	public void verifyCourseIsCompleteInTrainingPage(String courseNo, boolean isComplete) {
+	public void verifyAcademyLessonIsCompleteInTrainingPage(String courseNo, boolean isComplete) {
 		List<WebElement> course = getDriver()
 				.findElements(By.cssSelector(".lessons_list .is_not_sample:nth-child(" + courseNo + ") h4 .completed"));
 		if (isComplete == true) {
 			CustomVerification.verifyTrue("The check box should be present over the course", course.size() == 1);
 		} else {
 			CustomVerification.verifyTrue("The check box should NOT be present over the course", course.size() == 0);
-		//	System.out.println("The check box should NOT be present over the course");
 		}
 	}
 

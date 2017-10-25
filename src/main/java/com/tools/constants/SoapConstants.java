@@ -10,7 +10,8 @@ public class SoapConstants {
 	public static final String EQUAL = "eq";
 	public static final String STYLIST_ID_FILTER = "stylist_id";
 	public static final String STYLE_PARTY_ID_FILTER = "style_party_id";
-	public static final String STYLIST_ID_2000 = "12720";
+	//public static final String STYLIST_ID_2000 = "12720";
+	public static final String STYLIST_ID_2000 = "3000";
 	public static final String SOAP_STYLIST_FILTER_VALUE = "1";
 	public static final String SOAP_STYLIST_RANGE = "50";
 	

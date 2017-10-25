@@ -55,7 +55,9 @@ public class TempMail extends AbstractPage {
 		element(refreshButton).waitUntilVisible();
 		refreshButton.click();
 		
-		waitABit(5000);
+		waitABit(4000);
+		getDriver().navigate().refresh();
+		waitABit(2000);
 		List<WebElement> emailList = getDriver().findElements(By.cssSelector("#mails tbody tr td:nth-child(2) a"));
 		
 		System.out.println("size list "+ emailList.size());

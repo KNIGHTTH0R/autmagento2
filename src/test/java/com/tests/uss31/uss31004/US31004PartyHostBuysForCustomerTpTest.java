@@ -220,11 +220,11 @@ public class US31004PartyHostBuysForCustomerTpTest extends BaseTest {
 		shippingSteps.goToPaymentMethod();
 
 		String orderId = FormatterUtils.getOrderId(shippingSteps.grabUrl());
-		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementOrderId(orderId, 1));
+		HostDataGrabber.orderModelTp1.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 1));
 		HostDataGrabber.orderModelTp1.setDeliveryDate(deliveryTp1);
-		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementOrderId(orderId, 2));
+		HostDataGrabber.orderModelTp2.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 2));
 		HostDataGrabber.orderModelTp2.setDeliveryDate(deliveryTp2);
-		HostDataGrabber.orderModelTp3.setOrderId(FormatterUtils.incrementOrderId(orderId, 3));
+		HostDataGrabber.orderModelTp3.setOrderId(FormatterUtils.incrementSingleTpOrderId(orderId, 3));
 		HostDataGrabber.orderModelTp3.setDeliveryDate(deliveryTp3);
 	
 

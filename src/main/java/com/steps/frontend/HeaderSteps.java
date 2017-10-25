@@ -268,8 +268,12 @@ public class HeaderSteps extends AbstractSteps {
 		
 	}
 
+	@Step
 	public void checkSucesfullLoginInPippa() {
 		// TODO Auto-generated method stub
+		headerPage().openNewTab();
+		switchToNewestOpenedTab();
+		headerPage().navigate("https://staging.pippajean.com/de/");
 		headerPage().checkSucesfullLoginInPippa();
 	}
 	
