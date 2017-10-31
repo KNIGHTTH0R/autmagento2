@@ -25,6 +25,11 @@ public class NavigationPage extends AbstractPage {
 
 	@FindBy(css = ".header-top img[src*='logo']")
 	private WebElement adminHomePage;
+	
+	@FindBy(css = "#nav li.parent.level0:nth-child(9)  ")
+	private WebElement systemTab;
+	
+	
 
 	public void dismissPopUp() {
 		
@@ -95,5 +100,11 @@ public class NavigationPage extends AbstractPage {
 	public boolean isDismissPopPresent() {
 		// TODO Auto-generated method stub
 		return getDriver().findElements(By.cssSelector("#message-popup-window")).size() > 0;
+	}
+
+	public void clickOnSystemTab() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(systemTab).waitUntilVisible();
+		systemTab.click();
 	}
 }

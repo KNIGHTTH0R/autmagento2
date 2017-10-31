@@ -24,7 +24,7 @@ public class DysksWorkflows {
 		this.dysksStylistList = dysksStylistList;
 	}
 
-	@Step
+	/*@Step    comment by emilina - changed dBStylistList with dysksStylistList
 	public void validateStylists(String message) {
 
 		for (DBStylistModel stylistNow : dBStylistList) {
@@ -32,12 +32,32 @@ public class DysksWorkflows {
 
 			validateStylistName(stylistNow.getFirstName(), dykscStylist.getName());
 		}
+	}*/
+	
+	public void validateStylists(String message) {
+
+		for (DykscSeachModel dykscStylist : dysksStylistList) {
+			DBStylistModel dbStylist = findStylistDb(dykscStylist.getId(), dBStylistList);
+
+			validateStylistName(dykscStylist.getName(),dbStylist.getFirstName() );
+		}
 	}
 
 	public DykscSeachModel findStylist(String id, List<DykscSeachModel> dysksStylistList) {
 		DykscSeachModel result = new DykscSeachModel();
 		theFor: for (DykscSeachModel stylist : dysksStylistList) {
 			if (stylist.getId().contains(id)) {
+				result = stylist;
+				break theFor;
+			}
+		}
+		return result;
+	}
+	
+	public DBStylistModel findStylistDb(String id, List<DBStylistModel> dBStylistList) {
+		DBStylistModel result = new DBStylistModel();
+		theFor: for (DBStylistModel stylist : dBStylistList) {
+			if (stylist.getStylistId().contains(id)) {
 				result = stylist;
 				break theFor;
 			}

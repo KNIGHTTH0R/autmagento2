@@ -40,6 +40,27 @@ public class BackEndSteps extends AbstractSteps {
 		}
 		dismissPopUp();
 	}
+	
+	@Step
+	public void performStagingAdminLogin(String userName, String userPass)  {
+		navigate("https://staging.pippajean.com" + UrlConstants.BASE_URL_BE);
+		magentoLoginPage().inputUserName(userName);
+		magentoLoginPage().inputUserPassword(userPass);
+		magentoLoginPage().clickOnLogin();
+	
+		
+		waitABit(2000);
+		boolean isPresent = isdismissPopUpPresent();
+		
+		if (isPresent == false) {
+			
+			waitABit(3000);
+			magentoLoginPage().inputUserName(userName);
+			magentoLoginPage().inputUserPassword(userPass);
+			magentoLoginPage().clickOnLogin();
+		}
+		dismissPopUp();
+	}
 
 	@Step
 	public void goToBackend() {
@@ -438,6 +459,8 @@ public class BackEndSteps extends AbstractSteps {
 	public void clickOnSystemConfiguration() {
 		navigationPage().selectSubmenu("system_config");
 	}
+	
+
 
 	@Step
 	public void goToHomePage() {
@@ -457,6 +480,24 @@ public class BackEndSteps extends AbstractSteps {
 		customerDetailsHomePage().selectTopStatus(topStatus);
 		customerDetailsHomePage().saveAndContinueEdit();
 
+	}
+	
+	public void updateKloutScore(String kloutScore) {
+		customerDetailsHomePage().clickOnStylecoachProfileTab();
+		customerDetailsHomePage().inputKloutScore(kloutScore);
+		customerDetailsHomePage().saveAndContinueEdit();
+
+	}
+
+	public void updateOnlineStyleCoachStatus(String scStatus) {
+		customerDetailsHomePage().clickOnStylecoachProfileTab();
+		customerDetailsHomePage().selectOlineScStatus(scStatus);
+		customerDetailsHomePage().saveAndContinueEdit();
+	}
+
+	public void clickOnSystemTab() {
+		navigationPage().clickOnSystemTab();
+		
 	}
 
 	// @Step

@@ -17,6 +17,7 @@ import com.pages.backend.creditMemo.CreditMemoListPage;
 import com.pages.backend.customer.CustomerListPage;
 import com.pages.backend.customer.details.CustomerDetailsPage;
 import com.pages.backend.customer.details.LeadSettingsPage;
+import com.pages.backend.importExport.ImportExportPage;
 import com.pages.backend.newsletter.NewsletterSubscribersListPage;
 import com.pages.backend.orders.OrderListPage;
 import com.pages.backend.orders.details.OrderDetailsNavPage;
@@ -385,6 +386,9 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(PartyDetailsBackendPage.class);
 	}
 
+	public ImportExportPage importExportPage(){
+		return getPages().currentPageAt(ImportExportPage.class);
+	}
 	public CustomerDetailsPage customerDetailsHomePage() {
 		return getPages().currentPageAt(CustomerDetailsPage.class);
 	}

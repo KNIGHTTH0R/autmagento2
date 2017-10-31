@@ -109,7 +109,11 @@ public class CustomerDetailsPage extends AbstractPage {
 
 	@FindBy(id = "_stylistprofilebank_account_vat_number")
 	private WebElement vatNumberInput;
+	
+	@FindBy(id = "_stylistprofilesocial_media_klout_score")
+	private WebElement kloutScore;
 
+	
 	@FindBy(css = "li.success-msg")
 	private WebElement successMessage;
 
@@ -134,6 +138,9 @@ public class CustomerDetailsPage extends AbstractPage {
 	
 	@FindBy(id="_stylistprofiletake_of_phase_status")
 	private WebElement topStatus;
+	
+	@FindBy(id="_stylistprofileonline_stylecoach")
+	private WebElement onlineScStatus;
 	
 
 	public void addNewAddress() {
@@ -210,6 +217,12 @@ public class CustomerDetailsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(vatNumberInput).waitUntilVisible();
 		element(vatNumberInput).sendKeys(vatNumber);
+	}
+	
+	public void inputKloutScore(String kloutScore) {
+		evaluateJavascript("jQuery.noConflict();");
+		element(kloutScore).waitUntilVisible();
+		element(kloutScore).sendKeys(kloutScore);
 	}
 
 	public void selectCountryName(String countryName) {
@@ -498,6 +511,11 @@ public class CustomerDetailsPage extends AbstractPage {
 		
 	}
 
+	public void selectOlineScStatus(String status) {
+		element(onlineScStatus).waitUntilVisible();
+		element(onlineScStatus).selectByVisibleText(status);
+		
+	}
 	public void clickOnBorrowInfoTab() {
 		// TODO Auto-generated method stub
 		System.out.println("am ajuns aici");

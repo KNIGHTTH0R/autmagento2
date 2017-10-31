@@ -197,18 +197,38 @@ public class StylistListCalculation {
 
 	public static List<DBStylistModel> getDykscStylistByName(String firstName, String lastName, String filter,
 			String operand, String operand2, String filterValue, int mode) {
-
+/*
 		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
 		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
 
 		initialList = StylistListMagentoCalls.getStylistList(filter, operand, filterValue);
 		initialListPart2 = StylistListMagentoCalls.getStylistList(filter, operand2, filterValue);
+		initialList.addAll(initialListPart2);*/
+		
+		List<DBStylistModel> initialList = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart2 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart3 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart4 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart5 = new ArrayList<DBStylistModel>();
+		List<DBStylistModel> initialListPart6 = new ArrayList<DBStylistModel>();
+
+		initialList = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "0", "1000");
+		initialListPart2 = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "1001", "2000");
+		initialListPart3 = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "2001", "3000");
+		initialListPart4 = StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "3001", "4000");
+		initialListPart5= StylistListMagentoCalls.getStylistListInRange(filter, "from", "to", "4001", "5000");
+		initialListPart6 =StylistListMagentoCalls.getStylistList(filter, "gt", "5000");
+		
 		initialList.addAll(initialListPart2);
+		initialList.addAll(initialListPart3);
+		initialList.addAll(initialListPart4);
+		initialList.addAll(initialListPart5);
+		initialList.addAll(initialListPart6);
 
 		List<DBStylistModel> compatibleList = new ArrayList<DBStylistModel>();
-
+		int i=0;
 		for (DBStylistModel dbStylistModel : initialList) {
-
+			
 			if (!isStylistIncompatibleForDykscSearchByName(dbStylistModel, firstName, lastName)) {
 
 				compatibleList.add(dbStylistModel);
@@ -294,11 +314,23 @@ public class StylistListCalculation {
 
 	private static boolean isStylistIncompatibleForDykscSearchByName(DBStylistModel stylistModel, String firstName,
 			String lastName) {
+	/*	System.out.println(" ----->   start    < -----");
+		System.out.println("stylistModel.getStatus() "+stylistModel.getStatus().contentEquals("0"));
+		System.out.println("stylistModel.getLeadRetrievalPaused() "+stylistModel.getLeadRetrievalPaused().contentEquals("1"));
+		System.out.println("stylistModel.getStylistId "+stylistModel.getStylistId().contentEquals("1"));
+		System.out.println("!stylistModel.getConfirmed() "+!stylistModel.getConfirmed().contentEquals("1"));
+		System.out.println("!stylistModel.getAvatar() "+!stylistModel.getAvatar().contentEquals("1"));
+		System.out.println("!stylistModel.getSlogan() "+!stylistModel.getSlogan().contentEquals("1"));
+		System.out.println("stylistModel.getBirthDate() "+stylistModel.getBirthDate());
+		System.out.println("stylistModel.getFirstName() "+stylistModel.getFirstName().contains(firstName));
+		System.out.println("!stylistModel.getLastName() "+!stylistModel.getLastName().contains(lastName));
+		System.out.println("!stylistModel.getStylistQuiteDate() "+!stylistModel.getStylistQuiteDate().contentEquals("0"));*/
+
 		return stylistModel.getStatus().contentEquals("0") || stylistModel.getLeadRetrievalPaused().contentEquals("1")
 				|| stylistModel.getStylistId().contentEquals("1") || !stylistModel.getConfirmed().contentEquals("1")
 				|| !stylistModel.getAvatar().contentEquals("1") || !stylistModel.getSlogan().contentEquals("1")
-				|| stylistModel.getBirthDate().contentEquals("") || !stylistModel.getFirstName().contains(firstName)
-				|| !stylistModel.getLastName().contains(lastName);
+				|| !stylistModel.getFirstName().contains(firstName)
+				|| !stylistModel.getLastName().contains(lastName) || !stylistModel.getStylistQuiteDate().contentEquals("0") ;
 	}
 
 	public static boolean isStylistInRange(CoordinatesModel coordinateaModel, DBStylistModel dBStylistModel,

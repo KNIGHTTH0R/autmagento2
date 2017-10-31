@@ -65,8 +65,12 @@ public class US13007DykscSearchByNameTest extends BaseTest {
 			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss13" + File.separator + "us13007.properties");
 			prop.load(input);
 
-			firstName = prop.getProperty("firstName");
-			lastName = prop.getProperty("lastName");
+//			firstName = prop.getProperty("firstName");
+//			lastName = prop.getProperty("lastName");
+			
+			
+			firstName ="emilian";
+			lastName = "melian";
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -90,7 +94,7 @@ public class US13007DykscSearchByNameTest extends BaseTest {
 			coordinatesModel = AddressConverter.calculateLatAndLongFromAddress(addressModel);
 
 		}
-		searchByNameStylistList = StylistListCalculation.getDykscStylistByName(firstName, lastName, SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN,
+		searchByNameStylistList = StylistListCalculation.getDykscStylistByName("emilian", "melian", SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN,
 				SoapConstants.STYLIST_ID_2000, 2);
 
 		MongoConnector.cleanCollection(getClass().getSimpleName());

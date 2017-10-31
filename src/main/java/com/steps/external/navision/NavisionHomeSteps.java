@@ -96,6 +96,20 @@ public class NavisionHomeSteps extends AbstractSteps {
 		
 	
 	@Step
+	public void postOrder(String incrementId) throws Exception {
+			navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=39%3bJAAAAACLAQAAAAJ7CzEAMAAwADMAMwAzADgAMQAyADAAMA%3d%3d&node=0000232e-0000-0002-0008-0000836bd2d2&mode=View&page=9305&i=CAC&ni=4");
+			navisionSyncDashboardPage().searchForItem(incrementId);
+			navisionSyncDashboardPage().clickOnEditPoints();
+			navisionSyncDashboardPage().clickOnEditLink();
+			navisionSyncDashboardPage().selectHomeTab();
+			navisionSyncDashboardPage().clickOnPostOrderMenuBtn();
+			navisionSyncDashboardPage().confirmPostJournalLines();
+			navisionSyncDashboardPage().confirmSuccesfullyPostedJournalLines();
+			navisionSyncDashboardPage().closeWindow();
+		}
+	
+	
+	@Step
 	public void syncQtyOnItem(String skuItem,String variantCode,String qty) throws Exception {
 			navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=11%3bGwAAAAJ7&mode=View&page=31&i=7A03&IsDlg=1");
 			navisionSyncDashboardPage().searchForItem(skuItem);

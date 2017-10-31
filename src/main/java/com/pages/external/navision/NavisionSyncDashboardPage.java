@@ -302,6 +302,25 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 		waitABit(2000);
 
 	}
+	
+	public void clickOnPostOrderMenuBtn() {
+		waitABit(2000);
+		System.out.println("postButton sunt aici 2 ");
+
+		List<WebElement> tabs=getDriver().findElements(By.cssSelector(".ms-cui-tabContainer ul li:nth-child(2) .ms-cui-row-onerow a"));
+		Actions builder = new Actions(getDriver());
+		
+		for (WebElement tab : tabs) {
+			if(tab.getText().contains("Post")){
+				builder.moveToElement(tab).click(tab);
+				builder.perform();
+				break;
+			}
+		}
+ 		
+		waitABit(2000);
+
+	}
 
 	public void selectHomeTab() {
 		element(homeTab).waitUntilVisible();

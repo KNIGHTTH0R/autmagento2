@@ -26,6 +26,7 @@ import com.tools.generalCalculation.StylistListCalculation;
 import com.tools.geolocation.AddressConverter;
 import com.tools.persistance.MongoWriter;
 import com.tools.requirements.Application;
+import com.tools.utils.PrintUtils;
 import com.tools.utils.RandomAddress;
 import com.workflows.frontend.DysksWorkflows;
 
@@ -60,7 +61,7 @@ public class US13006HostLeadDykscPlzAndCountryTest extends BaseTest {
 
 		searchByPlzAndCountryStylistList = StylistListCalculation.getCompatibleStylistsForDysks(coordinatesModel, SoapConstants.SOAP_STYLIST_RANGE,
 				SoapConstants.STYLIST_ID_FILTER, SoapConstants.LESS_THAN, SoapConstants.GREATER_THAN, SoapConstants.STYLIST_ID_2000, 2);
-
+		PrintUtils.printListDbStylists(searchByPlzAndCountryStylistList);
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 	}
 

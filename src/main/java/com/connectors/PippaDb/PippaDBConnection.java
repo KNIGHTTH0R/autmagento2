@@ -26,7 +26,9 @@ public class PippaDBConnection {
 		Connection connection = null;
 		try {
 
-			connection = DriverManager.getConnection("jdbc:mysql://staging-aut.pippajean.com/pippajean_prod","pippajeanprod","3ZCb4n2z");
+			//connection = DriverManager.getConnection("jdbc:mysql://staging-aut.pippajean.com/pippajean_prod","pippajeanprod","3ZCb4n2z");
+			connection = DriverManager.getConnection("jdbc:mysql://staging.pippajean.com/pippajean_prod","pippajeancloud","3H9e$Ne@");
+
 
 		} catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");
@@ -79,12 +81,13 @@ public class PippaDBConnection {
 		}
 		
 		String[] ary = cursuri.split(",");
-	//	System.out.println("ary: "+Arrays.toString(ary));
+		System.out.println("ary: "+Arrays.toString(ary));
 		connection.close();
 		return Arrays.toString(ary); 
 	}
 
 	public static void main(String[] args) throws SQLException {
-		PippaDBConnection.deleteAcademyUserData("298","119838");
+		
+		PippaDBConnection.completedCoursesInShop();
 	}
 }

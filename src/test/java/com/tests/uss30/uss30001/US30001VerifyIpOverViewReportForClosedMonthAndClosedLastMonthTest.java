@@ -110,24 +110,33 @@ public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest e
 		}
 		
         //for february after is closing
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForClosedMonth("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-28 23:59:00","2017-03-10 17:00:00");
-		 //for march after is closing
+	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForClosedMonth("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-28 23:59:00","2017-03-10 17:00:00");
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForClosedMonth("6013","2017-10-05 00:00:00","2017-09-10 00:00:00","2017-10-10 00:00:00","2017-11-10 00:00:00");
+
+		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getPaidOrdersThisMonth());
+		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getIpTPOrdersThisMonth());
+		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getOpenChargebacks());
+		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getIpLastMonth());
+		//for march after is closing
 		
 		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
+	//	System.out.println("expectedOrdersList size"+ expectedOrdersList.size());
 //		expectedReturns = expectedIpOverviewModel.getReturns();
 	}
 
 	@Test
 	public void us30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest() throws Exception {
-		frontEndSteps.performLogin(stylistUsername, stylistPassword);
+		/*frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		
 		
-		headerSteps.redirectToStylistReports();
-		reportsSteps.clickOnIpReports();
-		ipReportsSteps.selectMonth("FEB - 2017");
+//		headerSteps.redirectToStylistReports();
+//		reportsSteps.clickOnIpReports();
+		headerSteps.navigate("http://staging-aut.pippajean.com/de/stylereports/order/ipsreport/");
+		headerSteps.waitABit(3000);
+		//ipReportsSteps.selectMonth("OKT - 2017");
 		//ipReportsSteps.selectMonth(DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 		
 		//validate Ip overview report 
@@ -156,7 +165,7 @@ public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest e
 //		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
 
 		customVerification.printErrors();
-
+*/
 	}
 	
 	

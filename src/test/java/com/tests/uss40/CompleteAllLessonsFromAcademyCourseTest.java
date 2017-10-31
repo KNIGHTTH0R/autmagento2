@@ -57,6 +57,8 @@ public class CompleteAllLessonsFromAcademyCourseTest extends BaseTest {
 		
 		academySteps.completeAcademyLesson("7");
 
+		academySteps.validateCourseIsCompleteInShop(PippaDBConnection.completedCoursesInShop());
+		
 		headerSteps.openNewTab();
 		headerSteps.switchToNewestOpenedTab();
 		headerSteps.navigate("https://staging.pippajean.com/de/");
