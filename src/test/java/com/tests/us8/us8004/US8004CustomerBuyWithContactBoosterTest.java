@@ -105,11 +105,11 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		genProduct1 = createdProductsList.get(1);
-//		genProduct2 = createdProductsList.get(7);
-//		voucherValue = genProduct2.getPrice();
-//		genProduct3 = createdProductsList.get(6);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(1);
+		genProduct2 = createdProductsList.get(7);
+		voucherValue = genProduct2.getPrice();
+		genProduct3 = createdProductsList.get(6);
 ////		
 //		
 		

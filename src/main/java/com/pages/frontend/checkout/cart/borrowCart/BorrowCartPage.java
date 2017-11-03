@@ -184,7 +184,8 @@ public class BorrowCartPage extends AbstractPage {
 
 	public void clickToShipping() {
 		element(kasseButton).waitUntilVisible();
-		kasseButton.click();
+//		kasseButton.click();
+		clickElement(kasseButton);
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(ExpectedConditions.invisibilityOfElementWithText(
 				By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}

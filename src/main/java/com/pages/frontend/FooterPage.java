@@ -84,7 +84,8 @@ public class FooterPage extends AbstractPage {
 	}
 
 	public void clickTraumkarriereStyleCoachLink() {
-		traumkarriereStyleCoachLink.click();
+		//traumkarriereStyleCoachLink.click();
+		clickElement(traumkarriereStyleCoachLink);
 	}
 
 	public void inputNewsletterEmail(String email) {

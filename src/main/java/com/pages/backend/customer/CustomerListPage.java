@@ -54,7 +54,8 @@ public class CustomerListPage extends AbstractPage {
 			WebElement currentLink = elementNow.findElement(By.cssSelector("*:nth-child(4)"));
 			System.out.println("Current Email: " + currentEmail);
 			if (currentEmail.trim().contentEquals(searchTerm)) {
-				currentLink.click();
+				clickElement(currentLink);
+				//currentLink.click();
 				waitABit(1000);
 				break theFor;
 			}

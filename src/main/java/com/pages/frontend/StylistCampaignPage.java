@@ -26,7 +26,9 @@ public class StylistCampaignPage extends AbstractPage {
 	}
 	
 	public void clickStartersetOrderButton() {
-		startersetOrderButton.click();
+		clickElement(startersetOrderButton);
+		//startersetOrderButton.click();
+		
 	}
 
 }

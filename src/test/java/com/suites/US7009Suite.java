@@ -13,7 +13,7 @@ import com.tests.us7.us7009.US7009ValidateCustomerIsAssignedToStylist;
 
 @SuiteClasses({
 //	US7009KoboRegOnNotVoucherOwnerContextTest.class,\
-	US7009KoboRegOnNotVoucherOwnerContextTest1.class,
+//	US7009KoboRegOnNotVoucherOwnerContextTest1.class,
 	US7009PlacePomOrderTest.class,
 	US7009CheckCustomerActivation.class,
 	US7009CheckReceivedEmailsTest.class,

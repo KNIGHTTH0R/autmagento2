@@ -18,6 +18,10 @@ import com.tests.us7.uss70012.US70012KoboCampaignRegistrationUnderContextTest1;
 
 @SuiteClasses({
 //	US7008KoboRegOnMasterNotPrefCountryTest1.class,
+	US7001RegularCustRegOnMasterTest.class,
+	US7001bRegularCustRegOnNotPrefCountryTest.class,
+	US7002RegularCustRegistrationOnContextTest.class,
+	
 	US7009KoboRegOnNotVoucherOwnerContextTest1.class,
 	US70010KoboRegOnVoucherOwnerContextTest1.class,
 	US70011KoboCampaignRegistrationOnMasterTest1.class,

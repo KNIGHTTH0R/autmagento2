@@ -15,8 +15,8 @@ import com.tests.uss17.us17002.US17002VerifyThatContactWasReassignedCorrectlyTes
 
 @SuiteClasses({
 	US17002StyleCoachRegistrationTest.class,
-	US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest.class,
 	US17002RegularCustomerRegistrationTest.class, //customer registers under SC1 
+	US17002StyleCoachRegistrationToBecomeCustomersPrefferedTest.class,
 	US17002ConfirmCustomerTest.class,
 	US17002ChangeCustomersContextTest.class, //customer changes the preffered SC to SC2
 	US17002SetCustomersPrefferdToBeQuitTest.class, //SC2 status = quit
