@@ -157,10 +157,10 @@ public class US6001bScRegistrationNewCustForbiddenCountryTest extends BaseTest {
 		// paymentSteps.fillKlarnaForm();
 		// } else {
 
-		// paymentSteps.expandCreditCardForm();
-		// paymentSteps.fillCreditCardForm(creditCardData);
-		paymentSteps.payWithBankTransfer();
-		confirmationSteps.grabConfirmationTotals();
+		 paymentSteps.expandCreditCardForm();
+		 paymentSteps.fillCreditCardForm(creditCardData);
+//		paymentSteps.payWithBankTransfer();
+//		confirmationSteps.grabConfirmationTotals();
 		confirmationSteps.agreeAndCheckout();
 
 		starterSetConfirmationWorkflows.setVerifyConfirmationTotals(DataGrabber.confirmationTotals,

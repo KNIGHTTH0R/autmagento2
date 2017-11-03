@@ -51,7 +51,8 @@ public class OrderListPage extends AbstractPage {
 		  List<WebElement> listElements = listContainer.findElements(By.tagName("tr"));
 		  theFor: for (WebElement elementNow : listElements) {
 		   if (elementNow.getText().contains(name)) {
-		    elementNow.findElement(By.cssSelector("td a[href*='admin/sales_order']")).click();
+			   clickElement(elementNow.findElement(By.cssSelector("td a[href*='admin/sales_order']")));
+		  //  elementNow.findElement(By.cssSelector("td a[href*='admin/sales_order']")).click();
 		    found = true;
 		    break theFor;
 		   }
