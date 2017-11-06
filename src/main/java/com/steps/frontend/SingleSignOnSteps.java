@@ -30,6 +30,13 @@ public class SingleSignOnSteps extends AbstractSteps {
 	}
 	
 	@Step
+	public  void validateCustomerName(String customerName) {
+		singleSignOnPage().validateCustomerName(customerName);
+		
+	}
+	
+	
+	@Step
 	public  void validateShopLogoutStoreView(String storeView) {
 		singleSignOnPage().validateShopLogoutStoreView(storeView);
 		
@@ -60,6 +67,16 @@ public class SingleSignOnSteps extends AbstractSteps {
 	public void validateShopLoginOtherWebsiteAndStoreView(String website, String storeView) {
 	//	navigate("https://staging.pippajean.com/");
 		headerPage().switchWebsite(website);
+		validateShopLoginStoreView(storeView);
+		validateShopLoginWebsite(website);
+		
+	}
+	
+	@Step
+	public void validateShopLoginOtherWebsiteAndStoreView(String website, String storeView,String customerName) {
+	//	navigate("https://staging.pippajean.com/");
+		headerPage().switchWebsite(website);
+		validateCustomerName(customerName);
 		validateShopLoginStoreView(storeView);
 		validateShopLoginWebsite(website);
 		
@@ -99,6 +116,14 @@ public class SingleSignOnSteps extends AbstractSteps {
 		singleSignOnPage().validateLoggedInAcademy();
 		switchBackToFirstTab();
 	}
+	
+	@Step
+	public void validateLoggedInAcademySameTab() {
+		openNewTab();
+		switchToNewestOpenedTab();
+		navigate("https://staging-academy.pippajean.com");
+		singleSignOnPage().validateLoggedInAcademy();
+	}
 
 
 	public void validateLoggedOutAlreadyFromAcademy() {
@@ -109,9 +134,28 @@ public class SingleSignOnSteps extends AbstractSteps {
 		switchBackToFirstTab();
 		
 	}
+	
+	public void validateLoggedOutFromAcademy() {
+//		openNewTab();
+		
+		navigate("https://staging-academy.pippajean.com");
+		singleSignOnPage().validateLoggedOutFromAcademy();
+
+		
+	}
 
 	public void navigateToShop() {
 		// TODO Auto-generated method stub
 		navigate("https://staging.pippajean.com/");
+	}
+
+	public void clickOnShopLogo() {
+		// TODO Auto-generated method stub
+		singleSignOnPage().clickOnShopLogo();
+	}
+
+	public void keepStylistContext() {
+		// TODO Auto-generated method stub
+		singleSignOnPage().keepStylistContext();
 	}
 }

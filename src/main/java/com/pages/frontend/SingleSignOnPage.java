@@ -26,14 +26,17 @@ public class SingleSignOnPage extends AbstractPage {
 	@FindBy(css=".header .quick-wrap .message")
 	private WebElement headerMessage;
 	
-	
-	
 	@FindBy(css="#primary .course-container span")
 	private WebElement academyHomePage;
 	
 	@FindBy(css=".login-form .head h1")
 	private WebElement academyLoginPage;
 	
+	@FindBy(css=".categories li:nth-child(1)")
+	private WebElement shopLogo;
+	
+	@FindBy(css="#PreferredPopup #keep-shop")
+	private WebElement keepShop;
 	
 	
 	
@@ -84,7 +87,6 @@ public class SingleSignOnPage extends AbstractPage {
 	}
 
 	public void validateLoggedOutFromAcademy() {
-		// TODO Auto-generated method stub
 		waitForPageToLoad();
 		element(academyLoginPage).waitUntilVisible();
 		Assert.assertTrue("Failure: Email notification text was not found. ", academyLoginPage.getText().contains("Login"));
@@ -106,5 +108,24 @@ public class SingleSignOnPage extends AbstractPage {
 			CustomVerification.verifyTrue("Failure: The user is not keept in the right store view",storeViewMessage.getText().toLowerCase().contains(storeView) );
 			CustomVerification.verifyTrue("Failure: User is not logged out from SHOP",!storeViewElements.isEmpty());
 		}
+	}
+
+	public void validateCustomerName(String customerName) {
+		List<WebElement> storeViewElements=getDriver().findElements(By.cssSelector(".header .quick-wrap .message"));
+		CustomVerification.verifyTrue("Failure: The name is not displayed in shop footer ",storeViewElements.get(0).getText().toUpperCase().contains("JULIA"));
+	}
+
+	public void clickOnShopLogo() {
+		element(shopLogo).waitUntilVisible();
+		shopLogo.click();
+	}
+	public void keepStylistContext() {
+		List<WebElement> changeModal=getDriver().findElements(By.cssSelector("#PreferredPopup #keep-shop"));
+		if(!changeModal.isEmpty()){
+			changeModal.get(0).click();
+		}else{
+			Assert.assertTrue("Failure: The <Change Stylist> modal is not displayed ",false);
+		}
+		
 	}
 }

@@ -176,7 +176,19 @@ public class AbstractSteps extends ScenarioSteps {
 
 	}
 	
-	
+	@Step
+	public void performLoginOnWebsiteWithContext(String userName, String userPass,String website,String context) {
+//		navigate(MongoReader.getBaseURL()+"/"+website);
+//		navigate(MongoReader.getBaseURL()+"/"+website);
+		navigate("https://staging.pippajean.com/"+website+"/"+context);
+		navigate("https://staging.pippajean.com/"+website+"/"+context);
+		headerPage().clickAnmeldenButton();
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+		waitABit(5000);
+
+	}
 
 	@Step
 	public void performLoginAfterChangingWebsite(String userName, String userPass) {
@@ -536,6 +548,7 @@ public class AbstractSteps extends ScenarioSteps {
 		return getPages().currentPageAt(StylistRegistrationPage.class);
 	}
 
+	
 	public SingleSignOnPage singleSignOnPage() {
 		return getPages().currentPageAt(SingleSignOnPage.class);
 	}
