@@ -292,7 +292,9 @@ public class CreateCustomerPage extends AbstractPage {
 	}
 
 	public void searchStylistByName() {
-		searchStylistByName.click();
+		element(searchStylistByName).waitUntilVisible();
+		clickElement(searchStylistByName);
+	//	searchStylistByName.click();
 	}
 
 	public void inputSearchFirstName(String postcode) {
@@ -340,7 +342,8 @@ public class CreateCustomerPage extends AbstractPage {
 
 	public void searchByNameSubmit() {
 		element(searchByNameSubmitButton).waitUntilVisible();
-		searchByNameSubmitButton.click();
+		clickElement(searchByNameSubmitButton);
+//	/	searchByNameSubmitButton.click();
 		withTimeoutOf(30, TimeUnit.SECONDS).waitFor(
 				ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".blockUI.blockMsg.blockElement")));
 		waitABit(1000);

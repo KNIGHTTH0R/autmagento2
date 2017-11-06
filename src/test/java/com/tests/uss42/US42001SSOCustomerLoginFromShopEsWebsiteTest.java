@@ -30,7 +30,7 @@ import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "SSO login from shop / de website", type = "Scenarios")
 @RunWith(SerenityRunner.class)
-public class US42001SSOCustomerLoginFromShopDeWebsiteTest extends BaseTest {
+public class US42001SSOCustomerLoginFromShopEsWebsiteTest extends BaseTest {
 
 	@Steps
 	public CustomerRegistrationSteps customerRegistrationSteps;
@@ -80,34 +80,35 @@ public class US42001SSOCustomerLoginFromShopDeWebsiteTest extends BaseTest {
 	}
 
 	@Test
-	public void us42001SSOLoginFromShopDeWebsiteTest() throws SQLException {
+	public void us42001SSOLoginFromShopEsWebsiteTest() throws SQLException {
 
 		// CASE 1: customer DE preffered website
 
-		System.out.println("CASE 1: customer DE preffered website");
+		System.out.println("CASE 1: customer ES preffered website");
 
-		PippaDBConnection.updateCustomerWebsite(customerId, WebsiteAndStoreViewConstants.DE_WEBSITE);
-		PippaDBConnection.updateCustomerStoreView(customerId, WebsiteAndStoreViewConstants.DE_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+		PippaDBConnection.updateCustomerWebsite(customerId, WebsiteAndStoreViewConstants.ES_WEBSITE);
+		PippaDBConnection.updateCustomerStoreView(customerId, WebsiteAndStoreViewConstants.ES_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 
-		customerRegistrationSteps.performLoginOnWebsite(username, password, WebsiteAndStoreViewConstants.DE_WEBSITE);
-		singleSignOnSteps.validateShopLoginWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW, customerContext);
+		customerRegistrationSteps.performLoginOnWebsite(username, password, WebsiteAndStoreViewConstants.ES_WEBSITE);
+		
+		singleSignOnSteps.validateShopLoginWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW, customerContext);
 		singleSignOnSteps.validateLoggedInAlreadyInAcademy();
 		// validate all website
-		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 		customerRegistrationSteps.performLogoutFromShop(WebsiteAndStoreViewConstants.EN_WEBSITE);
 		singleSignOnSteps.validateShopLogoutWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW, customerContext);
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW, customerContext);
 		singleSignOnSteps.validateLoggedOutAlreadyFromAcademy();
 
+		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
-		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 
 		// CASE 2: customer EN preffered website System.out.println(
 
@@ -115,54 +116,54 @@ public class US42001SSOCustomerLoginFromShopDeWebsiteTest extends BaseTest {
 
 		PippaDBConnection.updateCustomerWebsite(customerId, WebsiteAndStoreViewConstants.EN_WEBSITE);
 		PippaDBConnection.updateCustomerStoreView(customerId, WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 
-		customerRegistrationSteps.performLoginOnWebsite(username, password, WebsiteAndStoreViewConstants.DE_WEBSITE);
+		customerRegistrationSteps.performLoginOnWebsite(username, password, WebsiteAndStoreViewConstants.ES_WEBSITE);
 		singleSignOnSteps.validateShopLoginWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW, customerContext);
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW, customerContext);
 		singleSignOnSteps.validateLoggedInAlreadyInAcademy();
 		// validate all website
 		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
-		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
-
-		customerRegistrationSteps.performLogoutFromShop(WebsiteAndStoreViewConstants.ES_WEBSITE);
-		singleSignOnSteps.validateShopLogoutWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW, customerContext);
-		singleSignOnSteps.validateLoggedOutAlreadyFromAcademy();
-
-		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
-		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
-
-		// CASE 3: customer ES preffered website
-
-		System.out.println("CASE 3: customer ES preffered website ");
-		PippaDBConnection.updateCustomerWebsite(customerId, WebsiteAndStoreViewConstants.ES_WEBSITE);
-		PippaDBConnection.updateCustomerStoreView(customerId, WebsiteAndStoreViewConstants.ES_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
-
-		customerRegistrationSteps.performLoginOnWebsite(username, password, WebsiteAndStoreViewConstants.DE_WEBSITE);
-		singleSignOnSteps.validateShopLoginWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW, customerContext);
-		singleSignOnSteps.validateLoggedInAlreadyInAcademy();
-		// validate all website
-		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 
 		customerRegistrationSteps.performLogoutFromShop(WebsiteAndStoreViewConstants.EN_WEBSITE);
 		singleSignOnSteps.validateShopLogoutWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW, customerContext);
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW, customerContext);
 		singleSignOnSteps.validateLoggedOutAlreadyFromAcademy();
 
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
-		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
+		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
+
+		// CASE 3: customer ES preffered website
+
+		System.out.println("CASE 3: customer DE preffered website ");
+		PippaDBConnection.updateCustomerWebsite(customerId, WebsiteAndStoreViewConstants.DE_WEBSITE);
+		PippaDBConnection.updateCustomerStoreView(customerId, WebsiteAndStoreViewConstants.DE_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
+
+		customerRegistrationSteps.performLoginOnWebsite(username, password, WebsiteAndStoreViewConstants.ES_WEBSITE);
+		singleSignOnSteps.validateShopLoginWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW, customerContext);
+		singleSignOnSteps.validateLoggedInAlreadyInAcademy();
+		// validate all website
+		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
+		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
+
+		customerRegistrationSteps.performLogoutFromShop(WebsiteAndStoreViewConstants.EN_WEBSITE);
+		singleSignOnSteps.validateShopLogoutWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW, customerContext);
+		singleSignOnSteps.validateLoggedOutAlreadyFromAcademy();
+
+		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
+		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
+				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 
 		customVerification.printErrors();
 	}

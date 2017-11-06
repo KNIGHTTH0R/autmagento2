@@ -783,4 +783,10 @@ public class CustomerRegistrationSteps extends AbstractSteps {
 		registerLandingPage().submitAndContinue();
 	}
 
+	public void performLogoutFromShop(String website) {
+		navigate("https://staging.pippajean.com/"+website);
+		headerPage().clickAnmeldenButton();
+		
+	}
+
 }

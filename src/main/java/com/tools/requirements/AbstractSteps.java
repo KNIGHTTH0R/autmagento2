@@ -81,6 +81,7 @@ import com.pages.frontend.ProductListPage;
 import com.pages.frontend.RegistrationMessagePage;
 import com.pages.frontend.ReportsPage;
 import com.pages.frontend.ShopPage;
+import com.pages.frontend.SingleSignOnPage;
 import com.pages.frontend.StarterSetPage;
 import com.pages.frontend.StylistCampaignPage;
 import com.pages.frontend.StylistContextPage;
@@ -161,6 +162,19 @@ public class AbstractSteps extends ScenarioSteps {
 
 	}
 	
+	@Step
+	public void performLoginOnWebsite(String userName, String userPass,String website) {
+//		navigate(MongoReader.getBaseURL()+"/"+website);
+//		navigate(MongoReader.getBaseURL()+"/"+website);
+		navigate("https://staging.pippajean.com/"+website);
+		navigate("https://staging.pippajean.com/"+website);
+		headerPage().clickAnmeldenButton();
+		loginPage().inputUserName(userName);
+		loginPage().inputUserPass(userPass);
+		loginPage().clickOnLoginButton();
+		waitABit(5000);
+
+	}
 	
 	
 
@@ -214,6 +228,20 @@ public class AbstractSteps extends ScenarioSteps {
 		getDriver().manage().window().maximize();
 	}
 
+	
+	public void closeOthersTab(){
+		String originalHandle = getDriver().getWindowHandle();
+
+	   
+	    for(String handle : getDriver().getWindowHandles()) {
+	        if (!handle.equals(originalHandle)) {
+	        	getDriver().switchTo().window(handle);
+	        	getDriver().close();
+	        }
+	    }
+
+	    getDriver().switchTo().window(originalHandle);
+	}
 	@Step
 	public void switchBackToPreviousTab() {
 		Set<String> winSet = getDriver().getWindowHandles();
@@ -221,6 +249,16 @@ public class AbstractSteps extends ScenarioSteps {
 		Assert.assertTrue("There is only one tab!", winList.size() > 1);
 		String previousTab = winList.get(winList.size() - 2);
 		getDriver().switchTo().window(previousTab);
+		getDriver().manage().window().maximize();
+	}
+	
+	@Step
+	public void switchBackToFirstTab() {
+		Set<String> winSet = getDriver().getWindowHandles();
+		List<String> winList = new ArrayList<String>(winSet);
+		Assert.assertTrue("There is only one tab!", winList.size() > 1);
+		String firstTab = winList.get(0);
+		getDriver().switchTo().window(firstTab);
 		getDriver().manage().window().maximize();
 	}
 
@@ -496,6 +534,10 @@ public class AbstractSteps extends ScenarioSteps {
 
 	public StylistRegistrationPage stylistRegistrationPage() {
 		return getPages().currentPageAt(StylistRegistrationPage.class);
+	}
+
+	public SingleSignOnPage singleSignOnPage() {
+		return getPages().currentPageAt(SingleSignOnPage.class);
 	}
 
 	public StylistContextPage stylistContextPage() {

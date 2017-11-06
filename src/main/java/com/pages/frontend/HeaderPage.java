@@ -22,18 +22,17 @@ public class HeaderPage extends AbstractPage {
 	@FindBy(css = "div.quick-access")
 	private WebElementFacade succesLoginContainer;
 
-	
 	@FindBy(css = ".quick-access p")
 	private WebElementFacade succesLoginContainerES;
 
 	@FindBy(css = ".top-search-icon")
 	private WebElement submitSearch;
-	
+
 	@FindBy(css = ".links li:nth-child(3) a")
 	private WebElement log0utBtn;
 
-//	@FindBy(id = "#add-to-cart")
-//	private WebElement addToCartButton;
+	// @FindBy(id = "#add-to-cart")
+	// private WebElement addToCartButton;
 
 	@FindBy(css = "a.button[href*='cart']")
 	private WebElement goToCartButton;
@@ -55,7 +54,17 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = "ul.links>.last a")
 	private WebElement anmeldenButton;
-
+	
+	
+	@FindBy(css = ".footer #select-website li .en")
+	private WebElement enWebsite;
+	
+	@FindBy(css = ".footer #select-website li .es")
+	private WebElement esWebsite;
+	
+	@FindBy(css = ".footer #select-website li .de")
+	private WebElement deWebsite;
+	
 	@FindBy(css = "ul.links>.last a")
 	private WebElement abmeldenButton;
 
@@ -64,20 +73,18 @@ public class HeaderPage extends AbstractPage {
 
 	@FindBy(css = "div.switcher-wrapper")
 	private WebElement websiteContainer;
-	
+
 	@FindBy(css = "div.categories>ul.clearfix li:first-child a")
 	private WebElement shopButton;
-	
-	
+
 	@FindBy(css = "a[id*='facebookShare']")
 	private WebElement shareKoboLink;
-	
+
 	@FindBy(css = ".link-list.iconed li:nth-child(1) a")
 	private WebElement shareOnlineBoutiqueLink;
-	
+
 	@FindBy(css = ".link-list.iconed li:nth-child(2) a")
 	private WebElement inviteFriendsLink;
-	
 
 	public void selectLanguage(String language) {
 		element(websiteContainer).waitUntilVisible();
@@ -116,7 +123,7 @@ public class HeaderPage extends AbstractPage {
 	public void clickOnProfileButton() {
 		element(profileButton).waitUntilVisible();
 		clickElement(profileButton);
-//		profileButton.click();
+		// profileButton.click();
 	}
 
 	public void clickOnWishlistButton() {
@@ -124,16 +131,17 @@ public class HeaderPage extends AbstractPage {
 		wishlist.click();
 	}
 
-//	public void clickAddToCart() {
-//		element(addToCartButton).waitUntilVisible();
-//		addToCartButton.click();
-//	}
+	// public void clickAddToCart() {
+	// element(addToCartButton).waitUntilVisible();
+	// addToCartButton.click();
+	// }
 
 	public void clickGoToCart() {
 		element(goToCartButton).waitUntilVisible();
 		waitFor(ExpectedConditions.elementToBeClickable(goToCartButton));
 		goToCartButton.click();
-		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
 	}
 
 	public void clickShoppingBag() {
@@ -154,6 +162,27 @@ public class HeaderPage extends AbstractPage {
 		anmeldenButton.click();
 	}
 
+	public void switchDEWebsite() {
+		element(deWebsite).waitUntilVisible();
+		deWebsite.click();
+	}
+
+	public void switchESWebsite() {
+		element(esWebsite).waitUntilVisible();
+		esWebsite.click();
+	}
+
+	public void switchWebsite(String website) {
+		waitABit(1000);
+		List<WebElement> websiteSwitcher=getDriver().findElements(By.cssSelector(".footer #select-website li ."+website+""));
+		if(websiteSwitcher.size()!=0){
+			websiteSwitcher.get(0).click();
+		}else{
+			System.out.println("Failure: The website cannot be selected");
+		}
+		
+	}
+
 	public void clickAbmeldenButton() {
 		element(abmeldenButton).waitUntilVisible();
 		abmeldenButton.click();
@@ -170,41 +199,49 @@ public class HeaderPage extends AbstractPage {
 	}
 
 	public boolean succesfullLogin() {
-		return succesLoginContainer.getText().contains("¡BIENVENIDO,") || succesLoginContainer.getText().contains("HI,");
+		return succesLoginContainer.getText().contains("¡BIENVENIDO,")
+				|| succesLoginContainer.getText().contains("HI,");
 	}
-	
-	
+
 	public void checkSucesfullLogin() {
-		Assert.assertTrue("Failure: The login fails ",succesLoginContainer.getText().contains("¡BIENVENIDO,") || succesLoginContainer.getText().contains("HI,"));
+		Assert.assertTrue("Failure: The login fails ", succesLoginContainer.getText().contains("¡BIENVENIDO,")
+				|| succesLoginContainer.getText().contains("HI,"));
 	}
-	
+
 	public void checkSucesfullLoginDE() {
-		Assert.assertTrue("Failure: The login fails ",succesLoginContainer.getText().contains("HI,"));
+		Assert.assertTrue("Failure: The login fails ", succesLoginContainer.getText().contains("HI,"));
 	}
+
 	public void checkSucesfullLoginES() {
-		Assert.assertTrue("Failure: The login fails ",succesLoginContainer.getText().contains("¡BIENVENIDO,"));
-//		List<WebElement> element = getDriver().findElements(By.cssSelector(".quick-access .message"));
-//		if(element.size()!=0){
-//			System.out.println("printeaza ceva: "+ element.get(0).getText());
-//			//System.out.println("succesLoginContainer.getText(): " +succesLoginContainerES.getText());
-//			CustomVerification.verifyTrue("Failure: The login fails ",element.get(0).getText().contains("¡Bienvenido,"));
-//		}
-//		
-//		System.out.println("succesLoginContainer.getText(): " +succesLoginContainerES.getText());
-//		Assert.assertTrue("Failure: The login fails ",succesLoginContainerES.getText().contains("¡Bienvenido,"));
+		Assert.assertTrue("Failure: The login fails ", succesLoginContainer.getText().contains("¡BIENVENIDO,"));
+		// List<WebElement> element =
+		// getDriver().findElements(By.cssSelector(".quick-access .message"));
+		// if(element.size()!=0){
+		// System.out.println("printeaza ceva: "+ element.get(0).getText());
+		// //System.out.println("succesLoginContainer.getText(): "
+		// +succesLoginContainerES.getText());
+		// CustomVerification.verifyTrue("Failure: The login fails
+		// ",element.get(0).getText().contains("¡Bienvenido,"));
+		// }
+		//
+		// System.out.println("succesLoginContainer.getText(): "
+		// +succesLoginContainerES.getText());
+		// Assert.assertTrue("Failure: The login fails
+		// ",succesLoginContainerES.getText().contains("¡Bienvenido,"));
 	}
+
 	public void clickShop() {
 		element(shopButton).waitUntilVisible();
 		shopButton.click();
 	}
 
 	public void verifyWebsite(String website) {
-		System.out.println("url: "+getDriver().getCurrentUrl());
-		Assert.assertTrue("Failure: The Website is not correct ",getDriver().getCurrentUrl().contains(website));
+		System.out.println("url: " + getDriver().getCurrentUrl());
+		Assert.assertTrue("Failure: The Website is not correct ", getDriver().getCurrentUrl().contains(website));
 	}
-	
+
 	public void verifyStoreView(String storeView) {
-		Assert.assertTrue("Failure: The Website is not correct ",getDriver().getCurrentUrl().contains(storeView));
+		Assert.assertTrue("Failure: The Website is not correct ", getDriver().getCurrentUrl().contains(storeView));
 	}
 
 	public void clickOnKoboShare() {
@@ -217,27 +254,26 @@ public class HeaderPage extends AbstractPage {
 	public void clickOnShareOnlineBootique() {
 		element(shareOnlineBoutiqueLink).waitUntilVisible();
 		shareOnlineBoutiqueLink.click();
-		waitABit(5000);		
+		waitABit(5000);
 	}
 
 	public void verifyStylistContext(String context) {
-		System.out.println("url: "+getDriver().getCurrentUrl());
-		Assert.assertTrue("Failure: The Website is not correct ",getDriver().getCurrentUrl().contains(context));
-		
+		System.out.println("url: " + getDriver().getCurrentUrl());
+		Assert.assertTrue("Failure: The Website is not correct ", getDriver().getCurrentUrl().contains(context));
+
 	}
 
 	public void clickInviteFacebookFriends() {
 		// TODO Auto-generated method stub
 		element(inviteFriendsLink).waitUntilVisible();
 		inviteFriendsLink.click();
-		waitABit(5000);		
+		waitABit(5000);
 	}
 
 	public void checkSucesfullLoginInPippa() {
 		// TODO Auto-generated method stub
-		CustomVerification.verifyTrue("The user seems to not be logged in Pippajean", log0utBtn.getText().contains("ABMELDEN"));
+		CustomVerification.verifyTrue("The user seems to not be logged in Pippajean",
+				log0utBtn.getText().contains("ABMELDEN"));
 	}
-
-	
 
 }

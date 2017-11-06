@@ -89,6 +89,18 @@ public class DateUtils {
 		return String.valueOf(sdf.format(lastDayOfMonth));
 	}
 
+	public static Date yesterday() {
+	    final Calendar cal = Calendar.getInstance();
+	    cal.add(Calendar.DATE, -1);
+	    return cal.getTime();
+	}
+	
+	public static String getYesterdayDateString() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //2017-11-03 17:00:00
+        return dateFormat.format(yesterday());
+}
+	
 	public static String getFirstDayOfAGivenMonth(String dateString, String formatString) throws ParseException {
 		DateFormat format = new SimpleDateFormat(formatString);
 		Date date = format.parse(dateString);
@@ -502,6 +514,8 @@ public class DateUtils {
 		
 		//System.out.println(DateUtils.addDays("yyyy-MM-dd", 1));
 	//	System.out.println(DateUtils.parseDate("1484728910770", "dd. MMM. yy", new Locale.Builder().setLanguage("de").build(), "dd.MM.YYYY"));
+		
+		System.out.println(DateUtils.getYesterdayDateString());
 	}
 
 }
