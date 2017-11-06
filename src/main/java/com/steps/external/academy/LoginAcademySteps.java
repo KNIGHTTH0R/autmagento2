@@ -17,4 +17,11 @@ public class LoginAcademySteps extends AbstractSteps {
 		loginAcademyPage().inputPassword(password);
 		loginAcademyPage().clickLoginButton();
 	}
+
+
+	public void performLogoutFromAcademy() {
+		// TODO Auto-generated method stub
+		navigate("https://staging-academy.pippajean.com");
+		loginAcademyPage().clickOnLogOut();
+	}
 }

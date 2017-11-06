@@ -24,8 +24,14 @@ public class SingleSignOnSteps extends AbstractSteps {
 	
 
 	@Step
-	public  void vaslidateShopLoginStoreView(String storeView) {
+	public  void validateShopLoginStoreView(String storeView) {
 		singleSignOnPage().vaslidateShopLoginStoreView(storeView);
+		
+	}
+	
+	@Step
+	public  void validateShopLogoutStoreView(String storeView) {
+		singleSignOnPage().validateShopLogoutStoreView(storeView);
 		
 	}
 	
@@ -45,7 +51,7 @@ public class SingleSignOnSteps extends AbstractSteps {
 
 	@Step
 	public void validateShopLoginWebsiteAndStoreView(String website, String storeView, String context) {
-		vaslidateShopLoginStoreView(storeView);
+		validateShopLoginStoreView(storeView);
 		validateShopLoginWebsite(website);
 		validateContext(context);
 		
@@ -54,7 +60,7 @@ public class SingleSignOnSteps extends AbstractSteps {
 	public void validateShopLoginOtherWebsiteAndStoreView(String website, String storeView) {
 	//	navigate("https://staging.pippajean.com/");
 		headerPage().switchWebsite(website);
-		vaslidateShopLoginStoreView(storeView);
+		validateShopLoginStoreView(storeView);
 		validateShopLoginWebsite(website);
 		
 	}
@@ -63,15 +69,15 @@ public class SingleSignOnSteps extends AbstractSteps {
 	public void validateShopLogoutOtherWebsiteAndStoreView(String website, String storeView) {
 	//	navigate("https://staging.pippajean.com/");
 		headerPage().switchWebsite(website);
-		vaslidateShopLoginStoreView(storeView);
+		validateShopLogoutStoreView(storeView);
 		validateShopLoginWebsite(website);
-		
+	
 	}
 	
 	@Step
 	public void validateShopLogoutWebsiteAndStoreView(String website, String storeView, String context) {
-		vaslidateShopLoginStoreView(storeView);
-		validateShopLoginWebsite(website);
+		validateShopLogoutStoreView(storeView);
+	//	validateShopLoginWebsite(website);
 		validateContext(context);
 		
 	}
@@ -79,13 +85,21 @@ public class SingleSignOnSteps extends AbstractSteps {
 	@Step
 	public void validateLoggedInAlreadyInAcademy() {
 		openNewTab();
-	
 		switchToNewestOpenedTab();
 		navigate("https://staging-academy.pippajean.com");
 		singleSignOnPage().validateLoggedInAcademy();
-		
 		switchBackToFirstTab();
 	}
+	
+	@Step
+	public void validateLoggedInAcademy() {
+	//	openNewTab();
+		switchToNewestOpenedTab();
+		navigate("https://staging-academy.pippajean.com");
+		singleSignOnPage().validateLoggedInAcademy();
+		switchBackToFirstTab();
+	}
+
 
 	public void validateLoggedOutAlreadyFromAcademy() {
 //		openNewTab();
@@ -94,5 +108,10 @@ public class SingleSignOnSteps extends AbstractSteps {
 		singleSignOnPage().validateLoggedOutFromAcademy();
 		switchBackToFirstTab();
 		
+	}
+
+	public void navigateToShop() {
+		// TODO Auto-generated method stub
+		navigate("https://staging.pippajean.com/");
 	}
 }

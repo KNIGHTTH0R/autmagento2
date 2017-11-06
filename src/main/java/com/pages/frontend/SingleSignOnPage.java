@@ -23,6 +23,11 @@ public class SingleSignOnPage extends AbstractPage {
 	@FindBy(css=".header .quick-wrap .switcher-header li span")
 	private WebElement storeViewMessage;
 	
+	@FindBy(css=".header .quick-wrap .message")
+	private WebElement headerMessage;
+	
+	
+	
 	@FindBy(css="#primary .course-container span")
 	private WebElement academyHomePage;
 	
@@ -56,8 +61,22 @@ public class SingleSignOnPage extends AbstractPage {
 	}
 
 	public void vaslidateShopLoginStoreView(String storeView) {
+		List<WebElement> storeViewElements=getDriver().findElements(By.cssSelector(".header .quick-wrap .message"));
 		element(storeViewMessage).waitUntilVisible();
-		CustomVerification.verifyTrue("Failure: User is not logged in in the right store View",storeViewMessage.getText().toLowerCase().contains(storeView) );
+		if(storeView.contentEquals("es")){
+			CustomVerification.verifyTrue("Failure: User is not logged in in the right store View",storeViewMessage.getText().toLowerCase().contains(storeView) );
+			CustomVerification.verifyTrue("Failure: User is not logged in in the right store View",storeViewElements.get(0).getText().toUpperCase().contains("¡BIENVENIDO"));
+		}
+		if(storeView.contentEquals("de")){
+			CustomVerification.verifyTrue("Failure: User is not logged in in the right store View",storeViewMessage.getText().toLowerCase().contains(storeView) );
+			CustomVerification.verifyTrue("Failure: User is not logged in in the right store View",storeViewElements.get(0).getText().toUpperCase().contains("HI,"));
+		}
+		if(storeView.contentEquals("en")){
+			CustomVerification.verifyTrue("Failure: User is not logged in in the right store View",storeViewMessage.getText().toLowerCase().contains(storeView) );
+			CustomVerification.verifyTrue("Failure: User is not logged in in the right store View",storeViewElements.get(0).getText().toUpperCase().contains("WELCOME,"));
+		}
+	
+		
 	}
 
 	public void validateContext(String context) {
@@ -69,5 +88,23 @@ public class SingleSignOnPage extends AbstractPage {
 		waitForPageToLoad();
 		element(academyLoginPage).waitUntilVisible();
 		Assert.assertTrue("Failure: Email notification text was not found. ", academyLoginPage.getText().contains("Login"));
+	}
+
+	public void validateShopLogoutStoreView(String storeView) {
+		
+		List<WebElement> storeViewElements=getDriver().findElements(By.cssSelector(".header .quick-wrap .message"));
+		element(storeViewMessage).waitUntilVisible();
+		if(storeView.contentEquals("es")){
+			CustomVerification.verifyTrue("Failure: The user is not keept in the right store view",storeViewMessage.getText().toLowerCase().contains(storeView) );
+			CustomVerification.verifyTrue("Failure: User is not logged out from SHOP",!storeViewElements.isEmpty());
+		}
+		if(storeView.contentEquals("de")){
+			CustomVerification.verifyTrue("Failure: The user is not keept in the right store view",storeViewMessage.getText().toLowerCase().contains(storeView) );
+			CustomVerification.verifyTrue("Failure: User is not logged out from SHOP",!storeViewElements.isEmpty());
+		}
+		if(storeView.contentEquals("en")){
+			CustomVerification.verifyTrue("Failure: The user is not keept in the right store view",storeViewMessage.getText().toLowerCase().contains(storeView) );
+			CustomVerification.verifyTrue("Failure: User is not logged out from SHOP",!storeViewElements.isEmpty());
+		}
 	}
 }

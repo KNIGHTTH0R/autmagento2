@@ -31,11 +31,11 @@ public class PippaDBConnection {
 
 			connection = DriverManager.getConnection("jdbc:mysql://staging-aut.pippajean.com/pippajean_prod",
 					"pippajeanprod", "3ZCb4n2z");
-			/*
-			 * connection = DriverManager.getConnection(
-			 * "jdbc:mysql://staging.pippajean.com/pippajean_prod",
-			 * "pippajeancloud", "3H9e$Ne@");
-			 */
+
+			// connection =
+			// DriverManager.getConnection("jdbc:mysql://staging.pippajean.com/pippajean_prod",
+			// "pippajeancloud", "3H9e$Ne@");
+
 		} catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");
 			e.printStackTrace();

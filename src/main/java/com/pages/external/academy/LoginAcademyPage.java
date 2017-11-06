@@ -19,6 +19,10 @@ public class LoginAcademyPage extends AbstractPage{
 	@FindBy(css = ".btn.btn-submit")
 	private WebElement submitBtn;
 	
+	@FindBy(css = "#top-menu a[href*=logout]")
+	private WebElement logOutLink;
+	
+	
 	public void clickLoginWithPippajeanAccount() {
 		element(pjAccountBtn).waitUntilVisible();
 		pjAccountBtn.click();
@@ -39,6 +43,12 @@ public class LoginAcademyPage extends AbstractPage{
 	public void clickLoginButton() {
 		element(submitBtn).waitUntilVisible();
 		submitBtn.click();
+		
+	}
+
+	public void clickOnLogOut() {
+		element(logOutLink).waitUntilVisible();
+		logOutLink.click();
 		
 	}
 	
