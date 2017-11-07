@@ -29,7 +29,7 @@ public class PippaDBConnection {
 		Connection connection = null;
 		try {
 
-			connection = DriverManager.getConnection("jdbc:mysql://185.48.117.43/pippajean_prod",
+			connection = DriverManager.getConnection("jdbc:mysql://185.48.117.43:3306/pippajean_prod",
 					"pippajeanprod", "3ZCb4n2z");
 
 //			connection = DriverManager.getConnection("jdbc:mysql://staging.pippajean.com/pippajean_prod",
@@ -130,7 +130,6 @@ public class PippaDBConnection {
 		// /PippaDBConnection.completedCoursesInShop();
 		// PippaDBConnection.updateCustomerWebsite("122386","de");
 		// PippaDBConnection.updateCustomerStoreView("122386", "de", "de");
-		// PippaDBConnection.updateDateOnParty("2017-11-02 17:00:00",
-		// "http://staging-aut.pippajean.com/de/ioa/stylist/party/details/id/59667/");
+		 PippaDBConnection.updateDateOnParty("http://staging-aut.pippajean.com/de/ioa/stylist/party/details/id/59667/");
 	}
 }
