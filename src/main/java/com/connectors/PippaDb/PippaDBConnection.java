@@ -29,7 +29,7 @@ public class PippaDBConnection {
 		Connection connection = null;
 		try {
 
-			connection = DriverManager.getConnection("jdbc:mysql://185.48.117.43:3306/pippajean_prod",
+			connection = DriverManager.getConnection("jdbc:mysql://10.14.62.16:3306/pippajean_prod",
 					"pippajeanprod", "3ZCb4n2z");
 
 //			connection = DriverManager.getConnection("jdbc:mysql://staging.pippajean.com/pippajean_prod",
