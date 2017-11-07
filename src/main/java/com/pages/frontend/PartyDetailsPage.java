@@ -241,7 +241,8 @@ public class PartyDetailsPage extends AbstractPage {
 
 	public void closeParty() {
 		element(closeParty).waitUntilVisible();
-		closeParty.click();
+	//	closeParty.click();
+		clickElement(closeParty);
 	}
 
 	public void editParty() {

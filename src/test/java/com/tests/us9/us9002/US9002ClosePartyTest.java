@@ -76,7 +76,7 @@ public class US9002ClosePartyTest extends BaseTest {
 		MongoConnector.cleanCollection(getClass().getSimpleName());
 
 		urlModel = MongoReader.grabUrlModels("US10008CreatePartyWithExistingContactHostTest").get(0);
-		PippaDBConnection.updateDateOnParty("http://staging-aut.pippajean.com/de/ioa/stylist/party/details/id/59667/");
+		PippaDBConnection.updateDateOnParty(urlModel.getUrl());
 	}
 
 	@Test
