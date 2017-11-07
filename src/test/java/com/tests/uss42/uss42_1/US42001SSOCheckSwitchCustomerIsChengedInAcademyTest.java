@@ -115,6 +115,7 @@ public class US42001SSOCheckSwitchCustomerIsChengedInAcademyTest extends BaseTes
 		customerRegistrationSteps.performLoginOnWebsiteWithContext(username, password, WebsiteAndStoreViewConstants.DE_WEBSITE,"juliareiser");
 		singleSignOnSteps.keepStylistContext();
 
+		singleSignOnSteps.validateLoggedInAcademyWithRightUser("sso_customer1@evozon.com");
 		customVerification.printErrors();
 	}
 

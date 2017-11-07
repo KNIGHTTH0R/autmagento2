@@ -82,7 +82,7 @@ public class US42001SSOCustomerLoginFromShopEnWebsiteTest extends BaseTest {
 	@Test
 	public void us42001SSOLoginFromShopEnWebsiteTest() throws SQLException {
        // Prefferend Website EN
-		// CASE 1: customer DE preffered website
+		// CASE 1: customer DE preferred website
 
 		System.out.println("CASE 1: customer EN preffered website");
 
@@ -110,7 +110,7 @@ public class US42001SSOCustomerLoginFromShopEnWebsiteTest extends BaseTest {
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
 				WebsiteAndStoreViewConstants.EN_STORE_VIEW);
 
-		// CASE 2: customer EN preffered website System.out.println(
+		// CASE 2: customer EN preferred website System.out.println(
 
 		System.out.println("CASE 2: customer DE preffered website");
 
@@ -138,7 +138,7 @@ public class US42001SSOCustomerLoginFromShopEnWebsiteTest extends BaseTest {
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
 				WebsiteAndStoreViewConstants.EN_STORE_VIEW);
 
-		// CASE 3: customer ES preffered website
+		// CASE 3: customer ES preferred website
 
 		System.out.println("CASE 3: customer ES preffered website ");
 		PippaDBConnection.updateCustomerWebsite(customerId, WebsiteAndStoreViewConstants.ES_WEBSITE);
@@ -162,9 +162,9 @@ public class US42001SSOCustomerLoginFromShopEnWebsiteTest extends BaseTest {
 		singleSignOnSteps.validateLoggedOutAlreadyFromAcademy();
 
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.EN_STORE_VIEW);
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.EN_STORE_VIEW);
 
 		customVerification.printErrors();
 	}

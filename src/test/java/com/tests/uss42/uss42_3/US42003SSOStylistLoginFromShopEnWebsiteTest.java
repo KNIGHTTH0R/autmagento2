@@ -162,9 +162,9 @@ public class US42003SSOStylistLoginFromShopEnWebsiteTest extends BaseTest {
 		singleSignOnSteps.validateLoggedOutAlreadyFromAcademy();
 
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.EN_STORE_VIEW);
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
-				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
+				WebsiteAndStoreViewConstants.EN_STORE_VIEW);
 
 		customVerification.printErrors();
 	}

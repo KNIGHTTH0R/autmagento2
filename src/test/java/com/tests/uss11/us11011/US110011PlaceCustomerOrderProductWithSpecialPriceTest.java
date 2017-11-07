@@ -180,14 +180,32 @@ public class US110011PlaceCustomerOrderProductWithSpecialPriceTest extends BaseT
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		do {
+		/*do {
 			customerRegistrationSteps.navigate(urlModel.getUrl());
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
-		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));*/
+		
+		
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			if(partyDetailsSteps.orderForCustomer()){
+				partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
+				partyDetailsSteps.orderForCustomerFromParty(customerName);
+			}else{
+				break;
+			}
+			
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()) );
+
+		
 		
 		generalCartSteps.clearCart();
+		
+		
+		
 
 		HostBasicProductModel productData;
 

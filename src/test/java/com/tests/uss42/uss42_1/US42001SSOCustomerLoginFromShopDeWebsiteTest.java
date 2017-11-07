@@ -82,7 +82,7 @@ public class US42001SSOCustomerLoginFromShopDeWebsiteTest extends BaseTest {
 	@Test
 	public void us42001SSOLoginFromShopDeWebsiteTest() throws SQLException {
 
-		// CASE 1: customer DE preffered website
+		// CASE 1: customer DE preferred website
 
 		System.out.println("CASE 1: customer DE preffered website");
 
@@ -109,7 +109,7 @@ public class US42001SSOCustomerLoginFromShopDeWebsiteTest extends BaseTest {
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
 				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
 
-		// CASE 2: customer EN preffered website System.out.println(
+		// CASE 2: customer EN preferred website System.out.println(
 
 		System.out.println("CASE 2: customer EN preffered website");
 
@@ -137,7 +137,7 @@ public class US42001SSOCustomerLoginFromShopDeWebsiteTest extends BaseTest {
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
 				WebsiteAndStoreViewConstants.DE_STORE_VIEW);
 
-		// CASE 3: customer ES preffered website
+		// CASE 3: customer ES preferred website
 
 		System.out.println("CASE 3: customer ES preffered website ");
 		PippaDBConnection.updateCustomerWebsite(customerId, WebsiteAndStoreViewConstants.ES_WEBSITE);

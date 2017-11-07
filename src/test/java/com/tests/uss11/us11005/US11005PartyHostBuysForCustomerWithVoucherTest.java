@@ -170,14 +170,30 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		customerRegistrationSteps.navigate(urlModel.getUrl());
+		/*customerRegistrationSteps.navigate(urlModel.getUrl());
 		do {
 			customerRegistrationSteps.navigate(urlModel.getUrl());
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
+		*/
+		
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			if(partyDetailsSteps.orderForCustomer()){
+				partyDetailsSteps.orderForCustomerFromParty(customerName);
+			}else{
+				break;
+			}
+			
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()) );
+
+		
+		
 		generalCartSteps.clearCart();
 
+		
 		HostBasicProductModel productData;
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "4", "0");

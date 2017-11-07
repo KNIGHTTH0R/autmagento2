@@ -23,6 +23,11 @@ public class SingleSignOnPage extends AbstractPage {
 	@FindBy(css=".header .quick-wrap .switcher-header li span")
 	private WebElement storeViewMessage;
 	
+	@FindBy(css=".columns.thicker li span")
+	private WebElement websiteFlag;
+	
+	
+	
 	@FindBy(css=".header .quick-wrap .message")
 	private WebElement headerMessage;
 	
@@ -38,6 +43,9 @@ public class SingleSignOnPage extends AbstractPage {
 	@FindBy(css="#PreferredPopup #keep-shop")
 	private WebElement keepShop;
 	
+	@FindBy(css="#commentform .logged-in-as a:nth-child(1)")
+	private WebElement loggedAs;
+	
 	
 	
 	public void verifyLink() {
@@ -52,7 +60,9 @@ public class SingleSignOnPage extends AbstractPage {
 
 	public void validateShopLoginWebsite(String website) {
 		System.out.println("url: "+getDriver().getCurrentUrl());
-		Assert.assertTrue("Failure: The Website is not correct ",getDriver().getCurrentUrl().contains(website));
+		//Assert.assertTrue("Failure: The Website is not correct ",getDriver().getCurrentUrl().contains(website));
+		Assert.assertTrue("Failure: The user is not keept in the right store view",websiteFlag.getText().toLowerCase().contains(website) );
+		
 		
 	}
 	
@@ -127,5 +137,10 @@ public class SingleSignOnPage extends AbstractPage {
 			Assert.assertTrue("Failure: The <Change Stylist> modal is not displayed ",false);
 		}
 		
+	}
+
+	public void validateLoggedWithRightUser(String userEmail) {
+		element(loggedAs).waitUntilVisible();
+		CustomVerification.verifyTrue("Failure: Not Expected user is logged in Academy ",loggedAs.getText().contains(userEmail));
 	}
 }

@@ -160,11 +160,28 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		do {
+/*		do {
 			customerRegistrationSteps.navigate(urlModel.getUrl());
 			partyDetailsSteps.orderForCustomer();
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));
+		*/
+		
+		do {
+			customerRegistrationSteps.navigate(urlModel.getUrl());
+			partyDetailsSteps.orderForCustomer();
+			if(partyDetailsSteps.orderForCustomer()){
+				partyDetailsSteps.orderForCustomerFromParty(customerName);
+			}else{
+				break;
+			}
+			
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()) );
+
+		
+		
+		
+		
 		generalCartSteps.clearCart();
 
 		addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
