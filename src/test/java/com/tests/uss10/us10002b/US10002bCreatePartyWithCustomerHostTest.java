@@ -88,6 +88,7 @@ public class US10002bCreatePartyWithCustomerHostTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
+		System.out.println("asta am setat "+urlModel.getUrl());
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 	}
 
