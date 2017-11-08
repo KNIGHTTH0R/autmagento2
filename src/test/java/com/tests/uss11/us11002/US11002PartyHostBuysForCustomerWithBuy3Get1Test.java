@@ -176,17 +176,20 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 			partyDetailsSteps.orderForCustomerFromParty(customerName);
 		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()));*/
 		
+		customerRegistrationSteps.navigate(urlModel.getUrl());
+		partyDetailsSteps.orderForCustomer();
+		partyDetailsSteps.orderForCustomerFromParty(customerName);
 		
-		do {
+	/*	do {
 			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.orderForCustomer();
+		//	partyDetailsSteps.orderForCustomer();
 			if(partyDetailsSteps.orderForCustomer()){
 				partyDetailsSteps.orderForCustomerFromParty(customerName);
 			}else{
 				break;
 			}
 			
-		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()) );
+		} while (!orderForCustomerCartSteps.getCartOwnerInfo().contains(customerName.toUpperCase()) );*/
 		
 		
 		generalCartSteps.clearCart();

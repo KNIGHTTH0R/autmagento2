@@ -156,6 +156,7 @@ public class ConfirmationPage extends AbstractPage {
 	}
 
 	public void clickIAgree() {
+		waitABit(3000);
 		element(acceptTerms).waitUntilVisible();
 		acceptTerms.click();
 	}

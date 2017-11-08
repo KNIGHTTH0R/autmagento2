@@ -174,7 +174,7 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		
 		do {
 			customerRegistrationSteps.navigate(urlModel.getUrl());
-			partyDetailsSteps.orderForCustomer();
+		//	partyDetailsSteps.orderForCustomer();
 			if(partyDetailsSteps.orderForCustomer()){
 				partyDetailsSteps.verifyCountryRestrictionWhenSelectingCustomerParty(notAllowedCustomerName);
 				partyDetailsSteps.orderForCustomerFromParty(customerName);
