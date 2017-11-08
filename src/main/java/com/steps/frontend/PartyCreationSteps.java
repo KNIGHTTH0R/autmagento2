@@ -68,6 +68,11 @@ public class PartyCreationSteps extends AbstractSteps {
 
 	}
 	
+	public String getUrl(){
+		return getDriver().getCurrentUrl();
+		
+	}
+	
 	@Step
 	public String fillPartyDetailsForCustomerHostAT(String name) {
 		partyCreationPage().checkHostedByCustomer();
