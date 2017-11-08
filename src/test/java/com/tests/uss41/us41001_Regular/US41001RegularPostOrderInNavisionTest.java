@@ -1,4 +1,4 @@
-package com.tests.uss41.uss41_1_UploadFile;
+package com.tests.uss41.us41001_Regular;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.external.navision.NavisionHomeSteps;
 import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
+import com.tests.us8.us8001.US8001CustomerBuyWithForthyDiscountsAndJbTest;
 import com.tools.CustomVerification;
 import com.tools.constants.SoapKeys;
 import com.tools.data.backend.OrderModel;
@@ -26,7 +27,7 @@ import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US41.1 Invoice and Return", type = "Scenarios")
 @RunWith(SerenityRunner.class)
-public class US41001PostOrderInNavisionTest extends BaseTest {
+public class US41001RegularPostOrderInNavisionTest extends BaseTest {
 
 	
 	@Steps
@@ -46,15 +47,15 @@ public class US41001PostOrderInNavisionTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		orderModel = MongoReader.getOrderModel("US41001CustomerBuyWithForthyDiscountsAndJbTest"+SoapKeys.GRAB).get(0);
+		orderModel = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest"+SoapKeys.GRAB).get(0);
 	}
 
 	@Test
-	public void us41001PostOrderInNavisionTest() throws Exception {
+	public void us41001RegularPostOrderInNavisionTest() throws Exception {
 		
 		navisionSteps.performLoginIntoNavisonWebClient();
-//		navisionSteps.postOrder(orderModel.getOrderId());
-		navisionSteps.postOrder("10033381200");
+		navisionSteps.postOrder(orderModel.getOrderId());
+	//	navisionSteps.postOrder("10033381200");
 		customVerifications.printErrors();
 	}
 }

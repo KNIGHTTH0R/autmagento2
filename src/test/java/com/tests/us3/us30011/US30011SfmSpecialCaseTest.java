@@ -167,7 +167,7 @@ public class US30011SfmSpecialCaseTest extends BaseTest {
 		shoppingCartPriceRulesSteps.openNewTab();
 		shoppingCartPriceRulesSteps.switchToNewestOpenedTab();
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - all carts");
+		shoppingCartPriceRulesSteps.activateRule("AUT-Money voucher working on total - sfm cart");
 		shoppingCartPriceRulesSteps.switchBackToPreviousTab();
 
 		shippingSteps.goToPaymentMethod();

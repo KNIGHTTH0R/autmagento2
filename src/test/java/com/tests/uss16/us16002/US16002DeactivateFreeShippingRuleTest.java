@@ -27,6 +27,6 @@ public class US16002DeactivateFreeShippingRuleTest extends BaseTest {
 	@Test
 	public void us16002DeactivateFreeShippingRuleTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		shoppingCartPriceRulesSteps.deactivateRule("AUT-Free Shipping Rule For All Carts");
+		shoppingCartPriceRulesSteps.deactivateRule("AUT-Free Shipping Rule For Borrow Cart");
 	}
 }

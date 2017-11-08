@@ -27,6 +27,6 @@ public class US30011DeactivateDiscountOnCartRuleTest extends BaseTest {
 	@Test
 	public void us30011DeactivateDiscountOnCartRuleTest() {
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-		shoppingCartPriceRulesSteps.deactivateRule("AUT-Money voucher working on total - all carts");
+		shoppingCartPriceRulesSteps.deactivateRule("AUT-Money voucher working on total - sfm cart");
 	}
 }

@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 
 import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
+import com.steps.backend.ImportExport.ImportExportSteps;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
 import com.steps.frontend.HeaderSteps;
@@ -82,6 +83,8 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	public CustomVerification customVerifications;
 	@Steps
 	public FooterSteps footerSteps;
+	@Steps
+	public ImportExportSteps importExportSteps;
 
 	private String username, password;
 	private String discountClass;
@@ -222,7 +225,9 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
-
+		
+	//	importExportSteps.createOrderFile(FormatterUtils.extractOrderIDFromURL(url));
+		
 		confirmationSteps.agreeAndCheckout();
 
 		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);

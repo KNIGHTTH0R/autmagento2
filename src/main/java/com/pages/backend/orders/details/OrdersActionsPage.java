@@ -1,8 +1,11 @@
 package com.pages.backend.orders.details;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -43,6 +46,12 @@ public class OrdersActionsPage extends AbstractPage {
 	
 	@FindBy(css = "#sales_order_view_tabs_adyenPayment_order_notifications")
 	private WebElement adyenNotificationTab;
+	
+
+	@FindBy(css = "#dt-order_related_files_form")
+	private WebElement navDocSectionTab;
+	
+	
 	
 
 	public void markOrderAsPaid() {
@@ -146,5 +155,17 @@ public class OrdersActionsPage extends AbstractPage {
 						+ successMessage.getText(),
 				successMessage.getText().contains(ContextConstants.REFUNDED_SUCCESS_MESSAGE));
 	}
+
+
+	public void openDocumentsSection() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(navDocSectionTab).waitUntilVisible();
+		
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(navDocSectionTab).click().perform();
+		waitABit(4000);
+		
+	}
+	
 	
 }

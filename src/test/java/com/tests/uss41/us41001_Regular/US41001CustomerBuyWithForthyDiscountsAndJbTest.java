@@ -1,4 +1,4 @@
-package com.tests.uss41.uss41_1_UploadFile;
+package com.tests.uss41.us41001_Regular;
 
 import java.io.File;
 import java.io.FileInputStream;

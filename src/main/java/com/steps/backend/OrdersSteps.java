@@ -102,4 +102,9 @@ public class OrdersSteps extends AbstractSteps {
 	public void verifyCapture(String shopperReference) {
 		orderNotificationPage().verifyCapture(shopperReference);
 	}
+
+	public void openDocumentsSection() {
+		// TODO Auto-generated method stub
+		ordersActionsPage().openDocumentsSection();
+	}
 }

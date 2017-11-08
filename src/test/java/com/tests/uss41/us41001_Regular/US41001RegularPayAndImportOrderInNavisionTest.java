@@ -1,4 +1,4 @@
-package com.tests.uss41.uss41_1_UploadFile;
+package com.tests.uss41.us41001_Regular;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import com.steps.backend.OrdersSteps;
 import com.steps.external.navision.NavisionHomeSteps;
 import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
+import com.tests.us8.us8001.US8001CustomerBuyWithForthyDiscountsAndJbTest;
 import com.tools.CustomVerification;
 import com.tools.constants.Credentials;
 import com.tools.data.backend.OrderModel;
@@ -29,7 +30,7 @@ import net.thucydides.core.annotations.WithTag;
 @WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
 @Story(Application.StockSync.US23_1.class)
 @RunWith(SerenityRunner.class)
-public class US41001PayAndImportOrderInNavisionTest extends BaseTest {
+public class US41001RegularPayAndImportOrderInNavisionTest extends BaseTest {
 
 	
 	@Steps
@@ -50,11 +51,11 @@ public class US41001PayAndImportOrderInNavisionTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		orderModel = MongoReader.getOrderModel("US41001CustomerBuyWithForthyDiscountsAndJbTest").get(0);
+		orderModel = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest").get(0);
 	}
 
 	@Test
-	public void us41001PayAndImportOrderInNavisionTest() throws Exception {
+	public void US41001RegularPayAndImportOrderInNavisionTest() throws Exception {
 
 //		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 //		

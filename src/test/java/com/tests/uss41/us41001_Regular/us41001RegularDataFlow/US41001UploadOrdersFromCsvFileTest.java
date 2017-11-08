@@ -1,4 +1,4 @@
-package com.tests.uss41.uss41_1_UploadFile;
+package com.tests.uss41.us41001_Regular.us41001RegularDataFlow;
 
 import org.junit.Before;
 import org.junit.Test;
