@@ -27,6 +27,7 @@ public class ContextConstants {
 	public static String NO_STYLE_COACH_FLAG_STATUS = MongoReader.getDictionaryItem("NO_STYLE_COACH_FLAG_STATUS");
 	public static String NO_NEWSLETTER_FLAG_STATUS = MongoReader.getDictionaryItem("NO_NEWSLETTER_FLAG_STATUS");
 	public static String INVOICE_SHIPPING_SUBMITED_MESSAGE = MongoReader.getDictionaryItem("INVOICE_SHIPPING_SUBMITED_MESSAGE");
+	public static String INVOICE_SUBMITED_MESSAGE = MongoReader.getDictionaryItem("INVOICE_SUBMITED_MESSAGE");
 	public static String REFUNDED_SUCCESS_MESSAGE = MongoReader.getDictionaryItem("REFUNDED_SUCCESS_MESSAGE");
 	public static String COUNTRY_NAME = MongoReader.getDictionaryItem("COUNTRY_NAME");
 	public static String POST_CODE = MongoReader.getDictionaryItem("POST_CODE");

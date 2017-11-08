@@ -128,14 +128,14 @@ public class US42001SSOCustomerLoginFromShopEsWebsiteTest extends BaseTest {
 		singleSignOnSteps.validateShopLoginOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
 				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 
-		customerRegistrationSteps.performLogoutFromShop(WebsiteAndStoreViewConstants.EN_WEBSITE);
-		singleSignOnSteps.validateShopLogoutWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
+		customerRegistrationSteps.performLogoutFromShop(WebsiteAndStoreViewConstants.ES_WEBSITE);
+		singleSignOnSteps.validateShopLogoutWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
 				WebsiteAndStoreViewConstants.ES_STORE_VIEW, customerContext);
 		singleSignOnSteps.validateLoggedOutAlreadyFromAcademy();
 
 		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.DE_WEBSITE,
 				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
-		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.ES_WEBSITE,
+		singleSignOnSteps.validateShopLogoutOtherWebsiteAndStoreView(WebsiteAndStoreViewConstants.EN_WEBSITE,
 				WebsiteAndStoreViewConstants.ES_STORE_VIEW);
 
 		// CASE 3: customer ES preferred website

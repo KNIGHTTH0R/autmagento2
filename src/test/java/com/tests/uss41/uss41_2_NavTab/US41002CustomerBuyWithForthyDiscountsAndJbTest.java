@@ -1,4 +1,4 @@
-package com.tests.uss41;
+package com.tests.uss41.uss41_2_NavTab;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,7 +53,7 @@ import com.workflows.frontend.regularUser.RegularCartValidationWorkflows;
 @WithTag(name = "US8.1 Customer Buy With Forthy Discounts And Jb Test", type = "Scenarios")
 @Story(Application.RegularCart.US8_1.class)
 @RunWith(SerenityRunner.class)
-public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
+public class US41002CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -129,7 +129,7 @@ public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "us8" + File.separator + "us8001.properties");
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss41" + File.separator + "us41002.properties");
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
@@ -158,7 +158,7 @@ public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	}
 
 	@Test
-	public void us41001CustomerBuyWithForthyDiscountsAndJbTest() {
+	public void us41002CustomerBuyWithForthyDiscountsAndJbTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -230,7 +230,7 @@ public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		
-		importExportSteps.createOrderFile(FormatterUtils.extractOrderIDFromURL(url));
+	//	importExportSteps.createOrderFile(FormatterUtils.extractOrderIDFromURL(url));
 	//	regularCartValidationWorkflows.performCartValidationsWith40DiscountAndJb();
 
 		customVerifications.printErrors();

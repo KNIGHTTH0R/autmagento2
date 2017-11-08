@@ -1,4 +1,4 @@
-package com.tests.uss41;
+package com.tests.uss41.uss41_2_NavTab;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,17 +7,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.connectors.http.OrderInfoMagCalls;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.OrdersSteps;
 import com.steps.external.navision.NavisionHomeSteps;
 import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
-import com.tools.constants.Credentials;
+import com.tools.constants.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
-import com.tools.data.soap.DBOrderModel;
 import com.tools.persistance.MongoReader;
 import com.tools.requirements.Application;
 
@@ -26,10 +24,9 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
-@WithTag(name = "US23.1 Stock Sync", type = "Scenarios")
-@Story(Application.StockSync.US23_1.class)
+@WithTag(name = "US41.1 Invoice and Return", type = "Scenarios")
 @RunWith(SerenityRunner.class)
-public class US41001PayAndImportOrderInNavisionTest extends BaseTest {
+public class US41002PostOrderInNavisionTest extends BaseTest {
 
 	
 	@Steps
@@ -44,30 +41,20 @@ public class US41001PayAndImportOrderInNavisionTest extends BaseTest {
 	public CustomVerification customVerifications;
 
 	private OrderModel orderModel;
-	private DBOrderModel DBorderModel;
 	List<SyncInfoModel> syncronizedMagentoProducts = new ArrayList<SyncInfoModel>();
 	List<SyncInfoModel> syncronizedNavProducts = new ArrayList<SyncInfoModel>();
 
 	@Before
 	public void setUp() throws Exception {
-		orderModel = MongoReader.getOrderModel("US41001CustomerBuyWithForthyDiscountsAndJbTest").get(0);
+		orderModel = MongoReader.getOrderModel("US41002CustomerBuyWithForthyDiscountsAndJbTest"+SoapKeys.GRAB).get(0);
 	}
 
 	@Test
-	public void us41001PayAndImportOrderInNavisionTest() throws Exception {
-
-//		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-//		
-//
-//		
-//		backEndSteps.clickOnSalesOrders();
-//		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
-//		ordersSteps.openOrder(orderModel.getOrderId());
-//		ordersSteps.markOrderAsPaid();
+	public void us41002PostOrderInNavisionTest() throws Exception {
 		
 		navisionSteps.performLoginIntoNavisonWebClient();
-		DBorderModel=OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
-		navisionSteps.performOrderImport(DBorderModel.getOrderId());
+//		navisionSteps.postOrder(orderModel.getOrderId());
+		navisionSteps.postOrder("10033381200");
 		customVerifications.printErrors();
 	}
 }

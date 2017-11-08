@@ -1,4 +1,4 @@
-package com.tests.uss41;
+package com.tests.uss41.uss41_1_UploadFile;
 
 import java.util.ArrayList;
 import java.util.List;

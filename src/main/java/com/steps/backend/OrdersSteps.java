@@ -70,6 +70,14 @@ public class OrdersSteps extends AbstractSteps {
 		ordersActionsPage().verifyInvoiceShippingSubmitedMessage();
 
 	}
+	
+	@Step
+	public void createOrderInvoice(){
+		ordersActionsPage().clickInvoiceButton();
+		//ordersActionsPage().checkCreateShippment();
+		ordersActionsPage().submitInvoice();
+		ordersActionsPage().verifyInvoiceShippingSubmitedMessage();
+	}
 
 	@Step
 	public void refundOrder() {

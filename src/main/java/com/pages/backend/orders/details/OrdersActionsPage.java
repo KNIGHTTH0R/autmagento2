@@ -129,6 +129,15 @@ public class OrdersActionsPage extends AbstractPage {
 				successMessage.getText().contains(ContextConstants.INVOICE_SHIPPING_SUBMITED_MESSAGE));
 	}
 
+	
+	public void verifyInvoiceSubmitedMessage() {
+		element(successMessage).waitUntilVisible();
+		Assert.assertTrue(
+				"Failure: The mesage should be " + ContextConstants.INVOICE_SUBMITED_MESSAGE
+						+ " and it's not! Actual: " + successMessage.getText(),
+				successMessage.getText().contains(ContextConstants.INVOICE_SUBMITED_MESSAGE));
+	}
+	
 	public void verifyRefundedSuccessMessage() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(successMessage).waitUntilVisible();
