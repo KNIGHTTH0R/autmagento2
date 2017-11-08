@@ -20,5 +20,5 @@ import com.tests.uss10.uss10007.US10007CreateSecondFolowUpPartyForActivePartyTes
 })
 @RunWith(Suite.class)
 public class US10007SuitePartOne {
-
+	
 }
