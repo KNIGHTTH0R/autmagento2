@@ -158,8 +158,8 @@ public class ConfirmationPage extends AbstractPage {
 	public void clickIAgree() {
 		waitABit(5000);
 		element(acceptTerms).waitUntilVisible();
-	//	acceptTerms.click();
-		clickElement(acceptTerms);
+		acceptTerms.click();
+	//	clickElement(acceptTerms);
 	}
 
 	public void changeShippingAddress() {
@@ -173,8 +173,8 @@ public class ConfirmationPage extends AbstractPage {
 	}
 
 	public void clickOnSubmit() {
-		//element(submitButton).waitUntilVisible();
-		clickElement(submitButton);
+		element(submitButton).waitUntilVisible();
+		//clickElement(submitButton);
 		submitButton.click();
 	}
 
