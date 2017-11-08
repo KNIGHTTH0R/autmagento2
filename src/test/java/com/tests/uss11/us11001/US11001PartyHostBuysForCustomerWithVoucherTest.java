@@ -159,6 +159,7 @@ public class US11001PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 		}
 
 		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
+		System.out.println("URL "+ urlModel.getUrl());
 
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CALC);

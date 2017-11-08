@@ -92,6 +92,7 @@ public class US10001CreatePartyWithCustomerHostTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToCreatePartyPage();
 		urlModel.setUrl(partyCreationSteps.fillPartyDetailsForCustomerHost(customerName));
+		System.out.println("url Saved "+urlModel.getUrl());
 		dateModel.setDate(String.valueOf(System.currentTimeMillis()));
 		
 	}
