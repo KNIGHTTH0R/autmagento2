@@ -115,11 +115,11 @@ CreateProductsTest.class,
 	US17003Suite.class,
 	
 	
-	US13004Suite.class,
+/*	US13004Suite.class,
 	US13005Suite.class,
 	US13006Suite.class,
 	US13007Suite.class,
-	
+	*/
 //	US23001PartOneSuite.class,
 //	US20001Suite.class,
 //	US21001Suite.class,
