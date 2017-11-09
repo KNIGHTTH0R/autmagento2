@@ -187,7 +187,7 @@ public class US8001ReorderWithForthyDiscountsAndJbTest extends BaseTest {
 		profileNavSteps.selectMenu(ContextConstants.MEINE_BESTELLUNGEN);
 		profileSteps.clickOnOrder(orderId);
 		profileSteps.clickReorderLink(orderId);
-
+		headerSteps.waitABit(7000);
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.updateBasicProductToCart(genProduct1, "1", "0");

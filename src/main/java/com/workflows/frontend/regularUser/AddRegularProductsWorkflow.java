@@ -31,6 +31,7 @@ public class AddRegularProductsWorkflow {
 	@StepGroup
 	@Title("Add product to cart")
 	public RegularBasicProductModel setBasicProductToCart(ProductDetailedModel model, String qty, String productProperty) {
+
 		searchSteps.navigateToProductPage(model.getSku());
 		String finalPrice = CartDiscountsCalculation.calculateAskingPrice(model.getPrice(), qty);
 		String ipPoints = CartDiscountsCalculation.calculateIpPoints(model.getIp(), qty);

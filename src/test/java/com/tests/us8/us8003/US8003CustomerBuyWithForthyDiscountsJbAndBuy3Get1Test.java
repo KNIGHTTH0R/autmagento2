@@ -162,7 +162,7 @@ public class US8003CustomerBuyWithForthyDiscountsJbAndBuy3Get1Test extends BaseT
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 		RegularBasicProductModel productData;
-
+		headerSteps.waitABit(7000);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
 		RegularUserCartCalculator.allProductsList.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");

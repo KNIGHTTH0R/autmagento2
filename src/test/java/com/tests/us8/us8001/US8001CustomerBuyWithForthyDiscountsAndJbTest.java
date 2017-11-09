@@ -169,6 +169,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 
+		headerSteps.waitABit(7000);
 		RegularBasicProductModel productData;
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");

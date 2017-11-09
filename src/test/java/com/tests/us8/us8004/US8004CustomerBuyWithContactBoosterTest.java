@@ -203,7 +203,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 		RegularBasicProductModel productData;
-
+		headerSteps.waitABit(7000);
 //		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
 //		RegularUserCartCalculator.allProductsList.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");

@@ -181,7 +181,7 @@ public class US8007CustomerBuyWithTpTest extends BaseTest {
 		headerSteps.waitABit(2000);
 		generalCartSteps.clearCart();
 		RegularBasicProductModel productData;
-
+		headerSteps.waitABit(7000);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
 		if (!genProduct1.getStockData().getEarliestAvailability().contentEquals(""))
 			productData.setDeliveryDate(DateUtils
