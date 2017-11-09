@@ -29,19 +29,17 @@ public class US41001RegularCheckReceivedEmailsTest extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		int size = MongoReader.grabCustomerFormModels("US7001RegularCustRegOnMasterTest").size();
-		if (size > 0) {
-			stylistEmail = MongoReader.grabCustomerFormModels("US7001RegularCustRegOnMasterTest").get(0).getEmailName();
-		} else
-			System.out.println("The database has no entries");
-
+//		int size = MongoReader.grabCustomerFormModels("US7001RegularCustRegOnMasterTest").size();
+//		if (size > 0) {
+//			stylistEmail = MongoReader.grabCustomerFormModels("US7001RegularCustRegOnMasterTest").get(0).getEmailName();
+//		} else
+//			System.out.println("The database has no entries");
+		stylistEmail="emilianmelian12@geronra.com";
 	}
 
 	@Test
 	public void us41001RegularCheckReceivedEmailsTest() {
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.NEWSLETTER_MAIL_SUBJECT);
-		emailClientSteps.validateThatEmailIsReceived(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""), ContextConstants.WELCOME_MAIL_SUBJECT);
-
+		emailClientSteps.checkReceivedOriginalDocuments(stylistEmail.replace("@" + ConfigConstants.WEB_MAIL, ""),"Related orde","10026832500");
 	}
 
 }

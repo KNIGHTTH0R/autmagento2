@@ -47,7 +47,7 @@ public class US41001RegularPostOrderInNavisionTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		orderModel = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest"+SoapKeys.GRAB).get(0);
+		orderModel = MongoReader.getOrderModel("US41001CustomerBuyWithForthyDiscountsAndJbTest"+SoapKeys.GRAB).get(0);
 	}
 
 	@Test

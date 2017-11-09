@@ -144,6 +144,7 @@ public class CartPage extends AbstractPage {
 	 */
 	public List<CartProductModel> grabProductsDataWith50Discount() {
 		element(formContainer).waitUntilVisible();
+		waitABit(1000);
 		List<WebElement> entryList = formContainer.findElements(By.cssSelector("#shopping-cart-50-table tbody > tr"));
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 

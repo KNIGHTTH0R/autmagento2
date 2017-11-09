@@ -23,9 +23,20 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 	@FindBy(css = "table[summary*='MAGE Job Lines']  tr:nth-child(3) td:nth-child(4) a")
 	private WebElement salesOrderListLine;
+	
+	@FindBy(css = "table[summary*='MAGE Job Lines']  tr:nth-child(8) td:nth-child(4) a")
+	private WebElement salesOrderInfoRetriveLine;
 
-	@FindBy(css = "table[summary*='MAGE Job Inbound Line Filter'] tr:nth-child(1) td:nth-child(7)")
+	@FindBy(css = "table[summary*='MAGE Job Inbound Line Filter'] tr:nth-child(1) td:nth-child(6)")
 	private WebElement inputOrderId;
+
+	@FindBy(css = "table[summary*='MAGE Job Inbound Line Filter'] tr:nth-child(1) td:nth-child(8)")
+	private WebElement inputFormatExpresion;
+	
+	@FindBy(css = "	table[summary*='MAGE Job Inbound Line Filter'] tr:nth-child(5) td:nth-child(6)")
+	private WebElement inputOrderInfoId;
+	
+
 
 	@FindBy(css = "a.ms-nav-group-caption[title*=Lines]")
 	private WebElement linesDropDown;
@@ -72,6 +83,9 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 
 	@FindBy(css = "input[value*='Yes']")
 	private WebElement confirmPostJournalLines;
+	
+	@FindBy(css = "input[value*='OK']")
+	private WebElement confirmPostOrder;
 	
 	@FindBy(id = "createNewEntityLink")
 	private WebElement clickOnNewItem;
@@ -181,6 +195,7 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(inputOrderId).click().perform();
 		actions.moveToElement(inputOrderId).sendKeys(orderId).perform();
+		actions.moveToElement(inputFormatExpresion).click().perform();
 	}
 
 	public void performOrderImport() {
@@ -504,6 +519,29 @@ public class NavisionSyncDashboardPage extends AbstractPage {
 		
 		return inputField;
 		
+	}
+
+	public void clickOnSalesOrderInfoRetriveLine() {
+		waitABit(2000);
+		element(salesOrderInfoRetriveLine).waitUntilVisible();
+		salesOrderInfoRetriveLine.click();
+		waitABit(2000);
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(salesOrderInfoRetriveLine).click().perform();
+	}
+
+	public void inputOrderIdSalesInfo(String orderId) {
+		// TODO Auto-generated method stub
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(inputOrderInfoId).click().perform();
+		actions.moveToElement(inputOrderInfoId).sendKeys(orderId).perform();
+	}
+
+	public void confirmPostOrder() {
+		element(confirmPostOrder).waitUntilVisible();
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(confirmPostOrder).click().perform();
+		waitABit(2000);
 	}
 
 	

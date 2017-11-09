@@ -93,8 +93,8 @@ public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	private String voucherCode;
 	private String voucherValue;
 	private ProductDetailedModel genProduct1;
-	private ProductDetailedModel genProduct2;
-	private ProductDetailedModel genProduct3;
+//	private ProductDetailedModel genProduct2;
+//	private ProductDetailedModel genProduct3;
 	public static List<ProductDetailedModel> createdProductsList = new ArrayList<ProductDetailedModel>();
 	private CreditCardModel creditCardData = new CreditCardModel();
 
@@ -103,26 +103,19 @@ public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct1 =new ProductDetailedModel();
+		genProduct1.setPrice("89.90");
+		genProduct1.setIp("76");
+		genProduct1.setSku("plume-of-dreams-necklace");
 		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		
-		genProduct1 = createdProductsList.get(1);
-		System.out.println(genProduct1.getSku());
-		genProduct2 = createdProductsList.get(27);
-		System.out.println(genProduct2.getSku());
-		genProduct3 = createdProductsList.get(6);
-		System.out.println(genProduct3.getSku());
+//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+//		
+//		genProduct1 = createdProductsList.get(1);
+//		System.out.println(genProduct1.getSku());
+//		genProduct2 = createdProductsList.get(27);
+//		System.out.println(genProduct2.getSku());
+//		genProduct3 = createdProductsList.get(6);
+//		System.out.println(genProduct3.getSku());
 
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -173,44 +166,39 @@ public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
 		RegularUserCartCalculator.allProductsList.add(productData);
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
-		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct3, "4", "0");
-		RegularUserCartCalculator.allProductsList.add(productData);
+
 
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
-		regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
+		/*regularUserCartSteps.selectProductDiscountType(genProduct1.getSku(), ContextConstants.JEWELRY_BONUS);
 		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct1.getSku(),
-				ContextConstants.JEWELRY_BONUS);
-		regularUserCartSteps.selectProductDiscountType(genProduct2.getSku(), ContextConstants.DISCOUNT_40_BONUS);
-		regularUserCartSteps.updateProductList(RegularUserCartCalculator.allProductsList, genProduct2.getSku(),
-				ContextConstants.DISCOUNT_40_BONUS);
+				ContextConstants.JEWELRY_BONUS);*/
+		
 
-		regularUserCartSteps.typeCouponCode(voucherCode);
-		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();
+		/*regularUserCartSteps.typeCouponCode(voucherCode);
+		regularUserCartSteps.validateThatVoucherCannotBeAppliedMessage();*/
 
-		RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
-		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);
-
+	/*	RegularUserDataGrabber.grabbedRegularCartProductsList = regularUserCartSteps.grabProductsData();
+		RegularUserDataGrabber.regularUserGrabbedCartTotals = regularUserCartSteps.grabTotals(voucherCode);*/
+/*
 		RegularUserCartCalculator.calculateCartAndShippingTotals(RegularUserCartCalculator.allProductsList,
-				discountClass, shippingValue, voucherValue);
+				discountClass, shippingValue, voucherValue);*/
 
 		regularUserCartSteps.clickGoToShipping();
 		shippingPartySectionSteps.clickPartyNoOption();
 		shippingSteps.selectAddress(billingAddress);
 		shippingSteps.setSameAsBilling(true);
 
-		RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
+		/*RegularUserDataGrabber.grabbedRegularShippingProductsList = shippingSteps.grabRegularProductsList();
 
 		RegularUserDataGrabber.regularUserShippingTotals = shippingSteps.grabSurveyData();
-
+*/
 		shippingSteps.goToPaymentMethod();
 
 		String url = shippingSteps.grabUrl();
 		DataGrabber.urlModel.setName("Payment URL");
 		DataGrabber.urlModel.setUrl(url);
-		RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+	//	RegularUserDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		RegularUserDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
 		 paymentSteps.expandCreditCardForm();
@@ -219,16 +207,16 @@ public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		
 		//paymentSteps.payWithBankTransfer();
 
-		confirmationSteps.grabRegularProductsList();
+	//	confirmationSteps.grabRegularProductsList();
 
-		RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
+	//	RegularUserDataGrabber.regularUserConfirmationTotals = confirmationSteps.grabConfirmationTotals();
 
-		confirmationSteps.grabBillingData();
-		confirmationSteps.grabSippingData();
+//		confirmationSteps.grabBillingData();
+//		confirmationSteps.grabSippingData();
 
 		confirmationSteps.agreeAndCheckout();
 
-		regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
+	//	regularCartValidationWorkflows.setBillingShippingAddress(billingAddress, billingAddress);
 		
 		importExportSteps.createOrderFile(FormatterUtils.extractOrderIDFromURL(url));
 	//	regularCartValidationWorkflows.performCartValidationsWith40DiscountAndJb();

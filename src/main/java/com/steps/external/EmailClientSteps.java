@@ -28,6 +28,12 @@ public class EmailClientSteps extends AbstractSteps {
 		return DateUtils.getCurrentDate("MM/dd/YYYY");
 
 	}
+	
+	@Step
+	public void checkReceivedOriginalDocuments(String email, String title,String orderIncrementId){
+		mailPage.openEmail(email, title);
+		mailPage.checkReceivedOriginalDocuments(orderIncrementId);
+	}
 
 	@Step
 	public String registerFromLink(String email, String title) {

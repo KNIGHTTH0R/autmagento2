@@ -107,4 +107,13 @@ public class OrdersSteps extends AbstractSteps {
 		// TODO Auto-generated method stub
 		ordersActionsPage().openDocumentsSection();
 	}
+
+	public void valdateOriginalInvoiceIsReceived(String orderId, boolean isReceived) {
+		ordersActionsPage().valdateOriginalInvoiceIsReceived(orderId,isReceived);
+	}
+
+	public void valdateOriginalReturnIsReceived(String orderId, boolean isReceived) {
+		ordersActionsPage().valdateOriginalReturnIsReceived(orderId,isReceived);
+		
+	}
 }

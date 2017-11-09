@@ -47,7 +47,7 @@ public class US41001RegularCheckOriginalDocumentsInNavTabTest extends BaseTest {
 	@Before
 	public void setUp() {
 
-		List<OrderModel> orderModelList = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.GRAB);
+		List<OrderModel> orderModelList = MongoReader.getOrderModel("US41001CustomerBuyWithForthyDiscountsAndJbTest" + SoapKeys.GRAB);
 		
 
 		if (orderModelList.size() == 1) {
@@ -79,7 +79,8 @@ public class US41001RegularCheckOriginalDocumentsInNavTabTest extends BaseTest {
 		ordersSteps.openOrder(orderId);
 		ordersSteps.selectMenu("Dokumente aus NAV");
 		ordersSteps.openDocumentsSection();
-		
+		ordersSteps.valdateOriginalInvoiceIsReceived(orderId,true);
+		ordersSteps.valdateOriginalReturnIsReceived(orderId,true);
 		//add here validation
 		
 		customVerifications.printErrors();

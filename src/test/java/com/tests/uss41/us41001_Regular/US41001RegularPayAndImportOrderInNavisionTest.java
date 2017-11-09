@@ -16,6 +16,7 @@ import com.tests.BaseTest;
 import com.tests.us8.us8001.US8001CustomerBuyWithForthyDiscountsAndJbTest;
 import com.tools.CustomVerification;
 import com.tools.constants.Credentials;
+import com.tools.constants.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.data.soap.DBOrderModel;
@@ -51,24 +52,25 @@ public class US41001RegularPayAndImportOrderInNavisionTest extends BaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		orderModel = MongoReader.getOrderModel("US8001CustomerBuyWithForthyDiscountsAndJbTest").get(0);
+		orderModel = MongoReader.getOrderModel("US41001CustomerBuyWithForthyDiscountsAndJbTest"+SoapKeys.GRAB).get(0);
 	}
 
 	@Test
-	public void US41001RegularPayAndImportOrderInNavisionTest() throws Exception {
+	public void us41001RegularPayAndImportOrderInNavisionTest() throws Exception {
 
 //		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 //		
 //
 //		
-//		backEndSteps.clickOnSalesOrders();
-//		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
-//		ordersSteps.openOrder(orderModel.getOrderId());
-//		ordersSteps.markOrderAsPaid();
+		backEndSteps.clickOnSalesOrders();
+		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
+		ordersSteps.openOrder(orderModel.getOrderId());
+		ordersSteps.markOrderAsPaid();
 		
 		navisionSteps.performLoginIntoNavisonWebClient();
-		DBorderModel=OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
-		navisionSteps.performOrderImport(DBorderModel.getOrderId());
+		//DBorderModel=OrderInfoMagCalls.getOrderInfo(orderModel.getOrderId());
+		navisionSteps.performOrderImport(orderModel.getOrderId());
+		
 		customVerifications.printErrors();
 	}
 }

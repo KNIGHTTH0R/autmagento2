@@ -50,7 +50,7 @@ public class NavisionHomeSteps extends AbstractSteps {
 		navisionSyncDashboardPage().insertAuthentificationCredentials();
 	}
 
-	@Step
+/*	@Step
 	public void performOrderImport(String orderId) {
 		navisionSyncDashboardPage().clickOnSalesOrderListLine();
 	//	navisionSyncDashboardPage().clickOnLines();
@@ -62,7 +62,30 @@ public class NavisionHomeSteps extends AbstractSteps {
 		navisionSyncDashboardPage().selectActionsTab();
 		navisionSyncDashboardPage().performOrderImport();
 		navisionSyncDashboardPage().selectActionsTab();
+	}*/
+	
+	
+	@Step
+	public void performOrderImport(String orderId) {
+		navisionSyncDashboardPage().clickOnSalesOrderListLine();
+		navisionSyncDashboardPage().clickOnLinesDropdown();
+		navisionSyncDashboardPage().clickOnFilter();
+		navisionSyncDashboardPage().inputOrderId(orderId);
+		navisionSyncDashboardPage().closeDialogModal();
+		
+		navisionSyncDashboardPage().clickOnSalesOrderInfoRetriveLine();
+		navisionSyncDashboardPage().clickOnLinesDropdown();
+		navisionSyncDashboardPage().clickOnFilter();
+		navisionSyncDashboardPage().inputOrderIdSalesInfo(orderId);
+		navisionSyncDashboardPage().closeDialogModal();
+		
+		navisionSyncDashboardPage().selectActionsTab();
+		navisionSyncDashboardPage().performOrderImport();
+		navisionSyncDashboardPage().selectActionsTab();
+		waitABit(10000);
 	}
+	
+	
 	
 	
 	@Step
@@ -103,9 +126,8 @@ public class NavisionHomeSteps extends AbstractSteps {
 			navisionSyncDashboardPage().clickOnEditLink();
 			navisionSyncDashboardPage().selectHomeTab();
 			navisionSyncDashboardPage().clickOnPostOrderMenuBtn();
-			navisionSyncDashboardPage().confirmPostJournalLines();
-			navisionSyncDashboardPage().confirmSuccesfullyPostedJournalLines();
-			navisionSyncDashboardPage().closeWindow();
+			navisionSyncDashboardPage().confirmPostOrder();
+		//	navisionSyncDashboardPage().closeWindow();
 		}
 	
 	

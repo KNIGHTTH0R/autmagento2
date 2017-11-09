@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.tools.CustomVerification;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
@@ -165,6 +166,35 @@ public class OrdersActionsPage extends AbstractPage {
 		actions.moveToElement(navDocSectionTab).click().perform();
 		waitABit(4000);
 		
+	}
+
+
+	public void valdateOriginalInvoiceIsReceived(String orderId, boolean isReceived) {
+		// TODO Auto-generated method stub
+		//waitForLoading();
+		waitABit(2000);
+		List<WebElement> documents =getDriver().findElements(By.cssSelector("#_orderfilesbase_fieldset .checkboxes li label[for*='related']"));
+		
+ 		if(isReceived){
+ 			CustomVerification.verifyTrue("Failure: Original invoice file is not received", documents.get(0).getText().contains("INVOICE_"+orderId+".pdf"));
+		}else{
+			Assert.assertTrue("Failure: Original invoice file is displayed and should not be ", documents.size()==0);
+		}
+				
+			
+			
+	}
+
+
+	public void valdateOriginalReturnIsReceived(String orderId, boolean isReceived) {
+		// TODO Auto-generated method stub
+		List<WebElement> documents =getDriver().findElements(By.cssSelector("#_orderfilesbase_fieldset .checkboxes li label[for*='related']"));
+ 		if(isReceived){
+ 			CustomVerification.verifyTrue("Failure: Original return file is not received", documents.get(1).getText().contains("RETURN_FORM_"+orderId+".pdf"));
+		}else{
+			Assert.assertTrue("Failure: Original return file is displayed and should not be ", documents.size()>2);
+		}
+				
 	}
 	
 	

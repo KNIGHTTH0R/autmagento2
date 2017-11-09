@@ -168,4 +168,13 @@ public class TempMail extends AbstractPage {
 		getDriver().findElements(By.cssSelector("a[href*='invitation']")).get(0).click();
 	}
 
+
+	public void checkReceivedOriginalDocuments(String orderIncrementId) {
+		// TODO Auto-generated method stub
+		WebElement list=getDriver().findElement(By.cssSelector(".content.main table tbody tr:nth-child(3)"));
+		
+		CustomVerification.verifyTrue("Failure: invoice doc does not appers in mail", list.getText().contains("INVOICE_"+orderIncrementId));
+		CustomVerification.verifyTrue("Failure: return doc does not appers in mail", list.getText().contains("RETURN_FORM_"+orderIncrementId));
+	}
+
 }

@@ -103,19 +103,19 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("49.90");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+
+		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.setPrice("49.90");
+		MagentoProductCalls.createApiProduct(genProduct2);
+
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("10.00");
+		MagentoProductCalls.createApiProduct(genProduct3);
 		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+        /*createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
 		
 		genProduct1 = createdProductsList.get(1);
 		System.out.println(genProduct1.getSku());
@@ -123,7 +123,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		System.out.println(genProduct2.getSku());
 		genProduct3 = createdProductsList.get(6);
 		System.out.println(genProduct3.getSku());
-
+*/
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -226,7 +226,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		confirmationSteps.grabBillingData();
 		confirmationSteps.grabSippingData();
 		
-	//	importExportSteps.createOrderFile(FormatterUtils.extractOrderIDFromURL(url));
+		importExportSteps.createOrderFile(FormatterUtils.extractOrderIDFromURL(url));
 		
 		confirmationSteps.agreeAndCheckout();
 
