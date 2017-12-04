@@ -158,4 +158,16 @@ public class ReportsSteps extends AbstractSteps {
 
 	}
 
+	public static void main(String[] args) {
+
+		//	String basedir = System.getProperty("basedir");
+		//	String downloadsdirectory = basedir + "/resources/downloads/";
+			String downloadsdirectory= "C:/Users/emilianmelian/Downloads/automation/";
+			File folder = new File(downloadsdirectory);
+			File[] listOfFiles = folder.listFiles();
+			String text = PdfUtils.readPdf(downloadsdirectory + listOfFiles[0].getName());
+			System.out.println(text);
+			
+	}
+	
 }

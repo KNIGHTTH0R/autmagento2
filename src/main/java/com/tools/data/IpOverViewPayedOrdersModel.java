@@ -75,4 +75,12 @@ public class IpOverViewPayedOrdersModel {
 		this.ip = ip;
 	}
 
+	@Override
+	public String toString() {
+		return "IpOverViewPayedOrdersModel [orderID=" + orderID + ", customerName=" + customerName + ", orderDate="
+				+ orderDate + ", paymentDate=" + paymentDate + ", orderStatus=" + orderStatus + ", amount=" + amount
+				+ ", ip=" + ip + ", scheduledDelivery=" + scheduledDelivery + "]";
+	}
+
+	
 }

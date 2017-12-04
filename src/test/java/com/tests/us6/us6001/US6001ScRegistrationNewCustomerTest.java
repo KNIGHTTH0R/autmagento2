@@ -148,14 +148,14 @@ public class US6001ScRegistrationNewCustomerTest extends BaseTest {
 		DataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
 		DataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
 
-		// if (paymentSteps.isKlarnaAvailable()) {
-		// paymentSteps.expandKlarnaForm();
-		// paymentSteps.fillKlarnaForm();
-		// } else {
+		if (paymentSteps.isKlarnaAvailable()) {
+			paymentSteps.expandKlarnaForm();
+			paymentSteps.fillKlarnaForm();
+		} else {
 
-		paymentSteps.expandCreditCardForm();
-		paymentSteps.fillCreditCardForm(creditCardData);
-
+			paymentSteps.expandCreditCardForm();
+			paymentSteps.fillCreditCardForm(creditCardData);
+		}
 		// paymentSteps.payWithBankTransferEs();
 		confirmationSteps.grabConfirmationTotals();
 		confirmationSteps.agreeAndCheckout();

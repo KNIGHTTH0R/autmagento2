@@ -101,10 +101,10 @@ public class US3004SfmValidVatSmbBillingShippingAtTest extends BaseTest {
 //		MagentoProductCalls.createApiProduct(genProduct3);
 
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsSFMTest" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(21);
-		genProduct2 = createdProductsList.get(22);
+		genProduct1 = createdProductsList.get(5);
+		genProduct2 = createdProductsList.get(6);
 		genProduct3 = createdProductsList.get(2);
 		
 		

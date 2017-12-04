@@ -542,7 +542,7 @@ public class NavisionSoapCalls {
 		System.out.println("calculata valoare  "+calculateGrandTotal("0.84034", "90", "68.56"));
 		
 		System.out.println("test");
-		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("224603..224603");
+		List<NavOrderModel> ordersList = NavisionSoapCalls.getOrdersList("261798");
 
 		for (NavOrderModel order : ordersList) {
 			System.out.println("ceva ");

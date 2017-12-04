@@ -7,12 +7,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.tools.CustomVerification;
 import com.tools.constants.ConfigConstants;
 import com.tools.constants.ContextConstants;
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.DateUtils;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 
@@ -36,6 +39,18 @@ public class OrdersActionsPage extends AbstractPage {
 	@FindBy(css = "button[onclick*='/sales_order_invoice/start/order_id/']")
 	private WebElement invoiceButton;
 
+	@FindBy(css = "button[onclick*='/sales_order_shipment/start/order_id/']")
+	private WebElement shipButton;
+
+	@FindBy(id = "_orderfilesadditional_email_receiver")
+	private WebElement emailReceiverInput;
+
+	@FindBy(id = "_orderfilessubmitBtn")
+	private WebElement clickSubmitEmailBtn;
+
+	@FindBy(id = "send_email")
+	private WebElement shipmentEmailCheckBox;
+
 	@FindBy(css = "button[onclick*='/sales_order_creditmemo/start/order_id/']")
 	private WebElement creditMemoButton;
 
@@ -44,16 +59,15 @@ public class OrdersActionsPage extends AbstractPage {
 
 	@FindBy(css = "button.scalable.save.submit-button")
 	private WebElement submitInvoice;
-	
+
+	@FindBy(css = "button.scalable.save.submit-button")
+	private WebElement submitShipmentBtn;
+
 	@FindBy(css = "#sales_order_view_tabs_adyenPayment_order_notifications")
 	private WebElement adyenNotificationTab;
-	
 
 	@FindBy(css = "#dt-order_related_files_form")
 	private WebElement navDocSectionTab;
-	
-	
-	
 
 	public void markOrderAsPaid() {
 		element(markAsPaidButton).waitUntilVisible();
@@ -66,16 +80,15 @@ public class OrdersActionsPage extends AbstractPage {
 		getDriver().switchTo().defaultContent();
 		evaluateJavascript("jQuery.noConflict();");
 	}
-	
-	
-	//////////////emilian pom modfications
+
+	////////////// emilian pom modfications
 
 	public void waitForLoading() {
 		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
 		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("loading_mask_loader"),
 				ConfigConstants.LOADING));
-		
-//		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("loading_mask_loader"),ConfigConstants.LOADING));
+
+		// waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector("loading_mask_loader"),ConfigConstants.LOADING));
 	}
 
 	public void cancelOrder() {
@@ -105,10 +118,22 @@ public class OrdersActionsPage extends AbstractPage {
 		invoiceButton.click();
 	}
 
+	public void clickShipButton() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(shipButton).waitUntilVisible();
+		shipButton.click();
+	}
+
 	public void clickcreditMemoButton() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(creditMemoButton).waitUntilVisible();
 		creditMemoButton.click();
+	}
+
+	public void checkShipmentMail() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(shipmentEmailCheckBox).waitUntilVisible();
+		shipmentEmailCheckBox.click();
 	}
 
 	public void checkCreateShippment() {
@@ -121,6 +146,13 @@ public class OrdersActionsPage extends AbstractPage {
 		evaluateJavascript("jQuery.noConflict();");
 		element(submitInvoice).waitUntilVisible();
 		submitInvoice.click();
+		waitFor(ExpectedConditions.visibilityOf(successMessage));
+	}
+
+	public void submitShipment() {
+		evaluateJavascript("jQuery.noConflict();");
+		element(submitShipmentBtn).waitUntilVisible();
+		submitShipmentBtn.click();
 		waitFor(ExpectedConditions.visibilityOf(successMessage));
 	}
 
@@ -139,15 +171,20 @@ public class OrdersActionsPage extends AbstractPage {
 				successMessage.getText().contains(ContextConstants.INVOICE_SHIPPING_SUBMITED_MESSAGE));
 	}
 
-	
+	public void verifyShippingSubmitedMessage() {
+		element(successMessage).waitUntilVisible();
+		Assert.assertTrue("Failure: The mesage should be " + "Die Lieferung wurde erstellt." + " and it's not! Actual: "
+				+ successMessage.getText(), successMessage.getText().contains("Die Lieferung wurde erstellt."));
+	}
+
 	public void verifyInvoiceSubmitedMessage() {
 		element(successMessage).waitUntilVisible();
 		Assert.assertTrue(
-				"Failure: The mesage should be " + ContextConstants.INVOICE_SUBMITED_MESSAGE
-						+ " and it's not! Actual: " + successMessage.getText(),
+				"Failure: The mesage should be " + ContextConstants.INVOICE_SUBMITED_MESSAGE + " and it's not! Actual: "
+						+ successMessage.getText(),
 				successMessage.getText().contains(ContextConstants.INVOICE_SUBMITED_MESSAGE));
 	}
-	
+
 	public void verifyRefundedSuccessMessage() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(successMessage).waitUntilVisible();
@@ -157,45 +194,156 @@ public class OrdersActionsPage extends AbstractPage {
 				successMessage.getText().contains(ContextConstants.REFUNDED_SUCCESS_MESSAGE));
 	}
 
-
 	public void openDocumentsSection() {
 		evaluateJavascript("jQuery.noConflict();");
 		element(navDocSectionTab).waitUntilVisible();
-		
+
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(navDocSectionTab).click().perform();
 		waitABit(4000);
-		
-	}
 
+	}
 
 	public void valdateOriginalInvoiceIsReceived(String orderId, boolean isReceived) {
 		// TODO Auto-generated method stub
-		//waitForLoading();
+		// waitForLoading();
+		String dateCompare="";
 		waitABit(2000);
-		List<WebElement> documents =getDriver().findElements(By.cssSelector("#_orderfilesbase_fieldset .checkboxes li label[for*='related']"));
-		
- 		if(isReceived){
- 			CustomVerification.verifyTrue("Failure: Original invoice file is not received", documents.get(0).getText().contains("INVOICE_"+orderId+".pdf"));
-		}else{
-			Assert.assertTrue("Failure: Original invoice file is displayed and should not be ", documents.size()==0);
+		List<WebElement> documents = getDriver()
+				.findElements(By.cssSelector("#_orderfilesbase_fieldset .checkboxes li label[for*='related']"));
+
+		if (isReceived) {
+			CustomVerification.verifyTrue("Failure: Original invoice file is not received",
+					documents.get(0).getText().contains("INVOICE_" + orderId + ".pdf"));
+			dateCompare=extractDocDate(documents.get(0).getText());
+			CustomVerification.verifyTrue("Failure: Date is not displayed correctly",
+					dateCompare.contentEquals(DateUtils.getCurrentDate("dd MMM yyyy")));
+		} else {
+			Assert.assertTrue("Failure: Original invoice file is displayed and should not be ", documents.size() == 0);
 		}
-				
-			
-			
+
+	}
+	
+	public String  extractDocDate(String dateString){
+		String dateSubstring=dateString.substring(dateString.indexOf("pdf")+3); 
+		String day= dateSubstring.substring(2, dateSubstring.indexOf(".")); 
+		String month=dateSubstring.substring(dateSubstring.indexOf(". ")+2, dateSubstring.indexOf(" 2")); 
+		String year=dateSubstring.substring(dateSubstring.indexOf(" 2")+1, dateSubstring.indexOf(")")); 
+		
+		String dateCompare=day+" "+month.substring(0,3)+" "+year;
+		
+		if(dateCompare.contentEquals(DateUtils.getCurrentDate("dd MMM yyyy"))){
+			System.out.println("evrica");
+		}
+		return dateCompare;
 	}
 
-
+	public static void main(String[] args) {
+		String date="INVOICE_10026903600.pdf (22. November 2017) ";
+		String dateSubstring=date.substring(date.indexOf("pdf")+3); 
+		String day= dateSubstring.substring(2, dateSubstring.indexOf(".")); 
+		String month=dateSubstring.substring(dateSubstring.indexOf(". ")+2, dateSubstring.indexOf(" 2")); 
+		String year=dateSubstring.substring(dateSubstring.indexOf(" 2")+1, dateSubstring.indexOf(")")); 
+		
+		System.out.println(dateSubstring);
+		System.out.println(day);
+		System.out.println(month);
+		System.out.println(year);
+		String dateCompare=day+" "+month.substring(0,3)+" "+year;
+		
+		if(dateCompare.contentEquals(DateUtils.getCurrentDate("dd MMM yyyy"))){
+			System.out.println("evrica");
+		}
+	//System.out.println(DateUtils.getCurrentDate("dd MMM yyyy"));	
+		//DateUtils.addDaysToAAGivenDate(dateString, formatString, days)
+	}
+	
+	
 	public void valdateOriginalReturnIsReceived(String orderId, boolean isReceived) {
 		// TODO Auto-generated method stub
-		List<WebElement> documents =getDriver().findElements(By.cssSelector("#_orderfilesbase_fieldset .checkboxes li label[for*='related']"));
- 		if(isReceived){
- 			CustomVerification.verifyTrue("Failure: Original return file is not received", documents.get(1).getText().contains("RETURN_FORM_"+orderId+".pdf"));
-		}else{
-			Assert.assertTrue("Failure: Original return file is displayed and should not be ", documents.size()>2);
+		List<WebElement> documents = getDriver()
+				.findElements(By.cssSelector("#_orderfilesbase_fieldset .checkboxes li label[for*='related']"));
+		if (isReceived) {
+			CustomVerification.verifyTrue("Failure: Original return file is not received",
+					documents.get(1).getText().contains("RETURN_FORM_" + orderId + ".pdf"));
+		} else {
+			Assert.assertTrue("Failure: Original return file is displayed and should not be ", documents.size() < 2);
 		}
-				
+
+	}
+
+	public void validateEchangeDocIsReceived(String orderId, boolean isReceived) {
+
+		waitABit(2000);
+		boolean isDisplayed = false;
+		List<WebElement> documents = getDriver()
+				.findElements(By.cssSelector("#_orderfilesbase_fieldset .checkboxes li label[for*='related']"));
+
+
+		for (WebElement doc : documents) {
+			if (doc.getText().contains("EXCHANGE")) {
+				isDisplayed = true;
+			}
+		}
+
+		if (isReceived) {
+			CustomVerification.verifyTrue("Failure: Exchange file is not received",
+					isDisplayed);
+		} else {
+			Assert.assertTrue("Failure: Exchange file is displayed and should not be ", isDisplayed==false);
+		}
+
+	}
+
+	public void valdateExcangeReturnIsReceived(String orderId, boolean isReceived, int noOfFile) {
+		// TODO Auto-generated method stub
+		List<WebElement> documents = getDriver()
+				.findElements(By.cssSelector("#_orderfilesbase_fieldset .checkboxes li label[for*='related']"));
+
+		// Assert.assertTrue("The no of duments is not correct
+		// expected:"+noOfFile+", actual:"+documents.size(),
+		// noOfFile==documents.size());
+		CustomVerification.verifyTrue("The exchange retunr is not receioved ",
+				documents.get(documents.size() - 1).getText().contains("RETURN_FORM_"));
+
+	}
+
+	public void verifyCompleteStatus() {
+		List<WebElement> statusList = getDriver().findElements(By.cssSelector("#order_history_block .note-list li"));
+		Assert.assertTrue("Failure: The complete status is not displayed",
+				statusList.get(0).getText().contains("Vollständig"));
+	}
+
+	public void sendIndividualDocumentToSpecificReceiver(String documentName) {
+		evaluateJavascript("jQuery.noConflict();");
+		List<WebElement> documents = getDriver()
+				.findElements(By.cssSelector(".checkboxes li "));
+
+		for (WebElement doc : documents) {
+			if (doc.getText().contains(documentName)) {
+				doc.findElement(By.cssSelector("input")).click();
+				break;
+			}
+		}
+
 	}
 	
-	
+
+
+	public void clickSubmitEmail() {
+		element(clickSubmitEmailBtn).waitUntilVisible();
+		clickSubmitEmailBtn.click();
+	}
+
+	public void insertReceiver(String receiver) {
+		waitABit(2000);
+		element(emailReceiverInput).waitUntilVisible();
+		emailReceiverInput.sendKeys(receiver);
+	}
+
+	public void selectReceiverMethod(String receiver) {
+		Select oSelect = new Select(getDriver().findElement(By.id("_orderfilesemail_receiver")));
+		oSelect.selectByValue(receiver);
+	}
+
 }

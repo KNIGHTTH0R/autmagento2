@@ -96,10 +96,10 @@ public class US3007SfmNoVatNoSmbBillingShippingAtTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsSFMTest" + SoapKeys.GRAB);
 
-		genProduct1 = createdProductsList.get(25);
-		genProduct2 = createdProductsList.get(26);
+		genProduct1 = createdProductsList.get(7);
+		genProduct2 = createdProductsList.get(8);
 		genProduct3 = createdProductsList.get(2);
 		//
 //		genProduct1 = MagentoProductCalls.createProductModel();

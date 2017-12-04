@@ -3,13 +3,19 @@ package com.tools.data;
 import java.util.List;
 
 public class IpOverviewModel {
+	
+	
+	
+
 	@Override
 	public String toString() {
-		return "IpOverviewModel [paidOrdersPreviosMonth=" + paidOrdersPreviosMonth + ", paidOrdersThisMonth=" + paidOrdersThisMonth + ", reverseChargebackThisMonth="
-				+ reverseChargebackThisMonth + ", chargebacksThisMonth=" + chargebacksThisMonth + ", returnsThisMonth=" + returnsThisMonth + ", manualIpCorrection="
-				+ manualIpCorrection + ", totalIp=" + totalIp + ", ipThisMonth=" + ipThisMonth + ", ipLastMonth=" + ipLastMonth + ", openChargebacks=" + openChargebacks
-				+ ", ipTPOrdersThisMonth=" + ipTPOrdersThisMonth + ", ipTPOrdersLastMonth=" + ipTPOrdersLastMonth + ", openIpTotal=" + openIpTotal + ", payedOrders=" + payedOrders
-				+ ", returns=" + returns + ", manualCorections=" + manualCorections + "]";
+		return "IpOverviewModel [paidOrdersPreviosMonth=" + paidOrdersPreviosMonth + ", paidOrdersThisMonth="
+				+ paidOrdersThisMonth + ", reverseChargebackThisMonth=" + reverseChargebackThisMonth
+				+ ", chargebacksThisMonth=" + chargebacksThisMonth + ", returnsThisMonth=" + returnsThisMonth
+				+ ", manualIpCorrection=" + manualIpCorrection + ", totalIp=" + totalIp + ", ipThisMonth=" + ipThisMonth
+				+ ", ipLastMonth=" + ipLastMonth + ", openChargebacks=" + openChargebacks + ", ipTPOrdersThisMonth="
+				+ ipTPOrdersThisMonth + ", ipTPOrdersLastMonth=" + ipTPOrdersLastMonth + ", openIpTotal=" + openIpTotal
+				+ "]";
 	}
 
 	private String paidOrdersPreviosMonth;

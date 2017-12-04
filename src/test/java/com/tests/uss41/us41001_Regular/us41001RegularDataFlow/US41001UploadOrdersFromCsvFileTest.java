@@ -4,12 +4,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.ApacheHttpHelper;
 import com.steps.ValidationSteps;
 import com.steps.backend.BackEndSteps;
 import com.steps.backend.ImportExport.ImportExportSteps;
 import com.tests.BaseTest;
 import com.tools.CustomVerification;
 import com.tools.constants.Credentials;
+import com.tools.constants.EnvironmentConstants;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -34,7 +36,7 @@ public class US41001UploadOrdersFromCsvFileTest extends BaseTest {
 	}
 
 	@Test
-	public void us41001UploadOrdersFromCsvFileTest() {
+	public void us41001UploadOrdersFromCsvFileTest() throws Exception {
 		String path="C:\\Users\\emilianmelian\\Desktop\\OrderImport\\cm_uppload_sample.csv";
 
 		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
@@ -45,6 +47,8 @@ public class US41001UploadOrdersFromCsvFileTest extends BaseTest {
 		importExportSteps.uploadFile(path);
 		importExportSteps.runProfile("cm_uppload_sample.csv");
 		
+		ApacheHttpHelper.sendGet(EnvironmentConstants.SALES_ORDER_DATA_IMPORT_UPDATE_ON_CLOUD_AUT, EnvironmentConstants.USERNAME,
+				EnvironmentConstants.PASSWORD);
 
 	}
 

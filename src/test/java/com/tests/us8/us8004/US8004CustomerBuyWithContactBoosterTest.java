@@ -105,7 +105,7 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 		
-		genProduct1 = MagentoProductCalls.createProductModel();
+		/*genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setIp("25");
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
@@ -118,15 +118,15 @@ public class US8004CustomerBuyWithContactBoosterTest extends BaseTest {
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("10.00");
 		genProduct3.setIp("8");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);*/
 		
 
 
-	/*	createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(1);
-		genProduct2 = createdProductsList.get(7);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestRegularCart" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(0);
+		genProduct2 = createdProductsList.get(3);
 		voucherValue = genProduct2.getPrice();
-		genProduct3 = createdProductsList.get(6);*/
+		genProduct3 = createdProductsList.get(2);
 ////		
 //		
 		

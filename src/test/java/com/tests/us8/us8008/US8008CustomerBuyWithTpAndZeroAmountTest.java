@@ -93,13 +93,13 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		RegularUserDataGrabber.wipe();
 		DataGrabber.wipe();
 		
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		genProduct1 = createdProductsList.get(6);
-//		genProduct2 = createdProductsList.get(8);
-//		genProduct3 = createdProductsList.get(10);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestRegularCart" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(9);
+		genProduct2 = createdProductsList.get(7);
+		genProduct3 = createdProductsList.get(8);
 		
 
-		genProduct1 = MagentoProductCalls.createProductModel();
+	/*	genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("50.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
@@ -111,7 +111,7 @@ public class US8008CustomerBuyWithTpAndZeroAmountTest extends BaseTest {
 		genProduct3 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct3.setPrice("19.90");
 		genProduct3.setIp("0");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);*/
 
 		Properties prop = new Properties();
 		InputStream input = null;

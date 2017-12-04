@@ -52,7 +52,8 @@ public class ShippingPartySectionPage extends AbstractPage {
 
 	public void clickPartyNoOption() {
 		element(noPartyOption).waitUntilVisible();
-		noPartyOption.click();
+	//	noPartyOption.click();
+		clickElement(noPartyOption);
 		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"), ContextConstants.LOADING_MESSAGE));
 	}
 

@@ -19,6 +19,8 @@ public class EnvironmentConstants {
 	public static final String RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT = MongoReader.geteEnvironmentConstantsItem("RUN_SCHEDULED_ORDERS_PROCESS_SCRIPT");
 	public static final String RUN_POSTPONE_CANCEL_EMAIL_SCRIPT = MongoReader.geteEnvironmentConstantsItem("RUN_POSTPONE_CANCEL_EMAIL_SCRIPT");
 	//ip overview report
+	///////////////////////////////// 
+	public static final String SALES_ORDER_DATA_IMPORT_UPDATE_ON_CLOUD_AUT=MongoReader.geteEnvironmentConstantsItem("SALES_ORDER_DATA_IMPORT_UPDATE_ON_CLOUD_AUT");
 	public static final String RUN_ORDER_IMPORT = MongoReader.geteEnvironmentConstantsItem("RUN_ORDER_IMPORT");
 	public static final String RUN_CREDITMEMO_IMPORT = MongoReader.geteEnvironmentConstantsItem("RUN_CREDITMEMO_IMPORT");
 	public static final String RUN_SEND_IP_REPORT = MongoReader.geteEnvironmentConstantsItem("RUN_SEND_IP_REPORT");
@@ -70,11 +72,11 @@ public class EnvironmentConstants {
 	
 	
 	//CLOUD: staging-aut env  - uncomment following for testing without running the test from cmd line
-//	public static final String COMMISSION_URL = "commission-aut.pippajean.com";
-//	public static final String SOAP_URL="https://staging.pippajean.com/";
-//		
-//	public static final String SOAP_USERNAME="navision";
-//	public static final String SOAP_PASSWORD=";Bn8NzlGhi[z";
+/*	public static final String COMMISSION_URL = "commission-aut.pippajean.com";
+	public static final String SOAP_URL="https://staging-aut.pippajean.com/";
+		
+	public static final String SOAP_USERNAME="navision";
+	public static final String SOAP_PASSWORD=";Bn8NzlGhi[z";*/
 
 
 	

@@ -119,11 +119,11 @@ public class US11005PartyHostBuysForCustomerWithVoucherTest extends BaseTest {
 //		genProduct3.setIp("25");
 //		MagentoProductCalls.createApiProduct(genProduct3);
 //		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsPlaceCustomerCartTest" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(3);
-		genProduct2 = createdProductsList.get(6);
-		genProduct3 = createdProductsList.get(14);
+		genProduct1 = createdProductsList.get(2);
+		genProduct2 = createdProductsList.get(3);
+		genProduct3 = createdProductsList.get(4);
 
 		Properties prop = new Properties();
 		InputStream input = null;

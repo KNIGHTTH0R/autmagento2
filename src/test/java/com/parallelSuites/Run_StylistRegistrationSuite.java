@@ -17,10 +17,10 @@ import com.tests.us6.us6006.US6006ScBuyProductwithSpecialPriceTest;
 @SuiteClasses({
 	US6001Suite.class,
 	US6001bSuite.class,
-	US6002Suite.class,
-	US6002bSuite.class,
+//	US6002Suite.class,
+	//US6002bSuite.class,
 	US6003Suite.class,
-	US6006ScBuyProductwithSpecialPriceTest.class,
+//	US6006ScBuyProductwithSpecialPriceTest.class,
 	
 })
 @RunWith(Suite.class)

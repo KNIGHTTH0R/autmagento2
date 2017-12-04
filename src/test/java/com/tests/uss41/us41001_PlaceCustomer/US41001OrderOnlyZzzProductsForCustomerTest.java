@@ -1,0 +1,223 @@
+package com.tests.uss41.us41001_PlaceCustomer;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.connectors.mongo.MongoConnector;
+import com.steps.backend.ImportExport.ImportExportSteps;
+import com.steps.frontend.CustomerRegistrationSteps;
+import com.steps.frontend.DashboardSteps;
+import com.steps.frontend.FooterSteps;
+import com.steps.frontend.HeaderSteps;
+import com.steps.frontend.LoungeSteps;
+import com.steps.frontend.checkout.CheckoutValidationSteps;
+import com.steps.frontend.checkout.ConfirmationSteps;
+import com.steps.frontend.checkout.PaymentSteps;
+import com.steps.frontend.checkout.ShippingSteps;
+import com.steps.frontend.checkout.cart.GeneralCartSteps;
+import com.steps.frontend.checkout.cart.partyHost.OrderForCustomerCartSteps;
+import com.steps.frontend.checkout.shipping.regularUser.ShippingPartySectionSteps;
+import com.steps.frontend.registration.party.CreateNewContactSteps;
+import com.steps.frontend.reports.JewelryBonusHistorySteps;
+import com.tests.BaseTest;
+import com.tools.cartcalculations.partyHost.HostCartCalculator;
+import com.tools.constants.SoapKeys;
+import com.tools.constants.UrlConstants;
+import com.tools.data.backend.JewelryHistoryModel;
+import com.tools.data.frontend.AddressModel;
+import com.tools.data.frontend.CreditCardModel;
+import com.tools.data.frontend.CustomerFormModel;
+import com.tools.data.frontend.DateModel;
+import com.tools.data.frontend.HostBasicProductModel;
+import com.tools.data.soap.ProductDetailedModel;
+import com.tools.datahandler.HostDataGrabber;
+import com.tools.persistance.MongoReader;
+import com.tools.persistance.MongoWriter;
+import com.tools.utils.DateUtils;
+import com.tools.utils.FormatterUtils;
+import com.workflows.frontend.partyHost.AddProductsForCustomerWorkflow;
+import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.WithTag;
+import net.thucydides.core.annotations.WithTags;
+
+@WithTags({ @WithTag(name = "US15.4 Validate Zzz Product JB for all order states", type = "Scenarios"),
+	@WithTag(name = "US15.4 Check place a customer order details in mailchimp", type = "Scenarios") })
+@RunWith(SerenityRunner.class)
+public class US41001OrderOnlyZzzProductsForCustomerTest extends BaseTest {
+
+	@Steps
+	public HeaderSteps headerSteps;
+	@Steps
+	public FooterSteps footerSteps;
+	@Steps
+	public LoungeSteps loungeSteps;
+	@Steps
+	public ShippingSteps shippingSteps;
+	@Steps
+	public CreateNewContactSteps createNewContactSteps;
+	@Steps
+	public PaymentSteps paymentSteps;
+	@Steps
+	public OrderForCustomerCartSteps orderForCustomerCartSteps;
+	@Steps
+	public ConfirmationSteps confirmationSteps;
+	@Steps
+	public ShippingPartySectionSteps shippingPartySectionSteps;
+	@Steps
+	public CustomerRegistrationSteps customerRegistrationSteps;
+	@Steps
+	public GeneralCartSteps generalCartSteps;
+	@Steps
+	public AddProductsForCustomerWorkflow addProductsForCustomerWorkflow;
+	@Steps
+	public CheckoutValidationSteps checkoutValidationSteps;
+	@Steps
+	public HostCartValidationWorkflows hostCartValidationWorkflows;
+	@Steps
+	public JewelryBonusHistorySteps jewelryBonusHistorySteps;
+	@Steps
+	public DashboardSteps dashboardSteps;
+	
+	@Steps
+	public ImportExportSteps importExportSteps;
+
+	private String username, password;
+	private String discountClass;
+	private String shippingValue;
+	private String voucherValue;
+	private DateModel dateModel = new DateModel();
+	private CreditCardModel creditCardData = new CreditCardModel();
+	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderComplete = new JewelryHistoryModel();
+	private JewelryHistoryModel expectedJewelryHistoryModelWhenOrderCancelled = new JewelryHistoryModel();
+	private CustomerFormModel customerData;
+	private AddressModel addressData;
+	private ProductDetailedModel genProduct1;
+
+
+	@Before
+	public void setUp() throws Exception {
+		HostCartCalculator.wipe();
+		HostDataGrabber.wipe();
+
+		customerData = new CustomerFormModel();
+		addressData = new AddressModel();
+		
+		genProduct1 =new ProductDetailedModel();
+		genProduct1.setPrice("54.90");
+		genProduct1.setIp("46");
+		genProduct1.setSku("direktverkauf-style-coach-59-00-1");
+		
+
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream(UrlConstants.RESOURCES_PATH + "uss41" + File.separator + "us41001PlaceCust.properties");
+			prop.load(input);
+			username = prop.getProperty("username");
+			password = prop.getProperty("password");
+
+			discountClass = prop.getProperty("discountClass");
+			shippingValue = prop.getProperty("shippingValue");
+			voucherValue = prop.getProperty("voucherValue");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		MongoConnector.cleanCollection(getClass().getSimpleName());
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.COMPLETE);
+		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.CANCELED);
+
+	}
+
+	@Test
+	public void us41001OrderOnlyZzzProductsForCustomerTest() {
+		customerRegistrationSteps.performLogin(username, password);
+		if (!headerSteps.succesfullLogin()) {
+			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
+		}
+		headerSteps.selectLanguage(MongoReader.getContext());
+	/*	headerSteps.goToProfile();
+		headerSteps.waitABit(20000);
+
+		String currentTotal = dashboardSteps.getJewelryBonus();
+
+		expectedJewelryHistoryModelWhenOrderComplete = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal, genProduct1.getJewerlyBonusValue(), true);
+		expectedJewelryHistoryModelWhenOrderCancelled = dashboardSteps.calculateExpectedJewelryConfiguration(currentTotal, genProduct1.getJewerlyBonusValue(), false);
+*/
+		loungeSteps.orderForNewCustomer();
+		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
+		generalCartSteps.clearCart();
+		HostBasicProductModel productData;
+
+		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
+		HostCartCalculator.allProductsList.add(productData);
+	
+
+		headerSteps.openCartPreview();
+		headerSteps.goToCart();
+
+
+		orderForCustomerCartSteps.clickGoToShipping();
+		shippingPartySectionSteps.clickPartyNoOption();
+		shippingPartySectionSteps.checkItemNotReceivedYet();
+
+		shippingSteps.goToPaymentMethod();
+
+		String url = shippingSteps.grabUrl();
+		HostDataGrabber.orderModel.setTotalPrice(FormatterUtils.extractPriceFromURL(url));
+		HostDataGrabber.orderModel.setOrderId(FormatterUtils.extractOrderIDFromURL(url));
+
+//		if (MongoReader.getContext().contentEquals("de")) {
+//			paymentSteps.payWithBankTransfer();
+//		} else {
+//			paymentSteps.payWithBankTransferEs();
+//		}
+	
+		paymentSteps.expandCreditCardForm();
+		paymentSteps.fillCreditCardForm(creditCardData);
+
+		confirmationSteps.agreeAndCheckout();
+		importExportSteps.createOrderFile(FormatterUtils.extractOrderIDFromURL(url));
+		dateModel.setDate(DateUtils.getCurrentDateOneHourBack("MM/dd/YYYY"));
+		
+		checkoutValidationSteps.verifySuccessMessage();
+
+	}
+
+	@After
+	public void saveData() {
+		MongoWriter.saveCustomerFormModel(customerData, getClass().getSimpleName());
+		MongoWriter.saveOrderModel(HostDataGrabber.orderModel, getClass().getSimpleName());
+		MongoWriter.saveShippingModel(HostCartCalculator.shippingCalculatedModel, getClass().getSimpleName());
+		MongoWriter.saveUrlModel(HostDataGrabber.urlModel, getClass().getSimpleName());
+		MongoWriter.saveDateModel(dateModel, getClass().getSimpleName());
+		MongoWriter.saveJewerlyHistoryModel(expectedJewelryHistoryModelWhenOrderComplete, getClass().getSimpleName() + SoapKeys.COMPLETE);
+		MongoWriter.saveJewerlyHistoryModel(expectedJewelryHistoryModelWhenOrderCancelled, getClass().getSimpleName() + SoapKeys.CANCELED);
+		for (HostBasicProductModel product : HostCartCalculator.allProductsList) {
+			MongoWriter.saveHostBasicProductModel(product, getClass().getSimpleName());
+		}
+	}
+
+}

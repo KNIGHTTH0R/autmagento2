@@ -10,8 +10,11 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class ReportsPage extends AbstractPage {
 
-	@FindBy(css = "li a[href*='exportInventoryReport/order/sku/']")
+	/*@FindBy(css = "li a[href*='exportInventoryReport/order/sku/']")
+	private WebElement downloadBySkuLink;*/
+	@FindBy(css = "#stock-sidebar li a[href*='exportInventoryReport'] ")
 	private WebElement downloadBySkuLink;
+	
 
 	@FindBy(css = "li a[href*='stylereports/order/ipsreport/']")
 	private WebElement ipReportsLink;
@@ -21,6 +24,9 @@ public class ReportsPage extends AbstractPage {
 
 	@FindBy(css = "li a[href*='stock?']")
 	private WebElement mobileVersion;
+	
+	
+//	/#stock-sidebar li a[href*='exportInventoryReport'] 
 
 	public void downloadProductsOrderedBySku() {
 		element(downloadBySkuLink).waitUntilVisible();

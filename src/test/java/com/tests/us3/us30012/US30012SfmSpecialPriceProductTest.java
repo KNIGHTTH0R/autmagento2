@@ -152,6 +152,7 @@ public class US30012SfmSpecialPriceProductTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
+		headerSteps.waitABit(15000);
 		BasicProductModel productData;
 
 		productData = addProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0", ConfigConstants.DISCOUNT_50);

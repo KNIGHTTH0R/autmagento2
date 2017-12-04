@@ -114,14 +114,14 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 		genProduct2 = MagentoProductCalls.createNotAvailableYetProductModel();
 		genProduct2.setPrice("89.00");
 		genProduct2.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getFirstDayOfNextMonth("yyyy-MM-dd")));
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct2);
 		
 
 		genProduct3 = MagentoProductCalls.createMarketingProductModel();
 		genProduct3.setPrice("74.00");
 		genProduct3.setStockData(
-				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
+				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getLastDayOfNextMonth("yyyy-MM-dd")));
 		MagentoProductCalls.createApiProduct(genProduct3);
 
 		Properties prop = new Properties();

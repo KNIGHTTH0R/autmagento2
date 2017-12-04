@@ -206,7 +206,7 @@ public class IpReportValidationWorkflow {
 	@Step
 	public void validateOrderDate(String expected, String grabbed) throws ParseException {
 		System.out.println("expected " +expected);
-		String expectedDate =DateUtils.parseDate(expected, "yyyy-MM-dd HH:mm:ss", "dd.MM.YYYY");;
+		String expectedDate =DateUtils.parseDate(expected, "yyyy-mm-dd", "dd.mm.yyyy");
 		
 		
 		System.out.println("expectedDate "+expectedDate);
@@ -217,7 +217,7 @@ public class IpReportValidationWorkflow {
 	@Step
 	public void validatePaymentDate(String expected , String grabbed) throws ParseException {
 		System.out.println("expected " +expected);
-		String expectedDate =DateUtils.parseDate(expected, "yyyy-MM-dd HH:mm:ss", "dd.MM.YYYY");
+		String expectedDate =DateUtils.parseDate(expected, "yyyy-mm-dd", "dd.mm.yyyy");
 		
 		
 		CustomVerification.verifyTrue("Failure: Payment date doesn't match Expected: " + expectedDate + " Actual: " + grabbed,
@@ -227,6 +227,7 @@ public class IpReportValidationWorkflow {
 	@Step
 	public void validateOrderStatus(String expected, String grabbed) {
 		String englishStatus=grabbed.contentEquals("Zahlung erfolgreich")?"payment_complete":grabbed;
+		
 		CustomVerification.verifyTrue("Failure: Order status doesn't match Expected: " + expected + " Actual: " + englishStatus,
 				englishStatus.contentEquals(expected));
 	}

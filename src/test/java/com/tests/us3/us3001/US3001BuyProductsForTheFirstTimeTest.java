@@ -110,9 +110,9 @@ public class US3001BuyProductsForTheFirstTimeTest extends BaseTest {
 //		 genProduct3.setPrice("229.00");
 //		 MagentoProductCalls.createApiProduct(genProduct3);
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsSFMTest" + SoapKeys.GRAB);
 
-		genProduct1 = createdProductsList.get(19);
+		genProduct1 = createdProductsList.get(3);
 		genProduct2 = createdProductsList.get(1);
 		genProduct3 = createdProductsList.get(2);
 

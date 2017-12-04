@@ -103,7 +103,7 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
+	/*	genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
@@ -113,17 +113,17 @@ public class US8001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("10.00");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);*/
 		
-        /*createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestRegularCart" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(1);
+		genProduct1 = createdProductsList.get(0);
 		System.out.println(genProduct1.getSku());
-		genProduct2 = createdProductsList.get(27);
+		genProduct2 = createdProductsList.get(1);
 		System.out.println(genProduct2.getSku());
-		genProduct3 = createdProductsList.get(6);
+		genProduct3 = createdProductsList.get(2);
 		System.out.println(genProduct3.getSku());
-*/
+
 		Properties prop = new Properties();
 		InputStream input = null;
 

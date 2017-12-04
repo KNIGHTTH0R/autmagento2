@@ -11,7 +11,9 @@ import com.tools.CustomVerification;
 import com.tools.constants.UrlConstants;
 
 import com.tools.requirements.AbstractPage;
+import com.tools.utils.DateUtils;
 
+import freemarker.template.utility.DateUtil;
 import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class TempMail extends AbstractPage {
@@ -39,7 +41,9 @@ public class TempMail extends AbstractPage {
 	private WebElement iFrameInbox;
 	public void openEmail(String email, String title) {
 		navigate(UrlConstants.TEMPMAIL_WEB_MAIL);
+		
 		waitABit(2000);
+		
 		element(changeButton).waitUntilVisible();
 		changeButton.click();
 		
@@ -47,7 +51,7 @@ public class TempMail extends AbstractPage {
 		element(mailInput).clear();
 		mailInput.sendKeys(email);
 		
-		selectMailDomain("@geronra.com");
+		selectMailDomain("@hitbts.com");
 		
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
@@ -80,7 +84,7 @@ public class TempMail extends AbstractPage {
 			
 			Assert.assertTrue("The email with the title " + title + " was not found", foundEmail);
 		}else{
-			CustomVerification.verifyTrue("No emails received", true);
+			CustomVerification.verifyTrue("No emails received", false);
 		}
 		
 		
@@ -97,7 +101,7 @@ public class TempMail extends AbstractPage {
 		element(mailInput).clear();
 		mailInput.sendKeys(email);
 		
-		selectMailDomain("@geronra.com");
+		selectMailDomain("@hitbts.com");
 		
 		element(submitButton).waitUntilVisible();
 		submitButton.click();
@@ -144,6 +148,7 @@ public class TempMail extends AbstractPage {
 	
 	public String getConfirmationLink() {
 		waitABit(4000);
+		//focusElement("a[href*='confirm']");
 		String confirmLink = getDriver().findElement(By.cssSelector("a[href*='confirm']")).getAttribute("href");
 		return confirmLink;
 
@@ -173,8 +178,9 @@ public class TempMail extends AbstractPage {
 		// TODO Auto-generated method stub
 		WebElement list=getDriver().findElement(By.cssSelector(".content.main table tbody tr:nth-child(3)"));
 		
-		CustomVerification.verifyTrue("Failure: invoice doc does not appers in mail", list.getText().contains("INVOICE_"+orderIncrementId));
-		CustomVerification.verifyTrue("Failure: return doc does not appers in mail", list.getText().contains("RETURN_FORM_"+orderIncrementId));
+		CustomVerification.verifyTrue("Failure: invoice doc does not appers in mail", list.getText().contains(orderIncrementId));
 	}
+	
+
 
 }

@@ -125,15 +125,75 @@ public class NavisionHomeSteps extends AbstractSteps {
 			navisionSyncDashboardPage().clickOnEditPoints();
 			navisionSyncDashboardPage().clickOnEditLink();
 			navisionSyncDashboardPage().selectHomeTab();
-			navisionSyncDashboardPage().clickOnPostOrderMenuBtn();
+			navisionSyncDashboardPage().clickOnOrderMenuBtn("Post");
 			navisionSyncDashboardPage().confirmPostOrder();
 		//	navisionSyncDashboardPage().closeWindow();
 		}
 	
 	
+	
+	
+	
+
+	@Step
+	public void createSalesOrderReturn(String orderId, String postedOrderNo) throws Exception {
+	
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&mode=Create&page=42&i=176E1&IsDlg=1");
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&mode=Create&page=42&i=176E1&IsDlg=1");
+		navisionSyncDashboardPage().insertAuthentificationCredentials();
+		navisionSyncDashboardPage().selectHomeTab();
+		navisionSyncDashboardPage().clickOnCopyDocument();
+		navisionSyncDashboardPage().insertDocNo(postedOrderNo);
+	//	navisionSyncDashboardPage().selectHomeTab();
+	//	refresh();
+		navisionSyncDashboardPage().removeChargeItem(2);
+		navisionSyncDashboardPage().selectHomeTab();
+		navisionSyncDashboardPage().clickOnOrderMenuBtn("Post");
+		navisionSyncDashboardPage().confirmPostOrder();
+		
+		
+		
+		
+	}
+	
+	public void grabOrderNoFromPostedSalesInvoice() throws Exception{
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&mode=Create&page=42&i=176E1&IsDlg=1");
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&mode=Create&page=42&i=176E1&IsDlg=1");
+		navisionHomePage().clickSearchButton();
+		navisionSearchPage().inputSearchTerm("Posted Sales Invoices");
+		navisionSearchPage().clickOnMenu("Posted Sales Invoices");
+	}
+	
+	public void replicateOrder(String orderNo) throws Exception{
+	
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=23%3bcAAAAAJ7BjEAMAAzADAAMAAy&mode=View&page=143&i=5B6B&IsDlg=1");
+		navisionSyncDashboardPage().insertAuthentificationCredentials();
+		navisionSyncDashboardPage().searchForItem(orderNo);
+		navisionSyncDashboardPage().clickOnTheLastRow();
+		navisionSyncDashboardPage().selectActionsTab();
+		navisionSyncDashboardPage().clickOnNewMenuBtn("Replicate");
+	
+	}
+	
+	public String blanketMakeOrder(String orderNo) throws Exception{
+		navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=25%3bJAAAAACLBAAAAAJ7BDEAMAAwADY%3d&node=0000232e-0000-0031-0008-0000836bd2d2&mode=View&page=9303&i=5E44&ni=5");
+		navisionSyncDashboardPage().searchForItem(orderNo);
+		navisionSyncDashboardPage().clickOnEditPoints();
+		navisionSyncDashboardPage().clickOnEditLink();
+		navisionSyncDashboardPage().selectHomeTab();
+		navisionSyncDashboardPage().clickOnOrderMenuBtn("Make");
+		navisionSyncDashboardPage().confirmPostJournalLines();
+		String order=navisionSyncDashboardPage().grabOrderNoFromModal();
+		navisionSyncDashboardPage().confirmPostOrder();
+		System.out.println(order);
+		return order;
+	}
+	
+	
 	@Step
 	public void syncQtyOnItem(String skuItem,String variantCode,String qty) throws Exception {
 			navigate("http://185.48.116.231:8080/DynamicsNAV90/WebClient/?company=PippaJean&bookmark=11%3bGwAAAAJ7&mode=View&page=31&i=7A03&IsDlg=1");
+	
 			navisionSyncDashboardPage().searchForItem(skuItem);
 			navisionSyncDashboardPage().selectHomeTab();
 			navisionSyncDashboardPage().clickOnItemJournalMenuBtn();
@@ -195,6 +255,7 @@ public class NavisionHomeSteps extends AbstractSteps {
 		waitABit(40000);
 		System.out.println("am asteptat aici");
 	}
+
 	
 	}
 	

@@ -109,11 +109,11 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 //		MagentoProductCalls.createApiProduct(genProduct3);
 		
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsPlaceCustomerCartTest" + SoapKeys.GRAB);
 			
 		genProduct1 = createdProductsList.get(0);
-		genProduct2 = createdProductsList.get(15);
-		genProduct3 = createdProductsList.get(16);
+		genProduct2 = createdProductsList.get(5);
+		genProduct3 = createdProductsList.get(6);
 		
 		
 

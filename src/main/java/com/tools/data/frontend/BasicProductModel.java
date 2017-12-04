@@ -1,5 +1,7 @@
 package com.tools.data.frontend;
 
+import java.math.BigDecimal;
+
 public class BasicProductModel {
 
 	private String name;
@@ -14,9 +16,18 @@ public class BasicProductModel {
 	private String deliveryDate;
 	private String earliestAvailability;
 	private String isMarketing;
+	private BigDecimal isBuy3Get1;
 
 	
 	
+	public BigDecimal getIsBuy3Get1() {
+		return isBuy3Get1;
+	}
+
+	public void setIsBuy3Get1(BigDecimal discount) {
+		this.isBuy3Get1 = discount;
+	}
+
 	public String getIsMarketing() {
 		return isMarketing;
 	}

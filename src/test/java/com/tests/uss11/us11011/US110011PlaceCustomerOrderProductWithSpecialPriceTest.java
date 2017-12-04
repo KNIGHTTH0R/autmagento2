@@ -127,7 +127,7 @@ public class US110011PlaceCustomerOrderProductWithSpecialPriceTest extends BaseT
 //		genProduct3.setIp("25");
 //		MagentoProductCalls.createApiProduct(genProduct3);
 		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsPlaceCustomerCartTest" + SoapKeys.GRAB);
 		
         genProduct1 = createdProductsList.get(1);
 	

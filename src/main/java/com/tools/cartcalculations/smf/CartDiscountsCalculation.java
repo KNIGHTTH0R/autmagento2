@@ -267,6 +267,8 @@ public class CartDiscountsCalculation {
 		return sum;
 	}
 
+	
+	
 	public static BigDecimal calculateSubtotal(List<BasicProductModel> productsList) {
 		BigDecimal sum = BigDecimal.ZERO;
 		for (BasicProductModel product : productsList) {

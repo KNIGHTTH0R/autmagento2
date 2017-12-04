@@ -2,6 +2,9 @@ package com.steps.backend;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
+
 import com.tools.constants.TimeConstants;
 import com.tools.data.backend.OrderInfoModel;
 import com.tools.data.backend.OrderItemModel;
@@ -68,15 +71,30 @@ public class OrdersSteps extends AbstractSteps {
 		ordersActionsPage().checkCreateShippment();
 		ordersActionsPage().submitInvoice();
 		ordersActionsPage().verifyInvoiceShippingSubmitedMessage();
+	}
+	
+	
+	
+	@Step
+	public void createOrderShipment() {
+		ordersActionsPage().clickShipButton();
+		ordersActionsPage().checkShipmentMail();
+		ordersActionsPage().submitShipment();
+		ordersActionsPage().verifyShippingSubmitedMessage();
 
 	}
+	@Step
+	public void validateCompleteStatus(){
+		ordersActionsPage().verifyCompleteStatus();
+	}
+	
 	
 	@Step
 	public void createOrderInvoice(){
 		ordersActionsPage().clickInvoiceButton();
 		//ordersActionsPage().checkCreateShippment();
 		ordersActionsPage().submitInvoice();
-		ordersActionsPage().verifyInvoiceShippingSubmitedMessage();
+		ordersActionsPage().verifyInvoiceSubmitedMessage();
 	}
 
 	@Step
@@ -103,17 +121,47 @@ public class OrdersSteps extends AbstractSteps {
 		orderNotificationPage().verifyCapture(shopperReference);
 	}
 
+	@Step
 	public void openDocumentsSection() {
 		// TODO Auto-generated method stub
 		ordersActionsPage().openDocumentsSection();
 	}
 
+	@Step
 	public void valdateOriginalInvoiceIsReceived(String orderId, boolean isReceived) {
 		ordersActionsPage().valdateOriginalInvoiceIsReceived(orderId,isReceived);
 	}
-
+	
+	@Step
 	public void valdateOriginalReturnIsReceived(String orderId, boolean isReceived) {
+		// TODO Auto-generated method stub
 		ordersActionsPage().valdateOriginalReturnIsReceived(orderId,isReceived);
+	}
+	
+	@Step
+	public void validateSecoundReturnIsReceived(String orderId, boolean isReceived,int noOfDoc) {
+		// TODO Auto-generated method stub
+		ordersActionsPage().valdateExcangeReturnIsReceived(orderId,isReceived,noOfDoc);
+	}
+
+	public void validateEchangeDocIsReceived(String orderId, boolean isReceived) {
+		ordersActionsPage().validateEchangeDocIsReceived(orderId,isReceived);		
+	}
+
+	public void sendIndividualDocumentToSpecificReceiver(String documentName,String receiver) {
+	
+		ordersActionsPage().sendIndividualDocumentToSpecificReceiver(documentName);
+		ordersActionsPage().selectReceiverMethod("additional_email_receiver");
+		ordersActionsPage().insertReceiver(receiver);
+		ordersActionsPage().clickSubmitEmail();
+	}
+	public void sendIndividualDocumentToReceiver(String documentName,String receiver) {
 		
+		ordersActionsPage().sendIndividualDocumentToSpecificReceiver(documentName);
+		System.out.println("done");
+		ordersActionsPage().selectReceiverMethod(receiver);
+		System.out.println("done1");
+		ordersActionsPage().clickSubmitEmail();
+		System.out.println("done2");
 	}
 }

@@ -32,7 +32,7 @@ import com.tests.us6.us6006.US6006ScBuyProductwithSpecialPriceTest;
 	US8003Suite.class,	
 	US8004Suite.class,
 	US8005Suite.class,
-	US8006Suite.class,
+//	US8006Suite.class,
 	US8007Suite.class,
 	US8008Suite.class,
 })

@@ -136,11 +136,11 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 //				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 //		MagentoProductCalls.createApiProduct(genProduct3);
 
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsPlaceCustomerCartTest" + SoapKeys.GRAB);
 		
-		 genProduct1 = createdProductsList.get(3);
-		 genProduct2 = createdProductsList.get(12);
-		 genProduct3 = createdProductsList.get(11);
+		 genProduct1 = createdProductsList.get(2);
+		 genProduct2 = createdProductsList.get(8);
+		 genProduct3 = createdProductsList.get(7);
 		 
 		
 

@@ -59,13 +59,14 @@ public class US11003VerifyProductsInPlaceACustomerOrderModal extends BaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		genProduct1 = MagentoProductCalls.createProductModel();
+	/*	genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
 		genProduct1.setIp("75");
-		MagentoProductCalls.createApiProduct(genProduct1);
+		MagentoProductCalls.createApiProduct(genProduct1);*/
 		
-//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-//		genProduct1 = createdProductsList.get(1);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsPlaceCustomerCartTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(1);
+		
 
 		Properties prop = new Properties();
 		InputStream input = null;

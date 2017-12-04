@@ -96,7 +96,7 @@ public class US26001VerifyProdNotAvailableForTheMomentInAvReportTest extends Bas
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
-		headerSteps.redirectToStylistReports();
+		//headerSteps.redirectToStylistReports();
 		reportsSteps.downloadProductsOrderedBySku();
 		reportsSteps.verifyThatProductHasNotAvailableForTheMomentStatus(genProduct1.getSku());
 	}

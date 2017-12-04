@@ -45,8 +45,10 @@ public class CartBuy3Get1Calculation {
 
 		BigDecimal discount = BigDecimal.ZERO;
 		BigDecimal finalPrice = BigDecimal.ZERO;
+		BigDecimal finalPrice1 = BigDecimal.ZERO;
 
 		for (int i = 0; i < productsList.size(); i++) {
+			System.out.println("Analizez produsul: "+productsList.get(i).getProdCode() );
 			BasicProductModel nextproduct;
 			BasicProductModel product = productsList.get(i);
 			if (i != productsList.size() - 1) {
@@ -68,6 +70,7 @@ public class CartBuy3Get1Calculation {
 			newProduct.setQuantity(product.getQuantity());
 			newProduct.setProductsPrice(product.getProductsPrice());
 			newProduct.setFinalPrice(product.getFinalPrice());
+		//	newProduct.setFinalPrice(product.getProductsPrice());
 			newProduct.setPriceIP(product.getPriceIP());
 
 			discount = BigDecimal.valueOf(Double.parseDouble(product.getUnitPrice())).divide(BigDecimal.valueOf(2), 5, BigDecimal.ROUND_HALF_UP);
@@ -90,13 +93,25 @@ public class CartBuy3Get1Calculation {
 					remainder = BigDecimal.ZERO;
 				}
 			}
-			finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
+//			finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
+//			finalPrice = finalPrice.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+//			finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).subtract(finalPrice);
+//			finalPrice = finalPrice.subtract(discount);
+			
+			
+			finalPrice1=BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).subtract(discount);
+			System.out.println("step1: "+finalPrice1 );
+			finalPrice=finalPrice1.multiply(BigDecimal.valueOf(Double.parseDouble(product.getDiscountClass())));
+			System.out.println("step2: "+finalPrice1 );
 			finalPrice = finalPrice.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
-			finalPrice = BigDecimal.valueOf(Double.parseDouble(product.getProductsPrice())).subtract(finalPrice);
-			finalPrice = finalPrice.subtract(discount);
-			System.out.println("this is the final price for this product" + finalPrice);
-			newProduct.setFinalPrice(String.valueOf(finalPrice.setScale(2, BigDecimal.ROUND_HALF_UP)));
-
+			System.out.println("step3: "+finalPrice );
+			finalPrice1= finalPrice1.subtract(finalPrice);
+			System.out.println("step4: "+finalPrice1 );
+			
+			System.out.println("this is the final price for this product" + finalPrice1);
+			newProduct.setFinalPrice(String.valueOf(finalPrice1.setScale(2, BigDecimal.ROUND_HALF_UP)));
+			newProduct.setIsBuy3Get1(discount);
+			System.out.println("Discount "+discount);
 			cartProducts.add(newProduct);
 		}
 		return cartProducts;
@@ -212,4 +227,20 @@ public class CartBuy3Get1Calculation {
 		return result;
 	}
 
+	
+	public static void main(String[] args) {
+		BigDecimal finalPrice=BigDecimal.valueOf(0);
+		BigDecimal finalPrice1=BigDecimal.valueOf(0);
+		BigDecimal discount = BigDecimal.valueOf(24.95);
+		finalPrice1=BigDecimal.valueOf(Double.parseDouble("99.80")).subtract(discount);
+		System.out.println("step1: "+finalPrice1 );
+		finalPrice=finalPrice1.multiply(BigDecimal.valueOf(Double.parseDouble("25")));
+		System.out.println("step2: "+finalPrice1 );
+		finalPrice = finalPrice.divide(BigDecimal.valueOf(100), 5, BigDecimal.ROUND_HALF_UP);
+		System.out.println("step3: "+finalPrice );
+		finalPrice1= finalPrice1.subtract(finalPrice);
+		System.out.println("step4: "+finalPrice1 );
+		System.out.println(finalPrice1);
+		
+	}
 }

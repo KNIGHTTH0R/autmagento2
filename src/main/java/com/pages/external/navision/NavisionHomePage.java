@@ -11,9 +11,15 @@ public class NavisionHomePage extends AbstractPage {
 	@FindBy(css = "a[title='Search for Page or Report...']")
 	private WebElement searchButton;
 	
+	
+	
+
+	
 	public void clickSearchButton() {
 		element(searchButton).waitUntilVisible();
 		searchButton.click();
 	}
 
+	
+	
 }

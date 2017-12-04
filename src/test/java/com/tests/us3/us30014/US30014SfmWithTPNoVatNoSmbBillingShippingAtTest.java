@@ -159,6 +159,7 @@ public class US30014SfmWithTPNoVatNoSmbBillingShippingAtTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
+		headerSteps.waitABit(14000);
 		BasicProductModel productData;
 
 		String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct2.getStockData().getEarliestAvailability(),

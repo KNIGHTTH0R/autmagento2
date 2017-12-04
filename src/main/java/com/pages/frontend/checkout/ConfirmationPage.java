@@ -132,7 +132,7 @@ public class ConfirmationPage extends AbstractPage {
 			result.setCountryName(splittedText[4].trim());
 
 		} else {
-			System.out.println("FAILURE: error on shipping parsing - Confirmation Page");
+			//System.out.println("FAILURE: error on shipping parsing - Confirmation Page");
 		}
 
 		return result;

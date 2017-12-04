@@ -30,9 +30,15 @@ public class EmailClientSteps extends AbstractSteps {
 	}
 	
 	@Step
-	public void checkReceivedOriginalDocuments(String email, String title,String orderIncrementId){
+	public void openEmail(String email, String title){
 		mailPage.openEmail(email, title);
-		mailPage.checkReceivedOriginalDocuments(orderIncrementId);
+		
+	}
+	
+	@Step
+	public void checkReceivedOriginalDocuments(String originalDoc){
+		mailPage.checkReceivedOriginalDocuments(originalDoc);
+
 	}
 
 	@Step

@@ -12,17 +12,14 @@ import com.steps.backend.OrdersSteps;
 import com.steps.external.navision.NavisionHomeSteps;
 import com.steps.external.navision.NavisionImportSteps;
 import com.tests.BaseTest;
-import com.tests.us8.us8001.US8001CustomerBuyWithForthyDiscountsAndJbTest;
 import com.tools.CustomVerification;
 import com.tools.constants.SoapKeys;
 import com.tools.data.backend.OrderModel;
 import com.tools.data.navision.SyncInfoModel;
 import com.tools.persistance.MongoReader;
-import com.tools.requirements.Application;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
 import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US41.1 Invoice and Return", type = "Scenarios")
@@ -55,7 +52,6 @@ public class US41001RegularPostOrderInNavisionTest extends BaseTest {
 		
 		navisionSteps.performLoginIntoNavisonWebClient();
 		navisionSteps.postOrder(orderModel.getOrderId());
-	//	navisionSteps.postOrder("10033381200");
 		customVerifications.printErrors();
 	}
 }

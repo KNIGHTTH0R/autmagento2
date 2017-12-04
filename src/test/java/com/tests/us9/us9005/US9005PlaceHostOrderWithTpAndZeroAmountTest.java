@@ -108,11 +108,11 @@ public class US9005PlaceHostOrderWithTpAndZeroAmountTest extends BaseTest {
 //				MagentoProductCalls.createNotAvailableYetStockData(DateUtils.getNextMonthMiddle("yyyy-MM-dd")));
 //		MagentoProductCalls.createApiProduct(genProduct3);
 		
-		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+		 createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
 			
-		 genProduct1 = createdProductsList.get(1);
-		 genProduct2 = createdProductsList.get(8);
-		 genProduct3 = createdProductsList.get(11);
+		 genProduct1 = createdProductsList.get(0);
+		 genProduct2 = createdProductsList.get(7);
+		 genProduct3 = createdProductsList.get(10);
 
 		Properties prop = new Properties();
 		InputStream input = null;

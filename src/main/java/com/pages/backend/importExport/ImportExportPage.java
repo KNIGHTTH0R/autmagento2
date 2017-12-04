@@ -2,6 +2,7 @@ package com.pages.backend.importExport;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -118,12 +119,21 @@ public class ImportExportPage extends AbstractPage {
 	public void selectUploadedFile(String path) {
 		List<WebElement> lista=getDriver().findElements(By.cssSelector("#files option"));
 		Select oSelect = new Select(getDriver().findElement(By.id("files")));
-		for (WebElement option : lista) {
+		/*for (WebElement option : lista) {
 			if (option.getText().contains(path)) {
 				oSelect.selectByValue(option.getText());
 				break;
 			}
+		}*/
+		
+		if (lista.get(lista.size()-1).getText().contains(path)) {
+			oSelect.selectByValue(lista.get(lista.size()-1).getText());
+			
+		}else{
+			Assert.assertTrue("The document was not found",false);
 		}
+		
+	
 		
 	}
 

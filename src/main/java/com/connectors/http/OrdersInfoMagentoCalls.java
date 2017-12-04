@@ -1,6 +1,7 @@
 package com.connectors.http;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -236,7 +237,7 @@ public class OrdersInfoMagentoCalls {
 		SOAPElement complexFilter = filters.addChildElement(SoapKeys.COMPLEX_FILTER);
 		addOrderFilter(complexFilter, SoapConstants.STYLIST_ID_FILTER, SoapConstants.EQUAL, stylistId);
 		addOrderFilter(complexFilter, SoapConstants.SOAP_CREATED_AT_FILTER, SoapConstants.GREATER_THAN,
-				"2017-03-01 00:00:00");
+				"2017-09-01 00:00:00");
 
 		SOAPElement clinetKey = getStylistRequestParam.addChildElement(SoapKeys.CLIENT_KEY);
 		clinetKey.addTextNode(SoapKeys.CLIENT_KEY_VALUE);
@@ -263,11 +264,12 @@ public class OrdersInfoMagentoCalls {
 		SOAPElement filters = getStylistRequestParam.addChildElement(SoapKeys.FILTERS);
 		SOAPElement complexFilter = filters.addChildElement(SoapKeys.COMPLEX_FILTER);
 
-//		addOrderFilter(complexFilter, "increment_id", "from", orderLimit1);
-//		addOrderFilter(complexFilter, "increment_id", "to", orderLimit2);
+		// addOrderFilter(complexFilter, "increment_id", "from", orderLimit1);
+		// addOrderFilter(complexFilter, "increment_id", "to", orderLimit2);
 		addOrderFilter(complexFilter, "order_id", "from", orderLimit1);
 		addOrderFilter(complexFilter, "order_id", "to", orderLimit2);
-		//addOrderFilter(complexFilter, "status", "in", "payment_complete,complete,canceled_system");
+		// addOrderFilter(complexFilter, "status", "in",
+		// "payment_complete,complete,canceled_system");
 		addOrderFilter(complexFilter, "status", "in", "payment_complete,complete");
 		SOAPElement clinetKey = getStylistRequestParam.addChildElement(SoapKeys.CLIENT_KEY);
 		clinetKey.addTextNode(SoapKeys.CLIENT_KEY_VALUE);
@@ -334,6 +336,10 @@ public class OrdersInfoMagentoCalls {
 						model.setIncrementId(childNodes.item(j).getTextContent());
 					}
 
+					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_customer_name")) {
+						model.setCustomerName(childNodes.item(j).getTextContent());
+					}
+
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("grand_total")) {
 
 						model.setGrandTotal(childNodes.item(j).getTextContent());
@@ -356,11 +362,11 @@ public class OrdersInfoMagentoCalls {
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_id")) {
 						model.setOrderId(childNodes.item(j).getTextContent());
 					}
-					
+
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("updated_nav")) {
-					//	model.setUpdatedNav(childNodes.item(j).getTextContent());
-						model.setUpdatedNav(DateUtils.parseDate(childNodes.item(j).getTextContent(), "yyyy-MM-dd HH:mm:ss",
-								"yyyy-MM-dd", new Locale.Builder().setLanguage("de").build()));
+						// model.setUpdatedNav(childNodes.item(j).getTextContent());
+						model.setUpdatedNav(DateUtils.parseDate(childNodes.item(j).getTextContent(),
+								"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", new Locale.Builder().setLanguage("de").build()));
 					}
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("order_type")) {
@@ -438,18 +444,18 @@ public class OrdersInfoMagentoCalls {
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("firstname")) {
 						customerName = customerName.concat(childNodes.item(j).getTextContent() + " ");
-						System.out.println("firstname "+customerName);
+						System.out.println("firstname " + customerName);
 					}
 
 					if (childNodes.item(j).getNodeName().equalsIgnoreCase("lastname")) {
 						customerName = customerName.concat(childNodes.item(j).getTextContent());
-						System.out.println("lastname  "+customerName);
+						System.out.println("lastname  " + customerName);
 					}
-					///for ip overview 
-//					if(childNodes.item(j).getNodeName().equalsIgnoreCase("order_customer_name")){
-//						customerName=customerName.concat(childNodes.item(j).getTextContent());
-//						model.setCustomerName(customerName);
-//					}
+					/// for ip overview
+					// if(childNodes.item(j).getNodeName().equalsIgnoreCase("order_customer_name")){
+					// customerName=customerName.concat(childNodes.item(j).getTextContent());
+					// model.setCustomerName(customerName);
+					// }
 					// if
 					// (childNodes.item(j).getNodeName().equalsIgnoreCase("tax_amount"))
 					// {
@@ -478,8 +484,6 @@ public class OrdersInfoMagentoCalls {
 
 					}
 
-					
-
 					// model.setCustomerName(customerName);
 				}
 				orderModelList.add(model);
@@ -488,99 +492,22 @@ public class OrdersInfoMagentoCalls {
 		return orderModelList;
 	}
 
-	public static void main(String args[]) throws SOAPException, IOException {
-		// getOrderWithItems("212953","212953");
+	public static void main(String args[]) throws SOAPException, IOException, ParseException {
 
-		// System.out.println(OrdersInfoMagentoCalls.getPartyOrdersList("14830").get(0).getIncrementId());
 		// List<DBOrderModel>
-		// list=OrdersInfoMagentoCalls.getOrderWithItems("212468","212468");
-		//
-		//
-		// for (DBOrderModel dbOrderModel : list) {
-		// System.out.println(dbOrderModel.getIncrementId());
-		//
-		// List<SalesOrderInfoModel> listmod= dbOrderModel.getItemInfo();
-		// for (SalesOrderInfoModel salesOrderInfoModel : listmod) {
-		// System.out.println(salesOrderInfoModel.getSku());
-		// }
-		//
-		//
-		// }
-		
-	//	System.out.println(OrdersInfoMagentoCalls.getOrdersList("2513"));
+		// dbmodel=OrdersInfoMagentoCalls.getOrdersList("6013");
+		/*String x = "2017-11-06 17:33:03";
 
-		List<DBOrderModel> dbmodel=OrdersInfoMagentoCalls.getOrdersList("6013");
-		for (DBOrderModel dbOrderModel : dbmodel) {
-			System.out.println("customer name "+dbOrderModel.getCustomerName());
-		}
-//		List<DBOrderModel> dbmodel = OrdersInfoMagentoCalls.getOrdersInRangeList("211021", "211021");
-//		// ("213473", "213474");
-//
-//		for (DBOrderModel dbOrderModel : dbmodel) {
-//			System.out.println("updatednav "+dbOrderModel.getUpdatedNav());
-//			System.out.println("open order" + dbOrderModel.getIncrementId());
-//			System.out.println("f name  " + dbOrderModel.getCustomerFirstName());
-//			System.out.println("kobo " + dbOrderModel.getKoboSingleArticle());
-//			System.out.println("customer name " + dbOrderModel.getCustomerName());
-//			System.out.println("getIncrementId  : " + dbOrderModel.getIncrementId());
-//			System.out.println("getGrandTotal  : " + dbOrderModel.getGrandTotal());
-//			System.out.println("getCreatedAt : " + dbOrderModel.getCreatedAt());
-//			System.out.println("getBillToStreetAddress : " + dbOrderModel.getBillToStreetAddress());
-//			System.out.println("getStatus : " + dbOrderModel.getStatus());
-//			System.out.println("getPaidAt : " + dbOrderModel.getPaidAt());
-//
-//			System.out.println("getStylistId  : " + dbOrderModel.getStylistId());
-//			System.out.println("getTotalIp  : " + dbOrderModel.getTotalIp());
-//			System.out.println("getCreatedAt  : " + dbOrderModel.getCreatedAt());
-//			System.out.println("getOrderId : " + dbOrderModel.getOrderId());
-//			System.out.println("getOrderType : " + dbOrderModel.getOrderType());
-//			System.out.println("aaaaaaaaaaagetCartType : " + dbOrderModel.getCartType());
-//
-//			System.out.println("getTermPurchaseType : " + dbOrderModel.getTermPurchaseType());
-//			System.out.println("getShippingAmount : " + dbOrderModel.getShippingAmount());
-//			System.out.println("getCustomerId : " + dbOrderModel.getCustomerId());
-//			System.out.println("getOrderId : " + dbOrderModel.getOrderId());
-//			System.out.println("getStylistCustomerId: " + dbOrderModel.getStylistCustomerId());
-//			System.out.println("getPaymentMethodTypet: " + dbOrderModel.getPaymentMethodTypet());
-//
-//			System.out.println("getShippingType : " + dbOrderModel.getShippingType());
-//			System.out.println("getStylePartyId : " + dbOrderModel.getStylePartyId());
-//			System.out.println("getIsPreshipped: " + dbOrderModel.getIsPreshipped());
-//			System.out.println("getIsPom: " + dbOrderModel.getIsPom());
-//			System.out.println("getWebsiteCode : " + dbOrderModel.getWebsiteCode());
-//			System.out.println("getStoreLanguage : " + dbOrderModel.getStoreLanguage());
-//
-//			System.out.println("getCustomerFirstName  : " + dbOrderModel.getCustomerFirstName());
-//			System.out.println("getCustomerLastName  : " + dbOrderModel.getCustomerLastName());
-//			System.out.println("getTaxAmount: " + dbOrderModel.getTaxAmount());
-//			System.out.println("getBaseSubtotal : " + dbOrderModel.getBaseSubtotal());
-//
-//			System.out.println("bill post  : " + dbOrderModel.getBillToPostcode());
-//			System.out.println("bill fname  : " + dbOrderModel.getBillToFirstName());
-//			System.out.println("billl lname : " + dbOrderModel.getBillToLastName());
-//			System.out.println("bill street : " + dbOrderModel.getBillToStreetAddress());
-//			System.out.println("ship city : " + dbOrderModel.getBillToCity());
-//			System.out.println("ship country id : " + dbOrderModel.getBillCountryId());
-//
-//			// shipp
-//
-//			System.out.println("shipp post : " + dbOrderModel.getShipToPostcode());
-//			System.out.println("fname  : " + dbOrderModel.getShipToFirstName());
-//			System.out.println("ship lname : " + dbOrderModel.getShipToLastName());
-//			System.out.println("ship street : " + dbOrderModel.getShipToStreetAddress());
-//			System.out.println("ship city : " + dbOrderModel.getShipToCity());
-//			System.out.println("ship country id : " + dbOrderModel.getShipCountryId());
-//			System.out.println("ship house no: " + dbOrderModel.getShipToHousNumber());
-//			System.out.println("order customer email" + dbOrderModel.getOrderCustomerEmail());
-//			System.out.println("vat number" + dbOrderModel.getVatNumber());
-//			System.out.println("small b" + dbOrderModel.getSmallBusinessMan());
-//			System.out.println("banck accout" + dbOrderModel.getBanckAccountNumber());
-//			System.out.println("langCode" + dbOrderModel.getLanguageCode());
-//			// List<SalesOrderInfoModel> list = dbOrderModel.getItemInfo();
-//			// for (SalesOrderInfoModel salesOrderInfoModel : list) {
-//			// System.out.println("sku: " + salesOrderInfoModel.getSku());
-//			// }
-//		}
+		String format = DateUtils.parseDate("2017-11-06 17:33:03", "yyyy-mm-dd", "dd.mm.yyyy");
+
+		System.out.println(format);*/
+		
+		String x="Payment In Progress".toLowerCase().replace(" ", "_");
+		System.out.println(x);
+		/*
+		 * for (DBOrderModel dbOrderModel : dbmodel) { System.out.println(
+		 * "customer name "+dbOrderModel.getCustomerName()); }
+		 */
 
 	}
 

@@ -92,9 +92,9 @@ public class US30010SfmFreeShippingTest extends BaseTest {
 		CartCalculator.wipe();
 		DataGrabber.wipe();
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(29);
-		genProduct2 = createdProductsList.get(30);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsSFMTest" + SoapKeys.GRAB);
+		genProduct1 = createdProductsList.get(11);
+		genProduct2 = createdProductsList.get(12);
 
 //		genProduct1 = MagentoProductCalls.createProductModel();
 //		genProduct1.setPrice("49.00");

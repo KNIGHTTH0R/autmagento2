@@ -8,16 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Story;
-import net.thucydides.core.annotations.WithTag;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.connectors.http.MagentoProductCalls;
 import com.connectors.mongo.MongoConnector;
 import com.steps.frontend.CustomerRegistrationSteps;
 import com.steps.frontend.FooterSteps;
@@ -49,6 +45,11 @@ import com.tools.requirements.Application;
 import com.tools.utils.FormatterUtils;
 import com.workflows.frontend.partyHost.AddHostProductsWorkflow;
 import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
+
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Story;
+import net.thucydides.core.annotations.WithTag;
 
 @WithTag(name = "US9.2b Place Host Order (customer host) and ship to stylecoach", type = "Scenarios")
 @Story(Application.HostCart.US9_2.class)
@@ -105,23 +106,23 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("19.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//
-//		genProduct2 = MagentoProductCalls.createProductModel();
-//		genProduct2.setPrice("10.00");
-//		MagentoProductCalls.createApiProduct(genProduct2);
-//
-//		genProduct3 = MagentoProductCalls.createProductModel();
-//		genProduct3.setPrice("24.90");
-//		MagentoProductCalls.createApiProduct(genProduct3);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("19.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
+
+		genProduct2 = MagentoProductCalls.createProductModel();
+		genProduct2.setPrice("10.00");
+		MagentoProductCalls.createApiProduct(genProduct2);
+
+		genProduct3 = MagentoProductCalls.createProductModel();
+		genProduct3.setPrice("24.90");
+		MagentoProductCalls.createApiProduct(genProduct3);
 		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(19);
-		genProduct2 = createdProductsList.get(6);
-		genProduct3 = createdProductsList.get(1);
+		genProduct1 = createdProductsList.get(6);
+		genProduct2 = createdProductsList.get(5);
+		genProduct3 = createdProductsList.get(0);
 
 		Properties prop = new Properties();
 		InputStream input = null;

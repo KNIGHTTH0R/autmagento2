@@ -1,17 +1,16 @@
 package com.pages.frontend.checkout.shipping;
 
-import net.serenitybdd.core.annotations.findby.FindBy;
-
-import java.util.concurrent.TimeUnit;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.tools.constants.ContextConstants;
 import com.tools.constants.TimeConstants;
 import com.tools.requirements.AbstractPage;
+
+import net.serenitybdd.core.annotations.findby.FindBy;
 
 public class BillingFormPage extends AbstractPage {
 
@@ -77,6 +76,15 @@ public class BillingFormPage extends AbstractPage {
 //				ContextConstants.LOADING_MESSAGE));
 	}
 	
+	
+	public void selectAdress(String address){
+		waitForLoadingImageToDissapear();
+		element(addressDropDown).waitUntilVisible();
+		Select oSelect = new Select(addressDropDown);
+		oSelect.deselectByVisibleText(address);
+		waitForLoadingImageToDissapear();
+
+	}
 
 
 	public void inputFirstName(String firstName) {

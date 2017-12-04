@@ -127,11 +127,11 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 //		genProduct3.setPrice("29.90");
 //		MagentoProductCalls.createApiProduct(genProduct3);
 		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTest" + SoapKeys.GRAB);
+        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
 		
 		genProduct1 = createdProductsList.get(3);
-		genProduct2 = createdProductsList.get(6);
-		genProduct3 = createdProductsList.get(5);
+		genProduct2 = createdProductsList.get(5);
+		genProduct3 = createdProductsList.get(4);
 		
 		Properties prop = new Properties();
 		InputStream input = null;
