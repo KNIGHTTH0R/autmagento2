@@ -85,14 +85,14 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 			}
 		}
 
-		partyBonusCalculationModelList = MongoReader.grabPartyBonusCalculationModel("US10007CreatePartyWithStylistHostTest");
+		partyBonusCalculationModelList = MongoReader.grabPartyBonusCalculationModel("US11007PartyHostBuysForCustomerTpTest");
 
 		urlModel = MongoReader.grabUrlModels("US10007CreatePartyWithStylistHostTest" + SoapKeys.GRAB).get(0);
 	
 		PippaDBConnection.updateDateOnParty(urlModel.getUrl());
 		
 		System.out.println("url: "+urlModel.getUrl());
-		expectedClosedPartyPerformanceModel.setJewelryBonus("0");
+		expectedClosedPartyPerformanceModel.setJewelryBonus("35.00");
 		expectedClosedPartyPerformanceModel.setNoOfOrders(String.valueOf(partyBonusCalculationModelList.size()));
 		expectedClosedPartyPerformanceModel.setRetail(String.valueOf(PartyBonusCalculation.calculatePartyTotal(partyBonusCalculationModelList)));
 		expectedClosedPartyPerformanceModel.setFourthyDiscounts("1");
@@ -114,12 +114,12 @@ public class US10007ClosePartyAnfVerifyCommissionBonusesTest extends BaseTest {
 		partyDetailsSteps.closeTheParty();
 		partyDetailsSteps.returnToParty();
 		//emilian comment should be updated 
-	//	partyDetailsSteps.verifyClosedPartyAvailableActions();
+		partyDetailsSteps.verifyClosedPartyAvailableActions();
 		//emilian comment should be updated 
-	//	ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
+		ClosedPartyPerformanceModel grabbedClosedPartyPerformanceModel = partyDetailsSteps.grabClosedPartyPerformance();
 
 		//emilian comment should be updated 
-		//commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
+		commissionPartyValidationWorkflows.validateClosedPartyPerformance(grabbedClosedPartyPerformanceModel, expectedClosedPartyPerformanceModel);
 
 		customVerifications.printErrors();
 

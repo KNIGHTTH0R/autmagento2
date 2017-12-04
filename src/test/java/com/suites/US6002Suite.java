@@ -11,7 +11,7 @@ import com.tests.us6.us6002.US6002ScRegistrationExistingCustomerTest;
 
 
 @SuiteClasses({
-	US6002CreateCustomerTest.class,
+//	US6002CreateCustomerTest.class,
 	US6002ScRegistrationExistingCustomerTest.class,
 	US6002CheckStylistActivationTest.class,
 	US6002CheckStylistPreferedWebsiteAndLanguage.class,

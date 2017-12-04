@@ -106,7 +106,7 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
+		/*genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("19.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
@@ -116,13 +116,13 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("24.90");
-		MagentoProductCalls.createApiProduct(genProduct3);
+		MagentoProductCalls.createApiProduct(genProduct3);*/
 		
         createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
 		
-		genProduct1 = createdProductsList.get(6);
+		genProduct1 = createdProductsList.get(12);
 		genProduct2 = createdProductsList.get(5);
-		genProduct3 = createdProductsList.get(0);
+		genProduct3 = createdProductsList.get(13);
 
 		Properties prop = new Properties();
 		InputStream input = null;

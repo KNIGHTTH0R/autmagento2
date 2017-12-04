@@ -11,7 +11,7 @@ import com.tests.us6.us6002b.US6002bScRegExistingCustForbiddenCountryTest;
 
 
 @SuiteClasses({
-	US6002bCreateCustomerTest.class,
+//	US6002bCreateCustomerTest.class,
 	US6002bScRegExistingCustForbiddenCountryTest.class,
 	US6002bCheckStylistActivationTest.class,
 	US6002bCheckStylistPreferedWebsiteAndLanguage.class,

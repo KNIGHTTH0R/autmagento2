@@ -99,11 +99,11 @@ public class US8006CustomerBuyWithVoucherPartiallyOnShippingTest extends BaseTes
 		RegularUserCartCalculator.wipe();
 		RegularUserDataGrabber.wipe();
 		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestRegularCart" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(0);
-		genProduct2 = createdProductsList.get(1);
-		genProduct3 = createdProductsList.get(4);
-/*
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestRegularCart" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(0);
+//		genProduct2 = createdProductsList.get(1);
+//		genProduct3 = createdProductsList.get(4);
+
 		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
@@ -115,7 +115,7 @@ public class US8006CustomerBuyWithVoucherPartiallyOnShippingTest extends BaseTes
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("5.00");
 		MagentoProductCalls.createApiProduct(genProduct3);
-*/
+
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -162,7 +162,7 @@ public class US8006CustomerBuyWithVoucherPartiallyOnShippingTest extends BaseTes
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
 		RegularBasicProductModel productData;
-		headerSteps.waitABit(7000);
+		headerSteps.waitABit(15000);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct1, "1", "0");
 		RegularUserCartCalculator.allProductsList.add(productData);
 		productData = addRegularProductsWorkflow.setBasicProductToCart(genProduct2, "1", "0");

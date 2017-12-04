@@ -39,7 +39,8 @@ public class CreateProductsTestHostCart extends BaseTest {
 	private ProductDetailedModel genProduct10 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct11 = new ProductDetailedModel();
 	private ProductDetailedModel genProduct12 = new ProductDetailedModel();
-	
+	private ProductDetailedModel genProduct13 = new ProductDetailedModel();
+	private ProductDetailedModel genProduct14 = new ProductDetailedModel();
     String voucherValue;
 	
 	@Steps
@@ -135,9 +136,19 @@ public class CreateProductsTestHostCart extends BaseTest {
 		genProduct12.setPrice("89.00");
 		genProduct12.setSpecialPrice("55.00");
 		MagentoProductCalls.createApiProduct(genProduct12);
-		genProduct1.setPrice(genProduct12.getSpecialPrice());
+		genProduct12.setPrice(genProduct12.getSpecialPrice());
+		productsList.add(genProduct12);
 		
+		genProduct13 = MagentoProductCalls.createProductModel();
+		genProduct13.setPrice("19.00");
+		MagentoProductCalls.createApiProduct(genProduct13);
+		productsList.add(genProduct13);
 		
+		genProduct14 = MagentoProductCalls.createProductModel();
+		genProduct14.setPrice("24.90");
+		MagentoProductCalls.createApiProduct(genProduct14);
+		productsList.add(genProduct14);
+
 	}
 
 	@After

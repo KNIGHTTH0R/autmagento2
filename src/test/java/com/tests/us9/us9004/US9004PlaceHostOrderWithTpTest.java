@@ -112,7 +112,7 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 //
-	/*	genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1 = MagentoProductCalls.createProductModel();
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 
@@ -132,17 +132,17 @@ public class US9004PlaceHostOrderWithTpTest extends BaseTest {
 		genProduct4.setPrice("50.00");
 		genProduct4.setIp("0");
 		
-		MagentoProductCalls.createApiProduct(genProduct4);*/
+		MagentoProductCalls.createApiProduct(genProduct4);
 		
 	
 
 		
-        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
-		
-		genProduct1 = createdProductsList.get(0);
-		genProduct2 = createdProductsList.get(7);
-		genProduct3 = createdProductsList.get(10);
-		genProduct4 = createdProductsList.get(9);
+//        createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
+//		
+//		genProduct1 = createdProductsList.get(0);
+//		genProduct2 = createdProductsList.get(7);
+//		genProduct3 = createdProductsList.get(10);
+//		genProduct4 = createdProductsList.get(9);
 		Properties prop = new Properties();
 		InputStream input = null;
 
