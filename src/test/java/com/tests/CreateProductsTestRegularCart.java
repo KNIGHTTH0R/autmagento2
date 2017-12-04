@@ -59,10 +59,8 @@ public class CreateProductsTestRegularCart extends BaseTest {
 
 	@Test
 	public void createProductsTest() {
-
 		// 1
 		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setIp("25");
 		genProduct1.setPrice("89.00");
 		MagentoProductCalls.createApiProduct(genProduct1);
 		productsList.add(genProduct1);
@@ -77,7 +75,6 @@ public class CreateProductsTestRegularCart extends BaseTest {
 		// product for REGULAR CART - us8001
 		genProduct3 = MagentoProductCalls.createProductModel();
 		genProduct3.setPrice("10.00");
-		genProduct3.setIp("8");
 		MagentoProductCalls.createApiProduct(genProduct3);
 		productsList.add(genProduct3);
 
