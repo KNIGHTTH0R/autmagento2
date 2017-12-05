@@ -136,7 +136,6 @@ public class CreateProductsTestHostCart extends BaseTest {
 		genProduct12.setPrice("89.00");
 		genProduct12.setSpecialPrice("55.00");
 		MagentoProductCalls.createApiProduct(genProduct12);
-		genProduct12.setPrice(genProduct12.getSpecialPrice());
 		productsList.add(genProduct12);
 		
 		genProduct13 = MagentoProductCalls.createProductModel();

@@ -114,6 +114,7 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
 		genProduct1 = createdProductsList.get(11);
 		genProduct1.setPrice(genProduct1.getSpecialPrice());
+		
 
 		Properties prop = new Properties();
 		InputStream input = null;
