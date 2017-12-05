@@ -105,15 +105,15 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-		genProduct1 = MagentoProductCalls.createProductModel();
-		genProduct1.setPrice("89.00");
-		genProduct1.setSpecialPrice("55.00");
-		MagentoProductCalls.createApiProduct(genProduct1);
-		genProduct1.setPrice(genProduct1.getSpecialPrice());
+//		genProduct1 = MagentoProductCalls.createProductModel();
+//		genProduct1.setPrice("89.00");
+//		genProduct1.setSpecialPrice("55.00");
+//		MagentoProductCalls.createApiProduct(genProduct1);
+//		genProduct1.setPrice(genProduct1.getSpecialPrice());
 		
-		/*createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
+		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
 		genProduct1 = createdProductsList.get(11);
-		genProduct1.setPrice(genProduct1.getSpecialPrice());*/
+		genProduct1.setPrice(genProduct1.getSpecialPrice());
 
 		Properties prop = new Properties();
 		InputStream input = null;
