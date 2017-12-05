@@ -161,7 +161,7 @@ public class US9007PlaceHostOrderWithSpecialPriceProductHostTest extends BaseTes
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
-		headerSteps.waitABit(23000);
+		headerSteps.waitABit(30000);
 		HostBasicProductModel productData;
 
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct1, "3", "0");
