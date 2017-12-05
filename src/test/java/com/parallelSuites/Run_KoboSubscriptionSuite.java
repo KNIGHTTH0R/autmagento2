@@ -57,6 +57,7 @@ import com.tests.uss12.uss12001.US12001VoucherRunOutNotificationEmailTest;
 
 @SuiteClasses({
 	US12001StyleCoachRegistrationTest.class,
+	US12001RegularCustomerRegistrationTest.class,
 	US12001InitialKoboSubscriptionTest.class,
 	US12001CancelKoboInitialSubscriptionTest.class,
 	US12001KoboSubscriptionTest.class,
@@ -77,7 +78,7 @@ import com.tests.uss12.uss12001.US12001VoucherRunOutNotificationEmailTest;
 	US12001ChechUsesPerCouponAfterSubscriptionUpgardeCMTest.class,
 	US12001CancelCreditMemoForKoboUpgradeTest.class,
 	US12001ChechUsesPerCouponAfterSubscriptionUpgradeCancelCMTest.class,
-	US12001RegularCustomerRegistrationTest.class,
+	//moved up - US12001RegularCustomerRegistrationTest.class,
 	US12001ConfirmCustomerTest.class,
 	US12001CustomerBuyWithContactBoosterTest.class,
 	US12001VoucherRunOutNotificationEmailTest.class,
