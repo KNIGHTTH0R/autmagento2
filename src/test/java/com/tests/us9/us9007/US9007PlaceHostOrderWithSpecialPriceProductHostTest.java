@@ -55,7 +55,7 @@ import com.workflows.frontend.partyHost.HostCartValidationWorkflows;
 @WithTag(name = "US9.1 Place Host Order With 40% Discount and JB Test", type = "Scenarios")
 @Story(Application.HostCart.US9_1.class)
 @RunWith(SerenityRunner.class)
-public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
+public class US9007PlaceHostOrderWithSpecialPriceProductHostTest extends BaseTest {
 
 	@Steps
 	public HeaderSteps headerSteps;
@@ -105,15 +105,16 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		HostCartCalculator.wipe();
 		HostDataGrabber.wipe();
 
-//		genProduct1 = MagentoProductCalls.createProductModel();
-//		genProduct1.setPrice("89.00");
-//		genProduct1.setSpecialPrice("55.00");
-//		MagentoProductCalls.createApiProduct(genProduct1);
-//		genProduct1.setPrice(genProduct1.getSpecialPrice());
-		
-		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
-		genProduct1 = createdProductsList.get(11);
+		genProduct1 = MagentoProductCalls.createProductModel();
+		genProduct1.setPrice("89.00");
+		genProduct1.setSpecialPrice("55.00");
+		MagentoProductCalls.createApiProduct(genProduct1);
 		genProduct1.setPrice(genProduct1.getSpecialPrice());
+		
+//		createdProductsList = MongoReader.grabProductDetailedModel("CreateProductsTestHostCart" + SoapKeys.GRAB);
+//		genProduct1 = createdProductsList.get(11);
+//		genProduct1.setPrice("89.00");
+//		genProduct1.setPrice(genProduct1.getSpecialPrice());
 		
 
 		Properties prop = new Properties();
@@ -151,7 +152,7 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 	}
 
 	@Test
-	public void us9007PlaceHostOrderWithSpecialPriceProductTestEm() {
+	public void us9007PlaceHostOrderWithSpecialPriceProductHostTest() {
 		customerRegistrationSteps.performLogin(username, password);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
@@ -160,7 +161,7 @@ public class US9007PlaceHostOrderWithSpecialPriceProductTest extends BaseTest {
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.navigateToPartyPageAndStartOrder(partyUrlModel.getUrl());
 		generalCartSteps.clearCart();
-		headerSteps.waitABit(20000);
+		headerSteps.waitABit(23000);
 		HostBasicProductModel productData;
 
 		productData = addHostProductsWorkflow.setHostProductToCart(genProduct1, "3", "0");

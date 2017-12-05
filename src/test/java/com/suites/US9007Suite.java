@@ -5,11 +5,11 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.us9.us9007.US90007ClosePartyTest;
-import com.tests.us9.us9007.US9007PlaceHostOrderWithSpecialPriceProductTest;
+import com.tests.us9.us9007.US9007PlaceHostOrderWithSpecialPriceProductHostTest;
 
 @SuiteClasses({
 	US90007ClosePartyTest.class,
-	US9007PlaceHostOrderWithSpecialPriceProductTest.class,
+	US9007PlaceHostOrderWithSpecialPriceProductHostTest.class,
 
 	
 })
