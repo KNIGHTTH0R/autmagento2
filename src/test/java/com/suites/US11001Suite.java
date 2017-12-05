@@ -11,8 +11,8 @@ import com.tests.uss11.us11001.US11001ValidateOrderEmailTest;
 
 @SuiteClasses({
 	US11001PartyHostBuysForCustomerWithVoucherTest.class,
-	US11001ValidateOrderBackOfficeTest.class,
 	US11001CheckOrderOnStylecoachProfileTest.class,	
+	US11001ValidateOrderBackOfficeTest.class,
 //	US11001ValidateOrderEmailTest.class,
 
 })

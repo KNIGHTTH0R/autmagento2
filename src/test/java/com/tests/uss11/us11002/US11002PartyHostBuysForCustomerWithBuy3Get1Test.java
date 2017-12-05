@@ -156,7 +156,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 			}
 		}
 
-		urlModel = MongoReader.grabUrlModels("US10002bCreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
+		urlModel = MongoReader.grabUrlModels("US10001CreatePartyWithCustomerHostTest" + SoapKeys.GRAB).get(0);
 
 		System.out.println("dovada "+urlModel.getUrl() );
 		MongoConnector.cleanCollection(getClass().getSimpleName() + SoapKeys.GRAB);
