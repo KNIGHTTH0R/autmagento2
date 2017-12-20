@@ -212,7 +212,7 @@ public class US11002PartyHostBuysForCustomerWithBuy3Get1Test extends BaseTest {
 				voucherValue);
 
 		orderForCustomerCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.checkItemNotReceivedYet();
+		//shippingPartySectionSteps.checkItemNotReceivedYet();
 		shippingPartySectionSteps.enterPLZ(plz);
 		shippingPartySectionSteps.selectCountry(country);
 

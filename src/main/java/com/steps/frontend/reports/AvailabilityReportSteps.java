@@ -169,7 +169,7 @@ public class AvailabilityReportSteps extends AbstractSteps {
 	
 	public void validateProductName(String productName, String compare, String pageNumber, String rowNumber) {
 		if(!pageNumber.isEmpty()&&rowNumber.isEmpty()){
-			productName=productName+",P. "+pageNumber;
+			productName=productName+",S. "+pageNumber;
 		}
 		if(!rowNumber.isEmpty() && !pageNumber.isEmpty()){
 			productName=productName+","+pageNumber+", "+rowNumber;

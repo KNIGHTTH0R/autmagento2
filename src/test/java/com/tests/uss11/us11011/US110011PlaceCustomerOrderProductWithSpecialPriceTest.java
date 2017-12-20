@@ -221,7 +221,7 @@ public class US110011PlaceCustomerOrderProductWithSpecialPriceTest extends BaseT
 		HostCartCalculator.calculateOrderForCustomerCartAndShippingTotals(discountClass, shippingValue, voucherValue);
 
 		orderForCustomerCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.checkItemNotReceivedYet();
+	//	shippingPartySectionSteps.checkItemNotReceivedYet();
 		shippingPartySectionSteps.clickShipToHostessButton();
 	//	shippingPartySectionSteps.selectShipToHostessAddress(shippingAddress);
 

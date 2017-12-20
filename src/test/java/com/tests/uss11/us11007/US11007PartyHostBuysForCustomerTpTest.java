@@ -258,7 +258,7 @@ public class US11007PartyHostBuysForCustomerTpTest extends BaseTest {
 				.calculateTermPurchaseIpPoints(HostCartCalculator.allProductsListwithVoucher);
 
 		orderForCustomerCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.checkItemNotReceivedYet();
+	//	shippingPartySectionSteps.checkItemNotReceivedYet();
 
 		shippingPartySectionSteps.enterPLZ(plz);
 		shippingPartySectionSteps.selectCountry(country);

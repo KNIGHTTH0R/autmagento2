@@ -214,7 +214,7 @@ public class US11008PartyHostBuyWithTpAndZeroAmountTest extends BaseTest {
 		orderForCustomerCartSteps.typeCouponCode(voucherCode);
 
 		orderForCustomerCartSteps.clickGoToShipping();
-		shippingPartySectionSteps.checkItemNotReceivedYet();
+	//	shippingPartySectionSteps.checkItemNotReceivedYet();
 		shippingPartySectionSteps.enterPLZ(plz);
 		shippingPartySectionSteps.selectCountry(country);
 		shippingSteps.goToPaymentMethod();

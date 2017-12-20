@@ -63,27 +63,27 @@ public class US26002ValidateProductsOnStockAvailabilityListTest extends BaseTest
 	@Test
 	public void us26002ValidateProductsOnAvailabilityListTest() throws IOException, ParseException {
 
-		headerSteps.navigate("https://staging.pippajean.com/stock/");
+		headerSteps.navigate("https://staging.pippajean.com/stock/?store=de_lang_de");
 		headerSteps.waitABit(8000);
 
-		// tab 2
+		/*// tab 2
 		availabilitySteps.clickOnLessThenXProductsTab();
-		// availabilitySteps.verifyIfLessThenXPoductsTabIsSelected();
-		grabLessThanTwentyAvailableProducts = availabilitySteps.grabLessThanTwentyAvailableProducts();
+		availabilitySteps.verifyIfLessThenXPoductsTabIsSelected();
+		grabLessThanTwentyAvailableProducts = availabilitySteps.grabLessThanTwentyAvailableProducts();*/
 		// availabilitySteps.reloadReports();
 
-		headerSteps.refresh();
+	/*	headerSteps.refresh();
 		// tab 1
 		availabilitySteps.clickOnBackInStockTabProductsTab();
 		// availabilitySteps.verifyIfBackInStockPoductsTabIsSelected();
 		grabBackInStockProducts = availabilitySteps.grabBackInStockProducts();
 
-		
+		*/
 		// tab 3
 		availabilitySteps.clickOnTemporarlyNotAvailablePoductsTab();
-		// availabilitySteps.verifyIfTemporarlyNotAvailablePoductsTabIsSelected();
+		availabilitySteps.verifyIfTemporarlyNotAvailablePoductsTabIsSelected();
 		grabTemporlyNotAvailableProducts = availabilitySteps.grabTemporlyNotAvailableProducts();
-		
+	/*	
 		headerSteps.refresh();
 		// tab4
 		availabilitySteps.clickOnNotLongerAvailableProductsTab();
@@ -94,21 +94,21 @@ public class US26002ValidateProductsOnStockAvailabilityListTest extends BaseTest
 		headerSteps.refresh();
 		grabStockReportProducts=availabilitySteps.grabStockReportProducts();
 		// availabilitySteps.verifyIfStockPoductsTabIsSelected();
-
+*/
 		availabilitySteps.validateTemporarlyNotAvailablePoductsTab(
 				StockAvailabilityCalculations.temporarlyNotAvailableProducts, grabTemporlyNotAvailableProducts);
 
-		availabilitySteps.validateLessThanXProductsTab(StockAvailabilityCalculations.lessThanTwentyAvailableProducts,
-				grabLessThanTwentyAvailableProducts);
+		/*availabilitySteps.validateLessThanXProductsTab(StockAvailabilityCalculations.lessThanTwentyAvailableProducts,
+				grabLessThanTwentyAvailableProducts);*/
 
-		availabilitySteps.validateBackInStockProductsTab(StockAvailabilityCalculations.backInStockProducts,
+	/*	availabilitySteps.validateBackInStockProductsTab(StockAvailabilityCalculations.backInStockProducts,
 				grabBackInStockProducts);
 
 		availabilitySteps.validateNotLongerAvailableProducts(StockAvailabilityCalculations.notLogngerAvailableProduct,
 				grabNotLogngerAvailableProduct);
 
 		availabilitySteps.validateStockReportProducts(StockAvailabilityCalculations.stockReportProducts,
-				grabStockReportProducts);
+				grabStockReportProducts);*/
 		customVerification.printErrors();
 	}
 }
