@@ -200,7 +200,7 @@ public class US9002PlaceHostOrderWithForthyDiscountsJbAndBuy3Get1Test extends Ba
 
 		hostCartSteps.clickGoToShipping();
 		hostCartSteps.acceptInfoPopupForNotConsumedBonus();
-		contactHostShippingHostSteps.checkItemNotReceivedYet();
+	//	contactHostShippingHostSteps.checkItemNotReceivedYet();
 		contactHostShippingHostSteps.verifyThatRestrictedCountriesAreNotAvailable();
 		contactHostShippingHostSteps.selectCountry(country);
 		contactHostShippingHostSteps.enterPLZ(plz);

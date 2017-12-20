@@ -190,7 +190,7 @@ public class US9002bPlaceHostOrderAndShipToSylecoachTest extends BaseTest {
 		HostCartCalculator.calculateCartAndShippingTotals(discountClass, shippingValue);
 
 		hostCartSteps.clickGoToShipping();
-		contactHostShippingHostSteps.checkItemNotReceivedYet();
+	//	contactHostShippingHostSteps.checkItemNotReceivedYet();
 		contactHostShippingHostSteps.selectCountry(country);
 		contactHostShippingHostSteps.enterPLZ(plz);
 		//the following line is duplicate (is a workaround due to a bug)
