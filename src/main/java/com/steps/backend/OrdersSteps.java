@@ -134,13 +134,11 @@ public class OrdersSteps extends AbstractSteps {
 	
 	@Step
 	public void valdateOriginalReturnIsReceived(String orderId, boolean isReceived) {
-		// TODO Auto-generated method stub
 		ordersActionsPage().valdateOriginalReturnIsReceived(orderId,isReceived);
 	}
 	
 	@Step
 	public void validateSecoundReturnIsReceived(String orderId, boolean isReceived,int noOfDoc) {
-		// TODO Auto-generated method stub
 		ordersActionsPage().valdateExcangeReturnIsReceived(orderId,isReceived,noOfDoc);
 	}
 

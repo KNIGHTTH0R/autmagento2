@@ -49,8 +49,34 @@ public class ProductDetailedModel {
 	private String quantity;
 
 	
+	private String typeId;
+	private String productId;
+	private String isInStock;
+	private String isDiscountinued;
+	private String minQty;
+	private String earliestAvDate;
+	
+	private String catalogRowNumber;
+	private String catalogPageNumber;
 	
 	
+	
+	public String getCatalogRowNumber() {
+		return catalogRowNumber;
+	}
+
+	public void setCatalogRowNumber(String catalogRowNumber) {
+		this.catalogRowNumber = catalogRowNumber;
+	}
+
+	public String getCatalogPageNumber() {
+		return catalogPageNumber;
+	}
+
+	public void setCatalogPageNumber(String catalogPageNumber) {
+		this.catalogPageNumber = catalogPageNumber;
+	}
+
 	public String getQuantity() {
 		return quantity;
 	}
@@ -367,6 +393,57 @@ public class ProductDetailedModel {
 		this.jewelryBonusCart = jewelryBonusCart;
 	}
 
+	
+	
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	
+	public String getIsInStock() {
+		return isInStock;
+	}
+
+	public void setIsInStock(String isInStock) {
+		this.isInStock = isInStock;
+	}
+
+	public String getIsDiscountinued() {
+		return isDiscountinued;
+	}
+
+	public void setIsDiscountinued(String isDiscountinued) {
+		this.isDiscountinued = isDiscountinued;
+	}
+
+	public String getMinQty() {
+		return minQty;
+	}
+
+	public void setMinQty(String minQty) {
+		this.minQty = minQty;
+	}
+
+	public String getEarliestAvDate() {
+		return earliestAvDate;
+	}
+
+	public void setEarliestAvDate(String earliestAvDate) {
+		this.earliestAvDate = earliestAvDate;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductDetailedModel [type=" + type + ", set=" + set + ", sku=" + sku + ", categoriesArray="
@@ -382,8 +459,13 @@ public class ProductDetailedModel {
 				+ ", optionsContainer=" + optionsContainer + ", stockData=" + stockData + ", additionalAttributes="
 				+ additionalAttributes + ", store=" + store + ", ip=" + ip + ", newsFromDate=" + newsFromDate
 				+ ", newsToDate=" + newsToDate + ", jewerlyBonusValue=" + jewerlyBonusValue + ", jewelryBonusCart="
-				+ jewelryBonusCart + ", quantity=" + quantity + "]";
+				+ jewelryBonusCart + ", quantity=" + quantity + ", typeId=" + typeId + ", productId=" + productId
+				+ ", isInStock=" + isInStock + ", isDiscountinued=" + isDiscountinued + ", minQty=" + minQty
+				+ ", earliestAvDate=" + earliestAvDate + "]";
 	}
+
+	
+
 	
 	
 	

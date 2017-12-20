@@ -203,6 +203,24 @@ public class DateUtils {
 
 		return String.valueOf(format.format(calendar.getTime()));
 	}
+	
+	public static String getFirstWednesdayAfterDate(String dateString, String formatString) throws ParseException {
+		DateFormat format = new SimpleDateFormat(formatString);
+		Date date = format.parse(dateString);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.WEDNESDAY) {
+			calendar.add(Calendar.DATE, 1);
+		}
+
+		return String.valueOf(format.format(calendar.getTime()));
+	}
 
 	public static List<String> getFridaysBetweenDates(String startDateString, String endDateString, String formatString)
 			throws ParseException {

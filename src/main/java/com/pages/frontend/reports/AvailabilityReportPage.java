@@ -1,6 +1,7 @@
 package com.pages.frontend.reports;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,10 +30,10 @@ public class AvailabilityReportPage extends AbstractPage {
 
 	@FindBy(id = "report3")
 	private WebElement notLongerAvailableProducts;
-	
+
 	@FindBy(id = "report4")
 	private WebElement lessThenXProducts;
-	
+
 	@FindBy(id = "report5")
 	private WebElement stockReportProducts;
 
@@ -43,6 +44,12 @@ public class AvailabilityReportPage extends AbstractPage {
 	private WebElement textCenter;
 
 	public void clickOnBackInStockTabProducts() {
+		element(backInStockProducts).waitUntilVisible();
+		backInStockProducts.click();
+
+	}
+	
+	public void clickOnLessThan20AvailableProducts() {
 		element(backInStockProducts).waitUntilVisible();
 		backInStockProducts.click();
 
@@ -70,21 +77,21 @@ public class AvailabilityReportPage extends AbstractPage {
 	}
 
 	public void verifyIfTemporarlyNotAvailablePoductsIsSelected() {
-		Assert.assertTrue("The message is not displayed",
+		Assert.assertTrue("The title message is not displayed",
 				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
 						.contains(ContextConstants.TEMPORARLY_NOT_AVAILABLE));
 
 	}
 
-	public void verifyReportIsOpen(){
+	public void verifyReportIsOpen() {
 		List<WebElement> lines = getDriver().findElements(By.cssSelector("table.table tr"));
 		if (!lines.isEmpty()) {
 			System.out.println("---> Report opened correctly <---");
-		}else{
+		} else {
 			CustomVerification.verifyTrue("The report is not displayed", true);
 		}
 	}
-	
+
 	private WebElement getProductRow(String sku) {
 		List<WebElement> lines = getDriver().findElements(By.cssSelector("table.table tr"));
 		WebElement searchedLine = null;
@@ -215,29 +222,119 @@ public class AvailabilityReportPage extends AbstractPage {
 	public void clickOnStockReportTabProductsTab() {
 		element(stockReportProducts).waitUntilVisible();
 		stockReportProducts.click();
-		
+
 	}
 
 	public void verifyIfStockPoductsTabIsSelected() {
-		// TODO Auto-generated method stub
 		Assert.assertTrue("The message is not displayed",
 				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
 						.contains(ContextConstants.STOCK_REPORT));
 	}
 
 	public void clickOnLessThenXProductsTab() {
+		
 		element(lessThenXProducts).waitUntilVisible();
 		lessThenXProducts.click();
 	}
 
 	public void verifyIfLessThenXPoductsTabIsSelected() {
-//		Assert.assertTrue("The message is not displayed",
-//				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
-//						.contains(ContextConstants.LESS_THEN_X_ITEMS));
 		
-		Assert.assertTrue("The message is not displayed",
+		Assert.assertTrue("The Title message is not displayed",
 				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
 						.contains("Weniger als 20 Stück verfügbar"));
 	}
 
+	public List<ProductDetailedModel> grabTemporlyNotAvailableProducts() {
+		List<ProductDetailedModel> tempNotAvailableProducts = new ArrayList<ProductDetailedModel>();
+		List<WebElement> lines = getDriver().findElements(By.cssSelector("table.table tbody tr "));
+
+		for (WebElement product : lines) {
+			ProductDetailedModel grabbedProduct = new ProductDetailedModel();
+			grabbedProduct.setSku(product.findElement(By.cssSelector("td:nth-child(1)")).getText());
+			grabbedProduct.setName(product.findElement(By.cssSelector("td:nth-child(2)")).getText());
+			grabbedProduct.setEarliestAvDate(product.findElement(By.cssSelector("td:nth-child(3)")).getText());
+
+			tempNotAvailableProducts.add(grabbedProduct);
+
+		}
+
+		return tempNotAvailableProducts;
+	}
+
+	public List<ProductDetailedModel> grabBackInStockProducts() {
+		List<ProductDetailedModel> backInStockProducts = new ArrayList<ProductDetailedModel>();
+		List<WebElement> lines = getDriver().findElements(By.cssSelector("table.table tbody tr "));
+
+		for (WebElement product : lines) {
+			ProductDetailedModel grabbedProduct = new ProductDetailedModel();
+			List<String> categories = new ArrayList<String>();
+			grabbedProduct.setSku(product.findElement(By.cssSelector("td:nth-child(1)")).getText());
+			grabbedProduct.setName(product.findElement(By.cssSelector("td:nth-child(2)")).getText());
+
+			categories = Arrays.asList(product.findElement(By.cssSelector("td:nth-child(3)")).getText().split(","));
+			grabbedProduct.setCategoriesArray(categories);
+
+			backInStockProducts.add(grabbedProduct);
+
+		}
+
+		return backInStockProducts;
+	}
+
+	public List<ProductDetailedModel> grabLessThanTwentyAvalableProducts() {
+		waitABit(2000);
+		List<ProductDetailedModel> lessThenTwentyProducts = new ArrayList<ProductDetailedModel>();
+		List<WebElement> lines = getDriver().findElements(By.cssSelector("table.table tbody tr "));
+
+		for (WebElement product : lines) {
+			System.out.print(".");
+			ProductDetailedModel grabbedProduct = new ProductDetailedModel();
+			grabbedProduct.setSku(product.findElement(By.cssSelector("td:nth-child(1)")).getText());
+			grabbedProduct.setName(product.findElement(By.cssSelector("td:nth-child(2)")).getText());
+			grabbedProduct.setQuantity(product.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			grabbedProduct.setIsDiscountinued(product.findElements(By.cssSelector("td:nth-child(3) .icon-discontinued")).size() >0?"1":"0");
+
+			lessThenTwentyProducts.add(grabbedProduct);
+
+		}
+
+		return lessThenTwentyProducts;
+	}
+
+	public List<ProductDetailedModel> grabNotLongerAvailableProducts() {
+		List<ProductDetailedModel> notLongerAvailableProducts = new ArrayList<ProductDetailedModel>();
+		List<WebElement> lines = getDriver().findElements(By.cssSelector("table.table tbody tr "));
+
+		for (WebElement product : lines) {
+			ProductDetailedModel grabbedProduct = new ProductDetailedModel();
+			grabbedProduct.setSku(product.findElement(By.cssSelector("td:nth-child(1)")).getText());
+			grabbedProduct.setName(product.findElement(By.cssSelector("td:nth-child(2)")).getText());
+
+			notLongerAvailableProducts.add(grabbedProduct);
+
+		}
+
+		return notLongerAvailableProducts;
+	}
+
+	public List<ProductDetailedModel> grabStockReportProducts() {
+		// TODO Auto-generated method stub
+		List<ProductDetailedModel> stockReportProducts = new ArrayList<ProductDetailedModel>();
+		List<WebElement> lines = getDriver().findElements(By.cssSelector("table.table tbody tr "));
+		
+		for (WebElement product : lines) {
+			System.out.print(".");
+			ProductDetailedModel grabbedProduct = new ProductDetailedModel();
+			grabbedProduct.setSku(product.findElement(By.cssSelector("td:nth-child(1)")).getText());
+			grabbedProduct.setName(product.findElement(By.cssSelector("td:nth-child(2)")).getText());
+			grabbedProduct.setStatus(product.findElement(By.cssSelector("td:nth-child(3)")).getText());
+			grabbedProduct.setIsDiscountinued(product.findElements(By.cssSelector("td:nth-child(3) .icon-discontinued")).size() >0?"1":"0");
+			
+			stockReportProducts.add(grabbedProduct);
+
+		}
+
+		return stockReportProducts;
+	}
+	
 }

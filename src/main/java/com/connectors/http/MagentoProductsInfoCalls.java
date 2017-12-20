@@ -39,6 +39,28 @@ public class MagentoProductsInfoCalls {
 
 		return productInfo;
 	}
+	
+	public static ProductDetailedModel getProductInfo(String sessionId,String productId) {
+
+		ProductDetailedModel productInfo = new ProductDetailedModel();
+
+		try {
+			SOAPMessage response = soapGetProductInfo(sessionId,productId);
+			System.out.println(response);
+			try {
+				productInfo = extractProductInfo(response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (SOAPException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return productInfo;
+	}
 
 	public static SOAPMessage soapGetProductInfo(String userId) throws SOAPException, IOException {
 		String sessionId = HttpSoapConnector.performLogin();
@@ -50,6 +72,18 @@ public class MagentoProductsInfoCalls {
 
 		return soapResponse;
 	}
+	
+	public static SOAPMessage soapGetProductInfo(String sessionId,String userId) throws SOAPException, IOException {
+		//String sessionId = HttpSoapConnector.performLogin();
+		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+
+		SOAPMessage soapResponse = soapConnection.call(getProductInfoRequest(sessionId, userId),
+				EnvironmentConstants.SOAP_URL + UrlConstants.API_URI);
+
+		return soapResponse;
+	}
+
 
 
 	private static SOAPMessage getProductInfoRequest(String ssID, String prodId) throws SOAPException, IOException {
@@ -86,12 +120,7 @@ public class MagentoProductsInfoCalls {
 		for (int j = 0; j < childNodes.getLength(); j++) {
 
 
-			if (childNodes.item(j).getNodeName().equalsIgnoreCase("sku")) {
-				result.setSku(childNodes.item(j).getTextContent());
-			}
-			if (childNodes.item(j).getNodeName().equalsIgnoreCase("qty")) {
-				result.setQuantity(childNodes.item(j).getTextContent());
-			}
+			
 			if (childNodes.item(j).getNodeName().equalsIgnoreCase("url_key")) {
 				result.setName(childNodes.item(j).getTextContent());
 			}

@@ -494,16 +494,19 @@ public class OrdersInfoMagentoCalls {
 
 	public static void main(String args[]) throws SOAPException, IOException, ParseException {
 
-		// List<DBOrderModel>
-		// dbmodel=OrdersInfoMagentoCalls.getOrdersList("6013");
+		 List<DBOrderModel>
+		 dbmodel=OrdersInfoMagentoCalls.getOrdersList("6013");
+		System.out.println(dbmodel.get(0)); ;
 		/*String x = "2017-11-06 17:33:03";
 
 		String format = DateUtils.parseDate("2017-11-06 17:33:03", "yyyy-mm-dd", "dd.mm.yyyy");
 
 		System.out.println(format);*/
 		
-		String x="Payment In Progress".toLowerCase().replace(" ", "_");
-		System.out.println(x);
+		//String x="Payment In Progress".toLowerCase().replace(" ", "_");
+		/*for (DBOrderModel dbOrderModel : dbmodel) {
+			System.out.println(dbOrderModel.getCustomerName());
+		}*/
 		/*
 		 * for (DBOrderModel dbOrderModel : dbmodel) { System.out.println(
 		 * "customer name "+dbOrderModel.getCustomerName()); }

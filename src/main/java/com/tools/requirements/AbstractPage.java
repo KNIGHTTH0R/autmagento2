@@ -26,6 +26,11 @@ public class AbstractPage extends PageObject {
 	  JavascriptExecutor executor = (JavascriptExecutor) getDriver();
 	  executor.executeScript("arguments[0].click()", el);
 	 }
+	
+	public void waitForFancyBox(){
+		waitFor(ExpectedConditions.invisibilityOfElementWithText(By.cssSelector(".blockUI.blockMsg.blockElement"),
+				ContextConstants.LOADING_MESSAGE));
+	}
 
 	public void elementjQueryClick(String element) {
 		evaluateJavascript("var dd =jQuery(\" " + element + " \").eq(0);dd.click(); ");

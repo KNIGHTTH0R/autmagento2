@@ -26,10 +26,12 @@ import com.tests.uss17.us17001.US17001VerifyThatOldStylistWasDeactivatedTest;
 	US17001SecondRegularCustomerRegistrationTest.class, //create second customer account (customer2)
 	US17001AddNewContactToStyleCoachTest.class, // add first contact to SC list
 	US17001AddSecondNewContactToStyleCoachTest.class, //add the second contact to SC list, the first two contacts match by email
-	US17001ConfirmCustomerTest.class,
-	US17001ConfirmSecondCustomerTest.class,	
 	US17001AddThirdContactToStyleCoachTest.class,// add third contact to SC list
 	US17001AddForthContactToStyleCoachTest.class,// add forth contact to SC list, the third and forth contacts match by firstname and lastname
+	US17001ConfirmCustomerTest.class,
+	US17001ConfirmSecondCustomerTest.class,	
+	
+	
 	US17001ChangeFirstCustomersContextTest.class,//change the context of first customer to SC2
 	US17001ReasignContactsTest.class,// reassign and choose another SC from list
 	US17001VerifyThatContactsWereReassignedToSelectedScTest.class, // check that the contacts are reassigned to the selected SC

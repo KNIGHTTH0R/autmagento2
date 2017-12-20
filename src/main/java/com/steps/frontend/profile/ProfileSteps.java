@@ -26,24 +26,28 @@ public class ProfileSteps extends AbstractSteps {
 
 	@Step
 	public void verifyOrderId(String orderId, String compare) {
-		Assert.assertTrue("Failure: Order id is not as expected. Expected: " + compare + " Actual: " + orderId.toLowerCase(), orderId.toLowerCase().contains(compare.toLowerCase()));
+		Assert.assertTrue(
+				"Failure: Order id is not as expected. Expected: " + compare + " Actual: " + orderId.toLowerCase(),
+				orderId.toLowerCase().contains(compare.toLowerCase()));
 	}
 
 	@Step
 	public void verifyOrderPrice(String orderPrice, String compare) {
 		orderPrice = FormatterUtils.parseValueToZeroDecimals(orderPrice);
-		Assert.assertTrue("Failure: Order Price is not as expected. Expected: " + compare + " Actual: " + orderPrice, orderPrice.contentEquals(compare));
+		Assert.assertTrue("Failure: Order Price is not as expected. Expected: " + compare + " Actual: " + orderPrice,
+				orderPrice.contentEquals(compare));
 	}
+
 	@Step
 	public void clickReorderLink(String orderId) {
 		profileHistoryPage().clickReorderLink(orderId);
 	}
-	
+
 	@Step
 	public void verifySosMessage() {
 		sosPage().verifySosMessage();
 	}
-	
+
 	@Step
 	public void clickOnOrder(String orderId) {
 		profileHistoryPage().clickOnOrder(orderId);
@@ -52,5 +56,49 @@ public class ProfileSteps extends AbstractSteps {
 	@Step
 	public List<OrderModel> grabOrderDetails(String orderId) {
 		return profileHistoryPage().grabOrderDetails(orderId);
+	}
+
+	@Step
+	public void clickOnDokumenteTab() {
+		profileHistoryPage().clickOnDokumenteTab();
+	}
+
+	@Step
+	public void valdateOriginalInvoiceIsReceived(boolean isReceived) {
+		profileHistoryPage().valdateOriginalInvoiceIsReceived( isReceived);
+	}
+
+	@Step
+	public void valdateOriginalReturnIsReceived( boolean isReceived) {
+		profileHistoryPage().valdateOriginalReturnIsReceived( isReceived);
+	}
+
+	@Step
+	public void valdateExchangeDocIsReceived( boolean isReceived) {
+		profileHistoryPage().valdateExchangeDocIsReceived( isReceived);
+	}
+
+	@Step
+	public void valdateExchangeReturnIsReceived( boolean isReceived) {
+		profileHistoryPage().valdateExchangeReturnIsReceived(isReceived);
+	}
+
+	@Step
+	public void validateMessage(String message){
+		profileHistoryPage().validateMessage(message);
+	}
+
+	public void sendOriginalDocumentsToCustomer(String docName) {
+		profileHistoryPage().clickOnEmailIcon(docName);
+		profileHistoryPage().sendOriginalDocumentsToCustomer();
+		
+	}
+
+	public void sendExchangeDocumentsToSpecificAddress(String docName,String mailAddress) {
+		profileHistoryPage().clickOnEmailIcon(docName);
+		profileHistoryPage().clickSpecifiedEmailAddressOption();
+		profileHistoryPage().insertSpecifiedEmailAddress(mailAddress);
+		profileHistoryPage().sendOriginalDocumentsToCustomer();
+		
 	}
 }

@@ -52,21 +52,16 @@ public class IpOverviewCalculations {
 			String lastComissionRun, String nextComissionRun) throws NumberFormatException, ParseException {
 
 		List<DBOrderModel> allOrdersList = OrdersInfoMagentoCalls.getOrdersList(stylistId);
-		System.out.println("allOrdersList ok" );
 		List<DBCreditMemoModel> creditMemoList = CreditMemosInfoMagentoCalls.getCreditMemosList(stylistId);
-		System.out.println("creditMemoList ok" );
 		List<DBCreditMemoModel> completeCMList = CreditMemoCalculation
 				.populateCreditMemosListWithOrderDetails(creditMemoList, allOrdersList);
-		System.out.println("completeCMList ok" );
 		IpOverviewModel result = new IpOverviewModel();
 
 		result = IpOverviewCalculations.calculateOrdersForOpenMonthAndOpenedLastMonth(result, allOrdersList, month,
 				lastComissionRun, nextComissionRun);
 		
-		System.out.println("completeCMList result 1 ok" );
 		result = IpOverviewCalculations.calculateCreditMemos(result, completeCMList, month, lastComissionRun,
 				nextComissionRun);
-		System.out.println("completeCMList result 2 ok" );
 		return result;
 	}
 
@@ -370,7 +365,7 @@ public class IpOverviewCalculations {
 		IpOverViewPayedOrdersModel ipOverviewPaidOrdersModel = new IpOverViewPayedOrdersModel();
 
 		ipOverviewPaidOrdersModel.setOrderID(order.getIncrementId());
-		ipOverviewPaidOrdersModel.setCustomerName(order.getOrderCustomerName());
+		ipOverviewPaidOrdersModel.setCustomerName(order.getCustomerName());
 		ipOverviewPaidOrdersModel.setAmount(order.getGrandTotal());
 		ipOverviewPaidOrdersModel.setOrderDate(order.getCreatedAt());
 		ipOverviewPaidOrdersModel.setPaymentDate(order.getPaidAt());
@@ -744,9 +739,9 @@ public class IpOverviewCalculations {
 //		model=calculateIpOverviewForOpenMonthAndOpenedLastMonth("6013","2017-11-23 00:00:00","2017-11-15 17:00:00","2017-11-24 17:00:00");
 //		model=calculateIpOverviewForOpenMonthAndOpenedLastMonth("6409","2017-11-23 00:00:00","2017-11-15 17:00:00","2017-11-24 17:00:00");
 
-		model=calculateIpOverviewForOpenMonthAndOpenedLastMonth("6409","2017-10-10 00:00:00","2017-10-10 17:00:00","2017-11-15 17:00:00");
+		model=calculateIpOverviewForOpenMonthAndOpenedLastMonth("6013","2017-12-10 00:00:00","2017-12-06 17:00:00","2017-12-08 17:00:00");
 
-		//    model= IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("6409","2017-10-10 00:00:00","2017-09-10 00:00:00","2017-10-10 17:00:00","2017-11-15 17:00:00");
+	  //  model= IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("6013","2017-11-10 00:00:00","2017-10-10 00:00:00","2017-11-15 17:00:00","2017-12-06 17:00:00");
 
 //		System.out.println(model.getIpLastMonth());
 //		System.out.println(model.getIpThisMonth());
@@ -763,6 +758,15 @@ public class IpOverviewCalculations {
 //		System.out.println( "orders"+model.getPayedOrders());
 
 		System.out.println("ip this month:"+model.getChargebacksThisMonth());
+		System.out.println("returns in this month"+model.getReturnsThisMonth());
+		System.out.println("size list " +model.getPayedOrders().size());
+	    List<IpOverViewPayedOrdersModel> lista=model.getPayedOrders();
+	    for (IpOverViewPayedOrdersModel order : lista) {
+			System.out.println("order date: "+order.getOrderStatus()+" "+order.getOrderID()+" "+order.getOrderDate());
+			
+		}
+	    
+		System.out.println(model);
 		/*System.out.println("ip last month:"+model.getIpLastMonth());
 		System.out.println("return in current month:"+model.getReturnsThisMonth());*/
 		

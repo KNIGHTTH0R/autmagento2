@@ -22,7 +22,7 @@ import com.tests.uss23.US23001VerifyStockSyncAfterOrderImportTest;
 	
 	US23001VerifyMagAndNavStockAfterTPOrderTest.class,
 	US23001TranferQuantityFromQSin1000Test.class,
-	US23001PayAndImportTermPurchaseOrderTest.class,
+//	US23001PayAndImportTermPurchaseOrderTest.class,
 //	
 })
 @RunWith(Suite.class)

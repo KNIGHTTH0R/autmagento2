@@ -79,7 +79,7 @@ public class StylistInventoryBorrowCustomPackageTest extends BaseTest {
 			if (navOrderLinesModel.toString().contains("-")) {
 
 				StylistInvetoryUpdateModel model = StylistInventoryUpdateBorrowCalls.getBorrowUpdateInfo(customerId,
-						orderIncrementId, sku[0], sku[1],"yyyy");
+						orderIncrementId, sku[0], sku[1]," ");
 				System.out.println("model: " + model.getResult());
 				if (!model.getResult().contentEquals("1")) {
 					System.out.println("ASSSSSSSSERRRRRRRRRRRRRRRRT");

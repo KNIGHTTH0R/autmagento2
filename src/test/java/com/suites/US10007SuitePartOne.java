@@ -6,8 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.tests.uss10.uss10007.US10007AddManuallyBonusOnPartyTest;
 import com.tests.uss10.uss10007.US10007ClosePartyAnfVerifyCommissionBonusesTest;
-import com.tests.uss10.uss10007.US10007CreateFolowUpPartyForActivePartyTest;
-import com.tests.uss10.uss10007.US10007CreateSecondFolowUpPartyForActivePartyTest;
 
 @SuiteClasses({	
 //	US10007CreateFolowUpPartyForActivePartyTest.class,

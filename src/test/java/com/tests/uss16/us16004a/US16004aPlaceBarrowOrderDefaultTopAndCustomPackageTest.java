@@ -137,7 +137,7 @@ public class US16004aPlaceBarrowOrderDefaultTopAndCustomPackageTest extends Base
 		BorrowCartCalculator.allBorrowedProductsList.add(productData);
 		
 		// check if the elements of new borrow cart are correct displayed 
-		borrowCartSteps.checkBorrowCartForNewFunctionality(true,true);
+	//	borrowCartSteps.checkBorrowCartForNewFunctionality(true,true);
 		
 		BorrowCartCalculator.calculateCartAndShippingTotals(taxClass, shippingValue);
 

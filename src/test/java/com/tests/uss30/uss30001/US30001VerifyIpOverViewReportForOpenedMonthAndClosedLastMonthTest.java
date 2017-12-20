@@ -122,7 +122,6 @@ public class US30001VerifyIpOverViewReportForOpenedMonthAndClosedLastMonthTest e
 
 		 //for cloud - april
 		 expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("6013","2017-04-05 00:00:00","2017-03-06 23:59:00","2017-04-27 17:00:00","2017-05-10 17:00:00");
-
 		//pentru martie
 	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
 		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
@@ -138,8 +137,8 @@ public class US30001VerifyIpOverViewReportForOpenedMonthAndClosedLastMonthTest e
 		}
 		
 		
-		headerSteps.redirectToStylistReports();
-		reportsSteps.clickOnIpReports();
+	//	headerSteps.redirectToStylistReports();
+	//	reportsSteps.clickOnIpReports();
 
 //	System.out.println("asasasasasa"+ DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build()));
 //	
@@ -154,7 +153,7 @@ public class US30001VerifyIpOverViewReportForOpenedMonthAndClosedLastMonthTest e
 		//pentru martie
 		//headerSteps.navigate("http://aut-pippajean.evozon.com/de/ioa/stylereports/order/ipsreport/?month=2017-04");
 		//pentru-cloud
-		headerSteps.navigate("http://staging-aut.pippajean.com/de/ioa/stylereports/order/ipsreport/?month=2017-04");
+		headerSteps.navigate("http://staging-aut.pippajean.com/de/ioa/stylereports/order/ipsreport/?___store=de_lang_en&month=2017-11");
 
 		
 		//validate Ip overview report -sunt OK

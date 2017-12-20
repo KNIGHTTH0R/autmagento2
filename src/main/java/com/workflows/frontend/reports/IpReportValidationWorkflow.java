@@ -1,5 +1,7 @@
 package com.workflows.frontend.reports;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.List;
 
@@ -234,8 +236,10 @@ public class IpReportValidationWorkflow {
 	
 	@Step
 	public void validateAmount(String expected, String grabbed) {
-		CustomVerification.verifyTrue("Failure: Order amount doesn't match Expected: " + expected + " Actual: " + grabbed,
-				grabbed.contentEquals(expected));
+		BigDecimal expectedGrandTotal = new BigDecimal(Double.parseDouble(expected)).setScale(2, RoundingMode.HALF_UP);
+		CustomVerification.verifyTrue("Failure: Order amount doesn't match Expected: " + expectedGrandTotal + " Actual: " + grabbed,
+				grabbed.contentEquals(expectedGrandTotal.toString()));
+		
 	}
 	
 	@Step
@@ -345,6 +349,17 @@ public class IpReportValidationWorkflow {
 		CustomVerification.verifyTrue(
 				"Failure: Ip value for term purchase orders from previous month doesn't match Expected:  " + expected + " Actual: " + grabbed,
 				grabbed.contentEquals(expected));
+	}
+	
+	public static void main(String[] args) {
+		
+	/*	BigDecimal value = BigDecimal.valueOf(100);
+		BigDecimal vat = taxPercent.add(value).divide(value);
+		BigDecimal shopTaxAmount = gtValue.subtract(gtValue.divide(vat, 2, RoundingMode.HALF_UP));*/
+		String expected ="10.9999";
+		BigDecimal grandTotal = new BigDecimal(Double.parseDouble(expected)).setScale(2, RoundingMode.HALF_UP);
+		
+		System.out.println(grandTotal);
 	}
 
 }

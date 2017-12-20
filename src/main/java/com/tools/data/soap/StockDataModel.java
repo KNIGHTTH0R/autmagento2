@@ -22,6 +22,12 @@ public class StockDataModel {
 	private String maximumPercentageToBorrow;
 	private String useConfigMaximumPercentageToBorrow;
 	private String allowedTermPurchase;
+	
+	private String status;
+	private String typeId;
+	private String sku;
+	private String name;
+	private String productId;
 
 	public String getQty() {
 		return qty;
@@ -182,6 +188,63 @@ public class StockDataModel {
 	public void setAllowedTermPurchase(String allowedTermPurchase) {
 		this.allowedTermPurchase = allowedTermPurchase;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
+
+	
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	@Override
+	public String toString() {
+		return "StockDataModel [qty=" + qty + ", isInStock=" + isInStock + ", manageStock=" + manageStock
+				+ ", useConfigManageStock=" + useConfigManageStock + ", minQty=" + minQty + ", useConfigMinQty="
+				+ useConfigMinQty + ", minSaleQty=" + minSaleQty + ", useConfigMinSaleQty=" + useConfigMinSaleQty
+				+ ", maxSaleQty=" + maxSaleQty + ", useConfigMaxSaleQty=" + useConfigMaxSaleQty + ", isQtyDecimal="
+				+ isQtyDecimal + ", backorders=" + backorders + ", useConfigBackorders=" + useConfigBackorders
+				+ ", notifyStockQty=" + notifyStockQty + ", useConfigNotifyStockQty=" + useConfigNotifyStockQty
+				+ ", isDiscontinued=" + isDiscontinued + ", earliestAvailability=" + earliestAvailability
+				+ ", maximumPercentageToBorrow=" + maximumPercentageToBorrow + ", useConfigMaximumPercentageToBorrow="
+				+ useConfigMaximumPercentageToBorrow + ", allowedTermPurchase=" + allowedTermPurchase + ", status="
+				+ status + ", typeId=" + typeId + ", sku=" + sku + ", name=" + name + "]";
+	}
+
 	
 	
 

@@ -687,7 +687,40 @@ public class DBOrderModel {
 
 	@Override
 	public String toString() {
-		return "DBOrderModel [incrementId=" + incrementId +  ", itemInfo=" + itemInfo+ "]";
+		return "DBOrderModel [incrementId=" + incrementId + ", createdAt=" + createdAt + ", customerId=" + customerId
+				+ ", paymentCompleteAt=" + paymentCompleteAt + ", stylistCustomerId=" + stylistCustomerId + ", orderId="
+				+ orderId + ", paymentMethodTypet=" + paymentMethodTypet + ", shippingType=" + shippingType
+				+ ", orderType=" + orderType + ", cartType=" + cartType + ", stylePartyId=" + stylePartyId
+				+ ", grandTotal=" + grandTotal + ", isPreshipped=" + isPreshipped + ", isPom=" + isPom
+				+ ", websiteCode=" + websiteCode + ", storeLanguage=" + storeLanguage + ", koboSingleArticle="
+				+ koboSingleArticle + ", updatedNav=" + updatedNav + ", stylistId=" + stylistId + ", orderCurrencyCode="
+				+ orderCurrencyCode + ", baseSubtotal=" + baseSubtotal + ", taxAmount=" + taxAmount + ", taxPrecent="
+				+ taxPrecent + ", customerFirstName=" + customerFirstName + ", customerLastName=" + customerLastName
+				+ ", customerName=" + customerName + ", billToFirstName=" + billToFirstName + ", billToLastName="
+				+ billToLastName + ", billToPostcode=" + billToPostcode + ", billToStreetAddress=" + billToStreetAddress
+				+ ", billToCity=" + billToCity + ", billCountryId=" + billCountryId + ", billToHousNumber="
+				+ billToHousNumber + ", shipToFirstName=" + shipToFirstName + ", shipToLastName=" + shipToLastName
+				+ ", shipToPostcode=" + shipToPostcode + ", shipToStreetAddress=" + shipToStreetAddress
+				+ ", shipToCity=" + shipToCity + ", shipCountryId=" + shipCountryId + ", shipToHousNumber="
+				+ shipToHousNumber + ", shippingInclTax=" + shippingInclTax + ", discountAmount=" + discountAmount
+				+ ", paidAt=" + paidAt + ", status=" + status + ", totalIp=" + totalIp + ", totalIpRefunded="
+				+ totalIpRefunded + ", termPurchaseType=" + termPurchaseType + ", orderCustomerName="
+				+ orderCustomerName + ", scheduledDeliveryDate=" + scheduledDeliveryDate + ", itemInfo=" + itemInfo
+				+ ", itemSku=" + itemSku + ", shippingAmount=" + shippingAmount + ", originalPrice=" + originalPrice
+				+ ", qtyOrdered=" + qtyOrdered + ", calculatedGrandTotal=" + calculatedGrandTotal
+				+ ", calculatedTaxAmount=" + calculatedTaxAmount + ", baseDiscountAmount=" + baseDiscountAmount
+				+ ", jewelryCreditsUsed=" + jewelryCreditsUsed + ", marketingCreditsUsed=" + marketingCreditsUsed
+				+ ", fiftyDiscountsUsed=" + fiftyDiscountsUsed + ", fiftyDiscountsAmount=" + fiftyDiscountsAmount
+				+ ", orderCustomerEmail=" + orderCustomerEmail + ", vatNumber=" + vatNumber + ", smallBusinessMan="
+				+ smallBusinessMan + ", banckAccountNumber=" + banckAccountNumber + ", languageCode=" + languageCode
+				+ ", magentoGrandTotal=" + magentoGrandTotal + ", magentoTaxAmmount=" + magentoTaxAmmount
+				+ ", contactid=" + contactid + ", zeroVat=" + zeroVat + "]";
 	}
+
+	/*@Override
+	public String toString() {
+		return "DBOrderModel [incrementId=" + incrementId +  ", itemInfo=" + itemInfo+ "]";
+	}*/
+	
 	
 }

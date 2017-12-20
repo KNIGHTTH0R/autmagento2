@@ -14,8 +14,8 @@ public class EmailClientSteps extends AbstractSteps {
 //	 YopmailPage mailPage;
 //	 FakeMailGenerator mailPage;
 //	 MailDrop mailPage;
-//		Dispostable mailPage;
-	// Mailnesia mailPage;
+//	 Dispostable mailPage;
+//   Mailnesia mailPage;
 	 TempMail mailPage;
 	private static final long serialVersionUID = 1L;
 

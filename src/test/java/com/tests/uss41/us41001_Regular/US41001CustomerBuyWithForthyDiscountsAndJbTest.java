@@ -85,11 +85,7 @@ public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 	public ImportExportSteps importExportSteps;
 
 	private String username, password;
-	private String discountClass;
 	private String billingAddress;
-	private String shippingValue;
-	private String voucherCode;
-	private String voucherValue;
 	private ProductDetailedModel genProduct1;
 //	private ProductDetailedModel genProduct2;
 //	private ProductDetailedModel genProduct3;
@@ -124,13 +120,8 @@ public class US41001CustomerBuyWithForthyDiscountsAndJbTest extends BaseTest {
 			prop.load(input);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
-
-			discountClass = prop.getProperty("discountClass");
 			billingAddress = prop.getProperty("billingAddress");
-			shippingValue = prop.getProperty("shippingValue");
 
-			voucherCode = prop.getProperty("voucherCode");
-			voucherValue = prop.getProperty("voucherValue");
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

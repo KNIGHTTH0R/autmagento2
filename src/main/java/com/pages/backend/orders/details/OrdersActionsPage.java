@@ -205,8 +205,6 @@ public class OrdersActionsPage extends AbstractPage {
 	}
 
 	public void valdateOriginalInvoiceIsReceived(String orderId, boolean isReceived) {
-		// TODO Auto-generated method stub
-		// waitForLoading();
 		String dateCompare="";
 		waitABit(2000);
 		List<WebElement> documents = getDriver()

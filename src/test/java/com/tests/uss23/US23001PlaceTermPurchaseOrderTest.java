@@ -151,18 +151,24 @@ public class US23001PlaceTermPurchaseOrderTest extends BaseTest {
 
 		// this is parent configurable:R185SV
 		genProduct1 = MagentoProductsInfoCalls.getProductInfo("4466");
+		genProduct1.setSku("spot-on-ring");
 		// simple
 		genProduct2 = MagentoProductsInfoCalls.getProductInfo("2358");
+		genProduct2.setSku("sweet-melody-bracelet");
 		// bundle parent: K112GY-E195SV-B170BR
 		genProduct3 = MagentoProductsInfoCalls.getProductInfo("4319");
+		genProduct3.setSku("coin-of-rome-bracelet-1");
 		// genProduct3=MagentoProductsInfoCalls.getProductInfo("4304");
 
 		// this is parent configurable:R194RS
 		genProduct4 = MagentoProductsInfoCalls.getProductInfo("4596");
+		genProduct4.setSku("spencer-ring-rose");
 		// simple:N348SV
 		genProduct5 = MagentoProductsInfoCalls.getProductInfo("4575");
+		genProduct5.setSku("solitaire-neckring");
 		// bundle parent: K138SV-A023SV-A022SV
 		genProduct6 = MagentoProductsInfoCalls.getProductInfo("4417");
+		genProduct6.setSku("silver-star-set");
 
 
 

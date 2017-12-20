@@ -146,7 +146,7 @@ public class US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest extends BaseTes
 //		BorrowCartCalculator.allBorrowedProductsList.add(productData);
 		
 		// check if the elements of new borrow cart are correct displayed 
-		borrowCartSteps.checkBorrowCartForNewFunctionality(true,true);
+	//	borrowCartSteps.checkBorrowCartForNewFunctionality(true,true);
 		
 		BorrowCartCalculator.calculateCartAndShippingTotals(taxClass, shippingValue);
 
@@ -190,9 +190,9 @@ public class US16004aPlaceBarrowOrderDefaultTopAndTopPackageTest extends BaseTes
 		
 		//borrowCartValidationWorkflows.performBorrowNewCartValidations();
 		
-		borrowCartValidationWorkflows.performBorrowCartValidations();
+		
 		confirmationSteps.agreeAndCheckout();
-
+		borrowCartValidationWorkflows.performBorrowCartValidations();
 		checkoutValidationSteps.verifySuccessMessage();
 
 		customVerifications.printErrors();

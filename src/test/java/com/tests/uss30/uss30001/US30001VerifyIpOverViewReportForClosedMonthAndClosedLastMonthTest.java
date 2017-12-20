@@ -113,10 +113,10 @@ public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest e
 	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForClosedMonth("2513","2017-02-05 00:00:00","2017-01-09 13:07:29","2017-02-28 23:59:00","2017-03-10 17:00:00");
 		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForClosedMonth("6013","2017-10-05 00:00:00","2017-09-10 00:00:00","2017-10-10 00:00:00","2017-11-10 00:00:00");
 
-		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getPaidOrdersThisMonth());
-		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getIpTPOrdersThisMonth());
-		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getOpenChargebacks());
-		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getIpLastMonth());
+//		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getPaidOrdersThisMonth());
+//		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getIpTPOrdersThisMonth());
+//		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getOpenChargebacks());
+//		System.out.println("expectedIpOverviewModel.getPaidOrdersThisMonth(): "+expectedIpOverviewModel.getIpLastMonth());
 		//for march after is closing
 		
 		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
@@ -126,7 +126,7 @@ public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest e
 
 	@Test
 	public void us30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest() throws Exception {
-		/*frontEndSteps.performLogin(stylistUsername, stylistPassword);
+		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
@@ -165,7 +165,7 @@ public class US30001VerifyIpOverViewReportForClosedMonthAndClosedLastMonthTest e
 //		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
 
 		customVerification.printErrors();
-*/
+
 	}
 	
 	

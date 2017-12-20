@@ -76,30 +76,34 @@ public class US30001VerifyIpOverViewReportOpenedMonthAndOpenedLastMonthTest exte
 	private String stylistUsername, stylistPassword;
 	private String reportMonth;
 
-	private String month,previousCommissionRun,lastCommissionRun,nextCommissionRun;
+	private String month, previousCommissionRun, lastCommissionRun, nextCommissionRun;
 	IpOverviewModel expectedIpOverviewModel;
 	List<IpOverViewPayedOrdersModel> expectedOrdersList;
 	List<IpOverViewReturnsListModel> expectedReturns;
 
 	@Before
 	public void setUp() throws Exception {
-		
-//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_ORDER_IMPORT,
-//				EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
-//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_CREDITMEMO_IMPORT,
-//				EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
-//		backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
-//		ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SEND_IP_REPORT,
-//				EnvironmentConstants.USERNAME_JENKINS_COMM, EnvironmentConstants.PASSWORD_JENKINS_COMM);
+
+		// backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		// ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_ORDER_IMPORT,
+		// EnvironmentConstants.USERNAME_JENKINS_COMM,
+		// EnvironmentConstants.PASSWORD_JENKINS_COMM);
+		// backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		// ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_CREDITMEMO_IMPORT,
+		// EnvironmentConstants.USERNAME_JENKINS_COMM,
+		// EnvironmentConstants.PASSWORD_JENKINS_COMM);
+		// backEndSteps.waitCertainTime(TimeConstants.TIME_MEDIUM);
+		// ApacheHttpHelper.sendGet(EnvironmentConstants.RUN_SEND_IP_REPORT,
+		// EnvironmentConstants.USERNAME_JENKINS_COMM,
+		// EnvironmentConstants.PASSWORD_JENKINS_COMM);
 
 		Properties prop = new Properties();
 		InputStream input = null;
 
 		try {
 
-			input = new FileInputStream(UrlConstants.RESOURCES_PATH + FilePaths.US_30_FOLDER + File.separator + "us30001.properties");
+			input = new FileInputStream(
+					UrlConstants.RESOURCES_PATH + FilePaths.US_30_FOLDER + File.separator + "us30001.properties");
 			prop.load(input);
 			stylistUsername = prop.getProperty("username");
 			stylistPassword = prop.getProperty("password");
@@ -116,86 +120,82 @@ public class US30001VerifyIpOverViewReportOpenedMonthAndOpenedLastMonthTest exte
 				}
 			}
 		}
-		
-//		try {
-//			withTestDataFrom("resources/.commissionrundate.csv");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			Assert.fail("Failed !!!");
-//		}
 
-		//for selecting March from Dropdown
-		//march=Opened,february=Opened
-		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("2513","2017-03-05 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
-	//	expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("6013","2017-11-23 00:00:00","2017-11-15 17:00:00","2017-11-24 17:00:00");
-		
-		
-		//("6013","2017-04-05 00:00:00","2017-03-06 23:59:00","2017-04-27 17:00:00","2017-05-10 17:00:00");
-		//expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndClosedLastMonth("2513","2017-04-05 00:00:00","2017-02-28 23:59:00","2017-03-10 17:00:00","2017-04-10 17:00:00");
-		
-		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); //->pentru orders payed
-//		expectedReturns = expectedIpOverviewModel.getReturns();
-		
-		System.out.println("ip this month:"+expectedIpOverviewModel.getIpThisMonth());
-		System.out.println("ip last month:"+expectedIpOverviewModel.getIpLastMonth());
-		System.out.println("return in current month:"+expectedIpOverviewModel.getReturnsThisMonth());
-	
+		// try {
+		// withTestDataFrom("resources/.commissionrundate.csv");
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// Assert.fail("Failed !!!");
+		// }
+
+		// for selecting March from Dropdown
+		// march=Opened,february=Opened
+		// expectedIpOverviewModel =
+		// IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("2513","2017-03-05
+		// 00:00:00","2017-02-28 17:07:29","2017-03-31 23:59:00");
+		expectedIpOverviewModel = IpOverviewCalculations.calculateIpOverviewForOpenMonthAndOpenedLastMonth("6013",
+				"2017-12-10 00:00:00", "2017-12-06 17:00:00", "2017-12-08 17:00:00");
+
+		expectedOrdersList = expectedIpOverviewModel.getPayedOrders(); // ->pentru
+																		// orders
+																		// payed
+		expectedReturns = expectedIpOverviewModel.getReturns();
+
+		System.out.println("ip this month:" + expectedIpOverviewModel.getIpThisMonth());
+		System.out.println("ip last month:" + expectedIpOverviewModel.getIpLastMonth());
+		System.out.println("return in current month:" + expectedIpOverviewModel.getReturnsThisMonth());
 
 	}
 
 	@Test
 	public void us30001VerifyIpOverViewReportOpenedMonthAndOpenedLastMonthTest() throws Exception {
-		
-		
-		
-		/*frontEndSteps.performLogin(stylistUsername, stylistPassword);
+
+		frontEndSteps.performLogin(stylistUsername, stylistPassword);
 		if (!headerSteps.succesfullLogin()) {
 			footerSteps.selectWebsiteFromFooter(MongoReader.getContext());
 		}
-		
-		
-//		headerSteps.redirectToStylistReports();
-//		reportsSteps.clickOnIpReports();
 
-//	
-//	String str =DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM - yyyy", new Locale.Builder().setLanguage(MongoReader.getContext()).build());
-//	ipReportsSteps.selectMonth(str.toUpperCase());
+		// headerSteps.redirectToStylistReports();
+		// reportsSteps.clickOnIpReports();
+
+		//
+		// String str =DateUtils.parseDate(reportMonth, "yyyy-MM-dd", "MMM -
+		// yyyy", new
+		// Locale.Builder().setLanguage(MongoReader.getContext()).build());
+		// ipReportsSteps.selectMonth(str.toUpperCase());
 		headerSteps.navigate("http://staging-aut.pippajean.com/de/ioa/stylereports/order/ipsreport/");
-		
-		
-		//validate Ip overview report -sunt OK
-		IpOverViewSummaryModel  grabbedSummaryModel= ipReportsSteps.getIpOverviewSummaryModel();
+
+		// validate Ip overview report -sunt OK
+		IpOverViewSummaryModel grabbedSummaryModel = ipReportsSteps.getIpOverviewSummaryModel();
 		System.out.println("expected values" + expectedIpOverviewModel.toString());
-		System.out.println("grabbed values" +grabbedSummaryModel.toString());
+		System.out.println("grabbed values" + grabbedSummaryModel.toString());
 		ipReportValidationWorkflow.verifyIpOverviewReportDetails(grabbedSummaryModel, expectedIpOverviewModel);
-		
-		
-		//validate Open ips summary - OK
+
+		// validate Open ips summary - OK
 		IpOverViewOpenIpsModel grabbedOpenIpsModel = ipReportsSteps.getOpenIpsModelCurrentMonth();
-		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsCurrentMonth(grabbedOpenIpsModel, expectedIpOverviewModel);
-		
+		ipReportValidationWorkflow.verifyOpenIpFromOverviewReportDetailsCurrentMonth(grabbedOpenIpsModel,
+				expectedIpOverviewModel);
 
-//		//validate payed orders list-OK
-/// emilian comment 23/11/2017
-	 	List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
+		// //validate payed orders list-OK
+		/// emilian comment 23/11/2017
+		List<IpOverViewPayedOrdersModel> grabbedPayedOrdersModel = ipReportsSteps.getPayedOrdersModel();
 		ipReportValidationWorkflow.verifyPayedOrdersList(expectedOrdersList, grabbedPayedOrdersModel);
-		System.out.println("expected"+expectedOrdersList.size());
-		System.out.println("grabbed"+grabbedPayedOrdersModel.size());
-	   // System.out.println("order id "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
-//		
-//		
-//        //validate returns orders - shop=2,comm=6
-//		List<IpOverViewReturnsListModel> grabbedReturnsListModel = ipReportsSteps.getReturnsListModel();
-//		ipReportValidationWorkflow.verifyReturnedOrdersList(expectedReturns, grabbedReturnsListModel);
-//		System.out.println("expected returns"+expectedReturns.size());
-//		System.out.println("grabbed returns"+grabbedReturnsListModel.size());
-		
-		customVerification.printErrors();
-		*/
+		System.out.println("expected" + expectedOrdersList.size());
+		System.out.println("grabbed" + grabbedPayedOrdersModel.size());
+		// System.out.println("order id
+		// "+grabbedPayedOrdersModel.removeAll(expectedOrdersList));
+		//
+		//
+		// //validate returns orders - shop=2,comm=6
+		// List<IpOverViewReturnsListModel> grabbedReturnsListModel =
+		// ipReportsSteps.getReturnsListModel();
+		// ipReportValidationWorkflow.verifyReturnedOrdersList(expectedReturns,
+		// grabbedReturnsListModel);
+		// System.out.println("expected returns"+expectedReturns.size());
+		// System.out.println("grabbed returns"+grabbedReturnsListModel.size());
 
-        
+		customVerification.printErrors();
+
 	}
 
-	
-	
 }

@@ -29,9 +29,9 @@ public class MagentoProductCalls {
 
 	public static void main(String args[]) {
 		SyncInfoModel model = MagentoProductCalls.getMagProductInfo("1292");
-		System.out.println(model.getMinumimQuantity());
-		System.out.println(model.getQuantity());
-		System.out.println(model.getPendingQuantity());
+		System.out.println(model);
+//		System.out.println(model.getQuantity());
+//		System.out.println(model.getPendingQuantity());
 	}
 
 	public static ProductDetailedModel createPomProductModel() {
@@ -605,5 +605,6 @@ public class MagentoProductCalls {
 		return result;
 
 	}
+	
 
 }

@@ -53,11 +53,9 @@ public class US41001RegularPayAndImportOrderInNavisionTest extends BaseTest {
 
 	@Test
 	public void us41001RegularPayAndImportOrderInNavisionTest() throws Exception {
-//
-	backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
-////		
-////
-////		
+
+		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+
 		backEndSteps.clickOnSalesOrders();
 		ordersSteps.findOrderByOrderId(orderModel.getOrderId());
 		ordersSteps.openOrder(orderModel.getOrderId());
