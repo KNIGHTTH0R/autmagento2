@@ -176,13 +176,13 @@ public class US16001StyleCoachBorrowsProductsTest extends BaseTest {
 	@Test
 	public void us16001StyleCoachBorrowsProductsTest() {
 		
-		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
+/*		backEndSteps.performAdminLogin(Credentials.BE_USER, Credentials.BE_PASS);
 		backEndSteps.clickOnSystemConfiguration();
 		borrowSystemConfigurationSteps.goToBorrowTab();
 		borrowSystemConfigurationSteps.selectDisabledBorrowOption("Nein");
 		borrowSystemConfigurationSteps.selectBorrowProcessType("(Old process) Allow all products to be borrowed");
 		borrowSystemConfigurationSteps.selectCountries();
-		borrowSystemConfigurationSteps.saveConfiguration();
+		borrowSystemConfigurationSteps.saveConfiguration();*/
 		
 		
 		customerRegistrationSteps.performLogin(username, password);
