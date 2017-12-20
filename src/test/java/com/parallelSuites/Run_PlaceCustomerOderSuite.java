@@ -45,8 +45,8 @@ import com.tests.uss11.us11011.US110011PlaceCustomerOrderProductWithSpecialPrice
 	US11005Suite.class,
 	
 //	US11006Suite.class, -> deprecated
-	US11007Suite.class,
-	US11008Suite.class,
+	/*US11007Suite.class,
+	US11008Suite.class*/
 	US110011PlaceCustomerOrderProductWithSpecialPriceTest.class,
 })
 @RunWith(Suite.class)
