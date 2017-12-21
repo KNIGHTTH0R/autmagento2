@@ -168,7 +168,7 @@ public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 		}
 		headerSteps.selectLanguage(MongoReader.getContext());
 		headerSteps.goToProfile();
-		headerSteps.waitABit(20000);
+		headerSteps.waitABit(25000);
 
 		String currentTotal = dashboardSteps.getJewelryBonus();
 
