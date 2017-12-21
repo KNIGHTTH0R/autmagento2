@@ -178,7 +178,7 @@ public class US15004OrderZzzProductsForCustomerTest extends BaseTest {
 		loungeSteps.orderForNewCustomer();
 		createNewContactSteps.fillCreateNewContactDirectly(customerData, addressData);
 		generalCartSteps.clearCart();
-		headerSteps.waitABit(14000);
+		headerSteps.waitABit(20000);
 		HostBasicProductModel productData;
 
 		productData = addProductsForCustomerWorkflow.setHostProductToCart(genProduct1, "1", "0");
