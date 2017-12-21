@@ -167,6 +167,7 @@ public class US30016SfmWithTpOrdersWith0AmountTest extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
+		headerSteps.waitABit(20000);
 		BasicProductModel productData;
 		
 		String deliveryTP1 = DateUtils.getFirstFridayAfterDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd");

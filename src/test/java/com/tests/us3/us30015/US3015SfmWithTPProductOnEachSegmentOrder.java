@@ -161,7 +161,7 @@ public class US3015SfmWithTPProductOnEachSegmentOrder extends BaseTest {
 		headerSteps.openCartPreview();
 		headerSteps.goToCart();
 		generalCartSteps.clearCart();
-		headerSteps.waitABit(15000);
+		headerSteps.waitABit(20000);
 		BasicProductModel productData;
 		String deliveryTP1 = DateUtils.getFirstFridayAfterDate(
 				DateUtils.addDaysToAAGivenDate(genProduct1.getStockData().getEarliestAvailability(), "yyyy-MM-dd", 7),
