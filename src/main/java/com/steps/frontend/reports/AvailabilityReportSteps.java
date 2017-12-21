@@ -169,10 +169,10 @@ public class AvailabilityReportSteps extends AbstractSteps {
 	
 	public void validateProductName(String productName, String compare, String pageNumber, String rowNumber) {
 		if(!pageNumber.isEmpty()&&rowNumber.isEmpty()){
-			productName=productName+",S. "+pageNumber;
+			productName=productName+",P. "+pageNumber;
 		}
 		if(!rowNumber.isEmpty() && !pageNumber.isEmpty()){
-			productName=productName+","+pageNumber+", "+rowNumber;
+			productName=productName+",Page "+pageNumber+", Row "+rowNumber;
 		}
 		
 		CustomVerification.verifyTrue(
@@ -363,4 +363,21 @@ public class AvailabilityReportSteps extends AbstractSteps {
 		}
 	}
 
+	public void verifyLegendOnTemporarlyNotAvailablePoductsTab() {
+		availabilityReportPage().verifyLegendOnTemporarlyNotAvailablePoductsTab();
+		
+	}
+	
+	public void verifyLegendOnStockReportPoductsTab() {
+		availabilityReportPage().verifyLegendOnStockReportPoductsTab();
+		
+	}
+	
+	public void verifyLegendOnLessThanXPoductsTab() {
+		availabilityReportPage().verifyLegendOnLessThanXPoductsTab();
+		
+	}
+	
+	
+	
 }

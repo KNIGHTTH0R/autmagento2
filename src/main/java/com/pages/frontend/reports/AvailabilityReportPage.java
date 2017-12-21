@@ -70,16 +70,23 @@ public class AvailabilityReportPage extends AbstractPage {
 	}
 
 	public void verifyIfBackInStockTabProductsIsSelected() {
+		/*Assert.assertTrue("The message is not displayed",
+				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
+						.contains(ContextConstants.PRODUCTS_BACK_IN_STOCK));*/
 		Assert.assertTrue("The message is not displayed",
 				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
-						.contains(ContextConstants.PRODUCTS_BACK_IN_STOCK));
+						.contains("Products back in stock"));
 
 	}
 
 	public void verifyIfTemporarlyNotAvailablePoductsIsSelected() {
+	/*	Assert.assertTrue("The title message is not displayed",
+				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
+						.contains(ContextConstants.TEMPORARLY_NOT_AVAILABLE));*/
+		
 		Assert.assertTrue("The title message is not displayed",
 				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
-						.contains(ContextConstants.TEMPORARLY_NOT_AVAILABLE));
+						.contains("Temporarily not available"));
 
 	}
 
@@ -140,9 +147,13 @@ public class AvailabilityReportPage extends AbstractPage {
 	}
 
 	public void verifyIfNotLongerAvailablePoductsTabIsSelected() {
+		/*Assert.assertTrue("The message is not displayed",
+				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
+						.contains(ContextConstants.NO_LONGER_AVAILABLE));*/
+		
 		Assert.assertTrue("The message is not displayed",
 				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
-						.contains(ContextConstants.NO_LONGER_AVAILABLE));
+						.contains("Permanently not available"));
 
 	}
 
@@ -226,9 +237,13 @@ public class AvailabilityReportPage extends AbstractPage {
 	}
 
 	public void verifyIfStockPoductsTabIsSelected() {
+	/*	Assert.assertTrue("The message is not displayed",
+				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
+						.contains(ContextConstants.STOCK_REPORT));*/
+		
 		Assert.assertTrue("The message is not displayed",
 				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
-						.contains(ContextConstants.STOCK_REPORT));
+						.contains("Stock report"));
 	}
 
 	public void clickOnLessThenXProductsTab() {
@@ -239,9 +254,15 @@ public class AvailabilityReportPage extends AbstractPage {
 
 	public void verifyIfLessThenXPoductsTabIsSelected() {
 		
+		/*Assert.assertTrue("The Title message is not displayed",
+				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
+						.contains("Weniger als 20 Stück verfügbar"));*/
+		
 		Assert.assertTrue("The Title message is not displayed",
 				getDriver().findElement(By.cssSelector(".heading.col-xs-10 h1")).getText()
-						.contains("Weniger als 20 Stück verfügbar"));
+						.contains("Less than 20 items available"));
+		
+		
 	}
 
 	public List<ProductDetailedModel> grabTemporlyNotAvailableProducts() {
@@ -335,6 +356,30 @@ public class AvailabilityReportPage extends AbstractPage {
 		}
 
 		return stockReportProducts;
+	}
+
+	public void verifyLegendOnLessThanXPoductsTab() {
+		List<WebElement> legend = getDriver().findElements(By.cssSelector(".prod-legend-container tbody tr"));
+		
+		CustomVerification.verifyTrue("Failure: In Legend: is discontinued  text is not displayed ", legend.get(0).getText().contains("Dauerhaft nicht verfügbar"));
+
+	}
+	
+	public void verifyLegendOnStockReportPoductsTab() {
+		List<WebElement> legend = getDriver().findElements(By.cssSelector(".prod-legend-container tbody tr"));
+		
+		CustomVerification.verifyTrue("Failure: In Legend: is discontinued  text is not displayed ", legend.get(0).getText().contains("Dauerhaft nicht verfügbar"));
+		CustomVerification.verifyTrue("Failure: In Legend: 	Available for pre-orde text is not displayed ", legend.get(1).getText().contains("Auf Zielkauf bestellbar"));
+
+	}
+	
+	public void verifyLegendOnTemporarlyNotAvailablePoductsTab() {
+		List<WebElement> legend = getDriver().findElements(By.cssSelector(".prod-legend-container tbody tr"));
+		
+		CustomVerification.verifyTrue("Failure: In Legend: Expected delivery date  text is not displayed ", legend.get(0).getText().contains("Datum Erwarteter Lieferzeitpunkt"));
+		CustomVerification.verifyTrue("Failure: In Legend: Available for pre-orde text is not displayed ", legend.get(1).getText().contains("Auf Zielkauf bestellbar"));
+		CustomVerification.verifyTrue("Failure: In Legend: Delivery date will be announced text is not displayed ", legend.get(1).getText().contains("Lieferzeitpunkt in Klärung"));
+
 	}
 	
 }

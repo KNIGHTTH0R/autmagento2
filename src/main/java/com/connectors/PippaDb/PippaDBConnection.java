@@ -29,15 +29,15 @@ public class PippaDBConnection {
 		try {
 
 			
-			 connection = DriverManager.getConnection(
+			/* connection = DriverManager.getConnection(
 			 "jdbc:mysql://185.48.117.43:3306/pippajean_prod",
-			 "pippajeanprod", "3ZCb4n2z");
+			 "pippajeanprod", "3ZCb4n2z");*/
 			 
 
-			/*connection = DriverManager.getConnection(
+			connection = DriverManager.getConnection(
 					"jdbc:mysql://staging.pippajean.com/pippajean_prod?zeroDateTimeBehavior=convertToNull",
 					"pippajeancloud", "3H9e$Ne@");
-*/
+
 		} catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");
 			e.printStackTrace();
